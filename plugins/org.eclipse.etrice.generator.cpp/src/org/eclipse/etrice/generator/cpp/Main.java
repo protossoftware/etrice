@@ -139,7 +139,7 @@ public class Main extends AbstractGenerator {
 		if (!validator.validate(genModel))
 			return false;
 		
-		ETMapUtil.processModels(genModel, getResourceSet());
+		ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
 		if (debug) {
 			logger.logInfo("-- begin dump of mappings");
 			logger.logInfo(ETMapUtil.dumpMappings());

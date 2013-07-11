@@ -861,7 +861,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                   _builder.append("ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, \"");
                   String _name_4 = message.getName();
                   _builder.append(_name_4, "		");
-                  _builder.append("\", self->peerInstName )");
+                  _builder.append("\", self->peerInstName)");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -893,7 +893,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("_");
               String _name_6 = message.getName();
               _builder.append(_name_6, "		");
-              _builder.append("((etPort*)&((etReplPort*)self)->ports[i]");
+              _builder.append("(&((etReplPort*)self)->ports[i].port");
               _builder.append(dataCall, "		");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -923,7 +923,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _memberInUse_1 = this._cExtensions.memberInUse(_name_8, _plus_6);
               String _plus_7 = (typeName + refp);
               String _plus_8 = (refa + "data");
-              String _sendMessageCall_1 = this.sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", _memberInUse_1, _plus_7, _plus_8);
+              String _sendMessageCall_1 = this.sendMessageCall(hasData, "(&((etReplPort*)self)->ports[i].port)", _memberInUse_1, _plus_7, _plus_8);
               _builder.append(_sendMessageCall_1, "		");
               _builder.newLineIfNotEmpty();
               {
@@ -931,10 +931,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                 if (_generateMSCInstrumentation_1) {
                   _builder.append("\t");
                   _builder.append("\t");
-                  _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etPort*)&((etReplPort*)self)->ports[i])->myInstName, \"");
+                  _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, \"");
                   String _name_10 = message.getName();
                   _builder.append(_name_10, "		");
-                  _builder.append("\", ((etPort*)&((etReplPort*)self)->ports[i])->peerInstName )");
+                  _builder.append("\", ((etReplPort*)self)->ports[i].port.peerInstName)");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -963,7 +963,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("_");
               String _name_12 = message.getName();
               _builder.append(_name_12, "	");
-              _builder.append("((etPort*)&((etReplPort*)self)->ports[idx]");
+              _builder.append("(&((etReplPort*)self)->ports[idx].port");
               _builder.append(dataCall, "	");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -987,7 +987,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _memberInUse_2 = this._cExtensions.memberInUse(_name_14, _plus_10);
               String _plus_11 = (typeName + refp);
               String _plus_12 = (refa + "data");
-              String _sendMessageCall_2 = this.sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", _memberInUse_2, _plus_11, _plus_12);
+              String _sendMessageCall_2 = this.sendMessageCall(hasData, "(&((etReplPort*)self)->ports[idx].port)", _memberInUse_2, _plus_11, _plus_12);
               _builder.append(_sendMessageCall_2, "		");
               _builder.newLineIfNotEmpty();
               {
@@ -995,10 +995,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                 if (_generateMSCInstrumentation_2) {
                   _builder.append("\t");
                   _builder.append("\t");
-                  _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etPort*)&((etReplPort*)self)->ports[idx])->myInstName, \"");
+                  _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx].port.myInstName, \"");
                   String _name_16 = message.getName();
                   _builder.append(_name_16, "		");
-                  _builder.append("\", ((etPort*)&((etReplPort*)self)->ports[idx])->peerInstName )");
+                  _builder.append("\", ((etReplPort*)self)->ports[idx].port.peerInstName)");
                   _builder.newLineIfNotEmpty();
                 }
               }

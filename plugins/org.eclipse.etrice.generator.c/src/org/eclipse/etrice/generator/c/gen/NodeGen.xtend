@@ -261,6 +261,7 @@ class NodeGen {
 			}
 			else {
 				printf("type quit to exit\n");
+				fflush(stdout);
 				while (TRUE) {
 					char line[64];
 		
@@ -392,7 +393,7 @@ class NodeGen {
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
-			«IF ai.orderedIfItemInstances.empty»
+			«IF !GlobalGeneratorSettings::generateMSCInstrumentation» && ai.orderedIfItemInstances.empty»
 				/* no ports/saps/services - nothing to initialize statically */
 			«ELSE»
 				«genActorInstanceInitializer(root, ai)»
@@ -528,9 +529,9 @@ class NodeGen {
 	}
 	
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){
-		if (pi.protocol.getPortClass(pi.conjugated)== null) return "0"
+		if (pi.protocol.getPortClass(pi.conjugated)== null) return "NULL"
 		if (pi.protocol.getPortClass(pi.conjugated).attributes.empty){
-			return "0"
+			return "NULL"
 		}else{
 			return "&"+pi.path.pathName+"_var"
 		}
@@ -550,18 +551,25 @@ class NodeGen {
 	
 	def private String genReplSubPortInitializers(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var result = ""
+		val myInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
+			else ""
 		
 		for (p: pi.peers) {
 			val idx = pi.peers.indexOf(p)
 			val comma = if (idx<pi.peers.size-1) "," else ""
 			val thread = ETMapUtil::getPhysicalThread(p.eContainer as ActorInstance).name
 			var iiiD = getInterfaceItemInstanceData(pi)
-			iiiD = if (iiiD.equals("0")) iiiD+"," else iiiD+"["+idx+"],"
+			val peerInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
+				else ""
+			iiiD = if (iiiD.equals("NULL")) iiiD+"," else iiiD+"["+idx+"],"
 			result = result +
-				"{"+iiiD 
+				"{{"+iiiD 
 				+"&msgService_"+thread+", "
 				+p.objId+"+BASE_ADDRESS, "
-				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
+				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
+				+myInst
+				+peerInst
+				+"},"
 				+idx
 				+"}"+comma+" /* Repl Sub Port "+pi.name+" idx +"+idx+"*/\n"
 		}
@@ -639,12 +647,12 @@ class NodeGen {
 										«ELSE»
 											«IF GlobalGeneratorSettings::generateMSCInstrumentation»
 												ET_MSC_LOGGER_ASYNC_IN(
-													((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»])->peerInstName,
+													«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port.peerInstName,
 													«pi.protocol.name»_getMessageString(msg->evtID),
-													((etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»])->myInstName
+													«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port.myInstName
 													)
 											«ENDIF»
-											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port, msg);
 										«ENDIF»
 									break;
 								«ENDFOR»

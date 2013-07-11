@@ -38,20 +38,8 @@ typedef struct {
 } etPort;
 
 typedef struct {
-	void* varData;
-	etMessageService* msgService;
-	etAddressId peerAddress;
-	etAddressId localId;
+	etPort port;
 	etAddressId index;
-
-	#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
-		const char* myInstName;
-		const char* peerInstName;
-	#endif
-	#ifdef etDEBUG
-	etAddressId address;
-	/* thread ID from msg service: msgService->threadId */
-	#endif
 } etReplSubPort;
 
 typedef struct {
