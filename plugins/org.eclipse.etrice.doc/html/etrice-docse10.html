@@ -4,68 +4,1009 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Scope</title> 
+<head><title>Ports</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-04 15:04:00" /> 
+<meta name="date" content="2013-07-12 01:23:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 3--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse11.html" >next</a>] [<a 
-href="etrice-docch3.html" >prev</a>] [<a 
-href="etrice-docch3.html#tailetrice-docch3.html" >prev-tail</a>] [<a 
+href="etrice-docse9.html" >prev</a>] [<a 
+href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse10.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.1   </span> <a 
- id="x15-690003.1"></a>Scope</h3>
-<!--l. 5--><p class="noindent" >The scope of this tutorial is to demonstrate how to receive model messages from outside the
-model. Calling methods which are not part of the model is simple and you have already done
-this within the blinky tutorial (this is the other way round: model =&#x003E; external code). Receiving
-events from outside the model is a very common problem and a very frequently asked question.
-Therefore this tutorial shows how an external event (outside the model) can be received by the
-model.
-</p><!--l. 11--><p class="noindent" >This tutorial is not like hello world or blinky. Being familiar with the basic tool features is mandatory for this
-tutorial. The goal is to understand the mechanism not to learn the tool features.
-</p><!--l. 14--><p class="noindent" >The idea behind the exercise is, to control a Pedestrian crossing light. We will use the same GUI as for the
-blinky tutorial but now we will use the <span 
-class="ec-lmsso-10">REQUEST </span>button to start a FSM, which controls the traffic
-lights.
-</p><!--l. 18--><p class="noindent" ><img 
-src="images/020-Blinky08.png" alt="PIC"  
- />
-</p><!--l. 21--><p class="noindent" >The <span 
-class="ec-lmsso-10">REQUEST </span>must lead to a model message which starts the activity of the lights.
-</p><!--l. 23--><p class="noindent" >There are several possibilities to receive external events (e.g. TCP/UDP Socket, using OS messaging
-mechanism), but the easiest way is, to make a port usable from outside the model. To do that a few steps are
-necessary:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x15-69002x1">specify the messages (within a protocol) which should be sent into the model
+<h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x15-630003.3"></a>Ports</h3>
+<!--l. 203--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">3.3.1   </span> <a 
+ id="x15-640003.3.1"></a>Description</h4>
+<!--l. 205--><p class="noindent" ><span id="textcolor42"><span 
+class="ec-lmssbx-10">Port</span></span>s are the only interfaces of actors. A port has always a protocol assigned. Service Access Points (SAP) and Service
+Provision Points (SPP) are specialized ports that are used to define layering.
+</p><!--l. 209--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">3.3.2   </span> <a 
+ id="x15-650003.3.2"></a>Motivation</h4>
+     <ul class="itemize1">
+     <li class="itemize">Ports decouple interface definition (protocols) from interface usage
      </li>
-     <li 
-  class="enumerate" id="x15-69004x2">model an actor with a port (which uses the specified protocol) and connect the port to the receiver
+     <li class="itemize">Ports decouple the logical interface from the transport</li></ul>
+<!--l. 216--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">3.3.3   </span> <a 
+ id="x15-660003.3.3"></a>Notation</h4>
+<!--l. 218--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x15-670003.3.3"></a>Class Ports</h5>
+<!--l. 220--><p class="noindent" >These symbols can only appear on the border of an actor class symbol.
+</p><!--l. 222--><p class="noindent" >Ports that define an external interface of the actor class, are defined in the <span id="textcolor43"><span 
+class="ec-lmssbx-10">Interface</span></span>. Ports that define an internal interface
+are defined in the <span id="textcolor44"><span 
+class="ec-lmssbx-10">Structure</span></span> (e.g. internal ports).
+</p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmsso-10">External end ports </span>are defined in the Interface and the Structure
      </li>
-     <li 
-  class="enumerate" id="x15-69006x3">the external code should know the port (import of the port class)
+     <li class="itemize"><span 
+class="ec-lmsso-10">Internal end ports </span>are only defined in the Structure
      </li>
-     <li 
-  class="enumerate" id="x15-69008x4">the external code should provide a registration method, so that the actor is able to allow access
-     to this port
+     <li class="itemize"><span 
+class="ec-lmsso-10">Relay ports </span>are only defined in the Interface
      </li>
-     <li 
-  class="enumerate" id="x15-69010x5">the port can be used from the external code</li></ol>
-                                                                                 
-                                                                                 
-<!--l. 35--><div class="crosslinks"><p class="noindent">[<a 
+     <li class="itemize"><span 
+class="ec-lmsso-10">End ports </span>are always connected to the internal behavior of the ActorClass
+                                                                                            
+                                                                                            
+     </li>
+     <li class="itemize"><span 
+class="ec-lmsso-10">Replicated ports </span>can be defined with a fixed replication factor, e.g.<br 
+class="newline" /><span id="textcolor45"><span 
+class="ec-lmtk-10">Port</span></span> <span 
+class="ec-lmtt-10">port18 [5]: ProtocolClass1</span><br 
+class="newline" />or a variable replication factor, e.g.<br 
+class="newline" /><span id="textcolor46"><span 
+class="ec-lmtk-10">Port</span></span> <span 
+class="ec-lmtt-10">port18[*]: ProtocolClass1</span></li></ul>
+<!--l. 236--><p class="noindent" >The table <a 
+href="#x15-67001r3">3.3<!--tex4ht:ref: tab:class_port_notation --></a> shows all kinds of class ports with textual and graphical notation.
+<a 
+ id="x15-67001r3"></a>
+</p>
+<!--l. 240--><div class="longtable"> <table id="TBL-5" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1" /></colgroup><colgroup id="TBL-5-2g"><col 
+id="TBL-5-2" /></colgroup><colgroup id="TBL-5-3g"><col 
+id="TBL-5-3" /></colgroup>
+                                                                                            
+                                                                                            
+<tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td colspan="3" style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-1-1"  
+class="td11">           <div class="multicolumn"  style="white-space:nowrap; text-align:center;"> <div class="caption" 
+><span class="id">Table&#x00A0;3.3: </span><span  
+class="content">Class Port Notation</span></div><!--tex4ht:label?: x15-67001r3 -->                                               </div>                  <a 
+ id="x15-67002"></a>
+</td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-2-1"  
+class="td11">
+ <!--l. 243--><p class="noindent" ><span 
+class="ec-lmssbx-10">Element</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-2"  
+class="td11"> <span 
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-2-3"  
+class="td11">
+ <!--l. 243--><p class="noindent" ><span 
+class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-3-1"  
+class="td11">                </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-2"  
+class="td11">                   </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-3-3"  
+class="td11">
+</td></tr>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-4-1"  
+class="td11">
+ <!--l. 246--><p class="noindent" >Class
+  End
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-2"  
+class="td11"> <img 
+src="images/040-ClassEndPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-4-3"  
+class="td11">
+ <div class="tabular"> <table id="TBL-6" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-6-1g"><col 
+id="TBL-6-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-1"  
+class="td11"><span 
+class="ec-lmsso-10">External Class End Port:            </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-1"  
+class="td11"><!--l. 250-->    <!--l. 250--><p class="noindent" ><a 
+ id="x15-67003r1"></a><a 
+ id="x15-67004"></a><div class="lstlisting" id="listing-15"><span class="label"><a 
+ id="x15-67005r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67006r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67007r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port12</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67008r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67009r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67010r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">external</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port12</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67011r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67012r8"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </p> </div></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-1"  
+class="td11"><span 
+class="ec-lmsso-10">Internal Class End Port:              </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-1"  
+class="td11"><!--l. 263-->    <!--l. 263--><p class="noindent" ><a 
+ id="x15-67013r2"></a><a 
+ id="x15-67014"></a><div class="lstlisting" id="listing-16"><span class="label"><a 
+ id="x15-67015r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67016r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67017r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67018r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67019r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port20</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67020r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67021r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </p> </div></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-1"  
+class="td11">                            </td></tr></table> </div>         </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-5-1"  
+class="td11">
+ <!--l. 276--><p class="noindent" >Conjugated
+  Class
+  End
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-2"  
+class="td11"> <img 
+src="images/040-ConjugatedClassEndPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-5-3"  
+class="td11">
+ <div class="tabular"> <table id="TBL-7" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-7-1g"><col 
+id="TBL-7-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-7-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-1-1"  
+class="td11"><span 
+class="ec-lmsso-10">External Conjugated Class End Port:            </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-1"  
+class="td11"><!--l. 280-->    <!--l. 280--><p class="noindent" ><a 
+ id="x15-67022r3"></a><a 
+ id="x15-67023"></a><div class="lstlisting" id="listing-17"><span class="label"><a 
+ id="x15-67024r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67025r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67026r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port13</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67027r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67028r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67029r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">external</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port13</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67030r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67031r8"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </p> </div></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-1"  
+class="td11"><span 
+class="ec-lmsso-10">Internal Conjugated Class End Port:              </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-4-1"  
+class="td11"><!--l. 293-->    <!--l. 293--><p class="noindent" ><a 
+ id="x15-67032r4"></a><a 
+ id="x15-67033"></a><div class="lstlisting" id="listing-18"><span class="label"><a 
+ id="x15-67034r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67035r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67036r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67037r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67038r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port21</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67039r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67040r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </p> </div></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-1"  
+class="td11">                                     </td></tr></table> </div> </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-6-1"  
+class="td11">
+ <!--l. 307--><p class="noindent" >Class
+  Relay
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-2"  
+class="td11"> <img 
+src="images/040-ClassRelayPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-6-3"  
+class="td11">
+ <!--l. 309-->
+ <a 
+ id="x15-67041r5"></a>
+ <a 
+ id="x15-67042"></a>
+ <div class="lstlisting" id="listing-19"><span class="label"><a 
+ id="x15-67043r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67044r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67045r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port10</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67046r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67047r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67048r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67049r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 320--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-7-1"  
+class="td11">
+ <!--l. 321--><p class="noindent" >Conjugated
+  Class
+  Relay
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-7-2"  
+class="td11"> <img 
+src="images/040-ConjugatedClassRelayPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-7-3"  
+class="td11">
+ <!--l. 323-->
+ <a 
+ id="x15-67050r6"></a>
+ <a 
+ id="x15-67051"></a>
+ <div class="lstlisting" id="listing-20"><span class="label"><a 
+ id="x15-67052r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67053r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67054r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port10</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67055r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67056r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67057r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67058r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 334--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-8-1"  
+class="td11">
+ <!--l. 335--><p class="noindent" >Replicated
+  Class
+  End
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-8-2"  
+class="td11"> <img 
+src="images/040-ReplicatedClassEndPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-8-3"  
+class="td11">
+ <div class="tabular"> <table id="TBL-8" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-8-1g"><col 
+id="TBL-8-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-8-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-1-1"  
+class="td11"><!--l. 338--><p class="noindent" ><span 
+class="ec-lmsso-10">External Replicated Class End Port:</span>  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-2-1"  
+class="td11"><!--l. 339-->
+<a 
+ id="x15-67059r7"></a>
+<a 
+ id="x15-67060"></a>
+<div class="lstlisting" id="listing-21"><span class="label"><a 
+ id="x15-67061r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67062r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67063r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port16</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67064r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67065r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67066r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">external</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port16</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67067r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67068r8"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 351--><p class="noindent" >                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-3-1"  
+class="td11"><!--l. 351--><p class="noindent" ><span 
+class="ec-lmsso-10">Internal Replicated Class End Port:</span>    </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-4-1"  
+class="td11"><!--l. 352-->
+<a 
+ id="x15-67069r8"></a>
+<a 
+ id="x15-67070"></a>
+<div class="lstlisting" id="listing-22"><span class="label"><a 
+ id="x15-67071r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67072r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67073r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67074r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67075r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port16</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67076r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67077r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 363--><p class="noindent" >                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-8-5-1"  
+class="td11">                              </td></tr></table> </div>       </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-9-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-9-1"  
+class="td11">
+ <!--l. 366--><p class="noindent" >Conjugated
+  Replicated
+  Class
+  End
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-9-2"  
+class="td11"> <img 
+src="images/040-ConjugatedReplicatedClassEndPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-9-3"  
+class="td11">
+ <div class="tabular"> <table id="TBL-9" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-9-1g"><col 
+id="TBL-9-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-9-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-1-1"  
+class="td11"><!--l. 369--><p class="noindent" ><span 
+class="ec-lmsso-10">External Conjugated Replicated Class</span>
+<span 
+class="ec-lmsso-10">End Port:</span>                                   </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-2-1"  
+class="td11"><!--l. 370-->
+<a 
+ id="x15-67078r9"></a>
+<a 
+ id="x15-67079"></a>
+<div class="lstlisting" id="listing-23"><span class="label"><a 
+ id="x15-67080r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67081r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67082r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port17</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67083r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67084r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67085r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">external</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port17</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67086r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67087r8"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 382--><p class="noindent" >                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-3-1"  
+class="td11"><!--l. 382--><p class="noindent" ><span 
+class="ec-lmsso-10">Internal Conjugated Replicated Class</span>
+<span 
+class="ec-lmsso-10">End Port:</span>                                    </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-4-1"  
+class="td11"><!--l. 383-->
+<a 
+ id="x15-67088r10"></a>
+<a 
+ id="x15-67089"></a>
+<div class="lstlisting" id="listing-24"><span class="label"><a 
+ id="x15-67090r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67091r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67092r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67093r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67094r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port23</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67095r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67096r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 394--><p class="noindent" >                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:baseline;" id="TBL-9-5-1"  
+class="td11">                              </td></tr></table> </div>       </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-10-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-10-1"  
+class="td11">
+ <!--l. 397--><p class="noindent" >Replicated
+  Class
+  Relay
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-10-2"  
+class="td11"> <img 
+src="images/040-ReplicatedClassRelayPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-10-3"  
+class="td11">
+ <!--l. 399-->
+ <a 
+ id="x15-67097r11"></a>
+ <a 
+ id="x15-67098"></a>
+ <div class="lstlisting" id="listing-25"><span class="label"><a 
+ id="x15-67099r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67100r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67101r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port18</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67102r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67103r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67104r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67105r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 409--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-11-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-11-1"  
+class="td11">
+ <!--l. 410--><p class="noindent" >Conjugated
+  Replicated
+  Class
+  Relay
+  Port                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-11-2"  
+class="td11"> <img 
+src="images/040-ConjugatedReplicatedClassRelayPort.png" alt="PIC"  
+ />  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-11-3"  
+class="td11">
+ <!--l. 412-->
+ <a 
+ id="x15-67106r12"></a>
+ <a 
+ id="x15-67107"></a>
+ <div class="lstlisting" id="listing-26"><span class="label"><a 
+ id="x15-67108r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass6</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67109r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67110r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">port19</span><span 
+class="ec-lmtt-9">[3]:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67111r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67112r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67113r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-67114r7"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 423--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-12-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-12-1"  
+class="td11">                </td>                                                                          
+                                                                                            
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-13-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-13-1"  
+class="td11">                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-14-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-14-1"  
+class="td11">
+ <!--l. 424--><p class="noindent" >               </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-15-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-15-1"  
+class="td11">
+ <!--l. 424--><p class="noindent" >               </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-16-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-5-16-1"  
+class="td11">
+ <!--l. 424--><p class="noindent" >               </p></td>
+</tr>
+</table></div>
+<!--l. 427--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x15-680003.3.3"></a>Reference Ports</h5>
+<!--l. 429--><p class="noindent" >These symbols can only appear on the border of an actor class. Since the type of port is defined in the actor class, no textual
+notation for the Reference Ports exists.
+</p><!--l. 432--><p class="noindent" >The table <a 
+href="#x15-680014">3.4<!--tex4ht:ref: tab:reference_port_notation --></a> shows all kinds of reference ports with textual and graphical notation.
+</p>
+<div class="table">
+                                                                                            
+                                                                                            
+<!--l. 435--><p class="noindent" ><a 
+ id="x15-680014"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                            
+                                                                                            
+ <div class="caption" 
+><span class="id">Table&#x00A0;3.4: </span><span  
+class="content">Reference Port Notation</span></div><!--tex4ht:label?: x15-680014 -->
+<div class="tabular"> <table id="TBL-10" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-10-1g"><col 
+id="TBL-10-1" /></colgroup><colgroup id="TBL-10-2g"><col 
+id="TBL-10-2" /></colgroup><colgroup id="TBL-10-3g"><col 
+id="TBL-10-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-1"  
+class="td11">        <span 
+class="ec-lmssbx-10">Element           </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-2"  
+class="td11"> <span 
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-1-3"  
+class="td11"> <span 
+class="ec-lmssbx-10">Textual Notation  </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-1"  
+class="td11">      Reference Port         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-2"  
+class="td11">        <img 
+src="images/040-ReferencePort.png" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-2-3"  
+class="td11">      <span 
+class="ec-lmsso-10">implicit         </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-1"  
+class="td11"> Conjugated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-2"  
+class="td11">        <img 
+src="images/040-ConjugatedReferencePort.png" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-3-3"  
+class="td11">      <span 
+class="ec-lmsso-10">implicit         </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-1"  
+class="td11">  Replicated Reference Port  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-2"  
+class="td11">        <img 
+src="images/040-ReplicatedReferencePort.png" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-4-3"  
+class="td11">      <span 
+class="ec-lmsso-10">implicit         </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-5-1"  
+class="td11">   Conjugated Replicated     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-1"  
+class="td11">      Reference Port         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-2"  
+class="td11">        <img 
+src="images/040-ConjugatedReplicatedReferencePort.png" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-10-6-3"  
+class="td11">      <span 
+class="ec-lmsso-10">implicit         </span></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-10-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-10-7-1"  
+class="td11">                        </td></tr></table></div>
+                                                                                            
+                                                                                            
+</div><hr class="endfloat" />
+</div>
+                                                                                            
+                                                                                            
+<!--l. 450--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse11.html" >next</a>] [<a 
-href="etrice-docch3.html" >prev</a>] [<a 
-href="etrice-docch3.html#tailetrice-docch3.html" >prev-tail</a>] [<a 
+href="etrice-docse9.html" >prev</a>] [<a 
+href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="etrice-docse10.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
-<!--l. 35--><p class="noindent" ><a 
- id="tailetrice-docse10.html"></a> </p> 
+<!--l. 450--><p class="noindent" ><a 
+ id="tailetrice-docse10.html"></a>  </p> 
 </body></html> 

@@ -10,8 +10,8 @@ PhysicalModel PhysicalModel1 {
 		priomax = 10
 		
 		DefaultThread PhysicalThread1 {
-			execmode = mixed
-			interval = 100ms
+			execmode = mixed 
+			interval = 100 ms
 			prio = 0
 			stacksize = 1024
 			msgblocksize = 32
@@ -23,4 +23,4 @@ PhysicalModel PhysicalModel1 {
 		model = multiThreaded
 	} 
 	
-}
+}

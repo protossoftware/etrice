@@ -4,404 +4,134 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Tutorial Sending Data (Java)</title> 
+<head><title>Protocols</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-04 15:04:00" /> 
+<meta name="date" content="2013-07-12 01:23:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+<!--l. 167--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse10.html" >next</a>] [<a 
 href="etrice-docse8.html" >prev</a>] [<a 
 href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse9.html">tail</a>] [<a 
-href="etrice-docch2.html#etrice-docse9.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">2.7   </span> <a 
- id="x13-560002.7"></a>Tutorial Sending Data (Java)</h3>
-<!--l. 3--><p class="noindent" >
+href="etrice-docch3.html#etrice-docse9.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x14-590003.2"></a>Protocols</h3>
+<!--l. 169--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.1   </span> <a 
- id="x13-570002.7.1"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >This tutorial shows how data will be sent in a eTrice model. Within the example you will create two actors
-(MrPing and MrPong). MrPong will simply loop back every data it received. MrPing will send data and verify
-the result.
-</p><!--l. 9--><p class="noindent" >You will perform the following steps:
-</p><!--l. 11--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x13-57002x1">create a new model from scratch
+<h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
+ id="x14-600003.2.1"></a>Description</h4>
+<!--l. 171--><p class="noindent" >A <span id="textcolor40"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
+class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports. The exact
+semantics of a message is defined by the execution model.
+</p><!--l. 174--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
+ id="x14-610003.2.2"></a>Motivation</h4>
+     <ul class="itemize1">
+     <li class="itemize">Protocol classes provide a reusable interface specification for ports
      </li>
-     <li 
-  class="enumerate" id="x13-57004x2">create a data class
-     </li>
-     <li 
-  class="enumerate" id="x13-57006x3">define a protocol with attached data
-     </li>
-     <li 
-  class="enumerate" id="x13-57008x4">create an actor structure
-     </li>
-     <li 
-  class="enumerate" id="x13-57010x5">create two simple state machines
-     </li>
-     <li 
-  class="enumerate" id="x13-57012x6">build and run the model</li></ol>
-<!--l. 20--><p class="noindent" >
+     <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
+<!--l. 181--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.2   </span> <a 
- id="x13-580002.7.2"></a>Create a new model from scratch</h4>
-<!--l. 22--><p class="noindent" >Remember exercise <span 
-class="ec-lmsso-10">HelloWorld</span>. Create a new eTrice project and name it <span 
-class="ec-lmsso-10">SendingData</span>. Open the
-<span 
-class="ec-lmsso-10">SendingData.room </span>file and copy the following code into the file or use content assist to create the
-model.
-                                                                                 
-                                                                                 
+<h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
+ id="x14-620003.2.3"></a>Notation</h4>
+<!--l. 183--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing
+messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a data
+class.
 </p>
-<div class="verbatim" id="verbatim-10">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
+<!--l. 188-->
+<div class="lstlisting" id="listing-14"><span class="label"><a 
+ id="x14-62001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ProtocolClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62002r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">incoming</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62003r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m1</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">data</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62004r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m2</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62005r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62006r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">outgoing</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62007r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m3</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">data</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62008r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Message</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m4</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62009r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x14-62010r10"></a></span><span 
+class="ec-lmtt-9">}</span>
 </div>
-<!--l. 39--><p class="nopar" >
-</p><!--l. 41--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.3   </span> <a 
- id="x13-590002.7.3"></a>Add a data class</h4>
-<!--l. 43--><p class="noindent" >Position the cursor outside any class definition and right click the mouse within the editor window. From the
-context menu select <span 
-class="ec-lmsso-10">Content Assist </span>(or Ctrl+Space).
-</p><!--l. 46--><p class="noindent" ><img 
-src="images/025-SendingData01.png" alt="PIC"  
- />
-</p><!--l. 49--><p class="noindent" >Select <span 
-class="ec-lmsso-10">DataClass - data class skeleton </span>and name it <span 
-class="ec-lmsso-10">DemoData</span>. Remove the operations and add the following
-Attributes:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-11">
-DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
-&#x00A0;<br />}
-</div>
-<!--l. 59--><p class="nopar" >
-</p><!--l. 61--><p class="noindent" >Save the model and visit the outline view. Note that the outline view contains all data elements as defined in
-the model.
-</p><!--l. 64--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.4   </span> <a 
- id="x13-600002.7.4"></a>Create a new protocol</h4>
-<!--l. 66--><p class="noindent" >With the help of <span 
-class="ec-lmsso-10">Content Assist </span>create a <span 
-class="ec-lmsso-10">ProtocolClass </span>and name it <span 
-class="ec-lmsso-10">PingPongProtocol</span>. Create the following
-messages:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-12">
-ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pingSimple(data:int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;outgoing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pong(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pongSimple(data:int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-</div>
-<!--l. 80--><p class="nopar" >
-</p><!--l. 82--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.5   </span> <a 
- id="x13-610002.7.5"></a>Create MrPing and MrPong Actors</h4>
-<!--l. 84--><p class="noindent" >With the help of <span 
-class="ec-lmsso-10">Content Assist </span>create two new actor classes and name them <span 
-class="ec-lmsso-10">MrPing </span>and <span 
-class="ec-lmsso-10">MrPong</span>. The
-resulting model should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-13">
-RoomModel&#x00A0;SendingData&#x00A0;{
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;LogicalSystem&#x00A0;SendingData_LogSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemRef&#x00A0;SendingDataAppl:&#x00A0;SendingData_SubSystem
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SubSystemClass&#x00A0;SendingData_SubSystem&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorRef&#x00A0;SendigDataTopRef:&#x00A0;SendingDataTop
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;SendingDataTop&#x00A0;{&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;DataClass&#x00A0;DemoData&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int32Val:&#x00A0;int32&#x00A0;=&#x00A0;"4711"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;int8Array&#x00A0;[&#x00A0;10&#x00A0;]:&#x00A0;int8&#x00A0;=&#x00A0;"{1,2,3,4,5,6,7,8,9,10}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;float64Val:&#x00A0;float64&#x00A0;=&#x00A0;"0.0"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Attribute&#x00A0;stringVal:&#x00A0;string&#x00A0;=&#x00A0;"\"empty\""
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ProtocolClass&#x00A0;PingPongProtocol&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;incoming&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;ping(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pingSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;outgoing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pong(data:&#x00A0;DemoData)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Message&#x00A0;pongSimple(data:&#x00A0;int32)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPing&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass&#x00A0;MrPong&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Interface&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Structure&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Behavior&#x00A0;{&#x00A0;}
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
-&#x00A0;<br />}
-&#x00A0;<br />
-</div>
-<!--l. 131--><p class="nopar" >
-</p><!--l. 133--><p class="noindent" >The outline view should look like this:
-</p><!--l. 135--><p class="noindent" ><img 
-src="images/025-SendingData03.png" alt="PIC"  
- />
-                                                                                 
-                                                                                 
-</p><!--l. 138--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.6   </span> <a 
- id="x13-620002.7.6"></a>Define Actor Structure and Behavior</h4>
-<!--l. 140--><p class="noindent" >Save the model and visit the outline view. Within the outline view, right click on the <span 
-class="ec-lmsso-10">MrPong </span>actor and select
-<span 
-class="ec-lmsso-10">Edit Structure</span>. Select an <span 
-class="ec-lmsso-10">Interface Port </span>from the toolbox and add it to MrPong. Name the Port <span 
-class="ec-lmsso-10">PingPongPort</span>
-and select the <span 
-class="ec-lmsso-10">PingPongProtocol</span>.
-</p><!--l. 144--><p class="noindent" ><img 
-src="images/025-SendingData02.png" alt="PIC"  
- />
-</p><!--l. 147--><p class="noindent" >Do the same with MrPing but mark the port as <span 
-class="ec-lmsso-10">conjugated</span>
-</p><!--l. 149--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.7   </span> <a 
- id="x13-630002.7.7"></a>Define MrPongs behavior</h4>
-<!--l. 151--><p class="noindent" >Within the outline view, right click MrPong and select <span 
-class="ec-lmsso-10">Edit Behavior</span>. Create the following state
-machine:
-</p><!--l. 154--><p class="noindent" ><img 
-src="images/025-SendingData04.png" alt="PIC"  
- />
-</p><!--l. 157--><p class="noindent" >The transition dialogues should look like this: For <span 
-class="ec-lmsso-10">ping</span>:
-</p><!--l. 160--><p class="noindent" ><img 
-src="images/025-SendingData05.png" alt="PIC"  
- />
-</p><!--l. 163--><p class="noindent" >For <span 
-class="ec-lmsso-10">pingSimple</span>:
-</p><!--l. 165--><p class="noindent" ><img 
-src="images/025-SendingData06.png" alt="PIC"  
- />
-</p><!--l. 169--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.8   </span> <a 
- id="x13-640002.7.8"></a>Define MrPing behavior</h4>
-<!--l. 171--><p class="noindent" >Within the outline view double click MrPing. Navigate the cursor to the behavior of MrPing. With the help of
-content assist create a new operation.
-</p><!--l. 174--><p class="noindent" ><img 
-src="images/025-SendingData07.png" alt="PIC"  
- />
-</p><!--l. 177--><p class="noindent" >Name the operation <span 
-class="ec-lmsso-10">printData </span>and define the DemoData as a parameter.
-</p><!--l. 179--><p class="noindent" >Fill in the following code:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-14">
-Operation&#x00A0;printData(d:&#x00A0;DemoData)&#x00A0;:&#x00A0;void&#x00A0;{
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int32Val:&#x00A0;%d\\n\",d.int32Val);"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.float64Val:&#x00A0;%f\\n\",d.float64Val);"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"d.int8Array:&#x00A0;\");"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"for(int&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x003C;d.int8Array.length;&#x00A0;i++)&#x00A0;{"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"%d&#x00A0;\",d.int8Array[i]);}"
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;"System.out.printf(\"\\nd.stringVal:&#x00A0;%s\\n\",d.stringVal);"
-&#x00A0;<br />}
-</div>
-<!--l. 191--><p class="nopar" >
-</p><!--l. 194--><p class="noindent" >For MrPing create the following state machine: (Remember that you can copy and paste the action code from
-the tutorial directory.)
-</p><!--l. 197--><p class="noindent" ><img 
-src="images/025-SendingData08.png" alt="PIC"  
- />
-</p><!--l. 200--><p class="noindent" >The transition dialogues should look like this:
-</p><!--l. 202--><p class="noindent" >For <span 
-class="ec-lmsso-10">init</span>:
-</p><!--l. 204--><p class="noindent" ><img 
-src="images/025-SendingData09.png" alt="PIC"  
- />
-</p><!--l. 207--><p class="noindent" >For <span 
-class="ec-lmsso-10">wait1</span>:
-</p><!--l. 209--><p class="noindent" ><img 
-src="images/025-SendingData10.png" alt="PIC"  
- />
-</p><!--l. 212--><p class="noindent" >For <span 
-class="ec-lmsso-10">next</span>:
-</p><!--l. 214--><p class="noindent" ><img 
-src="images/025-SendingData11.png" alt="PIC"  
- />
-</p><!--l. 217--><p class="noindent" >For <span 
-class="ec-lmsso-10">wait2</span>:
-</p><!--l. 219--><p class="noindent" ><img 
-src="images/025-SendingData12.png" alt="PIC"  
- />
-</p><!--l. 222--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.9   </span> <a 
- id="x13-650002.7.9"></a>Define the top level</h4>
-<!--l. 224--><p class="noindent" >Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the
-ports.
-</p><!--l. 226--><p class="noindent" ><img 
-src="images/025-SendingData13.png" alt="PIC"  
- />
-</p>
-<div class="flushleft" 
->
-<!--l. 229--><p class="noindent" >
-The model is finished now and can be found in /org.eclipse.etrice.tutorials/model/SendingData.</p></div>
-<!--l. 232--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.10   </span> <a 
- id="x13-660002.7.10"></a>Generate and run the model</h4>
-<!--l. 234--><p class="noindent" >Generate the code by right click to <span 
-class="ec-lmssbx-10">gen_SendingData.launch </span>and run it as <span 
-class="ec-lmssbx-10">gen_SendingData</span>. Run the
-model. The output should look like this:
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-15">
-type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;1
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;2
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;3
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;4
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;5
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;6
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;7
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;8
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;9
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPongSimple
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />data:&#x00A0;10
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref1&#x00A0;-&#x003E;&#x00A0;looping
-&#x00A0;<br />d.int32Val:&#x00A0;4711
-&#x00A0;<br />d.float64Val:&#x00A0;0,000000
-&#x00A0;<br />d.int8Array:&#x00A0;1&#x00A0;2&#x00A0;3&#x00A0;4&#x00A0;5&#x00A0;6&#x00A0;7&#x00A0;8&#x00A0;9&#x00A0;10
-&#x00A0;<br />d.stringVal:&#x00A0;empty
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />d.int32Val:&#x00A0;815
-&#x00A0;<br />d.float64Val:&#x00A0;3,141234
-&#x00A0;<br />d.int8Array:&#x00A0;100&#x00A0;101&#x00A0;102&#x00A0;103&#x00A0;104&#x00A0;105&#x00A0;106&#x00A0;107&#x00A0;108&#x00A0;109
-&#x00A0;<br />d.stringVal:&#x00A0;some&#x00A0;contents
-&#x00A0;<br />/SendingData_SubSystem/SendigDataTopRef/ref0&#x00A0;-&#x003E;&#x00A0;waitForPong
-&#x00A0;<br />quit
-&#x00A0;<br />echo:&#x00A0;quit
-</div>
-<!--l. 286--><p class="nopar" >
-                                                                                 
-                                                                                 
-</p><!--l. 288--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.11   </span> <a 
- id="x13-670002.7.11"></a>Summary</h4>
-<!--l. 290--><p class="noindent" >Within the first loop an integer value will be incremented by <span 
-class="ec-lmsso-10">MrPong </span>and sent back to <span 
-class="ec-lmsso-10">MrPing</span>. As long as the
-guard is true <span 
-class="ec-lmsso-10">MrPing </span>sends back the value.
-</p><!--l. 293--><p class="noindent" >Within the <span 
-class="ec-lmsso-10">next </span>transition, <span 
-class="ec-lmsso-10">MrPing </span>creates a data class and sends the default values. Then <span 
-class="ec-lmsso-10">MrPing </span>changes
-the values and sends the class again. At this point you should note that during the send operation, a copy of
-the data class will be created and sent. Otherwise it would not be possible to send the same object two times,
-even more it would not be possible to send a stack object at all. This type of data passing is called <span 
-class="ec-lmsso-10">sending</span>
-<span 
-class="ec-lmsso-10">data by value</span>. However, for performance reasons some applications requires <span 
-class="ec-lmsso-10">sending data by reference</span>.
-In this case the user is responsible for the life cycle of the object. In Java the VM takes care
-of the life cycle of an object. This is not the case for C/C++. Consider that a object which is
-created within a transition of a state machine will be destroyed when the transition is finished. The
-receiving FSM would receive an invalid reference. Therefore care must be taken when sending
-references.
-</p><!--l. 304--><p class="noindent" >For sending data by reference you simply have to add the keyword <span 
-class="ec-lmsso-10">ref  </span>to the protocol definition.
-                                                                                 
-                                                                                 
-</p>
-<div class="verbatim" id="verbatim-16">
-Message&#x00A0;ping(data:&#x00A0;DemoData&#x00A0;ref)
-</div>
-<!--l. 306--><p class="nopar" >
-</p><!--l. 308--><p class="noindent" >Make the test and inspect the console output.
-                                                                                 
-                                                                                 
-</p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+                                                                                            
+                                                                                            
+<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse10.html" >next</a>] [<a 
 href="etrice-docse8.html" >prev</a>] [<a 
 href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="etrice-docse9.html" >front</a>] [<a 
-href="etrice-docch2.html#etrice-docse9.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch3.html#etrice-docse9.html" >up</a>] </p></div>
+<!--l. 201--><p class="noindent" ><a 
  id="tailetrice-docse9.html"></a> </p> 
 </body></html> 

@@ -4,123 +4,82 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Setting up the Workspace for Java Projects</title> 
+<head><title>eTrice Overview</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-10 11:27:00" /> 
+<meta name="date" content="2013-07-12 01:23:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse2.html" >next</a>] [<a 
-href="etrice-docch2.html" >prev</a>] [<a 
-href="etrice-docch2.html#tailetrice-docch2.html" >prev-tail</a>] [<a 
+href="etrice-docch1.html" >prev</a>] [<a 
+href="etrice-docch1.html#tailetrice-docch1.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse1.html">tail</a>] [<a 
-href="etrice-docch2.html#etrice-docse1.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">2.1   </span> <a 
- id="x5-40002.1"></a>Setting up the Workspace for Java Projects</h3>
-<!--l. 3--><p class="noindent" ><span 
-class="ec-lmssbx-10">Objectives for this tutorial:</span> </p>
+href="etrice-docch1.html#etrice-docse1.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x4-30001.1"></a>eTrice Overview</h3>
+<!--l. 3--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x4-40001.1.1"></a>What is eTrice?</h4>
+<!--l. 5--><p class="noindent" >eTrice provides an implementation of the ROOM modeling language (Real Time Object Oriented Modeling) together with
+editors, code generators for Java, C++ and C code and exemplary target middleware.
+</p><!--l. 8--><p class="noindent" >The model is defined in textual form (Xtext) with graphical editors (Graphiti) for the structural and behavioral (i.e. state
+machine) parts.
+</p><!--l. 11--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">1.1.2   </span> <a 
+ id="x4-50001.1.2"></a>Reduction of Complexity</h4>
+<!--l. 13--><p class="noindent" >eTrice is all about the reduction of complexity:
+</p>
      <ul class="itemize1">
-     <li class="itemize">create all needed library projects (runtime.java and modellib.java)
+     <li class="itemize">structural complexity
+         <ul class="itemize2">
+         <li class="itemize">by explicit modeling of hierarchical Actor containment, layering and inheritance</li></ul>
      </li>
-     <li class="itemize">create the tutorial project with the examples
+     <li class="itemize">behavioral complexity
+         <ul class="itemize2">
+         <li class="itemize">by hierarchical state machines with inheritance</li></ul>
      </li>
-     <li class="itemize">create the project with a traffic light simulator
+     <li class="itemize">team work complexity
+         <ul class="itemize2">
+         <li class="itemize">because loosely coupled Actors provide a natural way to structure team work
+                                                                                            
+                                                                                            
+         </li>
+         <li class="itemize">since textual model notation allows simple branching and merging</li></ul>
      </li>
-     <li class="itemize">test the workspace setup by running one of the examples</li></ul>
-<!--l. 11--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.1.1   </span> <a 
- id="x5-50002.1.1"></a>Create Library, Tutorial and Simulator Projects</h4>
-<!--l. 13--><p class="noindent" >After installation of eclipse and the eTrice plug in, your workspace should look like this:
-</p><!--l. 15--><p class="noindent" ><img 
-src="images/013-SetupWorkspace01.png" alt="PIC"  
- />
-</p><!--l. 18--><p class="noindent" >
-                                                                                 
-                                                                                 
-</p><!--l. 19--><p class="noindent" >Just the eTrice menu item is visible of the installed eTrice plugins.
-</p><!--l. 21--><p class="noindent" >Select the menu <span 
-class="ec-lmsso-10">File-&#x003E;New-&#x003E;Other</span>
-</p><!--l. 23--><p class="noindent" ><img 
-src="images/013-SetupWorkspace02.png" alt="PIC"  
- />
-</p><!--l. 26--><p class="noindent" >Open the eTrice tab and select <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> <span 
-class="ec-lmsso-10">Java Runtime</span>
-</p><!--l. 28--><p class="noindent" >Press <span 
-class="ec-lmsso-10">Next </span>and <span 
-class="ec-lmsso-10">Finish </span>to install the Runtime into your workspace.
-</p><!--l. 30--><p class="noindent" ><img 
-src="images/013-SetupWorkspace03.png" alt="PIC"  
- />
-</p><!--l. 33--><p class="noindent" >
-                                                                                 
-                                                                                 
-</p><!--l. 34--><p class="noindent" >Do the same steps for <span 
-class="ec-lmsso-10">eTrice Java Modellib</span>, <span 
-class="ec-lmsso-10">eTrice Java Tutorials </span>and <span 
-class="ec-lmsso-10">eTrice Trafficlight for Tutorials</span>. To
-avoid temporary error markers you should keep the proposed order of installation. The resulting workspace
-should look like this:
-</p><!--l. 38--><p class="noindent" ><img 
-src="images/013-SetupWorkspace04.png" alt="PIC"  
- />
-</p><!--l. 41--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
-</p><!--l. 43--><p class="noindent" >The tutorial models are available in the <span 
-class="ec-lmsso-10">org.eclipse.etrice.tutorials.java </span>project. All tutorials are ready to
-generate and run without any changes. To test the code generator and the workspace setup simply run
-<span 
-class="ec-lmsso-10">gen_SetupTest.launch </span>as <span 
-class="ec-lmsso-10">gen_SetupTest</span>:
-</p><!--l. 47--><p class="noindent" ><img 
-src="images/013-SetupWorkspace05.png" alt="PIC"  
- />
-</p><!--l. 50--><p class="noindent" >The successful generation ends with <span 
-class="ec-lmsso-10">Info: &#8211; finished code generation </span>in the Console.
-</p><!--l. 52--><p class="noindent" ><img 
-src="images/013-SetupWorkspace051.png" alt="PIC"  
- />
-</p><!--l. 55--><p class="noindent" >
-                                                                                 
-                                                                                 
-</p><!--l. 56--><p class="noindent" >For each tutorial in the folder src-gen a java package is generated including a java file called
-<span 
-class="ec-lmsso-10">SubSys&#x003C;...&#x003E;Runner.java </span>. To run the a generated application simply run this file as a java application. Try this
-with the file <span 
-class="ec-lmsso-10">src-gen/SetupTest_Model/SubSysClass1Runner.java </span>:
-</p><!--l. 60--><p class="noindent" ><img 
-src="images/013-SetupWorkspace06.png" alt="PIC"  
- />
-</p><!--l. 63--><p class="noindent" >To stop the application type <span 
-class="ec-lmsso-10">quit </span>in the console window. If your Console contains the lines <br 
-class="newline" /><span 
-class="ec-lmsso-10">****************** </span><br 
-class="newline" /><span 
-class="ec-lmsso-10">*** Setup OK *** </span><br 
-class="newline" /><span 
-class="ec-lmsso-10">****************** </span><br 
-class="newline" />your setup should be ok.
-</p><!--l. 69--><p class="noindent" ><img 
-src="images/013-SetupWorkspace07.png" alt="PIC"  
- />
-</p><!--l. 72--><p class="noindent" >Performing the tutorials will setup a dedicated project for each tutorial. Therefore there are some slight
-changes especially whenever a path must be set (e.g. to the model library) within your own projects. All this is
-described in the tutorials.
-                                                                                 
-                                                                                 
-</p>
+     <li class="itemize">complexity of concurrent &amp; distributed systems
+         <ul class="itemize2">
+         <li class="itemize">because loosely coupled Actors are deployable to threads, processes, nodes</li></ul>
+     </li>
+     <li class="itemize">complexity of variant handling and reuse (e.g. for product lines)
+         <ul class="itemize2">
+         <li class="itemize">by composition of existing Actors to new structures
+         </li>
+         <li class="itemize">since Protocols and Ports make Actors replaceable
+         </li>
+         <li class="itemize">by inheritance for structure, behavior and Protocols
+         </li>
+         <li class="itemize">by making use of model level libraries</li></ul>
+     </li>
+     <li class="itemize">complexity of debugging
+         <ul class="itemize2">
+         <li class="itemize">model level debugging: state machine animation, data inspection and manipulation, message injection,
+         generated message sequence charts
+         </li>
+         <li class="itemize">model checking easier for model than for code (detect errors before they occur)</li></ul>
+     </li></ul>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse2.html" >next</a>] [<a 
-href="etrice-docch2.html" >prev</a>] [<a 
-href="etrice-docch2.html#tailetrice-docch2.html" >prev-tail</a>] [<a 
+href="etrice-docch1.html" >prev</a>] [<a 
+href="etrice-docch1.html#tailetrice-docch1.html" >prev-tail</a>] [<a 
 href="etrice-docse1.html" >front</a>] [<a 
-href="etrice-docch2.html#etrice-docse1.html" >up</a>] </p></div>
+href="etrice-docch1.html#etrice-docse1.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse1.html"></a> </p> 
 </body></html> 

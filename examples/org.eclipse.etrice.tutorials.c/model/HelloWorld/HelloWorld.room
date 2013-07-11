@@ -12,7 +12,7 @@ RoomModel HelloWorld_Model {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"printf(\"Hello World\");"
+						"printf(\"Hello World\\n\");"
 					}
 				}
 				State state0

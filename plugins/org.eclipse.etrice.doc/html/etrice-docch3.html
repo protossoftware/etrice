@@ -4,32 +4,93 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>3 eTrice Features</title> 
+<head><title>3 ROOM Concepts</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-10 11:27:00" /> 
+<meta name="date" content="2013-07-12 01:23:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 71--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch4.html" >next</a>] [<a 
-href="etrice-docse2.html" >prev</a>] [<a 
-href="etrice-docse2.html#tailetrice-docse2.html" >prev-tail</a>] [<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse8.html" >next</a>] [<a 
+href="etrice-docse7.html" >prev</a>] [<a 
+href="etrice-docse7.html#tailetrice-docse7.html" >prev-tail</a>] [<a 
 href="#tailetrice-docch3.html">tail</a>] [<a 
 href="etrice-doc.html#etrice-docch3.html" >up</a>] </p></div>
 <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;3</span><br /><a 
- id="x7-90003"></a>eTrice Features</h2>
-                                                                                 
-                                                                                 
-<!--l. 83--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch4.html" >next</a>] [<a 
-href="etrice-docse2.html" >prev</a>] [<a 
-href="etrice-docse2.html#tailetrice-docse2.html" >prev-tail</a>] [<a 
+ id="x12-500003"></a>ROOM Concepts</h2>
+<!--l. 4--><p class="noindent" >This chapter gives an overview over the ROOM language elements and their textual and graphical
+notation. The formal ROOM grammar based on Xtext (EBNF) you can find in the eTrice repository:
+<a 
+href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext" class="url" ><span 
+class="ec-lmtt-10">http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext</span></a>
+</p>
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >3.1 <a 
+href="etrice-docse8.html#x13-510003.1">Actors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.1 <a 
+href="etrice-docse8.html#x13-520003.1.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.2 <a 
+href="etrice-docse8.html#x13-530003.1.2">Motivation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.3 <a 
+href="etrice-docse8.html#x13-540003.1.3">Notation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.4 <a 
+href="etrice-docse8.html#x13-550003.1.4">Details</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.2 <a 
+href="etrice-docse9.html#x14-590003.2">Protocols</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.1 <a 
+href="etrice-docse9.html#x14-600003.2.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.2 <a 
+href="etrice-docse9.html#x14-610003.2.2">Motivation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.3 <a 
+href="etrice-docse9.html#x14-620003.2.3">Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.3 <a 
+href="etrice-docse10.html#x15-630003.3">Ports</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.1 <a 
+href="etrice-docse10.html#x15-640003.3.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.2 <a 
+href="etrice-docse10.html#x15-650003.3.2">Motivation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.3 <a 
+href="etrice-docse10.html#x15-660003.3.3">Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.4 <a 
+href="etrice-docse11.html#x16-690003.4">DataClass</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.4.1 <a 
+href="etrice-docse11.html#x16-700003.4.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.4.2 <a 
+href="etrice-docse11.html#x16-710003.4.2">Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.5 <a 
+href="etrice-docse12.html#x17-720003.5">Layering</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.5.1 <a 
+href="etrice-docse12.html#x17-730003.5.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.5.2 <a 
+href="etrice-docse12.html#x17-740003.5.2">Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.6 <a 
+href="etrice-docse13.html#x18-750003.6">Finite State Machines</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.1 <a 
+href="etrice-docse13.html#x18-760003.6.1">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.2 <a 
+href="etrice-docse13.html#x18-770003.6.2">Motivation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.3 <a 
+href="etrice-docse13.html#x18-780003.6.3">Notation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.4 <a 
+href="etrice-docse13.html#x18-810003.6.4">Examples</a></span>
+</div>
+
+
+
+
+
+                                                                                            
+                                                                                            
+<!--l. 72--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse8.html" >next</a>] [<a 
+href="etrice-docse7.html" >prev</a>] [<a 
+href="etrice-docse7.html#tailetrice-docse7.html" >prev-tail</a>] [<a 
 href="etrice-docch3.html" >front</a>] [<a 
 href="etrice-doc.html#etrice-docch3.html" >up</a>] </p></div>
-<!--l. 83--><p class="noindent" ><a 
+<!--l. 72--><p class="noindent" ><a 
  id="tailetrice-docch3.html"></a> </p> 
 </body></html> 
