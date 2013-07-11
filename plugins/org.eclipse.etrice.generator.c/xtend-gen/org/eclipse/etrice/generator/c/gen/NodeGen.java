@@ -1185,12 +1185,17 @@ public class NodeGen {
           _builder.append(" */");
           _builder.newLineIfNotEmpty();
           {
+            boolean _and = false;
             boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
             boolean _not = (!_generateMSCInstrumentation);
-            if (_not) {
-              _builder.append(" && ai.orderedIfItemInstances.empty\u00BB");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
+            if (!_not) {
+              _and = false;
+            } else {
+              EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
+              boolean _isEmpty_1 = _orderedIfItemInstances_2.isEmpty();
+              _and = (_not && _isEmpty_1);
+            }
+            if (_and) {
               _builder.append("/* no ports/saps/services - nothing to initialize statically */");
               _builder.newLine();
             } else {
