@@ -142,6 +142,7 @@ class NodeGen {
 		 */
 		
 		#include <stdio.h>
+		#include <string.h>
 		
 		#include "«nr.getCHeaderFileName(ssi)»"
 
@@ -266,8 +267,7 @@ class NodeGen {
 					char line[64];
 		
 					if (fgets(line, 64, stdin) == NULL) {
-						printf("got NULL\n");
-						break;
+						/* ignore: may be interrupted */
 					}
 					else if (strncmp(line, "quit", 4)==0){
 						break;

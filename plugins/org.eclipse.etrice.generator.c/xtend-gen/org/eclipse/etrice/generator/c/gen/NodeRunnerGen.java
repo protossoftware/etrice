@@ -108,6 +108,8 @@ public class NodeRunnerGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("#include <string.h>");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("#include \"");
       String _cHeaderFileName = this._cExtensions.getCHeaderFileName(nr, ssi);

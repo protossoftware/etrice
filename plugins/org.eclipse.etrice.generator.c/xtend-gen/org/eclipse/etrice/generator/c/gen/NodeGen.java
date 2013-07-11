@@ -301,6 +301,8 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include <stdio.h>");
       _builder.newLine();
+      _builder.append("#include <string.h>");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("#include \"");
       String _cHeaderFileName = this._cExtensions.getCHeaderFileName(nr, ssi);
@@ -706,10 +708,7 @@ public class NodeGen {
       _builder.append("if (fgets(line, 64, stdin) == NULL) {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("printf(\"got NULL\\n\");");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("break;");
+      _builder.append("/* ignore: may be interrupted */");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("}");

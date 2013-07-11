@@ -52,6 +52,7 @@ class NodeRunnerGen {
 		 * it instantiates Node «nr.name» with SubSystem «ssi.name» and starts and ends the lifecycle
 		 */
 		
+		#include <string.h>
 		
 		#include "«nr.getCHeaderFileName(ssi)»"
 
