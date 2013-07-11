@@ -1,5 +1,15 @@
 \section{Setting up the Workspace for C Projects}
- 
+
+\textbf{Objectives for this tutorial:}
+\begin{itemize}
+	\item create all needed library projects (runtime.c and modellib.c)
+	\item create the tutorial project with the examples
+	\item create the project with a traffic light simulator
+	\item test the workspace setup by running one of the examples
+\end{itemize}
+
+\subsection{Create Library, Tutorial and Simulator Projects}
+
 Before you can start with C, some preconditions must be fulfilled:
 
 \begin{itemize}
@@ -7,94 +17,72 @@ Before you can start with C, some preconditions must be fulfilled:
 \item The CDT-Eclipse plugin must be installed as the C development environment.
 \end{itemize}
 
-Once the CDT is installed, the C runtime and model library must be imported. 
-(\textit{File->New->Project->\eTrice{}} select \textit{\eTrice{} C runtime} / \textit{\eTrice{} C modellib})
+After installation of eclipse and the \eTrice{} plug in, your workspace should look like this:  
 
-The resulting workspace should look like this:
+\includegraphics[width=0.8\textwidth]{images/013-SetupWorkspace01.png}
+% !images/013-SetupWorkspace01.png!
 
-\includegraphics{images/014-SetupWorkspaceC01.png}
-% !images/014-SetupWorkspaceC01.png!
+Just the \eTrice{} menu item is visible of the installed \eTrice{} plugins.
 
+\newpage
+Select the menu \emph{File->New->Other}
 
-\subsection{Testing the environment}
+\includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace02.png}
+% !images/013-SetupWorkspace02.png!
 
-To verify the C tool chain you should generate and run the Hello World example program of the CDT. 
-Activate the \textit{C/C++} perspective. 
+Open the \emph{eTrice} tab and select \textit{eTrice C Runtime}
 
-\includegraphics{images/014-SetupWorkspaceC03.png} 
-% !images/014-SetupWorkspaceC03.png!
- 
-From the main menu select \textit{File->New->C Project}.
- 
-\includegraphics{images/014-SetupWorkspaceC02.png}
-% !images/014-SetupWorkspaceC02.png!
+Press \emph{Next} and \emph{Finish} to install the Runtime into your workspace.
 
-Name the project. Select an \textit{Executable->Hello World ANSI C} as project type, \textit{MinGW GCC} as 
-tool chain and click \textit{Finish}. 
- 
-\includegraphics{images/014-SetupWorkspaceC04.png}
-% !images/014-SetupWorkspaceC04.png! 
+\includegraphics[width=0.6\textwidth]{images/014-SetupWorkspaceC005.png}
+% !images/014-SetupWorkspaceC005.png!
 
-Select the new project and click the build button (or right click the project and select \textit{Build 
-Project})
+\newpage
+Do the same steps for \textit{eTrice C Modellib}, \textit{eTrice C Tutorials} and \textit{eTrice Trafficlight for Tutorials}. To avoid temporary 
+error markers you should keep the proposed order of installation. The resulting workspace should look like 
+this:
 
-\includegraphics{images/014-SetupWorkspaceC05.png}
-% !images/014-SetupWorkspaceC05.png!
+\includegraphics[width=0.5\textwidth]{images/014-SetupWorkspace007.png}
+% !images/014-SetupWorkspace007.png!
 
-The binary should be generated. Run the binary as \textit{Local C/C++ Application}.
+\subsection{Perform Setup Test}
 
-\includegraphics{images/014-SetupWorkspaceC06.png}
-% !images/014-SetupWorkspaceC06.png!
+To check the correct setup of your workspace we run a little testproject contained in the tutorial project.
 
-Verify the output.
+The tutorial models are available in the  \emph{org.eclipse.etrice.tutorials.c} project. All tutorials are ready to generate and run without any changes. To test the code generator and the workspace setup simply run 
+\emph{gen\_SetupTestC.launch} as \emph{gen\_SetupTestC}: 
 
-\includegraphics{images/014-SetupWorkspaceC07.png}
-% !images/014-SetupWorkspaceC07.png!
+\includegraphics[width=0.6\textwidth]{images/014-05-gen_SetupTestC.png}
+% !images/014-05-gen_SetupTestC.png!
 
-Remember these steps. In the following Tutorials these steps will be referenced as \textit{build and run}.
+\newpage
+The successful generation ends with \emph{Info: -- finished code generation} in the Console.
 
+\includegraphics[width=0.5\textwidth]{images/014-06-FinishedCodeGeneration.png}
+% !014-06-FinishedCodeGeneration.png!
 
-\subsection{Building the C runtime system}
+For each tutorial in the folder src-gen a sub folder is generated which contains the generated code. The file \emph{<...>\_Runner.c} contains the main function. To run the generated application you first have to compile the project (with the hammer symbol in the C/C++ Perspective).
 
-The C runtime system contains some basic functionalities to run the generated models. The so called 
-runtime is common for all C projects. The requirements for several projects may differ depending on the 
-functionality of the model or the resources of the different platforms. Therefore the runtime is 
-configurable in terms of message queue size, frequency and memory alignment. The configuration file 
-\textit{etRuntimeConfig.h} is located in \textit{src/config}.
+\includegraphics[width=0.5\textwidth]{images/014-07-Compile.png}
+% !014-07-Compile.png!
 
-After changing the configuration, the runtime must be built.
+If the compilitation does not succeed, make sure to clean and compile the projects \emph{org.eclipse.etrice.runtime.c} and \emph{org.eclipse.etrice.modellib.c} with the correct build configuration for your platform. Depending on the setup of your C compiler and CDT you might have to change the pre defined build configurations \emph{MinGWDebug} or \emph{PosixDebug}.
 
-Open the properties of the \textit{org.eclipse.runtime.c} project and select \textit{C/C++ 
-Build->Settings->Tool Settings} and select \textit{Includes}.
+After the successful compilation you can run the application as \emph{Local C/C++ Application}.
 
-\includegraphics{images/014-SetupWorkspaceC08.png}
-% !images/014-SetupWorkspaceC08.png!
+\includegraphics[width=0.7\textwidth]{images/014-08-RunAsC-CPP-Application.png}
+% !images/014-08-RunAsC-CPP-Application.png!
 
-Verify the include paths
+\newpage
+To stop the application type \emph{quit} in the console window. If your Console contains the lines
+\newline\emph{******************}
+\newline\emph{*** Setup OK ***}
+\newline\emph{******************} 
+\newline your setup should be ok.
 
-\begin{itemize}
-\item \textit{src/config}
-\item \textit{src/common}
-\item \textit{src/platforms/generic}
-\end{itemize}
+%TODO : update screenshot
+\includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace07.png} 
+% !images/013-SetupWorkspace07.png!
 
-Within the Setting dialog select the tab \textit{Build Artefact} and select \textit{Static Library}
+Now the workspace is set up and you can perform the tutorials or start with your work.
 
-\includegraphics{images/014-SetupWorkspaceC09.png}
-% !images/014-SetupWorkspaceC09.png!
-
-Build the runtime by clicking
-
-\includegraphics{images/014-SetupWorkspaceC10.png}
-% !images/014-SetupWorkspaceC10.png!
-
-The runtime library should be created.
-
-\includegraphics{images/014-SetupWorkspaceC11.png}
-% !images/014-SetupWorkspaceC11.png!
-
-For the tutorials one runtime library should be sufficient. For embedded projects it might be necessary to 
-build project specific runtime libraries. In this case a separate project for the runtime should be 
-created. Symbolic links to the sources might be used to avoid duplicate files. Just the configuration file 
-must be duplicated. A specific library file must exist within the project. Such specific runtime libraries 
-might be referenced from several applications.     
