@@ -533,7 +533,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("void ");
       String _name_16 = ac.getName();
       _builder.append(_name_16, "");
-      _builder.append("_receiveMessage(void* self, void* ifitem, const etMessage* msg);");
+      _builder.append("_receiveMessage(void* self, const void* ifitem, const etMessage* msg);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
@@ -695,7 +695,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("void ");
       String _name_4 = ac.getName();
       _builder.append(_name_4, "");
-      _builder.append("_receiveMessage(void* self, void* ifitem, const etMessage* msg){");
+      _builder.append("_receiveMessage(void* self, const void* ifitem, const etMessage* msg){");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");

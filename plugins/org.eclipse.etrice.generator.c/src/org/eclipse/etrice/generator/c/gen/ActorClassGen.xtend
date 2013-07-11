@@ -177,7 +177,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		void «ac.name»_init(«ac.name»* self);
 
-		void «ac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg);
+		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg);
 		
 		«IF dataDriven || async»
 			void «ac.name»_execute(«ac.name»* self);
@@ -237,7 +237,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 		
 		
-		void «ac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg){
+		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !xpac.stateMachine.empty»
 				

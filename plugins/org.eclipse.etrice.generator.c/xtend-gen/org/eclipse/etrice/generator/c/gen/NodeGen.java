@@ -1804,7 +1804,7 @@ public class NodeGen {
         }
         final String peerInst = _xifexpression_2;
         String _xifexpression_3 = null;
-        boolean _equals = iiiD.equals("0");
+        boolean _equals = iiiD.equals("NULL");
         if (_equals) {
           String _plus_4 = (iiiD + ",");
           _xifexpression_3 = _plus_4;
@@ -1816,7 +1816,7 @@ public class NodeGen {
         }
         iiiD = _xifexpression_3;
         String _plus_8 = (result + 
-          "{");
+          "{{");
         String _plus_9 = (_plus_8 + iiiD);
         String _plus_10 = (_plus_9 + "&msgService_");
         String _plus_11 = (_plus_10 + thread);
@@ -1829,10 +1829,10 @@ public class NodeGen {
         int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
         int _plus_15 = (_interfaceItemLocalId + 1);
         String _plus_16 = (_plus_14 + Integer.valueOf(_plus_15));
-        String _plus_17 = (_plus_16 + ", ");
-        String _plus_18 = (_plus_17 + Integer.valueOf(idx));
-        String _plus_19 = (_plus_18 + myInst);
-        String _plus_20 = (_plus_19 + peerInst);
+        String _plus_17 = (_plus_16 + myInst);
+        String _plus_18 = (_plus_17 + peerInst);
+        String _plus_19 = (_plus_18 + "},");
+        String _plus_20 = (_plus_19 + Integer.valueOf(idx));
         String _plus_21 = (_plus_20 + "}");
         String _plus_22 = (_plus_21 + comma);
         String _plus_23 = (_plus_22 + " /* Repl Sub Port ");
@@ -2206,7 +2206,6 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  _builder.append("((etReplSubPort*)&");
                                   String _path_6 = ai_1.getPath();
                                   String _pathName_5 = this._roomExtensions.getPathName(_path_6);
                                   _builder.append(_pathName_5, "				");
@@ -2217,7 +2216,7 @@ public class NodeGen {
                                   EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
                                   int _indexOf_3 = _peers_4.indexOf(peer);
                                   _builder.append(_indexOf_3, "				");
-                                  _builder.append("])->peerInstName,");
+                                  _builder.append("].port.peerInstName,");
                                   _builder.newLineIfNotEmpty();
                                   _builder.append("\t\t");
                                   _builder.append("\t");
@@ -2230,7 +2229,6 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  _builder.append("((etReplSubPort*)&");
                                   String _path_7 = ai_1.getPath();
                                   String _pathName_6 = this._roomExtensions.getPathName(_path_7);
                                   _builder.append(_pathName_6, "				");
@@ -2241,7 +2239,7 @@ public class NodeGen {
                                   EList<InterfaceItemInstance> _peers_5 = pi.getPeers();
                                   int _indexOf_4 = _peers_5.indexOf(peer);
                                   _builder.append(_indexOf_4, "				");
-                                  _builder.append("])->myInstName");
+                                  _builder.append("].port.myInstName");
                                   _builder.newLineIfNotEmpty();
                                   _builder.append("\t\t");
                                   _builder.append("\t");
@@ -2259,7 +2257,7 @@ public class NodeGen {
                               String _path_8 = ai_1.getPath();
                               String _pathName_7 = this._roomExtensions.getPathName(_path_8);
                               _builder.append(_pathName_7, "			");
-                              _builder.append(",(etPort*)&");
+                              _builder.append(",&");
                               String _path_9 = ai_1.getPath();
                               String _pathName_8 = this._roomExtensions.getPathName(_path_9);
                               _builder.append(_pathName_8, "			");
@@ -2270,7 +2268,7 @@ public class NodeGen {
                               EList<InterfaceItemInstance> _peers_6 = pi.getPeers();
                               int _indexOf_5 = _peers_6.indexOf(peer);
                               _builder.append(_indexOf_5, "			");
-                              _builder.append("], msg);");
+                              _builder.append("].port, msg);");
                               _builder.newLineIfNotEmpty();
                             }
                           }

@@ -561,15 +561,16 @@ class NodeGen {
 			var iiiD = getInterfaceItemInstanceData(pi)
 			val peerInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
 				else ""
-			iiiD = if (iiiD.equals("0")) iiiD+"," else iiiD+"["+idx+"],"
+			iiiD = if (iiiD.equals("NULL")) iiiD+"," else iiiD+"["+idx+"],"
 			result = result +
-				"{"+iiiD 
+				"{{"+iiiD 
 				+"&msgService_"+thread+", "
 				+p.objId+"+BASE_ADDRESS, "
-				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)+", "
-				+idx
+				+(root.getExpandedActorClass(ai).getInterfaceItemLocalId(pi.interfaceItem)+1)
 				+myInst
 				+peerInst
+				+"},"
+				+idx
 				+"}"+comma+" /* Repl Sub Port "+pi.name+" idx +"+idx+"*/\n"
 		}
 		
@@ -646,12 +647,12 @@ class NodeGen {
 										«ELSE»
 											«IF GlobalGeneratorSettings::generateMSCInstrumentation»
 												ET_MSC_LOGGER_ASYNC_IN(
-													((etReplSubPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»])->peerInstName,
+													«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port.peerInstName,
 													«pi.protocol.name»_getMessageString(msg->evtID),
-													((etReplSubPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»])->myInstName
+													«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port.myInstName
 													)
 											«ENDIF»
-											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,(etPort*)&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»], msg);
+											«ai.actorClass.name»_receiveMessage((void*)&«ai.path.pathName»,&«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port, msg);
 										«ENDIF»
 									break;
 								«ENDFOR»
