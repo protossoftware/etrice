@@ -393,7 +393,7 @@ class NodeGen {
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
-			«IF !GlobalGeneratorSettings::generateMSCInstrumentation» && ai.orderedIfItemInstances.empty»
+			«IF !GlobalGeneratorSettings::generateMSCInstrumentation && ai.orderedIfItemInstances.empty»
 				/* no ports/saps/services - nothing to initialize statically */
 			«ELSE»
 				«genActorInstanceInitializer(root, ai)»
