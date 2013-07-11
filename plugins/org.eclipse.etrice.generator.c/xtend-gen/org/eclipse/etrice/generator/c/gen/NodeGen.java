@@ -693,6 +693,9 @@ public class NodeGen {
       _builder.append("printf(\"type quit to exit\\n\");");
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("fflush(stdout);");
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("while (TRUE) {");
       _builder.newLine();
       _builder.append("\t\t\t");
@@ -1183,9 +1186,12 @@ public class NodeGen {
           _builder.append(" */");
           _builder.newLineIfNotEmpty();
           {
-            EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
-            boolean _isEmpty_1 = _orderedIfItemInstances_2.isEmpty();
-            if (_isEmpty_1) {
+            boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+            boolean _not = (!_generateMSCInstrumentation);
+            if (_not) {
+              _builder.append(" && ai.orderedIfItemInstances.empty\u00BB");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
               _builder.append("/* no ports/saps/services - nothing to initialize statically */");
               _builder.newLine();
             } else {
@@ -1708,7 +1714,7 @@ public class NodeGen {
     PortClass _portClass = this._roomExtensions.getPortClass(_protocol, _isConjugated);
     boolean _equals = Objects.equal(_portClass, null);
     if (_equals) {
-      return "0";
+      return "NULL";
     }
     ProtocolClass _protocol_1 = pi.getProtocol();
     boolean _isConjugated_1 = this._roomExtensions.isConjugated(pi);
@@ -1716,7 +1722,7 @@ public class NodeGen {
     EList<Attribute> _attributes = _portClass_1.getAttributes();
     boolean _isEmpty = _attributes.isEmpty();
     if (_isEmpty) {
-      return "0";
+      return "NULL";
     } else {
       String _path = pi.getPath();
       String _pathName = this._roomExtensions.getPathName(_path);
@@ -1753,63 +1759,89 @@ public class NodeGen {
   
   private String genReplSubPortInitializers(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String result = "";
+    String _xifexpression = null;
+    boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+    if (_generateMSCInstrumentation) {
+      EObject _eContainer = pi.eContainer();
+      String _path = ((ActorInstance) _eContainer).getPath();
+      String _plus = (",\"" + _path);
+      String _plus_1 = (_plus + "\",");
+      _xifexpression = _plus_1;
+    } else {
+      _xifexpression = "";
+    }
+    final String myInst = _xifexpression;
     EList<InterfaceItemInstance> _peers = pi.getPeers();
     for (final InterfaceItemInstance p : _peers) {
       {
         EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
         final int idx = _peers_1.indexOf(p);
-        String _xifexpression = null;
+        String _xifexpression_1 = null;
         EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
         int _size = _peers_2.size();
         int _minus = (_size - 1);
         boolean _lessThan = (idx < _minus);
         if (_lessThan) {
-          _xifexpression = ",";
+          _xifexpression_1 = ",";
         } else {
-          _xifexpression = "";
+          _xifexpression_1 = "";
         }
-        final String comma = _xifexpression;
-        EObject _eContainer = p.eContainer();
-        PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(((ActorInstance) _eContainer));
+        final String comma = _xifexpression_1;
+        EObject _eContainer_1 = p.eContainer();
+        PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(((ActorInstance) _eContainer_1));
         final String thread = _physicalThread.getName();
         String iiiD = this.getInterfaceItemInstanceData(pi);
-        String _xifexpression_1 = null;
+        String _xifexpression_2 = null;
+        boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_1) {
+          EObject _eContainer_2 = p.eContainer();
+          String _path_1 = ((ActorInstance) _eContainer_2).getPath();
+          String _plus_2 = ("\"" + _path_1);
+          String _plus_3 = (_plus_2 + "\"");
+          _xifexpression_2 = _plus_3;
+        } else {
+          _xifexpression_2 = "";
+        }
+        final String peerInst = _xifexpression_2;
+        String _xifexpression_3 = null;
         boolean _equals = iiiD.equals("0");
         if (_equals) {
-          String _plus = (iiiD + ",");
-          _xifexpression_1 = _plus;
+          String _plus_4 = (iiiD + ",");
+          _xifexpression_3 = _plus_4;
         } else {
-          String _plus_1 = (iiiD + "[");
-          String _plus_2 = (_plus_1 + Integer.valueOf(idx));
-          String _plus_3 = (_plus_2 + "],");
-          _xifexpression_1 = _plus_3;
+          String _plus_5 = (iiiD + "[");
+          String _plus_6 = (_plus_5 + Integer.valueOf(idx));
+          String _plus_7 = (_plus_6 + "],");
+          _xifexpression_3 = _plus_7;
         }
-        iiiD = _xifexpression_1;
-        String _plus_4 = (result + 
+        iiiD = _xifexpression_3;
+        String _plus_8 = (result + 
           "{");
-        String _plus_5 = (_plus_4 + iiiD);
-        String _plus_6 = (_plus_5 + "&msgService_");
-        String _plus_7 = (_plus_6 + thread);
-        String _plus_8 = (_plus_7 + ", ");
+        String _plus_9 = (_plus_8 + iiiD);
+        String _plus_10 = (_plus_9 + "&msgService_");
+        String _plus_11 = (_plus_10 + thread);
+        String _plus_12 = (_plus_11 + ", ");
         int _objId = p.getObjId();
-        String _plus_9 = (_plus_8 + Integer.valueOf(_objId));
-        String _plus_10 = (_plus_9 + "+BASE_ADDRESS, ");
+        String _plus_13 = (_plus_12 + Integer.valueOf(_objId));
+        String _plus_14 = (_plus_13 + "+BASE_ADDRESS, ");
         ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
         InterfaceItem _interfaceItem = pi.getInterfaceItem();
         int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-        int _plus_11 = (_interfaceItemLocalId + 1);
-        String _plus_12 = (_plus_10 + Integer.valueOf(_plus_11));
-        String _plus_13 = (_plus_12 + ", ");
-        String _plus_14 = (_plus_13 + Integer.valueOf(idx));
-        String _plus_15 = (_plus_14 + "}");
-        String _plus_16 = (_plus_15 + comma);
-        String _plus_17 = (_plus_16 + " /* Repl Sub Port ");
+        int _plus_15 = (_interfaceItemLocalId + 1);
+        String _plus_16 = (_plus_14 + Integer.valueOf(_plus_15));
+        String _plus_17 = (_plus_16 + ", ");
+        String _plus_18 = (_plus_17 + Integer.valueOf(idx));
+        String _plus_19 = (_plus_18 + myInst);
+        String _plus_20 = (_plus_19 + peerInst);
+        String _plus_21 = (_plus_20 + "}");
+        String _plus_22 = (_plus_21 + comma);
+        String _plus_23 = (_plus_22 + " /* Repl Sub Port ");
         String _name = pi.getName();
-        String _plus_18 = (_plus_17 + _name);
-        String _plus_19 = (_plus_18 + " idx +");
-        String _plus_20 = (_plus_19 + Integer.valueOf(idx));
-        String _plus_21 = (_plus_20 + "*/\n");
-        result = _plus_21;
+        String _plus_24 = (_plus_23 + _name);
+        String _plus_25 = (_plus_24 + " idx +");
+        String _plus_26 = (_plus_25 + Integer.valueOf(idx));
+        String _plus_27 = (_plus_26 + "*/\n");
+        result = _plus_27;
       }
     }
     return result;
@@ -2174,7 +2206,7 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  _builder.append("((etPort*)&");
+                                  _builder.append("((etReplSubPort*)&");
                                   String _path_6 = ai_1.getPath();
                                   String _pathName_5 = this._roomExtensions.getPathName(_path_6);
                                   _builder.append(_pathName_5, "				");
@@ -2198,7 +2230,7 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  _builder.append("((etPort*)&");
+                                  _builder.append("((etReplSubPort*)&");
                                   String _path_7 = ai_1.getPath();
                                   String _pathName_6 = this._roomExtensions.getPathName(_path_7);
                                   _builder.append(_pathName_6, "				");
