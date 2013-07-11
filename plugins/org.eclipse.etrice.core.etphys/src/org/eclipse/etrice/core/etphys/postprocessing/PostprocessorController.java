@@ -18,5 +18,6 @@ public class PostprocessorController {
 
 	public static void process(GeneratedMetamodel metamodel){
 		new DocuPostprocessor().process(metamodel);
+		new ImplPostprocessor().process(metamodel);
 	}
 }

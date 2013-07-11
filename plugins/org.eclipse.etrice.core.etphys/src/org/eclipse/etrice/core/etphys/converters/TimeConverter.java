@@ -62,5 +62,28 @@ public class TimeConverter extends AbstractLexerBasedConverter<Integer> {
 			}
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter#toEscapedString(java.lang.Object)
+	 */
+	@Override
+	protected String toEscapedString(Integer value) {
+		if (value%1000==0) {
+			if (value%1000000==0) {
+				if (value%1000000000==0) {
+					return (value/1000000000)+"s";
+				}
+				else {
+					return (value/1000000)+"ms";
+				}
+			}
+			else {
+				return (value/1000)+"us";
+			}
+		}
+		else {
+			return value+"ns";
+		}
+	}
 
 }

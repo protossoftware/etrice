@@ -116,6 +116,15 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
   protected int time = TIME_EDEFAULT;
 
   /**
+   * This is true if the Time attribute has been set.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  protected boolean timeESet;
+
+  /**
    * The default value of the '{@link #getPrio() <em>Prio</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -304,8 +313,35 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
   {
     int oldTime = time;
     time = newTime;
+    boolean oldTimeESet = timeESet;
+    timeESet = true;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__TIME, oldTime, time));
+      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__TIME, oldTime, time, !oldTimeESet));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void unsetTime()
+  {
+    int oldTime = time;
+    boolean oldTimeESet = timeESet;
+    time = TIME_EDEFAULT;
+    timeESet = false;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.UNSET, ETPhysPackage.PHYSICAL_THREAD__TIME, oldTime, TIME_EDEFAULT, oldTimeESet));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isSetTime()
+  {
+    return timeESet;
   }
 
   /**
@@ -488,7 +524,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         setExecmode(EXECMODE_EDEFAULT);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__TIME:
-        setTime(TIME_EDEFAULT);
+        unsetTime();
         return;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio(PRIO_EDEFAULT);
@@ -523,7 +559,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
       case ETPhysPackage.PHYSICAL_THREAD__EXECMODE:
         return execmode != EXECMODE_EDEFAULT;
       case ETPhysPackage.PHYSICAL_THREAD__TIME:
-        return time != TIME_EDEFAULT;
+        return isSetTime();
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         return prio != PRIO_EDEFAULT;
       case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
@@ -554,7 +590,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
     result.append(", execmode: ");
     result.append(execmode);
     result.append(", time: ");
-    result.append(time);
+    if (timeESet) result.append(time); else result.append("<unset>");
     result.append(", prio: ");
     result.append(prio);
     result.append(", stacksize: ");

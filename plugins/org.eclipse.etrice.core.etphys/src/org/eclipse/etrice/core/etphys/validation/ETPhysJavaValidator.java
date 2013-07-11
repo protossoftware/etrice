@@ -22,6 +22,9 @@ import org.eclipse.xtext.validation.Check;
 
 public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 
+	public static final String ADD_TIME_INTERVAL = "ETPhysJavaValidator.addTimeInterval";
+	public static final String REMOVE_TIME_INTERVAL = "ETPhysJavaValidator.removeTimeInterval";
+	
 	@Check
 	public void checkThread(PhysicalThread thread) {
 		NodeClass nc = (NodeClass) thread.eContainer();
@@ -34,15 +37,21 @@ public class ETPhysJavaValidator extends AbstractETPhysJavaValidator {
 		
 		if (thread.getExecmode()==ExecMode.BLOCKED) {
 			if (thread.getTime()!=0)
-				error("no time interval must be specified with blocked execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+				error("no time interval must be specified with blocked execution mode",
+						ETPhysPackage.Literals.PHYSICAL_THREAD__TIME,
+						REMOVE_TIME_INTERVAL);
 		}
 		else if (thread.getExecmode()==ExecMode.POLLED){
 			if (thread.getTime()==0)
-				error("a time interval must be specified with polled execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+				error("a time interval must be specified with polled execution mode",
+						ETPhysPackage.Literals.PHYSICAL_THREAD__TIME,
+						ADD_TIME_INTERVAL);
 		}
 		else if (thread.getExecmode()==ExecMode.MIXED){
 			if (thread.getTime()==0)
-				error("a time interval must be specified with mixed execution mode", ETPhysPackage.Literals.PHYSICAL_THREAD__TIME);
+				error("a time interval must be specified with mixed execution mode",
+						ETPhysPackage.Literals.PHYSICAL_THREAD__TIME,
+						ADD_TIME_INTERVAL);
 		}
 	}
 	

@@ -124,9 +124,11 @@ public interface PhysicalThread extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Time</em>' attribute.
+   * @see #isSetTime()
+   * @see #unsetTime()
    * @see #setTime(int)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Time()
-   * @model
+   * @model unsettable="true"
    * @generated
    */
   int getTime();
@@ -136,10 +138,35 @@ public interface PhysicalThread extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Time</em>' attribute.
+   * @see #isSetTime()
+   * @see #unsetTime()
    * @see #getTime()
    * @generated
    */
   void setTime(int value);
+
+  /**
+   * Unsets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isSetTime()
+   * @see #getTime()
+   * @see #setTime(int)
+   * @generated
+   */
+  void unsetTime();
+
+  /**
+   * Returns whether the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}' attribute is set.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return whether the value of the '<em>Time</em>' attribute is set.
+   * @see #unsetTime()
+   * @see #getTime()
+   * @see #setTime(int)
+   * @generated
+   */
+  boolean isSetTime();
 
   /**
    * Returns the value of the '<em><b>Prio</b></em>' attribute.
