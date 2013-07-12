@@ -1,0 +1,3 @@
+src.includes = src-gen/,\
+               src-aspects/
+src.excludes = src-aspects/PingPong_Model/aspects/trace/InProjectRTTrace.aj

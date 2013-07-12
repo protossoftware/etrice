@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+====================================================================== 
+Bundles the aspects into a JAR library in the "release" folder
+
+NOTE: this build script must be run as part of the Eclipse build 
+process. External build is not yet supported.
+======================================================================
+-->
+<project name="org.eclipse.etrice.runtime.java.aspects" default="package-jar">
+    <description>Contains aspects which apply to the eTrice Java runtime</description>
+	<target name="init">
+		<!-- TODO: set up basedir if not in eclipse -->
+		<!-- TODO: set up classpath with aspectj weaver if not in eclipse -->
+		<property name="jardir" value="${basedir}/dist" />
+		<property name="bindir" value="${basedir}/bin" />
+		<property name="srcdir" value="${basedir}/src" />
+	</target>
+    <target name="package-jar" depends="init">
+		<jar destfile="${jardir}/org.eclipse.etrice.runtime.java.aspects.jar">
+			<fileset dir="${bindir}" includes="**/*" />
+			<fileset dir="${srcdir}" includes="**/*" />
+		</jar>
+    </target>
+</project>
