@@ -29,22 +29,21 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -82,6 +81,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalInstances <em>Optional Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,6 +166,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<ExpandedActorClass> xpActorClasses;
+
+	/**
+	 * The cached value of the '{@link #getOptionalInstances() <em>Optional Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptionalInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OptionalActorInstance> optionalInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -291,6 +301,18 @@ public class RootImpl extends EObjectImpl implements Root {
 			collectSubSystems();
 		}
 		return subSystemClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<OptionalActorInstance> getOptionalInstances() {
+		if (optionalInstances == null) {
+			optionalInstances = new EObjectContainmentEList<OptionalActorInstance>(OptionalActorInstance.class, this, ETriceGenPackage.ROOT__OPTIONAL_INSTANCES);
+		}
+		return optionalInstances;
 	}
 
 	private void collectSubSystems() {
@@ -518,9 +540,12 @@ public class RootImpl extends EObjectImpl implements Root {
 						int i = 2;
 						while (i<segments.length && inst!=null) {
 							boolean found = false;
-							for (ActorInstance ai : inst.getInstances()) {
+							for (AbstractInstance ai : inst.getInstances()) {
 								if (ai.getName().equals(segments[i])) {
-									inst = ai;
+									if (!(ai instanceof StructureInstance))
+										return null;
+									
+									inst = (StructureInstance) ai;
 									++i;
 									found = true;
 									break;
@@ -552,6 +577,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return ((InternalEList<?>)getOwnSubSystemInstances()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				return ((InternalEList<?>)getXpActorClasses()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
+				return ((InternalEList<?>)getOptionalInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -586,6 +613,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getUsedRoomModels();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				return getSubSystemClasses();
+			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
+				return getOptionalInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -638,6 +667,10 @@ public class RootImpl extends EObjectImpl implements Root {
 				getSubSystemClasses().clear();
 				getSubSystemClasses().addAll((Collection<? extends SubSystemClass>)newValue);
 				return;
+			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
+				getOptionalInstances().clear();
+				getOptionalInstances().addAll((Collection<? extends OptionalActorInstance>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -680,6 +713,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				getSubSystemClasses().clear();
 				return;
+			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
+				getOptionalInstances().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -714,6 +750,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getUsedRoomModels().isEmpty();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				return !getSubSystemClasses().isEmpty();
+			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
+				return optionalInstances != null && !optionalInstances.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -777,6 +815,13 @@ public class RootImpl extends EObjectImpl implements Root {
 					if (obj instanceof ActorInstance) {
 						ActorClass ac = ((ActorInstance)obj).getActorClass();
 						actorClasses.add(ac);
+					}
+					else if (obj instanceof ActorInterfaceInstance) {
+						ActorInterfaceInstance aii = (ActorInterfaceInstance) obj;
+						actorClasses.add(aii.getActorClass());
+						for (OptionalActorInstance oai : aii.getOptionalInstances()) {
+							actorClasses.add(oai.getActorClass());
+						}
 					}
 				}
 			}

@@ -17,10 +17,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -46,7 +44,6 @@ public class TestMultipleConnectedChoicepoint extends
 		TestInstanceModelBuilderBase {
 	
 	private Root root;
-	private HashMap<EClass, ArrayList<EObject>> instances;
 	private ExpandedActorClass xpac;
 
 	@Before

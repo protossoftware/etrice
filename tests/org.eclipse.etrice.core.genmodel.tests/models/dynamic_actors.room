@@ -1,0 +1,175 @@
+RoomModel DynamicActors {
+
+	LogicalSystem LS {
+		SubSystemRef main: Main
+	}
+
+	SubSystemClass Main {
+		ActorRef appl: Appl
+		LogicalThread defaultThread
+	}
+
+	ActorClass Appl {
+		Structure {
+			ActorRef cont1: Container1
+			ActorRef cont2: Container2
+			ActorRef cont3: Container3
+		}
+		Behavior { }
+	}
+
+	// example1: container with internal end port bound to optional actor
+	ActorClass Container1 {
+		Structure {
+			conjugated Port p0: PC
+			optional ActorRef ref0: Optional
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+
+	// example2: container with internal end port bound to array of optional actors
+	ActorClass Container2 {
+		Structure {
+			conjugated Port p0[*]: PC
+			optional ActorRef ref0[*]: Optional
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+
+	// example3: container with services
+	ActorClass Container3 {
+		Structure {
+			conjugated Port p0: PC
+			optional ActorRef ref0: OptionalForSvc
+			ActorRef svc2: Svc2
+			Binding p0 and ref0.p0
+			LayerConnection ref ref0 satisfied_by svc2.svc
+		}
+		Behavior { }
+	}
+
+	ActorClass Optional {
+		Interface {
+			Port p0: PC
+		}
+		Structure { }
+		Behavior { }
+	}
+
+	ActorClass Optional1 extends Optional {
+		Structure {
+			ActorRef ref0: AC1
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+
+	ActorClass Optional2 extends Optional {
+		Structure {
+			ActorRef ref0: AC2
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+
+	ActorClass AC1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior { }
+	}
+
+	ActorClass AC2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef ref0: AC1
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+
+	ActorClass OptionalForSvc {
+		Interface {
+			Port p0: PC
+		}
+		Structure { }
+		Behavior { }
+	}
+	
+	ActorClass OptionalForSvcOK extends OptionalForSvc {
+		Structure {
+			ActorRef ref0: ACForSvc
+			ActorRef svc1: Svc1
+			Binding p0 and ref0.p0
+			LayerConnection ref ref0 satisfied_by svc1.svc
+		}
+		Behavior { }
+	}
+	
+	ActorClass OptionalForSvcNOK extends OptionalForSvc {
+		Structure {
+			ActorRef ref0: ACForSvc
+			ActorRef svc1: Svc1
+			Binding p0 and ref0.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass ACForSvc {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+			SAP sap1: PSvc1
+			SAP sap2: PSvc2
+		}
+		Behavior { }
+	}
+	
+	ActorClass Svc1 {
+		Interface {
+			SPP svc:PSvc1
+		}
+		Structure {
+			ServiceImplementation of svc
+		}
+		Behavior { }
+	}
+	
+	ActorClass Svc2 {
+		Interface {
+			SPP svc:PSvc2
+		}
+		Structure {
+			ServiceImplementation of svc
+		}
+		Behavior { }
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message m1()
+		}
+	}
+
+	ProtocolClass PSvc1 {
+		incoming {
+			Message m1()
+		}
+	}
+
+	ProtocolClass PSvc2 {
+		incoming {
+			Message m1()
+		}
+	}
+
+}

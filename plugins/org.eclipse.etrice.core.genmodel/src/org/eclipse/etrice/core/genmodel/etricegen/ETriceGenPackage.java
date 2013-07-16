@@ -176,13 +176,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__SUB_SYSTEM_CLASSES = 10;
 
 	/**
+	 * The feature id for the '<em><b>Optional Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__OPTIONAL_INSTANCES = 11;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 11;
+	int ROOT_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -249,14 +258,14 @@ public interface ETriceGenPackage extends EPackage {
 	int INSTANCE_BASE_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl <em>Abstract Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getStructureInstance()
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getAbstractInstance()
 	 * @generated
 	 */
-	int STRUCTURE_INSTANCE = 2;
+	int ABSTRACT_INSTANCE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -265,7 +274,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__NAME = INSTANCE_BASE__NAME;
+	int ABSTRACT_INSTANCE__NAME = INSTANCE_BASE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -274,7 +283,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__PATH = INSTANCE_BASE__PATH;
+	int ABSTRACT_INSTANCE__PATH = INSTANCE_BASE__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Obj Id</b></em>' attribute.
@@ -283,7 +292,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__OBJ_ID = INSTANCE_BASE__OBJ_ID;
+	int ABSTRACT_INSTANCE__OBJ_ID = INSTANCE_BASE__OBJ_ID;
 
 	/**
 	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
@@ -292,7 +301,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__THREAD_ID = INSTANCE_BASE__THREAD_ID;
+	int ABSTRACT_INSTANCE__THREAD_ID = INSTANCE_BASE__THREAD_ID;
 
 	/**
 	 * The feature id for the '<em><b>NObj IDs</b></em>' attribute.
@@ -301,16 +310,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__NOBJ_IDS = INSTANCE_BASE__NOBJ_IDS;
-
-	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__INSTANCES = INSTANCE_BASE_FEATURE_COUNT + 0;
+	int ABSTRACT_INSTANCE__NOBJ_IDS = INSTANCE_BASE__NOBJ_IDS;
 
 	/**
 	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
@@ -319,7 +319,198 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__PORTS = INSTANCE_BASE_FEATURE_COUNT + 1;
+	int ABSTRACT_INSTANCE__PORTS = INSTANCE_BASE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl <em>Actor Interface Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActorInterfaceInstance()
+	 * @generated
+	 */
+	int ACTOR_INTERFACE_INSTANCE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__NAME = ABSTRACT_INSTANCE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__PATH = ABSTRACT_INSTANCE__PATH;
+
+	/**
+	 * The feature id for the '<em><b>Obj Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__OBJ_ID = ABSTRACT_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__THREAD_ID = ABSTRACT_INSTANCE__THREAD_ID;
+
+	/**
+	 * The feature id for the '<em><b>NObj IDs</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__NOBJ_IDS = ABSTRACT_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__PORTS = ABSTRACT_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__ACTOR_CLASS = ABSTRACT_INSTANCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Provided Services</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__PROVIDED_SERVICES = ABSTRACT_INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Optional Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__OPTIONAL_INSTANCES = ABSTRACT_INSTANCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Array</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE__ARRAY = ABSTRACT_INSTANCE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Actor Interface Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INTERFACE_INSTANCE_FEATURE_COUNT = ABSTRACT_INSTANCE_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getStructureInstance()
+	 * @generated
+	 */
+	int STRUCTURE_INSTANCE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__NAME = ABSTRACT_INSTANCE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__PATH = ABSTRACT_INSTANCE__PATH;
+
+	/**
+	 * The feature id for the '<em><b>Obj Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__OBJ_ID = ABSTRACT_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__THREAD_ID = ABSTRACT_INSTANCE__THREAD_ID;
+
+	/**
+	 * The feature id for the '<em><b>NObj IDs</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__NOBJ_IDS = ABSTRACT_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__PORTS = ABSTRACT_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__INSTANCES = ABSTRACT_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Saps</b></em>' containment reference list.
@@ -328,7 +519,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__SAPS = INSTANCE_BASE_FEATURE_COUNT + 2;
+	int STRUCTURE_INSTANCE__SAPS = ABSTRACT_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Spps</b></em>' containment reference list.
@@ -337,7 +528,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__SPPS = INSTANCE_BASE_FEATURE_COUNT + 3;
+	int STRUCTURE_INSTANCE__SPPS = ABSTRACT_INSTANCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
@@ -346,7 +537,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__SERVICES = INSTANCE_BASE_FEATURE_COUNT + 4;
+	int STRUCTURE_INSTANCE__SERVICES = ABSTRACT_INSTANCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -355,7 +546,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__BINDINGS = INSTANCE_BASE_FEATURE_COUNT + 5;
+	int STRUCTURE_INSTANCE__BINDINGS = ABSTRACT_INSTANCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
@@ -364,7 +555,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__CONNECTIONS = INSTANCE_BASE_FEATURE_COUNT + 6;
+	int STRUCTURE_INSTANCE__CONNECTIONS = ABSTRACT_INSTANCE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>All Contained Instances</b></em>' reference list.
@@ -373,7 +564,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__ALL_CONTAINED_INSTANCES = INSTANCE_BASE_FEATURE_COUNT + 7;
+	int STRUCTURE_INSTANCE__ALL_CONTAINED_INSTANCES = ABSTRACT_INSTANCE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Ordered If Item Instances</b></em>' reference list.
@@ -382,7 +573,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__ORDERED_IF_ITEM_INSTANCES = INSTANCE_BASE_FEATURE_COUNT + 8;
+	int STRUCTURE_INSTANCE__ORDERED_IF_ITEM_INSTANCES = ABSTRACT_INSTANCE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Structure Instance</em>' class.
@@ -391,7 +582,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE_FEATURE_COUNT = INSTANCE_BASE_FEATURE_COUNT + 9;
+	int STRUCTURE_INSTANCE_FEATURE_COUNT = ABSTRACT_INSTANCE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SystemInstanceImpl <em>System Instance</em>}' class.
@@ -401,7 +592,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getSystemInstance()
 	 * @generated
 	 */
-	int SYSTEM_INSTANCE = 3;
+	int SYSTEM_INSTANCE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -483,7 +674,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getSubSystemInstance()
 	 * @generated
 	 */
-	int SUB_SYSTEM_INSTANCE = 4;
+	int SUB_SYSTEM_INSTANCE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -531,15 +722,6 @@ public interface ETriceGenPackage extends EPackage {
 	int SUB_SYSTEM_INSTANCE__NOBJ_IDS = STRUCTURE_INSTANCE__NOBJ_IDS;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUB_SYSTEM_INSTANCE__INSTANCES = STRUCTURE_INSTANCE__INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -547,6 +729,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUB_SYSTEM_INSTANCE__PORTS = STRUCTURE_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_SYSTEM_INSTANCE__INSTANCES = STRUCTURE_INSTANCE__INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Saps</b></em>' containment reference list.
@@ -646,7 +837,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActorInstance()
 	 * @generated
 	 */
-	int ACTOR_INSTANCE = 5;
+	int ACTOR_INSTANCE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -694,15 +885,6 @@ public interface ETriceGenPackage extends EPackage {
 	int ACTOR_INSTANCE__NOBJ_IDS = STRUCTURE_INSTANCE__NOBJ_IDS;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR_INSTANCE__INSTANCES = STRUCTURE_INSTANCE__INSTANCES;
-
-	/**
 	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -710,6 +892,15 @@ public interface ETriceGenPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTOR_INSTANCE__PORTS = STRUCTURE_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_INSTANCE__INSTANCES = STRUCTURE_INSTANCE__INSTANCES;
 
 	/**
 	 * The feature id for the '<em><b>Saps</b></em>' containment reference list.
@@ -811,6 +1002,169 @@ public interface ETriceGenPackage extends EPackage {
 	int ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl <em>Optional Actor Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOptionalActorInstance()
+	 * @generated
+	 */
+	int OPTIONAL_ACTOR_INSTANCE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__NAME = STRUCTURE_INSTANCE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__PATH = STRUCTURE_INSTANCE__PATH;
+
+	/**
+	 * The feature id for the '<em><b>Obj Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__OBJ_ID = STRUCTURE_INSTANCE__OBJ_ID;
+
+	/**
+	 * The feature id for the '<em><b>Thread Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__THREAD_ID = STRUCTURE_INSTANCE__THREAD_ID;
+
+	/**
+	 * The feature id for the '<em><b>NObj IDs</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__NOBJ_IDS = STRUCTURE_INSTANCE__NOBJ_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__PORTS = STRUCTURE_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__INSTANCES = STRUCTURE_INSTANCE__INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Saps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__SAPS = STRUCTURE_INSTANCE__SAPS;
+
+	/**
+	 * The feature id for the '<em><b>Spps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__SPPS = STRUCTURE_INSTANCE__SPPS;
+
+	/**
+	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__SERVICES = STRUCTURE_INSTANCE__SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__BINDINGS = STRUCTURE_INSTANCE__BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__CONNECTIONS = STRUCTURE_INSTANCE__CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>All Contained Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__ALL_CONTAINED_INSTANCES = STRUCTURE_INSTANCE__ALL_CONTAINED_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Ordered If Item Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__ORDERED_IF_ITEM_INSTANCES = STRUCTURE_INSTANCE__ORDERED_IF_ITEM_INSTANCES;
+
+	/**
+	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__ACTOR_CLASS = STRUCTURE_INSTANCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Required Services</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE__REQUIRED_SERVICES = STRUCTURE_INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Optional Actor Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIONAL_ACTOR_INSTANCE_FEATURE_COUNT = STRUCTURE_INSTANCE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl <em>Interface Item Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -818,7 +1172,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getInterfaceItemInstance()
 	 * @generated
 	 */
-	int INTERFACE_ITEM_INSTANCE = 6;
+	int INTERFACE_ITEM_INSTANCE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -900,7 +1254,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortInstance()
 	 * @generated
 	 */
-	int PORT_INSTANCE = 7;
+	int PORT_INSTANCE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1009,7 +1363,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getBindingInstance()
 	 * @generated
 	 */
-	int BINDING_INSTANCE = 8;
+	int BINDING_INSTANCE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Ports</b></em>' reference list.
@@ -1046,7 +1400,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getSAPInstance()
 	 * @generated
 	 */
-	int SAP_INSTANCE = 9;
+	int SAP_INSTANCE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1137,7 +1491,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getSPPInstance()
 	 * @generated
 	 */
-	int SPP_INSTANCE = 10;
+	int SPP_INSTANCE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1228,7 +1582,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getServiceImplInstance()
 	 * @generated
 	 */
-	int SERVICE_IMPL_INSTANCE = 11;
+	int SERVICE_IMPL_INSTANCE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1319,7 +1673,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getConnectionInstance()
 	 * @generated
 	 */
-	int CONNECTION_INSTANCE = 12;
+	int CONNECTION_INSTANCE = 15;
 
 	/**
 	 * The feature id for the '<em><b>From AI</b></em>' reference.
@@ -1374,7 +1728,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActiveTrigger()
 	 * @generated
 	 */
-	int ACTIVE_TRIGGER = 13;
+	int ACTIVE_TRIGGER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1429,7 +1783,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getTransitionChain()
 	 * @generated
 	 */
-	int TRANSITION_CHAIN = 14;
+	int TRANSITION_CHAIN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Transition</b></em>' reference.
@@ -1466,7 +1820,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getITransitionChainVisitor()
 	 * @generated
 	 */
-	int ITRANSITION_CHAIN_VISITOR = 15;
+	int ITRANSITION_CHAIN_VISITOR = 18;
 
 	/**
 	 * The number of structural features of the '<em>ITransition Chain Visitor</em>' class.
@@ -1485,7 +1839,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getIDiagnostician()
 	 * @generated
 	 */
-	int IDIAGNOSTICIAN = 16;
+	int IDIAGNOSTICIAN = 19;
 
 	/**
 	 * The number of structural features of the '<em>IDiagnostician</em>' class.
@@ -1504,7 +1858,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedActorClass()
 	 * @generated
 	 */
-	int EXPANDED_ACTOR_CLASS = 17;
+	int EXPANDED_ACTOR_CLASS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
@@ -1541,7 +1895,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedRefinedState()
 	 * @generated
 	 */
-	int EXPANDED_REFINED_STATE = 18;
+	int EXPANDED_REFINED_STATE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1641,7 +1995,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 19;
+	int PORT_KIND = 22;
 
 
 	/**
@@ -1776,6 +2130,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_SubSystemClasses();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances <em>Optional Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Optional Instances</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_OptionalInstances();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase <em>Instance Base</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1841,6 +2206,81 @@ public interface ETriceGenPackage extends EPackage {
 	EAttribute getInstanceBase_NObjIDs();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance <em>Abstract Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Instance</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
+	 * @generated
+	 */
+	EClass getAbstractInstance();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance#getPorts <em>Ports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Ports</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance#getPorts()
+	 * @see #getAbstractInstance()
+	 * @generated
+	 */
+	EReference getAbstractInstance_Ports();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance <em>Actor Interface Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Actor Interface Instance</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
+	 * @generated
+	 */
+	EClass getActorInterfaceInstance();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getActorClass <em>Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Actor Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getActorClass()
+	 * @see #getActorInterfaceInstance()
+	 * @generated
+	 */
+	EReference getActorInterfaceInstance_ActorClass();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getProvidedServices <em>Provided Services</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Provided Services</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getProvidedServices()
+	 * @see #getActorInterfaceInstance()
+	 * @generated
+	 */
+	EReference getActorInterfaceInstance_ProvidedServices();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getOptionalInstances <em>Optional Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Optional Instances</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getOptionalInstances()
+	 * @see #getActorInterfaceInstance()
+	 * @generated
+	 */
+	EReference getActorInterfaceInstance_OptionalInstances();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#isArray <em>Array</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Array</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#isArray()
+	 * @see #getActorInterfaceInstance()
+	 * @generated
+	 */
+	EAttribute getActorInterfaceInstance_Array();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance <em>Structure Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1860,17 +2300,6 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStructureInstance_Instances();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getPorts <em>Ports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Ports</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getPorts()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_Ports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getSaps <em>Saps</em>}'.
@@ -2055,6 +2484,38 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getActorInstance_UnindexedName();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance <em>Optional Actor Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Optional Actor Instance</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance
+	 * @generated
+	 */
+	EClass getOptionalActorInstance();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance#getActorClass <em>Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Actor Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance#getActorClass()
+	 * @see #getOptionalActorInstance()
+	 * @generated
+	 */
+	EReference getOptionalActorInstance_ActorClass();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance#getRequiredServices <em>Required Services</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Required Services</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance#getRequiredServices()
+	 * @see #getOptionalActorInstance()
+	 * @generated
+	 */
+	EReference getOptionalActorInstance_RequiredServices();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance <em>Interface Item Instance</em>}'.
@@ -2616,6 +3077,14 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__SUB_SYSTEM_CLASSES = eINSTANCE.getRoot_SubSystemClasses();
 
 		/**
+		 * The meta object literal for the '<em><b>Optional Instances</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__OPTIONAL_INSTANCES = eINSTANCE.getRoot_OptionalInstances();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2666,6 +3135,66 @@ public interface ETriceGenPackage extends EPackage {
 		EAttribute INSTANCE_BASE__NOBJ_IDS = eINSTANCE.getInstanceBase_NObjIDs();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl <em>Abstract Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getAbstractInstance()
+		 * @generated
+		 */
+		EClass ABSTRACT_INSTANCE = eINSTANCE.getAbstractInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Ports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_INSTANCE__PORTS = eINSTANCE.getAbstractInstance_Ports();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl <em>Actor Interface Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActorInterfaceInstance()
+		 * @generated
+		 */
+		EClass ACTOR_INTERFACE_INSTANCE = eINSTANCE.getActorInterfaceInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Actor Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR_INTERFACE_INSTANCE__ACTOR_CLASS = eINSTANCE.getActorInterfaceInstance_ActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Provided Services</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR_INTERFACE_INSTANCE__PROVIDED_SERVICES = eINSTANCE.getActorInterfaceInstance_ProvidedServices();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional Instances</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR_INTERFACE_INSTANCE__OPTIONAL_INSTANCES = eINSTANCE.getActorInterfaceInstance_OptionalInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Array</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR_INTERFACE_INSTANCE__ARRAY = eINSTANCE.getActorInterfaceInstance_Array();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2682,14 +3211,6 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRUCTURE_INSTANCE__INSTANCES = eINSTANCE.getStructureInstance_Instances();
-
-		/**
-		 * The meta object literal for the '<em><b>Ports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__PORTS = eINSTANCE.getStructureInstance_Ports();
 
 		/**
 		 * The meta object literal for the '<em><b>Saps</b></em>' containment reference list feature.
@@ -2832,6 +3353,32 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTOR_INSTANCE__UNINDEXED_NAME = eINSTANCE.getActorInstance_UnindexedName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl <em>Optional Actor Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OptionalActorInstanceImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOptionalActorInstance()
+		 * @generated
+		 */
+		EClass OPTIONAL_ACTOR_INSTANCE = eINSTANCE.getOptionalActorInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Actor Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPTIONAL_ACTOR_INSTANCE__ACTOR_CLASS = eINSTANCE.getOptionalActorInstance_ActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Required Services</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPTIONAL_ACTOR_INSTANCE__REQUIRED_SERVICES = eINSTANCE.getOptionalActorInstance_RequiredServices();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InterfaceItemInstanceImpl <em>Interface Item Instance</em>}' class.

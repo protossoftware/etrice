@@ -28,7 +28,7 @@ import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
@@ -79,13 +79,13 @@ public class ETMapUtil {
 		return ndref2ssipaths.get(nr);
 	}
 	
-	public static NodeRef getNodeRef(StructureInstance si) {
+	public static NodeRef getNodeRef(AbstractInstance si) {
 		String path = si.getPath();
 		NodeRef nodeRef = path2ndref.get(path);
 		return nodeRef;
 	}
 	
-	public static PhysicalThread getPhysicalThread(ActorInstance ai) {
+	public static PhysicalThread getPhysicalThread(AbstractInstance ai) {
 		String path = ai.getPath();
 		PhysicalThread thread = path2pthread.get(path);
 		return thread;
@@ -168,7 +168,7 @@ public class ETMapUtil {
 	}
 
 	private static void addImplicitMappings(StructureInstance si, PhysicalThread dflt, NodeRef node) {
-		for (ActorInstance ai : si.getInstances()) {
+		for (AbstractInstance ai : si.getInstances()) {
 			String path = ai.getPath();
 			path2ndref.put(path, node);
 			PhysicalThread thread = path2pthread.get(path);
@@ -178,7 +178,9 @@ public class ETMapUtil {
 			}
 			
 			// recursion
-			addImplicitMappings(ai, thread, node);
+			if (ai instanceof StructureInstance) {
+				addImplicitMappings((StructureInstance) ai, thread, node);
+			}
 		}
 	}
 	

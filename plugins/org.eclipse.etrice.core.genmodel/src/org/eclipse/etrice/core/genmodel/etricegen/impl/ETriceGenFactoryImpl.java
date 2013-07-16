@@ -68,10 +68,12 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ETriceGenPackage.ROOT: return createRoot();
+			case ETriceGenPackage.ACTOR_INTERFACE_INSTANCE: return createActorInterfaceInstance();
 			case ETriceGenPackage.STRUCTURE_INSTANCE: return createStructureInstance();
 			case ETriceGenPackage.SYSTEM_INSTANCE: return createSystemInstance();
 			case ETriceGenPackage.SUB_SYSTEM_INSTANCE: return createSubSystemInstance();
 			case ETriceGenPackage.ACTOR_INSTANCE: return createActorInstance();
+			case ETriceGenPackage.OPTIONAL_ACTOR_INSTANCE: return createOptionalActorInstance();
 			case ETriceGenPackage.INTERFACE_ITEM_INSTANCE: return createInterfaceItemInstance();
 			case ETriceGenPackage.PORT_INSTANCE: return createPortInstance();
 			case ETriceGenPackage.BINDING_INSTANCE: return createBindingInstance();
@@ -133,6 +135,16 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ActorInterfaceInstance createActorInterfaceInstance() {
+		ActorInterfaceInstanceImpl actorInterfaceInstance = new ActorInterfaceInstanceImpl();
+		return actorInterfaceInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StructureInstance createStructureInstance() {
 		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
 		return structureInstance;
@@ -166,6 +178,16 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public ActorInstance createActorInstance() {
 		ActorInstanceImpl actorInstance = new ActorInstanceImpl();
 		return actorInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OptionalActorInstance createOptionalActorInstance() {
+		OptionalActorInstanceImpl optionalActorInstance = new OptionalActorInstanceImpl();
+		return optionalActorInstance;
 	}
 
 	/**
