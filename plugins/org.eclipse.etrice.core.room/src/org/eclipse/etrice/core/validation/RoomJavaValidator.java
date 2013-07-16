@@ -80,7 +80,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
 	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
-	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
+	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
 	
 	@Inject ImportUriResolver importUriResolver;
@@ -148,7 +148,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			// fixed multiplicity requires fixed type
 			if (ar.getRefType()==ReferenceType.OPTIONAL)
 				error(OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
-						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED);
+						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY, ar.getName());
 		}
 		
 		// check actor ref array has ports with fixed multiplicity

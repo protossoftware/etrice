@@ -95,13 +95,24 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED)
+	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY)
 	public void makeActorRefRefTypeFixed(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Make actor reference fixed", "[fixed] ActorRef...", "add.gif", new ISemanticModification() {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ActorRef ar = (ActorRef) element;
 				ar.setRefType(ReferenceType.FIXED);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY)
+	public void makeMultiplicityAny(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Change multiplicity to any", "ActorRef "+issue.getData()[0]+"[*]", "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ActorRef ar = (ActorRef) element;
+				ar.setSize(-1);
 			}
 		});
 	}
