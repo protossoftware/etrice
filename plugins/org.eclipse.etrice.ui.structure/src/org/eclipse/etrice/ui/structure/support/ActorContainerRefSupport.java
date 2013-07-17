@@ -47,8 +47,8 @@ import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.feature.ShapeUpdateFeature;
 import org.eclipse.etrice.ui.structure.support.provider.DefaultPositionProvider;
 import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider;
-import org.eclipse.etrice.ui.structure.support.provider.SuperDiagramPositionProvider;
 import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider.PosAndSize;
+import org.eclipse.etrice.ui.structure.support.provider.SuperDiagramPositionProvider;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -82,6 +82,7 @@ import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.DefaultResizeShapeFeature;
 import org.eclipse.graphiti.features.impl.Reason;
+import org.eclipse.graphiti.mm.PropertyContainer;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
@@ -99,6 +100,7 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.services.IPeService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
@@ -114,7 +116,11 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
+import com.google.common.collect.Lists;
+
 public class ActorContainerRefSupport {
+	
+	private static final String VERSION_KEY = "actorref_version";
 	
 	private static final int LINE_WIDTH = 1;
 	public static final int DEFAULT_SIZE_X = 180;
@@ -126,11 +132,247 @@ public class ActorContainerRefSupport {
 	private static final int REPLICATED_RECT_OFFSET = 3;
 	
 	public static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
-	public static final IColorConstant OPTIONAL_COLOR = new ColorConstant(0, 0, 255);
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	public static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
-
+	
 	private static class FeatureProvider extends DefaultFeatureProvider {
+		
+		private static class ActorRefGraphicsAccess {
+			
+			private static final String PROP_KEY = "actorref_graphic_element";
+			private static final String MAIN_BORDER = "mainborder";
+			private static final String REPL_BORDER = "replborder";
+			private static final String SIZE_FRAME = "sizeframe";
+			private static final String SUBSTRUCTURE = "substructure";
+			private static final String HATCHED_LINE = "hatched_line";
+			private static final String NAME_SHAPE = "name_shape";
+			private static final String SIZE_SHAPE = "size_shape";
+			private static final String LAYERCONN_ANCHOR = "layerconn_anchor";
+			
+			private IPeService peService;
+			
+			private ContainerShape containerShape;
+			private GraphicsAlgorithm invRectangle;
+			private Diagram diagram;
+			
+			public ActorRefGraphicsAccess(ContainerShape containerShape, Diagram diagram){
+				this.containerShape = containerShape;
+				this.invRectangle = containerShape.getGraphicsAlgorithm();
+				this.diagram = diagram;
+				peService = Graphiti.getPeService();
+				
+				String version = peService.getPropertyValue(containerShape, VERSION_KEY);
+				if(!"2".equals(version))
+					convertToVersion2();
+				
+			}
+			
+			private void convertToVersion2(){
+				List<EObject> deleteList = new ArrayList<EObject>();
+				for(Shape child : containerShape.getChildren())
+					if(child.getGraphicsAlgorithm() instanceof Text)
+						deleteList.add(child);
+				for(GraphicsAlgorithm ga : invRectangle.getGraphicsAlgorithmChildren())
+					deleteList.add(ga);
+				
+				createRefFigureInternal();
+				for(Anchor anchor : containerShape.getAnchors())
+					anchor.setReferencedGraphicsAlgorithm(getMainBorder());
+				
+				for(EObject toDelete : Lists.newArrayList(deleteList))
+					EcoreUtil.delete(toDelete, true);
+				
+				peService.setPropertyValue(containerShape, VERSION_KEY, "2");
+			}
+			
+			public Rectangle getMainBorder(){
+				return (Rectangle) findFirst(invRectangle.getGraphicsAlgorithmChildren(), MAIN_BORDER);
+			}
+			
+			public Rectangle getReplBorder(){
+				return (Rectangle) findFirst(invRectangle.getGraphicsAlgorithmChildren(), REPL_BORDER);
+			}
+			
+			public Rectangle getSizeFrame(){
+				return (Rectangle) findFirst(invRectangle.getGraphicsAlgorithmChildren(), SIZE_FRAME);
+			}
+			
+			@SuppressWarnings("unchecked")
+			public List<GraphicsAlgorithm> getSubstructure(){
+				Rectangle mainBorder = getMainBorder();
+				return (List<GraphicsAlgorithm>) findAll(mainBorder.getGraphicsAlgorithmChildren(), SUBSTRUCTURE);
+			}
+			
+			@SuppressWarnings("unchecked")
+			public List<GraphicsAlgorithm> getHatchedLines(){
+				Rectangle mainBorder = getMainBorder();
+				return (List<GraphicsAlgorithm>) findAll(mainBorder.getGraphicsAlgorithmChildren(), HATCHED_LINE);
+			}
+			
+			public Text getNameLabel(){
+				Shape shape = (Shape) findFirst(containerShape.getChildren(), NAME_SHAPE);
+				return (Text) shape.getGraphicsAlgorithm();
+			}
+			
+			public Text getSizeLabel(){
+				Shape shape = (Shape) findFirst(containerShape.getChildren(), SIZE_SHAPE);
+				return (Text) shape.getGraphicsAlgorithm();
+			}
+			
+			private List<? extends PropertyContainer> findAll(List<? extends PropertyContainer> items, String propValue){
+				List<PropertyContainer> result = new ArrayList<PropertyContainer>();
+				
+				for(PropertyContainer p : items)
+					if(propValue.equals(peService.getPropertyValue(p, PROP_KEY)))
+						result.add(p);
+				
+				return result;
+			}
+			
+			private PropertyContainer findFirst(List<? extends PropertyContainer> items, String propValue){
+				for(PropertyContainer p : items)
+					if(propValue.equals(peService.getPropertyValue(p, PROP_KEY)))
+						return p;
+				
+				return null;
+			}
+			
+			private void createRefFigureInternal() {
+				int width = invRectangle.getWidth()-2*MARGIN;
+				int height = invRectangle.getHeight()-2*MARGIN;
+				
+				IGaService gaService = Graphiti.getGaService();
+				IPeService peService = Graphiti.getPeService();
+				IPeCreateService peCreateService = Graphiti.getPeCreateService();
+				
+				{
+					// repl borderRect
+					Rectangle rect = gaService.createRectangle(invRectangle);
+					peService.setPropertyValue(rect, PROP_KEY, REPL_BORDER);
+					rect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(rect, MARGIN+REPLICATED_RECT_OFFSET, MARGIN-REPLICATED_RECT_OFFSET, width, height);
+				}
+				{
+					// main borderRect
+					Rectangle borderRect = gaService.createRectangle(invRectangle);
+					peService.setPropertyValue(borderRect, PROP_KEY, MAIN_BORDER);
+					borderRect.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
+					addSubStructureHint();
+					createHatched();
+				}
+				{
+					// size frame
+					Rectangle sizeFrame = gaService.createRectangle(invRectangle);
+					peService.setPropertyValue(sizeFrame, PROP_KEY, SIZE_FRAME);
+					sizeFrame.setLineWidth(LINE_WIDTH);
+					gaService.setLocationAndSize(sizeFrame, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
+				}
+				{
+					// acr name
+					Shape labelShape = peCreateService.createShape(containerShape, false);
+					peService.setPropertyValue(labelShape, PROP_KEY, NAME_SHAPE);
+					Text label = gaService.createDefaultText(diagram, labelShape);
+					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
+					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
+					gaService.setLocationAndSize(label, MARGIN, MARGIN, width, height);
+				}
+				
+				{
+					// repl size
+					Shape labelShape = peCreateService.createShape(containerShape, false);
+					peService.setPropertyValue(labelShape, PROP_KEY, SIZE_SHAPE);
+					Text label = gaService.createDefaultText(diagram, labelShape);
+					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
+					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
+					gaService.setLocationAndSize(label, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
+				}
+			}
+			
+			private void createRefFigureAnchor(){
+				// anchor for layer connections
+				ChopboxAnchor anchor = Graphiti.getPeCreateService().createChopboxAnchor(containerShape);
+				peService.setPropertyValue(anchor, PROP_KEY, LAYERCONN_ANCHOR);
+				anchor.setReferencedGraphicsAlgorithm(getMainBorder());
+			}
+			
+			/**
+			 *  create graphics
+			 *  <li>called only once
+			 *  <li>creates all possible graphics like replication and sub structure
+			 *  <li>index of graphics is fixed according to creation order
+			 *  @see
+			 *  {@link #updateRefFigure(ActorContainerRef, ContainerShape, boolean, Diagram) updateRefFigure}
+			 */
+			public void createRefFigure() {
+				createRefFigureInternal();
+				createRefFigureAnchor();
+			}
+			
+			public void createHatched() {
+				int x0=0, y0=0;
+				int x1=0, y1=0;
+				int step=15;
+				boolean down0=true;
+				boolean right1=true;
+				Rectangle mainBorder = getMainBorder();
+				int width = mainBorder.getWidth();
+				int height = mainBorder.getHeight();
+				
+				IGaService gaService = Graphiti.getGaService();
+				
+				while (true) {
+					if (down0) {
+						y0+=step;
+						if (y0>height) {
+							down0=false;
+							x0=y0-height;
+							y0=height;
+						}
+					}
+					else {
+						x0+=step;
+						if (x0>width)
+							break;
+					}
+					
+					if (right1) {
+						x1+=step;
+						if (x1>width) {
+							right1=false;
+							y1=x1-width;
+							x1=width;
+						}
+					}
+					else {
+						y1+=step;
+						if (y0>height)
+							break;
+					}
+					
+					Polyline line = gaService.createPlainPolyline(mainBorder, new int[] {x0, y0, x1, y1});
+					Graphiti.getPeService().setPropertyValue(line, PROP_KEY, HATCHED_LINE);
+					line.setTransparency(0.4);
+				}
+			}
+			
+			private void addSubStructureHint() {
+				Rectangle mainBorder = getMainBorder();
+				int x = mainBorder.getWidth()-35;
+				int y = mainBorder.getHeight()-30;
+				IGaService gaService = Graphiti.getGaService();
+				Rectangle hint1 = gaService.createRectangle(mainBorder);
+				Graphiti.getPeService().setPropertyValue(hint1, PROP_KEY, SUBSTRUCTURE);
+				hint1.setFilled(false);
+				hint1.setLineWidth(LINE_WIDTH);
+				gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
+				Rectangle hint2 = gaService.createRectangle(mainBorder);
+				Graphiti.getPeService().setPropertyValue(hint2, PROP_KEY, SUBSTRUCTURE);
+				hint2.setFilled(false);
+				hint2.setLineWidth(LINE_WIDTH);
+				gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
+			}
+		}
 		
 		private class CreateFeature extends AbstractCreateFeature {
 	
@@ -245,16 +487,8 @@ public class ActorContainerRefSupport {
 						Graphiti.getPeCreateService().createContainerShape(acShape, true);
 				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.REF_TYPE);
-	
-				EObject parent = (EObject) getBusinessObjectForPictogramElement(acShape);
-				boolean inherited = isInherited(ar, parent);
-			
-				boolean isOptional = false;
-				if (ar instanceof ActorRef) {
-					isOptional = ((ActorRef) ar).getRefType()==ReferenceType.OPTIONAL;
-				}
+				Graphiti.getPeService().setPropertyValue(containerShape, VERSION_KEY, "2");
 				
-				Color lineColor = isOptional? manageColor(OPTIONAL_COLOR) : manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
 				{
 					int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 					int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
@@ -262,7 +496,7 @@ public class ActorContainerRefSupport {
 					Graphiti.getGaService().setLocationAndSize(invisibleRectangle,
 							context.getX()-(width/2+MARGIN), context.getY()-(height/2+MARGIN), width + 2*MARGIN, height + 2*MARGIN);
 					
-					createRefFigure(ar, getDiagram(), containerShape, invisibleRectangle, lineColor, manageColor(BACKGROUND));
+					new ActorRefGraphicsAccess(containerShape, getDiagram()).createRefFigure();
 				}
 					
 				// create link and wire it
@@ -301,66 +535,54 @@ public class ActorContainerRefSupport {
 	
 			@Override
 			public boolean layout(ILayoutContext context) {
-				boolean anythingChanged = false;
 				ContainerShape containerShape = (ContainerShape) context
 						.getPictogramElement();
 	
 				// our invisible rectangle
-				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
+				GraphicsAlgorithm invRectangle = containerShape.getGraphicsAlgorithm();
+				ActorRefGraphicsAccess graphics = new ActorRefGraphicsAccess(containerShape, getDiagram());
 				
-				int w = containerGa.getWidth();
-				int h = containerGa.getHeight();
+				int w = invRectangle.getWidth();
+				int h = invRectangle.getHeight();
 				int nw = w-2*MARGIN;
 				int nh = h-2*MARGIN;
+			
 				
-				/**
-				 * TODO: (Keplar) use Ids to identify GraphicsAlgorithm children
-				 * see Graphiti example "filesystem"
-				 *  (org.eclipse.graphiti.examples.filesystem.patterns.FolderPattern)
-				 */
-				if(containerGa.getGraphicsAlgorithmChildren().size()>=1){
-					GraphicsAlgorithm borderRect = null;
-					Object obj = getBusinessObjectForPictogramElement(containerShape);
-					if(obj instanceof ActorRef && ((ActorRef)obj).getSize()!=1){
-						GraphicsAlgorithm replBorder = containerGa.getGraphicsAlgorithmChildren().get(0);
-						replBorder.setWidth(nw);
-						replBorder.setHeight(nh);
-						borderRect = containerGa.getGraphicsAlgorithmChildren().get(1);
-						GraphicsAlgorithm replFrame = containerGa.getGraphicsAlgorithmChildren().get(2);
-						replFrame.setX(MARGIN+nw-SIZE_FRAME_SIZE);
-					} else
-						borderRect = containerGa.getGraphicsAlgorithmChildren().get(0);
+				GraphicsAlgorithm replBorder = graphics.getReplBorder();
+				replBorder.setWidth(nw);
+				replBorder.setHeight(nh);
+				
+				Rectangle mainBorder = graphics.getMainBorder();
+				mainBorder.setWidth(nw);
+				mainBorder.setHeight(nh);
+				
+				int x = mainBorder.getWidth()-35;
+				int y = mainBorder.getHeight()-30;
+				Graphiti.getLayoutService().setLocationAndSize(graphics.getSubstructure().get(0), x+5, y, 20, 10);
+				Graphiti.getLayoutService().setLocationAndSize(graphics.getSubstructure().get(1), x, y+15, 20, 10);
+				
+				for(GraphicsAlgorithm line : Lists.newArrayList(graphics.getHatchedLines()))
+					EcoreUtil.delete(line, true);
+				graphics.createHatched();
+				
+				GraphicsAlgorithm replFrame = graphics.getSizeFrame();
+				replFrame.setX(MARGIN+nw-SIZE_FRAME_SIZE);
 					
-					borderRect.setWidth(nw);
-					borderRect.setHeight(nh);
-					Object bo = getBusinessObjectForPictogramElement(containerShape);
-					if (bo instanceof ActorContainerRef) {
-						ActorContainerRef acr = (ActorContainerRef) bo;
-						EObject parent = containerShape.getContainer().getLink().getBusinessObjects().get(0);
-						Color lineColor = manageColor(isInherited(acr, parent)?INHERITED_COLOR:LINE_COLOR);
-						// remove and recreate substructure hint
-						while (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							EcoreUtil.delete(borderRect.getGraphicsAlgorithmChildren().get(0), true);
-						}
-						addSubStructureHint(acr, (Rectangle) borderRect, lineColor);
-					}
 					
-					if (!containerShape.getChildren().isEmpty()) {
-						GraphicsAlgorithm childGA = containerShape.getChildren().get(0).getGraphicsAlgorithm();
-						assert(childGA instanceof Text): "label expected";
-						childGA.setWidth(nw);
-						childGA.setHeight(nh);
+				GraphicsAlgorithm label = graphics.getNameLabel();
+				label.setWidth(nw);
+				label.setHeight(nh);
 						
-						if(obj instanceof ActorRef && ((ActorRef)obj).getSize()!=1){
-							GraphicsAlgorithm replLabel = containerShape.getChildren().get(1).getGraphicsAlgorithm();
-							replLabel.setX(MARGIN+nw-SIZE_FRAME_SIZE);
-						}
-					}
-					
-					anythingChanged = true;
-				}
+				GraphicsAlgorithm replLabel = graphics.getSizeLabel();
+				replLabel.setX(MARGIN+nw-SIZE_FRAME_SIZE);
 				
-				return anythingChanged;
+				
+				ActorContainerRef acr = (ActorContainerRef) getBusinessObjectForPictogramElement(containerShape);
+				EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
+				boolean inherited = isInherited(acr, parent);
+				updateRefFigure(acr, containerShape, inherited, getDiagram());
+				
+				return true;
 			}
 		}
 
@@ -409,18 +631,10 @@ public class ActorContainerRefSupport {
 				if (dlg.open()!=Window.OK)
 					return;
 				
-				doneChanges   = true;
-				//updateLabel(acr, context.getPictogramElements()[0]);
-
-				boolean isOptional = false;
-				if (acr instanceof ActorRef) {
-					isOptional = ((ActorRef) acr).getRefType()==ReferenceType.OPTIONAL;
-				}
-				
 				EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
-				boolean inherited = isInherited(acr, parent);
-				Color lineColor = isOptional? manageColor(OPTIONAL_COLOR) : manageColor(inherited?INHERITED_COLOR:LINE_COLOR);
-				createRefFigure(acr, getDiagram(), containerShape, (Rectangle)containerShape.getGraphicsAlgorithm(), lineColor, manageColor(BACKGROUND));
+				updateRefFigure(acr, containerShape, isInherited(acr, parent), getDiagram());
+				
+				doneChanges   = true;
 			}
 			
 			@Override
@@ -559,25 +773,20 @@ public class ActorContainerRefSupport {
 			protected IReason updateNeeded(EObject bo, IUpdateContext context) {
 				ActorContainerRef acr = (ActorContainerRef) bo;
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
-				int borderShapeId = 0;
+				ActorRefGraphicsAccess graphics = new ActorRefGraphicsAccess(containerShape, getDiagram());
 				
 				String reason = "";
 				
+				boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getSize()!=1:false;
+				boolean isOptional = (acr instanceof ActorRef)? ((ActorRef)acr).getRefType() == ReferenceType.OPTIONAL:false;
+				boolean hasSubStruct = hasSubStructure(acr);
+				
 				// check replicated
-				if(acr instanceof ActorRef){
-					if(((ActorRef)acr).getSize()!=1){
-						if(invisibleRect.getGraphicsAlgorithmChildren().size() < 3)
-							reason += "ActorRef got replicated";
-						else
-							borderShapeId = 1;
-					} else {
-						if(invisibleRect.getGraphicsAlgorithmChildren().size() > 2){
-							reason += "ActorRef is not replicated anymore";
-							borderShapeId = 1;
-						}
-					}
-				}
+				boolean replFrameVisible = graphics.getReplBorder().getLineVisible();
+				if(isReplicated && !replFrameVisible)
+					reason += "ActorRef got replicated";
+				else if(!isReplicated && replFrameVisible)
+					reason += "ActorRef is not replicated anymore";
 				
 				// check if ref still owned/inherited anymore
 				Object containerBo = getBusinessObjectForPictogramElement(containerShape);
@@ -596,45 +805,27 @@ public class ActorContainerRefSupport {
 				}
 				
 				// check sub structure hint
-				{
-					boolean hasSubStruct = hasSubStructure(acr);
-					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
-						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(borderShapeId);
-						if (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
-							GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
-							if (hasSubStruct && !hint.getLineVisible())
-								reason += "state has sub structure now\n";
-							if (!hasSubStruct && hint.getLineVisible())
-								reason += "state has no sub structure anymore\n";
-						}
-					}
-				}
+				boolean subStructureVisible = graphics.getSubstructure().get(0).getLineVisible();
+				if (hasSubStruct && !subStructureVisible)
+					reason += "state has sub structure now\n";
+				if (!hasSubStruct && subStructureVisible)
+					reason += "state has no sub structure anymore\n";
+						
+				
 				
 				// check class name
-				if (!containerShape.getChildren().isEmpty()) {
-					GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
-					if (ga instanceof Text) {
-						if (bo instanceof ActorContainerRef) {
-							String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
-							if (!((Text)ga).getValue().equals(label))
-								reason += "Class name is out of date\n";
-						}
-					}
+				if (bo instanceof ActorContainerRef) {
+					String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
+					if (!label.equals(graphics.getNameLabel().getValue()))
+						reason += "Class name is out of date\n";
 				}
 				
 				// check replicated label
-				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()!=1){
-					if(containerShape.getChildren().size() >= 2){
-						GraphicsAlgorithm ga = containerShape.getChildren().get(1).getGraphicsAlgorithm();
-						if (ga instanceof Text) {
-							String value = ((Text)ga).getValue();
-							if (((ActorRef)acr).getSize()==-1) {
-								if (!value.equals("*"))
-									reason += "multiciply changed";
-							}
-							else if(!value.equals(((ActorRef)acr).getSize()+""))
-								reason += "multiciply changed";
-						}
+				{
+					if(isOptional || isReplicated){
+						String label = (isOptional)?"*":((ActorRef)bo).getSize()+"";
+						if(!label.equals(graphics.getSizeLabel().getValue()))
+							reason += "multiplicity changed";
 					}
 				}
 				
@@ -663,69 +854,18 @@ public class ActorContainerRefSupport {
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();				
 				GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 				ActorContainerRef acr = (ActorContainerRef) bo;
-				int borderRectId = 0;
 				
 				if(context instanceof PositionUpdateContext)
 					setPosition(acr, containerShape, (PositionUpdateContext) context);
 				
-				// check replicated
-				if(acr instanceof ActorRef){
-					if(((ActorRef)acr).getSize()!=1){
-						if(invisibleRect.getGraphicsAlgorithmChildren().size() < 3){
-							
-							IGaService gaService = Graphiti.getGaService();
-							int width = invisibleRect.getWidth()-2*MARGIN;
-							int height = invisibleRect.getHeight()-2*MARGIN;
-							Color lineColor = manageColor(isInherited(acr, acr.eContainer())?INHERITED_COLOR:LINE_COLOR);
-							
-							Rectangle replRect = gaService.createRectangle(invisibleRect);
-							replRect.setForeground(lineColor);
-							replRect.setBackground(manageColor(BACKGROUND));
-							replRect.setLineWidth(LINE_WIDTH);
-							gaService.setLocationAndSize(replRect, MARGIN+REPLICATED_RECT_OFFSET, MARGIN-REPLICATED_RECT_OFFSET, width, height);
-							invisibleRect.getGraphicsAlgorithmChildren().move(0, replRect);
-							
-							Rectangle sizeFrame = gaService.createRectangle(invisibleRect);
-							sizeFrame.setForeground(lineColor);
-							sizeFrame.setBackground(manageColor(BACKGROUND));
-							sizeFrame.setLineWidth(LINE_WIDTH);
-							gaService.setLocationAndSize(sizeFrame, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
-							invisibleRect.getGraphicsAlgorithmChildren().move(2, sizeFrame);
-							
-							Shape labelShape = Graphiti.getPeCreateService().createShape(containerShape, false);
-							Integer size = ((ActorRef)acr).getSize();
-							String txt = (size==-1)?"*":size.toString();
-							Text label = gaService.createDefaultText(getDiagram(), labelShape, txt);
-							label.setForeground(lineColor);
-							label.setBackground(lineColor);
-							label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
-							label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-							gaService.setLocationAndSize(label, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
-							containerShape.getChildren().move(1, labelShape);
-						}
-						borderRectId = 1;
-					} else {
-						if(invisibleRect.getGraphicsAlgorithmChildren().size() > 2){
-							EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(2), true);
-							EcoreUtil.delete(invisibleRect.getGraphicsAlgorithmChildren().get(0), true);
-							EcoreUtil.delete(containerShape.getChildren().get(1), true);
-						}
-					}
-				}
-				{
-					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
-						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(borderRectId);
-						updateSubStructureHint(acr, (Rectangle) borderRect);
-					}
-				}
-
-				updateLabel(acr, context.getPictogramElement());
+				EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
+				updateRefFigure(acr, containerShape, isInherited(acr, parent), getDiagram());
 				
-				GraphicsAlgorithm innerRect = containerShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(borderRectId);
+				GraphicsAlgorithm mainBorder = new ActorRefGraphicsAccess(containerShape, getDiagram()).getMainBorder();
 				IPositionProvider positionProvider = null;
 				if(context instanceof PositionUpdateContext){
 					positionProvider = ((PositionUpdateContext)context).getPositionProvider();
-					positionProvider = positionProvider.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(innerRect));
+					positionProvider = positionProvider.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(mainBorder));
 				}
 				
 				Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
@@ -748,7 +888,7 @@ public class ActorContainerRefSupport {
 				
 				if(!withoutPosition.isEmpty()){
 					IPositionProvider defaultPP = new DefaultPositionProvider(acr);
-					defaultPP = defaultPP.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(innerRect));
+					defaultPP = defaultPP.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(mainBorder));
 					updatePictogramElements(newShapes.values(), defaultPP);
 				}
 				
@@ -870,7 +1010,9 @@ public class ActorContainerRefSupport {
 					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(0));
 				
 				super.resizeShape(context);
+				
 			}
+			
 			
 			private void resizeChildrenInterfaceItems(IResizeShapeContext context, GraphicsAlgorithm innerRect){
 				PosAndSize innerRectPos = DiagramUtil.getPosAndSize(innerRect);
@@ -901,6 +1043,8 @@ public class ActorContainerRefSupport {
 				}
 				
 			}
+			
+			
 			
 		}
 		
@@ -963,32 +1107,88 @@ public class ActorContainerRefSupport {
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {
 			return ar.eContainer()!=parent;
 		}
+		
+		
 
-		protected static void updateSubStructureHint(ActorContainerRef acr, GraphicsAlgorithm borderRect) {
-			
-			boolean hasSubStructure = hasSubStructure(acr);
-			GraphicsAlgorithm hint = borderRect.getGraphicsAlgorithmChildren().get(0);
-			hint.setLineVisible(hasSubStructure);
-			hint = borderRect.getGraphicsAlgorithmChildren().get(1);
-			hint.setLineVisible(hasSubStructure);
+		private static boolean hasSubStructure(ActorContainerRef acr) {
+			if (acr instanceof ActorRef) {
+				if (!((ActorRef) acr).getType().getActorRefs().isEmpty())
+					return true;
+			}
+			else if (acr instanceof SubSystemRef) {
+				if (!((SubSystemRef)acr).getType().getActorRefs().isEmpty())
+					return true;
+			}
+			return false;
 		}
-
-		private static void updateLabel(ActorContainerRef acr, PictogramElement pe) {
-			ContainerShape container = (ContainerShape)pe;
+		
+		/**
+		 * update graphics
+		 * @see
+		 * {@link #createRefFigure(ActorContainerRef, Diagram, ContainerShape, Rectangle) createRefFigure}
+		 */
+		private static void updateRefFigure(ActorContainerRef acr, ContainerShape containerShape, boolean inherited, Diagram diagram){
+		
+			boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getSize()!=1:false;
+			boolean isOptional = (acr instanceof ActorRef)? ((ActorRef)acr).getRefType() == ReferenceType.OPTIONAL:false;
+			boolean hasSubStructure = hasSubStructure(acr);
 			
-			// TODO: identify children properly
-			if (!container.getChildren().isEmpty()) {
-				GraphicsAlgorithm actorLabel = container.getChildren().get(0).getGraphicsAlgorithm();
-				if (actorLabel instanceof Text)
-					((Text)actorLabel).setValue(RoomNameProvider.getRefLabelName(acr));
-				
-				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()!=1){
-					if(container.getChildren().size()>1){
-						GraphicsAlgorithm replLabel = container.getChildren().get(1).getGraphicsAlgorithm();
-						if (replLabel instanceof Text)
-							((Text)replLabel).setValue(((ActorRef)acr).getSize()+"");
-					}
+			IColorConstant lineColorConstant = inherited?INHERITED_COLOR:LINE_COLOR;
+			Color lineColor = Graphiti.getGaService().manageColor(diagram, lineColorConstant);
+			Color bgColor = Graphiti.getGaService().manageColor(diagram, BACKGROUND);
+			
+			ActorRefGraphicsAccess graphics = new ActorRefGraphicsAccess(containerShape, diagram);
+			
+			{
+				// repl borderRect
+				Rectangle rect = graphics.getReplBorder();
+				rect.setForeground(lineColor);
+				rect.setBackground(bgColor);
+				rect.setLineVisible(isReplicated);
+				rect.setFilled(isReplicated);
+			}
+			{
+				// main borderRect
+				GraphicsAlgorithm rect = graphics.getMainBorder();
+				rect.setForeground(lineColor);
+				rect.setBackground(bgColor);
+				for(GraphicsAlgorithm line : graphics.getHatchedLines()){
+					line.setLineVisible(isOptional);
+					line.setForeground(lineColor);
 				}
+				
+				// sub structure hint
+				for(GraphicsAlgorithm hint : graphics.getSubstructure()){
+					hint.setLineVisible(hasSubStructure);
+					hint.setForeground(lineColor);
+				}
+			}
+			{
+				// repl frame
+				GraphicsAlgorithm rect = graphics.getSizeFrame();
+				rect.setForeground(lineColor);
+				rect.setBackground(bgColor);
+				rect.setLineVisible(isReplicated);
+				rect.setFilled(isReplicated);
+			}
+			{
+				// acr name
+				Text label = graphics.getNameLabel();
+				label.setValue(RoomNameProvider.getRefLabelName(acr));
+				label.setForeground(lineColor);
+				label.setBackground(bgColor);
+			}
+			{
+				// repl size
+				Text label = graphics.getSizeLabel();
+				if(acr instanceof ActorRef){
+					ActorRef ar = (ActorRef)acr;
+					String text = isOptional?"*":ar.getSize()+"";
+					label.setValue(text);
+				}
+				label.setForeground(lineColor);
+				label.setBackground(bgColor);
+				label.getPictogramElement().setVisible(isReplicated);
 			}
 		}
 	}
@@ -1004,6 +1204,8 @@ public class ActorContainerRefSupport {
             GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
             GraphicsAlgorithm rectangle =
                             invisible.getGraphicsAlgorithmChildren().get(0);
+            if (!rectangle.getLineVisible())
+            	rectangle = invisible.getGraphicsAlgorithmChildren().get(1);
             return new GraphicsAlgorithm[] { rectangle };
 		}
 		
@@ -1013,6 +1215,8 @@ public class ActorContainerRefSupport {
 
             GraphicsAlgorithm rectangle =
                 invisible.getGraphicsAlgorithmChildren().get(0);
+        	if (!rectangle.getLineVisible())
+        		rectangle = invisible.getGraphicsAlgorithmChildren().get(1);
             return rectangle;
 		}
 		
@@ -1053,132 +1257,6 @@ public class ActorContainerRefSupport {
 			return data;
 		}
 	}
-	
-	private static void createRefFigure(ActorContainerRef ar,
-			Diagram diagram, ContainerShape containerShape, final Rectangle invisibleRectangle,
-			Color lineColor, Color bgColor) {
-		
-		invisibleRectangle.getGraphicsAlgorithmChildren().clear();
-		if (!containerShape.getChildren().isEmpty()) {
-			// potentially there are two text labels which we remove before re-creating
-			Shape shape = containerShape.getChildren().get(0);
-			if (shape.getGraphicsAlgorithm() instanceof Text)
-				containerShape.getChildren().remove(0);
-			shape = containerShape.getChildren().get(0);
-			if (shape.getGraphicsAlgorithm() instanceof Text)
-				containerShape.getChildren().remove(0);
-		}
-
-		int width = invisibleRectangle.getWidth()-2*MARGIN;
-		int height = invisibleRectangle.getHeight()-2*MARGIN;
-		
-		IGaService gaService = Graphiti.getGaService();
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
-			Rectangle rect = gaService.createRectangle(invisibleRectangle);
-			rect.setForeground(lineColor);
-			rect.setBackground(bgColor);
-			rect.setLineWidth(LINE_WIDTH);
-			gaService.setLocationAndSize(rect, MARGIN+REPLICATED_RECT_OFFSET, MARGIN-REPLICATED_RECT_OFFSET, width, height);
-		}
-
-		Rectangle borderRect = gaService.createRectangle(invisibleRectangle);
-		borderRect.setForeground(lineColor);
-		borderRect.setBackground(bgColor);
-		borderRect.setLineWidth(LINE_WIDTH);
-		gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
-
-		//hatchRectangle(borderRect, lineColor);
-		
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
-			Rectangle sizeFrame = gaService.createRectangle(invisibleRectangle);
-			sizeFrame.setForeground(lineColor);
-			sizeFrame.setBackground(bgColor);
-			sizeFrame.setLineWidth(LINE_WIDTH);
-			gaService.setLocationAndSize(sizeFrame, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
-		}
-		
-		addSubStructureHint(ar, borderRect, lineColor);
-		
-		IPeCreateService peCreateService = Graphiti.getPeCreateService();
-
-		// anchor for layer connections
-		if (containerShape.getAnchors().isEmpty()) {
-			ChopboxAnchor anchor = peCreateService.createChopboxAnchor(containerShape);
-			anchor.setReferencedGraphicsAlgorithm(borderRect);
-		}
-		else {
-			// we just set the referenced GA
-			containerShape.getAnchors().get(0).setReferencedGraphicsAlgorithm(borderRect);
-		}
-		
-		// the first child shape is the label
-		{
-			Shape labelShape = peCreateService.createShape(containerShape, false);
-			Text label = gaService.createDefaultText(diagram, labelShape, RoomNameProvider.getRefLabelName(ar));
-			label.setForeground(lineColor);
-			label.setBackground(lineColor);
-			label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
-			label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-			gaService.setLocationAndSize(label, MARGIN, MARGIN, width, height);
-		}
-		
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
-			Shape labelShape = peCreateService.createShape(containerShape, false);
-			Integer size = ((ActorRef)ar).getSize();
-			String txt = (size==-1)?"*":size.toString();
-			Text label = gaService.createDefaultText(diagram, labelShape, txt);
-			label.setForeground(lineColor);
-			label.setBackground(lineColor);
-			label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
-			label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-			gaService.setLocationAndSize(label, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
-		}
-	}
-
-	private static void hatchRectangle(Rectangle borderRect, Color lc) {
-		int x0=0, y0=0;
-		int x1=0, y1=0;
-		int step=15;
-		boolean down0=true;
-		boolean right1=true;
-		int width = borderRect.getWidth();
-		int height = borderRect.getHeight();
-		
-		IGaService gaService = Graphiti.getGaService();
-
-		while (true) {
-			if (down0) {
-				y0+=step;
-				if (y0>height) {
-					down0=false;
-					x0=y0-height;
-					y0=height;
-				}
-			}
-			else {
-				x0+=step;
-				if (x0>width)
-					break;
-			}
-			
-			if (right1) {
-				x1+=step;
-				if (x1>width) {
-					right1=false;
-					y1=x1-width;
-					x1=width;
-				}
-			}
-			else {
-				y1+=step;
-				if (y0>height)
-					break;
-			}
-			
-			Polyline line = gaService.createPlainPolyline(borderRect, new int[] {x0, y0, x1, y1});
-			line.setForeground(lc);
-		}
-	}
 
 	public static Style getStyle(Diagram diagram) {
 		IGaService gaService = Graphiti.getGaService();
@@ -1198,41 +1276,6 @@ public class ActorContainerRefSupport {
 			gaService.setRenderingStyle(style, PredefinedColoredAreas.getBlueWhiteGlossAdaptions());
 		}
 		return style;
-	}
-	
-	private static void addSubStructureHint(ActorContainerRef acr,
-			Rectangle borderRect, Color lineColor) {
-		
-		int x = borderRect.getWidth()-35;
-		int y = borderRect.getHeight()-30;
-		IGaService gaService = Graphiti.getGaService();
-		Rectangle hint1 = gaService.createRectangle(borderRect);
-		hint1.setForeground(lineColor);
-		hint1.setFilled(false);
-		hint1.setLineWidth(LINE_WIDTH);
-		gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
-		Rectangle hint2 = gaService.createRectangle(borderRect);
-		hint2.setForeground(lineColor);
-		hint2.setFilled(false);
-		hint2.setLineWidth(LINE_WIDTH);
-		gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
-
-		if (!hasSubStructure(acr)) {
-			hint1.setLineVisible(false);
-			hint2.setLineVisible(false);
-		}
-	}
-
-	private static boolean hasSubStructure(ActorContainerRef acr) {
-		if (acr instanceof ActorRef) {
-			if (!((ActorRef) acr).getType().getActorRefs().isEmpty())
-				return true;
-		}
-		else if (acr instanceof SubSystemRef) {
-			if (!((SubSystemRef)acr).getType().getActorRefs().isEmpty())
-				return true;
-		}
-		return false;
 	}
 
 	private FeatureProvider pfp;
