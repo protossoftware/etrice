@@ -38,7 +38,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 		this.localId = localId;
 		this.idx = idx;
 		
-		int thread = RTServices.getInstance().getMsgSvcCtrl().getThreadForPath(getParent().getInstancePath());
+		int thread = getParent().getThreadForPath(getParent().getInstancePath());
 		if (thread>=0) {
 			IMessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 			Address addr = msgSvc.getFreeAddress();
@@ -53,7 +53,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			}
 		}
 		
-		List<String> peerPaths = RTServices.getInstance().getMsgSvcCtrl().getPeersForPath(getInstancePath());
+		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			IRTObject object = getObject(peerPaths.get(0));
 			InterfaceItemBase peer = null;

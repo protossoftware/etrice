@@ -316,17 +316,13 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t\t");
       _builder.append("// thread mappings");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t\t");
-          _builder.append("msgSvcCtrl.addPathToThread(\"");
+          _builder.append("addPathToThread(\"");
           String _path = ai.getPath();
           _builder.append(_path, "		");
           _builder.append("\", ");
@@ -354,7 +350,7 @@ public class NodeGen {
                 boolean _greaterThan = (_size > 0);
                 if (_greaterThan) {
                   _builder.append("\t\t");
-                  _builder.append("msgSvcCtrl.addPathToPeers(\"");
+                  _builder.append("addPathToPeers(\"");
                   String _path_1 = pi.getPath();
                   _builder.append(_path_1, "		");
                   _builder.append("\", ");

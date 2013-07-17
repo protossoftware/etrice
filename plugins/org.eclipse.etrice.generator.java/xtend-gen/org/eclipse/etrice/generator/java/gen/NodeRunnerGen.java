@@ -50,8 +50,8 @@ public class NodeRunnerGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          String _javaFileName = this._javaExtensions.getJavaFileName(nr, ssi);
-          final String file = (_javaFileName + "_Runner.java");
+          String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
+          final String file = (_javaClassName + "_Runner.java");
           SubSystemClass _subSystemClass = ssi.getSubSystemClass();
           String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
           SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();

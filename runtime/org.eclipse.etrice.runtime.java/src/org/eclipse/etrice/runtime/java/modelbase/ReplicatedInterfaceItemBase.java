@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -38,7 +37,7 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 		
 		this.localId = localId;
 		
-		List<String> peerPaths = RTServices.getInstance().getMsgSvcCtrl().getPeersForPath(getInstancePath());
+		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null) {
 			for (String path : peerPaths) {
 				IRTObject object = getObject(path);

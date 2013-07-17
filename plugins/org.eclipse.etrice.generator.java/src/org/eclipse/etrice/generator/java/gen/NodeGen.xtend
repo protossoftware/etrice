@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.CommunicationType
-import org.eclipse.etrice.core.room.LogicalThread
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -127,18 +126,16 @@ class NodeGen {
 			@Override
 			public void instantiateActors() {
 				
-				MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
-
 				// thread mappings
 				«FOR ai : comp.allContainedInstances»
-						msgSvcCtrl.addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
+						addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
 				«ENDFOR»
 				
 				// port to peer port mappings
 				«FOR ai : comp.allContainedInstances»
 					«FOR pi : ai.orderedIfItemInstances»
 						«IF pi.peers.size>0»
-							msgSvcCtrl.addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
+							addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»

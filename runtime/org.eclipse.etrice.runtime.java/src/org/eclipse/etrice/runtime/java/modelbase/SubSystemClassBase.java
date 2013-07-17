@@ -8,6 +8,12 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
 import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -26,6 +32,35 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPo
  */
 public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 	
+	@SuppressWarnings("serial")
+	private static class PathToThread extends HashMap<String, Integer> {}
+	@SuppressWarnings("serial")
+	private static class PathToPeers extends HashMap<String, ArrayList<String>> {
+		public void put(String key, String value) {
+			ArrayList<String> list = get(key);
+			if (list==null) {
+				list = new ArrayList<String>();
+				put(key, list);
+			}
+			list.add(value);
+		}
+		
+		public void put(String key, Collection<String> values) {
+			ArrayList<String> list = get(key);
+			if (list==null) {
+				list = new ArrayList<String>(values);
+				put(key, list);
+			}
+			else
+				list.addAll(values);
+		}
+		
+		public void put(String key, String[] values) {
+			List<String> list = Arrays.asList(values);
+			put(key, list);
+		}
+	}
+	
 	// variable service (is only instantiated if needed)
 	protected IVariableService variableService = null;
 
@@ -34,6 +69,9 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
+	
+	private PathToThread path2thread = new PathToThread();
+	private PathToPeers path2peers = new PathToPeers();
 	
 	// for tests only
 	private TestSemaphore terminateSem=null;
@@ -162,5 +200,67 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 
 	public IVariableService getVariableService() {
 		return variableService;
+	}
+	
+	/**
+	 * map a path to a thread id 
+	 * @param path
+	 * @param thread
+	 */
+	public void addPathToThread(String path, int thread) {
+		path2thread.put(path, thread);
+	}
+	
+	/**
+	 * get thread for path
+	 * @param path
+	 * @return
+	 */
+	public int getThreadForPath(String path) {
+		Integer thread = path2thread.get(path);
+		if (thread==null)
+			return -1;
+		
+		return thread;
+	}
+	
+	/**
+	 * add a peer for the given path
+	 * @param path
+	 * @param peer
+	 */
+	public void addPathToPeer(String path, String peer) {
+		path2peers.put(path, peer);
+	}
+	
+	/**
+	 * add a collection of peers to the given path
+	 * @param path
+	 * @param peers
+	 */
+	public void addPathToPeers(String path, Collection<String> peers) {
+		path2peers.put(path, peers);
+	}
+	
+	/**
+	 * add several peers to the given path
+	 * @param path
+	 * @param peers
+	 */
+	public void addPathToPeers(String path, String... peers) {
+		path2peers.put(path, peers);
+	}
+	
+	/**
+	 * @param path
+	 * @return list of peer paths
+	 */
+	public List<String> getPeersForPath(String path) {
+		return path2peers.get(path);
+	}
+	
+	public void resetAll() {
+		path2peers.clear();
+		path2thread.clear();
 	}
 }
