@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -38,6 +39,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -86,7 +89,9 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -900,6 +905,47 @@ public class TransitionSupport {
 			}
 			
 			return super.getToolTip(ga);
+		}
+		
+		/**
+		 * @author jayant
+		 */
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			if (pe.isVisible()) {
+				// Constants for positioning decorators
+				int xOrigin = -20, yOrigin = 0; // Position to the left of label
+				int xGap = 0, yGap = -10;
+				
+				// Get the linked Business Object
+				EObject bo = Graphiti.getLinkService()
+						.getBusinessObjectForLinkedPictogramElement(
+								(PictogramElement) pe.eContainer());
+				
+				// Get Diagnostics associated with the business object
+				ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+						.getDiagramBehavior().getDiagramContainer())
+						.getDiagnosingModelObserver().getElementDiagonsticMap()
+						.get(bo);
+				
+				// Form Decorators based on Diagnostics
+				ArrayList<IDecorator> decorators = DecoratorUtil
+						.getMarkersFromDiagnostics(diagnostics);
+				
+				if (!decorators.isEmpty()) {
+					int i = 0;
+					for (IDecorator decorator : decorators) {
+						((ImageDecorator) decorator).setX(xOrigin + i * xGap);
+						((ImageDecorator) decorator).setY(yOrigin + i * yGap);
+						i++;
+					}
+					
+					return (IDecorator[]) decorators
+							.toArray(new IDecorator[decorators.size()]);
+				}
+			}
+			
+			return super.getDecorators(pe);
 		}
 	}
 	

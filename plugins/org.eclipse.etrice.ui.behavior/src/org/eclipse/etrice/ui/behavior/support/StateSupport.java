@@ -13,12 +13,9 @@
 package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -31,6 +28,8 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.IDimension;
@@ -84,7 +83,6 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
-import org.eclipse.graphiti.platform.IPlatformImageConstants;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
@@ -1086,65 +1084,41 @@ public class StateSupport {
 		 */
 		@Override
 		public IDecorator[] getDecorators(PictogramElement pe) {
-			//Some constants for decorator
+			// Constants for positioning decorators
 			GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
-			GraphicsAlgorithm rectangle = invisible.getGraphicsAlgorithmChildren().get(0);
+			GraphicsAlgorithm rectangle = invisible
+					.getGraphicsAlgorithmChildren().get(0);
 			int xOrigin = rectangle.getX();
 			int yOrigin = rectangle.getY();
-			ArrayList<IDecorator> decorators = new ArrayList<IDecorator>();
+			int xGap = 10, yGap = 0;
 			
-			//Get the linked Business Object
+			// Get the linked Business Object
 			EObject bo = Graphiti.getLinkService()
 					.getBusinessObjectForLinkedPictogramElement(pe);
 			
-			//Validate the compete ROOM Model and Get Diagnostics
-			EObject myModel = bo.eResource().getContents().get(0);
-			Diagnostic diagnostics = Diagnostician.INSTANCE.validate(myModel);
+			// Get Diagnostics associated with the business object
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
 			
-			//Inspect each child diagnostic
-			for (Diagnostic diagnostic : diagnostics.getChildren()) {
-				
-				//for each child diagnostic, find the associated EObject
-				FeatureBasedDiagnostic featureBasedDiagnostic = (FeatureBasedDiagnostic)diagnostic;
-				EObject source = featureBasedDiagnostic.getSourceEObject();
-				EStructuralFeature feature = featureBasedDiagnostic.getFeature();
-				int index = featureBasedDiagnostic.getIndex();
-				EObject eObject = null;
-				if (!feature.isMany())
-					eObject = (EObject) source.eGet(feature);
-				else {
-					List<?> list = (List<?>) source.eGet(feature);
-					eObject = (EObject) list.get(index);
-				}
-				
-				//compare the diagnostic EObject with the Business object linked with the pictogram element
-				//if they are equal, add entry to IDecorator[]
-				if (eObject.equals(bo)){
-					ImageDecorator imageRenderingDecorator = null;
-					switch (diagnostic.getSeverity()) {
-					case Diagnostic.ERROR:
-						imageRenderingDecorator = new ImageDecorator(IPlatformImageConstants.IMG_ECLIPSE_ERROR_TSK);
-						break;
-					case Diagnostic.WARNING:
-						imageRenderingDecorator = new ImageDecorator(IPlatformImageConstants.IMG_ECLIPSE_WARNING_TSK);
-						break;
-					case Diagnostic.INFO:
-						imageRenderingDecorator = new ImageDecorator(IPlatformImageConstants.IMG_ECLIPSE_INFORMATION_TSK);
-						break;
-					}
-					if (imageRenderingDecorator != null){
-						imageRenderingDecorator.setMessage(diagnostic.getMessage());
-						imageRenderingDecorator.setX(xOrigin);
-						imageRenderingDecorator.setY(yOrigin);
-						decorators.add(imageRenderingDecorator);
-					}
-				}
-			}
+			// Form Decorators based on Diagnostics
+			ArrayList<IDecorator> decorators = DecoratorUtil
+					.getMarkersFromDiagnostics(diagnostics);
 			
 			if (decorators.isEmpty())
 				return super.getDecorators(pe);
-			else
-				return (IDecorator[]) decorators.toArray(new IDecorator[decorators.size()]);
+			else {
+				int i = 0;
+				for (IDecorator decorator : decorators) {
+					((ImageDecorator) decorator).setX(xOrigin + xGap * i);
+					((ImageDecorator) decorator).setY(yOrigin + yGap * i);
+					i++;
+				}
+
+				return (IDecorator[]) decorators
+						.toArray(new IDecorator[decorators.size()]);
+			}
 		}
 	}
 	

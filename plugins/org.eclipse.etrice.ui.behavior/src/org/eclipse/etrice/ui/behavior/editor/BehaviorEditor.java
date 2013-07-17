@@ -21,11 +21,13 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.markers.DiagnosingModelObserver;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
@@ -42,9 +44,14 @@ import org.eclipse.swt.graphics.Image;
 public class BehaviorEditor extends RoomDiagramEditor {
 
 	public static final String BEHAVIOR_EDITOR_ID = "org.eclipse.etrice.ui.behavior.editor.BehaviorEditor";
+	private DiagnosingModelObserver diagnosingModelObserver;
 	
 	public BehaviorEditor() {
 		super();
+	}
+	
+	public DiagnosingModelObserver getDiagnosingModelObserver() {
+		return diagnosingModelObserver;
 	}
 	
 	@Override
@@ -54,6 +61,10 @@ public class BehaviorEditor extends RoomDiagramEditor {
 
 	@Override
 	public void initializeGraphicalViewer() {
+		// Start observing the Room Model for rendering Markers
+		diagnosingModelObserver = new DiagnosingModelObserver();
+		diagnosingModelObserver.observeRoomModel((RoomModel)getActorClass().eResource().getContents().get(0));
+		
 		super.initializeGraphicalViewer();
 		
 		Command cmd = new RecordingCommand(getEditingDomain()) {
@@ -64,6 +75,13 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		};
 		getEditingDomain().getCommandStack().execute(cmd);
 		getEditingDomain().getCommandStack().flush();
+	}
+	
+	@Override
+	public void dispose() {
+		// Stop observing the Room Model
+		diagnosingModelObserver.removeObserver();
+		super.dispose();
 	}
 	
 	public boolean showStateGraph(StateGraph sg) {
