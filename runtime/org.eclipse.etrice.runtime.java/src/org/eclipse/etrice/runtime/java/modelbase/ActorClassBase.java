@@ -22,7 +22,7 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemPort;
  * @author Thomas Schuetz
  *
  */
-public abstract class ActorClassBase extends EventReceiver implements IMessageReceiver {
+public abstract class ActorClassBase extends EventReceiver implements IMessageReceiver, IInterfaceItemOwner {
 
 	protected static final int EVT_SHIFT = 1000;	// TODOHRR: use 256 or shift operation later
 
@@ -117,10 +117,7 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	}
 	
 	public void destroy() {
-		for (IRTObject child : getChildren()) {
-			if (child instanceof ActorClassBase)
-				((ActorClassBase) child).destroy();
-		}
+		super.destroy();
 	}
 	
 	public abstract void executeInitTransition();
@@ -154,5 +151,9 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 			break;		
 		}
 		return true;
+	}
+	
+	public IEventReceiver getEventReceiver() {
+		return this;
 	}
 }

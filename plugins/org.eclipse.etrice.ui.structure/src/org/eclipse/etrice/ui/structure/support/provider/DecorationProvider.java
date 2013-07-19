@@ -9,7 +9,7 @@
  * 		Henrik Rentz-Reichert (initial contribution)
  * 
  *******************************************************************************/
-package org.eclipse.etrice.ui.structure.support;
+package org.eclipse.etrice.ui.structure.support.provider;
 
 import java.util.ArrayList;
 

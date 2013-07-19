@@ -279,6 +279,9 @@ public class SupportUtil {
 	}
 	
 	public static StructureClass getParent(ContainerShape shape, IFeatureProvider fp) {
+		if(shape == null)
+			return null;
+		
 		Object bo = fp.getBusinessObjectForPictogramElement(shape);
 		if (bo instanceof StructureClass)
 			return (StructureClass) bo;

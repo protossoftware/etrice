@@ -14,25 +14,33 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.core.ui.editor.RoomEditor;
 import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -46,12 +54,14 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public class RoomDiagramEditor extends DiagramEditor {
+public abstract class RoomDiagramEditor extends DiagramEditor {
 
 	@Inject
 	protected IResourceValidator resourceValidator;
 
 	private SaveOnFocusLostListener partListener;
+	
+	private SuperClassListener superClassListener;
 	
 	private ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 
@@ -81,6 +91,8 @@ public class RoomDiagramEditor extends DiagramEditor {
 		mte.unsetTarget(getEditingDomain());
 
 		getSite().getPage().removePartListener(partListener);
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().removePartListener(superClassListener);
+		superClassListener.dispose();
 		
 		super.dispose();
 	}
@@ -149,6 +161,9 @@ public class RoomDiagramEditor extends DiagramEditor {
 		partListener = new SaveOnFocusLostListener(this);
 		getSite().getPage().addPartListener(partListener);
 		
+		superClassListener = new SuperClassListener(this);
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
+		
 		/* we have to save here whether changes have been done or not to get rid of the dirty state
 		 * CAUTION: save in
 		 * init(IEditorSite site, IEditorInput input)
@@ -170,7 +185,87 @@ public class RoomDiagramEditor extends DiagramEditor {
 		// inside this call auto refresh will happen iff (and turn the editor dirty)
 		super.setFocus();
 		
+		if(superClassListener.isChangeInSuperClass())
+			superClassChanged();
+		
 		if (!dirtyAlready && isDirty())
 			doSave(null);
 	}
+	
+	/**
+	 * Check whether the given diagram editor manages a super class
+	 * @param editor
+	 * @return
+	 */
+	protected boolean registerSuperClassListener(RoomDiagramEditor editor) {
+		if(!(this.getClass().equals(editor.getClass()) && this.getStructureClass() instanceof ActorClass))
+			return false;
+		
+		StructureClass editorSc = editor.getStructureClass();
+		if(editorSc instanceof ActorClass){
+			URI editorResURI = toCurrentPlatformURI(editorSc.eResource().getURI());
+			
+			ActorClass base = (ActorClass) getStructureClass();
+			while((base = base.getBase()) != null){
+				URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
+				if(editorResURI.equals(baseResURI))
+					if(editorSc.getName().equals(base.getName()))
+						return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * Check whether the given room editor has a super class
+	 * @param editor
+	 * @return
+	 */
+	protected boolean registerSuperClassListener(RoomEditor editor) {
+		if(!(this.getStructureClass() instanceof ActorClass))
+			return false;
+		
+		return editor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>(){
+
+			@Override
+			public Boolean exec(XtextResource resource) throws Exception {
+				
+				URI editorResURI = toCurrentPlatformURI(resource.getURI());
+				URI thisScResURI = toCurrentPlatformURI(getStructureClass().eResource().getURI());
+				
+				// ignore if in same file (handled by graphiti)
+				if(thisScResURI.equals(editorResURI))
+					return false;
+				
+				ActorClass base = (ActorClass) getStructureClass();
+				while((base = base.getBase()) != null){
+					URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
+					if(editorResURI.equals(baseResURI))
+						return true;
+				}
+				
+				return false;
+			}
+		});
+	}
+	
+	private URI toCurrentPlatformURI(URI uri){
+		if(uri.isPlatform())
+			return uri;
+		else if(uri.isFile()){
+			final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+			String rootString = rootPath.toFile().toString();
+			String fileString = uri.toFileString();
+			if(fileString.startsWith(rootString))
+				return URI.createPlatformResourceURI(fileString.replace(rootString, ""), false);
+		}
+		return null;
+	}
+	
+	protected abstract void superClassChanged();
+
+	protected abstract StructureClass getStructureClass();
+
 }

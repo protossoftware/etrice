@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,11 +26,9 @@ import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
-import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
@@ -82,13 +79,13 @@ public class ETMapUtil {
 		return ndref2ssipaths.get(nr);
 	}
 	
-	public static NodeRef getNodeRef(StructureInstance si) {
+	public static NodeRef getNodeRef(AbstractInstance si) {
 		String path = si.getPath();
 		NodeRef nodeRef = path2ndref.get(path);
 		return nodeRef;
 	}
 	
-	public static PhysicalThread getPhysicalThread(ActorInstance ai) {
+	public static PhysicalThread getPhysicalThread(AbstractInstance ai) {
 		String path = ai.getPath();
 		PhysicalThread thread = path2pthread.get(path);
 		return thread;
@@ -108,7 +105,7 @@ public class ETMapUtil {
 		return result.toString();
 	}
 	
-	public static void processModels(Root genmodel, ResourceSet rs, IDiagnostician diagnostician) {
+	public static void processModels(Root genmodel, ResourceSet rs) {
 		path2pthread.clear();
 		path2ndref.clear();
 		ndref2ssipaths.clear();
@@ -121,49 +118,6 @@ public class ETMapUtil {
 				}
 			}
 		}
-		
-		for (Entry<String, PhysicalThread> p2t : path2pthread.entrySet()) {
-			String path = p2t.getKey();
-			StructureInstance si = genmodel.getInstance(path);
-			if (si instanceof ActorInstance) {
-				switch (((ActorInstance) si).getActorClass().getCommType()) {
-				case EVENT_DRIVEN:
-					if (p2t.getValue().getExecmode()==ExecMode.POLLED) {
-						error(diagnostician, path, "event driven", p2t.getValue(), "polled thread");
-					}
-					break;
-				case DATA_DRIVEN:
-					if (p2t.getValue().getExecmode()==ExecMode.BLOCKED) {
-						error(diagnostician, path, "data driven", p2t.getValue(), "blocked thread");
-					}
-					break;
-				case ASYNCHRONOUS:
-					if (p2t.getValue().getExecmode()==ExecMode.BLOCKED) {
-						error(diagnostician, path, "asynchronous", p2t.getValue(), "blocked thread");
-					}
-					else if (p2t.getValue().getExecmode()==ExecMode.POLLED) {
-						error(diagnostician, path, "asynchronous", p2t.getValue(), "polled thread");
-					}
-					break;
-				case SYNCHRONOUS:
-					// not implemented yet
-					break;
-				}
-			}
-		}
-	}
-
-	/**
-	 * @param diagnostician
-	 * @param inst
-	 * @param inst_comm_type
-	 * @param thread
-	 * @param thread_comm_type
-	 */
-	private static void error(IDiagnostician diagnostician, String inst, String inst_comm_type, PhysicalThread thread, String thread_comm_type) {
-		NodeRef nr = path2ndref.get(inst);
-		diagnostician.error(inst_comm_type+" actor instance '"+inst+"' mapped to "
-				+thread_comm_type+" '"+thread.getName()+"' of node '"+nr.getName()+"'", null, null);
 	}
 	
 	private static void processMappings(Root genmodel, MappingModel mdl) {
@@ -214,7 +168,7 @@ public class ETMapUtil {
 	}
 
 	private static void addImplicitMappings(StructureInstance si, PhysicalThread dflt, NodeRef node) {
-		for (ActorInstance ai : si.getInstances()) {
+		for (AbstractInstance ai : si.getInstances()) {
 			String path = ai.getPath();
 			path2ndref.put(path, node);
 			PhysicalThread thread = path2pthread.get(path);
@@ -224,7 +178,9 @@ public class ETMapUtil {
 			}
 			
 			// recursion
-			addImplicitMappings(ai, thread, node);
+			if (ai instanceof StructureInstance) {
+				addImplicitMappings((StructureInstance) ai, thread, node);
+			}
 		}
 	}
 	

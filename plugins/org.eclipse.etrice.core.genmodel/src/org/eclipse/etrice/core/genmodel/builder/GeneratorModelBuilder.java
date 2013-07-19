@@ -15,17 +15,22 @@ package org.eclipse.etrice.core.genmodel.builder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
@@ -33,6 +38,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -42,6 +48,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -49,12 +56,12 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -66,6 +73,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * A class for the creation of an intermediate model combining all information needed by
@@ -76,20 +84,32 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  */
 public class GeneratorModelBuilder {
 
+	private enum WorkItem {
+
+		CREATE_INSTANCES,
+		CREATE_PORTS,
+		CREATE_BINDINGS,
+		CONNECT_PORTS,
+		CONNECT_SERVICES,
+		CREATE_OPTIONAL_INSTANCES
+	}
+	
+	HashSet<WorkItem> alreadyDone = new HashSet<WorkItem>();
+
 	/**
 	 * the first object id used for the {@link org.eclipse.etrice.core.etrice.runtime.messaging.Address Address}es s of runtime instances
 	 */
 	private static final int OBJ_ID_OFFSET = 0;
 	
 	/**
-	 * a set containing all relay ports for fast frequent access to this information
-	 */
-	private HashSet<Port> relayPorts = new HashSet<Port>();
-	
-	/**
 	 * a list containing all InstanceBase objects
 	 */
 	private LinkedList<InstanceBase> allObjects = new LinkedList<InstanceBase>();
+	
+	/**
+	 * a set of all actor classes that are candidates for optional actors
+	 */
+	private HashMap<ActorClass, OptionalActorInstance> optionalActors = new HashMap<ActorClass, OptionalActorInstance>();
 	
 	/**
 	 * an instance of a logger
@@ -143,10 +163,13 @@ public class GeneratorModelBuilder {
 		root.setLibrary(asLibrary);
 		this.debug = debug;
 
-		if (!root.isLibrary()) {
+		if (root.isLibrary()) {
+			findOptionalActorClasses(root);
+		}
+		else {
 			// create instance model
 			
-			determineRelayPorts(root);
+			checkRelayPorts(root);
 			
 			boolean hasSystem = false;
 			for (RoomModel mdl : models) {
@@ -161,15 +184,18 @@ public class GeneratorModelBuilder {
 				logger.logInfo("GeneratorModelBuilder: no SystemClass found, assuming SubSystemClasses as top level elements");
 				for (RoomModel mdl : models) {
 					for (SubSystemClass comp : mdl.getSubSystemClasses()) {
-						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp));
+						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp, comp.getName()));
 					}
 				}
 			}
 			
+			createOptionalActorInstanceTrees(root);
+			
 			connectPorts(root);
 			checkPortMultiplicity(root);
-			
 			connectServices(root);
+			
+			matchOptionalActorInstances(root);
 			
 			setObjectIDs();
 		}
@@ -178,6 +204,156 @@ public class GeneratorModelBuilder {
 		createExpandedActorClasses(root);
 		
 		return root;
+	}
+
+	boolean dependenciesSatisfied(WorkItem... items) {
+		for (WorkItem item : items) {
+			if (!alreadyDone.contains(item))
+				return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * @param root
+	 */
+	private void matchOptionalActorInstances(Root root) {
+		assert(dependenciesSatisfied(WorkItem.CONNECT_SERVICES, WorkItem.CREATE_OPTIONAL_INSTANCES)): "dependencies satisfied";
+		
+		for (SubSystemInstance ssi : root.getSubSystemInstances()) {
+			TreeIterator<EObject> it = ssi.eAllContents();
+			while (it.hasNext()) {
+				EObject obj = it.next();
+				if (obj instanceof ActorInterfaceInstance) {
+					ActorInterfaceInstance aii = (ActorInterfaceInstance) obj;
+					HashSet<ProtocolClass> provided = computeProvidedServices(aii);
+
+					String kind = aii.isArray()?"array":"instance";
+					logger.logInfo("matches for optional actor "+kind+": "+aii.getPath());
+					
+					ActorClass optAC = aii.getActorClass();
+					EList<ActorClass> candidates = root.getSubClasses(optAC);
+					for (ActorClass candidate : candidates) {
+						OptionalActorInstance optAIC = optionalActors.get(candidate);
+						HashSet<ProtocolClass> required = new HashSet<ProtocolClass>();
+						for (SAPInstance sap : optAIC.getRequiredServices()) {
+							required.add(sap.getProtocol());
+						}
+						if (provided.containsAll(required)) {
+							logger.logInfo("  ok: "+optAIC.getActorClass().getName());
+							aii.getOptionalInstances().add(optAIC);
+						}
+						else {
+							logger.logInfo("  SAPs not satisfied: "+optAIC.getActorClass().getName());
+							for (ProtocolClass pc : required) {
+								if (!provided.contains(pc))
+									logger.logInfo("    missing protocol: "+pc.getName());
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param aii
+	 */
+	private HashSet<ProtocolClass> computeProvidedServices(ActorInterfaceInstance aii) {
+		HashSet<ProtocolClass> satisfied = new HashSet<ProtocolClass>();
+		EObject inst = aii;
+		while (inst instanceof AbstractInstanceImpl) {
+			AbstractInstanceImpl sii = (AbstractInstanceImpl) inst;
+			for (ServiceImplInstance svc: sii.protocol2service.values()) {
+				if (!satisfied.contains(svc.getProtocol())) {
+					aii.getProvidedServices().add(svc);
+					satisfied.add(svc.getProtocol());
+				}
+			}
+			
+			inst = inst.eContainer();
+		}
+		
+		return satisfied;
+	}
+
+	private void findOptionalActorClasses(Root root) {
+		HashSet<ActorClass> optionalActorClasses = new HashSet<ActorClass>();
+		for (RoomModel mdl : root.getModels()) {
+			for (ActorClass ac : mdl.getActorClasses()) {
+				for (ActorRef ar : ac.getActorRefs()) {
+					if (ar.getRefType()==ReferenceType.OPTIONAL)
+						optionalActorClasses.add(ar.getType());
+				}
+			}
+		}
+		root.getOptionalActorClasses().addAll(optionalActorClasses);
+	}
+	
+	/**
+	 * Create all optional actor instance trees.
+	 * To determine the needed ones each {@link ActorInterfaceInstance} has to get the list of sub classes
+	 * and determine matches.
+	 * 
+	 * To be able to determine matches the provided and required services have to be computed and compared.
+	 * So this method must be called after {@link #connectServices(Root)} ran.
+	 * 
+	 * @param root
+	 */
+	private void createOptionalActorInstanceTrees(Root root) {
+		root.computeSubClasses();
+		
+		/* determine all optional actor classes
+		 * 
+		 * For the sake of simplicity we have to do this for all models to really get all possibilities.
+		 * Otherwise if we start from the SubSystems and descend until we hit an
+		 * optional actor we might get further optional actors when considering
+		 * all possible instance sub trees. This would require a complicated iteration
+		 * until all optional actors are found.
+		 */
+		for (RoomModel mdl : root.getModels()) {
+			for (ActorClass ac : mdl.getActorClasses()) {
+				for (ActorRef ar : ac.getActorRefs()) {
+					if (ar.getRefType()==ReferenceType.OPTIONAL)
+						optionalActors.put(ar.getType(), null);
+				}
+			}
+		}
+		
+		// all optional actor classes as interfaces
+		root.getOptionalActorClasses().addAll(optionalActors.keySet());
+
+		// now compute all possible actor classes for optional actors (omit abstract types)
+		ArrayList<ActorClass> optional = new ArrayList<ActorClass>(optionalActors.keySet());
+		for (ActorClass ac : optional) {
+			EList<ActorClass> subCls = root.getSubClasses(ac);
+			for (ActorClass subCl : subCls) {
+				if (!subCl.isAbstract())
+					optionalActors.put(subCl, null);
+			}
+			if (ac.isAbstract())
+				optionalActors.remove(ac);
+		}
+		
+		for (Entry<ActorClass, OptionalActorInstance> entry : optionalActors.entrySet()) {
+			OptionalActorInstance ai = ETriceGenFactory.eINSTANCE.createOptionalActorInstance();
+			recursivelyCreateActorInstances(ai, entry.getKey(), entry.getKey().getName(), -1);
+			entry.setValue(ai);
+			root.getOptionalInstances().add(ai);
+			
+			for (PortInstance pi : ai.getPorts()) {
+				if (pi.getKind()==PortKind.RELAY)
+					pi.setKind(PortKind.INTERFACE);
+			}
+		}
+		
+		for (OptionalActorInstance optAI : optionalActors.values()) {
+			createServiceMappings(optAI);
+			
+			bindSAPs(optAI, optAI.getRequiredServices());
+		}
+		
+		alreadyDone.add(WorkItem.CREATE_OPTIONAL_INSTANCES);
 	}
 
 	/**
@@ -189,6 +365,8 @@ public class GeneratorModelBuilder {
 	private void connectServices(Root root) {
 		createServiceMappings(root);
 		bindSAPs(root);
+		
+		alreadyDone.add(WorkItem.CONNECT_SERVICES);
 	}
 
 	/**
@@ -197,6 +375,7 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void createServiceMappings(Root root) {
+		assert(dependenciesSatisfied(WorkItem.CREATE_INSTANCES, WorkItem.CREATE_BINDINGS)): "dependencies satisfied";
 		for (SubSystemInstance comp : root.getSubSystemInstances()) {
 			createServiceMappings(comp);
 		}
@@ -221,21 +400,21 @@ public class GeneratorModelBuilder {
 		}
 		
 		// recursive call for all children
-		for (ActorInstance child : si.getInstances()) {
+		for (ActorInstance child : si.getActorInstances()) {
 			createServiceMappings(child);
 		}
 	}
 
 	/**
-	 * Determines a connected services and attaches it to the protocol2service mapping
+	 * Determines a connected service and attaches it to the protocol2service mapping
 	 * of a structure instance
 	 * 
 	 * @param si
 	 * @param ci
 	 */
-	private void addService(StructureInstance si, ConnectionInstance ci) {
-		assert(si instanceof StructureInstanceImpl): "unknown implementation "+si.eClass().getName();
-		StructureInstanceImpl sii = (StructureInstanceImpl) si;
+	private void addService(AbstractInstance si, ConnectionInstance ci) {
+		assert(si instanceof AbstractInstanceImpl): "unknown implementation "+si.eClass().getName();
+		AbstractInstanceImpl sii = (AbstractInstanceImpl) si;
 		
 		ProtocolClass pc = ci.getToSPP().getSpp().getProtocol();
 		if (sii.protocol2service.get(pc)!=null) {
@@ -245,6 +424,8 @@ public class GeneratorModelBuilder {
 			EObject obj = null;
 			if (si instanceof ActorInstance)
 				obj = ((ActorInstance)si).getActorClass();
+			else if (si instanceof ActorInterfaceInstance)
+				obj = ((ActorInterfaceInstance)si).getActorClass();
 			else if (si instanceof SubSystemInstance)
 				obj = ((SubSystemInstance)si).getSubSystemClass();
 			else
@@ -299,34 +480,46 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void bindSAPs(Root root) {
+		ArrayList<SAPInstance> unsatisfied = new ArrayList<SAPInstance>();
+		
 		for (SubSystemInstance comp : root.getSubSystemInstances()) {
-			bindSAPs(comp);
+			bindSAPs(comp, unsatisfied);
+		}
+		
+		for (SAPInstance sap : unsatisfied) {
+			ActorClass ac = (ActorClass) sap.getSap().eContainer();
+			int idx = ac.getStrSAPs().indexOf(sap.getSap());
+			diagnostician.error("SAP "+sap.getPath()+" not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
 		}
 	}
 
 	/**
 	 * Connect a SAP to its service (recursively for all structure instances).
 	 * 
-	 * @param si
+	 * @param si a StructureInstance
+	 * @param unsatisfied a list of unsatisfied SAPs (to be returned)
 	 */
-	private void bindSAPs(StructureInstance si) {
+	private void bindSAPs(StructureInstance si, List<SAPInstance> unsatisfied) {
 		for (SAPInstance sap : si.getSaps()) {
-			bindSAP(si, sap);
+			if (!bindSAP(si, sap))
+				unsatisfied.add(sap);
 		}
 
 		// recursive call for all children
-		for (ActorInstance child : si.getInstances()) {
-			bindSAPs(child);
+		for (ActorInstance child : si.getActorInstances()) {
+			bindSAPs(child, unsatisfied);
 		}
 	}
 
 	/**
-	 * Do the actual binding of a SAP.
+	 * Do the actual binding of a SAP instance.
 	 * 
 	 * @param si
 	 * @param sap
+	 * 
+	 * @return {@code true} if the SAP could be satisfied
 	 */
-	private void bindSAP(StructureInstance si, SAPInstance sap) {
+	private boolean bindSAP(StructureInstance si, SAPInstance sap) {
 		assert(si instanceof StructureInstanceImpl);
 		StructureInstanceImpl sii = (StructureInstanceImpl) si;
 		
@@ -336,7 +529,7 @@ public class GeneratorModelBuilder {
 			if (svc!=null) {
 				sap.getPeers().add(svc);
 				svc.getPeers().add(sap);
-				return;
+				return true;
 			}
 			if (sii.eContainer() instanceof StructureInstanceImpl)
 				sii = (StructureInstanceImpl) sii.eContainer();
@@ -345,45 +538,34 @@ public class GeneratorModelBuilder {
 		}
 		while (sii!=null);
 		
-		ActorClass ac = (ActorClass) sap.getSap().eContainer();
-		int idx = ac.getStrSAPs().indexOf(sap.getSap());
-		diagnostician.error("SAP not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
+		return false;
 	}
 
 	/**
-	 * for efficiency reasons we create a set holding all relay ports
+	 * Check the consistency of data driven port bindings
+	 * 
 	 * @param root - the root object
 	 */
-	private void determineRelayPorts(Root root) {
+	private void checkRelayPorts(Root root) {
 		for (RoomModel model : root.getModels()) {
 			for (ActorClass ac : model.getActorClasses()) {
 				
 				// check own relay ports
-				for (Port port : ac.getIfPorts()) {
-					boolean external = false;
-					for (ExternalPort ep : ac.getExtPorts()) {
-						if (ep.getIfport()==port) {
-							external = true;
-							break;
-						}
-					}
-					if (!external) {
-						relayPorts.add(port);
-						
-						if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
-							if (port.isConjugated()) {
-								// check whether relay port is multiply connected
-								int count = 0;
-								for (Binding b : ac.getBindings()) {
-									if (b.getEndpoint1().getPort()==port)
-										++count;
-									if (b.getEndpoint2().getPort()==port)
-										++count;
-								}
-								if (count>1) {
-									int idx = ac.getIfPorts().indexOf(port);
-									diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
-								}
+				for (Port port : ac.getRelayPorts()) {
+					
+					if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
+						if (port.isConjugated()) {
+							// check whether relay port is multiply connected
+							int count = 0;
+							for (Binding b : ac.getBindings()) {
+								if (b.getEndpoint1().getPort()==port)
+									++count;
+								if (b.getEndpoint2().getPort()==port)
+									++count;
+							}
+							if (count>1) {
+								int idx = ac.getIfPorts().indexOf(port);
+								diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
 							}
 						}
 					}
@@ -439,7 +621,7 @@ public class GeneratorModelBuilder {
 		instance.setLogicalSystem(sys);
 		
 		for (SubSystemRef sr : sys.getSubSystems()) {
-			SubSystemInstance ssi = createSubSystemInstance(instance, sr);
+			SubSystemInstance ssi = createSubSystemInstance(sr.getType(), sr.getName());
 			instance.getInstances().add(ssi);
 		}
 		
@@ -448,18 +630,17 @@ public class GeneratorModelBuilder {
 	
 	/**
 	 * hierarchically (i.e. recursively) creates all instances implied by this component
-	 * @param ssc - the component class
+	 * @param ssc the component class
+	 * @param name the name to be used for the instance
 	 * @return the newly created hierarchy of instances
 	 */
-	private SubSystemInstance createSubSystemInstance(SystemInstance si, SubSystemRef sr) {
-		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+sr.getName());
+	private SubSystemInstance createSubSystemInstance(SubSystemClass ssc, String name) {
+		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+name);
 
 		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
 		allObjects.add(instance);
 		
-		SubSystemClass ssc = sr.getType();
-		
-		instance.setName(sr.getName());
+		instance.setName(name);
 		instance.setSubSystemClass(ssc);
 		
 		// TODOHRR: enumerate object ids per thread
@@ -472,32 +653,8 @@ public class GeneratorModelBuilder {
 		new BindingUtil(instance, diagnostician).createBindingInstances();
 		createConnectionInstances(instance, ssc.getConnections());
 		
-		return instance;
-	}
-	
-	/**
-	 * hierarchically (i.e. recursively) creates all instances implied by this component
-	 * @param ssc - the component class
-	 * @return the newly created hierarchy of instances
-	 */
-	private SubSystemInstance createSubSystemInstance(SubSystemClass ssc) {
-		logger.logInfo("GeneratorModelBuilder: creating subsystem instance from "+ssc.getName());
-
-		SubSystemInstance instance = ETriceGenFactory.eINSTANCE.createSubSystemInstance();
-		allObjects.add(instance);
-		
-		instance.setName(ssc.getName());
-		instance.setSubSystemClass(ssc);
-		
-		// TODOHRR: enumerate object ids per thread
-		
-		for (ActorRef ar : ssc.getActorRefs()) {
-			addRefInstances(instance, ar);
-		}
-		
-		// bindings are handled now since port instances of sub-actor instances are available
-		new BindingUtil(instance, diagnostician).createBindingInstances();
-		createConnectionInstances(instance, ssc.getConnections());
+		alreadyDone.add(WorkItem.CREATE_INSTANCES);
+		alreadyDone.add(WorkItem.CREATE_BINDINGS);
 		
 		return instance;
 	}
@@ -508,7 +665,7 @@ public class GeneratorModelBuilder {
 	 * @param aref
 	 * @return
 	 */
-	private ActorInstance recursivelyCreateActorInstances(ActorRef aref) {
+	private StructureInstance recursivelyCreateActorInstances(ActorRef aref) {
 		return recursivelyCreateActorInstances(aref, -1);
 	}
 	
@@ -519,7 +676,7 @@ public class GeneratorModelBuilder {
 	 * @param idx - index in replication array or -1 if no replication 
 	 * @return the newly created actor instance
 	 */
-	private ActorInstance recursivelyCreateActorInstances(ActorRef aref, int idx) {
+	private StructureInstance recursivelyCreateActorInstances(ActorRef aref, int idx) {
 		String name = aref.getName();
 		if (idx>=0)
 			name += "_"+idx;
@@ -528,21 +685,23 @@ public class GeneratorModelBuilder {
 			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
 
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
+		return recursivelyCreateActorInstances(ai, aref.getType(), name, idx);
+	}
+
+	private StructureInstance recursivelyCreateActorInstances(StructureInstance ai, ActorClass ac, String name, int idx) {
 		allObjects.add(ai);
 		
 		ai.setName(name);
-		ActorClass ac = aref.getType();
-		ai.setActorClass(ac);
-		if (idx>=0)
-			ai.setReplIdx(idx);
-
-		// create a list of super classes, super first, sub-classes last
-		LinkedList<ActorClass> classes = new LinkedList<ActorClass>();
-		classes.addFirst(ac);
-		while (ac.getBase()!=null) {
-			ac = ac.getBase();
-			classes.addFirst(ac);
+		if (ai instanceof ActorInstance) {
+			((ActorInstance)ai).setActorClass(ac);
+			if (idx>=0)
+				((ActorInstance)ai).setReplIdx(idx);
 		}
+		else if (ai instanceof OptionalActorInstance)
+			((OptionalActorInstance)ai).setActorClass(ac);
+
+		// get a list of super classes, super first, sub-classes last
+		List<ActorClass> classes = RoomHelpers.getClassHierarchy(ac);
 		
 		// create instances for super classes recursively (ports, actor refs and bindings)
 		// super classes first ensures that actor refs are present when bindings are created
@@ -561,14 +720,41 @@ public class GeneratorModelBuilder {
 		// bindings and layer connections are handled now since port instances of sub-actor instances are available
 		// this has to be done in one step per actor instance
 		// so we collect all bindings and connections first
-		ArrayList<Binding> bindings = new ArrayList<Binding>();
+		new BindingUtil(ai, diagnostician).createBindingInstances();
 		ArrayList<LayerConnection> connections = new ArrayList<LayerConnection>();
 		for (ActorClass acl : classes) {
-			bindings.addAll(acl.getBindings());
 			connections.addAll(acl.getConnections());
 		}
-		new BindingUtil(ai, diagnostician).createBindingInstances();
 		createConnectionInstances(ai, connections);
+		
+		return ai;
+	}
+	
+	/**
+	 * @param ar
+	 * @return
+	 */
+	private ActorInterfaceInstance createActorInterfaceInstance(ActorRef aref) {
+		String name = aref.getName();
+		
+		if (debug)
+			logger.logInfo("GeneratorModelBuilder: creating actor interface instance "+name+" from "+aref.getType().getName());
+
+		ActorInterfaceInstance ai = ETriceGenFactory.eINSTANCE.createActorInterfaceInstance();
+		allObjects.add(ai);
+		
+		ai.setName(name);
+		ActorClass ac = aref.getType();
+		ai.setActorClass(ac);
+		ai.setArray(aref.getSize()<0);
+		
+		for (ActorClass acl : RoomHelpers.getClassHierarchy(ac)) {
+			createPortInstances(ai, acl);
+		}
+		
+		for (PortInstance pi : ai.getPorts()) {
+			pi.setKind(PortKind.INTERFACE);
+		}
 		
 		return ai;
 	}
@@ -580,51 +766,45 @@ public class GeneratorModelBuilder {
 	 * @param ar the actor ref
 	 */
 	private void addRefInstances(StructureInstance si, ActorRef ar) {
-		if (ar.getSize()>1) {
+		if (ar.getRefType()==ReferenceType.OPTIONAL) {
+			si.getInstances().add(createActorInterfaceInstance(ar));
+		}
+		else if (ar.getSize()>1) {
 			for (int idx=0; idx<ar.getSize(); ++idx)
 				si.getInstances().add(recursivelyCreateActorInstances(ar, idx));
 		}
 		else
 			si.getInstances().add(recursivelyCreateActorInstances(ar));
 	}
-
+	
 	/**
 	 * create port instances for every kind of port
-	 * @param ai - the currently considered actor instance
+	 * @param ai - the currently considered abstract instance
 	 * @param ac - the actor class (might be a base class)
 	 */
-	private void createPortInstances(ActorInstance ai, ActorClass ac) {
-		for (ExternalPort port : ac.getExtPorts()) {
-			PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
-			allObjects.add(pi);
-			
-			pi.setName(port.getIfport().getName());
-			pi.setPort(port.getIfport());
-			pi.setKind(PortKind.EXTERNAL);
-			
-			ai.getPorts().add(pi);
-		}
-		for (Port port : ac.getIntPorts()) {
+	private void createPortInstances(AbstractInstance ai, ActorClass ac) {
+		createPortInstances(ac.getExternalEndPorts(), PortKind.EXTERNAL, ai);
+		if (ai instanceof ActorInstance)
+			createPortInstances(ac.getIntPorts(), PortKind.INTERNAL, ai);
+		createPortInstances(ac.getRelayPorts(), PortKind.RELAY, ai);
+	}
+
+	/**
+	 * Create port instances for all ports with the given kind
+	 * @param ports a list of {@link Port}s
+	 * @param kind a {@link PortKind}
+	 * @param ai the {@link AbstractInstance} that owns the port instances
+	 */
+	private void createPortInstances(EList<Port> ports, PortKind kind, AbstractInstance ai) {
+		for (Port port : ports) {
 			PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
 			allObjects.add(pi);
 			
 			pi.setName(port.getName());
 			pi.setPort(port);
-			pi.setKind(PortKind.INTERNAL);
+			pi.setKind(kind);
 			
 			ai.getPorts().add(pi);
-		}
-		for (Port port : ac.getIfPorts()) {
-			if (relayPorts.contains(port)) {
-				PortInstance pi = ETriceGenFactory.eINSTANCE.createPortInstance();
-				allObjects.add(pi);
-				
-				pi.setName(port.getName());
-				pi.setPort(port);
-				pi.setKind(PortKind.RELAY);
-				
-				ai.getPorts().add(pi);
-			}
 		}
 	}
 	
@@ -633,7 +813,7 @@ public class GeneratorModelBuilder {
 	 * @param ai - the currently considered actor instance
 	 * @param ac - the actor class (might be a base class)
 	 */
-	private void createServiceRelatedInstances(ActorInstance ai, ActorClass ac) {
+	private void createServiceRelatedInstances(StructureInstance ai, ActorClass ac) {
 		for (SAPRef sap : ac.getStrSAPs()) {
 			SAPInstance si = ETriceGenFactory.eINSTANCE.createSAPInstance();
 			allObjects.add(si);
@@ -678,8 +858,8 @@ public class GeneratorModelBuilder {
 			SAPoint from = lc.getFrom();
 			if (from instanceof RefSAPoint) {
 				if (((RefSAPoint)from).getRef() instanceof ActorRef) {
-					List<ActorInstance> fromInstances = getActorInstances(si, ((ActorRef)((RefSAPoint)from).getRef()));
-					for (ActorInstance fromInst : fromInstances) {
+					List<AbstractInstance> fromInstances = getSubInstances(si, ((ActorRef)((RefSAPoint)from).getRef()));
+					for (AbstractInstance fromInst : fromInstances) {
 						ConnectionInstance ci = ETriceGenFactory.eINSTANCE.createConnectionInstance();
 						ci.setConnection(lc);
 						ci.setFromAI(fromInst);
@@ -720,16 +900,16 @@ public class GeneratorModelBuilder {
 	 * @param spp
 	 * @return
 	 */
-	private SPPInstance getSPPInstance(StructureInstance si, ActorContainerRef ar, SPPRef spp) {
-		if (ar==null) {
-			for (SPPInstance sppi : si.getSpps()) {
+	private SPPInstance getSPPInstance(AbstractInstance si, ActorContainerRef ar, SPPRef spp) {
+		if (ar==null && si instanceof StructureInstance) {
+			for (SPPInstance sppi : ((StructureInstance)si).getSpps()) {
 				if (sppi.getSpp()==spp)
 					return sppi;
 			}
 		}
 		else {
 			if (ar instanceof ActorRef) {
-				List<ActorInstance> subais = getActorInstances(si, (ActorRef)ar);
+				List<AbstractInstance> subais = getSubInstances(si, (ActorRef)ar);
 				if (!subais.isEmpty())
 					return getSPPInstance(subais.get(0), null, spp);
 			}
@@ -741,19 +921,29 @@ public class GeneratorModelBuilder {
 	}
 	
 	/**
-	 * Returns an actor instances corresponding to an ActorRef.
+	 * Returns all actor instances corresponding to an ActorRef (one for scalar, several for array).
 	 * 
 	 * @param si
 	 * @param ar
 	 * @return
 	 */
-	private List<ActorInstance> getActorInstances(StructureInstance si, ActorRef ar) {
-		ArrayList<ActorInstance> result = new ArrayList<ActorInstance>();
-		for (ActorInstance subai : si.getInstances()) {
-			if (subai.getUnindexedName().equals(ar.getName())) {
-				result.add(subai);
+	private List<AbstractInstance> getSubInstances(AbstractInstance si, ActorRef ar) {
+		ArrayList<AbstractInstance> result = new ArrayList<AbstractInstance>();
+
+		if (si instanceof StructureInstance) {
+			for (AbstractInstance subai : ((StructureInstance) si)
+					.getInstances()) {
+				if (subai instanceof ActorInstance) {
+					if (((ActorInstance) subai).getUnindexedName().equals(ar.getName())) {
+						result.add(subai);
+					}
+				}
+				else if (subai.getName().equals(ar.getName())) {
+					result.add(subai);
+				}
 			}
 		}
+
 		return result;
 	}
 	
@@ -765,8 +955,8 @@ public class GeneratorModelBuilder {
 		TreeIterator<EObject> it = root.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof ActorInstance) {
-				for (PortInstance pi : ((ActorInstance) obj).getPorts()) {
+			if (obj instanceof AbstractInstance) {
+				for (PortInstance pi : ((AbstractInstance) obj).getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY) {
 						List<PortInstance> peers = getFinalPeers(pi, null, null);
 						pi.getPeers().addAll(peers);
@@ -781,8 +971,8 @@ public class GeneratorModelBuilder {
 		it = root.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof ActorInstance) {
-				for (PortInstance pi : ((ActorInstance) obj).getPorts()) {
+			if (obj instanceof AbstractInstance) {
+				for (PortInstance pi : ((AbstractInstance) obj).getPorts()) {
 					if (pi.getKind()!=PortKind.RELAY && pi.getPeers().size()>1)
 						if (pi.getPeers().get(0).getPeers().size()>1) {
 							BindingInstance bi = pi.getBindings().get(0);

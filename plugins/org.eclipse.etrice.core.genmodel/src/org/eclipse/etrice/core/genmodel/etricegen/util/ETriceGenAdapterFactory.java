@@ -106,6 +106,14 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 				return createInstanceBaseAdapter();
 			}
 			@Override
+			public Adapter caseAbstractInstance(AbstractInstance object) {
+				return createAbstractInstanceAdapter();
+			}
+			@Override
+			public Adapter caseActorInterfaceInstance(ActorInterfaceInstance object) {
+				return createActorInterfaceInstanceAdapter();
+			}
+			@Override
 			public Adapter caseStructureInstance(StructureInstance object) {
 				return createStructureInstanceAdapter();
 			}
@@ -120,6 +128,10 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseActorInstance(ActorInstance object) {
 				return createActorInstanceAdapter();
+			}
+			@Override
+			public Adapter caseOptionalActorInstance(OptionalActorInstance object) {
+				return createOptionalActorInstanceAdapter();
 			}
 			@Override
 			public Adapter caseInterfaceItemInstance(InterfaceItemInstance object) {
@@ -238,6 +250,34 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance <em>Abstract Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
+	 * @generated
+	 */
+	public Adapter createAbstractInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance <em>Actor Interface Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
+	 * @generated
+	 */
+	public Adapter createActorInterfaceInstanceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance <em>Structure Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -290,6 +330,20 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActorInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance <em>Optional Actor Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance
+	 * @generated
+	 */
+	public Adapter createOptionalActorInstanceAdapter() {
 		return null;
 	}
 

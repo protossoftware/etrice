@@ -9,6 +9,7 @@
 package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An implementation of the IRTObject interface using a hierarchical structure
@@ -114,5 +115,25 @@ public class RTObject implements IRTObject	{
 
 	public String getInstancePathName() {
 		return getInstancePath(PATHNAME_DELIM);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.IRTObject#getThreadForPath(java.lang.String)
+	 */
+	@Override
+	public int getThreadForPath(String path) {
+		if (parent!=null)
+			return parent.getThreadForPath(path);
+		return -1;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.IRTObject#getPeersForPath(java.lang.String)
+	 */
+	@Override
+	public List<String> getPeersForPath(String path) {
+		if (parent!=null)
+			return parent.getPeersForPath(path);
+		return null;
 	}
 }

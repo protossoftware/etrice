@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.SAPRef;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
@@ -58,7 +59,7 @@ public class GenericActorClassGenerator {
       List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       _xifexpression = _allEndPorts;
     }
-    List<Port> endPorts = _xifexpression;
+    final List<Port> endPorts = _xifexpression;
     List<SAPRef> _xifexpression_1 = null;
     boolean _usesInheritance_1 = this.langExt.usesInheritance();
     if (_usesInheritance_1) {
@@ -68,7 +69,7 @@ public class GenericActorClassGenerator {
       List<SAPRef> _allSAPs = RoomHelpers.getAllSAPs(ac);
       _xifexpression_1 = _allSAPs;
     }
-    List<SAPRef> strSAPs = _xifexpression_1;
+    final List<SAPRef> strSAPs = _xifexpression_1;
     List<ServiceImplementation> _xifexpression_2 = null;
     boolean _usesInheritance_2 = this.langExt.usesInheritance();
     if (_usesInheritance_2) {
@@ -78,9 +79,9 @@ public class GenericActorClassGenerator {
       List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
       _xifexpression_2 = _allServiceImplementations;
     }
-    List<ServiceImplementation> svcImpls = _xifexpression_2;
+    final List<ServiceImplementation> svcImpls = _xifexpression_2;
     ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
-    ArrayList<Pair<String,String>> list = _arrayList;
+    final ArrayList<Pair<String,String>> list = _arrayList;
     for (final Port ep : endPorts) {
       String _name = ep.getName();
       String _plus = ("IFITEM_" + _name);
@@ -109,6 +110,23 @@ public class GenericActorClassGenerator {
       String _string_2 = Integer.valueOf(_plus_5).toString();
       Pair<String,String> _pair_2 = Tuples.<String, String>pair(_plus_4, _string_2);
       list.add(_pair_2);
+    }
+    return this.langExt.genEnumeration("interface_items", list);
+  }
+  
+  public String genInterfaceItemConstantsForOptionalActor(final ActorClass ac) {
+    final List<Port> ports = RoomHelpers.getAllInterfacePorts(ac);
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    final ArrayList<Pair<String,String>> list = _arrayList;
+    Iterable<Indexed<Port>> _indexed = Indexed.<Port>indexed(ports);
+    for (final Indexed<Port> ep : _indexed) {
+      Port _value = ep.getValue();
+      String _name = _value.getName();
+      String _plus = ("IFITEM_" + _name);
+      int _index1 = ep.getIndex1();
+      String _string = Integer.valueOf(_index1).toString();
+      Pair<String,String> _pair = Tuples.<String, String>pair(_plus, _string);
+      list.add(_pair);
     }
     return this.langExt.genEnumeration("interface_items", list);
   }

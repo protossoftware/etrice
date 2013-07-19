@@ -7,7 +7,6 @@ Bundle-Activator: org.eclipse.etrice.ui.structure.Activator
 Bundle-Vendor: Eclipse eTrice (Incubation)
 Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.3.0",
  org.eclipse.etrice.ui.common;bundle-version="0.3.0",
- org.eclipse.etrice.ui.behavior;bundle-version="0.3.0",
  org.eclipse.graphiti;bundle-version="0.8.0",
  org.eclipse.graphiti.ui;bundle-version="0.8.0",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",
@@ -23,3 +22,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.structure,
  org.eclipse.etrice.ui.structure.editor,
  org.eclipse.etrice.ui.structure.support
+Import-Package: org.eclipse.etrice.ui.behavior

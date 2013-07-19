@@ -68,7 +68,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.Message;
 		import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
 		import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
-		import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+		import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.modelbase.PortBase;
 		import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
@@ -119,10 +119,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
-			public «portClassName»(IEventReceiver actor, String name, int localId) {
+			public «portClassName»(IInterfaceItemOwner actor, String name, int localId) {
 				this(actor, name, localId, 0);
 			}
-			public «portClassName»(IEventReceiver actor, String name, int localId, int idx) {
+			public «portClassName»(IInterfaceItemOwner actor, String name, int localId, int idx) {
 				super(actor, name, localId, idx);
 				«IF pclass!=null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
@@ -183,7 +183,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// replicated port class
 		static public class «replPortClassName» extends ReplicatedPortBase {
 		
-			public «replPortClassName»(IEventReceiver actor, String name, int localId) {
+			public «replPortClassName»(IInterfaceItemOwner actor, String name, int localId) {
 				super(actor, name, localId);
 			}
 			
@@ -199,7 +199,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				return («portClassName») getInterfaceItem(idx);
 			}
 			
-			protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 				return new «portClassName»(rcv, name, lid, idx);
 			}
 			

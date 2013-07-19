@@ -23,11 +23,16 @@ import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.graphiti.dt.IDiagramTypeProvider;
+import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -195,5 +200,20 @@ public class BehaviorEditor extends RoomDiagramEditor {
 				parent.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
 			parent.getSubgraph().getStates().add(rs);
 		}
+	}
+
+	@Override
+	protected void superClassChanged() {
+		IDiagramTypeProvider diagramTypeProvider = getDiagramTypeProvider();
+		Diagram diagram = diagramTypeProvider.getDiagram();
+		IFeatureProvider featureProvider = diagramTypeProvider.getFeatureProvider();
+		IUpdateContext updateCtx = new UpdateContext(diagram);
+		featureProvider.updateIfPossible(updateCtx);
+		diagramTypeProvider.getDiagramBehavior().refresh();
+	}
+
+	@Override
+	protected StructureClass getStructureClass() {
+		return getActorClass();
 	}
 }

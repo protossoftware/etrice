@@ -14,10 +14,8 @@ package org.eclipse.etrice.core.genmodel;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -25,7 +23,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.Port;
@@ -38,8 +35,7 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	private Root root;
 	private ExpandedActorClass xpac;
-	private HashMap<EClass, ArrayList<EObject>> instances;
-
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -59,15 +55,15 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		assertEquals("number of states", 7, instances.get(RoomPackage.eINSTANCE.getSimpleState()).size());
-		assertEquals("number of choice points", 1, instances.get(RoomPackage.eINSTANCE.getChoicePoint()).size());
-		assertEquals("number of transition points", 4, instances.get(RoomPackage.eINSTANCE.getTransitionPoint()).size());
-		assertEquals("number of entry points", 1, instances.get(RoomPackage.eINSTANCE.getEntryPoint()).size());
-		assertEquals("number of exit points", 1, instances.get(RoomPackage.eINSTANCE.getExitPoint()).size());
-		assertEquals("number of initial transitions", 2, instances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
-		assertEquals("number of triggered transitions", 11, instances.get(RoomPackage.eINSTANCE.getTriggeredTransition()).size());
-		assertEquals("number of continuation transitions", 3, instances.get(RoomPackage.eINSTANCE.getContinuationTransition()).size());
-		assertEquals("number of branch transitions", 2, instances.get(RoomPackage.eINSTANCE.getCPBranchTransition()).size());
+		checkSize(7, RoomPackage.eINSTANCE.getSimpleState());
+		checkSize(1, RoomPackage.eINSTANCE.getChoicePoint());
+		checkSize(4, RoomPackage.eINSTANCE.getTransitionPoint());
+		checkSize(1, RoomPackage.eINSTANCE.getEntryPoint());
+		checkSize(1, RoomPackage.eINSTANCE.getExitPoint());
+		checkSize(2, RoomPackage.eINSTANCE.getInitialTransition());
+		checkSize(11, RoomPackage.eINSTANCE.getTriggeredTransition());
+		checkSize(3, RoomPackage.eINSTANCE.getContinuationTransition());
+		checkSize(2, RoomPackage.eINSTANCE.getCPBranchTransition());
 	}
 	
 	@Test
