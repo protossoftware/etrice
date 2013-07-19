@@ -12,20 +12,16 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 

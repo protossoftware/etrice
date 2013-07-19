@@ -107,7 +107,7 @@ public class GeneratorModelBuilder {
 	private LinkedList<InstanceBase> allObjects = new LinkedList<InstanceBase>();
 	
 	/**
-	 * a set of all actor classes referenced by optional ActorRefs
+	 * a set of all actor classes that are candidates for optional actors
 	 */
 	private HashMap<ActorClass, OptionalActorInstance> optionalActors = new HashMap<ActorClass, OptionalActorInstance>();
 	
@@ -122,8 +122,6 @@ public class GeneratorModelBuilder {
 	private IDiagnostician diagnostician;
 
 	private boolean debug;
-
-	private HashMap<ActorClass, ArrayList<ActorClass>> subClasses = new HashMap<ActorClass, ArrayList<ActorClass>>();
 
 	/**
 	 * the only constructor takes a logger and a diagnostician as arguments
@@ -165,7 +163,10 @@ public class GeneratorModelBuilder {
 		root.setLibrary(asLibrary);
 		this.debug = debug;
 
-		if (!root.isLibrary()) {
+		if (root.isLibrary()) {
+			findOptionalActorClasses(root);
+		}
+		else {
 			// create instance model
 			
 			checkRelayPorts(root);
@@ -231,7 +232,7 @@ public class GeneratorModelBuilder {
 					logger.logInfo("matches for optional actor "+kind+": "+aii.getPath());
 					
 					ActorClass optAC = aii.getActorClass();
-					ArrayList<ActorClass> candidates = subClasses.get(optAC);
+					EList<ActorClass> candidates = root.getSubClasses(optAC);
 					for (ActorClass candidate : candidates) {
 						OptionalActorInstance optAIC = optionalActors.get(candidate);
 						HashSet<ProtocolClass> required = new HashSet<ProtocolClass>();
@@ -276,6 +277,19 @@ public class GeneratorModelBuilder {
 		return satisfied;
 	}
 
+	private void findOptionalActorClasses(Root root) {
+		HashSet<ActorClass> optionalActorClasses = new HashSet<ActorClass>();
+		for (RoomModel mdl : root.getModels()) {
+			for (ActorClass ac : mdl.getActorClasses()) {
+				for (ActorRef ar : ac.getActorRefs()) {
+					if (ar.getRefType()==ReferenceType.OPTIONAL)
+						optionalActorClasses.add(ar.getType());
+				}
+			}
+		}
+		root.getOptionalActorClasses().addAll(optionalActorClasses);
+	}
+	
 	/**
 	 * Create all optional actor instance trees.
 	 * To determine the needed ones each {@link ActorInterfaceInstance} has to get the list of sub classes
@@ -287,7 +301,7 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void createOptionalActorInstanceTrees(Root root) {
-		computeSubClasses(root);
+		root.computeSubClasses();
 		
 		/* determine all optional actor classes
 		 * 
@@ -305,14 +319,20 @@ public class GeneratorModelBuilder {
 				}
 			}
 		}
+		
+		// all optional actor classes as interfaces
+		root.getOptionalActorClasses().addAll(optionalActors.keySet());
 
-		// now compute all possible actor classes for optional actors
+		// now compute all possible actor classes for optional actors (omit abstract types)
 		ArrayList<ActorClass> optional = new ArrayList<ActorClass>(optionalActors.keySet());
 		for (ActorClass ac : optional) {
-			ArrayList<ActorClass> subCls = subClasses.get(ac);
+			EList<ActorClass> subCls = root.getSubClasses(ac);
 			for (ActorClass subCl : subCls) {
-				optionalActors.put(subCl, null);
+				if (!subCl.isAbstract())
+					optionalActors.put(subCl, null);
 			}
+			if (ac.isAbstract())
+				optionalActors.remove(ac);
 		}
 		
 		for (Entry<ActorClass, OptionalActorInstance> entry : optionalActors.entrySet()) {
@@ -337,27 +357,6 @@ public class GeneratorModelBuilder {
 	}
 
 	/**
-	 * Compute the sub classes of all actor classes and store them in the field
-	 * {@link #optionalActors}
-	 * 
-	 * @param root
-	 */
-	private void computeSubClasses(Root root) {
-		for (RoomModel mdl : root.getModels()) {
-			for (ActorClass ac : mdl.getActorClasses()) {
-				ActorClass base = ac.getBase();
-				while (base!=null) {
-					ArrayList<ActorClass> subs = subClasses.get(base);
-					if (subs==null)
-						subClasses.put(base, subs = new ArrayList<ActorClass>());
-					subs.add(ac);
-					base = base.getBase();
-				}
-			}
-		}
-	}
-
-	/**
 	 * Connect all services hierarchically. This finally connects SAPs with corresponding services
 	 * according to layer connections.
 	 * 
@@ -376,6 +375,7 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void createServiceMappings(Root root) {
+		assert(dependenciesSatisfied(WorkItem.CREATE_INSTANCES, WorkItem.CREATE_BINDINGS)): "dependencies satisfied";
 		for (SubSystemInstance comp : root.getSubSystemInstances()) {
 			createServiceMappings(comp);
 		}
@@ -388,8 +388,6 @@ public class GeneratorModelBuilder {
 	 * @param si
 	 */
 	private void createServiceMappings(StructureInstance si) {
-		assert(dependenciesSatisfied(WorkItem.CREATE_INSTANCES, WorkItem.CREATE_BINDINGS)): "dependencies satisfied";
-		
 		for (ConnectionInstance ci : si.getConnections()) {
 			if (ci.getFromSPP()==null) {
 				// this connection originates at an actor instance

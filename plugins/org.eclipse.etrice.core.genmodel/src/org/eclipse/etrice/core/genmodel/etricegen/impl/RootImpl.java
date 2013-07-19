@@ -82,6 +82,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalInstances <em>Optional Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,6 +107,8 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 
 	}
+
+	private HashMap<ActorClass, BasicEList<ActorClass>> subClasses = new HashMap<ActorClass, BasicEList<ActorClass>>();
 
 	/**
 	 * The default value of the '{@link #isLibrary() <em>Library</em>}' attribute.
@@ -176,6 +179,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<OptionalActorInstance> optionalInstances;
+
+	/**
+	 * The cached value of the '{@link #getOptionalActorClasses() <em>Optional Actor Classes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptionalActorClasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ActorClass> optionalActorClasses;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -313,6 +326,18 @@ public class RootImpl extends EObjectImpl implements Root {
 			optionalInstances = new EObjectContainmentEList<OptionalActorInstance>(OptionalActorInstance.class, this, ETriceGenPackage.ROOT__OPTIONAL_INSTANCES);
 		}
 		return optionalInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ActorClass> getOptionalActorClasses() {
+		if (optionalActorClasses == null) {
+			optionalActorClasses = new EObjectResolvingEList<ActorClass>(ActorClass.class, this, ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES);
+		}
+		return optionalActorClasses;
 	}
 
 	private void collectSubSystems() {
@@ -566,6 +591,35 @@ public class RootImpl extends EObjectImpl implements Root {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<ActorClass> getSubClasses(ActorClass ac) {
+		return subClasses.get(ac);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void computeSubClasses() {
+		for (RoomModel mdl : getModels()) {
+			for (ActorClass ac : mdl.getActorClasses()) {
+				ActorClass base = ac.getBase();
+				while (base!=null) {
+					BasicEList<ActorClass> subs = subClasses.get(base);
+					if (subs==null)
+						subClasses.put(base, subs = new BasicEList<ActorClass>());
+					subs.add(ac);
+					base = base.getBase();
+				}
+			}
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -615,6 +669,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getSubSystemClasses();
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
 				return getOptionalInstances();
+			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
+				return getOptionalActorClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -671,6 +727,10 @@ public class RootImpl extends EObjectImpl implements Root {
 				getOptionalInstances().clear();
 				getOptionalInstances().addAll((Collection<? extends OptionalActorInstance>)newValue);
 				return;
+			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
+				getOptionalActorClasses().clear();
+				getOptionalActorClasses().addAll((Collection<? extends ActorClass>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -716,6 +776,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
 				getOptionalInstances().clear();
 				return;
+			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
+				getOptionalActorClasses().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -752,6 +815,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getSubSystemClasses().isEmpty();
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
 				return optionalInstances != null && !optionalInstances.isEmpty();
+			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
+				return optionalActorClasses != null && !optionalActorClasses.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

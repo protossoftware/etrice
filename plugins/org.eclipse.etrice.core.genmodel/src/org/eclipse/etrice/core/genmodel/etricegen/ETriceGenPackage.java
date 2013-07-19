@@ -185,13 +185,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__OPTIONAL_INSTANCES = 11;
 
 	/**
+	 * The feature id for the '<em><b>Optional Actor Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__OPTIONAL_ACTOR_CLASSES = 12;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 12;
+	int ROOT_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -2141,6 +2150,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_OptionalInstances();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses <em>Optional Actor Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Optional Actor Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_OptionalActorClasses();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase <em>Instance Base</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3083,6 +3103,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__OPTIONAL_INSTANCES = eINSTANCE.getRoot_OptionalInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional Actor Classes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__OPTIONAL_ACTOR_CLASSES = eINSTANCE.getRoot_OptionalActorClasses();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.

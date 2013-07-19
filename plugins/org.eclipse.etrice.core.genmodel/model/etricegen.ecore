@@ -20,6 +20,10 @@
     <eOperations name="getInstance" eType="#//StructureInstance">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getSubClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
+      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    </eOperations>
+    <eOperations name="computeSubClasses"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="systemInstances" upperBound="-1"
         eType="#//SystemInstance" containment="true"/>
@@ -49,6 +53,8 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optionalInstances" upperBound="-1"
         eType="#//OptionalActorInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optionalActorClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceBase" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

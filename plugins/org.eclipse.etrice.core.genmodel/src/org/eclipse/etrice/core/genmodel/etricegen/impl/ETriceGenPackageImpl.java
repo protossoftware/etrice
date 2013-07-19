@@ -401,6 +401,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRoot_OptionalActorClasses() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInstanceBase() {
 		return instanceBaseEClass;
 	}
@@ -1121,6 +1130,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(rootEClass, ROOT__USED_ROOM_MODELS);
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_CLASSES);
 		createEReference(rootEClass, ROOT__OPTIONAL_INSTANCES);
+		createEReference(rootEClass, ROOT__OPTIONAL_ACTOR_CLASSES);
 
 		instanceBaseEClass = createEClass(INSTANCE_BASE);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__NAME);
@@ -1281,6 +1291,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getRoot_UsedRoomModels(), theRoomPackage.getRoomModel(), null, "usedRoomModels", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_SubSystemClasses(), theRoomPackage.getSubSystemClass(), null, "subSystemClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_OptionalInstances(), this.getOptionalActorInstance(), null, "optionalInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_OptionalActorClasses(), theRoomPackage.getActorClass(), null, "optionalActorClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(rootEClass, theRoomPackage.getRoomModel(), "getReferencedModels", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getRoomClass(), "cls", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1299,6 +1310,11 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		op = addEOperation(rootEClass, this.getStructureInstance(), "getInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(rootEClass, theRoomPackage.getActorClass(), "getSubClasses", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theRoomPackage.getActorClass(), "ac", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(rootEClass, null, "computeSubClasses", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(instanceBaseEClass, InstanceBase.class, "InstanceBase", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstanceBase_Name(), ecorePackage.getEString(), "name", null, 0, 1, InstanceBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
