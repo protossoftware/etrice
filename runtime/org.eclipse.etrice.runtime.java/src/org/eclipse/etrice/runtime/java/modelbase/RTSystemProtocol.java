@@ -26,7 +26,7 @@ public class RTSystemProtocol {
 	
 	public static class RTSystemPort extends RTSystemServicesProtocolPort {
 	
-		public RTSystemPort(IEventReceiver actor, int localId) {
+		public RTSystemPort(IInterfaceItemOwner actor, int localId) {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
 			
 			// since we have no mapping for the system ports we connect them directly here
@@ -44,7 +44,7 @@ public class RTSystemProtocol {
 	
 	public static class RTSystemConjPort extends RTSystemServicesProtocolConjReplPort {
 
-		public RTSystemConjPort(IEventReceiver actor, int localId) {
+		public RTSystemConjPort(IInterfaceItemOwner actor, int localId) {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
 		}
 		

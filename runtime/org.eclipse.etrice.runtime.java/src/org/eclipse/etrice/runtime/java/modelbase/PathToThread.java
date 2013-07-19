@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,12 +12,13 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.HashMap;
+
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public interface IReplicatedInterfaceItem {
+public class PathToThread extends HashMap<String, Integer> {
 
-	 InterfaceItemBase createSubInterfaceItem();
-	 void removeItem(InterfaceItemBase item);
+	private static final long serialVersionUID = 1L;
 }

@@ -14,6 +14,7 @@ package org.eclipse.etrice.runtime.java.modelbase;
 
 import static org.junit.Assert.assertEquals;
 
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
@@ -29,12 +30,12 @@ public class ReplicatedPortBaseTest {
 
 	private static class MockReplicatedPort extends ReplicatedPortBase {
 
-		public MockReplicatedPort(IEventReceiver parent, String name, int localId) {
+		public MockReplicatedPort(IInterfaceItemOwner parent, String name, int localId) {
 			super(parent, name, localId);
 		}
 
 		@Override
-		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 			return new MockPort(rcv, name, lid, idx);
 		}
 		
@@ -50,20 +51,26 @@ public class ReplicatedPortBaseTest {
 		msgSvcCtrl.addMsgSvc(
 				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
 
-		msgSvcCtrl.addPathToThread("/TOP/Rcv0", 0);
-		msgSvcCtrl.addPathToThread("/TOP/Rcv1", 1);
-		msgSvcCtrl.addPathToThread("/TOP/Rcv2", 1);
-		msgSvcCtrl.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Port2");
-		msgSvcCtrl.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv2/Port2");
-		msgSvcCtrl.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv0/Port0");
-		msgSvcCtrl.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv1/Port1");
+	}
+
+	private IRTObject createTopWithMappings() {
+		MockSubSystem top = new MockSubSystem(null, "TOP");
+		RTServices.getInstance().setSubSystem(top);
+		top.addPathToThread("/TOP/Rcv0", 0);
+		top.addPathToThread("/TOP/Rcv1", 1);
+		top.addPathToThread("/TOP/Rcv2", 1);
+		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Port2");
+		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv2/Port2");
+		top.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv0/Port0");
+		top.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv1/Port1");
+		return top;
 	}
 	
 	@Test
 	public void testPort2Repl() {
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		
-		TopRTObject top = new TopRTObject("TOP");
+		IRTObject top = createTopWithMappings();
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		MockEventReceiver eventRcv2 = new MockEventReceiver(top, "Rcv2");
@@ -108,7 +115,7 @@ public class ReplicatedPortBaseTest {
 	public void testRepl2Port() {
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		
-		TopRTObject top = new TopRTObject("TOP");
+		IRTObject top = createTopWithMappings();
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		MockEventReceiver eventRcv2 = new MockEventReceiver(top, "Rcv2");
@@ -153,7 +160,7 @@ public class ReplicatedPortBaseTest {
 	public void testRepl2Repl() {
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		
-		TopRTObject top = new TopRTObject("TOP");
+		IRTObject top = createTopWithMappings();
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		MockEventReceiver eventRcv2 = new MockEventReceiver(top, "Rcv2");

@@ -26,6 +26,8 @@ class MainGen implements IGenerator {
 	@Inject DataClassGen dataClassGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
+	@Inject OptionalActorInterfaceGen optionalActorInterfaceGen
+	@Inject OptionalActorFactoryGen optionalActorFactoryGen
 	@Inject NodeGen nodeGen
 	@Inject NodeRunnerGen nodeRunnerGen
 	@Inject PrepareFileSystem prepFS
@@ -40,13 +42,15 @@ class MainGen implements IGenerator {
 	}
 	
 	def void doGenerate(Root e) {
-		dataClassGen.doGenerate(e);
-		protocolClassGen.doGenerate(e);
-		actorClassGen.doGenerate(e);
+		dataClassGen.doGenerate(e)
+		protocolClassGen.doGenerate(e)
+		actorClassGen.doGenerate(e)
+		optionalActorInterfaceGen.doGenerate(e)
+		optionalActorFactoryGen.doGenerate(e)
 		nodeGen.doGenerate(e);
 		
 		if (!e.library) {
-			nodeRunnerGen.doGenerate(e);
+			nodeRunnerGen.doGenerate(e)
 		}
 	}
 }

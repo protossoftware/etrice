@@ -8,10 +8,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.etrice.runtime.java.config.IVariableService;
@@ -30,36 +27,7 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPo
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
-	
-	@SuppressWarnings("serial")
-	private static class PathToThread extends HashMap<String, Integer> {}
-	@SuppressWarnings("serial")
-	private static class PathToPeers extends HashMap<String, ArrayList<String>> {
-		public void put(String key, String value) {
-			ArrayList<String> list = get(key);
-			if (list==null) {
-				list = new ArrayList<String>();
-				put(key, list);
-			}
-			list.add(value);
-		}
-		
-		public void put(String key, Collection<String> values) {
-			ArrayList<String> list = get(key);
-			if (list==null) {
-				list = new ArrayList<String>(values);
-				put(key, list);
-			}
-			else
-				list.addAll(values);
-		}
-		
-		public void put(String key, String[] values) {
-			List<String> list = Arrays.asList(values);
-			put(key, list);
-		}
-	}
+public abstract class SubSystemClassBase extends RTObject implements IEventReceiver, IInterfaceItemOwner {
 	
 	// variable service (is only instantiated if needed)
 	protected IVariableService variableService = null;
@@ -259,8 +227,25 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		return path2peers.get(path);
 	}
 	
+	/**
+	 * Clears thread and peer mappings.
+	 */
 	public void resetAll() {
 		path2peers.clear();
 		path2thread.clear();
+	}
+	/**
+	 * @param optionalActorClass
+	 * @param instanceActorClass
+	 * @return
+	 */
+	abstract public IOptionalActorFactory getFactory(String optionalActorClass, String instanceActorClass);
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner#getEventReceiver()
+	 */
+	@Override
+	public IEventReceiver getEventReceiver() {
+		return this;
 	}
 }

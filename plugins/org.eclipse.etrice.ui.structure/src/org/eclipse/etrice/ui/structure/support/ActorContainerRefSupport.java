@@ -321,7 +321,7 @@ public class ActorContainerRefSupport {
 				if(containerGa.getGraphicsAlgorithmChildren().size()>=1){
 					GraphicsAlgorithm borderRect = null;
 					Object obj = getBusinessObjectForPictogramElement(containerShape);
-					if(obj instanceof ActorRef && ((ActorRef)obj).getSize()>1){
+					if(obj instanceof ActorRef && ((ActorRef)obj).getSize()!=1){
 						GraphicsAlgorithm replBorder = containerGa.getGraphicsAlgorithmChildren().get(0);
 						replBorder.setWidth(nw);
 						replBorder.setHeight(nh);
@@ -351,7 +351,7 @@ public class ActorContainerRefSupport {
 						childGA.setWidth(nw);
 						childGA.setHeight(nh);
 						
-						if(obj instanceof ActorRef && ((ActorRef)obj).getSize()>1){
+						if(obj instanceof ActorRef && ((ActorRef)obj).getSize()!=1){
 							GraphicsAlgorithm replLabel = containerShape.getChildren().get(1).getGraphicsAlgorithm();
 							replLabel.setX(MARGIN+nw-SIZE_FRAME_SIZE);
 						}
@@ -566,7 +566,7 @@ public class ActorContainerRefSupport {
 				
 				// check replicated
 				if(acr instanceof ActorRef){
-					if(((ActorRef)acr).getSize()>1){
+					if(((ActorRef)acr).getSize()!=1){
 						if(invisibleRect.getGraphicsAlgorithmChildren().size() < 3)
 							reason += "ActorRef got replicated";
 						else
@@ -623,11 +623,16 @@ public class ActorContainerRefSupport {
 				}
 				
 				// check replicated label
-				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()>1){
+				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()!=1){
 					if(containerShape.getChildren().size() >= 2){
 						GraphicsAlgorithm ga = containerShape.getChildren().get(1).getGraphicsAlgorithm();
 						if (ga instanceof Text) {
-							if(!((Text)ga).getValue().equals(((ActorRef)acr).getSize()+""))
+							String value = ((Text)ga).getValue();
+							if (((ActorRef)acr).getSize()==-1) {
+								if (!value.equals("*"))
+									reason += "multiciply changed";
+							}
+							else if(!value.equals(((ActorRef)acr).getSize()+""))
 								reason += "multiciply changed";
 						}
 					}
@@ -665,7 +670,7 @@ public class ActorContainerRefSupport {
 				
 				// check replicated
 				if(acr instanceof ActorRef){
-					if(((ActorRef)acr).getSize()>1){
+					if(((ActorRef)acr).getSize()!=1){
 						if(invisibleRect.getGraphicsAlgorithmChildren().size() < 3){
 							
 							IGaService gaService = Graphiti.getGaService();
@@ -689,7 +694,8 @@ public class ActorContainerRefSupport {
 							
 							Shape labelShape = Graphiti.getPeCreateService().createShape(containerShape, false);
 							Integer size = ((ActorRef)acr).getSize();
-							Text label = gaService.createDefaultText(getDiagram(), labelShape, size.toString());
+							String txt = (size==-1)?"*":size.toString();
+							Text label = gaService.createDefaultText(getDiagram(), labelShape, txt);
 							label.setForeground(lineColor);
 							label.setBackground(lineColor);
 							label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -858,7 +864,7 @@ public class ActorContainerRefSupport {
 				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				
-				if(bo instanceof ActorRef && ((ActorRef)bo).getSize() > 1)
+				if(bo instanceof ActorRef && ((ActorRef)bo).getSize() != 1)
 					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(1));
 				else
 					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(0));
@@ -976,7 +982,7 @@ public class ActorContainerRefSupport {
 				if (actorLabel instanceof Text)
 					((Text)actorLabel).setValue(RoomNameProvider.getRefLabelName(acr));
 				
-				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()>1){
+				if(acr instanceof ActorRef && ((ActorRef)acr).getSize()!=1){
 					if(container.getChildren().size()>1){
 						GraphicsAlgorithm replLabel = container.getChildren().get(1).getGraphicsAlgorithm();
 						if (replLabel instanceof Text)
@@ -1067,7 +1073,7 @@ public class ActorContainerRefSupport {
 		int height = invisibleRectangle.getHeight()-2*MARGIN;
 		
 		IGaService gaService = Graphiti.getGaService();
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()>1) {
+		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
 			Rectangle rect = gaService.createRectangle(invisibleRectangle);
 			rect.setForeground(lineColor);
 			rect.setBackground(bgColor);
@@ -1083,7 +1089,7 @@ public class ActorContainerRefSupport {
 
 		//hatchRectangle(borderRect, lineColor);
 		
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()>1) {
+		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
 			Rectangle sizeFrame = gaService.createRectangle(invisibleRectangle);
 			sizeFrame.setForeground(lineColor);
 			sizeFrame.setBackground(bgColor);
@@ -1116,10 +1122,11 @@ public class ActorContainerRefSupport {
 			gaService.setLocationAndSize(label, MARGIN, MARGIN, width, height);
 		}
 		
-		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()>1) {
+		if (ar instanceof ActorRef && ((ActorRef)ar).getSize()!=1) {
 			Shape labelShape = peCreateService.createShape(containerShape, false);
 			Integer size = ((ActorRef)ar).getSize();
-			Text label = gaService.createDefaultText(diagram, labelShape, size.toString());
+			String txt = (size==-1)?"*":size.toString();
+			Text label = gaService.createDefaultText(diagram, labelShape, txt);
 			label.setForeground(lineColor);
 			label.setBackground(lineColor);
 			label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);

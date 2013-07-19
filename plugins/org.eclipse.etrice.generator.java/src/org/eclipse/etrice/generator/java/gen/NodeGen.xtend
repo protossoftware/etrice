@@ -29,6 +29,7 @@ import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
+import org.eclipse.etrice.generator.base.IntelligentSeparator
 
 @Singleton
 class NodeGen {
@@ -84,6 +85,8 @@ class NodeGen {
 		import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+		import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
+		import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		
@@ -182,7 +185,22 @@ class NodeGen {
 					variableService.stop();
 				«ENDIF»
 			}
+			
+			public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {
+				«val else1 = new IntelligentSeparator("else ")»
+				«FOR oa : root.optionalActorClasses»
+					«else1»if (optionalActorClass.equals("«oa.name»")) {
+						«val else2 = new IntelligentSeparator("else ")»
+						«FOR subcls : root.getSubClasses(oa).union(oa).filter(s|!s.abstract)»
+							«else2»if ("«subcls.name»".equals(actorClass)) {
+								return new «subcls.javaFactoryName»();
+							}
+						«ENDFOR»
+					}
+				«ENDFOR»
 				
+				return null;
+			}
 		};
 	'''
 	}

@@ -13,6 +13,7 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -22,18 +23,19 @@ import org.eclipse.etrice.runtime.java.messaging.RTObject;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class ReplicatedInterfaceItemBase extends RTObject implements IReplicatedInterfaceItem {
+public abstract class ReplicatedInterfaceItemBase extends RTObject implements IReplicatedInterfaceItem, IInterfaceItemOwner {
 
 	private int localId;
 	private ArrayList<InterfaceItemBase> items = new ArrayList<InterfaceItemBase>();
+	private LinkedList<Integer> releasedIndices = new LinkedList<Integer>();
 
 	/**
-	 * @param parent
+	 * @param owner
 	 * @param name
 	 * @param localId
 	 */
-	protected ReplicatedInterfaceItemBase(IEventReceiver parent, String name, int localId) {
-		super(parent, name);
+	protected ReplicatedInterfaceItemBase(IInterfaceItemOwner owner, String name, int localId) {
+		super(owner, name);
 		
 		this.localId = localId;
 		
@@ -61,14 +63,29 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	 */
 	@Override
 	public InterfaceItemBase createSubInterfaceItem() {
-		InterfaceItemBase item = createInterfaceItem((IEventReceiver)getParent(), getName()+items.size(), localId, items.size());
+		InterfaceItemBase item = createInterfaceItem(this, getName()+items.size(), localId, getFreeIndex());
 		items.add(item);
 		return item;
 	}
 	
+	public void removeItem(InterfaceItemBase item) {
+		assert(item.getParent()==this): "is own child";
+		releasedIndices.push(item.getIdx());
+		items.remove(item);
+	}
+	
+	private int getFreeIndex() {
+		if (releasedIndices.isEmpty())
+			return items.size();
+		else
+			return releasedIndices.pop();
+	}
+	
 	public InterfaceItemBase getInterfaceItem(int idx) {
-		if (0<=idx && idx<items.size())
-			return items.get(idx);
+		for (InterfaceItemBase item : items) {
+			if (item.getIdx()==idx)
+				return item;
+		}
 		
 		return null;
 	}
@@ -81,5 +98,10 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 		return localId;
 	}
 	
-	protected abstract InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx);
+	@Override
+	public IEventReceiver getEventReceiver() {
+		return (IEventReceiver) getParent();
+	}
+	
+	protected abstract InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx);
 }

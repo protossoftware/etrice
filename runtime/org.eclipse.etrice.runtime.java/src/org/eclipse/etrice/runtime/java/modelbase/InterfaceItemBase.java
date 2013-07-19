@@ -17,6 +17,7 @@ import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
+import org.eclipse.etrice.runtime.java.modelbase.SystemMessage.Reason;
 
 /**
  * The abstract base class for actor class interface items like ports and saps.
@@ -26,17 +27,21 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  */
 public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	
-	private IMessageReceiver ownMsgReceiver;
-	private IMessageReceiver peerMsgReceiver;
+	private IReplicatedInterfaceItem replicator = null;
+	protected IMessageReceiver ownMsgReceiver;
+	protected IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
-	private Address peerAddress = null;
+	protected Address peerAddress = null;
 
-	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx) {
-		super(actor, name);
+	public InterfaceItemBase (IInterfaceItemOwner owner, String name, int localId, int idx) {
+		super(owner.getEventReceiver(), name);
 		
 		this.localId = localId;
 		this.idx = idx;
+		
+		if (owner instanceof IReplicatedInterfaceItem)
+			replicator = (IReplicatedInterfaceItem) owner;
 		
 		int thread = getParent().getThreadForPath(getParent().getInstancePath());
 		if (thread>=0) {
@@ -67,6 +72,16 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 		}
 		
 	}
+	
+	protected void handleSystemMessage(SystemMessage msg) {
+		switch (msg.getReason()) {
+		case DISCONNECT:
+			disconnect();
+			if (replicator!=null)
+				destroy();
+			break;
+		}
+	}
 
 	protected void connectWith(InterfaceItemBase peer) {
 		if (peer!=null) {
@@ -75,6 +90,16 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			peer.peerAddress = getAddress();
 			this.peerMsgReceiver = peer.ownMsgReceiver;
 			peer.peerMsgReceiver = ownMsgReceiver;
+		}
+	}
+	
+	protected void disconnect() {
+		peerMsgReceiver.receive(new SystemMessage(peerAddress, Reason.DISCONNECT));
+		peerAddress = null;
+		peerMsgReceiver = null;
+		
+		if (replicator!=null) {
+			replicator.removeItem(this);
 		}
 	}
 
@@ -104,5 +129,16 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 
 	protected Address getPeerAddress() {
 		return peerAddress;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#destroy()
+	 */
+	@Override
+	protected void destroy() {
+		if (peerAddress!=null)
+			disconnect();
+		
+		super.destroy();
 	}
 }

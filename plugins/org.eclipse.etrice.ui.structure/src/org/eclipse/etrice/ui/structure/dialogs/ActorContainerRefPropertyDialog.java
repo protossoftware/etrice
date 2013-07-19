@@ -35,6 +35,8 @@ import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.Multiplicity2StringConverter;
+import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.String2MultiplicityConverter;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Combo;
@@ -111,15 +113,28 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 	
 	class SizeValidator implements IValidator {
 
-		public SizeValidator() {
+		private boolean optional;
+
+		public SizeValidator(boolean optional) {
+			this.optional = optional;
 		}
 
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof Integer) {
 				int m = (Integer) value;
-				if (m<=0)
-					return ValidationStatus.error("multiplicity must not be positive");
+				if (m==0)
+					return ValidationStatus.error("multiplicity must not be 0");
+				if (m<-1)
+					return ValidationStatus.error("multiplicity must be -1 or positive");
+				if (optional) {
+					if (m>1)
+						return ValidationStatus.error("multiplicity >1 not allowed (only fixed actors)");
+				}
+				else {
+					if (m==-1)
+						return ValidationStatus.error("multiplicity * not allowed (only optional actors)");
+				}
 			}
 			return Status.OK_STATUS;
 		}
@@ -188,7 +203,10 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		}
 
 		if (ref instanceof ActorRef) {
-			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Size(), new SizeValidator());
+			boolean optional = ((ActorRef) ref).getRefType()==ReferenceType.OPTIONAL;
+			Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
+			String2MultiplicityConverter s2m = new String2MultiplicityConverter();
+			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Size(), new SizeValidator(optional), s2m, m2s, false);
 			if (hasInterfacePortWithMultiplicityAny(((ActorRef) ref).getType())) {
 				size.setEnabled(false);
 				createInfoDecorator(size, "size fixed since actor has interface ports with multiplicity *");
@@ -198,7 +216,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 			}
 		}
 		
-		Combo refType = createCombo(body, "Reference &Type:", ref, ReferenceType.class, RoomPackage.Literals.ACTOR_REF__REF_TYPE, ReferenceType.VALUES);
+		createCombo(body, "Reference &Type:", ref, ReferenceType.class, RoomPackage.Literals.ACTOR_REF__REF_TYPE, ReferenceType.VALUES);
 		
 		name.selectAll();
 		name.setFocus();

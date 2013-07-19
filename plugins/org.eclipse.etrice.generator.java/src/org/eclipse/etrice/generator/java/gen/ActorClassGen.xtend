@@ -24,6 +24,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.ReferenceType
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -77,7 +78,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDFOR»
 		
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
-			import «pc.^package».«pc.name».*;
+			import «pc.package».«pc.name».*;
+		«ENDFOR»
+
+		«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
+			import «sub.type.package».«sub.type.name»Interface;
 		«ENDFOR»
 		
 		«ac.userCode(1)»
@@ -101,10 +106,15 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR svc : ac.serviceImplementations»
 				protected «svc.getPortClassName()» «svc.spp.name» = null;
 			«ENDFOR»
-		
+			
+			//--------------------- optional actors
+			«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
+				protected «sub.type.name»Interface «sub.name» = null;
+			«ENDFOR»
+			
 			//--------------------- interface item IDs
 			«xpac.genInterfaceItemConstants»
-
+			
 			«configGenAddon.genMinMaxConstants(ac)»
 			«ac.attributes.attributes»
 			«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
@@ -121,26 +131,28 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»
-					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name»); 
+					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name»);
 				«ENDFOR»
 				
 				// own saps
 				«FOR sap : ac.strSAPs»
-					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0); 
+					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0);
 				«ENDFOR»
 				
 				// own service implementations
 				«FOR svc : ac.serviceImplementations»
-					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»); 
+					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»);
 				«ENDFOR»
 				
 				// sub actors
 				«FOR sub : ac.actorRefs»
-					«IF sub.size>1»
+					«IF sub.refType==ReferenceType.OPTIONAL»
+						«sub.name» = new «sub.type.name»Interface(this, "«sub.name»");
+					«ELSEIF sub.size>1»
 						for (int i=0; i<«sub.size»; ++i)
-							new «sub.type.name»(this, "«sub.name»_"+i); 
+							new «sub.type.name»(this, "«sub.name»_"+i);
 					«ELSE»
-						new «sub.type.name»(this, "«sub.name»"); 
+						new «sub.type.name»(this, "«sub.name»");
 					«ENDIF»
 				«ENDFOR»
 				«IF ctor!=null»
