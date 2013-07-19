@@ -6,7 +6,7 @@ digraph TutorialStructure {
 	SetupForC[label="Setting up the workspace for C" ];
 	HelloWorldForC[label="Hello World for C"];
 	PingPong [label="Ping Pong"];
-	TrafficLight [label="Traffic Light"];
+	TrafficLight [label="Traffic Light (Example)"];
 
 	SetupForJava -> HelloWorldForJava;
 	SetupForC -> HelloWorldForC;

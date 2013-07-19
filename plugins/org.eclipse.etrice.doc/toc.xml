@@ -13,25 +13,28 @@
              label="Setting up the Workspace for C Projects"/>
       <topic href="html/etrice-docse6.html#x10-330002.4" label="HelloWorld for Java"/>
       <topic href="html/etrice-docse7.html#x11-400002.5" label="HelloWorld for C"/>
+      <topic href="html/etrice-docse8.html#x12-500002.6"
+             label="Tutorial Ping Pong (Java and C)"/>
    </topic>
-   <topic href="html/etrice-docch3.html#x12-500003" label="eTrice Features"/>
-   <topic href="html/etrice-docch4.html#x13-510004" label="ROOM Concepts">
-      <topic href="html/etrice-docse8.html#x14-520004.1" label="Actors"/>
-      <topic href="html/etrice-docse9.html#x15-600004.2" label="Protocols"/>
-      <topic href="html/etrice-docse10.html#x16-640004.3" label="Ports"/>
-      <topic href="html/etrice-docse11.html#x17-700004.4" label="DataClass"/>
-      <topic href="html/etrice-docse12.html#x18-730004.5" label="Layering"/>
-      <topic href="html/etrice-docse13.html#x19-760004.6"
+   <topic href="html/etrice-docch3.html#x13-620003" label="ROOM Concepts">
+      <topic href="html/etrice-docse9.html#x14-630003.1" label="Actors"/>
+      <topic href="html/etrice-docse10.html#x15-710003.2" label="Protocols"/>
+      <topic href="html/etrice-docse11.html#x16-750003.3" label="Ports"/>
+      <topic href="html/etrice-docse12.html#x17-810003.4" label="DataClass"/>
+      <topic href="html/etrice-docse13.html#x18-840003.5" label="Layering"/>
+      <topic href="html/etrice-docse14.html#x19-870003.6"
              label="Finite State Machines"/>
-      <topic href="html/etrice-docse14.html#x20-830004.7"
+   </topic>
+   <topic href="html/etrice-docch4.html#x20-940004" label="eTrice Features">
+      <topic href="html/etrice-docse15.html#x21-950004.1"
              label="Automatic Diagram Layout with KIELER"/>
-      <topic href="html/etrice-docse15.html#x21-960004.8"
+      <topic href="html/etrice-docse16.html#x22-1080004.2"
              label="eTrice Models and Their Relations"/>
    </topic>
-   <topic href="html/etrice-docch5.html#x22-1010005"
+   <topic href="html/etrice-docch5.html#x23-1130005"
           label="eTrice Tool Developer’s Reference">
-      <topic href="html/etrice-docse16.html#x23-1020005.1" label="Architecture"/>
-      <topic href="html/etrice-docse17.html#x24-1060005.2"
+      <topic href="html/etrice-docse17.html#x24-1140005.1" label="Architecture"/>
+      <topic href="html/etrice-docse18.html#x25-1180005.2"
              label="Component Overview"/>
    </topic>
 </toc>

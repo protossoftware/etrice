@@ -4,460 +4,391 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Finite State Machines</title> 
+<head><title>Component Overview</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-04 15:04:00" /> 
+<meta name="date" content="2013-07-19 08:12:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 606--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
+<!--l. 92--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse17.html" >prev</a>] [<a 
 href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse18.html">tail</a>] [<a 
-href="etrice-docch4.html#etrice-docse18.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">4.6   </span> <a 
- id="x24-970004.6"></a>Finite State Machines</h3>
-<!--l. 608--><p class="noindent" >
+href="etrice-docch5.html#etrice-docse18.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x25-1180005.2"></a>Component Overview</h3>
+<!--l. 94--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">4.6.1   </span> <a 
- id="x24-980004.6.1"></a>Description</h4>
-<!--l. 610--><p class="noindent" >Definition from <a 
-href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
-</p><!--l. 612--><p class="noindent" >
-     </p><div class="quote">
-     <!--l. 613--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a
-     state machine, is a mathematical model used to design computer programs and digital logic
-     circuits. It is conceived as an abstract machine that can be in one of a finite number of
-     states. The machine is in only one state at a time; the state it is in at any given time
-     is called the current state. It can change from one state to another when initiated by a
-     triggering event or condition, this is called a transition. A particular FSM is defined by a
-     list of the possible states it can transition to from each state, and the triggering condition
-     for each transition.
-     </p><!--l. 621--><p class="noindent" >In  ROOM  each  actor  class  can  implement  its  behavior  using  a  state  machine.  Events
-     occurring at the end ports of an actor will be forwarded to and processed by the state
-     machine. Events possibly trigger state transitions.</p></div>
-<!--l. 626--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">4.6.2   </span> <a 
- id="x24-990004.6.2"></a>Motivation</h4>
-<!--l. 628--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically during
-processing new events are produced which are sent to peer actors.
-</p><!--l. 631--><p class="noindent" >We distinguish flat and hierarchical state machines.
-</p><!--l. 633--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">4.6.3   </span> <a 
- id="x24-1000004.6.3"></a>Notation</h4>
-<!--l. 635--><p class="noindent" >We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
-                                                                                 
-                                                                                 
-</p><!--l. 637--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
+ id="x25-1190005.2.1"></a>Room Language Overview</h4>
+<!--l. 96--><p class="noindent" >We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that
+are worth to be pointed out.
+</p><!--l. 99--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x24-1010004.6.3"></a>Flat Finite State Machine</h5>
-<!--l. 639--><p class="noindent" >The simpler flat finite state machines are composed of the elements shown in table <a 
-href="#x24-1010016">4.6<!--tex4ht:ref: tab:flat_fsm_notation --></a>.
+ id="x25-1200005.2.1"></a>Model Tweaks</h5>
+<!--l. 101--><p class="noindent" >The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at some places.
+This is done in the <span 
+class="ec-lmsso-10">/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext </span>which is written in the
+legacy Xtend language.
+</p><!--l. 107--><p class="noindent" >The following parts of the model are changed or added: </p>
+     <ul class="itemize1">
+     <li class="itemize">the default
+                                                                                            
+                                                                                            
+     <div class="verbatim" id="verbatim-9">
+     multiplicity
+</div>
+     <!--l. 109--><p class="nopar" > of the <span 
+class="ec-lmtt-10">Port </span>is set to 1
+     </p></li>
+     <li class="itemize">the operation <span 
+class="ec-lmtt-10">isReplicated </span>is added to the <span 
+class="ec-lmtt-10">Port</span>
+     </li>
+     <li class="itemize">the default <span 
+class="ec-lmtt-10">size </span>of the <span 
+class="ec-lmtt-10">ActorRef </span>is set to 1
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getName </span>is add to the <span 
+class="ec-lmtt-10">State </span>class
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getName </span>is add to the <span 
+class="ec-lmtt-10">StateGraphItem </span>class
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getGeneralProtocol </span>is added to the <span 
+class="ec-lmtt-10">InterfaceItem</span></li></ul>
+<!--l. 117--><p class="noindent" >
 </p>
-<div class="table">
-                                                                                 
-                                                                                 
-<!--l. 642--><p class="noindent" ><a 
- id="x24-1010016"></a></p><hr class="float" /><div class="float" 
->
-                                                                                 
-                                                                                 
- <div class="caption" 
-><span class="id">Table&#x00A0;4.6: </span><span  
-class="content">Flat finite state machine notation</span></div><!--tex4ht:label?: x24-1010016 -->
-<div class="tabular"> <table id="TBL-12" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-12-1g"><col 
-id="TBL-12-1" /></colgroup><colgroup id="TBL-12-2g"><col 
-id="TBL-12-2" /></colgroup><colgroup id="TBL-12-3g"><col 
-id="TBL-12-3" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-1-1"  
-class="td11"> <!--l. 646--><p class="noindent" ><span 
-class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-1-2"  
-class="td11"> <span 
-class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-1-3"  
-class="td11"> <!--l. 646--><p class="noindent" ><span 
-class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-2-1"  
-class="td11"> <!--l. 648--><p class="noindent" >State                      </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-2-2"  
-class="td11">        <img 
-src="images/040-State.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-2-3"  
-class="td11"> <!--l. 649-->
- <div class="lstlisting" id="listing-25"><span class="label"><a 
- id="x24-101002r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SomeState</span>
- 
-</div>
-<!--l. 654--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-3-1"  
-class="td11"> <!--l. 655--><p class="noindent" >InitialPoint               </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-3-2"  
-class="td11">        <img 
-src="images/040-InitialPoint.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-3-3"  
-class="td11"> <!--l. 655--><p class="noindent" ><span 
-class="ec-lmsso-10">implicit</span>                                                    </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-4-1"  
-class="td11"> <!--l. 657--><p class="noindent" >TransitionPoint         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-4-2"  
-class="td11">        <img 
-src="images/040-TransitionPoint.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-4-3"  
-class="td11"> <!--l. 658-->
- <div class="lstlisting" id="listing-26"><span class="label"><a 
- id="x24-101003r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">TransitionPoint</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tp</span>
- 
-</div>
-<!--l. 663--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-5-1"  
-class="td11"> <!--l. 664--><p class="noindent" >ChoicePoint             </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-5-2"  
-class="td11">        <img 
-src="images/040-ChoicePoint.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-5-3"  
-class="td11"> <!--l. 665-->
- <div class="lstlisting" id="listing-27"><span class="label"><a 
- id="x24-101004r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ChoicePoint</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">cp</span>
-  
-</div>
-<!--l. 670--><p class="noindent" >                                                              </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-6-1"  
-class="td11"> <!--l. 671--><p class="noindent" >Initial Transition        </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-6-2"  
-class="td11">        <img 
-src="images/040-InitialTransition.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-6-3"  
-class="td11"> <!--l. 672-->
- <div class="lstlisting" id="listing-28"><span class="label"><a 
- id="x24-101005r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span>
- 
-</div>
-<!--l. 677--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-7-1"  
-class="td11"> <!--l. 678--><p class="noindent" >Triggered Transition   </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-7-2"  
-class="td11">        <img 
-src="images/040-TriggeredTransition.jpg" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-7-3"  
-class="td11"> <!--l. 679-->
- <div class="lstlisting" id="listing-29"><span class="label"><a 
- id="x24-101006r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DoingThis</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-101007r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-101008r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">doThis</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">fct</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-101009r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-101010r5"></a></span><span 
-class="ec-lmtt-9">}</span>
- 
-</div>
-<!--l. 688--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-12-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-8-1"  
-class="td11">                   </td></tr></table></div>
-                                                                                 
-                                                                                 
-</div><hr class="endfloat" />
-</div>
 <h5 class="subsubsectionHead"><a 
- id="x24-1020004.6.3"></a>Hierarchical Finite State Machine</h5>
-<!--l. 695--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling
-elements listed in table <a 
-href="#x24-1020017">4.7<!--tex4ht:ref: tab:hier_fsm_notation --></a> are added to the set listed above.
+ id="x25-1210005.2.1"></a>Imports by URI Using Namespaces</h5>
+<!--l. 119--><p class="noindent" >The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model
+workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in
+the Guice modules by binding </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">PlatformRelativeUriResolver </span>&#8211; this class tries to convert the import URI into a platform relative URI. It
+     also replaces environment variables written in $ with their respective values.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">ImportedNamespaceAwareLocalScopeProvider </span>&#8211;  this  is  a  standard  scope  provider  which  is  aware  of
+     namespaces
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">GlobalNonPlatformURIEditorOpener </span>&#8211; this editor opener tries to convert general URIs into platform URIs
+     because editors can only open platform URIs
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">ImportAwareHyperlinkHelper </span>&#8211; turns the URI part of an import into a navigatable hyper link</li></ul>
+<!--l. 132--><p class="noindent" >
 </p>
-<div class="table">
-                                                                                 
-                                                                                 
-<!--l. 699--><p class="noindent" ><a 
- id="x24-1020017"></a></p><hr class="float" /><div class="float" 
->
-                                                                                 
-                                                                                 
- <div class="caption" 
-><span class="id">Table&#x00A0;4.7: </span><span  
-class="content">Additional notation elements of hierarchical finite state machines</span></div><!--tex4ht:label?: x24-1020017 -->
-<div class="tabular"> <table id="TBL-13" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-13-1g"><col 
-id="TBL-13-1" /></colgroup><colgroup id="TBL-13-2g"><col 
-id="TBL-13-2" /></colgroup><colgroup id="TBL-13-3g"><col 
-id="TBL-13-3" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-13-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-1"  
-class="td11"> <!--l. 703--><p class="noindent" ><span 
-class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-2"  
-class="td11">                                  <span 
-class="ec-lmssbx-10">Graphical Notation                                                </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-3"  
-class="td11"> <!--l. 703--><p class="noindent" ><span 
-class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-13-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-1"  
-class="td11"> <!--l. 705--><p class="noindent" >State with sub state
-  machine                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-2"  
-class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-14" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-14-1g"><col 
-id="TBL-14-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-14-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-1-1"  
-class="td00">Parent State</td></tr><tr  
- style="vertical-align:baseline;" id="TBL-14-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-2-1"  
-class="td00"> <img 
-src="images/040-StateWithSubFSM.jpg" alt="PIC"  
- /></td></tr></table>                                                                                                            </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-3"  
-class="td11"> <div class="tabular"> <table id="TBL-15" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-15-1g"><col 
-id="TBL-15-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-15-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-15-1-1"  
-class="td11">Sub state machine                                </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-15-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-15-2-1"  
-class="td11"><!--l. 710-->    <!--l. 710--><p class="noindent" ><div class="lstlisting" id="listing-30"><span class="label"><a 
- id="x24-102002r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Running</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-102003r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">subgraph</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-102004r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Process</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-102005r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Process</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-102006r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x24-102007r6"></a></span><span 
-class="ec-lmtt-9">}</span>
-                                            </p> </div></td>
-</tr></table></div>
- <!--l. 722--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-13-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-1"  
-class="td11"> <!--l. 723--><p class="noindent" >Entry Point              </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
-class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-16" class="tabular" 
-cellspacing="0" cellpadding="0"  
-><colgroup id="TBL-16-1g"><col 
-id="TBL-16-1" /></colgroup><tr  
- style="vertical-align:baseline;" id="TBL-16-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-1-1"  
-class="td00">In sub state machine</td></tr><tr  
- style="vertical-align:baseline;" id="TBL-16-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-2-1"  
-class="td00"> <img 
-src="images/040-EntryPoint.jpg" alt="PIC"  
- /></td></tr></table>                                                                                                  </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-3"  
-class="td11"> <!--l. 726-->
- <div class="lstlisting" id="listing-31"><span class="label"><a 
- id="x24-102008r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">EntryPoint</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">reInit</span>
- 
+<h5 class="subsubsectionHead"><a 
+ id="x25-1220005.2.1"></a>Naming</h5>
+<!--l. 134--><p class="noindent" >Two classes provide object names used for link resolution and for labels. The <span 
+class="ec-lmtt-10">RoomNameProvider </span>provides frequently used
+name strings, some of them are hierarchical like State paths. The <span 
+class="ec-lmtt-10">RoomFragmentProvider </span>serves a more formal purpose
+since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by
+Xtext.
+                                                                                            
+                                                                                            
+</p><!--l. 140--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1230005.2.1"></a>Helpers</h5>
+<!--l. 142--><p class="noindent" >The <span 
+class="ec-lmtt-10">RoomHelpers </span>class provides a great deal of static methods that help retrieve frequently used information from the
+model. Among many, many others </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getAllEndPorts(ActorClass) </span>- returns a list of all end ports of an actor class including inherited ones
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getInheritedActionCode(Transition, ActorClass) </span>- get the inherited part of a transition&#8217;s action code
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getSignature(Operation) </span>- returns a string representing the operation signature suited for a label</li></ul>
+<!--l. 154--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1240005.2.1"></a>Validation</h5>
+<!--l. 156--><p class="noindent" >Validation is used from various places. Therefore all validation code is accumulated in the @ValidationUtil@ class. All methods
+are static and many of them return a Result object which contains information about the problem detected as well as object
+and feature as suited for most validation purposes.
+</p><!--l. 160--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
+ id="x25-1250005.2.2"></a>Config Language Overview</h4>
+<!--l. 162--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1260005.2.2"></a>Model Tweaks</h5>
+<!--l. 164--><p class="noindent" >A couple of operations are added to the ConfigModel </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActorClassConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActorInstanceConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getProtocolClassConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getSubSystemConfigs</span></li></ul>
+<!--l. 172--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1270005.2.2"></a>Imports by URI Using Namespaces</h5>
+<!--l. 174--><p class="noindent" >Imports are treated like in Room language, section <span 
+class="ec-lmsso-10">Imports by URI Using Namespaces</span>.
+                                                                                            
+                                                                                            
+</p><!--l. 176--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1280005.2.2"></a>Util</h5>
+<!--l. 178--><p class="noindent" >A set of static utility methods can be found in the <span 
+class="ec-lmtt-10">ConfigUtil </span>class.
+</p><!--l. 180--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">5.2.3   </span> <a 
+ id="x25-1290005.2.3"></a>Aggregation Layer Overview</h4>
+<!--l. 182--><p class="noindent" >The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information
+which is implicitly contained in the Room model but not simple to retrieve. Examples of this are the state machine with
+inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of
+an end port (following bindings through relay ports).
+</p><!--l. 188--><p class="noindent" >The Generator Model is created from a list of Room models by a call of the
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-10">
+createGeneratorModel(List&#x003C;RoomModel&#x003E;,&#x00A0;boolean)
 </div>
-<!--l. 730--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-13-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-1"  
-class="td11"> <!--l. 731--><p class="noindent" >Exit Point                </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
-class="td11">                                        <img 
-src="images/040-ExitPoint.jpg" alt="PIC"  
- />                                                               </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-3"  
-class="td11"> <!--l. 733-->
- <div class="lstlisting" id="listing-32"><span class="label"><a 
- id="x24-102009r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ExitPoint</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tp0</span>
- 
-</div>
-<!--l. 736--><p class="noindent" >                                           </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-13-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-5-1"  
-class="td11">                   </td></tr></table>
-</div>
-                                                                                 
-                                                                                 
-</div><hr class="endfloat" />
-</div>
-<h4 class="subsectionHead"><span class="titlemark">4.6.4   </span> <a 
- id="x24-1030004.6.4"></a>Examples</h4>
-<hr class="figure" /><div class="figure" 
+<!--l. 190--><p class="nopar" >
+</p><!--l. 192--><p class="noindent" >method of the <span 
+class="ec-lmtt-10">GeneratorModelBuilder </span>class.
+</p><!--l. 194--><p class="noindent" >The <span 
+class="ec-lmtt-10">Root </span>object of the resulting Generator Model provides chiefly two things: </p>
+     <ul class="itemize1">
+     <li class="itemize">a tree of instances starting at each <span 
+class="ec-lmtt-10">SubSystem </span>with representations of each <span 
+class="ec-lmtt-10">ActorInstance </span>and <span 
+class="ec-lmtt-10">PortInstance</span>
+     </li>
+     <li class="itemize">for each <span 
+class="ec-lmtt-10">ActorClass </span>a corresponding <span 
+class="ec-lmtt-10">ExpandedActorClass </span>with an explicit state machine containing all
+     inherited state graph items</li></ul>
+<!--l. 202--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1300005.2.3"></a>The Instance Model</h5>
+<!--l. 204--><p class="noindent" >The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to
+get a list of all peer port instances for each port instance without having to bother about port and actor
+replication.
+</p><!--l. 208--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1310005.2.3"></a>The Expanded Actor Class</h5>
+<!--l. 210--><p class="noindent" >The expanded actor class contains, as already mentioned, the complete state machine of the actor class. This considerably
+simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of
+an actor. I.e. no target language inheritance is used to implement the state machine inheritance. Furthermore the
+<span 
+class="ec-lmtt-10">ExpandedActorClass </span>gives access to </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getIncomingTransitions(StateGraphNode) </span>&#8211; the set of incoming transition of a <span 
+class="ec-lmtt-10">StateGraphNode </span>(<span 
+class="ec-lmtt-10">State</span>,
+     <span 
+class="ec-lmtt-10">ChoicePoint </span>or <span 
+class="ec-lmtt-10">TransitionPoint</span>)
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getOutgoingTransitions(StateGraphNode) </span>&#8211; the set of outgoing transition of a <span 
+class="ec-lmtt-10">StateGraphNode</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActiveTriggers(State) </span>&#8211; the triggers that are active in this <span 
+class="ec-lmtt-10">State </span>in the order they are evaluated</li></ul>
+<!--l. 224--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1320005.2.3"></a>Transition Chains</h5>
+<!--l. 226--><p class="noindent" >By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at
+a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions
+until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in
+choice points). A <span 
+class="ec-lmtt-10">TransitionChain </span>of a transition is retrieved by a call of <span 
+class="ec-lmtt-10">getChain(Transition) </span>of the
+<span 
+class="ec-lmtt-10">ExpandedActorClass</span>. The <span 
+class="ec-lmtt-10">TransitionChain </span>accepts an <span 
+class="ec-lmtt-10">ITransitionChainVisitor </span>which is called along the chain to
+generate the action codes of involved transitions and the conditional statements arising from the involved choice
+points.
+                                                                                            
+                                                                                            
+</p><!--l. 236--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">5.2.4   </span> <a 
+ id="x25-1330005.2.4"></a>Generator Overview</h4>
+<!--l. 238--><p class="noindent" >There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific
+generators
+</p><!--l. 241--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1340005.2.4"></a>Base Classes and Interfaces</h5>
+<!--l. 243--><p class="noindent" >We just want to mention the most important classes and interfaces.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">
+     <div class="flushleft" 
 >
-                                                                                 
-                                                                                 
-<a 
- id="x24-1030011"></a>
-                                                                                 
-                                                                                 
-<!--l. 743--><p class="noindent" ><img 
-src="images/040-FlatFSM.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;4.1: </span><span  
-class="content">Example of a flat finite state machine</span></div><!--tex4ht:label?: x24-1030011 -->
-                                                                                 
-                                                                                 
-</div><hr class="endfigure" />
-<hr class="figure" /><div class="figure" 
+<!--l. 246--><p class="noindent" >
+<span 
+class="ec-lmtt-10">ITranslationProvider </span>&#8212; this interface is used by the <span 
+class="ec-lmtt-10">DetailCodeTranslator </span>for the language dependent
+translation of e.g. port.message() notation in detail code</p></div>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">AbstractGenerator </span>&#8212; concrete language generators should derive from this base class
+     </li>
+     <li class="itemize">
+     <div class="flushleft" 
 >
-                                                                                 
-                                                                                 
-<a 
- id="x24-1030022"></a>
-                                                                                 
-                                                                                 
-<!--l. 748--><p class="noindent" ><img 
-src="images/040-HierarchicalFSMTop.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;4.2: </span><span  
-class="content">Example of a hierarchical finite state machine &#8211; top level</span></div><!--tex4ht:label?: x24-1030022 -->
-                                                                                 
-                                                                                 
-</div><hr class="endfigure" />
-<hr class="figure" /><div class="figure" 
+<!--l. 250--><p class="noindent" >
+<span 
+class="ec-lmtt-10">DefaultTranslationProvider </span>&#8212; a stub implementation of <span 
+class="ec-lmtt-10">ITranslationProvider </span>from which clients may
+derive</p></div>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">Indexed </span>&#8212; provides an indexed iterable of a given iterable
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">GeneratorBaseModule </span>&#8212; a Google Guice module that binds a couple of basic services. Concrete language generators
+     should use a module that derives from this</li></ul>
+<!--l. 257--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1350005.2.4"></a>Generic Generator Parts</h5>
+<!--l. 259--><p class="noindent" >The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level
+generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by
+means of an <span 
+class="ec-lmtt-10">ILanguageExtension</span>. This extension and other parts of the generator be configured using Google Guice
+dependency injection.
+</p>
+<!--l. 264--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x25-1360005.2.4"></a><span 
+class="ec-lmssbx-10">GenericActorClassGenerator</span></span>
+The <span 
+class="ec-lmtt-10">GenericActorClassGenerator </span>generates constants for the interface items of a actor. Those constants are used by the
+generated state machine.
+                                                                                            
+                                                                                            
+</p>
+<!--l. 269--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x25-1370005.2.4"></a><span 
+class="ec-lmssbx-10">GenericProtocolClassGenerator</span></span>
+The <span 
+class="ec-lmtt-10">GenericProtocolClassGenerator </span>generates message ID constants for a protocol.
+</p>
+<!--l. 273--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x25-1380005.2.4"></a><span 
+class="ec-lmssbx-10">GenericStateMachineGenerator</span></span>
+</p>
+<div class="flushleft" 
 >
-                                                                                 
-                                                                                 
-<a 
- id="x24-1030033"></a>
-                                                                                 
-                                                                                 
-<!--l. 753--><p class="noindent" ><img 
-src="images/040-HierarchicalFSMInitializing.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;4.3: </span><span  
-class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
-class="ec-lmsso-10">Initializing</span></span></div><!--tex4ht:label?: x24-1030033 -->
-                                                                                 
-                                                                                 
-</div><hr class="endfigure" />
-<hr class="figure" /><div class="figure" 
->
-                                                                                 
-                                                                                 
-<a 
- id="x24-1030044"></a>
-                                                                                 
-                                                                                 
-<!--l. 758--><p class="noindent" ><img 
-src="images/040-HierarchicalFSMRunning.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;4.4: </span><span  
-class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
-class="ec-lmsso-10">Running</span></span></div><!--tex4ht:label?: x24-1030044 -->
-                                                                                 
-                                                                                 
-</div><hr class="endfigure" />
-                                                                                 
-                                                                                 
-<!--l. 71--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
+<!--l. 275--><p class="noindent" >
+The <span 
+class="ec-lmtt-10">GenericStateMachineGenerator </span>generates the complete state machine implementation. The skeleton of the
+generated code is</p></div>
+     <ul class="itemize1">
+     <li class="itemize">definition state ID constants
+     </li>
+     <li class="itemize">definition of transition chain constants
+     </li>
+     <li class="itemize">definition of trigger constants
+     </li>
+     <li class="itemize">entry, exit and action code methods
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">exitTo </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">executeTransitionChain </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">enterHistory </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">executeInitTransition </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">receiveEvent </span>method</li></ul>
+<!--l. 290--><p class="noindent" >The state machine works as follows. The main entry method is the <br 
+class="newline" /><span 
+class="ec-lmtt-10">receiveEvent </span>method. This is the case for both, data driven (polled) and event driven state machines. Then a number of
+nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a
+trigger fires then the <span 
+class="ec-lmtt-10">exitTo </span>method is called to execute all exit codes involved. Then the transition chain
+action codes are executed and the choice point conditions are evaluated in the <span 
+class="ec-lmtt-10">executeTransitionChain</span>
+method. Finally the history of the state where the chain ends is entered and all entry codes are executed by
+<span 
+class="ec-lmtt-10">enterHistory</span>.
+</p><!--l. 298--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1390005.2.4"></a>The Java Generator</h5>
+<!--l. 300--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
+class="ec-lmtt-10">JavaTranslationProvider </span>is very simple and only
+handles the case of sending a message from a distinct replicated port: <span 
+class="ec-lmtt-10">replPort[2].message()</span>. Other cases are handled by
+the base class by returning the original text.
+                                                                                            
+                                                                                            
+</p><!--l. 304--><p class="noindent" >The <span 
+class="ec-lmtt-10">DataClassGen </span>uses Java inheritance for the generated data classes. Otherwise it is pretty much straight
+forward.
+</p><!--l. 307--><p class="noindent" >The <span 
+class="ec-lmtt-10">ProtocolClassGen </span>generates a class for the protocol with nested static classes for regular and conjugated ports and
+similar for replicated ports.
+</p><!--l. 310--><p class="noindent" >The <span 
+class="ec-lmtt-10">ActorClassGen </span>uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code
+methods are inherited. Not inherited is the state machine implementation.
+</p><!--l. 313--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1400005.2.4"></a>The ANSI-C Generator</h5>
+<!--l. 315--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them
+and receive a pointer to those data (called <span 
+class="ec-lmtt-10">self </span>in analogy to the implicit C++ <span 
+class="ec-lmtt-10">this </span>pointer). No dynamic memory
+allocation is employed. All actor instances are statically initialized. One of the design goals for the generated C code was an
+optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end
+micro controllers.
+</p><!--l. 322--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x25-1410005.2.4"></a>The Documentation Generator</h5>
+<!--l. 324--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF and many other
+formats.
+</p>
+<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse17.html" >prev</a>] [<a 
 href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
 href="etrice-docse18.html" >front</a>] [<a 
-href="etrice-docch4.html#etrice-docse18.html" >up</a>] </p></div>
-<!--l. 71--><p class="noindent" ><a 
- id="tailetrice-docse18.html"></a> </p> 
+href="etrice-docch5.html#etrice-docse18.html" >up</a>] </p></div>
+<!--l. 85--><p class="noindent" ><a 
+ id="tailetrice-docse18.html"></a>  </p> 
 </body></html> 

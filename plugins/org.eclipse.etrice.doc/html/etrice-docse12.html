@@ -4,497 +4,408 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Layering</title> 
+<head><title>DataClass</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-12 01:23:00" /> 
+<meta name="date" content="2013-07-19 08:12:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 502--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 450--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
 href="etrice-docse11.html" >prev</a>] [<a 
 href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse12.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse12.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.5   </span> <a 
- id="x17-720003.5"></a>Layering</h3>
-<!--l. 504--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3.4   </span> <a 
+ id="x17-810003.4"></a>DataClass</h3>
+<!--l. 452--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.5.1   </span> <a 
- id="x17-730003.5.1"></a>Description</h4>
-<!--l. 506--><p class="noindent" >In addition to the actor containment hierarchies, layering provides another method to hierarchically structure a
-software system. Layering and actor hierarchies with port to port connections can be mixed on every level of
-granularity.
-</p><!--l. 510--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x17-73002x1">an actor class can define a Service Provision Point (<span id="textcolor49"><span 
-class="ec-lmssbx-10">SPPRef</span></span>) to publish a specific service, defined by a protocol
-     class
-     </li>
-     <li 
-  class="enumerate" id="x17-73004x2">an actor class can define a Service Access Point (<span id="textcolor50"><span 
-class="ec-lmssbx-10">SAPRef</span></span>) if it needs a service, defined by a protocol class
-     </li>
-     <li 
-  class="enumerate" id="x17-73006x3">for a given actor hierarchy, a <span id="textcolor51"><span 
-class="ec-lmssbx-10">LayerConnection</span></span> defines which SAP will be satisfied by (connected to) which
-     SPP</li></ol>
-<!--l. 519--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.4.1   </span> <a 
+ id="x17-820003.4.1"></a>Description</h4>
+<!--l. 454--><p class="noindent" >The <span id="textcolor47"><span 
+class="ec-lmssbx-10">DataClass</span></span> enables the modeling of hierarchical complex data types and operations on them. The data class is the
+equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via
+message between actors (defined as message data in a <span id="textcolor48"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span>).
+</p><!--l. 458--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.5.2   </span> <a 
- id="x17-740003.5.2"></a>Notation</h4>
-<!--l. 521--><p class="noindent" >For the graphical and textual notation refer to table <a 
-href="#x17-740015">3.5<!--tex4ht:ref: tab:layering_notation --></a>
+<h4 class="subsectionHead"><span class="titlemark">3.4.2   </span> <a 
+ id="x17-830003.4.2"></a>Notation</h4>
+<!--l. 460--><p class="noindent" >Example: DataClass using PrimitiveTypes
 </p>
-<div class="table">
-                                                                                            
-                                                                                            
-<!--l. 524--><p class="noindent" ><a 
- id="x17-740015"></a></p><hr class="float" /><div class="float" 
->
-                                                                                            
-                                                                                            
- <div class="caption" 
-><span class="id">Table&#x00A0;3.5: </span><span  
-class="content">Layering Notation</span></div><!--tex4ht:label?: x17-740015 -->
-<div class="tabular"> <table id="TBL-11" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-11-1g"><col 
-id="TBL-11-1" /></colgroup><colgroup id="TBL-11-2g"><col 
-id="TBL-11-2" /></colgroup><colgroup id="TBL-11-3g"><col 
-id="TBL-11-3" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-1-1"  
-class="td11"> <!--l. 528--><p class="noindent" ><span 
-class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-1-2"  
-class="td11"> <span 
-class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-1-3"  
-class="td11"> <!--l. 528--><p class="noindent" ><span 
-class="ec-lmssbx-10">Textual Notation</span>                                          </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-2-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 530--><p class="noindent" >
-  The layer
-  connections in this
-  model define which
-  services are provided
-  by the <span 
-class="ec-lmsso-10">ServiceLayer</span>
-  (<span 
-class="ec-lmsso-10">digitalIO </span>and
-  <span 
-class="ec-lmsso-10">timer</span>)</p></div>
-  <!--l. 533--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-2-2"  
-class="td11">        <img 
-src="images/040-LayeringModel.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-2-3"  
-class="td11"> <!--l. 537-->
- <div class="lstlisting" id="listing-29"><span class="label"><a 
- id="x17-74002r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+<!--l. 462-->
+<div class="lstlisting" id="listing-34"><span class="label"><a 
+ id="x17-83001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">DataClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Mode1</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74003r2"></a></span><span 
+ id="x17-83002r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83003r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">float32</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">another</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83004r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83005r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">no</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">arguments</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">no</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83006r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">operation1</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">void</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74004r3"></a></span><span 
+ id="x17-83007r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">UserCodeLine1</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83008r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Services</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83009r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">argument</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">no</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83010r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">operation2</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Param1</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ServiceLayer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74005r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Application</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ApplicationLayer</span><span 
+class="ec-lmssbx-10x-x-90">void</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74006r5"></a></span><span 
+ id="x17-83011r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">UserCodeLine1</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83012r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83013r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">argument</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83014r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">operation3</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Param1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">float64</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83015r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">UserCodeLine1</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83016r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83017r17"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 483--><p class="noindent" >Example: DataClass using other DataClasses:
+</p>
+<!--l. 485-->
+<div class="lstlisting" id="listing-35"><span class="label"><a 
+ id="x17-83018r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">DataClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83019r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83020r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83021r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83022r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">arguments</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">by</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83023r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">operation1</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Param1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Param2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83024r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">UserCodeLine1</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83025r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83026r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">//</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">arguments</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">value</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">by</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">reference</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">except</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">for</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">primitive</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">types</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x17-83027r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">operation2</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Param1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int32</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Param2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ref</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DataClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ref</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Application</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Services</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timer</span><span 
+class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74007r6"></a></span><span 
+ id="x17-83028r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ref</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Application</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Services</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">digitalIO</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">UserCodeLine1</span><span 
+class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74008r7"></a></span><span 
+ id="x17-83029r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74009r8"></a></span><span 
+ id="x17-83030r13"></a></span><span 
 class="ec-lmtt-9">}</span>
- 
-</div>
-<!--l. 548--><p class="noindent" >                                                 </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-3-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 549--><p class="noindent" >
-  The
-  implementation of
-  the services (SPPs)
-  can be delegated to
-  sub actors. In this
-  case the actor
-  <span 
-class="ec-lmsso-10">ServiceLayer </span>relays
-  (delegates) the
-  implementation
-  services <span 
-class="ec-lmsso-10">digitalIO</span>
-  and <span 
-class="ec-lmsso-10">timer </span>to sub
-  actors</p></div>
-  <!--l. 553--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-3-2"  
-class="td11">        <img 
-src="images/040-LayeringServiceLayer.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-3-3"  
-class="td11"> <!--l. 556-->
- <div class="lstlisting" id="listing-30"><span class="label"><a 
- id="x17-74010r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ServiceLayer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74011r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74012r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SPP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timer</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TimerProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74013r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SPP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">digitalIO</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DigitalIOProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74014r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74015r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74016r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Timer</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TimerService</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74017r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DigIO</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DifitalIOService</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74018r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">relay_sap</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Timer</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74019r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">relay_sap</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">digitalIO</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DigIO</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">digitalIO</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74020r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74021r12"></a></span><span 
-class="ec-lmtt-9">}</span>
- 
-</div>
-<!--l. 571--><p class="noindent" >                                                 </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-4-1"  
-class="td11">
- <div class="flushleft" 
->
- <!--l. 572--><p class="noindent" >
-  Every Actor inside
-  the
-  <span 
-class="ec-lmsso-10">ApplicationLayer</span>
-  that contains an
-  SAP with the same
-  protocol as <span 
-class="ec-lmsso-10">timer </span>or
-  <span 
-class="ec-lmsso-10">digitalIO </span>will be
-  connected to the
-  specified SPP</p></div>
-  <!--l. 575--><p class="noindent" >                            </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-11-4-2"  
-class="td11">        <img 
-src="images/040-LayeringApplicationLayer.png" alt="PIC"  
- />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-4-3"  
-class="td11"> <!--l. 578-->
- <div class="lstlisting" id="listing-31"><span class="label"><a 
- id="x17-74022r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ApplicationLayer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74023r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74024r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">function1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">A</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74025r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">function2</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">B</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74026r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">function3</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74027r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">function4</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">D</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74028r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74029r8"></a></span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74030r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74031r10"></a></span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">A</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74032r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74033r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timerSAP</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TimerProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74034r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74035r14"></a></span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74036r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74037r16"></a></span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">B</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74038r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74039r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timerSAP</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TimerProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74040r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">digitalSAP</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DigitalIOProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74041r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-74042r21"></a></span><span 
-class="ec-lmtt-9">}</span>
- 
-</div>
-<!--l. 602--><p class="noindent" >                                                 </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-11-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-11-5-1"  
-class="td11">                   </td></tr></table></div>
-                                                                                            
-                                                                                            
-</div><hr class="endfloat" />
 </div>
                                                                                             
                                                                                             
-<!--l. 606--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 502--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
 href="etrice-docse11.html" >prev</a>] [<a 
 href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="etrice-docse12.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse12.html" >up</a>] </p></div>
-<!--l. 606--><p class="noindent" ><a 
+<!--l. 502--><p class="noindent" ><a 
  id="tailetrice-docse12.html"></a> </p> 
 </body></html> 
