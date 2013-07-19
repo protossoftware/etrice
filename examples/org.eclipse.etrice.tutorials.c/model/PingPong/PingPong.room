@@ -1,14 +1,16 @@
 RoomModel PingPong_Model {
 
-	LogicalSystem LogSys1 {
-		SubSystemRef subSysRef1: SubSysClass1
-	}
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
 
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1:SubSysClass1 
+	}
 	SubSystemClass SubSysClass1 {
-		ActorRef actorRef1: PingPongTop
+		ActorRef actorRef1:PingPongTop
+		ActorRef timingService: ATimingService
+		LayerConnection ref actorRef1 satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}
-
 	ActorClass PingPongTop {
 		Structure {
 			ActorRef sender: Sender
@@ -17,10 +19,9 @@ RoomModel PingPong_Model {
 		}
 		Behavior { }
 	}
-
 	ActorClass Sender {
 		Interface {
-			conjugated Port receiver: PPingPong
+			conjugated Port receiver: PingPongProtocol
 		}
 		Structure {
 			external Port receiver
@@ -42,39 +43,49 @@ RoomModel PingPong_Model {
 			}
 		}
 	}
-
 	ActorClass Receiver {
 		Interface {
-			Port sender: PPingPong
+			Port sender: PingPongProtocol
 		}
 		Structure {
 			external Port sender
+			SAP timing : PTimer
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> WaingForPing { }
-				Transition tr0: WaingForPing -> ReceivedPing {
+				Transition init: initial -> WaitingForPing { }
+				Transition tr0: WaitingForPing -> WaitingForAWhile {
 					triggers {
 						<ping: sender>
 					}
 				}
-				State WaingForPing
-				State ReceivedPing {
+				Transition tr1: WaitingForAWhile -> SentPong {
+					triggers {
+						<timeout: timing>
+					}
+				}
+				State WaitingForPing
+				State SentPong {
 					entry {
 						"sender.pong();"
+					}
+				}
+				State WaitingForAWhile {
+					entry {
+						"timing.startTimeout(1000);"
 					}
 				}
 			}
 		}
 	}
-
-	ProtocolClass PPingPong {
+	
+	ProtocolClass PingPongProtocol {
 		incoming {
 			Message ping()
 		}
 		outgoing {
 			Message pong()
 		}
-	}
-
+	} 
+	
 }
