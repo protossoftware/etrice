@@ -9,7 +9,6 @@
 package org.eclipse.etrice.runtime.java.messaging;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IMessageService.ExecMode;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 
@@ -21,12 +20,12 @@ public class MessageServiceTest extends TestCase {
 	public void testRun() {
 		
 		// testing basic functionality of MessageService and Dispatcher
-		MessageService msg_service1 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService1", Thread.NORM_PRIORITY);
-		MessageService msg_service2 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService2", Thread.NORM_PRIORITY);
-		MessageService msg_service3 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService3", Thread.NORM_PRIORITY);
-		MessageService msg_service4 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService4", Thread.NORM_PRIORITY);
-		MessageService msg_service5 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService5", Thread.NORM_PRIORITY);
-		MessageService msg_service6 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService6", Thread.NORM_PRIORITY);
+		MessageService msg_service1 = new MessageService(null, 0, 0, "MessageService1", Thread.NORM_PRIORITY);
+		MessageService msg_service2 = new MessageService(null, 0, 0, "MessageService2", Thread.NORM_PRIORITY);
+		MessageService msg_service3 = new MessageService(null, 0, 0, "MessageService3", Thread.NORM_PRIORITY);
+		MessageService msg_service4 = new MessageService(null, 0, 0, "MessageService4", Thread.NORM_PRIORITY);
+		MessageService msg_service5 = new MessageService(null, 0, 0, "MessageService5", Thread.NORM_PRIORITY);
+		MessageService msg_service6 = new MessageService(null, 0, 0, "MessageService6", Thread.NORM_PRIORITY);
 
 		DummyMessageReceiver receiver1 = new DummyMessageReceiver(new Address(0,0,1)); 
 		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,2)); 
@@ -87,7 +86,7 @@ public class MessageServiceTest extends TestCase {
 		// current thread sends, MessageService has its own thread to dispatch the received messages
 		// implicit test of race conditions -> test breaks if you take out the synchronized keywords from the MessageService
 		
-		MessageService msg_service = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService1");
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
 
 		int max=3000;
 		int max_iter=10;
@@ -137,14 +136,14 @@ public class MessageServiceTest extends TestCase {
 
 	public void testMessageService() {
 		Address addr = new Address(0,0,0);
-		MessageService msg_service = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService1");
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
 		assertEquals(addr, msg_service.getAddress());
 		assertEquals(msg_service.getMessageDispatcher().getAddress().objectID, msg_service.getAddress().objectID+1);
 	}
 
 	public void testInstanceId() {
 		// setInstanceId via Constructor
-		MessageService msg_service = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService1");
+		MessageService msg_service = new MessageService(null, 0, 0, "MessageService1");
 		assertEquals("/MessageService_MessageService1", msg_service.getInstancePath());
 		assertEquals("/MessageService_MessageService1/Queue", msg_service.getMessageQueue().getInstancePath());
 		assertEquals("/MessageService_MessageService1/Dispatcher", msg_service.getMessageDispatcher().getInstancePath());

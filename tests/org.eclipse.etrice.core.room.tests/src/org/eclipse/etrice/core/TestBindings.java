@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;

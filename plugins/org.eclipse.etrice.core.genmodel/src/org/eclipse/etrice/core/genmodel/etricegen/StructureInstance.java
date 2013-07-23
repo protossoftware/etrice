@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getPorts <em>Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getSaps <em>Saps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getSpps <em>Spps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getServices <em>Services</em>}</li>
@@ -42,10 +43,10 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface StructureInstance extends AbstractInstance {
+public interface StructureInstance extends InstanceBase {
 	/**
 	 * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance}.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * It contains all child instances which are implicitly created by {@link ActorRef}s.
@@ -56,7 +57,19 @@ public interface StructureInstance extends AbstractInstance {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AbstractInstance> getInstances();
+	EList<ActorInstance> getInstances();
+
+	/**
+	 * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ports</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance_Ports()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PortInstance> getPorts();
 
 	/**
 	 * Returns the value of the '<em><b>Saps</b></em>' containment reference list.
@@ -148,13 +161,5 @@ public interface StructureInstance extends AbstractInstance {
 	 * @generated
 	 */
 	EList<InterfaceItemInstance> getOrderedIfItemInstances();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EList<ActorInstance> getActorInstances();
 
 } // StructureInstance

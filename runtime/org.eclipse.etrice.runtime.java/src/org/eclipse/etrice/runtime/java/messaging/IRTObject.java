@@ -36,7 +36,4 @@ public interface IRTObject {
 	String getInstancePath(char delim);
 	String getInstancePath();
 	String getInstancePathName();
-	
-	int getThreadForPath(String path);
-	List<String> getPeersForPath(String path);
 }

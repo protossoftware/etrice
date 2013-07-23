@@ -14,9 +14,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -49,81 +46,6 @@ public class JavaExtensions implements ILanguageExtension {
   public String getJavaFileName(final RoomClass rc) {
     String _name = rc.getName();
     String _plus = (_name + ".java");
-    return _plus;
-  }
-  
-  public String getJavaFactoryName(final ActorClass rc) {
-    String _name = rc.getName();
-    String _plus = (_name + "Factory");
-    return _plus;
-  }
-  
-  public String getJavaFactoryFileName(final ActorClass rc) {
-    String _javaFactoryName = this.getJavaFactoryName(rc);
-    String _plus = (_javaFactoryName + ".java");
-    return _plus;
-  }
-  
-  public String getJavaScalarInterfaceName(final ActorClass rc) {
-    String _name = rc.getName();
-    String _plus = (_name + "Interface");
-    return _plus;
-  }
-  
-  public String getJavaScalarInterfaceFileName(final ActorClass rc) {
-    String _javaScalarInterfaceName = this.getJavaScalarInterfaceName(rc);
-    String _plus = (_javaScalarInterfaceName + ".java");
-    return _plus;
-  }
-  
-  public String getJavaReplicatedInterfaceName(final ActorClass rc) {
-    String _name = rc.getName();
-    String _plus = (_name + "ReplicatedInterface");
-    return _plus;
-  }
-  
-  public String getJavaReplicatedInterfaceFileName(final ActorClass rc) {
-    String _javaReplicatedInterfaceName = this.getJavaReplicatedInterfaceName(rc);
-    String _plus = (_javaReplicatedInterfaceName + ".java");
-    return _plus;
-  }
-  
-  public String getJavaInterfaceName(final ActorClass ac, final boolean replicated) {
-    String _xifexpression = null;
-    if (replicated) {
-      String _javaReplicatedInterfaceName = this.getJavaReplicatedInterfaceName(ac);
-      _xifexpression = _javaReplicatedInterfaceName;
-    } else {
-      String _javaScalarInterfaceName = this.getJavaScalarInterfaceName(ac);
-      _xifexpression = _javaScalarInterfaceName;
-    }
-    return _xifexpression;
-  }
-  
-  public String getJavaInterfaceFileName(final ActorClass ac, final boolean replicated) {
-    String _xifexpression = null;
-    if (replicated) {
-      String _javaReplicatedInterfaceFileName = this.getJavaReplicatedInterfaceFileName(ac);
-      _xifexpression = _javaReplicatedInterfaceFileName;
-    } else {
-      String _javaScalarInterfaceFileName = this.getJavaScalarInterfaceFileName(ac);
-      _xifexpression = _javaScalarInterfaceFileName;
-    }
-    return _xifexpression;
-  }
-  
-  public String getJavaClassName(final NodeRef nr, final SubSystemInstance ssi) {
-    String _name = nr.getName();
-    String _plus = ("Node_" + _name);
-    String _plus_1 = (_plus + "_");
-    String _name_1 = ssi.getName();
-    String _plus_2 = (_plus_1 + _name_1);
-    return _plus_2;
-  }
-  
-  public String getJavaFileName(final NodeRef nr, final SubSystemInstance ssi) {
-    String _javaClassName = this.getJavaClassName(nr, ssi);
-    String _plus = (_javaClassName + ".java");
     return _plus;
   }
   

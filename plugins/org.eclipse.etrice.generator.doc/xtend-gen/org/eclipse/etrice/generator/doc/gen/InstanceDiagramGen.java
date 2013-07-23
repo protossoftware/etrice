@@ -20,9 +20,7 @@ import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
@@ -150,8 +148,8 @@ public class InstanceDiagramGen implements IRoomGenerator {
         _builder.append(";  ");
         _builder.newLineIfNotEmpty();
         {
-          EList<AbstractInstance> _instances_1 = ssi.getInstances();
-          for(final AbstractInstance ai : _instances_1) {
+          EList<ActorInstance> _instances_1 = ssi.getInstances();
+          for(final ActorInstance ai : _instances_1) {
             _builder.append("\t");
             String _instance = this.instance(ai);
             _builder.append(_instance, "	");
@@ -165,7 +163,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public String instance(final AbstractInstance ai) {
+  public String instance(final ActorInstance ai) {
     String _xblockexpression = null;
     {
       EObject _eContainer = ai.eContainer();
@@ -190,32 +188,17 @@ public class InstanceDiagramGen implements IRoomGenerator {
         _xifexpression_1 = _name_1;
       }
       final String nname = _xifexpression_1;
-      String _xifexpression_2 = null;
-      if ((ai instanceof ActorInstance)) {
-        ActorClass _actorClass = ((ActorInstance) ai).getActorClass();
-        String _name_2 = _actorClass.getName();
-        _xifexpression_2 = _name_2;
-      } else {
-        String _xifexpression_3 = null;
-        if ((ai instanceof ActorInterfaceInstance)) {
-          ActorClass _actorClass_1 = ((ActorInterfaceInstance) ai).getActorClass();
-          String _name_3 = _actorClass_1.getName();
-          _xifexpression_3 = _name_3;
-        } else {
-          _xifexpression_3 = "?";
-        }
-        _xifexpression_2 = _xifexpression_3;
-      }
-      final String clsname = _xifexpression_2;
       StringConcatenation _builder = new StringConcatenation();
       String _path = ai.getPath();
       String _pathName = this.roomExt.getPathName(_path);
       _builder.append(_pathName, "");
       _builder.append(" [label=\"");
-      String _name_4 = ai.getName();
-      _builder.append(_name_4, "");
+      String _name_2 = ai.getName();
+      _builder.append(_name_2, "");
       _builder.append("\\n(");
-      _builder.append(clsname, "");
+      ActorClass _actorClass = ai.getActorClass();
+      String _name_3 = _actorClass.getName();
+      _builder.append(_name_3, "");
       _builder.append(")\\n@");
       _builder.append(nname, "");
       _builder.append(":");
@@ -229,18 +212,14 @@ public class InstanceDiagramGen implements IRoomGenerator {
       String _path_2 = ai.getPath();
       String _pathName_2 = this.roomExt.getPathName(_path_2);
       _builder.append(_pathName_2, "");
-      _builder.append(";");
+      _builder.append(";  ");
       _builder.newLineIfNotEmpty();
       {
-        if ((ai instanceof StructureInstance)) {
-          {
-            EList<AbstractInstance> _instances = ((StructureInstance) ai).getInstances();
-            for(final AbstractInstance sub_ai : _instances) {
-              String _instance = this.instance(sub_ai);
-              _builder.append(_instance, "");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+        EList<ActorInstance> _instances = ai.getInstances();
+        for(final ActorInstance sub_ai : _instances) {
+          String _instance = this.instance(sub_ai);
+          _builder.append(_instance, "");
+          _builder.newLineIfNotEmpty();
         }
       }
       _xblockexpression = (_builder.toString());

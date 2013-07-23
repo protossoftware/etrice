@@ -24,15 +24,15 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
 import org.eclipse.etrice.ui.common.support.RemoveBendpointsFeature;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
-import org.eclipse.etrice.ui.structure.support.DiagramUpdateFeature;
+import org.eclipse.etrice.ui.structure.support.DecorationProvider;
 import org.eclipse.etrice.ui.structure.support.LayerConnectionSupport;
 import org.eclipse.etrice.ui.structure.support.PortSupport;
 import org.eclipse.etrice.ui.structure.support.SPPSupport;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
-import org.eclipse.etrice.ui.structure.support.provider.DecorationProvider;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
@@ -266,7 +266,7 @@ public class ProviderDispatcher {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			if (context.getPictogramElement() instanceof Diagram)
-				return new DiagramUpdateFeature(this);
+				return new AutoUpdateFeature(this);
 			
 	        IFeatureProvider fp = featureSwitch.doSwitch(getBusinessObject(context));
 			if (fp!=null)

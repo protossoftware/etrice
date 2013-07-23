@@ -12,8 +12,13 @@
 
 package org.eclipse.etrice.core.genmodel;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -30,21 +35,23 @@ public class TestHierarchy extends TestInstanceModelBuilderBase {
 		prepare();
 		
 		root = buildInstanceModel("hierarchy.room");
-		instances = collectInstances(root);
 	}
 
 	@Test
 	public void testInstances() {
-		checkSize(1, ETriceGenPackage.eINSTANCE.getSubSystemInstance());
-		checkSize(18, ETriceGenPackage.eINSTANCE.getActorInstance());
 		
-		ActorInstance ai = root.getSubSystemInstances().get(0).getActorInstances().get(0);
+		HashMap<EClass,ArrayList<EObject>> instances = collectInstances(root);
+		
+		assertEquals("Number of ComponentInstances", 1, instances.get(ETriceGenPackage.eINSTANCE.getSubSystemInstance()).size());
+		assertEquals("Number of ActorInstances", 18, instances.get(ETriceGenPackage.eINSTANCE.getActorInstance()).size());
+		
+		ActorInstance ai = root.getSubSystemInstances().get(0).getInstances().get(0);
 		assertEquals("Instance Path", "/CMain/l1a", ai.getPath());
 		
-		ai = ai.getActorInstances().get(1);
+		ai = ai.getInstances().get(1);
 		assertEquals("Instance Path", "/CMain/l1a/l2b", ai.getPath());
 		
-		ai = ai.getActorInstances().get(2);
+		ai = ai.getInstances().get(2);
 		assertEquals("Instance Path", "/CMain/l1a/l2b/l3c", ai.getPath());
 	}
 }

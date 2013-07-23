@@ -15,7 +15,7 @@ package org.eclipse.etrice.runtime.java.modelbase;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 
 class MockPort extends PortBase {
-	public MockPort(IInterfaceItemOwner parent, String name, int localId, int idx) {
+	public MockPort(IEventReceiver parent, String name, int localId, int idx) {
 		super(parent, name, localId, idx);
 	}
 

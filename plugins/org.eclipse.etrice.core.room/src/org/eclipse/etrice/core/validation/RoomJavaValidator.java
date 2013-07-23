@@ -46,7 +46,6 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
-import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -70,18 +69,10 @@ import com.google.inject.Inject;
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
-	/* message strings */
-	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
-	public static final String MULTIPLICITY_ANY_REQUIRES_OPTIONAL = "multiplicity any [*] requires optional";
-	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer";
-	
-	/* tags for quick fixes */
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
 	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
-	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
-	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -128,7 +119,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkActorRef(ActorRef ar) {
+	public void checkActorRefIsNotCircular(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {
 			ActorClass ac = (ActorClass) ar.eContainer();
 			
@@ -136,22 +127,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type());
 			}
 		}
-		
-		// check actor ref array upper bound
-		if (ar.getSize()<0) {
-			// multiplicity * requires optional
-			if (ar.getRefType()!=ReferenceType.OPTIONAL)
-				error(MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
-						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL);
-		}
-		else if (ar.getSize()>1) {
-			// fixed multiplicity requires fixed type
-			if (ar.getRefType()==ReferenceType.OPTIONAL)
-				error(OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
-						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY, ar.getName());
-		}
-		
-		// check actor ref array has ports with fixed multiplicity
+	}
+	
+	@Check
+	public void checkRefHasFixedMultiplicityPorts(ActorRef ar) {
 		if (ar!=null) {
 			ActorClass ac = ar.getType();
 			if (ar.getSize()>1) {
@@ -356,7 +335,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 
 	@Check
-	public void checkBinding(Binding bind) {
+	public void checkPortCompatibility(Binding bind) {
 		Result result = ValidationUtil.isValid(bind);
 		if (!result.isOk()) {
 			EObject sc = bind.eContainer();
@@ -563,25 +542,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 							RoomPackage.Literals.ATTRIBUTE__NAME);
 				else
 					error("name already used", RoomPackage.Literals.ATTRIBUTE__NAME);
-		}
-	}
-	
-	@Check
-	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
-		HashSet<Port> haveReplPeer = new HashSet<Port>();
-		for (Binding bind : sc.getBindings()) {
-			Port p1 = bind.getEndpoint1().getPort();
-			Port p2 = bind.getEndpoint2().getPort();
-			if (p1.getMultiplicity()!=1 && p2.getMultiplicity()!=1) {
-				if (!haveReplPeer.add(p1))
-					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
-							bind,
-							RoomPackage.Literals.BINDING__ENDPOINT1);
-				if (!haveReplPeer.add(p2))
-					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
-							bind,
-							RoomPackage.Literals.BINDING__ENDPOINT2);
-			}
 		}
 	}
 	

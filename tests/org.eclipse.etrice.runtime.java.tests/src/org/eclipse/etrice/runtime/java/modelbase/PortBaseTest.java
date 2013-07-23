@@ -13,7 +13,6 @@ import junit.framework.TestCase;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.IMessageService.ExecMode;
 
 public class PortBaseTest extends TestCase {
 	protected void setUp() throws Exception {
@@ -29,17 +28,16 @@ public class PortBaseTest extends TestCase {
 		msgSvcCtrl.resetAll();
 
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_0", Thread.NORM_PRIORITY));
+				new MessageService(null, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_0", Thread.NORM_PRIORITY));
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
+				new MessageService(null, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
 
-		MockSubSystem top = new MockSubSystem(null, "TOP");
-		RTServices.getInstance().setSubSystem(top);
-		top.addPathToThread("/TOP/Rcv0", 0);
-		top.addPathToThread("/TOP/Rcv1", 1);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv1/Port1");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv0/Port0");
+		msgSvcCtrl.addPathToThread("/TOP/Rcv0", 0);
+		msgSvcCtrl.addPathToThread("/TOP/Rcv1", 1);
+		msgSvcCtrl.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv1/Port1");
+		msgSvcCtrl.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv0/Port0");
 		
+		TopRTObject top = new TopRTObject("TOP");
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);

@@ -1,6 +1,7 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.messaging.Message;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -29,10 +30,10 @@ public class RTSystemServicesProtocol {
 	// port class
 	static public class RTSystemServicesProtocolPort extends PortBase {
 		// constructors
-		public RTSystemServicesProtocolPort(IInterfaceItemOwner actor, String name, int localId) {
+		public RTSystemServicesProtocolPort(IEventReceiver actor, String name, int localId) {
 			this(actor, name, localId, 0);
 		}
-		public RTSystemServicesProtocolPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
+		public RTSystemServicesProtocolPort(IEventReceiver actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
 		}
 	
@@ -56,7 +57,7 @@ public class RTSystemServicesProtocol {
 	// replicated port class
 	static public class RTSystemServicesProtocolReplPort extends ReplicatedPortBase {
 	
-		public RTSystemServicesProtocolReplPort(IInterfaceItemOwner actor, String name, int localId) {
+		public RTSystemServicesProtocolReplPort(IEventReceiver actor, String name, int localId) {
 			super(actor, name, localId);
 		}
 		
@@ -72,7 +73,7 @@ public class RTSystemServicesProtocol {
 			return (RTSystemServicesProtocolPort) getInterfaceItem(idx);
 		}
 		
-		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolPort(rcv, name, lid, idx);
 		}
 		
@@ -83,10 +84,10 @@ public class RTSystemServicesProtocol {
 	// port class
 	static public class RTSystemServicesProtocolConjPort extends PortBase {
 		// constructors
-		public RTSystemServicesProtocolConjPort(IInterfaceItemOwner actor, String name, int localId) {
+		public RTSystemServicesProtocolConjPort(IEventReceiver actor, String name, int localId) {
 			this(actor, name, localId, 0);
 		}
-		public RTSystemServicesProtocolConjPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
+		public RTSystemServicesProtocolConjPort(IEventReceiver actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
 		}
 	
@@ -122,7 +123,7 @@ public class RTSystemServicesProtocol {
 	// replicated port class
 	static public class RTSystemServicesProtocolConjReplPort extends ReplicatedPortBase {
 	
-		public RTSystemServicesProtocolConjReplPort(IInterfaceItemOwner actor, String name, int localId) {
+		public RTSystemServicesProtocolConjReplPort(IEventReceiver actor, String name, int localId) {
 			super(actor, name, localId);
 		}
 		
@@ -138,7 +139,7 @@ public class RTSystemServicesProtocol {
 			return (RTSystemServicesProtocolConjPort) getInterfaceItem(idx);
 		}
 		
-		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
+		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolConjPort(rcv, name, lid, idx);
 		}
 		

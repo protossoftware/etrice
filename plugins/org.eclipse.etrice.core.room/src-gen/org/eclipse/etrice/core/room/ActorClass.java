@@ -361,31 +361,4 @@ public interface ActorClass extends ActorContainerClass
    */
   void setStateMachine(StateGraph value);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();\r\nfor (ExternalPort ep : getExtPorts()) {\r\n\tports.add(ep.getIfport());\r\n}\r\nreturn ports;\r\n'"
-   * @generated
-   */
-  EList<Port> getExternalEndPorts();
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());\r\nfor (ExternalPort ep : getExtPorts()) {\r\n\tports.remove(ep.getIfport());\r\n}\r\nreturn ports;\r\n'"
-   * @generated
-   */
-  EList<Port> getRelayPorts();
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
-   * @generated
-   */
-  EList<SPPRef> getImplementedSPPs();
-
 } // ActorClass

@@ -19,10 +19,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
@@ -39,6 +42,8 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 	
 	private Root root;
 	private ExpandedActorClass xpac;
+	private HashMap<EClass, ArrayList<EObject>> instances;
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -66,11 +71,20 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 
 	@Test
 	public void testInstanceNumbers() {
-		checkSize(8, ETriceGenPackage.eINSTANCE.getActorInstance());
-		checkSize(30, ETriceGenPackage.eINSTANCE.getPortInstance());
-		checkSize(8, ETriceGenPackage.eINSTANCE.getSAPInstance());
-		checkSize(2, ETriceGenPackage.eINSTANCE.getSPPInstance());
-		checkSize(2, ETriceGenPackage.eINSTANCE.getServiceImplInstance());
+		ArrayList<EObject> actors = instances.get(ETriceGenPackage.eINSTANCE.getActorInstance());
+		assertEquals("Number of ActorInstances", 8, actors.size());
+
+		ArrayList<EObject> ports = instances.get(ETriceGenPackage.eINSTANCE.getPortInstance());
+		assertEquals("Number of PortInstances", 30, ports.size());
+
+		ArrayList<EObject> saps = instances.get(ETriceGenPackage.eINSTANCE.getSAPInstance());
+		assertEquals("Number of SAPInstances", 8, saps.size());
+
+		ArrayList<EObject> spps = instances.get(ETriceGenPackage.eINSTANCE.getSPPInstance());
+		assertEquals("Number of SPPInstances", 2, spps.size());
+
+		ArrayList<EObject> svcs = instances.get(ETriceGenPackage.eINSTANCE.getServiceImplInstance());
+		assertEquals("Number of ServiceImplInstances", 2, svcs.size());
 	}
 	
 	@Test

@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.etmap.util.ETMapUtil;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
@@ -75,8 +73,6 @@ public class VariableServiceGen {
   private TypeHelpers _typeHelpers;
   
   public void doGenerate(final Root root, final SubSystemInstance ssi) {
-    final NodeRef nr = ETMapUtil.getNodeRef(ssi);
-    final String clsname = this.stdExt.getJavaClassName(nr, ssi);
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
     SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
@@ -87,7 +83,9 @@ public class VariableServiceGen {
     SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
     String _path_1 = this.roomExt.getPath(_subSystemClass_3);
     final String infopath = (_generationInfoPath + _path_1);
-    final String file = (clsname + "VariableService.java");
+    SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+    String _name = _subSystemClass_4.getName();
+    final String file = (_name + "VariableService.java");
     CharSequence _generate = this.generate(root, ssi);
     this.fileIO.generateFile("generating VariableService implementation", path, infopath, file, _generate);
   }
@@ -95,8 +93,7 @@ public class VariableServiceGen {
   private CharSequence generate(final Root root, final SubSystemInstance comp) {
     CharSequence _xblockexpression = null;
     {
-      final NodeRef nr = ETMapUtil.getNodeRef(comp);
-      final String clsname = this.stdExt.getJavaClassName(nr, comp);
+      SubSystemClass cc = comp.getSubSystemClass();
       HashMap<ActorInstance,List<Attribute>> _hashMap = new HashMap<ActorInstance,List<Attribute>>();
       final HashMap<ActorInstance,List<Attribute>> aisAttrMap = _hashMap;
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
@@ -146,14 +143,18 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("public class ");
-      _builder.append(clsname, "");
-      _builder.append("VariableService extends AbstractVariableService{");
+      String _name_1 = cc.getName();
+      String _plus = (_name_1 + "VariableService");
+      _builder.append(_plus, "");
+      _builder.append(" extends AbstractVariableService{");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("private ");
-      _builder.append(clsname, "	");
+      SubSystemClass _subSystemClass_1 = comp.getSubSystemClass();
+      String _name_2 = _subSystemClass_1.getName();
+      _builder.append(_name_2, "	");
       _builder.append(" subSystem;");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -167,8 +168,8 @@ public class VariableServiceGen {
           _builder.append("\t");
           _builder.append("private ");
           ActorClass _actorClass = ai.getActorClass();
-          String _name_1 = _actorClass.getName();
-          _builder.append(_name_1, "	");
+          String _name_3 = _actorClass.getName();
+          _builder.append(_name_3, "	");
           _builder.append(" ");
           CharSequence _varName = this.getVarName(ai);
           _builder.append(_varName, "	");
@@ -180,9 +181,12 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      _builder.append(clsname, "	");
-      _builder.append("VariableService(");
-      _builder.append(clsname, "	");
+      String _name_4 = cc.getName();
+      String _plus_1 = (_name_4 + "VariableService");
+      _builder.append(_plus_1, "	");
+      _builder.append("(");
+      String _name_5 = cc.getName();
+      _builder.append(_name_5, "	");
       _builder.append(" subSystem) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -213,8 +217,8 @@ public class VariableServiceGen {
           _builder.append(_varName_1, "		");
           _builder.append(" = (");
           ActorClass _actorClass_1 = ai_1.getActorClass();
-          String _name_2 = _actorClass_1.getName();
-          _builder.append(_name_2, "		");
+          String _name_6 = _actorClass_1.getName();
+          _builder.append(_name_6, "		");
           _builder.append(")subSystem.getInstance(\"");
           String _path = ai_1.getPath();
           _builder.append(_path, "		");
@@ -272,9 +276,9 @@ public class VariableServiceGen {
               CharSequence _varName_2 = this.getVarName(ai_2);
               _builder.append(_varName_2, "				");
               _builder.append(".");
-              String _name_3 = a.getName();
-              String _plus = (_name_3 + "Lock");
-              CharSequence _invokeGetter = this.helpers.invokeGetter(_plus, null);
+              String _name_7 = a.getName();
+              String _plus_2 = (_name_7 + "Lock");
+              CharSequence _invokeGetter = this.helpers.invokeGetter(_plus_2, null);
               _builder.append(_invokeGetter, "				");
               _builder.append("){");
               _builder.newLineIfNotEmpty();
@@ -284,9 +288,9 @@ public class VariableServiceGen {
               CharSequence _varName_3 = this.getVarName(ai_2);
               _builder.append(_varName_3, "					");
               _builder.append(".");
-              String _name_4 = a.getName();
-              String _plus_1 = (_name_4 + "Lock");
-              CharSequence _invokeGetter_1 = this.helpers.invokeGetter(_plus_1, null);
+              String _name_8 = a.getName();
+              String _plus_3 = (_name_8 + "Lock");
+              CharSequence _invokeGetter_1 = this.helpers.invokeGetter(_plus_3, null);
               _builder.append(_invokeGetter_1, "					");
               _builder.append(".isUpdate()){");
               _builder.newLineIfNotEmpty();
@@ -416,8 +420,8 @@ public class VariableServiceGen {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("map.put(id+\"/");
-                  String _name_5 = a_2.getName();
-                  _builder.append(_name_5, "		");
+                  String _name_9 = a_2.getName();
+                  _builder.append(_name_9, "		");
                   _builder.append("\", ");
                   {
                     int _size = a_2.getSize();
@@ -427,8 +431,8 @@ public class VariableServiceGen {
                     }
                   }
                   _builder.append("object.");
-                  String _name_6 = a_2.getName();
-                  CharSequence _invokeGetter_2 = this.helpers.invokeGetter(_name_6, null);
+                  String _name_10 = a_2.getName();
+                  CharSequence _invokeGetter_2 = this.helpers.invokeGetter(_name_10, null);
                   _builder.append(_invokeGetter_2, "		");
                   {
                     int _size_1 = a_2.getSize();
@@ -443,11 +447,11 @@ public class VariableServiceGen {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("writeDataClass(id+\"/");
-                  String _name_7 = a_2.getName();
-                  _builder.append(_name_7, "		");
+                  String _name_11 = a_2.getName();
+                  _builder.append(_name_11, "		");
                   _builder.append("\", object.");
-                  String _name_8 = a_2.getName();
-                  CharSequence _invokeGetter_3 = this.helpers.invokeGetter(_name_8, null);
+                  String _name_12 = a_2.getName();
+                  CharSequence _invokeGetter_3 = this.helpers.invokeGetter(_name_12, null);
                   _builder.append(_invokeGetter_3, "		");
                   _builder.append(", map);");
                   _builder.newLineIfNotEmpty();

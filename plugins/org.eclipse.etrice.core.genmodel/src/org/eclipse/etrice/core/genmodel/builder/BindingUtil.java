@@ -16,13 +16,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
@@ -34,7 +31,6 @@ import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -69,8 +65,7 @@ public class BindingUtil {
 		
 		private int getMultiplicity(BindingEndPoint ep) {
 			if (ep.getActorRef() instanceof ActorRef)
-				if (((ActorRef) ep.getActorRef()).getRefType()==ReferenceType.FIXED)
-					return ((ActorRef) ep.getActorRef()).getSize();
+				return ((ActorRef) ep.getActorRef()).getSize();
 			
 			return 1;
 		}
@@ -93,22 +88,15 @@ public class BindingUtil {
 		this.diagnostician = diagnostician;
 		
 		// collect bindings
-		if (si instanceof SubSystemInstance) {
-			bindings.addAll(((SubSystemInstance) si).getSubSystemClass().getBindings());
-		}
-		else {
-			ActorClass ac = null;
-			if (si instanceof ActorInstance) {
-				ac = ((ActorInstance) si).getActorClass();
-			}
-			else if (si instanceof OptionalActorInstance) {
-				ac = ((OptionalActorInstance) si).getActorClass();
-			}
+		if (si instanceof ActorInstance) {
+			ActorClass ac = ((ActorInstance) si).getActorClass();
 			while (ac!=null) {
 				bindings.addAll(ac.getBindings());
 				ac = ac.getBase();
 			}
 		}
+		else if (si instanceof SubSystemInstance)
+			bindings.addAll(((SubSystemInstance) si).getSubSystemClass().getBindings());
 	}
 
 	/**
@@ -153,7 +141,7 @@ public class BindingUtil {
 	private void initPortInstanceMap() {
 		// 1. register existing port instances
 		
-		// local relay and internal ports
+		// local end ports
 		for (PortInstance pi : si.getPorts()) {
 			if (pi.getKind()!=PortKind.EXTERNAL) {
 				addPortInstance(pi, getEndPointKey(null, pi));
@@ -161,19 +149,13 @@ public class BindingUtil {
 		}
 		
 		// ports of actor refs
-		for (AbstractInstance subai : si.getInstances()) {
-			boolean forceMultFixed = false;
-			if (subai instanceof ActorInstance) {
-				forceMultFixed = ((ActorInstance) subai).getReplIdx()>1;
-			}
-			else if (subai instanceof ActorInterfaceInstance) {
-				forceMultFixed = ((ActorInterfaceInstance) subai).isArray();
-			}
-			for (PortInstance pi : subai.getPorts()) {
+		for (ActorInstance sub : si.getInstances()) {
+			boolean forceMultFixed = sub.getReplIdx()>1;
+			for (PortInstance pi : sub.getPorts()) {
 				if (pi.getKind()!=PortKind.INTERNAL) {
 					if (forceMultFixed && pi.getPort().getMultiplicity()<0)
 						diagnostician.error("port multiplicity of replicated actor has to be fixed", pi.getPort(), RoomPackage.eINSTANCE.getPort_Multiplicity());
-					addPortInstance(pi, getEndPointKey(subai, pi));
+					addPortInstance(pi, getEndPointKey(sub, pi));
 				}
 			}
 		}
@@ -227,14 +209,8 @@ public class BindingUtil {
 		list.add(bi);
 	}
 
-	private static String getEndPointKey(AbstractInstance ai, PortInstance pi) {
-		String ref = "";
-		if (ai instanceof ActorInstance)
-			ref = ((ActorInstance) ai).getUnindexedName();
-		else if (ai!=null)
-			ref = ai.getName();
-		
-		return ref+SEP+pi.getPort().getName();
+	private static String getEndPointKey(ActorInstance ai, PortInstance pi) {
+		return (ai!=null? ai.getUnindexedName():"")+SEP+pi.getPort().getName();
 	}
 	
 	private static String getEndPointKey(BindingEndPoint ep) {
@@ -246,8 +222,7 @@ public class BindingUtil {
 	}
 	
 	/**
-	 * add the port instance to the map. Replicated ports are added 'multiplicity' times.
-	 * If the multiplicity is * then the port is added once.
+	 * add the port instance to the map. Replicated ports are added 'multiplicity' times. If the multiplicity is * then the port is added once.
 	 *  
 	 * @param pi
 	 * @param ep2portInstances

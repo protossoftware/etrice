@@ -9,7 +9,6 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 
-
 /**
  * An abstract base class for port instances.
  * 
@@ -18,11 +17,11 @@ package org.eclipse.etrice.runtime.java.modelbase;
  */
 public abstract class PortBase extends InterfaceItemBase {
 	
-	public PortBase (IInterfaceItemOwner actor, String name, int localId){
+	public PortBase (IEventReceiver actor, String name, int localId){
 		super(actor, name, localId, 0);
 	}
 	
-	public PortBase (IInterfaceItemOwner actor, String name, int localId, int idx){
+	public PortBase (IEventReceiver actor, String name, int localId, int idx){
 		super(actor, name, localId, idx);
 	}
 }

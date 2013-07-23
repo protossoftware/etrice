@@ -14,14 +14,18 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
+
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
+
 import org.eclipse.etrice.core.room.LayerConnection;
 
 /**
@@ -49,7 +53,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractInstance fromAI;
+	protected ActorInstance fromAI;
 
 	/**
 	 * The cached value of the '{@link #getFromSPP() <em>From SPP</em>}' reference.
@@ -105,10 +109,10 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractInstance getFromAI() {
+	public ActorInstance getFromAI() {
 		if (fromAI != null && fromAI.eIsProxy()) {
 			InternalEObject oldFromAI = (InternalEObject)fromAI;
-			fromAI = (AbstractInstance)eResolveProxy(oldFromAI);
+			fromAI = (ActorInstance)eResolveProxy(oldFromAI);
 			if (fromAI != oldFromAI) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.CONNECTION_INSTANCE__FROM_AI, oldFromAI, fromAI));
@@ -122,7 +126,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractInstance basicGetFromAI() {
+	public ActorInstance basicGetFromAI() {
 		return fromAI;
 	}
 
@@ -131,8 +135,8 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFromAI(AbstractInstance newFromAI) {
-		AbstractInstance oldFromAI = fromAI;
+	public void setFromAI(ActorInstance newFromAI) {
+		ActorInstance oldFromAI = fromAI;
 		fromAI = newFromAI;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.CONNECTION_INSTANCE__FROM_AI, oldFromAI, fromAI));
@@ -365,7 +369,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.CONNECTION_INSTANCE__FROM_AI:
-				setFromAI((AbstractInstance)newValue);
+				setFromAI((ActorInstance)newValue);
 				return;
 			case ETriceGenPackage.CONNECTION_INSTANCE__FROM_SPP:
 				setFromSPP((SPPInstance)newValue);
@@ -389,7 +393,7 @@ public class ConnectionInstanceImpl extends EObjectImpl implements ConnectionIns
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.CONNECTION_INSTANCE__FROM_AI:
-				setFromAI((AbstractInstance)null);
+				setFromAI((ActorInstance)null);
 				return;
 			case ETriceGenPackage.CONNECTION_INSTANCE__FROM_SPP:
 				setFromSPP((SPPInstance)null);

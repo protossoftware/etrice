@@ -18,7 +18,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -31,6 +33,7 @@ import org.junit.Test;
 public class TestConnectedPorts extends TestInstanceModelBuilderBase {
 	
 	private Root root;
+	private HashMap<EClass, ArrayList<EObject>> instances;
 	
 	@Before
 	public void setUp() {
@@ -42,7 +45,8 @@ public class TestConnectedPorts extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testPortNumbers() {
-		checkSize(19, ETriceGenPackage.eINSTANCE.getPortInstance());
+		ArrayList<EObject> ports = instances.get(ETriceGenPackage.eINSTANCE.getPortInstance());
+		assertEquals("Number of PortInstances", 19, ports.size());
 	}
 	
 	@Test

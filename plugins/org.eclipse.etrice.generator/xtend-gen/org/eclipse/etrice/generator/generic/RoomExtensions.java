@@ -208,19 +208,6 @@ public class RoomExtensions {
   }
   
   /**
-   * @param rc a {@link RoomClass}
-   * @return the name of the room model followed by the class name and all . replaced with _
-   */
-  public String getFullyQualifiedName(final RoomClass rc) {
-    String _package = this.getPackage(rc);
-    String _replace = _package.replace(".", "_");
-    String _plus = (_replace + "_");
-    String _name = rc.getName();
-    String _plus_1 = (_plus + _name);
-    return _plus_1;
-  }
-  
-  /**
    * @param packageName a dot (.) separated package anem
    * @return the input with dots replaced with slashes (/)
    */

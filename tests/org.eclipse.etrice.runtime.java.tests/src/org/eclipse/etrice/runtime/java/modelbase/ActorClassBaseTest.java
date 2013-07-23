@@ -16,7 +16,6 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
-import org.eclipse.etrice.runtime.java.messaging.IMessageService.ExecMode;
 
 public class ActorClassBaseTest extends TestCase {
 
@@ -50,7 +49,7 @@ public class ActorClassBaseTest extends TestCase {
 		TopRTObject topRTObject = new TopRTObject("TOP");
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(topRTObject, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_Main", Thread.NORM_PRIORITY));
+				new MessageService(topRTObject, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_Main", Thread.NORM_PRIORITY));
 
 		// PathNames
 		ActorClassBase actor = new MockActor(topRTObject, "MockActor1");

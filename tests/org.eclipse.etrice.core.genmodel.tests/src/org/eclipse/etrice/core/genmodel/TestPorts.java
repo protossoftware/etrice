@@ -14,6 +14,11 @@ package org.eclipse.etrice.core.genmodel;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -30,12 +35,12 @@ public class TestPorts extends TestInstanceModelBuilderBase {
 		prepare();
 		
 		root = buildInstanceModel("ports.room");
-		instances = collectInstances(root);
 	}
 	
 	@Test
 	public void testPortNumbers() {
-		checkSize(3, ETriceGenPackage.eINSTANCE.getPortInstance());
+		HashMap<EClass, ArrayList<EObject>> instances = collectInstances(root);
+		assertEquals("Number of PortInstances", 3, instances.get(ETriceGenPackage.eINSTANCE.getPortInstance()).size());
 	}
 	
 	@Test

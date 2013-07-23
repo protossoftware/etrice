@@ -60,35 +60,6 @@ class ImplPostprocessor {
 				return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();
 			return null;
 			''')
-			
-		val actorClass = roomPackage.getClass("ActorClass")
-		actorClass.addOperation("getExternalEndPorts", roomPackage.getEClassifier("Port"), -1,
-			'''
-				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
-				for (ExternalPort ep : getExtPorts()) {
-					ports.add(ep.getIfport());
-				}
-				return ports;
-			'''
-		)
-		actorClass.addOperation("getRelayPorts", roomPackage.getEClassifier("Port"), -1,
-			'''
-				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());
-				for (ExternalPort ep : getExtPorts()) {
-					ports.remove(ep.getIfport());
-				}
-				return ports;
-			'''
-		)
-		actorClass.addOperation("getImplementedSPPs", roomPackage.getEClassifier("SPPRef"), -1,
-			'''
-				EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();
-				for (ServiceImplementation spp : getServiceImplementations()) {
-					spps.add(spp.getSpp());
-				}
-				return spps;
-			'''
-		)
 	}
 }
 

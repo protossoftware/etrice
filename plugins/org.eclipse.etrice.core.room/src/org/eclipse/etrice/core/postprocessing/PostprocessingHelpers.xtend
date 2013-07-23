@@ -59,23 +59,4 @@ class PostprocessingHelpers {
 		owner.EOperations.add(op)
 	}
 	
-	/* this does not work because the EMF generator doesn't pick up the annotation
-	def static addDerivedReferenceList(EClass owner, String name, EClassifier type, int upperBound, String body) {
-		val ref = EcoreFactory::eINSTANCE.createEReference
-		ref.setName(name)
-		ref.setEType(type)
-		ref.setUpperBound(upperBound)
-		ref.setChangeable(false)
-		ref.setTransient(true)
-		ref.setVolatile(true)
-		ref.setDerived(true)
-
-		val anno = EcoreFactory::eINSTANCE.createEAnnotation
-		anno.setSource("http://www.eclipse.org/emf/2002/GenModel")
-		anno.details.put("body", body)
-		ref.EAnnotations.add(anno)
-		
-		owner.EStructuralFeatures.add(ref)
-	}
-	*/
 }

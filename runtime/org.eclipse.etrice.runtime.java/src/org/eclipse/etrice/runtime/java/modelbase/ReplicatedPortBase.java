@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-
 /**
  * An abstract base class for instances of replicated ports.
  * 
@@ -26,7 +25,7 @@ public abstract class ReplicatedPortBase extends ReplicatedInterfaceItemBase {
 	 * @param name
 	 * @param localId
 	 */
-	public ReplicatedPortBase(IInterfaceItemOwner parent, String name, int localId) {
+	public ReplicatedPortBase(IEventReceiver parent, String name, int localId) {
 		super(parent, name, localId);
 	}
 

@@ -15,14 +15,14 @@ package org.eclipse.etrice.runtime.java.messaging;
 
 
 /**
- * The MessageService is the backbone of the asynchronous communication inside a SubSystem
+ * The MessageService the backbone of the asynchronous communication inside a SubSystem
  * It usually contains a thread a message queue and a dispatcher
  * 
  * @author Thomas Schuetz (initial contribution)
  * @author Henrik Rentz-Reichert (extending RTObject, implementing Runnable)
  *
  */
-public class MessageService extends RTObject implements IMessageService {
+public class MessageService extends RTObject implements IMessageReceiver, Runnable {
 
 	private boolean running = false;
 	
@@ -34,15 +34,11 @@ public class MessageService extends RTObject implements IMessageService {
 	private Thread thread;
 	private int priority;
 
-	public MessageService(IRTObject parent, ExecMode mode, int node, int thread, String name) {
-		this(parent, mode, 0, node, thread, name, Thread.NORM_PRIORITY);
+	public MessageService(IRTObject parent, int node, int thread, String name) {
+		this(parent, node, thread, name, Thread.NORM_PRIORITY);
 	}
 	
-	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name) {
-		this(parent, mode, nsec, node, thread, name, Thread.NORM_PRIORITY);
-	}
-	
-	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name, int priority) {
+	public MessageService(IRTObject parent, int node, int thread, String name, int priority) {
 		super(parent, "MessageService_"+name);
 		
 		address = new Address(node, thread, 0);
@@ -121,8 +117,11 @@ public class MessageService extends RTObject implements IMessageService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.messaging.IMessageService#setThread(java.lang.Thread)
+	/**
+	 * set the thread of this service
+	 * (also sets the thread priority)
+	 * 
+	 * @param thread
 	 */
 	public void setThread(Thread thread) {
 		this.thread = thread;
@@ -130,8 +129,8 @@ public class MessageService extends RTObject implements IMessageService {
 		thread.setPriority(priority);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.messaging.IMessageService#getThread()
+	/**
+	 * @return the thread of this service
 	 */
 	public Thread getThread() {
 		return thread;

@@ -21,17 +21,18 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class NodeRunnerGen {
   @Inject
-  private IGeneratorFileIo fileIO;
+  @Extension
+  private JavaIoFileSystemAccess fileAccess;
   
   @Inject
   @Extension
@@ -53,20 +54,16 @@ public class NodeRunnerGen {
           String _name = nr.getName();
           String _plus = (_name + "_");
           String _name_1 = ssi.getName();
-          String _plus_1 = (_plus + _name_1);
-          final String file = (_plus_1 + "_Runner.c");
+          final String clsname = (_plus + _name_1);
           SubSystemClass _subSystemClass = ssi.getSubSystemClass();
           String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
           SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
           String _path = this._roomExtensions.getPath(_subSystemClass_1);
-          final String filepath = (_generationTargetPath + _path);
-          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
-          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-          String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
-          final String infopath = (_generationInfoPath + _path_1);
+          String _plus_1 = (_generationTargetPath + _path);
+          this.fileAccess.setOutputPath(_plus_1);
+          String _plus_2 = (clsname + "_Runner.c");
           CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, first);
-          this.fileIO.generateFile("generating Node runner", filepath, infopath, file, _generateSourceFile);
+          this.fileAccess.generateFile(_plus_2, _generateSourceFile);
           first = false;
         }
       }

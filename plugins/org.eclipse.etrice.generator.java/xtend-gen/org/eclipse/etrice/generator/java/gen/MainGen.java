@@ -19,11 +19,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 import org.eclipse.etrice.generator.java.gen.ActorClassGen;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
-import org.eclipse.etrice.generator.java.gen.NodeGen;
-import org.eclipse.etrice.generator.java.gen.NodeRunnerGen;
-import org.eclipse.etrice.generator.java.gen.OptionalActorFactoryGen;
-import org.eclipse.etrice.generator.java.gen.OptionalActorInterfaceGen;
 import org.eclipse.etrice.generator.java.gen.ProtocolClassGen;
+import org.eclipse.etrice.generator.java.gen.SubSystemClassGen;
+import org.eclipse.etrice.generator.java.gen.SubSystemRunnerGen;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 
@@ -40,16 +38,10 @@ public class MainGen implements IGenerator {
   private ActorClassGen actorClassGen;
   
   @Inject
-  private OptionalActorInterfaceGen optionalActorInterfaceGen;
+  private SubSystemClassGen subsystemClassGen;
   
   @Inject
-  private OptionalActorFactoryGen optionalActorFactoryGen;
-  
-  @Inject
-  private NodeGen nodeGen;
-  
-  @Inject
-  private NodeRunnerGen nodeRunnerGen;
+  private SubSystemRunnerGen subsystemRunnerGen;
   
   @Inject
   private PrepareFileSystem prepFS;
@@ -68,13 +60,11 @@ public class MainGen implements IGenerator {
     this.dataClassGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
     this.actorClassGen.doGenerate(e);
-    this.optionalActorInterfaceGen.doGenerate(e);
-    this.optionalActorFactoryGen.doGenerate(e);
-    this.nodeGen.doGenerate(e);
+    this.subsystemClassGen.doGenerate(e);
     boolean _isLibrary = e.isLibrary();
     boolean _not = (!_isLibrary);
     if (_not) {
-      this.nodeRunnerGen.doGenerate(e);
+      this.subsystemRunnerGen.doGenerate(e);
     }
   }
 }

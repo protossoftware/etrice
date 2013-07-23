@@ -26,7 +26,6 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -583,51 +582,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STATE_MACHINE, newStateMachine, newStateMachine));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Port> getExternalEndPorts()
-  {
-    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
-    for (ExternalPort ep : getExtPorts()) {
-      ports.add(ep.getIfport());
-    }
-    return ports;
-    
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Port> getRelayPorts()
-  {
-    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());
-    for (ExternalPort ep : getExtPorts()) {
-      ports.remove(ep.getIfport());
-    }
-    return ports;
-    
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<SPPRef> getImplementedSPPs()
-  {
-    EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();
-    for (ServiceImplementation spp : getServiceImplementations()) {
-      spps.add(spp.getSpp());
-    }
-    return spps;
-    
   }
 
   /**

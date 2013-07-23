@@ -64,7 +64,6 @@ import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
@@ -709,13 +708,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EEnum actorCommunicationTypeEEnum = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EEnum referenceTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -2505,7 +2497,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getActorRef_RefType()
+  public EAttribute getActorRef_Size()
   {
     return (EAttribute)actorRefEClass.getEStructuralFeatures().get(0);
   }
@@ -2515,19 +2507,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getActorRef_Size()
-  {
-    return (EAttribute)actorRefEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getActorRef_Type()
   {
-    return (EReference)actorRefEClass.getEStructuralFeatures().get(2);
+    return (EReference)actorRefEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3345,16 +3327,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getReferenceType()
-  {
-    return referenceTypeEEnum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RoomFactory getRoomFactory()
   {
     return (RoomFactory)getEFactoryInstance();
@@ -3601,7 +3573,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(spPointEClass, SP_POINT__SERVICE);
 
     actorRefEClass = createEClass(ACTOR_REF);
-    createEAttribute(actorRefEClass, ACTOR_REF__REF_TYPE);
     createEAttribute(actorRefEClass, ACTOR_REF__SIZE);
     createEReference(actorRefEClass, ACTOR_REF__TYPE);
 
@@ -3720,7 +3691,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     literalTypeEEnum = createEEnum(LITERAL_TYPE);
     communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
     actorCommunicationTypeEEnum = createEEnum(ACTOR_COMMUNICATION_TYPE);
-    referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
   }
 
   /**
@@ -3949,12 +3919,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getActorClass_Operations(), this.getStandardOperation(), null, "operations", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_StateMachine(), this.getStateGraph(), null, "stateMachine", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    addEOperation(actorClassEClass, this.getPort(), "getExternalEndPorts", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-    addEOperation(actorClassEClass, this.getPort(), "getRelayPorts", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-    addEOperation(actorClassEClass, this.getSPPRef(), "getImplementedSPPs", 0, -1, IS_UNIQUE, IS_ORDERED);
-
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, InterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4032,7 +3996,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getSPPoint_Service(), this.getSPPRef(), null, "service", null, 0, 1, SPPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorRefEClass, ActorRef.class, "ActorRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getActorRef_RefType(), this.getReferenceType(), "refType", null, 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getActorRef_Size(), ecorePackage.getEInt(), "size", "1", 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorRef_Type(), this.getActorClass(), null, "type", null, 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4168,10 +4131,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.DATA_DRIVEN);
     addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.ASYNCHRONOUS);
     addEEnumLiteral(actorCommunicationTypeEEnum, ActorCommunicationType.SYNCHRONOUS);
-
-    initEEnum(referenceTypeEEnum, ReferenceType.class, "ReferenceType");
-    addEEnumLiteral(referenceTypeEEnum, ReferenceType.FIXED);
-    addEEnumLiteral(referenceTypeEEnum, ReferenceType.OPTIONAL);
 
     // Create resource
     createResource(eNS_URI);

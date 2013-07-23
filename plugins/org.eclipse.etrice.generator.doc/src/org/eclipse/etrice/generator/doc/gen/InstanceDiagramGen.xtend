@@ -26,8 +26,6 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
 import java.io.File
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 
 @Singleton
 class InstanceDiagramGen implements IRoomGenerator {
@@ -78,23 +76,18 @@ class InstanceDiagramGen implements IRoomGenerator {
 		'''
 	}
 	
-	def String instance(AbstractInstance ai) {
+	def String instance(ActorInstance ai) {
 		val parent = ai.eContainer as StructureInstance
 		val pthread = ETMapUtil::getPhysicalThread(ai)
 		val tname = if (pthread==null) "?" else pthread.name
 		val node = ETMapUtil::getNodeRef(ai)
 		val nname = if (node==null) "?" else node.name
-		val clsname = if (ai instanceof ActorInstance) (ai as ActorInstance).actorClass.name
-			else if (ai instanceof ActorInterfaceInstance) (ai as ActorInterfaceInstance).actorClass.name else "?"
-			
 		'''
-			«ai.path.getPathName()» [label="«ai.name»\n(«clsname»)\n@«nname»:«tname»"];
-			«parent.path.getPathName()» -> «ai.path.getPathName()»;
-			«IF ai instanceof StructureInstance»
-				«FOR sub_ai : (ai as StructureInstance).instances»
-					«instance(sub_ai)»
-				«ENDFOR»
-			«ENDIF» 
+			«ai.path.getPathName()» [label="«ai.name»\n(«ai.actorClass.name»)\n@«nname»:«tname»"];
+			«parent.path.getPathName()» -> «ai.path.getPathName()»;  
+			«FOR sub_ai : ai.instances»
+				«instance(sub_ai)»
+			«ENDFOR»
 		'''
 	}
 

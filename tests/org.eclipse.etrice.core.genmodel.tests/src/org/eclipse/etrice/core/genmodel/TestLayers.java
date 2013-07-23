@@ -15,7 +15,9 @@ package org.eclipse.etrice.core.genmodel;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
@@ -29,6 +31,7 @@ import org.junit.Test;
 public class TestLayers extends TestInstanceModelBuilderBase {
 	
 	private Root root;
+	private HashMap<EClass, ArrayList<EObject>> instances;
 	
 	@Before
 	public void setUp() {
@@ -40,9 +43,14 @@ public class TestLayers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testInstanceNumbers() {
-		checkSize(6, ETriceGenPackage.eINSTANCE.getSAPInstance());
-		checkSize(7, ETriceGenPackage.eINSTANCE.getSPPInstance());
-		checkSize(3, ETriceGenPackage.eINSTANCE.getServiceImplInstance());
+		ArrayList<EObject> saps = instances.get(ETriceGenPackage.eINSTANCE.getSAPInstance());
+		assertEquals("Number of SAPInstances", 6, saps.size());
+
+		ArrayList<EObject> spps = instances.get(ETriceGenPackage.eINSTANCE.getSPPInstance());
+		assertEquals("Number of SPPInstances", 7, spps.size());
+
+		ArrayList<EObject> svcs = instances.get(ETriceGenPackage.eINSTANCE.getServiceImplInstance());
+		assertEquals("Number of ServiceImplInstances", 3, svcs.size());
 	}
 	
 	@Test

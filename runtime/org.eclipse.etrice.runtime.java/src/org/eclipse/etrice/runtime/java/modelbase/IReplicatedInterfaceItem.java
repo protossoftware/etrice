@@ -19,5 +19,4 @@ package org.eclipse.etrice.runtime.java.modelbase;
 public interface IReplicatedInterfaceItem {
 
 	 InterfaceItemBase createSubInterfaceItem();
-	 void removeItem(InterfaceItemBase item);
 }

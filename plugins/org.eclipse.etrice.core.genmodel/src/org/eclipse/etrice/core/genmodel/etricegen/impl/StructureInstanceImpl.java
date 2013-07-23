@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,10 +23,11 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
+
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
@@ -38,6 +40,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,6 +50,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getPorts <em>Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getSaps <em>Saps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getSpps <em>Spps</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getServices <em>Services</em>}</li>
@@ -59,7 +63,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  *
  * @generated
  */
-public class StructureInstanceImpl extends AbstractInstanceImpl implements StructureInstance {
+public class StructureInstanceImpl extends InstanceBaseImpl implements StructureInstance {
 	/**
 	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -68,7 +72,17 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractInstance> instances;
+	protected EList<ActorInstance> instances;
+
+	/**
+	 * The cached value of the '{@link #getPorts() <em>Ports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPorts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PortInstance> ports;
 
 	/**
 	 * The cached value of the '{@link #getSaps() <em>Saps</em>}' containment reference list.
@@ -148,17 +162,31 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 	protected EClass eStaticClass() {
 		return ETriceGenPackage.Literals.STRUCTURE_INSTANCE;
 	}
+
+	public HashMap<ProtocolClass, ServiceImplInstance> protocol2service = new HashMap<ProtocolClass, ServiceImplInstance>();
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractInstance> getInstances() {
+	public EList<ActorInstance> getInstances() {
 		if (instances == null) {
-			instances = new EObjectContainmentEList<AbstractInstance>(AbstractInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES);
+			instances = new EObjectContainmentEList<ActorInstance>(ActorInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES);
 		}
 		return instances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PortInstance> getPorts() {
+		if (ports == null) {
+			ports = new EObjectContainmentEList<PortInstance>(PortInstance.class, this, ETriceGenPackage.STRUCTURE_INSTANCE__PORTS);
+		}
+		return ports;
 	}
 
 	/**
@@ -278,22 +306,6 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 		return orderedIfItemInstances;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<ActorInstance> getActorInstances() {
-		EList<ActorInstance> result = new BasicEList<ActorInstance>();
-		
-		for (AbstractInstance inst : getInstances()) {
-			if (inst instanceof ActorInstance)
-				result.add((ActorInstance) inst);
-		}
-		
-		return result;
-	}
-
 	private boolean isInActorClass(EObject obj, ActorClass ac) {
 		while (obj!=null) {
 			obj = obj.eContainer();
@@ -314,6 +326,8 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 		switch (featureID) {
 			case ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES:
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.STRUCTURE_INSTANCE__PORTS:
+				return ((InternalEList<?>)getPorts()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SAPS:
 				return ((InternalEList<?>)getSaps()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SPPS:
@@ -338,6 +352,8 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 		switch (featureID) {
 			case ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES:
 				return getInstances();
+			case ETriceGenPackage.STRUCTURE_INSTANCE__PORTS:
+				return getPorts();
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SAPS:
 				return getSaps();
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SPPS:
@@ -367,7 +383,11 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 		switch (featureID) {
 			case ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES:
 				getInstances().clear();
-				getInstances().addAll((Collection<? extends AbstractInstance>)newValue);
+				getInstances().addAll((Collection<? extends ActorInstance>)newValue);
+				return;
+			case ETriceGenPackage.STRUCTURE_INSTANCE__PORTS:
+				getPorts().clear();
+				getPorts().addAll((Collection<? extends PortInstance>)newValue);
 				return;
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SAPS:
 				getSaps().clear();
@@ -408,6 +428,9 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 			case ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES:
 				getInstances().clear();
 				return;
+			case ETriceGenPackage.STRUCTURE_INSTANCE__PORTS:
+				getPorts().clear();
+				return;
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SAPS:
 				getSaps().clear();
 				return;
@@ -440,6 +463,8 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 		switch (featureID) {
 			case ETriceGenPackage.STRUCTURE_INSTANCE__INSTANCES:
 				return instances != null && !instances.isEmpty();
+			case ETriceGenPackage.STRUCTURE_INSTANCE__PORTS:
+				return ports != null && !ports.isEmpty();
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SAPS:
 				return saps != null && !saps.isEmpty();
 			case ETriceGenPackage.STRUCTURE_INSTANCE__SPPS:

@@ -8,14 +8,11 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
-import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
+import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
@@ -27,7 +24,7 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPo
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class SubSystemClassBase extends RTObject implements IEventReceiver, IInterfaceItemOwner {
+public abstract class SubSystemClassBase extends RTObject implements IEventReceiver{
 	
 	// variable service (is only instantiated if needed)
 	protected IVariableService variableService = null;
@@ -37,9 +34,6 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	
 	//--------------------- interface item IDs
 	protected static final int IFITEM_RTSystemPort = 0;
-	
-	private PathToThread path2thread = new PathToThread();
-	private PathToPeers path2peers = new PathToPeers();
 	
 	// for tests only
 	private TestSemaphore terminateSem=null;
@@ -125,7 +119,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 		System.out.println("=== done destroy RTServices");
 	}
 	
-	public IMessageService getMsgService(int idx) {
+	public MessageService getMsgService(int idx) {
 		return RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(idx);
 	}
 	
@@ -168,84 +162,5 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 
 	public IVariableService getVariableService() {
 		return variableService;
-	}
-	
-	/**
-	 * map a path to a thread id 
-	 * @param path
-	 * @param thread
-	 */
-	public void addPathToThread(String path, int thread) {
-		path2thread.put(path, thread);
-	}
-	
-	/**
-	 * get thread for path
-	 * @param path
-	 * @return
-	 */
-	public int getThreadForPath(String path) {
-		Integer thread = path2thread.get(path);
-		if (thread==null)
-			return -1;
-		
-		return thread;
-	}
-	
-	/**
-	 * add a peer for the given path
-	 * @param path
-	 * @param peer
-	 */
-	public void addPathToPeer(String path, String peer) {
-		path2peers.put(path, peer);
-	}
-	
-	/**
-	 * add a collection of peers to the given path
-	 * @param path
-	 * @param peers
-	 */
-	public void addPathToPeers(String path, Collection<String> peers) {
-		path2peers.put(path, peers);
-	}
-	
-	/**
-	 * add several peers to the given path
-	 * @param path
-	 * @param peers
-	 */
-	public void addPathToPeers(String path, String... peers) {
-		path2peers.put(path, peers);
-	}
-	
-	/**
-	 * @param path
-	 * @return list of peer paths
-	 */
-	public List<String> getPeersForPath(String path) {
-		return path2peers.get(path);
-	}
-	
-	/**
-	 * Clears thread and peer mappings.
-	 */
-	public void resetAll() {
-		path2peers.clear();
-		path2thread.clear();
-	}
-	/**
-	 * @param optionalActorClass
-	 * @param instanceActorClass
-	 * @return
-	 */
-	abstract public IOptionalActorFactory getFactory(String optionalActorClass, String instanceActorClass);
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner#getEventReceiver()
-	 */
-	@Override
-	public IEventReceiver getEventReceiver() {
-		return this;
 	}
 }

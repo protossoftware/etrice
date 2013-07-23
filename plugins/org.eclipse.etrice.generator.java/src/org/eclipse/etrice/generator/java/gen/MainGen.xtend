@@ -26,10 +26,8 @@ class MainGen implements IGenerator {
 	@Inject DataClassGen dataClassGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
-	@Inject OptionalActorInterfaceGen optionalActorInterfaceGen
-	@Inject OptionalActorFactoryGen optionalActorFactoryGen
-	@Inject NodeGen nodeGen
-	@Inject NodeRunnerGen nodeRunnerGen
+	@Inject SubSystemClassGen subsystemClassGen
+	@Inject SubSystemRunnerGen subsystemRunnerGen
 	@Inject PrepareFileSystem prepFS
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
@@ -42,15 +40,13 @@ class MainGen implements IGenerator {
 	}
 	
 	def void doGenerate(Root e) {
-		dataClassGen.doGenerate(e)
-		protocolClassGen.doGenerate(e)
-		actorClassGen.doGenerate(e)
-		optionalActorInterfaceGen.doGenerate(e)
-		optionalActorFactoryGen.doGenerate(e)
-		nodeGen.doGenerate(e);
+		dataClassGen.doGenerate(e);
+		protocolClassGen.doGenerate(e);
+		actorClassGen.doGenerate(e);
+		subsystemClassGen.doGenerate(e);
 		
 		if (!e.library) {
-			nodeRunnerGen.doGenerate(e)
+			subsystemRunnerGen.doGenerate(e);
 		}
 	}
 }

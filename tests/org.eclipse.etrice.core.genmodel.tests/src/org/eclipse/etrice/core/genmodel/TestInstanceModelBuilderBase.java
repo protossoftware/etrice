@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.core.genmodel;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -35,6 +34,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -82,7 +82,6 @@ public class TestInstanceModelBuilderBase {
 	}
 
 	private String basePath;
-	protected HashMap<EClass, ArrayList<EObject>> instances;
 
 	protected void prepare() {
 		try {
@@ -155,11 +154,6 @@ public class TestInstanceModelBuilderBase {
 			}
 		}
 		return null;
-	}
-
-	protected void checkSize(int expected, EClass cls) {
-		ArrayList<EObject> objs = instances.get(cls);
-		assertEquals("Number of "+cls.getName(), expected, objs.size());
 	}
 
 }

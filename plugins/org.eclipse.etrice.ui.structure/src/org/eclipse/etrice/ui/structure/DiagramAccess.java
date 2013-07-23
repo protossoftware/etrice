@@ -16,7 +16,9 @@ package org.eclipse.etrice.ui.structure;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.ui.common.DiagramAccessBase;
-import org.eclipse.etrice.ui.structure.commands.UpdateDiagramCommand;
+import org.eclipse.etrice.ui.common.commands.UpdateCommand;
+import org.eclipse.etrice.ui.common.support.AutoUpdateFeature;
+import org.eclipse.etrice.ui.structure.commands.PopulateDiagramCommand;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -44,9 +46,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	}
 
 	protected Command getInitialCommand(StructureClass ac, Diagram diagram, TransactionalEditingDomain editingDomain) {
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
-		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		return new UpdateDiagramCommand(ac, diagram, editingDomain, featureProvider);
+		return new PopulateDiagramCommand(diagram, ac, editingDomain);
 	}
 
 	/* (non-Javadoc)
@@ -56,8 +56,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		StructureClass sc = (StructureClass) featureProvider.getBusinessObjectForPictogramElement(diagram);
-		UpdateDiagramCommand cmd = new UpdateDiagramCommand(sc, diagram, editingDomain, featureProvider);
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new AutoUpdateFeature(featureProvider));
 		if (cmd.updateNeeded())
 			return cmd;
 		

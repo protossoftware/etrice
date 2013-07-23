@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -27,16 +28,12 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.SubProtocolSelectionDialog;
-import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
-import org.eclipse.etrice.ui.structure.support.context.InitialAddConnectionContext;
-import org.eclipse.etrice.ui.structure.support.feature.ConnectionUpdateFeature;
-import org.eclipse.etrice.ui.structure.support.provider.ConnectionProvider;
-import org.eclipse.etrice.ui.structure.support.provider.DecorationProvider;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IReconnectionFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
@@ -51,12 +48,15 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
+import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
+import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
+import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -253,14 +253,15 @@ public class BindingSupport {
 
 			@Override
 			public boolean canAdd(IAddContext context) {
-				if(context.getNewObject() instanceof Binding)
+				if (context instanceof IAddConnectionContext && context.getNewObject() instanceof Binding) {
 					return true;
-				
+				}
 				return false;
 			}
 
 			@Override
 			public PictogramElement add(IAddContext context) {
+				IAddConnectionContext addConContext = (IAddConnectionContext) context;
 				Binding bind = (Binding) context.getNewObject();
 
 				boolean inherited = isInherited(getDiagram(), bind);
@@ -268,18 +269,9 @@ public class BindingSupport {
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				// CONNECTION WITH POLYLINE
 				Connection connection = peCreateService.createFreeFormConnection(getDiagram());
-				if(context instanceof InitialAddConnectionContext){
-					ConnectionProvider cp = ((InitialAddConnectionContext)context).getConnectionProvider();
-					Anchor a1 = cp.getAnchor(bind.getEndpoint1());
-					Anchor a2 = cp.getAnchor(bind.getEndpoint2());
-					assert(a1 != null && a2 != null) : "start and end anchor must be present";
-					connection.setStart(a1);
-					connection.setEnd(a2);
-				} else {
-					IAddConnectionContext addConContext = (IAddConnectionContext) context;
-					connection.setStart(addConContext.getSourceAnchor());
-					connection.setEnd(addConContext.getTargetAnchor());
-				}
+				connection.setStart(addConContext.getSourceAnchor());
+				connection.setEnd(addConContext.getTargetAnchor());
+				
 				Graphiti.getPeService().setPropertyValue(connection, Constants.TYPE_KEY, Constants.BIND_TYPE);
 
 				IGaService gaService = Graphiti.getGaService();
@@ -288,9 +280,6 @@ public class BindingSupport {
 
 				// create link and wire it
 				link(connection, bind);
-				
-				// call update
-				updatePictogramElement(connection);	
 
 				return connection;
 			}
@@ -387,35 +376,45 @@ public class BindingSupport {
 			}
 		}
 		
-		private class UpdateFeature extends ConnectionUpdateFeature {
+		private class UpdateFeature extends AbstractUpdateFeature {
 
 			public UpdateFeature(IFeatureProvider fp) {
 				super(fp);
 			}
 
 			@Override
-			protected boolean canUpdate(EObject bo, PictogramElement pe) {
-				return bo instanceof Binding;				
+			public boolean canUpdate(IUpdateContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return true;
+				
+				return false;
 			}
-			
+
 			@Override
-			protected boolean update(EObject bo, IUpdateContext context) {
-				boolean success = super.update(bo, context);
-				
-				Connection conn = (Connection) context.getPictogramElement();
-				if(context instanceof ConnectionUpdateContext){
-					ConnectionProvider cp = ((ConnectionUpdateContext) context).getConnectionProvider();
-					Binding bind = (Binding)bo;
-					Anchor newStart = cp.getAnchor(bind.getEndpoint1());
-					Anchor newEnd = cp.getAnchor(bind.getEndpoint2());
-					assert(newStart != null && newEnd != null) : "start and end anchor must be not null";
-					if(newStart != conn.getStart())
-						conn.setStart(newEnd);
-					if(newEnd != conn.getEnd())
-						conn.setEnd(newEnd);
+			public IReason updateNeeded(IUpdateContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
+					return Reason.createTrueReason("Binding deleted from model");
 				}
-				
-				return success;
+				return Reason.createFalseReason();
+			}
+
+			@Override
+			public boolean update(IUpdateContext context) {
+				PictogramElement pe = context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(pe);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
+					IRemoveContext rc = new RemoveContext(pe);
+					IFeatureProvider featureProvider = getFeatureProvider();
+					IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
+					if (removeFeature != null) {
+						removeFeature.remove(rc);
+					}
+					EcoreUtil.delete((EObject) bo);
+					return true;
+				}
+				return false;
 			}
 		}
 		

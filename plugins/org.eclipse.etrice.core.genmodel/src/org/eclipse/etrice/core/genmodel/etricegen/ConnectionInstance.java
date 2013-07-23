@@ -45,12 +45,12 @@ public interface ConnectionInstance extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From AI</em>' reference.
-	 * @see #setFromAI(AbstractInstance)
+	 * @see #setFromAI(ActorInstance)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getConnectionInstance_FromAI()
 	 * @model
 	 * @generated
 	 */
-	AbstractInstance getFromAI();
+	ActorInstance getFromAI();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getFromAI <em>From AI</em>}' reference.
@@ -60,7 +60,7 @@ public interface ConnectionInstance extends EObject {
 	 * @see #getFromAI()
 	 * @generated
 	 */
-	void setFromAI(AbstractInstance value);
+	void setFromAI(ActorInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>From SPP</b></em>' reference.

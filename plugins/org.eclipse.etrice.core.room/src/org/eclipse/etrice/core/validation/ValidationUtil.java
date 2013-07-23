@@ -50,7 +50,6 @@ import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -77,11 +76,6 @@ import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers.Match;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ValidationUtil {
-
-	/**
-	 * 
-	 */
-	public static final String CONNECTED_SUB_COMPONENT_PORTS_MUST_BE_CONJUGATED_TO_EACH_OTHER = "connected sub component ports must be conjugated to each other";
 
 	public static class Result {
 		private boolean ok;
@@ -287,7 +281,10 @@ public class ValidationUtil {
 			boolean checkCompound) {
 		
 		if (p1==p2)
-			return Result.error("no self connection allowed, ports are identical");
+			return Result.error("no self connection allowed, ports are indentical");
+
+		if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
+			return Result.error("ports are already bound");
 		
 		// check protocol compatibility
 		boolean pc1extendsIncoming = false;
@@ -392,10 +389,6 @@ public class ValidationUtil {
 							return Result.error("sub protocol already connected");
 					}
 			}
-			else {
-				if (alreadyConnected(p1, ref1, p2, ref2, sc, exclude))
-					return Result.error("ports are already bound");
-			}
 		}
 		
 		
@@ -408,7 +401,7 @@ public class ValidationUtil {
 
 			// both ports are on references
 			if (p1.isConjugated()==p2.isConjugated())
-				return Result.error(CONNECTED_SUB_COMPONENT_PORTS_MUST_BE_CONJUGATED_TO_EACH_OTHER);
+				return Result.error("connected sub component ports must be conjugated to each other");
 			
 			if (p1.isConjugated() && pc1extendsIncoming)
 				return Result.error("protocol extends incoming");
@@ -432,13 +425,6 @@ public class ValidationUtil {
 			Port sub = ref1!=null? p1:p2;
 			ActorContainerRef ref = ref1!=null? ref1:ref2;
 			
-			if (ref instanceof ActorRef && ((ActorRef) ref).getRefType()==ReferenceType.OPTIONAL) {
-				if (((ActorRef) ref).getSize()==-1) {
-					// the port must have multiplicity any
-					if (local.getMultiplicity()!=-1)
-						return Result.error("local port '"+local.getName()+"' must have multiplicity any");
-				}
-			}
 			if (RoomHelpers.isRelay(local)) {
 				if (local.isConjugated()!=sub.isConjugated())
 					return Result.error("relay port must have same direction as local port");
@@ -516,6 +502,13 @@ public class ValidationUtil {
 		bindings.add(key);
 		for (Binding bind : sc.getBindings()) {
 			if (bind==exclude)
+				continue;
+			
+			if (!(bind.getEndpoint1().getPort()==p1 && bind.getEndpoint1().getActorRef()==ref1
+					&& bind.getEndpoint2().getPort()==p2 && bind.getEndpoint2().getActorRef()==ref2))
+				continue;
+			if (!(bind.getEndpoint2().getPort()==p1 && bind.getEndpoint2().getActorRef()==ref1
+					&& bind.getEndpoint1().getPort()==p2 && bind.getEndpoint1().getActorRef()==ref2))
 				continue;
 
 			key = getKey(bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),

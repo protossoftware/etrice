@@ -41,8 +41,6 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances <em>Optional Instances</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -234,38 +232,6 @@ public interface Root extends EObject {
 	EList<SubSystemClass> getSubSystemClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Optional Instances</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Optional Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Optional Instances</em>' containment reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_OptionalInstances()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<OptionalActorInstance> getOptionalInstances();
-
-	/**
-	 * Returns the value of the '<em><b>Optional Actor Classes</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.ActorClass}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Optional Actor Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Optional Actor Classes</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_OptionalActorClasses()
-	 * @model
-	 * @generated
-	 */
-	EList<ActorClass> getOptionalActorClasses();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * @param cls a room class
 	 * @return all room models referenced directly or indirectly by this room class
@@ -325,21 +291,5 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	StructureInstance getInstance(String path);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	EList<ActorClass> getSubClasses(ActorClass ac);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void computeSubClasses();
 
 } // Root

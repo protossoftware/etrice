@@ -177,14 +177,6 @@ class RoomExtensions {
 	}
 	
 	/**
-	 * @param rc a {@link RoomClass}
-	 * @return the name of the room model followed by the class name and all . replaced with _
-	 */
-	def String getFullyQualifiedName(RoomClass rc) {
-		rc.package.replace(".", "_")+"_"+rc.name
-	}
-	
-	/**
 	 * @param packageName a dot (.) separated package anem
 	 * @return the input with dots replaced with slashes (/)
 	 */

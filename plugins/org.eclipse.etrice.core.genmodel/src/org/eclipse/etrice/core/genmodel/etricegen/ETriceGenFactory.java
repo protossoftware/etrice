@@ -41,15 +41,6 @@ public interface ETriceGenFactory extends EFactory {
 	Root createRoot();
 
 	/**
-	 * Returns a new object of class '<em>Actor Interface Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Actor Interface Instance</em>'.
-	 * @generated
-	 */
-	ActorInterfaceInstance createActorInterfaceInstance();
-
-	/**
 	 * Returns a new object of class '<em>Structure Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,15 +75,6 @@ public interface ETriceGenFactory extends EFactory {
 	 * @generated
 	 */
 	ActorInstance createActorInstance();
-
-	/**
-	 * Returns a new object of class '<em>Optional Actor Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Optional Actor Instance</em>'.
-	 * @generated
-	 */
-	OptionalActorInstance createOptionalActorInstance();
 
 	/**
 	 * Returns a new object of class '<em>Interface Item Instance</em>'.

@@ -19,8 +19,6 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.generator.base.Indexed.*
-import org.eclipse.etrice.core.room.ActorClass
 
 /**
  * Target language independent part of an actor class generator.
@@ -40,14 +38,14 @@ class GenericActorClassGenerator {
 	 */
 	def genInterfaceItemConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-		val endPorts = if (langExt.usesInheritance)
+		var endPorts = if (langExt.usesInheritance)
 			ac.endPorts else ac.allEndPorts
-		val strSAPs = if (langExt.usesInheritance)
+		var strSAPs = if (langExt.usesInheritance)
 			ac.strSAPs else ac.getAllSAPs
-		val svcImpls = if (langExt.usesInheritance)
+		var svcImpls = if (langExt.usesInheritance)
 			ac.serviceImplementations else ac.allServiceImplementations
 			
-		val list = new ArrayList<Pair<String, String>>()
+		var list = new ArrayList<Pair<String, String>>()
 		for (ep : endPorts) {
 			list.add(pair("IFITEM_"+ep.name, (1+xpac.getInterfaceItemLocalId(ep)).toString))
 		}
@@ -56,16 +54,6 @@ class GenericActorClassGenerator {
 		}
 		for (svc : svcImpls) {
 			list.add(pair("IFITEM_"+svc.spp.name, (1+xpac.getInterfaceItemLocalId(svc.spp)).toString))
-		}
-		
-		return langExt.genEnumeration("interface_items", list)
-	}
-	
-	def genInterfaceItemConstantsForOptionalActor(ActorClass ac) {
-		val ports = ac.allInterfacePorts
-		val list = new ArrayList<Pair<String, String>>()
-		for (ep : ports.indexed) {
-			list.add(pair("IFITEM_"+ep.value.name, ep.index1.toString))
 		}
 		
 		return langExt.genEnumeration("interface_items", list)
