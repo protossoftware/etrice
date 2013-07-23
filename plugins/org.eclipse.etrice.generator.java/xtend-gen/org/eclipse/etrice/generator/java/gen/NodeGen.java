@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.base.Indexed;
+import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
@@ -169,6 +170,10 @@ public class NodeGen {
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTServices;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
       _builder.newLine();
@@ -316,17 +321,13 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t\t");
       _builder.append("// thread mappings");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t\t");
-          _builder.append("msgSvcCtrl.addPathToThread(\"");
+          _builder.append("addPathToThread(\"");
           String _path = ai.getPath();
           _builder.append(_path, "		");
           _builder.append("\", ");
@@ -354,7 +355,7 @@ public class NodeGen {
                 boolean _greaterThan = (_size > 0);
                 if (_greaterThan) {
                   _builder.append("\t\t");
-                  _builder.append("msgSvcCtrl.addPathToPeers(\"");
+                  _builder.append("addPathToPeers(\"");
                   String _path_1 = pi.getPath();
                   _builder.append(_path_1, "		");
                   _builder.append("\", ");
@@ -532,7 +533,76 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {");
+      _builder.newLine();
       _builder.append("\t\t");
+      IntelligentSeparator _intelligentSeparator = new IntelligentSeparator("else ");
+      final IntelligentSeparator else1 = _intelligentSeparator;
+      _builder.newLineIfNotEmpty();
+      {
+        EList<ActorClass> _optionalActorClasses = root.getOptionalActorClasses();
+        for(final ActorClass oa : _optionalActorClasses) {
+          _builder.append("\t\t");
+          _builder.append(else1, "		");
+          _builder.append("if (optionalActorClass.equals(\"");
+          String _name_11 = oa.getName();
+          _builder.append(_name_11, "		");
+          _builder.append("\")) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          IntelligentSeparator _intelligentSeparator_1 = new IntelligentSeparator("else ");
+          final IntelligentSeparator else2 = _intelligentSeparator_1;
+          _builder.newLineIfNotEmpty();
+          {
+            EList<ActorClass> _subClasses = root.getSubClasses(oa);
+            List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
+            final Function1<ActorClass,Boolean> _function_1 = new Function1<ActorClass,Boolean>() {
+                public Boolean apply(final ActorClass s) {
+                  boolean _isAbstract = s.isAbstract();
+                  boolean _not = (!_isAbstract);
+                  return Boolean.valueOf(_not);
+                }
+              };
+            Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_union, _function_1);
+            for(final ActorClass subcls : _filter) {
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append(else2, "			");
+              _builder.append("if (\"");
+              String _name_12 = subcls.getName();
+              _builder.append(_name_12, "			");
+              _builder.append("\".equals(actorClass)) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("return new ");
+              String _javaFactoryName = this._javaExtensions.getJavaFactoryName(subcls);
+              _builder.append(_javaFactoryName, "				");
+              _builder.append("();");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return null;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("};");
       _builder.newLine();

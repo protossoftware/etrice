@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -91,10 +92,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 «««			«portClass(pc, false)»
 «««			«portClass(pc, true)»
 
-		/*--------------------- debug helpers */
-		
-		/* get message string for message id */
-		const char* «pc.name»_getMessageString(int msg_id);
+		«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+			/*--------------------- debug helpers */
+			
+			/* get message string for message id */
+			const char* «pc.name»_getMessageString(int msg_id);
+		«ENDIF»
 
 		«pc.userCode(2)»
 		
@@ -121,8 +124,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«portClassSource(pc, false)»
 			«portClassSource(pc, true)»
 			
-			/*--------------------- debug helpers */
-			«generateDebugHelpersImplementation(root, pc)»
+			«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				/*--------------------- debug helpers */
+				«generateDebugHelpersImplementation(root, pc)»
+			«ENDIF»
 		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
 			«pc.genDataDrivenPortSources»
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
@@ -253,6 +258,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, "«message.name»", self->peerInstName)
+							«ENDIF»
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
@@ -261,13 +269,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«IF hdlr != null»
 						int i;
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[i]«dataCall»);
+							«portClassName»_«message.name»(&((etReplPort*)self)->ports[i].port«dataCall»);
 						}					
 					«ELSE»
 						int i;
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[i])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[i].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[i].port.peerInstName)
+							«ENDIF»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -275,11 +286,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
 					«IF hdlr != null»
-						«portClassName»_«message.name»((etPort*)&((etReplPort*)self)->ports[idx]«dataCall»);
+						«portClassName»_«message.name»(&((etReplPort*)self)->ports[idx].port«dataCall»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						if (0<=idx && idx<((etReplPort*)self)->size) {
-							«sendMessageCall(hasData, "((etPort*)&((etReplPort*)self)->ports[idx])", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[idx].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[idx].port.peerInstName)
+							«ENDIF»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -323,7 +337,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def private messageGetterSignature(String className, String messageName, String type) {
 		type+" "+className+"_"+messageName+"_get(const "+className+"* const self)"
 	}
-	
+
+// TODO: can this be deleted?
 //	def sendMessage(Message m, boolean conj) {'''
 //	«var dir = if (conj) "IN" else "OUT"»
 //	«var hdlr = m.getSendHandler(conj)»

@@ -308,8 +308,13 @@ SPPoint:
 ;
 
 ActorRef:
-	'ActorRef' name=ID ('[' size=INT ']')? ':' type=[ActorClass|FQN] (docu=Documentation)?;
+	(refType=ReferenceType)? 'ActorRef' name=ID (size=MULTIPLICITY)? ':' type=[ActorClass|FQN] (docu=Documentation)?;
 
+enum ReferenceType:
+	FIXED='fixed' |
+	OPTIONAL='optional'
+	// IMPORTED='imported'
+;
 
 // **************************************************************
 // state machine

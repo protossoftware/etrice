@@ -1,0 +1,88 @@
+\section{HelloWorld for Java}
+
+\subsection{Scope}
+
+In this tutorial you will build your first very simple \eTrice{} model. The goal is to learn the work flow of 
+\eTrice{} and to understand a few basic features of ROOM. You will perform the following steps:
+
+\begin{enumerate}
+\item create a new model from scratch
+\item add a very simple state machine to an actor
+\item generate the source code
+\item run the model
+\item open the message sequence chart
+\end{enumerate}
+
+Make sure that you have set up the workspace as described in \emph{Setting up the Workspace for Java}.
+
+\subsection{Create a new model from scratch}
+
+The easiest way to create a new \eTrice{} Project is to use the eclipse project wizard. From the eclipse file 
+menu select \emph{File->New->Project} and create a new \emph{Empty eTrice Java Project} and name it \textbf{HelloWorld}.
+
+\includegraphics[width=0.8\textwidth]{images/015-HelloWorld10.png}
+% !images/015-HelloWorld10.png!
+
+The wizard creates everything that is needed to create, build and run an \eTrice{} model. The resulting 
+project should look like this:
+
+\includegraphics{images/015-HelloWorld11.png}
+% !images/015-HelloWorld11.png!
+
+Within the model directory the model file \emph{HelloWorld.room} was created. Open the 
+\emph{HelloWorld.room} file and delete the contents of the file. Open the content assist with Ctrl+Space 
+and select \emph{RoomModel - model skeleton}.
+
+\includegraphics[width=0.6\textwidth]{images/015-HelloWorld12.png}
+% !images/015-HelloWorld12.png!   
+
+Edit the template variables by typing the new names and jumping with Tab from name to name.
+
+The resulting model code should look like this:
+
+\begin{lstlisting}[language=ROOM]
+RoomModel HelloWorld_Model {
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1: HelloWorldTop
+		LogicalThread defaultThread
+	}
+
+	ActorClass HelloWorldTop { }
+
+}
+\end{lstlisting}
+
+\input{015.1-hello-world-create-statemachine}
+
+\subsection{Build and run the model}
+
+Now the model is finished and the source code can be generated. The project wizard has created a launch 
+configuration that is responsible for generating the source code. In the project \textit{HelloWorld} right click \emph{\_HelloWorld.launch} and run it as \emph{gen\_HelloWorld}. 
+
+\includegraphics[width=0.8\textwidth]{images/015-HelloWorld06.png}
+% !images/015-HelloWorld06.png!
+
+The source code for the model will be generated into the folder \emph{src-gen}. The main function will be contained in \emph{SubSystem\_HelloWorldRunner.java}. Select this file and run it as Java application.
+
+\includegraphics{images/015-HelloWorld07.png}
+% !images/015-HelloWorld07.png!
+
+
+The Hello World application starts and the string \emph{"Hello World"} will be printed into the console window. To stop the application the user must type \emph{quit} in the console window.
+
+\includegraphics[width=0.6\textwidth]{images/015-HelloWorld08.png}
+% !images/015-HelloWorld08.png!
+
+\input{015.2-hello-world-open-msc}
+
+\subsection{Summary}
+
+Now you have generated your first \eTrice{} model from scratch. You can switch between diagram editor and 
+textual model representation (.room file) and you can see what will be generated during editing and saving the diagram files. 
+You should take a look at the generated source files to understand how the state machine is generated and 
+the life cycle of the application works. The next tutorials will deal with more complex hierarchies in structure and behavior.

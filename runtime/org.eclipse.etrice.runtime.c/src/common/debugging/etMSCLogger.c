@@ -16,12 +16,12 @@
 #include "osal/etThread.h"
 
 static etFileHandle etMSCLogger_fileHandle = NULL;
-static char* etMSCLogger_objectName = "";
+static const char* etMSCLogger_objectName = "";
 
 /*TODO: move or replace ET_MAX_FILENAME_LEN */
 #define ET_MAX_FILENAME_LEN 256
 
-void etMSCLogger_open(char* logPath, char* mscName){
+void etMSCLogger_open(const char* logPath, const char* mscName){
 	char path[ET_MAX_FILENAME_LEN];
 	sprintf(path, "%s/%s.seq", logPath, mscName);
 	etMSCLogger_fileHandle = etLogger_fopen(path, "w+");
@@ -34,39 +34,39 @@ void etMSCLogger_close(void){
 
 }
 
-void etMSCLogger_setObjectName(char* objectName){
+void etMSCLogger_setObjectName(const char* objectName){
 	etMSCLogger_objectName = objectName;
 }
 
-char* etMSCLogger_getObjectName(void){
+const char* etMSCLogger_getObjectName(void){
 	return etMSCLogger_objectName;
 }
 
-void etMSCLogger_syncCall(char* sourceName, char* messageName, char* targetName){
+void etMSCLogger_syncCall(const char* sourceName, const char* messageName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s ==> %s %s(thread=%ld)\n", sourceName, targetName, messageName, etThread_self_id());
 	}
 }
 
-void etMSCLogger_syncReturn(char* sourceName, char* targetName){
+void etMSCLogger_syncReturn(const char* sourceName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s <== %s\n", sourceName, targetName);
 	}
 }
 
-void etMSCLogger_asyncOut(char* sourceName, char* messageName, char* targetName){
+void etMSCLogger_asyncOut(const char* sourceName, const char* messageName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >-- %s %s\n", sourceName, targetName, messageName);
 	}
 }
 
-void etMSCLogger_asyncIn(char* sourceName, char* messageName, char* targetName){
+void etMSCLogger_asyncIn(const char* sourceName, const char* messageName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
 	}
 }
 
-void etMSCLogger_setState(char* objectName, char* stateName){
+void etMSCLogger_setState(const char* objectName, const char* stateName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
 	}

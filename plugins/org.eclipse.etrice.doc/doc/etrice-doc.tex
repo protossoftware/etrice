@@ -1,18 +1,18 @@
 \documentclass[a4paper,oneside,10pt]{book}
 \usepackage[english]{babel}
-\usepackage[portrait,a4paper,margin=3.0cm,headsep=5mm]{geometry}
+\usepackage[portrait,a4paper,margin=2.0cm,headsep=5mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{longtable}
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{hyperref}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
 \hypersetup{hidelinks}
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage[labelfont=bf,singlelinecheck=false,format=plain,,justification=justified,indention=0cm]{caption}
-
 \usepackage{listings}
+\usepackage{mdframed}
 
 \input{roomlistings}
 
@@ -60,22 +60,25 @@
 
 \input{012-working-with-tutorials}
 \input{013-setting-up-the-workspace-for-java}
-\input{015-getting-started}
-\input{020-tutorial-blinky}
-\input{025-tutorial-sending-data}
-\input{030-tutorial-ped-lights}
-\input{032-setting-up-the-workspace_c}
-\input{034-getting-started_c}
-\input{036-tutorial-remove-comment_c}
+\input{014-setting-up-the-workspace-for-C}
+\input{015-hello-world-java}
+\input{016-hello-world-c}
+\input{017-tutorial-ping-pong}
+
 \input{040-room-concepts}
 
 \chapter{eTrice{} Features}
-
 \input{043-layout-with-kieler}
+
+%*** BEGIN Not implemented yet
 %\input{050-etrice-features}
 %\input{060-codegenerators}
 %\input{070-runtimes}
+%*** END Not implemented yet
+
 \input{080-etrice-models}
+
+\chapter{eTrice{} Tool Developer's Reference}
 
 \input{200-dev-reference}
 

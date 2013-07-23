@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -69,6 +70,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
+							|| GlobalGeneratorSettings::generateMSCInstrumentation
 		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
 		
 	'''
@@ -98,6 +100,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* const part of ActorClass (ROM) */
 		«IF hasConstData»
 			typedef struct «ac.name»_const {
+				«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+					const char* instName;
+					
+				«ENDIF»
 				/* simple ports */
 				«FOR ep : eventPorts»
 					«IF ep.multiplicity==1»
@@ -171,7 +177,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		void «ac.name»_init(«ac.name»* self);
 
-		void «ac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg);
+		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg);
 		
 		«IF dataDriven || async»
 			void «ac.name»_execute(«ac.name»* self);
@@ -231,7 +237,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 		
 		
-		void «ac.name»_receiveMessage(void* self, void* ifitem, const etMessage* msg){
+		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !xpac.stateMachine.empty»
 				

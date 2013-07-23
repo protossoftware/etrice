@@ -1,26 +1,23 @@
-RoomModel HelloWorld {
-
-	LogicalSystem System_HelloWorld {
-		SubSystemRef subsystem: SubSystem_HelloWorld
+RoomModel HelloWorld_Model {
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1:SubSysClass1 
 	}
-
-	SubSystemClass SubSystem_HelloWorld {
-		ActorRef application: HelloWorldTop
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1:HelloWorldTop 
 		LogicalThread defaultThread
 	}
-
 	ActorClass HelloWorldTop {
 		Structure { }
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"System.out.println(\"HelloWorld !\");"
+						"System.out.println(\"Hello World\");"
 					}
 				}
 				State state0
 			}
 		}
 	}
-
+	
 }

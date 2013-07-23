@@ -4,13 +4,13 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Tutorial HelloWorld for Java</title> 
+<head><title>Setting up the Workspace for C Projects</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-06-21 12:20:00" /> 
+<meta name="date" content="2013-07-19 08:21:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,284 +21,123 @@ href="etrice-docse4.html#tailetrice-docse4.html" >prev-tail</a>] [<a
 href="#tailetrice-docse5.html">tail</a>] [<a 
 href="etrice-docch2.html#etrice-docse5.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">2.3   </span> <a 
- id="x9-280002.3"></a>Tutorial HelloWorld for Java</h3>
-<!--l. 3--><p class="noindent" >
+ id="x9-300002.3"></a>Setting up the Workspace for C Projects</h3>
+<!--l. 3--><p class="noindent" ><span 
+class="ec-lmssbx-10">Objectives for this tutorial:</span> </p>
+     <ul class="itemize1">
+     <li class="itemize">create all needed library projects (runtime.c and modellib.c)
+     </li>
+     <li class="itemize">create the tutorial project with the examples
+     </li>
+     <li class="itemize">create the project with a traffic light simulator
+     </li>
+     <li class="itemize">test the workspace setup by running one of the examples</li></ul>
+<!--l. 11--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.3.1   </span> <a 
- id="x9-290002.3.1"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >In this tutorial you will build your first very simple eTrice model. The goal is to learn the work
-flow of eTrice and to understand a few basic features of ROOM. You will perform the following
-steps:
-</p><!--l. 8--><p class="noindent" >
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x9-29002x1">create a new model from scratch
-     </li>
-     <li 
-  class="enumerate" id="x9-29004x2">add a very simple state machine to an actor
-     </li>
-     <li 
-  class="enumerate" id="x9-29006x3">generate the source code
-     </li>
-     <li 
-  class="enumerate" id="x9-29008x4">run the model
-     </li>
-     <li 
-  class="enumerate" id="x9-29010x5">open the message sequence chart</li></ol>
-<!--l. 16--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
-class="ec-lmsso-10">Setting up the workspace</span>.
-</p><!--l. 18--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
- id="x9-300002.3.2"></a>Create a new model from scratch</h4>
-<!--l. 20--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu
-select <span 
-class="ec-lmssbx-10">File-&#x003E;New-&#x003E;Project </span>and create a new eTrice project and name it <span 
-class="ec-lmssbx-10">HelloWorld</span>.
-</p><!--l. 23--><p class="noindent" ><img 
-src="images/015-HelloWorld10.png" alt="PIC"  
- />
-</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project
-should look like this:
-</p><!--l. 29--><p class="noindent" ><img 
-src="images/015-HelloWorld11.png" alt="PIC"  
- />
-</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
-class="ec-lmsso-10">HelloWorld.room </span>was created. Open the <span 
-class="ec-lmsso-10">HelloWorld.room </span>file
-and delete the contents of the file. Open the content assist with Ctrl+Space and select <span 
-class="ec-lmsso-10">model</span>
-<span 
-class="ec-lmsso-10">skeleton</span>.
-</p><!--l. 36--><p class="noindent" ><img 
-src="images/015-HelloWorld12.png" alt="PIC"  
- />
-                                                                                 
-                                                                                 
-</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
-</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
-</p>
-<!--l. 43-->
-<div class="lstlisting" id="listing-1"><span class="label"><a 
- id="x9-30001r1"></a><span 
-class="ec-lmss-8x-x-62">1</span></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorld</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30002r2"></a><span 
-class="ec-lmss-8x-x-62">2</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30003r3"></a><span 
-class="ec-lmss-8x-x-62">3</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">System_HelloWorld</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30004r4"></a><span 
-class="ec-lmss-8x-x-62">4</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subsystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSystem_HelloWorld</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30005r5"></a><span 
-class="ec-lmss-8x-x-62">5</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30006r6"></a><span 
-class="ec-lmss-8x-x-62">6</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30007r7"></a><span 
-class="ec-lmss-8x-x-62">7</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSystem_HelloWorld</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30008r8"></a><span 
-class="ec-lmss-8x-x-62">8</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">application</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30009r9"></a><span 
-class="ec-lmss-8x-x-62">9</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30010r10"></a><span 
-class="ec-lmss-8x-x-62">10</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30011r11"></a><span 
-class="ec-lmss-8x-x-62">11</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30012r12"></a><span 
-class="ec-lmss-8x-x-62">12</span></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x9-30013r13"></a><span 
-class="ec-lmss-8x-x-62">13</span></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 59--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all
-elements will be used. But as prerequisite for further versions the following elements can be defined:
+ id="x9-310002.3.1"></a>Create Library, Tutorial and Simulator Projects</h4>
+<!--l. 13--><p class="noindent" >Before you can start with C, some preconditions must be fulfilled:
 </p>
      <ul class="itemize1">
-     <li class="itemize">the <span 
-class="ec-lmsso-10">LogicalSystem </span>(currently optional)
+     <li class="itemize">A C compiler must be installed on your machine. All tutorials are based on MinGW/GCC (Windows) and
+     Posix/GCC (Linux), but currently only tested on Windows with MinGW/GCC
      </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">SubSystemClass </span>(mandatory)
-     </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">ActorClass </span>(mandatory)</li></ul>
-<!--l. 67--><p class="noindent" >The <span 
-class="ec-lmsso-10">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
-class="ec-lmsso-10">SubSystemRef</span>. The
-<span 
-class="ec-lmsso-10">SubSystemClass </span>represents an address space and contains at least one <span 
-class="ec-lmsso-10">ActorRef</span>. The <span 
-class="ec-lmsso-10">ActorClass </span>is the
-building block of which an application will be built of. It is in general a good idea to define a top level actor
-that can be used as reference within the subsystem.
-</p><!--l. 72--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in an easy to navigate
-tree.
-</p><!--l. 74--><p class="noindent" ><img 
-src="images/015-HelloWorld02.png" alt="PIC"  
+     <li class="itemize">The CDT-Eclipse plugin must be installed as the C development environment.</li></ul>
+<!--l. 20--><p class="noindent" >After installation of eclipse and the eTrice plug in, your workspace should look like this:
+</p><!--l. 22--><p class="noindent" ><img 
+src="images/013-SetupWorkspace01.png" alt="PIC"  
  />
-</p><!--l. 78--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.3.3   </span> <a 
- id="x9-310002.3.3"></a>Create a state machine</h4>
-<!--l. 80--><p class="noindent" >We will implement the Hello World code on the initial transition of the <span 
-class="ec-lmsso-10">HelloWorldTop </span>actor. Therefore open
-the state machine editor by right clicking the <span 
-class="ec-lmsso-10">HelloWorldTop </span>actor in the outline view and select <span 
-class="ec-lmsso-10">Edit</span>
-<span 
-class="ec-lmsso-10">Behavior</span>.
-</p><!--l. 84--><p class="noindent" ><img 
-src="images/015-HelloWorld03.png" alt="PIC"  
+</p><!--l. 25--><p class="noindent" >Just the eTrice menu item is visible of the installed eTrice plugins.
+</p><!--l. 27--><p class="noindent" >
+                                                                                            
+                                                                                            
+</p><!--l. 28--><p class="noindent" >Select the menu <span 
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;Other</span>
+</p><!--l. 30--><p class="noindent" ><img 
+src="images/013-SetupWorkspace02.png" alt="PIC"  
  />
-</p><!--l. 87--><p class="noindent" >The state machine editor will be opened. Drag and drop an <span 
-class="ec-lmsso-10">Initial Point </span>from the tool box to the diagram into
-the top level state. Drag and drop a <span 
-class="ec-lmsso-10">State </span>from the tool box to the diagram. Confirm the dialogue with
-<span 
-class="ec-lmsso-10">ok</span>. Select the <span 
-class="ec-lmsso-10">Transition </span>in the tool box and draw the transition from the <span 
-class="ec-lmsso-10">Initial Point </span>to the
-State. Open the transition dialogue by double clicking the transition arrow and fill in the action
-code.
-                                                                                 
-                                                                                 
+</p><!--l. 33--><p class="noindent" >Open the <span 
+class="ec-lmsso-10">eTrice </span>tab and select <span 
+class="ec-lmsso-10">eTrice C Runtime</span>
+</p><!--l. 35--><p class="noindent" >Press <span 
+class="ec-lmsso-10">Next </span>and <span 
+class="ec-lmsso-10">Finish </span>to install the Runtime into your workspace.
+</p><!--l. 37--><p class="noindent" ><img 
+src="images/014-SetupWorkspaceC005.png" alt="PIC"  
+ />
+</p><!--l. 40--><p class="noindent" >
+                                                                                            
+                                                                                            
+</p><!--l. 41--><p class="noindent" >Do the same steps for <span 
+class="ec-lmsso-10">eTrice C Modellib</span>, <span 
+class="ec-lmsso-10">eTrice C Tutorials </span>and <span 
+class="ec-lmsso-10">eTrice Trafficlight for Tutorials</span>. To avoid temporary
+error markers you should keep the proposed order of installation. The resulting workspace should look like
+this:
+</p><!--l. 45--><p class="noindent" ><img 
+src="images/014-SetupWorkspace007.png" alt="PIC"  
+ />
 </p>
-<div class="verbatim" id="verbatim-1">
-System.out.println("Hello&#x00A0;World&#x00A0;!");
+<h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
+ id="x9-320002.3.2"></a>Perform Setup Test</h4>
+<!--l. 50--><p class="noindent" >To check the correct setup of your workspace we run a little testproject contained in the tutorial project.
+</p><!--l. 52--><p class="noindent" >The tutorial models are available in the <span 
+class="ec-lmsso-10">org.eclipse.etrice.tutorials.c </span>project. All tutorials are ready to generate and run
+without any changes. To test the code generator and the workspace setup simply run <span 
+class="ec-lmsso-10">gen_SetupTestC.launch </span>as
+<span 
+class="ec-lmsso-10">gen_SetupTestC</span>:
+</p><!--l. 55--><p class="noindent" ><img 
+src="images/014-05-gen_SetupTestC.png" alt="PIC"  
+ />
+</p><!--l. 58--><p class="noindent" >
+                                                                                            
+                                                                                            
+</p><!--l. 59--><p class="noindent" >The successful generation ends with <span 
+class="ec-lmsso-10">Info: &#8211; finished code generation </span>in the Console.
+</p><!--l. 61--><p class="noindent" ><img 
+src="images/014-06-FinishedCodeGeneration.png" alt="PIC"  
+ />
+</p><!--l. 64--><p class="noindent" >For each tutorial in the folder src-gen a sub folder is generated which contains the generated code. The file <span 
+class="ec-lmsso-10">&#x003C;...&#x003E;_Runner.c</span>
+contains the main function. To run the generated application you first have to compile the project (with the hammer symbol
+in the C/C++ Perspective).
+</p><!--l. 66--><p class="noindent" ><img 
+src="images/014-07-Compile.png" alt="PIC"  
+ />
+</p><!--l. 69--><p class="noindent" >If the compilitation does not succeed, make sure to clean and compile the projects <span 
+class="ec-lmsso-10">org.eclipse.etrice.runtime.c </span>and
+<span 
+class="ec-lmsso-10">org.eclipse.etrice.modellib.c </span>with the correct build configuration for your platform. Depending on the setup of
+your C compiler and CDT you might have to change the pre defined build configurations <span 
+class="ec-lmsso-10">MinGWDebug </span>or
+<span 
+class="ec-lmsso-10">PosixDebug</span>.
+</p><!--l. 71--><p class="noindent" >After the successful compilation you can run the application as <span 
+class="ec-lmsso-10">Local C/C++ Application</span>.
+</p><!--l. 73--><p class="noindent" ><img 
+src="images/014-08-RunAsC-CPP-Application.png" alt="PIC"  
+ />
+</p><!--l. 76--><p class="noindent" >
+                                                                                            
+                                                                                            
+</p><!--l. 77--><p class="noindent" >To stop the application type <span 
+class="ec-lmsso-10">quit </span>in the console window. If your Console contains the lines
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-2">
+******************
+&#x00A0;<br />***&#x00A0;Setup&#x00A0;OK&#x00A0;***
+&#x00A0;<br />******************
 </div>
-<!--l. 95--><p class="nopar" >
-</p><!--l. 97--><p class="noindent" >The result should look like this:
-</p><!--l. 99--><p class="noindent" ><img 
-src="images/015-HelloWorld04.png" alt="PIC"  
+<!--l. 82--><p class="nopar" > your setup should be ok.
+</p><!--l. 85--><p class="noindent" ><img 
+src="images/014-09-ConsoleWithSetupOk.png" alt="PIC"  
  />
-</p><!--l. 102--><p class="noindent" >Save the diagram and inspect the model file. Note that the textual representation was created after saving the
-diagram.
-</p><!--l. 105--><p class="noindent" ><img 
-src="images/015-HelloWorld05.png" alt="PIC"  
- />
-</p><!--l. 109--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.3.4   </span> <a 
- id="x9-320002.3.4"></a>Build and run the model</h4>
-<!--l. 111--><p class="noindent" >Now the model is finished and source code can be generated. The project wizard has created a launch
-configuration that is responsible for generating the source code. From <span 
-class="ec-lmsso-10">HelloWorld/ </span>right click
-<span 
-class="ec-lmssbx-10">gen_HelloWorld.launch </span>and run it as gen_HelloWorld. All model files in the model directory will be
-generated.
-</p><!--l. 116--><p class="noindent" ><img 
-src="images/015-HelloWorld06.png" alt="PIC"  
- />
-</p><!--l. 119--><p class="noindent" >The code will be generated to the src-gen directory. The main function will be contained in
-<span 
-class="ec-lmssbx-10">SubSystem_HelloWorldRunner.java</span>. Select this file and run it as Java application.
-</p><!--l. 122--><p class="noindent" ><img 
-src="images/015-HelloWorld07.png" alt="PIC"  
- />
-</p><!--l. 126--><p class="noindent" >The Hello World application starts and the string will be printed on the console window. To stop the
-application the user must type <span 
-class="ec-lmssbx-10">quit </span>in the console window.
-</p><!--l. 129--><p class="noindent" ><img 
-src="images/015-HelloWorld08.png" alt="PIC"  
- />
-</p><!--l. 132--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.3.5   </span> <a 
- id="x9-330002.3.5"></a>Open the Message Sequence Chart</h4>
-<!--l. 134--><p class="noindent" >During runtime the application produced a MSC and wrote it to a file. Open
-HelloWorld/tmp/log/SubSystem_HelloWorld_Async.seq using Trace2UML (it is open source and can be
-obtained from http://trace2uml.tigris.org/). You should see something like this:
-</p><!--l. 138--><p class="noindent" ><img 
-src="images/015-HelloWorld09.png" alt="PIC"  
- />
-</p><!--l. 142--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.3.6   </span> <a 
- id="x9-340002.3.6"></a>Summary</h4>
-<!--l. 144--><p class="noindent" >Now you have generated your first eTrice model from scratch. You can switch between diagram editor and
-model (.room file) and you can see what will be generated during editing and saving the diagram files. You
-should take a look at the generated source files to understand how the state machine is generated and the life
-cycle of the application. The next tutorials will deal with more complex hierarchies in structure and
-behavior.
-                                                                                 
-                                                                                 
+</p><!--l. 88--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
+                                                                                            
+                                                                                            
 </p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse6.html" >next</a>] [<a 

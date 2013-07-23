@@ -1,0 +1,32 @@
+RoomModel TrafficLight_Model {
+	
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.java/model/TcpService.room"
+	
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1:SubSysClass1 
+	}
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1:TrafficLightTop 
+		LogicalThread defaultThread
+	}
+	ActorClass TrafficLightTop {
+		Structure {
+			ActorRef tlInterface: TrafficLightInterface
+		}
+		Behavior { }
+	}
+	ActorClass TrafficLightInterface {
+		Structure {
+			conjugated Port control: PTcpControl
+			conjugated Port payload: PTcpPayload
+			ActorRef tlTCPClient: ATcpClient
+			Binding payload and tlTCPClient.PayloadPort
+			Binding control and tlTCPClient.ControlPort
+		}
+		Behavior { }
+	}
+	
+	
+}

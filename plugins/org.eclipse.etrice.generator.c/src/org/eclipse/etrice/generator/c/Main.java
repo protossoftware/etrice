@@ -19,6 +19,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IncrementalGenerationFileIo;
 import org.eclipse.etrice.generator.c.gen.Validator;
@@ -78,6 +79,8 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
 	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
 	public static final String OPTION_DEBUG = "-debug";
+	public static final String OPTION_MSC = "-msc_instr";
+	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 
 	/**
 	 * print usage message to stderr
@@ -177,6 +180,12 @@ public class Main extends AbstractGenerator {
 			else if (args[i].equals(OPTION_NOEXIT)) {
 				setTerminateOnError(false);
 			}
+			else if (args[i].equals(OPTION_MSC)) {
+				GlobalGeneratorSettings.setGenerateMSCInstrumentation(true);
+			}
+			else if (args[i].equals(OPTION_VERBOSE_RT)) {
+				GlobalGeneratorSettings.setGenerateWithVerboseOutput(true);
+			}
 			else if (args[i].equals(OPTION_DEBUG)) {
 				debug = true;
 			}
@@ -220,27 +229,47 @@ public class Main extends AbstractGenerator {
 	}
 
 	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary, boolean debug) {
-		if (!loadModels(uriList))
+		if (!loadModels(uriList)) {
+			logger.logInfo("loading of models failed");
+			logger.logError("-- terminating", null);
 			return false;
+		}
 
-		if (!validateModels())
+		if (!validateModels()) {
+			logger.logInfo("validation failed");
+			logger.logError("-- terminating", null);
 			return false;
+		}
 
-		if(!dataConfig.setResources(getResourceSet(), logger))
+		if (!dataConfig.setResources(getResourceSet(), logger)) {
+			logger.logInfo("configuration errors");
+			logger.logError("-- terminating", null);
 			return false;
+		}
 		
 		Root genModel = createGeneratorModel(asLibrary, genModelPath);
-		if (genModel==null)
+		if (diagnostician.isFailed() || genModel==null) {
+			logger.logInfo("errors during build of generator model");
+			logger.logError("-- terminating", null);
 			return false;
+		}
 		
-		if (!validator.validate(genModel))
+		if (!validator.validate(genModel)) {
+			logger.logInfo("validation failed during build of generator model");
+			logger.logError("-- terminating", null);
 			return false;
+		}
 		
-		ETMapUtil.processModels(genModel, getResourceSet());
+		ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
 		if (debug) {
 			logger.logInfo("-- begin dump of mappings");
 			logger.logInfo(ETMapUtil.dumpMappings());
 			logger.logInfo("-- end dump of mappings");
+		}
+		if (diagnostician.isFailed() || genModel==null) {
+			logger.logInfo("errors in mapping");
+			logger.logError("-- terminating", null);
+			return false;
 		}
 		
 		logger.logInfo("-- starting code generation");
@@ -252,7 +281,7 @@ public class Main extends AbstractGenerator {
 		}
 		
 		if (diagnostician.isFailed()) {
-			logger.logInfo("validation failed during build of generator model");
+			logger.logInfo("errors during code generation");
 			logger.logError("-- terminating", null);
 			return false;
 		}

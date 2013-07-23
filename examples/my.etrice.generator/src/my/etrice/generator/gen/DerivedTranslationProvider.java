@@ -26,6 +26,9 @@ import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
  */
 public class DerivedTranslationProvider extends JavaTranslationProvider {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.java.gen.JavaTranslationProvider#translateTag(java.lang.String, org.eclipse.etrice.core.room.DetailCode)
+	 */
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("Derived"))
 			return "DerivedReplacement";

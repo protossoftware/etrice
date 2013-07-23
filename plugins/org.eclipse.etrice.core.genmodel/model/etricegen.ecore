@@ -20,6 +20,10 @@
     <eOperations name="getInstance" eType="#//StructureInstance">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getSubClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
+      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    </eOperations>
+    <eOperations name="computeSubClasses"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="library" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="systemInstances" upperBound="-1"
         eType="#//SystemInstance" containment="true"/>
@@ -47,6 +51,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optionalInstances" upperBound="-1"
+        eType="#//OptionalActorInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optionalActorClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceBase" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -58,11 +66,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nObjIDs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StructureInstance" eSuperTypes="#//InstanceBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
-        eType="#//ActorInstance" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractInstance" abstract="true" eSuperTypes="#//InstanceBase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
         eType="#//PortInstance" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActorInterfaceInstance" eSuperTypes="#//AbstractInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedServices" upperBound="-1"
+        eType="#//ServiceImplInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optionalInstances" upperBound="-1"
+        eType="#//OptionalActorInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="array" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructureInstance" eSuperTypes="#//AbstractInstance">
+    <eOperations name="getActorInstances" upperBound="-1" eType="#//ActorInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="#//AbstractInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="saps" upperBound="-1" eType="#//SAPInstance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="spps" upperBound="-1" eType="#//SPPInstance"
@@ -100,6 +119,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unindexedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalActorInstance" eSuperTypes="#//StructureInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredServices" upperBound="-1"
+        eType="#//SAPInstance"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItemInstance" eSuperTypes="#//InstanceBase">
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -120,6 +144,7 @@
     <eLiterals name="external" literal="external"/>
     <eLiterals name="internal" value="1" literal="internal"/>
     <eLiterals name="relay" value="2" literal="relay"/>
+    <eLiterals name="interface" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BindingInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="2" eType="#//PortInstance"
@@ -140,7 +165,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="svcImpl" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ServiceImplementation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fromAI" eType="#//ActorInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromAI" eType="#//AbstractInstance"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromSPP" eType="#//SPPInstance"
         eOpposite="#//SPPInstance/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="toSPP" eType="#//SPPInstance"

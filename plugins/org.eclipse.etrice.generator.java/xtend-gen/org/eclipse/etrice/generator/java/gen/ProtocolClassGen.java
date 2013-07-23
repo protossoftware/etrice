@@ -140,7 +140,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;");
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;");
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;");
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
     _builder.newLine();
@@ -287,7 +287,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("this(actor, name, localId, 0);");
@@ -298,7 +298,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId, int idx) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId, int idx) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(actor, name, localId, idx);");
@@ -480,7 +480,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(replPortClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(actor, name, localId);");
@@ -528,7 +528,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {");
+      _builder.append("protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return new ");

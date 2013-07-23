@@ -227,7 +227,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				genDocu = true;
 			documentationButton.setSelection(genDocu);
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
-			mscButton.setSelection(configuration.getAttribute(MSC, false));
+			mscButton.setSelection(configuration.getAttribute(MSC, true));
 			verboseButton.setSelection(configuration.getAttribute(VERBOSE, false));
 		}
 		catch (CoreException e) {

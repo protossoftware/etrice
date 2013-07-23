@@ -1,0 +1,101 @@
+RoomModel SetupTest_Model {
+
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1: PingPongTop
+		ActorRef timingService: ATimingService
+		LayerConnection ref actorRef1 satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef sender: Sender
+			ActorRef receiver: Receiver
+			Binding receiver.sender and sender.receiver
+		}
+		Behavior { }
+	}
+
+	ActorClass Sender {
+		Interface {
+			conjugated Port receiver: PPingPong
+		}
+		Structure {
+			external Port receiver
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> SendingPing { }
+				Transition tr0: SendingPing -> ReceivedPong {
+					triggers {
+						<pong: receiver>
+					}
+				}
+				State SendingPing {
+					entry {
+						"receiver.ping();"
+					}
+				}
+				State ReceivedPong {
+					entry {
+						"System.out.println(\"******************\");"
+						"System.out.println(\"*** Setup OK ***\");"
+						"System.out.println(\"******************\");"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Receiver {
+		Interface {
+			Port sender: PPingPong
+		}
+		Structure {
+			external Port sender
+			SAP timeout: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaingForPing { }
+				Transition tr0: WaingForPing -> ReceivedPing {
+					triggers {
+						<ping: sender>
+					}
+				}
+				Transition tr1: ReceivedPing -> Done {
+					triggers {
+						<timeout: timeout>
+					}
+					action {
+						"sender.pong();"
+					}
+				}
+				State WaingForPing
+				State ReceivedPing {
+					entry {
+						"timeout.startTimeout(100);"
+					}
+				}
+				State Done
+			}
+		}
+	}
+
+	ProtocolClass PPingPong {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

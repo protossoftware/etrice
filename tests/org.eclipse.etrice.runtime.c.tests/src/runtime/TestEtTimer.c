@@ -112,7 +112,7 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 
 	printf("TestEtTimer_multiTimer: counter %d\n", (int)counter); fflush(stdout); // TODO: remove debug output
 
-	EXPECT_TRUE(id, "counter wrong", (counter > 33) && (counter < 45));
+	EXPECT_TRUE(id, "counter wrong", (counter > 25) && (counter < 45));
 	etTimer_destruct(&timer2);
 	etTimer_destruct(&timer1);
 

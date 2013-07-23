@@ -1,0 +1,225 @@
+\section{HelloWorld for C}
+
+\subsection{Scope}
+
+In this tutorial you will build your first very simple \eTrice{} model. The goal is to learn the work flow of 
+\eTrice{} and to understand a few basic features of ROOM. There are some more steps to do 
+in C compared to Java. You will perform the following steps:
+
+You will perform the following steps:
+
+\begin{enumerate}
+\item create a new model from scratch
+\item add a very simple state machine to an actor
+\item create a launch configuration for the C code generator
+\item setup the C environment
+\item generate the source code
+\item run the model
+\item open the message sequence chart
+\end{enumerate}
+
+Make sure that you have set up the workspace as described in \emph{Setting up the Workspace for C}.
+
+\subsection{Create a new model from scratch}
+
+Before you can create a new C-model, you have to create a new C project as described in \textit{Setting up 
+the Workspace for C Projects}.
+
+\begin{enumerate}
+\item select the \textit{C/C++} perspective
+\item select \textit{File->New->C Project} from the main menue
+\item name the project \textit{HelloWorldC} 
+\item the project type is \textit{Executable / Empty C Project}
+\item select the Toolchain for your platform (e.g. \textit{MinGW GCC})
+\end{enumerate}
+
+Your project explorer should look like this:
+
+\includegraphics{images/016-HelloWorldC01.png}
+% !images/016-HelloWorldC01.png!
+
+The next step is to add the model folder:
+Right click on the new project. Select \textit{New->Folder} and name it \textit{model}.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC02.png}
+% !images/016-HelloWorldC02.png!
+
+Add the model file to the folder. Right click on the new folder. Select \textit{New->file} and name it 
+\textit{HelloWorldC.room}.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC03.png}
+% !images/016-HelloWorldC03.png!
+
+Since the file extension \textit{.room} is recognised as an Xtext based format, the tool will ask you to add the Xtext nature. Answer with \textit{Yes}. 
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC04.png}
+% !images/016-HelloWorldC04.png!
+
+Open the \emph{HelloWorld.room} file and delete the contents of the file. Open the content assist with <Ctrl>+<Space> and select \emph{RoomModel - model skeleton}.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC041.png}
+% !images/016-HelloWorldC041.png!
+
+Edit the template variables by typing the new names and jumping with <Tab> from name to name.
+
+The resulting model code should look like this:
+
+\begin{lstlisting}[language=ROOM]
+RoomModel HelloWorld_Model {
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1: HelloWorldTop
+		LogicalThread defaultThread
+	}
+
+	ActorClass HelloWorldTop { }
+
+}
+\end{lstlisting}
+
+Now create the file model/HelloWorldC.etphys for the physical model and insert (<Ctrl>+<Space>) the code template \emph{PhysicalModel - model skeleton} without changes.
+
+Listing for HelloWorldC.etphys :
+
+\begin{lstlisting}[language=etPhys]
+PhysicalModel PhysicalModel1 {
+
+	PhysicalSystem PhysSys1 {
+		NodeRef nodeRef1 : NodeClass1
+	}
+
+	NodeClass NodeClass1 {
+		runtime = RuntimeClass1
+		priomin = -10
+		priomax = 10
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 100 ms
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 32
+			msgpoolsize = 10
+		}
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model = multiThreaded
+	}
+}
+\end{lstlisting}
+
+The physical model defines the setup of your nodes with their attributes like threads and mode of execution. In this case we define one node with one thread. 
+
+The mapping model we will create now defines the mapping (deployment) of the logical elements in the .room model to the physical elements int the .etphys model. Now create the file model/HelloWorldC.etmap for the mapping model and insert (Ctrl+Space) the code template \emph{MappingModel - model skeleton} with some changes (jump with <Tab> between the template variables):
+
+\begin{lstlisting}[language=etMap]
+MappingModel MappingModel1 {
+	import HelloWorld_Model.* from "HelloWorld.room"
+	import PhysicalModel1.* from "HelloWorld.etphys"
+	Mapping LogSys1 -> PhysSys1 {
+		SubSystemMapping subSysRef1 -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}
+\end{lstlisting}
+
+Now the workspace should look like this:
+
+\includegraphics{images/016-HelloWorldC05.png}
+% !images/016-HelloWorldC05.png!
+
+\input{015.1-hello-world-create-statemachine}
+
+\subsection{Create a launch configuration to start the C code generator}
+
+Unlike in Java a launch configuration for the C code generator must be created.
+
+From the main menu \textit{Run} or the context menu \textit{Run As} in the \emph{Project Explorer} select \textit{Run Configurations} .
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC06.png}
+% !images/016-HelloWorldC06.png!
+
+Within the dialog select \textit{\eTrice{} C Generator} and click the \textit{New} button to create a new 
+launch configuration.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC07.png}
+% !images/016-HelloWorldC07.png!
+
+A new configuration should be created. Name it \textit{gen\_HelloWorld} and add the mapping model \emph{HelloWorld.etmap} model via one of the 
+\textit{add} buttons.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC08.png}
+% !images/016-HelloWorldC08.png!
+
+The mapping model is the root model for the code generator.
+
+To save your launch configuration, select \textit{Shared file} in the tab \textit{Common} and add the \textit{HelloWorldC} project via the 
+\textit{Browse} button.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC10.png}
+% !images/016-HelloWorldC10.png!
+
+Apply your changes. The new configuration should now exist in your workspace.
+
+\includegraphics{images/016-HelloWorldC11.png}
+% !images/016-HelloWorldC11.png!
+
+
+\subsection{Generate the code}
+
+Now you can generate the code. Right click on the launch configuration and run it 
+as \textit{gen\_HelloWorldC}.
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC12.png}
+% !images/016-HelloWorldC12.png!
+
+The code should be generated and placed in the src-gen folder.
+
+\includegraphics{images/016-HelloWorldC13.png}
+% !images/016-HelloWorldC13.png!
+
+\subsection{Setup the C build}
+
+Before you can build the application you must setup the include and library pathes for the runtime system. 
+
+Right click the project and select \textit{Properties -> C/C++ Build -> Settings -> Includes}. 
+Add the include path for the current project \emph{src-gen} and the runtime source folders \emph{common}, \emph{config} and the chosen platform ( \emph{MT\_WIN\_MinGW} or \emph{MT\_POSIX\_GENERIC\_GCC} ).
+
+\includegraphics[width=0.8\textwidth]{images/016-HelloWorldC14.png}
+% !images/016-HelloWorldC14.png!
+
+Add the runtime library: \textit{Properties -> C/C++ Build -> Settings -> Libraries}.
+
+\includegraphics{images/016-HelloWorldC15.png}
+% !images/016-HelloWorldC15!
+
+The name of the library is \emph{org.eclipse.etrice.runtime.c} but the actual filename for the library is \emph{liborg.eclipse.etrice.runtime.c.a} .
+
+Exclude the folder \emph{src-gen-info} from the build path. This folder is used to store temporary files for the incremetal code generation and must not be compiled in order to avoid multiple definition of symbols.
+
+\includegraphics{images/016-HelloWorldC151.png}
+% !images/016-HelloWorldC151!
+
+\subsection{Build and run the model}
+
+Now you can build the application. Click the build button (hammer symbol) to build the application.
+Run the application in the folder \emph{Binary} as \textit{Local C/C++ Application}.
+The output in the Console View should contain the message \emph{Hello World}.
+
+\includegraphics{images/016-HelloWorldC16.png}
+% !images/016-HelloWorldC16.png!
+
+\input{015.2-hello-world-open-msc}
+
+\subsection{Summary}
+
+You are now familiar with all necessary steps to create, build and run an \eTrice{} C model from scratch. You 
+are able to create a launch configuration to start the code generator and to perform all necessary 
+settings to compile and link the application.  
+
+The next tutorial provides an exercise to get more familiar with these working steps.

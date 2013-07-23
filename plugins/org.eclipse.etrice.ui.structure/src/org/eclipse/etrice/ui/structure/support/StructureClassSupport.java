@@ -60,8 +60,8 @@ public class StructureClassSupport {
 	public static final int MARGIN = 40;
 	
 	private static final int LINE_WIDTH = 4;
-	public static final int DEFAULT_SIZE_X = 800;
-	public static final int DEFAULT_SIZE_Y = 500;
+	public static final int DEFAULT_SIZE_X = 600;
+	public static final int DEFAULT_SIZE_Y = 400;
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant BACKGROUND = new ColorConstant(255, 255, 255);
 

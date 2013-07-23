@@ -59,7 +59,15 @@ public enum PortKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RELAY(2, "relay", "relay");
+	RELAY(2, "relay", "relay"), /**
+	 * The '<em><b>Interface</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INTERFACE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	INTERFACE(3, "interface", "interface");
 
 	/**
 	 * The '<em><b>External</b></em>' literal value.
@@ -95,6 +103,21 @@ public enum PortKind implements Enumerator {
 	public static final int RELAY_VALUE = 2;
 
 	/**
+	 * The '<em><b>Interface</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Interface</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INTERFACE
+	 * @model name="interface"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTERFACE_VALUE = 3;
+
+	/**
 	 * An array of all the '<em><b>Port Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,6 +128,7 @@ public enum PortKind implements Enumerator {
 			EXTERNAL,
 			INTERNAL,
 			RELAY,
+			INTERFACE,
 		};
 
 	/**
@@ -158,6 +182,7 @@ public enum PortKind implements Enumerator {
 			case EXTERNAL_VALUE: return EXTERNAL;
 			case INTERNAL_VALUE: return INTERNAL;
 			case RELAY_VALUE: return RELAY;
+			case INTERFACE_VALUE: return INTERFACE;
 		}
 		return null;
 	}

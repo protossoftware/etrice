@@ -65,7 +65,7 @@
 				<include name="*.etphys"/>
 				<include name="*.rt-config"/>
 			</fileset>
-			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/models">
+			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/model">
 				<include name="TimingService.room"/>
 				<include name="Types.room"/>
 				<include name="TcpService.room"/>

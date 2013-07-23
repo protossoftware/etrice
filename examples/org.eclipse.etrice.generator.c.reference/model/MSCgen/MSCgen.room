@@ -1,0 +1,92 @@
+RoomModel RoomModel1 {
+	import room.basic.types.* from "../Types.room"
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1: Toplevel
+		LogicalThread defaultThread
+	}
+
+	ActorClass Toplevel {
+		Structure {
+			ActorRef sender: Sender
+			ActorRef receiver: Receiver
+			Binding sender.receiver and receiver.sender
+		}
+		Behavior { }
+	}
+
+	ActorClass Sender {
+		Interface {
+			conjugated Port receiver: PSendData
+		}
+		Structure {
+			external Port receiver
+			Attribute counter: int32
+			
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> SendingData {
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr0: SendingData -> cp cp0 {
+					triggers {
+						<receivedData: receiver>
+					}
+				}
+				Transition tr1: cp cp0 -> Done
+				Transition tr2: cp cp0 -> SendingData {
+					cond {
+						"++counter<10"
+					}
+				}
+				ChoicePoint cp0
+				State SendingData {
+					entry {
+						"receiver.sendData(1234);"
+					}
+				}
+				State Done
+			}
+		}
+	}
+
+	ActorClass Receiver {
+		Interface {
+			Port sender: PSendData
+		}
+		Structure {
+			external Port sender
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitingForData { }
+				Transition tr0: WaitingForData -> WaitingForData {
+					triggers {
+						<sendData: sender>
+					}
+					action {
+						"sender.receivedData();"
+					}
+				}
+				State WaitingForData
+			}
+		}
+	}
+
+	ProtocolClass PSendData {
+		incoming {
+			Message sendData(i: int32)
+			
+		}
+		outgoing {
+			Message receivedData()
+		}
+	}
+
+}
