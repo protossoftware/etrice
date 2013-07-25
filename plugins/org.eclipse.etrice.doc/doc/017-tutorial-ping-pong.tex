@@ -239,7 +239,7 @@ Now the \emph{Receiver} can use the timing service.
 \subsubsection{Inspect the Actor Structure}
 Before we start with the implementation of the behavior we will have a short look at the instance tree of the application we built so far:
 
-\includegraphics[width=0.5\textwidth]{images/017-09-PingPong_InstanceTree.jpg}
+\includegraphics[width=0.4\textwidth]{images/017-09-PingPong_InstanceTree.jpg}
 % !017-09-PingPong_InstanceTree.jpg! 
 
 For each instance you can see the names of the \emph{ActorRef}s and in brackets the names of the \emph{ActorClass}es. Starting at the subsystem level this instance tree will be implemented by the code generator. The subsystem will be implemented as process in Linux or Windows.
@@ -258,7 +258,7 @@ Use the \textit{Transition} tool to draw transitions from \textit{init} to \text
 When you draw a transition, the Dialog \emph{Edit Transition} opens. Here you can specify the trigger event and the action code for each transition. Note that the initial transition does not have a trigger event.
 The transition dialog for the Transition from \textit{SendingPing} to \textit{ReceivedPong} should look like this:
 
-\includegraphics[width=0.8\textwidth]{images/017-10-Edit-Transition.png}
+\includegraphics[width=0.6\textwidth]{images/017-10-Edit-Transition.png}
 % !images/017-10-Edit-Transition.png! 
 
 The transition will now be triggered by an incoming message \emph{ping} at the port \emph{receiver}.
@@ -341,5 +341,4 @@ Please note that the timeout messages startTimeout and timeout might vary depend
 
 \subsection{Summary}
 
-Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You have used entry code to send messages and have used the timing service from the model library. You are now familiar with the basic features of \eTrice{}. The further tutorials will take this knowledge as a precondition.
-
+Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You have used entry code to send messages and have used the timing service from the model library. You are now familiar with the basic features of \eTrice{}. Further tutorials and examples will take this knowledge as a precondition.
