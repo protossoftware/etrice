@@ -69,6 +69,11 @@ public class MSCLogger {
 			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" note: "+note) );
 	}
 	
+	public synchronized void addMessageCreate(String source, String target){
+		createLine(source, " (!) ", target, "");
+	}
+	
+	
 	public synchronized void addActorState(String actor, String state){
 		if (filter.applyTo(actor))
 			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" >>> "+state) );

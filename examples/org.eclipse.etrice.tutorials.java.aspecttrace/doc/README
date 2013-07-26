@@ -1,0 +1,96 @@
+AspectJ Synchronous MSC Trace Example
+=====================================
+
+This project shows how synchronous MSC trace functionality can be applied to an
+eTrice project using AspectJ. The example takes the PingPong model from the 
+Java tutorial and adds a new aspect that can be woven with the generated 
+eTrice code to automatically instrument method calls.
+
+Prerequisites
+-------------
+
+- An Eclipse environment with the following software installed:
+	- eTrice 0.3.0
+	- AspectJ
+		- the latest Kepler release can be found at
+		  http://download.eclipse.org/tools/ajdt/43/update
+		- install the feature "AspectJ Development Tools"
+- Optional software:
+	Trace2UML
+		- used to view trace logs as graphical message sequence charts
+		- http://trace2uml.tigris.org
+
+Setup
+-----
+
+1. Open an Eclipse workspace. 
+2. Add the following plugins to the Eclipse workspace:
+	- org.eclipse.etrice.runtime.java
+	- org.eclipse.etrice.modellib.java
+	- org.eclipse.etrice.runtime.java.aspects
+3. Import the example project org.eclipse.etrice.tutorials.java.aspecttrace
+
+Running the Example
+-------------------
+
+To run the example, perform the following steps:
+
+1. Run the launcher /gen_PingPongJava_aspecttrace.launch to generate the eTrice 
+   implementation code for the example (the trace aspect should be applied 
+   automatically)
+2. Run /src-gen/PingPong_Model/SubSysClass1Runner.java as a Java Application
+3. In the Console, after the sender actor reaches state "ReceivedPong" type 
+   "quit" to write the traces and terminate
+4. Inspect the Synchronous MSC generated at /tmp/log/subSysRef1_Sync.seq
+
+To remove the aspect from the build path and disable the Synchronous trace:
+
+1. right click on the file /disableMSCLogger.ajproperties
+2. click on AspectJ Tools > Apply Build Configuration
+
+To add the aspect to the build path and enable the Synchronous trace:
+
+1. right click on the file /enableMSCLogger.ajproperties
+2. click on AspectJ Tools > Apply Build Configuration
+
+Example Details
+---------------
+
+The example project is a copy of the PingPong example from the eTrice Java 
+tutorial. It has been converted to an AspectJ project by right clicking on the 
+project in the Explorer and selecting Configure > Convert to AspectJ Project.
+
+AspectJ projects can be configured with "Inpath" and "Aspect Path" entries. 
+Classes in the Inpath are considered as weaving targets by the AspectJ Builder.
+Aspects in the Aspect Path are applied to the project's source folder as well as
+classes in the Inpath.
+
+In this example, the eTrice Java Runtime and the eTrice Java Modellib are 
+added to the Inpath so that the trace aspect can be woven into them. The 
+example also adds the org.eclipse.etrice.runtime.java.aspects library to the 
+Aspect Path to provide core trace functionality. PingPongRTTrace is a concrete 
+extension of AbstractRTTrace in the aspect library.
+
+The PingPongRTTrace aspect can be easily enabled or disabled by adding and 
+removing it in the Build Path. This is the purpose of the 
+/enableMSCLogger.ajproperties and /disableMSCLogger.ajproperties files.
+
+Modifying PingPongRTTrace
+-------------------------
+
+The output of the synchronous MSC trace can be adjusted by modifying the  
+PingPongRTTrace aspect. The aspect defines two pointcuts, traceScope and 
+traceFilter which can be used to control the trace output. For details about 
+defining pointcuts, refer to the AspectJ Programming Guide at:
+
+http://eclipse.org/aspectj/doc/released/progguide/index.html
+
+Here are some examples:
+
+To restrict traces to calls made by PingPong_Model classes modify traceScope:
+	
+	public pointcut traceScope(): rtClasses() && within(PingPong_Model.*);
+	
+To filter out calls made to and from PingPong_Model.Receiver actors, modify traceFilter:
+
+	public pointcut traceFilter(): this(PingPong_Model.Receiver) || target(PingPong_Model.Receiver);
