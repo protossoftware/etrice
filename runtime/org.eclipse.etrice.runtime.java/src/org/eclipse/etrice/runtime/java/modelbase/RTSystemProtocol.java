@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemServicesProtocol.RTSystemServicesProtocolConjReplPort;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemServicesProtocol.RTSystemServicesProtocolPort;
 
@@ -26,25 +25,27 @@ public class RTSystemProtocol {
 	
 	public static class RTSystemPort extends RTSystemServicesProtocolPort {
 	
-		public RTSystemPort(IEventReceiver actor, int localId) {
+		public RTSystemPort(IInterfaceItemOwner actor, int localId) {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
 			
 			// since we have no mapping for the system ports we connect them directly here
-			IRTObject root = getRoot();
-			if (root instanceof RTSystem)
-				root = root.getChildren().get(0);
-			IRTObject sysport = root.getChild(RT_SYSTEM_PORT_NAME);
-			if (sysport!=null) {
-				InterfaceItemBase peer = ((IReplicatedInterfaceItem) sysport).createSubInterfaceItem();
+			IReplicatedInterfaceItem systemPort = actor.getSystemPort();
+			if (systemPort!=null) {
+				InterfaceItemBase peer = systemPort.createSubInterfaceItem();
 				connectWith(peer);
 			}
+		}
+		
+		@Override
+		protected void destroy() {
+			super.destroy();
 		}
 	
 	}
 	
 	public static class RTSystemConjPort extends RTSystemServicesProtocolConjReplPort {
 
-		public RTSystemConjPort(IEventReceiver actor, int localId) {
+		public RTSystemConjPort(IInterfaceItemOwner actor, int localId) {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
 		}
 		

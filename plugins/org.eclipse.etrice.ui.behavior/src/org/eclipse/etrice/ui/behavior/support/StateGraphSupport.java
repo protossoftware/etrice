@@ -74,8 +74,8 @@ public class StateGraphSupport {
 	
 	private static final int CORNER_SIZE = 20;
 	private static final int LINE_WIDTH = 4;
-	public static final int DEFAULT_SIZE_X = 600;
-	public static final int DEFAULT_SIZE_Y = 400;
+	public static final int DEFAULT_SIZE_X = 800;
+	public static final int DEFAULT_SIZE_Y = 500;
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant BACKGROUND = new ColorConstant(255, 255, 255);
 

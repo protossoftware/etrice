@@ -56,10 +56,26 @@ public class MSCLogger {
 		createLine(source, " <== ", target, message);
 	}
 
+	public synchronized void addMessageActorCreate(String source, String target){
+		createLine(source, " (!) ", target, "");
+	}
+
+	public synchronized void addMessageActorDestroy(String source, String target){
+		createLine(source, " (X) ", target, "");
+	}
+
+	public synchronized void addNote(String actor, String note){
+		if (filter.applyTo(actor))
+			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" note: "+note) );
+	}
 	
 	public synchronized void addActorState(String actor, String state){
 		if (filter.applyTo(actor))
 			getCommandList().add( new String ("\t"+filter.reduceString(actor)+" >>> "+state) );
+	}
+	
+	public synchronized void addVisibleComment(String comment){
+		getCommandList().add("# "+comment);
 	}
 
 	private void createLine(String source, String mid, String target, String message) {

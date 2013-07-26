@@ -13,33 +13,55 @@ import java.util.List;
 import org.eclipse.etrice.runtime.java.messaging.AbstractMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
+import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
- * The abstract base class for actor class interface items like ports and saps.
+ * The abstract base class for actor class interface items like {@link PortBase}
+ * and {@link InterfaceItemBroker}s.
  * 
  * @author Henrik Rentz-Reichert
- *
  */
 public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	
-	private IMessageReceiver ownMsgReceiver;
-	private IMessageReceiver peerMsgReceiver;
+	/**
+	 * If this is part of an {@link IReplicatedInterfaceItem} then the
+	 * owner of this item is stored in this field.
+	 * It is used for sub ports of a replicated ports. When of of this is
+	 * disconnected then it is also removed from its parent and destroyed.
+	 */
+	private IReplicatedInterfaceItem replicator = null;
+	
+	protected IMessageReceiver ownMsgReceiver;
+	protected IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
-	private Address peerAddress = null;
+	protected Address peerAddress = null;
+	private InterfaceItemBase peer;
 
-	public InterfaceItemBase (IEventReceiver actor, String name, int localId, int idx) {
-		super(actor, name);
+
+	/**
+	 * The constructor determines the thread of its {@link IEventReceiver}
+	 * 
+	 * @param owner
+	 * @param name
+	 * @param localId
+	 * @param idx
+	 */
+	public InterfaceItemBase (IInterfaceItemOwner owner, String name, int localId, int idx) {
+		super(owner.getEventReceiver(), name);
 		
 		this.localId = localId;
 		this.idx = idx;
 		
-		int thread = RTServices.getInstance().getMsgSvcCtrl().getThreadForPath(getParent().getInstancePath());
+		if (owner instanceof IReplicatedInterfaceItem)
+			replicator = (IReplicatedInterfaceItem) owner;
+		
+		int thread = owner.getEventReceiver().getThread();
 		if (thread>=0) {
-			MessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
+			IMessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 			Address addr = msgSvc.getFreeAddress();
 			setAddress(addr);
 			
@@ -52,7 +74,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			}
 		}
 		
-		List<String> peerPaths = RTServices.getInstance().getMsgSvcCtrl().getPeersForPath(getInstancePath());
+		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			IRTObject object = getObject(peerPaths.get(0));
 			InterfaceItemBase peer = null;
@@ -67,8 +89,15 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 		
 	}
 
-	protected void connectWith(InterfaceItemBase peer) {
+	protected synchronized void connectWith(InterfaceItemBase peer) {
 		if (peer!=null) {
+			this.peer = peer;
+			
+			if (peer instanceof IInterfaceItemBroker) {
+				peer.connectWith(this);
+				return;
+			}
+			
 			// connect with each other
 			peerAddress = peer.getAddress();
 			peer.peerAddress = getAddress();
@@ -76,12 +105,32 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			peer.peerMsgReceiver = ownMsgReceiver;
 		}
 	}
+	
+	protected synchronized void disconnect() {
+		disconnectInternal();
+		if (peer!=null) {
+			peer.disconnectInternal();
+			peer = null;
+		}
+	}
 
+	private void disconnectInternal() {
+		peerAddress = null;
+		peerMsgReceiver = null;
+		
+		if (replicator!=null)
+			destroy();
+	}
+	
 	protected IMessageReceiver getMsgReceiver() {
 		return ownMsgReceiver;
 	}
 
-	protected IMessageReceiver getPeerMsgReceiver() {
+	protected synchronized Address getPeerAddress() {
+		return peerAddress;
+	}
+
+	protected synchronized IMessageReceiver getPeerMsgReceiver() {
 		return peerMsgReceiver;
 	}
 
@@ -100,8 +149,31 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	public int getIdx() {
 		return idx;
 	}
-
-	protected Address getPeerAddress() {
-		return peerAddress;
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#destroy()
+	 */
+	@Override
+	protected void destroy() {
+		if (peerAddress!=null) {
+			disconnect();
+		}
+		
+		if (replicator!=null) {
+			replicator.removeItem(this);
+		}
+		
+		if (this.ownMsgReceiver instanceof MessageService) {
+			MessageService ms = (MessageService) this.ownMsgReceiver;
+			ms.getMessageDispatcher().removeMessageReceiver(this);
+			ms.freeAddress(getAddress());
+		}
+		
+		super.destroy();
+	}
+	
+	@Override
+	public String toString() {
+		return "port "+getName()+" "+getAddress()+" <-> "+getPeerAddress();
 	}
 }

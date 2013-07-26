@@ -26,6 +26,7 @@ import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -134,6 +135,37 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			for (EObject obj : candidates) {
 				if (obj.eGet(nameAttr).equals(fromObject))
 					return obj;
+			}
+			return null;
+		}
+	}
+
+	static class Enum2StringConverter extends Converter {
+
+		Enum2StringConverter() {
+			super(Enumerator.class, String.class);
+		}
+		
+		@Override
+		public Object convert(Object fromObject) {
+			return ((Enumerator)fromObject).getLiteral();
+		}
+	}
+
+	static class String2EnumConverter extends Converter {
+
+		private List<? extends Enumerator> choices;
+
+		String2EnumConverter(Object type, List<? extends Enumerator> choices) {
+			super(String.class, type);
+			this.choices = choices;
+		}
+		
+		@Override
+		public Object convert(Object fromObject) {
+			for (Enumerator choice : choices) {
+				if (choice.getLiteral().equals(fromObject))
+					return choice;
 			}
 			return null;
 		}
@@ -416,7 +448,37 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		
 		return combo;
 	}
+	
+	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices) {
+		return createCombo(parent, label, obj, type, att, choices, null);
+	}
+	
+	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices, IValidator validator) {
+		Label l = toolkit.createLabel(parent, label, SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
 
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
+		combo.setLayoutData(new GridData(SWT.HORIZONTAL));
+		combo.setVisibleItemCount(10);
+		toolkit.adapt(combo, true, true);
+		
+		for (Enumerator o : choices) {
+			combo.add(o.getLiteral());
+		}
+		
+		UpdateValueStrategy t2m = new UpdateValueStrategy().setConverter(new String2EnumConverter(type, choices));
+		UpdateValueStrategy m2t = new UpdateValueStrategy().setConverter(new Enum2StringConverter());
+		if (validator!=null) {
+			t2m.setAfterConvertValidator(validator);
+			t2m.setBeforeSetValidator(validator);
+			m2t.setAfterConvertValidator(validator);
+			m2t.setBeforeSetValidator(validator);
+		}
+		bindingContext.bindValue(SWTObservables.observeText(combo), PojoObservables.observeValue(obj, att.getName()), t2m, m2t);
+		
+		return combo;
+	}
+	
 	protected ControlDecoration createDecorator(Control ctrl, String message) {
 		ControlDecoration controlDecoration = new ControlDecoration(ctrl, SWT.LEFT | SWT.TOP);
 		controlDecoration.setDescriptionText(message);

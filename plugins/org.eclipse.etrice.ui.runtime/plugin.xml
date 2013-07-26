@@ -2,6 +2,12 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.etrice.core.ui.wizardCategory"
+            name="eTrice"/>
+   </extension>
+
 	<!-- ========= org.eclipse.etrice.runtime.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" 
@@ -104,12 +110,18 @@
 	  </example>
 	</extension>   
 
+	<extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.etrice.core.ui.exampleWizardCategory"
+            name="eTrice Examples and Tutorials"/>
+	</extension>
+
 	<!-- ========= org.eclipse.etrice.tutorials.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard" 
 			name="eTrice Java Tutorials" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice Java tutorials accompanying the online help</description>
@@ -126,7 +138,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" 
 			name="eTrice C Tutorials" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
@@ -143,7 +155,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" 
 			name="eTrice Trafficlight for Tutorials" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice traffic light GUI used in tutorials</description>
@@ -152,6 +164,40 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.tutorials.simulators.trafficlight" contentURI="contents/org.eclipse.etrice.tutorials.simulators.trafficlight.zip" description="eTrice Traffic Light GUI"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors1 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_DynamicActors1" 
+			name="eTrice Dynamic Actors Example 1" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice introductory example for dynamic actors</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_DynamicActors1" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors1" contentURI="contents/org.eclipse.etrice.examples.dynamicactors1.zip" description="Exmaple Dynamic Actors 1"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors2 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors2" 
+			name="eTrice Dynamic Actors Example 2" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice introductory example for dynamic actors</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors2" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors2" contentURI="contents/org.eclipse.etrice.examples.dynamicactors2.zip" description="Exmaple Dynamic Actors 2"/>
 	  </example>
 	</extension>   
 

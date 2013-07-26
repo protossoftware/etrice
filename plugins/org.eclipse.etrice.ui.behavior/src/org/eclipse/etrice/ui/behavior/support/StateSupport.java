@@ -964,6 +964,17 @@ public class StateSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
+			PictogramElement pe = context.getPictogramElements()[0];
+			
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+			if (bo instanceof State) {
+				ActorClass ac = SupportUtil.getActorClass(SupportUtil.getDiagram(pe));
+				State s = (State) bo;
+				if (!RoomHelpers.hasSubStructure(s, ac)) {
+					boolean editable = RoomHelpers.getActorClass(s)==ac;
+					return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
+				}
+			}
 			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 		

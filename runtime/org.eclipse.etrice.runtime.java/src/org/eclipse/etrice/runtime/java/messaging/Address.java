@@ -33,7 +33,7 @@ public class Address {
 	public int objectID;
 	
 	public String toString(){
-		return "Address(nodeID="+nodeID+",threadID="+threadID+",objectID="+objectID+")";
+		return "Address(n="+nodeID+",t="+threadID+",o="+objectID+")";
 	}
 	public String toID(){
 		return nodeID+"_"+threadID+"_"+objectID;

@@ -24,11 +24,14 @@
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.java" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.c" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.c" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.java" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.c" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.cpp" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.cpp" />
+		
+		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.java" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors1" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors2" />
 	</target>
 
 </project>

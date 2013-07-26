@@ -16,8 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.etrice.runtime.java.messaging.Address;
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 
 
 /**
@@ -79,8 +82,38 @@ public class DebuggingService {
 		asyncLogger.addActorState(actor.getInstancePath(), state);
 	}
 	
+	public void addMessageActorCreate(SubSystemClassBase parent, String refName) {
+		asyncLogger.addMessageActorCreate(parent.getInstancePath(), parent.getInstancePath()+IRTObject.PATH_DELIM+refName);
+	}
+	
+	public void addMessageActorCreate(ActorClassBase parent, String refName) {
+		asyncLogger.addMessageActorCreate(parent.getInstancePath(), parent.getInstancePath()+IRTObject.PATH_DELIM+refName);
+	}
+	
+	public void addMessageActorDestroy(ActorClassBase inst) {
+		if (!(inst.getParent() instanceof OptionalActorInterfaceBase))
+			asyncLogger.addMessageActorDestroy(inst.getParent().getInstancePath(), inst.getInstancePath());
+	}
+	
+	public void addMessageActorCreate(OptionalActorInterfaceBase oai, String actorClass) {
+		asyncLogger.addNote(oai.getParent().getInstancePath(), "dynamically creating actor class "+actorClass);
+		asyncLogger.addMessageActorCreate(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+oai.getName());
+	}
+	
+	public void addMessageActorDestroy(OptionalActorInterfaceBase oai) {
+		asyncLogger.addMessageActorDestroy(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+oai.getName());
+	}
+	
+	public void addVisibleComment(String comment) {
+		asyncLogger.addVisibleComment(comment);
+	}
+	
 	public void addPortInstance(PortBase port){
 		portInstances.put(port.getAddress(), port);
+	}
+	
+	public void removePortInstance(PortBase port){
+		portInstances.remove(port.getAddress());
 	}
 	
 	public MSCLogger getSyncLogger() {

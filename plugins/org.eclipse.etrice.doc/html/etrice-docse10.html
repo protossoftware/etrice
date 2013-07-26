@@ -4,134 +4,97 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Protocols</title> 
+<head><title>Dynamic Actors 2</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-25 15:04:00" /> 
+<meta name="date" content="2013-07-26 11:20:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 167--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse11.html" >next</a>] [<a 
+<!--l. 129--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse10.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
- id="x15-710003.2"></a>Protocols</h3>
-<!--l. 169--><p class="noindent" >
+ id="x15-670003.2"></a>Dynamic Actors 2</h3>
+<!--l. 131--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors2</span>.
+</p><!--l. 133--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
- id="x15-720003.2.1"></a>Description</h4>
-<!--l. 171--><p class="noindent" >A <span id="textcolor40"><span 
-class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
-class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports. The exact
-semantics of a message is defined by the execution model.
-</p><!--l. 174--><p class="noindent" >
+ id="x15-680003.2.1"></a>Purpose</h4>
+<!--l. 135--><p class="noindent" >A modified version of <span 
+class="ec-lmtt-10">dynamicactors1 </span>is used to analyze eventual memory leaks of the application.
+</p><!--l. 137--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
- id="x15-730003.2.2"></a>Motivation</h4>
-     <ul class="itemize1">
-     <li class="itemize">Protocol classes provide a reusable interface specification for ports
+ id="x15-690003.2.2"></a>Details</h4>
+<!--l. 139--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
+</p><!--l. 142--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x15-69002x1">create an instance of <span 
+class="ec-lmtt-10">Optional2</span>
      </li>
-     <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
-<!--l. 181--><p class="noindent" >
+     <li 
+  class="enumerate" id="x15-69004x2">destroy the instance
+     </li>
+     <li 
+  class="enumerate" id="x15-69006x3">create an instance of <span 
+class="ec-lmtt-10">Optional1</span>
+     </li>
+     <li 
+  class="enumerate" id="x15-69008x4">destroy the instance</li></ol>
+<!--l. 149--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
+</p><!--l. 151--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
+analyzed using <span 
+class="ec-lmtt-10">JConsole </span>(which is a part of the Java6 distribution) to dump the heap and <a 
+href="http://www.eclipse.org/mat/" ><span 
+class="ec-lmtt-10">org.eclipse.mat</span></a> to analyze
+it.
+</p><!--l. 156--><p class="noindent" >The measured total execution time on a Intel Core 2 Duo at 2.66 GHz was 110 ms. This corresponds to about 370
+<span 
+class="lmmi-10">&#x03BC;</span>s.
+</p><!--l. 159--><p class="noindent" >The result of the heap analysis for <span 
+class="ec-lmtt-10">org.eclipse.etrice.* </span>objects is listed in figure <a 
+href="#x15-690092">3.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
+the retained heap size indicate that the application has no memory leak.
 </p>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x15-690092"></a>
+                                                                                            
+                                                                                            
+<!--l. 163--><p class="noindent" ><img 
+src="images/039-DynAct2-HeapAnalysis.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;3.2: </span><span  
+class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x15-690092 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
 <h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
- id="x15-740003.2.3"></a>Notation</h4>
-<!--l. 183--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing
-messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a data
-class.
-</p>
-<!--l. 188-->
-<div class="lstlisting" id="listing-21"><span class="label"><a 
- id="x15-74001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ProtocolClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">incoming</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">m1</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">data</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">int32</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">m2</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">outgoing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">m3</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">data</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DataClass1</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">m4</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x15-74010r10"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-                                                                                            
-                                                                                            
-<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse11.html" >next</a>] [<a 
+ id="x15-700003.2.3"></a>Noteworthy</h4>
+     <ul class="itemize1">
+     <li class="itemize">Calling the garbage collector every time before the free memory is dumped costs a significant amount of time
+     and the execution time is increased to the order of seconds.
+     </li>
+     <li class="itemize">The measured free memory is close to constant. Only a small step is observed which wasn&#8217;t analyzed further.</li></ul>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="etrice-docse10.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse10.html" >up</a>] </p></div>
-<!--l. 201--><p class="noindent" ><a 
+<!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse10.html"></a> </p> 
 </body></html> 

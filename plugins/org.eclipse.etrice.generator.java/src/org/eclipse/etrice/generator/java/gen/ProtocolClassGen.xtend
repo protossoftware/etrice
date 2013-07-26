@@ -68,7 +68,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.Message;
 		import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
 		import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
-		import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
+		import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.modelbase.PortBase;
 		import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
@@ -119,10 +119,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
-			public «portClassName»(IEventReceiver actor, String name, int localId) {
+			public «portClassName»(IInterfaceItemOwner actor, String name, int localId) {
 				this(actor, name, localId, 0);
 			}
-			public «portClassName»(IEventReceiver actor, String name, int localId, int idx) {
+			public «portClassName»(IInterfaceItemOwner actor, String name, int localId, int idx) {
 				super(actor, name, localId, idx);
 				«IF pclass!=null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
@@ -131,41 +131,48 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					DebuggingService.getInstance().addPortInstance(this);
 				«ENDIF»
 			}
+			«IF GlobalSettings::generateMSCInstrumentation»
+				
+				public void destroy() {
+					DebuggingService.getInstance().removePortInstance(this);
+					super.destroy();
+				}
+			«ENDIF»
 		
 			@Override
 			public void receive(Message m) {
-					if (!(m instanceof EventMessage))
-						return;
-					EventMessage msg = (EventMessage) m;
-					if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-						«IF GlobalSettings::generateMSCInstrumentation»
-							if (messageStrings[msg.getEvtId()] != "timerTick"){
-«««								TODOTS: model switch for activation
-								DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-							}
-						«ENDIF»
-						«IF pc.handlesReceive(conj)»
-						switch (msg.getEvtId()) {
-							«FOR hdlr : pc.getReceiveHandlers(conj)»
-								case «hdlr.msg.getCodeName()»:
-								{
-									«FOR command : hdlr.detailCode.commands»
-										«command»
-									«ENDFOR»
-								}
-								break;
-							«ENDFOR»
-							default:
-						«ENDIF»
-							if (msg instanceof EventWithDataMessage)
-								getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-							else
-								getActor().receiveEvent(this, msg.getEvtId(), null);
-						«IF pc.handlesReceive(conj)»
+				if (!(m instanceof EventMessage))
+					return;
+				EventMessage msg = (EventMessage) m;
+				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
+					«IF GlobalSettings::generateMSCInstrumentation»
+						if (messageStrings[msg.getEvtId()] != "timerTick"){
+«««							TODOTS: model switch for activation
+							DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 						}
-						«ENDIF»
+					«ENDIF»
+					«IF pc.handlesReceive(conj)»
+					switch (msg.getEvtId()) {
+						«FOR hdlr : pc.getReceiveHandlers(conj)»
+							case «hdlr.msg.getCodeName()»:
+							{
+								«FOR command : hdlr.detailCode.commands»
+									«command»
+								«ENDFOR»
+							}
+							break;
+						«ENDFOR»
+						default:
+					«ENDIF»
+						if (msg instanceof EventWithDataMessage)
+							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+						else
+							getActor().receiveEvent(this, msg.getEvtId(), null);
+					«IF pc.handlesReceive(conj)»
 					}
-			}
+					«ENDIF»
+				}
+		}
 		
 			«IF pclass!=null»
 				«pclass.attributes.attributes»
@@ -183,7 +190,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// replicated port class
 		static public class «replPortClassName» extends ReplicatedPortBase {
 		
-			public «replPortClassName»(IEventReceiver actor, String name, int localId) {
+			public «replPortClassName»(IInterfaceItemOwner actor, String name, int localId) {
 				super(actor, name, localId);
 			}
 			
@@ -199,7 +206,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				return («portClassName») getInterfaceItem(idx);
 			}
 			
-			protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+			protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 				return new «portClassName»(rcv, name, lid, idx);
 			}
 			
@@ -207,8 +214,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				// incoming messages
 				«FOR m : pc.getAllIncomingMessages()»
 					«messageSignature(m)»{
-						for (int i=0; i<getReplication(); ++i) {
-							get(i).«messageCall(m)»;
+						for (InterfaceItemBase item : getItems()) {
+							((«portClassName»)item).«messageCall(m)»;
 						}
 					}
 				«ENDFOR»
@@ -216,8 +223,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				// outgoing messages
 				«FOR m : pc.getAllOutgoingMessages()»
 					«messageSignature(m)»{
-						for (int i=0; i<getReplication(); ++i) {
-							get(i).«messageCall(m)»;
+						for (InterfaceItemBase item : getItems()) {
+							((«portClassName»)item).«messageCall(m)»;
 						}
 					}
 				«ENDFOR»
@@ -268,9 +275,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						}
 					«ENDIF»
 					if (getPeerAddress()!=null)
-						«IF m.data==null»getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
-						«ELSE»getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
-					«ENDIF»
+						«IF m.data==null»
+							getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
+						«ELSE»
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+						«ENDIF»
 				«ENDIF»
 			}
 			«IF m.data!=null && m.data.refType.type instanceof DataClass»

@@ -15,7 +15,6 @@ package org.eclipse.etrice.runtime.java.modelbase;
 import java.util.List;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -30,7 +29,7 @@ public abstract class DataReceivePort extends DataPortBase {
 	protected DataReceivePort(IRTObject parent, String name, int localId) {
 		super(parent, name, localId);
 
-		List<String> peerPaths = RTServices.getInstance().getMsgSvcCtrl().getPeersForPath(getInstancePath());
+		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			IRTObject object = getObject(peerPaths.get(0));
 			connect((DataSendPort) object);

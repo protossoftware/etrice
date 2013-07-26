@@ -15,7 +15,7 @@ package org.eclipse.etrice.runtime.java.modelbase;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 
-class MockEventReceiver extends RTObject implements IEventReceiver {
+class MockEventReceiver extends RTObject implements IEventReceiver, IInterfaceItemOwner {
 
 	protected MockEventReceiver(IRTObject parent, String name) {
 		super(parent, name);
@@ -23,6 +23,30 @@ class MockEventReceiver extends RTObject implements IEventReceiver {
 
 	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner#getEventReceiver()
+	 */
+	@Override
+	public IEventReceiver getEventReceiver() {
+		return this;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner#getSystemPort()
+	 */
+	@Override
+	public IReplicatedInterfaceItem getSystemPort() {
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IEventReceiver#getThread()
+	 */
+	@Override
+	public int getThread() {
+		return 0;
 	}
 
 }

@@ -16,10 +16,11 @@ import static org.junit.Assert.*;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,35 +40,55 @@ public class TestBindings extends TestBase {
 
 	@Test
 	public void testBindingValidation() {
-		RoomModel mdl = (RoomModel) resource.getContents().get(0);
-		SubSystemClass ssc = mdl.getSubSystemClasses().get(0);
-		Binding bind = ssc.getBindings().get(0);
+		Binding bind = getBinding("Example1", 0);
 		Diagnostic diag = getDiag(bind).getChildren().get(0);
-		assertEquals("expect error message", "no self connection allowed, ports are indentical", diag.getMessage());
+		assertEquals("expect error message", "no self connection allowed, ports are identical", diag.getMessage());
 		
-		bind = ssc.getBindings().get(1);
+		bind = getBinding("Example1a", 0);
+		diag = getDiag(bind).getChildren().get(0);
+		assertEquals("expect error message", "ports are already bound", diag.getMessage());
+		
+		bind = getBinding("Example1a", 1);
+		diag = getDiag(bind).getChildren().get(0);
+		assertEquals("expect error message", "ports are already bound", diag.getMessage());
+		
+		bind = getBinding("Example2", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("expect error message", "port with multiplicity 1 is already connected", diag.getMessage());
 		
-		bind = ssc.getBindings().get(2);
+		bind = getBinding("Example2", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("expect error message", "port with multiplicity 1 is already connected", diag.getMessage());
 		
-		bind = ssc.getBindings().get(3);
+		bind = getBinding("Example3", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("protocols don't match", diag.getMessage());
 		
-		bind = ssc.getBindings().get(4);
+		bind = getBinding("Example4", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("protocol extends incoming", diag.getMessage());
 		
-		bind = ssc.getBindings().get(6);
+		bind = getBinding("Example5", 0);
+		diag = getDiag(bind);
+		assertTrue("binding is ok", diag.getChildren().isEmpty());
+		
+		bind = getBinding("Example6", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("protocol extends outgoing", diag.getMessage());
 		
-		bind = ssc.getBindings().get(7);
+		bind = getBinding("Example7", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("derived protocols not connectable (both directions extended)", diag.getMessage());
+		
+		diag = getDiag(resource.getEObject("ActorClass:Example8"));
+		Diagnostic childDiag = diag.getChildren().get(0);
+		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
+		childDiag = diag.getChildren().get(1);
+		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
+		childDiag = diag.getChildren().get(2);
+		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
+		childDiag = diag.getChildren().get(3);
+		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
 	}
 	
 	@Test
@@ -79,5 +100,10 @@ public class TestBindings extends TestBase {
 				assertEquals("a derived protocol should add either incoming or outgoing messages, not both", diag.getMessage());
 			}
 		}
+	}
+	
+	private Binding getBinding(String acname, int idx) {
+		ActorClass ac = (ActorClass) resource.getEObject("ActorClass:"+acname);
+		return ac.getBindings().get(idx);
 	}
 }

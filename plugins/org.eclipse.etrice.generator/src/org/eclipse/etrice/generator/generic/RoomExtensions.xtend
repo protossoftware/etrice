@@ -40,7 +40,10 @@ import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
+import org.eclipse.emf.common.util.TreeIterator
 
 /**
 	collection of convenience functions for code generation
@@ -174,6 +177,14 @@ class RoomExtensions {
 	 */
 	def String getPackage(RoomClass rc) {
 		return (rc.eContainer as RoomModel).name
+	}
+	
+	/**
+	 * @param rc a {@link RoomClass}
+	 * @return the name of the room model followed by the class name and all . replaced with _
+	 */
+	def String getFullyQualifiedName(RoomClass rc) {
+		rc.package.replace(".", "_")+"_"+rc.name
 	}
 	
 	/**
@@ -539,6 +550,17 @@ class RoomExtensions {
 			result.addAll(getOutgoingTransitionsHierarchical(ac, sg.eContainer() as State))
 		}
 		
+		return result;
+	}
+	
+	def getAllSubInstances(StructureInstance ssi) {
+		val BasicEList<AbstractInstance> result = new BasicEList<AbstractInstance>();
+		val TreeIterator<EObject> it = ssi.eAllContents();
+		while (it.hasNext()) {
+			val EObject obj = it.next();
+			if (obj instanceof AbstractInstance)
+				result.add(obj as AbstractInstance);
+		}
 		return result;
 	}
 	

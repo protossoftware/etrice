@@ -93,6 +93,23 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 public class RoomHelpers {
 	
 	/**
+	 * Compute a list of the class itself followed by its base classes in order
+	 * 
+	 * @param ac the {@link ActorClass}
+	 * @return a list of the class itself followed by its base classes in order
+	 */
+	public static List<ActorClass> getClassHierarchy(ActorClass ac) {
+		ArrayList<ActorClass> result = new ArrayList<ActorClass>();
+		
+		while (ac!=null) {
+			result.add(0, ac);
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Return a list of all {@link InterfaceItem}s ({@link Port}s and
 	 * {@link SPPRef}s) of a {@link StructureClass}.
 	 * Internal end ports and SAPs are <em>not</em> included.
@@ -1408,6 +1425,23 @@ public class RoomHelpers {
 		return result;
 	}
 	
+	public static List<ActorContainerRef> getAllActorContainerRefs(StructureClass sc) {
+		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
+		
+		if(sc instanceof LogicalSystem)
+			refs.addAll(((LogicalSystem)sc).getSubSystems());
+		else if(sc instanceof ActorContainerClass) {
+			refs.addAll(((ActorContainerClass)sc).getActorRefs());
+			if(sc instanceof ActorClass){
+				ActorClass base = (ActorClass)sc;
+				while((base = base.getBase()) != null)
+					refs.addAll(base.getActorRefs());
+			}
+		}
+		
+		return refs;
+	}
+
 	/**
 	 * Returns the parent {@link ActorClass} of a {@link StateGraphItem}.
 	 * 

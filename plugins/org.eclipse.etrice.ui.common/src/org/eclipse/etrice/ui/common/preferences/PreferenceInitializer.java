@@ -34,8 +34,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.HOR_GRID_UNIT, 10);
 		store.setDefault(PreferenceConstants.VER_GRID_UNIT, 10);
 		store.setDefault(PreferenceConstants.CONFIRM_DELETE, true);
-		store.setDefault(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, true);
-		store.setDefault(PreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, true);
+		store.setDefault(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, false);
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH, "doc-gen/images");
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO, PreferenceConstants.PATH_REL_TO_PROJECT);
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_FORMAT, PreferenceConstants.FORMAT_JPG);

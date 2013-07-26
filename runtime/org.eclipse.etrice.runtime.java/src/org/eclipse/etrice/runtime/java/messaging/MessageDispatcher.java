@@ -62,6 +62,22 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 		}
 	}
 	
+	public void removeMessageReceiver(IMessageReceiver receiver){
+		if (receiver.getAddress()==null)
+			return;
+		
+		// TODO: does only work same thread (else)
+		if (receiver.getAddress().nodeID != address.nodeID){
+			node_map.remove(receiver.getAddress().objectID);
+		}
+		else if(receiver.getAddress().threadID != address.threadID){
+			thread_map.remove(receiver.getAddress().threadID);
+		}
+		else {
+			local_map.remove(receiver.getAddress().objectID);
+		}
+	}
+	
 	@Override
 	public void receive(Message msg) {
 		// TODO: does only work same thread (else)

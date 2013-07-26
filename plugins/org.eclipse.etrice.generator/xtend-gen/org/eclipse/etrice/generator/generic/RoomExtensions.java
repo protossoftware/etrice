@@ -17,15 +17,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
@@ -205,6 +209,19 @@ public class RoomExtensions {
   public String getPackage(final RoomClass rc) {
     EObject _eContainer = rc.eContainer();
     return ((RoomModel) _eContainer).getName();
+  }
+  
+  /**
+   * @param rc a {@link RoomClass}
+   * @return the name of the room model followed by the class name and all . replaced with _
+   */
+  public String getFullyQualifiedName(final RoomClass rc) {
+    String _package = this.getPackage(rc);
+    String _replace = _package.replace(".", "_");
+    String _plus = (_replace + "_");
+    String _name = rc.getName();
+    String _plus_1 = (_plus + _name);
+    return _plus_1;
   }
   
   /**
@@ -760,6 +777,25 @@ public class RoomExtensions {
       EObject _eContainer_2 = sg.eContainer();
       List<Transition> _outgoingTransitionsHierarchical = this.getOutgoingTransitionsHierarchical(ac, ((State) _eContainer_2));
       result.addAll(_outgoingTransitionsHierarchical);
+    }
+    return result;
+  }
+  
+  public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {
+    BasicEList<AbstractInstance> _basicEList = new BasicEList<AbstractInstance>();
+    final BasicEList<AbstractInstance> result = _basicEList;
+    final TreeIterator<EObject> it = ssi.eAllContents();
+    boolean _hasNext = it.hasNext();
+    boolean _while = _hasNext;
+    while (_while) {
+      {
+        final EObject obj = it.next();
+        if ((obj instanceof AbstractInstance)) {
+          result.add(((AbstractInstance) obj));
+        }
+      }
+      boolean _hasNext_1 = it.hasNext();
+      _while = _hasNext_1;
     }
     return result;
   }

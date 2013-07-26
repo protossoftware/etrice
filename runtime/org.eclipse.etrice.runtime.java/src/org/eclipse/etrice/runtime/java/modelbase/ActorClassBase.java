@@ -22,7 +22,7 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemPort;
  * @author Thomas Schuetz
  *
  */
-public abstract class ActorClassBase extends EventReceiver implements IMessageReceiver {
+public abstract class ActorClassBase extends SystemPortOwner implements IMessageReceiver {
 
 	protected static final int EVT_SHIFT = 1000;	// TODOHRR: use 256 or shift operation later
 
@@ -38,7 +38,7 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	/**
 	 * the current state
 	 */
-	protected int state;
+	protected int state = NO_STATE;
 
 	protected RTSystemPort rtSystemPort = null;
 	
@@ -88,7 +88,7 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 		return ssc.getVariableService();
 	}
 	
-	//--------------------- lifecycle functions
+	//--------------------- life cycle functions
 	public void init() {
 		for (IRTObject child : getChildren()) {
 			if (child instanceof ActorClassBase)
@@ -117,15 +117,12 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 	}
 	
 	public void destroy() {
-		for (IRTObject child : getChildren()) {
-			if (child instanceof ActorClassBase)
-				((ActorClassBase) child).destroy();
-		}
+		super.destroy();
 	}
 	
 	public abstract void executeInitTransition();
 
-	// not automatically generated lifecycle functions
+	// not automatically generated life cycle functions
 	// are called, but with empty implementation -> can be overridden by user
 	public void initUser(){}
 	public void startUser(){}
@@ -146,7 +143,8 @@ public abstract class ActorClassBase extends EventReceiver implements IMessageRe
 		
 		switch (evt){
 		case RTSystemServicesProtocol.IN_executeInitialTransition :
-			executeInitTransition();
+			if (state==NO_STATE)
+				executeInitTransition();
 			break;
 		case RTSystemServicesProtocol.IN_startDebugging :
 			break;

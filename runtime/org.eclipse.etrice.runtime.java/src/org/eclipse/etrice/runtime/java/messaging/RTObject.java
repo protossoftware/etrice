@@ -9,6 +9,7 @@
 package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An implementation of the IRTObject interface using a hierarchical structure
@@ -44,14 +45,16 @@ public class RTObject implements IRTObject	{
 	}
 
 	protected void destroy() {
-		for (IRTObject child : children) {
+		while (!children.isEmpty()) {
+			IRTObject child = children.get(0);
 			if (child instanceof RTObject)
 				((RTObject) child).destroy();
 		}
-		
-		parent.getChildren().remove(this);
-		
-		parent = null;
+
+		if (parent!=null) {
+			parent.getChildren().remove(this);
+			parent = null;
+		}
 	}
 	
 	public IRTObject getRoot() {
@@ -114,5 +117,47 @@ public class RTObject implements IRTObject	{
 
 	public String getInstancePathName() {
 		return getInstancePath(PATHNAME_DELIM);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.IRTObject#getThreadForPath(java.lang.String)
+	 */
+	@Override
+	public int getThreadForPath(String path) {
+		if (parent!=null)
+			return parent.getThreadForPath(path);
+		return -1;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.IRTObject#getPeersForPath(java.lang.String)
+	 */
+	@Override
+	public List<String> getPeersForPath(String path) {
+		if (parent!=null)
+			return parent.getPeersForPath(path);
+		return null;
+	}
+	
+	private String toStringRecursive(String indent) {
+		StringBuilder result = new StringBuilder(indent+toString()+"\n");
+		
+		indent = "  "+indent;
+		for (IRTObject child : getChildren()) {
+			if (child instanceof RTObject)
+				result.append(((RTObject)child).toStringRecursive(indent));
+			else
+				result.append(child.toString()+"\n");
+		}
+		return result.toString();
+	}
+	
+	public String toStringRecursive() {
+		return toStringRecursive("");
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

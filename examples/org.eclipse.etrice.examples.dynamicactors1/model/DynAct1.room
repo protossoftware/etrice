@@ -1,0 +1,173 @@
+RoomModel org.eclipse.etrice.examples.dynamicactors1 {
+	
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+	
+	LogicalSystem LS {
+		SubSystemRef main: Main
+	}
+	
+	SubSystemClass Main {
+		ActorRef appl: Appl
+		
+		LogicalThread dflt_thread
+	}
+	
+	ActorClass Appl {
+		Structure {
+			ActorRef cont: Container
+		}
+		Behavior { }
+	}
+	
+	ActorClass Container {
+		Structure {
+			conjugated Port p0: PC
+			optional ActorRef opt: Optional
+			
+			Binding p0 and opt.p0
+		}
+		Behavior {
+			// this method prints the passed message and then dumps the object tree consisting of actors and ports
+			Operation dumpTree(msg: string) {
+				"System.out.println(msg);"
+				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
+			}
+			
+			StateMachine {
+				Transition init: initial -> CreateOptional2 { }
+				Transition tr0: CreateOptional2 -> CreateOptional1 {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"System.out.println(txt+\"\\n\");"
+						"opt.destroyOptionalActor();"
+						"dumpTree(\"after deletion of Optional2\");"
+					}
+				}
+				Transition tr2: CreateOptional1 -> ReceivedHelloAgain {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"System.out.println(txt+\"\\n\");"
+						"opt.destroyOptionalActor();"
+					}
+				}
+				State CreateOptional2 {
+					entry {
+						"dumpTree(\"before creation of Optional2\");"
+						"opt.createOptionalActor(\"Optional2\", getThread());"
+						"p0.sayHello();"
+						"dumpTree(\"after creation of Optional2\");"
+					}
+				}
+				State CreateOptional1 {
+					entry {
+						"opt.createOptionalActor(\"Optional1\", getThread());"
+						"p0.sayHello();"
+						"dumpTree(\"after creation of Optional1\");"
+					}
+				}
+				State ReceivedHelloAgain
+			}
+		}
+	}
+	
+	// the class that is referenced as optional by the Container
+	// since it is abstract it just serves as an interface
+	abstract ActorClass Optional {
+		Interface {
+			Port p0: PC
+		}
+		Structure { }
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional1 extends Optional {
+		Structure {
+			ActorRef sub1: AC1
+			Binding p0 and sub1.p0
+		}
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional2 extends Optional {
+		Structure {
+			ActorRef sub2: AC2
+			Binding p0 and sub2.p0
+		}
+		Behavior { }
+	}
+	
+	// the following actor classes are part of the possible optional instance sub trees
+	
+	ActorClass AC1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	ActorClass AC2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef deep_sub: AC3
+			Binding p0 and deep_sub.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass AC3 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"this is AC3, instance \"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	// a simple protocol that is used to demonstrate that actors are connected
+	ProtocolClass PC {
+		incoming {
+			Message sayHello()
+		}
+		outgoing {
+			Message hello(txt: string)
+		}
+	}
+}

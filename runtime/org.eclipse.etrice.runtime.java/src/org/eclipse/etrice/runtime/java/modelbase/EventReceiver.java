@@ -19,8 +19,29 @@ import org.eclipse.etrice.runtime.java.messaging.RTObject;
  */
 public abstract class EventReceiver extends RTObject implements IEventReceiver {
 
+	private int thread = -1;
+
+	/**
+	 * The only constructor for {@link EventReceiver} objects.
+	 * 
+	 * @param parent the parent object
+	 * @param name the name of this object
+	 */
 	public EventReceiver(IRTObject parent, String name) {
 		super(parent, name);
+	}
+	
+	@Override
+	public int getThread() {
+		if (thread<0) {
+			thread = getThreadForPath(getInstancePath());
+			if (thread<0)
+				if (getParent() instanceof EventReceiver)
+					thread = ((EventReceiver)getParent()).getThread();
+				else
+					thread = 0;
+		}
+		return thread;
 	}
 
 }

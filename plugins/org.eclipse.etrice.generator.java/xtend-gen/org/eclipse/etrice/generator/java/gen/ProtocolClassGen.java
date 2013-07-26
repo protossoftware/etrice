@@ -140,7 +140,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;");
     _builder.newLine();
-    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;");
+    _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;");
     _builder.newLine();
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
     _builder.newLine();
@@ -287,7 +287,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("this(actor, name, localId, 0);");
@@ -298,7 +298,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(portClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId, int idx) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId, int idx) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(actor, name, localId, idx);");
@@ -324,6 +324,27 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
+      {
+        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_1) {
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public void destroy() {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("DebuggingService.getInstance().removePortInstance(this);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("super.destroy();");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Override");
@@ -331,29 +352,29 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public void receive(Message m) {");
       _builder.newLine();
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("if (!(m instanceof EventMessage))");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t\t\t");
       _builder.append("return;");
       _builder.newLine();
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("EventMessage msg = (EventMessage) m;");
       _builder.newLine();
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
-          _builder.append("\t\t\t\t");
+        boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_2) {
+          _builder.append("\t\t\t");
           _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
           _builder.newLine();
-          _builder.append("\t\t\t\t");
+          _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
           _builder.newLine();
-          _builder.append("\t\t\t\t");
+          _builder.append("\t\t\t");
           _builder.append("}");
           _builder.newLine();
         }
@@ -361,21 +382,21 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       {
         boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
         if (_handlesReceive) {
-          _builder.append("\t\t\t\t");
+          _builder.append("\t\t\t");
           _builder.append("switch (msg.getEvtId()) {");
           _builder.newLine();
           {
             List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(pc, (conj).booleanValue());
             for(final MessageHandler hdlr : _receiveHandlers) {
-              _builder.append("\t\t\t\t");
+              _builder.append("\t\t\t");
               _builder.append("\t");
               _builder.append("case ");
               Message _msg = hdlr.getMsg();
               String _codeName = this._roomExtensions.getCodeName(_msg);
-              _builder.append(_codeName, "					");
+              _builder.append(_codeName, "				");
               _builder.append(":");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t\t\t\t");
+              _builder.append("\t\t\t");
               _builder.append("\t");
               _builder.append("{");
               _builder.newLine();
@@ -383,53 +404,52 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                 DetailCode _detailCode = hdlr.getDetailCode();
                 EList<String> _commands = _detailCode.getCommands();
                 for(final String command : _commands) {
-                  _builder.append("\t\t\t\t");
+                  _builder.append("\t\t\t");
                   _builder.append("\t");
                   _builder.append("\t");
-                  _builder.append(command, "						");
+                  _builder.append(command, "					");
                   _builder.newLineIfNotEmpty();
                 }
               }
-              _builder.append("\t\t\t\t");
+              _builder.append("\t\t\t");
               _builder.append("\t");
               _builder.append("}");
               _builder.newLine();
-              _builder.append("\t\t\t\t");
+              _builder.append("\t\t\t");
               _builder.append("\t");
               _builder.append("break;");
               _builder.newLine();
             }
           }
-          _builder.append("\t\t\t\t");
+          _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("default:");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("if (msg instanceof EventWithDataMessage)");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
+      _builder.append("\t\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("else");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
+      _builder.append("\t\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
       _builder.newLine();
       {
         boolean _handlesReceive_1 = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
         if (_handlesReceive_1) {
-          _builder.append("\t\t\t\t");
+          _builder.append("\t\t\t");
           _builder.append("}");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t\t");
+      _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
@@ -480,7 +500,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       _builder.append(replPortClassName, "	");
-      _builder.append("(IEventReceiver actor, String name, int localId) {");
+      _builder.append("(IInterfaceItemOwner actor, String name, int localId) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(actor, name, localId);");
@@ -528,7 +548,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {");
+      _builder.append("protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return new ");
@@ -555,11 +575,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("for (int i=0; i<getReplication(); ++i) {");
+              _builder.append("for (InterfaceItemBase item : getItems()) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t\t");
-              _builder.append("get(i).");
+              _builder.append("((");
+              _builder.append(portClassName, "			");
+              _builder.append(")item).");
               CharSequence _messageCall = this.messageCall(m_1);
               _builder.append(_messageCall, "			");
               _builder.append(";");
@@ -587,11 +609,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("for (int i=0; i<getReplication(); ++i) {");
+              _builder.append("for (InterfaceItemBase item : getItems()) {");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t\t");
-              _builder.append("get(i).");
+              _builder.append("((");
+              _builder.append(portClassName, "			");
+              _builder.append(")item).");
               CharSequence _messageCall_1 = this.messageCall(m_2);
               _builder.append(_messageCall_1, "			");
               _builder.append(";");
@@ -745,12 +769,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t");
           _builder.append("if (getPeerAddress()!=null)");
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
           {
             VarDecl _data = m.getData();
             boolean _equals = Objects.equal(_data, null);
             if (_equals) {
+              _builder.append("\t");
+              _builder.append("\t");
               _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
               _builder.append(dir, "		");
               _builder.append("_");
@@ -758,9 +782,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append(_name_2, "		");
               _builder.append("));");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("\t");
             } else {
+              _builder.append("\t");
+              _builder.append("\t");
               _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
               _builder.append(dir, "		");
               _builder.append("_");

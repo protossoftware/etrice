@@ -1,6 +1,12 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.messaging.Message;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -30,25 +36,25 @@ public class RTSystemServicesProtocol {
 	// port class
 	static public class RTSystemServicesProtocolPort extends PortBase {
 		// constructors
-		public RTSystemServicesProtocolPort(IEventReceiver actor, String name, int localId) {
+		public RTSystemServicesProtocolPort(IInterfaceItemOwner actor, String name, int localId) {
 			this(actor, name, localId, 0);
 		}
-		public RTSystemServicesProtocolPort(IEventReceiver actor, String name, int localId, int idx) {
+		public RTSystemServicesProtocolPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
 		}
 	
 		@Override
 		public void receive(Message m) {
-				if (!(m instanceof EventMessage))
-					return;
-				EventMessage msg = (EventMessage) m;
-				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-						if (msg instanceof EventWithDataMessage)
-							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-						else
-							getActor().receiveEvent(this, msg.getEvtId(), null);
-				}
-		}
+			if (!(m instanceof EventMessage))
+				return;
+			EventMessage msg = (EventMessage) m;
+			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
+					if (msg instanceof EventWithDataMessage)
+						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+					else
+						getActor().receiveEvent(this, msg.getEvtId(), null);
+			}
+	}
 	
 		
 		// sent messages
@@ -57,7 +63,7 @@ public class RTSystemServicesProtocol {
 	// replicated port class
 	static public class RTSystemServicesProtocolReplPort extends ReplicatedPortBase {
 	
-		public RTSystemServicesProtocolReplPort(IEventReceiver actor, String name, int localId) {
+		public RTSystemServicesProtocolReplPort(IInterfaceItemOwner actor, String name, int localId) {
 			super(actor, name, localId);
 		}
 		
@@ -73,7 +79,7 @@ public class RTSystemServicesProtocol {
 			return (RTSystemServicesProtocolPort) getInterfaceItem(idx);
 		}
 		
-		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolPort(rcv, name, lid, idx);
 		}
 		
@@ -84,25 +90,25 @@ public class RTSystemServicesProtocol {
 	// port class
 	static public class RTSystemServicesProtocolConjPort extends PortBase {
 		// constructors
-		public RTSystemServicesProtocolConjPort(IEventReceiver actor, String name, int localId) {
+		public RTSystemServicesProtocolConjPort(IInterfaceItemOwner actor, String name, int localId) {
 			this(actor, name, localId, 0);
 		}
-		public RTSystemServicesProtocolConjPort(IEventReceiver actor, String name, int localId, int idx) {
+		public RTSystemServicesProtocolConjPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
 		}
 	
 		@Override
 		public void receive(Message m) {
-				if (!(m instanceof EventMessage))
-					return;
-				EventMessage msg = (EventMessage) m;
-				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-						if (msg instanceof EventWithDataMessage)
-							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-						else
-							getActor().receiveEvent(this, msg.getEvtId(), null);
-				}
-		}
+			if (!(m instanceof EventMessage))
+				return;
+			EventMessage msg = (EventMessage) m;
+			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
+					if (msg instanceof EventWithDataMessage)
+						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+					else
+						getActor().receiveEvent(this, msg.getEvtId(), null);
+			}
+	}
 	
 		
 		// sent messages
@@ -123,7 +129,7 @@ public class RTSystemServicesProtocol {
 	// replicated port class
 	static public class RTSystemServicesProtocolConjReplPort extends ReplicatedPortBase {
 	
-		public RTSystemServicesProtocolConjReplPort(IEventReceiver actor, String name, int localId) {
+		public RTSystemServicesProtocolConjReplPort(IInterfaceItemOwner actor, String name, int localId) {
 			super(actor, name, localId);
 		}
 		
@@ -139,24 +145,24 @@ public class RTSystemServicesProtocol {
 			return (RTSystemServicesProtocolConjPort) getInterfaceItem(idx);
 		}
 		
-		protected InterfaceItemBase createInterfaceItem(IEventReceiver rcv, String name, int lid, int idx) {
+		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolConjPort(rcv, name, lid, idx);
 		}
 		
 		// incoming messages
 		public void executeInitialTransition(){
-			for (int i=0; i<getReplication(); ++i) {
-				get(i).executeInitialTransition();
+			for (InterfaceItemBase item : getItems()) {
+				((RTSystemServicesProtocolConjPort)item).executeInitialTransition();
 			}
 		}
 		public void startDebugging(){
-			for (int i=0; i<getReplication(); ++i) {
-				get(i).startDebugging();
+			for (InterfaceItemBase item : getItems()) {
+				((RTSystemServicesProtocolConjPort)item).startDebugging();
 			}
 		}
 		public void stopDebugging(){
-			for (int i=0; i<getReplication(); ++i) {
-				get(i).stopDebugging();
+			for (InterfaceItemBase item : getItems()) {
+				((RTSystemServicesProtocolConjPort)item).stopDebugging();
 			}
 		}
 	}

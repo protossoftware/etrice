@@ -109,9 +109,25 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ETriceGenPackage.ABSTRACT_INSTANCE: {
+				AbstractInstance abstractInstance = (AbstractInstance)theEObject;
+				T result = caseAbstractInstance(abstractInstance);
+				if (result == null) result = caseInstanceBase(abstractInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ETriceGenPackage.ACTOR_INTERFACE_INSTANCE: {
+				ActorInterfaceInstance actorInterfaceInstance = (ActorInterfaceInstance)theEObject;
+				T result = caseActorInterfaceInstance(actorInterfaceInstance);
+				if (result == null) result = caseAbstractInstance(actorInterfaceInstance);
+				if (result == null) result = caseInstanceBase(actorInterfaceInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ETriceGenPackage.STRUCTURE_INSTANCE: {
 				StructureInstance structureInstance = (StructureInstance)theEObject;
 				T result = caseStructureInstance(structureInstance);
+				if (result == null) result = caseAbstractInstance(structureInstance);
 				if (result == null) result = caseInstanceBase(structureInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -127,6 +143,7 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				SubSystemInstance subSystemInstance = (SubSystemInstance)theEObject;
 				T result = caseSubSystemInstance(subSystemInstance);
 				if (result == null) result = caseStructureInstance(subSystemInstance);
+				if (result == null) result = caseAbstractInstance(subSystemInstance);
 				if (result == null) result = caseInstanceBase(subSystemInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -135,7 +152,17 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				ActorInstance actorInstance = (ActorInstance)theEObject;
 				T result = caseActorInstance(actorInstance);
 				if (result == null) result = caseStructureInstance(actorInstance);
+				if (result == null) result = caseAbstractInstance(actorInstance);
 				if (result == null) result = caseInstanceBase(actorInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ETriceGenPackage.OPTIONAL_ACTOR_INSTANCE: {
+				OptionalActorInstance optionalActorInstance = (OptionalActorInstance)theEObject;
+				T result = caseOptionalActorInstance(optionalActorInstance);
+				if (result == null) result = caseStructureInstance(optionalActorInstance);
+				if (result == null) result = caseAbstractInstance(optionalActorInstance);
+				if (result == null) result = caseInstanceBase(optionalActorInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -264,6 +291,36 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractInstance(AbstractInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Actor Interface Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Actor Interface Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActorInterfaceInstance(ActorInterfaceInstance object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Structure Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -320,6 +377,21 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseActorInstance(ActorInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Optional Actor Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Optional Actor Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOptionalActorInstance(OptionalActorInstance object) {
 		return null;
 	}
 
