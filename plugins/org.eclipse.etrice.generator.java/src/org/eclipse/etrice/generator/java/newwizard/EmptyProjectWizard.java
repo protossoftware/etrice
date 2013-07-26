@@ -122,6 +122,18 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createModel(modelURI,
 							baseName);
 
+					URI physModelURI = URI.createPlatformResourceURI("/"
+							+ baseName
+							+ "/model/"+baseName+".etphys", true);
+					ProjectCreator.createPhysicalModel(physModelURI,
+							baseName);
+
+					URI mapModelURI = URI.createPlatformResourceURI("/"
+							+ baseName
+							+ "/model/"+baseName+".etmap", true);
+					ProjectCreator.createMappingModel(mapModelURI,
+							baseName);
+					
 					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
 							+baseName+"/build.properties", true),
 							baseName);
