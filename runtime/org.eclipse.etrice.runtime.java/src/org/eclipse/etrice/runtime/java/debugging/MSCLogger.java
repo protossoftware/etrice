@@ -102,7 +102,7 @@ public class MSCLogger {
 
 	private void saveMSCforTrace2UML(BufferedWriter out){
 		try {
-			out.write("#generated MSC for Trace2UML");
+			out.write("; generated MSC for Trace2UML");
 	    	out.newLine();
 		    for (String cmd : getCommandList()){
 		    	out.write(cmd);
