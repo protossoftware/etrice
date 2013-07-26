@@ -4,8 +4,8 @@ Bundle-Name: Derived Generator
 Bundle-SymbolicName: my.etrice.generator
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.3.0",
- org.eclipse.etrice.generator.java;bundle-version="0.3.0",
+Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.4.0",
+ org.eclipse.etrice.generator.java;bundle-version="0.4.0",
  com.google.inject;bundle-version="3.0.0",
- org.eclipse.etrice.core.room;bundle-version="0.3.0"
+ org.eclipse.etrice.core.room;bundle-version="0.4.0"
 Export-Package: my.etrice.generator
