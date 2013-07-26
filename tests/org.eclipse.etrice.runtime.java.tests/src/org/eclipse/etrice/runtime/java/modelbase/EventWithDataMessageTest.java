@@ -31,6 +31,6 @@ public class EventWithDataMessageTest extends TestCase {
 	
 	public void testToString() {
 		EventWithDataMessage msg = new EventWithDataMessage(new Address(1,2,3), 789, "eTrice");
-		assertEquals("EventWithDataMessage(Address(nodeID=1,threadID=2,objectID=3), evt=789, data=(eTrice))", msg.toString());
+		assertEquals("EventWithDataMessage(Address(n=1,t=2,o=3), evt=789, data=(eTrice))", msg.toString());
 	}
 }

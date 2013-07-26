@@ -26,7 +26,7 @@ public class MessageTest extends TestCase {
 	
 	public void testToString() {
 		Message msg = new Message(new Address(1,2,3));
-		assertEquals("Message(Address(nodeID=1,threadID=2,objectID=3))", msg.toString());
+		assertEquals("Message(Address(n=1,t=2,o=3))", msg.toString());
 	}
 
 

@@ -29,6 +29,6 @@ public class EventMessageTest extends TestCase {
 	
 	public void testToString() {
 		EventMessage msg = new EventMessage(new Address(1,2,3), 789);
-		assertEquals("EventMessage(Address(nodeID=1,threadID=2,objectID=3), evt=789)", msg.toString());
+		assertEquals("EventMessage(Address(n=1,t=2,o=3), evt=789)", msg.toString());
 	}
 }

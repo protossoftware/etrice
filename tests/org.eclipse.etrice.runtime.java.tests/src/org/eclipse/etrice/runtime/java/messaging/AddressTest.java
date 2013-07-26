@@ -22,7 +22,7 @@ public class AddressTest extends TestCase {
 	}
 	public void testToString() {
 		Address addr = new Address(1,2,3);
-		assertEquals("Address(nodeID=1,threadID=2,objectID=3)", addr.toString());
+		assertEquals("Address(n=1,t=2,o=3)", addr.toString());
 	}
 
 }
