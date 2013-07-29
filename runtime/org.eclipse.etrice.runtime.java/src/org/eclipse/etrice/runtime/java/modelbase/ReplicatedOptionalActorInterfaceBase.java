@@ -14,7 +14,6 @@ package org.eclipse.etrice.runtime.java.modelbase;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
@@ -51,6 +50,7 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 		// the factory will set our path2peers map
 		int index = getFreeIndex();
 		String name = getChildName(index);
+		logCreation(actorClass, name);
 		ActorClassBase actor = factory.create(this, name);
 		if (actor==null)
 			return -1;
@@ -67,7 +67,9 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 	 * @return
 	 */
 	public boolean destroyOptionalActor(int idx) {
-		IRTObject child = getChild(getChildName(idx));
+		String childName = getChildName(idx);
+		logDeletion(childName);
+		IRTObject child = getChild(childName);
 		if (!(child instanceof ActorClassBase))
 			return false;
 		
@@ -85,19 +87,6 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 			releasedIndices.push(idx);
 		}
 		actors.clear();
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase#getPeersForPath(java.lang.String)
-	 */
-	@Override
-	public List<String> getPeersForPath(String path) {
-//		if (getPath2peers()==null)
-//			return null;
-//		
-//		path = path.substring(getOwnPath().length(), path.lastIndexOf(INDEX_SEP));
-//		return getPath2peers().get(path);
-		return super.getPeersForPath(path);
 	}
 	
 	public String getChildName(int idx) {

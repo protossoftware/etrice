@@ -12,6 +12,9 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.util.List;
+
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 
 /**
@@ -34,7 +37,7 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
  */
 public class InterfaceItemBroker extends InterfaceItemBase implements IInterfaceItemBroker {
 
-	private InterfaceItemBase firstPeer;
+	private IRTObject firstPeer;
 
 	public InterfaceItemBroker(IInterfaceItemOwner parent, String name, int localId) {
 		this(parent, name, localId, 0);
@@ -59,32 +62,42 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 	}
 
 	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase#connectWithPeer()
+	 */
+	protected void connectWithPeer() {
+		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
+		if (peerPaths!=null && !peerPaths.isEmpty()) {
+			firstPeer = getObject(peerPaths.get(0));
+		}
+	}
+
+	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase#connectWith(org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase)
 	 */
 	@Override
-	public void connectWith(InterfaceItemBase peer) {
-		if (firstPeer==null) {
-			firstPeer = peer;
-			super.connectWith(peer);
-		}
-		else {
+	public InterfaceItemBase connectWith(InterfaceItemBase peer) {
+		if (firstPeer!=null) {
 			// we are already connected, lets connect our new peer with the previous one
 			
-			InterfaceItemBase peer1 = firstPeer;
+			InterfaceItemBase peer1 = null;
 			InterfaceItemBase peer2 = peer;
 			
 			// get a new replicated sub port if appropriate
-			if (peer1 instanceof IReplicatedInterfaceItem) {
-				peer1 = ((IReplicatedInterfaceItem) peer1).createSubInterfaceItem();
+			if (firstPeer instanceof IReplicatedInterfaceItem) {
+				peer1 = ((IReplicatedInterfaceItem) firstPeer).createSubInterfaceItem();
 			}
-			if (peer2 instanceof IReplicatedInterfaceItem) {
-				peer2 = ((IReplicatedInterfaceItem) peer2).createSubInterfaceItem();
+			else if (firstPeer instanceof InterfaceItemBase) {
+				peer1 = (InterfaceItemBase) firstPeer;
 			}
 			
 			peer2.peerAddress = peer1.getAddress();
 			peer2.peerMsgReceiver = peer1.ownMsgReceiver;
 			peer1.peerAddress = peer2.getAddress();
 			peer1.peerMsgReceiver = peer2.ownMsgReceiver;
+			
+			return peer1;
 		}
+		
+		return null;
 	}
 }

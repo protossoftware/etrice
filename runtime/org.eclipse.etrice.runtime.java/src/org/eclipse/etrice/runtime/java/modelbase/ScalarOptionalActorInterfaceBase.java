@@ -46,6 +46,7 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 			return false;
 		
 		// the factory will set our path2peers map
+		logCreation(actorClass, getName());
 		actor = factory.create(this, getName());
 	
 		startSubTree();
@@ -60,6 +61,8 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 	public boolean destroyOptionalActor() {
 		if (actor==null)
 			return false;
+		
+		logDeletion(getName());
 		
 		actor.destroy();
 		actor = null;

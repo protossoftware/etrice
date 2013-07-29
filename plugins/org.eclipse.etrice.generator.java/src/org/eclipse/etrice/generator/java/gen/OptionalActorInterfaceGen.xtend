@@ -77,23 +77,13 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 				«IF GlobalSettings::generateMSCInstrumentation»
 					
 					@Override
-					«IF replicated»
-						public int createOptionalActor(String actorClass, int thread) {
-					«ELSE»
-						public boolean createOptionalActor(String actorClass, int thread) {
-					«ENDIF»
-						DebuggingService.getInstance().addMessageActorCreate(this, actorClass);
-						return super.createOptionalActor(actorClass, thread);
+						protected void logCreation(String actorClass, String name) {
+						DebuggingService.getInstance().addMessageActorCreate(this, actorClass, name);
 					}
 					
 					@Override
-					«IF replicated»
-						public boolean destroyOptionalActor(int idx) {
-					«ELSE»
-						public boolean destroyOptionalActor() {
-					«ENDIF»
-						DebuggingService.getInstance().addMessageActorDestroy(this);
-						return super.destroyOptionalActor(«IF replicated»idx«ENDIF»);
+						protected void logDeletion(String name) {
+						DebuggingService.getInstance().addMessageActorDestroy(this, name);
 					}
 				«ENDIF»
 			}

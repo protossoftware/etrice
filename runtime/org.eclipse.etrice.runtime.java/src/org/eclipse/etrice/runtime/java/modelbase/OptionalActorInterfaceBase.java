@@ -56,16 +56,24 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 		if (getPath2peers()==null)
 			return getParent().getPeersForPath(path);
 		
-		path = path.substring(getOwnPath().length()+getName().length()+1);
-//		if (path.indexOf('/', 1)>=0)
-//			path = path.substring(getName().length()+1);
+		// remove own path + 
+		int sep = path.indexOf(PATH_DELIM, getOwnPath().length()+1);
+		if (sep<0 || sep>=path.length())
+			return null;
+		
+		String optInstPath = path.substring(0, sep);
+		path = path.substring(sep);
+		
 		ArrayList<String> paths = getPath2peers().get(path);
 		if (paths!=null) {
 			ArrayList<String> result = new ArrayList<String>();
 			for (String p : paths) {
 				if (p.indexOf('/', 1)>=0)
-					p = IRTObject.PATH_DELIM+getName()+IRTObject.PATH_DELIM+getName()+p;
-				p = getOwnPath()+p;
+					// it's a path nested in the optional instance
+					p = optInstPath+p;
+				else
+					// its a path to one of my brokers
+					p = getOwnPath()+p;
 				result.add(p);
 			}
 			return result;
@@ -131,5 +139,13 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	@Override
 	public IReplicatedInterfaceItem getSystemPort() {
 		return RTSystemPort;
+	}
+
+	protected void logCreation(String actorClass, String name) {
+		// empty implementation, may be overridden by sub class
+	}
+
+	protected void logDeletion(String name) {
+		// empty implementation, may be overridden by sub class
 	}
 }

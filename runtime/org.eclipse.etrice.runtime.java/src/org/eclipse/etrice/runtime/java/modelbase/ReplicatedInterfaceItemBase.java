@@ -25,6 +25,8 @@ import org.eclipse.etrice.runtime.java.messaging.RTObject;
  */
 public abstract class ReplicatedInterfaceItemBase extends RTObject implements IReplicatedInterfaceItem, IInterfaceItemOwner {
 
+	public static final char SEP = ':';
+	
 	private int localId;
 	private ArrayList<InterfaceItemBase> items = new ArrayList<InterfaceItemBase>();
 	private LinkedList<Integer> releasedIndices = new LinkedList<Integer>();
@@ -63,7 +65,7 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	 */
 	@Override
 	public InterfaceItemBase createSubInterfaceItem() {
-		InterfaceItemBase item = createInterfaceItem(this, getName()+items.size(), localId, getFreeIndex());
+		InterfaceItemBase item = createInterfaceItem(this, getName()+SEP+items.size(), localId, getFreeIndex());
 		items.add(item);
 		return item;
 	}
@@ -110,6 +112,11 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	
 	protected ArrayList<InterfaceItemBase> getItems() {
 		return items;
+	}
+	
+	@Override
+	public String toString() {
+		return "replicated port "+getName();
 	}
 	
 	protected abstract InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx);

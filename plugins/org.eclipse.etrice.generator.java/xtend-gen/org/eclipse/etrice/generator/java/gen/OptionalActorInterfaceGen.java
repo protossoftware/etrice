@@ -186,24 +186,13 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("@Override");
           _builder.newLine();
-          {
-            if (replicated) {
-              _builder.append("\t");
-              _builder.append("public int createOptionalActor(String actorClass, int thread) {");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("public boolean createOptionalActor(String actorClass, int thread) {");
-              _builder.newLine();
-            }
-          }
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, actorClass);");
+          _builder.append("protected void logCreation(String actorClass, String name) {");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("return super.createOptionalActor(actorClass, thread);");
+          _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, actorClass, name);");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
@@ -213,31 +202,14 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("@Override");
           _builder.newLine();
-          {
-            if (replicated) {
-              _builder.append("\t");
-              _builder.append("public boolean destroyOptionalActor(int idx) {");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("public boolean destroyOptionalActor() {");
-              _builder.newLine();
-            }
-          }
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+          _builder.append("protected void logDeletion(String name) {");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("return super.destroyOptionalActor(");
-          {
-            if (replicated) {
-              _builder.append("idx");
-            }
-          }
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
+          _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this, name);");
+          _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();

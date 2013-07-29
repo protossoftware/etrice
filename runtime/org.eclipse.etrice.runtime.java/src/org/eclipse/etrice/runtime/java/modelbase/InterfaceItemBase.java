@@ -74,6 +74,10 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			}
 		}
 		
+		connectWithPeer();
+	}
+
+	protected void connectWithPeer() {
 		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			IRTObject object = getObject(peerPaths.get(0));
@@ -86,16 +90,15 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			}
 			connectWith(peer);
 		}
-		
 	}
 
-	protected synchronized void connectWith(InterfaceItemBase peer) {
+	protected synchronized InterfaceItemBase connectWith(InterfaceItemBase peer) {
 		if (peer!=null) {
 			this.peer = peer;
 			
 			if (peer instanceof IInterfaceItemBroker) {
-				peer.connectWith(this);
-				return;
+				this.peer = peer.connectWith(this);
+				return this.peer;
 			}
 			
 			// connect with each other
@@ -103,7 +106,10 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			peer.peerAddress = getAddress();
 			this.peerMsgReceiver = peer.ownMsgReceiver;
 			peer.peerMsgReceiver = ownMsgReceiver;
+			
 		}
+		
+		return peer;
 	}
 	
 	protected synchronized void disconnect() {
@@ -174,6 +180,6 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	
 	@Override
 	public String toString() {
-		return "port "+getName()+" "+getAddress()+" <-> "+getPeerAddress();
+		return ((replicator!=null)?"sub ":"")+"port "+getName()+" "+getAddress()+" <-> "+getPeerAddress();
 	}
 }

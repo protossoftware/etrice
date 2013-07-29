@@ -57,12 +57,16 @@ public class DebuggingService {
 	}
 	
 	public void addMessageAsyncOut(Address source, Address target, String msg){
-		if (source!=null && target!=null)
-			asyncLogger.addMessageAsyncOut(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+		PortBase srcPort = portInstances.get(source);
+		PortBase tgtPort = portInstances.get(target);
+		if (srcPort!=null && tgtPort!=null)
+			asyncLogger.addMessageAsyncOut(srcPort.getActor().getInstancePath(), tgtPort.getActor().getInstancePath(), msg);
 	}
 	public void addMessageAsyncIn(Address source, Address target, String msg){
+		PortBase srcPort = portInstances.get(source);
+		PortBase tgtPort = portInstances.get(target);
 		if (source!=null && target!=null)
-			asyncLogger.addMessageAsyncIn(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+			asyncLogger.addMessageAsyncIn(srcPort.getActor().getInstancePath(), tgtPort.getActor().getInstancePath(), msg);
 		
 		// TODO: this was only a quickfix to trace unconnected ports
 //		if (source==null)
@@ -72,10 +76,16 @@ public class DebuggingService {
 			
 	}
 	public void addMessageSyncCall(Address source, Address target, String msg){
-		asyncLogger.addMessageSyncCall(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+		PortBase srcPort = portInstances.get(source);
+		PortBase tgtPort = portInstances.get(target);
+		if (srcPort!=null && tgtPort!=null)
+			asyncLogger.addMessageSyncCall(srcPort.getActor().getInstancePath(), tgtPort.getActor().getInstancePath(), msg);
 	}
 	public void addMessageSyncReturn(Address source, Address target, String msg){
-		asyncLogger.addMessageSyncReturn(portInstances.get(source).getActor().getInstancePath(), portInstances.get(target).getActor().getInstancePath(), msg);
+		PortBase srcPort = portInstances.get(source);
+		PortBase tgtPort = portInstances.get(target);
+		if (srcPort!=null && tgtPort!=null)
+			asyncLogger.addMessageSyncReturn(srcPort.getActor().getInstancePath(), tgtPort.getActor().getInstancePath(), msg);
 	}
 	
 	public void addActorState(ActorClassBase actor, String state){
@@ -95,13 +105,13 @@ public class DebuggingService {
 			asyncLogger.addMessageActorDestroy(inst.getParent().getInstancePath(), inst.getInstancePath());
 	}
 	
-	public void addMessageActorCreate(OptionalActorInterfaceBase oai, String actorClass) {
+	public void addMessageActorCreate(OptionalActorInterfaceBase oai, String actorClass, String name) {
 		asyncLogger.addNote(oai.getParent().getInstancePath(), "dynamically creating actor class "+actorClass);
-		asyncLogger.addMessageActorCreate(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+oai.getName());
+		asyncLogger.addMessageActorCreate(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+name);
 	}
 	
-	public void addMessageActorDestroy(OptionalActorInterfaceBase oai) {
-		asyncLogger.addMessageActorDestroy(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+oai.getName());
+	public void addMessageActorDestroy(OptionalActorInterfaceBase oai, String name) {
+		asyncLogger.addMessageActorDestroy(oai.getParent().getInstancePath(), oai.getInstancePath()+IRTObject.PATH_DELIM+name);
 	}
 	
 	public void addVisibleComment(String comment) {
