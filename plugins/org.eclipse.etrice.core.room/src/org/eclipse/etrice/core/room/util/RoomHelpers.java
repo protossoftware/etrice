@@ -2498,4 +2498,23 @@ public class RoomHelpers {
 		}
 		return false;
 	}
+
+	/**
+	 * check whether ac2 is super type of ac1 
+	 * @param ac1
+	 * @param ac2
+	 * @return <code>true</code> if ac1 or one of its base types is identical to ac2
+	 */
+	public static boolean isKindOf(ActorClass ac1, ActorClass ac2) {
+		if (ac2==null)
+			return false;
+		
+		while (ac1!=null) {
+			if (ac2==ac1)
+				return true;
+			
+			ac1 = ac1.getBase();
+		}
+		return false;
+	}
 }

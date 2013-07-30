@@ -159,7 +159,7 @@ public class ValidationUtil {
 	}
 
 	/**
-	 * check whether ac1 is super type of ac2 
+	 * check whether ac2 is super type of ac1 
 	 * @param ac1
 	 * @param ac2
 	 * @return <code>true</code> if ac1 or one of its base types is identical to ac2
