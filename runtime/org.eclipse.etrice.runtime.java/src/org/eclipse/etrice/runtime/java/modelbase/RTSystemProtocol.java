@@ -36,6 +36,9 @@ public class RTSystemProtocol {
 			}
 		}
 		
+		protected void connectWithPeer() {
+		}
+		
 		@Override
 		protected void destroy() {
 			super.destroy();
@@ -47,6 +50,9 @@ public class RTSystemProtocol {
 
 		public RTSystemConjPort(IInterfaceItemOwner actor, int localId) {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
+		}
+
+		protected void connectWithPeer() {
 		}
 		
 	}

@@ -46,6 +46,13 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 		RTSystemPort = new RTSystemConjPort(this, IFITEM_RTSystemPort);
 	}
 	
+	public String getInstancePath(char delim) {
+		if (getParent()!=null)
+			return getParent().getInstancePath(delim);
+		
+		return "";
+	}
+	
 	/**
 	 * Get list of peer paths
 	 * 
