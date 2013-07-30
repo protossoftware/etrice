@@ -32,6 +32,7 @@
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors1" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors2" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors3" />
 	</target>
 
 </project>

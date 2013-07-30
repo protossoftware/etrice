@@ -172,3 +172,31 @@ The small numbers per object and the retained heap size indicate that the applic
 costs a significant amount of time and the execution time is increased to the order of seconds.
 \item The measured free memory is close to constant. Only a small step is observed which wasn't analyzed further.
 \end{itemize}
+
+\section{Dynamic Actors 3}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors3}.
+
+\subsection{Purpose}
+
+The example demonstrates the usage of an optional actor array. It is shown that several actor classes
+derived from the type of the optional actor reference can be created as array members.
+The array members can be destroyed in arbitrary order and the array size grows and shrinks as appropriate.
+
+\subsection{Details}
+
+This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a
+replicated optional actor (or array of optional actors if you wish).
+The port of the \texttt{Container} was also changed to a replicated port. All replication factors in this example
+are of arbitrary multiplicity (*). The sizes vary dynamically and are unbound as far as the model is concerned.
+
+The behavior was changed to the following:
+Two instances of different classes are created as members of this array and both are deleted and one is created again.
+The replicated port is used to send (broadcast) messages to the optional actors.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\item careful inspection of the console output reveals that objects are created and destroyed as expected
+\end{itemize}

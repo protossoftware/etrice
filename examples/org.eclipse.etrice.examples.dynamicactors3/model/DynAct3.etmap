@@ -1,0 +1,11 @@
+MappingModel DynTest {
+	import org.eclipse.etrice.examples.dynamicactors1.* from "DynAct3.room"
+	import org.eclipse.etrice.examples.dynamicactors1.* from "DynAct3.etphys"
+
+	Mapping LS -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping dflt_thread -> PhysicalThread1
+		}
+	}
+
+}

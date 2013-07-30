@@ -201,4 +201,21 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors3 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" 
+			name="eTrice Dynamic Actors Example 3" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice introductory example for dynamic actors</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors3" contentURI="contents/org.eclipse.etrice.examples.dynamicactors3.zip" description="Exmaple Dynamic Actors 3"/>
+	  </example>
+	</extension>   
+
 </plugin>
