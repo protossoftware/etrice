@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import org.eclipse.etrice.runtime.java.modelbase.RTSystemServicesProtocol.RTSystemServicesProtocolConjPort;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemServicesProtocol.RTSystemServicesProtocolConjReplPort;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemServicesProtocol.RTSystemServicesProtocolPort;
 
@@ -52,6 +53,19 @@ public class RTSystemProtocol {
 			super(actor, RT_SYSTEM_PORT_NAME, localId);
 		}
 
+		@Override
+		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
+			return new RTSystemConjSubPort(rcv, name, lid, idx);
+		}
+		
+	}
+	
+	public static class RTSystemConjSubPort extends RTSystemServicesProtocolConjPort {
+
+		public RTSystemConjSubPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
+			super(actor, name, localId, idx);
+		}
+		
 		protected void connectWithPeer() {
 		}
 		
