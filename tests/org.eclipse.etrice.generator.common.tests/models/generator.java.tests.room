@@ -9,6 +9,7 @@ RoomModel JavaGenTests {
 	import StaticConfigTest.* from "StaticConfigTest.room"
 	import DynamicConfigTest.* from "DynamicConfigTest_Java.room"
 	import DataDrivenTest.* from "DataDrivenTest.room"
+	import DynamicActorTest1.* from "DynamicActorTest1.room"
 	
 	LogicalSystem JavaGenTests {
 		SubSystemRef hdTest: SubSystem_HandlerTest
@@ -20,5 +21,6 @@ RoomModel JavaGenTests {
 		SubSystemRef scTest: SubSystem_StaticConfigTest
 		SubSystemRef dcTest: SubSystem_DynamicConfigTest
 		SubSystemRef ddTest: SubSystem_DataDriven
+		SubSystemRef da1Test: SubSystem_DynamicActorTest1
 	}
 }
