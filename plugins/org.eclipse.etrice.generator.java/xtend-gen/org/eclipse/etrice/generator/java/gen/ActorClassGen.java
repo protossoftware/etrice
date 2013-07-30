@@ -635,27 +635,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      {
-        boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_2) {
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void destroy() {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("super.destroy();");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
@@ -767,6 +746,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(_destructorCall, "		");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
+              {
+                boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+                if (_generateMSCInstrumentation_2) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+                  _builder.newLine();
+                }
+              }
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("super.destroy();");
@@ -775,6 +763,24 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("}");
               _builder.newLine();
             }
+          }
+        } else {
+          boolean _generateMSCInstrumentation_3 = GlobalSettings.generateMSCInstrumentation();
+          if (_generateMSCInstrumentation_3) {
+            _builder.append("\t");
+            _builder.append("public void destroy() {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("super.destroy();");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
           }
         }
       }

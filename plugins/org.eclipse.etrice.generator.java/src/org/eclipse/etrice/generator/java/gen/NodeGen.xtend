@@ -30,6 +30,9 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
+import org.eclipse.etrice.core.room.ActorClass
+import com.google.common.collect.Sets
 
 @Singleton
 class NodeGen {
@@ -67,13 +70,14 @@ class NodeGen {
 			}
 		}
 	}
-
+	
 	def generate(Root root, SubSystemInstance comp, HashSet<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)
 		val clsname = nr.getJavaClassName(comp)
 		val threads = nr.type.threads.filter(t|usedThreads.contains(t))
+		val opt = Sets::newHashSet(comp.eAllContents.filter(i|i instanceof ActorInterfaceInstance).map[aii|(aii as ActorInterfaceInstance).actorClass])
 		
 	'''
 		package «cc.getPackage()»;
@@ -214,7 +218,7 @@ class NodeGen {
 			
 			public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {
 				«val else1 = new IntelligentSeparator("else ")»
-				«FOR oa : root.optionalActorClasses»
+				«FOR oa : opt»
 					«else1»if (optionalActorClass.equals("«oa.name»")) {
 						«val else2 = new IntelligentSeparator("else ")»
 						«FOR subcls : root.getSubClasses(oa).union(oa).filter(s|!s.abstract)»
@@ -259,5 +263,17 @@ class NodeGen {
 				}
 			}
 		}
+	}
+
+	def private isKindOf(ActorClass ac, HashSet<ActorClass> classes) {
+		var a = ac
+		
+		while (a!=null) {
+			if (classes.contains(a))
+				return true
+			a = a.base
+		}
+		
+		false
 	}
 }

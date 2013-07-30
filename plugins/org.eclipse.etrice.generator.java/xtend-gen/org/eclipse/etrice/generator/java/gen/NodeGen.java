@@ -11,13 +11,16 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
@@ -27,6 +30,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -54,6 +58,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -154,6 +159,21 @@ public class NodeGen {
           }
         };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
+      TreeIterator<EObject> _eAllContents = comp.eAllContents();
+      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+          public Boolean apply(final EObject i) {
+            return Boolean.valueOf((i instanceof ActorInterfaceInstance));
+          }
+        };
+      Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function_1);
+      final Function1<EObject,ActorClass> _function_2 = new Function1<EObject,ActorClass>() {
+          public ActorClass apply(final EObject aii) {
+            ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
+            return _actorClass;
+          }
+        };
+      Iterator<ActorClass> _map = IteratorExtensions.<EObject, ActorClass>map(_filter, _function_2);
+      final HashSet<ActorClass> opt = Sets.<ActorClass>newHashSet(_map);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(cc);
@@ -634,8 +654,7 @@ public class NodeGen {
       final IntelligentSeparator else1 = _intelligentSeparator;
       _builder.newLineIfNotEmpty();
       {
-        EList<ActorClass> _optionalActorClasses = root.getOptionalActorClasses();
-        for(final ActorClass oa : _optionalActorClasses) {
+        for(final ActorClass oa : opt) {
           _builder.append("\t\t");
           _builder.append(else1, "		");
           _builder.append("if (optionalActorClass.equals(\"");
@@ -651,15 +670,15 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass,Boolean> _function_1 = new Function1<ActorClass,Boolean>() {
+            final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
                 public Boolean apply(final ActorClass s) {
                   boolean _isAbstract = s.isAbstract();
                   boolean _not = (!_isAbstract);
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_union, _function_1);
-            for(final ActorClass subcls : _filter) {
+            Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
+            for(final ActorClass subcls : _filter_1) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append(else2, "			");
@@ -762,5 +781,28 @@ public class NodeGen {
         }
       }
     }
+  }
+  
+  private boolean isKindOf(final ActorClass ac, final HashSet<ActorClass> classes) {
+    boolean _xblockexpression = false;
+    {
+      ActorClass a = ac;
+      boolean _notEquals = (!Objects.equal(a, null));
+      boolean _while = _notEquals;
+      while (_while) {
+        {
+          boolean _contains = classes.contains(a);
+          if (_contains) {
+            return true;
+          }
+          ActorClass _base = a.getBase();
+          a = _base;
+        }
+        boolean _notEquals_1 = (!Objects.equal(a, null));
+        _while = _notEquals_1;
+      }
+      _xblockexpression = (false);
+    }
+    return _xblockexpression;
   }
 }

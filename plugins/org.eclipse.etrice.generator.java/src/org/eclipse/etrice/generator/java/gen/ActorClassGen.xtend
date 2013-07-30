@@ -176,13 +176,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ENDFOR»
 				«ENDIF»
 			}
-			«IF GlobalSettings::generateMSCInstrumentation»
-				
-				public void destroy() {
-					DebuggingService.getInstance().addMessageActorDestroy(this);
-					super.destroy();
-				}
-			«ENDIF»
 			
 			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getDynConfigReadAttributes(ac)), ac.name)»
 			
@@ -217,9 +210,17 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ELSE»
 					public void destroy(){
 						«ac.name.destructorCall»;
+						«IF GlobalSettings::generateMSCInstrumentation»
+							DebuggingService.getInstance().addMessageActorDestroy(this);
+						«ENDIF»
 						super.destroy();
 					}
 				«ENDIF»
+			«ELSEIF GlobalSettings::generateMSCInstrumentation»
+				public void destroy() {
+					DebuggingService.getInstance().addMessageActorDestroy(this);
+					super.destroy();
+				}
 			«ENDIF»
 		
 			«IF manualBehavior»
