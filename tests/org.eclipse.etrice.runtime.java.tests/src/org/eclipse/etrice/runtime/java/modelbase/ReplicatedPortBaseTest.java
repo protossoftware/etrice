@@ -93,8 +93,8 @@ public class ReplicatedPortBaseTest {
 		assertEquals("/TOP/Rcv1/Port1", port1.getInstancePath());
 		assertEquals("_TOP_Rcv1_Port1", port1.getInstancePathName());
 		assertEquals("/TOP/Rcv2/Port2", port2.getInstancePath());
-		assertEquals("/TOP/Rcv2/Port20", port2.getInterfaceItem(0).getInstancePath());
-		assertEquals("/TOP/Rcv2/Port21", port2.getInterfaceItem(1).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:0", port2.getInterfaceItem(0).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:1", port2.getInterfaceItem(1).getInstancePath());
 		
 		assertEquals(33, port0.getLocalId());
 		assertEquals(44, port1.getLocalId());
@@ -138,8 +138,8 @@ public class ReplicatedPortBaseTest {
 		assertEquals("/TOP/Rcv1/Port1", port1.getInstancePath());
 		assertEquals("_TOP_Rcv1_Port1", port1.getInstancePathName());
 		assertEquals("/TOP/Rcv2/Port2", port2.getInstancePath());
-		assertEquals("/TOP/Rcv2/Port20", port2.getInterfaceItem(0).getInstancePath());
-		assertEquals("/TOP/Rcv2/Port21", port2.getInterfaceItem(1).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:0", port2.getInterfaceItem(0).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:1", port2.getInterfaceItem(1).getInstancePath());
 		
 		assertEquals(33, port0.getLocalId());
 		assertEquals(44, port1.getLocalId());
@@ -184,8 +184,8 @@ public class ReplicatedPortBaseTest {
 		assertEquals("/TOP/Rcv1/Port1", port1.getInstancePath());
 		assertEquals("_TOP_Rcv1_Port1", port1.getInstancePathName());
 		assertEquals("/TOP/Rcv2/Port2", port2.getInstancePath());
-		assertEquals("/TOP/Rcv2/Port20", port2.getInterfaceItem(0).getInstancePath());
-		assertEquals("/TOP/Rcv2/Port21", port2.getInterfaceItem(1).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:0", port2.getInterfaceItem(0).getInstancePath());
+		assertEquals("/TOP/Rcv2/Port2:1", port2.getInterfaceItem(1).getInstancePath());
 		
 		assertEquals(33, port0.getLocalId());
 		assertEquals(44, port1.getLocalId());
