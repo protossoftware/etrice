@@ -43,6 +43,11 @@ public class PC {
 			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
+		
+		public void destroy() {
+			DebuggingService.getInstance().removePortInstance(this);
+			super.destroy();
+		}
 	
 		@Override
 		public void receive(Message m) {
@@ -113,6 +118,11 @@ public class PC {
 			super(actor, name, localId, idx);
 			DebuggingService.getInstance().addPortInstance(this);
 		}
+		
+		public void destroy() {
+			DebuggingService.getInstance().removePortInstance(this);
+			super.destroy();
+		}
 	
 		@Override
 		public void receive(Message m) {
@@ -138,7 +148,7 @@ public class PC {
 			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_sayHello));
-				}
+		}
 	}
 	
 	// replicated port class

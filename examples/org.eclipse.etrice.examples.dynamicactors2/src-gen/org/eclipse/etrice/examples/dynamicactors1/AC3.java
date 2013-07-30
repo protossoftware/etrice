@@ -65,6 +65,10 @@ public class AC3 extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	/* state IDs */
 	public static final int STATE_Ready = 2;
@@ -86,6 +90,7 @@ public class AC3 extends ActorClassBase {
 	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
+		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 		if (stateStrings[new_state]!="Idle") {
 		}	
 		this.state = new_state;

@@ -45,6 +45,7 @@ public class Appl extends ActorClassBase {
 		// own service implementations
 		
 		// sub actors
+		DebuggingService.getInstance().addMessageActorCreate(this, "cont");
 		new Container(this, "cont");
 
 	}
@@ -60,6 +61,10 @@ public class Appl extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	//--------------------- no state machine
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {

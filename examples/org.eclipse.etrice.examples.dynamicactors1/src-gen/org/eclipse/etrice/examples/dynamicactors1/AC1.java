@@ -51,11 +51,6 @@ public class AC1 extends ActorClassBase {
 
 	}
 	
-	public void destroy() {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		super.destroy();
-	}
-	
 	/* --------------------- attribute setters and getters */
 	
 	
@@ -70,6 +65,10 @@ public class AC1 extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	/* state IDs */
 	public static final int STATE_Ready = 2;

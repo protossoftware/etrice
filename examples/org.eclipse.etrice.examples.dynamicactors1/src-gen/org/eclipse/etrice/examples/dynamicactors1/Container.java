@@ -58,11 +58,6 @@ public class Container extends ActorClassBase {
 
 	}
 	
-	public void destroy() {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		super.destroy();
-	}
-	
 	/* --------------------- attribute setters and getters */
 	
 	
@@ -77,6 +72,10 @@ public class Container extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	/* state IDs */
 	public static final int STATE_CreateOptional2 = 2;
@@ -112,12 +111,12 @@ public class Container extends ActorClassBase {
 	/* Entry and Exit Codes */
 	protected void entry_CreateOptional2() {
 		dumpTree("before creation of Optional2");
-		opt.createOptionalActor("Optional2", Node_nodeRef1_main.THREAD_PHYSICALTHREAD1);
+		opt.createOptionalActor("Optional2", getThread());
 		p0.sayHello();
 		dumpTree("after creation of Optional2");
 	}
 	protected void entry_CreateOptional1() {
-		opt.createOptionalActor("Optional1", Node_nodeRef1_main.THREAD_PHYSICALTHREAD1);
+		opt.createOptionalActor("Optional1", getThread());
 		p0.sayHello();
 		dumpTree("after creation of Optional1");
 	}

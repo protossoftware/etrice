@@ -45,6 +45,7 @@ public class Optional1 extends Optional {
 		// own service implementations
 		
 		// sub actors
+		DebuggingService.getInstance().addMessageActorCreate(this, "sub1");
 		new AC1(this, "sub1");
 
 	}
@@ -60,6 +61,10 @@ public class Optional1 extends Optional {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	//--------------------- no state machine
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {

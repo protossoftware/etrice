@@ -45,6 +45,7 @@ public class AC2 extends ActorClassBase {
 		// own service implementations
 		
 		// sub actors
+		DebuggingService.getInstance().addMessageActorCreate(this, "deep_sub");
 		new AC3(this, "deep_sub");
 
 	}
@@ -60,6 +61,10 @@ public class AC2 extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	//--------------------- no state machine
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {

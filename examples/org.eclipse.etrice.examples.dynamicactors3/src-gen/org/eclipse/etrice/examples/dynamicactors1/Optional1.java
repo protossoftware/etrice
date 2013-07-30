@@ -50,11 +50,6 @@ public class Optional1 extends Optional {
 
 	}
 	
-	public void destroy() {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		super.destroy();
-	}
-	
 	/* --------------------- attribute setters and getters */
 	
 	
@@ -66,6 +61,10 @@ public class Optional1 extends Optional {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	//--------------------- no state machine
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
