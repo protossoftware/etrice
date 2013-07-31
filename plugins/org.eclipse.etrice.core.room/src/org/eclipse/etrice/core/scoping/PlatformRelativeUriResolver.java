@@ -17,10 +17,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -89,23 +85,26 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		if (uri.isRelative()) {
 			URI base = baseUri.trimSegments(1);
 			if (base.isPlatformResource()) {
-				Path basePath = new Path(base.toPlatformString(true));
-				if (basePath.segmentCount()<2) {
-					// it's a project
-					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(basePath.lastSegment());
-					if (project!=null) {
-						String abs = project.getRawLocationURI().toString();
-						base = URI.createURI(abs);
-					}
-				}
-				else {
-					// it's a folder
-					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(basePath);
-					if (folder!=null) {
-						String abs = folder.getRawLocationURI().toString();
-						base = URI.createURI(abs);
-					}
-				}
+				uri = base.appendSegments(uri.segments());
+				resolve = "platform:/resource"+uri.toPlatformString(true);
+				return resolve;
+//				Path basePath = new Path(base.toPlatformString(true));
+//				if (basePath.segmentCount()<2) {
+//					// it's a project
+//					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(basePath.lastSegment());
+//					if (project!=null) {
+//						String abs = project.getRawLocationURI().toString();
+//						base = URI.createURI(abs);
+//					}
+//				}
+//				else {
+//					// it's a folder
+//					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(basePath);
+//					if (folder!=null) {
+//						String abs = folder.getRawLocationURI().toString();
+//						base = URI.createURI(abs);
+//					}
+//				}
 			}
 			else if (base.isRelative()) {
 				base = URI.createFileURI(new File(base.toString()).getAbsolutePath());
