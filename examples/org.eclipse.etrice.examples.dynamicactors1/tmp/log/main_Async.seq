@@ -4,31 +4,31 @@
 	/LS/main/appl (!) /LS/main/appl/cont 
 # done sub system initialization
 	/LS/main/appl/cont note: dynamically creating actor class Optional2
-	/LS/main/appl/cont (!) /LS/main/appl/cont/opt 
-	/LS/main/appl/cont/opt (!) /LS/main/appl/cont/opt/sub2 
-	/LS/main/appl/cont/opt/sub2 (!) /LS/main/appl/cont/opt/sub2/deep_sub 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/opt/sub2/deep_sub sayHello
+	/LS/main/appl/cont (!) /LS/main/appl/cont/opt/opt 
+	/LS/main/appl/cont/opt/opt (!) /LS/main/appl/cont/opt/opt/sub2 
+	/LS/main/appl/cont/opt/opt/sub2 (!) /LS/main/appl/cont/opt/opt/sub2/deep_sub 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/opt/opt/sub2/deep_sub sayHello
 	/LS/main/appl/cont >>> CreateOptional2
-	/LS/main/appl/cont/opt/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/opt/sub2/deep_sub sayHello
-	/LS/main/appl/cont/opt/sub2/deep_sub >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/opt/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont/opt/sub2/deep_sub --> /LS/main/appl/cont hello
-	/LS/main/appl/cont (X) /LS/main/appl/cont/opt 
-	/LS/main/appl/cont/opt (X) /LS/main/appl/cont/opt/sub2 
-	/LS/main/appl/cont/opt/sub2 (X) /LS/main/appl/cont/opt/sub2/deep_sub 
+	/LS/main/appl/cont/opt/opt/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/opt/opt/sub2/deep_sub sayHello
+	/LS/main/appl/cont/opt/opt/sub2/deep_sub >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/opt/opt/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont/opt/opt/sub2/deep_sub --> /LS/main/appl/cont hello
+	/LS/main/appl/cont (X) /LS/main/appl/cont/opt/opt 
+	/LS/main/appl/cont/opt/opt (X) /LS/main/appl/cont/opt/opt/sub2 
+	/LS/main/appl/cont/opt/opt/sub2 (X) /LS/main/appl/cont/opt/opt/sub2/deep_sub 
 	/LS/main/appl/cont note: dynamically creating actor class Optional1
-	/LS/main/appl/cont (!) /LS/main/appl/cont/opt 
-	/LS/main/appl/cont/opt (!) /LS/main/appl/cont/opt/sub1 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/opt/sub1 sayHello
+	/LS/main/appl/cont (!) /LS/main/appl/cont/opt/opt 
+	/LS/main/appl/cont/opt/opt (!) /LS/main/appl/cont/opt/opt/sub1 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/opt/opt/sub1 sayHello
 	/LS/main/appl/cont >>> CreateOptional1
-	/LS/main/appl/cont/opt/sub1 >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/opt/sub1 sayHello
-	/LS/main/appl/cont/opt/sub1 >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/opt/sub1 >>> Ready
-	/LS/main/appl/cont/opt/sub1 --> /LS/main/appl/cont hello
-	/LS/main/appl/cont (X) /LS/main/appl/cont/opt 
-	/LS/main/appl/cont/opt (X) /LS/main/appl/cont/opt/sub1 
+	/LS/main/appl/cont/opt/opt/sub1 >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/opt/opt/sub1 sayHello
+	/LS/main/appl/cont/opt/opt/sub1 >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/opt/opt/sub1 >>> Ready
+	/LS/main/appl/cont/opt/opt/sub1 --> /LS/main/appl/cont hello
+	/LS/main/appl/cont (X) /LS/main/appl/cont/opt/opt 
+	/LS/main/appl/cont/opt/opt (X) /LS/main/appl/cont/opt/opt/sub1 
 	/LS/main/appl/cont >>> ReceivedHelloAgain
 # begin sub system destruction
 	/LS/main (X) /LS/main/appl 

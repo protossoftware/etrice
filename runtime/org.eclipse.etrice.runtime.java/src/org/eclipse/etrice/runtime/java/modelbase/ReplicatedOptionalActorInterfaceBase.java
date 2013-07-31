@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -19,29 +21,62 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
+ * This class serves as base class for generated classes.
+ * It specializes {@link OptionalActorInterfaceBase} for replicated optional actors.
+ * 
+ * @see OptionalActorInterfaceBase
+ * 
  * @author Henrik Rentz-Reichert
- *
  */
 public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterfaceBase {
 
+	/**
+	 * A separator for the index part of the name.
+	 */
 	private static final char INDEX_SEP = ':';
+	
+	/**
+	 * A list of freed indices.
+	 */
 	private LinkedList<Integer> releasedIndices = new LinkedList<Integer>();
+	
+	/**
+	 * All actor instances currently alive.
+	 */
 	private ArrayList<ActorClassBase> actors = new ArrayList<ActorClassBase>();
 
 	/**
-	 * @param parent
-	 * @param name
-	 * @param clsname
+	 * The only constructor.
+	 * 
+	 * @param parent the parent event receiver
+	 * @param name the name of the actor reference
+	 * @param clsname the actor class name of the reference
 	 */
-	public ReplicatedOptionalActorInterfaceBase(IEventReceiver parent, String name, String clsname) {
+	protected ReplicatedOptionalActorInterfaceBase(IEventReceiver parent, String name, String clsname) {
 		super(parent, name, clsname);
 	}
 	
+	/**
+	 * This method instantiates and starts an optional actor (together with its contained instances).
+	 * 
+	 * @param actorClass the name of the actor class to be instantiated
+	 * @param thread the ID of the message service (and thus the thread) for the newly created instances
+	 * @return the index of the newly create instance or {@code -1} on failure
+	 */
 	public int createOptionalActor(String actorClass, int thread) {
+		return createOptionalActor(actorClass, thread, null);
+	}
+	
+	/**
+	 * This method instantiates and starts an optional actor (together with its contained instances).
+	 * 
+	 * @param actorClass the name of the actor class to be instantiated
+	 * @param thread the ID of the message service (and thus the thread) for the newly created instances
+	 * @param input an optional {@link ObjectInput}
+	 * @return the index of the newly create instance or {@code -1} on failure
+	 */
+	public int createOptionalActor(String actorClass, int thread, ObjectInput input) {
 		setSubtreeThread(thread);
-		
-		// make sure the path is up to date
-		setOwnPath(getInstancePath());
 		
 		IOptionalActorFactory factory = RTServices.getInstance().getSubSystem().getFactory(getClassName(), actorClass);
 		if (factory==null)
@@ -56,22 +91,39 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 			return -1;
 		
 		actors.add(actor);
-		
-		startSubTree();
+	
+		startupSubTree(actor, input);
 		
 		return index;
 	}
 	
 	/**
-	 * @param idx
-	 * @return
+	 * Destroys an actor instance of this array.
+	 * Before actual destruction the instances are shut down properly.
+	 * 
+	 * @param idx the index of the instance to be destroyed
+	 * @return {@code true} on success, {@code false} else
 	 */
 	public boolean destroyOptionalActor(int idx) {
+		return destroyOptionalActor(idx, null);
+	}
+	
+	/**
+	 * Destroys an actor instance of this array.
+	 * Before actual destruction the instances are shut down properly.
+	 * 
+	 * @param idx the index of the instance to be destroyed
+	 * @param output an optional {@link ObjectOutput}
+	 * @return {@code true} on success, {@code false} else
+	 */
+	public boolean destroyOptionalActor(int idx, ObjectOutput output) {
 		String childName = getChildName(idx);
 		logDeletion(childName);
 		IRTObject child = getChild(childName);
 		if (!(child instanceof ActorClassBase))
 			return false;
+		
+		shutdownSubTree((ActorClassBase)child, output);
 		
 		((ActorClassBase)child).destroy();
 		releasedIndices.push(idx);
@@ -80,8 +132,23 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 		return true;
 	}
 	
+	/**
+	 * Destroys all instances in the array.
+	 * Before actual destruction the instances are shut down properly.
+	 */
 	public void destroyAllOptionalActors() {
+		destroyAllOptionalActors(null);
+	}
+	
+	/**
+	 * Destroys all instances in the array.
+	 * Before actual destruction the instances are shut down properly.
+	 * 
+	 * @param output an optional {@link ObjectOutput}
+	 */
+	public void destroyAllOptionalActors(ObjectOutput output) {
 		for (ActorClassBase actor : actors) {
+			shutdownSubTree(actor, output);
 			actor.destroy();
 			int idx = Integer.parseInt(actor.getName().substring(getName().length()));
 			releasedIndices.push(idx);
@@ -89,10 +156,19 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 		actors.clear();
 	}
 	
+	/**
+	 * Composes a name with an index for a child instance.
+	 * 
+	 * @param idx the index to be used
+	 * @return the composed name of the form &lt;name>:&lt;idx>
+	 */
 	public String getChildName(int idx) {
 		return getName()+INDEX_SEP+idx;
 	}
 	
+	/**
+	 * @return the next free index
+	 */
 	private int getFreeIndex() {
 		if (releasedIndices.isEmpty())
 			return actors.size();

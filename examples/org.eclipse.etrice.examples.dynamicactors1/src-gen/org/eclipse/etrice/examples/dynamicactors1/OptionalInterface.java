@@ -20,14 +20,12 @@ class OptionalInterface extends ScalarOptionalActorInterfaceBase {
 	}
 	
 	@Override
-	public boolean createOptionalActor(String actorClass, int thread) {
-		DebuggingService.getInstance().addMessageActorCreate(this, actorClass);
-		return super.createOptionalActor(actorClass, thread);
+		protected void logCreation(String actorClass, String name) {
+		DebuggingService.getInstance().addMessageActorCreate(this, actorClass, name);
 	}
 	
 	@Override
-	public boolean destroyOptionalActor() {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		return super.destroyOptionalActor();
+		protected void logDeletion(String name) {
+		DebuggingService.getInstance().addMessageActorDestroy(this, name);
 	}
 }

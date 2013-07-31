@@ -48,11 +48,6 @@ public abstract class Optional extends ActorClassBase {
 
 	}
 	
-	public void destroy() {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		super.destroy();
-	}
-	
 	/* --------------------- attribute setters and getters */
 	
 	
@@ -64,6 +59,10 @@ public abstract class Optional extends ActorClassBase {
 		super.stop();
 	}
 	
+	public void destroy() {
+		DebuggingService.getInstance().addMessageActorDestroy(this);
+		super.destroy();
+	}
 
 	//--------------------- no state machine
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {

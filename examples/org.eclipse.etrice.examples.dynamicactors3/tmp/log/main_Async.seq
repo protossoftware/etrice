@@ -4,57 +4,57 @@
 	/LS/main/appl (!) /LS/main/appl/cont 
 # done sub system initialization
 	/LS/main/appl/cont note: dynamically creating actor class Optional2
-	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray:0 
-	/LS/main/appl/cont/optarray:0 (!) /LS/main/appl/cont/optarray:0/sub2 
-	/LS/main/appl/cont/optarray:0/sub2 (!) /LS/main/appl/cont/optarray:0/sub2/deep_sub 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray:0/sub2/deep_sub sayHello
+	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray/optarray:0 
+	/LS/main/appl/cont/optarray/optarray:0 (!) /LS/main/appl/cont/optarray/optarray:0/sub2 
+	/LS/main/appl/cont/optarray/optarray:0/sub2 (!) /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub sayHello
 	/LS/main/appl/cont >>> CreateOptional2
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/optarray:0/sub2/deep_sub sayHello
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub --> /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub sayHello
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub --> /LS/main/appl/cont hello
 	/LS/main/appl/cont note: dynamically creating actor class Optional1
-	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray:1 
-	/LS/main/appl/cont/optarray:1 (!) /LS/main/appl/cont/optarray:1/sub1 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray:0/sub2/deep_sub sayHello
-	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray:1/sub1 sayHello
+	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray/optarray:1 
+	/LS/main/appl/cont/optarray/optarray:1 (!) /LS/main/appl/cont/optarray/optarray:1/sub1 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub sayHello
+	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray/optarray:1/sub1 sayHello
 	/LS/main/appl/cont >>> CreateOptional1
-	/LS/main/appl/cont/optarray:1/sub1 >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/optarray:0/sub2/deep_sub sayHello
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/optarray:1/sub1 sayHello
-	/LS/main/appl/cont/optarray:1/sub1 >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/optarray:1/sub1 >>> Ready
-	/LS/main/appl/cont/optarray:0/sub2/deep_sub --> /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub sayHello
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/optarray/optarray:1/sub1 sayHello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 >>> Ready
+	/LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub --> /LS/main/appl/cont hello
 	/LS/main/appl/cont >>> ReceivedHelloAgain
-	/LS/main/appl/cont/optarray:1/sub1 --> /LS/main/appl/cont hello
-	/LS/main/appl/cont (X) /LS/main/appl/cont/optarray:0 
-	/LS/main/appl/cont/optarray:0 (X) /LS/main/appl/cont/optarray:0/sub2 
-	/LS/main/appl/cont/optarray:0/sub2 (X) /LS/main/appl/cont/optarray:0/sub2/deep_sub 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray:1/sub1 sayHello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 --> /LS/main/appl/cont hello
+	/LS/main/appl/cont (X) /LS/main/appl/cont/optarray/optarray:0 
+	/LS/main/appl/cont/optarray/optarray:0 (X) /LS/main/appl/cont/optarray/optarray:0/sub2 
+	/LS/main/appl/cont/optarray/optarray:0/sub2 (X) /LS/main/appl/cont/optarray/optarray:0/sub2/deep_sub 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray/optarray:1/sub1 sayHello
 	/LS/main/appl/cont >>> Destroy0
-	/LS/main/appl/cont --> /LS/main/appl/cont/optarray:1/sub1 sayHello
-	/LS/main/appl/cont/optarray:1/sub1 >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/optarray:1/sub1 >>> Ready
-	/LS/main/appl/cont/optarray:1/sub1 --> /LS/main/appl/cont hello
-	/LS/main/appl/cont (X) /LS/main/appl/cont/optarray:1 
-	/LS/main/appl/cont/optarray:1 (X) /LS/main/appl/cont/optarray:1/sub1 
+	/LS/main/appl/cont --> /LS/main/appl/cont/optarray/optarray:1/sub1 sayHello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:1/sub1 >>> Ready
+	/LS/main/appl/cont/optarray/optarray:1/sub1 --> /LS/main/appl/cont hello
+	/LS/main/appl/cont (X) /LS/main/appl/cont/optarray/optarray:1 
+	/LS/main/appl/cont/optarray/optarray:1 (X) /LS/main/appl/cont/optarray/optarray:1/sub1 
 	/LS/main/appl/cont note: dynamically creating actor class Optional2
-	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray:1 
-	/LS/main/appl/cont/optarray:1 (!) /LS/main/appl/cont/optarray:1/sub2 
-	/LS/main/appl/cont/optarray:1/sub2 (!) /LS/main/appl/cont/optarray:1/sub2/deep_sub 
-	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray:1/sub2/deep_sub sayHello
+	/LS/main/appl/cont (!) /LS/main/appl/cont/optarray/optarray:1 
+	/LS/main/appl/cont/optarray/optarray:1 (!) /LS/main/appl/cont/optarray/optarray:1/sub2 
+	/LS/main/appl/cont/optarray/optarray:1/sub2 (!) /LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub 
+	/LS/main/appl/cont >-- /LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub sayHello
 	/LS/main/appl/cont >>> Destroy1Create2
-	/LS/main/appl/cont/optarray:1/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont --> /LS/main/appl/cont/optarray:1/sub2/deep_sub sayHello
-	/LS/main/appl/cont/optarray:1/sub2/deep_sub >-- /LS/main/appl/cont hello
-	/LS/main/appl/cont/optarray:1/sub2/deep_sub >>> Ready
-	/LS/main/appl/cont/optarray:1/sub2/deep_sub --> /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont --> /LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub sayHello
+	/LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub >-- /LS/main/appl/cont hello
+	/LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub >>> Ready
+	/LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub --> /LS/main/appl/cont hello
 	/LS/main/appl/cont >>> Done
 # begin sub system destruction
 	/LS/main (X) /LS/main/appl 
 	/LS/main/appl (X) /LS/main/appl/cont 
-	/LS/main/appl/cont/optarray:1 (X) /LS/main/appl/cont/optarray:1/sub2 
-	/LS/main/appl/cont/optarray:1/sub2 (X) /LS/main/appl/cont/optarray:1/sub2/deep_sub 
+	/LS/main/appl/cont/optarray/optarray:1 (X) /LS/main/appl/cont/optarray/optarray:1/sub2 
+	/LS/main/appl/cont/optarray/optarray:1/sub2 (X) /LS/main/appl/cont/optarray/optarray:1/sub2/deep_sub 

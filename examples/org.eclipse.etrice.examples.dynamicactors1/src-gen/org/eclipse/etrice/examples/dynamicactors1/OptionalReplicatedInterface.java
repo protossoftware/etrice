@@ -20,14 +20,12 @@ class OptionalReplicatedInterface extends ReplicatedOptionalActorInterfaceBase {
 	}
 	
 	@Override
-	public int createOptionalActor(String actorClass, int thread) {
-		DebuggingService.getInstance().addMessageActorCreate(this, actorClass);
-		return super.createOptionalActor(actorClass, thread);
+		protected void logCreation(String actorClass, String name) {
+		DebuggingService.getInstance().addMessageActorCreate(this, actorClass, name);
 	}
 	
 	@Override
-	public boolean destroyOptionalActor(int idx) {
-		DebuggingService.getInstance().addMessageActorDestroy(this);
-		return super.destroyOptionalActor(idx);
+		protected void logDeletion(String name) {
+		DebuggingService.getInstance().addMessageActorDestroy(this, name);
 	}
 }

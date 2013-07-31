@@ -12,33 +12,61 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
+ * This class serves as base class for generated classes.
+ * It specializes {@link OptionalActorInterfaceBase} for scalar optional actors.
+ * 
+ * @see OptionalActorInterfaceBase
+ * 
  * @author Henrik Rentz-Reichert
- *
  */
 public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase {
 
+	/**
+	 * Our single actor instance or {@code null} if not instantiated or destroyed.
+	 */
 	private ActorClassBase actor = null;
 
 	/**
-	 * @param parent
-	 * @param name
-	 * @param clsname
+	 * The only constructor.
+	 * 
+	 * @param parent the parent event receiver
+	 * @param name the name of the actor reference
+	 * @param clsname the actor class name of the reference
 	 */
-	public ScalarOptionalActorInterfaceBase(IEventReceiver parent, String name, String clsname) {
+	protected ScalarOptionalActorInterfaceBase(IEventReceiver parent, String name, String clsname) {
 		super(parent, name, clsname);
 	}
 
+	/**
+	 * This method instantiates and starts an optional actor (together with its contained instances).
+	 * 
+	 * @param actorClass the name of the actor class to be instantiated
+	 * @param thread the ID of the message service (and thus the thread) for the newly created instances
+	 * @return {@code true} on success or {@code false} on failure
+	 */
 	public boolean createOptionalActor(String actorClass, int thread) {
+		return createOptionalActor(actorClass, thread, null);
+	}
+	
+	/**
+	 * This method instantiates and starts an optional actor (together with its contained instances).
+	 * 
+	 * @param actorClass the name of the actor class to be instantiated
+	 * @param thread the ID of the message service (and thus the thread) for the newly created instances
+	 * @param input an optional {@link ObjectInput}
+	 * @return {@code true} on success or {@code false} on failure
+	 */
+	public boolean createOptionalActor(String actorClass, int thread, ObjectInput input) {
 		if (actor!=null)
 			return false;
 		
 		setSubtreeThread(thread);
-		
-		// make sure the path is up to date
-		setOwnPath(getInstancePath());
 		
 		// SubSystemClass.createOptionalActor() will set our PathTo* maps
 		IOptionalActorFactory factory = RTServices.getInstance().getSubSystem().getFactory(getClassName(), actorClass);
@@ -49,20 +77,36 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 		logCreation(actorClass, getName());
 		actor = factory.create(this, getName());
 	
-		startSubTree();
+		startupSubTree(actor, input);
 		
 		return actor!=null;
 	}
 	
 	/**
-	 * @param idx
-	 * @return
+	 * Destroys our actor instance.
+	 * Before actual destruction the instances are shut down properly.
+	 * 
+	 * @return {@code true} on success, {@code false} else
 	 */
 	public boolean destroyOptionalActor() {
+		return destroyOptionalActor(null);
+	}
+	
+	/**
+	 * Destroys our actor instance.
+	 * Before actual destruction the instances are shut down properly.
+	 * 
+	 * @param output an optional {@link ObjectOutput}
+	 * @return {@code true} on success, {@code false} else
+	 */
+	public boolean destroyOptionalActor(ObjectOutput output) {
 		if (actor==null)
 			return false;
 		
 		logDeletion(getName());
+		
+		if (output!=null)
+			saveActor(actor, output);
 		
 		actor.destroy();
 		actor = null;
