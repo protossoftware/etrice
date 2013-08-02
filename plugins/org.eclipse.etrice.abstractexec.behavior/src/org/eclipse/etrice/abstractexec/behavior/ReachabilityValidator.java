@@ -50,7 +50,13 @@ public class ReachabilityValidator implements IRoomValidator {
 
 		NullDiagnostician diagnostician = new NullDiagnostician();
 		GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
-		ExpandedActorClass xpac = builder.createExpandedActorClass(ac);
+		ExpandedActorClass xpac = null;
+		try {
+			xpac = builder.createExpandedActorClass(ac);
+		}
+		catch (Throwable t) {
+			return;
+		}
 		
 		if (xpac != null && !diagnostician.isFailed()) {
 			ReachabilityCheck checker = new ReachabilityCheck(xpac);
