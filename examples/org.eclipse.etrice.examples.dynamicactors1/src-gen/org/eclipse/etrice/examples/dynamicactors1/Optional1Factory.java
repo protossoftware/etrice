@@ -12,6 +12,8 @@ public class Optional1Factory implements IOptionalActorFactory {
 	public Optional1 create(OptionalActorInterfaceBase ai, String name) {
 		// set port mappings of this sub tree
 		path2peers.put("/sub1/p0", "/p0");
+		path2peers.put("/sub1/hlp", "/sub1/helper/p0");
+		path2peers.put("/sub1/helper/p0", "/sub1/hlp");
 		ai.setPath2peers(path2peers);
 		
 		// instantiate sub tree

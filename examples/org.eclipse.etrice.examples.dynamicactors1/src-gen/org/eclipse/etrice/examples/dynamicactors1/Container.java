@@ -120,6 +120,9 @@ public class Container extends ActorClassBase {
 		p0.sayHello();
 		dumpTree("after creation of Optional1");
 	}
+	protected void entry_ReceivedHelloAgain() {
+		System.out.println("Done, enter 'quit' to exit"); 
+	}
 	
 	/* Action Codes */
 	protected void action_TRANS_tr0_FROM_CreateOptional2_TO_CreateOptional1_BY_hellop0(InterfaceItemBase ifitem, String txt) {
@@ -214,6 +217,7 @@ public class Container extends ActorClassBase {
 					/* in leaf state: return state id */
 					return STATE_CreateOptional1;
 				case STATE_ReceivedHelloAgain:
+					if (!(skip_entry)) entry_ReceivedHelloAgain();
 					/* in leaf state: return state id */
 					return STATE_ReceivedHelloAgain;
 				case STATE_TOP:

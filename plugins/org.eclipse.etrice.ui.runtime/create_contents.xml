@@ -33,6 +33,9 @@
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors1" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors2" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors3" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors4" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors5" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors6" />
 	</target>
 
 </project>

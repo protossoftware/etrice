@@ -175,7 +175,7 @@
 			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>eTrice introductory example for dynamic actors</description>
+			<description>introductory example for dynamic actors</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
@@ -192,7 +192,7 @@
 			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>eTrice introductory example for dynamic actors</description>
+			<description>massive construction and destruction of dynamic actors</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
@@ -209,12 +209,63 @@
 			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>eTrice introductory example for dynamic actors</description>
+			<description>replicated dynamic actors</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors3" contentURI="contents/org.eclipse.etrice.examples.dynamicactors3.zip" description="Exmaple Dynamic Actors 3"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors4 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors4" 
+			name="eTrice Dynamic Actors Example 4" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>optional actor with access from level above</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors4" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors4" contentURI="contents/org.eclipse.etrice.examples.dynamicactors4.zip" description="Exmaple Dynamic Actors 4"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors5 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors5" 
+			name="eTrice Dynamic Actors Example 5" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>dynamic actor with external end port</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors5" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors5" contentURI="contents/org.eclipse.etrice.examples.dynamicactors5.zip" description="Exmaple Dynamic Actors 5"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors6 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors6" 
+			name="eTrice Dynamic Actors Example 6" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>nested optional actor</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors6" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors6" contentURI="contents/org.eclipse.etrice.examples.dynamicactors6.zip" description="Exmaple Dynamic Actors 6"/>
 	  </example>
 	</extension>   
 

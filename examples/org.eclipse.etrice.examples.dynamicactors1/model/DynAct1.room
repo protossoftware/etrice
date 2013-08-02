@@ -69,7 +69,11 @@ RoomModel org.eclipse.etrice.examples.dynamicactors1 {
 						"dumpTree(\"after creation of Optional1\");"
 					}
 				}
-				State ReceivedHelloAgain
+				State ReceivedHelloAgain {
+					entry {
+						"System.out.println(\"Done, enter 'quit' to exit\"); "
+					}
+				}
 			}
 		}
 	}
@@ -110,19 +114,33 @@ RoomModel org.eclipse.etrice.examples.dynamicactors1 {
 		}
 		Structure {
 			external Port p0
+			conjugated Port hlp: PC
+			ActorRef helper: AC3
+			Binding hlp and helper.p0
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> Ready { }
-				Transition tr0: Ready -> Ready {
+				Transition tr0: Ready -> AskHelper {
 					triggers {
 						<sayHello: p0>
 					}
+				}
+				Transition tr1: AskHelper -> Ready {
+					triggers {
+						<hello: hlp>
+					}
 					action {
+						"System.out.println(\"helper said \"+txt);"
 						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
 					}
 				}
 				State Ready
+				State AskHelper {
+					entry {
+						"hlp.sayHello();"
+					}
+				}
 			}
 		}
 	}

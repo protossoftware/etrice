@@ -20,6 +20,7 @@ public class AC1 extends ActorClassBase {
 	
 	//--------------------- ports
 	protected PCPort p0 = null;
+	protected PCConjPort hlp = null;
 	
 	//--------------------- saps
 	
@@ -29,6 +30,7 @@ public class AC1 extends ActorClassBase {
 	
 	//--------------------- interface item IDs
 	public static final int IFITEM_p0 = 1;
+	public static final int IFITEM_hlp = 2;
 	
 	/*--------------------- attributes ---------------------*/
 	/*--------------------- operations ---------------------*/
@@ -42,12 +44,15 @@ public class AC1 extends ActorClassBase {
 
 		// own ports
 		p0 = new PCPort(this, "p0", IFITEM_p0);
+		hlp = new PCConjPort(this, "hlp", IFITEM_hlp);
 		
 		// own saps
 		
 		// own service implementations
 		
 		// sub actors
+		DebuggingService.getInstance().addMessageActorCreate(this, "helper");
+		new AC3(this, "helper");
 
 	}
 	
@@ -57,6 +62,9 @@ public class AC1 extends ActorClassBase {
 	//--------------------- port getters
 	public PCPort getP0 (){
 		return this.p0;
+	}
+	public PCConjPort getHlp (){
+		return this.hlp;
 	}
 
 	//--------------------- lifecycle functions
@@ -72,22 +80,26 @@ public class AC1 extends ActorClassBase {
 
 	/* state IDs */
 	public static final int STATE_Ready = 2;
-	public static final int STATE_MAX = 3;
+	public static final int STATE_AskHelper = 3;
+	public static final int STATE_MAX = 4;
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__Ready = 1;
-	public static final int CHAIN_TRANS_tr0_FROM_Ready_TO_Ready_BY_sayHellop0_tr0 = 2;
+	public static final int CHAIN_TRANS_tr0_FROM_Ready_TO_AskHelper_BY_sayHellop0 = 2;
+	public static final int CHAIN_TRANS_tr1_FROM_AskHelper_TO_Ready_BY_hellohlp = 3;
 	
 	/* triggers */
 	public static final int POLLING = 0;
+	public static final int TRIG_hlp__hello = IFITEM_hlp + EVT_SHIFT*PC.OUT_hello;
 	public static final int TRIG_p0__sayHello = IFITEM_p0 + EVT_SHIFT*PC.IN_sayHello;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","Ready"
+	protected static final String stateStrings[] = {"<no state>","<top>","Ready",
+	"AskHelper"
 	};
 	
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
@@ -97,9 +109,13 @@ public class AC1 extends ActorClassBase {
 	}
 	
 	/* Entry and Exit Codes */
+	protected void entry_AskHelper() {
+		hlp.sayHello();
+	}
 	
 	/* Action Codes */
-	protected void action_TRANS_tr0_FROM_Ready_TO_Ready_BY_sayHellop0_tr0(InterfaceItemBase ifitem) {
+	protected void action_TRANS_tr1_FROM_AskHelper_TO_Ready_BY_hellohlp(InterfaceItemBase ifitem, String txt) {
+		System.out.println("helper said "+txt);
 		p0.hello("this is AC1, instance "+getInstancePath());
 	}
 	
@@ -114,6 +130,10 @@ public class AC1 extends ActorClassBase {
 			switch (current) {
 				case STATE_Ready:
 					this.history[STATE_TOP] = STATE_Ready;
+					current = STATE_TOP;
+					break;
+				case STATE_AskHelper:
+					this.history[STATE_TOP] = STATE_AskHelper;
 					current = STATE_TOP;
 					break;
 				default:
@@ -136,9 +156,14 @@ public class AC1 extends ActorClassBase {
 			{
 				return STATE_Ready;
 			}
-			case CHAIN_TRANS_tr0_FROM_Ready_TO_Ready_BY_sayHellop0_tr0:
+			case CHAIN_TRANS_tr0_FROM_Ready_TO_AskHelper_BY_sayHellop0:
 			{
-				action_TRANS_tr0_FROM_Ready_TO_Ready_BY_sayHellop0_tr0(ifitem);
+				return STATE_AskHelper;
+			}
+			case CHAIN_TRANS_tr1_FROM_AskHelper_TO_Ready_BY_hellohlp:
+			{
+				String txt = (String) generic_data;
+				action_TRANS_tr1_FROM_AskHelper_TO_Ready_BY_hellohlp(ifitem, txt);
 				return STATE_Ready;
 			}
 				default:
@@ -164,6 +189,10 @@ public class AC1 extends ActorClassBase {
 				case STATE_Ready:
 					/* in leaf state: return state id */
 					return STATE_Ready;
+				case STATE_AskHelper:
+					if (!(skip_entry)) entry_AskHelper();
+					/* in leaf state: return state id */
+					return STATE_AskHelper;
 				case STATE_TOP:
 					state = this.history[STATE_TOP];
 					break;
@@ -195,7 +224,20 @@ public class AC1 extends ActorClassBase {
 					switch(trigger) {
 							case TRIG_p0__sayHello:
 								{
-									chain = CHAIN_TRANS_tr0_FROM_Ready_TO_Ready_BY_sayHellop0_tr0;
+									chain = CHAIN_TRANS_tr0_FROM_Ready_TO_AskHelper_BY_sayHellop0;
+									catching_state = STATE_TOP;
+								}
+							break;
+							default:
+								/* should not occur */
+								break;
+					}
+					break;
+				case STATE_AskHelper:
+					switch(trigger) {
+							case TRIG_hlp__hello:
+								{
+									chain = CHAIN_TRANS_tr1_FROM_AskHelper_TO_Ready_BY_hellohlp;
 									catching_state = STATE_TOP;
 								}
 							break;

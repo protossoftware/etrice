@@ -38,7 +38,7 @@ RoomModel DynamicActorTest2 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray/optarray:0/sub2/deep_sub\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:0/sub2/deep_sub\"));"
 					}
 				}
 				Transition tr2: CreateOptional1 -> ReceivedHelloAgain {
@@ -46,7 +46,7 @@ RoomModel DynamicActorTest2 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray/optarray:0/sub2/deep_sub\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:0/sub2/deep_sub\"));"
 					}
 				}
 				Transition tr1: ReceivedHelloAgain -> Destroy0 {
@@ -54,7 +54,7 @@ RoomModel DynamicActorTest2 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray/optarray:1/sub1\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray:1/sub1\"));"
 					}
 				}
 				Transition tr3: Destroy0 -> Destroy1Create2 {
@@ -62,7 +62,7 @@ RoomModel DynamicActorTest2 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray/optarray:1/sub1\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray:1/sub1\"));"
 					}
 				}
 				Transition tr4: Destroy1Create2 -> Done {
@@ -70,7 +70,7 @@ RoomModel DynamicActorTest2 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray/optarray:1/sub2/deep_sub\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:1/sub2/deep_sub\"));"
 					}
 				}
 				State CreateOptional2 {
@@ -123,7 +123,7 @@ RoomModel DynamicActorTest2 {
 						"// we expect an RTSystemPort and p0"
 						"EXPECT_EQUAL_INT32(caseId, \"<MODEL_LOCATION|>\", 2, size);"
 						""
-						"EXPECT_TRUE(caseId, \"<MODEL_LOCATION|>\", leafActor.getInstancePath().equals(\"/JavaGenTests/da2Test/appl/cont/optarray/optarray:1/sub2/deep_sub\"));"
+						"EXPECT_TRUE(caseId, \"<MODEL_LOCATION|>\", leafActor.getInstancePath().equals(\"/JavaGenTests/da2Test/appl/cont/optarray:1/sub2/deep_sub\"));"
 						""
 						"etUnit_testFinished(caseId);"
 					}

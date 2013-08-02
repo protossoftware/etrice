@@ -127,6 +127,9 @@ public class Container extends ActorClassBase {
 		p0.sayHello();
 		printMemory("after creation of Optional1");
 	}
+	protected void entry_Done() {
+		System.out.println("Done, enter 'quit' to exit"); 
+	}
 	
 	/* Action Codes */
 	protected void action_TRANS_INITIAL_TO__CreateOptional2() {
@@ -236,6 +239,7 @@ public class Container extends ActorClassBase {
 					/* in leaf state: return state id */
 					return STATE_CreateOptional1;
 				case STATE_Done:
+					if (!(skip_entry)) entry_Done();
 					/* in leaf state: return state id */
 					return STATE_Done;
 				case STATE_TOP:

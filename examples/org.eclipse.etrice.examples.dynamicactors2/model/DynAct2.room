@@ -89,7 +89,11 @@ RoomModel org.eclipse.etrice.examples.dynamicactors1 {
 						"printMemory(\"after creation of Optional1\");"
 					}
 				}
-				State Done
+				State Done {
+					entry {
+						"System.out.println(\"Done, enter 'quit' to exit\"); "
+					}
+				}
 			}
 		}
 	}

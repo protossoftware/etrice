@@ -1,0 +1,148 @@
+RoomModel org.eclipse.etrice.examples.dynamicactors6 {
+	
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+	
+	LogicalSystem LS {
+		SubSystemRef main: Main
+	}
+	
+	SubSystemClass Main {
+		ActorRef appl: Appl
+		
+		LogicalThread dflt_thread
+	}
+	
+	ActorClass Appl {
+		Structure {
+			ActorRef cont: Container
+		}
+		Behavior { }
+	}
+	
+	ActorClass Container {
+		Structure {
+			conjugated Port p0: PC
+			optional ActorRef opt: Optional2
+			
+			Binding p0 and opt.p0
+		}
+		Behavior {
+			// this method prints the passed message and then dumps the object tree consisting of actors and ports
+			Operation dumpTree(msg: string) {
+				"System.out.println(msg);"
+				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
+			}
+			
+			StateMachine {
+				Transition init: initial -> CreateOptional2 { }
+				Transition tr0: CreateOptional2 -> Done {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"dumpTree(\"after received hello\");"
+						""
+						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"Done, enter \'quit\' to exit\");"
+					}
+				}
+				State CreateOptional2 {
+					entry {
+						"opt.createOptionalActor(\"Optional2\", getThread());"
+						"dumpTree(\"after creation of Optional2\");"
+						""
+						"// at this point the port isn\'t connected since"
+						"// the init message isn\'t processed yet"
+						"// - so no peer port exists"
+						"p0.sayHello();"
+					}
+				}
+				State Done
+			}
+		}
+	}
+	
+	ActorClass Optional1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef sub1: AC1
+			Binding p0 and sub1.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass Optional2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef sub2: AC2
+			Binding p0 and sub2.p0
+		}
+		Behavior { }
+	}
+	
+	// the following actor classes are part of the possible optional instance sub trees
+	
+	ActorClass AC1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				State Ready {
+					entry {
+						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass AC2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef deep_sub: AC3
+			Binding p0 and deep_sub.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass AC3 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			optional ActorRef nestedOpt: Optional1
+			Binding p0 and nestedOpt.p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				State Ready {
+					entry {
+						"nestedOpt.createOptionalActor(\"Optional1\", getThread());"
+					}
+				}
+			}
+		}
+	}
+	
+	// a simple protocol that is used to demonstrate that actors are connected
+	ProtocolClass PC {
+		incoming {
+			Message sayHello()
+		}
+		outgoing {
+			Message hello(txt: string)
+		}
+	}
+}
