@@ -200,3 +200,70 @@ The replicated port is used to send (broadcast) messages to the optional actors.
 \item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
 \item careful inspection of the console output reveals that objects are created and destroyed as expected
 \end{itemize}
+
+\section{Dynamic Actors 4}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors4}.
+
+\subsection{Purpose}
+
+The example demonstrates the usage of an optional actor. But here not the actor containing the optional reference
+is communicating with the optional actor but one level above.
+
+\subsection{Details}
+
+The \texttt{Controller} which has a reference to the \texttt{Container} is asking the latter
+for the creation of the dynamic actor. When it receives \texttt{ok()} it is requesting \texttt{sayHello()}
+from the newly created actor.
+
+After the \texttt{Controller} receives \texttt{hello()} it tells the \texttt{Container} to create another
+actor which fails because the old one is still in place.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\end{itemize}
+
+\section{Dynamic Actors 5}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors5}.
+
+\subsection{Purpose}
+
+The example shows that the optional actor can not only have relay ports but also external end ports.
+
+\subsection{Details}
+
+This simple example just shows that the optional actor may directly handle inbound messages by using an
+external end port rather than the relay port of the previous examples.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\end{itemize}
+
+\section{Dynamic Actors 6}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors6}.
+
+\subsection{Purpose}
+
+The example demonstrates the use of nested dynamic actors.
+
+\subsection{Details}
+
+In this example the dynamically created actor \texttt{Optional2} has again an optional reference two levels down in its hierarchy.
+On creation it immediately creates a nested dynamic actor of class \texttt{Optional1} which is sending \texttt{hello()} back
+to the outer \texttt{Container}.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\item when a dynamic actor is created its structure is there immediately and all ports are connected. But the initial transition
+is executed asynchronously. So after the outer dynamic actor is created the port of the \texttt{Container} is not yet connected
+because the initial transition which is responsible for the creation of the inner dynamic actor wasn't executed yet.
+So a message sent from this port directly after creation of the outer dynamic actor would get lost.
+\end{itemize}

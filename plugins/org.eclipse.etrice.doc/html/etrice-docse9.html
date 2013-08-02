@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-07-29 19:21:00" /> 
+<meta name="date" content="2013-08-02 10:13:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -28,6 +28,8 @@ class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors1</span>.
 </p>
 <h4 class="subsectionHead"><span class="titlemark">3.1.1   </span> <a 
  id="x14-640003.1.1"></a>Purpose</h4>
+                                                                                            
+                                                                                            
 <!--l. 16--><p class="noindent" >The example demonstrates the usage of an optional actor. It is shown that several actor classes derived from the type of the
 optional actor reference can be optionally created in place of the optional actor reference. Optional actor instances can also
 be destroyed and another instance can be created in the free slot.
@@ -43,8 +45,6 @@ src="images/039-DynAct1-Main_instanceTree.jpg" alt="PIC"
 place an instance of a compatible type can be created at run time. Compatible types are the type of the reference itself and
 all of its sub types as long as they are not abstract. Together with the instance all of its contained instances will be created
 and all ports are connected.
-                                                                                            
-                                                                                            
 </p><!--l. 33--><p class="noindent" >This example demonstrates how an optional actor is created and destroyed and another one of another type is created to hold
 the same place.
 </p><!--l. 36--><p class="noindent" ><img 
@@ -679,6 +679,8 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmssbx-10x-x-90">State</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ReceivedHelloAgain</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
  id="x14-65040r73"></a><span 
 class="ec-lmss-8x-x-62">73</span></span><span 
@@ -686,15 +688,20 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span>
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span>
 <br />
-         <div class="caption" 
+            <div class="caption" 
 ><span class="id">Listing&#x00A0;3.1:
-         </span><span  
+            </span><span  
 class="content">Container
-         actor
-         state
-         machine</span></div><!--tex4ht:label?: x14-650003.1 -->
+            actor
+            state
+            machine</span></div><!--tex4ht:label?: x14-650003.1 -->
 </div>
 <!--l. 48--><p class="noindent" >The console output of the running application starts with
                                                                                             
