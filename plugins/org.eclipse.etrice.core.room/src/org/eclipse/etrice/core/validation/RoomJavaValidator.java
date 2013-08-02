@@ -450,18 +450,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		for(InterfaceItem item : items){
 			ProtocolClass pc = RoomHelpers.getProtocol(item);
-			switch(pc.getCommType()){
-				case DATA_DRIVEN:
-					if(!datadriven && !async)
-						error("ports with datadriven protocols not allowed", ref, items.indexOf(item));
-					break;
-				case EVENT_DRIVEN:
-					if(!eventdriven && !async)
-						error("ports with eventdriven protocols not allowed", ref, items.indexOf(item));
-					break;
-				case SYNCHRONOUS:
-					// not supported yet
-			}
+			if (pc!=null)
+				switch(pc.getCommType()){
+					case DATA_DRIVEN:
+						if(!datadriven && !async)
+							error("ports with datadriven protocols not allowed", ref, items.indexOf(item));
+						break;
+					case EVENT_DRIVEN:
+						if(!eventdriven && !async)
+							error("ports with eventdriven protocols not allowed", ref, items.indexOf(item));
+						break;
+					case SYNCHRONOUS:
+						// not supported yet
+				}
 		}
 	}
 	

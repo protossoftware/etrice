@@ -223,6 +223,7 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 				@Override
 				public void handleException(Throwable exception) {
 					System.out.println("Exception in IRoomValidator " + validator.getName());
+					exception.printStackTrace();
 				}
 
 				@Override
