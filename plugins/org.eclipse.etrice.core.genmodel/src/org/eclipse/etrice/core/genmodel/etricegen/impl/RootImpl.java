@@ -594,7 +594,10 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public EList<ActorClass> getSubClasses(ActorClass ac) {
-		return subClasses.get(ac);
+		BasicEList<ActorClass> subCls = subClasses.get(ac);
+		if (subCls==null)
+			subCls = new BasicEList<ActorClass>();
+		return subCls;
 	}
 
 	/**

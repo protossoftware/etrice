@@ -58,7 +58,7 @@ public class RTObject implements IRTObject	{
 	}
 	
 	public IRTObject getRoot() {
-		IRTObject root = parent;
+		IRTObject root = this;
 		while (root.getParent()!=null)
 			root = root.getParent();
 		
@@ -76,13 +76,16 @@ public class RTObject implements IRTObject	{
 	
 	public IRTObject getObject(String path) {
 		boolean isAbsolute = path.charAt(0)==PATH_DELIM;
+		if (isAbsolute && getParent()!=null)
+			return getParent().getObject(path);
+		
 		if (isAbsolute)
 			path = path.substring(1);
+		
 		String[] segments = path.split(Character.toString(PATH_DELIM));
 
 		if (segments.length>0) {
-			IRTObject current = isAbsolute? getRoot() : this;
-			
+			IRTObject current = this;
 			
 			String first = segments[0];
 			for (String segment : segments) {

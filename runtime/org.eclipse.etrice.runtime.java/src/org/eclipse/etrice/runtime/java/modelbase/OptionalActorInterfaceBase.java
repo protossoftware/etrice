@@ -16,8 +16,10 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
 
 /**
@@ -25,11 +27,22 @@ import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPo
  * Concrete sub classes are {@link ScalarOptionalActorInterfaceBase} and {@link ReplicatedOptionalActorInterfaceBase}.
  * <p>
  * The code generator again derives from the concrete sub classes and adds {@link InterfaceItemBroker}s as members.
- * </p><p>
+ * </p>
+ * <p>
  * This generated class is instantiated as member of the containing actor (the one holding the associated optional
  * actor reference).
- * </p><p>
+ * </p>
+ * <p>
  * The broker items are responsible for the mediation of the port connections.
+ * </p>
+ * <p>
+ * This interface represents a border in the instance tree. We call all direct and indirect children
+ * the <i>interior</i> part of the instance tree and the remainder the <i>exterior</i> part.
+ * In order to have natural path names of the interior we have to omit this interface's segment.
+ * Because it is repeated by the instantiated optional actor. This is done by the overridden
+ * {@link #getInstancePath(char)}. As a consequence we also have to override {@link #getObject(String)}.
+ * This method turns the path into a relative one and then retrieves the object starting at this
+ * instance.
  * </p>
  * 
  * @author Henrik Rentz-Reichert
@@ -56,6 +69,11 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	 * 
 	 * @see #getPeersForPath(String)
 	 */
+	private String parentPath;
+	
+	/**
+	 * This is equivalent to {@link #parentPath}+{@link #getName()}
+	 */
 	private String ownPath;
 	
 	/**
@@ -80,9 +98,61 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 		super(parent, name);
 		className = clsname;
 		subtreeThread = parent.getThread();
-		setOwnPath(getInstancePath());
+		parentPath = getInstancePath();
+		ownPath = getInterfaceInstancePath();
 		
 		RTSystemPort = new RTSystemConjPort(this, IFITEM_RTSystemPort);
+	}
+	
+	/**
+	 * The regular instance path is changed here by omitting our segment.
+	 * 
+	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#getInstancePath(char)
+	 */
+	@Override
+	public String getInstancePath(char delim) {
+		// the parent is never null for optional actors
+		return getParent().getInstancePath(delim);
+	}
+	
+	/**
+	 * This is our regular instance path including our own name as last segment.
+	 * 
+	 * @return
+	 */
+	public String getInterfaceInstancePath() {
+		return super.getInstancePath(PATH_DELIM);
+	}
+	
+	/**
+	 * If the path points to our <i>interior</i> (which should be always the case)
+	 * the we turn it into a relative one starting here.
+	 * It is important that our own interface item brokers are treated specially.
+	 * 
+	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#getObject(java.lang.String)
+	 */
+	@Override
+	public IRTObject getObject(String path) {
+		int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
+		if (sep>=0 && sep<path.length()) {
+			// we turn the path into a relative one and resolve it starting at this instance
+			
+			// path segment of the optional actor
+			String optInst = path.substring(parentPath.length(), sep);
+			
+			// remainder
+			path = path.substring(sep);
+			
+			// if remainder only contains >1 segment 
+			if (path.indexOf(PATH_DELIM, 1)>=0)
+				// we add the optional actor segment
+				path = optInst+path;
+			
+			// finally we have to prefix with our own name since the relative path has to start with that
+			path = getName()+path;
+		}
+		
+		return super.getObject(path);
 	}
 	
 	/**
@@ -98,26 +168,36 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	 * @param path an absolute path
 	 * @return a list of absolute peer paths or {@code null} if not mapped
 	 */
+	@Override
 	public List<String> getPeersForPath(String path) {
+		// if no mapping available we delegate to our parent (which is never null)
 		if (getPath2peers()==null)
 			return getParent().getPeersForPath(path);
 		
-		/*  remove own path + following segment (which is a second time
-		 *  the name of the optional ref (+ maybe a replication index)
+		/*  remove parent path+1 up to next delimiter (thus including the optional ref name)
 		 *  e.g.
-		 *  incoming path = /LS/appl/cont/opt/opt/path/to/port
+		 *  incoming path = /LS/appl/cont/opt/path/to/port
 		 *  rel path = /path/to/port
 		 *  result of lookup (to interface port) = /port
 		 *  returned = /LS/appl/cont/opt/port (one of the interface port brokers)
 		 */
-		int sep = path.indexOf(PATH_DELIM, getOwnPath().length()+1);
+		int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
 		if (sep<0 || sep>=path.length())
 			return null;
 		
-		// The optInstPath for scalar optional actors ownPath/<name>.
-		// However, for replicated actors it is ownPath/<name>:<idx>
+		/* The optInstPath for scalar optional actors is parentPath/<name>.
+		 * However, for replicated actors it is parentPath/<name>:<idx>
+		 */
 		String optInstPath = path.substring(0, sep);
 		path = path.substring(sep);
+		
+		if (path.indexOf('/', 1)<0) {
+			/* 
+			 * This is an end port on the interface.
+			 * It is directly mapped to its broker (there is no mapping for it)
+			 */
+			return Collections.singletonList(ownPath+path);
+		}
 		
 		ArrayList<String> paths = getPath2peers().get(path);
 		if (paths!=null) {
@@ -127,8 +207,8 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 					// it's a path nested in the optional instance
 					p = optInstPath+p;
 				else
-					// its a path to one of my brokers
-					p = getOwnPath()+p;
+					// its a path to one of my brokers (an immediate child)
+					p = ownPath+p;
 				result.add(p);
 			}
 			return result;
@@ -142,6 +222,7 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	 * @param path
 	 * @return always the thread that was specified with the creation call
 	 */
+	@Override
 	public int getThreadForPath(String path) {
 		return subtreeThread;
 	}
@@ -178,21 +259,6 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	@Override
 	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 		// nothing to do, never called
-	}
-	
-	/**
-	 * Returns the cached own path to avoid multiple re-computation
-	 * @return the ownPath
-	 */
-	private String getOwnPath() {
-		return ownPath;
-	}
-
-	/**
-	 * @param ownPath the ownPath to set
-	 */
-	private void setOwnPath(String ownPath) {
-		this.ownPath = ownPath;
 	}
 
 	/**

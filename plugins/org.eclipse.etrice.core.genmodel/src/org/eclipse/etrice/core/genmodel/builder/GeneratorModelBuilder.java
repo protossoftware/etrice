@@ -232,8 +232,12 @@ public class GeneratorModelBuilder {
 					logger.logInfo("matches for optional actor "+kind+": "+aii.getPath());
 					
 					ActorClass optAC = aii.getActorClass();
-					EList<ActorClass> candidates = root.getSubClasses(optAC);
+					List<ActorClass> candidates = new ArrayList<ActorClass>(root.getSubClasses(optAC));
+					candidates.add(optAC);
 					for (ActorClass candidate : candidates) {
+						if (candidate.isAbstract())
+							continue;
+						
 						OptionalActorInstance optAIC = optionalActors.get(candidate);
 						HashSet<ProtocolClass> required = new HashSet<ProtocolClass>();
 						for (SAPInstance sap : optAIC.getRequiredServices()) {

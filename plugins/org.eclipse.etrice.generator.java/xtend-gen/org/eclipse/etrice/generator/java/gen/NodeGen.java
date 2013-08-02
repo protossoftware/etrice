@@ -11,9 +11,11 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -33,6 +35,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
@@ -59,6 +62,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -143,6 +147,42 @@ public class NodeGen {
     }
   }
   
+  /**
+   * Recursively collect all possible interface instances below a given structure instance.
+   */
+  private HashSet<ActorClass> getOptionalActorClasses(final Root root, final StructureInstance si) {
+    TreeIterator<EObject> _eAllContents = si.eAllContents();
+    final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+        public Boolean apply(final EObject i) {
+          return Boolean.valueOf((i instanceof ActorInterfaceInstance));
+        }
+      };
+    Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function);
+    final Function1<EObject,ActorInterfaceInstance> _function_1 = new Function1<EObject,ActorInterfaceInstance>() {
+        public ActorInterfaceInstance apply(final EObject aii) {
+          return ((ActorInterfaceInstance) aii);
+        }
+      };
+    Iterator<ActorInterfaceInstance> _map = IteratorExtensions.<EObject, ActorInterfaceInstance>map(_filter, _function_1);
+    final ArrayList<ActorInterfaceInstance> aifs = Lists.<ActorInterfaceInstance>newArrayList(_map);
+    final Function1<ActorInterfaceInstance,ActorClass> _function_2 = new Function1<ActorInterfaceInstance,ActorClass>() {
+        public ActorClass apply(final ActorInterfaceInstance aii) {
+          ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
+          return _actorClass;
+        }
+      };
+    List<ActorClass> _map_1 = ListExtensions.<ActorInterfaceInstance, ActorClass>map(aifs, _function_2);
+    final HashSet<ActorClass> result = Sets.<ActorClass>newHashSet(_map_1);
+    for (final ActorInterfaceInstance ai : aifs) {
+      EList<OptionalActorInstance> _optionalInstances = ai.getOptionalInstances();
+      for (final OptionalActorInstance oi : _optionalInstances) {
+        HashSet<ActorClass> _optionalActorClasses = this.getOptionalActorClasses(root, oi);
+        result.addAll(_optionalActorClasses);
+      }
+    }
+    return result;
+  }
+  
   public CharSequence generate(final Root root, final SubSystemInstance comp, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
@@ -159,21 +199,7 @@ public class NodeGen {
           }
         };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
-      TreeIterator<EObject> _eAllContents = comp.eAllContents();
-      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject i) {
-            return Boolean.valueOf((i instanceof ActorInterfaceInstance));
-          }
-        };
-      Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function_1);
-      final Function1<EObject,ActorClass> _function_2 = new Function1<EObject,ActorClass>() {
-          public ActorClass apply(final EObject aii) {
-            ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
-            return _actorClass;
-          }
-        };
-      Iterator<ActorClass> _map = IteratorExtensions.<EObject, ActorClass>map(_filter, _function_2);
-      final HashSet<ActorClass> opt = Sets.<ActorClass>newHashSet(_map);
+      final HashSet<ActorClass> opt = this.getOptionalActorClasses(root, comp);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(cc);
@@ -670,15 +696,15 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
+            final Function1<ActorClass,Boolean> _function_1 = new Function1<ActorClass,Boolean>() {
                 public Boolean apply(final ActorClass s) {
                   boolean _isAbstract = s.isAbstract();
                   boolean _not = (!_isAbstract);
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
-            for(final ActorClass subcls : _filter_1) {
+            Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_union, _function_1);
+            for(final ActorClass subcls : _filter) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append(else2, "			");

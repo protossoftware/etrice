@@ -33,6 +33,9 @@ import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 import org.eclipse.etrice.core.room.ActorClass
 import com.google.common.collect.Sets
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
+import com.google.common.collect.Lists
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 
 @Singleton
 class NodeGen {
@@ -71,13 +74,27 @@ class NodeGen {
 		}
 	}
 	
+	/**
+	 * Recursively collect all possible interface instances below a given structure instance.
+	 */
+	def private HashSet<ActorClass> getOptionalActorClasses(Root root, StructureInstance si) {
+		val aifs = Lists::newArrayList(si.eAllContents.filter(i|i instanceof ActorInterfaceInstance).map[aii|aii as ActorInterfaceInstance])
+		val result = Sets::newHashSet(aifs.map[aii|(aii as ActorInterfaceInstance).actorClass])
+		for (ai : aifs) {
+			for (oi : ai.optionalInstances) {
+				result.addAll(root.getOptionalActorClasses(oi))
+			}
+		}
+		
+		return result
+	}
 	def generate(Root root, SubSystemInstance comp, HashSet<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)
 		val clsname = nr.getJavaClassName(comp)
 		val threads = nr.type.threads.filter(t|usedThreads.contains(t))
-		val opt = Sets::newHashSet(comp.eAllContents.filter(i|i instanceof ActorInterfaceInstance).map[aii|(aii as ActorInterfaceInstance).actorClass])
+		val opt = root.getOptionalActorClasses(comp)
 		
 	'''
 		package «cc.getPackage()»;

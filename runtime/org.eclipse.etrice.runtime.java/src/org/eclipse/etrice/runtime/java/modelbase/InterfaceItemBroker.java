@@ -68,7 +68,18 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			firstPeer = getObject(peerPaths.get(0));
+			if (firstPeer instanceof InterfaceItemBroker) {
+				firstPeer = ((InterfaceItemBroker) firstPeer).connectWith(this);
+			}
 		}
+	}
+	
+	@Override
+	public String getInstancePath(char delim) {
+		if (getParent() instanceof OptionalActorInterfaceBase)
+			return ((OptionalActorInterfaceBase)getParent()).getInterfaceInstancePath()+PATH_DELIM+getName();
+		
+		return super.getInstancePath(delim);
 	}
 
 	/* (non-Javadoc)
@@ -99,5 +110,10 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return "interface broker "+super.toString();
 	}
 }
