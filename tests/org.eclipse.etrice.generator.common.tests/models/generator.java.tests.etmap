@@ -43,5 +43,14 @@ MappingModel JavaGenTest {
 		SubSystemMapping da2Test -> node11 {
 			ThreadMapping dflt_thread -> DfltThread
 		}
+		SubSystemMapping da3Test -> node12 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping da4Test -> node13 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
+		SubSystemMapping da5Test -> node14 {
+			ThreadMapping dflt_thread -> DfltThread
+		}
 	}
 }

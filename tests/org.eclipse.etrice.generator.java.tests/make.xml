@@ -206,6 +206,24 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicActorTest2</echo>
+		<echo>start DynamicActorTest3</echo>
+		<java output="${output}/runDynamicActorTest3.txt" classname="DynamicActorTest3.Node_node12_da3TestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicActorTest3</echo>
+		<echo>start DynamicActorTest4</echo>
+		<java output="${output}/runDynamicActorTest4.txt" classname="DynamicActorTest4.Node_node13_da4TestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicActorTest4</echo>
+		<echo>start DynamicActorTest5</echo>
+		<java output="${output}/runDynamicActorTest5.txt" classname="DynamicActorTest5.Node_node14_da5TestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicActorTest5</echo>
 	</target>
 	
 	<!--
@@ -296,6 +314,27 @@
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest2"/>
 			<arg value="./tmp/DynamicActorTest2.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest3"/>
+			<arg value="./tmp/DynamicActorTest3.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+				
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest4"/>
+			<arg value="./tmp/DynamicActorTest4.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest5"/>
+			<arg value="./tmp/DynamicActorTest5.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
