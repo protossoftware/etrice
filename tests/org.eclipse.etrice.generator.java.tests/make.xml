@@ -224,6 +224,12 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicActorTest5</echo>
+		<echo>start DynamicActorTest6</echo>
+		<java output="${output}/runDynamicActorTest6.txt" classname="DynamicActorTest6.Node_node15_da6TestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicActorTest6</echo>
 	</target>
 	
 	<!--
@@ -335,6 +341,13 @@
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest5"/>
 			<arg value="./tmp/DynamicActorTest5.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest6"/>
+			<arg value="./tmp/DynamicActorTest6.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
