@@ -198,14 +198,20 @@ public class EtUnitReportConverter {
 	protected void run(String[] args) {
 		// check options and create file list
 		Options options = parseOptions(args);
-		
+		if (options==null)
+			System.exit(1);
+
 		doEMFRegistration();
 		
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new EtunitResourceFactoryImpl());
 
-		saveReports(options, rs);
-		saveCombinedReport(options, rs);
+		boolean success = saveReports(options, rs);
+		if (!saveCombinedReport(options, rs))
+			success = false;
+		
+		if (!success)
+			System.exit(2);
 	}
 	
 	/**
@@ -222,7 +228,7 @@ public class EtUnitReportConverter {
 		return options;
 	}
 
-	protected void saveCombinedReport(Options options, ResourceSet rs) {
+	protected boolean saveCombinedReport(Options options, ResourceSet rs) {
 		if (options.needCombined()) {
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
@@ -235,18 +241,21 @@ public class EtUnitReportConverter {
 			
 			computeAndSetInfo(testsuites);
 			
-			saveCombined(root, options, rs);
+			return saveCombined(root, options, rs);
 		}
+		return true;
 	}
 
-	protected void saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
+	protected boolean saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
 		if (options.isCombinedResults()) {
 			File report = new File(options.getCombinedFile());
-			saveJUnitReport(root, report, rs, true);
+			return saveJUnitReport(root, report, rs, true);
 		}
+		return true;
 	}
 
-	protected void saveReports(Options options, ResourceSet rs) {
+	protected boolean saveReports(Options options, ResourceSet rs) {
+		boolean success = true;
 		for (String file : options.getFiles()) {
 			File report = new File(file);
 			if (report.exists()) {
@@ -266,13 +275,16 @@ public class EtUnitReportConverter {
 					}
 				}
 				if (root!=null) {
-					saveJUnitReport(root, report, rs, !options.isCombinedResults());
+					if (!saveJUnitReport(root, report, rs, !options.isCombinedResults()))
+						success = false;
 				}
 			}
 			else {
 				System.err.println("Error: report "+file+" does not exist");
+				success = false;
 			}
 		}
+		return success;
 	}
 
 	private void computeAndSetInfo(TestsuitesType testsuites) {
@@ -291,7 +303,7 @@ public class EtUnitReportConverter {
 		}
 	}
 
-	private void saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
+	private boolean saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
 		URI uri = URI.createFileURI(report.toString());
 		uri = uri.trimFileExtension();
 		uri = uri.appendFileExtension("xml");
@@ -304,8 +316,10 @@ public class EtUnitReportConverter {
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.err.println("Error: file "+uri+" could not be saved ("+e.getMessage()+")");
+				return false;
 			}
 		}
+		return true;
 	}
 
 	/**
