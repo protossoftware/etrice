@@ -1,0 +1,70 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/LS/main (!) /LS/main/appl 
+	/LS/main/appl (!) /LS/main/appl/ctrl 
+	/LS/main/appl/ctrl (!) /LS/main/appl/ctrl/cont 
+# done sub system initialization
+	/LS/main/appl/ctrl >-- /LS/main/appl/ctrl/cont createOpts
+	/LS/main/appl/ctrl >>> CreateOptionals
+	/LS/main/appl/ctrl/cont >>> Ready
+	/LS/main/appl/ctrl --> /LS/main/appl/ctrl/cont createOpts
+	/LS/main/appl/ctrl/cont note: dynamically creating actor class Optional1
+	/LS/main/appl/ctrl/cont (!) /LS/main/appl/ctrl/cont/opt1 
+	/LS/main/appl/ctrl/cont/opt1 (!) /LS/main/appl/ctrl/cont/opt1/sub1 
+	/LS/main/appl/ctrl/cont note: dynamically creating actor class Optional2
+	/LS/main/appl/ctrl/cont (!) /LS/main/appl/ctrl/cont/opt2 
+	/LS/main/appl/ctrl/cont/opt2 (!) /LS/main/appl/ctrl/cont/opt2/sub2 
+	/LS/main/appl/ctrl/cont >-- /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl/cont >>> Ready
+	/LS/main/appl/ctrl/cont/opt1/sub1 >>> Ready
+	/LS/main/appl/ctrl/cont/opt2/sub2 >>> Ready
+	/LS/main/appl/ctrl/cont --> /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl >-- /LS/main/appl/ctrl/cont/opt1/sub1 sayHello
+	/LS/main/appl/ctrl >>> Sending
+	/LS/main/appl/ctrl --> /LS/main/appl/ctrl/cont/opt1/sub1 sayHello
+	/LS/main/appl/ctrl/cont/opt1/sub1 >-- /LS/main/appl/ctrl/cont/opt2/sub2 hello
+	/LS/main/appl/ctrl/cont/opt1/sub1 >>> Ready
+	/LS/main/appl/ctrl/cont/opt1/sub1 --> /LS/main/appl/ctrl/cont/opt2/sub2 hello
+	/LS/main/appl/ctrl/cont/opt2/sub2 >-- /LS/main/appl/ctrl hello
+	/LS/main/appl/ctrl/cont/opt2/sub2 >>> Ready
+	/LS/main/appl/ctrl/cont/opt2/sub2 --> /LS/main/appl/ctrl hello
+	/LS/main/appl/ctrl >-- /LS/main/appl/ctrl/cont destroyOpts
+	/LS/main/appl/ctrl >>> Destroy
+	/LS/main/appl/ctrl --> /LS/main/appl/ctrl/cont destroyOpts
+	/LS/main/appl/ctrl/cont (X) /LS/main/appl/ctrl/cont/opt1 
+	/LS/main/appl/ctrl/cont/opt1 (X) /LS/main/appl/ctrl/cont/opt1/sub1 
+	/LS/main/appl/ctrl/cont (X) /LS/main/appl/ctrl/cont/opt2 
+	/LS/main/appl/ctrl/cont/opt2 (X) /LS/main/appl/ctrl/cont/opt2/sub2 
+	/LS/main/appl/ctrl/cont >-- /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl/cont >>> Ready
+	/LS/main/appl/ctrl/cont --> /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl >-- /LS/main/appl/ctrl/cont createOpts
+	/LS/main/appl/ctrl >>> CreateAgain
+	/LS/main/appl/ctrl --> /LS/main/appl/ctrl/cont createOpts
+	/LS/main/appl/ctrl/cont note: dynamically creating actor class Optional1
+	/LS/main/appl/ctrl/cont (!) /LS/main/appl/ctrl/cont/opt1 
+	/LS/main/appl/ctrl/cont/opt1 (!) /LS/main/appl/ctrl/cont/opt1/sub1 
+	/LS/main/appl/ctrl/cont note: dynamically creating actor class Optional2
+	/LS/main/appl/ctrl/cont (!) /LS/main/appl/ctrl/cont/opt2 
+	/LS/main/appl/ctrl/cont/opt2 (!) /LS/main/appl/ctrl/cont/opt2/sub2 
+	/LS/main/appl/ctrl/cont >-- /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl/cont >>> Ready
+	/LS/main/appl/ctrl/cont/opt1/sub1 >>> Ready
+	/LS/main/appl/ctrl/cont/opt2/sub2 >>> Ready
+	/LS/main/appl/ctrl/cont --> /LS/main/appl/ctrl done
+	/LS/main/appl/ctrl >-- /LS/main/appl/ctrl/cont/opt1/sub1 sayHello
+	/LS/main/appl/ctrl >>> SendAgain
+	/LS/main/appl/ctrl --> /LS/main/appl/ctrl/cont/opt1/sub1 sayHello
+	/LS/main/appl/ctrl/cont/opt1/sub1 >-- /LS/main/appl/ctrl/cont/opt2/sub2 hello
+	/LS/main/appl/ctrl/cont/opt1/sub1 >>> Ready
+	/LS/main/appl/ctrl/cont/opt1/sub1 --> /LS/main/appl/ctrl/cont/opt2/sub2 hello
+	/LS/main/appl/ctrl/cont/opt2/sub2 >-- /LS/main/appl/ctrl hello
+	/LS/main/appl/ctrl/cont/opt2/sub2 >>> Ready
+	/LS/main/appl/ctrl/cont/opt2/sub2 --> /LS/main/appl/ctrl hello
+	/LS/main/appl/ctrl >>> Done
+# begin sub system destruction
+	/LS/main (X) /LS/main/appl 
+	/LS/main/appl (X) /LS/main/appl/ctrl 
+	/LS/main/appl/ctrl (X) /LS/main/appl/ctrl/cont 
+	/LS/main/appl/ctrl/cont/opt1 (X) /LS/main/appl/ctrl/cont/opt1/sub1 
+	/LS/main/appl/ctrl/cont/opt2 (X) /LS/main/appl/ctrl/cont/opt2/sub2 
