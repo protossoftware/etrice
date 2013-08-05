@@ -177,7 +177,7 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 	}
 
 	public String toString(){
-		return "ReplicatedOptionalActorInterface(className="+getClassName()+", instancePath="+getInstancePath()+")";
+		return "ReplicatedOptionalActorInterface(className="+getClassName()+", instancePath="+getInterfaceInstancePath()+")";
 	}
 
 }

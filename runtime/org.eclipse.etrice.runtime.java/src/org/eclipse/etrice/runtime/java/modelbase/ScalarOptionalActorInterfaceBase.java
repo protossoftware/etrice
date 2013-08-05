@@ -115,7 +115,7 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 	}
 
 	public String toString(){
-		return "ScalarOptionalActorInterface(className="+getClassName()+", instancePath="+getInstancePath()+")";
+		return "ScalarOptionalActorInterface(className="+getClassName()+", instancePath="+getInterfaceInstancePath()+")";
 	}
 
 }

@@ -37,7 +37,10 @@ import org.eclipse.etrice.runtime.java.messaging.Message;
  */
 public class InterfaceItemBroker extends InterfaceItemBase implements IInterfaceItemBroker {
 
+	// CAUTION: must NOT initialize firstPeer with null since is set in base class constructor and
+	// AFTERWARDS initialized ==> value is lost
 	private IRTObject firstPeer;
+	private InterfaceItemBase secondPeer;
 
 	public InterfaceItemBroker(IInterfaceItemOwner parent, String name, int localId) {
 		this(parent, name, localId, 0);
@@ -69,17 +72,10 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 		if (peerPaths!=null && !peerPaths.isEmpty()) {
 			firstPeer = getObject(peerPaths.get(0));
 			if (firstPeer instanceof InterfaceItemBroker) {
-				firstPeer = ((InterfaceItemBroker) firstPeer).connectWith(this);
+				if (((InterfaceItemBroker) firstPeer).firstPeer==null)
+					((InterfaceItemBroker) firstPeer).firstPeer = this;
 			}
 		}
-	}
-	
-	@Override
-	public String getInstancePath(char delim) {
-		if (getParent() instanceof OptionalActorInterfaceBase)
-			return ((OptionalActorInterfaceBase)getParent()).getInterfaceInstancePath()+PATH_DELIM+getName();
-		
-		return super.getInstancePath(delim);
 	}
 
 	/* (non-Javadoc)
@@ -90,15 +86,50 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 		if (firstPeer!=null) {
 			// we are already connected, lets connect our new peer with the previous one
 			
+			secondPeer = peer;
+			
+			// we don't want to change firstPeer, so make a copy
+			IRTObject first = firstPeer;
+			
+			{
+				InterfaceItemBroker broker = this;
+				while (true) {
+					if (broker.firstPeer instanceof InterfaceItemBroker) {
+						InterfaceItemBroker neighbor = (InterfaceItemBroker) broker.firstPeer;
+						if (neighbor.firstPeer==broker) {
+							// neighbor points back
+							if (neighbor.secondPeer!=null) {
+								first = neighbor.secondPeer;
+								break;
+							}
+							else {
+								// we can't connect all the way to the final peer: deposit peer and wait for other side being ready
+								broker.secondPeer = peer;
+								return this;
+							}
+						}
+						broker = neighbor;
+					}
+					else {
+						first = broker.firstPeer;
+						break;
+					}
+				}
+			}
+			
 			InterfaceItemBase peer1 = null;
 			InterfaceItemBase peer2 = peer;
 			
-			// get a new replicated sub port if appropriate
-			if (firstPeer instanceof IReplicatedInterfaceItem) {
-				peer1 = ((IReplicatedInterfaceItem) firstPeer).createSubInterfaceItem();
+			if (first instanceof IReplicatedInterfaceItem) {
+				// get a new replicated sub port
+				peer1 = ((IReplicatedInterfaceItem) first).createSubInterfaceItem();
 			}
-			else if (firstPeer instanceof InterfaceItemBase) {
-				peer1 = (InterfaceItemBase) firstPeer;
+			else if (first instanceof InterfaceItemBase) {
+				peer1 = (InterfaceItemBase) first;
+			}
+			else {
+				assert(false): "unexpected peer kind";
+				return null;
 			}
 			
 			peer2.peerAddress = peer1.getAddress();
@@ -108,8 +139,19 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 			
 			return peer1;
 		}
+		else {
+			firstPeer = peer;
 		
-		return null;
+			return this;
+		}
+	}
+	
+	@Override
+	public String getInstancePath(char delim) {
+		if (getParent() instanceof OptionalActorInterfaceBase)
+			return ((OptionalActorInterfaceBase)getParent()).getInterfaceInstancePath()+PATH_DELIM+getName();
+		
+		return super.getInstancePath(delim);
 	}
 	
 	@Override

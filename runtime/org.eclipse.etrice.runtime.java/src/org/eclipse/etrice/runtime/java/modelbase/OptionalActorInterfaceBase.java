@@ -133,23 +133,25 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	 */
 	@Override
 	public IRTObject getObject(String path) {
-		int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
-		if (sep>=0 && sep<path.length()) {
-			// we turn the path into a relative one and resolve it starting at this instance
-			
-			// path segment of the optional actor
-			String optInst = path.substring(parentPath.length(), sep);
-			
-			// remainder
-			path = path.substring(sep);
-			
-			// if remainder only contains >1 segment 
-			if (path.indexOf(PATH_DELIM, 1)>=0)
-				// we add the optional actor segment
-				path = optInst+path;
-			
-			// finally we have to prefix with our own name since the relative path has to start with that
-			path = getName()+path;
+		if (path.startsWith(ownPath)) {
+			int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
+			if (sep>=0 && sep<path.length()) {
+				// we turn the path into a relative one and resolve it starting at this instance
+				
+				// path segment of the optional actor
+				String optInst = path.substring(parentPath.length(), sep);
+				
+				// remainder
+				path = path.substring(sep);
+				
+				// if remainder only contains >1 segment 
+				if (path.indexOf(PATH_DELIM, 1)>=0)
+					// we add the optional actor segment
+					path = optInst+path;
+				
+				// finally we have to prefix with our own name since the relative path has to start with that
+				path = getName()+path;
+			}
 		}
 		
 		return super.getObject(path);
