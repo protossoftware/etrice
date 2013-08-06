@@ -15,6 +15,7 @@ RoomModel JavaGenTests {
 	import DynamicActorTest4.* from "DynamicActorTest4.room"
 	import DynamicActorTest5.* from "DynamicActorTest5.room"
 	import DynamicActorTest6.* from "DynamicActorTest6.room"
+	import DynamicActorTest7.* from "DynamicActorTest7.room"
 	
 	LogicalSystem JavaGenTests {
 		SubSystemRef hdTest: SubSystem_HandlerTest
@@ -32,5 +33,6 @@ RoomModel JavaGenTests {
 		SubSystemRef da4Test: SubSystem_DynamicActorTest4
 		SubSystemRef da5Test: SubSystem_DynamicActorTest5
 		SubSystemRef da6Test: SubSystem_DynamicActorTest6
+		SubSystemRef da7Test: SubSystem_DynamicActorTest7
 	}
 }

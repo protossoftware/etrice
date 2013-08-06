@@ -111,6 +111,7 @@
 		<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
 			<arg value="${java.tests.model.path}/generator.java.tests.config"/>
 			<arg value="${java.tests.model.path}/generator.java.tests.etmap"/>
+			<arg value="-persistable"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
@@ -230,6 +231,12 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   DynamicActorTest6</echo>
+		<echo>start DynamicActorTest7</echo>
+		<java output="${output}/runDynamicActorTest7.txt" classname="DynamicActorTest7.Node_node16_da7TestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+		</java>
+		<echo>end   DynamicActorTest7</echo>
 	</target>
 	
 	<!--
@@ -348,6 +355,13 @@
 			<arg value="-suite"/>
 			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest6"/>
 			<arg value="./tmp/DynamicActorTest6.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest7"/>
+			<arg value="./tmp/DynamicActorTest7.etu"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>

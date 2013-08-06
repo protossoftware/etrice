@@ -5,3 +5,4 @@
 /src-gen
 /src-gen2
 /tmp
+*.obj
