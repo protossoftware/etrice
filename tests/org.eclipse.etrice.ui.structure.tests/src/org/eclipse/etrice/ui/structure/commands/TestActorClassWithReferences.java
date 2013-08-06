@@ -80,7 +80,7 @@ public class TestActorClassWithReferences extends TestBase {
 				nRefs++;
 				
 				// ports of actor refs
-				assertEquals("grand child shapes", 2, ((ContainerShape)childShape).getChildren().size());
+				assertEquals("grand child shapes", 3, ((ContainerShape)childShape).getChildren().size());
 				for (Shape grandChildShape : ((ContainerShape)childShape).getChildren()) {
 					// skip the actor ref label
 					if (grandChildShape.getGraphicsAlgorithm() instanceof Text)

@@ -31,6 +31,7 @@ import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.StructureTestActivator;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
+import org.eclipse.etrice.ui.structure.support.DiagramUtil;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
@@ -107,15 +108,16 @@ public class TestActorClassWithInheritance extends TestBase {
 				assertTrue("ga is rectangle", childShape.getGraphicsAlgorithm() instanceof Rectangle);
 				assertFalse("ga is invisible", childShape.getGraphicsAlgorithm().getFilled());
 				assertFalse("ga is invisible", childShape.getGraphicsAlgorithm().getLineVisible());
-				assertEquals("border rect", 1, childShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().size());
-				GraphicsAlgorithm borderRect = childShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
+				GraphicsAlgorithm borderRect = (GraphicsAlgorithm) DiagramUtil.findProp(childShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren(),
+						ActorContainerRefSupport.GRAPHIC_ITEM_KEY, ActorContainerRefSupport.MAIN_BORDER);
+				assertNotNull("borderRect", borderRect);
 				if (inherited)
-					assertTrue("border rect background", isEqual(borderRect.getForeground(), ActorContainerRefSupport.INHERITED_COLOR));
+					assertTrue("border rect foreground", isEqual(borderRect.getForeground(), ActorContainerRefSupport.INHERITED_COLOR));
 				else
 					assertTrue("border rect background", isEqual(borderRect.getForeground(), ActorContainerRefSupport.LINE_COLOR));
 				
 				// ports of actor refs
-				assertEquals("grand child shapes", 3, ((ContainerShape)childShape).getChildren().size());
+				assertEquals("grand child shapes", 4, ((ContainerShape)childShape).getChildren().size());
 				for (Shape grandChildShape : ((ContainerShape)childShape).getChildren()) {
 					// skip the actor ref label
 					if (grandChildShape.getGraphicsAlgorithm() instanceof Text)

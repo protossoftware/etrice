@@ -135,19 +135,19 @@ public class ActorContainerRefSupport {
 	public static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	public static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 	
+	public static final String GRAPHIC_ITEM_KEY = "actorref_graphic_element";
+	public static final String HATCHED_LINE = "hatched_line";
+	public static final String LAYERCONN_ANCHOR = "layerconn_anchor";
+	public static final String MAIN_BORDER = "mainborder";
+	public static final String NAME_SHAPE = "name_shape";
+	public static final String REPL_BORDER = "replborder";
+	public static final String SIZE_FRAME = "sizeframe";
+	public static final String SIZE_SHAPE = "size_shape";
+	public static final String SUBSTRUCTURE = "substructure";
+	
 	private static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private static class ActorRefGraphicsAccess {
-			
-			private static final String PROP_KEY = "actorref_graphic_element";
-			private static final String MAIN_BORDER = "mainborder";
-			private static final String REPL_BORDER = "replborder";
-			private static final String SIZE_FRAME = "sizeframe";
-			private static final String SUBSTRUCTURE = "substructure";
-			private static final String HATCHED_LINE = "hatched_line";
-			private static final String NAME_SHAPE = "name_shape";
-			private static final String SIZE_SHAPE = "size_shape";
-			private static final String LAYERCONN_ANCHOR = "layerconn_anchor";
 			
 			private IPeService peService;
 			
@@ -223,7 +223,7 @@ public class ActorContainerRefSupport {
 				List<PropertyContainer> result = new ArrayList<PropertyContainer>();
 				
 				for(PropertyContainer p : items)
-					if(propValue.equals(peService.getPropertyValue(p, PROP_KEY)))
+					if(propValue.equals(peService.getPropertyValue(p, GRAPHIC_ITEM_KEY)))
 						result.add(p);
 				
 				return result;
@@ -231,7 +231,7 @@ public class ActorContainerRefSupport {
 			
 			private PropertyContainer findFirst(List<? extends PropertyContainer> items, String propValue){
 				for(PropertyContainer p : items)
-					if(propValue.equals(peService.getPropertyValue(p, PROP_KEY)))
+					if(propValue.equals(peService.getPropertyValue(p, GRAPHIC_ITEM_KEY)))
 						return p;
 				
 				return null;
@@ -248,14 +248,14 @@ public class ActorContainerRefSupport {
 				{
 					// repl borderRect
 					Rectangle rect = gaService.createRectangle(invRectangle);
-					peService.setPropertyValue(rect, PROP_KEY, REPL_BORDER);
+					peService.setPropertyValue(rect, GRAPHIC_ITEM_KEY, REPL_BORDER);
 					rect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(rect, MARGIN+REPLICATED_RECT_OFFSET, MARGIN-REPLICATED_RECT_OFFSET, width, height);
 				}
 				{
 					// main borderRect
 					Rectangle borderRect = gaService.createRectangle(invRectangle);
-					peService.setPropertyValue(borderRect, PROP_KEY, MAIN_BORDER);
+					peService.setPropertyValue(borderRect, GRAPHIC_ITEM_KEY, MAIN_BORDER);
 					borderRect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(borderRect, MARGIN, MARGIN, width, height);
 					addSubStructureHint();
@@ -264,14 +264,14 @@ public class ActorContainerRefSupport {
 				{
 					// size frame
 					Rectangle sizeFrame = gaService.createRectangle(invRectangle);
-					peService.setPropertyValue(sizeFrame, PROP_KEY, SIZE_FRAME);
+					peService.setPropertyValue(sizeFrame, GRAPHIC_ITEM_KEY, SIZE_FRAME);
 					sizeFrame.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(sizeFrame, MARGIN+width-SIZE_FRAME_SIZE, MARGIN, SIZE_FRAME_SIZE, SIZE_FRAME_SIZE);
 				}
 				{
 					// acr name
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					peService.setPropertyValue(labelShape, PROP_KEY, NAME_SHAPE);
+					peService.setPropertyValue(labelShape, GRAPHIC_ITEM_KEY, NAME_SHAPE);
 					Text label = gaService.createDefaultText(diagram, labelShape);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -281,7 +281,7 @@ public class ActorContainerRefSupport {
 				{
 					// repl size
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					peService.setPropertyValue(labelShape, PROP_KEY, SIZE_SHAPE);
+					peService.setPropertyValue(labelShape, GRAPHIC_ITEM_KEY, SIZE_SHAPE);
 					Text label = gaService.createDefaultText(diagram, labelShape);
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					label.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
@@ -292,7 +292,7 @@ public class ActorContainerRefSupport {
 			private void createRefFigureAnchor(){
 				// anchor for layer connections
 				ChopboxAnchor anchor = Graphiti.getPeCreateService().createChopboxAnchor(containerShape);
-				peService.setPropertyValue(anchor, PROP_KEY, LAYERCONN_ANCHOR);
+				peService.setPropertyValue(anchor, GRAPHIC_ITEM_KEY, LAYERCONN_ANCHOR);
 				anchor.setReferencedGraphicsAlgorithm(getMainBorder());
 			}
 			
@@ -351,7 +351,7 @@ public class ActorContainerRefSupport {
 					}
 					
 					Polyline line = gaService.createPlainPolyline(mainBorder, new int[] {x0, y0, x1, y1});
-					Graphiti.getPeService().setPropertyValue(line, PROP_KEY, HATCHED_LINE);
+					Graphiti.getPeService().setPropertyValue(line, GRAPHIC_ITEM_KEY, HATCHED_LINE);
 					line.setTransparency(0.4);
 				}
 			}
@@ -362,12 +362,12 @@ public class ActorContainerRefSupport {
 				int y = mainBorder.getHeight()-30;
 				IGaService gaService = Graphiti.getGaService();
 				Rectangle hint1 = gaService.createRectangle(mainBorder);
-				Graphiti.getPeService().setPropertyValue(hint1, PROP_KEY, SUBSTRUCTURE);
+				Graphiti.getPeService().setPropertyValue(hint1, GRAPHIC_ITEM_KEY, SUBSTRUCTURE);
 				hint1.setFilled(false);
 				hint1.setLineWidth(LINE_WIDTH);
 				gaService.setLocationAndSize(hint1, x+5, y, 20, 10);
 				Rectangle hint2 = gaService.createRectangle(mainBorder);
-				Graphiti.getPeService().setPropertyValue(hint2, PROP_KEY, SUBSTRUCTURE);
+				Graphiti.getPeService().setPropertyValue(hint2, GRAPHIC_ITEM_KEY, SUBSTRUCTURE);
 				hint2.setFilled(false);
 				hint2.setLineWidth(LINE_WIDTH);
 				gaService.setLocationAndSize(hint2, x, y+15, 20, 10);
@@ -1280,6 +1280,8 @@ public class ActorContainerRefSupport {
 
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
+
+	
 	
 	public ActorContainerRefSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
 		pfp = new FeatureProvider(dtp,fp);
