@@ -1,0 +1,93 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/LogSys1/main (!) /LogSys1/main/main 
+	/LogSys1/main/main (!) /LogSys1/main/main/cont 
+# done sub system initialization
+	/LogSys1/main/main/cont note: dynamically creating actor class Optional1
+	/LogSys1/main/main/cont (!) /LogSys1/main/main/cont/opt 
+	/LogSys1/main/main/cont/opt (!) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont/opt/sub (!) /LogSys1/main/main/cont/opt/sub/deep 
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont >>> Init
+	/LogSys1/main/main/cont/opt/sub >>> Step1
+	/LogSys1/main/main/cont/opt/sub/deep >>> Step1
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont/opt/sub >-- /LogSys1/main/main/cont/opt/sub/deep step
+	/LogSys1/main/main/cont/opt/sub >>> Step2
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont/opt/sub >-- /LogSys1/main/main/cont/opt/sub/deep step
+	/LogSys1/main/main/cont/opt/sub >>> Step3_StepA
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont/opt/sub >-- /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont/opt/sub >>> Step3_StepA
+	/LogSys1/main/main/cont/opt/sub --> /LogSys1/main/main/cont/opt/sub/deep step
+	/LogSys1/main/main/cont/opt/sub/deep >>> Step2
+	/LogSys1/main/main/cont/opt/sub --> /LogSys1/main/main/cont/opt/sub/deep step
+	/LogSys1/main/main/cont/opt/sub/deep >>> Step3
+	/LogSys1/main/main/cont/opt/sub --> /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont (X) /LogSys1/main/main/cont/opt 
+	/LogSys1/main/main/cont/opt (X) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont/opt/sub (X) /LogSys1/main/main/cont/opt/sub/deep 
+	/LogSys1/main/main/cont note: dynamically creating actor class Optional2
+	/LogSys1/main/main/cont (!) /LogSys1/main/main/cont/opt 
+	/LogSys1/main/main/cont/opt (!) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont/opt/sub >>> Ready
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont >>> DestroyAndCreate
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont/opt/sub >>> Ready
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub step
+	/LogSys1/main/main/cont/opt/sub >>> Ready
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont/opt/sub >-- /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont/opt/sub >>> Ready
+	/LogSys1/main/main/cont/opt/sub --> /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont (X) /LogSys1/main/main/cont/opt 
+	/LogSys1/main/main/cont/opt (X) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont note: dynamically creating actor class Optional1
+	/LogSys1/main/main/cont (!) /LogSys1/main/main/cont/opt 
+	/LogSys1/main/main/cont/opt (!) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont/opt/sub (!) /LogSys1/main/main/cont/opt/sub/deep 
+	/LogSys1/main/main/cont/opt/sub >>> Step3_StepA
+	/LogSys1/main/main/cont/opt/sub/deep >>> Step3
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont >>> DestroyAndRestore
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/opt/sub sayHello
+	/LogSys1/main/main/cont/opt/sub >-- /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont/opt/sub >>> Step3_StepA
+	/LogSys1/main/main/cont/opt/sub --> /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont note: dynamically creating actor class Optional1
+	/LogSys1/main/main/cont (!) /LogSys1/main/main/cont/optarr:0 
+	/LogSys1/main/main/cont/optarr:0 (!) /LogSys1/main/main/cont/optarr:0/sub 
+	/LogSys1/main/main/cont/optarr:0/sub (!) /LogSys1/main/main/cont/optarr:0/sub/deep 
+	/LogSys1/main/main/cont/optarr:0/sub >>> Step3_StepA
+	/LogSys1/main/main/cont/optarr:0/sub/deep >>> Step3
+	/LogSys1/main/main/cont note: dynamically creating actor class Optional2
+	/LogSys1/main/main/cont (!) /LogSys1/main/main/cont/optarr:1 
+	/LogSys1/main/main/cont/optarr:1 (!) /LogSys1/main/main/cont/optarr:1/sub 
+	/LogSys1/main/main/cont/optarr:1/sub >>> Ready
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/optarr:0/sub sayHello
+	/LogSys1/main/main/cont >-- /LogSys1/main/main/cont/optarr:1/sub sayHello
+	/LogSys1/main/main/cont >>> LoadInArray
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/optarr:0/sub sayHello
+	/LogSys1/main/main/cont/optarr:0/sub >-- /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont/optarr:0/sub >>> Step3_StepA
+	/LogSys1/main/main/cont --> /LogSys1/main/main/cont/optarr:1/sub sayHello
+	/LogSys1/main/main/cont/optarr:1/sub >-- /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont/optarr:1/sub >>> Ready
+	/LogSys1/main/main/cont/optarr:0/sub --> /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont >>> ReceivedHello
+	/LogSys1/main/main/cont/optarr:1/sub --> /LogSys1/main/main/cont hello
+	/LogSys1/main/main/cont >>> Done
+# begin sub system destruction
+	/LogSys1/main (X) /LogSys1/main/main 
+	/LogSys1/main/main (X) /LogSys1/main/main/cont 
+	/LogSys1/main/main/cont/opt (X) /LogSys1/main/main/cont/opt/sub 
+	/LogSys1/main/main/cont/opt/sub (X) /LogSys1/main/main/cont/opt/sub/deep 
+	/LogSys1/main/main/cont/optarr:0 (X) /LogSys1/main/main/cont/optarr:0/sub 
+	/LogSys1/main/main/cont/optarr:0/sub (X) /LogSys1/main/main/cont/optarr:0/sub/deep 
+	/LogSys1/main/main/cont/optarr:1 (X) /LogSys1/main/main/cont/optarr:1/sub 

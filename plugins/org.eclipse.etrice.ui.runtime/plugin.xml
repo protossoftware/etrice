@@ -286,4 +286,21 @@
 	  </example>
 	</extension>   
 
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors8 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors8" 
+			name="eTrice Dynamic Actors Example 8" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>persistence test for dynamic actors</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors8" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors8" contentURI="contents/org.eclipse.etrice.examples.dynamicactors8.zip" description="Exmaple Dynamic Actors 8"/>
+	  </example>
+	</extension>   
+
 </plugin>
