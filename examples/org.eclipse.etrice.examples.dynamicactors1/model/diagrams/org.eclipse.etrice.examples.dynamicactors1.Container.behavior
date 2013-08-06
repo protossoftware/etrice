@@ -139,6 +139,10 @@
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="2" y="-10" font="//@fonts.0" value="init"/>
     </connectionDecorators>
+    <bendpoints x="113" y="91"/>
+    <bendpoints x="113" y="105"/>
+    <bendpoints x="113" y="119"/>
+    <bendpoints x="113" y="133"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@anchors.0" end="//@children.0/@children.3/@anchors.0">
     <properties key="obj-type" value="trans"/>
@@ -156,6 +160,10 @@
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="7" y="-7" font="//@fonts.0" value="tr0: &lt;hello:p0>"/>
     </connectionDecorators>
+    <bendpoints x="113" y="188"/>
+    <bendpoints x="113" y="202"/>
+    <bendpoints x="113" y="216"/>
+    <bendpoints x="113" y="230"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.4/@anchors.0">
     <properties key="obj-type" value="trans"/>
@@ -173,6 +181,10 @@
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="7" y="-7" font="//@fonts.0" value="tr2: &lt;hello:p0>"/>
     </connectionDecorators>
+    <bendpoints x="113" y="284"/>
+    <bendpoints x="113" y="298"/>
+    <bendpoints x="113" y="312"/>
+    <bendpoints x="113" y="326"/>
   </connections>
   <colors red="227" green="238" blue="249"/>
   <colors red="255" green="255" blue="255"/>
