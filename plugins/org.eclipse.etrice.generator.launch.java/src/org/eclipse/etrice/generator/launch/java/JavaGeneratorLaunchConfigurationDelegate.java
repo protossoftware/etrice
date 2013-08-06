@@ -46,6 +46,9 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 		if (configuration.getAttribute(JavaGeneratorConfigTab.DEBUG, false)) {
 			argString.append(" "+Main.OPTION_DEBUG);
 		}
+		if (configuration.getAttribute(JavaGeneratorConfigTab.PERSIST, false)) {
+			argString.append(" "+Main.OPTION_GEN_PERSIST);
+		}
 		if (configuration.getAttribute(JavaGeneratorConfigTab.MSC, false)) {
 			argString.append(" "+Main.OPTION_MSC);
 		}

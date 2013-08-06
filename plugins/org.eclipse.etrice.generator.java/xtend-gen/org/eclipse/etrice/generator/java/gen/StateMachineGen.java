@@ -107,4 +107,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     }
     return _xblockexpression;
   }
+  
+  public int getHistorySize(final ExpandedActorClass xpac) {
+    ActorClass _actorClass = xpac.getActorClass();
+    List<State> _allBaseStates = RoomHelpers.getAllBaseStates(_actorClass);
+    int _size = _allBaseStates.size();
+    int _plus = (_size + 2);
+    return _plus;
+  }
 }

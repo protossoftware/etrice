@@ -20,4 +20,19 @@ import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
  */
 public class GlobalSettings extends GlobalGeneratorSettings {
 	
+	private static boolean generatePersistenceInterface = false;
+
+	/**
+	 * @return the generatePersistenceInterface
+	 */
+	public static boolean isGeneratePersistenceInterface() {
+		return generatePersistenceInterface;
+	}
+
+	/**
+	 * @param generatePersistenceInterface the generatePersistenceInterface to set
+	 */
+	public static void setGeneratePersistenceInterface(boolean generatePersistenceInterface) {
+		GlobalSettings.generatePersistenceInterface = generatePersistenceInterface;
+	}
 }

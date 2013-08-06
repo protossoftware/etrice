@@ -25,6 +25,8 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ReferenceType
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.Attribute
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -57,12 +59,19 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
+		val impPersist = if (GlobalSettings::generatePersistenceInterface) "implements IPersistable " else ""
 		
 	'''
 		package «ac.getPackage»;
 		
 		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty»
 			import org.eclipse.etrice.runtime.java.config.DynConfigLock;
+		«ENDIF»
+		«IF GlobalSettings::generatePersistenceInterface»
+			import org.eclipse.etrice.runtime.java.modelbase.IPersistable;
+			import java.io.IOException;
+			import java.io.ObjectInput;
+			import java.io.ObjectOutput;
 		«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -88,7 +97,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(1)»
 		
 		
-		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» {
+		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» «impPersist»{
 		
 			«ac.userCode(2)»
 			
@@ -238,7 +247,121 @@ class ActorClassGen extends GenericActorClassGenerator {
 					public void executeInitTransition() {}
 				«ENDIF»
 			«ENDIF»
+			«IF GlobalSettings::generatePersistenceInterface»
+				
+				@Override
+				public void saveObject(ObjectOutput output) throws IOException {
+					«xpac.genSaveImpl»
+				}
+				
+				@Override
+				public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+					«xpac.genLoadImpl»
+				}
+			«ENDIF»
 		};
 	'''
+	}
+	
+	private def genSaveImpl(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		'''
+			«IF xpac.hasStateMachine()»
+				// state and history
+				output.writeInt(getState());
+				for (int h: history) output.writeInt(h);
+			«ENDIF»
+			«IF !ac.attributes.empty»
+				
+				// attributes
+				«FOR att : ac.attributes»
+					«IF att.refType.type instanceof PrimitiveType»
+						«genSavePrimitive(att)»
+					«ELSE»
+«««						DataClass and ExternalType (the latter one has to implement Serializable)
+						«IF att.size>1»
+							for («att.refType.type.name» v: «att.name») output.writeObject(v);
+						«ELSE»
+							output.writeObject(«att.name»);
+						«ENDIF»
+					«ENDIF»
+				«ENDFOR»
+			«ENDIF»
+		'''
+	}
+	
+	private def genLoadImpl(ExpandedActorClass xpac) {
+		val ac = xpac.actorClass
+		'''
+			«IF xpac.hasStateMachine()»
+				// state and history
+				setState(input.readInt());
+				for (int i=0; i<history.length; ++i) history[i] = input.readInt();
+			«ENDIF»
+			«IF !ac.attributes.empty»
+				
+				// attributes
+				«FOR att : ac.attributes»
+					«IF att.refType.type instanceof PrimitiveType»
+						«genLoadPrimitive(att)»
+					«ELSE»
+«««						DataClass and ExternalType (the latter one has to implement Serializable)
+						«IF att.size>1»
+							for (int i=0; i< «att.name».length; ++i) «att.name»[i] = («att.refType.type.name») input.readObject();
+						«ELSE»
+							«att.name» = («att.refType.type.name») input.readObject();
+						«ENDIF»
+					«ENDIF»
+				«ENDFOR»
+			«ENDIF»
+		'''
+	}
+
+	private def genSavePrimitive(Attribute att) {
+		val type = (att.refType.type as PrimitiveType).targetName
+		val method = type.saveMethod
+		
+		if (att.size>1)
+			"for ("+type+" v: "+att.name+") output."+method+"(v);"
+		else
+			"output."+method+"("+att.name+");"
+	}	
+	
+	private def getSaveMethod(String type) {
+		switch (type) {
+			case "boolean": "writeBoolean"
+			case "char": "writeChar"
+			case "byte": "writeByte"
+			case "short": "writeShort"
+			case "int": "write"
+			case "long": "writeLong"
+			case "float": "writeFloat"
+			case "double": "writeDouble"
+			case "String": "writeUTF"
+		}
+	}
+
+	private def genLoadPrimitive(Attribute att) {
+		val type = (att.refType.type as PrimitiveType).targetName
+		val method = type.loadMethod
+		
+		if (att.size>1)
+			"for (int i=0; i<"+att.name+".length; ++i) "+att.name+"[i] = input."+method+"();"
+		else
+			att.name+" = input."+method+"();"
+	}	
+	
+	private def getLoadMethod(String type) {
+		switch (type) {
+			case "boolean": "readBoolean"
+			case "char": "readChar"
+			case "byte": "readByte"
+			case "short": "readShort"
+			case "int": "read"
+			case "long": "readLong"
+			case "float": "readFloat"
+			case "double": "readDouble"
+			case "String": "readUTF"
+		}
 	}
 }

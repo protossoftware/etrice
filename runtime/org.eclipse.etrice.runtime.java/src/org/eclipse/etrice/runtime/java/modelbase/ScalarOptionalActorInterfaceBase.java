@@ -105,8 +105,7 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 		
 		logDeletion(getName());
 		
-		if (output!=null)
-			saveActor(actor, output);
+		shutdownSubTree(actor, output);
 		
 		actor.destroy();
 		actor = null;

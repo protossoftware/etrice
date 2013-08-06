@@ -355,36 +355,83 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	}
 
 	/**
-	 * TODO: persistence not implemented yet
+	 * This method is called if an {@link ObjectInput} was passed to creation and after
+	 * the actor instance sub tree is created and ports are bound.
 	 * 
-	 * @param actor
-	 * @param input
+	 * <p>
+	 * States, history and all attributes of the actor instances are restored.
+	 * </p>
+	 * 
+	 * @param actor an actor class
+	 * @param input the input stream
 	 */
 	protected void loadActor(ActorClassBase actor, ObjectInput input) {
 		if (input==null || actor==null)
 			return;
 		
 		try {
-			input.close();
+			recursivelyLoad(actor, input);
 		}
-		catch (IOException e) {
+		catch (Throwable e) {
 		}
 	}
 
 	/**
-	 * TODO: persistence not implemented yet
+	 * The recursive loading of an instance sub tree.
 	 * 
-	 * @param actor
-	 * @param output
+	 * @param actor an actor class
+	 * @param input the input stream
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
+	 */
+	private void recursivelyLoad(ActorClassBase actor, ObjectInput input) throws IOException, ClassNotFoundException {
+		if (actor instanceof IPersistable) {
+			((IPersistable) actor).loadObject(input);
+			
+			for (IRTObject child : actor.getChildren()) {
+				if (child instanceof ActorClassBase)
+					recursivelyLoad((ActorClassBase) child, input);
+			}
+		}
+	}
+	
+	/**
+	 * This method is called when an {@link ObjectOutput} was passed to destruction
+	 * and before the instance sub tree is destroyed.
+	 * 
+	 * <p>
+	 * States, history and all attributes of the actor instances are stored.
+	 * </p>
+	 * 
+	 * @param actor an actor class
+	 * @param output the output stream
 	 */
 	protected void saveActor(ActorClassBase actor, ObjectOutput output) {
 		if (output==null || actor==null)
 			return;
 		
 		try {
-			output.close();
+			recursivelySave(actor, output);
 		}
 		catch (IOException e) {
+		}
+	}
+
+	/**
+	 * The recursive saving of an instance sub tree.
+	 * 
+	 * @param actor an actor class
+	 * @param output the output stream
+	 * @throws IOException 
+	 */
+	private void recursivelySave(ActorClassBase actor, ObjectOutput output) throws IOException {
+		if (actor instanceof IPersistable) {
+			((IPersistable) actor).saveObject(output);
+			
+			for (IRTObject child : actor.getChildren()) {
+				if (child instanceof ActorClassBase)
+					recursivelySave((ActorClassBase) child, output);
+			}
 		}
 	}
 }

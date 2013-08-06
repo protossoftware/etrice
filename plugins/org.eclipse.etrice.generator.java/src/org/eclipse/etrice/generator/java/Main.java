@@ -49,6 +49,7 @@ public class Main extends AbstractGenerator {
 	public static final String OPTION_DEBUG = "-debug";
 	public static final String OPTION_MSC = "-msc_instr";
 	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
+	public static final String OPTION_GEN_PERSIST = "-persistable";
 	
 	/**
 	 * print usage message to stderr
@@ -63,6 +64,7 @@ public class Main extends AbstractGenerator {
 				+" ["+OPTION_GEN_DIR+" <generation directory>]"
 				+" ["+OPTION_GEN_INFO_DIR+" <generation info directory>]"
 				+" ["+OPTION_GEN_DOC_DIR+" <gen documentation directory>]"
+				+" ["+OPTION_GEN_PERSIST+"]"
 				+" ["+OPTION_DEBUG+"]"
 				+" ["+OPTION_MSC+"]"
 				+" ["+OPTION_VERBOSE_RT+"]"
@@ -77,6 +79,7 @@ public class Main extends AbstractGenerator {
 		output.println("      -genDir <generation directory>     # the directory for generated files");
 		output.println("      -genInfoDir <generation info dir>  # the directory for generated info files");
 		output.println("      -genDocDir <gen documentation dir> # the directory for generated documentation files");
+		output.println("      -persistable                       # if specified make actor classes persistable");
 		output.println("      -debug                             # if specified create debug output");
 		output.println("      -msc_instr                         # generate instrumentation for MSC generation");
 		output.println("      -gen_as_verbose                    # generate instrumentation for verbose console output");
@@ -170,6 +173,9 @@ public class Main extends AbstractGenerator {
 			}
 			else if (args[i].equals(OPTION_VERBOSE_RT)) {
 				GlobalSettings.setGenerateWithVerboseOutput(true);
+			}
+			else if (args[i].equals(OPTION_GEN_PERSIST)) {
+				GlobalSettings.setGeneratePersistenceInterface(true);
 			}
 			else if (args[i].equals(OPTION_DEBUG)) {
 				debug = true;

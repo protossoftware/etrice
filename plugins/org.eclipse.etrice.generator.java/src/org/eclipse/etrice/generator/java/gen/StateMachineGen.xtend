@@ -53,4 +53,8 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			this.state = new_state;
 		}
 	'''}
+	
+	def getHistorySize(ExpandedActorClass xpac) {
+		xpac.actorClass.getAllBaseStates().size+2
+	}
 }

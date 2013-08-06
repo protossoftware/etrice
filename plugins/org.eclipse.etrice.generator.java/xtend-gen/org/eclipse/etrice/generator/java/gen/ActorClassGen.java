@@ -20,9 +20,12 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAPRef;
@@ -139,6 +142,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       final EList<RoomModel> models = root.getReferencedModels(ac);
+      String _xifexpression_1 = null;
+      boolean _isGeneratePersistenceInterface = GlobalSettings.isGeneratePersistenceInterface();
+      if (_isGeneratePersistenceInterface) {
+        _xifexpression_1 = "implements IPersistable ";
+      } else {
+        _xifexpression_1 = "";
+      }
+      final String impPersist = _xifexpression_1;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(ac);
@@ -152,6 +163,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _isGeneratePersistenceInterface_1 = GlobalSettings.isGeneratePersistenceInterface();
+        if (_isGeneratePersistenceInterface_1) {
+          _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IPersistable;");
+          _builder.newLine();
+          _builder.append("import java.io.IOException;");
+          _builder.newLine();
+          _builder.append("import java.io.ObjectInput;");
+          _builder.newLine();
+          _builder.append("import java.io.ObjectOutput;");
           _builder.newLine();
         }
       }
@@ -252,7 +276,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("ActorClassBase");
         }
       }
-      _builder.append(" {");
+      _builder.append(" ");
+      _builder.append(impPersist, "");
+      _builder.append("{");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
@@ -828,10 +854,374 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
+      {
+        boolean _isGeneratePersistenceInterface_2 = GlobalSettings.isGeneratePersistenceInterface();
+        if (_isGeneratePersistenceInterface_2) {
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          CharSequence _genSaveImpl = this.genSaveImpl(xpac);
+          _builder.append(_genSaveImpl, "		");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          CharSequence _genLoadImpl = this.genLoadImpl(xpac);
+          _builder.append(_genLoadImpl, "		");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  private CharSequence genSaveImpl(final ExpandedActorClass xpac) {
+    CharSequence _xblockexpression = null;
+    {
+      final ActorClass ac = xpac.getActorClass();
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _hasStateMachine = xpac.hasStateMachine();
+        if (_hasStateMachine) {
+          _builder.append("// state and history");
+          _builder.newLine();
+          _builder.append("output.writeInt(getState());");
+          _builder.newLine();
+          _builder.append("for (int h: history) output.writeInt(h);");
+          _builder.newLine();
+        }
+      }
+      {
+        EList<Attribute> _attributes = ac.getAttributes();
+        boolean _isEmpty = _attributes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.newLine();
+          _builder.append("// attributes");
+          _builder.newLine();
+          {
+            EList<Attribute> _attributes_1 = ac.getAttributes();
+            for(final Attribute att : _attributes_1) {
+              {
+                RefableType _refType = att.getRefType();
+                DataType _type = _refType.getType();
+                if ((_type instanceof PrimitiveType)) {
+                  String _genSavePrimitive = this.genSavePrimitive(att);
+                  _builder.append(_genSavePrimitive, "");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  {
+                    int _size = att.getSize();
+                    boolean _greaterThan = (_size > 1);
+                    if (_greaterThan) {
+                      _builder.append("for (");
+                      RefableType _refType_1 = att.getRefType();
+                      DataType _type_1 = _refType_1.getType();
+                      String _name = _type_1.getName();
+                      _builder.append(_name, "");
+                      _builder.append(" v: ");
+                      String _name_1 = att.getName();
+                      _builder.append(_name_1, "");
+                      _builder.append(") output.writeObject(v);");
+                      _builder.newLineIfNotEmpty();
+                    } else {
+                      _builder.append("output.writeObject(");
+                      String _name_2 = att.getName();
+                      _builder.append(_name_2, "");
+                      _builder.append(");");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence genLoadImpl(final ExpandedActorClass xpac) {
+    CharSequence _xblockexpression = null;
+    {
+      final ActorClass ac = xpac.getActorClass();
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _hasStateMachine = xpac.hasStateMachine();
+        if (_hasStateMachine) {
+          _builder.append("// state and history");
+          _builder.newLine();
+          _builder.append("setState(input.readInt());");
+          _builder.newLine();
+          _builder.append("for (int i=0; i<history.length; ++i) history[i] = input.readInt();");
+          _builder.newLine();
+        }
+      }
+      {
+        EList<Attribute> _attributes = ac.getAttributes();
+        boolean _isEmpty = _attributes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.newLine();
+          _builder.append("// attributes");
+          _builder.newLine();
+          {
+            EList<Attribute> _attributes_1 = ac.getAttributes();
+            for(final Attribute att : _attributes_1) {
+              {
+                RefableType _refType = att.getRefType();
+                DataType _type = _refType.getType();
+                if ((_type instanceof PrimitiveType)) {
+                  String _genLoadPrimitive = this.genLoadPrimitive(att);
+                  _builder.append(_genLoadPrimitive, "");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  {
+                    int _size = att.getSize();
+                    boolean _greaterThan = (_size > 1);
+                    if (_greaterThan) {
+                      _builder.append("for (int i=0; i< ");
+                      String _name = att.getName();
+                      _builder.append(_name, "");
+                      _builder.append(".length; ++i) ");
+                      String _name_1 = att.getName();
+                      _builder.append(_name_1, "");
+                      _builder.append("[i] = (");
+                      RefableType _refType_1 = att.getRefType();
+                      DataType _type_1 = _refType_1.getType();
+                      String _name_2 = _type_1.getName();
+                      _builder.append(_name_2, "");
+                      _builder.append(") input.readObject();");
+                      _builder.newLineIfNotEmpty();
+                    } else {
+                      String _name_3 = att.getName();
+                      _builder.append(_name_3, "");
+                      _builder.append(" = (");
+                      RefableType _refType_2 = att.getRefType();
+                      DataType _type_2 = _refType_2.getType();
+                      String _name_4 = _type_2.getName();
+                      _builder.append(_name_4, "");
+                      _builder.append(") input.readObject();");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private String genSavePrimitive(final Attribute att) {
+    String _xblockexpression = null;
+    {
+      RefableType _refType = att.getRefType();
+      DataType _type = _refType.getType();
+      final String type = ((PrimitiveType) _type).getTargetName();
+      final String method = this.getSaveMethod(type);
+      String _xifexpression = null;
+      int _size = att.getSize();
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        String _plus = ("for (" + type);
+        String _plus_1 = (_plus + " v: ");
+        String _name = att.getName();
+        String _plus_2 = (_plus_1 + _name);
+        String _plus_3 = (_plus_2 + ") output.");
+        String _plus_4 = (_plus_3 + method);
+        String _plus_5 = (_plus_4 + "(v);");
+        _xifexpression = _plus_5;
+      } else {
+        String _plus_6 = ("output." + method);
+        String _plus_7 = (_plus_6 + "(");
+        String _name_1 = att.getName();
+        String _plus_8 = (_plus_7 + _name_1);
+        String _plus_9 = (_plus_8 + ");");
+        _xifexpression = _plus_9;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  private String getSaveMethod(final String type) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(type,"boolean")) {
+        _matched=true;
+        _switchResult = "writeBoolean";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"char")) {
+        _matched=true;
+        _switchResult = "writeChar";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"byte")) {
+        _matched=true;
+        _switchResult = "writeByte";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"short")) {
+        _matched=true;
+        _switchResult = "writeShort";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"int")) {
+        _matched=true;
+        _switchResult = "write";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"long")) {
+        _matched=true;
+        _switchResult = "writeLong";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"float")) {
+        _matched=true;
+        _switchResult = "writeFloat";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"double")) {
+        _matched=true;
+        _switchResult = "writeDouble";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"String")) {
+        _matched=true;
+        _switchResult = "writeUTF";
+      }
+    }
+    return _switchResult;
+  }
+  
+  private String genLoadPrimitive(final Attribute att) {
+    String _xblockexpression = null;
+    {
+      RefableType _refType = att.getRefType();
+      DataType _type = _refType.getType();
+      final String type = ((PrimitiveType) _type).getTargetName();
+      final String method = this.getLoadMethod(type);
+      String _xifexpression = null;
+      int _size = att.getSize();
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        String _name = att.getName();
+        String _plus = ("for (int i=0; i<" + _name);
+        String _plus_1 = (_plus + ".length; ++i) ");
+        String _name_1 = att.getName();
+        String _plus_2 = (_plus_1 + _name_1);
+        String _plus_3 = (_plus_2 + "[i] = input.");
+        String _plus_4 = (_plus_3 + method);
+        String _plus_5 = (_plus_4 + "();");
+        _xifexpression = _plus_5;
+      } else {
+        String _name_2 = att.getName();
+        String _plus_6 = (_name_2 + " = input.");
+        String _plus_7 = (_plus_6 + method);
+        String _plus_8 = (_plus_7 + "();");
+        _xifexpression = _plus_8;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  private String getLoadMethod(final String type) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(type,"boolean")) {
+        _matched=true;
+        _switchResult = "readBoolean";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"char")) {
+        _matched=true;
+        _switchResult = "readChar";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"byte")) {
+        _matched=true;
+        _switchResult = "readByte";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"short")) {
+        _matched=true;
+        _switchResult = "readShort";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"int")) {
+        _matched=true;
+        _switchResult = "read";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"long")) {
+        _matched=true;
+        _switchResult = "readLong";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"float")) {
+        _matched=true;
+        _switchResult = "readFloat";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"double")) {
+        _matched=true;
+        _switchResult = "readDouble";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,"String")) {
+        _matched=true;
+        _switchResult = "readUTF";
+      }
+    }
+    return _switchResult;
   }
 }

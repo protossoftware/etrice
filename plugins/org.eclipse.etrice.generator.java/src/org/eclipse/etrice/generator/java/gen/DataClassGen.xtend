@@ -50,6 +50,7 @@ class DataClassGen {
 		package «dc.getPackage()»;
 		
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
+		import java.io.Serializable;
 		
 		«var models = root.getReferencedModels(dc)»
 		«FOR model : models»import «model.name».*;
@@ -58,7 +59,9 @@ class DataClassGen {
 		«dc.userCode(1)»
 		
 		
-		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» {
+		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» implements Serializable {
+			
+			private static final long serialVersionUID = «(dc.package+dc.name).hashCode»L;
 			
 			«dc.userCode(2)»
 			
@@ -119,7 +122,7 @@ class DataClassGen {
 		return result
 	}
 	
-	def paramList(List<Attribute> attributes) {
+	def private paramList(List<Attribute> attributes) {
 		'''«FOR a: attributes SEPARATOR ", "»«a.name»«ENDFOR»'''
 	}
 	
@@ -135,7 +138,7 @@ class DataClassGen {
 		return result
 	}
 	
-	def deepCopy(DataClass _dc) {
+	def private deepCopy(DataClass _dc) {
 		var result = ""
 		var dc = _dc
 		while (dc!=null) {
@@ -145,7 +148,7 @@ class DataClassGen {
 		return result
 	}
 	
-	def deepCopy(List<Attribute> attributes) {
+	def private deepCopy(List<Attribute> attributes) {
 		'''
 		«FOR a : attributes»
 			«IF a.refType.type instanceof ComplexType»
