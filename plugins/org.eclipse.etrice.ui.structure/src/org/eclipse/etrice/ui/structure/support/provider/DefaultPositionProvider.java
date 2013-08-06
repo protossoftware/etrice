@@ -94,7 +94,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		int width = parent.inner.getW();
 		int height = parent.inner.getH();
-		int y = ActorContainerRefSupport.DEFAULT_SIZE_Y*5/2;
+		int y = ActorContainerRefSupport.MARGIN;
 		
 		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
 		List<InterfaceItem> ifItems = new ArrayList<InterfaceItem>();
@@ -113,8 +113,8 @@ public class DefaultPositionProvider implements IPositionProvider {
 		layoutInterfaceItems(ifItems, width, height, -InterfaceItemSupport.MARGIN);
 		
 		layoutActorRefs(refs, width, height, y);
-		y += ActorContainerRefSupport.DEFAULT_SIZE_Y*5/2;
 		
+		y = height - (InterfaceItemSupport.ITEM_SIZE + 2*InterfaceItemSupport.MARGIN);
 		layoutInterfaceItems(intPorts, width, height, y);
 	}
 
@@ -124,12 +124,11 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		int width = StructureClassSupport.DEFAULT_SIZE_X;
 		int height = StructureClassSupport.DEFAULT_SIZE_Y;
-		int y = ActorContainerRefSupport.DEFAULT_SIZE_Y*5/2;
+		int y = ActorContainerRefSupport.MARGIN;
 		
 		layoutInterfaceItems(RoomHelpers.getInterfaceItems(sc, true), width, height, -InterfaceItemSupport.MARGIN);
 		
 		layoutActorRefs(RoomHelpers.getAllActorContainerRefs(sc), width, height, y);
-		y += ActorContainerRefSupport.DEFAULT_SIZE_Y*5/2;
 		
 		List<InterfaceItem> intPorts = new ArrayList<InterfaceItem>();
 		if(sc instanceof ActorClass){
@@ -139,6 +138,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 				base = base.getBase();
 			}
 		}
+		y = height - (InterfaceItemSupport.ITEM_SIZE + 2*InterfaceItemSupport.MARGIN);
 		layoutInterfaceItems(intPorts, width, height, y);
 		
 	}
@@ -163,6 +163,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		int width = 0, height = 0;
 		// interface items of actore refs are mid points
+		// else start at invisible rectangle
 		if(bo instanceof InterfaceItem && parent.bo instanceof ActorContainerRef)
 			width = height = 2*InterfaceItemSupport.MARGIN_SMALL;
 		
@@ -224,22 +225,18 @@ public class DefaultPositionProvider implements IPositionProvider {
 		mappedClasses.add(acc);
 	}
 
-	private void layoutActorRefs(List<? extends ActorContainerRef> actorRefs, int width, int height, int y0){
-		int ncols = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
-		int nrows = actorRefs.size()/ncols;
+	private void layoutActorRefs(List<? extends ActorContainerRef> actorRefs, int width, int height, int y0){	
+		int minGap = ActorContainerRefSupport.MARGIN / 2; // additional space between
+		int ncols = width/(ActorContainerRefSupport.DEFAULT_SIZE_X + minGap);
+		
 		int gap = (width-(ncols*ActorContainerRefSupport.DEFAULT_SIZE_X))/(ncols+1);
 		int delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
-		int x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
+		int x0 = - ActorContainerRefSupport.MARGIN + gap; // start at visual border (not at invisible rectangle)
 		int i = 0;
 		for (ActorContainerRef ar : actorRefs) {
 			int row = i/ncols;
 			int col = i%ncols;
-			if (row>=nrows) {
-				int nc = actorRefs.size()%ncols;
-				gap = (width-(nc*ActorContainerRefSupport.DEFAULT_SIZE_X))/(nc+1);
-				delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
-				x0 = gap+ActorContainerRefSupport.DEFAULT_SIZE_X/2;
-			}
+			
 			int x = x0+delta*col;
 			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
 			obj2pos.put(getKey(ar), new Position((double)x/width, (double)y/height));
@@ -250,7 +247,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	private void layoutInterfaceItems(List<? extends InterfaceItem> items, int width, int height, int y0){
 		int n = items.size();
 		int delta = width/(n+1);
-		int pos = delta;
+		int pos = - InterfaceItemSupport.MARGIN + delta; // start at visual border
 		for (InterfaceItem item : items) {
 			obj2pos.put(getKey(item),  new Position((double)pos/width, (double)y0/height));
 			pos += delta;
