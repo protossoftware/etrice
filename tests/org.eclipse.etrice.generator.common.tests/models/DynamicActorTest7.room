@@ -36,7 +36,7 @@ RoomModel DynamicActorTest7 {
 		}
 		Behavior {
 			Operation Container() {
-				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest7\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest7\", \"DynamicActorTest6_case\");"
+				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest7\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest7\", \"DynamicActorTest7_case\");"
 			}
 			Operation ~Container() {
 				"etUnit_closeAll(caseId);"
@@ -125,6 +125,7 @@ RoomModel DynamicActorTest7 {
 						"EXPECT_EQUAL_INT8(caseId, \"current value of bval\", (byte)3, inst.getBval());"
 						"EXPECT_TRUE(caseId, \"changed string\", \"changed\".equals(inst.getSome()[1].getStr()));"
 						"EXPECT_EQUAL_FLOAT32(caseId, \"current vaue of\", 3.14159f, inst.getDerived().getSome().getFval()[2], 0.001f);"
+						"EXPECT_EQUAL_UINT8(caseId, \"current value of cval\", 'x', inst.getCval());"
 						""
 						"etUnit_testFinished(caseId);"
 					}
@@ -165,7 +166,13 @@ RoomModel DynamicActorTest7 {
 		Behavior { }
 	}
 
-	ActorClass Sub1 {
+	ActorClass Sub1Base {
+		Structure {
+			Attribute cval: char
+		}
+	}
+	
+	ActorClass Sub1 extends Sub1Base {
 		Interface {
 			Port fct: PStep
 		}
@@ -216,6 +223,7 @@ RoomModel DynamicActorTest7 {
 						"ival = 1;"
 						"sval = 2;"
 						"bval = 3;"
+						"cval = 'x';"
 					}
 				}
 				State Step2 {

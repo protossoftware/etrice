@@ -251,11 +251,31 @@ class ActorClassGen extends GenericActorClassGenerator {
 				
 				@Override
 				public void saveObject(ObjectOutput output) throws IOException {
+					«IF xpac.hasStateMachine()»
+						// state and history
+						output.writeInt(getState());
+						for (int h: history) output.writeInt(h);
+						
+					«ENDIF»
+					saveAttributes(output);
+				}
+				
+				protected void saveAttributes(ObjectOutput output) throws IOException {
 					«xpac.genSaveImpl»
 				}
 				
 				@Override
 				public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+					«IF xpac.hasStateMachine()»
+						// state and history
+						setState(input.readInt());
+						for (int i=0; i<history.length; ++i) history[i] = input.readInt();
+						
+					«ENDIF»
+					loadAttributes(input);
+				}
+				
+				protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {
 					«xpac.genLoadImpl»
 				}
 			«ENDIF»
@@ -266,14 +286,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genSaveImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF xpac.hasStateMachine()»
-				// state and history
-				output.writeInt(getState());
-				for (int h: history) output.writeInt(h);
+			«IF ac.base!=null»
+			super.saveAttributes(output);
+			
 			«ENDIF»
 			«IF !ac.attributes.empty»
-				
-				// attributes
 				«FOR att : ac.attributes»
 					«IF att.refType.type instanceof PrimitiveType»
 						«genSavePrimitive(att)»
@@ -293,14 +310,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genLoadImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF xpac.hasStateMachine()»
-				// state and history
-				setState(input.readInt());
-				for (int i=0; i<history.length; ++i) history[i] = input.readInt();
+			«IF ac.base!=null»
+			super.loadAttributes(input);
+			
 			«ENDIF»
 			«IF !ac.attributes.empty»
-				
-				// attributes
 				«FOR att : ac.attributes»
 					«IF att.refType.type instanceof PrimitiveType»
 						«genLoadPrimitive(att)»

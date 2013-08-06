@@ -865,6 +865,38 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
           _builder.newLine();
+          {
+            boolean _hasStateMachine_1 = xpac.hasStateMachine();
+            if (_hasStateMachine_1) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("// state and history");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("output.writeInt(getState());");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("for (int h: history) output.writeInt(h);");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("saveAttributes(output);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected void saveAttributes(ObjectOutput output) throws IOException {");
+          _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
           CharSequence _genSaveImpl = this.genSaveImpl(xpac);
@@ -880,6 +912,38 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
+          _builder.newLine();
+          {
+            boolean _hasStateMachine_2 = xpac.hasStateMachine();
+            if (_hasStateMachine_2) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("// state and history");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("setState(input.readInt());");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("for (int i=0; i<history.length; ++i) history[i] = input.readInt();");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("loadAttributes(input);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
@@ -904,13 +968,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _hasStateMachine = xpac.hasStateMachine();
-        if (_hasStateMachine) {
-          _builder.append("// state and history");
+        ActorClass _base = ac.getBase();
+        boolean _notEquals = (!Objects.equal(_base, null));
+        if (_notEquals) {
+          _builder.append("super.saveAttributes(output);");
           _builder.newLine();
-          _builder.append("output.writeInt(getState());");
-          _builder.newLine();
-          _builder.append("for (int h: history) output.writeInt(h);");
           _builder.newLine();
         }
       }
@@ -919,9 +981,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _isEmpty = _attributes.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          _builder.newLine();
-          _builder.append("// attributes");
-          _builder.newLine();
           {
             EList<Attribute> _attributes_1 = ac.getAttributes();
             for(final Attribute att : _attributes_1) {
@@ -972,13 +1031,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _hasStateMachine = xpac.hasStateMachine();
-        if (_hasStateMachine) {
-          _builder.append("// state and history");
+        ActorClass _base = ac.getBase();
+        boolean _notEquals = (!Objects.equal(_base, null));
+        if (_notEquals) {
+          _builder.append("super.loadAttributes(input);");
           _builder.newLine();
-          _builder.append("setState(input.readInt());");
-          _builder.newLine();
-          _builder.append("for (int i=0; i<history.length; ++i) history[i] = input.readInt();");
           _builder.newLine();
         }
       }
@@ -987,9 +1044,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _isEmpty = _attributes.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          _builder.newLine();
-          _builder.append("// attributes");
-          _builder.newLine();
           {
             EList<Attribute> _attributes_1 = ac.getAttributes();
             for(final Attribute att : _attributes_1) {

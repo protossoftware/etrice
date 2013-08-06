@@ -934,7 +934,12 @@ public class RootImpl extends EObjectImpl implements Root {
 			addedNew = false;
 			for (ActorClass ac : tmpAc) {
 				for (ActorRef ref : ac.getActorRefs()) {
-					addedNew |= actorClasses.add(ref.getType());
+					ActorClass cls = ref.getType();
+					addedNew |= actorClasses.add(cls);
+					while (cls.getBase()!=null) {
+						cls = cls.getBase();
+						addedNew |= actorClasses.add(cls);
+					}
 				}
 			}
 		}
