@@ -267,3 +267,53 @@ is executed asynchronously. So after the outer dynamic actor is created the port
 because the initial transition which is responsible for the creation of the inner dynamic actor wasn't executed yet.
 So a message sent from this port directly after creation of the outer dynamic actor would get lost.
 \end{itemize}
+
+\section{Dynamic Actors 7}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors7}.
+
+\subsection{Purpose}
+
+The example demonstrates the use of communication between two optional actors.
+
+\subsection{Details}
+
+In this example two sub trees of dynamic actors are created. The container is sending a message to one of them which is forwarding
+it to the other one which in turn is replying back to the container.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\end{itemize}
+
+\section{Dynamic Actors 8}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors8}.
+
+\subsection{Purpose}
+
+The example demonstrates the use of the persistence interface for dynamic actors.
+
+\subsection{Details}
+
+Dynamic actors can be persisted and restored. To this end the user has to pass an \texttt{java.io.ObjectOutput} to
+the creation method (\texttt{createOptionalActor()}) and an \texttt{java.io.ObjectInput} to the deletion method (\texttt{destroyOptionalActor()}).
+
+The code generation has to be invoked with the \texttt{-persistable} (e.g. by setting the 'generate persistence interface' flag in the Java Generator tab
+of the launch configuration). This lets the generator implement the \texttt{IPersistable} interface for actor classes.
+
+The example adds a manually coded very simple \texttt{FilePersistor} with four static methods for creation and deletion of scalar and replicated
+dynamic actors.
+
+The \texttt{Container} class first creates an optional actor of type \texttt{Optional1} in the scalar reference \texttt{opt}.
+Then messages are sent to this actor instance which lead to some state changes. Finally it is saved and destroyed.
+Now another actor class is instantiated in the same actor reference and also destroyed. Then the first instance is loaded from file.
+It directly starts in the state it had when it was saved. The second part of the example loads copies of the two
+instances created in the beginning into the \texttt{optarr} reference.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
+\end{itemize}

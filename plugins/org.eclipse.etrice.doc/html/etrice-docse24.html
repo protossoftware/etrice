@@ -4,391 +4,1378 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Component Overview</title> 
+<head><title>eTrice Models and Their Relations</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-08-02 10:13:00" /> 
+<meta name="date" content="2013-08-06 15:34:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 92--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch6.html" >next</a>] [<a 
 href="etrice-docse23.html" >prev</a>] [<a 
 href="etrice-docse23.html#tailetrice-docse23.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse24.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse24.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x32-1430006.2"></a>Component Overview</h3>
-<!--l. 94--><p class="noindent" >
+href="etrice-docch5.html#etrice-docse24.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x31-1410005.2"></a>eTrice Models and Their Relations</h3>
+<!--l. 3--><p class="noindent" >eTrice comprises several models:
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.1   </span> <a 
- id="x32-1440006.2.1"></a>Room Language Overview</h4>
-<!--l. 96--><p class="noindent" >We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that
-are worth to be pointed out.
-</p><!--l. 99--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1450006.2.1"></a>Model Tweaks</h5>
-<!--l. 101--><p class="noindent" >The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at some places.
-This is done in the <span 
-class="ec-lmsso-10">/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext </span>which is written in the
-legacy Xtend language.
-</p><!--l. 107--><p class="noindent" >The following parts of the model are changed or added: </p>
      <ul class="itemize1">
-     <li class="itemize">the default
-                                                                                            
-                                                                                            
-     <div class="verbatim" id="verbatim-11">
-     multiplicity
+     <li class="itemize">the ROOM model (*.room) &#8211; defines model classes and the logical structure of the model
+     </li>
+     <li class="itemize">the Config model (*.config) &#8211; defines configuration values for attributes
+     </li>
+     <li class="itemize">the Physical model (*.etphys) &#8211; defines the structure and properties of the physical system
+     </li>
+     <li class="itemize">the Mapping model (*.etmap) &#8211; defines a mapping from logical elements to physical elements</li></ul>
+<!--l. 12--><p class="noindent" >In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
+</p><!--l. 15--><p class="noindent" ><img 
+src="images/080-models.jpg" alt="PIC"  
+ />
+</p><!--l. 17--><p class="noindent" >In the following sections we will describe those models with emphasis of their cross relations.
+</p><!--l. 19--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
+ id="x31-1420005.2.1"></a>The ROOM Model</h4>
+<!--l. 21--><p class="noindent" >The ROOM model defines <span id="textcolor52"><span 
+class="ec-lmssbx-10">DataClass</span></span>es, <span id="textcolor53"><span 
+class="ec-lmssbx-10">ProtocolClass</span></span>es, <span id="textcolor54"><span 
+class="ec-lmssbx-10">ActorClass</span></span>es, <span id="textcolor55"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span>es and <span id="textcolor56"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span>s. Thereby
+the three latter form a hierarchy. The <span id="textcolor57"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> is the top level element of the structure. It contains references to
+<span id="textcolor58"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span> elements. The <span id="textcolor59"><span 
+class="ec-lmssbx-10">SubSystemClass</span></span> in turn contains references to <span id="textcolor60"><span 
+class="ec-lmssbx-10">ActorClass</span></span> elements which again
+contain (recursively) references to <span id="textcolor61"><span 
+class="ec-lmssbx-10">ActorClass</span></span> elements. The complete structural hierarchy implies a tree
+which has the <span id="textcolor62"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> as root and where each reference stands for a new node with possibly further
+branches.
+</p><!--l. 29--><p class="noindent" >Let&#8217;s consider a simple example. It doesn&#8217;t implement anything meaningful and completely omits behavioral and other
+aspects.
+</p>
+<!--l. 32--><div class="lstinputlisting">
+<a 
+ id="x31-142001r1"></a>
+<a 
+ id="x31-142002"></a>
+<span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">RoomModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142005r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">subA</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SubA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">subB</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SubB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142007r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142009r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SubA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142011r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actB</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142013r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">dflt</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142015r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actB1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actC1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">dflt</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142017r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142018r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actB2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142019r17"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142020r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142021r19"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SubB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142022r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142023r21"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actB</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142024r22"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142025r23"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">dflt</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142026r24"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142027r25"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142028r26"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142029r27"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142030r28"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142031r29"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142032r30"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142033r31"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actB1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142034r32"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actB2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142035r33"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142036r34"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142037r35"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142038r36"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142039r37"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142040r38"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142041r39"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actC1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActC</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142042r40"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actC2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActC</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142043r41"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142044r42"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142045r43"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142046r44"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActC</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142047r45"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142048r46"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">PrimitiveType</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ptInteger</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Integer</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">default</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">0</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-142049r47"></a></span><span 
+class="ec-lmtt-9">}</span>
+<br />
+    <div class="caption" 
+><span class="id">Listing&#x00A0;5.1:
+    </span><span  
+class="content">ROOM
+    example
+    code</span></div><!--tex4ht:label?: x31-1420005.2 -->
 </div>
-     <!--l. 109--><p class="nopar" > of the <span 
-class="ec-lmtt-10">Port </span>is set to 1
-     </p></li>
-     <li class="itemize">the operation <span 
-class="ec-lmtt-10">isReplicated </span>is added to the <span 
-class="ec-lmtt-10">Port</span>
-     </li>
-     <li class="itemize">the default <span 
-class="ec-lmtt-10">size </span>of the <span 
-class="ec-lmtt-10">ActorRef </span>is set to 1
-     </li>
-     <li class="itemize">an operation <span 
-class="ec-lmtt-10">getName </span>is add to the <span 
-class="ec-lmtt-10">State </span>class
-     </li>
-     <li class="itemize">an operation <span 
-class="ec-lmtt-10">getName </span>is add to the <span 
-class="ec-lmtt-10">StateGraphItem </span>class
-     </li>
-     <li class="itemize">an operation <span 
-class="ec-lmtt-10">getGeneralProtocol </span>is added to the <span 
-class="ec-lmtt-10">InterfaceItem</span></li></ul>
-<!--l. 117--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1460006.2.1"></a>Imports by URI Using Namespaces</h5>
-<!--l. 119--><p class="noindent" >The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model
-workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in
-the Guice modules by binding </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmtt-10">PlatformRelativeUriResolver </span>&#8211; this class tries to convert the import URI into a platform relative URI. It
-     also replaces environment variables written in $ with their respective values.
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">ImportedNamespaceAwareLocalScopeProvider </span>&#8211;  this  is  a  standard  scope  provider  which  is  aware  of
-     namespaces
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">GlobalNonPlatformURIEditorOpener </span>&#8211; this editor opener tries to convert general URIs into platform URIs
-     because editors can only open platform URIs
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">ImportAwareHyperlinkHelper </span>&#8211; turns the URI part of an import into a navigatable hyper link</li></ul>
-<!--l. 132--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1470006.2.1"></a>Naming</h5>
-<!--l. 134--><p class="noindent" >Two classes provide object names used for link resolution and for labels. The <span 
-class="ec-lmtt-10">RoomNameProvider </span>provides frequently used
-name strings, some of them are hierarchical like State paths. The <span 
-class="ec-lmtt-10">RoomFragmentProvider </span>serves a more formal purpose
-since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by
-Xtext.
                                                                                             
                                                                                             
-</p><!--l. 140--><p class="noindent" >
+<!--l. 34--><p class="noindent" >When a <span id="textcolor63"><span 
+class="ec-lmssbx-10">LogicalSystem</span></span> is instantiated then recursively all of the contained referenced elements are instantiated as instances
+of the corresponding class. Thus the instance tree of the above example looks like in figure <a 
+href="#x31-1420505">5.5<!--tex4ht:ref: fig:instance_tree --></a> (the third line in the white
+boxes shows some mapping information, see section <a 
+href="#x31-1450005.2.4">5.2.4<!--tex4ht:ref: sec:mapping_model --></a> <a 
+href="#x31-1450005.2.4">The Mapping Model<!--tex4ht:ref: sec:mapping_model --></a>):
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1480006.2.1"></a>Helpers</h5>
-<!--l. 142--><p class="noindent" >The <span 
-class="ec-lmtt-10">RoomHelpers </span>class provides a great deal of static methods that help retrieve frequently used information from the
-model. Among many, many others </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmtt-10">getAllEndPorts(ActorClass) </span>- returns a list of all end ports of an actor class including inherited ones
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getInheritedActionCode(Transition, ActorClass) </span>- get the inherited part of a transition&#8217;s action code
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getSignature(Operation) </span>- returns a string representing the operation signature suited for a label</li></ul>
-<!--l. 154--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1490006.2.1"></a>Validation</h5>
-<!--l. 156--><p class="noindent" >Validation is used from various places. Therefore all validation code is accumulated in the @ValidationUtil@ class. All methods
-are static and many of them return a Result object which contains information about the problem detected as well as object
-and feature as suited for most validation purposes.
-</p><!--l. 160--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.2   </span> <a 
- id="x32-1500006.2.2"></a>Config Language Overview</h4>
-<!--l. 162--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1510006.2.2"></a>Model Tweaks</h5>
-<!--l. 164--><p class="noindent" >A couple of operations are added to the ConfigModel </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmtt-10">getActorClassConfigs</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getActorInstanceConfigs</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getProtocolClassConfigs</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getSubSystemConfigs</span></li></ul>
-<!--l. 172--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1520006.2.2"></a>Imports by URI Using Namespaces</h5>
-<!--l. 174--><p class="noindent" >Imports are treated like in Room language, section <span 
-class="ec-lmsso-10">Imports by URI Using Namespaces</span>.
+<hr class="figure" /><div class="figure" 
+>
                                                                                             
                                                                                             
-</p><!--l. 176--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1530006.2.2"></a>Util</h5>
-<!--l. 178--><p class="noindent" >A set of static utility methods can be found in the <span 
-class="ec-lmtt-10">ConfigUtil </span>class.
-</p><!--l. 180--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.3   </span> <a 
- id="x32-1540006.2.3"></a>Aggregation Layer Overview</h4>
-<!--l. 182--><p class="noindent" >The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information
-which is implicitly contained in the Room model but not simple to retrieve. Examples of this are the state machine with
-inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of
-an end port (following bindings through relay ports).
-</p><!--l. 188--><p class="noindent" >The Generator Model is created from a list of Room models by a call of the
+<a 
+ id="x31-1420505"></a><a 
+ id="x31-14300025"></a><a 
+ id="x31-14400011"></a><a 
+ id="x31-14400046"></a><a 
+ id="x31-14500017"></a>
                                                                                             
                                                                                             
+<!--l. 40--><p class="noindent" ><img 
+src="images/080-instances.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;5.5: </span><span  
+class="content">Instances of a ROOM system</span></div><!--tex4ht:label?: x31-1420505 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
+ id="x31-1430005.2.2"></a>The Config Model</h4>
+<!--l. 47--><p class="noindent" >Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level
+and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value
+configured for the same attribute.
 </p>
-<div class="verbatim" id="verbatim-12">
-createGeneratorModel(List&#x003C;RoomModel&#x003E;,&#x00A0;boolean)
+<!--l. 51--><div class="lstinputlisting">
+<a 
+ id="x31-143001r2"></a>
+<a 
+ id="x31-143002"></a>
+<span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ConfigModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143005r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">example</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143007r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClassConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143009r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143011r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClassConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143013r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143015r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">subA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">12</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143017r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143018r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143019r17"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">subA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143020r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">13</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143021r19"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143022r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143023r21"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">subA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actA</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">actB2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143024r22"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">val</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">14</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143025r23"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-143026r24"></a></span><span 
+class="ec-lmtt-9">}</span>
+<br />
+    <div class="caption" 
+><span class="id">Listing&#x00A0;5.2:
+    </span><span  
+class="content">Config
+    example
+    code</span></div><!--tex4ht:label?: x31-1430005.2 -->
 </div>
-<!--l. 190--><p class="nopar" >
-</p><!--l. 192--><p class="noindent" >method of the <span 
-class="ec-lmtt-10">GeneratorModelBuilder </span>class.
-</p><!--l. 194--><p class="noindent" >The <span 
-class="ec-lmtt-10">Root </span>object of the resulting Generator Model provides chiefly two things: </p>
-     <ul class="itemize1">
-     <li class="itemize">a tree of instances starting at each <span 
-class="ec-lmtt-10">SubSystem </span>with representations of each <span 
-class="ec-lmtt-10">ActorInstance </span>and <span 
-class="ec-lmtt-10">PortInstance</span>
-     </li>
-     <li class="itemize">for each <span 
-class="ec-lmtt-10">ActorClass </span>a corresponding <span 
-class="ec-lmtt-10">ExpandedActorClass </span>with an explicit state machine containing all
-     inherited state graph items</li></ul>
-<!--l. 202--><p class="noindent" >
+<!--l. 53--><p class="noindent" >
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1550006.2.3"></a>The Instance Model</h5>
-<!--l. 204--><p class="noindent" >The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to
-get a list of all peer port instances for each port instance without having to bother about port and actor
-replication.
-</p><!--l. 208--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.2.3   </span> <a 
+ id="x31-1440005.2.3"></a>The Physical Model</h4>
+<!--l. 55--><p class="noindent" >The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define
+runtime classes which (currently) only define the overall execution model of the platform.
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1560006.2.3"></a>The Expanded Actor Class</h5>
-<!--l. 210--><p class="noindent" >The expanded actor class contains, as already mentioned, the complete state machine of the actor class. This considerably
-simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of
-an actor. I.e. no target language inheritance is used to implement the state machine inheritance. Furthermore the
+<!--l. 59--><div class="lstinputlisting">
+<a 
+ id="x31-144001r3"></a>
+<a 
+ id="x31-144002"></a>
 <span 
-class="ec-lmtt-10">ExpandedActorClass </span>gives access to </p>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmtt-10">getIncomingTransitions(StateGraphNode) </span>&#8211; the set of incoming transition of a <span 
-class="ec-lmtt-10">StateGraphNode </span>(<span 
-class="ec-lmtt-10">State</span>,
-     <span 
-class="ec-lmtt-10">ChoicePoint </span>or <span 
-class="ec-lmtt-10">TransitionPoint</span>)
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getOutgoingTransitions(StateGraphNode) </span>&#8211; the set of outgoing transition of a <span 
-class="ec-lmtt-10">StateGraphNode</span>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">getActiveTriggers(State) </span>&#8211; the triggers that are active in this <span 
-class="ec-lmtt-10">State </span>in the order they are evaluated</li></ul>
-<!--l. 224--><p class="noindent" >
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">PhysicalModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">runtimes</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144005r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">RuntimeClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PCRuntime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">model</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">multiThreaded</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144007r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144009r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">RuntimeClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MSP430Runtime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">model</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">singleThreaded</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144011r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144012r10"></a></span><span 
+class="ec-lmtt-9">}</span>
+<br />
+    <div class="caption" 
+><span class="id">Listing&#x00A0;5.3:
+    </span><span  
+class="content">etPhys
+    runtime
+    definition</span></div><!--tex4ht:label?: x31-1440005.2 -->
+</div>
+<!--l. 61--><p class="noindent" >The <span id="textcolor64"><span 
+class="ec-lmssbx-10">PhysicalSystem</span></span> is composed of <span id="textcolor65"><span 
+class="ec-lmssbx-10">NodeRef</span></span>erences which are instances of <span id="textcolor66"><span 
+class="ec-lmssbx-10">NodeClass</span></span>es. Each <span id="textcolor67"><span 
+class="ec-lmssbx-10">NodeClass</span></span> is referencing
+a <span id="textcolor68"><span 
+class="ec-lmssbx-10">RuntimeClass</span></span> and is defining <span id="textcolor69"><span 
+class="ec-lmssbx-10">Threads</span></span>.
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1570006.2.3"></a>Transition Chains</h5>
-<!--l. 226--><p class="noindent" >By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at
-a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions
-until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in
-choice points). A <span 
-class="ec-lmtt-10">TransitionChain </span>of a transition is retrieved by a call of <span 
-class="ec-lmtt-10">getChain(Transition) </span>of the
+<!--l. 65--><div class="lstinputlisting">
+<a 
+ id="x31-144013r4"></a>
+<a 
+ id="x31-144014"></a>
 <span 
-class="ec-lmtt-10">ExpandedActorClass</span>. The <span 
-class="ec-lmtt-10">TransitionChain </span>accepts an <span 
-class="ec-lmtt-10">ITransitionChainVisitor </span>which is called along the chain to
-generate the action codes of involved transitions and the conditional statements arising from the involved choice
-points.
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144015r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">PhysicalModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144016r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144017r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">etphys</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">runtimes</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etphys</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144018r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144019r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">PhysicalSystem</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MainPhys</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144020r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">NodeRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">pc1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PC_Node</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144021r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">NodeRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">pc2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PC_Node</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144022r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">NodeRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">mc</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MSP430_Node</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144023r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144024r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144025r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">NodeClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PC_Node</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144026r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">runtime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">runtimes</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">PCRuntime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144027r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">priomin</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144028r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">priomax</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144029r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">DefaultThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">thread1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144030r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">execmode</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">blocked</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144031r17"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">prio</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144032r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">stacksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1024</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144033r19"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">64</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144034r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">50</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144035r21"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144036r22"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Thread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">thread2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144037r23"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">execmode</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">polled</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144038r24"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">interval</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ms</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144039r25"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">prio</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144040r26"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">stacksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1024</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144041r27"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">64</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144042r28"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">50</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144043r29"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144044r30"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144045r31"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144046r32"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">NodeClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MSP430_Node</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144047r33"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">runtime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">runtimes</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">MSP430Runtime</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144048r34"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">priomin</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144049r35"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">priomax</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144050r36"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">DefaultThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144051r37"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">execmode</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">polled</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144052r38"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">interval</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">us</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144053r39"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">prio</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144054r40"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">stacksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">256</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144055r41"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">64</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144056r42"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">50</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144057r43"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144058r44"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-144059r45"></a></span><span 
+class="ec-lmtt-9">}</span>
+<br />
+    <div class="caption" 
+><span class="id">Listing&#x00A0;5.4:
+    </span><span  
+class="content">etPhys
+    example
+    code</span></div><!--tex4ht:label?: x31-1440005.2 -->
                                                                                             
                                                                                             
-</p><!--l. 236--><p class="noindent" >
+</div>
+<!--l. 67--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.4   </span> <a 
- id="x32-1580006.2.4"></a>Generator Overview</h4>
-<!--l. 238--><p class="noindent" >There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific
-generators
-</p><!--l. 241--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.2.4   </span> <a 
+ id="x31-1450005.2.4"></a>The Mapping Model</h4>
+<!--l. 70--><p class="noindent" >The last model finally combines all this information by mapping logical to physical entities.
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1590006.2.4"></a>Base Classes and Interfaces</h5>
-<!--l. 243--><p class="noindent" >We just want to mention the most important classes and interfaces.
-</p>
-     <ul class="itemize1">
-     <li class="itemize">
-     <div class="flushleft" 
->
-<!--l. 246--><p class="noindent" >
+<!--l. 72--><div class="lstinputlisting">
+<a 
+ id="x31-145001r5"></a>
+<a 
+ id="x31-145002"></a>
 <span 
-class="ec-lmtt-10">ITranslationProvider </span>&#8212; this interface is used by the <span 
-class="ec-lmtt-10">DetailCodeTranslator </span>for the language dependent
-translation of e.g. port.message() notation in detail code</p></div>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">AbstractGenerator </span>&#8212; concrete language generators should derive from this base class
-     </li>
-     <li class="itemize">
-     <div class="flushleft" 
->
-<!--l. 250--><p class="noindent" >
-<span 
-class="ec-lmtt-10">DefaultTranslationProvider </span>&#8212; a stub implementation of <span 
-class="ec-lmtt-10">ITranslationProvider </span>from which clients may
-derive</p></div>
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">Indexed </span>&#8212; provides an indexed iterable of a given iterable
-     </li>
-     <li class="itemize"><span 
-class="ec-lmtt-10">GeneratorBaseModule </span>&#8212; a Google Guice module that binds a couple of basic services. Concrete language generators
-     should use a module that derives from this</li></ul>
-<!--l. 257--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1600006.2.4"></a>Generic Generator Parts</h5>
-<!--l. 259--><p class="noindent" >The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level
-generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by
-means of an <span 
-class="ec-lmtt-10">ILanguageExtension</span>. This extension and other parts of the generator be configured using Google Guice
-dependency injection.
-</p>
-<!--l. 264--><p class="noindent" ><span class="paragraphHead"><a 
- id="x32-1610006.2.4"></a><span 
-class="ec-lmssbx-10">GenericActorClassGenerator</span></span>
-The <span 
-class="ec-lmtt-10">GenericActorClassGenerator </span>generates constants for the interface items of a actor. Those constants are used by the
-generated state machine.
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">MappingModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145005r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">etphys</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">example</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etphys</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">example</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145007r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Mapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MainPhys</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145009r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">subA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">pc1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ThreadMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">dflt</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">thread1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145011r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ThreadMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">thread2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145013r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">subB</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">mc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ThreadMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">dflt</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145015r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ThreadMapping</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">extra</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145017r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x31-145018r16"></a></span><span 
+class="ec-lmtt-9">}</span>
+<br />
+    <div class="caption" 
+><span class="id">Listing&#x00A0;5.5:
+    </span><span  
+class="content">etMap
+    example
+    code</span></div><!--tex4ht:label?: x31-1450005.2 -->
+</div>
+<!--l. 74--><p class="noindent" >The result of the mapping is also depicted in above tree diagram (figure <a 
+href="#x31-1420505">5.5<!--tex4ht:ref: fig:instance_tree --></a>) of the instances. All actor instances (the white
+boxes) are mapped to a node and a thread running on this node (shown as @<span 
+class="ec-lmsso-10">node </span>: <span 
+class="ec-lmsso-10">thread</span>).
                                                                                             
                                                                                             
 </p>
-<!--l. 269--><p class="noindent" ><span class="paragraphHead"><a 
- id="x32-1620006.2.4"></a><span 
-class="ec-lmssbx-10">GenericProtocolClassGenerator</span></span>
-The <span 
-class="ec-lmtt-10">GenericProtocolClassGenerator </span>generates message ID constants for a protocol.
-</p>
-<!--l. 273--><p class="noindent" ><span class="paragraphHead"><a 
- id="x32-1630006.2.4"></a><span 
-class="ec-lmssbx-10">GenericStateMachineGenerator</span></span>
-</p>
-<div class="flushleft" 
->
-<!--l. 275--><p class="noindent" >
-The <span 
-class="ec-lmtt-10">GenericStateMachineGenerator </span>generates the complete state machine implementation. The skeleton of the
-generated code is</p></div>
-     <ul class="itemize1">
-     <li class="itemize">definition state ID constants
-     </li>
-     <li class="itemize">definition of transition chain constants
-     </li>
-     <li class="itemize">definition of trigger constants
-     </li>
-     <li class="itemize">entry, exit and action code methods
-     </li>
-     <li class="itemize">the <span 
-class="ec-lmtt-10">exitTo </span>method
-     </li>
-     <li class="itemize">the <span 
-class="ec-lmtt-10">executeTransitionChain </span>method
-     </li>
-     <li class="itemize">the <span 
-class="ec-lmtt-10">enterHistory </span>method
-     </li>
-     <li class="itemize">the <span 
-class="ec-lmtt-10">executeInitTransition </span>method
-     </li>
-     <li class="itemize">the <span 
-class="ec-lmtt-10">receiveEvent </span>method</li></ul>
-<!--l. 290--><p class="noindent" >The state machine works as follows. The main entry method is the <br 
-class="newline" /><span 
-class="ec-lmtt-10">receiveEvent </span>method. This is the case for both, data driven (polled) and event driven state machines. Then a number of
-nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a
-trigger fires then the <span 
-class="ec-lmtt-10">exitTo </span>method is called to execute all exit codes involved. Then the transition chain
-action codes are executed and the choice point conditions are evaluated in the <span 
-class="ec-lmtt-10">executeTransitionChain</span>
-method. Finally the history of the state where the chain ends is entered and all entry codes are executed by
-<span 
-class="ec-lmtt-10">enterHistory</span>.
-</p><!--l. 298--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1640006.2.4"></a>The Java Generator</h5>
-<!--l. 300--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
-class="ec-lmtt-10">JavaTranslationProvider </span>is very simple and only
-handles the case of sending a message from a distinct replicated port: <span 
-class="ec-lmtt-10">replPort[2].message()</span>. Other cases are handled by
-the base class by returning the original text.
-                                                                                            
-                                                                                            
-</p><!--l. 304--><p class="noindent" >The <span 
-class="ec-lmtt-10">DataClassGen </span>uses Java inheritance for the generated data classes. Otherwise it is pretty much straight
-forward.
-</p><!--l. 307--><p class="noindent" >The <span 
-class="ec-lmtt-10">ProtocolClassGen </span>generates a class for the protocol with nested static classes for regular and conjugated ports and
-similar for replicated ports.
-</p><!--l. 310--><p class="noindent" >The <span 
-class="ec-lmtt-10">ActorClassGen </span>uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code
-methods are inherited. Not inherited is the state machine implementation.
-</p><!--l. 313--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1650006.2.4"></a>The ANSI-C Generator</h5>
-<!--l. 315--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them
-and receive a pointer to those data (called <span 
-class="ec-lmtt-10">self </span>in analogy to the implicit C++ <span 
-class="ec-lmtt-10">this </span>pointer). No dynamic memory
-allocation is employed. All actor instances are statically initialized. One of the design goals for the generated C code was an
-optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end
-micro controllers.
-</p><!--l. 322--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x32-1660006.2.4"></a>The Documentation Generator</h5>
-<!--l. 324--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF and many other
-formats.
-</p>
-<!--l. 104--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 100--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch6.html" >next</a>] [<a 
 href="etrice-docse23.html" >prev</a>] [<a 
 href="etrice-docse23.html#tailetrice-docse23.html" >prev-tail</a>] [<a 
 href="etrice-docse24.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse24.html" >up</a>] </p></div>
-<!--l. 104--><p class="noindent" ><a 
- id="tailetrice-docse24.html"></a>  </p> 
+href="etrice-docch5.html#etrice-docse24.html" >up</a>] </p></div>
+<!--l. 100--><p class="noindent" ><a 
+ id="tailetrice-docse24.html"></a> </p> 
 </body></html> 
