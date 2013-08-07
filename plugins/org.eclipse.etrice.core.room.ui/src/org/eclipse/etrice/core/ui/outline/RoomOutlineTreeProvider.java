@@ -30,8 +30,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -63,11 +63,11 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	@Inject ImportUriResolver importUriResolver;
 	
 	protected boolean _isLeaf(ActorClass ac) {
-		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
+		if (ac.getInterfacePorts().size()>0 || ac.getServiceProvisionPoints().size()>0) {
 			return false;
 		}
-		if (ac.getIntPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
-				ac.getStrSAPs().size()>0 || ac.getAttributes().size()>0 ||
+		if (ac.getInternalPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
+				ac.getServiceAccessPoints().size()>0 || ac.getAttributes().size()>0 ||
 				ac.getActorRefs().size()>0) {
 			return false;
 		}
@@ -92,11 +92,11 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	private void createChildren1(IOutlineNode parentNode, ActorClass ac) {
-		if (ac.getIfPorts().size()>0 || ac.getIfSPPs().size()>0) {
+		if (ac.getInterfacePorts().size()>0 || ac.getServiceProvisionPoints().size()>0) {
 			createExtraNode(ac, parentNode, INTERFACE_LABEL);
 		}
-		if (ac.getIntPorts().size()>0 || ac.getExtPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
-				ac.getStrSAPs().size()>0 || ac.getAttributes().size()>0 ||
+		if (ac.getInternalPorts().size()>0 || ac.getExternalPorts().size()>0 || ac.getServiceImplementations().size()>0 ||
+				ac.getServiceAccessPoints().size()>0 || ac.getAttributes().size()>0 ||
 				ac.getActorRefs().size()>0) {
 			createExtraNode(ac, parentNode, STRUCTURE_LABEL);
 		}
@@ -107,19 +107,19 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	private void createChildren2(IOutlineNode parentNode, ActorClass ac) {
 		if (parentNode.getText().equals(INTERFACE_LABEL)) {
-			for (Port port : ac.getIfPorts())
+			for (Port port : ac.getInterfacePorts())
 				createNode(parentNode, port);
-			for (SPPRef spp : ac.getIfSPPs())
+			for (SPP spp : ac.getServiceProvisionPoints())
 				createNode(parentNode, spp);
 		}
 		else if (parentNode.getText().equals(STRUCTURE_LABEL)) {
-			for (Port port : ac.getIntPorts())
+			for (Port port : ac.getInternalPorts())
 				createNode(parentNode, port);
-			for (ExternalPort port : ac.getExtPorts())
-				createNode(parentNode, port.getIfport());
+			for (ExternalPort port : ac.getExternalPorts())
+				createNode(parentNode, port.getInterfacePort());
 			for (ServiceImplementation svc : ac.getServiceImplementations())
 				createNode(parentNode, svc);
-			for (SAPRef sap : ac.getStrSAPs())
+			for (SAP sap : ac.getServiceAccessPoints())
 				createNode(parentNode, sap);
 			for (Attribute attr : ac.getAttributes())
 				createNode(parentNode, attr);
@@ -201,7 +201,7 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 		if (pc.getRegular()!=null)
 			createExtraNode(pc, parentNode, REG_PORT_CLASS_LABEL);
-		if (pc.getConjugate()!=null)
+		if (pc.getConjugated()!=null)
 			createExtraNode(pc, parentNode, CONJ_PORT_CLASS_LABEL);
 	}	
 	
@@ -225,10 +225,10 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			}
 		}
 		else if (parentNode.getText().equals(CONJ_PORT_CLASS_LABEL)) {
-			for (Attribute att : pc.getConjugate().getAttributes()) {
+			for (Attribute att : pc.getConjugated().getAttributes()) {
 				createNode(parentNode, att);
 			}
-			for (PortOperation op : pc.getConjugate().getOperations()) {
+			for (PortOperation op : pc.getConjugated().getOperations()) {
 				createNode(parentNode, op);
 			}
 		}

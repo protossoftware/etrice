@@ -157,18 +157,18 @@ public class JavaExtensions implements ILanguageExtension {
     if (_greaterThan) {
       _or_1 = true;
     } else {
-      RefableType _refType = a.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isPrimitive = this.typeHelpers.isPrimitive(_type);
+      RefableType _type = a.getType();
+      DataType _type_1 = _type.getType();
+      boolean _isPrimitive = this.typeHelpers.isPrimitive(_type_1);
       boolean _not = (!_isPrimitive);
       _or_1 = (_greaterThan || _not);
     }
     if (_or_1) {
       _or = true;
     } else {
-      RefableType _refType_1 = a.getRefType();
-      DataType _type_1 = _refType_1.getType();
-      String _typeName = this.typeHelpers.typeName(_type_1);
+      RefableType _type_2 = a.getType();
+      DataType _type_3 = _type_2.getType();
+      String _typeName = this.typeHelpers.typeName(_type_3);
       boolean _equals = _typeName.equals("String");
       _or = (_or_1 || _equals);
     }

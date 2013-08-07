@@ -34,7 +34,10 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -141,13 +144,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		
 		// check actor ref array upper bound
-		if (ar.getSize()<0) {
+		if (ar.getMultiplicity()<0) {
 			// multiplicity * requires optional
 			if (ar.getRefType()!=ReferenceType.OPTIONAL)
 				error(MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
 						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL);
 		}
-		else if (ar.getSize()>1) {
+		else if (ar.getMultiplicity()>1) {
 			// fixed multiplicity requires fixed type
 			if (ar.getRefType()==ReferenceType.OPTIONAL)
 				error(OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
@@ -157,8 +160,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		// check actor ref array has ports with fixed multiplicity
 		if (ar!=null) {
 			ActorClass ac = ar.getType();
-			if (ar.getSize()>1) {
-				for (Port p : ac.getIfPorts()) {
+			if (ar.getMultiplicity()>1) {
+				for (Port p : ac.getInterfacePorts()) {
 					if (p.getMultiplicity()<0) {
 						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
 						error("replicated actor must not have replicated port with arbitrary multiplicity", RoomPackage.Literals.ACTOR_CONTAINER_CLASS__ACTOR_REFS, idx);
@@ -171,7 +174,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkLayerConnectiontarget(LayerConnection lc) {
 		if (lc.getTo().getRef() instanceof ActorRef)
-			if (((ActorRef)lc.getTo().getRef()).getSize()>1) {
+			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1) {
 				int idx = ((StructureClass)lc.eContainer()).getConnections().indexOf(lc);
 				error("layer connection must not connect to replicated actor", RoomPackage.Literals.STRUCTURE_CLASS__CONNECTIONS, idx);
 			}
@@ -206,12 +209,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 		
 		while (dc!=null) {
-			if (att.getRefType().getType()==dc && !att.getRefType().isRef()) {
+			if (att.getType().getType()==dc && !att.getType().isRef()) {
 				error(
 						"Attribute type must not refer to own class or a super class",
-						RoomPackage.Literals.ATTRIBUTE__REF_TYPE,
+						RoomPackage.Literals.ATTRIBUTE__TYPE,
 						CIRCULAR_CONTAINMENT,
-						""+att.getRefType().getType().getName().length()
+						""+att.getType().getType().getName().length()
 					);
 				break;
 			}
@@ -222,8 +225,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkAttributeNoStringArray(Attribute att){
-		if(!att.getRefType().isRef() && att.getRefType().getType() instanceof PrimitiveType){
-			PrimitiveType type = (PrimitiveType)att.getRefType().getType();
+		if(!att.getType().isRef() && att.getType().getType() instanceof PrimitiveType){
+			PrimitiveType type = (PrimitiveType)att.getType().getType();
 			if(type.getName().equalsIgnoreCase("string") && att.getSize() > 0)
 				error("string type must have multiplicity 0", RoomPackage.Literals.ATTRIBUTE__SIZE);
 		}
@@ -335,7 +338,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				else {
 					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
 					if (aRef != null) {
-						if (aRef.getSize() > 1)
+						if (aRef.getMultiplicity() > 1)
 							error("no arrays of actor references supported",
 									RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 					} else
@@ -428,13 +431,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		// check external ports
 		List<InterfaceItem> extPorts = new ArrayList<InterfaceItem>();
-		for(ExternalPort exPort : ac.getExtPorts())
-			extPorts.add(exPort.getIfport());
-		checkPortCommunicationCompatibility(ac, extPorts, RoomPackage.eINSTANCE.getActorClass_ExtPorts());
+		for(ExternalPort exPort : ac.getExternalPorts())
+			extPorts.add(exPort.getInterfacePort());
+		checkPortCommunicationCompatibility(ac, extPorts, RoomPackage.eINSTANCE.getActorClass_ExternalPorts());
 		// check internal ports
-		checkPortCommunicationCompatibility(ac, ac.getIntPorts(), RoomPackage.eINSTANCE.getActorClass_IntPorts());
+		checkPortCommunicationCompatibility(ac, ac.getInternalPorts(), RoomPackage.eINSTANCE.getActorClass_InternalPorts());
 		// check SAPs
-		checkPortCommunicationCompatibility(ac, ac.getStrSAPs(), RoomPackage.eINSTANCE.getActorClass_StrSAPs());
+		checkPortCommunicationCompatibility(ac, ac.getServiceAccessPoints(), RoomPackage.eINSTANCE.getActorClass_ServiceAccessPoints());
 		// check service implementations
 		List<InterfaceItem> serviceImpls = new ArrayList<InterfaceItem>();
 		for(ServiceImplementation si: ac.getServiceImplementations())
@@ -547,17 +550,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (RoomHelpers.isConstructor(op)) {
 			if (!op.getArguments().isEmpty())
 				error("Constructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
-			if (op.getReturntype()!=null)
-				error("Constructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+			if (op.getReturnType()!=null)
+				error("Constructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}
 		else if (RoomHelpers.isDestructor(op)) {
 			if (!op.getArguments().isEmpty())
 				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
-			if (op.getReturntype()!=null)
-				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURNTYPE);
+			if (op.getReturnType()!=null)
+				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}
 		else if (op.isDestructor())
-			error("Destructor must have class name", RoomPackage.Literals.OPERATION__RETURNTYPE);
+			error("Destructor must have class name", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 	}
 	
 	@Check
@@ -633,6 +636,30 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 							RoomPackage.Literals.BINDING__ENDPOINT2);
 			}
 		}
+	}
+	
+	@Check
+	public void checkDetailCode(DetailCode dc) {
+		if (dc.getLines().isEmpty())
+			error("detail code must not be empty", dc, RoomPackage.Literals.DETAIL_CODE__LINES);
+	}
+	
+	@Check
+	public void checkDocumentation(Documentation doc) {
+		if (doc.getLines().isEmpty())
+			error("documentation must not be empty", doc, RoomPackage.Literals.DOCUMENTATION__LINES);
+	}
+	
+	@Check
+	public void checkPortClassContents(PortClass pc) {
+		if (pc.getAttributes().isEmpty() && pc.getMsgHandlers().isEmpty() && pc.getOperations().isEmpty())
+			error("port class must not be empty", pc, RoomPackage.Literals.PORT_CLASS__ATTRIBUTES);
+	}
+	
+	@Check
+	public void checkCompoundProtocolClass(CompoundProtocolClass cpc) {
+		if (cpc.getSubProtocols().isEmpty())
+			error("no sub protocols defined", cpc, RoomPackage.Literals.COMPOUND_PROTOCOL_CLASS__SUB_PROTOCOLS);
 	}
 	
 	private void error(Result result) {

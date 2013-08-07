@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
@@ -68,12 +68,12 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 	
-	private SPPRef spp;
+	private SPP spp;
 	private IScope scope;
 	private boolean newSPP;
 	private boolean refitem;
 
-	public SPPPropertyDialog(Shell shell, SPPRef spp, IScope scope, boolean newSPP, boolean refitem) {
+	public SPPPropertyDialog(Shell shell, SPP spp, IScope scope, boolean newSPP, boolean refitem) {
 		super(shell, "Edit SPP");
 		this.spp = spp;
 		this.scope = scope;
@@ -104,7 +104,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		}
 		
 		Text name = createText(body, "Name:", spp, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
-		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getSPPRef_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getSPP_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		
 		if (!newSPP) {
 			// TODOHRR: check whether spp is used externally?

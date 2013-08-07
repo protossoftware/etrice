@@ -148,7 +148,7 @@ class DataClassGen {
 			«IF ctor!=null»
 			{
 				// user defined constructor body
-				«FOR l : ctor.detailCode.commands»
+				«FOR l : ctor.detailCode.lines»
 					«l»
 				«ENDFOR»
 			}
@@ -237,7 +237,7 @@ class DataClassGen {
 	}
 	
 	def argListConstructor(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»_«ENDFOR»'''
+		'''«FOR a : attributes SEPARATOR ", "»«a.type.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»_«ENDFOR»'''
 	}
 
 	
@@ -255,7 +255,7 @@ class DataClassGen {
 	def deepCopy(List<Attribute> attributes) {
 		'''
 		«FOR a : attributes»
-			«IF a.refType.type instanceof ComplexType»
+			«IF a.type.type instanceof ComplexType»
 				if («a.name»!=null) {
 					«IF a.size==0»
 						copy.«a.name» = «a.name».deepCopy();

@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * @generated
    * @ordered
    */
-  protected SPPRef relay;
+  protected SPP relay;
 
   /**
    * <!-- begin-user-doc -->
@@ -64,12 +64,12 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef getRelay()
+  public SPP getRelay()
   {
     if (relay != null && relay.eIsProxy())
     {
       InternalEObject oldRelay = (InternalEObject)relay;
-      relay = (SPPRef)eResolveProxy(oldRelay);
+      relay = (SPP)eResolveProxy(oldRelay);
       if (relay != oldRelay)
       {
         if (eNotificationRequired())
@@ -84,7 +84,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef basicGetRelay()
+  public SPP basicGetRelay()
   {
     return relay;
   }
@@ -94,9 +94,9 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRelay(SPPRef newRelay)
+  public void setRelay(SPP newRelay)
   {
-    SPPRef oldRelay = relay;
+    SPP oldRelay = relay;
     relay = newRelay;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.RELAY_SA_POINT__RELAY, oldRelay, relay));
@@ -130,7 +130,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
     switch (featureID)
     {
       case RoomPackage.RELAY_SA_POINT__RELAY:
-        setRelay((SPPRef)newValue);
+        setRelay((SPP)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -147,7 +147,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
     switch (featureID)
     {
       case RoomPackage.RELAY_SA_POINT__RELAY:
-        setRelay((SPPRef)null);
+        setRelay((SPP)null);
         return;
     }
     super.eUnset(featureID);

@@ -272,10 +272,10 @@ public class CppExtensions implements ILanguageExtension {
                 _builder.appendImmediate(",", "	");
               }
               _builder.append("\t");
-              RefableType _refType = att.getRefType();
-              DataType _type = _refType.getType();
+              RefableType _type = att.getType();
+              DataType _type_1 = _type.getType();
               int _size = att.getSize();
-              String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size);
+              String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type_1, _size);
               _builder.append(_initializationWithDefaultValues, "	");
               _builder.newLineIfNotEmpty();
             }

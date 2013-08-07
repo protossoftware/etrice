@@ -409,9 +409,9 @@ public class VariableServiceGen {
             List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc_1);
             for(final Attribute a_2 : _allAttributes) {
               {
-                RefableType _refType = a_2.getRefType();
-                DataType _type = _refType.getType();
-                boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+                RefableType _type = a_2.getType();
+                DataType _type_1 = _type.getType();
+                boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
                 if (_isPrimitive) {
                   _builder.append("\t");
                   _builder.append("\t");
@@ -509,9 +509,9 @@ public class VariableServiceGen {
           boolean _greaterThan = (_size > 0);
           if (_greaterThan) {
             _builder.append("for(");
-            RefableType _refType = a.getRefType();
-            DataType _type = _refType.getType();
-            String _typeName = this._typeHelpers.typeName(_type);
+            RefableType _type = a.getType();
+            DataType _type_1 = _type.getType();
+            String _typeName = this._typeHelpers.typeName(_type_1);
             _builder.append(_typeName, "");
             _builder.append(" e : ");
             _builder.append(aVarName, "");
@@ -569,13 +569,13 @@ public class VariableServiceGen {
           List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
           final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
               public void apply(final Attribute a) {
-                RefableType _refType = a.getRefType();
-                DataType _type = _refType.getType();
-                boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type);
+                RefableType _type = a.getType();
+                DataType _type_1 = _type.getType();
+                boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
                 if (_isDataClass) {
-                  RefableType _refType_1 = a.getRefType();
-                  DataType _type_1 = _refType_1.getType();
-                  result.add(((DataClass) _type_1));
+                  RefableType _type_2 = a.getType();
+                  DataType _type_3 = _type_2.getType();
+                  result.add(((DataClass) _type_3));
                 }
               }
             };
@@ -602,13 +602,13 @@ public class VariableServiceGen {
         List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
         final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
             public void apply(final Attribute a) {
-              RefableType _refType = a.getRefType();
-              DataType _type = _refType.getType();
-              boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type);
+              RefableType _type = a.getType();
+              DataType _type_1 = _type.getType();
+              boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
               if (_isDataClass) {
-                RefableType _refType_1 = a.getRefType();
-                DataType _type_1 = _refType_1.getType();
-                visit.add(((DataClass) _type_1));
+                RefableType _type_2 = a.getType();
+                DataType _type_3 = _type_2.getType();
+                visit.add(((DataClass) _type_3));
               }
             }
           };
@@ -672,9 +672,9 @@ public class VariableServiceGen {
     {
       final Attribute a = IterableExtensions.<Attribute>last(path);
       CharSequence _xifexpression = null;
-      RefableType _refType = a.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+      RefableType _type = a.getType();
+      DataType _type_1 = _type.getType();
+      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("values.put(\"");
@@ -707,15 +707,15 @@ public class VariableServiceGen {
         _xifexpression = _builder;
       } else {
         CharSequence _xifexpression_1 = null;
-        RefableType _refType_1 = a.getRefType();
-        DataType _type_1 = _refType_1.getType();
-        boolean _isDataClass = this._typeHelpers.isDataClass(_type_1);
+        RefableType _type_2 = a.getType();
+        DataType _type_3 = _type_2.getType();
+        boolean _isDataClass = this._typeHelpers.isDataClass(_type_3);
         if (_isDataClass) {
           CharSequence _xblockexpression_1 = null;
           {
-            RefableType _refType_2 = a.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            DataClass dataClass = ((DataClass) _type_2);
+            RefableType _type_4 = a.getType();
+            DataType _type_5 = _type_4.getType();
+            DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
@@ -743,9 +743,9 @@ public class VariableServiceGen {
       Attribute a = IterableExtensions.<Attribute>last(path);
       String aVarName = this.toAbsolutePath(path, "_");
       CharSequence _xifexpression = null;
-      RefableType _refType = a.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+      RefableType _type = a.getType();
+      DataType _type_1 = _type.getType();
+      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("id = \"");
@@ -759,15 +759,15 @@ public class VariableServiceGen {
           int _size = a.getSize();
           boolean _equals = (_size == 0);
           if (_equals) {
-            RefableType _refType_1 = a.getRefType();
-            DataType _type_1 = _refType_1.getType();
-            String _typeName = this._typeHelpers.typeName(_type_1);
+            RefableType _type_2 = a.getType();
+            DataType _type_3 = _type_2.getType();
+            String _typeName = this._typeHelpers.typeName(_type_3);
             String _wrapper = this.stdExt.toWrapper(_typeName);
             _builder.append(_wrapper, "");
           } else {
-            RefableType _refType_2 = a.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            String _typeName_1 = this._typeHelpers.typeName(_type_2);
+            RefableType _type_4 = a.getType();
+            DataType _type_5 = _type_4.getType();
+            String _typeName_1 = this._typeHelpers.typeName(_type_5);
             _builder.append(_typeName_1, "");
             _builder.append("[]");
           }
@@ -783,9 +783,9 @@ public class VariableServiceGen {
         _builder.append("\t");
         _builder.append(aVarName, "	");
         _builder.append(" = ensure");
-        RefableType _refType_3 = a.getRefType();
-        DataType _type_3 = _refType_3.getType();
-        String _typeName_2 = this._typeHelpers.typeName(_type_3);
+        RefableType _type_6 = a.getType();
+        DataType _type_7 = _type_6.getType();
+        String _typeName_2 = this._typeHelpers.typeName(_type_7);
         String _firstUpper = StringExtensions.toFirstUpper(_typeName_2);
         _builder.append(_firstUpper, "	");
         {
@@ -831,15 +831,15 @@ public class VariableServiceGen {
           int _size_5 = a.getSize();
           boolean _equals_2 = (_size_5 == 0);
           if (_equals_2) {
-            RefableType _refType_4 = a.getRefType();
-            DataType _type_4 = _refType_4.getType();
-            String _typeName_3 = this._typeHelpers.typeName(_type_4);
+            RefableType _type_8 = a.getType();
+            DataType _type_9 = _type_8.getType();
+            String _typeName_3 = this._typeHelpers.typeName(_type_9);
             String _wrapper_1 = this.stdExt.toWrapper(_typeName_3);
             _builder.append(_wrapper_1, "	");
           } else {
-            RefableType _refType_5 = a.getRefType();
-            DataType _type_5 = _refType_5.getType();
-            String _typeName_4 = this._typeHelpers.typeName(_type_5);
+            RefableType _type_10 = a.getType();
+            DataType _type_11 = _type_10.getType();
+            String _typeName_4 = this._typeHelpers.typeName(_type_11);
             _builder.append(_typeName_4, "	");
             _builder.append("[]");
           }
@@ -857,15 +857,15 @@ public class VariableServiceGen {
         _xifexpression = _builder;
       } else {
         CharSequence _xifexpression_1 = null;
-        RefableType _refType_6 = a.getRefType();
-        DataType _type_6 = _refType_6.getType();
-        boolean _isDataClass = this._typeHelpers.isDataClass(_type_6);
+        RefableType _type_12 = a.getType();
+        DataType _type_13 = _type_12.getType();
+        boolean _isDataClass = this._typeHelpers.isDataClass(_type_13);
         if (_isDataClass) {
           CharSequence _xblockexpression_1 = null;
           {
-            RefableType _refType_7 = a.getRefType();
-            DataType _type_7 = _refType_7.getType();
-            DataClass dataClass = ((DataClass) _type_7);
+            RefableType _type_14 = a.getType();
+            DataType _type_15 = _type_14.getType();
+            DataClass dataClass = ((DataClass) _type_15);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
@@ -893,9 +893,9 @@ public class VariableServiceGen {
       Attribute a = IterableExtensions.<Attribute>last(path);
       String aVarName = this.toAbsolutePath(path, "_");
       CharSequence _xifexpression = null;
-      RefableType _refType = a.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+      RefableType _type = a.getType();
+      DataType _type_1 = _type.getType();
+      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
       if (_isPrimitive) {
         CharSequence _xblockexpression_1 = null;
         {
@@ -945,15 +945,15 @@ public class VariableServiceGen {
         _xifexpression = _xblockexpression_1;
       } else {
         CharSequence _xifexpression_1 = null;
-        RefableType _refType_1 = a.getRefType();
-        DataType _type_1 = _refType_1.getType();
-        boolean _isDataClass = this._typeHelpers.isDataClass(_type_1);
+        RefableType _type_2 = a.getType();
+        DataType _type_3 = _type_2.getType();
+        boolean _isDataClass = this._typeHelpers.isDataClass(_type_3);
         if (_isDataClass) {
           CharSequence _xblockexpression_2 = null;
           {
-            RefableType _refType_2 = a.getRefType();
-            DataType _type_2 = _refType_2.getType();
-            final DataClass dataClass = ((DataClass) _type_2);
+            RefableType _type_4 = a.getType();
+            DataType _type_5 = _type_4.getType();
+            final DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder = new StringConcatenation();
             {
               List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);

@@ -106,13 +106,13 @@ public class PortSupport extends InterfaceItemSupport {
 		        if (acc instanceof ActorClass) {
 		        	ActorClass ac = (ActorClass) acc;
 		        	if (internal)
-		        		ac.getIntPorts().add(port);
+		        		ac.getInternalPorts().add(port);
 		        	else {
-		        		ac.getIfPorts().add(port);
+		        		ac.getInterfacePorts().add(port);
 		        		
 						xp = RoomFactory.eINSTANCE.createExternalPort();
-						xp.setIfport(port);
-						ac.getExtPorts().add(xp);
+						xp.setInterfacePort(port);
+						ac.getExternalPorts().add(xp);
 		        	}
 		        }
 		        else if (acc instanceof SubSystemClass) {
@@ -131,10 +131,10 @@ public class PortSupport extends InterfaceItemSupport {
 			        if (acc instanceof ActorClass) {
 			        	ActorClass ac = (ActorClass) acc;
 			        	if (internal)
-			        		ac.getIntPorts().remove(port);
+			        		ac.getInternalPorts().remove(port);
 			        	else {
-			        		ac.getIfPorts().remove(port);
-							ac.getExtPorts().remove(xp);
+			        		ac.getInterfacePorts().remove(port);
+							ac.getExternalPorts().remove(xp);
 			        	}
 			        }
 			        else if (acc instanceof SubSystemClass) {
@@ -344,8 +344,8 @@ public class PortSupport extends InterfaceItemSupport {
 					if (port.eContainer() instanceof ActorClass) {
 						ExternalPort external = null;
 						ActorClass ac = (ActorClass) port.eContainer();
-						for (ExternalPort extp : ac.getExtPorts()) {
-							if (extp.getIfport()==port) {
+						for (ExternalPort extp : ac.getExternalPorts()) {
+							if (extp.getInterfacePort()==port) {
 								external = extp;
 								break;
 							}

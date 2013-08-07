@@ -33,7 +33,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 
 public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 	
@@ -91,11 +91,11 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 	}
 	
 	private Port getPort(ActorClass ac, String name) {
-		for (Port p : ac.getIfPorts()) {
+		for (Port p : ac.getInterfacePorts()) {
 			if (p.getName().equals(name))
 				return p;
 		}
-		for (Port p : ac.getIntPorts()) {
+		for (Port p : ac.getInternalPorts()) {
 			if (p.getName().equals(name))
 				return p;
 		}
@@ -107,8 +107,8 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		return null;
 	}
 	
-	private SAPRef getSAP(ActorClass ac, String name) {
-		for (SAPRef sap : ac.getStrSAPs()) {
+	private SAP getSAP(ActorClass ac, String name) {
+		for (SAP sap : ac.getServiceAccessPoints()) {
 			if (sap.getName().equals(name))
 				return sap;
 		}
@@ -128,8 +128,8 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		Port subctrl = getPort(xpac.getActorClass(), "subctrl");
 		Port fct1 = getPort(xpac.getActorClass(), "fct1");
 		Port fct2 = getPort(xpac.getActorClass(), "fct2");
-		SAPRef ctrltimeout = getSAP(xpac.getActorClass(), "ctrltimeout");
-		SAPRef timeout = getSAP(xpac.getActorClass(), "timeout");
+		SAP ctrltimeout = getSAP(xpac.getActorClass(), "ctrltimeout");
+		SAP timeout = getSAP(xpac.getActorClass(), "timeout");
 		
 		int lid = 0;
 		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(base));

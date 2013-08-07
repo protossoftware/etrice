@@ -325,19 +325,19 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.SAP_REF:
+      case RoomPackage.SAP:
       {
-        SAPRef sapRef = (SAPRef)theEObject;
-        T result = caseSAPRef(sapRef);
-        if (result == null) result = caseInterfaceItem(sapRef);
+        SAP sap = (SAP)theEObject;
+        T result = caseSAP(sap);
+        if (result == null) result = caseInterfaceItem(sap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.SPP_REF:
+      case RoomPackage.SPP:
       {
-        SPPRef sppRef = (SPPRef)theEObject;
-        T result = caseSPPRef(sppRef);
-        if (result == null) result = caseInterfaceItem(sppRef);
+        SPP spp = (SPP)theEObject;
+        T result = caseSPP(spp);
+        if (result == null) result = caseInterfaceItem(spp);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1258,33 +1258,33 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>SAP Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>SAP</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>SAP Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>SAP</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSAPRef(SAPRef object)
+  public T caseSAP(SAP object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>SPP Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>SPP</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>SPP Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>SPP</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSPPRef(SPPRef object)
+  public T caseSPP(SPP object)
   {
     return null;
   }

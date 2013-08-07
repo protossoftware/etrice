@@ -105,8 +105,8 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	private void collectAttributes(AttrConfig config,
 			List<IEObjectDescription> scopes) {
-		if (config.getAttribute().getRefType().getType() instanceof DataClass) {
-			DataClass dc = (DataClass) config.getAttribute().getRefType()
+		if (config.getAttribute().getType().getType() instanceof DataClass) {
+			DataClass dc = (DataClass) config.getAttribute().getType()
 					.getType();
 			for (Attribute att : ConfigUtil
 					.filterConfigurableAttributes(RoomHelpers
@@ -149,7 +149,7 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (protocolConfig.getRegular() == config)
 			portClass = protocolConfig.getProtocol().getRegular();
 		else
-			portClass = protocolConfig.getProtocol().getConjugate();
+			portClass = protocolConfig.getProtocol().getConjugated();
 
 		if (portClass != null)
 			for (Attribute att : ConfigUtil

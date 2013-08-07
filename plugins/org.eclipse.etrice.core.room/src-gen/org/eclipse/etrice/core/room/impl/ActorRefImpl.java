@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getRefType <em>Ref Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getSize <em>Size</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
@@ -52,24 +52,24 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   protected ReferenceType refType = REF_TYPE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
+   * The default value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSize()
+   * @see #getMultiplicity()
    * @generated
    * @ordered
    */
-  protected static final int SIZE_EDEFAULT = 1;
+  protected static final int MULTIPLICITY_EDEFAULT = 1;
 
   /**
-   * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
+   * The cached value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSize()
+   * @see #getMultiplicity()
    * @generated
    * @ordered
    */
-  protected int size = SIZE_EDEFAULT;
+  protected int multiplicity = MULTIPLICITY_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -130,9 +130,9 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getSize()
+  public int getMultiplicity()
   {
-    return size;
+    return multiplicity;
   }
 
   /**
@@ -140,12 +140,12 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSize(int newSize)
+  public void setMultiplicity(int newMultiplicity)
   {
-    int oldSize = size;
-    size = newSize;
+    int oldMultiplicity = multiplicity;
+    multiplicity = newMultiplicity;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_REF__SIZE, oldSize, size));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_REF__MULTIPLICITY, oldMultiplicity, multiplicity));
   }
 
   /**
@@ -203,8 +203,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
     {
       case RoomPackage.ACTOR_REF__REF_TYPE:
         return getRefType();
-      case RoomPackage.ACTOR_REF__SIZE:
-        return getSize();
+      case RoomPackage.ACTOR_REF__MULTIPLICITY:
+        return getMultiplicity();
       case RoomPackage.ACTOR_REF__TYPE:
         if (resolve) return getType();
         return basicGetType();
@@ -225,8 +225,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
       case RoomPackage.ACTOR_REF__REF_TYPE:
         setRefType((ReferenceType)newValue);
         return;
-      case RoomPackage.ACTOR_REF__SIZE:
-        setSize((Integer)newValue);
+      case RoomPackage.ACTOR_REF__MULTIPLICITY:
+        setMultiplicity((Integer)newValue);
         return;
       case RoomPackage.ACTOR_REF__TYPE:
         setType((ActorClass)newValue);
@@ -248,8 +248,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
       case RoomPackage.ACTOR_REF__REF_TYPE:
         setRefType(REF_TYPE_EDEFAULT);
         return;
-      case RoomPackage.ACTOR_REF__SIZE:
-        setSize(SIZE_EDEFAULT);
+      case RoomPackage.ACTOR_REF__MULTIPLICITY:
+        setMultiplicity(MULTIPLICITY_EDEFAULT);
         return;
       case RoomPackage.ACTOR_REF__TYPE:
         setType((ActorClass)null);
@@ -270,8 +270,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
     {
       case RoomPackage.ACTOR_REF__REF_TYPE:
         return refType != REF_TYPE_EDEFAULT;
-      case RoomPackage.ACTOR_REF__SIZE:
-        return size != SIZE_EDEFAULT;
+      case RoomPackage.ACTOR_REF__MULTIPLICITY:
+        return multiplicity != MULTIPLICITY_EDEFAULT;
       case RoomPackage.ACTOR_REF__TYPE:
         return type != null;
     }
@@ -291,8 +291,8 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (refType: ");
     result.append(refType);
-    result.append(", size: ");
-    result.append(size);
+    result.append(", multiplicity: ");
+    result.append(multiplicity);
     result.append(')');
     return result.toString();
   }

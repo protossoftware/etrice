@@ -228,7 +228,7 @@ RoomModel StaticConfigTest {
 			Attribute float_c: float32 = "16"
 			Attribute float_i: float32 = "256"
 		}
-		conjugate PortClass
+		conjugated PortClass
 		{
 			Attribute array2_r [ 2 ]: int64 = "{11,22}"
 			Attribute array2_c [ 2 ]: int64 = "{0,0}"
@@ -246,7 +246,7 @@ RoomModel StaticConfigTest {
 		}
 
 		//SAP
-		conjugate PortClass
+		conjugated PortClass
 		{
 			Attribute sap_data_2: Data_2_dc
 

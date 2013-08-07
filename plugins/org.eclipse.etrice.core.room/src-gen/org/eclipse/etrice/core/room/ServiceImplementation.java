@@ -37,12 +37,12 @@ public interface ServiceImplementation extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Spp</em>' reference.
-   * @see #setSpp(SPPRef)
+   * @see #setSpp(SPP)
    * @see org.eclipse.etrice.core.room.RoomPackage#getServiceImplementation_Spp()
    * @model
    * @generated
    */
-  SPPRef getSpp();
+  SPP getSpp();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.ServiceImplementation#getSpp <em>Spp</em>}' reference.
@@ -52,6 +52,6 @@ public interface ServiceImplementation extends EObject
    * @see #getSpp()
    * @generated
    */
-  void setSpp(SPPRef value);
+  void setSpp(SPP value);
 
 } // ServiceImplementation

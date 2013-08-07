@@ -31,8 +31,8 @@ import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.State
 import org.eclipse.etrice.core.room.StateGraph
@@ -111,7 +111,7 @@ class RoomExtensions {
 	 */
 	def List<Port> punion(Iterable<Port> in1, Iterable<ExternalPort> in2){
 		val ret=new ArrayList<Port>()
-		in2.forEach(e|ret.add(e.ifport))
+		in2.forEach(e|ret.add(e.interfacePort))
 		ret.addAll(in1)
 		return ret
 	}
@@ -288,22 +288,22 @@ class RoomExtensions {
 	 * @return a name for the associated port class
 	 */
 	def dispatch String getPortClassName(ExternalPort p){
-		return p.ifport.getPortClassName()
+		return p.interfacePort.getPortClassName()
 	}
 	
 	/**
-	 * @param sap a {@link SAPRef}
+	 * @param sap a {@link SAP}
 	 * @return a name for the associated port class
 	 */
-	def dispatch getPortClassName(SAPRef sap) {
+	def dispatch getPortClassName(SAP sap) {
 		return sap.protocol.getPortClassName(true)
 	}
 
 	/**
-	 * @param spp a {@link SPPRef}
+	 * @param spp a {@link SPP}
 	 * @return a name for the associated port class
 	 */
-	def dispatch String getPortClassName(SPPRef spp) {
+	def dispatch String getPortClassName(SPP spp) {
 		return spp.protocol.getPortClassName(false, true)
 	}
 
@@ -342,7 +342,7 @@ class RoomExtensions {
 	 */
 	def PortClass getPortClass(ProtocolClass pc, boolean conj) {
 		if (conj)
-			return pc.conjugate
+			return pc.conjugated
 		else
 			return pc.regular
 	}
@@ -500,7 +500,7 @@ class RoomExtensions {
 	 * 		void return type
 	 */
 	def boolean overridesStop(ActorClass ac) {
-		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returntype==null)
+		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType==null)
 			|| (ac.base!=null && ac.base.overridesStop())
 	}
 

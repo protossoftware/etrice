@@ -175,7 +175,7 @@ public class DataConfigurationHelper {
 	private static void collectConfigs(AttrClassConfig config, String path,
 			Map<String, AttrClassConfig> map) {
 		Attribute a = config.getAttribute();
-		if (a.getRefType().getType() instanceof DataClass)
+		if (a.getType().getType() instanceof DataClass)
 			for (AttrClassConfig c : config.getAttributes())
 				collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
 		map.put(path, config);
@@ -184,7 +184,7 @@ public class DataConfigurationHelper {
 	private static void collectConfigs(AttrInstanceConfig config, String path,
 			Map<String, AttrInstanceConfig> map) {
 		Attribute a = config.getAttribute();
-		if (a.getRefType().getType() instanceof DataClass)
+		if (a.getType().getType() instanceof DataClass)
 			for (AttrInstanceConfig c : config.getAttributes())
 				collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
 		map.put(path, config);

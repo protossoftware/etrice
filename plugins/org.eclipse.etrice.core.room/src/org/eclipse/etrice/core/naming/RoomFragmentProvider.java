@@ -41,7 +41,7 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -70,7 +70,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		}
 		
 		@Override
-		public String caseSPPRef(SPPRef spp) {
+		public String caseSPP(SPP spp) {
 			return doSwitch(spp.eContainer())+SEP+spp.getName();
 		}
 		
@@ -234,7 +234,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 
 	public static boolean isSPP(EObject obj) {
 		URI uri = EcoreUtil.getURI(obj);
-		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getSPPRef().getName());
+		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getSPP().getName());
 	}
 
 	public static boolean isBinding(EObject obj) {
@@ -356,7 +356,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			if (type.equals(RoomPackage.eINSTANCE.getPort().getName())) {
 				return getPort(rc, remainder);
 			}
-			else if (type.equals(RoomPackage.eINSTANCE.getSPPRef().getName())) {
+			else if (type.equals(RoomPackage.eINSTANCE.getSPP().getName())) {
 				return getSPP(rc, remainder);
 			}
 			else if (type.equals(RoomPackage.eINSTANCE.getSubSystemRef().getName())
@@ -663,7 +663,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		if (sc instanceof ActorContainerClass) {
 			for (ActorRef ar : ((ActorContainerClass) sc).getActorRefs()) {
 				if (ar.getName().equals(refName)) {
-					for (SPPRef spp : ar.getType().getIfSPPs())
+					for (SPP spp : ar.getType().getServiceProvisionPoints())
 						if (spp.getName().equals(sppName)) {
 							SPPoint sppt = RoomFactory.eINSTANCE.createSPPoint();
 							sppt.setRef(ar);
@@ -676,7 +676,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		else if (sc instanceof LogicalSystem) {
 			for (SubSystemRef ssr : ((LogicalSystem) sc).getSubSystems()) {
 				if (ssr.getName().equals(refName)) {
-					for (SPPRef spp: ssr.getType().getIfSPPs())
+					for (SPP spp: ssr.getType().getServiceProvisionPoints())
 						if (spp.getName().equals(sppName)) {
 							SPPoint sppt = RoomFactory.eINSTANCE.createSPPoint();
 							sppt.setRef(ssr);
@@ -721,7 +721,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 
 	private SAPoint getRelaySAPoint(StructureClass sc, String name) {
 		if (sc instanceof ActorContainerClass) {
-			for (SPPRef spp : ((ActorContainerClass) sc).getIfSPPs()) {
+			for (SPP spp : ((ActorContainerClass) sc).getServiceProvisionPoints()) {
 				if (spp.getName().equals(name)) {
 					RelaySAPoint sapt = RoomFactory.eINSTANCE.createRelaySAPoint();
 					sapt.setRelay(spp);
@@ -773,11 +773,11 @@ public class RoomFragmentProvider implements IFragmentProvider {
 
 	protected Port getPort(RoomClass rc, String name) {
 		if (rc instanceof ActorClass) {
-			for (Port p : ((ActorClass) rc).getIfPorts()) {
+			for (Port p : ((ActorClass) rc).getInterfacePorts()) {
 				if (p.getName().equals(name))
 					return p;
 			}
-			for (Port p : ((ActorClass) rc).getIntPorts()) {
+			for (Port p : ((ActorClass) rc).getInternalPorts()) {
 				if (p.getName().equals(name))
 					return p;
 			}
@@ -793,9 +793,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		return null;
 	}
 
-	protected SPPRef getSPP(RoomClass rc, String name) {
+	protected SPP getSPP(RoomClass rc, String name) {
 		if (rc instanceof ActorContainerClass) {
-			for (SPPRef spp : ((ActorContainerClass) rc).getIfSPPs()) {
+			for (SPP spp : ((ActorContainerClass) rc).getServiceProvisionPoints()) {
 				if (spp.getName().equals(name))
 					return spp;
 			}

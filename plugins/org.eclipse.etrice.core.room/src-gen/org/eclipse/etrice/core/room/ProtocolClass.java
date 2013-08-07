@@ -46,7 +46,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getIncomingMessages <em>Incoming Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getOutgoingMessages <em>Outgoing Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getRegular <em>Regular</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getConjugate <em>Conjugate</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getSemantics <em>Semantics</em>}</li>
  * </ul>
  * </p>
@@ -250,30 +250,30 @@ public interface ProtocolClass extends GeneralProtocolClass
   void setRegular(PortClass value);
 
   /**
-   * Returns the value of the '<em><b>Conjugate</b></em>' containment reference.
+   * Returns the value of the '<em><b>Conjugated</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is the optional conjugate port class specification.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Conjugate</em>' containment reference.
-   * @see #setConjugate(PortClass)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass_Conjugate()
+   * @return the value of the '<em>Conjugated</em>' containment reference.
+   * @see #setConjugated(PortClass)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass_Conjugated()
    * @model containment="true"
    * @generated
    */
-  PortClass getConjugate();
+  PortClass getConjugated();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ProtocolClass#getConjugate <em>Conjugate</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ProtocolClass#getConjugated <em>Conjugated</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Conjugate</em>' containment reference.
-   * @see #getConjugate()
+   * @param value the new value of the '<em>Conjugated</em>' containment reference.
+   * @see #getConjugated()
    * @generated
    */
-  void setConjugate(PortClass value);
+  void setConjugated(PortClass value);
 
   /**
    * Returns the value of the '<em><b>Semantics</b></em>' containment reference.

@@ -222,13 +222,13 @@ public class ProcedureHelpers {
       int _size = attribute.getSize();
       boolean _equals = (_size == 0);
       if (_equals) {
-        RefableType _refType = attribute.getRefType();
-        DataType _type = _refType.getType();
-        String _typeName = this._typeHelpers.typeName(_type);
+        RefableType _type = attribute.getType();
+        DataType _type_1 = _type.getType();
+        String _typeName = this._typeHelpers.typeName(_type_1);
         _builder.append(_typeName, "");
         {
-          RefableType _refType_1 = attribute.getRefType();
-          boolean _isRef = _refType_1.isRef();
+          RefableType _type_2 = attribute.getType();
+          boolean _isRef = _type_2.isRef();
           if (_isRef) {
             String _pointerLiteral = this.languageExt.pointerLiteral();
             _builder.append(_pointerLiteral, "");
@@ -240,13 +240,13 @@ public class ProcedureHelpers {
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       } else {
-        RefableType _refType_2 = attribute.getRefType();
-        DataType _type_1 = _refType_2.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type_1);
+        RefableType _type_3 = attribute.getType();
+        DataType _type_4 = _type_3.getType();
+        String _typeName_1 = this._typeHelpers.typeName(_type_4);
         int _size_1 = attribute.getSize();
         String _name_1 = attribute.getName();
-        RefableType _refType_3 = attribute.getRefType();
-        boolean _isRef_1 = _refType_3.isRef();
+        RefableType _type_5 = attribute.getType();
+        boolean _isRef_1 = _type_5.isRef();
         String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
         _builder.append(_arrayDeclaration, "");
         _builder.append(";");
@@ -268,9 +268,9 @@ public class ProcedureHelpers {
       String _defaultValueLiteral_1 = att.getDefaultValueLiteral();
       _xifexpression = _defaultValueLiteral_1;
     } else {
-      RefableType _refType = att.getRefType();
-      DataType _type = _refType.getType();
-      String _defaultValue = this.languageExt.defaultValue(_type);
+      RefableType _type = att.getType();
+      DataType _type_1 = _type.getType();
+      String _defaultValue = this.languageExt.defaultValue(_type_1);
       _xifexpression = _defaultValue;
     }
     final String dflt = _xifexpression;
@@ -404,9 +404,9 @@ public class ProcedureHelpers {
     _builder.append(" (");
     String _selfPointer = this.languageExt.selfPointer(classname, true);
     _builder.append(_selfPointer, "");
-    RefableType _refType = attribute.getRefType();
-    DataType _type = _refType.getType();
-    String _typeName = this._typeHelpers.typeName(_type);
+    RefableType _type = attribute.getType();
+    DataType _type_1 = _type.getType();
+    String _typeName = this._typeHelpers.typeName(_type_1);
     _builder.append(_typeName, "");
     {
       int _size = attribute.getSize();
@@ -431,9 +431,9 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
-    RefableType _refType = attribute.getRefType();
-    DataType _type = _refType.getType();
-    String _typeName = this._typeHelpers.typeName(_type);
+    RefableType _type = attribute.getType();
+    DataType _type_1 = _type.getType();
+    String _typeName = this._typeHelpers.typeName(_type_1);
     _builder.append(_typeName, "");
     {
       int _size = attribute.getSize();
@@ -467,9 +467,9 @@ public class ProcedureHelpers {
         } else {
           _builder.appendImmediate(", ", "");
         }
-        RefableType _refType = a.getRefType();
-        DataType _type = _refType.getType();
-        String _typeName = this._typeHelpers.typeName(_type);
+        RefableType _type = a.getType();
+        DataType _type_1 = _type.getType();
+        String _typeName = this._typeHelpers.typeName(_type_1);
         _builder.append(_typeName, "");
         {
           int _size = a.getSize();
@@ -697,8 +697,8 @@ public class ProcedureHelpers {
         EList<VarDecl> _arguments = operation.getArguments();
         CharSequence _BuildArgumentList = this.BuildArgumentList(_arguments);
         String _string = _BuildArgumentList.toString();
-        RefableType _returntype = operation.getReturntype();
-        String _dataTypeToString = this.dataTypeToString(_returntype);
+        RefableType _returnType = operation.getReturnType();
+        String _dataTypeToString = this.dataTypeToString(_returnType);
         CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
         _xifexpression_1 = _classOperationSignature_2;
       }

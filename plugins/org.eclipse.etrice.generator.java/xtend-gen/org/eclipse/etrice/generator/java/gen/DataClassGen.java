@@ -205,8 +205,8 @@ public class DataClassGen {
           _builder.newLine();
           {
             DetailCode _detailCode = ctor.getDetailCode();
-            EList<String> _commands = _detailCode.getCommands();
-            for(final String l : _commands) {
+            EList<String> _lines = _detailCode.getLines();
+            for(final String l : _lines) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append(l, "			");
@@ -402,9 +402,9 @@ public class DataClassGen {
     {
       for(final Attribute a : attributes) {
         {
-          RefableType _refType = a.getRefType();
-          DataType _type = _refType.getType();
-          if ((_type instanceof ComplexType)) {
+          RefableType _type = a.getType();
+          DataType _type_1 = _type.getType();
+          if ((_type_1 instanceof ComplexType)) {
             _builder.append("if (");
             String _name = a.getName();
             _builder.append(_name, "");

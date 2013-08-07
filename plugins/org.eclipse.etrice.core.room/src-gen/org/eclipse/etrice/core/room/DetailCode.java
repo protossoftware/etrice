@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.DetailCode#getCommands <em>Commands</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.DetailCode#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface DetailCode extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Commands</b></em>' attribute list.
+   * Returns the value of the '<em><b>Lines</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -46,11 +46,11 @@ public interface DetailCode extends EObject
    * <br>This is a list of commands in the code generator's target language.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Commands</em>' attribute list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getDetailCode_Commands()
+   * @return the value of the '<em>Lines</em>' attribute list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDetailCode_Lines()
    * @model unique="false"
    * @generated
    */
-  EList<String> getCommands();
+  EList<String> getLines();
 
 } // DetailCode

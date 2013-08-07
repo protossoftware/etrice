@@ -311,22 +311,22 @@ public interface RoomFactory extends EFactory
   ExternalPort createExternalPort();
 
   /**
-   * Returns a new object of class '<em>SAP Ref</em>'.
+   * Returns a new object of class '<em>SAP</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>SAP Ref</em>'.
+   * @return a new object of class '<em>SAP</em>'.
    * @generated
    */
-  SAPRef createSAPRef();
+  SAP createSAP();
 
   /**
-   * Returns a new object of class '<em>SPP Ref</em>'.
+   * Returns a new object of class '<em>SPP</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>SPP Ref</em>'.
+   * @return a new object of class '<em>SPP</em>'.
    * @generated
    */
-  SPPRef createSPPRef();
+  SPP createSPP();
 
   /**
    * Returns a new object of class '<em>Service Implementation</em>'.

@@ -57,8 +57,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -492,9 +492,9 @@ public class RootImpl extends EObjectImpl implements Root {
 				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
 				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
 			}
-			if (pc.getConjugate()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
+			if (pc.getConjugated()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getConjugated().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getConjugated().getOperations());
 			}
 		}
 		return new BasicEList<DataClass>(dataClasses);
@@ -947,14 +947,14 @@ public class RootImpl extends EObjectImpl implements Root {
 		
 		// determine data and protocol classes used by actor classes
 		for (ActorClass ac : actorClasses) {
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getIfPorts());
+			getInterfaceItemProtocolClasses(protocolClasses, ac.getInterfacePorts());
 			// ExtPorts are in the interface and thus already covered
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getIntPorts());
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getStrSAPs());
+			getInterfaceItemProtocolClasses(protocolClasses, ac.getInternalPorts());
+			getInterfaceItemProtocolClasses(protocolClasses, ac.getServiceAccessPoints());
 			for (ServiceImplementation ispp : ac.getServiceImplementations()) {
 				protocolClasses.add(ispp.getSpp().getProtocol());
 			}
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getIfSPPs());
+			getInterfaceItemProtocolClasses(protocolClasses, ac.getServiceProvisionPoints());
 			getAttributeDataClasses(dataClasses, ac.getAttributes());
 			getOperationDataClasses(dataClasses, ac.getOperations());
 		}
@@ -983,9 +983,9 @@ public class RootImpl extends EObjectImpl implements Root {
 				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
 				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
 			}
-			if (pc.getConjugate()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getConjugate().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getConjugate().getOperations());
+			if (pc.getConjugated()!=null) {
+				getAttributeDataClasses(dataClasses, pc.getConjugated().getAttributes());
+				getOperationDataClasses(dataClasses, pc.getConjugated().getOperations());
 			}
 		}
 		
@@ -1025,17 +1025,17 @@ public class RootImpl extends EObjectImpl implements Root {
 		for (InterfaceItem ii : items) {
 			if (ii instanceof Port && ((Port)ii).getProtocol() instanceof ProtocolClass)
 				protocolClasses.add((ProtocolClass) ((Port)ii).getProtocol());
-			else if (ii instanceof SAPRef)
-				protocolClasses.add(((SAPRef)ii).getProtocol());
-			else if (ii instanceof SPPRef)
-				protocolClasses.add(((SPPRef)ii).getProtocol());
+			else if (ii instanceof SAP)
+				protocolClasses.add(((SAP)ii).getProtocol());
+			else if (ii instanceof SPP)
+				protocolClasses.add(((SPP)ii).getProtocol());
 		}
 	}
 
 	private void getOperationDataClasses(HashSet<DataClass> dataClasses, EList<? extends Operation> operations) {
 		for (Operation op : operations) {
-			if (op.getReturntype()!=null) {
-				DataClass dc = name2dc.get(op.getReturntype().getType().getName());
+			if (op.getReturnType()!=null) {
+				DataClass dc = name2dc.get(op.getReturnType().getType().getName());
 				if (dc!=null)
 					dataClasses.add(dc);
 			}
@@ -1053,7 +1053,7 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	private void getAttributeDataClasses(HashSet<DataClass> dataClasses, Collection<Attribute> attributes) {
 		for (Attribute attr : attributes) {
-			DataClass dc = name2dc.get(attr.getRefType().getType().getName());
+			DataClass dc = name2dc.get(attr.getType().getType().getName());
 			if (dc!=null)
 				dataClasses.add(dc);
 		}

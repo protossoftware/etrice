@@ -31,8 +31,8 @@ import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
@@ -411,7 +411,7 @@ class NodeGen {
 		replEventItems.addAll(ai.orderedIfItemInstances.filter(e|e.replicated))
 		val haveReplSubItems = replEventItems.findFirst(e|!e.peers.empty)!=null
 		val replEventPorts = replEventItems.filter(i|i.interfaceItem instanceof Port)
-		val replEventSPPs = replEventItems.filter(i|i.interfaceItem instanceof SPPRef)
+		val replEventSPPs = replEventItems.filter(i|i.interfaceItem instanceof SPP)
 		
 		val simplePorts = ai.orderedIfItemInstances.filter(e|e.simple)
 		
@@ -421,7 +421,7 @@ class NodeGen {
 		
 		// lists of event driven ports and saps
 		val simpleEventPorts = simpleEventItems.filter(i|i.interfaceItem instanceof Port)
-		val simpleEventSAPs = simpleEventItems.filter(i|i.interfaceItem instanceof SAPRef)
+		val simpleEventSAPs = simpleEventItems.filter(i|i.interfaceItem instanceof SAP)
 		
 		val dataPorts = simplePorts.filter(p|p.protocol.commType==CommunicationType::DATA_DRIVEN)
 		val recvPorts = dataPorts.filter(p|p instanceof PortInstance && !(p as PortInstance).port.conjugated)

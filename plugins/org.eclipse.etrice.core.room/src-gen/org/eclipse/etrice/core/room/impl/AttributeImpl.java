@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getRefType <em>Ref Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -76,14 +76,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   protected int size = SIZE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRefType() <em>Ref Type</em>}' containment reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRefType()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected RefableType refType;
+  protected RefableType type;
 
   /**
    * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
@@ -187,9 +187,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public RefableType getRefType()
+  public RefableType getType()
   {
-    return refType;
+    return type;
   }
 
   /**
@@ -197,13 +197,13 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRefType(RefableType newRefType, NotificationChain msgs)
+  public NotificationChain basicSetType(RefableType newType, NotificationChain msgs)
   {
-    RefableType oldRefType = refType;
-    refType = newRefType;
+    RefableType oldType = type;
+    type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__REF_TYPE, oldRefType, newRefType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -214,20 +214,20 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRefType(RefableType newRefType)
+  public void setType(RefableType newType)
   {
-    if (newRefType != refType)
+    if (newType != type)
     {
       NotificationChain msgs = null;
-      if (refType != null)
-        msgs = ((InternalEObject)refType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__REF_TYPE, null, msgs);
-      if (newRefType != null)
-        msgs = ((InternalEObject)newRefType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__REF_TYPE, null, msgs);
-      msgs = basicSetRefType(newRefType, msgs);
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ATTRIBUTE__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__REF_TYPE, newRefType, newRefType));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ATTRIBUTE__TYPE, newType, newType));
   }
 
   /**
@@ -311,8 +311,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
-      case RoomPackage.ATTRIBUTE__REF_TYPE:
-        return basicSetRefType(null, msgs);
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return basicSetType(null, msgs);
       case RoomPackage.ATTRIBUTE__DOCU:
         return basicSetDocu(null, msgs);
     }
@@ -333,8 +333,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getName();
       case RoomPackage.ATTRIBUTE__SIZE:
         return getSize();
-      case RoomPackage.ATTRIBUTE__REF_TYPE:
-        return getRefType();
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return getType();
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         return getDefaultValueLiteral();
       case RoomPackage.ATTRIBUTE__DOCU:
@@ -359,8 +359,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__SIZE:
         setSize((Integer)newValue);
         return;
-      case RoomPackage.ATTRIBUTE__REF_TYPE:
-        setRefType((RefableType)newValue);
+      case RoomPackage.ATTRIBUTE__TYPE:
+        setType((RefableType)newValue);
         return;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         setDefaultValueLiteral((String)newValue);
@@ -388,8 +388,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case RoomPackage.ATTRIBUTE__SIZE:
         setSize(SIZE_EDEFAULT);
         return;
-      case RoomPackage.ATTRIBUTE__REF_TYPE:
-        setRefType((RefableType)null);
+      case RoomPackage.ATTRIBUTE__TYPE:
+        setType((RefableType)null);
         return;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
@@ -415,8 +415,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.ATTRIBUTE__SIZE:
         return size != SIZE_EDEFAULT;
-      case RoomPackage.ATTRIBUTE__REF_TYPE:
-        return refType != null;
+      case RoomPackage.ATTRIBUTE__TYPE:
+        return type != null;
       case RoomPackage.ATTRIBUTE__DEFAULT_VALUE_LITERAL:
         return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null : !DEFAULT_VALUE_LITERAL_EDEFAULT.equals(defaultValueLiteral);
       case RoomPackage.ATTRIBUTE__DOCU:

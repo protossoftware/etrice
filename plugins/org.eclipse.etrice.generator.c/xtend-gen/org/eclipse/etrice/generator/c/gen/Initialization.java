@@ -97,15 +97,15 @@ public class Initialization {
         _or = true;
       } else {
         boolean _and = false;
-        RefableType _refType = a.getRefType();
-        boolean _isRef = _refType.isRef();
+        RefableType _type = a.getType();
+        boolean _isRef = _type.isRef();
         boolean _not = (!_isRef);
         if (!_not) {
           _and = false;
         } else {
-          RefableType _refType_1 = a.getRefType();
-          DataType _type = _refType_1.getType();
-          boolean _isPrimitive = this._typeHelpers.isPrimitive(_type);
+          RefableType _type_1 = a.getType();
+          DataType _type_2 = _type_1.getType();
+          boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_2);
           _and = (_not && _isPrimitive);
         }
         _or = (_equals || _and);
@@ -145,10 +145,10 @@ public class Initialization {
     CharSequence _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
-      RefableType _refType_1 = a.getRefType();
-      boolean _isRef = _refType_1.isRef();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
+      RefableType _type_1 = a.getType();
+      boolean _isRef = _type_1.isRef();
       if (_isRef) {
         String _xifexpression = null;
         String _defaultValueLiteral = a.getDefaultValueLiteral();
@@ -303,15 +303,15 @@ public class Initialization {
     boolean _notEquals = (!Objects.equal(value, null));
     if (_notEquals) {
       Attribute _last_1 = IterableExtensions.<Attribute>last(path);
-      RefableType _refType = _last_1.getRefType();
-      DataType _type = _refType.getType();
-      String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) _type), value);
+      RefableType _type = _last_1.getType();
+      DataType _type_1 = _type.getType();
+      String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) _type_1), value);
       _xifexpression = _valueLiteral;
     } else {
       Attribute _last_2 = IterableExtensions.<Attribute>last(path);
-      RefableType _refType_1 = _last_2.getRefType();
-      DataType _type_1 = _refType_1.getType();
-      String _defaultValue = this.languageExt.defaultValue(_type_1);
+      RefableType _type_2 = _last_2.getType();
+      DataType _type_3 = _type_2.getType();
+      String _defaultValue = this.languageExt.defaultValue(_type_3);
       _xifexpression = _defaultValue;
     }
     return _xifexpression;

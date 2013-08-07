@@ -402,8 +402,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLine();
               {
                 DetailCode _detailCode = hdlr.getDetailCode();
-                EList<String> _commands = _detailCode.getCommands();
-                for(final String command : _commands) {
+                EList<String> _lines = _detailCode.getLines();
+                for(final String command : _lines) {
                   _builder.append("\t\t\t");
                   _builder.append("\t");
                   _builder.append("\t");
@@ -733,8 +733,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t");
           {
             DetailCode _detailCode = hdlr.getDetailCode();
-            EList<String> _commands = _detailCode.getCommands();
-            for(final String command : _commands) {
+            EList<String> _lines = _detailCode.getLines();
+            for(final String command : _lines) {
               _builder.append("\t");
               _builder.append(command, "	");
               _builder.newLineIfNotEmpty();

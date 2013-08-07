@@ -122,9 +122,9 @@ class ProcedureHelpers {
 	def attributeDeclaration(Attribute attribute){
 	'''
 		«IF attribute.size==0»
-			«attribute.refType.type.typeName»«IF attribute.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
+			«attribute.type.type.typeName»«IF attribute.type.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
 		«ELSE»
-			«languageExt.arrayDeclaration(attribute.refType.type.typeName, attribute.size, attribute.name, attribute.refType.ref)»;
+			«languageExt.arrayDeclaration(attribute.type.type.typeName, attribute.size, attribute.name, attribute.type.ref)»;
 		«ENDIF» 	
 	'''	
 	}
@@ -134,7 +134,7 @@ class ProcedureHelpers {
 	 * @return the code for an array initializer
 	 */
 	def arrayInitializer(Attribute att) {
-		val dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.refType.type)
+		val dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.type.type)
 
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)
@@ -195,7 +195,7 @@ class ProcedureHelpers {
 	 * @return code for the attribute setter declaration
 	 */	
 	def private setterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
+		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.type.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
 	}
 	
 	/**
@@ -204,7 +204,7 @@ class ProcedureHelpers {
 	 * @return code for the attribute getter declaration
 	 */	
 	def private getterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»«attribute.refType.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
+		'''«languageExt.accessLevelPublic()»«attribute.type.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
 	}
 	
 	/**
@@ -212,7 +212,7 @@ class ProcedureHelpers {
 	 * @return an argument list for the attributes
 	 */
 	def argList(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
+		'''«FOR a : attributes SEPARATOR ", "»«a.type.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
 	}
 	
 	/**
@@ -321,7 +321,7 @@ class ProcedureHelpers {
 		else if (operation.destructor)
 			classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType)
 		else
-			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returntype))
+			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returnType))
 	}
 
 	/**

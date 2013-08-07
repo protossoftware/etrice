@@ -55,7 +55,7 @@ import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
@@ -229,8 +229,8 @@ public class ValidationUtil {
 			return Result.error("port with multiplicity 1 is already connected");
 
 		if (acc instanceof ActorClass) {
-			for (ExternalPort xp : ((ActorClass)acc).getExtPorts()) {
-				if (xp.getIfport()==port)
+			for (ExternalPort xp : ((ActorClass)acc).getExternalPorts()) {
+				if (xp.getInterfacePort()==port)
 					return Result.error("external end ports must not be connected");
 			}
 		}
@@ -242,7 +242,7 @@ public class ValidationUtil {
 		if (port.isReplicated())
 			return true;
 
-		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getSize()>1)
+		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getMultiplicity()>1)
 			return true;
 		
 		if (RoomHelpers.isRelay(port) && port.getProtocol() instanceof CompoundProtocolClass)
@@ -433,7 +433,7 @@ public class ValidationUtil {
 			ActorContainerRef ref = ref1!=null? ref1:ref2;
 			
 			if (ref instanceof ActorRef && ((ActorRef) ref).getRefType()==ReferenceType.OPTIONAL) {
-				if (((ActorRef) ref).getSize()==-1) {
+				if (((ActorRef) ref).getMultiplicity()==-1) {
 					// the port must have multiplicity any
 					if (local.getMultiplicity()!=-1)
 						return Result.error("local port '"+local.getName()+"' must have multiplicity any");
@@ -569,7 +569,7 @@ public class ValidationUtil {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(ac, ac.eResource().getResourceSet());
 		for (Setting ref : refs) {
 			if (ref.getEObject() instanceof ActorRef)
-				return ((ActorRef)ref.getEObject()).getSize()>1;
+				return ((ActorRef)ref.getEObject()).getMultiplicity()>1;
 		}
 		
 		return false;
@@ -600,7 +600,7 @@ public class ValidationUtil {
 		return ep.getActorRef()==ref && ep.getPort()==port;
 	}
 
-	public static boolean isRelay(SPPRef spp) {
+	public static boolean isRelay(SPP spp) {
 		ActorContainerClass acc = (ActorContainerClass) spp.eContainer();
 		if (acc instanceof ActorClass) {
 			ActorClass ac = (ActorClass) acc;
@@ -623,13 +623,13 @@ public class ValidationUtil {
 		}
 	}
 	
-	public static Result isConnectable(SPPRef src, ActorContainerRef srcRef,
-			SPPRef tgt, ActorContainerRef tgtRef, StructureClass ac) {
+	public static Result isConnectable(SPP src, ActorContainerRef srcRef,
+			SPP tgt, ActorContainerRef tgtRef, StructureClass ac) {
 		return isConnectable(src, srcRef, tgt, tgtRef, ac, null);
 	}
 	
-	public static Result isConnectable(SPPRef src, ActorContainerRef srcRef,
-			SPPRef dst, ActorContainerRef dstRef, StructureClass sc, LayerConnection exclude) {
+	public static Result isConnectable(SPP src, ActorContainerRef srcRef,
+			SPP dst, ActorContainerRef dstRef, StructureClass sc, LayerConnection exclude) {
 
 		if (sc==null) {
 			return Result.error("internal error");
@@ -652,12 +652,12 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
-	public static boolean isConnectableSrc(SPPRef src, ActorContainerRef ref,
+	public static boolean isConnectableSrc(SPP src, ActorContainerRef ref,
 			StructureClass sc) {
 		return isConnectableSrc(src, ref, sc, null);
 	}
 	
-	public static boolean isConnectableSrc(SPPRef src, ActorContainerRef ref,
+	public static boolean isConnectableSrc(SPP src, ActorContainerRef ref,
 			StructureClass sc, LayerConnection exclude) {
 		
 		if (sc==null) {
@@ -668,7 +668,7 @@ public class ValidationUtil {
 			return false;
 
 		if (ref instanceof ActorRef)
-			if (((ActorRef) ref).getSize()>1)
+			if (((ActorRef) ref).getMultiplicity()>1)
 				return false;
 		
 		// in case of ref!=null no further checks possible
@@ -683,7 +683,7 @@ public class ValidationUtil {
 		return true;
 	}
 
-	public static boolean isReferencedInModel(SPPRef spp) {
+	public static boolean isReferencedInModel(SPP spp) {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(spp, spp.eResource().getResourceSet());
 		for (Setting ref : refs) {
 			if (ref.getEObject() instanceof ServiceImplementation)
@@ -697,11 +697,11 @@ public class ValidationUtil {
 		return false;
 	}
 	
-	public static boolean isConnectedSrc(SPPRef src, StructureClass sc) {
+	public static boolean isConnectedSrc(SPP src, StructureClass sc) {
 		return isConnectedSrc(src, sc, null);
 	}
 	
-	public static boolean isConnectedSrc(SPPRef src, StructureClass sc, LayerConnection exclude) {
+	public static boolean isConnectedSrc(SPP src, StructureClass sc, LayerConnection exclude) {
 		for (LayerConnection lc : sc.getConnections()) {
 			if (lc!=exclude)
 				if (lc.getFrom() instanceof RelaySAPoint) {
@@ -726,12 +726,12 @@ public class ValidationUtil {
 		return false;
 	}
 
-	public static boolean isConnectableDst(SPPRef src, ActorContainerRef ref,
+	public static boolean isConnectableDst(SPP src, ActorContainerRef ref,
 			StructureClass sc) {
 		return isConnectableDst(src, ref, sc, null);
 	}
 	
-	public static boolean isConnectableDst(SPPRef dst, ActorContainerRef ref,
+	public static boolean isConnectableDst(SPP dst, ActorContainerRef ref,
 			StructureClass sc, LayerConnection exclude) {
 		
 		if (sc==null) {
@@ -749,11 +749,11 @@ public class ValidationUtil {
 		return true;
 	}
 	
-	public static boolean isConnectedDst(SPPRef src, ActorContainerRef acr, StructureClass sc) {
+	public static boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc) {
 		return isConnectedDst(src, acr, sc, null);
 	}
 	
-	public static boolean isConnectedDst(SPPRef src, ActorContainerRef acr, StructureClass sc, LayerConnection exclude) {
+	public static boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc, LayerConnection exclude) {
 		for (LayerConnection lc : sc.getConnections()) {
 			if (lc!=exclude)
 					if (lc.getTo().getService()==src && lc.getTo().getRef()==acr)
@@ -939,10 +939,10 @@ public class ValidationUtil {
 				return Result.ok();
 			
 			do {
-				all.addAll(ac.getIfPorts());
-				all.addAll(ac.getIntPorts());
-				all.addAll(ac.getIfSPPs());
-				all.addAll(ac.getStrSAPs());
+				all.addAll(ac.getInterfacePorts());
+				all.addAll(ac.getInternalPorts());
+				all.addAll(ac.getServiceProvisionPoints());
+				all.addAll(ac.getServiceAccessPoints());
 				
 				ac = ac.getBase();
 			}
@@ -960,7 +960,7 @@ public class ValidationUtil {
 		else if (item.eContainer() instanceof SubSystemClass) {
 			SubSystemClass ssc = (SubSystemClass) item.eContainer();
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
-			all.addAll(ssc.getIfSPPs());
+			all.addAll(ssc.getServiceProvisionPoints());
 			all.addAll(ssc.getRelayPorts());
 			
 			for (InterfaceItem ii : all) {

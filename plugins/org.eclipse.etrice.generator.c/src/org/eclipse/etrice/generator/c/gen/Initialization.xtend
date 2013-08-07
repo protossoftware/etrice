@@ -44,7 +44,7 @@ class Initialization {
 	def private String initAttributeArray(InstanceBase instance, List<Attribute> path){
 		var a = path.last
 		var COMMENT = '''		/* «a.name»«IF a.size>1»[«a.size»]«ENDIF» */'''.toString
-		if(a.size == 0 || (!a.refType.ref && a.refType.type.primitive))
+		if(a.size == 0 || (!a.type.ref && a.type.type.primitive))
 			initAttribute(instance, path)+COMMENT
 		else 
 		'''
@@ -54,8 +54,8 @@ class Initialization {
 	
 	def private initAttribute(InstanceBase instance, List<Attribute> path) {
 		var a = path.last
-		var aType = a.refType.type
-		if(a.refType.ref){
+		var aType = a.type.type
+		if(a.type.ref){
 			return if(a.defaultValueLiteral != null)
 				a.defaultValueLiteral
 			else
@@ -93,7 +93,7 @@ class Initialization {
 			}
 		if(value == null)
 			value = path.last.defaultValueLiteral
-		return if(value != null) languageExt.toValueLiteral(path.last.refType.type as PrimitiveType, value)
-			else languageExt.defaultValue(path.last.refType.type)
+		return if(value != null) languageExt.toValueLiteral(path.last.type.type as PrimitiveType, value)
+			else languageExt.defaultValue(path.last.type.type)
 	}
 }

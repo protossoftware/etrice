@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.room.SPPRef;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getIfSPPs <em>If SP Ps</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getServiceProvisionPoints <em>Service Provision Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode3 <em>User Code3</em>}</li>
@@ -43,14 +43,14 @@ import org.eclipse.etrice.core.room.SPPRef;
 public class ActorContainerClassImpl extends StructureClassImpl implements ActorContainerClass
 {
   /**
-   * The cached value of the '{@link #getIfSPPs() <em>If SP Ps</em>}' containment reference list.
+   * The cached value of the '{@link #getServiceProvisionPoints() <em>Service Provision Points</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIfSPPs()
+   * @see #getServiceProvisionPoints()
    * @generated
    * @ordered
    */
-  protected EList<SPPRef> ifSPPs;
+  protected EList<SPP> serviceProvisionPoints;
 
   /**
    * The cached value of the '{@link #getUserCode1() <em>User Code1</em>}' containment reference.
@@ -118,13 +118,13 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SPPRef> getIfSPPs()
+  public EList<SPP> getServiceProvisionPoints()
   {
-    if (ifSPPs == null)
+    if (serviceProvisionPoints == null)
     {
-      ifSPPs = new EObjectContainmentEList<SPPRef>(SPPRef.class, this, RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS);
+      serviceProvisionPoints = new EObjectContainmentEList<SPP>(SPP.class, this, RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS);
     }
-    return ifSPPs;
+    return serviceProvisionPoints;
   }
 
   /**
@@ -295,8 +295,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
-        return ((InternalEList<?>)getIfSPPs()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS:
+        return ((InternalEList<?>)getServiceProvisionPoints()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
         return basicSetUserCode1(null, msgs);
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
@@ -319,8 +319,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
-        return getIfSPPs();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS:
+        return getServiceProvisionPoints();
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
         return getUserCode1();
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:
@@ -344,9 +344,9 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
-        getIfSPPs().clear();
-        getIfSPPs().addAll((Collection<? extends SPPRef>)newValue);
+      case RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS:
+        getServiceProvisionPoints().clear();
+        getServiceProvisionPoints().addAll((Collection<? extends SPP>)newValue);
         return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
         setUserCode1((DetailCode)newValue);
@@ -375,8 +375,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
-        getIfSPPs().clear();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS:
+        getServiceProvisionPoints().clear();
         return;
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
         setUserCode1((DetailCode)null);
@@ -404,8 +404,8 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CONTAINER_CLASS__IF_SP_PS:
-        return ifSPPs != null && !ifSPPs.isEmpty();
+      case RoomPackage.ACTOR_CONTAINER_CLASS__SERVICE_PROVISION_POINTS:
+        return serviceProvisionPoints != null && !serviceProvisionPoints.isEmpty();
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE1:
         return userCode1 != null;
       case RoomPackage.ACTOR_CONTAINER_CLASS__USER_CODE2:

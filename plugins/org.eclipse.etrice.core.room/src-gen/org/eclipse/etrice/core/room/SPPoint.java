@@ -63,12 +63,12 @@ public interface SPPoint extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Service</em>' reference.
-   * @see #setService(SPPRef)
+   * @see #setService(SPP)
    * @see org.eclipse.etrice.core.room.RoomPackage#getSPPoint_Service()
    * @model
    * @generated
    */
-  SPPRef getService();
+  SPP getService();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.SPPoint#getService <em>Service</em>}' reference.
@@ -78,6 +78,6 @@ public interface SPPoint extends EObject
    * @see #getService()
    * @generated
    */
-  void setService(SPPRef value);
+  void setService(SPP value);
 
 } // SPPoint

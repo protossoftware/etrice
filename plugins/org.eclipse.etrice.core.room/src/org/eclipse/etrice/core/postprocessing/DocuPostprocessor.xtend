@@ -140,7 +140,7 @@ class DocuPostprocessor {
 			</ul>
 		''')
 		
-		cls.getReference("ifSPPs").setDocumentation(
+		cls.getReference("serviceProvisionPoints").setDocumentation(
 			'''
 				This is a list of all interface SPPs.
 			''')
@@ -347,7 +347,7 @@ class DocuPostprocessor {
 				The default is scalar ({@code size=1}), values {@code >1} indicate an array.
 			''')
 			
-		cls.getReference("refType").setDocumentation(
+		cls.getReference("type").setDocumentation(
 			'''
 				This is the attribute's type.
 			''')
@@ -382,7 +382,7 @@ class DocuPostprocessor {
 				This is a list of arguments for the operation.
 			''')
 		
-		cls.getReference("returntype").setDocumentation(
+		cls.getReference("returnType").setDocumentation(
 			'''
 				This is an optional return type of the operation.
 			''')
@@ -527,7 +527,7 @@ class DocuPostprocessor {
 				This is the optional regular port class specification.
 			''')
 		
-		cls.getReference("conjugate").setDocumentation(
+		cls.getReference("conjugated").setDocumentation(
 			'''
 				This is the optional conjugate port class specification.
 			''')
@@ -738,8 +738,8 @@ class DocuPostprocessor {
 			  <li>Structure: all internal structural aspects of an actor class</li>
 			  <ul>
 			    <li>{@link #getUsercode1}-3: user defined code with generator dependent meaning</li>
-			    <li>{@link #getIntPorts}: a list of all internal end {@link Port}s</li>
-			    <li>{@link #getExtPorts}: a list of all {@link ExternalPort}s (the interface ports that
+			    <li>{@link #getInternalPorts}: a list of all internal end {@link Port}s</li>
+			    <li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that
 			       are end ports, not relay ports</li>
 			    <li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s</li>
 			    <li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class</li>
@@ -780,17 +780,17 @@ class DocuPostprocessor {
 				and state machine are inherited.
 			''')
 		
-		cls.getReference("ifPorts").setDocumentation(
+		cls.getReference("interfacePorts").setDocumentation(
 			'''
 				This is a list containing all ports of the actor interface.
 			''')
 		
-		cls.getReference("intPorts").setDocumentation(
+		cls.getReference("internalPorts").setDocumentation(
 			'''
 				This is a list containing all ports of the actor structure (internal end ports).
 			''')
 		
-		cls.getReference("extPorts").setDocumentation(
+		cls.getReference("externalPorts").setDocumentation(
 			'''
 				This is a list containing all ports of the actor interface that are end ports.
 			''')
@@ -805,7 +805,7 @@ class DocuPostprocessor {
 				This is a list of all service implementations.
 			''')
 		
-		cls.getReference("strSAPs").setDocumentation(
+		cls.getReference("serviceAccessPoints").setDocumentation(
 			'''
 				This is a list of all SAPs.
 			''')
@@ -910,13 +910,13 @@ class DocuPostprocessor {
 			@see {@link Port}
 		''')
 		
-		cls.getReference("ifport").setDocumentation(
+		cls.getReference("interfacePort").setDocumentation(
 			'''
 				This is the referenced interface port of the actor class which is now an external end port.
 			''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("SAPRef")
+		cls = pckg.getClass("SAP")
 		cls.setDocumentation('''
 			A service access point is similar to a {@link Port} but is not explicitly bound to a peer.
 			Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the
@@ -933,7 +933,7 @@ class DocuPostprocessor {
 			''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("SPPRef")
+		cls = pckg.getClass("SPP")
 		cls.setDocumentation('''
 			A service provision point is used to connect an actor class with a {@link ServiceImplementation}.
 			It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})
@@ -1214,7 +1214,7 @@ class DocuPostprocessor {
 				This is the type (i.e. actor class) of the actor ref.
 			''')
 		
-		cls.getAttribute("size").setDocumentation(
+		cls.getAttribute("multiplicity").setDocumentation(
 			'''
 				If the size is >1 then this is a replicated actor.
 			''')
@@ -1353,7 +1353,7 @@ class DocuPostprocessor {
 			</p>
 		''')
 			
-		cls.getAttribute("commands").setDocumentation(
+		cls.getAttribute("lines").setDocumentation(
 			'''
 				This is a list of commands in the code generator's target language.
 			''')
@@ -1693,7 +1693,7 @@ class DocuPostprocessor {
 			certain places in the model.
 		''')
 		
-		cls.getAttribute("text").setDocumentation(
+		cls.getAttribute("lines").setDocumentation(
 			'''
 				This is the documentation's contents.
 			''')

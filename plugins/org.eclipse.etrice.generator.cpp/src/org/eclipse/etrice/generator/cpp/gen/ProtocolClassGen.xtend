@@ -24,8 +24,8 @@ import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -255,7 +255,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«FOR hdlr : pc.getReceiveHandlers(conj)»
 				case «pc.name»::«hdlr.msg.getCodeName()»:
 					{
-						«FOR command : hdlr.detailCode.commands»
+						«FOR command : hdlr.detailCode.lines»
 						«command»
 						«ENDFOR»
 					}
@@ -365,7 +365,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def messageSignatureExplicit(Message m) {
 		var dc = (m.data.refType.type as DataClass)
-		'''public: void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
+		'''public: void «m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
 	}
 
 	def messageSignatureDefinition(Message m, String classPrefix) {
@@ -374,7 +374,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def messageSignatureExplicitDefinition(Message m, String classPrefix) {
 		var dc = (m.data.refType.type as DataClass)
-		'''void «classPrefix»::«m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.refType.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
+		'''void «classPrefix»::«m.name»(«IF dc.base!=null»«dc.base.typeName» _super, «ENDIF»«FOR a : dc.attributes SEPARATOR ", "»«a.type.type.typeName»«IF a.size>1»[]«ENDIF» «a.name»«ENDFOR»)'''
 	}
 
 //	def messageCall(Message m) {
@@ -396,7 +396,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 			«messageSignatureDefinition(m, classPrefix)» {
 				«IF hdlr!=null»
-					«FOR command : hdlr.detailCode.commands»	«command»
+					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
 					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
@@ -426,12 +426,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			var direction = if (p.isConjugated())"OUT_" else "IN_"
 			return enumInUse(p.getProtocol().getName(), direction+msg.getName())
 		}
-		else if (item instanceof SAPRef) {
-			var sap = item as SAPRef;
+		else if (item instanceof SAP) {
+			var sap = item as SAP;
 			return enumInUse(sap.getProtocol().getName(), "OUT_"+msg.getName())
 		}
-		else if (item instanceof SPPRef) {
-			var spp = item as SPPRef;
+		else if (item instanceof SPP) {
+			var spp = item as SPP;
 			return enumInUse(spp.getProtocol().getName(), "IN_"+msg.getName())
 		}
 

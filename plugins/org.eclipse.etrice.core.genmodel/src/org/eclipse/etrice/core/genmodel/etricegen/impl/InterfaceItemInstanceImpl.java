@@ -30,8 +30,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,10 +94,10 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 	 */
 	public ProtocolClass basicGetProtocol() {
 		InterfaceItem item = getInterfaceItem();
-		if (item instanceof SAPRef)
-			return ((SAPRef)this.getInterfaceItem()).getProtocol();
-		else if (item instanceof SPPRef)
-			return ((SPPRef)item).getProtocol();
+		if (item instanceof SAP)
+			return ((SAP)this.getInterfaceItem()).getProtocol();
+		else if (item instanceof SPP)
+			return ((SPP)item).getProtocol();
 		else if (item instanceof Port) {
 			if (((Port)item).getProtocol() instanceof ProtocolClass)
 				return (ProtocolClass) ((Port)item).getProtocol();

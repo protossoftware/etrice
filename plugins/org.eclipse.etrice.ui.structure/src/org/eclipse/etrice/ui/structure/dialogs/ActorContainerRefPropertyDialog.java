@@ -152,18 +152,18 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				if (ReferenceType.OPTIONAL.getLiteral().equals(value))
-					if (ref.getSize()>1)
+					if (ref.getMultiplicity()>1)
 						return ValidationStatus.error("replicated optional actors must have multiplicity *");
 				if (ReferenceType.FIXED.getLiteral().equals(value))
-					if (ref.getSize()<0)
+					if (ref.getMultiplicity()<0)
 						return ValidationStatus.error("replicated fixed actors must have fixed multiplicity");
 			}
 			else if (value instanceof ReferenceType) {
 				if (ReferenceType.OPTIONAL==value)
-					if (ref.getSize()>1)
+					if (ref.getMultiplicity()>1)
 						return ValidationStatus.error("replicated optional actors must have multiplicity *");
 				if (ReferenceType.FIXED==value)
-					if (ref.getSize()<0)
+					if (ref.getMultiplicity()<0)
 						return ValidationStatus.error("replicated fixed actors must have fixed multiplicity");
 			}
 			return Status.OK_STATUS;
@@ -236,7 +236,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		if (ref instanceof ActorRef) {
 			Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 			String2MultiplicityConverter s2m = new String2MultiplicityConverter();
-			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Size(), new SizeValidator(((ActorRef) ref)), s2m, m2s, false);
+			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Multiplicity(), new SizeValidator(((ActorRef) ref)), s2m, m2s, false);
 			if (hasInterfacePortWithMultiplicityAny(((ActorRef) ref).getType())) {
 				size.setEnabled(false);
 				createInfoDecorator(size, "size fixed since actor has interface ports with multiplicity *");
@@ -262,7 +262,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		if (ac==null)
 			return false;
 		
-		for (Port p : ac.getIfPorts()) {
+		for (Port p : ac.getInterfacePorts()) {
 			if (p.getMultiplicity()<0)
 				return true;
 		}

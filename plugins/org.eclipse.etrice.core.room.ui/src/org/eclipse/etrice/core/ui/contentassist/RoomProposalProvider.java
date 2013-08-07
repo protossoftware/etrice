@@ -158,7 +158,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
 					if (ref instanceof ActorRef) {
 						ActorRef aRef = (ActorRef) ref;
-						if (aRef.getSize() == 1)
+						if (aRef.getMultiplicity() == 1)
 							refs.add((ActorRef) ref);
 					}
 				}

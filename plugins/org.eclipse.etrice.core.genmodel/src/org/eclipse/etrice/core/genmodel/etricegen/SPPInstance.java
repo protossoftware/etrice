@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,12 +43,12 @@ public interface SPPInstance extends InstanceBase {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Spp</em>' reference.
-	 * @see #setSpp(SPPRef)
+	 * @see #setSpp(SPP)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getSPPInstance_Spp()
 	 * @model
 	 * @generated
 	 */
-	SPPRef getSpp();
+	SPP getSpp();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getSpp <em>Spp</em>}' reference.
@@ -58,7 +58,7 @@ public interface SPPInstance extends InstanceBase {
 	 * @see #getSpp()
 	 * @generated
 	 */
-	void setSpp(SPPRef value);
+	void setSpp(SPP value);
 
 	/**
 	 * Returns the value of the '<em><b>Incoming</b></em>' reference list.

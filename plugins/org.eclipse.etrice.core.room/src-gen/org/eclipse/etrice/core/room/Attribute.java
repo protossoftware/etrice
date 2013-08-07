@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.Attribute#getRefType <em>Ref Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Attribute#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Attribute#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -93,30 +93,30 @@ public interface Attribute extends EObject
   void setSize(int value);
 
   /**
-   * Returns the value of the '<em><b>Ref Type</b></em>' containment reference.
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is the attribute's type.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Ref Type</em>' containment reference.
-   * @see #setRefType(RefableType)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_RefType()
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(RefableType)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getAttribute_Type()
    * @model containment="true"
    * @generated
    */
-  RefableType getRefType();
+  RefableType getType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#getRefType <em>Ref Type</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Attribute#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ref Type</em>' containment reference.
-   * @see #getRefType()
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
    * @generated
    */
-  void setRefType(RefableType value);
+  void setType(RefableType value);
 
   /**
    * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.

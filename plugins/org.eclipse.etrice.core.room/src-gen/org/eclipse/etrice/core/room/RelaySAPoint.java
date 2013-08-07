@@ -35,12 +35,12 @@ public interface RelaySAPoint extends SAPoint
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Relay</em>' reference.
-   * @see #setRelay(SPPRef)
+   * @see #setRelay(SPP)
    * @see org.eclipse.etrice.core.room.RoomPackage#getRelaySAPoint_Relay()
    * @model
    * @generated
    */
-  SPPRef getRelay();
+  SPP getRelay();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.RelaySAPoint#getRelay <em>Relay</em>}' reference.
@@ -50,6 +50,6 @@ public interface RelaySAPoint extends SAPoint
    * @see #getRelay()
    * @generated
    */
-  void setRelay(SPPRef value);
+  void setRelay(SPP value);
 
 } // RelaySAPoint

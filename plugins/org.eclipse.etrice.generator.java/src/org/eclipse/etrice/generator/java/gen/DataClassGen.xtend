@@ -80,7 +80,7 @@ class DataClassGen {
 					
 					{
 						// user defined constructor body
-						«FOR l : ctor.detailCode.commands»
+						«FOR l : ctor.detailCode.lines»
 							«l»
 						«ENDFOR»
 					}
@@ -151,7 +151,7 @@ class DataClassGen {
 	def private deepCopy(List<Attribute> attributes) {
 		'''
 		«FOR a : attributes»
-			«IF a.refType.type instanceof ComplexType»
+			«IF a.type.type instanceof ComplexType»
 				if («a.name»!=null) {
 					«IF a.size==0»
 						copy.«a.name» = «a.name».deepCopy();

@@ -70,7 +70,7 @@ public class BindingUtil {
 		private int getMultiplicity(BindingEndPoint ep) {
 			if (ep.getActorRef() instanceof ActorRef)
 				if (((ActorRef) ep.getActorRef()).getRefType()==ReferenceType.FIXED)
-					return ((ActorRef) ep.getActorRef()).getSize();
+					return ((ActorRef) ep.getActorRef()).getMultiplicity();
 			
 			return 1;
 		}

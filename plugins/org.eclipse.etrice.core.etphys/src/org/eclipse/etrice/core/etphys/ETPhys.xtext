@@ -39,21 +39,21 @@ NodeRef:
 
 NodeClass:
 	'NodeClass'name=ID (docu=Documentation)? '{'
-		'runtime' '=' runtime=[RuntimeClass|FQN]
-		'priomin' '=' priomin=PRIO
-		'priomax' '=' priomax=PRIO
+		('runtime' '=' runtime=[RuntimeClass|FQN] &
+		'priomin' '=' priomin=PRIO &
+		'priomax' '=' priomax=PRIO)
 		threads+=PhysicalThread*
 	'}'
 ;
 
 PhysicalThread:
 	(default?='DefaultThread' | 'Thread') name=ID '{'
-		'execmode' '=' execmode=ExecMode
-		('interval' '=' time=TIME)?
-		'prio' '=' prio=PRIO
-		'stacksize' '=' stacksize=INT
-		'msgblocksize' '=' msgblocksize=INT
-		'msgpoolsize' '=' msgpoolsize=INT
+		('execmode' '=' execmode=ExecMode &
+		('interval' '=' time=TIME)? &
+		'prio' '=' prio=PRIO &
+		'stacksize' '=' stacksize=INT &
+		'msgblocksize' '=' msgblocksize=INT &
+		'msgpoolsize' '=' msgpoolsize=INT)
 	'}'
 ;
 

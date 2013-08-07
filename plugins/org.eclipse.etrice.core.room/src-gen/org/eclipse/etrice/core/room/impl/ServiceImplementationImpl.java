@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 
 /**
@@ -37,7 +37,7 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * @generated
    * @ordered
    */
-  protected SPPRef spp;
+  protected SPP spp;
 
   /**
    * <!-- begin-user-doc -->
@@ -65,12 +65,12 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef getSpp()
+  public SPP getSpp()
   {
     if (spp != null && spp.eIsProxy())
     {
       InternalEObject oldSpp = (InternalEObject)spp;
-      spp = (SPPRef)eResolveProxy(oldSpp);
+      spp = (SPP)eResolveProxy(oldSpp);
       if (spp != oldSpp)
       {
         if (eNotificationRequired())
@@ -85,7 +85,7 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef basicGetSpp()
+  public SPP basicGetSpp()
   {
     return spp;
   }
@@ -95,9 +95,9 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSpp(SPPRef newSpp)
+  public void setSpp(SPP newSpp)
   {
-    SPPRef oldSpp = spp;
+    SPP oldSpp = spp;
     spp = newSpp;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SERVICE_IMPLEMENTATION__SPP, oldSpp, spp));
@@ -131,7 +131,7 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        setSpp((SPPRef)newValue);
+        setSpp((SPP)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -148,7 +148,7 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
     switch (featureID)
     {
       case RoomPackage.SERVICE_IMPLEMENTATION__SPP:
-        setSpp((SPPRef)null);
+        setSpp((SPP)null);
         return;
     }
     super.eUnset(featureID);

@@ -43,7 +43,7 @@ class GenericActorClassGenerator {
 		val endPorts = if (langExt.usesInheritance)
 			ac.endPorts else ac.allEndPorts
 		val strSAPs = if (langExt.usesInheritance)
-			ac.strSAPs else ac.getAllSAPs
+			ac.serviceAccessPoints else ac.getAllSAPs
 		val svcImpls = if (langExt.usesInheritance)
 			ac.serviceImplementations else ac.allServiceImplementations
 			

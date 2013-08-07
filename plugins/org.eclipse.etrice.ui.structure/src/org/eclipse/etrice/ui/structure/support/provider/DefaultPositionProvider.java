@@ -134,7 +134,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		if(sc instanceof ActorClass){
 			ActorClass base = (ActorClass)sc;
 			while(base != null){
-				intPorts.addAll(base.getIntPorts());
+				intPorts.addAll(base.getInternalPorts());
 				base = base.getBase();
 			}
 		}

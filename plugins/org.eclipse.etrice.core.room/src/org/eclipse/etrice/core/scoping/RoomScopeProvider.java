@@ -47,8 +47,8 @@ import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.SimpleState;
@@ -135,7 +135,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 */
 	private boolean isContained(Port p, EList<ExternalPort> ports) {
 		for (ExternalPort port : ports) {
-			if (port.getIfport()==p)
+			if (port.getInterfacePort()==p)
 				return true;
 		}
 		return false;
@@ -327,12 +327,12 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				protocol = (ProtocolClass) ((Port)item).getProtocol();
 				conjugated = ((Port)item).isConjugated();
 			}
-			else if (item instanceof SAPRef) {
-				protocol = ((SAPRef)item).getProtocol();
+			else if (item instanceof SAP) {
+				protocol = ((SAP)item).getProtocol();
 				conjugated = true;
 			}
-			else if (item instanceof SPPRef) {
-				protocol = ((SPPRef)item).getProtocol();
+			else if (item instanceof SPP) {
+				protocol = ((SPP)item).getProtocol();
 				conjugated = false;
 			}
 			
@@ -355,11 +355,11 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		ActorClass ac = getActorClass(mfi);
-		for (Port p : ac.getIntPorts()) {
+		for (Port p : ac.getInternalPorts()) {
 			scopes.add(EObjectDescription.create(p.getName(), p));
 		}
-		for (ExternalPort p : ac.getExtPorts()) {
-			scopes.add(EObjectDescription.create(p.getIfport().getName(), p.getIfport()));
+		for (ExternalPort p : ac.getExternalPorts()) {
+			scopes.add(EObjectDescription.create(p.getInterfacePort().getName(), p.getInterfacePort()));
 		}
 		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
@@ -430,12 +430,12 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				for (ActorClass a : classes) {
 					// collect internal and relay ports, i.e.
 					// structure ports not in interface (internal)
-					for (Port p : a.getIntPorts()) {
+					for (Port p : a.getInternalPorts()) {
 						scopes.add(EObjectDescription.create(p.getName(), p));
 					}
 					// interface ports not in structure (relay)
-					for (Port p : a.getIfPorts()) {
-						if (!isContained(p, a.getExtPorts()))
+					for (Port p : a.getInterfacePorts()) {
+						if (!isContained(p, a.getExternalPorts()))
 							scopes.add(EObjectDescription.create(p.getName(), p));
 					}
 				}
@@ -450,7 +450,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				ActorClass ac = ((ActorRef)ep.getActorRef()).getType();
 				LinkedList<ActorClass> classes = getBaseClasses(ac);
 				for (ActorClass a : classes) {
-					for (Port p : a.getIfPorts()) {
+					for (Port p : a.getInterfacePorts()) {
 						scopes.add(EObjectDescription.create(p.getName(), p));
 					}
 				}
@@ -625,7 +625,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	/**
-	 * returns a flat list of SPPRef scopes for a {@link RelaySAPoint}
+	 * returns a flat list of SPP scopes for a {@link RelaySAPoint}
 	 * @param pt
 	 * @param ref
 	 * @return a list of scopes
@@ -636,7 +636,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		ActorClass ac = getActorClass(pt);
 		LinkedList<ActorClass> classes = getBaseClasses(ac);
 		for (ActorClass a : classes) {
-			for (SPPRef spp : a.getIfSPPs()) {
+			for (SPP spp : a.getServiceProvisionPoints()) {
 				scopes.add(EObjectDescription.create(spp.getName(), spp));
 			}
 		}
@@ -672,7 +672,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	/**
-	 * returns a flat list of SPPRef scopes for a {@link SPPoint}
+	 * returns a flat list of SPP scopes for a {@link SPPoint}
 	 * @param pt
 	 * @param ref
 	 * @return a list of scopes
@@ -685,14 +685,14 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				ActorClass ac = ((ActorRef)pt.getRef()).getType();
 				LinkedList<ActorClass> classes = getBaseClasses(ac);
 				for (ActorClass a : classes) {
-					for (SPPRef spp : a.getIfSPPs()) {
+					for (SPP spp : a.getServiceProvisionPoints()) {
 						scopes.add(EObjectDescription.create(spp.getName(), spp));
 					}
 				}
 			}
 			else if (pt.getRef() instanceof SubSystemRef) {
 				SubSystemClass ssc = ((SubSystemRef)pt.getRef()).getType();
-				for (SPPRef spp : ssc.getIfSPPs()) {
+				for (SPP spp : ssc.getServiceProvisionPoints()) {
 					scopes.add(EObjectDescription.create(spp.getName(), spp));
 				}
 			}
@@ -725,7 +725,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		PortClass pcls = (PortClass) op.eContainer();
 		ProtocolClass pc = RoomHelpers.getProtocolClass(op);
 		if (pc!=null) {
-			if (pcls==pc.getConjugate())
+			if (pcls==pc.getConjugated())
 				for (Message m : pc.getIncomingMessages()) {
 					scopes.add(EObjectDescription.create(m.getName(), m));
 				}
@@ -762,7 +762,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
 		ActorClass ac = getActorClass(ep);
-		for (Port ip : ac.getIfPorts()) {
+		for (Port ip : ac.getInterfacePorts()) {
 			scopes.add(EObjectDescription.create(ip.getName(), ip));
 		}
 		

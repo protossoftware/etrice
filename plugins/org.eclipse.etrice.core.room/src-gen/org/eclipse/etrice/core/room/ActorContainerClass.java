@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getIfSPPs <em>If SP Ps</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getServiceProvisionPoints <em>Service Provision Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode3 <em>User Code3</em>}</li>
@@ -36,20 +36,20 @@ import org.eclipse.emf.common.util.EList;
 public interface ActorContainerClass extends StructureClass
 {
   /**
-   * Returns the value of the '<em><b>If SP Ps</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.SPPRef}.
+   * Returns the value of the '<em><b>Service Provision Points</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.SPP}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is a list of all interface SPPs.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>If SP Ps</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_IfSPPs()
+   * @return the value of the '<em>Service Provision Points</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass_ServiceProvisionPoints()
    * @model containment="true"
    * @generated
    */
-  EList<SPPRef> getIfSPPs();
+  EList<SPP> getServiceProvisionPoints();
 
   /**
    * Returns the value of the '<em><b>User Code1</b></em>' containment reference.

@@ -107,7 +107,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDFOR»
 			
 			//--------------------- saps
-			«FOR sap : ac.strSAPs»
+			«FOR sap : ac.serviceAccessPoints»
 				protected «sap.getPortClassName()» «sap.name» = null;
 			«ENDFOR»
 			
@@ -118,7 +118,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			
 			//--------------------- optional actors
 			«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
-				protected «sub.type.name»«IF sub.size!=1»Replicated«ENDIF»Interface «sub.name» = null;
+				protected «sub.type.name»«IF sub.multiplicity!=1»Replicated«ENDIF»Interface «sub.name» = null;
 			«ENDFOR»
 			
 			//--------------------- interface item IDs
@@ -144,7 +144,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDFOR»
 				
 				// own saps
-				«FOR sap : ac.strSAPs»
+				«FOR sap : ac.serviceAccessPoints»
 					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0);
 				«ENDFOR»
 				
@@ -156,9 +156,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 				// sub actors
 				«FOR sub : ac.actorRefs»
 					«IF sub.refType==ReferenceType.OPTIONAL»
-						«sub.name» = new «sub.type.name»«IF sub.size!=1»Replicated«ENDIF»Interface(this, "«sub.name»");
-					«ELSEIF sub.size>1»
-						for (int i=0; i<«sub.size»; ++i) {
+						«sub.name» = new «sub.type.name»«IF sub.multiplicity!=1»Replicated«ENDIF»Interface(this, "«sub.name»");
+					«ELSEIF sub.multiplicity>1»
+						for (int i=0; i<«sub.multiplicity»; ++i) {
 							«IF GlobalSettings::generateMSCInstrumentation»
 								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
 							«ENDIF»
@@ -194,7 +194,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR ep : ac.getEndPorts()»
 				«ep.portClassName.getterImplementation(ep.name, ac.name)»
 			«ENDFOR»
-			«FOR sap : ac.strSAPs»
+			«FOR sap : ac.serviceAccessPoints»
 				«sap.portClassName.getterImplementation(sap.name, ac.name)»
 			«ENDFOR»
 			«FOR svc : ac.serviceImplementations»
@@ -292,12 +292,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.refType.type instanceof PrimitiveType»
+					«IF att.type.type instanceof PrimitiveType»
 						«genSavePrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
 						«IF att.size>1»
-							for («att.refType.type.name» v: «att.name») output.writeObject(v);
+							for («att.type.type.name» v: «att.name») output.writeObject(v);
 						«ELSE»
 							output.writeObject(«att.name»);
 						«ENDIF»
@@ -316,14 +316,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.refType.type instanceof PrimitiveType»
+					«IF att.type.type instanceof PrimitiveType»
 						«genLoadPrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
 						«IF att.size>1»
-							for (int i=0; i< «att.name».length; ++i) «att.name»[i] = («att.refType.type.name») input.readObject();
+							for (int i=0; i< «att.name».length; ++i) «att.name»[i] = («att.type.type.name») input.readObject();
 						«ELSE»
-							«att.name» = («att.refType.type.name») input.readObject();
+							«att.name» = («att.type.type.name») input.readObject();
 						«ENDIF»
 					«ENDIF»
 				«ENDFOR»
@@ -332,7 +332,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genSavePrimitive(Attribute att) {
-		val type = (att.refType.type as PrimitiveType).targetName
+		val type = (att.type.type as PrimitiveType).targetName
 		val method = type.saveMethod
 		
 		if (att.size>1)
@@ -356,7 +356,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genLoadPrimitive(Attribute att) {
-		val type = (att.refType.type as PrimitiveType).targetName
+		val type = (att.type.type as PrimitiveType).targetName
 		val method = type.loadMethod
 		
 		if (att.size>1)

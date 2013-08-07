@@ -78,18 +78,18 @@ DataClass:
 	
 	
 Attribute:
-	'Attribute' name=ID ('[' size=INT ']')? ':' refType=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
+	'Attribute' name=ID ('[' size=INT ']')? ':' type=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 Operation: StandardOperation | PortOperation; 
 
 StandardOperation:
-	'Operation' (destructor?='~')? name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returntype=RefableType)))?
+	'Operation' (destructor?='~')? name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returnType=RefableType)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
 ;
 
 PortOperation:
-    'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' ( (':' ('void' | (returntype=RefableType))) | ('sends' sendsMsg=[Message|ID]) )?
+    'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' ( (':' ('void' | (returnType=RefableType))) | ('sends' sendsMsg=[Message|ID]) )?
             (docu=Documentation)?
             detailCode=DetailCode
 ; 
@@ -115,14 +115,14 @@ ProtocolClass:
 		('incoming' '{' incomingMessages+=Message* '}')?
 		('outgoing' '{' outgoingMessages+=Message* '}')?
 		('regular' 'PortClass' regular=PortClass)?
-		('conjugate' 'PortClass' conjugate=PortClass)?
+		('conjugated' 'PortClass' conjugated=PortClass)?
 		(semantics=ProtocolSemantics)?
 	'}';
 	
 CompoundProtocolClass:
 	'CompoundProtocolClass' name=ID (docu=Documentation)? '{'
 		annotations+=Annotation*
-		subProtocols+=SubProtocol+
+		subProtocols+=SubProtocol*
 	'}'
 ;
 
@@ -133,11 +133,12 @@ Message:
 	(docu=Documentation)?;
 
 PortClass:
+	{PortClass}
 	'{'
 		('usercode' userCode=DetailCode)?
 		(attributes+=Attribute |
 		operations+=PortOperation |
-		msgHandlers+=MessageHandler)+
+		msgHandlers+=MessageHandler)*
 	'}';
 
 MessageHandler: InMessageHandler|OutMessageHandler;
@@ -202,21 +203,21 @@ ActorClass:
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		annotations+=Annotation*
 		('Interface' '{'
-			ifPorts+=Port*
-			ifSPPs+=SPPRef*
+			interfacePorts+=Port*
+			serviceProvisionPoints+=SPP*
 		'}')?
 		('Structure' (structureDocu=Documentation)? '{'
 			('usercode1' userCode1=DetailCode)?
 			('usercode2' userCode2=DetailCode)?
 			('usercode3' userCode3=DetailCode)?
-			(intPorts+=Port |
-			extPorts+=ExternalPort)*
-			serviceImplementations+=ServiceImplementation*
-			strSAPs+=SAPRef*
-			attributes+=Attribute*
-			actorRefs+=ActorRef*
-			bindings+=Binding*
-			connections+=LayerConnection*
+			((internalPorts+=Port |
+			externalPorts+=ExternalPort)* &
+			actorRefs+=ActorRef* &
+			serviceImplementations+=ServiceImplementation* &
+			serviceAccessPoints+=SAP* &
+			bindings+=Binding* &
+			connections+=LayerConnection* &
+			attributes+=Attribute*)
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
 			behaviorAnnotations+=Annotation*
@@ -225,27 +226,27 @@ ActorClass:
 		'}')?
 	'}';
 
-InterfaceItem: Port | SAPRef | SPPRef;
+InterfaceItem: Port | SAP | SPP;
 
 Port:
 	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[GeneralProtocolClass|FQN] (docu=Documentation)?;
 ExternalPort:
-	'external' 'Port' ifport=[Port|ID] ;
+	'external' 'Port' interfacePort=[Port|ID] ;
 
-SAPRef:
+SAP:
 	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] ;
 
-SPPRef:
+SPP:
 	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] ;
 ServiceImplementation:
-	'ServiceImplementation' 'of' spp=[SPPRef|ID];
+	'ServiceImplementation' 'of' spp=[SPP|ID];
 
 LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
 		annotations+=Annotation*
-		subSystems+=SubSystemRef*
-		bindings+=Binding*
-		connections+=LayerConnection*
+		(subSystems+=SubSystemRef* &
+		bindings+=Binding* &
+		connections+=LayerConnection*)
 	'}';
 
 ActorContainerRef: SubSystemRef | ActorRef;
@@ -259,13 +260,13 @@ SubSystemClass:
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
-		relayPorts+=Port*
-		ifSPPs+=SPPRef*
-		actorRefs+=ActorRef*
-		bindings+=Binding*
-		connections+=LayerConnection*
-		threads+=LogicalThread*
-		actorInstanceMappings+=ActorInstanceMapping*
+		(relayPorts+=Port* &
+		serviceProvisionPoints+=SPP* &
+		actorRefs+=ActorRef* &
+		bindings+=Binding* &
+		connections+=LayerConnection* &
+		threads+=LogicalThread* &
+		actorInstanceMappings+=ActorInstanceMapping*)
 	'}';
 
 LogicalThread:
@@ -301,14 +302,14 @@ RefSAPoint:
 	'ref' ref=[ActorContainerRef|ID];
 RelaySAPoint:
 	// relays from own interface
-	'relay_sap' relay=[SPPRef|ID];
+	'relay_sap' relay=[SPP|ID];
 
 SPPoint:
-	ref=[ActorContainerRef|ID] '.'  service=[SPPRef|ID]
+	ref=[ActorContainerRef|ID] '.'  service=[SPP|ID]
 ;
 
 ActorRef:
-	(refType=ReferenceType)? 'ActorRef' name=ID (size=MULTIPLICITY)? ':' type=[ActorClass|FQN] (docu=Documentation)?;
+	(refType=ReferenceType)? 'ActorRef' name=ID (multiplicity=MULTIPLICITY)? ':' type=[ActorClass|FQN] (docu=Documentation)?;
 
 enum ReferenceType:
 	FIXED='fixed' |
@@ -367,8 +368,9 @@ RefinedState:
 // TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
 // super() keyword or flag like in Trice
 DetailCode:
+	{DetailCode}
 	'{'
-		commands+=STRING+
+		lines+=STRING*
 	'}';
 
 TrPoint: TransitionPoint | EntryPoint | ExitPoint;
@@ -464,8 +466,10 @@ Guard:
 // **************************************************************
 // general
 
-Documentation: '['
-		text+=STRING+
+Documentation:
+	{Documentation}
+	'['
+		lines+=STRING*
 	']';
 
 Annotation: '@' name=ID ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;

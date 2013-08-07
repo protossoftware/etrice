@@ -101,10 +101,10 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
   {
     if (this instanceof org.eclipse.etrice.core.room.Port)
       return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
-    else if (this instanceof org.eclipse.etrice.core.room.SAPRef)
-      return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();
-    else if (this instanceof org.eclipse.etrice.core.room.SPPRef)
-      return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();
+    else if (this instanceof org.eclipse.etrice.core.room.SAP)
+      return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();
+    else if (this instanceof org.eclipse.etrice.core.room.SPP)
+      return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();
     return null;
     
   }

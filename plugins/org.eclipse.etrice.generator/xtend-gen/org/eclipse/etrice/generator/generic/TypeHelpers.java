@@ -73,8 +73,8 @@ public class TypeHelpers {
   }
   
   public String getTypeName(final Attribute att) {
-    RefableType _refType = att.getRefType();
-    String _typeName = this.getTypeName(_refType);
+    RefableType _type = att.getType();
+    String _typeName = this.getTypeName(_type);
     return _typeName;
   }
   
@@ -99,8 +99,8 @@ public class TypeHelpers {
   }
   
   public String getPrimitiveTypeName(final Attribute att) {
-    RefableType _refType = att.getRefType();
-    String _primitiveTypeName = this.getPrimitiveTypeName(_refType);
+    RefableType _type = att.getType();
+    String _primitiveTypeName = this.getPrimitiveTypeName(_type);
     return _primitiveTypeName;
   }
   

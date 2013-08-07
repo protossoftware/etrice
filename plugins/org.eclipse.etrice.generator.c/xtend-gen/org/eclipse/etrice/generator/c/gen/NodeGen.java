@@ -50,8 +50,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -1249,7 +1249,7 @@ public class NodeGen {
       final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance i) {
             InterfaceItem _interfaceItem = i.getInterfaceItem();
-            return Boolean.valueOf((_interfaceItem instanceof SPPRef));
+            return Boolean.valueOf((_interfaceItem instanceof SPP));
           }
         };
       final Iterable<InterfaceItemInstance> replEventSPPs = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_3);
@@ -1283,7 +1283,7 @@ public class NodeGen {
       final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
           public Boolean apply(final InterfaceItemInstance i) {
             InterfaceItem _interfaceItem = i.getInterfaceItem();
-            return Boolean.valueOf((_interfaceItem instanceof SAPRef));
+            return Boolean.valueOf((_interfaceItem instanceof SAP));
           }
         };
       final Iterable<InterfaceItemInstance> simpleEventSAPs = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_7);

@@ -81,7 +81,7 @@ class JavaExtensions implements ILanguageExtension {
 	}
 	
 	def boolean needsInitialization(Attribute a){
-		a.size > 0 || !typeHelpers.isPrimitive(a.refType.type) || typeHelpers.typeName(a.refType.type).equals("String")
+		a.size > 0 || !typeHelpers.isPrimitive(a.type.type) || typeHelpers.typeName(a.type.type).equals("String")
 	}
 	
 	override String accessLevelPrivate() {"private "}

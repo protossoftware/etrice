@@ -18,7 +18,7 @@ package org.eclipse.etrice.core.room;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getRefType <em>Ref Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getSize <em>Size</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getType <em>Type</em>}</li>
  * </ul>
  * </p>
@@ -59,7 +59,7 @@ public interface ActorRef extends ActorContainerRef
   void setRefType(ReferenceType value);
 
   /**
-   * Returns the value of the '<em><b>Size</b></em>' attribute.
+   * Returns the value of the '<em><b>Multiplicity</b></em>' attribute.
    * The default value is <code>"1"</code>.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,23 +67,23 @@ public interface ActorRef extends ActorContainerRef
    * <br>If the size is >1 then this is a replicated actor.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Size</em>' attribute.
-   * @see #setSize(int)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorRef_Size()
+   * @return the value of the '<em>Multiplicity</em>' attribute.
+   * @see #setMultiplicity(int)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorRef_Multiplicity()
    * @model default="1"
    * @generated
    */
-  int getSize();
+  int getMultiplicity();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorRef#getSize <em>Size</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorRef#getMultiplicity <em>Multiplicity</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Size</em>' attribute.
-   * @see #getSize()
+   * @param value the new value of the '<em>Multiplicity</em>' attribute.
+   * @see #getMultiplicity()
    * @generated
    */
-  void setSize(int value);
+  void setMultiplicity(int value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.

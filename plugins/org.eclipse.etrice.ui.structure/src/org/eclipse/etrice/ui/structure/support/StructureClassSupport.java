@@ -316,7 +316,7 @@ public class StructureClassSupport {
 					// ...with the exception of internal end ports
 					if (childBo instanceof Port) {
 						if (sc instanceof ActorClass) {
-							if (((ActorClass) sc).getIntPorts().contains(childBo))
+							if (((ActorClass) sc).getInternalPorts().contains(childBo))
 								onInterface = false;
 						}
 					}

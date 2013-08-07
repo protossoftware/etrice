@@ -63,7 +63,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	
 	public String genActionOperationCall(Transition tr) {
 
-		if (tr.getAction()!=null && !tr.getAction().getCommands().isEmpty()) {
+		if (tr.getAction()!=null && !tr.getAction().getLines().isEmpty()) {
 			if (tr instanceof InitialTransition)
 				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)

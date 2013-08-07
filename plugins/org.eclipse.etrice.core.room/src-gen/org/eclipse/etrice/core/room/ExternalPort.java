@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.ExternalPort#getIfport <em>Ifport</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ExternalPort#getInterfacePort <em>Interface Port</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,29 +32,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface ExternalPort extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Ifport</b></em>' reference.
+   * Returns the value of the '<em><b>Interface Port</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is the referenced interface port of the actor class which is now an external end port.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Ifport</em>' reference.
-   * @see #setIfport(Port)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getExternalPort_Ifport()
+   * @return the value of the '<em>Interface Port</em>' reference.
+   * @see #setInterfacePort(Port)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getExternalPort_InterfacePort()
    * @model
    * @generated
    */
-  Port getIfport();
+  Port getInterfacePort();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ExternalPort#getIfport <em>Ifport</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.ExternalPort#getInterfacePort <em>Interface Port</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ifport</em>' reference.
-   * @see #getIfport()
+   * @param value the new value of the '<em>Interface Port</em>' reference.
+   * @see #getInterfacePort()
    * @generated
    */
-  void setIfport(Port value);
+  void setInterfacePort(Port value);
 
 } // ExternalPort

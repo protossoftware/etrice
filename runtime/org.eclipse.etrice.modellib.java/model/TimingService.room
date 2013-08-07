@@ -150,7 +150,7 @@ RoomModel room.basic.service.timing {
 				}"
 			}
 		}
-		conjugate PortClass
+		conjugated PortClass
 		{
 			usercode {
 			"private int currentId = 0;
@@ -158,7 +158,7 @@ RoomModel room.basic.service.timing {
 			}
 			handle
 			outgoing internalTimer {
-			"//conjugate PortClass handle timer
+			"//conjugated PortClass handle timer
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData) dataMsg.getData();
 				if (active && td.getId()==currentId) {
@@ -167,7 +167,7 @@ RoomModel room.basic.service.timing {
 			}
 			handle
 			outgoing internalTimeout {
-			"//conjugate PortClass handle timeout
+			"//conjugated PortClass handle timeout
 				EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
 				TimerData td = (TimerData) dataMsg.getData();
 				if (active && td.getId()==currentId) {
@@ -177,7 +177,7 @@ RoomModel room.basic.service.timing {
 			}
 			handle
 			incoming kill {
-			"//conjugate PortClass kill
+			"//conjugated PortClass kill
 				if (active) {
 					active = false;
 					TimerData td = new TimerData();

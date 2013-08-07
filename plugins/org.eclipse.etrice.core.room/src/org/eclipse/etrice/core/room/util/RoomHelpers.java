@@ -56,8 +56,8 @@ import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -111,7 +111,7 @@ public class RoomHelpers {
 	
 	/**
 	 * Return a list of all {@link InterfaceItem}s ({@link Port}s and
-	 * {@link SPPRef}s) of a {@link StructureClass}.
+	 * {@link SPP}s) of a {@link StructureClass}.
 	 * Internal end ports and SAPs are <em>not</em> included.
 	 * 
 	 * @param sc the {@link StructureClass}
@@ -125,14 +125,14 @@ public class RoomHelpers {
 		if (sc instanceof ActorClass) {
 			ActorClass ac = (ActorClass) sc;
 			do {
-				result.addAll(ac.getIfSPPs());
-				result.addAll(ac.getIfPorts());
+				result.addAll(ac.getServiceProvisionPoints());
+				result.addAll(ac.getInterfacePorts());
 				ac = ac.getBase();
 			}
 			while (includeInherited && ac!=null);
 		}
 		else if (sc instanceof SubSystemClass) {
-			result.addAll(((SubSystemClass) sc).getIfSPPs());
+			result.addAll(((SubSystemClass) sc).getServiceProvisionPoints());
 			result.addAll(((SubSystemClass) sc).getRelayPorts());
 		}
 		else if (sc instanceof LogicalSystem) {
@@ -604,7 +604,7 @@ public class RoomHelpers {
 		if (dc==null)
 			return false;
 		
-		for (String cmd : dc.getCommands()) {
+		for (String cmd : dc.getLines()) {
 			if (!cmd.isEmpty())
 				return true;
 		}
@@ -662,7 +662,7 @@ public class RoomHelpers {
 			return true;
 		
 		if (includeInherited && s instanceof RefinedState)
-			return !getInheritedCode((RefinedState) s, feature, true /* order doesn't matter here */).getCommands().isEmpty();
+			return !getInheritedCode((RefinedState) s, feature, true /* order doesn't matter here */).getLines().isEmpty();
 		
 		return false;
 	}
@@ -675,11 +675,11 @@ public class RoomHelpers {
 	 * @return  the {@link DetailCode} as String with a newline character after each command.
 	 */
 	public static String getDetailCode(DetailCode code) {
-		if (code==null || code.getCommands().isEmpty())
+		if (code==null || code.getLines().isEmpty())
 			return "";
 		
 		StringBuilder result = new StringBuilder();
-		for (String cmd : code.getCommands()) {
+		for (String cmd : code.getLines()) {
 			result.append(cmd + "\n");
 		}
 		return result.toString();
@@ -733,9 +733,9 @@ public class RoomHelpers {
 			DetailCode dc = (DetailCode) s.eGet(code);
 			if (dc!=null) {
 				if (addFront)
-					result.getCommands().addAll(0, dc.getCommands());
+					result.getLines().addAll(0, dc.getLines());
 				else
-					result.getCommands().addAll(dc.getCommands());
+					result.getLines().addAll(dc.getLines());
 				
 			}
 			if (s instanceof RefinedState)
@@ -1186,9 +1186,9 @@ public class RoomHelpers {
 	public static boolean isConjugated(InterfaceItem item) {
 		if (item instanceof Port)
 			return ((Port) item).isConjugated();
-		else if (item instanceof SAPRef)
+		else if (item instanceof SAP)
 			return true;
-		else if (item instanceof SPPRef)
+		else if (item instanceof SPP)
 			return false;
 		
 		assert(false): "unexpected sub type";
@@ -1283,31 +1283,31 @@ public class RoomHelpers {
 	 * @return a list of the end {@link Port}s of an {@link ActorClass}
 	 */
 	public static List<Port> getEndPorts(ActorClass ac) {
-		ArrayList<Port> result = new ArrayList<Port>(ac.getIntPorts());
+		ArrayList<Port> result = new ArrayList<Port>(ac.getInternalPorts());
 
 		// to preserve the order of external ports we use insertAt
 		int insertAt = 0;
-		for (ExternalPort p : ac.getExtPorts()) {
-			result.add(insertAt++, p.getIfport());
+		for (ExternalPort p : ac.getExternalPorts()) {
+			result.add(insertAt++, p.getInterfacePort());
 		}
 
 		return result;
 	}
 	
 	/**
-	 * Returns a list of {@link SAPRef}s of an {@link ActorClass}
+	 * Returns a list of {@link SAP}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
 	 * @param ac an {@link ActorClass}
 	 * 
-	 * @return a list of all end {@link SAPRef}s of an {@link ActorClass}
+	 * @return a list of all end {@link SAP}s of an {@link ActorClass}
 	 * 		with base class items first
 	 */
-	public static List<SAPRef> getAllSAPs(ActorClass ac) {
-		ArrayList<SAPRef> result = new ArrayList<SAPRef>();
+	public static List<SAP> getAllSAPs(ActorClass ac) {
+		ArrayList<SAP> result = new ArrayList<SAP>();
 		
 		while (ac!=null) {
-			result.addAll(0, ac.getStrSAPs());
+			result.addAll(0, ac.getServiceAccessPoints());
 			ac = ac.getBase();
 		}
 		
@@ -1335,7 +1335,7 @@ public class RoomHelpers {
 	}
 	
 	/**
-	 * Returns a list of all {@link SAPRef}s of an {@link ActorClass}
+	 * Returns a list of all {@link SAP}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
 	 * @param ac an {@link ActorClass}
@@ -1347,12 +1347,12 @@ public class RoomHelpers {
 		ArrayList<Port> result = new ArrayList<Port>();
 		
 		while (ac!=null) {
-			result.addAll(0, ac.getIntPorts());
+			result.addAll(0, ac.getInternalPorts());
 			
 			// to preserve the order of external ports we use insertAt
 			int insertAt = 0;
-			for (ExternalPort p : ac.getExtPorts()) {
-				result.add(insertAt++, p.getIfport());
+			for (ExternalPort p : ac.getExternalPorts()) {
+				result.add(insertAt++, p.getInterfacePort());
 			}
 			
 			ac = ac.getBase();
@@ -1367,7 +1367,7 @@ public class RoomHelpers {
 	 */
 	public static List<Port> getInterfacePorts(ActorContainerClass ac) {
 		if (ac instanceof ActorClass)
-			return ((ActorClass) ac).getIfPorts();
+			return ((ActorClass) ac).getInterfacePorts();
 		else if (ac instanceof SubSystemClass)
 			return ((SubSystemClass) ac).getRelayPorts();
 
@@ -1385,7 +1385,7 @@ public class RoomHelpers {
 			ArrayList<Port> result = new ArrayList<Port>();
 			ActorClass curr = (ActorClass) ac;
 			while (curr != null) {
-				result.addAll(0, curr.getIfPorts());
+				result.addAll(0, curr.getInterfacePorts());
 				curr = curr.getBase();
 			}
 			return result;
@@ -1410,11 +1410,11 @@ public class RoomHelpers {
 			return result;
 		
 		while (ac!=null) {
-			result.addAll(ac.getIntPorts());
-			for (ExternalPort p : ac.getExtPorts()) {
-				result.add(p.getIfport());
+			result.addAll(ac.getInternalPorts());
+			for (ExternalPort p : ac.getExternalPorts()) {
+				result.add(p.getInterfacePort());
 			}
-			result.addAll(ac.getStrSAPs());
+			result.addAll(ac.getServiceAccessPoints());
 			for (ServiceImplementation svc : ac.getServiceImplementations()) {
 				result.add(svc.getSpp());
 			}
@@ -1729,7 +1729,7 @@ public class RoomHelpers {
 	
 	/**
 	 * Computes a list of all messages that can be received or sent by an {@link InterfaceItem}
-	 * (i.e. {@link Port}, {@link SAPRef} or {@link SPPRef}.
+	 * (i.e. {@link Port}, {@link SAP} or {@link SPP}.
 	 * 
 	 * @param item the interface item
 	 * @param outgoing <code>true</code> for outgoing, <code>false</code> for incoming
@@ -1751,12 +1751,12 @@ public class RoomHelpers {
 			if (((Port) item).isConjugated())
 				outgoing = !outgoing;
 		}
-		else if (item instanceof SAPRef) {
+		else if (item instanceof SAP) {
 			outgoing = !outgoing;
-			protocol = ((SAPRef)item).getProtocol();
+			protocol = ((SAP)item).getProtocol();
 		}
-		else if (item instanceof SPPRef) {
-			protocol = ((SPPRef)item).getProtocol();
+		else if (item instanceof SPP) {
+			protocol = ((SPP)item).getProtocol();
 		}
 		else {
 			assert(false): "unexpected sub type";
@@ -1768,7 +1768,7 @@ public class RoomHelpers {
 	
 	/**
 	 * Returns the {@link PortClass} associated with an {@link InterfaceItem}
-	 * (i.e. {@link Port}, {@link SAPRef} or {@link SPPRef}.
+	 * (i.e. {@link Port}, {@link SAP} or {@link SPP}.
 	 * For regular ports this is the regular PortClass of the associated {@link ProtocolClass}.
 	 * 
 	 * @param item the interface item
@@ -1788,19 +1788,19 @@ public class RoomHelpers {
 			protocol = (ProtocolClass) ((Port) item).getProtocol();
 			conjugated = ((Port) item).isConjugated();
 		}
-		else if (item instanceof SAPRef) {
-			protocol = ((SAPRef)item).getProtocol();
+		else if (item instanceof SAP) {
+			protocol = ((SAP)item).getProtocol();
 			conjugated = true;
 		}
-		else if (item instanceof SPPRef) {
-			protocol = ((SPPRef)item).getProtocol();
+		else if (item instanceof SPP) {
+			protocol = ((SPP)item).getProtocol();
 		}
 		else {
 			assert(false): "unexpected sub type";
 			return null;
 		}
 		
-		return conjugated? protocol.getConjugate():protocol.getRegular();
+		return conjugated? protocol.getConjugated():protocol.getRegular();
 	}
 	
 	/**
@@ -1812,9 +1812,9 @@ public class RoomHelpers {
 	public static boolean isRelay(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
-			if (((ActorClass)acc).getIfPorts().contains(port)) {
-				for (ExternalPort xp : ((ActorClass)acc).getExtPorts()) {
-					if (xp.getIfport()==port)
+			if (((ActorClass)acc).getInterfacePorts().contains(port)) {
+				for (ExternalPort xp : ((ActorClass)acc).getExternalPorts()) {
+					if (xp.getInterfacePort()==port)
 						return false;
 				}
 				return true;
@@ -1834,7 +1834,7 @@ public class RoomHelpers {
 	public static boolean isInternal(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
-			if (((ActorClass)acc).getIntPorts().contains(port)) {
+			if (((ActorClass)acc).getInternalPorts().contains(port)) {
 				return true;
 			}
 			return false;
@@ -1852,8 +1852,8 @@ public class RoomHelpers {
 	public static boolean isExternal(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
-			for (ExternalPort ep : ((ActorClass)acc).getExtPorts()) {
-				if (ep.getIfport()==port) {
+			for (ExternalPort ep : ((ActorClass)acc).getExternalPorts()) {
+				if (ep.getInterfacePort()==port) {
 					return true;
 				}
 			}
@@ -1969,7 +1969,7 @@ public class RoomHelpers {
 			else
 				signature += ", "+arg.getName()+": "+arg.getRefType().getType().getName();
 		}
-		String rt = op.getReturntype()!=null? ": "+op.getReturntype().getType().getName():"";
+		String rt = op.getReturnType()!=null? ": "+op.getReturnType().getType().getName():"";
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
 			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
 		signature = op.getName()+"("+signature+")"+rt;
@@ -2126,10 +2126,10 @@ public class RoomHelpers {
 		if (item instanceof Port) {
 			return ((Port)item).getProtocol();
 		}
-		else if (item instanceof SAPRef)
-			return ((SAPRef)item).getProtocol();
-		else if (item instanceof SPPRef)
-			return ((SPPRef)item).getProtocol();
+		else if (item instanceof SAP)
+			return ((SAP)item).getProtocol();
+		else if (item instanceof SPP)
+			return ((SPP)item).getProtocol();
 		
 		assert(false): "unexpected sub type";
 		return null;
@@ -2458,11 +2458,11 @@ public class RoomHelpers {
 			}
 			// port
 			List<InterfaceItem> ifs = new ArrayList<InterfaceItem>();
-			ifs.addAll(last.getIfSPPs());
+			ifs.addAll(last.getServiceProvisionPoints());
 			if (last instanceof ActorClass) {
 				ActorClass actor = (ActorClass) last;
-				ifs.addAll(actor.getIfPorts());
-				ifs.addAll(actor.getIntPorts());
+				ifs.addAll(actor.getInterfacePorts());
+				ifs.addAll(actor.getInternalPorts());
 			}
 			if (last instanceof SubSystemClass)
 				ifs.addAll(((SubSystemClass) last).getRelayPorts());

@@ -28,8 +28,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -310,8 +310,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- saps");
       _builder.newLine();
       {
-        EList<SAPRef> _strSAPs = ac.getStrSAPs();
-        for(final SAPRef sap : _strSAPs) {
+        EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
+        for(final SAP sap : _serviceAccessPoints) {
           _builder.append("\t");
           _builder.append("protected ");
           String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
@@ -336,7 +336,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName_2 = this._roomExtensions.getPortClassName(svc);
           _builder.append(_portClassName_2, "	");
           _builder.append(" ");
-          SPPRef _spp = svc.getSpp();
+          SPP _spp = svc.getSpp();
           String _name_8 = _spp.getName();
           _builder.append(_name_8, "	");
           _builder.append(" = null;");
@@ -365,8 +365,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _name_9 = _type_2.getName();
           _builder.append(_name_9, "	");
           {
-            int _size = sub_1.getSize();
-            boolean _notEquals_1 = (_size != 1);
+            int _multiplicity = sub_1.getMultiplicity();
+            boolean _notEquals_1 = (_multiplicity != 1);
             if (_notEquals_1) {
               _builder.append("Replicated");
             }
@@ -467,8 +467,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("// own saps");
       _builder.newLine();
       {
-        EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
-        for(final SAPRef sap_1 : _strSAPs_1) {
+        EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
+        for(final SAP sap_1 : _serviceAccessPoints_1) {
           _builder.append("\t\t");
           String _name_16 = sap_1.getName();
           _builder.append(_name_16, "		");
@@ -494,18 +494,18 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
         for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
           _builder.append("\t\t");
-          SPPRef _spp_1 = svc_1.getSpp();
+          SPP _spp_1 = svc_1.getSpp();
           String _name_19 = _spp_1.getName();
           _builder.append(_name_19, "		");
           _builder.append(" = new ");
           String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
           _builder.append(_portClassName_5, "		");
           _builder.append("(this, \"");
-          SPPRef _spp_2 = svc_1.getSpp();
+          SPP _spp_2 = svc_1.getSpp();
           String _name_20 = _spp_2.getName();
           _builder.append(_name_20, "		");
           _builder.append("\", IFITEM_");
-          SPPRef _spp_3 = svc_1.getSpp();
+          SPP _spp_3 = svc_1.getSpp();
           String _name_21 = _spp_3.getName();
           _builder.append(_name_21, "		");
           _builder.append(");");
@@ -532,8 +532,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               String _name_23 = _type_3.getName();
               _builder.append(_name_23, "		");
               {
-                int _size_1 = sub_2.getSize();
-                boolean _notEquals_2 = (_size_1 != 1);
+                int _multiplicity_1 = sub_2.getMultiplicity();
+                boolean _notEquals_2 = (_multiplicity_1 != 1);
                 if (_notEquals_2) {
                   _builder.append("Replicated");
                 }
@@ -544,13 +544,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
             } else {
-              int _size_2 = sub_2.getSize();
-              boolean _greaterThan = (_size_2 > 1);
+              int _multiplicity_2 = sub_2.getMultiplicity();
+              boolean _greaterThan = (_multiplicity_2 > 1);
               if (_greaterThan) {
                 _builder.append("\t\t");
                 _builder.append("for (int i=0; i<");
-                int _size_3 = sub_2.getSize();
-                _builder.append(_size_3, "		");
+                int _multiplicity_3 = sub_2.getMultiplicity();
+                _builder.append(_multiplicity_3, "		");
                 _builder.append("; ++i) {");
                 _builder.newLineIfNotEmpty();
                 {
@@ -695,8 +695,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        EList<SAPRef> _strSAPs_2 = ac.getStrSAPs();
-        for(final SAPRef sap_2 : _strSAPs_2) {
+        EList<SAP> _serviceAccessPoints_2 = ac.getServiceAccessPoints();
+        for(final SAP sap_2 : _serviceAccessPoints_2) {
           _builder.append("\t");
           String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
           String _name_35 = sap_2.getName();
@@ -711,7 +711,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
           _builder.append("\t");
           String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
-          SPPRef _spp_4 = svc_2.getSpp();
+          SPP _spp_4 = svc_2.getSpp();
           String _name_37 = _spp_4.getName();
           String _name_38 = ac.getName();
           CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_37, _name_38);
@@ -985,9 +985,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
             EList<Attribute> _attributes_1 = ac.getAttributes();
             for(final Attribute att : _attributes_1) {
               {
-                RefableType _refType = att.getRefType();
-                DataType _type = _refType.getType();
-                if ((_type instanceof PrimitiveType)) {
+                RefableType _type = att.getType();
+                DataType _type_1 = _type.getType();
+                if ((_type_1 instanceof PrimitiveType)) {
                   String _genSavePrimitive = this.genSavePrimitive(att);
                   _builder.append(_genSavePrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -997,9 +997,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
                     boolean _greaterThan = (_size > 1);
                     if (_greaterThan) {
                       _builder.append("for (");
-                      RefableType _refType_1 = att.getRefType();
-                      DataType _type_1 = _refType_1.getType();
-                      String _name = _type_1.getName();
+                      RefableType _type_2 = att.getType();
+                      DataType _type_3 = _type_2.getType();
+                      String _name = _type_3.getName();
                       _builder.append(_name, "");
                       _builder.append(" v: ");
                       String _name_1 = att.getName();
@@ -1048,9 +1048,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
             EList<Attribute> _attributes_1 = ac.getAttributes();
             for(final Attribute att : _attributes_1) {
               {
-                RefableType _refType = att.getRefType();
-                DataType _type = _refType.getType();
-                if ((_type instanceof PrimitiveType)) {
+                RefableType _type = att.getType();
+                DataType _type_1 = _type.getType();
+                if ((_type_1 instanceof PrimitiveType)) {
                   String _genLoadPrimitive = this.genLoadPrimitive(att);
                   _builder.append(_genLoadPrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -1066,9 +1066,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
                       String _name_1 = att.getName();
                       _builder.append(_name_1, "");
                       _builder.append("[i] = (");
-                      RefableType _refType_1 = att.getRefType();
-                      DataType _type_1 = _refType_1.getType();
-                      String _name_2 = _type_1.getName();
+                      RefableType _type_2 = att.getType();
+                      DataType _type_3 = _type_2.getType();
+                      String _name_2 = _type_3.getName();
                       _builder.append(_name_2, "");
                       _builder.append(") input.readObject();");
                       _builder.newLineIfNotEmpty();
@@ -1076,9 +1076,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
                       String _name_3 = att.getName();
                       _builder.append(_name_3, "");
                       _builder.append(" = (");
-                      RefableType _refType_2 = att.getRefType();
-                      DataType _type_2 = _refType_2.getType();
-                      String _name_4 = _type_2.getName();
+                      RefableType _type_4 = att.getType();
+                      DataType _type_5 = _type_4.getType();
+                      String _name_4 = _type_5.getName();
                       _builder.append(_name_4, "");
                       _builder.append(") input.readObject();");
                       _builder.newLineIfNotEmpty();
@@ -1098,9 +1098,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String genSavePrimitive(final Attribute att) {
     String _xblockexpression = null;
     {
-      RefableType _refType = att.getRefType();
-      DataType _type = _refType.getType();
-      final String type = ((PrimitiveType) _type).getTargetName();
+      RefableType _type = att.getType();
+      DataType _type_1 = _type.getType();
+      final String type = ((PrimitiveType) _type_1).getTargetName();
       final String method = this.getSaveMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();
@@ -1190,9 +1190,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String genLoadPrimitive(final Attribute att) {
     String _xblockexpression = null;
     {
-      RefableType _refType = att.getRefType();
-      DataType _type = _refType.getType();
-      final String type = ((PrimitiveType) _type).getTargetName();
+      RefableType _type = att.getType();
+      DataType _type_1 = _type.getType();
+      final String type = ((PrimitiveType) _type_1).getTargetName();
       final String method = this.getLoadMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();

@@ -11,22 +11,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SPP Ref</b></em>'.
+ * An implementation of the model object '<em><b>SPP</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.SPPRefImpl#getProtocol <em>Protocol</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SPPImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
+public class SPPImpl extends InterfaceItemImpl implements SPP
 {
   /**
    * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
@@ -43,7 +43,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SPPRefImpl()
+  protected SPPImpl()
   {
     super();
   }
@@ -56,7 +56,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SPP_REF;
+    return RoomPackage.Literals.SPP;
   }
 
   /**
@@ -73,7 +73,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
       if (protocol != oldProtocol)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SPP_REF__PROTOCOL, oldProtocol, protocol));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SPP__PROTOCOL, oldProtocol, protocol));
       }
     }
     return protocol;
@@ -99,7 +99,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
     ProtocolClass oldProtocol = protocol;
     protocol = newProtocol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SPP_REF__PROTOCOL, oldProtocol, protocol));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SPP__PROTOCOL, oldProtocol, protocol));
   }
 
   /**
@@ -112,7 +112,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SPP_REF__PROTOCOL:
+      case RoomPackage.SPP__PROTOCOL:
         if (resolve) return getProtocol();
         return basicGetProtocol();
     }
@@ -129,7 +129,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SPP_REF__PROTOCOL:
+      case RoomPackage.SPP__PROTOCOL:
         setProtocol((ProtocolClass)newValue);
         return;
     }
@@ -146,7 +146,7 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SPP_REF__PROTOCOL:
+      case RoomPackage.SPP__PROTOCOL:
         setProtocol((ProtocolClass)null);
         return;
     }
@@ -163,10 +163,10 @@ public class SPPRefImpl extends InterfaceItemImpl implements SPPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SPP_REF__PROTOCOL:
+      case RoomPackage.SPP__PROTOCOL:
         return protocol != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //SPPRefImpl
+} //SPPImpl

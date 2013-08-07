@@ -457,13 +457,13 @@ public class NodeGen {
         EList<ActorRef> _actorRefs = cc.getActorRefs();
         for(final ActorRef sub : _actorRefs) {
           {
-            int _size_1 = sub.getSize();
-            boolean _greaterThan_1 = (_size_1 > 1);
+            int _multiplicity = sub.getMultiplicity();
+            boolean _greaterThan_1 = (_multiplicity > 1);
             if (_greaterThan_1) {
               _builder.append("\t\t");
               _builder.append("for (int i=0; i<");
-              int _size_2 = sub.getSize();
-              _builder.append(_size_2, "		");
+              int _multiplicity_1 = sub.getMultiplicity();
+              _builder.append(_multiplicity_1, "		");
               _builder.append("; ++i) {");
               _builder.newLineIfNotEmpty();
               {

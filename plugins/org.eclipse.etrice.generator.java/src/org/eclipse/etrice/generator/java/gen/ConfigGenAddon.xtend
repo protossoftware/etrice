@@ -56,7 +56,7 @@ class ConfigGenAddon {
 	
 	def private CharSequence applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
-		var aType = a.refType.type		
+		var aType = a.type.type		
 		switch aType {
 			PrimitiveType: {
 				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
@@ -76,7 +76,7 @@ class ConfigGenAddon {
 	
 	def public genDynConfigGetterSetter(ActorClass ac){'''
 		«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
-			public «a.refType.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
+			public «a.type.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
 				if(lock_«a.name» == null)
 					return «a.name»;
 				else
@@ -84,7 +84,7 @@ class ConfigGenAddon {
 						return «a.name»;
 					}
 			}
-			public void set«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
+			public void set«a.name.toFirstUpper»(«a.type.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
 				if(lock_«a.name» == null)
 					this.«a.name» = «a.name»;
 				else
@@ -97,7 +97,7 @@ class ConfigGenAddon {
 			}	
 		«ENDFOR»
 		«FOR a : dataConfigExt.getDynConfigWriteAttributes(ac)»
-			public void setAndWrite«a.name.toFirstUpper»(«a.refType.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
+			public void setAndWrite«a.name.toFirstUpper»(«a.type.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»){
 					set«a.name.toFirstUpper»(«a.name»);
 					getVariableService().write(this.getInstancePath()+"/«a.name»", «a.name»);
 			}
@@ -116,7 +116,7 @@ class ConfigGenAddon {
 	}
 	
 	def private CharSequence genMinMaxConstantsRec(ActorClass ac, String varNamePath, List<Attribute> path){
-		var aType = path.last.refType.type
+		var aType = path.last.type.type
 		switch aType {
 			DataClass:
 				'''

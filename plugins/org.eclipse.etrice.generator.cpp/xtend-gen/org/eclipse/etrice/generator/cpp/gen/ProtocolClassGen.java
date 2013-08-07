@@ -33,8 +33,8 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.cpp.GeneratorOptions;
@@ -715,8 +715,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLine();
               {
                 DetailCode _detailCode = hdlr.getDetailCode();
-                EList<String> _commands = _detailCode.getCommands();
-                for(final String command : _commands) {
+                EList<String> _lines = _detailCode.getLines();
+                for(final String command : _lines) {
                   _builder.append("\t\t");
                   _builder.append("\t");
                   _builder.append("\t\t");
@@ -1049,9 +1049,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           } else {
             _builder.appendImmediate(", ", "");
           }
-          RefableType _refType_1 = a.getRefType();
-          DataType _type_1 = _refType_1.getType();
-          String _typeName_1 = this._typeHelpers.typeName(_type_1);
+          RefableType _type_1 = a.getType();
+          DataType _type_2 = _type_1.getType();
+          String _typeName_1 = this._typeHelpers.typeName(_type_2);
           _builder.append(_typeName_1, "");
           {
             int _size = a.getSize();
@@ -1131,9 +1131,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           } else {
             _builder.appendImmediate(", ", "");
           }
-          RefableType _refType_1 = a.getRefType();
-          DataType _type_1 = _refType_1.getType();
-          String _typeName_1 = this._typeHelpers.typeName(_type_1);
+          RefableType _type_1 = a.getType();
+          DataType _type_2 = _type_1.getType();
+          String _typeName_1 = this._typeHelpers.typeName(_type_2);
           _builder.append(_typeName_1, "");
           {
             int _size = a.getSize();
@@ -1203,8 +1203,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t");
           {
             DetailCode _detailCode = hdlr.getDetailCode();
-            EList<String> _commands = _detailCode.getCommands();
-            for(final String command : _commands) {
+            EList<String> _lines = _detailCode.getLines();
+            for(final String command : _lines) {
               _builder.append("\t");
               _builder.append(command, "	");
               _builder.newLineIfNotEmpty();
@@ -1386,16 +1386,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String _plus = (direction + _name_1);
       return this.enumInUse(_name, _plus);
     } else {
-      if ((item instanceof SAPRef)) {
-        SAPRef sap = ((SAPRef) item);
+      if ((item instanceof SAP)) {
+        SAP sap = ((SAP) item);
         ProtocolClass _protocol_1 = sap.getProtocol();
         String _name_2 = _protocol_1.getName();
         String _name_3 = msg.getName();
         String _plus_1 = ("OUT_" + _name_3);
         return this.enumInUse(_name_2, _plus_1);
       } else {
-        if ((item instanceof SPPRef)) {
-          SPPRef spp = ((SPPRef) item);
+        if ((item instanceof SPP)) {
+          SPP spp = ((SPP) item);
           ProtocolClass _protocol_2 = spp.getProtocol();
           String _name_4 = _protocol_2.getName();
           String _name_5 = msg.getName();

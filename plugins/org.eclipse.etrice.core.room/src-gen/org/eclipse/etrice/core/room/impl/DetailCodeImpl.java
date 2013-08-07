@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl#getCommands <em>Commands</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,14 +31,14 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class DetailCodeImpl extends MinimalEObjectImpl.Container implements DetailCode
 {
   /**
-   * The cached value of the '{@link #getCommands() <em>Commands</em>}' attribute list.
+   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCommands()
+   * @see #getLines()
    * @generated
    * @ordered
    */
-  protected EList<String> commands;
+  protected EList<String> lines;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,13 +66,13 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getCommands()
+  public EList<String> getLines()
   {
-    if (commands == null)
+    if (lines == null)
     {
-      commands = new EDataTypeEList<String>(String.class, this, RoomPackage.DETAIL_CODE__COMMANDS);
+      lines = new EDataTypeEList<String>(String.class, this, RoomPackage.DETAIL_CODE__LINES);
     }
-    return commands;
+    return lines;
   }
 
   /**
@@ -85,8 +85,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case RoomPackage.DETAIL_CODE__COMMANDS:
-        return getCommands();
+      case RoomPackage.DETAIL_CODE__LINES:
+        return getLines();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -102,9 +102,9 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case RoomPackage.DETAIL_CODE__COMMANDS:
-        getCommands().clear();
-        getCommands().addAll((Collection<? extends String>)newValue);
+      case RoomPackage.DETAIL_CODE__LINES:
+        getLines().clear();
+        getLines().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -120,8 +120,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case RoomPackage.DETAIL_CODE__COMMANDS:
-        getCommands().clear();
+      case RoomPackage.DETAIL_CODE__LINES:
+        getLines().clear();
         return;
     }
     super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case RoomPackage.DETAIL_CODE__COMMANDS:
-        return commands != null && !commands.isEmpty();
+      case RoomPackage.DETAIL_CODE__LINES:
+        return lines != null && !lines.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -154,8 +154,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (commands: ");
-    result.append(commands);
+    result.append(" (lines: ");
+    result.append(lines);
     result.append(')');
     return result.toString();
   }

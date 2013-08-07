@@ -204,7 +204,7 @@ RoomModel StaticConfigTest {
 				"EXPECT_EQUAL_FLOAT32(caseId,\"TestProtocolAttributes:2\", 3.f, float_c, 0.1f);"
 			}
 		}
-		conjugate PortClass
+		conjugated PortClass
 		{
 			Attribute array2_r [ 2 ]: int64 = "{11,22}"
 			Attribute array2_c [ 2 ]: int64 = "{0,0}"
@@ -228,7 +228,7 @@ RoomModel StaticConfigTest {
 		}
 
 		//SAP
-		conjugate PortClass
+		conjugated PortClass
 		{
 			Attribute sap_data_2: Data_2_dc
 

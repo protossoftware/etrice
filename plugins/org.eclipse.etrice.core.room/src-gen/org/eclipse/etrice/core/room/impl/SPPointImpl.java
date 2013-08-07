@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 
 /**
@@ -49,7 +49,7 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * @generated
    * @ordered
    */
-  protected SPPRef service;
+  protected SPP service;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,12 +120,12 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef getService()
+  public SPP getService()
   {
     if (service != null && service.eIsProxy())
     {
       InternalEObject oldService = (InternalEObject)service;
-      service = (SPPRef)eResolveProxy(oldService);
+      service = (SPP)eResolveProxy(oldService);
       if (service != oldService)
       {
         if (eNotificationRequired())
@@ -140,7 +140,7 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef basicGetService()
+  public SPP basicGetService()
   {
     return service;
   }
@@ -150,9 +150,9 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setService(SPPRef newService)
+  public void setService(SPP newService)
   {
-    SPPRef oldService = service;
+    SPP oldService = service;
     service = newService;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SP_POINT__SERVICE, oldService, service));
@@ -192,7 +192,7 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
         setRef((ActorContainerRef)newValue);
         return;
       case RoomPackage.SP_POINT__SERVICE:
-        setService((SPPRef)newValue);
+        setService((SPP)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,7 +212,7 @@ public class SPPointImpl extends MinimalEObjectImpl.Container implements SPPoint
         setRef((ActorContainerRef)null);
         return;
       case RoomPackage.SP_POINT__SERVICE:
-        setService((SPPRef)null);
+        setService((SPP)null);
         return;
     }
     super.eUnset(featureID);

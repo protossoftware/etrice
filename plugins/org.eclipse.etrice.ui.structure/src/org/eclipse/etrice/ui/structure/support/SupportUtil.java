@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -96,8 +96,8 @@ public class SupportUtil {
 							if (obj instanceof Port) {
 								ifitem2anchor.put(acr.getName()+SEP+((Port)obj).getName(), childShape.getAnchors().get(0));
 							}
-							if (obj instanceof SPPRef) {
-								ifitem2anchor.put(acr.getName()+SEP+((SPPRef)obj).getName(), childShape.getAnchors().get(0));
+							if (obj instanceof SPP) {
+								ifitem2anchor.put(acr.getName()+SEP+((SPP)obj).getName(), childShape.getAnchors().get(0));
 							}
 						}
 					}
@@ -304,11 +304,11 @@ public class SupportUtil {
 		return null;
 	}
 
-	public static SPPRef getSPPRef(Anchor anchor, IFeatureProvider fp) {
+	public static SPP getSPP(Anchor anchor, IFeatureProvider fp) {
 		if (anchor != null) {
 			Object obj = fp.getBusinessObjectForPictogramElement(anchor.getParent());
-			if (obj instanceof SPPRef) {
-				return (SPPRef) obj;
+			if (obj instanceof SPP) {
+				return (SPP) obj;
 			}
 		}
 		return null;

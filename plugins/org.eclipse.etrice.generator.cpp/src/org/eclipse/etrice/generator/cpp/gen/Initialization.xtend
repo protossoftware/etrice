@@ -37,7 +37,7 @@ class Initialization {
 		'''
 			// initialize attributes
 			«FOR a : attribs»
-				«var aType = a.refType.type»
+				«var aType = a.type.type»
 				«var value = a.defaultValueLiteral»
 				«IF value!=null»
 					«IF a.size == 0 || aType.characterType»
@@ -53,7 +53,7 @@ class Initialization {
 					«ELSE»
 						«IF !useClassDefaultsOnly»
 							for (int i=0;i<«a.size»;i++){
-								«a.name»[i] = «IF a.refType.isRef»«languageExt.nullPointer()»«ELSE»«languageExt.defaultValue(aType)»«ENDIF»;
+								«a.name»[i] = «IF a.type.isRef»«languageExt.nullPointer()»«ELSE»«languageExt.defaultValue(aType)»«ENDIF»;
 							}
 						«ENDIF»
 					«ENDIF»
@@ -72,11 +72,11 @@ class Initialization {
 	}
 
 	def attributeInitialization(Attribute a, boolean useClassDefaultsOnly) {
-		var aType = a.refType.type
+		var aType = a.type.type
 		var value = a.defaultValueLiteral
 		if (value != null) {
 				if (a.size == 0 || aType.characterType) {
-					if (a.refType.isRef) 
+					if (a.type.isRef) 
 						'''«a.name»(new «aType.name»(«value»))'''
 					else
 						'''«a.name»(«value»)'''
@@ -90,7 +90,7 @@ class Initialization {
 		} 
 		else if (aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly) {
 			if (a.size==0) {
-				if (a.refType.isRef)
+				if (a.type.isRef)
 					'''«a.name»(«languageExt.nullPointer()»)'''
 				else
 					'''«a.name»(«languageExt.defaultValue(aType)»)'''

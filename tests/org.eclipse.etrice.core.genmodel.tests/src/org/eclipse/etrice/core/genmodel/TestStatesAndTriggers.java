@@ -27,7 +27,7 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
 
@@ -122,10 +122,10 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testIfItems() {
-		Port fct = xpac.getActorClass().getIfPorts().get(0);
-		Port sub = xpac.getActorClass().getIntPorts().get(0);
-		SAPRef timer = xpac.getActorClass().getStrSAPs().get(0);
-		SAPRef timeout = xpac.getActorClass().getStrSAPs().get(1);
+		Port fct = xpac.getActorClass().getInterfacePorts().get(0);
+		Port sub = xpac.getActorClass().getInternalPorts().get(0);
+		SAP timer = xpac.getActorClass().getServiceAccessPoints().get(0);
+		SAP timeout = xpac.getActorClass().getServiceAccessPoints().get(1);
 		
 		assertEquals("port name", "fct", fct.getName());
 		assertEquals("port name", "subp", sub.getName());

@@ -40,14 +40,14 @@ class Initialization {
 			// initialize attributes
 			«FOR a : attribs»
 				«attributeClassInit(a, roomClass, useClassDefaultsOnly)»
-				«IF a.refType.type.dataClass»«attributeInitPrimitiveRec(new ArrayList<Attribute>.union(a), roomClass)»«ENDIF»
+				«IF a.type.type.dataClass»«attributeInitPrimitiveRec(new ArrayList<Attribute>.union(a), roomClass)»«ENDIF»
 			«ENDFOR»
 		'''
 	}
 	
 	def private attributeClassInit(Attribute a, EObject roomClass, boolean useClassDefaultsOnly){
-		var aType = a.refType.type
-		if(a.refType.ref){
+		var aType = a.type.type
+		if(a.type.ref){
 			if(a.defaultValueLiteral != null)
 				attributeInit(a, a.defaultValueLiteral)
 			else if(languageExt.needsInitialization(a))
@@ -66,7 +66,7 @@ class Initialization {
 	
 	def private CharSequence attributeInitPrimitiveRec(List<Attribute> path, EObject roomClass){
 		var a = path.last
-		var aType = a.refType.type
+		var aType = a.type.type
 		if(aType.dataClass){
 			return '''
 				«FOR e : (aType as DataClass).allAttributes»
@@ -90,7 +90,7 @@ class Initialization {
 	}
 	
 	def genAttributeInitializer(Attribute a, String value, String invokes){
-		var aType = a.refType.type
+		var aType = a.type.type
 		// special treatment of char array with single character ('x')
 		'''
 		«IF a.size == 0 || (a.size > 0 && "char".equals(aType.typeName) && !value.matches("'.'|\\(char\\).*"))»
@@ -98,7 +98,7 @@ class Initialization {
 		«ELSEIF !value.trim.startsWith('{') || "char".equals(aType.typeName)»
 			{
 				«aType.typeName»[] array = new «aType.typeName»[«a.size»];
-				«IF !(a.refType.ref && aType.primitive)»
+				«IF !(a.type.ref && aType.primitive)»
 					for (int i=0;i<«a.size»;i++){
 						array[i] = «value»;
 					}

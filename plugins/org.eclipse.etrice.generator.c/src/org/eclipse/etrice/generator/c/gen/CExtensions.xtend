@@ -260,11 +260,11 @@ class CExtensions implements ILanguageExtension {
 			else
 				dv.initializer(att.size)
 		}
-		else if (att.refType.ref) {
+		else if (att.type.ref) {
 			"NULL".initializer(att.size)
 		}
 		else
-			att.refType.type.initializationWithDefaultValues(att.size)
+			att.type.type.initializationWithDefaultValues(att.size)
 	}
 	
 	override generateArglistAndTypedData(VarDecl data) {

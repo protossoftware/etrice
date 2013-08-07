@@ -27,8 +27,8 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -178,7 +178,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (!_and_2) {
         _and_1 = false;
       } else {
-        List<SAPRef> _allSAPs = RoomHelpers.getAllSAPs(ac);
+        List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
         boolean _isEmpty_2 = _allSAPs.isEmpty();
         _and_1 = (_and_2 && _isEmpty_2);
       }
@@ -354,8 +354,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* saps */");
           _builder.newLine();
           {
-            List<SAPRef> _allSAPs_1 = RoomHelpers.getAllSAPs(ac);
-            for(final SAPRef sap : _allSAPs_1) {
+            List<SAP> _allSAPs_1 = RoomHelpers.getAllSAPs(ac);
+            for(final SAP sap : _allSAPs_1) {
               _builder.append("\t");
               _builder.append("const ");
               String _portClassName_2 = this._roomExtensions.getPortClassName(sap);
@@ -399,7 +399,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final ServiceImplementation svc : _allServiceImplementations_1) {
               _builder.append("\t");
               _builder.append("const etReplPort ");
-              SPPRef _spp = svc.getSpp();
+              SPP _spp = svc.getSpp();
               String _name_8 = _spp.getName();
               _builder.append(_name_8, "	");
               _builder.append(";");

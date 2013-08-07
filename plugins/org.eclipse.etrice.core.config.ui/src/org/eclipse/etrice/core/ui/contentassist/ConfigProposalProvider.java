@@ -97,7 +97,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
 					if (ref instanceof ActorRef) {
 						ActorRef aRef = (ActorRef) ref;
-						if (aRef.getSize() == 1)
+						if (aRef.getMultiplicity() == 1)
 							refs.add((ActorRef) ref);
 					}
 				}
@@ -199,7 +199,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 
 	private boolean hideKeyword(AttrConfig config, Keyword keyword) {
 		LiteralType type = ConfigUtil.getLiteralType(config.getAttribute());
-		DataType dataType = config.getAttribute().getRefType().getType();
+		DataType dataType = config.getAttribute().getType().getType();
 		if (keyword.getValue().equals("min")
 				|| keyword.getValue().equals("max")) {
 			if (type != LiteralType.INT && type != LiteralType.REAL)
@@ -234,7 +234,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 						.getAttribute();
 				if (attr.getSize() <= array.getLiterals().size())
 					return true;
-				if (((PrimitiveType) attr.getRefType().getType()).getType() == LiteralType.CHAR)
+				if (((PrimitiveType) attr.getType().getType()).getType() == LiteralType.CHAR)
 					return true;
 			}
 		}

@@ -170,8 +170,8 @@ class NodeGen {
 		
 				// sub actors
 				«FOR sub : cc.actorRefs»
-					«IF sub.size>1»
-						for (int i=0; i<«sub.size»; ++i) {
+					«IF sub.multiplicity>1»
+						for (int i=0; i<«sub.multiplicity»; ++i) {
 							«IF GlobalSettings::generateMSCInstrumentation»
 								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
 							«ENDIF»

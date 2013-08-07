@@ -238,7 +238,7 @@ RoomModel room.basic.service.timing {
 		outgoing {
 			Message timeout()
 		}
-		conjugate PortClass
+		conjugated PortClass
 		{
 			handle incoming startTimer{
 			"

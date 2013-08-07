@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -45,7 +45,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * @generated
 	 * @ordered
 	 */
-	protected SAPRef sap;
+	protected SAP sap;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,10 +71,10 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SAPRef getSap() {
+	public SAP getSap() {
 		if (sap != null && sap.eIsProxy()) {
 			InternalEObject oldSap = (InternalEObject)sap;
-			sap = (SAPRef)eResolveProxy(oldSap);
+			sap = (SAP)eResolveProxy(oldSap);
 			if (sap != oldSap) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.SAP_INSTANCE__SAP, oldSap, sap));
@@ -88,7 +88,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SAPRef basicGetSap() {
+	public SAP basicGetSap() {
 		return sap;
 	}
 
@@ -97,8 +97,8 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSap(SAPRef newSap) {
-		SAPRef oldSap = sap;
+	public void setSap(SAP newSap) {
+		SAP oldSap = sap;
 		sap = newSap;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.SAP_INSTANCE__SAP, oldSap, sap));
@@ -128,7 +128,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.SAP_INSTANCE__SAP:
-				setSap((SAPRef)newValue);
+				setSap((SAP)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,7 +143,7 @@ public class SAPInstanceImpl extends InterfaceItemInstanceImpl implements SAPIns
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.SAP_INSTANCE__SAP:
-				setSap((SAPRef)null);
+				setSap((SAP)null);
 				return;
 		}
 		super.eUnset(featureID);

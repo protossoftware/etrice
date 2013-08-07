@@ -108,8 +108,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class is the super class of the structural classes&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link ActorClass}&lt;/li>&#xD;&#xA;  &lt;li>{@link SubSystemClass}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ifSPPs" upperBound="-1"
-        eType="#//SPPRef" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceProvisionPoints"
+        upperBound="-1" eType="#//SPP" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of all interface SPPs.&#xD;&#xA;"/>
       </eAnnotations>
@@ -286,7 +286,7 @@
         <details key="documentation" value="&lt;br>The default is scalar ({@code size=1}), values {@code >1} indicate an array.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//RefableType"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the attribute's type.&#xD;&#xA;"/>
@@ -319,7 +319,7 @@
         <details key="documentation" value="&lt;br>This is a list of arguments for the operation.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returntype" eType="#//RefableType"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//RefableType"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional return type of the operation.&#xD;&#xA;"/>
@@ -424,7 +424,7 @@
         <details key="documentation" value="&lt;br>This is the optional regular port class specification.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conjugate" eType="#//PortClass"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conjugated" eType="#//PortClass"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the optional conjugate port class specification.&#xD;&#xA;"/>
@@ -590,21 +590,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="#//ActorContainerClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The actor class in ROOM has three compartments which aren't represented as separate model objects.&#xD;&#xA;To understand to which compartment an attribute or reference belongs to here is a list&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>Interface: everything which is visible from the outside from a model point of view&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getIfPorts}: a list of all interface {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Structure: all internal structural aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getUsercode1}-3: user defined code with generator dependent meaning&lt;/li>&#xD;&#xA;    &lt;li>{@link #getIntPorts}: a list of all internal end {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getExtPorts}: a list of all {@link ExternalPort}s (the interface ports that&#xD;&#xA;       are end ports, not relay ports&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getAttributes}: a list of all actor class {@link Attribute}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}&#xD;&#xA;       has the meaning of a composition)&lt;/li>&#xD;&#xA;    &lt;li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getConnections}: a list of all {@link LayerConnections}&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Behavior: the behavioral aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getOperations}: a list of {@link Operation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStateMachine}: the {@link StateMachine} definition&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The actor class in ROOM has three compartments which aren't represented as separate model objects.&#xD;&#xA;To understand to which compartment an attribute or reference belongs to here is a list&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>Interface: everything which is visible from the outside from a model point of view&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getIfPorts}: a list of all interface {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Structure: all internal structural aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getUsercode1}-3: user defined code with generator dependent meaning&lt;/li>&#xD;&#xA;    &lt;li>{@link #getInternalPorts}: a list of all internal end {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that&#xD;&#xA;       are end ports, not relay ports&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getAttributes}: a list of all actor class {@link Attribute}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}&#xD;&#xA;       has the meaning of a composition)&lt;/li>&#xD;&#xA;    &lt;li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getConnections}: a list of all {@link LayerConnections}&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Behavior: the behavioral aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getOperations}: a list of {@link Operation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStateMachine}: the {@link StateMachine} definition&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="getExternalEndPorts" upperBound="-1" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;Port> ports = new org.eclipse.emf.common.util.BasicEList&lt;Port>();&#xD;&#xA;for (ExternalPort ep : getExtPorts()) {&#xD;&#xA;&#x9;ports.add(ep.getIfport());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;Port> ports = new org.eclipse.emf.common.util.BasicEList&lt;Port>();&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;ports.add(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getRelayPorts" upperBound="-1" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;Port> ports = new org.eclipse.emf.common.util.BasicEList&lt;Port>(getIfPorts());&#xD;&#xA;for (ExternalPort ep : getExtPorts()) {&#xD;&#xA;&#x9;ports.remove(ep.getIfport());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;Port> ports = new org.eclipse.emf.common.util.BasicEList&lt;Port>(getInterfacePorts());&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;ports.remove(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getImplementedSPPs" upperBound="-1" eType="#//SPPRef">
+    <eOperations name="getImplementedSPPs" upperBound="-1" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;SPPRef> spps = new org.eclipse.emf.common.util.BasicEList&lt;SPPRef>();&#xD;&#xA;for (ServiceImplementation spp : getServiceImplementations()) {&#xD;&#xA;&#x9;spps.add(spp.getSpp());&#xD;&#xA;}&#xD;&#xA;return spps;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;SPP> spps = new org.eclipse.emf.common.util.BasicEList&lt;SPP>();&#xD;&#xA;for (ServiceImplementation spp : getServiceImplementations()) {&#xD;&#xA;&#x9;spps.add(spp.getSpp());&#xD;&#xA;}&#xD;&#xA;return spps;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -622,7 +622,7 @@
         <details key="documentation" value="&lt;br>The base class from which all attributes, operations, ports, SAPs&#xD;&#xA;and state machine are inherited.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ifPorts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacePorts" upperBound="-1"
         eType="#//Port" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface.&#xD;&#xA;"/>
@@ -634,13 +634,13 @@
         <details key="documentation" value="&lt;br>This is an optional documentation of the actor structure.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="intPorts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="internalPorts" upperBound="-1"
         eType="#//Port" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list containing all ports of the actor structure (internal end ports).&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extPorts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalPorts" upperBound="-1"
         eType="#//ExternalPort" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface that are end ports.&#xD;&#xA;"/>
@@ -652,8 +652,8 @@
         <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="strSAPs" upperBound="-1"
-        eType="#//SAPRef" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceAccessPoints" upperBound="-1"
+        eType="#//SAP" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of all SAPs.&#xD;&#xA;"/>
       </eAnnotations>
@@ -695,7 +695,7 @@
     </eAnnotations>
     <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAPRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPPRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
+        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAP)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPP)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -740,13 +740,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>An external port is part of the actor structure and references an interface port.&#xD;&#xA;An interface port which is referenced by an external port is an external end port.&#xD;&#xA;If it is not referenced it is a relay port.&#xD;&#xA;&#xD;&#xA;@see {@link Port}&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ifport" eType="#//Port">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfacePort" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the referenced interface port of the actor class which is now an external end port.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAPRef" eSuperTypes="#//InterfaceItem">
+  <eClassifiers xsi:type="ecore:EClass" name="SAP" eSuperTypes="#//InterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A service access point is similar to a {@link Port} but is not explicitly bound to a peer.&#xD;&#xA;Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the&#xD;&#xA;containing actors.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SAP is associated with a {@link ProtocolClass} and is conjugate to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
@@ -756,7 +756,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SPPRef" eSuperTypes="#//InterfaceItem">
+  <eClassifiers xsi:type="ecore:EClass" name="SPP" eSuperTypes="#//InterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A service provision point is used to connect an actor class with a {@link ServiceImplementation}.&#xD;&#xA;It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})&#xD;&#xA;or connect to a {@link ServiceImplementation} of its actor class.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;An SPP is associated with a {@link ProtocolClass} and is regular to this protocol.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
@@ -770,7 +770,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s&#xD;&#xA;that are bound to it following the service resolution logic.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPPRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the SPP connected to the service.&#xD;&#xA;"/>
       </eAnnotations>
@@ -952,7 +952,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>Links from a relay {@link SPPRef} of the actor class.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="#//SPPRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the referenced SPPRef.&#xD;&#xA;"/>
       </eAnnotations>
@@ -967,7 +967,7 @@
         <details key="documentation" value="&lt;br>This is the referenced actor container ref.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//SPPRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the referenced service.&#xD;&#xA;"/>
       </eAnnotations>
@@ -978,7 +978,7 @@
       <details key="documentation" value="&lt;br>A means to compose {@link SubSystemClass}es of {@link ActorClass}es. Each ref will&#xD;&#xA;be turned into an actor instance of the referenced type.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="refType" eType="#//ReferenceType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>If the size is >1 then this is a replicated actor.&#xD;&#xA;"/>
@@ -1108,8 +1108,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of commands in the code generator's target language.&#xD;&#xA;"/>
       </eAnnotations>
@@ -1367,7 +1367,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A piece of documentation that can be optionally attached at&#xD;&#xA;certain places in the model.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the documentation's contents.&#xD;&#xA;"/>

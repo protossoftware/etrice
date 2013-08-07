@@ -110,7 +110,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				//--------------------- ports
 				«ac.endPorts.map(port | '''«port.portClassName» «port.name»;''').join("\n")»
 				//--------------------- saps
-				«ac.strSAPs.map(sap | '''«sap.portClassName» «sap.name»;''').join("\n")»
+				«ac.serviceAccessPoints.map(sap | '''«sap.portClassName» «sap.name»;''').join("\n")»
 				//--------------------- services
 				«ac.serviceImplementations.map(svc | '''«svc.portClassName» «svc.spp.name»;''').join("\n")»
 			
@@ -132,7 +132,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR ep : ac.getEndPorts()»
 				«ep.portClassName.getterImplementation(ep.name, ac.name)»
 			«ENDFOR»
-			«FOR sap : ac.strSAPs»
+			«FOR sap : ac.serviceAccessPoints»
 				«sap.portClassName.getterImplementation(sap.name, ac.name)»
 			«ENDFOR»
 			«FOR svc : ac.serviceImplementations»
@@ -176,7 +176,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			initializerList.add('''«ep.name»(*this, this, "«ep.name»", IFITEM_«ep.name», «IF ep.multiplicity==1»0, «ENDIF»port_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF», peer_addr[IFITEM_«ep.name»]«IF ep.multiplicity==1»[0]«ENDIF»)''');
 		}
 		// own saps
-		for ( sap : ac.strSAPs ) {
+		for ( sap : ac.serviceAccessPoints ) {
 			initializerList.add('''«sap.name»(*this, this, "«sap.name»", IFITEM_«sap.name», 0, port_addr[IFITEM_«sap.name»][0], peer_addr[IFITEM_«sap.name»][0])''');
 		}
 		// own service implementations

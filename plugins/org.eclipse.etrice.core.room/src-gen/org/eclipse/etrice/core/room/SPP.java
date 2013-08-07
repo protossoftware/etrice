@@ -5,16 +5,16 @@ package org.eclipse.etrice.core.room;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>SAP Ref</b></em>'.
+ * A representation of the model object '<em><b>SPP</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>A service access point is similar to a {@link Port} but is not explicitly bound to a peer.
- * Rather, it is bound to a {@link ServiceImplementation} which is connected to one of the
- * containing actors.
+ * <br>A service provision point is used to connect an actor class with a {@link ServiceImplementation}.
+ * It can (similar to relay ports) delegate to another actor class (using a {@link LayerConnection})
+ * or connect to a {@link ServiceImplementation} of its actor class.
  * 
  * <p>
- * An SAP is associated with a {@link ProtocolClass} and is conjugate to this protocol.
+ * An SPP is associated with a {@link ProtocolClass} and is regular to this protocol.
  * </p>
  * 
  * <!-- end-model-doc -->
@@ -22,15 +22,15 @@ package org.eclipse.etrice.core.room;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.SAPRef#getProtocol <em>Protocol</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.SPP#getProtocol <em>Protocol</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getSAPRef()
+ * @see org.eclipse.etrice.core.room.RoomPackage#getSPP()
  * @model
  * @generated
  */
-public interface SAPRef extends InterfaceItem
+public interface SPP extends InterfaceItem
 {
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' reference.
@@ -42,14 +42,14 @@ public interface SAPRef extends InterfaceItem
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.
    * @see #setProtocol(ProtocolClass)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getSAPRef_Protocol()
+   * @see org.eclipse.etrice.core.room.RoomPackage#getSPP_Protocol()
    * @model
    * @generated
    */
   ProtocolClass getProtocol();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.SAPRef#getProtocol <em>Protocol</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.SPP#getProtocol <em>Protocol</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Protocol</em>' reference.
@@ -58,4 +58,4 @@ public interface SAPRef extends InterfaceItem
    */
   void setProtocol(ProtocolClass value);
 
-} // SAPRef
+} // SPP

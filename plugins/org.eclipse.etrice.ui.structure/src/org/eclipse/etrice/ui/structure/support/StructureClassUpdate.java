@@ -92,7 +92,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 			if(sc instanceof ActorClass){
 				ActorClass base = (ActorClass)sc;
 				while(base != null){
-					toAdd.addAll(base.getIntPorts());
+					toAdd.addAll(base.getInternalPorts());
 					base = base.getBase();
 				}
 			}

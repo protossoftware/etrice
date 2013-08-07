@@ -113,7 +113,7 @@ public class DetailCodeTranslator {
 		
 		// concatenate lines
 		StringBuilder text = new StringBuilder();
-		for (String line : code.getCommands()) {
+		for (String line : code.getLines()) {
 			text.append(line+"\n");
 		}
 

@@ -62,7 +62,7 @@ public interface InterfaceItem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof org.eclipse.etrice.core.room.Port)\r\n\treturn ((org.eclipse.etrice.core.room.Port) this).getProtocol();\r\nelse if (this instanceof org.eclipse.etrice.core.room.SAPRef)\r\n\treturn ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();\r\nelse if (this instanceof org.eclipse.etrice.core.room.SPPRef)\r\n\treturn ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();\r\nreturn null;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof org.eclipse.etrice.core.room.Port)\r\n\treturn ((org.eclipse.etrice.core.room.Port) this).getProtocol();\r\nelse if (this instanceof org.eclipse.etrice.core.room.SAP)\r\n\treturn ((org.eclipse.etrice.core.room.SAP) this).getProtocol();\r\nelse if (this instanceof org.eclipse.etrice.core.room.SPP)\r\n\treturn ((org.eclipse.etrice.core.room.SPP) this).getProtocol();\r\nreturn null;\r\n'"
    * @generated
    */
   GeneralProtocolClass getGeneralProtocol();

@@ -235,14 +235,14 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createExternalPortAdapter();
       }
       @Override
-      public Adapter caseSAPRef(SAPRef object)
+      public Adapter caseSAP(SAP object)
       {
-        return createSAPRefAdapter();
+        return createSAPAdapter();
       }
       @Override
-      public Adapter caseSPPRef(SPPRef object)
+      public Adapter caseSPP(SPP object)
       {
-        return createSPPRefAdapter();
+        return createSPPAdapter();
       }
       @Override
       public Adapter caseServiceImplementation(ServiceImplementation object)
@@ -992,31 +992,31 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAPRef <em>SAP Ref</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SAP <em>SAP</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SAPRef
+   * @see org.eclipse.etrice.core.room.SAP
    * @generated
    */
-  public Adapter createSAPRefAdapter()
+  public Adapter createSAPAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPPRef <em>SPP Ref</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SPP <em>SPP</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SPPRef
+   * @see org.eclipse.etrice.core.room.SPP
    * @generated
    */
-  public Adapter createSPPRefAdapter()
+  public Adapter createSPPAdapter()
   {
     return null;
   }

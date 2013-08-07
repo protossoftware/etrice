@@ -29,7 +29,7 @@ class ImplPostprocessor {
 			'''return multiplicity>1 || multiplicity==-1;''')
 		
 		var actorRef = roomPackage.getClass("ActorRef")
-		actorRef.getAttribute("size").setDefaultValueLiteral("1")
+		actorRef.getAttribute("multiplicity").setDefaultValueLiteral("1")
 		
 		var state = roomPackage.getClass("State")
 		state.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
@@ -54,10 +54,10 @@ class ImplPostprocessor {
 			'''
 			if (this instanceof org.eclipse.etrice.core.room.Port)
 				return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
-			else if (this instanceof org.eclipse.etrice.core.room.SAPRef)
-				return ((org.eclipse.etrice.core.room.SAPRef) this).getProtocol();
-			else if (this instanceof org.eclipse.etrice.core.room.SPPRef)
-				return ((org.eclipse.etrice.core.room.SPPRef) this).getProtocol();
+			else if (this instanceof org.eclipse.etrice.core.room.SAP)
+				return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();
+			else if (this instanceof org.eclipse.etrice.core.room.SPP)
+				return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();
 			return null;
 			''')
 			
@@ -65,24 +65,24 @@ class ImplPostprocessor {
 		actorClass.addOperation("getExternalEndPorts", roomPackage.getEClassifier("Port"), -1,
 			'''
 				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
-				for (ExternalPort ep : getExtPorts()) {
-					ports.add(ep.getIfport());
+				for (ExternalPort ep : getExternalPorts()) {
+					ports.add(ep.getInterfacePort());
 				}
 				return ports;
 			'''
 		)
 		actorClass.addOperation("getRelayPorts", roomPackage.getEClassifier("Port"), -1,
 			'''
-				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());
-				for (ExternalPort ep : getExtPorts()) {
-					ports.remove(ep.getIfport());
+				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());
+				for (ExternalPort ep : getExternalPorts()) {
+					ports.remove(ep.getInterfacePort());
 				}
 				return ports;
 			'''
 		)
-		actorClass.addOperation("getImplementedSPPs", roomPackage.getEClassifier("SPPRef"), -1,
+		actorClass.addOperation("getImplementedSPPs", roomPackage.getEClassifier("SPP"), -1,
 			'''
-				EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();
+				EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();
 				for (ServiceImplementation spp : getServiceImplementations()) {
 					spps.add(spp.getSpp());
 				}

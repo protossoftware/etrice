@@ -872,9 +872,9 @@ public class DocGen implements IRoomGenerator {
             String _name = at.getName();
             _builder.append(_name, "");
             _builder.append(" & ");
-            RefableType _refType = at.getRefType();
-            DataType _type = _refType.getType();
-            String _name_1 = _type.getName();
+            RefableType _type = at.getType();
+            DataType _type_1 = _type.getType();
+            String _name_1 = _type_1.getName();
             _builder.append(_name_1, "");
             _builder.append(" & ");
             Documentation _docu = at.getDocu();
@@ -913,11 +913,11 @@ public class DocGen implements IRoomGenerator {
         _builder.append("\t");
         _builder.append("ReturnType: &  ");
         {
-          RefableType _returntype = op.getReturntype();
-          boolean _notEquals = (!Objects.equal(_returntype, null));
+          RefableType _returnType = op.getReturnType();
+          boolean _notEquals = (!Objects.equal(_returnType, null));
           if (_notEquals) {
-            RefableType _returntype_1 = op.getReturntype();
-            DataType _type = _returntype_1.getType();
+            RefableType _returnType_1 = op.getReturnType();
+            DataType _type = _returnType_1.getType();
             String _name_1 = _type.getName();
             _builder.append(_name_1, "	");
           } else {
@@ -1000,8 +1000,8 @@ public class DocGen implements IRoomGenerator {
     {
       boolean _notEquals = (!Objects.equal(doc, null));
       if (_notEquals) {
-        EList<String> _text = doc.getText();
-        String _join = IterableExtensions.join(_text);
+        EList<String> _lines = doc.getLines();
+        String _join = IterableExtensions.join(_lines);
         _builder.append(_join, "");
         _builder.newLineIfNotEmpty();
       }

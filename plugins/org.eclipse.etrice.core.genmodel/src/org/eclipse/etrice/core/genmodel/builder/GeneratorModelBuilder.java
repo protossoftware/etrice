@@ -65,9 +65,9 @@ import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubProtocol;
@@ -434,7 +434,7 @@ public class GeneratorModelBuilder {
 				obj = ((SubSystemInstance)si).getSubSystemClass();
 			else
 				obj = si;
-			diagnostician.error("A service can only be offered once per actor instance, consider pushing one down to a contained actor!", obj, RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs());
+			diagnostician.error("A service can only be offered once per actor instance, consider pushing one down to a contained actor!", obj, RoomPackage.eINSTANCE.getActorContainerClass_ServiceProvisionPoints());
 		}
 		else {
 			if (ci.getFromSPP()!=null && ci.getFromSPP().getSpp().getProtocol()!=pc) {
@@ -461,8 +461,8 @@ public class GeneratorModelBuilder {
 						}
 						if (!found) {
 							ActorContainerClass acr = (ActorContainerClass) sppi.getSpp().eContainer();
-							int idx = acr.getIfSPPs().indexOf(sppi.getSpp());
-							diagnostician.error("An SPP mus be connected by a layer connection or implemented by a ServiceImplementation!", sppi.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
+							int idx = acr.getServiceProvisionPoints().indexOf(sppi.getSpp());
+							diagnostician.error("An SPP mus be connected by a layer connection or implemented by a ServiceImplementation!", sppi.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_ServiceProvisionPoints(), idx);
 						}
 						return;
 					}
@@ -492,8 +492,8 @@ public class GeneratorModelBuilder {
 		
 		for (SAPInstance sap : unsatisfied) {
 			ActorClass ac = (ActorClass) sap.getSap().eContainer();
-			int idx = ac.getStrSAPs().indexOf(sap.getSap());
-			diagnostician.error("SAP "+sap.getPath()+" not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_StrSAPs(), idx);
+			int idx = ac.getServiceAccessPoints().indexOf(sap.getSap());
+			diagnostician.error("SAP "+sap.getPath()+" not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_ServiceAccessPoints(), idx);
 		}
 	}
 
@@ -568,8 +568,8 @@ public class GeneratorModelBuilder {
 									++count;
 							}
 							if (count>1) {
-								int idx = ac.getIfPorts().indexOf(port);
-								diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_IfPorts(), idx);
+								int idx = ac.getInterfacePorts().indexOf(port);
+								diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_InterfacePorts(), idx);
 							}
 						}
 					}
@@ -750,7 +750,7 @@ public class GeneratorModelBuilder {
 		ai.setName(name);
 		ActorClass ac = aref.getType();
 		ai.setActorClass(ac);
-		ai.setArray(aref.getSize()<0);
+		ai.setArray(aref.getMultiplicity()<0);
 		
 		for (ActorClass acl : RoomHelpers.getClassHierarchy(ac)) {
 			createPortInstances(ai, acl);
@@ -773,8 +773,8 @@ public class GeneratorModelBuilder {
 		if (ar.getRefType()==ReferenceType.OPTIONAL) {
 			si.getInstances().add(createActorInterfaceInstance(ar));
 		}
-		else if (ar.getSize()>1) {
-			for (int idx=0; idx<ar.getSize(); ++idx)
+		else if (ar.getMultiplicity()>1) {
+			for (int idx=0; idx<ar.getMultiplicity(); ++idx)
 				si.getInstances().add(recursivelyCreateActorInstances(ar, idx));
 		}
 		else
@@ -789,7 +789,7 @@ public class GeneratorModelBuilder {
 	private void createPortInstances(AbstractInstance ai, ActorClass ac) {
 		createPortInstances(ac.getExternalEndPorts(), PortKind.EXTERNAL, ai);
 		if (ai instanceof ActorInstance)
-			createPortInstances(ac.getIntPorts(), PortKind.INTERNAL, ai);
+			createPortInstances(ac.getInternalPorts(), PortKind.INTERNAL, ai);
 		createPortInstances(ac.getRelayPorts(), PortKind.RELAY, ai);
 	}
 
@@ -818,7 +818,7 @@ public class GeneratorModelBuilder {
 	 * @param ac - the actor class (might be a base class)
 	 */
 	private void createServiceRelatedInstances(StructureInstance ai, ActorClass ac) {
-		for (SAPRef sap : ac.getStrSAPs()) {
+		for (SAP sap : ac.getServiceAccessPoints()) {
 			SAPInstance si = ETriceGenFactory.eINSTANCE.createSAPInstance();
 			allObjects.add(si);
 			si.setName(sap.getName());
@@ -826,7 +826,7 @@ public class GeneratorModelBuilder {
 			
 			ai.getSaps().add(si);
 		}
-		for (SPPRef sap : ac.getIfSPPs()) {
+		for (SPP sap : ac.getServiceProvisionPoints()) {
 			SPPInstance si = ETriceGenFactory.eINSTANCE.createSPPInstance();
 			allObjects.add(si);
 			si.setName(sap.getName());
@@ -880,8 +880,8 @@ public class GeneratorModelBuilder {
 				SPPInstance fromSPPinst = getSPPInstance(si, null, ((RelaySAPoint)from).getRelay());
 				if (fromSPPinst.getOutgoing()!=null) {
 					ActorContainerClass acr = (ActorContainerClass) fromSPPinst.getSpp().eContainer();
-					int idx = acr.getIfSPPs().indexOf(fromSPPinst.getSpp());
-					diagnostician.error("SPPRef has several outgoing layer connections!", fromSPPinst.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_IfSPPs(), idx);
+					int idx = acr.getServiceProvisionPoints().indexOf(fromSPPinst.getSpp());
+					diagnostician.error("SPP has several outgoing layer connections!", fromSPPinst.getSpp(), RoomPackage.eINSTANCE.getActorContainerClass_ServiceProvisionPoints(), idx);
 				}
 				ConnectionInstance ci = ETriceGenFactory.eINSTANCE.createConnectionInstance();
 				ci.setConnection(lc);
@@ -904,7 +904,7 @@ public class GeneratorModelBuilder {
 	 * @param spp
 	 * @return
 	 */
-	private SPPInstance getSPPInstance(AbstractInstance si, ActorContainerRef ar, SPPRef spp) {
+	private SPPInstance getSPPInstance(AbstractInstance si, ActorContainerRef ar, SPP spp) {
 		if (ar==null && si instanceof StructureInstance) {
 			for (SPPInstance sppi : ((StructureInstance)si).getSpps()) {
 				if (sppi.getSpp()==spp)
@@ -1083,11 +1083,11 @@ public class GeneratorModelBuilder {
 		if (item.eContainer() instanceof ActorInstance) {
 			ActorClass ac = ((ActorInstance)item.eContainer()).getActorClass();
 			Port port = ((PortInstance)item).getPort();
-			EStructuralFeature feat = ac.getIfPorts().contains(port)?
-					RoomPackage.Literals.ACTOR_CLASS__INT_PORTS: RoomPackage.Literals.ACTOR_CLASS__IF_PORTS;
-			int idx = ac.getIfPorts().indexOf(port);
+			EStructuralFeature feat = ac.getInterfacePorts().contains(port)?
+					RoomPackage.Literals.ACTOR_CLASS__INTERNAL_PORTS: RoomPackage.Literals.ACTOR_CLASS__INTERFACE_PORTS;
+			int idx = ac.getInterfacePorts().indexOf(port);
 			if (idx<0)
-				ac.getIntPorts().indexOf(port);
+				ac.getInternalPorts().indexOf(port);
 			diagnostician.warning(msg, ac, feat, idx);
 		}
 		else {
@@ -1138,11 +1138,11 @@ public class GeneratorModelBuilder {
 					if (pi.getKind()!=PortKind.RELAY) {
 						if (pi.getProtocol().getCommType()==CommunicationType.EVENT_DRIVEN) {
 							if (pi.getBindings().size()>pi.getPort().getMultiplicity() && pi.getPort().getMultiplicity()!=-1) {
-								EStructuralFeature feature = RoomPackage.eINSTANCE.getActorClass_IfPorts();
-								int idx = ac.getIfPorts().indexOf(pi.getPort());
+								EStructuralFeature feature = RoomPackage.eINSTANCE.getActorClass_InterfacePorts();
+								int idx = ac.getInterfacePorts().indexOf(pi.getPort());
 								if (idx<0) {
-									feature = RoomPackage.eINSTANCE.getActorClass_IntPorts();
-									idx = ac.getIntPorts().indexOf(pi.getPort());
+									feature = RoomPackage.eINSTANCE.getActorClass_InternalPorts();
+									idx = ac.getInternalPorts().indexOf(pi.getPort());
 								}
 								diagnostician.error("number of peers ("+pi.getBindings().size()
 										+ ") of port '"+pi.getName()

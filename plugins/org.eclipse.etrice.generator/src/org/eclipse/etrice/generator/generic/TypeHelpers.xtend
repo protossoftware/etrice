@@ -65,7 +65,7 @@ class TypeHelpers {
 	}
 	
 	def String getTypeName(Attribute att) {
-		getTypeName(att.getRefType())
+		getTypeName(att.getType())
 	}
 
 	/**
@@ -84,7 +84,7 @@ class TypeHelpers {
 	}
 	
 	def String getPrimitiveTypeName(Attribute att) {
-		getPrimitiveTypeName(att.getRefType())
+		getPrimitiveTypeName(att.getType())
 	}
 
 	def String defaultValue(VarDecl a) {

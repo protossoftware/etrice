@@ -350,7 +350,7 @@ class DocGen implements IRoomGenerator {
 			Name & Type & Description\\
 			«FOR at : attributes»
 			\hline
-			«at.name» & «at.refType.type.name» & «generateDocText(at.docu)»\\
+			«at.name» & «at.type.type.name» & «generateDocText(at.docu)»\\
 			«ENDFOR»	
 			\hline
 			\end{tabular}
@@ -365,7 +365,7 @@ class DocGen implements IRoomGenerator {
 			\hline		
 				Name: & «op.name»\\
 				\hline
-				ReturnType: &  «IF op.returntype != null»«op.returntype.type.name»«ELSE»void«ENDIF»\\
+				ReturnType: &  «IF op.returnType != null»«op.returnType.type.name»«ELSE»void«ENDIF»\\
 				\hline
 				Arguments: & «FOR pa : op.arguments SEPARATOR ", "»«pa.name»:«pa.refType.type.name»«ENDFOR»\\
 				«IF op.docu != null»
@@ -385,7 +385,7 @@ class DocGen implements IRoomGenerator {
 	
 	def generateDocText(Documentation doc){'''
 		«IF doc!=null»
-			«doc.text.join()»
+			«doc.lines.join()»
 		«ENDIF»		
 		'''
 	}

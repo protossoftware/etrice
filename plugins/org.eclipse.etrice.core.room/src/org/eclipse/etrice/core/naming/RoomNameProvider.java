@@ -38,8 +38,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -81,8 +81,8 @@ public class RoomNameProvider {
 		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); }
 		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); }
 		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; }
-		public String caseSAPRef(org.eclipse.etrice.core.room.SAPRef object) { return "SAP '"+object.getName()+"'"; }
-		public String caseSPPRef(org.eclipse.etrice.core.room.SPPRef object) { return "SPP '"+object.getName()+"'"; }
+		public String caseSAP(org.eclipse.etrice.core.room.SAP object) { return "SAP '"+object.getName()+"'"; }
+		public String caseSPP(org.eclipse.etrice.core.room.SPP object) { return "SPP '"+object.getName()+"'"; }
 		public String caseActorClass(ActorClass object) { return "ActorClass "+object.getName(); }
 		public String caseSubSystemClass(SubSystemClass object) { return "SubsystemClass "+object.getName(); }
 	};
@@ -96,8 +96,8 @@ public class RoomNameProvider {
 	 *   <li>Transition</li>
 	 *   <li>ActorRef</li>
 	 *   <li>Port</li>
-	 *   <li>SAPRef</li>
-	 *   <li>SPPRef</li>
+	 *   <li>SAP</li>
+	 *   <li>SPP</li>
 	 *   <li>ActorClass</li>
 	 *   <li>SubSystemClass</li>
 	 * </ul>
@@ -456,8 +456,8 @@ public class RoomNameProvider {
 				
 				if (nit instanceof CPBranchTransition) {
 					CPBranchTransition cpt = (CPBranchTransition) nit;
-					if (cpt.getCondition()!=null && !cpt.getCondition().getCommands().isEmpty())
-						return name+"["+cpt.getCondition().getCommands().get(0)+"]";
+					if (cpt.getCondition()!=null && !cpt.getCondition().getLines().isEmpty())
+						return name+"["+cpt.getCondition().getLines().get(0)+"]";
 				}
 
 				return name+"[?]";
@@ -475,7 +475,7 @@ public class RoomNameProvider {
 			}
 			
 			if (t instanceof GuardedTransition) {
-				name += " guard {"+((GuardedTransition)t).getGuard().getCommands().get(0)+"}";
+				name += " guard {"+((GuardedTransition)t).getGuard().getLines().get(0)+"}";
 			}
 		}
 		return name;
@@ -495,8 +495,8 @@ public class RoomNameProvider {
 				name += "|";
 			name += getMsgFromIfLabel(mif);
 		}
-		if (trig.getGuard()!=null && !trig.getGuard().getGuard().getCommands().isEmpty())
-			name += " guard {"+trig.getGuard().getGuard().getCommands().get(0)+"}";
+		if (trig.getGuard()!=null && !trig.getGuard().getGuard().getLines().isEmpty())
+			name += " guard {"+trig.getGuard().getGuard().getLines().get(0)+"}";
 		
 		return name+">";
 	}
@@ -570,16 +570,16 @@ public class RoomNameProvider {
 		if (acc instanceof ActorClass) {
 			ActorClass ac = (ActorClass) acc;
 			do {
-				for (Port p : ac.getIfPorts()) {
+				for (Port p : ac.getInterfacePorts()) {
 					names.add(p.getName());
 				}
-				for (Port p : ac.getIntPorts()) {
+				for (Port p : ac.getInternalPorts()) {
 					names.add(p.getName());
 				}
-				for (SAPRef sap : ac.getStrSAPs()) {
+				for (SAP sap : ac.getServiceAccessPoints()) {
 					names.add(sap.getName());
 				}
-				for (SPPRef spp : ac.getIfSPPs()) {
+				for (SPP spp : ac.getServiceProvisionPoints()) {
 					names.add(spp.getName());
 				}
 				
@@ -591,7 +591,7 @@ public class RoomNameProvider {
 			for (Port p : ((SubSystemClass) acc).getRelayPorts()) {
 				names.add(p.getName());
 			}
-			for (SPPRef spp : ((SubSystemClass) acc).getIfSPPs()) {
+			for (SPP spp : ((SubSystemClass) acc).getServiceProvisionPoints()) {
 				names.add(spp.getName());
 			}
 		}

@@ -112,7 +112,7 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ActorRef ar = (ActorRef) element;
-				ar.setSize(-1);
+				ar.setMultiplicity(-1);
 			}
 		});
 	}

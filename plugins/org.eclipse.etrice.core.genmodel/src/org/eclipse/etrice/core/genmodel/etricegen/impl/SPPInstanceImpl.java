@@ -16,7 +16,7 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
@@ -57,7 +57,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * @generated
 	 * @ordered
 	 */
-	protected SPPRef spp;
+	protected SPP spp;
 
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
@@ -103,10 +103,10 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SPPRef getSpp() {
+	public SPP getSpp() {
 		if (spp != null && spp.eIsProxy()) {
 			InternalEObject oldSpp = (InternalEObject)spp;
-			spp = (SPPRef)eResolveProxy(oldSpp);
+			spp = (SPP)eResolveProxy(oldSpp);
 			if (spp != oldSpp) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.SPP_INSTANCE__SPP, oldSpp, spp));
@@ -120,7 +120,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SPPRef basicGetSpp() {
+	public SPP basicGetSpp() {
 		return spp;
 	}
 
@@ -129,8 +129,8 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSpp(SPPRef newSpp) {
-		SPPRef oldSpp = spp;
+	public void setSpp(SPP newSpp) {
+		SPP oldSpp = spp;
 		spp = newSpp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.SPP_INSTANCE__SPP, oldSpp, spp));
@@ -273,7 +273,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.SPP_INSTANCE__SPP:
-				setSpp((SPPRef)newValue);
+				setSpp((SPP)newValue);
 				return;
 			case ETriceGenPackage.SPP_INSTANCE__INCOMING:
 				getIncoming().clear();
@@ -295,7 +295,7 @@ public class SPPInstanceImpl extends InstanceBaseImpl implements SPPInstance {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.SPP_INSTANCE__SPP:
-				setSpp((SPPRef)null);
+				setSpp((SPP)null);
 				return;
 			case ETriceGenPackage.SPP_INSTANCE__INCOMING:
 				getIncoming().clear();

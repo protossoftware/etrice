@@ -156,7 +156,7 @@ class CppExtensions implements ILanguageExtension {
 			'''
 				{
 					«FOR att : dc.attributes SEPARATOR ","»
-						«att.refType.type.initializationWithDefaultValues(att.size)»
+						«att.type.type.initializationWithDefaultValues(att.size)»
 					«ENDFOR»
 				}
 			'''

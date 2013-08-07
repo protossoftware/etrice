@@ -1386,10 +1386,10 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getBindingInstance_Binding(), theRoomPackage.getBinding(), null, "binding", null, 0, 1, BindingInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sapInstanceEClass, SAPInstance.class, "SAPInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSAPInstance_Sap(), theRoomPackage.getSAPRef(), null, "sap", null, 0, 1, SAPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSAPInstance_Sap(), theRoomPackage.getSAP(), null, "sap", null, 0, 1, SAPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sppInstanceEClass, SPPInstance.class, "SPPInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSPPInstance_Spp(), theRoomPackage.getSPPRef(), null, "spp", null, 0, 1, SPPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSPPInstance_Spp(), theRoomPackage.getSPP(), null, "spp", null, 0, 1, SPPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSPPInstance_Incoming(), this.getConnectionInstance(), this.getConnectionInstance_ToSPP(), "incoming", null, 0, -1, SPPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSPPInstance_Outgoing(), this.getConnectionInstance(), this.getConnectionInstance_FromSPP(), "outgoing", null, 0, 1, SPPInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

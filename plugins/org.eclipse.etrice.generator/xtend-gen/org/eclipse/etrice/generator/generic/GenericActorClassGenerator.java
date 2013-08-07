@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.Indexed;
@@ -60,16 +60,16 @@ public class GenericActorClassGenerator {
       _xifexpression = _allEndPorts;
     }
     final List<Port> endPorts = _xifexpression;
-    List<SAPRef> _xifexpression_1 = null;
+    List<SAP> _xifexpression_1 = null;
     boolean _usesInheritance_1 = this.langExt.usesInheritance();
     if (_usesInheritance_1) {
-      EList<SAPRef> _strSAPs = ac.getStrSAPs();
-      _xifexpression_1 = _strSAPs;
+      EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
+      _xifexpression_1 = _serviceAccessPoints;
     } else {
-      List<SAPRef> _allSAPs = RoomHelpers.getAllSAPs(ac);
+      List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
       _xifexpression_1 = _allSAPs;
     }
-    final List<SAPRef> strSAPs = _xifexpression_1;
+    final List<SAP> strSAPs = _xifexpression_1;
     List<ServiceImplementation> _xifexpression_2 = null;
     boolean _usesInheritance_2 = this.langExt.usesInheritance();
     if (_usesInheritance_2) {
@@ -91,7 +91,7 @@ public class GenericActorClassGenerator {
       Pair<String,String> _pair = Tuples.<String, String>pair(_plus, _string);
       list.add(_pair);
     }
-    for (final SAPRef sap : strSAPs) {
+    for (final SAP sap : strSAPs) {
       String _name_1 = sap.getName();
       String _plus_2 = ("IFITEM_" + _name_1);
       int _interfaceItemLocalId_1 = xpac.getInterfaceItemLocalId(sap);
@@ -101,10 +101,10 @@ public class GenericActorClassGenerator {
       list.add(_pair_1);
     }
     for (final ServiceImplementation svc : svcImpls) {
-      SPPRef _spp = svc.getSpp();
+      SPP _spp = svc.getSpp();
       String _name_2 = _spp.getName();
       String _plus_4 = ("IFITEM_" + _name_2);
-      SPPRef _spp_1 = svc.getSpp();
+      SPP _spp_1 = svc.getSpp();
       int _interfaceItemLocalId_2 = xpac.getInterfaceItemLocalId(_spp_1);
       int _plus_5 = (1 + _interfaceItemLocalId_2);
       String _string_2 = Integer.valueOf(_plus_5).toString();

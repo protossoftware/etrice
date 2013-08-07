@@ -534,17 +534,17 @@ public class CExtensions implements ILanguageExtension {
         _xifexpression = _xifexpression_1;
       } else {
         String _xifexpression_2 = null;
-        RefableType _refType = att.getRefType();
-        boolean _isRef = _refType.isRef();
+        RefableType _type = att.getType();
+        boolean _isRef = _type.isRef();
         if (_isRef) {
           int _size_1 = att.getSize();
           String _initializer_1 = this.initializer("NULL", _size_1);
           _xifexpression_2 = _initializer_1;
         } else {
-          RefableType _refType_1 = att.getRefType();
-          DataType _type = _refType_1.getType();
+          RefableType _type_1 = att.getType();
+          DataType _type_2 = _type_1.getType();
           int _size_2 = att.getSize();
-          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type, _size_2);
+          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type_2, _size_2);
           _xifexpression_2 = _initializationWithDefaultValues;
         }
         _xifexpression = _xifexpression_2;

@@ -264,11 +264,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 					if (out.size()==1) {
 						State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;
 						if (node instanceof EntryPoint) {
-							if (state!=null && ac.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getCommands().isEmpty())
+							if (state!=null && ac.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getLines().isEmpty())
 								result.append(tcv.genEntryOperationCall(state));
 						}
 						else if (node instanceof ExitPoint) {
-							if (state!=null && ac.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getCommands().isEmpty())
+							if (state!=null && ac.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getLines().isEmpty())
 								result.append(tcv.genExitOperationCall(state));
 						}
 						else {

@@ -25,8 +25,8 @@ import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -41,12 +41,12 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIfPorts <em>If Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getIntPorts <em>Int Ports</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getExtPorts <em>Ext Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInternalPorts <em>Internal Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getExternalPorts <em>External Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceImplementations <em>Service Implementations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStrSAPs <em>Str SA Ps</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceAccessPoints <em>Service Access Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
@@ -110,14 +110,14 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected ActorClass base;
 
   /**
-   * The cached value of the '{@link #getIfPorts() <em>If Ports</em>}' containment reference list.
+   * The cached value of the '{@link #getInterfacePorts() <em>Interface Ports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIfPorts()
+   * @see #getInterfacePorts()
    * @generated
    * @ordered
    */
-  protected EList<Port> ifPorts;
+  protected EList<Port> interfacePorts;
 
   /**
    * The cached value of the '{@link #getStructureDocu() <em>Structure Docu</em>}' containment reference.
@@ -130,24 +130,24 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected Documentation structureDocu;
 
   /**
-   * The cached value of the '{@link #getIntPorts() <em>Int Ports</em>}' containment reference list.
+   * The cached value of the '{@link #getInternalPorts() <em>Internal Ports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIntPorts()
+   * @see #getInternalPorts()
    * @generated
    * @ordered
    */
-  protected EList<Port> intPorts;
+  protected EList<Port> internalPorts;
 
   /**
-   * The cached value of the '{@link #getExtPorts() <em>Ext Ports</em>}' containment reference list.
+   * The cached value of the '{@link #getExternalPorts() <em>External Ports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExtPorts()
+   * @see #getExternalPorts()
    * @generated
    * @ordered
    */
-  protected EList<ExternalPort> extPorts;
+  protected EList<ExternalPort> externalPorts;
 
   /**
    * The cached value of the '{@link #getServiceImplementations() <em>Service Implementations</em>}' containment reference list.
@@ -160,14 +160,14 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected EList<ServiceImplementation> serviceImplementations;
 
   /**
-   * The cached value of the '{@link #getStrSAPs() <em>Str SA Ps</em>}' containment reference list.
+   * The cached value of the '{@link #getServiceAccessPoints() <em>Service Access Points</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStrSAPs()
+   * @see #getServiceAccessPoints()
    * @generated
    * @ordered
    */
-  protected EList<SAPRef> strSAPs;
+  protected EList<SAP> serviceAccessPoints;
 
   /**
    * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -334,13 +334,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Port> getIfPorts()
+  public EList<Port> getInterfacePorts()
   {
-    if (ifPorts == null)
+    if (interfacePorts == null)
     {
-      ifPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__IF_PORTS);
+      interfacePorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__INTERFACE_PORTS);
     }
-    return ifPorts;
+    return interfacePorts;
   }
 
   /**
@@ -396,13 +396,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Port> getIntPorts()
+  public EList<Port> getInternalPorts()
   {
-    if (intPorts == null)
+    if (internalPorts == null)
     {
-      intPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__INT_PORTS);
+      internalPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__INTERNAL_PORTS);
     }
-    return intPorts;
+    return internalPorts;
   }
 
   /**
@@ -410,13 +410,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ExternalPort> getExtPorts()
+  public EList<ExternalPort> getExternalPorts()
   {
-    if (extPorts == null)
+    if (externalPorts == null)
     {
-      extPorts = new EObjectContainmentEList<ExternalPort>(ExternalPort.class, this, RoomPackage.ACTOR_CLASS__EXT_PORTS);
+      externalPorts = new EObjectContainmentEList<ExternalPort>(ExternalPort.class, this, RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS);
     }
-    return extPorts;
+    return externalPorts;
   }
 
   /**
@@ -438,13 +438,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SAPRef> getStrSAPs()
+  public EList<SAP> getServiceAccessPoints()
   {
-    if (strSAPs == null)
+    if (serviceAccessPoints == null)
     {
-      strSAPs = new EObjectContainmentEList<SAPRef>(SAPRef.class, this, RoomPackage.ACTOR_CLASS__STR_SA_PS);
+      serviceAccessPoints = new EObjectContainmentEList<SAP>(SAP.class, this, RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS);
     }
-    return strSAPs;
+    return serviceAccessPoints;
   }
 
   /**
@@ -593,8 +593,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   public EList<Port> getExternalEndPorts()
   {
     EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
-    for (ExternalPort ep : getExtPorts()) {
-      ports.add(ep.getIfport());
+    for (ExternalPort ep : getExternalPorts()) {
+      ports.add(ep.getInterfacePort());
     }
     return ports;
     
@@ -607,9 +607,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    */
   public EList<Port> getRelayPorts()
   {
-    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());
-    for (ExternalPort ep : getExtPorts()) {
-      ports.remove(ep.getIfport());
+    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());
+    for (ExternalPort ep : getExternalPorts()) {
+      ports.remove(ep.getInterfacePort());
     }
     return ports;
     
@@ -620,9 +620,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SPPRef> getImplementedSPPs()
+  public EList<SPP> getImplementedSPPs()
   {
-    EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();
+    EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();
     for (ServiceImplementation spp : getServiceImplementations()) {
       spps.add(spp.getSpp());
     }
@@ -640,18 +640,18 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   {
     switch (featureID)
     {
-      case RoomPackage.ACTOR_CLASS__IF_PORTS:
-        return ((InternalEList<?>)getIfPorts()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
+        return ((InternalEList<?>)getInterfacePorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return basicSetStructureDocu(null, msgs);
-      case RoomPackage.ACTOR_CLASS__INT_PORTS:
-        return ((InternalEList<?>)getIntPorts()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__EXT_PORTS:
-        return ((InternalEList<?>)getExtPorts()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
+        return ((InternalEList<?>)getInternalPorts()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
+        return ((InternalEList<?>)getExternalPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
         return ((InternalEList<?>)getServiceImplementations()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__STR_SA_PS:
-        return ((InternalEList<?>)getStrSAPs()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return ((InternalEList<?>)getServiceAccessPoints()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
@@ -683,18 +683,18 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
-      case RoomPackage.ACTOR_CLASS__IF_PORTS:
-        return getIfPorts();
+      case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
+        return getInterfacePorts();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return getStructureDocu();
-      case RoomPackage.ACTOR_CLASS__INT_PORTS:
-        return getIntPorts();
-      case RoomPackage.ACTOR_CLASS__EXT_PORTS:
-        return getExtPorts();
+      case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
+        return getInternalPorts();
+      case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
+        return getExternalPorts();
       case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
         return getServiceImplementations();
-      case RoomPackage.ACTOR_CLASS__STR_SA_PS:
-        return getStrSAPs();
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return getServiceAccessPoints();
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return getAttributes();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
@@ -729,28 +729,28 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__IF_PORTS:
-        getIfPorts().clear();
-        getIfPorts().addAll((Collection<? extends Port>)newValue);
+      case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
+        getInterfacePorts().clear();
+        getInterfacePorts().addAll((Collection<? extends Port>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__INT_PORTS:
-        getIntPorts().clear();
-        getIntPorts().addAll((Collection<? extends Port>)newValue);
+      case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
+        getInternalPorts().clear();
+        getInternalPorts().addAll((Collection<? extends Port>)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__EXT_PORTS:
-        getExtPorts().clear();
-        getExtPorts().addAll((Collection<? extends ExternalPort>)newValue);
+      case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
+        getExternalPorts().clear();
+        getExternalPorts().addAll((Collection<? extends ExternalPort>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
         getServiceImplementations().clear();
         getServiceImplementations().addAll((Collection<? extends ServiceImplementation>)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__STR_SA_PS:
-        getStrSAPs().clear();
-        getStrSAPs().addAll((Collection<? extends SAPRef>)newValue);
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        getServiceAccessPoints().clear();
+        getServiceAccessPoints().addAll((Collection<? extends SAP>)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         getAttributes().clear();
@@ -793,23 +793,23 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BASE:
         setBase((ActorClass)null);
         return;
-      case RoomPackage.ACTOR_CLASS__IF_PORTS:
-        getIfPorts().clear();
+      case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
+        getInterfacePorts().clear();
         return;
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)null);
         return;
-      case RoomPackage.ACTOR_CLASS__INT_PORTS:
-        getIntPorts().clear();
+      case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
+        getInternalPorts().clear();
         return;
-      case RoomPackage.ACTOR_CLASS__EXT_PORTS:
-        getExtPorts().clear();
+      case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
+        getExternalPorts().clear();
         return;
       case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
         getServiceImplementations().clear();
         return;
-      case RoomPackage.ACTOR_CLASS__STR_SA_PS:
-        getStrSAPs().clear();
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        getServiceAccessPoints().clear();
         return;
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         getAttributes().clear();
@@ -846,18 +846,18 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return commType != COMM_TYPE_EDEFAULT;
       case RoomPackage.ACTOR_CLASS__BASE:
         return base != null;
-      case RoomPackage.ACTOR_CLASS__IF_PORTS:
-        return ifPorts != null && !ifPorts.isEmpty();
+      case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
+        return interfacePorts != null && !interfacePorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return structureDocu != null;
-      case RoomPackage.ACTOR_CLASS__INT_PORTS:
-        return intPorts != null && !intPorts.isEmpty();
-      case RoomPackage.ACTOR_CLASS__EXT_PORTS:
-        return extPorts != null && !extPorts.isEmpty();
+      case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
+        return internalPorts != null && !internalPorts.isEmpty();
+      case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
+        return externalPorts != null && !externalPorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
         return serviceImplementations != null && !serviceImplementations.isEmpty();
-      case RoomPackage.ACTOR_CLASS__STR_SA_PS:
-        return strSAPs != null && !strSAPs.isEmpty();
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return serviceAccessPoints != null && !serviceAccessPoints.isEmpty();
       case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:

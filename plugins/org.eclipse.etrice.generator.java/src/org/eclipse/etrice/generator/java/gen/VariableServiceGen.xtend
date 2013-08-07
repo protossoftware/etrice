@@ -145,7 +145,7 @@ class VariableServiceGen {
 			«FOR dc : getAllDataClasses(dataClasses)»
 				private void writeDataClass(String id, «dc.typeName» object, Map<String, Object> map){
 					«FOR a : dc.allAttributes»
-						«IF a.refType.type.primitive»
+						«IF a.type.type.primitive»
 							map.put(id+"/«a.name»", «IF a.size>0»toObjectArray(«ENDIF»object.«invokeGetter(a.name, null)»«IF a.size>0»)«ENDIF»);
 						«ELSE»
 							writeDataClass(id+"/«a.name»", object.«invokeGetter(a.name, null)», map);
@@ -169,7 +169,7 @@ class VariableServiceGen {
 		var max = configExt.getAttrClassConfigMaxValue(ac, path) != null
 		if(min || max)
 			'''
-				«IF a.size>0»for(«a.refType.type.typeName» e : «aVarName»)
+				«IF a.size>0»for(«a.type.type.typeName» e : «aVarName»)
 					«ENDIF»checkMinMax(«IF a.size>0»e«ELSE»«aVarName»«ENDIF», «IF min»«ac.name».MIN«aVarName»«ELSE»null«ENDIF», «IF max»«ac.name».MAX«aVarName»«ELSE»null«ENDIF»);
 			'''
 	}
@@ -177,7 +177,7 @@ class VariableServiceGen {
 	def private getDynConfigDataClasses(Iterable<ActorInstance> ais){
 		val result = new HashSet<DataClass>
 		ais.forEach(ai | configExt.getDynConfigReadAttributes(ai).
-			forEach(a | if(a.refType.type.dataClass)result.add(a.refType.type as DataClass)
+			forEach(a | if(a.type.type.dataClass)result.add(a.type.type as DataClass)
 			))
 		return result
 	}
@@ -189,7 +189,7 @@ class VariableServiceGen {
 		visit.addAll(dcs)
 		while(!visit.empty){
 			var dc = visit.pop
-			dc.allAttributes.forEach(a | if(a.refType.type.dataClass)visit.add(a.refType.type as DataClass))
+			dc.allAttributes.forEach(a | if(a.type.type.dataClass)visit.add(a.type.type as DataClass))
 		}
 		return result
 	}
@@ -210,13 +210,13 @@ class VariableServiceGen {
 	
 	def private CharSequence genGetAttributeValues(List<Attribute> path, ActorInstance ai){
 		val a = path.last
-		if (a.refType.type.primitive) {
+		if (a.type.type.primitive) {
 			'''
 				values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
 			'''
 		}
-		else if (a.refType.type.dataClass) {
-			var dataClass = (a.refType.type as DataClass)
+		else if (a.type.type.dataClass) {
+			var dataClass = (a.type.type as DataClass)
 			'''
 				«FOR at : dataClass.allAttributes»
 					«genGetAttributeValues(path.union(at), ai)»
@@ -228,20 +228,20 @@ class VariableServiceGen {
 	def private CharSequence genSetAttributeValues1(List<Attribute> path, ActorInstance ai){
 		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
-		if(a.refType.type.primitive){'''
+		if(a.type.type.primitive){'''
 			id = "«ai.path»«path.toAbsolutePath("/")»";
-			«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF» «aVarName» = null;
+			«IF a.size==0»«a.type.type.typeName.toWrapper»«ELSE»«a.type.type.typeName»[]«ENDIF» «aVarName» = null;
 			object = values.get(id);
 			if(object != null){
-				«aVarName» = ensure«a.refType.type.typeName.toFirstUpper»«IF a.size>0»Array«ENDIF»(object«IF a.size>0», «a.size»«ENDIF»);
+				«aVarName» = ensure«a.type.type.typeName.toFirstUpper»«IF a.size>0»Array«ENDIF»(object«IF a.size>0», «a.size»«ENDIF»);
 				«genMinMaxCheck(path, ai.actorClass)»
-				if(!«IF a.size==0»«aVarName».equals(«ELSE»Arrays.equals(«aVarName», «ENDIF»(«IF a.size==0»«a.refType.type.typeName.toWrapper»«ELSE»«a.refType.type.typeName»[]«ENDIF»)getDiffMap().get(id)))
+				if(!«IF a.size==0»«aVarName».equals(«ELSE»Arrays.equals(«aVarName», «ENDIF»(«IF a.size==0»«a.type.type.typeName.toWrapper»«ELSE»«a.type.type.typeName»[]«ENDIF»)getDiffMap().get(id)))
 					changed = true;
 			} else
 				warning(id, "is missing");
 		'''
-		} else if(a.refType.type.dataClass){
-			var dataClass = (a.refType.type as DataClass)
+		} else if(a.type.type.dataClass){
+			var dataClass = (a.type.type as DataClass)
 			'''
 				«FOR at : dataClass.allAttributes»
 					«genSetAttributeValues1(path.union(at), ai)»
@@ -253,7 +253,7 @@ class VariableServiceGen {
 	def private CharSequence genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
 		var a = path.last 
 		var aVarName = path.toAbsolutePath("_")
-		if (a.refType.type.primitive) {
+		if (a.type.type.primitive) {
 			val getters = if(path.size>1)path.take(path.size-1).invokeGetters(null)+"." else ""
 			'''
 				if(«aVarName» != null){
@@ -261,8 +261,8 @@ class VariableServiceGen {
 					getDiffMap().put("«ai.path»«path.toAbsolutePath("/")»", «aVarName»);
 				}
 			'''
-		} else if (a.refType.type.dataClass) {
-			val dataClass = (a.refType.type as DataClass)
+		} else if (a.type.type.dataClass) {
+			val dataClass = (a.type.type as DataClass)
 			'''
 				«FOR at : dataClass.allAttributes»
 					«genSetAttributeValues2(path.union(at), ai)»

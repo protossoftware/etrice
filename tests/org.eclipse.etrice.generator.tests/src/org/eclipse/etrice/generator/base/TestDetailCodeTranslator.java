@@ -159,16 +159,16 @@ public class TestDetailCodeTranslator {
 		Port port = RoomFactory.eINSTANCE.createPort();
 		port.setName("fct");
 		port.setProtocol(pc);
-		ac.getIntPorts().add(port);
+		ac.getInternalPorts().add(port);
 		
 		Attribute attr = RoomFactory.eINSTANCE.createAttribute();
 		attr.setName("value");
-		attr.setRefType(EcoreUtil.copy(refType));
+		attr.setType(EcoreUtil.copy(refType));
 		ac.getAttributes().add(attr);
 		
 		attr = RoomFactory.eINSTANCE.createAttribute();
 		attr.setName("array");
-		attr.setRefType(EcoreUtil.copy(refType));
+		attr.setType(EcoreUtil.copy(refType));
 		attr.setSize(8);
 		ac.getAttributes().add(attr);
 
@@ -208,7 +208,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testSingleComment() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("//");
+		dc.getLines().add("//");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -218,9 +218,9 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testMultiComment() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("/* some comment");
-		dc.getCommands().add("continued");
-		dc.getCommands().add("*/");
+		dc.getLines().add("/* some comment");
+		dc.getLines().add("continued");
+		dc.getLines().add("*/");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -230,7 +230,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortNonExMsg() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out();");
+		dc.getLines().add("fct.out();");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -240,7 +240,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsg() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out1();");
+		dc.getLines().add("fct.out1();");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -250,7 +250,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testIndexedPortMsg() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct[2].out1();");
+		dc.getLines().add("fct[2].out1();");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -260,7 +260,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testIndexedPortMsgComplex() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct[self->index[2]].out1();");
+		dc.getLines().add("fct[self->index[2]].out1();");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -270,7 +270,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgValue() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("x = 2*fct.in1;");
+		dc.getLines().add("x = 2*fct.in1;");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -280,7 +280,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgValueInGuard() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.in1");
+		dc.getLines().add("fct.in1");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -290,7 +290,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgValueNoReplace() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("x = 2*fct.out1;");
+		dc.getLines().add("x = 2*fct.out1;");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -300,9 +300,9 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgComments() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct . out1  (/*comment*/");
-		dc.getCommands().add("//comment");
-		dc.getCommands().add("  );");
+		dc.getLines().add("fct . out1  (/*comment*/");
+		dc.getLines().add("//comment");
+		dc.getLines().add("  );");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -312,7 +312,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgData() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out2(123);");
+		dc.getLines().add("fct.out2(123);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -322,7 +322,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgDataComment() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out2(123/4 /*comment*/);");
+		dc.getLines().add("fct.out2(123/4 /*comment*/);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -332,7 +332,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgDataRecursive() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out2(value);");
+		dc.getLines().add("fct.out2(value);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -342,7 +342,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgDataFloat() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out2(123.4);");
+		dc.getLines().add("fct.out2(123.4);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -352,7 +352,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testPortMsgDataComplex() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("fct.out2(foxy(abc, 12.3));");
+		dc.getLines().add("fct.out2(foxy(abc, 12.3));");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -362,7 +362,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testAttributeGetter() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("int x = value*2;");
+		dc.getLines().add("int x = value*2;");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -372,7 +372,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testAttributeIndexedGetter() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("int x = array[2]*2;");
+		dc.getLines().add("int x = array[2]*2;");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -382,7 +382,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testAttributeSetter() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("value.set(2);");
+		dc.getLines().add("value.set(2);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -392,7 +392,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testAttributeIndexedSetter() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("array[3].set(2);");
+		dc.getLines().add("array[3].set(2);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -402,7 +402,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testAttributeIndexedSetterRecursive() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("array[value].set(value);");
+		dc.getLines().add("array[value].set(value);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -412,7 +412,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperation0() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar0();");
+		dc.getLines().add("bar0();");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -422,7 +422,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperation1() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar1(123);");
+		dc.getLines().add("bar1(123);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -432,7 +432,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperation2() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar2(123, 456);");
+		dc.getLines().add("bar2(123, 456);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -442,7 +442,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperation3() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar2(123, value);");
+		dc.getLines().add("bar2(123, value);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -452,7 +452,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperation4() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar2(123, bar1(value));");
+		dc.getLines().add("bar2(123, bar1(value));");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -462,7 +462,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testOperationWrongNArg() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("bar2(123, 456, 789);");
+		dc.getLines().add("bar2(123, 456, 789);");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -472,7 +472,7 @@ public class TestDetailCodeTranslator {
 	@Test (timeout=1000)
 	public void testCommentBug() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("*/ no comment */");
+		dc.getLines().add("*/ no comment */");
 		
 		String result = translator.translateDetailCode(dc);
 		
@@ -504,7 +504,7 @@ public class TestDetailCodeTranslator {
 			DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 			String line;
 			while ((line = reader.readLine())!=null) {
-				dc.getCommands().add(line);
+				dc.getLines().add(line);
 			}
 			return dc;
 		} catch (IOException e) {
@@ -516,7 +516,7 @@ public class TestDetailCodeTranslator {
 	@Test
 	public void testTags() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("log(\"my message\", \"<|location|>\");");
+		dc.getLines().add("log(\"my message\", \"<|location|>\");");
 		
 		String result = translator.translateDetailCode(dc);
 		

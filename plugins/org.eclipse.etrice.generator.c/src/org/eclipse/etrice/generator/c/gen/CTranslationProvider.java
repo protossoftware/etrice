@@ -25,8 +25,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -44,7 +44,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 		if (container instanceof PortClass) {
 			PortClass pc = (PortClass) container;
 			ProtocolClass prot = (ProtocolClass) container.eContainer();
-			String portClassName = roomExt.getPortClassName(prot, prot.getConjugate()==pc);
+			String portClassName = roomExt.getPortClassName(prot, prot.getConjugated()==pc);
 			self = "(("+portClassName+"_var*)(self->varData))->";
 		}
 	}
@@ -114,15 +114,15 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 				}
 			}
 		}
-		else if (item instanceof SAPRef) {
-			result = roomExt.getPortClassName(((SAPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
+		else if (item instanceof SAP) {
+			result = roomExt.getPortClassName(((SAP)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
 			result += getOrigComment(orig);
 		}
-		else if (item instanceof SPPRef) {
+		else if (item instanceof SPP) {
 			if (index==null)
-				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
+				result = roomExt.getPortClassName(((SPP)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			else
-				result = roomExt.getPortClassName(((SPPRef)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
+				result = roomExt.getPortClassName(((SPP)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 			result += getOrigComment(orig);
 		}
 		

@@ -25,8 +25,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>Structure: all internal structural aspects of an actor class</li>
  *   <ul>
  *     <li>{@link #getUsercode1}-3: user defined code with generator dependent meaning</li>
- *     <li>{@link #getIntPorts}: a list of all internal end {@link Port}s</li>
- *     <li>{@link #getExtPorts}: a list of all {@link ExternalPort}s (the interface ports that
+ *     <li>{@link #getInternalPorts}: a list of all internal end {@link Port}s</li>
+ *     <li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that
  *        are end ports, not relay ports</li>
  *     <li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s</li>
  *     <li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class</li>
@@ -52,12 +52,12 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIfPorts <em>If Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getIntPorts <em>Int Ports</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getExtPorts <em>Ext Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInternalPorts <em>Internal Ports</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getExternalPorts <em>External Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStrSAPs <em>Str SA Ps</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints <em>Service Access Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
@@ -156,7 +156,7 @@ public interface ActorClass extends ActorContainerClass
   void setBase(ActorClass value);
 
   /**
-   * Returns the value of the '<em><b>If Ports</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Interface Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -164,12 +164,12 @@ public interface ActorClass extends ActorContainerClass
    * <br>This is a list containing all ports of the actor interface.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>If Ports</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_IfPorts()
+   * @return the value of the '<em>Interface Ports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_InterfacePorts()
    * @model containment="true"
    * @generated
    */
-  EList<Port> getIfPorts();
+  EList<Port> getInterfacePorts();
 
   /**
    * Returns the value of the '<em><b>Structure Docu</b></em>' containment reference.
@@ -198,7 +198,7 @@ public interface ActorClass extends ActorContainerClass
   void setStructureDocu(Documentation value);
 
   /**
-   * Returns the value of the '<em><b>Int Ports</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Internal Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -206,15 +206,15 @@ public interface ActorClass extends ActorContainerClass
    * <br>This is a list containing all ports of the actor structure (internal end ports).
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Int Ports</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_IntPorts()
+   * @return the value of the '<em>Internal Ports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_InternalPorts()
    * @model containment="true"
    * @generated
    */
-  EList<Port> getIntPorts();
+  EList<Port> getInternalPorts();
 
   /**
-   * Returns the value of the '<em><b>Ext Ports</b></em>' containment reference list.
+   * Returns the value of the '<em><b>External Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ExternalPort}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -222,12 +222,12 @@ public interface ActorClass extends ActorContainerClass
    * <br>This is a list containing all ports of the actor interface that are end ports.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Ext Ports</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ExtPorts()
+   * @return the value of the '<em>External Ports</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ExternalPorts()
    * @model containment="true"
    * @generated
    */
-  EList<ExternalPort> getExtPorts();
+  EList<ExternalPort> getExternalPorts();
 
   /**
    * Returns the value of the '<em><b>Service Implementations</b></em>' containment reference list.
@@ -246,20 +246,20 @@ public interface ActorClass extends ActorContainerClass
   EList<ServiceImplementation> getServiceImplementations();
 
   /**
-   * Returns the value of the '<em><b>Str SA Ps</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.SAPRef}.
+   * Returns the value of the '<em><b>Service Access Points</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.SAP}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is a list of all SAPs.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Str SA Ps</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StrSAPs()
+   * @return the value of the '<em>Service Access Points</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ServiceAccessPoints()
    * @model containment="true"
    * @generated
    */
-  EList<SAPRef> getStrSAPs();
+  EList<SAP> getServiceAccessPoints();
 
   /**
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
@@ -365,7 +365,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();\r\nfor (ExternalPort ep : getExtPorts()) {\r\n\tports.add(ep.getIfport());\r\n}\r\nreturn ports;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.add(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getExternalEndPorts();
@@ -374,7 +374,7 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getIfPorts());\r\nfor (ExternalPort ep : getExtPorts()) {\r\n\tports.remove(ep.getIfport());\r\n}\r\nreturn ports;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.remove(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getRelayPorts();
@@ -383,9 +383,9 @@ public interface ActorClass extends ActorContainerClass
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPPRef> spps = new org.eclipse.emf.common.util.BasicEList<SPPRef>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
    * @generated
    */
-  EList<SPPRef> getImplementedSPPs();
+  EList<SPP> getImplementedSPPs();
 
 } // ActorClass

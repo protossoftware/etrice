@@ -34,7 +34,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -44,8 +44,8 @@ public class ConfigUtil {
 		if (attr == null)
 			return null;
 
-		if (attr.getRefType() != null) {
-			DataType type = attr.getRefType().getType();
+		if (attr.getType() != null) {
+			DataType type = attr.getType().getType();
 			if (type instanceof PrimitiveType) {
 				return ((PrimitiveType) type).getType();
 			}
@@ -127,11 +127,11 @@ public class ConfigUtil {
 			}
 			// port
 			List<InterfaceItem> ifs = new ArrayList<InterfaceItem>();
-			ifs.addAll(last.getIfSPPs());
+			ifs.addAll(last.getServiceProvisionPoints());
 			if (last instanceof ActorClass) {
 				ActorClass actor = (ActorClass) last;
-				ifs.addAll(actor.getIfPorts());
-				ifs.addAll(actor.getIntPorts());
+				ifs.addAll(actor.getInterfacePorts());
+				ifs.addAll(actor.getInternalPorts());
 			}
 			if (last instanceof SubSystemClass)
 				ifs.addAll(((SubSystemClass) last).getRelayPorts());
@@ -156,14 +156,14 @@ public class ConfigUtil {
 			if (port.getProtocol() instanceof ProtocolClass) {
 				ProtocolClass protocol = (ProtocolClass) port.getProtocol();
 				if (port.isConjugated())
-					portClass = protocol.getConjugate();
+					portClass = protocol.getConjugated();
 				else
 					portClass = protocol.getRegular();
 			}
-		} else if (item instanceof SAPRef) {
-			ProtocolClass protocol = ((SAPRef) item).getProtocol();
-			if (protocol.getConjugate() != null)
-				portClass = protocol.getConjugate();
+		} else if (item instanceof SAP) {
+			ProtocolClass protocol = ((SAP) item).getProtocol();
+			if (protocol.getConjugated() != null)
+				portClass = protocol.getConjugated();
 		}
 
 		return portClass;
@@ -176,10 +176,10 @@ public class ConfigUtil {
 		if (acc instanceof ActorClass) {
 			ActorClass ac = (ActorClass) acc;
 			do {
-				result.addAll(ac.getIntPorts());
-				result.addAll(ac.getStrSAPs());
-				for (ExternalPort ext : ac.getExtPorts())
-					result.add(ext.getIfport());
+				result.addAll(ac.getInternalPorts());
+				result.addAll(ac.getServiceAccessPoints());
+				for (ExternalPort ext : ac.getExternalPorts())
+					result.add(ext.getInterfacePort());
 				ac = ac.getBase();
 			} while (includeInherited && ac != null);
 		} else if (acc instanceof SubSystemClass) {
@@ -207,9 +207,9 @@ public class ConfigUtil {
 			List<Attribute> attributes) {
 		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {
-			if (!a.getRefType().isRef())
-				if (a.getRefType().getType() instanceof PrimitiveType
-						|| (a.getRefType().getType() instanceof DataClass && a
+			if (!a.getType().isRef())
+				if (a.getType().getType() instanceof PrimitiveType
+						|| (a.getType().getType() instanceof DataClass && a
 								.getSize() == 0))
 					result.add(a);
 		}

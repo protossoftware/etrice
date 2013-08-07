@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalPortImpl#getIfport <em>Ifport</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalPortImpl#getInterfacePort <em>Interface Port</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,14 +30,14 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class ExternalPortImpl extends MinimalEObjectImpl.Container implements ExternalPort
 {
   /**
-   * The cached value of the '{@link #getIfport() <em>Ifport</em>}' reference.
+   * The cached value of the '{@link #getInterfacePort() <em>Interface Port</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIfport()
+   * @see #getInterfacePort()
    * @generated
    * @ordered
    */
-  protected Port ifport;
+  protected Port interfacePort;
 
   /**
    * <!-- begin-user-doc -->
@@ -65,19 +65,19 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
    * <!-- end-user-doc -->
    * @generated
    */
-  public Port getIfport()
+  public Port getInterfacePort()
   {
-    if (ifport != null && ifport.eIsProxy())
+    if (interfacePort != null && interfacePort.eIsProxy())
     {
-      InternalEObject oldIfport = (InternalEObject)ifport;
-      ifport = (Port)eResolveProxy(oldIfport);
-      if (ifport != oldIfport)
+      InternalEObject oldInterfacePort = (InternalEObject)interfacePort;
+      interfacePort = (Port)eResolveProxy(oldInterfacePort);
+      if (interfacePort != oldInterfacePort)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.EXTERNAL_PORT__IFPORT, oldIfport, ifport));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
       }
     }
-    return ifport;
+    return interfacePort;
   }
 
   /**
@@ -85,9 +85,9 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
    * <!-- end-user-doc -->
    * @generated
    */
-  public Port basicGetIfport()
+  public Port basicGetInterfacePort()
   {
-    return ifport;
+    return interfacePort;
   }
 
   /**
@@ -95,12 +95,12 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIfport(Port newIfport)
+  public void setInterfacePort(Port newInterfacePort)
   {
-    Port oldIfport = ifport;
-    ifport = newIfport;
+    Port oldInterfacePort = interfacePort;
+    interfacePort = newInterfacePort;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_PORT__IFPORT, oldIfport, ifport));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.EXTERNAL_PORT__INTERFACE_PORT, oldInterfacePort, interfacePort));
   }
 
   /**
@@ -113,9 +113,9 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
   {
     switch (featureID)
     {
-      case RoomPackage.EXTERNAL_PORT__IFPORT:
-        if (resolve) return getIfport();
-        return basicGetIfport();
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        if (resolve) return getInterfacePort();
+        return basicGetInterfacePort();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,8 +130,8 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
   {
     switch (featureID)
     {
-      case RoomPackage.EXTERNAL_PORT__IFPORT:
-        setIfport((Port)newValue);
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        setInterfacePort((Port)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -147,8 +147,8 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
   {
     switch (featureID)
     {
-      case RoomPackage.EXTERNAL_PORT__IFPORT:
-        setIfport((Port)null);
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        setInterfacePort((Port)null);
         return;
     }
     super.eUnset(featureID);
@@ -164,8 +164,8 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
   {
     switch (featureID)
     {
-      case RoomPackage.EXTERNAL_PORT__IFPORT:
-        return ifport != null;
+      case RoomPackage.EXTERNAL_PORT__INTERFACE_PORT:
+        return interfacePort != null;
     }
     return super.eIsSet(featureID);
   }

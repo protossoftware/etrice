@@ -207,8 +207,8 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		if (acc instanceof SubSystemClass)
 			return true;
 		else if (acc instanceof ActorClass) {
-			for (ExternalPort xp : ((ActorClass) acc).getExtPorts()) {
-				if (xp.getIfport()==port)
+			for (ExternalPort xp : ((ActorClass) acc).getExternalPorts()) {
+				if (xp.getInterfacePort()==port)
 					return false;
 			}
 			return true;
@@ -321,17 +321,17 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 			ActorClass ac = (ActorClass) acc;
 			
 			if (relay) {
-				for (ExternalPort xp : ac.getExtPorts()) {
-					if (xp.getIfport()==port) {
-						ac.getExtPorts().remove(xp);
+				for (ExternalPort xp : ac.getExternalPorts()) {
+					if (xp.getInterfacePort()==port) {
+						ac.getExternalPorts().remove(xp);
 						break;
 					}
 				}
 			}
 			else {
 				ExternalPort xp = RoomFactory.eINSTANCE.createExternalPort();
-				xp.setIfport(port);
-				ac.getExtPorts().add(xp);
+				xp.setInterfacePort(port);
+				ac.getExternalPorts().add(xp);
 			}
 		}
 		

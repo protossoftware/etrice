@@ -11,22 +11,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
+import org.eclipse.etrice.core.room.SAP;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SAP Ref</b></em>'.
+ * An implementation of the model object '<em><b>SAP</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.SAPRefImpl#getProtocol <em>Protocol</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.SAPImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
+public class SAPImpl extends InterfaceItemImpl implements SAP
 {
   /**
    * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' reference.
@@ -43,7 +43,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SAPRefImpl()
+  protected SAPImpl()
   {
     super();
   }
@@ -56,7 +56,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SAP_REF;
+    return RoomPackage.Literals.SAP;
   }
 
   /**
@@ -73,7 +73,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
       if (protocol != oldProtocol)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SAP_REF__PROTOCOL, oldProtocol, protocol));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.SAP__PROTOCOL, oldProtocol, protocol));
       }
     }
     return protocol;
@@ -99,7 +99,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
     ProtocolClass oldProtocol = protocol;
     protocol = newProtocol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SAP_REF__PROTOCOL, oldProtocol, protocol));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SAP__PROTOCOL, oldProtocol, protocol));
   }
 
   /**
@@ -112,7 +112,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SAP_REF__PROTOCOL:
+      case RoomPackage.SAP__PROTOCOL:
         if (resolve) return getProtocol();
         return basicGetProtocol();
     }
@@ -129,7 +129,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SAP_REF__PROTOCOL:
+      case RoomPackage.SAP__PROTOCOL:
         setProtocol((ProtocolClass)newValue);
         return;
     }
@@ -146,7 +146,7 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SAP_REF__PROTOCOL:
+      case RoomPackage.SAP__PROTOCOL:
         setProtocol((ProtocolClass)null);
         return;
     }
@@ -163,10 +163,10 @@ public class SAPRefImpl extends InterfaceItemImpl implements SAPRef
   {
     switch (featureID)
     {
-      case RoomPackage.SAP_REF__PROTOCOL:
+      case RoomPackage.SAP__PROTOCOL:
         return protocol != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //SAPRefImpl
+} //SAPImpl

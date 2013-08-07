@@ -32,11 +32,11 @@ public class StringToDetailCode extends Converter {
 			String[] cmds = code.split("\r\n");
 			DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
 			for (int i = 0; i < cmds.length; i++) {
-				dc.getCommands().add(cmds[i]);
+				dc.getLines().add(cmds[i]);
 			}
 			// trim last command if empty
 			if (cmds[cmds.length-1].isEmpty())
-				dc.getCommands().remove(cmds.length-1);
+				dc.getLines().remove(cmds.length-1);
 			return dc;
 		}
 		return null;
@@ -47,7 +47,7 @@ public class StringToDetailCode extends Converter {
 	 */
 	private DetailCode createEmptyDetailCode() {
 		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
-		dc.getCommands().add("");
+		dc.getLines().add("");
 		return dc;
 	}
 

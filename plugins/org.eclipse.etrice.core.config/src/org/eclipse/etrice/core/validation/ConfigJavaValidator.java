@@ -119,7 +119,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				else {
 					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
 					if (aRef != null) {
-						if (aRef.getSize() > 1)
+						if (aRef.getMultiplicity() > 1)
 							error("no arrays of actor references supported",
 									ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 					} else
@@ -174,8 +174,8 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (a == null)
 			return;
 
-		DataType type = a.getRefType().getType();
-		if (a.getRefType().isRef())
+		DataType type = a.getType().getType();
+		if (a.getType().isRef())
 			error("reference not supported",
 					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 		else if (type instanceof PrimitiveType) {
@@ -199,7 +199,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (attr == null)
 			return;
 
-		DataType type = attr.getRefType().getType();
+		DataType type = attr.getType().getType();
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 

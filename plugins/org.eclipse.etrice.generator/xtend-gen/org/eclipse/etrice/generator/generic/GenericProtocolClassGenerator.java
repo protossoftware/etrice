@@ -19,8 +19,8 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -128,16 +128,16 @@ public class GenericProtocolClassGenerator {
       String _plus = (direction + _name_1);
       return this._iLanguageExtension.memberInUse(_name, _plus);
     } else {
-      if ((item instanceof SAPRef)) {
-        SAPRef sap = ((SAPRef) item);
+      if ((item instanceof SAP)) {
+        SAP sap = ((SAP) item);
         ProtocolClass _protocol_1 = sap.getProtocol();
         String _name_2 = _protocol_1.getName();
         String _name_3 = msg.getName();
         String _plus_1 = ("OUT_" + _name_3);
         return this._iLanguageExtension.memberInUse(_name_2, _plus_1);
       } else {
-        if ((item instanceof SPPRef)) {
-          SPPRef spp = ((SPPRef) item);
+        if ((item instanceof SPP)) {
+          SPP spp = ((SPP) item);
           ProtocolClass _protocol_2 = spp.getProtocol();
           String _name_4 = _protocol_2.getName();
           String _name_5 = msg.getName();

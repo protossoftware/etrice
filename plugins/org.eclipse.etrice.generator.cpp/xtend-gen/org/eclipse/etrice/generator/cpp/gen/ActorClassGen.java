@@ -27,8 +27,8 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -291,9 +291,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("//--------------------- saps");
     _builder.newLine();
     _builder.append("\t\t\t");
-    EList<SAPRef> _strSAPs = ac.getStrSAPs();
-    final Function1<SAPRef,String> _function_1 = new Function1<SAPRef,String>() {
-        public String apply(final SAPRef sap) {
+    EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
+    final Function1<SAP,String> _function_1 = new Function1<SAP,String>() {
+        public String apply(final SAP sap) {
           StringConcatenation _builder = new StringConcatenation();
           String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName, "");
@@ -304,7 +304,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return _builder.toString();
         }
       };
-    List<String> _map_1 = ListExtensions.<SAPRef, String>map(_strSAPs, _function_1);
+    List<String> _map_1 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_1);
     String _join_1 = IterableExtensions.join(_map_1, "\n");
     _builder.append(_join_1, "			");
     _builder.newLineIfNotEmpty();
@@ -319,7 +319,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(svc);
           _builder.append(_portClassName, "");
           _builder.append(" ");
-          SPPRef _spp = svc.getSpp();
+          SPP _spp = svc.getSpp();
           String _name = _spp.getName();
           _builder.append(_name, "");
           _builder.append(";");
@@ -384,8 +384,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
     }
     {
-      EList<SAPRef> _strSAPs_1 = ac.getStrSAPs();
-      for(final SAPRef sap : _strSAPs_1) {
+      EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
+      for(final SAP sap : _serviceAccessPoints_1) {
         _builder.append("\t\t");
         String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
         String _name_9 = sap.getName();
@@ -400,7 +400,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       for(final ServiceImplementation svc : _serviceImplementations_1) {
         _builder.append("\t\t");
         String _portClassName_2 = this._roomExtensions.getPortClassName(svc);
-        SPPRef _spp = svc.getSpp();
+        SPP _spp = svc.getSpp();
         String _name_11 = _spp.getName();
         String _name_12 = ac.getName();
         CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_2, _name_11, _name_12);
@@ -542,8 +542,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder_2.append(")");
       initializerList.add(_builder_2);
     }
-    EList<SAPRef> _strSAPs = ac.getStrSAPs();
-    for (final SAPRef sap : _strSAPs) {
+    EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
+    for (final SAP sap : _serviceAccessPoints) {
       StringConcatenation _builder_3 = new StringConcatenation();
       String _name_6 = sap.getName();
       _builder_3.append(_name_6, "");
@@ -565,23 +565,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
     EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
     for (final ServiceImplementation svc : _serviceImplementations) {
       StringConcatenation _builder_4 = new StringConcatenation();
-      SPPRef _spp = svc.getSpp();
+      SPP _spp = svc.getSpp();
       String _name_11 = _spp.getName();
       _builder_4.append(_name_11, "");
       _builder_4.append("(*this, this, \"");
-      SPPRef _spp_1 = svc.getSpp();
+      SPP _spp_1 = svc.getSpp();
       String _name_12 = _spp_1.getName();
       _builder_4.append(_name_12, "");
       _builder_4.append("\", IFITEM_");
-      SPPRef _spp_2 = svc.getSpp();
+      SPP _spp_2 = svc.getSpp();
       String _name_13 = _spp_2.getName();
       _builder_4.append(_name_13, "");
       _builder_4.append(", port_addr[IFITEM_");
-      SPPRef _spp_3 = svc.getSpp();
+      SPP _spp_3 = svc.getSpp();
       String _name_14 = _spp_3.getName();
       _builder_4.append(_name_14, "");
       _builder_4.append("], peer_addr[IFITEM_");
-      SPPRef _spp_4 = svc.getSpp();
+      SPP _spp_4 = svc.getSpp();
       String _name_15 = _spp_4.getName();
       _builder_4.append(_name_15, "");
       _builder_4.append("])");

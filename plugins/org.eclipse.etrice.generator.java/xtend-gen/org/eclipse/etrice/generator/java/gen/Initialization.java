@@ -61,9 +61,9 @@ public class Initialization {
         _builder.append(_attributeClassInit, "");
         _builder.newLineIfNotEmpty();
         {
-          RefableType _refType = a.getRefType();
-          DataType _type = _refType.getType();
-          boolean _isDataClass = this.typeHelpers.isDataClass(_type);
+          RefableType _type = a.getType();
+          DataType _type_1 = _type.getType();
+          boolean _isDataClass = this.typeHelpers.isDataClass(_type_1);
           if (_isDataClass) {
             ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
             List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
@@ -80,11 +80,11 @@ public class Initialization {
   private CharSequence attributeClassInit(final Attribute a, final EObject roomClass, final boolean useClassDefaultsOnly) {
     CharSequence _xblockexpression = null;
     {
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
       CharSequence _xifexpression = null;
-      RefableType _refType_1 = a.getRefType();
-      boolean _isRef = _refType_1.isRef();
+      RefableType _type_1 = a.getType();
+      boolean _isRef = _type_1.isRef();
       if (_isRef) {
         CharSequence _xifexpression_1 = null;
         String _defaultValueLiteral = a.getDefaultValueLiteral();
@@ -160,8 +160,8 @@ public class Initialization {
     CharSequence _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
       CharSequence _xifexpression = null;
       boolean _isDataClass = this.typeHelpers.isDataClass(aType);
       if (_isDataClass) {
@@ -226,8 +226,8 @@ public class Initialization {
   public CharSequence genAttributeInitializer(final Attribute a, final String value, final String invokes) {
     CharSequence _xblockexpression = null;
     {
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _or = false;
@@ -292,8 +292,8 @@ public class Initialization {
             _builder.newLineIfNotEmpty();
             {
               boolean _and_2 = false;
-              RefableType _refType_1 = a.getRefType();
-              boolean _isRef = _refType_1.isRef();
+              RefableType _type_1 = a.getType();
+              boolean _isRef = _type_1.isRef();
               if (!_isRef) {
                 _and_2 = false;
               } else {

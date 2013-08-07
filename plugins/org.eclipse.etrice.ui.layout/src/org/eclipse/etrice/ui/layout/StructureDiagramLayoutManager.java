@@ -20,7 +20,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SAPoint;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
@@ -181,10 +181,10 @@ public class StructureDiagramLayoutManager extends ETriceDiagramLayoutManager {
 			ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 			if (acc instanceof ActorClass) {
 				ActorClass ac = (ActorClass) acc;
-				if (ac.getIntPorts().contains(port))
+				if (ac.getInternalPorts().contains(port))
 					return true;
 			}
-		} else if (item instanceof SPPRef) {
+		} else if (item instanceof SPP) {
 			return false;
 		} else {
 			assert (false) : "unexpected sub type";

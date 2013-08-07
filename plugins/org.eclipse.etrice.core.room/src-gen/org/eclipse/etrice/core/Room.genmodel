@@ -50,7 +50,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/connections"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorContainerClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/ifSPPs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/serviceProvisionPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/userCode1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/userCode2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/userCode3"/>
@@ -88,14 +88,14 @@
     <genClasses ecoreClass="Room.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/size"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/refType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/defaultValueLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Attribute/docu"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Operation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/arguments"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returntype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Operation/detailCode"/>
     </genClasses>
@@ -117,7 +117,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/incomingMessages"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/outgoingMessages"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/regular"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/conjugate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/conjugated"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolClass/semantics"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//CompoundProtocolClass">
@@ -158,12 +158,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorClass/commType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/base"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/ifPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/interfacePorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structureDocu"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/intPorts"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/extPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/internalPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/externalPorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceImplementations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/strSAPs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceAccessPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/behaviorDocu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/behaviorAnnotations"/>
@@ -185,13 +185,13 @@
       <genOperations ecoreOperation="Room.ecore#//Port/isReplicated"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ExternalPort">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ExternalPort/ifport"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ExternalPort/interfacePort"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SAPRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SAPRef/protocol"/>
+    <genClasses ecoreClass="Room.ecore#//SAP">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SAP/protocol"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SPPRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPPRef/protocol"/>
+    <genClasses ecoreClass="Room.ecore#//SPP">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SPP/protocol"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ServiceImplementation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ServiceImplementation/spp"/>
@@ -248,7 +248,7 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorRef">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/refType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/multiplicity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorRef/type"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//StateGraphNode"/>
@@ -277,7 +277,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//RefinedState/target"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//DetailCode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//DetailCode/commands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//DetailCode/lines"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//TrPoint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//TrPoint/name"/>
@@ -343,7 +343,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Guard/guard"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Documentation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Documentation/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Documentation/lines"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Annotation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Annotation/name"/>

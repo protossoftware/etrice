@@ -152,10 +152,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Binding"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAPInstance" eSuperTypes="#//InterfaceItemInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAPRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sap" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SAP"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SPPInstance" eSuperTypes="#//InstanceBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPPRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SPP"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//ConnectionInstance" eOpposite="#//ConnectionInstance/toSPP"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="#//ConnectionInstance"

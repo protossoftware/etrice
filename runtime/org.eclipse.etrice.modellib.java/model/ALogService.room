@@ -15,7 +15,8 @@ RoomModel room.basic.service.logging {
 				"FileOutputStream file = null;"
 				"PrintStream p = null;"
 				"static long tStart = System.currentTimeMillis();"
-			} ServiceImplementation of log
+			}
+			ServiceImplementation of log
 		}
 		Behavior {
 			Operation destroyUser() {
@@ -77,14 +78,13 @@ RoomModel room.basic.service.logging {
 				"public static final int LOG_LEVEL_MEDIUM = 2;"
 				"public static final int LOG_LEVEL_HIGH = 3;"
 		}
-		
 		incoming {
 			Message open(fileName: string)
 			Message close()
 			private Message internalLog(data: InternalLogData)
 		}
 
-		conjugate PortClass {
+		conjugated PortClass {
 			usercode {
 				"static int logLevel=0;"
 				"InternalLogData d = new InternalLogData();"

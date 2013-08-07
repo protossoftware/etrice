@@ -156,7 +156,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						«FOR hdlr : pc.getReceiveHandlers(conj)»
 							case «hdlr.msg.getCodeName()»:
 							{
-								«FOR command : hdlr.detailCode.commands»
+								«FOR command : hdlr.detailCode.lines»
 									«command»
 								«ENDFOR»
 							}
@@ -265,7 +265,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 			«messageSignature(m)» {
 				«IF hdlr!=null»
-					«FOR command : hdlr.detailCode.commands»	«command»
+					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
 					«IF GlobalSettings::generateMSCInstrumentation»

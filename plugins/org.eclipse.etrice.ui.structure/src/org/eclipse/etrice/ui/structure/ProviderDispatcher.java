@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.common.support.RemoveBendpointsFeature;
@@ -109,7 +109,7 @@ public class ProviderDispatcher {
 		}
 		
 		@Override
-		public IFeatureProvider caseSPPRef(SPPRef object) {
+		public IFeatureProvider caseSPP(SPP object) {
 			return sppSupport.getFeatureProvider();
 		}
 		@Override
@@ -185,7 +185,7 @@ public class ProviderDispatcher {
 		}
 		
 		@Override
-		public IToolBehaviorProvider caseSPPRef(SPPRef object) {
+		public IToolBehaviorProvider caseSPP(SPP object) {
 			return sppSupport.getToolBehaviorProvider();
 		}
 		

@@ -17,8 +17,8 @@ import java.util.ArrayList
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.InterfaceItem
-import org.eclipse.etrice.core.room.SAPRef
-import org.eclipse.etrice.core.room.SPPRef
+import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageFromIf
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -78,12 +78,12 @@ class GenericProtocolClassGenerator {
 			var direction = if (p.isConjugated())"OUT_" else "IN_"
 			return memberInUse(p.getProtocol().getName(), direction+msg.getName())
 		}
-		else if (item instanceof SAPRef) {
-			var sap = item as SAPRef;
+		else if (item instanceof SAP) {
+			var sap = item as SAP;
 			return memberInUse(sap.getProtocol().getName(), "OUT_"+msg.getName())
 		}
-		else if (item instanceof SPPRef) {
-			var spp = item as SPPRef;
+		else if (item instanceof SPP) {
+			var spp = item as SPP;
 			return memberInUse(spp.getProtocol().getName(), "IN_"+msg.getName())
 		}
 

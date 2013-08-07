@@ -777,7 +777,7 @@ public class ActorContainerRefSupport {
 				
 				String reason = "";
 				
-				boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getSize()!=1:false;
+				boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getMultiplicity()!=1:false;
 				boolean isOptional = (acr instanceof ActorRef)? ((ActorRef)acr).getRefType() == ReferenceType.OPTIONAL:false;
 				boolean hasSubStruct = hasSubStructure(acr);
 				
@@ -823,7 +823,7 @@ public class ActorContainerRefSupport {
 				// check replicated label
 				{
 					if(isOptional || isReplicated){
-						String label = (isOptional)?"*":((ActorRef)bo).getSize()+"";
+						String label = (isOptional)?"*":((ActorRef)bo).getMultiplicity()+"";
 						if(!label.equals(graphics.getSizeLabel().getValue()))
 							reason += "multiplicity changed";
 					}
@@ -1004,7 +1004,7 @@ public class ActorContainerRefSupport {
 				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
 				
-				if(bo instanceof ActorRef && ((ActorRef)bo).getSize() != 1)
+				if(bo instanceof ActorRef && ((ActorRef)bo).getMultiplicity() != 1)
 					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(1));
 				else
 					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(0));
@@ -1129,7 +1129,7 @@ public class ActorContainerRefSupport {
 		 */
 		private static void updateRefFigure(ActorContainerRef acr, ContainerShape containerShape, boolean inherited, Diagram diagram){
 		
-			boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getSize()!=1:false;
+			boolean isReplicated = (acr instanceof ActorRef)? ((ActorRef)acr).getMultiplicity()!=1:false;
 			boolean isOptional = (acr instanceof ActorRef)? ((ActorRef)acr).getRefType() == ReferenceType.OPTIONAL:false;
 			boolean hasSubStructure = hasSubStructure(acr);
 			
@@ -1183,7 +1183,7 @@ public class ActorContainerRefSupport {
 				Text label = graphics.getSizeLabel();
 				if(acr instanceof ActorRef){
 					ActorRef ar = (ActorRef)acr;
-					String text = isOptional?"*":ar.getSize()+"";
+					String text = isOptional?"*":ar.getMultiplicity()+"";
 					label.setValue(text);
 				}
 				label.setForeground(lineColor);

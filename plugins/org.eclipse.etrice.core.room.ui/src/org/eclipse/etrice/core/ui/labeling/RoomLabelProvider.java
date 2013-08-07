@@ -34,8 +34,8 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SimpleState;
@@ -126,11 +126,11 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "LogicalSystem.gif";
 	}
 
-	String image(SAPRef sap) {
+	String image(SAP sap) {
 		return "SAP.gif";
 	}
 
-	String image(SPPRef spp) {
+	String image(SPP spp) {
 		return "SPP.gif";
 	}
 
@@ -262,15 +262,15 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String text(ExternalPort ep) {
-		return text(ep.getIfport());
+		return text(ep.getInterfacePort());
 	}
 	
-	String text(SAPRef sap) {
+	String text(SAP sap) {
 		String protocol = sap.getProtocol()!=null? (" : "+sap.getProtocol().getName()):"";
 		return "SAP "+sap.getName()+protocol;
 	}
 	
-	String text(SPPRef spp) {
+	String text(SPP spp) {
 		String protocol = spp.getProtocol()!=null? (" : "+spp.getProtocol().getName()):"";
 		return "SPP "+spp.getName()+protocol;
 	}
@@ -297,7 +297,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	String text(Attribute attr) {
-		String type = attr.getRefType().getType()!=null? (" : "+attr.getRefType().getType().getName()):"";
+		String type = attr.getType().getType()!=null? (" : "+attr.getType().getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
 				(" = "+attr.getDefaultValueLiteral()) : "";
 		String mult = attr.getSize()>1? ("["+attr.getSize()+"]") : "";

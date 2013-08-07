@@ -41,8 +41,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
@@ -143,8 +143,8 @@ public class RoomExtensions {
     final ArrayList<Port> ret = _arrayList;
     final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
         public void apply(final ExternalPort e) {
-          Port _ifport = e.getIfport();
-          ret.add(_ifport);
+          Port _interfacePort = e.getInterfacePort();
+          ret.add(_interfacePort);
         }
       };
     IterableExtensions.<ExternalPort>forEach(in2, _function);
@@ -359,24 +359,24 @@ public class RoomExtensions {
    * @return a name for the associated port class
    */
   protected String _getPortClassName(final ExternalPort p) {
-    Port _ifport = p.getIfport();
-    return this.getPortClassName(_ifport);
+    Port _interfacePort = p.getInterfacePort();
+    return this.getPortClassName(_interfacePort);
   }
   
   /**
-   * @param sap a {@link SAPRef}
+   * @param sap a {@link SAP}
    * @return a name for the associated port class
    */
-  protected String _getPortClassName(final SAPRef sap) {
+  protected String _getPortClassName(final SAP sap) {
     ProtocolClass _protocol = sap.getProtocol();
     return this.getPortClassName(_protocol, true);
   }
   
   /**
-   * @param spp a {@link SPPRef}
+   * @param spp a {@link SPP}
    * @return a name for the associated port class
    */
-  protected String _getPortClassName(final SPPRef spp) {
+  protected String _getPortClassName(final SPP spp) {
     ProtocolClass _protocol = spp.getProtocol();
     return this.getPortClassName(_protocol, false, true);
   }
@@ -386,7 +386,7 @@ public class RoomExtensions {
    * @return a name for the associated port class
    */
   protected String _getPortClassName(final ServiceImplementation svc) {
-    SPPRef _spp = svc.getSpp();
+    SPP _spp = svc.getSpp();
     ProtocolClass _protocol = _spp.getProtocol();
     return this.getPortClassName(_protocol, false, true);
   }
@@ -435,7 +435,7 @@ public class RoomExtensions {
    */
   public PortClass getPortClass(final ProtocolClass pc, final boolean conj) {
     if (conj) {
-      return pc.getConjugate();
+      return pc.getConjugated();
     } else {
       return pc.getRegular();
     }
@@ -686,8 +686,8 @@ public class RoomExtensions {
           if (!_and_1) {
             _and = false;
           } else {
-            RefableType _returntype = e.getReturntype();
-            boolean _equals_1 = Objects.equal(_returntype, null);
+            RefableType _returnType = e.getReturnType();
+            boolean _equals_1 = Objects.equal(_returnType, null);
             _and = (_and_1 && _equals_1);
           }
           return Boolean.valueOf(_and);
@@ -803,10 +803,10 @@ public class RoomExtensions {
   public String getPortClassName(final EObject p) {
     if (p instanceof Port) {
       return _getPortClassName((Port)p);
-    } else if (p instanceof SAPRef) {
-      return _getPortClassName((SAPRef)p);
-    } else if (p instanceof SPPRef) {
-      return _getPortClassName((SPPRef)p);
+    } else if (p instanceof SAP) {
+      return _getPortClassName((SAP)p);
+    } else if (p instanceof SPP) {
+      return _getPortClassName((SPP)p);
     } else if (p instanceof ExternalPort) {
       return _getPortClassName((ExternalPort)p);
     } else if (p instanceof ServiceImplementation) {

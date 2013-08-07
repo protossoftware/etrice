@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DocumentationImpl#getText <em>Text</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DocumentationImpl#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,14 +31,14 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class DocumentationImpl extends MinimalEObjectImpl.Container implements Documentation
 {
   /**
-   * The cached value of the '{@link #getText() <em>Text</em>}' attribute list.
+   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getText()
+   * @see #getLines()
    * @generated
    * @ordered
    */
-  protected EList<String> text;
+  protected EList<String> lines;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,13 +66,13 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getText()
+  public EList<String> getLines()
   {
-    if (text == null)
+    if (lines == null)
     {
-      text = new EDataTypeEList<String>(String.class, this, RoomPackage.DOCUMENTATION__TEXT);
+      lines = new EDataTypeEList<String>(String.class, this, RoomPackage.DOCUMENTATION__LINES);
     }
-    return text;
+    return lines;
   }
 
   /**
@@ -85,8 +85,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__TEXT:
-        return getText();
+      case RoomPackage.DOCUMENTATION__LINES:
+        return getLines();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -102,9 +102,9 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__TEXT:
-        getText().clear();
-        getText().addAll((Collection<? extends String>)newValue);
+      case RoomPackage.DOCUMENTATION__LINES:
+        getLines().clear();
+        getLines().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -120,8 +120,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__TEXT:
-        getText().clear();
+      case RoomPackage.DOCUMENTATION__LINES:
+        getLines().clear();
         return;
     }
     super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__TEXT:
-        return text != null && !text.isEmpty();
+      case RoomPackage.DOCUMENTATION__LINES:
+        return lines != null && !lines.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -154,8 +154,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (text: ");
-    result.append(text);
+    result.append(" (lines: ");
+    result.append(lines);
     result.append(')');
     return result.toString();
   }

@@ -40,7 +40,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getIncomingMessages <em>Incoming Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getOutgoingMessages <em>Outgoing Messages</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getRegular <em>Regular</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getConjugate <em>Conjugate</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getSemantics <em>Semantics</em>}</li>
  * </ul>
  * </p>
@@ -140,14 +140,14 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
   protected PortClass regular;
 
   /**
-   * The cached value of the '{@link #getConjugate() <em>Conjugate</em>}' containment reference.
+   * The cached value of the '{@link #getConjugated() <em>Conjugated</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConjugate()
+   * @see #getConjugated()
    * @generated
    * @ordered
    */
-  protected PortClass conjugate;
+  protected PortClass conjugated;
 
   /**
    * The cached value of the '{@link #getSemantics() <em>Semantics</em>}' containment reference.
@@ -471,9 +471,9 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  public PortClass getConjugate()
+  public PortClass getConjugated()
   {
-    return conjugate;
+    return conjugated;
   }
 
   /**
@@ -481,13 +481,13 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConjugate(PortClass newConjugate, NotificationChain msgs)
+  public NotificationChain basicSetConjugated(PortClass newConjugated, NotificationChain msgs)
   {
-    PortClass oldConjugate = conjugate;
-    conjugate = newConjugate;
+    PortClass oldConjugated = conjugated;
+    conjugated = newConjugated;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATE, oldConjugate, newConjugate);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, oldConjugated, newConjugated);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -498,20 +498,20 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConjugate(PortClass newConjugate)
+  public void setConjugated(PortClass newConjugated)
   {
-    if (newConjugate != conjugate)
+    if (newConjugated != conjugated)
     {
       NotificationChain msgs = null;
-      if (conjugate != null)
-        msgs = ((InternalEObject)conjugate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATE, null, msgs);
-      if (newConjugate != null)
-        msgs = ((InternalEObject)newConjugate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATE, null, msgs);
-      msgs = basicSetConjugate(newConjugate, msgs);
+      if (conjugated != null)
+        msgs = ((InternalEObject)conjugated).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
+      if (newConjugated != null)
+        msgs = ((InternalEObject)newConjugated).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.PROTOCOL_CLASS__CONJUGATED, null, msgs);
+      msgs = basicSetConjugated(newConjugated, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATE, newConjugate, newConjugate));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.PROTOCOL_CLASS__CONJUGATED, newConjugated, newConjugated));
   }
 
   /**
@@ -584,8 +584,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
         return ((InternalEList<?>)getOutgoingMessages()).basicRemove(otherEnd, msgs);
       case RoomPackage.PROTOCOL_CLASS__REGULAR:
         return basicSetRegular(null, msgs);
-      case RoomPackage.PROTOCOL_CLASS__CONJUGATE:
-        return basicSetConjugate(null, msgs);
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return basicSetConjugated(null, msgs);
       case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
         return basicSetSemantics(null, msgs);
     }
@@ -619,8 +619,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
         return getOutgoingMessages();
       case RoomPackage.PROTOCOL_CLASS__REGULAR:
         return getRegular();
-      case RoomPackage.PROTOCOL_CLASS__CONJUGATE:
-        return getConjugate();
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return getConjugated();
       case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
         return getSemantics();
     }
@@ -664,8 +664,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
       case RoomPackage.PROTOCOL_CLASS__REGULAR:
         setRegular((PortClass)newValue);
         return;
-      case RoomPackage.PROTOCOL_CLASS__CONJUGATE:
-        setConjugate((PortClass)newValue);
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        setConjugated((PortClass)newValue);
         return;
       case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
         setSemantics((ProtocolSemantics)newValue);
@@ -708,8 +708,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
       case RoomPackage.PROTOCOL_CLASS__REGULAR:
         setRegular((PortClass)null);
         return;
-      case RoomPackage.PROTOCOL_CLASS__CONJUGATE:
-        setConjugate((PortClass)null);
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        setConjugated((PortClass)null);
         return;
       case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
         setSemantics((ProtocolSemantics)null);
@@ -744,8 +744,8 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
         return outgoingMessages != null && !outgoingMessages.isEmpty();
       case RoomPackage.PROTOCOL_CLASS__REGULAR:
         return regular != null;
-      case RoomPackage.PROTOCOL_CLASS__CONJUGATE:
-        return conjugate != null;
+      case RoomPackage.PROTOCOL_CLASS__CONJUGATED:
+        return conjugated != null;
       case RoomPackage.PROTOCOL_CLASS__SEMANTICS:
         return semantics != null;
     }

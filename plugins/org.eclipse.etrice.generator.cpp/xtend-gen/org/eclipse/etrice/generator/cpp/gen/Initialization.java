@@ -53,8 +53,8 @@ public class Initialization {
     _builder.newLine();
     {
       for(final Attribute a : attribs) {
-        RefableType _refType = a.getRefType();
-        DataType aType = _refType.getType();
+        RefableType _type = a.getType();
+        DataType aType = _type.getType();
         _builder.newLineIfNotEmpty();
         String value = a.getDefaultValueLiteral();
         _builder.newLineIfNotEmpty();
@@ -135,8 +135,8 @@ public class Initialization {
                       _builder.append(_name_2, "	");
                       _builder.append("[i] = ");
                       {
-                        RefableType _refType_1 = a.getRefType();
-                        boolean _isRef = _refType_1.isRef();
+                        RefableType _type_1 = a.getType();
+                        boolean _isRef = _type_1.isRef();
                         if (_isRef) {
                           String _nullPointer = this.languageExt.nullPointer();
                           _builder.append(_nullPointer, "	");
@@ -184,8 +184,8 @@ public class Initialization {
   public CharSequence attributeInitialization(final Attribute a, final boolean useClassDefaultsOnly) {
     CharSequence _xblockexpression = null;
     {
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
       String value = a.getDefaultValueLiteral();
       CharSequence _xifexpression = null;
       boolean _notEquals = (!Objects.equal(value, null));
@@ -202,8 +202,8 @@ public class Initialization {
         }
         if (_or) {
           CharSequence _xifexpression_2 = null;
-          RefableType _refType_1 = a.getRefType();
-          boolean _isRef = _refType_1.isRef();
+          RefableType _type_1 = a.getType();
+          boolean _isRef = _type_1.isRef();
           if (_isRef) {
             StringConcatenation _builder = new StringConcatenation();
             String _name = a.getName();
@@ -267,8 +267,8 @@ public class Initialization {
           boolean _equals_1 = (_size_2 == 0);
           if (_equals_1) {
             CharSequence _xifexpression_6 = null;
-            RefableType _refType_2 = a.getRefType();
-            boolean _isRef_1 = _refType_2.isRef();
+            RefableType _type_2 = a.getType();
+            boolean _isRef_1 = _type_2.isRef();
             if (_isRef_1) {
               StringConcatenation _builder_4 = new StringConcatenation();
               String _name_5 = a.getName();

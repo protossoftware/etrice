@@ -423,9 +423,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 		
 		for (ProtocolClass pc : gmRoot.getUsedProtocolClasses()) {
-			if (pc.getConjugate()!=null) {
-				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugate(), translationProvider);
-				translateDetailCodesOfTree(pc.getConjugate(), dct);
+			if (pc.getConjugated()!=null) {
+				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugated(), translationProvider);
+				translateDetailCodesOfTree(pc.getConjugated(), dct);
 			}
 			if (pc.getRegular()!=null) {
 				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getRegular(), translationProvider);

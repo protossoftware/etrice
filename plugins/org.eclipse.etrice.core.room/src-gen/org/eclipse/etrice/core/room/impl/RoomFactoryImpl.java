@@ -97,8 +97,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.INTERFACE_ITEM: return createInterfaceItem();
       case RoomPackage.PORT: return createPort();
       case RoomPackage.EXTERNAL_PORT: return createExternalPort();
-      case RoomPackage.SAP_REF: return createSAPRef();
-      case RoomPackage.SPP_REF: return createSPPRef();
+      case RoomPackage.SAP: return createSAP();
+      case RoomPackage.SPP: return createSPP();
       case RoomPackage.SERVICE_IMPLEMENTATION: return createServiceImplementation();
       case RoomPackage.LOGICAL_SYSTEM: return createLogicalSystem();
       case RoomPackage.ACTOR_CONTAINER_REF: return createActorContainerRef();
@@ -556,10 +556,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SAPRef createSAPRef()
+  public SAP createSAP()
   {
-    SAPRefImpl sapRef = new SAPRefImpl();
-    return sapRef;
+    SAPImpl sap = new SAPImpl();
+    return sap;
   }
 
   /**
@@ -567,10 +567,10 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SPPRef createSPPRef()
+  public SPP createSPP()
   {
-    SPPRefImpl sppRef = new SPPRefImpl();
-    return sppRef;
+    SPPImpl spp = new SPPImpl();
+    return spp;
   }
 
   /**

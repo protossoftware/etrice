@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -98,17 +98,17 @@ public class SPPSupport extends InterfaceItemSupport {
 				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 
 				// create SPP
-		        SPPRef spp = RoomFactory.eINSTANCE.createSPPRef();
+		        SPP spp = RoomFactory.eINSTANCE.createSPP();
 		        spp.setName(RoomNameProvider.getUniqueInterfaceItemName("spp", acc));
 				
-				acc.getIfSPPs().add(spp);
+				acc.getServiceProvisionPoints().add(spp);
 		        
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAPRef_Protocol());
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, true, false);
 				if (dlg.open()!=Window.OK) {
-					acc.getIfSPPs().remove(spp);
+					acc.getServiceProvisionPoints().remove(spp);
 					return EMPTY;
 				}
 		        
@@ -130,8 +130,8 @@ public class SPPSupport extends InterfaceItemSupport {
 
 			@Override
 			protected String getItemKind(InterfaceItem item) {
-				if (item instanceof SPPRef)
-					return getSPPKind((SPPRef)item);
+				if (item instanceof SPP)
+					return getSPPKind((SPP)item);
 				
 				return "";
 			}
@@ -142,8 +142,8 @@ public class SPPSupport extends InterfaceItemSupport {
 					GraphicsAlgorithm invisibleRectangle, Color darkColor,
 					Color brightDolor) {
 				
-				if (item instanceof SPPRef)
-					createSPPFigure((SPPRef) item, refitem, containerShape, invisibleRectangle, darkColor, brightDolor);
+				if (item instanceof SPP)
+					createSPPFigure((SPP) item, refitem, containerShape, invisibleRectangle, darkColor, brightDolor);
 			}
 	
 		}
@@ -164,18 +164,18 @@ public class SPPSupport extends InterfaceItemSupport {
 				PictogramElement[] pes = context.getPictogramElements();
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
-					return (bo instanceof SPPRef);
+					return (bo instanceof SPP);
 				}
 				return false;
 			}
 
 			@Override
 			public void execute(ICustomContext context) {
-				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+				SPP spp = (SPP) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				boolean refport = isRefItem(context.getPictogramElements()[0]);
 				
 		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAPRef_Protocol());
+		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, false, refport);
 				if (dlg.open()!=Window.OK)
@@ -200,8 +200,8 @@ public class SPPSupport extends InterfaceItemSupport {
 
 			@Override
 			protected String getItemKind(InterfaceItem item) {
-				if (item instanceof SPPRef)
-					return getSPPKind((SPPRef)item);
+				if (item instanceof SPP)
+					return getSPPKind((SPP)item);
 				
 				return "";
 			}
@@ -209,7 +209,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			@Override
 			protected void updateFigure(InterfaceItem item,
 					PictogramElement pe, Color dark, Color bright) {
-				updateSPPFigure((SPPRef)item, pe, dark, bright);
+				updateSPPFigure((SPP)item, pe, dark, bright);
 			}
 			
 		}
@@ -233,7 +233,7 @@ public class SPPSupport extends InterfaceItemSupport {
 				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
 					return true;
 				
-				if (!(bo instanceof SPPRef))
+				if (!(bo instanceof SPP))
 					return false;
 				
 				return true;
@@ -244,7 +244,7 @@ public class SPPSupport extends InterfaceItemSupport {
 				// check for bindings first
 				external.clear();
 				internal.clear();
-				SPPRef spp = (SPPRef) getBusinessObjectForPictogramElement(context.getPictogramElement());
+				SPP spp = (SPP) getBusinessObjectForPictogramElement(context.getPictogramElement());
 				StructureClass sc = (StructureClass) spp.eContainer();
 				Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(spp, spp.eResource().getResourceSet());
 				for (Setting ref : refs) {
@@ -335,7 +335,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			return new DeleteFeature(fp);
 		}
 
-		protected static void createSPPFigure(SPPRef spp, boolean refspp,
+		protected static void createSPPFigure(SPP spp, boolean refspp,
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightDolor) {
 
@@ -395,7 +395,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			}
 		}
 
-		private static void updateSPPFigure(SPPRef spp, PictogramElement pe, Color dark, Color bright) {
+		private static void updateSPPFigure(SPP spp, PictogramElement pe, Color dark, Color bright) {
 			ContainerShape container = (ContainerShape)pe;
 			
 			// we clear the figure and rebuild it
@@ -473,7 +473,7 @@ public class SPPSupport extends InterfaceItemSupport {
 		return tbp;
 	}
 	
-	protected static String getSPPKind(SPPRef spp) {
+	protected static String getSPPKind(SPP spp) {
 		String kind = "";
 		if (ValidationUtil.isRelay(spp))
 			kind += "R";

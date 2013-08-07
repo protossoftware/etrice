@@ -61,8 +61,8 @@ import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAPRef;
-import org.eclipse.etrice.core.room.SPPRef;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -349,7 +349,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			
 			// collect the refined action code in a hash map
 			for (RefinedTransition rt : copiedStateMachine.getRefinedTransitions()) {
-				if (rt.getAction()==null || rt.getAction().getCommands().isEmpty())
+				if (rt.getAction()==null || rt.getAction().getLines().isEmpty())
 					continue;
 				
 				DetailCode code = trans2refinedAction.get(rt.getTarget());
@@ -358,7 +358,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 					trans2refinedAction.put(rt.getTarget(), code);
 				}
 				
-				code.getCommands().addAll(0, rt.getAction().getCommands());
+				code.getLines().addAll(0, rt.getAction().getLines());
 			}
 		}
 		
@@ -368,7 +368,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			if (entry.getKey().getAction()==null)
 				entry.getKey().setAction(entry.getValue());
 			else
-				entry.getKey().getAction().getCommands().addAll(entry.getValue().getCommands());
+				entry.getKey().getAction().getLines().addAll(entry.getValue().getLines());
 		}
 	}
 
@@ -959,16 +959,16 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			// first recurse into base class
 			offset = computeInterfaceItemLocalIds(ac.getBase(), offset);
 		
-		for (ExternalPort ep : ac.getExtPorts()) {
-			ifitem2localId.put(ep.getIfport(), offset);
+		for (ExternalPort ep : ac.getExternalPorts()) {
+			ifitem2localId.put(ep.getInterfacePort(), offset);
 			++offset;
 		}
-		for (Port ip : ac.getIntPorts()) {
+		for (Port ip : ac.getInternalPorts()) {
 			ifitem2localId.put(ip, offset);
 			++offset;
 		}
 		
-		for (SAPRef sap : ac.getStrSAPs()) {
+		for (SAP sap : ac.getServiceAccessPoints()) {
 			ifitem2localId.put(sap, offset);
 			++offset;
 		}
@@ -1084,11 +1084,11 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		BasicEList<MessageFromIf> result = new BasicEList<MessageFromIf>();
 		
 		HashSet<InterfaceItem> ownIfItems = new HashSet<InterfaceItem>();
-		ownIfItems.addAll(getActorClass().getIntPorts());
-		for (ExternalPort ep : getActorClass().getExtPorts()) {
-			ownIfItems.add(ep.getIfport());
+		ownIfItems.addAll(getActorClass().getInternalPorts());
+		for (ExternalPort ep : getActorClass().getExternalPorts()) {
+			ownIfItems.add(ep.getInterfacePort());
 		}
-		ownIfItems.addAll(getActorClass().getStrSAPs());
+		ownIfItems.addAll(getActorClass().getServiceAccessPoints());
 		for (ServiceImplementation svc : getActorClass().getServiceImplementations()) {
 			ownIfItems.add(svc.getSpp());
 		}
@@ -1121,12 +1121,12 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			Port p = (Port) mif.getFrom();
 			return p.getProtocol().getName()+(p.isConjugated()?".OUT_":".IN_")+mif.getMessage().getName();
 		}
-		else if (mif.getFrom() instanceof SAPRef) {
-			SAPRef sap = (SAPRef) mif.getFrom();
+		else if (mif.getFrom() instanceof SAP) {
+			SAP sap = (SAP) mif.getFrom();
 			return sap.getProtocol().getName()+".OUT_"+mif.getMessage().getName();
 		}
-		else if (mif.getFrom() instanceof SPPRef) {
-			SPPRef spp = (SPPRef) mif.getFrom();
+		else if (mif.getFrom() instanceof SPP) {
+			SPP spp = (SPP) mif.getFrom();
 			return spp.getProtocol().getName()+".IN_"+mif.getMessage().getName();
 		}
 

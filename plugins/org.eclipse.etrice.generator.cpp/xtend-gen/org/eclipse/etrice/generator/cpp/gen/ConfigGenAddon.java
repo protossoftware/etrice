@@ -112,8 +112,8 @@ public class ConfigGenAddon {
     String _xblockexpression = null;
     {
       Attribute a = IterableExtensions.<Attribute>last(path);
-      RefableType _refType = a.getRefType();
-      DataType aType = _refType.getType();
+      RefableType _type = a.getType();
+      DataType aType = _type.getType();
       String _xifexpression = null;
       boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
       if (_isPrimitive) {
@@ -260,9 +260,9 @@ public class ConfigGenAddon {
       List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
       for(final Attribute a : _dynConfigReadAttributes) {
         _builder.append("public ");
-        RefableType _refType = a.getRefType();
-        DataType _type = _refType.getType();
-        String _typeName = this.typeHelpers.typeName(_type);
+        RefableType _type = a.getType();
+        DataType _type_1 = _type.getType();
+        String _typeName = this.typeHelpers.typeName(_type_1);
         _builder.append(_typeName, "");
         {
           int _size = a.getSize();
@@ -314,9 +314,9 @@ public class ConfigGenAddon {
         String _firstUpper_1 = StringExtensions.toFirstUpper(_name_5);
         _builder.append(_firstUpper_1, "");
         _builder.append("(");
-        RefableType _refType_1 = a.getRefType();
-        DataType _type_1 = _refType_1.getType();
-        String _typeName_1 = this.typeHelpers.typeName(_type_1);
+        RefableType _type_2 = a.getType();
+        DataType _type_3 = _type_2.getType();
+        String _typeName_1 = this.typeHelpers.typeName(_type_3);
         _builder.append(_typeName_1, "");
         {
           int _size_1 = a.getSize();
@@ -392,9 +392,9 @@ public class ConfigGenAddon {
         String _firstUpper_3 = StringExtensions.toFirstUpper(_name_15);
         _builder.append(_firstUpper_3, "");
         _builder.append("(");
-        RefableType _refType_2 = a_1.getRefType();
-        DataType _type_2 = _refType_2.getType();
-        String _typeName_2 = this.typeHelpers.typeName(_type_2);
+        RefableType _type_4 = a_1.getType();
+        DataType _type_5 = _type_4.getType();
+        String _typeName_2 = this.typeHelpers.typeName(_type_5);
         _builder.append(_typeName_2, "");
         {
           int _size_2 = a_1.getSize();
@@ -465,16 +465,16 @@ public class ConfigGenAddon {
       String temp = ((String) null);
       String _xifexpression = null;
       Attribute _last = IterableExtensions.<Attribute>last(path);
-      RefableType _refType = _last.getRefType();
-      DataType _type = _refType.getType();
-      boolean _isDataClass = this.typeHelpers.isDataClass(_type);
+      RefableType _type = _last.getType();
+      DataType _type_1 = _type.getType();
+      boolean _isDataClass = this.typeHelpers.isDataClass(_type_1);
       if (_isDataClass) {
         StringConcatenation _builder = new StringConcatenation();
         {
           Attribute _last_1 = IterableExtensions.<Attribute>last(path);
-          RefableType _refType_1 = _last_1.getRefType();
-          DataType _type_1 = _refType_1.getType();
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _type_1));
+          RefableType _type_2 = _last_1.getType();
+          DataType _type_3 = _type_2.getType();
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _type_3));
           for(final Attribute e : _allAttributes) {
             String _plus = (varNamePath + "_");
             String _name = e.getName();
@@ -489,17 +489,17 @@ public class ConfigGenAddon {
       } else {
         String _xifexpression_1 = null;
         Attribute _last_2 = IterableExtensions.<Attribute>last(path);
-        RefableType _refType_2 = _last_2.getRefType();
-        DataType _type_2 = _refType_2.getType();
-        if ((_type_2 instanceof ExternalType)) {
+        RefableType _type_4 = _last_2.getType();
+        DataType _type_5 = _type_4.getType();
+        if ((_type_5 instanceof ExternalType)) {
           _xifexpression_1 = null;
         } else {
           String _xblockexpression_1 = null;
           {
             Attribute _last_3 = IterableExtensions.<Attribute>last(path);
-            RefableType _refType_3 = _last_3.getRefType();
-            DataType _type_3 = _refType_3.getType();
-            PrimitiveType aType = ((PrimitiveType) _type_3);
+            RefableType _type_6 = _last_3.getType();
+            DataType _type_7 = _type_6.getType();
+            PrimitiveType aType = ((PrimitiveType) _type_7);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
               String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);

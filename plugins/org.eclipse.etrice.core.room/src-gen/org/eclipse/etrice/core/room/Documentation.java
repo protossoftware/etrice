@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.Documentation#getText <em>Text</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Documentation#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface Documentation extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Text</b></em>' attribute list.
+   * Returns the value of the '<em><b>Lines</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -39,11 +39,11 @@ public interface Documentation extends EObject
    * <br>This is the documentation's contents.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Text</em>' attribute list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getDocumentation_Text()
+   * @return the value of the '<em>Lines</em>' attribute list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDocumentation_Lines()
    * @model unique="false"
    * @generated
    */
-  EList<String> getText();
+  EList<String> getLines();
 
 } // Documentation

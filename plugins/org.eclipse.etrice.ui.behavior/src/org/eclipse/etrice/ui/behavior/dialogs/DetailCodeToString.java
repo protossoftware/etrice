@@ -20,7 +20,7 @@ public class DetailCodeToString extends Converter {
 	public Object convert(Object fromObject) {
 		if (fromObject instanceof DetailCode) {
 			String result = "";
-			for (String cmd : ((DetailCode) fromObject).getCommands()) {
+			for (String cmd : ((DetailCode) fromObject).getLines()) {
 				result += cmd+"\n";
 			}
 			return result;
