@@ -50,7 +50,7 @@ public class ActorClassBaseTest extends TestCase {
 		TopRTObject topRTObject = new TopRTObject("TOP");
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(topRTObject, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_Main", Thread.NORM_PRIORITY));
+				new MessageService(topRTObject, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService_Main", Thread.NORM_PRIORITY));
 
 		// PathNames
 		ActorClassBase actor = new MockActor(topRTObject, "MockActor1");

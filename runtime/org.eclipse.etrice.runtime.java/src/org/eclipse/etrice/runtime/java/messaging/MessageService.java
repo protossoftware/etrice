@@ -72,7 +72,7 @@ public class MessageService extends RTObject implements IMessageService {
 	public synchronized void receive(Message msg) {
 		if (msg!=null) {
 			messageQueue.push(msg);
-			notifyAll(); // wake up thread to compute message
+			notifyAll(); // wake up thread to process message
 		}
 	}
 

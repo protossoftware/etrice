@@ -34,7 +34,7 @@ public class MessageServiceController {
 
 	public synchronized int getNewID() {
 		if (freeIDs.isEmpty())
-			return nextFreeID;
+			return nextFreeID++;
 		else
 			return freeIDs.remove();
 	}

@@ -47,9 +47,9 @@ public class ReplicatedPortBaseTest {
 		msgSvcCtrl.resetAll();
 
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_0", Thread.NORM_PRIORITY));
+				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService_0", Thread.NORM_PRIORITY));
 		msgSvcCtrl.addMsgSvc(
-				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNMsgSvc(), "MessageService_1", Thread.NORM_PRIORITY));
+				new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService_1", Thread.NORM_PRIORITY));
 
 	}
 
