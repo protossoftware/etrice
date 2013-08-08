@@ -94,7 +94,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		int width = parent.inner.getW();
 		int height = parent.inner.getH();
-		int y = ActorContainerRefSupport.MARGIN;
+		int y = - InterfaceItemSupport.MARGIN + 2*ActorContainerRefSupport.MARGIN;
 		
 		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
 		List<InterfaceItem> ifItems = new ArrayList<InterfaceItem>();
@@ -112,10 +112,10 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		layoutInterfaceItems(ifItems, width, height, -InterfaceItemSupport.MARGIN);
 		
-		layoutActorRefs(refs, width, height, y);
-		
-		y = height - (InterfaceItemSupport.ITEM_SIZE + 2*InterfaceItemSupport.MARGIN);
 		layoutInterfaceItems(intPorts, width, height, y);
+		
+		y += InterfaceItemSupport.ITEM_SIZE + 2*ActorContainerRefSupport.MARGIN;
+		layoutActorRefs(refs, width, height, y);
 	}
 
 	public DefaultPositionProvider(StructureClass sc) {
@@ -124,11 +124,9 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		int width = StructureClassSupport.DEFAULT_SIZE_X;
 		int height = StructureClassSupport.DEFAULT_SIZE_Y;
-		int y = ActorContainerRefSupport.MARGIN;
+		int y = - InterfaceItemSupport.MARGIN + 2*ActorContainerRefSupport.MARGIN;
 		
 		layoutInterfaceItems(RoomHelpers.getInterfaceItems(sc, true), width, height, -InterfaceItemSupport.MARGIN);
-		
-		layoutActorRefs(RoomHelpers.getAllActorContainerRefs(sc), width, height, y);
 		
 		List<InterfaceItem> intPorts = new ArrayList<InterfaceItem>();
 		if(sc instanceof ActorClass){
@@ -138,8 +136,10 @@ public class DefaultPositionProvider implements IPositionProvider {
 				base = base.getBase();
 			}
 		}
-		y = height - (InterfaceItemSupport.ITEM_SIZE + 2*InterfaceItemSupport.MARGIN);
 		layoutInterfaceItems(intPorts, width, height, y);
+		
+		y += InterfaceItemSupport.ITEM_SIZE + 2*ActorContainerRefSupport.MARGIN;
+		layoutActorRefs(RoomHelpers.getAllActorContainerRefs(sc), width, height, y);
 		
 	}
 
@@ -236,6 +236,13 @@ public class DefaultPositionProvider implements IPositionProvider {
 		for (ActorContainerRef ar : actorRefs) {
 			int row = i/ncols;
 			int col = i%ncols;
+			
+			int nLastRow = actorRefs.size()%ncols;
+			if(row >= actorRefs.size()/ncols && nLastRow > 0){
+				gap = (width-(nLastRow*ActorContainerRefSupport.DEFAULT_SIZE_X))/(nLastRow+1);
+				delta = gap+ActorContainerRefSupport.DEFAULT_SIZE_X;
+				x0 = - ActorContainerRefSupport.MARGIN + gap;
+			}
 			
 			int x = x0+delta*col;
 			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
