@@ -8,7 +8,7 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 
 /**
@@ -21,9 +21,7 @@ import java.util.HashMap;
 public class MessageDispatcher extends RTObject implements IMessageReceiver {
 
 	private HashMap<Number, IMessageReceiver> local_map = new HashMap<Number, IMessageReceiver>();
-	private HashMap<Number, IMessageReceiver> thread_map = new HashMap<Number, IMessageReceiver>();
-	private HashMap<Number, IMessageReceiver> node_map = new HashMap<Number, IMessageReceiver>();
-	private ArrayList<Address> freeAdresses = new ArrayList<Address>();
+	private LinkedList<Address> freeAdresses = new LinkedList<Address>();
 	
 	private Address address = null;
 	private int nextFreeObjId;
@@ -39,7 +37,7 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 			return new Address(getAddress().nodeID, getAddress().threadID, nextFreeObjId++);
 		}
 		else
-			return freeAdresses.remove(0);
+			return freeAdresses.remove();
 	}
 	
 	public void freeAddress(Address addr) {
@@ -50,14 +48,8 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 		if (receiver.getAddress()==null)
 			return;
 		
-		// TODO: does only work same thread (else)
-		if (receiver.getAddress().nodeID != address.nodeID){
-			node_map.put(receiver.getAddress().objectID, receiver);
-		}
-		else if(receiver.getAddress().threadID != address.threadID){
-			thread_map.put(receiver.getAddress().threadID, receiver);
-		}
-		else {
+		if (receiver.getAddress().nodeID == address.nodeID
+				&& receiver.getAddress().threadID == address.threadID) {
 			local_map.put(receiver.getAddress().objectID, receiver);
 		}
 	}
@@ -66,36 +58,23 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 		if (receiver.getAddress()==null)
 			return;
 		
-		// TODO: does only work same thread (else)
-		if (receiver.getAddress().nodeID != address.nodeID){
-			node_map.remove(receiver.getAddress().objectID);
-		}
-		else if(receiver.getAddress().threadID != address.threadID){
-			thread_map.remove(receiver.getAddress().threadID);
-		}
-		else {
+		if (receiver.getAddress().nodeID == address.nodeID
+				&& receiver.getAddress().threadID == address.threadID) {
 			local_map.remove(receiver.getAddress().objectID);
 		}
 	}
 	
 	@Override
 	public void receive(Message msg) {
-		// TODO: does only work same thread (else)
-		IMessageReceiver receiver = null;
-		if (msg.getAddress().nodeID != address.nodeID){
-			receiver = node_map.get(msg.getAddress().objectID);
-		}
-		else if(msg.getAddress().threadID != address.threadID){
-			receiver = thread_map.get(msg.getAddress().threadID);
-		}
-		else {
-			// Same node, same thread -> local call Dispatch Map
-			receiver = local_map.get(msg.getAddress().objectID);
-		}
-		if(receiver!=null)
-		{
-			receiver.receive(msg);
-			// TODO: error handling for not found addresses
+		if (msg.getAddress().nodeID == address.nodeID
+				&& msg.getAddress().threadID == address.threadID) {
+			IMessageReceiver receiver = local_map.get(msg.getAddress().objectID);
+			if(receiver!=null) {
+				receiver.receive(msg);
+			}
+			else {
+				// TODO: error handling for not found addresses
+			}
 		}
 	}
 	

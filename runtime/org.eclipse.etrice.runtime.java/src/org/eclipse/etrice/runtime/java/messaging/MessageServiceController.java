@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -27,33 +27,40 @@ import java.util.Map;
 
 public class MessageServiceController {
 	
-	private List<IMessageService> messageServiceList = null;
+	private HashMap<Integer, IMessageService> messageServices = new HashMap<Integer, IMessageService>();
+	private LinkedList<Integer> freeIDs = new LinkedList<Integer>();
 	private boolean running = false;
+	private int nextFreeID = 0;
 
-	public MessageServiceController(/*IRTObject parent*/){
-		// TODOTS: Who is parent of MessageServices and Controller?
-		// this.parent = parent;
-		messageServiceList = new ArrayList<IMessageService>();
-	}
-
-	public void addMsgSvc(IMessageService msgSvc){
-		// TODOTS: Who is parent of MessageServices ?
-		assert(msgSvc.getAddress().threadID == messageServiceList.size());
-		messageServiceList.add(msgSvc);
+	public synchronized int getNewID() {
+		if (freeIDs.isEmpty())
+			return nextFreeID;
+		else
+			return freeIDs.remove();
 	}
 	
-	public int getNMsgSvc() {
-		return messageServiceList.size();
+	public void freeID(int id) {
+		freeIDs.add(id);
 	}
 	
-	public IMessageService getMsgSvc(int threadID){
-		assert(threadID < messageServiceList.size());
-		return messageServiceList.get(threadID);
+	public synchronized void addMsgSvc(IMessageService msgSvc){
+		if (nextFreeID<=msgSvc.getAddress().threadID)
+			nextFreeID = msgSvc.getAddress().threadID+1;
+		
+		messageServices.put(msgSvc.getAddress().threadID, msgSvc);
+	}
+
+	public synchronized void removeMsgSvc(IMessageService msgSvc){
+		messageServices.remove(msgSvc.getAddress().threadID);
+	}
+	
+	public IMessageService getMsgSvc(int id){
+		return messageServices.get(id);
 	}
 	
 	public void start() {
 		// start all message services
-		for (IMessageService msgSvc : messageServiceList){
+		for (IMessageService msgSvc : messageServices.values()){
 			Thread thread = new Thread(msgSvc, msgSvc.getName());
 			msgSvc.setThread(thread);
 			thread.start();
@@ -96,7 +103,7 @@ public class MessageServiceController {
 
 	private void terminate() {
 		// terminate all message services
-		for (IMessageService msgSvc : messageServiceList){
+		for (IMessageService msgSvc : messageServices.values()){
 			msgSvc.terminate();
 			// TODOTS: stop in order of priorities
 		}
@@ -104,10 +111,10 @@ public class MessageServiceController {
 
 	/**
 	 * waitTerminate waits blocking for all MessageServices to terminate 
-	 * ! not threadsafe !
+	 * ! not thread safe !
 	 */
 	public void waitTerminate() {
-		for (IMessageService msgSvc : messageServiceList) {
+		for (IMessageService msgSvc : messageServices.values()) {
 			try {
 				msgSvc.getThread().join(1000);	// wait at most 1000ms
 				if (msgSvc.getThread().isAlive())
@@ -119,8 +126,10 @@ public class MessageServiceController {
 		}
 	}
 	
-	public void resetAll() {
+	public synchronized void resetAll() {
 		stop();
-		messageServiceList.clear();
-}
+		messageServices.clear();
+		freeIDs.clear();
+		nextFreeID = 0;
+	}
 }

@@ -106,7 +106,7 @@ public class MessageService extends RTObject implements IMessageService {
 		return messageQueue;
 	}
 
-	public synchronized MessageDispatcher getMessageDispatcher() {
+	protected synchronized MessageDispatcher getMessageDispatcher() {
 		return messageDispatcher;
 	}
 
@@ -135,6 +135,16 @@ public class MessageService extends RTObject implements IMessageService {
 	 */
 	public Thread getThread() {
 		return thread;
+	}
+
+	@Override
+	public void addMessageReceiver(IMessageReceiver receiver) {
+		messageDispatcher.addMessageReceiver(receiver);
+	}
+
+	@Override
+	public void removeMessageReceiver(IMessageReceiver receiver) {
+		messageDispatcher.removeMessageReceiver(receiver);
 	}
 
 }

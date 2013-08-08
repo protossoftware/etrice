@@ -15,7 +15,6 @@ import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 
 /**
@@ -34,7 +33,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	 */
 	private IReplicatedInterfaceItem replicator = null;
 	
-	protected IMessageReceiver ownMsgReceiver;
+	protected IMessageService ownMsgReceiver;
 	protected IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
@@ -64,14 +63,9 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			IMessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 			Address addr = msgSvc.getFreeAddress();
 			setAddress(addr);
+			msgSvc.addMessageReceiver(this);
 			
 			this.ownMsgReceiver = msgSvc;
-			
-			if (this.ownMsgReceiver instanceof MessageService) {
-				MessageService ms = (MessageService) this.ownMsgReceiver;
-				// register at the own dispatcher to receive messages
-				ms.getMessageDispatcher().addMessageReceiver(this);
-			}
 		}
 		
 		connectWithPeer();
@@ -139,10 +133,6 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	protected synchronized IMessageReceiver getPeerMsgReceiver() {
 		return peerMsgReceiver;
 	}
-
-	public void setMsgReceiver(IMessageReceiver msgReceiver) {
-		this.ownMsgReceiver = msgReceiver;
-	}
 	
 	public IEventReceiver getActor() {
 		return (IEventReceiver) getParent();
@@ -169,11 +159,8 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			replicator.removeItem(this);
 		}
 		
-		if (this.ownMsgReceiver instanceof MessageService) {
-			MessageService ms = (MessageService) this.ownMsgReceiver;
-			ms.getMessageDispatcher().removeMessageReceiver(this);
-			ms.freeAddress(getAddress());
-		}
+		ownMsgReceiver.removeMessageReceiver(this);
+		ownMsgReceiver.freeAddress(getAddress());
 		
 		super.destroy();
 	}
