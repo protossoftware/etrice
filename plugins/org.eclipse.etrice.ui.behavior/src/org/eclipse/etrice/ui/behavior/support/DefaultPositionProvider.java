@@ -58,6 +58,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	private HashMap<String, PosAndSize> sg2sz = new HashMap<String, PosAndSize>();
 	private double scaleX;
 	private double scaleY;
+	private int posX, posY;
 	
 	public DefaultPositionProvider(ActorClass ac) {
 		mapPositions(ac.getBase());
@@ -70,6 +71,12 @@ public class DefaultPositionProvider implements IPositionProvider {
 	public void setScale(double sx, double sy) {
 		this.scaleX = sx;
 		this.scaleY = sy;
+	}
+	
+	@Override
+	public void setPosition(int x, int y){
+		this.posX = x;
+		this.posY = y;
 	}
 
 	public PosAndSize getPosition(StateGraphNode node) {
@@ -113,13 +120,15 @@ public class DefaultPositionProvider implements IPositionProvider {
 		
 		ArrayList<Position> list = trans2points.get(RoomNameProvider.getFullPath(trans));
 		if (list!=null) {
+			int i = 0;
 			for (Position p : list) {
 				Pos pos = 
 					new Pos(
-						(int) (p.x * scaleX),
-						(int) (p.y * scaleY)
+						(int) (p.x * scaleX) + ((i==0)?0:posX),
+						(int) (p.y * scaleY) + ((i==0)?0:posY)
 					);
 				result.add(pos);
+				i++;
 			}
 		}
 		
@@ -262,8 +271,8 @@ public class DefaultPositionProvider implements IPositionProvider {
 					if (conn instanceof FreeFormConnection) {
 						for (Point bp : ((FreeFormConnection) conn).getBendpoints()) {
 							pos = new Position();
-							pos.x = bp.getX() / ((double)sz.getWidth());
-							pos.y = bp.getY() / ((double)sz.getHeight());
+							pos.x = (bp.getX() - sz.getX()) / ((double)sz.getWidth());
+							pos.y = (bp.getY() - sz.getY()) / ((double)sz.getHeight());
 							points.add(pos);
 						}
 					}

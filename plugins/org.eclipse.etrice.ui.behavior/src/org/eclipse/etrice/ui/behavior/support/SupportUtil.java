@@ -466,6 +466,7 @@ public class SupportUtil {
 		
 		GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 		ctx.getPositionProvider().setScale(borderRect.getWidth(), borderRect.getHeight());
+		ctx.getPositionProvider().setPosition(sgShape.getGraphicsAlgorithm().getX(), sgShape.getGraphicsAlgorithm().getY());
 		
 		addInitialPointIff(ctx, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 		addStateGraphNodes(ctx.getTrPoints(), ctx.getPositionProvider(), sgShape, fp, node2anchor);
@@ -522,6 +523,7 @@ public class SupportUtil {
 		
 		GraphicsAlgorithm borderRect = sgShape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 		ctx.getPositionProvider().setScale(borderRect.getWidth(), borderRect.getHeight());
+		ctx.getPositionProvider().setPosition(sgShape.getGraphicsAlgorithm().getX(), sgShape.getGraphicsAlgorithm().getY());
 		
 		// states
 		{
