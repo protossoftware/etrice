@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -1417,18 +1418,23 @@ public class RoomHelpers {
 	/**
 	 * @param ac an {@link ActorClass}
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * interface items of this actor class (<i>without</i> inherited ones)
+	 * event driven interface items of this actor class (<i>without</i> inherited ones)
 	 */
 	public static List<MessageFromIf> getMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
 		
 		List<InterfaceItem> items = getInterfaceItems(ac);
 		for (InterfaceItem item : items) {
-			for (Message msg : getIncoming(item)) {
-				MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
-				mif.setMessage(msg);
-				mif.setFrom(item);
-				result.add(mif);
+			if (item.getGeneralProtocol() instanceof ProtocolClass) {
+				ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
+				if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
+					for (Message msg : getIncoming(item)) {
+						MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+						mif.setMessage(msg);
+						mif.setFrom(item);
+						result.add(mif);
+					}
+				}
 			}
 		}
 		
@@ -1438,7 +1444,7 @@ public class RoomHelpers {
 	/**
 	 * @param ac an {@link ActorClass}
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
+	 * event driven interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
 	 */
 	public static List<MessageFromIf> getOwnMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
@@ -1451,11 +1457,16 @@ public class RoomHelpers {
 			
 			List<InterfaceItem> items = getInterfaceItems(ac);
 			for (InterfaceItem item : items) {
-				for (Message msg : getIncoming(item)) {
-					MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
-					mif.setMessage(msg);
-					mif.setFrom(item);
-					result.add(mif);
+				if (item.getGeneralProtocol() instanceof ProtocolClass) {
+					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
+					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
+						for (Message msg : getIncoming(item)) {
+							MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+							mif.setMessage(msg);
+							mif.setFrom(item);
+							result.add(mif);
+						}
+					}
 				}
 			}
 			
@@ -1468,7 +1479,7 @@ public class RoomHelpers {
 	/**
 	 * @param ac an {@link ActorClass}
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * interface items of this actor class(<i>including</i> inherited ones)
+	 * event driven interface items of this actor class(<i>including</i> inherited ones)
 	 */
 	public static List<MessageFromIf> getAllMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
@@ -1476,11 +1487,16 @@ public class RoomHelpers {
 		while (ac!=null) {
 			List<InterfaceItem> items = getInterfaceItems(ac);
 			for (InterfaceItem item : items) {
-				for (Message msg : getIncoming(item)) {
-					MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
-					mif.setMessage(msg);
-					mif.setFrom(item);
-					result.add(mif);
+				if (item.getGeneralProtocol() instanceof ProtocolClass) {
+					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
+					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
+						for (Message msg : getIncoming(item)) {
+							MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+							mif.setMessage(msg);
+							mif.setFrom(item);
+							result.add(mif);
+						}
+					}
 				}
 			}
 			
