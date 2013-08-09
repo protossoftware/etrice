@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.dialogs;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -34,6 +35,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.dialogs.MultiValidator2;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.Multiplicity2StringConverter;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.String2MultiplicityConverter;
@@ -111,64 +113,48 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 	
-	class SizeValidator implements IValidator {
+	class SizeAndRefTypeValidator extends MultiValidator2{
 
-		private ActorRef ref;
-
-		public SizeValidator(ActorRef ref) {
-			this.ref = ref;
+		public SizeAndRefTypeValidator(DataBindingContext bindingContext) {
+			super(bindingContext, 2);
 		}
 
 		@Override
+		public IStatus validate(List<Object> values) {
+			int m = (Integer) values.get(0);
+			ReferenceType rt = (ReferenceType) values.get(1);
+			if (m==0)
+				return ValidationStatus.error("multiplicity must not be 0");
+			if (m<-1)
+				return ValidationStatus.error("multiplicity must be -1 or positive");
+			if (rt==ReferenceType.OPTIONAL) {
+				if (m>1)
+					return ValidationStatus.error("multiplicity >1 not allowed (only fixed actors)");
+			}
+			else {
+				if (m==-1)
+					return ValidationStatus.error("multiplicity * not allowed (only optional actors)");
+			}
+			
+			return ValidationStatus.ok();
+		}
+		
+	}
+	
+	class SizeValidator implements IValidator {
+
+		@Override
 		public IStatus validate(Object value) {
-			if (value instanceof Integer) {
+			if(value instanceof Integer){
 				int m = (Integer) value;
 				if (m==0)
 					return ValidationStatus.error("multiplicity must not be 0");
 				if (m<-1)
 					return ValidationStatus.error("multiplicity must be -1 or positive");
-				if (ref.getRefType()==ReferenceType.OPTIONAL) {
-					if (m>1)
-						return ValidationStatus.error("multiplicity >1 not allowed (only fixed actors)");
-				}
-				else {
-					if (m==-1)
-						return ValidationStatus.error("multiplicity * not allowed (only optional actors)");
-				}
 			}
-			return Status.OK_STATUS;
+			
+			return ValidationStatus.ok();
 		}
-	}
-	
-	class RefTypeValidator implements IValidator {
-
-		private ActorRef ref;
-
-		public RefTypeValidator(ActorRef ref) {
-			this.ref = ref;
-		}
-		
-		@Override
-		public IStatus validate(Object value) {
-			if (value instanceof String) {
-				if (ReferenceType.OPTIONAL.getLiteral().equals(value))
-					if (ref.getMultiplicity()>1)
-						return ValidationStatus.error("replicated optional actors must have multiplicity *");
-				if (ReferenceType.FIXED.getLiteral().equals(value))
-					if (ref.getMultiplicity()<0)
-						return ValidationStatus.error("replicated fixed actors must have fixed multiplicity");
-			}
-			else if (value instanceof ReferenceType) {
-				if (ReferenceType.OPTIONAL==value)
-					if (ref.getMultiplicity()>1)
-						return ValidationStatus.error("replicated optional actors must have multiplicity *");
-				if (ReferenceType.FIXED==value)
-					if (ref.getMultiplicity()<0)
-						return ValidationStatus.error("replicated fixed actors must have fixed multiplicity");
-			}
-			return Status.OK_STATUS;
-		}
-		
 	}
 
 	private ActorContainerRef ref;
@@ -236,7 +222,10 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		if (ref instanceof ActorRef) {
 			Multiplicity2StringConverter m2s = new Multiplicity2StringConverter();
 			String2MultiplicityConverter s2m = new String2MultiplicityConverter();
-			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Multiplicity(), new SizeValidator(((ActorRef) ref)), s2m, m2s, false);
+			MultiValidator2 multiValidator = new SizeAndRefTypeValidator(bindingContext);
+			
+			IValidator sizeValidator = new SizeValidator();
+			Text size = createText(body, "&Multiplicity", ref, RoomPackage.eINSTANCE.getActorRef_Multiplicity(), sizeValidator, multiValidator, s2m, m2s, false);
 			if (hasInterfacePortWithMultiplicityAny(((ActorRef) ref).getType())) {
 				size.setEnabled(false);
 				createInfoDecorator(size, "size fixed since actor has interface ports with multiplicity *");
@@ -245,8 +234,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 				createDecorator(size, "multiplicity");
 			}
 			
-			RefTypeValidator rtv = new RefTypeValidator((ActorRef) ref);
-			Combo refType = createCombo(body, "Reference &Type:", ref, ReferenceType.class, RoomPackage.Literals.ACTOR_REF__REF_TYPE, ReferenceType.VALUES, rtv);
+			Combo refType = createCombo(body, "Reference &Type:", ref, ReferenceType.class, RoomPackage.eINSTANCE.getActorRef_RefType(), ReferenceType.VALUES, null, multiValidator);
 			createDecorator(refType, "invalid ref type");
 		}
 		
