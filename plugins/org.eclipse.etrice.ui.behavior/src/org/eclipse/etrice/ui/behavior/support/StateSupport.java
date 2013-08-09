@@ -788,8 +788,16 @@ public class StateSupport {
 							Object childBo = getBusinessObjectForPictogramElement(childShape);
 							if (childBo instanceof TrPoint) {
 								ga = childShape.getGraphicsAlgorithm();
-								ga.setX((int) (ga.getX()*sx));
-								ga.setY((int) (ga.getY()*sy));
+								
+								int midX = ga.getX() + ga.getWidth()/2 - MARGIN;
+								int midY = ga.getY() + ga.getHeight()/2 - MARGIN;
+								midX = (int) (midX*sx);
+								midY = (int) (midY*sy);
+								midX = midX - ga.getWidth()/2 + MARGIN;
+								midY = midY - ga.getHeight()/2 + MARGIN;
+								
+								Graphiti.getGaService().setLocation(ga, midX, midY);
+								updatePictogramElement(childShape);
 							}
 							
 						}
