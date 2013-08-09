@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  * 
  * @author Henrik Rentz-Reichert
  */
-public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterfaceBase {
+public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterfaceBase implements IPersistable {
 
 	/**
 	 * A separator for the index part of the name.
@@ -178,6 +179,36 @@ public class ReplicatedOptionalActorInterfaceBase extends OptionalActorInterface
 
 	public String toString(){
 		return "ReplicatedOptionalActorInterface(className="+getClassName()+", instancePath="+getInterfaceInstancePath()+")";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IPersistable#saveObject(java.io.ObjectOutput)
+	 */
+	@Override
+	public void saveObject(ObjectOutput output) throws IOException {
+		output.writeInt(actors.size());
+		for (ActorClassBase actor : actors) {
+			output.writeUTF(actor.getClassName());
+			output.writeInt(actor.getThread());
+			int idx = Integer.parseInt(actor.getName().substring(actor.getName().indexOf(INDEX_SEP)+1));
+			output.writeInt(idx);
+			saveActor(actor, output);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IPersistable#loadObject(java.io.ObjectInput)
+	 */
+	@Override
+	public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+		int size = input.readInt();
+		for (int i=0; i<size; ++i) {
+			String className = input.readUTF();
+			int thread = input.readInt();
+			int idx = input.readInt();
+			releasedIndices.add(idx);	// will be used as next index
+			createOptionalActor(className, thread, input);
+		}
 	}
 
 }

@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
@@ -25,7 +26,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  * 
  * @author Henrik Rentz-Reichert
  */
-public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase {
+public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase implements IPersistable {
 
 	/**
 	 * Our single actor instance or {@code null} if not instantiated or destroyed.
@@ -115,6 +116,32 @@ public class ScalarOptionalActorInterfaceBase extends OptionalActorInterfaceBase
 
 	public String toString(){
 		return "ScalarOptionalActorInterface(className="+getClassName()+", instancePath="+getInterfaceInstancePath()+")";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IPersistable#saveObject(java.io.ObjectOutput)
+	 */
+	@Override
+	public void saveObject(ObjectOutput output) throws IOException {
+		output.writeBoolean(actor!=null);
+		if (actor!=null) {
+			output.writeUTF(actor.getClassName());
+			output.writeInt(actor.getThread());
+			saveActor(actor, output);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.modelbase.IPersistable#loadObject(java.io.ObjectInput)
+	 */
+	@Override
+	public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+		boolean haveActor = input.readBoolean();
+		if (haveActor) {
+			String className = input.readUTF();
+			int thread = input.readInt();
+			createOptionalActor(className, thread, input);
+		}
 	}
 
 }

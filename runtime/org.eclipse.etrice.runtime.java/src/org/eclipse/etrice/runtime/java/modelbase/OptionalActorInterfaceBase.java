@@ -391,6 +391,9 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 			for (IRTObject child : actor.getChildren()) {
 				if (child instanceof ActorClassBase)
 					recursivelyLoad((ActorClassBase) child, input);
+				else if (child instanceof IPersistable) {
+					((IPersistable) child).loadObject(input);
+				}
 			}
 		}
 	}
@@ -431,6 +434,9 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 			for (IRTObject child : actor.getChildren()) {
 				if (child instanceof ActorClassBase)
 					recursivelySave((ActorClassBase) child, output);
+				else if (child instanceof IPersistable) {
+					((IPersistable) child).saveObject(output);
+				}
 			}
 		}
 	}
