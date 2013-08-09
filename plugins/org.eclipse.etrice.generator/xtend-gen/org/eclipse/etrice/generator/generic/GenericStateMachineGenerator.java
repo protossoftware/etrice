@@ -181,16 +181,18 @@ public class GenericStateMachineGenerator {
    * @return the generated code
    */
   protected String genTriggerConstants(final ExpandedActorClass xpac) {
-    EList<MessageFromIf> _xifexpression = null;
+    List<MessageFromIf> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
-      EList<MessageFromIf> _ownTriggers = xpac.getOwnTriggers();
-      _xifexpression = _ownTriggers;
+      ActorClass _actorClass = xpac.getActorClass();
+      List<MessageFromIf> _ownMessagesFromInterfaces = RoomHelpers.getOwnMessagesFromInterfaces(_actorClass);
+      _xifexpression = _ownMessagesFromInterfaces;
     } else {
-      EList<MessageFromIf> _triggers = xpac.getTriggers();
-      _xifexpression = _triggers;
+      ActorClass _actorClass_1 = xpac.getActorClass();
+      List<MessageFromIf> _allMessagesFromInterfaces = RoomHelpers.getAllMessagesFromInterfaces(_actorClass_1);
+      _xifexpression = _allMessagesFromInterfaces;
     }
-    final EList<MessageFromIf> triggers = _xifexpression;
+    final List<MessageFromIf> triggers = _xifexpression;
     ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
     final ArrayList<Pair<String,String>> list = _arrayList;
     Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");

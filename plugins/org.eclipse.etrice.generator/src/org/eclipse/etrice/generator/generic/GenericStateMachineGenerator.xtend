@@ -108,8 +108,9 @@ class GenericStateMachineGenerator {
 	 */
 	def protected genTriggerConstants(ExpandedActorClass xpac) {
 		val triggers = if (langExt.usesInheritance)
-			xpac.getOwnTriggers() else xpac.triggers
-
+					xpac.actorClass.ownMessagesFromInterfaces
+					else xpac.actorClass.allMessagesFromInterfaces
+		
 		val list = new ArrayList<Pair<String, String>>()
 		list.add(pair("POLLING", "0"));
 		for (mif : triggers) {

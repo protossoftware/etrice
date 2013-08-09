@@ -44,6 +44,7 @@ import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -1377,8 +1378,9 @@ public class RoomHelpers {
 
 	/**
 	 * @param ac an {@link ActorClass}
-	 * @return a list of the all interface ports including inherited with base
+	 * @return a list of the all interface ports <i>including</i> inherited with base
 	 *         class ports first
+	 * @see #getInterfaceItems(ActorClass)
 	 */
 	public static List<Port> getAllInterfacePorts(ActorContainerClass ac) {
 		if (ac instanceof ActorClass) {
@@ -1397,6 +1399,98 @@ public class RoomHelpers {
 	}
 	
 	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of all interface items <i>without</i> inherited ones
+	 * @see #getAllInterfaceItems(ActorClass)
+	 */
+	public static List<InterfaceItem> getInterfaceItems(ActorClass ac) {
+		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
+
+		result.addAll(ac.getInternalPorts());
+		result.addAll(ac.getExternalEndPorts());
+		result.addAll(ac.getServiceAccessPoints());
+		result.addAll(ac.getImplementedSPPs());
+		
+		return result;
+	}
+	
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * interface items of this actor class (<i>without</i> inherited ones)
+	 */
+	public static List<MessageFromIf> getMessagesFromInterfaces(ActorClass ac) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		List<InterfaceItem> items = getInterfaceItems(ac);
+		for (InterfaceItem item : items) {
+			for (Message msg : getIncoming(item)) {
+				MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+				mif.setMessage(msg);
+				mif.setFrom(item);
+				result.add(mif);
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
+	 */
+	public static List<MessageFromIf> getOwnMessagesFromInterfaces(ActorClass ac) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		result.addAll(getMessagesFromInterfaces(ac));
+		ac = ac.getBase();
+		while (ac!=null) {
+			if (hasNonEmptyStateMachine(ac))
+				break;
+			
+			List<InterfaceItem> items = getInterfaceItems(ac);
+			for (InterfaceItem item : items) {
+				for (Message msg : getIncoming(item)) {
+					MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+					mif.setMessage(msg);
+					mif.setFrom(item);
+					result.add(mif);
+				}
+			}
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * @param ac an {@link ActorClass}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * interface items of this actor class(<i>including</i> inherited ones)
+	 */
+	public static List<MessageFromIf> getAllMessagesFromInterfaces(ActorClass ac) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		while (ac!=null) {
+			List<InterfaceItem> items = getInterfaceItems(ac);
+			for (InterfaceItem item : items) {
+				for (Message msg : getIncoming(item)) {
+					MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+					mif.setMessage(msg);
+					mif.setFrom(item);
+					result.add(mif);
+				}
+			}
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Returns a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 * including base classes. I.e. all end ports, all SAPs and all non-relaying SPPs.
 	 * 
@@ -1411,13 +1505,9 @@ public class RoomHelpers {
 		
 		while (ac!=null) {
 			result.addAll(ac.getInternalPorts());
-			for (ExternalPort p : ac.getExternalPorts()) {
-				result.add(p.getInterfacePort());
-			}
+			result.addAll(ac.getExternalEndPorts());
 			result.addAll(ac.getServiceAccessPoints());
-			for (ServiceImplementation svc : ac.getServiceImplementations()) {
-				result.add(svc.getSpp());
-			}
+			result.addAll(ac.getImplementedSPPs());
 			
 			ac = ac.getBase();
 		}
