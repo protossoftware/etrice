@@ -89,6 +89,14 @@ public interface IPositionProvider {
 	 * @param sy scale in y direction
 	 */
 	public void setScale(double sx, double sy);
+	
+	/**
+	 * Set the position of the state graph to which coordinates should be mapped.
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void setPosition(int x, int y);
 
 	/**
 	 * @param sg a {@link StateGraph}
