@@ -61,10 +61,34 @@ public class MessageService extends RTObject implements IMessageService {
 		return address;
 	}
 
-	public synchronized void run() {
+	public void run() {
 		running = true;
+		
 		while (running) {
-			pollOneMessage();
+			Message msg = null;
+			
+			// get next Message from Queue
+			synchronized(this) {
+				msg = messageQueue.pop();
+			}
+			
+			if (msg == null) {
+				// no message in queue -> wait until Thread is notified
+				try {
+					synchronized(this) {
+						if (!running)
+							return;
+						wait();
+					}
+				}
+				catch (InterruptedException e) {
+				}
+			}
+			else {
+				// process message
+				lastMessageTimestamp = System.currentTimeMillis();
+				messageDispatcher.receive(msg);
+			}
 		}
 	}
 
@@ -76,42 +100,12 @@ public class MessageService extends RTObject implements IMessageService {
 		}
 	}
 
-	private synchronized void pollOneMessage() {
-		Message msg = messageQueue.pop(); // get next Message from Queue
-		if (msg == null) {
-			// no message in queue -> wait till Thread is notified
-			try {
-				wait();
-			}
-			catch (InterruptedException e) {
-			}
-		}
-		else {
-			lastMessageTimestamp = System.currentTimeMillis();
-			messageDispatcher.receive(msg);
-		}
-
-	}
-
-	public Address getFreeAddress() {
+	public synchronized Address getFreeAddress() {
 		return messageDispatcher.getFreeAddress();
 	}
 	
-	public void freeAddress(Address addr) {
+	public synchronized void freeAddress(Address addr) {
 		messageDispatcher.freeAddress(addr);
-	}
-	
-	// protected methods for sole use by test cases
-	protected MessageSeQueue getMessageQueue() {
-		return messageQueue;
-	}
-
-	protected synchronized MessageDispatcher getMessageDispatcher() {
-		return messageDispatcher;
-	}
-
-	protected synchronized long getLastMessageTimestamp() {
-		return lastMessageTimestamp;
 	}
 	
 	public synchronized void terminate() {
@@ -145,6 +139,19 @@ public class MessageService extends RTObject implements IMessageService {
 	@Override
 	public void removeMessageReceiver(IMessageReceiver receiver) {
 		messageDispatcher.removeMessageReceiver(receiver);
+	}
+	
+	// protected methods for sole use by test cases
+	protected MessageSeQueue getMessageQueue() {
+		return messageQueue;
+	}
+
+	protected synchronized MessageDispatcher getMessageDispatcher() {
+		return messageDispatcher;
+	}
+
+	protected synchronized long getLastMessageTimestamp() {
+		return lastMessageTimestamp;
 	}
 
 }
