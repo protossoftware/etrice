@@ -39,7 +39,7 @@ public class MessageServiceController {
 			return freeIDs.remove();
 	}
 	
-	public void freeID(int id) {
+	public synchronized void freeID(int id) {
 		freeIDs.add(id);
 	}
 	
@@ -54,7 +54,7 @@ public class MessageServiceController {
 		messageServices.remove(msgSvc.getAddress().threadID);
 	}
 	
-	public IMessageService getMsgSvc(int id){
+	public synchronized IMessageService getMsgSvc(int id){
 		return messageServices.get(id);
 	}
 	
