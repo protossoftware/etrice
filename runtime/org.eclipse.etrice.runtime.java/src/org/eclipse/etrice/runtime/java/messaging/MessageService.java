@@ -22,17 +22,13 @@ package org.eclipse.etrice.runtime.java.messaging;
  * @author Henrik Rentz-Reichert (extending RTObject, implementing Runnable)
  *
  */
-public class MessageService extends RTObject implements IMessageService {
+public class MessageService extends AbstractMessageService {
 
 	private boolean running = false;
 	
-	// TODO: add internal message queue for less locks (faster thread internal messaging)
-	private MessageSeQueue messageQueue = null;
-	private MessageDispatcher messageDispatcher = null;
-	private Address address = null;
-	private long lastMessageTimestamp;
 	private Thread thread;
 	private int priority;
+	private long lastMessageTimestamp;
 
 	public MessageService(IRTObject parent, ExecMode mode, int node, int thread, String name) {
 		this(parent, mode, 0, node, thread, name, Thread.NORM_PRIORITY);
@@ -43,22 +39,12 @@ public class MessageService extends RTObject implements IMessageService {
 	}
 	
 	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name, int priority) {
-		super(parent, "MessageService_"+name);
+		super(parent, "MessageService_"+name, node, thread);
 		
-		address = new Address(node, thread, 0);
 		this.priority = priority;
 
 		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
 		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
-
-		// instantiate dispatcher and queue
-		messageDispatcher = new MessageDispatcher(this, new Address(address.nodeID,address.threadID, address.objectID + 1), "Dispatcher");
-		messageQueue = new MessageSeQueue(this, "Queue");
-	}
-
-	@Override
-	public Address getAddress() {
-		return address;
 	}
 
 	public void run() {
@@ -69,7 +55,7 @@ public class MessageService extends RTObject implements IMessageService {
 			
 			// get next Message from Queue
 			synchronized(this) {
-				msg = messageQueue.pop();
+				msg = getMessageQueue().pop();
 			}
 			
 			if (msg == null) {
@@ -87,25 +73,52 @@ public class MessageService extends RTObject implements IMessageService {
 			else {
 				// process message
 				lastMessageTimestamp = System.currentTimeMillis();
-				messageDispatcher.receive(msg);
+				getMessageDispatcher().receive(msg);
 			}
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#receive(org.eclipse.etrice.runtime.java.messaging.Message)
+	 */
 	@Override
 	public synchronized void receive(Message msg) {
-		if (msg!=null) {
-			messageQueue.push(msg);
-			notifyAll(); // wake up thread to process message
-		}
-	}
-
-	public synchronized Address getFreeAddress() {
-		return messageDispatcher.getFreeAddress();
+		super.receive(msg);
+		
+		// wake up thread to process message
+		notifyAll();
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#getFreeAddress()
+	 */
+	@Override
+	public synchronized Address getFreeAddress() {
+		return super.getFreeAddress();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#addMessageReceiver(org.eclipse.etrice.runtime.java.messaging.IMessageReceiver)
+	 */
+	@Override
+	public synchronized void addMessageReceiver(IMessageReceiver receiver) {
+		super.addMessageReceiver(receiver);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#removeMessageReceiver(org.eclipse.etrice.runtime.java.messaging.IMessageReceiver)
+	 */
+	@Override
+	public synchronized void removeMessageReceiver(IMessageReceiver receiver) {
+		super.removeMessageReceiver(receiver);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#freeAddress(org.eclipse.etrice.runtime.java.messaging.Address)
+	 */
+	@Override
 	public synchronized void freeAddress(Address addr) {
-		messageDispatcher.freeAddress(addr);
+		super.freeAddress(addr);
 	}
 	
 	public synchronized void terminate() {
@@ -131,26 +144,7 @@ public class MessageService extends RTObject implements IMessageService {
 		return thread;
 	}
 
-	@Override
-	public void addMessageReceiver(IMessageReceiver receiver) {
-		messageDispatcher.addMessageReceiver(receiver);
-	}
-
-	@Override
-	public void removeMessageReceiver(IMessageReceiver receiver) {
-		messageDispatcher.removeMessageReceiver(receiver);
-	}
-	
-	// protected methods for sole use by test cases
-	protected MessageSeQueue getMessageQueue() {
-		return messageQueue;
-	}
-
-	protected synchronized MessageDispatcher getMessageDispatcher() {
-		return messageDispatcher;
-	}
-
-	protected synchronized long getLastMessageTimestamp() {
+	protected long getLastMessageTimestamp() {
 		return lastMessageTimestamp;
 	}
 

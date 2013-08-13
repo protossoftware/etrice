@@ -19,16 +19,13 @@ public class MessageServiceTest extends TestCase {
 
 
 	public void testRun() {
-		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
-		msgSvcCtrl.resetAll();
-		
 		// testing basic functionality of MessageService and Dispatcher
-		MessageService msg_service1 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService1", Thread.NORM_PRIORITY);
-		MessageService msg_service2 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService2", Thread.NORM_PRIORITY);
-		MessageService msg_service3 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService3", Thread.NORM_PRIORITY);
-		MessageService msg_service4 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService4", Thread.NORM_PRIORITY);
-		MessageService msg_service5 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService5", Thread.NORM_PRIORITY);
-		MessageService msg_service6 = new MessageService(null, ExecMode.BLOCKED, 0, 0, msgSvcCtrl.getNewID(), "MessageService6", Thread.NORM_PRIORITY);
+		MessageService msg_service1 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 0, "MessageService1", Thread.NORM_PRIORITY);
+		MessageService msg_service2 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 1, "MessageService2", Thread.NORM_PRIORITY);
+		MessageService msg_service3 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 2, "MessageService3", Thread.NORM_PRIORITY);
+		MessageService msg_service4 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 3, "MessageService4", Thread.NORM_PRIORITY);
+		MessageService msg_service5 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 4, "MessageService5", Thread.NORM_PRIORITY);
+		MessageService msg_service6 = new MessageService(null, ExecMode.BLOCKED, 0, 0, 5, "MessageService6", Thread.NORM_PRIORITY);
 
 		DummyMessageReceiver receiver1 = new DummyMessageReceiver(new Address(0,0,1)); 
 		DummyMessageReceiver receiver2 = new DummyMessageReceiver(new Address(0,1,2)); 
