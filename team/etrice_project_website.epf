@@ -1,5 +1,0 @@
-#Fri Jan 28 09:39:16 CET 2011
-file_export_version=3.0
-@org.eclipse.team.cvs.core=3.3.300.I20100526-0800
-\!/=
-/instance/org.eclipse.team.cvs.core/repositories/%extssh%__COMMITTER_NAME__@dev.eclipse.org%%cvsroot%org.eclipse/location=\:extssh\:__COMMITTER_NAME__@dev.eclipse.org\:/cvsroot/org.eclipse

@@ -52,64 +52,75 @@
 // --- Configurable options --------------------------------------------
 
 // Add as many milestones as you like. First will be used for "Fixed (in <TM>)" link:
-var target_milestones= ["0.1.0", "0.2.0", "0.3.0M1", "0.3.0M2"];
+var target_milestones= ["0.3.0", "0.4.0", "0.4.0M1", "0.4.0M2"];
 
 // Add "<name>", "<email>" pairs for people you frequently CC:
 var ccs= [
 "TS", "ts@protos.de",
 "TJ", "thomas.jung@tieto.com",
 "HRR", "hrr@protos.de",
+"JH", "juergen.markus.haug@student.uni-augsburg.de",
+"EP", "ep@protos.de",
 ];
 
-// Add "<name>", "<email>" pairs for people you frequently assign bugs to:
+// Add "<name>", "<email>" pairs for people you frequently assign bugs to: 
 var assignees= ccs;
 
 // Add "<name>", "<string>" pairs for template strings that you frequently insert into the comment field (e.g. repo URLs):
 var commentTemplates= [
-"Fixed with ", "Fixed with "
+"Fixed with ", "Done with "
 ];
 
 // Add Products and Components to which you frequently move bugs:
-var moveProducts= [ "Platform" ];
+var moveProducts= [ "eTrice" ];
 var moveComponents= [ "Core", "Documentation", "Generators", "Runtime", "Test", "UserInterface" ];
 
 // Add quick version links on the search page (<version> for exact version, <version*> for prefix match):
-var queryVersions= [ "0.1.0", "0.2.0", "0.3.0"];
+var queryVersions= [ "0.1", "0.2", "0.3", "0.4"];
 
 // Add quick classifications links on the search page (<name>", ["<classification1>", "<classification2>", ...] pairs):
 var queryClassifications= [
 "E", ["Eclipse"],
-" & ", ["Eclipse", "Modeling"],
-"M", ["Modeling"],
+" & ", ["Eclipse", "RT"],
+"RT", ["RT"],
 ];
 
 // Add quick product links on the search page ("<name>", "<Classification>", ["<product1>", "<product2>", ...] triplets):
 var queryProducts= [
-"eT", "Modeling", ["MDT.ETrice"],
+"EGit", "Technology", ["EGit"],
+" & ", "Technology", ["EGit", "JGit"],
+"JGit", "Technology", ["JGit"],
 ];
 
 // Add quick component links on the search page ("<name>", ["<component1>", "<component2>", ...] pairs):
 var queryComponents= [
-"Core", ["Core"],
-"Gen", ["Generators"],
+"UI", ["UI"],
+" & IDE", ["UI", "IDE"],
 ];
 
 // Add tags to categorize bugs within a component:
 var categories= new Array();
 categories["Text"]= [
 "[core.room]",
+"[core.etphys]",
+"[core.etmap]",
 "[core.genmodel]",
 "[core.config]",
+"[doc]",
 "[etunit.converter]",
+"[examples]",
 "[generator]",
-"[generator.c]",
 "[generator.java]",
+"[generator.c]",
+"[generator.cpp]",
 "[generator.doc]",
 "[generator.fsmtest]",
-"[modellib.c]",
 "[modellib.java]",
-"[runtime.c]",
+"[modellib.c]",
+"[modellib.cpp]",
 "[runtime.java]",
+"[runtime.c]",
+"[runtime.cpp]",
 "[tutorials]",
 "[ui.common]",
 "[ui.behavior]",
