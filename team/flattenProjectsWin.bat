@@ -1,4 +1,4 @@
-REM this scripts flattens the folder structure of some projects to make development more convenient
+REM this script flattens the folder structure of some projects to make development more convenient
 REM symbolic links (mklink) are used to link to the git repository
 REM This script works only for NTFS filesystem  
 
@@ -17,6 +17,8 @@ mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors3 ..\examples
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors4 ..\examples\org.eclipse.etrice.examples.dynamicactors4
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors5 ..\examples\org.eclipse.etrice.examples.dynamicactors5
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors6 ..\examples\org.eclipse.etrice.examples.dynamicactors6
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors7 ..\examples\org.eclipse.etrice.examples.dynamicactors7
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors8 ..\examples\org.eclipse.etrice.examples.dynamicactors8
 
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.java.aspecttrace ..\examples\org.eclipse.etrice.tutorials.java.aspecttrace
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.java.aspects ..\runtime\org.eclipse.etrice.runtime.java.aspects
