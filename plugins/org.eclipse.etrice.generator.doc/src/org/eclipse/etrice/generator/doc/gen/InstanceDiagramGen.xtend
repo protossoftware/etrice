@@ -14,29 +14,28 @@ package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.io.File
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
-import org.eclipse.etrice.generator.base.IRoomGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
-import java.io.File
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 
 @Singleton
-class InstanceDiagramGen implements IRoomGenerator {
+class InstanceDiagramGen {
 
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger
 	
-	override doGenerate(Root root) {
+	def doGenerate(Root root) {
 		for (model: root.models) {
 			var path = model.docGenerationTargetPath+ "/images"
 			fileAccess.setOutputPath(path)
@@ -53,7 +52,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 	
 	// generate batch file to convert .dot to .jpg
 	// dot -Tjpg -oSS.jpg SS.dot	
-	def generate2jpg(Root root){
+	def private generate2jpg(Root root){
 		'''
 			«FOR sys : root.systemInstances»
 				dot -Tjpg -o «sys.name»_instanceTree.jpg «sys.name»_instanceTree.dot
@@ -61,7 +60,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 		'''
 	}
 	
-	def generate(Root root, SystemInstance sys) {
+	def private generate(Root root, SystemInstance sys) {
 		'''
 			digraph «sys.name» {
 				rankdir=TD;
@@ -78,7 +77,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 		'''
 	}
 	
-	def String instance(AbstractInstance ai) {
+	def private String instance(AbstractInstance ai) {
 		val parent = ai.eContainer as StructureInstance
 		val pthread = ETMapUtil::getPhysicalThread(ai)
 		val tname = if (pthread==null) "?" else pthread.name
@@ -99,7 +98,7 @@ class InstanceDiagramGen implements IRoomGenerator {
 		'''
 	}
 
- 	def runDot2Jpg(String path, String bat){
+ 	def private runDot2Jpg(String path, String bat){
  		var wdir = new File(path)
  		try {
 			val p = getRuntime.exec("cmd /C "+bat, null, wdir)

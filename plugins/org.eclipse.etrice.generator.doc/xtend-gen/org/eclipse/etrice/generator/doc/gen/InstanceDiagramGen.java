@@ -30,7 +30,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -39,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
-public class InstanceDiagramGen implements IRoomGenerator {
+public class InstanceDiagramGen {
   @Inject
   @Extension
   private JavaIoFileSystemAccess fileAccess;
@@ -80,7 +79,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     }
   }
   
-  public CharSequence generate2jpg(final Root root) {
+  private CharSequence generate2jpg(final Root root) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<SystemInstance> _systemInstances = root.getSystemInstances();
@@ -98,7 +97,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generate(final Root root, final SystemInstance sys) {
+  private CharSequence generate(final Root root, final SystemInstance sys) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("digraph ");
     String _name = sys.getName();
@@ -165,7 +164,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _builder;
   }
   
-  public String instance(final AbstractInstance ai) {
+  private String instance(final AbstractInstance ai) {
     String _xblockexpression = null;
     {
       EObject _eContainer = ai.eContainer();
@@ -264,7 +263,7 @@ public class InstanceDiagramGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public void runDot2Jpg(final String path, final String bat) {
+  private void runDot2Jpg(final String path, final String bat) {
     File _file = new File(path);
     File wdir = _file;
     try {

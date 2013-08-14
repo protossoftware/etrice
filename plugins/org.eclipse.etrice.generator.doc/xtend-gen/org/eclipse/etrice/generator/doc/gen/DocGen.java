@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
@@ -39,7 +40,6 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
-import org.eclipse.etrice.generator.base.IRoomGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -48,7 +48,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class DocGen implements IRoomGenerator {
+public class DocGen {
   @Inject
   @Extension
   private JavaIoFileSystemAccess fileAccess;
@@ -79,7 +79,7 @@ public class DocGen implements IRoomGenerator {
     }
   }
   
-  public CharSequence generateModelDoc(final Root root, final RoomModel model) {
+  private CharSequence generateModelDoc(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\documentclass[titlepage]{article}");
     _builder.newLine();
@@ -224,7 +224,7 @@ public class DocGen implements IRoomGenerator {
     _builder.append("\\title{");
     String _name = model.getName();
     _builder.append(_name, "");
-    _builder.append(" Modeldocumentation}");
+    _builder.append(" Model Documentation}");
     _builder.newLineIfNotEmpty();
     _builder.append("\\date{\\today}");
     _builder.newLine();
@@ -252,6 +252,11 @@ public class DocGen implements IRoomGenerator {
     CharSequence _generateDocText = this.generateDocText(_docu);
     _builder.append(_generateDocText, "");
     _builder.newLineIfNotEmpty();
+    _builder.append("\\section{Logical System Description}");
+    _builder.newLine();
+    CharSequence _generateAllLogicalSystemDocs = this.generateAllLogicalSystemDocs(root, model);
+    _builder.append(_generateAllLogicalSystemDocs, "");
+    _builder.newLineIfNotEmpty();
     _builder.append("\\section{Subsystem Description}");
     _builder.newLine();
     CharSequence _generateAllSubSysClassDocs = this.generateAllSubSysClassDocs(root, model);
@@ -277,7 +282,59 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateAllSubSysClassDocs(final Root root, final RoomModel model) {
+  private CharSequence generateAllLogicalSystemDocs(final Root root, final RoomModel model) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<LogicalSystem> _systems = model.getSystems();
+      for(final LogicalSystem sys : _systems) {
+        CharSequence _generateLogicalSystemDoc = this.generateLogicalSystemDoc(root, model, sys);
+        _builder.append(_generateLogicalSystemDoc, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  private CharSequence generateLogicalSystemDoc(final Root root, final RoomModel model, final LogicalSystem system) {
+    CharSequence _xblockexpression = null;
+    {
+      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+      String _plus = (_docGenerationTargetPath + "images\\");
+      String _name = system.getName();
+      String _plus_1 = (_plus + _name);
+      String filenamei = (_plus_1 + "_instanceTree.jpg");
+      String _replaceAll = filenamei.replaceAll("\\\\", "/");
+      filenamei = _replaceAll;
+      String latexFilenamei = filenamei.replaceAll("/", "//");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\level{2}{");
+      String _name_1 = system.getName();
+      _builder.append(_name_1, "");
+      _builder.append("}");
+      _builder.newLineIfNotEmpty();
+      Documentation _docu = system.getDocu();
+      CharSequence _generateDocText = this.generateDocText(_docu);
+      _builder.append(_generateDocText, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\\level{3}{Instance Tree}");
+      _builder.newLine();
+      {
+        String _fileExists = this.fileExists(filenamei);
+        boolean _equals = _fileExists.equals("true");
+        if (_equals) {
+          String _name_2 = system.getName();
+          String _plus_2 = (_name_2 + " Instance Tree");
+          CharSequence _includeGraphics = this.includeGraphics(latexFilenamei, "0.5", _plus_2);
+          _builder.append(_includeGraphics, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence generateAllSubSysClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
@@ -290,7 +347,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateSubSysClassDoc(final Root root, final RoomModel model, final SubSystemClass ssc) {
+  private CharSequence generateSubSysClassDoc(final Root root, final RoomModel model, final SubSystemClass ssc) {
     CharSequence _xblockexpression = null;
     {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
@@ -301,18 +358,10 @@ public class DocGen implements IRoomGenerator {
       String _replaceAll = filename.replaceAll("\\\\", "/");
       filename = _replaceAll;
       String latexFilename = filename.replaceAll("/", "//");
-      String _docGenerationTargetPath_1 = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus_2 = (_docGenerationTargetPath_1 + "images\\");
-      String _name_1 = ssc.getName();
-      String _plus_3 = (_plus_2 + _name_1);
-      String filenamei = (_plus_3 + "_instanceTree.jpg");
-      String _replaceAll_1 = filenamei.replaceAll("\\\\", "/");
-      filenamei = _replaceAll_1;
-      String latexFilenamei = filenamei.replaceAll("/", "//");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
-      String _name_2 = ssc.getName();
-      _builder.append(_name_2, "");
+      String _name_1 = ssc.getName();
+      _builder.append(_name_1, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = ssc.getDocu();
@@ -325,23 +374,10 @@ public class DocGen implements IRoomGenerator {
         String _fileExists = this.fileExists(filename);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
-          String _name_3 = ssc.getName();
-          String _plus_4 = (_name_3 + " Structure");
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_4);
+          String _name_2 = ssc.getName();
+          String _plus_2 = (_name_2 + " Structure");
+          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_2);
           _builder.append(_includeGraphics, "");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\\level{3}{Instance Tree}");
-      _builder.newLine();
-      {
-        String _fileExists_1 = this.fileExists(filename);
-        boolean _equals_1 = _fileExists_1.equals("true");
-        if (_equals_1) {
-          String _name_4 = ssc.getName();
-          String _plus_5 = (_name_4 + " Instance Tree");
-          CharSequence _includeGraphics_1 = this.includeGraphics(latexFilenamei, "0.5", _plus_5);
-          _builder.append(_includeGraphics_1, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -350,7 +386,7 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateAllDataClassDocs(final Root root, final RoomModel model) {
+  private CharSequence generateAllDataClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<DataClass> _dataClasses = model.getDataClasses();
@@ -363,7 +399,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateDataClassDoc(final Root root, final DataClass dc) {
+  private CharSequence generateDataClassDoc(final Root root, final DataClass dc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = dc.getName();
@@ -390,7 +426,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateAllProtocolClassDocs(final Root root, final RoomModel model) {
+  private CharSequence generateAllProtocolClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
@@ -403,7 +439,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  protected CharSequence _generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
+  private CharSequence _generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
     _builder.append("\\level{2} {");
@@ -516,7 +552,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  protected CharSequence _generateProtocolClassDoc(final Root root, final CompoundProtocolClass pc) {
+  private CharSequence _generateProtocolClassDoc(final Root root, final CompoundProtocolClass pc) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = pc.getName();
@@ -558,7 +594,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateAllActorClassDocs(final Root root, final RoomModel model) {
+  private CharSequence generateAllActorClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<ActorClass> _actorClasses = model.getActorClasses();
@@ -571,7 +607,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateActorClassDoc(final Root root, final RoomModel model, final ActorClass ac) {
+  private CharSequence generateActorClassDoc(final Root root, final RoomModel model, final ActorClass ac) {
     CharSequence _xblockexpression = null;
     {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
@@ -635,7 +671,7 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateFsmDoc(final RoomModel model, final ActorClass ac) {
+  private CharSequence generateFsmDoc(final RoomModel model, final ActorClass ac) {
     CharSequence _xblockexpression = null;
     {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
@@ -738,7 +774,7 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public String generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
+  private String generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
     String _xblockexpression = null;
     {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
@@ -853,7 +889,7 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateAttributesDoc(final List<Attribute> attributes) {
+  private CharSequence generateAttributesDoc(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _isEmpty = attributes.isEmpty();
@@ -893,7 +929,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateOperationsDoc(final List<StandardOperation> operations) {
+  private CharSequence generateOperationsDoc(final List<StandardOperation> operations) {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final StandardOperation op : operations) {
@@ -995,7 +1031,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public CharSequence generateDocText(final Documentation doc) {
+  private CharSequence generateDocText(final Documentation doc) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _notEquals = (!Objects.equal(doc, null));
@@ -1009,7 +1045,7 @@ public class DocGen implements IRoomGenerator {
     return _builder;
   }
   
-  public String fileExists(final String f) {
+  private String fileExists(final String f) {
     File _file = new File(f);
     final File file = _file;
     final boolean exist = file.exists();
@@ -1025,7 +1061,7 @@ public class DocGen implements IRoomGenerator {
     }
   }
   
-  public CharSequence includeGraphics(final String filename, final String scale, final String caption) {
+  private CharSequence includeGraphics(final String filename, final String scale, final String caption) {
     CharSequence _xblockexpression = null;
     {
       String latexCaption = caption.replaceAll("_", "\\\\_");
@@ -1049,12 +1085,7 @@ public class DocGen implements IRoomGenerator {
     return _xblockexpression;
   }
   
-  public String irgendwas(final Root root, final ActorClass ac) {
-    String _name = ac.getName();
-    return (_name + ".bla");
-  }
-  
-  public CharSequence generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {
+  private CharSequence generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {
     if (pc instanceof CompoundProtocolClass) {
       return _generateProtocolClassDoc(root, (CompoundProtocolClass)pc);
     } else if (pc instanceof ProtocolClass) {
