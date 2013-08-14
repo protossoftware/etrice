@@ -187,7 +187,6 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
           _builder.append("@Override");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("\t");
           _builder.append("protected void logCreation(String actorClass, String name) {");
           _builder.newLine();
           _builder.append("\t");
@@ -202,7 +201,6 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("@Override");
           _builder.newLine();
-          _builder.append("\t");
           _builder.append("\t");
           _builder.append("protected void logDeletion(String name) {");
           _builder.newLine();

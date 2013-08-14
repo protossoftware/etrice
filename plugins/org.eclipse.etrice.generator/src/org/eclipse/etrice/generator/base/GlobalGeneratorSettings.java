@@ -22,6 +22,11 @@ public class GlobalGeneratorSettings {
 	private static boolean generateMSCInstrumentation = false;
 	private static boolean generateWithVerboseOutput = false;
 
+	public static void reset() {
+		generateMSCInstrumentation = false;
+		generateWithVerboseOutput = false;
+	}
+
 	public static boolean generateMSCInstrumentation() {
 		return generateMSCInstrumentation;
 	}

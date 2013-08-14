@@ -22,6 +22,12 @@ public class GlobalSettings extends GlobalGeneratorSettings {
 	
 	private static boolean generatePersistenceInterface = false;
 
+	public static void reset() {
+		generatePersistenceInterface = false;
+		
+		GlobalGeneratorSettings.reset();
+	}
+	
 	/**
 	 * @return the generatePersistenceInterface
 	 */

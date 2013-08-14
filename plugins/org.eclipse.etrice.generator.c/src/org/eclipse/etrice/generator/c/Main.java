@@ -133,6 +133,7 @@ public class Main extends AbstractGenerator {
 		RoomExtensions.setDefaultGenDir();
 		RoomExtensions.setDefaultGenInfoDir();
 		RoomExtensions.setDefaultGenDocDir();
+		GlobalGeneratorSettings.reset();
 		
 		// parsing arguments
 		for (int i=0; i<args.length; ++i) {
