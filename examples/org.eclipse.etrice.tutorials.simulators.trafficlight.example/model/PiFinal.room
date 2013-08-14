@@ -1,7 +1,7 @@
 RoomModel PiModel {
-	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/models/TcpService.room"
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/models/Types.room"
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/models/TimingService.room"
+	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/model/TcpService.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
 	import trafficlight.connector.* from "trafficlight.connector.room"
 	
 	LogicalSystem PiSystem {
