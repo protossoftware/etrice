@@ -13,6 +13,10 @@ mklink /J ..\..\FlatWorld\org.eclipse.etrice.generator.c.reference ..\examples\o
 
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors1 ..\examples\org.eclipse.etrice.examples.dynamicactors1
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors2 ..\examples\org.eclipse.etrice.examples.dynamicactors2
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors3 ..\examples\org.eclipse.etrice.examples.dynamicactors3
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors4 ..\examples\org.eclipse.etrice.examples.dynamicactors4
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors5 ..\examples\org.eclipse.etrice.examples.dynamicactors5
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors6 ..\examples\org.eclipse.etrice.examples.dynamicactors6
 
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.java.aspecttrace ..\examples\org.eclipse.etrice.tutorials.java.aspecttrace
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.java.aspects ..\runtime\org.eclipse.etrice.runtime.java.aspects
