@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.common.dialogs;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,21 +21,25 @@ import org.eclipse.core.databinding.AggregateValidationStatus;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.beans.PojoObservables;
+import org.eclipse.core.databinding.ValidationStatusProvider;
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.conversion.IConverter;
-import org.eclipse.core.databinding.observable.ChangeEvent;
-import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.IObservableCollection;
+import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.ComputedValue;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.databinding.swt.ISWTObservable;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
@@ -49,6 +55,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.FormDialog;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
@@ -57,7 +64,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 
 public abstract class AbstractPropertyDialog extends FormDialog {
-
+	
 	static class DescriptionBased_Reference2StringConverter extends Converter {
 
 		private EAttribute nameAttr;
@@ -171,14 +178,19 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		}
 	}
 	
+	private static String DATA_KEY_STATUS = "etrice.status";
 	
 	private String title;
 	private FormToolkit toolkit;
 	private DataBindingContext bindingContext;
-	private HashMap<Control, ControlDecoration> decoratorMap = new HashMap<Control, ControlDecoration>();
+	
+	// decoration -> validation status
+	private HashMap<ControlDecoration, IObservableValue> decoratorMap = new HashMap<ControlDecoration, IObservableValue>();
+	
+	// top validation message
+	private IObservableValue displayedValidationStatus;
 	private Label validationLabel;
 	private Label validationText;
-	private AggregateValidationStatus aggregateValidationStatus;
 
 	public AbstractPropertyDialog(Shell shell, String title) {
 		super(shell);
@@ -213,44 +225,40 @@ public abstract class AbstractPropertyDialog extends FormDialog {
                         GridData.FILL_HORIZONTAL));
 
 		createContent(mform, body, bindingContext);
-		
-        aggregateValidationStatus = new AggregateValidationStatus(
-        		bindingContext.getBindings(),
-                AggregateValidationStatus.MAX_SEVERITY);
-
-        bindingContext.bindValue(SWTObservables
-                .observeText(validationText),
-                aggregateValidationStatus, null,
-                null);
-
-		aggregateValidationStatus.addChangeListener(new IChangeListener() {
-			public void handleChange(ChangeEvent event) {
-
+				
+		displayedValidationStatus = new ComputedValue(IStatus.class) {
+			
+			Collection<ControlDecoration> decorations = decoratorMap.keySet();
+			
+			@Override
+			protected Object calculate() {
 				boolean ok = true;
-				for (Object o : bindingContext.getBindings()) {
-					Binding binding = (Binding) o;
-					IStatus status = (IStatus) binding.getValidationStatus()
-							.getValue();
-					Control control = null;
-					if (binding.getTarget() instanceof ISWTObservable) {
-						ISWTObservable swtObservable = (ISWTObservable) binding
-								.getTarget();
-						control = (Control) swtObservable.getWidget();
-					}
-					ControlDecoration decoration = decoratorMap.get(control);
-					if (decoration != null) {
-						if (status.isOK()) {
-							decoration.hide();
-						} else {
-							ok = false;
-							decoration.setDescriptionText(status.getMessage());
-							decoration.show();
-						}
-					}
+				IStatus newStatus = ValidationStatus.ok();
+				
+				// iterate over all decoration and there validation status
+				for(ControlDecoration decoration: decorations){
+					IObservableValue observableValue = decoratorMap.get(decoration);
+					IStatus status = (IStatus) observableValue.getValue();
+					
+					if (!status.isOK()) {
+						// validation error
+						ok = false;
+						decoration.setDescriptionText(status.getMessage());
+						decoration.show();
+						// select severest and meaningful message
+						if(status.getSeverity() > newStatus.getSeverity())
+							if(!status.getMessage().isEmpty())
+								newStatus = status;
+					} else
+						decoration.hide();
 				}
-				updateValidationFeedback(ok);
+				
+				updateValidationFeedback(ok && newStatus.isOK());
+				return newStatus;
 			}
-		});
+		};
+		
+		bindingContext.bindValue(WidgetProperties.text().observe(validationText), displayedValidationStatus);
 	}
 
 	/* (non-Javadoc)
@@ -260,7 +268,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	protected Control createButtonBar(Composite parent) {
 		Control bar = super.createButtonBar(parent);
 
-		Object value = aggregateValidationStatus.getValue();
+		Object value = displayedValidationStatus.getValue();
 		if (value instanceof IStatus) {
 			boolean ok = ((IStatus) value).isOK();
 			updateValidationFeedback(ok);
@@ -313,6 +321,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	}
 	
 	protected Text createText(Composite parent, String label, EObject obj, EStructuralFeature feat, IValidator validator, IConverter s2m, IConverter m2s, boolean multiline) {
+		return createText(parent, label, obj, feat, validator, null, s2m, m2s, multiline);
+	}
+	
+	protected Text createText(Composite parent, String label, EObject obj, EStructuralFeature feat, IValidator singleValidator, MultiValidator2 multiValidator, IConverter s2m, IConverter m2s, boolean multiline) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 		
@@ -322,27 +334,28 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		Text text = toolkit.createText(parent, "", style);
 		GridData gd = new GridData(multiline?GridData.FILL_BOTH:GridData.FILL_HORIZONTAL);
 		text.setLayoutData(gd);
-
+		
 		UpdateValueStrategy t2m = null;
 		UpdateValueStrategy m2t = null;
-		if (validator!=null || s2m!=null || m2s!=null) {
+		if (singleValidator!=null || s2m!=null || m2s!=null) {
 			t2m = new UpdateValueStrategy();
 			if (s2m!=null)
 				t2m.setConverter(s2m);
-			if (validator!=null) {
-				t2m.setAfterConvertValidator(validator);
-				t2m.setBeforeSetValidator(validator);
+			if (singleValidator!=null) {
+				t2m.setAfterConvertValidator(singleValidator);
+				t2m.setBeforeSetValidator(singleValidator);
 			}
 			m2t = new UpdateValueStrategy();
 			if (m2s!=null)
 				m2t.setConverter(m2s);
-			if (validator!=null) {
-				m2t.setAfterConvertValidator(validator);
-				m2t.setBeforeSetValidator(validator);
+			if (singleValidator!=null) {
+				m2t.setAfterConvertValidator(singleValidator);
+				m2t.setBeforeSetValidator(singleValidator);
 			}
 		}
-		bindingContext.bindValue(SWTObservables.observeText(text, SWT.Modify), PojoObservables.observeValue(
-				obj, feat.getName()), t2m, m2t);
+		
+		Object type = (s2m!= null)?s2m.getToType():String.class;
+		createBinding(text, obj, feat, type, t2m, m2t, multiValidator);
 		
 		return text;
 	}
@@ -363,10 +376,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	}
 	
 	protected Button createCheck(Composite parent, String label, EObject obj, EAttribute att) {
-		return createCheck(parent, label, obj, att, null);
+		return createCheck(parent, label, obj, att, null, null);
 	}
 	
-	protected Button createCheck(Composite parent, String label, EObject obj, EAttribute att, IValidator validator) {
+	protected Button createCheck(Composite parent, String label, EObject obj, EAttribute att, IValidator validator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 		
@@ -383,17 +396,16 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			m2t.setAfterConvertValidator(validator);
 			m2t.setBeforeSetValidator(validator);
 		}
-		bindingContext.bindValue(SWTObservables.observeSelection(check), PojoObservables.observeValue(
-				obj, att.getName()), t2m, m2t);
+		createBinding(check, obj, att, Boolean.class, t2m, m2t, multiValidator);
 		
 		return check;
 	}
 	
 	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EReference ref, List<? extends EObject> candidates, EAttribute nameAttr) {
-		return createCombo(parent, label, obj, type, ref, candidates, nameAttr, null);
+		return createCombo(parent, label, obj, type, ref, candidates, nameAttr, null, null);
 	}
 	
-	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EReference ref, List<? extends EObject> candidates, EAttribute nameAttr, IValidator validator) {
+	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EReference ref, List<? extends EObject> candidates, EAttribute nameAttr, IValidator validator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 
@@ -416,12 +428,16 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			m2t.setAfterConvertValidator(validator);
 			m2t.setBeforeSetValidator(validator);
 		}
-		bindingContext.bindValue(SWTObservables.observeText(combo), PojoObservables.observeValue(obj, ref.getName()), t2m, m2t);
+		createBinding(combo, obj, ref, type, t2m, m2t, multiValidator);
 		
 		return combo;
 	}
 	
-	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator) {
+	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator){
+		return createComboUsingDesc(parent, label, obj, type, ref, candidates, nameAttr, validator, null);
+	}
+	
+	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 
@@ -444,16 +460,17 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			m2t.setAfterConvertValidator(validator);
 			m2t.setBeforeSetValidator(validator);
 		}
-		bindingContext.bindValue(SWTObservables.observeText(combo), PojoObservables.observeValue(obj, ref.getName()), t2m, m2t);
+		
+		createBinding(combo, obj, ref, type, t2m, m2t, multiValidator);
 		
 		return combo;
 	}
 	
 	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices) {
-		return createCombo(parent, label, obj, type, att, choices, null);
+		return createCombo(parent, label, obj, type, att, choices, null, null);
 	}
 	
-	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices, IValidator validator) {
+	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices, IValidator singleValidator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 
@@ -462,21 +479,44 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		combo.setVisibleItemCount(10);
 		toolkit.adapt(combo, true, true);
 		
-		for (Enumerator o : choices) {
+		for (Enumerator o : choices) 
 			combo.add(o.getLiteral());
-		}
 		
 		UpdateValueStrategy t2m = new UpdateValueStrategy().setConverter(new String2EnumConverter(type, choices));
 		UpdateValueStrategy m2t = new UpdateValueStrategy().setConverter(new Enum2StringConverter());
-		if (validator!=null) {
-			t2m.setAfterConvertValidator(validator);
-			t2m.setBeforeSetValidator(validator);
-			m2t.setAfterConvertValidator(validator);
-			m2t.setBeforeSetValidator(validator);
+		if (singleValidator!=null) {
+			t2m.setAfterConvertValidator(singleValidator);
+			t2m.setBeforeSetValidator(singleValidator);
+			m2t.setAfterConvertValidator(singleValidator);
+			m2t.setBeforeSetValidator(singleValidator);
 		}
-		bindingContext.bindValue(SWTObservables.observeText(combo), PojoObservables.observeValue(obj, att.getName()), t2m, m2t);
+		
+		createBinding(combo, obj, att, type, t2m, m2t, multiValidator);
 		
 		return combo;
+	}
+	
+	private void createBinding(Widget widget, EObject obj, EStructuralFeature feature, Object objType, UpdateValueStrategy t2m, UpdateValueStrategy m2t, MultiValidator2 multiValidator){
+		IObservableValue observableWidget = null;
+		if(widget instanceof Text)
+			observableWidget = WidgetProperties.text(SWT.Modify).observe(widget);
+		else if(widget instanceof Button || widget instanceof Combo)
+			observableWidget = WidgetProperties.selection().observe(widget);
+		IObservableValue observableObj = EMFProperties.value(feature).observe(obj);
+		
+		if(multiValidator != null){
+			IObservableValue convertedObservable = new WritableValue(null, objType);
+			Binding convertBinding = bindingContext.bindValue(observableWidget, convertedObservable, t2m, m2t);
+			multiValidator.installValidator(convertBinding, observableObj);
+		
+			List<ValidationStatusProvider> valProviders = new ArrayList<ValidationStatusProvider>();
+			valProviders.add(convertBinding);
+			valProviders.add(multiValidator);
+			widget.setData(DATA_KEY_STATUS, createAggregateValidationStatus(valProviders));
+		} else {
+			Binding binding = bindingContext.bindValue(observableWidget, observableObj, t2m, m2t);
+			widget.setData(DATA_KEY_STATUS, binding.getValidationStatus());
+		}
 	}
 	
 	protected ControlDecoration createDecorator(Control ctrl, String message) {
@@ -486,8 +526,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 				FieldDecorationRegistry.DEC_ERROR);
 		controlDecoration.setImage(fieldDecoration.getImage());
 		controlDecoration.hide();
-        
-		decoratorMap.put(ctrl, controlDecoration);
+       
+		IObservableValue status = getObservableStatus(ctrl);
+		if(status != null)
+			decoratorMap.put(controlDecoration, status);
 
         return controlDecoration;
 	}
@@ -505,6 +547,13 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	protected DataBindingContext getBindingContext() {
 		return bindingContext;
 	}
+	
+	/**
+	 * Returns the observable validation status for the given widget.
+	 */
+	protected IObservableValue getObservableStatus(Widget widget){
+		return (IObservableValue) widget.getData(DATA_KEY_STATUS);
+	}
 
 	/**
 	 * @return the toolkit
@@ -515,5 +564,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 
 	protected void setTitle(String title) {
 		this.title = title;
+	}
+	
+	private IObservableValue createAggregateValidationStatus(Collection<ValidationStatusProvider> valProvider){
+		IObservableCollection observableStatusProvider = new WritableList(valProvider, ValidationStatusProvider.class);
+		return new AggregateValidationStatus(observableStatusProvider, AggregateValidationStatus.MAX_SEVERITY);
 	}
 }
