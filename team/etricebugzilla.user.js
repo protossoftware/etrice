@@ -57,7 +57,7 @@ var target_milestones= ["0.3.0", "0.4.0", "0.4.0M1", "0.4.0M2"];
 // Add "<name>", "<email>" pairs for people you frequently CC:
 var ccs= [
 "TS", "ts@protos.de",
-"TJ", "thomas.jung@tieto.com",
+"TJ", "thomas.jung@protos.de",
 "HRR", "hrr@protos.de",
 "JH", "juergen.markus.haug@student.uni-augsburg.de",
 "EP", "ep@protos.de",
@@ -80,22 +80,23 @@ var queryVersions= [ "0.1", "0.2", "0.3", "0.4"];
 
 // Add quick classifications links on the search page (<name>", ["<classification1>", "<classification2>", ...] pairs):
 var queryClassifications= [
-"E", ["Eclipse"],
-" & ", ["Eclipse", "RT"],
-"RT", ["RT"],
+"Mod", ["Modeling"]
 ];
 
 // Add quick product links on the search page ("<name>", "<Classification>", ["<product1>", "<product2>", ...] triplets):
 var queryProducts= [
-"EGit", "Technology", ["EGit"],
-" & ", "Technology", ["EGit", "JGit"],
-"JGit", "Technology", ["JGit"],
+"eT,", "Modeling", ["eTrice"],
+"TMF", "Modeling", ["TMF"],
+" & ", "Modeling", ["TMF", "GMP"],
+"GMP", "Modeling", ["GMP"],
 ];
 
 // Add quick component links on the search page ("<name>", ["<component1>", "<component2>", ...] pairs):
 var queryComponents= [
-"UI", ["UI"],
-" & IDE", ["UI", "IDE"],
+"Core,", ["Core"],
+"Gen", ["Generators"],
+" & ", ["Generators", "Runtime"],
+"Run", ["Runtime"],
 ];
 
 // Add tags to categorize bugs within a component:
