@@ -79,9 +79,21 @@ public class Optional1 extends Optional implements IPersistable {
 	
 	@Override
 	public void saveObject(ObjectOutput output) throws IOException {
+		saveAttributes(output);
+	}
+	
+	protected void saveAttributes(ObjectOutput output) throws IOException {
+		super.saveAttributes(output);
+		
 	}
 	
 	@Override
 	public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+		loadAttributes(input);
+	}
+	
+	protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {
+		super.loadAttributes(input);
+		
 	}
 };

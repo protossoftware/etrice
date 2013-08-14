@@ -81,14 +81,14 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 	}
 	
 	public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {
-		if (optionalActorClass.equals("Optional1")) {
-			if ("Optional1".equals(actorClass)) {
-				return new Optional1Factory();
-			}
-		}
-		else if (optionalActorClass.equals("Optional2")) {
+		if (optionalActorClass.equals("Optional2")) {
 			if ("Optional2".equals(actorClass)) {
 				return new Optional2Factory();
+			}
+		}
+		else if (optionalActorClass.equals("Optional1")) {
+			if ("Optional1".equals(actorClass)) {
+				return new Optional1Factory();
 			}
 		}
 		

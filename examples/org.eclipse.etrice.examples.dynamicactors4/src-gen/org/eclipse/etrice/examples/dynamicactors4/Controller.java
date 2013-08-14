@@ -96,9 +96,9 @@ public class Controller extends ActorClassBase {
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_opt__hello = IFITEM_opt + EVT_SHIFT*PC.OUT_hello;
-	public static final int TRIG_worker__error = IFITEM_worker + EVT_SHIFT*PWorker.OUT_error;
 	public static final int TRIG_worker__ok = IFITEM_worker + EVT_SHIFT*PWorker.OUT_ok;
+	public static final int TRIG_worker__error = IFITEM_worker + EVT_SHIFT*PWorker.OUT_error;
+	public static final int TRIG_opt__hello = IFITEM_opt + EVT_SHIFT*PC.OUT_hello;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","createOpt1",

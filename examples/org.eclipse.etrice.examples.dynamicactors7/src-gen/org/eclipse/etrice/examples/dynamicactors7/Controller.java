@@ -105,6 +105,7 @@ public class Controller extends ActorClassBase {
 	/* triggers */
 	public static final int POLLING = 0;
 	public static final int TRIG_pcont__done = IFITEM_pcont + EVT_SHIFT*PCtrl.OUT_done;
+	public static final int TRIG_pout__hello = IFITEM_pout + EVT_SHIFT*PC.OUT_hello;
 	public static final int TRIG_pin__hello = IFITEM_pin + EVT_SHIFT*PC.OUT_hello;
 	
 	// state names

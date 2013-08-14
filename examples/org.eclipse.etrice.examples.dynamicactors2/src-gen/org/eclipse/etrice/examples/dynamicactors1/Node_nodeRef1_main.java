@@ -1,7 +1,6 @@
 package org.eclipse.etrice.examples.dynamicactors1;
 
 import org.eclipse.etrice.runtime.java.config.IVariableService;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
@@ -48,7 +47,6 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 		addPathToPeers("/LS/main/appl/cont/opt/p0", "/LS/main/appl/cont/p0");
 
 		// sub actors
-		DebuggingService.getInstance().addMessageActorCreate(this, "appl");
 		new Appl(this, "appl"); 
 		
 		// apply instance attribute configurations
@@ -56,21 +54,12 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 	
 	@Override
 	public void init(){
-		DebuggingService.getInstance().addVisibleComment("begin sub system initialization");
 		super.init();
-		DebuggingService.getInstance().addVisibleComment("done sub system initialization");
 	}
 		
 	@Override
 	public void stop(){
 		super.stop();
-	}
-	
-	@Override
-	public void destroy() {
-		DebuggingService.getInstance().addVisibleComment("begin sub system destruction");
-		super.destroy();
-		DebuggingService.getInstance().addVisibleComment("done sub system destruction");
 	}
 	
 	public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {

@@ -156,8 +156,9 @@ public class Sub1 extends ActorClassBase implements IPersistable {
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_fct__sayHello = IFITEM_fct + EVT_SHIFT*PStep.IN_sayHello;
+	public static final int TRIG_dp__hello = IFITEM_dp + EVT_SHIFT*PStep.OUT_hello;
 	public static final int TRIG_fct__step = IFITEM_fct + EVT_SHIFT*PStep.IN_step;
+	public static final int TRIG_fct__sayHello = IFITEM_fct + EVT_SHIFT*PStep.IN_sayHello;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","Step3",
@@ -487,7 +488,10 @@ public class Sub1 extends ActorClassBase implements IPersistable {
 		output.writeInt(getState());
 		for (int h: history) output.writeInt(h);
 		
-		// attributes
+		saveAttributes(output);
+	}
+	
+	protected void saveAttributes(ObjectOutput output) throws IOException {
 		output.write(ival);
 		output.writeShort(sval);
 		output.writeByte(bval);
@@ -502,7 +506,10 @@ public class Sub1 extends ActorClassBase implements IPersistable {
 		setState(input.readInt());
 		for (int i=0; i<history.length; ++i) history[i] = input.readInt();
 		
-		// attributes
+		loadAttributes(input);
+	}
+	
+	protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {
 		ival = input.read();
 		sval = input.readShort();
 		bval = input.readByte();

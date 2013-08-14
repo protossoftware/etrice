@@ -79,9 +79,17 @@ public class Appl extends ActorClassBase implements IPersistable {
 	
 	@Override
 	public void saveObject(ObjectOutput output) throws IOException {
+		saveAttributes(output);
+	}
+	
+	protected void saveAttributes(ObjectOutput output) throws IOException {
 	}
 	
 	@Override
 	public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
+		loadAttributes(input);
+	}
+	
+	protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {
 	}
 };

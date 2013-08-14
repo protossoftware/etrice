@@ -86,6 +86,7 @@ public class AC2 extends ActorClassBase {
 	
 	/* triggers */
 	public static final int POLLING = 0;
+	public static final int TRIG_pout__sayHello = IFITEM_pout + EVT_SHIFT*PC.IN_sayHello;
 	public static final int TRIG_pin__hello = IFITEM_pin + EVT_SHIFT*PC.OUT_hello;
 	
 	// state names

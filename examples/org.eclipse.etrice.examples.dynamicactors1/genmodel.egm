@@ -32,7 +32,7 @@
       <states xsi:type="room:SimpleState" name="Ready"/>
       <states xsi:type="room:SimpleState" name="AskHelper">
         <entryCode>
-          <commands>hlp.sayHello();</commands>
+          <lines>hlp.sayHello();</lines>
         </entryCode>
       </states>
       <transitions xsi:type="room:InitialTransition" name="init">
@@ -51,8 +51,8 @@
       <transitions xsi:type="room:TriggeredTransition" name="tr1">
         <to xsi:type="room:StateTerminal" state="//@xpActorClasses.0/@stateMachine/@states.0"/>
         <action>
-          <commands>System.out.println(&quot;helper said &quot;+txt);</commands>
-          <commands>p0.hello(&quot;this is AC1, instance &quot;+getInstancePath());</commands>
+          <lines>System.out.println(&quot;helper said &quot;+txt);</lines>
+          <lines>p0.hello(&quot;this is AC1, instance &quot;+getInstancePath());</lines>
         </action>
         <from xsi:type="room:StateTerminal" state="//@xpActorClasses.0/@stateMachine/@states.1"/>
         <triggers>
@@ -78,7 +78,7 @@
       <transitions xsi:type="room:TriggeredTransition" name="tr0">
         <to xsi:type="room:StateTerminal" state="//@xpActorClasses.2/@stateMachine/@states.0"/>
         <action>
-          <commands>p0.hello(&quot;this is AC3, instance &quot;+getInstancePath());</commands>
+          <lines>p0.hello(&quot;this is AC3, instance &quot;+getInstancePath());</lines>
         </action>
         <from xsi:type="room:StateTerminal" state="//@xpActorClasses.2/@stateMachine/@states.0"/>
         <triggers>
@@ -99,22 +99,22 @@
     <stateMachine>
       <states xsi:type="room:SimpleState" name="CreateOptional2">
         <entryCode>
-          <commands>dumpTree(&quot;before creation of Optional2&quot;);</commands>
-          <commands>opt.createOptionalActor(&quot;Optional2&quot;, getThread());</commands>
-          <commands>p0.sayHello();</commands>
-          <commands>dumpTree(&quot;after creation of Optional2&quot;);</commands>
+          <lines>dumpTree(&quot;before creation of Optional2&quot;);</lines>
+          <lines>opt.createOptionalActor(&quot;Optional2&quot;, getThread());</lines>
+          <lines>p0.sayHello();</lines>
+          <lines>dumpTree(&quot;after creation of Optional2&quot;);</lines>
         </entryCode>
       </states>
       <states xsi:type="room:SimpleState" name="CreateOptional1">
         <entryCode>
-          <commands>opt.createOptionalActor(&quot;Optional1&quot;, getThread());</commands>
-          <commands>p0.sayHello();</commands>
-          <commands>dumpTree(&quot;after creation of Optional1&quot;);</commands>
+          <lines>opt.createOptionalActor(&quot;Optional1&quot;, getThread());</lines>
+          <lines>p0.sayHello();</lines>
+          <lines>dumpTree(&quot;after creation of Optional1&quot;);</lines>
         </entryCode>
       </states>
       <states xsi:type="room:SimpleState" name="ReceivedHelloAgain">
         <entryCode>
-          <commands>System.out.println(&quot;Done, enter 'quit' to exit&quot;); </commands>
+          <lines>System.out.println(&quot;Done, enter 'quit' to exit&quot;); </lines>
         </entryCode>
       </states>
       <transitions xsi:type="room:InitialTransition" name="init">
@@ -123,9 +123,9 @@
       <transitions xsi:type="room:TriggeredTransition" name="tr0">
         <to xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.1"/>
         <action>
-          <commands>System.out.println(txt+&quot;\n&quot;);</commands>
-          <commands>opt.destroyOptionalActor();</commands>
-          <commands>dumpTree(&quot;after deletion of Optional2&quot;);</commands>
+          <lines>System.out.println(txt+&quot;\n&quot;);</lines>
+          <lines>opt.destroyOptionalActor();</lines>
+          <lines>dumpTree(&quot;after deletion of Optional2&quot;);</lines>
         </action>
         <from xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.0"/>
         <triggers>
@@ -138,8 +138,8 @@
       <transitions xsi:type="room:TriggeredTransition" name="tr2">
         <to xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.2"/>
         <action>
-          <commands>System.out.println(txt+&quot;\n&quot;);</commands>
-          <commands>opt.destroyOptionalActor();</commands>
+          <lines>System.out.println(txt+&quot;\n&quot;);</lines>
+          <lines>opt.destroyOptionalActor();</lines>
         </action>
         <from xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.1"/>
         <triggers>

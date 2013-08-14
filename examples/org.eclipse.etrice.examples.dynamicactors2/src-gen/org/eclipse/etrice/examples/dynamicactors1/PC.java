@@ -7,7 +7,6 @@ import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.modelbase.PortBase;
 import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
-import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
@@ -41,12 +40,6 @@ public class PC {
 		}
 		public PCPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
-			DebuggingService.getInstance().addPortInstance(this);
-		}
-		
-		public void destroy() {
-			DebuggingService.getInstance().removePortInstance(this);
-			super.destroy();
 		}
 	
 		@Override
@@ -55,9 +48,6 @@ public class PC {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-				if (messageStrings[msg.getEvtId()] != "timerTick"){
-					DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-				}
 					if (msg instanceof EventWithDataMessage)
 						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 					else
@@ -68,9 +58,6 @@ public class PC {
 		
 		// sent messages
 		public void hello(String txt) {
-			if (messageStrings[ OUT_hello] != "timerTick") {
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_hello]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_hello, txt));
 		}
@@ -116,12 +103,6 @@ public class PC {
 		}
 		public PCConjPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
-			DebuggingService.getInstance().addPortInstance(this);
-		}
-		
-		public void destroy() {
-			DebuggingService.getInstance().removePortInstance(this);
-			super.destroy();
 		}
 	
 		@Override
@@ -130,9 +111,6 @@ public class PC {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-				if (messageStrings[msg.getEvtId()] != "timerTick"){
-					DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-				}
 					if (msg instanceof EventWithDataMessage)
 						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
 					else
@@ -143,9 +121,6 @@ public class PC {
 		
 		// sent messages
 		public void sayHello() {
-			if (messageStrings[ IN_sayHello] != "timerTick") {
-				DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_sayHello]);
-			}
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_sayHello));
 		}

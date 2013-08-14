@@ -79,6 +79,7 @@ public class AC1 extends ActorClassBase {
 	
 	/* triggers */
 	public static final int POLLING = 0;
+	public static final int TRIG_p0__sayHello = IFITEM_p0 + EVT_SHIFT*PC.IN_sayHello;
 	
 	// state names
 	protected static final String stateStrings[] = {"<no state>","<top>","Ready"

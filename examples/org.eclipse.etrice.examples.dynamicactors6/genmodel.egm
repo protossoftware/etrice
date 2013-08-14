@@ -31,7 +31,7 @@
     <stateMachine>
       <states xsi:type="room:SimpleState" name="Ready">
         <entryCode>
-          <commands>p0.hello(&quot;this is AC1, instance &quot;+getInstancePath());</commands>
+          <lines>p0.hello(&quot;this is AC1, instance &quot;+getInstancePath());</lines>
         </entryCode>
       </states>
       <transitions xsi:type="room:InitialTransition" name="init">
@@ -48,7 +48,7 @@
     <stateMachine>
       <states xsi:type="room:SimpleState" name="Ready">
         <entryCode>
-          <commands>nestedOpt.createOptionalActor(&quot;Optional1&quot;, getThread());</commands>
+          <lines>nestedOpt.createOptionalActor(&quot;Optional1&quot;, getThread());</lines>
         </entryCode>
       </states>
       <transitions xsi:type="room:InitialTransition" name="init">
@@ -65,13 +65,13 @@
     <stateMachine>
       <states xsi:type="room:SimpleState" name="CreateOptional2">
         <entryCode>
-          <commands>opt.createOptionalActor(&quot;Optional2&quot;, getThread());</commands>
-          <commands>dumpTree(&quot;after creation of Optional2&quot;);</commands>
-          <commands></commands>
-          <commands>// at this point the port isn't connected since</commands>
-          <commands>// the init message isn't processed yet</commands>
-          <commands>// - so no peer port exists</commands>
-          <commands>p0.sayHello();</commands>
+          <lines>opt.createOptionalActor(&quot;Optional2&quot;, getThread());</lines>
+          <lines>dumpTree(&quot;after creation of Optional2&quot;);</lines>
+          <lines></lines>
+          <lines>// at this point the port isn't connected since</lines>
+          <lines>// the init message isn't processed yet</lines>
+          <lines>// - so no peer port exists</lines>
+          <lines>p0.sayHello();</lines>
         </entryCode>
       </states>
       <states xsi:type="room:SimpleState" name="Done"/>
@@ -81,10 +81,10 @@
       <transitions xsi:type="room:TriggeredTransition" name="tr0">
         <to xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.1"/>
         <action>
-          <commands>dumpTree(&quot;after received hello&quot;);</commands>
-          <commands></commands>
-          <commands>System.out.println(&quot;received &quot;+txt);</commands>
-          <commands>System.out.println(&quot;Done, enter 'quit' to exit&quot;);</commands>
+          <lines>dumpTree(&quot;after received hello&quot;);</lines>
+          <lines></lines>
+          <lines>System.out.println(&quot;received &quot;+txt);</lines>
+          <lines>System.out.println(&quot;Done, enter 'quit' to exit&quot;);</lines>
         </action>
         <from xsi:type="room:StateTerminal" state="//@xpActorClasses.4/@stateMachine/@states.0"/>
         <triggers>
