@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Guard;
 import org.eclipse.etrice.core.room.GuardedTransition;
@@ -19,6 +20,7 @@ import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -192,7 +194,13 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		s2m = new StringToDetailCode();
 		s2m_not_null = new StringToDetailCode(false);
 		
-		interfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+		interfaceItems = new ArrayList<InterfaceItem>();
+		for(InterfaceItem item : RoomHelpers.getAllInterfaceItems(ac)){
+			ProtocolClass pc = RoomHelpers.getProtocol(item);
+			if(pc != null && pc.getCommType() == CommunicationType.EVENT_DRIVEN)
+				interfaceItems.add(item);
+		}
+		
 		inherited = RoomHelpers.getActorClass(trans)!=ac;
 		
 		refined = null;
