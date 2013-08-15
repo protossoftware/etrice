@@ -52,7 +52,7 @@ public class ChoicePointPropertyDialog extends AbstractPropertyDialog {
 
 		NameValidator nv = new NameValidator();
 		
-		Text name = createText(body, "&Name:", cp, RoomPackage.eINSTANCE.getTrPoint_Name(), nv);
+		Text name = createText(body, "&Name:", cp, RoomPackage.eINSTANCE.getChoicePoint_Name(), nv);
 		
 		createDecorator(name, "invalid name");
 		
