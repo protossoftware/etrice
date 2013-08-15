@@ -29,7 +29,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	def genHeaderConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
-		val historySize = ac.allBaseStates.size - ac.allLeafStates.size + 2
+		val historySize = xpac.stateMachine.baseStateList.size - xpac.stateMachine.leafStateList.size + 2
 		'''
 			/* constant for state machine data */
 			#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
@@ -60,10 +60,11 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	
 	override protected genExtra(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
+		val states = xpac.stateMachine.baseStateList.getLeafStatesLast
 		'''
 			«IF GlobalGeneratorSettings::generateMSCInstrumentation»
 				/* state names */
-				static char* stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
+				static char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
 				«ENDFOR»};
 			«ENDIF»
 			

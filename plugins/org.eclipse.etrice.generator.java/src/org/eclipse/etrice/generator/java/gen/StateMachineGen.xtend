@@ -12,44 +12,58 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import org.eclipse.etrice.core.room.State
+import java.util.ArrayList
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 	
-	@Inject extension RoomExtensions
-
 	override genExtra(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
-	'''
-		// state names
-		protected static final String stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
-		«ENDFOR»};
+		val states = new ArrayList<State>()
+		var ac = xpac.actorClass
 		
+//		it is crucial that we obey the order that is used for state IDs
+//		that means we have to collect base classes first and each base class list with leaf states last
+		while (ac!=null) {
+			states.addAll(0, ac.allBaseStates.leafStatesLast)
+			ac = ac.base
+		}
+	'''
+		«IF GlobalSettings::generateMSCInstrumentation || GlobalSettings::generateWithVerboseOutput»
+			// state names
+			protected static final String stateStrings[] = {
+				"<no state>",
+				"<top>",
+				«FOR state : states SEPARATOR ","»
+					"«state.genStatePathName»"
+				«ENDFOR»
+			};
+				
+		«ENDIF»
 «««	 	TODOHRR: history defined in ActorClassBase, init in constructor
 «««			history = new int[5];
 «««			for (int i = 0; i < history.length; i++) {
 «««				history[i] = NO_STATE;
 «««			}
 		// history
-		protected int history[] = {NO_STATE,NO_STATE«FOR state : ac.getAllBaseStates()»,NO_STATE«ENDFOR»};
+		protected int history[] = {NO_STATE, NO_STATE«FOR state : states», NO_STATE«ENDFOR»};
 		
 		private void setState(int new_state) {
 			«IF GlobalSettings::generateMSCInstrumentation»
 				DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 			«ENDIF»
-			if (stateStrings[new_state]!="Idle") {
-				«IF GlobalSettings::generateWithVerboseOutput»
+			«IF GlobalSettings::generateWithVerboseOutput»
+				if (stateStrings[new_state]!="Idle") {
 					System.out.println("state switch of "+getInstancePath() + ": "
 							+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
-				«ENDIF»
-			}	
+				}	
+			«ENDIF»
 			this.state = new_state;
 		}
 	'''}

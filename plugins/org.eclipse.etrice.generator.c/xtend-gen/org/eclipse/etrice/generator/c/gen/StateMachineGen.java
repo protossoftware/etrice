@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
@@ -35,10 +36,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
-      int _size = _allBaseStates.size();
-      List<State> _allLeafStates = this._roomExtensions.getAllLeafStates(ac);
-      int _size_1 = _allLeafStates.size();
+      StateGraph _stateMachine = xpac.getStateMachine();
+      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      int _size = _baseStateList.size();
+      StateGraph _stateMachine_1 = xpac.getStateMachine();
+      List<State> _leafStateList = RoomHelpers.getLeafStateList(_stateMachine_1);
+      int _size_1 = _leafStateList.size();
       int _minus = (_size - _size_1);
       final int historySize = (_minus + 2);
       StringConcatenation _builder = new StringConcatenation();
@@ -114,6 +117,9 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
+      StateGraph _stateMachine = xpac.getStateMachine();
+      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      final List<State> states = this._roomExtensions.getLeafStatesLast(_baseStateList);
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
@@ -122,9 +128,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           _builder.newLine();
           _builder.append("static char* stateStrings[] = {\"<no state>\",\"<top>\",");
           {
-            List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
             boolean _hasElements = false;
-            for(final State state : _allBaseStatesLeavesLast) {
+            for(final State state : states) {
               if (!_hasElements) {
                 _hasElements = true;
               } else {
