@@ -112,6 +112,8 @@
 			<arg value="${java.tests.model.path}/generator.java.tests.config"/>
 			<arg value="${java.tests.model.path}/generator.java.tests.etmap"/>
 			<arg value="-persistable"/>
+			<arg value="-gen_as_verbose"/>
+			<arg value="-msc_instr"/>
 			<classpath refid="clspath"/>
 		</java>
 	</target>
