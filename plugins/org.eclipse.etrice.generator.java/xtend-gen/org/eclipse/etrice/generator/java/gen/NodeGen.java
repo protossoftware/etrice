@@ -247,7 +247,7 @@ public class NodeGen {
         }
       }
       _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(cc, 1);
+      CharSequence _userCode = this._procedureHelpers.userCode(cc, 1, false);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -274,7 +274,7 @@ public class NodeGen {
       }
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2);
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
       _builder.append(_userCode_1, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

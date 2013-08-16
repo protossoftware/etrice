@@ -271,7 +271,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(ac, 1);
+      CharSequence _userCode = this._procedureHelpers.userCode(ac, 1, true);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -561,7 +561,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_operationsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2);
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2, true);
       _builder.append(_userCode_1, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -639,7 +639,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(ac, 3);
+      CharSequence _userCode = this._procedureHelpers.userCode(ac, 3, true);
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

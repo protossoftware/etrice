@@ -129,34 +129,66 @@ public class ProcedureHelpers {
    * @param id 0, 1 or 2 for the corresponding user codes
    * @return the generated code
    */
-  public CharSequence userCode(final ActorContainerClass ac, final int id) {
-    CharSequence _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(id,1)) {
-        _matched=true;
-        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(ac);
-        CharSequence _userCode = this.userCode(_deepUserCode1);
-        _switchResult = _userCode;
+  public CharSequence userCode(final ActorContainerClass ac, final int id, final boolean includeInherited) {
+    CharSequence _xifexpression = null;
+    if (includeInherited) {
+      CharSequence _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(id,1)) {
+          _matched=true;
+          String _deepUserCode1 = RoomHelpers.getDeepUserCode1(ac);
+          CharSequence _userCode = this.userCode(_deepUserCode1);
+          _switchResult = _userCode;
+        }
       }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,2)) {
-        _matched=true;
-        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(ac);
-        CharSequence _userCode_1 = this.userCode(_deepUserCode2);
-        _switchResult = _userCode_1;
+      if (!_matched) {
+        if (Objects.equal(id,2)) {
+          _matched=true;
+          String _deepUserCode2 = RoomHelpers.getDeepUserCode2(ac);
+          CharSequence _userCode_1 = this.userCode(_deepUserCode2);
+          _switchResult = _userCode_1;
+        }
       }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,3)) {
-        _matched=true;
-        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(ac);
-        CharSequence _userCode_2 = this.userCode(_deepUserCode3);
-        _switchResult = _userCode_2;
+      if (!_matched) {
+        if (Objects.equal(id,3)) {
+          _matched=true;
+          String _deepUserCode3 = RoomHelpers.getDeepUserCode3(ac);
+          CharSequence _userCode_2 = this.userCode(_deepUserCode3);
+          _switchResult = _userCode_2;
+        }
       }
+      _xifexpression = _switchResult;
+    } else {
+      CharSequence _switchResult_1 = null;
+      boolean _matched_1 = false;
+      if (!_matched_1) {
+        if (Objects.equal(id,1)) {
+          _matched_1=true;
+          DetailCode _userCode1 = ac.getUserCode1();
+          CharSequence _userCode_3 = this.userCode(_userCode1);
+          _switchResult_1 = _userCode_3;
+        }
+      }
+      if (!_matched_1) {
+        if (Objects.equal(id,2)) {
+          _matched_1=true;
+          DetailCode _userCode2 = ac.getUserCode2();
+          CharSequence _userCode_4 = this.userCode(_userCode2);
+          _switchResult_1 = _userCode_4;
+        }
+      }
+      if (!_matched_1) {
+        if (Objects.equal(id,3)) {
+          _matched_1=true;
+          DetailCode _userCode3 = ac.getUserCode3();
+          CharSequence _userCode_5 = this.userCode(_userCode3);
+          _switchResult_1 = _userCode_5;
+        }
+      }
+      _xifexpression = _switchResult_1;
     }
-    return _switchResult;
+    return _xifexpression;
   }
   
   /**

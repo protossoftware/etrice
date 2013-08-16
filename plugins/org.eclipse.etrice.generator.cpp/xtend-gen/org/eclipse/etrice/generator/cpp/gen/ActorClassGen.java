@@ -234,7 +234,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    CharSequence _userCode = this._procedureHelpers.userCode(ac, 1);
+    CharSequence _userCode = this._procedureHelpers.userCode(ac, 1, true);
     _builder.append(_userCode, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -462,7 +462,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     }
     _builder.newLine();
     _builder.append("\t\t");
-    CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2);
+    CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2, false);
     _builder.append(_userCode_1, "		");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

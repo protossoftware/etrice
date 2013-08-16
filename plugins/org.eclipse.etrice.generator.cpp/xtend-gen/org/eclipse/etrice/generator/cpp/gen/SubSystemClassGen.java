@@ -178,7 +178,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    CharSequence _userCode = this._procedureHelpers.userCode(cc, 1);
+    CharSequence _userCode = this._procedureHelpers.userCode(cc, 1, false);
     _builder.append(_userCode, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -192,7 +192,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t\t");
-    CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2);
+    CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
     _builder.append(_userCode_1, "		");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");

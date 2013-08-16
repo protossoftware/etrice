@@ -100,7 +100,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDFOR»
 
 		
-		«ac.userCode(1)»
+		«ac.userCode(1, true)»
 		
 		
 		class «ac.name» : public «IF ac.base!=null»«ac.base.name»«ELSE»etRuntime::ActorClassBase«ENDIF» {
@@ -155,7 +155,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				virtual void executeInitTransition();
 			«ENDIF»
 
-			«ac.userCode(2)»
+			«ac.userCode(2, false)»
 
 		};
 		

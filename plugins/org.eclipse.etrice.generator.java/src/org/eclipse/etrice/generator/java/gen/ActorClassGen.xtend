@@ -94,12 +94,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 			import «sub.type.package».«sub.type.name»Interface;
 		«ENDFOR»
 		
-		«ac.userCode(1)»
+		«ac.userCode(1, true)»
 		
 		
 		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» «impPersist»{
 		
-			«ac.userCode(2)»
+			«ac.userCode(2, false)»
 			
 			//--------------------- ports
 			«FOR ep : ac.getEndPorts()»

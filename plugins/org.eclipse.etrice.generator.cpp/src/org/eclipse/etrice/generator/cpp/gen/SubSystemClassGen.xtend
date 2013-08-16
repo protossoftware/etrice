@@ -95,11 +95,11 @@ class SubSystemClassGen {
 		«ENDFOR»
 		
 		
-		«cc.userCode(1)»
+		«cc.userCode(1, false)»
 		
 		class «cc.name» : public etRuntime::SubSystemClassBase{
 		
-			«cc.userCode(2)»
+			«cc.userCode(2, false)»
 			
 			public:
 				«cc.name»(IRTObject* parent, std::string name)

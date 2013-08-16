@@ -73,12 +73,19 @@ class ProcedureHelpers {
 	 * @param id 0, 1 or 2 for the corresponding user codes
 	 * @return the generated code
 	 */
-	def userCode(ActorContainerClass ac, int id) {
-		switch (id) {
-			case 1: userCode(getDeepUserCode1(ac))
-			case 2: userCode(getDeepUserCode2(ac))
-			case 3: userCode(getDeepUserCode3(ac))
-		}
+	def userCode(ActorContainerClass ac, int id, boolean includeInherited) {
+		if (includeInherited)
+			switch (id) {
+				case 1: userCode(getDeepUserCode1(ac))
+				case 2: userCode(getDeepUserCode2(ac))
+				case 3: userCode(getDeepUserCode3(ac))
+			}
+		else
+			switch (id) {
+				case 1: userCode(ac.userCode1)
+				case 2: userCode(ac.userCode2)
+				case 3: userCode(ac.userCode3)
+			}
 	}
 	
 	/**

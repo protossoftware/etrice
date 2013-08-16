@@ -93,7 +93,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include «pc.includePath»
 		«ENDFOR»
 		
-		«ac.userCode(1)»
+		«ac.userCode(1, true)»
 		
 		typedef struct «ac.name» «ac.name»;
 		
@@ -185,7 +185,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 		«ac.operations.operationsDeclaration(ac.name)»
 		
-		«ac.userCode(2)»
+		«ac.userCode(2, true)»
 		
 		«generateIncludeGuardEnd(ac)»
 		
@@ -219,7 +219,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include «pc.includePath»
 		«ENDFOR»
 		
-		«ac.userCode(3)»
+		«ac.userCode(3, true)»
 
 		/* interface item IDs */
 		«xpac.genInterfaceItemConstants»

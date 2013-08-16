@@ -118,7 +118,7 @@ class NodeGen {
 			import «model.name».*;
 		«ENDFOR»
 		
-		«cc.userCode(1)»
+		«cc.userCode(1, false)»
 		
 		public class «clsname» extends SubSystemClassBase {
 			
@@ -126,7 +126,7 @@ class NodeGen {
 				public static final int «thread.value.threadId» = «thread.index0»;
 			«ENDFOR»
 		
-			«cc.userCode(2)»
+			«cc.userCode(2, false)»
 			
 			public «clsname»(IRTObject parent, String name) {
 				super(parent, name);
