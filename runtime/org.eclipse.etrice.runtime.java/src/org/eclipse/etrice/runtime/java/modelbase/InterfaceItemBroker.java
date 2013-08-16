@@ -156,6 +156,9 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 	
 	@Override
 	public String toString() {
-		return "interface broker "+super.toString();
+		String peer1 = (firstPeer instanceof InterfaceItemBase)? (((InterfaceItemBase)firstPeer).getAddress().toString()+"("+firstPeer.getClass().toString()+")")
+				:(firstPeer instanceof ReplicatedInterfaceItemBase? (((ReplicatedInterfaceItemBase)firstPeer).toString()+"("+firstPeer.getClass().toString()+")"):"null");
+		String peer2 = secondPeer==null? "null":(secondPeer.getAddress().toString()+"("+secondPeer.getClass().toString()+")");
+		return "interface broker port "+getName()+" - 1. peer "+peer1+" 2. peer "+peer2;
 	}
 }
