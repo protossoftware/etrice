@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -543,6 +544,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (pc.getCommType()==CommunicationType.DATA_DRIVEN)
 			if (msg.getData()==null)
 				error("Messages of data driven protocols must carry data", RoomPackage.Literals.MESSAGE__DATA);
+	}
+	
+	@Check
+	public void checkMessageFromIf(MessageFromIf mfi){
+		if(mfi.getFrom() != null){
+			if(RoomHelpers.getProtocol(mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
+				error("port must have event driven protocol", mfi, RoomPackage.eINSTANCE.getMessageFromIf_From());
+		}
 	}
 
 	@Check
