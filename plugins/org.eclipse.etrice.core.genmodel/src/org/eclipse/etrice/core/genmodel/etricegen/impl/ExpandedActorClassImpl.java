@@ -365,6 +365,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// for refined transitions we just append the action code to the target
 		// we can do this since the target is a copy just for this class
 		for (Entry<Transition, DetailCode> entry : trans2refinedAction.entrySet()) {
+			ownObjects.add(entry.getKey());
 			if (entry.getKey().getAction()==null)
 				entry.getKey().setAction(entry.getValue());
 			else

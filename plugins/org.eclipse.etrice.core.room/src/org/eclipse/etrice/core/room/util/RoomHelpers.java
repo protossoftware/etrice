@@ -467,6 +467,8 @@ public class RoomHelpers {
 			return false;
 		if (!sg.getChPoints().isEmpty())
 			return false;
+		if (!sg.getRefinedTransitions().isEmpty())
+			return false;
 		
 		return true;
 	}
