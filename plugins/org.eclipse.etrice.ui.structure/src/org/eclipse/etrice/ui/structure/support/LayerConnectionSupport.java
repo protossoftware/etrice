@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
@@ -48,7 +49,6 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
@@ -76,7 +76,7 @@ public class LayerConnectionSupport {
 	
 	class FeatureProvider extends DefaultFeatureProvider {
 		
-		private class CreateFeature extends AbstractCreateConnectionFeature {
+		private class CreateFeature extends ChangeAwareCreateConnectionFeature{
 			
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "LayerConnection", "create LayerConnection");
@@ -108,7 +108,7 @@ public class LayerConnectionSupport {
 			}
 			
 			@Override
-			public Connection create(ICreateConnectionContext context) {
+			protected Connection doCreate(ICreateConnectionContext context) {
 				IFeatureProvider featureProvider = getFeatureProvider();
 				SPP src = SupportUtil.getSPP(context.getSourceAnchor(), featureProvider);
 				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);

@@ -36,6 +36,8 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
@@ -76,7 +78,6 @@ import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
@@ -374,11 +375,10 @@ public class ActorContainerRefSupport {
 			}
 		}
 		
-		private class CreateFeature extends AbstractCreateFeature {
+		private class CreateFeature extends ChangeAwareCreateFeature {
 	
 			private boolean actorRef;
-			private boolean doneChanges = false;
-
+			
 			public CreateFeature(IFeatureProvider fp, boolean actorRef) {
 				super(fp, actorRef?"ActorRef":"SubSystemRef", "create "+(actorRef?"ActorRef":"SubSystemRef"));
 				this.actorRef = actorRef;
@@ -404,57 +404,47 @@ public class ActorContainerRefSupport {
 				return false;
 			}
 	
-			@Override
-			public Object[] create(ICreateContext context) {
-		        
-		        StructureClass sc = (StructureClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
-		        
-		        ActorContainerRef newRef = null;
-		        if (sc instanceof ActorContainerClass) {
-		        	ActorContainerClass acc = (ActorContainerClass) sc;
-		        	
-		        	// create ActorRef
-		        	ActorRef ar = RoomFactory.eINSTANCE.createActorRef();
-
-			        acc.getActorRefs().add(ar);
-		        	newRef = ar;
-		        	
-		        }
-		        else if (sc instanceof LogicalSystem) {
-		        	LogicalSystem sys = (LogicalSystem) sc;
-		        	
-		        	// create ActorRef
-		        	SubSystemRef ssr = RoomFactory.eINSTANCE.createSubSystemRef();
-		        	
-		        	sys.getSubSystems().add(ssr);
-		        	newRef = ssr;
-		        }
-		        
-		        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
-
-		        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
-		        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
-				IScope scope = scopeProvider.getScope(newRef.eContainer().eContainer(), reference);
-		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, scope, sc, true);
-				if (dlg.open()!=Window.OK) {
-			        if (sc instanceof ActorContainerClass)
-			        	((ActorContainerClass)sc).getActorRefs().remove(newRef);
-			        else if (sc instanceof LogicalSystem)
-			        	((LogicalSystem) sc).getSubSystems().remove(newRef);
-					return EMPTY;
-				}
-		        
-		        addGraphicalRepresentation(context, newRef);
-		        doneChanges = true;
-		        
-		        // return newly created business object(s)
-		        return new Object[] { newRef };
-			}
 			
 			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+			protected Object[] doCreate(ICreateContext context) {
+				 StructureClass sc = (StructureClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
+			        
+			        ActorContainerRef newRef = null;
+			        if (sc instanceof ActorContainerClass) {
+			        	ActorContainerClass acc = (ActorContainerClass) sc;
+			        	
+			        	// create ActorRef
+			        	ActorRef ar = RoomFactory.eINSTANCE.createActorRef();
+
+				        acc.getActorRefs().add(ar);
+			        	newRef = ar;
+			        	
+			        }
+			        else if (sc instanceof LogicalSystem) {
+			        	LogicalSystem sys = (LogicalSystem) sc;
+			        	
+			        	// create ActorRef
+			        	SubSystemRef ssr = RoomFactory.eINSTANCE.createSubSystemRef();
+			        	
+			        	sys.getSubSystems().add(ssr);
+			        	newRef = ssr;
+			        }
+			        
+			        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
+
+			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
+			        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
+					IScope scope = scopeProvider.getScope(newRef.eContainer().eContainer(), reference);
+			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			        ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, newRef, scope, sc, true);
+					
+			        if (dlg.open()==Window.OK) {
+			        	addGraphicalRepresentation(context, newRef);
+			        	
+			        	return new Object[] { newRef };
+					}
+			        
+			        return EMPTY;
 			}
 		}
 	
@@ -586,9 +576,7 @@ public class ActorContainerRefSupport {
 			}
 		}
 
-		private static class PropertyFeature extends AbstractCustomFeature {
-
-			private boolean doneChanges = false;
+		private static class PropertyFeature extends ChangeAwareCustomFeature {
 
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
@@ -616,9 +604,9 @@ public class ActorContainerRefSupport {
 				}
 				return false;
 			}
-
+			
 			@Override
-			public void execute(ICustomContext context) {
+			protected boolean doExecute(ICustomContext context) {
 				ContainerShape containerShape = (ContainerShape) context.getPictogramElements()[0];
 				ActorContainerRef acr = (ActorContainerRef) getBusinessObjectForPictogramElement(containerShape);
 				StructureClass sc = (StructureClass)acr.eContainer();
@@ -628,18 +616,15 @@ public class ActorContainerRefSupport {
 				IScope scope = scopeProvider.getScope(acr.eContainer().eContainer(), reference);
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ActorContainerRefPropertyDialog dlg = new ActorContainerRefPropertyDialog(shell, acr, scope, sc, false);
-				if (dlg.open()!=Window.OK)
-					return;
 				
-				EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
-				updateRefFigure(acr, containerShape, isInherited(acr, parent), getDiagram());
+				if (dlg.open()==Window.OK){
+					EObject parent = (EObject) getBusinessObjectForPictogramElement(containerShape.getContainer());
+					updateRefFigure(acr, containerShape, isInherited(acr, parent), getDiagram());
+					
+					return true;
+				}
 				
-				doneChanges   = true;
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+				return false;
 			}
 			
 		}

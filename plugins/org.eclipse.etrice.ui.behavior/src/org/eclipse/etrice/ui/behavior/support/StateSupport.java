@@ -27,6 +27,8 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.IDimension;
@@ -59,7 +61,6 @@ import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
@@ -114,10 +115,8 @@ public class StateSupport {
 
 	private static class FeatureProvider extends DefaultFeatureProvider {
 
-		private class CreateFeature extends AbstractCreateFeature {
+		private class CreateFeature extends ChangeAwareCreateFeature {
 	
-			private boolean doneChanges = false;
-			
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "State", "create State");
 			}
@@ -140,7 +139,7 @@ public class StateSupport {
 			}
 	
 			@Override
-			public Object[] create(ICreateContext context) {
+			public Object[] doCreate(ICreateContext context) {
 		        
 		        ContainerShape targetContainer = context.getTargetContainer();
 		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
@@ -158,27 +157,14 @@ public class StateSupport {
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	        	StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, true);
-				if (dlg.open()!=Window.OK) {
-					if (inherited) {
-						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
-					}
-					else {
-						sg.getStates().remove(s);
-					}
-					doneChanges = false;
-					return EMPTY;
+				if (dlg.open()==Window.OK) {
+					addGraphicalRepresentation(context, s);
+				
+					// return newly created business object(s)
+			        return new Object[] { s };
 				}
 		        
-		        addGraphicalRepresentation(context, s);
-		        doneChanges = true;
-		        
-		        // return newly created business object(s)
-		        return new Object[] { s };
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+				return null;
 			}
 		}
 	
@@ -333,9 +319,8 @@ public class StateSupport {
 			}
 		}
 
-		private static class PropertyFeature extends AbstractCustomFeature {
+		private static class PropertyFeature extends ChangeAwareCustomFeature {
 
-			private boolean doneChanges = false;
 			private boolean editable;
 			
 			public PropertyFeature(IFeatureProvider fp, boolean editable) {
@@ -367,19 +352,20 @@ public class StateSupport {
 			}
 
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, editable);
-				if (dlg.open()!=Window.OK)
-					return;
-
-				doneChanges = true;
-				updateFigure(s, context);
+				if (dlg.open()==Window.OK){
+					updateFigure(s, context);
+					adjustSubgraphLabels(s, ac);
 				
-				adjustSubgraphLabels(s, ac);
+					return true;
+				}
+				
+				return false;
 			}
 
 			private void adjustSubgraphLabels(State s, ActorClass ac) {
@@ -422,11 +408,6 @@ public class StateSupport {
 					((Text)ga).setValue(s.getName());
 				}
 
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
 			}
 		}
 		

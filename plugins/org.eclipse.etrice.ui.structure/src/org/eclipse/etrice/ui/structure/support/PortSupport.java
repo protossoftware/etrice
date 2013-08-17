@@ -95,7 +95,7 @@ public class PortSupport extends InterfaceItemSupport {
 			}
 	
 			@Override
-			public Object[] create(ICreateContext context) {
+			public Object[] doCreate(ICreateContext context) {
 				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 
 				// create Port
@@ -127,31 +127,17 @@ public class PortSupport extends InterfaceItemSupport {
 		        IScope scope = scopeProvider.getScope(port, RoomPackage.eINSTANCE.getPort_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, true, false, internal);
-				if (dlg.open()!=Window.OK) {
-			        if (acc instanceof ActorClass) {
-			        	ActorClass ac = (ActorClass) acc;
-			        	if (internal)
-			        		ac.getInternalPorts().remove(port);
-			        	else {
-			        		ac.getInterfacePorts().remove(port);
-							ac.getExternalPorts().remove(xp);
-			        	}
-			        }
-			        else if (acc instanceof SubSystemClass) {
-			        	SubSystemClass ssc = (SubSystemClass) acc;
-			        	ssc.getRelayPorts().remove(port);
-			        }
-					return EMPTY;
+				if (dlg.open()==Window.OK) {
+					// do the add
+					addGraphicalRepresentation(context, port);
+					
+					// return newly created business object(s)
+					return new Object[] { port };
 				}
-				
-				doneChanges = true;
-		        
-		        // do the add
-		        addGraphicalRepresentation(context, port);
-	
-		        // return newly created business object(s)
-		        return new Object[] { port };
+
+				return null;
 			}
+	        
 		}
 		
 		private static class AddFeature extends InterfaceItemSupport.FeatureProvider.AddFeature {
@@ -182,8 +168,6 @@ public class PortSupport extends InterfaceItemSupport {
 		
 		private static class PropertyFeature extends InterfaceItemSupport.FeatureProvider.PropertyFeature {
 
-			private boolean doneChanges = false;
-
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp, "Edit Port...", "Edit Port Properties");
 			}
@@ -202,7 +186,7 @@ public class PortSupport extends InterfaceItemSupport {
 			}
 			
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				if (bo instanceof Port) {
 					Port port = (Port) bo;
@@ -214,19 +198,16 @@ public class PortSupport extends InterfaceItemSupport {
 			        IScope scope = scopeProvider.getScope(port.eContainer().eContainer(), RoomPackage.eINSTANCE.getPort_Protocol());
 			        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			        PortPropertyDialog dlg = new PortPropertyDialog(shell, port, scope, acc, false, refport, internal);
-					if (dlg.open()!=Window.OK)
-						return;
-
-					doneChanges  = true;
-					updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-					String kind = getPortKind(port);
-					Graphiti.getPeService().setPropertyValue(context.getPictogramElements()[0], PROP_KIND, kind);
+					if (dlg.open()==Window.OK){
+						updatePortFigure(port, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+						String kind = getPortKind(port);
+						Graphiti.getPeService().setPropertyValue(context.getPictogramElements()[0], PROP_KIND, kind);
+						
+						return true;
+					}
+					
+					return false;
 				}
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
 			}
 			
 		}

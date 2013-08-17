@@ -29,6 +29,9 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -111,10 +114,8 @@ public class TrPointSupport {
 	
 	private static class FeatureProvider extends DefaultFeatureProvider {
 		
-		private static class CreateFeature extends AbstractCreateFeature {
+		private static class CreateFeature extends ChangeAwareCreateFeature {
 	
-			private boolean doneChanges = false;
-			
 			protected Type type;
 	
 			public CreateFeature(IFeatureProvider fp, Type type, String name, String description) {
@@ -136,7 +137,7 @@ public class TrPointSupport {
 			}
 	
 			@Override
-			public Object[] create(ICreateContext context) {
+			public Object[] doCreate(ICreateContext context) {
 				ContainerShape targetContainer = context.getTargetContainer();
 		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
@@ -163,23 +164,15 @@ public class TrPointSupport {
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, false);
-				if (dlg.open()!=Window.OK) {
-					if (inherited) {
-						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
-					}
-					else {
-						sg.getTrPoints().remove(tp);
-					}
-					return EMPTY;
+				if (dlg.open()==Window.OK) {
+					 // do the add
+			        addGraphicalRepresentation(context, tp);
+		
+			        // return newly created business object(s)
+			        return new Object[] { tp };
 				}
-				
-				doneChanges = true;
 		        
-		        // do the add
-		        addGraphicalRepresentation(context, tp);
-	
-		        // return newly created business object(s)
-		        return new Object[] { tp };
+		        return null;
 			}
 	
 			@Override
@@ -507,11 +500,10 @@ public class TrPointSupport {
 			}
 		}
 	
-		private static class PropertyFeature extends AbstractCustomFeature {
+		private static class PropertyFeature extends ChangeAwareCustomFeature {
 
 			private String name;
 			private String description;
-			private boolean doneChanges = false;
 
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
@@ -542,25 +534,22 @@ public class TrPointSupport {
 			}
 
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				PictogramElement pe = context.getPictogramElements()[0];
 				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(pe);
 				boolean subtp = isSubTP(pe);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TrPointPropertyDialog dlg = new TrPointPropertyDialog(shell, tp, subtp);
-				if (dlg.open()!=Window.OK)
-					return;
-
-				doneChanges = true;
-				String kind = getItemKind(tp);
-				Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);
-				updateTrPointFigure(tp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+				if (dlg.open()==Window.OK){
+					String kind = getItemKind(tp);
+					Graphiti.getPeService().setPropertyValue(pe, PROP_KIND, kind);
+					updateTrPointFigure(tp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+				
+					return true;
+				}
+				
+				return false;
 			}
 		}
 		

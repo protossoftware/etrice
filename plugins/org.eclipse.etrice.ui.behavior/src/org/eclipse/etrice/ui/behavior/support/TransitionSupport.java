@@ -38,6 +38,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -64,7 +66,6 @@ import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
@@ -105,10 +106,8 @@ public class TransitionSupport {
 
 	static class FeatureProvider extends DefaultFeatureProvider {
 		
-		private class CreateFeature extends AbstractCreateConnectionFeature {
+		private class CreateFeature extends ChangeAwareCreateConnectionFeature {
 			
-			private boolean doneChanges = false;
-
 			public CreateFeature(IFeatureProvider fp) {
 				super(fp, "Transition", "create Transition");
 			}
@@ -139,9 +138,7 @@ public class TransitionSupport {
 			}
 			
 			@Override
-			public Connection create(ICreateConnectionContext context) {
-				Connection newConnection = null;
-
+			public Connection doCreate(ICreateConnectionContext context) {
 				ActorClass ac = SupportUtil.getActorClass(getDiagram());
 				
 				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
@@ -251,28 +248,14 @@ public class TransitionSupport {
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
-					if (dlg.open()!=Window.OK) {
-						if (inherited) {
-							SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
-						}
-						else {
-							sg.getTransitions().remove(trans);
-						}
-						return null;
+					if (dlg.open()==Window.OK) {
+						AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
+						addContext.setNewObject(trans);
+						return (Connection) getFeatureProvider().addIfPossible(addContext);
 					}
-					
-					AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
-					addContext.setNewObject(trans);
-					newConnection = (Connection) getFeatureProvider().addIfPossible(addContext);
-					doneChanges = true;
 				}
 				
-				return newConnection;
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges ;
+				return null;
 			}
 		}
 		
@@ -593,9 +576,8 @@ public class TransitionSupport {
 			}
 		}
 		
-		private static class PropertyFeature extends AbstractCustomFeature {
+		private static class PropertyFeature extends ChangeAwareCustomFeature {
 
-			private boolean doneChanges = false;
 			private boolean editable;
 
 			public PropertyFeature(IFeatureProvider fp, boolean editable) {
@@ -633,7 +615,7 @@ public class TransitionSupport {
 			}
 
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				PictogramElement pe = context.getPictogramElements()[0];
 				if (pe instanceof ConnectionDecorator)
 					pe = (PictogramElement) pe.eContainer();
@@ -642,21 +624,17 @@ public class TransitionSupport {
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
-				if (dlg.open()!=Window.OK)
-					return;
-
-				doneChanges = true;
+				if (dlg.open()==Window.OK){
+					boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
+					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
+			        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+			        		lineColor:manageColor(FILL_COLOR);
+					updateLabel(trans, conn, fillColor);
 				
-				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
-				Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
-		        		lineColor:manageColor(FILL_COLOR);
-				updateLabel(trans, conn, fillColor);
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+					return true;
+				}
+				
+				return false;	
 			}
 		}
 		
