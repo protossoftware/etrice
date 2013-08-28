@@ -13,7 +13,6 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
@@ -219,9 +218,9 @@ public class ReplicatedPortBaseTest {
 		assertEquals(2, ifitem2.getIdx());
 		// Remove ifitem instance at Port0:1
 		ifitem1.destroy();
+		assertEquals(2, port0.getNInterfaceItems());
 		// Create ifitem instance (should take the freed index 1)
 		InterfaceItemBase ifitem3 = port0.createSubInterfaceItem();
-		assertNotEquals(ifitem1, ifitem3);
 		assertEquals("Port0:1", ifitem3.getName());
 		assertEquals(1, ifitem3.getIdx());
 		// Test that other ifitems are unaffected
