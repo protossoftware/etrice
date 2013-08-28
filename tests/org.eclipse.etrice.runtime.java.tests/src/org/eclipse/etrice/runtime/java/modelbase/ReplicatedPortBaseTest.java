@@ -13,6 +13,7 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.MessageService;
@@ -200,6 +201,34 @@ public class ReplicatedPortBaseTest {
 		assertEquals(eventRcv1, port1.getActor());
 		assertEquals(eventRcv2, port2.getInterfaceItem(0).getActor());
 		assertEquals(eventRcv2, port2.getInterfaceItem(1).getActor());
+	}
+	
+	@Test
+	public void testReplRemoveCreate() {
+		IRTObject top = createTopWithMappings();
+		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
+		MockReplicatedPort port0 = new MockReplicatedPort(eventRcv0, "Port0", 33);
+		InterfaceItemBase ifitem0 = port0.createSubInterfaceItem();
+		InterfaceItemBase ifitem1 = port0.createSubInterfaceItem();
+		InterfaceItemBase ifitem2 = port0.createSubInterfaceItem();
+		assertEquals("Port0:0", ifitem0.getName());
+		assertEquals(0, ifitem0.getIdx());
+		assertEquals("Port0:1", ifitem1.getName());
+		assertEquals(1, ifitem1.getIdx());
+		assertEquals("Port0:2", ifitem2.getName());
+		assertEquals(2, ifitem2.getIdx());
+		// Remove ifitem instance at Port0:1
+		ifitem1.destroy();
+		// Create ifitem instance (should take the freed index 1)
+		InterfaceItemBase ifitem3 = port0.createSubInterfaceItem();
+		assertNotEquals(ifitem1, ifitem3);
+		assertEquals("Port0:1", ifitem3.getName());
+		assertEquals(1, ifitem3.getIdx());
+		// Test that other ifitems are unaffected
+		assertEquals("Port0:0", ifitem0.getName());
+		assertEquals(0, ifitem0.getIdx());
+		assertEquals("Port0:2", ifitem2.getName());
+		assertEquals(2, ifitem2.getIdx());
 	}
 
 }

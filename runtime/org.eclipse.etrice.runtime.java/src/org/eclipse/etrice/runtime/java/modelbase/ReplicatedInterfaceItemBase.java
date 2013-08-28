@@ -65,15 +65,18 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	 */
 	@Override
 	public InterfaceItemBase createSubInterfaceItem() {
-		InterfaceItemBase item = createInterfaceItem(this, getName()+SEP+items.size(), localId, getFreeIndex());
+		int newIndex = getFreeIndex();
+		InterfaceItemBase item = createInterfaceItem(this, getName()+SEP+newIndex, localId, newIndex);
 		items.add(item);
 		return item;
 	}
 	
 	public void removeItem(InterfaceItemBase item) {
-		assert(item.getParent()==this): "is own child";
-		releasedIndices.push(item.getIdx());
-		items.remove(item);
+		boolean isRemoved = items.remove(item);
+		assert(isRemoved): "is own child";
+		if(isRemoved) {
+			releasedIndices.push(item.getIdx());
+		}
 	}
 	
 	private int getFreeIndex() {
