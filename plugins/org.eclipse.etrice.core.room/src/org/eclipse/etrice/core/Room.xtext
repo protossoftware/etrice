@@ -477,30 +477,30 @@ Annotation: '@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attribu
 KeyValue: key=ID '=' value=Literal;
 
 AnnotationType:
-'AnnotationType' name=ID (docu=Documentation)? '{'
-'target' '=' '(' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* ')'
-attributes+=AnnotationAttribute*
-'}'
+	'AnnotationType' name=ID (docu=Documentation)? '{'
+	'target' '=' (targets+=AnnotationTargetType | ('{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
+	attributes+=AnnotationAttribute*
+	'}'
 ;
 
 AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
 
 SimpleAnnotationAttribute:
-(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
 ;
 
 EnumAnnotationAttribute:
-(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '(' values+=STRING (',' values+=STRING)* ')'
+	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
 ;
 
 enum AnnotationTargetType:
-DATA_CLASS='DataClass' |
-ACTOR_CLASS='ActorClass' |
-ACTOR_BEHAVIOR='ActorBehavior' |
-PROTOCOL_CLASS='ProtocolClass' |
-COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
-SUBSYSTEM_CLASS='SubSystemClass' |
-LOGICAL_SYSTEM_CLASS='LogicalSystem'
+	DATA_CLASS='DataClass' |
+	ACTOR_CLASS='ActorClass' |
+	ACTOR_BEHAVIOR='ActorBehavior' |
+	PROTOCOL_CLASS='ProtocolClass' |
+	COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
+	SUBSYSTEM_CLASS='SubSystemClass' |
+	LOGICAL_SYSTEM_CLASS='LogicalSystem'
 ;
 
 // Value Types for Attributes (NOTE: copied from org.eclipse.etrice.core.config)

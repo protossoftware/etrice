@@ -93,4 +93,14 @@ public class TestAnnotations extends TestBase {
 		assertTrue(diag.getChildren().size() == 1);
 		assertTrue(diag.getChildren().get(0).getMessage().contains("missing mandatory attributes"));
 	}
+	
+	@Test
+	public void InvalidEnumValue() {
+		EObject obj = res.getEObject("ActorClass:InvalidEnumValue");
+		ActorClass ac = (ActorClass)obj;
+		Diagnostic diag = getDiag(ac);
+		assertFalse(diag.getChildren().isEmpty());
+		assertTrue(diag.getChildren().size() == 1);
+		assertTrue(diag.getChildren().get(0).getMessage().contains("Invalid enum attribute value"));
+	}
 }

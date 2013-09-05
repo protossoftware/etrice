@@ -67,6 +67,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
 					put(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives(), "rule__TransitionChainStartTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
+					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0(), "rule__EnumAnnotationAttribute__Alternatives_0");
@@ -213,7 +214,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
 					put(grammarAccess.getKeyValueAccess().getGroup(), "rule__KeyValue__Group__0");
 					put(grammarAccess.getAnnotationTypeAccess().getGroup(), "rule__AnnotationType__Group__0");
-					put(grammarAccess.getAnnotationTypeAccess().getGroup_8(), "rule__AnnotationType__Group_8__0");
+					put(grammarAccess.getAnnotationTypeAccess().getGroup_6_1(), "rule__AnnotationType__Group_6_1__0");
+					put(grammarAccess.getAnnotationTypeAccess().getGroup_6_1_2(), "rule__AnnotationType__Group_6_1_2__0");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getGroup(), "rule__SimpleAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup(), "rule__EnumAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6(), "rule__EnumAnnotationAttribute__Group_6__0");
@@ -483,9 +485,10 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getKeyValueAccess().getValueAssignment_2(), "rule__KeyValue__ValueAssignment_2");
 					put(grammarAccess.getAnnotationTypeAccess().getNameAssignment_1(), "rule__AnnotationType__NameAssignment_1");
 					put(grammarAccess.getAnnotationTypeAccess().getDocuAssignment_2(), "rule__AnnotationType__DocuAssignment_2");
-					put(grammarAccess.getAnnotationTypeAccess().getTargetsAssignment_7(), "rule__AnnotationType__TargetsAssignment_7");
-					put(grammarAccess.getAnnotationTypeAccess().getTargetsAssignment_8_1(), "rule__AnnotationType__TargetsAssignment_8_1");
-					put(grammarAccess.getAnnotationTypeAccess().getAttributesAssignment_10(), "rule__AnnotationType__AttributesAssignment_10");
+					put(grammarAccess.getAnnotationTypeAccess().getTargetsAssignment_6_0(), "rule__AnnotationType__TargetsAssignment_6_0");
+					put(grammarAccess.getAnnotationTypeAccess().getTargetsAssignment_6_1_1(), "rule__AnnotationType__TargetsAssignment_6_1_1");
+					put(grammarAccess.getAnnotationTypeAccess().getTargetsAssignment_6_1_2_1(), "rule__AnnotationType__TargetsAssignment_6_1_2_1");
+					put(grammarAccess.getAnnotationTypeAccess().getAttributesAssignment_7(), "rule__AnnotationType__AttributesAssignment_7");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalAssignment_0_0(), "rule__SimpleAnnotationAttribute__OptionalAssignment_0_0");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getNameAssignment_2(), "rule__SimpleAnnotationAttribute__NameAssignment_2");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeAssignment_4(), "rule__SimpleAnnotationAttribute__TypeAssignment_4");

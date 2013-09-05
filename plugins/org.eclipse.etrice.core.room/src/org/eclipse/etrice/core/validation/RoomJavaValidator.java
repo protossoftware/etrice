@@ -704,8 +704,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkAnnotationTarget(Annotation a) {
+		if(a.getType() == null || a.getType().eIsProxy())
+			return;
+		
 		EObject parent = a.eContainer();
-		if(a.getType() == null) return;
 		EList<AnnotationTargetType> targetList = a.getType().getTargets();
 		AnnotationTargetType invalidTargetType = null;
 		if(parent instanceof ActorClass) {

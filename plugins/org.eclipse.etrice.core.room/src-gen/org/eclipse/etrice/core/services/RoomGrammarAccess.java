@@ -4856,28 +4856,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cTargetKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEqualsSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cLeftParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cTargetsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cTargetsAnnotationTargetTypeEnumRuleCall_7_0 = (RuleCall)cTargetsAssignment_7.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cCommaKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cTargetsAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cTargetsAnnotationTargetTypeEnumRuleCall_8_1_0 = (RuleCall)cTargetsAssignment_8_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_9 = (Keyword)cGroup.eContents().get(9);
-		private final Assignment cAttributesAssignment_10 = (Assignment)cGroup.eContents().get(10);
-		private final RuleCall cAttributesAnnotationAttributeParserRuleCall_10_0 = (RuleCall)cAttributesAssignment_10.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Assignment cTargetsAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
+		private final RuleCall cTargetsAnnotationTargetTypeEnumRuleCall_6_0_0 = (RuleCall)cTargetsAssignment_6_0.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cTargetsAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final RuleCall cTargetsAnnotationTargetTypeEnumRuleCall_6_1_1_0 = (RuleCall)cTargetsAssignment_6_1_1.eContents().get(0);
+		private final Group cGroup_6_1_2 = (Group)cGroup_6_1.eContents().get(2);
+		private final Keyword cCommaKeyword_6_1_2_0 = (Keyword)cGroup_6_1_2.eContents().get(0);
+		private final Assignment cTargetsAssignment_6_1_2_1 = (Assignment)cGroup_6_1_2.eContents().get(1);
+		private final RuleCall cTargetsAnnotationTargetTypeEnumRuleCall_6_1_2_1_0 = (RuleCall)cTargetsAssignment_6_1_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_1_3 = (Keyword)cGroup_6_1.eContents().get(3);
+		private final Assignment cAttributesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cAttributesAnnotationAttributeParserRuleCall_7_0 = (RuleCall)cAttributesAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//AnnotationType:
 		//
-		//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" "(" targets+=AnnotationTargetType (","
+		//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 		//
-		//	targets+=AnnotationTargetType)* ")" attributes+=AnnotationAttribute* "}";
+		//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"AnnotationType" name=ID docu=Documentation? "{" "target" "=" "(" targets+=AnnotationTargetType (","
+		//"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 		//
-		//targets+=AnnotationTargetType)* ")" attributes+=AnnotationAttribute* "}"
+		//targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"AnnotationType"
@@ -4904,38 +4908,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_5() { return cEqualsSignKeyword_5; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_6() { return cLeftParenthesisKeyword_6; }
+		//targets+=AnnotationTargetType | "{" targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}"
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 
 		//targets+=AnnotationTargetType
-		public Assignment getTargetsAssignment_7() { return cTargetsAssignment_7; }
+		public Assignment getTargetsAssignment_6_0() { return cTargetsAssignment_6_0; }
 
 		//AnnotationTargetType
-		public RuleCall getTargetsAnnotationTargetTypeEnumRuleCall_7_0() { return cTargetsAnnotationTargetTypeEnumRuleCall_7_0; }
+		public RuleCall getTargetsAnnotationTargetTypeEnumRuleCall_6_0_0() { return cTargetsAnnotationTargetTypeEnumRuleCall_6_0_0; }
+
+		//"{" targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}"
+		public Group getGroup_6_1() { return cGroup_6_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_6_1_0() { return cLeftCurlyBracketKeyword_6_1_0; }
+
+		//targets+=AnnotationTargetType
+		public Assignment getTargetsAssignment_6_1_1() { return cTargetsAssignment_6_1_1; }
+
+		//AnnotationTargetType
+		public RuleCall getTargetsAnnotationTargetTypeEnumRuleCall_6_1_1_0() { return cTargetsAnnotationTargetTypeEnumRuleCall_6_1_1_0; }
 
 		//("," targets+=AnnotationTargetType)*
-		public Group getGroup_8() { return cGroup_8; }
+		public Group getGroup_6_1_2() { return cGroup_6_1_2; }
 
 		//","
-		public Keyword getCommaKeyword_8_0() { return cCommaKeyword_8_0; }
+		public Keyword getCommaKeyword_6_1_2_0() { return cCommaKeyword_6_1_2_0; }
 
 		//targets+=AnnotationTargetType
-		public Assignment getTargetsAssignment_8_1() { return cTargetsAssignment_8_1; }
+		public Assignment getTargetsAssignment_6_1_2_1() { return cTargetsAssignment_6_1_2_1; }
 
 		//AnnotationTargetType
-		public RuleCall getTargetsAnnotationTargetTypeEnumRuleCall_8_1_0() { return cTargetsAnnotationTargetTypeEnumRuleCall_8_1_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_9() { return cRightParenthesisKeyword_9; }
-
-		//attributes+=AnnotationAttribute*
-		public Assignment getAttributesAssignment_10() { return cAttributesAssignment_10; }
-
-		//AnnotationAttribute
-		public RuleCall getAttributesAnnotationAttributeParserRuleCall_10_0() { return cAttributesAnnotationAttributeParserRuleCall_10_0; }
+		public RuleCall getTargetsAnnotationTargetTypeEnumRuleCall_6_1_2_1_0() { return cTargetsAnnotationTargetTypeEnumRuleCall_6_1_2_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
+		public Keyword getRightCurlyBracketKeyword_6_1_3() { return cRightCurlyBracketKeyword_6_1_3; }
+
+		//attributes+=AnnotationAttribute*
+		public Assignment getAttributesAssignment_7() { return cAttributesAssignment_7; }
+
+		//AnnotationAttribute
+		public RuleCall getAttributesAnnotationAttributeParserRuleCall_7_0() { return cAttributesAnnotationAttributeParserRuleCall_7_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class AnnotationAttributeElements extends AbstractParserRuleElementFinder {
@@ -5023,21 +5039,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cValuesAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cValuesSTRINGTerminalRuleCall_5_0 = (RuleCall)cValuesAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cCommaKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cValuesAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final RuleCall cValuesSTRINGTerminalRuleCall_6_1_0 = (RuleCall)cValuesAssignment_6_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//EnumAnnotationAttribute:
 		//
-		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "(" values+=STRING ("," values+=STRING)* ")";
+		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//(optional?="optional" | "mandatory") "attribute" name=ID ":" "(" values+=STRING ("," values+=STRING)* ")"
+		//(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//optional?="optional" | "mandatory"
@@ -5064,8 +5080,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//values+=STRING
 		public Assignment getValuesAssignment_5() { return cValuesAssignment_5; }
@@ -5085,8 +5101,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getValuesSTRINGTerminalRuleCall_6_1_0() { return cValuesSTRINGTerminalRuleCall_6_1_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -7131,9 +7147,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//AnnotationType:
 	//
-	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" "(" targets+=AnnotationTargetType (","
+	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 	//
-	//	targets+=AnnotationTargetType)* ")" attributes+=AnnotationAttribute* "}";
+	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public AnnotationTypeElements getAnnotationTypeAccess() {
 		return (pAnnotationType != null) ? pAnnotationType : (pAnnotationType = new AnnotationTypeElements());
 	}
@@ -7166,7 +7182,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//EnumAnnotationAttribute:
 	//
-	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "(" values+=STRING ("," values+=STRING)* ")";
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 	public EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return (pEnumAnnotationAttribute != null) ? pEnumAnnotationAttribute : (pEnumAnnotationAttribute = new EnumAnnotationAttributeElements());
 	}

@@ -58,14 +58,21 @@ public class TestBase {
 		URI uri = URI.createFileURI(path);
 		return rs.getResource(uri, true);
 	}
-
+	
 	public Diagnostic getDiag(EObject ele) {
+		return getDiag(ele, true);
+	}
+
+	public Diagnostic getDiag(EObject ele, boolean disableConcreteSyntaxValidation) {
 		Map<Object, Object> options = Maps.newHashMap();
 		options.put(CheckMode.KEY, CheckMode.FAST_ONLY);
 		options.put(CancelableDiagnostician.CANCEL_INDICATOR, CancelIndicator.NullImpl);
-		// disable concrete syntax validation, since a semantic model that has been parsed 
-		// from the concrete syntax always complies with it - otherwise there are parse errors.
-		options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+		
+		if (disableConcreteSyntaxValidation) {
+			// disable concrete syntax validation, since a semantic model that has been parsed 
+			// from the concrete syntax always complies with it - otherwise there are parse errors.
+			options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+		}
 		// see EObjectValidator.getRootEValidator(Map<Object, Object>)
 		options.put(EValidator.class, CoreTestsActivator.getInstance().getDiagnostician());
 		return CoreTestsActivator.getInstance().getDiagnostician().validate(ele, options);

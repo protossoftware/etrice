@@ -51,7 +51,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setNoSpace().around(k);
 		}
 		
-		for (Keyword k: f.findKeywords("<", "~")) {
+		for (Keyword k: f.findKeywords("<", "~", "@")) {
 			c.setNoSpace().after(k);
 		}
 		for (Keyword k: f.findKeywords(")", ">", ",", ":")) {

@@ -7659,75 +7659,94 @@ ruleAnnotationType returns [EObject current=null]
     {
     	newLeafNode(otherlv_5, grammarAccess.getAnnotationTypeAccess().getEqualsSignKeyword_5());
     }
-	otherlv_6='(' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getAnnotationTypeAccess().getLeftParenthesisKeyword_6());
-    }
-(
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeEnumRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeEnumRuleCall_6_0_0()); 
 	    }
-		lv_targets_7_0=ruleAnnotationTargetType		{
+		lv_targets_6_0=ruleAnnotationTargetType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAnnotationTypeRule());
 	        }
        		add(
        			$current, 
        			"targets",
-        		lv_targets_7_0, 
+        		lv_targets_6_0, 
         		"AnnotationTargetType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_8=',' 
+)
+    |(	otherlv_7='{' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getAnnotationTypeAccess().getCommaKeyword_8_0());
+    	newLeafNode(otherlv_7, grammarAccess.getAnnotationTypeAccess().getLeftCurlyBracketKeyword_6_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeEnumRuleCall_8_1_0()); 
+	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeEnumRuleCall_6_1_1_0()); 
 	    }
-		lv_targets_9_0=ruleAnnotationTargetType		{
+		lv_targets_8_0=ruleAnnotationTargetType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAnnotationTypeRule());
 	        }
        		add(
        			$current, 
        			"targets",
-        		lv_targets_9_0, 
+        		lv_targets_8_0, 
         		"AnnotationTargetType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_10=')' 
+)(	otherlv_9=',' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getAnnotationTypeAccess().getRightParenthesisKeyword_9());
+    	newLeafNode(otherlv_9, grammarAccess.getAnnotationTypeAccess().getCommaKeyword_6_1_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getAttributesAnnotationAttributeParserRuleCall_10_0()); 
+	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeEnumRuleCall_6_1_2_1_0()); 
 	    }
-		lv_attributes_11_0=ruleAnnotationAttribute		{
+		lv_targets_10_0=ruleAnnotationTargetType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAnnotationTypeRule());
+	        }
+       		add(
+       			$current, 
+       			"targets",
+        		lv_targets_10_0, 
+        		"AnnotationTargetType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_11='}' 
+    {
+    	newLeafNode(otherlv_11, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_6_1_3());
+    }
+))(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getAttributesAnnotationAttributeParserRuleCall_7_0()); 
+	    }
+		lv_attributes_12_0=ruleAnnotationAttribute		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAnnotationTypeRule());
 	        }
        		add(
        			$current, 
        			"attributes",
-        		lv_attributes_11_0, 
+        		lv_attributes_12_0, 
         		"AnnotationAttribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_12='}' 
+)*	otherlv_13='}' 
     {
-    	newLeafNode(otherlv_12, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_11());
+    	newLeafNode(otherlv_13, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_8());
     }
 )
 ;
@@ -7921,9 +7940,9 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
     {
     	newLeafNode(otherlv_4, grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3());
     }
-	otherlv_5='(' 
+	otherlv_5='{' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftParenthesisKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4());
     }
 (
 (
@@ -7965,9 +7984,9 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_9=')' 
+))*	otherlv_9='}' 
     {
-    	newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightParenthesisKeyword_7());
+    	newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7());
     }
 )
 ;
