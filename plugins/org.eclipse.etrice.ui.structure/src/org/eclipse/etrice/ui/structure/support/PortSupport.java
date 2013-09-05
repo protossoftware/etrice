@@ -205,9 +205,8 @@ public class PortSupport extends InterfaceItemSupport {
 						
 						return true;
 					}
-					
-					return false;
 				}
+				return false;
 			}
 			
 		}
