@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -347,6 +348,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			return rc;
 		}
 		else if (type.equals(RoomPackage.eINSTANCE.getLogicalSystem().getName())) {
+			return rc;
+		}
+		else if (type.equals(RoomPackage.eINSTANCE.getAnnotationType().getName())) {
 			return rc;
 		}
 		
@@ -834,6 +838,10 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		for (LogicalSystem ls : model.getSystems()) {
 			if (ls.getName() != null && ls.getName().equals(className))
 				return ls;
+		}
+		for (AnnotationType at : model.getAnnotationTypes()) {
+			if (at.getName() != null && at.getName().equals(className))
+				return at;
 		}
 		return null;
 	}

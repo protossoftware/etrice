@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.Annotation#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Annotation#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Annotation#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
@@ -32,30 +32,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface Annotation extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is the name of the annotation.
+   * <br>This is the type of the annotation.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotation_Name()
+   * @return the value of the '<em>Type</em>' reference.
+   * @see #setType(AnnotationType)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotation_Type()
    * @model
    * @generated
    */
-  String getName();
+  AnnotationType getType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Annotation#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Annotation#getType <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Type</em>' reference.
+   * @see #getType()
    * @generated
    */
-  void setName(String value);
+  void setType(AnnotationType value);
 
   /**
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

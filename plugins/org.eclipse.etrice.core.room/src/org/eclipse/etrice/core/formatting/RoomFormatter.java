@@ -74,7 +74,8 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getPrimitiveTypeRule());
 		c.setLinewrap().around(f.getExternalTypeRule());
 		c.setLinewrap(2).around(f.getProtocolClassRule());
-		
+		c.setLinewrap(2).around(f.getAnnotationTypeRule());
+		c.setLinewrap().around(f.getAnnotationAttributeRule());
 		c.setLinewrap().around(f.getActorInstanceMappingRule());
 		
 		// structure classes

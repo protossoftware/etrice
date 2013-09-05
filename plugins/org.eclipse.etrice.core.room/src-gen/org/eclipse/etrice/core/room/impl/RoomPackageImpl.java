@@ -17,9 +17,13 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
+import org.eclipse.etrice.core.room.AnnotationAttribute;
+import org.eclipse.etrice.core.room.AnnotationTargetType;
+import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.BooleanLiteral;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
@@ -32,6 +36,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.EnumAnnotationAttribute;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -42,9 +47,11 @@ import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InMessageHandler;
 import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.IntLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.LiteralType;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
@@ -52,6 +59,7 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.room.NumberLiteral;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.OutMessageHandler;
 import org.eclipse.etrice.core.room.OutSemanticsRule;
@@ -61,6 +69,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
+import org.eclipse.etrice.core.room.RealLiteral;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefableType;
@@ -76,6 +85,7 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
@@ -83,6 +93,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.StringLiteral;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
@@ -685,6 +696,76 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass annotationTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass annotationAttributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass simpleAnnotationAttributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumAnnotationAttributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass booleanLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numberLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass importEClass = null;
 
   /**
@@ -714,6 +795,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EEnum referenceTypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum annotationTargetTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -886,6 +974,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EReference getRoomModel_Systems()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoomModel_AnnotationTypes()
+  {
+    return (EReference)roomModelEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -3233,9 +3331,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAnnotation_Name()
+  public EReference getAnnotation_Type()
   {
-    return (EAttribute)annotationEClass.getEStructuralFeatures().get(0);
+    return (EReference)annotationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3273,9 +3371,209 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getKeyValue_Value()
+  public EReference getKeyValue_Value()
   {
-    return (EAttribute)keyValueEClass.getEStructuralFeatures().get(1);
+    return (EReference)keyValueEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAnnotationType()
+  {
+    return annotationTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAnnotationType_Targets()
+  {
+    return (EAttribute)annotationTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAnnotationType_Attributes()
+  {
+    return (EReference)annotationTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAnnotationAttribute()
+  {
+    return annotationAttributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAnnotationAttribute_Optional()
+  {
+    return (EAttribute)annotationAttributeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAnnotationAttribute_Name()
+  {
+    return (EAttribute)annotationAttributeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSimpleAnnotationAttribute()
+  {
+    return simpleAnnotationAttributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleAnnotationAttribute_Type()
+  {
+    return (EAttribute)simpleAnnotationAttributeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnumAnnotationAttribute()
+  {
+    return enumAnnotationAttributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEnumAnnotationAttribute_Values()
+  {
+    return (EAttribute)enumAnnotationAttributeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLiteral()
+  {
+    return literalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBooleanLiteral()
+  {
+    return booleanLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBooleanLiteral_IsTrue()
+  {
+    return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNumberLiteral()
+  {
+    return numberLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealLiteral()
+  {
+    return realLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRealLiteral_Value()
+  {
+    return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntLiteral()
+  {
+    return intLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntLiteral_Value()
+  {
+    return (EAttribute)intLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringLiteral()
+  {
+    return stringLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStringLiteral_Value()
+  {
+    return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -3353,6 +3651,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getAnnotationTargetType()
+  {
+    return annotationTargetTypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RoomFactory getRoomFactory()
   {
     return (RoomFactory)getEFactoryInstance();
@@ -3389,6 +3697,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(roomModelEClass, ROOM_MODEL__ACTOR_CLASSES);
     createEReference(roomModelEClass, ROOM_MODEL__SUB_SYSTEM_CLASSES);
     createEReference(roomModelEClass, ROOM_MODEL__SYSTEMS);
+    createEReference(roomModelEClass, ROOM_MODEL__ANNOTATION_TYPES);
 
     roomClassEClass = createEClass(ROOM_CLASS);
     createEAttribute(roomClassEClass, ROOM_CLASS__NAME);
@@ -3703,12 +4012,42 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(documentationEClass, DOCUMENTATION__LINES);
 
     annotationEClass = createEClass(ANNOTATION);
-    createEAttribute(annotationEClass, ANNOTATION__NAME);
+    createEReference(annotationEClass, ANNOTATION__TYPE);
     createEReference(annotationEClass, ANNOTATION__ATTRIBUTES);
 
     keyValueEClass = createEClass(KEY_VALUE);
     createEAttribute(keyValueEClass, KEY_VALUE__KEY);
-    createEAttribute(keyValueEClass, KEY_VALUE__VALUE);
+    createEReference(keyValueEClass, KEY_VALUE__VALUE);
+
+    annotationTypeEClass = createEClass(ANNOTATION_TYPE);
+    createEAttribute(annotationTypeEClass, ANNOTATION_TYPE__TARGETS);
+    createEReference(annotationTypeEClass, ANNOTATION_TYPE__ATTRIBUTES);
+
+    annotationAttributeEClass = createEClass(ANNOTATION_ATTRIBUTE);
+    createEAttribute(annotationAttributeEClass, ANNOTATION_ATTRIBUTE__OPTIONAL);
+    createEAttribute(annotationAttributeEClass, ANNOTATION_ATTRIBUTE__NAME);
+
+    simpleAnnotationAttributeEClass = createEClass(SIMPLE_ANNOTATION_ATTRIBUTE);
+    createEAttribute(simpleAnnotationAttributeEClass, SIMPLE_ANNOTATION_ATTRIBUTE__TYPE);
+
+    enumAnnotationAttributeEClass = createEClass(ENUM_ANNOTATION_ATTRIBUTE);
+    createEAttribute(enumAnnotationAttributeEClass, ENUM_ANNOTATION_ATTRIBUTE__VALUES);
+
+    literalEClass = createEClass(LITERAL);
+
+    booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
+    createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__IS_TRUE);
+
+    numberLiteralEClass = createEClass(NUMBER_LITERAL);
+
+    realLiteralEClass = createEClass(REAL_LITERAL);
+    createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
+
+    intLiteralEClass = createEClass(INT_LITERAL);
+    createEAttribute(intLiteralEClass, INT_LITERAL__VALUE);
+
+    stringLiteralEClass = createEClass(STRING_LITERAL);
+    createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
@@ -3719,6 +4058,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
     actorCommunicationTypeEEnum = createEEnum(ACTOR_COMMUNICATION_TYPE);
     referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
+    annotationTargetTypeEEnum = createEEnum(ANNOTATION_TARGET_TYPE);
   }
 
   /**
@@ -3797,6 +4137,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     subStateTrPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     choicepointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
+    annotationTypeEClass.getESuperTypes().add(this.getRoomClass());
+    simpleAnnotationAttributeEClass.getESuperTypes().add(this.getAnnotationAttribute());
+    enumAnnotationAttributeEClass.getESuperTypes().add(this.getAnnotationAttribute());
+    booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
+    numberLiteralEClass.getESuperTypes().add(this.getLiteral());
+    realLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
+    intLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
+    stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 
     // Initialize classes and features; add operations and parameters
     initEClass(roomModelEClass, RoomModel.class, "RoomModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3810,6 +4158,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getRoomModel_ActorClasses(), this.getActorClass(), null, "actorClasses", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_SubSystemClasses(), this.getSubSystemClass(), null, "subSystemClasses", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_Systems(), this.getLogicalSystem(), null, "systems", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoomModel_AnnotationTypes(), this.getAnnotationType(), null, "annotationTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(roomClassEClass, RoomClass.class, "RoomClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRoomClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, RoomClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4138,12 +4487,42 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getDocumentation_Lines(), ecorePackage.getEString(), "lines", null, 0, -1, Documentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAnnotation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAnnotation_Type(), this.getAnnotationType(), null, "type", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAnnotation_Attributes(), this.getKeyValue(), null, "attributes", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(keyValueEClass, KeyValue.class, "KeyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getKeyValue_Key(), ecorePackage.getEString(), "key", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKeyValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getKeyValue_Value(), this.getLiteral(), null, "value", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(annotationTypeEClass, AnnotationType.class, "AnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAnnotationType_Targets(), this.getAnnotationTargetType(), "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAnnotationType_Attributes(), this.getAnnotationAttribute(), null, "attributes", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(annotationAttributeEClass, AnnotationAttribute.class, "AnnotationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAnnotationAttribute_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1, AnnotationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAnnotationAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, AnnotationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(simpleAnnotationAttributeEClass, SimpleAnnotationAttribute.class, "SimpleAnnotationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSimpleAnnotationAttribute_Type(), this.getLiteralType(), "type", null, 0, 1, SimpleAnnotationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumAnnotationAttributeEClass, EnumAnnotationAttribute.class, "EnumAnnotationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumAnnotationAttribute_Values(), ecorePackage.getEString(), "values", null, 0, -1, EnumAnnotationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBooleanLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIntLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4170,6 +4549,15 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEEnum(referenceTypeEEnum, ReferenceType.class, "ReferenceType");
     addEEnumLiteral(referenceTypeEEnum, ReferenceType.FIXED);
     addEEnumLiteral(referenceTypeEEnum, ReferenceType.OPTIONAL);
+
+    initEEnum(annotationTargetTypeEEnum, AnnotationTargetType.class, "AnnotationTargetType");
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.DATA_CLASS);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.ACTOR_CLASS);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.ACTOR_BEHAVIOR);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.PROTOCOL_CLASS);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.COMPOUND_PROTOCOL_CLASS);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.SUBSYSTEM_CLASS);
+    addEEnumLiteral(annotationTargetTypeEEnum, AnnotationTargetType.LOGICAL_SYSTEM_CLASS);
 
     // Create resource
     createResource(eNS_URI);

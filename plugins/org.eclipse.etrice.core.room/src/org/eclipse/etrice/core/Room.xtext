@@ -34,12 +34,13 @@ RoomModel :
 		protocolClasses+=GeneralProtocolClass |
 		actorClasses+=ActorClass  |
 		subSystemClasses+=SubSystemClass |
-		systems+=LogicalSystem
+		systems+=LogicalSystem |
+		annotationTypes+=AnnotationType
 	)*
 	'}'
 ;
 
-RoomClass: DataType | GeneralProtocolClass | StructureClass;
+RoomClass: DataType | GeneralProtocolClass | StructureClass | AnnotationType;
 StructureClass: ActorContainerClass | LogicalSystem;
 ActorContainerClass: ActorClass | SubSystemClass;
 
@@ -472,8 +473,87 @@ Documentation:
 		lines+=STRING*
 	']';
 
-Annotation: '@' name=ID ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
-KeyValue: key=ID '=' value=STRING;
+Annotation: '@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+KeyValue: key=ID '=' value=Literal;
+
+AnnotationType:
+'AnnotationType' name=ID (docu=Documentation)? '{'
+'target' '=' '(' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* ')'
+attributes+=AnnotationAttribute*
+'}'
+;
+
+AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
+
+SimpleAnnotationAttribute:
+(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+;
+
+EnumAnnotationAttribute:
+(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '(' values+=STRING (',' values+=STRING)* ')'
+;
+
+enum AnnotationTargetType:
+DATA_CLASS='DataClass' |
+ACTOR_CLASS='ActorClass' |
+ACTOR_BEHAVIOR='ActorBehavior' |
+PROTOCOL_CLASS='ProtocolClass' |
+COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
+SUBSYSTEM_CLASS='SubSystemClass' |
+LOGICAL_SYSTEM_CLASS='LogicalSystem'
+;
+
+// Value Types for Attributes (NOTE: copied from org.eclipse.etrice.core.config)
+Literal:
+	BooleanLiteral |
+	NumberLiteral |
+	StringLiteral;
+
+BooleanLiteral:
+	{BooleanLiteral} ('false' | isTrue?='true');
+
+NumberLiteral:
+	IntLiteral | RealLiteral;
+
+RealLiteral:
+	{RealLiteral} value=Real;
+
+IntLiteral:
+	{IntLiteral} value=Integer;
+
+StringLiteral:
+	{StringLiteral} value=STRING;
+
+Integer returns ecore::ELong:
+	SignedInteger | Hexadecimal;
+
+SignedInteger hidden():
+	('+' | '-')? INT;
+
+Hexadecimal hidden():
+	HEX;
+
+Real returns ecore::EDouble:
+	Decimal | DotDecimal | DecimalDot | DecimalExp;
+
+Decimal hidden():
+	('+' | '-')? INT '.' INT;
+
+DotDecimal hidden():
+	('+' | '-')? '.' INT;
+
+DecimalDot hidden():
+	('+' | '-')? INT '.';
+
+DecimalExp hidden():
+	('+' | '-')? INT '.' INT EXP;
+
+terminal EXP:
+	('e' | 'E') ('+' | '-')? ('0'..'9')+;
+
+terminal HEX:
+	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+
 
 // HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 // this is configured in the work flow by

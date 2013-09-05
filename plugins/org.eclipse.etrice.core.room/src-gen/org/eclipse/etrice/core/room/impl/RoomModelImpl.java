@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -47,6 +48,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getActorClasses <em>Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getSystems <em>Systems</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getAnnotationTypes <em>Annotation Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,6 +165,16 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * @ordered
    */
   protected EList<LogicalSystem> systems;
+
+  /**
+   * The cached value of the '{@link #getAnnotationTypes() <em>Annotation Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotationTypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<AnnotationType> annotationTypes;
 
   /**
    * <!-- begin-user-doc -->
@@ -373,6 +385,20 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<AnnotationType> getAnnotationTypes()
+  {
+    if (annotationTypes == null)
+    {
+      annotationTypes = new EObjectContainmentEList<AnnotationType>(AnnotationType.class, this, RoomPackage.ROOM_MODEL__ANNOTATION_TYPES);
+    }
+    return annotationTypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -396,6 +422,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return ((InternalEList<?>)getSubSystemClasses()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__SYSTEMS:
         return ((InternalEList<?>)getSystems()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return ((InternalEList<?>)getAnnotationTypes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -430,6 +458,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return getSubSystemClasses();
       case RoomPackage.ROOM_MODEL__SYSTEMS:
         return getSystems();
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return getAnnotationTypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -483,6 +513,10 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         getSystems().clear();
         getSystems().addAll((Collection<? extends LogicalSystem>)newValue);
         return;
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        getAnnotationTypes().clear();
+        getAnnotationTypes().addAll((Collection<? extends AnnotationType>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -527,6 +561,9 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__SYSTEMS:
         getSystems().clear();
         return;
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        getAnnotationTypes().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -561,6 +598,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return subSystemClasses != null && !subSystemClasses.isEmpty();
       case RoomPackage.ROOM_MODEL__SYSTEMS:
         return systems != null && !systems.isEmpty();
+      case RoomPackage.ROOM_MODEL__ANNOTATION_TYPES:
+        return annotationTypes != null && !annotationTypes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

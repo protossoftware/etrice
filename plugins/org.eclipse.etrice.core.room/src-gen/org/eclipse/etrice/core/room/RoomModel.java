@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getActorClasses <em>Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getSystems <em>Systems</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getAnnotationTypes <em>Annotation Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -222,5 +223,21 @@ public interface RoomModel extends EObject
    * @generated
    */
   EList<LogicalSystem> getSystems();
+
+  /**
+   * Returns the value of the '<em><b>Annotation Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.AnnotationType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotation Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotation Types</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_AnnotationTypes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AnnotationType> getAnnotationTypes();
 
 } // RoomModel

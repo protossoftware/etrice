@@ -3,13 +3,16 @@
 package org.eclipse.etrice.core.room.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.KeyValue;
+import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -49,24 +52,14 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   protected String key = KEY_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final String VALUE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected String value = VALUE_EDEFAULT;
+  protected Literal value;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,7 +110,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  public Literal getValue()
   {
     return value;
   }
@@ -127,12 +120,53 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  public NotificationChain basicSetValue(Literal newValue, NotificationChain msgs)
   {
-    String oldValue = value;
+    Literal oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.KEY_VALUE__VALUE, oldValue, value));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.KEY_VALUE__VALUE, oldValue, newValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValue(Literal newValue)
+  {
+    if (newValue != value)
+    {
+      NotificationChain msgs = null;
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.KEY_VALUE__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.KEY_VALUE__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.KEY_VALUE__VALUE, newValue, newValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RoomPackage.KEY_VALUE__VALUE:
+        return basicSetValue(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -167,7 +201,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
         setKey((String)newValue);
         return;
       case RoomPackage.KEY_VALUE__VALUE:
-        setValue((String)newValue);
+        setValue((Literal)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -187,7 +221,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
         setKey(KEY_EDEFAULT);
         return;
       case RoomPackage.KEY_VALUE__VALUE:
-        setValue(VALUE_EDEFAULT);
+        setValue((Literal)null);
         return;
     }
     super.eUnset(featureID);
@@ -206,7 +240,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
       case RoomPackage.KEY_VALUE__KEY:
         return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
       case RoomPackage.KEY_VALUE__VALUE:
-        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+        return value != null;
     }
     return super.eIsSet(featureID);
   }
@@ -224,8 +258,6 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (key: ");
     result.append(key);
-    result.append(", value: ");
-    result.append(value);
     result.append(')');
     return result.toString();
   }

@@ -147,6 +147,16 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.DOCUMENTATION: return createDocumentation();
       case RoomPackage.ANNOTATION: return createAnnotation();
       case RoomPackage.KEY_VALUE: return createKeyValue();
+      case RoomPackage.ANNOTATION_TYPE: return createAnnotationType();
+      case RoomPackage.ANNOTATION_ATTRIBUTE: return createAnnotationAttribute();
+      case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE: return createSimpleAnnotationAttribute();
+      case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE: return createEnumAnnotationAttribute();
+      case RoomPackage.LITERAL: return createLiteral();
+      case RoomPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
+      case RoomPackage.NUMBER_LITERAL: return createNumberLiteral();
+      case RoomPackage.REAL_LITERAL: return createRealLiteral();
+      case RoomPackage.INT_LITERAL: return createIntLiteral();
+      case RoomPackage.STRING_LITERAL: return createStringLiteral();
       case RoomPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -171,6 +181,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
         return createActorCommunicationTypeFromString(eDataType, initialValue);
       case RoomPackage.REFERENCE_TYPE:
         return createReferenceTypeFromString(eDataType, initialValue);
+      case RoomPackage.ANNOTATION_TARGET_TYPE:
+        return createAnnotationTargetTypeFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -194,6 +206,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
         return convertActorCommunicationTypeToString(eDataType, instanceValue);
       case RoomPackage.REFERENCE_TYPE:
         return convertReferenceTypeToString(eDataType, instanceValue);
+      case RoomPackage.ANNOTATION_TARGET_TYPE:
+        return convertAnnotationTargetTypeToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -1106,6 +1120,116 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public AnnotationType createAnnotationType()
+  {
+    AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
+    return annotationType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnnotationAttribute createAnnotationAttribute()
+  {
+    AnnotationAttributeImpl annotationAttribute = new AnnotationAttributeImpl();
+    return annotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleAnnotationAttribute createSimpleAnnotationAttribute()
+  {
+    SimpleAnnotationAttributeImpl simpleAnnotationAttribute = new SimpleAnnotationAttributeImpl();
+    return simpleAnnotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumAnnotationAttribute createEnumAnnotationAttribute()
+  {
+    EnumAnnotationAttributeImpl enumAnnotationAttribute = new EnumAnnotationAttributeImpl();
+    return enumAnnotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Literal createLiteral()
+  {
+    LiteralImpl literal = new LiteralImpl();
+    return literal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BooleanLiteral createBooleanLiteral()
+  {
+    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
+    return booleanLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NumberLiteral createNumberLiteral()
+  {
+    NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
+    return numberLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RealLiteral createRealLiteral()
+  {
+    RealLiteralImpl realLiteral = new RealLiteralImpl();
+    return realLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntLiteral createIntLiteral()
+  {
+    IntLiteralImpl intLiteral = new IntLiteralImpl();
+    return intLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StringLiteral createStringLiteral()
+  {
+    StringLiteralImpl stringLiteral = new StringLiteralImpl();
+    return stringLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -1196,6 +1320,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * @generated
    */
   public String convertReferenceTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnnotationTargetType createAnnotationTargetTypeFromString(EDataType eDataType, String initialValue)
+  {
+    AnnotationTargetType result = AnnotationTargetType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertAnnotationTargetTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

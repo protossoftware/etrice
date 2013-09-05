@@ -4,7 +4,6 @@ package org.eclipse.etrice.core.room.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,42 +11,40 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.core.room.Annotation;
+import org.eclipse.etrice.core.room.AnnotationAttribute;
+import org.eclipse.etrice.core.room.AnnotationTargetType;
 import org.eclipse.etrice.core.room.AnnotationType;
-import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Annotation</b></em>'.
+ * An implementation of the model object '<em><b>Annotation Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationTypeImpl#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationTypeImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AnnotationImpl extends MinimalEObjectImpl.Container implements Annotation
+public class AnnotationTypeImpl extends RoomClassImpl implements AnnotationType
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getTargets() <em>Targets</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getTargets()
    * @generated
    * @ordered
    */
-  protected AnnotationType type;
+  protected EList<AnnotationTargetType> targets;
 
   /**
    * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -57,14 +54,14 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * @generated
    * @ordered
    */
-  protected EList<KeyValue> attributes;
+  protected EList<AnnotationAttribute> attributes;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AnnotationImpl()
+  protected AnnotationTypeImpl()
   {
     super();
   }
@@ -77,7 +74,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.ANNOTATION;
+    return RoomPackage.Literals.ANNOTATION_TYPE;
   }
 
   /**
@@ -85,19 +82,13 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * <!-- end-user-doc -->
    * @generated
    */
-  public AnnotationType getType()
+  public EList<AnnotationTargetType> getTargets()
   {
-    if (type != null && type.eIsProxy())
+    if (targets == null)
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (AnnotationType)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.ANNOTATION__TYPE, oldType, type));
-      }
+      targets = new EDataTypeEList<AnnotationTargetType>(AnnotationTargetType.class, this, RoomPackage.ANNOTATION_TYPE__TARGETS);
     }
-    return type;
+    return targets;
   }
 
   /**
@@ -105,34 +96,11 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
    * <!-- end-user-doc -->
    * @generated
    */
-  public AnnotationType basicGetType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(AnnotationType newType)
-  {
-    AnnotationType oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ANNOTATION__TYPE, oldType, type));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<KeyValue> getAttributes()
+  public EList<AnnotationAttribute> getAttributes()
   {
     if (attributes == null)
     {
-      attributes = new EObjectContainmentEList<KeyValue>(KeyValue.class, this, RoomPackage.ANNOTATION__ATTRIBUTES);
+      attributes = new EObjectContainmentEList<AnnotationAttribute>(AnnotationAttribute.class, this, RoomPackage.ANNOTATION_TYPE__ATTRIBUTES);
     }
     return attributes;
   }
@@ -147,7 +115,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case RoomPackage.ANNOTATION_TYPE__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -163,10 +131,9 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case RoomPackage.ANNOTATION_TYPE__TARGETS:
+        return getTargets();
+      case RoomPackage.ANNOTATION_TYPE__ATTRIBUTES:
         return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -183,12 +150,13 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
-        setType((AnnotationType)newValue);
+      case RoomPackage.ANNOTATION_TYPE__TARGETS:
+        getTargets().clear();
+        getTargets().addAll((Collection<? extends AnnotationTargetType>)newValue);
         return;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case RoomPackage.ANNOTATION_TYPE__ATTRIBUTES:
         getAttributes().clear();
-        getAttributes().addAll((Collection<? extends KeyValue>)newValue);
+        getAttributes().addAll((Collection<? extends AnnotationAttribute>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -204,10 +172,10 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
-        setType((AnnotationType)null);
+      case RoomPackage.ANNOTATION_TYPE__TARGETS:
+        getTargets().clear();
         return;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case RoomPackage.ANNOTATION_TYPE__ATTRIBUTES:
         getAttributes().clear();
         return;
     }
@@ -224,12 +192,29 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
-        return type != null;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case RoomPackage.ANNOTATION_TYPE__TARGETS:
+        return targets != null && !targets.isEmpty();
+      case RoomPackage.ANNOTATION_TYPE__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //AnnotationImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (targets: ");
+    result.append(targets);
+    result.append(')');
+    return result.toString();
+  }
+
+} //AnnotationTypeImpl

@@ -1705,9 +1705,9 @@ class DocuPostprocessor {
 			to add {@link KeyValue} pairs to certain model items.
 		''')
 		
-		cls.getAttribute("name").setDocumentation(
+		cls.getReference("type").setDocumentation(
 			'''
-				This is the name of the annotation.
+				This is the type of the annotation.
 			''')
 		
 		cls.getReference("attributes").setDocumentation(
@@ -1726,7 +1726,7 @@ class DocuPostprocessor {
 				This is the key of the pair.
 			''')
 		
-		cls.getAttribute("value").setDocumentation(
+		cls.getReference("value").setDocumentation(
 			'''
 				This is the value of the pair.
 			''')

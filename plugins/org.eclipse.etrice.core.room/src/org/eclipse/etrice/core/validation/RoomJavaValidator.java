@@ -14,8 +14,11 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -30,19 +33,28 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Annotation;
+import org.eclipse.etrice.core.room.AnnotationAttribute;
+import org.eclipse.etrice.core.room.AnnotationTargetType;
+import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BooleanLiteral;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Documentation;
+import org.eclipse.etrice.core.room.EnumAnnotationAttribute;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.IntLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -51,6 +63,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RealLiteral;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -59,9 +72,11 @@ import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
+import org.eclipse.etrice.core.room.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.StringLiteral;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -669,6 +684,140 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkCompoundProtocolClass(CompoundProtocolClass cpc) {
 		if (cpc.getSubProtocols().isEmpty())
 			error("no sub protocols defined", cpc, RoomPackage.Literals.COMPOUND_PROTOCOL_CLASS__SUB_PROTOCOLS);
+	}
+	
+	@Check
+	public void checkAnnotationTypeTargetsUnique(AnnotationType at) {
+		for(AnnotationTargetType targetType : AnnotationTargetType.values()) {
+			int count = 0;
+			for(int i = 0; i < at.getTargets().size(); i++) {
+				AnnotationTargetType target = at.getTargets().get(i);
+				if(target.equals(targetType)) {
+					count++;
+					if(count > 1) {
+						error("duplicate target "+target.getLiteral(), at, RoomPackage.Literals.ANNOTATION_TYPE__TARGETS, i);
+					}
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkAnnotationTarget(Annotation a) {
+		EObject parent = a.eContainer();
+		if(a.getType() == null) return;
+		EList<AnnotationTargetType> targetList = a.getType().getTargets();
+		AnnotationTargetType invalidTargetType = null;
+		if(parent instanceof ActorClass) {
+			ActorClass actorParent = (ActorClass)parent;
+			if(actorParent.getAnnotations().contains(a) && !targetList.contains(AnnotationTargetType.ACTOR_CLASS)) {
+				invalidTargetType = AnnotationTargetType.ACTOR_CLASS;
+			}
+			else if(actorParent.getBehaviorAnnotations().contains(a) && !targetList.contains(AnnotationTargetType.ACTOR_BEHAVIOR)) {
+				invalidTargetType = AnnotationTargetType.ACTOR_BEHAVIOR;
+			}
+		}
+		else if(parent instanceof DataClass && !targetList.contains(AnnotationTargetType.DATA_CLASS)) {
+			invalidTargetType = AnnotationTargetType.DATA_CLASS;
+		}
+		else if(parent instanceof ProtocolClass && !targetList.contains(AnnotationTargetType.PROTOCOL_CLASS)) {
+			invalidTargetType = AnnotationTargetType.PROTOCOL_CLASS;
+		}
+		else if(parent instanceof CompoundProtocolClass && !targetList.contains(AnnotationTargetType.COMPOUND_PROTOCOL_CLASS)) {
+			invalidTargetType = AnnotationTargetType.COMPOUND_PROTOCOL_CLASS;
+		}
+		else if(parent instanceof LogicalSystem && !targetList.contains(AnnotationTargetType.LOGICAL_SYSTEM_CLASS)) {
+			invalidTargetType = AnnotationTargetType.LOGICAL_SYSTEM_CLASS;
+		}
+		else if(parent instanceof SubSystemClass && !targetList.contains(AnnotationTargetType.SUBSYSTEM_CLASS)) {
+			invalidTargetType = AnnotationTargetType.SUBSYSTEM_CLASS;
+		}
+		if(invalidTargetType != null) {
+			error("AnnotationType " + a.getType().getName() + " is not allowed for target " + invalidTargetType.getLiteral(), a, RoomPackage.Literals.ANNOTATION__TYPE);
+		}
+	}
+	
+	@Check
+	public void checkAnnotationAttributeKeys(Annotation a) {
+		EList<AnnotationAttribute> validAttrList = a.getType().getAttributes();
+		EList<KeyValue> attrList = a.getAttributes();
+		Set<String> validAttrNames = new HashSet<String>();
+		for(AnnotationAttribute attr : validAttrList) {
+			validAttrNames.add(attr.getName());
+		}
+		for(int i = 0; i < attrList.size(); i++) {
+			if(!validAttrNames.contains(attrList.get(i).getKey())) {
+				error("Annotation contains undefined attribute", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+			}
+		}
+	}
+	
+	@Check
+	public void checkAnnotationAttributeMandatory(Annotation a) {
+		Set<String> mandatoryAttrNames = new HashSet<String>();
+		Set<String> annoAttrNames = new HashSet<String>();
+		for(AnnotationAttribute attr : a.getType().getAttributes()) {
+			if(!attr.isOptional()) mandatoryAttrNames.add(attr.getName());
+		}
+		for(KeyValue kv : a.getAttributes()) {
+			annoAttrNames.add(kv.getKey());
+		}
+		mandatoryAttrNames.removeAll(annoAttrNames);
+		if(!mandatoryAttrNames.isEmpty()) {
+			error("Annotation is missing mandatory attributes " + mandatoryAttrNames.toString(), a, null);
+		}
+	}
+	
+	@Check
+	public void checkAnnotationAttributeType(Annotation a) {
+		Map<String, AnnotationAttribute> attrDefs = new HashMap<String, AnnotationAttribute>();
+		for(AnnotationAttribute annoAttr : a.getType().getAttributes()) {
+			attrDefs.put(annoAttr.getName(), annoAttr);
+		}
+		for(int i = 0; i < a.getAttributes().size(); i++) {
+			KeyValue kv = a.getAttributes().get(i);
+			if(attrDefs.containsKey(kv.getKey())) {
+				Literal val = kv.getValue();
+				AnnotationAttribute attr = attrDefs.get(kv.getKey());
+				if(RoomPackage.Literals.SIMPLE_ANNOTATION_ATTRIBUTE.isInstance(attr)) {
+					SimpleAnnotationAttribute simpleAttrDef = (SimpleAnnotationAttribute)attr;
+					switch(simpleAttrDef.getType()) {
+					case BOOL:
+						if(!(val instanceof BooleanLiteral)) {
+							error("Expected boolean attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+						}
+						break;
+					case INT:
+						if(!(val instanceof IntLiteral)) {
+							error("Expected integer number attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+						}
+						break;
+					case REAL:
+						if(!(val instanceof RealLiteral)) {
+							error("Expected real number attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+						}
+						break;
+					case CHAR:
+						if(!(val instanceof StringLiteral)) {
+							error("Expected character string attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+						}
+						break;
+					}
+				}
+				else if(RoomPackage.Literals.ENUM_ANNOTATION_ATTRIBUTE.isInstance(attr)) {
+					if(!RoomPackage.Literals.STRING_LITERAL.isInstance(val)) {
+						error("Expected enum attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+					}
+					else {
+						EnumAnnotationAttribute enumAttrDef = (EnumAnnotationAttribute)attr;
+						String strVal = ((StringLiteral)val).getValue(); 
+						if(!enumAttrDef.getValues().contains(strVal)) {
+							error("Invalid enum attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	private void error(Result result) {

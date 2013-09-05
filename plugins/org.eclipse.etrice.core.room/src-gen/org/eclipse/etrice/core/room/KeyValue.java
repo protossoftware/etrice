@@ -55,29 +55,29 @@ public interface KeyValue extends EObject
   void setKey(String value);
 
   /**
-   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is the value of the pair.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(String)
+   * @return the value of the '<em>Value</em>' containment reference.
+   * @see #setValue(Literal)
    * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue_Value()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getValue();
+  Literal getValue();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' attribute.
+   * @param value the new value of the '<em>Value</em>' containment reference.
    * @see #getValue()
    * @generated
    */
-  void setValue(String value);
+  void setValue(Literal value);
 
 } // KeyValue

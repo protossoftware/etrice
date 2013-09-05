@@ -1,0 +1,70 @@
+RoomModel AnnotationExample {
+	LogicalSystem LogSys {
+		SubSystemRef subSysRef:SubSysClass
+	}
+	SubSystemClass SubSysClass {
+		ActorRef actorRef:ActorClass1
+		LogicalThread defaultThread
+	}
+	
+	ActorClass ActorClass1 {
+		@ExampleAnnotation(stringAttr="value", boolAttr=true, intAttr=0, realAttr=0.0, enumAttr="VAL1")
+	}
+	
+	AnnotationType ExampleAnnotation {
+		target = ( ActorBehavior, ActorClass, CompoundProtocolClass, DataClass, LogicalSystem, ProtocolClass, SubSystemClass )
+		mandatory attribute stringAttr : ptCharacter
+		mandatory attribute boolAttr : ptBoolean
+		mandatory attribute intAttr : ptInteger
+		mandatory attribute realAttr : ptReal
+		mandatory attribute enumAttr : ("VAL1", "VAL2", "VAL3")
+		optional attribute optAttr : ptInteger
+	}
+	
+	AnnotationType NonUniqueTargets 
+			["Test non-unique targets in AnnotationType definition"]
+	{
+		target = ( ActorClass, ActorClass )
+	}
+	
+	AnnotationType WrongTargetTestAnnotation
+			["Test validation of annotation declared in unspecified target"]
+	{
+		target = ( ActorClass )
+	}
+	
+	ProtocolClass WrongTargetTestProtocol {
+		@WrongTargetTestAnnotation
+		incoming {
+			Message x()
+		}
+	}
+	
+	AnnotationType UndefinedAttributeTestAnnotation
+			["AnnotationType for undefined attribute validation test"]
+	{
+		target = ( ActorClass )
+		mandatory attribute abc : ptInteger
+	}
+	
+	ActorClass UndefinedAttributeTestActor
+			["ActorClass declaring annotation with undefined attribute"]
+	{
+		@UndefinedAttributeTestAnnotation(abc=0, xyz=0)
+	}
+	
+	AnnotationType MandatoryAttributeTestAnnotation
+			["AnnotationType containing a mix of mandatory and optional annotations"]
+	{
+		target = ( ActorClass )
+		mandatory attribute a : ptInteger
+		mandatory attribute b : ptInteger
+		optional attribute c : ptInteger
+	}
+	
+	ActorClass MandatoryAttributeTestActor
+			["ActorClass declaring annotation with missing mandatory attribute b"]
+	{
+		@MandatoryAttributeTestAnnotation(a=0,c=0)
+	}
+}

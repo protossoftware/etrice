@@ -28,6 +28,15 @@
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/FIXED"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/OPTIONAL"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//AnnotationTargetType">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/DATA_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/ACTOR_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/ACTOR_BEHAVIOR"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/PROTOCOL_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/COMPOUND_PROTOCOL_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/SUBSYSTEM_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/LOGICAL_SYSTEM_CLASS"/>
+    </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
@@ -39,6 +48,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/actorClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/subSystemClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/systems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/annotationTypes"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//RoomClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomClass/name"/>
@@ -346,12 +356,40 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Documentation/lines"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Annotation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Annotation/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Annotation/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Annotation/attributes"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//KeyValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//KeyValue/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//KeyValue/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//KeyValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//AnnotationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationType/targets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//AnnotationType/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//AnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationAttribute/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationAttribute/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//SimpleAnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//SimpleAnnotationAttribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//EnumAnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//EnumAnnotationAttribute/values"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//Literal"/>
+    <genClasses ecoreClass="Room.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BooleanLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//NumberLiteral"/>
+    <genClasses ecoreClass="Room.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//StringLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>

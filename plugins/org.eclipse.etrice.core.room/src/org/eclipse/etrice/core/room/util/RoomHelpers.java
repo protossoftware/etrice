@@ -1638,7 +1638,7 @@ public class RoomHelpers {
 	 */
 	public static boolean isAnnotationPresent(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
-			if (annotation.getName().equals(name))
+			if (annotation.getType().getName().equals(name))
 				return true;
 		}
 		return false;
@@ -1682,7 +1682,7 @@ public class RoomHelpers {
 	 */
 	public static List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
-			if (annotation.getName().equals(name))
+			if (annotation.getType().getName().equals(name))
 				return annotation.getAttributes();
 		}
 		return Collections.emptyList();
@@ -1775,7 +1775,8 @@ public class RoomHelpers {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
 			if (attrib.getKey().equals(key))
-				return attrib.getValue();
+				// TODO: return actual value as string, instead of default ecore toString impl
+				return attrib.getValue().toString();
 		}
 		return "";
 	}
@@ -1807,7 +1808,8 @@ public class RoomHelpers {
 	public static String getAttribute(Annotation annotation, String key) {
 		for (KeyValue attrib : annotation.getAttributes()) {
 			if (attrib.getKey().equals(key))
-				return attrib.getValue();
+				// TODO: return actual value as string, instead of default ecore toString impl  
+				return attrib.getValue().toString();
 		}
 		return "";
 	}
