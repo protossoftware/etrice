@@ -94,7 +94,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			}
 	
 			@Override
-			public Object[] create(ICreateContext context) {
+			public Object[] doCreate(ICreateContext context) {
 				ActorContainerClass acc = (ActorContainerClass) context.getTargetContainer().getLink().getBusinessObjects().get(0);
 
 				// create SPP
@@ -107,18 +107,15 @@ public class SPPSupport extends InterfaceItemSupport {
 		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		        SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, true, false);
-				if (dlg.open()!=Window.OK) {
-					acc.getServiceProvisionPoints().remove(spp);
-					return EMPTY;
+				if (dlg.open()==Window.OK) {
+			        // do the add
+			        addGraphicalRepresentation(context, spp);
+		
+			        // return newly created business object(s)
+			        return new Object[] { spp };
 				}
-		        
-				doneChanges = true;
 				
-		        // do the add
-		        addGraphicalRepresentation(context, spp);
-	
-		        // return newly created business object(s)
-		        return new Object[] { spp };
+				return null;
 			}
 		}
 		
@@ -150,8 +147,6 @@ public class SPPSupport extends InterfaceItemSupport {
 	
 		private static class PropertyFeature extends InterfaceItemSupport.FeatureProvider.PropertyFeature {
 
-			private boolean doneChanges = false;
-
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp, "Edit SPP...", "Edit SPP Properties");
 			}
@@ -170,7 +165,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			}
 
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				SPP spp = (SPP) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 				boolean refport = isRefItem(context.getPictogramElements()[0]);
 				
@@ -178,16 +173,13 @@ public class SPPSupport extends InterfaceItemSupport {
 		        IScope scope = scopeProvider.getScope(spp.eContainer().eContainer(), RoomPackage.eINSTANCE.getSAP_Protocol());
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				SPPPropertyDialog dlg = new SPPPropertyDialog(shell, spp, scope, false, refport);
-				if (dlg.open()!=Window.OK)
-					return;
+				if (dlg.open()==Window.OK){
+					updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+					
+					return true;
+				}
 				
-				doneChanges = true;
-				updateSPPFigure(spp, context.getPictogramElements()[0], manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+				return false;
 			}
 			
 		}

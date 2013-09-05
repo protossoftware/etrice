@@ -21,6 +21,8 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.ChoicePointPropertyDialog;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -47,10 +49,8 @@ import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
-import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
@@ -93,10 +93,8 @@ public class ChoicePointSupport {
 	
 	private static class FeatureProvider extends DefaultFeatureProvider {
 		
-		private static class CreateFeature extends AbstractCreateFeature {
+		private static class CreateFeature extends ChangeAwareCreateFeature {
 	
-			private boolean doneChanges = false;
-
 			public CreateFeature(IFeatureProvider fp, String name, String description) {
 				super(fp, name, description);
 			}
@@ -107,7 +105,7 @@ public class ChoicePointSupport {
 			}
 	
 			@Override
-			public Object[] create(ICreateContext context) {
+			public Object[] doCreate(ICreateContext context) {
 				
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
@@ -125,23 +123,15 @@ public class ChoicePointSupport {
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ChoicePointPropertyDialog dlg = new ChoicePointPropertyDialog(shell, cp);
-				if (dlg.open()!=Window.OK) {
-					if (inherited) {
-						SupportUtil.undoInsertRefinedState(sg, ac, targetContainer, getFeatureProvider());
-					}
-					else {
-						sg.getChPoints().remove(cp);
-					}
-					doneChanges = false;
-					return EMPTY;
+				if (dlg.open()==Window.OK) {
+					// do the add
+			        addGraphicalRepresentation(context, cp);
+		
+			        // return newly created business object(s)
+			        return new Object[] { cp };
 				}
 				
-		        // do the add
-		        addGraphicalRepresentation(context, cp);
-		        doneChanges = true;
-	
-		        // return newly created business object(s)
-		        return new Object[] { cp };
+		        return null;
 			}
 	
 			@Override
@@ -154,11 +144,6 @@ public class ChoicePointSupport {
 						}
 					}
 				return false;
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
 			}
 		}
 		
@@ -265,12 +250,11 @@ public class ChoicePointSupport {
 			}
 		}
 		
-		private static class PropertyFeature extends AbstractCustomFeature {
+		private static class PropertyFeature extends ChangeAwareCustomFeature {
 
 			private String name;
 			private String description;
-			private boolean doneChanges = false;
-
+			
 			public PropertyFeature(IFeatureProvider fp) {
 				super(fp);
 				this.name = "Edit Choice Point";
@@ -300,22 +284,19 @@ public class ChoicePointSupport {
 			}
 
 			@Override
-			public void execute(ICustomContext context) {
+			public boolean doExecute(ICustomContext context) {
 				PictogramElement pe = context.getPictogramElements()[0];
 				ChoicePoint cp = (ChoicePoint) getBusinessObjectForPictogramElement(pe);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				ChoicePointPropertyDialog dlg = new ChoicePointPropertyDialog(shell, cp);
-				if (dlg.open()!=Window.OK)
-					return;
-
-				doneChanges = true;
-				updateFigure(cp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
-			}
-			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
+				if (dlg.open()==Window.OK){
+					updateFigure(cp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
+					
+					return true;
+				}
+				
+				return false;
 			}
 		}
 		

@@ -22,6 +22,8 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
@@ -45,9 +47,7 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
-import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
@@ -83,10 +83,9 @@ public class InterfaceItemSupport {
 	
 	protected static class FeatureProvider extends DefaultFeatureProvider {
 
-		protected abstract static class CreateFeature extends AbstractCreateFeature {
+		protected abstract static class CreateFeature extends ChangeAwareCreateFeature {
 	
 			protected boolean internal;
-			protected boolean doneChanges = false;
 	
 			public CreateFeature(IFeatureProvider fp, boolean internal, String name, String description) {
 				super(fp, name, description);
@@ -108,10 +107,6 @@ public class InterfaceItemSupport {
 				return false;
 			}
 			
-			@Override
-			public boolean hasDoneChanges() {
-				return doneChanges;
-			}
 		}
 		
 		protected abstract static class AddFeature extends AbstractAddFeature {
@@ -431,7 +426,7 @@ public class InterfaceItemSupport {
 		}
 		
 		
-		protected static abstract class PropertyFeature extends AbstractCustomFeature {
+		protected static abstract class PropertyFeature extends ChangeAwareCustomFeature {
 
 			private String name;
 			private String description;
