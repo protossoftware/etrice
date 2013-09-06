@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BooleanLiteral;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -40,9 +41,11 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.IntLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -51,6 +54,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RealLiteral;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -68,6 +72,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.StringLiteral;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -1775,9 +1780,29 @@ public class RoomHelpers {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
 			if (attrib.getKey().equals(key))
-				// TODO: return actual value as string, instead of default ecore toString impl
-				return attrib.getValue().toString();
+				return literalToString(attrib.getValue());
 		}
+		return "";
+	}
+	
+	/**
+	 * @param l a {@link Literal}
+	 * @return a string representation of the literal
+	 */
+	public static String literalToString(Literal l) {
+		if (l instanceof BooleanLiteral) {
+			return ((BooleanLiteral) l).isIsTrue()? "true":"false";
+		}
+		if (l instanceof IntLiteral) {
+			return Long.toString(((IntLiteral) l).getValue());
+		}
+		if (l instanceof RealLiteral) {
+			return Double.toString(((RealLiteral)l).getValue());
+		}
+		if (l instanceof StringLiteral) {
+			return ((StringLiteral)l).getValue();
+		}
+		assert(false): "unexpected sub type";
 		return "";
 	}
 	
@@ -1808,8 +1833,7 @@ public class RoomHelpers {
 	public static String getAttribute(Annotation annotation, String key) {
 		for (KeyValue attrib : annotation.getAttributes()) {
 			if (attrib.getKey().equals(key))
-				// TODO: return actual value as string, instead of default ecore toString impl  
-				return attrib.getValue().toString();
+				return literalToString(attrib.getValue());
 		}
 		return "";
 	}

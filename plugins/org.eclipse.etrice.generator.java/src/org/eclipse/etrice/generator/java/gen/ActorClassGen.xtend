@@ -60,6 +60,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (GlobalSettings::generatePersistenceInterface) "implements IPersistable " else ""
+		val baseClass = if (ac.base!=null) ac.base.name else
+			if (ac.getAttribute("ActorBaseClass", "class").empty) "ActorClassBase" else ac.getAttribute("ActorBaseClass", "class")
+		val baseClassImport = if (ac.getAttribute("ActorBaseClass", "class").empty) "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase"
+				else ac.getAttribute("ActorBaseClass", "package")+"."+ac.getAttribute("ActorBaseClass", "class")
 		
 	'''
 		package «ac.getPackage»;
@@ -76,7 +80,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.Address;
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
-		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+		import «baseClassImport»;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
@@ -97,7 +101,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(1, true)»
 		
 		
-		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «IF ac.base!=null»«ac.base.name»«ELSE»ActorClassBase«ENDIF» «impPersist»{
+		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «baseClass» «impPersist»{
 		
 			«ac.userCode(2, false)»
 			

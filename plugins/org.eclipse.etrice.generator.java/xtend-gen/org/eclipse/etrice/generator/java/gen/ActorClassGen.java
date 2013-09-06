@@ -150,6 +150,39 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _xifexpression_1 = "";
       }
       final String impPersist = _xifexpression_1;
+      String _xifexpression_2 = null;
+      ActorClass _base = ac.getBase();
+      boolean _notEquals = (!Objects.equal(_base, null));
+      if (_notEquals) {
+        ActorClass _base_1 = ac.getBase();
+        String _name_2 = _base_1.getName();
+        _xifexpression_2 = _name_2;
+      } else {
+        String _xifexpression_3 = null;
+        String _attribute = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
+        boolean _isEmpty = _attribute.isEmpty();
+        if (_isEmpty) {
+          _xifexpression_3 = "ActorClassBase";
+        } else {
+          String _attribute_1 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
+          _xifexpression_3 = _attribute_1;
+        }
+        _xifexpression_2 = _xifexpression_3;
+      }
+      final String baseClass = _xifexpression_2;
+      String _xifexpression_4 = null;
+      String _attribute_2 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
+      boolean _isEmpty_1 = _attribute_2.isEmpty();
+      if (_isEmpty_1) {
+        _xifexpression_4 = "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase";
+      } else {
+        String _attribute_3 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "package");
+        String _plus_1 = (_attribute_3 + ".");
+        String _attribute_4 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
+        String _plus_2 = (_plus_1 + _attribute_4);
+        _xifexpression_4 = _plus_2;
+      }
+      final String baseClassImport = _xifexpression_4;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(ac);
@@ -159,8 +192,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
-        boolean _not = (!_isEmpty);
+        boolean _isEmpty_2 = _dynConfigReadAttributes.isEmpty();
+        boolean _not = (!_isEmpty_2);
         if (_not) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
           _builder.newLine();
@@ -185,8 +218,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;");
       _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
-      _builder.newLine();
+      _builder.append("import ");
+      _builder.append(baseClassImport, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
@@ -199,8 +234,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final RoomModel model : models) {
           _builder.append("import ");
-          String _name_2 = model.getName();
-          _builder.append(_name_2, "");
+          String _name_3 = model.getName();
+          _builder.append(_name_3, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
@@ -213,8 +248,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _package_1 = this._roomExtensions.getPackage(pc);
           _builder.append(_package_1, "");
           _builder.append(".");
-          String _name_3 = pc.getName();
-          _builder.append(_name_3, "");
+          String _name_4 = pc.getName();
+          _builder.append(_name_4, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
@@ -237,8 +272,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_package_2, "");
           _builder.append(".");
           ActorClass _type_1 = sub.getType();
-          String _name_4 = _type_1.getName();
-          _builder.append(_name_4, "");
+          String _name_5 = _type_1.getName();
+          _builder.append(_name_5, "");
           _builder.append("Interface;");
           _builder.newLineIfNotEmpty();
         }
@@ -265,17 +300,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("class ");
       _builder.append(clsname, "");
       _builder.append(" extends ");
-      {
-        ActorClass _base = ac.getBase();
-        boolean _notEquals = (!Objects.equal(_base, null));
-        if (_notEquals) {
-          ActorClass _base_1 = ac.getBase();
-          String _name_5 = _base_1.getName();
-          _builder.append(_name_5, "");
-        } else {
-          _builder.append("ActorClassBase");
-        }
-      }
+      _builder.append(baseClass, "");
       _builder.append(" ");
       _builder.append(impPersist, "");
       _builder.append("{");
@@ -634,14 +659,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         boolean _or_1 = false;
         List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_1 = _dynConfigReadAttributes_2.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
+        boolean _isEmpty_3 = _dynConfigReadAttributes_2.isEmpty();
+        boolean _not_1 = (!_isEmpty_3);
         if (_not_1) {
           _or_1 = true;
         } else {
           List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
-          boolean _isEmpty_2 = _dynConfigWriteAttributes.isEmpty();
-          boolean _not_2 = (!_isEmpty_2);
+          boolean _isEmpty_4 = _dynConfigWriteAttributes.isEmpty();
+          boolean _not_2 = (!_isEmpty_4);
           _or_1 = (_not_1 || _not_2);
         }
         if (_or_1) {
