@@ -14,8 +14,10 @@ package org.eclipse.etrice.ui.structure.support;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.support.context.DeleteContext;
 import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider;
@@ -32,6 +34,7 @@ import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
 public class DiagramUpdateFeature extends AbstractUpdateFeature {
@@ -42,19 +45,32 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 
 	@Override
 	public boolean canUpdate(IUpdateContext context) {
+		Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+		if(!(bo instanceof EObject) || ((EObject) bo).eIsProxy())
+			return false;
+		
 		return true;
 	}
 
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
-		StructureClass sc = (StructureClass) getBusinessObjectForPictogramElement(getDiagram());
-		
-		if(sc instanceof ActorClass && ((ActorClass)sc).getBase() != null)
-			return new Reason(true);
-		if(updateConnectionsNeeded(getDiagram()))
-			return new Reason(true);
-		if(updateNeeded(getDiagram()))
-			return new Reason(true);
+		PictogramElement pe = context.getPictogramElement();
+		Object bo = getBusinessObjectForPictogramElement(pe);
+		if(bo instanceof EObject){
+			EObject eBo = (EObject)bo;
+			if (eBo.eIsProxy()) 
+				return Reason.createTrueReason("Deleted from model");
+			
+			StructureClass sc = (StructureClass) bo;
+			if(sc instanceof ActorClass && ((ActorClass)sc).getBase() != null)
+				return new Reason(true);
+			if(updateConnectionsNeeded(getDiagram()))
+				return new Reason(true);
+			if(updateNeeded(getDiagram()))
+				return new Reason(true);
+			if(!new DiagramAccess().getDiagramName(sc).equals(getDiagram().getName()))
+				return new Reason(true);
+		}
 
 		return new Reason(false);
 	}
@@ -106,7 +122,9 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 
 	@Override
 	public boolean update(IUpdateContext context) {
-		StructureClass sc = (StructureClass) getBusinessObjectForPictogramElement(getDiagram());
+		PictogramElement pe = context.getPictogramElement();
+		Object bo = getBusinessObjectForPictogramElement(pe);
+		StructureClass sc = (StructureClass) bo;
 		ContainerShape scShape = DiagramUtil.findScShape(getDiagram());
 		IPositionProvider positionProvider = null;
 		if(context instanceof PositionUpdateContext)
@@ -114,7 +132,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		
 		if(scShape == null)
 			scShape = createStructureClass(sc, positionProvider);
-		
+				
 		boolean doneChanges = updateConnections(getDiagram());
 		
 		if (updateIfNeeded(getDiagram()))
@@ -130,6 +148,12 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 			
 			doneChanges |= getFeatureProvider().updateIfPossible(ctx).toBoolean();
 		} 
+		
+		String diagramName = new DiagramAccess().getDiagramName(sc);
+		if(!diagramName.equals(getDiagram().getName())){
+			getDiagram().setName(new DiagramAccess().getDiagramName(sc));
+			doneChanges = true;
+		}
 		
 		return doneChanges;
 	}

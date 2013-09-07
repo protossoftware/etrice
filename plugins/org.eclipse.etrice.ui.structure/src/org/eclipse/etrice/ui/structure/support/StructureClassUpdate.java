@@ -172,7 +172,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 
 	@Override
 	protected IReason updateNeeded(EObject bo, IUpdateContext context) {
-		return Reason.createTrueReason();
+		return Reason.createFalseReason();
 	}
 	
 	private Map<EObject,Connection> addConnectionsInitial(List<? extends EObject> toAdd, ConnectionProvider cp){

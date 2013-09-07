@@ -61,5 +61,12 @@
             uriExtension="structure">
         </resourceServiceProvider>
     </extension>
+ <extension
+       point="org.eclipse.etrice.ui.common.refactoring.rename">
+    <participant
+          diagram_extension="structure"
+          editor_id="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+    </participant>
+ </extension>
 
 </plugin>

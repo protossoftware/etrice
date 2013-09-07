@@ -48,7 +48,7 @@ import org.eclipse.ui.part.FileEditorInput;
  */
 public abstract class DiagramAccessBase {
 
-	private static final String DIAGRAMS_FOLDER_NAME = "diagrams";
+	public static final String DIAGRAMS_FOLDER_NAME = "diagrams";
 	
 	/**
 	 * 
@@ -211,10 +211,10 @@ public abstract class DiagramAccessBase {
 		return input;
 	}
 
-	abstract protected String getDiagramName(StructureClass sc);
+	public abstract String getDiagramName(StructureClass sc);
+	abstract protected String getFileExtension();
 	abstract protected String getDiagramTypeId();
 	abstract protected String getEditorId();
-	abstract protected String getFileExtension();
 	abstract protected Command getInitialCommand(StructureClass ac, Diagram diagram, TransactionalEditingDomain editingDomain);
 	abstract protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain);
 }

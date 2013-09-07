@@ -40,6 +40,11 @@ public abstract class CommonUpdateFeature extends AbstractUpdateFeature {
 	
 	@Override
 	public final boolean canUpdate(IUpdateContext context) {
+		// disable update if diagram is disconnected from model
+		Object diagramBo = getBusinessObjectForPictogramElement(getDiagram());
+		if(diagramBo instanceof EObject && ((EObject) diagramBo).eIsProxy())
+			return false;
+		
 		Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 		if (bo instanceof EObject){
 			EObject eBo = (EObject)bo;

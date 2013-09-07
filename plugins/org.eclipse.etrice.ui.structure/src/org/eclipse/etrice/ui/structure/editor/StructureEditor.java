@@ -68,6 +68,7 @@ public class StructureEditor extends RoomDiagramEditor {
 	protected DiagramBehavior createDiagramBehavior() {
 		final StructureEditor editor = this;
 		return new DiagramBehavior(this) {
+			@Override
 			protected DefaultRefreshBehavior createRefreshBehavior() {
 				return new DiagramRefreshBehavior(editor);
 			}

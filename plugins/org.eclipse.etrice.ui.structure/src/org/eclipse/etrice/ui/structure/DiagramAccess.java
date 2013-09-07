@@ -27,7 +27,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 
 public class DiagramAccess extends DiagramAccessBase {
 
-	protected String getDiagramName(StructureClass sc) {
+	public String getDiagramName(StructureClass sc) {
 		return "Structure of "+sc.getName();
 	}
 
@@ -43,24 +43,20 @@ public class DiagramAccess extends DiagramAccessBase {
 		return ".structure";
 	}
 
-	protected Command getInitialCommand(StructureClass ac, Diagram diagram, TransactionalEditingDomain editingDomain) {
+	protected Command getInitialCommand(StructureClass sc, Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		return new UpdateDiagramCommand(ac, diagram, editingDomain, featureProvider);
+		return new UpdateDiagramCommand(diagram, sc, editingDomain, featureProvider);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getUpdateCommand(org.eclipse.graphiti.mm.pictograms.Diagram, org.eclipse.emf.transaction.TransactionalEditingDomain)
-	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		StructureClass sc = (StructureClass) featureProvider.getBusinessObjectForPictogramElement(diagram);
-		UpdateDiagramCommand cmd = new UpdateDiagramCommand(sc, diagram, editingDomain, featureProvider);
+		UpdateDiagramCommand cmd = new UpdateDiagramCommand(diagram, editingDomain, featureProvider);
 		if (cmd.updateNeeded())
 			return cmd;
-		
+
 		return null;
 	}
 }

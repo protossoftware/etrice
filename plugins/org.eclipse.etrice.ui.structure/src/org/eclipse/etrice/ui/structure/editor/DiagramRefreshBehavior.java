@@ -42,8 +42,12 @@ public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 				autoUpdate(new PositionUpdateContext(diagram, new SuperDiagramPositionProvider(sc)));
 			else
 				autoUpdate(new UpdateContext(diagram));
-			
 		}
+	}
+	
+	@Override
+	protected void handleAutoUpdateAtReset() {	
+		super.handleAutoUpdateAtReset();
 	}
 
 	public void autoUpdate(IUpdateContext updateCtx) {
@@ -52,5 +56,7 @@ public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 		featureProvider.updateIfPossible(updateCtx);
 		refresh();
 	}
+	
+	
 
 }

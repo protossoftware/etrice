@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.eclipse.etrice.ui.common.refactoring.rename" name="Diagram Rename Participant" schema="schema/org.eclipse.etrice.ui.common.refactoring.rename.exsd"/>
    <extension
          point="org.eclipse.ui.startup">
       <startup
@@ -20,6 +21,26 @@
       <initializer
             class="org.eclipse.etrice.ui.common.preferences.PreferenceInitializer">
       </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.etrice.ui.common.refactoring.DiagramRenameParticipant"
+            id="org.eclipse.etrice.ui.common.renameParticipant"
+            name="eTrice Diagram Rename Participant">
+         <enablement>
+            <with
+                  variable="element">
+               <adapt
+                     type="org.eclipse.core.resources.IFile">
+                  <test
+                        property="org.eclipse.core.resources.extension"
+                        value="room">
+                  </test>
+               </adapt>
+            </with>
+         </enablement>
+      </renameParticipant>
    </extension>
 
 </plugin>

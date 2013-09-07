@@ -12,12 +12,15 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
+import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -28,12 +31,15 @@ import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
+import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.context.impl.CustomContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
@@ -46,10 +52,14 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.platform.IPlatformImageConstants;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IContextButtonEntry;
+import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -117,7 +127,7 @@ public class StructureClassSupport {
 					rect.setForeground(manageColor(LINE_COLOR));
 					rect.setBackground(manageColor(BACKGROUND));
 					rect.setTransparency(0.5);
-					rect.setLineWidth(LINE_WIDTH);
+					rect.setLineVisible(false);
 					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
 					// then unfilled opaque
 					rect = gaService.createRectangle(invisibleRectangle);
@@ -240,6 +250,46 @@ public class StructureClassSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				return false;
+			}
+		}
+		
+		private class ReconnectToModel extends AbstractCustomFeature {
+
+			public ReconnectToModel(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+				RoomDiagramEditor editor = (RoomDiagramEditor) getDiagramBehavior().getDiagramContainer();
+				
+				Job job = new ChangeDiagramInputJob("blub", editor);
+				job.setUser(true);
+				job.schedule();
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				return true;
+			}
+			
+			@Override
+			public String getName() {
+				return "Reconnect Diagram to Model";
+			}
+			
+			
+			
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
+			
+			@Override
+			public boolean isAvailable(IContext context) {
+				Object bo = fp.getBusinessObjectForPictogramElement(getDiagram());
+				
+				return bo instanceof EObject && ((EObject)bo).eIsProxy();
 			}
 		}
 		
@@ -374,7 +424,7 @@ public class StructureClassSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] {
-					new OpenBehaviorDiagram(fp)};
+					new OpenBehaviorDiagram(fp), new ReconnectToModel(fp)};
 		}
 		
 		@Override
@@ -413,8 +463,24 @@ public class StructureClassSupport {
             GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
 
             GraphicsAlgorithm rectangle =
-                invisible.getGraphicsAlgorithmChildren().get(0);
+                invisible.getGraphicsAlgorithmChildren().get(1);
             return rectangle;
+		}
+		
+		@Override
+		public IContextButtonPadData getContextButtonPad(
+				IPictogramElementContext context) {
+			IContextButtonPadData data = super.getContextButtonPad(context);
+			
+			ICustomContext customContext = new CustomContext();
+			ICustomFeature reconnectToModel = afp.getCustomFeatures(customContext)[1];
+			if(reconnectToModel.isAvailable(customContext)){
+				IContextButtonEntry entry = new ContextButtonEntry(reconnectToModel, customContext);
+				entry.setIconId(IPlatformImageConstants.IMG_ECLIPSE_QUICKASSIST);
+				data.getDomainSpecificContextButtons().add(entry);
+			}
+			
+			return data;
 		}
 	}
 

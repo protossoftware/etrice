@@ -33,7 +33,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getDiagramName(org.eclipse.etrice.core.room.StructureClass)
 	 */
 	@Override
-	protected String getDiagramName(StructureClass sc) {
+	public String getDiagramName(StructureClass sc) {
 		return "Behavior of "+sc.getName();
 	}
 

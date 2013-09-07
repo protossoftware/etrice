@@ -31,8 +31,11 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.core.ui.editor.RoomEditor;
 import org.eclipse.etrice.ui.common.Activator;
+import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -65,11 +68,15 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 	
 	private ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 
+	private boolean showLostDiagramInputDialog = true;
+	
 	public RoomDiagramEditor() {
 		super();
 		
 		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
+		
+		TrayDialog.setDialogHelpAvailable(false);
 	}
 	
 	@Override
@@ -182,7 +189,7 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 	public void setFocus() {
 		boolean dirtyAlready = isDirty();
 		
-		// inside this call auto refresh will happen iff (and turn the editor dirty)
+		// inside this call auto refresh will happen if (and turn the editor dirty)
 		super.setFocus();
 		
 		if(superClassListener.isChangeInSuperClass())
@@ -190,6 +197,26 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 		
 		if (!dirtyAlready && isDirty())
 			doSave(null);
+		
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		EObject diagramBo = diagram.getLink().getBusinessObjects().iterator().next();
+		if(diagramBo == null || diagramBo.eIsProxy())
+			handleMissingDiagramBo(diagram);
+	}
+	
+	protected void handleMissingDiagramBo(Diagram diagram){
+		if(!showLostDiagramInputDialog)
+			return;
+		
+		// show only once
+		showLostDiagramInputDialog = false;
+		MessageDialog dialog = new MessageDialog(getGraphicalControl().getShell(),
+				"Diagram out-dated", null, "Diagram input lost. Cannot find ROOM file or class for "+diagram.getName(),
+				MessageDialog.ERROR, new String[] { "OK", "Reconnect Diagram" }, 0);
+		int result = dialog.open();
+		
+		if(result == 1)
+			new ChangeDiagramInputJob("Change input for "+diagram.getName(), this).schedule();	
 	}
 	
 	/**
@@ -216,7 +243,6 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 		
 		return false;
 	}
-	
 	
 	/**
 	 * Check whether the given room editor has a super class

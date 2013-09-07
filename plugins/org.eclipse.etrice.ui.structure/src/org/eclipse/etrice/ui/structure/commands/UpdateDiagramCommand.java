@@ -29,25 +29,32 @@ public class UpdateDiagramCommand extends RecordingCommand {
 
 	private Diagram diagram;
 	private IFeatureProvider featureProvider;
-	private StructureClass sc;
+	private StructureClass linkedSc;
 	
-	public UpdateDiagramCommand(StructureClass sc, Diagram diagram, TransactionalEditingDomain domain, IFeatureProvider featureProvider) {
+	public UpdateDiagramCommand(Diagram diagram, TransactionalEditingDomain domain, IFeatureProvider featureProvider) {
 		super(domain);
-		this.sc = sc;
 		this.diagram = diagram;
 		this.featureProvider = featureProvider;
+		this.linkedSc = null;
+	}
+	
+	public UpdateDiagramCommand(Diagram diagram, StructureClass linkedSc, TransactionalEditingDomain domain, IFeatureProvider featureProvider) {
+		this(diagram, domain, featureProvider);
+		this.linkedSc = linkedSc;
 	}
 
 	@Override
 	protected void doExecute() {
-		if(diagram.getLink() == null)
-			featureProvider.link(diagram, sc);
+		if(linkedSc != null)
+			featureProvider.link(diagram, linkedSc);
+		
+		Object diagramBo = featureProvider.getBusinessObjectForPictogramElement(diagram);
 		
 		IUpdateContext context;
-		if(sc instanceof ActorClass && ((ActorClass)sc).getBase() != null)
-			context = new PositionUpdateContext(diagram, new SuperDiagramPositionProvider(sc));
-		else if(DiagramUtil.findScShape(diagram) == null)
-			context = new PositionUpdateContext(diagram, new DefaultPositionProvider(sc));
+		if(diagramBo instanceof ActorClass && ((ActorClass)diagramBo).getBase() != null)
+			context = new PositionUpdateContext(diagram, new SuperDiagramPositionProvider((ActorClass)diagramBo));
+		else if(diagramBo instanceof StructureClass && DiagramUtil.findScShape(diagram) == null)
+			context = new PositionUpdateContext(diagram, new DefaultPositionProvider((StructureClass)diagramBo));
 		else
 			context = new UpdateContext(diagram);
 		
