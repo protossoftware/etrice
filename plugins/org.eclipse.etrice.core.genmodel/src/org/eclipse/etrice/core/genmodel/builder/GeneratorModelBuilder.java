@@ -25,7 +25,6 @@ import java.util.Map.Entry;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
@@ -647,6 +646,8 @@ public class GeneratorModelBuilder {
 		instance.setName(name);
 		instance.setSubSystemClass(ssc);
 		
+		createPortInstances(ssc.getRelayPorts(), PortKind.INTERNAL, instance);
+		
 		// TODOHRR: enumerate object ids per thread
 		
 		for (ActorRef ar : ssc.getActorRefs()) {
@@ -1154,17 +1155,18 @@ public class GeneratorModelBuilder {
 				}
 			}
 			else if (obj instanceof SubSystemInstance) {
-				SubSystemInstance ssi = (SubSystemInstance) obj;
-				SubSystemClass ssc = ssi.getSubSystemClass();
-				for (PortInstance pi : ssi.getPorts()) {
-					EReference feature = RoomPackage.eINSTANCE.getSubSystemClass_RelayPorts();
-					int idx = ssc.getRelayPorts().indexOf(pi.getPort());
-					
-					diagnostician.error("number of peers ("+pi.getBindings().size()
-							+ ") of port '"+pi.getName()
-							+"' exceeds multiplicity "+pi.getPort().getMultiplicity()
-							+" in instance "+ssi.getPath(), ssc, feature, idx);
-				}
+				// TODO: do meaningful check here
+//				SubSystemInstance ssi = (SubSystemInstance) obj;
+//				SubSystemClass ssc = ssi.getSubSystemClass();
+//				for (PortInstance pi : ssi.getPorts()) {
+//					EReference feature = RoomPackage.eINSTANCE.getSubSystemClass_RelayPorts();
+//					int idx = ssc.getRelayPorts().indexOf(pi.getPort());
+//					
+//					diagnostician.error("number of peers ("+pi.getBindings().size()
+//							+ ") of port '"+pi.getName()
+//							+"' exceeds multiplicity "+pi.getPort().getMultiplicity()
+//							+" in instance "+ssi.getPath(), ssc, feature, idx);
+//				}
 			}
 		}
 	}

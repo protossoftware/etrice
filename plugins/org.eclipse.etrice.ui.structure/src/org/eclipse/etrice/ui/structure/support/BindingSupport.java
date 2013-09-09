@@ -118,6 +118,9 @@ public class BindingSupport {
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
+				if (context.getSourceAnchor()==null)
+					return false;
+				
 				Port src = SupportUtil.getPort(context.getSourceAnchor(), getFeatureProvider());
 				boolean canStart = src!=null;
 				if (canStart) {
@@ -129,7 +132,7 @@ public class BindingSupport {
 							canStart = false;
 					}
 					else {
-						ActorContainerClass acc = (ActorContainerClass) ref.eContainer();
+						StructureClass acc = (StructureClass) ref.eContainer();
 						if (!ValidationUtil.isConnectable(src, ref, acc).isOk())
 							canStart = false;
 					}
@@ -494,7 +497,7 @@ public class BindingSupport {
 		}
 
 		private boolean isInherited(Diagram diag, Binding b) {
-			ActorContainerClass ac = (ActorContainerClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
+			StructureClass ac = (StructureClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diag.getChildren().get(0));
 			return (b.eContainer()!=ac);
 		}
 		

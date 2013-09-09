@@ -19,7 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -34,6 +33,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InMessageHandler;
 import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.MessageHandler;
@@ -55,6 +55,7 @@ import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateTerminal;
+import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -126,19 +127,20 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		return null;
 	}
-
+	
 	/**
-	 * check whether port is referenced by external port
-	 * @param p - port to be checked
-	 * @param ports - list of external ports
-	 * @return true if contained
+	 * first container of type {@link StructureClass}
+	 * @param obj
+	 * @return StructureClass container
 	 */
-	private boolean isContained(Port p, EList<ExternalPort> ports) {
-		for (ExternalPort port : ports) {
-			if (port.getInterfacePort()==p)
-				return true;
-		}
-		return false;
+	private StructureClass getStructureClass(EObject obj) {
+		EObject ctx = obj.eContainer();
+		while (!(ctx instanceof StructureClass) && ctx.eContainer()!=null)
+			ctx = ctx.eContainer();
+		if (ctx instanceof StructureClass)
+			return (StructureClass) ctx;
+		
+		return null;
 	}
 
 	/**
@@ -393,7 +395,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_BindingEndPoint_actorRef(BindingEndPoint ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ActorContainerClass sc = getActorContainerClass(ep);
+		StructureClass sc = getStructureClass(ep);
 		if (sc instanceof ActorClass) {
 			LinkedList<ActorClass> classes = getBaseClasses((ActorClass)sc);
 			for (ActorClass a : classes) {
@@ -402,9 +404,15 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			}
 		}
-		else {
-			for (ActorRef ar : sc.getActorRefs()) {
+		else if (sc instanceof SubSystemClass){
+			for (ActorRef ar : ((SubSystemClass) sc).getActorRefs()) {
 				scopes.add(EObjectDescription.create(ar.getName(), ar));
+			}
+		}
+		else {
+			LogicalSystem ls = (LogicalSystem) sc;
+			for (SubSystemRef ssr : ls.getSubSystems()) {
+				scopes.add(EObjectDescription.create(ssr.getName(), ssr));
 			}
 		}
 		
@@ -420,11 +428,11 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_BindingEndPoint_port(BindingEndPoint ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ActorContainerClass acc = getActorContainerClass(ep);
+		StructureClass sc = getStructureClass(ep);
 		
 		if (ep.getActorRef() == null){
-			if (acc instanceof ActorClass) {
-				ActorClass ac = (ActorClass) acc;
+			if (sc instanceof ActorClass) {
+				ActorClass ac = (ActorClass) sc;
 				// for all super classes (including this class)
 				LinkedList<ActorClass> classes = getBaseClasses(ac);
 				for (ActorClass a : classes) {
@@ -434,14 +442,16 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 						scopes.add(EObjectDescription.create(p.getName(), p));
 					}
 					// interface ports not in structure (relay)
-					for (Port p : a.getInterfacePorts()) {
-						if (!isContained(p, a.getExternalPorts()))
-							scopes.add(EObjectDescription.create(p.getName(), p));
+					for (Port p : a.getRelayPorts()) {
+						scopes.add(EObjectDescription.create(p.getName(), p));
 					}
 				}
 			}
-			else {
-				// SubSystemClass has no internal end ports
+			else if (sc instanceof SubSystemClass) {
+				SubSystemClass ssc = (SubSystemClass) sc;
+				for (Port p : ssc.getRelayPorts()) {
+					scopes.add(EObjectDescription.create(p.getName(), p));
+				}
 			}
 		}
 		else {
