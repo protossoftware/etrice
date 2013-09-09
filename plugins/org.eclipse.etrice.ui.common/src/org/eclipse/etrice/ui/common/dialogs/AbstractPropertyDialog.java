@@ -39,13 +39,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -178,8 +183,12 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		}
 	}
 	
-	private static String DATA_KEY_STATUS = "etrice.status";
 	
+	private static String PREF_KEY_WIDTH = ".width";
+	private static String PREF_KEY_HEIGHT = ".height";
+	private static String WIDGET_DATA_KEY_VALSTATUS = "etrice.status";
+		
+	private IPreferenceStore preferenceStore;
 	private String title;
 	private FormToolkit toolkit;
 	private DataBindingContext bindingContext;
@@ -195,9 +204,21 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	public AbstractPropertyDialog(Shell shell, String title) {
 		super(shell);
 		this.title = title;
+		this.preferenceStore = Activator.getDefault().getPreferenceStore();
 	}
 
 	abstract protected Image getImage();
+	
+	@Override
+	public int open() {
+		
+		if(getShell() == null)
+			create();
+		
+		setupUserDialogSize();
+		
+		return super.open();
+	}
 	
 	@Override
 	protected void createFormContent(IManagedForm mform) {
@@ -205,8 +226,8 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		bindingContext = new DataBindingContext();
 
 		Form form = mform.getForm().getForm();
-		form.setText(title);
-
+		form.setText(title);		
+		
 		form.setImage(getImage());
 		mform.getToolkit().decorateFormHeading(form);
 
@@ -512,10 +533,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			List<ValidationStatusProvider> valProviders = new ArrayList<ValidationStatusProvider>();
 			valProviders.add(convertBinding);
 			valProviders.add(multiValidator);
-			widget.setData(DATA_KEY_STATUS, createAggregateValidationStatus(valProviders));
+			widget.setData(WIDGET_DATA_KEY_VALSTATUS, createAggregateValidationStatus(valProviders));
 		} else {
 			Binding binding = bindingContext.bindValue(observableWidget, observableObj, t2m, m2t);
-			widget.setData(DATA_KEY_STATUS, binding.getValidationStatus());
+			widget.setData(WIDGET_DATA_KEY_VALSTATUS, binding.getValidationStatus());
 		}
 	}
 	
@@ -552,7 +573,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	 * Returns the observable validation status for the given widget.
 	 */
 	protected IObservableValue getObservableStatus(Widget widget){
-		return (IObservableValue) widget.getData(DATA_KEY_STATUS);
+		return (IObservableValue) widget.getData(WIDGET_DATA_KEY_VALSTATUS);
 	}
 
 	/**
@@ -569,5 +590,28 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	private IObservableValue createAggregateValidationStatus(Collection<ValidationStatusProvider> valProvider){
 		IObservableCollection observableStatusProvider = new WritableList(valProvider, ValidationStatusProvider.class);
 		return new AggregateValidationStatus(observableStatusProvider, AggregateValidationStatus.MAX_SEVERITY);
+	}
+	
+	private void setupUserDialogSize(){
+		int width = preferenceStore.getInt(this.getClass().getName()+PREF_KEY_WIDTH);
+		int height = preferenceStore.getInt(this.getClass().getName()+PREF_KEY_HEIGHT);
+		if(width > 0 && height > 0)
+			getShell().setSize(width, height);
+		
+		getShell().addControlListener(new ControlListener() {
+			
+			String dialogId = AbstractPropertyDialog.this.getClass().getName();
+			
+			@Override
+			public void controlResized(ControlEvent e) {
+				Point size = getShell().getSize();				
+				preferenceStore.setValue(dialogId+PREF_KEY_WIDTH, size.x);
+				preferenceStore.setValue(dialogId+PREF_KEY_HEIGHT, size.y);
+			}
+			
+			@Override
+			public void controlMoved(ControlEvent e) {
+			}
+		});
 	}
 }
