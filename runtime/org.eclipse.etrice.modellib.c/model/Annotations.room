@@ -1,0 +1,7 @@
+RoomModel room.basic.annotations {
+	
+	AnnotationType BehaviorManual {
+		target = ActorBehavior
+	}
+	
+}

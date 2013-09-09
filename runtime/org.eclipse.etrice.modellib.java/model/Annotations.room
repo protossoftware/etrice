@@ -1,5 +1,9 @@
 RoomModel room.basic.annotations {
 	
+	AnnotationType BehaviorManual {
+		target = ActorBehavior
+	}
+	
 	AnnotationType ActorBaseClass {
 		target = ActorClass
 		mandatory attribute class: ptCharacter
