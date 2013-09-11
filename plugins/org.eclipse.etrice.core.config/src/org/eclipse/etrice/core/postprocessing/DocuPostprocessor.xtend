@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.postprocessing
 
 import org.eclipse.xtext.GeneratedMetamodel
 
-import static extension org.eclipse.etrice.core.postprocessing.PostprocessingHelpers.*
+import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
 
 class DocuPostprocessor {
 		
@@ -335,33 +335,6 @@ class DocuPostprocessor {
 			'''
 				Controls the behavior of the dynamic configuration. If set to false, then {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} is updated (overwritten) if changes occur in the external configuration, 
 				otherwise set to true, then changes in {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} (that occur from within the system) are recorded to the external configuration.
-			''')
-			
-		//------------------------------------------------------------------
-		
-		cls = pckg.getClass("LiteralArray")
-		cls.setDocumentation(
-			'''
-				Aggregates one or more {@link Literal literals}.		
-			''')
-			
-		cls.getReference("literals").setDocumentation(
-			'''
-				This is a list of literals.
-			''')
-			
-		//------------------------------------------------------------------
-		
-		cls = pckg.getClass("Literal")
-		cls.setDocumentation(
-			'''
-				It is the super class of
-				<ul>
-					<li>{@link BooleanLiteral}</li>
-					<li>{@link NumberLiteral}</li>
-					<li>{@link StringLiteral}</li>
-				</ul>
-				that represents a primitive value.
 			''')
 			
 		//------------------------------------------------------------------

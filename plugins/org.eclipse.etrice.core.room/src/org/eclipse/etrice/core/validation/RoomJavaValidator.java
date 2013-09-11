@@ -28,6 +28,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.Literal;
+import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -39,7 +44,6 @@ import org.eclipse.etrice.core.room.AnnotationTargetType;
 import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BooleanLiteral;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
@@ -50,11 +54,9 @@ import org.eclipse.etrice.core.room.EnumAnnotationAttribute;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.IntLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -63,7 +65,6 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RealLiteral;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -76,7 +77,6 @@ import org.eclipse.etrice.core.room.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StringLiteral;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -807,7 +807,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					}
 				}
 				else if(RoomPackage.Literals.ENUM_ANNOTATION_ATTRIBUTE.isInstance(attr)) {
-					if(!RoomPackage.Literals.STRING_LITERAL.isInstance(val)) {
+					if(!(val instanceof StringLiteral)) {
 						error("Expected enum attribute value", a, RoomPackage.Literals.ANNOTATION__ATTRIBUTES, i);
 					}
 					else {

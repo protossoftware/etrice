@@ -22,6 +22,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.Literal;
+import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -31,7 +36,6 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BooleanLiteral;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -41,11 +45,9 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.IntLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
-import org.eclipse.etrice.core.room.Literal;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
@@ -54,7 +56,6 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RealLiteral;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
@@ -72,10 +73,10 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.StateTerminal;
-import org.eclipse.etrice.core.room.StringLiteral;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
@@ -1168,7 +1169,7 @@ public class RoomHelpers {
 
 	/**
 	 * @param item an {@link InterfaceItem}
-	 * @return a list of all incoming {@link Messages} of this item
+	 * @return a list of all incoming {@link Message}s of this item
 	 */
 	public static List<Message> getIncoming(InterfaceItem item) {
 		if (getProtocol(item)!=null)
@@ -1179,7 +1180,7 @@ public class RoomHelpers {
 
 	/**
 	 * @param item an {@link InterfaceItem}
-	 * @return a list of all outgoing {@link Messages} of this item
+	 * @return a list of all outgoing {@link Message}s of this item
 	 */
 	public static List<Message> getOutgoing(InterfaceItem item) {
 		if (getProtocol(item)!=null)

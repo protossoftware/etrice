@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common eTrice Grammar Fragment and Utility Classes
+Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Version: 0.4.0.qualifier
+Bundle-SymbolicName: org.eclipse.etrice.core.common; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.etrice.core.common,
+ org.eclipse.etrice.core.common.base,
+ org.eclipse.etrice.core.common.base.impl,
+ org.eclipse.etrice.core.common.base.util,
+ org.eclipse.etrice.core.common.converter,
+ org.eclipse.etrice.core.common.formatting,
+ org.eclipse.etrice.core.common.generator,
+ org.eclipse.etrice.core.common.parser.antlr,
+ org.eclipse.etrice.core.common.parser.antlr.internal,
+ org.eclipse.etrice.core.common.postprocessing,
+ org.eclipse.etrice.core.common.scoping,
+ org.eclipse.etrice.core.common.serializer,
+ org.eclipse.etrice.core.common.services,
+ org.eclipse.etrice.core.common.validation
+

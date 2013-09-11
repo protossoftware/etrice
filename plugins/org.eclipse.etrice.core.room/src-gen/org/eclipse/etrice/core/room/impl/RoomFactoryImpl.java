@@ -151,12 +151,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.ANNOTATION_ATTRIBUTE: return createAnnotationAttribute();
       case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE: return createSimpleAnnotationAttribute();
       case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE: return createEnumAnnotationAttribute();
-      case RoomPackage.LITERAL: return createLiteral();
-      case RoomPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-      case RoomPackage.NUMBER_LITERAL: return createNumberLiteral();
-      case RoomPackage.REAL_LITERAL: return createRealLiteral();
-      case RoomPackage.INT_LITERAL: return createIntLiteral();
-      case RoomPackage.STRING_LITERAL: return createStringLiteral();
       case RoomPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -1157,72 +1151,6 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     EnumAnnotationAttributeImpl enumAnnotationAttribute = new EnumAnnotationAttributeImpl();
     return enumAnnotationAttribute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Literal createLiteral()
-  {
-    LiteralImpl literal = new LiteralImpl();
-    return literal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanLiteral createBooleanLiteral()
-  {
-    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-    return booleanLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NumberLiteral createNumberLiteral()
-  {
-    NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
-    return numberLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RealLiteral createRealLiteral()
-  {
-    RealLiteralImpl realLiteral = new RealLiteralImpl();
-    return realLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IntLiteral createIntLiteral()
-  {
-    IntLiteralImpl intLiteral = new IntLiteralImpl();
-    return intLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StringLiteral createStringLiteral()
-  {
-    StringLiteralImpl stringLiteral = new StringLiteralImpl();
-    return stringLiteral;
   }
 
   /**

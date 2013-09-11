@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 		Eyrak Paen
  * 
  *******************************************************************************/
 
@@ -23,9 +24,12 @@ var projectName = "org.eclipse.etrice.core.room"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-    bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
-	}
+	bean = StandaloneSetup {
+        scanClassPath = true
+        platformUri = "${runtimeProject}/.."
+        registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel"
+        registerGeneratedEPackage = "org.eclipse.etrice.core.common.base.BasePackage"
+    }
 	
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"

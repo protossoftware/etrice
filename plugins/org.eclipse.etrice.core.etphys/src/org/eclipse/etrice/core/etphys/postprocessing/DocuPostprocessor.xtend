@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.etphys.postprocessing
 
 import org.eclipse.xtext.GeneratedMetamodel
 
-import static extension org.eclipse.etrice.core.postprocessing.PostprocessingHelpers.*
+import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
 
 class DocuPostprocessor {
 		

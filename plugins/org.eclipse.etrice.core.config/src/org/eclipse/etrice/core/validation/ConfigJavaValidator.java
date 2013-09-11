@@ -21,23 +21,24 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.Literal;
+import org.eclipse.etrice.core.common.base.NumberLiteral;
+import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
-import org.eclipse.etrice.core.config.BooleanLiteral;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
-import org.eclipse.etrice.core.config.IntLiteral;
-import org.eclipse.etrice.core.config.Literal;
-import org.eclipse.etrice.core.config.NumberLiteral;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
-import org.eclipse.etrice.core.config.RealLiteral;
 import org.eclipse.etrice.core.config.RefPath;
-import org.eclipse.etrice.core.config.StringLiteral;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
@@ -246,7 +247,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 		List<Literal> values = config.getValue().getLiterals();
 		EReference valueRef = ConfigPackage.eINSTANCE.getAttrConfig_Value();
-		EReference arrayRef = ConfigPackage.eINSTANCE
+		EReference arrayRef = BasePackage.eINSTANCE
 				.getLiteralArray_Literals();
 		LiteralType type = primitive.getType();
 		Attribute attribute = config.getAttribute();

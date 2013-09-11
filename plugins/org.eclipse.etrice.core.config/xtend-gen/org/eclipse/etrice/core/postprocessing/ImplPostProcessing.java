@@ -13,7 +13,7 @@ package org.eclipse.etrice.core.postprocessing;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.etrice.core.postprocessing.PostprocessingHelpers;
+import org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.GeneratedMetamodel;
 

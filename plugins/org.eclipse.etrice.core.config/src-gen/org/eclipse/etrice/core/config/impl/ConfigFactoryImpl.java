@@ -78,13 +78,6 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
       case ConfigPackage.ATTR_INSTANCE_CONFIG: return createAttrInstanceConfig();
       case ConfigPackage.REF_PATH: return createRefPath();
       case ConfigPackage.IMPORT: return createImport();
-      case ConfigPackage.LITERAL_ARRAY: return createLiteralArray();
-      case ConfigPackage.LITERAL: return createLiteral();
-      case ConfigPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-      case ConfigPackage.NUMBER_LITERAL: return createNumberLiteral();
-      case ConfigPackage.REAL_LITERAL: return createRealLiteral();
-      case ConfigPackage.INT_LITERAL: return createIntLiteral();
-      case ConfigPackage.STRING_LITERAL: return createStringLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -242,83 +235,6 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LiteralArray createLiteralArray()
-  {
-    LiteralArrayImpl literalArray = new LiteralArrayImpl();
-    return literalArray;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Literal createLiteral()
-  {
-    LiteralImpl literal = new LiteralImpl();
-    return literal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanLiteral createBooleanLiteral()
-  {
-    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-    return booleanLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NumberLiteral createNumberLiteral()
-  {
-    NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
-    return numberLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RealLiteral createRealLiteral()
-  {
-    RealLiteralImpl realLiteral = new RealLiteralImpl();
-    return realLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IntLiteral createIntLiteral()
-  {
-    IntLiteralImpl intLiteral = new IntLiteralImpl();
-    return intLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StringLiteral createStringLiteral()
-  {
-    StringLiteralImpl stringLiteral = new StringLiteralImpl();
-    return stringLiteral;
   }
 
   /**

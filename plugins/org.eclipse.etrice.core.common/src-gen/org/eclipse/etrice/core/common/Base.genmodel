@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.common/src-gen" editDirectory="/org.eclipse.etrice.core.common.edit/src"
+    editorDirectory="/org.eclipse.etrice.core.common.editor/src" modelPluginID="org.eclipse.etrice.core.common"
+    forceOverwrite="true" modelName="Base" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.common.edit"
+    editorPluginID="org.eclipse.etrice.core.common.editor" runtimeVersion="2.9">
+  <genPackages prefix="Base" basePackage="org.eclipse.etrice.core.common" disposableProviderFactory="true"
+      fileExtensions="etbase" ecorePackage="Base.ecore#/">
+    <genClasses ecoreClass="Base.ecore#//LiteralArray">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//LiteralArray/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//Literal"/>
+    <genClasses ecoreClass="Base.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//BooleanLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//NumberLiteral"/>
+    <genClasses ecoreClass="Base.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//StringLiteral/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

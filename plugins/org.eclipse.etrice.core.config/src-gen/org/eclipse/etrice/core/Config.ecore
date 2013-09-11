@@ -201,7 +201,7 @@
         <details key="documentation" value="&lt;br>This is the attribute.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//LiteralArray"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//LiteralArray"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the value of {@link #getAttribute attribute}.&#xD;&#xA;"/>
@@ -212,13 +212,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.Attribute attribute}.&#xD;&#xA;The configuration defines a default value for all instances of the attribute.&#xD;&#xA;The values are applied at generation time.&#xD;&#xA;&lt;br>If the type of the given {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} is&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>primitive, then a {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} might exist and {@link #getAttributes attributes} is empty&lt;/li>&#xD;&#xA;&#x9;&lt;li>compound attribute (e.g. {@link org.eclipse.etrice.core.room.DataClass data class}), then {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} is null and configurations for children {@link #getAttributes attributes} might exist&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="min" eType="#//NumberLiteral"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="min" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the lower bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="max" eType="#//NumberLiteral"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="max" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the upper bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.&#xD;&#xA;"/>
@@ -277,34 +277,5 @@
         <details key="documentation" value="&lt;br>The import URI can be a relative or absolute file system path.&#xD;&#xA;It may contain environment variables in ${} which will be expanded.&#xD;&#xA;&lt;p>&#xD;&#xA;Examples:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>import model &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;../../AnotherProject/models/AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;/${ROOM_MODELS}/SomeModel.room&quot;&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LiteralArray">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Aggregates one or more {@link Literal literals}.&#x9;&#x9;&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
-        eType="#//Literal" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of literals.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Literal">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>It is the super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>{@link BooleanLiteral}&lt;/li>&#xD;&#xA;&#x9;&lt;li>{@link NumberLiteral}&lt;/li>&#xD;&#xA;&#x9;&lt;li>{@link StringLiteral}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;that represents a primitive value.&#xD;&#xA;"/>
-    </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NumberLiteral" eSuperTypes="#//Literal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//NumberLiteral">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntLiteral" eSuperTypes="#//NumberLiteral">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

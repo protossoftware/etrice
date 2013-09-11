@@ -17,7 +17,7 @@ import com.google.inject.Injector;
 public class ConfigStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		org.eclipse.etrice.core.common.BaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

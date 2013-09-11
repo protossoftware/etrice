@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.config;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.etrice.core.common.base.NumberLiteral;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Attr Class Config</b></em>'.

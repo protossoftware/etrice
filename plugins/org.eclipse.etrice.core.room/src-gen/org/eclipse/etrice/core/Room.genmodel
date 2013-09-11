@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.room.editor/src" modelPluginID="org.eclipse.etrice.core.room"
     forceOverwrite="true" modelName="Room" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
-    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.9">
+    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//LiteralType">
@@ -376,20 +376,6 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//EnumAnnotationAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//EnumAnnotationAttribute/values"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//Literal"/>
-    <genClasses ecoreClass="Room.ecore#//BooleanLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//BooleanLiteral/isTrue"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//NumberLiteral"/>
-    <genClasses ecoreClass="Room.ecore#//RealLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RealLiteral/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//IntLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//IntLiteral/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//StringLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//StringLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>

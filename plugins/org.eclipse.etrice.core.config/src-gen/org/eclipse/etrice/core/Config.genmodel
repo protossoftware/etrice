@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.config.editor/src" modelPluginID="org.eclipse.etrice.core.config"
     forceOverwrite="true" modelName="Config" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.config.edit"
-    editorPluginID="org.eclipse.etrice.core.config.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
+    editorPluginID="org.eclipse.etrice.core.config.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
   <genPackages prefix="Config" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Config.ecore#/">
     <genClasses ecoreClass="Config.ecore#//ConfigModel">
@@ -71,23 +71,6 @@
     <genClasses ecoreClass="Config.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importedNamespace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importURI"/>
-    </genClasses>
-    <genClasses ecoreClass="Config.ecore#//LiteralArray">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//LiteralArray/literals"/>
-    </genClasses>
-    <genClasses ecoreClass="Config.ecore#//Literal"/>
-    <genClasses ecoreClass="Config.ecore#//BooleanLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//BooleanLiteral/isTrue"/>
-    </genClasses>
-    <genClasses ecoreClass="Config.ecore#//NumberLiteral"/>
-    <genClasses ecoreClass="Config.ecore#//RealLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RealLiteral/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Config.ecore#//IntLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//IntLiteral/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Config.ecore#//StringLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//StringLiteral/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

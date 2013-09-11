@@ -11,9 +11,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.etrice.core.common.base.LiteralArray;
+
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
-import org.eclipse.etrice.core.config.LiteralArray;
 
 import org.eclipse.etrice.core.room.Attribute;
 

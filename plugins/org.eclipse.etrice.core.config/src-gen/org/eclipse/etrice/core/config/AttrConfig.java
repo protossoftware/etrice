@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.config;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.LiteralArray;
+
 import org.eclipse.etrice.core.room.Attribute;
 
 /**
