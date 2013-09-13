@@ -91,6 +91,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
@@ -105,6 +106,7 @@
 				<include name="com.google.guava_10.*.jar" />
 				<include name="org.eclipse.equinox.common_3.6.*.jar" />
 				<include name="org.eclipse.xtext.util_2.*.jar" />
+				<include name="org.eclipse.xtext.common.types_2.4*.jar" />
 				<include name="org.eclipse.xtend.lib_2.*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.*.jar" />
 				<include name="org.apache.log4j_1.2*.jar" />
