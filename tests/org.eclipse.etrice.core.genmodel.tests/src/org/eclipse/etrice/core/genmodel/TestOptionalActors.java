@@ -49,7 +49,7 @@ public class TestOptionalActors extends TestInstanceModelBuilderBase {
 	public void testInstanceNumbers() {
 		checkSize(4, ETriceGenPackage.eINSTANCE.getSAPInstance());
 		checkSize(3, ETriceGenPackage.eINSTANCE.getSPPInstance());
-		checkSize(3, ETriceGenPackage.eINSTANCE.getServiceImplInstance());
+		checkSize(6, ETriceGenPackage.eINSTANCE.getServiceImplInstance());
 		checkSize(12, ETriceGenPackage.eINSTANCE.getActorInstance());
 		checkSize(3, ETriceGenPackage.eINSTANCE.getActorInterfaceInstance());
 		checkSize(6, ETriceGenPackage.eINSTANCE.getOptionalActorInstance());
@@ -70,7 +70,7 @@ public class TestOptionalActors extends TestInstanceModelBuilderBase {
 		
 		sap = (SAPInstance) getInstance(saps, "/OptionalForSvcOK/ref0/sap2");
 		assertNotNull("sap expected", sap);
-		assertEquals("SAP has no peer", 0, sap.getPeers().size());
+		assertEquals("SAP has one peer", 1, sap.getPeers().size());
 	}
 	
 	@Test
