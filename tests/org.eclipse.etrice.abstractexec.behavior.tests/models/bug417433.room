@@ -1,0 +1,82 @@
+/*
+ * stripped down example of https://bugs.eclipse.org/417433
+ */
+RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.examples by Franca2ETriceTransformation." ]
+{
+	ActorClass RobotArmExampleClient {
+		Interface {
+			conjugated Port messageAPI: RobotArm
+		}
+		Structure {
+			external Port messageAPI
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> waitingForMove { }
+				Transition done1: waitingForMove -> waitingForGrab {
+					triggers {
+						<replyMove: messageAPI>
+					}
+				}
+				Transition done2: waitingForGrab -> waitingForRelease {
+					triggers {
+						<replyGrab: messageAPI>
+					}
+				}
+				Transition done: waitingForRelease -> ready {
+					triggers {
+						<replyRelease: messageAPI>
+					}
+				}
+				State waitingForMove {
+					entry {
+						"messageAPI.move(new StructPosition(0, 0, 0));"
+					}
+				}
+				State waitingForGrab {
+					entry {
+						"messageAPI.grab(0.0);"
+					}
+				}
+				State waitingForRelease {
+					entry {
+						"messageAPI.release();"
+					}
+				}
+				State ready
+			}
+		}
+	}
+
+	ProtocolClass RobotArm {
+		incoming {
+			Message move(pos: StructPosition)
+			Message grab(gripAngle: Double)
+			Message release()
+		}
+		outgoing {
+			Message replyMove(ok: Boolean) [ "reply for move" ]
+			Message replyGrab(ok: Boolean) [ "reply for grab" ]
+			Message replyRelease(ok: Boolean) [ "reply for release" ]
+			Message operable(pos: StructPosition)
+		}
+		semantics {
+			in : grab -> out : replyGrab
+			in : move -> out : replyMove
+			in : release -> out : replyRelease
+		}
+	}
+
+
+	DataClass StructPosition {
+		Attribute x: UInt16
+		Attribute y: UInt16
+		Attribute z: UInt16
+	}
+
+	PrimitiveType UInt16: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
+	PrimitiveType UInt32: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
+	PrimitiveType Double: ptReal -> java.lang.Double(java.lang.Double) default "0.0"
+	PrimitiveType Boolean: ptBoolean -> java.lang.Boolean(java.lang.Boolean) default "false"
+}
+

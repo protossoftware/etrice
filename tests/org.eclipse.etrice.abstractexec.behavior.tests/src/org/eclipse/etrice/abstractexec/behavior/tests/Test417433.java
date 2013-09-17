@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,29 +13,26 @@
 package org.eclipse.etrice.abstractexec.behavior.tests;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Henrik Rentz-Reichert (initial contribution)
+ * @author Henrik Rentz-Reichert
  *
  */
-public class TestSemanticValidation extends TestBase {
-
-	@SuppressWarnings("unused")
-	private static final String MSG1 = "replace this with the expected error/Warning message";
+public class Test417433 extends TestBase {
 
 	@Before
 	public void setUp() {
-		prepare("semantics.room");
+		prepare("bug417433.room");
 	}
 	
 	@Test
 	public void testSomething() {
-		assertEquals("number of infos", 2, getInfoMsgToDiagnostic().size());
-		assertEquals("number of warnings", 5, getWarningMsgToDiagnostic().size());
-//		assertEquals("number of errors", 1, getErrorMsgToDiagnostic().size());
-//		assertNotNull(MSG1, getErrorMsgToDiagnostic().get(MSG1));
-		// further checks for all other messages...
+		assertEquals("number of infos", 3, getInfoMsgToDiagnostic().size());
+		assertEquals("number of warnings", 0, getWarningMsgToDiagnostic().size());
+		assertEquals("number of errors", 0, getErrorMsgToDiagnostic().size());
 	}
+
 }

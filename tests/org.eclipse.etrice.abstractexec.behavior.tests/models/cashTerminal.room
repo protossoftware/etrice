@@ -16,7 +16,7 @@ RoomModel CashTerminal {
 						"auth.hello();"
 					}
 				}
-				Transition tr0: state0_sm -> offline {
+				Transition tr0: state0_sm -> offline_sm {
 					triggers {
 						<serviceNA: auth>
 					}
@@ -51,7 +51,7 @@ RoomModel CashTerminal {
 						"terminal.showWelcome();"
 					}
 				}
-				State offline
+				State offline_sm
 				State handleCard {
 					subgraph {
 						Transition init: initial -> state0_sm {
@@ -125,12 +125,12 @@ RoomModel CashTerminal {
 		}
 		Behavior {
 			StateMachine {
-				Transition tr0: cp cp0 -> error {
+				Transition tr0: cp cp0 -> error_rm {
 					action {
 						"client.serviceNA();"
 					}
 				}
-				Transition tr2: cp cp0 -> standby {
+				Transition tr2: cp cp0 -> standby_rm {
 					cond {
 						"if(okay)"
 					}
@@ -138,7 +138,7 @@ RoomModel CashTerminal {
 						"client.hello();"
 					}
 				}
-				Transition tr4: standby -> standby {
+				Transition tr4: standby_rm -> standby_rm {
 					triggers {
 						<checkCard: client>
 					}
@@ -149,7 +149,7 @@ RoomModel CashTerminal {
 						"\tinvalidCard();"
 					}
 				}
-				Transition tr5_vm: standby -> standby {
+				Transition tr5_vm: standby_rm -> standby_rm {
 					triggers {
 						<checkPIN: client>
 					}
@@ -167,8 +167,8 @@ RoomModel CashTerminal {
 					}
 				}
 				ChoicePoint cp0
-				State standby
-				State error
+				State standby_rm
+				State error_rm
 				State state0
 			}
 		}

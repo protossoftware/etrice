@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -88,8 +89,17 @@ public class ActiveRules {
 					// discard all alternatives
 					localRules.clear();
 
-					// and add all follow ups
-					localRules.addAll(match.getFollowUps());
+					if (match.getFollowUps().isEmpty()) {
+						// all rules of this branch consumed
+						// restart at root of semantic rules
+						ProtocolSemantics semantics = ((ProtocolClass)msg.getIfitem().getGeneralProtocol()).getSemantics();
+						localRules.addAll(semantics.getRules());
+					}
+					else {
+						// and add all follow ups
+						localRules.addAll(match.getFollowUps());
+					}
+					
 				} else {
 					// TODO: issue a warning?
 					wrongMsgList.add(msg);

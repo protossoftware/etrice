@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -109,35 +110,46 @@ public class TestSemantics {
 				EList<?> list = (EList<?>) feature;
 				Object source = list.get(d.getIndex());
 				if (source instanceof StateGraphItem) {
-					checkItem(((StateGraphItem) source).getName(), marker);
+					StateGraphItem sgi = (StateGraphItem) source;
+					checkItem(sgi.getName(), RoomNameProvider.getName(sgi), marker);
 					items.remove(source);
 				}
 			}
 		} else if (container instanceof Trigger) {
 			if (container.eContainer() instanceof Transition) {
-				checkItem(((Transition) container.eContainer()).getName(),
+				Transition transition = (Transition) container.eContainer();
+				checkItem(transition.getName(),
+						RoomNameProvider.getName(transition),
 						marker);
 				items.remove(container.eContainer());
 			} else
 				Assert.fail("unexpected test object: " + container.eContainer());
 		} else if (container instanceof Transition) {
-			checkItem(((Transition) container).getName(), marker);
+			Transition transition = (Transition) container;
+			checkItem(transition.getName(),
+					RoomNameProvider.getName(transition),
+					marker);
 			items.remove(container);
 		} else if (container instanceof State) {
-			checkItem(((State) container).getName(), marker);
+			State state = (State) container;
+			checkItem(state.getName(),
+					RoomNameProvider.getName(state),
+					marker);
 			items.remove(container);
 		} else
 			Assert.fail("unexpected test object: " + container);
 	}
 
-	private void checkItem(String name, DiagCode diagCode) {
+	private void checkItem(String name, String longName, DiagCode diagCode) {
 		int begin = name.lastIndexOf("_");
 		String errorCodes = "";
 		if (begin != -1)
 			errorCodes = name.substring(begin);
-		Assert.assertTrue("Missing warning (" + diagCode.diagCode
-				+ ") for item " + name + " ("
-				+ current.getRoomModel().getName() + ")",
-				errorCodes.contains(diagCode.shortCut));
+		if (!errorCodes.contains(diagCode.shortCut)) {
+			Assert.assertTrue("Missing warning (" + diagCode.diagCode
+					+ ") for item " + longName + " ("
+					+ current.getRoomModel().getName() + ")",
+					false);
+		}
 	}
 }

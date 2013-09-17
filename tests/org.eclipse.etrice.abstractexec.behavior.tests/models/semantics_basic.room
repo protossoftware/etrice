@@ -1,5 +1,6 @@
 RoomModel Semantics_basic {
 		
+/* re-consider these tests after change that fixed bug 417433 (b346dafb0f65e906d6c9865ac00d5c7406054d36)
 	ActorClass GroupTransition_ac  {
 		Structure {
 			Port p0 : Sem_Protocol2
@@ -264,6 +265,7 @@ RoomModel Semantics_basic {
 			}
 		}
 	}
+*/
 
 	ProtocolClass Sem_Protocol2 {
 		incoming {
