@@ -1,0 +1,31 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/LogSys1/subSysRef1 (!) /LogSys1/subSysRef1/actorRef1 
+	/LogSys1/subSysRef1/actorRef1 (!) /LogSys1/subSysRef1/actorRef1/container 
+	/LogSys1/subSysRef1 (!) /LogSys1/subSysRef1/timingService 
+# done sub system initialization
+	/LogSys1/subSysRef1/actorRef1/container note: dynamically creating actor class PingPong
+	/LogSys1/subSysRef1/actorRef1/container (!) /LogSys1/subSysRef1/actorRef1/container/pp 
+	/LogSys1/subSysRef1/actorRef1/container/pp (!) /LogSys1/subSysRef1/actorRef1/container/pp/receiver 
+	/LogSys1/subSysRef1/actorRef1/container/pp (!) /LogSys1/subSysRef1/actorRef1/container/pp/sender 
+	/LogSys1/subSysRef1/actorRef1/container >>> Running
+	/LogSys1/subSysRef1/timingService >>> Operational
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver >>> WaitingForPing
+	/LogSys1/subSysRef1/actorRef1/container/pp/sender >-- /LogSys1/subSysRef1/actorRef1/container/pp/receiver ping
+	/LogSys1/subSysRef1/actorRef1/container/pp/sender >>> SendingPing
+	/LogSys1/subSysRef1/actorRef1/container/pp/sender --> /LogSys1/subSysRef1/actorRef1/container/pp/receiver ping
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver >>> WaitingForAWhile
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver --> /LogSys1/subSysRef1/timingService internalStartTimeout
+	/LogSys1/subSysRef1/timingService >>> Operational
+	/LogSys1/subSysRef1/timingService >-- /LogSys1/subSysRef1/actorRef1/container/pp/receiver internalTimeout
+	/LogSys1/subSysRef1/timingService --> /LogSys1/subSysRef1/actorRef1/container/pp/receiver internalTimeout
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver >-- /LogSys1/subSysRef1/actorRef1/container/pp/sender pong
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver >>> SentPong
+	/LogSys1/subSysRef1/actorRef1/container/pp/receiver --> /LogSys1/subSysRef1/actorRef1/container/pp/sender pong
+	/LogSys1/subSysRef1/actorRef1/container/pp/sender >>> ReceivedPong
+# begin sub system destruction
+	/LogSys1/subSysRef1 (X) /LogSys1/subSysRef1/actorRef1 
+	/LogSys1/subSysRef1/actorRef1 (X) /LogSys1/subSysRef1/actorRef1/container 
+	/LogSys1/subSysRef1/actorRef1/container/pp (X) /LogSys1/subSysRef1/actorRef1/container/pp/receiver 
+	/LogSys1/subSysRef1/actorRef1/container/pp (X) /LogSys1/subSysRef1/actorRef1/container/pp/sender 
+	/LogSys1/subSysRef1 (X) /LogSys1/subSysRef1/timingService 

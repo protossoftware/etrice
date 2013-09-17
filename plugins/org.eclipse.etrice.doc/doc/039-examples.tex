@@ -317,3 +317,28 @@ instances created in the beginning into the \texttt{optarr} reference.
 \begin{itemize}
 \item the generated MSC \texttt{main\_Async.seq} is a good illustration of the dynamic changes in the system structure
 \end{itemize}
+
+\section{Dynamic Actors 9}
+
+This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors9}.
+
+\subsection{Purpose}
+
+The example demonstrates the use of SAPs in dynamic actors.
+
+\subsection{Details}
+
+This simple example re-uses the PingPong tutorial. The static part of the system introduces a \texttt{TimingService} as SPP
+and the \texttt{Receiver} embedded in the optional part uses a SAP of this protocol.
+
+The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
+services.
+
+On the other hand the factory for the optional actor maps SAPs to those broker ports.
+
+\subsection{Noteworthy}
+
+\begin{itemize}
+\item \emph{Caution:} currently the generator informs about unsatisfied services in dynamic actors. But it is still possible to create such an
+instance. The consequence is an unbound SAP
+\end{itemize}

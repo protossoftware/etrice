@@ -1,0 +1,9 @@
+MappingModel org.eclipse.etrice.examples.dynamicactors9 {
+	import org.eclipse.etrice.examples.dynamicactors9.* from "DynAct9.room"
+	import org.eclipse.etrice.examples.dynamicactors9.* from "DynAct9.etphys"
+	Mapping LogSys1 -> PhysSys1 {
+		SubSystemMapping subSysRef1 -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

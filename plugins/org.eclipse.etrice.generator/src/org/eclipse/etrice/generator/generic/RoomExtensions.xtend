@@ -169,7 +169,7 @@ class RoomExtensions {
 
 
 	//-------------------------------------------------------
-	// packages and pathes
+	// packages and paths
 	
 	/**
 	 * @param rc a {@link RoomClass}

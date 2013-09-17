@@ -113,6 +113,7 @@ class NodeGen {
 		import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
 		
 		«FOR model : models»
 			import «model.name».*;
@@ -155,7 +156,7 @@ class NodeGen {
 				
 				// thread mappings
 				«FOR ai : comp.allContainedInstances»
-						addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
+					addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
 				«ENDFOR»
 				
 				// port to peer port mappings
@@ -166,6 +167,12 @@ class NodeGen {
 							addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
 						«ENDIF»
 					«ENDFOR»
+					«val services = if (ai instanceof ActorInterfaceInstance) (ai as ActorInterfaceInstance).providedServices else null»
+					«IF services!=null»
+						«FOR svc: services»
+							addPathToPeers("«ai.path»/«svc.protocol.fullyQualifiedName»", "«svc.path»");
+						«ENDFOR»
+					«ENDIF»
 				«ENDFOR»
 		
 				// sub actors
@@ -183,6 +190,16 @@ class NodeGen {
 						«ENDIF»
 						new «sub.type.name»(this, "«sub.name»"); 
 					«ENDIF»
+				«ENDFOR»
+				
+				// wire optional actor interfaces with services
+				«FOR aii: comp.allSubInstances.filter(inst|inst instanceof ActorInterfaceInstance).map(inst|inst as ActorInterfaceInstance)»
+					{
+						OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("«aii.getPath()»");
+						«FOR svc: aii.providedServices»
+							new InterfaceItemBroker(oai, "«svc.protocol.fullyQualifiedName»", 0);
+						«ENDFOR»
+					}
 				«ENDFOR»
 				
 				// apply instance attribute configurations

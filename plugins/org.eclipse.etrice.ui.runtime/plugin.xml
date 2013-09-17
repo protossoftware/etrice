@@ -180,7 +180,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_DynamicActors1" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors1" contentURI="contents/org.eclipse.etrice.examples.dynamicactors1.zip" description="Exmaple Dynamic Actors 1"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors1" contentURI="contents/org.eclipse.etrice.examples.dynamicactors1.zip" description="Dynamic Actors Example 1"/>
 	  </example>
 	</extension>   
 
@@ -197,7 +197,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors2" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors2" contentURI="contents/org.eclipse.etrice.examples.dynamicactors2.zip" description="Exmaple Dynamic Actors 2"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors2" contentURI="contents/org.eclipse.etrice.examples.dynamicactors2.zip" description="Dynamic Actors Example 2"/>
 	  </example>
 	</extension>   
 
@@ -214,7 +214,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors3" contentURI="contents/org.eclipse.etrice.examples.dynamicactors3.zip" description="Exmaple Dynamic Actors 3"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors3" contentURI="contents/org.eclipse.etrice.examples.dynamicactors3.zip" description="Dynamic Actors Example 3"/>
 	  </example>
 	</extension>   
 
@@ -231,7 +231,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors4" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors4" contentURI="contents/org.eclipse.etrice.examples.dynamicactors4.zip" description="Exmaple Dynamic Actors 4"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors4" contentURI="contents/org.eclipse.etrice.examples.dynamicactors4.zip" description="Dynamic Actors Example 4"/>
 	  </example>
 	</extension>   
 
@@ -248,7 +248,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors5" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors5" contentURI="contents/org.eclipse.etrice.examples.dynamicactors5.zip" description="Exmaple Dynamic Actors 5"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors5" contentURI="contents/org.eclipse.etrice.examples.dynamicactors5.zip" description="Dynamic Actors Example 5"/>
 	  </example>
 	</extension>   
 
@@ -265,7 +265,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors6" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors6" contentURI="contents/org.eclipse.etrice.examples.dynamicactors6.zip" description="Exmaple Dynamic Actors 6"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors6" contentURI="contents/org.eclipse.etrice.examples.dynamicactors6.zip" description="Dynamic Actors Example 6"/>
 	  </example>
 	</extension>   
 
@@ -282,7 +282,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors7" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors7" contentURI="contents/org.eclipse.etrice.examples.dynamicactors7.zip" description="Exmaple Dynamic Actors 7"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors7" contentURI="contents/org.eclipse.etrice.examples.dynamicactors7.zip" description="Dynamic Actors Example 7"/>
 	  </example>
 	</extension>   
 
@@ -299,7 +299,24 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors8" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors8" contentURI="contents/org.eclipse.etrice.examples.dynamicactors8.zip" description="Exmaple Dynamic Actors 8"/>
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors8" contentURI="contents/org.eclipse.etrice.examples.dynamicactors8.zip" description="Dynamic Actors Example 8"/>
+	  </example>
+	</extension>   
+
+	<!-- ========= org.eclipse.etrice.examples.dynamicactors9 ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors9" 
+			name="eTrice Dynamic Actors Example 9" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>dynamic actor using SAP</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors9" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors9" contentURI="contents/org.eclipse.etrice.examples.dynamicactors9.zip" description="Dynamic Actors Example 9"/>
 	  </example>
 	</extension>   
 

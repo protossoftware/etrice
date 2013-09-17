@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -235,6 +236,8 @@ public class NodeGen {
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;");
       _builder.newLine();
       _builder.newLine();
       {
@@ -447,6 +450,38 @@ public class NodeGen {
               }
             }
           }
+          _builder.append("\t\t");
+          EList<ServiceImplInstance> _xifexpression_1 = null;
+          if ((ai_1 instanceof ActorInterfaceInstance)) {
+            EList<ServiceImplInstance> _providedServices = ((ActorInterfaceInstance) ai_1).getProvidedServices();
+            _xifexpression_1 = _providedServices;
+          } else {
+            _xifexpression_1 = null;
+          }
+          final EList<ServiceImplInstance> services = _xifexpression_1;
+          _builder.newLineIfNotEmpty();
+          {
+            boolean _notEquals = (!Objects.equal(services, null));
+            if (_notEquals) {
+              {
+                for(final ServiceImplInstance svc : services) {
+                  _builder.append("\t\t");
+                  _builder.append("addPathToPeers(\"");
+                  String _path_3 = ai_1.getPath();
+                  _builder.append(_path_3, "		");
+                  _builder.append("/");
+                  ProtocolClass _protocol = svc.getProtocol();
+                  String _fullyQualifiedName = this._roomExtensions.getFullyQualifiedName(_protocol);
+                  _builder.append(_fullyQualifiedName, "		");
+                  _builder.append("\", \"");
+                  String _path_4 = svc.getPath();
+                  _builder.append(_path_4, "		");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
         }
       }
       _builder.newLine();
@@ -521,6 +556,54 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("// wire optional actor interfaces with services");
+      _builder.newLine();
+      {
+        BasicEList<AbstractInstance> _allSubInstances_1 = this._roomExtensions.getAllSubInstances(comp);
+        final Function1<AbstractInstance,Boolean> _function_1 = new Function1<AbstractInstance,Boolean>() {
+            public Boolean apply(final AbstractInstance inst) {
+              return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
+            }
+          };
+        Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances_1, _function_1);
+        final Function1<AbstractInstance,ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance,ActorInterfaceInstance>() {
+            public ActorInterfaceInstance apply(final AbstractInstance inst) {
+              return ((ActorInterfaceInstance) inst);
+            }
+          };
+        Iterable<ActorInterfaceInstance> _map = IterableExtensions.<AbstractInstance, ActorInterfaceInstance>map(_filter, _function_2);
+        for(final ActorInterfaceInstance aii : _map) {
+          _builder.append("\t\t");
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject(\"");
+          String _path_5 = aii.getPath();
+          _builder.append(_path_5, "			");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+          {
+            EList<ServiceImplInstance> _providedServices_1 = aii.getProvidedServices();
+            for(final ServiceImplInstance svc_1 : _providedServices_1) {
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("new InterfaceItemBroker(oai, \"");
+              ProtocolClass _protocol_1 = svc_1.getProtocol();
+              String _fullyQualifiedName_1 = this._roomExtensions.getFullyQualifiedName(_protocol_1);
+              _builder.append(_fullyQualifiedName_1, "			");
+              _builder.append("\", 0);");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("// apply instance attribute configurations");
       _builder.newLine();
       {
@@ -546,8 +629,8 @@ public class NodeGen {
               String _name_12 = _actorClass_1.getName();
               _builder.append(_name_12, "			");
               _builder.append(") getObject(\"");
-              String _path_3 = ai_2.getPath();
-              _builder.append(_path_3, "			");
+              String _path_6 = ai_2.getPath();
+              _builder.append(_path_6, "			");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -696,15 +779,15 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass,Boolean> _function_1 = new Function1<ActorClass,Boolean>() {
+            final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
                 public Boolean apply(final ActorClass s) {
                   boolean _isAbstract = s.isAbstract();
                   boolean _not = (!_isAbstract);
                   return Boolean.valueOf(_not);
                 }
               };
-            Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_union, _function_1);
-            for(final ActorClass subcls : _filter) {
+            Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
+            for(final ActorClass subcls : _filter_1) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append(else2, "			");

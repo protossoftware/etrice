@@ -351,12 +351,35 @@ public class GeneratorModelBuilder {
 		}
 		
 		for (OptionalActorInstance optAI : optionalActors.values()) {
-			createServiceMappings(optAI);
-			
-			bindSAPs(optAI, optAI.getRequiredServices());
+			connectServices(optAI);
 		}
 		
 		alreadyDone.add(WorkItem.CREATE_OPTIONAL_INSTANCES);
+	}
+
+	/**
+	 * @param optAI
+	 */
+	private void connectServices(OptionalActorInstance optAI) {
+		createServiceMappings(optAI);
+		
+		bindSAPs(optAI, optAI.getRequiredServices());
+		
+		HashMap<ProtocolClass, ServiceImplInstance> protocol2svc = new HashMap<ProtocolClass, ServiceImplInstance>();
+		for (SAPInstance sap : optAI.getRequiredServices()) {
+			ProtocolClass pc = sap.getProtocol();
+			ServiceImplInstance svc = protocol2svc.get(pc);
+			if (svc==null) {
+				svc = ETriceGenFactory.eINSTANCE.createServiceImplInstance();
+				RoomModel mdl = (RoomModel) pc.eContainer();
+				String fqn = mdl.getName()+"."+pc.getName();
+				svc.setName(fqn.replace('.', '_'));
+				protocol2svc.put(pc, svc);
+				optAI.getServices().add(svc);
+			}
+			sap.getPeers().add(svc);
+			svc.getPeers().add(sap);
+		}
 	}
 
 	/**
