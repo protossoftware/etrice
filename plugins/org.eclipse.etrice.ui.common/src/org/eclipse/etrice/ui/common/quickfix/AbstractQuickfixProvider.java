@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
-import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -40,14 +40,14 @@ public abstract class AbstractQuickfixProvider {
 				Fix annotation = input.getAnnotation(Fix.class);
 				boolean result = annotation != null && issueCode.equals(annotation.value())
 						&& input.getParameterTypes().length == 2 && Void.TYPE == input.getReturnType()
-						&& input.getParameterTypes()[0].isAssignableFrom(Issue.class)
+						&& input.getParameterTypes()[0].isAssignableFrom(FeatureBasedDiagnostic.class)
 						&& input.getParameterTypes()[1].isAssignableFrom(IssueResolutionAcceptor.class);
 				return result;
 			}
 		};
 	}
 
-	protected List<IssueResolution> getResolutions(Issue issue, List<Method> fixMethods) {
+	protected List<IssueResolution> getResolutions(FeatureBasedDiagnostic issue, List<Method> fixMethods) {
 		IssueResolutionAcceptor issueResolutionAcceptor = new IssueResolutionAcceptor();
 		for (Method fixMethod : fixMethods) {
 			try {
@@ -64,8 +64,8 @@ public abstract class AbstractQuickfixProvider {
 		return Iterables.filter(methods, getFixMethodPredicate(issueCode));
 	}
 
-	protected List<Method> getFixMethods(final Issue issue) {
-		return Lists.newArrayList(collectMethods(getClass(), issue.getCode()));
+	protected List<Method> getFixMethods(final FeatureBasedDiagnostic issue) {
+		return Lists.newArrayList(collectMethods(getClass(), issue.getIssueCode()));
 	}
 
 	public boolean hasResolutionFor(final String issueCode) {
@@ -75,7 +75,7 @@ public abstract class AbstractQuickfixProvider {
 		return methods.iterator().hasNext();
 	}
 
-	public List<IssueResolution> getResolutions(final Issue issue) {
+	public List<IssueResolution> getResolutions(final FeatureBasedDiagnostic issue) {
 		List<Method> fixMethods = getFixMethods(issue);
 		return getResolutions(issue, fixMethods);
 	}

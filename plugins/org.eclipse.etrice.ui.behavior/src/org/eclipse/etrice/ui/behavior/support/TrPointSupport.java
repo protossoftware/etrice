@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -30,9 +31,12 @@ import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.QuickFixDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.quickfix.BehaviorQuickfixProvider;
+import org.eclipse.etrice.ui.common.quickfix.IssueResolution;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -99,6 +103,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 public class TrPointSupport {
 	
@@ -711,6 +716,71 @@ public class TrPointSupport {
 			}
 		}
 		
+		private static class QuickFixFeature extends AbstractCustomFeature {
+
+			private boolean doneChanges = false;
+
+			public QuickFixFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Quick Fix";
+			}
+
+			@Override
+			public String getDescription() {
+				return "Apply Quick fixes";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				return true;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+
+				// Get the issue Resolutions Map
+				Object bo = getBusinessObjectForPictogramElement(context
+						.getPictogramElements()[0]);
+				ArrayList<Diagnostic> issues = ((BehaviorEditor) getDiagramBehavior()
+						.getDiagramContainer()).getDiagnosingModelObserver()
+						.getElementDiagonsticMap().get(bo);
+
+				HashMap<FeatureBasedDiagnostic, List<IssueResolution>> issueResolutionsMap = new HashMap<FeatureBasedDiagnostic, List<IssueResolution>>();
+				BehaviorQuickfixProvider behaviorQuickfixProvider = new BehaviorQuickfixProvider();
+				for (Diagnostic issue : issues) {
+					issueResolutionsMap
+							.put((FeatureBasedDiagnostic) issue,
+									behaviorQuickfixProvider
+											.getResolutions((FeatureBasedDiagnostic) issue));
+				}
+
+				// Create & Open the Quick Fix Dialog
+				Shell shell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				QuickFixDialog dlg = new QuickFixDialog(shell, issueResolutionsMap);
+
+				if (dlg.open() != Window.OK)
+					return;
+
+				Object[] result = dlg.getResult();
+				if (result == null)
+					return;
+				else{
+					((IssueResolution)result[0]).apply(getDiagram());
+					doneChanges = true;
+				}
+			}
+
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
+		}
+
 		protected IFeatureProvider fp;
 		
 		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -744,7 +814,24 @@ public class TrPointSupport {
 	
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
+			PictogramElement pe = context.getPictogramElements()[0];
+			Object bo = getBusinessObjectForPictogramElement(pe);
+			
+			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
+			
+			result.add(new PropertyFeature(fp));
+			
+			// Provide quick fix feature only for those edit parts which have
+			// errors, warnings or infos.
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			if (diagnostics != null)
+				result.add(new QuickFixFeature(fp));
+
+			ICustomFeature features[] = new ICustomFeature[result.size()];
+			return result.toArray(features);
 		}
 		
 		@Override
