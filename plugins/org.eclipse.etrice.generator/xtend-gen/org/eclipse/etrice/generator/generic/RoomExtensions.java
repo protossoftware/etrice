@@ -13,7 +13,6 @@ package org.eclipse.etrice.generator.generic;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +51,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -249,47 +249,12 @@ public class RoomExtensions {
    * @return the path of the Eclipse project containing the EObject's resource
    */
   public String getProjectPath(final EObject e) {
-    final Resource res = e.eResource();
+    final URI res = FileSystemHelpers.getProjectURI(e);
     boolean _equals = Objects.equal(res, null);
     if (_equals) {
       return "";
-    } else {
-      URI _uRI = res.getURI();
-      String _fileString = _uRI.toFileString();
-      File _file = new File(_fileString);
-      File tmpf = _file;
-      boolean _isFile = tmpf.isFile();
-      boolean _not = (!_isFile);
-      if (_not) {
-        return "";
-      }
-      boolean isProject = false;
-      boolean _dowhile = false;
-      do {
-        {
-          File _parentFile = tmpf.getParentFile();
-          tmpf = _parentFile;
-          String[] contents = tmpf.list();
-          for (final String f : contents) {
-            boolean _equals_1 = f.equals(".project");
-            if (_equals_1) {
-              isProject = true;
-            }
-          }
-        }
-        boolean _and = false;
-        boolean _not_1 = (!isProject);
-        if (!_not_1) {
-          _and = false;
-        } else {
-          File _parentFile = tmpf.getParentFile();
-          boolean _notEquals = (!Objects.equal(_parentFile, null));
-          _and = (_not_1 && _notEquals);
-        }
-        _dowhile = _and;
-      } while(_dowhile);
-      return tmpf.getAbsolutePath();
     }
+    return res.toFileString();
   }
   
   /**

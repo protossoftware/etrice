@@ -13,7 +13,6 @@
 package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Singleton
-import java.io.File
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
@@ -44,6 +43,7 @@ import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.emf.common.util.TreeIterator
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 /**
 	collection of convenience functions for code generation
@@ -210,27 +210,12 @@ class RoomExtensions {
 	 * @return the path of the Eclipse project containing the EObject's resource
 	 */
 	def String getProjectPath(EObject e) {
-		val res = e.eResource;
+		val res = FileSystemHelpers::getProjectURI(e)
 		if (res==null) {
 			return ""
 		}
-		else {
-			var tmpf = new File(res.URI.toFileString)
-			if (!tmpf.file)
-				return ""
-			var isProject = false;
-			do {
-				tmpf = tmpf.parentFile
-				var contents = tmpf.list
-				for (f : contents)
-					if (f.equals(".project")) {
-						isProject = true
-					}
-			}
-			while (!isProject && tmpf.parentFile!=null)
-			
-			return tmpf.absolutePath
-		}
+
+		return res.toFileString
 	}
 	
 	/**
