@@ -104,6 +104,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
+	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
+	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -583,8 +585,30 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (op.getReturnType()!=null)
 				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}
-		else if (op.isDestructor())
-			error("Destructor must have class name", RoomPackage.Literals.OPERATION__RETURN_TYPE);
+		else if (op.isDestructor()) {
+			RoomClass cls = (RoomClass) op.eContainer();
+			error("Destructor must have class name", RoomPackage.Literals.OPERATION__NAME, CHANGE_DESTRUCTOR_NAME, cls.getName());
+		}
+		else if (op.getArguments().isEmpty()) {
+			RoomClass cls = (RoomClass) op.eContainer();
+			
+			// check for method with same name with destructor flag set
+			EList<StandardOperation> ops = null;
+			if (cls instanceof ActorClass)
+				ops = ((ActorClass) cls).getOperations();
+			else if (cls instanceof DataClass)
+				ops = ((DataClass) cls).getOperations();
+			else {
+				assert(false): "unexpected parent class";
+			}
+			
+			for (StandardOperation o : ops) {
+				if (o.isDestructor() && o.getName().equals(op.getName())) {
+					warning("Constructor meant?", RoomPackage.Literals.OPERATION__NAME, CHANGE_CONSTRUCTOR_NAME, cls.getName());
+				}
+			}
+			
+		}
 	}
 	
 	@Check

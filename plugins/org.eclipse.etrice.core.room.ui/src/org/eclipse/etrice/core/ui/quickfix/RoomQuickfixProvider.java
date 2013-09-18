@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.ReferenceType;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -124,6 +125,28 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ActorRef ar = (ActorRef) element;
 				ar.setRefType(ReferenceType.OPTIONAL);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.CHANGE_DESTRUCTOR_NAME)
+	public void fixDestructor(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Change destructor name", "~"+issue.getData()[0]+"()", "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				StandardOperation op = (StandardOperation) element;
+				op.setName(issue.getData()[0]);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.CHANGE_CONSTRUCTOR_NAME)
+	public void fixConstructor(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Change constructor name", issue.getData()[0]+"()", "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				StandardOperation op = (StandardOperation) element;
+				op.setName(issue.getData()[0]);
 			}
 		});
 	}
