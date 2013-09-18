@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
+import org.eclipse.etrice.ui.common.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
@@ -68,7 +69,6 @@ import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
-import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -701,17 +701,6 @@ public class TransitionSupport {
 			
 		}
 		
-		protected static class RemoveFeature extends DefaultRemoveFeature {
-
-			public RemoveFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-
-			public boolean canRemove(IRemoveContext context) {
-				return false;
-			}
-		}
-		
 		protected static class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
@@ -767,7 +756,7 @@ public class TransitionSupport {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
-			return new RemoveFeature(fp);
+			return new CantRemoveFeature(fp);
 		}
 
 		@Override

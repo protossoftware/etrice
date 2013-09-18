@@ -31,6 +31,8 @@ import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
+import org.eclipse.etrice.ui.common.support.CantDeleteFeature;
+import org.eclipse.etrice.ui.common.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.support.RemoveBendpointsFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -292,6 +294,10 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
+			if (context.getPictogramElement() instanceof ConnectionDecorator) {
+				return new CantDeleteFeature(this);
+			}
+			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getDeleteFeature(context);
@@ -301,6 +307,10 @@ public class ProviderDispatcher {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
+			if (context.getPictogramElement() instanceof ConnectionDecorator) {
+				return new CantRemoveFeature(this);
+			}
+			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
 				return fp.getRemoveFeature(context);
