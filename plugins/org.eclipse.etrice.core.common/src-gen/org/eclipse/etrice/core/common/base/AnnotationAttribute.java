@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room;
+package org.eclipse.etrice.core.common.base;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -9,15 +9,20 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Annotation Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>Defines an attribute in an {@link AnnotationType}. This attribute 
+ * 			can then be declared in respective {@link Annotation} instances.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.AnnotationAttribute#isOptional <em>Optional</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.AnnotationAttribute#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotationAttribute()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationAttribute()
  * @model
  * @generated
  */
@@ -26,21 +31,23 @@ public interface AnnotationAttribute extends EObject
   /**
    * Returns the value of the '<em><b>Optional</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Optional</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>Specifies whether the attribute should be optional or not. If the 
+   * 			attribute is optional, it can be omitted by {@link Annotation}s of 
+   * 			the same {@link AnnotationType}.
+   * 
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Optional</em>' attribute.
    * @see #setOptional(boolean)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotationAttribute_Optional()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationAttribute_Optional()
    * @model
    * @generated
    */
   boolean isOptional();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.AnnotationAttribute#isOptional <em>Optional</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#isOptional <em>Optional</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Optional</em>' attribute.
@@ -52,21 +59,20 @@ public interface AnnotationAttribute extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>The name of the attribute
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotationAttribute_Name()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationAttribute_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.AnnotationAttribute#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.

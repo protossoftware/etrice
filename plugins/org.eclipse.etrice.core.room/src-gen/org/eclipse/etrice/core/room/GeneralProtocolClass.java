@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.etrice.core.common.base.Annotation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>General Protocol Class</b></em>'.
@@ -33,7 +35,7 @@ public interface GeneralProtocolClass extends RoomClass
 {
   /**
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->

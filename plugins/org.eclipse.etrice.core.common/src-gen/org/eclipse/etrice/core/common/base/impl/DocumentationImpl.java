@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import java.util.Collection;
 
@@ -8,42 +8,44 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
-import org.eclipse.etrice.core.room.EnumAnnotationAttribute;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enum Annotation Attribute</b></em>'.
+ * An implementation of the model object '<em><b>Documentation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.EnumAnnotationAttributeImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.DocumentationImpl#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl implements EnumAnnotationAttribute
+public class DocumentationImpl extends MinimalEObjectImpl.Container implements Documentation
 {
   /**
-   * The cached value of the '{@link #getValues() <em>Values</em>}' attribute list.
+   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValues()
+   * @see #getLines()
    * @generated
    * @ordered
    */
-  protected EList<String> values;
+  protected EList<String> lines;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnumAnnotationAttributeImpl()
+  protected DocumentationImpl()
   {
     super();
   }
@@ -56,7 +58,7 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.ENUM_ANNOTATION_ATTRIBUTE;
+    return BasePackage.Literals.DOCUMENTATION;
   }
 
   /**
@@ -64,13 +66,13 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getValues()
+  public EList<String> getLines()
   {
-    if (values == null)
+    if (lines == null)
     {
-      values = new EDataTypeEList<String>(String.class, this, RoomPackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES);
+      lines = new EDataTypeEList<String>(String.class, this, BasePackage.DOCUMENTATION__LINES);
     }
-    return values;
+    return lines;
   }
 
   /**
@@ -83,8 +85,8 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
   {
     switch (featureID)
     {
-      case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
-        return getValues();
+      case BasePackage.DOCUMENTATION__LINES:
+        return getLines();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -100,9 +102,9 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
   {
     switch (featureID)
     {
-      case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
-        getValues().clear();
-        getValues().addAll((Collection<? extends String>)newValue);
+      case BasePackage.DOCUMENTATION__LINES:
+        getLines().clear();
+        getLines().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -118,8 +120,8 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
   {
     switch (featureID)
     {
-      case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
-        getValues().clear();
+      case BasePackage.DOCUMENTATION__LINES:
+        getLines().clear();
         return;
     }
     super.eUnset(featureID);
@@ -135,8 +137,8 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
   {
     switch (featureID)
     {
-      case RoomPackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
-        return values != null && !values.isEmpty();
+      case BasePackage.DOCUMENTATION__LINES:
+        return lines != null && !lines.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -152,10 +154,10 @@ public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl impleme
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (values: ");
-    result.append(values);
+    result.append(" (lines: ");
+    result.append(lines);
     result.append(')');
     return result.toString();
   }
 
-} //EnumAnnotationAttributeImpl
+} //DocumentationImpl

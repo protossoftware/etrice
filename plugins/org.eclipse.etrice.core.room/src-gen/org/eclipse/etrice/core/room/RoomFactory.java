@@ -734,69 +734,6 @@ public interface RoomFactory extends EFactory
   Guard createGuard();
 
   /**
-   * Returns a new object of class '<em>Documentation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Documentation</em>'.
-   * @generated
-   */
-  Documentation createDocumentation();
-
-  /**
-   * Returns a new object of class '<em>Annotation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Annotation</em>'.
-   * @generated
-   */
-  Annotation createAnnotation();
-
-  /**
-   * Returns a new object of class '<em>Key Value</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Key Value</em>'.
-   * @generated
-   */
-  KeyValue createKeyValue();
-
-  /**
-   * Returns a new object of class '<em>Annotation Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Annotation Type</em>'.
-   * @generated
-   */
-  AnnotationType createAnnotationType();
-
-  /**
-   * Returns a new object of class '<em>Annotation Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Annotation Attribute</em>'.
-   * @generated
-   */
-  AnnotationAttribute createAnnotationAttribute();
-
-  /**
-   * Returns a new object of class '<em>Simple Annotation Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Simple Annotation Attribute</em>'.
-   * @generated
-   */
-  SimpleAnnotationAttribute createSimpleAnnotationAttribute();
-
-  /**
-   * Returns a new object of class '<em>Enum Annotation Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enum Annotation Attribute</em>'.
-   * @generated
-   */
-  EnumAnnotationAttribute createEnumAnnotationAttribute();
-
-  /**
    * Returns a new object of class '<em>Import</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

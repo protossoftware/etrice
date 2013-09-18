@@ -11,8 +11,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.etrice.core.common.base.Documentation;
+
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomPackage;
 

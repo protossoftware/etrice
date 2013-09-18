@@ -4124,292 +4124,6 @@ public interface RoomPackage extends EPackage
   int GUARD_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.DocumentationImpl <em>Documentation</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.DocumentationImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDocumentation()
-   * @generated
-   */
-  int DOCUMENTATION = 79;
-
-  /**
-   * The feature id for the '<em><b>Lines</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOCUMENTATION__LINES = 0;
-
-  /**
-   * The number of structural features of the '<em>Documentation</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOCUMENTATION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AnnotationImpl <em>Annotation</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.AnnotationImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
-   * @generated
-   */
-  int ANNOTATION = 80;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION__ATTRIBUTES = 1;
-
-  /**
-   * The number of structural features of the '<em>Annotation</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.KeyValueImpl <em>Key Value</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.KeyValueImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
-   * @generated
-   */
-  int KEY_VALUE = 81;
-
-  /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEY_VALUE__KEY = 0;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEY_VALUE__VALUE = 1;
-
-  /**
-   * The number of structural features of the '<em>Key Value</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEY_VALUE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.AnnotationTypeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationType()
-   * @generated
-   */
-  int ANNOTATION_TYPE = 82;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_TYPE__NAME = ROOM_CLASS__NAME;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_TYPE__DOCU = ROOM_CLASS__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Targets</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_TYPE__TARGETS = ROOM_CLASS_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_TYPE__ATTRIBUTES = ROOM_CLASS_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Annotation Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_TYPE_FEATURE_COUNT = ROOM_CLASS_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl <em>Annotation Attribute</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationAttribute()
-   * @generated
-   */
-  int ANNOTATION_ATTRIBUTE = 83;
-
-  /**
-   * The feature id for the '<em><b>Optional</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_ATTRIBUTE__OPTIONAL = 0;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_ATTRIBUTE__NAME = 1;
-
-  /**
-   * The number of structural features of the '<em>Annotation Attribute</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ANNOTATION_ATTRIBUTE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SimpleAnnotationAttributeImpl <em>Simple Annotation Attribute</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.SimpleAnnotationAttributeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleAnnotationAttribute()
-   * @generated
-   */
-  int SIMPLE_ANNOTATION_ATTRIBUTE = 84;
-
-  /**
-   * The feature id for the '<em><b>Optional</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_ANNOTATION_ATTRIBUTE__OPTIONAL = ANNOTATION_ATTRIBUTE__OPTIONAL;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_ANNOTATION_ATTRIBUTE__NAME = ANNOTATION_ATTRIBUTE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_ANNOTATION_ATTRIBUTE__TYPE = ANNOTATION_ATTRIBUTE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Simple Annotation Attribute</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_ANNOTATION_ATTRIBUTE_FEATURE_COUNT = ANNOTATION_ATTRIBUTE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.EnumAnnotationAttributeImpl <em>Enum Annotation Attribute</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.EnumAnnotationAttributeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getEnumAnnotationAttribute()
-   * @generated
-   */
-  int ENUM_ANNOTATION_ATTRIBUTE = 85;
-
-  /**
-   * The feature id for the '<em><b>Optional</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUM_ANNOTATION_ATTRIBUTE__OPTIONAL = ANNOTATION_ATTRIBUTE__OPTIONAL;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUM_ANNOTATION_ATTRIBUTE__NAME = ANNOTATION_ATTRIBUTE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Values</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUM_ANNOTATION_ATTRIBUTE__VALUES = ANNOTATION_ATTRIBUTE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Enum Annotation Attribute</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUM_ANNOTATION_ATTRIBUTE_FEATURE_COUNT = ANNOTATION_ATTRIBUTE_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4417,7 +4131,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 86;
+  int IMPORT = 79;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -4447,16 +4161,6 @@ public interface RoomPackage extends EPackage
   int IMPORT_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.LiteralType
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
-   * @generated
-   */
-  int LITERAL_TYPE = 87;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4464,7 +4168,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 88;
+  int COMMUNICATION_TYPE = 80;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
@@ -4474,7 +4178,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
    * @generated
    */
-  int ACTOR_COMMUNICATION_TYPE = 89;
+  int ACTOR_COMMUNICATION_TYPE = 81;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.
@@ -4484,17 +4188,17 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getReferenceType()
    * @generated
    */
-  int REFERENCE_TYPE = 90;
+  int REFERENCE_TYPE = 82;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.AnnotationTargetType <em>Annotation Target Type</em>}' enum.
+   * The meta object id for the '{@link org.eclipse.etrice.core.room.RoomAnnotationTargetEnum <em>Annotation Target Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.AnnotationTargetType
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationTargetType()
+   * @see org.eclipse.etrice.core.room.RoomAnnotationTargetEnum
+   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRoomAnnotationTargetEnum()
    * @generated
    */
-  int ANNOTATION_TARGET_TYPE = 91;
+  int ROOM_ANNOTATION_TARGET_ENUM = 83;
 
 
   /**
@@ -7092,197 +6796,6 @@ public interface RoomPackage extends EPackage
   EReference getGuard_Guard();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Documentation <em>Documentation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Documentation</em>'.
-   * @see org.eclipse.etrice.core.room.Documentation
-   * @generated
-   */
-  EClass getDocumentation();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.Documentation#getLines <em>Lines</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Lines</em>'.
-   * @see org.eclipse.etrice.core.room.Documentation#getLines()
-   * @see #getDocumentation()
-   * @generated
-   */
-  EAttribute getDocumentation_Lines();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Annotation <em>Annotation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Annotation</em>'.
-   * @see org.eclipse.etrice.core.room.Annotation
-   * @generated
-   */
-  EClass getAnnotation();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.Annotation#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
-   * @see org.eclipse.etrice.core.room.Annotation#getType()
-   * @see #getAnnotation()
-   * @generated
-   */
-  EReference getAnnotation_Type();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Annotation#getAttributes <em>Attributes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.eclipse.etrice.core.room.Annotation#getAttributes()
-   * @see #getAnnotation()
-   * @generated
-   */
-  EReference getAnnotation_Attributes();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.KeyValue <em>Key Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Key Value</em>'.
-   * @see org.eclipse.etrice.core.room.KeyValue
-   * @generated
-   */
-  EClass getKeyValue();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.KeyValue#getKey <em>Key</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Key</em>'.
-   * @see org.eclipse.etrice.core.room.KeyValue#getKey()
-   * @see #getKeyValue()
-   * @generated
-   */
-  EAttribute getKeyValue_Key();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see org.eclipse.etrice.core.room.KeyValue#getValue()
-   * @see #getKeyValue()
-   * @generated
-   */
-  EReference getKeyValue_Value();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.AnnotationType <em>Annotation Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Annotation Type</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationType
-   * @generated
-   */
-  EClass getAnnotationType();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.AnnotationType#getTargets <em>Targets</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Targets</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationType#getTargets()
-   * @see #getAnnotationType()
-   * @generated
-   */
-  EAttribute getAnnotationType_Targets();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.AnnotationType#getAttributes <em>Attributes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationType#getAttributes()
-   * @see #getAnnotationType()
-   * @generated
-   */
-  EReference getAnnotationType_Attributes();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.AnnotationAttribute <em>Annotation Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Annotation Attribute</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationAttribute
-   * @generated
-   */
-  EClass getAnnotationAttribute();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.AnnotationAttribute#isOptional <em>Optional</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Optional</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationAttribute#isOptional()
-   * @see #getAnnotationAttribute()
-   * @generated
-   */
-  EAttribute getAnnotationAttribute_Optional();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.AnnotationAttribute#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationAttribute#getName()
-   * @see #getAnnotationAttribute()
-   * @generated
-   */
-  EAttribute getAnnotationAttribute_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SimpleAnnotationAttribute <em>Simple Annotation Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Simple Annotation Attribute</em>'.
-   * @see org.eclipse.etrice.core.room.SimpleAnnotationAttribute
-   * @generated
-   */
-  EClass getSimpleAnnotationAttribute();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.SimpleAnnotationAttribute#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.eclipse.etrice.core.room.SimpleAnnotationAttribute#getType()
-   * @see #getSimpleAnnotationAttribute()
-   * @generated
-   */
-  EAttribute getSimpleAnnotationAttribute_Type();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.EnumAnnotationAttribute <em>Enum Annotation Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Enum Annotation Attribute</em>'.
-   * @see org.eclipse.etrice.core.room.EnumAnnotationAttribute
-   * @generated
-   */
-  EClass getEnumAnnotationAttribute();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.EnumAnnotationAttribute#getValues <em>Values</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Values</em>'.
-   * @see org.eclipse.etrice.core.room.EnumAnnotationAttribute#getValues()
-   * @see #getEnumAnnotationAttribute()
-   * @generated
-   */
-  EAttribute getEnumAnnotationAttribute_Values();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Import <em>Import</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7315,16 +6828,6 @@ public interface RoomPackage extends EPackage
   EAttribute getImport_ImportURI();
 
   /**
-   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Literal Type</em>'.
-   * @see org.eclipse.etrice.core.room.LiteralType
-   * @generated
-   */
-  EEnum getLiteralType();
-
-  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7355,14 +6858,14 @@ public interface RoomPackage extends EPackage
   EEnum getReferenceType();
 
   /**
-   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.AnnotationTargetType <em>Annotation Target Type</em>}'.
+   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.RoomAnnotationTargetEnum <em>Annotation Target Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Annotation Target Type</em>'.
-   * @see org.eclipse.etrice.core.room.AnnotationTargetType
+   * @return the meta object for enum '<em>Annotation Target Enum</em>'.
+   * @see org.eclipse.etrice.core.room.RoomAnnotationTargetEnum
    * @generated
    */
-  EEnum getAnnotationTargetType();
+  EEnum getRoomAnnotationTargetEnum();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -9490,164 +8993,6 @@ public interface RoomPackage extends EPackage
     EReference GUARD__GUARD = eINSTANCE.getGuard_Guard();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.DocumentationImpl <em>Documentation</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.DocumentationImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDocumentation()
-     * @generated
-     */
-    EClass DOCUMENTATION = eINSTANCE.getDocumentation();
-
-    /**
-     * The meta object literal for the '<em><b>Lines</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DOCUMENTATION__LINES = eINSTANCE.getDocumentation_Lines();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.AnnotationImpl <em>Annotation</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.AnnotationImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotation()
-     * @generated
-     */
-    EClass ANNOTATION = eINSTANCE.getAnnotation();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ANNOTATION__TYPE = eINSTANCE.getAnnotation_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ANNOTATION__ATTRIBUTES = eINSTANCE.getAnnotation_Attributes();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.KeyValueImpl <em>Key Value</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.KeyValueImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getKeyValue()
-     * @generated
-     */
-    EClass KEY_VALUE = eINSTANCE.getKeyValue();
-
-    /**
-     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute KEY_VALUE__KEY = eINSTANCE.getKeyValue_Key();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference KEY_VALUE__VALUE = eINSTANCE.getKeyValue_Value();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.AnnotationTypeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationType()
-     * @generated
-     */
-    EClass ANNOTATION_TYPE = eINSTANCE.getAnnotationType();
-
-    /**
-     * The meta object literal for the '<em><b>Targets</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ANNOTATION_TYPE__TARGETS = eINSTANCE.getAnnotationType_Targets();
-
-    /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ANNOTATION_TYPE__ATTRIBUTES = eINSTANCE.getAnnotationType_Attributes();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl <em>Annotation Attribute</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationAttribute()
-     * @generated
-     */
-    EClass ANNOTATION_ATTRIBUTE = eINSTANCE.getAnnotationAttribute();
-
-    /**
-     * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ANNOTATION_ATTRIBUTE__OPTIONAL = eINSTANCE.getAnnotationAttribute_Optional();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ANNOTATION_ATTRIBUTE__NAME = eINSTANCE.getAnnotationAttribute_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SimpleAnnotationAttributeImpl <em>Simple Annotation Attribute</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.SimpleAnnotationAttributeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleAnnotationAttribute()
-     * @generated
-     */
-    EClass SIMPLE_ANNOTATION_ATTRIBUTE = eINSTANCE.getSimpleAnnotationAttribute();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SIMPLE_ANNOTATION_ATTRIBUTE__TYPE = eINSTANCE.getSimpleAnnotationAttribute_Type();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.EnumAnnotationAttributeImpl <em>Enum Annotation Attribute</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.EnumAnnotationAttributeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getEnumAnnotationAttribute()
-     * @generated
-     */
-    EClass ENUM_ANNOTATION_ATTRIBUTE = eINSTANCE.getEnumAnnotationAttribute();
-
-    /**
-     * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ENUM_ANNOTATION_ATTRIBUTE__VALUES = eINSTANCE.getEnumAnnotationAttribute_Values();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ImportImpl <em>Import</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9672,16 +9017,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.LiteralType <em>Literal Type</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.LiteralType
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLiteralType()
-     * @generated
-     */
-    EEnum LITERAL_TYPE = eINSTANCE.getLiteralType();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
@@ -9714,14 +9049,14 @@ public interface RoomPackage extends EPackage
     EEnum REFERENCE_TYPE = eINSTANCE.getReferenceType();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.AnnotationTargetType <em>Annotation Target Type</em>}' enum.
+     * The meta object literal for the '{@link org.eclipse.etrice.core.room.RoomAnnotationTargetEnum <em>Annotation Target Enum</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.AnnotationTargetType
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getAnnotationTargetType()
+     * @see org.eclipse.etrice.core.room.RoomAnnotationTargetEnum
+     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRoomAnnotationTargetEnum()
      * @generated
      */
-    EEnum ANNOTATION_TARGET_TYPE = eINSTANCE.getAnnotationTargetType();
+    EEnum ROOM_ANNOTATION_TARGET_ENUM = eINSTANCE.getRoomAnnotationTargetEnum();
 
   }
 

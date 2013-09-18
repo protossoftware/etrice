@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room;
+package org.eclipse.etrice.core.common.base;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.Documentation#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.Documentation#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getDocumentation()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getDocumentation()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface Documentation extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Lines</em>' attribute list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getDocumentation_Lines()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getDocumentation_Lines()
    * @model unique="false"
    * @generated
    */

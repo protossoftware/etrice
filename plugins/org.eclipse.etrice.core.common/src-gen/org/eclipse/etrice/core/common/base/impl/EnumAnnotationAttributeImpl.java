@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import java.util.Collection;
 
@@ -8,44 +8,42 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
-import org.eclipse.etrice.core.room.Documentation;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Documentation</b></em>'.
+ * An implementation of the model object '<em><b>Enum Annotation Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DocumentationImpl#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.EnumAnnotationAttributeImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DocumentationImpl extends MinimalEObjectImpl.Container implements Documentation
+public class EnumAnnotationAttributeImpl extends AnnotationAttributeImpl implements EnumAnnotationAttribute
 {
   /**
-   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
+   * The cached value of the '{@link #getValues() <em>Values</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLines()
+   * @see #getValues()
    * @generated
    * @ordered
    */
-  protected EList<String> lines;
+  protected EList<String> values;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DocumentationImpl()
+  protected EnumAnnotationAttributeImpl()
   {
     super();
   }
@@ -58,7 +56,7 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.DOCUMENTATION;
+    return BasePackage.Literals.ENUM_ANNOTATION_ATTRIBUTE;
   }
 
   /**
@@ -66,13 +64,13 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getLines()
+  public EList<String> getValues()
   {
-    if (lines == null)
+    if (values == null)
     {
-      lines = new EDataTypeEList<String>(String.class, this, RoomPackage.DOCUMENTATION__LINES);
+      values = new EDataTypeEList<String>(String.class, this, BasePackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES);
     }
-    return lines;
+    return values;
   }
 
   /**
@@ -85,8 +83,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__LINES:
-        return getLines();
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
+        return getValues();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -102,9 +100,9 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__LINES:
-        getLines().clear();
-        getLines().addAll((Collection<? extends String>)newValue);
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
+        getValues().clear();
+        getValues().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -120,8 +118,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__LINES:
-        getLines().clear();
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
+        getValues().clear();
         return;
     }
     super.eUnset(featureID);
@@ -137,8 +135,8 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
   {
     switch (featureID)
     {
-      case RoomPackage.DOCUMENTATION__LINES:
-        return lines != null && !lines.isEmpty();
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE__VALUES:
+        return values != null && !values.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -154,10 +152,10 @@ public class DocumentationImpl extends MinimalEObjectImpl.Container implements D
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (lines: ");
-    result.append(lines);
+    result.append(" (values: ");
+    result.append(values);
     result.append(')');
     return result.toString();
   }
 
-} //DocumentationImpl
+} //EnumAnnotationAttributeImpl

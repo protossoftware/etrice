@@ -4,6 +4,9 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.Documentation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Actor Class</b></em>'.
@@ -305,7 +308,7 @@ public interface ActorClass extends ActorContainerClass
 
   /**
    * Returns the value of the '<em><b>Behavior Annotations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Annotation}.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->

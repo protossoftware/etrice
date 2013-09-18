@@ -15,6 +15,60 @@ grammar org.eclipse.etrice.core.common.Base with org.eclipse.xtext.common.Termin
 generate base "http://www.eclipse.org/etrice/core/common/Base"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
+// **************************************************************
+// AnnotationType and Annotation Rules
+
+Annotation: '@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+KeyValue: key=ID '=' value=Literal;
+
+AnnotationType:
+	'AnnotationType' name=ID (docu=Documentation)? '{'
+	'target' '=' (targets+=(AnnotationTargetType) | ( '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
+	attributes+=AnnotationAttribute*
+	'}'
+;
+
+//
+// Sub-grammars should use AnnotationTargetType to refer to 
+// specific sub-grammar targets. For example, valid values for 
+// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
+// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
+// implementing validation, quick-fixes, and code completion proposals via the 
+// usual Xtext mechanisms.
+//
+AnnotationTargetType:
+	ID
+;
+
+AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
+
+SimpleAnnotationAttribute:
+	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
+;
+
+EnumAnnotationAttribute:
+	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
+;
+
+// **************************************************************
+// Documentation Rule
+
+Documentation:
+	{Documentation}
+	'['
+		lines+=STRING*
+	']';
+
+// **************************************************************
+// Literal Rules
+
+enum LiteralType:
+	BOOL='ptBoolean' |
+	INT='ptInteger' |
+	REAL='ptReal' |
+	CHAR='ptCharacter' 
+;
+
 LiteralArray:
 	literals+=Literal (',' literals+=Literal)*;
 
@@ -68,3 +122,6 @@ terminal EXP:
 
 terminal HEX:
 	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+
+FQN:
+	ID ('.' ID)*;

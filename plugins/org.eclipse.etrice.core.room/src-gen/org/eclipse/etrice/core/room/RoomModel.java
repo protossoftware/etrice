@@ -6,6 +6,9 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.Documentation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Model</b></em>'.
@@ -226,7 +229,7 @@ public interface RoomModel extends EObject
 
   /**
    * Returns the value of the '<em><b>Annotation Types</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.AnnotationType}.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.AnnotationType}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Annotation Types</em>' containment reference list isn't clear,

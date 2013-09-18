@@ -75,6 +75,41 @@ public class BaseAdapterFactory extends AdapterFactoryImpl
     new BaseSwitch<Adapter>()
     {
       @Override
+      public Adapter caseAnnotation(Annotation object)
+      {
+        return createAnnotationAdapter();
+      }
+      @Override
+      public Adapter caseKeyValue(KeyValue object)
+      {
+        return createKeyValueAdapter();
+      }
+      @Override
+      public Adapter caseAnnotationType(AnnotationType object)
+      {
+        return createAnnotationTypeAdapter();
+      }
+      @Override
+      public Adapter caseAnnotationAttribute(AnnotationAttribute object)
+      {
+        return createAnnotationAttributeAdapter();
+      }
+      @Override
+      public Adapter caseSimpleAnnotationAttribute(SimpleAnnotationAttribute object)
+      {
+        return createSimpleAnnotationAttributeAdapter();
+      }
+      @Override
+      public Adapter caseEnumAnnotationAttribute(EnumAnnotationAttribute object)
+      {
+        return createEnumAnnotationAttributeAdapter();
+      }
+      @Override
+      public Adapter caseDocumentation(Documentation object)
+      {
+        return createDocumentationAdapter();
+      }
+      @Override
       public Adapter caseLiteralArray(LiteralArray object)
       {
         return createLiteralArrayAdapter();
@@ -130,6 +165,111 @@ public class BaseAdapterFactory extends AdapterFactoryImpl
     return modelSwitch.doSwitch((EObject)target);
   }
 
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.Annotation <em>Annotation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.Annotation
+   * @generated
+   */
+  public Adapter createAnnotationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.KeyValue <em>Key Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.KeyValue
+   * @generated
+   */
+  public Adapter createKeyValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.AnnotationType <em>Annotation Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.AnnotationType
+   * @generated
+   */
+  public Adapter createAnnotationTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.AnnotationAttribute <em>Annotation Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.AnnotationAttribute
+   * @generated
+   */
+  public Adapter createAnnotationAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute <em>Simple Annotation Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute
+   * @generated
+   */
+  public Adapter createSimpleAnnotationAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.EnumAnnotationAttribute <em>Enum Annotation Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.EnumAnnotationAttribute
+   * @generated
+   */
+  public Adapter createEnumAnnotationAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.Documentation <em>Documentation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.Documentation
+   * @generated
+   */
+  public Adapter createDocumentationAdapter()
+  {
+    return null;
+  }
 
   /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.LiteralArray <em>Literal Array</em>}'.

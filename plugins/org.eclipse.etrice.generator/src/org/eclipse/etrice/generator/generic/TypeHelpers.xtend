@@ -28,7 +28,7 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.ExternalType
-import org.eclipse.etrice.core.room.LiteralType
+import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.VarDecl

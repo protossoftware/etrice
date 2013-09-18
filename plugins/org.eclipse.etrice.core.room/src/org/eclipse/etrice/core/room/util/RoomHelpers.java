@@ -22,18 +22,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.common.base.BooleanLiteral;
-import org.eclipse.etrice.core.common.base.IntLiteral;
-import org.eclipse.etrice.core.common.base.Literal;
-import org.eclipse.etrice.core.common.base.RealLiteral;
-import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.Annotation;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -46,7 +41,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.KeyValue;
+import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
@@ -98,7 +93,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
  *
  * @see {@link org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model}
  */
-public class RoomHelpers {
+public class RoomHelpers extends BaseHelpers {
 	
 	/**
 	 * Compute a list of the class itself followed by its base classes in order
@@ -1635,22 +1630,6 @@ public class RoomHelpers {
 	}
 	
 	/**
-	 * <code>true</code> if the named annotation is present in a list of {@link Annotation}s.
-	 * 
-	 * @param annotations the {@link List List&lt;Annotation>}
-	 * @param name the name to be searched
-	 * 
-	 * @return <code>true</code> if the named annotation is present in a list of {@link Annotation}s
-	 */
-	public static boolean isAnnotationPresent(List<Annotation> annotations, String name) {
-		for (Annotation annotation : annotations) {
-			if (annotation.getType().getName().equals(name))
-				return true;
-		}
-		return false;
-	}
-	
-	/**
 	 * Returns a list of the {@link Annotation} attributes of the named annotation.
 	 * Returns an empty list if no such annotation is found.
 	 * 
@@ -1675,23 +1654,6 @@ public class RoomHelpers {
 	 */
 	public static List<KeyValue> getBehaviorAttributes(ActorClass ac, String name) {
 		return getAttributes(ac.getBehaviorAnnotations(), name);
-	}
-	
-	/**
-	 * Returns a list of the {@link Annotation} attributes of the named annotation of a list of annotations.
-	 * Returns an empty list if no such annotation is found.
-	 * 
-	 * @param annotations the {@link List List&lt;Annotation>}
-	 * @param name the name to be searched
-	 * 
-	 * @return a list of the {@link Annotation} attributes of the named annotation
-	 */
-	public static List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
-		for (Annotation annotation : annotations) {
-			if (annotation.getType().getName().equals(name))
-				return annotation.getAttributes();
-		}
-		return Collections.emptyList();
 	}
 	
 	/**
@@ -1725,24 +1687,6 @@ public class RoomHelpers {
 	}
 	
 	/**
-	 * Searches the annotation attributes of list of annotations for a given name.
-	 *  
-	 * @param annotations the annotation list
-	 * @param name the annotation name
-	 * @param key the attribute name
-	 * 
-	 * @return <code>true</code> if such an attribute is present
-	 */
-	public static boolean isAttributePresent(List<Annotation> annotations, String name, String key) {
-		List<KeyValue> attributes = getAttributes(annotations, name);
-		for (KeyValue attrib : attributes) {
-			if (attrib.getKey().equals(key))
-				return true;
-		}
-		return false;
-	}
-	
-	/**
 	 * Returns the value of an annotation attribute of an {@link ActorClass}
 	 * 
 	 * @param ac the actor class
@@ -1766,77 +1710,6 @@ public class RoomHelpers {
 	 */
 	public static String getBehaviorAttribute(ActorClass ac, String name, String key) {
 		return getAttribute(ac.getBehaviorAnnotations(), name, key);
-	}
-	
-	/**
-	 * Returns the value of an annotation attribute of a list of annotations
-	 * 
-	 * @param annotations the list of annotations
-	 * @param name the annotation name
-	 * @param key the attribute name
-	 * 
-	 * @return the string value of the attribute or an empty string if not found
-	 */
-	public static String getAttribute(List<Annotation> annotations, String name, String key) {
-		List<KeyValue> attributes = getAttributes(annotations, name);
-		for (KeyValue attrib : attributes) {
-			if (attrib.getKey().equals(key))
-				return literalToString(attrib.getValue());
-		}
-		return "";
-	}
-	
-	/**
-	 * @param l a {@link Literal}
-	 * @return a string representation of the literal
-	 */
-	public static String literalToString(Literal l) {
-		if (l instanceof BooleanLiteral) {
-			return ((BooleanLiteral) l).isIsTrue()? "true":"false";
-		}
-		if (l instanceof IntLiteral) {
-			return Long.toString(((IntLiteral) l).getValue());
-		}
-		if (l instanceof RealLiteral) {
-			return Double.toString(((RealLiteral)l).getValue());
-		}
-		if (l instanceof StringLiteral) {
-			return ((StringLiteral)l).getValue();
-		}
-		assert(false): "unexpected sub type";
-		return "";
-	}
-	
-	/**
-	 * Checks for an annotation whether a named attribute is present
-	 * 
-	 * @param annotation the annotation
-	 * @param key the attribute name
-	 * 
-	 * @return <code>true</code> if such an attribute is present
-	 */
-	public static boolean isAttributePresent(Annotation annotation, String key) {
-		for (KeyValue attrib : annotation.getAttributes()) {
-			if (attrib.getKey().equals(key))
-				return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Returns the string value of an annotation attribute
-	 * 
-	 * @param annotation the annotation
-	 * @param key the attribute name
-	 * 
-	 * @return the string value of the attribute or an empty string if not found
-	 */
-	public static String getAttribute(Annotation annotation, String key) {
-		for (KeyValue attrib : annotation.getAttributes()) {
-			if (attrib.getKey().equals(key))
-				return literalToString(attrib.getValue());
-		}
-		return "";
 	}
 	
 	/**

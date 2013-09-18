@@ -15,12 +15,15 @@ package org.eclipse.etrice.core.naming;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.ComposedSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.util.BaseSwitch;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
@@ -58,7 +61,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 
 public class RoomFragmentProvider implements IFragmentProvider {
 
-	private class PathProvider extends RoomSwitch<String> {
+	private class RoomPathProvider extends RoomSwitch<String> {
 
 		@Override
 		public String caseRoomClass(RoomClass rc) {
@@ -164,6 +167,23 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		public String caseStateGraph(StateGraph sg) {
 			// going up one step in the containment hierarchy either hits a state or a RoomClass
 			return doSwitch(sg.eContainer())+SEP+STATE_GRAPH;
+		}
+	}
+	
+	private class BasePathProvider extends BaseSwitch<String> {
+		/* (non-Javadoc)
+		 * @see org.eclipse.etrice.core.common.base.util.BaseSwitch#caseAnnotationType(org.eclipse.etrice.core.common.base.AnnotationType)
+		 */
+		@Override
+		public String caseAnnotationType(AnnotationType object) {
+			return object.getName();
+		}
+	}
+	
+	private class PathProvider extends ComposedSwitch<String> {
+		public PathProvider() {
+			this.addSwitch(new BasePathProvider());
+			this.addSwitch(new RoomPathProvider());
 		}
 	}
 	
@@ -325,6 +345,10 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			end = fragment.length();
 		String className = fragment.substring(begin, end);
 		
+		if(type.equals(BasePackage.eINSTANCE.getAnnotationType().getName())) {
+			return getAnnotationType(model, className);
+		}
+		
 		RoomClass rc = getRoomClass(model, className);
 		if (type.equals(RoomPackage.eINSTANCE.getDataClass().getName())) {
 			return rc;
@@ -348,9 +372,6 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			return rc;
 		}
 		else if (type.equals(RoomPackage.eINSTANCE.getLogicalSystem().getName())) {
-			return rc;
-		}
-		else if (type.equals(RoomPackage.eINSTANCE.getAnnotationType().getName())) {
 			return rc;
 		}
 		
@@ -810,6 +831,15 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		return null;
 	}
 	
+	protected AnnotationType getAnnotationType(RoomModel model, String name) {
+		for(AnnotationType at : model.getAnnotationTypes()) {
+			if(at.getName().equals(name)) {
+				return at;
+			}
+		}
+		return null;
+	}
+	
 	private RoomClass getRoomClass(RoomModel model, String className) {
 		for (DataClass dc : model.getDataClasses()) {
 			if (dc.getName() != null && dc.getName().equals(className))
@@ -838,10 +868,6 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		for (LogicalSystem ls : model.getSystems()) {
 			if (ls.getName() != null && ls.getName().equals(className))
 				return ls;
-		}
-		for (AnnotationType at : model.getAnnotationTypes()) {
-			if (at.getName() != null && at.getName().equals(className))
-				return at;
 		}
 		return null;
 	}

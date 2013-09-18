@@ -7,12 +7,6 @@
     editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//LiteralType">
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/BOOL"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/INT"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/REAL"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//LiteralType/CHAR"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/EVENT_DRIVEN"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//CommunicationType/DATA_DRIVEN"/>
@@ -28,14 +22,14 @@
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/FIXED"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//ReferenceType/OPTIONAL"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//AnnotationTargetType">
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/DATA_CLASS"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/ACTOR_CLASS"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/ACTOR_BEHAVIOR"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/PROTOCOL_CLASS"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/COMPOUND_PROTOCOL_CLASS"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/SUBSYSTEM_CLASS"/>
-      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//AnnotationTargetType/LOGICAL_SYSTEM_CLASS"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//RoomAnnotationTargetEnum">
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/DATA_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/ACTOR_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/ACTOR_BEHAVIOR"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/PROTOCOL_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/COMPOUND_PROTOCOL_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/SUBSYSTEM_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/LOGICAL_SYSTEM_CLASS"/>
     </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
@@ -351,31 +345,6 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Guard">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Guard/guard"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//Documentation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Documentation/lines"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//Annotation">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Annotation/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Annotation/attributes"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//KeyValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//KeyValue/key"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//KeyValue/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//AnnotationType">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationType/targets"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//AnnotationType/attributes"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//AnnotationAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationAttribute/optional"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//AnnotationAttribute/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SimpleAnnotationAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//SimpleAnnotationAttribute/type"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//EnumAnnotationAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//EnumAnnotationAttribute/values"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>

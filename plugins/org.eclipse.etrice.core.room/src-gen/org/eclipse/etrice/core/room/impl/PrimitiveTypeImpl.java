@@ -8,7 +8,8 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.LiteralType;
+import org.eclipse.etrice.core.common.base.LiteralType;
+
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RoomPackage;
 

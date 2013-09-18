@@ -3,11 +3,17 @@ package org.eclipse.etrice.core.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.Documentation;
+import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.LiteralArray;
 import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.common.serializer.BaseSemanticSequencer;
 import org.eclipse.etrice.core.config.ActorClassConfig;
@@ -42,10 +48,35 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BasePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case BasePackage.ANNOTATION:
+				if(context == grammarAccess.getAnnotationRule()) {
+					sequence_Annotation(context, (Annotation) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.ANNOTATION_TYPE:
+				if(context == grammarAccess.getAnnotationTypeRule()) {
+					sequence_AnnotationType(context, (AnnotationType) semanticObject); 
+					return; 
+				}
+				else break;
 			case BasePackage.BOOLEAN_LITERAL:
 				if(context == grammarAccess.getBooleanLiteralRule() ||
 				   context == grammarAccess.getLiteralRule()) {
 					sequence_BooleanLiteral(context, (BooleanLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.DOCUMENTATION:
+				if(context == grammarAccess.getDocumentationRule()) {
+					sequence_Documentation(context, (Documentation) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.ENUM_ANNOTATION_ATTRIBUTE:
+				if(context == grammarAccess.getAnnotationAttributeRule() ||
+				   context == grammarAccess.getEnumAnnotationAttributeRule()) {
+					sequence_EnumAnnotationAttribute(context, (EnumAnnotationAttribute) semanticObject); 
 					return; 
 				}
 				else break;
@@ -54,6 +85,12 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				   context == grammarAccess.getLiteralRule() ||
 				   context == grammarAccess.getNumberLiteralRule()) {
 					sequence_IntLiteral(context, (IntLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.KEY_VALUE:
+				if(context == grammarAccess.getKeyValueRule()) {
+					sequence_KeyValue(context, (KeyValue) semanticObject); 
 					return; 
 				}
 				else break;
@@ -68,6 +105,13 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				   context == grammarAccess.getNumberLiteralRule() ||
 				   context == grammarAccess.getRealLiteralRule()) {
 					sequence_RealLiteral(context, (RealLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE:
+				if(context == grammarAccess.getAnnotationAttributeRule() ||
+				   context == grammarAccess.getSimpleAnnotationAttributeRule()) {
+					sequence_SimpleAnnotationAttribute(context, (SimpleAnnotationAttribute) semanticObject); 
 					return; 
 				}
 				else break;

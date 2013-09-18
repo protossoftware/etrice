@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.room.Documentation
+import org.eclipse.etrice.core.common.base.Documentation
 import org.eclipse.etrice.core.room.LogicalSystem
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel

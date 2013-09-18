@@ -7,6 +7,39 @@
     editorPluginID="org.eclipse.etrice.core.common.editor" runtimeVersion="2.9">
   <genPackages prefix="Base" basePackage="org.eclipse.etrice.core.common" disposableProviderFactory="true"
       fileExtensions="etbase" ecorePackage="Base.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Base.ecore#//LiteralType">
+      <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/BOOL"/>
+      <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/INT"/>
+      <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/REAL"/>
+      <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/CHAR"/>
+    </genEnums>
+    <genClasses ecoreClass="Base.ecore#//Annotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Base.ecore#//Annotation/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//Annotation/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//KeyValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//KeyValue/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//KeyValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//AnnotationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//AnnotationType/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//AnnotationType/docu"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//AnnotationType/targets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//AnnotationType/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//AnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//AnnotationAttribute/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//AnnotationAttribute/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//SimpleAnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//SimpleAnnotationAttribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//EnumAnnotationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//EnumAnnotationAttribute/values"/>
+    </genClasses>
+    <genClasses ecoreClass="Base.ecore#//Documentation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//Documentation/lines"/>
+    </genClasses>
     <genClasses ecoreClass="Base.ecore#//LiteralArray">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Base.ecore#//LiteralArray/literals"/>
     </genClasses>

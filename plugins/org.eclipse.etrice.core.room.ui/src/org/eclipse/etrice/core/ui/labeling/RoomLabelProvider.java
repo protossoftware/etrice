@@ -13,12 +13,12 @@
 package org.eclipse.etrice.core.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.etrice.core.common.base.AnnotationAttribute;
+import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.AnnotationAttribute;
-import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
@@ -39,8 +39,8 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;

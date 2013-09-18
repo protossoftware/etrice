@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room;
+package org.eclipse.etrice.core.common.base;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -9,14 +9,19 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Enum Annotation Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>An {@link AnnotationAttribute} whose possible values are defined 
+ * 			by a list of String values.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.EnumAnnotationAttribute#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.EnumAnnotationAttribute#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getEnumAnnotationAttribute()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getEnumAnnotationAttribute()
  * @model
  * @generated
  */
@@ -26,13 +31,12 @@ public interface EnumAnnotationAttribute extends AnnotationAttribute
    * Returns the value of the '<em><b>Values</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>A list of values that define the enumeration
+   * <!-- end-model-doc -->
    * @return the value of the '<em>Values</em>' attribute list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getEnumAnnotationAttribute_Values()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getEnumAnnotationAttribute_Values()
    * @model unique="false"
    * @generated
    */

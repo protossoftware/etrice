@@ -1685,52 +1685,7 @@ class DocuPostprocessor {
 				This is a guard condition specified in the code generator's target language.
 				It has to evaluate to a boolean value.
 			''')
-
-		//------------------------------------------------------------------
-		cls = pckg.getClass("Documentation")
-		cls.setDocumentation('''
-			A piece of documentation that can be optionally attached at
-			certain places in the model.
-		''')
-		
-		cls.getAttribute("lines").setDocumentation(
-			'''
-				This is the documentation's contents.
-			''')
-
-		//------------------------------------------------------------------
-		cls = pckg.getClass("Annotation")
-		cls.setDocumentation('''
-			An annotation similar to Java annotations that can be used
-			to add {@link KeyValue} pairs to certain model items.
-		''')
-		
-		cls.getReference("type").setDocumentation(
-			'''
-				This is the type of the annotation.
-			''')
-		
-		cls.getReference("attributes").setDocumentation(
-			'''
-				This is a list of key/value pairs.
-			''')
-
-		//------------------------------------------------------------------
-		cls = pckg.getClass("KeyValue")
-		cls.setDocumentation('''
-			A key/value pair.
-		''')
-		
-		cls.getAttribute("key").setDocumentation(
-			'''
-				This is the key of the pair.
-			''')
-		
-		cls.getReference("value").setDocumentation(
-			'''
-				This is the value of the pair.
-			''')
-
+			
 		//------------------------------------------------------------------
 		cls = pckg.getClass("Import")
 		cls.setDocumentation('''

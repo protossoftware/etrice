@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room;
+package org.eclipse.etrice.core.common.base;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Literal Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.etrice.core.room.RoomPackage#getLiteralType()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getLiteralType()
  * @model
  * @generated
  */

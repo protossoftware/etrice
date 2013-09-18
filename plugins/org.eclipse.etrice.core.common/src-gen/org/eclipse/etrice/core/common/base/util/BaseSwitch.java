@@ -72,6 +72,57 @@ public class BaseSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
+      case BasePackage.ANNOTATION:
+      {
+        Annotation annotation = (Annotation)theEObject;
+        T result = caseAnnotation(annotation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.KEY_VALUE:
+      {
+        KeyValue keyValue = (KeyValue)theEObject;
+        T result = caseKeyValue(keyValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.ANNOTATION_TYPE:
+      {
+        AnnotationType annotationType = (AnnotationType)theEObject;
+        T result = caseAnnotationType(annotationType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.ANNOTATION_ATTRIBUTE:
+      {
+        AnnotationAttribute annotationAttribute = (AnnotationAttribute)theEObject;
+        T result = caseAnnotationAttribute(annotationAttribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE:
+      {
+        SimpleAnnotationAttribute simpleAnnotationAttribute = (SimpleAnnotationAttribute)theEObject;
+        T result = caseSimpleAnnotationAttribute(simpleAnnotationAttribute);
+        if (result == null) result = caseAnnotationAttribute(simpleAnnotationAttribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE:
+      {
+        EnumAnnotationAttribute enumAnnotationAttribute = (EnumAnnotationAttribute)theEObject;
+        T result = caseEnumAnnotationAttribute(enumAnnotationAttribute);
+        if (result == null) result = caseAnnotationAttribute(enumAnnotationAttribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BasePackage.DOCUMENTATION:
+      {
+        Documentation documentation = (Documentation)theEObject;
+        T result = caseDocumentation(documentation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BasePackage.LITERAL_ARRAY:
       {
         LiteralArray literalArray = (LiteralArray)theEObject;
@@ -130,6 +181,118 @@ public class BaseSwitch<T> extends Switch<T>
       }
       default: return defaultCase(theEObject);
     }
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Annotation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Annotation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnnotation(Annotation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Key Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Key Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyValue(KeyValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnnotationType(AnnotationType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Annotation Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Annotation Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnnotationAttribute(AnnotationAttribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Simple Annotation Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simple Annotation Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimpleAnnotationAttribute(SimpleAnnotationAttribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Annotation Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Annotation Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumAnnotationAttribute(EnumAnnotationAttribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Documentation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Documentation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDocumentation(Documentation object)
+  {
+    return null;
   }
 
   /**

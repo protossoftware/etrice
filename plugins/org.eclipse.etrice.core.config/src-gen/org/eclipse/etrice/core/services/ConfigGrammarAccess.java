@@ -1292,6 +1292,135 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getFQNAccess().getRule();
 	}
 
+	//// **************************************************************
+	//
+	//// AnnotationType and Annotation Rules
+	//
+	//Annotation:
+	//
+	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
+		return gaBase.getAnnotationAccess();
+	}
+	
+	public ParserRule getAnnotationRule() {
+		return getAnnotationAccess().getRule();
+	}
+
+	//KeyValue:
+	//
+	//	key=ID "=" value=Literal;
+	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
+		return gaBase.getKeyValueAccess();
+	}
+	
+	public ParserRule getKeyValueRule() {
+		return getKeyValueAccess().getRule();
+	}
+
+	//AnnotationType:
+	//
+	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (=> targets+=AnnotationTargetType | "{"
+	//
+	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
+	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
+		return gaBase.getAnnotationTypeAccess();
+	}
+	
+	public ParserRule getAnnotationTypeRule() {
+		return getAnnotationTypeAccess().getRule();
+	}
+
+	////
+	//
+	//// Sub-grammars should use AnnotationTargetType to refer to 
+	//
+	//// specific sub-grammar targets. For example, valid values for 
+	//
+	//// AnnotationTargetType in the Room sub-grammar include "ActorClass", 
+	//
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
+	//
+	//// implementing validation and code completion proposals via the usual Xtext 
+	//
+	//// mechanisms.
+	//
+	////
+	//
+	//AnnotationTargetType:
+	//
+	//	ID;
+	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
+		return gaBase.getAnnotationTargetTypeAccess();
+	}
+	
+	public ParserRule getAnnotationTargetTypeRule() {
+		return getAnnotationTargetTypeAccess().getRule();
+	}
+
+	//AnnotationAttribute:
+	//
+	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
+		return gaBase.getAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getAnnotationAttributeRule() {
+		return getAnnotationAttributeAccess().getRule();
+	}
+
+	//SimpleAnnotationAttribute:
+	//
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
+	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
+		return gaBase.getSimpleAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getSimpleAnnotationAttributeRule() {
+		return getSimpleAnnotationAttributeAccess().getRule();
+	}
+
+	//EnumAnnotationAttribute:
+	//
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
+	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
+		return gaBase.getEnumAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getEnumAnnotationAttributeRule() {
+		return getEnumAnnotationAttributeAccess().getRule();
+	}
+
+	//// **************************************************************
+	//
+	//// Documentation Rule
+	//
+	//Documentation:
+	//
+	//	{Documentation} "[" lines+=STRING* "]";
+	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
+		return gaBase.getDocumentationAccess();
+	}
+	
+	public ParserRule getDocumentationRule() {
+		return getDocumentationAccess().getRule();
+	}
+
+	//// **************************************************************
+	//
+	//// Literal Rules
+	//
+	//enum LiteralType:
+	//
+	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
+		return gaBase.getLiteralTypeAccess();
+	}
+	
+	public EnumRule getLiteralTypeRule() {
+		return getLiteralTypeAccess().getRule();
+	}
+
 	//LiteralArray:
 	//
 	//	literals+=Literal ("," literals+=Literal)*;

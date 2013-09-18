@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.room.LiteralType;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SimpleAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.room.SimpleAnnotationAttribute;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.SimpleAnnotationAttributeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.SimpleAnnotationAttributeImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,7 +65,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.SIMPLE_ANNOTATION_ATTRIBUTE;
+    return BasePackage.Literals.SIMPLE_ANNOTATION_ATTRIBUTE;
   }
 
   /**
@@ -88,7 +88,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
     LiteralType oldType = type;
     type = newType == null ? TYPE_EDEFAULT : newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE, oldType, type));
   }
 
   /**
@@ -101,7 +101,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   {
     switch (featureID)
     {
-      case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
         return getType();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   {
     switch (featureID)
     {
-      case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
         setType((LiteralType)newValue);
         return;
     }
@@ -134,7 +134,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   {
     switch (featureID)
     {
-      case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
         setType(TYPE_EDEFAULT);
         return;
     }
@@ -151,7 +151,7 @@ public class SimpleAnnotationAttributeImpl extends AnnotationAttributeImpl imple
   {
     switch (featureID)
     {
-      case RoomPackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE__TYPE:
         return type != TYPE_EDEFAULT;
     }
     return super.eIsSet(featureID);

@@ -29,7 +29,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LiteralType;
+import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;

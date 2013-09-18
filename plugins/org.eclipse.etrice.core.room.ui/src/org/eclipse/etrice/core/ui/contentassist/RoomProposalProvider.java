@@ -15,13 +15,17 @@ package org.eclipse.etrice.core.ui.contentassist;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
@@ -143,6 +147,20 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 			for (ActorRef instance : instances)
 				acceptor.accept(createCompletionProposal(instance.getName(),
 						context));
+		}
+	}
+	
+	@Override
+	public void complete_AnnotationTargetType(EObject model, org.eclipse.xtext.RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		EList<String> existingTargets = new BasicEList<String>();
+		if(model instanceof AnnotationType) {
+			existingTargets.addAll(((AnnotationType)model).getTargets());
+		}
+		for(RoomAnnotationTargetEnum t : RoomAnnotationTargetEnum.values()) {
+			String targetName = t.getLiteral();
+			if(!existingTargets.isEmpty() && !existingTargets.contains(targetName)) {
+				acceptor.accept(createCompletionProposal(targetName, context));
+			}
 		}
 	}
 

@@ -18,6 +18,434 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
+	public class AnnotationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Annotation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCommercialAtKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTypeAnnotationTypeCrossReference_1_0 = (CrossReference)cTypeAssignment_1.eContents().get(0);
+		private final RuleCall cTypeAnnotationTypeFQNParserRuleCall_1_0_1 = (RuleCall)cTypeAnnotationTypeCrossReference_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cAttributesKeyValueParserRuleCall_2_1_0 = (RuleCall)cAttributesAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cAttributesKeyValueParserRuleCall_2_2_1_0 = (RuleCall)cAttributesAssignment_2_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		
+		//// **************************************************************
+		//
+		//// AnnotationType and Annotation Rules
+		//
+		//Annotation:
+		//
+		//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+		public ParserRule getRule() { return rule; }
+
+		//"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?
+		public Group getGroup() { return cGroup; }
+
+		//"@"
+		public Keyword getCommercialAtKeyword_0() { return cCommercialAtKeyword_0; }
+
+		//type=[AnnotationType|FQN]
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+
+		//[AnnotationType|FQN]
+		public CrossReference getTypeAnnotationTypeCrossReference_1_0() { return cTypeAnnotationTypeCrossReference_1_0; }
+
+		//FQN
+		public RuleCall getTypeAnnotationTypeFQNParserRuleCall_1_0_1() { return cTypeAnnotationTypeFQNParserRuleCall_1_0_1; }
+
+		//("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
+
+		//attributes+=KeyValue
+		public Assignment getAttributesAssignment_2_1() { return cAttributesAssignment_2_1; }
+
+		//KeyValue
+		public RuleCall getAttributesKeyValueParserRuleCall_2_1_0() { return cAttributesKeyValueParserRuleCall_2_1_0; }
+
+		//("," attributes+=KeyValue)*
+		public Group getGroup_2_2() { return cGroup_2_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+
+		//attributes+=KeyValue
+		public Assignment getAttributesAssignment_2_2_1() { return cAttributesAssignment_2_2_1; }
+
+		//KeyValue
+		public RuleCall getAttributesKeyValueParserRuleCall_2_2_1_0() { return cAttributesKeyValueParserRuleCall_2_2_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
+	}
+
+	public class KeyValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "KeyValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueLiteralParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		
+		//KeyValue:
+		//
+		//	key=ID "=" value=Literal;
+		public ParserRule getRule() { return rule; }
+
+		//key=ID "=" value=Literal
+		public Group getGroup() { return cGroup; }
+
+		//key=ID
+		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
+
+		//ID
+		public RuleCall getKeyIDTerminalRuleCall_0_0() { return cKeyIDTerminalRuleCall_0_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+
+		//value=Literal
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+
+		//Literal
+		public RuleCall getValueLiteralParserRuleCall_2_0() { return cValueLiteralParserRuleCall_2_0; }
+	}
+
+	public class AnnotationTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnnotationType");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAnnotationTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cDocuAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDocuDocumentationParserRuleCall_2_0 = (RuleCall)cDocuAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cTargetKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cEqualsSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Assignment cTargetsAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
+		private final RuleCall cTargetsAnnotationTargetTypeParserRuleCall_6_0_0 = (RuleCall)cTargetsAssignment_6_0.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cTargetsAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final RuleCall cTargetsAnnotationTargetTypeParserRuleCall_6_1_1_0 = (RuleCall)cTargetsAssignment_6_1_1.eContents().get(0);
+		private final Group cGroup_6_1_2 = (Group)cGroup_6_1.eContents().get(2);
+		private final Keyword cCommaKeyword_6_1_2_0 = (Keyword)cGroup_6_1_2.eContents().get(0);
+		private final Assignment cTargetsAssignment_6_1_2_1 = (Assignment)cGroup_6_1_2.eContents().get(1);
+		private final RuleCall cTargetsAnnotationTargetTypeParserRuleCall_6_1_2_1_0 = (RuleCall)cTargetsAssignment_6_1_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_1_3 = (Keyword)cGroup_6_1.eContents().get(3);
+		private final Assignment cAttributesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cAttributesAnnotationAttributeParserRuleCall_7_0 = (RuleCall)cAttributesAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		
+		//AnnotationType:
+		//
+		//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
+		//
+		//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
+		public ParserRule getRule() { return rule; }
+
+		//"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
+		//
+		//targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}"
+		public Group getGroup() { return cGroup; }
+
+		//"AnnotationType"
+		public Keyword getAnnotationTypeKeyword_0() { return cAnnotationTypeKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//docu=Documentation?
+		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
+
+		//Documentation
+		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+
+		//"target"
+		public Keyword getTargetKeyword_4() { return cTargetKeyword_4; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_5() { return cEqualsSignKeyword_5; }
+
+		//targets+=AnnotationTargetType | "{" targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}"
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+
+		//targets+=AnnotationTargetType
+		public Assignment getTargetsAssignment_6_0() { return cTargetsAssignment_6_0; }
+
+		//AnnotationTargetType
+		public RuleCall getTargetsAnnotationTargetTypeParserRuleCall_6_0_0() { return cTargetsAnnotationTargetTypeParserRuleCall_6_0_0; }
+
+		//"{" targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}"
+		public Group getGroup_6_1() { return cGroup_6_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_6_1_0() { return cLeftCurlyBracketKeyword_6_1_0; }
+
+		//targets+=AnnotationTargetType
+		public Assignment getTargetsAssignment_6_1_1() { return cTargetsAssignment_6_1_1; }
+
+		//AnnotationTargetType
+		public RuleCall getTargetsAnnotationTargetTypeParserRuleCall_6_1_1_0() { return cTargetsAnnotationTargetTypeParserRuleCall_6_1_1_0; }
+
+		//("," targets+=AnnotationTargetType)*
+		public Group getGroup_6_1_2() { return cGroup_6_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_6_1_2_0() { return cCommaKeyword_6_1_2_0; }
+
+		//targets+=AnnotationTargetType
+		public Assignment getTargetsAssignment_6_1_2_1() { return cTargetsAssignment_6_1_2_1; }
+
+		//AnnotationTargetType
+		public RuleCall getTargetsAnnotationTargetTypeParserRuleCall_6_1_2_1_0() { return cTargetsAnnotationTargetTypeParserRuleCall_6_1_2_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6_1_3() { return cRightCurlyBracketKeyword_6_1_3; }
+
+		//attributes+=AnnotationAttribute*
+		public Assignment getAttributesAssignment_7() { return cAttributesAssignment_7; }
+
+		//AnnotationAttribute
+		public RuleCall getAttributesAnnotationAttributeParserRuleCall_7_0() { return cAttributesAnnotationAttributeParserRuleCall_7_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+	}
+
+	public class AnnotationTargetTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnnotationTargetType");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		////
+		//
+		//// Sub-grammars should use AnnotationTargetType to refer to 
+		//
+		//// specific sub-grammar targets. For example, valid values for 
+		//
+		//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
+		//
+		//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
+		//
+		//// implementing validation, quick-fixes, and code completion proposals via the 
+		//
+		//// usual Xtext mechanisms.
+		//
+		////
+		//
+		//AnnotationTargetType:
+		//
+		//	ID;
+		public ParserRule getRule() { return rule; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
+
+	public class AnnotationAttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnnotationAttribute");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cSimpleAnnotationAttributeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEnumAnnotationAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//AnnotationAttribute:
+		//
+		//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+		public ParserRule getRule() { return rule; }
+
+		//SimpleAnnotationAttribute | EnumAnnotationAttribute
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//SimpleAnnotationAttribute
+		public RuleCall getSimpleAnnotationAttributeParserRuleCall_0() { return cSimpleAnnotationAttributeParserRuleCall_0; }
+
+		//EnumAnnotationAttribute
+		public RuleCall getEnumAnnotationAttributeParserRuleCall_1() { return cEnumAnnotationAttributeParserRuleCall_1; }
+	}
+
+	public class SimpleAnnotationAttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleAnnotationAttribute");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cOptionalAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cOptionalOptionalKeyword_0_0_0 = (Keyword)cOptionalAssignment_0_0.eContents().get(0);
+		private final Keyword cMandatoryKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
+		private final Keyword cAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTypeLiteralTypeEnumRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
+		
+		//SimpleAnnotationAttribute:
+		//
+		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
+		public ParserRule getRule() { return rule; }
+
+		//(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType
+		public Group getGroup() { return cGroup; }
+
+		//optional?="optional" | "mandatory"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//optional?="optional"
+		public Assignment getOptionalAssignment_0_0() { return cOptionalAssignment_0_0; }
+
+		//"optional"
+		public Keyword getOptionalOptionalKeyword_0_0_0() { return cOptionalOptionalKeyword_0_0_0; }
+
+		//"mandatory"
+		public Keyword getMandatoryKeyword_0_1() { return cMandatoryKeyword_0_1; }
+
+		//"attribute"
+		public Keyword getAttributeKeyword_1() { return cAttributeKeyword_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+
+		//":"
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
+
+		//type=LiteralType
+		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
+
+		//LiteralType
+		public RuleCall getTypeLiteralTypeEnumRuleCall_4_0() { return cTypeLiteralTypeEnumRuleCall_4_0; }
+	}
+
+	public class EnumAnnotationAttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumAnnotationAttribute");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cOptionalAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cOptionalOptionalKeyword_0_0_0 = (Keyword)cOptionalAssignment_0_0.eContents().get(0);
+		private final Keyword cMandatoryKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
+		private final Keyword cAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cValuesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cValuesSTRINGTerminalRuleCall_5_0 = (RuleCall)cValuesAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cCommaKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cValuesAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cValuesSTRINGTerminalRuleCall_6_1_0 = (RuleCall)cValuesAssignment_6_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//EnumAnnotationAttribute:
+		//
+		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
+		public ParserRule getRule() { return rule; }
+
+		//(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}"
+		public Group getGroup() { return cGroup; }
+
+		//optional?="optional" | "mandatory"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//optional?="optional"
+		public Assignment getOptionalAssignment_0_0() { return cOptionalAssignment_0_0; }
+
+		//"optional"
+		public Keyword getOptionalOptionalKeyword_0_0_0() { return cOptionalOptionalKeyword_0_0_0; }
+
+		//"mandatory"
+		public Keyword getMandatoryKeyword_0_1() { return cMandatoryKeyword_0_1; }
+
+		//"attribute"
+		public Keyword getAttributeKeyword_1() { return cAttributeKeyword_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+
+		//":"
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+
+		//values+=STRING
+		public Assignment getValuesAssignment_5() { return cValuesAssignment_5; }
+
+		//STRING
+		public RuleCall getValuesSTRINGTerminalRuleCall_5_0() { return cValuesSTRINGTerminalRuleCall_5_0; }
+
+		//("," values+=STRING)*
+		public Group getGroup_6() { return cGroup_6; }
+
+		//","
+		public Keyword getCommaKeyword_6_0() { return cCommaKeyword_6_0; }
+
+		//values+=STRING
+		public Assignment getValuesAssignment_6_1() { return cValuesAssignment_6_1; }
+
+		//STRING
+		public RuleCall getValuesSTRINGTerminalRuleCall_6_1_0() { return cValuesSTRINGTerminalRuleCall_6_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
+
+	public class DocumentationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Documentation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cDocumentationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cLinesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cLinesSTRINGTerminalRuleCall_2_0 = (RuleCall)cLinesAssignment_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//// **************************************************************
+		//
+		//// Documentation Rule
+		//
+		//Documentation:
+		//
+		//	{Documentation} "[" lines+=STRING* "]";
+		public ParserRule getRule() { return rule; }
+
+		//{Documentation} "[" lines+=STRING* "]"
+		public Group getGroup() { return cGroup; }
+
+		//{Documentation}
+		public Action getDocumentationAction_0() { return cDocumentationAction_0; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
+
+		//lines+=STRING*
+		public Assignment getLinesAssignment_2() { return cLinesAssignment_2; }
+
+		//STRING
+		public RuleCall getLinesSTRINGTerminalRuleCall_2_0() { return cLinesSTRINGTerminalRuleCall_2_0; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
+	}
+
 	public class LiteralArrayElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralArray");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -446,8 +874,95 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//EXP
 		public RuleCall getEXPTerminalRuleCall_4() { return cEXPTerminalRuleCall_4; }
 	}
+
+	public class FQNElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//FQN:
+		//
+		//	ID ("." ID)*;
+		public ParserRule getRule() { return rule; }
+
+		//ID ("." ID)*
+		public Group getGroup() { return cGroup; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+
+		//("." ID)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+	}
 	
 	
+	public class LiteralTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cBOOLEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cBOOLPtBooleanKeyword_0_0 = (Keyword)cBOOLEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cINTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cINTPtIntegerKeyword_1_0 = (Keyword)cINTEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cREALEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cREALPtRealKeyword_2_0 = (Keyword)cREALEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cCHAREnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cCHARPtCharacterKeyword_3_0 = (Keyword)cCHAREnumLiteralDeclaration_3.eContents().get(0);
+		
+		//// **************************************************************
+		//
+		//// Literal Rules
+		//
+		//enum LiteralType:
+		//
+		//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+		public EnumRule getRule() { return rule; }
+
+		//BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//BOOL="ptBoolean"
+		public EnumLiteralDeclaration getBOOLEnumLiteralDeclaration_0() { return cBOOLEnumLiteralDeclaration_0; }
+
+		//"ptBoolean"
+		public Keyword getBOOLPtBooleanKeyword_0_0() { return cBOOLPtBooleanKeyword_0_0; }
+
+		//INT="ptInteger"
+		public EnumLiteralDeclaration getINTEnumLiteralDeclaration_1() { return cINTEnumLiteralDeclaration_1; }
+
+		//"ptInteger"
+		public Keyword getINTPtIntegerKeyword_1_0() { return cINTPtIntegerKeyword_1_0; }
+
+		//REAL="ptReal"
+		public EnumLiteralDeclaration getREALEnumLiteralDeclaration_2() { return cREALEnumLiteralDeclaration_2; }
+
+		//"ptReal"
+		public Keyword getREALPtRealKeyword_2_0() { return cREALPtRealKeyword_2_0; }
+
+		//CHAR="ptCharacter"
+		public EnumLiteralDeclaration getCHAREnumLiteralDeclaration_3() { return cCHAREnumLiteralDeclaration_3; }
+
+		//"ptCharacter"
+		public Keyword getCHARPtCharacterKeyword_3_0() { return cCHARPtCharacterKeyword_3_0; }
+	}
+	
+	private AnnotationElements pAnnotation;
+	private KeyValueElements pKeyValue;
+	private AnnotationTypeElements pAnnotationType;
+	private AnnotationTargetTypeElements pAnnotationTargetType;
+	private AnnotationAttributeElements pAnnotationAttribute;
+	private SimpleAnnotationAttributeElements pSimpleAnnotationAttribute;
+	private EnumAnnotationAttributeElements pEnumAnnotationAttribute;
+	private DocumentationElements pDocumentation;
+	private LiteralTypeElements unknownRuleLiteralType;
 	private LiteralArrayElements pLiteralArray;
 	private LiteralElements pLiteral;
 	private BooleanLiteralElements pBooleanLiteral;
@@ -465,6 +980,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	private DecimalExpElements pDecimalExp;
 	private TerminalRule tEXP;
 	private TerminalRule tHEX;
+	private FQNElements pFQN;
 	
 	private final Grammar grammar;
 
@@ -504,6 +1020,135 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
+	//// **************************************************************
+	//
+	//// AnnotationType and Annotation Rules
+	//
+	//Annotation:
+	//
+	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+	public AnnotationElements getAnnotationAccess() {
+		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
+	}
+	
+	public ParserRule getAnnotationRule() {
+		return getAnnotationAccess().getRule();
+	}
+
+	//KeyValue:
+	//
+	//	key=ID "=" value=Literal;
+	public KeyValueElements getKeyValueAccess() {
+		return (pKeyValue != null) ? pKeyValue : (pKeyValue = new KeyValueElements());
+	}
+	
+	public ParserRule getKeyValueRule() {
+		return getKeyValueAccess().getRule();
+	}
+
+	//AnnotationType:
+	//
+	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
+	//
+	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
+	public AnnotationTypeElements getAnnotationTypeAccess() {
+		return (pAnnotationType != null) ? pAnnotationType : (pAnnotationType = new AnnotationTypeElements());
+	}
+	
+	public ParserRule getAnnotationTypeRule() {
+		return getAnnotationTypeAccess().getRule();
+	}
+
+	////
+	//
+	//// Sub-grammars should use AnnotationTargetType to refer to 
+	//
+	//// specific sub-grammar targets. For example, valid values for 
+	//
+	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
+	//
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
+	//
+	//// implementing validation, quick-fixes, and code completion proposals via the 
+	//
+	//// usual Xtext mechanisms.
+	//
+	////
+	//
+	//AnnotationTargetType:
+	//
+	//	ID;
+	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
+		return (pAnnotationTargetType != null) ? pAnnotationTargetType : (pAnnotationTargetType = new AnnotationTargetTypeElements());
+	}
+	
+	public ParserRule getAnnotationTargetTypeRule() {
+		return getAnnotationTargetTypeAccess().getRule();
+	}
+
+	//AnnotationAttribute:
+	//
+	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	public AnnotationAttributeElements getAnnotationAttributeAccess() {
+		return (pAnnotationAttribute != null) ? pAnnotationAttribute : (pAnnotationAttribute = new AnnotationAttributeElements());
+	}
+	
+	public ParserRule getAnnotationAttributeRule() {
+		return getAnnotationAttributeAccess().getRule();
+	}
+
+	//SimpleAnnotationAttribute:
+	//
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
+	public SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
+		return (pSimpleAnnotationAttribute != null) ? pSimpleAnnotationAttribute : (pSimpleAnnotationAttribute = new SimpleAnnotationAttributeElements());
+	}
+	
+	public ParserRule getSimpleAnnotationAttributeRule() {
+		return getSimpleAnnotationAttributeAccess().getRule();
+	}
+
+	//EnumAnnotationAttribute:
+	//
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
+	public EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
+		return (pEnumAnnotationAttribute != null) ? pEnumAnnotationAttribute : (pEnumAnnotationAttribute = new EnumAnnotationAttributeElements());
+	}
+	
+	public ParserRule getEnumAnnotationAttributeRule() {
+		return getEnumAnnotationAttributeAccess().getRule();
+	}
+
+	//// **************************************************************
+	//
+	//// Documentation Rule
+	//
+	//Documentation:
+	//
+	//	{Documentation} "[" lines+=STRING* "]";
+	public DocumentationElements getDocumentationAccess() {
+		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
+	}
+	
+	public ParserRule getDocumentationRule() {
+		return getDocumentationAccess().getRule();
+	}
+
+	//// **************************************************************
+	//
+	//// Literal Rules
+	//
+	//enum LiteralType:
+	//
+	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+	public LiteralTypeElements getLiteralTypeAccess() {
+		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
+	}
+	
+	public EnumRule getLiteralTypeRule() {
+		return getLiteralTypeAccess().getRule();
+	}
+
 	//LiteralArray:
 	//
 	//	literals+=Literal ("," literals+=Literal)*;
@@ -684,6 +1329,17 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	public TerminalRule getHEXRule() {
 		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
 	} 
+
+	//FQN:
+	//
+	//	ID ("." ID)*;
+	public FQNElements getFQNAccess() {
+		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+	}
+	
+	public ParserRule getFQNRule() {
+		return getFQNAccess().getRule();
+	}
 
 	//terminal ID:
 	//

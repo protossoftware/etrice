@@ -2,6 +2,7 @@
  */
 package org.eclipse.etrice.core.room;
 
+import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
  * <!-- begin-user-doc -->

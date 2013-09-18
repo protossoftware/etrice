@@ -49,7 +49,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.LiteralType;
+import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemRef;

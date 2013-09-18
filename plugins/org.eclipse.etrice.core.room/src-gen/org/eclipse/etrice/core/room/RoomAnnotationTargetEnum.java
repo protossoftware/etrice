@@ -10,14 +10,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Annotation Target Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Annotation Target Enum</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.etrice.core.room.RoomPackage#getAnnotationTargetType()
+ * @see org.eclipse.etrice.core.room.RoomPackage#getRoomAnnotationTargetEnum()
  * @model
  * @generated
  */
-public enum AnnotationTargetType implements Enumerator
+public enum RoomAnnotationTargetEnum implements Enumerator
 {
   /**
    * The '<em><b>DATA CLASS</b></em>' literal object.
@@ -195,13 +195,13 @@ public enum AnnotationTargetType implements Enumerator
   public static final int LOGICAL_SYSTEM_CLASS_VALUE = 6;
 
   /**
-   * An array of all the '<em><b>Annotation Target Type</b></em>' enumerators.
+   * An array of all the '<em><b>Annotation Target Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final AnnotationTargetType[] VALUES_ARRAY =
-    new AnnotationTargetType[]
+  private static final RoomAnnotationTargetEnum[] VALUES_ARRAY =
+    new RoomAnnotationTargetEnum[]
     {
       DATA_CLASS,
       ACTOR_CLASS,
@@ -213,24 +213,24 @@ public enum AnnotationTargetType implements Enumerator
     };
 
   /**
-   * A public read-only list of all the '<em><b>Annotation Target Type</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Annotation Target Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<AnnotationTargetType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<RoomAnnotationTargetEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Annotation Target Type</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Annotation Target Enum</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AnnotationTargetType get(String literal)
+  public static RoomAnnotationTargetEnum get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      AnnotationTargetType result = VALUES_ARRAY[i];
+      RoomAnnotationTargetEnum result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -240,16 +240,16 @@ public enum AnnotationTargetType implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Annotation Target Type</b></em>' literal with the specified name.
+   * Returns the '<em><b>Annotation Target Enum</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AnnotationTargetType getByName(String name)
+  public static RoomAnnotationTargetEnum getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      AnnotationTargetType result = VALUES_ARRAY[i];
+      RoomAnnotationTargetEnum result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -259,12 +259,12 @@ public enum AnnotationTargetType implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Annotation Target Type</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Annotation Target Enum</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AnnotationTargetType get(int value)
+  public static RoomAnnotationTargetEnum get(int value)
   {
     switch (value)
     {
@@ -306,7 +306,7 @@ public enum AnnotationTargetType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private AnnotationTargetType(int value, String name, String literal)
+  private RoomAnnotationTargetEnum(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -355,4 +355,4 @@ public enum AnnotationTargetType implements Enumerator
     return literal;
   }
   
-} //AnnotationTargetType
+} //RoomAnnotationTargetEnum

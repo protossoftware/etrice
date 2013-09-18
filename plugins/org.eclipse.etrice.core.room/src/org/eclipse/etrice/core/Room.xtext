@@ -42,7 +42,7 @@ RoomModel :
 	'}'
 ;
 
-RoomClass: DataType | GeneralProtocolClass | StructureClass | AnnotationType;
+RoomClass: DataType | GeneralProtocolClass | StructureClass;
 StructureClass: ActorContainerClass | LogicalSystem;
 ActorContainerClass: ActorClass | SubSystemClass;
 
@@ -53,13 +53,6 @@ VarDecl:
 	name=ID ':' refType=RefableType;
 
 RefableType: type=[DataType|FQN] (ref?='ref')?;
-
-enum LiteralType:
-	BOOL='ptBoolean' |
-	INT='ptInteger' |
-	REAL='ptReal' |
-	CHAR='ptCharacter' 
-;
 
 DataType: PrimitiveType | ComplexType;
 ComplexType: DataClass | ExternalType;
@@ -469,42 +462,6 @@ Guard:
 // **************************************************************
 // general
 
-Documentation:
-	{Documentation}
-	'['
-		lines+=STRING*
-	']';
-
-Annotation: '@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
-KeyValue: key=ID '=' value=Literal;
-
-AnnotationType:
-	'AnnotationType' name=ID (docu=Documentation)? '{'
-	'target' '=' (targets+=AnnotationTargetType | ('{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'))
-	attributes+=AnnotationAttribute*
-	'}'
-;
-
-AnnotationAttribute: SimpleAnnotationAttribute | EnumAnnotationAttribute;
-
-SimpleAnnotationAttribute:
-	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
-;
-
-EnumAnnotationAttribute:
-	(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
-;
-
-enum AnnotationTargetType:
-	DATA_CLASS='DataClass' |
-	ACTOR_CLASS='ActorClass' |
-	ACTOR_BEHAVIOR='ActorBehavior' |
-	PROTOCOL_CLASS='ProtocolClass' |
-	COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
-	SUBSYSTEM_CLASS='SubSystemClass' |
-	LOGICAL_SYSTEM_CLASS='LogicalSystem'
-;
-
 // HOWTO: use a combination of URI global scopes and namespace aware local scope provider
 // this is configured in the work flow by
 //			fragment = scoping.ImportURIScopingFragment {}
@@ -529,9 +486,26 @@ Import :
 ImportedFQN:
 	FQN ('.*')?;
 
-FQN:
-	ID ('.' ID)*;
-
 // the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
 // (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
 MULTIPLICITY returns ecore::EInt : '[' ('*'|INT) ']';
+
+AnnotationTargetType:
+	'DataClass' | 
+	'ActorClass' | 
+	'ActorBehavior' | 
+	'ProtocolClass' | 
+	'CompoundProtocolClass' | 
+	'SubSystemClass' | 
+	'LogicalSystem'
+;
+
+enum RoomAnnotationTargetEnum:
+	DATA_CLASS='DataClass' |
+	ACTOR_CLASS='ActorClass' |
+	ACTOR_BEHAVIOR='ActorBehavior' |
+	PROTOCOL_CLASS='ProtocolClass' |
+	COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
+	SUBSYSTEM_CLASS='SubSystemClass' |
+	LOGICAL_SYSTEM_CLASS='LogicalSystem'
+;

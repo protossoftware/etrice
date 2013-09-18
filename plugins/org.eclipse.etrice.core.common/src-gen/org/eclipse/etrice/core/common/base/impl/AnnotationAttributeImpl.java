@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.etrice.core.room.AnnotationAttribute;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.common.base.AnnotationAttribute;
+import org.eclipse.etrice.core.common.base.BasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,8 +19,8 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl#isOptional <em>Optional</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationAttributeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationAttributeImpl#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationAttributeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,7 +86,7 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.ANNOTATION_ATTRIBUTE;
+    return BasePackage.Literals.ANNOTATION_ATTRIBUTE;
   }
 
   /**
@@ -109,7 +109,7 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
     boolean oldOptional = optional;
     optional = newOptional;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ANNOTATION_ATTRIBUTE__OPTIONAL, oldOptional, optional));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.ANNOTATION_ATTRIBUTE__OPTIONAL, oldOptional, optional));
   }
 
   /**
@@ -132,7 +132,7 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ANNOTATION_ATTRIBUTE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.ANNOTATION_ATTRIBUTE__NAME, oldName, name));
   }
 
   /**
@@ -145,9 +145,9 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
+      case BasePackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
         return isOptional();
-      case RoomPackage.ANNOTATION_ATTRIBUTE__NAME:
+      case BasePackage.ANNOTATION_ATTRIBUTE__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -163,10 +163,10 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
+      case BasePackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
         setOptional((Boolean)newValue);
         return;
-      case RoomPackage.ANNOTATION_ATTRIBUTE__NAME:
+      case BasePackage.ANNOTATION_ATTRIBUTE__NAME:
         setName((String)newValue);
         return;
     }
@@ -183,10 +183,10 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
+      case BasePackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
         setOptional(OPTIONAL_EDEFAULT);
         return;
-      case RoomPackage.ANNOTATION_ATTRIBUTE__NAME:
+      case BasePackage.ANNOTATION_ATTRIBUTE__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -203,9 +203,9 @@ public class AnnotationAttributeImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
+      case BasePackage.ANNOTATION_ATTRIBUTE__OPTIONAL:
         return optional != OPTIONAL_EDEFAULT;
-      case RoomPackage.ANNOTATION_ATTRIBUTE__NAME:
+      case BasePackage.ANNOTATION_ATTRIBUTE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);

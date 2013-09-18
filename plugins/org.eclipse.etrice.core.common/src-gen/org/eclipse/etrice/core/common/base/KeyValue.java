@@ -1,10 +1,8 @@
 /**
  */
-package org.eclipse.etrice.core.room;
+package org.eclipse.etrice.core.common.base;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.etrice.core.common.base.Literal;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,12 +17,12 @@ import org.eclipse.etrice.core.common.base.Literal;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.KeyValue#getKey <em>Key</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.KeyValue#getKey <em>Key</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.KeyValue#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getKeyValue()
  * @model
  * @generated
  */
@@ -40,14 +38,14 @@ public interface KeyValue extends EObject
    * <!-- end-model-doc -->
    * @return the value of the '<em>Key</em>' attribute.
    * @see #setKey(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue_Key()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getKeyValue_Key()
    * @model
    * @generated
    */
   String getKey();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.KeyValue#getKey <em>Key</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.KeyValue#getKey <em>Key</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Key</em>' attribute.
@@ -66,14 +64,14 @@ public interface KeyValue extends EObject
    * <!-- end-model-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
    * @see #setValue(Literal)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getKeyValue_Value()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getKeyValue_Value()
    * @model containment="true"
    * @generated
    */
   Literal getValue();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.KeyValue#getValue <em>Value</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.KeyValue#getValue <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Value</em>' containment reference.

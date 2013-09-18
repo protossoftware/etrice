@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.room.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import java.util.Collection;
 
@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.core.room.Annotation;
-import org.eclipse.etrice.core.room.AnnotationType;
-import org.eclipse.etrice.core.room.KeyValue;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.KeyValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,8 +30,8 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.AnnotationImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,7 +77,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   @Override
   protected EClass eStaticClass()
   {
-    return RoomPackage.Literals.ANNOTATION;
+    return BasePackage.Literals.ANNOTATION;
   }
 
   /**
@@ -94,7 +94,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
       if (type != oldType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RoomPackage.ANNOTATION__TYPE, oldType, type));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, BasePackage.ANNOTATION__TYPE, oldType, type));
       }
     }
     return type;
@@ -120,7 +120,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
     AnnotationType oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ANNOTATION__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.ANNOTATION__TYPE, oldType, type));
   }
 
   /**
@@ -132,7 +132,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     if (attributes == null)
     {
-      attributes = new EObjectContainmentEList<KeyValue>(KeyValue.class, this, RoomPackage.ANNOTATION__ATTRIBUTES);
+      attributes = new EObjectContainmentEList<KeyValue>(KeyValue.class, this, BasePackage.ANNOTATION__ATTRIBUTES);
     }
     return attributes;
   }
@@ -147,7 +147,7 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case BasePackage.ANNOTATION__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -163,10 +163,10 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
+      case BasePackage.ANNOTATION__TYPE:
         if (resolve) return getType();
         return basicGetType();
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case BasePackage.ANNOTATION__ATTRIBUTES:
         return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -183,10 +183,10 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
+      case BasePackage.ANNOTATION__TYPE:
         setType((AnnotationType)newValue);
         return;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case BasePackage.ANNOTATION__ATTRIBUTES:
         getAttributes().clear();
         getAttributes().addAll((Collection<? extends KeyValue>)newValue);
         return;
@@ -204,10 +204,10 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
+      case BasePackage.ANNOTATION__TYPE:
         setType((AnnotationType)null);
         return;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case BasePackage.ANNOTATION__ATTRIBUTES:
         getAttributes().clear();
         return;
     }
@@ -224,9 +224,9 @@ public class AnnotationImpl extends MinimalEObjectImpl.Container implements Anno
   {
     switch (featureID)
     {
-      case RoomPackage.ANNOTATION__TYPE:
+      case BasePackage.ANNOTATION__TYPE:
         return type != null;
-      case RoomPackage.ANNOTATION__ATTRIBUTES:
+      case BasePackage.ANNOTATION__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);

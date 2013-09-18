@@ -185,7 +185,6 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     isInited = true;
 
     // Initialize simple dependencies
-    BasePackage.eINSTANCE.eClass();
     RoomPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

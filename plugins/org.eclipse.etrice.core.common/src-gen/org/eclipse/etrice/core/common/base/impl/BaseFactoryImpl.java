@@ -3,6 +3,7 @@
 package org.eclipse.etrice.core.common.base.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -64,6 +65,13 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
   {
     switch (eClass.getClassifierID())
     {
+      case BasePackage.ANNOTATION: return createAnnotation();
+      case BasePackage.KEY_VALUE: return createKeyValue();
+      case BasePackage.ANNOTATION_TYPE: return createAnnotationType();
+      case BasePackage.ANNOTATION_ATTRIBUTE: return createAnnotationAttribute();
+      case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE: return createSimpleAnnotationAttribute();
+      case BasePackage.ENUM_ANNOTATION_ATTRIBUTE: return createEnumAnnotationAttribute();
+      case BasePackage.DOCUMENTATION: return createDocumentation();
       case BasePackage.LITERAL_ARRAY: return createLiteralArray();
       case BasePackage.LITERAL: return createLiteral();
       case BasePackage.BOOLEAN_LITERAL: return createBooleanLiteral();
@@ -74,6 +82,117 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case BasePackage.LITERAL_TYPE:
+        return createLiteralTypeFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case BasePackage.LITERAL_TYPE:
+        return convertLiteralTypeToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Annotation createAnnotation()
+  {
+    AnnotationImpl annotation = new AnnotationImpl();
+    return annotation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValue createKeyValue()
+  {
+    KeyValueImpl keyValue = new KeyValueImpl();
+    return keyValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnnotationType createAnnotationType()
+  {
+    AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
+    return annotationType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnnotationAttribute createAnnotationAttribute()
+  {
+    AnnotationAttributeImpl annotationAttribute = new AnnotationAttributeImpl();
+    return annotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleAnnotationAttribute createSimpleAnnotationAttribute()
+  {
+    SimpleAnnotationAttributeImpl simpleAnnotationAttribute = new SimpleAnnotationAttributeImpl();
+    return simpleAnnotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumAnnotationAttribute createEnumAnnotationAttribute()
+  {
+    EnumAnnotationAttributeImpl enumAnnotationAttribute = new EnumAnnotationAttributeImpl();
+    return enumAnnotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Documentation createDocumentation()
+  {
+    DocumentationImpl documentation = new DocumentationImpl();
+    return documentation;
   }
 
   /**
@@ -151,6 +270,28 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
     return stringLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LiteralType createLiteralTypeFromString(EDataType eDataType, String initialValue)
+  {
+    LiteralType result = LiteralType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertLiteralTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

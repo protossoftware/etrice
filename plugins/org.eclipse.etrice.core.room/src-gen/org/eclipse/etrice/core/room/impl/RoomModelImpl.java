@@ -18,10 +18,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.Documentation;
+
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.AnnotationType;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.Documentation;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Import;

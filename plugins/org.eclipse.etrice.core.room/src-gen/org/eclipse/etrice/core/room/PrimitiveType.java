@@ -2,6 +2,7 @@
  */
 package org.eclipse.etrice.core.room;
 
+import org.eclipse.etrice.core.common.base.LiteralType;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +34,7 @@ public interface PrimitiveType extends DataType
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.
-   * The literals are from the enumeration {@link org.eclipse.etrice.core.room.LiteralType}.
+   * The literals are from the enumeration {@link org.eclipse.etrice.core.common.base.LiteralType}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
@@ -41,7 +42,7 @@ public interface PrimitiveType extends DataType
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Type</em>' attribute.
-   * @see org.eclipse.etrice.core.room.LiteralType
+   * @see org.eclipse.etrice.core.common.base.LiteralType
    * @see #setType(LiteralType)
    * @see org.eclipse.etrice.core.room.RoomPackage#getPrimitiveType_Type()
    * @model
@@ -54,7 +55,7 @@ public interface PrimitiveType extends DataType
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' attribute.
-   * @see org.eclipse.etrice.core.room.LiteralType
+   * @see org.eclipse.etrice.core.common.base.LiteralType
    * @see #getType()
    * @generated
    */
