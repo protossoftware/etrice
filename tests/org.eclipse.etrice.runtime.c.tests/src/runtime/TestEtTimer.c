@@ -67,7 +67,9 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 
 	{
 		etInt32 elapsed = etTimeHelpers_convertToMSec(&endTime) - etTimeHelpers_convertToMSec(&startTime);
-		EXPECT_TRUE(id, "elapsed time wrong", (elapsed > 2100) && (elapsed < 2200));
+		char buffer[64];
+		sprintf(buffer, "elapsed time %d expected to be in [2100, 2200]", (int)elapsed);
+		EXPECT_TRUE(id, buffer, (elapsed >= 2100) && (elapsed <= 2200));
 
 		printf("TestEtTimer_lifecycle: elapsed %d\n", (int)elapsed); fflush(stdout); // TODO: remove debug output
 	}
