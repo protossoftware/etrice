@@ -139,6 +139,10 @@ public class DiagnosingModelObserver extends EContentAdapter {
 				if (elementDiagnosticMap.get(eObject) == null)
 					elementDiagnosticMap.put(eObject,
 							new ArrayList<Diagnostic>());
+
+				// FIXME Some Diagnostics are added Multiple times. Remove
+				// duplicate diagnostics. This is the reason for multiple
+				// entries for same issue in Quick Fix Dialog.
 				elementDiagnosticMap.get(eObject).add(diagnostic);
 			}
 		}

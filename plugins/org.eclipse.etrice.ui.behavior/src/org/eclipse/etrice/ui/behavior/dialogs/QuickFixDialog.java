@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.SelectionDialog;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
@@ -60,7 +61,7 @@ public class QuickFixDialog extends SelectionDialog {
 	private HashMap<FeatureBasedDiagnostic, List<IssueResolution>> issueResolutionsMap;
 	private TableViewer issueList;
 	private TableViewer resolutionsList;
-	private Label resolutionDescription;
+	private Text resolutionDescription;
 
 	/**
 	 * Constructs a list selection dialog.
@@ -83,9 +84,10 @@ public class QuickFixDialog extends SelectionDialog {
 	 * @see Dialog#createDialogArea(Composite)
 	 */
 	public Control createDialogArea(Composite parent) {
-		Composite contents = (Composite) super.createDialogArea(parent);
-		createMessageArea(contents);
+		// FIXME problems with first call to label provider.
 
+		Composite contents = (Composite) super.createDialogArea(parent);
+		
 		createLabel(contents, ISSUES_LIST_LABEL);
 		createIssueList(contents);
 
@@ -109,6 +111,10 @@ public class QuickFixDialog extends SelectionDialog {
 	private void createIssueList(Composite control) {
 		issueList = new TableViewer(control, SWT.BORDER | SWT.SINGLE
 				| SWT.V_SCROLL);
+
+		GridData gd = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
+		gd.heightHint = 60;
+		issueList.getControl().setLayoutData(gd);
 
 		issueList.setContentProvider(new IStructuredContentProvider() {
 
@@ -179,6 +185,10 @@ public class QuickFixDialog extends SelectionDialog {
 		resolutionsList = new TableViewer(control, SWT.BORDER | SWT.SINGLE
 				| SWT.V_SCROLL);
 
+		GridData gd = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
+		gd.heightHint = 60;
+		resolutionsList.getControl().setLayoutData(gd);
+
 		resolutionsList.setContentProvider(new IStructuredContentProvider() {
 
 			@Override
@@ -247,38 +257,17 @@ public class QuickFixDialog extends SelectionDialog {
 		return label;
 	}
 
-	/**
-	 * Creates the message text widget and sets layout data.
-	 * 
-	 * @param composite
-	 *            the parent composite of the message area.
-	 */
-	protected Label createMessageArea(Composite composite) {
-		Label label = super.createMessageArea(composite);
+	private Text createDescritionArea(Composite composite) {
+		Text text = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		GridData gd = new GridData(GridData.FILL, GridData.BEGINNING, true, false);
+		gd.heightHint = 60;
+		gd.widthHint = 130;
+		text.setLayoutData(gd);
+		text.setEditable(false);
 
-		GridData data = new GridData();
-		data.grabExcessVerticalSpace = false;
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalAlignment = GridData.FILL;
-		data.verticalAlignment = GridData.BEGINNING;
-		label.setLayoutData(data);
+		resolutionDescription = text;
 
-		return label;
-	}
-
-	private Label createDescritionArea(Composite composite) {
-		Label label = super.createMessageArea(composite);
-
-		GridData data = new GridData();
-		data.grabExcessVerticalSpace = true;
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalAlignment = GridData.FILL;
-		data.verticalAlignment = GridData.BEGINNING;
-		label.setLayoutData(data);
-
-		resolutionDescription = label;
-
-		return label;
+		return text;
 	}
 
 	/**

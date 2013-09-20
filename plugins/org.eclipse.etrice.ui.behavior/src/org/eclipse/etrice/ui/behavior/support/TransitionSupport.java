@@ -114,7 +114,7 @@ public class TransitionSupport {
 	private static final int LINE_WIDTH = 1;
 	private static final int MAX_LABEL_LENGTH = 20;
 
-	static class FeatureProvider extends DefaultFeatureProvider {
+	public static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends AbstractCreateConnectionFeature {
 			
@@ -604,10 +604,13 @@ public class TransitionSupport {
 			}
 		}
 		
-		private static class PropertyFeature extends AbstractCustomFeature {
+		public static class PropertyFeature extends AbstractCustomFeature {
 
 			private boolean doneChanges = false;
 			private boolean editable;
+			private String actionCodeSelectionString = "";
+			private String messageToDisplay = "";
+			private String messageTitle = "";
 
 			public PropertyFeature(IFeatureProvider fp, boolean editable) {
 				super(fp);
@@ -653,6 +656,8 @@ public class TransitionSupport {
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
+				dlg.setActionCodeSelectionString(actionCodeSelectionString);
+				dlg.setMessageDialogContents(messageToDisplay, messageTitle);
 				if (dlg.open()!=Window.OK)
 					return;
 
@@ -668,6 +673,15 @@ public class TransitionSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				return doneChanges;
+			}
+
+			public void setActionCodeSelectionString(String selectionString){
+				actionCodeSelectionString = selectionString;
+			}
+
+			public void setMessageDialogContents(String message, String title) {
+				messageToDisplay = message;
+				messageTitle = title; 
 			}
 		}
 		
@@ -825,8 +839,7 @@ public class TransitionSupport {
 				if (result == null)
 					return;
 				else{
-					((IssueResolution)result[0]).apply(getDiagram());
-					doneChanges = true;
+					doneChanges = ((IssueResolution)result[0]).apply(getDiagram(), getFeatureProvider());
 				}
 			}
 

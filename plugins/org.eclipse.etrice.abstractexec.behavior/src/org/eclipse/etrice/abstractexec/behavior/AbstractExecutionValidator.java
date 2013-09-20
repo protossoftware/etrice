@@ -184,10 +184,10 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		for (MessageFromIf msg : incoming) {
 			messageAcceptor.acceptWarning("State should handle the message "
 					+ msg.getMessage().getName() + " from port "
-					+ msg.getFrom().getName() + " ", container,
-					orig.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER,
-					st.getName(), msg.getFrom().getGeneralProtocol().getName(),
-					msg.getMessage().getName(), msg.getFrom().getName());
+					+ msg.getFrom().getName() + " ", container, orig
+					.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER, st
+					.getName(), msg.getMessage().getName(), msg.getFrom()
+					.getName());
 		}
 		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
 
@@ -196,8 +196,8 @@ public class AbstractExecutionValidator implements IRoomValidator {
 					+ msg.getMessage().getName() + " to port "
 					+ msg.getFrom().getName() + " ", container, orig
 					.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND,
-					st.getName(), msg.getFrom().getGeneralProtocol().getName(),
-					msg.getMessage().getName(), msg.getFrom().getName());
+					st.getName(), msg.getMessage().getName(), msg.getFrom()
+							.getName());
 		}
 
 	}
@@ -236,13 +236,8 @@ public class AbstractExecutionValidator implements IRoomValidator {
 															.indexOf(trig),
 													DIAG_CODE_VIOLATION_TRIGGER,
 													trigger.getMsg().getName(),
-													mif.getFrom()
-															.getGeneralProtocol()
-															.getName(), mif
-															.getMessage()
-															.getName(), mif
-															.getFrom()
-															.getName());
+													mif.getMessage().getName(),
+													mif.getFrom().getName());
 								}
 							}
 						}
@@ -251,10 +246,11 @@ public class AbstractExecutionValidator implements IRoomValidator {
 					DetailCode dc = (DetailCode) origin;
 					EObject orig = xpac.getOrig(dc);
 					messageAcceptor.acceptWarning(
-							"The message violates the semantic rule",
-							orig.eContainer(), orig.eContainingFeature(),
+							"The message violates the semantic rule", orig
+									.eContainer(), orig.eContainingFeature(),
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							DIAG_CODE_VIOLATION_MESSAGESEND);
+							DIAG_CODE_VIOLATION_MESSAGESEND, msg.getMsg()
+									.getName(), msg.getIfitem().getName());
 
 				}
 			}

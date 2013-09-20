@@ -123,7 +123,7 @@ public class StateSupport {
 	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 	private static final IColorConstant INHERITED_BACKGROUND = new ColorConstant(230, 230, 230);
 
-	private static class FeatureProvider extends DefaultFeatureProvider {
+	public static class FeatureProvider extends DefaultFeatureProvider {
 
 		private class CreateFeature extends AbstractCreateFeature {
 	
@@ -344,11 +344,18 @@ public class StateSupport {
 			}
 		}
 
-		private static class PropertyFeature extends AbstractCustomFeature {
+		public static class PropertyFeature extends AbstractCustomFeature {
 
 			private boolean doneChanges = false;
 			private boolean editable;
 			
+			private boolean addCode = false;
+			private String entryCodeSelectionString = "";
+			private String exitCodeSelectionString = "";
+			private String doCodeSelectionString = "";
+			private String messageToDisplay = "";
+			private String messageTitle = "";
+
 			public PropertyFeature(IFeatureProvider fp, boolean editable) {
 				super(fp);
 				
@@ -384,6 +391,12 @@ public class StateSupport {
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				StatePropertyDialog dlg = new StatePropertyDialog(shell, ac, s, editable);
+				dlg.setAddCode(addCode);
+				dlg.setEntryCodeSelectionString(entryCodeSelectionString);
+				dlg.setExitCodeSelectionString(exitCodeSelectionString);
+				dlg.setDoCodeSelectionString(doCodeSelectionString);
+				dlg.setMessageDialogContents(messageToDisplay, messageTitle);
+
 				if (dlg.open()!=Window.OK)
 					return;
 
@@ -438,6 +451,27 @@ public class StateSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				return doneChanges;
+			}
+
+			public void setAddCode(boolean add) {
+				addCode = add;
+			}
+
+			public void setEntryCodeSelectionString(String selectionString){
+				entryCodeSelectionString = selectionString;
+			}
+
+			public void setExitCodeSelectionString(String selectionString){
+				exitCodeSelectionString = selectionString;
+			}
+
+			public void setDoCodeSelectionString(String selectionString){
+				doCodeSelectionString = selectionString;
+			}
+
+			public void setMessageDialogContents(String message, String title) {
+				messageToDisplay = message;
+				messageTitle = title; 
 			}
 		}
 		
@@ -920,8 +954,7 @@ public class StateSupport {
 				if (result == null)
 					return;
 				else{
-					((IssueResolution)result[0]).apply(getDiagram());
-					doneChanges = true;
+					doneChanges = ((IssueResolution)result[0]).apply(getDiagram(), getFeatureProvider());
 				}
 			}
 

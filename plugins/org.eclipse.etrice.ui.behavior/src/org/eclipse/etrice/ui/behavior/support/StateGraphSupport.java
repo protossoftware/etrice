@@ -585,8 +585,7 @@ public class StateGraphSupport {
 				if (result == null)
 					return;
 				else{
-					((IssueResolution)result[0]).apply(getDiagram());
-					doneChanges = true;
+					doneChanges = ((IssueResolution)result[0]).apply(getDiagram(), getFeatureProvider());
 				}
 			}
 
