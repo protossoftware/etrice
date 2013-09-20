@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class OptionalActorInterfaceGen extends GenericActorClassGenerator {
@@ -46,7 +47,7 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 		'''
 			package «ac.getPackage»;
 			
-			«IF GlobalSettings::generateMSCInstrumentation»
+			«IF Main::settings.generateMSCInstrumentation»
 				import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 			«ENDIF»
 			import org.eclipse.etrice.runtime.java.modelbase.IEventReceiver;
@@ -74,7 +75,7 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 						«ENDIF»
 					«ENDFOR»
 				}
-				«IF GlobalSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					
 					@Override
 					protected void logCreation(String actorClass, String name) {

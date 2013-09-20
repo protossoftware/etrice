@@ -32,8 +32,8 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.core.room.PortClass
-import org.eclipse.etrice.generator.cpp.GeneratorOptions
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.cpp.Main
 
 /**
  * @author Peter Karlitschek
@@ -189,7 +189,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCppHeaderFileName»"
 		#include "common/debugging/DebuggingService.h"
 		#include <iostream>
-		«IF GeneratorOptions::useEtUnit»
+		«IF Main::settings.isUseEtUnit»
 			extern "C" {
 				#include "etUnit.h"
 			}

@@ -12,22 +12,17 @@
 
 package org.eclipse.etrice.generator.c;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
-import org.eclipse.etrice.generator.base.IncrementalGenerationFileIo;
 import org.eclipse.etrice.generator.c.gen.Validator;
 import org.eclipse.etrice.generator.c.setup.GeneratorModule;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
-import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 
 import com.google.inject.Inject;
 
@@ -69,34 +64,14 @@ import com.google.inject.Inject;
  *
  */
 public class Main extends AbstractGenerator {
-	
-	public static final String OPTION_LIB = "-lib";
-	public static final String OPTION_NOEXIT = "-noexit";
-	public static final String OPTION_GEN_INST_DIAG = "-genInstDiag";
-	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
-	public static final String OPTION_GEN_INCREMENTAL = "-inc";
-	public static final String OPTION_GEN_DIR = "-genDir";
-	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
-	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
-	public static final String OPTION_DEBUG = "-debug";
-	public static final String OPTION_MSC = "-msc_instr";
-	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 
 	/**
-	 * print usage message to stderr
+	 * print usage message to output/console
 	 */
-	private static void printUsage() {
-		output.println(Main.class.getName()+" [-saveGenModel <genmodel path>] [-genInstDiag] [-lib] [-inc] [-debug] [-genDir <generation directory>] [-genInfoDir <generation info directory>] [-genInfoDir <gen documentation directory>] <list of model file paths>");
-		output.println("      <list of model file paths>         # model file paths may be specified as");
-		output.println("                                         # e.g. C:\\path\\to\\model\\mymodel.room");
-		output.println("      -saveGenModel <genmodel path>      # if specified the generator model will be saved to this location");
-		output.println("      -genInstDiag                       # if specified an instance diagram is created for each subsystem");
-		output.println("      -lib                               # if specified all classes are generated and no instances");
-		output.println("      -noexit                            # if specified the JVM is not exited");
-		output.println("      -inc                               # if specified the generation is incremental");
-		output.println("      -genDir <generation directory>     # the directory for generated files");
-		output.println("      -genInfoDir <generation info dir>  # the directory for generated info files");
-		output.println("      -genDocDir <gen documentation dir> # the directory for generated documentation files");
+	protected void printUsage() {
+		output.println(this.getClass().getName()+getCommonOptions()
+				+" <list of model file paths>");
+		output.println(getCommonOptionDescriptions());
 	}
 
 	public static void main(String[] args) {
@@ -116,96 +91,14 @@ public class Main extends AbstractGenerator {
 	
 	@Inject
 	protected IDataConfiguration dataConfig;
-	
-	
-	public int runGenerator(String[] args) {
-		if (args.length == 0) {
-			return usageError("no arguments!");
-		}
 
-		// setting defaults
-		String genModelPath = null;
-		List<String> uriList = new ArrayList<String>();
-		boolean genInstDiag = false;
-		boolean asLibrary = false;
-		boolean debug = false;
-		IncrementalGenerationFileIo.setGenerateIncremental(false);
-		RoomExtensions.setDefaultGenDir();
-		RoomExtensions.setDefaultGenInfoDir();
-		RoomExtensions.setDefaultGenDocDir();
-		GlobalGeneratorSettings.reset();
-		
-		// parsing arguments
-		for (int i=0; i<args.length; ++i) {
-			if (args[i].equals(OPTION_SAVE_GEN_MODEL)) {
-				if (++i<args.length) {
-					genModelPath = args[i]+"/genmodel.egm";
-				}
-				else {
-					return usageError(OPTION_SAVE_GEN_MODEL+" needs path");
-				}
-			}
-			else if (args[i].equals(OPTION_GEN_DIR)) {
-				if (++i<args.length) {
-					RoomExtensions.setGenDir(args[i]);
-				}
-				else {
-					return usageError(OPTION_GEN_DIR+" needs directory");
-				}
-			}
-			else if (args[i].equals(OPTION_GEN_INFO_DIR)) {
-				if (++i<args.length) {
-					RoomExtensions.setGenInfoDir(args[i]);
-				}
-				else {
-					return usageError(OPTION_GEN_INFO_DIR+" needs directory");
-				}
-			}
-			else if (args[i].equals(OPTION_GEN_DOC_DIR)) {
-				if (++i<args.length) {
-					RoomExtensions.setGenDocDir(args[i]);
-				}
-				else {
-					return usageError(OPTION_GEN_DOC_DIR+" needs directory");
-				}
-			}
-			else if (args[i].equals(OPTION_GEN_INCREMENTAL)) {
-				IncrementalGenerationFileIo.setGenerateIncremental(true);
-			}
-			else if (args[i].equals(OPTION_GEN_INST_DIAG)) {
-				genInstDiag = true;
-			}
-			else if (args[i].equals(OPTION_LIB)) {
-				asLibrary = true;
-			}
-			else if (args[i].equals(OPTION_NOEXIT)) {
-				setTerminateOnError(false);
-			}
-			else if (args[i].equals(OPTION_MSC)) {
-				GlobalGeneratorSettings.setGenerateMSCInstrumentation(true);
-			}
-			else if (args[i].equals(OPTION_VERBOSE_RT)) {
-				GlobalGeneratorSettings.setGenerateWithVerboseOutput(true);
-			}
-			else if (args[i].equals(OPTION_DEBUG)) {
-				debug = true;
-			}
-			else {
-				uriList.add(args[i]);
-			}
-		}
-
-		setupRoomModel();
-		dataConfig.doSetup();
-		setupMappingModel();
-		setupPhysicalModel();
-
-		if (!runGenerator(uriList, genModelPath, genInstDiag, asLibrary, debug))
-			return GENERATOR_ERROR;
-		
-		return GENERATOR_OK;
+	/**
+	 * @return the unique {@link GlobalSettings}
+	 */
+	public static GlobalGeneratorSettings getSettings() {
+		return (GlobalGeneratorSettings) getInstance().getGeneratorSettings();
 	}
-
+	
 	/**
 	 * setup the eTrice mapping model plug-in
 	 */
@@ -223,46 +116,45 @@ public class Main extends AbstractGenerator {
 			ETPhysStandaloneSetup.doSetup();
 	}
 
-	protected int usageError(String text) {
-		logger.logError(Main.class.getName() + " - aborting: " + text, null);
-		printUsage();
-		return GENERATOR_ERROR;
-	}
-
-	protected boolean runGenerator(List<String> uriList, String genModelPath, boolean genInstDiag, boolean asLibrary, boolean debug) {
-		if (!loadModels(uriList)) {
+	protected int runGenerator() {
+		setupRoomModel();
+		dataConfig.doSetup();
+		setupMappingModel();
+		setupPhysicalModel();
+		
+		if (!loadModels(getSettings().getInputModelURIs())) {
 			logger.logInfo("loading of models failed");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 
 		if (!validateModels()) {
 			logger.logInfo("validation failed");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 
 		if (!dataConfig.setResources(getResourceSet(), logger)) {
 			logger.logInfo("configuration errors");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 		
-		Root genModel = createGeneratorModel(asLibrary, genModelPath);
+		Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logInfo("errors during build of generator model");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 		
 		if (!validator.validate(genModel)) {
 			logger.logInfo("validation failed during build of generator model");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 		
 		ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
-		if (debug) {
+		if (getSettings().isDebugMode()) {
 			logger.logInfo("-- begin dump of mappings");
 			logger.logInfo(ETMapUtil.dumpMappings());
 			logger.logInfo("-- end dump of mappings");
@@ -270,24 +162,24 @@ public class Main extends AbstractGenerator {
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logInfo("errors in mapping");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 		
 		logger.logInfo("-- starting code generation");
 		fileAccess.setOutputPath("src-gen/");
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
-		if (genInstDiag) {
+		if (getSettings().isGenerateDocumentation()) {
 			mainDocGenerator.doGenerate(genModel);
 		}
 		
 		if (diagnostician.isFailed()) {
 			logger.logInfo("errors during code generation");
 			logger.logError("-- terminating", null);
-			return false;
+			return GENERATOR_ERROR;
 		}
 		logger.logInfo("-- finished code generation");
 		
-		return true;
+		return GENERATOR_OK;
 	}
 }

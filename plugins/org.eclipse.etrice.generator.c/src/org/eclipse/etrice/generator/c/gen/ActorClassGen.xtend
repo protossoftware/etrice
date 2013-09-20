@@ -28,7 +28,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
+import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -70,7 +70,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
-							|| GlobalGeneratorSettings::generateMSCInstrumentation
+							|| Main::settings.generateMSCInstrumentation
 		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
 		
 	'''
@@ -100,7 +100,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* const part of ActorClass (ROM) */
 		«IF hasConstData»
 			typedef struct «ac.name»_const {
-				«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					const char* instName;
 					
 				«ENDIF»

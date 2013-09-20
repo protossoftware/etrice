@@ -19,7 +19,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
+import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -62,7 +62,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		val ac = xpac.actorClass
 		val states = xpac.stateMachine.baseStateList.getLeafStatesLast
 		'''
-			«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+			«IF Main::settings.generateMSCInstrumentation»
 				/* state names */
 				static char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
 				«ENDFOR»};
@@ -70,7 +70,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			
 			«langExt.accessLevelPrivate»void setState(«ac.name»* self, «stateType» new_state) {
 				self->state = new_state;
-				«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
 				«ENDIF»
 			}

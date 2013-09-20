@@ -12,6 +12,9 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author Henrik Rentz-Reichert
@@ -19,29 +22,65 @@ package org.eclipse.etrice.generator.base;
  */
 public class GlobalGeneratorSettings {
 
-	private static boolean generateMSCInstrumentation = false;
-	private static boolean generateWithVerboseOutput = false;
-
-	public static void reset() {
-		generateMSCInstrumentation = false;
-		generateWithVerboseOutput = false;
-	}
-
-	public static boolean generateMSCInstrumentation() {
+	private List<String> inputModelURIs = new ArrayList<String>();
+	private boolean generateMSCInstrumentation = false;
+	private boolean generateWithVerboseOutput = false;
+	private String generatorModelPath = null;
+	private boolean generateDocumentation = false;
+	private boolean generateAsLibrary = false;
+	private boolean debugMode = false;
+	
+	public boolean generateMSCInstrumentation() {
 		return generateMSCInstrumentation;
 	}
 
-	public static void setGenerateMSCInstrumentation(
+	public void setGenerateMSCInstrumentation(
 			boolean generateMSCInstrumentation) {
-		GlobalGeneratorSettings.generateMSCInstrumentation = generateMSCInstrumentation;
+		this.generateMSCInstrumentation = generateMSCInstrumentation;
 	}
 
-	public static boolean generateWithVerboseOutput() {
+	public boolean generateWithVerboseOutput() {
 		return generateWithVerboseOutput;
 	}
 
-	public static void setGenerateWithVerboseOutput(boolean generateWithVerboseOutput) {
-		GlobalGeneratorSettings.generateWithVerboseOutput = generateWithVerboseOutput;
+	public void setGenerateWithVerboseOutput(boolean generateWithVerboseOutput) {
+		this.generateWithVerboseOutput = generateWithVerboseOutput;
+	}
+
+	public List<String> getInputModelURIs() {
+		return inputModelURIs;
+	}
+
+	public String getGeneratorModelPath() {
+		return generatorModelPath;
+	}
+
+	public void setGeneratorModelPath(String generatorModelPath) {
+		this.generatorModelPath = generatorModelPath;
+	}
+
+	public boolean isGenerateDocumentation() {
+		return generateDocumentation;
+	}
+
+	public void setGenerateDocumentation(boolean generateDocumentation) {
+		this.generateDocumentation = generateDocumentation;
+	}
+
+	public boolean isGenerateAsLibrary() {
+		return generateAsLibrary;
+	}
+
+	public void setGenerateAsLibrary(boolean generateAsLibrary) {
+		this.generateAsLibrary = generateAsLibrary;
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
 	}
 
 }

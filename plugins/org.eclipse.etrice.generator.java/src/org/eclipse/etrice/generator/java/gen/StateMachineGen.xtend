@@ -20,6 +20,7 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.etrice.core.room.State
 import java.util.ArrayList
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -35,7 +36,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			ac = ac.base
 		}
 	'''
-		«IF GlobalSettings::generateMSCInstrumentation || GlobalSettings::generateWithVerboseOutput»
+		«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»
 			// state names
 			protected static final String stateStrings[] = {
 				"<no state>",
@@ -55,10 +56,10 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		protected int history[] = {NO_STATE, NO_STATE«FOR state : states», NO_STATE«ENDFOR»};
 		
 		private void setState(int new_state) {
-			«IF GlobalSettings::generateMSCInstrumentation»
+			«IF Main::settings.generateMSCInstrumentation»
 				DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
 			«ENDIF»
-			«IF GlobalSettings::generateWithVerboseOutput»
+			«IF Main::settings.generateWithVerboseOutput»
 				if (stateStrings[new_state]!="Idle") {
 					System.out.println("state switch of "+getInstancePath() + ": "
 							+ stateStrings[this.state] + " -> " + stateStrings[new_state]);

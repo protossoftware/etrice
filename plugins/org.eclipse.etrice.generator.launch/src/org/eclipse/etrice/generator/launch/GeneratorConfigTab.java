@@ -135,7 +135,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		documentationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		documentationButton.addSelectionListener(new UpdateConfig());
 
-		debugButton = createCheckButton(mainComposite, "debug output");
+		debugButton = createCheckButton(mainComposite, "generate debug output");
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		debugButton.addSelectionListener(new UpdateConfig());
 

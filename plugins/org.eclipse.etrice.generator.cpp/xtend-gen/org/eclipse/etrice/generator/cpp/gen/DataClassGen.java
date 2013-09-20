@@ -26,8 +26,9 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.cpp.GeneratorOptions;
+import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.GeneratorSettings;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -355,7 +356,8 @@ public class DataClassGen {
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       {
-        boolean _isUseEtUnit = GeneratorOptions.isUseEtUnit();
+        GeneratorSettings _settings = Main.getSettings();
+        boolean _isUseEtUnit = _settings.isUseEtUnit();
         if (_isUseEtUnit) {
           _builder.append("extern \"C\" {");
           _builder.newLine();

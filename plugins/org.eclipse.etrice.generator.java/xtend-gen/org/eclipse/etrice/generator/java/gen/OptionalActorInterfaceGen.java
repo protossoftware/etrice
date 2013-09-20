@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -79,7 +80,8 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         if (_generateMSCInstrumentation) {
           _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
           _builder.newLine();
@@ -179,7 +181,8 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_1 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.newLine();

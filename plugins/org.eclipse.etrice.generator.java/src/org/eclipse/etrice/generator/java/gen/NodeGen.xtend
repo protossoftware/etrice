@@ -33,9 +33,9 @@ import static extension org.eclipse.etrice.generator.base.Indexed.*
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 import org.eclipse.etrice.core.room.ActorClass
 import com.google.common.collect.Sets
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import com.google.common.collect.Lists
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class NodeGen {
@@ -100,7 +100,7 @@ class NodeGen {
 		package «cc.getPackage()»;
 		
 		import org.eclipse.etrice.runtime.java.config.IVariableService;
-		«IF GlobalSettings::generateMSCInstrumentation»
+		«IF Main::settings.generateMSCInstrumentation»
 			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		«ENDIF»
 		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
@@ -179,13 +179,13 @@ class NodeGen {
 				«FOR sub : cc.actorRefs»
 					«IF sub.multiplicity>1»
 						for (int i=0; i<«sub.multiplicity»; ++i) {
-							«IF GlobalSettings::generateMSCInstrumentation»
+							«IF Main::settings.generateMSCInstrumentation»
 								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
 							«ENDIF»
 							new «sub.type.name»(this, "«sub.name»_"+i);
 						}
 					«ELSE»
-						«IF GlobalSettings::generateMSCInstrumentation»
+						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»");
 						«ENDIF»
 						new «sub.type.name»(this, "«sub.name»"); 
@@ -218,7 +218,7 @@ class NodeGen {
 			
 			@Override
 			public void init(){
-				«IF GlobalSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					DebuggingService.getInstance().addVisibleComment("begin sub system initialization");
 				«ENDIF»
 				«IF dataConfigExt.hasVariableService(comp)»
@@ -228,7 +228,7 @@ class NodeGen {
 				«IF dataConfigExt.hasVariableService(comp)»
 					variableService.init();
 				«ENDIF»
-				«IF GlobalSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					DebuggingService.getInstance().addVisibleComment("done sub system initialization");
 				«ENDIF»
 			}
@@ -240,7 +240,7 @@ class NodeGen {
 					variableService.stop();
 				«ENDIF»
 			}
-			«IF GlobalSettings::generateMSCInstrumentation»
+			«IF Main::settings.generateMSCInstrumentation»
 				
 				@Override
 				public void destroy() {

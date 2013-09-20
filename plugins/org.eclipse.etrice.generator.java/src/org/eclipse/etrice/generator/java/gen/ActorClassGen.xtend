@@ -27,6 +27,7 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -59,7 +60,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
-		val impPersist = if (GlobalSettings::generatePersistenceInterface) "implements IPersistable " else ""
+		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
 		val baseClass = if (ac.base!=null) ac.base.name else
 			if (ac.getAttribute("ActorBaseClass", "class").empty) "ActorClassBase" else ac.getAttribute("ActorBaseClass", "class")
 		val baseClassImport = if (ac.getAttribute("ActorBaseClass", "class").empty) "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase"
@@ -71,7 +72,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty»
 			import org.eclipse.etrice.runtime.java.config.DynConfigLock;
 		«ENDIF»
-		«IF GlobalSettings::generatePersistenceInterface»
+		«IF Main::settings.generatePersistenceInterface»
 			import org.eclipse.etrice.runtime.java.modelbase.IPersistable;
 			import java.io.IOException;
 			import java.io.ObjectInput;
@@ -163,13 +164,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«sub.name» = new «sub.type.name»«IF sub.multiplicity!=1»Replicated«ENDIF»Interface(this, "«sub.name»");
 					«ELSEIF sub.multiplicity>1»
 						for (int i=0; i<«sub.multiplicity»; ++i) {
-							«IF GlobalSettings::generateMSCInstrumentation»
+							«IF Main::settings.generateMSCInstrumentation»
 								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
 							«ENDIF»
 							new «sub.type.name»(this, "«sub.name»_"+i);
 						}
 					«ELSE»
-						«IF GlobalSettings::generateMSCInstrumentation»
+						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»");
 						«ENDIF»
 						new «sub.type.name»(this, "«sub.name»");
@@ -223,13 +224,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ELSE»
 					public void destroy(){
 						«ac.name.destructorCall»;
-						«IF GlobalSettings::generateMSCInstrumentation»
+						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorDestroy(this);
 						«ENDIF»
 						super.destroy();
 					}
 				«ENDIF»
-			«ELSEIF GlobalSettings::generateMSCInstrumentation»
+			«ELSEIF Main::settings.generateMSCInstrumentation»
 				public void destroy() {
 					DebuggingService.getInstance().addMessageActorDestroy(this);
 					super.destroy();
@@ -251,7 +252,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					public void executeInitTransition() {}
 				«ENDIF»
 			«ENDIF»
-			«IF GlobalSettings::generatePersistenceInterface»
+			«IF Main::settings.generatePersistenceInterface»
 				
 				@Override
 				public void saveObject(ObjectOutput output) throws IOException {

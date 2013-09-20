@@ -54,6 +54,7 @@ import org.eclipse.etrice.generator.base.Indexed;
 import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
@@ -211,7 +212,8 @@ public class NodeGen {
       _builder.append("import org.eclipse.etrice.runtime.java.config.IVariableService;");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         if (_generateMSCInstrumentation) {
           _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
           _builder.newLine();
@@ -502,7 +504,8 @@ public class NodeGen {
               _builder.append("; ++i) {");
               _builder.newLineIfNotEmpty();
               {
-                boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+                GlobalSettings _settings_1 = Main.getSettings();
+                boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_1) {
                   _builder.append("\t\t");
                   _builder.append("\t");
@@ -529,7 +532,8 @@ public class NodeGen {
               _builder.newLine();
             } else {
               {
-                boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+                GlobalSettings _settings_2 = Main.getSettings();
+                boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_2) {
                   _builder.append("\t\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
@@ -664,7 +668,8 @@ public class NodeGen {
       _builder.append("public void init(){");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_3 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_3 = Main.getSettings();
+        boolean _generateMSCInstrumentation_3 = _settings_3.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_3) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addVisibleComment(\"begin sub system initialization\");");
@@ -693,7 +698,8 @@ public class NodeGen {
         }
       }
       {
-        boolean _generateMSCInstrumentation_4 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_4 = Main.getSettings();
+        boolean _generateMSCInstrumentation_4 = _settings_4.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_4) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addVisibleComment(\"done sub system initialization\");");
@@ -726,7 +732,8 @@ public class NodeGen {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_5 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_5 = Main.getSettings();
+        boolean _generateMSCInstrumentation_5 = _settings_5.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_5) {
           _builder.append("\t");
           _builder.newLine();

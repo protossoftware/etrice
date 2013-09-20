@@ -21,11 +21,14 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
@@ -40,6 +43,7 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -185,7 +189,42 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @param argString
 	 * @throws CoreException
 	 */
-	protected abstract void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException;
+	@SuppressWarnings("deprecation")	// keep compatible
+	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
+		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_LIB);
+		}
+		if (configuration.getAttribute(GeneratorConfigTab.SAVE_GEN_MODEL, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_SAVE_GEN_MODEL);
+			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?"));
+		}
+		if (configuration.getAttribute(GeneratorConfigTab.GEN_DOCUMENTATION, false)
+				|| configuration.getAttribute(GeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
+			argString.append(" "+AbstractGenerator.OPTION_DOCUMENTATION);
+		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_DEBUG);
+		}
+		if (configuration.getAttribute(GeneratorConfigTab.MSC, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_MSC);
+		}
+		if (configuration.getAttribute(GeneratorConfigTab.VERBOSE, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_VERBOSE_RT);
+		}
+		
+		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {
+			argString.append(" "+AbstractGenerator.OPTION_GEN_INCREMENTAL);
+		}
+		
+		argString.append(" "+AbstractGenerator.OPTION_GEN_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DIR));
+		
+		argString.append(" "+AbstractGenerator.OPTION_GEN_INFO_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
+		
+		argString.append(" "+AbstractGenerator.OPTION_GEN_DOC_DIR);
+		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DOC_DIR));
+	}
 	
 	/**
 	 * call the generator main method

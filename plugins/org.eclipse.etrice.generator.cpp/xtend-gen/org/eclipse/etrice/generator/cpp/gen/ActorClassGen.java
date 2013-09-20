@@ -33,8 +33,9 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.cpp.GeneratorOptions;
+import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.GeneratorSettings;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.cpp.gen.StateMachineGen;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -175,7 +176,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("#include \"common/debugging/DebuggingService.h\"");
     _builder.newLine();
     {
-      boolean _isUseEtUnit = GeneratorOptions.isUseEtUnit();
+      GeneratorSettings _settings = Main.getSettings();
+      boolean _isUseEtUnit = _settings.isUseEtUnit();
       if (_isUseEtUnit) {
         _builder.append("\t");
         _builder.append("extern \"C\" {");

@@ -24,9 +24,9 @@ import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.cpp.GeneratorOptions
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.generator.cpp.Main
 
 /**
  * @author Peter Karlitschek
@@ -80,7 +80,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/IMessageReceiver.h"
 		#include "common/debugging/DebuggingService.h"
-		«IF GeneratorOptions::useEtUnit»
+		«IF Main::settings.isUseEtUnit»
 			extern "C" {
 				#include "etUnit.h"
 			}

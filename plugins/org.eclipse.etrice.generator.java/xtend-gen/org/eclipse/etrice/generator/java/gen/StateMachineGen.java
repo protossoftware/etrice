@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
@@ -48,11 +49,13 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _or = false;
-        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         if (_generateMSCInstrumentation) {
           _or = true;
         } else {
-          boolean _generateWithVerboseOutput = GlobalSettings.generateWithVerboseOutput();
+          GlobalSettings _settings_1 = Main.getSettings();
+          boolean _generateWithVerboseOutput = _settings_1.generateWithVerboseOutput();
           _or = (_generateMSCInstrumentation || _generateWithVerboseOutput);
         }
         if (_or) {
@@ -102,7 +105,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("private void setState(int new_state) {");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_2 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_2.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
@@ -110,7 +114,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
         }
       }
       {
-        boolean _generateWithVerboseOutput_1 = GlobalSettings.generateWithVerboseOutput();
+        GlobalSettings _settings_3 = Main.getSettings();
+        boolean _generateWithVerboseOutput_1 = _settings_3.generateWithVerboseOutput();
         if (_generateWithVerboseOutput_1) {
           _builder.append("\t");
           _builder.append("if (stateStrings[new_state]!=\"Idle\") {");

@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -193,7 +194,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (_not) {
         _or = true;
       } else {
-        boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         _or = (_not || _generateMSCInstrumentation);
       }
       final boolean hasConstData = _or;
@@ -294,7 +296,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("_const {");
           _builder.newLineIfNotEmpty();
           {
-            boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+            GlobalGeneratorSettings _settings_1 = Main.getSettings();
+            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
             if (_generateMSCInstrumentation_1) {
               _builder.append("\t");
               _builder.append("const char* instName;");

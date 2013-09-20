@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
+import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -122,7 +123,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       final List<State> states = this._roomExtensions.getLeafStatesLast(_baseStateList);
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         if (_generateMSCInstrumentation) {
           _builder.append("/* state names */");
           _builder.newLine();
@@ -161,7 +163,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("self->state = new_state;");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])");

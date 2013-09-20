@@ -35,6 +35,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -176,7 +177,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
     _builder.newLine();
     {
-      boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (_generateMSCInstrumentation) {
         _builder.append("/*--------------------- debug helpers */");
         _builder.newLine();
@@ -250,7 +252,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         {
-          boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+          GlobalGeneratorSettings _settings = Main.getSettings();
+          boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
           if (_generateMSCInstrumentation) {
             _builder.append("/*--------------------- debug helpers */");
             _builder.newLine();
@@ -854,7 +857,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append(_sendMessageCall, "		");
               _builder.newLineIfNotEmpty();
               {
-                boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+                GlobalGeneratorSettings _settings = Main.getSettings();
+                boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation) {
                   _builder.append("\t");
                   _builder.append("\t");
@@ -927,7 +931,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append(_sendMessageCall_1, "		");
               _builder.newLineIfNotEmpty();
               {
-                boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+                GlobalGeneratorSettings _settings_1 = Main.getSettings();
+                boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_1) {
                   _builder.append("\t");
                   _builder.append("\t");
@@ -991,7 +996,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append(_sendMessageCall_2, "		");
               _builder.newLineIfNotEmpty();
               {
-                boolean _generateMSCInstrumentation_2 = GlobalGeneratorSettings.generateMSCInstrumentation();
+                GlobalGeneratorSettings _settings_2 = Main.getSettings();
+                boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_2) {
                   _builder.append("\t");
                   _builder.append("\t");

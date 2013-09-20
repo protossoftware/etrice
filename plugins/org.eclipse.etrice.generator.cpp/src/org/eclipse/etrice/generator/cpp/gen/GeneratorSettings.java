@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.java.gen;
+package org.eclipse.etrice.generator.cpp.gen;
 
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 
@@ -18,21 +18,15 @@ import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
  * @author Henrik Rentz-Reichert
  *
  */
-public class GlobalSettings extends GlobalGeneratorSettings {
-	
-	private boolean generatePersistenceInterface = false;
-	
-	/**
-	 * @return the generatePersistenceInterface
-	 */
-	public boolean isGeneratePersistenceInterface() {
-		return generatePersistenceInterface;
+public class GeneratorSettings extends GlobalGeneratorSettings {
+
+	private boolean useEtUnit = false;
+
+	public boolean isUseEtUnit() {
+		return useEtUnit;
 	}
 
-	/**
-	 * @param generatePersistenceInterface the generatePersistenceInterface to set
-	 */
-	public void setGeneratePersistenceInterface(boolean generatePersistenceInterface) {
-		this.generatePersistenceInterface = generatePersistenceInterface;
+	public void setUseEtUnit(boolean useEtUnit) {
+		this.useEtUnit = useEtUnit;
 	}
 }

@@ -39,6 +39,7 @@ import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.Initialization;
@@ -143,7 +144,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       final EList<RoomModel> models = root.getReferencedModels(ac);
       String _xifexpression_1 = null;
-      boolean _isGeneratePersistenceInterface = GlobalSettings.isGeneratePersistenceInterface();
+      GlobalSettings _settings = Main.getSettings();
+      boolean _isGeneratePersistenceInterface = _settings.isGeneratePersistenceInterface();
       if (_isGeneratePersistenceInterface) {
         _xifexpression_1 = "implements IPersistable ";
       } else {
@@ -200,7 +202,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        boolean _isGeneratePersistenceInterface_1 = GlobalSettings.isGeneratePersistenceInterface();
+        GlobalSettings _settings_1 = Main.getSettings();
+        boolean _isGeneratePersistenceInterface_1 = _settings_1.isGeneratePersistenceInterface();
         if (_isGeneratePersistenceInterface_1) {
           _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IPersistable;");
           _builder.newLine();
@@ -579,7 +582,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("; ++i) {");
                 _builder.newLineIfNotEmpty();
                 {
-                  boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+                  GlobalSettings _settings_2 = Main.getSettings();
+                  boolean _generateMSCInstrumentation = _settings_2.generateMSCInstrumentation();
                   if (_generateMSCInstrumentation) {
                     _builder.append("\t\t");
                     _builder.append("\t");
@@ -606,7 +610,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.newLine();
               } else {
                 {
-                  boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+                  GlobalSettings _settings_3 = Main.getSettings();
+                  boolean _generateMSCInstrumentation_1 = _settings_3.generateMSCInstrumentation();
                   if (_generateMSCInstrumentation_1) {
                     _builder.append("\t\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
@@ -798,7 +803,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(";");
               _builder.newLineIfNotEmpty();
               {
-                boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+                GlobalSettings _settings_4 = Main.getSettings();
+                boolean _generateMSCInstrumentation_2 = _settings_4.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_2) {
                   _builder.append("\t");
                   _builder.append("\t");
@@ -816,7 +822,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
         } else {
-          boolean _generateMSCInstrumentation_3 = GlobalSettings.generateMSCInstrumentation();
+          GlobalSettings _settings_5 = Main.getSettings();
+          boolean _generateMSCInstrumentation_3 = _settings_5.generateMSCInstrumentation();
           if (_generateMSCInstrumentation_3) {
             _builder.append("\t");
             _builder.append("public void destroy() {");
@@ -880,7 +887,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        boolean _isGeneratePersistenceInterface_2 = GlobalSettings.isGeneratePersistenceInterface();
+        GlobalSettings _settings_6 = Main.getSettings();
+        boolean _isGeneratePersistenceInterface_2 = _settings_6.isGeneratePersistenceInterface();
         if (_isGeneratePersistenceInterface_2) {
           _builder.append("\t");
           _builder.newLine();

@@ -16,9 +16,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.EMFPlugin;
@@ -36,6 +38,7 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -66,6 +69,18 @@ import com.google.inject.Provider;
  *
  */
 public abstract class AbstractGenerator implements IResourceURIAcceptor {
+	
+	public static final String OPTION_LIB = "-lib";
+	public static final String OPTION_NOEXIT = "-noexit";
+	public static final String OPTION_DOCUMENTATION = "-genDocu";
+	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
+	public static final String OPTION_GEN_INCREMENTAL = "-inc";
+	public static final String OPTION_GEN_DIR = "-genDir";
+	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
+	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
+	public static final String OPTION_MSC = "-msc_instr";
+	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
+	public static final String OPTION_DEBUG = "-debug";
 
 	/**
 	 * constant used as return value of {@link #runGenerator(String[])}
@@ -136,6 +151,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		return instance;
 	}
 	
+	/**
+	 * The protected constructor is setting the {@link #instance} static member
+	 */
 	protected AbstractGenerator() {
 		instance = this;
 	}
@@ -143,15 +161,184 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	/**
 	 * creates an instance of the generator and invokes the {@link #runGenerator(String[])} method
 	 * @param generatorModule a Guice module from which the {@link com.google.inject.Injector Injector} is created
-	 * @return
+	 * @param args the command line arguments
+	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
 	protected static int createAndRunGenerator(Module generatorModule, String[] args) {
 		injector = Guice.createInjector(generatorModule);
 		AbstractGenerator generator = injector.getInstance(AbstractGenerator.class);
 		generator.logger.setOutput(output);
-		return generator.runGenerator(args);
+		
+		if (!generator.parseOptions(args))
+			return GENERATOR_ERROR;
+		
+		return generator.runGenerator();
 	}
 
+	/**
+	 * Initialize {@link GlobalGeneratorSettings} and parse all options by calling
+	 * {@link #parseOption(String, Iterator)}.
+	 * 
+	 * @param args the command line arguments
+	 * @return {@code true} if all options could be parsed successfully
+	 */
+	protected boolean parseOptions(String[] args) {
+		if (args.length == 0) {
+			return usageError("no arguments!");
+		}
+		
+		// default settings
+		RoomExtensions.setDefaultGenDir();
+		RoomExtensions.setDefaultGenInfoDir();
+		RoomExtensions.setDefaultGenDocDir();
+		IncrementalGenerationFileIo.setGenerateIncremental(false);
+		
+		List<String> argList = Arrays.asList(args);
+		for (Iterator<String> it = argList.iterator(); it.hasNext();) {
+			if (!parseOption(it.next(), it))
+				return false;
+		}
+		
+		return true;
+	}
+
+	/**
+	 * This method may be overridden by the concrete generator. After checking options super should be called
+	 * and its return value should be returned.
+	 * 
+	 * <p>
+	 * The following options are recognized
+	 * <ul>
+	 * <li>{@value #OPTION_DEBUG}</li>
+	 * <li>{@value #OPTION_DOCUMENTATION}</li>
+	 * <li>{@value #OPTION_GEN_DIR}</li>
+	 * <li>{@value #OPTION_GEN_DOC_DIR}</li>
+	 * <li>{@value #OPTION_GEN_INCREMENTAL}</li>
+	 * <li>{@value #OPTION_GEN_INFO_DIR}</li>
+	 * <li>{@value #OPTION_LIB}</li>
+	 * <li>{@value #OPTION_MSC}</li>
+	 * <li>{@value #OPTION_NOEXIT}</li>
+	 * <li>{@value #OPTION_SAVE_GEN_MODEL}</li>
+	 * <li>{@value #OPTION_VERBOSE_RT}</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param arg the current argument
+	 * @param it an iterator to retrieve subsequent arguments
+	 * @return {@code true} if the option was parsed successfully
+	 */
+	protected boolean parseOption(String arg, Iterator<String> it) {
+		if (arg.equals(OPTION_SAVE_GEN_MODEL)) {
+			if (it.hasNext()) {
+				generatorSettings.setGeneratorModelPath(it.next()+"/genmodel.egm");
+			}
+			else {
+				return usageError(OPTION_SAVE_GEN_MODEL+" needs path");
+			}
+		}
+		else if (arg.equals(OPTION_GEN_DIR)) {
+			if (it.hasNext()) {
+				RoomExtensions.setGenDir(it.next());
+			}
+			else {
+				return usageError(OPTION_GEN_DIR+" needs directory");
+			}
+		}
+		else if (arg.equals(OPTION_GEN_INFO_DIR)) {
+			if (it.hasNext()) {
+				RoomExtensions.setGenInfoDir(it.next());
+			}
+			else {
+				return usageError(OPTION_GEN_INFO_DIR+" needs directory");
+			}
+		}
+		else if (arg.equals(OPTION_GEN_DOC_DIR)) {
+			if (it.hasNext()) {
+				RoomExtensions.setGenDocDir(it.next());
+			}
+			else {
+				return usageError(OPTION_GEN_DOC_DIR+" needs directory");
+			}
+		}
+		else if (arg.equals(OPTION_GEN_INCREMENTAL)) {
+			IncrementalGenerationFileIo.setGenerateIncremental(true);
+		}
+		else if (arg.equals(OPTION_DOCUMENTATION)) {
+			generatorSettings.setGenerateDocumentation(true);
+		}
+		else if (arg.equals(OPTION_LIB)) {
+			generatorSettings.setGenerateAsLibrary(true);
+		}
+		else if (arg.equals(OPTION_NOEXIT)) {
+			setTerminateOnError(false);
+		}
+		else if (arg.equals(OPTION_MSC)) {
+			generatorSettings.setGenerateMSCInstrumentation(true);
+		}
+		else if (arg.equals(OPTION_VERBOSE_RT)) {
+			generatorSettings.setGenerateWithVerboseOutput(true);
+		}
+		else if (arg.equals(OPTION_DEBUG)) {
+			generatorSettings.setDebugMode(true);
+		}
+		else {
+			generatorSettings.getInputModelURIs().add(arg);
+		}
+		
+		return true;
+	}
+
+	/**
+	 * This method logs an error followed by a call to {@link #printUsage()}.
+	 * 
+	 * @param text the error text to be shown
+	 * @return {@code false}
+	 */
+	protected boolean usageError(String text) {
+		logger.logError(this.getClass().getName() + " - aborting: " + text, null);
+		printUsage();
+		return false;
+	}
+
+	/**
+	 * This method should show all possible command line options together with a
+	 * description. It is supposed to use {@link #getCommonOptions()} and
+	 * {@link #getCommonOptionDescriptions()}.
+	 */
+	protected abstract void printUsage();
+
+	protected String getCommonOptions() {
+		return " ["+OPTION_SAVE_GEN_MODEL+" <genmodel path>]"
+				+" ["+OPTION_DOCUMENTATION+"]"
+				+" ["+OPTION_LIB+"]"
+				+" ["+OPTION_NOEXIT+"]"
+				+" ["+OPTION_SAVE_GEN_MODEL+" <genmodel path>]"
+				+" ["+OPTION_GEN_INCREMENTAL
+				+" ["+OPTION_GEN_DIR+" <generation directory>]"
+				+" ["+OPTION_GEN_INFO_DIR+" <generation info directory>]"
+				+" ["+OPTION_GEN_DOC_DIR+" <gen documentation directory>]"
+				+" ["+OPTION_DEBUG+"]"
+				+" ["+OPTION_MSC+"]"
+				+" ["+OPTION_VERBOSE_RT+"]";
+	}
+	
+	protected String getCommonOptionDescriptions() {
+		return
+			 "      <list of model file paths>         # model file paths may be specified as\n"
+			+"                                         # e.g. C:\\path\\to\\model\\mymodel.room\n"
+			+"      -genDocu                           # if specified documentation is created\n"
+			+"      -lib                               # if specified all classes are generated and no instances\n"
+			+"      -noexit                            # if specified the JVM is not exited\n"
+			+"      -saveGenModel <genmodel path>      # if specified the generator model will be saved to this location\n"
+			+"      -inc                               # if specified the generation is incremental\n"
+			+"      -genDir <generation directory>     # the directory for generated files\n"
+			+"      -genInfoDir <generation info dir>  # the directory for generated info files\n"
+			+"      -genDocDir <gen documentation dir> # the directory for generated documentation files\n"
+			+"      -debug                             # if specified create debug output\n"
+			+"      -msc_instr                         # generate instrumentation for MSC generation\n"
+			+"      -gen_as_verbose                    # generate instrumentation for verbose console output";
+	}
+	
 	/**
 	 * Provides access to the Guice injector of the generator.
 	 * This is useful if classes with injected dependencies are instantiated manually.
@@ -197,6 +384,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 */
 	@Inject
 	protected ITranslationProvider translationProvider;
+	
+	@Inject
+	protected GlobalGeneratorSettings generatorSettings;
 	
 	/**
 	 * The rsource validator which is injected using the ROOM DSL injector
@@ -477,10 +667,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	
 	/**
 	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
-	 * @param args
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
-	protected abstract int runGenerator(String[] args);
+	protected abstract int runGenerator();
 	
 	/**
 	 * This implementation of the method normalizes the URI and adds it to the
@@ -524,6 +713,16 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		File f = new File(can);
 		can = f.getCanonicalPath();	// e.g. remove embedded ../
 		return URI.createFileURI(can);
+	}
+
+	/**
+	 * The generator settings can also be statically accessed using {@link #getInstance()} followed
+	 * by a call to this method.
+	 * 
+	 * @return the {@link #generatorSettings}
+	 */
+	public GlobalGeneratorSettings getGeneratorSettings() {
+		return generatorSettings;
 	}	
 
 }

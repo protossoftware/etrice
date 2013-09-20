@@ -59,6 +59,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.base.IntelligentSeparator;
+import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
@@ -1187,7 +1188,8 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
           {
             boolean _and = false;
-            boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+            GlobalGeneratorSettings _settings = Main.getSettings();
+            boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
             boolean _not = (!_generateMSCInstrumentation);
             if (!_not) {
               _and = false;
@@ -1367,7 +1369,8 @@ public class NodeGen {
       if (_or_1) {
         _or = true;
       } else {
-        boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         _or = (_or_1 || _generateMSCInstrumentation);
       }
       final boolean haveConstData = _or;
@@ -1423,7 +1426,8 @@ public class NodeGen {
           _builder.append("_const = {");
           _builder.newLineIfNotEmpty();
           {
-            boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+            GlobalGeneratorSettings _settings_1 = Main.getSettings();
+            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
             if (_generateMSCInstrumentation_1) {
               _builder.append("\t");
               _builder.append(sep, "	");
@@ -1627,7 +1631,8 @@ public class NodeGen {
       }
       final String msgSvc = _xifexpression_2;
       String _xifexpression_3 = null;
-      boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (_generateMSCInstrumentation) {
         EObject _eContainer_1 = pi.eContainer();
         String _path = ((ActorInstance) _eContainer_1).getPath();
@@ -1639,7 +1644,8 @@ public class NodeGen {
       }
       final String myInst = _xifexpression_3;
       String _xifexpression_4 = null;
-      boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+      GlobalGeneratorSettings _settings_1 = Main.getSettings();
+      boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
       if (_generateMSCInstrumentation_1) {
         EList<InterfaceItemInstance> _peers_7 = pi.getPeers();
         InterfaceItemInstance _get_3 = _peers_7.get(0);
@@ -1765,7 +1771,8 @@ public class NodeGen {
   private String genReplSubPortInitializers(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String result = "";
     String _xifexpression = null;
-    boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+    GlobalGeneratorSettings _settings = Main.getSettings();
+    boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
     if (_generateMSCInstrumentation) {
       EObject _eContainer = pi.eContainer();
       String _path = ((ActorInstance) _eContainer).getPath();
@@ -1797,7 +1804,8 @@ public class NodeGen {
         final String thread = _physicalThread.getName();
         String iiiD = this.getInterfaceItemInstanceData(pi);
         String _xifexpression_2 = null;
-        boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_1) {
           EObject _eContainer_2 = p.eContainer();
           String _path_1 = ((ActorInstance) _eContainer_2).getPath();
@@ -2202,7 +2210,8 @@ public class NodeGen {
                               _builder.newLine();
                             } else {
                               {
-                                boolean _generateMSCInstrumentation = GlobalGeneratorSettings.generateMSCInstrumentation();
+                                GlobalGeneratorSettings _settings = Main.getSettings();
+                                boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
                                 if (_generateMSCInstrumentation) {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
@@ -2384,7 +2393,8 @@ public class NodeGen {
                           _builder.newLine();
                         } else {
                           {
-                            boolean _generateMSCInstrumentation_1 = GlobalGeneratorSettings.generateMSCInstrumentation();
+                            GlobalGeneratorSettings _settings_1 = Main.getSettings();
+                            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
                             if (_generateMSCInstrumentation_1) {
                               _builder.append("\t\t");
                               _builder.append("\t");

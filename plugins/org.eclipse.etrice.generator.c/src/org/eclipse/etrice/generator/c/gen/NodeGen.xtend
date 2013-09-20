@@ -40,7 +40,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.base.GlobalGeneratorSettings
+import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class NodeGen {
@@ -393,7 +393,7 @@ class NodeGen {
 		«FOR ai : ssi.allContainedInstances»
 			
 			/* instance «ai.path.getPathName()» */
-			«IF !GlobalGeneratorSettings::generateMSCInstrumentation && ai.orderedIfItemInstances.empty»
+			«IF !Main::settings.generateMSCInstrumentation && ai.orderedIfItemInstances.empty»
 				/* no ports/saps/services - nothing to initialize statically */
 			«ELSE»
 				«genActorInstanceInitializer(root, ai)»
@@ -437,7 +437,7 @@ class NodeGen {
 		
 		var replSubPortsArray = if (haveReplSubItems) instName+"_repl_sub_ports" else "NULL"
 		val haveConstData = !simpleEventItems.empty || !recvPorts.empty || !replEventItems.empty
-				|| GlobalGeneratorSettings::generateMSCInstrumentation
+				|| Main::settings.generateMSCInstrumentation
 		val sep = new IntelligentSeparator(",");
 	'''
 		«IF haveReplSubItems»
@@ -450,7 +450,7 @@ class NodeGen {
 		«ENDIF»
 		«IF haveConstData»
 			static const «ai.actorClass.name»_const «instName»_const = {
-				«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					«sep»"«ai.path»"
 					
 				«ENDIF»
@@ -502,9 +502,9 @@ class NodeGen {
 		val objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		val idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getPhysicalThread(pi.peers.get(0).eContainer as ActorInstance).name
-		val myInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
+		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
 			else ""
-		val peerInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
+		val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
 			else ""
 		
 		"{"+getInterfaceItemInstanceData(pi)+", " 
@@ -551,7 +551,7 @@ class NodeGen {
 	
 	def private String genReplSubPortInitializers(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var result = ""
-		val myInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
+		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
 			else ""
 		
 		for (p: pi.peers) {
@@ -559,7 +559,7 @@ class NodeGen {
 			val comma = if (idx<pi.peers.size-1) "," else ""
 			val thread = ETMapUtil::getPhysicalThread(p.eContainer as ActorInstance).name
 			var iiiD = getInterfaceItemInstanceData(pi)
-			val peerInst = if (GlobalGeneratorSettings::generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
+			val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
 				else ""
 			iiiD = if (iiiD.equals("NULL")) iiiD+"," else iiiD+"["+idx+"],"
 			result = result +
@@ -645,7 +645,7 @@ class NodeGen {
 													break;
 												}										
 										«ELSE»
-											«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+											«IF Main::settings.generateMSCInstrumentation»
 												ET_MSC_LOGGER_ASYNC_IN(
 													«ai.path.pathName»_const.«pi.name».ports[«pi.peers.indexOf(peer)»].port.peerInstName,
 													«pi.protocol.name»_getMessageString(msg->evtID),
@@ -669,7 +669,7 @@ class NodeGen {
 												break;
 										}
 									«ELSE»
-										«IF GlobalGeneratorSettings::generateMSCInstrumentation»
+										«IF Main::settings.generateMSCInstrumentation»
 											ET_MSC_LOGGER_ASYNC_IN(
 												((etPort*)&«ai.path.pathName»_const.«pi.name»)->peerInstName,
 												«pi.protocol.name»_getMessageString(msg->evtID),

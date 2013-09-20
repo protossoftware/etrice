@@ -37,6 +37,7 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
+import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.Initialization;
@@ -149,7 +150,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;");
     _builder.newLine();
     {
-      boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+      GlobalSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (_generateMSCInstrumentation) {
         _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
         _builder.newLine();
@@ -314,7 +316,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       {
-        boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
         if (_generateMSCInstrumentation) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addPortInstance(this);");
@@ -325,7 +328,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_1 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_1 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.newLine();
@@ -365,7 +369,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {");
       _builder.newLine();
       {
-        boolean _generateMSCInstrumentation_2 = GlobalSettings.generateMSCInstrumentation();
+        GlobalSettings _settings_2 = Main.getSettings();
+        boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_2) {
           _builder.append("\t\t\t");
           _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
@@ -742,7 +747,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           }
         } else {
           {
-            boolean _generateMSCInstrumentation = GlobalSettings.generateMSCInstrumentation();
+            GlobalSettings _settings = Main.getSettings();
+            boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
             if (_generateMSCInstrumentation) {
               _builder.append("\t");
               _builder.append("if (messageStrings[ ");

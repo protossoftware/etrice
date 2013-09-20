@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -72,7 +73,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.modelbase.PortBase;
 		import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
-		«IF GlobalSettings::generateMSCInstrumentation»
+		«IF Main::settings.generateMSCInstrumentation»
 			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		«ENDIF»
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -127,11 +128,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«IF pclass!=null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
 				«ENDIF»
-				«IF GlobalSettings::generateMSCInstrumentation»
+				«IF Main::settings.generateMSCInstrumentation»
 					DebuggingService.getInstance().addPortInstance(this);
 				«ENDIF»
 			}
-			«IF GlobalSettings::generateMSCInstrumentation»
+			«IF Main::settings.generateMSCInstrumentation»
 				
 				public void destroy() {
 					DebuggingService.getInstance().removePortInstance(this);
@@ -145,7 +146,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					return;
 				EventMessage msg = (EventMessage) m;
 				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-					«IF GlobalSettings::generateMSCInstrumentation»
+					«IF Main::settings.generateMSCInstrumentation»
 						if (messageStrings[msg.getEvtId()] != "timerTick"){
 «««							TODOTS: model switch for activation
 							DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
@@ -268,7 +269,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
-					«IF GlobalSettings::generateMSCInstrumentation»
+					«IF Main::settings.generateMSCInstrumentation»
 						if (messageStrings[ «dir»_«m.name»] != "timerTick") {
 «««							TODOTS: model switch for activation
 							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
