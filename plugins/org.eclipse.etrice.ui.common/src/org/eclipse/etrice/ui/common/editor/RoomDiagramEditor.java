@@ -211,7 +211,9 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 		// show only once
 		showLostDiagramInputDialog = false;
 		MessageDialog dialog = new MessageDialog(getGraphicalControl().getShell(),
-				"Diagram out-dated", null, "Diagram input lost. Cannot find ROOM file or class for "+diagram.getName(),
+				"Diagram out-dated", null,
+				"Diagram input lost. Cannot find ROOM file or class for "+diagram.getName() +"\n\n"
+				+ "Please ensure that no whitespace or special characters are contained in any related path, file or project",
 				MessageDialog.ERROR, new String[] { "OK", "Reconnect Diagram" }, 0);
 		int result = dialog.open();
 		

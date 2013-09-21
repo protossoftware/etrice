@@ -89,7 +89,7 @@ public class ChangeDiagramInputJob extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		
 		URI diagramURI = diagram.eResource().getURI().trimFragment();
-		final IFile diagramFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(diagramURI.toPlatformString(false)));
+		final IFile diagramFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(diagramURI.toPlatformString(true)));
 		IContainer diagramFolder = diagramFile.getParent();
 		
 		// find room files in parent model folder

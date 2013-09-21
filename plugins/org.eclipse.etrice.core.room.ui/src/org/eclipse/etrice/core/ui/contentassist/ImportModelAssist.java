@@ -19,8 +19,10 @@ public class ImportModelAssist {
 	public static void addPaths(final AbstractContentProposalProvider provider, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor, final String extension) {
 		final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot().getFullPath();
-		IPath modelPath = new Path(context.getRootModel().eResource().getURI().toPlatformString(false));
-		modelPath = ResourcesPlugin.getWorkspace().getRoot().getFile(modelPath).getLocation();
+		
+		// toPlatformString(true) to support whitespace & special characters
+		IPath modelPath = new Path(context.getRootModel().eResource().getURI().toPlatformString(true));
+		modelPath = ResourcesPlugin.getWorkspace().getRoot().getFile(modelPath).getLocation();		
 		final URI modelURI = URI.createFileURI(modelPath.toOSString()).trimSegments(1);
 		IResourceProxyVisitor visitor = new IResourceProxyVisitor() {
 
