@@ -152,12 +152,12 @@ RoomModel trafficlight.example {
 			external Port controller
 			conjugated Port tcpCtrl: PTcpControl
 			conjugated Port tcpPayload: PTcpPayload
-			SAP timeout: PTimer
-			SAP blinkerTimeout: PTimer 
-			Attribute ipConfig: DTcpControl ["configuration of the IP-port for the communication with the Traffic Light GUI"]
 			ActorRef trafficLightSocket: ATcpClient
+			SAP timeout: PTimer
+			SAP blinkerTimeout: PTimer
 			Binding trafficLightSocket.ControlPort and tcpCtrl
 			Binding trafficLightSocket.PayloadPort and tcpPayload
+			Attribute ipConfig: DTcpControl ["configuration of the IP-port for the communication with the Traffic Light GUI"]
 		}
 		Behavior {
 			Operation sendString(text: string)["convenience function for sending a string over the socket"] {
@@ -274,6 +274,7 @@ RoomModel trafficlight.example {
 					entry {
 						"sendString(\"carLights=yellow\\n\");"
 						"timeout.startTimeout(1000);"
+						"// Hallo"
 					}
 				}
 				State CarRed {
@@ -288,6 +289,7 @@ RoomModel trafficlight.example {
 						"controller.greenForPedDone();"
 					}
 				}
+				State state0
 			}
 		}
 	}
