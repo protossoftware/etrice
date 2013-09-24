@@ -432,16 +432,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t\t\t");
+      _builder.append("\t\t\t");
       _builder.append("if (msg instanceof EventWithDataMessage)");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t\t\t");
       _builder.append("else");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
       _builder.newLine();
       {
