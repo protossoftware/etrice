@@ -50,7 +50,8 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 					peer = ((InterfaceItemBase) object);
 				}
 				else if (object instanceof IReplicatedInterfaceItem) {
-					peer = ((IReplicatedInterfaceItem) object).createSubInterfaceItem();
+					if (object!=this)	// avoid connecting to myself: occurs in a special situation with optional actors
+						peer = ((IReplicatedInterfaceItem) object).createSubInterfaceItem();
 				}
 				if (peer!=null) {
 					InterfaceItemBase item = createSubInterfaceItem();

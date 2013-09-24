@@ -144,17 +144,28 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 				// remainder
 				path = path.substring(sep);
 				
-				// if remainder only contains >1 segment 
+				// if remainder contains more than one segment it points into the optional actor 
 				if (path.indexOf(PATH_DELIM, 1)>=0)
 					// we add the optional actor segment
 					path = optInst+path;
+				else {
+					/* the port is our own port
+					 * a) on the interface ==> it is a broker and direct child
+					 * b) internal ==> it is a child of the optional actor
+					 */
+					IRTObject obj = super.getObject(getName()+path);
+					if (obj==null) {
+						obj = super.getObject(getName()+optInst+path);
+					}
+					return obj;
+				}
 				
 				// finally we have to prefix with our own name since the relative path has to start with that
 				path = getName()+path;
 			}
 		}
 		
-		return super.getObject(path);
+		return getParent().getObject(path);
 	}
 	
 	/**

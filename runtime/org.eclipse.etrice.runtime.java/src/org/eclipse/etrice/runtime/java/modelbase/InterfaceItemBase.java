@@ -68,7 +68,8 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			this.ownMsgReceiver = msgSvc;
 		}
 		
-		connectWithPeer();
+		if (replicator==null)
+			connectWithPeer();
 	}
 
 	protected void connectWithPeer() {
