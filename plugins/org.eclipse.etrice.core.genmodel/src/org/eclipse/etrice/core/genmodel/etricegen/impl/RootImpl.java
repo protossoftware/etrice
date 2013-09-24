@@ -893,6 +893,9 @@ public class RootImpl extends EObjectImpl implements Root {
 					}
 				}
 			}
+			for (OptionalActorInstance oai: getOptionalInstances()) {
+				actorClasses.add(oai.getActorClass());
+			}
 			
 			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
 			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
