@@ -812,7 +812,7 @@ public class GeneratorModelBuilder {
 	 */
 	private void createPortInstances(AbstractInstance ai, ActorClass ac) {
 		createPortInstances(ac.getExternalEndPorts(), PortKind.EXTERNAL, ai);
-		if (ai instanceof ActorInstance)
+		if (ai instanceof ActorInstance || ai instanceof OptionalActorInstance)
 			createPortInstances(ac.getInternalPorts(), PortKind.INTERNAL, ai);
 		createPortInstances(ac.getRelayPorts(), PortKind.RELAY, ai);
 	}
