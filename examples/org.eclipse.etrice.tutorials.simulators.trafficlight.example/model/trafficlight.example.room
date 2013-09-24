@@ -20,6 +20,16 @@ RoomModel trafficlight.example {
 	LogicalSystem LSTraffic {
 		SubSystemRef main: SSTraffic
 	}
+
+	 ActorClass ActorClassName {
+		Interface {
+			
+		}
+		Structure {
+		}
+		Behavior {
+		}
+	}		
 	
 	SubSystemClass SSTraffic ["Subsystem of Trafficlight Example Application. The Subsystem contains all Actors of the application."] {
 		ActorRef application: TrafficlightExampleApplication ["reference to application"]

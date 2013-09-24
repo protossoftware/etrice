@@ -1,0 +1,79 @@
+RoomModel TrafficlightModel {
+	
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.java/model/TcpService.room"
+	
+	LogicalSystem TrafficlightLogSys {
+		SubSystemRef subsystem:SubSys 
+	}
+	SubSystemClass SubSys {
+		ActorRef application:Application 
+		LogicalThread defaultThread
+	}
+	ActorClass Application {
+		Structure {
+			ActorRef commands: TrafficLightCommands
+		}
+		Behavior { }
+	}
+	
+	ActorClass TrafficLightCommands {
+		Interface {
+			Port fct: PTrafficLightCommands
+		}
+		Structure {
+			external Port fct
+			conjugated Port socketControl: PTcpControl
+			conjugated Port socketPayload: PTcpPayload
+			ActorRef socket: ATcpClient
+			Binding socketControl and socket.ControlPort
+			Binding socketPayload and socket.PayloadPort
+			Attribute socketConfig: DTcpControl
+			
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> ConfigSocket {
+					action {
+						"socketConfig = new DTcpControl(\"localhost\", 4441);"
+					}
+				}
+				Transition tr0: ConfigSocket -> SocketOpen {
+					triggers {
+						<established: socketControl>
+					}
+				}
+				State ConfigSocket {
+					entry {
+						"socketControl.open(socketConfig);"
+					}
+				}
+				State SocketOpen {
+					entry {
+						"String payload = new String(\"carLights=red\\n\");"
+						"socketPayload.send(new DTcpPayload(0, payload.length(), payload.getBytes() ));"
+					}
+				}
+			}
+		}
+	}
+	
+	ProtocolClass PTrafficLightCommands {
+		incoming {
+			Message carRed()
+			Message carYellow()
+			Message carYellowRed()
+			Message carGreen()
+			Message carOff()
+			
+			Message pedRed()
+			Message pedGreen()
+			Message pedOff()
+			
+		}
+		outgoing {
+			Message pressedButton()
+		}
+	}
+}

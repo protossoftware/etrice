@@ -1,0 +1,429 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/TrafficlightLogSys/subsystem (!) /TrafficlightLogSys/subsystem/application 
+	/TrafficlightLogSys/subsystem/application (!) /TrafficlightLogSys/subsystem/application/controller 
+	/TrafficlightLogSys/subsystem/application (!) /TrafficlightLogSys/subsystem/application/coordinator 
+	/TrafficlightLogSys/subsystem/application (!) /TrafficlightLogSys/subsystem/application/tsCommands 
+	/TrafficlightLogSys/subsystem/application/tsCommands (!) /TrafficlightLogSys/subsystem/application/tsCommands/socket 
+	/TrafficlightLogSys/subsystem/application (!) /TrafficlightLogSys/subsystem/application/tlCommands2 
+	/TrafficlightLogSys/subsystem/application/tlCommands2 (!) /TrafficlightLogSys/subsystem/application/tlCommands2/socket 
+	/TrafficlightLogSys/subsystem/application (!) /TrafficlightLogSys/subsystem/application/controller2 
+	/TrafficlightLogSys/subsystem (!) /TrafficlightLogSys/subsystem/timingService 
+# done sub system initialization
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands startInit
+	/TrafficlightLogSys/subsystem/application/controller >>> InitCommands
+	/TrafficlightLogSys/subsystem/application/coordinator >>> Idle
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> NotInitialized
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> closed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> NotInitialized
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> closed
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 startInit
+	/TrafficlightLogSys/subsystem/application/controller2 >>> InitCommands
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands startInit
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket open
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> ConfigSocket
+	/TrafficlightLogSys/subsystem/application/coordinator --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 startInit
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket open
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> ConfigSocket
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket open
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >-- /TrafficlightLogSys/subsystem/application/tsCommands established
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket open
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >-- /TrafficlightLogSys/subsystem/application/tlCommands2 established
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket --> /TrafficlightLogSys/subsystem/application/tsCommands established
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/controller doneInit
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket --> /TrafficlightLogSys/subsystem/application/tlCommands2 established
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/controller2 doneInit
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/controller doneInit
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_On
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/controller2 doneInit
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_On
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_On
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_On
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_On
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_On
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/controller >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Blinking_Off
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedOff
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedOff
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/coordinator internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/coordinator internalTimeout
+	/TrafficlightLogSys/subsystem/application/coordinator >-- /TrafficlightLogSys/subsystem/application/controller setOn
+	/TrafficlightLogSys/subsystem/application/coordinator >-- /TrafficlightLogSys/subsystem/application/controller2 setOn
+	/TrafficlightLogSys/subsystem/application/coordinator >>> Running
+	/TrafficlightLogSys/subsystem/application/coordinator --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/coordinator --> /TrafficlightLogSys/subsystem/application/controller setOn
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_AllRed
+	/TrafficlightLogSys/subsystem/application/coordinator --> /TrafficlightLogSys/subsystem/application/controller2 setOn
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_AllRed
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService kill
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService kill
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carGreen
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_CarGreen
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carGreen
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_CarGreen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carGreen
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carGreen
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_CarYellow
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_CarYellow
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carYellow
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carYellow
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_CarRed
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_CarRed
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedGreen
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_PedGreen
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedGreen
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_PedGreen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedGreen
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedGreen
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller internalTimeout
+	/TrafficlightLogSys/subsystem/timingService >-- /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/controller >-- /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/controller >>> Working_AllRed
+	/TrafficlightLogSys/subsystem/timingService --> /TrafficlightLogSys/subsystem/application/controller2 internalTimeout
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/controller2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/controller2 >>> Working_AllRed
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands carRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/application/tsCommands pedRed
+	/TrafficlightLogSys/subsystem/application/tsCommands >-- /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 carRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/application/tlCommands2 pedRed
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >-- /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2 >>> SocketOpen
+	/TrafficlightLogSys/subsystem/application/controller2 --> /TrafficlightLogSys/subsystem/timingService internalStartTimeout
+	/TrafficlightLogSys/subsystem/timingService >>> Operational
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tsCommands --> /TrafficlightLogSys/subsystem/application/tsCommands/socket send
+	/TrafficlightLogSys/subsystem/application/tsCommands/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+	/TrafficlightLogSys/subsystem/application/tlCommands2 --> /TrafficlightLogSys/subsystem/application/tlCommands2/socket send
+	/TrafficlightLogSys/subsystem/application/tlCommands2/socket >>> opened
+# begin sub system destruction
+	/TrafficlightLogSys/subsystem (X) /TrafficlightLogSys/subsystem/application 
+	/TrafficlightLogSys/subsystem/application (X) /TrafficlightLogSys/subsystem/application/controller 
+	/TrafficlightLogSys/subsystem/application (X) /TrafficlightLogSys/subsystem/application/coordinator 
+	/TrafficlightLogSys/subsystem/application (X) /TrafficlightLogSys/subsystem/application/tsCommands 
+	/TrafficlightLogSys/subsystem/application/tsCommands (X) /TrafficlightLogSys/subsystem/application/tsCommands/socket 
+	/TrafficlightLogSys/subsystem/application (X) /TrafficlightLogSys/subsystem/application/tlCommands2 
+	/TrafficlightLogSys/subsystem/application/tlCommands2 (X) /TrafficlightLogSys/subsystem/application/tlCommands2/socket 
+	/TrafficlightLogSys/subsystem/application (X) /TrafficlightLogSys/subsystem/application/controller2 
+	/TrafficlightLogSys/subsystem (X) /TrafficlightLogSys/subsystem/timingService 

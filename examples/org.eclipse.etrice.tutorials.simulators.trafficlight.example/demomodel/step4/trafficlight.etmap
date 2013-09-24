@@ -1,0 +1,10 @@
+MappingModel MappingModel1 {
+	import TrafficlightModel.* from "trafficlight.room"
+	import TrafficLightPhysicalModel.* from "trafficlight.etphys"
+	Mapping TrafficlightLogSys -> PhysicalSys {
+		SubSystemMapping subsystem -> node1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+	
+}
