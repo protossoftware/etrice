@@ -403,80 +403,93 @@ public class DataClassGen {
       for(final Attribute a : attributes) {
         {
           RefableType _type = a.getType();
-          DataType _type_1 = _type.getType();
-          if ((_type_1 instanceof ComplexType)) {
-            _builder.append("if (");
+          boolean _isRef = _type.isRef();
+          if (_isRef) {
+            _builder.append("copy.");
             String _name = a.getName();
             _builder.append(_name, "");
-            _builder.append("!=null) {");
+            _builder.append(" = ");
+            String _name_1 = a.getName();
+            _builder.append(_name_1, "");
+            _builder.append(";");
             _builder.newLineIfNotEmpty();
-            {
-              int _size = a.getSize();
-              boolean _equals = (_size == 0);
-              if (_equals) {
-                _builder.append("\t");
-                _builder.append("copy.");
-                String _name_1 = a.getName();
-                _builder.append(_name_1, "	");
-                _builder.append(" = ");
-                String _name_2 = a.getName();
-                _builder.append(_name_2, "	");
-                _builder.append(".deepCopy();");
-                _builder.newLineIfNotEmpty();
-              } else {
-                _builder.append("\t");
-                _builder.append("for (int i=0;i<");
-                String _name_3 = a.getName();
-                _builder.append(_name_3, "	");
-                _builder.append(".length;i++){");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("copy.");
-                String _name_4 = a.getName();
-                _builder.append(_name_4, "		");
-                _builder.append("[i] = ");
-                String _name_5 = a.getName();
-                _builder.append(_name_5, "		");
-                _builder.append("[i].deepCopy();");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
-            _builder.append("}");
-            _builder.newLine();
           } else {
-            {
-              int _size_1 = a.getSize();
-              boolean _equals_1 = (_size_1 == 0);
-              if (_equals_1) {
-                _builder.append("copy.");
-                String _name_6 = a.getName();
-                _builder.append(_name_6, "");
-                _builder.append(" = ");
-                String _name_7 = a.getName();
-                _builder.append(_name_7, "");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-              } else {
-                _builder.append("for (int i=0;i<");
-                String _name_8 = a.getName();
-                _builder.append(_name_8, "");
-                _builder.append(".length;i++){");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("copy.");
-                String _name_9 = a.getName();
-                _builder.append(_name_9, "	");
-                _builder.append("[i] = ");
-                String _name_10 = a.getName();
-                _builder.append(_name_10, "	");
-                _builder.append("[i];");
-                _builder.newLineIfNotEmpty();
-                _builder.append("}");
-                _builder.newLine();
+            RefableType _type_1 = a.getType();
+            DataType _type_2 = _type_1.getType();
+            if ((_type_2 instanceof ComplexType)) {
+              _builder.append("if (");
+              String _name_2 = a.getName();
+              _builder.append(_name_2, "");
+              _builder.append("!=null) {");
+              _builder.newLineIfNotEmpty();
+              {
+                int _size = a.getSize();
+                boolean _lessEqualsThan = (_size <= 1);
+                if (_lessEqualsThan) {
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_3 = a.getName();
+                  _builder.append(_name_3, "	");
+                  _builder.append(" = ");
+                  String _name_4 = a.getName();
+                  _builder.append(_name_4, "	");
+                  _builder.append(".deepCopy();");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("for (int i=0;i<");
+                  String _name_5 = a.getName();
+                  _builder.append(_name_5, "	");
+                  _builder.append(".length;i++){");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_6 = a.getName();
+                  _builder.append(_name_6, "		");
+                  _builder.append("[i] = ");
+                  String _name_7 = a.getName();
+                  _builder.append(_name_7, "		");
+                  _builder.append("[i].deepCopy();");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                }
+              }
+              _builder.append("}");
+              _builder.newLine();
+            } else {
+              {
+                int _size_1 = a.getSize();
+                boolean _equals = (_size_1 == 0);
+                if (_equals) {
+                  _builder.append("copy.");
+                  String _name_8 = a.getName();
+                  _builder.append(_name_8, "");
+                  _builder.append(" = ");
+                  String _name_9 = a.getName();
+                  _builder.append(_name_9, "");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("for (int i=0;i<");
+                  String _name_10 = a.getName();
+                  _builder.append(_name_10, "");
+                  _builder.append(".length;i++){");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_11 = a.getName();
+                  _builder.append(_name_11, "	");
+                  _builder.append("[i] = ");
+                  String _name_12 = a.getName();
+                  _builder.append(_name_12, "	");
+                  _builder.append("[i];");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("}");
+                  _builder.newLine();
+                }
               }
             }
           }
