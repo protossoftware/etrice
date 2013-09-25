@@ -707,7 +707,7 @@ public class GeneratorModelBuilder {
 	private StructureInstance recursivelyCreateActorInstances(ActorRef aref, int idx) {
 		String name = aref.getName();
 		if (idx>=0)
-			name += GenmodelConstants.INDEX_SEP+idx;
+			name += GenmodelConstants.INDEX_SEP+""+idx;
 		
 		if (debug)
 			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
