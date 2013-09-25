@@ -165,7 +165,7 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 			}
 		}
 		
-		return getParent().getObject(path);
+		return super.getObject(path);
 	}
 	
 	/**
