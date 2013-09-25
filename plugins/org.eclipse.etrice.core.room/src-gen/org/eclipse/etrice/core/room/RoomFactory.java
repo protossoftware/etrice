@@ -401,6 +401,15 @@ public interface RoomFactory extends EFactory
   RefPath createRefPath();
 
   /**
+   * Returns a new object of class '<em>Ref Segment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ref Segment</em>'.
+   * @generated
+   */
+  RefSegment createRefSegment();
+
+  /**
    * Returns a new object of class '<em>Binding</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

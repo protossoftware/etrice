@@ -52,6 +52,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
@@ -2373,10 +2374,10 @@ public class RoomHelpers extends BaseHelpers {
 	public static ActorContainerClass getActorContainerClass(ActorInstanceMapping aim) {
 		// follow segments
 		ActorContainerClass result = getParentContainer(aim);
-		for (String ref : aim.getPath().getRefs()) {
+		for (RefSegment ref : aim.getPath().getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -2400,7 +2401,7 @@ public class RoomHelpers extends BaseHelpers {
 	 */
 	public static String asString(RefPath path) {
 		StringBuilder sb = new StringBuilder();
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			sb.append("/"+ref);
 		}
 		return sb.toString();
@@ -2421,10 +2422,10 @@ public class RoomHelpers extends BaseHelpers {
 		
 		ActorRef lastMatch = null;
 		ActorContainerClass result = root;
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -2452,14 +2453,14 @@ public class RoomHelpers extends BaseHelpers {
 			return null;
 
 		ActorContainerClass last = root;
-		Iterator<String> it = path.getRefs().iterator();
-		String ref;
+		Iterator<RefSegment> it = path.getRefs().iterator();
+		RefSegment ref;
 		while (it.hasNext()) {
 			ref = it.next();
 			// actor
 			ActorRef match = null;
 			for (ActorRef actor : last.getActorRefs()) {
-				if (actor.getName().equals(ref)) {
+				if (actor.getName().equals(ref.getRef())) {
 					match = actor;
 					break;
 				}
@@ -2480,7 +2481,19 @@ public class RoomHelpers extends BaseHelpers {
 					return null;
 			}
 			if (match == null)
-				return ref;
+				return ref.getRef();
+			
+			if (match.getMultiplicity()==1) {
+				if (ref.getIdx()!=-1)
+					return ref.toString()+" (ref not indexed )";
+			}
+			else {
+				if (ref.getIdx()<0)
+					return ref.toString()+" (ref needs index)";
+				if (ref.getIdx()>=match.getMultiplicity())
+					return ref.toString()+" (index out of bounds)";
+			}
+			
 			last = match.getType();
 		}
 

@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.SubSystemClass;
 
 /**
@@ -242,8 +243,8 @@ public class ETMapUtil {
 	private static String getPath(RefPath path) {
 		StringBuilder result = new StringBuilder();
 		
-		for (String ref : path.getRefs()) {
-			result.append(InstanceBase.pathDelim+ref);
+		for (RefSegment ref : path.getRefs()) {
+			result.append(InstanceBase.pathDelim+ref.toString());
 		}
 		
 		return result.toString();

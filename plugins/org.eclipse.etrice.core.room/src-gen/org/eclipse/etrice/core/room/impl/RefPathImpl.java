@@ -4,15 +4,20 @@ package org.eclipse.etrice.core.room.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -31,14 +36,14 @@ import org.eclipse.etrice.core.room.RoomPackage;
 public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
 {
   /**
-   * The cached value of the '{@link #getRefs() <em>Refs</em>}' attribute list.
+   * The cached value of the '{@link #getRefs() <em>Refs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getRefs()
    * @generated
    * @ordered
    */
-  protected EList<String> refs;
+  protected EList<RefSegment> refs;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,13 +71,44 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getRefs()
+  public EList<RefSegment> getRefs()
   {
     if (refs == null)
     {
-      refs = new EDataTypeEList<String>(String.class, this, RoomPackage.REF_PATH__REFS);
+      refs = new EObjectContainmentEList<RefSegment>(RefSegment.class, this, RoomPackage.REF_PATH__REFS);
     }
     return refs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String toString()
+  {
+    StringBuilder sb = new StringBuilder();
+    for (RefSegment ref : getRefs()) {
+      sb.append("/"+ref.toString());
+    }
+    return sb.toString();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RoomPackage.REF_PATH__REFS:
+        return ((InternalEList<?>)getRefs()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,7 +140,7 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
     {
       case RoomPackage.REF_PATH__REFS:
         getRefs().clear();
-        getRefs().addAll((Collection<? extends String>)newValue);
+        getRefs().addAll((Collection<? extends RefSegment>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,23 +177,6 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
         return refs != null && !refs.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (refs: ");
-    result.append(refs);
-    result.append(')');
-    return result.toString();
   }
 
 } //RefPathImpl

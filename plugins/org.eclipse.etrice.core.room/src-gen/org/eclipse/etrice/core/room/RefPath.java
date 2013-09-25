@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>A path of strings that are interpreted as {@link ActorRef}s starting at a {@link SubSystemClass}.
+ * <br>A path of strings that are interpreted as {@link org.eclipse.etrice.core.room.ActorRef}s starting at a {@link org.eclipse.etrice.core.room.SubSystemClass}.
  * 
  * <!-- end-model-doc -->
  *
@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface RefPath extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Refs</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Refs</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.RefSegment}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
@@ -39,11 +39,19 @@ public interface RefPath extends EObject
    * corresponding {@link ActorContainerRef}.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Refs</em>' attribute list.
+   * @return the value of the '<em>Refs</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getRefPath_Refs()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getRefs();
+  EList<RefSegment> getRefs();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder sb = new StringBuilder();\r\nfor (RefSegment ref : path.getRefs()) {\r\n\tsb.append(\"/\"+ref);\r\n}\r\nreturn sb.toString();\r\n'"
+   * @generated
+   */
+  String toString();
 
 } // RefPath

@@ -107,6 +107,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.LOGICAL_THREAD: return createLogicalThread();
       case RoomPackage.ACTOR_INSTANCE_MAPPING: return createActorInstanceMapping();
       case RoomPackage.REF_PATH: return createRefPath();
+      case RoomPackage.REF_SEGMENT: return createRefSegment();
       case RoomPackage.BINDING: return createBinding();
       case RoomPackage.BINDING_END_POINT: return createBindingEndPoint();
       case RoomPackage.LAYER_CONNECTION: return createLayerConnection();
@@ -656,6 +657,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     RefPathImpl refPath = new RefPathImpl();
     return refPath;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefSegment createRefSegment()
+  {
+    RefSegmentImpl refSegment = new RefSegmentImpl();
+    return refSegment;
   }
 
   /**

@@ -162,6 +162,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorInstanceMappingAccess().getGroup_4(), "rule__ActorInstanceMapping__Group_4__0");
 					put(grammarAccess.getRefPathAccess().getGroup(), "rule__RefPath__Group__0");
 					put(grammarAccess.getRefPathAccess().getGroup_1(), "rule__RefPath__Group_1__0");
+					put(grammarAccess.getRefSegmentAccess().getGroup(), "rule__RefSegment__Group__0");
+					put(grammarAccess.getRefSegmentAccess().getGroup_1(), "rule__RefSegment__Group_1__0");
 					put(grammarAccess.getBindingAccess().getGroup(), "rule__Binding__Group__0");
 					put(grammarAccess.getBindingEndPointAccess().getGroup(), "rule__BindingEndPoint__Group__0");
 					put(grammarAccess.getBindingEndPointAccess().getGroup_0(), "rule__BindingEndPoint__Group_0__0");
@@ -393,6 +395,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsAssignment_4_1(), "rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_0(), "rule__RefPath__RefsAssignment_0");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
+					put(grammarAccess.getRefSegmentAccess().getRefAssignment_0(), "rule__RefSegment__RefAssignment_0");
+					put(grammarAccess.getRefSegmentAccess().getIdxAssignment_1_1(), "rule__RefSegment__IdxAssignment_1_1");
 					put(grammarAccess.getBindingAccess().getEndpoint1Assignment_1(), "rule__Binding__Endpoint1Assignment_1");
 					put(grammarAccess.getBindingAccess().getEndpoint2Assignment_3(), "rule__Binding__Endpoint2Assignment_3");
 					put(grammarAccess.getBindingEndPointAccess().getActorRefAssignment_0_0(), "rule__BindingEndPoint__ActorRefAssignment_0_0");

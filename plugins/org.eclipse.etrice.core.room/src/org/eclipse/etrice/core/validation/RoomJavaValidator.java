@@ -342,11 +342,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 							RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				else {
 					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
-					if (aRef != null) {
-						if (aRef.getMultiplicity() > 1)
-							error("no arrays of actor references supported",
-									RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
-					} else
+					if (aRef == null)
 						error("invalid actor reference",
 								RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				}
@@ -358,7 +354,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	private void checkMappings(EList<ActorInstanceMapping> actorInstanceMappings) {
 		HashSet<String> paths = new HashSet<String>();
 		for (ActorInstanceMapping aim : actorInstanceMappings) {
-			if (!paths.add(RoomHelpers.asString(aim.getPath()))) {
+			if (!paths.add(aim.getPath().toString())) {
 				EObject parent = aim.eContainer();
 				int idx = actorInstanceMappings.indexOf(aim);
 				error("duplicate mapping", parent, aim.eContainingFeature(), idx, DUPLICATE_ACTOR_INSTANCE_MAPPING);

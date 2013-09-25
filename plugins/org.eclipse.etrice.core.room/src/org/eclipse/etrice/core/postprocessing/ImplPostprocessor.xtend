@@ -21,21 +21,21 @@ import static extension org.eclipse.etrice.core.common.postprocessing.Postproces
 class ImplPostprocessor {
 	
 	def process(GeneratedMetamodel metamodel) {
-		var roomPackage = metamodel.EPackage
+		val roomPackage = metamodel.EPackage
 		
-		var port = roomPackage.getClass("Port")
+		val port = roomPackage.getClass("Port")
 		port.getAttribute("multiplicity").setDefaultValueLiteral("1")
 		port.addOperation("isReplicated", EcorePackage::eINSTANCE.getEClassifier("EBoolean"), 1, 
 			'''return multiplicity>1 || multiplicity==-1;''')
 		
-		var actorRef = roomPackage.getClass("ActorRef")
+		val actorRef = roomPackage.getClass("ActorRef")
 		actorRef.getAttribute("multiplicity").setDefaultValueLiteral("1")
 		
-		var state = roomPackage.getClass("State")
+		val state = roomPackage.getClass("State")
 		state.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
 			'''return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? "":((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :"";''')
 		
-		var stateGraphItem = roomPackage.getClass("StateGraphItem")
+		val stateGraphItem = roomPackage.getClass("StateGraphItem")
 		stateGraphItem.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
 			'''
 			if (this instanceof org.eclipse.etrice.core.room.State) 
@@ -49,7 +49,7 @@ class ImplPostprocessor {
 			return "";
 			''')
 			
-		var interfaceItem = roomPackage.getClass("InterfaceItem")
+		val interfaceItem = roomPackage.getClass("InterfaceItem")
 		interfaceItem.addOperation("getGeneralProtocol", roomPackage.getEClassifier("GeneralProtocolClass"), 1, 
 			'''
 			if (this instanceof org.eclipse.etrice.core.room.Port)
@@ -87,6 +87,31 @@ class ImplPostprocessor {
 					spps.add(spp.getSpp());
 				}
 				return spps;
+			'''
+		)
+				
+		val refPath = roomPackage.getClass("RefPath")
+		refPath.addOperation(
+			"toString",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				StringBuilder sb = new StringBuilder();
+				for (RefSegment ref : getRefs()) {
+					sb.append("/"+ref.toString());
+				}
+				return sb.toString();
+			'''
+		)
+				
+		val refSeg = roomPackage.getClass("RefSegment")
+		refSeg.getAttribute("idx").setDefaultValueLiteral("-1")
+		refSeg.addOperation(
+			"toString",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");
 			'''
 		)
 	}

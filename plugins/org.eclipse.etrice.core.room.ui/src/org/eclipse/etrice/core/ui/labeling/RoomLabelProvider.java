@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
@@ -346,11 +347,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	String text(ActorInstanceMapping aim) {
-		StringBuilder path = new StringBuilder();
-		for (String seg : aim.getPath().getRefs()) {
-			path.append("/"+seg);
-		}
-		return path+" -> "+aim.getThread().getName();
+		return aim.getPath().toString()+" -> "+aim.getThread().getName();
 	}
 	
 	String text (LogicalThread lt ) {

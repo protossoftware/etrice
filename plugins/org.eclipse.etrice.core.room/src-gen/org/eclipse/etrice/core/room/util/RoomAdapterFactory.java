@@ -285,6 +285,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createRefPathAdapter();
       }
       @Override
+      public Adapter caseRefSegment(RefSegment object)
+      {
+        return createRefSegmentAdapter();
+      }
+      @Override
       public Adapter caseBinding(Binding object)
       {
         return createBindingAdapter();
@@ -1122,6 +1127,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRefPathAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSegment <em>Ref Segment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefSegment
+   * @generated
+   */
+  public Adapter createRefSegmentAdapter()
   {
     return null;
   }

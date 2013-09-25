@@ -2827,37 +2827,74 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefPath");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cRefsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cRefsIDTerminalRuleCall_0_0 = (RuleCall)cRefsAssignment_0.eContents().get(0);
+		private final RuleCall cRefsRefSegmentParserRuleCall_0_0 = (RuleCall)cRefsAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cSolidusKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cRefsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cRefsIDTerminalRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
+		private final RuleCall cRefsRefSegmentParserRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
 		
 		//RefPath:
 		//
-		//	refs+=ID ("/" refs+=ID)*;
+		//	refs+=RefSegment ("/" refs+=RefSegment)*;
 		public ParserRule getRule() { return rule; }
 
-		//refs+=ID ("/" refs+=ID)*
+		//refs+=RefSegment ("/" refs+=RefSegment)*
 		public Group getGroup() { return cGroup; }
 
-		//refs+=ID
+		//refs+=RefSegment
 		public Assignment getRefsAssignment_0() { return cRefsAssignment_0; }
 
-		//ID
-		public RuleCall getRefsIDTerminalRuleCall_0_0() { return cRefsIDTerminalRuleCall_0_0; }
+		//RefSegment
+		public RuleCall getRefsRefSegmentParserRuleCall_0_0() { return cRefsRefSegmentParserRuleCall_0_0; }
 
-		//("/" refs+=ID)*
+		//("/" refs+=RefSegment)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"/"
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
 
-		//refs+=ID
+		//refs+=RefSegment
 		public Assignment getRefsAssignment_1_1() { return cRefsAssignment_1_1; }
 
+		//RefSegment
+		public RuleCall getRefsRefSegmentParserRuleCall_1_1_0() { return cRefsRefSegmentParserRuleCall_1_1_0; }
+	}
+
+	public class RefSegmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefSegment");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cRefAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cRefIDTerminalRuleCall_0_0 = (RuleCall)cRefAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cColonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cIdxAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cIdxINTTerminalRuleCall_1_1_0 = (RuleCall)cIdxAssignment_1_1.eContents().get(0);
+		
+		//RefSegment:
+		//
+		//	ref=ID (":" idx=INT)?;
+		public ParserRule getRule() { return rule; }
+
+		//ref=ID (":" idx=INT)?
+		public Group getGroup() { return cGroup; }
+
+		//ref=ID
+		public Assignment getRefAssignment_0() { return cRefAssignment_0; }
+
 		//ID
-		public RuleCall getRefsIDTerminalRuleCall_1_1_0() { return cRefsIDTerminalRuleCall_1_1_0; }
+		public RuleCall getRefIDTerminalRuleCall_0_0() { return cRefIDTerminalRuleCall_0_0; }
+
+		//(":" idx=INT)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//":"
+		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
+
+		//idx=INT
+		public Assignment getIdxAssignment_1_1() { return cIdxAssignment_1_1; }
+
+		//INT
+		public RuleCall getIdxINTTerminalRuleCall_1_1_0() { return cIdxINTTerminalRuleCall_1_1_0; }
 	}
 
 	public class BindingElements extends AbstractParserRuleElementFinder {
@@ -2870,12 +2907,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cEndpoint2Assignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cEndpoint2BindingEndPointParserRuleCall_3_0 = (RuleCall)cEndpoint2Assignment_3.eContents().get(0);
 		
-		//// TODOHRR: bindings for replicated ports
-		//
-		//// (1) declare several bindings
-		//
-		//// (2) use a notation with 1 to n bindings
-		//
 		//Binding:
 		//
 		//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
@@ -5141,6 +5172,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private LogicalThreadElements pLogicalThread;
 	private ActorInstanceMappingElements pActorInstanceMapping;
 	private RefPathElements pRefPath;
+	private RefSegmentElements pRefSegment;
 	private BindingElements pBinding;
 	private BindingEndPointElements pBindingEndPoint;
 	private LayerConnectionElements pLayerConnection;
@@ -5783,7 +5815,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//RefPath:
 	//
-	//	refs+=ID ("/" refs+=ID)*;
+	//	refs+=RefSegment ("/" refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
 		return (pRefPath != null) ? pRefPath : (pRefPath = new RefPathElements());
 	}
@@ -5792,12 +5824,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefPathAccess().getRule();
 	}
 
-	//// TODOHRR: bindings for replicated ports
+	//RefSegment:
 	//
-	//// (1) declare several bindings
-	//
-	//// (2) use a notation with 1 to n bindings
-	//
+	//	ref=ID (":" idx=INT)?;
+	public RefSegmentElements getRefSegmentAccess() {
+		return (pRefSegment != null) ? pRefSegment : (pRefSegment = new RefSegmentElements());
+	}
+	
+	public ParserRule getRefSegmentRule() {
+		return getRefSegmentAccess().getRule();
+	}
+
 	//Binding:
 	//
 	//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
@@ -6390,7 +6427,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//AnnotationType:
 	//
-	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (=> targets+=AnnotationTargetType | "{"
+	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 	//
 	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {

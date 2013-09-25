@@ -224,7 +224,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorInstanceMapping/actorInstanceMappings"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//RefPath">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefPath/refs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RefPath/refs"/>
+      <genOperations ecoreOperation="Room.ecore#//RefPath/toString"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RefSegment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefSegment/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RefSegment/idx"/>
+      <genOperations ecoreOperation="Room.ecore#//RefSegment/toString"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Binding">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Binding/endpoint1"/>

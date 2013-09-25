@@ -276,11 +276,12 @@ ActorInstanceMapping:
 ;
 
 RefPath:
-	refs+=ID ('/' refs+=ID)*;
+	refs+=RefSegment ('/' refs+=RefSegment)*;
+
+RefSegment:
+	ref=ID (':' idx=INT)?
+;
 	
-// TODOHRR: bindings for replicated ports
-// (1) declare several bindings
-// (2) use a notation with 1 to n bindings
 Binding:
 	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
 	
