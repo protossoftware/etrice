@@ -85,6 +85,8 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttrInstanceConfigAccess().getGroup_3_1_0(), "rule__AttrInstanceConfig__Group_3_1_0__0");
 					put(grammarAccess.getRefPathAccess().getGroup(), "rule__RefPath__Group__0");
 					put(grammarAccess.getRefPathAccess().getGroup_1(), "rule__RefPath__Group_1__0");
+					put(grammarAccess.getRefSegmentAccess().getGroup(), "rule__RefSegment__Group__0");
+					put(grammarAccess.getRefSegmentAccess().getGroup_1(), "rule__RefSegment__Group_1__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
 					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
@@ -147,6 +149,8 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttrInstanceConfigAccess().getAttributesAssignment_3_1_1(), "rule__AttrInstanceConfig__AttributesAssignment_3_1_1");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_0(), "rule__RefPath__RefsAssignment_0");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
+					put(grammarAccess.getRefSegmentAccess().getRefAssignment_0(), "rule__RefSegment__RefAssignment_0");
+					put(grammarAccess.getRefSegmentAccess().getIdxAssignment_1_1(), "rule__RefSegment__IdxAssignment_1_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
 					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 					put(grammarAccess.getAnnotationAccess().getTypeAssignment_1(), "rule__Annotation__TypeAssignment_1");

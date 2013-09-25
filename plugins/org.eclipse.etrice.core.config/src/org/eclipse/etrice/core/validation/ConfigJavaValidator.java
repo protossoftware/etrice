@@ -119,11 +119,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 							ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				else {
 					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
-					if (aRef != null) {
-						if (aRef.getMultiplicity() > 1)
-							error("no arrays of actor references supported",
-									ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
-					} else
+					if (aRef == null)
 						error("invalid actor reference",
 								ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				}

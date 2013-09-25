@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface RefPath extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Refs</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Refs</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.config.RefSegment}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
@@ -39,11 +39,11 @@ public interface RefPath extends EObject
    * corresponding {@link ActorContainerRef}.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Refs</em>' attribute list.
+   * @return the value of the '<em>Refs</em>' containment reference list.
    * @see org.eclipse.etrice.core.config.ConfigPackage#getRefPath_Refs()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getRefs();
+  EList<RefSegment> getRefs();
 
 } // RefPath

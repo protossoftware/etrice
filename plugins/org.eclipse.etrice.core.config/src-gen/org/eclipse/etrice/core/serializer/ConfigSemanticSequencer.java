@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.services.ConfigGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -195,6 +196,12 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case ConfigPackage.REF_SEGMENT:
+				if(context == grammarAccess.getRefSegmentRule()) {
+					sequence_RefSegment(context, (RefSegment) semanticObject); 
+					return; 
+				}
+				else break;
 			case ConfigPackage.SUB_SYSTEM_CONFIG:
 				if(context == grammarAccess.getConfigElementRule() ||
 				   context == grammarAccess.getSubSystemConfigRule()) {
@@ -298,9 +305,18 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (refs+=ID refs+=ID*)
+	 *     (refs+=RefSegment refs+=RefSegment*)
 	 */
 	protected void sequence_RefPath(EObject context, RefPath semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ref=ID idx=INT?)
+	 */
+	protected void sequence_RefSegment(EObject context, RefSegment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

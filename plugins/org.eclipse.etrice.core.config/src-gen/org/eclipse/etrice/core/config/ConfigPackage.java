@@ -610,7 +610,7 @@ public interface ConfigPackage extends EPackage
   int REF_PATH = 12;
 
   /**
-   * The feature id for the '<em><b>Refs</b></em>' attribute list.
+   * The feature id for the '<em><b>Refs</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -628,6 +628,43 @@ public interface ConfigPackage extends EPackage
   int REF_PATH_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.RefSegmentImpl <em>Ref Segment</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.RefSegmentImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefSegment()
+   * @generated
+   */
+  int REF_SEGMENT = 13;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_SEGMENT__REF = 0;
+
+  /**
+   * The feature id for the '<em><b>Idx</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_SEGMENT__IDX = 1;
+
+  /**
+   * The number of structural features of the '<em>Ref Segment</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REF_SEGMENT_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -635,7 +672,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 13;
+  int IMPORT = 14;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -1137,15 +1174,47 @@ public interface ConfigPackage extends EPackage
   EClass getRefPath();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.config.RefPath#getRefs <em>Refs</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.RefPath#getRefs <em>Refs</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Refs</em>'.
+   * @return the meta object for the containment reference list '<em>Refs</em>'.
    * @see org.eclipse.etrice.core.config.RefPath#getRefs()
    * @see #getRefPath()
    * @generated
    */
-  EAttribute getRefPath_Refs();
+  EReference getRefPath_Refs();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.RefSegment <em>Ref Segment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Ref Segment</em>'.
+   * @see org.eclipse.etrice.core.config.RefSegment
+   * @generated
+   */
+  EClass getRefSegment();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.RefSegment#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ref</em>'.
+   * @see org.eclipse.etrice.core.config.RefSegment#getRef()
+   * @see #getRefSegment()
+   * @generated
+   */
+  EAttribute getRefSegment_Ref();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.RefSegment#getIdx <em>Idx</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Idx</em>'.
+   * @see org.eclipse.etrice.core.config.RefSegment#getIdx()
+   * @see #getRefSegment()
+   * @generated
+   */
+  EAttribute getRefSegment_Idx();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.Import <em>Import</em>}'.
@@ -1581,12 +1650,38 @@ public interface ConfigPackage extends EPackage
     EClass REF_PATH = eINSTANCE.getRefPath();
 
     /**
-     * The meta object literal for the '<em><b>Refs</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Refs</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute REF_PATH__REFS = eINSTANCE.getRefPath_Refs();
+    EReference REF_PATH__REFS = eINSTANCE.getRefPath_Refs();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.RefSegmentImpl <em>Ref Segment</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.RefSegmentImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefSegment()
+     * @generated
+     */
+    EClass REF_SEGMENT = eINSTANCE.getRefSegment();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REF_SEGMENT__REF = eINSTANCE.getRefSegment_Ref();
+
+    /**
+     * The meta object literal for the '<em><b>Idx</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REF_SEGMENT__IDX = eINSTANCE.getRefSegment_Idx();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.

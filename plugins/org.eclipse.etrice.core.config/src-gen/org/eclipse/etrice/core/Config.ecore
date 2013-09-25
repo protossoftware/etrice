@@ -256,10 +256,31 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A path of strings that are interpreted as {@link org.eclipse.etrice.core.room.ActorRef}s starting at a {@link org.eclipse.etrice.core.room.SubSystemClass}.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refs" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//RefSegment"
+        containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a path in the instance tree where each segment corresponds to the name of the&#xD;&#xA;corresponding {@link ActorContainerRef}.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefSegment">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A segment of a {@link RefPath}. It consists of a name and an optional index.&#xD;&#xA;If the index is not set it will be {@code -1}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return getRef() + ((getIdx()>=0)? &quot;:&quot;+getIdx() : &quot;&quot;);&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The segment name corresponding to an actor reference.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idx" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="-1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The optional index of the reference (for replicated actors).&#xD;&#xA;If not set the index is {@code -1}.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

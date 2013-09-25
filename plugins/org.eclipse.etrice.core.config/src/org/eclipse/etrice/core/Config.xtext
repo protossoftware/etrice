@@ -82,7 +82,11 @@ AttrInstanceConfig:
 	'}')?;
 
 RefPath:
-	refs+=ID ('/' refs+=ID)*;
+	refs+=RefSegment ('/' refs+=RefSegment)*;
+
+RefSegment:
+	ref=ID (':' idx=INT)?
+;
 
 	// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
 Import:
@@ -93,21 +97,4 @@ ImportedFQN:
 
 FQN:
 	ID ('.' ID)*;
-
-	// -----------------------------------------------------------------------------
-
-//enum Unit:
-//	N|
-//	W|
-//	S = 's'|
-//	KG = 'kg'|
-//	M = 'm'|
-//	C|
-//	NM|
-//	RPM|
-//	V|
-//	A|
-//	HZ = 'Hz'|
-//	KW
-//;
 

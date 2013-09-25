@@ -13,15 +13,16 @@
 package org.eclipse.etrice.core.postprocessing
 
 import org.eclipse.xtext.GeneratedMetamodel
+import org.eclipse.emf.ecore.EcorePackage
 
 import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
 
 class ImplPostProcessing {
 	
 	def process(GeneratedMetamodel metamodel) {
-		var configPackage = metamodel.EPackage
+		val configPackage = metamodel.EPackage
 		
-		var configModel = configPackage.getClass("ConfigModel")
+		val configModel = configPackage.getClass("ConfigModel")
 		configModel.addOperation(
 				"getActorClassConfigs",
 	       		configPackage.getEClassifier("ActorClassConfig"),
@@ -64,6 +65,17 @@ class ImplPostProcessing {
 					if(element instanceof SubSystemConfig)
 						list.add((SubSystemConfig) element);
 				return list;''')
+				
+		val refSeg = configPackage.getClass("RefSegment")
+		refSeg.getAttribute("idx").setDefaultValueLiteral("-1")
+		refSeg.addOperation(
+			"toString",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");
+			'''
+		)
 	}
 	
 }

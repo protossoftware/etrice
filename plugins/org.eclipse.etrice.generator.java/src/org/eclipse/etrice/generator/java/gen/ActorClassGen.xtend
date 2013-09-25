@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -165,9 +166,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ELSEIF sub.multiplicity>1»
 						for (int i=0; i<«sub.multiplicity»; ++i) {
 							«IF Main::settings.generateMSCInstrumentation»
-								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
+								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 							«ENDIF»
-							new «sub.type.name»(this, "«sub.name»_"+i);
+							new «sub.type.name»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 						}
 					«ELSE»
 						«IF Main::settings.generateMSCInstrumentation»

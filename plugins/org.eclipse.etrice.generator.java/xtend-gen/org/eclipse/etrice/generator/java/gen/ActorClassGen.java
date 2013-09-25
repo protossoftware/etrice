@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -590,7 +591,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                     String _name_25 = sub_2.getName();
                     _builder.append(_name_25, "			");
-                    _builder.append("_\"+i);");
+                    _builder.append(GenmodelConstants.INDEX_SEP, "			");
+                    _builder.append("\"+i);");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -603,7 +605,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("(this, \"");
                 String _name_27 = sub_2.getName();
                 _builder.append(_name_27, "			");
-                _builder.append("_\"+i);");
+                _builder.append(GenmodelConstants.INDEX_SEP, "			");
+                _builder.append("\"+i);");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
                 _builder.append("}");

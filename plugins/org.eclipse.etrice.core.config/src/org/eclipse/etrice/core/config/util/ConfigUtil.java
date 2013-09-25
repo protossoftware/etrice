@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -59,11 +60,19 @@ public class ConfigUtil {
 			return null;
 
 		ActorContainerClass result = root;
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
+					if (match.getMultiplicity()==1) {
+						if (ref.getIdx()!=-1)
+							return null;
+					}
+					else {
+						if (ref.getIdx()<0 || ref.getIdx()>=match.getMultiplicity())
+							return null;
+					}
 					break;
 				}
 			}
@@ -83,10 +92,10 @@ public class ConfigUtil {
 
 		ActorRef lastMatch = null;
 		ActorContainerClass result = root;
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -113,14 +122,14 @@ public class ConfigUtil {
 			return null;
 
 		ActorContainerClass last = root;
-		Iterator<String> it = path.getRefs().iterator();
-		String ref;
+		Iterator<RefSegment> it = path.getRefs().iterator();
+		RefSegment ref;
 		while (it.hasNext()) {
 			ref = it.next();
 			// actor
 			ActorRef match = null;
 			for (ActorRef actor : last.getActorRefs()) {
-				if (actor.getName().equals(ref)) {
+				if (actor.getName().equals(ref.getRef())) {
 					match = actor;
 					break;
 				}
@@ -137,11 +146,23 @@ public class ConfigUtil {
 				ifs.addAll(((SubSystemClass) last).getRelayPorts());
 			for (InterfaceItem item : ifs) {
 				// not nested, quit if last segment
-				if (item.getName().equals(ref) && !it.hasNext())
+				if (item.getName().equals(ref.getRef()) && !it.hasNext())
 					return null;
 			}
 			if (match == null)
-				return ref;
+				return ref.getRef();
+			
+			if (match.getMultiplicity()==1) {
+				if (ref.getIdx()!=-1)
+					return ref.toString()+" (ref not indexed )";
+			}
+			else {
+				if (ref.getIdx()<0)
+					return ref.toString()+" (ref needs index)";
+				if (ref.getIdx()>=match.getMultiplicity())
+					return ref.toString()+" (index out of bounds)";
+			}
+			
 			last = match.getType();
 		}
 
@@ -192,7 +213,7 @@ public class ConfigUtil {
 	public static String getPath(ActorInstanceConfig config) {
 		String path = "/" + config.getRoot().getName() + "/"
 				+ config.getSubSystem().getName();
-		for (String s : config.getPath().getRefs())
+		for (RefSegment s : config.getPath().getRefs())
 			path += "/" + s;
 
 		return path;
