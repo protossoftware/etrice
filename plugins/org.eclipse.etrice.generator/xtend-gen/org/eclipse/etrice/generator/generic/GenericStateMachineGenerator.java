@@ -102,7 +102,7 @@ public class GenericStateMachineGenerator {
     List<State> baseStates = _xifexpression_1;
     List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(baseStates);
     baseStates = _leafStatesLast;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     ArrayList<Pair<String,String>> list = _arrayList;
     boolean _usesInheritance_2 = this.langExt.usesInheritance();
     boolean _not = (!_usesInheritance_2);
@@ -158,7 +158,7 @@ public class GenericStateMachineGenerator {
       _xifexpression_1 = 0;
     }
     int offset = _xifexpression_1;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     ArrayList<Pair<String,String>> list = _arrayList;
     for (final TransitionChain chain : chains) {
       {
@@ -193,7 +193,7 @@ public class GenericStateMachineGenerator {
       _xifexpression = _allMessagesFromInterfaces;
     }
     final List<MessageFromIf> triggers = _xifexpression;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     final ArrayList<Pair<String,String>> list = _arrayList;
     Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");
     list.add(_pair);
@@ -1267,10 +1267,10 @@ public class GenericStateMachineGenerator {
     _builder.newLineIfNotEmpty();
     List<Transition> _outgoingTransitionsHierarchical = this._roomExtensions.getOutgoingTransitionsHierarchical(xpac, state);
     final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
-        public Boolean apply(final Transition t) {
-          return Boolean.valueOf((t instanceof GuardedTransition));
-        }
-      };
+      public Boolean apply(final Transition t) {
+        return Boolean.valueOf((t instanceof GuardedTransition));
+      }
+    };
     Iterable<Transition> transitions = IterableExtensions.<Transition>filter(_outgoingTransitionsHierarchical, _function);
     _builder.newLineIfNotEmpty();
     {
@@ -1532,11 +1532,11 @@ public class GenericStateMachineGenerator {
     {
       EList<Trigger> _triggers = tt.getTriggers();
       final Function1<Trigger,Boolean> _function = new Function1<Trigger,Boolean>() {
-          public Boolean apply(final Trigger e) {
-            boolean _isMatching = ac.isMatching(e, trigger);
-            return Boolean.valueOf(_isMatching);
-          }
-        };
+        public Boolean apply(final Trigger e) {
+          boolean _isMatching = ac.isMatching(e, trigger);
+          return Boolean.valueOf(_isMatching);
+        }
+      };
       final Trigger tr = IterableExtensions.<Trigger>findFirst(_triggers, _function);
       StringConcatenation _builder = new StringConcatenation();
       {
@@ -2117,17 +2117,17 @@ public class GenericStateMachineGenerator {
       StateGraph _stateMachine_1 = xpac.getStateMachine();
       List<TrPoint> _allTrPointsRecursive = RoomHelpers.getAllTrPointsRecursive(_stateMachine_1);
       final Function1<TrPoint,Boolean> _function = new Function1<TrPoint,Boolean>() {
-          public Boolean apply(final TrPoint t) {
-            boolean _and = false;
-            if (!(t instanceof TransitionPoint)) {
-              _and = false;
-            } else {
-              boolean _isHandler = ((TransitionPoint) t).isHandler();
-              _and = ((t instanceof TransitionPoint) && _isHandler);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final TrPoint t) {
+          boolean _and = false;
+          if (!(t instanceof TransitionPoint)) {
+            _and = false;
+          } else {
+            boolean _isHandler = ((TransitionPoint) t).isHandler();
+            _and = ((t instanceof TransitionPoint) && _isHandler);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       Iterable<TrPoint> _filter = IterableExtensions.<TrPoint>filter(_allTrPointsRecursive, _function);
       boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
       boolean _not = (!_isEmpty_1);

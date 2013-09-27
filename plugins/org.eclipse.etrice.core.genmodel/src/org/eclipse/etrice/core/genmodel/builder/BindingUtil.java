@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -104,10 +105,10 @@ public class BindingUtil {
 			else if (si instanceof OptionalActorInstance) {
 				ac = ((OptionalActorInstance) si).getActorClass();
 			}
-			while (ac!=null) {
-				bindings.addAll(ac.getBindings());
-				ac = ac.getBase();
+			else {
+				assert(false): "unexpected sub type";
 			}
+			bindings.addAll(RoomHelpers.getAllBindings(ac));
 		}
 	}
 

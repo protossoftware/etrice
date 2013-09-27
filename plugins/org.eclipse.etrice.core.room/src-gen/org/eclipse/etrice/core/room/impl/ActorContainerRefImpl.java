@@ -15,6 +15,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StructureClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -152,6 +153,22 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CONTAINER_REF__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StructureClass getStructureClass()
+  {
+    if (this instanceof org.eclipse.etrice.core.room.ActorRef)
+      return ((org.eclipse.etrice.core.room.ActorRef)this).getType();
+    else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)
+      return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();
+    else
+      return null;
+    
   }
 
   /**

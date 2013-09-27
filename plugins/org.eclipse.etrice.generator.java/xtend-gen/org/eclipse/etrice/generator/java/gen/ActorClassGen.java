@@ -127,20 +127,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final String clsname = _xifexpression;
       EList<StandardOperation> _operations = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isConstructor = RoomHelpers.isConstructor(op);
-            return Boolean.valueOf(_isConstructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isConstructor = RoomHelpers.isConstructor(op);
+          return Boolean.valueOf(_isConstructor);
+        }
+      };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isDestructor = op.isDestructor();
-            return Boolean.valueOf(_isDestructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isDestructor = op.isDestructor();
+          return Boolean.valueOf(_isDestructor);
+        }
+      };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       final EList<RoomModel> models = root.getReferencedModels(ac);
@@ -262,12 +262,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
         final Function1<ActorRef,Boolean> _function_2 = new Function1<ActorRef,Boolean>() {
-            public Boolean apply(final ActorRef r) {
-              ReferenceType _refType = r.getRefType();
-              boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-              return Boolean.valueOf(_equals);
-            }
-          };
+          public Boolean apply(final ActorRef r) {
+            ReferenceType _refType = r.getRefType();
+            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
+            return Boolean.valueOf(_equals);
+          }
+        };
         Iterable<ActorRef> _filter_2 = IterableExtensions.<ActorRef>filter(_actorRefs, _function_2);
         for(final ActorRef sub : _filter_2) {
           _builder.append("import ");
@@ -380,12 +380,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
         final Function1<ActorRef,Boolean> _function_3 = new Function1<ActorRef,Boolean>() {
-            public Boolean apply(final ActorRef r) {
-              ReferenceType _refType = r.getRefType();
-              boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-              return Boolean.valueOf(_equals);
-            }
-          };
+          public Boolean apply(final ActorRef r) {
+            ReferenceType _refType = r.getRefType();
+            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
+            return Boolean.valueOf(_equals);
+          }
+        };
         Iterable<ActorRef> _filter_3 = IterableExtensions.<ActorRef>filter(_actorRefs_1, _function_3);
         for(final ActorRef sub_1 : _filter_3) {
           _builder.append("\t");

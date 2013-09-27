@@ -97,10 +97,10 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 public class RoomHelpers extends BaseHelpers {
 	
 	/**
-	 * Compute a list of the class itself followed by its base classes in order
+	 * Compute a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 * 
 	 * @param ac the {@link ActorClass}
-	 * @return a list of the class itself followed by its base classes in order
+	 * @return a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 */
 	public static List<ActorClass> getClassHierarchy(ActorClass ac) {
 		ArrayList<ActorClass> result = new ArrayList<ActorClass>();
@@ -1514,7 +1514,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 * including base classes. I.e. all end ports, all SAPs and all non-relaying SPPs.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 */
@@ -1528,6 +1528,29 @@ public class RoomHelpers extends BaseHelpers {
 			result.addAll(ac.getExternalEndPorts());
 			result.addAll(ac.getServiceAccessPoints());
 			result.addAll(ac.getImplementedSPPs());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all {@link Port}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link Port}s of an {@link ActorClass}
+	 */
+	public static List<Port> getAllPorts(ActorClass ac) {
+		ArrayList<Port> result = new ArrayList<Port>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getInternalPorts());
+			result.addAll(ac.getInterfacePorts());
 			
 			ac = ac.getBase();
 		}
@@ -1550,6 +1573,50 @@ public class RoomHelpers extends BaseHelpers {
 		}
 		
 		return refs;
+	}
+	
+	/**
+	 * Returns a list of all {@link Binding}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param pc an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link Binding}s of an {@link ActorClass}
+	 */
+	public static List<Binding> getAllBindings(ActorClass ac) {
+		ArrayList<Binding> result = new ArrayList<Binding>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getBindings());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all {@link LayerConnection}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param pc an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link LayerConnection}s of an {@link ActorClass}
+	 */
+	public static List<LayerConnection> getAllLayerConnections(ActorClass ac) {
+		ArrayList<LayerConnection> result = new ArrayList<LayerConnection>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getConnections());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
 	}
 
 	/**
@@ -2122,7 +2189,21 @@ public class RoomHelpers extends BaseHelpers {
 			return (ProtocolClass) pc;
 			else
 				return null;
-		}
+	}
+	
+	/**
+	 * Returns {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}.
+	 * 
+	 * @param item an {@link InterfaceItem}
+	 * @return {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}
+	 */
+	public static boolean isDataDriven(InterfaceItem item) {
+		ProtocolClass pc = getProtocol(item);
+		if (pc!=null && pc.getCommType()==CommunicationType.DATA_DRIVEN)
+			return true;
+		
+		return false;
+	}
 	
 	/**
 	 * Returns the {@link GeneralProtocolClass} of an {@link InterfaceItem}.

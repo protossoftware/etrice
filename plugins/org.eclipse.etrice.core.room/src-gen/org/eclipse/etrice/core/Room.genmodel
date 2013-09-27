@@ -206,6 +206,7 @@
     <genClasses ecoreClass="Room.ecore#//ActorContainerRef">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorContainerRef/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerRef/docu"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorContainerRef/getStructureClass"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//SubSystemRef">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemRef/type"/>

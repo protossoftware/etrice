@@ -49,7 +49,7 @@ public interface RefPath extends EObject
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder sb = new StringBuilder();\r\nfor (RefSegment ref : path.getRefs()) {\r\n\tsb.append(\"/\"+ref);\r\n}\r\nreturn sb.toString();\r\n'"
+   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder sb = new StringBuilder();\r\nfor (RefSegment ref : getRefs()) {\r\n\tsb.append(\"/\"+ref.toString());\r\n}\r\nreturn sb.toString();\r\n'"
    * @generated
    */
   String toString();

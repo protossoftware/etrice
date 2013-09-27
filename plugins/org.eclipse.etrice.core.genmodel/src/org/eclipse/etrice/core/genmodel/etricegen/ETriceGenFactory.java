@@ -194,6 +194,51 @@ public interface ETriceGenFactory extends EFactory {
 	ExpandedRefinedState createExpandedRefinedState();
 
 	/**
+	 * Returns a new object of class '<em>Open Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Open Binding</em>'.
+	 * @generated
+	 */
+	OpenBinding createOpenBinding();
+
+	/**
+	 * Returns a new object of class '<em>Open Service Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Open Service Connection</em>'.
+	 * @generated
+	 */
+	OpenServiceConnection createOpenServiceConnection();
+
+	/**
+	 * Returns a new object of class '<em>Wire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wire</em>'.
+	 * @generated
+	 */
+	Wire createWire();
+
+	/**
+	 * Returns a new object of class '<em>Wired Actor Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wired Actor Class</em>'.
+	 * @generated
+	 */
+	WiredActorClass createWiredActorClass();
+
+	/**
+	 * Returns a new object of class '<em>Wired Sub System Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wired Sub System Class</em>'.
+	 * @generated
+	 */
+	WiredSubSystemClass createWiredSubSystemClass();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

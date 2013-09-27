@@ -79,11 +79,11 @@ public class DataClassGen {
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isConstructor = RoomHelpers.isConstructor(op);
-            return Boolean.valueOf(_isConstructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isConstructor = RoomHelpers.isConstructor(op);
+          return Boolean.valueOf(_isConstructor);
+        }
+      };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       StringConcatenation _builder = new StringConcatenation();

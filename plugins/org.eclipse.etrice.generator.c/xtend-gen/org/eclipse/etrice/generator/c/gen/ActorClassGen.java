@@ -118,48 +118,48 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
-            return Boolean.valueOf(_equals);
-          }
-        };
+        public Boolean apply(final Port p) {
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+          return Boolean.valueOf(_equals);
+        }
+      };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            boolean _and = false;
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isConjugated = p.isConjugated();
-              _and = (_equals && _isConjugated);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            _and = (_equals && _isConjugated);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            boolean _and = false;
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isConjugated = p.isConjugated();
-              boolean _not = (!_isConjugated);
-              _and = (_equals && _not);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            boolean _not = (!_isConjugated);
+            _and = (_equals && _not);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
       ActorCommunicationType _commType = ac.getCommType();
       final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);

@@ -133,33 +133,53 @@ public class ImplPostprocessor {
       _builder_6.append("return spps;");
       _builder_6.newLine();
       PostprocessingHelpers.addOperation(actorClass, "getImplementedSPPs", _eClassifier_6, Integer.valueOf(_minus_2), _builder_6.toString());
-      final EClass refPath = PostprocessingHelpers.getClass(roomPackage, "RefPath");
-      EClassifier _eClassifier_7 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      final EClass actorContainerRef = PostprocessingHelpers.getClass(roomPackage, "ActorContainerRef");
+      EClassifier _eClassifier_7 = roomPackage.getEClassifier("StructureClass");
       StringConcatenation _builder_7 = new StringConcatenation();
-      _builder_7.append("StringBuilder sb = new StringBuilder();");
-      _builder_7.newLine();
-      _builder_7.append("for (RefSegment ref : getRefs()) {");
+      _builder_7.append("if (this instanceof org.eclipse.etrice.core.room.ActorRef)");
       _builder_7.newLine();
       _builder_7.append("\t");
-      _builder_7.append("sb.append(\"/\"+ref.toString());");
+      _builder_7.append("return ((org.eclipse.etrice.core.room.ActorRef)this).getType();");
       _builder_7.newLine();
-      _builder_7.append("}");
+      _builder_7.append("else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)");
       _builder_7.newLine();
-      _builder_7.append("return sb.toString();");
+      _builder_7.append("\t");
+      _builder_7.append("return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();");
       _builder_7.newLine();
-      PostprocessingHelpers.addOperation(refPath, 
-        "toString", _eClassifier_7, 
+      _builder_7.append("else");
+      _builder_7.newLine();
+      _builder_7.append("\t");
+      _builder_7.append("return null;");
+      _builder_7.newLine();
+      PostprocessingHelpers.addOperation(actorContainerRef, "getStructureClass", _eClassifier_7, 
         Integer.valueOf(1), _builder_7.toString());
+      final EClass refPath = PostprocessingHelpers.getClass(roomPackage, "RefPath");
+      EClassifier _eClassifier_8 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("StringBuilder sb = new StringBuilder();");
+      _builder_8.newLine();
+      _builder_8.append("for (RefSegment ref : getRefs()) {");
+      _builder_8.newLine();
+      _builder_8.append("\t");
+      _builder_8.append("sb.append(\"/\"+ref.toString());");
+      _builder_8.newLine();
+      _builder_8.append("}");
+      _builder_8.newLine();
+      _builder_8.append("return sb.toString();");
+      _builder_8.newLine();
+      PostprocessingHelpers.addOperation(refPath, 
+        "toString", _eClassifier_8, 
+        Integer.valueOf(1), _builder_8.toString());
       final EClass refSeg = PostprocessingHelpers.getClass(roomPackage, "RefSegment");
       EAttribute _attribute_2 = PostprocessingHelpers.getAttribute(refSeg, "idx");
       _attribute_2.setDefaultValueLiteral("-1");
-      EClassifier _eClassifier_8 = EcorePackage.eINSTANCE.getEClassifier("EString");
-      StringConcatenation _builder_8 = new StringConcatenation();
-      _builder_8.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
-      _builder_8.newLine();
+      EClassifier _eClassifier_9 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
+      _builder_9.newLine();
       boolean _addOperation = PostprocessingHelpers.addOperation(refSeg, 
-        "toString", _eClassifier_8, 
-        Integer.valueOf(1), _builder_8.toString());
+        "toString", _eClassifier_9, 
+        Integer.valueOf(1), _builder_9.toString());
       _xblockexpression = (_addOperation);
     }
     return _xblockexpression;

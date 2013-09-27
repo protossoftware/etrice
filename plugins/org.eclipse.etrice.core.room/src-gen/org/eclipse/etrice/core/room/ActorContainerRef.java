@@ -87,4 +87,13 @@ public interface ActorContainerRef extends EObject
    */
   void setDocu(Documentation value);
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof org.eclipse.etrice.core.room.ActorRef)\r\n\treturn ((org.eclipse.etrice.core.room.ActorRef)this).getType();\r\nelse if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)\r\n\treturn ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();\r\nelse\r\n\treturn null;\r\n'"
+   * @generated
+   */
+  StructureClass getStructureClass();
+
 } // ActorContainerRef

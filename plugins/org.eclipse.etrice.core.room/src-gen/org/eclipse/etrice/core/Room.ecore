@@ -792,6 +792,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link SubSystemRef}&lt;/li>&#xD;&#xA;  &lt;li>{@link ActorRef}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;The reference designates a specific role of the referenced structure class.&#xD;&#xA;"/>
     </eAnnotations>
+    <eOperations name="getStructureClass" eType="#//StructureClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.ActorRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.ActorRef)this).getType();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();&#xD;&#xA;else&#xD;&#xA;&#x9;return null;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>By this name the actor container reference is referred to in the model.&#xD;&#xA;"/>
@@ -875,7 +880,7 @@
     </eAnnotations>
     <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="StringBuilder sb = new StringBuilder();&#xD;&#xA;for (RefSegment ref : path.getRefs()) {&#xD;&#xA;&#x9;sb.append(&quot;/&quot;+ref);&#xD;&#xA;}&#xD;&#xA;return sb.toString();&#xD;&#xA;"/>
+        <details key="body" value="StringBuilder sb = new StringBuilder();&#xD;&#xA;for (RefSegment ref : getRefs()) {&#xD;&#xA;&#x9;sb.append(&quot;/&quot;+ref.toString());&#xD;&#xA;}&#xD;&#xA;return sb.toString();&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//RefSegment"

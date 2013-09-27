@@ -80,7 +80,7 @@ public class GenericActorClassGenerator {
       _xifexpression_2 = _allServiceImplementations;
     }
     final List<ServiceImplementation> svcImpls = _xifexpression_2;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     final ArrayList<Pair<String,String>> list = _arrayList;
     for (final Port ep : endPorts) {
       String _name = ep.getName();
@@ -116,7 +116,7 @@ public class GenericActorClassGenerator {
   
   public String genInterfaceItemConstantsForOptionalActor(final ActorClass ac) {
     final List<Port> ports = RoomHelpers.getAllInterfacePorts(ac);
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     final ArrayList<Pair<String,String>> list = _arrayList;
     Iterable<Indexed<Port>> _indexed = Indexed.<Port>indexed(ports);
     for (final Indexed<Port> ep : _indexed) {

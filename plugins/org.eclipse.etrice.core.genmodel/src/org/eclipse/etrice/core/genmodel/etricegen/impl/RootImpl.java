@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -83,6 +84,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getWiredInstances <em>Wired Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -189,6 +191,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<ActorClass> optionalActorClasses;
+
+	/**
+	 * The cached value of the '{@link #getWiredInstances() <em>Wired Instances</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWiredInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WiredStructureClass> wiredInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -338,6 +350,18 @@ public class RootImpl extends EObjectImpl implements Root {
 			optionalActorClasses = new EObjectResolvingEList<ActorClass>(ActorClass.class, this, ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES);
 		}
 		return optionalActorClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<WiredStructureClass> getWiredInstances() {
+		if (wiredInstances == null) {
+			wiredInstances = new EObjectContainmentEList<WiredStructureClass>(WiredStructureClass.class, this, ETriceGenPackage.ROOT__WIRED_INSTANCES);
+		}
+		return wiredInstances;
 	}
 
 	private void collectSubSystems() {
@@ -636,6 +660,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return ((InternalEList<?>)getXpActorClasses()).basicRemove(otherEnd, msgs);
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
 				return ((InternalEList<?>)getOptionalInstances()).basicRemove(otherEnd, msgs);
+			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
+				return ((InternalEList<?>)getWiredInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -674,6 +700,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getOptionalInstances();
 			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
 				return getOptionalActorClasses();
+			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
+				return getWiredInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -734,6 +762,10 @@ public class RootImpl extends EObjectImpl implements Root {
 				getOptionalActorClasses().clear();
 				getOptionalActorClasses().addAll((Collection<? extends ActorClass>)newValue);
 				return;
+			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
+				getWiredInstances().clear();
+				getWiredInstances().addAll((Collection<? extends WiredStructureClass>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -782,6 +814,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
 				getOptionalActorClasses().clear();
 				return;
+			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
+				getWiredInstances().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -820,6 +855,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return optionalInstances != null && !optionalInstances.isEmpty();
 			case ETriceGenPackage.ROOT__OPTIONAL_ACTOR_CLASSES:
 				return optionalActorClasses != null && !optionalActorClasses.isEmpty();
+			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
+				return wiredInstances != null && !wiredInstances.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

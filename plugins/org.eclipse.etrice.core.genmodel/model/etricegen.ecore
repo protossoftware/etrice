@@ -55,6 +55,8 @@
         eType="#//OptionalActorInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="optionalActorClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wiredInstances" upperBound="-1"
+        eType="#//WiredStructureClass" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceBase" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -259,5 +261,38 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedDo" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DetailCode"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WiredStructureClass" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
+        eType="#//Wire" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="openBindings" upperBound="-1"
+        eType="#//OpenBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedServices" upperBound="-1"
+        eType="#//OpenServiceConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredServices" upperBound="-1"
+        eType="#//OpenServiceConnection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpenBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Port"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OpenServiceConnection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wire">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataDriven" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path1" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path2" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WiredActorClass" eSuperTypes="#//WiredStructureClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WiredSubSystemClass" eSuperTypes="#//WiredStructureClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
   </eClassifiers>
 </ecore:EPackage>

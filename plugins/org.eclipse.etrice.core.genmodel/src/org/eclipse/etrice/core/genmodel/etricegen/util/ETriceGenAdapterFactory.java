@@ -186,6 +186,30 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 				return createExpandedRefinedStateAdapter();
 			}
 			@Override
+			public Adapter caseWiredStructureClass(WiredStructureClass object) {
+				return createWiredStructureClassAdapter();
+			}
+			@Override
+			public Adapter caseOpenBinding(OpenBinding object) {
+				return createOpenBindingAdapter();
+			}
+			@Override
+			public Adapter caseOpenServiceConnection(OpenServiceConnection object) {
+				return createOpenServiceConnectionAdapter();
+			}
+			@Override
+			public Adapter caseWire(Wire object) {
+				return createWireAdapter();
+			}
+			@Override
+			public Adapter caseWiredActorClass(WiredActorClass object) {
+				return createWiredActorClassAdapter();
+			}
+			@Override
+			public Adapter caseWiredSubSystemClass(WiredSubSystemClass object) {
+				return createWiredSubSystemClassAdapter();
+			}
+			@Override
 			public Adapter caseStateGraphItem(StateGraphItem object) {
 				return createStateGraphItemAdapter();
 			}
@@ -526,6 +550,90 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpandedRefinedStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass <em>Wired Structure Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass
+	 * @generated
+	 */
+	public Adapter createWiredStructureClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding <em>Open Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenBinding
+	 * @generated
+	 */
+	public Adapter createOpenBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection <em>Open Service Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection
+	 * @generated
+	 */
+	public Adapter createOpenServiceConnectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.Wire <em>Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Wire
+	 * @generated
+	 */
+	public Adapter createWireAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass <em>Wired Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+	 * @generated
+	 */
+	public Adapter createWiredActorClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass <em>Wired Sub System Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
+	 * @generated
+	 */
+	public Adapter createWiredSubSystemClassAdapter() {
 		return null;
 	}
 

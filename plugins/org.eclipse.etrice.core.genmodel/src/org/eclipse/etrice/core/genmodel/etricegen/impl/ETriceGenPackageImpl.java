@@ -18,9 +18,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -33,6 +31,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
@@ -44,7 +44,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
-
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -207,6 +210,48 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * @generated
 	 */
 	private EClass expandedRefinedStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wiredStructureClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass openBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass openServiceConnectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wiredActorClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wiredSubSystemClassEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -403,6 +448,15 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getRoot_OptionalActorClasses() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_WiredInstances() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1085,6 +1139,177 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWiredStructureClass() {
+		return wiredStructureClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredStructureClass_Wires() {
+		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredStructureClass_OpenBindings() {
+		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredStructureClass_ProvidedServices() {
+		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredStructureClass_RequiredServices() {
+		return (EReference)wiredStructureClassEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOpenBinding() {
+		return openBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOpenBinding_Path() {
+		return (EAttribute)openBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOpenBinding_Port() {
+		return (EReference)openBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOpenServiceConnection() {
+		return openServiceConnectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOpenServiceConnection_Path() {
+		return (EAttribute)openServiceConnectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOpenServiceConnection_Protocol() {
+		return (EReference)openServiceConnectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWire() {
+		return wireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWire_DataDriven() {
+		return (EAttribute)wireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWire_Path1() {
+		return (EAttribute)wireEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWire_Path2() {
+		return (EAttribute)wireEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWiredActorClass() {
+		return wiredActorClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredActorClass_ActorClass() {
+		return (EReference)wiredActorClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWiredSubSystemClass() {
+		return wiredSubSystemClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWiredSubSystemClass_SubSystemClass() {
+		return (EReference)wiredSubSystemClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getPortKind() {
 		return portKindEEnum;
 	}
@@ -1131,6 +1356,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(rootEClass, ROOT__SUB_SYSTEM_CLASSES);
 		createEReference(rootEClass, ROOT__OPTIONAL_INSTANCES);
 		createEReference(rootEClass, ROOT__OPTIONAL_ACTOR_CLASSES);
+		createEReference(rootEClass, ROOT__WIRED_INSTANCES);
 
 		instanceBaseEClass = createEClass(INSTANCE_BASE);
 		createEAttribute(instanceBaseEClass, INSTANCE_BASE__NAME);
@@ -1228,6 +1454,31 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_EXIT);
 		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_DO);
 
+		wiredStructureClassEClass = createEClass(WIRED_STRUCTURE_CLASS);
+		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__WIRES);
+		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__OPEN_BINDINGS);
+		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES);
+		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES);
+
+		openBindingEClass = createEClass(OPEN_BINDING);
+		createEAttribute(openBindingEClass, OPEN_BINDING__PATH);
+		createEReference(openBindingEClass, OPEN_BINDING__PORT);
+
+		openServiceConnectionEClass = createEClass(OPEN_SERVICE_CONNECTION);
+		createEAttribute(openServiceConnectionEClass, OPEN_SERVICE_CONNECTION__PATH);
+		createEReference(openServiceConnectionEClass, OPEN_SERVICE_CONNECTION__PROTOCOL);
+
+		wireEClass = createEClass(WIRE);
+		createEAttribute(wireEClass, WIRE__DATA_DRIVEN);
+		createEAttribute(wireEClass, WIRE__PATH1);
+		createEAttribute(wireEClass, WIRE__PATH2);
+
+		wiredActorClassEClass = createEClass(WIRED_ACTOR_CLASS);
+		createEReference(wiredActorClassEClass, WIRED_ACTOR_CLASS__ACTOR_CLASS);
+
+		wiredSubSystemClassEClass = createEClass(WIRED_SUB_SYSTEM_CLASS);
+		createEReference(wiredSubSystemClassEClass, WIRED_SUB_SYSTEM_CLASS__SUB_SYSTEM_CLASS);
+
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
 	}
@@ -1276,6 +1527,8 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		sppInstanceEClass.getESuperTypes().add(this.getInstanceBase());
 		serviceImplInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
 		expandedRefinedStateEClass.getESuperTypes().add(theRoomPackage.getSimpleState());
+		wiredActorClassEClass.getESuperTypes().add(this.getWiredStructureClass());
+		wiredSubSystemClassEClass.getESuperTypes().add(this.getWiredStructureClass());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1292,6 +1545,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getRoot_SubSystemClasses(), theRoomPackage.getSubSystemClass(), null, "subSystemClasses", null, 0, -1, Root.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_OptionalInstances(), this.getOptionalActorInstance(), null, "optionalInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_OptionalActorClasses(), theRoomPackage.getActorClass(), null, "optionalActorClasses", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_WiredInstances(), this.getWiredStructureClass(), null, "wiredInstances", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(rootEClass, theRoomPackage.getRoomModel(), "getReferencedModels", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getRoomClass(), "cls", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1492,6 +1746,31 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		op = addEOperation(expandedRefinedStateEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theRoomPackage.getRefinedState(), "rs", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(wiredStructureClassEClass, WiredStructureClass.class, "WiredStructureClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWiredStructureClass_Wires(), this.getWire(), null, "wires", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWiredStructureClass_OpenBindings(), this.getOpenBinding(), null, "openBindings", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWiredStructureClass_ProvidedServices(), this.getOpenServiceConnection(), null, "providedServices", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWiredStructureClass_RequiredServices(), this.getOpenServiceConnection(), null, "requiredServices", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(openBindingEClass, OpenBinding.class, "OpenBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOpenBinding_Path(), ecorePackage.getEString(), "path", null, 0, -1, OpenBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOpenBinding_Port(), theRoomPackage.getPort(), null, "port", null, 0, 1, OpenBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(openServiceConnectionEClass, OpenServiceConnection.class, "OpenServiceConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOpenServiceConnection_Path(), ecorePackage.getEString(), "path", null, 0, -1, OpenServiceConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOpenServiceConnection_Protocol(), theRoomPackage.getProtocolClass(), null, "protocol", null, 0, 1, OpenServiceConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(wireEClass, Wire.class, "Wire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWire_DataDriven(), ecorePackage.getEBoolean(), "dataDriven", null, 0, 1, Wire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWire_Path1(), ecorePackage.getEString(), "path1", null, 0, -1, Wire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWire_Path2(), ecorePackage.getEString(), "path2", null, 0, -1, Wire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(wiredActorClassEClass, WiredActorClass.class, "WiredActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWiredActorClass_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, WiredActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(wiredSubSystemClassEClass, WiredSubSystemClass.class, "WiredSubSystemClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWiredSubSystemClass_SubSystemClass(), theRoomPackage.getSubSystemClass(), null, "subSystemClass", null, 0, 1, WiredSubSystemClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");

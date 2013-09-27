@@ -89,6 +89,20 @@ class ImplPostprocessor {
 				return spps;
 			'''
 		)
+		
+		val actorContainerRef = roomPackage.getClass("ActorContainerRef")
+		actorContainerRef.addOperation("getStructureClass",
+			roomPackage.getEClassifier("StructureClass"),
+			1,
+			'''
+				if (this instanceof org.eclipse.etrice.core.room.ActorRef)
+					return ((org.eclipse.etrice.core.room.ActorRef)this).getType();
+				else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)
+					return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();
+				else
+					return null;
+			'''
+		)
 				
 		val refPath = roomPackage.getClass("RefPath")
 		refPath.addOperation(
