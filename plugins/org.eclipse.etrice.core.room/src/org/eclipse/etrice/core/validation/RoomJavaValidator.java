@@ -14,6 +14,7 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -27,9 +28,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -253,6 +256,56 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		if (ValidationUtil.isCircularClassHierarchy(ac))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+	}
+	
+	@Check
+	public void checkUniqueNames(ActorClass ac) {
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return;
+		
+		HashMap<String, EObject> name2obj = new HashMap<String, EObject>();
+		
+		// first add all base class objects (we'll add no errors for them)
+		if (ac.getBase()!=null) {
+			ActorClass base = ac.getBase();
+			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(base);
+			for (InterfaceItem item : items) {
+				name2obj.put(item.getName(), item);
+			}
+			List<ActorContainerRef> refs = RoomHelpers.getAllActorContainerRefs(base);
+			for (ActorContainerRef ref : refs) {
+				name2obj.put(ref.getName(), ref);
+			}
+		}
+		
+		// now we check our own items and refs
+		List<InterfaceItem> items = RoomHelpers.getInterfaceItems(ac);
+		for (InterfaceItem item : items) {
+			if (name2obj.containsKey(item.getName())) {
+				EObject duplicate = name2obj.get(item.getName());
+				String location = RoomNameProvider.getLocation(duplicate);
+				EObject parent = item.eContainer();
+				@SuppressWarnings("unchecked")
+				int idx = ((List<EObject>)parent.eGet(item.eContainingFeature())).indexOf(item);
+				error("names must be unique (duplicate of "+location+")", parent, item.eContainingFeature(), idx);
+			}
+			else
+				name2obj.put(item.getName(), item);
+		}
+		
+		List<ActorContainerRef> refs = RoomHelpers.getRefs(ac, false);
+		for (ActorContainerRef ref : refs) {
+			if (name2obj.containsKey(ref.getName())) {
+				EObject duplicate = name2obj.get(ref.getName());
+				String location = RoomNameProvider.getLocation(duplicate);
+				EObject parent = ref.eContainer();
+				@SuppressWarnings("unchecked")
+				int idx = ((List<EObject>)parent.eGet(ref.eContainingFeature())).indexOf(ref);
+				error("names must be unique (duplicate of "+location+")", parent, ref.eContainingFeature(), idx);
+			}
+			else
+				name2obj.put(ref.getName(), ref);
+		}
 	}
 	
 	@Check

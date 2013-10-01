@@ -79,7 +79,7 @@ public class RoomNameProvider {
 		public String caseChoicePoint(ChoicePoint object) { return object.getName(); }
 		public String caseTrPoint(TrPoint object) { return object.getName(); }
 		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); }
-		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); }
+		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return "ActorRef '"+object.getName()+"'"; }
 		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; }
 		public String caseSAP(org.eclipse.etrice.core.room.SAP object) { return "SAP '"+object.getName()+"'"; }
 		public String caseSPP(org.eclipse.etrice.core.room.SPP object) { return "SPP '"+object.getName()+"'"; }
