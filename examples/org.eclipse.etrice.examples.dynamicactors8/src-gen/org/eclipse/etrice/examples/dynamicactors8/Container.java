@@ -9,6 +9,7 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -73,6 +74,11 @@ public class Container extends ActorClassBase implements IPersistable {
 		// sub actors
 		opt = new OptionalInterface(this, "opt");
 		optarr = new OptionalReplicatedInterface(this, "optarr");
+		
+		// wiring
+		InterfaceItemBase.connect(this, "opt/fct", "op");
+		InterfaceItemBase.connect(this, "optarr/fct", "opa");
+		
 
 	}
 	
@@ -121,21 +127,22 @@ public class Container extends ActorClassBase implements IPersistable {
 	public static final int TRIG_opa__hello = IFITEM_opa + EVT_SHIFT*PStep.OUT_hello;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","Init",
-	"DestroyAndCreate",
-	"DestroyAndRestore",
-	"Done",
-	"LoadInArray",
-	"ReceivedHello"
+	protected static final String stateStrings[] = {
+		"<no state>",
+		"<top>",
+		"Init",
+		"DestroyAndCreate",
+		"DestroyAndRestore",
+		"Done",
+		"LoadInArray",
+		"ReceivedHello"
 	};
-	
+		
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
-		if (stateStrings[new_state]!="Idle") {
-		}	
 		this.state = new_state;
 	}
 	

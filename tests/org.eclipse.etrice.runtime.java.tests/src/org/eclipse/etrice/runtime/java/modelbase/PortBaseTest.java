@@ -37,13 +37,13 @@ public class PortBaseTest extends TestCase {
 		RTServices.getInstance().setSubSystem(top);
 		top.addPathToThread("/TOP/Rcv0", 0);
 		top.addPathToThread("/TOP/Rcv1", 1);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv1/Port1");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv0/Port0");
 		
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
+		
+		port0.connectWith(port1);
 		
 		assertEquals(msgSvcCtrl.getMsgSvc(0), port0.getMsgReceiver());
 		assertEquals(msgSvcCtrl.getMsgSvc(1), port1.getMsgReceiver());

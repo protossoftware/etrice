@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -34,13 +35,16 @@ import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -65,6 +69,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -97,6 +102,22 @@ public class NodeGen {
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
+    HashMap<SubSystemClass,WiredSubSystemClass> _hashMap = new HashMap<SubSystemClass, WiredSubSystemClass>();
+    final HashMap<SubSystemClass,WiredSubSystemClass> sscc2wired = _hashMap;
+    EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
+    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+      public Boolean apply(final WiredStructureClass w) {
+        return Boolean.valueOf((w instanceof WiredSubSystemClass));
+      }
+    };
+    Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      public void apply(final WiredStructureClass w) {
+        SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
+        sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
+      }
+    };
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
       List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
@@ -105,14 +126,16 @@ public class NodeGen {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
           SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
+          final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass);
           SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-          String _path = this._roomExtensions.getPath(_subSystemClass_1);
-          final String path = (_generationTargetPath + _path);
+          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass_1);
           SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
+          String _path = this._roomExtensions.getPath(_subSystemClass_2);
+          final String path = (_generationTargetPath + _path);
           SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-          String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
+          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_3);
+          SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+          String _path_1 = this._roomExtensions.getPath(_subSystemClass_4);
           final String infopath = (_generationInfoPath + _path_1);
           final String file = this._javaExtensions.getJavaFileName(nr, ssi);
           this.checkDataPorts(ssi);
@@ -123,14 +146,14 @@ public class NodeGen {
           for (final PhysicalThread thread : _threads) {
             {
               EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-              final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
+              final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
                 public Boolean apply(final ActorInstance ai) {
                   PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
                   boolean _equals = Objects.equal(_physicalThread, thread);
                   return Boolean.valueOf(_equals);
                 }
               };
-              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
+              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_2);
               boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
               boolean _not = (!_isEmpty);
               if (_not) {
@@ -138,7 +161,7 @@ public class NodeGen {
               }
             }
           }
-          CharSequence _generate = this.generate(root, ssi, usedThreads);
+          CharSequence _generate = this.generate(root, ssi, wired, usedThreads);
           this.fileIO.generateFile("generating Node implementation", path, infopath, file, _generate);
           boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
           if (_hasVariableService) {
@@ -185,7 +208,7 @@ public class NodeGen {
     return result;
   }
   
-  public CharSequence generate(final Root root, final SubSystemInstance comp, final HashSet<PhysicalThread> usedThreads) {
+  public CharSequence generate(final Root root, final SubSystemInstance comp, final WiredSubSystemClass wired, final HashSet<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final SubSystemClass cc = comp.getSubSystemClass();
@@ -230,6 +253,8 @@ public class NodeGen {
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.RTServices;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;");
       _builder.newLine();
@@ -400,92 +425,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("// port to peer port mappings");
-      _builder.newLine();
-      {
-        BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
-        for(final AbstractInstance ai_1 : _allSubInstances) {
-          _builder.append("\t\t");
-          EList<? extends InterfaceItemInstance> _xifexpression = null;
-          if ((ai_1 instanceof ActorInstance)) {
-            EList<InterfaceItemInstance> _orderedIfItemInstances = ((ActorInstance) ai_1).getOrderedIfItemInstances();
-            _xifexpression = _orderedIfItemInstances;
-          } else {
-            EList<PortInstance> _ports = ai_1.getPorts();
-            _xifexpression = _ports;
-          }
-          final EList<? extends InterfaceItemInstance> ports = _xifexpression;
-          _builder.newLineIfNotEmpty();
-          {
-            for(final InterfaceItemInstance pi : ports) {
-              {
-                EList<InterfaceItemInstance> _peers = pi.getPeers();
-                int _size = _peers.size();
-                boolean _greaterThan = (_size > 0);
-                if (_greaterThan) {
-                  _builder.append("\t\t");
-                  _builder.append("addPathToPeers(\"");
-                  String _path_1 = pi.getPath();
-                  _builder.append(_path_1, "		");
-                  _builder.append("\", ");
-                  {
-                    EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
-                    boolean _hasElements = false;
-                    for(final InterfaceItemInstance peer : _peers_1) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate(",", "		");
-                      }
-                      _builder.append("\"");
-                      String _path_2 = peer.getPath();
-                      _builder.append(_path_2, "		");
-                      _builder.append("\"");
-                    }
-                  }
-                  _builder.append(");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
-          _builder.append("\t\t");
-          EList<ServiceImplInstance> _xifexpression_1 = null;
-          if ((ai_1 instanceof ActorInterfaceInstance)) {
-            EList<ServiceImplInstance> _providedServices = ((ActorInterfaceInstance) ai_1).getProvidedServices();
-            _xifexpression_1 = _providedServices;
-          } else {
-            _xifexpression_1 = null;
-          }
-          final EList<ServiceImplInstance> services = _xifexpression_1;
-          _builder.newLineIfNotEmpty();
-          {
-            boolean _notEquals = (!Objects.equal(services, null));
-            if (_notEquals) {
-              {
-                for(final ServiceImplInstance svc : services) {
-                  _builder.append("\t\t");
-                  _builder.append("addPathToPeers(\"");
-                  String _path_3 = ai_1.getPath();
-                  _builder.append(_path_3, "		");
-                  _builder.append("/");
-                  ProtocolClass _protocol = svc.getProtocol();
-                  String _fullyQualifiedName = this._roomExtensions.getFullyQualifiedName(_protocol);
-                  _builder.append(_fullyQualifiedName, "		");
-                  _builder.append("\", \"");
-                  String _path_4 = svc.getPath();
-                  _builder.append(_path_4, "		");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
-        }
-      }
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// sub actors");
@@ -495,8 +434,8 @@ public class NodeGen {
         for(final ActorRef sub : _actorRefs) {
           {
             int _multiplicity = sub.getMultiplicity();
-            boolean _greaterThan_1 = (_multiplicity > 1);
-            if (_greaterThan_1) {
+            boolean _greaterThan = (_multiplicity > 1);
+            if (_greaterThan) {
               _builder.append("\t\t");
               _builder.append("for (int i=0; i<");
               int _multiplicity_1 = sub.getMultiplicity();
@@ -560,16 +499,16 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("// wire optional actor interfaces with services");
+      _builder.append("// create service brokers in optional actor interfaces");
       _builder.newLine();
       {
-        BasicEList<AbstractInstance> _allSubInstances_1 = this._roomExtensions.getAllSubInstances(comp);
+        BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
         final Function1<AbstractInstance,Boolean> _function_1 = new Function1<AbstractInstance,Boolean>() {
           public Boolean apply(final AbstractInstance inst) {
             return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
           }
         };
-        Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances_1, _function_1);
+        Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_1);
         final Function1<AbstractInstance,ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance,ActorInterfaceInstance>() {
           public ActorInterfaceInstance apply(final AbstractInstance inst) {
             return ((ActorInterfaceInstance) inst);
@@ -583,20 +522,34 @@ public class NodeGen {
           _builder.append("\t\t");
           _builder.append("\t");
           _builder.append("OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject(\"");
-          String _path_5 = aii.getPath();
-          _builder.append(_path_5, "			");
+          String _path_1 = aii.getPath();
+          _builder.append(_path_1, "			");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
           {
-            EList<ServiceImplInstance> _providedServices_1 = aii.getProvidedServices();
-            for(final ServiceImplInstance svc_1 : _providedServices_1) {
+            EList<ServiceImplInstance> _providedServices = aii.getProvidedServices();
+            for(final ServiceImplInstance svc : _providedServices) {
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("new InterfaceItemBroker(oai, \"");
-              ProtocolClass _protocol_1 = svc_1.getProtocol();
-              String _fullyQualifiedName_1 = this._roomExtensions.getFullyQualifiedName(_protocol_1);
-              _builder.append(_fullyQualifiedName_1, "			");
+              ProtocolClass _protocol = svc.getProtocol();
+              String _fullyQualifiedName = this._roomExtensions.getFullyQualifiedName(_protocol);
+              _builder.append(_fullyQualifiedName, "			");
               _builder.append("\", 0);");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("InterfaceItemBase.connect(this, \"");
+              String _path_2 = svc.getPath();
+              _builder.append(_path_2, "			");
+              _builder.append("\", \"");
+              String _path_3 = aii.getPath();
+              String _plus = (_path_3 + Character.valueOf(InstanceBase.pathDelim));
+              ProtocolClass _protocol_1 = svc.getProtocol();
+              String _fullyQualifiedName_1 = this._roomExtensions.getFullyQualifiedName(_protocol_1);
+              String _plus_1 = (_plus + _fullyQualifiedName_1);
+              _builder.append(_plus_1, "			");
+              _builder.append("\");");
               _builder.newLineIfNotEmpty();
             }
           }
@@ -608,33 +561,62 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("// wiring");
+      _builder.newLine();
+      {
+        EList<Wire> _wires = wired.getWires();
+        for(final Wire wire : _wires) {
+          _builder.append("\t\t");
+          String _xifexpression = null;
+          boolean _isDataDriven = wire.isDataDriven();
+          if (_isDataDriven) {
+            _xifexpression = "DataPortBase";
+          } else {
+            _xifexpression = "InterfaceItemBase";
+          }
+          _builder.append(_xifexpression, "		");
+          _builder.append(".connect(this, \"");
+          EList<String> _path1 = wire.getPath1();
+          String _join = IterableExtensions.join(_path1, "/");
+          _builder.append(_join, "		");
+          _builder.append("\", \"");
+          EList<String> _path2 = wire.getPath2();
+          String _join_1 = IterableExtensions.join(_path2, "/");
+          _builder.append(_join_1, "		");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("// apply instance attribute configurations");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances_1 = comp.getAllContainedInstances();
-        for(final ActorInstance ai_2 : _allContainedInstances_1) {
+        for(final ActorInstance ai_1 : _allContainedInstances_1) {
           _builder.append("\t\t");
-          final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_2, "inst");
+          final CharSequence cfg = this.configGenAddon.genActorInstanceConfig(ai_1, "inst");
           _builder.newLineIfNotEmpty();
           {
             int _length = cfg.length();
-            boolean _greaterThan_2 = (_length > 0);
-            if (_greaterThan_2) {
+            boolean _greaterThan_1 = (_length > 0);
+            if (_greaterThan_1) {
               _builder.append("\t\t");
               _builder.append("{");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              ActorClass _actorClass = ai_2.getActorClass();
+              ActorClass _actorClass = ai_1.getActorClass();
               String _name_11 = _actorClass.getName();
               _builder.append(_name_11, "			");
               _builder.append(" inst = (");
-              ActorClass _actorClass_1 = ai_2.getActorClass();
+              ActorClass _actorClass_1 = ai_1.getActorClass();
               String _name_12 = _actorClass_1.getName();
               _builder.append(_name_12, "			");
               _builder.append(") getObject(\"");
-              String _path_6 = ai_2.getPath();
-              _builder.append(_path_6, "			");
+              String _path_4 = ai_1.getPath();
+              _builder.append(_path_4, "			");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");

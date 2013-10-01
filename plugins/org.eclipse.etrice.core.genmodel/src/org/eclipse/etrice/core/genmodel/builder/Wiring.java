@@ -476,7 +476,7 @@ public class Wiring {
 		// propagate unsatisfied requested services
 		for (ActorContainerRef ref : refs) {
 			WiredStructureClass sub = null;
-			if (ref instanceof ActorRef)
+			if (ref instanceof ActorRef && ((ActorRef)ref).getRefType()==ReferenceType.FIXED)
 				sub = getWiredActorClass(((ActorRef) ref).getType());
 			
 			if (sub!=null) {

@@ -23,12 +23,12 @@ class Optional1Interface extends ScalarOptionalActorInterfaceBase {
 	}
 	
 	@Override
-		protected void logCreation(String actorClass, String name) {
+	protected void logCreation(String actorClass, String name) {
 		DebuggingService.getInstance().addMessageActorCreate(this, actorClass, name);
 	}
 	
 	@Override
-		protected void logDeletion(String name) {
+	protected void logDeletion(String name) {
 		DebuggingService.getInstance().addMessageActorDestroy(this, name);
 	}
 }

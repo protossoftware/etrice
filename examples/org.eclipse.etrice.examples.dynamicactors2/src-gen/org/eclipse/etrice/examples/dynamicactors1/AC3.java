@@ -5,6 +5,7 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -48,6 +49,9 @@ public class AC3 extends ActorClassBase {
 		// own service implementations
 		
 		// sub actors
+		
+		// wiring
+		
 
 	}
 	
@@ -78,16 +82,10 @@ public class AC3 extends ActorClassBase {
 	public static final int POLLING = 0;
 	public static final int TRIG_p0__sayHello = IFITEM_p0 + EVT_SHIFT*PC.IN_sayHello;
 	
-	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","Ready"
-	};
-	
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE, NO_STATE, NO_STATE};
 	
 	private void setState(int new_state) {
-		if (stateStrings[new_state]!="Idle") {
-		}	
 		this.state = new_state;
 	}
 	

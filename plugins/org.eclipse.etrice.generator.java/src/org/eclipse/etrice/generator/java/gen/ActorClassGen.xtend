@@ -29,6 +29,9 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.java.Main
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+import org.eclipse.etrice.core.room.ActorClass
+import java.util.HashMap
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -44,18 +47,21 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension StateMachineGen
 	
 	def doGenerate(Root root) {
+		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
+		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
 		for (xpac: root.xpActorClasses) {
+			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
 			var file = xpac.actorClass.getJavaFileName
 			if (manualBehavior)
 				file = "Abstract"+file
-			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, manualBehavior))
+			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, wired, manualBehavior))
 		}
 	}
 	
-	def generate(Root root, ExpandedActorClass xpac, boolean manualBehavior) {
+	def generate(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
 		val ctor = ac.operations.filter(op|op.constructor).head
@@ -84,6 +90,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 		import «baseClassImport»;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+		import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -177,6 +184,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 						new «sub.type.name»(this, "«sub.name»");
 					«ENDIF»
 				«ENDFOR»
+				
+				// wiring
+				«FOR wire: wired.wires»
+					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
+				«ENDFOR»
+				
 				«IF ctor!=null»
 					
 					{

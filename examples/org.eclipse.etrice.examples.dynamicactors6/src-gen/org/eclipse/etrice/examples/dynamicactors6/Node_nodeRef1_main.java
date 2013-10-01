@@ -8,10 +8,12 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
 
 
 
@@ -42,14 +44,17 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 		// thread mappings
 		addPathToThread("/LS/main/appl", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LS/main/appl/cont", THREAD_PHYSICALTHREAD1);
-		
-		// port to peer port mappings
-		addPathToPeers("/LS/main/appl/cont/p0", "/LS/main/appl/cont/opt/p0");
-		addPathToPeers("/LS/main/appl/cont/opt/p0", "/LS/main/appl/cont/p0");
 
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "appl");
 		new Appl(this, "appl"); 
+		
+		// create service brokers in optional actor interfaces
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LS/main/appl/cont/opt");
+		}
+		
+		// wiring
 		
 		// apply instance attribute configurations
 	}
@@ -74,14 +79,14 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 	}
 	
 	public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {
-		if (optionalActorClass.equals("Optional2")) {
-			if ("Optional2".equals(actorClass)) {
-				return new Optional2Factory();
-			}
-		}
-		else if (optionalActorClass.equals("Optional1")) {
+		if (optionalActorClass.equals("Optional1")) {
 			if ("Optional1".equals(actorClass)) {
 				return new Optional1Factory();
+			}
+		}
+		else if (optionalActorClass.equals("Optional2")) {
+			if ("Optional2".equals(actorClass)) {
+				return new Optional2Factory();
 			}
 		}
 		

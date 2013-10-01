@@ -12,8 +12,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.List;
-
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 
 /**
@@ -24,14 +22,5 @@ public class DataSendPort extends DataPortBase {
 
 	public DataSendPort(IRTObject parent, String name, int localId) {
 		super(parent, name, localId);
-		
-		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
-		if (peerPaths!=null) {
-			for (String peerPath : peerPaths) {
-				IRTObject object = getObject(peerPath);
-				if (object instanceof DataReceivePort)
-					((DataReceivePort)object).connect(this);
-			}
-		}
 	}
 }

@@ -13,11 +13,15 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -50,6 +54,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -84,34 +89,52 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private StateMachineGen _stateMachineGen;
   
   public void doGenerate(final Root root) {
+    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
+    final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
+    EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
+    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+      public Boolean apply(final WiredStructureClass w) {
+        return Boolean.valueOf((w instanceof WiredActorClass));
+      }
+    };
+    Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      public void apply(final WiredStructureClass w) {
+        ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
+        ac2wired.put(_actorClass, ((WiredActorClass) w));
+      }
+    };
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        final boolean manualBehavior = RoomHelpers.isBehaviorAnnotationPresent(_actorClass, "BehaviorManual");
+        final WiredActorClass wired = ac2wired.get(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass_1);
+        final boolean manualBehavior = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_1, "BehaviorManual");
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _path = this._roomExtensions.getPath(_actorClass_2);
-        final String path = (_generationTargetPath + _path);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass_2);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_3);
+        String _path = this._roomExtensions.getPath(_actorClass_3);
+        final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_4 = xpac.getActorClass();
-        String _path_1 = this._roomExtensions.getPath(_actorClass_4);
-        final String infopath = (_generationInfoPath + _path_1);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_4);
         ActorClass _actorClass_5 = xpac.getActorClass();
-        String file = this._javaExtensions.getJavaFileName(_actorClass_5);
+        String _path_1 = this._roomExtensions.getPath(_actorClass_5);
+        final String infopath = (_generationInfoPath + _path_1);
+        ActorClass _actorClass_6 = xpac.getActorClass();
+        String file = this._javaExtensions.getJavaFileName(_actorClass_6);
         if (manualBehavior) {
           String _plus = ("Abstract" + file);
           file = _plus;
         }
-        CharSequence _generate = this.generate(root, xpac, manualBehavior);
+        CharSequence _generate = this.generate(root, xpac, wired, manualBehavior);
         this.fileIO.generateFile("generating ActorClass implementation", path, infopath, file, _generate);
       }
     }
   }
   
-  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final boolean manualBehavior) {
+  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -227,6 +250,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
       _builder.newLine();
@@ -639,6 +664,37 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// wiring");
+      _builder.newLine();
+      {
+        EList<Wire> _wires = wired.getWires();
+        for(final Wire wire : _wires) {
+          _builder.append("\t\t");
+          String _xifexpression_5 = null;
+          boolean _isDataDriven = wire.isDataDriven();
+          if (_isDataDriven) {
+            _xifexpression_5 = "DataPortBase";
+          } else {
+            _xifexpression_5 = "InterfaceItemBase";
+          }
+          _builder.append(_xifexpression_5, "		");
+          _builder.append(".connect(this, \"");
+          EList<String> _path1 = wire.getPath1();
+          String _join = IterableExtensions.join(_path1, "/");
+          _builder.append(_join, "		");
+          _builder.append("\", \"");
+          EList<String> _path2 = wire.getPath2();
+          String _join_1 = IterableExtensions.join(_path2, "/");
+          _builder.append(_join_1, "		");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
       {
         boolean _notEquals_3 = (!Objects.equal(ctor, null));
         if (_notEquals_3) {

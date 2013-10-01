@@ -8,10 +8,12 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
 
 
 
@@ -43,20 +45,20 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 		addPathToThread("/LS/main/appl", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LS/main/appl/ctrl", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LS/main/appl/ctrl/cont", THREAD_PHYSICALTHREAD1);
-		
-		// port to peer port mappings
-		addPathToPeers("/LS/main/appl/ctrl/pcont", "/LS/main/appl/ctrl/cont/fct");
-		addPathToPeers("/LS/main/appl/ctrl/pout", "/LS/main/appl/ctrl/cont/opt1/pin");
-		addPathToPeers("/LS/main/appl/ctrl/pin", "/LS/main/appl/ctrl/cont/opt2/pout");
-		addPathToPeers("/LS/main/appl/ctrl/cont/fct", "/LS/main/appl/ctrl/pcont");
-		addPathToPeers("/LS/main/appl/ctrl/cont/opt1/pout", "/LS/main/appl/ctrl/cont/opt2/pin");
-		addPathToPeers("/LS/main/appl/ctrl/cont/opt1/pin", "/LS/main/appl/ctrl/pout");
-		addPathToPeers("/LS/main/appl/ctrl/cont/opt2/pout", "/LS/main/appl/ctrl/pin");
-		addPathToPeers("/LS/main/appl/ctrl/cont/opt2/pin", "/LS/main/appl/ctrl/cont/opt1/pout");
 
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "appl");
 		new Appl(this, "appl"); 
+		
+		// create service brokers in optional actor interfaces
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LS/main/appl/ctrl/cont/opt1");
+		}
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LS/main/appl/ctrl/cont/opt2");
+		}
+		
+		// wiring
 		
 		// apply instance attribute configurations
 	}

@@ -9,6 +9,7 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -51,6 +52,9 @@ public class Optional2 extends Optional implements IPersistable {
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "sub");
 		new Sub2(this, "sub");
+		
+		// wiring
+		
 
 	}
 	

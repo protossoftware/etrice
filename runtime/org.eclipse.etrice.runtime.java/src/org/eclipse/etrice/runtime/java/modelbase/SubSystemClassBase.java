@@ -8,9 +8,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.eclipse.etrice.runtime.java.config.IVariableService;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import org.eclipse.etrice.runtime.java.messaging.Address;
@@ -39,7 +36,6 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	protected static final int IFITEM_RTSystemPort = 0;
 	
 	private PathToThread path2thread = new PathToThread();
-	private PathToPeers path2peers = new PathToPeers();
 	
 	// for tests only
 	private TestSemaphore terminateSem=null;
@@ -190,47 +186,12 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	}
 	
 	/**
-	 * add a peer for the given path
-	 * @param path
-	 * @param peer
-	 */
-	public void addPathToPeer(String path, String peer) {
-		path2peers.put(path, peer);
-	}
-	
-	/**
-	 * add a collection of peers to the given path
-	 * @param path
-	 * @param peers
-	 */
-	public void addPathToPeers(String path, Collection<String> peers) {
-		path2peers.put(path, peers);
-	}
-	
-	/**
-	 * add several peers to the given path
-	 * @param path
-	 * @param peers
-	 */
-	public void addPathToPeers(String path, String... peers) {
-		path2peers.put(path, peers);
-	}
-	
-	/**
-	 * @param path
-	 * @return list of peer paths
-	 */
-	public List<String> getPeersForPath(String path) {
-		return path2peers.get(path);
-	}
-	
-	/**
 	 * Clears thread and peer mappings.
 	 */
 	public void resetAll() {
-		path2peers.clear();
 		path2thread.clear();
 	}
+	
 	/**
 	 * @param optionalActorClass
 	 * @param instanceActorClass

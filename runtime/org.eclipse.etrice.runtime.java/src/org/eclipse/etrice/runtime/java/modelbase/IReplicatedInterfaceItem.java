@@ -16,7 +16,7 @@ package org.eclipse.etrice.runtime.java.modelbase;
  * @author Henrik Rentz-Reichert
  *
  */
-public interface IReplicatedInterfaceItem {
+public interface IReplicatedInterfaceItem extends IInterfaceItem {
 
 	 InterfaceItemBase createSubInterfaceItem();
 	 void removeItem(InterfaceItemBase item);

@@ -8,10 +8,12 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
 
 
 
@@ -42,14 +44,17 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 		// thread mappings
 		addPathToThread("/LS/main/appl", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LS/main/appl/cont", THREAD_PHYSICALTHREAD1);
-		
-		// port to peer port mappings
-		addPathToPeers("/LS/main/appl/cont/p0", "/LS/main/appl/cont/opt/p0");
-		addPathToPeers("/LS/main/appl/cont/opt/p0", "/LS/main/appl/cont/p0");
 
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "appl");
 		new Appl(this, "appl"); 
+		
+		// create service brokers in optional actor interfaces
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LS/main/appl/cont/opt");
+		}
+		
+		// wiring
 		
 		// apply instance attribute configurations
 	}

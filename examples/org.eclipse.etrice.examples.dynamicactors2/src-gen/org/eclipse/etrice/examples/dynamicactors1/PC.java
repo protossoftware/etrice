@@ -48,10 +48,10 @@ public class PC {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	
@@ -111,10 +111,10 @@ public class PC {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	

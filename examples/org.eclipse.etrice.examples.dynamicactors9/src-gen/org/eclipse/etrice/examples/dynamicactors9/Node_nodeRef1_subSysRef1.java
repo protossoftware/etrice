@@ -8,6 +8,7 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -45,9 +46,6 @@ public class Node_nodeRef1_subSysRef1 extends SubSystemClassBase {
 		addPathToThread("/LogSys1/subSysRef1/actorRef1", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LogSys1/subSysRef1/actorRef1/container", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LogSys1/subSysRef1/timingService", THREAD_PHYSICALTHREAD1);
-		
-		// port to peer port mappings
-		addPathToPeers("/LogSys1/subSysRef1/actorRef1/container/pp/room_basic_service_timing_PTimer", "/LogSys1/subSysRef1/timingService/timer");
 
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "actorRef1");
@@ -55,11 +53,14 @@ public class Node_nodeRef1_subSysRef1 extends SubSystemClassBase {
 		DebuggingService.getInstance().addMessageActorCreate(this, "timingService");
 		new ATimingService(this, "timingService"); 
 		
-		// wire optional actor interfaces with services
+		// create service brokers in optional actor interfaces
 		{
 			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LogSys1/subSysRef1/actorRef1/container/pp");
 			new InterfaceItemBroker(oai, "room_basic_service_timing_PTimer", 0);
+			InterfaceItemBase.connect(this, "/LogSys1/subSysRef1/timingService/timer", "/LogSys1/subSysRef1/actorRef1/container/pp/room_basic_service_timing_PTimer");
 		}
+		
+		// wiring
 		
 		// apply instance attribute configurations
 	}

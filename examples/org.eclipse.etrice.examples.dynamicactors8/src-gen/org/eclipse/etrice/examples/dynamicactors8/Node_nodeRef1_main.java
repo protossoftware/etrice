@@ -8,10 +8,12 @@ import org.eclipse.etrice.runtime.java.messaging.MessageService;
 import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 import org.eclipse.etrice.runtime.java.messaging.RTServices;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
 
 
 
@@ -42,16 +44,20 @@ public class Node_nodeRef1_main extends SubSystemClassBase {
 		// thread mappings
 		addPathToThread("/LogSys1/main/main", THREAD_PHYSICALTHREAD1);
 		addPathToThread("/LogSys1/main/main/cont", THREAD_PHYSICALTHREAD1);
-		
-		// port to peer port mappings
-		addPathToPeers("/LogSys1/main/main/cont/op", "/LogSys1/main/main/cont/opt/fct");
-		addPathToPeers("/LogSys1/main/main/cont/opa", "/LogSys1/main/main/cont/optarr/fct");
-		addPathToPeers("/LogSys1/main/main/cont/opt/fct", "/LogSys1/main/main/cont/op");
-		addPathToPeers("/LogSys1/main/main/cont/optarr/fct", "/LogSys1/main/main/cont/opa");
 
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "main");
 		new Appl(this, "main"); 
+		
+		// create service brokers in optional actor interfaces
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LogSys1/main/main/cont/opt");
+		}
+		{
+			OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("/LogSys1/main/main/cont/optarr");
+		}
+		
+		// wiring
 		
 		// apply instance attribute configurations
 	}

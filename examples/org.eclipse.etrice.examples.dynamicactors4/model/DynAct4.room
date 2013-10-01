@@ -21,10 +21,10 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 	
 	ActorClass Controller {
 		Structure {
-			conjugated Port worker: PWorker
+			conjugated Port wrk: PWorker
 			conjugated Port opt: PC
 			ActorRef worker: Worker
-			Binding worker and worker.fct
+			Binding wrk and worker.fct
 			Binding opt and worker.opt
 		}
 		Behavior {
@@ -32,7 +32,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 				Transition init: initial -> createOpt1 { }
 				Transition tr0: createOpt1 -> SendHello {
 					triggers {
-						<ok: worker>
+						<ok: wrk>
 					}
 				}
 				Transition tr1: SendHello -> TryCreateInvalid {
@@ -45,17 +45,17 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 				}
 				Transition tr2: createOpt1 -> UnexpectedError {
 					triggers {
-						<error: worker>
+						<error: wrk>
 					}
 				}
 				Transition tr3: TryCreateInvalid -> ExpectedError {
 					triggers {
-						<error: worker>
+						<error: wrk>
 					}
 				}
 				State createOpt1 {
 					entry {
-						"worker.create(\"Optional1\");"
+						"wrk.create(\"Optional1\");"
 					}
 				}
 				State SendHello {
@@ -65,7 +65,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 				}
 				State TryCreateInvalid {
 					entry {
-						"worker.create(\"Optional\");"
+						"wrk.create(\"Optional\");"
 					}
 				}
 				State UnexpectedError
