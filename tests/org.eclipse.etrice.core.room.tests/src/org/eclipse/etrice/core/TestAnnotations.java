@@ -12,14 +12,12 @@
 
 package org.eclipse.etrice.core;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -36,32 +34,11 @@ public class TestAnnotations extends TestBase {
 	}
 	
 	@Test
-	public void AnnotationTypeWithAllFeatures() {
-		EObject obj = res.getEObject("AnnotationType:ExampleAnnotation");
-		AnnotationType at = (AnnotationType)obj;
-		assertEquals(6,at.getAttributes().size());
-		Diagnostic diag = getDiag(at);
-		assertTrue(diag.getChildren().isEmpty());
-	}
-	
-	@Test
-	public void AnnotationWithAllFeatures() {
-		EObject obj = res.getEObject("ActorClass:ActorClass1");
-		ActorClass ac = (ActorClass)obj;
-		Annotation anno = ac.getAnnotations().get(0);
-		assertEquals(5,anno.getAttributes().size());
-		Diagnostic diag = getDiag(anno);
-		assertTrue(diag.getChildren().isEmpty());
-	}
-	
-	@Test
-	public void NonUniqueAnnotationTypeTargets() {
-		EObject obj = res.getEObject("AnnotationType:NonUniqueTargets");
+	public void AnnotationTypeWithAllPossibleTargets() {
+		EObject obj = res.getEObject("AnnotationType:AllPossibleTargets");
 		AnnotationType at = (AnnotationType)obj;
 		Diagnostic diag = getDiag(at);
-		assertFalse(diag.getChildren().isEmpty());
-		assertTrue(diag.getChildren().size() == 1);
-		assertTrue(diag.getChildren().get(0).getMessage().contains("duplicate target ActorClass"));
+		assertTrue(diag.getChildren().isEmpty());
 	}
 	
 	@Test
@@ -75,32 +52,19 @@ public class TestAnnotations extends TestBase {
 	}
 	
 	@Test
-	public void UndefinedAttributeInAnnotation() {
-		EObject obj = res.getEObject("ActorClass:UndefinedAttributeTestActor");
+	public void SameNameAnnotationTypeRoomClass() {
+		// Test RoomClass validator check
+		EObject obj = res.getEObject("ActorClass:SameNameAnnotationTypeRoomClass");
 		ActorClass ac = (ActorClass)obj;
-		Diagnostic diag = getDiag(ac);
-		assertFalse(diag.getChildren().isEmpty());
-		assertTrue(diag.getChildren().size() == 1);
-		assertTrue(diag.getChildren().get(0).getMessage().contains("undefined attribute"));
-	}
-	
-	@Test
-	public void MandatoryAttributesMissingInAnnotation() {
-		EObject obj = res.getEObject("ActorClass:MandatoryAttributeTestActor");
-		ActorClass ac = (ActorClass)obj;
-		Diagnostic diag = getDiag(ac);
-		assertFalse(diag.getChildren().isEmpty());
-		assertTrue(diag.getChildren().size() == 1);
-		assertTrue(diag.getChildren().get(0).getMessage().contains("missing mandatory attributes"));
-	}
-	
-	@Test
-	public void InvalidEnumValue() {
-		EObject obj = res.getEObject("ActorClass:InvalidEnumValue");
-		ActorClass ac = (ActorClass)obj;
-		Diagnostic diag = getDiag(ac);
-		assertFalse(diag.getChildren().isEmpty());
-		assertTrue(diag.getChildren().size() == 1);
-		assertTrue(diag.getChildren().get(0).getMessage().contains("Invalid enum attribute value"));
+		Diagnostic diagActorClass = getDiag(ac);
+		assertFalse(diagActorClass.getChildren().isEmpty());
+		assertTrue(diagActorClass.getChildren().size() == 1);
+		assertTrue(diagActorClass.getChildren().get(0).getMessage().contains("already exists as an AnnotationType name"));
+		// Test AnnotationType validator check
+		obj = res.getEObject("AnnotationType:SameNameAnnotationTypeRoomClass");
+		AnnotationType at = (AnnotationType)obj;
+		Diagnostic diagAnnotationType = getDiag(at);
+		assertFalse(diagAnnotationType.getChildren().isEmpty());
+		assertTrue(diagAnnotationType.getChildren().get(0).getMessage().contains("already exists as a RoomClass name"));
 	}
 }

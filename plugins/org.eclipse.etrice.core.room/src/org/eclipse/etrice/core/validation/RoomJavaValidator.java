@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 		Eyrak Paen
  * 
  *******************************************************************************/
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -777,25 +779,30 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 	}
 	
-	/*public static enum AnnotationTargetType {
-		ACTOR_CLASS("ActorClass"),
-		ACTOR_BEHAVIOR("ActorBehavior"),
-		DATA_CLASS("DataClass"),
-		PROTOCOL_CLASS("ProtocolClass"),
-		COMPOUND_PROTOCOL_CLASS("CompoundProtocolClass"),
-		LOGICAL_SYSTEM_CLASS("LogicalSystem"),
-		SUBSYSTEM_CLASS("SubSystem");
-		
-		private final String literal;
-		
-		AnnotationTargetType(String literal) {
-			this.literal = literal;
+	@Check
+	public void checkRoomClassAnnotationTypeUniqueness(RoomClass rc) {
+		if(rc.eContainer() instanceof RoomModel) {
+			RoomModel model = (RoomModel)rc.eContainer();
+			for(AnnotationType at : model.getAnnotationTypes()) {
+				if(rc.getName().equals(at.getName())) {
+					error("The name \""+at.getName()+"\" already exists as an AnnotationType name", rc, RoomPackage.Literals.ROOM_CLASS__NAME); 
+				}
+			}
 		}
-		
-		public String getLiteral() {
-			return literal;
+	}
+	
+	@Check
+	public void checkRoomClassAnnotationTypeUniqueness(AnnotationType at) {
+		if(at.eContainer() instanceof RoomModel) {
+			RoomModel model = (RoomModel)at.eContainer();
+			for(Object obj : org.eclipse.emf.ecore.util.EcoreUtil.getObjectsByType(model.eContents(), RoomPackage.Literals.ROOM_CLASS)) {
+				RoomClass rc = (RoomClass)obj;
+				if(at.getName().equals(rc.getName())) {
+					error("The name \""+at.getName()+"\" already exists as a RoomClass name", at, BasePackage.Literals.ANNOTATION_TYPE__NAME); 
+				}
+			}
 		}
-	}*/
+	}
 	
 	private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());

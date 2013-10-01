@@ -12,26 +12,26 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Manual modifications go to {org.eclipse.etrice.core.common.BaseRuntimeModule}
+ * Manual modifications go to {org.eclipse.etrice.core.common.BaseTestRuntimeModule}
  */
  @SuppressWarnings("all")
-public abstract class AbstractBaseRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractBaseTestRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
 	@Override
 	public void configure(Binder binder) {
-		properties = tryBindProperties(binder, "org/eclipse/etrice/core/common/Base.properties");
+		properties = tryBindProperties(binder, "org/eclipse/etrice/core/common/BaseTest.properties");
 		super.configure(binder);
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.etrice.core.common.Base");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.etrice.core.common.BaseTest");
 	}
 	
 	public void configureFileExtensions(Binder binder) {
 		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("__etbase");
+			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("etbase");
 	}
 	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
@@ -41,17 +41,17 @@ public abstract class AbstractBaseRuntimeModule extends DefaultRuntimeModule {
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.etrice.core.common.services.BaseGrammarAccess.class;
+		return org.eclipse.etrice.core.common.services.BaseTestGrammarAccess.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.etrice.core.common.serializer.BaseSemanticSequencer.class;
+		return org.eclipse.etrice.core.common.serializer.BaseTestSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.etrice.core.common.serializer.BaseSyntacticSequencer.class;
+		return org.eclipse.etrice.core.common.serializer.BaseTestSyntacticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
@@ -59,49 +59,9 @@ public abstract class AbstractBaseRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.serializer.impl.Serializer.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.etrice.core.common.parser.antlr.BaseParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.etrice.core.common.parser.antlr.BaseAntlrTokenFileProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseLexer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseLexer> provideInternalBaseLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseLexer.class);
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseLexer.class);
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.etrice.core.common.validation.BaseJavaValidator> bindBaseJavaValidator() {
-		return org.eclipse.etrice.core.common.validation.BaseJavaValidator.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
-		return org.eclipse.etrice.core.common.scoping.BaseScopeProvider.class;
+		return org.eclipse.etrice.core.common.scoping.BaseTestScopeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
@@ -144,14 +104,39 @@ public abstract class AbstractBaseRuntimeModule extends DefaultRuntimeModule {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return org.eclipse.etrice.core.common.generator.BaseGenerator.class;
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
+		return org.eclipse.etrice.core.common.parser.antlr.BaseTestParser.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.formatting.FormatterFragment
-	public Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {
-		return org.eclipse.etrice.core.common.formatting.BaseFormatter.class;
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return org.eclipse.etrice.core.common.parser.antlr.BaseTestAntlrTokenFileProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseTestLexer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public com.google.inject.Provider<org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseTestLexer> provideInternalBaseTestLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseTestLexer.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public void configureRuntimeLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.etrice.core.common.parser.antlr.internal.InternalBaseTestLexer.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
 }

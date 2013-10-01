@@ -14,10 +14,10 @@ import com.google.inject.Injector;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class BaseStandaloneSetupGenerated implements ISetup {
+public class BaseTestStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		org.eclipse.etrice.core.common.BaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -25,12 +25,12 @@ public class BaseStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.etrice.core.common.BaseRuntimeModule());
+		return Guice.createInjector(new org.eclipse.etrice.core.common.BaseTestRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/etrice/core/common/Base")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/etrice/core/common/Base", org.eclipse.etrice.core.common.base.BasePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/etrice/core/common/BaseTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/etrice/core/common/BaseTest", org.eclipse.etrice.core.common.basetest.BasetestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
@@ -38,8 +38,6 @@ public class BaseStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("__etbase", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("__etbase", serviceProvider);
 		
-
-
 
 	}
 }

@@ -1,0 +1,5 @@
+AnnotationType NonUniqueTargets [ "Test non-unique targets in AnnotationType definition" ] {
+	target = {
+		TestTarget, TestTarget
+	}
+}

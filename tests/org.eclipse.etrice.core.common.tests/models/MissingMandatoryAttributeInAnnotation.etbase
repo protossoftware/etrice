@@ -1,0 +1,9 @@
+AnnotationType MandatoryAttributeTestAnnotation [
+"AnnotationType containing a mix of mandatory and optional annotations" ] {
+	target = TestTarget
+	mandatory attribute a: ptInteger
+	mandatory attribute b: ptInteger
+	optional attribute c: ptInteger
+}
+
+@MandatoryAttributeTestAnnotation(a = 0, c = 0)

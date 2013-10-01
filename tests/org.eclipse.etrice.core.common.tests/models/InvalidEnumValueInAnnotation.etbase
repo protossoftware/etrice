@@ -1,0 +1,8 @@
+AnnotationType EnumAnnotation ["Test invalid enum value specified in Annotation"]{
+	target = TestTarget
+	mandatory attribute enumAttr: {
+		"VAL1", "VAL2", "VAL3"
+	}
+}
+
+@EnumAnnotation(enumAttr = "invalid")

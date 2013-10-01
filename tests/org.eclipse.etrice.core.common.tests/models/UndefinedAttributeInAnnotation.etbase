@@ -1,0 +1,6 @@
+AnnotationType UndefinedAttributeTestAnnotation [ "AnnotationType for undefined attribute validation test" ] {
+	target = TestTarget
+	mandatory attribute abc: ptInteger
+}
+
+@UndefinedAttributeTestAnnotation(abc = 0, xyz = 0)

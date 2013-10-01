@@ -10,7 +10,7 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 import com.google.inject.Injector;
 
-public class BaseInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
+public class BaseTestInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 	
     protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
@@ -31,7 +31,7 @@ public class BaseInjectorProvider implements IInjectorProvider, IRegistryConfigu
 	}
 	
 	protected Injector internalCreateInjector() {
-	    return new BaseStandaloneSetup().createInjectorAndDoEMFRegistration();
+	    return new BaseTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	public void restoreRegistry() {

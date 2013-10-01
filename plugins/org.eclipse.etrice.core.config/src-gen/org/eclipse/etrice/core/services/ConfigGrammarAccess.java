@@ -946,106 +946,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//// -----------------------------------------------------------------------------
-		//
-		////enum Unit:
-		//
-		////	N|
-		//
-		////	W|
-		//
-		////	S = 's'|
-		//
-		////	KG = 'kg'|
-		//
-		////	M = 'm'|
-		//
-		////	C|
-		//
-		////	NM|
-		//
-		////	RPM|
-		//
-		////	V|
-		//
-		////	A|
-		//
-		////	HZ = 'Hz'|
-		//
-		////	KW
-		//
-		////;
-		//
 		//FQN:
 		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)* // -----------------------------------------------------------------------------
-		//
-		////enum Unit:
-		//
-		////	N|
-		//
-		////	W|
-		//
-		////	S = 's'|
-		//
-		////	KG = 'kg'|
-		//
-		////	M = 'm'|
-		//
-		////	C|
-		//
-		////	NM|
-		//
-		////	RPM|
-		//
-		////	V|
-		//
-		////	A|
-		//
-		////	HZ = 'Hz'|
-		//
-		////	KW
-		//
-		////;
+		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID // -----------------------------------------------------------------------------
-		//
-		////enum Unit:
-		//
-		////	N|
-		//
-		////	W|
-		//
-		////	S = 's'|
-		//
-		////	KG = 'kg'|
-		//
-		////	M = 'm'|
-		//
-		////	C|
-		//
-		////	NM|
-		//
-		////	RPM|
-		//
-		////	V|
-		//
-		////	A|
-		//
-		////	HZ = 'Hz'|
-		//
-		////	KW
-		//
-		////;
-		//
-		//)*
+		//("." ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
@@ -1300,36 +1212,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return getImportedFQNAccess().getRule();
 	}
 
-	//// -----------------------------------------------------------------------------
-	//
-	////enum Unit:
-	//
-	////	N|
-	//
-	////	W|
-	//
-	////	S = 's'|
-	//
-	////	KG = 'kg'|
-	//
-	////	M = 'm'|
-	//
-	////	C|
-	//
-	////	NM|
-	//
-	////	RPM|
-	//
-	////	V|
-	//
-	////	A|
-	//
-	////	HZ = 'Hz'|
-	//
-	////	KW
-	//
-	////;
-	//
 	//FQN:
 	//
 	//	ID ("." ID)*;
