@@ -18,7 +18,6 @@ import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.HashSet
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
@@ -41,6 +40,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 
 @Singleton
 class NodeGen {
@@ -66,7 +66,7 @@ class NodeGen {
 				
 				val usedThreads = new HashSet<PhysicalThread>();
 				for (thread: nr.type.threads) {
-					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)
+					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
 					if (!instancesOnThread.empty)
 						usedThreads.add(thread)
 				}
@@ -501,7 +501,7 @@ class NodeGen {
 	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		val objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		val idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
-		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getPhysicalThread(pi.peers.get(0).eContainer as ActorInstance).name
+		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getMappedThread(pi.peers.get(0).eContainer as ActorInstance).thread.name
 		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
 			else ""
 		val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
@@ -557,7 +557,7 @@ class NodeGen {
 		for (p: pi.peers) {
 			val idx = pi.peers.indexOf(p)
 			val comma = if (idx<pi.peers.size-1) "," else ""
-			val thread = ETMapUtil::getPhysicalThread(p.eContainer as ActorInstance).name
+			val thread = ETMapUtil::getMappedThread(p.eContainer as ActorInstance).thread.name
 			var iiiD = getInterfaceItemInstanceData(pi)
 			val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
 				else ""
@@ -594,7 +594,7 @@ class NodeGen {
 		#include "debugging/etMSCLogger.h"
 		
 		«FOR thread: nr.type.threads.filter(t|usedThreads.contains(t)) SEPARATOR "\n"»
-			«val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)»
+			«val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)»
 			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
 			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
 			

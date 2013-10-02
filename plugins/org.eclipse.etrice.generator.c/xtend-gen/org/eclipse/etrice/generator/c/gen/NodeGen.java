@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
@@ -128,8 +129,9 @@ public class NodeGen {
               EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
               final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
                 public Boolean apply(final ActorInstance ai) {
-                  PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
-                  boolean _equals = Objects.equal(_physicalThread, thread);
+                  MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                  PhysicalThread _thread = _mappedThread.getThread();
+                  boolean _equals = Objects.equal(_thread, thread);
                   return Boolean.valueOf(_equals);
                 }
               };
@@ -1624,8 +1626,9 @@ public class NodeGen {
         EList<InterfaceItemInstance> _peers_6 = pi.getPeers();
         InterfaceItemInstance _get_2 = _peers_6.get(0);
         EObject _eContainer = _get_2.eContainer();
-        PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(((ActorInstance) _eContainer));
-        String _name = _physicalThread.getName();
+        MappedThread _mappedThread = ETMapUtil.getMappedThread(((ActorInstance) _eContainer));
+        PhysicalThread _thread = _mappedThread.getThread();
+        String _name = _thread.getName();
         String _plus = ("&msgService_" + _name);
         _xifexpression_2 = _plus;
       }
@@ -1800,8 +1803,9 @@ public class NodeGen {
         }
         final String comma = _xifexpression_1;
         EObject _eContainer_1 = p.eContainer();
-        PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(((ActorInstance) _eContainer_1));
-        final String thread = _physicalThread.getName();
+        MappedThread _mappedThread = ETMapUtil.getMappedThread(((ActorInstance) _eContainer_1));
+        PhysicalThread _thread = _mappedThread.getThread();
+        final String thread = _thread.getName();
         String iiiD = this.getInterfaceItemInstanceData(pi);
         String _xifexpression_2 = null;
         GlobalGeneratorSettings _settings_1 = Main.getSettings();
@@ -1918,8 +1922,9 @@ public class NodeGen {
           EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
           final Function1<ActorInstance,Boolean> _function_1 = new Function1<ActorInstance,Boolean>() {
             public Boolean apply(final ActorInstance ai) {
-              PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
-              boolean _equals = Objects.equal(_physicalThread, thread);
+              MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+              PhysicalThread _thread = _mappedThread.getThread();
+              boolean _equals = Objects.equal(_thread, thread);
               return Boolean.valueOf(_equals);
             }
           };

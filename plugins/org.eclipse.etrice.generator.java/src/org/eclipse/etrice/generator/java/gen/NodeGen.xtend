@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.HashSet
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
@@ -40,6 +39,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
 import java.util.HashMap
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 
 @Singleton
 class NodeGen {
@@ -69,7 +69,7 @@ class NodeGen {
 				
 				val usedThreads = new HashSet<PhysicalThread>();
 				for (thread: nr.type.threads) {
-					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)
+					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
 					if (!instancesOnThread.empty)
 						usedThreads.add(thread)
 				}
@@ -165,7 +165,10 @@ class NodeGen {
 				
 				// thread mappings
 				«FOR ai : comp.allContainedInstances»
-					addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
+					«val mapped = ETMapUtil::getMappedThread(ai)»
+					«IF !(mapped.implicit || mapped.asParent)»
+						addPathToThread("«ai.path»", «mapped.thread.threadId»);
+					«ENDIF»
 				«ENDFOR»
 		
 				// sub actors

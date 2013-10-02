@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
@@ -148,8 +149,9 @@ public class NodeGen {
               EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
               final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
                 public Boolean apply(final ActorInstance ai) {
-                  PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
-                  boolean _equals = Objects.equal(_physicalThread, thread);
+                  MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                  PhysicalThread _thread = _mappedThread.getThread();
+                  boolean _equals = Objects.equal(_thread, thread);
                   return Boolean.valueOf(_equals);
                 }
               };
@@ -414,15 +416,31 @@ public class NodeGen {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t\t");
-          _builder.append("addPathToThread(\"");
-          String _path = ai.getPath();
-          _builder.append(_path, "		");
-          _builder.append("\", ");
-          PhysicalThread _physicalThread = ETMapUtil.getPhysicalThread(ai);
-          String _threadId_3 = this.getThreadId(_physicalThread);
-          _builder.append(_threadId_3, "		");
-          _builder.append(");");
+          final MappedThread mapped = ETMapUtil.getMappedThread(ai);
           _builder.newLineIfNotEmpty();
+          {
+            boolean _or_1 = false;
+            boolean _isImplicit = mapped.isImplicit();
+            if (_isImplicit) {
+              _or_1 = true;
+            } else {
+              boolean _isAsParent = mapped.isAsParent();
+              _or_1 = (_isImplicit || _isAsParent);
+            }
+            boolean _not = (!_or_1);
+            if (_not) {
+              _builder.append("\t\t");
+              _builder.append("addPathToThread(\"");
+              String _path = ai.getPath();
+              _builder.append(_path, "		");
+              _builder.append("\", ");
+              PhysicalThread _thread = mapped.getThread();
+              String _threadId_3 = this.getThreadId(_thread);
+              _builder.append(_threadId_3, "		");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _builder.newLine();

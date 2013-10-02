@@ -50,8 +50,37 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  */
 public class ETMapUtil {
 
+	public static class MappedThread {
+		private PhysicalThread thread = null;
+		private boolean implicit = false;
+		private boolean asParent = false;
+		
+		public MappedThread(PhysicalThread thread) {
+			this(thread, false, false);
+		}
+		
+		public MappedThread(PhysicalThread thread, boolean implicit, boolean asParent) {
+			super();
+			this.thread = thread;
+			this.implicit = implicit;
+			this.asParent = asParent;
+		}
+
+		public PhysicalThread getThread() {
+			return thread;
+		}
+
+		public boolean isImplicit() {
+			return implicit;
+		}
+
+		public boolean isAsParent() {
+			return asParent;
+		}
+	}
+	
 	@SuppressWarnings("serial")
-	private static class PathToPThread extends HashMap<String, PhysicalThread> {}
+	private static class PathToPThread extends HashMap<String, MappedThread> {}
 	
 	@SuppressWarnings("serial")
 	private static class PathToNodeRef extends HashMap<String, NodeRef> {}
@@ -90,9 +119,9 @@ public class ETMapUtil {
 		return nodeRef;
 	}
 	
-	public static PhysicalThread getPhysicalThread(AbstractInstance ai) {
+	public static MappedThread getMappedThread(AbstractInstance ai) {
 		String path = ai.getPath();
-		PhysicalThread thread = path2pthread.get(path);
+		MappedThread thread = path2pthread.get(path);
 		return thread;
 	}
 	
@@ -104,7 +133,10 @@ public class ETMapUtil {
 		
 		for (String key : keys) {
 			NodeRef node = path2ndref.get(key);
-			result.append("\n"+key+"\t -> "+node.getName()+":"+path2pthread.get(key).getName());
+			MappedThread thread = path2pthread.get(key);
+			result.append("\n"+key+"\t -> "+node.getName()+":"+thread.getThread().getName());
+			if (thread.isImplicit())
+				result.append(" (implicit)");
 		}
 		
 		return result.toString();
@@ -124,27 +156,28 @@ public class ETMapUtil {
 			}
 		}
 		
-		for (Entry<String, PhysicalThread> p2t : path2pthread.entrySet()) {
+		for (Entry<String, MappedThread> p2t : path2pthread.entrySet()) {
 			String path = p2t.getKey();
 			StructureInstance si = genmodel.getInstance(path);
 			if (si instanceof ActorInstance) {
+				PhysicalThread thread = p2t.getValue().getThread();
 				switch (((ActorInstance) si).getActorClass().getCommType()) {
 				case EVENT_DRIVEN:
-					if (p2t.getValue().getExecmode()==ExecMode.POLLED) {
-						error(diagnostician, path, "event driven", p2t.getValue(), "polled thread");
+					if (thread.getExecmode()==ExecMode.POLLED) {
+						error(diagnostician, path, "event driven", thread, "polled thread");
 					}
 					break;
 				case DATA_DRIVEN:
-					if (p2t.getValue().getExecmode()==ExecMode.BLOCKED) {
-						error(diagnostician, path, "data driven", p2t.getValue(), "blocked thread");
+					if (thread.getExecmode()==ExecMode.BLOCKED) {
+						error(diagnostician, path, "data driven", thread, "blocked thread");
 					}
 					break;
 				case ASYNCHRONOUS:
-					if (p2t.getValue().getExecmode()==ExecMode.BLOCKED) {
-						error(diagnostician, path, "asynchronous", p2t.getValue(), "blocked thread");
+					if (thread.getExecmode()==ExecMode.BLOCKED) {
+						error(diagnostician, path, "asynchronous", thread, "blocked thread");
 					}
-					else if (p2t.getValue().getExecmode()==ExecMode.POLLED) {
-						error(diagnostician, path, "asynchronous", p2t.getValue(), "polled thread");
+					else if (thread.getExecmode()==ExecMode.POLLED) {
+						error(diagnostician, path, "asynchronous", thread, "polled thread");
 					}
 					break;
 				case SYNCHRONOUS:
@@ -196,7 +229,7 @@ public class ETMapUtil {
 			LThreadToPThread lthread2pthread) {
 		for (ActorInstanceMapping aim : mappings) {
 			String path = parentPath+getPath(aim.getPath());
-			path2pthread.put(path, lthread2pthread.get(aim.getThread()));
+			path2pthread.put(path, new MappedThread(lthread2pthread.get(aim.getThread())));
 			
 			// recursion
 			createThreadMappings(aim.getActorInstanceMappings(), path, lthread2pthread);
@@ -219,15 +252,18 @@ public class ETMapUtil {
 		for (AbstractInstance ai : si.getInstances()) {
 			String path = ai.getPath();
 			path2ndref.put(path, node);
-			PhysicalThread thread = path2pthread.get(path);
+			MappedThread thread = path2pthread.get(path);
 			if (thread==null) {
-				thread = dflt;
-				path2pthread.put(path, dflt);
+				thread = new MappedThread(dflt, true, true);
+				path2pthread.put(path, thread);
+			}
+			else if (thread.getThread()==dflt) {
+				thread.asParent = true;
 			}
 			
 			// recursion
 			if (ai instanceof StructureInstance) {
-				addImplicitMappings((StructureInstance) ai, thread, node);
+				addImplicitMappings((StructureInstance) ai, thread.getThread(), node);
 			}
 		}
 	}
