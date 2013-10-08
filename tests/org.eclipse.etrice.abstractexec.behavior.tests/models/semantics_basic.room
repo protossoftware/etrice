@@ -1,17 +1,12 @@
 RoomModel Semantics_basic {
 		
-/* re-consider these tests after change that fixed bug 417433 (b346dafb0f65e906d6c9865ac00d5c7406054d36)
 	ActorClass GroupTransition_ac  {
 		Structure {
-			Port p0 : Sem_Protocol2
+			Port p0 : Sem_Protocol
 		}
 		Behavior { 
 			StateMachine {
-				Transition init: initial -> state0 {
-					action {
-						"p0.out3();"
-					}
-				}
+				Transition init: initial -> state0 { }
 				Transition tr0: state0 -> state1 {
 					triggers {
 						<in1: p0>
@@ -40,7 +35,11 @@ RoomModel Semantics_basic {
 						<wrong1: p0>
 					}
 				}
-				State state0
+				State state0 {
+					entry {
+						"p0.out3();"
+					}
+				}
 				State state1 {
 					subgraph {
 						Transition init: initial -> state1_0 { }
@@ -77,7 +76,7 @@ RoomModel Semantics_basic {
 	
 	ActorClass SimpleAlternative_ac  {
 		Structure {
-			Port p0 : Sem_Protocol2
+			Port p0 : Sem_Protocol
 		}
 		Behavior {
 			StateMachine {
@@ -104,12 +103,12 @@ RoomModel Semantics_basic {
 						<in3: p0>
 					}
 				}
-				Transition tr4: state3 -> state5 {
+				Transition tr4: state3 -> state0 {
 					triggers {
 						<in1: p0>
 					}
 				}
-				Transition tr5: state3 -> state4 {
+				Transition tr5: state3 -> state4_sm {
 					triggers {
 						<in2: p0>
 					}
@@ -127,8 +126,7 @@ RoomModel Semantics_basic {
 				State state1
 				State state2
 				State state3
-				State state4
-				State state5
+				State state4_sm
 				State state6_rm
 			}
 		}
@@ -136,13 +134,13 @@ RoomModel Semantics_basic {
 	
 	ActorClass TransitionsPoint_ac{
 		Structure {
-			Port p0 : Sem_Protocol2
+			Port p0 : Sem_Protocol_TransitonPoint
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
 					action {
-						"p0.out2();"
+						"p0.out1();"
 					}
 				}
 				Transition tr0: state0 -> state1 {
@@ -150,28 +148,18 @@ RoomModel Semantics_basic {
 						<in1: p0>
 					}
 				}
-				Transition tr1: my tp0 -> state2 {
-					triggers {
-						<in3: p0>
-					}
-				}
-				Transition tr2: state2 -> state1 {
+				Transition tr1: my tp0 -> state1 {
 					triggers {
 						<in1: p0>
-					}
-				}
-				Transition tr3_vtvm: my tp0 -> state1 {
-					triggers {
-						<in1: p0>
-					}
-					action {
-						"p0.out1();"
 					}
 				}
 				TransitionPoint tp0
 				State state0
-				State state1
-				State state2
+				State state1 {
+					entry {
+						"p0.out1()"
+					}
+				}
 			}
 		}
 	}
@@ -200,6 +188,8 @@ RoomModel Semantics_basic {
 		}
 	}
 	
+/* re-consider these tests after change that fixed bug 417433 (b346dafb0f65e906d6c9865ac00d5c7406054d36)
+	
 	ActorClass DualSemantics_ac{
 		Structure {
 			Port a: Sem_ProtocolA
@@ -207,67 +197,47 @@ RoomModel Semantics_basic {
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> state0 {
-					action {
-						"b.outB1();"
-					}
-				}
+				Transition init: initial -> state0 { }
 				Transition tr0: state0 -> state1 {
 					triggers {
 						<inA1: a>
 					}
 				}
-				Transition tr1: state0 -> state2_sm {
+				Transition tr1: state1 -> state0 {
 					triggers {
-						<inA1: a guard {
-							"if(true)"
-						}>
-					}
-				}
-				Transition tr3: state1 -> state3 {
-					triggers {
-						<inB1: b>
-					}
-				}
-				Transition tr4: state2_sm -> state3 {
-					triggers {
-						<inB1: b>
-					}
-				}
-				Transition tr2: state0 -> state0 {
-					triggers {
-						<inB1: b>
-					}
-				}
-				Transition tr5_vm: state2_sm -> state4 {
-					triggers {
-						<inB1: b guard {
-							"if(true)"
-						}>
+						<inA1: a>
 					}
 					action {
-						"a.outA1();"
+						"a.outA1()"
 					}
 				}
-				State state0
+				Transition tr2: state1 -> state0 {
+					triggers {
+						<inB1: b>
+					}
+				}
+				Transition tr3: state0 -> state0 {
+					triggers {
+						<inB1: b>
+					}
+				}
+				State state0 {
+					entry {
+						"b.outB1();"
+					}
+				}
 				State state1 {
 					entry {
 						"a.outA1();"
 					}
 				}
-				State state2_sm {
-					exit {
-						"a.outA1();"
-					}
-				}
-				State state3
-				State state4
 			}
 		}
 	}
+
 */
 
-	ProtocolClass Sem_Protocol2 {
+	ProtocolClass Sem_Protocol_TransitonPoint{
 		incoming {
 			Message in1()
 			Message in2()
@@ -281,11 +251,29 @@ RoomModel Semantics_basic {
 			Message wrong1()
 		}
 		semantics {
-			// TransitionPoint
+			out:out1->in:in1
+		}
+	}
+
+	ProtocolClass Sem_Protocol {
+		incoming {
+			Message in1()
+			Message in2()
+			Message in3()
+			Message wrong1()
+		}
+		outgoing {
+			Message out1()
+			Message out2()
+			Message out3()
+			Message wrong1()
+		}
+		semantics {
+			
 			out:out1->(in:in2->in:in3->in:in2, in:in1->in:in3->in:in1)
-			// SimpleAlternative
+			
 			out:out2->(in:in1->in:in3->in:in1, in:in3->(in:in1, in:in3))
-			// GroupTransition
+			
 			out:out3->in:in1->in:in2 
 			
 		}
