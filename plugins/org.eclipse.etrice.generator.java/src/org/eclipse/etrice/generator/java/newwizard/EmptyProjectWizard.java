@@ -138,10 +138,15 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							+baseName+"/build.properties", true),
 							baseName);
 
-					ProjectCreator.createLaunchConfig(URI.createPlatformResourceURI("/"
+					ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI("/"
 							+baseName+"/gen_"+baseName+".launch", true),
 							baseName,
 							additionalLaunchConfigLines);
+
+					ProjectCreator.createLaunchApplicationConfig(URI.createPlatformResourceURI("/"
+							+baseName+"/run_"+baseName+".launch", true),
+							baseName,
+							"Node_nodeRef1_subSysRef1Runner");
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/tmp/log"),

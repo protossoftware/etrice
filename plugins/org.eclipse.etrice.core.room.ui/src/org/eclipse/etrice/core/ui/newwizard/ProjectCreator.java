@@ -415,7 +415,7 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createLaunchConfig(URI uri, String baseName, String[] addLines) {
+	public static void createLaunchGeneratorConfig(URI uri, String baseName, String[] addLines) {
 		try {
 			PrintStream launch = new PrintStream(URIConverter.INSTANCE.createOutputStream(uri, null), false, "UTF-8");
 			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
@@ -430,6 +430,31 @@ public class ProjectCreator {
 			for (String line : addLines) {
 				launch.println(line);
 			}
+			launch.println("</launchConfiguration>");
+			launch.close();
+		}
+		catch (UnsupportedEncodingException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		}
+		catch (IOException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		}
+	}
+
+	public static void createLaunchApplicationConfig(URI uri, String project, String mainClass) {
+		try {
+			PrintStream launch = new PrintStream(URIConverter.INSTANCE.createOutputStream(uri, null), false, "UTF-8");
+			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+			launch.println("<launchConfiguration type=\"org.eclipse.jdt.launching.localJavaApplication\">");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+			launch.println("<listEntry value=\"/"+project+"/src-gen/"+project.replace('.', '/')+"/"+mainClass+".java\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+			launch.println("<listEntry value=\"1\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\""+project+"."+mainClass+"\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+project+"\"/>");
 			launch.println("</launchConfiguration>");
 			launch.close();
 		}
