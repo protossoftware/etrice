@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="MSC" value="true"/>
+<listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/WikiDiagrams/model/WikiDiagrams.etmap}"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+</launchConfiguration>

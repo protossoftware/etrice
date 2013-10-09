@@ -1,0 +1,127 @@
+RoomModel WikiDiagrams {
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actor: AnActorClass
+		LogicalThread defaultThread
+	}
+
+	ActorClass AnActorClass {
+		Interface {
+			conjugated Port fct: AProtocolClass
+			conjugated Port rel: AProtocolClass
+		}
+		Structure {
+			external Port fct
+			Port a4: AProtocolClass
+			ActorRef actor2: ActorClass2
+			ActorRef actor3A: ActorClass3
+			ActorRef actor3B: ActorClass3
+			ActorRef actor4: ActorClass4
+			Binding actor2.fct1 and actor3A.fct
+			Binding actor2.fct2 and actor3B.fct
+			Binding a4 and actor4.fct
+			Binding rel and actor2.fct
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass2 {
+		Interface {
+			Port fct1: AProtocolClass
+			Port fct2: AProtocolClass
+			conjugated Port fct: AProtocolClass
+		}
+		Structure {
+			external Port fct1
+			external Port fct2
+			external Port fct
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Initial { }
+				Transition tr0: Initial -> DoingThis {
+					triggers {
+						<doThis: fct1>
+					}
+				}
+				Transition tr1: Initial -> DoingThat {
+					triggers {
+						<doThat: fct1>
+					}
+				}
+				Transition tr2: DoingThis -> Initial {
+					triggers {
+						<reset: fct1>
+					}
+				}
+				Transition tr3: DoingThat -> Initial {
+					triggers {
+						<reset: fct1>
+					}
+				}
+				Transition tr4: Initial -> Error {
+					triggers {
+						<error: fct1>
+					}
+				}
+				Transition tr5: DoingThis -> Error {
+					triggers {
+						<error: fct1>
+					}
+				}
+				Transition tr6: DoingThat -> Error {
+					triggers {
+						<error: fct1>
+					}
+				}
+				Transition tr7: Error -> Initial {
+					triggers {
+						<error: fct1>
+					}
+				}
+				State Initial
+				State DoingThis
+				State DoingThat
+				State Error
+			}
+		}
+	}
+
+	ActorClass ActorClass3 {
+		Interface {
+			conjugated Port fct: AProtocolClass
+		}
+		Structure {
+			external Port fct
+		}
+		Behavior { }
+	}
+
+	ActorClass ActorClass4 {
+		Interface {
+			conjugated Port fct: AProtocolClass
+		}
+		Structure {
+			external Port fct
+		}
+		Behavior { }
+	}
+
+	ProtocolClass AProtocolClass {
+		incoming {
+			Message doThis()
+			Message doThat()
+			Message reset()
+			Message error()
+		}
+		outgoing {
+			Message doneThis()
+			Message doneThat()
+		}
+	}
+
+}
