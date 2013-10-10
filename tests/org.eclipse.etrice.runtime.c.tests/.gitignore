@@ -1,7 +1,5 @@
-DebugLinux
-ReleaseLinux
-DebugMinGW
-ReleaseMinGW
+PosixDebug
+MinGWDebug
 bin
 output
 results
