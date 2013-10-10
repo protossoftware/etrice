@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-09-17 10:33:00" /> 
+<meta name="date" content="2013-10-10 18:13:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -58,23 +58,23 @@ class="ec-lmssbx-10">HelloWorld</span>.
 </p><!--l. 23--><p class="noindent" ><img 
 src="images/015-HelloWorld10.png" alt="PIC"  
  />
-</p><!--l. 26--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like
+</p><!--l. 25--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like
 this:
-</p><!--l. 29--><p class="noindent" ><img 
+</p><!--l. 28--><p class="noindent" ><img 
 src="images/015-HelloWorld11.png" alt="PIC"  
  />
-</p><!--l. 32--><p class="noindent" >Within the model directory the model file <span 
+</p><!--l. 30--><p class="noindent" >Within the model directory the model file <span 
 class="ec-lmsso-10">HelloWorld.room </span>was created. Open the <span 
 class="ec-lmsso-10">HelloWorld.room </span>file and delete the
 contents of the file. Open the content assist with Ctrl+Space and select <span 
 class="ec-lmsso-10">RoomModel - model skeleton</span>.
-</p><!--l. 36--><p class="noindent" ><img 
+</p><!--l. 34--><p class="noindent" ><img 
 src="images/015-HelloWorld12.png" alt="PIC"  
  />
-</p><!--l. 39--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
-</p><!--l. 41--><p class="noindent" >The resulting model code should look like this:
+</p><!--l. 36--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
+</p><!--l. 38--><p class="noindent" >The resulting model code should look like this:
 </p>
-<!--l. 43-->
+<!--l. 40-->
 <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x10-35001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -174,8 +174,8 @@ class="ec-lmtt-9">}</span>
                                                                                             
                                                                                             
 </div>
-<!--l. 1--><p class="noindent" >The goal of eTrice is to describe distributed systems on a logical level. In the current version not all elements will be used.
-But as prerequisite for further versions the following elements can be defined: </p>
+<!--l. 1--><p class="noindent" >The ROOM model describes distributed systems on a logical level. In the current version not all elements will be used. But as
+prerequisite for further versions the following elements can be defined: </p>
      <ul class="itemize1">
      <li class="itemize">the <span 
 class="ec-lmsso-10">LogicalSystem </span>(currently optional)
@@ -187,40 +187,41 @@ class="ec-lmsso-10">SubSystemClass </span>(mandatory)
 class="ec-lmsso-10">ActorClass </span>(mandatory)</li></ul>
 <!--l. 9--><p class="noindent" >The <span 
 class="ec-lmsso-10">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
-class="ec-lmsso-10">SubSystemRef</span>. The <span 
-class="ec-lmsso-10">SubSystemClass</span>
-represents an address space (e.g. a linux process or an image for a microcontroller) and contains at least one <span 
-class="ec-lmsso-10">ActorRef</span>. The
+class="ec-lmsso-10">SubSystemRef</span>. The
 <span 
-class="ec-lmsso-10">ActorClass </span>is the building block for building the hierachical structure of an application. A good point to start is to define a
-top level actor that can be used as structural root within the subsystem.
+class="ec-lmsso-10">SubSystemClass </span>represents an address space (e.g. a Linux process or an image for a micro controller) and
+contains at least one <span 
+class="ec-lmsso-10">ActorRef</span>. The <span 
+class="ec-lmsso-10">ActorClass </span>is the building block for building the hierachical structure of an
+application. A good way to start is to define a top level actor that can be used as structural root within the
+subsystem.
 </p><!--l. 14--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in a navigation tree. You can jump to an
-element in the textual editor by double clicking the element in the outline view.
-</p><!--l. 16--><p class="noindent" ><img 
+element in the textual editor by double clicking the element in the outline view (provided the outline is linked with the
+editor).
+</p><!--l. 18--><p class="noindent" ><img 
 src="images/015-HelloWorld02.png" alt="PIC"  
  />
-</p><!--l. 19--><p class="noindent" >
+</p><!--l. 20--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.4.3   </span> <a 
  id="x10-360002.4.3"></a>Create a state machine</h4>
-<!--l. 21--><p class="noindent" >We will implement the Hello World code on the initial transition of the <span 
+<!--l. 22--><p class="noindent" >We will implement the Hello World code on the initial transition of the <span 
 class="ec-lmsso-10">HelloWorldTop </span>actor. Therefore open the state
 machine editor by right clicking the <span 
 class="ec-lmsso-10">HelloWorldTop </span>actor in the outline view and select <span 
 class="ec-lmsso-10">Edit Behavior</span>.
-</p><!--l. 24--><p class="noindent" ><img 
+</p><!--l. 25--><p class="noindent" ><img 
 src="images/015-HelloWorld03.png" alt="PIC"  
  />
 </p><!--l. 27--><p class="noindent" >The state machine editor will be opened. Drag and drop an <span 
 class="ec-lmsso-10">Initial Point </span>from the tool box to the diagram into the top level
 state. Drag and drop a <span 
-class="ec-lmsso-10">State </span>from the tool box to the diagram. Confirm the dialogue with <span 
+class="ec-lmsso-10">State </span>from the tool box to the diagram. Confirm the dialog with <span 
 class="ec-lmsso-10">ok</span>. Select the <span 
-class="ec-lmsso-10">Transition </span>in the
-tool box and draw the transition from the <span 
-class="ec-lmsso-10">Initial Point </span>to the State. Open the transition dialogue by double
-clicking the transition arrow and fill in the action code. Be aware of the different action code in Java and
-C.
+class="ec-lmsso-10">Transition </span>in the tool
+box and draw the transition from the <span 
+class="ec-lmsso-10">Initial Point </span>to the State. In the transition property dialog fill in the action code. Be
+aware of the different action code in Java and C.
 </p>
 <hr class="figure" /><div class="figure" 
 >
@@ -229,29 +230,29 @@ C.
                                                                                             
                                                                                             
 <div class="minipage">_________________________________________
-_________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 33--><p class="noindent" ><span 
+_________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 36--><p class="noindent" ><span 
 class="ec-lmssbx-10">action code for Java</span>
 </p>
 <div class="verbatim" id="verbatim-3">
-System.out.println("Hello&#x00A0;World&#x00A0;!");
+System.out.println("Hello&#x00A0;World");
 </div>
-<!--l. 36--><p class="nopar" >
-</p></div> &#x00A0;     <div class="minipage">_________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 42--><p class="noindent" ><span 
+<!--l. 39--><p class="nopar" >
+</p></div> &#x00A0;     <div class="minipage">_________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 45--><p class="noindent" ><span 
 class="ec-lmssbx-10">action code for C</span>
 </p>
 <div class="verbatim" id="verbatim-4">
 printf("Hello&#x00A0;World\n");
 </div>
-<!--l. 45--><p class="nopar" >
+<!--l. 48--><p class="nopar" >
 </p></div>
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
-<!--l. 51--><p class="noindent" >The result should look like this:
-</p><!--l. 53--><p class="noindent" ><img 
+<!--l. 54--><p class="noindent" >The result should look like this:
+</p><!--l. 56--><p class="noindent" ><img 
 src="images/015-HelloWorld04.png" alt="PIC"  
  />
-</p><!--l. 56--><p class="noindent" >Save the diagram and inspect the model (HelloWorld.room) file. Note that the textual representation was changed after
+</p><!--l. 58--><p class="noindent" >Save the diagram and inspect the model (HelloWorld.room) file. Note that the textual representation was changed after
 saving the diagram.
 </p>
 <hr class="figure" /><div class="figure" 
@@ -262,9 +263,9 @@ saving the diagram.
                                                                                             
 <div class="minipage">
 ______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 62--><p class="noindent" ><span 
+______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 64--><p class="noindent" ><span 
 class="ec-lmssbx-10">room model for Java </span><br 
-class="newline" /></p><!--l. 64-->
+class="newline" /></p><!--l. 66-->
 <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x10-36001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -489,9 +490,9 @@ class="ec-lmss-8x-x-62">22</span></span><span
 class="ec-lmtt-9">}</span>
 </div>
 </div>  <div class="minipage">
-___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 93--><p class="noindent" ><span 
+___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 95--><p class="noindent" ><span 
 class="ec-lmssbx-10">room model for C </span><br 
-class="newline" /></p><!--l. 95-->
+class="newline" /></p><!--l. 97-->
 <div class="lstlisting" id="listing-3"><span class="label"><a 
  id="x10-36023r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -721,27 +722,27 @@ class="ec-lmtt-9">}</span>
 </div><hr class="endfigure" />
 <h4 class="subsectionHead"><span class="titlemark">2.4.4   </span> <a 
  id="x10-370002.4.4"></a>Build and run the model</h4>
-<!--l. 64--><p class="noindent" >Now the model is finished and the source code can be generated. The project wizard has created a launch configuration that
+<!--l. 61--><p class="noindent" >Now the model is finished and the source code can be generated. The project wizard has created a launch configuration that
 is responsible for generating the source code. In the project <span 
 class="ec-lmsso-10">HelloWorld </span>right click <span 
 class="ec-lmsso-10">_HelloWorld.launch </span>and run it as
 <span 
 class="ec-lmsso-10">gen_HelloWorld</span>.
-</p><!--l. 67--><p class="noindent" ><img 
+</p><!--l. 64--><p class="noindent" ><img 
 src="images/015-HelloWorld06.png" alt="PIC"  
  />
-</p><!--l. 70--><p class="noindent" >The source code for the model will be generated into the folder <span 
+</p><!--l. 66--><p class="noindent" >The source code for the model will be generated into the folder <span 
 class="ec-lmsso-10">src-gen</span>. The main function will be contained in
 <span 
 class="ec-lmsso-10">SubSystem_HelloWorldRunner.java</span>. Select this file and run it as Java application.
-</p><!--l. 72--><p class="noindent" ><img 
+</p><!--l. 68--><p class="noindent" ><img 
 src="images/015-HelloWorld07.png" alt="PIC"  
  />
-</p><!--l. 76--><p class="noindent" >The Hello World application starts and the string <span 
-class="ec-lmsso-10">"Hello World" </span>will be printed into the console window. To stop the
+</p><!--l. 71--><p class="noindent" >The Hello World application starts and the string <span 
+class="ec-lmsso-10">"Hello World" </span>will be printed into the console window. To terminate the
 application the user must type <span 
 class="ec-lmsso-10">quit </span>in the console window.
-</p><!--l. 78--><p class="noindent" ><img 
+</p><!--l. 73--><p class="noindent" ><img 
 src="images/015-HelloWorld08.png" alt="PIC"  
  />
 </p><!--l. 1--><p class="noindent" >
@@ -760,7 +761,7 @@ already there.
 href="http://trace2uml.tigris.org/" >Trace2UML project home and download of windows version</a>
      </li>
      <li class="itemize"><a 
-href="http://apt.astade.de/" >download of the linux package of the Astade UML tool which contains Trace2UML</a></li></ul>
+href="http://apt.astade.de/" >download of the Linux package of the Astade UML tool which contains Trace2UML</a></li></ul>
 <!--l. 10--><p class="noindent" >After opening the file, you should see something like this:
 </p><!--l. 12--><p class="noindent" ><img 
 src="images/015-HelloWorld09.png" alt="PIC"  
@@ -769,11 +770,11 @@ src="images/015-HelloWorld09.png" alt="PIC"
 class="ec-lmsso-10">/LogSys1/subSysRef1/actorRef1 </span>is in the state <span 
 class="ec-lmsso-10">state0</span>. This is the simplest possible MSC.
 The MSCs for further tutorials will contain more information.
-</p><!--l. 83--><p class="noindent" >
+</p><!--l. 77--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.4.6   </span> <a 
  id="x10-390002.4.6"></a>Summary</h4>
-<!--l. 85--><p class="noindent" >Now you have generated your first eTrice model from scratch. You can switch between diagram editor and textual model
+<!--l. 79--><p class="noindent" >Now you have generated your first eTrice model from scratch. You can switch between diagram editor and textual model
 representation (.room file) and you can see what will be generated during editing and saving the diagram files. You
 should take a look at the generated source files to understand how the state machine is generated and the life
 cycle of the application works. The next tutorials will deal with more complex hierarchies in structure and

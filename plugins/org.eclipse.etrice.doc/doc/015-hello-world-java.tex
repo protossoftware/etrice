@@ -21,20 +21,17 @@ The easiest way to create a new \eTrice{} Project is to use the eclipse project 
 menu select \emph{File->New->Project} and create a new \emph{Empty eTrice Java Project} and name it \textbf{HelloWorld}.
 
 \includegraphics[width=0.8\textwidth]{images/015-HelloWorld10.png}
-% !images/015-HelloWorld10.png!
 
 The wizard creates everything that is needed to create, build and run an \eTrice{} model. The resulting 
 project should look like this:
 
 \includegraphics{images/015-HelloWorld11.png}
-% !images/015-HelloWorld11.png!
 
 Within the model directory the model file \emph{HelloWorld.room} was created. Open the 
 \emph{HelloWorld.room} file and delete the contents of the file. Open the content assist with Ctrl+Space 
 and select \emph{RoomModel - model skeleton}.
 
 \includegraphics[width=0.6\textwidth]{images/015-HelloWorld12.png}
-% !images/015-HelloWorld12.png!   
 
 Edit the template variables by typing the new names and jumping with Tab from name to name.
 
@@ -65,18 +62,15 @@ Now the model is finished and the source code can be generated. The project wiza
 configuration that is responsible for generating the source code. In the project \textit{HelloWorld} right click \emph{\_HelloWorld.launch} and run it as \emph{gen\_HelloWorld}. 
 
 \includegraphics[width=0.8\textwidth]{images/015-HelloWorld06.png}
-% !images/015-HelloWorld06.png!
 
 The source code for the model will be generated into the folder \emph{src-gen}. The main function will be contained in \emph{SubSystem\_HelloWorldRunner.java}. Select this file and run it as Java application.
 
 \includegraphics{images/015-HelloWorld07.png}
-% !images/015-HelloWorld07.png!
 
 
-The Hello World application starts and the string \emph{"Hello World"} will be printed into the console window. To stop the application the user must type \emph{quit} in the console window.
+The Hello World application starts and the string \emph{"Hello World"} will be printed into the console window. To terminate the application the user must type \emph{quit} in the console window.
 
 \includegraphics[width=0.6\textwidth]{images/015-HelloWorld08.png}
-% !images/015-HelloWorld08.png!
 
 \input{015.2-hello-world-open-msc}
 
