@@ -709,13 +709,13 @@ public class NodeGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("if (fgets(line, 64, stdin) == NULL) {");
+      _builder.append("if (fgets(line, 64, stdin) != NULL) {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("/* if (strncmp(line, \"quit\", 4)==0){");
+      _builder.append("if (strncmp(line, \"quit\", 4)==0)");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("break;*/");
+      _builder.append("\t\t\t\t\t");
+      _builder.append("break;");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("}");

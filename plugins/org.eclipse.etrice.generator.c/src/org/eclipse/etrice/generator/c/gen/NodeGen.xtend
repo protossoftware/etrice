@@ -267,9 +267,9 @@ class NodeGen {
 				while (TRUE) {
 					char line[64];
 		
-					if (fgets(line, 64, stdin) == NULL) {
-						/* if (strncmp(line, "quit", 4)==0){
-						break;*/
+					if (fgets(line, 64, stdin) != NULL) {
+						if (strncmp(line, "quit", 4)==0)
+							break;
 					}
 				}
 			}
