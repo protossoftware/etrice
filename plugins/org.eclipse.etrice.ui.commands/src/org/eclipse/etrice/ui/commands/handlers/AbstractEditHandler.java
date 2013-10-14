@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.core.ui.editor.RoomEditor;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -81,8 +82,9 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IEditorPart editor = window.getActivePage().getActiveEditor();
-		if (editor instanceof XtextEditor) {
-			ISelection selection = HandlerUtil.getCurrentSelection(event);
+		if (editor instanceof RoomEditor) {
+			RoomEditor xed = (RoomEditor) editor;
+			ISelection selection = xed.getSelectionProvider().getSelection();
 			if (selection instanceof IStructuredSelection) {
 				// event from the xtext editor's outline view
 				IStructuredSelection ss = (IStructuredSelection) selection;
@@ -99,7 +101,6 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 			else if (selection instanceof ITextSelection) {
 				// event from the xtext editor itself
 				final ITextSelection ss = (ITextSelection) selection;
-				XtextEditor xed = (XtextEditor) editor;
 				IXtextDocument document = xed.getDocument();
 				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
 					@Override
@@ -202,6 +203,8 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 
 	protected boolean checkPrerequisites(XtextEditor xtextEditor,
 			IXtextDocument document, final String fragment) {
+		if (fragment==null)
+			return false;
 		if (hasIssues(document, new NullProgressMonitor())) {
 			MessageDialog.openError(xtextEditor.getSite().getShell(), "Validation Errors", "The editor has validation errors.\nCannot open diagram!");
 			return false;
