@@ -216,4 +216,8 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	public IReplicatedInterfaceItem getSystemPort() {
 		return RTSystemPort;
 	}
+
+	public boolean hasGeneratedMSCInstrumentation() {
+		return false;
+	}
 }

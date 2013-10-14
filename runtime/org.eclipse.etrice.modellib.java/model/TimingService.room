@@ -72,6 +72,7 @@ RoomModel room.basic.service.timing {
 	ProtocolClass PTimer {
 		usercode1 {
 			"import java.util.TimerTask;"
+			"import org.eclipse.etrice.runtime.java.messaging.RTServices;"
 		}
 		usercode2 {
 		"static protected class FireTimeoutTask extends TimerTask {
@@ -191,6 +192,8 @@ RoomModel room.basic.service.timing {
 				if (active) return;
 				active = true;
 
+				if (RTServices.getInstance().getSubSystem().hasGeneratedMSCInstrumentation())
+					DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, new TimerData(time_ms,++currentId)));
 			"
 			}
@@ -199,6 +202,8 @@ RoomModel room.basic.service.timing {
 				if (active) return;
 				active = true;
 
+				if (RTServices.getInstance().getSubSystem().hasGeneratedMSCInstrumentation())
+					DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
 				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, new TimerData(time_ms,++currentId)));
 		"
 			}

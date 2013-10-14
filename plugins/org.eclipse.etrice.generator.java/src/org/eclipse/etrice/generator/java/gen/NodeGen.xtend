@@ -245,6 +245,11 @@ class NodeGen {
 			«IF Main::settings.generateMSCInstrumentation»
 				
 				@Override
+				public boolean hasGeneratedMSCInstrumentation() {
+					return true;
+				}
+				
+				@Override
 				public void destroy() {
 					DebuggingService.getInstance().addVisibleComment("begin sub system destruction");
 					super.destroy();
