@@ -103,7 +103,10 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	}
 	
 	public IInterfaceItem connectWith(IInterfaceItem peer) {
-		return peer.connectWith(createSubInterfaceItem());
+		if (peer instanceof InterfaceItemBroker)
+			return peer.connectWith(this);
+		else
+			return peer.connectWith(createSubInterfaceItem());
 	}
 	
 	protected abstract InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx);
