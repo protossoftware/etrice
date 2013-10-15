@@ -1,0 +1,1 @@
+this is the place where the logs (MSCs) of the running applications go
