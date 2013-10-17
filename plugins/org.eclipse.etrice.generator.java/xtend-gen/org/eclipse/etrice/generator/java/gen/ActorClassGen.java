@@ -27,6 +27,8 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -37,6 +39,7 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
@@ -905,7 +908,154 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         if (manualBehavior) {
           _builder.append("\t");
-          _builder.append("public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);");
+          _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
+          _builder.newLine();
+          {
+            List<InterfaceItem> _allInterfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+            boolean _hasElements = false;
+            for(final InterfaceItem ifitem : _allInterfaceItems) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate("else ", "		");
+              }
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("if (ifitem==");
+              String _name_40 = ifitem.getName();
+              _builder.append(_name_40, "		");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("switch (evt) {");
+              _builder.newLine();
+              {
+                List<Message> _incoming = RoomHelpers.getIncoming(ifitem);
+                for(final Message msg : _incoming) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("case ");
+                  ProtocolClass _protocolClass = RoomHelpers.getProtocolClass(msg);
+                  String _name_41 = _protocolClass.getName();
+                  _builder.append(_name_41, "				");
+                  _builder.append(".");
+                  String _xifexpression_6 = null;
+                  boolean _isIncoming = this._roomExtensions.isIncoming(msg);
+                  if (_isIncoming) {
+                    _xifexpression_6 = "IN_";
+                  } else {
+                    _xifexpression_6 = "OUT_";
+                  }
+                  _builder.append(_xifexpression_6, "				");
+                  String _name_42 = msg.getName();
+                  _builder.append(_name_42, "				");
+                  _builder.append(":");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    VarDecl _data = msg.getData();
+                    boolean _notEquals_5 = (!Objects.equal(_data, null));
+                    if (_notEquals_5) {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("\t");
+                      _builder.append("{");
+                      String _typedDataDefinition = this._javaExtensions.getTypedDataDefinition(msg);
+                      _builder.append(_typedDataDefinition, "					");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("on_");
+                  String _name_43 = ifitem.getName();
+                  _builder.append(_name_43, "					");
+                  _builder.append("_");
+                  String _name_44 = msg.getName();
+                  _builder.append(_name_44, "					");
+                  _builder.append("(ifitem");
+                  {
+                    VarDecl _data_1 = msg.getData();
+                    boolean _notEquals_6 = (!Objects.equal(_data_1, null));
+                    if (_notEquals_6) {
+                      _builder.append(", ");
+                      VarDecl _data_2 = msg.getData();
+                      String _name_45 = _data_2.getName();
+                      _builder.append(_name_45, "					");
+                    }
+                  }
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("break;");
+                  _builder.newLine();
+                  {
+                    VarDecl _data_3 = msg.getData();
+                    boolean _notEquals_7 = (!Objects.equal(_data_3, null));
+                    if (_notEquals_7) {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("\t");
+                      _builder.append("}");
+                      _builder.newLine();
+                    }
+                  }
+                }
+              }
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          {
+            List<InterfaceItem> _allInterfaceItems_1 = RoomHelpers.getAllInterfaceItems(ac);
+            for(final InterfaceItem ifitem_1 : _allInterfaceItems_1) {
+              {
+                List<Message> _incoming_1 = RoomHelpers.getIncoming(ifitem_1);
+                for(final Message msg_1 : _incoming_1) {
+                  _builder.append("\t");
+                  _builder.append("protected void on_");
+                  String _name_46 = ifitem_1.getName();
+                  _builder.append(_name_46, "	");
+                  _builder.append("_");
+                  String _name_47 = msg_1.getName();
+                  _builder.append(_name_47, "	");
+                  _builder.append("(InterfaceItemBase ifitem");
+                  {
+                    VarDecl _data_4 = msg_1.getData();
+                    boolean _notEquals_8 = (!Objects.equal(_data_4, null));
+                    if (_notEquals_8) {
+                      VarDecl _data_5 = msg_1.getData();
+                      String[] _generateArglistAndTypedData = this._javaExtensions.generateArglistAndTypedData(_data_5);
+                      String _get = _generateArglistAndTypedData[2];
+                      _builder.append(_get, "	");
+                    }
+                  }
+                  _builder.append(") {}");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public abstract void executeInitTransition();");

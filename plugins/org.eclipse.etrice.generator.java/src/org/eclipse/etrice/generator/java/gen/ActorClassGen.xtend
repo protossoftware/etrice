@@ -252,7 +252,31 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 		
 			«IF manualBehavior»
-				public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);
+				public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+					«FOR ifitem : ac.allInterfaceItems SEPARATOR "else "»
+						if (ifitem==«ifitem.name») {
+							switch (evt) {
+								«FOR msg: ifitem.incoming»
+									case «msg.protocolClass.name».«if (msg.incoming) "IN_" else "OUT_"»«msg.name»:
+										«IF (msg.data!=null)»
+											{«msg.typedDataDefinition»
+										«ENDIF»
+										on_«ifitem.name»_«msg.name»(ifitem«IF (msg.data!=null)», «msg.data.name»«ENDIF»);
+										break;
+										«IF (msg.data!=null)»
+											}
+										«ENDIF»
+								«ENDFOR»
+							}
+						}
+					«ENDFOR»
+				}
+				«FOR ifitem : ac.allInterfaceItems»
+					«FOR msg: ifitem.incoming»
+						protected void on_«ifitem.name»_«msg.name»(InterfaceItemBase ifitem«IF msg.data!=null»«msg.data.generateArglistAndTypedData.get(2)»«ENDIF») {}
+					«ENDFOR»
+				«ENDFOR»
+				
 				public abstract void executeInitTransition();
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
