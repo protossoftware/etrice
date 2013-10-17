@@ -50,7 +50,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected String initialProjectName;
 	protected URI modelURI;
 	
-	private String[] additionalLaunchConfigLines = new String[] {
+	private static final String[] additionalLaunchConfigLines = new String[] {
 		"<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>"
 	};
 
@@ -140,11 +140,14 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 					ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI("/"
 							+baseName+"/gen_"+baseName+".launch", true),
+							"java",
+							"/"+baseName+"/model",
 							baseName,
 							additionalLaunchConfigLines);
 
-					ProjectCreator.createLaunchApplicationConfig(URI.createPlatformResourceURI("/"
+					ProjectCreator.createLaunchJavaApplicationConfig(URI.createPlatformResourceURI("/"
 							+baseName+"/run_"+baseName+".launch", true),
+							baseName,
 							baseName,
 							"Node_nodeRef1_subSysRef1Runner");
 

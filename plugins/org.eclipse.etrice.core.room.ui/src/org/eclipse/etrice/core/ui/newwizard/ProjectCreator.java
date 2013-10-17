@@ -14,6 +14,8 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -124,23 +126,8 @@ public class ProjectCreator {
 			}
 
 			{
-				String[] natureIds = projectDescription.getNatureIds();
-				if (natureIds == null) {
-					natureIds = new String[0];
-				}
-				for (String nature : naturesToAdd) {
-					natureIds = addNature(nature, natureIds, project);
-				}
-				projectDescription.setNatureIds(natureIds);
-
-				ICommand[] builders = projectDescription.getBuildSpec();
-				if (builders == null) {
-					builders = new ICommand[0];
-				}
-				for (String builder : buildersToAdd) {
-					builders = addBuilder(builder, builders, projectDescription);
-				}
-				projectDescription.setBuildSpec(builders);
+				addNatures(projectDescription, naturesToAdd);
+				addBuilders(projectDescription, buildersToAdd);
 
 				project.setDescription(projectDescription, new SubProgressMonitor(progressMonitor, 1));
 
@@ -192,44 +179,43 @@ public class ProjectCreator {
 	}
 
 	/**
-	 * @param manifestBuilder
-	 * @param builders
-	 * @param projectDescription
-	 * @return
+	 * @param desc
+	 * @param naturesToAdd
 	 */
-	private static ICommand[] addBuilder(String manifestBuilder, ICommand[] builders,
-			IProjectDescription projectDescription) {
-		boolean hasBuilder = false;
-		for (int i = 0; i < builders.length; ++i) {
-			if (manifestBuilder.equals(builders[i].getBuilderName())) {
-				hasBuilder = true;
+	public static void addNatures(IProjectDescription desc, List<String> naturesToAdd) {
+		HashSet<String> natures = new HashSet<String>(); 
+		String[] ids = desc.getNatureIds();
+		if (ids!=null)
+			for (String id : ids) {
+				natures.add(id);
 			}
-		}
-		if (!hasBuilder) {
-			ICommand[] oldBuilders = builders;
-			builders = new ICommand[oldBuilders.length + 1];
-			System.arraycopy(oldBuilders, 0, builders, 0, oldBuilders.length);
-			builders[oldBuilders.length] = projectDescription.newCommand();
-			builders[oldBuilders.length].setBuilderName(manifestBuilder);
-		}
-		return builders;
+		
+		natures.addAll(naturesToAdd);
+		
+		ids = new String[natures.size()];
+		ids = natures.toArray(ids);
+		
+		desc.setNatureIds(ids);
 	}
 
-	/**
-	 * @param natureId
-	 * @param natureIds
-	 * @param project
-	 * @return
-	 * @throws CoreException
-	 */
-	private static String[] addNature(String natureId, String[] natureIds, IProject project) throws CoreException {
-		if (!project.hasNature(natureId)) {
-			String[] oldNatureIds = natureIds;
-			natureIds = new String[oldNatureIds.length + 1];
-			System.arraycopy(oldNatureIds, 0, natureIds, 0, oldNatureIds.length);
-			natureIds[oldNatureIds.length] = natureId;
+	public static void addBuilders(IProjectDescription desc, List<String> buildersToAdd) {
+		HashMap<String, ICommand> builders = new HashMap<String, ICommand>();
+		ICommand[] buildSpecs = desc.getBuildSpec();
+		for (ICommand spec : buildSpecs) {
+			builders.put(spec.getBuilderName(), spec);
 		}
-		return natureIds;
+		for (String builder : buildersToAdd) {
+			if (!builders.containsKey(builder)) {
+				ICommand cmd = desc.newCommand();
+				cmd.setBuilderName(builder);
+				builders.put(builder, cmd);
+			}
+		}
+		
+		buildSpecs = new ICommand[builders.size()];
+		buildSpecs = builders.values().toArray(buildSpecs);
+		
+		desc.setBuildSpec(buildSpecs);
 	}
 
 	/**
@@ -415,14 +401,14 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createLaunchGeneratorConfig(URI uri, String baseName, String[] addLines) {
+	public static void createLaunchGeneratorConfig(URI uri, String targetLanguage, String modelPath, String baseName, String[] addLines) {
 		try {
 			PrintStream launch = new PrintStream(URIConverter.INSTANCE.createOutputStream(uri, null), false, "UTF-8");
 			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-			launch.println("<launchConfiguration type=\"org.eclipse.etrice.generator.launch.java.launchConfigurationType\">");
+			launch.println("<launchConfiguration type=\"org.eclipse.etrice.generator.launch."+targetLanguage+".launchConfigurationType\">");
 			launch.println("<booleanAttribute key=\"MSC\" value=\"true\"/>");
 			launch.println("<listAttribute key=\"ModelFiles\">");
-			launch.println("<listEntry value=\"${workspace_loc:/" + baseName + "/model/" + baseName + ".etmap}\"/>");
+			launch.println("<listEntry value=\"${workspace_loc:" + modelPath + "/" + baseName + ".etmap}\"/>");
 			launch.println("</listAttribute>");
 			launch.println("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
 			launch.println("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
@@ -441,19 +427,19 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createLaunchApplicationConfig(URI uri, String project, String mainClass) {
+	public static void createLaunchJavaApplicationConfig(URI uri, String project, String mdlName, String mainClass) {
 		try {
 			PrintStream launch = new PrintStream(URIConverter.INSTANCE.createOutputStream(uri, null), false, "UTF-8");
 			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 			launch.println("<launchConfiguration type=\"org.eclipse.jdt.launching.localJavaApplication\">");
 			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
-			launch.println("<listEntry value=\"/"+project+"/src-gen/"+project.replace('.', '/')+"/"+mainClass+".java\"/>");
+			launch.println("<listEntry value=\"/"+project+"/src-gen/"+mdlName.replace('.', '/')+"/"+mainClass+".java\"/>");
 			launch.println("</listAttribute>");
 			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
 			launch.println("<listEntry value=\"1\"/>");
 			launch.println("</listAttribute>");
 			launch.println("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
-			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\""+project+"."+mainClass+"\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\""+mdlName+"."+mainClass+"\"/>");
 			launch.println("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\""+project+"\"/>");
 			launch.println("</launchConfiguration>");
 			launch.close();
@@ -462,6 +448,36 @@ public class ProjectCreator {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
 		catch (IOException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		}
+	}
+
+	public static void createLaunchCApplicationConfig(URI uri, String project,
+			String mainClass) {
+		try {
+			PrintStream launch = new PrintStream(
+					URIConverter.INSTANCE.createOutputStream(uri, null), false,
+					"UTF-8");
+			launch.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+			launch.println("<launchConfiguration type=\"org.eclipse.cdt.launch.applicationLaunchType\">");
+			launch.println("<booleanAttribute key=\"org.eclipse.cdt.debug.mi.core.verboseMode\" value=\"false\"/>");
+			launch.println("<intAttribute key=\"org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR\" value=\"2\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.cdt.launch.DEBUGGER_START_MODE\" value=\"run\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.cdt.launch.PROGRAM_NAME\" value=\"Debug/"+project+".exe\"/>");
+			launch.println("<stringAttribute key=\"org.eclipse.cdt.launch.PROJECT_ATTR\" value=\""+project+"\"/>");
+			launch.println("<booleanAttribute key=\"org.eclipse.cdt.launch.use_terminal\" value=\"true\"/>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+			launch.println("<listEntry value=\"/"+project+"\"/>");
+			launch.println("</listAttribute>");
+			launch.println("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+			launch.println("<listEntry value=\"4\"/>");
+			launch.println("</listAttribute>");
+			launch.println("</launchConfiguration>");
+
+			launch.close();
+		} catch (UnsupportedEncodingException e) {
+			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
+		} catch (IOException e) {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
 	}
