@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.newwizard;
+package org.eclipse.etrice.generator.ui.wizard;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -38,7 +39,7 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.RoomUiActivator;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -481,6 +482,53 @@ public class ProjectCreator {
 			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
 		}
 	}
+	
+	public static void addIncludePathsAndLibraries(IProject project) {
+		//IManagedBuildInfo buildInfo = ManagedBuildManager.getBuildInfo(project);
+	}
+	
+	public static void createRunAndLaunchConfigurations(String baseName,
+			IProject project, String mdlPath, String[] additionalLaunchConfigLines) throws CoreException {
+		
+		if (project.getNature(JavaCore.NATURE_ID)!=null) {
+			ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI(
+					"/"+project.getName()+"/gen_"+baseName+".launch", true),
+					"java",
+					mdlPath,
+					baseName,
+					additionalLaunchConfigLines);
+			ProjectCreator.createLaunchJavaApplicationConfig(URI.createPlatformResourceURI(
+					"/"+project.getName()+"/run_"+baseName+".launch", true),
+					project.getName(),
+					baseName,
+					"Node_nodeRef1_subSysRef1Runner");
+		}
+		else if (project.getNature("org.eclipse.cdt.core.cnature")!=null) {
+			ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI(
+					"/"+project.getName()+"/gen_"+baseName+".launch", true),
+					"c",
+					mdlPath,
+					baseName,
+					additionalLaunchConfigLines);
+			ProjectCreator.createLaunchCApplicationConfig(URI.createPlatformResourceURI(
+					"/"+project.getName()+"/run_"+baseName+".launch", true),
+					project.getName(),
+					"Node_nodeRef1_subSysRef1Runner");
+		}
+	}
+
+	/**
+	 * @param project
+	 * @param progressMonitor
+	 * @throws CoreException
+	 */
+	public static void addXtextNature(IProject project, IProgressMonitor progressMonitor) throws CoreException {
+		IProjectDescription description = project.getDescription();
+		ProjectCreator.addNatures(description, Collections.singletonList("org.eclipse.xtext.ui.shared.xtextNature"));
+		ProjectCreator.addBuilders(description, Collections.singletonList("org.eclipse.xtext.ui.shared.xtextBuilder"));
+		
+		project.setDescription(description, new SubProgressMonitor(progressMonitor, 1));
+	}
 
 	/**
 	 * Returns an image descriptor for the image file at the given plug-in
@@ -491,14 +539,14 @@ public class ProjectCreator {
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
-		ImageDescriptor desc = RoomActivator.getInstance().getImageRegistry().getDescriptor(path);
+		ImageDescriptor desc = RoomUiActivator.getDefault().getImageRegistry().getDescriptor(path);
 		if (desc == null) {
-			desc = RoomActivator.imageDescriptorFromPlugin("org.eclipse.etrice.core.room.ui", path);
+			desc = RoomUiActivator.imageDescriptorFromPlugin("org.eclipse.etrice.core.room.ui", path);
 			if (desc == null)
 				System.err.println("image not found: " + path);
 			else {
-				RoomActivator.getInstance().getImageRegistry().put(path, desc);
-				RoomActivator.getInstance().getImageRegistry().get(path);
+				RoomUiActivator.getDefault().getImageRegistry().put(path, desc);
+				RoomUiActivator.getDefault().getImageRegistry().get(path);
 			}
 		}
 		return desc;

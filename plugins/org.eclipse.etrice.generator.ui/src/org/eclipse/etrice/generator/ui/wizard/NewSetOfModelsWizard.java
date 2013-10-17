@@ -10,24 +10,18 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.wizard;
-
-import java.util.Collections;
+package org.eclipse.etrice.generator.ui.wizard;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.core.ui.newwizard.ProjectCreator;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -106,39 +100,9 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					IWorkspace workspace = ResourcesPlugin.getWorkspace();
 					IProject project = workspace.getRoot().getFolder(page.getPath()).getProject();
 					
-					// add run and launch configurations
-					if (project.getNature(JavaCore.NATURE_ID)!=null) {
-						ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI(
-								"/"+project.getName()+"/gen_"+baseName+".launch", true),
-								"java",
-								page.getPath().toString(),
-								baseName,
-								additionalLaunchConfigLines);
-						ProjectCreator.createLaunchJavaApplicationConfig(URI.createPlatformResourceURI(
-								"/"+project.getName()+"/run_"+baseName+".launch", true),
-								project.getName(),
-								baseName,
-								"Node_nodeRef1_subSysRef1Runner");
-					}
-					else if (project.getNature("org.eclipse.cdt.core.cnature")!=null) {
-						ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI(
-								"/"+project.getName()+"/gen_"+baseName+".launch", true),
-								"c",
-								page.getPath().toString(),
-								baseName,
-								additionalLaunchConfigLines);
-						ProjectCreator.createLaunchCApplicationConfig(URI.createPlatformResourceURI(
-								"/"+project.getName()+"/run_"+baseName+".launch", true),
-								project.getName(),
-								"Node_nodeRef1_subSysRef1Runner");
-					}
+					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, page.getPath().toString(), additionalLaunchConfigLines);
 					
-					// add Xtext nature and builder
-					IProjectDescription description = project.getDescription();
-					ProjectCreator.addNatures(description, Collections.singletonList("org.eclipse.xtext.ui.shared.xtextNature"));
-					ProjectCreator.addBuilders(description, Collections.singletonList("org.eclipse.xtext.ui.shared.xtextBuilder"));
-					
-					project.setDescription(description, new SubProgressMonitor(progressMonitor, 1));
+					ProjectCreator.addXtextNature(project, progressMonitor);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);
@@ -146,6 +110,7 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					progressMonitor.done();
 				}
 			}
+
 		};
 
 		try {

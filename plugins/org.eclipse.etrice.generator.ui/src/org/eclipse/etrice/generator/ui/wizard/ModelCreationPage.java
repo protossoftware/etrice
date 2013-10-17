@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.wizard;
+package org.eclipse.etrice.generator.ui.wizard;
 
 import java.util.Iterator;
 

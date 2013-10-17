@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.etrice.generator.java.newwizard;
+package org.eclipse.etrice.generator.ui.wizard;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.core.ui.newwizard.ProjectCreator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
