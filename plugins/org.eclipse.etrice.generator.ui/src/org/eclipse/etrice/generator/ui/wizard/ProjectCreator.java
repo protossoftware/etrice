@@ -494,7 +494,10 @@ public class ProjectCreator {
 		}
 	}
 	
-	public static void addIncludePathsAndLibraries(IProject project) {
+	public static void addIncludePathsAndLibraries(IProject project) throws CoreException {
+		if (project.getNature("org.eclipse.cdt.core.cnature")==null)
+			return;
+		
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject runtime = workspace.getRoot().getProject("org.eclipse.etrice.runtime.c");
 		IFolder common = runtime.getFolder("src/common");
