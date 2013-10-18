@@ -98,10 +98,12 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					ProjectCreator.createMappingModel(mapModelURI, baseName);
 					
 					IWorkspace workspace = ResourcesPlugin.getWorkspace();
-					IProject project = workspace.getRoot().getFolder(page.getPath()).getProject();
+					IProject project = (page.getPath().segmentCount()==1)?
+							workspace.getRoot().getProject(page.getPath().lastSegment())
+							: workspace.getRoot().getFolder(page.getPath()).getProject();
 					
 					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, page.getPath().toString(), additionalLaunchConfigLines);
-					
+					ProjectCreator.addIncludePathsAndLibraries(project);
 					ProjectCreator.addXtextNature(project, progressMonitor);
 					
 				} catch (Exception e) {
