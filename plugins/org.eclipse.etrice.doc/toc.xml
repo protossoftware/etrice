@@ -40,13 +40,14 @@
       <topic href="html/etrice-docse24.html#x31-1320005.1" label="Model Navigation"/>
       <topic href="html/etrice-docse25.html#x32-1370005.2"
              label="Automatic Diagram Layout with KIELER"/>
-      <topic href="html/etrice-docse26.html#x33-1500005.3"
+      <topic href="html/etrice-docse26.html#x33-1500005.3" label="Annotations"/>
+      <topic href="html/etrice-docse27.html#x34-1550005.4"
              label="eTrice Models and Their Relations"/>
    </topic>
-   <topic href="html/etrice-docch6.html#x34-1550006"
+   <topic href="html/etrice-docch6.html#x35-1600006"
           label="eTrice Tool Developer’s Reference">
-      <topic href="html/etrice-docse27.html#x35-1560006.1" label="Architecture"/>
-      <topic href="html/etrice-docse28.html#x36-1600006.2"
+      <topic href="html/etrice-docse28.html#x36-1610006.1" label="Architecture"/>
+      <topic href="html/etrice-docse29.html#x37-1650006.2"
              label="Component Overview"/>
    </topic>
 </toc>

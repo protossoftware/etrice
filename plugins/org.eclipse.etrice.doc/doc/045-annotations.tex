@@ -1,0 +1,65 @@
+\section{Annotations}
+
+In \eTrice{} it is possible to use annotations similar to Java annotations.
+Annotation types can be defined together with their targets and other properties and
+later they can be used.
+
+Annotations can be processed by the code generator to influence its behavior.
+
+\subsection{Annotation Type Definitions}
+
+Examples of such definitions can be found in the files \texttt{Annotations.room} which are part of the modellibs.
+They contain definitions of annotations that are recognized by the generator of the associated language.
+
+Consider e.g. the annotations definitions for Java
+
+\lstinputlisting[language=ROOM]{../../../runtime/org.eclipse.etrice.modellib.java/model/Annotations.room}
+
+Here we find two definitions. The meaning of those annotations will be explained later in section
+\ref{sec:predef_annotations} about "\nameref{sec:predef_annotations}".
+
+The annotation type definition defines a target where the annotation is allowed to be used.
+This can be one of
+
+\begin{itemize}
+\item DataClass
+\item ActorClass
+\item ActorBehavior
+\item ProtocolClass
+\item CompoundProtocolClass
+\item SubSystemClass
+\item LogicalSystem
+\end{itemize}
+
+Attributes can be added as needed and qualified as mandatory or optional.
+Attributes have a type (similar as the PrimitiveType but with the understanding that
+ptChar is a string). Another attribute type is enum with an explicit list of allowed
+enum literals.
+
+\subsection{Usage and Effect of the Pre-defined Annotations}
+\label{sec:predef_annotations}
+
+The \eTrice{} generators currently implement two annotations.
+
+\subsubsection{BehaviorManual}
+
+This annotation has no attribute. If specified the code generator won't generate a state machine but
+part of the interface and methods of an actor class.
+
+\textbf{Java}
+
+An abstract base class \texttt{Abstract<ActorClassName>} is generated which contains ports, SAPs and attributes as members.
+The \texttt{receiveEvent()} method is dispatching to distinct methods per pair of interface item (port or SAP) and message
+coming in from this interface item. The user has to sub class the abstract base class and may override the
+generated methods as needed.
+
+\textbf{C}
+
+The generator is only generating a public header file and is leaving its implementation to the user.
+
+\subsubsection{ActorBaseClass}
+
+This annotation is defined for Java only. It tells the generator that the generated actor class should
+inherit from the specified base class (mandatory string parameters class and package).
+
+If the actor class is modeled as having another actor base class then the annotation has no effect.
