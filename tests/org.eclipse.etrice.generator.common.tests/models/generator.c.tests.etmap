@@ -19,6 +19,8 @@ MappingModel CGenTest {
 		SubSystemMapping scTest -> node5 {
 			ThreadMapping dflt_thread -> DfltThread
 		}
-
+		SubSystemMapping cpExtTest -> node6 {
+			ThreadMapping defaultThread -> DfltThread
+		}
 	}
 }
