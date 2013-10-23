@@ -80,6 +80,9 @@ public class DiagramRenameParticipant extends RenameParticipant {
 		IFile roomFile = (IFile) element;
 		IFolder diagramFolder = roomFile.getParent().getFolder(new Path(DiagramAccessBase.DIAGRAMS_FOLDER_NAME));
 		
+		if(!diagramFolder.exists())
+			return false;
+		
 		// find all diagrams in diagram folder
 		final  List<IFile> allDiagrams = new ArrayList<IFile>();
 		IResourceProxyVisitor visitor = new IResourceProxyVisitor() {
