@@ -20,7 +20,7 @@
       version="0.4.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.etrice.core.room.ui"
-      license-feature="org.eclipse.license"
+      license-feature="org.eclipse.license.feature.group"
       license-feature-version="1.0.0.qualifier">
 
    <description url="http://www.eclipse.org/etrice">
@@ -35,6 +35,10 @@ v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
    </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
 
    <requires>
       <import plugin="org.eclipse.emf.ecore" version="2.6.0" match="greaterOrEqual"/>
