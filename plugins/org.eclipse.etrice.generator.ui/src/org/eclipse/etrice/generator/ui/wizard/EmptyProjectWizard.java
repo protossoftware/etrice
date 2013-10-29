@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.etrice.generator.ui.wizard;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -19,6 +21,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -48,6 +54,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject runtimeProject;
 	protected String initialProjectName;
 	protected URI modelURI;
+	private EmptyProjectConfigPage config;
 	
 	private static final String[] additionalLaunchConfigLines = new String[] {
 		"<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>"
@@ -69,10 +76,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			@Override
 			protected boolean validatePage() {
 				if (super.validatePage()) {
-					if (runtimeProject==null || !runtimeProject.exists()) {
-						setErrorMessage("the project 'org.eclipse.etrice.runtime.java' must be in the workspace");
-						return false;
-					}
 					IPath locationPath = getLocationPath();
 					projectLocation = Platform.getLocation().equals(
 							locationPath) ? null : locationPath;
@@ -91,6 +94,11 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 		newProjectCreationPage
 				.setDescription("Create an empty Java project with eTrice dependencies");
 		addPage(newProjectCreationPage);
+		
+		config = new EmptyProjectConfigPage("config", runtimeProject);
+		config.setTitle("Project Configuration");
+		config.setDescription("Choose a build type for the project");
+		addPage(config);
 	}
 	
 	@Override
@@ -100,14 +108,36 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
+					if (!config.useJDTBuild())
+						runtimeProject = null;
+					
+					ArrayList<String> natures = new ArrayList<String>(ProjectCreator.getCommonNatureIDs());
+					if (config.useMVNBuild())
+						natures.add("org.eclipse.m2e.core.maven2Nature");
+
+					ArrayList<String> builders = new ArrayList<String>(ProjectCreator.getCommonBuilderIDs());
+					if (config.useMVNBuild())
+						builders.add("org.eclipse.m2e.core.maven2Builder");
+					
+					ArrayList<IClasspathEntry> pathEntries = new ArrayList<IClasspathEntry>();
+					if (config.useMVNBuild()) {
+						IClasspathEntry mvnContainer = JavaCore.newContainerEntry(
+								new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"),
+								new IAccessRule[] {},
+								new IClasspathAttribute[] {JavaCore.newClasspathAttribute("maven.pomderived", "true")},
+								false);
+						pathEntries.add(mvnContainer);
+					}
+					
 					URI modelProjectURI = (projectLocation==null) ? null : URI.createFileURI(projectLocation.toOSString());
 					project = ProjectCreator.createETriceProject(
 							new Path(sourcePath.toString()),
 							new Path(sourceGenPath.toString()),
 							modelProjectURI,
 							runtimeProject,
-							ProjectCreator.getCommonNatureIDs(),
-							ProjectCreator.getCommonBuilderIDs(),
+							natures,
+							builders,
+							pathEntries,
 							BasicMonitor.toMonitor(progressMonitor)
 						);
 
@@ -153,6 +183,21 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/tmp/log"),
 							true, projectLocation, progressMonitor);
+					
+					if (config.useMVNBuild()) {
+						ProjectCreator.createMavenPOM(URI.createPlatformResourceURI("/"
+								+baseName+"/pom.xml", true),
+								baseName,
+								baseName,
+								"Node_nodeRef1_subSysRef1Runner");
+						ProjectCreator.createMavenBuilder(URI.createPlatformResourceURI("/"
+								+baseName+"/build_"+baseName+".launch", true),
+								baseName);
+						ProjectCreator.createMavenLauncher(URI.createPlatformResourceURI("/"
+								+baseName+"/runjar_"+baseName+".launch", true),
+								baseName,
+								baseName);
+					}
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);
