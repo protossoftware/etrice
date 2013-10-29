@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
@@ -112,7 +111,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		String uriString = importUriResolver.resolve(imp);
 		
 		URI uri = URI.createURI(uriString);
-		ResourceSet rs = new ResourceSetImpl();
+		ResourceSet rs = imp.eResource().getResourceSet();
 
 		try {
 			Resource res = rs.getResource(uri, true);
