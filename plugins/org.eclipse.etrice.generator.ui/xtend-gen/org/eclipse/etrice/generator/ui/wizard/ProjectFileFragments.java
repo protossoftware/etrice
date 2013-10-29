@@ -359,10 +359,10 @@ public class ProjectFileFragments {
     _builder.append("<configuration>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<source />");
+    _builder.append("<source>1.6</source>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<target />");
+    _builder.append("<target>1.6</target>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("</configuration>");
