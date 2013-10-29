@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-10-21 12:44:00" /> 
+<meta name="date" content="2013-10-29 17:16:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -58,23 +58,26 @@ class="ec-lmssbx-10">HelloWorld</span>.
 </p><!--l. 23--><p class="noindent" ><img 
 src="images/015-HelloWorld10.png" alt="PIC"  
  />
-</p><!--l. 25--><p class="noindent" >The wizard creates everything that is needed to create, build and run an eTrice model. The resulting project should look like
+</p><!--l. 25--><p class="noindent" >On the second wizard page use the selected default ("Use Eclipse JDT build") and press "Finish". The wizard creates
+everything that is needed to create, build and run an eTrice model. The resulting project should look like
 this:
-</p><!--l. 28--><p class="noindent" ><img 
+</p><!--l. 29--><p class="noindent" ><img 
 src="images/015-HelloWorld11.png" alt="PIC"  
  />
-</p><!--l. 30--><p class="noindent" >Within the model directory the model file <span 
+</p><!--l. 31--><p class="noindent" >Within the model directory the model file <span 
 class="ec-lmsso-10">HelloWorld.room </span>was created. Open the <span 
 class="ec-lmsso-10">HelloWorld.room </span>file and delete the
 contents of the file. Open the content assist with Ctrl+Space and select <span 
 class="ec-lmsso-10">RoomModel - model skeleton</span>.
-</p><!--l. 34--><p class="noindent" ><img 
+</p><!--l. 35--><p class="noindent" ><img 
 src="images/015-HelloWorld12.png" alt="PIC"  
  />
-</p><!--l. 36--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
-</p><!--l. 38--><p class="noindent" >The resulting model code should look like this:
+</p><!--l. 37--><p class="noindent" >Edit the template variables by typing the new names and jumping with Tab from name to name.
+</p><!--l. 39--><p class="noindent" >The resulting model code should look like this:
 </p>
-<!--l. 40-->
+<!--l. 41-->
+                                                                                            
+                                                                                            
 <div class="lstlisting" id="listing-1"><span class="label"><a 
  id="x10-35001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -171,13 +174,11 @@ class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a
  id="x10-35014r14"></a><span 
 class="ec-lmss-8x-x-62">14</span></span><span 
 class="ec-lmtt-9">}</span>
-                                                                                            
-                                                                                            
 </div>
-<!--l. 57--><p class="noindent" >The physical model has already been created for us in file model/HelloWorld.etphys. We can just leave it as it
+<!--l. 58--><p class="noindent" >The physical model has already been created for us in file model/HelloWorld.etphys. We can just leave it as it
 is.
 </p>
-<!--l. 60-->
+<!--l. 61-->
 <div class="lstlisting" id="listing-2"><span class="label"><a 
  id="x10-35015r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -391,12 +392,12 @@ class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a
 class="ec-lmss-8x-x-62">24</span></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 87--><p class="noindent" >The physical model defines the setup of your nodes with their attributes like threads and mode of execution. In this case we
+<!--l. 88--><p class="noindent" >The physical model defines the setup of your nodes with their attributes like threads and mode of execution. In this case we
 define one node with one thread.
-</p><!--l. 89--><p class="noindent" >Similar for the mapping model model/HelloWorld.etmap which is used to deploy the logical system onto the physical
+</p><!--l. 90--><p class="noindent" >Similar for the mapping model model/HelloWorld.etmap which is used to deploy the logical system onto the physical
 system.
 </p>
-<!--l. 91-->
+<!--l. 92-->
 <div class="lstlisting" id="listing-3"><span class="label"><a 
  id="x10-35039r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -1044,29 +1045,29 @@ class="ec-lmtt-9">}</span>
 </div><hr class="endfigure" />
 <h4 class="subsectionHead"><span class="titlemark">2.4.4   </span> <a 
  id="x10-370002.4.4"></a>Build and run the model</h4>
-<!--l. 107--><p class="noindent" >Now the model is finished and the source code can be generated. The project wizard has created a launch configuration that
+<!--l. 108--><p class="noindent" >Now the model is finished and the source code can be generated. The project wizard has created a launch configuration that
 is responsible for generating the source code. In the project <span 
 class="ec-lmsso-10">HelloWorld </span>right click <span 
 class="ec-lmsso-10">gen_HelloWorld.launch </span>and run it as
 <span 
 class="ec-lmsso-10">gen_HelloWorld</span>.
-</p><!--l. 110--><p class="noindent" ><img 
+</p><!--l. 111--><p class="noindent" ><img 
 src="images/015-HelloWorld06.png" alt="PIC"  
  />
-</p><!--l. 112--><p class="noindent" >The source code for the model will be generated into the folder <span 
+</p><!--l. 113--><p class="noindent" >The source code for the model will be generated into the folder <span 
 class="ec-lmsso-10">src-gen</span>. The main function will be contained in
 <span 
 class="ec-lmsso-10">HelloWorld/Nod_nodeRef1_subSysRef1Runner.java</span>. Select this file and run it as Java application or use the generated
 launch configuration <span 
 class="ec-lmsso-10">run_HelloWorld.launch</span>.
-</p><!--l. 115--><p class="noindent" ><img 
+</p><!--l. 116--><p class="noindent" ><img 
 src="images/015-HelloWorld07.png" alt="PIC"  
  />
-</p><!--l. 118--><p class="noindent" >The Hello World application starts and the string <span 
+</p><!--l. 119--><p class="noindent" >The Hello World application starts and the string <span 
 class="ec-lmsso-10">"Hello World" </span>will be printed into the console window. To terminate the
 application the user must enter <span 
 class="ec-lmsso-10">quit </span>in the console window.
-</p><!--l. 120--><p class="noindent" ><img 
+</p><!--l. 121--><p class="noindent" ><img 
 src="images/015-HelloWorld08.png" alt="PIC"  
  />
 </p><!--l. 1--><p class="noindent" >
@@ -1094,11 +1095,11 @@ src="images/015-HelloWorld09.png" alt="PIC"
 class="ec-lmsso-10">/LogSys1/subSysRef1/actorRef1 </span>is in the state <span 
 class="ec-lmsso-10">state0</span>. This is the simplest possible MSC.
 The MSCs for further tutorials will contain more information.
-</p><!--l. 124--><p class="noindent" >
+</p><!--l. 125--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.4.6   </span> <a 
  id="x10-390002.4.6"></a>Summary</h4>
-<!--l. 126--><p class="noindent" >Now you have generated your first eTrice model from scratch. You can switch between diagram editor and textual model
+<!--l. 127--><p class="noindent" >Now you have generated your first eTrice model from scratch. You can switch between diagram editor and textual model
 representation (.room file) and you can see what will be generated during editing and saving the diagram files. You
 should take a look at the generated source files to understand how the state machine is generated and the life
 cycle of the application works. The next tutorials will deal with more complex hierarchies in structure and
