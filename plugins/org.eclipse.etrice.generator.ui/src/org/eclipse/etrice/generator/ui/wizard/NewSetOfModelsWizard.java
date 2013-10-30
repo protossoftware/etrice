@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.etrice.generator.ui.configurator.ProjectConfigurationDelegator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -103,8 +104,9 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 							: workspace.getRoot().getFolder(page.getPath()).getProject();
 					
 					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, page.getPath().toString(), additionalLaunchConfigLines);
-					ProjectCreator.addIncludePathsAndLibraries(project);
 					ProjectCreator.addXtextNature(project, progressMonitor);
+					
+					ProjectConfigurationDelegator.getInstance().configure(project);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);

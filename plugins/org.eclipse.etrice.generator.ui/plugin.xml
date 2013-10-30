@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.eclipse.etrice.generator.ui.project_configurator" name="Configurator for eTrice projects" schema="schema/org.eclipse.etrice.generator.ui.project_configurator.exsd"/>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page

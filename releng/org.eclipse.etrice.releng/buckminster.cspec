@@ -10,12 +10,13 @@
         <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.c" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.c.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials.java" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.runtime.c.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.cdt-integration.feature" componentType="eclipse.feature"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="copy.sites" actor="ant">
@@ -41,8 +42,8 @@
                 <cs:property key="targets" value="create.javadoc"/>
             </cs:actorProperties>
             <cs:properties>
-                <cs:property key="root" value="${WORKSPACE}"/>
                 <cs:property key="mustCreateJavadoc" value="${manage.javadoc}"/>
+                <cs:property key="root" value="${WORKSPACE}"/>
             </cs:properties>
             <cs:products>
                 <cs:public name="javadoc.output" base="plugins/org.eclipse.graphiti.doc/javadoc/"/>

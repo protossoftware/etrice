@@ -21,17 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.cdt.core.model.CoreModel;
-import org.eclipse.cdt.core.settings.model.CIncludePathEntry;
-import org.eclipse.cdt.core.settings.model.CLibraryFileEntry;
-import org.eclipse.cdt.core.settings.model.CLibraryPathEntry;
-import org.eclipse.cdt.core.settings.model.ICConfigurationDescription;
-import org.eclipse.cdt.core.settings.model.ICFolderDescription;
-import org.eclipse.cdt.core.settings.model.ICLanguageSetting;
-import org.eclipse.cdt.core.settings.model.ICLanguageSettingEntry;
-import org.eclipse.cdt.core.settings.model.ICProjectDescription;
-import org.eclipse.cdt.core.settings.model.ICSettingEntry;
-import org.eclipse.cdt.core.settings.model.ICTargetPlatformSetting;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
@@ -221,7 +210,7 @@ public class ProjectCreator {
 	 * @param desc
 	 * @param naturesToAdd
 	 */
-	public static void addNatures(IProjectDescription desc,
+	private static void addNatures(IProjectDescription desc,
 			List<String> naturesToAdd) {
 		HashSet<String> natures = new HashSet<String>();
 		String[] ids = desc.getNatureIds();
@@ -238,7 +227,7 @@ public class ProjectCreator {
 		desc.setNatureIds(ids);
 	}
 
-	public static void addBuilders(IProjectDescription desc,
+	private static void addBuilders(IProjectDescription desc,
 			List<String> buildersToAdd) {
 		HashMap<String, ICommand> builders = new HashMap<String, ICommand>();
 		ICommand[] buildSpecs = desc.getBuildSpec();
@@ -296,7 +285,7 @@ public class ProjectCreator {
 		}
 	}
 
-	public static IContainer findOrCreateContainer(IPath path,
+	protected static IContainer findOrCreateContainer(IPath path,
 			boolean forceRefresh, IPath localLocation,
 			IProgressMonitor progressMonitor) throws CoreException {
 		String projectName = path.segment(0);
@@ -307,7 +296,7 @@ public class ProjectCreator {
 				progressMonitor);
 	}
 
-	public static IContainer findOrCreateContainer(IPath path,
+	protected static IContainer findOrCreateContainer(IPath path,
 			boolean forceRefresh, IProjectDescription projectDescription,
 			IProgressMonitor progressMonitor) throws CoreException {
 		try {
@@ -392,109 +381,11 @@ public class ProjectCreator {
 		writeFile(uri, ProjectFileFragments.getLaunchCApplicationConfig(project));
 	}
 
-	public static void addIncludePathsAndLibraries(IProject project)
-			throws CoreException {
-		if (project.getNature("org.eclipse.cdt.core.cnature") == null)
-			return;
-
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IProject runtime = workspace.getRoot().getProject(
-				"org.eclipse.etrice.runtime.c");
-		IFolder common = runtime.getFolder("src/common");
-		IFolder config = runtime.getFolder("src/config");
-		IFolder posix = runtime.getFolder("src/platforms/MT_POSIX_GENERIC_GCC");
-		IFolder mingw = runtime.getFolder("src/platforms/MT_WIN_MinGW");
-		IFolder src_gen = project.getFolder("src-gen");
-		IFolder mingw_debug = project.getFolder("MinGWDebug");
-		IFolder mingw_release = project.getFolder("MinGWRelease");
-		IFolder posix_debug = project.getFolder("PosixDebug");
-		IFolder posix_release = project.getFolder("PosixRelease");
-
-		ICProjectDescription projectDescription = CoreModel.getDefault()
-				.getProjectDescription(project, true);
-		ICConfigurationDescription configDecriptions[] = projectDescription
-				.getConfigurations();
-
-		for (ICConfigurationDescription configDescription : configDecriptions) {
-			ICFolderDescription projectRoot = configDescription
-					.getRootFolderDescription();
-			ICLanguageSetting[] settings = projectRoot.getLanguageSettings();
-			for (ICLanguageSetting setting : settings) {
-				if (!"org.eclipse.cdt.core.gcc".equals(setting.getLanguageId())) {
-					continue;
-				}
-
-				ICTargetPlatformSetting tgt = configDescription
-						.getTargetPlatformSetting();
-				String id = tgt.getId();
-
-				ArrayList<ICLanguageSettingEntry> includes = new ArrayList<ICLanguageSettingEntry>();
-				includes.add(new CIncludePathEntry(src_gen,
-						ICSettingEntry.LOCAL));
-				includes.add(new CIncludePathEntry(common, ICSettingEntry.LOCAL));
-				includes.add(new CIncludePathEntry(config, ICSettingEntry.LOCAL));
-				if (id.startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe")) {
-					includes.add(new CIncludePathEntry(mingw,
-							ICSettingEntry.LOCAL));
-				} else if (id
-						.startsWith("cdt.managedbuild.target.gnu.platform.posix.exe")) {
-					includes.add(new CIncludePathEntry(posix,
-							ICSettingEntry.LOCAL));
-				}
-				addSettings(setting, ICSettingEntry.INCLUDE_PATH, includes);
-
-				List<? extends ICLanguageSettingEntry> libPaths = null;
-				if (id.startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe.debug")) {
-					libPaths = Collections.singletonList(new CLibraryPathEntry(
-							mingw_debug, ICSettingEntry.LOCAL));
-				} else if (id
-						.startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe.release")) {
-					libPaths = Collections.singletonList(new CLibraryPathEntry(
-							mingw_release, ICSettingEntry.LOCAL));
-				} else if (id
-						.startsWith("cdt.managedbuild.target.gnu.platform.posix.exe.debug")) {
-					libPaths = Collections.singletonList(new CLibraryPathEntry(
-							posix_debug, ICSettingEntry.LOCAL));
-				} else if (id
-						.startsWith("cdt.managedbuild.target.gnu.platform.posix.exe.release")) {
-					libPaths = Collections.singletonList(new CLibraryPathEntry(
-							posix_release, ICSettingEntry.LOCAL));
-				}
-				if (libPaths != null)
-					addSettings(setting, ICSettingEntry.LIBRARY_PATH, libPaths);
-
-				List<? extends ICLanguageSettingEntry> libs = Collections
-						.singletonList(new CLibraryFileEntry(
-								"org.eclipse.etrice.runtime.c", 0));
-				addSettings(setting, ICSettingEntry.LIBRARY_FILE, libs);
-			}
-		}
-		try {
-			CoreModel.getDefault().setProjectDescription(project,
-					projectDescription);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void addSettings(ICLanguageSetting setting, int kind,
-			List<? extends ICLanguageSettingEntry> entries) {
-		HashMap<String, ICLanguageSettingEntry> newEntries = new HashMap<String, ICLanguageSettingEntry>();
-		for (ICLanguageSettingEntry entry : setting.getSettingEntriesList(kind)) {
-			newEntries.put(entry.getName(), entry);
-		}
-		for (ICLanguageSettingEntry entry : entries) {
-			newEntries.put(entry.getName(), entry);
-		}
-		setting.setSettingEntries(kind, new ArrayList<ICLanguageSettingEntry>(
-				newEntries.values()));
-	}
-
 	public static void createRunAndLaunchConfigurations(String baseName,
 			IProject project, String mdlPath,
 			String[] additionalLaunchConfigLines) throws CoreException {
 
-		if (project.getNature(JavaCore.NATURE_ID) != null) {
+		if (project.hasNature(JavaCore.NATURE_ID)) {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), "java",
@@ -504,7 +395,7 @@ public class ProjectCreator {
 							+ "/run_" + baseName + ".launch", true),
 					project.getName(), baseName,
 					"Node_nodeRef1_subSysRef1Runner");
-		} else if (project.getNature("org.eclipse.cdt.core.cnature") != null) {
+		} else if (project.hasNature("org.eclipse.cdt.core.cnature")) {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), "c",
