@@ -31,7 +31,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 public class ReachabilityValidator implements IRoomValidator {
 
-	public static String DIAG_CODE_UNREACHABLE = "etrice.unreachable";
+	public static final String DIAG_CODE_UNREACHABLE = "etrice.unreachable";
 	
 	@Override
 	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor) {

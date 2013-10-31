@@ -14,7 +14,7 @@ package org.eclipse.etrice.ui.common.quickfix;
 
 import java.util.List;
 
-import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 import com.google.common.collect.Lists;
 
@@ -26,7 +26,7 @@ public class IssueResolutionAcceptor {
 
 	private List<IssueResolution> issueResolutions = Lists.newArrayList();
 
-	public void accept(Issue issue, String label, String description, String image, IDiagramModification modification) {
+	public void accept(FeatureBasedDiagnostic issue, String label, String description, String image, IDiagramModification modification) {
 		issueResolutions.add(new IssueResolution(label, description, image, modification));
 	}
 

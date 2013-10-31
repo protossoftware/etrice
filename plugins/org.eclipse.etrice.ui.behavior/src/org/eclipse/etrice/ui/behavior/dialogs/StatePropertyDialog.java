@@ -15,6 +15,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -41,6 +42,13 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 
 	private State state;
 	private boolean inherited;
+
+	private boolean addCode = false;
+	private String entryCodeSelectionString = "";
+	private String exitCodeSelectionString = "";
+	private String doCodeSelectionString = "";
+	private String messageToDisplay = "";
+	private String messageTitle = "";
 
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
 		super(shell, edit?"Edit State":"View State", ac);
@@ -84,6 +92,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
+			
+			if (addCode && !entryCodeSelectionString.isEmpty())
+				entry.append(entryCodeSelectionString + "();\n");
+			setTextSelectionAndFocus(entry, entryCodeSelectionString);
 		}
 		else {
 			if (state instanceof RefinedState)
@@ -93,6 +105,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (addCode && !entryCodeSelectionString.isEmpty())
+					entry.append(entryCodeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, entryCodeSelectionString);
 			}
 			
 			{
@@ -101,6 +117,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (addCode && !entryCodeSelectionString.isEmpty())
+					entry.append(entryCodeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, entryCodeSelectionString);
 			}
 		}
 		
@@ -112,6 +132,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
+
+			if (addCode && !exitCodeSelectionString.isEmpty())
+				entry.append(exitCodeSelectionString + "();\n");
+			setTextSelectionAndFocus(entry, exitCodeSelectionString);
 		}
 		else {
 			{
@@ -120,6 +144,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				exit.setLayoutData(gd);
+
+				if (addCode && !exitCodeSelectionString.isEmpty())
+					exit.append(exitCodeSelectionString + "();\n");
+				setTextSelectionAndFocus(exit, exitCodeSelectionString);
 			}
 			
 			if (state instanceof RefinedState)
@@ -129,6 +157,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (addCode && !exitCodeSelectionString.isEmpty())
+					entry.append(exitCodeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, exitCodeSelectionString);
 			}
 		}
 		
@@ -140,9 +172,42 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);
+
+			if (addCode && !doCodeSelectionString.isEmpty())
+				dotxt.append(doCodeSelectionString + "();\n");
+			setTextSelectionAndFocus(dotxt, doCodeSelectionString);
 		}
 		
 		createMembersAndMessagesButtons(body);
+
+		if (!messageToDisplay.isEmpty()) {
+			getShell().getParent().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					MessageDialog.openInformation(getShell(), messageTitle,
+							messageToDisplay);
+				}
+			});
+		}
 	}
 
+	public void setAddCode(boolean add) {
+		addCode = add;
+	}
+
+	public void setEntryCodeSelectionString(String selectionString) {
+		entryCodeSelectionString = selectionString;
+	}
+
+	public void setExitCodeSelectionString(String selectionString) {
+		exitCodeSelectionString = selectionString;
+	}
+
+	public void setDoCodeSelectionString(String selectionString) {
+		doCodeSelectionString = selectionString;
+	}
+
+	public void setMessageDialogContents(String message, String title) {
+		messageToDisplay = message;
+		messageTitle = title; 
+	}
 }

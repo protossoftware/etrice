@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.common.quickfix;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 
 /**
@@ -30,7 +31,7 @@ public class IssueResolution {
 	 * @param label
 	 * @param image
 	 */
-	public IssueResolution(String description, String label, String image, IDiagramModification modification) {
+	public IssueResolution(String label, String description, String image, IDiagramModification modification) {
 		this.description = description;
 		this.label = label;
 		this.image = image;
@@ -61,9 +62,9 @@ public class IssueResolution {
 	/**
 	 * @param diagram
 	 */
-	public void apply(Diagram diagram) {
+	public boolean apply(Diagram diagram, IFeatureProvider fp) {
 		try {
-			modification.apply(diagram, null);
+			return modification.apply(diagram, fp);
 		} catch(Exception exc) {
 			throw new WrappedException(exc);
 		}

@@ -12,8 +12,11 @@
 
 package org.eclipse.etrice.ui.behavior.support;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -23,6 +26,11 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
+import org.eclipse.etrice.ui.behavior.dialogs.QuickFixDialog;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.quickfix.BehaviorQuickfixProvider;
+import org.eclipse.etrice.ui.common.quickfix.IssueResolution;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -63,10 +71,16 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 public class StateGraphSupport {
 	
@@ -517,6 +531,70 @@ public class StateGraphSupport {
 			}
 		}
 		
+		private static class QuickFixFeature extends AbstractCustomFeature {
+
+			private boolean doneChanges = false;
+
+			public QuickFixFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Quick Fix";
+			}
+
+			@Override
+			public String getDescription() {
+				return "Apply Quick fixes";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				return true;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+
+				// Get the issue Resolutions Map
+				Object bo = getBusinessObjectForPictogramElement(context
+						.getPictogramElements()[0]);
+				ArrayList<Diagnostic> issues = ((BehaviorEditor) getDiagramBehavior()
+						.getDiagramContainer()).getDiagnosingModelObserver()
+						.getElementDiagonsticMap().get(bo);
+
+				HashMap<FeatureBasedDiagnostic, List<IssueResolution>> issueResolutionsMap = new HashMap<FeatureBasedDiagnostic, List<IssueResolution>>();
+				BehaviorQuickfixProvider behaviorQuickfixProvider = new BehaviorQuickfixProvider();
+				for (Diagnostic issue : issues) {
+					issueResolutionsMap
+							.put((FeatureBasedDiagnostic) issue,
+									behaviorQuickfixProvider
+											.getResolutions((FeatureBasedDiagnostic) issue));
+				}
+
+				// Create & Open the Quick Fix Dialog
+				Shell shell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				QuickFixDialog dlg = new QuickFixDialog(shell, issueResolutionsMap);
+
+				if (dlg.open() != Window.OK)
+					return;
+
+				Object[] result = dlg.getResult();
+				if (result == null)
+					return;
+				else{
+					doneChanges = ((IssueResolution)result[0]).apply(getDiagram(), getFeatureProvider());
+				}
+			}
+
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
+		}
+
 		private IFeatureProvider fp;
 	
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -557,9 +635,27 @@ public class StateGraphSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new GoUpFeature(fp) };
+			PictogramElement pe = context.getPictogramElements()[0];
+			Object bo = getBusinessObjectForPictogramElement(pe);
+
+			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
+
+			result.add(new GoUpFeature(fp));
+
+			// Provide quick fix feature only for those edit parts which have
+			// errors, warnings or infos.
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			if (diagnostics != null)
+				result.add(new QuickFixFeature(fp));
+
+			ICustomFeature features[] = new ICustomFeature[result.size()];
+			return result.toArray(features);
 		}
 	}
+	
 
 	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
@@ -587,6 +683,48 @@ public class StateGraphSupport {
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
 			return new FeatureProvider.GoUpFeature(getDiagramTypeProvider().getFeatureProvider());
+		}
+		
+		/**
+		 * @author jayant
+		 */
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			// Constants for positioning decorators
+			GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
+			GraphicsAlgorithm rectangle = invisible
+					.getGraphicsAlgorithmChildren().get(0);
+			int xOrigin = rectangle.getX();
+			int yOrigin = rectangle.getY();
+			int xGap = 10, yGap = 0;
+			
+			// Get the linked Business Object
+			EObject bo = Graphiti.getLinkService()
+					.getBusinessObjectForLinkedPictogramElement(pe);
+			
+			// Get Diagnostics associated with the business object
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			
+			// Form Decorators based on Diagnostics
+			ArrayList<IDecorator> decorators = DecoratorUtil
+					.getMarkersFromDiagnostics(diagnostics);
+			
+			if (decorators.isEmpty())
+				return super.getDecorators(pe);
+			else {
+				int i = 0;
+				for (IDecorator decorator : decorators) {
+					((ImageDecorator) decorator).setX(xOrigin + xGap * i);
+					((ImageDecorator) decorator).setY(yOrigin + yGap * i);
+					i++;
+				}
+				
+				return (IDecorator[]) decorators
+						.toArray(new IDecorator[decorators.size()]);
+			}
 		}
 	}
 

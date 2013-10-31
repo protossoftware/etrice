@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -184,6 +185,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private boolean triggerError = false;
 	private boolean inherited;
 	private RefinedTransition refined;
+	private String actionCodeSelectionString = "";
+	private String messageToDisplay = "";
+	private String messageTitle = "";
 
 	public TransitionPropertyDialog(Shell shell, ActorClass ac, Transition trans) {
 		super(shell, "Edit Transition", ac);
@@ -303,8 +307,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 		{
 			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
-			if (code!=null)
-				createFixedText(body, "Base Action Code:", code, true);
+			if (code!=null){
+				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
+				setTextSelectionAndFocus(baseActionCode, actionCodeSelectionString);
+			}
 		}
 		
 		if (inherited) {
@@ -314,6 +320,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				action.setLayoutData(gd);
+				setTextSelectionAndFocus(action, actionCodeSelectionString);
 			}
 		}
 		else
@@ -323,9 +330,19 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			action.setLayoutData(gd);
+			setTextSelectionAndFocus(action, actionCodeSelectionString);
 		}
 		
 		createMembersAndMessagesButtons(body);
+
+		if (!messageToDisplay.isEmpty()) {
+			getShell().getParent().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					MessageDialog.openInformation(getShell(), messageTitle,
+							messageToDisplay);
+				}
+			});
+		}
 	}
 
 	private void disableAll(Composite parent) {
@@ -750,5 +767,14 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			((Trigger) element).setGuard(guard);
 		}
+	}
+
+	public void setActionCodeSelectionString(String selectionString){
+		this.actionCodeSelectionString = selectionString;
+	}
+
+	public void setMessageDialogContents(String message, String title) {
+		messageToDisplay = message;
+		messageTitle = title; 
 	}
 }

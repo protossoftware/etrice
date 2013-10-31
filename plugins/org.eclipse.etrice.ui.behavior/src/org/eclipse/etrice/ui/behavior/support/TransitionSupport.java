@@ -13,7 +13,10 @@
 package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -37,10 +40,15 @@ import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
+import org.eclipse.etrice.ui.behavior.dialogs.QuickFixDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.common.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.quickfix.BehaviorQuickfixProvider;
+import org.eclipse.etrice.ui.common.quickfix.IssueResolution;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -87,7 +95,9 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -95,6 +105,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 
 public class TransitionSupport {
 
@@ -104,7 +115,7 @@ public class TransitionSupport {
 	private static final int LINE_WIDTH = 1;
 	private static final int MAX_LABEL_LENGTH = 20;
 
-	static class FeatureProvider extends DefaultFeatureProvider {
+	public static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends ChangeAwareCreateConnectionFeature {
 			
@@ -576,9 +587,12 @@ public class TransitionSupport {
 			}
 		}
 		
-		private static class PropertyFeature extends ChangeAwareCustomFeature {
+		public static class PropertyFeature extends ChangeAwareCustomFeature {
 
 			private boolean editable;
+			private String actionCodeSelectionString = "";
+			private String messageToDisplay = "";
+			private String messageTitle = "";
 
 			public PropertyFeature(IFeatureProvider fp, boolean editable) {
 				super(fp);
@@ -624,6 +638,8 @@ public class TransitionSupport {
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
+				dlg.setActionCodeSelectionString(actionCodeSelectionString);
+				dlg.setMessageDialogContents(messageToDisplay, messageTitle);
 				if (dlg.open()==Window.OK){
 					boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
 					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
@@ -635,6 +651,15 @@ public class TransitionSupport {
 				}
 				
 				return false;	
+			}
+
+			public void setActionCodeSelectionString(String selectionString){
+				actionCodeSelectionString = selectionString;
+			}
+
+			public void setMessageDialogContents(String message, String title) {
+				messageToDisplay = message;
+				messageTitle = title; 
 			}
 		}
 		
@@ -727,6 +752,70 @@ public class TransitionSupport {
 			}
 		}
 		
+		private static class QuickFixFeature extends AbstractCustomFeature {
+
+			private boolean doneChanges = false;
+
+			public QuickFixFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Quick Fix";
+			}
+
+			@Override
+			public String getDescription() {
+				return "Apply Quick fixes";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				return true;
+			}
+
+			@Override
+			public void execute(ICustomContext context) {
+
+				// Get the issue Resolutions Map
+				Object bo = getBusinessObjectForPictogramElement(context
+						.getPictogramElements()[0]);
+				ArrayList<Diagnostic> issues = ((BehaviorEditor) getDiagramBehavior()
+						.getDiagramContainer()).getDiagnosingModelObserver()
+						.getElementDiagonsticMap().get(bo);
+
+				HashMap<FeatureBasedDiagnostic, List<IssueResolution>> issueResolutionsMap = new HashMap<FeatureBasedDiagnostic, List<IssueResolution>>();
+				BehaviorQuickfixProvider behaviorQuickfixProvider = new BehaviorQuickfixProvider();
+				for (Diagnostic issue : issues) {
+					issueResolutionsMap
+							.put((FeatureBasedDiagnostic) issue,
+									behaviorQuickfixProvider
+											.getResolutions((FeatureBasedDiagnostic) issue));
+				}
+
+				// Create & Open the Quick Fix Dialog
+				Shell shell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				QuickFixDialog dlg = new QuickFixDialog(shell, issueResolutionsMap);
+
+				if (dlg.open() != Window.OK)
+					return;
+
+				Object[] result = dlg.getResult();
+				if (result == null)
+					return;
+				else{
+					doneChanges = ((IssueResolution)result[0]).apply(getDiagram(), getFeatureProvider());
+				}
+			}
+
+			@Override
+			public boolean hasDoneChanges() {
+				return doneChanges;
+			}
+		}
+
 		private IFeatureProvider fp;
 		
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -794,6 +883,15 @@ public class TransitionSupport {
 					result.add(new RefineTransitionFeature(fp));
 			}
 			
+			// Provide quick fix feature only for those edit parts which have
+			// errors, warnings or infos.
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			if (diagnostics != null)
+				result.add(new QuickFixFeature(fp));
+
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
 		}
@@ -867,6 +965,47 @@ public class TransitionSupport {
 			}
 			
 			return super.getToolTip(ga);
+		}
+		
+		/**
+		 * @author jayant
+		 */
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			if (pe.isVisible()) {
+				// Constants for positioning decorators
+				int xOrigin = -20, yOrigin = 0; // Position to the left of label
+				int xGap = 0, yGap = -10;
+				
+				// Get the linked Business Object
+				EObject bo = Graphiti.getLinkService()
+						.getBusinessObjectForLinkedPictogramElement(
+								(PictogramElement) pe.eContainer());
+				
+				// Get Diagnostics associated with the business object
+				ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+						.getDiagramBehavior().getDiagramContainer())
+						.getDiagnosingModelObserver().getElementDiagonsticMap()
+						.get(bo);
+				
+				// Form Decorators based on Diagnostics
+				ArrayList<IDecorator> decorators = DecoratorUtil
+						.getMarkersFromDiagnostics(diagnostics);
+				
+				if (!decorators.isEmpty()) {
+					int i = 0;
+					for (IDecorator decorator : decorators) {
+						((ImageDecorator) decorator).setX(xOrigin + i * xGap);
+						((ImageDecorator) decorator).setY(yOrigin + i * yGap);
+						i++;
+					}
+					
+					return (IDecorator[]) decorators
+							.toArray(new IDecorator[decorators.size()]);
+				}
+			}
+			
+			return super.getDecorators(pe);
 		}
 	}
 	

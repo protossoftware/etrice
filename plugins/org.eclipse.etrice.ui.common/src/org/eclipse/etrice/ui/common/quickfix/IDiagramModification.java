@@ -21,5 +21,5 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
  */
 public interface IDiagramModification {
 
-	void apply(Diagram diagram, IFeatureProvider fp) throws Exception;
+	boolean apply(Diagram diagram, IFeatureProvider fp) throws Exception;
 }
