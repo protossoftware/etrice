@@ -13,6 +13,7 @@
 
 package org.eclipse.etrice.ui.behavior.quickfix;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -31,27 +32,26 @@ import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.ui.behavior.support.StateSupport.FeatureProvider.PropertyFeature;
+import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog.Where;
+import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
-import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
 import org.eclipse.etrice.ui.common.quickfix.AbstractQuickfixProvider;
 import org.eclipse.etrice.ui.common.quickfix.IDiagramModification;
 import org.eclipse.etrice.ui.common.quickfix.IssueResolutionAcceptor;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IRemoveFeature;
-import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
-import org.eclipse.graphiti.features.context.impl.CustomContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
-import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
@@ -195,31 +195,21 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							// unexpected
 							return false;
 
-						// Open StatePropertyDialog, add line, select added
-						// line
-						PropertyFeature propertyFeature = null;
-						ICustomContext customContext = new CustomContext(pes
-								.toArray(new PictogramElement[pes.size()]));
-						ICustomFeature features[] = fp
-								.getCustomFeatures(customContext);
-						for (ICustomFeature feature : features) {
-							if (feature instanceof PropertyFeature) {
-								propertyFeature = (PropertyFeature) feature;
-								break;
-							}
+						// Open StatePropertyDialog, add line, select added line
+						ActorClass ac = SupportUtil.getActorClass(diagram);
+						Shell shell = PlatformUI.getWorkbench()
+								.getActiveWorkbenchWindow().getShell();
+						StatePropertyDialog dlg = new StatePropertyDialog(
+								shell, ac, state, true);
+						dlg.setCodeSelectionString(codeString,
+								EnumSet.of(Where.ENTRY));
+						dlg.setAddCode(true);
+						dlg.setMessageDialogContents(
+								"Please complete the code with the newly inserted and highlighted fragment.",
+								"Quick Fix");
+						if (dlg.open() == Window.OK) {
+							return true;
 						}
-						if (propertyFeature != null) {
-							propertyFeature
-									.setEntryCodeSelectionString(codeString);
-							propertyFeature.setAddCode(true);
-							propertyFeature
-									.setMessageDialogContents(
-											"Please complete the code with the newly inserted and highlighted fragment.",
-											"Quick Fix");
-							propertyFeature.execute(customContext);
-							return propertyFeature.hasDoneChanges();
-						}
-
 						return false;
 					}
 				});
@@ -249,31 +239,21 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							// unexpected
 							return false;
 
-						// Open StatePropertyDialog, add line & select added
-						// line
-						PropertyFeature propertyFeature = null;
-						ICustomContext customContext = new CustomContext(pes
-								.toArray(new PictogramElement[pes.size()]));
-						ICustomFeature features[] = fp
-								.getCustomFeatures(customContext);
-						for (ICustomFeature feature : features) {
-							if (feature instanceof PropertyFeature) {
-								propertyFeature = (PropertyFeature) feature;
-								break;
-							}
+						// Open StatePropertyDialog, add line, select added line
+						ActorClass ac = SupportUtil.getActorClass(diagram);
+						Shell shell = PlatformUI.getWorkbench()
+								.getActiveWorkbenchWindow().getShell();
+						StatePropertyDialog dlg = new StatePropertyDialog(
+								shell, ac, state, true);
+						dlg.setCodeSelectionString(codeString,
+								EnumSet.of(Where.EXIT));
+						dlg.setAddCode(true);
+						dlg.setMessageDialogContents(
+								"Please complete the code with the newly inserted and highlighted fragment.",
+								"Quick Fix");
+						if (dlg.open() == Window.OK) {
+							return true;
 						}
-						if (propertyFeature != null) {
-							propertyFeature
-									.setExitCodeSelectionString(codeString);
-							propertyFeature.setAddCode(true);
-							propertyFeature
-									.setMessageDialogContents(
-											"Please complete the code with the newly inserted and highlighted fragment.",
-											"Quick Fix");
-							propertyFeature.execute(customContext);
-							return propertyFeature.hasDoneChanges();
-						}
-
 						return false;
 					}
 				});
@@ -405,31 +385,20 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 
 							// Open StatePropertyDialog & select the offending
 							// code
-							PropertyFeature propertyFeature = null;
-							ICustomContext customContext = new CustomContext(
-									pes.toArray(new PictogramElement[pes.size()]));
-							ICustomFeature features[] = fp
-									.getCustomFeatures(customContext);
-							for (ICustomFeature feature : features) {
-								if (feature instanceof PropertyFeature) {
-									propertyFeature = (PropertyFeature) feature;
-									break;
-								}
+							ActorClass ac = SupportUtil.getActorClass(diagram);
+							Shell shell = PlatformUI.getWorkbench()
+									.getActiveWorkbenchWindow().getShell();
+							StatePropertyDialog dlg = new StatePropertyDialog(
+									shell, ac, state, true);
+							dlg.setCodeSelectionString(codeString, EnumSet.of(
+									Where.ENTRY, Where.EXIT, Where.DO));
+							dlg.setMessageDialogContents(
+									"Please remove the highlighted code after inspection.",
+									"Quick Fix");
+							if (dlg.open() == Window.OK) {
+								return true;
 							}
-							if (propertyFeature != null) {
-								propertyFeature
-										.setEntryCodeSelectionString(codeString);
-								propertyFeature
-										.setExitCodeSelectionString(codeString);
-								propertyFeature
-										.setDoCodeSelectionString(codeString);
-								propertyFeature
-										.setMessageDialogContents(
-												"Please remove the highlighted code after inspection.",
-												"Quick Fix");
-								propertyFeature.execute(customContext);
-								return propertyFeature.hasDoneChanges();
-							}
+							return false;
 
 						} else if (obj instanceof Transition
 								|| obj instanceof Trigger) {
@@ -449,26 +418,17 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 
 							// Open TransitionPropertyDialog & select the
 							// offending piece of code
-							TransitionSupport.FeatureProvider.PropertyFeature propertyFeature = null;
-							ICustomContext customContext = new CustomContext(
-									pes.toArray(new PictogramElement[pes.size()]));
-							ICustomFeature features[] = fp
-									.getCustomFeatures(customContext);
-							for (ICustomFeature feature : features) {
-								if (feature instanceof TransitionSupport.FeatureProvider.PropertyFeature) {
-									propertyFeature = (TransitionSupport.FeatureProvider.PropertyFeature) feature;
-									break;
-								}
-							}
-							if (propertyFeature != null) {
-								propertyFeature
-										.setActionCodeSelectionString(codeString);
-								propertyFeature
-										.setMessageDialogContents(
-												"Please remove the highlighted code after inspection.",
-												"Quick Fix");
-								propertyFeature.execute(customContext);
-								return propertyFeature.hasDoneChanges();
+							Shell shell = PlatformUI.getWorkbench()
+									.getActiveWorkbenchWindow().getShell();
+							TransitionPropertyDialog dlg = new TransitionPropertyDialog(
+									shell, SupportUtil.getActorClass(diagram),
+									transition);
+							dlg.setCodeSelectionString(codeString);
+							dlg.setMessageDialogContents(
+									"Please remove the highlighted code after inspection.",
+									"Quick Fix");
+							if (dlg.open() == Window.OK) {
+								return true;
 							}
 						}
 						return false;

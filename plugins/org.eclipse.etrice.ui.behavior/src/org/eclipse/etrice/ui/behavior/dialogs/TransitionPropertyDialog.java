@@ -185,7 +185,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private boolean triggerError = false;
 	private boolean inherited;
 	private RefinedTransition refined;
-	private String actionCodeSelectionString = "";
+	private String codeSelectionString = "";
 	private String messageToDisplay = "";
 	private String messageTitle = "";
 
@@ -244,6 +244,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				
 				name.selectAll();
 				name.setFocus();
+				if (!codeSelectionString.isEmpty())
+					name.setEnabled(false);
 			}
 		}
 		
@@ -309,7 +311,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
 			if (code!=null){
 				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
-				setTextSelectionAndFocus(baseActionCode, actionCodeSelectionString);
+				setTextSelectionAndFocus(baseActionCode, codeSelectionString);
 			}
 		}
 		
@@ -320,7 +322,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				action.setLayoutData(gd);
-				setTextSelectionAndFocus(action, actionCodeSelectionString);
+				setTextSelectionAndFocus(action, codeSelectionString);
 			}
 		}
 		else
@@ -330,7 +332,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			action.setLayoutData(gd);
-			setTextSelectionAndFocus(action, actionCodeSelectionString);
+			setTextSelectionAndFocus(action, codeSelectionString);
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -769,8 +771,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 
-	public void setActionCodeSelectionString(String selectionString){
-		this.actionCodeSelectionString = selectionString;
+	public void setCodeSelectionString(String selectionString){
+		this.codeSelectionString = selectionString;
 	}
 
 	public void setMessageDialogContents(String message, String title) {

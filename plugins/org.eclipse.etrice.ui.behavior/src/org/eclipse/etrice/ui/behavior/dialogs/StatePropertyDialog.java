@@ -1,5 +1,7 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
+import java.util.EnumSet;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -43,10 +45,20 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 	private State state;
 	private boolean inherited;
 
+	/**
+	 * Enum for quickfix. Used when {@link StatePropertyDialog} is invoked from
+	 * {@link QuickFixDialog}.
+	 * 
+	 * @author jayant
+	 * 
+	 */
+	public enum Where {
+		ENTRY, EXIT, DO 
+	}
+
 	private boolean addCode = false;
-	private String entryCodeSelectionString = "";
-	private String exitCodeSelectionString = "";
-	private String doCodeSelectionString = "";
+	private String codeSelectionString = "";
+	private EnumSet<Where> where = EnumSet.noneOf(Where.class);
 	private String messageToDisplay = "";
 	private String messageTitle = "";
 
@@ -76,6 +88,9 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			
 			name.setFocus();
 			name.selectAll();
+
+			if (!where.isEmpty())
+				name.setEnabled(false);
 		}
 		else {
 			createFixedText(body, "Name:", state.getName(), false);
@@ -92,10 +107,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
-			
-			if (addCode && !entryCodeSelectionString.isEmpty())
-				entry.append(entryCodeSelectionString + "();\n");
-			setTextSelectionAndFocus(entry, entryCodeSelectionString);
+
+			if (where.contains(Where.ENTRY)) {
+				if (addCode)
+					entry.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, codeSelectionString);
+			}
 		}
 		else {
 			if (state instanceof RefinedState)
@@ -106,9 +123,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
 
-				if (addCode && !entryCodeSelectionString.isEmpty())
-					entry.append(entryCodeSelectionString + "();\n");
-				setTextSelectionAndFocus(entry, entryCodeSelectionString);
+				if (where.contains(Where.ENTRY)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 			
 			{
@@ -118,9 +137,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
 
-				if (addCode && !entryCodeSelectionString.isEmpty())
-					entry.append(entryCodeSelectionString + "();\n");
-				setTextSelectionAndFocus(entry, entryCodeSelectionString);
+				if (where.contains(Where.ENTRY)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 		}
 		
@@ -133,9 +154,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
 
-			if (addCode && !exitCodeSelectionString.isEmpty())
-				entry.append(exitCodeSelectionString + "();\n");
-			setTextSelectionAndFocus(entry, exitCodeSelectionString);
+			if (where.contains(Where.EXIT)) {
+				if (addCode)
+					entry.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, codeSelectionString);
+			}
 		}
 		else {
 			{
@@ -145,9 +168,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				gd.heightHint = 100;
 				exit.setLayoutData(gd);
 
-				if (addCode && !exitCodeSelectionString.isEmpty())
-					exit.append(exitCodeSelectionString + "();\n");
-				setTextSelectionAndFocus(exit, exitCodeSelectionString);
+				if (where.contains(Where.EXIT)) {
+					if (addCode)
+						exit.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(exit, codeSelectionString);
+				}
 			}
 			
 			if (state instanceof RefinedState)
@@ -158,9 +183,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
 
-				if (addCode && !exitCodeSelectionString.isEmpty())
-					entry.append(exitCodeSelectionString + "();\n");
-				setTextSelectionAndFocus(entry, exitCodeSelectionString);
+				if (where.contains(Where.EXIT)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 		}
 		
@@ -173,9 +200,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);
 
-			if (addCode && !doCodeSelectionString.isEmpty())
-				dotxt.append(doCodeSelectionString + "();\n");
-			setTextSelectionAndFocus(dotxt, doCodeSelectionString);
+			if (where.contains(Where.DO)) {
+				if (addCode)
+					dotxt.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(dotxt, codeSelectionString);
+			}
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -194,20 +223,13 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		addCode = add;
 	}
 
-	public void setEntryCodeSelectionString(String selectionString) {
-		entryCodeSelectionString = selectionString;
-	}
-
-	public void setExitCodeSelectionString(String selectionString) {
-		exitCodeSelectionString = selectionString;
-	}
-
-	public void setDoCodeSelectionString(String selectionString) {
-		doCodeSelectionString = selectionString;
+	public void setCodeSelectionString(String selectionString, EnumSet<Where> where) {
+		this.where = where;
+		codeSelectionString = selectionString;
 	}
 
 	public void setMessageDialogContents(String message, String title) {
 		messageToDisplay = message;
-		messageTitle = title; 
+		messageTitle = title;
 	}
 }

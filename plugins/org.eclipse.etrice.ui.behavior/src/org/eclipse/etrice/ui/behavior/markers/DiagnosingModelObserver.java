@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.markers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -110,6 +111,10 @@ public class DiagnosingModelObserver extends EContentAdapter {
 		// Perform Model Validation and get the diagnostic
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(roomModel);
 
+		// A local HashMap for ensuring uniqueness of diagnostics
+		HashMap<EObject, HashSet<String>> uniqueEnsurer = new HashMap<EObject, HashSet<String>>();
+		uniqueEnsurer.clear();
+
 		// Inspect each child diagnostic
 		for (Diagnostic diagnostic : diagnostics.getChildren()) {
 
@@ -133,17 +138,23 @@ public class DiagnosingModelObserver extends EContentAdapter {
 				eObject = source.eContainer();
 			else
 				eObject = source;
-			
+
 			if (eObject != null) {
 				// Add diagnostic to elementDiagnosticMap keyed on model element
-				if (elementDiagnosticMap.get(eObject) == null)
+				if (elementDiagnosticMap.get(eObject) == null){
 					elementDiagnosticMap.put(eObject,
 							new ArrayList<Diagnostic>());
+					uniqueEnsurer.put(eObject, new HashSet<String>());
+				}
 
-				// FIXME Some Diagnostics are added Multiple times. Remove
-				// duplicate diagnostics. This is the reason for multiple
-				// entries for same issue in Quick Fix Dialog.
-				elementDiagnosticMap.get(eObject).add(diagnostic);
+				//Insert only if the Diagnostic reports a new error/warning  
+				String certificate = featureBasedDiagnostic.getIssueCode();
+				for(String data : featureBasedDiagnostic.getIssueData())
+					certificate += data;
+				if (!(uniqueEnsurer.get(eObject).contains(certificate))){
+					uniqueEnsurer.get(eObject).add(certificate);
+					elementDiagnosticMap.get(eObject).add(diagnostic);
+				}
 			}
 		}
 	}
