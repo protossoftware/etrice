@@ -279,6 +279,45 @@
 			<arg value="-lrt"/>
 		</exec>
 		
+		<!-- compile and link ChoicepointTestExtended -->
+		<mkdir dir="bin/ChoicePointTestExtended"/>
+		<exec dir="bin/ChoicePointTestExtended" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-I../../src-gen/"/>
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<!--<arg value="-ansi"/>-->
+			<arg value="../../src-gen/ChoicePointTestExtended/Testee_event.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/Testee_inherited_event.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/Tester_event.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/node6_cpExtTest.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/node6_cpExtTest_Runner.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/CPTestProtocol_event.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/CPTestProtocol_inherited_event.c"/>
+			<arg value="../../src-gen/ChoicePointTestExtended/NavigationProtocol_event.c"/>
+		</exec>
+		<exec dir="bin/ChoicePointTestExtended" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L${c-runtime.path}/bin"/>
+			<arg value="-oChoicePointTestExtended.exe"/>
+			<arg value="Tester_event.o"/>
+			<arg value="Testee_inherited_event.o"/>
+			<arg value="Testee_event.o"/>
+			<arg value="node6_cpExtTest.o"/>
+			<arg value="node6_cpExtTest_Runner.o"/>
+			<arg value="CPTestProtocol_event.o"/>
+			<arg value="CPTestProtocol_inherited_event.o"/>
+			<arg value="NavigationProtocol_event.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
+		</exec>
+		
 		<!-- compile and link SendingDataTestC -->
 		<mkdir dir="bin/SendingDataTestC"/>
 		<exec dir="bin/SendingDataTestC" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">

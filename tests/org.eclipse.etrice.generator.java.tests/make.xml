@@ -5,7 +5,7 @@
 	results into xunit xml.
 
 	To work locally you should define in your environment
-	ETRICE_TARGET_PLATFORM=path to the eclipse folder of your Juno installation
+	ETRICE_TARGET_PLATFORM=path to the eclipse installation folder
 	
 	@author Henrik Rentz-Reichert
 -->
@@ -157,6 +157,12 @@
 			<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
 		</java>
 		<echo>end   ChoicePointTest</echo>
+			<echo>start ChoicePointTestExtended</echo>
+				<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
+					<arg value="-headless"/>
+					<classpath path="${bin.path};${runtime.path}/bin;${modellib.path}/bin"/>
+				</java>
+				<echo>end   ChoicePointTestExtended</echo>
 		<echo>start PingPongThreadTest</echo>
 		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.Node_node6_ppTestRunner" fork="true" failonerror="true">
 			<arg value="-headless"/>
@@ -263,6 +269,13 @@
 			<arg value="./tmp/ChoicePointTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+		
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+					<arg value="-suite"/>
+					<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTestExtended"/>
+					<arg value="./tmp/ChoicePointTestExtended.etu"/>
+					<classpath refid="clspath"/>
+				</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
@@ -376,6 +389,7 @@
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
+		<move file="./tmp/ChoicePointTestExtended.xml" tofile="./tmp/JavaChoicePointTestExtended.xml"/>
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml"/>
 		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/JavaDynamicConfigTest.xml"/>
 		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/JavaDataDrivenTest.xml"/>
