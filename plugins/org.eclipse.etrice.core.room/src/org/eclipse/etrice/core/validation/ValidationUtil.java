@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.validation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -205,12 +206,56 @@ public class ValidationUtil {
 		if (isKindOf(ref,ac))
 			return true;
 		
-		for (ActorRef ar : ref.getActorRefs()) {
-			if (isKindOf(ar.getType(), ac) || isKindOf(ref, ar.getType()))
-				return true;
-			else if (isReferencing(ar.getType(), ac))
-				return true;
+		Set<ActorClass> visited = new HashSet<ActorClass>();
+		LinkedList<ActorClass> stack = new LinkedList<ActorClass>();
+		visited.add(ac);
+		stack.push(ref);
+		
+		ActorClass next;
+		while(!stack.isEmpty()){
+			next = stack.pop();
+			if(visited.contains(next))
+				continue;
+			
+			for (ActorRef ar : next.getActorRefs()) {
+				if (isKindOf(ar.getType(), ac) || isKindOf(next, ar.getType()))
+					return true;
+				stack.push(ar.getType());
+			}
+			visited.add(next);
 		}
+		
+		return false;
+	}
+	
+	/**
+	 * check if compound protocol is circular
+	 * @param ref
+	 * @param ac
+	 * @return <code>true</code> if cpc contains a cycle
+	 */
+	public static boolean isCircular(CompoundProtocolClass ref, CompoundProtocolClass cpc) {
+		Set<CompoundProtocolClass> visited = new HashSet<CompoundProtocolClass>();
+		LinkedList<CompoundProtocolClass> stack = new LinkedList<CompoundProtocolClass>();
+		visited.add(cpc);
+		stack.push(ref);
+		
+		CompoundProtocolClass next;
+		while(!stack.isEmpty()){
+			next = stack.pop();
+			if(next == cpc)
+				return true;
+			if(visited.contains(next))
+				continue;
+			for(SubProtocol subProtocol : next.getSubProtocols()){
+				if(subProtocol.getProtocol() instanceof CompoundProtocolClass){	
+					CompoundProtocolClass c = (CompoundProtocolClass)subProtocol.getProtocol();
+					stack.push(c);
+				}
+			}
+			visited.add(next);
+		}
+		
 		return false;
 	}
 	
