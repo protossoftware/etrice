@@ -27,6 +27,7 @@ public class ImageProvider extends AbstractImageProvider {
 	public static final String IMG_CP = PREFIX + "cp";
 	public static final String IMG_INITIAL = PREFIX + "initial";
 	public static final String IMG_TRANSITION = PREFIX + "transition";
+	public static final String IMG_QUICKFIX = PREFIX + "quickfix";
 
 	@Override
 	protected void addAvailableImages() {
@@ -37,6 +38,7 @@ public class ImageProvider extends AbstractImageProvider {
 		addImageFilePath(IMG_INITIAL, "icons/InitialPoint.gif");
 		addImageFilePath(IMG_CP, "icons/ChoicePoint.gif");
 		addImageFilePath(IMG_TRANSITION, "icons/Transition.gif");
+		addImageFilePath(IMG_QUICKFIX, "icons/quickfix/quickassist.gif");
 	}
 
 }

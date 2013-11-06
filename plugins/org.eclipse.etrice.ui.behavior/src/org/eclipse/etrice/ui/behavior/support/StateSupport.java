@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
@@ -27,6 +28,8 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
+import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
+import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
@@ -87,7 +90,9 @@ import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
+import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -922,6 +927,15 @@ public class StateSupport {
 				else
 					result.add(new CreateSubGraphFeature(fp));
 			}
+
+			// Provide quick fix feature only for those edit parts which have
+			// errors, warnings or infos.
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			if (diagnostics != null)
+				result.add(new QuickFixFeature(fp));
 			
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
@@ -1053,6 +1067,48 @@ public class StateSupport {
 			}
 
 			return data;
+		}
+		
+		/**
+		 * @author jayant
+		 */
+		@Override
+		public IDecorator[] getDecorators(PictogramElement pe) {
+			// Constants for positioning decorators
+			GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
+			GraphicsAlgorithm rectangle = invisible
+					.getGraphicsAlgorithmChildren().get(0);
+			int xOrigin = rectangle.getX();
+			int yOrigin = rectangle.getY();
+			int xGap = 10, yGap = 0;
+			
+			// Get the linked Business Object
+			EObject bo = Graphiti.getLinkService()
+					.getBusinessObjectForLinkedPictogramElement(pe);
+			
+			// Get Diagnostics associated with the business object
+			ArrayList<Diagnostic> diagnostics = ((BehaviorEditor) getDiagramTypeProvider()
+					.getDiagramBehavior().getDiagramContainer())
+					.getDiagnosingModelObserver().getElementDiagonsticMap()
+					.get(bo);
+			
+			// Form Decorators based on Diagnostics
+			ArrayList<IDecorator> decorators = DecoratorUtil
+					.getMarkersFromDiagnostics(diagnostics);
+			
+			if (decorators.isEmpty())
+				return super.getDecorators(pe);
+			else {
+				int i = 0;
+				for (IDecorator decorator : decorators) {
+					((ImageDecorator) decorator).setX(xOrigin + xGap * i);
+					((ImageDecorator) decorator).setY(yOrigin + yGap * i);
+					i++;
+				}
+
+				return (IDecorator[]) decorators
+						.toArray(new IDecorator[decorators.size()]);
+			}
 		}
 	}
 	
