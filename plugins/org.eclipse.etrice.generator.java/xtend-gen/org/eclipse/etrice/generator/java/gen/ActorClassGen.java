@@ -14,34 +14,19 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.HashMap;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.Wire;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
-import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAP;
-import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -213,45 +198,40 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       final String baseClassImport = _xifexpression_4;
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package ");
-      String _package = this._roomExtensions.getPackage(ac);
-      _builder.append(_package, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
+      _builder.append("package �ac.getPackage�;");
       _builder.newLine();
-      {
-        List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_2 = _dynConfigReadAttributes.isEmpty();
-        boolean _not = (!_isEmpty_2);
-        if (_not) {
-          _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
-          _builder.newLine();
-        }
-      }
-      {
-        GlobalSettings _settings_1 = Main.getSettings();
-        boolean _isGeneratePersistenceInterface_1 = _settings_1.isGeneratePersistenceInterface();
-        if (_isGeneratePersistenceInterface_1) {
-          _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IPersistable;");
-          _builder.newLine();
-          _builder.append("import java.io.IOException;");
-          _builder.newLine();
-          _builder.append("import java.io.ObjectInput;");
-          _builder.newLine();
-          _builder.append("import java.io.ObjectOutput;");
-          _builder.newLine();
-        }
-      }
+      _builder.newLine();
+      _builder.append("�IF !dataConfigExt.getDynConfigReadAttributes(ac).empty�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
+      _builder.newLine();
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("�IF Main::settings.generatePersistenceInterface�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IPersistable;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import java.io.IOException;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import java.io.ObjectInput;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import java.io.ObjectOutput;");
+      _builder.newLine();
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;");
       _builder.newLine();
-      _builder.append("import ");
-      _builder.append(baseClassImport, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
+      _builder.append("import �baseClassImport�;");
+      _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;");
@@ -263,940 +243,632 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
       _builder.newLine();
       _builder.newLine();
-      {
-        for(final RoomModel model : models) {
-          _builder.append("import ");
-          String _name_3 = model.getName();
-          _builder.append(_name_3, "");
-          _builder.append(".*;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.newLine();
-      {
-        EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
-        for(final ProtocolClass pc : _referencedProtocolClasses) {
-          _builder.append("import ");
-          String _package_1 = this._roomExtensions.getPackage(pc);
-          _builder.append(_package_1, "");
-          _builder.append(".");
-          String _name_4 = pc.getName();
-          _builder.append(_name_4, "");
-          _builder.append(".*;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.newLine();
-      {
-        EList<ActorRef> _actorRefs = ac.getActorRefs();
-        final Function1<ActorRef,Boolean> _function_2 = new Function1<ActorRef,Boolean>() {
-          public Boolean apply(final ActorRef r) {
-            ReferenceType _refType = r.getRefType();
-            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-            return Boolean.valueOf(_equals);
-          }
-        };
-        Iterable<ActorRef> _filter_2 = IterableExtensions.<ActorRef>filter(_actorRefs, _function_2);
-        for(final ActorRef sub : _filter_2) {
-          _builder.append("import ");
-          ActorClass _type = sub.getType();
-          String _package_2 = this._roomExtensions.getPackage(_type);
-          _builder.append(_package_2, "");
-          _builder.append(".");
-          ActorClass _type_1 = sub.getType();
-          String _name_5 = _type_1.getName();
-          _builder.append(_name_5, "");
-          _builder.append("Interface;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(ac, 1, true);
-      _builder.append(_userCode, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("public ");
-      {
-        boolean _or = false;
-        if (manualBehavior) {
-          _or = true;
-        } else {
-          boolean _isAbstract = ac.isAbstract();
-          _or = (manualBehavior || _isAbstract);
-        }
-        if (_or) {
-          _builder.append("abstract ");
-        }
-      }
-      _builder.append("class ");
-      _builder.append(clsname, "");
-      _builder.append(" extends ");
-      _builder.append(baseClass, "");
-      _builder.append(" ");
-      _builder.append(impPersist, "");
-      _builder.append("{");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�FOR model : models�");
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2, false);
-      _builder.append(_userCode_1, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("import �model.name�.*;");
+      _builder.newLine();
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("�FOR pc : root.getReferencedProtocolClasses(ac)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import �pc.package�.�pc.name�.*;");
+      _builder.newLine();
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("�FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("import �sub.type.package�.�sub.type.name�Interface;");
+      _builder.newLine();
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("�ac.userCode(1, true)�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public �IF manualBehavior || ac.^abstract�abstract �ENDIF�class �clsname� extends �baseClass� �impPersist�{");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ac.userCode(2, false)�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- ports");
       _builder.newLine();
-      {
-        List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
-        for(final Port ep : _endPorts) {
-          _builder.append("\t");
-          _builder.append("protected ");
-          String _portClassName = this._roomExtensions.getPortClassName(ep);
-          _builder.append(_portClassName, "	");
-          _builder.append(" ");
-          String _name_6 = ep.getName();
-          _builder.append(_name_6, "	");
-          _builder.append(" = null;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�FOR ep : ac.getEndPorts()�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected �ep.getPortClassName()� �ep.name� = null;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- saps");
       _builder.newLine();
-      {
-        EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-        for(final SAP sap : _serviceAccessPoints) {
-          _builder.append("\t");
-          _builder.append("protected ");
-          String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
-          _builder.append(_portClassName_1, "	");
-          _builder.append(" ");
-          String _name_7 = sap.getName();
-          _builder.append(_name_7, "	");
-          _builder.append(" = null;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�FOR sap : ac.serviceAccessPoints�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected �sap.getPortClassName()� �sap.name� = null;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- services");
       _builder.newLine();
-      {
-        EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-        for(final ServiceImplementation svc : _serviceImplementations) {
-          _builder.append("\t");
-          _builder.append("protected ");
-          String _portClassName_2 = this._roomExtensions.getPortClassName(svc);
-          _builder.append(_portClassName_2, "	");
-          _builder.append(" ");
-          SPP _spp = svc.getSpp();
-          String _name_8 = _spp.getName();
-          _builder.append(_name_8, "	");
-          _builder.append(" = null;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�FOR svc : ac.serviceImplementations�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected �svc.getPortClassName()� �svc.spp.name� = null;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- optional actors");
       _builder.newLine();
-      {
-        EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
-        final Function1<ActorRef,Boolean> _function_3 = new Function1<ActorRef,Boolean>() {
-          public Boolean apply(final ActorRef r) {
-            ReferenceType _refType = r.getRefType();
-            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-            return Boolean.valueOf(_equals);
-          }
-        };
-        Iterable<ActorRef> _filter_3 = IterableExtensions.<ActorRef>filter(_actorRefs_1, _function_3);
-        for(final ActorRef sub_1 : _filter_3) {
-          _builder.append("\t");
-          _builder.append("protected ");
-          ActorClass _type_2 = sub_1.getType();
-          String _name_9 = _type_2.getName();
-          _builder.append(_name_9, "	");
-          {
-            int _multiplicity = sub_1.getMultiplicity();
-            boolean _notEquals_1 = (_multiplicity != 1);
-            if (_notEquals_1) {
-              _builder.append("Replicated");
-            }
-          }
-          _builder.append("Interface ");
-          String _name_10 = sub_1.getName();
-          _builder.append(_name_10, "	");
-          _builder.append(" = null;");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected �sub.type.name��IF sub.multiplicity!=1�Replicated�ENDIF�Interface �sub.name� = null;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- interface item IDs");
       _builder.newLine();
       _builder.append("\t");
-      String _genInterfaceItemConstants = this.genInterfaceItemConstants(xpac);
-      _builder.append(_genInterfaceItemConstants, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�xpac.genInterfaceItemConstants�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      String _genMinMaxConstants = this.configGenAddon.genMinMaxConstants(ac);
-      _builder.append(_genMinMaxConstants, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�configGenAddon.genMinMaxConstants(ac)�");
+      _builder.newLine();
       _builder.append("\t");
-      EList<Attribute> _attributes = ac.getAttributes();
-      CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
-      _builder.append(_attributes_1, "	");
-      _builder.newLineIfNotEmpty();
-      {
-        List<Attribute> _dynConfigReadAttributes_1 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        for(final Attribute a : _dynConfigReadAttributes_1) {
-          _builder.append("\t");
-          _builder.append("private DynConfigLock lock_");
-          String _name_11 = a.getName();
-          _builder.append(_name_11, "	");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("�ac.attributes.attributes�");
+      _builder.newLine();
       _builder.append("\t");
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(ac);
-      _builder.append(_operationsImplementation, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�FOR a : dataConfigExt.getDynConfigReadAttributes(ac)�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("private DynConfigLock lock_�a.name�;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ac.operationsImplementation�");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- construction");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public ");
-      _builder.append(clsname, "	");
-      _builder.append("(IRTObject parent, String name) {");
-      _builder.newLineIfNotEmpty();
+      _builder.append("public �clsname�(IRTObject parent, String name) {");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.append("super(parent, name);");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("setClassName(\"");
-      String _name_12 = ac.getName();
-      _builder.append(_name_12, "		");
-      _builder.append("\");");
-      _builder.newLineIfNotEmpty();
+      _builder.append("setClassName(\"�ac.name�\");");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      EList<Attribute> _attributes_2 = ac.getAttributes();
-      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_2, ac, false);
-      _builder.append(_attributeInitialization, "		");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�ac.attributes.attributeInitialization(ac, false)�");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// own ports");
       _builder.newLine();
-      {
-        List<Port> _endPorts_1 = RoomHelpers.getEndPorts(ac);
-        for(final Port ep_1 : _endPorts_1) {
-          _builder.append("\t\t");
-          String _name_13 = ep_1.getName();
-          _builder.append(_name_13, "		");
-          _builder.append(" = new ");
-          String _portClassName_3 = this._roomExtensions.getPortClassName(ep_1);
-          _builder.append(_portClassName_3, "		");
-          _builder.append("(this, \"");
-          String _name_14 = ep_1.getName();
-          _builder.append(_name_14, "		");
-          _builder.append("\", IFITEM_");
-          String _name_15 = ep_1.getName();
-          _builder.append(_name_15, "		");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�FOR ep : ac.getEndPorts()�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ep.name� = new �ep.getPortClassName()�(this, \"�ep.name�\", IFITEM_�ep.name�);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// own saps");
       _builder.newLine();
-      {
-        EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
-        for(final SAP sap_1 : _serviceAccessPoints_1) {
-          _builder.append("\t\t");
-          String _name_16 = sap_1.getName();
-          _builder.append(_name_16, "		");
-          _builder.append(" = new ");
-          String _portClassName_4 = this._roomExtensions.getPortClassName(sap_1);
-          _builder.append(_portClassName_4, "		");
-          _builder.append("(this, \"");
-          String _name_17 = sap_1.getName();
-          _builder.append(_name_17, "		");
-          _builder.append("\", IFITEM_");
-          String _name_18 = sap_1.getName();
-          _builder.append(_name_18, "		");
-          _builder.append(", 0);");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�FOR sap : ac.serviceAccessPoints�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�sap.name� = new �sap.getPortClassName()�(this, \"�sap.name�\", IFITEM_�sap.name�, 0);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// own service implementations");
       _builder.newLine();
-      {
-        EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
-        for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
-          _builder.append("\t\t");
-          SPP _spp_1 = svc_1.getSpp();
-          String _name_19 = _spp_1.getName();
-          _builder.append(_name_19, "		");
-          _builder.append(" = new ");
-          String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
-          _builder.append(_portClassName_5, "		");
-          _builder.append("(this, \"");
-          SPP _spp_2 = svc_1.getSpp();
-          String _name_20 = _spp_2.getName();
-          _builder.append(_name_20, "		");
-          _builder.append("\", IFITEM_");
-          SPP _spp_3 = svc_1.getSpp();
-          String _name_21 = _spp_3.getName();
-          _builder.append(_name_21, "		");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�FOR svc : ac.serviceImplementations�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�svc.spp.name� = new �svc.getPortClassName()�(this, \"�svc.spp.name�\", IFITEM_�svc.spp.name�);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// sub actors");
       _builder.newLine();
-      {
-        EList<ActorRef> _actorRefs_2 = ac.getActorRefs();
-        for(final ActorRef sub_2 : _actorRefs_2) {
-          {
-            ReferenceType _refType = sub_2.getRefType();
-            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-            if (_equals) {
-              _builder.append("\t\t");
-              String _name_22 = sub_2.getName();
-              _builder.append(_name_22, "		");
-              _builder.append(" = new ");
-              ActorClass _type_3 = sub_2.getType();
-              String _name_23 = _type_3.getName();
-              _builder.append(_name_23, "		");
-              {
-                int _multiplicity_1 = sub_2.getMultiplicity();
-                boolean _notEquals_2 = (_multiplicity_1 != 1);
-                if (_notEquals_2) {
-                  _builder.append("Replicated");
-                }
-              }
-              _builder.append("Interface(this, \"");
-              String _name_24 = sub_2.getName();
-              _builder.append(_name_24, "		");
-              _builder.append("\");");
-              _builder.newLineIfNotEmpty();
-            } else {
-              int _multiplicity_2 = sub_2.getMultiplicity();
-              boolean _greaterThan = (_multiplicity_2 > 1);
-              if (_greaterThan) {
-                _builder.append("\t\t");
-                _builder.append("for (int i=0; i<");
-                int _multiplicity_3 = sub_2.getMultiplicity();
-                _builder.append(_multiplicity_3, "		");
-                _builder.append("; ++i) {");
-                _builder.newLineIfNotEmpty();
-                {
-                  GlobalSettings _settings_2 = Main.getSettings();
-                  boolean _generateMSCInstrumentation = _settings_2.generateMSCInstrumentation();
-                  if (_generateMSCInstrumentation) {
-                    _builder.append("\t\t");
-                    _builder.append("\t");
-                    _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_25 = sub_2.getName();
-                    _builder.append(_name_25, "			");
-                    _builder.append(GenmodelConstants.INDEX_SEP, "			");
-                    _builder.append("\"+i);");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
-                _builder.append("\t\t");
-                _builder.append("\t");
-                _builder.append("new ");
-                ActorClass _type_4 = sub_2.getType();
-                String _name_26 = _type_4.getName();
-                _builder.append(_name_26, "			");
-                _builder.append("(this, \"");
-                String _name_27 = sub_2.getName();
-                _builder.append(_name_27, "			");
-                _builder.append(GenmodelConstants.INDEX_SEP, "			");
-                _builder.append("\"+i);");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
-                _builder.append("}");
-                _builder.newLine();
-              } else {
-                {
-                  GlobalSettings _settings_3 = Main.getSettings();
-                  boolean _generateMSCInstrumentation_1 = _settings_3.generateMSCInstrumentation();
-                  if (_generateMSCInstrumentation_1) {
-                    _builder.append("\t\t");
-                    _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_28 = sub_2.getName();
-                    _builder.append(_name_28, "		");
-                    _builder.append("\");");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
-                _builder.append("\t\t");
-                _builder.append("new ");
-                ActorClass _type_5 = sub_2.getType();
-                String _name_29 = _type_5.getName();
-                _builder.append(_name_29, "		");
-                _builder.append("(this, \"");
-                String _name_30 = sub_2.getName();
-                _builder.append(_name_30, "		");
-                _builder.append("\");");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-          }
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�FOR sub : ac.actorRefs�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�IF sub.refType==ReferenceType.OPTIONAL�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�sub.name� = new �sub.type.name��IF sub.multiplicity!=1�Replicated�ENDIF�Interface(this, \"�sub.name�\");");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ELSEIF sub.multiplicity>1�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("for (int i=0; i<�sub.multiplicity�; ++i) {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�IF Main::settings.generateMSCInstrumentation�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"�sub.name��GenmodelConstants::INDEX_SEP�\"+i);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("new �sub.type.name�(this, \"�sub.name��GenmodelConstants::INDEX_SEP�\"+i);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�IF Main::settings.generateMSCInstrumentation�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"�sub.name�\");");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("new �sub.type.name�(this, \"�sub.name�\");");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// wiring");
       _builder.newLine();
-      {
-        EList<Wire> _wires = wired.getWires();
-        for(final Wire wire : _wires) {
-          _builder.append("\t\t");
-          String _xifexpression_5 = null;
-          boolean _isDataDriven = wire.isDataDriven();
-          if (_isDataDriven) {
-            _xifexpression_5 = "DataPortBase";
-          } else {
-            _xifexpression_5 = "InterfaceItemBase";
-          }
-          _builder.append(_xifexpression_5, "		");
-          _builder.append(".connect(this, \"");
-          EList<String> _path1 = wire.getPath1();
-          String _join = IterableExtensions.join(_path1, "/");
-          _builder.append(_join, "		");
-          _builder.append("\", \"");
-          EList<String> _path2 = wire.getPath2();
-          String _join_1 = IterableExtensions.join(_path2, "/");
-          _builder.append(_join_1, "		");
-          _builder.append("\");");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�FOR wire: wired.wires�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�if (wire.dataDriven) \"DataPortBase\" else \"InterfaceItemBase\"�.connect(this, \"�wire.path1.join(\'/\')�\", \"�wire.path2.join(\'/\')�\");");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
-      {
-        boolean _notEquals_3 = (!Objects.equal(ctor, null));
-        if (_notEquals_3) {
-          _builder.append("\t\t");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// user defined constructor body");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          AbstractGenerator _instance = AbstractGenerator.getInstance();
-          DetailCode _detailCode = ctor.getDetailCode();
-          String _translatedCode = _instance.getTranslatedCode(_detailCode);
-          _builder.append(_translatedCode, "			");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�IF ctor!=null�");
       _builder.newLine();
-      {
-        boolean _or_1 = false;
-        List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_3 = _dynConfigReadAttributes_2.isEmpty();
-        boolean _not_1 = (!_isEmpty_3);
-        if (_not_1) {
-          _or_1 = true;
-        } else {
-          List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
-          boolean _isEmpty_4 = _dynConfigWriteAttributes.isEmpty();
-          boolean _not_2 = (!_isEmpty_4);
-          _or_1 = (_not_1 || _not_2);
-        }
-        if (_or_1) {
-          {
-            List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-            for(final Attribute a_1 : _dynConfigReadAttributes_3) {
-              _builder.append("\t\t");
-              _builder.append("lock_");
-              String _name_31 = a_1.getName();
-              _builder.append(_name_31, "		");
-              _builder.append(" = new DynConfigLock();");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-        }
-      }
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("// user defined constructor body");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�FOR a : dataConfigExt.getDynConfigReadAttributes(ac)�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("lock_�a.name� = new DynConfigLock();");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      EList<Attribute> _attributes_3 = ac.getAttributes();
-      List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_4);
-      String _name_32 = ac.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_32);
-      _builder.append(_attributeSettersGettersImplementation, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getDynConfigReadAttributes(ac)), ac.name)�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _genDynConfigGetterSetter = this.configGenAddon.genDynConfigGetterSetter(ac);
-      _builder.append(_genDynConfigGetterSetter, "	");
-      _builder.newLineIfNotEmpty();
+      _builder.append("�configGenAddon.genDynConfigGetterSetter(ac)�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- port getters");
       _builder.newLine();
-      {
-        List<Port> _endPorts_2 = RoomHelpers.getEndPorts(ac);
-        for(final Port ep_2 : _endPorts_2) {
-          _builder.append("\t");
-          String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
-          String _name_33 = ep_2.getName();
-          String _name_34 = ac.getName();
-          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_33, _name_34);
-          _builder.append(_terImplementation, "	");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      {
-        EList<SAP> _serviceAccessPoints_2 = ac.getServiceAccessPoints();
-        for(final SAP sap_2 : _serviceAccessPoints_2) {
-          _builder.append("\t");
-          String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
-          String _name_35 = sap_2.getName();
-          String _name_36 = ac.getName();
-          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_35, _name_36);
-          _builder.append(_terImplementation_1, "	");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      {
-        EList<ServiceImplementation> _serviceImplementations_2 = ac.getServiceImplementations();
-        for(final ServiceImplementation svc_2 : _serviceImplementations_2) {
-          _builder.append("\t");
-          String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
-          SPP _spp_4 = svc_2.getSpp();
-          String _name_37 = _spp_4.getName();
-          String _name_38 = ac.getName();
-          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_37, _name_38);
-          _builder.append(_terImplementation_2, "	");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�FOR ep : ac.getEndPorts()�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ep.portClassName.getterImplementation(ep.name, ac.name)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�FOR sap : ac.serviceAccessPoints�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�sap.portClassName.getterImplementation(sap.name, ac.name)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�FOR svc : ac.serviceImplementations�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�svc.portClassName.getterImplementation(svc.spp.name, ac.name)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//--------------------- lifecycle functions");
       _builder.newLine();
-      {
-        boolean _overridesStop = this._roomExtensions.overridesStop(ac);
-        boolean _not_3 = (!_overridesStop);
-        if (_not_3) {
-          {
-            if (manualBehavior) {
-              _builder.append("\t");
-              _builder.append("public abstract void stop();");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("public void stop(){");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("stopUser();");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("super.stop();");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�IF !ac.overridesStop()�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�IF manualBehavior�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public abstract void stop();");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public void stop(){");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("stopUser();");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("super.stop();");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
-      {
-        boolean _notEquals_4 = (!Objects.equal(dtor, null));
-        if (_notEquals_4) {
-          {
-            if (manualBehavior) {
-              _builder.append("\t");
-              _builder.append("public abstract void destroy();");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("public void destroy(){");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              String _name_39 = ac.getName();
-              String _destructorCall = this._procedureHelpers.destructorCall(_name_39);
-              _builder.append(_destructorCall, "		");
-              _builder.append(";");
-              _builder.newLineIfNotEmpty();
-              {
-                GlobalSettings _settings_4 = Main.getSettings();
-                boolean _generateMSCInstrumentation_2 = _settings_4.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation_2) {
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
-                  _builder.newLine();
-                }
-              }
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("super.destroy();");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
-        } else {
-          GlobalSettings _settings_5 = Main.getSettings();
-          boolean _generateMSCInstrumentation_3 = _settings_5.generateMSCInstrumentation();
-          if (_generateMSCInstrumentation_3) {
-            _builder.append("\t");
-            _builder.append("public void destroy() {");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("super.destroy();");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      }
+      _builder.append("\t");
+      _builder.append("�IF dtor!=null�");
       _builder.newLine();
-      {
-        if (manualBehavior) {
-          _builder.append("\t");
-          _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
-          _builder.newLine();
-          {
-            List<InterfaceItem> _allInterfaceItems = RoomHelpers.getAllInterfaceItems(ac);
-            boolean _hasElements = false;
-            for(final InterfaceItem ifitem : _allInterfaceItems) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate("else ", "		");
-              }
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("if (ifitem==");
-              String _name_40 = ifitem.getName();
-              _builder.append(_name_40, "		");
-              _builder.append(") {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("switch (evt) {");
-              _builder.newLine();
-              {
-                List<Message> _incoming = RoomHelpers.getIncoming(ifitem);
-                for(final Message msg : _incoming) {
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("\t\t");
-                  _builder.append("case ");
-                  ProtocolClass _protocolClass = RoomHelpers.getProtocolClass(msg);
-                  String _name_41 = _protocolClass.getName();
-                  _builder.append(_name_41, "				");
-                  _builder.append(".");
-                  String _xifexpression_6 = null;
-                  boolean _isIncoming = this._roomExtensions.isIncoming(msg);
-                  if (_isIncoming) {
-                    _xifexpression_6 = "IN_";
-                  } else {
-                    _xifexpression_6 = "OUT_";
-                  }
-                  _builder.append(_xifexpression_6, "				");
-                  String _name_42 = msg.getName();
-                  _builder.append(_name_42, "				");
-                  _builder.append(":");
-                  _builder.newLineIfNotEmpty();
-                  {
-                    VarDecl _data = msg.getData();
-                    boolean _notEquals_5 = (!Objects.equal(_data, null));
-                    if (_notEquals_5) {
-                      _builder.append("\t");
-                      _builder.append("\t");
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("{");
-                      String _typedDataDefinition = this._javaExtensions.getTypedDataDefinition(msg);
-                      _builder.append(_typedDataDefinition, "					");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("\t\t");
-                  _builder.append("\t");
-                  _builder.append("on_");
-                  String _name_43 = ifitem.getName();
-                  _builder.append(_name_43, "					");
-                  _builder.append("_");
-                  String _name_44 = msg.getName();
-                  _builder.append(_name_44, "					");
-                  _builder.append("(ifitem");
-                  {
-                    VarDecl _data_1 = msg.getData();
-                    boolean _notEquals_6 = (!Objects.equal(_data_1, null));
-                    if (_notEquals_6) {
-                      _builder.append(", ");
-                      VarDecl _data_2 = msg.getData();
-                      String _name_45 = _data_2.getName();
-                      _builder.append(_name_45, "					");
-                    }
-                  }
-                  _builder.append(");");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("\t\t");
-                  _builder.append("\t");
-                  _builder.append("break;");
-                  _builder.newLine();
-                  {
-                    VarDecl _data_3 = msg.getData();
-                    boolean _notEquals_7 = (!Objects.equal(_data_3, null));
-                    if (_notEquals_7) {
-                      _builder.append("\t");
-                      _builder.append("\t");
-                      _builder.append("\t\t");
-                      _builder.append("\t");
-                      _builder.append("}");
-                      _builder.newLine();
-                    }
-                  }
-                }
-              }
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          {
-            List<InterfaceItem> _allInterfaceItems_1 = RoomHelpers.getAllInterfaceItems(ac);
-            for(final InterfaceItem ifitem_1 : _allInterfaceItems_1) {
-              {
-                List<Message> _incoming_1 = RoomHelpers.getIncoming(ifitem_1);
-                for(final Message msg_1 : _incoming_1) {
-                  _builder.append("\t");
-                  _builder.append("protected void on_");
-                  String _name_46 = ifitem_1.getName();
-                  _builder.append(_name_46, "	");
-                  _builder.append("_");
-                  String _name_47 = msg_1.getName();
-                  _builder.append(_name_47, "	");
-                  _builder.append("(InterfaceItemBase ifitem");
-                  {
-                    VarDecl _data_4 = msg_1.getData();
-                    boolean _notEquals_8 = (!Objects.equal(_data_4, null));
-                    if (_notEquals_8) {
-                      VarDecl _data_5 = msg_1.getData();
-                      String[] _generateArglistAndTypedData = this._javaExtensions.generateArglistAndTypedData(_data_5);
-                      String _get = _generateArglistAndTypedData[2];
-                      _builder.append(_get, "	");
-                    }
-                  }
-                  _builder.append(") {}");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public abstract void executeInitTransition();");
-          _builder.newLine();
-        } else {
-          {
-            boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
-            if (_hasNonEmptyStateMachine) {
-              _builder.append("\t");
-              CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
-              _builder.append(_genStateMachine, "	");
-              _builder.newLineIfNotEmpty();
-            } else {
-              boolean _hasStateMachine = xpac.hasStateMachine();
-              boolean _not_4 = (!_hasStateMachine);
-              if (_not_4) {
-                _builder.append("\t");
-                _builder.append("//--------------------- no state machine");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("handleSystemEvent(ifitem, evt, data);");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("}");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("public void executeInitTransition() {}");
-                _builder.newLine();
-              }
-            }
-          }
-        }
-      }
-      {
-        GlobalSettings _settings_6 = Main.getSettings();
-        boolean _isGeneratePersistenceInterface_2 = _settings_6.isGeneratePersistenceInterface();
-        if (_isGeneratePersistenceInterface_2) {
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
-          _builder.newLine();
-          {
-            boolean _hasStateMachine_1 = xpac.hasStateMachine();
-            if (_hasStateMachine_1) {
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("// state and history");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("output.writeInt(getState());");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("for (int h: history) output.writeInt(h);");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("saveAttributes(output);");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected void saveAttributes(ObjectOutput output) throws IOException {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          CharSequence _genSaveImpl = this.genSaveImpl(xpac);
-          _builder.append(_genSaveImpl, "		");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
-          _builder.newLine();
-          {
-            boolean _hasStateMachine_2 = xpac.hasStateMachine();
-            if (_hasStateMachine_2) {
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("// state and history");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("setState(input.readInt());");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("for (int i=0; i<history.length; ++i) history[i] = input.readInt();");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("loadAttributes(input);");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          CharSequence _genLoadImpl = this.genLoadImpl(xpac);
-          _builder.append(_genLoadImpl, "		");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
+      _builder.append("\t\t");
+      _builder.append("�IF manualBehavior�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public abstract void destroy();");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public void destroy(){");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�ac.name.destructorCall�;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�IF Main::settings.generateMSCInstrumentation�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("super.destroy();");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ELSEIF Main::settings.generateMSCInstrumentation�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public void destroy() {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("super.destroy();");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�IF manualBehavior�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�FOR ifitem : ac.allInterfaceItems SEPARATOR \"else \"�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("if (ifitem==�ifitem.name�) {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("switch (evt) {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�FOR msg: ifitem.incoming�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("case �msg.protocolClass.name�.�if (msg.incoming) \"IN_\" else \"OUT_\"��msg.name�:");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("�IF (msg.data!=null)�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t\t");
+      _builder.append("{�msg.typedDataDefinition�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("on_�ifitem.name�_�msg.name�(ifitem�IF (msg.data!=null)�, �msg.data.name��ENDIF�);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("break;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("�IF (msg.data!=null)�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�FOR ifitem : ac.allInterfaceItems�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�FOR msg: ifitem.incoming�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("protected void on_�ifitem.name�_�msg.name�(InterfaceItemBase ifitem�IF msg.data!=null��msg.data.generateArglistAndTypedData.get(2)��ENDIF�) {}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public abstract void executeInitTransition();");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�IF ac.hasNonEmptyStateMachine�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�xpac.genStateMachine()�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ELSEIF !xpac.hasStateMachine()�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("//--------------------- no state machine");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("handleSystemEvent(ifitem, evt, data);");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("public void executeInitTransition() {}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�IF Main::settings.generatePersistenceInterface�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("@Override");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�IF xpac.hasStateMachine()�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("// state and history");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("output.writeInt(getState());");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("for (int h: history) output.writeInt(h);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("saveAttributes(output);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected void saveAttributes(ObjectOutput output) throws IOException {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�xpac.genSaveImpl�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("@Override");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�IF xpac.hasStateMachine()�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("// state and history");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("setState(input.readInt());");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("for (int i=0; i<history.length; ++i) history[i] = input.readInt();");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("loadAttributes(input);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�xpac.genLoadImpl�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);
@@ -1209,59 +881,58 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
-      {
-        ActorClass _base = ac.getBase();
-        boolean _notEquals = (!Objects.equal(_base, null));
-        if (_notEquals) {
-          _builder.append("super.saveAttributes(output);");
-          _builder.newLine();
-          _builder.newLine();
-        }
-      }
-      {
-        EList<Attribute> _attributes = ac.getAttributes();
-        boolean _isEmpty = _attributes.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          {
-            EList<Attribute> _attributes_1 = ac.getAttributes();
-            for(final Attribute att : _attributes_1) {
-              {
-                RefableType _type = att.getType();
-                DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
-                  String _genSavePrimitive = this.genSavePrimitive(att);
-                  _builder.append(_genSavePrimitive, "");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  {
-                    int _size = att.getSize();
-                    boolean _greaterThan = (_size > 1);
-                    if (_greaterThan) {
-                      _builder.append("for (");
-                      RefableType _type_2 = att.getType();
-                      DataType _type_3 = _type_2.getType();
-                      String _name = _type_3.getName();
-                      _builder.append(_name, "");
-                      _builder.append(" v: ");
-                      String _name_1 = att.getName();
-                      _builder.append(_name_1, "");
-                      _builder.append(") output.writeObject(v);");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      _builder.append("output.writeObject(");
-                      String _name_2 = att.getName();
-                      _builder.append(_name_2, "");
-                      _builder.append(");");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      _builder.append("\t\t\t");
+      _builder.append("�IF ac.base!=null�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("super.saveAttributes(output);");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�IF !ac.attributes.empty�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�FOR att : ac.attributes�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�IF att.type.type instanceof PrimitiveType�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�genSavePrimitive(att)�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("���\t\t\t\t\t\tDataClass and ExternalType (the latter one has to implement Serializable)");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�IF att.size>1�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("for (�att.type.type.name� v: �att.name�) output.writeObject(v);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("output.writeObject(�att.name�);");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -1272,66 +943,58 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StringConcatenation _builder = new StringConcatenation();
-      {
-        ActorClass _base = ac.getBase();
-        boolean _notEquals = (!Objects.equal(_base, null));
-        if (_notEquals) {
-          _builder.append("super.loadAttributes(input);");
-          _builder.newLine();
-          _builder.newLine();
-        }
-      }
-      {
-        EList<Attribute> _attributes = ac.getAttributes();
-        boolean _isEmpty = _attributes.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          {
-            EList<Attribute> _attributes_1 = ac.getAttributes();
-            for(final Attribute att : _attributes_1) {
-              {
-                RefableType _type = att.getType();
-                DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
-                  String _genLoadPrimitive = this.genLoadPrimitive(att);
-                  _builder.append(_genLoadPrimitive, "");
-                  _builder.newLineIfNotEmpty();
-                } else {
-                  {
-                    int _size = att.getSize();
-                    boolean _greaterThan = (_size > 1);
-                    if (_greaterThan) {
-                      _builder.append("for (int i=0; i< ");
-                      String _name = att.getName();
-                      _builder.append(_name, "");
-                      _builder.append(".length; ++i) ");
-                      String _name_1 = att.getName();
-                      _builder.append(_name_1, "");
-                      _builder.append("[i] = (");
-                      RefableType _type_2 = att.getType();
-                      DataType _type_3 = _type_2.getType();
-                      String _name_2 = _type_3.getName();
-                      _builder.append(_name_2, "");
-                      _builder.append(") input.readObject();");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      String _name_3 = att.getName();
-                      _builder.append(_name_3, "");
-                      _builder.append(" = (");
-                      RefableType _type_4 = att.getType();
-                      DataType _type_5 = _type_4.getType();
-                      String _name_4 = _type_5.getName();
-                      _builder.append(_name_4, "");
-                      _builder.append(") input.readObject();");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      _builder.append("\t\t\t");
+      _builder.append("�IF ac.base!=null�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("super.loadAttributes(input);");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�IF !ac.attributes.empty�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�FOR att : ac.attributes�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�IF att.type.type instanceof PrimitiveType�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�genLoadPrimitive(att)�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("���\t\t\t\t\t\tDataClass and ExternalType (the latter one has to implement Serializable)");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�IF att.size>1�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("for (int i=0; i< �att.name�.length; ++i) �att.name�[i] = (�att.type.type.name�) input.readObject();");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�ELSE�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t\t");
+      _builder.append("�att.name� = (�att.type.type.name�) input.readObject();");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("�ENDIF�");
+      _builder.newLine();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;

@@ -29,13 +29,11 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * A collection of methods for generation of user code, attributes with getters and setters
@@ -204,25 +202,19 @@ public class ProcedureHelpers {
   
   private CharSequence userCode(final String code) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(code, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isEmpty = code.isEmpty();
-        boolean _not = (!_isEmpty);
-        _and = (_notEquals && _not);
-      }
-      if (_and) {
-        _builder.append("/*--------------------- begin user code ---------------------*/");
-        _builder.newLine();
-        _builder.append(code, "");
-        _builder.newLineIfNotEmpty();
-        _builder.append("/*--------------------- end user code ---------------------*/");
-        _builder.newLine();
-      }
-    }
+    _builder.append("�IF code!=null && !code.empty�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*--------------------- begin user code ---------------------*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�code�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*--------------------- end user code ---------------------*/");
+    _builder.newLine();
+    _builder.append("�ENDIF�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -234,13 +226,13 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- attributes ---------------------*/");
     _builder.newLine();
-    {
-      for(final Attribute attribute : attribs) {
-        CharSequence _attributeDeclaration = this.attributeDeclaration(attribute);
-        _builder.append(_attributeDeclaration, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("�FOR attribute : attribs�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�attributeDeclaration(attribute)�");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -250,41 +242,18 @@ public class ProcedureHelpers {
    */
   public CharSequence attributeDeclaration(final Attribute attribute) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      int _size = attribute.getSize();
-      boolean _equals = (_size == 0);
-      if (_equals) {
-        RefableType _type = attribute.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        _builder.append(_typeName, "");
-        {
-          RefableType _type_2 = attribute.getType();
-          boolean _isRef = _type_2.isRef();
-          if (_isRef) {
-            String _pointerLiteral = this.languageExt.pointerLiteral();
-            _builder.append(_pointerLiteral, "");
-          }
-        }
-        _builder.append(" ");
-        String _name = attribute.getName();
-        _builder.append(_name, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      } else {
-        RefableType _type_3 = attribute.getType();
-        DataType _type_4 = _type_3.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type_4);
-        int _size_1 = attribute.getSize();
-        String _name_1 = attribute.getName();
-        RefableType _type_5 = attribute.getType();
-        boolean _isRef_1 = _type_5.isRef();
-        String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
-        _builder.append(_arrayDeclaration, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("�IF attribute.size==0�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�attribute.type.type.typeName��IF attribute.type.ref��languageExt.pointerLiteral()��ENDIF� �attribute.name�;");
+    _builder.newLine();
+    _builder.append("�ELSE�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�languageExt.arrayDeclaration(attribute.type.type.typeName, attribute.size, attribute.name, attribute.type.ref)�;");
+    _builder.newLine();
+    _builder.append("�ENDIF� \t");
+    _builder.newLine();
     return _builder;
   }
   
@@ -359,18 +328,16 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
-    {
-      for(final Attribute attribute : attribs) {
-        CharSequence _setterHeader = this.setterHeader(attribute, classname);
-        _builder.append(_setterHeader, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        CharSequence _terHeader = this.getterHeader(attribute, classname);
-        _builder.append(_terHeader, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("�FOR attribute : attribs�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�setterHeader(attribute, classname)�;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�getterHeader(attribute, classname)�;");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -383,40 +350,22 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
-    {
-      for(final Attribute attribute : attribs) {
-        CharSequence _setterHeader = this.setterHeader(attribute, classname);
-        _builder.append(_setterHeader, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t ");
-        String _memberAccess = this.languageExt.memberAccess();
-        _builder.append(_memberAccess, "	 ");
-        String _name = attribute.getName();
-        _builder.append(_name, "	 ");
-        _builder.append(" = ");
-        String _name_1 = attribute.getName();
-        _builder.append(_name_1, "	 ");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
-        CharSequence _terHeader = this.getterHeader(attribute, classname);
-        _builder.append(_terHeader, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("return ");
-        String _memberAccess_1 = this.languageExt.memberAccess();
-        _builder.append(_memberAccess_1, "	");
-        String _name_2 = attribute.getName();
-        _builder.append(_name_2, "	");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
+    _builder.append("�FOR attribute : attribs��setterHeader(attribute, classname)� {");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("�languageExt.memberAccess()��attribute.name� = �attribute.name�;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("�getterHeader(attribute, classname)� {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return �languageExt.memberAccess()��attribute.name�;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -427,30 +376,7 @@ public class ProcedureHelpers {
    */
   private CharSequence setterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelPublic = this.languageExt.accessLevelPublic();
-    _builder.append(_accessLevelPublic, "");
-    _builder.append("void set");
-    String _name = attribute.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name);
-    _builder.append(_firstUpper, "");
-    _builder.append(" (");
-    String _selfPointer = this.languageExt.selfPointer(classname, true);
-    _builder.append(_selfPointer, "");
-    RefableType _type = attribute.getType();
-    DataType _type_1 = _type.getType();
-    String _typeName = this._typeHelpers.typeName(_type_1);
-    _builder.append(_typeName, "");
-    {
-      int _size = attribute.getSize();
-      boolean _notEquals = (_size != 0);
-      if (_notEquals) {
-        _builder.append("[]");
-      }
-    }
-    _builder.append(" ");
-    String _name_1 = attribute.getName();
-    _builder.append(_name_1, "");
-    _builder.append(")");
+    _builder.append("�languageExt.accessLevelPublic()�void set�attribute.name.toFirstUpper()� (�languageExt.selfPointer(classname, true)��attribute.type.type.typeName��IF attribute.size!=0�[]�ENDIF� �attribute.name�)");
     return _builder;
   }
   
@@ -461,27 +387,7 @@ public class ProcedureHelpers {
    */
   private CharSequence getterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelPublic = this.languageExt.accessLevelPublic();
-    _builder.append(_accessLevelPublic, "");
-    RefableType _type = attribute.getType();
-    DataType _type_1 = _type.getType();
-    String _typeName = this._typeHelpers.typeName(_type_1);
-    _builder.append(_typeName, "");
-    {
-      int _size = attribute.getSize();
-      boolean _notEquals = (_size != 0);
-      if (_notEquals) {
-        _builder.append("[]");
-      }
-    }
-    _builder.append(" get");
-    String _name = attribute.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name);
-    _builder.append(_firstUpper, "");
-    _builder.append(" (");
-    String _selfPointer = this.languageExt.selfPointer(classname, false);
-    _builder.append(_selfPointer, "");
-    _builder.append(")");
+    _builder.append("�languageExt.accessLevelPublic()��attribute.type.type.typeName��IF attribute.size!=0�[]�ENDIF� get�attribute.name.toFirstUpper()� (�languageExt.selfPointer(classname, false)�)");
     return _builder;
   }
   
@@ -491,30 +397,7 @@ public class ProcedureHelpers {
    */
   public CharSequence argList(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final Attribute a : attributes) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        RefableType _type = a.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        _builder.append(_typeName, "");
-        {
-          int _size = a.getSize();
-          boolean _greaterThan = (_size > 0);
-          if (_greaterThan) {
-            _builder.append("[]");
-          }
-        }
-        _builder.append(" ");
-        String _name = a.getName();
-        _builder.append(_name, "");
-      }
-    }
+    _builder.append("�FOR a : attributes SEPARATOR \", \"��a.type.type.typeName��IF a.size>0�[]�ENDIF� �a.name��ENDFOR�");
     return _builder;
   }
   
@@ -525,19 +408,7 @@ public class ProcedureHelpers {
    */
   public CharSequence invokeGetters(final Iterable<Attribute> path, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final Attribute a : path) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(".", "");
-        }
-        String _name = a.getName();
-        CharSequence _invokeGetter = this.invokeGetter(_name, classname);
-        _builder.append(_invokeGetter, "");
-      }
-    }
+    _builder.append("�FOR a : path SEPARATOR \'.\'��invokeGetter(a.name, classname)��ENDFOR�");
     return _builder;
   }
   
@@ -549,24 +420,11 @@ public class ProcedureHelpers {
    */
   public CharSequence getterImplementation(final String typeName, final String name, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelPublic = this.languageExt.accessLevelPublic();
-    _builder.append(_accessLevelPublic, "");
-    _builder.append(typeName, "");
-    _builder.append(" get");
-    String _firstUpper = StringExtensions.toFirstUpper(name);
-    _builder.append(_firstUpper, "");
-    _builder.append(" (");
-    String _selfPointer = this.languageExt.selfPointer(classname, false);
-    _builder.append(_selfPointer, "");
-    _builder.append("){");
-    _builder.newLineIfNotEmpty();
+    _builder.append("�languageExt.accessLevelPublic()��typeName� get�name.toFirstUpper()� (�languageExt.selfPointer(classname, false)�){");
+    _builder.newLine();
     _builder.append("\t");
-    _builder.append("return ");
-    String _memberAccess = this.languageExt.memberAccess();
-    _builder.append(_memberAccess, "	");
-    _builder.append(name, "	");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("return �languageExt.memberAccess()��name�;");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -579,13 +437,7 @@ public class ProcedureHelpers {
    */
   public CharSequence invokeGetter(final String name, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("get");
-    String _firstUpper = StringExtensions.toFirstUpper(name);
-    _builder.append(_firstUpper, "");
-    _builder.append("(");
-    String _selfPointer = this.languageExt.selfPointer(classname, true);
-    _builder.append(_selfPointer, "");
-    _builder.append(")");
+    _builder.append("get�name.toFirstUpper�(�languageExt.selfPointer(classname, true)�)");
     return _builder;
   }
   
@@ -597,14 +449,7 @@ public class ProcedureHelpers {
    */
   public CharSequence invokeSetter(final String name, final String classname, final String value) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("set");
-    String _firstUpper = StringExtensions.toFirstUpper(name);
-    _builder.append(_firstUpper, "");
-    _builder.append("(");
-    String _selfPointer = this.languageExt.selfPointer(classname, true);
-    _builder.append(_selfPointer, "");
-    _builder.append(value, "");
-    _builder.append(")");
+    _builder.append("set�name.toFirstUpper�(�languageExt.selfPointer(classname, true)��value�)");
     return _builder;
   }
   
@@ -617,27 +462,19 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- operations ---------------------*/");
     _builder.newLine();
-    {
-      for(final Operation operation : operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname);
-            _builder.append(_operationSignature, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
+    _builder.append("�FOR operation : operations�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�IF !(languageExt.usesInheritance && operation.constructor)�");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�operationSignature(operation, classname)�;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�ENDIF�");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -650,35 +487,25 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- operations ---------------------*/");
     _builder.newLine();
-    {
-      for(final Operation operation : operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname);
-            _builder.append(_operationSignature, "");
-            _builder.append(" {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            AbstractGenerator _instance = AbstractGenerator.getInstance();
-            DetailCode _detailCode = operation.getDetailCode();
-            String _translatedCode = _instance.getTranslatedCode(_detailCode);
-            _builder.append(_translatedCode, "	");
-            _builder.newLineIfNotEmpty();
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-      }
-    }
+    _builder.append("�FOR operation : operations�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�IF !(languageExt.usesInheritance && operation.constructor)�");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�operationSignature(operation, classname)� {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("�AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)�");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�ENDIF�");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
@@ -772,49 +599,13 @@ public class ProcedureHelpers {
    */
   private CharSequence BuildArgumentList(final EList<VarDecl> arguments) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final VarDecl argument : arguments) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        RefableType _refType = argument.getRefType();
-        DataType _type = _refType.getType();
-        String _typeName = this._typeHelpers.typeName(_type);
-        _builder.append(_typeName, "");
-        {
-          RefableType _refType_1 = argument.getRefType();
-          boolean _isRef = _refType_1.isRef();
-          if (_isRef) {
-            String _pointerLiteral = this.languageExt.pointerLiteral();
-            _builder.append(_pointerLiteral, "");
-          }
-        }
-        _builder.append(" ");
-        String _name = argument.getName();
-        _builder.append(_name, "");
-      }
-    }
+    _builder.append("�FOR argument : arguments SEPARATOR \", \"��argument.refType.type.typeName��IF argument.refType.ref��languageExt.pointerLiteral()��ENDIF� �argument.name��ENDFOR�");
     return _builder;
   }
   
   private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType) {
     StringConcatenation _builder = new StringConcatenation();
-    String _accessLevelPublic = this.languageExt.accessLevelPublic();
-    _builder.append(_accessLevelPublic, "");
-    _builder.append(returnType, "");
-    _builder.append(" ");
-    String _memberInDeclaration = this.languageExt.memberInDeclaration(classname, operationname);
-    _builder.append(_memberInDeclaration, "");
-    _builder.append("(");
-    boolean _isEmpty = argumentList.isEmpty();
-    boolean _not = (!_isEmpty);
-    String _selfPointer = this.languageExt.selfPointer(classname, _not);
-    _builder.append(_selfPointer, "");
-    _builder.append(argumentList, "");
-    _builder.append(")");
+    _builder.append("�languageExt.accessLevelPublic()��returnType� �languageExt.memberInDeclaration(classname, operationname)�(�languageExt.selfPointer(classname, !argumentList.empty)��argumentList�)");
     return _builder;
   }
 }

@@ -26,11 +26,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -82,29 +80,20 @@ public class InstanceDiagramGen {
   
   private CharSequence generate2jpg(final Root root) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<SystemInstance> _systemInstances = root.getSystemInstances();
-      for(final SystemInstance sys : _systemInstances) {
-        _builder.append("dot -Tjpg -o ");
-        String _name = sys.getName();
-        _builder.append(_name, "");
-        _builder.append("_instanceTree.jpg ");
-        String _name_1 = sys.getName();
-        _builder.append(_name_1, "");
-        _builder.append("_instanceTree.dot");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("�FOR sys : root.systemInstances�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("dot -Tjpg -o �sys.name�_instanceTree.jpg �sys.name�_instanceTree.dot");
+    _builder.newLine();
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     return _builder;
   }
   
   private CharSequence generate(final Root root, final SystemInstance sys) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("digraph ");
-    String _name = sys.getName();
-    _builder.append(_name, "");
-    _builder.append(" {");
-    _builder.newLineIfNotEmpty();
+    _builder.append("digraph �sys.name� {");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("rankdir=TD;");
     _builder.newLine();
@@ -112,54 +101,29 @@ public class InstanceDiagramGen {
     _builder.append("node [shape=box];");
     _builder.newLine();
     _builder.append("\t");
-    String _path = sys.getPath();
-    String _pathName = this.roomExt.getPathName(_path);
-    _builder.append(_pathName, "	");
-    _builder.append(" [label=\"");
-    String _name_1 = sys.getName();
-    _builder.append(_name_1, "	");
-    _builder.append("\\n(");
-    String _name_2 = sys.getName();
-    _builder.append(_name_2, "	");
-    _builder.append(")\" style=filled color=red];");
-    _builder.newLineIfNotEmpty();
-    {
-      EList<SubSystemInstance> _instances = sys.getInstances();
-      for(final SubSystemInstance ssi : _instances) {
-        _builder.append("\t");
-        String _path_1 = ssi.getPath();
-        String _pathName_1 = this.roomExt.getPathName(_path_1);
-        _builder.append(_pathName_1, "	");
-        _builder.append(" [label=\"");
-        String _name_3 = ssi.getName();
-        _builder.append(_name_3, "	");
-        _builder.append("\\n(");
-        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        String _name_4 = _subSystemClass.getName();
-        _builder.append(_name_4, "	");
-        _builder.append(")\" style=filled color=yellow];");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        String _path_2 = sys.getPath();
-        String _pathName_2 = this.roomExt.getPathName(_path_2);
-        _builder.append(_pathName_2, "	");
-        _builder.append(" -> ");
-        String _path_3 = ssi.getPath();
-        String _pathName_3 = this.roomExt.getPathName(_path_3);
-        _builder.append(_pathName_3, "	");
-        _builder.append(";  ");
-        _builder.newLineIfNotEmpty();
-        {
-          EList<AbstractInstance> _instances_1 = ssi.getInstances();
-          for(final AbstractInstance ai : _instances_1) {
-            _builder.append("\t");
-            String _instance = this.instance(ai);
-            _builder.append(_instance, "	");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
+    _builder.append("�sys.path.getPathName()� [label=\"�sys.name�\\n(�sys.name�)\" style=filled color=red];");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�FOR ssi : sys.instances�");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�ssi.path.getPathName()� [label=\"�ssi.name�\\n(�ssi.subSystemClass.name�)\" style=filled color=yellow];");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�sys.path.getPathName()� -> �ssi.path.getPathName()�;  ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�FOR ai : ssi.instances�");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("�instance(ai)�");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("�ENDFOR�");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -216,50 +180,23 @@ public class InstanceDiagramGen {
       }
       final String clsname = _xifexpression_3;
       StringConcatenation _builder = new StringConcatenation();
-      String _path = ai.getPath();
-      String _pathName = this.roomExt.getPathName(_path);
-      _builder.append(_pathName, "");
-      _builder.append(" [label=\"");
-      _builder.append(optional, "");
-      String _name_4 = ai.getName();
-      _builder.append(_name_4, "");
-      _builder.append("\\n(");
-      _builder.append(clsname, "");
-      _builder.append(")\\n@");
-      _builder.append(nname, "");
-      _builder.append(":");
-      _builder.append(tname, "");
-      _builder.append("\"");
-      {
-        boolean _isEmpty = optional.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          _builder.append(" color=blue style=dashed");
-        }
-      }
-      _builder.append("];");
-      _builder.newLineIfNotEmpty();
-      String _path_1 = parent.getPath();
-      String _pathName_1 = this.roomExt.getPathName(_path_1);
-      _builder.append(_pathName_1, "");
-      _builder.append(" -> ");
-      String _path_2 = ai.getPath();
-      String _pathName_2 = this.roomExt.getPathName(_path_2);
-      _builder.append(_pathName_2, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      {
-        if ((ai instanceof StructureInstance)) {
-          {
-            EList<AbstractInstance> _instances = ((StructureInstance) ai).getInstances();
-            for(final AbstractInstance sub_ai : _instances) {
-              String _instance = this.instance(sub_ai);
-              _builder.append(_instance, "");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-        }
-      }
+      _builder.append("�ai.path.getPathName()� [label=\"�optional��ai.name�\\n(�clsname�)\\n@�nname�:�tname�\"�IF !optional.empty� color=blue style=dashed�ENDIF�];");
+      _builder.newLine();
+      _builder.append("�parent.path.getPathName()� -> �ai.path.getPathName()�;");
+      _builder.newLine();
+      _builder.append("�IF ai instanceof StructureInstance�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�FOR sub_ai : (ai as StructureInstance).instances�");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("�instance(sub_ai)�");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("�ENDFOR�");
+      _builder.newLine();
+      _builder.append("�ENDIF� ");
+      _builder.newLine();
       _xblockexpression = (_builder.toString());
     }
     return _xblockexpression;
