@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="plugin_export" name="build">
+	<property environment="env"/>
+	<target name="plugin_export">
+		<pde.exportPlugins useworkspacecompiledclasses="true" qualifier="exp" destination="${env.ETRICE_DEPLOY}" exportSource="false" exportType="directory" plugins="org.eclipse.etrice.core.common,org.eclipse.etrice.core.config,org.eclipse.etrice.core.etmap,org.eclipse.etrice.core.etphys,org.eclipse.etrice.core.genmodel,org.eclipse.etrice.core.room,org.eclipse.etrice.generator,org.eclipse.etrice.generator.config,org.eclipse.etrice.generator.doc,org.eclipse.etrice.generator.java" useJARFormat="true"/>
+	</target>
+</project>

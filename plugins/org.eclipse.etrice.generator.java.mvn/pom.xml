@@ -1,0 +1,295 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.etrice</groupId>
+	<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
+	<packaging>maven-plugin</packaging>
+	<version>0.0.4</version>
+	<name>org.eclipse.etrice.generator.java.mvn eTrice Java generator</name>
+	<url>http://eclipse.org/etrice</url>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
+				<version>2.1</version> <executions> <execution> <phase>package</phase> <goals> 
+				<goal>shade</goal> </goals> <configuration> <filters> <filter> <artifact>org.eclipse.emf.common:org.eclipse.emf.common</artifact> 
+				<includes> <include>**</include> </includes> </filter> </filters> </configuration> 
+				</execution> </executions> </plugin> -->			<!-- <plugin> <groupId>com.googlecode.addjars-maven-plugin</groupId> <artifactId>addjars-maven-plugin</artifactId> 
+				<version>1.0.2</version> <executions> <execution> <goals> <goal>add-jars</goal> 
+				</goals> <configuration> <resources> <resource> <directory>${project.basedir}</directory> 
+				<includes> <include>src/lib/org.eclipse.emf.ecore_2.9.1.v20130827-0309.jar</include> 
+				<include>src/lib/org.eclipse.emf.common_2.9.1.v20130827-0309.jar</include> 
+				</includes> </resource> </resources> </configuration> </execution> </executions> 
+				</plugin> -->
+			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <executions> 
+				<execution> <phase>package</phase> <goals> <goal>single</goal> </goals> </execution> 
+				</executions> <configuration> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+				</descriptorRefs> <archive> <manifest> <mainClass>HeWo7.Node_nodeRef1_subSysRef1Runner</mainClass> 
+				</manifest> </archive> </configuration> </plugin> -->
+		</plugins>
+		<pluginManagement>
+			<plugins>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-plugin-plugin</artifactId>
+	                <version>3.2</version>
+	                <configuration>
+	                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+	                </configuration>
+	                <executions>
+	                    <execution>
+	                        <id>mojo-descriptor</id>
+	                        <phase>process-classes</phase>
+	                        <goals>
+	                            <goal>descriptor</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	            </plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.googlecode.addjars-maven-plugin
+										</groupId>
+										<artifactId>
+											addjars-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0.2,)
+										</versionRange>
+										<goals>
+											<goal>add-jars</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-install-plugin
+										</artifactId>
+										<versionRange>
+											[2.3.1,)
+										</versionRange>
+										<goals>
+											<goal>install-file</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencies>
+	   <dependency>
+	      <groupId>org.apache.maven.plugin-tools</groupId>
+	      <artifactId>maven-plugin-annotations</artifactId>
+	      <version>3.2</version>
+	      <!-- annotations are not needed for plugin execution so you can remove this dependency
+	           for execution with using provided scope -->
+	      <scope>provided</scope>
+	    </dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-testing</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<scope>test</scope>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.aether</groupId>
+			<artifactId>aether-api</artifactId>
+			<version>1.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.aether</groupId>
+			<artifactId>aether-util</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
+		<!-- Eclipse plug-ins -->
+		<dependency>
+			<groupId>org.apache.log4j</groupId>
+			<artifactId>org.apache.log4j</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr.runtime</groupId>
+			<artifactId>org.antlr.runtime</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>3.6.200</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>com.google.guava</artifactId>
+			<version>11.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>com.google.inject</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.common.types</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		
+		<!-- eTrice plug-ins -->
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.generator.java</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.generator.config</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.generator.doc</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.generator</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.common</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.room</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.etphys</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.etmap</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.config</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.etrice</groupId>
+			<artifactId>org.eclipse.etrice.core.genmodel</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		
+		<!-- IMPORTANT: runtime-assembler-cli uses another version of com.google.guava - therefore moved to the end of the dependencies -->
+		<dependency>
+			<groupId>org.sonatype.runtime</groupId>
+			<artifactId>runtime-assembler-cli</artifactId>
+			<version>0.1.1</version>
+		</dependency>
+	</dependencies>
+</project>

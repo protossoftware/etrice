@@ -140,7 +140,7 @@ class ProjectFileFragments {
 				<modelVersion>4.0.0</modelVersion>
 				<groupId>«project»</groupId>
 				<artifactId>«mdlName»</artifactId>
-				<version>0.0.1</version>
+				<version>1.0.0</version>
 				<build>
 					<sourceDirectory>src-gen</sourceDirectory>
 					<resources>
@@ -152,6 +152,23 @@ class ProjectFileFragments {
 						</resource>
 					</resources>
 					<plugins>
+						<plugin>
+							<groupId>org.eclipse.etrice</groupId>
+							<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
+							<version>0.0.4</version>
+							<executions>
+								<execution>
+									<goals>
+										<goal>eTriceJavaGenerator</goal>
+									</goals>
+							        <configuration>
+							          <arguments>
+							          	<param>model/«mdlName».etmap</param>
+							          </arguments>
+							        </configuration>
+								</execution>
+							</executions>
+						</plugin>
 						<plugin>
 							<artifactId>maven-compiler-plugin</artifactId>
 							<version>3.1</version>
@@ -182,15 +199,52 @@ class ProjectFileFragments {
 							</configuration>
 						</plugin>
 					</plugins>
+					<pluginManagement>
+						<plugins>
+							<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+							<plugin>
+								<groupId>org.eclipse.m2e</groupId>
+								<artifactId>lifecycle-mapping</artifactId>
+								<version>1.0.0</version>
+								<configuration>
+									<lifecycleMappingMetadata>
+										<pluginExecutions>
+											<pluginExecution>
+												<pluginExecutionFilter>
+													<groupId>
+														org.eclipse.etrice
+													</groupId>
+													<artifactId>
+														org.eclipse.etrice.generator.java.mvn
+													</artifactId>
+													<versionRange>
+														[0.0.4,)
+													</versionRange>
+													<goals>
+														<goal>
+															eTriceJavaGenerator
+														</goal>
+													</goals>
+												</pluginExecutionFilter>
+												<action>
+													<ignore></ignore>
+												</action>
+											</pluginExecution>
+										</pluginExecutions>
+									</lifecycleMappingMetadata>
+								</configuration>
+							</plugin>
+						</plugins>
+					</pluginManagement>
 				</build>
 				<dependencies>
 					<dependency>
-						<groupId>org.eclipse.etrice.runtime.java</groupId>
+						<groupId>org.eclipse.etrice</groupId>
 				<artifactId>org.eclipse.etrice.runtime.java</artifactId>
 						<version>0.0.4</version>
 				  	</dependency>
 				  	<dependency>
-				  		<groupId>org.eclipse.etrice.modellib.java</groupId>
+				  		<groupId>org.eclipse.etrice</groupId>
 				  		<artifactId>org.eclipse.etrice.modellib.java</artifactId>
 				  		<version>0.0.4</version>
 				  	</dependency>
