@@ -13,7 +13,8 @@
 	<version>0.4.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>eTrice ROOM Java generator</name>
+	<name>eTrice Java generator</name>
+	
 	<description>code generator from ROOM (Real-Time Object Oriented Modeling)
   models to the Java target language</description>
 	<url>http://eclipse.org/etrice</url>
