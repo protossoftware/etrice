@@ -356,7 +356,7 @@ public class ProjectFileFragments {
     _builder.append("<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("<version>0.0.4</version>");
+    _builder.append("<version>0.4.0</version>");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("<executions>");
@@ -551,7 +551,7 @@ public class ProjectFileFragments {
     _builder.append("<versionRange>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t\t\t\t");
-    _builder.append("[0.0.4,)");
+    _builder.append("[0.4.0,)");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t\t\t");
     _builder.append("</versionRange>");
@@ -620,7 +620,7 @@ public class ProjectFileFragments {
     _builder.append("<artifactId>org.eclipse.etrice.runtime.java</artifactId>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<version>0.0.4</version>");
+    _builder.append("<version>0.4.0</version>");
     _builder.newLine();
     _builder.append("\t  \t");
     _builder.append("</dependency>");
@@ -635,7 +635,7 @@ public class ProjectFileFragments {
     _builder.append("<artifactId>org.eclipse.etrice.modellib.java</artifactId>");
     _builder.newLine();
     _builder.append("\t  \t\t");
-    _builder.append("<version>0.0.4</version>");
+    _builder.append("<version>0.4.0</version>");
     _builder.newLine();
     _builder.append("\t  \t");
     _builder.append("</dependency>");
