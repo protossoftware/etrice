@@ -19,10 +19,7 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.etrice.generator.generic.ProcedureHelpers;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -35,17 +32,7 @@ public class Initialization {
   private TypeHelpers _typeHelpers;
   
   @Inject
-  @Extension
-  private RoomExtensions _roomExtensions;
-  
-  @Inject
   private ILanguageExtension languageExt;
-  
-  @Inject
-  private IDataConfiguration dataConfigExt;
-  
-  @Inject
-  private ProcedureHelpers procedureHelpers;
   
   public CharSequence attributeInitialization(final List<Attribute> attribs, final boolean useClassDefaultsOnly) {
     StringConcatenation _builder = new StringConcatenation();

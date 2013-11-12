@@ -913,27 +913,4 @@ public class NodeGen {
       }
     }
   }
-  
-  private boolean isKindOf(final ActorClass ac, final HashSet<ActorClass> classes) {
-    boolean _xblockexpression = false;
-    {
-      ActorClass a = ac;
-      boolean _notEquals = (!Objects.equal(a, null));
-      boolean _while = _notEquals;
-      while (_while) {
-        {
-          boolean _contains = classes.contains(a);
-          if (_contains) {
-            return true;
-          }
-          ActorClass _base = a.getBase();
-          a = _base;
-        }
-        boolean _notEquals_1 = (!Objects.equal(a, null));
-        _while = _notEquals_1;
-      }
-      _xblockexpression = (false);
-    }
-    return _xblockexpression;
-  }
 }

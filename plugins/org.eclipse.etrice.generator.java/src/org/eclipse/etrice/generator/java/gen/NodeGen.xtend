@@ -305,16 +305,4 @@ class NodeGen {
 			}
 		}
 	}
-
-	def private isKindOf(ActorClass ac, HashSet<ActorClass> classes) {
-		var a = ac
-		
-		while (a!=null) {
-			if (classes.contains(a))
-				return true
-			a = a.base
-		}
-		
-		false
-	}
 }
