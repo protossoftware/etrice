@@ -12,4 +12,5 @@
   
   <artifactId>org.eclipse.etrice.core.common</artifactId>
   <packaging>eclipse-plugin</packaging>
+
 </project>
