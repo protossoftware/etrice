@@ -222,13 +222,18 @@ public class JavaExtensions implements ILanguageExtension {
   
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR entry: entries�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public static final int �entry.first� = �entry.second�;");
-    _builder.newLine();
-    _builder.append("�ENDFOR�");
-    _builder.newLine();
+    {
+      for(final Pair<String, String> entry : entries) {
+        _builder.append("public static final int ");
+        String _first = entry.getFirst();
+        _builder.append(_first, "");
+        _builder.append(" = ");
+        String _second = entry.getSecond();
+        _builder.append(_second, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     String _string = _builder.toString();
     return _string;
   }
@@ -306,7 +311,21 @@ public class JavaExtensions implements ILanguageExtension {
           String _trim = _replace_1.trim();
           String[] singleValues = _trim.split(",");
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{ �FOR v: singleValues SEPARATOR \', \'��castValue(type, v.trim)��ENDFOR� }");
+          _builder.append("{ ");
+          {
+            boolean _hasElements = false;
+            for(final String v : singleValues) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(", ", "");
+              }
+              String _trim_1 = v.trim();
+              String _castValue = this.castValue(type, _trim_1);
+              _builder.append(_castValue, "");
+            }
+          }
+          _builder.append(" }");
           String _string = _builder.toString();
           _xblockexpression = (_string);
         }

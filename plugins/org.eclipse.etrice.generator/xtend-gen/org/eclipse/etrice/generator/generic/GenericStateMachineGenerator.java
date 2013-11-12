@@ -16,15 +16,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.Guard;
+import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
@@ -294,71 +300,130 @@ public class GenericStateMachineGenerator {
       final String constIfItemPtr = _xifexpression_4;
       final boolean usesHdlr = this.usesHandlerTrPoints(xpac);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("�IF shallGenerateOneFile�");
+      {
+        if (shallGenerateOneFile) {
+          _builder.append("/* state IDs */");
+          _builder.newLine();
+          String _genStateIdConstants = this.genStateIdConstants(xpac);
+          _builder.append(_genStateIdConstants, "");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("/* transition chains */");
+          _builder.newLine();
+          String _genTransitionChainConstants = this.genTransitionChainConstants(xpac);
+          _builder.append(_genTransitionChainConstants, "");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("/* triggers */");
+          _builder.newLine();
+          String _genTriggerConstants = this.genTriggerConstants(xpac);
+          _builder.append(_genTriggerConstants, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
-      _builder.append("/* state IDs */");
-      _builder.newLine();
-      _builder.append("�xpac.genStateIdConstants�");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("/* transition chains */");
-      _builder.newLine();
-      _builder.append("�xpac.genTransitionChainConstants�");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("/* triggers */");
-      _builder.newLine();
-      _builder.append("�xpac.genTriggerConstants�");
-      _builder.newLine();
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("�genExtra(xpac)�");
-      _builder.newLine();
+      CharSequence _genExtra = this.genExtra(xpac);
+      _builder.append(_genExtra, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/* Entry and Exit Codes */");
       _builder.newLine();
-      _builder.append("�FOR state : xpac.stateMachine.getStateList()�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF !langExt.usesInheritance || xpac.isOwnObject(state)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�xpac.genActionCodeMethods(state)�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine = xpac.getStateMachine();
+        List<State> _stateList = RoomHelpers.getStateList(_stateMachine);
+        for(final State state : _stateList) {
+          {
+            boolean _or_1 = false;
+            boolean _usesInheritance_3 = this.langExt.usesInheritance();
+            boolean _not = (!_usesInheritance_3);
+            if (_not) {
+              _or_1 = true;
+            } else {
+              boolean _isOwnObject = xpac.isOwnObject(state);
+              _or_1 = (_not || _isOwnObject);
+            }
+            if (_or_1) {
+              CharSequence _genActionCodeMethods = this.genActionCodeMethods(xpac, state);
+              _builder.append(_genActionCodeMethods, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _builder.newLine();
       _builder.append("/* Action Codes */");
       _builder.newLine();
-      _builder.append("�FOR tr : xpac.stateMachine.allTransitionsRecursive�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�var start = xpac.getChain(tr)?.transition�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�langExt.accessLevelProtected�void �opScopePriv��tr.getActionCodeOperationName()�(�langExt.selfPointer(ac.name, hasArgs)��IF hasArgs��constIfItemPtr� ifitem�transitionChainGenerator.generateArgumentList(xpac, tr)��ENDIF�) {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�AbstractGenerator::getInstance().getTranslatedCode(tr.action)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine_1 = xpac.getStateMachine();
+        List<Transition> _allTransitionsRecursive = RoomHelpers.getAllTransitionsRecursive(_stateMachine_1);
+        for(final Transition tr : _allTransitionsRecursive) {
+          {
+            boolean _and = false;
+            boolean _or_2 = false;
+            boolean _usesInheritance_4 = this.langExt.usesInheritance();
+            boolean _not_1 = (!_usesInheritance_4);
+            if (_not_1) {
+              _or_2 = true;
+            } else {
+              boolean _isOwnObject_1 = xpac.isOwnObject(tr);
+              _or_2 = (_not_1 || _isOwnObject_1);
+            }
+            if (!_or_2) {
+              _and = false;
+            } else {
+              DetailCode _action = tr.getAction();
+              boolean _hasDetailCode = RoomHelpers.hasDetailCode(_action);
+              _and = (_or_2 && _hasDetailCode);
+            }
+            if (_and) {
+              TransitionChain _chain = xpac.getChain(tr);
+              Transition _transition = null;
+              if (_chain!=null) {
+                _transition=_chain.getTransition();
+              }
+              Transition start = _transition;
+              _builder.newLineIfNotEmpty();
+              boolean _and_1 = false;
+              if (!(start instanceof NonInitialTransition)) {
+                _and_1 = false;
+              } else {
+                boolean _not_2 = (!(start instanceof GuardedTransition));
+                _and_1 = ((start instanceof NonInitialTransition) && _not_2);
+              }
+              boolean hasArgs = _and_1;
+              _builder.newLineIfNotEmpty();
+              String _accessLevelProtected = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected, "");
+              _builder.append("void ");
+              _builder.append(opScopePriv, "");
+              String _actionCodeOperationName = CodegenHelpers.getActionCodeOperationName(tr);
+              _builder.append(_actionCodeOperationName, "");
+              _builder.append("(");
+              String _name_3 = ac.getName();
+              String _selfPointer = this.langExt.selfPointer(_name_3, hasArgs);
+              _builder.append(_selfPointer, "");
+              {
+                if (hasArgs) {
+                  _builder.append(constIfItemPtr, "");
+                  _builder.append(" ifitem");
+                  String _generateArgumentList = this.transitionChainGenerator.generateArgumentList(xpac, tr);
+                  _builder.append(_generateArgumentList, "");
+                }
+              }
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              AbstractGenerator _instance = AbstractGenerator.getInstance();
+              DetailCode _action_1 = tr.getAction();
+              String _translatedCode = _instance.getTranslatedCode(_action_1);
+              _builder.append(_translatedCode, "	");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+        }
+      }
       _builder.newLine();
       _builder.append("/**");
       _builder.newLine();
@@ -374,47 +439,93 @@ public class GenericStateMachineGenerator {
       _builder.append(" ");
       _builder.append("* @param to - the final parent state");
       _builder.newLine();
-      _builder.append(" ");
-      _builder.append("�IF usesHdlr�");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("* @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        if (usesHdlr) {
+          _builder.append(" ");
+          _builder.append("* @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)");
+          _builder.newLine();
+        }
+      }
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
-      _builder.append("�privAccess�void �opScopePriv�exitTo(�self��stateType� current, �stateType� to�IF usesHdlr�, �boolType� handler�ENDIF�) {");
-      _builder.newLine();
+      _builder.append(privAccess, "");
+      _builder.append("void ");
+      _builder.append(opScopePriv, "");
+      _builder.append("exitTo(");
+      _builder.append(self, "");
+      String _stateType = this.stateType();
+      _builder.append(_stateType, "");
+      _builder.append(" current, ");
+      String _stateType_1 = this.stateType();
+      _builder.append(_stateType_1, "");
+      _builder.append(" to");
+      {
+        if (usesHdlr) {
+          _builder.append(", ");
+          String _boolType = this.boolType();
+          _builder.append(_boolType, "");
+          _builder.append(" handler");
+        }
+      }
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("while (current!=to) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("switch (current) {");
       _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�FOR state : xpac.stateMachine.getBaseStateList()�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("case �state.getGenStateId()�:");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�IF state.hasExitCode(true)��IF usesHdlr�if (!handler) �ENDIF��state.getExitCodeOperationName()�(�langExt.selfPointer(false)�);�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�setHistory(state.getParentStateId(), state.getGenStateId())�;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("current = �state.getParentStateId()�;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("break;");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine_2 = xpac.getStateMachine();
+        List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine_2);
+        for(final State state_1 : _baseStateList) {
+          _builder.append("\t\t\t");
+          _builder.append("case ");
+          String _genStateId = CodegenHelpers.getGenStateId(state_1);
+          _builder.append(_genStateId, "			");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          {
+            boolean _hasExitCode = RoomHelpers.hasExitCode(state_1, true);
+            if (_hasExitCode) {
+              {
+                if (usesHdlr) {
+                  _builder.append("if (!handler) ");
+                }
+              }
+              String _exitCodeOperationName = CodegenHelpers.getExitCodeOperationName(state_1);
+              _builder.append(_exitCodeOperationName, "				");
+              _builder.append("(");
+              String _selfPointer_1 = this.langExt.selfPointer(false);
+              _builder.append(_selfPointer_1, "				");
+              _builder.append(");");
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          String _parentStateId = CodegenHelpers.getParentStateId(state_1);
+          String _genStateId_1 = CodegenHelpers.getGenStateId(state_1);
+          String _setHistory = this.setHistory(_parentStateId, _genStateId_1);
+          _builder.append(_setHistory, "				");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("current = ");
+          String _parentStateId_1 = CodegenHelpers.getParentStateId(state_1);
+          _builder.append(_parentStateId_1, "				");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("break;");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t\t\t");
       _builder.append("default:");
       _builder.newLine();
@@ -453,32 +564,53 @@ public class GenericStateMachineGenerator {
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
-      _builder.append("�privAccess��stateType� �opScopePriv�executeTransitionChain(�self�int chain�IF handleEvents�, �constIfItemPtr� ifitem, �langExt.voidPointer� generic_data�ENDIF�) {");
-      _builder.newLine();
+      _builder.append(privAccess, "");
+      String _stateType_2 = this.stateType();
+      _builder.append(_stateType_2, "");
+      _builder.append(" ");
+      _builder.append(opScopePriv, "");
+      _builder.append("executeTransitionChain(");
+      _builder.append(self, "");
+      _builder.append("int chain");
+      {
+        if (handleEvents) {
+          _builder.append(", ");
+          _builder.append(constIfItemPtr, "");
+          _builder.append(" ifitem, ");
+          String _voidPointer = this.langExt.voidPointer();
+          _builder.append(_voidPointer, "");
+          _builder.append(" generic_data");
+        }
+      }
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("switch (chain) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("�var allchains = xpac.getTransitionChains()�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR tc : allchains�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("case �tc.genChainId�:");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�transitionChainGenerator.generateExecuteChain(xpac, tc)�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      EList<TransitionChain> allchains = xpac.getTransitionChains();
+      _builder.newLineIfNotEmpty();
+      {
+        for(final TransitionChain tc : allchains) {
+          _builder.append("\t\t");
+          _builder.append("case ");
+          String _genChainId = CodegenHelpers.getGenChainId(tc);
+          _builder.append(_genChainId, "		");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          String _generateExecuteChain = this.transitionChainGenerator.generateExecuteChain(xpac, tc);
+          _builder.append(_generateExecuteChain, "			");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t\t\t");
       _builder.append("default:");
       _builder.newLine();
@@ -505,122 +637,228 @@ public class GenericStateMachineGenerator {
       _builder.append(" ");
       _builder.append("* @param state - the state which is entered");
       _builder.newLine();
-      _builder.append(" ");
-      _builder.append("�IF usesHdlr�");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("* @param handler - entry code is executed if not handler");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        if (usesHdlr) {
+          _builder.append(" ");
+          _builder.append("* @param handler - entry code is executed if not handler");
+          _builder.newLine();
+        }
+      }
       _builder.append(" ");
       _builder.append("* @return - the ID of the final leaf state");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
-      _builder.append("�privAccess��stateType� �opScopePriv�enterHistory(�self��stateType� state�IF usesHdlr�, �boolType� handler�ENDIF�) {");
-      _builder.newLine();
+      _builder.append(privAccess, "");
+      String _stateType_3 = this.stateType();
+      _builder.append(_stateType_3, "");
+      _builder.append(" ");
+      _builder.append(opScopePriv, "");
+      _builder.append("enterHistory(");
+      _builder.append(self, "");
+      String _stateType_4 = this.stateType();
+      _builder.append(_stateType_4, "");
+      _builder.append(" state");
+      {
+        if (usesHdlr) {
+          _builder.append(", ");
+          String _boolType_1 = this.boolType();
+          _builder.append(_boolType_1, "");
+          _builder.append(" handler");
+        }
+      }
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("�boolType� skip_entry = �langExt.booleanConstant(false)�;");
-      _builder.newLine();
+      String _boolType_2 = this.boolType();
+      _builder.append(_boolType_2, "	");
+      _builder.append(" skip_entry = ");
+      String _booleanConstant = this.langExt.booleanConstant(false);
+      _builder.append(_booleanConstant, "	");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("if (state >= STATE_MAX) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("state = �IF !langExt.usesInheritance�(�stateType�)�ENDIF� (state - STATE_MAX);");
-      _builder.newLine();
+      _builder.append("state = ");
+      {
+        boolean _usesInheritance_5 = this.langExt.usesInheritance();
+        boolean _not_3 = (!_usesInheritance_5);
+        if (_not_3) {
+          _builder.append("(");
+          String _stateType_5 = this.stateType();
+          _builder.append(_stateType_5, "		");
+          _builder.append(")");
+        }
+      }
+      _builder.append(" (state - STATE_MAX);");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("skip_entry = �langExt.booleanConstant(true)�;");
-      _builder.newLine();
+      _builder.append("skip_entry = ");
+      String _booleanConstant_1 = this.langExt.booleanConstant(true);
+      _builder.append(_booleanConstant_1, "		");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("while (�langExt.booleanConstant(true)�) {");
-      _builder.newLine();
+      _builder.append("while (");
+      String _booleanConstant_2 = this.langExt.booleanConstant(true);
+      _builder.append(_booleanConstant_2, "	");
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("switch (state) {");
       _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�FOR state : xpac.stateMachine.getBaseStateList()�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("case �state.getGenStateId()�:");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�IF state.hasEntryCode(true)�if (!(skip_entry�IF usesHdlr� || handler�ENDIF�)) �state.getEntryCodeOperationName()�(�langExt.selfPointer(false)�);�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�IF state.isLeaf()�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("/* in leaf state: return state id */");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("return �state.getGenStateId()�;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("/* state has a sub graph */");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�IF state.subgraph.hasInitTransition()�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("/* with init transition */");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("if (�getHistory(state.getGenStateId())�==NO_STATE) {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("�var sub_initt = state.subgraph.getInitTransition()�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("state = executeTransitionChain(�langExt.selfPointer(true)��xpac.getChain(sub_initt).genChainId��IF handleEvents�, �langExt.nullPointer�, �langExt.nullPointer��ENDIF�);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("else {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("state = �getHistory(state.getGenStateId())�;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("/* without init transition */");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("state = �getHistory(state.getGenStateId())�;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("break;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine_3 = xpac.getStateMachine();
+        List<State> _baseStateList_1 = RoomHelpers.getBaseStateList(_stateMachine_3);
+        for(final State state_2 : _baseStateList_1) {
+          _builder.append("\t\t\t");
+          _builder.append("case ");
+          String _genStateId_2 = CodegenHelpers.getGenStateId(state_2);
+          _builder.append(_genStateId_2, "			");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          {
+            boolean _hasEntryCode = RoomHelpers.hasEntryCode(state_2, true);
+            if (_hasEntryCode) {
+              _builder.append("if (!(skip_entry");
+              {
+                if (usesHdlr) {
+                  _builder.append(" || handler");
+                }
+              }
+              _builder.append(")) ");
+              String _entryCodeOperationName = CodegenHelpers.getEntryCodeOperationName(state_2);
+              _builder.append(_entryCodeOperationName, "				");
+              _builder.append("(");
+              String _selfPointer_2 = this.langExt.selfPointer(false);
+              _builder.append(_selfPointer_2, "				");
+              _builder.append(");");
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          {
+            boolean _isLeaf = RoomHelpers.isLeaf(state_2);
+            if (_isLeaf) {
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("/* in leaf state: return state id */");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("return ");
+              String _genStateId_3 = CodegenHelpers.getGenStateId(state_2);
+              _builder.append(_genStateId_3, "				");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("/* state has a sub graph */");
+              _builder.newLine();
+              {
+                StateGraph _subgraph = state_2.getSubgraph();
+                boolean _hasInitTransition = RoomHelpers.hasInitTransition(_subgraph);
+                if (_hasInitTransition) {
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("/* with init transition */");
+                  _builder.newLine();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("if (");
+                  String _genStateId_4 = CodegenHelpers.getGenStateId(state_2);
+                  String _history = this.getHistory(_genStateId_4);
+                  _builder.append(_history, "				");
+                  _builder.append("==NO_STATE) {");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  StateGraph _subgraph_1 = state_2.getSubgraph();
+                  Transition sub_initt = RoomHelpers.getInitTransition(_subgraph_1);
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("state = executeTransitionChain(");
+                  String _selfPointer_3 = this.langExt.selfPointer(true);
+                  _builder.append(_selfPointer_3, "					");
+                  TransitionChain _chain_1 = xpac.getChain(sub_initt);
+                  String _genChainId_1 = CodegenHelpers.getGenChainId(_chain_1);
+                  _builder.append(_genChainId_1, "					");
+                  {
+                    if (handleEvents) {
+                      _builder.append(", ");
+                      String _nullPointer = this.langExt.nullPointer();
+                      _builder.append(_nullPointer, "					");
+                      _builder.append(", ");
+                      String _nullPointer_1 = this.langExt.nullPointer();
+                      _builder.append(_nullPointer_1, "					");
+                    }
+                  }
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("else {");
+                  _builder.newLine();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("state = ");
+                  String _genStateId_5 = CodegenHelpers.getGenStateId(state_2);
+                  String _history_1 = this.getHistory(_genStateId_5);
+                  _builder.append(_history_1, "					");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                } else {
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("/* without init transition */");
+                  _builder.newLine();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("state = ");
+                  String _genStateId_6 = CodegenHelpers.getGenStateId(state_2);
+                  String _history_2 = this.getHistory(_genStateId_6);
+                  _builder.append(_history_2, "				");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("break;");
+              _builder.newLine();
+            }
+          }
+        }
+      }
       _builder.append("\t\t\t");
       _builder.append("case STATE_TOP:");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("state = �getHistory(\"STATE_TOP\")�;");
-      _builder.newLine();
+      _builder.append("state = ");
+      String _history_3 = this.getHistory("STATE_TOP");
+      _builder.append(_history_3, "				");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("break;");
       _builder.newLine();
@@ -637,112 +875,225 @@ public class GenericStateMachineGenerator {
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("skip_entry = �langExt.booleanConstant(false)�;");
-      _builder.newLine();
+      _builder.append("skip_entry = ");
+      String _booleanConstant_3 = this.langExt.booleanConstant(false);
+      _builder.append(_booleanConstant_3, "		");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�unreachableReturn�");
-      _builder.newLine();
+      String _unreachableReturn = this.unreachableReturn();
+      _builder.append(_unreachableReturn, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("�publicIf�void �opScope�executeInitTransition(�selfOnly�) {");
-      _builder.newLine();
+      _builder.append(publicIf, "");
+      _builder.append("void ");
+      _builder.append(opScope, "");
+      _builder.append("executeInitTransition(");
+      _builder.append(selfOnly, "");
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("�var initt = xpac.stateMachine.getInitTransition()�");
-      _builder.newLine();
+      StateGraph _stateMachine_4 = xpac.getStateMachine();
+      Transition initt = RoomHelpers.getInitTransition(_stateMachine_4);
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("int chain = �xpac.getChain(initt).genChainId�;");
-      _builder.newLine();
+      _builder.append("int chain = ");
+      TransitionChain _chain_2 = xpac.getChain(initt);
+      String _genChainId_2 = CodegenHelpers.getGenChainId(_chain_2);
+      _builder.append(_genChainId_2, "	");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("�stateType� next = �opScopePriv�executeTransitionChain(�langExt.selfPointer(true)�chain�IF handleEvents�, �langExt.nullPointer�, �langExt.nullPointer��ENDIF�);");
-      _builder.newLine();
+      String _stateType_6 = this.stateType();
+      _builder.append(_stateType_6, "	");
+      _builder.append(" next = ");
+      _builder.append(opScopePriv, "	");
+      _builder.append("executeTransitionChain(");
+      String _selfPointer_4 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_4, "	");
+      _builder.append("chain");
+      {
+        if (handleEvents) {
+          _builder.append(", ");
+          String _nullPointer_2 = this.langExt.nullPointer();
+          _builder.append(_nullPointer_2, "	");
+          _builder.append(", ");
+          String _nullPointer_3 = this.langExt.nullPointer();
+          _builder.append(_nullPointer_3, "	");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("next = �opScopePriv�enterHistory(�langExt.selfPointer(true)�next�IF usesHdlr�, �langExt.booleanConstant(false)��ENDIF�);");
-      _builder.newLine();
+      _builder.append("next = ");
+      _builder.append(opScopePriv, "	");
+      _builder.append("enterHistory(");
+      String _selfPointer_5 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_5, "	");
+      _builder.append("next");
+      {
+        if (usesHdlr) {
+          _builder.append(", ");
+          String _booleanConstant_4 = this.langExt.booleanConstant(false);
+          _builder.append(_booleanConstant_4, "	");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append("setState(�langExt.selfPointer(true)�next);");
-      _builder.newLine();
+      _builder.append("setState(");
+      String _selfPointer_6 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_6, "	");
+      _builder.append("next);");
+      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
       _builder.append("/* receiveEvent contains the main implementation of the FSM */");
       _builder.newLine();
-      _builder.append("�publicIf�void �opScope�receiveEvent(�langExt.selfPointer(ac.name, handleEvents)��IF handleEvents��ifItemPtr� ifitem, int evt, �langExt.voidPointer� generic_data�ENDIF�) {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF async�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("int trigger = (ifitem==�langExt.nullPointer�)? POLLING : ifitem�getLocalId� + EVT_SHIFT*evt;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ELSEIF eventDriven�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("int trigger = ifitem�getLocalId� + EVT_SHIFT*evt;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      _builder.append(publicIf, "");
+      _builder.append("void ");
+      _builder.append(opScope, "");
+      _builder.append("receiveEvent(");
+      String _name_4 = ac.getName();
+      String _selfPointer_7 = this.langExt.selfPointer(_name_4, handleEvents);
+      _builder.append(_selfPointer_7, "");
+      {
+        if (handleEvents) {
+          _builder.append(ifItemPtr, "");
+          _builder.append(" ifitem, int evt, ");
+          String _voidPointer_1 = this.langExt.voidPointer();
+          _builder.append(_voidPointer_1, "");
+          _builder.append(" generic_data");
+        }
+      }
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
+      {
+        if (async) {
+          _builder.append("\t");
+          _builder.append("int trigger = (ifitem==");
+          String _nullPointer_4 = this.langExt.nullPointer();
+          _builder.append(_nullPointer_4, "	");
+          _builder.append(")? POLLING : ifitem");
+          _builder.append(getLocalId, "	");
+          _builder.append(" + EVT_SHIFT*evt;");
+          _builder.newLineIfNotEmpty();
+        } else {
+          if (eventDriven) {
+            _builder.append("\t");
+            _builder.append("int trigger = ifitem");
+            _builder.append(getLocalId, "	");
+            _builder.append(" + EVT_SHIFT*evt;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
       _builder.append("\t");
       _builder.append("int chain = NOT_CAUGHT;");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�stateType� catching_state = NO_STATE;");
-      _builder.newLine();
+      String _stateType_7 = this.stateType();
+      _builder.append(_stateType_7, "	");
+      _builder.append(" catching_state = NO_STATE;");
+      _builder.newLineIfNotEmpty();
+      {
+        if (usesHdlr) {
+          _builder.append("\t");
+          String _boolType_3 = this.boolType();
+          _builder.append(_boolType_3, "	");
+          _builder.append(" is_handler = ");
+          String _booleanConstant_5 = this.langExt.booleanConstant(false);
+          _builder.append(_booleanConstant_5, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
-      _builder.append("�IF usesHdlr�");
       _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�boolType� is_handler = �langExt.booleanConstant(false)�;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF handleEvents�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("if (!handleSystemEvent(ifitem, evt, generic_data)) {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�genStateSwitch(xpac, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�genStateSwitch(xpac, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        if (handleEvents) {
+          _builder.append("\t");
+          _builder.append("if (!handleSystemEvent(ifitem, evt, generic_data)) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          CharSequence _genStateSwitch = this.genStateSwitch(xpac, usesHdlr);
+          _builder.append(_genStateSwitch, "		");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        } else {
+          _builder.append("\t");
+          CharSequence _genStateSwitch_1 = this.genStateSwitch(xpac, usesHdlr);
+          _builder.append(_genStateSwitch_1, "	");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       _builder.append("if (chain != NOT_CAUGHT) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("�opScopePriv�exitTo(�langExt.selfPointer(true)�getState(�langExt.selfPointer(false)�), catching_state�IF usesHdlr�, is_handler�ENDIF�);");
-      _builder.newLine();
+      _builder.append(opScopePriv, "		");
+      _builder.append("exitTo(");
+      String _selfPointer_8 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_8, "		");
+      _builder.append("getState(");
+      String _selfPointer_9 = this.langExt.selfPointer(false);
+      _builder.append(_selfPointer_9, "		");
+      _builder.append("), catching_state");
+      {
+        if (usesHdlr) {
+          _builder.append(", is_handler");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("�stateType� next = �opScopePriv�executeTransitionChain(�langExt.selfPointer(true)�chain�IF handleEvents�, ifitem, generic_data�ENDIF�);");
-      _builder.newLine();
+      String _stateType_8 = this.stateType();
+      _builder.append(_stateType_8, "			");
+      _builder.append(" next = ");
+      _builder.append(opScopePriv, "			");
+      _builder.append("executeTransitionChain(");
+      String _selfPointer_10 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_10, "			");
+      _builder.append("chain");
+      {
+        if (handleEvents) {
+          _builder.append(", ifitem, generic_data");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
-      _builder.append("next = �opScopePriv�enterHistory(�langExt.selfPointer(true)�next�IF usesHdlr�, is_handler�ENDIF�);");
-      _builder.newLine();
+      _builder.append("next = ");
+      _builder.append(opScopePriv, "			");
+      _builder.append("enterHistory(");
+      String _selfPointer_11 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_11, "			");
+      _builder.append("next");
+      {
+        if (usesHdlr) {
+          _builder.append(", is_handler");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
-      _builder.append("setState(�langExt.selfPointer(true)�next);");
-      _builder.newLine();
+      _builder.append("setState(");
+      String _selfPointer_12 = this.langExt.selfPointer(true);
+      _builder.append(_selfPointer_12, "			");
+      _builder.append("next);");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
@@ -778,86 +1129,112 @@ public class GenericStateMachineGenerator {
       ActorCommunicationType _commType_2 = _actorClass_2.getCommType();
       boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("switch (getState(�langExt.selfPointer(false)�)) {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�FOR state : xpac.stateMachine.getLeafStateList()�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("case �state.getGenStateId()�:");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�IF async�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�var atlist =  xpac.getActiveTriggers(state)�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�IF !atlist.isEmpty�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("switch(trigger) {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("case POLLING:");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("�genDataDrivenTriggers(xpac, state, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("break;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�genEventDrivenTriggers(xpac, state, atlist, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�genDataDrivenTriggers(xpac, state, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ELSEIF dataDriven�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�genDataDrivenTriggers(xpac, state, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ELSEIF eventDriven�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�var atlist =  xpac.getActiveTriggers(state)�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�IF !atlist.isEmpty�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("switch(trigger) {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("�genEventDrivenTriggers(xpac, state, atlist, usesHdlr)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("break;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      _builder.append("switch (getState(");
+      String _selfPointer = this.langExt.selfPointer(false);
+      _builder.append(_selfPointer, "");
+      _builder.append(")) {");
+      _builder.newLineIfNotEmpty();
+      {
+        StateGraph _stateMachine = xpac.getStateMachine();
+        List<State> _leafStateList = RoomHelpers.getLeafStateList(_stateMachine);
+        for(final State state : _leafStateList) {
+          _builder.append("\t");
+          _builder.append("case ");
+          String _genStateId = CodegenHelpers.getGenStateId(state);
+          _builder.append(_genStateId, "	");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          {
+            if (async) {
+              _builder.append("\t");
+              _builder.append("\t");
+              EList<ActiveTrigger> atlist = xpac.getActiveTriggers(state);
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isEmpty = atlist.isEmpty();
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("switch(trigger) {");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("case POLLING:");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  CharSequence _genDataDrivenTriggers = this.genDataDrivenTriggers(xpac, state, usesHdlr);
+                  _builder.append(_genDataDrivenTriggers, "				");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("break;");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  CharSequence _genEventDrivenTriggers = this.genEventDrivenTriggers(xpac, state, atlist, usesHdlr);
+                  _builder.append(_genEventDrivenTriggers, "			");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  CharSequence _genDataDrivenTriggers_1 = this.genDataDrivenTriggers(xpac, state, usesHdlr);
+                  _builder.append(_genDataDrivenTriggers_1, "		");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            } else {
+              if (dataDriven) {
+                _builder.append("\t");
+                _builder.append("\t");
+                CharSequence _genDataDrivenTriggers_2 = this.genDataDrivenTriggers(xpac, state, usesHdlr);
+                _builder.append(_genDataDrivenTriggers_2, "		");
+                _builder.newLineIfNotEmpty();
+              } else {
+                if (eventDriven) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  EList<ActiveTrigger> atlist_1 = xpac.getActiveTriggers(state);
+                  _builder.newLineIfNotEmpty();
+                  {
+                    boolean _isEmpty_1 = atlist_1.isEmpty();
+                    boolean _not_1 = (!_isEmpty_1);
+                    if (_not_1) {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("switch(trigger) {");
+                      _builder.newLine();
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      CharSequence _genEventDrivenTriggers_1 = this.genEventDrivenTriggers(xpac, state, atlist_1, usesHdlr);
+                      _builder.append(_genEventDrivenTriggers_1, "				");
+                      _builder.newLineIfNotEmpty();
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("}");
+                      _builder.newLine();
+                    }
+                  }
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("break;");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("default:");
       _builder.newLine();
@@ -885,50 +1262,70 @@ public class GenericStateMachineGenerator {
    */
   protected CharSequence genDataDrivenTriggers(final ExpandedActorClass xpac, final State state, final boolean usesHdlr) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�genDoCodes(state)�");
-    _builder.newLine();
-    _builder.append("�var transitions = xpac.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)�");
-    _builder.newLine();
-    _builder.append("�FOR tr : transitions�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("if (�AbstractGenerator::getInstance().getTranslatedCode((tr as GuardedTransition).guard)�)");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("{");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�var chain = xpac.getChain(tr)�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("chain = �chain.genChainId�;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("catching_state = �chain.stateContext.genStateId�;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�IF chain.isHandler() && usesHdlr�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("is_handler = TRUE;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�IF tr!=transitions.last�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("else ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("�ENDFOR�");
-    _builder.newLine();
+    String _genDoCodes = this.genDoCodes(state);
+    _builder.append(_genDoCodes, "");
+    _builder.newLineIfNotEmpty();
+    List<Transition> _outgoingTransitionsHierarchical = this._roomExtensions.getOutgoingTransitionsHierarchical(xpac, state);
+    final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
+      public Boolean apply(final Transition t) {
+        return Boolean.valueOf((t instanceof GuardedTransition));
+      }
+    };
+    Iterable<Transition> transitions = IterableExtensions.<Transition>filter(_outgoingTransitionsHierarchical, _function);
+    _builder.newLineIfNotEmpty();
+    {
+      for(final Transition tr : transitions) {
+        _builder.append("if (");
+        AbstractGenerator _instance = AbstractGenerator.getInstance();
+        DetailCode _guard = ((GuardedTransition) tr).getGuard();
+        String _translatedCode = _instance.getTranslatedCode(_guard);
+        _builder.append(_translatedCode, "");
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        TransitionChain chain = xpac.getChain(tr);
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("chain = ");
+        String _genChainId = CodegenHelpers.getGenChainId(chain);
+        _builder.append(_genChainId, "	");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("catching_state = ");
+        State _stateContext = chain.getStateContext();
+        String _genStateId = CodegenHelpers.getGenStateId(_stateContext);
+        _builder.append(_genStateId, "	");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        {
+          boolean _and = false;
+          boolean _isHandler = chain.isHandler();
+          if (!_isHandler) {
+            _and = false;
+          } else {
+            _and = (_isHandler && usesHdlr);
+          }
+          if (_and) {
+            _builder.append("\t");
+            _builder.append("is_handler = TRUE;");
+            _builder.newLine();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+        {
+          Transition _last = IterableExtensions.<Transition>last(transitions);
+          boolean _notEquals = (!Objects.equal(tr, _last));
+          if (_notEquals) {
+            _builder.append("else ");
+            _builder.newLine();
+          }
+        }
+      }
+    }
     return _builder;
   }
   
@@ -944,58 +1341,96 @@ public class GenericStateMachineGenerator {
    */
   protected CharSequence genEventDrivenTriggers(final ExpandedActorClass xpac, final State state, final List<ActiveTrigger> atlist, final boolean usesHdlr) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR at : atlist�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("case �xpac.getTriggerCodeName(at)�:");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�var needData = at.hasGuard�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�IF needData�{ �langExt.getTypedDataDefinition(at.msg)��ENDIF�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�FOR tt : at.transitions SEPARATOR \" else \"�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("�var chain = xpac.getChain(tt)�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("�guard(chain.transition, at.trigger, xpac)�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("{");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("chain = �chain.genChainId�;");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("catching_state = �chain.stateContext.genStateId�;");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("�IF chain.isHandler() && usesHdlr�");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("is_handler = �langExt.booleanConstant(true)�;");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�ENDFOR�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�IF needData�}�ENDIF�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("break;");
-    _builder.newLine();
-    _builder.append("�ENDFOR�");
-    _builder.newLine();
+    {
+      for(final ActiveTrigger at : atlist) {
+        _builder.append("case ");
+        String _triggerCodeName = xpac.getTriggerCodeName(at);
+        _builder.append(_triggerCodeName, "");
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        boolean needData = ETriceGenUtil.hasGuard(at);
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        {
+          if (needData) {
+            _builder.append("{ ");
+            Message _msg = at.getMsg();
+            String _typedDataDefinition = this.langExt.getTypedDataDefinition(_msg);
+            _builder.append(_typedDataDefinition, "	");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        {
+          EList<TriggeredTransition> _transitions = at.getTransitions();
+          boolean _hasElements = false;
+          for(final TriggeredTransition tt : _transitions) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(" else ", "	");
+            }
+            _builder.append("\t");
+            TransitionChain chain = xpac.getChain(tt);
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            Transition _transition = chain.getTransition();
+            String _trigger = at.getTrigger();
+            CharSequence _guard = this.guard(_transition, _trigger, xpac);
+            _builder.append(_guard, "	");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("{");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("chain = ");
+            String _genChainId = CodegenHelpers.getGenChainId(chain);
+            _builder.append(_genChainId, "		");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("catching_state = ");
+            State _stateContext = chain.getStateContext();
+            String _genStateId = CodegenHelpers.getGenStateId(_stateContext);
+            _builder.append(_genStateId, "		");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            {
+              boolean _and = false;
+              boolean _isHandler = chain.isHandler();
+              if (!_isHandler) {
+                _and = false;
+              } else {
+                _and = (_isHandler && usesHdlr);
+              }
+              if (_and) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("is_handler = ");
+                String _booleanConstant = this.langExt.booleanConstant(true);
+                _builder.append(_booleanConstant, "		");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        {
+          if (needData) {
+            _builder.append("}");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append("break;");
+        _builder.newLine();
+      }
+    }
     _builder.append("default:");
     _builder.newLine();
     _builder.append("\t");
@@ -1104,13 +1539,19 @@ public class GenericStateMachineGenerator {
       };
       final Trigger tr = IterableExtensions.<Trigger>findFirst(_triggers, _function);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("�IF tr.hasGuard()�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("if (�AbstractGenerator::getInstance().getTranslatedCode(tr.guard.guard)�)");
-      _builder.newLine();
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        boolean _hasGuard = RoomHelpers.hasGuard(tr);
+        if (_hasGuard) {
+          _builder.append("if (");
+          AbstractGenerator _instance = AbstractGenerator.getInstance();
+          Guard _guard = tr.getGuard();
+          DetailCode _guard_1 = _guard.getGuard();
+          String _translatedCode = _instance.getTranslatedCode(_guard_1);
+          _builder.append(_translatedCode, "");
+          _builder.append(")");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -1134,20 +1575,29 @@ public class GenericStateMachineGenerator {
    */
   protected String genDoCodes(final State state) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�IF state.hasDoCode(true)�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�state.getDoCodeOperationName()�(�langExt.selfPointer(false)�);");
-    _builder.newLine();
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("�IF state.eContainer.eContainer instanceof State�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�genDoCodes(state.eContainer.eContainer as State)�");
-    _builder.newLine();
-    _builder.append("�ENDIF�");
-    _builder.newLine();
+    {
+      boolean _hasDoCode = RoomHelpers.hasDoCode(state, true);
+      if (_hasDoCode) {
+        String _doCodeOperationName = CodegenHelpers.getDoCodeOperationName(state);
+        _builder.append(_doCodeOperationName, "");
+        _builder.append("(");
+        String _selfPointer = this.langExt.selfPointer(false);
+        _builder.append(_selfPointer, "");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EObject _eContainer = state.eContainer();
+      EObject _eContainer_1 = _eContainer.eContainer();
+      if ((_eContainer_1 instanceof State)) {
+        EObject _eContainer_2 = state.eContainer();
+        EObject _eContainer_3 = _eContainer_2.eContainer();
+        String _genDoCodes = this.genDoCodes(((State) _eContainer_3));
+        _builder.append(_genDoCodes, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder.toString();
   }
   
@@ -1247,81 +1697,105 @@ public class GenericStateMachineGenerator {
         }
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("�IF !entry.empty�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF generateImplementation�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected�void �opScopePriv��entryOp�(�selfPtr�) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�entry�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected�void �entryOp�(�selfPtr�);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�IF !exit.empty�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF generateImplementation�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected�void �opScopePriv��exitOp�(�selfPtr�) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�exit�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected�void �exitOp�(�selfPtr�);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�IF !docode.empty�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF generateImplementation�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected� void �opScopePriv��doOp�(�selfPtr�) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�docode�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�langExt.accessLevelProtected�void �doOp�(�selfPtr�);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        boolean _isEmpty = entry.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          {
+            if (generateImplementation) {
+              String _accessLevelProtected = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected, "");
+              _builder.append("void ");
+              _builder.append(opScopePriv, "");
+              _builder.append(entryOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append(entry, "	");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            } else {
+              String _accessLevelProtected_1 = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected_1, "");
+              _builder.append("void ");
+              _builder.append(entryOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      {
+        boolean _isEmpty_1 = exit.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          {
+            if (generateImplementation) {
+              String _accessLevelProtected_2 = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected_2, "");
+              _builder.append("void ");
+              _builder.append(opScopePriv, "");
+              _builder.append(exitOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append(exit, "	");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            } else {
+              String _accessLevelProtected_3 = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected_3, "");
+              _builder.append("void ");
+              _builder.append(exitOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      {
+        boolean _isEmpty_2 = docode.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
+          {
+            if (generateImplementation) {
+              String _accessLevelProtected_4 = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected_4, "");
+              _builder.append(" void ");
+              _builder.append(opScopePriv, "");
+              _builder.append(doOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append(docode, "	");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            } else {
+              String _accessLevelProtected_5 = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected_5, "");
+              _builder.append("void ");
+              _builder.append(doOp, "");
+              _builder.append("(");
+              _builder.append(selfPtr, "");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
@@ -1363,59 +1837,112 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("/* state IDs */");
       _builder.newLine();
-      _builder.append("�xpac.genStateIdConstants�");
-      _builder.newLine();
+      String _genStateIdConstants = this.genStateIdConstants(xpac);
+      _builder.append(_genStateIdConstants, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/* transition chains */");
       _builder.newLine();
-      _builder.append("�xpac.genTransitionChainConstants�");
-      _builder.newLine();
+      String _genTransitionChainConstants = this.genTransitionChainConstants(xpac);
+      _builder.append(_genTransitionChainConstants, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/* triggers */");
       _builder.newLine();
-      _builder.append("�xpac.genTriggerConstants�");
+      String _genTriggerConstants = this.genTriggerConstants(xpac);
+      _builder.append(_genTriggerConstants, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.newLine();
-      _builder.append("�genExtraDecl(xpac)�");
-      _builder.newLine();
+      CharSequence _genExtraDecl = this.genExtraDecl(xpac);
+      _builder.append(_genExtraDecl, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/* Entry and Exit Codes */");
       _builder.newLine();
-      _builder.append("�FOR state : xpac.stateMachine.getStateList()�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF !langExt.usesInheritance || xpac.isOwnObject(state)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�xpac.genActionCodeMethods(state, false)�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine = xpac.getStateMachine();
+        List<State> _stateList = RoomHelpers.getStateList(_stateMachine);
+        for(final State state : _stateList) {
+          {
+            boolean _or_1 = false;
+            boolean _usesInheritance = this.langExt.usesInheritance();
+            boolean _not = (!_usesInheritance);
+            if (_not) {
+              _or_1 = true;
+            } else {
+              boolean _isOwnObject = xpac.isOwnObject(state);
+              _or_1 = (_not || _isOwnObject);
+            }
+            if (_or_1) {
+              CharSequence _genActionCodeMethods = this.genActionCodeMethods(xpac, state, false);
+              _builder.append(_genActionCodeMethods, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _builder.newLine();
       _builder.append("/* Action Codes */");
       _builder.newLine();
-      _builder.append("�FOR tr : xpac.stateMachine.allTransitionsRecursive�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�var start = xpac.getChain(tr).transition�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�langExt.accessLevelProtected�void �tr.getActionCodeOperationName()�(�langExt.selfPointer(ac.name, hasArgs)��IF hasArgs��constPointer(\"etRuntime::InterfaceItemBase\")� ifitem�transitionChainGenerator.generateArgumentList(xpac, tr)��ENDIF�);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        StateGraph _stateMachine_1 = xpac.getStateMachine();
+        List<Transition> _allTransitionsRecursive = RoomHelpers.getAllTransitionsRecursive(_stateMachine_1);
+        for(final Transition tr : _allTransitionsRecursive) {
+          {
+            boolean _and = false;
+            boolean _or_2 = false;
+            boolean _usesInheritance_1 = this.langExt.usesInheritance();
+            boolean _not_1 = (!_usesInheritance_1);
+            if (_not_1) {
+              _or_2 = true;
+            } else {
+              boolean _isOwnObject_1 = xpac.isOwnObject(tr);
+              _or_2 = (_not_1 || _isOwnObject_1);
+            }
+            if (!_or_2) {
+              _and = false;
+            } else {
+              DetailCode _action = tr.getAction();
+              boolean _hasDetailCode = RoomHelpers.hasDetailCode(_action);
+              _and = (_or_2 && _hasDetailCode);
+            }
+            if (_and) {
+              TransitionChain _chain = xpac.getChain(tr);
+              Transition start = _chain.getTransition();
+              _builder.newLineIfNotEmpty();
+              boolean _and_1 = false;
+              if (!(start instanceof NonInitialTransition)) {
+                _and_1 = false;
+              } else {
+                boolean _not_2 = (!(start instanceof GuardedTransition));
+                _and_1 = ((start instanceof NonInitialTransition) && _not_2);
+              }
+              boolean hasArgs = _and_1;
+              _builder.newLineIfNotEmpty();
+              String _accessLevelProtected = this.langExt.accessLevelProtected();
+              _builder.append(_accessLevelProtected, "");
+              _builder.append("void ");
+              String _actionCodeOperationName = CodegenHelpers.getActionCodeOperationName(tr);
+              _builder.append(_actionCodeOperationName, "");
+              _builder.append("(");
+              String _name_1 = ac.getName();
+              String _selfPointer = this.langExt.selfPointer(_name_1, hasArgs);
+              _builder.append(_selfPointer, "");
+              {
+                if (hasArgs) {
+                  String _constPointer = this.constPointer("etRuntime::InterfaceItemBase");
+                  _builder.append(_constPointer, "");
+                  _builder.append(" ifitem");
+                  String _generateArgumentList = this.transitionChainGenerator.generateArgumentList(xpac, tr);
+                  _builder.append(_generateArgumentList, "");
+                }
+              }
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _builder.newLine();
       _builder.append("private:");
       _builder.newLine();
@@ -1434,21 +1961,30 @@ public class GenericStateMachineGenerator {
       _builder.append("\t ");
       _builder.append("* @param to - the final parent state");
       _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("�IF usesHdlr�");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        if (usesHdlr) {
+          _builder.append("\t ");
+          _builder.append("* @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t ");
       _builder.append("*/");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("void exitTo(�self�int current, int to�IF usesHdlr�, �boolType� handler�ENDIF�);");
-      _builder.newLine();
+      _builder.append("void exitTo(");
+      _builder.append(self, "	");
+      _builder.append("int current, int to");
+      {
+        if (usesHdlr) {
+          _builder.append(", ");
+          String _boolType = this.boolType();
+          _builder.append(_boolType, "	");
+          _builder.append(" handler");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
@@ -1473,8 +2009,22 @@ public class GenericStateMachineGenerator {
       _builder.append("*/");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("int executeTransitionChain(�self�int chain�IF handleEvents�, �constPointer(\"etRuntime::InterfaceItemBase\")� ifitem, �langExt.voidPointer� generic_data�ENDIF�);");
-      _builder.newLine();
+      _builder.append("int executeTransitionChain(");
+      _builder.append(self, "	");
+      _builder.append("int chain");
+      {
+        if (handleEvents) {
+          _builder.append(", ");
+          String _constPointer_1 = this.constPointer("etRuntime::InterfaceItemBase");
+          _builder.append(_constPointer_1, "	");
+          _builder.append(" ifitem, ");
+          String _voidPointer = this.langExt.voidPointer();
+          _builder.append(_voidPointer, "	");
+          _builder.append(" generic_data");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
@@ -1486,15 +2036,13 @@ public class GenericStateMachineGenerator {
       _builder.append("\t ");
       _builder.append("* @param state - the state which is entered");
       _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("�IF usesHdlr�");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param handler - entry code is executed if not handler");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      {
+        if (usesHdlr) {
+          _builder.append("\t ");
+          _builder.append("* @param handler - entry code is executed if not handler");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t ");
       _builder.append("* @return - the ID of the final leaf state");
       _builder.newLine();
@@ -1502,23 +2050,50 @@ public class GenericStateMachineGenerator {
       _builder.append("*/");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("int enterHistory(�self�int state�IF usesHdlr�, �boolType� handler�ENDIF�);");
-      _builder.newLine();
+      _builder.append("int enterHistory(");
+      _builder.append(self, "	");
+      _builder.append("int state");
+      {
+        if (usesHdlr) {
+          _builder.append(", ");
+          String _boolType_1 = this.boolType();
+          _builder.append(_boolType_1, "	");
+          _builder.append(" handler");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("public:");
       _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("void executeInitTransition(�langExt.selfPointer(ac.name, false)�);");
-      _builder.newLine();
+      _builder.append("void executeInitTransition(");
+      String _name_2 = ac.getName();
+      String _selfPointer_1 = this.langExt.selfPointer(_name_2, false);
+      _builder.append(_selfPointer_1, "	");
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* receiveEvent contains the main implementation of the FSM */");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("void receiveEvent(�langExt.selfPointer(ac.name, handleEvents)��IF handleEvents�etRuntime::InterfaceItemBase* ifitem, int evt, �langExt.voidPointer� generic_data�ENDIF�);");
-      _builder.newLine();
+      _builder.append("void receiveEvent(");
+      String _name_3 = ac.getName();
+      String _selfPointer_2 = this.langExt.selfPointer(_name_3, handleEvents);
+      _builder.append(_selfPointer_2, "	");
+      {
+        if (handleEvents) {
+          _builder.append("etRuntime::InterfaceItemBase* ifitem, int evt, ");
+          String _voidPointer_1 = this.langExt.voidPointer();
+          _builder.append(_voidPointer_1, "	");
+          _builder.append(" generic_data");
+        }
+      }
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _xblockexpression = (_builder);
     }
     return _xblockexpression;

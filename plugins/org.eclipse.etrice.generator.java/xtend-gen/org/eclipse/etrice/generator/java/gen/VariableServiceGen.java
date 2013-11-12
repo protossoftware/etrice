@@ -14,11 +14,13 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
@@ -41,9 +43,11 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -110,8 +114,12 @@ public class VariableServiceGen {
       IterableExtensions.<ActorInstance>forEach(_allContainedInstances, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
-      _builder.append("package �comp.subSystemClass.getPackage()�;");
-      _builder.newLine();
+      _builder.append("package ");
+      SubSystemClass _subSystemClass = comp.getSubSystemClass();
+      String _package = this.roomExt.getPackage(_subSystemClass);
+      _builder.append(_package, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("import java.util.Arrays;");
       _builder.newLine();
@@ -121,46 +129,68 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("import org.eclipse.etrice.runtime.java.config.AbstractVariableService;");
       _builder.newLine();
-      _builder.append("�configExt.getUserCode1(comp)�");
+      String _userCode1 = this.configExt.getUserCode1(comp);
+      _builder.append(_userCode1, "");
+      _builder.newLineIfNotEmpty();
+      {
+        Set<ActorInstance> _keySet = aisAttrMap.keySet();
+        HashSet<RoomModel> _roomModels = this.getRoomModels(_keySet);
+        for(final RoomModel model : _roomModels) {
+          _builder.append("import ");
+          String _name = model.getName();
+          _builder.append(_name, "");
+          _builder.append(".*;");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
-      _builder.append("�FOR model : aisAttrMap.keySet.roomModels�");
+      _builder.newLine();
+      _builder.append("public class ");
+      _builder.append(clsname, "");
+      _builder.append("VariableService extends AbstractVariableService{");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("import �model.name�.*;");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("public class �clsname�VariableService extends AbstractVariableService{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("private �clsname� subSystem;");
-      _builder.newLine();
+      _builder.append("private ");
+      _builder.append(clsname, "	");
+      _builder.append(" subSystem;");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// Actor instances");
       _builder.newLine();
+      {
+        Set<ActorInstance> _keySet_1 = aisAttrMap.keySet();
+        for(final ActorInstance ai : _keySet_1) {
+          _builder.append("\t");
+          _builder.append("private ");
+          ActorClass _actorClass = ai.getActorClass();
+          String _name_1 = _actorClass.getName();
+          _builder.append(_name_1, "	");
+          _builder.append(" ");
+          CharSequence _varName = this.getVarName(ai);
+          _builder.append(_varName, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
-      _builder.append("�FOR ai : aisAttrMap.keySet�");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public ");
+      _builder.append(clsname, "	");
+      _builder.append("VariableService(");
+      _builder.append(clsname, "	");
+      _builder.append(" subSystem) {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("private �ai.actorClass.name� �ai.varName�;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public �clsname�VariableService(�clsname� subSystem) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("super(�configExt.getUserCode2(comp)�);");
-      _builder.newLine();
+      _builder.append("super(");
+      String _userCode2 = this.configExt.getUserCode2(comp);
+      _builder.append(_userCode2, "		");
+      _builder.append(");");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("this.subSystem = subSystem;");
       _builder.newLine();
@@ -175,15 +205,23 @@ public class VariableServiceGen {
       _builder.append("\t");
       _builder.append("protected void initInstances(){");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR ai : aisAttrMap.keySet�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ai.varName� = (�ai.actorClass.name�)subSystem.getInstance(\"�ai.path�\");");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        Set<ActorInstance> _keySet_2 = aisAttrMap.keySet();
+        for(final ActorInstance ai_1 : _keySet_2) {
+          _builder.append("\t\t");
+          CharSequence _varName_1 = this.getVarName(ai_1);
+          _builder.append(_varName_1, "		");
+          _builder.append(" = (");
+          ActorClass _actorClass_1 = ai_1.getActorClass();
+          String _name_2 = _actorClass_1.getName();
+          _builder.append(_name_2, "		");
+          _builder.append(")subSystem.getInstance(\"");
+          String _path = ai_1.getPath();
+          _builder.append(_path, "		");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -204,54 +242,83 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR ai : aisAttrMap.keySet�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�FOR a : aisAttrMap.get(ai)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("try{");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("boolean changed = false;");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�genSetAttributeValues1(new ArrayList<Attribute>.union(a), ai)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("if(changed)");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("synchronized(�ai.varName�.�invokeGetter(a.name+\"Lock\", null)�){");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("if(�ai.varName�.�invokeGetter(a.name+\"Lock\", null)�.isUpdate()){");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t\t");
-      _builder.append("�genSetAttributeValues2(new ArrayList<Attribute>.union(a), ai)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}catch(IllegalArgumentException e){");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("error(id, e);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        Set<ActorInstance> _keySet_3 = aisAttrMap.keySet();
+        for(final ActorInstance ai_2 : _keySet_3) {
+          {
+            List<Attribute> _get = aisAttrMap.get(ai_2);
+            for(final Attribute a : _get) {
+              _builder.append("\t\t");
+              _builder.append("try{");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("boolean changed = false;");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+              List<Attribute> _union = this.roomExt.<Attribute>union(_arrayList, a);
+              CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai_2);
+              _builder.append(_genSetAttributeValues1, "			");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("if(changed)");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("synchronized(");
+              CharSequence _varName_2 = this.getVarName(ai_2);
+              _builder.append(_varName_2, "				");
+              _builder.append(".");
+              String _name_3 = a.getName();
+              String _plus = (_name_3 + "Lock");
+              CharSequence _invokeGetter = this.helpers.invokeGetter(_plus, null);
+              _builder.append(_invokeGetter, "				");
+              _builder.append("){");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("if(");
+              CharSequence _varName_3 = this.getVarName(ai_2);
+              _builder.append(_varName_3, "					");
+              _builder.append(".");
+              String _name_4 = a.getName();
+              String _plus_1 = (_name_4 + "Lock");
+              CharSequence _invokeGetter_1 = this.helpers.invokeGetter(_plus_1, null);
+              _builder.append(_invokeGetter_1, "					");
+              _builder.append(".isUpdate()){");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t\t");
+              ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
+              List<Attribute> _union_1 = this.roomExt.<Attribute>union(_arrayList_1, a);
+              CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union_1, ai_2);
+              _builder.append(_genSetAttributeValues2, "						");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("}catch(IllegalArgumentException e){");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("error(id, e);");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -266,21 +333,22 @@ public class VariableServiceGen {
       _builder.append("\t\t");
       _builder.append("Map<String, Object> values = new HashMap<String, Object>();");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR ai : aisAttrMap.keySet�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�FOR a : aisAttrMap.get(ai)�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�genGetAttributeValues(new ArrayList<Attribute>.union(a), ai)�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        Set<ActorInstance> _keySet_4 = aisAttrMap.keySet();
+        for(final ActorInstance ai_3 : _keySet_4) {
+          {
+            List<Attribute> _get_1 = aisAttrMap.get(ai_3);
+            for(final Attribute a_1 : _get_1) {
+              _builder.append("\t\t");
+              ArrayList<Attribute> _arrayList_2 = new ArrayList<Attribute>();
+              List<Attribute> _union_2 = this.roomExt.<Attribute>union(_arrayList_2, a_1);
+              CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union_2, ai_3);
+              _builder.append(_genGetAttributeValues, "		");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
@@ -298,20 +366,26 @@ public class VariableServiceGen {
       _builder.append("public void writeDataClass(String id, Object dcObject, Map<String, Object> writeMap) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("�var dataClasses = aisAttrMap.keySet.dynConfigDataClasses�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR dc : dataClasses�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("if(dcObject.getClass().equals(�dc.typeName�.class))");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("writeDataClass(id, (�dc.typeName�) dcObject, writeTasks);");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      Set<ActorInstance> _keySet_5 = aisAttrMap.keySet();
+      HashSet<DataClass> dataClasses = this.getDynConfigDataClasses(_keySet_5);
+      _builder.newLineIfNotEmpty();
+      {
+        for(final DataClass dc : dataClasses) {
+          _builder.append("\t\t");
+          _builder.append("if(dcObject.getClass().equals(");
+          String _typeName = this._typeHelpers.typeName(dc);
+          _builder.append(_typeName, "		");
+          _builder.append(".class))");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("writeDataClass(id, (");
+          String _typeName_1 = this._typeHelpers.typeName(dc);
+          _builder.append(_typeName_1, "			");
+          _builder.append(") dcObject, writeTasks);");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -322,39 +396,70 @@ public class VariableServiceGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�FOR dc : getAllDataClasses(dataClasses)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("private void writeDataClass(String id, �dc.typeName� object, Map<String, Object> map){");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�FOR a : dc.allAttributes�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�IF a.type.type.primitive�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("map.put(id+\"/�a.name�\", �IF a.size>0�toObjectArray(�ENDIF�object.�invokeGetter(a.name, null)��IF a.size>0�)�ENDIF�);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("writeDataClass(id+\"/�a.name�\", object.�invokeGetter(a.name, null)�, map);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        HashSet<DataClass> _allDataClasses = this.getAllDataClasses(dataClasses);
+        for(final DataClass dc_1 : _allDataClasses) {
+          _builder.append("\t");
+          _builder.append("private void writeDataClass(String id, ");
+          String _typeName_2 = this._typeHelpers.typeName(dc_1);
+          _builder.append(_typeName_2, "	");
+          _builder.append(" object, Map<String, Object> map){");
+          _builder.newLineIfNotEmpty();
+          {
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc_1);
+            for(final Attribute a_2 : _allAttributes) {
+              {
+                RefableType _type = a_2.getType();
+                DataType _type_1 = _type.getType();
+                boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
+                if (_isPrimitive) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("map.put(id+\"/");
+                  String _name_5 = a_2.getName();
+                  _builder.append(_name_5, "		");
+                  _builder.append("\", ");
+                  {
+                    int _size = a_2.getSize();
+                    boolean _greaterThan = (_size > 0);
+                    if (_greaterThan) {
+                      _builder.append("toObjectArray(");
+                    }
+                  }
+                  _builder.append("object.");
+                  String _name_6 = a_2.getName();
+                  CharSequence _invokeGetter_2 = this.helpers.invokeGetter(_name_6, null);
+                  _builder.append(_invokeGetter_2, "		");
+                  {
+                    int _size_1 = a_2.getSize();
+                    boolean _greaterThan_1 = (_size_1 > 0);
+                    if (_greaterThan_1) {
+                      _builder.append(")");
+                    }
+                  }
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("writeDataClass(id+\"/");
+                  String _name_7 = a_2.getName();
+                  _builder.append(_name_7, "		");
+                  _builder.append("\", object.");
+                  String _name_8 = a_2.getName();
+                  CharSequence _invokeGetter_3 = this.helpers.invokeGetter(_name_8, null);
+                  _builder.append(_invokeGetter_3, "		");
+                  _builder.append(", map);");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
@@ -364,8 +469,11 @@ public class VariableServiceGen {
       _builder.append("protected int getPollingTimerUser(){");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("return �configExt.getPollingTimerUser(comp)�;");
-      _builder.newLine();
+      _builder.append("return ");
+      int _pollingTimerUser = this.configExt.getPollingTimerUser(comp);
+      _builder.append(_pollingTimerUser, "		");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -396,11 +504,56 @@ public class VariableServiceGen {
       }
       if (_or) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("�IF a.size>0�for(�a.type.type.typeName� e : �aVarName�)");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("�ENDIF�checkMinMax(�IF a.size>0�e�ELSE��aVarName��ENDIF�, �IF min��ac.name�.MIN�aVarName��ELSE�null�ENDIF�, �IF max��ac.name�.MAX�aVarName��ELSE�null�ENDIF�);");
-        _builder.newLine();
+        {
+          int _size = a.getSize();
+          boolean _greaterThan = (_size > 0);
+          if (_greaterThan) {
+            _builder.append("for(");
+            RefableType _type = a.getType();
+            DataType _type_1 = _type.getType();
+            String _typeName = this._typeHelpers.typeName(_type_1);
+            _builder.append(_typeName, "");
+            _builder.append(" e : ");
+            _builder.append(aVarName, "");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+          }
+        }
+        _builder.append("checkMinMax(");
+        {
+          int _size_1 = a.getSize();
+          boolean _greaterThan_1 = (_size_1 > 0);
+          if (_greaterThan_1) {
+            _builder.append("e");
+          } else {
+            _builder.append(aVarName, "");
+          }
+        }
+        _builder.append(", ");
+        {
+          if (min) {
+            String _name = ac.getName();
+            _builder.append(_name, "");
+            _builder.append(".MIN");
+            _builder.append(aVarName, "");
+          } else {
+            _builder.append("null");
+          }
+        }
+        _builder.append(", ");
+        {
+          if (max) {
+            String _name_1 = ac.getName();
+            _builder.append(_name_1, "");
+            _builder.append(".MAX");
+            _builder.append(aVarName, "");
+          } else {
+            _builder.append("null");
+          }
+        }
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
         _xifexpression = _builder;
       }
       _xblockexpression = (_xifexpression);
@@ -484,14 +637,33 @@ public class VariableServiceGen {
   
   private String toAbsolutePath(final List<Attribute> path, final String pathDelim) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR p : path��pathDelim��p.name��ENDFOR�");
+    {
+      for(final Attribute p : path) {
+        _builder.append(pathDelim, "");
+        String _name = p.getName();
+        _builder.append(_name, "");
+      }
+    }
     String _string = _builder.toString();
     return _string;
   }
   
   private CharSequence getVarName(final ActorInstance ai) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR p : ai.path.split(\'/\').drop(2) SEPARATOR \'_\'��p��ENDFOR�");
+    {
+      String _path = ai.getPath();
+      String[] _split = _path.split("/");
+      Iterable<String> _drop = IterableExtensions.<String>drop(((Iterable<String>)Conversions.doWrapArray(_split)), 2);
+      boolean _hasElements = false;
+      for(final String p : _drop) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate("_", "");
+        }
+        _builder.append(p, "");
+      }
+    }
     return _builder;
   }
   
@@ -505,8 +677,33 @@ public class VariableServiceGen {
       boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("values.put(\"�ai.path��path.toAbsolutePath(\'/\')�\", �IF a.size>0�toObjectArray(�ENDIF��ai.varName�.�path.invokeGetters(null)��IF a.size>0�)�ENDIF�);");
-        _builder.newLine();
+        _builder.append("values.put(\"");
+        String _path = ai.getPath();
+        _builder.append(_path, "");
+        String _absolutePath = this.toAbsolutePath(path, "/");
+        _builder.append(_absolutePath, "");
+        _builder.append("\", ");
+        {
+          int _size = a.getSize();
+          boolean _greaterThan = (_size > 0);
+          if (_greaterThan) {
+            _builder.append("toObjectArray(");
+          }
+        }
+        CharSequence _varName = this.getVarName(ai);
+        _builder.append(_varName, "");
+        _builder.append(".");
+        CharSequence _invokeGetters = this.helpers.invokeGetters(path, null);
+        _builder.append(_invokeGetters, "");
+        {
+          int _size_1 = a.getSize();
+          boolean _greaterThan_1 = (_size_1 > 0);
+          if (_greaterThan_1) {
+            _builder.append(")");
+          }
+        }
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
         _xifexpression = _builder;
       } else {
         CharSequence _xifexpression_1 = null;
@@ -520,13 +717,15 @@ public class VariableServiceGen {
             DataType _type_5 = _type_4.getType();
             DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder_1 = new StringConcatenation();
-            _builder_1.append("�FOR at : dataClass.allAttributes�");
-            _builder_1.newLine();
-            _builder_1.append("\t");
-            _builder_1.append("�genGetAttributeValues(path.union(at), ai)�");
-            _builder_1.newLine();
-            _builder_1.append("�ENDFOR�");
-            _builder_1.newLine();
+            {
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              for(final Attribute at : _allAttributes) {
+                List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
+                CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
+                _builder_1.append(_genGetAttributeValues, "");
+                _builder_1.newLineIfNotEmpty();
+              }
+            }
             _xblockexpression_1 = (_builder_1);
           }
           _xifexpression_1 = _xblockexpression_1;
@@ -549,23 +748,104 @@ public class VariableServiceGen {
       boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
       if (_isPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("id = \"�ai.path��path.toAbsolutePath(\"/\")�\";");
-        _builder.newLine();
-        _builder.append("�IF a.size==0��a.type.type.typeName.toWrapper��ELSE��a.type.type.typeName�[]�ENDIF� �aVarName� = null;");
-        _builder.newLine();
+        _builder.append("id = \"");
+        String _path = ai.getPath();
+        _builder.append(_path, "");
+        String _absolutePath = this.toAbsolutePath(path, "/");
+        _builder.append(_absolutePath, "");
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+        {
+          int _size = a.getSize();
+          boolean _equals = (_size == 0);
+          if (_equals) {
+            RefableType _type_2 = a.getType();
+            DataType _type_3 = _type_2.getType();
+            String _typeName = this._typeHelpers.typeName(_type_3);
+            String _wrapper = this.stdExt.toWrapper(_typeName);
+            _builder.append(_wrapper, "");
+          } else {
+            RefableType _type_4 = a.getType();
+            DataType _type_5 = _type_4.getType();
+            String _typeName_1 = this._typeHelpers.typeName(_type_5);
+            _builder.append(_typeName_1, "");
+            _builder.append("[]");
+          }
+        }
+        _builder.append(" ");
+        _builder.append(aVarName, "");
+        _builder.append(" = null;");
+        _builder.newLineIfNotEmpty();
         _builder.append("object = values.get(id);");
         _builder.newLine();
         _builder.append("if(object != null){");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("�aVarName� = ensure�a.type.type.typeName.toFirstUpper��IF a.size>0�Array�ENDIF�(object�IF a.size>0�, �a.size��ENDIF�);");
-        _builder.newLine();
+        _builder.append(aVarName, "	");
+        _builder.append(" = ensure");
+        RefableType _type_6 = a.getType();
+        DataType _type_7 = _type_6.getType();
+        String _typeName_2 = this._typeHelpers.typeName(_type_7);
+        String _firstUpper = StringExtensions.toFirstUpper(_typeName_2);
+        _builder.append(_firstUpper, "	");
+        {
+          int _size_1 = a.getSize();
+          boolean _greaterThan = (_size_1 > 0);
+          if (_greaterThan) {
+            _builder.append("Array");
+          }
+        }
+        _builder.append("(object");
+        {
+          int _size_2 = a.getSize();
+          boolean _greaterThan_1 = (_size_2 > 0);
+          if (_greaterThan_1) {
+            _builder.append(", ");
+            int _size_3 = a.getSize();
+            _builder.append(_size_3, "	");
+          }
+        }
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("�genMinMaxCheck(path, ai.actorClass)�");
-        _builder.newLine();
+        ActorClass _actorClass = ai.getActorClass();
+        CharSequence _genMinMaxCheck = this.genMinMaxCheck(path, _actorClass);
+        _builder.append(_genMinMaxCheck, "	");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("if(!�IF a.size==0��aVarName�.equals(�ELSE�Arrays.equals(�aVarName�, �ENDIF�(�IF a.size==0��a.type.type.typeName.toWrapper��ELSE��a.type.type.typeName�[]�ENDIF�)getDiffMap().get(id)))");
-        _builder.newLine();
+        _builder.append("if(!");
+        {
+          int _size_4 = a.getSize();
+          boolean _equals_1 = (_size_4 == 0);
+          if (_equals_1) {
+            _builder.append(aVarName, "	");
+            _builder.append(".equals(");
+          } else {
+            _builder.append("Arrays.equals(");
+            _builder.append(aVarName, "	");
+            _builder.append(", ");
+          }
+        }
+        _builder.append("(");
+        {
+          int _size_5 = a.getSize();
+          boolean _equals_2 = (_size_5 == 0);
+          if (_equals_2) {
+            RefableType _type_8 = a.getType();
+            DataType _type_9 = _type_8.getType();
+            String _typeName_3 = this._typeHelpers.typeName(_type_9);
+            String _wrapper_1 = this.stdExt.toWrapper(_typeName_3);
+            _builder.append(_wrapper_1, "	");
+          } else {
+            RefableType _type_10 = a.getType();
+            DataType _type_11 = _type_10.getType();
+            String _typeName_4 = this._typeHelpers.typeName(_type_11);
+            _builder.append(_typeName_4, "	");
+            _builder.append("[]");
+          }
+        }
+        _builder.append(")getDiffMap().get(id)))");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("changed = true;");
         _builder.newLine();
@@ -577,23 +857,25 @@ public class VariableServiceGen {
         _xifexpression = _builder;
       } else {
         CharSequence _xifexpression_1 = null;
-        RefableType _type_2 = a.getType();
-        DataType _type_3 = _type_2.getType();
-        boolean _isDataClass = this._typeHelpers.isDataClass(_type_3);
+        RefableType _type_12 = a.getType();
+        DataType _type_13 = _type_12.getType();
+        boolean _isDataClass = this._typeHelpers.isDataClass(_type_13);
         if (_isDataClass) {
           CharSequence _xblockexpression_1 = null;
           {
-            RefableType _type_4 = a.getType();
-            DataType _type_5 = _type_4.getType();
-            DataClass dataClass = ((DataClass) _type_5);
+            RefableType _type_14 = a.getType();
+            DataType _type_15 = _type_14.getType();
+            DataClass dataClass = ((DataClass) _type_15);
             StringConcatenation _builder_1 = new StringConcatenation();
-            _builder_1.append("�FOR at : dataClass.allAttributes�");
-            _builder_1.newLine();
-            _builder_1.append("\t");
-            _builder_1.append("�genSetAttributeValues1(path.union(at), ai)�");
-            _builder_1.newLine();
-            _builder_1.append("�ENDFOR�");
-            _builder_1.newLine();
+            {
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              for(final Attribute at : _allAttributes) {
+                List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
+                CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
+                _builder_1.append(_genSetAttributeValues1, "");
+                _builder_1.newLineIfNotEmpty();
+              }
+            }
             _xblockexpression_1 = (_builder_1);
           }
           _xifexpression_1 = _xblockexpression_1;
@@ -632,14 +914,30 @@ public class VariableServiceGen {
           }
           final String getters = _xifexpression_1;
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("if(�aVarName� != null){");
-          _builder.newLine();
+          _builder.append("if(");
+          _builder.append(aVarName, "");
+          _builder.append(" != null){");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("�ai.varName�.�getters��invokeSetter(a.name, null, aVarName)�;");
-          _builder.newLine();
+          CharSequence _varName = this.getVarName(ai);
+          _builder.append(_varName, "	");
+          _builder.append(".");
+          _builder.append(getters, "	");
+          String _name = a.getName();
+          CharSequence _invokeSetter = this.helpers.invokeSetter(_name, null, aVarName);
+          _builder.append(_invokeSetter, "	");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("getDiffMap().put(\"�ai.path��path.toAbsolutePath(\"/\")�\", �aVarName�);");
-          _builder.newLine();
+          _builder.append("getDiffMap().put(\"");
+          String _path = ai.getPath();
+          _builder.append(_path, "	");
+          String _absolutePath = this.toAbsolutePath(path, "/");
+          _builder.append(_absolutePath, "	");
+          _builder.append("\", ");
+          _builder.append(aVarName, "	");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
           _builder.append("}");
           _builder.newLine();
           _xblockexpression_1 = (_builder);
@@ -657,13 +955,15 @@ public class VariableServiceGen {
             DataType _type_5 = _type_4.getType();
             final DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder = new StringConcatenation();
-            _builder.append("�FOR at : dataClass.allAttributes�");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("�genSetAttributeValues2(path.union(at), ai)�");
-            _builder.newLine();
-            _builder.append("�ENDFOR�");
-            _builder.newLine();
+            {
+              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              for(final Attribute at : _allAttributes) {
+                List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
+                CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);
+                _builder.append(_genSetAttributeValues2, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             _xblockexpression_2 = (_builder);
           }
           _xifexpression_1 = _xblockexpression_2;

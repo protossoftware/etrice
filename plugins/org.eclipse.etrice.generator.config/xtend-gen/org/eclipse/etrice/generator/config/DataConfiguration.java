@@ -110,7 +110,12 @@ public class DataConfiguration implements IDataConfiguration {
     AttrClassConfig _xblockexpression = null;
     {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/�actor.name�/�path.toStringPath�");
+      _builder.append("/");
+      String _name = actor.getName();
+      _builder.append(_name, "");
+      _builder.append("/");
+      String _stringPath = this.toStringPath(path);
+      _builder.append(_stringPath, "");
       String id = _builder.toString();
       AttrClassConfig _get = DataConfigurationHelper.actorClassAttrMap.get(id);
       _xblockexpression = (_get);
@@ -122,7 +127,20 @@ public class DataConfiguration implements IDataConfiguration {
     String _xblockexpression = null;
     {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/�pc.name�/�IF regular�regular�ELSE�conjugated�ENDIF�/�path.toStringPath�");
+      _builder.append("/");
+      String _name = pc.getName();
+      _builder.append(_name, "");
+      _builder.append("/");
+      {
+        if (regular) {
+          _builder.append("regular");
+        } else {
+          _builder.append("conjugated");
+        }
+      }
+      _builder.append("/");
+      String _stringPath = this.toStringPath(path);
+      _builder.append(_stringPath, "");
       String id = _builder.toString();
       String _stringExpr = null;
       AttrClassConfig _get = DataConfigurationHelper.protocolClassAttrMap.get(id);
@@ -140,7 +158,18 @@ public class DataConfiguration implements IDataConfiguration {
   
   private String toStringPath(final List<Attribute> path) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR a : path SEPARATOR \'/\'��a.name��ENDFOR�");
+    {
+      boolean _hasElements = false;
+      for(final Attribute a : path) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate("/", "");
+        }
+        String _name = a.getName();
+        _builder.append(_name, "");
+      }
+    }
     String _string = _builder.toString();
     return _string;
   }
@@ -245,7 +274,10 @@ public class DataConfiguration implements IDataConfiguration {
     boolean _notEquals = (!Objects.equal(_filePath, null));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("new ConfigSourceFile(\"�dynConfig.filePath�\")");
+      _builder.append("new ConfigSourceFile(\"");
+      String _filePath_1 = dynConfig.getFilePath();
+      _builder.append(_filePath_1, "");
+      _builder.append("\")");
       _xifexpression = _builder.toString();
     } else {
       String _userCode2 = null;
@@ -310,7 +342,19 @@ public class DataConfiguration implements IDataConfiguration {
   
   private String toStringExpr(final LiteralArray literal) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR l : literal.literals SEPARATOR \',\'��l.toStringExpr��ENDFOR�");
+    {
+      EList<Literal> _literals = literal.getLiterals();
+      boolean _hasElements = false;
+      for(final Literal l : _literals) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(",", "");
+        }
+        String _stringExpr = this.toStringExpr(l);
+        _builder.append(_stringExpr, "");
+      }
+    }
     String _string = _builder.toString();
     return _string;
   }

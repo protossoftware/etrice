@@ -18,7 +18,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
+import org.eclipse.etrice.generator.java.Main;
+import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @Singleton
@@ -44,90 +47,95 @@ public class StateMachineGen extends GenericStateMachineGenerator {
         _while = _notEquals_1;
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\t\t");
-      _builder.append("�IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("// state names");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("protected static final String stateStrings[] = {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("\"<no state>\",");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("\"<top>\",");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�FOR state : states SEPARATOR \",\"�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("\"�state.genStatePathName�\"");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("};");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("���\t \tTODOHRR: history defined in ActorClassBase, init in constructor");
-      _builder.newLine();
-      _builder.append("���\t\t\thistory = new int[5];");
-      _builder.newLine();
-      _builder.append("���\t\t\tfor (int i = 0; i < history.length; i++) {");
-      _builder.newLine();
-      _builder.append("���\t\t\t\thistory[i] = NO_STATE;");
-      _builder.newLine();
-      _builder.append("���\t\t\t}");
-      _builder.newLine();
-      _builder.append("\t\t");
+      {
+        boolean _or = false;
+        GlobalSettings _settings = Main.getSettings();
+        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation) {
+          _or = true;
+        } else {
+          GlobalSettings _settings_1 = Main.getSettings();
+          boolean _generateWithVerboseOutput = _settings_1.generateWithVerboseOutput();
+          _or = (_generateMSCInstrumentation || _generateWithVerboseOutput);
+        }
+        if (_or) {
+          _builder.append("// state names");
+          _builder.newLine();
+          _builder.append("protected static final String stateStrings[] = {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\"<no state>\",");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\"<top>\",");
+          _builder.newLine();
+          {
+            boolean _hasElements = false;
+            for(final State state : states) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(",", "	");
+              }
+              _builder.append("\t");
+              _builder.append("\"");
+              String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+              _builder.append(_genStatePathName, "	");
+              _builder.append("\"");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("};");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+        }
+      }
       _builder.append("// history");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("protected int history[] = {NO_STATE, NO_STATE�FOR state : states�, NO_STATE�ENDFOR�};");
+      _builder.append("protected int history[] = {NO_STATE, NO_STATE");
+      {
+        for(final State state_1 : states) {
+          _builder.append(", NO_STATE");
+        }
+      }
+      _builder.append("};");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
       _builder.append("private void setState(int new_state) {");
       _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�IF Main::settings.generateMSCInstrumentation�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�IF Main::settings.generateWithVerboseOutput�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("System.out.println(\"state switch of \"+getInstancePath() + \": \"");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t\t\t");
-      _builder.append("+ stateStrings[this.state] + \" -> \" + stateStrings[new_state]);");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("}\t");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
+      {
+        GlobalSettings _settings_2 = Main.getSettings();
+        boolean _generateMSCInstrumentation_1 = _settings_2.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_1) {
+          _builder.append("\t");
+          _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
+          _builder.newLine();
+        }
+      }
+      {
+        GlobalSettings _settings_3 = Main.getSettings();
+        boolean _generateWithVerboseOutput_1 = _settings_3.generateWithVerboseOutput();
+        if (_generateWithVerboseOutput_1) {
+          _builder.append("\t");
+          _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("System.out.println(\"state switch of \"+getInstancePath() + \": \"");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t\t\t");
+          _builder.append("+ stateStrings[this.state] + \" -> \" + stateStrings[new_state]);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}\t");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
       _builder.append("this.state = new_state;");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
       _xblockexpression = (_builder);

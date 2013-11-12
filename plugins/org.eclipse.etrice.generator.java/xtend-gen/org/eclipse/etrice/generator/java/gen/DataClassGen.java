@@ -17,7 +17,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
@@ -82,94 +87,137 @@ public class DataClassGen {
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package �dc.getPackage()�;");
-      _builder.newLine();
+      _builder.append("package ");
+      String _package = this._roomExtensions.getPackage(dc);
+      _builder.append(_package, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
       _builder.newLine();
       _builder.append("import java.io.Serializable;");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("�var models = root.getReferencedModels(dc)�");
+      EList<RoomModel> models = root.getReferencedModels(dc);
+      _builder.newLineIfNotEmpty();
+      {
+        for(final RoomModel model : models) {
+          _builder.append("import ");
+          String _name = model.getName();
+          _builder.append(_name, "");
+          _builder.append(".*;");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
-      _builder.append("�FOR model : models�import �model.name�.*;");
-      _builder.newLine();
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("�dc.userCode(1)�");
+      CharSequence _userCode = this._procedureHelpers.userCode(dc, 1);
+      _builder.append(_userCode, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.newLine();
-      _builder.newLine();
-      _builder.append("public class �dc.name��IF dc.base!=null� extends �dc.base.name��ENDIF� implements Serializable {");
-      _builder.newLine();
+      _builder.append("public class ");
+      String _name_1 = dc.getName();
+      _builder.append(_name_1, "");
+      {
+        DataClass _base = dc.getBase();
+        boolean _notEquals = (!Objects.equal(_base, null));
+        if (_notEquals) {
+          _builder.append(" extends ");
+          DataClass _base_1 = dc.getBase();
+          String _name_2 = _base_1.getName();
+          _builder.append(_name_2, "");
+        }
+      }
+      _builder.append(" implements Serializable {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("private static final long serialVersionUID = �(dc.package+dc.name).hashCode�L;");
-      _builder.newLine();
+      _builder.append("private static final long serialVersionUID = ");
+      String _package_1 = this._roomExtensions.getPackage(dc);
+      String _name_3 = dc.getName();
+      String _plus = (_package_1 + _name_3);
+      int _hashCode = _plus.hashCode();
+      _builder.append(_hashCode, "	");
+      _builder.append("L;");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�dc.userCode(2)�");
-      _builder.newLine();
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(dc, 2);
+      _builder.append(_userCode_1, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�dc.attributes.attributes�");
-      _builder.newLine();
+      EList<Attribute> _attributes = dc.getAttributes();
+      CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
+      _builder.append(_attributes_1, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�dc.attributes.attributeSettersGettersImplementation(dc.name)�");
-      _builder.newLine();
+      EList<Attribute> _attributes_2 = dc.getAttributes();
+      String _name_4 = dc.getName();
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_4);
+      _builder.append(_attributeSettersGettersImplementation, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("�dc.operations.operationsImplementation(dc.name)�");
-      _builder.newLine();
+      EList<StandardOperation> _operations_1 = dc.getOperations();
+      String _name_5 = dc.getName();
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations_1, _name_5);
+      _builder.append(_operationsImplementation, "	");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// default constructor");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public �dc.name�() {");
-      _builder.newLine();
+      _builder.append("public ");
+      String _name_6 = dc.getName();
+      _builder.append(_name_6, "	");
+      _builder.append("() {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super();");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("�dc.attributes.attributeInitialization(dc, true)�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�IF ctor!=null�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("// user defined constructor body");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�FOR l : ctor.detailCode.lines�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("�l�");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
+      EList<Attribute> _attributes_3 = dc.getAttributes();
+      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, dc, true);
+      _builder.append(_attributeInitialization, "		");
+      _builder.newLineIfNotEmpty();
+      {
+        boolean _notEquals_1 = (!Objects.equal(ctor, null));
+        if (_notEquals_1) {
+          _builder.append("\t\t");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("// user defined constructor body");
+          _builder.newLine();
+          {
+            DetailCode _detailCode = ctor.getDetailCode();
+            EList<String> _lines = _detailCode.getLines();
+            for(final String l : _lines) {
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append(l, "			");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -179,34 +227,47 @@ public class DataClassGen {
       _builder.append("// constructor using fields");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public �dc.name�(�dc.argList�) {");
-      _builder.newLine();
+      _builder.append("public ");
+      String _name_7 = dc.getName();
+      _builder.append(_name_7, "	");
+      _builder.append("(");
+      String _argList = this.argList(dc);
+      _builder.append(_argList, "	");
+      _builder.append(") {");
+      _builder.newLineIfNotEmpty();
+      {
+        DataClass _base_2 = dc.getBase();
+        boolean _notEquals_2 = (!Objects.equal(_base_2, null));
+        if (_notEquals_2) {
+          _builder.append("\t\t");
+          _builder.append("super(");
+          DataClass _base_3 = dc.getBase();
+          String _paramList = this.paramList(_base_3);
+          _builder.append(_paramList, "		");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+        } else {
+          _builder.append("\t\t");
+          _builder.append("super();");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t\t");
-      _builder.append("�IF dc.base!=null�");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("super(�dc.base.paramList�);");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ELSE�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("super();");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDIF�");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�FOR a : dc.attributes�");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("this.�a.name� = �a.name�;");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("�ENDFOR�");
-      _builder.newLine();
+      {
+        EList<Attribute> _attributes_4 = dc.getAttributes();
+        for(final Attribute a : _attributes_4) {
+          _builder.append("\t\t");
+          _builder.append("this.");
+          String _name_8 = a.getName();
+          _builder.append(_name_8, "		");
+          _builder.append(" = ");
+          String _name_9 = a.getName();
+          _builder.append(_name_9, "		");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -216,14 +277,23 @@ public class DataClassGen {
       _builder.append("// deep copy");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public �dc.name� deepCopy() {");
-      _builder.newLine();
+      _builder.append("public ");
+      String _name_10 = dc.getName();
+      _builder.append(_name_10, "	");
+      _builder.append(" deepCopy() {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("�dc.name� copy = new �dc.name�();");
-      _builder.newLine();
+      String _name_11 = dc.getName();
+      _builder.append(_name_11, "		");
+      _builder.append(" copy = new ");
+      String _name_12 = dc.getName();
+      _builder.append(_name_12, "		");
+      _builder.append("();");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("�deepCopy(dc)�");
-      _builder.newLine();
+      String _deepCopy = this.deepCopy(dc);
+      _builder.append(_deepCopy, "		");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("return copy;");
       _builder.newLine();
@@ -265,7 +335,18 @@ public class DataClassGen {
   
   private CharSequence paramList(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR a: attributes SEPARATOR \", \"��a.name��ENDFOR�");
+    {
+      boolean _hasElements = false;
+      for(final Attribute a : attributes) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(", ", "");
+        }
+        String _name = a.getName();
+        _builder.append(_name, "");
+      }
+    }
     return _builder;
   }
   
@@ -318,73 +399,103 @@ public class DataClassGen {
   
   private CharSequence deepCopy(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("�FOR a : attributes�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�IF a.type.ref�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("copy.�a.name� = �a.name�;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�ELSEIF a.type.type instanceof ComplexType�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if (�a.name�!=null) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("�IF a.size<=1�");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("copy.�a.name� = �a.name�.deepCopy();");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("�ELSE�");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("for (int i=0;i<�a.name�.length;i++){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("copy.�a.name�[i] = �a.name�[i].deepCopy();");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�ELSE�");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�IF a.size==0�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("copy.�a.name� = �a.name�;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�ELSE�");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for (int i=0;i<�a.name�.length;i++){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("copy.�a.name�[i] = �a.name�[i];");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("�ENDIF�");
-    _builder.newLine();
-    _builder.append("�ENDFOR�");
-    _builder.newLine();
+    {
+      for(final Attribute a : attributes) {
+        {
+          RefableType _type = a.getType();
+          boolean _isRef = _type.isRef();
+          if (_isRef) {
+            _builder.append("copy.");
+            String _name = a.getName();
+            _builder.append(_name, "");
+            _builder.append(" = ");
+            String _name_1 = a.getName();
+            _builder.append(_name_1, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          } else {
+            RefableType _type_1 = a.getType();
+            DataType _type_2 = _type_1.getType();
+            if ((_type_2 instanceof ComplexType)) {
+              _builder.append("if (");
+              String _name_2 = a.getName();
+              _builder.append(_name_2, "");
+              _builder.append("!=null) {");
+              _builder.newLineIfNotEmpty();
+              {
+                int _size = a.getSize();
+                boolean _lessEqualsThan = (_size <= 1);
+                if (_lessEqualsThan) {
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_3 = a.getName();
+                  _builder.append(_name_3, "	");
+                  _builder.append(" = ");
+                  String _name_4 = a.getName();
+                  _builder.append(_name_4, "	");
+                  _builder.append(".deepCopy();");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("for (int i=0;i<");
+                  String _name_5 = a.getName();
+                  _builder.append(_name_5, "	");
+                  _builder.append(".length;i++){");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_6 = a.getName();
+                  _builder.append(_name_6, "		");
+                  _builder.append("[i] = ");
+                  String _name_7 = a.getName();
+                  _builder.append(_name_7, "		");
+                  _builder.append("[i].deepCopy();");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                }
+              }
+              _builder.append("}");
+              _builder.newLine();
+            } else {
+              {
+                int _size_1 = a.getSize();
+                boolean _equals = (_size_1 == 0);
+                if (_equals) {
+                  _builder.append("copy.");
+                  String _name_8 = a.getName();
+                  _builder.append(_name_8, "");
+                  _builder.append(" = ");
+                  String _name_9 = a.getName();
+                  _builder.append(_name_9, "");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("for (int i=0;i<");
+                  String _name_10 = a.getName();
+                  _builder.append(_name_10, "");
+                  _builder.append(".length;i++){");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("copy.");
+                  String _name_11 = a.getName();
+                  _builder.append(_name_11, "	");
+                  _builder.append("[i] = ");
+                  String _name_12 = a.getName();
+                  _builder.append(_name_12, "	");
+                  _builder.append("[i];");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("}");
+                  _builder.newLine();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     return _builder;
   }
 }
