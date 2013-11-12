@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
@@ -222,15 +221,5 @@ public class OptionalActorFactoryGen {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
-  }
-  
-  private String relPath(final OptionalActorInstance oi, final InterfaceItemInstance pi) {
-    String _path = pi.getPath();
-    ActorClass _actorClass = oi.getActorClass();
-    String _name = _actorClass.getName();
-    int _length = _name.length();
-    int _plus = (_length + 1);
-    String path = _path.substring(_plus);
-    return path;
   }
 }
