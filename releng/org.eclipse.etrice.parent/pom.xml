@@ -78,6 +78,8 @@
 		<module>../../plugins/org.eclipse.etrice.generator.doc</module>
 		<module>../../plugins/org.eclipse.etrice.generator.java</module>
 		<module>../../plugins/org.eclipse.etrice.generator.java.mvn</module>
+		<module>../../runtime/org.eclipse.etrice.modellib.java</module>
+		<module>../../runtime/org.eclipse.etrice.runtime.java</module>
 	</modules>
 
 	<build>
