@@ -2221,7 +2221,7 @@ public class RoomHelpers extends BaseHelpers {
 		else if (item instanceof SPP)
 			return ((SPP)item).getProtocol();
 		
-		assert(false): "unexpected sub type";
+		assert(item.eIsProxy()): "unexpected sub type";
 		return null;
 	}
 

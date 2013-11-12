@@ -281,7 +281,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
 					«xpac.genStateMachine()»
-				«ELSEIF !xpac.hasStateMachine()»
+				«ELSEIF xpac.stateMachine.empty»
+«««					no state machine in the super classes 
 					//--------------------- no state machine
 					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 						handleSystemEvent(ifitem, evt, data);

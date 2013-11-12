@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
@@ -1069,9 +1070,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(_genStateMachine, "	");
               _builder.newLineIfNotEmpty();
             } else {
-              boolean _hasStateMachine = xpac.hasStateMachine();
-              boolean _not_4 = (!_hasStateMachine);
-              if (_not_4) {
+              StateGraph _stateMachine = xpac.getStateMachine();
+              boolean _isEmpty_5 = RoomHelpers.isEmpty(_stateMachine);
+              if (_isEmpty_5) {
                 _builder.append("\t");
                 _builder.append("//--------------------- no state machine");
                 _builder.newLine();
@@ -1108,8 +1109,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
           _builder.newLine();
           {
-            boolean _hasStateMachine_1 = xpac.hasStateMachine();
-            if (_hasStateMachine_1) {
+            boolean _hasStateMachine = xpac.hasStateMachine();
+            if (_hasStateMachine) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("// state and history");
@@ -1156,8 +1157,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
           _builder.newLine();
           {
-            boolean _hasStateMachine_2 = xpac.hasStateMachine();
-            if (_hasStateMachine_2) {
+            boolean _hasStateMachine_1 = xpac.hasStateMachine();
+            if (_hasStateMachine_1) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("// state and history");
