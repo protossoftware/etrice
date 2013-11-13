@@ -168,6 +168,7 @@
 			<artifactId>antlr-runtime</artifactId>
 			<version>3.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
@@ -181,18 +182,20 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-			<version>2.9.1</version>
+			<version>2.9.1.v20130827-0309</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
-			<version>3.6.200</version>
+			<version>3.6.200-v20130402-1505</version>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
+			<artifactId>org.eclipse.xtext.standalone</artifactId>
 			<version>2.4.3</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.util</artifactId>
@@ -203,6 +206,7 @@
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
 			<version>2.4.3</version>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
