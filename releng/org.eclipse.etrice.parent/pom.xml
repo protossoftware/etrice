@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>eTrice Java generator</name>
-	
+
 	<description>code generator from ROOM (Real-Time Object Oriented Modeling)
   models to the Java target language</description>
 	<url>http://eclipse.org/etrice</url>
@@ -61,6 +61,11 @@
 			<id>orbit</id>
 			<layout>p2</layout>
 			<url>${orbit-site}</url>
+		</repository>
+		<repository>
+			<id>repository.jboss.org-public</id>
+			<name>JBoss.org Maven repository</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
 		<!-- <repository> <id>KIELER</id> <layout>p2</layout> <url>http://download.eclipse.org/etrice/KIELER/kieler-0.7.1</url> 
 			</repository> <repository> <id>license repo</id> <layout>p2</layout> <url>http://download.eclipse.org/cbi/updates/license</url> 
@@ -165,58 +170,59 @@
 						</baselineRepositories>
 					</configuration>
 				</plugin>
-  			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-  			<plugin>
-  				<groupId>org.eclipse.m2e</groupId>
-  				<artifactId>lifecycle-mapping</artifactId>
-  				<version>1.0.0</version>
-  				<configuration>
-  					<lifecycleMappingMetadata>
-  						<pluginExecutions>
-  							<pluginExecution>
-  								<pluginExecutionFilter>
-  									<groupId>
-  										org.eclipse.tycho
-  									</groupId>
-  									<artifactId>
-  										tycho-packaging-plugin
-  									</artifactId>
-  									<versionRange>
-  										[0.19.0,)
-  									</versionRange>
-  									<goals>
-  										<goal>validate-id</goal>
-  										<goal>validate-version</goal>
-  										<goal>build-qualifier</goal>
-  									</goals>
-  								</pluginExecutionFilter>
-  								<action>
-  									<ignore></ignore>
-  								</action>
-  							</pluginExecution>
-  							<pluginExecution>
-  								<pluginExecutionFilter>
-  									<groupId>
-  										org.eclipse.tycho
-  									</groupId>
-  									<artifactId>
-  										tycho-compiler-plugin
-  									</artifactId>
-  									<versionRange>
-  										[0.19.0,)
-  									</versionRange>
-  									<goals>
-  										<goal>compile</goal>
-  									</goals>
-  								</pluginExecutionFilter>
-  								<action>
-  									<ignore></ignore>
-  								</action>
-  							</pluginExecution>
-  						</pluginExecutions>
-  					</lifecycleMappingMetadata>
-  				</configuration>
-  			</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-packaging-plugin
+										</artifactId>
+										<versionRange>
+											[0.19.0,)
+										</versionRange>
+										<goals>
+											<goal>validate-id</goal>
+											<goal>validate-version</goal>
+											<goal>build-qualifier</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-compiler-plugin
+										</artifactId>
+										<versionRange>
+											[0.19.0,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
