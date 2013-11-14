@@ -144,6 +144,12 @@
 	-->
 	<target name="run" depends="compile">
 		<mkdir dir="tmp/log"/>
+		<echo>start PingPongThreadTestReplPort</echo>
+		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.Node_node7_prTestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+		</java>
+		<echo>end   PingPongThreadTestReplPort</echo>
 		<echo>start HandlerTest</echo>
 		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.Node_node3_hdTestRunner" fork="true" failonerror="true">
 			<arg value="-headless"/>
@@ -156,24 +162,24 @@
 			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
 		</java>
 		<echo>end   ChoicePointTest</echo>
-			<echo>start ChoicePointTestExtended</echo>
-				<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
-					<arg value="-headless"/>
-					<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
-				</java>
-				<echo>end   ChoicePointTestExtended</echo>
+		<echo>start EnumTest</echo>
+		<java output="${output}/runEnumTest.txt" classname="EnumTest.Node_node18_enTestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+		</java>
+		<echo>end   EnumTest</echo>
+		<echo>start ChoicePointTestExtended</echo>
+			<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
+				<arg value="-headless"/>
+				<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			</java>
+		<echo>end   ChoicePointTestExtended</echo>
 		<echo>start PingPongThreadTest</echo>
 		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.Node_node6_ppTestRunner" fork="true" failonerror="true">
 			<arg value="-headless"/>
 			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
 		</java>
 		<echo>end   PingPongThreadTest</echo>
-		<echo>start PingPongThreadTestReplPort</echo>
-		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.Node_node7_prTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
-		</java>
-		<echo>end   PingPongThreadTestReplPort</echo>
 		<echo>start SendingDataTestJava</echo>
 		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.Node_node4_sdTestRunner" fork="true" failonerror="true">
 			<arg value="-headless"/>

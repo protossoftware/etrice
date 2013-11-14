@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.common.base.LiteralType;
@@ -49,6 +50,9 @@ public class ConfigUtil {
 			DataType type = attr.getType().getType();
 			if (type instanceof PrimitiveType) {
 				return ((PrimitiveType) type).getType();
+			}
+			else if (type instanceof EnumerationType) {
+				return LiteralType.INT; 
 			}
 		}
 
@@ -229,6 +233,7 @@ public class ConfigUtil {
 		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {
 			if (!a.getType().isRef())
+				// TODO-Enum
 				if (a.getType().getType() instanceof PrimitiveType
 						|| (a.getType().getType() instanceof DataClass && a
 								.getSize() == 0))

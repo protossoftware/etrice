@@ -11,7 +11,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SAP;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,12 +102,12 @@ public class InterfaceItemImpl extends MinimalEObjectImpl.Container implements I
    */
   public GeneralProtocolClass getGeneralProtocol()
   {
-    if (this instanceof org.eclipse.etrice.core.room.Port)
-      return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
-    else if (this instanceof org.eclipse.etrice.core.room.SAP)
-      return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();
-    else if (this instanceof org.eclipse.etrice.core.room.SPP)
-      return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();
+    if (this instanceof Port)
+      return ((Port) this).getProtocol();
+    else if (this instanceof SAP)
+      return ((SAP) this).getProtocol();
+    else if (this instanceof SPP)
+      return ((SPP) this).getProtocol();
     return null;
     
   }

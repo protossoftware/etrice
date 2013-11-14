@@ -39,93 +39,95 @@ protected class ThisRootNode extends RootToken {
 			case 6: return new DataType_Alternatives(this, this, 6, inst);
 			case 7: return new ComplexType_Alternatives(this, this, 7, inst);
 			case 8: return new PrimitiveType_Group(this, this, 8, inst);
-			case 9: return new ExternalType_Group(this, this, 9, inst);
-			case 10: return new DataClass_Group(this, this, 10, inst);
-			case 11: return new Attribute_Group(this, this, 11, inst);
-			case 12: return new Operation_Alternatives(this, this, 12, inst);
-			case 13: return new StandardOperation_Group(this, this, 13, inst);
-			case 14: return new PortOperation_Group(this, this, 14, inst);
-			case 15: return new GeneralProtocolClass_Alternatives(this, this, 15, inst);
-			case 16: return new ProtocolClass_Group(this, this, 16, inst);
-			case 17: return new CompoundProtocolClass_Group(this, this, 17, inst);
-			case 18: return new SubProtocol_Group(this, this, 18, inst);
-			case 19: return new Message_Group(this, this, 19, inst);
-			case 20: return new PortClass_Group(this, this, 20, inst);
-			case 21: return new MessageHandler_Alternatives(this, this, 21, inst);
-			case 22: return new InMessageHandler_Group(this, this, 22, inst);
-			case 23: return new OutMessageHandler_Group(this, this, 23, inst);
-			case 24: return new ProtocolSemantics_Group(this, this, 24, inst);
-			case 25: return new SemanticsRule_Alternatives(this, this, 25, inst);
-			case 26: return new InSemanticsRule_Group(this, this, 26, inst);
-			case 27: return new OutSemanticsRule_Group(this, this, 27, inst);
-			case 28: return new ActorClass_Group(this, this, 28, inst);
-			case 29: return new InterfaceItem_Alternatives(this, this, 29, inst);
-			case 30: return new Port_Group(this, this, 30, inst);
-			case 31: return new ExternalPort_Group(this, this, 31, inst);
-			case 32: return new SAP_Group(this, this, 32, inst);
-			case 33: return new SPP_Group(this, this, 33, inst);
-			case 34: return new ServiceImplementation_Group(this, this, 34, inst);
-			case 35: return new LogicalSystem_Group(this, this, 35, inst);
-			case 36: return new ActorContainerRef_Alternatives(this, this, 36, inst);
-			case 37: return new SubSystemRef_Group(this, this, 37, inst);
-			case 38: return new SubSystemClass_Group(this, this, 38, inst);
-			case 39: return new LogicalThread_Group(this, this, 39, inst);
-			case 40: return new ActorInstanceMapping_Group(this, this, 40, inst);
-			case 41: return new RefPath_Group(this, this, 41, inst);
-			case 42: return new RefSegment_Group(this, this, 42, inst);
-			case 43: return new Binding_Group(this, this, 43, inst);
-			case 44: return new BindingEndPoint_Group(this, this, 44, inst);
-			case 45: return new LayerConnection_Group(this, this, 45, inst);
-			case 46: return new SAPoint_Alternatives(this, this, 46, inst);
-			case 47: return new RefSAPoint_Group(this, this, 47, inst);
-			case 48: return new RelaySAPoint_Group(this, this, 48, inst);
-			case 49: return new SPPoint_Group(this, this, 49, inst);
-			case 50: return new ActorRef_Group(this, this, 50, inst);
-			case 51: return new StateGraphNode_Alternatives(this, this, 51, inst);
-			case 52: return new StateGraphItem_Alternatives(this, this, 52, inst);
-			case 53: return new State_Alternatives(this, this, 53, inst);
-			case 54: return new StateGraph_Group(this, this, 54, inst);
-			case 55: return new StateMachine_Group(this, this, 55, inst);
-			case 56: return new SimpleState_Group(this, this, 56, inst);
-			case 57: return new RefinedState_Group(this, this, 57, inst);
-			case 58: return new DetailCode_Group(this, this, 58, inst);
-			case 59: return new TrPoint_Alternatives(this, this, 59, inst);
-			case 60: return new TransitionPoint_Group(this, this, 60, inst);
-			case 61: return new EntryPoint_Group(this, this, 61, inst);
-			case 62: return new ExitPoint_Group(this, this, 62, inst);
-			case 63: return new ChoicePoint_Group(this, this, 63, inst);
-			case 64: return new Transition_Alternatives(this, this, 64, inst);
-			case 65: return new NonInitialTransition_Alternatives(this, this, 65, inst);
-			case 66: return new TransitionChainStartTransition_Alternatives(this, this, 66, inst);
-			case 67: return new InitialTransition_Group(this, this, 67, inst);
-			case 68: return new ContinuationTransition_Group(this, this, 68, inst);
-			case 69: return new TriggeredTransition_Group(this, this, 69, inst);
-			case 70: return new GuardedTransition_Group(this, this, 70, inst);
-			case 71: return new CPBranchTransition_Group(this, this, 71, inst);
-			case 72: return new RefinedTransition_Group(this, this, 72, inst);
-			case 73: return new TransitionTerminal_Alternatives(this, this, 73, inst);
-			case 74: return new StateTerminal_StateAssignment(this, this, 74, inst);
-			case 75: return new TrPointTerminal_Group(this, this, 75, inst);
-			case 76: return new SubStateTrPointTerminal_Group(this, this, 76, inst);
-			case 77: return new ChoicepointTerminal_Group(this, this, 77, inst);
-			case 78: return new Trigger_Group(this, this, 78, inst);
-			case 79: return new MessageFromIf_Group(this, this, 79, inst);
-			case 80: return new Guard_Group(this, this, 80, inst);
-			case 81: return new Import_Group(this, this, 81, inst);
-			case 82: return new Annotation_Group(this, this, 82, inst);
-			case 83: return new KeyValue_Group(this, this, 83, inst);
-			case 84: return new AnnotationType_Group(this, this, 84, inst);
-			case 85: return new AnnotationAttribute_Alternatives(this, this, 85, inst);
-			case 86: return new SimpleAnnotationAttribute_Group(this, this, 86, inst);
-			case 87: return new EnumAnnotationAttribute_Group(this, this, 87, inst);
-			case 88: return new Documentation_Group(this, this, 88, inst);
-			case 89: return new LiteralArray_Group(this, this, 89, inst);
-			case 90: return new Literal_Alternatives(this, this, 90, inst);
-			case 91: return new BooleanLiteral_Group(this, this, 91, inst);
-			case 92: return new NumberLiteral_Alternatives(this, this, 92, inst);
-			case 93: return new RealLiteral_Group(this, this, 93, inst);
-			case 94: return new IntLiteral_Group(this, this, 94, inst);
-			case 95: return new StringLiteral_Group(this, this, 95, inst);
+			case 9: return new EnumerationType_Group(this, this, 9, inst);
+			case 10: return new EnumLiteral_Group(this, this, 10, inst);
+			case 11: return new ExternalType_Group(this, this, 11, inst);
+			case 12: return new DataClass_Group(this, this, 12, inst);
+			case 13: return new Attribute_Group(this, this, 13, inst);
+			case 14: return new Operation_Alternatives(this, this, 14, inst);
+			case 15: return new StandardOperation_Group(this, this, 15, inst);
+			case 16: return new PortOperation_Group(this, this, 16, inst);
+			case 17: return new GeneralProtocolClass_Alternatives(this, this, 17, inst);
+			case 18: return new ProtocolClass_Group(this, this, 18, inst);
+			case 19: return new CompoundProtocolClass_Group(this, this, 19, inst);
+			case 20: return new SubProtocol_Group(this, this, 20, inst);
+			case 21: return new Message_Group(this, this, 21, inst);
+			case 22: return new PortClass_Group(this, this, 22, inst);
+			case 23: return new MessageHandler_Alternatives(this, this, 23, inst);
+			case 24: return new InMessageHandler_Group(this, this, 24, inst);
+			case 25: return new OutMessageHandler_Group(this, this, 25, inst);
+			case 26: return new ProtocolSemantics_Group(this, this, 26, inst);
+			case 27: return new SemanticsRule_Alternatives(this, this, 27, inst);
+			case 28: return new InSemanticsRule_Group(this, this, 28, inst);
+			case 29: return new OutSemanticsRule_Group(this, this, 29, inst);
+			case 30: return new ActorClass_Group(this, this, 30, inst);
+			case 31: return new InterfaceItem_Alternatives(this, this, 31, inst);
+			case 32: return new Port_Group(this, this, 32, inst);
+			case 33: return new ExternalPort_Group(this, this, 33, inst);
+			case 34: return new SAP_Group(this, this, 34, inst);
+			case 35: return new SPP_Group(this, this, 35, inst);
+			case 36: return new ServiceImplementation_Group(this, this, 36, inst);
+			case 37: return new LogicalSystem_Group(this, this, 37, inst);
+			case 38: return new ActorContainerRef_Alternatives(this, this, 38, inst);
+			case 39: return new SubSystemRef_Group(this, this, 39, inst);
+			case 40: return new SubSystemClass_Group(this, this, 40, inst);
+			case 41: return new LogicalThread_Group(this, this, 41, inst);
+			case 42: return new ActorInstanceMapping_Group(this, this, 42, inst);
+			case 43: return new RefPath_Group(this, this, 43, inst);
+			case 44: return new RefSegment_Group(this, this, 44, inst);
+			case 45: return new Binding_Group(this, this, 45, inst);
+			case 46: return new BindingEndPoint_Group(this, this, 46, inst);
+			case 47: return new LayerConnection_Group(this, this, 47, inst);
+			case 48: return new SAPoint_Alternatives(this, this, 48, inst);
+			case 49: return new RefSAPoint_Group(this, this, 49, inst);
+			case 50: return new RelaySAPoint_Group(this, this, 50, inst);
+			case 51: return new SPPoint_Group(this, this, 51, inst);
+			case 52: return new ActorRef_Group(this, this, 52, inst);
+			case 53: return new StateGraphNode_Alternatives(this, this, 53, inst);
+			case 54: return new StateGraphItem_Alternatives(this, this, 54, inst);
+			case 55: return new State_Alternatives(this, this, 55, inst);
+			case 56: return new StateGraph_Group(this, this, 56, inst);
+			case 57: return new StateMachine_Group(this, this, 57, inst);
+			case 58: return new SimpleState_Group(this, this, 58, inst);
+			case 59: return new RefinedState_Group(this, this, 59, inst);
+			case 60: return new DetailCode_Group(this, this, 60, inst);
+			case 61: return new TrPoint_Alternatives(this, this, 61, inst);
+			case 62: return new TransitionPoint_Group(this, this, 62, inst);
+			case 63: return new EntryPoint_Group(this, this, 63, inst);
+			case 64: return new ExitPoint_Group(this, this, 64, inst);
+			case 65: return new ChoicePoint_Group(this, this, 65, inst);
+			case 66: return new Transition_Alternatives(this, this, 66, inst);
+			case 67: return new NonInitialTransition_Alternatives(this, this, 67, inst);
+			case 68: return new TransitionChainStartTransition_Alternatives(this, this, 68, inst);
+			case 69: return new InitialTransition_Group(this, this, 69, inst);
+			case 70: return new ContinuationTransition_Group(this, this, 70, inst);
+			case 71: return new TriggeredTransition_Group(this, this, 71, inst);
+			case 72: return new GuardedTransition_Group(this, this, 72, inst);
+			case 73: return new CPBranchTransition_Group(this, this, 73, inst);
+			case 74: return new RefinedTransition_Group(this, this, 74, inst);
+			case 75: return new TransitionTerminal_Alternatives(this, this, 75, inst);
+			case 76: return new StateTerminal_StateAssignment(this, this, 76, inst);
+			case 77: return new TrPointTerminal_Group(this, this, 77, inst);
+			case 78: return new SubStateTrPointTerminal_Group(this, this, 78, inst);
+			case 79: return new ChoicepointTerminal_Group(this, this, 79, inst);
+			case 80: return new Trigger_Group(this, this, 80, inst);
+			case 81: return new MessageFromIf_Group(this, this, 81, inst);
+			case 82: return new Guard_Group(this, this, 82, inst);
+			case 83: return new Import_Group(this, this, 83, inst);
+			case 84: return new Annotation_Group(this, this, 84, inst);
+			case 85: return new KeyValue_Group(this, this, 85, inst);
+			case 86: return new AnnotationType_Group(this, this, 86, inst);
+			case 87: return new AnnotationAttribute_Alternatives(this, this, 87, inst);
+			case 88: return new SimpleAnnotationAttribute_Group(this, this, 88, inst);
+			case 89: return new EnumAnnotationAttribute_Group(this, this, 89, inst);
+			case 90: return new Documentation_Group(this, this, 90, inst);
+			case 91: return new LiteralArray_Group(this, this, 91, inst);
+			case 92: return new Literal_Alternatives(this, this, 92, inst);
+			case 93: return new BooleanLiteral_Group(this, this, 93, inst);
+			case 94: return new NumberLiteral_Alternatives(this, this, 94, inst);
+			case 95: return new RealLiteral_Group(this, this, 95, inst);
+			case 96: return new IntLiteral_Group(this, this, 96, inst);
+			case 97: return new StringLiteral_Group(this, this, 97, inst);
 			default: return null;
 		}	
 	}	
@@ -135,24 +137,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule RoomModel ****************
  *
  * RoomModel:
- * 
  * 	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
- * 
- * 	externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
- * 
- * 	actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem |
- * 
- * 	annotationTypes+=AnnotationType)* "}";
+ * 	enumerationTypes+=EnumerationType | externalTypes+=ExternalType | dataClasses+=DataClass |
+ * 	protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
+ * 	systems+=LogicalSystem | annotationTypes+=AnnotationType)* "}";
  *
  **/
 
 // "RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
-// 
-// externalTypes+=ExternalType | dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass |
-// 
-// actorClasses+=ActorClass | subSystemClasses+=SubSystemClass | systems+=LogicalSystem |
-// 
-// annotationTypes+=AnnotationType)* "}"
+// enumerationTypes+=EnumerationType | externalTypes+=ExternalType | dataClasses+=DataClass |
+// protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
+// systems+=LogicalSystem | annotationTypes+=AnnotationType)* "}"
 protected class RoomModel_Group extends GroupToken {
 	
 	public RoomModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -352,11 +347,9 @@ protected class RoomModel_ImportsAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// (primitiveTypes+=PrimitiveType | externalTypes+=ExternalType | dataClasses+=DataClass |
-// 
-// protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
-// 
-// systems+=LogicalSystem | annotationTypes+=AnnotationType)*
+// (primitiveTypes+=PrimitiveType | enumerationTypes+=EnumerationType | externalTypes+=ExternalType |
+// dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass |
+// subSystemClasses+=SubSystemClass | systems+=LogicalSystem | annotationTypes+=AnnotationType)*
 protected class RoomModel_Alternatives_5 extends AlternativesToken {
 
 	public RoomModel_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -372,13 +365,14 @@ protected class RoomModel_Alternatives_5 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new RoomModel_PrimitiveTypesAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new RoomModel_ExternalTypesAssignment_5_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new RoomModel_DataClassesAssignment_5_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new RoomModel_ProtocolClassesAssignment_5_3(lastRuleCallOrigin, this, 3, inst);
-			case 4: return new RoomModel_ActorClassesAssignment_5_4(lastRuleCallOrigin, this, 4, inst);
-			case 5: return new RoomModel_SubSystemClassesAssignment_5_5(lastRuleCallOrigin, this, 5, inst);
-			case 6: return new RoomModel_SystemsAssignment_5_6(lastRuleCallOrigin, this, 6, inst);
-			case 7: return new RoomModel_AnnotationTypesAssignment_5_7(lastRuleCallOrigin, this, 7, inst);
+			case 1: return new RoomModel_EnumerationTypesAssignment_5_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new RoomModel_ExternalTypesAssignment_5_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new RoomModel_DataClassesAssignment_5_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new RoomModel_ProtocolClassesAssignment_5_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new RoomModel_ActorClassesAssignment_5_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new RoomModel_SubSystemClassesAssignment_5_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new RoomModel_SystemsAssignment_5_7(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new RoomModel_AnnotationTypesAssignment_5_8(lastRuleCallOrigin, this, 8, inst);
 			default: return null;
 		}	
 	}
@@ -433,16 +427,64 @@ protected class RoomModel_PrimitiveTypesAssignment_5_0 extends AssignmentToken  
 	}	
 }
 
-// externalTypes+=ExternalType
-protected class RoomModel_ExternalTypesAssignment_5_1 extends AssignmentToken  {
+// enumerationTypes+=EnumerationType
+protected class RoomModel_EnumerationTypesAssignment_5_1 extends AssignmentToken  {
 	
-	public RoomModel_ExternalTypesAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_EnumerationTypesAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getExternalTypesAssignment_5_1();
+		return grammarAccess.getRoomModelAccess().getEnumerationTypesAssignment_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("enumerationTypes",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("enumerationTypes");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumerationTypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getRoomModelAccess().getEnumerationTypesEnumerationTypeParserRuleCall_5_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RoomModel_Alternatives_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RoomModel_ImportsAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new RoomModel_LeftCurlyBracketKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// externalTypes+=ExternalType
+protected class RoomModel_ExternalTypesAssignment_5_2 extends AssignmentToken  {
+	
+	public RoomModel_ExternalTypesAssignment_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRoomModelAccess().getExternalTypesAssignment_5_2();
 	}
 
     @Override
@@ -461,7 +503,7 @@ protected class RoomModel_ExternalTypesAssignment_5_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExternalTypeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getExternalTypesExternalTypeParserRuleCall_5_1_0(); 
+				element = grammarAccess.getRoomModelAccess().getExternalTypesExternalTypeParserRuleCall_5_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -482,15 +524,15 @@ protected class RoomModel_ExternalTypesAssignment_5_1 extends AssignmentToken  {
 }
 
 // dataClasses+=DataClass
-protected class RoomModel_DataClassesAssignment_5_2 extends AssignmentToken  {
+protected class RoomModel_DataClassesAssignment_5_3 extends AssignmentToken  {
 	
-	public RoomModel_DataClassesAssignment_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_DataClassesAssignment_5_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getDataClassesAssignment_5_2();
+		return grammarAccess.getRoomModelAccess().getDataClassesAssignment_5_3();
 	}
 
     @Override
@@ -509,7 +551,7 @@ protected class RoomModel_DataClassesAssignment_5_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDataClassRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getDataClassesDataClassParserRuleCall_5_2_0(); 
+				element = grammarAccess.getRoomModelAccess().getDataClassesDataClassParserRuleCall_5_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -530,15 +572,15 @@ protected class RoomModel_DataClassesAssignment_5_2 extends AssignmentToken  {
 }
 
 // protocolClasses+=GeneralProtocolClass
-protected class RoomModel_ProtocolClassesAssignment_5_3 extends AssignmentToken  {
+protected class RoomModel_ProtocolClassesAssignment_5_4 extends AssignmentToken  {
 	
-	public RoomModel_ProtocolClassesAssignment_5_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_ProtocolClassesAssignment_5_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getProtocolClassesAssignment_5_3();
+		return grammarAccess.getRoomModelAccess().getProtocolClassesAssignment_5_4();
 	}
 
     @Override
@@ -557,7 +599,7 @@ protected class RoomModel_ProtocolClassesAssignment_5_3 extends AssignmentToken 
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getGeneralProtocolClassRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_3_0(); 
+				element = grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -578,15 +620,15 @@ protected class RoomModel_ProtocolClassesAssignment_5_3 extends AssignmentToken 
 }
 
 // actorClasses+=ActorClass
-protected class RoomModel_ActorClassesAssignment_5_4 extends AssignmentToken  {
+protected class RoomModel_ActorClassesAssignment_5_5 extends AssignmentToken  {
 	
-	public RoomModel_ActorClassesAssignment_5_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_ActorClassesAssignment_5_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getActorClassesAssignment_5_4();
+		return grammarAccess.getRoomModelAccess().getActorClassesAssignment_5_5();
 	}
 
     @Override
@@ -605,7 +647,7 @@ protected class RoomModel_ActorClassesAssignment_5_4 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getActorClassRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getActorClassesActorClassParserRuleCall_5_4_0(); 
+				element = grammarAccess.getRoomModelAccess().getActorClassesActorClassParserRuleCall_5_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -626,15 +668,15 @@ protected class RoomModel_ActorClassesAssignment_5_4 extends AssignmentToken  {
 }
 
 // subSystemClasses+=SubSystemClass
-protected class RoomModel_SubSystemClassesAssignment_5_5 extends AssignmentToken  {
+protected class RoomModel_SubSystemClassesAssignment_5_6 extends AssignmentToken  {
 	
-	public RoomModel_SubSystemClassesAssignment_5_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_SubSystemClassesAssignment_5_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getSubSystemClassesAssignment_5_5();
+		return grammarAccess.getRoomModelAccess().getSubSystemClassesAssignment_5_6();
 	}
 
     @Override
@@ -653,7 +695,7 @@ protected class RoomModel_SubSystemClassesAssignment_5_5 extends AssignmentToken
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSubSystemClassRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getSubSystemClassesSubSystemClassParserRuleCall_5_5_0(); 
+				element = grammarAccess.getRoomModelAccess().getSubSystemClassesSubSystemClassParserRuleCall_5_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -674,15 +716,15 @@ protected class RoomModel_SubSystemClassesAssignment_5_5 extends AssignmentToken
 }
 
 // systems+=LogicalSystem
-protected class RoomModel_SystemsAssignment_5_6 extends AssignmentToken  {
+protected class RoomModel_SystemsAssignment_5_7 extends AssignmentToken  {
 	
-	public RoomModel_SystemsAssignment_5_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_SystemsAssignment_5_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getSystemsAssignment_5_6();
+		return grammarAccess.getRoomModelAccess().getSystemsAssignment_5_7();
 	}
 
     @Override
@@ -701,7 +743,7 @@ protected class RoomModel_SystemsAssignment_5_6 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLogicalSystemRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getSystemsLogicalSystemParserRuleCall_5_6_0(); 
+				element = grammarAccess.getRoomModelAccess().getSystemsLogicalSystemParserRuleCall_5_7_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -722,15 +764,15 @@ protected class RoomModel_SystemsAssignment_5_6 extends AssignmentToken  {
 }
 
 // annotationTypes+=AnnotationType
-protected class RoomModel_AnnotationTypesAssignment_5_7 extends AssignmentToken  {
+protected class RoomModel_AnnotationTypesAssignment_5_8 extends AssignmentToken  {
 	
-	public RoomModel_AnnotationTypesAssignment_5_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RoomModel_AnnotationTypesAssignment_5_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_5_7();
+		return grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_5_8();
 	}
 
     @Override
@@ -749,7 +791,7 @@ protected class RoomModel_AnnotationTypesAssignment_5_7 extends AssignmentToken 
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAnnotationTypeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRoomModelAccess().getAnnotationTypesAnnotationTypeParserRuleCall_5_7_0(); 
+				element = grammarAccess.getRoomModelAccess().getAnnotationTypesAnnotationTypeParserRuleCall_5_8_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -801,7 +843,6 @@ protected class RoomModel_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule RoomClass ****************
  *
  * RoomClass:
- * 
  * 	DataType | GeneralProtocolClass | StructureClass;
  *
  **/
@@ -833,6 +874,7 @@ protected class RoomClass_Alternatives extends AlternativesToken {
 		if(getEObject().eClass() != grammarAccess.getActorClassRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCompoundProtocolClassRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDataClassRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEnumerationTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getExternalTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getLogicalSystemRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getPrimitiveTypeRule().getType().getClassifier() && 
@@ -867,6 +909,7 @@ protected class RoomClass_DataTypeParserRuleCall_0 extends RuleCallToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getDataClassRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEnumerationTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getExternalTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getPrimitiveTypeRule().getType().getClassifier())
 			return null;
@@ -964,7 +1007,6 @@ protected class RoomClass_StructureClassParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule StructureClass ****************
  *
  * StructureClass:
- * 
  * 	ActorContainerClass | LogicalSystem;
  *
  **/
@@ -1081,7 +1123,6 @@ protected class StructureClass_LogicalSystemParserRuleCall_1 extends RuleCallTok
 /************ begin Rule ActorContainerClass ****************
  *
  * ActorContainerClass:
- * 
  * 	ActorClass | SubSystemClass;
  *
  **/
@@ -1196,11 +1237,8 @@ protected class ActorContainerClass_SubSystemClassParserRuleCall_1 extends RuleC
 /************ begin Rule VarDecl ****************
  *
  * // **************************************************************
- * 
  * // data class
- * 
  * VarDecl:
- * 
  * 	name=ID ":" refType=RefableType;
  *
  **/
@@ -1342,7 +1380,6 @@ protected class VarDecl_RefTypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule RefableType ****************
  *
  * RefableType:
- * 
  * 	type=[DataType|FQN] ref?="ref"?;
  *
  **/
@@ -1454,12 +1491,11 @@ protected class RefableType_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule DataType ****************
  *
  * DataType:
- * 
- * 	PrimitiveType | ComplexType;
+ * 	PrimitiveType | EnumerationType | ComplexType;
  *
  **/
 
-// PrimitiveType | ComplexType
+// PrimitiveType | EnumerationType | ComplexType
 protected class DataType_Alternatives extends AlternativesToken {
 
 	public DataType_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1475,7 +1511,8 @@ protected class DataType_Alternatives extends AlternativesToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new DataType_PrimitiveTypeParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new DataType_ComplexTypeParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new DataType_EnumerationTypeParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new DataType_ComplexTypeParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -1483,6 +1520,7 @@ protected class DataType_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getDataClassRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEnumerationTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getExternalTypeRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getPrimitiveTypeRule().getType().getClassifier())
 			return null;
@@ -1527,16 +1565,52 @@ protected class DataType_PrimitiveTypeParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ComplexType
-protected class DataType_ComplexTypeParserRuleCall_1 extends RuleCallToken {
+// EnumerationType
+protected class DataType_EnumerationTypeParserRuleCall_1 extends RuleCallToken {
 	
-	public DataType_ComplexTypeParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DataType_EnumerationTypeParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getDataTypeAccess().getComplexTypeParserRuleCall_1();
+		return grammarAccess.getDataTypeAccess().getEnumerationTypeParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEnumerationTypeRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EnumerationType_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// ComplexType
+protected class DataType_ComplexTypeParserRuleCall_2 extends RuleCallToken {
+	
+	public DataType_ComplexTypeParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getDataTypeAccess().getComplexTypeParserRuleCall_2();
 	}
 
     @Override
@@ -1571,7 +1645,6 @@ protected class DataType_ComplexTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule ComplexType ****************
  *
  * ComplexType:
- * 
  * 	DataClass | ExternalType;
  *
  **/
@@ -1686,15 +1759,12 @@ protected class ComplexType_ExternalTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule PrimitiveType ****************
  *
  * PrimitiveType:
- * 
  * 	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
- * 
  * 	defaultValueLiteral=STRING docu=Documentation?;
  *
  **/
 
 // "PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
-// 
 // defaultValueLiteral=STRING docu=Documentation?
 protected class PrimitiveType_Group extends GroupToken {
 	
@@ -2100,10 +2170,609 @@ protected class PrimitiveType_DocuAssignment_9 extends AssignmentToken  {
 /************ end Rule PrimitiveType ****************/
 
 
+/************ begin Rule EnumerationType ****************
+ *
+ * EnumerationType:
+ * 	"Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
+ * 	literals+=EnumLiteral)*)? "}";
+ *
+ **/
+
+// "Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
+// literals+=EnumLiteral)*)? "}"
+protected class EnumerationType_Group extends GroupToken {
+	
+	public EnumerationType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_RightCurlyBracketKeyword_6(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEnumerationTypeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "Enumeration"
+protected class EnumerationType_EnumerationKeyword_0 extends KeywordToken  {
+	
+	public EnumerationType_EnumerationKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getEnumerationKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// name=ID
+protected class EnumerationType_NameAssignment_1 extends AssignmentToken  {
+	
+	public EnumerationType_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_EnumerationKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getEnumerationTypeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getEnumerationTypeAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// docu=Documentation?
+protected class EnumerationType_DocuAssignment_2 extends AssignmentToken  {
+	
+	public EnumerationType_DocuAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getDocuAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Documentation_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("docu",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("docu");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getDocumentationRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getEnumerationTypeAccess().getDocuDocumentationParserRuleCall_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new EnumerationType_NameAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ("of" primitiveType=[PrimitiveType|FQN])?
+protected class EnumerationType_Group_3 extends GroupToken {
+	
+	public EnumerationType_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_PrimitiveTypeAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "of"
+protected class EnumerationType_OfKeyword_3_0 extends KeywordToken  {
+	
+	public EnumerationType_OfKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getOfKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_DocuAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumerationType_NameAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// primitiveType=[PrimitiveType|FQN]
+protected class EnumerationType_PrimitiveTypeAssignment_3_1 extends AssignmentToken  {
+	
+	public EnumerationType_PrimitiveTypeAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getPrimitiveTypeAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_OfKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("primitiveType",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("primitiveType");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumerationTypeAccess().getPrimitiveTypePrimitiveTypeCrossReference_3_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getEnumerationTypeAccess().getPrimitiveTypePrimitiveTypeCrossReference_3_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+// "{"
+protected class EnumerationType_LeftCurlyBracketKeyword_4 extends KeywordToken  {
+	
+	public EnumerationType_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getLeftCurlyBracketKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumerationType_DocuAssignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new EnumerationType_NameAssignment_1(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// (literals+=EnumLiteral ("," literals+=EnumLiteral)*)?
+protected class EnumerationType_Group_5 extends GroupToken {
+	
+	public EnumerationType_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumerationType_LiteralsAssignment_5_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// literals+=EnumLiteral
+protected class EnumerationType_LiteralsAssignment_5_0 extends AssignmentToken  {
+	
+	public EnumerationType_LiteralsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getLiteralsAssignment_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("literals",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("literals");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getEnumerationTypeAccess().getLiteralsEnumLiteralParserRuleCall_5_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new EnumerationType_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ("," literals+=EnumLiteral)*
+protected class EnumerationType_Group_5_1 extends GroupToken {
+	
+	public EnumerationType_Group_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getGroup_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_LiteralsAssignment_5_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ","
+protected class EnumerationType_CommaKeyword_5_1_0 extends KeywordToken  {
+	
+	public EnumerationType_CommaKeyword_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getCommaKeyword_5_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumerationType_LiteralsAssignment_5_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// literals+=EnumLiteral
+protected class EnumerationType_LiteralsAssignment_5_1_1 extends AssignmentToken  {
+	
+	public EnumerationType_LiteralsAssignment_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getLiteralsAssignment_5_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("literals",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("literals");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getEnumerationTypeAccess().getLiteralsEnumLiteralParserRuleCall_5_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new EnumerationType_CommaKeyword_5_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+// "}"
+protected class EnumerationType_RightCurlyBracketKeyword_6 extends KeywordToken  {
+	
+	public EnumerationType_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationTypeAccess().getRightCurlyBracketKeyword_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumerationType_Group_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumerationType_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule EnumerationType ****************/
+
+
+/************ begin Rule EnumLiteral ****************
+ *
+ * EnumLiteral:
+ * 	name=ID ("=" literal=IntLiteral)?;
+ *
+ **/
+
+// name=ID ("=" literal=IntLiteral)?
+protected class EnumLiteral_Group extends GroupToken {
+	
+	public EnumLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumLiteral_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new EnumLiteral_NameAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEnumLiteralRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// name=ID
+protected class EnumLiteral_NameAssignment_0 extends AssignmentToken  {
+	
+	public EnumLiteral_NameAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumLiteralAccess().getNameAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getEnumLiteralAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getEnumLiteralAccess().getNameIDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("=" literal=IntLiteral)?
+protected class EnumLiteral_Group_1 extends GroupToken {
+	
+	public EnumLiteral_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumLiteral_LiteralAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "="
+protected class EnumLiteral_EqualsSignKeyword_1_0 extends KeywordToken  {
+	
+	public EnumLiteral_EqualsSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumLiteralAccess().getEqualsSignKeyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EnumLiteral_NameAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// literal=IntLiteral
+protected class EnumLiteral_LiteralAssignment_1_1 extends AssignmentToken  {
+	
+	public EnumLiteral_LiteralAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumLiteralAccess().getLiteralAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new IntLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("literal",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("literal");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getIntLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getEnumLiteralAccess().getLiteralIntLiteralParserRuleCall_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new EnumLiteral_EqualsSignKeyword_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule EnumLiteral ****************/
+
+
 /************ begin Rule ExternalType ****************
  *
  * ExternalType:
- * 
  * 	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
@@ -2383,21 +3052,15 @@ protected class ExternalType_DocuAssignment_5 extends AssignmentToken  {
 /************ begin Rule DataClass ****************
  *
  * // TODOHRR: define detail level language?
- * 
  * DataClass:
- * 
  * 	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
- * 
  * 	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
- * 
  * 	operations+=StandardOperation* "}";
  *
  **/
 
 // "DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
-// 
 // userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-// 
 // operations+=StandardOperation* "}"
 protected class DataClass_Group extends GroupToken {
 	
@@ -3099,7 +3762,6 @@ protected class DataClass_RightCurlyBracketKeyword_11 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 
  * 	"Attribute" name=ID ("[" size=INT "]")? ":" type=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
@@ -3493,7 +4155,6 @@ protected class Attribute_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- * 
  * 	StandardOperation | PortOperation;
  *
  **/
@@ -3608,15 +4269,12 @@ protected class Operation_PortOperationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StandardOperation ****************
  *
  * StandardOperation:
- * 
  * 	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
- * 
  * 	returnType=RefableType))? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
 // "Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
-// 
 // returnType=RefableType))? docu=Documentation? detailCode=DetailCode
 protected class StandardOperation_Group extends GroupToken {
 	
@@ -4159,15 +4817,12 @@ protected class StandardOperation_DetailCodeAssignment_8 extends AssignmentToken
 /************ begin Rule PortOperation ****************
  *
  * PortOperation:
- * 
  * 	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
- * 
  * 	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
  *
  **/
 
 // "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
-// 
 // "sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
 protected class PortOperation_Group extends GroupToken {
 	
@@ -4781,7 +5436,6 @@ protected class PortOperation_DetailCodeAssignment_7 extends AssignmentToken  {
 /************ begin Rule GeneralProtocolClass ****************
  *
  * GeneralProtocolClass:
- * 
  * 	ProtocolClass | CompoundProtocolClass;
  *
  **/
@@ -4896,27 +5550,18 @@ protected class GeneralProtocolClass_CompoundProtocolClassParserRuleCall_1 exten
 /************ begin Rule ProtocolClass ****************
  *
  * ProtocolClass:
- * 
  * 	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
- * 
  * 	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
- * 
  * 	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
- * 
  * 	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
- * 
  * 	semantics=ProtocolSemantics? "}";
  *
  **/
 
 // commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
-// 
 // annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
-// 
 // userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
-// 
 // "}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
-// 
 // semantics=ProtocolSemantics? "}"
 protected class ProtocolClass_Group extends GroupToken {
 	
@@ -6126,7 +6771,6 @@ protected class ProtocolClass_RightCurlyBracketKeyword_15 extends KeywordToken  
 /************ begin Rule CompoundProtocolClass ****************
  *
  * CompoundProtocolClass:
- * 
  * 	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol* "}";
  *
  **/
@@ -6410,7 +7054,6 @@ protected class CompoundProtocolClass_RightCurlyBracketKeyword_6 extends Keyword
 /************ begin Rule SubProtocol ****************
  *
  * SubProtocol:
- * 
  * 	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
  *
  **/
@@ -6565,7 +7208,6 @@ protected class SubProtocol_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule Message ****************
  *
  * Message:
- * 
  * 	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
  *
  **/
@@ -6833,15 +7475,12 @@ protected class Message_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule PortClass ****************
  *
  * PortClass:
- * 
  * 	{PortClass} "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
- * 
  * 	msgHandlers+=MessageHandler)* "}";
  *
  **/
 
 // {PortClass} "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
-// 
 // msgHandlers+=MessageHandler)* "}"
 protected class PortClass_Group extends GroupToken {
 	
@@ -6919,7 +7558,7 @@ protected class PortClass_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// ("usercode" userCode=DetailCode)?
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2'
 protected class PortClass_Group_2 extends GroupToken {
 	
 	public PortClass_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6941,7 +7580,7 @@ protected class PortClass_Group_2 extends GroupToken {
 
 }
 
-// "usercode"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2/@elements.0'
 protected class PortClass_UsercodeKeyword_2_0 extends KeywordToken  {
 	
 	public PortClass_UsercodeKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6963,7 +7602,7 @@ protected class PortClass_UsercodeKeyword_2_0 extends KeywordToken  {
 
 }
 
-// userCode=DetailCode
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2/@elements.1'
 protected class PortClass_UserCodeAssignment_2_1 extends AssignmentToken  {
 	
 	public PortClass_UserCodeAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7010,7 +7649,7 @@ protected class PortClass_UserCodeAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// (attributes+=Attribute | operations+=PortOperation | msgHandlers+=MessageHandler)*
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3'
 protected class PortClass_Alternatives_3 extends AlternativesToken {
 
 	public PortClass_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7034,7 +7673,7 @@ protected class PortClass_Alternatives_3 extends AlternativesToken {
 
 }
 
-// attributes+=Attribute
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.0'
 protected class PortClass_AttributesAssignment_3_0 extends AssignmentToken  {
 	
 	public PortClass_AttributesAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7082,7 +7721,7 @@ protected class PortClass_AttributesAssignment_3_0 extends AssignmentToken  {
 	}	
 }
 
-// operations+=PortOperation
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.1'
 protected class PortClass_OperationsAssignment_3_1 extends AssignmentToken  {
 	
 	public PortClass_OperationsAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7130,7 +7769,7 @@ protected class PortClass_OperationsAssignment_3_1 extends AssignmentToken  {
 	}	
 }
 
-// msgHandlers+=MessageHandler
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.2'
 protected class PortClass_MsgHandlersAssignment_3_2 extends AssignmentToken  {
 	
 	public PortClass_MsgHandlersAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7179,7 +7818,7 @@ protected class PortClass_MsgHandlersAssignment_3_2 extends AssignmentToken  {
 }
 
 
-// "}"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.4'
 protected class PortClass_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public PortClass_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7209,13 +7848,11 @@ protected class PortClass_RightCurlyBracketKeyword_4 extends KeywordToken  {
 
 /************ begin Rule MessageHandler ****************
  *
- * MessageHandler:
- * 
- * 	InMessageHandler | OutMessageHandler;
+ * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MessageHandler'
  *
  **/
 
-// InMessageHandler | OutMessageHandler
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives'
 protected class MessageHandler_Alternatives extends AlternativesToken {
 
 	public MessageHandler_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7246,7 +7883,7 @@ protected class MessageHandler_Alternatives extends AlternativesToken {
 
 }
 
-// InMessageHandler
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.0'
 protected class MessageHandler_InMessageHandlerParserRuleCall_0 extends RuleCallToken {
 	
 	public MessageHandler_InMessageHandlerParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7282,7 +7919,7 @@ protected class MessageHandler_InMessageHandlerParserRuleCall_0 extends RuleCall
 	}	
 }
 
-// OutMessageHandler
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.1'
 protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCallToken {
 	
 	public MessageHandler_OutMessageHandlerParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7324,13 +7961,11 @@ protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCal
 
 /************ begin Rule InMessageHandler ****************
  *
- * InMessageHandler:
- * 
- * 	"handle" "incoming" msg=[Message] detailCode=DetailCode;
+ * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InMessageHandler'
  *
  **/
 
-// "handle" "incoming" msg=[Message] detailCode=DetailCode
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives'
 protected class InMessageHandler_Group extends GroupToken {
 	
 	public InMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7359,7 +7994,7 @@ protected class InMessageHandler_Group extends GroupToken {
 
 }
 
-// "handle"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.0'
 protected class InMessageHandler_HandleKeyword_0 extends KeywordToken  {
 	
 	public InMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7380,7 +8015,7 @@ protected class InMessageHandler_HandleKeyword_0 extends KeywordToken  {
 
 }
 
-// "incoming"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.1'
 protected class InMessageHandler_IncomingKeyword_1 extends KeywordToken  {
 	
 	public InMessageHandler_IncomingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7402,7 +8037,7 @@ protected class InMessageHandler_IncomingKeyword_1 extends KeywordToken  {
 
 }
 
-// msg=[Message]
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.2'
 protected class InMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 	
 	public InMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7439,7 +8074,7 @@ protected class InMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 
 }
 
-// detailCode=DetailCode
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.3'
 protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
 	
 	public InMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7491,13 +8126,11 @@ protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken 
 
 /************ begin Rule OutMessageHandler ****************
  *
- * OutMessageHandler:
- * 
- * 	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
+ * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/OutMessageHandler'
  *
  **/
 
-// "handle" "outgoing" msg=[Message] detailCode=DetailCode
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives'
 protected class OutMessageHandler_Group extends GroupToken {
 	
 	public OutMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7526,7 +8159,7 @@ protected class OutMessageHandler_Group extends GroupToken {
 
 }
 
-// "handle"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.0'
 protected class OutMessageHandler_HandleKeyword_0 extends KeywordToken  {
 	
 	public OutMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7547,7 +8180,7 @@ protected class OutMessageHandler_HandleKeyword_0 extends KeywordToken  {
 
 }
 
-// "outgoing"
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.1'
 protected class OutMessageHandler_OutgoingKeyword_1 extends KeywordToken  {
 	
 	public OutMessageHandler_OutgoingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7569,7 +8202,7 @@ protected class OutMessageHandler_OutgoingKeyword_1 extends KeywordToken  {
 
 }
 
-// msg=[Message]
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.2'
 protected class OutMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 	
 	public OutMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7606,7 +8239,7 @@ protected class OutMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 
 }
 
-// detailCode=DetailCode
+// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.3'
 protected class OutMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
 	
 	public OutMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7659,7 +8292,6 @@ protected class OutMessageHandler_DetailCodeAssignment_3 extends AssignmentToken
 /************ begin Rule ProtocolSemantics ****************
  *
  * ProtocolSemantics:
- * 
  * 	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
  *
  **/
@@ -7840,7 +8472,6 @@ protected class ProtocolSemantics_RightCurlyBracketKeyword_4 extends KeywordToke
 /************ begin Rule SemanticsRule ****************
  *
  * SemanticsRule:
- * 
  * 	InSemanticsRule | OutSemanticsRule;
  *
  **/
@@ -7955,15 +8586,12 @@ protected class SemanticsRule_OutSemanticsRuleParserRuleCall_1 extends RuleCallT
 /************ begin Rule InSemanticsRule ****************
  *
  * InSemanticsRule:
- * 
  * 	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
- * 
  * 	")"))?;
  *
  **/
 
 // "in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-// 
 // ")"))?
 protected class InSemanticsRule_Group extends GroupToken {
 	
@@ -8401,15 +9029,12 @@ protected class InSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends KeywordT
 /************ begin Rule OutSemanticsRule ****************
  *
  * OutSemanticsRule:
- * 
  * 	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
- * 
  * 	followUps+=SemanticsRule)+ ")"))?;
  *
  **/
 
 // "out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-// 
 // ")"))?
 protected class OutSemanticsRule_Group extends GroupToken {
 	
@@ -8847,53 +9472,31 @@ protected class OutSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends Keyword
 /************ begin Rule ActorClass ****************
  *
  * // some notes on ports
- * 
  * //
- * 
  * // in ROOM ports can be contained in the structure and/or the interface
- * 
  * // p in s ==> internal end port
- * 
  * // p in i ==> relay port
- * 
  * // p in i and p in s ==> external end port
- * 
  * // since double containment is not supported we decided to define external ports as reference to interface ports
- * 
  * ActorClass:
- * 
  * 	(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
- * 
  * 	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
- * 
  * 	serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
- * 
  * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
- * 
  * 	externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
- * 
  * 	serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
- * 
  * 	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
- * 
  * 	stateMachine=StateMachine? "}")? "}";
  *
  **/
 
 // (abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-// 
 // base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
-// 
 // serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
-// 
 // ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
-// 
 // externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
-// 
 // serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-// 
 // ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-// 
 // stateMachine=StateMachine? "}")? "}"
 protected class ActorClass_Group extends GroupToken {
 	
@@ -9457,11 +10060,8 @@ protected class ActorClass_RightCurlyBracketKeyword_7_4 extends KeywordToken  {
 
 
 // ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
-// 
 // ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port | externalPorts+=ExternalPort)* & actorRefs+=ActorRef* &
-// 
 // serviceImplementations+=ServiceImplementation* & serviceAccessPoints+=SAP* & bindings+=Binding* &
-// 
 // connections+=LayerConnection* & attributes+=Attribute*) "}")?
 protected class ActorClass_Group_8 extends GroupToken {
 	
@@ -9854,9 +10454,7 @@ protected class ActorClass_UserCode3Assignment_8_5_1 extends AssignmentToken  {
 
 
 // (internalPorts+=Port | externalPorts+=ExternalPort)* & actorRefs+=ActorRef* &
-// 
 // serviceImplementations+=ServiceImplementation* & serviceAccessPoints+=SAP* & bindings+=Binding* &
-// 
 // connections+=LayerConnection* & attributes+=Attribute*
 protected class ActorClass_UnorderedGroup_8_6 extends UnorderedGroupToken {
 	
@@ -10359,7 +10957,6 @@ protected class ActorClass_RightCurlyBracketKeyword_8_7 extends KeywordToken  {
 
 
 // ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-// 
 // stateMachine=StateMachine? "}")?
 protected class ActorClass_Group_9 extends GroupToken {
 	
@@ -10678,7 +11275,6 @@ protected class ActorClass_RightCurlyBracketKeyword_10 extends KeywordToken  {
 /************ begin Rule InterfaceItem ****************
  *
  * InterfaceItem:
- * 
  * 	Port | SAP | SPP;
  *
  **/
@@ -10831,15 +11427,12 @@ protected class InterfaceItem_SPPParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Port ****************
  *
  * Port:
- * 
  * 	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
- * 
  * 	docu=Documentation?;
  *
  **/
 
 // conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
-// 
 // docu=Documentation?
 protected class Port_Group extends GroupToken {
 	
@@ -11106,7 +11699,6 @@ protected class Port_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule ExternalPort ****************
  *
  * ExternalPort:
- * 
  * 	"external" "Port" interfacePort=[Port];
  *
  **/
@@ -11227,7 +11819,6 @@ protected class ExternalPort_InterfacePortAssignment_2 extends AssignmentToken  
 /************ begin Rule SAP ****************
  *
  * SAP:
- * 
  * 	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
  *
  **/
@@ -11382,7 +11973,6 @@ protected class SAP_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule SPP ****************
  *
  * SPP:
- * 
  * 	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
  *
  **/
@@ -11537,7 +12127,6 @@ protected class SPP_ProtocolAssignment_3 extends AssignmentToken  {
 /************ begin Rule ServiceImplementation ****************
  *
  * ServiceImplementation:
- * 
  * 	"ServiceImplementation" "of" spp=[SPP];
  *
  **/
@@ -11658,15 +12247,12 @@ protected class ServiceImplementation_SppAssignment_2 extends AssignmentToken  {
 /************ begin Rule LogicalSystem ****************
  *
  * LogicalSystem:
- * 
  * 	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* &
- * 
  * 	bindings+=Binding* & connections+=LayerConnection*) "}";
  *
  **/
 
 // "LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* & bindings+=Binding*
-// 
 // & connections+=LayerConnection*) "}"
 protected class LogicalSystem_Group extends GroupToken {
 	
@@ -12070,7 +12656,6 @@ protected class LogicalSystem_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule ActorContainerRef ****************
  *
  * ActorContainerRef:
- * 
  * 	SubSystemRef | ActorRef;
  *
  **/
@@ -12185,7 +12770,6 @@ protected class ActorContainerRef_ActorRefParserRuleCall_1 extends RuleCallToken
 /************ begin Rule SubSystemRef ****************
  *
  * SubSystemRef:
- * 
  * 	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
  *
  **/
@@ -12387,23 +12971,16 @@ protected class SubSystemRef_DocuAssignment_4 extends AssignmentToken  {
 /************ begin Rule SubSystemClass ****************
  *
  * SubSystemClass:
- * 
  * 	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
- * 
  * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port* &
- * 
  * 	serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
- * 
  * 	threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}";
  *
  **/
 
 // "SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
-// 
 // ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port* &
-// 
 // serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
-// 
 // threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}"
 protected class SubSystemClass_Group extends GroupToken {
 	
@@ -12884,7 +13461,6 @@ protected class SubSystemClass_UserCode3Assignment_7_1 extends AssignmentToken  
 
 
 // relayPorts+=Port* & serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* &
-// 
 // connections+=LayerConnection* & threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*
 protected class SubSystemClass_UnorderedGroup_8 extends UnorderedGroupToken {
 	
@@ -13326,7 +13902,6 @@ protected class SubSystemClass_RightCurlyBracketKeyword_9 extends KeywordToken  
 /************ begin Rule LogicalThread ****************
  *
  * LogicalThread:
- * 
  * 	"LogicalThread" name=ID;
  *
  **/
@@ -13422,9 +13997,7 @@ protected class LogicalThread_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ActorInstanceMapping ****************
  *
  * ActorInstanceMapping:
- * 
  * 	"ActorInstanceMapping" path=RefPath "->" thread=[LogicalThread] ("{" actorInstanceMappings+=ActorInstanceMapping*
- * 
  * 	"}")?;
  *
  **/
@@ -13706,7 +14279,6 @@ protected class ActorInstanceMapping_RightCurlyBracketKeyword_4_2 extends Keywor
 /************ begin Rule RefPath ****************
  *
  * RefPath:
- * 
  * 	refs+=RefSegment ("/" refs+=RefSegment)*;
  *
  **/
@@ -13885,7 +14457,6 @@ protected class RefPath_RefsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule RefSegment ****************
  *
  * RefSegment:
- * 
  * 	ref=ID (":" idx=INT)?;
  *
  **/
@@ -14039,7 +14610,6 @@ protected class RefSegment_IdxAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Binding ****************
  *
  * Binding:
- * 
  * 	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
  *
  **/
@@ -14215,7 +14785,6 @@ protected class Binding_Endpoint2Assignment_3 extends AssignmentToken  {
 /************ begin Rule BindingEndPoint ****************
  *
  * BindingEndPoint:
- * 
  * 	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
  *
  **/
@@ -14457,7 +15026,6 @@ protected class BindingEndPoint_SubAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule LayerConnection ****************
  *
  * LayerConnection:
- * 
  * 	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
  *
  **/
@@ -14633,7 +15201,6 @@ protected class LayerConnection_ToAssignment_3 extends AssignmentToken  {
 /************ begin Rule SAPoint ****************
  *
  * SAPoint:
- * 
  * 	RefSAPoint | RelaySAPoint;
  *
  **/
@@ -14748,13 +15315,11 @@ protected class SAPoint_RelaySAPointParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule RefSAPoint ****************
  *
  * RefSAPoint: // satisfies a sub actor
- * 
  * 	"ref" ref=[ActorContainerRef];
  *
  **/
 
 // // satisfies a sub actor
-// 
 // "ref" ref=[ActorContainerRef]
 protected class RefSAPoint_Group extends GroupToken {
 	
@@ -14785,7 +15350,6 @@ protected class RefSAPoint_Group extends GroupToken {
 }
 
 // // satisfies a sub actor
-// 
 // "ref"
 protected class RefSAPoint_RefKeyword_0 extends KeywordToken  {
 	
@@ -14851,13 +15415,11 @@ protected class RefSAPoint_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule RelaySAPoint ****************
  *
  * RelaySAPoint: // relays from own interface
- * 
  * 	"relay_sap" relay=[SPP];
  *
  **/
 
 // // relays from own interface
-// 
 // "relay_sap" relay=[SPP]
 protected class RelaySAPoint_Group extends GroupToken {
 	
@@ -14888,7 +15450,6 @@ protected class RelaySAPoint_Group extends GroupToken {
 }
 
 // // relays from own interface
-// 
 // "relay_sap"
 protected class RelaySAPoint_Relay_sapKeyword_0 extends KeywordToken  {
 	
@@ -14954,7 +15515,6 @@ protected class RelaySAPoint_RelayAssignment_1 extends AssignmentToken  {
 /************ begin Rule SPPoint ****************
  *
  * SPPoint:
- * 
  * 	ref=[ActorContainerRef] "." service=[SPP];
  *
  **/
@@ -15090,7 +15650,6 @@ protected class SPPoint_ServiceAssignment_2 extends AssignmentToken  {
 /************ begin Rule ActorRef ****************
  *
  * ActorRef:
- * 
  * 	refType=ReferenceType? "ActorRef" name=ID multiplicity=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
  *
  **/
@@ -15361,11 +15920,8 @@ protected class ActorRef_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule StateGraphNode ****************
  *
  * // **************************************************************
- * 
  * // state machine
- * 
  * StateGraphNode:
- * 
  * 	State | ChoicePoint | TrPoint;
  *
  **/
@@ -15524,7 +16080,6 @@ protected class StateGraphNode_TrPointParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule StateGraphItem ****************
  *
  * StateGraphItem:
- * 
  * 	StateGraphNode | Transition;
  *
  **/
@@ -15657,7 +16212,6 @@ protected class StateGraphItem_TransitionParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule State ****************
  *
  * State:
- * 
  * 	SimpleState | RefinedState;
  *
  **/
@@ -15772,15 +16326,12 @@ protected class State_RefinedStateParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StateGraph ****************
  *
  * StateGraph:
- * 
  * 	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
- * 
  * 	refinedTransitions+=RefinedTransition)* "}";
  *
  **/
 
 // {StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-// 
 // refinedTransitions+=RefinedTransition)* "}"
 protected class StateGraph_Group extends GroupToken {
 	
@@ -15859,7 +16410,6 @@ protected class StateGraph_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 }
 
 // (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-// 
 // refinedTransitions+=RefinedTransition)*
 protected class StateGraph_Alternatives_2 extends AlternativesToken {
 
@@ -16152,15 +16702,12 @@ protected class StateGraph_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule StateMachine ****************
  *
  * StateMachine returns StateGraph:
- * 
  * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
- * 
  * 	| refinedTransitions+=RefinedTransition)* "}";
  *
  **/
 
 // {StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-// 
 // refinedTransitions+=RefinedTransition)* "}"
 protected class StateMachine_Group extends GroupToken {
 	
@@ -16261,7 +16808,6 @@ protected class StateMachine_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 }
 
 // (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-// 
 // refinedTransitions+=RefinedTransition)*
 protected class StateMachine_Alternatives_3 extends AlternativesToken {
 
@@ -16554,15 +17100,12 @@ protected class StateMachine_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule SimpleState ****************
  *
  * SimpleState:
- * 
  * 	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
- * 
  * 	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
  *
  **/
 
 // "State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
-// 
 // doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?
 protected class SimpleState_Group extends GroupToken {
 	
@@ -16696,7 +17239,6 @@ protected class SimpleState_DocuAssignment_2 extends AssignmentToken  {
 }
 
 // ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph"
-// 
 // subgraph=StateGraph)? "}")?
 protected class SimpleState_Group_3 extends GroupToken {
 	
@@ -17145,15 +17687,12 @@ protected class SimpleState_RightCurlyBracketKeyword_3_5 extends KeywordToken  {
 /************ begin Rule RefinedState ****************
  *
  * RefinedState:
- * 
  * 	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
- * 
  * 	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
  *
  **/
 
 // "RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)?
-// 
 // ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}"
 protected class RefinedState_Group extends GroupToken {
 	
@@ -17713,11 +18252,8 @@ protected class RefinedState_RightCurlyBracketKeyword_8 extends KeywordToken  {
 /************ begin Rule DetailCode ****************
  *
  * // TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
- * 
  * // super() keyword or flag like in Trice
- * 
  * DetailCode:
- * 
  * 	{DetailCode} "{" lines+=STRING* "}";
  *
  **/
@@ -17864,7 +18400,6 @@ protected class DetailCode_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule TrPoint ****************
  *
  * TrPoint:
- * 
  * 	TransitionPoint | EntryPoint | ExitPoint;
  *
  **/
@@ -18017,7 +18552,6 @@ protected class TrPoint_ExitPointParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule TransitionPoint ****************
  *
  * TransitionPoint:
- * 
  * 	handler?="handler"? "TransitionPoint" name=ID;
  *
  **/
@@ -18147,7 +18681,6 @@ protected class TransitionPoint_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule EntryPoint ****************
  *
  * EntryPoint:
- * 
  * 	"EntryPoint" name=ID;
  *
  **/
@@ -18243,7 +18776,6 @@ protected class EntryPoint_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExitPoint ****************
  *
  * ExitPoint:
- * 
  * 	"ExitPoint" name=ID;
  *
  **/
@@ -18339,7 +18871,6 @@ protected class ExitPoint_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ChoicePoint ****************
  *
  * ChoicePoint:
- * 
  * 	"ChoicePoint" name=ID docu=Documentation?;
  *
  **/
@@ -18482,7 +19013,6 @@ protected class ChoicePoint_DocuAssignment_2 extends AssignmentToken  {
 /************ begin Rule Transition ****************
  *
  * Transition:
- * 
  * 	InitialTransition | NonInitialTransition;
  *
  **/
@@ -18603,7 +19133,6 @@ protected class Transition_NonInitialTransitionParserRuleCall_1 extends RuleCall
 /************ begin Rule NonInitialTransition ****************
  *
  * NonInitialTransition:
- * 
  * 	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
  *
  **/
@@ -18758,7 +19287,6 @@ protected class NonInitialTransition_CPBranchTransitionParserRuleCall_2 extends 
 /************ begin Rule TransitionChainStartTransition ****************
  *
  * TransitionChainStartTransition:
- * 
  * 	TriggeredTransition | GuardedTransition;
  *
  **/
@@ -18873,9 +19401,7 @@ protected class TransitionChainStartTransition_GuardedTransitionParserRuleCall_1
 /************ begin Rule InitialTransition ****************
  *
  * InitialTransition:
- * 
  * 	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
- * 
  * 	"}";
  *
  **/
@@ -19267,15 +19793,12 @@ protected class InitialTransition_RightCurlyBracketKeyword_9 extends KeywordToke
 /************ begin Rule ContinuationTransition ****************
  *
  * ContinuationTransition:
- * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
- * 
  * 	action=DetailCode)? "}")?;
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
-// 
 // action=DetailCode)? "}")?
 protected class ContinuationTransition_Group extends GroupToken {
 	
@@ -19711,15 +20234,12 @@ protected class ContinuationTransition_RightCurlyBracketKeyword_7_2 extends Keyw
 /************ begin Rule TriggeredTransition ****************
  *
  * TriggeredTransition:
- * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
- * 
  * 	triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
-// 
 // triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}"
 protected class TriggeredTransition_Group extends GroupToken {
 	
@@ -20336,15 +20856,12 @@ protected class TriggeredTransition_RightCurlyBracketKeyword_14 extends KeywordT
 /************ begin Rule GuardedTransition ****************
  *
  * GuardedTransition:
- * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
- * 
  * 	guard=DetailCode ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
-// 
 // guard=DetailCode ("action" action=DetailCode)? "}"
 protected class GuardedTransition_Group extends GroupToken {
 	
@@ -20824,15 +21341,12 @@ protected class GuardedTransition_RightCurlyBracketKeyword_11 extends KeywordTok
 /************ begin Rule CPBranchTransition ****************
  *
  * CPBranchTransition:
- * 
  * 	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
- * 
  * 	condition=DetailCode ("action" action=DetailCode)? "}";
  *
  **/
 
 // "Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
-// 
 // condition=DetailCode ("action" action=DetailCode)? "}"
 protected class CPBranchTransition_Group extends GroupToken {
 	
@@ -21312,9 +21826,7 @@ protected class CPBranchTransition_RightCurlyBracketKeyword_11 extends KeywordTo
 /************ begin Rule RefinedTransition ****************
  *
  * // by validation RefinedTransition can only be contained in the top level state graph
- * 
  * RefinedTransition:
- * 
  * 	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
  *
  **/
@@ -21572,7 +22084,6 @@ protected class RefinedTransition_RightCurlyBracketKeyword_6 extends KeywordToke
 /************ begin Rule TransitionTerminal ****************
  *
  * TransitionTerminal:
- * 
  * 	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
  *
  **/
@@ -21763,7 +22274,6 @@ protected class TransitionTerminal_ChoicepointTerminalParserRuleCall_3 extends R
 /************ begin Rule StateTerminal ****************
  *
  * StateTerminal:
- * 
  * 	state=[State];
  *
  **/
@@ -21812,7 +22322,6 @@ protected class StateTerminal_StateAssignment extends AssignmentToken  {
 /************ begin Rule TrPointTerminal ****************
  *
  * TrPointTerminal:
- * 
  * 	"my" trPoint=[TrPoint];
  *
  **/
@@ -21911,7 +22420,6 @@ protected class TrPointTerminal_TrPointAssignment_1 extends AssignmentToken  {
 /************ begin Rule SubStateTrPointTerminal ****************
  *
  * SubStateTrPointTerminal:
- * 
  * 	trPoint=[TrPoint] "of" state=[State];
  *
  **/
@@ -22047,7 +22555,6 @@ protected class SubStateTrPointTerminal_StateAssignment_2 extends AssignmentToke
 /************ begin Rule ChoicepointTerminal ****************
  *
  * ChoicepointTerminal:
- * 
  * 	"cp" cp=[ChoicePoint];
  *
  **/
@@ -22146,7 +22653,6 @@ protected class ChoicepointTerminal_CpAssignment_1 extends AssignmentToken  {
 /************ begin Rule Trigger ****************
  *
  * Trigger:
- * 
  * 	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
  *
  **/
@@ -22417,7 +22923,6 @@ protected class Trigger_GreaterThanSignKeyword_4 extends KeywordToken  {
 /************ begin Rule MessageFromIf ****************
  *
  * MessageFromIf:
- * 
  * 	message=[Message] ":" from=[InterfaceItem];
  *
  **/
@@ -22553,7 +23058,6 @@ protected class MessageFromIf_FromAssignment_2 extends AssignmentToken  {
 /************ begin Rule Guard ****************
  *
  * Guard:
- * 
  * 	"guard" guard=DetailCode;
  *
  **/
@@ -22661,47 +23165,26 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * // **************************************************************
- * 
  * // general
- * 
  * // HOWTO: use a combination of URI global scopes and namespace aware local scope provider
- * 
  * // this is configured in the work flow by
- * 
  * //			fragment = scoping.ImportURIScopingFragment {}
- * 
  * // and by overriding configureIScopeProviderDelegate in the runtime module with 
- * 
  * //			ImportedNamespaceAwareLocalScopeProvider
- * 
  * // also configure in the RuntimeModule
- * 
  * //	public Class<? extends ImportUriResolver> bindImportUriResolver() {
- * 
  * //		return PlatformRelativeUriResolver.class;
- * 
  * //	}
- * 
  * // and in the UiRuntimeModule
- * 
  * //	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
- * 
  * //		return GlobalNonPlatformURIEditorOpener.class;
- * 
  * //	}
- * 
  * //	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
- * 
  * //		return ImportAwareHyperlinkHelper.class;
- * 
  * //	}
- * 
  * // the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
- * 
  * // the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
- * 
  * Import:
- * 
  * 	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
  *
  **/
@@ -22925,11 +23408,8 @@ protected class Import_ImportURIAssignment_2 extends AssignmentToken  {
 /************ begin Rule Annotation ****************
  *
  * // **************************************************************
- * 
  * // AnnotationType and Annotation Rules
- * 
  * Annotation:
- * 
  * 	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
  *
  **/
@@ -23235,7 +23715,6 @@ protected class Annotation_RightParenthesisKeyword_2_3 extends KeywordToken  {
 /************ begin Rule KeyValue ****************
  *
  * KeyValue:
- * 
  * 	key=ID "=" value=Literal;
  *
  **/
@@ -23377,15 +23856,12 @@ protected class KeyValue_ValueAssignment_2 extends AssignmentToken  {
 /************ begin Rule AnnotationType ****************
  *
  * AnnotationType:
- * 
  * 	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
- * 
  * 	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
  *
  **/
 
 // "AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
-// 
 // targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}"
 protected class AnnotationType_Group extends GroupToken {
 	
@@ -23900,7 +24376,6 @@ protected class AnnotationType_RightCurlyBracketKeyword_8 extends KeywordToken  
 /************ begin Rule AnnotationAttribute ****************
  *
  * AnnotationAttribute:
- * 
  * 	SimpleAnnotationAttribute | EnumAnnotationAttribute;
  *
  **/
@@ -24015,7 +24490,6 @@ protected class AnnotationAttribute_EnumAnnotationAttributeParserRuleCall_1 exte
 /************ begin Rule SimpleAnnotationAttribute ****************
  *
  * SimpleAnnotationAttribute:
- * 
  * 	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
  *
  **/
@@ -24246,7 +24720,6 @@ protected class SimpleAnnotationAttribute_TypeAssignment_4 extends AssignmentTok
 /************ begin Rule EnumAnnotationAttribute ****************
  *
  * EnumAnnotationAttribute:
- * 
  * 	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
  *
  **/
@@ -24602,11 +25075,8 @@ protected class EnumAnnotationAttribute_RightCurlyBracketKeyword_7 extends Keywo
 /************ begin Rule Documentation ****************
  *
  * // **************************************************************
- * 
  * // Documentation Rule
- * 
  * Documentation:
- * 
  * 	{Documentation} "[" lines+=STRING* "]";
  *
  **/
@@ -24753,7 +25223,6 @@ protected class Documentation_RightSquareBracketKeyword_3 extends KeywordToken  
 /************ begin Rule LiteralArray ****************
  *
  * LiteralArray:
- * 
  * 	literals+=Literal ("," literals+=Literal)*;
  *
  **/
@@ -24932,9 +25401,7 @@ protected class LiteralArray_LiteralsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Literal ****************
  *
  * // Value Types for Attributes
- * 
  * Literal:
- * 
  * 	BooleanLiteral | NumberLiteral | StringLiteral;
  *
  **/
@@ -25089,7 +25556,6 @@ protected class Literal_StringLiteralParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule BooleanLiteral ****************
  *
  * BooleanLiteral:
- * 
  * 	{BooleanLiteral} ("false" | isTrue?="true");
  *
  **/
@@ -25236,7 +25702,6 @@ protected class BooleanLiteral_IsTrueAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule NumberLiteral ****************
  *
  * NumberLiteral:
- * 
  * 	IntLiteral | RealLiteral;
  *
  **/
@@ -25351,7 +25816,6 @@ protected class NumberLiteral_RealLiteralParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
- * 
  * 	{RealLiteral} value=Real;
  *
  **/
@@ -25452,7 +25916,6 @@ protected class RealLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule IntLiteral ****************
  *
  * IntLiteral:
- * 
  * 	{IntLiteral} value=Integer;
  *
  **/
@@ -25553,7 +26016,6 @@ protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule StringLiteral ****************
  *
  * StringLiteral:
- * 
  * 	{StringLiteral} value=STRING;
  *
  **/

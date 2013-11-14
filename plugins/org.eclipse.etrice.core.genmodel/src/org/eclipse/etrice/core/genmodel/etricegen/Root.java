@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -44,6 +45,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getWiredInstances <em>Wired Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -283,6 +285,22 @@ public interface Root extends EObject {
 	EList<WiredStructureClass> getWiredInstances();
 
 	/**
+	 * Returns the value of the '<em><b>Used Enum Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.EnumerationType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Enum Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Enum Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedEnumClasses()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<EnumerationType> getUsedEnumClasses();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * @param cls a room class
 	 * @return all room models referenced directly or indirectly by this room class
@@ -313,6 +331,14 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<DataClass> getReferencedDataClasses(RoomClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<EnumerationType> getReferencedEnumClasses(RoomClass cls);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
@@ -43,6 +44,7 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -234,6 +236,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkAttributeNoStringArray(Attribute att){
+		// TODO-Enum
 		if(!att.getType().isRef() && att.getType().getType() instanceof PrimitiveType){
 			PrimitiveType type = (PrimitiveType)att.getType().getType();
 			if(type.getName().equalsIgnoreCase("string") && att.getSize() > 0)
@@ -801,6 +804,18 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 			}
 		}
+	}
+	
+	@Check
+	public void checkEnumeration(EnumerationType et) {
+		if (et.getPrimitiveType()!=null) {
+			if (et.getPrimitiveType().getType()!=LiteralType.INT) {
+				error("enumerations must be of integer type", RoomPackage.Literals.ENUMERATION_TYPE__PRIMITIVE_TYPE);
+			}
+		}
+		
+		if (et.getLiterals().isEmpty())
+			error("at least one literal has to be specified", RoomPackage.Literals.ENUMERATION_TYPE__LITERALS);
 	}
 	
 	private void error(Result result) {

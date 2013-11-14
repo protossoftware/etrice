@@ -26,7 +26,6 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -793,7 +792,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                   VarDecl _data_3 = m.getData();
                   RefableType _refType_1 = _data_3.getRefType();
                   DataType _type = _refType_1.getType();
-                  boolean _not_1 = (!(_type instanceof PrimitiveType));
+                  boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type);
+                  boolean _not_1 = (!_isEnumerationOrPrimitive);
                   _and = (_not && _not_1);
                 }
                 if (_and) {

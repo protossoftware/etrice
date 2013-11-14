@@ -32,6 +32,10 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.util.RoomHelpers
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -146,6 +150,9 @@ class CppExtensions implements ILanguageExtension {
 		if (dt instanceof PrimitiveType) {
 			return (dt as PrimitiveType).getDefaultValueLiteral
 		}
+		else if (dt instanceof EnumerationType) {
+			return RoomHelpers::getDefaultValue(dt as EnumerationType)
+		}
 		else if (dt instanceof ExternalType) {
 			diagnostician.warning("initialize external type with default constructor"+dt.name, dt.eContainer, dt.eContainingFeature)
 			return dt.typeName + "()"
@@ -187,6 +194,8 @@ class CppExtensions implements ILanguageExtension {
 			
 		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
 			(data.getRefType().getType() as PrimitiveType).getTargetName()
+		else if (data.getRefType().getType() instanceof EnumerationType)
+			(data.getRefType().getType() as EnumerationType).targetType
 		else
 			data.getRefType().getType().getName()
 			
@@ -196,6 +205,9 @@ class CppExtensions implements ILanguageExtension {
 				ct
 			else
 				typeName
+		}
+		else if (data.getRefType().getType() instanceof EnumerationType) {
+			(data.getRefType().getType() as EnumerationType).castType
 		}
 		else
 			typeName

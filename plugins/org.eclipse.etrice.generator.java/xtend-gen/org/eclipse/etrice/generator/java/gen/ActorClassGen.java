@@ -30,7 +30,6 @@ import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
@@ -48,6 +47,7 @@ import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
@@ -91,6 +91,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
   @Extension
   private StateMachineGen _stateMachineGen;
+  
+  @Inject
+  @Extension
+  private TypeHelpers _typeHelpers;
   
   public void doGenerate(final Root root) {
     HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
@@ -273,7 +277,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLine();
       {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
@@ -287,7 +290,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLine();
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
         final Function1<ActorRef,Boolean> _function_2 = new Function1<ActorRef,Boolean>() {
@@ -1230,7 +1232,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               {
                 RefableType _type = att.getType();
                 DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
+                boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+                if (_isEnumerationOrPrimitive) {
                   String _genSavePrimitive = this.genSavePrimitive(att);
                   _builder.append(_genSavePrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -1293,7 +1296,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               {
                 RefableType _type = att.getType();
                 DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
+                boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+                if (_isEnumerationOrPrimitive) {
                   String _genLoadPrimitive = this.genLoadPrimitive(att);
                   _builder.append(_genLoadPrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -1343,7 +1347,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = ((PrimitiveType) _type_1).getTargetName();
+      final String type = this._typeHelpers.typeName(_type_1);
       final String method = this.getSaveMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();
@@ -1435,7 +1439,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = ((PrimitiveType) _type_1).getTargetName();
+      final String type = this._typeHelpers.typeName(_type_1);
       final String method = this.getLoadMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();

@@ -29,6 +29,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumerationType
 
 class ConfigGenAddon {
 	
@@ -70,6 +71,8 @@ class ConfigGenAddon {
 	def private String applyInstanceConfig(InstanceBase instance, String invokes, List<Attribute> path){
 		var a = path.last
 		var aType = a.type.type
+		
+		// TODO-Enum
 		if(aType.primitive){
 			var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
 			if(value == null)
@@ -146,6 +149,9 @@ class ConfigGenAddon {
 			'''
 		else if (path.last.type.type instanceof ExternalType) {
 			// do nothing
+		}
+		else if (path.last.type.type instanceof EnumerationType) {
+			// TODO-Enum
 		}
 		else
 		{

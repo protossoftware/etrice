@@ -25,13 +25,13 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ReferenceType
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.java.Main
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
 import java.util.HashMap
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -45,6 +45,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
+	@Inject extension TypeHelpers
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
@@ -98,11 +99,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
-		
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			import «pc.package».«pc.name».*;
 		«ENDFOR»
-
 		«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
 			import «sub.type.package».«sub.type.name»Interface;
 		«ENDFOR»
@@ -336,7 +335,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.type.type instanceof PrimitiveType»
+					«IF att.type.type.enumerationOrPrimitive»
 						«genSavePrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
@@ -360,7 +359,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.type.type instanceof PrimitiveType»
+					«IF att.type.type.enumerationOrPrimitive»
 						«genLoadPrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
@@ -376,7 +375,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genSavePrimitive(Attribute att) {
-		val type = (att.type.type as PrimitiveType).targetName
+		val type = att.type.type.typeName
 		val method = type.saveMethod
 		
 		if (att.size>1)
@@ -400,7 +399,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genLoadPrimitive(Attribute att) {
-		val type = (att.type.type as PrimitiveType).targetName
+		val type = att.type.type.typeName
 		val method = type.loadMethod
 		
 		if (att.size>1)

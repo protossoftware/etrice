@@ -145,6 +145,7 @@ class VariableServiceGen {
 			«FOR dc : getAllDataClasses(dataClasses)»
 				private void writeDataClass(String id, «dc.typeName» object, Map<String, Object> map){
 					«FOR a : dc.allAttributes»
+«««						TODO-Enum
 						«IF a.type.type.primitive»
 							map.put(id+"/«a.name»", «IF a.size>0»toObjectArray(«ENDIF»object.«invokeGetter(a.name, null)»«IF a.size>0»)«ENDIF»);
 						«ELSE»
@@ -210,6 +211,8 @@ class VariableServiceGen {
 	
 	def private CharSequence genGetAttributeValues(List<Attribute> path, ActorInstance ai){
 		val a = path.last
+		
+		// TODO-Enum
 		if (a.type.type.primitive) {
 			'''
 				values.put("«ai.path»«path.toAbsolutePath('/')»", «IF a.size>0»toObjectArray(«ENDIF»«ai.varName».«path.invokeGetters(null)»«IF a.size>0»)«ENDIF»);
@@ -228,6 +231,8 @@ class VariableServiceGen {
 	def private CharSequence genSetAttributeValues1(List<Attribute> path, ActorInstance ai){
 		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
+		
+		// TODO-Enum
 		if(a.type.type.primitive){'''
 			id = "«ai.path»«path.toAbsolutePath("/")»";
 			«IF a.size==0»«a.type.type.typeName.toWrapper»«ELSE»«a.type.type.typeName»[]«ENDIF» «aVarName» = null;
@@ -253,6 +258,8 @@ class VariableServiceGen {
 	def private CharSequence genSetAttributeValues2(List<Attribute> path, ActorInstance ai){
 		var a = path.last 
 		var aVarName = path.toAbsolutePath("_")
+		
+		// TODO-Enum
 		if (a.type.type.primitive) {
 			val getters = if(path.size>1)path.take(path.size-1).invokeGetters(null)+"." else ""
 			'''

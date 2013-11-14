@@ -12,6 +12,7 @@ package org.eclipse.etrice.core.room;
  * <br>The super class of
  * <ul>
  *   <li>{@link PrimitiveType}</li>
+ *   <li>{@link EnumerationType}</li>
  *   <li>{@link ComplexType}</li>
  * </ul>
  * 

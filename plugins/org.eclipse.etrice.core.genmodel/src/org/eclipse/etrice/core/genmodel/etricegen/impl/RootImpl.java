@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -46,23 +46,15 @@ import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
+import org.eclipse.etrice.core.genmodel.util.RoomCrossReferencer;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.Operation;
-import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SAP;
-import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,6 +77,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getWiredInstances <em>Wired Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedEnumClasses <em>Used Enum Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -283,6 +276,18 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public EList<EnumerationType> getUsedEnumClasses() {
+		if (usedEnumClasses==null) {
+			computeUsedClasses();
+		}
+		return usedEnumClasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public EList<ProtocolClass> getUsedProtocolClasses() {
 		if (usedProtocolClasses==null) {
 			computeUsedClasses();
@@ -425,33 +430,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public EList<RoomModel> getReferencedModels(RoomClass cls) {
-
-		HashSet<DataClass> dataClasses = new HashSet<DataClass>();
-		HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-		HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
-		HashSet<RoomModel> models = new HashSet<RoomModel>();
-		
-		if (cls instanceof DataClass) {
-			dataClasses.add((DataClass) cls);
-		}
-		else if (cls instanceof ProtocolClass) {
-			protocolClasses.add((ProtocolClass) cls);
-		}
-		else if (cls instanceof ActorClass) {
-			actorClasses.add((ActorClass) cls);
-		}
-		else if (cls instanceof SubSystemClass) {
-			SubSystemClass cc = (SubSystemClass) cls;
-			for (ActorRef ar : cc.getActorRefs()) {
-				recursivelyAddReferencedClasses(ar.getType(), actorClasses);
-			}
-		}
-
-		getReferencedClassesAndModels(dataClasses, protocolClasses,
-				actorClasses, models);
-
-		// remove own model
-		models.remove(cls.eContainer());
+		Set<RoomModel> models = crossReferencer.getReferencedModels(cls);
 		
 		BasicEList<RoomModel> result = new BasicEList<RoomModel>(models);
 		Comparator<RoomModel> comp = new RoomModelComparator();
@@ -465,23 +444,12 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public EList<ProtocolClass> getReferencedProtocolClasses(RoomClass rc) {
-		BasicEList<ProtocolClass> result = new BasicEList<ProtocolClass>();
-		if (rc instanceof ActorClass) {
-			ActorClass cls = (ActorClass) rc;
-			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
-			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
-			HashSet<RoomModel> models = new HashSet<RoomModel>();
-			
-			actorClasses.add(cls);
-			
-			getReferencedClassesAndModels(dataClasses, protocolClasses,
-					actorClasses, models);
-			
-			result.addAll(protocolClasses);
-			Comparator<RoomClass> comp = new RoomClassComparator();
-			Collections.sort(result, comp);
-		}
+		Set<ProtocolClass> protocolClasses = crossReferencer.getReferencedProtocolClasses(rc);
+		
+		BasicEList<ProtocolClass> result = new BasicEList<ProtocolClass>(protocolClasses);
+		Comparator<RoomClass> comp = new RoomClassComparator();
+		Collections.sort(result, comp);
+		
 		return result;
 	}
 
@@ -491,37 +459,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public EList<DataClass> getReferencedDataClasses(RoomClass rc) {
-		HashSet<DataClass> dataClasses = new  HashSet<DataClass>();
-		if (rc instanceof DataClass) {
-			DataClass cls = (DataClass) rc;
-			if (cls.getBase()!=null)
-				dataClasses.add(cls.getBase());
-			getAttributeDataClasses(dataClasses, cls.getAttributes());
-			getOperationDataClasses(dataClasses, cls.getOperations());
-		}
-		else if (rc instanceof ActorClass) {
-			ActorClass cls = (ActorClass) rc;
-			do {
-				getAttributeDataClasses(dataClasses, cls.getAttributes());
-				getOperationDataClasses(dataClasses, cls.getOperations());
-				cls = cls.getBase();
-			}
-			while (cls!=null);
-		}
-		else if (rc instanceof ProtocolClass) {
-			ProtocolClass pc = (ProtocolClass) rc;
-			getMessageDataClasses(dataClasses, pc.getIncomingMessages());
-			getMessageDataClasses(dataClasses, pc.getOutgoingMessages());
-			if (pc.getRegular()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
-			}
-			if (pc.getConjugated()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getConjugated().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getConjugated().getOperations());
-			}
-		}
-		return new BasicEList<DataClass>(dataClasses);
+		return new BasicEList<DataClass>(crossReferencer.getReferencedDataClasses(rc));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<EnumerationType> getReferencedEnumClasses(RoomClass rc) {
+		return new BasicEList<EnumerationType>(crossReferencer.getReferencedEnumClasses(rc));
 	}
 
 	/**
@@ -530,26 +477,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public EList<ActorClass> getReferencedActorClasses(RoomClass rc) {
-		HashSet<ActorClass> result = new HashSet<ActorClass>();
-		if (rc instanceof ActorClass) {
-			ActorClass cls = (ActorClass) rc;
-			recursivelyAddReferencedClasses(cls, result);
-		}
-		else if (rc instanceof SubSystemClass) {
-			SubSystemClass cls = (SubSystemClass) rc;
-			for (ActorRef ar : cls.getActorRefs()) {
-				recursivelyAddReferencedClasses(ar.getType(), result);
-			}
-		}
-		return new BasicEList<ActorClass>(result);
-	}
-
-	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
-		actorClasses.add(ac);
-		
-		for (ActorRef ar : ac.getActorRefs()) {
-			recursivelyAddReferencedClasses(ar.getType(), actorClasses);
-		}
+		return new BasicEList<ActorClass>(crossReferencer.getReferencedActorClasses(rc));
 	}
 
 	/**
@@ -702,6 +630,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getOptionalActorClasses();
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				return getWiredInstances();
+			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
+				return getUsedEnumClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -766,6 +696,10 @@ public class RootImpl extends EObjectImpl implements Root {
 				getWiredInstances().clear();
 				getWiredInstances().addAll((Collection<? extends WiredStructureClass>)newValue);
 				return;
+			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
+				getUsedEnumClasses().clear();
+				getUsedEnumClasses().addAll((Collection<? extends EnumerationType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -817,6 +751,9 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				getWiredInstances().clear();
 				return;
+			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
+				getUsedEnumClasses().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -857,6 +794,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return optionalActorClasses != null && !optionalActorClasses.isEmpty();
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				return wiredInstances != null && !wiredInstances.isEmpty();
+			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
+				return !getUsedEnumClasses().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -877,9 +816,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		return result.toString();
 	}
 
-	private HashMap<String, DataClass> name2dc = new HashMap<String, DataClass>();
+	private RoomCrossReferencer crossReferencer = new RoomCrossReferencer();
 	
 	private BasicEList<DataClass> usedDataClasses = null;
+	private BasicEList<EnumerationType> usedEnumClasses = null;
 	private BasicEList<ProtocolClass> usedProtocolClasses = null;
 	private BasicEList<ActorClass> usedActorClasses = null;
 	private BasicEList<RoomModel> usedRoomModels = null;
@@ -887,12 +827,14 @@ public class RootImpl extends EObjectImpl implements Root {
 	private void computeUsedClasses() {
 		if (isLibrary()) {
 			usedDataClasses = new BasicEList<DataClass>();
+			usedEnumClasses = new BasicEList<EnumerationType>();
 			usedProtocolClasses = new BasicEList<ProtocolClass>();
 			usedActorClasses = new BasicEList<ActorClass>();
 			usedRoomModels = new BasicEList<RoomModel>();
 			subSystemClasses = new BasicEList<SubSystemClass>();
 			for (RoomModel mdl : getModels()) {
 				usedDataClasses.addAll(mdl.getDataClasses());
+				usedEnumClasses.addAll(mdl.getEnumerationTypes());
 				
 				for (GeneralProtocolClass gpc : mdl.getProtocolClasses()) {
 					if (gpc instanceof ProtocolClass)
@@ -905,12 +847,6 @@ public class RootImpl extends EObjectImpl implements Root {
 			}
 		}
 		else {
-			for (RoomModel mdl : getModels()) {
-				for (DataClass dc : mdl.getDataClasses()) {
-					name2dc.put(dc.getName(), dc);
-				}
-			}
-			
 			// first we collect actor classes
 			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
 			for (SubSystemInstance ci : getSubSystemInstances()) {
@@ -935,13 +871,15 @@ public class RootImpl extends EObjectImpl implements Root {
 			}
 			
 			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
+			HashSet<EnumerationType> enumClasses = new HashSet<EnumerationType>();
 			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
 			HashSet<RoomModel> models = new HashSet<RoomModel>();
 			
-			getReferencedClassesAndModels(dataClasses, protocolClasses,
+			crossReferencer.getReferencedClassesAndModels(dataClasses, enumClasses, protocolClasses,
 					actorClasses, models);
 			
 			usedDataClasses = new BasicEList<DataClass>(dataClasses);
+			usedEnumClasses = new BasicEList<EnumerationType>(enumClasses);
 			usedProtocolClasses = new BasicEList<ProtocolClass>(protocolClasses);
 			usedActorClasses = new BasicEList<ActorClass>(actorClasses);
 			usedRoomModels = new BasicEList<RoomModel>(models);
@@ -950,165 +888,10 @@ public class RootImpl extends EObjectImpl implements Root {
 		RoomClassComparator rcComp = new RoomClassComparator();
 		RoomModelComparator mdlComp = new RoomModelComparator();
 		Collections.sort(usedDataClasses, rcComp);
+		Collections.sort(usedEnumClasses, rcComp);
 		Collections.sort(usedProtocolClasses, rcComp);
 		Collections.sort(usedActorClasses, rcComp);
 		Collections.sort(usedRoomModels, mdlComp);
-	}
-
-	private void getReferencedClassesAndModels(HashSet<DataClass> dataClasses,
-			HashSet<ProtocolClass> protocolClasses,
-			HashSet<ActorClass> actorClasses, HashSet<RoomModel> models) {
-		// add actor base classes
-		LinkedList<ActorClass> tmpAc = new LinkedList<ActorClass>(actorClasses);
-		for (ActorClass ac : tmpAc) {
-			while (ac.getBase()!=null) {
-				ac = ac.getBase();
-				actorClasses.add(ac);
-			}
-		}
-		
-		// add referenced actor classes
-		boolean addedNew = false;
-		do {
-			tmpAc = new LinkedList<ActorClass>(actorClasses);
-			addedNew = false;
-			for (ActorClass ac : tmpAc) {
-				for (ActorRef ref : ac.getActorRefs()) {
-					ActorClass cls = ref.getType();
-					addedNew |= actorClasses.add(cls);
-					while (cls.getBase()!=null) {
-						cls = cls.getBase();
-						addedNew |= actorClasses.add(cls);
-					}
-				}
-			}
-		}
-		while (addedNew);
-		
-		// determine data and protocol classes used by actor classes
-		for (ActorClass ac : actorClasses) {
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getInterfacePorts());
-			// ExtPorts are in the interface and thus already covered
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getInternalPorts());
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getServiceAccessPoints());
-			for (ServiceImplementation ispp : ac.getServiceImplementations()) {
-				protocolClasses.add(ispp.getSpp().getProtocol());
-			}
-			getInterfaceItemProtocolClasses(protocolClasses, ac.getServiceProvisionPoints());
-			getAttributeDataClasses(dataClasses, ac.getAttributes());
-			getOperationDataClasses(dataClasses, ac.getOperations());
-		}
-		
-		// add protocol base classes
-		LinkedList<ProtocolClass> tmpPc = new LinkedList<ProtocolClass>(protocolClasses);
-		for (ProtocolClass pc : tmpPc) {
-			while (pc.getBase()!=null) {
-				pc = pc.getBase();
-				protocolClasses.add(pc);
-			}
-		}
-		
-		// add data classes used by protocols
-		for (ProtocolClass pc : protocolClasses) {
-			for (Message m : pc.getIncomingMessages()) {
-				if (m.getData()!=null)
-					getVarDeclDataClasses(dataClasses, Collections.singleton(m.getData()));
-			}
-			for (Message m : pc.getOutgoingMessages()) {
-				if (m.getData()!=null)
-					getVarDeclDataClasses(dataClasses, Collections.singleton(m.getData()));
-			}
-			
-			if (pc.getRegular()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getRegular().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getRegular().getOperations());
-			}
-			if (pc.getConjugated()!=null) {
-				getAttributeDataClasses(dataClasses, pc.getConjugated().getAttributes());
-				getOperationDataClasses(dataClasses, pc.getConjugated().getOperations());
-			}
-		}
-		
-		// add data class base classes and data class attribute and operation classes
-		boolean repeat = true;
-		do {
-			LinkedList<DataClass> tmpDc = new LinkedList<DataClass>(dataClasses);
-			for (DataClass dc : tmpDc) {
-				getAttributeDataClasses(dataClasses, dc.getAttributes());
-				getOperationDataClasses(dataClasses, dc.getOperations());
-				while (dc.getBase()!=null) {
-					dc = dc.getBase();
-					dataClasses.add(dc);
-				}
-			}
-			
-			if (tmpDc.size()==dataClasses.size())
-				// nothing changed
-				repeat = false;
-		}
-		while (repeat);
-		
-		// finally compute used models
-		for (DataClass dc : dataClasses) {
-			models.add((RoomModel) dc.eContainer());
-		}
-		for (ProtocolClass pc : protocolClasses) {
-			models.add((RoomModel) pc.eContainer());
-		}
-		for (ActorClass ac : actorClasses) {
-			models.add((RoomModel) ac.eContainer());
-		}
-	}
-
-	private void getInterfaceItemProtocolClasses(
-			HashSet<ProtocolClass> protocolClasses, EList<? extends InterfaceItem> items) {
-		for (InterfaceItem ii : items) {
-			if (ii instanceof Port && ((Port)ii).getProtocol() instanceof ProtocolClass)
-				protocolClasses.add((ProtocolClass) ((Port)ii).getProtocol());
-			else if (ii instanceof SAP)
-				protocolClasses.add(((SAP)ii).getProtocol());
-			else if (ii instanceof SPP)
-				protocolClasses.add(((SPP)ii).getProtocol());
-		}
-	}
-
-	private void getOperationDataClasses(HashSet<DataClass> dataClasses, EList<? extends Operation> operations) {
-		for (Operation op : operations) {
-			if (op.getReturnType()!=null) {
-				DataClass dc = name2dc.get(op.getReturnType().getType().getName());
-				if (dc!=null)
-					dataClasses.add(dc);
-			}
-			getVarDeclDataClasses(dataClasses, op.getArguments());
-		}
-	}
-
-	private void getVarDeclDataClasses(HashSet<DataClass> dataClasses, Collection<VarDecl> decls) {
-		for (VarDecl vd : decls) {
-			DataClass dc = name2dc.get(vd.getRefType().getType().getName());
-			if (dc!=null)
-				dataClasses.add(dc);
-		}
-	}
-
-	private void getAttributeDataClasses(HashSet<DataClass> dataClasses, Collection<Attribute> attributes) {
-		for (Attribute attr : attributes) {
-			DataClass dc = name2dc.get(attr.getType().getType().getName());
-			if (dc!=null)
-				dataClasses.add(dc);
-		}
-	}
-	
-	private void getMessageDataClasses(HashSet<DataClass> dataClasses, EList<Message> messages) {
-		for (Message message : messages) {
-			if (message.getData()!=null) {
-				if (message.getData().getRefType().getType() instanceof DataClass) {
-					DataClass dc = (DataClass) message.getData().getRefType().getType();
-					if (dc!=null)
-						dataClasses.add(dc);
-				}
-			}
-		}
 	}
 
 } //RootImpl

@@ -32,6 +32,8 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EntryPoint;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -168,6 +170,20 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass primitiveTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumerationTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -822,7 +838,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ExternalTypes()
+  public EReference getRoomModel_EnumerationTypes()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(4);
   }
@@ -832,7 +848,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_DataClasses()
+  public EReference getRoomModel_ExternalTypes()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(5);
   }
@@ -842,7 +858,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ProtocolClasses()
+  public EReference getRoomModel_DataClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(6);
   }
@@ -852,7 +868,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ActorClasses()
+  public EReference getRoomModel_ProtocolClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(7);
   }
@@ -862,7 +878,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_SubSystemClasses()
+  public EReference getRoomModel_ActorClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(8);
   }
@@ -872,7 +888,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_Systems()
+  public EReference getRoomModel_SubSystemClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(9);
   }
@@ -882,9 +898,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_AnnotationTypes()
+  public EReference getRoomModel_Systems()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoomModel_AnnotationTypes()
+  {
+    return (EReference)roomModelEClass.getEStructuralFeatures().get(11);
   }
 
   /**
@@ -1145,6 +1171,66 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EAttribute getPrimitiveType_DefaultValueLiteral()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnumerationType()
+  {
+    return enumerationTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumerationType_PrimitiveType()
+  {
+    return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumerationType_Literals()
+  {
+    return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnumLiteral()
+  {
+    return enumLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEnumLiteral_Name()
+  {
+    return (EAttribute)enumLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumLiteral_Literal()
+  {
+    return (EReference)enumLiteralEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -3332,6 +3418,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(roomModelEClass, ROOM_MODEL__DOCU);
     createEReference(roomModelEClass, ROOM_MODEL__IMPORTS);
     createEReference(roomModelEClass, ROOM_MODEL__PRIMITIVE_TYPES);
+    createEReference(roomModelEClass, ROOM_MODEL__ENUMERATION_TYPES);
     createEReference(roomModelEClass, ROOM_MODEL__EXTERNAL_TYPES);
     createEReference(roomModelEClass, ROOM_MODEL__DATA_CLASSES);
     createEReference(roomModelEClass, ROOM_MODEL__PROTOCOL_CLASSES);
@@ -3373,6 +3460,14 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__TARGET_NAME);
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__CAST_NAME);
     createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__DEFAULT_VALUE_LITERAL);
+
+    enumerationTypeEClass = createEClass(ENUMERATION_TYPE);
+    createEReference(enumerationTypeEClass, ENUMERATION_TYPE__PRIMITIVE_TYPE);
+    createEReference(enumerationTypeEClass, ENUMERATION_TYPE__LITERALS);
+
+    enumLiteralEClass = createEClass(ENUM_LITERAL);
+    createEAttribute(enumLiteralEClass, ENUM_LITERAL__NAME);
+    createEReference(enumLiteralEClass, ENUM_LITERAL__LITERAL);
 
     externalTypeEClass = createEClass(EXTERNAL_TYPE);
     createEAttribute(externalTypeEClass, EXTERNAL_TYPE__TARGET_NAME);
@@ -3701,6 +3796,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     dataTypeEClass.getESuperTypes().add(this.getRoomClass());
     complexTypeEClass.getESuperTypes().add(this.getDataType());
     primitiveTypeEClass.getESuperTypes().add(this.getDataType());
+    enumerationTypeEClass.getESuperTypes().add(this.getDataType());
     externalTypeEClass.getESuperTypes().add(this.getComplexType());
     dataClassEClass.getESuperTypes().add(this.getComplexType());
     standardOperationEClass.getESuperTypes().add(this.getOperation());
@@ -3750,6 +3846,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getRoomModel_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_Imports(), this.getImport(), null, "imports", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_PrimitiveTypes(), this.getPrimitiveType(), null, "primitiveTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoomModel_EnumerationTypes(), this.getEnumerationType(), null, "enumerationTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_ExternalTypes(), this.getExternalType(), null, "externalTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_DataClasses(), this.getDataClass(), null, "dataClasses", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_ProtocolClasses(), this.getGeneralProtocolClass(), null, "protocolClasses", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3791,6 +3888,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getPrimitiveType_TargetName(), ecorePackage.getEString(), "targetName", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPrimitiveType_CastName(), ecorePackage.getEString(), "castName", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPrimitiveType_DefaultValueLiteral(), ecorePackage.getEString(), "defaultValueLiteral", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumerationTypeEClass, EnumerationType.class, "EnumerationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEnumerationType_PrimitiveType(), this.getPrimitiveType(), null, "primitiveType", null, 0, 1, EnumerationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumerationType_Literals(), this.getEnumLiteral(), null, "literals", null, 0, -1, EnumerationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumLiteralEClass, EnumLiteral.class, "EnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumLiteral_Literal(), theBasePackage.getIntLiteral(), null, "literal", null, 0, 1, EnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    addEOperation(enumLiteralEClass, ecorePackage.getELong(), "getLiteralValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(externalTypeEClass, ExternalType.class, "ExternalType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getExternalType_TargetName(), ecorePackage.getEString(), "targetName", null, 0, 1, ExternalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -15,12 +15,16 @@ package org.eclipse.etrice.generator.base;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.genmodel.util.RoomCrossReferencer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
@@ -63,6 +67,7 @@ public class DetailCodeTranslator {
 	private HashMap<String, InterfaceItem> name2item = new HashMap<String, InterfaceItem>();
 	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
 	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
+	private EObject container;
 	
 	/**
 	 * Constructor to be used with actor classes
@@ -100,6 +105,7 @@ public class DetailCodeTranslator {
 	
 	private DetailCodeTranslator(EObject container, ITranslationProvider provider) {
 		this.provider = provider;
+		this.container = container;
 		prepare(container);
 	}
 	
@@ -124,6 +130,9 @@ public class DetailCodeTranslator {
 		
 		if (provider.translateTags())
 			result = translateTags(result, code);
+		
+		if (provider.translateEnums())
+			result = translateEnums(result);
 		
 		return result;
 	}
@@ -226,7 +235,39 @@ public class DetailCodeTranslator {
 			}
 		}
 		
-		return result.toString();
+		return translateEnums(result.toString());
+	}
+	
+	private String translateEnums(String text) {
+		if (provider.translateEnums()) {
+			
+			RoomCrossReferencer crossReferencer = new RoomCrossReferencer();
+			
+			Set<EnumerationType> enumClasses = null;
+			if (container instanceof ActorClass) {
+				enumClasses = crossReferencer.getReferencedEnumClasses((ActorClass)container);
+			} else if (container instanceof DataClass)
+				enumClasses = crossReferencer.getReferencedEnumClasses((DataClass)container);
+			else if (container instanceof PortClass)
+				enumClasses = crossReferencer.getReferencedEnumClasses((PortClass)container);
+			else if (container instanceof ProtocolClass)
+				enumClasses = crossReferencer.getReferencedEnumClasses((ProtocolClass)container);
+			
+			if (enumClasses!=null) {
+				for (EnumerationType et : enumClasses) {
+					for (EnumLiteral lit : et.getLiterals()) {
+						String pattern = et.getName()+"."+lit.getName();
+						if (text.contains(pattern)) {
+							String replacement = provider.getEnumText(lit);
+							text = text.replace(pattern, replacement);
+						}
+					}
+				}
+			}
+			return text;
+		}
+		else
+			return text;
 	}
 
 	private String getArrayIndex(String text, Position curr) {

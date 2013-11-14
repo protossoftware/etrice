@@ -26,9 +26,12 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -267,6 +270,11 @@ public class DocGen {
     CharSequence _generateAllProtocolClassDocs = this.generateAllProtocolClassDocs(root, model);
     _builder.append(_generateAllProtocolClassDocs, "");
     _builder.newLineIfNotEmpty();
+    _builder.append("\\section{Enumeration Description}");
+    _builder.newLine();
+    CharSequence _generateAllEnumerationDocs = this.generateAllEnumerationDocs(root, model);
+    _builder.append(_generateAllEnumerationDocs, "");
+    _builder.newLineIfNotEmpty();
     _builder.append("\\section{Data Class Description}");
     _builder.newLine();
     CharSequence _generateAllDataClassDocs = this.generateAllDataClassDocs(root, model);
@@ -309,7 +317,8 @@ public class DocGen {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = system.getName();
-      _builder.append(_name_1, "");
+      String _escapedString = this.escapedString(_name_1);
+      _builder.append(_escapedString, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = system.getDocu();
@@ -353,7 +362,8 @@ public class DocGen {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
       String _plus = (_docGenerationTargetPath + "images\\");
       String _name = ssc.getName();
-      String _plus_1 = (_plus + _name);
+      String _escapedString = this.escapedString(_name);
+      String _plus_1 = (_plus + _escapedString);
       String filename = (_plus_1 + "_structure.jpg");
       String _replaceAll = filename.replaceAll("\\\\", "/");
       filename = _replaceAll;
@@ -361,7 +371,8 @@ public class DocGen {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = ssc.getName();
-      _builder.append(_name_1, "");
+      String _escapedString_1 = this.escapedString(_name_1);
+      _builder.append(_escapedString_1, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = ssc.getDocu();
@@ -386,6 +397,85 @@ public class DocGen {
     return _xblockexpression;
   }
   
+  private CharSequence generateAllEnumerationDocs(final Root root, final RoomModel model) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
+      for(final EnumerationType et : _enumerationTypes) {
+        CharSequence _generateEnumerationDoc = this.generateEnumerationDoc(root, et);
+        _builder.append(_generateEnumerationDoc, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  private CharSequence generateEnumerationDoc(final Root root, final EnumerationType dc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\\level{2} {");
+    String _name = dc.getName();
+    String _escapedString = this.escapedString(_name);
+    _builder.append(_escapedString, "");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
+    Documentation _docu = dc.getDocu();
+    CharSequence _generateDocText = this.generateDocText(_docu);
+    _builder.append(_generateDocText, "");
+    _builder.newLineIfNotEmpty();
+    {
+      PrimitiveType _primitiveType = dc.getPrimitiveType();
+      boolean _notEquals = (!Objects.equal(_primitiveType, null));
+      if (_notEquals) {
+        _builder.append("The literals of this enumeration are based on PrimitiveType ");
+        PrimitiveType _primitiveType_1 = dc.getPrimitiveType();
+        String _name_1 = _primitiveType_1.getName();
+        String _escapedString_1 = this.escapedString(_name_1);
+        _builder.append(_escapedString_1, "");
+        _builder.append(".");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("The literals of this enumeration are of type \\texttt{int}.");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\\level{3}{Literals}");
+    _builder.newLine();
+    _builder.append("\\begin{tabular}[ht]{|l|r|r|r|}");
+    _builder.newLine();
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\\textbf{Name} & \\textbf{Value} & \\textbf{Hex Value} & \\textbf{Binary Value}\\\\");
+    _builder.newLine();
+    {
+      EList<EnumLiteral> _literals = dc.getLiterals();
+      for(final EnumLiteral lit : _literals) {
+        _builder.append("\\hline");
+        _builder.newLine();
+        String _name_2 = lit.getName();
+        String _escapedString_2 = this.escapedString(_name_2);
+        _builder.append(_escapedString_2, "");
+        _builder.append(" & ");
+        long _literalValue = lit.getLiteralValue();
+        _builder.append(_literalValue, "");
+        _builder.append(" & 0x");
+        long _literalValue_1 = lit.getLiteralValue();
+        String _hexString = Long.toHexString(_literalValue_1);
+        _builder.append(_hexString, "");
+        _builder.append(" & ");
+        long _literalValue_2 = lit.getLiteralValue();
+        String _binaryString = Long.toBinaryString(_literalValue_2);
+        _builder.append(_binaryString, "");
+        _builder.append("\\\\");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\\end{tabular}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   private CharSequence generateAllDataClassDocs(final Root root, final RoomModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -403,7 +493,8 @@ public class DocGen {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = dc.getName();
-    _builder.append(_name, "");
+    String _escapedString = this.escapedString(_name);
+    _builder.append(_escapedString, "");
     _builder.append("}");
     _builder.newLineIfNotEmpty();
     Documentation _docu = dc.getDocu();
@@ -444,7 +535,8 @@ public class DocGen {
     _builder.append("\t");
     _builder.append("\\level{2} {");
     String _name = pc.getName();
-    _builder.append(_name, "	");
+    String _escapedString = this.escapedString(_name);
+    _builder.append(_escapedString, "	");
     _builder.append("}");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -473,7 +565,8 @@ public class DocGen {
         _builder.newLine();
         _builder.append("\t");
         String _name_1 = ims.getName();
-        _builder.append(_name_1, "	");
+        String _escapedString_1 = this.escapedString(_name_1);
+        _builder.append(_escapedString_1, "	");
         _builder.append(" & ");
         {
           VarDecl _data = ims.getData();
@@ -482,7 +575,8 @@ public class DocGen {
             _builder.append(" ");
             VarDecl _data_1 = ims.getData();
             String _name_2 = _data_1.getName();
-            _builder.append(_name_2, "	");
+            String _escapedString_2 = this.escapedString(_name_2);
+            _builder.append(_escapedString_2, "	");
             _builder.append(" ");
           }
         }
@@ -522,7 +616,8 @@ public class DocGen {
         _builder.newLine();
         _builder.append("\t");
         String _name_3 = oms.getName();
-        _builder.append(_name_3, "	");
+        String _escapedString_3 = this.escapedString(_name_3);
+        _builder.append(_escapedString_3, "	");
         _builder.append(" & ");
         {
           VarDecl _data_2 = oms.getData();
@@ -531,7 +626,8 @@ public class DocGen {
             _builder.append(" ");
             VarDecl _data_3 = oms.getData();
             String _name_4 = _data_3.getName();
-            _builder.append(_name_4, "	");
+            String _escapedString_4 = this.escapedString(_name_4);
+            _builder.append(_escapedString_4, "	");
             _builder.append(" ");
           }
         }
@@ -556,7 +652,8 @@ public class DocGen {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = pc.getName();
-    _builder.append(_name, "");
+    String _escapedString = this.escapedString(_name);
+    _builder.append(_escapedString, "");
     _builder.append("}");
     _builder.newLineIfNotEmpty();
     Documentation _docu = pc.getDocu();
@@ -570,7 +667,7 @@ public class DocGen {
     _builder.newLine();
     _builder.append("\\hline");
     _builder.newLine();
-    _builder.append("Name & Protocol\\\\");
+    _builder.append("\\textbf{Name} & \\textbf{Protocol}\\\\");
     _builder.newLine();
     {
       EList<SubProtocol> _subProtocols = pc.getSubProtocols();
@@ -578,11 +675,13 @@ public class DocGen {
         _builder.append("\\hline");
         _builder.newLine();
         String _name_1 = sub.getName();
-        _builder.append(_name_1, "");
+        String _escapedString_1 = this.escapedString(_name_1);
+        _builder.append(_escapedString_1, "");
         _builder.append(" & ");
         GeneralProtocolClass _protocol = sub.getProtocol();
         String _name_2 = _protocol.getName();
-        _builder.append(_name_2, "");
+        String _escapedString_2 = this.escapedString(_name_2);
+        _builder.append(_escapedString_2, "");
         _builder.append("\\\\");
         _builder.newLineIfNotEmpty();
       }
@@ -621,7 +720,8 @@ public class DocGen {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = ac.getName();
-      _builder.append(_name_1, "");
+      String _escapedString = this.escapedString(_name_1);
+      _builder.append(_escapedString, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = ac.getDocu();
@@ -736,7 +836,8 @@ public class DocGen {
             if (_notEquals_1) {
               _builder.append("\\textbf{Choicepoint description} \\textit{");
               String _name_2 = c.getName();
-              _builder.append(_name_2, "");
+              String _escapedString = this.escapedString(_name_2);
+              _builder.append(_escapedString, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
               _builder.append("\\newline");
@@ -850,7 +951,8 @@ public class DocGen {
             if (_notEquals_1) {
               _builder.append("\\textbf{Choicepoint description} \\textit{");
               String _name_2 = c.getName();
-              _builder.append(_name_2, "");
+              String _escapedString = this.escapedString(_name_2);
+              _builder.append(_escapedString, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
               _builder.append("\\newline");
@@ -899,19 +1001,21 @@ public class DocGen {
         _builder.newLine();
         _builder.append("\\hline");
         _builder.newLine();
-        _builder.append("Name & Type & Description\\\\");
+        _builder.append("\\textbf{Name} & \\textbf{Type} & \\textbf{Description}\\\\");
         _builder.newLine();
         {
           for(final Attribute at : attributes) {
             _builder.append("\\hline");
             _builder.newLine();
             String _name = at.getName();
-            _builder.append(_name, "");
+            String _escapedString = this.escapedString(_name);
+            _builder.append(_escapedString, "");
             _builder.append(" & ");
             RefableType _type = at.getType();
             DataType _type_1 = _type.getType();
             String _name_1 = _type_1.getName();
-            _builder.append(_name_1, "");
+            String _escapedString_1 = this.escapedString(_name_1);
+            _builder.append(_escapedString_1, "");
             _builder.append(" & ");
             Documentation _docu = at.getDocu();
             CharSequence _generateDocText = this.generateDocText(_docu);
@@ -940,7 +1044,8 @@ public class DocGen {
         _builder.append("\t");
         _builder.append("Name: & ");
         String _name = op.getName();
-        _builder.append(_name, "	");
+        String _escapedString = this.escapedString(_name);
+        _builder.append(_escapedString, "	");
         _builder.append("\\\\");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -955,7 +1060,8 @@ public class DocGen {
             RefableType _returnType_1 = op.getReturnType();
             DataType _type = _returnType_1.getType();
             String _name_1 = _type.getName();
-            _builder.append(_name_1, "	");
+            String _escapedString_1 = this.escapedString(_name_1);
+            _builder.append(_escapedString_1, "	");
           } else {
             _builder.append("void");
           }
@@ -977,12 +1083,14 @@ public class DocGen {
               _builder.appendImmediate(", ", "	");
             }
             String _name_2 = pa.getName();
-            _builder.append(_name_2, "	");
+            String _escapedString_2 = this.escapedString(_name_2);
+            _builder.append(_escapedString_2, "	");
             _builder.append(":");
             RefableType _refType = pa.getRefType();
             DataType _type_1 = _refType.getType();
             String _name_3 = _type_1.getName();
-            _builder.append(_name_3, "	");
+            String _escapedString_3 = this.escapedString(_name_3);
+            _builder.append(_escapedString_3, "	");
           }
         }
         _builder.append("\\\\");
@@ -1083,6 +1191,11 @@ public class DocGen {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  private String escapedString(final String text) {
+    String _replace = text.replace("_", "\\_");
+    return _replace;
   }
   
   private CharSequence generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {

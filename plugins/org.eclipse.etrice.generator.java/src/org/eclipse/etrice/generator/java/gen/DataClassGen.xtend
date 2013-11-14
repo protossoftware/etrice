@@ -53,7 +53,8 @@ class DataClassGen {
 		import java.io.Serializable;
 		
 		«var models = root.getReferencedModels(dc)»
-		«FOR model : models»import «model.name».*;
+		«FOR model : models»
+			import «model.name».*;
 		«ENDFOR»
 		
 		«dc.userCode(1)»

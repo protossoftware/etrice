@@ -28,6 +28,8 @@
         <details key="documentation" value="&lt;br>This is a list of all primitive types defined by this model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationTypes" upperBound="-1"
+        eType="#//EnumerationType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="externalTypes" upperBound="-1"
         eType="#//ExternalType" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -176,7 +178,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//RoomClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link PrimitiveType}&lt;/li>&#xD;&#xA;  &lt;li>{@link ComplexType}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link PrimitiveType}&lt;/li>&#xD;&#xA;  &lt;li>{@link EnumerationType}&lt;/li>&#xD;&#xA;  &lt;li>{@link ComplexType}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//DataType">
@@ -206,6 +208,39 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional default value literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//DataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A sub type of {@link DataType} for enumerations.&#xD;&#xA;The EnumerationType can be associated with a {@link PrimitiveType} as value type for&#xD;&#xA;the {@link EnumLiteral}s. It has to contain at least one literal.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveType" eType="#//PrimitiveType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The value type of the literals.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//EnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A literal value of the enumeration.&#xD;&#xA;It can have a value associated.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getLiteralValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this.getLiteral() != null)&#xD;&#xA;&#x9;return this.getLiteral().getValue();&#xD;&#xA;&#xD;&#xA;// recursively from predecessor&#xD;&#xA;&lt;%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());&#xD;&#xA;int idx = et.getLiterals().indexOf(this);&#xD;&#xA;if (idx > 0)&#xD;&#xA;&#x9;return et.getLiterals().get(idx - 1).getLiteralValue() + 1;&#xD;&#xA;&#xD;&#xA;return 0;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The name of the literal.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//IntLiteral"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The value of the literal. It is associated with a target type which defaults to&#xD;&#xA;{@code int} and can be set explicitly using the {@link EnumerationType#primitiveType}&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -696,7 +731,7 @@
     </eAnnotations>
     <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.Port)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Port) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SAP)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SPP)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
+        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.Port%>)&#xD;&#xA;&#x9;return ((Port) this).getProtocol();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SAP%>)&#xD;&#xA;&#x9;return ((SAP) this).getProtocol();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SPP%>)&#xD;&#xA;&#x9;return ((SPP) this).getProtocol();&#xD;&#xA;return null;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -794,7 +829,7 @@
     </eAnnotations>
     <eOperations name="getStructureClass" eType="#//StructureClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.ActorRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.ActorRef)this).getType();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();&#xD;&#xA;else&#xD;&#xA;&#x9;return null;&#xD;&#xA;"/>
+        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.ActorRef%>)&#xD;&#xA;&#x9;return ((ActorRef)this).getType();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SubSystemRef%>)&#xD;&#xA;&#x9;return ((SubSystemRef)this).getType();&#xD;&#xA;else&#xD;&#xA;&#x9;return null;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -1037,7 +1072,7 @@
     </eAnnotations>
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof org.eclipse.etrice.core.room.State) &#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.State)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.TrPoint)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.TrPoint)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();&#xD;&#xA;else if (this instanceof org.eclipse.etrice.core.room.Transition)&#xD;&#xA;&#x9;return ((org.eclipse.etrice.core.room.Transition)this).getName();&#xD;&#xA;return &quot;&quot;;&#xD;&#xA;"/>
+        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.State%>) &#xD;&#xA;&#x9;return ((State)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.TrPoint%>)&#xD;&#xA;&#x9;return ((TrPoint)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.ChoicePoint%>)&#xD;&#xA;&#x9;return ((ChoicePoint)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.Transition%>)&#xD;&#xA;&#x9;return ((Transition)this).getName();&#xD;&#xA;return &quot;&quot;;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
@@ -1047,7 +1082,7 @@
     </eAnnotations>
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? &quot;&quot;:((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
+        <details key="body" value="return (this instanceof &lt;%org.eclipse.etrice.core.room.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof &lt;%org.eclipse.etrice.core.room.RefinedState%>)? (((RefinedState)this).getTarget()==null? &quot;&quot;:((RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"

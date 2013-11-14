@@ -74,6 +74,8 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.DATA_TYPE: return createDataType();
       case RoomPackage.COMPLEX_TYPE: return createComplexType();
       case RoomPackage.PRIMITIVE_TYPE: return createPrimitiveType();
+      case RoomPackage.ENUMERATION_TYPE: return createEnumerationType();
+      case RoomPackage.ENUM_LITERAL: return createEnumLiteral();
       case RoomPackage.EXTERNAL_TYPE: return createExternalType();
       case RoomPackage.DATA_CLASS: return createDataClass();
       case RoomPackage.ATTRIBUTE: return createAttribute();
@@ -294,6 +296,28 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
     return primitiveType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumerationType createEnumerationType()
+  {
+    EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
+    return enumerationType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumLiteral createEnumLiteral()
+  {
+    EnumLiteralImpl enumLiteral = new EnumLiteralImpl();
+    return enumLiteral;
   }
 
   /**

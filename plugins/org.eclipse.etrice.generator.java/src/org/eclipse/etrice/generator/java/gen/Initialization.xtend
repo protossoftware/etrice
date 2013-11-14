@@ -77,7 +77,10 @@ class Initialization {
 		else if(aType.primitive){
 			var value = getDataConfigValue(path, roomClass)
 			return if(value != null) attributeInit(path, languageExt.toValueLiteral(aType as PrimitiveType, value))
-		 }
+		}
+		else if(aType.enumeration) {
+			// TODO-Enum
+		}
 	}
 	
 	def private attributeInit(Attribute a, String value){

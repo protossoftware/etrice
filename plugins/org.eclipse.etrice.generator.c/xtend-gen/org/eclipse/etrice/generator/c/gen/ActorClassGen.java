@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -264,11 +265,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
+        EList<EnumerationType> _referencedEnumClasses = root.getReferencedEnumClasses(ac);
+        for(final EnumerationType enumClass : _referencedEnumClasses) {
+          _builder.append("#include ");
+          String _includePath_1 = this._cExtensions.getIncludePath(enumClass);
+          _builder.append(_includePath_1, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
           _builder.append("#include ");
-          String _includePath_1 = this._cExtensions.getIncludePath(pc);
-          _builder.append(_includePath_1, "");
+          String _includePath_2 = this._cExtensions.getIncludePath(pc);
+          _builder.append(_includePath_2, "");
           _builder.newLineIfNotEmpty();
         }
       }

@@ -24,6 +24,7 @@ import org.eclipse.etrice.generator.generic.PrepareFileSystem
 class MainGen implements IGenerator {
 	
 	@Inject DataClassGen dataClassGen
+	@Inject EnumerationTypeGen enumTypeGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
 	@Inject OptionalActorInterfaceGen optionalActorInterfaceGen
@@ -43,6 +44,7 @@ class MainGen implements IGenerator {
 	
 	def void doGenerate(Root e) {
 		dataClassGen.doGenerate(e)
+		enumTypeGen.doGenerate(e)
 		protocolClassGen.doGenerate(e)
 		actorClassGen.doGenerate(e)
 		optionalActorInterfaceGen.doGenerate(e)

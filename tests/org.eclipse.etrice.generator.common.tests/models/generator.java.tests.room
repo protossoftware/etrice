@@ -2,6 +2,7 @@ RoomModel JavaGenTests {
 	
 	import HandlerTest.* from "HandlerTest.room"
 	import ChoicePointTest.* from "ChoicePointTest.room"
+	import EnumTest.* from "EnumTest.room"
 	import ChoicePointTestExtended.* from "ChoicePointTestExtended.room"
 	import PingPongThreadTest.* from "PingPongThreadTest.room"
 	import PingPongThreadTestReplPort.* from "PingPongThreadReplPortTest.room"
@@ -21,6 +22,7 @@ RoomModel JavaGenTests {
 	LogicalSystem JavaGenTests {
 		SubSystemRef hdTest: SubSystem_HandlerTest
 		SubSystemRef cpTest: SubSystem_CPTest
+		SubSystemRef enTest: SubSystem_EnumTest
 		SubSystemRef cpExtTest : SubSystem_CPTestExtended
 		SubSystemRef ppTest: SubSystem_PingPong
 		SubSystemRef prTest: SubSystem_PingPongReplPort

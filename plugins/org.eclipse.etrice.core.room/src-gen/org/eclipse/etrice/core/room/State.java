@@ -173,7 +173,7 @@ public interface State extends StateGraphNode
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? \"\":((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :\"\";'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (this instanceof <%org.eclipse.etrice.core.room.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof <%org.eclipse.etrice.core.room.RefinedState%>)? (((RefinedState)this).getTarget()==null? \"\":((RefinedState)this).getTarget().getName()) :\"\";'"
    * @generated
    */
   String getName();

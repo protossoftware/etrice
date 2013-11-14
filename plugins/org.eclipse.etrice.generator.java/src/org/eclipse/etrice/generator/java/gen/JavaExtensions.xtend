@@ -33,6 +33,10 @@ import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.util.RoomHelpers
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -81,7 +85,7 @@ class JavaExtensions implements ILanguageExtension {
 	}
 	
 	def boolean needsInitialization(Attribute a){
-		a.size > 0 || !typeHelpers.isPrimitive(a.type.type) || typeHelpers.typeName(a.type.type).equals("String")
+		a.size > 0 || !typeHelpers.isEnumerationOrPrimitive(a.type.type) || typeHelpers.typeName(a.type.type).equals("String")
 	}
 	
 	override String accessLevelPrivate() {"private "}
@@ -193,6 +197,8 @@ class JavaExtensions implements ILanguageExtension {
 		switch dt {
 			PrimitiveType:
 				toValueLiteral(dt, dt.defaultValueLiteral)
+			EnumerationType:
+				RoomHelpers::getDefaultValue(dt)
 			ExternalType:
 				"new "+(dt as ExternalType).targetName+"()"
 			default:
@@ -222,15 +228,19 @@ class JavaExtensions implements ILanguageExtension {
 		if (data==null)
 			return newArrayList("", "", "")
 		
-		var typeName = data.getRefType().getType().getName();
+		var typeName = data.refType.type.getName();
 		var castTypeName = typeName;
-		if (data.getRefType().getType() instanceof PrimitiveType) {
-			typeName = (data.getRefType().getType() as PrimitiveType).getTargetName();
-			val ct = (data.getRefType().getType() as PrimitiveType).getCastName();
+		if (data.refType.type instanceof PrimitiveType) {
+			typeName = (data.refType.type as PrimitiveType).getTargetName()
+			val ct = (data.refType.type as PrimitiveType).getCastName()
 			if (ct!=null && !ct.isEmpty())
-				castTypeName = ct;
+				castTypeName = ct
 		}
-
+		else if (data.refType.type instanceof EnumerationType) {
+			typeName = (data.refType.type as EnumerationType).targetType
+			castTypeName = (data.refType.type as EnumerationType).javaCastType
+		}
+		
 		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data;\n";
 		val dataArg = ", "+data.getName();
 		val typedArgList = ", "+typeName+" "+data.getName();

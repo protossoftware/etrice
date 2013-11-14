@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.c.gen.ActorClassGen;
 import org.eclipse.etrice.generator.c.gen.DataClassGen;
+import org.eclipse.etrice.generator.c.gen.EnumerationTypeGen;
 import org.eclipse.etrice.generator.c.gen.NodeGen;
 import org.eclipse.etrice.generator.c.gen.NodeRunnerGen;
 import org.eclipse.etrice.generator.c.gen.ProtocolClassGen;
@@ -31,6 +32,9 @@ import org.eclipse.xtext.generator.IGenerator;
 public class MainGen implements IGenerator {
   @Inject
   private DataClassGen dataClassGen;
+  
+  @Inject
+  private EnumerationTypeGen enumClassGen;
   
   @Inject
   private ProtocolClassGen protocolClassGen;
@@ -59,6 +63,7 @@ public class MainGen implements IGenerator {
   
   public void doGenerate(final Root e) {
     this.dataClassGen.doGenerate(e);
+    this.enumClassGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
     this.actorClassGen.doGenerate(e);
     this.nodeGen.doGenerate(e);

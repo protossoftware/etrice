@@ -1641,11 +1641,20 @@ public class NodeGen {
       }
       final String myInst = _xifexpression_3;
       String _xifexpression_4 = null;
+      boolean _and = false;
       GlobalGeneratorSettings _settings_1 = Main.getSettings();
       boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-      if (_generateMSCInstrumentation_1) {
+      if (!_generateMSCInstrumentation_1) {
+        _and = false;
+      } else {
         EList<InterfaceItemInstance> _peers_7 = pi.getPeers();
-        InterfaceItemInstance _get_3 = _peers_7.get(0);
+        boolean _isEmpty_3 = _peers_7.isEmpty();
+        boolean _not = (!_isEmpty_3);
+        _and = (_generateMSCInstrumentation_1 && _not);
+      }
+      if (_and) {
+        EList<InterfaceItemInstance> _peers_8 = pi.getPeers();
+        InterfaceItemInstance _get_3 = _peers_8.get(0);
         EObject _eContainer_2 = _get_3.eContainer();
         String _path_1 = ((ActorInstance) _eContainer_2).getPath();
         String _plus_3 = ("\"" + _path_1);

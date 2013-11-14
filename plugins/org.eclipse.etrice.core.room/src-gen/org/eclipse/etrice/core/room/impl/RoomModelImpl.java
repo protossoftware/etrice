@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Import;
@@ -43,6 +44,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getPrimitiveTypes <em>Primitive Types</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getEnumerationTypes <em>Enumeration Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getExternalTypes <em>External Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getProtocolClasses <em>Protocol Classes</em>}</li>
@@ -106,6 +108,16 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * @ordered
    */
   protected EList<PrimitiveType> primitiveTypes;
+
+  /**
+   * The cached value of the '{@link #getEnumerationTypes() <em>Enumeration Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEnumerationTypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<EnumerationType> enumerationTypes;
 
   /**
    * The cached value of the '{@link #getExternalTypes() <em>External Types</em>}' containment reference list.
@@ -302,6 +314,20 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<EnumerationType> getEnumerationTypes()
+  {
+    if (enumerationTypes == null)
+    {
+      enumerationTypes = new EObjectContainmentEList<EnumerationType>(EnumerationType.class, this, RoomPackage.ROOM_MODEL__ENUMERATION_TYPES);
+    }
+    return enumerationTypes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ExternalType> getExternalTypes()
   {
     if (externalTypes == null)
@@ -411,6 +437,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
         return ((InternalEList<?>)getPrimitiveTypes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ROOM_MODEL__ENUMERATION_TYPES:
+        return ((InternalEList<?>)getEnumerationTypes()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
         return ((InternalEList<?>)getExternalTypes()).basicRemove(otherEnd, msgs);
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
@@ -447,6 +475,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return getImports();
       case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
         return getPrimitiveTypes();
+      case RoomPackage.ROOM_MODEL__ENUMERATION_TYPES:
+        return getEnumerationTypes();
       case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
         return getExternalTypes();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:
@@ -489,6 +519,10 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
         getPrimitiveTypes().clear();
         getPrimitiveTypes().addAll((Collection<? extends PrimitiveType>)newValue);
+        return;
+      case RoomPackage.ROOM_MODEL__ENUMERATION_TYPES:
+        getEnumerationTypes().clear();
+        getEnumerationTypes().addAll((Collection<? extends EnumerationType>)newValue);
         return;
       case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
         getExternalTypes().clear();
@@ -544,6 +578,9 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
       case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
         getPrimitiveTypes().clear();
         return;
+      case RoomPackage.ROOM_MODEL__ENUMERATION_TYPES:
+        getEnumerationTypes().clear();
+        return;
       case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
         getExternalTypes().clear();
         return;
@@ -587,6 +624,8 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
         return imports != null && !imports.isEmpty();
       case RoomPackage.ROOM_MODEL__PRIMITIVE_TYPES:
         return primitiveTypes != null && !primitiveTypes.isEmpty();
+      case RoomPackage.ROOM_MODEL__ENUMERATION_TYPES:
+        return enumerationTypes != null && !enumerationTypes.isEmpty();
       case RoomPackage.ROOM_MODEL__EXTERNAL_TYPES:
         return externalTypes != null && !externalTypes.isEmpty();
       case RoomPackage.ROOM_MODEL__DATA_CLASSES:

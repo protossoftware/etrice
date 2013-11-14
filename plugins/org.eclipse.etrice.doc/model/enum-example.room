@@ -1,0 +1,46 @@
+RoomModel EnumExample {
+
+	PrimitiveType int16: ptInteger -> short(Short) default "0"
+	PrimitiveType char: ptCharacter -> char(Char) default ""
+	
+	Enumeration FirstEnum {
+		zero,		// 0
+		one,		// 1
+		two,		// 2
+		three		// 3
+	}
+
+	Enumeration SecondEnum {
+		one = 1,	// 1
+		two,		// 2
+		three		// 3
+	}
+
+	Enumeration ThirdEnum {
+		one = 1,	// 1
+		two,		// 2
+		five = 5	// 5
+	}
+
+	Enumeration FourthEnum {
+		one = 1,			// 1
+		three = 3,			// 3
+		sixtyfive = 0x41	// 0x41 or 65
+	}
+
+	Enumeration FifthEnum of int16 {
+		f1 = 0x1,			// 0x1 or 1
+		f2 = 0x2,			// 0x2 or 2
+		f3 = 0x4,			// 0x4 or 4
+		f4 = 0x8			// 0x8 or 8
+	}
+	
+	Enumeration WrongType of char /* <- ERROR: no integer primitive type */ {
+		c
+	}
+
+	Enumeration EmptyEnum {
+		// ERROR: no literals defined
+	}
+
+}

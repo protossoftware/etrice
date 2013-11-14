@@ -204,9 +204,41 @@ class DocuPostprocessor {
 			The super class of
 			<ul>
 			  <li>{@link PrimitiveType}</li>
+			  <li>{@link EnumerationType}</li>
 			  <li>{@link ComplexType}</li>
 			</ul>
 		''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("EnumerationType")
+		cls.setDocumentation('''
+			A sub type of {@link DataType} for enumerations.
+			The EnumerationType can be associated with a {@link PrimitiveType} as value type for
+			the {@link EnumLiteral}s. It has to contain at least one literal.
+		''')
+		
+		cls.getReference("primitiveType").setDocumentation(
+			'''
+				The value type of the literals.
+			''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("EnumLiteral")
+		cls.setDocumentation('''
+			A literal value of the enumeration.
+			It can have a value associated.
+		''')
+		
+		cls.getAttribute("name").setDocumentation(
+			'''
+				The name of the literal.
+			''')
+		
+		cls.getReference("literal").setDocumentation(
+			'''
+				The value of the literal. It is associated with a target type which defaults to
+				{@code int} and can be set explicitly using the {@link EnumerationType#primitiveType}
+			''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("ComplexType")

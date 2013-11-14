@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.SubSystemRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -162,10 +164,10 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    */
   public StructureClass getStructureClass()
   {
-    if (this instanceof org.eclipse.etrice.core.room.ActorRef)
-      return ((org.eclipse.etrice.core.room.ActorRef)this).getType();
-    else if (this instanceof org.eclipse.etrice.core.room.SubSystemRef)
-      return ((org.eclipse.etrice.core.room.SubSystemRef)this).getType();
+    if (this instanceof ActorRef)
+      return ((ActorRef)this).getType();
+    else if (this instanceof SubSystemRef)
+      return ((SubSystemRef)this).getType();
     else
       return null;
     

@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
@@ -155,6 +157,17 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	
 	private String getOrigComment(String orig) {
 		return " /* ORIG: "+orig +" */";
+	}
+
+	@Override
+	public boolean translateEnums() {
+		return true;
+	}
+
+	@Override
+	public String getEnumText(EnumLiteral literal) {
+		EnumerationType et = (EnumerationType) literal.eContainer();
+		return et.getName()+"_"+literal.getName()+getOrigComment(et.getName()+" dot "+literal.getName());
 	}
 
 }

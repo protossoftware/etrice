@@ -11,6 +11,9 @@
     <eOperations name="getReferencedDataClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass">
       <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
     </eOperations>
+    <eOperations name="getReferencedEnumClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType">
+      <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
+    </eOperations>
     <eOperations name="getReferencedActorClasses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
       <eParameters name="cls" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomClass"/>
     </eOperations>
@@ -57,6 +60,9 @@
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wiredInstances" upperBound="-1"
         eType="#//WiredStructureClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedEnumClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceBase" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

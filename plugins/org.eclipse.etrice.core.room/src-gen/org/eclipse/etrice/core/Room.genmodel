@@ -36,6 +36,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/primitiveTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/enumerationTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/externalTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/dataClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/protocolClasses"/>
@@ -75,6 +76,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/targetName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/castName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//PrimitiveType/defaultValueLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//EnumerationType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//EnumerationType/primitiveType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//EnumerationType/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="Room.ecore#//EnumLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//EnumLiteral/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//EnumLiteral/literal"/>
+      <genOperations ecoreOperation="Room.ecore#//EnumLiteral/getLiteralValue"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ExternalType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ExternalType/targetName"/>

@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -354,6 +355,9 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			return rc;
 		}
 		else if (type.equals(RoomPackage.eINSTANCE.getPrimitiveType().getName())) {
+			return rc;
+		}
+		else if (type.equals(RoomPackage.eINSTANCE.getEnumerationType().getName())) {
 			return rc;
 		}
 		else if (type.equals(RoomPackage.eINSTANCE.getExternalType().getName())) {
@@ -852,6 +856,10 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		for (PrimitiveType pt : model.getPrimitiveTypes()) {
 			if (pt.getName() != null && pt.getName().equals(className))
 				return pt;
+		}
+		for (EnumerationType et : model.getEnumerationTypes()) {
+			if (et.getName() != null && et.getName().equals(className))
+				return et;
 		}
 		for (GeneralProtocolClass pc : model.getProtocolClasses()) {
 			if (pc.getName() != null && pc.getName().equals(className))

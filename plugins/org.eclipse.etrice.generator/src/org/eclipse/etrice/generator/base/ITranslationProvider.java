@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
@@ -147,4 +148,17 @@ public interface ITranslationProvider {
 	 * @return the translated tag
 	 */
 	String translateTag(String tag, DetailCode code);
+	
+	/**
+	 * @return true if translations are provided for enumerations
+	 */
+	boolean translateEnums();
+	
+	/**
+	 * yields a replacement for &lt;enumtype>.&lt;literal>
+	 * 
+	 * @param literal the enumeration literal to be translated
+	 * @return the translated enumeration literal
+	 */
+	String getEnumText(EnumLiteral literal);
 }

@@ -203,13 +203,22 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__WIRED_INSTANCES = 13;
 
 	/**
+	 * The feature id for the '<em><b>Used Enum Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__USED_ENUM_CLASSES = 14;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 14;
+	int ROOT_FEATURE_COUNT = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -2484,6 +2493,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_WiredInstances();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Used Enum Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_UsedEnumClasses();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase <em>Instance Base</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3645,6 +3665,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__WIRED_INSTANCES = eINSTANCE.getRoot_WiredInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Enum Classes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__USED_ENUM_CLASSES = eINSTANCE.getRoot_UsedEnumClasses();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.

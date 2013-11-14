@@ -503,7 +503,7 @@ class NodeGen {
 		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getMappedThread(pi.peers.get(0).eContainer as ActorInstance).thread.name
 		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
 			else ""
-		val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
+		val peerInst = if (Main::settings.generateMSCInstrumentation && !pi.peers.empty) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
 			else ""
 		
 		"{"+getInterfaceItemInstanceData(pi)+", " 
