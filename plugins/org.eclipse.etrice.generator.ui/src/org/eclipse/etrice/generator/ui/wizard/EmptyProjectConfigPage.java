@@ -71,7 +71,7 @@ class EmptyProjectConfigPage extends WizardPage {
 	    mvnBuild.setText("use &Maven build");
 	    
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
-		if (prefStore.getBoolean(PreferenceConstants.USE_MAVEN))
+		if (prefStore.getString(PreferenceConstants.BUILD_KIND).equals(PreferenceConstants.MAVEN))
 			mvnBuild.setSelection(true);
 		else
 		    jdtBuild.setSelection(true);

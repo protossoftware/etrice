@@ -13,5 +13,10 @@ public class PreferenceConstants {
 
 	public static final String GEN_DOC_DIR = "GeneratedDocuDirectory";
 	
-	public static final String USE_MAVEN = "WizardUseMaven";
+	/**
+	 * The kind of build with the two possibilities {@link #MAVEN} and {@link #JDT}
+	 */
+	public static final String BUILD_KIND = "BuildKind";
+	public static final String MAVEN = "Maven";
+	public static final String JDT = "JDT";
 }
