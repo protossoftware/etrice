@@ -13,6 +13,8 @@
 package org.eclipse.etrice.generator.ui.wizard;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -22,6 +24,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -52,7 +55,6 @@ class EmptyProjectConfigPage extends WizardPage {
 		
 	    jdtBuild = new Button(composite, SWT.RADIO);
 	    jdtBuild.setText("use &Eclipse JDT build");
-	    jdtBuild.setSelection(true);
 	    jdtBuild.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -67,6 +69,12 @@ class EmptyProjectConfigPage extends WizardPage {
 		});
 	    mvnBuild = new Button(composite, SWT.RADIO);
 	    mvnBuild.setText("use &Maven build");
+	    
+		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+		if (prefStore.getBoolean(PreferenceConstants.USE_MAVEN))
+			mvnBuild.setSelection(true);
+		else
+		    jdtBuild.setSelection(true);
 	    
 	    // Show description on opening
 	    setErrorMessage(null);

@@ -27,6 +27,11 @@ public class GeneratorPreferencePage
 		
 		addField(
 				new BooleanFieldEditor(
+						PreferenceConstants.USE_MAVEN,
+						"Use &Maven to generate and build new projects:",
+						getFieldEditorParent()));
+		addField(
+				new BooleanFieldEditor(
 						PreferenceConstants.GEN_INCREMENTAL,
 						"Generate &incrementally:",
 						getFieldEditorParent()));

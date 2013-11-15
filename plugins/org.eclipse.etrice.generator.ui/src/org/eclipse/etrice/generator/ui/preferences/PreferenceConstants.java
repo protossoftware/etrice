@@ -12,4 +12,6 @@ public class PreferenceConstants {
 	public static final String GEN_INCREMENTAL = "GenerateIncremental";
 
 	public static final String GEN_DOC_DIR = "GeneratedDocuDirectory";
+	
+	public static final String USE_MAVEN = "WizardUseMaven";
 }
