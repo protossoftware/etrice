@@ -278,7 +278,7 @@ class ProjectFileFragments {
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
 			<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${env_var:JAVA_HOME}/bin/java.exe"/>
-			<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-jar target/«mdlName»-0.0.1-jar-with-dependencies.jar"/>
+			<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-jar target/«mdlName»-1.0.0-jar-with-dependencies.jar"/>
 			<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/«project»}"/>
 			</launchConfiguration>
 		'''

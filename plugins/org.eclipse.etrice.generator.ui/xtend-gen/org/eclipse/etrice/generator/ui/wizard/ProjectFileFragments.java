@@ -696,7 +696,7 @@ public class ProjectFileFragments {
     _builder.newLine();
     _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS\" value=\"-jar target/");
     _builder.append(mdlName, "");
-    _builder.append("-0.0.1-jar-with-dependencies.jar\"/>");
+    _builder.append("-1.0.0-jar-with-dependencies.jar\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY\" value=\"${workspace_loc:/");
     _builder.append(project, "");
