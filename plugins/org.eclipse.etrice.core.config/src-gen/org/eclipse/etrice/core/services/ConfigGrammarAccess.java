@@ -32,7 +32,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ConfigModel:
-		//
 		//	"ConfigModel" name=FQN "{" imports+=Import* configElements+=ConfigElement* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -76,7 +75,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolClassConfigParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//ConfigElement:
-		//
 		//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 		public ParserRule getRule() { return rule; }
 
@@ -113,7 +111,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//SubSystemConfig:
-		//
 		//	"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}";
 		public ParserRule getRule() { return rule; }
 
@@ -184,14 +181,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DynamicConfig:
-		//
 		//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-		//
 		//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
 		public ParserRule getRule() { return rule; }
 
 		//"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-		//
 		//userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}"
 		public Group getGroup() { return cGroup; }
 
@@ -202,7 +196,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor" userCode2=STRING)) &
-		//
 		//("polling timer [ms]" polling=INT)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
@@ -277,7 +270,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ActorClassConfig:
-		//
 		//	"ActorClassConfig" actor=[room::ActorClass|FQN] "{" attributes+=AttrClassConfig* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -332,14 +324,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//ActorInstanceConfig:
-		//
 		//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
-		//
 		//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}";
 		public ParserRule getRule() { return rule; }
 
 		//"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
-		//
 		//(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}"
 		public Group getGroup() { return cGroup; }
 
@@ -418,14 +407,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ProtocolClassConfig:
-		//
 		//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-		//
 		//	conjugated=PortClassConfig)?) "}";
 		public ParserRule getRule() { return rule; }
 
 		//"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-		//
 		//conjugated=PortClassConfig)?) "}"
 		public Group getGroup() { return cGroup; }
 
@@ -486,7 +472,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PortClassConfig:
-		//
 		//	{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -525,7 +510,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PortInstanceConfig:
-		//
 		//	"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -564,7 +548,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAttrInstanceConfigParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AttrConfig:
-		//
 		//	AttrClassConfig | AttrInstanceConfig;
 		public ParserRule getRule() { return rule; }
 
@@ -607,14 +590,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrClassConfig:
-		//
 		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
-		//
 		//	max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
-		//
 		//max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?
 		public Group getGroup() { return cGroup; }
 
@@ -717,14 +697,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrInstanceConfig:
-		//
 		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
-		//
 		//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration" (readOnly?="read"
-		//
 		//| "write"))? attributes+=AttrInstanceConfig*) "}")?
 		public Group getGroup() { return cGroup; }
 
@@ -803,7 +780,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefsRefSegmentParserRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
 		
 		//RefPath:
-		//
 		//	refs+=RefSegment ("/" refs+=RefSegment)*;
 		public ParserRule getRule() { return rule; }
 
@@ -840,7 +816,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIdxINTTerminalRuleCall_1_1_0 = (RuleCall)cIdxAssignment_1_1.eContents().get(0);
 		
 		//RefSegment:
-		//
 		//	ref=ID (":" idx=INT)?;
 		public ParserRule getRule() { return rule; }
 
@@ -880,9 +855,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
 		
 		//// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
-		//
 		//Import:
-		//
 		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -924,7 +897,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ImportedFQN:
-		//
 		//	FQN ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -947,7 +919,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -1025,7 +996,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//ConfigModel:
-	//
 	//	"ConfigModel" name=FQN "{" imports+=Import* configElements+=ConfigElement* "}";
 	public ConfigModelElements getConfigModelAccess() {
 		return (pConfigModel != null) ? pConfigModel : (pConfigModel = new ConfigModelElements());
@@ -1036,7 +1006,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConfigElement:
-	//
 	//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
 		return (pConfigElement != null) ? pConfigElement : (pConfigElement = new ConfigElementElements());
@@ -1047,7 +1016,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubSystemConfig:
-	//
 	//	"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}";
 	public SubSystemConfigElements getSubSystemConfigAccess() {
 		return (pSubSystemConfig != null) ? pSubSystemConfig : (pSubSystemConfig = new SubSystemConfigElements());
@@ -1058,9 +1026,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DynamicConfig:
-	//
 	//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-	//
 	//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
 	public DynamicConfigElements getDynamicConfigAccess() {
 		return (pDynamicConfig != null) ? pDynamicConfig : (pDynamicConfig = new DynamicConfigElements());
@@ -1071,7 +1037,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorClassConfig:
-	//
 	//	"ActorClassConfig" actor=[room::ActorClass|FQN] "{" attributes+=AttrClassConfig* "}";
 	public ActorClassConfigElements getActorClassConfigAccess() {
 		return (pActorClassConfig != null) ? pActorClassConfig : (pActorClassConfig = new ActorClassConfigElements());
@@ -1082,9 +1047,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ActorInstanceConfig:
-	//
 	//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
-	//
 	//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}";
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {
 		return (pActorInstanceConfig != null) ? pActorInstanceConfig : (pActorInstanceConfig = new ActorInstanceConfigElements());
@@ -1095,9 +1058,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ProtocolClassConfig:
-	//
 	//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-	//
 	//	conjugated=PortClassConfig)?) "}";
 	public ProtocolClassConfigElements getProtocolClassConfigAccess() {
 		return (pProtocolClassConfig != null) ? pProtocolClassConfig : (pProtocolClassConfig = new ProtocolClassConfigElements());
@@ -1108,7 +1069,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PortClassConfig:
-	//
 	//	{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}";
 	public PortClassConfigElements getPortClassConfigAccess() {
 		return (pPortClassConfig != null) ? pPortClassConfig : (pPortClassConfig = new PortClassConfigElements());
@@ -1119,7 +1079,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PortInstanceConfig:
-	//
 	//	"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}";
 	public PortInstanceConfigElements getPortInstanceConfigAccess() {
 		return (pPortInstanceConfig != null) ? pPortInstanceConfig : (pPortInstanceConfig = new PortInstanceConfigElements());
@@ -1130,7 +1089,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrConfig:
-	//
 	//	AttrClassConfig | AttrInstanceConfig;
 	public AttrConfigElements getAttrConfigAccess() {
 		return (pAttrConfig != null) ? pAttrConfig : (pAttrConfig = new AttrConfigElements());
@@ -1141,9 +1099,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrClassConfig:
-	//
 	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
-	//
 	//	max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
 		return (pAttrClassConfig != null) ? pAttrClassConfig : (pAttrClassConfig = new AttrClassConfigElements());
@@ -1154,9 +1110,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrInstanceConfig:
-	//
 	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
-	//
 	//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
@@ -1167,7 +1121,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefPath:
-	//
 	//	refs+=RefSegment ("/" refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
 		return (pRefPath != null) ? pRefPath : (pRefPath = new RefPathElements());
@@ -1178,7 +1131,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefSegment:
-	//
 	//	ref=ID (":" idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
 		return (pRefSegment != null) ? pRefSegment : (pRefSegment = new RefSegmentElements());
@@ -1189,9 +1141,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
-	//
 	//Import:
-	//
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
@@ -1202,7 +1152,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportedFQN:
-	//
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
 		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
@@ -1213,7 +1162,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FQN:
-	//
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -1224,11 +1172,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//
 	//// AnnotationType and Annotation Rules
-	//
 	//Annotation:
-	//
 	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
 		return gaBase.getAnnotationAccess();
@@ -1239,7 +1184,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KeyValue:
-	//
 	//	key=ID "=" value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
 		return gaBase.getKeyValueAccess();
@@ -1250,9 +1194,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnnotationType:
-	//
 	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
-	//
 	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
 		return gaBase.getAnnotationTypeAccess();
@@ -1263,23 +1205,14 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////
-	//
 	//// Sub-grammars should use AnnotationTargetType to refer to 
-	//
 	//// specific sub-grammar targets. For example, valid values for 
-	//
 	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-	//
 	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-	//
 	//// implementing validation, quick-fixes, and code completion proposals via the 
-	//
 	//// usual Xtext mechanisms.
-	//
 	////
-	//
 	//AnnotationTargetType:
-	//
 	//	ID;
 	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return gaBase.getAnnotationTargetTypeAccess();
@@ -1290,7 +1223,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnnotationAttribute:
-	//
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
 		return gaBase.getAnnotationAttributeAccess();
@@ -1301,7 +1233,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleAnnotationAttribute:
-	//
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
 		return gaBase.getSimpleAnnotationAttributeAccess();
@@ -1312,7 +1243,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumAnnotationAttribute:
-	//
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return gaBase.getEnumAnnotationAttributeAccess();
@@ -1323,11 +1253,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//
 	//// Documentation Rule
-	//
 	//Documentation:
-	//
 	//	{Documentation} "[" lines+=STRING* "]";
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
 		return gaBase.getDocumentationAccess();
@@ -1338,11 +1265,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//
 	//// Literal Rules
-	//
 	//enum LiteralType:
-	//
 	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
 		return gaBase.getLiteralTypeAccess();
@@ -1353,7 +1277,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LiteralArray:
-	//
 	//	literals+=Literal ("," literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
 		return gaBase.getLiteralArrayAccess();
@@ -1364,9 +1287,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Value Types for Attributes
-	//
 	//Literal:
-	//
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaBase.getLiteralAccess();
@@ -1377,7 +1298,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BooleanLiteral:
-	//
 	//	{BooleanLiteral} ("false" | isTrue?="true");
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
 		return gaBase.getBooleanLiteralAccess();
@@ -1388,7 +1308,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NumberLiteral:
-	//
 	//	IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
 		return gaBase.getNumberLiteralAccess();
@@ -1399,7 +1318,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//
 	//	{RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
 		return gaBase.getRealLiteralAccess();
@@ -1410,7 +1328,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntLiteral:
-	//
 	//	{IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
 		return gaBase.getIntLiteralAccess();
@@ -1421,7 +1338,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StringLiteral:
-	//
 	//	{StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
 		return gaBase.getStringLiteralAccess();
@@ -1432,7 +1348,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//
 	//	SignedInteger | Hexadecimal;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
@@ -1443,7 +1358,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SignedInteger hidden():
-	//
 	//	("+" | "-")? INT;
 	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
 		return gaBase.getSignedIntegerAccess();
@@ -1454,7 +1368,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Hexadecimal hidden():
-	//
 	//	HEX;
 	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
 		return gaBase.getHexadecimalAccess();
@@ -1465,7 +1378,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real returns ecore::EDouble:
-	//
 	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
@@ -1476,7 +1388,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Decimal hidden():
-	//
 	//	("+" | "-")? INT "." INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
 		return gaBase.getDecimalAccess();
@@ -1487,7 +1398,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DotDecimal hidden():
-	//
 	//	("+" | "-")? "." INT;
 	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
 		return gaBase.getDotDecimalAccess();
@@ -1498,7 +1408,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DecimalDot hidden():
-	//
 	//	("+" | "-")? INT ".";
 	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
 		return gaBase.getDecimalDotAccess();
@@ -1509,7 +1418,6 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DecimalExp hidden():
-	//
 	//	("+" | "-")? INT "." INT EXP;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
@@ -1520,65 +1428,55 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal EXP:
-	//
 	//	("e" | "E") ("+" | "-")? "0".."9"+;
 	public TerminalRule getEXPRule() {
 		return gaBase.getEXPRule();
 	} 
 
 	//terminal HEX:
-	//
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
 	} 
 
 	//terminal ID:
-	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaBase.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaBase.getINTRule();
 	} 
 
 	//terminal STRING:
-	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBase.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaBase.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaBase.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaBase.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBase.getANY_OTHERRule();

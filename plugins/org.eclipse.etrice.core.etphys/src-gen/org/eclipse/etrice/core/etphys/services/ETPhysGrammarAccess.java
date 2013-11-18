@@ -37,14 +37,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//PhysicalModel:
-		//
 		//	"PhysicalModel" name=FQN "{" imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass |
-		//
 		//	runtimeClasses+=RuntimeClass)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"PhysicalModel" name=FQN "{" imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass |
-		//
 		//runtimeClasses+=RuntimeClass)* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -105,7 +102,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//PhysicalSystem:
-		//
 		//	"PhysicalSystem" name=ID docu=Documentation? "{" nodeRefs+=NodeRef* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -154,7 +150,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//NodeRef:
-		//
 		//	"NodeRef" name=ID ":" type=[NodeClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
@@ -220,14 +215,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//NodeClass:
-		//
 		//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-		//
 		//	"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-		//
 		//"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -354,18 +346,13 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PhysicalThread:
-		//
 		//	(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-		//
 		//	"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
-		//
 		//	msgpoolsize=INT) "}";
 		public ParserRule getRule() { return rule; }
 
 		//(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-		//
 		//"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
-		//
 		//msgpoolsize=INT) "}"
 		public Group getGroup() { return cGroup; }
 
@@ -391,7 +378,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
 		//"execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? & "prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT &
-		//
 		//"msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "=" msgpoolsize=INT
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
@@ -505,7 +491,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//RuntimeClass:
-		//
 		//	"RuntimeClass" name=ID docu=Documentation? "{" "model" "=" threadModel=ThreadModel "}";
 		public ParserRule getRule() { return rule; }
 
@@ -555,7 +540,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Documentation:
-		//
 		//	"[" text+=STRING+ "]";
 		public ParserRule getRule() { return rule; }
 
@@ -584,7 +568,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//PRIO returns ecore::EInt hidden():
-		//
 		//	("+" | "-")? INT;
 		public ParserRule getRule() { return rule; }
 
@@ -618,7 +601,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
 		
 		//Import:
-		//
 		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -660,7 +642,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ImportedFQN:
-		//
 		//	FQN ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -683,7 +664,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -720,7 +700,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNsKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		
 		//TIME returns ecore::EInt:
-		//
 		//	INT "s" | INT "ms" | INT "us" | INT "ns";
 		public ParserRule getRule() { return rule; }
 
@@ -776,7 +755,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMIXEDMixedKeyword_2_0 = (Keyword)cMIXEDEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum ExecMode:
-		//
 		//	POLLED="polled" | BLOCKED="blocked" | MIXED="mixed";
 		public EnumRule getRule() { return rule; }
 
@@ -811,7 +789,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMULTI_THREADEDMultiThreadedKeyword_1_0 = (Keyword)cMULTI_THREADEDEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum ThreadModel:
-		//
 		//	SINGLE_THREADED="singleThreaded" | MULTI_THREADED="multiThreaded";
 		public EnumRule getRule() { return rule; }
 
@@ -885,9 +862,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//PhysicalModel:
-	//
 	//	"PhysicalModel" name=FQN "{" imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass |
-	//
 	//	runtimeClasses+=RuntimeClass)* "}";
 	public PhysicalModelElements getPhysicalModelAccess() {
 		return (pPhysicalModel != null) ? pPhysicalModel : (pPhysicalModel = new PhysicalModelElements());
@@ -898,7 +873,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PhysicalSystem:
-	//
 	//	"PhysicalSystem" name=ID docu=Documentation? "{" nodeRefs+=NodeRef* "}";
 	public PhysicalSystemElements getPhysicalSystemAccess() {
 		return (pPhysicalSystem != null) ? pPhysicalSystem : (pPhysicalSystem = new PhysicalSystemElements());
@@ -909,7 +883,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NodeRef:
-	//
 	//	"NodeRef" name=ID ":" type=[NodeClass|FQN] docu=Documentation?;
 	public NodeRefElements getNodeRefAccess() {
 		return (pNodeRef != null) ? pNodeRef : (pNodeRef = new NodeRefElements());
@@ -920,9 +893,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NodeClass:
-	//
 	//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-	//
 	//	"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}";
 	public NodeClassElements getNodeClassAccess() {
 		return (pNodeClass != null) ? pNodeClass : (pNodeClass = new NodeClassElements());
@@ -933,11 +904,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PhysicalThread:
-	//
 	//	(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-	//
 	//	"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
-	//
 	//	msgpoolsize=INT) "}";
 	public PhysicalThreadElements getPhysicalThreadAccess() {
 		return (pPhysicalThread != null) ? pPhysicalThread : (pPhysicalThread = new PhysicalThreadElements());
@@ -948,7 +916,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum ExecMode:
-	//
 	//	POLLED="polled" | BLOCKED="blocked" | MIXED="mixed";
 	public ExecModeElements getExecModeAccess() {
 		return (unknownRuleExecMode != null) ? unknownRuleExecMode : (unknownRuleExecMode = new ExecModeElements());
@@ -959,7 +926,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RuntimeClass:
-	//
 	//	"RuntimeClass" name=ID docu=Documentation? "{" "model" "=" threadModel=ThreadModel "}";
 	public RuntimeClassElements getRuntimeClassAccess() {
 		return (pRuntimeClass != null) ? pRuntimeClass : (pRuntimeClass = new RuntimeClassElements());
@@ -970,7 +936,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum ThreadModel:
-	//
 	//	SINGLE_THREADED="singleThreaded" | MULTI_THREADED="multiThreaded";
 	public ThreadModelElements getThreadModelAccess() {
 		return (unknownRuleThreadModel != null) ? unknownRuleThreadModel : (unknownRuleThreadModel = new ThreadModelElements());
@@ -981,7 +946,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Documentation:
-	//
 	//	"[" text+=STRING+ "]";
 	public DocumentationElements getDocumentationAccess() {
 		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
@@ -992,7 +956,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PRIO returns ecore::EInt hidden():
-	//
 	//	("+" | "-")? INT;
 	public PRIOElements getPRIOAccess() {
 		return (pPRIO != null) ? pPRIO : (pPRIO = new PRIOElements());
@@ -1003,7 +966,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
@@ -1014,7 +976,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportedFQN:
-	//
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
 		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
@@ -1025,7 +986,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FQN:
-	//
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -1036,7 +996,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TIME returns ecore::EInt:
-	//
 	//	INT "s" | INT "ms" | INT "us" | INT "ns";
 	public TIMEElements getTIMEAccess() {
 		return (pTIME != null) ? pTIME : (pTIME = new TIMEElements());
@@ -1047,51 +1006,43 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

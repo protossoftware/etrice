@@ -1141,11 +1141,11 @@ public class DocGen {
   
   private CharSequence generateDocText(final Documentation doc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("% text from user Documentation");
-    _builder.newLine();
     {
       boolean _notEquals = (!Objects.equal(doc, null));
       if (_notEquals) {
+        _builder.append("% begin text from user Documentation");
+        _builder.newLine();
         {
           EList<String> _lines = doc.getLines();
           for(final String line : _lines) {
@@ -1153,6 +1153,8 @@ public class DocGen {
             _builder.newLineIfNotEmpty();
           }
         }
+        _builder.append("% end text from user Documentation");
+        _builder.newLine();
       }
     }
     return _builder;

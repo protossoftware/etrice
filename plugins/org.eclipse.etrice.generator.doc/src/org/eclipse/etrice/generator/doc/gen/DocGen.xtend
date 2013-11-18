@@ -432,12 +432,13 @@ class DocGen {
 	
 	def private generateDocText(Documentation doc){
 		'''
-		% text from user Documentation
 		«IF doc!=null»
+			% begin text from user Documentation
 			«FOR line: doc.lines»
 				«line»
 			«ENDFOR»
-		«ENDIF»		
+			% end text from user Documentation
+		«ENDIF»
 		'''
 	}
 	
