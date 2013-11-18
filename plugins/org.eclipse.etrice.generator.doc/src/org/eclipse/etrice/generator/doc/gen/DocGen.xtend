@@ -146,7 +146,7 @@ class DocGen {
 	}
 	
 	def private generateLogicalSystemDoc(Root root, RoomModel model, LogicalSystem system) {
-		var filenamei = model.docGenerationTargetPath + "images\\" + system.name + "_instanceTree.jpg"
+		var filenamei = model.docGenerationTargetPath + "images\\" + system.name.escapedString + "_instanceTree.jpg"
 		filenamei = filenamei.replaceAll("\\\\","/");
 		var latexFilenamei = filenamei.replaceAll("/","//") 
 		'''
@@ -430,9 +430,13 @@ class DocGen {
 		'''
 	}
 	
-	def private generateDocText(Documentation doc){'''
+	def private generateDocText(Documentation doc){
+		'''
+		% text from user Documentation
 		«IF doc!=null»
-			«doc.lines.join()»
+			«FOR line: doc.lines»
+				«line»
+			«ENDFOR»
 		«ENDIF»		
 		'''
 	}

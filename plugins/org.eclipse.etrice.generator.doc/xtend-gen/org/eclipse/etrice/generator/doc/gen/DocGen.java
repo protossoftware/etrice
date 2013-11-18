@@ -47,7 +47,6 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -309,7 +308,8 @@ public class DocGen {
       String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
       String _plus = (_docGenerationTargetPath + "images\\");
       String _name = system.getName();
-      String _plus_1 = (_plus + _name);
+      String _escapedString = this.escapedString(_name);
+      String _plus_1 = (_plus + _escapedString);
       String filenamei = (_plus_1 + "_instanceTree.jpg");
       String _replaceAll = filenamei.replaceAll("\\\\", "/");
       filenamei = _replaceAll;
@@ -317,8 +317,8 @@ public class DocGen {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = system.getName();
-      String _escapedString = this.escapedString(_name_1);
-      _builder.append(_escapedString, "");
+      String _escapedString_1 = this.escapedString(_name_1);
+      _builder.append(_escapedString_1, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = system.getDocu();
@@ -1141,13 +1141,18 @@ public class DocGen {
   
   private CharSequence generateDocText(final Documentation doc) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("% text from user Documentation");
+    _builder.newLine();
     {
       boolean _notEquals = (!Objects.equal(doc, null));
       if (_notEquals) {
-        EList<String> _lines = doc.getLines();
-        String _join = IterableExtensions.join(_lines);
-        _builder.append(_join, "");
-        _builder.newLineIfNotEmpty();
+        {
+          EList<String> _lines = doc.getLines();
+          for(final String line : _lines) {
+            _builder.append(line, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder;
