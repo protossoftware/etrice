@@ -535,7 +535,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	/**
 	 * returns a flat list of Transition scopes for a {@link RefinedTransition}
-	 * @param rs - the refined state
+	 * @param trans - the refined transition
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */
@@ -583,7 +583,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 	
 	/**
-	 * returns a flat list of Message scopes for a {@link SemanticsInRule}
+	 * returns a flat list of Message scopes for a {@link InSemanticsRule}
 	 * @param sr - the semantics rule for incoming messages
 	 * @param ref - not used
 	 * @return a list of scopes
@@ -608,7 +608,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	/**
-	 * returns a flat list of ActorRef scopes for a {@link SubActorSAPoint}
+	 * returns a flat list of ActorRef scopes for a {@link RefSAPoint}
 	 * @param pt
 	 * @param ref
 	 * @return a list of scopes
@@ -764,7 +764,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	/**
 	 * returns a flat list of Port scopes for a {@link ExternalPort}
-	 * @param ar - the external port
+	 * @param ep - the external port
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */

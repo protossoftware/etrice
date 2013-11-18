@@ -240,7 +240,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//IntLiteral"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>The value of the literal. It is associated with a target type which defaults to&#xD;&#xA;{@code int} and can be set explicitly using the {@link EnumerationType#primitiveType}&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>The value of the literal. It is associated with a target type which defaults to&#xD;&#xA;{@code int} and can be set explicitly using the {@link EnumerationType#getPrimitiveType()}&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -572,17 +572,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InMessageHandler" eSuperTypes="#//MessageHandler">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for incoming messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MsgHandler}.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for incoming messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MessageHandler}.&#xD;&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutMessageHandler" eSuperTypes="#//MessageHandler">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for outgoing messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MsgHandler}.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Is a handler (or interceptor) for outgoing messages. In the generated code the&#xD;&#xA;message is available. It is derived from {@link MessageHandler}.&#xD;&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolSemantics">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>An optional semantics specification as part of a {@link ProtocolClass}.&#xD;&#xA;The semantic is defined as a &lt;em>legal execution tree&lt;/em>.&#xD;&#xA;This tree is composed of incoming and outgoing messages and each path through&#xD;&#xA;this tree is a valid sequence of messages exchanged through a port instance.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The semantics are composed using {@link SemanticsRule]s.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>An optional semantics specification as part of a {@link ProtocolClass}.&#xD;&#xA;The semantic is defined as a &lt;em>legal execution tree&lt;/em>.&#xD;&#xA;This tree is composed of incoming and outgoing messages and each path through&#xD;&#xA;this tree is a valid sequence of messages exchanged through a port instance.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The semantics are composed using {@link SemanticsRule}s.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//SemanticsRule" containment="true">
@@ -625,7 +625,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActorClass" eSuperTypes="#//ActorContainerClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The actor class in ROOM has three compartments which aren't represented as separate model objects.&#xD;&#xA;To understand to which compartment an attribute or reference belongs to here is a list&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>Interface: everything which is visible from the outside from a model point of view&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getIfPorts}: a list of all interface {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Structure: all internal structural aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getUsercode1}-3: user defined code with generator dependent meaning&lt;/li>&#xD;&#xA;    &lt;li>{@link #getInternalPorts}: a list of all internal end {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that&#xD;&#xA;       are end ports, not relay ports&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getAttributes}: a list of all actor class {@link Attribute}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}&#xD;&#xA;       has the meaning of a composition)&lt;/li>&#xD;&#xA;    &lt;li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getConnections}: a list of all {@link LayerConnections}&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Behavior: the behavioral aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getOperations}: a list of {@link Operation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStateMachine}: the {@link StateMachine} definition&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Together with {@link ProtocolClass} and {@link DataClass} one of&#xD;&#xA;the main class types of the ROOM language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The actor class in ROOM has three compartments which aren't represented as separate model objects.&#xD;&#xA;To understand to which compartment an attribute or reference belongs to here is a list&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>Interface: everything which is visible from the outside from a model point of view&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getInterfacePorts}: a list of all interface {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link ActorContainerClass#getServiceProvisionPoints()}: a list of all interface {@link SPP}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Structure: all internal structural aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getUserCode1}-3: user defined code with generator dependent meaning&lt;/li>&#xD;&#xA;    &lt;li>{@link #getInternalPorts}: a list of all internal end {@link Port}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that&#xD;&#xA;       are end ports, not relay ports&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getServiceAccessPoints}: a list of all {@link SAP}s used by this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getAttributes}: a list of all actor class {@link Attribute}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}&#xD;&#xA;       has the meaning of a composition)&lt;/li>&#xD;&#xA;    &lt;li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class&lt;/li>&#xD;&#xA;    &lt;li>{@link #getConnections}: a list of all {@link LayerConnection}s&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;  &lt;li>Behavior: the behavioral aspects of an actor class&lt;/li>&#xD;&#xA;  &lt;ul>&#xD;&#xA;    &lt;li>{@link #getOperations}: a list of {@link Operation}s&lt;/li>&#xD;&#xA;    &lt;li>{@link #getStateMachine}: the {@link StateGraph state machine} definition&lt;/li>&#xD;&#xA;  &lt;/ul>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="getExternalEndPorts" upperBound="-1" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -727,7 +727,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link Port}&lt;/li>&#xD;&#xA;  &lt;li>{@link SAPRef}&lt;/li>&#xD;&#xA;  &lt;li>{@link SPPRef}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link Port}&lt;/li>&#xD;&#xA;  &lt;li>{@link SAP}&lt;/li>&#xD;&#xA;  &lt;li>{@link SPP}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="getGeneralProtocol" eType="#//GeneralProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -742,7 +742,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//InterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A port defines a part of the interface of an {@link ActorClass} in a specific role.&#xD;&#xA;The port is associated with a {@link ProtocolClass}. If it is conjugated then the&#xD;&#xA;roles of incoming and outgoing messages of the protocol are inverted.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Ports can have a multiplicity. If it is greater one the port is called replicated.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Whether a port is a relay port or not is a property that is derived from how it is&#xD;&#xA;referenced by its {@link ActorClass}:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>ports contained in the actor structure are called &lt;em>internal end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface and are also referenced by an {@link ExternalPort}&#xD;&#xA;     are called &lt;em>external end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface only are called &lt;em>relay ports&lt;/em>&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Relay ports delegate to sub actors and end ports are connected to the actor's state machine.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)}&#xD;&#xA;@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)}&#xD;&#xA;@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)}&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>A port defines a part of the interface of an {@link ActorClass} in a specific role.&#xD;&#xA;The port is associated with a {@link ProtocolClass}. If it is conjugated then the&#xD;&#xA;roles of incoming and outgoing messages of the protocol are inverted.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Ports can have a multiplicity. If it is greater one the port is called replicated.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Whether a port is a relay port or not is a property that is derived from how it is&#xD;&#xA;referenced by its {@link ActorClass}:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>ports contained in the actor structure are called &lt;em>internal end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface and are also referenced by an {@link ExternalPort}&#xD;&#xA;     are called &lt;em>external end ports&lt;/em>&lt;/li>&#xD;&#xA;  &lt;li>ports contained in the actor interface only are called &lt;em>relay ports&lt;/em>&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;Relay ports delegate to sub actors and end ports are connected to the actor's state machine.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)&#xD;&#xA;@see org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="isReplicated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -774,7 +774,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExternalPort">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>An external port is part of the actor structure and references an interface port.&#xD;&#xA;An interface port which is referenced by an external port is an external end port.&#xD;&#xA;If it is not referenced it is a relay port.&#xD;&#xA;&#xD;&#xA;@see {@link Port}&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>An external port is part of the actor structure and references an interface port.&#xD;&#xA;An interface port which is referenced by an external port is an external end port.&#xD;&#xA;If it is not referenced it is a relay port.&#xD;&#xA;&#xD;&#xA;@see Port&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfacePort" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -788,7 +788,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the SAPRef's protocol class.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -798,13 +798,13 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the SAPRef's protocol class.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is the SAP's protocol class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceImplementation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s&#xD;&#xA;that are bound to it following the service resolution logic.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>A service implementation can be reagrded as the replicated peer port of all {@link SAP}s&#xD;&#xA;that are bound to it following the service resolution logic.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="spp" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -814,7 +814,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalSystem" eSuperTypes="#//StructureClass">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.&#xD;&#xA;This way the logical system is composed of sub system instances. It also defines&#xD;&#xA;{@link Binding}s and {@link LayerConnection}s between those sub systems.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The logical system is the root of the instance tree of the generator model.&#xD;&#xA;Each {@link SubSystemRef} is turned into a {@link SubSystemInstance} and each&#xD;&#xA;{@link ActorRef} is turned into an {@link ActorInstance}.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The top level structural class. It can only contain sub systems using {@link SubSystemRef}s.&#xD;&#xA;This way the logical system is composed of sub system instances. It also defines&#xD;&#xA;{@link Binding}s and {@link LayerConnection}s between those sub systems.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The logical system is the root of the instance tree of the generator model.&#xD;&#xA;Each {@link SubSystemRef} is turned into a {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance} and each&#xD;&#xA;{@link ActorRef} is turned into an {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystems" upperBound="-1"
         eType="#//SubSystemRef" containment="true">
@@ -985,7 +985,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LayerConnection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.&#xD;&#xA;The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Layer connections are used to connect {@link SAP}s and {@link ServiceImplementation}s.&#xD;&#xA;The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//SAPoint"
         containment="true">
@@ -1017,17 +1017,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelaySAPoint" eSuperTypes="#//SAPoint">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Links from a relay {@link SPPRef} of the actor class.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Links from a relay {@link SPP} of the actor class.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relay" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the referenced SPPRef.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is the referenced SPP.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SPPoint">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>Links to a {@link SPP} of an {@link ActorContainerRef}, i.e. an SPP of a sub actor&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//ActorContainerRef">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1068,7 +1068,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraphItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link StateStateGraphNode}&lt;/li>&#xD;&#xA;  &lt;li>{@link Transition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link StateGraphNode}&lt;/li>&#xD;&#xA;  &lt;li>{@link Transition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1118,7 +1118,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateGraph">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A state graph is a directed graph composed of&#xD;&#xA;{@link StateGraphNode}s as nodes and {@link Transitions} as edges.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>A state graph is a directed graph composed of&#xD;&#xA;{@link StateGraphNode}s as nodes and {@link Transition}s as edges.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
         eType="#//State" containment="true">
@@ -1153,7 +1153,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//State">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A simple state is the standard case of a @link State}.&#xD;&#xA;It comprises and &lt;em>entry&lt;/em>, &lt;em>exit&lt;/em> and &lt;em>do&lt;/em> code&#xD;&#xA;and it can contain another {@link StateGRaph} as sub state&#xD;&#xA;graph.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>A simple state is the standard case of a @link State}.&#xD;&#xA;It comprises and &lt;em>entry&lt;/em>, &lt;em>exit&lt;/em> and &lt;em>do&lt;/em> code&#xD;&#xA;and it can contain another {@link StateGraph} as sub state&#xD;&#xA;graph.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1163,7 +1163,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//State">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A refined state can be used only in a derived {@link ActorClass}.&#xD;&#xA;It refers to a {@link State} in the inherited state machine&#xD;&#xA;which is refined by adding detail code and/or&#xD;&#xA;{@link StateGRaphItem}s in the sub state graph.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>A refined state can be used only in a derived {@link ActorClass}.&#xD;&#xA;It refers to a {@link State} in the inherited state machine&#xD;&#xA;which is refined by adding detail code and/or&#xD;&#xA;{@link StateGraphItem}s in the sub state graph.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1173,7 +1173,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DetailCode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">

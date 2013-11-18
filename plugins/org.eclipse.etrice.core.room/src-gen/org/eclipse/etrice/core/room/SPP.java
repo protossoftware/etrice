@@ -37,7 +37,7 @@ public interface SPP extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is the SAPRef's protocol class.
+   * <br>This is the SAP's protocol class.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Protocol</em>' reference.

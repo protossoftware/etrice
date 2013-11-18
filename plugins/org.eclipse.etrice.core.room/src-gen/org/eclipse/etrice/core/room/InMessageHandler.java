@@ -10,7 +10,7 @@ package org.eclipse.etrice.core.room;
  *
  * <!-- begin-model-doc -->
  * <br>Is a handler (or interceptor) for incoming messages. In the generated code the
- * message is available. It is derived from {@link MsgHandler}.
+ * message is available. It is derived from {@link MessageHandler}.
  * 
  * <!-- end-model-doc -->
  *

@@ -44,7 +44,6 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 	}
 
 	/**
-	 * @param actor
 	 * @param name
 	 * @param localId
 	 * @param idx

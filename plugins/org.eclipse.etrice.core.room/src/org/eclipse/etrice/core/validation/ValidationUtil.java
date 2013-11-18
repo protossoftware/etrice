@@ -231,7 +231,7 @@ public class ValidationUtil {
 	/**
 	 * check if compound protocol is circular
 	 * @param ref
-	 * @param ac
+	 * @param cpc
 	 * @return <code>true</code> if cpc contains a cycle
 	 */
 	public static boolean isCircular(CompoundProtocolClass ref, CompoundProtocolClass cpc) {
@@ -1036,7 +1036,7 @@ public class ValidationUtil {
 
 	/**
 	 * @param tr
-	 * @return
+	 * @return the {@link Result} of the check
 	 */
 	public static Result checkTransition(Transition tr) {
 		ActorClass ac = RoomHelpers.getActorClass(tr);

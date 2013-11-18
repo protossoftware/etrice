@@ -175,7 +175,7 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	/**
 	 * get thread for path
 	 * @param path
-	 * @return
+	 * @return the thread ID for the given instance path
 	 */
 	public int getThreadForPath(String path) {
 		Integer thread = path2thread.get(path);
@@ -193,9 +193,9 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	}
 	
 	/**
-	 * @param optionalActorClass
-	 * @param instanceActorClass
-	 * @return
+	 * @param optionalActorClass the name of the container class
+	 * @param instanceActorClass the name of the instance class to be created
+	 * @return the matching {@link IOptionalActorFactory} or {@code null}
 	 */
 	abstract public IOptionalActorFactory getFactory(String optionalActorClass, String instanceActorClass);
 	

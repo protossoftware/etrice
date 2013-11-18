@@ -30,9 +30,9 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * Relay ports delegate to sub actors and end ports are connected to the actor's state machine.
  * </p>
  * 
- * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)}
- * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)}
- * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)}
+ * @see org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)
+ * @see org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)
+ * @see org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)
  * 
  * <!-- end-model-doc -->
  *

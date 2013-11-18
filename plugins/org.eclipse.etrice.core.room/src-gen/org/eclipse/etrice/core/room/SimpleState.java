@@ -11,7 +11,7 @@ package org.eclipse.etrice.core.room;
  * <!-- begin-model-doc -->
  * <br>A simple state is the standard case of a @link State}.
  * It comprises and <em>entry</em>, <em>exit</em> and <em>do</em> code
- * and it can contain another {@link StateGRaph} as sub state
+ * and it can contain another {@link StateGraph} as sub state
  * graph.
  * 
  * <!-- end-model-doc -->

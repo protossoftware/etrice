@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
  * <br>The super class of
  * <ul>
  *   <li>{@link Port}</li>
- *   <li>{@link SAPRef}</li>
- *   <li>{@link SPPRef}</li>
+ *   <li>{@link SAP}</li>
+ *   <li>{@link SPP}</li>
  * </ul>
  * 
  * <!-- end-model-doc -->

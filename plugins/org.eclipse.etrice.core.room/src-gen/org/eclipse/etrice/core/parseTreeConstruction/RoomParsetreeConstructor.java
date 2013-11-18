@@ -7558,7 +7558,7 @@ protected class PortClass_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2'
+// ("usercode" userCode=DetailCode)?
 protected class PortClass_Group_2 extends GroupToken {
 	
 	public PortClass_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7580,7 +7580,7 @@ protected class PortClass_Group_2 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2/@elements.0'
+// "usercode"
 protected class PortClass_UsercodeKeyword_2_0 extends KeywordToken  {
 	
 	public PortClass_UsercodeKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7602,7 +7602,7 @@ protected class PortClass_UsercodeKeyword_2_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2/@elements.1'
+// userCode=DetailCode
 protected class PortClass_UserCodeAssignment_2_1 extends AssignmentToken  {
 	
 	public PortClass_UserCodeAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7649,7 +7649,7 @@ protected class PortClass_UserCodeAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3'
+// (attributes+=Attribute | operations+=PortOperation | msgHandlers+=MessageHandler)*
 protected class PortClass_Alternatives_3 extends AlternativesToken {
 
 	public PortClass_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7673,7 +7673,7 @@ protected class PortClass_Alternatives_3 extends AlternativesToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.0'
+// attributes+=Attribute
 protected class PortClass_AttributesAssignment_3_0 extends AssignmentToken  {
 	
 	public PortClass_AttributesAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7721,7 +7721,7 @@ protected class PortClass_AttributesAssignment_3_0 extends AssignmentToken  {
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.1'
+// operations+=PortOperation
 protected class PortClass_OperationsAssignment_3_1 extends AssignmentToken  {
 	
 	public PortClass_OperationsAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7769,7 +7769,7 @@ protected class PortClass_OperationsAssignment_3_1 extends AssignmentToken  {
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3/@elements.2'
+// msgHandlers+=MessageHandler
 protected class PortClass_MsgHandlersAssignment_3_2 extends AssignmentToken  {
 	
 	public PortClass_MsgHandlersAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7818,7 +7818,7 @@ protected class PortClass_MsgHandlersAssignment_3_2 extends AssignmentToken  {
 }
 
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.4'
+// "}"
 protected class PortClass_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public PortClass_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7848,11 +7848,12 @@ protected class PortClass_RightCurlyBracketKeyword_4 extends KeywordToken  {
 
 /************ begin Rule MessageHandler ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MessageHandler'
+ * MessageHandler:
+ * 	InMessageHandler | OutMessageHandler;
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives'
+// InMessageHandler | OutMessageHandler
 protected class MessageHandler_Alternatives extends AlternativesToken {
 
 	public MessageHandler_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7883,7 +7884,7 @@ protected class MessageHandler_Alternatives extends AlternativesToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.0'
+// InMessageHandler
 protected class MessageHandler_InMessageHandlerParserRuleCall_0 extends RuleCallToken {
 	
 	public MessageHandler_InMessageHandlerParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7919,7 +7920,7 @@ protected class MessageHandler_InMessageHandlerParserRuleCall_0 extends RuleCall
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.1'
+// OutMessageHandler
 protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCallToken {
 	
 	public MessageHandler_OutMessageHandlerParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7961,11 +7962,12 @@ protected class MessageHandler_OutMessageHandlerParserRuleCall_1 extends RuleCal
 
 /************ begin Rule InMessageHandler ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InMessageHandler'
+ * InMessageHandler:
+ * 	"handle" "incoming" msg=[Message] detailCode=DetailCode;
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives'
+// "handle" "incoming" msg=[Message] detailCode=DetailCode
 protected class InMessageHandler_Group extends GroupToken {
 	
 	public InMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7994,7 +7996,7 @@ protected class InMessageHandler_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.0'
+// "handle"
 protected class InMessageHandler_HandleKeyword_0 extends KeywordToken  {
 	
 	public InMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8015,7 +8017,7 @@ protected class InMessageHandler_HandleKeyword_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.1'
+// "incoming"
 protected class InMessageHandler_IncomingKeyword_1 extends KeywordToken  {
 	
 	public InMessageHandler_IncomingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8037,7 +8039,7 @@ protected class InMessageHandler_IncomingKeyword_1 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.2'
+// msg=[Message]
 protected class InMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 	
 	public InMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8074,7 +8076,7 @@ protected class InMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.3'
+// detailCode=DetailCode
 protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
 	
 	public InMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8126,11 +8128,12 @@ protected class InMessageHandler_DetailCodeAssignment_3 extends AssignmentToken 
 
 /************ begin Rule OutMessageHandler ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/OutMessageHandler'
+ * OutMessageHandler:
+ * 	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives'
+// "handle" "outgoing" msg=[Message] detailCode=DetailCode
 protected class OutMessageHandler_Group extends GroupToken {
 	
 	public OutMessageHandler_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8159,7 +8162,7 @@ protected class OutMessageHandler_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.0'
+// "handle"
 protected class OutMessageHandler_HandleKeyword_0 extends KeywordToken  {
 	
 	public OutMessageHandler_HandleKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8180,7 +8183,7 @@ protected class OutMessageHandler_HandleKeyword_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.1'
+// "outgoing"
 protected class OutMessageHandler_OutgoingKeyword_1 extends KeywordToken  {
 	
 	public OutMessageHandler_OutgoingKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8202,7 +8205,7 @@ protected class OutMessageHandler_OutgoingKeyword_1 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.2'
+// msg=[Message]
 protected class OutMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 	
 	public OutMessageHandler_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8239,7 +8242,7 @@ protected class OutMessageHandler_MsgAssignment_2 extends AssignmentToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.3'
+// detailCode=DetailCode
 protected class OutMessageHandler_DetailCodeAssignment_3 extends AssignmentToken  {
 	
 	public OutMessageHandler_DetailCodeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

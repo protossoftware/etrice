@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <!-- begin-model-doc -->
  * <br>A state graph is a directed graph composed of
- * {@link StateGraphNode}s as nodes and {@link Transitions} as edges.
+ * {@link StateGraphNode}s as nodes and {@link Transition}s as edges.
  * 
  * <!-- end-model-doc -->
  *

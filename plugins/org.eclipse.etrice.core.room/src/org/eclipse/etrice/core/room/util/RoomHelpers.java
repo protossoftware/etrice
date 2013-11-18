@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -94,7 +95,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
  *
  * @author Henrik Rentz-Reichert initial contribution and API
  *
- * @see {@link org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model}
+ * @see org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model
  */
 public class RoomHelpers extends BaseHelpers {
 	
@@ -271,8 +272,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 2 of a {@link DataClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode2(DataClass ac) {
-		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
+	public static String getDeepUserCode2(DataClass dc) {
+		return getDeepUserCode(dc, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
 	}
 
 
@@ -449,11 +450,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * Returns whether an {@link ActorClass} has a non-empty {@link StateMachine}.
+	 * Returns whether an {@link ActorClass} has a non-empty {@link StateGraph}.
 	 * 
-	 * @param s the {@link State}
+	 * @param ac the {@link ActorClass}
 	 * 
-	 * @return whether an {@link ActorClass} has a non-empty {@link StateMachine}
+	 * @return whether an {@link ActorClass} has a non-empty {@link StateGraph}
 	 */
 	public static boolean hasNonEmptyStateMachine(ActorClass ac) {
 		return !isEmpty(ac.getStateMachine());
@@ -940,8 +941,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
-	 * 	getAllNames(StateGraph, StateGraphItem)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
+	 * 	getAllNames(StateGraph, StateGraphItem)
 	 */
 	public static Set<String> getAllNames(StateGraph sg) {
 		return getAllNames(sg, null);
@@ -1002,8 +1003,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link State}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
-	 * 	getAllStateNames(StateGraph, State)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
+	 * 	getAllStateNames(StateGraph, State)
 	 */
 	public static Set<String> getAllStateNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
@@ -1032,8 +1033,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
-	 * 	getAllStateNames(StateGraph, TrPoint)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
+	 * 	getAllStateNames(StateGraph, TrPoint)
 	 */
 	public static Set<String> getAllTrPointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
@@ -1062,8 +1063,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
-	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
+	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)
 	 */
 	public static Set<String> getAllChoicePointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
@@ -1092,8 +1093,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
-	 * 	getAllTransitionNames(StateGraph, Transition)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
+	 * 	getAllTransitionNames(StateGraph, Transition)
 	 */
 	public static Set<String> getAllTransitionNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_Transitions());
@@ -1207,7 +1208,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Attribute}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Attribute}s of an {@link ActorClass}
 	 */
@@ -1227,7 +1228,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Attribute}s of a {@link DataClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param dc an {@link DataClass}
 	 * 
 	 * @return a list of all {@link Attribute}s of a {@link DataClass}
 	 */
@@ -1247,7 +1248,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Operation}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Operation}s of an {@link ActorClass}
 	 */
@@ -1267,7 +1268,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Operation}s of a {@link DataClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param dc an {@link DataClass}
 	 * 
 	 * @return a list of all {@link Operation}s of a {@link DataClass}
 	 */
@@ -1581,7 +1582,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Binding}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Binding}s of an {@link ActorClass}
 	 */
@@ -1603,7 +1604,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link LayerConnection}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link LayerConnection}s of an {@link ActorClass}
 	 */
@@ -1735,7 +1736,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 * 
-	 * @see {@link #isBehaviorAttributePresent(ActorClass, String, String)}
+	 * @see #isBehaviorAttributePresent(ActorClass, String, String)
 	 */
 	public static boolean isAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getAnnotations(), name, key);
@@ -1750,7 +1751,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 * 
-	 * @see {@link #isAttributePresent(ActorClass, String, String)}
+	 * @see #isAttributePresent(ActorClass, String, String)
 	 */
 	public static boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getBehaviorAnnotations(), name, key);
@@ -1814,7 +1815,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all messages
 	 * 
-	 * @see {@link #getAllMessages(ProtocolClass, boolean)}
+	 * @see #getAllMessages(ProtocolClass, boolean)
 	 */
 	public static List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
@@ -2074,9 +2075,9 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * return the {@link BaseState} of a {@link State}
+	 * return the {@link SimpleState} of a {@link State}
 	 * @param s
-	 * @return the state itself if a BaseState or the BaseState for a {@link RefinedState}
+	 * @return the state itself if a SimpleState or the base state for a {@link RefinedState}
 	 */
 	public static SimpleState getBaseState(State s) {
 		if (s instanceof SimpleState)
@@ -2088,11 +2089,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * Returns a list of target states of a {@link RefinedSatte} recursively.
+	 * Returns a list of target states of a {@link RefinedState} recursively.
 	 * 
 	 * @param rs the refined state
 	 * 
-	 * @return a list of target states of a {@link RefinedSatte} recursively
+	 * @return a list of target states of a {@link RefinedState} recursively
 	 */
 	public static List<State> getReferencedStatesRecursively(RefinedState rs) {
 		ArrayList<State> result = new ArrayList<State>();
@@ -2359,7 +2360,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns the recursive base class code of a transition.
 	 * 
 	 * @param trans the transition
-	 * @param actorClass the actor class
+	 * @param ac the actor class
 	 * 
 	 * @return the recursive base class code of a transition
 	 */
@@ -2391,7 +2392,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns the complete action code including base class code of a {@link Transition}.
 	 * 
 	 * @param trans the transition
-	 * @param actorClass the actor class
+	 * @param ac the actor class
 	 * 
 	 * @return the complete action code including base class code of a {@link Transition}
 	 */
@@ -2525,11 +2526,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * returns first invalid path segment else null
+	 * returns first invalid path segment else {@code null}
 	 * 
 	 * @param root
 	 * @param path
-	 * @return
+	 * @return first invalid path segment else {@code null}
 	 */
 	public static String checkPath(ActorContainerClass root, RefPath path) {
 		if (path == null)

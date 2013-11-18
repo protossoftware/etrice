@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * this tree is a valid sequence of messages exchanged through a port instance.
  * 
  * <p>
- * The semantics are composed using {@link SemanticsRule]s.
+ * The semantics are composed using {@link SemanticsRule}s.
  * </p>
  * 
  * <!-- end-model-doc -->

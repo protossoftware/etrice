@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.
+ * <br>Layer connections are used to connect {@link SAP}s and {@link ServiceImplementation}s.
  * The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.
  * 
  * <!-- end-model-doc -->

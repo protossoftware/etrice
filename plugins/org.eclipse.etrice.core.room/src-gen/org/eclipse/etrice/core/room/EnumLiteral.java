@@ -63,7 +63,7 @@ public interface EnumLiteral extends EObject
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>The value of the literal. It is associated with a target type which defaults to
-   * {@code int} and can be set explicitly using the {@link EnumerationType#primitiveType}
+   * {@code int} and can be set explicitly using the {@link EnumerationType#getPrimitiveType()}
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Literal</em>' containment reference.

@@ -19,10 +19,9 @@ package org.eclipse.etrice.runtime.java.modelbase;
 public interface IOptionalActorFactory {
 
 	/**
-	 * @param name 
-	 * @param replicatedOptionalActorInterfaceBase
-	 * @param name
-	 * @return
+	 * @param parent the {@link OptionalActorInterfaceBase} that owns the optional actor
+	 * @param name the name of the new actor instance
+	 * @return the created {@link ActorClassBase}
 	 */
 	ActorClassBase create(OptionalActorInterfaceBase parent, String name);
 

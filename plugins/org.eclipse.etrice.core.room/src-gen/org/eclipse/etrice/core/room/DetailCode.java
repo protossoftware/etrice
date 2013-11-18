@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * target language.
  * 
  * <p>
- * The detail code is parsed by the {@link DetailCodeTranslator}
+ * The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}
  * which replaces certain frequent constructs like access of members
  * and sending a message via a port by target language specific code.
  * </p>

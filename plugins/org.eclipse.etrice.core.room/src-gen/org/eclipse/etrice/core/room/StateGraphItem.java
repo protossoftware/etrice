@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-model-doc -->
  * <br>The super class of
  * <ul>
- *   <li>{@link StateStateGraphNode}</li>
+ *   <li>{@link StateGraphNode}</li>
  *   <li>{@link Transition}</li>
  * </ul>
  * 
