@@ -339,10 +339,18 @@ class GenericStateMachineGenerator {
 					«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
 					next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», is_handler«ENDIF»);
 					setState(«langExt.selfPointer(true)»next);
+					«finalAction()»
 				}
 			}
 		}
 	'''}
+	
+	/**
+	 * empty, but may be overridden
+	 */
+	def finalAction() {
+		''''''
+	}
 
 	
 	/**

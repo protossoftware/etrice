@@ -142,7 +142,7 @@ class ProjectFileFragments {
 				<artifactId>«mdlName»</artifactId>
 				<version>1.0.0</version>
 				<build>
-					<sourceDirectory>src-gen</sourceDirectory>
+					<sourceDirectory>src,src-gen</sourceDirectory>
 					<resources>
 						<resource>
 							<directory>src-gen</directory>

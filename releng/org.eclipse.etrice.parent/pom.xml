@@ -60,39 +60,21 @@
 	<developers>
 		<developer>
 			<name>Thomas Schuetz</name>
-			<email>ts@protos.de</email>
-			<organization>Protos Software GmbH</organization>
-			<organizationUrl>http://www.protos.de/index.php/en</organizationUrl>
 		</developer>
 		<developer>
 			<name>Henrik Rentz-Reichert</name>
-			<email>hrr@protos.de</email>
-			<organization>Protos Software GmbH</organization>
-			<organizationUrl>http://www.protos.de/index.php/en</organizationUrl>
 		</developer>
 		<developer>
 			<name>Thomas Jung</name>
-			<email>tj@protos.de</email>
-			<organization>Protos Software GmbH</organization>
-			<organizationUrl>http://www.protos.de/index.php/en</organizationUrl>
 		</developer>
 		<developer>
 			<name>Juergen Haug</name>
-			<email>juergen.markus.haug@student.uni-augsburg.de</email>
-			<organization>Protos Software GmbH</organization>
-			<organizationUrl>http://www.protos.de/index.php/en</organizationUrl>
 		</developer>
 		<developer>
 			<name>Eyrak Paen</name>
-			<email>ep@protos.de</email>
-			<organization>Protos Software GmbH</organization>
-			<organizationUrl>http://www.protos.de/index.php/en</organizationUrl>
 		</developer>
 		<developer>
 			<name>Peter Karlitschek</name>
-			<email>Peter.Karlitschek@draeger.com</email>
-			<organization>Draeger Medical GmbH</organization>
-			<organizationUrl>http://www.draeger.com</organizationUrl>
 		</developer>
 	</developers>
 
@@ -133,6 +115,84 @@
 		<module>../../runtime/org.eclipse.etrice.runtime.java</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>fast</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>full</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<configuration>
+							<tags>
+								<tag>
+									<name>generated</name>
+									<placement>a</placement>
+									<head>Generated:</head>
+								</tag>
+								<tag>
+									<name>ordered</name>
+									<placement>X</placement>
+									<head>Ordered:</head>
+								</tag>
+								<tag>
+									<name>model</name>
+									<placement>X</placement>
+									<head>Model:</head>
+								</tag>
+								<tag>
+									<name>parameter</name>
+									<placement>X</placement>
+									<head>Parameter:</head>
+								</tag>
+							</tags>
+							<additionalDependencies>
+								<additionalDependency>
+									<groupId>org.eclipse.etrice</groupId>
+									<artifactId>org.eclipse.etrice.core.genmodel</artifactId>
+									<version>0.4.0-SNAPSHOT</version>
+								</additionalDependency>
+								<additionalDependency>
+									<groupId>org.eclipse.etrice</groupId>
+									<artifactId>org.eclipse.etrice.generator</artifactId>
+									<version>0.4.0-SNAPSHOT</version>
+								</additionalDependency>
+							</additionalDependencies>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -140,68 +200,6 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<tags>
-						<tag>
-							<name>generated</name>
-							<placement>a</placement>
-							<head>Generated:</head>
-						</tag>
-						<tag>
-							<name>ordered</name>
-							<placement>X</placement>
-							<head>Ordered:</head>
-						</tag>
-						<tag>
-							<name>model</name>
-							<placement>X</placement>
-							<head>Model:</head>
-						</tag>
-						<tag>
-							<name>parameter</name>
-							<placement>X</placement>
-							<head>Parameter:</head>
-						</tag>
-					</tags>
-					<additionalDependencies>
-						<additionalDependency>
-							<groupId>org.eclipse.etrice</groupId>
-							<artifactId>org.eclipse.etrice.core.genmodel</artifactId>
-							<version>0.4.0-SNAPSHOT</version>
-						</additionalDependency>
-						<additionalDependency>
-							<groupId>org.eclipse.etrice</groupId>
-							<artifactId>org.eclipse.etrice.generator</artifactId>
-							<version>0.4.0-SNAPSHOT</version>
-						</additionalDependency>
-					</additionalDependencies>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>

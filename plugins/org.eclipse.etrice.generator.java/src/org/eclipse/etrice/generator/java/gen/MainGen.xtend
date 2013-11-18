@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
+import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class MainGen implements IGenerator {
@@ -27,6 +28,7 @@ class MainGen implements IGenerator {
 	@Inject EnumerationTypeGen enumTypeGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
+	@Inject ActorClassDataGen actorClassDataGen
 	@Inject OptionalActorInterfaceGen optionalActorInterfaceGen
 	@Inject OptionalActorFactoryGen optionalActorFactoryGen
 	@Inject NodeGen nodeGen
@@ -47,6 +49,8 @@ class MainGen implements IGenerator {
 		enumTypeGen.doGenerate(e)
 		protocolClassGen.doGenerate(e)
 		actorClassGen.doGenerate(e)
+		if (Main::settings.isGenerateStoreDataObj)
+			actorClassDataGen.doGenerate(e)
 		optionalActorInterfaceGen.doGenerate(e)
 		optionalActorFactoryGen.doGenerate(e)
 		nodeGen.doGenerate(e);

@@ -1094,6 +1094,10 @@ public class GenericStateMachineGenerator {
       _builder.append(_selfPointer_12, "			");
       _builder.append("next);");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t");
+      CharSequence _finalAction = this.finalAction();
+      _builder.append(_finalAction, "			");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
@@ -1105,6 +1109,14 @@ public class GenericStateMachineGenerator {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * empty, but may be overridden
+   */
+  public CharSequence finalAction() {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder;
   }
   
   /**

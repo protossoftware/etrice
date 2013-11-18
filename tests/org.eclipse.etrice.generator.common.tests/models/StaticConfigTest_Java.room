@@ -50,7 +50,7 @@ RoomModel StaticConfigTest {
 				State s1 {
 					entry {
 						"data_3.varCheck3(caseId);"
-						"SubSystemClassBase subSystem = (SubSystemClassBase) ((ActorClassBase)getParent()).getParent();"
+						"SubSystemClassBase subSystem = (SubSystemClassBase) RTServices.getInstance().getSubSystem();"
 						"Testee_Super2_ac testee_super2 = (Testee_Super2_ac) subSystem.getInstance(\"/System_StaticConfigTest/subSystem/top/tester/testee_super2\");"
 						"int caseId_2 = testee_super2.getCaseId();"
 						"testee_super2.getReg_port().varCheck(caseId_2);"

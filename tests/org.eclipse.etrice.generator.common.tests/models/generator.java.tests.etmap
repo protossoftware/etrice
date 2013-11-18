@@ -64,5 +64,8 @@ MappingModel JavaGenTest {
 		SubSystemMapping enTest -> node18 {
 			ThreadMapping defaultThread -> DfltThread
 		}
+		SubSystemMapping stTest -> node19 {
+			ThreadMapping defaultThread -> DfltThread
+		}
 	}
 }

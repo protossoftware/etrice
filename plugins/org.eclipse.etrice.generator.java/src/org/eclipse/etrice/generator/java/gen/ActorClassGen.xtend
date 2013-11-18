@@ -69,10 +69,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
-		val baseClass = if (ac.base!=null) ac.base.name else
-			if (ac.getAttribute("ActorBaseClass", "class").empty) "ActorClassBase" else ac.getAttribute("ActorBaseClass", "class")
-		val baseClassImport = if (ac.getAttribute("ActorBaseClass", "class").empty) "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase"
-				else ac.getAttribute("ActorBaseClass", "package")+"."+ac.getAttribute("ActorBaseClass", "class")
+		val dataObjClass = ac.name+"_DataObject"
+		val baseClass = if (ac.base!=null) ac.base.name
+			else if (!ac.getAttribute("ActorBaseClass", "class").empty) ac.getAttribute("ActorBaseClass", "class")
+			else if (Main::settings.generateStoreDataObj) "ActorClassFinalActionBase"
+			else "ActorClassBase"
 		
 	'''
 		package «ac.getPackage»;
@@ -86,14 +87,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 			import java.io.ObjectInput;
 			import java.io.ObjectOutput;
 		«ENDIF»
-		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
-		import «baseClassImport»;
-		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
-		import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
-		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		«IF Main::settings.isGenerateStoreDataObj»
+			import java.util.Arrays;
+		«ENDIF»
+		import org.eclipse.etrice.runtime.java.messaging.*;
+		import org.eclipse.etrice.runtime.java.modelbase.*;
+		import org.eclipse.etrice.runtime.java.debugging.*;
+		
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
 		«FOR model : models»
@@ -322,6 +322,90 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«xpac.genLoadImpl»
 				}
 			«ENDIF»
+			«IF Main::settings.isGenerateStoreDataObj»
+				
+				protected void store(IActorClassDataObject obj) {
+					if (!(obj instanceof «dataObjClass»))
+						return;
+					
+					«dataObjClass» dataObject = («dataObjClass») obj;
+					«IF ac.base!=null»
+						
+						super.store(dataObject);
+					«ENDIF»
+					«IF ac.hasNonEmptyStateMachine»
+						
+						dataObject.setState(getState());
+						dataObject.setHistory(Arrays.copyOf(history, history.length));
+					«ENDIF»
+					«IF !ac.attributes.empty»
+						
+						«FOR att : ac.attributes»
+							«IF att.type.type.enumerationOrPrimitive»
+								«IF att.size>1»
+									dataObject.set«att.name.toFirstUpper»(Arrays.copyOf(«att.name», «att.name».length));
+								«ELSE»
+									dataObject.set«att.name.toFirstUpper»(«att.name»);
+								«ENDIF»
+							«ELSE»
+«««						DataClass and ExternalType
+								«IF att.size>1»
+									{
+										«att.type.type.name»[] arr = Arrays.copyOf(«att.name», «att.name».length);
+										for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();
+										dataObject.set«att.name.toFirstUpper»(arr);
+									}
+								«ELSE»
+									dataObject.set«att.name.toFirstUpper»(«att.name».deepCopy());
+								«ENDIF»
+							«ENDIF»
+						«ENDFOR»
+					«ENDIF»
+				}
+				
+				protected void restore(IActorClassDataObject obj) {
+					if (!(obj instanceof «dataObjClass»))
+						return;
+					
+					«dataObjClass» dataObject = («dataObjClass») obj;
+					«IF ac.base!=null»
+						
+						super.restore(dataObject);
+					«ENDIF»
+					«IF ac.hasNonEmptyStateMachine»
+						
+						setState(dataObject.getState());
+						history = Arrays.copyOf(dataObject.getHistory(), dataObject.getHistory().length);
+					«ENDIF»
+					«IF !ac.attributes.empty»
+						
+						«FOR att : ac.attributes»
+							«IF att.type.type.enumerationOrPrimitive»
+								«IF att.size>1»
+									set«att.name.toFirstUpper»(Arrays.copyOf(dataObject.get«att.name.toFirstUpper»(), «att.name».length));
+								«ELSE»
+									set«att.name.toFirstUpper»(dataObject.get«att.name.toFirstUpper»());
+								«ENDIF»
+							«ELSE»
+«««						DataClass and ExternalType
+								«IF att.size>1»
+									{
+										«att.type.type.name»[] arr = Arrays.copyOf(dataObject.get«att.name.toFirstUpper»(), «att.name».length);
+										for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();
+										set«att.name.toFirstUpper»(arr);
+									}
+								«ELSE»
+									set«att.name.toFirstUpper»(dataObject.get«att.name.toFirstUpper»().deepCopy());
+								«ENDIF»
+							«ENDIF»
+						«ENDFOR»
+					«ENDIF»
+				}
+				
+				protected «dataObjClass» newDataObject() {
+					return new «dataObjClass»();
+				}
+			«ENDIF»
 		};
 	'''
 	}
@@ -330,8 +414,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.base!=null»
-			super.saveAttributes(output);
-			
+				super.saveAttributes(output);
+				
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
@@ -354,8 +438,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.base!=null»
-			super.loadAttributes(input);
-			
+				super.loadAttributes(input);
+				
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»

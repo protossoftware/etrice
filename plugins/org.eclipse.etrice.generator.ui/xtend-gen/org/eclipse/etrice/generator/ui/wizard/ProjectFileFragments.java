@@ -317,7 +317,7 @@ public class ProjectFileFragments {
     _builder.append("<build>");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<sourceDirectory>src-gen</sourceDirectory>");
+    _builder.append("<sourceDirectory>src,src-gen</sourceDirectory>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<resources>");

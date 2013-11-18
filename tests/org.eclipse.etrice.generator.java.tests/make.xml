@@ -113,6 +113,7 @@
 			<arg value="${java.tests.model.path}/generator.java.tests.config"/>
 			<arg value="${java.tests.model.path}/generator.java.tests.etmap"/>
 			<arg value="-persistable"/>
+			<arg value="-storeDataObj"/>
 			<arg value="-gen_as_verbose"/>
 			<arg value="-msc_instr"/>
 			<classpath refid="clspath"/>
@@ -168,6 +169,12 @@
 			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
 		</java>
 		<echo>end   EnumTest</echo>
+		<echo>start StoreRestore</echo>
+		<java output="${output}/runStoreRestore.txt" classname="StoreRestore.Node_node19_stTestRunner" fork="true" failonerror="true">
+			<arg value="-headless"/>
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+		</java>
+		<echo>end   StoreRestore</echo>
 		<echo>start ChoicePointTestExtended</echo>
 			<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
 				<arg value="-headless"/>
@@ -274,13 +281,27 @@
 			<arg value="./tmp/ChoicePointTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.EnumTest"/>
+			<arg value="./tmp/EnumTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.StoreRestore"/>
+			<arg value="./tmp/StoreRestore.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 		
 		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-					<arg value="-suite"/>
-					<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTestExtended"/>
-					<arg value="./tmp/ChoicePointTestExtended.etu"/>
-					<classpath refid="clspath"/>
-				</java>
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTestExtended"/>
+			<arg value="./tmp/ChoicePointTestExtended.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
 			<arg value="-suite"/>
@@ -393,6 +414,7 @@
 	-->
 	<target name="copy_results" depends="set_tr">
 		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
+		<move file="./tmp/EnumTest.xml" tofile="./tmp/JavaEnumTest.xml"/>
 		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
 		<move file="./tmp/ChoicePointTestExtended.xml" tofile="./tmp/JavaChoicePointTestExtended.xml"/>
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml"/>
