@@ -69,24 +69,33 @@ AttrConfig:
 	AttrClassConfig | AttrInstanceConfig;
 
 AttrClassConfig:
-	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
+	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
 	(('min' '=' min=NumberLiteral)?
 	('max' '=' max=NumberLiteral)?
 	(attributes+=AttrClassConfig)*)
 	'}')?;
 
 AttrInstanceConfig:
-	'Attr' attribute=[room::Attribute] ('=' value=LiteralArray)? ('{'
+	'Attr' attribute=[room::Attribute] ('=' value=ConfigValueArray)? ('{'
 	((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
 	(attributes+=AttrInstanceConfig*))
 	'}')?;
+
+ConfigValueArray:
+	values+=ConfigValue (',' values+=ConfigValue)*;
+
+ConfigValue: LiteralConfigValue | EnumConfigValue;
+
+LiteralConfigValue: value=Literal;
+
+EnumConfigValue:
+	type=[room::EnumerationType] '.' value=[room::EnumLiteral];
 
 RefPath:
 	refs+=RefSegment ('/' refs+=RefSegment)*;
 
 RefSegment:
-	ref=ID (':' idx=INT)?
-;
+	ref=ID (':' idx=INT)?;
 
 	// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
 Import:

@@ -135,6 +135,26 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
         return createAttrInstanceConfigAdapter();
       }
       @Override
+      public Adapter caseConfigValueArray(ConfigValueArray object)
+      {
+        return createConfigValueArrayAdapter();
+      }
+      @Override
+      public Adapter caseConfigValue(ConfigValue object)
+      {
+        return createConfigValueAdapter();
+      }
+      @Override
+      public Adapter caseLiteralConfigValue(LiteralConfigValue object)
+      {
+        return createLiteralConfigValueAdapter();
+      }
+      @Override
+      public Adapter caseEnumConfigValue(EnumConfigValue object)
+      {
+        return createEnumConfigValueAdapter();
+      }
+      @Override
       public Adapter caseRefPath(RefPath object)
       {
         return createRefPathAdapter();
@@ -347,6 +367,66 @@ public class ConfigAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAttrInstanceConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ConfigValueArray <em>Value Array</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.ConfigValueArray
+   * @generated
+   */
+  public Adapter createConfigValueArrayAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.ConfigValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.ConfigValue
+   * @generated
+   */
+  public Adapter createConfigValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.LiteralConfigValue <em>Literal Config Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.LiteralConfigValue
+   * @generated
+   */
+  public Adapter createLiteralConfigValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.config.EnumConfigValue <em>Enum Config Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.config.EnumConfigValue
+   * @generated
+   */
+  public Adapter createEnumConfigValueAdapter()
   {
     return null;
   }

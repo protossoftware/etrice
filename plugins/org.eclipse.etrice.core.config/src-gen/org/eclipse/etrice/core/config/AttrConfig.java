@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.config;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.etrice.core.common.base.LiteralArray;
-
 import org.eclipse.etrice.core.room.Attribute;
 
 /**
@@ -71,12 +69,12 @@ public interface AttrConfig extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(LiteralArray)
+   * @see #setValue(ConfigValueArray)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrConfig_Value()
    * @model containment="true"
    * @generated
    */
-  LiteralArray getValue();
+  ConfigValueArray getValue();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.config.AttrConfig#getValue <em>Value</em>}' containment reference.
@@ -86,6 +84,6 @@ public interface AttrConfig extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(LiteralArray value);
+  void setValue(ConfigValueArray value);
 
 } // AttrConfig

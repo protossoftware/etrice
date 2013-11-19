@@ -232,6 +232,11 @@
         <details key="body" value="if (this.getLiteral() != null)&#xD;&#xA;&#x9;return this.getLiteral().getValue();&#xD;&#xA;&#xD;&#xA;// recursively from predecessor&#xD;&#xA;&lt;%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());&#xD;&#xA;int idx = et.getLiterals().indexOf(this);&#xD;&#xA;if (idx > 0)&#xD;&#xA;&#x9;return et.getLiterals().get(idx - 1).getLiteralValue() + 1;&#xD;&#xA;&#xD;&#xA;return 0;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="&lt;%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());&#xD;&#xA;return et.getName() + &quot;.&quot; + this.getName();&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>The name of the literal.&#xD;&#xA;"/>

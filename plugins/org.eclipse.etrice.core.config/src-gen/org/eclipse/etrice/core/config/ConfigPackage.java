@@ -600,6 +600,118 @@ public interface ConfigPackage extends EPackage
   int ATTR_INSTANCE_CONFIG_FEATURE_COUNT = ATTR_CONFIG_FEATURE_COUNT + 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ConfigValueArrayImpl <em>Value Array</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ConfigValueArrayImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigValueArray()
+   * @generated
+   */
+  int CONFIG_VALUE_ARRAY = 12;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_VALUE_ARRAY__VALUES = 0;
+
+  /**
+   * The number of structural features of the '<em>Value Array</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_VALUE_ARRAY_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ConfigValueImpl <em>Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.ConfigValueImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigValue()
+   * @generated
+   */
+  int CONFIG_VALUE = 13;
+
+  /**
+   * The number of structural features of the '<em>Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_VALUE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.LiteralConfigValueImpl <em>Literal Config Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.LiteralConfigValueImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteralConfigValue()
+   * @generated
+   */
+  int LITERAL_CONFIG_VALUE = 14;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_CONFIG_VALUE__VALUE = CONFIG_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Literal Config Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_CONFIG_VALUE_FEATURE_COUNT = CONFIG_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.EnumConfigValueImpl <em>Enum Config Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.config.impl.EnumConfigValueImpl
+   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getEnumConfigValue()
+   * @generated
+   */
+  int ENUM_CONFIG_VALUE = 15;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_CONFIG_VALUE__TYPE = CONFIG_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_CONFIG_VALUE__VALUE = CONFIG_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Enum Config Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_CONFIG_VALUE_FEATURE_COUNT = CONFIG_VALUE_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -607,7 +719,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefPath()
    * @generated
    */
-  int REF_PATH = 12;
+  int REF_PATH = 16;
 
   /**
    * The feature id for the '<em><b>Refs</b></em>' containment reference list.
@@ -635,7 +747,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getRefSegment()
    * @generated
    */
-  int REF_SEGMENT = 13;
+  int REF_SEGMENT = 17;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' attribute.
@@ -672,7 +784,7 @@ public interface ConfigPackage extends EPackage
    * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 14;
+  int IMPORT = 18;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -1164,6 +1276,90 @@ public interface ConfigPackage extends EPackage
   EReference getAttrInstanceConfig_Attributes();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ConfigValueArray <em>Value Array</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value Array</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigValueArray
+   * @generated
+   */
+  EClass getConfigValueArray();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.config.ConfigValueArray#getValues <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Values</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigValueArray#getValues()
+   * @see #getConfigValueArray()
+   * @generated
+   */
+  EReference getConfigValueArray_Values();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ConfigValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.ConfigValue
+   * @generated
+   */
+  EClass getConfigValue();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.LiteralConfigValue <em>Literal Config Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal Config Value</em>'.
+   * @see org.eclipse.etrice.core.config.LiteralConfigValue
+   * @generated
+   */
+  EClass getLiteralConfigValue();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.config.LiteralConfigValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.LiteralConfigValue#getValue()
+   * @see #getLiteralConfigValue()
+   * @generated
+   */
+  EReference getLiteralConfigValue_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.EnumConfigValue <em>Enum Config Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enum Config Value</em>'.
+   * @see org.eclipse.etrice.core.config.EnumConfigValue
+   * @generated
+   */
+  EClass getEnumConfigValue();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.EnumConfigValue#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see org.eclipse.etrice.core.config.EnumConfigValue#getType()
+   * @see #getEnumConfigValue()
+   * @generated
+   */
+  EReference getEnumConfigValue_Type();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.config.EnumConfigValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Value</em>'.
+   * @see org.eclipse.etrice.core.config.EnumConfigValue#getValue()
+   * @see #getEnumConfigValue()
+   * @generated
+   */
+  EReference getEnumConfigValue_Value();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.RefPath <em>Ref Path</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1638,6 +1834,78 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EReference ATTR_INSTANCE_CONFIG__ATTRIBUTES = eINSTANCE.getAttrInstanceConfig_Attributes();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ConfigValueArrayImpl <em>Value Array</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ConfigValueArrayImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigValueArray()
+     * @generated
+     */
+    EClass CONFIG_VALUE_ARRAY = eINSTANCE.getConfigValueArray();
+
+    /**
+     * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONFIG_VALUE_ARRAY__VALUES = eINSTANCE.getConfigValueArray_Values();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ConfigValueImpl <em>Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.ConfigValueImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getConfigValue()
+     * @generated
+     */
+    EClass CONFIG_VALUE = eINSTANCE.getConfigValue();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.LiteralConfigValueImpl <em>Literal Config Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.LiteralConfigValueImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getLiteralConfigValue()
+     * @generated
+     */
+    EClass LITERAL_CONFIG_VALUE = eINSTANCE.getLiteralConfigValue();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LITERAL_CONFIG_VALUE__VALUE = eINSTANCE.getLiteralConfigValue_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.EnumConfigValueImpl <em>Enum Config Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.config.impl.EnumConfigValueImpl
+     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getEnumConfigValue()
+     * @generated
+     */
+    EClass ENUM_CONFIG_VALUE = eINSTANCE.getEnumConfigValue();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENUM_CONFIG_VALUE__TYPE = eINSTANCE.getEnumConfigValue_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENUM_CONFIG_VALUE__VALUE = eINSTANCE.getEnumConfigValue_Value();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.RefPathImpl <em>Ref Path</em>}' class.

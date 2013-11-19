@@ -48,12 +48,8 @@ public class ConfigUtil {
 
 		if (attr.getType() != null) {
 			DataType type = attr.getType().getType();
-			if (type instanceof PrimitiveType) {
+			if (type instanceof PrimitiveType)
 				return ((PrimitiveType) type).getType();
-			}
-			else if (type instanceof EnumerationType) {
-				return LiteralType.INT; 
-			}
 		}
 
 		return null;
@@ -67,14 +63,15 @@ public class ConfigUtil {
 		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
+				if (actor instanceof ActorRef
+						&& actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
-					if (match.getMultiplicity()==1) {
-						if (ref.getIdx()!=-1)
+					if (match.getMultiplicity() == 1) {
+						if (ref.getIdx() != -1)
 							return null;
-					}
-					else {
-						if (ref.getIdx()<0 || ref.getIdx()>=match.getMultiplicity())
+					} else {
+						if (ref.getIdx() < 0
+								|| ref.getIdx() >= match.getMultiplicity())
 							return null;
 					}
 					break;
@@ -99,7 +96,8 @@ public class ConfigUtil {
 		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
+				if (actor instanceof ActorRef
+						&& actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -155,18 +153,17 @@ public class ConfigUtil {
 			}
 			if (match == null)
 				return ref.getRef();
-			
-			if (match.getMultiplicity()==1) {
-				if (ref.getIdx()!=-1)
-					return ref.toString()+" (ref not indexed )";
+
+			if (match.getMultiplicity() == 1) {
+				if (ref.getIdx() != -1)
+					return ref.toString() + " (ref not indexed )";
+			} else {
+				if (ref.getIdx() < 0)
+					return ref.toString() + " (ref needs index)";
+				if (ref.getIdx() >= match.getMultiplicity())
+					return ref.toString() + " (index out of bounds)";
 			}
-			else {
-				if (ref.getIdx()<0)
-					return ref.toString()+" (ref needs index)";
-				if (ref.getIdx()>=match.getMultiplicity())
-					return ref.toString()+" (index out of bounds)";
-			}
-			
+
 			last = match.getType();
 		}
 
@@ -232,12 +229,13 @@ public class ConfigUtil {
 			List<Attribute> attributes) {
 		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {
-			if (!a.getType().isRef())
-				// TODO-Enum
-				if (a.getType().getType() instanceof PrimitiveType
-						|| (a.getType().getType() instanceof DataClass && a
-								.getSize() == 0))
-					result.add(a);
+			if (a.getType().isRef())
+				continue;
+			DataType type = a.getType().getType();
+			if (type instanceof PrimitiveType
+					|| type instanceof EnumerationType
+					|| (type instanceof DataClass && a.getSize() == 0))
+				result.add(a);
 		}
 
 		return result;

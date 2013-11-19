@@ -65,8 +65,9 @@ class ConfigGenAddon {
 					initGen.genAttributeInitializer(a, toValueLiteral(aType, value), invokes)	
 			}
 			EnumerationType: {
-				// TODO-Enum
-				""
+				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
+				if(value != null)
+					initGen.genAttributeInitializer(a, value, invokes)
 			}
 			DataClass:
 				'''

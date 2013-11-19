@@ -201,7 +201,7 @@
         <details key="documentation" value="&lt;br>This is the attribute.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//LiteralArray"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ConfigValueArray"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the value of {@link #getAttribute attribute}.&#xD;&#xA;"/>
@@ -251,6 +251,19 @@
         <details key="documentation" value="&lt;br>This is a list of attribute configurations of children attributes, in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} is compound.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigValueArray">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//ConfigValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralConfigValue" eSuperTypes="#//ConfigValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Literal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumConfigValue" eSuperTypes="#//ConfigValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumLiteral"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefPath">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

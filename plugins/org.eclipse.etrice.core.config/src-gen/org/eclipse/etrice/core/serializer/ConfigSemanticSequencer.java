@@ -22,8 +22,11 @@ import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
+import org.eclipse.etrice.core.config.EnumConfigValue;
 import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
@@ -159,15 +162,35 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case ConfigPackage.CONFIG_VALUE_ARRAY:
+				if(context == grammarAccess.getConfigValueArrayRule()) {
+					sequence_ConfigValueArray(context, (ConfigValueArray) semanticObject); 
+					return; 
+				}
+				else break;
 			case ConfigPackage.DYNAMIC_CONFIG:
 				if(context == grammarAccess.getDynamicConfigRule()) {
 					sequence_DynamicConfig(context, (DynamicConfig) semanticObject); 
 					return; 
 				}
 				else break;
+			case ConfigPackage.ENUM_CONFIG_VALUE:
+				if(context == grammarAccess.getConfigValueRule() ||
+				   context == grammarAccess.getEnumConfigValueRule()) {
+					sequence_EnumConfigValue(context, (EnumConfigValue) semanticObject); 
+					return; 
+				}
+				else break;
 			case ConfigPackage.IMPORT:
 				if(context == grammarAccess.getImportRule()) {
 					sequence_Import(context, (Import) semanticObject); 
+					return; 
+				}
+				else break;
+			case ConfigPackage.LITERAL_CONFIG_VALUE:
+				if(context == grammarAccess.getConfigValueRule() ||
+				   context == grammarAccess.getLiteralConfigValueRule()) {
+					sequence_LiteralConfigValue(context, (LiteralConfigValue) semanticObject); 
 					return; 
 				}
 				else break;
@@ -233,7 +256,7 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=LiteralArray? (min=NumberLiteral? max=NumberLiteral? attributes+=AttrClassConfig*)?)
+	 *     (attribute=[Attribute|ID] value=ConfigValueArray? (min=NumberLiteral? max=NumberLiteral? attributes+=AttrClassConfig*)?)
 	 */
 	protected void sequence_AttrClassConfig(EObject context, AttrClassConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -242,7 +265,7 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (attribute=[Attribute|ID] value=LiteralArray? ((dynConfig?='dynamic configuration' readOnly?='read'?)? attributes+=AttrInstanceConfig*)?)
+	 *     (attribute=[Attribute|ID] value=ConfigValueArray? ((dynConfig?='dynamic configuration' readOnly?='read'?)? attributes+=AttrInstanceConfig*)?)
 	 */
 	protected void sequence_AttrInstanceConfig(EObject context, AttrInstanceConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -260,6 +283,15 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (values+=ConfigValue values+=ConfigValue*)
+	 */
+	protected void sequence_ConfigValueArray(EObject context, ConfigValueArray semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     ((filePath=STRING | (userCode1=STRING userCode2=STRING)) polling=INT?)
 	 */
 	protected void sequence_DynamicConfig(EObject context, DynamicConfig semanticObject) {
@@ -269,10 +301,45 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (type=[EnumerationType|ID] value=[EnumLiteral|ID])
+	 */
+	protected void sequence_EnumConfigValue(EObject context, EnumConfigValue semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.ENUM_CONFIG_VALUE__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.ENUM_CONFIG_VALUE__TYPE));
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.ENUM_CONFIG_VALUE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.ENUM_CONFIG_VALUE__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getEnumConfigValueAccess().getTypeEnumerationTypeIDTerminalRuleCall_0_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getEnumConfigValueAccess().getValueEnumLiteralIDTerminalRuleCall_2_0_1(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (importedNamespace=ImportedFQN? importURI=STRING)
 	 */
 	protected void sequence_Import(EObject context, Import semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     value=Literal
+	 */
+	protected void sequence_LiteralConfigValue(EObject context, LiteralConfigValue semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ConfigPackage.Literals.LITERAL_CONFIG_VALUE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.LITERAL_CONFIG_VALUE__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getLiteralConfigValueAccess().getValueLiteralParserRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	

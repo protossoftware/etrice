@@ -75,16 +75,9 @@ class Initialization {
 					a.defaultValueLiteral
 				else
 					languageExt.defaultValue(aType)
-			PrimitiveType: {
+			case aType.enumerationOrPrimitive: {
 				var value = getPrimitiveValue(instance, path)
 				if(a.size > 0 && !aType.characterType && !value.trim.startsWith('{'))
-					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
-				else
-					value
-			}
-			EnumerationType: {
-				var value = aType.defaultValue
-				if (a.size > 0 && !value.trim.startsWith('{'))
 					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
 				else
 					value
@@ -102,9 +95,9 @@ class Initialization {
 		if(value == null)
 			value = path.last.defaultValueLiteral
 		
-		// TODO-Enum: was it guaranteed that path.last.type.type is a PrimitiveType?
-		// now: treat EnumerationType separately 
-		return if(value != null) languageExt.toValueLiteral(path.last.type.type as PrimitiveType, value)
-			else languageExt.defaultValue(path.last.type.type)
+		var type = path.last.type.type
+		return if(value != null && type.primitive) languageExt.toValueLiteral(type as PrimitiveType, value)
+				else if(value != null && type.enumeration) languageExt.toEnumLiteral(type as EnumerationType, value)
+				else languageExt.defaultValue(type)
 	}
 }

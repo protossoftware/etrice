@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
@@ -82,32 +83,37 @@ public class Initialization {
     {
       RefableType _type = a.getType();
       DataType aType = _type.getType();
-      CharSequence _xifexpression = null;
-      RefableType _type_1 = a.getType();
-      boolean _isRef = _type_1.isRef();
-      if (_isRef) {
-        CharSequence _xifexpression_1 = null;
-        String _defaultValueLiteral = a.getDefaultValueLiteral();
-        boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
-        if (_notEquals) {
-          String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
-          CharSequence _attributeInit = this.attributeInit(a, _defaultValueLiteral_1);
-          _xifexpression_1 = _attributeInit;
-        } else {
-          CharSequence _xifexpression_2 = null;
-          boolean _needsInitialization = this.languageExt.needsInitialization(a);
-          if (_needsInitialization) {
-            String _nullPointer = this.languageExt.nullPointer();
-            CharSequence _attributeInit_1 = this.attributeInit(a, _nullPointer);
-            _xifexpression_2 = _attributeInit_1;
+      CharSequence _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        RefableType _type_1 = a.getType();
+        boolean _isRef = _type_1.isRef();
+        if (_isRef) {
+          _matched=true;
+          CharSequence _xifexpression = null;
+          String _defaultValueLiteral = a.getDefaultValueLiteral();
+          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+          if (_notEquals) {
+            String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
+            CharSequence _attributeInit = this.attributeInit(a, _defaultValueLiteral_1);
+            _xifexpression = _attributeInit;
+          } else {
+            CharSequence _xifexpression_1 = null;
+            boolean _needsInitialization = this.languageExt.needsInitialization(a);
+            if (_needsInitialization) {
+              String _nullPointer = this.languageExt.nullPointer();
+              CharSequence _attributeInit_1 = this.attributeInit(a, _nullPointer);
+              _xifexpression_1 = _attributeInit_1;
+            }
+            _xifexpression = _xifexpression_1;
           }
-          _xifexpression_1 = _xifexpression_2;
+          _switchResult = _xifexpression;
         }
-        _xifexpression = _xifexpression_1;
-      } else {
-        CharSequence _xifexpression_3 = null;
-        boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-        if (_isPrimitive) {
+      }
+      if (!_matched) {
+        if (aType instanceof PrimitiveType) {
+          final PrimitiveType _primitiveType = (PrimitiveType)aType;
+          _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
             ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
@@ -118,14 +124,14 @@ public class Initialization {
               String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
               value = _defaultValueLiteral_2;
             }
-            CharSequence _xifexpression_4 = null;
+            CharSequence _xifexpression_2 = null;
             boolean _notEquals_1 = (!Objects.equal(value, null));
             if (_notEquals_1) {
-              String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) aType), value);
+              String _valueLiteral = this.languageExt.toValueLiteral(_primitiveType, value);
               CharSequence _attributeInit_2 = this.attributeInit(a, _valueLiteral);
-              _xifexpression_4 = _attributeInit_2;
+              _xifexpression_2 = _attributeInit_2;
             } else {
-              CharSequence _xifexpression_5 = null;
+              CharSequence _xifexpression_3 = null;
               boolean _or = false;
               boolean _not = (!useClassDefaultsOnly);
               if (_not) {
@@ -135,23 +141,60 @@ public class Initialization {
                 _or = (_not || _needsInitialization_1);
               }
               if (_or) {
-                String _defaultValue = this.languageExt.defaultValue(aType);
+                String _defaultValue = this.languageExt.defaultValue(_primitiveType);
                 CharSequence _attributeInit_3 = this.attributeInit(a, _defaultValue);
-                _xifexpression_5 = _attributeInit_3;
+                _xifexpression_3 = _attributeInit_3;
               }
-              _xifexpression_4 = _xifexpression_5;
+              _xifexpression_2 = _xifexpression_3;
             }
-            _xblockexpression_1 = (_xifexpression_4);
+            _xblockexpression_1 = (_xifexpression_2);
           }
-          _xifexpression_3 = _xblockexpression_1;
-        } else {
-          String _defaultValue = this.languageExt.defaultValue(aType);
-          CharSequence _attributeInit_2 = this.attributeInit(a, _defaultValue);
-          _xifexpression_3 = _attributeInit_2;
+          _switchResult = _xblockexpression_1;
         }
-        _xifexpression = _xifexpression_3;
       }
-      _xblockexpression = (_xifexpression);
+      if (!_matched) {
+        if (aType instanceof EnumerationType) {
+          final EnumerationType _enumerationType = (EnumerationType)aType;
+          _matched=true;
+          CharSequence _xblockexpression_1 = null;
+          {
+            ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
+            String value = this.getDataConfigValue(_union, roomClass);
+            boolean _equals = Objects.equal(value, null);
+            if (_equals) {
+              String _defaultValueLiteral_2 = a.getDefaultValueLiteral();
+              value = _defaultValueLiteral_2;
+            }
+            CharSequence _xifexpression_2 = null;
+            boolean _notEquals_1 = (!Objects.equal(value, null));
+            if (_notEquals_1) {
+              String _enumLiteral = this.languageExt.toEnumLiteral(_enumerationType, value);
+              CharSequence _attributeInit_2 = this.attributeInit(a, _enumLiteral);
+              _xifexpression_2 = _attributeInit_2;
+            } else {
+              CharSequence _xifexpression_3 = null;
+              boolean _or = false;
+              boolean _not = (!useClassDefaultsOnly);
+              if (_not) {
+                _or = true;
+              } else {
+                boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
+                _or = (_not || _needsInitialization_1);
+              }
+              if (_or) {
+                String _defaultValue = this.languageExt.defaultValue(_enumerationType);
+                CharSequence _attributeInit_3 = this.attributeInit(a, _defaultValue);
+                _xifexpression_3 = _attributeInit_3;
+              }
+              _xifexpression_2 = _xifexpression_3;
+            }
+            _xblockexpression_1 = (_xifexpression_2);
+          }
+          _switchResult = _xblockexpression_1;
+        }
+      }
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }
@@ -162,44 +205,56 @@ public class Initialization {
       Attribute a = IterableExtensions.<Attribute>last(path);
       RefableType _type = a.getType();
       DataType aType = _type.getType();
-      CharSequence _xifexpression = null;
-      boolean _isDataClass = this.typeHelpers.isDataClass(aType);
-      if (_isDataClass) {
-        StringConcatenation _builder = new StringConcatenation();
-        {
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
-          for(final Attribute e : _allAttributes) {
-            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-            CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
-            _builder.append(_attributeInitPrimitiveRec, "");
-            _builder.newLineIfNotEmpty();
+      CharSequence _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (aType instanceof DataClass) {
+          final DataClass _dataClass = (DataClass)aType;
+          _matched=true;
+          StringConcatenation _builder = new StringConcatenation();
+          {
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
+            for(final Attribute e : _allAttributes) {
+              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+              CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
+              _builder.append(_attributeInitPrimitiveRec, "");
+              _builder.newLineIfNotEmpty();
+            }
           }
+          return _builder;
         }
-        return _builder;
-      } else {
-        CharSequence _xifexpression_1 = null;
-        boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-        if (_isPrimitive) {
+      }
+      if (!_matched) {
+        if (aType instanceof PrimitiveType) {
+          final PrimitiveType _primitiveType = (PrimitiveType)aType;
+          _matched=true;
           String value = this.getDataConfigValue(path, roomClass);
-          CharSequence _xifexpression_2 = null;
+          CharSequence _xifexpression = null;
           boolean _notEquals = (!Objects.equal(value, null));
           if (_notEquals) {
-            String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType) aType), value);
+            String _valueLiteral = this.languageExt.toValueLiteral(_primitiveType, value);
             CharSequence _attributeInit = this.attributeInit(path, _valueLiteral);
-            _xifexpression_2 = _attributeInit;
+            _xifexpression = _attributeInit;
           }
-          return _xifexpression_2;
-        } else {
-          CharSequence _xifexpression_3 = null;
-          boolean _isEnumeration = this.typeHelpers.isEnumeration(aType);
-          if (_isEnumeration) {
-            _xifexpression_3 = null;
-          }
-          _xifexpression_1 = _xifexpression_3;
+          return _xifexpression;
         }
-        _xifexpression = _xifexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      if (!_matched) {
+        if (aType instanceof EnumerationType) {
+          final EnumerationType _enumerationType = (EnumerationType)aType;
+          _matched=true;
+          String value = this.getDataConfigValue(path, roomClass);
+          CharSequence _xifexpression = null;
+          boolean _notEquals = (!Objects.equal(value, null));
+          if (_notEquals) {
+            String _enumLiteral = this.languageExt.toEnumLiteral(_enumerationType, value);
+            CharSequence _attributeInit = this.attributeInit(path, _enumLiteral);
+            _xifexpression = _attributeInit;
+          }
+          return _xifexpression;
+        }
+      }
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }

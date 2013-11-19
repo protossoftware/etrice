@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.util.RoomHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumLiteral
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -201,7 +202,7 @@ class CExtensions implements ILanguageExtension {
 				"'"+value+"'"
 			case type.type == LiteralType::CHAR:
 				"\""+value+"\""
-			case value.contains(','): {
+			case value.contains(',') || value.contains('{'): {
 					var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
 					'''{ «FOR v: singleValues SEPARATOR ', '»«toValueLiteral(type, v.trim)»«ENDFOR» }'''.toString
 				}
@@ -210,6 +211,20 @@ class CExtensions implements ILanguageExtension {
 			default:
 				value	
 		}
+	}
+	
+	override toEnumLiteral(EnumerationType type, String value) {
+		if(value.contains(',') || value.contains('{')){
+			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+			'''{ «FOR v: singleValues SEPARATOR ', '»«convertStringEnumLiteral(type, v.trim)»«ENDFOR» }'''.toString
+		} else
+			value
+	}
+	
+	def private convertStringEnumLiteral(EnumerationType type, String value){
+		for(EnumLiteral l : type.literals)
+			if(l.name.equals(value))
+				return type.getName()+"_"+l.getName()
 	}
 
 	override String defaultValue(DataType dt) {
@@ -321,4 +336,7 @@ class CExtensions implements ILanguageExtension {
 	def getIncludePath(RoomClass rc) {
 		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCHeaderFileName+"\""
 	}
+	
+	
+	
 }

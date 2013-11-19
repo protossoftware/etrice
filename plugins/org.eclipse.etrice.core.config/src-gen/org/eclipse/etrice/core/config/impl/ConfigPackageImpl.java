@@ -20,8 +20,12 @@ import org.eclipse.etrice.core.config.ConfigElement;
 import org.eclipse.etrice.core.config.ConfigFactory;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.ConfigValue;
+import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
+import org.eclipse.etrice.core.config.EnumConfigValue;
 import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
@@ -122,6 +126,34 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * @generated
    */
   private EClass attrInstanceConfigEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configValueArrayEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass literalConfigValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumConfigValueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -645,6 +677,86 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getConfigValueArray()
+  {
+    return configValueArrayEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConfigValueArray_Values()
+  {
+    return (EReference)configValueArrayEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfigValue()
+  {
+    return configValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLiteralConfigValue()
+  {
+    return literalConfigValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLiteralConfigValue_Value()
+  {
+    return (EReference)literalConfigValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnumConfigValue()
+  {
+    return enumConfigValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumConfigValue_Type()
+  {
+    return (EReference)enumConfigValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumConfigValue_Value()
+  {
+    return (EReference)enumConfigValueEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getRefPath()
   {
     return refPathEClass;
@@ -805,6 +917,18 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     createEAttribute(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__READ_ONLY);
     createEReference(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__ATTRIBUTES);
 
+    configValueArrayEClass = createEClass(CONFIG_VALUE_ARRAY);
+    createEReference(configValueArrayEClass, CONFIG_VALUE_ARRAY__VALUES);
+
+    configValueEClass = createEClass(CONFIG_VALUE);
+
+    literalConfigValueEClass = createEClass(LITERAL_CONFIG_VALUE);
+    createEReference(literalConfigValueEClass, LITERAL_CONFIG_VALUE__VALUE);
+
+    enumConfigValueEClass = createEClass(ENUM_CONFIG_VALUE);
+    createEReference(enumConfigValueEClass, ENUM_CONFIG_VALUE__TYPE);
+    createEReference(enumConfigValueEClass, ENUM_CONFIG_VALUE__VALUE);
+
     refPathEClass = createEClass(REF_PATH);
     createEReference(refPathEClass, REF_PATH__REFS);
 
@@ -856,6 +980,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     protocolClassConfigEClass.getESuperTypes().add(this.getConfigElement());
     attrClassConfigEClass.getESuperTypes().add(this.getAttrConfig());
     attrInstanceConfigEClass.getESuperTypes().add(this.getAttrConfig());
+    literalConfigValueEClass.getESuperTypes().add(this.getConfigValue());
+    enumConfigValueEClass.getESuperTypes().add(this.getConfigValue());
 
     // Initialize classes and features; add operations and parameters
     initEClass(configModelEClass, ConfigModel.class, "ConfigModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -909,7 +1035,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
 
     initEClass(attrConfigEClass, AttrConfig.class, "AttrConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttrConfig_Attribute(), theRoomPackage.getAttribute(), null, "attribute", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttrConfig_Value(), theBasePackage.getLiteralArray(), null, "value", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttrConfig_Value(), this.getConfigValueArray(), null, "value", null, 0, 1, AttrConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attrClassConfigEClass, AttrClassConfig.class, "AttrClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttrClassConfig_Min(), theBasePackage.getNumberLiteral(), null, "min", null, 0, 1, AttrClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -920,6 +1046,18 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEAttribute(getAttrInstanceConfig_DynConfig(), ecorePackage.getEBoolean(), "dynConfig", null, 0, 1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttrInstanceConfig_ReadOnly(), ecorePackage.getEBoolean(), "readOnly", null, 0, 1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAttrInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configValueArrayEClass, ConfigValueArray.class, "ConfigValueArray", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConfigValueArray_Values(), this.getConfigValue(), null, "values", null, 0, -1, ConfigValueArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configValueEClass, ConfigValue.class, "ConfigValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(literalConfigValueEClass, LiteralConfigValue.class, "LiteralConfigValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLiteralConfigValue_Value(), theBasePackage.getLiteral(), null, "value", null, 0, 1, LiteralConfigValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumConfigValueEClass, EnumConfigValue.class, "EnumConfigValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEnumConfigValue_Type(), theRoomPackage.getEnumerationType(), null, "type", null, 0, 1, EnumConfigValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumConfigValue_Value(), theRoomPackage.getEnumLiteral(), null, "value", null, 0, 1, EnumConfigValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRefPath_Refs(), this.getRefSegment(), null, "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -11,10 +11,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.etrice.core.common.base.LiteralArray;
-
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.ConfigValueArray;
 
 import org.eclipse.etrice.core.room.Attribute;
 
@@ -52,7 +51,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * @generated
    * @ordered
    */
-  protected LiteralArray value;
+  protected ConfigValueArray value;
 
   /**
    * <!-- begin-user-doc -->
@@ -123,7 +122,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
-  public LiteralArray getValue()
+  public ConfigValueArray getValue()
   {
     return value;
   }
@@ -133,9 +132,9 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(LiteralArray newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(ConfigValueArray newValue, NotificationChain msgs)
   {
-    LiteralArray oldValue = value;
+    ConfigValueArray oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -150,7 +149,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(LiteralArray newValue)
+  public void setValue(ConfigValueArray newValue)
   {
     if (newValue != value)
     {
@@ -215,7 +214,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
         setAttribute((Attribute)newValue);
         return;
       case ConfigPackage.ATTR_CONFIG__VALUE:
-        setValue((LiteralArray)newValue);
+        setValue((ConfigValueArray)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -235,7 +234,7 @@ public class AttrConfigImpl extends MinimalEObjectImpl.Container implements Attr
         setAttribute((Attribute)null);
         return;
       case ConfigPackage.ATTR_CONFIG__VALUE:
-        setValue((LiteralArray)null);
+        setValue((ConfigValueArray)null);
         return;
     }
     super.eUnset(featureID);

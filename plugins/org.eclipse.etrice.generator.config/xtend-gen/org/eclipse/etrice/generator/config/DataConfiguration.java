@@ -22,15 +22,18 @@ import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.Literal;
-import org.eclipse.etrice.core.common.base.LiteralArray;
 import org.eclipse.etrice.core.common.base.NumberLiteral;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
+import org.eclipse.etrice.core.config.ConfigValue;
+import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
+import org.eclipse.etrice.core.config.EnumConfigValue;
 import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -38,6 +41,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
@@ -70,7 +74,7 @@ public class DataConfiguration implements IDataConfiguration {
   public String getAttrClassConfigValue(final ActorClass actor, final List<Attribute> path) {
     String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
-    LiteralArray _value = null;
+    ConfigValueArray _value = null;
     if (_attrClassConfig!=null) {
       _value=_attrClassConfig.getValue();
     }
@@ -144,7 +148,7 @@ public class DataConfiguration implements IDataConfiguration {
       String id = _builder.toString();
       String _stringExpr = null;
       AttrClassConfig _get = DataConfigurationHelper.protocolClassAttrMap.get(id);
-      LiteralArray _value = null;
+      ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
       }
@@ -183,7 +187,7 @@ public class DataConfiguration implements IDataConfiguration {
       String id = (_plus + _stringPath);
       String _stringExpr = null;
       AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
-      LiteralArray _value = null;
+      ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
       }
@@ -202,7 +206,7 @@ public class DataConfiguration implements IDataConfiguration {
     String _stringPath = this.toStringPath(path);
     String _plus_1 = (_plus + _stringPath);
     AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(_plus_1);
-    LiteralArray _value = null;
+    ConfigValueArray _value = null;
     if (_get!=null) {
       _value=_get.getValue();
     }
@@ -340,12 +344,12 @@ public class DataConfiguration implements IDataConfiguration {
     return _notEquals;
   }
   
-  private String toStringExpr(final LiteralArray literal) {
+  private String toStringExpr(final ConfigValueArray literal) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EList<Literal> _literals = literal.getLiterals();
+      EList<ConfigValue> _values = literal.getValues();
       boolean _hasElements = false;
-      for(final Literal l : _literals) {
+      for(final ConfigValue l : _values) {
         if (!_hasElements) {
           _hasElements = true;
         } else {
@@ -357,6 +361,30 @@ public class DataConfiguration implements IDataConfiguration {
     }
     String _string = _builder.toString();
     return _string;
+  }
+  
+  private String toStringExpr(final ConfigValue configValue) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (configValue instanceof LiteralConfigValue) {
+        final LiteralConfigValue _literalConfigValue = (LiteralConfigValue)configValue;
+        _matched=true;
+        Literal _value = _literalConfigValue.getValue();
+        String _stringExpr = this.toStringExpr(_value);
+        _switchResult = _stringExpr;
+      }
+    }
+    if (!_matched) {
+      if (configValue instanceof EnumConfigValue) {
+        final EnumConfigValue _enumConfigValue = (EnumConfigValue)configValue;
+        _matched=true;
+        EnumLiteral _value = _enumConfigValue.getValue();
+        String _fullName = _value.getFullName();
+        _switchResult = _fullName;
+      }
+    }
+    return _switchResult;
   }
   
   private String toStringExpr(final Literal literal) {

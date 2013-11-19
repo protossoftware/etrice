@@ -152,15 +152,20 @@ class JavaExtensions implements ILanguageExtension {
 		"super."+method+"("+args+");"
 	}
 	
-	override toValueLiteral(PrimitiveType type, String value) {
-		switch(type.targetName){
-			case !typeHelpers.isCharacterType(type) && value.contains(','): {
-				var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
-				'''{ «FOR v: singleValues SEPARATOR ', '»«castValue(type, v.trim)»«ENDFOR» }'''.toString
-			}
-			default:
-				castValue(type, value)		
-		}
+	override toValueLiteral(PrimitiveType type, String value){
+		if(!typeHelpers.isCharacterType(type) && (value.contains(',') || value.contains('{'))) {
+			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+			'''{ «FOR v: singleValues SEPARATOR ', '»«castValue(type, v.trim)»«ENDFOR» }'''.toString
+		}else
+			castValue(type, value)	
+	}
+	
+	override toEnumLiteral(EnumerationType type, String value){
+		if(value.contains(',') || value.contains('{')) {
+			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+			'''{ «FOR v: singleValues SEPARATOR ', '»«v.trim»«ENDFOR» }'''.toString
+		} else
+			value
 	}
 	
 	def private castValue(PrimitiveType type, String value){

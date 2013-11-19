@@ -41,6 +41,7 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDynamicConfigAccess().getAlternatives_2_0(), "rule__DynamicConfig__Alternatives_2_0");
 					put(grammarAccess.getAttrConfigAccess().getAlternatives(), "rule__AttrConfig__Alternatives");
 					put(grammarAccess.getAttrInstanceConfigAccess().getAlternatives_3_1_0_1(), "rule__AttrInstanceConfig__Alternatives_3_1_0_1");
+					put(grammarAccess.getConfigValueAccess().getAlternatives(), "rule__ConfigValue__Alternatives");
 					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
@@ -83,6 +84,9 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttrInstanceConfigAccess().getGroup_3(), "rule__AttrInstanceConfig__Group_3__0");
 					put(grammarAccess.getAttrInstanceConfigAccess().getGroup_3_1(), "rule__AttrInstanceConfig__Group_3_1__0");
 					put(grammarAccess.getAttrInstanceConfigAccess().getGroup_3_1_0(), "rule__AttrInstanceConfig__Group_3_1_0__0");
+					put(grammarAccess.getConfigValueArrayAccess().getGroup(), "rule__ConfigValueArray__Group__0");
+					put(grammarAccess.getConfigValueArrayAccess().getGroup_1(), "rule__ConfigValueArray__Group_1__0");
+					put(grammarAccess.getEnumConfigValueAccess().getGroup(), "rule__EnumConfigValue__Group__0");
 					put(grammarAccess.getRefPathAccess().getGroup(), "rule__RefPath__Group__0");
 					put(grammarAccess.getRefPathAccess().getGroup_1(), "rule__RefPath__Group_1__0");
 					put(grammarAccess.getRefSegmentAccess().getGroup(), "rule__RefSegment__Group__0");
@@ -147,6 +151,11 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttrInstanceConfigAccess().getDynConfigAssignment_3_1_0_0(), "rule__AttrInstanceConfig__DynConfigAssignment_3_1_0_0");
 					put(grammarAccess.getAttrInstanceConfigAccess().getReadOnlyAssignment_3_1_0_1_0(), "rule__AttrInstanceConfig__ReadOnlyAssignment_3_1_0_1_0");
 					put(grammarAccess.getAttrInstanceConfigAccess().getAttributesAssignment_3_1_1(), "rule__AttrInstanceConfig__AttributesAssignment_3_1_1");
+					put(grammarAccess.getConfigValueArrayAccess().getValuesAssignment_0(), "rule__ConfigValueArray__ValuesAssignment_0");
+					put(grammarAccess.getConfigValueArrayAccess().getValuesAssignment_1_1(), "rule__ConfigValueArray__ValuesAssignment_1_1");
+					put(grammarAccess.getLiteralConfigValueAccess().getValueAssignment(), "rule__LiteralConfigValue__ValueAssignment");
+					put(grammarAccess.getEnumConfigValueAccess().getTypeAssignment_0(), "rule__EnumConfigValue__TypeAssignment_0");
+					put(grammarAccess.getEnumConfigValueAccess().getValueAssignment_2(), "rule__EnumConfigValue__ValueAssignment_2");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_0(), "rule__RefPath__RefsAssignment_0");
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
 					put(grammarAccess.getRefSegmentAccess().getRefAssignment_0(), "rule__RefSegment__RefAssignment_0");

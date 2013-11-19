@@ -21,10 +21,10 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.Literal;
+import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.common.base.NumberLiteral;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.StringLiteral;
@@ -35,6 +35,9 @@ import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigPackage;
+import org.eclipse.etrice.core.config.ConfigValue;
+import org.eclipse.etrice.core.config.EnumConfigValue;
+import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
@@ -48,9 +51,9 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -67,31 +70,26 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		Set<ActorClass> actorClasses = new HashSet<ActorClass>();
 		for (ActorClassConfig classConfig : model.getActorClassConfigs()) {
 			if (actorClasses.contains(classConfig.getActor()))
-				error("duplicate class config", model,
-						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
-						model.getConfigElements().indexOf(classConfig));
+				error("duplicate class config", model, ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS, model
+						.getConfigElements().indexOf(classConfig));
 			else
 				actorClasses.add(classConfig.getActor());
 		}
 		// duplicate actor instance config check
 		Set<String> actorRefs = new HashSet<String>();
-		for (ActorInstanceConfig instanceConfig : model
-				.getActorInstanceConfigs()) {
+		for (ActorInstanceConfig instanceConfig : model.getActorInstanceConfigs()) {
 			String ref = ConfigUtil.getPath(instanceConfig);
 			if (actorRefs.contains(ref))
-				error("duplicate actor instance config", model,
-						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
+				error("duplicate actor instance config", model, ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
 						model.getConfigElements().indexOf(instanceConfig));
 			else
 				actorRefs.add(ref);
 		}
 		// duplicate protocol class config check
 		Set<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-		for (ProtocolClassConfig protocolConfig : model
-				.getProtocolClassConfigs()) {
+		for (ProtocolClassConfig protocolConfig : model.getProtocolClassConfigs()) {
 			if (protocolClasses.contains(protocolConfig.getProtocol()))
-				error("duplicate protocol class config", model,
-						ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
+				error("duplicate protocol class config", model, ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
 						model.getConfigElements().indexOf(protocolConfig));
 			else
 				protocolClasses.add(protocolConfig.getProtocol());
@@ -101,10 +99,8 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 	@Check
 	public void checkActorClassConfig(ActorClassConfig config) {
 		if (config.getActor().isAbstract())
-			error("abstract actor classes not supported",
-					ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ACTOR);
-		checkDuplicateAttributes(config.getAttributes(),
-				ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ATTRIBUTES);
+			error("abstract actor classes not supported", ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ACTOR);
+		checkDuplicateAttributes(config.getAttributes(), ConfigPackage.Literals.ACTOR_CLASS_CONFIG__ATTRIBUTES);
 
 	}
 
@@ -121,8 +117,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				else {
 					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
 					if (aRef == null)
-						error("invalid actor reference",
-								ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
+						error("invalid actor reference", ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				}
 			}
 		}
@@ -131,36 +126,30 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		for (PortInstanceConfig portConfig : config.getPorts()) {
 			InterfaceItem item = portConfig.getItem();
 			if (items.contains(item))
-				error("duplicate port instance config",
-						ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PORTS,
-						config.getPorts().indexOf(portConfig));
+				error("duplicate port instance config", ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PORTS, config
+						.getPorts().indexOf(portConfig));
 			else
 				items.add(item);
 		}
 
-		checkDuplicateAttributes(config.getAttributes(),
-				ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
+		checkDuplicateAttributes(config.getAttributes(), ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__ATTRIBUTES);
 	}
 
 	@Check
 	public void checkPortClassConfig(PortClassConfig config) {
-		checkDuplicateAttributes(config.getAttributes(),
-				ConfigPackage.Literals.PORT_CLASS_CONFIG__ATTRIBUTES);
+		checkDuplicateAttributes(config.getAttributes(), ConfigPackage.Literals.PORT_CLASS_CONFIG__ATTRIBUTES);
 	}
 
 	@Check
 	public void checkPortInstanceConfig(PortInstanceConfig config) {
-		checkDuplicateAttributes(config.getAttributes(),
-				ConfigPackage.Literals.PORT_INSTANCE_CONFIG__ATTRIBUTES);
+		checkDuplicateAttributes(config.getAttributes(), ConfigPackage.Literals.PORT_INSTANCE_CONFIG__ATTRIBUTES);
 	}
 
-	private void checkDuplicateAttributes(
-			List<? extends AttrConfig> attrConfigs, EReference ref) {
+	private void checkDuplicateAttributes(List<? extends AttrConfig> attrConfigs, EReference ref) {
 		Set<Attribute> attributes = new HashSet<Attribute>();
 		for (AttrConfig config : attrConfigs) {
 			if (attributes.contains(config.getAttribute()))
-				error("duplicate attribute entry", ref,
-						attrConfigs.indexOf(config));
+				error("duplicate attribute entry", ref, attrConfigs.indexOf(config));
 			else
 				attributes.add(config.getAttribute());
 		}
@@ -174,24 +163,23 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 		DataType type = a.getType().getType();
 		if (a.getType().isRef())
-			error("reference not supported",
-					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
+			error("reference not supported", ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 		else if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 			checkAttrConfigValue(primitive, config);
 		}
 		else if (type instanceof ComplexType) {
 			if (config.getValue() != null)
-				error("not available",
-						ConfigPackage.Literals.ATTR_CONFIG__VALUE);
+				error("not available", ConfigPackage.Literals.ATTR_CONFIG__VALUE);
 			if (a.getSize() > 0)
-				error("ComplexType arrays not supported",
-						ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
+				error("ComplexType arrays not supported", ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 		}
-		// TODO-Enum
+		else if (type instanceof EnumerationType) {
+			EnumerationType enumType = (EnumerationType) type;
+			checkAttrConfigValue(enumType, config);
+		}
 		else
-			error("Type not supported",
-					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
+			error("Type not supported", ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 	}
 
 	@Check
@@ -201,8 +189,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			return;
 
 		DataType type = attr.getType().getType();
-		
-		// TODO-Enum
+
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 
@@ -217,21 +204,18 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (attr == null)
 			return;
 
-		EStructuralFeature feature = ConfigPackage.eINSTANCE
-				.getAttrInstanceConfig_DynConfig();
+		EStructuralFeature feature = ConfigPackage.eINSTANCE.getAttrInstanceConfig_DynConfig();
 		if (config.isDynConfig()) {
 			if (!(config.eContainer() instanceof ActorInstanceConfig))
 				error("dynamic configuration only at root attributes", feature);
 			if (config.eContainer() instanceof ActorInstanceConfig) {
 				ConfigModel model = getConfigModel(config);
-				SubSystemRef ssRef = ((ActorInstanceConfig) config.eContainer())
-						.getSubSystem();
+				SubSystemRef ssRef = ((ActorInstanceConfig) config.eContainer()).getSubSystem();
 				boolean found = false;
 				for (SubSystemConfig c : model.getSubSystemConfigs()) {
 					if (c.getSubSystem().equals(ssRef)) {
 						if (c.getDynConfig() == null)
-							error("no source for dynamic config in SubSystemConfig",
-									feature);
+							error("no source for dynamic config in SubSystemConfig", feature);
 						found = true;
 					}
 				}
@@ -247,10 +231,9 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (config.getValue() == null)
 			return;
 
-		List<Literal> values = config.getValue().getLiterals();
+		List<ConfigValue> values = config.getValue().getValues();
 		EReference valueRef = ConfigPackage.eINSTANCE.getAttrConfig_Value();
-		EReference arrayRef = BasePackage.eINSTANCE
-				.getLiteralArray_Literals();
+		EReference arrayRef = ConfigPackage.eINSTANCE.getConfigValueArray_Values();
 		LiteralType type = primitive.getType();
 		Attribute attribute = config.getAttribute();
 		int attrMult = (attribute.getSize() > 0) ? attribute.getSize() : 1;
@@ -258,108 +241,132 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			if (values.size() > attrMult)
 				error("too many values, multiplicity is " + attrMult, valueRef);
 			if (values.size() > 1 && values.size() < attrMult)
-				error("not enough values, multiplicity is " + attrMult,
-						valueRef);
+				error("not enough values, multiplicity is " + attrMult, valueRef);
 		}
 		// type check
-		for (Literal value : values) {
+		for (ConfigValue configValue : values) {
+			Object value = configValue;
+			if (configValue instanceof LiteralConfigValue)
+				value = ((LiteralConfigValue) configValue).getValue();
 			switch (type) {
-			case BOOL:
-				if (!(value instanceof BooleanLiteral))
-					error("must be boolean value", valueRef);
-				break;
-			case REAL:
-				if (!(value instanceof NumberLiteral))
-					error("must be an integer or real value", valueRef);
-				break;
-			case INT:
-				if (!(value instanceof IntLiteral))
-					error("must be an integer", valueRef);
-				break;
-			case CHAR:
-				if (!(value instanceof StringLiteral))
-					error("must be a string", valueRef);
-				else {
-					if (values.size() > 1)
-						error("multiplicity must be one", valueRef);
-					StringLiteral strValue = (StringLiteral) value;
-					if (attribute.getSize() > 0
-							&& attrMult < strValue.getValue().length())
-						error("too many characters - maximal length is "
-								+ attrMult, valueRef);
-				}
-				break;
+				case BOOL:
+					if (!(value instanceof BooleanLiteral))
+						error("must be boolean value", config.getValue(), arrayRef, values.indexOf(configValue));
+					break;
+				case REAL:
+					if (!(value instanceof NumberLiteral))
+						error("must be an integer or real value", config.getValue(), arrayRef,
+								values.indexOf(configValue));
+					break;
+				case INT:
+					if (!(value instanceof IntLiteral))
+						error("must be an integer", config.getValue(), arrayRef, values.indexOf(configValue));
+					break;
+				case CHAR:
+					if (!(value instanceof StringLiteral))
+						error("must be a string", config.getValue(), arrayRef, values.indexOf(configValue));
+					else {
+						if (values.size() > 1)
+							error("multiplicity must be one", config.getValue(), arrayRef, values.indexOf(configValue));
+						StringLiteral strValue = (StringLiteral) value;
+						if (attribute.getSize() > 0 && attrMult < strValue.getValue().length())
+							error("too many characters - maximal length is " + attrMult, config.getValue(), arrayRef,
+									values.indexOf(configValue));
+					}
+					break;
 			}
 		}
 
+		List<NumberLiteral> numberValues = new ArrayList<NumberLiteral>();
+		for (ConfigValue value : values) {
+			if (value instanceof LiteralConfigValue) {
+				Literal literalValue = ((LiteralConfigValue) value).getValue();
+				if (literalValue instanceof NumberLiteral)
+					numberValues.add((NumberLiteral) literalValue);
+			}
+		}
 		// numeric check
 		if ((type == LiteralType.INT || type == LiteralType.REAL)) {
 			AttrClassConfig attrClassConfig = null;
 			if (config instanceof AttrInstanceConfig) {
 				attrClassConfig = resolveAttrClassConfig((AttrInstanceConfig) config);
-			} else if (config instanceof AttrClassConfig) {
+			}
+			else if (config instanceof AttrClassConfig) {
 				attrClassConfig = (AttrClassConfig) config;
 			}
 
 			if (attrClassConfig != null) {
 				NumberLiteral min = attrClassConfig.getMin();
 				NumberLiteral max = attrClassConfig.getMax();
-				for (Literal value : values) {
-					if (!(value instanceof NumberLiteral))
-						continue;
-
+				for (NumberLiteral value : numberValues) {
 					if (value instanceof RealLiteral) {
 						double dbValue = ((RealLiteral) value).getValue();
 						if (min instanceof RealLiteral) {
 							double dbMin = ((RealLiteral) min).getValue();
 							if (dbMin > dbValue)
-								error("value is less than minimum",
-										config.getValue(), arrayRef,
-										values.indexOf(value));
-						} else if (min != null)
-							warning("could not compare with minimum (incompatible datatypes)",
-									config.getValue(), arrayRef,
-									values.indexOf(value));
+								error("value is less than minimum", config.getValue(), arrayRef, values.indexOf(value));
+						}
+						else if (min != null)
+							warning("could not compare with minimum (incompatible datatypes)", config.getValue(),
+									arrayRef, values.indexOf(value));
 						if (max instanceof RealLiteral) {
 							double dbMax = ((RealLiteral) max).getValue();
 							if (dbMax < dbValue)
-								error("value exceeds maximum",
-										config.getValue(), arrayRef,
-										values.indexOf(value));
-						} else if (max != null)
-							warning("could not compare with maximum (incompatible datatypes)",
-									config.getValue(), arrayRef,
-									values.indexOf(value));
-					} else if (value instanceof IntLiteral) {
+								error("value exceeds maximum", config.getValue(), arrayRef, values.indexOf(value));
+						}
+						else if (max != null)
+							warning("could not compare with maximum (incompatible datatypes)", config.getValue(),
+									arrayRef, values.indexOf(value));
+					}
+					else if (value instanceof IntLiteral) {
 						long lValue = ((IntLiteral) value).getValue();
 						if (min instanceof IntLiteral) {
 							long lMin = ((IntLiteral) min).getValue();
 							if (lMin > lValue)
-								error("value is less than minimum",
-										config.getValue(), arrayRef,
-										values.indexOf(value));
-						} else if (min != null)
-							warning("could not compare with minimum (incompatible datatypes)",
-									config.getValue(), arrayRef,
-									values.indexOf(value));
+								error("value is less than minimum", config.getValue(), arrayRef, values.indexOf(value));
+						}
+						else if (min != null)
+							warning("could not compare with minimum (incompatible datatypes)", config.getValue(),
+									arrayRef, values.indexOf(value));
 						if (max instanceof IntLiteral) {
 							long lMax = ((IntLiteral) max).getValue();
 							if (lMax < lValue)
-								error("value exceeds maximum",
-										config.getValue(), arrayRef,
-										values.indexOf(value));
-						} else if (max != null)
-							warning("could not compare with maximum (incompatible datatypes)",
-									config.getValue(), arrayRef,
-									values.indexOf(value));
+								error("value exceeds maximum", config.getValue(), arrayRef, values.indexOf(value));
+						}
+						else if (max != null)
+							warning("could not compare with maximum (incompatible datatypes)", config.getValue(),
+									arrayRef, values.indexOf(value));
 					}
 				}
 			}
 		}
 	}
 
-	private void checkAttrConfigMin(PrimitiveType primitive,
-			AttrClassConfig config) {
+	private void checkAttrConfigValue(EnumerationType enumType, AttrConfig config) {
+		List<ConfigValue> values = config.getValue().getValues();
+		EReference valueRef = ConfigPackage.eINSTANCE.getAttrConfig_Value();
+		EReference arrayRef = ConfigPackage.eINSTANCE.getConfigValueArray_Values();
+		Attribute attribute = config.getAttribute();
+		int attrMult = (attribute.getSize() > 0) ? attribute.getSize() : 1;
+		if (values.size() > attrMult)
+			error("too many values, multiplicity is " + attrMult, valueRef);
+		if (values.size() > 1 && values.size() < attrMult)
+			error("not enough values, multiplicity is " + attrMult, valueRef);
+
+		for (ConfigValue configValue : values) {
+			Object value = configValue;
+			if (configValue instanceof EnumConfigValue){
+				EnumConfigValue enumConfig = (EnumConfigValue)configValue;
+				if(enumType != enumConfig.getType())
+					error("must be of type " + enumType.getName(), enumConfig, ConfigPackage.Literals.ENUM_CONFIG_VALUE__TYPE);
+				value = enumConfig.getValue();
+			}
+			if (!enumType.getLiterals().contains(value))
+				error("must be of type " + enumType.getName(), config.getValue(), arrayRef, values.indexOf(value));
+		}
+	}
+
+	private void checkAttrConfigMin(PrimitiveType primitive, AttrClassConfig config) {
 		NumberLiteral min = config.getMin();
 		if (min == null)
 			return;
@@ -416,8 +423,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 
 	}
 
-	private void checkAttrConfigMax(PrimitiveType primitive,
-			AttrClassConfig config) {
+	private void checkAttrConfigMax(PrimitiveType primitive, AttrClassConfig config) {
 		NumberLiteral max = config.getMax();
 		if (max == null)
 			return;
@@ -495,17 +501,14 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		ConfigModel model = getConfigModel(source);
 		List<AttrClassConfig> rootClassAttrConfigs = new ArrayList<AttrClassConfig>();
 		if (source.eContainer() instanceof PortInstanceConfig) {
-			PortInstanceConfig portInstanceConfig = (PortInstanceConfig) source
-					.eContainer();
-			GeneralProtocolClass generalProtocol = portInstanceConfig.getItem()
-					.getGeneralProtocol();
+			PortInstanceConfig portInstanceConfig = (PortInstanceConfig) source.eContainer();
+			GeneralProtocolClass generalProtocol = portInstanceConfig.getItem().getGeneralProtocol();
 			PortClassConfig portClassConfig = null;
 			if (generalProtocol instanceof ProtocolClass) {
 				ProtocolClass protocol = (ProtocolClass) generalProtocol;
 				for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
 					if (cf.getProtocol().equals(protocol)) {
-						if (protocol.getRegular().equals(
-								ConfigUtil.getPortClass(portInstanceConfig)))
+						if (protocol.getRegular().equals(ConfigUtil.getPortClass(portInstanceConfig)))
 							portClassConfig = cf.getRegular();
 						else
 							portClassConfig = cf.getConjugated();
@@ -515,11 +518,10 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			}
 			if (portClassConfig != null)
 				rootClassAttrConfigs = portClassConfig.getAttributes();
-		} else if (source.eContainer() instanceof ActorInstanceConfig) {
-			ActorInstanceConfig aiConfig = (ActorInstanceConfig) source
-					.eContainer();
-			ActorClass actor = ConfigUtil.getLastActorRef(
-					aiConfig.getSubSystem().getType(), aiConfig.getPath())
+		}
+		else if (source.eContainer() instanceof ActorInstanceConfig) {
+			ActorInstanceConfig aiConfig = (ActorInstanceConfig) source.eContainer();
+			ActorClass actor = ConfigUtil.getLastActorRef(aiConfig.getSubSystem().getType(), aiConfig.getPath())
 					.getType();
 			// find ActorClassConfig
 			for (ActorClassConfig cf : model.getActorClassConfigs()) {

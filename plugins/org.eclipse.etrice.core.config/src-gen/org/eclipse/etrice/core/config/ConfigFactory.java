@@ -131,6 +131,42 @@ public interface ConfigFactory extends EFactory
   AttrInstanceConfig createAttrInstanceConfig();
 
   /**
+   * Returns a new object of class '<em>Value Array</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value Array</em>'.
+   * @generated
+   */
+  ConfigValueArray createConfigValueArray();
+
+  /**
+   * Returns a new object of class '<em>Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value</em>'.
+   * @generated
+   */
+  ConfigValue createConfigValue();
+
+  /**
+   * Returns a new object of class '<em>Literal Config Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal Config Value</em>'.
+   * @generated
+   */
+  LiteralConfigValue createLiteralConfigValue();
+
+  /**
+   * Returns a new object of class '<em>Enum Config Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enum Config Value</em>'.
+   * @generated
+   */
+  EnumConfigValue createEnumConfigValue();
+
+  /**
    * Returns a new object of class '<em>Ref Path</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
