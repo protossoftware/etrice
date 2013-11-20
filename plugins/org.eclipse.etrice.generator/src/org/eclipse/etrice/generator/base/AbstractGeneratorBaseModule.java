@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -46,7 +47,7 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 	 */
 	@Override
 	public void configure(Binder binder) {
-		binder.bind(ResourceSet.class).to(ResourceSetImpl.class);
+		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 
 		binder.bind(Logger.class).in(Singleton.class);
 		binder.bind(ILineOutputLogger.class).to(Logger.class);

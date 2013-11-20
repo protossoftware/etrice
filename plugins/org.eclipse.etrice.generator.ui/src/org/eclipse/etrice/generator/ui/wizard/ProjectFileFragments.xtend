@@ -223,6 +223,14 @@ class ProjectFileFragments {
 							        </configuration>
 								</execution>
 							</executions>
+							<dependencies>
+								<!-- put the modellib on the class path to allow resolution of models by the generator -->
+								<dependency>
+									<groupId>org.eclipse.etrice</groupId>
+									<artifactId>org.eclipse.etrice.modellib.java</artifactId>
+									<version>0.4.0-SNAPSHOT</version>
+								</dependency>
+							</dependencies>
 						</plugin>
 						<plugin>
 							<artifactId>maven-compiler-plugin</artifactId>
