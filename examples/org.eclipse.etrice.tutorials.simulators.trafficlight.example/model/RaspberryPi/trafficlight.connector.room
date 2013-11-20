@@ -1,8 +1,8 @@
 RoomModel trafficlight.connector {
 
-	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/model/TcpService.room"
+	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.java/model/TcpService.room"
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
 
 	ActorClass TrafficLightInterface {
 		Interface {

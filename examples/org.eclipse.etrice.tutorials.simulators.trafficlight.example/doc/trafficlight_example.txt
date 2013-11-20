@@ -1,0 +1,11 @@
+How to run trfficlight_demo:
+
+1. run generator with gen_trafficlight.example.launch
+2. start 3 traffic light GUIs in project org.eclipse.etrice.tutorials.simulators.trafficlight :
+	- run trafficlight_port_4441.launch , trafficlight_port_4442.launch and trafficlight_port_4443.launch
+3. trafficlight 4441 and 4442 are coordinated automatically, 4443 reacts on "request" button
+
+Info:
+- .config contains ip-config for all lights
+- .etmap and .etphys -> standard
+
