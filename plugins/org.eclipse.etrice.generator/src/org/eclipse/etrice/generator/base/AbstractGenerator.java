@@ -83,13 +83,13 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	public static final String OPTION_DEBUG = "-debug";
 
 	/**
-	 * constant used as return value of {@link #runGenerator(String[])}
-	 * @see {@link #GENERATOR_ERROR}
+	 * constant used as return value of {@link #runGenerator())}
+	 * @see #GENERATOR_ERROR
 	 */
 	public static final int GENERATOR_OK = 0;
 	/**
-	 * constant used as return value of {@link #runGenerator(String[])}
-	 * @see {@link #GENERATOR_OK}
+	 * constant used as return value of {@link #runGenerator()}
+	 * @see #GENERATOR_OK
 	 */
 	public static final int GENERATOR_ERROR = 1;
 	
@@ -110,7 +110,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * @param terminateOnError a flag that determines shut down behavior
 	 * (this behavior is implemented in the concrete generator defining <code>main()</code>)
 	 * 
-	 * @see {@link #isTerminateOnError()}
+	 * @see #isTerminateOnError()
 	 */
 	public static void setTerminateOnError(boolean terminateOnError) {
 		AbstractGenerator.terminateOnError = terminateOnError;
@@ -395,7 +395,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 
 	/**
 	 * This resource set combines all resources processed by the generator
-	 * @return
+	 * @return the resource set for the input models
 	 */
 	protected ResourceSet getResourceSet() {
 		return resourceSet;

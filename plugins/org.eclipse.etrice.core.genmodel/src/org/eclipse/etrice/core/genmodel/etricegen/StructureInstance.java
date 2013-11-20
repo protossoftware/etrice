@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.room.ActorRef;
 
 /**
  * <!-- begin-user-doc -->

@@ -14,10 +14,13 @@ package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
@@ -158,7 +161,7 @@ public interface ExpandedActorClass extends EObject {
 	 * <!-- begin-user-doc -->
 	 * @param mif a message/interface item pair
 	 * @return a string that can serve as the name of a constant representing this trigger.
-	 * @see {@link #getTriggerCodeName(ActiveTrigger)}
+	 * @see #getTriggerCodeName(ActiveTrigger)
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -169,7 +172,7 @@ public interface ExpandedActorClass extends EObject {
 	 * <!-- begin-user-doc -->
 	 * @param at the active trigger
 	 * @return a string that can serve as the name of a constant representing this trigger.
-	 * @see {@link #getTriggerCodeName(MessageFromIf)}
+	 * @see #getTriggerCodeName(MessageFromIf)
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -210,7 +213,7 @@ public interface ExpandedActorClass extends EObject {
 	 * <!-- begin-user-doc -->
 	 * @return a sorted list of triggers of this actor class (including base classes).
 	 * The elements are sorted by the trigger name (a concatenation of interface item name and message name).
-	 * @see {@link #getOwnTriggers()}
+	 * @see #getOwnTriggers()
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -221,7 +224,7 @@ public interface ExpandedActorClass extends EObject {
 	 * <!-- begin-user-doc -->
 	 * @return a sorted list of triggers of this actor class (including base classes).
 	 * The elements are sorted by the trigger name (a concatenation of interface item name and message name).
-	 * @see {@link #getTriggers()}
+	 * @see #getTriggers()
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -293,7 +296,7 @@ public interface ExpandedActorClass extends EObject {
 	 * {@link StateGraphItem}s. This methods maps back to the original object if applicable.
 	 * 
 	 * @param copy a copied object
-	 * @return the original object of the {@link RoomModel}
+	 * @return the original object of the {@link RoomModel1}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -303,7 +306,7 @@ public interface ExpandedActorClass extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * @param trans a {@link Transition}
-	 * @return the common data type of the {@link TransitionChainBundle} associated with the transition
+	 * @return the common data type of the TransitionChainBundle (see  {@link ExpandedActorClassImpl}) associated with the transition
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

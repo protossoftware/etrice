@@ -134,8 +134,8 @@ public class RoomExtensions {
   
   /**
    * a specialized version of {@link #union(Iterable, Iterable)}
-   * @param l1 an iterable of type T
-   * @param l2 a second iterable of type T
+   * @param in1 an iterable of type T
+   * @param in2 a second iterable of type T
    * @return the union of the two iterables as new list
    */
   public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {

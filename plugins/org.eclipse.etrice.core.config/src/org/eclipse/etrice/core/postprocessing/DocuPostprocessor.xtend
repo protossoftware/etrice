@@ -72,7 +72,7 @@ class DocuPostprocessor {
 		
 		cls.getReference("root").setDocumentation(
 			'''
-				This is the logical system that contains the {@link #org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
+				This is the logical system that contains the {@link org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
 			''')
 			
 		cls.getReference("subSystem").setDocumentation(
@@ -212,7 +212,7 @@ class DocuPostprocessor {
 			
 		cls.getReference("subSystem").setDocumentation(
 			'''
-				This is the sub system that contains the {@link #getRefPath actor instance}.
+				This is the sub system that contains the {@link #getPath actor instance}.
 			''')
 			
 		cls.getReference("path").setDocumentation(
@@ -348,7 +348,7 @@ class DocuPostprocessor {
 		cls.getReference("refs").setDocumentation(
 			'''
 				This is a path in the instance tree where each segment corresponds to the name of the
-				corresponding {@link ActorContainerRef}.
+				corresponding {@link {@link org.eclipse.etrice.core.room.ActorContainerRef}}.
 			''')
 			
 		//------------------------------------------------------------------

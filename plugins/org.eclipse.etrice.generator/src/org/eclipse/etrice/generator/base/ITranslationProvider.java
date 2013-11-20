@@ -15,12 +15,16 @@ package org.eclipse.etrice.generator.base;
 import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
 
 /**
  * This interface is used by the detail code parser to replace
@@ -37,7 +41,7 @@ import org.eclipse.etrice.core.room.Operation;
  * </ul>
  * </p>
  * 
- * @see {@link DetailCodeTranslator}
+ * @see DetailCodeTranslator
  * 
  * @author Henrik Rentz-Reichert
  */

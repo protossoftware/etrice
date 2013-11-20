@@ -13,6 +13,10 @@
 package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.LogicalSystem;
+import org.eclipse.etrice.core.room.SubSystemClass;
 
 /**
  * <!-- begin-user-doc -->

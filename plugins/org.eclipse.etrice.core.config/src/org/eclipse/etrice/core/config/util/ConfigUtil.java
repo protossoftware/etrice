@@ -115,11 +115,11 @@ public class ConfigUtil {
 	}
 
 	/**
-	 * returns first invalid path segment else null
+	 * returns first invalid path segment else {@code null}
 	 * 
 	 * @param root
 	 * @param path
-	 * @return
+	 * @return the first invalid path segment else {@code null}
 	 */
 	public static String checkPath(ActorContainerClass root, RefPath path) {
 		if (path == null)

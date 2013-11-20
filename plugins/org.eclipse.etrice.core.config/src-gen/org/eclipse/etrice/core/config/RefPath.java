@@ -36,7 +36,7 @@ public interface RefPath extends EObject
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>This is a path in the instance tree where each segment corresponds to the name of the
-   * corresponding {@link ActorContainerRef}.
+   * corresponding {@link {@link org.eclipse.etrice.core.room.ActorContainerRef}}.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Refs</em>' containment reference list.

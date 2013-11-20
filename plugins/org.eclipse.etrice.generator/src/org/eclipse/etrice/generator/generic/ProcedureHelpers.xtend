@@ -110,13 +110,13 @@ class ProcedureHelpers {
 	// Attributes
 	
 	/**
-	 * @param attribs a list of {@link Attribute}s
+	 * @param EnumTest a list of {@link Attribute}s
 	 * @return code declaring the attributes
 	 */
-	def attributes(List<Attribute> attribs) {
+	def attributes(List<Attribute> EnumTest) {
 	'''
 		/*--------------------- attributes ---------------------*/
-		«FOR attribute : attribs»
+		«FOR attribute : EnumTest»
 			«attributeDeclaration(attribute)»
 		«ENDFOR»
 	'''
@@ -164,14 +164,14 @@ class ProcedureHelpers {
 	// Attribute setters & getters
 	
 	/**
-	 * @param attribs a list of {@link Attribute}s
+	 * @param EnumTest a list of {@link Attribute}s
 	 * @param classname the name of the defining class
 	 * @return code declaring setters and getters for the attributes
 	 */	
-	def attributeSettersGettersDeclaration(List<Attribute> attribs, String classname) {
+	def attributeSettersGettersDeclaration(List<Attribute> EnumTest, String classname) {
 	'''
 		/* --------------------- attribute setters and getters */
-		«FOR attribute : attribs»
+		«FOR attribute : EnumTest»
 			«setterHeader(attribute, classname)»;
 			«getterHeader(attribute, classname)»;
 		«ENDFOR»
@@ -179,14 +179,14 @@ class ProcedureHelpers {
 	}
 
 	/**
-	 * @param attribs a list of {@link Attribute}s
+	 * @param EnumTest a list of {@link Attribute}s
 	 * @param classname the name of the defining class
 	 * @return code defining setters and getters for the attributes
 	 */	
-	def attributeSettersGettersImplementation(List<Attribute> attribs, String classname) {
+	def attributeSettersGettersImplementation(List<Attribute> EnumTest, String classname) {
 	'''
 		/* --------------------- attribute setters and getters */
-		«FOR attribute : attribs»«setterHeader(attribute, classname)» {
+		«FOR attribute : EnumTest»«setterHeader(attribute, classname)» {
 			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
 		}
 		«getterHeader(attribute, classname)» {
@@ -215,7 +215,7 @@ class ProcedureHelpers {
 	}
 	
 	/**
-	 * @param attribs a list of {@link Attribute}s
+	 * @param attributes a list of {@link Attribute}s
 	 * @return an argument list for the attributes
 	 */
 	def argList(List<Attribute> attributes) {
@@ -223,7 +223,7 @@ class ProcedureHelpers {
 	}
 	
 	/**
-	 * @param attribs an iterable of {@link Attribute}s representing a path
+	 * @param EnumTest an iterable of {@link Attribute}s representing a path
 	 * @param classname the name of the defining class
 	 * @return the invocation code for the call of a setter
 	 */	

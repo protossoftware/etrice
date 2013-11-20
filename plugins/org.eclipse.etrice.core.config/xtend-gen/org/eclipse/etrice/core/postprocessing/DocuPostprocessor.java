@@ -80,7 +80,7 @@ public class DocuPostprocessor {
     PostprocessingHelpers.setDocumentation(cls, _builder_5.toString());
     EReference _reference_2 = PostprocessingHelpers.getReference(cls, "root");
     StringConcatenation _builder_6 = new StringConcatenation();
-    _builder_6.append("This is the logical system that contains the {@link #org.eclipse.etrice.core.room.SubSystemRef sub system reference}.");
+    _builder_6.append("This is the logical system that contains the {@link org.eclipse.etrice.core.room.SubSystemRef sub system reference}.");
     _builder_6.newLine();
     PostprocessingHelpers.setDocumentation(_reference_2, _builder_6.toString());
     EReference _reference_3 = PostprocessingHelpers.getReference(cls, "subSystem");
@@ -237,7 +237,7 @@ public class DocuPostprocessor {
     PostprocessingHelpers.setDocumentation(_reference_11, _builder_24.toString());
     EReference _reference_12 = PostprocessingHelpers.getReference(cls, "subSystem");
     StringConcatenation _builder_25 = new StringConcatenation();
-    _builder_25.append("This is the sub system that contains the {@link #getRefPath actor instance}.");
+    _builder_25.append("This is the sub system that contains the {@link #getPath actor instance}.");
     _builder_25.newLine();
     PostprocessingHelpers.setDocumentation(_reference_12, _builder_25.toString());
     EReference _reference_13 = PostprocessingHelpers.getReference(cls, "path");
@@ -396,7 +396,7 @@ public class DocuPostprocessor {
     StringConcatenation _builder_44 = new StringConcatenation();
     _builder_44.append("This is a path in the instance tree where each segment corresponds to the name of the");
     _builder_44.newLine();
-    _builder_44.append("corresponding {@link ActorContainerRef}.");
+    _builder_44.append("corresponding {@link {@link org.eclipse.etrice.core.room.ActorContainerRef}}.");
     _builder_44.newLine();
     PostprocessingHelpers.setDocumentation(_reference_24, _builder_44.toString());
     EClass _class_12 = PostprocessingHelpers.getClass(pckg, "RefSegment");

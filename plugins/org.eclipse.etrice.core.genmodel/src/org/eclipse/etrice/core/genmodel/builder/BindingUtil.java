@@ -115,8 +115,6 @@ public class BindingUtil {
 	/**
 	 * create binding instances. Since bindings connect port instances the ports can point back to their bindings
 	 * using EOpposite
-	 * @param si - create bindings for this actor instance
-	 * @param bindings - a list of bindings
 	 */
 	public void createBindingInstances() {
 		initPortInstanceMap();

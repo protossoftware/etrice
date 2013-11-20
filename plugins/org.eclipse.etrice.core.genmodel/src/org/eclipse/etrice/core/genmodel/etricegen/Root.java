@@ -323,7 +323,7 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param cls a {@link RoomClass}, actually a {@link DataClass}, a {@link ProtocoClass} or an {@link ActorClass}
+	 * @param cls a {@link RoomClass}, actually a {@link DataClass}, a {@link ProtocolClass} or an {@link ActorClass}
 	 * @return all data classes that are directly or indirectly referenced by {@code cls} and also
 	 *   descending into base classes
 	 * <!-- end-user-doc -->

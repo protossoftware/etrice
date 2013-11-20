@@ -94,7 +94,7 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	/**
 	 * This is our regular instance path including our own name as last segment.
 	 * 
-	 * @return
+	 * @return the regular instance path including our own name as last segment
 	 */
 	public String getInterfaceInstancePath() {
 		return super.getInstancePath(PATH_DELIM);

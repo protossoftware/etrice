@@ -13,9 +13,9 @@
 package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
 
 /**

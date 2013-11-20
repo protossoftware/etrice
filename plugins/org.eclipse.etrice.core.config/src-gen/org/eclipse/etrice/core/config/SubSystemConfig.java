@@ -35,7 +35,7 @@ public interface SubSystemConfig extends ConfigElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is the logical system that contains the {@link #org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
+   * <br>This is the logical system that contains the {@link org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Root</em>' reference.
