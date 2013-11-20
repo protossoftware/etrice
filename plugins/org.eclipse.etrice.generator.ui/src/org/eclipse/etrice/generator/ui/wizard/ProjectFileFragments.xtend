@@ -141,8 +141,25 @@ class ProjectFileFragments {
 				<groupId>«project»</groupId>
 				<artifactId>«mdlName»</artifactId>
 				<version>1.0.0</version>
+				
+				<repositories>
+					<repository>
+						<id>repo.eclipse.org-snapshots</id>
+						<name>eTrice Repository - Snapshots</name>
+						<url>https://repo.eclipse.org/content/repositories/etrice-snapshots/</url>
+					</repository>
+				</repositories>
+				
+				<pluginRepositories>
+					<pluginRepository>
+						<id>repo.eclipse.org-snapshots</id>
+						<name>eTrice Repository - Snapshots</name>
+						<url>https://repo.eclipse.org/content/repositories/etrice-snapshots/</url>
+					</pluginRepository>
+				</pluginRepositories>
+				
 				<build>
-					<sourceDirectory>src,src-gen</sourceDirectory>
+					<sourceDirectory>src-gen</sourceDirectory>
 					<resources>
 						<resource>
 							<directory>src-gen</directory>
@@ -152,6 +169,25 @@ class ProjectFileFragments {
 						</resource>
 					</resources>
 					<plugins>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>build-helper-maven-plugin</artifactId>
+							<version>1.7</version>
+							<executions>
+								<execution>
+									<id>add-source</id>
+									<phase>generate-sources</phase>
+									<goals>
+										<goal>add-source</goal>
+									</goals>
+									<configuration>
+										<sources>
+											<source>src</source>
+										</sources>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
 						<plugin>
 							<groupId>org.eclipse.etrice</groupId>
 							<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
@@ -163,6 +199,25 @@ class ProjectFileFragments {
 									</goals>
 							        <configuration>
 							          <arguments>
+										<!-- allowed switches for the generator (not complete) -->
+										<!-- generate the store/restore interface using POJO data objects
+										<param>-storeDataObj</param>
+										-->
+										<!-- generate MSC instrumentation
+										<param>-msc_instr</param>
+										-->
+										<!-- generate the persistence interface for dynamic actors
+										<param>-persistable</param>
+										-->
+										<!-- generate all ROOM classes as library
+										<param>-lib</param>
+										-->
+										<!-- generate documentation
+										<param>-genDocu</param>
+										-->
+										<!-- generate files incrementally (overwrite only if contents changed)
+										<param>-inc</param>
+										-->
 							          	<param>model/«mdlName».etmap</param>
 							          </arguments>
 							        </configuration>
@@ -230,6 +285,25 @@ class ProjectFileFragments {
 													<ignore></ignore>
 												</action>
 											</pluginExecution>
+											<pluginExecution>
+												<pluginExecutionFilter>
+													<groupId>
+														org.codehaus.mojo
+													</groupId>
+													<artifactId>
+														build-helper-maven-plugin
+													</artifactId>
+													<versionRange>
+														[1.7,)
+													</versionRange>
+													<goals>
+														<goal>add-source</goal>
+													</goals>
+												</pluginExecutionFilter>
+												<action>
+													<ignore></ignore>
+												</action>
+											</pluginExecution>
 										</pluginExecutions>
 									</lifecycleMappingMetadata>
 								</configuration>
@@ -240,7 +314,7 @@ class ProjectFileFragments {
 				<dependencies>
 					<dependency>
 						<groupId>org.eclipse.etrice</groupId>
-				<artifactId>org.eclipse.etrice.runtime.java</artifactId>
+						<artifactId>org.eclipse.etrice.runtime.java</artifactId>
 						<version>0.4.0-SNAPSHOT</version>
 				  	</dependency>
 				  	<dependency>
@@ -248,8 +322,8 @@ class ProjectFileFragments {
 				  		<artifactId>org.eclipse.etrice.modellib.java</artifactId>
 				  		<version>0.4.0-SNAPSHOT</version>
 				  	</dependency>
-				  </dependencies>
-				  </project>"
+				</dependencies>
+			</project>
 		'''
 	}
 	
