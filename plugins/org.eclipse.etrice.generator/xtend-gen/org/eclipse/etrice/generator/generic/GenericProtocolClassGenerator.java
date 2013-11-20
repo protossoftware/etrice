@@ -49,7 +49,7 @@ public class GenericProtocolClassGenerator {
    */
   public String genMessageIDs(final ProtocolClass pc) {
     int offset = 0;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
     ArrayList<Pair<String,String>> list = _arrayList;
     String _name = pc.getName();
     String _memberInDeclaration = this._iLanguageExtension.memberInDeclaration(_name, "MSG_MIN");

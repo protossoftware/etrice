@@ -142,11 +142,11 @@ public class RoomExtensions {
     ArrayList<Port> _arrayList = new ArrayList<Port>();
     final ArrayList<Port> ret = _arrayList;
     final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
-      public void apply(final ExternalPort e) {
-        Port _interfacePort = e.getInterfacePort();
-        ret.add(_interfacePort);
-      }
-    };
+        public void apply(final ExternalPort e) {
+          Port _interfacePort = e.getInterfacePort();
+          ret.add(_interfacePort);
+        }
+      };
     IterableExtensions.<ExternalPort>forEach(in2, _function);
     Iterables.<Port>addAll(ret, in1);
     return ret;
@@ -544,12 +544,12 @@ public class RoomExtensions {
     EObject _eContainer = m.eContainer();
     List<MessageHandler> _sendHandlers = this.getSendHandlers(((ProtocolClass) _eContainer), conj);
     final Function1<MessageHandler,Boolean> _function = new Function1<MessageHandler,Boolean>() {
-      public Boolean apply(final MessageHandler e) {
-        Message _msg = e.getMsg();
-        boolean _equals = Objects.equal(_msg, m);
-        return Boolean.valueOf(_equals);
-      }
-    };
+        public Boolean apply(final MessageHandler e) {
+          Message _msg = e.getMsg();
+          boolean _equals = Objects.equal(_msg, m);
+          return Boolean.valueOf(_equals);
+        }
+      };
     return IterableExtensions.<MessageHandler>findFirst(_sendHandlers, _function);
   }
   
@@ -587,19 +587,19 @@ public class RoomExtensions {
     List<State> _xblockexpression = null;
     {
       final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
-        public Boolean apply(final State s) {
-          boolean _isLeaf = RoomHelpers.isLeaf(s);
-          return Boolean.valueOf(_isLeaf);
-        }
-      };
+          public Boolean apply(final State s) {
+            boolean _isLeaf = RoomHelpers.isLeaf(s);
+            return Boolean.valueOf(_isLeaf);
+          }
+        };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
       final Function1<State,Boolean> _function_1 = new Function1<State,Boolean>() {
-        public Boolean apply(final State s) {
-          boolean _isLeaf = RoomHelpers.isLeaf(s);
-          boolean _not = (!_isLeaf);
-          return Boolean.valueOf(_not);
-        }
-      };
+          public Boolean apply(final State s) {
+            boolean _isLeaf = RoomHelpers.isLeaf(s);
+            boolean _not = (!_isLeaf);
+            return Boolean.valueOf(_not);
+          }
+        };
       final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
       List<State> _union = this.<State>union(nonLeaf, leaf);
       _xblockexpression = (_union);
@@ -636,28 +636,28 @@ public class RoomExtensions {
     boolean _or = false;
     EList<StandardOperation> _operations = ac.getOperations();
     final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-      public Boolean apply(final StandardOperation e) {
-        boolean _and = false;
-        boolean _and_1 = false;
-        String _name = e.getName();
-        boolean _equals = Objects.equal(_name, "stop");
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          EList<VarDecl> _arguments = e.getArguments();
-          boolean _isEmpty = _arguments.isEmpty();
-          _and_1 = (_equals && _isEmpty);
+        public Boolean apply(final StandardOperation e) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          String _name = e.getName();
+          boolean _equals = Objects.equal(_name, "stop");
+          if (!_equals) {
+            _and_1 = false;
+          } else {
+            EList<VarDecl> _arguments = e.getArguments();
+            boolean _isEmpty = _arguments.isEmpty();
+            _and_1 = (_equals && _isEmpty);
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            RefableType _returnType = e.getReturnType();
+            boolean _equals_1 = Objects.equal(_returnType, null);
+            _and = (_and_1 && _equals_1);
+          }
+          return Boolean.valueOf(_and);
         }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          RefableType _returnType = e.getReturnType();
-          boolean _equals_1 = Objects.equal(_returnType, null);
-          _and = (_and_1 && _equals_1);
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
+      };
     boolean _exists = IterableExtensions.<StandardOperation>exists(_operations, _function);
     if (_exists) {
       _or = true;
