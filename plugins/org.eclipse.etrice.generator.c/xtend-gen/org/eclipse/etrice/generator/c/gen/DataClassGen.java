@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
@@ -106,6 +107,15 @@ public class DataClassGen {
         _builder.append("#include ");
         String _includePath = this._cExtensions.getIncludePath(dataClass);
         _builder.append(_includePath, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EList<EnumerationType> _referencedEnumClasses = root.getReferencedEnumClasses(dc);
+      for(final EnumerationType enumClass : _referencedEnumClasses) {
+        _builder.append("#include ");
+        String _includePath_1 = this._cExtensions.getIncludePath(enumClass);
+        _builder.append(_includePath_1, "");
         _builder.newLineIfNotEmpty();
       }
     }

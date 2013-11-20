@@ -36,31 +36,26 @@ the Workspace for C Projects}.
 Your project explorer should look like this:
 
 \includegraphics{images/016-HelloWorldC01.png}
-% !images/016-HelloWorldC01.png!
 
 The next step is to add the model folder:
 Right click on the new project. Select \textit{New->Folder} and name it \textit{model}.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC02.png}
-% !images/016-HelloWorldC02.png!
 
 Add the model file to the folder. Right click on the new folder. Select \textit{New->file} and name it 
 \textit{HelloWorldC.room}.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC03.png}
-% !images/016-HelloWorldC03.png!
 
-Since the file extension \textit{.room} is recognised as an Xtext based format, the tool will ask you to add the Xtext nature. Answer with \textit{Yes}. 
+Since the file extension \textit{.room} is recognized as an Xtext based format, the tool will ask you to add the Xtext nature. Answer with \textit{Yes}. 
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC04.png}
-% !images/016-HelloWorldC04.png!
 
-Open the \emph{HelloWorld.room} file and delete the contents of the file. Open the content assist with <Ctrl>+<Space> and select \emph{RoomModel - model skeleton}.
+Open the \emph{HelloWorld.room} file and invoke the content assist with <Ctrl>+<Space> and select \emph{RoomModel - model skeleton}.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC041.png}
-% !images/016-HelloWorldC041.png!
 
-Edit the template variables by typing the new names and jumping with <Tab> from name to name.
+Edit the template parameters by typing the new names and jumping with <Tab> from name to name.
 
 The resulting model code should look like this:
 
@@ -118,8 +113,8 @@ The mapping model we will create now defines the mapping (deployment) of the log
 
 \begin{lstlisting}[language=etMap]
 MappingModel MappingModel1 {
-	import HelloWorld_Model.* from "HelloWorld.room"
-	import PhysicalModel1.* from "HelloWorld.etphys"
+	import HelloWorld_Model.* from "HelloWorldC.room"
+	import PhysicalModel1.* from "HelloWorldC.etphys"
 	Mapping LogSys1 -> PhysSys1 {
 		SubSystemMapping subSysRef1 -> nodeRef1 {
 			ThreadMapping defaultThread -> PhysicalThread1
@@ -131,30 +126,27 @@ MappingModel MappingModel1 {
 Now the workspace should look like this:
 
 \includegraphics{images/016-HelloWorldC05.png}
-% !images/016-HelloWorldC05.png!
 
 \input{015.1-hello-world-create-statemachine}
 
 \subsection{Create a launch configuration to start the C code generator}
 
-Unlike in Java a launch configuration for the C code generator must be created.
+Unlike in Java (where the new wizard already created a launch configuration)
+a launch configuration for the C code generator must be created manually.
 
 From the main menu \textit{Run} or the context menu \textit{Run As} in the \emph{Project Explorer} select \textit{Run Configurations} .
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC06.png}
-% !images/016-HelloWorldC06.png!
 
 Within the dialog select \textit{\eTrice{} C Generator} and click the \textit{New} button to create a new 
 launch configuration.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC07.png}
-% !images/016-HelloWorldC07.png!
 
 A new configuration should be created. Name it \textit{gen\_HelloWorld} and add the mapping model \emph{HelloWorld.etmap} model via one of the 
 \textit{add} buttons.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC08.png}
-% !images/016-HelloWorldC08.png!
 
 The mapping model is the root model for the code generator.
 
@@ -162,12 +154,10 @@ To save your launch configuration, select \textit{Shared file} in the tab \texti
 \textit{Browse} button.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC10.png}
-% !images/016-HelloWorldC10.png!
 
 Apply your changes. The new configuration should now exist in your workspace.
 
 \includegraphics{images/016-HelloWorldC11.png}
-% !images/016-HelloWorldC11.png!
 
 
 \subsection{Generate the code}
@@ -176,34 +166,31 @@ Now you can generate the code. Right click on the launch configuration and run i
 as \textit{gen\_HelloWorldC}.
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC12.png}
-% !images/016-HelloWorldC12.png!
 
 The code should be generated and placed in the src-gen folder.
 
 \includegraphics{images/016-HelloWorldC13.png}
-% !images/016-HelloWorldC13.png!
 
 \subsection{Setup the C build}
 
-Before you can build the application you must setup the include and library pathes for the runtime system. 
+Before you can build the application you must setup the include and library paths for the runtime system. 
 
 Right click the project and select \textit{Properties -> C/C++ Build -> Settings -> Includes}. 
-Add the include path for the current project \emph{src-gen} and the runtime source folders \emph{common}, \emph{config} and the chosen platform ( \emph{MT\_WIN\_MinGW} or \emph{MT\_POSIX\_GENERIC\_GCC} ).
+Add the include path for the current project \emph{src-gen} and the runtime source folders \emph{common}, \emph{config} and the chosen platform (\emph{MT\_WIN\_MinGW} or \emph{MT\_POSIX\_GENERIC\_GCC}).
 
 \includegraphics[width=0.8\textwidth]{images/016-HelloWorldC14.png}
-% !images/016-HelloWorldC14.png!
 
-Add the runtime library: \textit{Properties -> C/C++ Build -> Settings -> Libraries}.
+Add the runtime library: \textit{Properties -> C/C++ Build -> Settings -> Libraries} and the runtime library which is appropriate for your
+environment (e.g. \texttt{rt} for Linux).
 
 \includegraphics{images/016-HelloWorldC15.png}
-% !images/016-HelloWorldC15!
 
-The name of the library is \emph{org.eclipse.etrice.runtime.c} but the actual filename for the library is \emph{liborg.eclipse.etrice.runtime.c.a} .
+The name of the library is \emph{org.eclipse.etrice.runtime.c} but the actual file name for the library is \emph{liborg.eclipse.etrice.runtime.c.a} .
 
-Exclude the folder \emph{src-gen-info} from the build path. This folder is used to store temporary files for the incremetal code generation and must not be compiled in order to avoid multiple definition of symbols.
+\textbf{Caution:} Exclude the folder \emph{src-gen-info} from the build (this is done in the properties of this folder).
+This folder is used to store temporary files for the incremental code generation and must not be compiled in order to avoid multiple definition of symbols.
 
 \includegraphics{images/016-HelloWorldC151.png}
-% !images/016-HelloWorldC151!
 
 \subsection{Build and run the model}
 
@@ -212,7 +199,6 @@ Run the application in the folder \emph{Binary} as \textit{Local C/C++ Applicati
 The output in the Console View should contain the message \emph{Hello World}.
 
 \includegraphics{images/016-HelloWorldC16.png}
-% !images/016-HelloWorldC16.png!
 
 \input{015.2-hello-world-open-msc}
 

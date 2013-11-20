@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.doc.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
@@ -27,6 +26,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 
 @Singleton
 class InstanceDiagramGen {
@@ -79,8 +79,8 @@ class InstanceDiagramGen {
 	
 	def private String instance(AbstractInstance ai) {
 		val parent = ai.eContainer as StructureInstance
-		val pthread = ETMapUtil::getPhysicalThread(ai)
-		val tname = if (pthread==null) "?" else pthread.name
+		val pthread = ETMapUtil::getMappedThread(ai)
+		val tname = if (pthread==null) "?" else pthread.thread.name
 		val node = ETMapUtil::getNodeRef(ai)
 		val nname = if (node==null) "?" else node.name
 		val optional = if (ai instanceof ActorInterfaceInstance) "optional " else ""

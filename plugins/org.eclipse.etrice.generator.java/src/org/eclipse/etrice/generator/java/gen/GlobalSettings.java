@@ -21,6 +21,7 @@ import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 public class GlobalSettings extends GlobalGeneratorSettings {
 	
 	private boolean generatePersistenceInterface = false;
+	private boolean generateStoreDataObj = false;
 	
 	/**
 	 * @return the generatePersistenceInterface
@@ -34,5 +35,19 @@ public class GlobalSettings extends GlobalGeneratorSettings {
 	 */
 	public void setGeneratePersistenceInterface(boolean generatePersistenceInterface) {
 		this.generatePersistenceInterface = generatePersistenceInterface;
+	}
+
+	/**
+	 * @return the generateStoreDataObj
+	 */
+	public boolean isGenerateStoreDataObj() {
+		return generateStoreDataObj;
+	}
+
+	/**
+	 * @param generateStoreDataObj the generateStoreDataObj to set
+	 */
+	public void setGenerateStoreDataObj(boolean generateStoreDataObj) {
+		this.generateStoreDataObj = generateStoreDataObj;
 	}
 }

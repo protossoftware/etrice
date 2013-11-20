@@ -19,7 +19,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Message
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
@@ -81,7 +80,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«pc.userCode(1)»
 		
 		«var models = root.getReferencedModels(pc)»
-		«FOR model : models»import «model.name».*;
+		«FOR model : models»
+			import «model.name».*;
 		«ENDFOR»
 		
 		public class «pc.name» {
@@ -147,10 +147,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				EventMessage msg = (EventMessage) m;
 				if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
 					«IF Main::settings.generateMSCInstrumentation»
-						if (messageStrings[msg.getEvtId()] != "timerTick"){
-«««							TODOTS: model switch for activation
-							DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
-						}
+						DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 					«ENDIF»
 					«IF pc.handlesReceive(conj)»
 					switch (msg.getEvtId()) {
@@ -165,10 +162,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						«ENDFOR»
 						default:
 					«ENDIF»
-						if (msg instanceof EventWithDataMessage)
-							getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-						else
-							getActor().receiveEvent(this, msg.getEvtId(), null);
+					if (msg instanceof EventWithDataMessage)
+						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+					else
+						getActor().receiveEvent(this, msg.getEvtId(), null);
 					«IF pc.handlesReceive(conj)»
 					}
 					«ENDIF»
@@ -270,16 +267,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ENDFOR»
 				«ELSE»
 					«IF Main::settings.generateMSCInstrumentation»
-						if (messageStrings[ «dir»_«m.name»] != "timerTick") {
-«««							TODOTS: model switch for activation
-							DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
-						}
+						DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
 					«ENDIF»
 					if (getPeerAddress()!=null)
 						«IF m.data==null»
 							getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
 						«ELSE»
-							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type instanceof PrimitiveType))».deepCopy()«ENDIF»));
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type.enumerationOrPrimitive))».deepCopy()«ENDIF»));
 						«ENDIF»
 				«ENDIF»
 			}

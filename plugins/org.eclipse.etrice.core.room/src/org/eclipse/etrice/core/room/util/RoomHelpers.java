@@ -41,7 +41,10 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.KeyValue;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
@@ -52,6 +55,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RefinedTransition;
@@ -91,15 +95,15 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
  *
  * @author Henrik Rentz-Reichert initial contribution and API
  *
- * @see {@link org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model}
+ * @see org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model
  */
 public class RoomHelpers extends BaseHelpers {
 	
 	/**
-	 * Compute a list of the class itself followed by its base classes in order
+	 * Compute a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 * 
 	 * @param ac the {@link ActorClass}
-	 * @return a list of the class itself followed by its base classes in order
+	 * @return a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 */
 	public static List<ActorClass> getClassHierarchy(ActorClass ac) {
 		ArrayList<ActorClass> result = new ArrayList<ActorClass>();
@@ -268,8 +272,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 2 of a {@link DataClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode2(DataClass ac) {
-		return getDeepUserCode(ac, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
+	public static String getDeepUserCode2(DataClass dc) {
+		return getDeepUserCode(dc, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
 	}
 
 
@@ -446,11 +450,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * Returns whether an {@link ActorClass} has a non-empty {@link StateMachine}.
+	 * Returns whether an {@link ActorClass} has a non-empty {@link StateGraph}.
 	 * 
-	 * @param s the {@link State}
+	 * @param ac the {@link ActorClass}
 	 * 
-	 * @return whether an {@link ActorClass} has a non-empty {@link StateMachine}
+	 * @return whether an {@link ActorClass} has a non-empty {@link StateGraph}
 	 */
 	public static boolean hasNonEmptyStateMachine(ActorClass ac) {
 		return !isEmpty(ac.getStateMachine());
@@ -937,8 +941,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
-	 * 	getAllNames(StateGraph, StateGraphItem)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
+	 * 	getAllNames(StateGraph, StateGraphItem)
 	 */
 	public static Set<String> getAllNames(StateGraph sg) {
 		return getAllNames(sg, null);
@@ -999,8 +1003,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link State}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
-	 * 	getAllStateNames(StateGraph, State)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
+	 * 	getAllStateNames(StateGraph, State)
 	 */
 	public static Set<String> getAllStateNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
@@ -1029,8 +1033,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
-	 * 	getAllStateNames(StateGraph, TrPoint)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
+	 * 	getAllStateNames(StateGraph, TrPoint)
 	 */
 	public static Set<String> getAllTrPointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
@@ -1059,8 +1063,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
-	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
+	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)
 	 */
 	public static Set<String> getAllChoicePointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
@@ -1089,8 +1093,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 * 
-	 * @see {@link org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
-	 * 	getAllTransitionNames(StateGraph, Transition)}
+	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
+	 * 	getAllTransitionNames(StateGraph, Transition)
 	 */
 	public static Set<String> getAllTransitionNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_Transitions());
@@ -1204,7 +1208,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Attribute}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Attribute}s of an {@link ActorClass}
 	 */
@@ -1224,7 +1228,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Attribute}s of a {@link DataClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param dc an {@link DataClass}
 	 * 
 	 * @return a list of all {@link Attribute}s of a {@link DataClass}
 	 */
@@ -1244,7 +1248,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Operation}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Operation}s of an {@link ActorClass}
 	 */
@@ -1264,7 +1268,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all {@link Operation}s of a {@link DataClass}
 	 * including base classes.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param dc an {@link DataClass}
 	 * 
 	 * @return a list of all {@link Operation}s of a {@link DataClass}
 	 */
@@ -1513,7 +1517,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 * including base classes. I.e. all end ports, all SAPs and all non-relaying SPPs.
 	 * 
-	 * @param pc an {@link ActorClass}
+	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 */
@@ -1527,6 +1531,29 @@ public class RoomHelpers extends BaseHelpers {
 			result.addAll(ac.getExternalEndPorts());
 			result.addAll(ac.getServiceAccessPoints());
 			result.addAll(ac.getImplementedSPPs());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all {@link Port}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link Port}s of an {@link ActorClass}
+	 */
+	public static List<Port> getAllPorts(ActorClass ac) {
+		ArrayList<Port> result = new ArrayList<Port>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getInternalPorts());
+			result.addAll(ac.getInterfacePorts());
 			
 			ac = ac.getBase();
 		}
@@ -1549,6 +1576,50 @@ public class RoomHelpers extends BaseHelpers {
 		}
 		
 		return refs;
+	}
+	
+	/**
+	 * Returns a list of all {@link Binding}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link Binding}s of an {@link ActorClass}
+	 */
+	public static List<Binding> getAllBindings(ActorClass ac) {
+		ArrayList<Binding> result = new ArrayList<Binding>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getBindings());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all {@link LayerConnection}s of an {@link ActorClass}
+	 * including base classes.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link LayerConnection}s of an {@link ActorClass}
+	 */
+	public static List<LayerConnection> getAllLayerConnections(ActorClass ac) {
+		ArrayList<LayerConnection> result = new ArrayList<LayerConnection>();
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return result;
+		
+		while (ac!=null) {
+			result.addAll(ac.getConnections());
+			
+			ac = ac.getBase();
+		}
+		
+		return result;
 	}
 
 	/**
@@ -1665,7 +1736,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 * 
-	 * @see {@link #isBehaviorAttributePresent(ActorClass, String, String)}
+	 * @see #isBehaviorAttributePresent(ActorClass, String, String)
 	 */
 	public static boolean isAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getAnnotations(), name, key);
@@ -1680,7 +1751,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 * 
-	 * @see {@link #isAttributePresent(ActorClass, String, String)}
+	 * @see #isAttributePresent(ActorClass, String, String)
 	 */
 	public static boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getBehaviorAnnotations(), name, key);
@@ -1744,7 +1815,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all messages
 	 * 
-	 * @see {@link #getAllMessages(ProtocolClass, boolean)}
+	 * @see #getAllMessages(ProtocolClass, boolean)
 	 */
 	public static List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
@@ -2004,9 +2075,9 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * return the {@link BaseState} of a {@link State}
+	 * return the {@link SimpleState} of a {@link State}
 	 * @param s
-	 * @return the state itself if a BaseState or the BaseState for a {@link RefinedState}
+	 * @return the state itself if a SimpleState or the base state for a {@link RefinedState}
 	 */
 	public static SimpleState getBaseState(State s) {
 		if (s instanceof SimpleState)
@@ -2018,11 +2089,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * Returns a list of target states of a {@link RefinedSatte} recursively.
+	 * Returns a list of target states of a {@link RefinedState} recursively.
 	 * 
 	 * @param rs the refined state
 	 * 
-	 * @return a list of target states of a {@link RefinedSatte} recursively
+	 * @return a list of target states of a {@link RefinedState} recursively
 	 */
 	public static List<State> getReferencedStatesRecursively(RefinedState rs) {
 		ArrayList<State> result = new ArrayList<State>();
@@ -2121,7 +2192,21 @@ public class RoomHelpers extends BaseHelpers {
 			return (ProtocolClass) pc;
 			else
 				return null;
-		}
+	}
+	
+	/**
+	 * Returns {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}.
+	 * 
+	 * @param item an {@link InterfaceItem}
+	 * @return {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}
+	 */
+	public static boolean isDataDriven(InterfaceItem item) {
+		ProtocolClass pc = getProtocol(item);
+		if (pc!=null && pc.getCommType()==CommunicationType.DATA_DRIVEN)
+			return true;
+		
+		return false;
+	}
 	
 	/**
 	 * Returns the {@link GeneralProtocolClass} of an {@link InterfaceItem}.
@@ -2139,7 +2224,7 @@ public class RoomHelpers extends BaseHelpers {
 		else if (item instanceof SPP)
 			return ((SPP)item).getProtocol();
 		
-		assert(false): "unexpected sub type";
+		assert(item.eIsProxy()): "unexpected sub type";
 		return null;
 	}
 
@@ -2275,7 +2360,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns the recursive base class code of a transition.
 	 * 
 	 * @param trans the transition
-	 * @param actorClass the actor class
+	 * @param ac the actor class
 	 * 
 	 * @return the recursive base class code of a transition
 	 */
@@ -2307,7 +2392,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * Returns the complete action code including base class code of a {@link Transition}.
 	 * 
 	 * @param trans the transition
-	 * @param actorClass the actor class
+	 * @param ac the actor class
 	 * 
 	 * @return the complete action code including base class code of a {@link Transition}
 	 */
@@ -2373,10 +2458,10 @@ public class RoomHelpers extends BaseHelpers {
 	public static ActorContainerClass getActorContainerClass(ActorInstanceMapping aim) {
 		// follow segments
 		ActorContainerClass result = getParentContainer(aim);
-		for (String ref : aim.getPath().getRefs()) {
+		for (RefSegment ref : aim.getPath().getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -2400,7 +2485,7 @@ public class RoomHelpers extends BaseHelpers {
 	 */
 	public static String asString(RefPath path) {
 		StringBuilder sb = new StringBuilder();
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			sb.append("/"+ref);
 		}
 		return sb.toString();
@@ -2421,10 +2506,10 @@ public class RoomHelpers extends BaseHelpers {
 		
 		ActorRef lastMatch = null;
 		ActorContainerClass result = root;
-		for (String ref : path.getRefs()) {
+		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
 			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
-				if (actor instanceof ActorRef && actor.getName().equals(ref)) {
+				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
 				}
@@ -2441,25 +2526,25 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * returns first invalid path segment else null
+	 * returns first invalid path segment else {@code null}
 	 * 
 	 * @param root
 	 * @param path
-	 * @return
+	 * @return first invalid path segment else {@code null}
 	 */
 	public static String checkPath(ActorContainerClass root, RefPath path) {
 		if (path == null)
 			return null;
 
 		ActorContainerClass last = root;
-		Iterator<String> it = path.getRefs().iterator();
-		String ref;
+		Iterator<RefSegment> it = path.getRefs().iterator();
+		RefSegment ref;
 		while (it.hasNext()) {
 			ref = it.next();
 			// actor
 			ActorRef match = null;
 			for (ActorRef actor : last.getActorRefs()) {
-				if (actor.getName().equals(ref)) {
+				if (actor.getName().equals(ref.getRef())) {
 					match = actor;
 					break;
 				}
@@ -2480,7 +2565,19 @@ public class RoomHelpers extends BaseHelpers {
 					return null;
 			}
 			if (match == null)
-				return ref;
+				return ref.getRef();
+			
+			if (match.getMultiplicity()==1) {
+				if (ref.getIdx()!=-1)
+					return ref.toString()+" (ref not indexed )";
+			}
+			else {
+				if (ref.getIdx()<0)
+					return ref.toString()+" (ref needs index)";
+				if (ref.getIdx()>=match.getMultiplicity())
+					return ref.toString()+" (index out of bounds)";
+			}
+			
 			last = match.getType();
 		}
 
@@ -2524,5 +2621,65 @@ public class RoomHelpers extends BaseHelpers {
 			ac1 = ac1.getBase();
 		}
 		return false;
+	}
+	
+	/**
+	 * @param type an enumeration
+	 * @return the value of the first literal as string
+	 */
+	public static String getDefaultValue(EnumerationType type) {
+		if (type.getLiterals().isEmpty())
+			return "";
+		
+		return getCastedValue(type.getLiterals().get(0));
+	}
+
+	/**
+	 * This method computes a string that includes a cast to the proper type if
+	 * it is not {@code int}. The expression is surrounded by brackets.
+	 * 
+	 * @param literal an enumeration literal
+	 * @return the literal as string with proper cast
+	 */
+	public static String getCastedValue(EnumLiteral literal) {
+		EnumerationType type = (EnumerationType) literal.eContainer();
+		String cast = getTargetType(type);
+		if (cast.equals("int"))
+			return Long.toString(literal.getLiteralValue());
+		else
+			return "(("+cast+")"+Long.toString(literal.getLiteralValue())+")";
+	}
+	
+	/**
+	 * @param type an enumeration
+	 * @return the target type in the generated code
+	 */
+	public static String getTargetType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			return type.getPrimitiveType().getTargetName();
+		
+		return "int";
+	}
+	
+	/**
+	 * @param type an enumeration
+	 * @return the cast type in the generated code
+	 */
+	public static String getCastType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			return type.getPrimitiveType().getCastName();
+		
+		return "int";
+	}
+	
+	/**
+	 * @param type an enumeration
+	 * @return the cast type in the generated code for Java
+	 */
+	public static String getJavaCastType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			return type.getPrimitiveType().getCastName();
+		
+		return "Integer";
 	}
 }

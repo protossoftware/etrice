@@ -126,7 +126,7 @@ class GenericStateMachineGenerator {
 	 * @param xpac the {@link ExpandedActorClass}
 	 * @return the generated code
 	 * 
-	 * @see {@link #genStateMachine}
+	 * @see #genStateMachine
 	 */
 	def genStateMachine(ExpandedActorClass xpac) {
 		xpac.genStateMachine(true)
@@ -339,10 +339,18 @@ class GenericStateMachineGenerator {
 					«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
 					next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», is_handler«ENDIF»);
 					setState(«langExt.selfPointer(true)»next);
+					«finalAction()»
 				}
 			}
 		}
 	'''}
+	
+	/**
+	 * empty, but may be overridden
+	 */
+	def finalAction() {
+		''''''
+	}
 
 	
 	/**
@@ -350,7 +358,7 @@ class GenericStateMachineGenerator {
 	 * Asynchronous, data driven and event driven state machines are distinguished
 	 * 
 	 * @param xpac the {@link ExpandedActorClass}
-	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoints}
+	 * @param usesHdlr if the state machine uses no handler {@link TransitionPoint}s
 	 * 		at all then unused variables can be avoided by passing <code>true</code> 
 	 * @return the generated code
 	 */
@@ -472,8 +480,8 @@ class GenericStateMachineGenerator {
 	/**
 	 * setter for history array
 	 * 
-	 * @param the ID of the state whose history should be set
-	 * @param the ID of the state that should be assigned
+	 * @param state the ID of the state whose history should be set
+	 * @param historyState the ID of the state that should be assigned
 	 * @return the generated code
 	 */
 	def protected setHistory(String state, String historyState) {
@@ -565,7 +573,7 @@ class GenericStateMachineGenerator {
 	/**
 	 * generate action code method implementations
 	 * 
-	 * @param xpax the {@link ExpandedActorClass}
+	 * @param xpac the {@link ExpandedActorClass}
 	 * @param state the {@link State}
 	 * @return the generated code
 	 */

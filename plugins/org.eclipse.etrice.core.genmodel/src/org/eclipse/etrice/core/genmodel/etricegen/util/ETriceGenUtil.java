@@ -29,7 +29,7 @@ public class ETriceGenUtil {
 	 * @param trigstr the encoded trigger string
 	 * @return <code>true</code> if the encoded trigger string is matching the {@link Trigger}
 	 * 
-	 * @see {@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isMatching(Trigger, String)}
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isMatching(Trigger, String)
 	 */
 	public static boolean isMatching(Trigger trig, String trigstr) {
 		return ETriceGenFactory.eINSTANCE.createExpandedActorClass().isMatching(trig, trigstr);

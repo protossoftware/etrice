@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-09-17 10:33:00" /> 
+<meta name="date" content="2013-11-15 09:59:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -42,77 +42,79 @@ class="ec-lmssbx-10">Objectives for this tutorial:</span> </p>
      <li class="itemize">A C compiler must be installed on your machine. All tutorials are based on MinGW/GCC (Windows) and
      Posix/GCC (Linux), but currently only tested on Windows with MinGW/GCC
      </li>
-     <li class="itemize">The CDT-Eclipse plugin must be installed as the C development environment.</li></ul>
-<!--l. 20--><p class="noindent" >After installation of eclipse and the eTrice plug in, your workspace should look like this:
+     <li class="itemize">The C/C++ Development Tools (CDT) must be installed in Eclipse as the C development environment.</li></ul>
+<!--l. 20--><p class="noindent" >After installation of eTrice in Eclipse, your workspace should look like this (note the eTrice item in the main
+menu):
 </p><!--l. 22--><p class="noindent" ><img 
 src="images/013-SetupWorkspace01.png" alt="PIC"  
  />
-</p><!--l. 25--><p class="noindent" >Just the eTrice menu item is visible of the installed eTrice plugins.
-</p><!--l. 27--><p class="noindent" >Select the menu <span 
+</p><!--l. 24--><p class="noindent" >Select the menu <span 
 class="ec-lmsso-10">File-&#x003E;New-&#x003E;Other</span>
-</p><!--l. 29--><p class="noindent" ><img 
+</p><!--l. 26--><p class="noindent" ><img 
 src="images/013-SetupWorkspace02.png" alt="PIC"  
  />
-</p><!--l. 32--><p class="noindent" >Open the <span 
-class="ec-lmsso-10">eTrice </span>tab and select <span 
+</p><!--l. 28--><p class="noindent" >Open the <span 
+class="ec-lmsso-10">eTrice </span>folder and select <span 
 class="ec-lmsso-10">eTrice C Runtime</span>
-</p><!--l. 34--><p class="noindent" >Press <span 
+</p><!--l. 30--><p class="noindent" >Press <span 
 class="ec-lmsso-10">Next </span>and <span 
 class="ec-lmsso-10">Finish </span>to install the Runtime into your workspace.
-</p><!--l. 36--><p class="noindent" ><img 
+</p><!--l. 32--><p class="noindent" ><img 
 src="images/014-SetupWorkspaceC005.png" alt="PIC"  
  />
-</p><!--l. 39--><p class="noindent" >Do the same steps for <span 
+</p><!--l. 34--><p class="noindent" >Do the same steps for <span 
 class="ec-lmsso-10">eTrice C Modellib</span>, <span 
 class="ec-lmsso-10">eTrice C Tutorials </span>and <span 
 class="ec-lmsso-10">eTrice Trafficlight for Tutorials</span>. To avoid temporary
 error markers you should keep the proposed order of installation. The resulting workspace should look like
 this:
-</p><!--l. 43--><p class="noindent" ><img 
+</p><!--l. 38--><p class="noindent" ><img 
 src="images/014-SetupWorkspace007.png" alt="PIC"  
  />
                                                                                             
                                                                                             
-</p><!--l. 46--><p class="noindent" >
+</p><!--l. 40--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
  id="x9-320002.3.2"></a>Perform Setup Test</h4>
-<!--l. 48--><p class="noindent" >To check the correct setup of your workspace we run a little testproject contained in the tutorial project.
-</p><!--l. 50--><p class="noindent" >The tutorial models are available in the <span 
+<!--l. 42--><p class="noindent" >To check the correct setup of your workspace we run a little test project contained in the tutorial project.
+</p><!--l. 44--><p class="noindent" >The tutorial models are available in the <span 
 class="ec-lmsso-10">org.eclipse.etrice.tutorials.c </span>project. All tutorials are ready to generate and run
 without any changes. To test the code generator and the workspace setup simply run <span 
 class="ec-lmsso-10">gen_SetupTestC.launch </span>as
 <span 
 class="ec-lmsso-10">gen_SetupTestC</span>:
-</p><!--l. 53--><p class="noindent" ><img 
+</p><!--l. 47--><p class="noindent" ><img 
 src="images/014-05-gen_SetupTestC.png" alt="PIC"  
  />
-</p><!--l. 56--><p class="noindent" >The successful generation ends with <span 
-class="ec-lmsso-10">Info: &#8211; finished code generation </span>in the Console.
-</p><!--l. 58--><p class="noindent" ><img 
+</p><!--l. 49--><p class="noindent" >The successful generation ends with <span 
+class="ec-lmtt-10">Info: &#8211; finished code generation </span>in the Console.
+</p><!--l. 51--><p class="noindent" ><img 
 src="images/014-06-FinishedCodeGeneration.png" alt="PIC"  
  />
-</p><!--l. 61--><p class="noindent" >For each tutorial in the folder src-gen a sub folder is generated which contains the generated code. The file <span 
+</p><!--l. 53--><p class="noindent" >For each tutorial in the folder src-gen a sub folder is generated which contains the generated code. The file <span 
 class="ec-lmsso-10">&#x003C;...&#x003E;_Runner.c</span>
 contains the main function. To run the generated application you first have to compile the project (with the hammer symbol
 in the C/C++ Perspective).
-</p><!--l. 63--><p class="noindent" ><img 
+</p><!--l. 55--><p class="noindent" ><span 
+class="ec-lmssbx-10">Caution: </span>make sure to choose the correct build configuration for your environment.
+</p><!--l. 57--><p class="noindent" ><img 
 src="images/014-07-Compile.png" alt="PIC"  
  />
-</p><!--l. 66--><p class="noindent" >If the compilitation does not succeed, make sure to clean and compile the projects <span 
+</p><!--l. 59--><p class="noindent" >If the compilation does not succeed, make sure to clean and compile the projects <span 
 class="ec-lmsso-10">org.eclipse.etrice.runtime.c </span>and
 <span 
 class="ec-lmsso-10">org.eclipse.etrice.modellib.c </span>with the correct build configuration for your platform. Depending on the setup of
-your C compiler and CDT you might have to change the pre defined build configurations <span 
+your C compiler and CDT you might have to change the predefined build configurations <span 
 class="ec-lmsso-10">MinGWDebug </span>or
 <span 
 class="ec-lmsso-10">PosixDebug</span>.
-</p><!--l. 68--><p class="noindent" >After the successful compilation you can run the application as <span 
+</p><!--l. 61--><p class="noindent" >After the successful compilation you can run the application as <span 
 class="ec-lmsso-10">Local C/C++ Application</span>.
-</p><!--l. 70--><p class="noindent" ><img 
+</p><!--l. 63--><p class="noindent" ><img 
 src="images/014-08-RunAsC-CPP-Application.png" alt="PIC"  
  />
-</p><!--l. 73--><p class="noindent" >To stop the application type <span 
+</p><!--l. 65--><p class="noindent" >To terminate the application type <span 
 class="ec-lmsso-10">quit </span>in the console window. If your Console contains the lines
                                                                                             
                                                                                             
@@ -122,11 +124,11 @@ class="ec-lmsso-10">quit </span>in the console window. If your Console contains 
 &#x00A0;<br />***&#x00A0;Setup&#x00A0;OK&#x00A0;***
 &#x00A0;<br />******************
 </div>
-<!--l. 78--><p class="nopar" > your setup should be ok.
-</p><!--l. 81--><p class="noindent" ><img 
+<!--l. 70--><p class="nopar" > your setup should be ok.
+</p><!--l. 73--><p class="noindent" ><img 
 src="images/014-09-ConsoleWithSetupOk.png" alt="PIC"  
  />
-</p><!--l. 84--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
+</p><!--l. 75--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
                                                                                             
                                                                                             
 </p>

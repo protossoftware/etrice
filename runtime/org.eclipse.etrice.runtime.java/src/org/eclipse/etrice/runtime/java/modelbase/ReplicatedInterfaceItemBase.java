@@ -14,9 +14,7 @@ package org.eclipse.etrice.runtime.java.modelbase;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.RTObject;
 
 /**
@@ -40,24 +38,6 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 		super(owner, name);
 		
 		this.localId = localId;
-		
-		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
-		if (peerPaths!=null) {
-			for (String path : peerPaths) {
-				IRTObject object = getObject(path);
-				InterfaceItemBase peer = null;
-				if (object instanceof InterfaceItemBase) {
-					peer = ((InterfaceItemBase) object);
-				}
-				else if (object instanceof IReplicatedInterfaceItem) {
-					peer = ((IReplicatedInterfaceItem) object).createSubInterfaceItem();
-				}
-				if (peer!=null) {
-					InterfaceItemBase item = createSubInterfaceItem();
-					item.connectWith(peer);
-				}
-			}
-		}
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +54,7 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	public void removeItem(InterfaceItemBase item) {
 		boolean isRemoved = items.remove(item);
 		assert(isRemoved): "is own child";
-		if(isRemoved) {
+		if (isRemoved) {
 			releasedIndices.push(item.getIdx());
 		}
 	}
@@ -120,6 +100,13 @@ public abstract class ReplicatedInterfaceItemBase extends RTObject implements IR
 	@Override
 	public String toString() {
 		return "replicated port "+getName();
+	}
+	
+	public IInterfaceItem connectWith(IInterfaceItem peer) {
+		if (peer instanceof InterfaceItemBroker)
+			return peer.connectWith(this);
+		else
+			return peer.connectWith(createSubInterfaceItem());
 	}
 	
 	protected abstract InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx);

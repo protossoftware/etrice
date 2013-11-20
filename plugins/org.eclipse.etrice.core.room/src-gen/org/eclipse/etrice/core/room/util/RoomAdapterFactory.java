@@ -120,6 +120,16 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createPrimitiveTypeAdapter();
       }
       @Override
+      public Adapter caseEnumerationType(EnumerationType object)
+      {
+        return createEnumerationTypeAdapter();
+      }
+      @Override
+      public Adapter caseEnumLiteral(EnumLiteral object)
+      {
+        return createEnumLiteralAdapter();
+      }
+      @Override
       public Adapter caseExternalType(ExternalType object)
       {
         return createExternalTypeAdapter();
@@ -283,6 +293,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseRefPath(RefPath object)
       {
         return createRefPathAdapter();
+      }
+      @Override
+      public Adapter caseRefSegment(RefSegment object)
+      {
+        return createRefSegmentAdapter();
       }
       @Override
       public Adapter caseBinding(Binding object)
@@ -627,6 +642,36 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createPrimitiveTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumerationType <em>Enumeration Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.EnumerationType
+   * @generated
+   */
+  public Adapter createEnumerationTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.EnumLiteral <em>Enum Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.EnumLiteral
+   * @generated
+   */
+  public Adapter createEnumLiteralAdapter()
   {
     return null;
   }
@@ -1122,6 +1167,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRefPathAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RefSegment <em>Ref Segment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RefSegment
+   * @generated
+   */
+  public Adapter createRefSegmentAdapter()
   {
     return null;
   }

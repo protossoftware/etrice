@@ -1,0 +1,88 @@
+RoomModel EnumTest {
+
+	import room.basic.types.* from "Types.room"
+
+	SubSystemClass SubSystem_EnumTest {
+		ActorRef actorRef1: EnumTest_Top
+		LogicalThread defaultThread
+	}
+
+	ActorClass EnumTest_Top {
+		Structure {
+			ActorRef user: EnumUser
+		}
+		Behavior { }
+	}
+	
+	ActorClass EnumUser {
+		Interface {
+			Port prt: PC
+		}
+		Structure {
+			external Port prt
+			
+			Attribute caseId: int32
+			Attribute first: FirstEnum
+			Attribute second: SecondEnum = "SecondEnum.one"
+			Attribute third: ThirdEnum
+			Attribute fourth: FourthEnum
+			Attribute fifth: FifthEnum
+		}
+		Behavior {
+			Operation EnumUser() {
+				"caseId = etUnit_openAll(\"tmp\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
+			}
+			Operation ~EnumUser() {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> state0 { }
+				State state0 {
+					entry {
+						"EXPECT_EQUAL_INT32(caseId, \"second: initialized value\", 1, second);"
+						""
+						"first = FirstEnum.zero;"
+						"second = SecondEnum.three;"
+						"third = ThirdEnum.five;"
+						"fourth = FourthEnum.sixtyfive;"
+						"fifth = FifthEnum.f3;"
+						""
+						"EXPECT_EQUAL_INT32(caseId, \"first: newly set value\", 0, first);"
+						"EXPECT_EQUAL_INT32(caseId, \"second: newly set value\", 3, second);"
+						"EXPECT_EQUAL_INT32(caseId, \"third: newly set value\", 5, third);"
+						"EXPECT_EQUAL_INT32(caseId, \"fourth: newly set value\", 0x41, fourth);"
+						"EXPECT_EQUAL_INT16(caseId, \"fifth: newly set value\", (short)0x4, fifth);"
+						""
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+	
+	ProtocolClass PC {
+		incoming {
+			Message m1(d: FirstEnum)
+		}
+	}
+	
+	Enumeration FirstEnum {
+		zero, one, two, three
+	}
+	
+	Enumeration SecondEnum {
+		one=1, two, three
+	}
+	
+	Enumeration ThirdEnum {
+		one=1, two, five=5
+	}
+	
+	Enumeration FourthEnum {
+		one=1, three=3, sixtyfive=0x41
+	}
+
+	Enumeration FifthEnum of int16 {
+		f1=0x1, f2=0x2, f3=0x4, f4=0x8
+	}
+}

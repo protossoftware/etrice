@@ -13,17 +13,23 @@ package org.eclipse.etrice.generator.java.gen;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
@@ -32,6 +38,8 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
@@ -39,6 +47,7 @@ import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.ConfigGenAddon;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
@@ -49,6 +58,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -82,35 +93,57 @@ public class ActorClassGen extends GenericActorClassGenerator {
   @Extension
   private StateMachineGen _stateMachineGen;
   
+  @Inject
+  @Extension
+  private TypeHelpers _typeHelpers;
+  
   public void doGenerate(final Root root) {
+    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
+    final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
+    EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
+    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+      public Boolean apply(final WiredStructureClass w) {
+        return Boolean.valueOf((w instanceof WiredActorClass));
+      }
+    };
+    Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      public void apply(final WiredStructureClass w) {
+        ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
+        ac2wired.put(_actorClass, ((WiredActorClass) w));
+      }
+    };
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     for (final ExpandedActorClass xpac : _xpActorClasses) {
       {
         ActorClass _actorClass = xpac.getActorClass();
-        final boolean manualBehavior = RoomHelpers.isBehaviorAnnotationPresent(_actorClass, "BehaviorManual");
+        final WiredActorClass wired = ac2wired.get(_actorClass);
         ActorClass _actorClass_1 = xpac.getActorClass();
-        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass_1);
+        final boolean manualBehavior = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_1, "BehaviorManual");
         ActorClass _actorClass_2 = xpac.getActorClass();
-        String _path = this._roomExtensions.getPath(_actorClass_2);
-        final String path = (_generationTargetPath + _path);
+        String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass_2);
         ActorClass _actorClass_3 = xpac.getActorClass();
-        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_3);
+        String _path = this._roomExtensions.getPath(_actorClass_3);
+        final String path = (_generationTargetPath + _path);
         ActorClass _actorClass_4 = xpac.getActorClass();
-        String _path_1 = this._roomExtensions.getPath(_actorClass_4);
-        final String infopath = (_generationInfoPath + _path_1);
+        String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_actorClass_4);
         ActorClass _actorClass_5 = xpac.getActorClass();
-        String file = this._javaExtensions.getJavaFileName(_actorClass_5);
+        String _path_1 = this._roomExtensions.getPath(_actorClass_5);
+        final String infopath = (_generationInfoPath + _path_1);
+        ActorClass _actorClass_6 = xpac.getActorClass();
+        String file = this._javaExtensions.getJavaFileName(_actorClass_6);
         if (manualBehavior) {
           String _plus = ("Abstract" + file);
           file = _plus;
         }
-        CharSequence _generate = this.generate(root, xpac, manualBehavior);
+        CharSequence _generate = this.generate(root, xpac, wired, manualBehavior);
         this.fileIO.generateFile("generating ActorClass implementation", path, infopath, file, _generate);
       }
     }
   }
   
-  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final boolean manualBehavior) {
+  public CharSequence generate(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -126,20 +159,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final String clsname = _xifexpression;
       EList<StandardOperation> _operations = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isConstructor = RoomHelpers.isConstructor(op);
-            return Boolean.valueOf(_isConstructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isConstructor = RoomHelpers.isConstructor(op);
+          return Boolean.valueOf(_isConstructor);
+        }
+      };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isDestructor = op.isDestructor();
-            return Boolean.valueOf(_isDestructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isDestructor = op.isDestructor();
+          return Boolean.valueOf(_isDestructor);
+        }
+      };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       final EList<RoomModel> models = root.getReferencedModels(ac);
@@ -152,39 +185,37 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _xifexpression_1 = "";
       }
       final String impPersist = _xifexpression_1;
+      String _name_2 = ac.getName();
+      final String dataObjClass = (_name_2 + "_DataObject");
       String _xifexpression_2 = null;
       ActorClass _base = ac.getBase();
       boolean _notEquals = (!Objects.equal(_base, null));
       if (_notEquals) {
         ActorClass _base_1 = ac.getBase();
-        String _name_2 = _base_1.getName();
-        _xifexpression_2 = _name_2;
+        String _name_3 = _base_1.getName();
+        _xifexpression_2 = _name_3;
       } else {
         String _xifexpression_3 = null;
         String _attribute = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
         boolean _isEmpty = _attribute.isEmpty();
-        if (_isEmpty) {
-          _xifexpression_3 = "ActorClassBase";
-        } else {
+        boolean _not = (!_isEmpty);
+        if (_not) {
           String _attribute_1 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
           _xifexpression_3 = _attribute_1;
+        } else {
+          String _xifexpression_4 = null;
+          GlobalSettings _settings_1 = Main.getSettings();
+          boolean _isGenerateStoreDataObj = _settings_1.isGenerateStoreDataObj();
+          if (_isGenerateStoreDataObj) {
+            _xifexpression_4 = "ActorClassFinalActionBase";
+          } else {
+            _xifexpression_4 = "ActorClassBase";
+          }
+          _xifexpression_3 = _xifexpression_4;
         }
         _xifexpression_2 = _xifexpression_3;
       }
       final String baseClass = _xifexpression_2;
-      String _xifexpression_4 = null;
-      String _attribute_2 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
-      boolean _isEmpty_1 = _attribute_2.isEmpty();
-      if (_isEmpty_1) {
-        _xifexpression_4 = "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase";
-      } else {
-        String _attribute_3 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "package");
-        String _plus_1 = (_attribute_3 + ".");
-        String _attribute_4 = RoomHelpers.getAttribute(ac, "ActorBaseClass", "class");
-        String _plus_2 = (_plus_1 + _attribute_4);
-        _xifexpression_4 = _plus_2;
-      }
-      final String baseClassImport = _xifexpression_4;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(ac);
@@ -194,16 +225,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         List<Attribute> _dynConfigReadAttributes = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_2 = _dynConfigReadAttributes.isEmpty();
-        boolean _not = (!_isEmpty_2);
-        if (_not) {
+        boolean _isEmpty_1 = _dynConfigReadAttributes.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
           _builder.append("import org.eclipse.etrice.runtime.java.config.DynConfigLock;");
           _builder.newLine();
         }
       }
       {
-        GlobalSettings _settings_1 = Main.getSettings();
-        boolean _isGeneratePersistenceInterface_1 = _settings_1.isGeneratePersistenceInterface();
+        GlobalSettings _settings_2 = Main.getSettings();
+        boolean _isGeneratePersistenceInterface_1 = _settings_2.isGeneratePersistenceInterface();
         if (_isGeneratePersistenceInterface_1) {
           _builder.append("import org.eclipse.etrice.runtime.java.modelbase.IPersistable;");
           _builder.newLine();
@@ -215,21 +246,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
         }
       }
-      _builder.append("import org.eclipse.etrice.runtime.java.messaging.Address;");
+      {
+        GlobalSettings _settings_3 = Main.getSettings();
+        boolean _isGenerateStoreDataObj_1 = _settings_3.isGenerateStoreDataObj();
+        if (_isGenerateStoreDataObj_1) {
+          _builder.append("import java.util.Arrays;");
+          _builder.newLine();
+        }
+      }
+      _builder.append("import org.eclipse.etrice.runtime.java.messaging.*;");
       _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.messaging.IRTObject;");
+      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.*;");
       _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;");
+      _builder.append("import org.eclipse.etrice.runtime.java.debugging.*;");
       _builder.newLine();
-      _builder.append("import ");
-      _builder.append(baseClassImport, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;");
-      _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;");
-      _builder.newLine();
-      _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
       _builder.newLine();
       _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
       _builder.newLine();
@@ -237,13 +267,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final RoomModel model : models) {
           _builder.append("import ");
-          String _name_3 = model.getName();
-          _builder.append(_name_3, "");
+          String _name_4 = model.getName();
+          _builder.append(_name_4, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLine();
       {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
@@ -251,22 +280,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _package_1 = this._roomExtensions.getPackage(pc);
           _builder.append(_package_1, "");
           _builder.append(".");
-          String _name_4 = pc.getName();
-          _builder.append(_name_4, "");
+          String _name_5 = pc.getName();
+          _builder.append(_name_5, "");
           _builder.append(".*;");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLine();
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
         final Function1<ActorRef,Boolean> _function_2 = new Function1<ActorRef,Boolean>() {
-            public Boolean apply(final ActorRef r) {
-              ReferenceType _refType = r.getRefType();
-              boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-              return Boolean.valueOf(_equals);
-            }
-          };
+          public Boolean apply(final ActorRef r) {
+            ReferenceType _refType = r.getRefType();
+            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
+            return Boolean.valueOf(_equals);
+          }
+        };
         Iterable<ActorRef> _filter_2 = IterableExtensions.<ActorRef>filter(_actorRefs, _function_2);
         for(final ActorRef sub : _filter_2) {
           _builder.append("import ");
@@ -275,8 +303,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_package_2, "");
           _builder.append(".");
           ActorClass _type_1 = sub.getType();
-          String _name_5 = _type_1.getName();
-          _builder.append(_name_5, "");
+          String _name_6 = _type_1.getName();
+          _builder.append(_name_6, "");
           _builder.append("Interface;");
           _builder.newLineIfNotEmpty();
         }
@@ -326,8 +354,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName = this._roomExtensions.getPortClassName(ep);
           _builder.append(_portClassName, "	");
           _builder.append(" ");
-          String _name_6 = ep.getName();
-          _builder.append(_name_6, "	");
+          String _name_7 = ep.getName();
+          _builder.append(_name_7, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -345,8 +373,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName_1, "	");
           _builder.append(" ");
-          String _name_7 = sap.getName();
-          _builder.append(_name_7, "	");
+          String _name_8 = sap.getName();
+          _builder.append(_name_8, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -365,8 +393,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_portClassName_2, "	");
           _builder.append(" ");
           SPP _spp = svc.getSpp();
-          String _name_8 = _spp.getName();
-          _builder.append(_name_8, "	");
+          String _name_9 = _spp.getName();
+          _builder.append(_name_9, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -379,19 +407,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
         final Function1<ActorRef,Boolean> _function_3 = new Function1<ActorRef,Boolean>() {
-            public Boolean apply(final ActorRef r) {
-              ReferenceType _refType = r.getRefType();
-              boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
-              return Boolean.valueOf(_equals);
-            }
-          };
+          public Boolean apply(final ActorRef r) {
+            ReferenceType _refType = r.getRefType();
+            boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
+            return Boolean.valueOf(_equals);
+          }
+        };
         Iterable<ActorRef> _filter_3 = IterableExtensions.<ActorRef>filter(_actorRefs_1, _function_3);
         for(final ActorRef sub_1 : _filter_3) {
           _builder.append("\t");
           _builder.append("protected ");
           ActorClass _type_2 = sub_1.getType();
-          String _name_9 = _type_2.getName();
-          _builder.append(_name_9, "	");
+          String _name_10 = _type_2.getName();
+          _builder.append(_name_10, "	");
           {
             int _multiplicity = sub_1.getMultiplicity();
             boolean _notEquals_1 = (_multiplicity != 1);
@@ -400,8 +428,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           _builder.append("Interface ");
-          String _name_10 = sub_1.getName();
-          _builder.append(_name_10, "	");
+          String _name_11 = sub_1.getName();
+          _builder.append(_name_11, "	");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -431,8 +459,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Attribute a : _dynConfigReadAttributes_1) {
           _builder.append("\t");
           _builder.append("private DynConfigLock lock_");
-          String _name_11 = a.getName();
-          _builder.append(_name_11, "	");
+          String _name_12 = a.getName();
+          _builder.append(_name_12, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -455,8 +483,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("setClassName(\"");
-      String _name_12 = ac.getName();
-      _builder.append(_name_12, "		");
+      String _name_13 = ac.getName();
+      _builder.append(_name_13, "		");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -474,17 +502,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         List<Port> _endPorts_1 = RoomHelpers.getEndPorts(ac);
         for(final Port ep_1 : _endPorts_1) {
           _builder.append("\t\t");
-          String _name_13 = ep_1.getName();
-          _builder.append(_name_13, "		");
+          String _name_14 = ep_1.getName();
+          _builder.append(_name_14, "		");
           _builder.append(" = new ");
           String _portClassName_3 = this._roomExtensions.getPortClassName(ep_1);
           _builder.append(_portClassName_3, "		");
           _builder.append("(this, \"");
-          String _name_14 = ep_1.getName();
-          _builder.append(_name_14, "		");
-          _builder.append("\", IFITEM_");
           String _name_15 = ep_1.getName();
           _builder.append(_name_15, "		");
+          _builder.append("\", IFITEM_");
+          String _name_16 = ep_1.getName();
+          _builder.append(_name_16, "		");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
         }
@@ -498,17 +526,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
         for(final SAP sap_1 : _serviceAccessPoints_1) {
           _builder.append("\t\t");
-          String _name_16 = sap_1.getName();
-          _builder.append(_name_16, "		");
+          String _name_17 = sap_1.getName();
+          _builder.append(_name_17, "		");
           _builder.append(" = new ");
           String _portClassName_4 = this._roomExtensions.getPortClassName(sap_1);
           _builder.append(_portClassName_4, "		");
           _builder.append("(this, \"");
-          String _name_17 = sap_1.getName();
-          _builder.append(_name_17, "		");
-          _builder.append("\", IFITEM_");
           String _name_18 = sap_1.getName();
           _builder.append(_name_18, "		");
+          _builder.append("\", IFITEM_");
+          String _name_19 = sap_1.getName();
+          _builder.append(_name_19, "		");
           _builder.append(", 0);");
           _builder.newLineIfNotEmpty();
         }
@@ -523,19 +551,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
           _builder.append("\t\t");
           SPP _spp_1 = svc_1.getSpp();
-          String _name_19 = _spp_1.getName();
-          _builder.append(_name_19, "		");
+          String _name_20 = _spp_1.getName();
+          _builder.append(_name_20, "		");
           _builder.append(" = new ");
           String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
           _builder.append(_portClassName_5, "		");
           _builder.append("(this, \"");
           SPP _spp_2 = svc_1.getSpp();
-          String _name_20 = _spp_2.getName();
-          _builder.append(_name_20, "		");
+          String _name_21 = _spp_2.getName();
+          _builder.append(_name_21, "		");
           _builder.append("\", IFITEM_");
           SPP _spp_3 = svc_1.getSpp();
-          String _name_21 = _spp_3.getName();
-          _builder.append(_name_21, "		");
+          String _name_22 = _spp_3.getName();
+          _builder.append(_name_22, "		");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
         }
@@ -553,12 +581,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
             if (_equals) {
               _builder.append("\t\t");
-              String _name_22 = sub_2.getName();
-              _builder.append(_name_22, "		");
+              String _name_23 = sub_2.getName();
+              _builder.append(_name_23, "		");
               _builder.append(" = new ");
               ActorClass _type_3 = sub_2.getType();
-              String _name_23 = _type_3.getName();
-              _builder.append(_name_23, "		");
+              String _name_24 = _type_3.getName();
+              _builder.append(_name_24, "		");
               {
                 int _multiplicity_1 = sub_2.getMultiplicity();
                 boolean _notEquals_2 = (_multiplicity_1 != 1);
@@ -567,8 +595,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 }
               }
               _builder.append("Interface(this, \"");
-              String _name_24 = sub_2.getName();
-              _builder.append(_name_24, "		");
+              String _name_25 = sub_2.getName();
+              _builder.append(_name_25, "		");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
             } else {
@@ -582,15 +610,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("; ++i) {");
                 _builder.newLineIfNotEmpty();
                 {
-                  GlobalSettings _settings_2 = Main.getSettings();
-                  boolean _generateMSCInstrumentation = _settings_2.generateMSCInstrumentation();
+                  GlobalSettings _settings_4 = Main.getSettings();
+                  boolean _generateMSCInstrumentation = _settings_4.generateMSCInstrumentation();
                   if (_generateMSCInstrumentation) {
                     _builder.append("\t\t");
                     _builder.append("\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_25 = sub_2.getName();
-                    _builder.append(_name_25, "			");
-                    _builder.append("_\"+i);");
+                    String _name_26 = sub_2.getName();
+                    _builder.append(_name_26, "			");
+                    _builder.append(GenmodelConstants.INDEX_SEP, "			");
+                    _builder.append("\"+i);");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -598,25 +627,26 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("\t");
                 _builder.append("new ");
                 ActorClass _type_4 = sub_2.getType();
-                String _name_26 = _type_4.getName();
-                _builder.append(_name_26, "			");
-                _builder.append("(this, \"");
-                String _name_27 = sub_2.getName();
+                String _name_27 = _type_4.getName();
                 _builder.append(_name_27, "			");
-                _builder.append("_\"+i);");
+                _builder.append("(this, \"");
+                String _name_28 = sub_2.getName();
+                _builder.append(_name_28, "			");
+                _builder.append(GenmodelConstants.INDEX_SEP, "			");
+                _builder.append("\"+i);");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
                 _builder.append("}");
                 _builder.newLine();
               } else {
                 {
-                  GlobalSettings _settings_3 = Main.getSettings();
-                  boolean _generateMSCInstrumentation_1 = _settings_3.generateMSCInstrumentation();
+                  GlobalSettings _settings_5 = Main.getSettings();
+                  boolean _generateMSCInstrumentation_1 = _settings_5.generateMSCInstrumentation();
                   if (_generateMSCInstrumentation_1) {
                     _builder.append("\t\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_28 = sub_2.getName();
-                    _builder.append(_name_28, "		");
+                    String _name_29 = sub_2.getName();
+                    _builder.append(_name_29, "		");
                     _builder.append("\");");
                     _builder.newLineIfNotEmpty();
                   }
@@ -624,11 +654,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("\t\t");
                 _builder.append("new ");
                 ActorClass _type_5 = sub_2.getType();
-                String _name_29 = _type_5.getName();
-                _builder.append(_name_29, "		");
-                _builder.append("(this, \"");
-                String _name_30 = sub_2.getName();
+                String _name_30 = _type_5.getName();
                 _builder.append(_name_30, "		");
+                _builder.append("(this, \"");
+                String _name_31 = sub_2.getName();
+                _builder.append(_name_31, "		");
                 _builder.append("\");");
                 _builder.newLineIfNotEmpty();
               }
@@ -636,6 +666,37 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// wiring");
+      _builder.newLine();
+      {
+        EList<Wire> _wires = wired.getWires();
+        for(final Wire wire : _wires) {
+          _builder.append("\t\t");
+          String _xifexpression_5 = null;
+          boolean _isDataDriven = wire.isDataDriven();
+          if (_isDataDriven) {
+            _xifexpression_5 = "DataPortBase";
+          } else {
+            _xifexpression_5 = "InterfaceItemBase";
+          }
+          _builder.append(_xifexpression_5, "		");
+          _builder.append(".connect(this, \"");
+          EList<String> _path1 = wire.getPath1();
+          String _join = IterableExtensions.join(_path1, "/");
+          _builder.append(_join, "		");
+          _builder.append("\", \"");
+          EList<String> _path2 = wire.getPath2();
+          String _join_1 = IterableExtensions.join(_path2, "/");
+          _builder.append(_join_1, "		");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
       {
         boolean _notEquals_3 = (!Objects.equal(ctor, null));
         if (_notEquals_3) {
@@ -664,15 +725,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         boolean _or_1 = false;
         List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_3 = _dynConfigReadAttributes_2.isEmpty();
-        boolean _not_1 = (!_isEmpty_3);
-        if (_not_1) {
+        boolean _isEmpty_2 = _dynConfigReadAttributes_2.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
           _or_1 = true;
         } else {
           List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
-          boolean _isEmpty_4 = _dynConfigWriteAttributes.isEmpty();
-          boolean _not_2 = (!_isEmpty_4);
-          _or_1 = (_not_1 || _not_2);
+          boolean _isEmpty_3 = _dynConfigWriteAttributes.isEmpty();
+          boolean _not_3 = (!_isEmpty_3);
+          _or_1 = (_not_2 || _not_3);
         }
         if (_or_1) {
           {
@@ -680,8 +741,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final Attribute a_1 : _dynConfigReadAttributes_3) {
               _builder.append("\t\t");
               _builder.append("lock_");
-              String _name_31 = a_1.getName();
-              _builder.append(_name_31, "		");
+              String _name_32 = a_1.getName();
+              _builder.append(_name_32, "		");
               _builder.append(" = new DynConfigLock();");
               _builder.newLineIfNotEmpty();
             }
@@ -697,8 +758,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       EList<Attribute> _attributes_3 = ac.getAttributes();
       List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
       List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_4);
-      String _name_32 = ac.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_32);
+      String _name_33 = ac.getName();
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_33);
       _builder.append(_attributeSettersGettersImplementation, "	");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -717,9 +778,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Port ep_2 : _endPorts_2) {
           _builder.append("\t");
           String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
-          String _name_33 = ep_2.getName();
-          String _name_34 = ac.getName();
-          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_33, _name_34);
+          String _name_34 = ep_2.getName();
+          String _name_35 = ac.getName();
+          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_34, _name_35);
           _builder.append(_terImplementation, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -729,9 +790,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final SAP sap_2 : _serviceAccessPoints_2) {
           _builder.append("\t");
           String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
-          String _name_35 = sap_2.getName();
-          String _name_36 = ac.getName();
-          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_35, _name_36);
+          String _name_36 = sap_2.getName();
+          String _name_37 = ac.getName();
+          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_36, _name_37);
           _builder.append(_terImplementation_1, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -742,9 +803,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
           SPP _spp_4 = svc_2.getSpp();
-          String _name_37 = _spp_4.getName();
-          String _name_38 = ac.getName();
-          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_37, _name_38);
+          String _name_38 = _spp_4.getName();
+          String _name_39 = ac.getName();
+          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_38, _name_39);
           _builder.append(_terImplementation_2, "	");
           _builder.newLineIfNotEmpty();
         }
@@ -755,8 +816,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         boolean _overridesStop = this._roomExtensions.overridesStop(ac);
-        boolean _not_3 = (!_overridesStop);
-        if (_not_3) {
+        boolean _not_4 = (!_overridesStop);
+        if (_not_4) {
           {
             if (manualBehavior) {
               _builder.append("\t");
@@ -797,14 +858,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
-              String _name_39 = ac.getName();
-              String _destructorCall = this._procedureHelpers.destructorCall(_name_39);
+              String _name_40 = ac.getName();
+              String _destructorCall = this._procedureHelpers.destructorCall(_name_40);
               _builder.append(_destructorCall, "		");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
               {
-                GlobalSettings _settings_4 = Main.getSettings();
-                boolean _generateMSCInstrumentation_2 = _settings_4.generateMSCInstrumentation();
+                GlobalSettings _settings_6 = Main.getSettings();
+                boolean _generateMSCInstrumentation_2 = _settings_6.generateMSCInstrumentation();
                 if (_generateMSCInstrumentation_2) {
                   _builder.append("\t");
                   _builder.append("\t");
@@ -822,8 +883,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
         } else {
-          GlobalSettings _settings_5 = Main.getSettings();
-          boolean _generateMSCInstrumentation_3 = _settings_5.generateMSCInstrumentation();
+          GlobalSettings _settings_7 = Main.getSettings();
+          boolean _generateMSCInstrumentation_3 = _settings_7.generateMSCInstrumentation();
           if (_generateMSCInstrumentation_3) {
             _builder.append("\t");
             _builder.append("public void destroy() {");
@@ -846,7 +907,154 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         if (manualBehavior) {
           _builder.append("\t");
-          _builder.append("public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);");
+          _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
+          _builder.newLine();
+          {
+            List<InterfaceItem> _allInterfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+            boolean _hasElements = false;
+            for(final InterfaceItem ifitem : _allInterfaceItems) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate("else ", "		");
+              }
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("if (ifitem==");
+              String _name_41 = ifitem.getName();
+              _builder.append(_name_41, "		");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("switch (evt) {");
+              _builder.newLine();
+              {
+                List<Message> _incoming = RoomHelpers.getIncoming(ifitem);
+                for(final Message msg : _incoming) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("case ");
+                  ProtocolClass _protocolClass = RoomHelpers.getProtocolClass(msg);
+                  String _name_42 = _protocolClass.getName();
+                  _builder.append(_name_42, "				");
+                  _builder.append(".");
+                  String _xifexpression_6 = null;
+                  boolean _isIncoming = this._roomExtensions.isIncoming(msg);
+                  if (_isIncoming) {
+                    _xifexpression_6 = "IN_";
+                  } else {
+                    _xifexpression_6 = "OUT_";
+                  }
+                  _builder.append(_xifexpression_6, "				");
+                  String _name_43 = msg.getName();
+                  _builder.append(_name_43, "				");
+                  _builder.append(":");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    VarDecl _data = msg.getData();
+                    boolean _notEquals_5 = (!Objects.equal(_data, null));
+                    if (_notEquals_5) {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("\t");
+                      _builder.append("{");
+                      String _typedDataDefinition = this._javaExtensions.getTypedDataDefinition(msg);
+                      _builder.append(_typedDataDefinition, "					");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("on_");
+                  String _name_44 = ifitem.getName();
+                  _builder.append(_name_44, "					");
+                  _builder.append("_");
+                  String _name_45 = msg.getName();
+                  _builder.append(_name_45, "					");
+                  _builder.append("(ifitem");
+                  {
+                    VarDecl _data_1 = msg.getData();
+                    boolean _notEquals_6 = (!Objects.equal(_data_1, null));
+                    if (_notEquals_6) {
+                      _builder.append(", ");
+                      VarDecl _data_2 = msg.getData();
+                      String _name_46 = _data_2.getName();
+                      _builder.append(_name_46, "					");
+                    }
+                  }
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("break;");
+                  _builder.newLine();
+                  {
+                    VarDecl _data_3 = msg.getData();
+                    boolean _notEquals_7 = (!Objects.equal(_data_3, null));
+                    if (_notEquals_7) {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("\t");
+                      _builder.append("}");
+                      _builder.newLine();
+                    }
+                  }
+                }
+              }
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          {
+            List<InterfaceItem> _allInterfaceItems_1 = RoomHelpers.getAllInterfaceItems(ac);
+            for(final InterfaceItem ifitem_1 : _allInterfaceItems_1) {
+              {
+                List<Message> _incoming_1 = RoomHelpers.getIncoming(ifitem_1);
+                for(final Message msg_1 : _incoming_1) {
+                  _builder.append("\t");
+                  _builder.append("protected void on_");
+                  String _name_47 = ifitem_1.getName();
+                  _builder.append(_name_47, "	");
+                  _builder.append("_");
+                  String _name_48 = msg_1.getName();
+                  _builder.append(_name_48, "	");
+                  _builder.append("(InterfaceItemBase ifitem");
+                  {
+                    VarDecl _data_4 = msg_1.getData();
+                    boolean _notEquals_8 = (!Objects.equal(_data_4, null));
+                    if (_notEquals_8) {
+                      VarDecl _data_5 = msg_1.getData();
+                      String[] _generateArglistAndTypedData = this._javaExtensions.generateArglistAndTypedData(_data_5);
+                      String _get = _generateArglistAndTypedData[2];
+                      _builder.append(_get, "	");
+                    }
+                  }
+                  _builder.append(") {}");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public abstract void executeInitTransition();");
@@ -860,9 +1068,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(_genStateMachine, "	");
               _builder.newLineIfNotEmpty();
             } else {
-              boolean _hasStateMachine = xpac.hasStateMachine();
-              boolean _not_4 = (!_hasStateMachine);
-              if (_not_4) {
+              StateGraph _stateMachine = xpac.getStateMachine();
+              boolean _isEmpty_4 = RoomHelpers.isEmpty(_stateMachine);
+              if (_isEmpty_4) {
                 _builder.append("\t");
                 _builder.append("//--------------------- no state machine");
                 _builder.newLine();
@@ -887,8 +1095,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        GlobalSettings _settings_6 = Main.getSettings();
-        boolean _isGeneratePersistenceInterface_2 = _settings_6.isGeneratePersistenceInterface();
+        GlobalSettings _settings_8 = Main.getSettings();
+        boolean _isGeneratePersistenceInterface_2 = _settings_8.isGeneratePersistenceInterface();
         if (_isGeneratePersistenceInterface_2) {
           _builder.append("\t");
           _builder.newLine();
@@ -899,8 +1107,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("public void saveObject(ObjectOutput output) throws IOException {");
           _builder.newLine();
           {
-            boolean _hasStateMachine_1 = xpac.hasStateMachine();
-            if (_hasStateMachine_1) {
+            boolean _hasStateMachine = xpac.hasStateMachine();
+            if (_hasStateMachine) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("// state and history");
@@ -947,8 +1155,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {");
           _builder.newLine();
           {
-            boolean _hasStateMachine_2 = xpac.hasStateMachine();
-            if (_hasStateMachine_2) {
+            boolean _hasStateMachine_1 = xpac.hasStateMachine();
+            if (_hasStateMachine_1) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("// state and history");
@@ -988,6 +1196,366 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
         }
       }
+      {
+        GlobalSettings _settings_9 = Main.getSettings();
+        boolean _isGenerateStoreDataObj_2 = _settings_9.isGenerateStoreDataObj();
+        if (_isGenerateStoreDataObj_2) {
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected void store(IActorClassDataObject obj) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("if (!(obj instanceof ");
+          _builder.append(dataObjClass, "		");
+          _builder.append("))");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t\t");
+          _builder.append("return;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append(dataObjClass, "		");
+          _builder.append(" dataObject = (");
+          _builder.append(dataObjClass, "		");
+          _builder.append(") obj;");
+          _builder.newLineIfNotEmpty();
+          {
+            ActorClass _base_2 = ac.getBase();
+            boolean _notEquals_9 = (!Objects.equal(_base_2, null));
+            if (_notEquals_9) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("super.store(dataObject);");
+              _builder.newLine();
+            }
+          }
+          {
+            boolean _hasNonEmptyStateMachine_1 = RoomHelpers.hasNonEmptyStateMachine(ac);
+            if (_hasNonEmptyStateMachine_1) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("dataObject.setState(getState());");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("dataObject.setHistory(Arrays.copyOf(history, history.length));");
+              _builder.newLine();
+            }
+          }
+          {
+            EList<Attribute> _attributes_4 = ac.getAttributes();
+            boolean _isEmpty_5 = _attributes_4.isEmpty();
+            boolean _not_5 = (!_isEmpty_5);
+            if (_not_5) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              {
+                EList<Attribute> _attributes_5 = ac.getAttributes();
+                for(final Attribute att : _attributes_5) {
+                  {
+                    RefableType _type_6 = att.getType();
+                    DataType _type_7 = _type_6.getType();
+                    boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_7);
+                    if (_isEnumerationOrPrimitive) {
+                      {
+                        int _size = att.getSize();
+                        boolean _greaterThan_1 = (_size > 1);
+                        if (_greaterThan_1) {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("dataObject.set");
+                          String _name_49 = att.getName();
+                          String _firstUpper = StringExtensions.toFirstUpper(_name_49);
+                          _builder.append(_firstUpper, "		");
+                          _builder.append("(Arrays.copyOf(");
+                          String _name_50 = att.getName();
+                          _builder.append(_name_50, "		");
+                          _builder.append(", ");
+                          String _name_51 = att.getName();
+                          _builder.append(_name_51, "		");
+                          _builder.append(".length));");
+                          _builder.newLineIfNotEmpty();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("dataObject.set");
+                          String _name_52 = att.getName();
+                          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_52);
+                          _builder.append(_firstUpper_1, "		");
+                          _builder.append("(");
+                          String _name_53 = att.getName();
+                          _builder.append(_name_53, "		");
+                          _builder.append(");");
+                          _builder.newLineIfNotEmpty();
+                        }
+                      }
+                    } else {
+                      {
+                        int _size_1 = att.getSize();
+                        boolean _greaterThan_2 = (_size_1 > 1);
+                        if (_greaterThan_2) {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("{");
+                          _builder.newLine();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          RefableType _type_8 = att.getType();
+                          DataType _type_9 = _type_8.getType();
+                          String _name_54 = _type_9.getName();
+                          _builder.append(_name_54, "			");
+                          _builder.append("[] arr = Arrays.copyOf(");
+                          String _name_55 = att.getName();
+                          _builder.append(_name_55, "			");
+                          _builder.append(", ");
+                          String _name_56 = att.getName();
+                          _builder.append(_name_56, "			");
+                          _builder.append(".length);");
+                          _builder.newLineIfNotEmpty();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();");
+                          _builder.newLine();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("dataObject.set");
+                          String _name_57 = att.getName();
+                          String _firstUpper_2 = StringExtensions.toFirstUpper(_name_57);
+                          _builder.append(_firstUpper_2, "			");
+                          _builder.append("(arr);");
+                          _builder.newLineIfNotEmpty();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("}");
+                          _builder.newLine();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("dataObject.set");
+                          String _name_58 = att.getName();
+                          String _firstUpper_3 = StringExtensions.toFirstUpper(_name_58);
+                          _builder.append(_firstUpper_3, "		");
+                          _builder.append("(");
+                          String _name_59 = att.getName();
+                          _builder.append(_name_59, "		");
+                          _builder.append(".deepCopy());");
+                          _builder.newLineIfNotEmpty();
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected void restore(IActorClassDataObject obj) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("if (!(obj instanceof ");
+          _builder.append(dataObjClass, "		");
+          _builder.append("))");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t\t");
+          _builder.append("return;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append(dataObjClass, "		");
+          _builder.append(" dataObject = (");
+          _builder.append(dataObjClass, "		");
+          _builder.append(") obj;");
+          _builder.newLineIfNotEmpty();
+          {
+            ActorClass _base_3 = ac.getBase();
+            boolean _notEquals_10 = (!Objects.equal(_base_3, null));
+            if (_notEquals_10) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("super.restore(dataObject);");
+              _builder.newLine();
+            }
+          }
+          {
+            boolean _hasNonEmptyStateMachine_2 = RoomHelpers.hasNonEmptyStateMachine(ac);
+            if (_hasNonEmptyStateMachine_2) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("setState(dataObject.getState());");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("history = Arrays.copyOf(dataObject.getHistory(), dataObject.getHistory().length);");
+              _builder.newLine();
+            }
+          }
+          {
+            EList<Attribute> _attributes_6 = ac.getAttributes();
+            boolean _isEmpty_6 = _attributes_6.isEmpty();
+            boolean _not_6 = (!_isEmpty_6);
+            if (_not_6) {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.newLine();
+              {
+                EList<Attribute> _attributes_7 = ac.getAttributes();
+                for(final Attribute att_1 : _attributes_7) {
+                  {
+                    RefableType _type_10 = att_1.getType();
+                    DataType _type_11 = _type_10.getType();
+                    boolean _isEnumerationOrPrimitive_1 = this._typeHelpers.isEnumerationOrPrimitive(_type_11);
+                    if (_isEnumerationOrPrimitive_1) {
+                      {
+                        int _size_2 = att_1.getSize();
+                        boolean _greaterThan_3 = (_size_2 > 1);
+                        if (_greaterThan_3) {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("set");
+                          String _name_60 = att_1.getName();
+                          String _firstUpper_4 = StringExtensions.toFirstUpper(_name_60);
+                          _builder.append(_firstUpper_4, "		");
+                          _builder.append("(Arrays.copyOf(dataObject.get");
+                          String _name_61 = att_1.getName();
+                          String _firstUpper_5 = StringExtensions.toFirstUpper(_name_61);
+                          _builder.append(_firstUpper_5, "		");
+                          _builder.append("(), ");
+                          String _name_62 = att_1.getName();
+                          _builder.append(_name_62, "		");
+                          _builder.append(".length));");
+                          _builder.newLineIfNotEmpty();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("set");
+                          String _name_63 = att_1.getName();
+                          String _firstUpper_6 = StringExtensions.toFirstUpper(_name_63);
+                          _builder.append(_firstUpper_6, "		");
+                          _builder.append("(dataObject.get");
+                          String _name_64 = att_1.getName();
+                          String _firstUpper_7 = StringExtensions.toFirstUpper(_name_64);
+                          _builder.append(_firstUpper_7, "		");
+                          _builder.append("());");
+                          _builder.newLineIfNotEmpty();
+                        }
+                      }
+                    } else {
+                      {
+                        int _size_3 = att_1.getSize();
+                        boolean _greaterThan_4 = (_size_3 > 1);
+                        if (_greaterThan_4) {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("{");
+                          _builder.newLine();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          RefableType _type_12 = att_1.getType();
+                          DataType _type_13 = _type_12.getType();
+                          String _name_65 = _type_13.getName();
+                          _builder.append(_name_65, "			");
+                          _builder.append("[] arr = Arrays.copyOf(dataObject.get");
+                          String _name_66 = att_1.getName();
+                          String _firstUpper_8 = StringExtensions.toFirstUpper(_name_66);
+                          _builder.append(_firstUpper_8, "			");
+                          _builder.append("(), ");
+                          String _name_67 = att_1.getName();
+                          _builder.append(_name_67, "			");
+                          _builder.append(".length);");
+                          _builder.newLineIfNotEmpty();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();");
+                          _builder.newLine();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("set");
+                          String _name_68 = att_1.getName();
+                          String _firstUpper_9 = StringExtensions.toFirstUpper(_name_68);
+                          _builder.append(_firstUpper_9, "			");
+                          _builder.append("(arr);");
+                          _builder.newLineIfNotEmpty();
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("}");
+                          _builder.newLine();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t");
+                          _builder.append("set");
+                          String _name_69 = att_1.getName();
+                          String _firstUpper_10 = StringExtensions.toFirstUpper(_name_69);
+                          _builder.append(_firstUpper_10, "		");
+                          _builder.append("(dataObject.get");
+                          String _name_70 = att_1.getName();
+                          String _firstUpper_11 = StringExtensions.toFirstUpper(_name_70);
+                          _builder.append(_firstUpper_11, "		");
+                          _builder.append("().deepCopy());");
+                          _builder.newLineIfNotEmpty();
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected ");
+          _builder.append(dataObjClass, "	");
+          _builder.append(" newDataObject() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("return new ");
+          _builder.append(dataObjClass, "		");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);
@@ -1020,7 +1588,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               {
                 RefableType _type = att.getType();
                 DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
+                boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+                if (_isEnumerationOrPrimitive) {
                   String _genSavePrimitive = this.genSavePrimitive(att);
                   _builder.append(_genSavePrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -1083,7 +1652,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               {
                 RefableType _type = att.getType();
                 DataType _type_1 = _type.getType();
-                if ((_type_1 instanceof PrimitiveType)) {
+                boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+                if (_isEnumerationOrPrimitive) {
                   String _genLoadPrimitive = this.genLoadPrimitive(att);
                   _builder.append(_genLoadPrimitive, "");
                   _builder.newLineIfNotEmpty();
@@ -1133,7 +1703,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = ((PrimitiveType) _type_1).getTargetName();
+      final String type = this._typeHelpers.typeName(_type_1);
       final String method = this.getSaveMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();
@@ -1225,7 +1795,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = ((PrimitiveType) _type_1).getTargetName();
+      final String type = this._typeHelpers.typeName(_type_1);
       final String method = this.getLoadMethod(type);
       String _xifexpression = null;
       int _size = att.getSize();

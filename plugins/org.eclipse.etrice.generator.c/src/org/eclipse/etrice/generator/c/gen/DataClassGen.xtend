@@ -65,6 +65,9 @@ class DataClassGen {
 		«FOR dataClass : root.getReferencedDataClasses(dc)»
 			#include «dataClass.includePath»
 		«ENDFOR»
+		«FOR enumClass : root.getReferencedEnumClasses(dc)»
+			#include «enumClass.includePath»
+		«ENDFOR»
 		
 		«dc.userCode(1)»
 				

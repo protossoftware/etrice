@@ -22,27 +22,27 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <ul>
  *   <li>Interface: everything which is visible from the outside from a model point of view
  *   <ul>
- *     <li>{@link #getIfPorts}: a list of all interface {@link Port}s</li>
- *     <li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s</li>
+ *     <li>{@link #getInterfacePorts}: a list of all interface {@link Port}s</li>
+ *     <li>{@link ActorContainerClass#getServiceProvisionPoints()}: a list of all interface {@link SPP}s</li>
  *   </ul>
  *   <li>Structure: all internal structural aspects of an actor class</li>
  *   <ul>
- *     <li>{@link #getUsercode1}-3: user defined code with generator dependent meaning</li>
+ *     <li>{@link #getUserCode1}-3: user defined code with generator dependent meaning</li>
  *     <li>{@link #getInternalPorts}: a list of all internal end {@link Port}s</li>
  *     <li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that
  *        are end ports, not relay ports</li>
  *     <li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s</li>
- *     <li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class</li>
+ *     <li>{@link #getServiceAccessPoints}: a list of all {@link SAP}s used by this actor class</li>
  *     <li>{@link #getAttributes}: a list of all actor class {@link Attribute}s</li>
  *     <li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}
  *        has the meaning of a composition)</li>
  *     <li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class</li>
- *     <li>{@link #getConnections}: a list of all {@link LayerConnections}</li>
+ *     <li>{@link #getConnections}: a list of all {@link LayerConnection}s</li>
  *   </ul>
  *   <li>Behavior: the behavioral aspects of an actor class</li>
  *   <ul>
  *     <li>{@link #getOperations}: a list of {@link Operation}s</li>
- *     <li>{@link #getStateMachine}: the {@link StateMachine} definition</li>
+ *     <li>{@link #getStateMachine}: the {@link StateGraph state machine} definition</li>
  *   </ul>
  * </ul>
  * </p>

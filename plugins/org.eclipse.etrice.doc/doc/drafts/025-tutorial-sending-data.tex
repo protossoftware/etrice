@@ -44,7 +44,6 @@ Position the cursor outside any class definition and right click the mouse withi
 the context menu select \textit{Content Assist} (or Ctrl+Space).  
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData01.png}
-% !images/025-SendingData01.png!
 
 Select \textit{DataClass - data class skeleton} and name it \textit{DemoData}.
 Remove the operations and add the following Attributes:
@@ -133,7 +132,6 @@ RoomModel SendingData {
 The outline view should look like this:
 
 \includegraphics{images/025-SendingData03.png}
-% !images/025-SendingData03.png!
 
 \subsection{Define Actor Structure and Behavior}
 
@@ -142,7 +140,6 @@ actor and select \textit{Edit Structure}. Select an \textit{Interface Port} from
 MrPong. Name the Port \textit{PingPongPort} and select the \textit{PingPongProtocol}.
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData02.png}
-% !images/025-SendingData02.png!
 
 Do the same with MrPing but mark the port as \textit{conjugated}
 
@@ -152,18 +149,15 @@ Within the outline view, right click MrPong and select \textit{Edit Behavior}. C
 machine:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData04.png}
-% !images/025-SendingData04.png!
 
-The transition dialogues should look like this:
+The transition dialog should look like this:
 For \textit{ping}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData05.png}
-% !images/025-SendingData05.png!
 
 For \textit{pingSimple}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData06.png}
-% !images/025-SendingData06.png!
 
 
 \subsection{Define MrPing behavior}
@@ -172,7 +166,6 @@ Within the outline view double click MrPing. Navigate the cursor to the behavior
 of content assist create a new operation.
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData07.png}
-% !images/025-SendingData07.png!
 
 Name the operation \textit{printData} and define the DemoData as a parameter.
 
@@ -195,36 +188,30 @@ For MrPing create the following state machine:
 (Remember that you can copy and paste the action code from the tutorial directory.)
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData08.png}
-% !images/025-SendingData08.png!
 
-The transition dialogues should look like this:
+The transition dialog should look like this:
 
 For \textit{init}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData09.png}
-% !images/025-SendingData09.png!
 
 For \textit{wait1}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData10.png}
-% !images/025-SendingData10.png!
 
 For \textit{next}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData11.png}
-% !images/025-SendingData11.png!
 
 For \textit{wait2}:
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData12.png}
-% !images/025-SendingData12.png!
 
 \subsection{Define the top level}
 
 Open the Structure from SendingDataTop and add MrPing and MrPong as a reference. Connect the ports.
 
 \includegraphics[width=0.8\textwidth]{images/025-SendingData13.png}
-% !images/025-SendingData13.png!
 
 \begin{flushleft}The model is finished now and can be found in 
 /org.eclipse.etrice.tutorials/model/SendingData.\end{flushleft}

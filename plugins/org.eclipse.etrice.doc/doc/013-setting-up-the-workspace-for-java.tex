@@ -10,31 +10,25 @@
 
 \subsection{Create Library, Tutorial and Simulator Projects}
 
-After installation of eclipse and the \eTrice{} plug in, your workspace should look like this:  
+After installation of \eTrice{} in Eclipse, your workspace should look like this (note the eTrice item in the main menu):  
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace01.png}
-% !images/013-SetupWorkspace01.png!
-
-Just the \eTrice{} menu item is visible of the installed \eTrice{} plugins.
 
 Select the menu \emph{File->New->Other}
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace02.png}
-% !images/013-SetupWorkspace02.png!
 
-Open the \emph{eTrice} tab and select \textit{eTrice Java Runtime}
+Open the \emph{eTrice} folder and select \textit{eTrice Java Runtime}
 
 Press \emph{Next} and \emph{Finish} to install the Runtime into your workspace.
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace03.png}
-% !images/013-SetupWorkspace03.png!
 
 Do the same steps for \textit{eTrice Java Modellib}, \textit{eTrice Java Tutorials} and \textit{eTrice Trafficlight for Tutorials}. To avoid temporary 
 error markers you should keep the proposed order of installation. The resulting workspace should look like 
 this:
 
 \includegraphics[width=0.5\textwidth]{images/013-SetupWorkspace04.png}
-% !images/013-SetupWorkspace04.png!
 
 \subsection{Perform Setup Test}
 
@@ -45,19 +39,16 @@ ready to generate and run without any changes. To test the code generator and th
 \emph{gen\_SetupTestJava.launch} as \emph{gen\_SetupTestJava}: 
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace05.png}
-% !images/013-SetupWorkspace05.png!
 
 The successful generation ends with \emph{Info: -- finished code generation} in the Console.
 
 \includegraphics[width=0.5\textwidth]{images/013-SetupWorkspace051.png}
-% !images/013-SetupWorkspace051.png!
 
 For each tutorial in the folder src-gen a java package is generated including a java file called 
-\emph{SubSys<...>Runner.java} . To run the generated application simply run this file as a java application.
+\emph{SubSys<...>Runner.java}. To run the generated application simply run this file as a Java application.
 Try this with the file \emph{src-gen/SetupTest\_Model/SubSysClass1Runner.java} :
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace06.png}
-% !images/013-SetupWorkspace06.png!
 
 To stop the application type \emph{quit} in the console window. If your Console contains the lines
 \begin{verbatim}
@@ -68,6 +59,5 @@ To stop the application type \emph{quit} in the console window. If your Console 
 your setup should be ok.
 
 \includegraphics[width=0.6\textwidth]{images/013-SetupWorkspace07.png} 
-% !images/013-SetupWorkspace07.png!
 
 Now the workspace is set up and you can perform the tutorials or start with your work.

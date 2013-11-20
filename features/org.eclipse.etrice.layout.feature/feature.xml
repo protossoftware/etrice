@@ -21,7 +21,7 @@
       provider-name="%providerName"
       plugin="org.eclipse.etrice.core.room.ui"
       license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature-version="1.0.0.v20131003-1638">
 
    <description>
       %description
@@ -36,8 +36,8 @@ which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
    </license>
 
    <requires>

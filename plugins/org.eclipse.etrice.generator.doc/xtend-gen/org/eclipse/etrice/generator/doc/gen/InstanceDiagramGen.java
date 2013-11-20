@@ -17,6 +17,7 @@ import java.io.File;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -169,13 +170,14 @@ public class InstanceDiagramGen {
     {
       EObject _eContainer = ai.eContainer();
       final StructureInstance parent = ((StructureInstance) _eContainer);
-      final PhysicalThread pthread = ETMapUtil.getPhysicalThread(ai);
+      final MappedThread pthread = ETMapUtil.getMappedThread(ai);
       String _xifexpression = null;
       boolean _equals = Objects.equal(pthread, null);
       if (_equals) {
         _xifexpression = "?";
       } else {
-        String _name = pthread.getName();
+        PhysicalThread _thread = pthread.getThread();
+        String _name = _thread.getName();
         _xifexpression = _name;
       }
       final String tname = _xifexpression;

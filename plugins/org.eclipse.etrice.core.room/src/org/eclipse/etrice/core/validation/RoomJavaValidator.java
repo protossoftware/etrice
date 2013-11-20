@@ -7,6 +7,7 @@
  * 
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
+ * 		Eyrak Paen
  * 
  *******************************************************************************/
 
@@ -14,6 +15,7 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -24,12 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -39,6 +44,7 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -107,7 +113,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		String uriString = importUriResolver.resolve(imp);
 		
 		URI uri = URI.createURI(uriString);
-		ResourceSet rs = new ResourceSetImpl();
+		ResourceSet rs = imp.eResource().getResourceSet();
 
 		try {
 			Resource res = rs.getResource(uri, true);
@@ -230,6 +236,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkAttributeNoStringArray(Attribute att){
+		// TODO-Enum
 		if(!att.getType().isRef() && att.getType().getType() instanceof PrimitiveType){
 			PrimitiveType type = (PrimitiveType)att.getType().getType();
 			if(type.getName().equalsIgnoreCase("string") && att.getSize() > 0)
@@ -253,6 +260,56 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		if (ValidationUtil.isCircularClassHierarchy(ac))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+	}
+	
+	@Check
+	public void checkUniqueNames(ActorClass ac) {
+		if (ValidationUtil.isCircularClassHierarchy(ac))
+			return;
+		
+		HashMap<String, EObject> name2obj = new HashMap<String, EObject>();
+		
+		// first add all base class objects (we'll add no errors for them)
+		if (ac.getBase()!=null) {
+			ActorClass base = ac.getBase();
+			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(base);
+			for (InterfaceItem item : items) {
+				name2obj.put(item.getName(), item);
+			}
+			List<ActorContainerRef> refs = RoomHelpers.getAllActorContainerRefs(base);
+			for (ActorContainerRef ref : refs) {
+				name2obj.put(ref.getName(), ref);
+			}
+		}
+		
+		// now we check our own items and refs
+		List<InterfaceItem> items = RoomHelpers.getInterfaceItems(ac);
+		for (InterfaceItem item : items) {
+			if (name2obj.containsKey(item.getName())) {
+				EObject duplicate = name2obj.get(item.getName());
+				String location = RoomNameProvider.getLocation(duplicate);
+				EObject parent = item.eContainer();
+				@SuppressWarnings("unchecked")
+				int idx = ((List<EObject>)parent.eGet(item.eContainingFeature())).indexOf(item);
+				error("names must be unique (duplicate of "+location+")", parent, item.eContainingFeature(), idx);
+			}
+			else
+				name2obj.put(item.getName(), item);
+		}
+		
+		List<ActorContainerRef> refs = RoomHelpers.getRefs(ac, false);
+		for (ActorContainerRef ref : refs) {
+			if (name2obj.containsKey(ref.getName())) {
+				EObject duplicate = name2obj.get(ref.getName());
+				String location = RoomNameProvider.getLocation(duplicate);
+				EObject parent = ref.eContainer();
+				@SuppressWarnings("unchecked")
+				int idx = ((List<EObject>)parent.eGet(ref.eContainingFeature())).indexOf(ref);
+				error("names must be unique (duplicate of "+location+")", parent, ref.eContainingFeature(), idx);
+			}
+			else
+				name2obj.put(ref.getName(), ref);
+		}
 	}
 	
 	@Check
@@ -342,11 +399,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 							RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				else {
 					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
-					if (aRef != null) {
-						if (aRef.getMultiplicity() > 1)
-							error("no arrays of actor references supported",
-									RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
-					} else
+					if (aRef == null)
 						error("invalid actor reference",
 								RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				}
@@ -358,7 +411,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	private void checkMappings(EList<ActorInstanceMapping> actorInstanceMappings) {
 		HashSet<String> paths = new HashSet<String>();
 		for (ActorInstanceMapping aim : actorInstanceMappings) {
-			if (!paths.add(RoomHelpers.asString(aim.getPath()))) {
+			if (!paths.add(aim.getPath().toString())) {
 				EObject parent = aim.eContainer();
 				int idx = actorInstanceMappings.indexOf(aim);
 				error("duplicate mapping", parent, aim.eContainingFeature(), idx, DUPLICATE_ACTOR_INSTANCE_MAPPING);
@@ -728,25 +781,42 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 	}
 	
-	/*public static enum AnnotationTargetType {
-		ACTOR_CLASS("ActorClass"),
-		ACTOR_BEHAVIOR("ActorBehavior"),
-		DATA_CLASS("DataClass"),
-		PROTOCOL_CLASS("ProtocolClass"),
-		COMPOUND_PROTOCOL_CLASS("CompoundProtocolClass"),
-		LOGICAL_SYSTEM_CLASS("LogicalSystem"),
-		SUBSYSTEM_CLASS("SubSystem");
-		
-		private final String literal;
-		
-		AnnotationTargetType(String literal) {
-			this.literal = literal;
+	@Check
+	public void checkRoomClassAnnotationTypeUniqueness(RoomClass rc) {
+		if(rc.eContainer() instanceof RoomModel) {
+			RoomModel model = (RoomModel)rc.eContainer();
+			for(AnnotationType at : model.getAnnotationTypes()) {
+				if(rc.getName().equals(at.getName())) {
+					error("The name \""+at.getName()+"\" already exists as an AnnotationType name", rc, RoomPackage.Literals.ROOM_CLASS__NAME); 
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkRoomClassAnnotationTypeUniqueness(AnnotationType at) {
+		if(at.eContainer() instanceof RoomModel) {
+			RoomModel model = (RoomModel)at.eContainer();
+			for(Object obj : org.eclipse.emf.ecore.util.EcoreUtil.getObjectsByType(model.eContents(), RoomPackage.Literals.ROOM_CLASS)) {
+				RoomClass rc = (RoomClass)obj;
+				if(at.getName().equals(rc.getName())) {
+					error("The name \""+at.getName()+"\" already exists as a RoomClass name", at, BasePackage.Literals.ANNOTATION_TYPE__NAME); 
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkEnumeration(EnumerationType et) {
+		if (et.getPrimitiveType()!=null) {
+			if (et.getPrimitiveType().getType()!=LiteralType.INT) {
+				error("enumerations must be of integer type", RoomPackage.Literals.ENUMERATION_TYPE__PRIMITIVE_TYPE);
+			}
 		}
 		
-		public String getLiteral() {
-			return literal;
-		}
-	}*/
+		if (et.getLiterals().isEmpty())
+			error("at least one literal has to be specified", RoomPackage.Literals.ENUMERATION_TYPE__LITERALS);
+	}
 	
 	private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());

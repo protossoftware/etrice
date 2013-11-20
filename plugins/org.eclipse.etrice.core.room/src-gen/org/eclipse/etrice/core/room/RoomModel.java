@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getPrimitiveTypes <em>Primitive Types</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getEnumerationTypes <em>Enumeration Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getExternalTypes <em>External Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getDataClasses <em>Data Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getProtocolClasses <em>Protocol Classes</em>}</li>
@@ -130,6 +131,22 @@ public interface RoomModel extends EObject
    * @generated
    */
   EList<PrimitiveType> getPrimitiveTypes();
+
+  /**
+   * Returns the value of the '<em><b>Enumeration Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.EnumerationType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Enumeration Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Enumeration Types</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_EnumerationTypes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<EnumerationType> getEnumerationTypes();
 
   /**
    * Returns the value of the '<em><b>External Types</b></em>' containment reference list.

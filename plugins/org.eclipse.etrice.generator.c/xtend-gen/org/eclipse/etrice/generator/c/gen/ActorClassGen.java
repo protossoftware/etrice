@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
@@ -118,48 +119,48 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
-            return Boolean.valueOf(_equals);
-          }
-        };
+        public Boolean apply(final Port p) {
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+          return Boolean.valueOf(_equals);
+        }
+      };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            boolean _and = false;
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isConjugated = p.isConjugated();
-              _and = (_equals && _isConjugated);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            _and = (_equals && _isConjugated);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            boolean _and = false;
-            GeneralProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isConjugated = p.isConjugated();
-              boolean _not = (!_isConjugated);
-              _and = (_equals && _not);
-            }
-            return Boolean.valueOf(_and);
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            boolean _not = (!_isConjugated);
+            _and = (_equals && _not);
           }
-        };
+          return Boolean.valueOf(_and);
+        }
+      };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
       ActorCommunicationType _commType = ac.getCommType();
       final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
@@ -264,11 +265,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
+        EList<EnumerationType> _referencedEnumClasses = root.getReferencedEnumClasses(ac);
+        for(final EnumerationType enumClass : _referencedEnumClasses) {
+          _builder.append("#include ");
+          String _includePath_1 = this._cExtensions.getIncludePath(enumClass);
+          _builder.append(_includePath_1, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
         for(final ProtocolClass pc : _referencedProtocolClasses) {
           _builder.append("#include ");
-          String _includePath_1 = this._cExtensions.getIncludePath(pc);
-          _builder.append(_includePath_1, "");
+          String _includePath_2 = this._cExtensions.getIncludePath(pc);
+          _builder.append(_includePath_2, "");
           _builder.newLineIfNotEmpty();
         }
       }

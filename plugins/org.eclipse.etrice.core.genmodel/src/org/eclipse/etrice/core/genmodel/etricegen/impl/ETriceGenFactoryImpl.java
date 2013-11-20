@@ -85,6 +85,11 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 			case ETriceGenPackage.TRANSITION_CHAIN: return createTransitionChain();
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: return createExpandedActorClass();
 			case ETriceGenPackage.EXPANDED_REFINED_STATE: return createExpandedRefinedState();
+			case ETriceGenPackage.OPEN_BINDING: return createOpenBinding();
+			case ETriceGenPackage.OPEN_SERVICE_CONNECTION: return createOpenServiceConnection();
+			case ETriceGenPackage.WIRE: return createWire();
+			case ETriceGenPackage.WIRED_ACTOR_CLASS: return createWiredActorClass();
+			case ETriceGenPackage.WIRED_SUB_SYSTEM_CLASS: return createWiredSubSystemClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -298,6 +303,56 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	public ExpandedRefinedState createExpandedRefinedState() {
 		ExpandedRefinedStateImpl expandedRefinedState = new ExpandedRefinedStateImpl();
 		return expandedRefinedState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OpenBinding createOpenBinding() {
+		OpenBindingImpl openBinding = new OpenBindingImpl();
+		return openBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OpenServiceConnection createOpenServiceConnection() {
+		OpenServiceConnectionImpl openServiceConnection = new OpenServiceConnectionImpl();
+		return openServiceConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Wire createWire() {
+		WireImpl wire = new WireImpl();
+		return wire;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WiredActorClass createWiredActorClass() {
+		WiredActorClassImpl wiredActorClass = new WiredActorClassImpl();
+		return wiredActorClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WiredSubSystemClass createWiredSubSystemClass() {
+		WiredSubSystemClassImpl wiredSubSystemClass = new WiredSubSystemClassImpl();
+		return wiredSubSystemClass;
 	}
 
 	/**

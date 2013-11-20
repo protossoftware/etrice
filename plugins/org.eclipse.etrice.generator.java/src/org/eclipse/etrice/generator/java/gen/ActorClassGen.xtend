@@ -25,9 +25,13 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.room.ReferenceType
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+import org.eclipse.etrice.core.room.ActorClass
+import java.util.HashMap
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -41,30 +45,35 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
+	@Inject extension TypeHelpers
 	
 	def doGenerate(Root root) {
+		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
+		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
 		for (xpac: root.xpActorClasses) {
+			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
 			var file = xpac.actorClass.getJavaFileName
 			if (manualBehavior)
 				file = "Abstract"+file
-			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, manualBehavior))
+			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, wired, manualBehavior))
 		}
 	}
 	
-	def generate(Root root, ExpandedActorClass xpac, boolean manualBehavior) {
+	def generate(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
-		val baseClass = if (ac.base!=null) ac.base.name else
-			if (ac.getAttribute("ActorBaseClass", "class").empty) "ActorClassBase" else ac.getAttribute("ActorBaseClass", "class")
-		val baseClassImport = if (ac.getAttribute("ActorBaseClass", "class").empty) "org.eclipse.etrice.runtime.java.modelbase.ActorClassBase"
-				else ac.getAttribute("ActorBaseClass", "package")+"."+ac.getAttribute("ActorBaseClass", "class")
+		val dataObjClass = ac.name+"_DataObject"
+		val baseClass = if (ac.base!=null) ac.base.name
+			else if (!ac.getAttribute("ActorBaseClass", "class").empty) ac.getAttribute("ActorBaseClass", "class")
+			else if (Main::settings.generateStoreDataObj) "ActorClassFinalActionBase"
+			else "ActorClassBase"
 		
 	'''
 		package «ac.getPackage»;
@@ -78,23 +87,21 @@ class ActorClassGen extends GenericActorClassGenerator {
 			import java.io.ObjectInput;
 			import java.io.ObjectOutput;
 		«ENDIF»
-		import org.eclipse.etrice.runtime.java.messaging.Address;
-		import org.eclipse.etrice.runtime.java.messaging.IRTObject;
-		import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
-		import «baseClassImport»;
-		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
-		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-		import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+		«IF Main::settings.isGenerateStoreDataObj»
+			import java.util.Arrays;
+		«ENDIF»
+		import org.eclipse.etrice.runtime.java.messaging.*;
+		import org.eclipse.etrice.runtime.java.modelbase.*;
+		import org.eclipse.etrice.runtime.java.debugging.*;
+		
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		
 		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
-		
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			import «pc.package».«pc.name».*;
 		«ENDFOR»
-
 		«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
 			import «sub.type.package».«sub.type.name»Interface;
 		«ENDFOR»
@@ -165,9 +172,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ELSEIF sub.multiplicity>1»
 						for (int i=0; i<«sub.multiplicity»; ++i) {
 							«IF Main::settings.generateMSCInstrumentation»
-								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
+								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 							«ENDIF»
-							new «sub.type.name»(this, "«sub.name»_"+i);
+							new «sub.type.name»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 						}
 					«ELSE»
 						«IF Main::settings.generateMSCInstrumentation»
@@ -176,6 +183,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 						new «sub.type.name»(this, "«sub.name»");
 					«ENDIF»
 				«ENDFOR»
+				
+				// wiring
+				«FOR wire: wired.wires»
+					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
+				«ENDFOR»
+				
 				«IF ctor!=null»
 					
 					{
@@ -238,12 +251,37 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 		
 			«IF manualBehavior»
-				public abstract void receiveEvent(InterfaceItemBase ifitem, int evt, Object data);
+				public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+					«FOR ifitem : ac.allInterfaceItems SEPARATOR "else "»
+						if (ifitem==«ifitem.name») {
+							switch (evt) {
+								«FOR msg: ifitem.incoming»
+									case «msg.protocolClass.name».«if (msg.incoming) "IN_" else "OUT_"»«msg.name»:
+										«IF (msg.data!=null)»
+											{«msg.typedDataDefinition»
+										«ENDIF»
+										on_«ifitem.name»_«msg.name»(ifitem«IF (msg.data!=null)», «msg.data.name»«ENDIF»);
+										break;
+										«IF (msg.data!=null)»
+											}
+										«ENDIF»
+								«ENDFOR»
+							}
+						}
+					«ENDFOR»
+				}
+				«FOR ifitem : ac.allInterfaceItems»
+					«FOR msg: ifitem.incoming»
+						protected void on_«ifitem.name»_«msg.name»(InterfaceItemBase ifitem«IF msg.data!=null»«msg.data.generateArglistAndTypedData.get(2)»«ENDIF») {}
+					«ENDFOR»
+				«ENDFOR»
+				
 				public abstract void executeInitTransition();
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
 					«xpac.genStateMachine()»
-				«ELSEIF !xpac.hasStateMachine()»
+				«ELSEIF xpac.stateMachine.empty»
+«««					no state machine in the super classes 
 					//--------------------- no state machine
 					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 						handleSystemEvent(ifitem, evt, data);
@@ -284,6 +322,90 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«xpac.genLoadImpl»
 				}
 			«ENDIF»
+			«IF Main::settings.isGenerateStoreDataObj»
+				
+				protected void store(IActorClassDataObject obj) {
+					if (!(obj instanceof «dataObjClass»))
+						return;
+					
+					«dataObjClass» dataObject = («dataObjClass») obj;
+					«IF ac.base!=null»
+						
+						super.store(dataObject);
+					«ENDIF»
+					«IF ac.hasNonEmptyStateMachine»
+						
+						dataObject.setState(getState());
+						dataObject.setHistory(Arrays.copyOf(history, history.length));
+					«ENDIF»
+					«IF !ac.attributes.empty»
+						
+						«FOR att : ac.attributes»
+							«IF att.type.type.enumerationOrPrimitive»
+								«IF att.size>1»
+									dataObject.set«att.name.toFirstUpper»(Arrays.copyOf(«att.name», «att.name».length));
+								«ELSE»
+									dataObject.set«att.name.toFirstUpper»(«att.name»);
+								«ENDIF»
+							«ELSE»
+«««						DataClass and ExternalType
+								«IF att.size>1»
+									{
+										«att.type.type.name»[] arr = Arrays.copyOf(«att.name», «att.name».length);
+										for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();
+										dataObject.set«att.name.toFirstUpper»(arr);
+									}
+								«ELSE»
+									dataObject.set«att.name.toFirstUpper»(«att.name».deepCopy());
+								«ENDIF»
+							«ENDIF»
+						«ENDFOR»
+					«ENDIF»
+				}
+				
+				protected void restore(IActorClassDataObject obj) {
+					if (!(obj instanceof «dataObjClass»))
+						return;
+					
+					«dataObjClass» dataObject = («dataObjClass») obj;
+					«IF ac.base!=null»
+						
+						super.restore(dataObject);
+					«ENDIF»
+					«IF ac.hasNonEmptyStateMachine»
+						
+						setState(dataObject.getState());
+						history = Arrays.copyOf(dataObject.getHistory(), dataObject.getHistory().length);
+					«ENDIF»
+					«IF !ac.attributes.empty»
+						
+						«FOR att : ac.attributes»
+							«IF att.type.type.enumerationOrPrimitive»
+								«IF att.size>1»
+									set«att.name.toFirstUpper»(Arrays.copyOf(dataObject.get«att.name.toFirstUpper»(), «att.name».length));
+								«ELSE»
+									set«att.name.toFirstUpper»(dataObject.get«att.name.toFirstUpper»());
+								«ENDIF»
+							«ELSE»
+«««						DataClass and ExternalType
+								«IF att.size>1»
+									{
+										«att.type.type.name»[] arr = Arrays.copyOf(dataObject.get«att.name.toFirstUpper»(), «att.name».length);
+										for(int i=0; i<arr.length; ++i) arr[i] = arr[i].deepCopy();
+										set«att.name.toFirstUpper»(arr);
+									}
+								«ELSE»
+									set«att.name.toFirstUpper»(dataObject.get«att.name.toFirstUpper»().deepCopy());
+								«ENDIF»
+							«ENDIF»
+						«ENDFOR»
+					«ENDIF»
+				}
+				
+				protected «dataObjClass» newDataObject() {
+					return new «dataObjClass»();
+				}
+			«ENDIF»
 		};
 	'''
 	}
@@ -292,12 +414,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.base!=null»
-			super.saveAttributes(output);
-			
+				super.saveAttributes(output);
+				
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.type.type instanceof PrimitiveType»
+					«IF att.type.type.enumerationOrPrimitive»
 						«genSavePrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
@@ -316,12 +438,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.base!=null»
-			super.loadAttributes(input);
-			
+				super.loadAttributes(input);
+				
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
-					«IF att.type.type instanceof PrimitiveType»
+					«IF att.type.type.enumerationOrPrimitive»
 						«genLoadPrimitive(att)»
 					«ELSE»
 «««						DataClass and ExternalType (the latter one has to implement Serializable)
@@ -337,7 +459,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genSavePrimitive(Attribute att) {
-		val type = (att.type.type as PrimitiveType).targetName
+		val type = att.type.type.typeName
 		val method = type.saveMethod
 		
 		if (att.size>1)
@@ -361,7 +483,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genLoadPrimitive(Attribute att) {
-		val type = (att.type.type as PrimitiveType).targetName
+		val type = att.type.type.typeName
 		val method = type.loadMethod
 		
 		if (att.size>1)

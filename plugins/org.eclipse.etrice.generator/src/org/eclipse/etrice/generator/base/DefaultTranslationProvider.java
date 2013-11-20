@@ -19,6 +19,8 @@ import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
@@ -124,6 +126,23 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 
 	@Override
 	public void setContainerClass(EObject container) {
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#translateEnums()
+	 */
+	@Override
+	public boolean translateEnums() {
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getEnumText(org.eclipse.etrice.core.room.EnumLiteral)
+	 */
+	@Override
+	public String getEnumText(EnumLiteral literal) {
+		EnumerationType et = (EnumerationType) literal.eContainer();
+		return et.getName()+"."+literal.getName();
 	}
 	
 }

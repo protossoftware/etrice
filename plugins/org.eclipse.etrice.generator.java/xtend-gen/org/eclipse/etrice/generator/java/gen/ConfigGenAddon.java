@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
@@ -134,6 +135,13 @@ public class ConfigGenAddon {
             _xblockexpression_1 = (_xifexpression);
           }
           _switchResult = _xblockexpression_1;
+        }
+      }
+      if (!_matched) {
+        if (aType instanceof EnumerationType) {
+          final EnumerationType _enumerationType = (EnumerationType)aType;
+          _matched=true;
+          _switchResult = "";
         }
       }
       if (!_matched) {
@@ -440,6 +448,13 @@ public class ConfigGenAddon {
             _xblockexpression_1 = (_builder);
           }
           _switchResult = _xblockexpression_1;
+        }
+      }
+      if (!_matched) {
+        if (aType instanceof EnumerationType) {
+          final EnumerationType _enumerationType = (EnumerationType)aType;
+          _matched=true;
+          _switchResult = "";
         }
       }
       _xblockexpression = (_switchResult);

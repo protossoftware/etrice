@@ -24,9 +24,13 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.base.BaseFactory;
+import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -118,6 +122,17 @@ public class TestDetailCodeTranslator {
 		@Override
 		public void setContainerClass(EObject container) {
 		}
+
+		@Override
+		public boolean translateEnums() {
+			return true;
+		}
+
+		@Override
+		public String getEnumText(EnumLiteral literal) {
+			EnumerationType et = (EnumerationType) literal.eContainer();
+			return ">"+et.getName()+"_"+literal.getName()+"<";
+		}
 	}
 
 	private RoomModel model;
@@ -152,6 +167,25 @@ public class TestDetailCodeTranslator {
 		in1.setName("in1");
 		pc.getIncomingMessages().add(in1);
 		
+		EnumerationType et = RoomFactory.eINSTANCE.createEnumerationType();
+		et.setName("MyEnum");
+		EnumLiteral lit = RoomFactory.eINSTANCE.createEnumLiteral();
+		lit.setName("one");
+		IntLiteral intl = BaseFactory.eINSTANCE.createIntLiteral();
+		intl.setValue(1);
+		lit.setLiteral(intl);
+		et.getLiterals().add(lit);
+		lit = RoomFactory.eINSTANCE.createEnumLiteral();
+		lit.setName("three");
+		intl = BaseFactory.eINSTANCE.createIntLiteral();
+		intl.setValue(3);
+		lit.setLiteral(intl);
+		et.getLiterals().add(lit);
+		model.getEnumerationTypes().add(et);
+
+		RefableType enumType = RoomFactory.eINSTANCE.createRefableType();
+		refType.setType(et);
+		
 		ac = RoomFactory.eINSTANCE.createActorClass();
 		model.getActorClasses().add(ac);
 		ac.setName("TestActor");
@@ -171,7 +205,12 @@ public class TestDetailCodeTranslator {
 		attr.setType(EcoreUtil.copy(refType));
 		attr.setSize(8);
 		ac.getAttributes().add(attr);
-
+		
+		attr = RoomFactory.eINSTANCE.createAttribute();
+		attr.setName("enumval");
+		attr.setType(enumType);
+		ac.getAttributes().add(attr);
+		
 		StandardOperation op0 = RoomFactory.eINSTANCE.createStandardOperation();
 		op0.setName("bar0");
 		ac.getOperations().add(op0);
@@ -520,6 +559,16 @@ public class TestDetailCodeTranslator {
 		
 		String result = translator.translateDetailCode(dc);
 		
-		assertEquals("large file", "log(\"my message\", \">location<\");", result);
+		assertEquals("tag", "log(\"my message\", \">location<\");", result);
+	}
+	
+	@Test
+	public void testEnums() {
+		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		dc.getLines().add("int i = MyEnum.one; i = MyEnum.three; i = 1+MyEnum.three; MyEnum.nonexisting;");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("enum", "int i = >MyEnum_one<; i = >MyEnum_three<; i = 1+>MyEnum_three<; MyEnum.nonexisting;", result);
 	}
 }

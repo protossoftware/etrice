@@ -46,6 +46,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -119,11 +120,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 							ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				else {
 					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
-					if (aRef != null) {
-						if (aRef.getMultiplicity() > 1)
-							error("no arrays of actor references supported",
-									ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
-					} else
+					if (aRef == null)
 						error("invalid actor reference",
 								ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				}
@@ -182,14 +179,17 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		else if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 			checkAttrConfigValue(primitive, config);
-		} else if (type instanceof DataType) {
+		}
+		else if (type instanceof ComplexType) {
 			if (config.getValue() != null)
 				error("not available",
 						ConfigPackage.Literals.ATTR_CONFIG__VALUE);
 			if (a.getSize() > 0)
-				error("DataClass arrays not supported",
+				error("ComplexType arrays not supported",
 						ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
-		} else
+		}
+		// TODO-Enum
+		else
 			error("Type not supported",
 					ConfigPackage.Literals.ATTR_CONFIG__ATTRIBUTE);
 	}
@@ -201,6 +201,8 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			return;
 
 		DataType type = attr.getType().getType();
+		
+		// TODO-Enum
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 

@@ -143,6 +143,22 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
+  /**
+   * if {@code -storeDataObj} is set then a call to {@code finalAction()} is generated
+   */
+  public CharSequence finalAction() {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      GlobalSettings _settings = Main.getSettings();
+      boolean _isGenerateStoreDataObj = _settings.isGenerateStoreDataObj();
+      if (_isGenerateStoreDataObj) {
+        _builder.append("finalAction();");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
   public int getHistorySize(final ExpandedActorClass xpac) {
     ActorClass _actorClass = xpac.getActorClass();
     List<State> _allBaseStates = RoomHelpers.getAllBaseStates(_actorClass);

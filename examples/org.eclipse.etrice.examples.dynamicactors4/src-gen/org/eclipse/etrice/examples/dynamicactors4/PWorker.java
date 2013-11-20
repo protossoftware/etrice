@@ -59,10 +59,10 @@ public class PWorker {
 				if (messageStrings[msg.getEvtId()] != "timerTick"){
 					DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 				}
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	
@@ -146,10 +146,10 @@ public class PWorker {
 				if (messageStrings[msg.getEvtId()] != "timerTick"){
 					DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
 				}
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	

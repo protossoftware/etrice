@@ -194,13 +194,31 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__OPTIONAL_ACTOR_CLASSES = 12;
 
 	/**
+	 * The feature id for the '<em><b>Wired Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__WIRED_INSTANCES = 13;
+
+	/**
+	 * The feature id for the '<em><b>Used Enum Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__USED_ENUM_CLASSES = 14;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 13;
+	int ROOT_FEATURE_COUNT = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -1997,6 +2015,309 @@ public interface ETriceGenPackage extends EPackage {
 	int EXPANDED_REFINED_STATE_FEATURE_COUNT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredStructureClass()
+	 * @generated
+	 */
+	int WIRED_STRUCTURE_CLASS = 22;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_STRUCTURE_CLASS__WIRES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Open Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_STRUCTURE_CLASS__OPEN_BINDINGS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Provided Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Required Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES = 3;
+
+	/**
+	 * The number of structural features of the '<em>Wired Structure Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_STRUCTURE_CLASS_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl <em>Open Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenBinding()
+	 * @generated
+	 */
+	int OPEN_BINDING = 23;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_BINDING__PATH = 0;
+
+	/**
+	 * The feature id for the '<em><b>Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_BINDING__PORT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Open Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_BINDING_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl <em>Open Service Connection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenServiceConnection()
+	 * @generated
+	 */
+	int OPEN_SERVICE_CONNECTION = 24;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_SERVICE_CONNECTION__PATH = 0;
+
+	/**
+	 * The feature id for the '<em><b>Protocol</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_SERVICE_CONNECTION__PROTOCOL = 1;
+
+	/**
+	 * The number of structural features of the '<em>Open Service Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_SERVICE_CONNECTION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl <em>Wire</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWire()
+	 * @generated
+	 */
+	int WIRE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Data Driven</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRE__DATA_DRIVEN = 0;
+
+	/**
+	 * The feature id for the '<em><b>Path1</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRE__PATH1 = 1;
+
+	/**
+	 * The feature id for the '<em><b>Path2</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRE__PATH2 = 2;
+
+	/**
+	 * The number of structural features of the '<em>Wire</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredActorClassImpl <em>Wired Actor Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredActorClassImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredActorClass()
+	 * @generated
+	 */
+	int WIRED_ACTOR_CLASS = 26;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS__WIRES = WIRED_STRUCTURE_CLASS__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Open Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS__OPEN_BINDINGS = WIRED_STRUCTURE_CLASS__OPEN_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Provided Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS__PROVIDED_SERVICES = WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Required Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS__REQUIRED_SERVICES = WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS__ACTOR_CLASS = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Wired Actor Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_ACTOR_CLASS_FEATURE_COUNT = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredSubSystemClassImpl <em>Wired Sub System Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredSubSystemClassImpl
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredSubSystemClass()
+	 * @generated
+	 */
+	int WIRED_SUB_SYSTEM_CLASS = 27;
+
+	/**
+	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS__WIRES = WIRED_STRUCTURE_CLASS__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Open Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS__OPEN_BINDINGS = WIRED_STRUCTURE_CLASS__OPEN_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Provided Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS__PROVIDED_SERVICES = WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Required Services</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS__REQUIRED_SERVICES = WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES;
+
+	/**
+	 * The feature id for the '<em><b>Sub System Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS__SUB_SYSTEM_CLASS = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Wired Sub System Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRED_SUB_SYSTEM_CLASS_FEATURE_COUNT = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2004,7 +2325,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 22;
+	int PORT_KIND = 28;
 
 
 	/**
@@ -2159,6 +2480,28 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_OptionalActorClasses();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getWiredInstances <em>Wired Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Wired Instances</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getWiredInstances()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_WiredInstances();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Used Enum Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_UsedEnumClasses();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase <em>Instance Base</em>}'.
@@ -2967,6 +3310,209 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getExpandedRefinedState_InheritedDo();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass <em>Wired Structure Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wired Structure Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass
+	 * @generated
+	 */
+	EClass getWiredStructureClass();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getWires <em>Wires</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Wires</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getWires()
+	 * @see #getWiredStructureClass()
+	 * @generated
+	 */
+	EReference getWiredStructureClass_Wires();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getOpenBindings <em>Open Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Open Bindings</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getOpenBindings()
+	 * @see #getWiredStructureClass()
+	 * @generated
+	 */
+	EReference getWiredStructureClass_OpenBindings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getProvidedServices <em>Provided Services</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Provided Services</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getProvidedServices()
+	 * @see #getWiredStructureClass()
+	 * @generated
+	 */
+	EReference getWiredStructureClass_ProvidedServices();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getRequiredServices <em>Required Services</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Required Services</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getRequiredServices()
+	 * @see #getWiredStructureClass()
+	 * @generated
+	 */
+	EReference getWiredStructureClass_RequiredServices();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding <em>Open Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Open Binding</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenBinding
+	 * @generated
+	 */
+	EClass getOpenBinding();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Path</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPath()
+	 * @see #getOpenBinding()
+	 * @generated
+	 */
+	EAttribute getOpenBinding_Path();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPort <em>Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Port</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPort()
+	 * @see #getOpenBinding()
+	 * @generated
+	 */
+	EReference getOpenBinding_Port();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection <em>Open Service Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Open Service Connection</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection
+	 * @generated
+	 */
+	EClass getOpenServiceConnection();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Path</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getPath()
+	 * @see #getOpenServiceConnection()
+	 * @generated
+	 */
+	EAttribute getOpenServiceConnection_Path();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getProtocol <em>Protocol</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Protocol</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getProtocol()
+	 * @see #getOpenServiceConnection()
+	 * @generated
+	 */
+	EReference getOpenServiceConnection_Protocol();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.Wire <em>Wire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wire</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Wire
+	 * @generated
+	 */
+	EClass getWire();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#isDataDriven <em>Data Driven</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Driven</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Wire#isDataDriven()
+	 * @see #getWire()
+	 * @generated
+	 */
+	EAttribute getWire_DataDriven();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath1 <em>Path1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Path1</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath1()
+	 * @see #getWire()
+	 * @generated
+	 */
+	EAttribute getWire_Path1();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath2 <em>Path2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Path2</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath2()
+	 * @see #getWire()
+	 * @generated
+	 */
+	EAttribute getWire_Path2();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass <em>Wired Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wired Actor Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+	 * @generated
+	 */
+	EClass getWiredActorClass();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass#getActorClass <em>Actor Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Actor Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass#getActorClass()
+	 * @see #getWiredActorClass()
+	 * @generated
+	 */
+	EReference getWiredActorClass_ActorClass();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass <em>Wired Sub System Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wired Sub System Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
+	 * @generated
+	 */
+	EClass getWiredSubSystemClass();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass#getSubSystemClass <em>Sub System Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Sub System Class</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass#getSubSystemClass()
+	 * @see #getWiredSubSystemClass()
+	 * @generated
+	 */
+	EReference getWiredSubSystemClass_SubSystemClass();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3111,6 +3657,22 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__OPTIONAL_ACTOR_CLASSES = eINSTANCE.getRoot_OptionalActorClasses();
+
+		/**
+		 * The meta object literal for the '<em><b>Wired Instances</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__WIRED_INSTANCES = eINSTANCE.getRoot_WiredInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Enum Classes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__USED_ENUM_CLASSES = eINSTANCE.getRoot_UsedEnumClasses();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.
@@ -3753,6 +4315,170 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_REFINED_STATE__INHERITED_DO = eINSTANCE.getExpandedRefinedState_InheritedDo();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredStructureClass()
+		 * @generated
+		 */
+		EClass WIRED_STRUCTURE_CLASS = eINSTANCE.getWiredStructureClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Wires</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_STRUCTURE_CLASS__WIRES = eINSTANCE.getWiredStructureClass_Wires();
+
+		/**
+		 * The meta object literal for the '<em><b>Open Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_STRUCTURE_CLASS__OPEN_BINDINGS = eINSTANCE.getWiredStructureClass_OpenBindings();
+
+		/**
+		 * The meta object literal for the '<em><b>Provided Services</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_STRUCTURE_CLASS__PROVIDED_SERVICES = eINSTANCE.getWiredStructureClass_ProvidedServices();
+
+		/**
+		 * The meta object literal for the '<em><b>Required Services</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_STRUCTURE_CLASS__REQUIRED_SERVICES = eINSTANCE.getWiredStructureClass_RequiredServices();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl <em>Open Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenBinding()
+		 * @generated
+		 */
+		EClass OPEN_BINDING = eINSTANCE.getOpenBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPEN_BINDING__PATH = eINSTANCE.getOpenBinding_Path();
+
+		/**
+		 * The meta object literal for the '<em><b>Port</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPEN_BINDING__PORT = eINSTANCE.getOpenBinding_Port();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl <em>Open Service Connection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenServiceConnection()
+		 * @generated
+		 */
+		EClass OPEN_SERVICE_CONNECTION = eINSTANCE.getOpenServiceConnection();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPEN_SERVICE_CONNECTION__PATH = eINSTANCE.getOpenServiceConnection_Path();
+
+		/**
+		 * The meta object literal for the '<em><b>Protocol</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPEN_SERVICE_CONNECTION__PROTOCOL = eINSTANCE.getOpenServiceConnection_Protocol();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl <em>Wire</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWire()
+		 * @generated
+		 */
+		EClass WIRE = eINSTANCE.getWire();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Driven</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIRE__DATA_DRIVEN = eINSTANCE.getWire_DataDriven();
+
+		/**
+		 * The meta object literal for the '<em><b>Path1</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIRE__PATH1 = eINSTANCE.getWire_Path1();
+
+		/**
+		 * The meta object literal for the '<em><b>Path2</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIRE__PATH2 = eINSTANCE.getWire_Path2();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredActorClassImpl <em>Wired Actor Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredActorClassImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredActorClass()
+		 * @generated
+		 */
+		EClass WIRED_ACTOR_CLASS = eINSTANCE.getWiredActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Actor Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_ACTOR_CLASS__ACTOR_CLASS = eINSTANCE.getWiredActorClass_ActorClass();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredSubSystemClassImpl <em>Wired Sub System Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.WiredSubSystemClassImpl
+		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredSubSystemClass()
+		 * @generated
+		 */
+		EClass WIRED_SUB_SYSTEM_CLASS = eINSTANCE.getWiredSubSystemClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub System Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WIRED_SUB_SYSTEM_CLASS__SUB_SYSTEM_CLASS = eINSTANCE.getWiredSubSystemClass_SubSystemClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.

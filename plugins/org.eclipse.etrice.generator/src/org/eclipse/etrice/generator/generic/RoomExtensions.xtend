@@ -105,8 +105,8 @@ class RoomExtensions {
     
 	/**
 	 * a specialized version of {@link #union(Iterable, Iterable)}
-	 * @param l1 an iterable of type T
-	 * @param l2 a second iterable of type T
+	 * @param in1 an iterable of type T
+	 * @param in2 a second iterable of type T
 	 * @return the union of the two iterables as new list
 	 */
 	def List<Port> punion(Iterable<Port> in1, Iterable<ExternalPort> in2){

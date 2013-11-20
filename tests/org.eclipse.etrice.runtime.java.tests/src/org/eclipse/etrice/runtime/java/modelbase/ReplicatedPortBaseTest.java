@@ -59,10 +59,6 @@ public class ReplicatedPortBaseTest {
 		top.addPathToThread("/TOP/Rcv0", 0);
 		top.addPathToThread("/TOP/Rcv1", 1);
 		top.addPathToThread("/TOP/Rcv2", 1);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Port2");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv2/Port2");
-		top.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv0/Port0");
-		top.addPathToPeer("/TOP/Rcv2/Port2", "/TOP/Rcv1/Port1");
 		return top;
 	}
 	
@@ -77,6 +73,9 @@ public class ReplicatedPortBaseTest {
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
 		MockReplicatedPort port2 = new MockReplicatedPort(eventRcv2, "Port2", 55);
+		
+		port0.connectWith(port2);
+		port1.connectWith(port2);
 		
 		assertEquals(2, port2.getNInterfaceItems());
 		
@@ -123,6 +122,9 @@ public class ReplicatedPortBaseTest {
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
 		
+		port2.connectWith(port0);
+		port2.connectWith(port1);
+		
 		assertEquals(2, port2.getNInterfaceItems());
 		
 		assertEquals(msgSvcCtrl.getMsgSvc(0), port0.getMsgReceiver());
@@ -167,6 +169,9 @@ public class ReplicatedPortBaseTest {
 		MockReplicatedPort port0 = new MockReplicatedPort(eventRcv0, "Port0", 33);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
 		MockReplicatedPort port2 = new MockReplicatedPort(eventRcv2, "Port2", 55);
+
+		port0.connectWith(port2);
+		port1.connectWith(port2);
 		
 		assertEquals(1, port0.getNInterfaceItems());
 		assertEquals(2, port2.getNInterfaceItems());

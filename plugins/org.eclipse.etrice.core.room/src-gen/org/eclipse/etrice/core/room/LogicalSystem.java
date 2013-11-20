@@ -16,8 +16,8 @@ import org.eclipse.emf.common.util.EList;
  * 
  * <p>
  * The logical system is the root of the instance tree of the generator model.
- * Each {@link SubSystemRef} is turned into a {@link SubSystemInstance} and each
- * {@link ActorRef} is turned into an {@link ActorInstance}.
+ * Each {@link SubSystemRef} is turned into a {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance} and each
+ * {@link ActorRef} is turned into an {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.
  * </p>
  * 
  * <!-- end-model-doc -->

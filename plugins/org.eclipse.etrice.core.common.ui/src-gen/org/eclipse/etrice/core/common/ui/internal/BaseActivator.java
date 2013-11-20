@@ -24,6 +24,7 @@ import com.google.inject.Module;
 public class BaseActivator extends AbstractUIPlugin {
 	
 	public static final String ORG_ECLIPSE_ETRICE_CORE_COMMON_BASE = "org.eclipse.etrice.core.common.Base";
+	public static final String ORG_ECLIPSE_ETRICE_CORE_COMMON_BASETEST = "org.eclipse.etrice.core.common.BaseTest";
 	
 	private static final Logger logger = Logger.getLogger(BaseActivator.class);
 	
@@ -76,6 +77,9 @@ public class BaseActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_ETRICE_CORE_COMMON_BASE.equals(grammar)) {
 			return new org.eclipse.etrice.core.common.BaseRuntimeModule();
 		}
+		if (ORG_ECLIPSE_ETRICE_CORE_COMMON_BASETEST.equals(grammar)) {
+			return new org.eclipse.etrice.core.common.BaseTestRuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -83,6 +87,9 @@ public class BaseActivator extends AbstractUIPlugin {
 	protected Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_ETRICE_CORE_COMMON_BASE.equals(grammar)) {
 			return new org.eclipse.etrice.core.common.ui.BaseUiModule(this);
+		}
+		if (ORG_ECLIPSE_ETRICE_CORE_COMMON_BASETEST.equals(grammar)) {
+			return new org.eclipse.etrice.core.common.ui.BaseTestUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

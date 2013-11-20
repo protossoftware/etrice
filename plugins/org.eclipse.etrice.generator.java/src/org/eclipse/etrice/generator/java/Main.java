@@ -36,6 +36,7 @@ import com.google.inject.Inject;
 public class Main extends AbstractGenerator {
 	
 	public static final String OPTION_GEN_PERSIST = "-persistable";
+	public static final String OPTION_GEN_STORE_DATA_OBJ = "-storeDataObj";
 	
 	/**
 	 * print usage message to output/console
@@ -43,9 +44,11 @@ public class Main extends AbstractGenerator {
 	protected void printUsage() {
 		output.println(this.getClass().getName()+getCommonOptions()
 				+" ["+OPTION_GEN_PERSIST+"]"
+				+" ["+OPTION_GEN_STORE_DATA_OBJ+"]"
 				+" <list of model file paths>");
 		output.println(getCommonOptionDescriptions());
 		output.println("      -persistable                       # if specified make actor classes persistable");
+		output.println("      -storeDataObj                      # if specified equip actor classes with store/restore using POJOs");
 	}
 
 	/**
@@ -85,6 +88,10 @@ public class Main extends AbstractGenerator {
 	protected boolean parseOption(String arg, Iterator<String> it) {
 		if (arg.equals(OPTION_GEN_PERSIST)) {
 			getSettings().setGeneratePersistenceInterface(true);
+			return true;
+		}
+		else if (arg.equals(OPTION_GEN_STORE_DATA_OBJ)) {
+			getSettings().setGenerateStoreDataObj(true);
 			return true;
 		}
 		

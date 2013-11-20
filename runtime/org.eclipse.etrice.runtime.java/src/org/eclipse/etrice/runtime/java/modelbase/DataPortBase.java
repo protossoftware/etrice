@@ -35,4 +35,14 @@ public class DataPortBase extends RTObject {
 		return localId;
 	}
 
+	public static void connect(IRTObject obj, String path1, String path2) {
+		IRTObject obj1 = obj.getObject(path1);
+		IRTObject obj2 = obj.getObject(path2);
+		if (obj1 instanceof DataSendPort && obj2 instanceof DataReceivePort) {
+			((DataReceivePort)obj2).connect((DataSendPort) obj1);
+		}
+		else if (obj2 instanceof DataSendPort && obj1 instanceof DataReceivePort) {
+			((DataReceivePort)obj1).connect((DataSendPort) obj2);
+		}
+	}
 }

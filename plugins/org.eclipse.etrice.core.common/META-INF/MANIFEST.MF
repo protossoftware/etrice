@@ -19,11 +19,14 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.common,
  org.eclipse.etrice.core.common.base,
  org.eclipse.etrice.core.common.base.impl,
  org.eclipse.etrice.core.common.base.util,
+ org.eclipse.etrice.core.common.basetest,
+ org.eclipse.etrice.core.common.basetest.impl,
+ org.eclipse.etrice.core.common.basetest.util,
  org.eclipse.etrice.core.common.converter,
  org.eclipse.etrice.core.common.formatting,
  org.eclipse.etrice.core.common.generator,

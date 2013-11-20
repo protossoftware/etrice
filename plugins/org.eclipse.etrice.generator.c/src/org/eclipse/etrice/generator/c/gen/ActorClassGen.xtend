@@ -89,6 +89,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR dataClass : root.getReferencedDataClasses(ac)»
 			#include «dataClass.includePath»
 		«ENDFOR»
+		«FOR enumClass : root.getReferencedEnumClasses(ac)»
+			#include «enumClass.includePath»
+		«ENDFOR»
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			#include «pc.includePath»
 		«ENDFOR»

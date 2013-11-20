@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -43,6 +44,8 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getWiredInstances <em>Wired Instances</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}</li>
  * </ul>
  * </p>
  *
@@ -266,6 +269,38 @@ public interface Root extends EObject {
 	EList<ActorClass> getOptionalActorClasses();
 
 	/**
+	 * Returns the value of the '<em><b>Wired Instances</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Wired Instances</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Wired Instances</em>' containment reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_WiredInstances()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<WiredStructureClass> getWiredInstances();
+
+	/**
+	 * Returns the value of the '<em><b>Used Enum Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.EnumerationType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Enum Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Enum Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedEnumClasses()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<EnumerationType> getUsedEnumClasses();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * @param cls a room class
 	 * @return all room models referenced directly or indirectly by this room class
@@ -288,7 +323,7 @@ public interface Root extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param cls a {@link RoomClass}, actually a {@link DataClass}, a {@link ProtocoClass} or an {@link ActorClass}
+	 * @param cls a {@link RoomClass}, actually a {@link DataClass}, a {@link ProtocolClass} or an {@link ActorClass}
 	 * @return all data classes that are directly or indirectly referenced by {@code cls} and also
 	 *   descending into base classes
 	 * <!-- end-user-doc -->
@@ -296,6 +331,14 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	EList<DataClass> getReferencedDataClasses(RoomClass cls);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<EnumerationType> getReferencedEnumClasses(RoomClass cls);
 
 	/**
 	 * <!-- begin-user-doc -->

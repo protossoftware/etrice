@@ -227,15 +227,15 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param attribs a list of {@link Attribute}s
+   * @param EnumTest a list of {@link Attribute}s
    * @return code declaring the attributes
    */
-  public CharSequence attributes(final List<Attribute> attribs) {
+  public CharSequence attributes(final List<Attribute> EnumTest) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- attributes ---------------------*/");
     _builder.newLine();
     {
-      for(final Attribute attribute : attribs) {
+      for(final Attribute attribute : EnumTest) {
         CharSequence _attributeDeclaration = this.attributeDeclaration(attribute);
         _builder.append(_attributeDeclaration, "");
         _builder.newLineIfNotEmpty();
@@ -351,16 +351,16 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param attribs a list of {@link Attribute}s
+   * @param EnumTest a list of {@link Attribute}s
    * @param classname the name of the defining class
    * @return code declaring setters and getters for the attributes
    */
-  public CharSequence attributeSettersGettersDeclaration(final List<Attribute> attribs, final String classname) {
+  public CharSequence attributeSettersGettersDeclaration(final List<Attribute> EnumTest, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
-      for(final Attribute attribute : attribs) {
+      for(final Attribute attribute : EnumTest) {
         CharSequence _setterHeader = this.setterHeader(attribute, classname);
         _builder.append(_setterHeader, "");
         _builder.append(";");
@@ -375,16 +375,16 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param attribs a list of {@link Attribute}s
+   * @param EnumTest a list of {@link Attribute}s
    * @param classname the name of the defining class
    * @return code defining setters and getters for the attributes
    */
-  public CharSequence attributeSettersGettersImplementation(final List<Attribute> attribs, final String classname) {
+  public CharSequence attributeSettersGettersImplementation(final List<Attribute> EnumTest, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
-      for(final Attribute attribute : attribs) {
+      for(final Attribute attribute : EnumTest) {
         CharSequence _setterHeader = this.setterHeader(attribute, classname);
         _builder.append(_setterHeader, "");
         _builder.append(" {");
@@ -486,7 +486,7 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param attribs a list of {@link Attribute}s
+   * @param attributes a list of {@link Attribute}s
    * @return an argument list for the attributes
    */
   public CharSequence argList(final List<Attribute> attributes) {
@@ -519,7 +519,7 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param attribs an iterable of {@link Attribute}s representing a path
+   * @param EnumTest an iterable of {@link Attribute}s representing a path
    * @param classname the name of the defining class
    * @return the invocation code for the call of a setter
    */

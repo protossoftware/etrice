@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.PortClass;
@@ -105,8 +106,8 @@ public class Initialization {
         } else {
           RefableType _type_1 = a.getType();
           DataType _type_2 = _type_1.getType();
-          boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_2);
-          _and = (_not && _isPrimitive);
+          boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
+          _and = (_not && _isEnumerationOrPrimitive);
         }
         _or = (_equals || _and);
       }
@@ -234,6 +235,51 @@ public class Initialization {
               boolean _startsWith = _trim.startsWith("{");
               boolean _not_1 = (!_startsWith);
               _and = (_and_1 && _not_1);
+            }
+            if (_and) {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("{ ");
+              {
+                int _size_1 = a.getSize();
+                IntegerRange _upTo = new IntegerRange(1, _size_1);
+                boolean _hasElements = false;
+                for(final Integer i : _upTo) {
+                  if (!_hasElements) {
+                    _hasElements = true;
+                  } else {
+                    _builder.appendImmediate(", ", "");
+                  }
+                  _builder.append(value, "");
+                }
+              }
+              _builder.append(" }");
+              _xifexpression_1 = _builder;
+            } else {
+              _xifexpression_1 = value;
+            }
+            _xblockexpression_1 = (_xifexpression_1);
+          }
+          _switchResult = _xblockexpression_1;
+        }
+      }
+      if (!_matched) {
+        if (aType instanceof EnumerationType) {
+          final EnumerationType _enumerationType = (EnumerationType)aType;
+          _matched=true;
+          CharSequence _xblockexpression_1 = null;
+          {
+            String value = RoomHelpers.getDefaultValue(_enumerationType);
+            CharSequence _xifexpression_1 = null;
+            boolean _and = false;
+            int _size = a.getSize();
+            boolean _greaterThan = (_size > 0);
+            if (!_greaterThan) {
+              _and = false;
+            } else {
+              String _trim = value.trim();
+              boolean _startsWith = _trim.startsWith("{");
+              boolean _not = (!_startsWith);
+              _and = (_greaterThan && _not);
             }
             if (_and) {
               StringConcatenation _builder = new StringConcatenation();

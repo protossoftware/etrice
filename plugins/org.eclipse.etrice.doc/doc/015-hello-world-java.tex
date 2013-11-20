@@ -21,20 +21,18 @@ The easiest way to create a new \eTrice{} Project is to use the eclipse project 
 menu select \emph{File->New->Project} and create a new \emph{Empty eTrice Java Project} and name it \textbf{HelloWorld}.
 
 \includegraphics[width=0.8\textwidth]{images/015-HelloWorld10.png}
-% !images/015-HelloWorld10.png!
 
+On the second wizard page use the selected default ("Use Eclipse JDT build") and press "Finish".
 The wizard creates everything that is needed to create, build and run an \eTrice{} model. The resulting 
 project should look like this:
 
 \includegraphics{images/015-HelloWorld11.png}
-% !images/015-HelloWorld11.png!
 
 Within the model directory the model file \emph{HelloWorld.room} was created. Open the 
 \emph{HelloWorld.room} file and delete the contents of the file. Open the content assist with Ctrl+Space 
 and select \emph{RoomModel - model skeleton}.
 
 \includegraphics[width=0.6\textwidth]{images/015-HelloWorld12.png}
-% !images/015-HelloWorld12.png!   
 
 Edit the template variables by typing the new names and jumping with Tab from name to name.
 
@@ -57,26 +55,70 @@ RoomModel HelloWorld_Model {
 }
 \end{lstlisting}
 
+The physical model has already been created for us in file model/HelloWorld.etphys.
+We can just leave it as it is.
+
+\begin{lstlisting}[language=etPhys]
+PhysicalModel PhysicalModel1 {
+
+	PhysicalSystem PhysSys1 {
+		NodeRef nodeRef1 : NodeClass1
+	}
+
+	NodeClass NodeClass1 {
+		runtime = RuntimeClass1
+		priomin = -10
+		priomax = 10
+		DefaultThread PhysicalThread1 {
+			execmode = mixed
+			interval = 100 ms
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 32
+			msgpoolsize = 10
+		}
+	}
+
+	RuntimeClass RuntimeClass1 {
+		model = multiThreaded
+	}
+}
+\end{lstlisting}
+
+The physical model defines the setup of your nodes with their attributes like threads and mode of execution. In this case we define one node with one thread. 
+
+Similar for the mapping model model/HelloWorld.etmap which is used to deploy the logical system onto the physical system.
+
+\begin{lstlisting}[language=etMap]
+MappingModel MappingModel1 {
+	import HelloWorld_Model.* from "HelloWorldC.room"
+	import PhysicalModel1.* from "HelloWorldC.etphys"
+	Mapping LogSys1 -> PhysSys1 {
+		SubSystemMapping subSysRef1 -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}
+\end{lstlisting}
+
 \input{015.1-hello-world-create-statemachine}
 
 \subsection{Build and run the model}
 
 Now the model is finished and the source code can be generated. The project wizard has created a launch 
-configuration that is responsible for generating the source code. In the project \textit{HelloWorld} right click \emph{\_HelloWorld.launch} and run it as \emph{gen\_HelloWorld}. 
+configuration that is responsible for generating the source code. In the project \textit{HelloWorld} right click \emph{gen\_HelloWorld.launch} and run it as \emph{gen\_HelloWorld}. 
 
 \includegraphics[width=0.8\textwidth]{images/015-HelloWorld06.png}
-% !images/015-HelloWorld06.png!
 
-The source code for the model will be generated into the folder \emph{src-gen}. The main function will be contained in \emph{SubSystem\_HelloWorldRunner.java}. Select this file and run it as Java application.
+The source code for the model will be generated into the folder \emph{src-gen}. The main function will be contained in \emph{HelloWorld/Nod\_nodeRef1\_subSysRef1Runner.java}.
+Select this file and run it as Java application or use the generated launch configuration \emph{run\_HelloWorld.launch}.
 
 \includegraphics{images/015-HelloWorld07.png}
-% !images/015-HelloWorld07.png!
 
 
-The Hello World application starts and the string \emph{"Hello World"} will be printed into the console window. To stop the application the user must type \emph{quit} in the console window.
+The Hello World application starts and the string \emph{"Hello World"} will be printed into the console window. To terminate the application the user must enter \emph{quit} in the console window.
 
 \includegraphics[width=0.6\textwidth]{images/015-HelloWorld08.png}
-% !images/015-HelloWorld08.png!
 
 \input{015.2-hello-world-open-msc}
 

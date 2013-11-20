@@ -1,0 +1,56 @@
+\section{eTrice Java Projects}
+
+There are two flavors of \eTrice{} Java projects. The first one uses the Eclipse JDT build and the
+second one uses Maven to build and deploy an \eTrice{} application.
+
+The kind of build can be selected in the "Empty eTrice Java project" wizard.
+
+\subsection{Eclipse JDT Build}
+
+If this kind of build is chosen the \eTrice{} new project wizard requires the \texttt{org.eclipse.etrice.runtime.java}
+project in the workspace and adds a dependency to it.
+
+If the project uses other \eTrice{} projects (e.g. the \texttt{org.eclipse.etrice.modellib.java})
+they have to be added to the Java build path as well.
+
+The \eTrice{} new project wizard creates the following files for the JDT build
+\begin{itemize}
+\item a ROOM model file with exemplary classes
+\item a simple physical model
+\item a model mapping the logical entities of the ROOM model to the physical entities
+\item a launch configuration that invokes the \eTrice{} Java code generator for the new models
+\item a launch configuration that launches the main method of the generated code
+\end{itemize}
+
+If "build automatically" is chosen the newly created model can be generated and launched with just two clicks.
+
+\subsection{Maven Build}
+
+The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed
+by the Maven pom.xml but the e2m builder maps them as JDT visible dependencies to the project class path.
+
+As a preparation the \texttt{org.eclipse.etrice.runtime.java} should be imported to the workspace
+using the \eTrice{} new wizard. Then execute the \texttt{install\_org.eclipse.etrice.runtime.java.launch}
+Maven launch configuration (or execute \texttt{mvn install} from the command line). This installs the \eTrice{}
+Java runtime as a Maven component to the local repository.
+
+Then perform similar steps for the \texttt{org.eclipse.etrice.modellib.java}.
+
+The \eTrice{} new project wizard creates the following files for the Maven build
+\begin{itemize}
+\item a ROOM model file with exemplary classes
+\item a simple physical model
+\item a model mapping the logical entities of the ROOM model to the physical entities
+\item a launch configuration that invokes the \eTrice{} Java code generator for the new models
+\item a launch configuration that builds and deploys the generated application
+\item a launch configuration that launches the deployed jar file
+\item a launch configuration that launches the main method of the generated code (for convenience or
+if the generated code should be launched in debug mode)
+\end{itemize}
+
+After the new project is created the m2e builder creates the dependencies in the project class path.
+Therefore also JDT can compile and launch the application.
+
+When the packaging of the project succeeded two jar files have been created in the \texttt{target} folder.
+The larger one with "jar-with-dependencies" in its name also contains the referenced Maven components. It can be
+launched using the \texttt{runjar\_*} launch configuration.

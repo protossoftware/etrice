@@ -23,11 +23,11 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -133,6 +133,15 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _builder.append("#include ");
         String _includePath = this._cExtensions.getIncludePath(dataClass);
         _builder.append(_includePath, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EList<EnumerationType> _referencedEnumClasses = root.getReferencedEnumClasses(pc);
+      for(final EnumerationType enumClass : _referencedEnumClasses) {
+        _builder.append("#include ");
+        String _includePath_1 = this._cExtensions.getIncludePath(enumClass);
+        _builder.append(_includePath_1, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -386,7 +395,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             VarDecl _data_2 = message.getData();
             RefableType _refType_1 = _data_2.getRefType();
             DataType _type_1 = _refType_1.getType();
-            boolean _not_1 = (!(_type_1 instanceof PrimitiveType));
+            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+            boolean _not_1 = (!_isEnumerationOrPrimitive);
             if (_not_1) {
               _or = true;
             } else {
@@ -482,12 +492,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-          public Boolean apply(final Message m) {
-            VarDecl _data = m.getData();
-            boolean _notEquals = (!Objects.equal(_data, null));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/* data driven send port (conjugated) */");
@@ -573,7 +583,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             VarDecl _data_4 = message.getData();
             RefableType _refType_3 = _data_4.getRefType();
             DataType _type_2 = _refType_3.getType();
-            boolean _not = (!(_type_2 instanceof PrimitiveType));
+            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
+            boolean _not = (!_isEnumerationOrPrimitive);
             _and = (hasData && _not);
           }
           if (_and) {
@@ -619,12 +630,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-          public Boolean apply(final Message m) {
-            VarDecl _data = m.getData();
-            boolean _notEquals = (!Objects.equal(_data, null));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       StringConcatenation _builder = new StringConcatenation();
       {
@@ -638,7 +649,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           VarDecl _data_1 = message.getData();
           RefableType _refType_1 = _data_1.getRefType();
           DataType _type_1 = _refType_1.getType();
-          boolean _not = (!(_type_1 instanceof PrimitiveType));
+          boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+          boolean _not = (!_isEnumerationOrPrimitive);
           if (_not) {
             _xifexpression = "*";
           } else {
@@ -754,7 +766,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             VarDecl _data_3 = message.getData();
             RefableType _refType_2 = _data_3.getRefType();
             DataType _type_1 = _refType_2.getType();
-            boolean _not = (!(_type_1 instanceof PrimitiveType));
+            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+            boolean _not = (!_isEnumerationOrPrimitive);
             if (_not) {
               _or = true;
             } else {
@@ -781,7 +794,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             VarDecl _data_5 = message.getData();
             RefableType _refType_4 = _data_5.getRefType();
             DataType _type_2 = _refType_4.getType();
-            boolean _not_1 = (!(_type_2 instanceof PrimitiveType));
+            boolean _isEnumerationOrPrimitive_1 = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
+            boolean _not_1 = (!_isEnumerationOrPrimitive_1);
             _and_3 = (hasData && _not_1);
           }
           if (!_and_3) {

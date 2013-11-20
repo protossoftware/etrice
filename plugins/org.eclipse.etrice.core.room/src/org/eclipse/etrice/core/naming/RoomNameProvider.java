@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.GuardedTransition;
 import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.NonInitialTransition;
@@ -79,7 +80,7 @@ public class RoomNameProvider {
 		public String caseChoicePoint(ChoicePoint object) { return object.getName(); }
 		public String caseTrPoint(TrPoint object) { return object.getName(); }
 		public String caseTransition(Transition object) { return RoomNameProvider.getTransitionName(object); }
-		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return object.getName(); }
+		public String caseActorRef(org.eclipse.etrice.core.room.ActorRef object) { return "ActorRef '"+object.getName()+"'"; }
 		public String casePort(org.eclipse.etrice.core.room.Port object) { return "Port '"+object.getName()+"'"; }
 		public String caseSAP(org.eclipse.etrice.core.room.SAP object) { return "SAP '"+object.getName()+"'"; }
 		public String caseSPP(org.eclipse.etrice.core.room.SPP object) { return "SPP '"+object.getName()+"'"; }
@@ -332,7 +333,7 @@ public class RoomNameProvider {
 	/**
 	 * @param sg a {@link StateGraph} serving as name space
 	 * @return a unique name for a new {@link Transition} (has to be unique among
-	 * 		all {@link StateGraphItems} of the state graph)
+	 * 		all {@link StateGraphItem}s of the state graph)
 	 */
 	public static String getUniqueTransitionName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
@@ -349,7 +350,7 @@ public class RoomNameProvider {
 	/**
 	 * @param sg a {@link StateGraph} serving as name space
 	 * @return a unique name for a new {@link InitialTransition} (has to be unique among
-	 * 		all {@link StateGraphItems} of the state graph)
+	 * 		all {@link StateGraphItem}s of the state graph)
 	 */
 	public static String getUniqueInitialTransitionName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
@@ -369,7 +370,7 @@ public class RoomNameProvider {
 	/**
 	 * @param sg a {@link StateGraph} serving as name space
 	 * @return a unique name for a new {@link ChoicePoint} (has to be unique among
-	 * 		all {@link StateGraphItems} of the state graph)
+	 * 		all {@link StateGraphItem}s of the state graph)
 	 */
 	public static String getUniqueChoicePointName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
@@ -386,7 +387,7 @@ public class RoomNameProvider {
 	/**
 	 * @param sg a {@link StateGraph} serving as name space
 	 * @return a unique name for a new {@link TrPoint} (has to be unique among
-	 * 		all {@link StateGraphItems} of the state graph)
+	 * 		all {@link StateGraphItem}s of the state graph)
 	 */
 	public static String getUniqueTrPointName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
@@ -403,7 +404,7 @@ public class RoomNameProvider {
 	/**
 	 * @param sg a {@link StateGraph} serving as name space
 	 * @return a unique name for a new {@link State} (has to be unique among
-	 * 		all {@link StateGraphItems} of the state graph)
+	 * 		all {@link StateGraphItem}s of the state graph)
 	 */
 	public static String getUniqueStateName(StateGraph sg) {
 		Set<String> names = RoomHelpers.getAllNames(sg);
@@ -657,7 +658,7 @@ public class RoomNameProvider {
 	}
 
 	/**
-	 * @param ep a {@link Binding}
+	 * @param bind a {@link Binding}
 	 * @return a human readable name for the binding
 	 */
 	public static String getDisplayName(Binding bind) {

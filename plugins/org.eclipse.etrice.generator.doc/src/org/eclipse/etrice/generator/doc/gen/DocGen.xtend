@@ -34,6 +34,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import org.eclipse.etrice.core.room.EnumerationType
 
 @Singleton
 class DocGen {
@@ -127,6 +128,8 @@ class DocGen {
 		«root.generateAllSubSysClassDocs(model)»
 		\section{Protocol Class Description}
 		«root.generateAllProtocolClassDocs(model)»
+		\section{Enumeration Description}
+		«root.generateAllEnumerationDocs(model)»
 		\section{Data Class Description}
 		«root.generateAllDataClassDocs(model)»
 		\section{Actor Class Description}
@@ -143,11 +146,11 @@ class DocGen {
 	}
 	
 	def private generateLogicalSystemDoc(Root root, RoomModel model, LogicalSystem system) {
-		var filenamei = model.docGenerationTargetPath + "images\\" + system.name + "_instanceTree.jpg"
+		var filenamei = model.docGenerationTargetPath + "images\\" + system.name.escapedString + "_instanceTree.jpg"
 		filenamei = filenamei.replaceAll("\\\\","/");
 		var latexFilenamei = filenamei.replaceAll("/","//") 
 		'''
-		\level{2}{«system.name»}
+		\level{2}{«system.name.escapedString»}
 		«system.docu.generateDocText»
 		\level{3}{Instance Tree}
 		«IF fileExists(filenamei).equals("true")»
@@ -164,18 +167,46 @@ class DocGen {
 	}
 
 	def private generateSubSysClassDoc(Root root, RoomModel model, SubSystemClass ssc) {
-		var filename = model.docGenerationTargetPath + "images\\" + ssc.name + "_structure.jpg"
+		var filename = model.docGenerationTargetPath + "images\\" + ssc.name.escapedString + "_structure.jpg"
 		filename = filename.replaceAll("\\\\","/");
 		var latexFilename = filename.replaceAll("/","//")
 		
 		'''
-		\level{2}{«ssc.name»}
+		\level{2}{«ssc.name.escapedString»}
 		«ssc.docu.generateDocText»
 		\level{3}{Structure}
 		«IF fileExists(filename).equals("true")»
 			«includeGraphics(latexFilename,"0.4",ssc.name + " Structure")»
 		«ENDIF»
 		'''
+	}
+	
+	def private generateAllEnumerationDocs(Root root, RoomModel model){'''
+		«FOR et : model.enumerationTypes»
+			«root.generateEnumerationDoc(et)»
+		«ENDFOR»		
+	'''}
+
+	def private generateEnumerationDoc(Root root, EnumerationType dc) {
+	'''
+		\level{2} {«dc.name.escapedString»}
+		«dc.docu.generateDocText»
+		«IF dc.primitiveType!=null»
+			The literals of this enumeration are based on PrimitiveType «dc.primitiveType.name.escapedString».
+		«ELSE»
+			The literals of this enumeration are of type \texttt{int}.
+		«ENDIF»
+		\level{3}{Literals}
+		\begin{tabular}[ht]{|l|r|r|r|}
+		\hline
+		\textbf{Name} & \textbf{Value} & \textbf{Hex Value} & \textbf{Binary Value}\\
+		«FOR lit: dc.literals»
+			\hline
+			«lit.name.escapedString» & «lit.literalValue» & 0x«Long.toHexString(lit.literalValue)» & «Long.toBinaryString(lit.literalValue)»\\
+		«ENDFOR»
+		\hline
+		\end{tabular}
+	'''	
 	}
 	
 	def private generateAllDataClassDocs(Root root, RoomModel model){'''
@@ -185,7 +216,7 @@ class DocGen {
 	'''}
 
 	def private generateDataClassDoc(Root root, DataClass dc) {'''
-		\level{2} {«dc.name»}
+		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
 		\level{3}{Attributes}
 		«dc.attributes.generateAttributesDoc»
@@ -203,7 +234,7 @@ class DocGen {
 	}
 	
 	def private dispatch generateProtocolClassDoc(Root root, ProtocolClass pc) {'''
-		\level{2} {«pc.name»}
+		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
 		\level{3}{Incoming Messages}
 	
@@ -212,7 +243,7 @@ class DocGen {
 		Message & Data & Description\\
 		«FOR ims : pc.allIncomingMessages»
 			\hline
-			«ims.name» & «IF ims.data != null» «ims.data.name» «ENDIF» & «ims.docu.generateDocText»\\
+			«ims.name.escapedString» & «IF ims.data != null» «ims.data.name.escapedString» «ENDIF» & «ims.docu.generateDocText»\\
 		«ENDFOR»
 		\hline
 		\end{tabular}
@@ -223,7 +254,7 @@ class DocGen {
 		Message & Data & Description\\
 		«FOR oms : pc.allOutgoingMessages»
 			\hline
-			«oms.name» & «IF oms.data != null» «oms.data.name» «ENDIF» & «oms.docu.generateDocText»\\
+			«oms.name.escapedString» & «IF oms.data != null» «oms.data.name.escapedString» «ENDIF» & «oms.docu.generateDocText»\\
 		«ENDFOR»
 		\hline
 		\end{tabular}			
@@ -231,16 +262,16 @@ class DocGen {
 	}
 	
 	def private dispatch generateProtocolClassDoc(Root root, CompoundProtocolClass pc) {'''
-		\level{2} {«pc.name»}
+		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
 		\level{3}{Sub Protocols}
 		
 		\begin{tabular}[ht]{|l|l|}
 		\hline
-		Name & Protocol\\
+		\textbf{Name} & \textbf{Protocol}\\
 		«FOR sub : pc.subProtocols»
 			\hline
-			«sub.name» & «sub.protocol.name»\\
+			«sub.name.escapedString» & «sub.protocol.name.escapedString»\\
 		«ENDFOR»
 		\hline
 		\end{tabular}
@@ -259,7 +290,7 @@ class DocGen {
 		filename = filename.replaceAll("\\\\","/");
 		var latexFilename = filename.replaceAll("/","//") 
 		'''
-		\level{2}{«ac.name»}
+		\level{2}{«ac.name.escapedString»}
 		«ac.docu.generateDocText»
 		\level{3}{Structure}
 		
@@ -302,7 +333,7 @@ class DocGen {
 
 		«FOR c : ac.stateMachine.chPoints»
 			«IF c.docu != null»
-				\textbf{Choicepoint description} \textit{«c.name»}:
+				\textbf{Choicepoint description} \textit{«c.name.escapedString»}:
 				\newline
 				«generateDocText(c.docu)»
 				\newline\newline
@@ -342,7 +373,7 @@ class DocGen {
 
 		«FOR c : state.subgraph.chPoints»
 			«IF c.docu != null»
-				\textbf{Choicepoint description} \textit{«c.name»}:
+				\textbf{Choicepoint description} \textit{«c.name.escapedString»}:
 				\newline
 				«generateDocText(c.docu)»
 				\newline\newline
@@ -363,10 +394,10 @@ class DocGen {
 		«IF !attributes.empty»
 			\begin{tabular}[ht]{|l|l|l|}
 			\hline
-			Name & Type & Description\\
+			\textbf{Name} & \textbf{Type} & \textbf{Description}\\
 			«FOR at : attributes»
 			\hline
-			«at.name» & «at.type.type.name» & «generateDocText(at.docu)»\\
+			«at.name.escapedString» & «at.type.type.name.escapedString» & «generateDocText(at.docu)»\\
 			«ENDFOR»	
 			\hline
 			\end{tabular}
@@ -379,11 +410,11 @@ class DocGen {
 		«FOR op : operations»
 			\begin{tabular}[ht]{|l|l|}
 			\hline		
-				Name: & «op.name»\\
+				Name: & «op.name.escapedString»\\
 				\hline
-				ReturnType: &  «IF op.returnType != null»«op.returnType.type.name»«ELSE»void«ENDIF»\\
+				ReturnType: &  «IF op.returnType != null»«op.returnType.type.name.escapedString»«ELSE»void«ENDIF»\\
 				\hline
-				Arguments: & «FOR pa : op.arguments SEPARATOR ", "»«pa.name»:«pa.refType.type.name»«ENDFOR»\\
+				Arguments: & «FOR pa : op.arguments SEPARATOR ", "»«pa.name.escapedString»:«pa.refType.type.name.escapedString»«ENDFOR»\\
 				«IF op.docu != null»
 					\hline
 					«IF op.docu.toString.length > 85»
@@ -399,10 +430,15 @@ class DocGen {
 		'''
 	}
 	
-	def private generateDocText(Documentation doc){'''
+	def private generateDocText(Documentation doc){
+		'''
 		«IF doc!=null»
-			«doc.lines.join()»
-		«ENDIF»		
+			% begin text from user Documentation
+			«FOR line: doc.lines»
+				«line»
+			«ENDFOR»
+			% end text from user Documentation
+		«ENDIF»
 		'''
 	}
 	
@@ -429,5 +465,9 @@ class DocGen {
 			\figcaption{«latexCaption»}
 			\end{center}
 		'''
+	}
+	
+	def private escapedString(String text) {
+		text.replace("_","\\_")
 	}
 }

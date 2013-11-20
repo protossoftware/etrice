@@ -36,6 +36,8 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
@@ -214,6 +216,8 @@ class CExtensions implements ILanguageExtension {
 		switch dt{
 			PrimitiveType:
 				toValueLiteral(dt, dt.defaultValueLiteral)
+			EnumerationType:
+				RoomHelpers::getDefaultValue(dt)
 			ExternalType:{
 				if (dt.defaultValueLiteral != null )
 					return dt.getDefaultValueLiteral
@@ -272,7 +276,9 @@ class CExtensions implements ILanguageExtension {
 			return newArrayList("", "", "")
 			
 		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
-			(data.getRefType().getType() as PrimitiveType).getTargetName()
+			(data.getRefType().getType() as PrimitiveType).targetName
+		else if (data.getRefType().getType() instanceof EnumerationType)
+			(data.getRefType().getType() as EnumerationType).targetType
 		else
 			data.getRefType().getType().getName()
 			
@@ -283,13 +289,16 @@ class CExtensions implements ILanguageExtension {
 			else
 				typeName
 		}
+		else if (data.getRefType().getType() instanceof EnumerationType) {
+			(data.getRefType().getType() as EnumerationType).castType
+		}
 		else
 			typeName
 		castTypeName = castTypeName+"*"
 		var deRef = "*"
 		
 		val isRef = data.getRefType().isRef()
-		val isPrim = (data.getRefType().getType() instanceof PrimitiveType)
+		val isPrim = (data.getRefType().getType() instanceof PrimitiveType || data.getRefType().getType() instanceof EnumerationType)
 		if (isRef) {
 				typeName = typeName+"*"
 				castTypeName = castTypeName+"*"

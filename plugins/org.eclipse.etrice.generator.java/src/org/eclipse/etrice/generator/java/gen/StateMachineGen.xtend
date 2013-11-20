@@ -69,6 +69,17 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		}
 	'''}
 	
+	/**
+	 * if {@code -storeDataObj} is set then a call to {@code finalAction()} is generated
+	 */
+	override finalAction() {
+		'''
+			«IF Main::settings.generateStoreDataObj»
+				finalAction();
+			«ENDIF»
+		'''
+	}
+	
 	def getHistorySize(ExpandedActorClass xpac) {
 		xpac.actorClass.getAllBaseStates().size+2
 	}

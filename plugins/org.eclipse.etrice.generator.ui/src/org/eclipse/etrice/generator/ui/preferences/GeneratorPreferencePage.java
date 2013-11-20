@@ -26,9 +26,17 @@ public class GeneratorPreferencePage
 		addLabel("");
 		
 		addField(
+				new RadioGroupFieldEditor(
+						PreferenceConstants.BUILD_KIND,
+						"Choose the build kind that is used for eTrice Java applications:",
+						1,
+						new String[][] { {	"&Maven",	PreferenceConstants.MAVEN }, {
+											"&JDT",		PreferenceConstants.JDT }
+						}, getFieldEditorParent()));
+		addField(
 				new BooleanFieldEditor(
 						PreferenceConstants.GEN_INCREMENTAL,
-						"Generate &incrementally:",
+						"Generate &incrementally",
 						getFieldEditorParent()));
 		addField(
 				new StringFieldEditor(
@@ -49,13 +57,6 @@ public class GeneratorPreferencePage
 //		addField(new DirectoryFieldEditor(PreferenceConstants.P_PATH, 
 //				"&Directory preference:", getFieldEditorParent()));
 //
-//		addField(new RadioGroupFieldEditor(
-//				PreferenceConstants.P_CHOICE,
-//			"An example of a multiple-choice preference",
-//			1,
-//			new String[][] { { "&Choice 1", "choice1" }, {
-//				"C&hoice 2", "choice2" }
-//		}, getFieldEditorParent()));
 	}
 
 	private void addLabel(String message) {

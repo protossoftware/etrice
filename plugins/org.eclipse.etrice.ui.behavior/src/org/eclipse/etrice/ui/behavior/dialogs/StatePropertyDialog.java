@@ -1,5 +1,7 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
+import java.util.EnumSet;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -15,6 +17,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -42,6 +45,23 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 	private State state;
 	private boolean inherited;
 
+	/**
+	 * Enum for quickfix. Used when {@link StatePropertyDialog} is invoked from
+	 * {@link QuickFixDialog}.
+	 * 
+	 * @author jayant
+	 * 
+	 */
+	public enum Where {
+		ENTRY, EXIT, DO 
+	}
+
+	private boolean addCode = false;
+	private String codeSelectionString = "";
+	private EnumSet<Where> where = EnumSet.noneOf(Where.class);
+	private String messageToDisplay = "";
+	private String messageTitle = "";
+
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
 		super(shell, edit?"Edit State":"View State", ac);
 		this.state = s;
@@ -68,6 +88,9 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			
 			name.setFocus();
 			name.selectAll();
+
+			if (!where.isEmpty())
+				name.setEnabled(false);
 		}
 		else {
 			createFixedText(body, "Name:", state.getName(), false);
@@ -84,6 +107,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
+
+			if (where.contains(Where.ENTRY)) {
+				if (addCode)
+					entry.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, codeSelectionString);
+			}
 		}
 		else {
 			if (state instanceof RefinedState)
@@ -93,6 +122,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (where.contains(Where.ENTRY)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 			
 			{
@@ -101,6 +136,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (where.contains(Where.ENTRY)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 		}
 		
@@ -112,6 +153,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
+
+			if (where.contains(Where.EXIT)) {
+				if (addCode)
+					entry.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(entry, codeSelectionString);
+			}
 		}
 		else {
 			{
@@ -120,6 +167,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				exit.setLayoutData(gd);
+
+				if (where.contains(Where.EXIT)) {
+					if (addCode)
+						exit.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(exit, codeSelectionString);
+				}
 			}
 			
 			if (state instanceof RefinedState)
@@ -129,6 +182,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
+
+				if (where.contains(Where.EXIT)) {
+					if (addCode)
+						entry.append(codeSelectionString + "();\n");
+					setTextSelectionAndFocus(entry, codeSelectionString);
+				}
 			}
 		}
 		
@@ -140,9 +199,37 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);
+
+			if (where.contains(Where.DO)) {
+				if (addCode)
+					dotxt.append(codeSelectionString + "();\n");
+				setTextSelectionAndFocus(dotxt, codeSelectionString);
+			}
 		}
 		
 		createMembersAndMessagesButtons(body);
+
+		if (!messageToDisplay.isEmpty()) {
+			getShell().getParent().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					MessageDialog.openInformation(getShell(), messageTitle,
+							messageToDisplay);
+				}
+			});
+		}
 	}
 
+	public void setAddCode(boolean add) {
+		addCode = add;
+	}
+
+	public void setCodeSelectionString(String selectionString, EnumSet<Where> where) {
+		this.where = where;
+		codeSelectionString = selectionString;
+	}
+
+	public void setMessageDialogContents(String message, String title) {
+		messageToDisplay = message;
+		messageTitle = title;
+	}
 }

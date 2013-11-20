@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
@@ -64,9 +65,9 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 	private EObject getCrossLinkedEObject(ActorInstanceMapping aim) {
 		ActorContainerClass lastAcContainer = RoomHelpers.getParentContainer(aim);
 		ActorRef lastRef = null;
-		for (String ref : aim.getPath().getRefs()) {
+		for (RefSegment ref : aim.getPath().getRefs()) {
 			for (ActorRef r : lastAcContainer.getActorRefs())
-				if (r.getName().equals(ref)) {
+				if (r.getName().equals(ref.getRef())) {
 					lastRef = r;
 					lastAcContainer = lastRef.getType();
 					break;

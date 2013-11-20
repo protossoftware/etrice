@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.eclipse.etrice.generator.ui.project_configurator" name="Configurator for eTrice projects" schema="schema/org.eclipse.etrice.generator.ui.project_configurator.exsd"/>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
@@ -15,6 +16,37 @@
       <initializer
             class="org.eclipse.etrice.generator.ui.preferences.PreferenceInitializer">
       </initializer>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.etrice.core.ui.wizardCategory"
+            name="eTrice">
+      </category>
+      <wizard
+            category="org.eclipse.etrice.core.ui.wizardCategory"
+            class="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
+            icon="icons/NewETriceProject.gif"
+            id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
+            name="New Set of eTrice Models">
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.etrice.core.ui.wizardCategory"
+            name="eTrice"/>
+      <wizard
+            id="org.eclipse.etrice.generator.ui.wizard.EmptyProjectWizard"
+            name="Empty eTrice Java Project"
+            class="org.eclipse.etrice.generator.ui.wizard.EmptyProjectWizard"
+            category="org.eclipse.etrice.core.ui.wizardCategory"
+            project="true"
+            icon="icons/NewETriceProject.gif">
+         <description>Create an empty Java plug-in project with eTrice dependencies</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
    </extension>
 
 </plugin>

@@ -74,12 +74,12 @@ public class DocuPostprocessor {
     _builder_5.newLine();
     _builder_5.append("to add {@link KeyValue} pairs to certain model items. The structure ");
     _builder_5.newLine();
-    _builder_5.append("of Annotations are defined by {@AnnotationType}s.");
+    _builder_5.append("of Annotations are defined by {@link AnnotationType}s.");
     _builder_5.newLine();
     PostprocessingHelpers.setDocumentation(cls, _builder_5.toString());
     EReference _reference_1 = PostprocessingHelpers.getReference(cls, "type");
     StringConcatenation _builder_6 = new StringConcatenation();
-    _builder_6.append("The {@AnnotationType} that defines the structure of ");
+    _builder_6.append("The {@link AnnotationType} that defines the structure of ");
     _builder_6.newLine();
     _builder_6.append("the annotation.");
     _builder_6.newLine();
@@ -119,7 +119,7 @@ public class DocuPostprocessor {
     _builder_13.append("A list of names representing the locations in which ");
     _builder_13.newLine();
     _builder_13.append("\t\t\t");
-    _builder_13.append("{@Annotation}s of this AnnotationType can occur");
+    _builder_13.append("{@link Annotation}s of this AnnotationType can occur");
     PostprocessingHelpers.setDocumentation(_attribute_3, _builder_13.toString());
     EReference _reference_4 = PostprocessingHelpers.getReference(cls, "docu");
     StringConcatenation _builder_14 = new StringConcatenation();
@@ -127,10 +127,10 @@ public class DocuPostprocessor {
     PostprocessingHelpers.setDocumentation(_reference_4, _builder_14.toString());
     EReference _reference_5 = PostprocessingHelpers.getReference(cls, "attributes");
     StringConcatenation _builder_15 = new StringConcatenation();
-    _builder_15.append("Defines the {@link Attribute}s that are required or allowed in ");
+    _builder_15.append("Defines the {@link AnnotationAttribute}s that are required or allowed in ");
     _builder_15.newLine();
     _builder_15.append("\t\t\t");
-    _builder_15.append("{@Annotation} instances of this AnnotationType");
+    _builder_15.append("{@link Annotation} instances of this AnnotationType");
     PostprocessingHelpers.setDocumentation(_reference_5, _builder_15.toString());
     EClass _class_5 = PostprocessingHelpers.getClass(pckg, "AnnotationAttribute");
     cls = _class_5;

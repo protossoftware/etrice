@@ -1,0 +1,8 @@
+# @title Darken the "Mark Occurrences" rectangles
+# @description The "Mark Occurrences" feature highlights entries in the right gutter, but is too faded to see with our color scheme.
+# @task_type LASTMOD
+file_export_version=3.0
+/instance/org.eclipse.ui.editors/occurrenceIndicationColor=100,200,200
+/instance/org.eclipse.ui.editors/occurrenceIndicationInVerticalRuler=true
+/instance/org.eclipse.ui.editors/writeOccurrenceIndicationColor=255,200,0
+/instance/org.eclipse.ui.editors/writeOccurrenceIndicationInVerticalRuler=true

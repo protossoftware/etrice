@@ -1216,19 +1216,19 @@ ruleRefPath returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		lv_refs_0_0=RULE_ID
-		{
-			newLeafNode(lv_refs_0_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_0_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_0_0()); 
+	    }
+		lv_refs_0_0=ruleRefSegment		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getRefPathRule());
+	            $current = createModelElementForParent(grammarAccess.getRefPathRule());
 	        }
-       		addWithLastConsumed(
+       		add(
        			$current, 
        			"refs",
         		lv_refs_0_0, 
-        		"ID");
+        		"RefSegment");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -1238,23 +1238,84 @@ ruleRefPath returns [EObject current=null]
     }
 (
 (
-		lv_refs_2_0=RULE_ID
-		{
-			newLeafNode(lv_refs_2_0, grammarAccess.getRefPathAccess().getRefsIDTerminalRuleCall_1_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_1_1_0()); 
+	    }
+		lv_refs_2_0=ruleRefSegment		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getRefPathRule());
+	            $current = createModelElementForParent(grammarAccess.getRefPathRule());
 	        }
-       		addWithLastConsumed(
+       		add(
        			$current, 
        			"refs",
         		lv_refs_2_0, 
-        		"ID");
+        		"RefSegment");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))*)
+;
+
+
+
+
+
+// Entry rule entryRuleRefSegment
+entryRuleRefSegment returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRefSegmentRule()); }
+	 iv_ruleRefSegment=ruleRefSegment 
+	 { $current=$iv_ruleRefSegment.current; } 
+	 EOF 
+;
+
+// Rule RefSegment
+ruleRefSegment returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		lv_ref_0_0=RULE_ID
+		{
+			newLeafNode(lv_ref_0_0, grammarAccess.getRefSegmentAccess().getRefIDTerminalRuleCall_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRefSegmentRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"ref",
+        		lv_ref_0_0, 
+        		"ID");
+	    }
+
+)
+)(	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getRefSegmentAccess().getColonKeyword_1_0());
+    }
+(
+(
+		lv_idx_2_0=RULE_INT
+		{
+			newLeafNode(lv_idx_2_0, grammarAccess.getRefSegmentAccess().getIdxINTTerminalRuleCall_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getRefSegmentRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"idx",
+        		lv_idx_2_0, 
+        		"INT");
+	    }
+
+)
+))?)
 ;
 
 

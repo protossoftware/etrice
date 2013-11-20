@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.HashSet
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
@@ -36,6 +35,11 @@ import com.google.common.collect.Sets
 import com.google.common.collect.Lists
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
+import java.util.HashMap
+import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 
 @Singleton
 class NodeGen {
@@ -51,9 +55,12 @@ class NodeGen {
 	@Inject IDiagnostician diagnostician
 	
 	def doGenerate(Root root) {
+		val HashMap<SubSystemClass, WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>
+		root.wiredInstances.filter(w|w instanceof WiredSubSystemClass).forEach[w|sscc2wired.put((w as WiredSubSystemClass).subSystemClass, w as WiredSubSystemClass)]
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
+				val wired = sscc2wired.get(ssi.subSystemClass)
 				val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 				val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
 				val file = nr.getJavaFileName(ssi)
@@ -62,12 +69,12 @@ class NodeGen {
 				
 				val usedThreads = new HashSet<PhysicalThread>();
 				for (thread: nr.type.threads) {
-					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getPhysicalThread(ai)==thread)
+					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
 					if (!instancesOnThread.empty)
 						usedThreads.add(thread)
 				}
 				
-				fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, usedThreads))
+				fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, wired, usedThreads))
 				if (dataConfigExt.hasVariableService(ssi))
 					varService.doGenerate(root, ssi);
 			}
@@ -88,7 +95,8 @@ class NodeGen {
 		
 		return result
 	}
-	def generate(Root root, SubSystemInstance comp, HashSet<PhysicalThread> usedThreads) {
+	
+	def generate(Root root, SubSystemInstance comp, WiredSubSystemClass wired, HashSet<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)
@@ -109,6 +117,7 @@ class NodeGen {
 		import org.eclipse.etrice.runtime.java.messaging.MessageServiceController;
 		import org.eclipse.etrice.runtime.java.messaging.RTServices;
 		import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
+		import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 		import org.eclipse.etrice.runtime.java.modelbase.OptionalActorInterfaceBase;
 		import org.eclipse.etrice.runtime.java.modelbase.IOptionalActorFactory;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
@@ -156,22 +165,9 @@ class NodeGen {
 				
 				// thread mappings
 				«FOR ai : comp.allContainedInstances»
-					addPathToThread("«ai.path»", «ETMapUtil::getPhysicalThread(ai).threadId»);
-				«ENDFOR»
-				
-				// port to peer port mappings
-				«FOR ai : comp.allSubInstances»
-					«val ports = if (ai instanceof ActorInstance) (ai as ActorInstance).orderedIfItemInstances else ai.ports»
-					«FOR pi : ports»
-						«IF pi.peers.size>0»
-							addPathToPeers("«pi.path»", «FOR peer : pi.peers SEPARATOR ","»"«peer.path»"«ENDFOR»);
-						«ENDIF»
-					«ENDFOR»
-					«val services = if (ai instanceof ActorInterfaceInstance) (ai as ActorInterfaceInstance).providedServices else null»
-					«IF services!=null»
-						«FOR svc: services»
-							addPathToPeers("«ai.path»/«svc.protocol.fullyQualifiedName»", "«svc.path»");
-						«ENDFOR»
+					«val mapped = ETMapUtil::getMappedThread(ai)»
+					«IF !(mapped.implicit || mapped.asParent)»
+						addPathToThread("«ai.path»", «mapped.thread.threadId»);
 					«ENDIF»
 				«ENDFOR»
 		
@@ -192,14 +188,20 @@ class NodeGen {
 					«ENDIF»
 				«ENDFOR»
 				
-				// wire optional actor interfaces with services
+				// create service brokers in optional actor interfaces
 				«FOR aii: comp.allSubInstances.filter(inst|inst instanceof ActorInterfaceInstance).map(inst|inst as ActorInterfaceInstance)»
 					{
 						OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject("«aii.getPath()»");
 						«FOR svc: aii.providedServices»
 							new InterfaceItemBroker(oai, "«svc.protocol.fullyQualifiedName»", 0);
+							InterfaceItemBase.connect(this, "«svc.path»", "«aii.getPath()+InstanceBase::pathDelim+svc.protocol.fullyQualifiedName»");
 						«ENDFOR»
 					}
+				«ENDFOR»
+				
+				// wiring
+				«FOR wire: wired.wires»
+					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 				«ENDFOR»
 				
 				// apply instance attribute configurations
@@ -241,6 +243,11 @@ class NodeGen {
 				«ENDIF»
 			}
 			«IF Main::settings.generateMSCInstrumentation»
+				
+				@Override
+				public boolean hasGeneratedMSCInstrumentation() {
+					return true;
+				}
 				
 				@Override
 				public void destroy() {
@@ -297,17 +304,5 @@ class NodeGen {
 				}
 			}
 		}
-	}
-
-	def private isKindOf(ActorClass ac, HashSet<ActorClass> classes) {
-		var a = ac
-		
-		while (a!=null) {
-			if (classes.contains(a))
-				return true
-			a = a.base
-		}
-		
-		false
 	}
 }

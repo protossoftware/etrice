@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import org.eclipse.core.databinding.AggregateValidationStatus;
 import org.eclipse.core.databinding.Binding;
@@ -613,5 +614,38 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			public void controlMoved(ControlEvent e) {
 			}
 		});
+	}
+	
+	/**
+	 * Selects the string {@code selectSring(...)} inside the Text & shifts the
+	 * keyboard focus to it. If the select string is empty or not present inside
+	 * the text, it does nothing.
+	 * 
+	 * @param text
+	 * @param selectString
+	 * 
+	 * @author jayant
+	 */
+	protected void setTextSelectionAndFocus(Text text, String selectString) {
+		if (selectString.isEmpty())
+			return;
+		String content = text.getText();
+		int start = content.indexOf(selectString+'(');
+		if (start != -1) {
+
+			// find the index of closing brace
+			int end = start + selectString.length() + 1;
+			Stack<Character> parenthesis = new Stack<Character>();
+			parenthesis.push('(');
+			while (end < content.length() && !parenthesis.isEmpty()) {
+				if (content.charAt(end) == '(')
+					parenthesis.push('(');
+				else if (content.charAt(end) == ')')
+					parenthesis.pop();
+				end++;
+			}
+			text.setFocus();
+			text.setSelection(start, end);
+		}
 	}
 }

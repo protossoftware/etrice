@@ -42,7 +42,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 /**
  * This class contains custom scoping description.
  * 
- * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
+ * See <a href="http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping">scoping</a> on
  *      how and when to use it
  * 
  */

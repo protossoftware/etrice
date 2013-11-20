@@ -5,6 +5,7 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -59,6 +60,10 @@ public class Container extends ActorClassBase {
 		// sub actors
 		opt1 = new Optional1Interface(this, "opt1");
 		opt2 = new Optional2Interface(this, "opt2");
+		
+		// wiring
+		InterfaceItemBase.connect(this, "opt1/pout", "opt2/pin");
+		
 
 	}
 	
@@ -96,16 +101,17 @@ public class Container extends ActorClassBase {
 	public static final int TRIG_fct__destroyOpts = IFITEM_fct + EVT_SHIFT*PCtrl.IN_destroyOpts;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","Ready"
+	protected static final String stateStrings[] = {
+		"<no state>",
+		"<top>",
+		"Ready"
 	};
-	
+		
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE, NO_STATE, NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
-		if (stateStrings[new_state]!="Idle") {
-		}	
 		this.state = new_state;
 	}
 	

@@ -346,11 +346,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	String text(ActorInstanceMapping aim) {
-		StringBuilder path = new StringBuilder();
-		for (String seg : aim.getPath().getRefs()) {
-			path.append("/"+seg);
-		}
-		return path+" -> "+aim.getThread().getName();
+		return aim.getPath().toString()+" -> "+aim.getThread().getName();
 	}
 	
 	String text (LogicalThread lt ) {

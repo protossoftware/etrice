@@ -13,15 +13,12 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-
 import org.eclipse.etrice.core.room.ActorClass;
 
 /**
@@ -164,7 +161,7 @@ public class ActorInstanceImpl extends StructureInstanceImpl implements ActorIns
 	 * @generated NOT
 	 */
 	public String getUnindexedName() {
-		return (getReplIdx()>=0)? getName().substring(0, getName().lastIndexOf('_')) : getName();
+		return (getReplIdx()>=0)? getName().substring(0, getName().lastIndexOf(GenmodelConstants.INDEX_SEP)) : getName();
 	}
 
 	/**

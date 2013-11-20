@@ -71,7 +71,7 @@ public interface ActorInstanceConfig extends ConfigElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is the sub system that contains the {@link #getRefPath actor instance}.
+   * <br>This is the sub system that contains the {@link #getPath actor instance}.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Sub System</em>' reference.

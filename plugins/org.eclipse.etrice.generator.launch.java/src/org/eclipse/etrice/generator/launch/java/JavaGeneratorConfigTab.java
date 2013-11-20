@@ -28,8 +28,11 @@ import org.eclipse.swt.widgets.Composite;
 public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 
 	public static final String PERSIST = "Persist";
+	public static final String DATA_OBJ = "DataObj";
 	
 	private Button genPersist;
+
+	private Button genDataObj;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
@@ -48,6 +51,10 @@ public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 		genPersist = createCheckButton(mainComposite, "generate persistence interface");
 		genPersist.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		genPersist.addSelectionListener(new UpdateConfig());
+
+		genDataObj = createCheckButton(mainComposite, "generate store to/from POJO data objects");
+		genDataObj.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		genDataObj.addSelectionListener(new UpdateConfig());
 	}
 	
 	/* (non-Javadoc)
@@ -59,6 +66,7 @@ public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 		
 		try {
 			genPersist.setSelection(configuration.getAttribute(PERSIST, false));
+			genPersist.setSelection(configuration.getAttribute(DATA_OBJ, false));
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -73,5 +81,6 @@ public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 		super.performApply(configuration);
 		
 		configuration.setAttribute(PERSIST, genPersist.getSelection());
+		configuration.setAttribute(DATA_OBJ, genDataObj.getSelection());
 	}
 }

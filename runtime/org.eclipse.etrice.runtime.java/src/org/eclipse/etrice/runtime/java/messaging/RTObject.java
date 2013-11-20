@@ -9,7 +9,6 @@
 package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An implementation of the IRTObject interface using a hierarchical structure
@@ -89,7 +88,7 @@ public class RTObject implements IRTObject	{
 			
 			String first = segments[0];
 			for (String segment : segments) {
-				if (segment==first) {
+				if (isAbsolute && segment==first) {
 					if (!segment.equals(current.getName()))
 						return null;
 				}
@@ -130,16 +129,6 @@ public class RTObject implements IRTObject	{
 		if (parent!=null)
 			return parent.getThreadForPath(path);
 		return -1;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.messaging.IRTObject#getPeersForPath(java.lang.String)
-	 */
-	@Override
-	public List<String> getPeersForPath(String path) {
-		if (parent!=null)
-			return parent.getPeersForPath(path);
-		return null;
 	}
 	
 	private String toStringRecursive(String indent) {

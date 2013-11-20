@@ -1,0 +1,15 @@
+AnnotationType ExampleAnnotation["Test for no errors using all available features"] {
+	target = {
+		Target1, Target2
+	}
+	mandatory attribute stringAttr: ptCharacter
+	mandatory attribute boolAttr: ptBoolean
+	mandatory attribute intAttr: ptInteger
+	mandatory attribute realAttr: ptReal
+	mandatory attribute enumAttr: {
+		"VAL1", "VAL2", "VAL3"
+	}
+	optional attribute optAttr: ptInteger
+}
+
+@ExampleAnnotation(stringAttr = "value", boolAttr = true, intAttr = 0, realAttr = 0.0, enumAttr = "VAL1")

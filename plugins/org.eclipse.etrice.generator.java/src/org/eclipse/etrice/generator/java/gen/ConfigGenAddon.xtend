@@ -27,6 +27,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumerationType
 
 class ConfigGenAddon {
 	
@@ -62,6 +63,10 @@ class ConfigGenAddon {
 				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
 				if(value != null)
 					initGen.genAttributeInitializer(a, toValueLiteral(aType, value), invokes)	
+			}
+			EnumerationType: {
+				// TODO-Enum
+				""
 			}
 			DataClass:
 				'''
@@ -134,6 +139,10 @@ class ConfigGenAddon {
 						public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
 					«ENDIF»
 				'''
+			}
+			EnumerationType: {
+				// TODO-Enum
+				""
 			}
 		}
 	}

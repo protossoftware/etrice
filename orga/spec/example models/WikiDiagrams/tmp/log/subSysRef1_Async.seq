@@ -1,0 +1,15 @@
+; generated MSC for Trace2UML
+# begin sub system initialization
+	/LogSys1/subSysRef1 (!) /LogSys1/subSysRef1/actor 
+	/LogSys1/subSysRef1/actor (!) /LogSys1/subSysRef1/actor/actor2 
+	/LogSys1/subSysRef1/actor (!) /LogSys1/subSysRef1/actor/actor3A 
+	/LogSys1/subSysRef1/actor (!) /LogSys1/subSysRef1/actor/actor3B 
+	/LogSys1/subSysRef1/actor (!) /LogSys1/subSysRef1/actor/actor4 
+# done sub system initialization
+	/LogSys1/subSysRef1/actor/actor2 >>> Initial
+# begin sub system destruction
+	/LogSys1/subSysRef1 (X) /LogSys1/subSysRef1/actor 
+	/LogSys1/subSysRef1/actor (X) /LogSys1/subSysRef1/actor/actor2 
+	/LogSys1/subSysRef1/actor (X) /LogSys1/subSysRef1/actor/actor3A 
+	/LogSys1/subSysRef1/actor (X) /LogSys1/subSysRef1/actor/actor3B 
+	/LogSys1/subSysRef1/actor (X) /LogSys1/subSysRef1/actor/actor4 

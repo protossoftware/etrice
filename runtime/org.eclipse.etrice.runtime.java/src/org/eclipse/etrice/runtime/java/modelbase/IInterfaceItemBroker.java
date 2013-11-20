@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
+
 /**
  * This is just a marker interface.
  * 
@@ -19,6 +20,6 @@ package org.eclipse.etrice.runtime.java.modelbase;
  * @author Henrik Rentz-Reichert
  *
  */
-public interface IInterfaceItemBroker {
-
+public interface IInterfaceItemBroker extends IInterfaceItem {
+	
 }

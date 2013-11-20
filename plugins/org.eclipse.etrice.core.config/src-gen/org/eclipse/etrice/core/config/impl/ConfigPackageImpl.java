@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -128,6 +129,13 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * @generated
    */
   private EClass refPathEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass refSegmentEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -647,9 +655,39 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRefPath_Refs()
+  public EReference getRefPath_Refs()
   {
-    return (EAttribute)refPathEClass.getEStructuralFeatures().get(0);
+    return (EReference)refPathEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRefSegment()
+  {
+    return refSegmentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRefSegment_Ref()
+  {
+    return (EAttribute)refSegmentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRefSegment_Idx()
+  {
+    return (EAttribute)refSegmentEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -768,7 +806,11 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     createEReference(attrInstanceConfigEClass, ATTR_INSTANCE_CONFIG__ATTRIBUTES);
 
     refPathEClass = createEClass(REF_PATH);
-    createEAttribute(refPathEClass, REF_PATH__REFS);
+    createEReference(refPathEClass, REF_PATH__REFS);
+
+    refSegmentEClass = createEClass(REF_SEGMENT);
+    createEAttribute(refSegmentEClass, REF_SEGMENT__REF);
+    createEAttribute(refSegmentEClass, REF_SEGMENT__IDX);
 
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
@@ -880,7 +922,13 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEReference(getAttrInstanceConfig_Attributes(), this.getAttrInstanceConfig(), null, "attributes", null, 0, -1, AttrInstanceConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(refPathEClass, RefPath.class, "RefPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRefPath_Refs(), ecorePackage.getEString(), "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRefPath_Refs(), this.getRefSegment(), null, "refs", null, 0, -1, RefPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(refSegmentEClass, RefSegment.class, "RefSegment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRefSegment_Ref(), ecorePackage.getEString(), "ref", null, 0, 1, RefSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRefSegment_Idx(), ecorePackage.getEInt(), "idx", "-1", 0, 1, RefSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    addEOperation(refSegmentEClass, ecorePackage.getEString(), "toString", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -10,9 +10,11 @@
  */
 package org.eclipse.etrice.core.postprocessing;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -22,8 +24,8 @@ public class ImplPostProcessing {
   public boolean process(final GeneratedMetamodel metamodel) {
     boolean _xblockexpression = false;
     {
-      EPackage configPackage = metamodel.getEPackage();
-      EClass configModel = PostprocessingHelpers.getClass(configPackage, "ConfigModel");
+      final EPackage configPackage = metamodel.getEPackage();
+      final EClass configModel = PostprocessingHelpers.getClass(configPackage, "ConfigModel");
       EClassifier _eClassifier = configPackage.getEClassifier("ActorClassConfig");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("EList<ActorClassConfig> list = new org.eclipse.emf.common.util.BasicEList<ActorClassConfig>();");
@@ -87,9 +89,19 @@ public class ImplPostProcessing {
       _builder_3.append("list.add((SubSystemConfig) element);");
       _builder_3.newLine();
       _builder_3.append("return list;");
-      boolean _addOperation = PostprocessingHelpers.addOperation(configModel, 
+      PostprocessingHelpers.addOperation(configModel, 
         "getSubSystemConfigs", _eClassifier_3, 
         Integer.valueOf(PostprocessingHelpers.UNBOUNDED_MULTIPLICITY), _builder_3.toString());
+      final EClass refSeg = PostprocessingHelpers.getClass(configPackage, "RefSegment");
+      EAttribute _attribute = PostprocessingHelpers.getAttribute(refSeg, "idx");
+      _attribute.setDefaultValueLiteral("-1");
+      EClassifier _eClassifier_4 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
+      _builder_4.newLine();
+      boolean _addOperation = PostprocessingHelpers.addOperation(refSeg, 
+        "toString", _eClassifier_4, 
+        Integer.valueOf(1), _builder_4.toString());
       _xblockexpression = (_addOperation);
     }
     return _xblockexpression;

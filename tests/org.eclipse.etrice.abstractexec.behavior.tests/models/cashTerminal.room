@@ -130,7 +130,7 @@ RoomModel CashTerminal {
 						"client.serviceNA();"
 					}
 				}
-				Transition tr2: cp cp0 -> standby_rm {
+				Transition tr2: cp cp0 -> online {
 					cond {
 						"if(okay)"
 					}
@@ -138,26 +138,9 @@ RoomModel CashTerminal {
 						"client.hello();"
 					}
 				}
-				Transition tr4: standby_rm -> standby_rm {
+				Transition tr4: online -> cp cp1 {
 					triggers {
 						<checkCard: client>
-					}
-					action {
-						"if(valid)"
-						"\tclient.validCard();"
-						"else"
-						"\tinvalidCard();"
-					}
-				}
-				Transition tr5_vm: standby_rm -> standby_rm {
-					triggers {
-						<checkPIN: client>
-					}
-					action {
-						"if(correct)"
-						"\tclient.correctPIN();"
-						"else"
-						"\tclient.wrongPIN();"
 					}
 				}
 				Transition init: initial -> state0 { }
@@ -166,10 +149,47 @@ RoomModel CashTerminal {
 						<hello: client>
 					}
 				}
+				Transition tr1: cp cp1 -> state0 {
+					action {
+						"client.invalidCard();"
+					}
+				}
+				Transition tr3: cp cp1 -> pin_checker {
+					cond {
+						"correct"
+					}
+					action {
+						"client.validCard();"
+					}
+				}
+				Transition tr5_vm: cp cp2 -> pin_checker {
+					action {
+						// violates semantics: more than 2 checks possible
+						"client.hello();"
+						"client.wrongPIN();"
+					}
+				}
+				Transition tr5: cp cp2 -> state0 {
+					cond {
+						"correct"
+					}
+					action {
+						"client.correctPIN()"
+					}
+				}
+				Transition tr7: pin_checker -> cp cp2 {
+					triggers {
+						<checkPIN: client>
+					}
+				}
 				ChoicePoint cp0
-				State standby_rm
+				ChoicePoint cp1
+				ChoicePoint cp2
+				State online
+				// bad state error_rm: does not respond to hello anymore
 				State error_rm
 				State state0
+				State pin_checker
 			}
 		}
 	}
@@ -189,7 +209,7 @@ RoomModel CashTerminal {
 		}
 		semantics { 
 			in:showOffline
-			in:showWelcome->out:cardEntered->(in:showPIN->out:pinEntered->(in:dispenseMoney->in:showWelcome,in:confiscateCard->in:showWelcome),in:showWelcome)
+			in:showWelcome->out:cardEntered->(in:showPIN->out:pinEntered->(in:dispenseMoney,in:confiscateCard),in:showWelcome)
 		}
 	}
 	
@@ -209,11 +229,13 @@ RoomModel CashTerminal {
 			Message hello()
 		}
 		semantics {
+			// protocol for each authentication
 			in:hello->(
 				out:hello->in:checkCard->(
 					out:validCard->in:checkPIN->(
 						out:correctPIN,
-						out:wrongPIN->in:checkPIN->(
+						out:wrongPIN
+						->in:checkPIN->(
 							out:correctPIN,
 							out:wrongPIN
 						)

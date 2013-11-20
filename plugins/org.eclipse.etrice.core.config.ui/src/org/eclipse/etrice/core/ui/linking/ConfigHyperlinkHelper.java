@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
+import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.jface.text.Region;
@@ -60,9 +61,9 @@ public class ConfigHyperlinkHelper extends ImportAwareHyperlinkHelper {
 	private EObject getCrossLinkedEObject(ActorInstanceConfig config) {
 		ActorContainerClass lastAcContainer = config.getSubSystem().getType();
 		ActorRef lastRef = null;
-		for (String ref : config.getPath().getRefs()) {
+		for (RefSegment ref : config.getPath().getRefs()) {
 			for (ActorRef r : lastAcContainer.getActorRefs())
-				if (r.getName().equals(ref)) {
+				if (r.getName().equals(ref.getRef())) {
 					lastRef = r;
 					lastAcContainer = lastRef.getType();
 					break;

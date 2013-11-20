@@ -5,6 +5,7 @@ import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
 import org.eclipse.etrice.runtime.java.modelbase.ActorClassBase;
 import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
+import org.eclipse.etrice.runtime.java.modelbase.DataPortBase;
 import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
@@ -20,7 +21,7 @@ public class Controller extends ActorClassBase {
 
 	
 	//--------------------- ports
-	protected PWorkerConjPort worker = null;
+	protected PWorkerConjPort wrk = null;
 	protected PCConjPort opt = null;
 	
 	//--------------------- saps
@@ -30,7 +31,7 @@ public class Controller extends ActorClassBase {
 	//--------------------- optional actors
 	
 	//--------------------- interface item IDs
-	public static final int IFITEM_worker = 1;
+	public static final int IFITEM_wrk = 1;
 	public static final int IFITEM_opt = 2;
 	
 	/*--------------------- attributes ---------------------*/
@@ -44,7 +45,7 @@ public class Controller extends ActorClassBase {
 		// initialize attributes
 
 		// own ports
-		worker = new PWorkerConjPort(this, "worker", IFITEM_worker);
+		wrk = new PWorkerConjPort(this, "wrk", IFITEM_wrk);
 		opt = new PCConjPort(this, "opt", IFITEM_opt);
 		
 		// own saps
@@ -54,6 +55,11 @@ public class Controller extends ActorClassBase {
 		// sub actors
 		DebuggingService.getInstance().addMessageActorCreate(this, "worker");
 		new Worker(this, "worker");
+		
+		// wiring
+		InterfaceItemBase.connect(this, "worker/fct", "wrk");
+		InterfaceItemBase.connect(this, "worker/opt/p0", "opt");
+		
 
 	}
 	
@@ -61,8 +67,8 @@ public class Controller extends ActorClassBase {
 	
 	
 	//--------------------- port getters
-	public PWorkerConjPort getWorker (){
-		return this.worker;
+	public PWorkerConjPort getWrk (){
+		return this.wrk;
 	}
 	public PCConjPort getOpt (){
 		return this.opt;
@@ -89,44 +95,45 @@ public class Controller extends ActorClassBase {
 	
 	/* transition chains */
 	public static final int CHAIN_TRANS_INITIAL_TO__createOpt1 = 1;
-	public static final int CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okworker = 2;
+	public static final int CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okwrk = 2;
 	public static final int CHAIN_TRANS_tr1_FROM_SendHello_TO_TryCreateInvalid_BY_helloopt = 3;
-	public static final int CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorworker = 4;
-	public static final int CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorworker = 5;
+	public static final int CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorwrk = 4;
+	public static final int CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorwrk = 5;
 	
 	/* triggers */
 	public static final int POLLING = 0;
-	public static final int TRIG_worker__ok = IFITEM_worker + EVT_SHIFT*PWorker.OUT_ok;
-	public static final int TRIG_worker__error = IFITEM_worker + EVT_SHIFT*PWorker.OUT_error;
+	public static final int TRIG_wrk__ok = IFITEM_wrk + EVT_SHIFT*PWorker.OUT_ok;
+	public static final int TRIG_wrk__error = IFITEM_wrk + EVT_SHIFT*PWorker.OUT_error;
 	public static final int TRIG_opt__hello = IFITEM_opt + EVT_SHIFT*PC.OUT_hello;
 	
 	// state names
-	protected static final String stateStrings[] = {"<no state>","<top>","createOpt1",
-	"SendHello",
-	"TryCreateInvalid",
-	"UnexpectedError",
-	"ExpectedError"
+	protected static final String stateStrings[] = {
+		"<no state>",
+		"<top>",
+		"createOpt1",
+		"SendHello",
+		"TryCreateInvalid",
+		"UnexpectedError",
+		"ExpectedError"
 	};
-	
+		
 	// history
-	protected int history[] = {NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE,NO_STATE};
+	protected int history[] = {NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE, NO_STATE};
 	
 	private void setState(int new_state) {
 		DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
-		if (stateStrings[new_state]!="Idle") {
-		}	
 		this.state = new_state;
 	}
 	
 	/* Entry and Exit Codes */
 	protected void entry_createOpt1() {
-		worker.create("Optional1");
+		wrk.create("Optional1");
 	}
 	protected void entry_SendHello() {
 		opt.sayHello();
 	}
 	protected void entry_TryCreateInvalid() {
-		worker.create("Optional");
+		wrk.create("Optional");
 	}
 	protected void entry_ExpectedError() {
 		System.out.println("Done, enter 'quit' to exit"); 
@@ -186,7 +193,7 @@ public class Controller extends ActorClassBase {
 			{
 				return STATE_createOpt1;
 			}
-			case CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okworker:
+			case CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okwrk:
 			{
 				return STATE_SendHello;
 			}
@@ -196,11 +203,11 @@ public class Controller extends ActorClassBase {
 				action_TRANS_tr1_FROM_SendHello_TO_TryCreateInvalid_BY_helloopt(ifitem, txt);
 				return STATE_TryCreateInvalid;
 			}
-			case CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorworker:
+			case CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorwrk:
 			{
 				return STATE_UnexpectedError;
 			}
-			case CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorworker:
+			case CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorwrk:
 			{
 				return STATE_ExpectedError;
 			}
@@ -272,15 +279,15 @@ public class Controller extends ActorClassBase {
 			switch (getState()) {
 				case STATE_createOpt1:
 					switch(trigger) {
-							case TRIG_worker__ok:
+							case TRIG_wrk__ok:
 								{
-									chain = CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okworker;
+									chain = CHAIN_TRANS_tr0_FROM_createOpt1_TO_SendHello_BY_okwrk;
 									catching_state = STATE_TOP;
 								}
 							break;
-							case TRIG_worker__error:
+							case TRIG_wrk__error:
 								{
-									chain = CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorworker;
+									chain = CHAIN_TRANS_tr2_FROM_createOpt1_TO_UnexpectedError_BY_errorwrk;
 									catching_state = STATE_TOP;
 								}
 							break;
@@ -304,9 +311,9 @@ public class Controller extends ActorClassBase {
 					break;
 				case STATE_TryCreateInvalid:
 					switch(trigger) {
-							case TRIG_worker__error:
+							case TRIG_wrk__error:
 								{
-									chain = CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorworker;
+									chain = CHAIN_TRANS_tr3_FROM_TryCreateInvalid_TO_ExpectedError_BY_errorwrk;
 									catching_state = STATE_TOP;
 								}
 							break;

@@ -20,6 +20,7 @@ import java.util.HashSet;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -63,9 +64,9 @@ public class TestReplicatedActors extends TestInstanceModelBuilderBase {
 		PortInstance intp1 = getPort("/Main/appl1/intp1");
 		PortInstance intp2 = getPort("/Main/appl1/intp2");
 		PortInstance intp3 = getPort("/Main/appl1/intp3");
-		PortInstance ac1_0p = getPort("/Main/appl1/ac1repl_0/ac1p");
-		PortInstance ac1_1p = getPort("/Main/appl1/ac1repl_1/ac1p");
-		PortInstance ac1_2p = getPort("/Main/appl1/ac1repl_2/ac1p");
+		PortInstance ac1_0p = getPort("/Main/appl1/ac1repl"+GenmodelConstants.INDEX_SEP+"0/ac1p");
+		PortInstance ac1_1p = getPort("/Main/appl1/ac1repl"+GenmodelConstants.INDEX_SEP+"1/ac1p");
+		PortInstance ac1_2p = getPort("/Main/appl1/ac1repl"+GenmodelConstants.INDEX_SEP+"2/ac1p");
 
 		assertEquals("number of peers of "+intp1.getName(), 1, intp1.getPeers().size());
 		assertEquals("number of peers of "+intp2.getName(), 1, intp2.getPeers().size());
@@ -88,12 +89,12 @@ public class TestReplicatedActors extends TestInstanceModelBuilderBase {
 	// example 2: regular port of replicated actor connected to regular port of replicated actor
 	@Test
 	public void checkExample2() {
-		PortInstance ac1_0p = getPort("/Main/appl2/ac1repl_0/ac1p");
-		PortInstance ac1_1p = getPort("/Main/appl2/ac1repl_1/ac1p");
-		PortInstance ac1_2p = getPort("/Main/appl2/ac1repl_2/ac1p");
-		PortInstance ac2_0p = getPort("/Main/appl2/ac2repl_0/ac2p");
-		PortInstance ac2_1p = getPort("/Main/appl2/ac2repl_1/ac2p");
-		PortInstance ac2_2p = getPort("/Main/appl2/ac2repl_2/ac2p");
+		PortInstance ac1_0p = getPort("/Main/appl2/ac1repl"+GenmodelConstants.INDEX_SEP+"0/ac1p");
+		PortInstance ac1_1p = getPort("/Main/appl2/ac1repl"+GenmodelConstants.INDEX_SEP+"1/ac1p");
+		PortInstance ac1_2p = getPort("/Main/appl2/ac1repl"+GenmodelConstants.INDEX_SEP+"2/ac1p");
+		PortInstance ac2_0p = getPort("/Main/appl2/ac2repl"+GenmodelConstants.INDEX_SEP+"0/ac2p");
+		PortInstance ac2_1p = getPort("/Main/appl2/ac2repl"+GenmodelConstants.INDEX_SEP+"1/ac2p");
+		PortInstance ac2_2p = getPort("/Main/appl2/ac2repl"+GenmodelConstants.INDEX_SEP+"2/ac2p");
 
 		assertEquals("number of peers of "+ac1_0p.getName(), 1, ac1_0p.getPeers().size());
 		assertEquals("number of peers of "+ac1_1p.getName(), 1, ac1_1p.getPeers().size());
@@ -116,9 +117,9 @@ public class TestReplicatedActors extends TestInstanceModelBuilderBase {
 	// example 3: regular port of replicated actor connected to replicated port
 	@Test
 	public void checkExample3() {
-		PortInstance ac1_0p = getPort("/Main/appl3/ac1repl_0/ac1p");
-		PortInstance ac1_1p = getPort("/Main/appl3/ac1repl_1/ac1p");
-		PortInstance ac1_2p = getPort("/Main/appl3/ac1repl_2/ac1p");
+		PortInstance ac1_0p = getPort("/Main/appl3/ac1repl"+GenmodelConstants.INDEX_SEP+"0/ac1p");
+		PortInstance ac1_1p = getPort("/Main/appl3/ac1repl"+GenmodelConstants.INDEX_SEP+"1/ac1p");
+		PortInstance ac1_2p = getPort("/Main/appl3/ac1repl"+GenmodelConstants.INDEX_SEP+"2/ac1p");
 		PortInstance intrep = getPort("/Main/appl3/intrep");
 		
 		assertEquals("number of peers of "+ac1_0p.getName(), 1, ac1_0p.getPeers().size());
@@ -134,12 +135,12 @@ public class TestReplicatedActors extends TestInstanceModelBuilderBase {
 	// example 4: regular port of replicated actor connected to replicated port of replicated actor
 	@Test
 	public void checkExample4() {
-		PortInstance ac1_0p = getPort("/Main/appl4/ac1repl_0/ac1p");
-		PortInstance ac1_1p = getPort("/Main/appl4/ac1repl_1/ac1p");
-		PortInstance ac2_0p = getPort("/Main/appl4/ac2repl_0/ac2p");
-		PortInstance ac2_1p = getPort("/Main/appl4/ac2repl_1/ac2p");
-		PortInstance ac2_2p = getPort("/Main/appl4/ac2repl_2/ac2p");
-		PortInstance ac2_3p = getPort("/Main/appl4/ac2repl_3/ac2p");
+		PortInstance ac1_0p = getPort("/Main/appl4/ac1repl"+GenmodelConstants.INDEX_SEP+"0/ac1p");
+		PortInstance ac1_1p = getPort("/Main/appl4/ac1repl"+GenmodelConstants.INDEX_SEP+"1/ac1p");
+		PortInstance ac2_0p = getPort("/Main/appl4/ac2repl"+GenmodelConstants.INDEX_SEP+"0/ac2p");
+		PortInstance ac2_1p = getPort("/Main/appl4/ac2repl"+GenmodelConstants.INDEX_SEP+"1/ac2p");
+		PortInstance ac2_2p = getPort("/Main/appl4/ac2repl"+GenmodelConstants.INDEX_SEP+"2/ac2p");
+		PortInstance ac2_3p = getPort("/Main/appl4/ac2repl"+GenmodelConstants.INDEX_SEP+"3/ac2p");
 
 		assertEquals("number of peers of "+ac1_0p.getName(), 2, ac1_0p.getPeers().size());
 		assertEquals("number of peers of "+ac1_1p.getName(), 2, ac1_1p.getPeers().size());
@@ -166,14 +167,14 @@ public class TestReplicatedActors extends TestInstanceModelBuilderBase {
 	@Test
 	public void checkExample5() {
 		PortInstance testee = getPort("/Main/appl5/testDriver/testee");
-		PortInstance ref0_0p = getPort("/Main/appl5/ref0_0/tester/test");
-		PortInstance ref0_1p = getPort("/Main/appl5/ref0_1/tester/test");
-		PortInstance ref0_2p = getPort("/Main/appl5/ref0_2/tester/test");
-		PortInstance ref0_3p = getPort("/Main/appl5/ref0_3/tester/test");
-		PortInstance ref0_4p = getPort("/Main/appl5/ref0_4/tester/test");
-		PortInstance ref0_5p = getPort("/Main/appl5/ref0_5/tester/test");
-		PortInstance ref0_6p = getPort("/Main/appl5/ref0_6/tester/test");
-		PortInstance ref0_7p = getPort("/Main/appl5/ref0_7/tester/test");
+		PortInstance ref0_0p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"0/tester/test");
+		PortInstance ref0_1p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"1/tester/test");
+		PortInstance ref0_2p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"2/tester/test");
+		PortInstance ref0_3p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"3/tester/test");
+		PortInstance ref0_4p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"4/tester/test");
+		PortInstance ref0_5p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"5/tester/test");
+		PortInstance ref0_6p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"6/tester/test");
+		PortInstance ref0_7p = getPort("/Main/appl5/ref0"+GenmodelConstants.INDEX_SEP+"7/tester/test");
 
 		assertEquals("number of peers of "+testee.getName(), 8, testee.getPeers().size());
 		assertEquals("number of peers of "+ref0_0p.getName(), 1, ref0_0p.getPeers().size());

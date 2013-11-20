@@ -204,9 +204,41 @@ class DocuPostprocessor {
 			The super class of
 			<ul>
 			  <li>{@link PrimitiveType}</li>
+			  <li>{@link EnumerationType}</li>
 			  <li>{@link ComplexType}</li>
 			</ul>
 		''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("EnumerationType")
+		cls.setDocumentation('''
+			A sub type of {@link DataType} for enumerations.
+			The EnumerationType can be associated with a {@link PrimitiveType} as value type for
+			the {@link EnumLiteral}s. It has to contain at least one literal.
+		''')
+		
+		cls.getReference("primitiveType").setDocumentation(
+			'''
+				The value type of the literals.
+			''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("EnumLiteral")
+		cls.setDocumentation('''
+			A literal value of the enumeration.
+			It can have a value associated.
+		''')
+		
+		cls.getAttribute("name").setDocumentation(
+			'''
+				The name of the literal.
+			''')
+		
+		cls.getReference("literal").setDocumentation(
+			'''
+				The value of the literal. It is associated with a target type which defaults to
+				{@code int} and can be set explicitly using the {@link EnumerationType#getPrimitiveType()}
+			''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("ComplexType")
@@ -658,14 +690,14 @@ class DocuPostprocessor {
 		cls = pckg.getClass("InMessageHandler")
 		cls.setDocumentation('''
 			Is a handler (or interceptor) for incoming messages. In the generated code the
-			message is available. It is derived from {@link MsgHandler}.
+			message is available. It is derived from {@link MessageHandler}.
 		''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("OutMessageHandler")
 		cls.setDocumentation('''
 			Is a handler (or interceptor) for outgoing messages. In the generated code the
-			message is available. It is derived from {@link MsgHandler}.
+			message is available. It is derived from {@link MessageHandler}.
 		''')
 		
 		//------------------------------------------------------------------
@@ -677,7 +709,7 @@ class DocuPostprocessor {
 			this tree is a valid sequence of messages exchanged through a port instance.
 			
 			<p>
-			The semantics are composed using {@link SemanticsRule]s.
+			The semantics are composed using {@link SemanticsRule}s.
 			</p>
 		''')
 		
@@ -732,27 +764,27 @@ class DocuPostprocessor {
 			<ul>
 			  <li>Interface: everything which is visible from the outside from a model point of view
 			  <ul>
-			    <li>{@link #getIfPorts}: a list of all interface {@link Port}s</li>
-			    <li>{@link ActorContainerClass#getIfSPPs}: a list of all interface {@link SPPRef}s</li>
+			    <li>{@link #getInterfacePorts}: a list of all interface {@link Port}s</li>
+			    <li>{@link ActorContainerClass#getServiceProvisionPoints()}: a list of all interface {@link SPP}s</li>
 			  </ul>
 			  <li>Structure: all internal structural aspects of an actor class</li>
 			  <ul>
-			    <li>{@link #getUsercode1}-3: user defined code with generator dependent meaning</li>
+			    <li>{@link #getUserCode1}-3: user defined code with generator dependent meaning</li>
 			    <li>{@link #getInternalPorts}: a list of all internal end {@link Port}s</li>
 			    <li>{@link #getExternalPorts}: a list of all {@link ExternalPort}s (the interface ports that
 			       are end ports, not relay ports</li>
 			    <li>{@link #getServiceImplementations}: a list of all {@link ServiceImplementation}s</li>
-			    <li>{@link #getStrSAPs}: a list of all {@link SAPRef}s used by this actor class</li>
+			    <li>{@link #getServiceAccessPoints}: a list of all {@link SAP}s used by this actor class</li>
 			    <li>{@link #getAttributes}: a list of all actor class {@link Attribute}s</li>
 			    <li>{@link #getActorRefs}: a list of all referenced actor classes (an {@link ActorRef}
 			       has the meaning of a composition)</li>
 			    <li>{@link #getBindings}: a list of all port {@link Binding}s of this actor class</li>
-			    <li>{@link #getConnections}: a list of all {@link LayerConnections}</li>
+			    <li>{@link #getConnections}: a list of all {@link LayerConnection}s</li>
 			  </ul>
 			  <li>Behavior: the behavioral aspects of an actor class</li>
 			  <ul>
 			    <li>{@link #getOperations}: a list of {@link Operation}s</li>
-			    <li>{@link #getStateMachine}: the {@link StateMachine} definition</li>
+			    <li>{@link #getStateMachine}: the {@link StateGraph state machine} definition</li>
 			  </ul>
 			</ul>
 			</p>
@@ -841,8 +873,8 @@ class DocuPostprocessor {
 			The super class of
 			<ul>
 			  <li>{@link Port}</li>
-			  <li>{@link SAPRef}</li>
-			  <li>{@link SPPRef}</li>
+			  <li>{@link SAP}</li>
+			  <li>{@link SPP}</li>
 			</ul>
 		''')
 		
@@ -874,9 +906,9 @@ class DocuPostprocessor {
 			Relay ports delegate to sub actors and end ports are connected to the actor's state machine.
 			</p>
 			
-			@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)}
-			@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)}
-			@see {@link org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)}
+			@see org.eclipse.etrice.core.room.util.RoomHelpers#isRelay(Port) RoomHelpers.isRelay(Port)
+			@see org.eclipse.etrice.core.room.util.RoomHelpers#isInternal(Port) RoomHelpers.isInternal(Port)
+			@see org.eclipse.etrice.core.room.util.RoomHelpers#isExternal(Port) RoomHelpers.isExternal(Port)
 		''')
 		
 		cls.getAttribute("conjugated").setDocumentation(
@@ -907,7 +939,7 @@ class DocuPostprocessor {
 			An interface port which is referenced by an external port is an external end port.
 			If it is not referenced it is a relay port.
 			
-			@see {@link Port}
+			@see Port
 		''')
 		
 		cls.getReference("interfacePort").setDocumentation(
@@ -929,7 +961,7 @@ class DocuPostprocessor {
 		
 		cls.getReference("protocol").setDocumentation(
 			'''
-				This is the SAPRef's protocol class.
+				This is the SAP's protocol class.
 			''')
 		
 		//------------------------------------------------------------------
@@ -946,13 +978,13 @@ class DocuPostprocessor {
 		
 		cls.getReference("protocol").setDocumentation(
 			'''
-				This is the SAPRef's protocol class.
+				This is the SAP's protocol class.
 			''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("ServiceImplementation")
 		cls.setDocumentation('''
-			A service implementation can be reagrded as the replicated peer port of all {@link SAPRef}s
+			A service implementation can be reagrded as the replicated peer port of all {@link SAP}s
 			that are bound to it following the service resolution logic.
 		''')
 		
@@ -970,8 +1002,8 @@ class DocuPostprocessor {
 			
 			<p>
 			The logical system is the root of the instance tree of the generator model.
-			Each {@link SubSystemRef} is turned into a {@link SubSystemInstance} and each
-			{@link ActorRef} is turned into an {@link ActorInstance}.
+			Each {@link SubSystemRef} is turned into a {@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance} and each
+			{@link ActorRef} is turned into an {@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance}.
 			</p>
 		''')
 		
@@ -1085,15 +1117,37 @@ class DocuPostprocessor {
 			''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("RefPath")
-		cls.setDocumentation('''
-			A path of strings that are interpreted as {@link ActorRef}s starting at a {@link SubSystemClass}.
-		''')
 		
-		cls.getAttribute("refs").setDocumentation(
+		cls = pckg.getClass("RefPath")
+		cls.setDocumentation(
+			'''
+				A path of strings that are interpreted as {@link org.eclipse.etrice.core.room.ActorRef}s starting at a {@link org.eclipse.etrice.core.room.SubSystemClass}.
+			''')
+		
+		cls.getReference("refs").setDocumentation(
 			'''
 				This is a path in the instance tree where each segment corresponds to the name of the
 				corresponding {@link ActorContainerRef}.
+			''')
+			
+		//------------------------------------------------------------------
+		
+		cls = pckg.getClass("RefSegment")
+		cls.setDocumentation(
+			'''
+				A segment of a {@link RefPath}. It consists of a name and an optional index.
+				If the index is not set it will be {@code -1}.
+			''')
+		
+		cls.getAttribute("ref").setDocumentation(
+			'''
+				The segment name corresponding to an actor reference.
+			''')
+		
+		cls.getAttribute("idx").setDocumentation(
+			'''
+				The optional index of the reference (for replicated actors).
+				If not set the index is {@code -1}.
 			''')
 		
 		//------------------------------------------------------------------
@@ -1140,7 +1194,7 @@ class DocuPostprocessor {
 		//------------------------------------------------------------------
 		cls = pckg.getClass("LayerConnection")
 		cls.setDocumentation('''
-			Layer connections are used to connect {@link SAPRef}s and {@link ServiceImplementation}s.
+			Layer connections are used to connect {@link SAP}s and {@link ServiceImplementation}s.
 			The source is described by a {@link SAPoint} and the target by a {@link SPPoint}.
 		''')
 		
@@ -1178,18 +1232,18 @@ class DocuPostprocessor {
 		//------------------------------------------------------------------
 		cls = pckg.getClass("RelaySAPoint")
 		cls.setDocumentation('''
-			Links from a relay {@link SPPRef} of the actor class.
+			Links from a relay {@link SPP} of the actor class.
 		''')
 		
 		cls.getReference("relay").setDocumentation(
 			'''
-				This is the referenced SPPRef.
+				This is the referenced SPP.
 			''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("SPPoint")
 		cls.setDocumentation('''
-			Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor
+			Links to a {@link SPP} of an {@link ActorContainerRef}, i.e. an SPP of a sub actor
 		''')
 		
 		cls.getReference("ref").setDocumentation(
@@ -1235,7 +1289,7 @@ class DocuPostprocessor {
 		cls.setDocumentation('''
 			The super class of
 			<ul>
-			  <li>{@link StateStateGraphNode}</li>
+			  <li>{@link StateGraphNode}</li>
 			  <li>{@link Transition}</li>
 			</ul>
 		''')
@@ -1283,7 +1337,7 @@ class DocuPostprocessor {
 		cls = pckg.getClass("StateGraph")
 		cls.setDocumentation('''
 			A state graph is a directed graph composed of
-			{@link StateGraphNode}s as nodes and {@link Transitions} as edges.
+			{@link StateGraphNode}s as nodes and {@link Transition}s as edges.
 		''')
 			
 		cls.getReference("states").setDocumentation(
@@ -1316,7 +1370,7 @@ class DocuPostprocessor {
 		cls.setDocumentation('''
 			A simple state is the standard case of a @link State}.
 			It comprises and <em>entry</em>, <em>exit</em> and <em>do</em> code
-			and it can contain another {@link StateGRaph} as sub state
+			and it can contain another {@link StateGraph} as sub state
 			graph.
 		''')
 		
@@ -1331,7 +1385,7 @@ class DocuPostprocessor {
 			A refined state can be used only in a derived {@link ActorClass}.
 			It refers to a {@link State} in the inherited state machine
 			which is refined by adding detail code and/or
-			{@link StateGRaphItem}s in the sub state graph.
+			{@link StateGraphItem}s in the sub state graph.
 		''')
 			
 		cls.getReference("target").setDocumentation(
@@ -1347,7 +1401,7 @@ class DocuPostprocessor {
 			target language.
 			
 			<p>
-			The detail code is parsed by the {@link DetailCodeTranslator}
+			The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}
 			which replaces certain frequent constructs like access of members
 			and sending a message via a port by target language specific code.
 			</p>

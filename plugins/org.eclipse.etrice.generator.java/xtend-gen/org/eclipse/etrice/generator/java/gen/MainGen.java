@@ -17,8 +17,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
+import org.eclipse.etrice.generator.java.Main;
+import org.eclipse.etrice.generator.java.gen.ActorClassDataGen;
 import org.eclipse.etrice.generator.java.gen.ActorClassGen;
 import org.eclipse.etrice.generator.java.gen.DataClassGen;
+import org.eclipse.etrice.generator.java.gen.EnumerationTypeGen;
+import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.NodeGen;
 import org.eclipse.etrice.generator.java.gen.NodeRunnerGen;
 import org.eclipse.etrice.generator.java.gen.OptionalActorFactoryGen;
@@ -34,10 +38,16 @@ public class MainGen implements IGenerator {
   private DataClassGen dataClassGen;
   
   @Inject
+  private EnumerationTypeGen enumTypeGen;
+  
+  @Inject
   private ProtocolClassGen protocolClassGen;
   
   @Inject
   private ActorClassGen actorClassGen;
+  
+  @Inject
+  private ActorClassDataGen actorClassDataGen;
   
   @Inject
   private OptionalActorInterfaceGen optionalActorInterfaceGen;
@@ -66,8 +76,14 @@ public class MainGen implements IGenerator {
   
   public void doGenerate(final Root e) {
     this.dataClassGen.doGenerate(e);
+    this.enumTypeGen.doGenerate(e);
     this.protocolClassGen.doGenerate(e);
     this.actorClassGen.doGenerate(e);
+    GlobalSettings _settings = Main.getSettings();
+    boolean _isGenerateStoreDataObj = _settings.isGenerateStoreDataObj();
+    if (_isGenerateStoreDataObj) {
+      this.actorClassDataGen.doGenerate(e);
+    }
     this.optionalActorInterfaceGen.doGenerate(e);
     this.optionalActorFactoryGen.doGenerate(e);
     this.nodeGen.doGenerate(e);

@@ -64,12 +64,12 @@ class DocuPostprocessor {
 		cls.setDocumentation('''
 			An annotation similar to Java annotations that can be used
 			to add {@link KeyValue} pairs to certain model items. The structure 
-			of Annotations are defined by {@AnnotationType}s.
+			of Annotations are defined by {@link AnnotationType}s.
 		''')
 		
 		cls.getReference("type").setDocumentation(
 			'''
-				The {@AnnotationType} that defines the structure of 
+				The {@link AnnotationType} that defines the structure of 
 				the annotation.
 			''')
 		
@@ -104,14 +104,14 @@ class DocuPostprocessor {
 		)
 		cls.getAttribute("targets").setDocumentation(
 			'''A list of names representing the locations in which 
-			{@Annotation}s of this AnnotationType can occur'''
+			{@link Annotation}s of this AnnotationType can occur'''
 		)
 		cls.getReference("docu").setDocumentation(
 			'''Optional model-level documentation'''
 		)
 		cls.getReference("attributes").setDocumentation(
-			'''Defines the {@link Attribute}s that are required or allowed in 
-			{@Annotation} instances of this AnnotationType'''
+			'''Defines the {@link AnnotationAttribute}s that are required or allowed in 
+			{@link Annotation} instances of this AnnotationType'''
 		)
 				
 		//------------------------------------------------------------------

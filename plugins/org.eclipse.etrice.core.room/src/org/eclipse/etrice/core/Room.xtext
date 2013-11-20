@@ -31,6 +31,7 @@ RoomModel :
 	(imports+=Import)*
 	(
 		primitiveTypes+=PrimitiveType	|
+		enumerationTypes+=EnumerationType	|
 		externalTypes+=ExternalType	|
 		dataClasses+=DataClass	|
 		protocolClasses+=GeneralProtocolClass |
@@ -54,10 +55,20 @@ VarDecl:
 
 RefableType: type=[DataType|FQN] (ref?='ref')?;
 
-DataType: PrimitiveType | ComplexType;
+DataType: PrimitiveType | EnumerationType | ComplexType;
 ComplexType: DataClass | ExternalType;
 
 PrimitiveType: 'PrimitiveType' name=ID ':' type=LiteralType '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
+
+EnumerationType:
+	'Enumeration' name=ID (docu=Documentation)? ('of' primitiveType=[PrimitiveType|FQN])? '{'
+		(literals+=EnumLiteral (',' literals+=EnumLiteral)*)?
+	'}'
+;
+
+EnumLiteral:
+	name=ID ('=' literal=IntLiteral)?
+;
 
 ExternalType: 'ExternalType' name=ID '->' targetName=FQN ('default' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
@@ -276,11 +287,12 @@ ActorInstanceMapping:
 ;
 
 RefPath:
-	refs+=ID ('/' refs+=ID)*;
+	refs+=RefSegment ('/' refs+=RefSegment)*;
+
+RefSegment:
+	ref=ID (':' idx=INT)?
+;
 	
-// TODOHRR: bindings for replicated ports
-// (1) declare several bindings
-// (2) use a notation with 1 to n bindings
 Binding:
 	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
 	

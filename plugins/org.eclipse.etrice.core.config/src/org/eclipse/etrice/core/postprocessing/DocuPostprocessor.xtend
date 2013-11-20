@@ -72,7 +72,7 @@ class DocuPostprocessor {
 		
 		cls.getReference("root").setDocumentation(
 			'''
-				This is the logical system that contains the {@link #org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
+				This is the logical system that contains the {@link org.eclipse.etrice.core.room.SubSystemRef sub system reference}.
 			''')
 			
 		cls.getReference("subSystem").setDocumentation(
@@ -212,7 +212,7 @@ class DocuPostprocessor {
 			
 		cls.getReference("subSystem").setDocumentation(
 			'''
-				This is the sub system that contains the {@link #getRefPath actor instance}.
+				This is the sub system that contains the {@link #getPath actor instance}.
 			''')
 			
 		cls.getReference("path").setDocumentation(
@@ -345,10 +345,30 @@ class DocuPostprocessor {
 				A path of strings that are interpreted as {@link org.eclipse.etrice.core.room.ActorRef}s starting at a {@link org.eclipse.etrice.core.room.SubSystemClass}.
 			''')
 		
-		cls.getAttribute("refs").setDocumentation(
+		cls.getReference("refs").setDocumentation(
 			'''
 				This is a path in the instance tree where each segment corresponds to the name of the
-				corresponding {@link ActorContainerRef}.
+				corresponding {@link {@link org.eclipse.etrice.core.room.ActorContainerRef}}.
+			''')
+			
+		//------------------------------------------------------------------
+		
+		cls = pckg.getClass("RefSegment")
+		cls.setDocumentation(
+			'''
+				A segment of a {@link RefPath}. It consists of a name and an optional index.
+				If the index is not set it will be {@code -1}.
+			''')
+		
+		cls.getAttribute("ref").setDocumentation(
+			'''
+				The segment name corresponding to an actor reference.
+			''')
+		
+		cls.getAttribute("idx").setDocumentation(
+			'''
+				The optional index of the reference (for replicated actors).
+				If not set the index is {@code -1}.
 			''')
 			
 		//------------------------------------------------------------------

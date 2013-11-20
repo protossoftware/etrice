@@ -32,7 +32,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MappingModel:
-		//
 		//	"MappingModel" name=FQN "{" imports+=Import* mappings+=Mapping* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -84,14 +83,11 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Mapping:
-		//
 		//	"Mapping" logicalSys=[room::LogicalSystem|FQN] "->" physicalSys=[phys::PhysicalSystem|FQN] "{"
-		//
 		//	subsysMappings+=SubSystemMapping* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"Mapping" logicalSys=[room::LogicalSystem|FQN] "->" physicalSys=[phys::PhysicalSystem|FQN] "{"
-		//
 		//subsysMappings+=SubSystemMapping* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -150,14 +146,11 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//SubSystemMapping:
-		//
 		//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
-		//
 		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
-		//
 		//"}")?
 		public Group getGroup() { return cGroup; }
 
@@ -214,7 +207,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1 = (RuleCall)cPhysicalThreadPhysicalThreadCrossReference_3_0.eContents().get(1);
 		
 		//ThreadMapping:
-		//
 		//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread];
 		public ParserRule getRule() { return rule; }
 
@@ -260,7 +252,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
 		
 		//Import:
-		//
 		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -302,7 +293,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ImportedFQN:
-		//
 		//	FQN ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -325,7 +315,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -393,7 +382,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//MappingModel:
-	//
 	//	"MappingModel" name=FQN "{" imports+=Import* mappings+=Mapping* "}";
 	public MappingModelElements getMappingModelAccess() {
 		return (pMappingModel != null) ? pMappingModel : (pMappingModel = new MappingModelElements());
@@ -404,9 +392,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Mapping:
-	//
 	//	"Mapping" logicalSys=[room::LogicalSystem|FQN] "->" physicalSys=[phys::PhysicalSystem|FQN] "{"
-	//
 	//	subsysMappings+=SubSystemMapping* "}";
 	public MappingElements getMappingAccess() {
 		return (pMapping != null) ? pMapping : (pMapping = new MappingElements());
@@ -417,9 +403,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SubSystemMapping:
-	//
 	//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
-	//
 	//	"}")?;
 	public SubSystemMappingElements getSubSystemMappingAccess() {
 		return (pSubSystemMapping != null) ? pSubSystemMapping : (pSubSystemMapping = new SubSystemMappingElements());
@@ -430,7 +414,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ThreadMapping:
-	//
 	//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread];
 	public ThreadMappingElements getThreadMappingAccess() {
 		return (pThreadMapping != null) ? pThreadMapping : (pThreadMapping = new ThreadMappingElements());
@@ -441,7 +424,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
@@ -452,7 +434,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportedFQN:
-	//
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
 		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
@@ -463,7 +444,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FQN:
-	//
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -474,51 +454,43 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

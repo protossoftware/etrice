@@ -53,7 +53,8 @@ class DataClassGen {
 		import java.io.Serializable;
 		
 		«var models = root.getReferencedModels(dc)»
-		«FOR model : models»import «model.name».*;
+		«FOR model : models»
+			import «model.name».*;
 		«ENDFOR»
 		
 		«dc.userCode(1)»
@@ -151,9 +152,11 @@ class DataClassGen {
 	def private deepCopy(List<Attribute> attributes) {
 		'''
 		«FOR a : attributes»
-			«IF a.type.type instanceof ComplexType»
+			«IF a.type.ref»
+				copy.«a.name» = «a.name»;
+			«ELSEIF a.type.type instanceof ComplexType»
 				if («a.name»!=null) {
-					«IF a.size==0»
+					«IF a.size<=1»
 						copy.«a.name» = «a.name».deepCopy();
 					«ELSE»
 						for (int i=0;i<«a.name».length;i++){

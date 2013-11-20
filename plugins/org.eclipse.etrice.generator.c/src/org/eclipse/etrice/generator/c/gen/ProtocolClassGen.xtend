@@ -18,17 +18,16 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.CommunicationType
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -73,6 +72,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include «dataClass.includePath»
+		«ENDFOR»
+		«FOR enumClass : root.getReferencedEnumClasses(pc)»
+			#include «enumClass.includePath»
 		«ENDFOR»
 		
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»
@@ -163,7 +165,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«FOR message : messages»
 			«var hasData = message.data!=null»
 			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-			«var refp = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
+			«var refp = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive)||(message.data.refType.ref))) "*" else ""»
 			«var data = if (hasData) ", "+typeName+refp+" data" else ""»
 			«messageSignature(portClassName, message.name, "", data)»;
 			«messageSignature(replPortClassName, message.name, "_broadcast", data)»;
@@ -208,7 +210,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«FOR message : sentMsgs»
 				«var hasData = message.data!=null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
-				«var refp = if (hasData && !(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
+				«var refp = if (hasData && !(message.data.refType.type.enumerationOrPrimitive)) "*" else ""»
 				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)»;
 				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)»;
@@ -221,7 +223,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 			«FOR message : messages»
 				«var typeName =message.data.refType.type.typeName»
-				«var refp = if (!(message.data.refType.type instanceof PrimitiveType)) "*" else ""»
+				«var refp = if (!(message.data.refType.type.enumerationOrPrimitive)) "*" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
 					self->«message.name» = «refp»data;
@@ -246,8 +248,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var hasData = message.data!=null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
 				«var refp = if (hasData && ((message.data.refType.ref))) "*" else ""»
-				«var refpd = if (hasData && (!(message.data.refType.type instanceof PrimitiveType)||(message.data.refType.ref))) "*" else ""»
-				«var refa = if (hasData && (!(message.data.refType.type instanceof PrimitiveType))&&(!(message.data.refType.ref))) "" else "&"»
+				«var refpd = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive)||(message.data.refType.ref))) "*" else ""»
+				«var refa = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive))&&(!(message.data.refType.ref))) "" else "&"»
 				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
 				«var dataCall = if (hasData) ", data" else ""»
 				«var hdlr = message.getSendHandler(conj)»

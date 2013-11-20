@@ -104,6 +104,24 @@ public interface RoomFactory extends EFactory
   PrimitiveType createPrimitiveType();
 
   /**
+   * Returns a new object of class '<em>Enumeration Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enumeration Type</em>'.
+   * @generated
+   */
+  EnumerationType createEnumerationType();
+
+  /**
+   * Returns a new object of class '<em>Enum Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enum Literal</em>'.
+   * @generated
+   */
+  EnumLiteral createEnumLiteral();
+
+  /**
    * Returns a new object of class '<em>External Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -399,6 +417,15 @@ public interface RoomFactory extends EFactory
    * @generated
    */
   RefPath createRefPath();
+
+  /**
+   * Returns a new object of class '<em>Ref Segment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ref Segment</em>'.
+   * @generated
+   */
+  RefSegment createRefSegment();
 
   /**
    * Returns a new object of class '<em>Binding</em>'.

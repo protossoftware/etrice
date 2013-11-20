@@ -6,8 +6,12 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.room.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,14 +52,14 @@ public class StateGraphItemImpl extends MinimalEObjectImpl.Container implements 
    */
   public String getName()
   {
-    if (this instanceof org.eclipse.etrice.core.room.State) 
-      return ((org.eclipse.etrice.core.room.State)this).getName();
-    else if (this instanceof org.eclipse.etrice.core.room.TrPoint)
-      return ((org.eclipse.etrice.core.room.TrPoint)this).getName();
-    else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint)
-      return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();
-    else if (this instanceof org.eclipse.etrice.core.room.Transition)
-      return ((org.eclipse.etrice.core.room.Transition)this).getName();
+    if (this instanceof State) 
+      return ((State)this).getName();
+    else if (this instanceof TrPoint)
+      return ((TrPoint)this).getName();
+    else if (this instanceof ChoicePoint)
+      return ((ChoicePoint)this).getName();
+    else if (this instanceof Transition)
+      return ((Transition)this).getName();
     return "";
     
   }

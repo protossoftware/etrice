@@ -15,9 +15,6 @@ package org.eclipse.etrice.runtime.java.modelbase;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.modelbase.RTSystemProtocol.RTSystemConjPort;
@@ -58,25 +55,6 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	private String className;
 	
 	/**
-	 * This map is set during optional actor creation by the factory.
-	 */
-	private PathToPeers path2peers = null;
-	
-	/**
-	 * The path of this instance is used to determine correct mappings.
-	 * It is subtracted from incoming paths, then (relative) peer paths are looked up and
-	 * the result paths are turned into absolute ones by adding this again.
-	 * 
-	 * @see #getPeersForPath(String)
-	 */
-	private String parentPath;
-	
-	/**
-	 * This is equivalent to {@link #parentPath}+{@link #getName()}
-	 */
-	private String ownPath;
-	
-	/**
 	 * The thread (associated with the message service of this ID) that will be used by the
 	 * optional actor instance.
 	 */
@@ -98,8 +76,6 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 		super(parent, name);
 		className = clsname;
 		subtreeThread = parent.getThread();
-		parentPath = getInstancePath();
-		ownPath = getInterfaceInstancePath();
 		
 		RTSystemPort = new RTSystemConjPort(this, IFITEM_RTSystemPort);
 	}
@@ -118,106 +94,12 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	/**
 	 * This is our regular instance path including our own name as last segment.
 	 * 
-	 * @return
+	 * @return the regular instance path including our own name as last segment
 	 */
 	public String getInterfaceInstancePath() {
 		return super.getInstancePath(PATH_DELIM);
 	}
-	
-	/**
-	 * If the path points to our <i>interior</i> (which should be always the case)
-	 * the we turn it into a relative one starting here.
-	 * It is important that our own interface item brokers are treated specially.
-	 * 
-	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#getObject(java.lang.String)
-	 */
-	@Override
-	public IRTObject getObject(String path) {
-		if (path.startsWith(ownPath)) {
-			int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
-			if (sep>=0 && sep<path.length()) {
-				// we turn the path into a relative one and resolve it starting at this instance
-				
-				// path segment of the optional actor
-				String optInst = path.substring(parentPath.length(), sep);
-				
-				// remainder
-				path = path.substring(sep);
-				
-				// if remainder only contains >1 segment 
-				if (path.indexOf(PATH_DELIM, 1)>=0)
-					// we add the optional actor segment
-					path = optInst+path;
-				
-				// finally we have to prefix with our own name since the relative path has to start with that
-				path = getName()+path;
-			}
-		}
-		
-		return super.getObject(path);
-	}
-	
-	/**
-	 * Get list of peer paths.
-	 * <p>
-	 * This method delegates to its parent if {@link #getPath2peers()}{@code ==null}.
-	 * </p>
-	 * <p>
-	 * If an optional actor instance is created the used factory will set
-	 * its own path-to-peer mapping. Then the incoming path is made relative to
-	 * the created actor and the paths looked up in the map are made absolute again.
-	 * 
-	 * @param path an absolute path
-	 * @return a list of absolute peer paths or {@code null} if not mapped
-	 */
-	@Override
-	public List<String> getPeersForPath(String path) {
-		// if no mapping available we delegate to our parent (which is never null)
-		if (getPath2peers()==null)
-			return getParent().getPeersForPath(path);
-		
-		/*  remove parent path+1 up to next delimiter (thus including the optional ref name)
-		 *  e.g.
-		 *  incoming path = /LS/appl/cont/opt/path/to/port
-		 *  rel path = /path/to/port
-		 *  result of lookup (to interface port) = /port
-		 *  returned = /LS/appl/cont/opt/port (one of the interface port brokers)
-		 */
-		int sep = path.indexOf(PATH_DELIM, parentPath.length()+1);
-		if (sep<0 || sep>=path.length())
-			return null;
-		
-		/* The optInstPath for scalar optional actors is parentPath/<name>.
-		 * However, for replicated actors it is parentPath/<name>:<idx>
-		 */
-		String optInstPath = path.substring(0, sep);
-		path = path.substring(sep);
-		
-		if (path.indexOf('/', 1)<0) {
-			/* 
-			 * This is an end port on the interface.
-			 * It is directly mapped to its broker (there is no mapping for it)
-			 */
-			return Collections.singletonList(ownPath+path);
-		}
-		
-		ArrayList<String> paths = getPath2peers().get(path);
-		if (paths!=null) {
-			ArrayList<String> result = new ArrayList<String>();
-			for (String p : paths) {
-				if (p.indexOf('/', 1)>=0)
-					// it's a path nested in the optional instance
-					p = optInstPath+p;
-				else
-					// its a path to one of my brokers (an immediate child)
-					p = ownPath+p;
-				result.add(p);
-			}
-			return result;
-		}
-		return paths;
-	}
-	
+
 	/**
 	 * Get thread for path. The thread is passed to the optional actor creation method.
 	 * 
@@ -227,24 +109,6 @@ public abstract class OptionalActorInterfaceBase extends SystemPortOwner impleme
 	@Override
 	public int getThreadForPath(String path) {
 		return subtreeThread;
-	}
-
-	/**
-	 * This method is called by the optional actor factory to set the relative path mappings
-	 * for the created instance sub tree
-	 * 
-	 * @param path2peers
-	 */
-	public void setPath2peers(PathToPeers path2peers) {
-		this.path2peers = path2peers;
-	}
-
-	/**
-	 * Returns the locally set path-to-peer mapping
-	 * @return the path2peers
-	 */
-	protected PathToPeers getPath2peers() {
-		return path2peers;
 	}
 
 	/**

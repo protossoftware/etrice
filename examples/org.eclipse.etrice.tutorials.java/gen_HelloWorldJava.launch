@@ -7,7 +7,7 @@
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/HelloWorld.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/HelloWorld.etmap}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

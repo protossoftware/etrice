@@ -1,6 +1,8 @@
 RoomModel CGenTests {
 	
 	import ChoicePointTest.* from "ChoicePointTest.room"
+	import ChoicePointTestExtended.* from "ChoicePointTestExtended.room"
+	import EnumTest.* from "EnumTest.room"
 	import DataDrivenTest.* from "DataDrivenTest.room"
 	import HandlerTest.* from "HandlerTest.room"
 	import SendingDataTestC.* from "SendingDataTestC.room"
@@ -8,6 +10,8 @@ RoomModel CGenTests {
 	
 	LogicalSystem CGenTests {
 		SubSystemRef cpTest: SubSystem_CPTest
+		SubSystemRef cpExtTest : SubSystem_CPTestExtended
+		SubSystemRef enTest: SubSystem_EnumTest
 		SubSystemRef ddTest: SubSystem_DataDriven
 		SubSystemRef hdTest: SubSystem_HandlerTest
 		SubSystemRef sdTest: SubSystem_SendingData

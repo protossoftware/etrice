@@ -68,7 +68,7 @@ public class CodegenHelpers {
 	 * @param s a {@link State} (must not be <code>null</code>)
 	 * @return the path of the state that may serve as a unique identifier
 	 * 
-	 * @see {@link org.eclipse.etrice.core.naming.RoomNameProvider#getFullPath(StateGraphItem)}
+	 * @see org.eclipse.etrice.core.naming.RoomNameProvider#getFullPath(StateGraphItem)
 	 */
 	public static String getGenStatePathName(State s) {
 		return RoomNameProvider.getFullPath(s);
@@ -88,7 +88,7 @@ public class CodegenHelpers {
 	/**
 	 * @param s a {@link State} (may be <code>null</code>)
 	 * @return an ID for the parent state of s
-	 * @see {@link #getGenStateId(State)}
+	 * @see #getGenStateId(State)
 	 */
 	public static String getParentStateId(State s) {
 		return getGenStateId(RoomHelpers.getParentState(s));

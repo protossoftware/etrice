@@ -7,7 +7,7 @@
           <ports name="p0" objId="3" peers="//@systemInstances.0/@instances.0/@instances.0/@instances.0/@instances.0/@ports.0" kind="internal" bindings="//@systemInstances.0/@instances.0/@instances.0/@instances.0/@bindings.0">
             <port href="model/DynAct6.room#Port:Container$p0"/>
           </ports>
-          <instances xsi:type="etricegen:ActorInterfaceInstance" name="opt" optionalInstances="//@optionalInstances.0">
+          <instances xsi:type="etricegen:ActorInterfaceInstance" name="opt" optionalInstances="//@optionalInstances.1">
             <ports name="p0" objId="4" peers="//@systemInstances.0/@instances.0/@instances.0/@instances.0/@ports.0" kind="interface" bindings="//@systemInstances.0/@instances.0/@instances.0/@instances.0/@bindings.0">
               <port href="model/DynAct6.room#Port:Optional2$p0"/>
             </ports>
@@ -104,54 +104,106 @@
     <actorClass href="model/DynAct6.room#ActorClass:Optional2"/>
     <stateMachine/>
   </xpActorClasses>
-  <optionalInstances name="Optional2">
-    <ports name="p0" objId="5" peers="//@optionalInstances.0/@instances.0/@instances.0/@instances.0/@ports.0" kind="interface" bindings="//@optionalInstances.0/@bindings.0">
-      <port href="model/DynAct6.room#Port:Optional2$p0"/>
-    </ports>
-    <instances xsi:type="etricegen:ActorInstance" name="sub2" objId="6">
-      <ports name="p0" kind="relay" bindings="//@optionalInstances.0/@instances.0/@bindings.0 //@optionalInstances.0/@bindings.0">
-        <port href="model/DynAct6.room#Port:AC2$p0"/>
-      </ports>
-      <instances xsi:type="etricegen:ActorInstance" name="deep_sub" objId="7">
-        <ports name="p0" kind="relay" bindings="//@optionalInstances.0/@instances.0/@instances.0/@bindings.0 //@optionalInstances.0/@instances.0/@bindings.0">
-          <port href="model/DynAct6.room#Port:AC3$p0"/>
-        </ports>
-        <instances xsi:type="etricegen:ActorInterfaceInstance" name="nestedOpt">
-          <ports name="p0" objId="8" peers="//@optionalInstances.0/@ports.0" kind="interface" bindings="//@optionalInstances.0/@instances.0/@instances.0/@bindings.0">
-            <port href="model/DynAct6.room#Port:Optional1$p0"/>
-          </ports>
-          <actorClass href="model/DynAct6.room#ActorClass:Optional1"/>
-        </instances>
-        <bindings ports="//@optionalInstances.0/@instances.0/@instances.0/@ports.0 //@optionalInstances.0/@instances.0/@instances.0/@instances.0/@ports.0">
-          <binding href="model/DynAct6.room#Binding:AC3$p0!.-p0!nestedOpt"/>
-        </bindings>
-        <actorClass href="model/DynAct6.room#ActorClass:AC3"/>
-      </instances>
-      <bindings ports="//@optionalInstances.0/@instances.0/@ports.0 //@optionalInstances.0/@instances.0/@instances.0/@ports.0">
-        <binding href="model/DynAct6.room#Binding:AC2$p0!.-p0!deep_sub"/>
-      </bindings>
-      <actorClass href="model/DynAct6.room#ActorClass:AC2"/>
-    </instances>
-    <bindings ports="//@optionalInstances.0/@ports.0 //@optionalInstances.0/@instances.0/@ports.0">
-      <binding href="model/DynAct6.room#Binding:Optional2$p0!.-p0!sub2"/>
-    </bindings>
-    <actorClass href="model/DynAct6.room#ActorClass:Optional2"/>
-  </optionalInstances>
   <optionalInstances name="Optional1">
-    <ports name="p0" objId="9" peers="//@optionalInstances.1/@instances.0/@ports.0" kind="interface" bindings="//@optionalInstances.1/@bindings.0">
+    <ports name="p0" objId="5" peers="//@optionalInstances.0/@instances.0/@ports.0" kind="interface" bindings="//@optionalInstances.0/@bindings.0">
       <port href="model/DynAct6.room#Port:Optional1$p0"/>
     </ports>
-    <instances xsi:type="etricegen:ActorInstance" name="sub1" objId="10">
-      <ports name="p0" objId="11" peers="//@optionalInstances.1/@ports.0" bindings="//@optionalInstances.1/@bindings.0">
+    <instances xsi:type="etricegen:ActorInstance" name="sub1" objId="6">
+      <ports name="p0" objId="7" peers="//@optionalInstances.0/@ports.0" bindings="//@optionalInstances.0/@bindings.0">
         <port href="model/DynAct6.room#Port:AC1$p0"/>
       </ports>
       <actorClass href="model/DynAct6.room#ActorClass:AC1"/>
     </instances>
-    <bindings ports="//@optionalInstances.1/@ports.0 //@optionalInstances.1/@instances.0/@ports.0">
+    <bindings ports="//@optionalInstances.0/@ports.0 //@optionalInstances.0/@instances.0/@ports.0">
       <binding href="model/DynAct6.room#Binding:Optional1$p0!.-p0!sub1"/>
     </bindings>
     <actorClass href="model/DynAct6.room#ActorClass:Optional1"/>
   </optionalInstances>
-  <optionalActorClasses href="model/DynAct6.room#ActorClass:Optional2"/>
+  <optionalInstances name="Optional2">
+    <ports name="p0" objId="8" peers="//@optionalInstances.1/@instances.0/@instances.0/@instances.0/@ports.0" kind="interface" bindings="//@optionalInstances.1/@bindings.0">
+      <port href="model/DynAct6.room#Port:Optional2$p0"/>
+    </ports>
+    <instances xsi:type="etricegen:ActorInstance" name="sub2" objId="9">
+      <ports name="p0" kind="relay" bindings="//@optionalInstances.1/@instances.0/@bindings.0 //@optionalInstances.1/@bindings.0">
+        <port href="model/DynAct6.room#Port:AC2$p0"/>
+      </ports>
+      <instances xsi:type="etricegen:ActorInstance" name="deep_sub" objId="10">
+        <ports name="p0" kind="relay" bindings="//@optionalInstances.1/@instances.0/@instances.0/@bindings.0 //@optionalInstances.1/@instances.0/@bindings.0">
+          <port href="model/DynAct6.room#Port:AC3$p0"/>
+        </ports>
+        <instances xsi:type="etricegen:ActorInterfaceInstance" name="nestedOpt">
+          <ports name="p0" objId="11" peers="//@optionalInstances.1/@ports.0" kind="interface" bindings="//@optionalInstances.1/@instances.0/@instances.0/@bindings.0">
+            <port href="model/DynAct6.room#Port:Optional1$p0"/>
+          </ports>
+          <actorClass href="model/DynAct6.room#ActorClass:Optional1"/>
+        </instances>
+        <bindings ports="//@optionalInstances.1/@instances.0/@instances.0/@ports.0 //@optionalInstances.1/@instances.0/@instances.0/@instances.0/@ports.0">
+          <binding href="model/DynAct6.room#Binding:AC3$p0!.-p0!nestedOpt"/>
+        </bindings>
+        <actorClass href="model/DynAct6.room#ActorClass:AC3"/>
+      </instances>
+      <bindings ports="//@optionalInstances.1/@instances.0/@ports.0 //@optionalInstances.1/@instances.0/@instances.0/@ports.0">
+        <binding href="model/DynAct6.room#Binding:AC2$p0!.-p0!deep_sub"/>
+      </bindings>
+      <actorClass href="model/DynAct6.room#ActorClass:AC2"/>
+    </instances>
+    <bindings ports="//@optionalInstances.1/@ports.0 //@optionalInstances.1/@instances.0/@ports.0">
+      <binding href="model/DynAct6.room#Binding:Optional2$p0!.-p0!sub2"/>
+    </bindings>
+    <actorClass href="model/DynAct6.room#ActorClass:Optional2"/>
+  </optionalInstances>
   <optionalActorClasses href="model/DynAct6.room#ActorClass:Optional1"/>
+  <optionalActorClasses href="model/DynAct6.room#ActorClass:Optional2"/>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <actorClass href="model/DynAct6.room#ActorClass:AC1"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <openBindings>
+      <path>nestedOpt</path>
+      <path>p0</path>
+      <port href="model/DynAct6.room#Port:AC3$p0"/>
+    </openBindings>
+    <actorClass href="model/DynAct6.room#ActorClass:AC3"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <openBindings>
+      <path>deep_sub</path>
+      <path>nestedOpt</path>
+      <path>p0</path>
+      <port href="model/DynAct6.room#Port:AC2$p0"/>
+    </openBindings>
+    <actorClass href="model/DynAct6.room#ActorClass:AC2"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <wires>
+      <path1>opt</path1>
+      <path1>p0</path1>
+      <path2>p0</path2>
+    </wires>
+    <actorClass href="model/DynAct6.room#ActorClass:Container"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <actorClass href="model/DynAct6.room#ActorClass:Appl"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <openBindings>
+      <path>sub1</path>
+      <path>p0</path>
+      <port href="model/DynAct6.room#Port:Optional1$p0"/>
+    </openBindings>
+    <actorClass href="model/DynAct6.room#ActorClass:Optional1"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredActorClass">
+    <openBindings>
+      <path>sub2</path>
+      <path>deep_sub</path>
+      <path>nestedOpt</path>
+      <path>p0</path>
+      <port href="model/DynAct6.room#Port:Optional2$p0"/>
+    </openBindings>
+    <actorClass href="model/DynAct6.room#ActorClass:Optional2"/>
+  </wiredInstances>
+  <wiredInstances xsi:type="etricegen:WiredSubSystemClass">
+    <subSystemClass href="model/DynAct6.room#SubSystemClass:Main"/>
+  </wiredInstances>
 </etricegen:Root>

@@ -26,7 +26,6 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -373,14 +372,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
         if (_generateMSCInstrumentation_2) {
           _builder.append("\t\t\t");
-          _builder.append("if (messageStrings[msg.getEvtId()] != \"timerTick\"){");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("}");
           _builder.newLine();
         }
       }
@@ -432,16 +424,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t\t\t");
+      _builder.append("\t\t\t");
       _builder.append("if (msg instanceof EventWithDataMessage)");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t\t\t");
       _builder.append("else");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
+      _builder.append("\t\t\t\t");
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
       _builder.newLine();
       {
@@ -751,25 +743,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
             if (_generateMSCInstrumentation) {
               _builder.append("\t");
-              _builder.append("if (messageStrings[ ");
+              _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
               _builder.append(dir, "	");
               _builder.append("_");
               String _name = m.getName();
               _builder.append(_name, "	");
-              _builder.append("] != \"timerTick\") {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[");
-              _builder.append(dir, "		");
-              _builder.append("_");
-              String _name_1 = m.getName();
-              _builder.append(_name_1, "		");
               _builder.append("]);");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
             }
           }
           _builder.append("\t");
@@ -784,8 +764,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), ");
               _builder.append(dir, "		");
               _builder.append("_");
-              String _name_2 = m.getName();
-              _builder.append(_name_2, "		");
+              String _name_1 = m.getName();
+              _builder.append(_name_1, "		");
               _builder.append("));");
               _builder.newLineIfNotEmpty();
             } else {
@@ -794,12 +774,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), ");
               _builder.append(dir, "		");
               _builder.append("_");
-              String _name_3 = m.getName();
-              _builder.append(_name_3, "		");
+              String _name_2 = m.getName();
+              _builder.append(_name_2, "		");
               _builder.append(", ");
               VarDecl _data_1 = m.getData();
-              String _name_4 = _data_1.getName();
-              _builder.append(_name_4, "		");
+              String _name_3 = _data_1.getName();
+              _builder.append(_name_3, "		");
               {
                 boolean _and = false;
                 VarDecl _data_2 = m.getData();
@@ -812,7 +792,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
                   VarDecl _data_3 = m.getData();
                   RefableType _refType_1 = _data_3.getRefType();
                   DataType _type = _refType_1.getType();
-                  boolean _not_1 = (!(_type instanceof PrimitiveType));
+                  boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type);
+                  boolean _not_1 = (!_isEnumerationOrPrimitive);
                   _and = (_not && _not_1);
                 }
                 if (_and) {
@@ -845,14 +826,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          String _name_5 = m.getName();
-          _builder.append(_name_5, "	");
+          String _name_4 = m.getName();
+          _builder.append(_name_4, "	");
           _builder.append("(new ");
           VarDecl _data_6 = m.getData();
           RefableType _refType_3 = _data_6.getRefType();
           DataType _type_2 = _refType_3.getType();
-          String _name_6 = _type_2.getName();
-          _builder.append(_name_6, "	");
+          String _name_5 = _type_2.getName();
+          _builder.append(_name_5, "	");
           _builder.append("(");
           VarDecl _data_7 = m.getData();
           RefableType _refType_4 = _data_7.getRefType();
@@ -875,12 +856,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-          public Boolean apply(final Message m) {
-            VarDecl _data = m.getData();
-            boolean _notEquals = (!Objects.equal(_data, null));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final EList<RoomModel> models = root.getReferencedModels(pc);
       StringConcatenation _builder = new StringConcatenation();

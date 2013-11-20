@@ -12,9 +12,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.List;
-
-import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 import org.eclipse.etrice.runtime.java.messaging.Message;
 
 /**
@@ -39,15 +36,14 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 
 	// CAUTION: must NOT initialize firstPeer with null since is set in base class constructor and
 	// AFTERWARDS initialized ==> value is lost
-	private IRTObject firstPeer;
-	private InterfaceItemBase secondPeer;
+	private IInterfaceItem firstPeer;
+	private IInterfaceItem secondPeer;
 
 	public InterfaceItemBroker(IInterfaceItemOwner parent, String name, int localId) {
 		this(parent, name, localId, 0);
 	}
 
 	/**
-	 * @param actor
 	 * @param name
 	 * @param localId
 	 * @param idx
@@ -63,33 +59,19 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 	public void receive(Message msg) {
 		// ignore this, will never receive a message
 	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase#connectWithPeer()
-	 */
-	protected void connectWithPeer() {
-		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
-		if (peerPaths!=null && !peerPaths.isEmpty()) {
-			firstPeer = getObject(peerPaths.get(0));
-			if (firstPeer instanceof InterfaceItemBroker) {
-				if (((InterfaceItemBroker) firstPeer).firstPeer==null)
-					((InterfaceItemBroker) firstPeer).firstPeer = this;
-			}
-		}
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase#connectWith(org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase)
 	 */
 	@Override
-	public InterfaceItemBase connectWith(InterfaceItemBase peer) {
+	public IInterfaceItem connectWith(IInterfaceItem peer) {
 		if (firstPeer!=null) {
 			// we are already connected, lets connect our new peer with the previous one
 			
 			secondPeer = peer;
 			
 			// we don't want to change firstPeer, so make a copy
-			IRTObject first = firstPeer;
+			IInterfaceItem first = firstPeer;
 			
 			{
 				InterfaceItemBroker broker = this;
@@ -117,30 +99,18 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 				}
 			}
 			
-			InterfaceItemBase peer1 = null;
-			InterfaceItemBase peer2 = peer;
-			
-			if (first instanceof IReplicatedInterfaceItem) {
-				// get a new replicated sub port
-				peer1 = ((IReplicatedInterfaceItem) first).createSubInterfaceItem();
-			}
-			else if (first instanceof InterfaceItemBase) {
-				peer1 = (InterfaceItemBase) first;
-			}
-			else {
-				assert(false): "unexpected peer kind";
-				return null;
-			}
-			
-			peer2.peerAddress = peer1.getAddress();
-			peer2.peerMsgReceiver = peer1.ownMsgReceiver;
-			peer1.peerAddress = peer2.getAddress();
-			peer1.peerMsgReceiver = peer2.ownMsgReceiver;
-			
-			return peer1;
+			return first.connectWith(peer);
 		}
 		else {
 			firstPeer = peer;
+			
+			if (firstPeer instanceof InterfaceItemBroker) {
+				// deal with the situation that two brokers aren't connected yet: make symmetrical and set also first peer
+				// of neighbor
+				InterfaceItemBroker neighbor = (InterfaceItemBroker) firstPeer;
+				if (neighbor.firstPeer==null)
+					neighbor.firstPeer = this;
+			}
 		
 			return this;
 		}
@@ -158,7 +128,8 @@ public class InterfaceItemBroker extends InterfaceItemBase implements IInterface
 	public String toString() {
 		String peer1 = (firstPeer instanceof InterfaceItemBase)? (((InterfaceItemBase)firstPeer).getAddress().toString()+"("+firstPeer.getClass().toString()+")")
 				:(firstPeer instanceof ReplicatedInterfaceItemBase? (((ReplicatedInterfaceItemBase)firstPeer).toString()+"("+firstPeer.getClass().toString()+")"):"null");
-		String peer2 = secondPeer==null? "null":(secondPeer.getAddress().toString()+"("+secondPeer.getClass().toString()+")");
+		String peer2 = (secondPeer instanceof InterfaceItemBase)? (((InterfaceItemBase)secondPeer).getAddress().toString()+"("+secondPeer.getClass().toString()+")")
+				:(secondPeer instanceof ReplicatedInterfaceItemBase? (((ReplicatedInterfaceItemBase)secondPeer).toString()+"("+secondPeer.getClass().toString()+")"):"null");
 		return "interface broker port "+getName()+" - 1. peer "+peer1+" 2. peer "+peer2;
 	}
 }

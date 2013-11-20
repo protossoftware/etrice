@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
@@ -46,10 +47,14 @@ public class TypeHelpers {
     if ((type instanceof PrimitiveType)) {
       return ((PrimitiveType) type).getTargetName();
     } else {
-      if ((type instanceof ExternalType)) {
-        return ((ExternalType) type).getTargetName();
+      if ((type instanceof EnumerationType)) {
+        return RoomHelpers.getTargetType(((EnumerationType) type));
       } else {
-        return type.getName();
+        if ((type instanceof ExternalType)) {
+          return ((ExternalType) type).getTargetName();
+        } else {
+          return type.getName();
+        }
       }
     }
   }
@@ -130,6 +135,20 @@ public class TypeHelpers {
   
   public boolean isPrimitive(final DataType type) {
     return (type instanceof PrimitiveType);
+  }
+  
+  public boolean isEnumeration(final DataType type) {
+    return (type instanceof EnumerationType);
+  }
+  
+  public boolean isEnumerationOrPrimitive(final DataType type) {
+    boolean _or = false;
+    if ((type instanceof EnumerationType)) {
+      _or = true;
+    } else {
+      _or = ((type instanceof EnumerationType) || (type instanceof PrimitiveType));
+    }
+    return _or;
   }
   
   public boolean isDataClass(final DataType type) {

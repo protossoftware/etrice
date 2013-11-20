@@ -6,7 +6,7 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.common.edit"
     editorPluginID="org.eclipse.etrice.core.common.editor" runtimeVersion="2.9">
   <genPackages prefix="Base" basePackage="org.eclipse.etrice.core.common" disposableProviderFactory="true"
-      fileExtensions="etbase" ecorePackage="Base.ecore#/">
+      fileExtensions="__etbase" ecorePackage="Base.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Base.ecore#//LiteralType">
       <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/BOOL"/>
       <genEnumLiterals ecoreEnumLiteral="Base.ecore#//LiteralType/INT"/>

@@ -19,15 +19,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
+import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.SubSystemClass;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.TreeIterator;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -163,8 +161,8 @@ public class SubSystemInstanceImpl extends StructureInstanceImpl implements SubS
 			for (ActorInstanceMapping aim : getSubSystemClass().getActorInstanceMappings()) {
 				int tid = getSubSystemClass().getThreads().indexOf(aim.getThread())+1;
 				String path = getPath();
-				for (String seg : aim.getPath().getRefs()) {
-					path += InstanceBase.pathDelim+seg;
+				for (RefSegment seg : aim.getPath().getRefs()) {
+					path += InstanceBase.pathDelim+seg.toString();
 				}
 				inst2thread.put(path, tid);
 			}

@@ -66,7 +66,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//AttrInstanceConfig/attributes"/>
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//RefPath">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RefPath/refs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//RefPath/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//RefSegment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RefSegment/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RefSegment/idx"/>
+      <genOperations ecoreOperation="Config.ecore#//RefSegment/toString"/>
     </genClasses>
     <genClasses ecoreClass="Config.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importedNamespace"/>

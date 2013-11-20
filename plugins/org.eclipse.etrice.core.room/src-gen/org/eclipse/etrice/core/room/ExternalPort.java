@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * An interface port which is referenced by an external port is an external end port.
  * If it is not referenced it is a relay port.
  * 
- * @see {@link Port}
+ * @see Port
  * 
  * <!-- end-model-doc -->
  *

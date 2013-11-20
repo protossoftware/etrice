@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumerationType
 
 class Initialization {
 	
@@ -44,7 +45,7 @@ class Initialization {
 	def private String initAttributeArray(InstanceBase instance, List<Attribute> path){
 		var a = path.last
 		var COMMENT = '''		/* «a.name»«IF a.size>1»[«a.size»]«ENDIF» */'''.toString
-		if(a.size == 0 || (!a.type.ref && a.type.type.primitive))
+		if(a.size == 0 || (!a.type.ref && a.type.type.enumerationOrPrimitive))
 			initAttribute(instance, path)+COMMENT
 		else 
 		'''
@@ -81,6 +82,13 @@ class Initialization {
 				else
 					value
 			}
+			EnumerationType: {
+				var value = aType.defaultValue
+				if (a.size > 0 && !value.trim.startsWith('{'))
+					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
+				else
+					value
+			}
 		}
 	}
 	
@@ -93,6 +101,9 @@ class Initialization {
 			}
 		if(value == null)
 			value = path.last.defaultValueLiteral
+		
+		// TODO-Enum: was it guaranteed that path.last.type.type is a PrimitiveType?
+		// now: treat EnumerationType separately 
 		return if(value != null) languageExt.toValueLiteral(path.last.type.type as PrimitiveType, value)
 			else languageExt.defaultValue(path.last.type.type)
 	}

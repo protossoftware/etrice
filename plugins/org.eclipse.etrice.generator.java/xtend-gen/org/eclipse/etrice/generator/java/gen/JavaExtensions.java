@@ -19,12 +19,14 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -159,8 +161,8 @@ public class JavaExtensions implements ILanguageExtension {
     } else {
       RefableType _type = a.getType();
       DataType _type_1 = _type.getType();
-      boolean _isPrimitive = this.typeHelpers.isPrimitive(_type_1);
-      boolean _not = (!_isPrimitive);
+      boolean _isEnumerationOrPrimitive = this.typeHelpers.isEnumerationOrPrimitive(_type_1);
+      boolean _not = (!_isEnumerationOrPrimitive);
       _or_1 = (_greaterThan || _not);
     }
     if (_or_1) {
@@ -223,7 +225,7 @@ public class JavaExtensions implements ILanguageExtension {
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      for(final Pair<String,String> entry : entries) {
+      for(final Pair<String, String> entry : entries) {
         _builder.append("public static final int ");
         String _first = entry.getFirst();
         _builder.append(_first, "");
@@ -451,6 +453,14 @@ public class JavaExtensions implements ILanguageExtension {
       }
     }
     if (!_matched) {
+      if (dt instanceof EnumerationType) {
+        final EnumerationType _enumerationType = (EnumerationType)dt;
+        _matched=true;
+        String _defaultValue = RoomHelpers.getDefaultValue(_enumerationType);
+        _switchResult = _defaultValue;
+      }
+    }
+    if (!_matched) {
       if (dt instanceof ExternalType) {
         final ExternalType _externalType = (ExternalType)dt;
         _matched=true;
@@ -539,6 +549,19 @@ public class JavaExtensions implements ILanguageExtension {
       }
       if (_and) {
         castTypeName = ct;
+      }
+    } else {
+      RefableType _refType_4 = data.getRefType();
+      DataType _type_4 = _refType_4.getType();
+      if ((_type_4 instanceof EnumerationType)) {
+        RefableType _refType_5 = data.getRefType();
+        DataType _type_5 = _refType_5.getType();
+        String _targetType = RoomHelpers.getTargetType(((EnumerationType) _type_5));
+        typeName = _targetType;
+        RefableType _refType_6 = data.getRefType();
+        DataType _type_6 = _refType_6.getType();
+        String _javaCastType = RoomHelpers.getJavaCastType(((EnumerationType) _type_6));
+        castTypeName = _javaCastType;
       }
     }
     String _plus = (typeName + " ");

@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -206,11 +207,12 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 				return true;
 		}
 		if (keyword.getValue().equals("Attr")) {
-			if (!(dataType instanceof PrimitiveType || dataType instanceof DataClass))
+			if (!(dataType instanceof PrimitiveType || dataType instanceof EnumerationType || dataType instanceof DataClass))
 				return true;
 		}
 		if (keyword.getValue().equals("=")) {
 			if (!config.getAttribute().eIsProxy())
+				// TODO-Enum
 				if (!(dataType instanceof PrimitiveType))
 					return true;
 		}

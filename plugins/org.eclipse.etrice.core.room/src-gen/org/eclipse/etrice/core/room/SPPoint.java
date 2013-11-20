@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>Links to a {@link SPPRef} of an {@link ActorContainerRef}, i.e. an SPPRef of a sub actor
+ * <br>Links to a {@link SPP} of an {@link ActorContainerRef}, i.e. an SPP of a sub actor
  * 
  * <!-- end-model-doc -->
  *

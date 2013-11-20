@@ -199,10 +199,22 @@ public class GeneratorModelBuilder {
 			setObjectIDs();
 		}
 		
+		// wiring on a per class level
+		createWiredInstances(root);
+		
 		// transform actor classes
 		createExpandedActorClasses(root);
 		
 		return root;
+	}
+
+	/**
+	 * @param root
+	 */
+	private void createWiredInstances(Root root) {
+		// no pre-requisites, just need used classes
+		
+		new Wiring(root).createWiredClasses();
 	}
 
 	boolean dependenciesSatisfied(WorkItem... items) {
@@ -683,6 +695,7 @@ public class GeneratorModelBuilder {
 		
 		alreadyDone.add(WorkItem.CREATE_INSTANCES);
 		alreadyDone.add(WorkItem.CREATE_BINDINGS);
+		alreadyDone.add(WorkItem.CREATE_PORTS);
 		
 		return instance;
 	}
@@ -707,7 +720,7 @@ public class GeneratorModelBuilder {
 	private StructureInstance recursivelyCreateActorInstances(ActorRef aref, int idx) {
 		String name = aref.getName();
 		if (idx>=0)
-			name += "_"+idx;
+			name += GenmodelConstants.INDEX_SEP+""+idx;
 		
 		if (debug)
 			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
@@ -812,7 +825,7 @@ public class GeneratorModelBuilder {
 	 */
 	private void createPortInstances(AbstractInstance ai, ActorClass ac) {
 		createPortInstances(ac.getExternalEndPorts(), PortKind.EXTERNAL, ai);
-		if (ai instanceof ActorInstance)
+		if (ai instanceof ActorInstance || ai instanceof OptionalActorInstance)
 			createPortInstances(ac.getInternalPorts(), PortKind.INTERNAL, ai);
 		createPortInstances(ac.getRelayPorts(), PortKind.RELAY, ai);
 	}
@@ -980,6 +993,8 @@ public class GeneratorModelBuilder {
 	 * @param root
 	 */
 	private void connectPorts(Root root) {
+		assert(dependenciesSatisfied(WorkItem.CREATE_BINDINGS)): "dependencies satisfied";
+		
 		TreeIterator<EObject> it = root.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
@@ -1011,6 +1026,8 @@ public class GeneratorModelBuilder {
 				}
 			}
 		}
+		
+		alreadyDone.add(WorkItem.CONNECT_PORTS);
 	}
 
 	/**

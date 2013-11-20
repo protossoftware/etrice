@@ -143,6 +143,22 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.ENUMERATION_TYPE:
+      {
+        EnumerationType enumerationType = (EnumerationType)theEObject;
+        T result = caseEnumerationType(enumerationType);
+        if (result == null) result = caseDataType(enumerationType);
+        if (result == null) result = caseRoomClass(enumerationType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.ENUM_LITERAL:
+      {
+        EnumLiteral enumLiteral = (EnumLiteral)theEObject;
+        T result = caseEnumLiteral(enumLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.EXTERNAL_TYPE:
       {
         ExternalType externalType = (ExternalType)theEObject;
@@ -400,6 +416,13 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RefPath refPath = (RefPath)theEObject;
         T result = caseRefPath(refPath);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.REF_SEGMENT:
+      {
+        RefSegment refSegment = (RefSegment)theEObject;
+        T result = caseRefSegment(refSegment);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -864,6 +887,38 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePrimitiveType(PrimitiveType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumerationType(EnumerationType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumLiteral(EnumLiteral object)
   {
     return null;
   }
@@ -1392,6 +1447,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRefPath(RefPath object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ref Segment</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ref Segment</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRefSegment(RefSegment object)
   {
     return null;
   }

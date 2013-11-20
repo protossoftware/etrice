@@ -18,20 +18,17 @@ import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType
-import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class Initialization {
 
 	@Inject extension TypeHelpers
-	@Inject extension RoomExtensions
+//	@Inject extension RoomExtensions
 	@Inject ILanguageExtension languageExt
-	@Inject IDataConfiguration dataConfigExt
-	@Inject ProcedureHelpers procedureHelpers
+//	@Inject IDataConfiguration dataConfigExt
+//	@Inject ProcedureHelpers procedureHelpers
 	
 	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
 		'''

@@ -124,6 +124,12 @@
 		<arg value='""' />
 		<arg line='"-d../html"' />
 	</exec>
+	
+	<!-- fix for wrong order of </p> and </div> -->
+	<replace dir="${html.dir}" token="&lt;/p> &lt;/div>" value="&lt;/div> &lt;/p>">
+	  <include name="**/*.html"/>
+	</replace>
+	
 	<copy todir="${html.dir}">
 		<fileset dir="${doc.dir}"
 			includes="**/*.html **/*.png **/*.css" 

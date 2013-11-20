@@ -77,7 +77,7 @@ public class Activator extends AbstractUIPlugin {
 				System.err.println("image not found: "+path);
 			else {
 				getDefault().getImageRegistry().put(path, desc);
-				getDefault().getImageRegistry().get(path);
+				img = getDefault().getImageRegistry().get(path);
 			}
 		}
 		return img;

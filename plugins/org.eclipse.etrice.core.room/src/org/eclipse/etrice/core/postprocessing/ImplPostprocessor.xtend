@@ -21,43 +21,44 @@ import static extension org.eclipse.etrice.core.common.postprocessing.Postproces
 class ImplPostprocessor {
 	
 	def process(GeneratedMetamodel metamodel) {
-		var roomPackage = metamodel.EPackage
+		val roomPackage = metamodel.EPackage
 		
-		var port = roomPackage.getClass("Port")
+		val port = roomPackage.getClass("Port")
 		port.getAttribute("multiplicity").setDefaultValueLiteral("1")
 		port.addOperation("isReplicated", EcorePackage::eINSTANCE.getEClassifier("EBoolean"), 1, 
 			'''return multiplicity>1 || multiplicity==-1;''')
 		
-		var actorRef = roomPackage.getClass("ActorRef")
+		val actorRef = roomPackage.getClass("ActorRef")
 		actorRef.getAttribute("multiplicity").setDefaultValueLiteral("1")
 		
-		var state = roomPackage.getClass("State")
+		val state = roomPackage.getClass("State")
 		state.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
-			'''return (this instanceof org.eclipse.etrice.core.room.SimpleState)? ((org.eclipse.etrice.core.room.SimpleState)this).getName() :(this instanceof org.eclipse.etrice.core.room.RefinedState)? (((org.eclipse.etrice.core.room.RefinedState)this).getTarget()==null? "":((org.eclipse.etrice.core.room.RefinedState)this).getTarget().getName()) :"";''')
+		// HOWTO: putting a fully qualified type name in <% %> makes ecore generate an import statement
+			'''return (this instanceof <%org.eclipse.etrice.core.room.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof <%org.eclipse.etrice.core.room.RefinedState%>)? (((RefinedState)this).getTarget()==null? "":((RefinedState)this).getTarget().getName()) :"";''')
 		
-		var stateGraphItem = roomPackage.getClass("StateGraphItem")
+		val stateGraphItem = roomPackage.getClass("StateGraphItem")
 		stateGraphItem.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
 			'''
-			if (this instanceof org.eclipse.etrice.core.room.State) 
-				return ((org.eclipse.etrice.core.room.State)this).getName();
-			else if (this instanceof org.eclipse.etrice.core.room.TrPoint)
-				return ((org.eclipse.etrice.core.room.TrPoint)this).getName();
-			else if (this instanceof org.eclipse.etrice.core.room.ChoicePoint)
-				return ((org.eclipse.etrice.core.room.ChoicePoint)this).getName();
-			else if (this instanceof org.eclipse.etrice.core.room.Transition)
-				return ((org.eclipse.etrice.core.room.Transition)this).getName();
+			if (this instanceof <%org.eclipse.etrice.core.room.State%>) 
+				return ((State)this).getName();
+			else if (this instanceof <%org.eclipse.etrice.core.room.TrPoint%>)
+				return ((TrPoint)this).getName();
+			else if (this instanceof <%org.eclipse.etrice.core.room.ChoicePoint%>)
+				return ((ChoicePoint)this).getName();
+			else if (this instanceof <%org.eclipse.etrice.core.room.Transition%>)
+				return ((Transition)this).getName();
 			return "";
 			''')
 			
-		var interfaceItem = roomPackage.getClass("InterfaceItem")
+		val interfaceItem = roomPackage.getClass("InterfaceItem")
 		interfaceItem.addOperation("getGeneralProtocol", roomPackage.getEClassifier("GeneralProtocolClass"), 1, 
 			'''
-			if (this instanceof org.eclipse.etrice.core.room.Port)
-				return ((org.eclipse.etrice.core.room.Port) this).getProtocol();
-			else if (this instanceof org.eclipse.etrice.core.room.SAP)
-				return ((org.eclipse.etrice.core.room.SAP) this).getProtocol();
-			else if (this instanceof org.eclipse.etrice.core.room.SPP)
-				return ((org.eclipse.etrice.core.room.SPP) this).getProtocol();
+			if (this instanceof <%org.eclipse.etrice.core.room.Port%>)
+				return ((Port) this).getProtocol();
+			else if (this instanceof <%org.eclipse.etrice.core.room.SAP%>)
+				return ((SAP) this).getProtocol();
+			else if (this instanceof <%org.eclipse.etrice.core.room.SPP%>)
+				return ((SPP) this).getProtocol();
 			return null;
 			''')
 			
@@ -87,6 +88,64 @@ class ImplPostprocessor {
 					spps.add(spp.getSpp());
 				}
 				return spps;
+			'''
+		)
+		
+		val actorContainerRef = roomPackage.getClass("ActorContainerRef")
+		actorContainerRef.addOperation("getStructureClass",
+			roomPackage.getEClassifier("StructureClass"),
+			1,
+			'''
+				if (this instanceof <%org.eclipse.etrice.core.room.ActorRef%>)
+					return ((ActorRef)this).getType();
+				else if (this instanceof <%org.eclipse.etrice.core.room.SubSystemRef%>)
+					return ((SubSystemRef)this).getType();
+				else
+					return null;
+			'''
+		)
+				
+		val refPath = roomPackage.getClass("RefPath")
+		refPath.addOperation(
+			"toString",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				StringBuilder sb = new StringBuilder();
+				for (RefSegment ref : getRefs()) {
+					sb.append("/"+ref.toString());
+				}
+				return sb.toString();
+			'''
+		)
+				
+		val refSeg = roomPackage.getClass("RefSegment")
+		refSeg.getAttribute("idx").setDefaultValueLiteral("-1")
+		refSeg.addOperation(
+			"toString",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");
+			'''
+		)
+		
+		val enumLiteral = roomPackage.getClass("EnumLiteral")
+		enumLiteral.addOperation(
+			"getLiteralValue",
+			EcorePackage::eINSTANCE.getEClassifier("ELong"),
+			1,
+			'''
+				if (this.getLiteral() != null)
+					return this.getLiteral().getValue();
+				
+				// recursively from predecessor
+				<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());
+				int idx = et.getLiterals().indexOf(this);
+				if (idx > 0)
+					return et.getLiterals().get(idx - 1).getLiteralValue() + 1;
+				
+				return 0;
 			'''
 		)
 	}

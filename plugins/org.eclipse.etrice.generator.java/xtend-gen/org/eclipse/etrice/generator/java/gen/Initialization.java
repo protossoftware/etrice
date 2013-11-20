@@ -189,6 +189,13 @@ public class Initialization {
             _xifexpression_2 = _attributeInit;
           }
           return _xifexpression_2;
+        } else {
+          CharSequence _xifexpression_3 = null;
+          boolean _isEnumeration = this.typeHelpers.isEnumeration(aType);
+          if (_isEnumeration) {
+            _xifexpression_3 = null;
+          }
+          _xifexpression_1 = _xifexpression_3;
         }
         _xifexpression = _xifexpression_1;
       }

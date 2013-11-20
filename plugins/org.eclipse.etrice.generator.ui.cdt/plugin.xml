@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.etrice.generator.ui.project_configurator">
+      <project_configurator
+            appliesToNature="org.eclipse.cdt.core.cnature"
+            class="org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator">
+      </project_configurator>
+   </extension>
+
+</plugin>

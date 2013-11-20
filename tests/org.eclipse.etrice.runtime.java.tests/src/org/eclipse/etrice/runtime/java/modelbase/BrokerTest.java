@@ -47,19 +47,18 @@ public class BrokerTest extends TestCase {
 		top.addPathToThread("/TOP/Rcv0", 0);
 		top.addPathToThread("/TOP/Rcv1", 1);
 		top.addPathToThread("/TOP/Rcv2", 2);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv0/Port0");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv1/Port1");
 		
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		MockEventReceiver eventRcv2 = new MockEventReceiver(top, "Rcv2");
 		
-		// caution: the order is relevant
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
 		InterfaceItemBroker broker = new InterfaceItemBroker(eventRcv2, "Broker", 55, 10);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
+		
+		// caution: the order is relevant
+		port0.connectWith(broker);
+		port1.connectWith(broker);
 		
 		MessageServiceController msgSvcCtrl = RTServices.getInstance().getMsgSvcCtrl();
 		assertEquals(msgSvcCtrl.getMsgSvc(0), port0.getMsgReceiver());
@@ -83,23 +82,21 @@ public class BrokerTest extends TestCase {
 		top.addPathToThread("/TOP/Rcv1", 1);
 		top.addPathToThread("/TOP/Rcv2", 2);
 		top.addPathToThread("/TOP/Rcv3", 2);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv0/Port0");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv3/Broker");
-		top.addPathToPeer("/TOP/Rcv3/Broker", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv3/Broker");
-		top.addPathToPeer("/TOP/Rcv3/Broker", "/TOP/Rcv1/Port1");
 		
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
 		MockEventReceiver eventRcv2 = new MockEventReceiver(top, "Rcv2");
 		MockEventReceiver eventRcv3 = new MockEventReceiver(top, "Rcv3");
 		
-		// caution: the order is relevant
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
-		new InterfaceItemBroker(eventRcv2, "Broker", 55, 10);
-		new InterfaceItemBroker(eventRcv3, "Broker", 66, 20);
+		InterfaceItemBroker broker0 = new InterfaceItemBroker(eventRcv2, "Broker", 55, 10);
+		InterfaceItemBroker broker1 = new InterfaceItemBroker(eventRcv3, "Broker", 66, 20);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
+		
+		// caution: the order is relevant
+		port0.connectWith(broker1);
+		broker0.connectWith(broker1);
+		port1.connectWith(broker1);
 		
 		assertEquals(port1.getAddress(), port0.getPeerAddress());
 		assertEquals(port0.getAddress(), port1.getPeerAddress());
@@ -113,14 +110,6 @@ public class BrokerTest extends TestCase {
 		top.addPathToThread("/TOP/Rcv2", 2);
 		top.addPathToThread("/TOP/Rcv3", 2);
 		top.addPathToThread("/TOP/Rcv4", 2);
-		top.addPathToPeer("/TOP/Rcv0/Port0", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv0/Port0");
-		top.addPathToPeer("/TOP/Rcv2/Broker", "/TOP/Rcv3/Broker");
-		top.addPathToPeer("/TOP/Rcv3/Broker", "/TOP/Rcv2/Broker");
-		top.addPathToPeer("/TOP/Rcv3/Broker", "/TOP/Rcv4/Broker");
-		top.addPathToPeer("/TOP/Rcv4/Broker", "/TOP/Rcv3/Broker");
-		top.addPathToPeer("/TOP/Rcv1/Port1", "/TOP/Rcv4/Broker");
-		top.addPathToPeer("/TOP/Rcv4/Broker", "/TOP/Rcv1/Port1");
 		
 		MockEventReceiver eventRcv0 = new MockEventReceiver(top, "Rcv0");
 		MockEventReceiver eventRcv1 = new MockEventReceiver(top, "Rcv1");
@@ -128,12 +117,17 @@ public class BrokerTest extends TestCase {
 		MockEventReceiver eventRcv3 = new MockEventReceiver(top, "Rcv3");
 		MockEventReceiver eventRcv4 = new MockEventReceiver(top, "Rcv4");
 		
-		// caution: the order is relevant
-		new InterfaceItemBroker(eventRcv2, "Broker", 55, 10);
-		new InterfaceItemBroker(eventRcv3, "Broker", 66, 20);
-		new InterfaceItemBroker(eventRcv4, "Broker", 77, 30);
+		InterfaceItemBroker broker0 = new InterfaceItemBroker(eventRcv2, "Broker", 55, 10);
+		InterfaceItemBroker broker1 = new InterfaceItemBroker(eventRcv3, "Broker", 66, 20);
+		InterfaceItemBroker broker2 = new InterfaceItemBroker(eventRcv4, "Broker", 77, 30);
 		PortBase port0 = new MockPort(eventRcv0, "Port0", 33, 0);
 		PortBase port1 = new MockPort(eventRcv1, "Port1", 44, 5);
+		
+		// caution: the order is relevant
+		broker1.connectWith(broker0);
+		port0.connectWith(broker0);
+		broker2.connectWith(broker1);
+		port1.connectWith(broker2);
 		
 		assertEquals(port1.getAddress(), port0.getPeerAddress());
 		assertEquals(port0.getAddress(), port1.getPeerAddress());

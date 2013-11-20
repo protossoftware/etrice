@@ -36,6 +36,9 @@ import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.EnumerationType
+
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class TypeHelpers {
@@ -46,6 +49,8 @@ class TypeHelpers {
 	def String typeName(DataType type) {
 		if (type instanceof PrimitiveType)
 			return (type as PrimitiveType).targetName
+		else if (type instanceof EnumerationType)
+			return (type as EnumerationType).targetType
 		else if (type instanceof ExternalType)
 			return (type as ExternalType).targetName
 		else
@@ -105,6 +110,14 @@ class TypeHelpers {
 	
 	def isPrimitive(DataType type){
 		return type instanceof PrimitiveType
+	}
+	
+	def isEnumeration(DataType type){
+		return type instanceof EnumerationType
+	}
+	
+	def isEnumerationOrPrimitive(DataType type){
+		return type instanceof EnumerationType || type instanceof PrimitiveType
 	}
 	
 	def isDataClass(DataType type){

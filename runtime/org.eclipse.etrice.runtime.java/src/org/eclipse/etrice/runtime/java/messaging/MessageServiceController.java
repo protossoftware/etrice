@@ -116,6 +116,9 @@ public class MessageServiceController {
 	public void waitTerminate() {
 		for (IMessageService msgSvc : messageServices.values()) {
 			try {
+				if (msgSvc.getThread()==null)
+					continue;
+				
 				msgSvc.getThread().join(1000);	// wait at most 1000ms
 				if (msgSvc.getThread().isAlive())
 					System.out.println("### Message Service "

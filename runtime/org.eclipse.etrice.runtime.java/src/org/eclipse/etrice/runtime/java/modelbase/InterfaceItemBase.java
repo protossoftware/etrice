@@ -8,8 +8,6 @@
 
 package org.eclipse.etrice.runtime.java.modelbase;
 
-import java.util.List;
-
 import org.eclipse.etrice.runtime.java.messaging.AbstractMessageReceiver;
 import org.eclipse.etrice.runtime.java.messaging.Address;
 import org.eclipse.etrice.runtime.java.messaging.IMessageReceiver;
@@ -23,7 +21,7 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
  * 
  * @author Henrik Rentz-Reichert
  */
-public abstract class InterfaceItemBase extends AbstractMessageReceiver {
+public abstract class InterfaceItemBase extends AbstractMessageReceiver implements IInterfaceItem {
 	
 	/**
 	 * If this is part of an {@link IReplicatedInterfaceItem} then the
@@ -38,7 +36,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	private int localId;
 	private int idx;
 	protected Address peerAddress = null;
-	private InterfaceItemBase peer;
+	private IInterfaceItem peer;
 
 
 	/**
@@ -67,26 +65,9 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 			
 			this.ownMsgReceiver = msgSvc;
 		}
-		
-		connectWithPeer();
 	}
 
-	protected void connectWithPeer() {
-		List<String> peerPaths = getParent().getPeersForPath(getInstancePath());
-		if (peerPaths!=null && !peerPaths.isEmpty()) {
-			IRTObject object = getObject(peerPaths.get(0));
-			InterfaceItemBase peer = null;
-			if (object instanceof InterfaceItemBase) {
-				peer = ((InterfaceItemBase) object);
-			}
-			else if (object instanceof IReplicatedInterfaceItem) {
-				peer = ((IReplicatedInterfaceItem) object).createSubInterfaceItem();
-			}
-			connectWith(peer);
-		}
-	}
-
-	protected synchronized InterfaceItemBase connectWith(InterfaceItemBase peer) {
+	public synchronized IInterfaceItem connectWith(IInterfaceItem peer) {
 		if (peer!=null) {
 			this.peer = peer;
 			
@@ -95,11 +76,18 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 				return this.peer;
 			}
 			
-			// connect with each other
-			peerAddress = peer.getAddress();
-			peer.peerAddress = getAddress();
-			this.peerMsgReceiver = peer.ownMsgReceiver;
-			peer.peerMsgReceiver = ownMsgReceiver;
+			if (peer instanceof IReplicatedInterfaceItem)
+				peer = ((IReplicatedInterfaceItem) peer).createSubInterfaceItem();
+			
+			if (peer instanceof InterfaceItemBase) {
+				InterfaceItemBase thePeer = (InterfaceItemBase) peer;
+				
+				// connect with each other
+				peerAddress = thePeer.getAddress();
+				thePeer.peerAddress = getAddress();
+				this.peerMsgReceiver = thePeer.ownMsgReceiver;
+				thePeer.peerMsgReceiver = ownMsgReceiver;
+			}
 			
 		}
 		
@@ -109,7 +97,8 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	protected synchronized void disconnect() {
 		disconnectInternal();
 		if (peer!=null) {
-			peer.disconnectInternal();
+			if (peer instanceof InterfaceItemBase)
+				((InterfaceItemBase)peer).disconnectInternal();
 			peer = null;
 		}
 	}
@@ -168,5 +157,14 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver {
 	@Override
 	public String toString() {
 		return ((replicator!=null)?"sub ":"")+"port "+getName()+" "+getAddress()+" <-> "+getPeerAddress();
+	}
+	
+	public static void connect(IRTObject obj, String path1, String path2) {
+		IRTObject obj1 = obj.getObject(path1);
+		IRTObject obj2 = obj.getObject(path2);
+		
+		if (obj1 instanceof IInterfaceItem && obj2 instanceof IInterfaceItem) {
+			((IInterfaceItem)obj1).connectWith((IInterfaceItem) obj2);
+		}
 	}
 }

@@ -77,6 +77,7 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
       case ConfigPackage.ATTR_CLASS_CONFIG: return createAttrClassConfig();
       case ConfigPackage.ATTR_INSTANCE_CONFIG: return createAttrInstanceConfig();
       case ConfigPackage.REF_PATH: return createRefPath();
+      case ConfigPackage.REF_SEGMENT: return createRefSegment();
       case ConfigPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -224,6 +225,17 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     RefPathImpl refPath = new RefPathImpl();
     return refPath;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefSegment createRefSegment()
+  {
+    RefSegmentImpl refSegment = new RefSegmentImpl();
+    return refSegment;
   }
 
   /**

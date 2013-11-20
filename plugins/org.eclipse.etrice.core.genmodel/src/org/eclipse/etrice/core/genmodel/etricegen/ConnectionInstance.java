@@ -13,8 +13,8 @@
 package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.room.LayerConnection;
+import org.eclipse.etrice.core.room.SPP;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public interface ConnectionInstance extends EObject {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is the source {@link SPPRef} of this connection.
+	 * This is the source {@link SPP} of this connection.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From SPP</em>' reference.
@@ -94,7 +94,7 @@ public interface ConnectionInstance extends EObject {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getIncoming <em>Incoming</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is the destination {@link SPPRef} of this connection.
+	 * This is the destination {@link SPP} of this connection.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To SPP</em>' reference.
