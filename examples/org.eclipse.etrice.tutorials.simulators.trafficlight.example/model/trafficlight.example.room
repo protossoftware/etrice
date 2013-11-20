@@ -9,56 +9,51 @@
  * 		Thomas Schuetz (initial contribution)
  * 
  *******************************************************************************/
-
-
 RoomModel trafficlight.example {
 
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+
 	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+
 	import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/model/TcpService.room"
 
 	LogicalSystem LSTraffic {
 		SubSystemRef main: SSTraffic
 	}
 
-	 ActorClass ActorClassName {
-		Interface {
-			
-		}
-		Structure {
-		}
-		Behavior {
-		}
-	}		
-	
-	SubSystemClass SSTraffic ["Subsystem of Trafficlight Example Application. The Subsystem contains all Actors of the application."] {
-		ActorRef application: TrafficlightExampleApplication ["reference to application"]
-		ActorRef TimingService: ATimingService ["reference to timing service"]
-		LayerConnection ref application satisfied_by TimingService.timer 
-	
+	SubSystemClass SSTraffic [
+	"Subsystem of Trafficlight Example Application. The Subsystem contains all Actors of the application." ] {
+		ActorRef application: TrafficlightExampleApplication [ "reference to application" ]
+		ActorRef TimingService: ATimingService [ "reference to timing service" ]
+		LayerConnection ref application satisfied_by TimingService.timer
 		LogicalThread dflt_thread
 	}
 
-	ActorClass TrafficlightExampleApplication ["Toplevel Actor of the Trafficlight Example Application."]{
+	ActorClass ActorClassName {
+		Structure { }
+		Behavior { }
+	}
+
+	ActorClass TrafficlightExampleApplication [ "Toplevel Actor of the Trafficlight Example Application." ] {
 		Structure {
-			
-			ActorRef light1: TrafficLight ["first traffic light"]
-			ActorRef light2: TrafficLight ["second traffic light"]
-			ActorRef controller: TrafficController ["controller for coordination of the traffic lights"]
-			Binding controller.light1 and light1.controller 
+			ActorRef light1: TrafficLight [ "first traffic light" ]
+			ActorRef light2: TrafficLight [ "second traffic light" ]
+			ActorRef controller: TrafficController [ "controller for coordination of the traffic lights" ]
+			ActorRef pedestrianLight: PedestrianLight
+			Binding controller.light1 and light1.controller
 			Binding controller.light2 and light2.controller
 		}
 		Behavior { }
 	}
 
-	ActorClass TrafficController ["The TrafficController coordinates two traffic lights (directions)."] {
+	ActorClass TrafficController [ "The TrafficController coordinates two traffic lights (directions)." ] {
 		Interface {
-			conjugated Port light1: PTrafficLight ["port to control traffic light 1"]
-			conjugated Port light2: PTrafficLight ["port to control traffic light 2"]
+			conjugated Port light1: PTrafficLight [ "port to control traffic light 1" ]
+			conjugated Port light2: PTrafficLight [ "port to control traffic light 2" ]
 		}
 		Structure {
-			external Port light1 
-			external Port light2 
+			external Port light1
+			external Port light2
 			SAP timeout: PTimer
 		}
 		Behavior {
@@ -154,7 +149,105 @@ RoomModel trafficlight.example {
 		}
 	}
 
-	ActorClass TrafficLight ["This Actor is responsible for controlling a single traffic light via socket. It uses a socket client for communication."] {
+	ActorClass PedestrianLight {
+		Structure {
+			conjugated Port tcpCtrl: PTcpControl
+			conjugated Port tcpPayload: PTcpPayload
+			ActorRef socketClient: ATcpClient
+			SAP timeout: PTimer
+			Binding tcpCtrl and socketClient.ControlPort
+			Binding tcpPayload and socketClient.PayloadPort
+			Attribute ipConfig: DTcpControl [ "configuration of the IP-port for the communication with the Traffic Light GUI" ]
+		}
+		Behavior {
+			Operation sendString(text: string) [ "convenience function for sending a string over the socket" ] {
+				"
+				DTcpPayload pl = new DTcpPayload();
+				pl.setData(text.getBytes());
+				tcpPayload.send(new DTcpPayload(1, text.length(), text.getBytes()));
+			"
+			}
+			StateMachine {
+				Transition init: initial -> OpenSocket { }
+				Transition tr0: OpenSocket -> tp0 of Operational {
+					triggers {
+						<established: tcpCtrl>
+					}
+				}
+				State OpenSocket {
+					entry {
+						"tcpCtrl.open(ipConfig);"
+					}
+				}
+				State Operational {
+					subgraph {
+						Transition tr0: my tp0 -> AllRed
+						Transition tr1: AllRed -> CarGreen {
+							triggers {
+								<timeout: timeout>
+							}
+						}
+						Transition tr2: CarGreen -> CarYellow {
+							triggers {
+								<receive: tcpPayload>
+							}
+						}
+						Transition tr3: CarYellow -> CarRed {
+							triggers {
+								<timeout: timeout>
+							}
+						}
+						Transition tr4: CarRed -> PedGreen {
+							triggers {
+								<timeout: timeout>
+							}
+						}
+						Transition tr5: PedGreen -> AllRed {
+							triggers {
+								<timeout: timeout>
+							}
+						}
+						EntryPoint tp0
+						State AllRed {
+							entry {
+								"sendString(\"pedLights=red\\n\");"
+								"sendString(\"carLights=red\\n\");"
+								"timeout.startTimeout(1000);"
+							}
+						}
+						State CarGreen {
+							entry {
+								"sendString(\"carLights=green\\n\");"
+								"timeout.startTimeout(3000);"
+							}
+						}
+						State CarYellow {
+							entry {
+								"sendString(\"carLights=yellow\\n\");"
+								"timeout.startTimeout(1000);"
+							}
+						}
+						State CarRed {
+							entry {
+								"sendString(\"carLights=red\\n\");"
+								"timeout.startTimeout(1000);"
+							}
+						}
+						State PedGreen {
+							entry {
+								"sendString(\"pedLights=green\\n\");"
+								"timeout.startTimeout(3000);"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass TrafficLight [
+	"This Actor is responsible for controlling a single traffic light via socket. It uses a socket client for communication."
+	] {
 		Interface {
 			Port controller: PTrafficLight
 		}
@@ -167,17 +260,17 @@ RoomModel trafficlight.example {
 			SAP blinkerTimeout: PTimer
 			Binding trafficLightSocket.ControlPort and tcpCtrl
 			Binding trafficLightSocket.PayloadPort and tcpPayload
-			Attribute ipConfig: DTcpControl ["configuration of the IP-port for the communication with the Traffic Light GUI"]
+			Attribute ipConfig: DTcpControl [ "configuration of the IP-port for the communication with the Traffic Light GUI" ]
 		}
 		Behavior {
-			Operation sendString(text: string)["convenience function for sending a string over the socket"] {
-			"
+			Operation sendString(text: string) [ "convenience function for sending a string over the socket" ] {
+				"
 				DTcpPayload pl = new DTcpPayload();
 				pl.setData(text.getBytes());
 				tcpPayload.send(new DTcpPayload(1, text.length(), text.getBytes()));
 			"
 			}
-			StateMachine  {
+			StateMachine {
 				Transition init: initial -> OpenSocket { }
 				Transition tr0: OpenSocket -> tp0 of Off_Blinking {
 					triggers {
@@ -299,19 +392,18 @@ RoomModel trafficlight.example {
 						"controller.greenForPedDone();"
 					}
 				}
-				State state0
 			}
 		}
 	}
 
 	ProtocolClass PTrafficLight {
 		incoming {
-			Message greenForCar() ["trigger green for car"]
-			Message greenForPed() ["trigger green for pedestrians"]
+			Message greenForCar() [ "trigger green for car" ]
+			Message greenForPed() [ "trigger green for pedestrians" ]
 		}
 		outgoing {
-			Message greenForCarDone() ["positive response for greenForCar - is sent when switch is over"]
-			Message greenForPedDone() ["positive response for greenForPed - is sent when switch is over"]
+			Message greenForCarDone() [ "positive response for greenForCar - is sent when switch is over" ]
+			Message greenForPedDone() [ "positive response for greenForPed - is sent when switch is over" ]
 		}
 	}
 

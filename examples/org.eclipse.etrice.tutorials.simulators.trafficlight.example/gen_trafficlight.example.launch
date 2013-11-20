@@ -7,9 +7,10 @@
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.etmap}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.config}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.room}"/>
 </listAttribute>
+<booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
