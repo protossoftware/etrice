@@ -47,9 +47,14 @@
 	</licenses>
 
 	<issueManagement>
-		<url>https://bugs.eclipse.org/bugs/enter_bug.cgi?product=eTrice</url>
 		<system>Bugzilla</system>
+		<url>https://bugs.eclipse.org/bugs/enter_bug.cgi?product=eTrice</url>
 	</issueManagement>
+	
+	<ciManagement>
+		<system>Hudson</system>
+		<url>https://hudson.eclipse.org/etrice/job/etrice-maven3/</url>
+	</ciManagement>
 
 	<scm>
 		<url>http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/</url>
@@ -94,10 +99,14 @@
 			<name>JBoss.org Maven repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
-		<!-- <repository> <id>KIELER</id> <layout>p2</layout> <url>http://download.eclipse.org/etrice/KIELER/kieler-0.7.1</url> 
-			</repository> <repository> <id>license repo</id> <layout>p2</layout> <url>http://download.eclipse.org/cbi/updates/license</url> 
-			</repository> -->
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.eclipse.org.cbi-releases</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<modules>
 		<module>../../plugins/org.eclipse.etrice.core.common</module>
