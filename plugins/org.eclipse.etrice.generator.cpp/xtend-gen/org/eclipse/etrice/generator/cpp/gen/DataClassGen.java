@@ -109,20 +109,20 @@ public class DataClassGen {
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isConstructor = RoomHelpers.isConstructor(op);
-          return Boolean.valueOf(_isConstructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isConstructor = RoomHelpers.isConstructor(op);
+            return Boolean.valueOf(_isConstructor);
+          }
+        };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isDestructor = op.isDestructor();
-          return Boolean.valueOf(_isDestructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isDestructor = op.isDestructor();
+            return Boolean.valueOf(_isDestructor);
+          }
+        };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       StringConcatenation _builder = new StringConcatenation();
@@ -316,20 +316,20 @@ public class DataClassGen {
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isConstructor = RoomHelpers.isConstructor(op);
-          return Boolean.valueOf(_isConstructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isConstructor = RoomHelpers.isConstructor(op);
+            return Boolean.valueOf(_isConstructor);
+          }
+        };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isDestructor = op.isDestructor();
-          return Boolean.valueOf(_isDestructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isDestructor = op.isDestructor();
+            return Boolean.valueOf(_isDestructor);
+          }
+        };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       StringConcatenation _builder = new StringConcatenation();

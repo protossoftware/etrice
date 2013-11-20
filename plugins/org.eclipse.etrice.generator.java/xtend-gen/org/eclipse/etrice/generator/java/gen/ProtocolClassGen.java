@@ -856,12 +856,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          boolean _notEquals = (!Objects.equal(_data, null));
-          return Boolean.valueOf(_notEquals);
-        }
-      };
+          public Boolean apply(final Message m) {
+            VarDecl _data = m.getData();
+            boolean _notEquals = (!Objects.equal(_data, null));
+            return Boolean.valueOf(_notEquals);
+          }
+        };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final EList<RoomModel> models = root.getReferencedModels(pc);
       StringConcatenation _builder = new StringConcatenation();

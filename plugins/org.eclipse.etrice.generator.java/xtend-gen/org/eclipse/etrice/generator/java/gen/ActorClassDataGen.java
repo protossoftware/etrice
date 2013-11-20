@@ -51,21 +51,21 @@ public class ActorClassDataGen {
   private ProcedureHelpers _procedureHelpers;
   
   public void doGenerate(final Root root) {
-    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
+    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass,WiredActorClass>();
     final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
-      public Boolean apply(final WiredStructureClass w) {
-        return Boolean.valueOf((w instanceof WiredActorClass));
-      }
-    };
+        public Boolean apply(final WiredStructureClass w) {
+          return Boolean.valueOf((w instanceof WiredActorClass));
+        }
+      };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
-      public void apply(final WiredStructureClass w) {
-        ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
-        ac2wired.put(_actorClass, ((WiredActorClass) w));
-      }
-    };
+        public void apply(final WiredStructureClass w) {
+          ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
+          ac2wired.put(_actorClass, ((WiredActorClass) w));
+        }
+      };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     for (final ExpandedActorClass xpac : _xpActorClasses) {

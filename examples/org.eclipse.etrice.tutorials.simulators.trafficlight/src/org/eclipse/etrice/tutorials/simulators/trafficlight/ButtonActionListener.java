@@ -33,7 +33,6 @@ implements ActionListener {
 		String s = arg0.getActionCommand();
 		
 		if (s.equals("REQUEST")) {
-			System.out.println("Taste gedrückt");
 			try {
 				out.write(cmd1.getBytes());
 				out.flush();
@@ -41,7 +40,6 @@ implements ActionListener {
 			catch (IOException e){
 				System.out.println(e.toString());
 			}
-		//	out.write(cmd1.getBytes());
 		}
 	}
 }
