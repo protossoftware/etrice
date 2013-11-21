@@ -1,11 +1,11 @@
-PhysicalModel PhysicalModel1 {
+PhysicalModel TrafficlLight_PhysicalModel {
 
-	PhysicalSystem PhysSys1 {
-		NodeRef nodeRef1 : NodeClass1
+	PhysicalSystem PSTraffic {
+		NodeRef trafficNode : PSNode
 	}
 
-	NodeClass NodeClass1 {
-		runtime = RuntimeClass1
+	NodeClass PSNode {
+		runtime = PSRuntimeClass
 		priomin = -10
 		priomax = 10
 		DefaultThread PhysicalThread1 {
@@ -17,7 +17,7 @@ PhysicalModel PhysicalModel1 {
 		}
 	}
 
-	RuntimeClass RuntimeClass1 {
+	RuntimeClass PSRuntimeClass {
 		model = multiThreaded
 	}
 
