@@ -53,6 +53,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.base.Indexed;
@@ -94,6 +95,10 @@ public class NodeGen {
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
+  @Inject
   private IGeneratorFileIo fileIO;
   
   @Inject
@@ -103,21 +108,21 @@ public class NodeGen {
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
-    HashMap<SubSystemClass,WiredSubSystemClass> _hashMap = new HashMap<SubSystemClass,WiredSubSystemClass>();
+    HashMap<SubSystemClass,WiredSubSystemClass> _hashMap = new HashMap<SubSystemClass, WiredSubSystemClass>();
     final HashMap<SubSystemClass,WiredSubSystemClass> sscc2wired = _hashMap;
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
-        public Boolean apply(final WiredStructureClass w) {
-          return Boolean.valueOf((w instanceof WiredSubSystemClass));
-        }
-      };
+      public Boolean apply(final WiredStructureClass w) {
+        return Boolean.valueOf((w instanceof WiredSubSystemClass));
+      }
+    };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
-        public void apply(final WiredStructureClass w) {
-          SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
-          sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
-        }
-      };
+      public void apply(final WiredStructureClass w) {
+        SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
+        sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
+      }
+    };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
@@ -127,27 +132,30 @@ public class NodeGen {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
           SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass);
-          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass_1);
-          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-          String _path = this._roomExtensions.getPath(_subSystemClass_2);
-          final String path = (_generationTargetPath + _path);
-          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_3);
-          SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
-          String _path_1 = this._roomExtensions.getPath(_subSystemClass_4);
-          final String infopath = (_generationInfoPath + _path_1);
-          final String file = this._javaExtensions.getJavaFileName(nr, ssi);
-          this.checkDataPorts(ssi);
-          HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
-          final HashSet<PhysicalThread> usedThreads = _hashSet;
-          NodeClass _type = nr.getType();
-          EList<PhysicalThread> _threads = _type.getThreads();
-          for (final PhysicalThread thread : _threads) {
-            {
-              EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-              final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
+          boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
+          if (_isValidGenerationLocation) {
+            SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+            final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass_1);
+            SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+            String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass_2);
+            SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+            String _path = this._roomExtensions.getPath(_subSystemClass_3);
+            final String path = (_generationTargetPath + _path);
+            SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+            String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_4);
+            SubSystemClass _subSystemClass_5 = ssi.getSubSystemClass();
+            String _path_1 = this._roomExtensions.getPath(_subSystemClass_5);
+            final String infopath = (_generationInfoPath + _path_1);
+            final String file = this._javaExtensions.getJavaFileName(nr, ssi);
+            this.checkDataPorts(ssi);
+            HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
+            final HashSet<PhysicalThread> usedThreads = _hashSet;
+            NodeClass _type = nr.getType();
+            EList<PhysicalThread> _threads = _type.getThreads();
+            for (final PhysicalThread thread : _threads) {
+              {
+                EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+                final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
                   public Boolean apply(final ActorInstance ai) {
                     MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
                     PhysicalThread _thread = _mappedThread.getThread();
@@ -155,19 +163,20 @@ public class NodeGen {
                     return Boolean.valueOf(_equals);
                   }
                 };
-              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_2);
-              boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                usedThreads.add(thread);
+                final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_2);
+                boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  usedThreads.add(thread);
+                }
               }
             }
-          }
-          CharSequence _generate = this.generate(root, ssi, wired, usedThreads);
-          this.fileIO.generateFile("generating Node implementation", path, infopath, file, _generate);
-          boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
-          if (_hasVariableService) {
-            this.varService.doGenerate(root, ssi);
+            CharSequence _generate = this.generate(root, ssi, wired, usedThreads);
+            this.fileIO.generateFile("generating Node implementation", path, infopath, file, _generate);
+            boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
+            if (_hasVariableService) {
+              this.varService.doGenerate(root, ssi);
+            }
           }
         }
       }
@@ -180,24 +189,24 @@ public class NodeGen {
   private HashSet<ActorClass> getOptionalActorClasses(final Root root, final StructureInstance si) {
     TreeIterator<EObject> _eAllContents = si.eAllContents();
     final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
-        public Boolean apply(final EObject i) {
-          return Boolean.valueOf((i instanceof ActorInterfaceInstance));
-        }
-      };
+      public Boolean apply(final EObject i) {
+        return Boolean.valueOf((i instanceof ActorInterfaceInstance));
+      }
+    };
     Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function);
     final Function1<EObject,ActorInterfaceInstance> _function_1 = new Function1<EObject,ActorInterfaceInstance>() {
-        public ActorInterfaceInstance apply(final EObject aii) {
-          return ((ActorInterfaceInstance) aii);
-        }
-      };
+      public ActorInterfaceInstance apply(final EObject aii) {
+        return ((ActorInterfaceInstance) aii);
+      }
+    };
     Iterator<ActorInterfaceInstance> _map = IteratorExtensions.<EObject, ActorInterfaceInstance>map(_filter, _function_1);
     final ArrayList<ActorInterfaceInstance> aifs = Lists.<ActorInterfaceInstance>newArrayList(_map);
     final Function1<ActorInterfaceInstance,ActorClass> _function_2 = new Function1<ActorInterfaceInstance,ActorClass>() {
-        public ActorClass apply(final ActorInterfaceInstance aii) {
-          ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
-          return _actorClass;
-        }
-      };
+      public ActorClass apply(final ActorInterfaceInstance aii) {
+        ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
+        return _actorClass;
+      }
+    };
     List<ActorClass> _map_1 = ListExtensions.<ActorInterfaceInstance, ActorClass>map(aifs, _function_2);
     final HashSet<ActorClass> result = Sets.<ActorClass>newHashSet(_map_1);
     for (final ActorInterfaceInstance ai : aifs) {
@@ -220,11 +229,11 @@ public class NodeGen {
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
-          public Boolean apply(final PhysicalThread t) {
-            boolean _contains = usedThreads.contains(t);
-            return Boolean.valueOf(_contains);
-          }
-        };
+        public Boolean apply(final PhysicalThread t) {
+          boolean _contains = usedThreads.contains(t);
+          return Boolean.valueOf(_contains);
+        }
+      };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       final HashSet<ActorClass> opt = this.getOptionalActorClasses(root, comp);
       StringConcatenation _builder = new StringConcatenation();
@@ -522,16 +531,16 @@ public class NodeGen {
       {
         BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
         final Function1<AbstractInstance,Boolean> _function_1 = new Function1<AbstractInstance,Boolean>() {
-            public Boolean apply(final AbstractInstance inst) {
-              return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
-            }
-          };
+          public Boolean apply(final AbstractInstance inst) {
+            return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
+          }
+        };
         Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_1);
         final Function1<AbstractInstance,ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance,ActorInterfaceInstance>() {
-            public ActorInterfaceInstance apply(final AbstractInstance inst) {
-              return ((ActorInterfaceInstance) inst);
-            }
-          };
+          public ActorInterfaceInstance apply(final AbstractInstance inst) {
+            return ((ActorInterfaceInstance) inst);
+          }
+        };
         Iterable<ActorInterfaceInstance> _map = IterableExtensions.<AbstractInstance, ActorInterfaceInstance>map(_filter, _function_2);
         for(final ActorInterfaceInstance aii : _map) {
           _builder.append("\t\t");
@@ -802,12 +811,12 @@ public class NodeGen {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
             final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
-                public Boolean apply(final ActorClass s) {
-                  boolean _isAbstract = s.isAbstract();
-                  boolean _not = (!_isAbstract);
-                  return Boolean.valueOf(_not);
-                }
-              };
+              public Boolean apply(final ActorClass s) {
+                boolean _isAbstract = s.isAbstract();
+                boolean _not = (!_isAbstract);
+                return Boolean.valueOf(_not);
+              }
+            };
             Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
             for(final ActorClass subcls : _filter_1) {
               _builder.append("\t\t");

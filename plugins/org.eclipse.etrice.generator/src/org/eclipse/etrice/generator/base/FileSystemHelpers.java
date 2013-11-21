@@ -40,6 +40,14 @@ public class FileSystemHelpers extends RelativePathHelpers {
 	}
 	
 	/**
+	 * @param obj a model object
+	 * @return <code>true</code> if the generation path is valid
+	 */
+	public boolean isValidGenerationLocation(EObject obj) {
+		return getProjectURI(obj)!=null;
+	}
+	
+	/**
 	 * determines the URI of the first directory in the path of an object's resource
 	 * which contains a file with a given name
 	 * 
@@ -60,8 +68,13 @@ public class FileSystemHelpers extends RelativePathHelpers {
 				parent = new File(osString);
 			}
 			else {
+				try {
 				parent = new File(mainPath.toFileString()).getAbsoluteFile();
 				mainPath = URI.createFileURI(parent.getAbsolutePath());
+				}
+				catch (Throwable e) {
+					return null;
+				}
 			}
 			
 			boolean isProject = false;

@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.EnumerationType
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 /**
  * @author Henrik Rentz-Reichert
@@ -29,9 +30,10 @@ class EnumerationTypeGen {
 	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
+	@Inject extension FileSystemHelpers
 	
 	def doGenerate(Root root) {
-		for (et: root.usedEnumClasses) {
+		for (et: root.usedEnumClasses.filter(cl|cl.isValidGenerationLocation)) {
 			var path = et.generationTargetPath+et.getPath
 			var infopath = et.generationInfoPath+et.getPath
 			var file = et.getJavaFileName

@@ -19,26 +19,25 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
+import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 
 @Singleton
 class ActorClassDataGen {
 	
 	@Inject IGeneratorFileIo fileIO
 	@Inject extension RoomExtensions
-	@Inject IDataConfiguration dataConfigExt
-	
+	@Inject extension FileSystemHelpers
 	@Inject extension ProcedureHelpers
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
-		for (xpac: root.xpActorClasses) {
+		for (xpac: root.xpActorClasses.filter(cl|cl.actorClass.isValidGenerationLocation)) {
 			val wired = ac2wired.get(xpac.actorClass)
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath

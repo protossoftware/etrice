@@ -16,11 +16,14 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -38,9 +41,20 @@ public class EnumerationTypeGen {
   @Extension
   private RoomExtensions _roomExtensions;
   
+  @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
   public void doGenerate(final Root root) {
     EList<EnumerationType> _usedEnumClasses = root.getUsedEnumClasses();
-    for (final EnumerationType et : _usedEnumClasses) {
+    final Function1<EnumerationType,Boolean> _function = new Function1<EnumerationType,Boolean>() {
+      public Boolean apply(final EnumerationType cl) {
+        boolean _isValidGenerationLocation = EnumerationTypeGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+        return Boolean.valueOf(_isValidGenerationLocation);
+      }
+    };
+    Iterable<EnumerationType> _filter = IterableExtensions.<EnumerationType>filter(_usedEnumClasses, _function);
+    for (final EnumerationType et : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(et);
         String _path = this._roomExtensions.getPath(et);

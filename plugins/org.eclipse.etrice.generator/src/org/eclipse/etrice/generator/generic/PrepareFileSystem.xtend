@@ -47,7 +47,9 @@ class PrepareFileSystem {
 		for (e: resource.contents){
 			if (e instanceof Root) {
 				for (mdl : (e as Root).usedRoomModels) {
-					pathes.add(mdl.generationTargetPath)
+					val tgtpath = mdl.generationTargetPath
+					if (tgtpath!=null && !tgtpath.empty)
+						pathes.add(tgtpath)
 				}
 			}
 		}

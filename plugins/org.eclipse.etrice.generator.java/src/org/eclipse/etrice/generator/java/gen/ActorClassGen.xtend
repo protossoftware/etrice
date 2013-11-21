@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
 import java.util.HashMap
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -46,11 +47,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
 	@Inject extension TypeHelpers
+	@Inject extension FileSystemHelpers
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
-		for (xpac: root.xpActorClasses) {
+		for (xpac: root.xpActorClasses.filter(cl|cl.actorClass.isValidGenerationLocation)) {
 			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath

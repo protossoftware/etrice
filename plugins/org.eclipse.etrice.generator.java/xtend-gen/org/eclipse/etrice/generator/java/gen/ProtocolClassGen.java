@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -77,11 +78,22 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private DataClassGen _dataClassGen;
   
   @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
+  @Inject
   private ILogger logger;
   
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    for (final ProtocolClass pc : _usedProtocolClasses) {
+    final Function1<ProtocolClass,Boolean> _function = new Function1<ProtocolClass,Boolean>() {
+      public Boolean apply(final ProtocolClass cl) {
+        boolean _isValidGenerationLocation = ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+        return Boolean.valueOf(_isValidGenerationLocation);
+      }
+    };
+    Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_usedProtocolClasses, _function);
+    for (final ProtocolClass pc : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(pc);
         String _path = this._roomExtensions.getPath(pc);
@@ -856,12 +868,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-          public Boolean apply(final Message m) {
-            VarDecl _data = m.getData();
-            boolean _notEquals = (!Objects.equal(_data, null));
-            return Boolean.valueOf(_notEquals);
-          }
-        };
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final EList<RoomModel> models = root.getReferencedModels(pc);
       StringConcatenation _builder = new StringConcatenation();

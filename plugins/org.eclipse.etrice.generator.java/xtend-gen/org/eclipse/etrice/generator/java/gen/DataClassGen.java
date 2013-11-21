@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -57,9 +58,20 @@ public class DataClassGen {
   @Extension
   private Initialization _initialization;
   
+  @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
-    for (final DataClass dc : _usedDataClasses) {
+    final Function1<DataClass,Boolean> _function = new Function1<DataClass,Boolean>() {
+      public Boolean apply(final DataClass cl) {
+        boolean _isValidGenerationLocation = DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+        return Boolean.valueOf(_isValidGenerationLocation);
+      }
+    };
+    Iterable<DataClass> _filter = IterableExtensions.<DataClass>filter(_usedDataClasses, _function);
+    for (final DataClass dc : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
         String _path = this._roomExtensions.getPath(dc);
@@ -79,11 +91,11 @@ public class DataClassGen {
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-          public Boolean apply(final StandardOperation op) {
-            boolean _isConstructor = RoomHelpers.isConstructor(op);
-            return Boolean.valueOf(_isConstructor);
-          }
-        };
+        public Boolean apply(final StandardOperation op) {
+          boolean _isConstructor = RoomHelpers.isConstructor(op);
+          return Boolean.valueOf(_isConstructor);
+        }
+      };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       StringConcatenation _builder = new StringConcatenation();

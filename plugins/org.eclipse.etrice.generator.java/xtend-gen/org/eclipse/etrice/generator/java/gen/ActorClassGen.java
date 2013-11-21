@@ -42,6 +42,7 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -97,6 +98,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
   @Extension
   private TypeHelpers _typeHelpers;
   
+  @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
   public void doGenerate(final Root root) {
     HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
     final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
@@ -115,7 +120,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
     };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
-    for (final ExpandedActorClass xpac : _xpActorClasses) {
+    final Function1<ExpandedActorClass,Boolean> _function_2 = new Function1<ExpandedActorClass,Boolean>() {
+      public Boolean apply(final ExpandedActorClass cl) {
+        ActorClass _actorClass = cl.getActorClass();
+        boolean _isValidGenerationLocation = ActorClassGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass);
+        return Boolean.valueOf(_isValidGenerationLocation);
+      }
+    };
+    Iterable<ExpandedActorClass> _filter_1 = IterableExtensions.<ExpandedActorClass>filter(_xpActorClasses, _function_2);
+    for (final ExpandedActorClass xpac : _filter_1) {
       {
         ActorClass _actorClass = xpac.getActorClass();
         final WiredActorClass wired = ac2wired.get(_actorClass);

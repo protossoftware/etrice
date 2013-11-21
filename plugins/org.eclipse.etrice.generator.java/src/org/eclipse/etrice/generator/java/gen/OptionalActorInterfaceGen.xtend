@@ -22,6 +22,7 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class OptionalActorInterfaceGen extends GenericActorClassGenerator {
@@ -29,9 +30,10 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
+	@Inject extension FileSystemHelpers
 	
 	def doGenerate(Root root) {
-		for (ac: root.optionalActorClasses) {
+		for (ac: root.optionalActorClasses.filter(cl|cl.isValidGenerationLocation)) {
 			val path = ac.generationTargetPath+ac.path
 			val infopath = ac.generationInfoPath+ac.path
 			var file = ac.getJavaInterfaceFileName(false)

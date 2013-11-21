@@ -40,6 +40,7 @@ import java.util.HashMap
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class NodeGen {
@@ -49,6 +50,7 @@ class NodeGen {
 	@Inject IDataConfiguration dataConfigExt
 	@Inject ConfigGenAddon configGenAddon
 	@Inject extension ProcedureHelpers
+	@Inject extension FileSystemHelpers
 
 	@Inject IGeneratorFileIo fileIO
 	@Inject VariableServiceGen varService
@@ -60,23 +62,25 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				val wired = sscc2wired.get(ssi.subSystemClass)
-				val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-				val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
-				val file = nr.getJavaFileName(ssi)
-				
-				checkDataPorts(ssi)
-				
-				val usedThreads = new HashSet<PhysicalThread>();
-				for (thread: nr.type.threads) {
-					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
-					if (!instancesOnThread.empty)
-						usedThreads.add(thread)
+				if (ssi.subSystemClass.validGenerationLocation) {
+					val wired = sscc2wired.get(ssi.subSystemClass)
+					val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+					val file = nr.getJavaFileName(ssi)
+					
+					checkDataPorts(ssi)
+					
+					val usedThreads = new HashSet<PhysicalThread>();
+					for (thread: nr.type.threads) {
+						val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
+						if (!instancesOnThread.empty)
+							usedThreads.add(thread)
+					}
+					
+					fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, wired, usedThreads))
+					if (dataConfigExt.hasVariableService(ssi))
+						varService.doGenerate(root, ssi);
 				}
-				
-				fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, wired, usedThreads))
-				if (dataConfigExt.hasVariableService(ssi))
-					varService.doGenerate(root, ssi);
 			}
 		}
 	}

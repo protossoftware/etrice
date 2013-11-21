@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
@@ -40,6 +41,10 @@ public class NodeRunnerGen {
   private JavaExtensions _javaExtensions;
   
   @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
+  @Inject
   private IGeneratorFileIo fileIO;
   
   public void doGenerate(final Root root) {
@@ -50,20 +55,24 @@ public class NodeRunnerGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
-          final String file = (_javaClassName + "Runner.java");
           SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
-          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-          String _path = this.roomExt.getPath(_subSystemClass_1);
-          final String filepath = (_generationTargetPath + _path);
-          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-          String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
-          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-          String _path_1 = this.roomExt.getPath(_subSystemClass_3);
-          final String infopath = (_generationInfoPath + _path_1);
-          CharSequence _generate = this.generate(root, ssi);
-          this.fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, _generate);
+          boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
+          if (_isValidGenerationLocation) {
+            String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
+            final String file = (_javaClassName + "Runner.java");
+            SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+            String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass_1);
+            SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+            String _path = this.roomExt.getPath(_subSystemClass_2);
+            final String filepath = (_generationTargetPath + _path);
+            SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+            String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_3);
+            SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
+            String _path_1 = this.roomExt.getPath(_subSystemClass_4);
+            final String infopath = (_generationInfoPath + _path_1);
+            CharSequence _generate = this.generate(root, ssi);
+            this.fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, _generate);
+          }
         }
       }
     }

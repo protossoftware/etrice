@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.generator.generic;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.File;
@@ -59,8 +60,21 @@ public class PrepareFileSystem {
       if ((e instanceof Root)) {
         EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
         for (final RoomModel mdl : _usedRoomModels) {
-          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(mdl);
-          pathes.add(_generationTargetPath);
+          {
+            final String tgtpath = this._roomExtensions.getGenerationTargetPath(mdl);
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(tgtpath, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _isEmpty = tgtpath.isEmpty();
+              boolean _not = (!_isEmpty);
+              _and = (_notEquals && _not);
+            }
+            if (_and) {
+              pathes.add(tgtpath);
+            }
+          }
         }
       }
     }

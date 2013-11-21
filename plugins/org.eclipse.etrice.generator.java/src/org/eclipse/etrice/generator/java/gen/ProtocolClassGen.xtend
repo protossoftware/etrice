@@ -28,6 +28,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -39,10 +40,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension Initialization
 	@Inject extension TypeHelpers
 	@Inject extension DataClassGen
+	@Inject extension FileSystemHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
-		for (pc: root.usedProtocolClasses) {
+		for (pc: root.usedProtocolClasses.filter(cl|cl.isValidGenerationLocation)) {
 			val path = pc.generationTargetPath+pc.getPath
 			val infopath = pc.generationInfoPath+pc.getPath
 			val file = pc.getJavaFileName

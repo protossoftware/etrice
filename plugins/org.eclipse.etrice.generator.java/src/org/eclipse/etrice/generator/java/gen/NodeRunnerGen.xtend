@@ -20,12 +20,14 @@ import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class NodeRunnerGen {
 
 	@Inject extension RoomExtensions roomExt
 	@Inject extension JavaExtensions
+	@Inject extension FileSystemHelpers
 	
 	@Inject IGeneratorFileIo fileIO
 	
@@ -33,10 +35,12 @@ class NodeRunnerGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				val file = nr.getJavaClassName(ssi)+"Runner.java"
-				val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-				val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
-				fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, root.generate(ssi))
+				if (ssi.subSystemClass.validGenerationLocation) {
+					val file = nr.getJavaClassName(ssi)+"Runner.java"
+					val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+					fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, root.generate(ssi))
+				}
 			}
 		}
 	}

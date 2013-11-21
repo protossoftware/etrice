@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -26,6 +27,8 @@ import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -41,9 +44,20 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
   @Extension
   private RoomExtensions _roomExtensions;
   
+  @Inject
+  @Extension
+  private FileSystemHelpers _fileSystemHelpers;
+  
   public void doGenerate(final Root root) {
     EList<ActorClass> _optionalActorClasses = root.getOptionalActorClasses();
-    for (final ActorClass ac : _optionalActorClasses) {
+    final Function1<ActorClass,Boolean> _function = new Function1<ActorClass,Boolean>() {
+      public Boolean apply(final ActorClass cl) {
+        boolean _isValidGenerationLocation = OptionalActorInterfaceGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+        return Boolean.valueOf(_isValidGenerationLocation);
+      }
+    };
+    Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_optionalActorClasses, _function);
+    for (final ActorClass ac : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(ac);
         String _path = this._roomExtensions.getPath(ac);
