@@ -117,9 +117,13 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 			catch (IllegalArgumentException e) {
 			}
 			resolve = uri.toString();
-			File file = new File(uri.toFileString());
-			if (file.isDirectory())
-				return "path/to/directory";
+			try {
+				File file = new File(uri.toFileString());
+				if (file.isDirectory())
+					return "path/to/directory";
+				}
+			catch (Throwable e) {
+			}
 		}
 		return resolve;
 	}
