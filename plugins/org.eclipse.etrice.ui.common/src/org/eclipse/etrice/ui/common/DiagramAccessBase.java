@@ -18,19 +18,20 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
@@ -41,6 +42,11 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -50,11 +56,17 @@ public abstract class DiagramAccessBase {
 
 	public static final String DIAGRAMS_FOLDER_NAME = "diagrams";
 	
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+	
 	/**
 	 * 
 	 */
 	public DiagramAccessBase() {
 		super();
+		
+		Injector injector = RoomUiModule.getInjector();
+        injector.injectMembers(this);
 	}
 
 	public Diagram getDiagram(StructureClass sc) {
@@ -65,6 +77,8 @@ public abstract class DiagramAccessBase {
 		URI uri = resource.getURI();
 		
 		String modelName = ((RoomModel) sc.eContainer()).getName();
+		
+		ResourceSet rs = newResourceSet(uri);
 		
 		URI diagURI = null;
 		boolean exists = false;
@@ -87,7 +101,6 @@ public abstract class DiagramAccessBase {
 			exists = diagramFile.exists();
 		}
 		
-		ResourceSet rs = new ResourceSetImpl();
 		if (exists) {
 			Resource diagRes = rs.getResource(diagURI, true);
 			if (diagRes.getContents().isEmpty())
@@ -128,8 +141,22 @@ public abstract class DiagramAccessBase {
 		return null;
 	}
 
+	private ResourceSet newResourceSet(URI uri) {
+		ResourceSet rs;
+		if (uri.isPlatformResource()) {
+			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+			IProject project = file.getProject();
+			rs = resourceSetProvider.get(project);
+		}
+		else {
+			rs = new XtextResourceSet();
+		}
+		return rs;
+	}
+	
 	private void populateDiagram(StructureClass ac, Diagram diagram) {
-		ResourceSet rs = diagram.eResource().getResourceSet();
+		ResourceSet rs = newResourceSet(ac.eResource().getURI());
+		
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		if (editingDomain == null) {
 			// Not yet existing, create one

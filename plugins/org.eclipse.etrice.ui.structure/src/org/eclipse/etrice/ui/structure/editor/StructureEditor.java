@@ -14,6 +14,7 @@ package org.eclipse.etrice.ui.structure.editor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.editor.CustomDiagramBehavior;
 import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
@@ -67,7 +68,7 @@ public class StructureEditor extends RoomDiagramEditor {
 	@Override
 	protected DiagramBehavior createDiagramBehavior() {
 		final StructureEditor editor = this;
-		return new DiagramBehavior(this) {
+		return new CustomDiagramBehavior(this) {
 			@Override
 			protected DefaultRefreshBehavior createRefreshBehavior() {
 				return new DiagramRefreshBehavior(editor);

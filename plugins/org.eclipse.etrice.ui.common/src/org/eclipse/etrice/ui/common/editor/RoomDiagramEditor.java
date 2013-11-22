@@ -33,11 +33,17 @@ import org.eclipse.etrice.core.ui.editor.RoomEditor;
 import org.eclipse.etrice.ui.common.Activator;
 import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
+import org.eclipse.graphiti.ui.editor.EditorInputAdapter;
+import org.eclipse.graphiti.ui.editor.IDiagramEditorInput;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,7 +63,7 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert initial contribution and API
  *
  */
-public abstract class RoomDiagramEditor extends DiagramEditor {
+public abstract class RoomDiagramEditor extends DiagramEditor implements IInputUriHolder {
 
 	@Inject
 	protected IResourceValidator resourceValidator;
@@ -69,6 +75,8 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 	private ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 
 	private boolean showLostDiagramInputDialog = true;
+
+	private URI inputUri;
 	
 	public RoomDiagramEditor() {
 		super();
@@ -79,11 +87,32 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 		TrayDialog.setDialogHelpAvailable(false);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.ui.editor.DiagramEditor#createDiagramBehavior()
+	 */
+	@Override
+	protected DiagramBehavior createDiagramBehavior() {
+		return new CustomDiagramBehavior(this);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.graphiti.ui.editor.DiagramEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)
+	 */
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		IEditorInput newInput = EditorInputAdapter.adaptToDiagramEditorInput(input);
+		if (newInput instanceof IDiagramEditorInput)
+			this.inputUri = ((IDiagramEditorInput) newInput).getUri();
+		
+		super.init(site, input);
+	}
+	
 	@Override
 	public void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		
-		Map<EObject, Collection<Setting>> result = EcoreUtil.UnresolvedProxyCrossReferencer.find(getEditingDomain().getResourceSet());
+		ResourceSet resourceSet = getEditingDomain().getResourceSet();
+		Map<EObject, Collection<Setting>> result = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceSet);
 		if (!result.isEmpty())
 			System.err.println("ERROR in diagram viewer: could not resolve all proxies!");
 
@@ -295,5 +324,9 @@ public abstract class RoomDiagramEditor extends DiagramEditor {
 	protected abstract void superClassChanged();
 
 	protected abstract StructureClass getStructureClass();
+
+	public URI getInputUri() {
+		return inputUri;
+	}
 
 }
