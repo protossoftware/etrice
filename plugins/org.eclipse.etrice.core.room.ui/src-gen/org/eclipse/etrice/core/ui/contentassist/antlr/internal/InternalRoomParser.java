@@ -70252,28 +70252,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExternalType__TargetNameAssignment_3"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24318:1: rule__ExternalType__TargetNameAssignment_3 : ( ruleFQN ) ;
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24318:1: rule__ExternalType__TargetNameAssignment_3 : ( RULE_STRING ) ;
     public final void rule__ExternalType__TargetNameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24322:1: ( ( ruleFQN ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24323:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24322:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24323:1: ( RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24323:1: ( ruleFQN )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24324:1: ruleFQN
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24323:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24324:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0()); 
+               before(grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleFQN_in_rule__ExternalType__TargetNameAssignment_350590);
-            ruleFQN();
-
-            state._fsp--;
-            if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__ExternalType__TargetNameAssignment_350590); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0()); 
+               after(grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); 
             }
 
             }
@@ -82288,13 +82284,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     static final String DFA24_eofS =
         "\31\uffff";
     static final String DFA24_minS =
-        "\1\150\1\7\1\50\1\7\1\52\4\7\2\52\1\46\2\7\1\52\1\7\1\10\1\153"+
-        "\3\46\1\10\1\46\2\uffff";
+        "\1\150\1\7\1\50\1\7\1\52\4\7\3\52\1\46\2\7\1\10\1\153\1\7\2\46"+
+        "\1\10\1\46\2\uffff\1\46";
     static final String DFA24_maxS =
-        "\1\150\2\50\1\161\1\57\2\7\1\161\1\7\2\52\1\70\2\7\1\52\1\7\1\71"+
-        "\1\155\3\70\1\71\1\46\2\uffff";
+        "\1\150\2\50\1\161\1\57\3\7\1\161\3\52\1\70\2\7\1\71\1\155\1\7\2"+
+        "\70\1\71\1\46\2\uffff\1\70";
     static final String DFA24_acceptS =
-        "\27\uffff\1\2\1\1";
+        "\26\uffff\1\2\1\1\1\uffff";
     static final String DFA24_specialS =
         "\31\uffff}>";
     static final String[] DFA24_transitionS = {
@@ -82302,27 +82298,27 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             "\1\2\40\uffff\1\3",
             "\1\3",
             "\1\4\150\uffff\1\5\1\6",
-            "\1\7\4\uffff\1\10",
+            "\1\10\4\uffff\1\7",
             "\1\11",
             "\1\12",
-            "\1\13\150\uffff\1\14\1\15",
-            "\1\16",
-            "\1\7",
-            "\1\7",
-            "\1\21\10\uffff\1\17\10\uffff\1\20",
+            "\1\13",
+            "\1\14\150\uffff\1\15\1\16",
+            "\1\10",
+            "\1\10",
+            "\1\10",
+            "\1\20\10\uffff\1\21\10\uffff\1\17",
             "\1\22",
             "\1\23",
-            "\1\7",
-            "\1\24",
-            "\1\25\60\uffff\1\26",
-            "\1\30\1\uffff\1\27",
-            "\1\21\21\uffff\1\20",
-            "\1\21\21\uffff\1\20",
-            "\1\21\21\uffff\1\20",
-            "\1\25\60\uffff\1\26",
-            "\1\21",
+            "\1\24\60\uffff\1\25",
+            "\1\27\1\uffff\1\26",
+            "\1\30",
+            "\1\20\21\uffff\1\17",
+            "\1\20\21\uffff\1\17",
+            "\1\24\60\uffff\1\25",
+            "\1\20",
             "",
-            ""
+            "",
+            "\1\20\21\uffff\1\17"
     };
 
     static final short[] DFA24_eot = DFA.unpackEncodedString(DFA24_eotS);
@@ -82616,25 +82612,25 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     static final String DFA201_eofS =
         "\13\uffff";
     static final String DFA201_minS =
-        "\1\37\1\uffff\1\7\1\125\3\7\2\125\1\0\1\uffff";
+        "\1\37\1\uffff\1\7\1\125\3\7\1\125\1\0\1\125\1\uffff";
     static final String DFA201_maxS =
-        "\1\134\1\uffff\1\7\1\127\3\7\1\127\1\125\1\0\1\uffff";
+        "\1\134\1\uffff\1\7\1\127\3\7\1\125\1\0\1\127\1\uffff";
     static final String DFA201_acceptS =
         "\1\uffff\1\2\10\uffff\1\1";
     static final String DFA201_specialS =
-        "\11\uffff\1\0\1\uffff}>";
+        "\10\uffff\1\0\2\uffff}>";
     static final String[] DFA201_transitionS = {
             "\2\1\6\uffff\1\1\17\uffff\1\1\10\uffff\1\1\12\uffff\3\1\1\uffff"+
             "\1\1\4\uffff\1\2\3\uffff\1\1\3\uffff\1\1",
             "",
             "\1\3",
-            "\1\6\1\4\1\5",
+            "\1\5\1\6\1\4",
             "\1\7",
             "\1\10",
             "\1\11",
-            "\1\6\1\uffff\1\5",
-            "\1\6",
+            "\1\5",
             "\1\uffff",
+            "\1\5\1\uffff\1\4",
             ""
     };
 
@@ -82675,10 +82671,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA201_9 = input.LA(1);
+                        int LA201_8 = input.LA(1);
 
                          
-                        int index201_9 = input.index();
+                        int index201_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred5_InternalRoom()) ) {s = 10;}
@@ -82686,7 +82682,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index201_9);
+                        input.seek(index201_8);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -84040,7 +84036,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ExternalType__Group__1__Impl_in_rule__ExternalType__Group__112178 = new BitSet(new long[]{0x0000040000000000L});
     public static final BitSet FOLLOW_rule__ExternalType__Group__2_in_rule__ExternalType__Group__112181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ExternalType__NameAssignment_1_in_rule__ExternalType__Group__1__Impl12208 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExternalType__Group__2__Impl_in_rule__ExternalType__Group__212238 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__ExternalType__Group__2__Impl_in_rule__ExternalType__Group__212238 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_rule__ExternalType__Group__3_in_rule__ExternalType__Group__212241 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_42_in_rule__ExternalType__Group__2__Impl12269 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ExternalType__Group__3__Impl_in_rule__ExternalType__Group__312300 = new BitSet(new long[]{0x0100080000000000L});
@@ -85628,7 +85624,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_ID_in_rule__EnumLiteral__NameAssignment_050497 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleIntLiteral_in_rule__EnumLiteral__LiteralAssignment_1_150528 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ExternalType__NameAssignment_150559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__ExternalType__TargetNameAssignment_350590 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__ExternalType__TargetNameAssignment_350590 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_rule__ExternalType__DefaultValueLiteralAssignment_4_150621 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__ExternalType__DocuAssignment_550652 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__DataClass__NameAssignment_150683 = new BitSet(new long[]{0x0000000000000002L});

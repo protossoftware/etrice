@@ -136,7 +136,7 @@ public class CppExtensions implements ILanguageExtension {
     _builder.append("typedef enum {");
     _builder.newLine();
     {
-      for(final Pair<String,String> entry : entries) {
+      for(final Pair<String, String> entry : entries) {
         String _first = entry.getFirst();
         _builder.append(_first, "");
         _builder.append(" = ");

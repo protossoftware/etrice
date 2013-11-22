@@ -255,7 +255,7 @@ RoomModel StaticConfigTest {
 		}
 	}
 
-	ExternalType extType -> int default "999"
+	ExternalType extType -> "int" default "999"
 
 	DataClass Data_Super1_dc {
 		// PrimitiveType

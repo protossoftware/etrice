@@ -219,7 +219,7 @@ static int socketReceiver(void* slf, int channel, int size, const int8* data) {
 		Attribute data [ 128 ]: int8
 	}
 
-	ExternalType etSocketServerData -> etSocketServerData
-	ExternalType etSocketConnectionData -> etSocketConnectionData
+	ExternalType etSocketServerData -> "etSocketServerData"
+	ExternalType etSocketConnectionData -> "etSocketConnectionData"
 	
 }

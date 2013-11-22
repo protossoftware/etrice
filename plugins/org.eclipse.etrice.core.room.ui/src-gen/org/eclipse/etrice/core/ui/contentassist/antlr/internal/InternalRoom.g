@@ -24321,8 +24321,8 @@ rule__ExternalType__TargetNameAssignment_3
     }
 :
 (
-{ before(grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0()); }
-	ruleFQN{ after(grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0()); }
+{ before(grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); }
+	RULE_STRING{ after(grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); }
 )
 
 ;

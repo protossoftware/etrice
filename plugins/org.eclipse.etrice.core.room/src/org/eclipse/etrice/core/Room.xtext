@@ -70,7 +70,7 @@ EnumLiteral:
 	name=ID ('=' literal=IntLiteral)?
 ;
 
-ExternalType: 'ExternalType' name=ID '->' targetName=FQN ('default' defaultValueLiteral=STRING)? (docu=Documentation)?;
+ExternalType: 'ExternalType' name=ID '->' targetName=STRING ('default' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 // TODOHRR: define detail level language?
 DataClass:

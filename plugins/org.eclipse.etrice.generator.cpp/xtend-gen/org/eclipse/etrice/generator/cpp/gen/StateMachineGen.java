@@ -138,7 +138,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _xifexpression = _triggers;
     }
     final EList<MessageFromIf> triggers = _xifexpression;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String,String>>();
+    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
     final ArrayList<Pair<String,String>> list = _arrayList;
     Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");
     list.add(_pair);

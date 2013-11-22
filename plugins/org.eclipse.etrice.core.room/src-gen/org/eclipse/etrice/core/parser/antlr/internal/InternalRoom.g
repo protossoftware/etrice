@@ -989,19 +989,19 @@ ruleExternalType returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0()); 
-	    }
-		lv_targetName_3_0=ruleFQN		{
+		lv_targetName_3_0=RULE_STRING
+		{
+			newLeafNode(lv_targetName_3_0, grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getExternalTypeRule());
+	            $current = createModelElement(grammarAccess.getExternalTypeRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"targetName",
         		lv_targetName_3_0, 
-        		"FQN");
-	        afterParserOrEnumRuleCall();
+        		"STRING");
 	    }
 
 )

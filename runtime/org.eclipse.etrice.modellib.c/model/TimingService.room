@@ -279,8 +279,8 @@ RoomModel room.basic.service.timing {
 			Attribute status:int8="0"
 		}
 	}
-	ExternalType tcb -> etTimerControlBlock
-	ExternalType targetTime -> etTime
+	ExternalType tcb -> "etTimerControlBlock"
+	ExternalType targetTime -> "etTime"
 }
 	
 	

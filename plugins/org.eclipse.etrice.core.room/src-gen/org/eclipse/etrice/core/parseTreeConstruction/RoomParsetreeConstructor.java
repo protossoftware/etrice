@@ -2773,11 +2773,11 @@ protected class EnumLiteral_LiteralAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule ExternalType ****************
  *
  * ExternalType:
- * 	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
+ * 	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
  *
  **/
 
-// "ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?
+// "ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?
 protected class ExternalType_Group extends GroupToken {
 	
 	public ExternalType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2885,7 +2885,7 @@ protected class ExternalType_HyphenMinusGreaterThanSignKeyword_2 extends Keyword
 
 }
 
-// targetName=FQN
+// targetName=STRING
 protected class ExternalType_TargetNameAssignment_3 extends AssignmentToken  {
 	
 	public ExternalType_TargetNameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2909,9 +2909,9 @@ protected class ExternalType_TargetNameAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("targetName",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("targetName");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0(), value, null)) {
-			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getExternalTypeAccess().getTargetNameFQNParserRuleCall_3_0();
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0();
 			return obj;
 		}
 		return null;

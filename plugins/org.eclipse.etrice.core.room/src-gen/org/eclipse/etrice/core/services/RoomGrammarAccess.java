@@ -548,7 +548,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cTargetNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTargetNameFQNParserRuleCall_3_0 = (RuleCall)cTargetNameAssignment_3.eContents().get(0);
+		private final RuleCall cTargetNameSTRINGTerminalRuleCall_3_0 = (RuleCall)cTargetNameAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cDefaultKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cDefaultValueLiteralAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
@@ -557,10 +557,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
 		//ExternalType:
-		//	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
+		//	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?
+		//"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//"ExternalType"
@@ -575,11 +575,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 
-		//targetName=FQN
+		//targetName=STRING
 		public Assignment getTargetNameAssignment_3() { return cTargetNameAssignment_3; }
 
-		//FQN
-		public RuleCall getTargetNameFQNParserRuleCall_3_0() { return cTargetNameFQNParserRuleCall_3_0; }
+		//STRING
+		public RuleCall getTargetNameSTRINGTerminalRuleCall_3_0() { return cTargetNameSTRINGTerminalRuleCall_3_0; }
 
 		//("default" defaultValueLiteral=STRING)?
 		public Group getGroup_4() { return cGroup_4; }
@@ -5289,7 +5289,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ExternalType:
-	//	"ExternalType" name=ID "->" targetName=FQN ("default" defaultValueLiteral=STRING)? docu=Documentation?;
+	//	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
 	public ExternalTypeElements getExternalTypeAccess() {
 		return (pExternalType != null) ? pExternalType : (pExternalType = new ExternalTypeElements());
 	}
