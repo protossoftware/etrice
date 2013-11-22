@@ -2,8 +2,8 @@
 <launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
 <booleanAttribute key="DataObj" value="false"/>
 <booleanAttribute key="Debug" value="false"/>
-<booleanAttribute key="GenDocumentation" value="false"/>
-<booleanAttribute key="GenInstanceDiagram" value="false"/>
+<booleanAttribute key="GenDocumentation" value="true"/>
+<booleanAttribute key="GenInstanceDiagram" value="true"/>
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
