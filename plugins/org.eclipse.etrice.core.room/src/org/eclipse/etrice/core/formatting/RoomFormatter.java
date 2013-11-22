@@ -29,12 +29,13 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 	protected void configureFormatting(FormattingConfig c) {
 		org.eclipse.etrice.core.services.RoomGrammarAccess f = (org.eclipse.etrice.core.services.RoomGrammarAccess) getGrammarAccess();
 
-		// general
+		// HOWTO: dump a list of keywords to the host console
 //		Set<String> keywords = GrammarUtil.getAllKeywords(grammar.getGrammar());
 //		for (String kw : keywords) {
 //			System.out.println(kw+",");
 //		}
 		 
+		// general
 		c.setAutoLinewrap(120);
 		c.setLinewrap(2).before(f.getSL_COMMENTRule());
 		c.setLinewrap(2).before(f.getML_COMMENTRule());
