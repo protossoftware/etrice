@@ -225,7 +225,8 @@ public class DocGen {
     _builder.newLine();
     _builder.append("\\title{");
     String _name = model.getName();
-    _builder.append(_name, "");
+    String _escapedString = this.escapedString(_name);
+    _builder.append(_escapedString, "");
     _builder.append(" Model Documentation}");
     _builder.newLineIfNotEmpty();
     _builder.append("\\date{\\today}");
