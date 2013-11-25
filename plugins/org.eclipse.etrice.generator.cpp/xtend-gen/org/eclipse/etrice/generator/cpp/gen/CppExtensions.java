@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
@@ -29,7 +30,6 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -250,7 +250,7 @@ public class CppExtensions implements ILanguageExtension {
     } else {
       String _xifexpression_1 = null;
       if ((dt instanceof EnumerationType)) {
-        return RoomHelpers.getDefaultValue(((EnumerationType) dt));
+        return this.getDefaultValue(((EnumerationType) dt));
       } else {
         String _xifexpression_2 = null;
         if ((dt instanceof ExternalType)) {
@@ -295,6 +295,21 @@ public class CppExtensions implements ILanguageExtension {
         _xifexpression_1 = _xifexpression_2;
       }
       _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  public String getDefaultValue(final EnumerationType type) {
+    String _xifexpression = null;
+    EList<EnumLiteral> _literals = type.getLiterals();
+    boolean _isEmpty = _literals.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = "";
+    } else {
+      EList<EnumLiteral> _literals_1 = type.getLiterals();
+      EnumLiteral _get = _literals_1.get(0);
+      String _castedValue = this.getCastedValue(_get);
+      _xifexpression = _castedValue;
     }
     return _xifexpression;
   }
@@ -360,7 +375,7 @@ public class CppExtensions implements ILanguageExtension {
       if ((_type_2 instanceof EnumerationType)) {
         RefableType _refType_3 = data.getRefType();
         DataType _type_3 = _refType_3.getType();
-        String _targetType = RoomHelpers.getTargetType(((EnumerationType) _type_3));
+        String _targetType = this.getTargetType(((EnumerationType) _type_3));
         _xifexpression_1 = _targetType;
       } else {
         RefableType _refType_4 = data.getRefType();
@@ -405,7 +420,7 @@ public class CppExtensions implements ILanguageExtension {
       if ((_type_6 instanceof EnumerationType)) {
         RefableType _refType_7 = data.getRefType();
         DataType _type_7 = _refType_7.getType();
-        String _castType = RoomHelpers.getCastType(((EnumerationType) _type_7));
+        String _castType = this.getCastType(((EnumerationType) _type_7));
         _xifexpression_3 = _castType;
       } else {
         _xifexpression_3 = typeName;
@@ -451,5 +466,62 @@ public class CppExtensions implements ILanguageExtension {
     String _name_3 = data.getName();
     final String typedArgList = (_plus_12 + _name_3);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
+  }
+  
+  public String getTargetType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _targetName = _primitiveType_1.getTargetName();
+      _xifexpression = _targetName;
+    } else {
+      String _name = type.getName();
+      _xifexpression = _name;
+    }
+    return _xifexpression;
+  }
+  
+  public String getCastedValue(final EnumLiteral literal) {
+    String _xblockexpression = null;
+    {
+      EObject _eContainer = literal.eContainer();
+      final EnumerationType type = ((EnumerationType) _eContainer);
+      final String cast = this.getTargetType(type);
+      String _xifexpression = null;
+      PrimitiveType _primitiveType = type.getPrimitiveType();
+      boolean _notEquals = (!Objects.equal(_primitiveType, null));
+      if (_notEquals) {
+        long _literalValue = literal.getLiteralValue();
+        String _string = Long.toString(_literalValue);
+        _xifexpression = _string;
+      } else {
+        String _plus = ("((" + cast);
+        String _plus_1 = (_plus + ")");
+        long _literalValue_1 = literal.getLiteralValue();
+        String _string_1 = Long.toString(_literalValue_1);
+        String _plus_2 = (_plus_1 + _string_1);
+        String _plus_3 = (_plus_2 + ")");
+        _xifexpression = _plus_3;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public String getCastType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _castName = _primitiveType_1.getCastName();
+      _xifexpression = _castName;
+    } else {
+      String _name = type.getName();
+      _xifexpression = _name;
+    }
+    return _xifexpression;
   }
 }

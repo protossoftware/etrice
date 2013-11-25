@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -72,7 +71,7 @@ public class EnumerationTypeGen {
   public CharSequence generate(final Root root, final EnumerationType et) {
     CharSequence _xblockexpression = null;
     {
-      final String type = RoomHelpers.getTargetType(et);
+      final String type = this._javaExtensions.getTargetType(et);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(et);

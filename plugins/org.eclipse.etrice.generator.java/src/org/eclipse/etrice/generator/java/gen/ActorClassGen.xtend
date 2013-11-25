@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.ActorClass
 import java.util.HashMap
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.base.FileSystemHelpers
+import org.eclipse.etrice.core.room.EnumerationType
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -461,7 +462,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genSavePrimitive(Attribute att) {
-		val type = att.type.type.typeName
+		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType==null)
+			"int"
+		else
+			att.type.type.typeName
 		val method = type.saveMethod
 		
 		if (att.size>1)
@@ -485,7 +489,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genLoadPrimitive(Attribute att) {
-		val type = att.type.type.typeName
+		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType==null)
+			"int"
+		else
+			att.type.type.typeName
 		val method = type.loadMethod
 		
 		if (att.size>1)

@@ -37,9 +37,9 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.EnumerationType
-import org.eclipse.etrice.core.room.util.RoomHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumLiteral
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -217,7 +217,7 @@ class CExtensions implements ILanguageExtension {
 			PrimitiveType:
 				toValueLiteral(dt, dt.defaultValueLiteral)
 			EnumerationType:
-				RoomHelpers::getDefaultValue(dt)
+				getDefaultValue(dt)
 			ExternalType:{
 				if (dt.defaultValueLiteral != null )
 					return dt.getDefaultValueLiteral
@@ -233,6 +233,13 @@ class CExtensions implements ILanguageExtension {
 				}
 			'''
 		}
+	}
+	
+	def String getDefaultValue(EnumerationType type) {
+		if (type.getLiterals().isEmpty())
+			""
+		else
+			getCastedValue(type.getLiterals().get(0))
 	}
 	
 	override initializationWithDefaultValues(DataType dt, int size) {
@@ -321,4 +328,29 @@ class CExtensions implements ILanguageExtension {
 	def getIncludePath(RoomClass rc) {
 		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCHeaderFileName+"\""
 	}
+	
+	override getTargetType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getTargetName()
+		else
+			type.getName()
+	}
+	
+	override getCastedValue(EnumLiteral literal) {
+		val type = literal.eContainer() as EnumerationType
+		val cast = type.targetType
+		
+		if (type.primitiveType!=null)
+			Long.toString(literal.getLiteralValue())
+		else
+			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
+	}
+	
+	override getCastType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getCastName()
+		else
+			type.getName()
+	}
+	
 }

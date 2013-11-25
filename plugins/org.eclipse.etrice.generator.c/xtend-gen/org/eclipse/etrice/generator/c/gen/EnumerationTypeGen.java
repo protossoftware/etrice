@@ -10,12 +10,13 @@
  */
 package org.eclipse.etrice.generator.c.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -55,7 +56,7 @@ public class EnumerationTypeGen {
     }
   }
   
-  public CharSequence generateHeaderFile(final Root root, final EnumerationType et) {
+  private CharSequence generateHeaderFile(final Root root, final EnumerationType et) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -85,17 +86,56 @@ public class EnumerationTypeGen {
     _builder.newLine();
     _builder.newLine();
     {
-      EList<EnumLiteral> _literals = et.getLiterals();
-      for(final EnumLiteral lit : _literals) {
-        _builder.append("#define ");
-        String _name_1 = et.getName();
-        _builder.append(_name_1, "");
-        _builder.append("_");
-        String _name_2 = lit.getName();
-        _builder.append(_name_2, "");
-        _builder.append(" ");
-        String _castedValue = RoomHelpers.getCastedValue(lit);
-        _builder.append(_castedValue, "");
+      PrimitiveType _primitiveType = et.getPrimitiveType();
+      boolean _notEquals = (!Objects.equal(_primitiveType, null));
+      if (_notEquals) {
+        {
+          EList<EnumLiteral> _literals = et.getLiterals();
+          for(final EnumLiteral lit : _literals) {
+            _builder.append("#define ");
+            String _name_1 = et.getName();
+            _builder.append(_name_1, "");
+            _builder.append("_");
+            String _name_2 = lit.getName();
+            _builder.append(_name_2, "");
+            _builder.append(" ");
+            String _castedValue = this._cExtensions.getCastedValue(lit);
+            _builder.append(_castedValue, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      } else {
+        _builder.append("typedef enum ");
+        String _name_3 = et.getName();
+        _builder.append(_name_3, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<EnumLiteral> _literals_1 = et.getLiterals();
+          boolean _hasElements = false;
+          for(final EnumLiteral lit_1 : _literals_1) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "	");
+            }
+            _builder.append("\t");
+            String _name_4 = et.getName();
+            _builder.append(_name_4, "	");
+            _builder.append("_");
+            String _name_5 = lit_1.getName();
+            _builder.append(_name_5, "	");
+            _builder.append(" = ");
+            long _literalValue = lit_1.getLiteralValue();
+            _builder.append(_literalValue, "	");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+        String _name_6 = et.getName();
+        _builder.append(_name_6, "");
+        _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
     }

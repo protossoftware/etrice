@@ -34,9 +34,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.EnumerationType
-import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumLiteral
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -198,7 +197,7 @@ class JavaExtensions implements ILanguageExtension {
 			PrimitiveType:
 				toValueLiteral(dt, dt.defaultValueLiteral)
 			EnumerationType:
-				RoomHelpers::getDefaultValue(dt)
+				getDefaultValue(dt)
 			ExternalType:
 				"new "+(dt as ExternalType).targetName+"()"
 			default:
@@ -206,6 +205,12 @@ class JavaExtensions implements ILanguageExtension {
 		}
 	}
 	
+	def String getDefaultValue(EnumerationType type) {
+		if (type.getLiterals().isEmpty())
+			""
+		else
+			getCastedValue(type.getLiterals().get(0))
+	}
 
 	override initializationWithDefaultValues(DataType dt, int size) {
 		val dv = dt.defaultValue
@@ -238,7 +243,7 @@ class JavaExtensions implements ILanguageExtension {
 		}
 		else if (data.refType.type instanceof EnumerationType) {
 			typeName = (data.refType.type as EnumerationType).targetType
-			castTypeName = (data.refType.type as EnumerationType).javaCastType
+			castTypeName = (data.refType.type as EnumerationType).castType
 		}
 		
 		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data;\n";
@@ -246,6 +251,30 @@ class JavaExtensions implements ILanguageExtension {
 		val typedArgList = ", "+typeName+" "+data.getName();
 		
 		return newArrayList(dataArg, typedData, typedArgList);
+	}
+	
+	override getTargetType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getTargetName()
+		else
+			"int"
+	}
+	
+	override getCastedValue(EnumLiteral literal) {
+		val type = literal.eContainer() as EnumerationType
+		val cast = type.targetType
+		
+		if (type.primitiveType==null)
+			Long.toString(literal.getLiteralValue())
+		else
+			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
+	}
+	
+	override getCastType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getCastName()
+		else
+			"int"
 	}
 	
 }

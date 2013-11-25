@@ -48,7 +48,7 @@ public class TypeHelpers {
       return ((PrimitiveType) type).getTargetName();
     } else {
       if ((type instanceof EnumerationType)) {
-        return RoomHelpers.getTargetType(((EnumerationType) type));
+        return this.languageExt.getTargetType(((EnumerationType) type));
       } else {
         if ((type instanceof ExternalType)) {
           return ((ExternalType) type).getTargetName();

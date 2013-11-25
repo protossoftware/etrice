@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -37,14 +39,11 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.common.base.Annotation;
-import org.eclipse.etrice.core.common.base.KeyValue;
-import org.eclipse.etrice.core.room.EnumLiteral;
-import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
@@ -2621,65 +2620,5 @@ public class RoomHelpers extends BaseHelpers {
 			ac1 = ac1.getBase();
 		}
 		return false;
-	}
-	
-	/**
-	 * @param type an enumeration
-	 * @return the value of the first literal as string
-	 */
-	public static String getDefaultValue(EnumerationType type) {
-		if (type.getLiterals().isEmpty())
-			return "";
-		
-		return getCastedValue(type.getLiterals().get(0));
-	}
-
-	/**
-	 * This method computes a string that includes a cast to the proper type if
-	 * it is not {@code int}. The expression is surrounded by brackets.
-	 * 
-	 * @param literal an enumeration literal
-	 * @return the literal as string with proper cast
-	 */
-	public static String getCastedValue(EnumLiteral literal) {
-		EnumerationType type = (EnumerationType) literal.eContainer();
-		String cast = getTargetType(type);
-		if (cast.equals("int"))
-			return Long.toString(literal.getLiteralValue());
-		else
-			return "(("+cast+")"+Long.toString(literal.getLiteralValue())+")";
-	}
-	
-	/**
-	 * @param type an enumeration
-	 * @return the target type in the generated code
-	 */
-	public static String getTargetType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
-			return type.getPrimitiveType().getTargetName();
-		
-		return "int";
-	}
-	
-	/**
-	 * @param type an enumeration
-	 * @return the cast type in the generated code
-	 */
-	public static String getCastType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
-			return type.getPrimitiveType().getCastName();
-		
-		return "int";
-	}
-	
-	/**
-	 * @param type an enumeration
-	 * @return the cast type in the generated code for Java
-	 */
-	public static String getJavaCastType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
-			return type.getPrimitiveType().getCastName();
-		
-		return "Integer";
 	}
 }

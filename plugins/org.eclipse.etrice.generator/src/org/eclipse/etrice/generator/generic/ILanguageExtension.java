@@ -13,12 +13,15 @@
 package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.VarDecl;
 
 import java.util.List;
+
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.etrice.core.room.EnumerationType;
 
 
 /**
@@ -244,4 +247,25 @@ public interface ILanguageExtension {
 	 * @return the array initializer
 	 */
 	String initializationWithDefaultValues(DataType dt, int size);
+
+	/**
+	 * returns the target type for the enumeration type
+	 * @param type the enumeration type
+	 * @return the target type for the enumeration type
+	 */
+	String getTargetType(EnumerationType type);
+	
+	/**
+	 * returns the casted value as string
+	 * @param literal an enumeration type literal
+	 * @return the casted value as string
+	 */
+	String getCastedValue(EnumLiteral literal);
+	
+	/**
+	 * return the cast type of an enumeration type
+	 * @param type the enumeration type
+	 * @return the cast type of an enumeration type
+	 */
+	String getCastType(EnumerationType type);
 }

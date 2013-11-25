@@ -14,11 +14,14 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
@@ -26,7 +29,6 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -456,7 +458,7 @@ public class JavaExtensions implements ILanguageExtension {
       if (dt instanceof EnumerationType) {
         final EnumerationType _enumerationType = (EnumerationType)dt;
         _matched=true;
-        String _defaultValue = RoomHelpers.getDefaultValue(_enumerationType);
+        String _defaultValue = this.getDefaultValue(_enumerationType);
         _switchResult = _defaultValue;
       }
     }
@@ -477,6 +479,21 @@ public class JavaExtensions implements ILanguageExtension {
       _switchResult = _plus_1;
     }
     return _switchResult;
+  }
+  
+  public String getDefaultValue(final EnumerationType type) {
+    String _xifexpression = null;
+    EList<EnumLiteral> _literals = type.getLiterals();
+    boolean _isEmpty = _literals.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = "";
+    } else {
+      EList<EnumLiteral> _literals_1 = type.getLiterals();
+      EnumLiteral _get = _literals_1.get(0);
+      String _castedValue = this.getCastedValue(_get);
+      _xifexpression = _castedValue;
+    }
+    return _xifexpression;
   }
   
   public String initializationWithDefaultValues(final DataType dt, final int size) {
@@ -556,12 +573,12 @@ public class JavaExtensions implements ILanguageExtension {
       if ((_type_4 instanceof EnumerationType)) {
         RefableType _refType_5 = data.getRefType();
         DataType _type_5 = _refType_5.getType();
-        String _targetType = RoomHelpers.getTargetType(((EnumerationType) _type_5));
+        String _targetType = this.getTargetType(((EnumerationType) _type_5));
         typeName = _targetType;
         RefableType _refType_6 = data.getRefType();
         DataType _type_6 = _refType_6.getType();
-        String _javaCastType = RoomHelpers.getJavaCastType(((EnumerationType) _type_6));
-        castTypeName = _javaCastType;
+        String _castType = this.getCastType(((EnumerationType) _type_6));
+        castTypeName = _castType;
       }
     }
     String _plus = (typeName + " ");
@@ -577,5 +594,60 @@ public class JavaExtensions implements ILanguageExtension {
     String _name_2 = data.getName();
     final String typedArgList = (_plus_5 + _name_2);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
+  }
+  
+  public String getTargetType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _targetName = _primitiveType_1.getTargetName();
+      _xifexpression = _targetName;
+    } else {
+      _xifexpression = "int";
+    }
+    return _xifexpression;
+  }
+  
+  public String getCastedValue(final EnumLiteral literal) {
+    String _xblockexpression = null;
+    {
+      EObject _eContainer = literal.eContainer();
+      final EnumerationType type = ((EnumerationType) _eContainer);
+      final String cast = this.getTargetType(type);
+      String _xifexpression = null;
+      PrimitiveType _primitiveType = type.getPrimitiveType();
+      boolean _equals = Objects.equal(_primitiveType, null);
+      if (_equals) {
+        long _literalValue = literal.getLiteralValue();
+        String _string = Long.toString(_literalValue);
+        _xifexpression = _string;
+      } else {
+        String _plus = ("((" + cast);
+        String _plus_1 = (_plus + ")");
+        long _literalValue_1 = literal.getLiteralValue();
+        String _string_1 = Long.toString(_literalValue_1);
+        String _plus_2 = (_plus_1 + _string_1);
+        String _plus_3 = (_plus_2 + ")");
+        _xifexpression = _plus_3;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public String getCastType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _castName = _primitiveType_1.getCastName();
+      _xifexpression = _castName;
+    } else {
+      _xifexpression = "int";
+    }
+    return _xifexpression;
   }
 }

@@ -268,7 +268,7 @@ public class Initialization {
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
-            String value = RoomHelpers.getDefaultValue(_enumerationType);
+            String value = this.languageExt.getDefaultValue(_enumerationType);
             CharSequence _xifexpression_1 = null;
             boolean _and = false;
             int _size = a.getSize();

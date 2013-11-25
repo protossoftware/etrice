@@ -27,9 +27,11 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
@@ -1714,11 +1716,30 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String genSavePrimitive(final Attribute att) {
     String _xblockexpression = null;
     {
+      String _xifexpression = null;
+      boolean _and = false;
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = this._typeHelpers.typeName(_type_1);
+      if (!(_type_1 instanceof EnumerationType)) {
+        _and = false;
+      } else {
+        RefableType _type_2 = att.getType();
+        DataType _type_3 = _type_2.getType();
+        PrimitiveType _primitiveType = ((EnumerationType) _type_3).getPrimitiveType();
+        boolean _equals = Objects.equal(_primitiveType, null);
+        _and = ((_type_1 instanceof EnumerationType) && _equals);
+      }
+      if (_and) {
+        _xifexpression = "int";
+      } else {
+        RefableType _type_4 = att.getType();
+        DataType _type_5 = _type_4.getType();
+        String _typeName = this._typeHelpers.typeName(_type_5);
+        _xifexpression = _typeName;
+      }
+      final String type = _xifexpression;
       final String method = this.getSaveMethod(type);
-      String _xifexpression = null;
+      String _xifexpression_1 = null;
       int _size = att.getSize();
       boolean _greaterThan = (_size > 1);
       if (_greaterThan) {
@@ -1729,16 +1750,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String _plus_3 = (_plus_2 + ") output.");
         String _plus_4 = (_plus_3 + method);
         String _plus_5 = (_plus_4 + "(v);");
-        _xifexpression = _plus_5;
+        _xifexpression_1 = _plus_5;
       } else {
         String _plus_6 = ("output." + method);
         String _plus_7 = (_plus_6 + "(");
         String _name_1 = att.getName();
         String _plus_8 = (_plus_7 + _name_1);
         String _plus_9 = (_plus_8 + ");");
-        _xifexpression = _plus_9;
+        _xifexpression_1 = _plus_9;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (_xifexpression_1);
     }
     return _xblockexpression;
   }
@@ -1806,11 +1827,30 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String genLoadPrimitive(final Attribute att) {
     String _xblockexpression = null;
     {
+      String _xifexpression = null;
+      boolean _and = false;
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      final String type = this._typeHelpers.typeName(_type_1);
+      if (!(_type_1 instanceof EnumerationType)) {
+        _and = false;
+      } else {
+        RefableType _type_2 = att.getType();
+        DataType _type_3 = _type_2.getType();
+        PrimitiveType _primitiveType = ((EnumerationType) _type_3).getPrimitiveType();
+        boolean _equals = Objects.equal(_primitiveType, null);
+        _and = ((_type_1 instanceof EnumerationType) && _equals);
+      }
+      if (_and) {
+        _xifexpression = "int";
+      } else {
+        RefableType _type_4 = att.getType();
+        DataType _type_5 = _type_4.getType();
+        String _typeName = this._typeHelpers.typeName(_type_5);
+        _xifexpression = _typeName;
+      }
+      final String type = _xifexpression;
       final String method = this.getLoadMethod(type);
-      String _xifexpression = null;
+      String _xifexpression_1 = null;
       int _size = att.getSize();
       boolean _greaterThan = (_size > 1);
       if (_greaterThan) {
@@ -1822,15 +1862,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
         String _plus_3 = (_plus_2 + "[i] = input.");
         String _plus_4 = (_plus_3 + method);
         String _plus_5 = (_plus_4 + "();");
-        _xifexpression = _plus_5;
+        _xifexpression_1 = _plus_5;
       } else {
         String _name_2 = att.getName();
         String _plus_6 = (_name_2 + " = input.");
         String _plus_7 = (_plus_6 + method);
         String _plus_8 = (_plus_7 + "();");
-        _xifexpression = _plus_8;
+        _xifexpression_1 = _plus_8;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = (_xifexpression_1);
     }
     return _xblockexpression;
   }

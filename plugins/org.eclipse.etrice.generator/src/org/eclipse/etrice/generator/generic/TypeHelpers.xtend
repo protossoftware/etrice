@@ -38,8 +38,6 @@ import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.EnumerationType
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
 @Singleton
 class TypeHelpers {
 
@@ -50,7 +48,7 @@ class TypeHelpers {
 		if (type instanceof PrimitiveType)
 			return (type as PrimitiveType).targetName
 		else if (type instanceof EnumerationType)
-			return (type as EnumerationType).targetType
+			return languageExt.getTargetType(type as EnumerationType)
 		else if (type instanceof ExternalType)
 			return (type as ExternalType).targetName
 		else

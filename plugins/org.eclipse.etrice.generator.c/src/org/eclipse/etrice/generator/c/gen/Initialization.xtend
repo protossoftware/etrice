@@ -83,7 +83,7 @@ class Initialization {
 					value
 			}
 			EnumerationType: {
-				var value = aType.defaultValue
+				var value = languageExt.getDefaultValue(aType)
 				if (a.size > 0 && !value.trim.startsWith('{'))
 					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
 				else

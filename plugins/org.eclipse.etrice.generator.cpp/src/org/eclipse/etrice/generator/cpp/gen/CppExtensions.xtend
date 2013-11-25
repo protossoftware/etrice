@@ -33,9 +33,8 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.EnumerationType
-import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.EnumLiteral
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -151,7 +150,7 @@ class CppExtensions implements ILanguageExtension {
 			return (dt as PrimitiveType).getDefaultValueLiteral
 		}
 		else if (dt instanceof EnumerationType) {
-			return RoomHelpers::getDefaultValue(dt as EnumerationType)
+			return getDefaultValue(dt as EnumerationType)
 		}
 		else if (dt instanceof ExternalType) {
 			diagnostician.warning("initialize external type with default constructor"+dt.name, dt.eContainer, dt.eContainingFeature)
@@ -168,6 +167,13 @@ class CppExtensions implements ILanguageExtension {
 				}
 			'''
 		}
+	}
+	
+	def String getDefaultValue(EnumerationType type) {
+		if (type.getLiterals().isEmpty())
+			""
+		else
+			getCastedValue(type.getLiterals().get(0))
 	}
 	
 	override initializationWithDefaultValues(DataType dt, int size) {
@@ -232,6 +238,30 @@ class CppExtensions implements ILanguageExtension {
 		val typedArgList = ", "+typeName+" "+data.getName()
 		
 		return newArrayList(dataArg, typedData, typedArgList);
+	}
+	
+	override getTargetType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getTargetName()
+		else
+			type.getName()
+	}
+	
+	override getCastedValue(EnumLiteral literal) {
+		val type = literal.eContainer() as EnumerationType
+		val cast = type.targetType
+		
+		if (type.primitiveType!=null)
+			Long.toString(literal.getLiteralValue())
+		else
+			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
+	}
+	
+	override getCastType(EnumerationType type) {
+		if (type.getPrimitiveType()!=null)
+			type.getPrimitiveType().getCastName()
+		else
+			type.getName()
 	}
 	
 }

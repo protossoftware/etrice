@@ -15,6 +15,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.LiteralType;
@@ -24,6 +25,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Message;
@@ -422,7 +424,7 @@ public class CExtensions implements ILanguageExtension {
       if (dt instanceof EnumerationType) {
         final EnumerationType _enumerationType = (EnumerationType)dt;
         _matched=true;
-        String _defaultValue = RoomHelpers.getDefaultValue(_enumerationType);
+        String _defaultValue = this.getDefaultValue(_enumerationType);
         _switchResult = _defaultValue;
       }
     }
@@ -477,6 +479,21 @@ public class CExtensions implements ILanguageExtension {
       }
     }
     return _switchResult;
+  }
+  
+  public String getDefaultValue(final EnumerationType type) {
+    String _xifexpression = null;
+    EList<EnumLiteral> _literals = type.getLiterals();
+    boolean _isEmpty = _literals.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = "";
+    } else {
+      EList<EnumLiteral> _literals_1 = type.getLiterals();
+      EnumLiteral _get = _literals_1.get(0);
+      String _castedValue = this.getCastedValue(_get);
+      _xifexpression = _castedValue;
+    }
+    return _xifexpression;
   }
   
   public String initializationWithDefaultValues(final DataType dt, final int size) {
@@ -583,7 +600,7 @@ public class CExtensions implements ILanguageExtension {
       if ((_type_2 instanceof EnumerationType)) {
         RefableType _refType_3 = data.getRefType();
         DataType _type_3 = _refType_3.getType();
-        String _targetType = RoomHelpers.getTargetType(((EnumerationType) _type_3));
+        String _targetType = this.getTargetType(((EnumerationType) _type_3));
         _xifexpression_1 = _targetType;
       } else {
         RefableType _refType_4 = data.getRefType();
@@ -628,7 +645,7 @@ public class CExtensions implements ILanguageExtension {
       if ((_type_6 instanceof EnumerationType)) {
         RefableType _refType_7 = data.getRefType();
         DataType _type_7 = _refType_7.getType();
-        String _castType = RoomHelpers.getCastType(((EnumerationType) _type_7));
+        String _castType = this.getCastType(((EnumerationType) _type_7));
         _xifexpression_3 = _castType;
       } else {
         _xifexpression_3 = typeName;
@@ -692,5 +709,62 @@ public class CExtensions implements ILanguageExtension {
     String _plus_2 = (_plus_1 + _cHeaderFileName);
     String _plus_3 = (_plus_2 + "\"");
     return _plus_3;
+  }
+  
+  public String getTargetType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _targetName = _primitiveType_1.getTargetName();
+      _xifexpression = _targetName;
+    } else {
+      String _name = type.getName();
+      _xifexpression = _name;
+    }
+    return _xifexpression;
+  }
+  
+  public String getCastedValue(final EnumLiteral literal) {
+    String _xblockexpression = null;
+    {
+      EObject _eContainer = literal.eContainer();
+      final EnumerationType type = ((EnumerationType) _eContainer);
+      final String cast = this.getTargetType(type);
+      String _xifexpression = null;
+      PrimitiveType _primitiveType = type.getPrimitiveType();
+      boolean _notEquals = (!Objects.equal(_primitiveType, null));
+      if (_notEquals) {
+        long _literalValue = literal.getLiteralValue();
+        String _string = Long.toString(_literalValue);
+        _xifexpression = _string;
+      } else {
+        String _plus = ("((" + cast);
+        String _plus_1 = (_plus + ")");
+        long _literalValue_1 = literal.getLiteralValue();
+        String _string_1 = Long.toString(_literalValue_1);
+        String _plus_2 = (_plus_1 + _string_1);
+        String _plus_3 = (_plus_2 + ")");
+        _xifexpression = _plus_3;
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
+  }
+  
+  public String getCastType(final EnumerationType type) {
+    String _xifexpression = null;
+    PrimitiveType _primitiveType = type.getPrimitiveType();
+    boolean _notEquals = (!Objects.equal(_primitiveType, null));
+    if (_notEquals) {
+      PrimitiveType _primitiveType_1 = type.getPrimitiveType();
+      String _castName = _primitiveType_1.getCastName();
+      _xifexpression = _castName;
+    } else {
+      String _name = type.getName();
+      _xifexpression = _name;
+    }
+    return _xifexpression;
   }
 }
