@@ -12,16 +12,15 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import java.util.List;
+
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.VarDecl;
-
-import java.util.List;
-
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.etrice.core.room.EnumerationType;
 
 
 /**
@@ -211,14 +210,22 @@ public interface ILanguageExtension {
 	String superCall(String baseClassName, String method, String arguments);
 	
 	/**
-	 * Produces necessary casts or data type keys for primitive values
+	 * Produces necessary casts or data type keys for an attribute (array) value statement
 	 * @param type ROOM PrimitiveType
-	 * @param value Java Primitive e.g. Long, Byte, String
+	 * @param value User value statement, maybe array (with)out brackets
 	 * @return for Java: <br>
 	 * toPrimitve("PrimitiveType int64: ptInteger -> long (Long)", Long value = 99) -> 99L<br>
 	 * toPrimitve("PrimitiveType int8: ptInteger -> byte (Byte)", Byte value = 12) -> (byte)12
 	 */
 	String toValueLiteral(PrimitiveType type, String value);
+	
+	/**
+	 * User enum value to platform expression
+	 * @param type ROOM EnumerationType
+	 * @param value User value statement, maybe array (with)out brackets
+	 * @return enum text expression
+	 */
+	String toEnumLiteral(EnumerationType type, String value);
 	
 	/**
 	 * return three strings used by the generator

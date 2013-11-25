@@ -65,6 +65,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//AttrInstanceConfig/readOnly"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//AttrInstanceConfig/attributes"/>
     </genClasses>
+    <genClasses ecoreClass="Config.ecore#//ConfigValueArray">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//ConfigValueArray/values"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//ConfigValue"/>
+    <genClasses ecoreClass="Config.ecore#//LiteralConfigValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//LiteralConfigValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Config.ecore#//EnumConfigValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//EnumConfigValue/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Config.ecore#//EnumConfigValue/value"/>
+    </genClasses>
     <genClasses ecoreClass="Config.ecore#//RefPath">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Config.ecore#//RefPath/refs"/>
     </genClasses>

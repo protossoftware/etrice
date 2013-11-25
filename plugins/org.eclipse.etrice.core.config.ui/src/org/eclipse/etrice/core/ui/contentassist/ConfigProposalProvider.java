@@ -16,10 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
-import org.eclipse.etrice.core.common.base.LiteralArray;
+import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -28,8 +29,8 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
-import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.Assignment;
@@ -173,18 +174,39 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		acceptor.accept(createCompletionProposal("", "Real" + mult, null,
 				context));
 	}
-
+	
+	
+	@Override
+	public void completeEnumConfigValue_Type(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		String mult = "";
+		Attribute attr = getAttribute(model);
+		if(attr == null)
+			return;
+		
+		mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
+		DataType type = attr.getType().getType();
+		if(!(type instanceof EnumerationType))
+			return;
+		EnumerationType enumType = (EnumerationType)type;
+		
+		acceptor.accept(createCompletionProposal(enumType.getName(), enumType.getName(), null, context));
+		for(EnumLiteral l : enumType.getLiterals())
+			acceptor.accept(createCompletionProposal(l.getFullName(), l.getFullName()+mult, null, context));
+	}
+	
 	@Override
 	public void completeKeyword(Keyword keyword,
 			ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-
+		
 		EObject model = contentAssistContext.getCurrentModel();
 		if (model instanceof AttrConfig)
 			if (hideKeyword((AttrConfig) model, keyword))
 				return;
-		if (model instanceof LiteralArray)
-			if (hideKeyword((LiteralArray) model, keyword))
+		if (model instanceof ConfigValueArray)
+			if (hideKeyword((ConfigValueArray) model, keyword))
 				return;
 		if (keyword.getValue().equals("true")
 				|| keyword.getValue().equals("false")) {
@@ -229,12 +251,12 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		return false;
 	}
 
-	private boolean hideKeyword(LiteralArray array, Keyword keyword) {
+	private boolean hideKeyword(ConfigValueArray array, Keyword keyword) {
 		if (keyword.getValue().equals(",")) {
 			if (array.eContainer() instanceof AttrConfig) {
 				Attribute attr = ((AttrConfig) array.eContainer())
 						.getAttribute();
-				if (attr.getSize() <= array.getLiterals().size())
+				if (attr.getSize() <= array.getValues().size())
 					return true;
 				if (((PrimitiveType) attr.getType().getType()).getType() == LiteralType.CHAR)
 					return true;

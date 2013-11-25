@@ -1741,7 +1741,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final String method = this.getSaveMethod(type);
       String _xifexpression_1 = null;
       int _size = att.getSize();
-      boolean _greaterThan = (_size > 1);
+      boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         String _plus = ("for (" + type);
         String _plus_1 = (_plus + " v: ");
@@ -1852,7 +1852,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final String method = this.getLoadMethod(type);
       String _xifexpression_1 = null;
       int _size = att.getSize();
-      boolean _greaterThan = (_size > 1);
+      boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         String _name = att.getName();
         String _plus = ("for (int i=0; i<" + _name);

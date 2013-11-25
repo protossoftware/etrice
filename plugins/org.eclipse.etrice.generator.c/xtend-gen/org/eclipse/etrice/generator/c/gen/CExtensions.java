@@ -364,8 +364,15 @@ public class CExtensions implements ILanguageExtension {
       }
     }
     if (!_matched) {
+      boolean _or = false;
       boolean _contains = value.contains(",");
       if (_contains) {
+        _or = true;
+      } else {
+        boolean _contains_1 = value.contains("{");
+        _or = (_contains || _contains_1);
+      }
+      if (_or) {
         _matched=true;
         String _xblockexpression = null;
         {
@@ -406,6 +413,64 @@ public class CExtensions implements ILanguageExtension {
       _switchResult = value;
     }
     return _switchResult;
+  }
+  
+  public String toEnumLiteral(final EnumerationType type, final String value) {
+    String _xifexpression = null;
+    boolean _or = false;
+    boolean _contains = value.contains(",");
+    if (_contains) {
+      _or = true;
+    } else {
+      boolean _contains_1 = value.contains("{");
+      _or = (_contains || _contains_1);
+    }
+    if (_or) {
+      String _xblockexpression = null;
+      {
+        String _replace = value.replace("{", "");
+        String _replace_1 = _replace.replace("}", "");
+        String _trim = _replace_1.trim();
+        String[] singleValues = _trim.split(",");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{ ");
+        {
+          boolean _hasElements = false;
+          for(final String v : singleValues) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            String _trim_1 = v.trim();
+            String _convertStringEnumLiteral = this.convertStringEnumLiteral(type, _trim_1);
+            _builder.append(_convertStringEnumLiteral, "");
+          }
+        }
+        _builder.append(" }");
+        String _string = _builder.toString();
+        _xblockexpression = (_string);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = value;
+    }
+    return _xifexpression;
+  }
+  
+  private String convertStringEnumLiteral(final EnumerationType type, final String value) {
+    EList<EnumLiteral> _literals = type.getLiterals();
+    for (final EnumLiteral l : _literals) {
+      String _name = l.getName();
+      boolean _equals = _name.equals(value);
+      if (_equals) {
+        String _name_1 = type.getName();
+        String _plus = (_name_1 + "_");
+        String _name_2 = l.getName();
+        return (_plus + _name_2);
+      }
+    }
+    return null;
   }
   
   public String defaultValue(final DataType dt) {

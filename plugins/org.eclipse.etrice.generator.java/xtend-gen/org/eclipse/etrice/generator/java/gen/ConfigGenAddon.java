@@ -141,7 +141,18 @@ public class ConfigGenAddon {
         if (aType instanceof EnumerationType) {
           final EnumerationType _enumerationType = (EnumerationType)aType;
           _matched=true;
-          _switchResult = "";
+          CharSequence _xblockexpression_1 = null;
+          {
+            String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
+            CharSequence _xifexpression = null;
+            boolean _notEquals = (!Objects.equal(value, null));
+            if (_notEquals) {
+              CharSequence _genAttributeInitializer = this.initGen.genAttributeInitializer(a, value, invokes);
+              _xifexpression = _genAttributeInitializer;
+            }
+            _xblockexpression_1 = (_xifexpression);
+          }
+          _switchResult = _xblockexpression_1;
         }
       }
       if (!_matched) {

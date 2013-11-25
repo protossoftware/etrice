@@ -23,10 +23,15 @@ RoomModel EnumTest {
 			
 			Attribute caseId: int32
 			Attribute first: FirstEnum
-			Attribute second: SecondEnum = "SecondEnum.one"
+			Attribute second: SecondEnum = "SecondEnum.two"
 			Attribute third: ThirdEnum
 			Attribute fourth: FourthEnum
 			Attribute fifth: FifthEnum
+			
+			Attribute arrayFirst[1] : FirstEnum
+			Attribute arrayFourth[65] : FourthEnum = "FourthEnum.sixtyfive"
+			Attribute arrayFifth[2] : FifthEnum = "{ FifthEnum.f1, FifthEnum.f2}"
+			
 		}
 		Behavior {
 			Operation EnumUser() {
@@ -39,7 +44,13 @@ RoomModel EnumTest {
 				Transition init: initial -> state0 { }
 				State state0 {
 					entry {
-						"EXPECT_EQUAL_INT32(caseId, \"second: initialized value\", 1, second);"
+						"EXPECT_EQUAL_INT32(caseId, \"first: initialized value\", 0, first);"
+						"EXPECT_EQUAL_INT32(caseId, \"second: initialized value\", 2, second);"
+						""
+						"EXPECT_EQUAL_INT32(caseId, \"arrayFirst: initialized set value\", 0, arrayFirst[0]);"
+						"EXPECT_EQUAL_INT32(caseId, \"arrayFouth: initialized set value\", 0x41, arrayFourth[20]);"
+						"EXPECT_EQUAL_INT16(caseId, \"arrayFifth: initialized set value\", (short)0x01, arrayFifth[0]);"
+						"EXPECT_EQUAL_INT16(caseId, \"arrayFifth: initialized set value\", (short)0x02, arrayFifth[1]);"
 						""
 						"first = FirstEnum.zero;"
 						"second = SecondEnum.three;"

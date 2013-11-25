@@ -243,6 +243,11 @@ public class CppExtensions implements ILanguageExtension {
     throw _unsupportedOperationException;
   }
   
+  public String toEnumLiteral(final EnumerationType type, final String value) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO Config for Cpp");
+    throw _unsupportedOperationException;
+  }
+  
   public String defaultValue(final DataType dt) {
     String _xifexpression = null;
     if ((dt instanceof PrimitiveType)) {

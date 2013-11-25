@@ -144,6 +144,10 @@ class CppExtensions implements ILanguageExtension {
 	override String toValueLiteral(PrimitiveType type, String value){
 		throw new UnsupportedOperationException("TODO Config for Cpp");
 	}
+	
+	override toEnumLiteral(EnumerationType type, String value) {
+		throw new UnsupportedOperationException("TODO Config for Cpp")
+	}
 
 	override String defaultValue(DataType dt) {
 		if (dt instanceof PrimitiveType) {

@@ -162,6 +162,36 @@ public class ConfigSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ConfigPackage.CONFIG_VALUE_ARRAY:
+      {
+        ConfigValueArray configValueArray = (ConfigValueArray)theEObject;
+        T result = caseConfigValueArray(configValueArray);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.CONFIG_VALUE:
+      {
+        ConfigValue configValue = (ConfigValue)theEObject;
+        T result = caseConfigValue(configValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.LITERAL_CONFIG_VALUE:
+      {
+        LiteralConfigValue literalConfigValue = (LiteralConfigValue)theEObject;
+        T result = caseLiteralConfigValue(literalConfigValue);
+        if (result == null) result = caseConfigValue(literalConfigValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ConfigPackage.ENUM_CONFIG_VALUE:
+      {
+        EnumConfigValue enumConfigValue = (EnumConfigValue)theEObject;
+        T result = caseEnumConfigValue(enumConfigValue);
+        if (result == null) result = caseConfigValue(enumConfigValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ConfigPackage.REF_PATH:
       {
         RefPath refPath = (RefPath)theEObject;
@@ -375,6 +405,70 @@ public class ConfigSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAttrInstanceConfig(AttrInstanceConfig object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value Array</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value Array</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigValueArray(ConfigValueArray object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigValue(ConfigValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal Config Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal Config Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteralConfigValue(LiteralConfigValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Config Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Config Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumConfigValue(EnumConfigValue object)
   {
     return null;
   }

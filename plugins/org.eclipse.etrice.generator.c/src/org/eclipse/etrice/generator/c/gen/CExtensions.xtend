@@ -201,7 +201,7 @@ class CExtensions implements ILanguageExtension {
 				"'"+value+"'"
 			case type.type == LiteralType::CHAR:
 				"\""+value+"\""
-			case value.contains(','): {
+			case value.contains(',') || value.contains('{'): {
 					var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
 					'''{ «FOR v: singleValues SEPARATOR ', '»«toValueLiteral(type, v.trim)»«ENDFOR» }'''.toString
 				}
@@ -210,6 +210,20 @@ class CExtensions implements ILanguageExtension {
 			default:
 				value	
 		}
+	}
+	
+	override toEnumLiteral(EnumerationType type, String value) {
+		if(value.contains(',') || value.contains('{')){
+			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
+			'''{ «FOR v: singleValues SEPARATOR ', '»«convertStringEnumLiteral(type, v.trim)»«ENDFOR» }'''.toString
+		} else
+			value
+	}
+	
+	def private convertStringEnumLiteral(EnumerationType type, String value){
+		for(EnumLiteral l : type.literals)
+			if(l.name.equals(value))
+				return type.getName()+"_"+l.getName()
 	}
 
 	override String defaultValue(DataType dt) {

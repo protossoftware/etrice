@@ -76,6 +76,10 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
       case ConfigPackage.ATTR_CONFIG: return createAttrConfig();
       case ConfigPackage.ATTR_CLASS_CONFIG: return createAttrClassConfig();
       case ConfigPackage.ATTR_INSTANCE_CONFIG: return createAttrInstanceConfig();
+      case ConfigPackage.CONFIG_VALUE_ARRAY: return createConfigValueArray();
+      case ConfigPackage.CONFIG_VALUE: return createConfigValue();
+      case ConfigPackage.LITERAL_CONFIG_VALUE: return createLiteralConfigValue();
+      case ConfigPackage.ENUM_CONFIG_VALUE: return createEnumConfigValue();
       case ConfigPackage.REF_PATH: return createRefPath();
       case ConfigPackage.REF_SEGMENT: return createRefSegment();
       case ConfigPackage.IMPORT: return createImport();
@@ -214,6 +218,50 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     AttrInstanceConfigImpl attrInstanceConfig = new AttrInstanceConfigImpl();
     return attrInstanceConfig;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConfigValueArray createConfigValueArray()
+  {
+    ConfigValueArrayImpl configValueArray = new ConfigValueArrayImpl();
+    return configValueArray;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConfigValue createConfigValue()
+  {
+    ConfigValueImpl configValue = new ConfigValueImpl();
+    return configValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LiteralConfigValue createLiteralConfigValue()
+  {
+    LiteralConfigValueImpl literalConfigValue = new LiteralConfigValueImpl();
+    return literalConfigValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumConfigValue createEnumConfigValue()
+  {
+    EnumConfigValueImpl enumConfigValue = new EnumConfigValueImpl();
+    return enumConfigValue;
   }
 
   /**

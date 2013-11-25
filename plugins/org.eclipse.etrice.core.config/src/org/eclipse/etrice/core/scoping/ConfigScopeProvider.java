@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
+import org.eclipse.etrice.core.config.ConfigValueArray;
+import org.eclipse.etrice.core.config.EnumConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
@@ -27,6 +29,9 @@ import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.DataType;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.PortClass;
@@ -100,6 +105,32 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			collectAttributes((PortClassConfig) ctx.eContainer(), scopes);
 		else if (ctx.eContainer() instanceof PortInstanceConfig)
 			collectAttributes((PortInstanceConfig) ctx.eContainer(), scopes);
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+	
+	public IScope scope_EnumConfigValue_type(EnumConfigValue ctx, EReference ref){
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		if(ctx.eContainer() instanceof ConfigValueArray && ctx.eContainer().eContainer() instanceof AttrConfig){
+			AttrConfig config = (AttrConfig)ctx.eContainer().eContainer();
+			
+			DataType type = config.getAttribute().getType().getType();
+			if(type instanceof EnumerationType)
+				scopes.add(EObjectDescription.create(type.getName(), type));
+		}
+		
+		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+	
+	public IScope scope_EnumConfigValue_value(EnumConfigValue ctx, EReference ref){
+		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
+		
+		if(ctx.eContainer() instanceof ConfigValueArray && ctx.eContainer().eContainer() instanceof AttrConfig){
+			if(ctx.getType() != null)
+				for(EnumLiteral enumLiteral : ctx.getType().getLiterals())
+					scopes.add(EObjectDescription.create(enumLiteral.getName(), enumLiteral));
+		}
+		
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 

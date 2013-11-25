@@ -180,6 +180,18 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getFullName()
+  {
+    EnumerationType et = ((EnumerationType) this.eContainer());
+    return et.getName() + "." + this.getName();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {

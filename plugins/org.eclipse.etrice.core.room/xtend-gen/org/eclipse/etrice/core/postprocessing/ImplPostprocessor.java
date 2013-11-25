@@ -203,9 +203,18 @@ public class ImplPostprocessor {
       _builder_10.newLine();
       _builder_10.append("return 0;");
       _builder_10.newLine();
-      boolean _addOperation = PostprocessingHelpers.addOperation(enumLiteral, 
+      PostprocessingHelpers.addOperation(enumLiteral, 
         "getLiteralValue", _eClassifier_10, 
         Integer.valueOf(1), _builder_10.toString());
+      EClassifier _eClassifier_11 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_11 = new StringConcatenation();
+      _builder_11.append("<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());");
+      _builder_11.newLine();
+      _builder_11.append("return et.getName() + \".\" + this.getName();");
+      _builder_11.newLine();
+      boolean _addOperation = PostprocessingHelpers.addOperation(enumLiteral, 
+        "getFullName", _eClassifier_11, 
+        Integer.valueOf(1), _builder_11.toString());
       _xblockexpression = (_addOperation);
     }
     return _xblockexpression;

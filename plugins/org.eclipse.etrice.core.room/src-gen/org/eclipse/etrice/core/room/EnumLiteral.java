@@ -93,4 +93,13 @@ public interface EnumLiteral extends EObject
    */
   long getLiteralValue();
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());\r\nreturn et.getName() + \".\" + this.getName();\r\n'"
+   * @generated
+   */
+  String getFullName();
+
 } // EnumLiteral

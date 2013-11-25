@@ -571,7 +571,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final RuleCall cValueConfigValueArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
@@ -590,11 +590,11 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrClassConfig:
-		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
+		//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
 		//	max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
+		//"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
 		//max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?
 		public Group getGroup() { return cGroup; }
 
@@ -610,17 +610,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
 
-		//("=" value=LiteralArray)?
+		//("=" value=ConfigValueArray)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
 
-		//value=LiteralArray
+		//value=ConfigValueArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 
-		//LiteralArray
-		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
+		//ConfigValueArray
+		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
 
 		//("{" (("min" "=" min=NumberLiteral)? ("max" "=" max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?
 		public Group getGroup_3() { return cGroup_3; }
@@ -681,7 +681,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueLiteralArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final RuleCall cValueConfigValueArrayParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
@@ -697,12 +697,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AttrInstanceConfig:
-		//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
+		//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" ((dynConfig?="dynamic configuration"
 		//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration" (readOnly?="read"
-		//| "write"))? attributes+=AttrInstanceConfig*) "}")?
+		//"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" ((dynConfig?="dynamic configuration"
+		//(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Attr"
@@ -717,17 +717,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
 
-		//("=" value=LiteralArray)?
+		//("=" value=ConfigValueArray)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
 
-		//value=LiteralArray
+		//value=ConfigValueArray
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 
-		//LiteralArray
-		public RuleCall getValueLiteralArrayParserRuleCall_2_1_0() { return cValueLiteralArrayParserRuleCall_2_1_0; }
+		//ConfigValueArray
+		public RuleCall getValueConfigValueArrayParserRuleCall_2_1_0() { return cValueConfigValueArrayParserRuleCall_2_1_0; }
 
 		//("{" ((dynConfig?="dynamic configuration" (readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?
 		public Group getGroup_3() { return cGroup_3; }
@@ -767,6 +767,118 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
+	}
+
+	public class ConfigValueArrayElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConfigValueArray");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cValuesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cValuesConfigValueParserRuleCall_0_0 = (RuleCall)cValuesAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cValuesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cValuesConfigValueParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
+		
+		//ConfigValueArray:
+		//	values+=ConfigValue ("," values+=ConfigValue)*;
+		public ParserRule getRule() { return rule; }
+
+		//values+=ConfigValue ("," values+=ConfigValue)*
+		public Group getGroup() { return cGroup; }
+
+		//values+=ConfigValue
+		public Assignment getValuesAssignment_0() { return cValuesAssignment_0; }
+
+		//ConfigValue
+		public RuleCall getValuesConfigValueParserRuleCall_0_0() { return cValuesConfigValueParserRuleCall_0_0; }
+
+		//("," values+=ConfigValue)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//","
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+
+		//values+=ConfigValue
+		public Assignment getValuesAssignment_1_1() { return cValuesAssignment_1_1; }
+
+		//ConfigValue
+		public RuleCall getValuesConfigValueParserRuleCall_1_1_0() { return cValuesConfigValueParserRuleCall_1_1_0; }
+	}
+
+	public class ConfigValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConfigValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cLiteralConfigValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEnumConfigValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ConfigValue:
+		//	LiteralConfigValue | EnumConfigValue;
+		public ParserRule getRule() { return rule; }
+
+		//LiteralConfigValue | EnumConfigValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//LiteralConfigValue
+		public RuleCall getLiteralConfigValueParserRuleCall_0() { return cLiteralConfigValueParserRuleCall_0; }
+
+		//EnumConfigValue
+		public RuleCall getEnumConfigValueParserRuleCall_1() { return cEnumConfigValueParserRuleCall_1; }
+	}
+
+	public class LiteralConfigValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralConfigValue");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cValueLiteralParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		
+		//LiteralConfigValue:
+		//	value=Literal;
+		public ParserRule getRule() { return rule; }
+
+		//value=Literal
+		public Assignment getValueAssignment() { return cValueAssignment; }
+
+		//Literal
+		public RuleCall getValueLiteralParserRuleCall_0() { return cValueLiteralParserRuleCall_0; }
+	}
+
+	public class EnumConfigValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumConfigValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cTypeEnumerationTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeEnumerationTypeIDTerminalRuleCall_0_0_1 = (RuleCall)cTypeEnumerationTypeCrossReference_0_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cValueEnumLiteralCrossReference_2_0 = (CrossReference)cValueAssignment_2.eContents().get(0);
+		private final RuleCall cValueEnumLiteralIDTerminalRuleCall_2_0_1 = (RuleCall)cValueEnumLiteralCrossReference_2_0.eContents().get(1);
+		
+		//EnumConfigValue:
+		//	type=[room::EnumerationType] "." value=[room::EnumLiteral];
+		public ParserRule getRule() { return rule; }
+
+		//type=[room::EnumerationType] "." value=[room::EnumLiteral]
+		public Group getGroup() { return cGroup; }
+
+		//type=[room::EnumerationType]
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+
+		//[room::EnumerationType]
+		public CrossReference getTypeEnumerationTypeCrossReference_0_0() { return cTypeEnumerationTypeCrossReference_0_0; }
+
+		//ID
+		public RuleCall getTypeEnumerationTypeIDTerminalRuleCall_0_0_1() { return cTypeEnumerationTypeIDTerminalRuleCall_0_0_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+
+		//value=[room::EnumLiteral]
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+
+		//[room::EnumLiteral]
+		public CrossReference getValueEnumLiteralCrossReference_2_0() { return cValueEnumLiteralCrossReference_2_0; }
+
+		//ID
+		public RuleCall getValueEnumLiteralIDTerminalRuleCall_2_0_1() { return cValueEnumLiteralIDTerminalRuleCall_2_0_1; }
 	}
 
 	public class RefPathElements extends AbstractParserRuleElementFinder {
@@ -951,6 +1063,10 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	private AttrConfigElements pAttrConfig;
 	private AttrClassConfigElements pAttrClassConfig;
 	private AttrInstanceConfigElements pAttrInstanceConfig;
+	private ConfigValueArrayElements pConfigValueArray;
+	private ConfigValueElements pConfigValue;
+	private LiteralConfigValueElements pLiteralConfigValue;
+	private EnumConfigValueElements pEnumConfigValue;
 	private RefPathElements pRefPath;
 	private RefSegmentElements pRefSegment;
 	private ImportElements pImport;
@@ -1099,7 +1215,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrClassConfig:
-	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
+	//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
 	//	max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
 		return (pAttrClassConfig != null) ? pAttrClassConfig : (pAttrClassConfig = new AttrClassConfigElements());
@@ -1110,7 +1226,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AttrInstanceConfig:
-	//	"Attr" attribute=[room::Attribute] ("=" value=LiteralArray)? ("{" ((dynConfig?="dynamic configuration"
+	//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" ((dynConfig?="dynamic configuration"
 	//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
 		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
@@ -1118,6 +1234,46 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getAttrInstanceConfigRule() {
 		return getAttrInstanceConfigAccess().getRule();
+	}
+
+	//ConfigValueArray:
+	//	values+=ConfigValue ("," values+=ConfigValue)*;
+	public ConfigValueArrayElements getConfigValueArrayAccess() {
+		return (pConfigValueArray != null) ? pConfigValueArray : (pConfigValueArray = new ConfigValueArrayElements());
+	}
+	
+	public ParserRule getConfigValueArrayRule() {
+		return getConfigValueArrayAccess().getRule();
+	}
+
+	//ConfigValue:
+	//	LiteralConfigValue | EnumConfigValue;
+	public ConfigValueElements getConfigValueAccess() {
+		return (pConfigValue != null) ? pConfigValue : (pConfigValue = new ConfigValueElements());
+	}
+	
+	public ParserRule getConfigValueRule() {
+		return getConfigValueAccess().getRule();
+	}
+
+	//LiteralConfigValue:
+	//	value=Literal;
+	public LiteralConfigValueElements getLiteralConfigValueAccess() {
+		return (pLiteralConfigValue != null) ? pLiteralConfigValue : (pLiteralConfigValue = new LiteralConfigValueElements());
+	}
+	
+	public ParserRule getLiteralConfigValueRule() {
+		return getLiteralConfigValueAccess().getRule();
+	}
+
+	//EnumConfigValue:
+	//	type=[room::EnumerationType] "." value=[room::EnumLiteral];
+	public EnumConfigValueElements getEnumConfigValueAccess() {
+		return (pEnumConfigValue != null) ? pEnumConfigValue : (pEnumConfigValue = new EnumConfigValueElements());
+	}
+	
+	public ParserRule getEnumConfigValueRule() {
+		return getEnumConfigValueAccess().getRule();
 	}
 
 	//RefPath:

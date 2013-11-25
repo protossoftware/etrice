@@ -292,55 +292,97 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String toValueLiteral(final PrimitiveType type, final String value) {
-    String _switchResult = null;
-    String _targetName = type.getTargetName();
-    final String _switchValue = _targetName;
-    boolean _matched = false;
-    if (!_matched) {
-      boolean _and = false;
-      boolean _isCharacterType = this.typeHelpers.isCharacterType(type);
-      boolean _not = (!_isCharacterType);
-      if (!_not) {
-        _and = false;
+    String _xifexpression = null;
+    boolean _and = false;
+    boolean _isCharacterType = this.typeHelpers.isCharacterType(type);
+    boolean _not = (!_isCharacterType);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      boolean _contains = value.contains(",");
+      if (_contains) {
+        _or = true;
       } else {
-        boolean _contains = value.contains(",");
-        _and = (_not && _contains);
+        boolean _contains_1 = value.contains("{");
+        _or = (_contains || _contains_1);
       }
-      if (_and) {
-        _matched=true;
-        String _xblockexpression = null;
+      _and = (_not && _or);
+    }
+    if (_and) {
+      String _xblockexpression = null;
+      {
+        String _replace = value.replace("{", "");
+        String _replace_1 = _replace.replace("}", "");
+        String _trim = _replace_1.trim();
+        String[] singleValues = _trim.split(",");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{ ");
         {
-          String _replace = value.replace("{", "");
-          String _replace_1 = _replace.replace("}", "");
-          String _trim = _replace_1.trim();
-          String[] singleValues = _trim.split(",");
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{ ");
-          {
-            boolean _hasElements = false;
-            for(final String v : singleValues) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(", ", "");
-              }
-              String _trim_1 = v.trim();
-              String _castValue = this.castValue(type, _trim_1);
-              _builder.append(_castValue, "");
+          boolean _hasElements = false;
+          for(final String v : singleValues) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
             }
+            String _trim_1 = v.trim();
+            String _castValue = this.castValue(type, _trim_1);
+            _builder.append(_castValue, "");
           }
-          _builder.append(" }");
-          String _string = _builder.toString();
-          _xblockexpression = (_string);
         }
-        _switchResult = _xblockexpression;
+        _builder.append(" }");
+        String _string = _builder.toString();
+        _xblockexpression = (_string);
       }
-    }
-    if (!_matched) {
+      _xifexpression = _xblockexpression;
+    } else {
       String _castValue = this.castValue(type, value);
-      _switchResult = _castValue;
+      _xifexpression = _castValue;
     }
-    return _switchResult;
+    return _xifexpression;
+  }
+  
+  public String toEnumLiteral(final EnumerationType type, final String value) {
+    String _xifexpression = null;
+    boolean _or = false;
+    boolean _contains = value.contains(",");
+    if (_contains) {
+      _or = true;
+    } else {
+      boolean _contains_1 = value.contains("{");
+      _or = (_contains || _contains_1);
+    }
+    if (_or) {
+      String _xblockexpression = null;
+      {
+        String _replace = value.replace("{", "");
+        String _replace_1 = _replace.replace("}", "");
+        String _trim = _replace_1.trim();
+        String[] singleValues = _trim.split(",");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{ ");
+        {
+          boolean _hasElements = false;
+          for(final String v : singleValues) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            String _trim_1 = v.trim();
+            _builder.append(_trim_1, "");
+          }
+        }
+        _builder.append(" }");
+        String _string = _builder.toString();
+        _xblockexpression = (_string);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = value;
+    }
+    return _xifexpression;
   }
   
   private String castValue(final PrimitiveType type, final String value) {

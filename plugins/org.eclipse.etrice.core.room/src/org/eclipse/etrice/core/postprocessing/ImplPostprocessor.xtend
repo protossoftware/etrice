@@ -147,6 +147,16 @@ class ImplPostprocessor {
 				
 				return 0;
 			'''
+			)
+			
+			enumLiteral.addOperation(
+			"getFullName",
+			EcorePackage::eINSTANCE.getEClassifier("EString"),
+			1,
+			'''
+				<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());
+				return et.getName() + "." + this.getName();
+			'''
 		)
 	}
 }

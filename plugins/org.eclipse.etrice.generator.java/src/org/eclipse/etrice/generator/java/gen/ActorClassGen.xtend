@@ -468,7 +468,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			att.type.type.typeName
 		val method = type.saveMethod
 		
-		if (att.size>1)
+		if (att.size>0)
 			"for ("+type+" v: "+att.name+") output."+method+"(v);"
 		else
 			"output."+method+"("+att.name+");"
@@ -495,7 +495,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			att.type.type.typeName
 		val method = type.loadMethod
 		
-		if (att.size>1)
+		if (att.size>0)
 			"for (int i=0; i<"+att.name+".length; ++i) "+att.name+"[i] = input."+method+"();"
 		else
 			att.name+" = input."+method+"();"

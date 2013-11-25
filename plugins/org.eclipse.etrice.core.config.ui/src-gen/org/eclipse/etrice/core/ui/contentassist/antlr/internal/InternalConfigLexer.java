@@ -31,8 +31,8 @@ public class InternalConfigLexer extends Lexer {
     public static final int RULE_HEX=5;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -729,10 +729,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:42:7: ( ':' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:42:9: ':'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:42:7: ( ',' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:42:9: ','
             {
-            match(':'); 
+            match(','); 
 
             }
 
@@ -749,11 +749,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:43:7: ( 'import' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:43:9: 'import'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:43:7: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:43:9: '.'
             {
-            match("import"); 
-
+            match('.'); 
 
             }
 
@@ -770,11 +769,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:44:7: ( 'from' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:44:9: 'from'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:44:7: ( ':' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:44:9: ':'
             {
-            match("from"); 
-
+            match(':'); 
 
             }
 
@@ -791,10 +789,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:45:7: ( '.*' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:45:9: '.*'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:45:7: ( 'import' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:45:9: 'import'
             {
-            match(".*"); 
+            match("import"); 
 
 
             }
@@ -812,10 +810,11 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:7: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:9: '.'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:7: ( 'from' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:9: 'from'
             {
-            match('.'); 
+            match("from"); 
+
 
             }
 
@@ -832,10 +831,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:7: ( 'attribute' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:9: 'attribute'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:7: ( '.*' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:9: '.*'
             {
-            match("attribute"); 
+            match(".*"); 
 
 
             }
@@ -853,10 +852,11 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:7: ( ',' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:9: ','
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:7: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:9: 'attribute'
             {
-            match(','); 
+            match("attribute"); 
+
 
             }
 
@@ -976,8 +976,8 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_EXP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7946:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7946:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8205:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8205:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -988,7 +988,7 @@ public class InternalConfigLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7946:22: ( '+' | '-' )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8205:22: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1014,7 +1014,7 @@ public class InternalConfigLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7946:33: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8205:33: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -1028,7 +1028,7 @@ public class InternalConfigLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7946:34: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8205:34: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1060,10 +1060,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:12: ( '0x' | '0X' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:12: ( '0x' | '0X' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1091,7 +1091,7 @@ public class InternalConfigLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:13: '0x'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:13: '0x'
                     {
                     match("0x"); 
 
@@ -1099,7 +1099,7 @@ public class InternalConfigLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:18: '0X'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:18: '0X'
                     {
                     match("0X"); 
 
@@ -1109,7 +1109,7 @@ public class InternalConfigLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7948:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8207:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt4=0;
             loop4:
             do {
@@ -1163,10 +1163,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7950:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7950:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8209:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8209:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7950:11: ( '^' )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8209:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1175,7 +1175,7 @@ public class InternalConfigLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7950:11: '^'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8209:11: '^'
                     {
                     match('^'); 
 
@@ -1193,7 +1193,7 @@ public class InternalConfigLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7950:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8209:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1242,10 +1242,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7952:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7952:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8211:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8211:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7952:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8211:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1259,7 +1259,7 @@ public class InternalConfigLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7952:13: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8211:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1291,10 +1291,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1312,10 +1312,10 @@ public class InternalConfigLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1331,7 +1331,7 @@ public class InternalConfigLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1347,7 +1347,7 @@ public class InternalConfigLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1372,10 +1372,10 @@ public class InternalConfigLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1391,7 +1391,7 @@ public class InternalConfigLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1407,7 +1407,7 @@ public class InternalConfigLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7954:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8213:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1450,12 +1450,12 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7956:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7956:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8215:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8215:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7956:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8215:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1480,7 +1480,7 @@ public class InternalConfigLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7956:52: .
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8215:52: .
             	    {
             	    matchAny(); 
 
@@ -1510,12 +1510,12 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1528,7 +1528,7 @@ public class InternalConfigLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1548,7 +1548,7 @@ public class InternalConfigLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1557,9 +1557,9 @@ public class InternalConfigLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:41: ( '\\r' )?
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1568,7 +1568,7 @@ public class InternalConfigLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7958:41: '\\r'
+                            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8217:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1600,10 +1600,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7960:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7960:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8219:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8219:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7960:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8219:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1657,8 +1657,8 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7962:16: ( . )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7962:18: .
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8221:16: ( . )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8221:18: .
             {
             matchAny(); 
 
@@ -2049,15 +2049,15 @@ public class InternalConfigLexer extends Lexer {
 
     protected DFA16 dfa16 = new DFA16(this);
     static final String DFA16_eotS =
-        "\1\uffff\3\47\2\uffff\2\47\2\uffff\1\47\1\70\7\47\2\uffff\1\47"+
-        "\1\106\1\47\3\uffff\3\47\1\120\1\45\2\uffff\2\45\2\uffff\1\47\1"+
-        "\uffff\6\47\2\uffff\3\47\2\uffff\1\47\3\uffff\11\47\2\uffff\1\47"+
-        "\2\uffff\1\47\3\uffff\2\47\1\uffff\1\115\4\uffff\3\47\1\163\1\164"+
-        "\33\47\2\uffff\2\47\1\u0092\12\47\1\u009d\1\47\1\u009f\1\47\1\u00a1"+
-        "\5\47\1\u00a7\1\u00a8\1\u00a9\1\47\1\u00ab\2\uffff\10\47\1\uffff"+
-        "\1\47\1\uffff\1\47\1\uffff\1\47\1\uffff\5\47\3\uffff\1\47\1\uffff"+
-        "\2\47\1\u00c2\5\47\2\uffff\6\47\1\u00ce\5\47\1\uffff\10\47\1\u00dc"+
-        "\2\47\1\uffff\6\47\1\uffff\2\47\1\uffff\3\47\1\uffff\3\47\1\u00ed"+
+        "\1\uffff\3\47\2\uffff\2\47\2\uffff\1\47\1\70\7\47\2\uffff\1\105"+
+        "\1\uffff\2\47\2\uffff\3\47\1\120\1\45\2\uffff\2\45\2\uffff\1\47"+
+        "\1\uffff\6\47\2\uffff\3\47\2\uffff\1\47\3\uffff\11\47\5\uffff\2"+
+        "\47\2\uffff\2\47\1\uffff\1\115\4\uffff\3\47\1\163\1\164\33\47\2"+
+        "\uffff\2\47\1\u0092\12\47\1\u009d\1\47\1\u009f\1\47\1\u00a1\5\47"+
+        "\1\u00a7\1\u00a8\1\u00a9\1\47\1\u00ab\2\uffff\10\47\1\uffff\1\47"+
+        "\1\uffff\1\47\1\uffff\1\47\1\uffff\5\47\3\uffff\1\47\1\uffff\2\47"+
+        "\1\u00c2\5\47\2\uffff\6\47\1\u00ce\5\47\1\uffff\10\47\1\u00dc\2"+
+        "\47\1\uffff\6\47\1\uffff\2\47\1\uffff\3\47\1\uffff\3\47\1\u00ed"+
         "\1\u00ee\1\u00ef\1\u00f0\6\47\1\u00f7\1\47\1\u00f9\4\uffff\6\47"+
         "\1\uffff\1\47\1\uffff\1\u0101\1\u0102\5\47\2\uffff\11\47\1\u0111"+
         "\4\47\1\uffff\1\u0116\3\47\1\uffff\1\u011a\2\47\1\uffff\4\47\1\u0121"+
@@ -2066,11 +2066,11 @@ public class InternalConfigLexer extends Lexer {
         "\u0123\uffff";
     static final String DFA16_minS =
         "\1\0\1\162\2\141\2\uffff\2\157\2\uffff\1\165\1\52\1\171\1\163\1"+
-        "\143\1\157\1\145\1\157\1\156\2\uffff\1\155\1\52\1\164\3\uffff\1"+
-        "\160\1\162\1\53\1\130\1\101\2\uffff\2\0\2\uffff\1\151\1\uffff\1"+
-        "\144\2\156\2\154\1\157\2\uffff\1\102\1\154\1\156\2\uffff\1\142\3"+
-        "\uffff\1\156\1\145\2\164\1\157\1\162\1\141\1\156\1\164\2\uffff\1"+
-        "\160\2\uffff\1\164\3\uffff\1\164\1\165\1\uffff\1\60\4\uffff\1\164"+
+        "\143\1\157\1\145\1\157\1\156\2\uffff\1\52\1\uffff\1\155\1\164\2"+
+        "\uffff\1\160\1\162\1\53\1\130\1\101\2\uffff\2\0\2\uffff\1\151\1"+
+        "\uffff\1\144\2\156\2\154\1\157\2\uffff\1\102\1\154\1\156\2\uffff"+
+        "\1\142\3\uffff\1\156\1\145\2\164\1\157\1\162\1\141\1\156\1\164\5"+
+        "\uffff\1\160\1\164\2\uffff\1\164\1\165\1\uffff\1\60\4\uffff\1\164"+
         "\1\145\1\144\2\60\1\163\1\145\1\155\1\157\1\156\1\145\1\150\1\154"+
         "\1\146\1\123\1\141\1\162\1\157\1\162\2\164\1\165\1\144\1\152\1\145"+
         "\1\157\1\162\1\151\2\145\1\154\1\141\2\uffff\1\145\1\40\1\60\1\157"+
@@ -2090,11 +2090,11 @@ public class InternalConfigLexer extends Lexer {
         "\1\uffff\2\151\2\147\2\60\2\uffff";
     static final String DFA16_maxS =
         "\1\uffff\1\162\1\157\1\162\2\uffff\1\164\1\157\2\uffff\1\165\1"+
-        "\57\1\171\1\163\1\164\1\162\1\145\1\157\1\156\2\uffff\1\155\1\52"+
-        "\1\164\3\uffff\1\160\1\162\1\71\1\170\1\172\2\uffff\2\uffff\2\uffff"+
-        "\1\151\1\uffff\1\144\1\170\1\156\2\154\1\157\2\uffff\1\122\1\154"+
-        "\1\156\2\uffff\1\142\3\uffff\1\156\1\145\2\164\1\157\1\162\1\147"+
-        "\1\156\1\164\2\uffff\1\160\2\uffff\1\164\3\uffff\1\164\1\165\1\uffff"+
+        "\57\1\171\1\163\1\164\1\162\1\145\1\157\1\156\2\uffff\1\52\1\uffff"+
+        "\1\155\1\164\2\uffff\1\160\1\162\1\71\1\170\1\172\2\uffff\2\uffff"+
+        "\2\uffff\1\151\1\uffff\1\144\1\170\1\156\2\154\1\157\2\uffff\1\122"+
+        "\1\154\1\156\2\uffff\1\142\3\uffff\1\156\1\145\2\164\1\157\1\162"+
+        "\1\147\1\156\1\164\5\uffff\1\160\1\164\2\uffff\1\164\1\165\1\uffff"+
         "\1\172\4\uffff\1\164\1\145\1\144\2\172\1\163\1\145\1\155\1\157\1"+
         "\156\1\145\1\150\1\154\1\146\1\123\1\141\1\162\1\157\1\162\2\164"+
         "\1\165\1\144\1\152\1\145\1\157\1\162\1\151\2\145\1\154\1\141\2\uffff"+
@@ -2113,24 +2113,24 @@ public class InternalConfigLexer extends Lexer {
         "\155\1\151\1\146\2\103\1\172\1\147\1\151\2\157\1\uffff\1\172\1\147"+
         "\2\156\1\uffff\1\172\2\146\1\uffff\2\151\2\147\2\172\2\uffff";
     static final String DFA16_acceptS =
-        "\4\uffff\1\5\1\6\2\uffff\1\14\1\15\11\uffff\1\35\1\40\3\uffff\1"+
-        "\46\1\47\1\50\5\uffff\1\56\1\57\2\uffff\1\63\1\64\1\uffff\1\56\6"+
-        "\uffff\1\5\1\6\3\uffff\1\14\1\15\1\uffff\1\61\1\62\1\17\11\uffff"+
-        "\1\35\1\40\1\uffff\1\43\1\44\1\uffff\1\46\1\47\1\50\2\uffff\1\54"+
-        "\1\uffff\1\55\1\57\1\60\1\63\40\uffff\1\37\1\36\34\uffff\1\21\1"+
-        "\42\12\uffff\1\34\1\uffff\1\32\1\uffff\1\51\5\uffff\1\53\1\1\1\2"+
-        "\1\uffff\1\4\10\uffff\1\22\1\23\14\uffff\1\11\13\uffff\1\41\6\uffff"+
+        "\4\uffff\1\5\1\6\2\uffff\1\14\1\15\11\uffff\1\35\1\40\1\uffff\1"+
+        "\42\2\uffff\1\47\1\50\5\uffff\1\56\1\57\2\uffff\1\63\1\64\1\uffff"+
+        "\1\56\6\uffff\1\5\1\6\3\uffff\1\14\1\15\1\uffff\1\61\1\62\1\17\11"+
+        "\uffff\1\35\1\40\1\45\1\41\1\42\2\uffff\1\47\1\50\2\uffff\1\54\1"+
+        "\uffff\1\55\1\57\1\60\1\63\40\uffff\1\37\1\36\34\uffff\1\21\1\44"+
+        "\12\uffff\1\34\1\uffff\1\32\1\uffff\1\51\5\uffff\1\53\1\1\1\2\1"+
+        "\uffff\1\4\10\uffff\1\22\1\23\14\uffff\1\11\13\uffff\1\43\6\uffff"+
         "\1\24\2\uffff\1\20\3\uffff\1\30\20\uffff\1\52\1\3\1\7\1\10\6\uffff"+
-        "\1\31\1\uffff\1\45\7\uffff\1\12\1\13\16\uffff\1\33\4\uffff\1\16"+
+        "\1\31\1\uffff\1\46\7\uffff\1\12\1\13\16\uffff\1\33\4\uffff\1\16"+
         "\3\uffff\1\25\6\uffff\1\26\1\27";
     static final String DFA16_specialS =
-        "\1\2\41\uffff\1\1\1\0\u00ff\uffff}>";
+        "\1\1\41\uffff\1\2\1\0\u00ff\uffff}>";
     static final String[] DFA16_transitionS = {
             "\11\45\2\44\2\45\1\44\22\45\1\44\1\45\1\42\4\45\1\43\3\45\1"+
-            "\4\1\30\1\5\1\26\1\13\1\36\11\41\1\24\2\45\1\23\3\45\1\16\1"+
+            "\4\1\24\1\5\1\25\1\13\1\36\11\41\1\26\2\45\1\23\3\45\1\16\1"+
             "\40\1\7\1\40\1\35\3\40\1\22\6\40\1\17\2\40\1\12\7\40\1\31\1"+
-            "\45\1\32\1\37\1\40\1\45\1\27\1\40\1\21\1\14\1\35\1\3\2\40\1"+
-            "\25\3\40\1\2\1\40\1\33\1\6\1\40\1\20\1\40\1\34\1\15\1\40\1\1"+
+            "\45\1\32\1\37\1\40\1\45\1\30\1\40\1\21\1\14\1\35\1\3\2\40\1"+
+            "\27\3\40\1\2\1\40\1\33\1\6\1\40\1\20\1\40\1\34\1\15\1\40\1\1"+
             "\3\40\1\10\1\45\1\11\uff82\45",
             "\1\46",
             "\1\51\7\uffff\1\52\5\uffff\1\50",
@@ -2153,9 +2153,9 @@ public class InternalConfigLexer extends Lexer {
             "",
             "",
             "\1\104",
-            "\1\105",
-            "\1\107",
             "",
+            "\1\107",
+            "\1\110",
             "",
             "",
             "\1\113",
@@ -2199,11 +2199,11 @@ public class InternalConfigLexer extends Lexer {
             "\1\153",
             "",
             "",
+            "",
+            "",
+            "",
             "\1\154",
-            "",
-            "",
             "\1\155",
-            "",
             "",
             "",
             "\1\156",
@@ -2471,16 +2471,6 @@ public class InternalConfigLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA16_34 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA16_34>='\u0000' && LA16_34<='\uFFFF')) ) {s = 81;}
-
-                        else s = 37;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA16_0 = input.LA(1);
 
                         s = -1;
@@ -2522,15 +2512,15 @@ public class InternalConfigLexer extends Lexer {
 
                         else if ( (LA16_0=='=') ) {s = 19;}
 
-                        else if ( (LA16_0==':') ) {s = 20;}
+                        else if ( (LA16_0==',') ) {s = 20;}
 
-                        else if ( (LA16_0=='i') ) {s = 21;}
+                        else if ( (LA16_0=='.') ) {s = 21;}
 
-                        else if ( (LA16_0=='.') ) {s = 22;}
+                        else if ( (LA16_0==':') ) {s = 22;}
 
-                        else if ( (LA16_0=='a') ) {s = 23;}
+                        else if ( (LA16_0=='i') ) {s = 23;}
 
-                        else if ( (LA16_0==',') ) {s = 24;}
+                        else if ( (LA16_0=='a') ) {s = 24;}
 
                         else if ( (LA16_0=='[') ) {s = 25;}
 
@@ -2557,6 +2547,16 @@ public class InternalConfigLexer extends Lexer {
                         else if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 36;}
 
                         else if ( ((LA16_0>='\u0000' && LA16_0<='\b')||(LA16_0>='\u000B' && LA16_0<='\f')||(LA16_0>='\u000E' && LA16_0<='\u001F')||LA16_0=='!'||(LA16_0>='#' && LA16_0<='&')||(LA16_0>='(' && LA16_0<='*')||(LA16_0>=';' && LA16_0<='<')||(LA16_0>='>' && LA16_0<='@')||LA16_0=='\\'||LA16_0=='`'||LA16_0=='|'||(LA16_0>='~' && LA16_0<='\uFFFF')) ) {s = 37;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA16_34 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA16_34>='\u0000' && LA16_34<='\uFFFF')) ) {s = 81;}
+
+                        else s = 37;
 
                         if ( s>=0 ) return s;
                         break;
