@@ -194,6 +194,11 @@ public class Initialization {
           _switchResult = _xblockexpression_1;
         }
       }
+      if (!_matched) {
+        String _defaultValue = this.languageExt.defaultValue(aType);
+        CharSequence _attributeInit_2 = this.attributeInit(a, _defaultValue);
+        _switchResult = _attributeInit_2;
+      }
       _xblockexpression = (_switchResult);
     }
     return _xblockexpression;

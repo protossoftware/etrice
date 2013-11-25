@@ -66,6 +66,8 @@ class Initialization {
 				if(value != null) attributeInit(a, languageExt.toEnumLiteral(aType, value)) else if(!useClassDefaultsOnly ||
 					languageExt.needsInitialization(a)) attributeInit(a, languageExt.defaultValue(aType))
 			}
+			default:
+				attributeInit(a, languageExt.defaultValue(aType))
 		}
 	}
 
