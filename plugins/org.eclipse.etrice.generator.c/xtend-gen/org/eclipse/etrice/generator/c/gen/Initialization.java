@@ -210,8 +210,8 @@ public class Initialization {
         }
       }
       if (!_matched) {
-        boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(aType);
-        if (_isEnumerationOrPrimitive) {
+        if (aType instanceof PrimitiveType) {
+          final PrimitiveType _primitiveType = (PrimitiveType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -224,7 +224,7 @@ public class Initialization {
             if (!_greaterThan) {
               _and_1 = false;
             } else {
-              boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
+              boolean _isCharacterType = this._typeHelpers.isCharacterType(_primitiveType);
               boolean _not = (!_isCharacterType);
               _and_1 = (_greaterThan && _not);
             }
@@ -266,7 +266,7 @@ public class Initialization {
         if (aType instanceof EnumerationType) {
           final EnumerationType _enumerationType = (EnumerationType)aType;
           _matched=true;
-          CharSequence _xblockexpression_2 = null;
+          CharSequence _xblockexpression_1 = null;
           {
             String value = this.languageExt.getDefaultValue(_enumerationType);
             CharSequence _xifexpression_1 = null;
@@ -302,9 +302,9 @@ public class Initialization {
             } else {
               _xifexpression_1 = value;
             }
-            _xblockexpression_2 = (_xifexpression_1);
+            _xblockexpression_1 = (_xifexpression_1);
           }
-          _switchResult = _xblockexpression_2;
+          _switchResult = _xblockexpression_1;
         }
       }
       _xblockexpression = (_switchResult);
