@@ -371,7 +371,8 @@ public class JavaExtensions implements ILanguageExtension {
               _builder.appendImmediate(", ", "");
             }
             String _trim_1 = v.trim();
-            _builder.append(_trim_1, "");
+            String _convertStringEnumLiteral = this.convertStringEnumLiteral(type, _trim_1);
+            _builder.append(_convertStringEnumLiteral, "");
           }
         }
         _builder.append(" }");
@@ -380,9 +381,25 @@ public class JavaExtensions implements ILanguageExtension {
       }
       _xifexpression = _xblockexpression;
     } else {
-      _xifexpression = value;
+      String _convertStringEnumLiteral = this.convertStringEnumLiteral(type, value);
+      _xifexpression = _convertStringEnumLiteral;
     }
     return _xifexpression;
+  }
+  
+  private String convertStringEnumLiteral(final EnumerationType type, final String value) {
+    EList<EnumLiteral> _literals = type.getLiterals();
+    for (final EnumLiteral l : _literals) {
+      String _name = l.getName();
+      boolean _equals = _name.equals(value);
+      if (_equals) {
+        String _name_1 = type.getName();
+        String _plus = (_name_1 + ".");
+        String _name_2 = l.getName();
+        return (_plus + _name_2);
+      }
+    }
+    return null;
   }
   
   private String castValue(final PrimitiveType type, final String value) {

@@ -217,7 +217,7 @@ class CExtensions implements ILanguageExtension {
 			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
 			'''{ «FOR v: singleValues SEPARATOR ', '»«convertStringEnumLiteral(type, v.trim)»«ENDFOR» }'''.toString
 		} else
-			value
+			convertStringEnumLiteral(type, value)
 	}
 	
 	def private convertStringEnumLiteral(EnumerationType type, String value){

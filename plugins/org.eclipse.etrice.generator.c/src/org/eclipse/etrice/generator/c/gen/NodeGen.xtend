@@ -482,21 +482,21 @@ class NodeGen {
 				«ENDFOR»
 			};
 		«ENDIF»
-			static «ai.actorClass.name» «instName» = {
+		static «ai.actorClass.name» «instName» = {
 			«IF haveConstData»
 				&«instName»_const,
 				
 			«ENDIF»			
-				/* data send ports */
-				«FOR pi : sendPorts»
-					«pi.genSendPortInitializer»,
-				«ENDFOR»
-				
-				/* attributes */
-				«attrInitGenAddon.generateAttributeInit(ai, ai.actorClass.allAttributes)»
-				
-				/* state and history are initialized in init fuction */
-			};
+			/* data send ports */
+			«FOR pi : sendPorts»
+				«pi.genSendPortInitializer»,
+			«ENDFOR»
+			
+			/* attributes */
+			«attrInitGenAddon.generateAttributeInit(ai, ai.actorClass.allAttributes)»
+			
+			/* state and history are initialized in init function */
+		};
 	'''}
 		
 	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {

@@ -238,7 +238,7 @@ public class Initialization {
             }
             if (_and) {
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append("{ ");
+              _builder.append("{");
               {
                 int _size_1 = a.getSize();
                 IntegerRange _upTo = new IntegerRange(1, _size_1);
@@ -252,7 +252,7 @@ public class Initialization {
                   _builder.append(value, "");
                 }
               }
-              _builder.append(" }");
+              _builder.append("}");
               _xifexpression_1 = _builder;
             } else {
               _xifexpression_1 = value;
@@ -268,7 +268,7 @@ public class Initialization {
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
-            String value = this.languageExt.getDefaultValue(_enumerationType);
+            String value = this.getPrimitiveValue(instance, path);
             CharSequence _xifexpression_1 = null;
             boolean _and = false;
             int _size = a.getSize();
@@ -283,7 +283,7 @@ public class Initialization {
             }
             if (_and) {
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append("{ ");
+              _builder.append("{");
               {
                 int _size_1 = a.getSize();
                 IntegerRange _upTo = new IntegerRange(1, _size_1);
@@ -297,7 +297,7 @@ public class Initialization {
                   _builder.append(value, "");
                 }
               }
-              _builder.append(" }");
+              _builder.append("}");
               _xifexpression_1 = _builder;
             } else {
               _xifexpression_1 = value;

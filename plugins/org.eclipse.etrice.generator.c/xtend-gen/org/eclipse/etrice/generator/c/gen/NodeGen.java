@@ -1530,13 +1530,12 @@ public class NodeGen {
           _builder.newLine();
         }
       }
-      _builder.append("\t");
       _builder.append("static ");
       ActorClass _actorClass_1 = ai.getActorClass();
       String _name_1 = _actorClass_1.getName();
-      _builder.append(_name_1, "	");
+      _builder.append(_name_1, "");
       _builder.append(" ");
-      _builder.append(instName, "	");
+      _builder.append(instName, "");
       _builder.append(" = {");
       _builder.newLineIfNotEmpty();
       {
@@ -1550,35 +1549,34 @@ public class NodeGen {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("/* data send ports */");
       _builder.newLine();
       {
         for(final InterfaceItemInstance pi_6 : sendPorts) {
-          _builder.append("\t\t");
+          _builder.append("\t");
           CharSequence _genSendPortInitializer = this.genSendPortInitializer(pi_6);
-          _builder.append(_genSendPortInitializer, "		");
+          _builder.append(_genSendPortInitializer, "	");
           _builder.append(",");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("/* attributes */");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       ActorClass _actorClass_2 = ai.getActorClass();
       List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
       CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
-      _builder.append(_generateAttributeInit, "		");
+      _builder.append(_generateAttributeInit, "	");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("/* state and history are initialized in init fuction */");
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("/* state and history are initialized in init function */");
+      _builder.newLine();
       _builder.append("};");
       _builder.newLine();
       _xblockexpression = (_builder);

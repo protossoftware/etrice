@@ -162,9 +162,15 @@ class JavaExtensions implements ILanguageExtension {
 	override toEnumLiteral(EnumerationType type, String value){
 		if(value.contains(',') || value.contains('{')) {
 			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
-			'''{ «FOR v: singleValues SEPARATOR ', '»«v.trim»«ENDFOR» }'''.toString
+			'''{ «FOR v: singleValues SEPARATOR ', '»«convertStringEnumLiteral(type, v.trim)»«ENDFOR» }'''.toString
 		} else
-			value
+			convertStringEnumLiteral(type, value)
+	}
+	
+	def private convertStringEnumLiteral(EnumerationType type, String value){
+		for(EnumLiteral l : type.literals)
+			if(l.name.equals(value))
+				return type.getName()+"."+l.getName()
 	}
 	
 	def private castValue(PrimitiveType type, String value){

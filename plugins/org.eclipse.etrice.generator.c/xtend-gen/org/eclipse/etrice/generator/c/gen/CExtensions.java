@@ -453,7 +453,8 @@ public class CExtensions implements ILanguageExtension {
       }
       _xifexpression = _xblockexpression;
     } else {
-      _xifexpression = value;
+      String _convertStringEnumLiteral = this.convertStringEnumLiteral(type, value);
+      _xifexpression = _convertStringEnumLiteral;
     }
     return _xifexpression;
   }

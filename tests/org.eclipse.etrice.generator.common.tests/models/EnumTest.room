@@ -23,14 +23,14 @@ RoomModel EnumTest {
 			
 			Attribute caseId: int32
 			Attribute first: FirstEnum
-			Attribute second: SecondEnum = "SecondEnum.two"
+			Attribute second: SecondEnum = "two"
 			Attribute third: ThirdEnum
 			Attribute fourth: FourthEnum
 			Attribute fifth: FifthEnum
 			
 			Attribute arrayFirst[1] : FirstEnum
-			Attribute arrayFourth[65] : FourthEnum = "FourthEnum.sixtyfive"
-			Attribute arrayFifth[2] : FifthEnum = "{ FifthEnum.f1, FifthEnum.f2}"
+			Attribute arrayFourth[65] : FourthEnum = "sixtyfive"
+			Attribute arrayFifth[2] : FifthEnum = "{f1, f2}"
 			
 		}
 		Behavior {

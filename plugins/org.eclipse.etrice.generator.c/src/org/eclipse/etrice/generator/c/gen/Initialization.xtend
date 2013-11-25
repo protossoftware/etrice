@@ -78,14 +78,14 @@ class Initialization {
 			PrimitiveType: {
 				var value = getPrimitiveValue(instance, path)
 				if(a.size > 0 && !aType.characterType && !value.trim.startsWith('{'))
-					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
+					'''{«FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR»}'''
 				else
 					value
 			}
 			EnumerationType: {
-				var value = languageExt.getDefaultValue(aType)
+				var value = getPrimitiveValue(instance, path)
 				if (a.size > 0 && !value.trim.startsWith('{'))
-					'''{ «FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR» }'''
+					'''{«FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR»}'''
 				else
 					value
 			}

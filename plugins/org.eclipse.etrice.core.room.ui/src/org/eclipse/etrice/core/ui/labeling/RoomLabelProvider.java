@@ -23,6 +23,8 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.EnumLiteral;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
@@ -210,6 +212,15 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String image(AnnotationAttribute aa) {
 		return "Attribute.gif";
 	}
+	
+	String image(EnumerationType et) {
+		return "EnumerationType.gif";
+	}
+	
+	String image(EnumLiteral lit) {
+		return "EnumLiteral.gif";
+	}
+	
 	// custom labels
 	
 	StyledString text(Import im) {
@@ -352,6 +363,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	String text (LogicalThread lt ) {
 		return lt.getName();		
 	}
+	
+	StyledString text(EnumerationType et) {
+		StyledString txt = new StyledString("enum "+et.getName());
+		txt.setStyle(0, 4, getKeywordStyler());
+		return txt;
+	}
+	
+	String text (EnumLiteral lit) {
+		return lit.getName()+" = "+lit.getLiteralValue();		
+	}
+	
 	private Styler getKeywordStyler() {
 		if (keywordStyler==null) {
 			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
