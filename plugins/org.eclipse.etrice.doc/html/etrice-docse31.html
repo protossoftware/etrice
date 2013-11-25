@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-15 09:59:00" /> 
+<meta name="date" content="2013-11-25 18:01:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -20,17 +20,17 @@ href="etrice-docse30.html#tailetrice-docse30.html" >prev-tail</a>] [<a
 href="#tailetrice-docse31.html">tail</a>] [<a 
 href="etrice-docch6.html#etrice-docse31.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x39-1690006.2"></a>Component Overview</h3>
+ id="x39-1700006.2"></a>Component Overview</h3>
 <!--l. 94--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.1   </span> <a 
- id="x39-1700006.2.1"></a>Room Language Overview</h4>
+ id="x39-1710006.2.1"></a>Room Language Overview</h4>
 <!--l. 96--><p class="noindent" >We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that
 are worth to be pointed out.
 </p><!--l. 99--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1710006.2.1"></a>Model Tweaks</h5>
+ id="x39-1720006.2.1"></a>Model Tweaks</h5>
 <!--l. 101--><p class="noindent" >The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at some places.
 This is done in the <span 
 class="ec-lmsso-10">/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext </span>which is written in the
@@ -68,7 +68,7 @@ class="ec-lmtt-10">InterfaceItem</span></li></ul>
 <!--l. 117--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1720006.2.1"></a>Imports by URI Using Namespaces</h5>
+ id="x39-1730006.2.1"></a>Imports by URI Using Namespaces</h5>
 <!--l. 119--><p class="noindent" >The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model
 workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in
 the Guice modules by binding </p>
@@ -90,7 +90,7 @@ class="ec-lmtt-10">ImportAwareHyperlinkHelper </span>&#8211; turns the URI part 
 <!--l. 132--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1730006.2.1"></a>Naming</h5>
+ id="x39-1740006.2.1"></a>Naming</h5>
 <!--l. 134--><p class="noindent" >Two classes provide object names used for link resolution and for labels. The <span 
 class="ec-lmtt-10">RoomNameProvider </span>provides frequently used
 name strings, some of them are hierarchical like State paths. The <span 
@@ -102,7 +102,7 @@ Xtext.
 </p><!--l. 140--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1740006.2.1"></a>Helpers</h5>
+ id="x39-1750006.2.1"></a>Helpers</h5>
 <!--l. 142--><p class="noindent" >The <span 
 class="ec-lmtt-10">RoomHelpers </span>class provides a great deal of static methods that help retrieve frequently used information from the
 model. Among many, many others </p>
@@ -118,18 +118,18 @@ class="ec-lmtt-10">getSignature(Operation) </span>- returns a string representin
 <!--l. 154--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1750006.2.1"></a>Validation</h5>
+ id="x39-1760006.2.1"></a>Validation</h5>
 <!--l. 156--><p class="noindent" >Validation is used from various places. Therefore all validation code is accumulated in the @ValidationUtil@ class. All methods
 are static and many of them return a Result object which contains information about the problem detected as well as object
 and feature as suited for most validation purposes.
 </p><!--l. 160--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.2   </span> <a 
- id="x39-1760006.2.2"></a>Config Language Overview</h4>
+ id="x39-1770006.2.2"></a>Config Language Overview</h4>
 <!--l. 162--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1770006.2.2"></a>Model Tweaks</h5>
+ id="x39-1780006.2.2"></a>Model Tweaks</h5>
 <!--l. 164--><p class="noindent" >A couple of operations are added to the ConfigModel </p>
      <ul class="itemize1">
      <li class="itemize"><span 
@@ -146,7 +146,7 @@ class="ec-lmtt-10">getSubSystemConfigs</span></li></ul>
 <!--l. 172--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1780006.2.2"></a>Imports by URI Using Namespaces</h5>
+ id="x39-1790006.2.2"></a>Imports by URI Using Namespaces</h5>
 <!--l. 174--><p class="noindent" >Imports are treated like in Room language, section <span 
 class="ec-lmsso-10">Imports by URI Using Namespaces</span>.
                                                                                             
@@ -154,13 +154,13 @@ class="ec-lmsso-10">Imports by URI Using Namespaces</span>.
 </p><!--l. 176--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1790006.2.2"></a>Util</h5>
+ id="x39-1800006.2.2"></a>Util</h5>
 <!--l. 178--><p class="noindent" >A set of static utility methods can be found in the <span 
 class="ec-lmtt-10">ConfigUtil </span>class.
 </p><!--l. 180--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.3   </span> <a 
- id="x39-1800006.2.3"></a>Aggregation Layer Overview</h4>
+ id="x39-1810006.2.3"></a>Aggregation Layer Overview</h4>
 <!--l. 182--><p class="noindent" >The eTrice Generator Model (genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information
 which is implicitly contained in the Room model but not simple to retrieve. Examples of this are the state machine with
 inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of
@@ -190,14 +190,14 @@ class="ec-lmtt-10">ExpandedActorClass </span>with an explicit state machine cont
 <!--l. 202--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1810006.2.3"></a>The Instance Model</h5>
+ id="x39-1820006.2.3"></a>The Instance Model</h5>
 <!--l. 204--><p class="noindent" >The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to
 get a list of all peer port instances for each port instance without having to bother about port and actor
 replication.
 </p><!--l. 208--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1820006.2.3"></a>The Expanded Actor Class</h5>
+ id="x39-1830006.2.3"></a>The Expanded Actor Class</h5>
 <!--l. 210--><p class="noindent" >The expanded actor class contains, as already mentioned, the complete state machine of the actor class. This considerably
 simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of
 an actor. I.e. no target language inheritance is used to implement the state machine inheritance. Furthermore the
@@ -222,7 +222,7 @@ class="ec-lmtt-10">State </span>in the order they are evaluated</li></ul>
 <!--l. 224--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1830006.2.3"></a>Transition Chains</h5>
+ id="x39-1840006.2.3"></a>Transition Chains</h5>
 <!--l. 226--><p class="noindent" >By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at
 a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions
 until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in
@@ -240,13 +240,13 @@ points.
 </p><!--l. 236--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.4   </span> <a 
- id="x39-1840006.2.4"></a>Generator Overview</h4>
+ id="x39-1850006.2.4"></a>Generator Overview</h4>
 <!--l. 238--><p class="noindent" >There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific
 generators
 </p><!--l. 241--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1850006.2.4"></a>Base Classes and Interfaces</h5>
+ id="x39-1860006.2.4"></a>Base Classes and Interfaces</h5>
 <!--l. 243--><p class="noindent" >We just want to mention the most important classes and interfaces.
 </p>
      <ul class="itemize1">
@@ -280,7 +280,7 @@ class="ec-lmtt-10">GeneratorBaseModule </span>&#8212; a Google Guice module that
 <!--l. 257--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1860006.2.4"></a>Generic Generator Parts</h5>
+ id="x39-1870006.2.4"></a>Generic Generator Parts</h5>
 <!--l. 259--><p class="noindent" >The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level
 generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by
 means of an <span 
@@ -288,7 +288,7 @@ class="ec-lmtt-10">ILanguageExtension</span>. This extension and other parts of 
 dependency injection.
 </p>
 <!--l. 264--><p class="noindent" ><span class="paragraphHead"><a 
- id="x39-1870006.2.4"></a><span 
+ id="x39-1880006.2.4"></a><span 
 class="ec-lmssbx-10">GenericActorClassGenerator</span></span>
 The <span 
 class="ec-lmtt-10">GenericActorClassGenerator </span>generates constants for the interface items of a actor. Those constants are used by the
@@ -297,13 +297,13 @@ generated state machine.
                                                                                             
 </p>
 <!--l. 269--><p class="noindent" ><span class="paragraphHead"><a 
- id="x39-1880006.2.4"></a><span 
+ id="x39-1890006.2.4"></a><span 
 class="ec-lmssbx-10">GenericProtocolClassGenerator</span></span>
 The <span 
 class="ec-lmtt-10">GenericProtocolClassGenerator </span>generates message ID constants for a protocol.
 </p>
 <!--l. 273--><p class="noindent" ><span class="paragraphHead"><a 
- id="x39-1890006.2.4"></a><span 
+ id="x39-1900006.2.4"></a><span 
 class="ec-lmssbx-10">GenericStateMachineGenerator</span></span>
 </p>
 <div class="flushleft" 
@@ -349,7 +349,7 @@ class="ec-lmtt-10">enterHistory</span>.
 </p><!--l. 298--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1900006.2.4"></a>The Java Generator</h5>
+ id="x39-1910006.2.4"></a>The Java Generator</h5>
 <!--l. 300--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
 class="ec-lmtt-10">JavaTranslationProvider </span>is very simple and only
 handles the case of sending a message from a distinct replicated port: <span 
@@ -369,7 +369,7 @@ methods are inherited. Not inherited is the state machine implementation.
 </p><!--l. 313--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1910006.2.4"></a>The ANSI-C Generator</h5>
+ id="x39-1920006.2.4"></a>The ANSI-C Generator</h5>
 <!--l. 315--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them
 and receive a pointer to those data (called <span 
 class="ec-lmtt-10">self </span>in analogy to the implicit C++ <span 
@@ -380,7 +380,7 @@ micro controllers.
 </p><!--l. 322--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
- id="x39-1920006.2.4"></a>The Documentation Generator</h5>
+ id="x39-1930006.2.4"></a>The Documentation Generator</h5>
 <!--l. 324--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF and many other
 formats.
 </p>

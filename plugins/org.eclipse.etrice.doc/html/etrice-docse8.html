@@ -4,13 +4,13 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Tutorial Ping Pong (Java and C)</title> 
+<head><title>Ping Pong Tutorial (Java and C)</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-15 09:59:00" /> 
+<meta name="date" content="2013-11-25 18:01:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,23 +21,23 @@ href="etrice-docse7.html#tailetrice-docse7.html" >prev-tail</a>] [<a
 href="#tailetrice-docse8.html">tail</a>] [<a 
 href="etrice-docch2.html#etrice-docse8.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">2.6   </span> <a 
- id="x12-500002.6"></a>Tutorial Ping Pong (Java and C)</h3>
-<!--l. 3--><p class="noindent" >
+ id="x12-500002.6"></a>Ping Pong Tutorial (Java and C)</h3>
+<!--l. 4--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.1   </span> <a 
  id="x12-510002.6.1"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >This tutorial describes how to create a simple hierarchical actor system of actors communicating via ports and bindings.
+<!--l. 6--><p class="noindent" >This tutorial describes how to create a simple hierarchical actor system of actors communicating via ports and bindings.
 Additionally you will use the Timing Service from the eTrice model library. This tutorial can be done for the target languages
 Java or C. For the Ping Pong scenario we want to create a model with a sender and a reveiver of a message.
 The receiver has to wait for the ping message from the sender, wait for a second and respond with a pong
 message.
-</p><!--l. 10--><p class="noindent" >The resulting Message Sequence Chart (MSC) at the ende of this tutorial should look like this:
-</p><!--l. 12--><p class="noindent" ><img 
+</p><!--l. 11--><p class="noindent" >The resulting Message Sequence Chart (MSC) at the ende of this tutorial should look like this:
+</p><!--l. 13--><p class="noindent" ><img 
 src="images/017-01-MSC.png" alt="PIC"  
  />
-</p><!--l. 15--><p class="noindent" >We will take this MSC as specification for the desired behavior.
-</p><!--l. 17--><p class="noindent" >You will perform the following steps:
-</p><!--l. 19--><p class="noindent" >
+</p><!--l. 16--><p class="noindent" >We will take this MSC as specification for the desired behavior.
+</p><!--l. 18--><p class="noindent" >You will perform the following steps:
+</p><!--l. 20--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x12-51002x1">create a new model from scratch
@@ -60,17 +60,17 @@ class="ec-lmsso-10">TimingService</span>
      </li>
      <li 
   class="enumerate" id="x12-51014x7">open the message sequence chart</li></ol>
-<!--l. 29--><p class="noindent" >
+<!--l. 30--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.2   </span> <a 
  id="x12-520002.6.2"></a>Create a new model from scratch</h4>
-<!--l. 31--><p class="noindent" >Create a new eTrice project according to <span 
+<!--l. 32--><p class="noindent" >Create a new eTrice project according to <span 
 class="ec-lmsso-10">HelloWorld for Java or C </span>and name it <span 
 class="ec-lmsso-10">PingPong</span>.
-</p><!--l. 33--><p class="noindent" >Your <span 
+</p><!--l. 34--><p class="noindent" >Your <span 
 class="ec-lmsso-10">ROOM </span>model should look like this:
 </p>
-<!--l. 35-->
+<!--l. 36-->
                                                                                             
                                                                                             
 <div class="lstlisting" id="listing-11"><span class="label"><a 
@@ -159,16 +159,16 @@ class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a
 class="ec-lmss-8x-x-62">11</span></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 49--><p class="noindent" >
+<!--l. 50--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.3   </span> <a 
  id="x12-530002.6.3"></a>Create a new protocol</h4>
-<!--l. 51--><p class="noindent" >First we define a protocol for the communication between the Sender and the Receiver. From the specification MSC above
+<!--l. 52--><p class="noindent" >First we define a protocol for the communication between the Sender and the Receiver. From the specification MSC above
 we can derive that the Sender sends a <span 
 class="ec-lmsso-10">ping </span>message to the receiver and the receiver responds with a <span 
 class="ec-lmsso-10">pong</span>
 message.
-</p><!--l. 53--><p class="noindent" >In <span 
+</p><!--l. 54--><p class="noindent" >In <span 
 class="ec-lmsso-10">ROOM </span>the <span 
 class="ec-lmsso-10">ProtocolClass </span>specifies interfaces. In this case we go for an asynchronous, bidirectional messaging interface
 (eventdriven) which is the standard communication type for a <span 
@@ -181,9 +181,9 @@ class="ec-lmsso-10">Content Assist </span>to create two incoming
 messages called <span 
 class="ec-lmsso-10">ping </span>and <span 
 class="ec-lmsso-10">pong</span>.
-</p><!--l. 59--><p class="noindent" >The resulting code should look like this:
+</p><!--l. 60--><p class="noindent" >The resulting code should look like this:
 </p>
-<!--l. 61-->
+<!--l. 62-->
 <div class="lstlisting" id="listing-12"><span class="label"><a 
  id="x12-53001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -253,36 +253,36 @@ class="ec-lmss-8x-x-62">8</span></span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 72--><p class="noindent" >With <span 
+<!--l. 73--><p class="noindent" >With <span 
 class="ec-lmsso-10">Ctrl-Shift+F </span>or selecting <span 
 class="ec-lmsso-10">Format </span>from the context menu you can format the <span 
 class="ec-lmsso-10">ROOM </span>model. Note that the new
 <span 
 class="ec-lmsso-10">ProtocolClass </span>is displayed in the outline view.
-</p><!--l. 75--><p class="noindent" >
+</p><!--l. 76--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.4   </span> <a 
  id="x12-540002.6.4"></a>Create the Actor Structure</h4>
-<!--l. 76--><p class="noindent" >
+<!--l. 77--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x12-550002.6.4"></a>Add two additional actor classes</h5>
-<!--l. 78--><p class="noindent" >Position the cursor outside any class definition and call the <span 
+<!--l. 79--><p class="noindent" >Position the cursor outside any class definition and call the <span 
 class="ec-lmsso-10">Content Assist </span>with <span 
 class="ec-lmsso-10">Ctrl+Space</span>. Select <span 
 class="ec-lmsso-10">ActorClass - actor class</span>
 <span 
 class="ec-lmsso-10">skeleton or ActorClass </span>and name the ActorClass <span 
 class="ec-lmsso-10">Sender</span>.
-</p><!--l. 81--><p class="noindent" ><img 
+</p><!--l. 82--><p class="noindent" ><img 
 src="images/017-02-content-assist.png" alt="PIC"  
  />
-</p><!--l. 84--><p class="noindent" >Repeat the described procedure and name the new actor <span 
+</p><!--l. 85--><p class="noindent" >Repeat the described procedure and name the new actor <span 
 class="ec-lmsso-10">Receiver</span>.
-</p><!--l. 86--><p class="noindent" >With Ctrl+Shift+F you can format your textual model.
-</p><!--l. 88--><p class="noindent" >The Result:
+</p><!--l. 87--><p class="noindent" >With Ctrl+Shift+F you can format your textual model.
+</p><!--l. 89--><p class="noindent" >The Result:
 </p>
-<!--l. 90-->
+<!--l. 91-->
 <div class="lstlisting" id="listing-13"><span class="label"><a 
  id="x12-55001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -408,15 +408,15 @@ class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a
 class="ec-lmss-8x-x-62">18</span></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 111--><p class="noindent" >You can should also see the new <span 
+<!--l. 112--><p class="noindent" >You can should also see the new <span 
 class="ec-lmsso-10">ActorClass</span>es in the outline view.
                                                                                             
                                                                                             
-</p><!--l. 113--><p class="noindent" >
+</p><!--l. 114--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x12-560002.6.4"></a>Add ports to the actors</h5>
-<!--l. 115--><p class="noindent" >To open the graphical structure editor, right click <span 
+<!--l. 116--><p class="noindent" >To open the graphical structure editor, right click <span 
 class="ec-lmsso-10">Receiver </span>in the Outline View and select <span 
 class="ec-lmsso-10">Edit Structure</span>. Drag and Drop an
 <span 
@@ -432,16 +432,16 @@ class="ec-lmsso-10">Conjugated </span>and <span
 class="ec-lmsso-10">Is Relay Port </span>stay unchecked. Click <span 
 class="ec-lmsso-10">ok</span>. The resulting structure should look like
 this:
-</p><!--l. 119--><p class="noindent" ><img 
+</p><!--l. 120--><p class="noindent" ><img 
 src="images/017-04-Port-for-Actor-Receiver.png" alt="PIC"  
  />
-</p><!--l. 122--><p class="noindent" >Repeat the steps above for the <span 
+</p><!--l. 123--><p class="noindent" >Repeat the steps above for the <span 
 class="ec-lmsso-10">sender</span>. Create a port named <span 
 class="ec-lmsso-10">receiver </span>with the same <span 
 class="ec-lmsso-10">Protocol </span>and make it
 <span 
 class="ec-lmsso-10">Conjugated</span>.
-</p><!--l. 124--><p class="noindent" >Keep in mind that the protocol defines <span 
+</p><!--l. 125--><p class="noindent" >Keep in mind that the protocol defines <span 
 class="ec-lmsso-10">ping </span>as incoming message and <span 
 class="ec-lmsso-10">pong </span>as outgoing message. <span 
 class="ec-lmsso-10">Receiver </span>receives <span 
@@ -454,17 +454,17 @@ class="ec-lmsso-10">ping </span>and receive <span
 class="ec-lmsso-10">pong</span>. Therefore
 the <span 
 class="ec-lmsso-10">Sender</span>s port must be a conjugated port.
-</p><!--l. 128--><p class="noindent" >
+</p><!--l. 129--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x12-570002.6.4"></a>Build hierarchical actor structure</h5>
-<!--l. 130--><p class="noindent" >Now we want to add the new actors to the structure of <span 
+<!--l. 131--><p class="noindent" >Now we want to add the new actors to the structure of <span 
 class="ec-lmsso-10">ActorClass PingPongTop</span>.
-</p><!--l. 132--><p class="noindent" >From the outline view right click <span 
+</p><!--l. 133--><p class="noindent" >From the outline view right click <span 
 class="ec-lmsso-10">PingPongTop </span>and select <span 
 class="ec-lmsso-10">Edit Structure</span>. Remember that you can only see the outline view if
 the textual editor with the .room file is active.
-</p><!--l. 134--><p class="noindent" >Drag and Drop an <span 
+</p><!--l. 135--><p class="noindent" >Drag and Drop an <span 
 class="ec-lmsso-10">ActorRef  </span>inside the <span 
 class="ec-lmsso-10">PingPongTop </span>actor. Name it <span 
 class="ec-lmsso-10">sender</span>. From the actor class drop down list select
@@ -473,15 +473,15 @@ class="ec-lmsso-10">Sender</span>. Do the same for <span
 class="ec-lmsso-10">Receiver</span>. Connect the ports via the binding tool int the <span 
 class="ec-lmsso-10">Palette</span>. The resulting structure should look
 like this:
-</p><!--l. 137--><p class="noindent" ><img 
+</p><!--l. 138--><p class="noindent" ><img 
 src="images/017-03-PingPongTop-Structure.png" alt="PIC"  
  />
-</p><!--l. 140--><p class="noindent" >We have build the structure of a hierarchical actor system with two actors that send each other messages.
-</p><!--l. 142--><p class="noindent" >
+</p><!--l. 141--><p class="noindent" >We have build the structure of a hierarchical actor system with two actors that send each other messages.
+</p><!--l. 143--><p class="noindent" >
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x12-580002.6.4"></a>Import the Timing Service</h5>
-<!--l. 144--><p class="noindent" >In order to implement the waiting time of the <span 
+<!--l. 145--><p class="noindent" >In order to implement the waiting time of the <span 
 class="ec-lmsso-10">Receiver </span>we need a timing service. The timing service is provided by the model
 library and must be imported before it can be used in your model.
 </p>
@@ -493,9 +493,9 @@ library and must be imported before it can be used in your model.
                                                                                             
 <div class="minipage">
 ______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 149--><p class="noindent" ><span 
+______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 150--><p class="noindent" ><span 
 class="ec-lmssbx-10">room model for Java </span><br 
-class="newline" /></p><!--l. 151-->
+class="newline" /></p><!--l. 152-->
 <div class="lstlisting" id="listing-14"><span class="label"><a 
  id="x12-58001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -549,9 +549,9 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">(...)</span>
 </div>
 </div>  <div class="minipage">
-___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 162--><p class="noindent" ><span 
+___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 163--><p class="noindent" ><span 
 class="ec-lmssbx-10">room model for C </span><br 
-class="newline" /></p><!--l. 164-->
+class="newline" /></p><!--l. 165-->
 <div class="lstlisting" id="listing-15"><span class="label"><a 
  id="x12-58005r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -608,7 +608,7 @@ class="ec-lmtt-9">(...)</span>
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
-<!--l. 174--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path or the settings for your C
+<!--l. 175--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path or the settings for your C
 compiler are configured to use the modellib. Otherwise the generated code can not be built.
 </p>
 <hr class="figure" /><div class="figure" 
@@ -621,7 +621,7 @@ compiler are configured to use the modellib. Otherwise the generated code can no
                                                                                             
 <div class="minipage">
 ______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 179--><p class="noindent" ><span 
+______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 180--><p class="noindent" ><span 
 class="ec-lmssbx-10">build settings for Java </span><br 
 class="newline" />Right click the project <span 
 class="ec-lmsso-10">PingPong </span>and select <span 
@@ -630,14 +630,14 @@ class="ec-lmsso-10">Properties</span>
 class="ec-lmsso-10">-&#x003E; Java Build Path -&#x003E; Projects  </span>. Add the project
 <span 
 class="ec-lmsso-10">org.eclipse.etrice.modellib.java </span>.
-</p><!--l. 183--><p class="noindent" ><img 
+</p><!--l. 184--><p class="noindent" ><img 
 src="images/020-Blinky16.png" alt="PIC"  
  />
 </p></div>  <div class="minipage">
-________________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 191--><p class="noindent" ><span 
+________________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 192--><p class="noindent" ><span 
 class="ec-lmssbx-10">build settings for C </span><br 
 class="newline" />
-</p><!--l. 194--><p class="noindent" >Right click the project <span 
+</p><!--l. 195--><p class="noindent" >Right click the project <span 
 class="ec-lmsso-10">PingPong </span>and select <span 
 class="ec-lmsso-10">Properties</span>
 <span 
@@ -645,10 +645,10 @@ class="ec-lmsso-10">-&#x003E; C/C++ Build -&#x003E; Settings -&#x003E; Includes<
 include  path  <span 
 class="ec-lmsso-10">org.eclipse.etrice.modellib.c/src-gen  </span>to
 the list.
-</p><!--l. 196--><p class="noindent" ><img 
+</p><!--l. 197--><p class="noindent" ><img 
 src="images/017-06-Settings-for-C-Includes.png" alt="PIC"  
  />
-</p><!--l. 199--><p class="noindent" >Select <span 
+</p><!--l. 200--><p class="noindent" >Select <span 
 class="ec-lmsso-10">Properties -&#x003E; C/C++ Build -&#x003E; Settings -&#x003E;</span>
 <span 
 class="ec-lmsso-10">Libraries</span>. Add the library <span 
@@ -659,16 +659,16 @@ class="ec-lmsso-10">org.eclipse.etrice.modellib.c/MinGWDebug  </span>to
 the    lists.    For    Posix    the    path    will    be
 <span 
 class="ec-lmsso-10">org.eclipse.etrice.modellib.c/PosixDebug</span>.
-</p><!--l. 202--><p class="noindent" ><img 
+</p><!--l. 203--><p class="noindent" ><img 
 src="images/017-07-Settings-for-C-Libraries.png" alt="PIC"  
  />
 </p></div>
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
-<!--l. 209--><p class="noindent" >Now the imported library can be used within your model and we will add the actor with the timing service to our
+<!--l. 210--><p class="noindent" >Now the imported library can be used within your model and we will add the actor with the timing service to our
 model.
-</p><!--l. 211--><p class="noindent" >Right click the <span 
+</p><!--l. 212--><p class="noindent" >Right click the <span 
 class="ec-lmsso-10">SubSystemClass SubSysClass1 </span>in the outline view and select <span 
 class="ec-lmsso-10">Edit Structure</span>. The <span 
 class="ec-lmsso-10">ActorClass PingPongTop </span>is
@@ -685,10 +685,10 @@ class="ec-lmsso-10">actorRef1 </span>to the service provision point (<span
 class="ec-lmsso-10">SPP</span>) of the <span 
 class="ec-lmsso-10">timingService</span>. The resulting structure should
 look like this:
-</p><!--l. 216--><p class="noindent" ><img 
+</p><!--l. 217--><p class="noindent" ><img 
 src="images/017-08-SubSystem-with-timing-service.png" alt="PIC"  
  />
-</p><!--l. 219--><p class="noindent" >The layer connection between an <span 
+</p><!--l. 220--><p class="noindent" >The layer connection between an <span 
 class="ec-lmsso-10">ActorRef  </span>and a <span 
 class="ec-lmsso-10">SPP </span>enables the use of service access points (<span 
 class="ec-lmsso-10">SAP</span>) for the service provided
@@ -702,14 +702,14 @@ class="ec-lmsso-10">PTimer </span>inside actorRef1 is now connected automaticall
 class="ec-lmsso-10">SPP </span>of the
 <span 
 class="ec-lmsso-10">timingService</span>.
-</p><!--l. 221--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to
+</p><!--l. 222--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to
 access the timing service must be added in the .room file. Open the <span 
 class="ec-lmsso-10">PingPong.room </span>file and navigate to the <span 
 class="ec-lmsso-10">Receiver </span>actor.
 Add the SAP for the protocol <span 
 class="ec-lmsso-10">PTimer </span>to the structure of the actor:
 </p>
-<!--l. 225-->
+<!--l. 226-->
 <div class="lstlisting" id="listing-16"><span class="label"><a 
  id="x12-58009r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -796,32 +796,32 @@ class="ec-lmss-8x-x-62">9</span></span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 237--><p class="noindent" >Now the <span 
+<!--l. 238--><p class="noindent" >Now the <span 
 class="ec-lmsso-10">Receiver </span>can use the timing service.
 </p>
 <h5 class="subsubsectionHead"><a 
  id="x12-590002.6.4"></a>Inspect the Actor Structure</h5>
-<!--l. 240--><p class="noindent" >Before we start with the implementation of the behavior we will have a short look at the instance tree of the application we
+<!--l. 241--><p class="noindent" >Before we start with the implementation of the behavior we will have a short look at the instance tree of the application we
 built so far:
-</p><!--l. 242--><p class="noindent" ><img 
+</p><!--l. 243--><p class="noindent" ><img 
 src="images/017-09-PingPong_InstanceTree.jpg" alt="PIC"  
  />
-</p><!--l. 245--><p class="noindent" >For each instance you can see the names of the <span 
+</p><!--l. 246--><p class="noindent" >For each instance you can see the names of the <span 
 class="ec-lmsso-10">ActorRef </span>s and in brackets the names of the <span 
 class="ec-lmsso-10">ActorClass</span>es. Starting at the
 subsystem level this instance tree will be implemented by the code generator. The subsystem will be implemented as process
 in Linux or Windows.
-</p><!--l. 248--><p class="noindent" >
+</p><!--l. 249--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.5   </span> <a 
  id="x12-600002.6.5"></a>Implement the Behavior</h4>
-<!--l. 250--><p class="noindent" >We will implement two finite state machines (<span 
+<!--l. 251--><p class="noindent" >We will implement two finite state machines (<span 
 class="ec-lmsso-10">FSM</span>s) to define the event driven behavior of the actors <span 
 class="ec-lmsso-10">Sender </span>and
 <span 
 class="ec-lmsso-10">Receiver</span>.
-</p><!--l. 252--><p class="noindent" >Before you start with the implementation, have a look at the MSC with the specification of the behavior.
-</p><!--l. 254--><p class="noindent" >Lets start with the <span 
+</p><!--l. 253--><p class="noindent" >Before you start with the implementation, have a look at the MSC with the specification of the behavior.
+</p><!--l. 255--><p class="noindent" >Lets start with the <span 
 class="ec-lmsso-10">Sender</span>. Right click to <span 
 class="ec-lmsso-10">Sender </span>in the outline view or the structure editor and select <span 
 class="ec-lmsso-10">Edit Behavior</span>. Drag
@@ -842,13 +842,13 @@ Note that the initial transition does not have a trigger event. The transition d
 class="ec-lmsso-10">SendingPing </span>to
 <span 
 class="ec-lmsso-10">ReceivedPong </span>should look like this:
-</p><!--l. 261--><p class="noindent" ><img 
+</p><!--l. 262--><p class="noindent" ><img 
 src="images/017-10-Edit-Transition.png" alt="PIC"  
  />
-</p><!--l. 264--><p class="noindent" >The transition will now be triggered by an incoming message <span 
+</p><!--l. 265--><p class="noindent" >The transition will now be triggered by an incoming message <span 
 class="ec-lmsso-10">ping </span>at the port <span 
 class="ec-lmsso-10">receiver</span>.
-</p><!--l. 266--><p class="noindent" >Now we open the dialog <span 
+</p><!--l. 267--><p class="noindent" >Now we open the dialog <span 
 class="ec-lmsso-10">Edit State </span>of the state <span 
 class="ec-lmsso-10">SendingPing </span>by right clicking the state and selecting <span 
 class="ec-lmsso-10">Edit</span>
@@ -868,17 +868,17 @@ class="ec-lmsso-10">Messages </span>to select the message from the list of avail
 their available messages. Assuming that the actor <span 
 class="ec-lmsso-10">Receiver </span>is connected to this port, the message will be sent
 there.
-</p><!--l. 273--><p class="noindent" >The FSM of <span 
+</p><!--l. 274--><p class="noindent" >The FSM of <span 
 class="ec-lmsso-10">Sender </span>should now look like this:
-</p><!--l. 275--><p class="noindent" ><img 
+</p><!--l. 276--><p class="noindent" ><img 
 src="images/017-11-FSM-Sender.png" alt="PIC"  
  />
-</p><!--l. 278--><p class="noindent" >Now we implement the FSM of the <span 
+</p><!--l. 279--><p class="noindent" >Now we implement the FSM of the <span 
 class="ec-lmsso-10">ActorClass Receiver</span>.
-</p><!--l. 280--><p class="noindent" ><img 
+</p><!--l. 281--><p class="noindent" ><img 
 src="images/017-12-FSM-Receiver.png" alt="PIC"  
  />
-</p><!--l. 283--><p class="noindent" >In the entry code of the state <span 
+</p><!--l. 284--><p class="noindent" >In the entry code of the state <span 
 class="ec-lmsso-10">WaitingForAWhile </span>we start the timeout:
                                                                                             
                                                                                             
@@ -886,8 +886,8 @@ class="ec-lmsso-10">WaitingForAWhile </span>we start the timeout:
 <div class="verbatim" id="verbatim-7">
 timing.startTimeout(1000);
 </div>
-<!--l. 287--><p class="nopar" >
-</p><!--l. 289--><p class="noindent" >In the entry code of the state <span 
+<!--l. 288--><p class="nopar" >
+</p><!--l. 290--><p class="noindent" >In the entry code of the state <span 
 class="ec-lmsso-10">SentPong </span>we send the message <span 
 class="ec-lmsso-10">pong </span>back to the <span 
 class="ec-lmsso-10">Sender</span>:
@@ -897,12 +897,12 @@ class="ec-lmsso-10">Sender</span>:
 <div class="verbatim" id="verbatim-8">
 sender.pong();
 </div>
-<!--l. 293--><p class="nopar" >
-</p><!--l. 295--><p class="noindent" >Save the diagram and inspect the <span 
+<!--l. 294--><p class="nopar" >
+</p><!--l. 296--><p class="noindent" >Save the diagram and inspect the <span 
 class="ec-lmsso-10">PingPong.room </span>file. The <span 
 class="ec-lmsso-10">Receiver </span>should look like this:
 </p>
-<!--l. 297-->
+<!--l. 298-->
 <div class="lstlisting" id="listing-17"><span class="label"><a 
  id="x12-60001r1"></a><span 
 class="ec-lmss-8x-x-62">1</span></span><span 
@@ -1338,23 +1338,23 @@ class="ec-lmss-8x-x-62">35</span></span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 335--><p class="noindent" >The PingPong model is done now. You can generate, compile and run it as described in <span 
+<!--l. 336--><p class="noindent" >The PingPong model is done now. You can generate, compile and run it as described in <span 
 class="ec-lmsso-10">Hello World for C </span>or <span 
 class="ec-lmsso-10">Hello World for</span>
 <span 
 class="ec-lmsso-10">Java</span>. The generated MSC in tmp/log should show the same MSC we used to specify the behavior at the beginning of this
 tutorial.
-</p><!--l. 337--><p class="noindent" ><img 
+</p><!--l. 338--><p class="noindent" ><img 
 src="images/017-01-MSC.png" alt="PIC"  
  />
-</p><!--l. 340--><p class="noindent" >Please note that the timeout messages startTimeout and timeout might vary depending on the target language and are not
+</p><!--l. 341--><p class="noindent" >Please note that the timeout messages startTimeout and timeout might vary depending on the target language and are not
 displayed completely correct in the current version (red dot). The MSC logger will be extended to handle this correct in the
 next version.
-</p><!--l. 342--><p class="noindent" >
+</p><!--l. 343--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">2.6.6   </span> <a 
  id="x12-610002.6.6"></a>Summary</h4>
-<!--l. 344--><p class="noindent" >Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You
+<!--l. 345--><p class="noindent" >Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You
 have used entry code to send messages and have used the timing service from the model library. You are
 now familiar with the basic features of eTrice. Further tutorials and examples will take this knowledge as a
 precondition.
