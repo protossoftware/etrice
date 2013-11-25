@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.generator.java.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
@@ -55,9 +56,16 @@ public class NodeRunnerGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-          if (_isValidGenerationLocation) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(ssi, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+            boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
+            _and = (_notEquals && _isValidGenerationLocation);
+          }
+          if (_and) {
             String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
             final String file = (_javaClassName + "Runner.java");
             SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();

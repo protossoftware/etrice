@@ -131,9 +131,16 @@ public class NodeGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-          if (_isValidGenerationLocation) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(ssi, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+            boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
+            _and = (_notEquals && _isValidGenerationLocation);
+          }
+          if (_and) {
             SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
             final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass_1);
             SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();

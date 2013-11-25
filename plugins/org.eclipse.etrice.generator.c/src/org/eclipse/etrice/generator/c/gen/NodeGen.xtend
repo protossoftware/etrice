@@ -58,29 +58,31 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-				val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
-				var file = nr.getCHeaderFileName(ssi)
-			
-				checkDataPorts(ssi)
+				if (ssi!=null) {
+					val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
+					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+					var file = nr.getCHeaderFileName(ssi)
 				
-				val usedThreads = new HashSet<PhysicalThread>();
-				for (thread: nr.type.threads) {
-					val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
-					if (!instancesOnThread.empty)
-						usedThreads.add(thread)
+					checkDataPorts(ssi)
+					
+					val usedThreads = new HashSet<PhysicalThread>();
+					for (thread: nr.type.threads) {
+						val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
+						if (!instancesOnThread.empty)
+							usedThreads.add(thread)
+					}
+					
+					fileIO.generateFile("generating Node declaration", filepath, infopath, file, root.generateHeaderFile(ssi))
+					
+					file = nr.getCSourceFileName(ssi)
+					fileIO.generateFile("generating Node implementation", filepath, infopath, file, root.generateSourceFile(ssi, usedThreads))
+					
+					file = nr.getInstSourceFileName(ssi)
+					fileIO.generateFile("generating Node instance file", filepath, infopath, file, root.generateInstanceFile(ssi, usedThreads))
+		
+					file = nr.getDispSourceFileName(ssi)
+					fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, root.generateDispatcherFile(ssi, usedThreads))
 				}
-				
-				fileIO.generateFile("generating Node declaration", filepath, infopath, file, root.generateHeaderFile(ssi))
-				
-				file = nr.getCSourceFileName(ssi)
-				fileIO.generateFile("generating Node implementation", filepath, infopath, file, root.generateSourceFile(ssi, usedThreads))
-				
-				file = nr.getInstSourceFileName(ssi)
-				fileIO.generateFile("generating Node instance file", filepath, infopath, file, root.generateInstanceFile(ssi, usedThreads))
-	
-				file = nr.getDispSourceFileName(ssi)
-				fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, root.generateDispatcherFile(ssi, usedThreads))
 			}
 		}
 	}

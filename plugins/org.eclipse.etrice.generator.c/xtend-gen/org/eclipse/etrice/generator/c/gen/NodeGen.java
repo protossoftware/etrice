@@ -108,55 +108,58 @@ public class NodeGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
-          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-          String _path = this._roomExtensions.getPath(_subSystemClass_1);
-          final String filepath = (_generationTargetPath + _path);
-          SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-          String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
-          SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-          String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
-          final String infopath = (_generationInfoPath + _path_1);
-          String file = this._cExtensions.getCHeaderFileName(nr, ssi);
-          this.checkDataPorts(ssi);
-          HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
-          final HashSet<PhysicalThread> usedThreads = _hashSet;
-          NodeClass _type = nr.getType();
-          EList<PhysicalThread> _threads = _type.getThreads();
-          for (final PhysicalThread thread : _threads) {
-            {
-              EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-              final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
-                public Boolean apply(final ActorInstance ai) {
-                  MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-                  PhysicalThread _thread = _mappedThread.getThread();
-                  boolean _equals = Objects.equal(_thread, thread);
-                  return Boolean.valueOf(_equals);
+          boolean _notEquals = (!Objects.equal(ssi, null));
+          if (_notEquals) {
+            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+            String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
+            SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+            String _path = this._roomExtensions.getPath(_subSystemClass_1);
+            final String filepath = (_generationTargetPath + _path);
+            SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+            String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_2);
+            SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+            String _path_1 = this._roomExtensions.getPath(_subSystemClass_3);
+            final String infopath = (_generationInfoPath + _path_1);
+            String file = this._cExtensions.getCHeaderFileName(nr, ssi);
+            this.checkDataPorts(ssi);
+            HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
+            final HashSet<PhysicalThread> usedThreads = _hashSet;
+            NodeClass _type = nr.getType();
+            EList<PhysicalThread> _threads = _type.getThreads();
+            for (final PhysicalThread thread : _threads) {
+              {
+                EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
+                final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
+                  public Boolean apply(final ActorInstance ai) {
+                    MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                    PhysicalThread _thread = _mappedThread.getThread();
+                    boolean _equals = Objects.equal(_thread, thread);
+                    return Boolean.valueOf(_equals);
+                  }
+                };
+                final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
+                boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  usedThreads.add(thread);
                 }
-              };
-              final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
-              boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                usedThreads.add(thread);
               }
             }
+            CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi);
+            this.fileIO.generateFile("generating Node declaration", filepath, infopath, file, _generateHeaderFile);
+            String _cSourceFileName = this._cExtensions.getCSourceFileName(nr, ssi);
+            file = _cSourceFileName;
+            CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, usedThreads);
+            this.fileIO.generateFile("generating Node implementation", filepath, infopath, file, _generateSourceFile);
+            String _instSourceFileName = this._cExtensions.getInstSourceFileName(nr, ssi);
+            file = _instSourceFileName;
+            CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi, usedThreads);
+            this.fileIO.generateFile("generating Node instance file", filepath, infopath, file, _generateInstanceFile);
+            String _dispSourceFileName = this._cExtensions.getDispSourceFileName(nr, ssi);
+            file = _dispSourceFileName;
+            CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi, usedThreads);
+            this.fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, _generateDispatcherFile);
           }
-          CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi);
-          this.fileIO.generateFile("generating Node declaration", filepath, infopath, file, _generateHeaderFile);
-          String _cSourceFileName = this._cExtensions.getCSourceFileName(nr, ssi);
-          file = _cSourceFileName;
-          CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, usedThreads);
-          this.fileIO.generateFile("generating Node implementation", filepath, infopath, file, _generateSourceFile);
-          String _instSourceFileName = this._cExtensions.getInstSourceFileName(nr, ssi);
-          file = _instSourceFileName;
-          CharSequence _generateInstanceFile = this.generateInstanceFile(root, ssi, usedThreads);
-          this.fileIO.generateFile("generating Node instance file", filepath, infopath, file, _generateInstanceFile);
-          String _dispSourceFileName = this._cExtensions.getDispSourceFileName(nr, ssi);
-          file = _dispSourceFileName;
-          CharSequence _generateDispatcherFile = this.generateDispatcherFile(root, ssi, usedThreads);
-          this.fileIO.generateFile("generating Node dispatcher file", filepath, infopath, file, _generateDispatcherFile);
         }
       }
     }

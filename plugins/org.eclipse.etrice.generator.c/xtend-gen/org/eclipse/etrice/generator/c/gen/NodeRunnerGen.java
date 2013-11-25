@@ -11,6 +11,7 @@
  */
 package org.eclipse.etrice.generator.c.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
@@ -51,20 +52,23 @@ public class NodeRunnerGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          String _name = nr.getName();
-          String _plus = (_name + "_");
-          String _name_1 = ssi.getName();
-          final String clsname = (_plus + _name_1);
-          SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-          String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
-          SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-          String _path = this._roomExtensions.getPath(_subSystemClass_1);
-          String _plus_1 = (_generationTargetPath + _path);
-          this.fileAccess.setOutputPath(_plus_1);
-          String _plus_2 = (clsname + "_Runner.c");
-          CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, first);
-          this.fileAccess.generateFile(_plus_2, _generateSourceFile);
-          first = false;
+          boolean _notEquals = (!Objects.equal(ssi, null));
+          if (_notEquals) {
+            String _name = nr.getName();
+            String _plus = (_name + "_");
+            String _name_1 = ssi.getName();
+            final String clsname = (_plus + _name_1);
+            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+            String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass);
+            SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+            String _path = this._roomExtensions.getPath(_subSystemClass_1);
+            String _plus_1 = (_generationTargetPath + _path);
+            this.fileAccess.setOutputPath(_plus_1);
+            String _plus_2 = (clsname + "_Runner.c");
+            CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, first);
+            this.fileAccess.generateFile(_plus_2, _generateSourceFile);
+            first = false;
+          }
         }
       }
     }
