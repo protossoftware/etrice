@@ -73,6 +73,8 @@ RoomModel StaticConfigTest {
 			external Port conj_port
 			Attribute caseId: int32
 			Attribute data_1: Data_1_dc
+			Attribute enumval1: Enum_1 = "one"
+			Attribute enumval2: Enum_2 = "four"
 			ActorRef testee_2: Testee_2_ac
 		}
 		Behavior {
@@ -126,6 +128,10 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:34\", String.valueOf(getData_1().getChar_array_i()).equals(\"Inst\"));"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:35\", getData_1().getData_2().getInt32_c() == 42);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:36\", getData_1().getData_2().getInt32_i() == 43);"
+						
+						// enums
+						"EXPECT_TRUE(caseId,\"testee_1:enumval1\", getEnumval1() == Enum_1.two);"
+						"EXPECT_TRUE(caseId,\"testee_1:enumval2\", getEnumval2() == Enum_2.three);"
 						"etUnit_testFinished(caseId);"
 					}
 				}
@@ -372,6 +378,17 @@ RoomModel StaticConfigTest {
 			"EXPECT_TRUE(caseId, \"Data_3_dc:9\", primitive_array_ref instanceof byte[]);"
 			"EXPECT_TRUE(caseId, \"Data_3_dc:10\", string_ref == null);"
 		}
+	}
+
+	Enumeration Enum_1 {
+		zero,
+		one,
+		two
+	}
+	
+	Enumeration Enum_2 of int16 {
+		three=3,
+		four
 	}
 
 }

@@ -221,8 +221,11 @@ class CExtensions implements ILanguageExtension {
 	}
 	
 	def private convertStringEnumLiteral(EnumerationType type, String value){
+		var v = value
+		if (v.startsWith(type.name))
+			v = v.substring(type.name.length+1)
 		for(EnumLiteral l : type.literals)
-			if(l.name.equals(value))
+			if(l.name.equals(v))
 				return type.getName()+"_"+l.getName()
 	}
 

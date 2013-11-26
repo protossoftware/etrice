@@ -388,15 +388,25 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   private String convertStringEnumLiteral(final EnumerationType type, final String value) {
+    String v = value;
+    String _name = type.getName();
+    boolean _startsWith = v.startsWith(_name);
+    if (_startsWith) {
+      String _name_1 = type.getName();
+      int _length = _name_1.length();
+      int _plus = (_length + 1);
+      String _substring = v.substring(_plus);
+      v = _substring;
+    }
     EList<EnumLiteral> _literals = type.getLiterals();
     for (final EnumLiteral l : _literals) {
-      String _name = l.getName();
-      boolean _equals = _name.equals(value);
+      String _name_2 = l.getName();
+      boolean _equals = _name_2.equals(v);
       if (_equals) {
-        String _name_1 = type.getName();
-        String _plus = (_name_1 + ".");
-        String _name_2 = l.getName();
-        return (_plus + _name_2);
+        String _name_3 = type.getName();
+        String _plus_1 = (_name_3 + ".");
+        String _name_4 = l.getName();
+        return (_plus_1 + _name_4);
       }
     }
     return null;

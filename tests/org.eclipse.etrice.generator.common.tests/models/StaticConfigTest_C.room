@@ -68,6 +68,8 @@ RoomModel StaticConfigTest {
 			external Port conj_port
 			Attribute caseId: int32
 			Attribute data_1: Data_1_dc
+			Attribute enumval1: Enum_1 = "one"
+			Attribute enumval2: Enum_2 = "four"
 			ActorRef testee_2: Testee_2_ac
 		}
 		Behavior {
@@ -133,6 +135,11 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId,\"testee_1:conj_port:39\", ((TestProtocolAttributesConjPort_var*)self->constData->conj_port.varData)->array2_c[1] == 32);"
 						"EXPECT_TRUE(caseId,\"testee_1:conj_port:40\", ((TestProtocolAttributesConjPort_var*)self->constData->conj_port.varData)->array2_i[0] == 1);"
 						"EXPECT_TRUE(caseId,\"testee_1:conj_port:41\", ((TestProtocolAttributesConjPort_var*)self->constData->conj_port.varData)->array2_i[1] == 2);"
+						"etUnit_testFinished(caseId);"
+						
+						// enums
+						"EXPECT_TRUE(caseId,\"testee_1:enumval1\", enumval1 == Enum_1.two);"
+						"EXPECT_TRUE(caseId,\"testee_1:enumval2\", enumval2 == Enum_2.three);"
 						"etUnit_testFinished(caseId);"
 					}
 				}
@@ -392,6 +399,17 @@ RoomModel StaticConfigTest {
 			"EXPECT_TRUE(caseId, \"Data_3_dc:9\", ext_type_ref == NULL);"
 			"EXPECT_TRUE(caseId, \"Data_3_dc:10\", ext_type_ref_array[0] == NULL && dataClass_ref_array[1] == NULL);"
 		}
+	}
+
+	Enumeration Enum_1 {
+		zero,
+		one,
+		two
+	}
+	
+	Enumeration Enum_2 of int16 {
+		three=3,
+		four
 	}
 
 }
