@@ -87,11 +87,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
     final Function1<ProtocolClass,Boolean> _function = new Function1<ProtocolClass,Boolean>() {
-      public Boolean apply(final ProtocolClass cl) {
-        boolean _isValidGenerationLocation = ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
-        return Boolean.valueOf(_isValidGenerationLocation);
-      }
-    };
+        public Boolean apply(final ProtocolClass cl) {
+          boolean _isValidGenerationLocation = ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+          return Boolean.valueOf(_isValidGenerationLocation);
+        }
+      };
     Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_usedProtocolClasses, _function);
     for (final ProtocolClass pc : _filter) {
       {
@@ -868,12 +868,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
       final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          boolean _notEquals = (!Objects.equal(_data, null));
-          return Boolean.valueOf(_notEquals);
-        }
-      };
+          public Boolean apply(final Message m) {
+            VarDecl _data = m.getData();
+            boolean _notEquals = (!Objects.equal(_data, null));
+            return Boolean.valueOf(_notEquals);
+          }
+        };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final EList<RoomModel> models = root.getReferencedModels(pc);
       StringConcatenation _builder = new StringConcatenation();

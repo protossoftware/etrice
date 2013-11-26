@@ -44,30 +44,30 @@ public class OptionalActorFactoryGen {
   private FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
-    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
+    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass,WiredActorClass>();
     final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
-      public Boolean apply(final WiredStructureClass w) {
-        return Boolean.valueOf((w instanceof WiredActorClass));
-      }
-    };
+        public Boolean apply(final WiredStructureClass w) {
+          return Boolean.valueOf((w instanceof WiredActorClass));
+        }
+      };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
-      public void apply(final WiredStructureClass w) {
-        ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
-        ac2wired.put(_actorClass, ((WiredActorClass) w));
-      }
-    };
+        public void apply(final WiredStructureClass w) {
+          ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
+          ac2wired.put(_actorClass, ((WiredActorClass) w));
+        }
+      };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<OptionalActorInstance> _optionalInstances = root.getOptionalInstances();
     final Function1<OptionalActorInstance,Boolean> _function_2 = new Function1<OptionalActorInstance,Boolean>() {
-      public Boolean apply(final OptionalActorInstance cl) {
-        ActorClass _actorClass = cl.getActorClass();
-        boolean _isValidGenerationLocation = OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass);
-        return Boolean.valueOf(_isValidGenerationLocation);
-      }
-    };
+        public Boolean apply(final OptionalActorInstance cl) {
+          ActorClass _actorClass = cl.getActorClass();
+          boolean _isValidGenerationLocation = OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass);
+          return Boolean.valueOf(_isValidGenerationLocation);
+        }
+      };
     Iterable<OptionalActorInstance> _filter_1 = IterableExtensions.<OptionalActorInstance>filter(_optionalInstances, _function_2);
     for (final OptionalActorInstance oi : _filter_1) {
       {
@@ -144,11 +144,11 @@ public class OptionalActorFactoryGen {
       {
         List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
         final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
-          public Boolean apply(final Port p) {
-            boolean _isExternal = RoomHelpers.isExternal(p);
-            return Boolean.valueOf(_isExternal);
-          }
-        };
+            public Boolean apply(final Port p) {
+              boolean _isExternal = RoomHelpers.isExternal(p);
+              return Boolean.valueOf(_isExternal);
+            }
+          };
         Iterable<Port> _filter = IterableExtensions.<Port>filter(_allEndPorts, _function);
         for(final Port port : _filter) {
           _builder.append("\t\t");

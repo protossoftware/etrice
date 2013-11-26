@@ -65,11 +65,11 @@ public class DataClassGen {
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     final Function1<DataClass,Boolean> _function = new Function1<DataClass,Boolean>() {
-      public Boolean apply(final DataClass cl) {
-        boolean _isValidGenerationLocation = DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
-        return Boolean.valueOf(_isValidGenerationLocation);
-      }
-    };
+        public Boolean apply(final DataClass cl) {
+          boolean _isValidGenerationLocation = DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
+          return Boolean.valueOf(_isValidGenerationLocation);
+        }
+      };
     Iterable<DataClass> _filter = IterableExtensions.<DataClass>filter(_usedDataClasses, _function);
     for (final DataClass dc : _filter) {
       {
@@ -91,11 +91,11 @@ public class DataClassGen {
     {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isConstructor = RoomHelpers.isConstructor(op);
-          return Boolean.valueOf(_isConstructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isConstructor = RoomHelpers.isConstructor(op);
+            return Boolean.valueOf(_isConstructor);
+          }
+        };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       StringConcatenation _builder = new StringConcatenation();

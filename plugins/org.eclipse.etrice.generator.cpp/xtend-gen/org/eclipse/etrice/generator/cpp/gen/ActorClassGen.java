@@ -274,17 +274,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\t\t\t");
     List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
     final Function1<Port,String> _function = new Function1<Port,String>() {
-      public String apply(final Port port) {
-        StringConcatenation _builder = new StringConcatenation();
-        String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(port);
-        _builder.append(_portClassName, "");
-        _builder.append(" ");
-        String _name = port.getName();
-        _builder.append(_name, "");
-        _builder.append(";");
-        return _builder.toString();
-      }
-    };
+        public String apply(final Port port) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(port);
+          _builder.append(_portClassName, "");
+          _builder.append(" ");
+          String _name = port.getName();
+          _builder.append(_name, "");
+          _builder.append(";");
+          return _builder.toString();
+        }
+      };
     List<String> _map = ListExtensions.<Port, String>map(_endPorts, _function);
     String _join = IterableExtensions.join(_map, "\n");
     _builder.append(_join, "			");
@@ -295,17 +295,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\t\t\t");
     EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
     final Function1<SAP,String> _function_1 = new Function1<SAP,String>() {
-      public String apply(final SAP sap) {
-        StringConcatenation _builder = new StringConcatenation();
-        String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(sap);
-        _builder.append(_portClassName, "");
-        _builder.append(" ");
-        String _name = sap.getName();
-        _builder.append(_name, "");
-        _builder.append(";");
-        return _builder.toString();
-      }
-    };
+        public String apply(final SAP sap) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(sap);
+          _builder.append(_portClassName, "");
+          _builder.append(" ");
+          String _name = sap.getName();
+          _builder.append(_name, "");
+          _builder.append(";");
+          return _builder.toString();
+        }
+      };
     List<String> _map_1 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_1);
     String _join_1 = IterableExtensions.join(_map_1, "\n");
     _builder.append(_join_1, "			");
@@ -316,18 +316,18 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("\t\t\t");
     EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
     final Function1<ServiceImplementation,String> _function_2 = new Function1<ServiceImplementation,String>() {
-      public String apply(final ServiceImplementation svc) {
-        StringConcatenation _builder = new StringConcatenation();
-        String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(svc);
-        _builder.append(_portClassName, "");
-        _builder.append(" ");
-        SPP _spp = svc.getSpp();
-        String _name = _spp.getName();
-        _builder.append(_name, "");
-        _builder.append(";");
-        return _builder.toString();
-      }
-    };
+        public String apply(final ServiceImplementation svc) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(svc);
+          _builder.append(_portClassName, "");
+          _builder.append(" ");
+          SPP _spp = svc.getSpp();
+          String _name = _spp.getName();
+          _builder.append(_name, "");
+          _builder.append(";");
+          return _builder.toString();
+        }
+      };
     List<String> _map_2 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_2);
     String _join_2 = IterableExtensions.join(_map_2, "\n");
     _builder.append(_join_2, "			");
@@ -606,20 +606,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       EList<StandardOperation> _operations = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isConstructor = RoomHelpers.isConstructor(op);
-          return Boolean.valueOf(_isConstructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isConstructor = RoomHelpers.isConstructor(op);
+            return Boolean.valueOf(_isConstructor);
+          }
+        };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = ac.getOperations();
       final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          boolean _isDestructor = op.isDestructor();
-          return Boolean.valueOf(_isDestructor);
-        }
-      };
+          public Boolean apply(final StandardOperation op) {
+            boolean _isDestructor = op.isDestructor();
+            return Boolean.valueOf(_isDestructor);
+          }
+        };
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       ActorClass _actorClass = xpac.getActorClass();

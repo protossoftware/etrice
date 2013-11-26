@@ -130,13 +130,13 @@ public class NodeGen {
               {
                 EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
                 final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
-                  public Boolean apply(final ActorInstance ai) {
-                    MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-                    PhysicalThread _thread = _mappedThread.getThread();
-                    boolean _equals = Objects.equal(_thread, thread);
-                    return Boolean.valueOf(_equals);
-                  }
-                };
+                    public Boolean apply(final ActorInstance ai) {
+                      MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                      PhysicalThread _thread = _mappedThread.getThread();
+                      boolean _equals = Objects.equal(_thread, thread);
+                      return Boolean.valueOf(_equals);
+                    }
+                  };
                 final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
                 boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
                 boolean _not = (!_isEmpty);
@@ -275,11 +275,11 @@ public class NodeGen {
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
-        public Boolean apply(final PhysicalThread t) {
-          boolean _contains = usedThreads.contains(t);
-          return Boolean.valueOf(_contains);
-        }
-      };
+          public Boolean apply(final PhysicalThread t) {
+            boolean _contains = usedThreads.contains(t);
+            return Boolean.valueOf(_contains);
+          }
+        };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
@@ -786,11 +786,11 @@ public class NodeGen {
             ActorClass _actorClass = ai.getActorClass();
             EList<StandardOperation> _operations = _actorClass.getOperations();
             final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
-              public Boolean apply(final StandardOperation op) {
-                boolean _isDestructor = op.isDestructor();
-                return Boolean.valueOf(_isDestructor);
-              }
-            };
+                public Boolean apply(final StandardOperation op) {
+                  boolean _isDestructor = op.isDestructor();
+                  return Boolean.valueOf(_isDestructor);
+                }
+              };
             Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function_1);
             boolean _isEmpty = IterableExtensions.isEmpty(_filter);
             boolean _not = (!_isEmpty);
@@ -874,11 +874,11 @@ public class NodeGen {
             ActorClass _actorClass_3 = ai_1.getActorClass();
             EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
             final Function1<StandardOperation,Boolean> _function_2 = new Function1<StandardOperation,Boolean>() {
-              public Boolean apply(final StandardOperation op) {
-                boolean _isConstructor = RoomHelpers.isConstructor(op);
-                return Boolean.valueOf(_isConstructor);
-              }
-            };
+                public Boolean apply(final StandardOperation op) {
+                  boolean _isConstructor = RoomHelpers.isConstructor(op);
+                  return Boolean.valueOf(_isConstructor);
+                }
+              };
             Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_2);
             boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
             boolean _not_1 = (!_isEmpty_1);
@@ -1013,11 +1013,11 @@ public class NodeGen {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
         final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
-          public Boolean apply(final PhysicalThread t) {
-            boolean _contains = usedThreads.contains(t);
-            return Boolean.valueOf(_contains);
-          }
-        };
+            public Boolean apply(final PhysicalThread t) {
+              boolean _contains = usedThreads.contains(t);
+              return Boolean.valueOf(_contains);
+            }
+          };
         Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
         for(final PhysicalThread thread : _filter) {
           _builder.append("/* ");
@@ -1223,110 +1223,110 @@ public class NodeGen {
       final ArrayList<InterfaceItemInstance> replEventItems = _arrayList;
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance e) {
-          boolean _isReplicated = e.isReplicated();
-          return Boolean.valueOf(_isReplicated);
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance e) {
+            boolean _isReplicated = e.isReplicated();
+            return Boolean.valueOf(_isReplicated);
+          }
+        };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
       Iterables.<InterfaceItemInstance>addAll(replEventItems, _filter);
       final Function1<InterfaceItemInstance,Boolean> _function_1 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance e) {
-          EList<InterfaceItemInstance> _peers = e.getPeers();
-          boolean _isEmpty = _peers.isEmpty();
-          boolean _not = (!_isEmpty);
-          return Boolean.valueOf(_not);
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance e) {
+            EList<InterfaceItemInstance> _peers = e.getPeers();
+            boolean _isEmpty = _peers.isEmpty();
+            boolean _not = (!_isEmpty);
+            return Boolean.valueOf(_not);
+          }
+        };
       InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replEventItems, _function_1);
       final boolean haveReplSubItems = (!Objects.equal(_findFirst, null));
       final Function1<InterfaceItemInstance,Boolean> _function_2 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance i) {
-          InterfaceItem _interfaceItem = i.getInterfaceItem();
-          return Boolean.valueOf((_interfaceItem instanceof Port));
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof Port));
+          }
+        };
       final Iterable<InterfaceItemInstance> replEventPorts = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_2);
       final Function1<InterfaceItemInstance,Boolean> _function_3 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance i) {
-          InterfaceItem _interfaceItem = i.getInterfaceItem();
-          return Boolean.valueOf((_interfaceItem instanceof SPP));
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof SPP));
+          }
+        };
       final Iterable<InterfaceItemInstance> replEventSPPs = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_3);
       EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance e) {
-          boolean _isSimple = e.isSimple();
-          return Boolean.valueOf(_isSimple);
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance e) {
+            boolean _isSimple = e.isSimple();
+            return Boolean.valueOf(_isSimple);
+          }
+        };
       final Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_4);
       ArrayList<InterfaceItemInstance> _arrayList_1 = new ArrayList<InterfaceItemInstance>();
       final ArrayList<InterfaceItemInstance> simpleEventItems = _arrayList_1;
       final Function1<InterfaceItemInstance,Boolean> _function_5 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance p) {
-          ProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = _protocol.getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
-          return Boolean.valueOf(_equals);
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance p) {
+            ProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = _protocol.getCommType();
+            boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+            return Boolean.valueOf(_equals);
+          }
+        };
       Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_5);
       Iterables.<InterfaceItemInstance>addAll(simpleEventItems, _filter_1);
       final Function1<InterfaceItemInstance,Boolean> _function_6 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance i) {
-          InterfaceItem _interfaceItem = i.getInterfaceItem();
-          return Boolean.valueOf((_interfaceItem instanceof Port));
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof Port));
+          }
+        };
       final Iterable<InterfaceItemInstance> simpleEventPorts = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_6);
       final Function1<InterfaceItemInstance,Boolean> _function_7 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance i) {
-          InterfaceItem _interfaceItem = i.getInterfaceItem();
-          return Boolean.valueOf((_interfaceItem instanceof SAP));
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance i) {
+            InterfaceItem _interfaceItem = i.getInterfaceItem();
+            return Boolean.valueOf((_interfaceItem instanceof SAP));
+          }
+        };
       final Iterable<InterfaceItemInstance> simpleEventSAPs = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_7);
       final Function1<InterfaceItemInstance,Boolean> _function_8 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance p) {
-          ProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = _protocol.getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-          return Boolean.valueOf(_equals);
-        }
-      };
+          public Boolean apply(final InterfaceItemInstance p) {
+            ProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = _protocol.getCommType();
+            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+            return Boolean.valueOf(_equals);
+          }
+        };
       final Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_8);
       final Function1<InterfaceItemInstance,Boolean> _function_9 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance p) {
-          boolean _and = false;
-          if (!(p instanceof PortInstance)) {
-            _and = false;
-          } else {
-            Port _port = ((PortInstance) p).getPort();
-            boolean _isConjugated = _port.isConjugated();
-            boolean _not = (!_isConjugated);
-            _and = ((p instanceof PortInstance) && _not);
+          public Boolean apply(final InterfaceItemInstance p) {
+            boolean _and = false;
+            if (!(p instanceof PortInstance)) {
+              _and = false;
+            } else {
+              Port _port = ((PortInstance) p).getPort();
+              boolean _isConjugated = _port.isConjugated();
+              boolean _not = (!_isConjugated);
+              _and = ((p instanceof PortInstance) && _not);
+            }
+            return Boolean.valueOf(_and);
           }
-          return Boolean.valueOf(_and);
-        }
-      };
+        };
       final Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_9);
       final Function1<InterfaceItemInstance,Boolean> _function_10 = new Function1<InterfaceItemInstance,Boolean>() {
-        public Boolean apply(final InterfaceItemInstance p) {
-          boolean _and = false;
-          if (!(p instanceof PortInstance)) {
-            _and = false;
-          } else {
-            Port _port = ((PortInstance) p).getPort();
-            boolean _isConjugated = _port.isConjugated();
-            _and = ((p instanceof PortInstance) && _isConjugated);
+          public Boolean apply(final InterfaceItemInstance p) {
+            boolean _and = false;
+            if (!(p instanceof PortInstance)) {
+              _and = false;
+            } else {
+              Port _port = ((PortInstance) p).getPort();
+              boolean _isConjugated = _port.isConjugated();
+              _and = ((p instanceof PortInstance) && _isConjugated);
+            }
+            return Boolean.valueOf(_and);
           }
-          return Boolean.valueOf(_and);
-        }
-      };
+        };
       final Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_10);
-      HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance, Integer>();
+      HashMap<InterfaceItemInstance,Integer> _hashMap = new HashMap<InterfaceItemInstance,Integer>();
       final HashMap<InterfaceItemInstance,Integer> offsets = _hashMap;
       int offset = 0;
       for (final InterfaceItemInstance p : replEventItems) {
@@ -1389,13 +1389,13 @@ public class NodeGen {
           _builder.newLine();
           {
             final Function1<InterfaceItemInstance,Boolean> _function_11 = new Function1<InterfaceItemInstance,Boolean>() {
-              public Boolean apply(final InterfaceItemInstance e) {
-                EList<InterfaceItemInstance> _peers = e.getPeers();
-                boolean _isEmpty = _peers.isEmpty();
-                boolean _not = (!_isEmpty);
-                return Boolean.valueOf(_not);
-              }
-            };
+                public Boolean apply(final InterfaceItemInstance e) {
+                  EList<InterfaceItemInstance> _peers = e.getPeers();
+                  boolean _isEmpty = _peers.isEmpty();
+                  boolean _not = (!_isEmpty);
+                  return Boolean.valueOf(_not);
+                }
+              };
             Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_11);
             boolean _hasElements = false;
             for(final InterfaceItemInstance pi : _filter_2) {
@@ -1910,11 +1910,11 @@ public class NodeGen {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
         final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
-          public Boolean apply(final PhysicalThread t) {
-            boolean _contains = usedThreads.contains(t);
-            return Boolean.valueOf(_contains);
-          }
-        };
+            public Boolean apply(final PhysicalThread t) {
+              boolean _contains = usedThreads.contains(t);
+              return Boolean.valueOf(_contains);
+            }
+          };
         Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
         boolean _hasElements = false;
         for(final PhysicalThread thread : _filter) {
@@ -1925,51 +1925,51 @@ public class NodeGen {
           }
           EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
           final Function1<ActorInstance,Boolean> _function_1 = new Function1<ActorInstance,Boolean>() {
-            public Boolean apply(final ActorInstance ai) {
-              MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-              PhysicalThread _thread = _mappedThread.getThread();
-              boolean _equals = Objects.equal(_thread, thread);
-              return Boolean.valueOf(_equals);
-            }
-          };
+              public Boolean apply(final ActorInstance ai) {
+                MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                PhysicalThread _thread = _mappedThread.getThread();
+                boolean _equals = Objects.equal(_thread, thread);
+                return Boolean.valueOf(_equals);
+              }
+            };
           final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_1);
           _builder.newLineIfNotEmpty();
           final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
-            public Boolean apply(final ActorInstance ai) {
-              boolean _or = false;
-              ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.EVENT_DRIVEN);
-              if (_equals) {
-                _or = true;
-              } else {
-                ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
-                _or = (_equals || _equals_1);
+              public Boolean apply(final ActorInstance ai) {
+                boolean _or = false;
+                ActorClass _actorClass = ai.getActorClass();
+                ActorCommunicationType _commType = _actorClass.getCommType();
+                boolean _equals = Objects.equal(_commType, ActorCommunicationType.EVENT_DRIVEN);
+                if (_equals) {
+                  _or = true;
+                } else {
+                  ActorClass _actorClass_1 = ai.getActorClass();
+                  ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
+                  boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                  _or = (_equals || _equals_1);
+                }
+                return Boolean.valueOf(_or);
               }
-              return Boolean.valueOf(_or);
-            }
-          };
+            };
           final Iterable<ActorInstance> dispatchedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_2);
           _builder.newLineIfNotEmpty();
           final Function1<ActorInstance,Boolean> _function_3 = new Function1<ActorInstance,Boolean>() {
-            public Boolean apply(final ActorInstance ai) {
-              boolean _or = false;
-              ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
-              if (_equals) {
-                _or = true;
-              } else {
-                ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
-                _or = (_equals || _equals_1);
+              public Boolean apply(final ActorInstance ai) {
+                boolean _or = false;
+                ActorClass _actorClass = ai.getActorClass();
+                ActorCommunicationType _commType = _actorClass.getCommType();
+                boolean _equals = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
+                if (_equals) {
+                  _or = true;
+                } else {
+                  ActorClass _actorClass_1 = ai.getActorClass();
+                  ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
+                  boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                  _or = (_equals || _equals_1);
+                }
+                return Boolean.valueOf(_or);
               }
-              return Boolean.valueOf(_or);
-            }
-          };
+            };
           final Iterable<ActorInstance> executedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_3);
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -2092,13 +2092,13 @@ public class NodeGen {
               {
                 EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
                 final Function1<InterfaceItemInstance,Boolean> _function_4 = new Function1<InterfaceItemInstance,Boolean>() {
-                  public Boolean apply(final InterfaceItemInstance p) {
-                    ProtocolClass _protocol = p.getProtocol();
-                    CommunicationType _commType = _protocol.getCommType();
-                    boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
-                    return Boolean.valueOf(_equals);
-                  }
-                };
+                    public Boolean apply(final InterfaceItemInstance p) {
+                      ProtocolClass _protocol = p.getProtocol();
+                      CommunicationType _commType = _protocol.getCommType();
+                      boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
+                      return Boolean.valueOf(_equals);
+                    }
+                  };
                 Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function_4);
                 for(final InterfaceItemInstance pi : _filter_1) {
                   {
