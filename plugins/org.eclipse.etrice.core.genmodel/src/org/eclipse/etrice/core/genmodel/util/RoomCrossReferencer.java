@@ -92,6 +92,19 @@ public class RoomCrossReferencer {
 			getReferencedClassesAndModels(dataClasses, enumClasses, protocolClasses,
 					actorClasses, models);
 		}
+		else if (rc instanceof ProtocolClass) {
+			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
+			HashSet<EnumerationType> enumClasses = new HashSet<EnumerationType>();
+			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
+			HashSet<RoomModel> models = new HashSet<RoomModel>();
+			
+			protocolClasses.add((ProtocolClass) rc);
+			
+			getReferencedClassesAndModels(dataClasses, enumClasses, protocolClasses,
+					actorClasses, models);
+
+			protocolClasses.remove((ProtocolClass) rc);
+		}
 		return protocolClasses;
 	}
 

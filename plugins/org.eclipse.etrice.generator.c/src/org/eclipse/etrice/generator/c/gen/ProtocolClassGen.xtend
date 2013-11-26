@@ -70,6 +70,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«pc.userCode(1)»
 		
+		«FOR protocolClass : root.getReferencedProtocolClasses(pc)»
+			#include «protocolClass.includePath»
+		«ENDFOR»
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include «dataClass.includePath»
 		«ENDFOR»

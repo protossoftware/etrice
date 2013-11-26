@@ -128,11 +128,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
+      EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(pc);
+      for(final ProtocolClass protocolClass : _referencedProtocolClasses) {
+        _builder.append("#include ");
+        String _includePath = this._cExtensions.getIncludePath(protocolClass);
+        _builder.append(_includePath, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
       EList<DataClass> _referencedDataClasses = root.getReferencedDataClasses(pc);
       for(final DataClass dataClass : _referencedDataClasses) {
         _builder.append("#include ");
-        String _includePath = this._cExtensions.getIncludePath(dataClass);
-        _builder.append(_includePath, "");
+        String _includePath_1 = this._cExtensions.getIncludePath(dataClass);
+        _builder.append(_includePath_1, "");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -140,8 +149,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       EList<EnumerationType> _referencedEnumClasses = root.getReferencedEnumClasses(pc);
       for(final EnumerationType enumClass : _referencedEnumClasses) {
         _builder.append("#include ");
-        String _includePath_1 = this._cExtensions.getIncludePath(enumClass);
-        _builder.append(_includePath_1, "");
+        String _includePath_2 = this._cExtensions.getIncludePath(enumClass);
+        _builder.append(_includePath_2, "");
         _builder.newLineIfNotEmpty();
       }
     }
