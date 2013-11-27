@@ -94,8 +94,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
 			#error "synchronoue protocols not implemented yet"
 		«ENDIF»
-«««			«portClass(pc, false)»
-«««			«portClass(pc, true)»
 
 		«IF Main::settings.generateMSCInstrumentation»
 			/*--------------------- debug helpers */
@@ -156,7 +154,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				typedef struct «portClassName»_var «portClassName»_var; 
 				struct «portClassName»_var {
 					«pc.getPortClass(conj).attributes.attributes»
-					};
+				};
 				«FOR a:pc.getPortClass(conj).attributes»
 					«IF a.defaultValueLiteral!=null»
 						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
@@ -192,21 +190,40 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def private genDataDrivenPortHeaders(ProtocolClass pc) {
 		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
-		
+		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.enumeration)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		/*
+		 * MSC code is generated only for the first enumeration of the messages of this protocol
+		 */
 		'''
 			/* data driven send port (conjugated) */
-			typedef struct {
+			typedef struct «pc.getPortClassName(true)» {
 				«FOR msg : sentMsgs»
 					«var typeName = msg.data.refType.type.typeName»
 					«var refp = if (msg.data.refType.ref) "*" else ""»
 					«typeName»«refp» «msg.name»;
 				«ENDFOR»
+				«IF usesMSC»
+					#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+						const char* instName;
+						const char** peerNames;
+					#endif
+				«ENDIF»
 			}
 			«pc.getPortClassName(true)»;
 			
 			/* data driven receive port (regular) */
-			typedef struct {
+			typedef struct «pc.getPortClassName(false)» {
 				const «pc.getPortClassName(true)»* peer;
+				«IF usesMSC»
+					#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+						const char* instName;
+						«val msg = enumMsgs.get(0)»
+						«var typeName = msg.data.refType.type.typeName»
+						«var refp = if (msg.data.refType.ref) "*" else ""»
+						«typeName»«refp» «msg.name»;
+					#endif
+				«ENDIF»
 			}
 			«pc.getPortClassName(false)»;
 			
@@ -221,17 +238,40 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDFOR»
 		'''
 	}
+	
 	def private genDataDrivenPortSources(ProtocolClass pc) {
 		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
+		val enumMsgs = messages.filter(m|m.data.refType.type.enumeration)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		/*
+		 * MSC code is generated only for the first enumeration of the messages of this protocol
+		 */
 	'''
 			«FOR message : messages»
 				«var typeName =message.data.refType.type.typeName»
 				«var refp = if (!(message.data.refType.type.enumerationOrPrimitive)) "*" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
+					«IF usesMSC && message==enumMsgs.get(0)»
+						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+							{
+								const char** peerName;
+								for (peerName=self->peerNames; *peerName!=NULL; ++peerName)
+									ET_MSC_LOGGER_ASYNC_OUT(self->instName, «message.data.refType.type.name»_getLiteralName(data), *peerName)
+							}
+						#endif
+					«ENDIF»
 					self->«message.name» = «refp»data;
 				}
 				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)» {
+					«IF usesMSC && message==enumMsgs.get(0)»
+						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+							if (self->peer->«message.name»!=self->«message.name») {
+								ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, «message.data.refType.type.name»_getLiteralName(self->peer->«message.name»), self->instName)
+								((«pc.getPortClassName(false)»*)self)->«message.name» = self->peer->«message.name»;
+							}
+						#endif
+					«ENDIF»
 					return self->peer->«message.name»;
 				}
 				

@@ -357,7 +357,7 @@ class CExtensions implements ILanguageExtension {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
 		
-		if (type.primitiveType!=null)
+		if (type.primitiveType==null)
 			Long.toString(literal.getLiteralValue())
 		else
 			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"

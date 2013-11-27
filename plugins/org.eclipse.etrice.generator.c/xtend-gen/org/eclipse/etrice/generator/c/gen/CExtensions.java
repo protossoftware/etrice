@@ -810,8 +810,8 @@ public class CExtensions implements ILanguageExtension {
       final String cast = this.getTargetType(type);
       String _xifexpression = null;
       PrimitiveType _primitiveType = type.getPrimitiveType();
-      boolean _notEquals = (!Objects.equal(_primitiveType, null));
-      if (_notEquals) {
+      boolean _equals = Objects.equal(_primitiveType, null);
+      if (_equals) {
         long _literalValue = literal.getLiteralValue();
         String _string = Long.toString(_literalValue);
         _xifexpression = _string;

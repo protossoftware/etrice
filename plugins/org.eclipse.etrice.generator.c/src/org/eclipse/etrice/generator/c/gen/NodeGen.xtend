@@ -18,6 +18,7 @@ import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.HashSet
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
@@ -34,19 +35,20 @@ import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.base.IntelligentSeparator
+import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.c.Main
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
 
 @Singleton
 class NodeGen {
 	
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
+	@Inject extension TypeHelpers
 	@Inject extension ProcedureHelpers helpers
 	
 	@Inject IGeneratorFileIo fileIO
@@ -440,7 +442,12 @@ class NodeGen {
 		val haveConstData = !simpleEventItems.empty || !recvPorts.empty || !replEventItems.empty
 				|| Main::settings.generateMSCInstrumentation
 		val sep = new IntelligentSeparator(",");
+		
+		val const = if (Main::settings.generateMSCInstrumentation) "/*const*/" else "const"
 	'''
+		«IF Main::settings.generateMSCInstrumentation»
+			«genPeerPortArrays(root, ai)»
+		«ENDIF»
 		«IF haveReplSubItems»
 			static const etReplSubPort «replSubPortsArray»[«offset»] = {
 				/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
@@ -450,7 +457,7 @@ class NodeGen {
 			};
 		«ENDIF»
 		«IF haveConstData»
-			static const «ai.actorClass.name»_const «instName»_const = {
+			static «const» «ai.actorClass.name»_const «instName»_const = {
 				«IF Main::settings.generateMSCInstrumentation»
 					«sep»"«ai.path»"
 					
@@ -498,6 +505,26 @@ class NodeGen {
 			/* state and history are initialized in init function */
 		};
 	'''}
+	
+	private def genPeerPortArrays(Root root, ActorInstance ai) {
+		val simplePorts = ai.orderedIfItemInstances.filter(e|e.simple && e instanceof PortInstance).map(inst|inst as PortInstance)
+		val sendPorts = simplePorts.filter(p|p.port.conjugated && p.protocol.commType==CommunicationType::DATA_DRIVEN)
+		val enumPortsWithPeers = sendPorts.filter(p|!p.peers.empty && !p.port.outgoing.filter(m|m.data.refType.type.enumeration).empty)
+		'''
+		«IF !enumPortsWithPeers.empty»
+			#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+			«FOR pi: enumPortsWithPeers»
+				static const char* «pi.path.pathName»_peers[«pi.peers.size+1»] = {
+					«FOR peer: pi.peers»
+						"«(peer.eContainer as ActorInstance).path»",
+					«ENDFOR»
+					NULL
+				};
+			«ENDFOR»
+			#endif
+		«ENDIF»
+		'''
+	}
 		
 	def private String genPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		val objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
@@ -519,12 +546,22 @@ class NodeGen {
 	
 	def private genSendPortInitializer(InterfaceItemInstance pi) {
 		val pc = (pi as PortInstance).port.protocol as ProtocolClass
+		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
+		val enumMsgs = messages.filter(m|m.data.refType.type.enumeration)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		val instName = (pi.eContainer as ActorInstance).path
 		
 		'''
 			{
 				«FOR m : pc.incomingMessages SEPARATOR ","»
 					«m.data.refType.type.defaultValue»
 				«ENDFOR»
+				«IF usesMSC»
+					#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+						, "«instName»",
+						«pi.path.pathName»_peers
+					#endif
+				«ENDIF»
 			} /* send port «pi.name» */
 		'''
 	}
@@ -540,19 +577,25 @@ class NodeGen {
 	
 	
 	def private String genRecvPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
+		var sentMsgs = pi.interfaceItem.incoming.filter(m|m.data!=null)
+		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.enumeration)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		val enumVal = if (usesMSC) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n, \""+ai.path+"\", "+enumMsgs.get(0).data.refType.type.defaultValue+"\n#endif\n"
+					else ""
+		
 		if (pi.peers.empty)
-			return "{NULL}"
+			return "{NULL"+enumVal+"}"
 
 		var peer = pi.peers.get(0)
 		var peerInst = pi.peers.get(0).eContainer() as ActorInstance
 		var instName = peerInst.path.pathName
 			
-		"{&"+instName+"."+peer.name+"}"
+		"{&"+instName+"."+peer.name+enumVal+"}"
 	}
 	
 	def private String genReplSubPortInitializers(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var result = ""
-		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
+		val myInst = if (Main::settings.generateMSCInstrumentation) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\""+(pi.eContainer as ActorInstance).path+"\",\n#endif\n"
 			else ""
 		
 		for (p: pi.peers) {

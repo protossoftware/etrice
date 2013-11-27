@@ -42,6 +42,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -352,7 +353,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               CharSequence _attributes_2 = this._procedureHelpers.attributes(_attributes_1);
               _builder.append(_attributes_2, "	");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
               _builder.append("};");
               _builder.newLine();
               {
@@ -508,11 +508,35 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           }
         };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isEnumeration = ProtocolClassGen.this._typeHelpers.isEnumeration(_type);
+          return Boolean.valueOf(_isEnumeration);
+        }
+      };
+      final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
+      if (!_generateMSCInstrumentation) {
+        _and = false;
+      } else {
+        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
+        boolean _not = (!_isEmpty);
+        _and = (_generateMSCInstrumentation && _not);
+      }
+      final boolean usesMSC = _and;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/* data driven send port (conjugated) */");
       _builder.newLine();
-      _builder.append("typedef struct {");
-      _builder.newLine();
+      _builder.append("typedef struct ");
+      String _portClassName = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
       {
         for(final Message msg : sentMsgs) {
           _builder.append("\t");
@@ -543,86 +567,154 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
+      {
+        if (usesMSC) {
+          _builder.append("\t");
+          _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("const char* instName;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("const char** peerNames;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("#endif");
+          _builder.newLine();
+        }
+      }
       _builder.append("}");
       _builder.newLine();
-      String _portClassName = this._roomExtensions.getPortClassName(pc, true);
-      _builder.append(_portClassName, "");
+      String _portClassName_1 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_1, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/* data driven receive port (regular) */");
       _builder.newLine();
-      _builder.append("typedef struct {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("const ");
-      String _portClassName_1 = this._roomExtensions.getPortClassName(pc, true);
-      _builder.append(_portClassName_1, "	");
-      _builder.append("* peer;");
-      _builder.newLineIfNotEmpty();
-      _builder.append("}");
-      _builder.newLine();
+      _builder.append("typedef struct ");
       String _portClassName_2 = this._roomExtensions.getPortClassName(pc, false);
       _builder.append(_portClassName_2, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("const ");
+      String _portClassName_3 = this._roomExtensions.getPortClassName(pc, true);
+      _builder.append(_portClassName_3, "	");
+      _builder.append("* peer;");
+      _builder.newLineIfNotEmpty();
+      {
+        if (usesMSC) {
+          _builder.append("\t");
+          _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("const char* instName;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          final Message msg_1 = ((Message[])Conversions.unwrapArray(enumMsgs, Message.class))[0];
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          VarDecl _data_2 = msg_1.getData();
+          RefableType _refType_2 = _data_2.getRefType();
+          DataType _type_1 = _refType_2.getType();
+          String typeName_1 = this._typeHelpers.typeName(_type_1);
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          String _xifexpression_1 = null;
+          VarDecl _data_3 = msg_1.getData();
+          RefableType _refType_3 = _data_3.getRefType();
+          boolean _isRef_1 = _refType_3.isRef();
+          if (_isRef_1) {
+            _xifexpression_1 = "*";
+          } else {
+            _xifexpression_1 = "";
+          }
+          String refp_1 = _xifexpression_1;
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append(typeName_1, "		");
+          _builder.append(refp_1, "		");
+          _builder.append(" ");
+          String _name_1 = msg_1.getName();
+          _builder.append(_name_1, "		");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("#endif");
+          _builder.newLine();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      String _portClassName_4 = this._roomExtensions.getPortClassName(pc, false);
+      _builder.append(_portClassName_4, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
         for(final Message message : sentMsgs) {
-          VarDecl _data_2 = message.getData();
-          boolean hasData = (!Objects.equal(_data_2, null));
-          _builder.newLineIfNotEmpty();
-          String _xifexpression_1 = null;
-          if (hasData) {
-            VarDecl _data_3 = message.getData();
-            RefableType _refType_2 = _data_3.getRefType();
-            DataType _type_1 = _refType_2.getType();
-            String _typeName = this._typeHelpers.typeName(_type_1);
-            _xifexpression_1 = _typeName;
-          } else {
-            _xifexpression_1 = "";
-          }
-          String typeName_1 = _xifexpression_1;
+          VarDecl _data_4 = message.getData();
+          boolean hasData = (!Objects.equal(_data_4, null));
           _builder.newLineIfNotEmpty();
           String _xifexpression_2 = null;
-          boolean _and = false;
-          if (!hasData) {
-            _and = false;
-          } else {
-            VarDecl _data_4 = message.getData();
-            RefableType _refType_3 = _data_4.getRefType();
-            DataType _type_2 = _refType_3.getType();
-            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
-            boolean _not = (!_isEnumerationOrPrimitive);
-            _and = (hasData && _not);
-          }
-          if (_and) {
-            _xifexpression_2 = "*";
+          if (hasData) {
+            VarDecl _data_5 = message.getData();
+            RefableType _refType_4 = _data_5.getRefType();
+            DataType _type_2 = _refType_4.getType();
+            String _typeName = this._typeHelpers.typeName(_type_2);
+            _xifexpression_2 = _typeName;
           } else {
             _xifexpression_2 = "";
           }
-          String refp_1 = _xifexpression_2;
+          String typeName_2 = _xifexpression_2;
           _builder.newLineIfNotEmpty();
           String _xifexpression_3 = null;
-          if (hasData) {
-            String _plus = (", " + typeName_1);
-            String _plus_1 = (_plus + refp_1);
-            String _plus_2 = (_plus_1 + " data");
-            _xifexpression_3 = _plus_2;
+          boolean _and_1 = false;
+          if (!hasData) {
+            _and_1 = false;
+          } else {
+            VarDecl _data_6 = message.getData();
+            RefableType _refType_5 = _data_6.getRefType();
+            DataType _type_3 = _refType_5.getType();
+            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_3);
+            boolean _not_1 = (!_isEnumerationOrPrimitive);
+            _and_1 = (hasData && _not_1);
+          }
+          if (_and_1) {
+            _xifexpression_3 = "*";
           } else {
             _xifexpression_3 = "";
           }
-          String data = _xifexpression_3;
+          String refp_2 = _xifexpression_3;
           _builder.newLineIfNotEmpty();
-          String _portClassName_3 = this._roomExtensions.getPortClassName(pc, true);
-          String _name_1 = message.getName();
-          String _messageSetterSignature = this.messageSetterSignature(_portClassName_3, _name_1, data);
+          String _xifexpression_4 = null;
+          if (hasData) {
+            String _plus = (", " + typeName_2);
+            String _plus_1 = (_plus + refp_2);
+            String _plus_2 = (_plus_1 + " data");
+            _xifexpression_4 = _plus_2;
+          } else {
+            _xifexpression_4 = "";
+          }
+          String data = _xifexpression_4;
+          _builder.newLineIfNotEmpty();
+          String _portClassName_5 = this._roomExtensions.getPortClassName(pc, true);
+          String _name_2 = message.getName();
+          String _messageSetterSignature = this.messageSetterSignature(_portClassName_5, _name_2, data);
           _builder.append(_messageSetterSignature, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
-          String _portClassName_4 = this._roomExtensions.getPortClassName(pc, false);
-          String _name_2 = message.getName();
-          String _messageGetterSignature = this.messageGetterSignature(_portClassName_4, _name_2, typeName_1);
+          String _portClassName_6 = this._roomExtensions.getPortClassName(pc, false);
+          String _name_3 = message.getName();
+          String _messageGetterSignature = this.messageGetterSignature(_portClassName_6, _name_3, typeName_2);
           _builder.append(_messageGetterSignature, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
@@ -646,6 +738,27 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           }
         };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isEnumeration = ProtocolClassGen.this._typeHelpers.isEnumeration(_type);
+          return Boolean.valueOf(_isEnumeration);
+        }
+      };
+      final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
+      if (!_generateMSCInstrumentation) {
+        _and = false;
+      } else {
+        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
+        boolean _not = (!_isEmpty);
+        _and = (_generateMSCInstrumentation && _not);
+      }
+      final boolean usesMSC = _and;
       StringConcatenation _builder = new StringConcatenation();
       {
         for(final Message message : messages) {
@@ -659,8 +772,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           RefableType _refType_1 = _data_1.getRefType();
           DataType _type_1 = _refType_1.getType();
           boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
-          boolean _not = (!_isEnumerationOrPrimitive);
-          if (_not) {
+          boolean _not_1 = (!_isEnumerationOrPrimitive);
+          if (_not_1) {
             _xifexpression = "*";
           } else {
             _xifexpression = "";
@@ -677,10 +790,54 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(_messageSetterSignature, "");
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
+          {
+            boolean _and_1 = false;
+            if (!usesMSC) {
+              _and_1 = false;
+            } else {
+              Object _get = ((Object[])Conversions.unwrapArray(enumMsgs, Object.class))[0];
+              boolean _equals = Objects.equal(message, _get);
+              _and_1 = (usesMSC && _equals);
+            }
+            if (_and_1) {
+              _builder.append("\t");
+              _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("{");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("const char** peerName;");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("for (peerName=self->peerNames; *peerName!=NULL; ++peerName)");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t\t");
+              _builder.append("ET_MSC_LOGGER_ASYNC_OUT(self->instName, ");
+              VarDecl _data_2 = message.getData();
+              RefableType _refType_2 = _data_2.getRefType();
+              DataType _type_2 = _refType_2.getType();
+              String _name_1 = _type_2.getName();
+              _builder.append(_name_1, "				");
+              _builder.append("_getLiteralName(data), *peerName)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("#endif");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("self->");
-          String _name_1 = message.getName();
-          _builder.append(_name_1, "	");
+          String _name_2 = message.getName();
+          _builder.append(_name_2, "	");
           _builder.append(" = ");
           _builder.append(refp, "	");
           _builder.append("data;");
@@ -688,15 +845,73 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("}");
           _builder.newLine();
           String _portClassName_1 = this._roomExtensions.getPortClassName(pc, false);
-          String _name_2 = message.getName();
-          String _messageGetterSignature = this.messageGetterSignature(_portClassName_1, _name_2, typeName);
+          String _name_3 = message.getName();
+          String _messageGetterSignature = this.messageGetterSignature(_portClassName_1, _name_3, typeName);
           _builder.append(_messageGetterSignature, "");
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
+          {
+            boolean _and_2 = false;
+            if (!usesMSC) {
+              _and_2 = false;
+            } else {
+              Object _get_1 = ((Object[])Conversions.unwrapArray(enumMsgs, Object.class))[0];
+              boolean _equals_1 = Objects.equal(message, _get_1);
+              _and_2 = (usesMSC && _equals_1);
+            }
+            if (_and_2) {
+              _builder.append("\t");
+              _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("if (self->peer->");
+              String _name_4 = message.getName();
+              _builder.append(_name_4, "		");
+              _builder.append("!=self->");
+              String _name_5 = message.getName();
+              _builder.append(_name_5, "		");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, ");
+              VarDecl _data_3 = message.getData();
+              RefableType _refType_3 = _data_3.getRefType();
+              DataType _type_3 = _refType_3.getType();
+              String _name_6 = _type_3.getName();
+              _builder.append(_name_6, "			");
+              _builder.append("_getLiteralName(self->peer->");
+              String _name_7 = message.getName();
+              _builder.append(_name_7, "			");
+              _builder.append("), self->instName)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("((");
+              String _portClassName_2 = this._roomExtensions.getPortClassName(pc, false);
+              _builder.append(_portClassName_2, "			");
+              _builder.append("*)self)->");
+              String _name_8 = message.getName();
+              _builder.append(_name_8, "			");
+              _builder.append(" = self->peer->");
+              String _name_9 = message.getName();
+              _builder.append(_name_9, "			");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("#endif");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("return self->peer->");
-          String _name_3 = message.getName();
-          _builder.append(_name_3, "	");
+          String _name_10 = message.getName();
+          _builder.append(_name_10, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           _builder.append("}");

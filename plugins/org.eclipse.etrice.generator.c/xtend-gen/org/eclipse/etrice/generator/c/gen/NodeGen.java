@@ -66,7 +66,9 @@ import org.eclipse.etrice.generator.c.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -83,6 +85,10 @@ public class NodeGen {
   @Inject
   @Extension
   private RoomExtensions _roomExtensions;
+  
+  @Inject
+  @Extension
+  private TypeHelpers _typeHelpers;
   
   @Inject
   @Extension
@@ -1375,7 +1381,25 @@ public class NodeGen {
       final boolean haveConstData = _or;
       IntelligentSeparator _intelligentSeparator = new IntelligentSeparator(",");
       final IntelligentSeparator sep = _intelligentSeparator;
+      String _xifexpression_1 = null;
+      GlobalGeneratorSettings _settings_1 = Main.getSettings();
+      boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
+      if (_generateMSCInstrumentation_1) {
+        _xifexpression_1 = "/*const*/";
+      } else {
+        _xifexpression_1 = "const";
+      }
+      final String const_ = _xifexpression_1;
       StringConcatenation _builder = new StringConcatenation();
+      {
+        GlobalGeneratorSettings _settings_2 = Main.getSettings();
+        boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
+        if (_generateMSCInstrumentation_2) {
+          CharSequence _genPeerPortArrays = this.genPeerPortArrays(root, ai);
+          _builder.append(_genPeerPortArrays, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       {
         if (haveReplSubItems) {
           _builder.append("static const etReplSubPort ");
@@ -1416,7 +1440,9 @@ public class NodeGen {
       }
       {
         if (haveConstData) {
-          _builder.append("static const ");
+          _builder.append("static ");
+          _builder.append(const_, "");
+          _builder.append(" ");
           ActorClass _actorClass = ai.getActorClass();
           String _name = _actorClass.getName();
           _builder.append(_name, "");
@@ -1425,9 +1451,9 @@ public class NodeGen {
           _builder.append("_const = {");
           _builder.newLineIfNotEmpty();
           {
-            GlobalGeneratorSettings _settings_1 = Main.getSettings();
-            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-            if (_generateMSCInstrumentation_1) {
+            GlobalGeneratorSettings _settings_3 = Main.getSettings();
+            boolean _generateMSCInstrumentation_3 = _settings_3.generateMSCInstrumentation();
+            if (_generateMSCInstrumentation_3) {
               _builder.append("\t");
               _builder.append(sep, "	");
               _builder.append("\"");
@@ -1584,6 +1610,123 @@ public class NodeGen {
     return _xblockexpression;
   }
   
+  private CharSequence genPeerPortArrays(final Root root, final ActorInstance ai) {
+    CharSequence _xblockexpression = null;
+    {
+      EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
+      final Function1<InterfaceItemInstance,Boolean> _function = new Function1<InterfaceItemInstance,Boolean>() {
+        public Boolean apply(final InterfaceItemInstance e) {
+          boolean _and = false;
+          boolean _isSimple = e.isSimple();
+          if (!_isSimple) {
+            _and = false;
+          } else {
+            _and = (_isSimple && (e instanceof PortInstance));
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
+      final Function1<InterfaceItemInstance,PortInstance> _function_1 = new Function1<InterfaceItemInstance,PortInstance>() {
+        public PortInstance apply(final InterfaceItemInstance inst) {
+          return ((PortInstance) inst);
+        }
+      };
+      final Iterable<PortInstance> simplePorts = IterableExtensions.<InterfaceItemInstance, PortInstance>map(_filter, _function_1);
+      final Function1<PortInstance,Boolean> _function_2 = new Function1<PortInstance,Boolean>() {
+        public Boolean apply(final PortInstance p) {
+          boolean _and = false;
+          Port _port = p.getPort();
+          boolean _isConjugated = _port.isConjugated();
+          if (!_isConjugated) {
+            _and = false;
+          } else {
+            ProtocolClass _protocol = p.getProtocol();
+            CommunicationType _commType = _protocol.getCommType();
+            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+            _and = (_isConjugated && _equals);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final Iterable<PortInstance> sendPorts = IterableExtensions.<PortInstance>filter(simplePorts, _function_2);
+      final Function1<PortInstance,Boolean> _function_3 = new Function1<PortInstance,Boolean>() {
+        public Boolean apply(final PortInstance p) {
+          boolean _and = false;
+          EList<InterfaceItemInstance> _peers = p.getPeers();
+          boolean _isEmpty = _peers.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (!_not) {
+            _and = false;
+          } else {
+            Port _port = p.getPort();
+            List<Message> _outgoing = RoomHelpers.getOutgoing(_port);
+            final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+              public Boolean apply(final Message m) {
+                VarDecl _data = m.getData();
+                RefableType _refType = _data.getRefType();
+                DataType _type = _refType.getType();
+                boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
+                return Boolean.valueOf(_isEnumeration);
+              }
+            };
+            Iterable<Message> _filter = IterableExtensions.<Message>filter(_outgoing, _function);
+            boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
+            boolean _not_1 = (!_isEmpty_1);
+            _and = (_not && _not_1);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final Iterable<PortInstance> enumPortsWithPeers = IterableExtensions.<PortInstance>filter(sendPorts, _function_3);
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isEmpty = IterableExtensions.isEmpty(enumPortsWithPeers);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+          _builder.newLine();
+          {
+            for(final PortInstance pi : enumPortsWithPeers) {
+              _builder.append("static const char* ");
+              String _path = pi.getPath();
+              String _pathName = this._roomExtensions.getPathName(_path);
+              _builder.append(_pathName, "");
+              _builder.append("_peers[");
+              EList<InterfaceItemInstance> _peers = pi.getPeers();
+              int _size = _peers.size();
+              int _plus = (_size + 1);
+              _builder.append(_plus, "");
+              _builder.append("] = {");
+              _builder.newLineIfNotEmpty();
+              {
+                EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+                for(final InterfaceItemInstance peer : _peers_1) {
+                  _builder.append("\t");
+                  _builder.append("\"");
+                  EObject _eContainer = peer.eContainer();
+                  String _path_1 = ((ActorInstance) _eContainer).getPath();
+                  _builder.append(_path_1, "	");
+                  _builder.append("\",");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("\t");
+              _builder.append("NULL");
+              _builder.newLine();
+              _builder.append("};");
+              _builder.newLine();
+            }
+          }
+          _builder.append("#endif");
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = (_builder);
+    }
+    return _xblockexpression;
+  }
+  
   private String genPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String _xblockexpression = null;
     {
@@ -1695,6 +1838,38 @@ public class NodeGen {
       Port _port = ((PortInstance) pi).getPort();
       GeneralProtocolClass _protocol = _port.getProtocol();
       final ProtocolClass pc = ((ProtocolClass) _protocol);
+      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
+      Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
+      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
+          return Boolean.valueOf(_isEnumeration);
+        }
+      };
+      final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
+      if (!_generateMSCInstrumentation) {
+        _and = false;
+      } else {
+        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
+        boolean _not = (!_isEmpty);
+        _and = (_generateMSCInstrumentation && _not);
+      }
+      final boolean usesMSC = _and;
+      EObject _eContainer = pi.eContainer();
+      final String instName = ((ActorInstance) _eContainer).getPath();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
       _builder.newLine();
@@ -1714,6 +1889,29 @@ public class NodeGen {
           String _defaultValue = this._cExtensions.defaultValue(_type);
           _builder.append(_defaultValue, "	");
           _builder.newLineIfNotEmpty();
+        }
+      }
+      {
+        if (usesMSC) {
+          _builder.append("\t");
+          _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append(", \"");
+          _builder.append(instName, "		");
+          _builder.append("\",");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("\t");
+          String _path = pi.getPath();
+          String _pathName = this._roomExtensions.getPathName(_path);
+          _builder.append(_pathName, "		");
+          _builder.append("_peers");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("#endif");
+          _builder.newLine();
         }
       }
       _builder.append("} /* send port ");
@@ -1752,25 +1950,75 @@ public class NodeGen {
   private String genRecvPortInitializer(final Root root, final ActorInstance ai, final InterfaceItemInstance pi) {
     String _xblockexpression = null;
     {
+      InterfaceItem _interfaceItem = pi.getInterfaceItem();
+      List<Message> _incoming = RoomHelpers.getIncoming(_interfaceItem);
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
+      Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_incoming, _function);
+      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
+          return Boolean.valueOf(_isEnumeration);
+        }
+      };
+      final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
+      if (!_generateMSCInstrumentation) {
+        _and = false;
+      } else {
+        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
+        boolean _not = (!_isEmpty);
+        _and = (_generateMSCInstrumentation && _not);
+      }
+      final boolean usesMSC = _and;
+      String _xifexpression = null;
+      if (usesMSC) {
+        String _path = ai.getPath();
+        String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n, \"" + _path);
+        String _plus_1 = (_plus + "\", ");
+        Message _get = ((Message[])Conversions.unwrapArray(enumMsgs, Message.class))[0];
+        VarDecl _data = _get.getData();
+        RefableType _refType = _data.getRefType();
+        DataType _type = _refType.getType();
+        String _defaultValue = this._cExtensions.defaultValue(_type);
+        String _plus_2 = (_plus_1 + _defaultValue);
+        String _plus_3 = (_plus_2 + "\n#endif\n");
+        _xifexpression = _plus_3;
+      } else {
+        _xifexpression = "";
+      }
+      final String enumVal = _xifexpression;
       EList<InterfaceItemInstance> _peers = pi.getPeers();
-      boolean _isEmpty = _peers.isEmpty();
-      if (_isEmpty) {
-        return "{NULL}";
+      boolean _isEmpty_1 = _peers.isEmpty();
+      if (_isEmpty_1) {
+        String _plus_4 = ("{NULL" + enumVal);
+        return (_plus_4 + "}");
       }
       EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
       InterfaceItemInstance peer = _peers_1.get(0);
       EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-      InterfaceItemInstance _get = _peers_2.get(0);
-      EObject _eContainer = _get.eContainer();
+      InterfaceItemInstance _get_1 = _peers_2.get(0);
+      EObject _eContainer = _get_1.eContainer();
       ActorInstance peerInst = ((ActorInstance) _eContainer);
-      String _path = peerInst.getPath();
-      String instName = this._roomExtensions.getPathName(_path);
-      String _plus = ("{&" + instName);
-      String _plus_1 = (_plus + ".");
+      String _path_1 = peerInst.getPath();
+      String instName = this._roomExtensions.getPathName(_path_1);
+      String _plus_5 = ("{&" + instName);
+      String _plus_6 = (_plus_5 + ".");
       String _name = peer.getName();
-      String _plus_2 = (_plus_1 + _name);
-      String _plus_3 = (_plus_2 + "}");
-      _xblockexpression = (_plus_3);
+      String _plus_7 = (_plus_6 + _name);
+      String _plus_8 = (_plus_7 + enumVal);
+      String _plus_9 = (_plus_8 + "}");
+      _xblockexpression = (_plus_9);
     }
     return _xblockexpression;
   }
@@ -1783,8 +2031,8 @@ public class NodeGen {
     if (_generateMSCInstrumentation) {
       EObject _eContainer = pi.eContainer();
       String _path = ((ActorInstance) _eContainer).getPath();
-      String _plus = (",\"" + _path);
-      String _plus_1 = (_plus + "\",");
+      String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
+      String _plus_1 = (_plus + "\",\n#endif\n");
       _xifexpression = _plus_1;
     } else {
       _xifexpression = "";
