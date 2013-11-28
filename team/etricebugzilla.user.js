@@ -52,7 +52,7 @@
 // --- Configurable options --------------------------------------------
 
 // Add as many milestones as you like. First will be used for "Fixed (in <TM>)" link:
-var target_milestones= ["0.3.0", "0.4.0", "0.4.0M1", "0.4.0M2"];
+var target_milestones= ["0.4.0M2", "0.4.0M3", "0.4.0"];
 
 // Add "<name>", "<email>" pairs for people you frequently CC:
 var ccs= [
@@ -68,7 +68,8 @@ var assignees= ccs;
 
 // Add "<name>", "<string>" pairs for template strings that you frequently insert into the comment field (e.g. repo URLs):
 var commentTemplates= [
-"Fixed with ", "Done with "
+"Fixed", "Fixed with commit ID\n",
+"Done", "Done with commit ID\n",
 ];
 
 // Add Products and Components to which you frequently move bugs:
