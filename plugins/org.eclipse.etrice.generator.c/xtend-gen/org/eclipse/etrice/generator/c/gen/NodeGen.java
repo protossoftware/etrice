@@ -21,14 +21,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
+import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -43,12 +48,14 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SAP;
@@ -68,6 +75,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -105,6 +113,9 @@ public class NodeGen {
   
   @Inject
   private IDiagnostician diagnostician;
+  
+  @Inject
+  private ILogger logger;
   
   public void doGenerate(final Root root) {
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
@@ -287,6 +298,8 @@ public class NodeGen {
         }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
+      EList<Annotation> _annotations = ssc.getAnnotations();
+      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -326,6 +339,8 @@ public class NodeGen {
       _builder.append("#include \"debugging/etLogger.h\"");
       _builder.newLine();
       _builder.append("#include \"debugging/etMSCLogger.h\"");
+      _builder.newLine();
+      _builder.append("#include \"debugging/etDataLogger.h\"");
       _builder.newLine();
       _builder.append("#include \"messaging/etSystemProtocol.h\"");
       _builder.newLine();
@@ -651,6 +666,32 @@ public class NodeGen {
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
+      {
+        if (logData) {
+          {
+            for(final PhysicalThread thread_4 : threads) {
+              _builder.append("\t");
+              _builder.append("MsgDispatcher_");
+              String _name_14 = thread_4.getName();
+              _builder.append(_name_14, "	");
+              _builder.append("_logDataHeaders();");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            for(final PhysicalThread thread_5 : threads) {
+              _builder.append("\t");
+              _builder.append("MsgDispatcher_");
+              String _name_15 = thread_5.getName();
+              _builder.append(_name_15, "	");
+              _builder.append("_logData();");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
       _builder.newLine();
@@ -803,11 +844,11 @@ public class NodeGen {
             if (_not) {
               _builder.append("\t");
               ActorClass _actorClass_1 = ai.getActorClass();
-              String _name_14 = _actorClass_1.getName();
+              String _name_16 = _actorClass_1.getName();
               ActorClass _actorClass_2 = ai.getActorClass();
-              String _name_15 = _actorClass_2.getName();
-              String _destructorName = this.languageExt.destructorName(_name_15);
-              String _memberInUse = this.languageExt.memberInUse(_name_14, _destructorName);
+              String _name_17 = _actorClass_2.getName();
+              String _destructorName = this.languageExt.destructorName(_name_17);
+              String _memberInUse = this.languageExt.memberInUse(_name_16, _destructorName);
               _builder.append(_memberInUse, "	");
               _builder.append("(&");
               String _path = ai.getPath();
@@ -891,11 +932,11 @@ public class NodeGen {
             if (_not_1) {
               _builder.append("\t");
               ActorClass _actorClass_4 = ai_1.getActorClass();
-              String _name_16 = _actorClass_4.getName();
+              String _name_18 = _actorClass_4.getName();
               ActorClass _actorClass_5 = ai_1.getActorClass();
-              String _name_17 = _actorClass_5.getName();
-              String _constructorName = this.languageExt.constructorName(_name_17);
-              String _memberInUse_1 = this.languageExt.memberInUse(_name_16, _constructorName);
+              String _name_19 = _actorClass_5.getName();
+              String _constructorName = this.languageExt.constructorName(_name_19);
+              String _memberInUse_1 = this.languageExt.memberInUse(_name_18, _constructorName);
               _builder.append(_memberInUse_1, "	");
               _builder.append("(&");
               String _path_1 = ai_1.getPath();
@@ -931,8 +972,8 @@ public class NodeGen {
         for(final ActorInstance ai_2 : _allContainedInstances_2) {
           _builder.append("\t");
           ActorClass _actorClass_6 = ai_2.getActorClass();
-          String _name_18 = _actorClass_6.getName();
-          _builder.append(_name_18, "	");
+          String _name_20 = _actorClass_6.getName();
+          _builder.append(_name_20, "	");
           _builder.append("_init(&");
           String _path_2 = ai_2.getPath();
           String _pathName_2 = this._roomExtensions.getPathName(_path_2);
@@ -2120,6 +2161,10 @@ public class NodeGen {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
+      final ArrayList<PortInstance> loggedPorts = this.loggedPorts(ssi);
+      SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+      EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -2138,10 +2183,7 @@ public class NodeGen {
       _builder.append(_name_1, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* - one generated message dispatcher (receiveMessage) for each MessageService (Thread)");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("* - one generated execute dispatcher (execute) for each MessageService (Thread)");
+      _builder.append("* contains a generated message dispatcher (receiveMessage) for each MessageService (Thread)");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -2266,6 +2308,48 @@ public class NodeGen {
               _builder.newLine();
               _builder.append("}");
               _builder.newLine();
+              {
+                if (logData) {
+                  _builder.append("static void MsgDispatcher_");
+                  String _name_6 = thread.getName();
+                  _builder.append(_name_6, "");
+                  _builder.append("_logDataHeaders(void){");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    for(final PortInstance pi : loggedPorts) {
+                      _builder.append("\t");
+                      _builder.append("ET_DATA_LOGGER_LOG_STRING(\"");
+                      String _path_1 = pi.getPath();
+                      _builder.append(_path_1, "	");
+                      _builder.append("\")");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                  _builder.append("\t");
+                  _builder.append("ET_DATA_LOGGER_NEW_ROW");
+                  _builder.newLine();
+                  _builder.append("}");
+                  _builder.newLine();
+                  _builder.append("static void MsgDispatcher_");
+                  String _name_7 = thread.getName();
+                  _builder.append(_name_7, "");
+                  _builder.append("_logData(void){");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    for(final PortInstance pi_1 : loggedPorts) {
+                      _builder.append("\t");
+                      String _createLoggerCall = this.createLoggerCall(pi_1);
+                      _builder.append(_createLoggerCall, "	");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                  _builder.append("\t");
+                  _builder.append("ET_DATA_LOGGER_NEW_ROW");
+                  _builder.newLine();
+                  _builder.append("}");
+                  _builder.newLine();
+                }
+              }
             }
           }
           _builder.newLine();
@@ -2273,22 +2357,22 @@ public class NodeGen {
           _builder.newLine();
           _builder.append(" ");
           _builder.append("* generated dispatch function for all messages for the thread \"");
-          String _name_6 = thread.getName();
-          _builder.append(_name_6, " ");
+          String _name_8 = thread.getName();
+          _builder.append(_name_8, " ");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
           _builder.append(" ");
           _builder.append("*/");
           _builder.newLine();
           _builder.append("static etBool MsgDispatcher_");
-          String _name_7 = thread.getName();
-          _builder.append(_name_7, "");
+          String _name_9 = thread.getName();
+          _builder.append(_name_9, "");
           _builder.append("_receiveMessage(const etMessage* msg){");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"MsgDispatcher_");
-          String _name_8 = thread.getName();
-          _builder.append(_name_8, "	");
+          String _name_10 = thread.getName();
+          _builder.append(_name_10, "	");
           _builder.append("\", \"receiveMessage\")");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -2304,15 +2388,29 @@ public class NodeGen {
             boolean _not = (!_isEmpty);
             if (_not) {
               _builder.append("\t\t\t");
-              _builder.append("if (msg->evtID == etSystemProtocol_IN_poll)");
+              _builder.append("if (msg->evtID == etSystemProtocol_IN_poll) {");
               _builder.newLine();
               _builder.append("\t\t\t");
               _builder.append("\t");
               _builder.append("MsgDispatcher_");
-              String _name_9 = thread.getName();
-              _builder.append(_name_9, "				");
+              String _name_11 = thread.getName();
+              _builder.append(_name_11, "				");
               _builder.append("_poll();");
               _builder.newLineIfNotEmpty();
+              {
+                if (logData) {
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  _builder.append("MsgDispatcher_");
+                  String _name_12 = thread.getName();
+                  _builder.append(_name_12, "				");
+                  _builder.append("_logData();");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("\t\t\t");
+              _builder.append("}");
+              _builder.newLine();
               _builder.append("\t\t\t");
               _builder.append("else");
               _builder.newLine();
@@ -2333,8 +2431,8 @@ public class NodeGen {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("/* interface items of ");
-              String _path_1 = ai_1.getPath();
-              _builder.append(_path_1, "		");
+              String _path_2 = ai_1.getPath();
+              _builder.append(_path_2, "		");
               _builder.append(" */");
               _builder.newLineIfNotEmpty();
               {
@@ -2348,25 +2446,25 @@ public class NodeGen {
                   }
                 };
                 Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function_4);
-                for(final InterfaceItemInstance pi : _filter_1) {
+                for(final InterfaceItemInstance pi_2 : _filter_1) {
                   {
-                    boolean _isReplicated = pi.isReplicated();
+                    boolean _isReplicated = pi_2.isReplicated();
                     if (_isReplicated) {
                       {
-                        EList<InterfaceItemInstance> _peers = pi.getPeers();
+                        EList<InterfaceItemInstance> _peers = pi_2.getPeers();
                         for(final InterfaceItemInstance peer : _peers) {
                           _builder.append("\t\t");
                           _builder.append("case ");
-                          int _objId = pi.getObjId();
-                          EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
+                          int _objId = pi_2.getObjId();
+                          EList<InterfaceItemInstance> _peers_1 = pi_2.getPeers();
                           int _indexOf = _peers_1.indexOf(peer);
                           int _plus = (_objId + _indexOf);
                           _builder.append(_plus, "		");
                           _builder.append("+BASE_ADDRESS:");
                           _builder.newLineIfNotEmpty();
                           {
-                            ProtocolClass _protocol = pi.getProtocol();
-                            boolean _isConjugated = this._roomExtensions.isConjugated(pi);
+                            ProtocolClass _protocol = pi_2.getProtocol();
+                            boolean _isConjugated = this._roomExtensions.isConjugated(pi_2);
                             boolean _handlesReceive = this._roomExtensions.handlesReceive(_protocol, _isConjugated);
                             if (_handlesReceive) {
                               _builder.append("\t\t");
@@ -2374,17 +2472,17 @@ public class NodeGen {
                               _builder.append("switch (msg->evtID){");
                               _builder.newLine();
                               {
-                                ProtocolClass _protocol_1 = pi.getProtocol();
-                                boolean _isConjugated_1 = this._roomExtensions.isConjugated(pi);
+                                ProtocolClass _protocol_1 = pi_2.getProtocol();
+                                boolean _isConjugated_1 = this._roomExtensions.isConjugated(pi_2);
                                 List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(_protocol_1, _isConjugated_1);
                                 for(final MessageHandler h : _receiveHandlers) {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
                                   _builder.append("case ");
-                                  ProtocolClass _protocol_2 = pi.getProtocol();
-                                  String _name_10 = _protocol_2.getName();
-                                  _builder.append(_name_10, "				");
+                                  ProtocolClass _protocol_2 = pi_2.getProtocol();
+                                  String _name_13 = _protocol_2.getName();
+                                  _builder.append(_name_13, "				");
                                   _builder.append("_");
                                   Message _msg = h.getMsg();
                                   String _codeName = this._roomExtensions.getCodeName(_msg);
@@ -2395,33 +2493,33 @@ public class NodeGen {
                                   _builder.append("\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  ProtocolClass _protocol_3 = pi.getProtocol();
-                                  boolean _isConjugated_2 = this._roomExtensions.isConjugated(pi);
+                                  ProtocolClass _protocol_3 = pi_2.getProtocol();
+                                  boolean _isConjugated_2 = this._roomExtensions.isConjugated(pi_2);
                                   String _portClassName = this._roomExtensions.getPortClassName(_protocol_3, _isConjugated_2);
                                   _builder.append(_portClassName, "					");
                                   _builder.append("_");
                                   Message _msg_1 = h.getMsg();
-                                  String _name_11 = _msg_1.getName();
-                                  _builder.append(_name_11, "					");
+                                  String _name_14 = _msg_1.getName();
+                                  _builder.append(_name_14, "					");
                                   _builder.append("_receiveHandler((etPort *)&");
-                                  String _path_2 = ai_1.getPath();
-                                  String _pathName_1 = this._roomExtensions.getPathName(_path_2);
+                                  String _path_3 = ai_1.getPath();
+                                  String _pathName_1 = this._roomExtensions.getPathName(_path_3);
                                   _builder.append(_pathName_1, "					");
                                   _builder.append("_const.");
-                                  String _name_12 = pi.getName();
-                                  _builder.append(_name_12, "					");
+                                  String _name_15 = pi_2.getName();
+                                  _builder.append(_name_15, "					");
                                   _builder.append(".ports[");
-                                  EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
+                                  EList<InterfaceItemInstance> _peers_2 = pi_2.getPeers();
                                   int _indexOf_1 = _peers_2.indexOf(peer);
                                   _builder.append(_indexOf_1, "					");
                                   _builder.append("],msg,(void*)&");
-                                  String _path_3 = ai_1.getPath();
-                                  String _pathName_2 = this._roomExtensions.getPathName(_path_3);
+                                  String _path_4 = ai_1.getPath();
+                                  String _pathName_2 = this._roomExtensions.getPathName(_path_4);
                                   _builder.append(_pathName_2, "					");
                                   _builder.append(",");
                                   ActorClass _actorClass_1 = ai_1.getActorClass();
-                                  String _name_13 = _actorClass_1.getName();
-                                  _builder.append(_name_13, "					");
+                                  String _name_16 = _actorClass_1.getName();
+                                  _builder.append(_name_16, "					");
                                   _builder.append("_receiveMessage);");
                                   _builder.newLineIfNotEmpty();
                                   _builder.append("\t\t");
@@ -2436,21 +2534,21 @@ public class NodeGen {
                               _builder.append("\t");
                               _builder.append("default: ");
                               ActorClass _actorClass_2 = ai_1.getActorClass();
-                              String _name_14 = _actorClass_2.getName();
-                              _builder.append(_name_14, "				");
+                              String _name_17 = _actorClass_2.getName();
+                              _builder.append(_name_17, "				");
                               _builder.append("_receiveMessage((void*)&");
-                              String _path_4 = ai_1.getPath();
-                              String _pathName_3 = this._roomExtensions.getPathName(_path_4);
+                              String _path_5 = ai_1.getPath();
+                              String _pathName_3 = this._roomExtensions.getPathName(_path_5);
                               _builder.append(_pathName_3, "				");
                               _builder.append(",(etPort*)&");
-                              String _path_5 = ai_1.getPath();
-                              String _pathName_4 = this._roomExtensions.getPathName(_path_5);
+                              String _path_6 = ai_1.getPath();
+                              String _pathName_4 = this._roomExtensions.getPathName(_path_6);
                               _builder.append(_pathName_4, "				");
                               _builder.append("_const.");
-                              String _name_15 = pi.getName();
-                              _builder.append(_name_15, "				");
+                              String _name_18 = pi_2.getName();
+                              _builder.append(_name_18, "				");
                               _builder.append(".ports[");
-                              EList<InterfaceItemInstance> _peers_3 = pi.getPeers();
+                              EList<InterfaceItemInstance> _peers_3 = pi_2.getPeers();
                               int _indexOf_2 = _peers_3.indexOf(peer);
                               _builder.append(_indexOf_2, "				");
                               _builder.append("], msg);");
@@ -2477,14 +2575,14 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  String _path_6 = ai_1.getPath();
-                                  String _pathName_5 = this._roomExtensions.getPathName(_path_6);
+                                  String _path_7 = ai_1.getPath();
+                                  String _pathName_5 = this._roomExtensions.getPathName(_path_7);
                                   _builder.append(_pathName_5, "				");
                                   _builder.append("_const.");
-                                  String _name_16 = pi.getName();
-                                  _builder.append(_name_16, "				");
+                                  String _name_19 = pi_2.getName();
+                                  _builder.append(_name_19, "				");
                                   _builder.append(".ports[");
-                                  EList<InterfaceItemInstance> _peers_4 = pi.getPeers();
+                                  EList<InterfaceItemInstance> _peers_4 = pi_2.getPeers();
                                   int _indexOf_3 = _peers_4.indexOf(peer);
                                   _builder.append(_indexOf_3, "				");
                                   _builder.append("].port.peerInstName,");
@@ -2492,22 +2590,22 @@ public class NodeGen {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  ProtocolClass _protocol_4 = pi.getProtocol();
-                                  String _name_17 = _protocol_4.getName();
-                                  _builder.append(_name_17, "				");
+                                  ProtocolClass _protocol_4 = pi_2.getProtocol();
+                                  String _name_20 = _protocol_4.getName();
+                                  _builder.append(_name_20, "				");
                                   _builder.append("_getMessageString(msg->evtID),");
                                   _builder.newLineIfNotEmpty();
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("\t");
-                                  String _path_7 = ai_1.getPath();
-                                  String _pathName_6 = this._roomExtensions.getPathName(_path_7);
+                                  String _path_8 = ai_1.getPath();
+                                  String _pathName_6 = this._roomExtensions.getPathName(_path_8);
                                   _builder.append(_pathName_6, "				");
                                   _builder.append("_const.");
-                                  String _name_18 = pi.getName();
-                                  _builder.append(_name_18, "				");
+                                  String _name_21 = pi_2.getName();
+                                  _builder.append(_name_21, "				");
                                   _builder.append(".ports[");
-                                  EList<InterfaceItemInstance> _peers_5 = pi.getPeers();
+                                  EList<InterfaceItemInstance> _peers_5 = pi_2.getPeers();
                                   int _indexOf_4 = _peers_5.indexOf(peer);
                                   _builder.append(_indexOf_4, "				");
                                   _builder.append("].port.myInstName");
@@ -2522,21 +2620,21 @@ public class NodeGen {
                               _builder.append("\t\t");
                               _builder.append("\t");
                               ActorClass _actorClass_3 = ai_1.getActorClass();
-                              String _name_19 = _actorClass_3.getName();
-                              _builder.append(_name_19, "			");
+                              String _name_22 = _actorClass_3.getName();
+                              _builder.append(_name_22, "			");
                               _builder.append("_receiveMessage((void*)&");
-                              String _path_8 = ai_1.getPath();
-                              String _pathName_7 = this._roomExtensions.getPathName(_path_8);
+                              String _path_9 = ai_1.getPath();
+                              String _pathName_7 = this._roomExtensions.getPathName(_path_9);
                               _builder.append(_pathName_7, "			");
                               _builder.append(",&");
-                              String _path_9 = ai_1.getPath();
-                              String _pathName_8 = this._roomExtensions.getPathName(_path_9);
+                              String _path_10 = ai_1.getPath();
+                              String _pathName_8 = this._roomExtensions.getPathName(_path_10);
                               _builder.append(_pathName_8, "			");
                               _builder.append("_const.");
-                              String _name_20 = pi.getName();
-                              _builder.append(_name_20, "			");
+                              String _name_23 = pi_2.getName();
+                              _builder.append(_name_23, "			");
                               _builder.append(".ports[");
-                              EList<InterfaceItemInstance> _peers_6 = pi.getPeers();
+                              EList<InterfaceItemInstance> _peers_6 = pi_2.getPeers();
                               int _indexOf_5 = _peers_6.indexOf(peer);
                               _builder.append(_indexOf_5, "			");
                               _builder.append("].port, msg);");
@@ -2551,13 +2649,13 @@ public class NodeGen {
                     } else {
                       _builder.append("\t\t");
                       _builder.append("case ");
-                      int _objId_1 = pi.getObjId();
+                      int _objId_1 = pi_2.getObjId();
                       _builder.append(_objId_1, "		");
                       _builder.append("+BASE_ADDRESS:");
                       _builder.newLineIfNotEmpty();
                       {
-                        ProtocolClass _protocol_5 = pi.getProtocol();
-                        boolean _isConjugated_3 = this._roomExtensions.isConjugated(pi);
+                        ProtocolClass _protocol_5 = pi_2.getProtocol();
+                        boolean _isConjugated_3 = this._roomExtensions.isConjugated(pi_2);
                         boolean _handlesReceive_1 = this._roomExtensions.handlesReceive(_protocol_5, _isConjugated_3);
                         if (_handlesReceive_1) {
                           _builder.append("\t\t");
@@ -2565,17 +2663,17 @@ public class NodeGen {
                           _builder.append("switch (msg->evtID){");
                           _builder.newLine();
                           {
-                            ProtocolClass _protocol_6 = pi.getProtocol();
-                            boolean _isConjugated_4 = this._roomExtensions.isConjugated(pi);
+                            ProtocolClass _protocol_6 = pi_2.getProtocol();
+                            boolean _isConjugated_4 = this._roomExtensions.isConjugated(pi_2);
                             List<MessageHandler> _receiveHandlers_1 = this._roomExtensions.getReceiveHandlers(_protocol_6, _isConjugated_4);
                             for(final MessageHandler h_1 : _receiveHandlers_1) {
                               _builder.append("\t\t");
                               _builder.append("\t");
                               _builder.append("\t");
                               _builder.append("case ");
-                              ProtocolClass _protocol_7 = pi.getProtocol();
-                              String _name_21 = _protocol_7.getName();
-                              _builder.append(_name_21, "				");
+                              ProtocolClass _protocol_7 = pi_2.getProtocol();
+                              String _name_24 = _protocol_7.getName();
+                              _builder.append(_name_24, "				");
                               _builder.append("_");
                               Message _msg_2 = h_1.getMsg();
                               String _codeName_1 = this._roomExtensions.getCodeName(_msg_2);
@@ -2586,29 +2684,29 @@ public class NodeGen {
                               _builder.append("\t");
                               _builder.append("\t");
                               _builder.append("\t");
-                              ProtocolClass _protocol_8 = pi.getProtocol();
-                              boolean _isConjugated_5 = this._roomExtensions.isConjugated(pi);
+                              ProtocolClass _protocol_8 = pi_2.getProtocol();
+                              boolean _isConjugated_5 = this._roomExtensions.isConjugated(pi_2);
                               String _portClassName_1 = this._roomExtensions.getPortClassName(_protocol_8, _isConjugated_5);
                               _builder.append(_portClassName_1, "					");
                               _builder.append("_");
                               Message _msg_3 = h_1.getMsg();
-                              String _name_22 = _msg_3.getName();
-                              _builder.append(_name_22, "					");
+                              String _name_25 = _msg_3.getName();
+                              _builder.append(_name_25, "					");
                               _builder.append("_receiveHandler((etPort *)&");
-                              String _path_10 = ai_1.getPath();
-                              String _pathName_9 = this._roomExtensions.getPathName(_path_10);
+                              String _path_11 = ai_1.getPath();
+                              String _pathName_9 = this._roomExtensions.getPathName(_path_11);
                               _builder.append(_pathName_9, "					");
                               _builder.append("_const.");
-                              String _name_23 = pi.getName();
-                              _builder.append(_name_23, "					");
+                              String _name_26 = pi_2.getName();
+                              _builder.append(_name_26, "					");
                               _builder.append(",msg,(void*)&");
-                              String _path_11 = ai_1.getPath();
-                              String _pathName_10 = this._roomExtensions.getPathName(_path_11);
+                              String _path_12 = ai_1.getPath();
+                              String _pathName_10 = this._roomExtensions.getPathName(_path_12);
                               _builder.append(_pathName_10, "					");
                               _builder.append(",");
                               ActorClass _actorClass_4 = ai_1.getActorClass();
-                              String _name_24 = _actorClass_4.getName();
-                              _builder.append(_name_24, "					");
+                              String _name_27 = _actorClass_4.getName();
+                              _builder.append(_name_27, "					");
                               _builder.append("_receiveMessage);");
                               _builder.newLineIfNotEmpty();
                               _builder.append("\t\t");
@@ -2624,19 +2722,19 @@ public class NodeGen {
                           _builder.append("\t");
                           _builder.append("default: ");
                           ActorClass _actorClass_5 = ai_1.getActorClass();
-                          String _name_25 = _actorClass_5.getName();
-                          _builder.append(_name_25, "				");
+                          String _name_28 = _actorClass_5.getName();
+                          _builder.append(_name_28, "				");
                           _builder.append("_receiveMessage((void*)&");
-                          String _path_12 = ai_1.getPath();
-                          String _pathName_11 = this._roomExtensions.getPathName(_path_12);
+                          String _path_13 = ai_1.getPath();
+                          String _pathName_11 = this._roomExtensions.getPathName(_path_13);
                           _builder.append(_pathName_11, "				");
                           _builder.append(",(etPort*)&");
-                          String _path_13 = ai_1.getPath();
-                          String _pathName_12 = this._roomExtensions.getPathName(_path_13);
+                          String _path_14 = ai_1.getPath();
+                          String _pathName_12 = this._roomExtensions.getPathName(_path_14);
                           _builder.append(_pathName_12, "				");
                           _builder.append("_const.");
-                          String _name_26 = pi.getName();
-                          _builder.append(_name_26, "				");
+                          String _name_29 = pi_2.getName();
+                          _builder.append(_name_29, "				");
                           _builder.append(", msg);");
                           _builder.newLineIfNotEmpty();
                           _builder.append("\t\t");
@@ -2661,32 +2759,32 @@ public class NodeGen {
                               _builder.append("\t");
                               _builder.append("\t");
                               _builder.append("((etPort*)&");
-                              String _path_14 = ai_1.getPath();
-                              String _pathName_13 = this._roomExtensions.getPathName(_path_14);
+                              String _path_15 = ai_1.getPath();
+                              String _pathName_13 = this._roomExtensions.getPathName(_path_15);
                               _builder.append(_pathName_13, "				");
                               _builder.append("_const.");
-                              String _name_27 = pi.getName();
-                              _builder.append(_name_27, "				");
+                              String _name_30 = pi_2.getName();
+                              _builder.append(_name_30, "				");
                               _builder.append(")->peerInstName,");
                               _builder.newLineIfNotEmpty();
                               _builder.append("\t\t");
                               _builder.append("\t");
                               _builder.append("\t");
-                              ProtocolClass _protocol_9 = pi.getProtocol();
-                              String _name_28 = _protocol_9.getName();
-                              _builder.append(_name_28, "				");
+                              ProtocolClass _protocol_9 = pi_2.getProtocol();
+                              String _name_31 = _protocol_9.getName();
+                              _builder.append(_name_31, "				");
                               _builder.append("_getMessageString(msg->evtID),");
                               _builder.newLineIfNotEmpty();
                               _builder.append("\t\t");
                               _builder.append("\t");
                               _builder.append("\t");
                               _builder.append("((etPort*)&");
-                              String _path_15 = ai_1.getPath();
-                              String _pathName_14 = this._roomExtensions.getPathName(_path_15);
+                              String _path_16 = ai_1.getPath();
+                              String _pathName_14 = this._roomExtensions.getPathName(_path_16);
                               _builder.append(_pathName_14, "				");
                               _builder.append("_const.");
-                              String _name_29 = pi.getName();
-                              _builder.append(_name_29, "				");
+                              String _name_32 = pi_2.getName();
+                              _builder.append(_name_32, "				");
                               _builder.append(")->myInstName");
                               _builder.newLineIfNotEmpty();
                               _builder.append("\t\t");
@@ -2699,19 +2797,19 @@ public class NodeGen {
                           _builder.append("\t\t");
                           _builder.append("\t");
                           ActorClass _actorClass_6 = ai_1.getActorClass();
-                          String _name_30 = _actorClass_6.getName();
-                          _builder.append(_name_30, "			");
+                          String _name_33 = _actorClass_6.getName();
+                          _builder.append(_name_33, "			");
                           _builder.append("_receiveMessage((void*)&");
-                          String _path_16 = ai_1.getPath();
-                          String _pathName_15 = this._roomExtensions.getPathName(_path_16);
+                          String _path_17 = ai_1.getPath();
+                          String _pathName_15 = this._roomExtensions.getPathName(_path_17);
                           _builder.append(_pathName_15, "			");
                           _builder.append(",(etPort*)&");
-                          String _path_17 = ai_1.getPath();
-                          String _pathName_16 = this._roomExtensions.getPathName(_path_17);
+                          String _path_18 = ai_1.getPath();
+                          String _pathName_16 = this._roomExtensions.getPathName(_path_18);
                           _builder.append(_pathName_16, "			");
                           _builder.append("_const.");
-                          String _name_31 = pi.getName();
-                          _builder.append(_name_31, "			");
+                          String _name_34 = pi_2.getName();
+                          _builder.append(_name_34, "			");
                           _builder.append(", msg);");
                           _builder.newLineIfNotEmpty();
                         }
@@ -2733,8 +2831,8 @@ public class NodeGen {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("etLogger_logErrorF(\"MessageService_");
-          String _name_32 = thread.getName();
-          _builder.append(_name_32, "			");
+          String _name_35 = thread.getName();
+          _builder.append(_name_35, "			");
           _builder.append("_receiveMessage: address %d does not exist \", msg->address);");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t\t");
@@ -2756,6 +2854,208 @@ public class NodeGen {
       _xblockexpression = (_builder);
     }
     return _xblockexpression;
+  }
+  
+  private String createLoggerCall(final PortInstance pi) {
+    String _xblockexpression = null;
+    {
+      ProtocolClass _protocol = pi.getProtocol();
+      EList<Message> _incomingMessages = _protocol.getIncomingMessages();
+      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          boolean _and = false;
+          VarDecl _data = m.getData();
+          boolean _notEquals = (!Objects.equal(_data, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            VarDecl _data_1 = m.getData();
+            RefableType _refType = _data_1.getRefType();
+            DataType _type = _refType.getType();
+            boolean _isEnumerationOrPrimitive = NodeGen.this._typeHelpers.isEnumerationOrPrimitive(_type);
+            _and = (_notEquals && _isEnumerationOrPrimitive);
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);
+      final Message msg = ((Message[])Conversions.unwrapArray(_filter, Message.class))[0];
+      EObject _eContainer = pi.eContainer();
+      final ActorInstance ai = ((ActorInstance) _eContainer);
+      String _path = ai.getPath();
+      String _pathName = this._roomExtensions.getPathName(_path);
+      String _plus = (_pathName + ".");
+      String _name = pi.getName();
+      String _plus_1 = (_plus + _name);
+      String _plus_2 = (_plus_1 + ".");
+      String _name_1 = msg.getName();
+      final String data = (_plus_2 + _name_1);
+      LiteralType _xifexpression = null;
+      VarDecl _data = msg.getData();
+      RefableType _refType = _data.getRefType();
+      DataType _type = _refType.getType();
+      if ((_type instanceof EnumerationType)) {
+        _xifexpression = LiteralType.INT;
+      } else {
+        VarDecl _data_1 = msg.getData();
+        RefableType _refType_1 = _data_1.getRefType();
+        DataType _type_1 = _refType_1.getType();
+        LiteralType _type_2 = ((PrimitiveType) _type_1).getType();
+        _xifexpression = _type_2;
+      }
+      final LiteralType type = _xifexpression;
+      String _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(type,LiteralType.BOOL)) {
+          _matched=true;
+          String _plus_3 = ("ET_DATA_LOGGER_LOG_BOOL((int)" + data);
+          String _plus_4 = (_plus_3 + ")");
+          _switchResult = _plus_4;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(type,LiteralType.CHAR)) {
+          _matched=true;
+          String _plus_5 = ("ET_DATA_LOGGER_LOG_INT((int)" + data);
+          String _plus_6 = (_plus_5 + ")");
+          _switchResult = _plus_6;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(type,LiteralType.INT)) {
+          _matched=true;
+          String _plus_7 = ("ET_DATA_LOGGER_LOG_INT((int)" + data);
+          String _plus_8 = (_plus_7 + ")");
+          _switchResult = _plus_8;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(type,LiteralType.REAL)) {
+          _matched=true;
+          String _plus_9 = ("ET_DATA_LOGGER_LOG_DOUBLE((double)" + data);
+          String _plus_10 = (_plus_9 + ")");
+          _switchResult = _plus_10;
+        }
+      }
+      if (!_matched) {
+        _switchResult = "internal error: unknown primitive type";
+      }
+      _xblockexpression = (_switchResult);
+    }
+    return _xblockexpression;
+  }
+  
+  private ArrayList<PortInstance> loggedPorts(final SubSystemInstance ssi) {
+    final ArrayList<PortInstance> result = CollectionLiterals.<PortInstance>newArrayList();
+    SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+    EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+    boolean _isAnnotationPresent = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+    if (_isAnnotationPresent) {
+      this.logger.logInfo("Data Logging is configured by annotation");
+      SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
+      EList<Annotation> _annotations_1 = _subSystemClass_1.getAnnotations();
+      final String filters = BaseHelpers.getAttribute(_annotations_1, "DataLogging", "pathlist");
+      final String[] filterList = filters.split(",");
+      for (final String filter : filterList) {
+        String _plus = ("  filter: " + filter);
+        this.logger.logInfo(_plus);
+      }
+      final ArrayList<String> notLogged = CollectionLiterals.<String>newArrayList();
+      this.logger.logInfo("  logged ports:");
+      TreeIterator<EObject> iter = ssi.eAllContents();
+      boolean _hasNext = iter.hasNext();
+      boolean _while = _hasNext;
+      while (_while) {
+        {
+          final EObject obj = iter.next();
+          if ((obj instanceof PortInstance)) {
+            final PortInstance pi = ((PortInstance) obj);
+            Port _port = pi.getPort();
+            boolean _isRelay = RoomHelpers.isRelay(_port);
+            boolean _not = (!_isRelay);
+            if (_not) {
+              ProtocolClass _protocol = pi.getProtocol();
+              CommunicationType _commType = _protocol.getCommType();
+              boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+              if (_equals) {
+                Port _port_1 = pi.getPort();
+                boolean _isConjugated = _port_1.isConjugated();
+                if (_isConjugated) {
+                  final String path = pi.getPath();
+                  boolean matched = false;
+                  boolean primitive = false;
+                  for (final String filter_1 : filterList) {
+                    boolean _matches = path.matches(filter_1);
+                    if (_matches) {
+                      matched = true;
+                      ProtocolClass _protocol_1 = pi.getProtocol();
+                      EList<Message> _incomingMessages = _protocol_1.getIncomingMessages();
+                      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+                        public Boolean apply(final Message m) {
+                          boolean _and = false;
+                          VarDecl _data = m.getData();
+                          boolean _notEquals = (!Objects.equal(_data, null));
+                          if (!_notEquals) {
+                            _and = false;
+                          } else {
+                            VarDecl _data_1 = m.getData();
+                            RefableType _refType = _data_1.getRefType();
+                            DataType _type = _refType.getType();
+                            boolean _isEnumerationOrPrimitive = NodeGen.this._typeHelpers.isEnumerationOrPrimitive(_type);
+                            _and = (_notEquals && _isEnumerationOrPrimitive);
+                          }
+                          return Boolean.valueOf(_and);
+                        }
+                      };
+                      Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);
+                      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+                      boolean _not_1 = (!_isEmpty);
+                      if (_not_1) {
+                        result.add(pi);
+                        primitive = true;
+                        String _path = pi.getPath();
+                        String _plus_1 = ("    data driven port " + _path);
+                        String _plus_2 = (_plus_1 + " (matched ");
+                        String _plus_3 = (_plus_2 + filter_1);
+                        String _plus_4 = (_plus_3 + ")");
+                        this.logger.logInfo(_plus_4);
+                      }
+                    }
+                  }
+                  boolean _not_2 = (!primitive);
+                  if (_not_2) {
+                    if (matched) {
+                      String _path_1 = pi.getPath();
+                      String _plus_5 = ("    data driven port " + _path_1);
+                      String _plus_6 = (_plus_5 + " (matched but contains no primitive data)");
+                      notLogged.add(_plus_6);
+                    } else {
+                      String _path_2 = pi.getPath();
+                      String _plus_7 = ("    data driven port " + _path_2);
+                      String _plus_8 = (_plus_7 + " (no match found)");
+                      notLogged.add(_plus_8);
+                    }
+                  }
+                } else {
+                  String _path_3 = pi.getPath();
+                  String _plus_9 = ("    data driven port " + _path_3);
+                  String _plus_10 = (_plus_9 + " (receive port)");
+                  notLogged.add(_plus_10);
+                }
+              }
+            }
+          }
+        }
+        boolean _hasNext_1 = iter.hasNext();
+        _while = _hasNext_1;
+      }
+      this.logger.logInfo("  NOT logged ports:");
+      for (final String nl : notLogged) {
+        this.logger.logInfo(nl);
+      }
+    }
+    return result;
   }
   
   private void checkDataPorts(final SubSystemInstance comp) {

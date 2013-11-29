@@ -16,6 +16,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -82,6 +85,9 @@ public class NodeRunnerGen {
       String _plus = (_name + "_");
       String _name_1 = ssi.getName();
       final String clsname = (_plus + _name_1);
+      SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+      EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -124,6 +130,8 @@ public class NodeRunnerGen {
       _builder.append("#include \"debugging/etLogger.h\"");
       _builder.newLine();
       _builder.append("#include \"debugging/etMSCLogger.h\"");
+      _builder.newLine();
+      _builder.append("#include \"debugging/etDataLogger.h\"");
       _builder.newLine();
       _builder.newLine();
       _builder.append("#include \"osal/etPlatformLifecycle.h\"");
@@ -171,6 +179,13 @@ public class NodeRunnerGen {
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_OPEN(\"main\");");
       _builder.newLine();
+      {
+        if (logData) {
+          _builder.append("\t");
+          _builder.append("ET_DATA_LOGGER_OPEN(\"main\");");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* startup sequence  of lifecycle */");
@@ -212,6 +227,13 @@ public class NodeRunnerGen {
       _builder.append("_destroy(); \t/* lifecycle destroy */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      {
+        if (logData) {
+          _builder.append("\t");
+          _builder.append("ET_DATA_LOGGER_CLOSE");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_CLOSE");
       _builder.newLine();

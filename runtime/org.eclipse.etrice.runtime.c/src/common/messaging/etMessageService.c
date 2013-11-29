@@ -195,7 +195,7 @@ static void etMessageService_timerCallback(void* data) {
 	{
 		etMessageService* self = (etMessageService*) data;
 
-		/* create a temporary port struct and send the terminate message */
+		/* create a temporary port struct and send the poll message */
 		etSystemProtocolConjPort port;
 		port.localId = 0;
 		port.msgService = self;

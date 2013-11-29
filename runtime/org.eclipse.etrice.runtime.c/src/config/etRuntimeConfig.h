@@ -15,11 +15,14 @@
 
 /* flags for debugging */
 
+/* MSC logger */
 #define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
 //#define ET_SYNC_MSC_LOGGER_ACTIVATE  /* needs ET_MSC_LOGGER_ACTIVATE */
 #define ET_ASYNC_MSC_LOGGER_ACTIVATE  /* needs ET_MSC_LOGGER_ACTIVATE */
 #define ET_LOGGER_ACTIVATE
 
+/* data logger */
+#define ET_DATA_LOGGER_ACTIVATE
 
 #define STRUCT_ALIGN		8
 
