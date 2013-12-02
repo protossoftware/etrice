@@ -13,9 +13,21 @@
 package org.eclipse.etrice.core.ui.quickfix;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationAttribute;
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BaseFactory;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.KeyValue;
+import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -32,6 +44,26 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 
 public class RoomQuickfixProvider extends DefaultQuickfixProvider {
+
+	/**
+	 * @author Henrik Rentz-Reichert
+	 *
+	 */
+	private final class ChangeAnnotationAttributeModification implements ISemanticModification {
+		private String val;
+		
+		private ChangeAnnotationAttributeModification(String val) {
+			this.val = val;
+		}
+		
+		@Override
+		public void apply(EObject element, IModificationContext context) throws Exception {
+			KeyValue kv = (KeyValue) element;
+			StringLiteral sl = BaseFactory.eINSTANCE.createStringLiteral();
+			sl.setValue(val);
+			kv.setValue(sl);
+		}
+	}
 
 	@Override
 	public List<IssueResolution> getResolutions(Issue issue) {
@@ -150,4 +182,140 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 	}
+	
+	@Fix(RoomJavaValidator.INVALID_ANNOTATION_TARGET)
+	public void fixInvalidAnnotationTarget(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove this annotation", "remove @"+issue.getData()[0]+"...", "add.gif", new ISemanticModification() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				Annotation ann = (Annotation) element;
+				Object getterResult = ann.eContainer().eGet(ann.eContainingFeature());
+				((List<? extends EObject>) getterResult).remove(ann);
+			}
+		});
+		
+		acceptor.accept(issue, "Add this target to the definition", issue.getData()[1], "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				Annotation ann = (Annotation) element;
+				ann.getType().getTargets().add(issue.getData()[2]);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.DUPLICATE_ANNOTATION_TARGETS)
+	public void fixDuplicateAnnotationTarget(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove the duplicate target", "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				AnnotationType at = (AnnotationType) element;
+				Iterator<String> it = at.getTargets().iterator();
+				while (it.hasNext()) {
+					String tgt = it.next();
+					if (tgt.equals(issue.getData()[0]))
+						it.remove();
+				}
+				at.getTargets().add(issue.getData()[0]);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.MANDATORY_ATTRIBUTE_MISSING)
+	public void fixMissingAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add missing attribute", "add "+issue.getData()[0], "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				Annotation ann = (Annotation) element;
+				KeyValue kv = BaseFactory.eINSTANCE.createKeyValue();
+				kv.setKey(issue.getData()[0]);
+				for (AnnotationAttribute att : ann.getType().getAttributes()) {
+					if (att.getName().equals(issue.getData()[0])) {
+						if (att instanceof SimpleAnnotationAttribute) {
+							switch (((SimpleAnnotationAttribute) att).getType()) {
+								case BOOL: {
+									BooleanLiteral bl = BaseFactory.eINSTANCE.createBooleanLiteral();
+									kv.setValue(bl);
+									break;
+								}
+								case CHAR: {
+									StringLiteral sl = BaseFactory.eINSTANCE.createStringLiteral();
+									sl.setValue("");
+									kv.setValue(sl);
+									break;
+								}
+								case INT: {
+									IntLiteral il = BaseFactory.eINSTANCE.createIntLiteral();
+									il.setValue(0);
+									kv.setValue(il);
+									break;
+								}
+								case REAL: {
+									RealLiteral rl = BaseFactory.eINSTANCE.createRealLiteral();
+									rl.setValue(0);
+									kv.setValue(rl);
+									break;
+								}
+							}
+						}
+						else if (att instanceof EnumAnnotationAttribute) {
+							StringLiteral sl = BaseFactory.eINSTANCE.createStringLiteral();
+							sl.setValue(((EnumAnnotationAttribute) att).getValues().get(0));
+							kv.setValue(sl);
+						}
+						else {
+							assert(false): "unexpected sub type";
+						}
+						ann.getAttributes().add(kv);
+						break;
+					}
+				}
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.UNDEFINED_ANNOTATION_ATTRIBUTE)
+	public void fixUndefinedAnnotationAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove undefined attribute", "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				Annotation ann = (Annotation) element;
+				Iterator<KeyValue> it = ann.getAttributes().iterator();
+				while (it.hasNext()) {
+					KeyValue kv = it.next();
+					if (kv.getKey().equals(issue.getData()[0])) {
+						it.remove();
+						break;
+					}
+				}
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE)
+	public void fixUndefinedAnnotationAttributeValue(final Issue issue, IssueResolutionAcceptor acceptor) {
+		for (int i=0; i<issue.getData().length; ++i) {
+			acceptor.accept(issue, "Change attribute value to "+issue.getData()[i], "... = "+issue.getData()[i], "add.gif",
+					new ChangeAnnotationAttributeModification(issue.getData()[i]));
+		}
+	}
+	
+	@Fix(RoomJavaValidator.DUPLICATE_ANNOTATION_ATTRIBUTE)
+	public void fixDuplicateAnnotationAttribute(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove duplicate attribute "+issue.getData()[0], "remove "+issue.getData()[0], "add.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				Annotation ann = (Annotation) element;
+				for (int i=ann.getAttributes().size()-1; i>=0; --i) {
+					KeyValue kv = ann.getAttributes().get(i);
+					if (kv.getKey().equals(issue.getData()[0])) {
+						ann.getAttributes().remove(i);
+						break;
+					}
+				}
+			}
+		});
+
+	}
+
 }

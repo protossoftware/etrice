@@ -99,6 +99,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
+	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -777,9 +778,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			invalidTargetType = RoomAnnotationTargetEnum.SUBSYSTEM_CLASS;
 		}
 		if(invalidTargetType != null) {
-			error("AnnotationType " + a.getType().getName() + " is not allowed for target " + invalidTargetType.getLiteral(), a, BasePackage.Literals.ANNOTATION__TYPE);
+			error("AnnotationType " + a.getType().getName() + " is not allowed for target " + invalidTargetType.getLiteral(),
+					a,
+					BasePackage.Literals.ANNOTATION__TYPE,
+					INVALID_ANNOTATION_TARGET,
+					a.getType().getName(),
+					a.getType().getName()+" {target = "+invalidTargetType.getLiteral()+" ...",
+					invalidTargetType.getLiteral());
 		}
-	}
+		}
 	
 	@Check
 	public void checkRoomClassAnnotationTypeUniqueness(RoomClass rc) {

@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.etrice.core.common.ui.quickfix
 
+import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 //import org.eclipse.xtext.validation.Issue
@@ -20,7 +22,7 @@ package org.eclipse.etrice.core.common.ui.quickfix
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-class BaseQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider {
+class BaseQuickfixProvider extends DefaultQuickfixProvider {
 
 //	@Fix(MyDslValidator::INVALID_NAME)
 //	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
@@ -29,6 +31,21 @@ class BaseQuickfixProvider extends org.eclipse.xtext.ui.editor.quickfix.DefaultQ
 //			val xtextDocument = context.xtextDocument
 //			val firstLetter = xtextDocument.get(issue.offset, 1)
 //			xtextDocument.replace(issue.offset, 1, firstLetter.toUpperCase)
+//		]
+//	}
+	
+//	@Fix(BaseJavaValidator::DUPLICATE_ANNOTATION_TARGETS)
+//	def fixDuplicateAnnotationTarget(Issue issue, IssueResolutionAcceptor acceptor) {
+//		acceptor.accept(issue, "Remove the duplicate target", "remove "+issue.data.get(0), "add.gif") [
+//			element, context |
+//				val at = element as AnnotationType
+//				val it = at.getTargets().iterator();
+//				while (it.hasNext()) {
+//					val tgt = it.next()
+//					if (tgt.equals(issue.data.get(0)))
+//						it.remove()
+//				}
+//				at.getTargets().add(issue.data.get(0))
 //		]
 //	}
 }

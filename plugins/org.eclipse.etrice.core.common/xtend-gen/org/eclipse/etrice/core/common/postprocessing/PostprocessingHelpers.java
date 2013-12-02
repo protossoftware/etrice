@@ -45,12 +45,12 @@ public class PostprocessingHelpers {
   public static EAttribute getAttribute(final EClass cls, final String name) {
     EList<EAttribute> _eAllAttributes = cls.getEAllAttributes();
     final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
-        public Boolean apply(final EAttribute a) {
-          String _name = a.getName();
-          boolean _equals = _name.equals(name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final EAttribute a) {
+        String _name = a.getName();
+        boolean _equals = _name.equals(name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     EAttribute _findFirst = IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
     return _findFirst;
   }
@@ -58,12 +58,12 @@ public class PostprocessingHelpers {
   public static EReference getReference(final EClass cls, final String name) {
     EList<EReference> _eAllReferences = cls.getEAllReferences();
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
-        public Boolean apply(final EReference a) {
-          String _name = a.getName();
-          boolean _equals = _name.equals(name);
-          return Boolean.valueOf(_equals);
-        }
-      };
+      public Boolean apply(final EReference a) {
+        String _name = a.getName();
+        boolean _equals = _name.equals(name);
+        return Boolean.valueOf(_equals);
+      }
+    };
     EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
     return _findFirst;
   }

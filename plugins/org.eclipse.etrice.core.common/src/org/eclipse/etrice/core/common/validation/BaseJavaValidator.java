@@ -12,25 +12,21 @@
 
 package org.eclipse.etrice.core.common.validation;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.common.base.BasePackage;
-import org.eclipse.etrice.core.common.base.BooleanLiteral;
-import org.eclipse.etrice.core.common.base.Documentation;
-import org.eclipse.etrice.core.common.base.IntLiteral;
-import org.eclipse.etrice.core.common.base.Literal;
-import org.eclipse.etrice.core.common.base.RealLiteral;
-import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationAttribute;
 import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
+import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.xtext.validation.Check;
 
 /**
@@ -39,6 +35,13 @@ import org.eclipse.xtext.validation.Check;
  * see http://www.eclipse.org/Xtext/documentation.html#validation
  */
 public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation.AbstractBaseJavaValidator {
+	
+	public static final String MANDATORY_ATTRIBUTE_MISSING = "BaseJavaValidator.MandatoryAttributeMissing";
+	public static final String DUPLICATE_ANNOTATION_TARGETS = "BaseJavaValidator.DuplicateAnnotationTargets";
+	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.UndfinedAnnotationAttribute";
+	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE = "BaseJavaValidator.UndfinedAnnotationAttributeValue";
+	public static final String DUPLICATE_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.DuplicateAnnotationAttribute";
+	
 	@Check
 	public void checkDocumentation(Documentation doc) {
 		if (doc.getLines().isEmpty())
@@ -47,95 +50,122 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	
 	@Check
 	public void checkAnnotationTypeTargetsUnique(AnnotationType at) {
-		Set<String> targets = new HashSet<String>();
-		int i = 0;
-		for(String t : at.getTargets()) {
-			if(targets.add(t) == false) {
-				error("duplicate target "+t, at, BasePackage.Literals.ANNOTATION_TYPE__TARGETS, i);
-			}
-			i++;
-		}
-	}
-	
-	@Check
-	public void checkAnnotationAttributeKeys(Annotation a) {
-		EList<AnnotationAttribute> validAttrList = a.getType().getAttributes();
-		EList<KeyValue> attrList = a.getAttributes();
-		Set<String> validAttrNames = new HashSet<String>();
-		for(AnnotationAttribute attr : validAttrList) {
-			validAttrNames.add(attr.getName());
-		}
-		for(int i = 0; i < attrList.size(); i++) {
-			if(!validAttrNames.contains(attrList.get(i).getKey())) {
-				error("Annotation contains undefined attribute", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
+		HashSet<String> targets = new HashSet<String>();
+		for (String tgt : at.getTargets()) {
+			if (!targets.add(tgt)) {
+				error("The target "+tgt+" is defined more than once",
+						at,
+						BasePackage.Literals.ANNOTATION_TYPE__TARGETS,
+						DUPLICATE_ANNOTATION_TARGETS,
+						tgt);
 			}
 		}
 	}
 	
 	@Check
 	public void checkAnnotationAttributeMandatory(Annotation a) {
-		Set<String> mandatoryAttrNames = new HashSet<String>();
-		Set<String> annoAttrNames = new HashSet<String>();
-		for(AnnotationAttribute attr : a.getType().getAttributes()) {
-			if(!attr.isOptional()) mandatoryAttrNames.add(attr.getName());
-		}
-		for(KeyValue kv : a.getAttributes()) {
-			annoAttrNames.add(kv.getKey());
-		}
-		mandatoryAttrNames.removeAll(annoAttrNames);
-		if(!mandatoryAttrNames.isEmpty()) {
-			error("Annotation is missing mandatory attributes " + mandatoryAttrNames.toString(), a, null);
+		for (AnnotationAttribute att : a.getType().getAttributes()) {
+			if (!att.isOptional()) {
+				boolean isDefined = false;
+				for (KeyValue kv : a.getAttributes()) {
+					if (kv.getKey().equals(att.getName())) {
+						isDefined = true;
+						break;
+					}
+				}
+				if (!isDefined) {
+					error("mandatory attribute "+att.getName()+" is missing",
+							a,
+							BasePackage.Literals.ANNOTATION__ATTRIBUTES,
+							MANDATORY_ATTRIBUTE_MISSING,
+							att.getName());
+				}
+			}
 		}
 	}
 	
 	@Check
 	public void checkAnnotationAttributeType(Annotation a) {
-		Map<String, AnnotationAttribute> attrDefs = new HashMap<String, AnnotationAttribute>();
-		for(AnnotationAttribute annoAttr : a.getType().getAttributes()) {
-			attrDefs.put(annoAttr.getName(), annoAttr);
-		}
-		for(int i = 0; i < a.getAttributes().size(); i++) {
-			KeyValue kv = a.getAttributes().get(i);
-			if(attrDefs.containsKey(kv.getKey())) {
-				Literal val = kv.getValue();
-				AnnotationAttribute attr = attrDefs.get(kv.getKey());
-				if(BasePackage.Literals.SIMPLE_ANNOTATION_ATTRIBUTE.isInstance(attr)) {
-					SimpleAnnotationAttribute simpleAttrDef = (SimpleAnnotationAttribute)attr;
-					switch(simpleAttrDef.getType()) {
-					case BOOL:
-						if(!(val instanceof BooleanLiteral)) {
-							error("Expected boolean attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
+		HashSet<String> names = new HashSet<String>();
+		for (KeyValue kv : a.getAttributes()) {
+			int idx = a.getAttributes().indexOf(kv);
+			
+			if (!names.add(kv.getKey())) {
+				error("duplicate attribute "+kv.getKey(),
+						a,
+						BasePackage.Literals.ANNOTATION__ATTRIBUTES,
+						idx,
+						DUPLICATE_ANNOTATION_ATTRIBUTE,
+						kv.getKey()
+					);
+			}
+			boolean isAllowed = false;
+			for (AnnotationAttribute att : a.getType().getAttributes()) {
+				if (att.getName().equals(kv.getKey())) {
+					isAllowed = true;
+					
+					// check also value of enum attribute
+					if (kv.getValue()!=null) {
+						if (att instanceof EnumAnnotationAttribute) {
+							EList<String> values = ((EnumAnnotationAttribute) att).getValues();
+							if (kv.getValue() instanceof StringLiteral) {
+								boolean valueAllowed = false;
+								String value = ((StringLiteral)kv.getValue()).getValue();
+								for (String val : values) {
+									if (val.equals(value)) {
+										valueAllowed = true;
+										break;
+									}
+								}
+								if (!valueAllowed) {
+									error("choose one of the allowed enum values",
+											kv,
+											BasePackage.Literals.KEY_VALUE__VALUE,
+											UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE,
+											values.toArray(new String[values.size()]));
+								}
+							}
+							else {
+								error("choose one of the allowed enum values (values has to be a string)",
+										kv,
+										BasePackage.Literals.KEY_VALUE__VALUE,
+										UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE,
+										values.toArray(new String[values.size()]));
+							}
 						}
-						break;
-					case INT:
-						if(!(val instanceof IntLiteral)) {
-							error("Expected integer number attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
-						}
-						break;
-					case REAL:
-						if(!(val instanceof RealLiteral)) {
-							error("Expected real number attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
-						}
-						break;
-					case CHAR:
-						if(!(val instanceof StringLiteral)) {
-							error("Expected character string attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
-						}
-						break;
 					}
+					else if (att instanceof SimpleAnnotationAttribute) {
+						switch (((SimpleAnnotationAttribute) att).getType()) {
+							case BOOL :
+								if (!(kv.getValue() instanceof BooleanLiteral))
+									error("boolean literal expected", kv, BasePackage.Literals.KEY_VALUE__VALUE);
+								break;
+							case CHAR :
+								if (!(kv.getValue() instanceof StringLiteral))
+									error("char/string literal expected", kv, BasePackage.Literals.KEY_VALUE__VALUE);
+								break;
+							case INT :
+								if (!(kv.getValue() instanceof IntLiteral))
+									error("integer literal expected", kv, BasePackage.Literals.KEY_VALUE__VALUE);
+								break;
+							case REAL :
+								if (!(kv.getValue() instanceof RealLiteral))
+									error("real literal expected", kv, BasePackage.Literals.KEY_VALUE__VALUE);
+								break;
+							default :
+								break;
+						}
+					}
+					break;
 				}
-				else if(BasePackage.Literals.ENUM_ANNOTATION_ATTRIBUTE.isInstance(attr)) {
-					if(!(val instanceof StringLiteral)) {
-						error("Expected enum attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
-					}
-					else {
-						EnumAnnotationAttribute enumAttrDef = (EnumAnnotationAttribute)attr;
-						String strVal = ((StringLiteral)val).getValue(); 
-						if(!enumAttrDef.getValues().contains(strVal)) {
-							error("Invalid enum attribute value", a, BasePackage.Literals.ANNOTATION__ATTRIBUTES, i);
-						}
-					}
-				}
+			}
+			if (!isAllowed) {
+				error("Attribute "+kv.getKey()+" is undefined",
+						a,
+						BasePackage.Literals.ANNOTATION__ATTRIBUTES,
+						idx,
+						UNDEFINED_ANNOTATION_ATTRIBUTE,
+						kv.getKey());
 			}
 		}
 	}
