@@ -245,7 +245,7 @@ public class CExtensions implements ILanguageExtension {
       _builder.newLineIfNotEmpty();
       {
         boolean _hasElements = false;
-        for(final Pair<String,String> entry : entries) {
+        for(final Pair<String, String> entry : entries) {
           if (!_hasElements) {
             _hasElements = true;
           } else {

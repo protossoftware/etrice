@@ -227,7 +227,7 @@ public class JavaExtensions implements ILanguageExtension {
   public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      for(final Pair<String,String> entry : entries) {
+      for(final Pair<String, String> entry : entries) {
         _builder.append("public static final int ");
         String _first = entry.getFirst();
         _builder.append(_first, "");

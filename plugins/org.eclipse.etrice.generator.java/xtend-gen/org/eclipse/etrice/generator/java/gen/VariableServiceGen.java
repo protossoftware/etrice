@@ -97,20 +97,20 @@ public class VariableServiceGen {
     {
       final NodeRef nr = ETMapUtil.getNodeRef(comp);
       final String clsname = this.stdExt.getJavaClassName(nr, comp);
-      HashMap<ActorInstance,List<Attribute>> _hashMap = new HashMap<ActorInstance,List<Attribute>>();
+      HashMap<ActorInstance,List<Attribute>> _hashMap = new HashMap<ActorInstance, List<Attribute>>();
       final HashMap<ActorInstance,List<Attribute>> aisAttrMap = _hashMap;
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
       final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
-          public void apply(final ActorInstance ai) {
-            List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
-            boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
-              aisAttrMap.put(ai, _dynConfigReadAttributes_1);
-            }
+        public void apply(final ActorInstance ai) {
+          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
+          boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            List<Attribute> _dynConfigReadAttributes_1 = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
+            aisAttrMap.put(ai, _dynConfigReadAttributes_1);
           }
-        };
+        }
+      };
       IterableExtensions.<ActorInstance>forEach(_allContainedInstances, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
@@ -565,23 +565,23 @@ public class VariableServiceGen {
     HashSet<DataClass> _hashSet = new HashSet<DataClass>();
     final HashSet<DataClass> result = _hashSet;
     final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
-        public void apply(final ActorInstance ai) {
-          List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
-          final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
-              public void apply(final Attribute a) {
-                RefableType _type = a.getType();
-                DataType _type_1 = _type.getType();
-                boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
-                if (_isDataClass) {
-                  RefableType _type_2 = a.getType();
-                  DataType _type_3 = _type_2.getType();
-                  result.add(((DataClass) _type_3));
-                }
-              }
-            };
-          IterableExtensions.<Attribute>forEach(_dynConfigReadAttributes, _function);
-        }
-      };
+      public void apply(final ActorInstance ai) {
+        List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
+        final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
+          public void apply(final Attribute a) {
+            RefableType _type = a.getType();
+            DataType _type_1 = _type.getType();
+            boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
+            if (_isDataClass) {
+              RefableType _type_2 = a.getType();
+              DataType _type_3 = _type_2.getType();
+              result.add(((DataClass) _type_3));
+            }
+          }
+        };
+        IterableExtensions.<Attribute>forEach(_dynConfigReadAttributes, _function);
+      }
+    };
     IterableExtensions.<ActorInstance>forEach(ais, _function);
     return result;
   }
@@ -601,17 +601,17 @@ public class VariableServiceGen {
         DataClass dc = visit.pop();
         List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
         final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
-            public void apply(final Attribute a) {
-              RefableType _type = a.getType();
-              DataType _type_1 = _type.getType();
-              boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
-              if (_isDataClass) {
-                RefableType _type_2 = a.getType();
-                DataType _type_3 = _type_2.getType();
-                visit.add(((DataClass) _type_3));
-              }
+          public void apply(final Attribute a) {
+            RefableType _type = a.getType();
+            DataType _type_1 = _type.getType();
+            boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
+            if (_isDataClass) {
+              RefableType _type_2 = a.getType();
+              DataType _type_3 = _type_2.getType();
+              visit.add(((DataClass) _type_3));
             }
-          };
+          }
+        };
         IterableExtensions.<Attribute>forEach(_allAttributes, _function);
       }
       boolean _isEmpty_1 = visit.isEmpty();
@@ -625,12 +625,12 @@ public class VariableServiceGen {
     HashSet<RoomModel> _hashSet = new HashSet<RoomModel>();
     final HashSet<RoomModel> models = _hashSet;
     final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
-        public void apply(final ActorInstance ai) {
-          ActorClass _actorClass = ai.getActorClass();
-          EObject _eContainer = _actorClass.eContainer();
-          models.add(((RoomModel) _eContainer));
-        }
-      };
+      public void apply(final ActorInstance ai) {
+        ActorClass _actorClass = ai.getActorClass();
+        EObject _eContainer = _actorClass.eContainer();
+        models.add(((RoomModel) _eContainer));
+      }
+    };
     IterableExtensions.<ActorInstance>forEach(ais, _function);
     return models;
   }
