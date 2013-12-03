@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType">
+<stringAttribute key="bad_container_name" value="\org.eclipse.etrice.core.config\.l"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;resources&gt;&#13;&#10;&lt;item path=&quot;/org.eclipse.etrice.core.config&quot; type=&quot;4&quot;/&gt;&#13;&#10;&lt;item path=&quot;/org.eclipse.etrice.core.config.generator&quot; type=&quot;4&quot;/&gt;&#13;&#10;&lt;item path=&quot;/org.eclipse.etrice.core.config.tests&quot; type=&quot;4&quot;/&gt;&#13;&#10;&lt;item path=&quot;/org.eclipse.etrice.core.config.ui&quot; type=&quot;4&quot;/&gt;&#13;&#10;&lt;/resources&gt;}"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/org.eclipse.etrice.core.config"/>
