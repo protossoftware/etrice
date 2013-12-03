@@ -15,7 +15,7 @@
 
 #include "etDatatypes.h"
 
-#define CEIL_ALIGN(n)          ((n)+((ALIGNMENT-((n)&(ALIGNMENT-1)))&(ALIGNMENT-1)))
+#define MEM_CEIL(n)          ((n)+((ALIGNMENT-((n)&(ALIGNMENT-1)))&(ALIGNMENT-1)))
 
 struct etMemory;
 

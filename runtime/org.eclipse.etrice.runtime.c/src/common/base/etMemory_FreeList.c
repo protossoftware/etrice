@@ -126,7 +126,7 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 
 void* etMemory_FreeList_alloc(etMemory* heap, etUInt16 size) {
 	void* mem;
-	size = CEIL_ALIGN(size);
+	size = MEM_CEIL(size);
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "alloc")
 
 	mem = etMemory_getFreeListMem((etFreeListMemory*) heap, size);
@@ -140,7 +140,7 @@ void* etMemory_FreeList_alloc(etMemory* heap, etUInt16 size) {
 void etMemory_FreeList_free(etMemory* heap, void* obj, etUInt16 size) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "free")
 	{
-		size = CEIL_ALIGN(size);
+		size = MEM_CEIL(size);
 		etMemory_putFreeListMem((etFreeListMemory*) heap, obj, size);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
@@ -159,7 +159,7 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	self->nslots = nslots;
 	{
 		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListObj);
-		self->current = ((etUInt8*)self)+CEIL_ALIGN(used);
+		self->current = ((etUInt8*)self)+MEM_CEIL(used);
 	}
 
 	/* initialize the free lists */

@@ -29,7 +29,7 @@ typedef struct etFixedSizeMemory {
 void* etMemory_FixedSize_alloc(etMemory* heap, etUInt16 size) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
 	void* mem = NULL;
-	size = CEIL_ALIGN(size);
+	size = MEM_CEIL(size);
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "alloc")
 
@@ -58,7 +58,7 @@ void etMemory_FixedSize_free(etMemory* heap, void* obj, etUInt16 size) {
  */
 etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
-	size_t data_size = CEIL_ALIGN(sizeof(etFixedSizeMemory));
+	size_t data_size = MEM_CEIL(sizeof(etFixedSizeMemory));
 	int i;
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")

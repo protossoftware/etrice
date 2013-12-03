@@ -13,7 +13,7 @@
 #include "modelbase/etPort.h"
 
 #include "debugging/etMSCLogger.h"
-#include "osal/etMemory.h"
+#include "base/etMemory.h"
 #include <string.h>
 
 /*

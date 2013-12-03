@@ -59,7 +59,7 @@ typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already define
 	#define FALSE 0
 #endif
 
-#define ALIGNMENT		4
+#define ALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
 
 /*
  * typedefs for eTrice Runtime and Testing

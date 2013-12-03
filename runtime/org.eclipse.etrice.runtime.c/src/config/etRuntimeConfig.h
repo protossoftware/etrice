@@ -24,8 +24,6 @@
 /* data logger */
 #define ET_DATA_LOGGER_ACTIVATE
 
-#define STRUCT_ALIGN		8
-
 /* timing and scheduling */
 //#define FREQUENCY 10L
 //#define ET_RUNTIME_MAXLOOP 100
