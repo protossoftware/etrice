@@ -639,7 +639,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"etUnit/etUnit.h\"");
       _builder.newLine();
-      _builder.append("#include \"osal/etMemory.h\"");
+      _builder.append("#include \"base/etMemory.h\"");
       _builder.newLine();
       _builder.newLine();
       {
