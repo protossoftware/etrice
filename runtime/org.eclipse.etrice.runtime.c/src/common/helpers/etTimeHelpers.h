@@ -10,14 +10,48 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etTimeHelpers.h
+ *
+ * a collection of useful methods when working with \ref etTime values
+ *
+ * \author Thomas Schuetz, Henrik Rentz-Reichert
+ */
+
 #ifndef _ETTIMEHELPERS_H_
 #define _ETTIMEHELPERS_H_
 
 #include "osal/etTime.h"
 
-void etTime_subtract(etTime *self, etTime* subtractValue);
-void etTime_add(etTime *self, etTime* addValue);
-etInt32 etTimeHelpers_convertToMSec(etTime *time);
+/**
+ * computes the difference of two times
+ *
+ * \param self the this pointer
+ * \param subtractValue the time to be subtracted
+ */
+void etTime_subtract(etTime *self, const etTime* subtractValue);
+
+/**
+ * computes the sum of two times
+ *
+ * \param self the this pointer
+ * \param addValue the time to be added
+ */
+void etTime_add(etTime *self, const etTime* addValue);
+
+/**
+ * convert a time to milliseconds
+ *
+ * \param time the time to be converted
+ */
+etInt32 etTimeHelpers_convertToMSec(const etTime *time);
+
+/**
+ * convert a time from milliseconds
+ *
+ * \param result the structure obtaining the result
+ * \param milliSeconds the time to be converted
+ */
 void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds);
 
 

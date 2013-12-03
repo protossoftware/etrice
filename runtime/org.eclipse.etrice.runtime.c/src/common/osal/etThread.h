@@ -10,14 +10,16 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etThread.h
+ *
+ * defines a generic interface for platform specific implementations of a thread
+ *
+ * \author Thomas Schuetz, Thomas Jung
+ *
+ */
 #ifndef _ETTHREAD_H_
 #define _ETTHREAD_H_
-
-/**
- * etThread.h defines a generic interface for platform specific implementations of a thread
- *
- * */
-
 
 #include "etDatatypes.h"
 

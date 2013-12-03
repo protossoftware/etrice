@@ -10,18 +10,36 @@
  *
  *******************************************************************************/
 
+/**
+ * file etRuntimeConfig.h
+ *
+ * preprocessor switches that configure the runtime
+ *
+ * \author Thomas Schuetz
+ */
+
 #ifndef ETGLOBALFLAGS_H_
 #define ETGLOBALFLAGS_H_
 
 /* flags for debugging */
 
+
 /* MSC logger */
-#define ET_MSC_LOGGER_ACTIVATE  /* needs ET_LOGGER_ACTIVATE */
-//#define ET_SYNC_MSC_LOGGER_ACTIVATE  /* needs ET_MSC_LOGGER_ACTIVATE */
-#define ET_ASYNC_MSC_LOGGER_ACTIVATE  /* needs ET_MSC_LOGGER_ACTIVATE */
+
+/** switches the logger on */
 #define ET_LOGGER_ACTIVATE
 
+/** switches the MSC logger on, needs \ref ET_LOGGER_ACTIVATE */
+#define ET_MSC_LOGGER_ACTIVATE
+
+/** switches the logging of asynchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
+#undef ET_SYNC_MSC_LOGGER_ACTIVATE
+/** switches the logging of synchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
+#define ET_ASYNC_MSC_LOGGER_ACTIVATE
+
 /* data logger */
+
+/** switches the data logger on */
 #define ET_DATA_LOGGER_ACTIVATE
 
 /* timing and scheduling */
@@ -29,7 +47,7 @@
 //#define ET_RUNTIME_MAXLOOP 100
 /*#define ET_RUNTIME_ENDLESS*/
 
-/* enable multi threading (e.g. for protection of message queues) */
+/** enable multi threading (e.g. for protection of message queues) */
 #define ET_MULTI_THREADING
 
 #endif /* ETGLOBALFLAGS_H_ */

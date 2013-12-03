@@ -10,15 +10,20 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etThreadList.h
+ *
+ * NOT IMPLEMENTED YET
+ *
+ * holds a complete list of all threads
+ *
+ */
+
 #ifndef _etThreadController_H_
 #define _etThreadController_H_
 
 #include "osal/etThread.h"
 
-/**
- * etThreadController holds a complete list of all threads
- *
- **/
 typedef struct etThreadController{
 	etThread* threadList;	/**< list of all thread data (as array) **/
 	int32 size;				/**< size of the list **/

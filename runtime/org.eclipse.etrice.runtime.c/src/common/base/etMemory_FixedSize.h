@@ -10,6 +10,14 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etMemory_FixedSize.h
+ *
+ * a simple memory management that uses equal sized chunks. The free chunks are maintained in
+ * a \ref etQueue
+ *
+ * \author Thomas Schuetz, Henrik Rentz-Reichert
+ */
 #ifndef _ETMEMORY_FIXED_SIZE_H_
 #define _ETMEMORY_FIXED_SIZE_H_
 

@@ -15,6 +15,10 @@
 
 #include "etDatatypes.h"
 
+/**
+ * this macro computes the memory aligned value for a given size. It uses the ALIGNMENT
+ * defined in etDatatypes.h
+ */
 #define MEM_CEIL(n)          ((n)+((ALIGNMENT-((n)&(ALIGNMENT-1)))&(ALIGNMENT-1)))
 
 struct etMemory;
@@ -40,7 +44,9 @@ typedef struct etMemory {
 	/** size of the heap in bytes */
 	etUInt32 size;
 
+	/** the configured allocation method */
 	etMemory_alloc* alloc;
+	/** the configured freeing method */
 	etMemory_free* free;
 } etMemory;
 

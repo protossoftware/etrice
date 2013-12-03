@@ -10,6 +10,14 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etTcpSockets.h
+ *
+ * abstraction of a TCP/IP socket client and server
+ *
+ * \author Henrik Rentz-Reichert
+ */
+
 #ifndef _ETTCPSOCKETS_H_
 #define _ETTCPSOCKETS_H_
 
@@ -140,7 +148,7 @@ void etFreeSocketConnectionData(etSocketConnectionData* data);
 
 /**
  * connect a socket server
- * @param addr the internet address given as quadrupel, if {@code NULL} then local host is assumed
+ * @param addr the internet address given as quadrupel, if <code>NULL</code> then local host is assumed
  * @param port the port to which the connection should be established
  * @param self the client data
  * @return an error code of type {@link etSocketError}

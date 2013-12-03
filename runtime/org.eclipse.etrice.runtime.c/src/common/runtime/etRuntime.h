@@ -13,8 +13,21 @@
 #ifndef _ETRUNTIME_H_
 #define _ETRUNTIME_H_
 
+/**
+ * \file etRuntime.h
+ *
+ * runtime methods
+ *
+ * \author Thomas Schuetz
+ */
+
 #include "osal/etSema.h"
 
+/**
+ * a global semaphore used to terminate the application in headless mode
+ *
+ * \return the semaphore
+ */
 etSema* etRuntime_getTerminateSemaphore();
 
 #endif /* _ETRUNTIME_H_ */

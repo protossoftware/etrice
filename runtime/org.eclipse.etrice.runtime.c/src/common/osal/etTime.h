@@ -10,12 +10,16 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etTime.h
+ *
+ * defines a generic interface for platform specific implementations of services around time
+ *
+ * \author Thomas Schuetz
+ */
+
 #ifndef _ETTIME_H_
 #define _ETTIME_H_
-
-/**
- * etTime.h defines a generic interface for platform specific implementations of services around time
- */
 
 #include "etDatatypes.h"
 
@@ -23,8 +27,8 @@
  * time definition composed by the number of seconds and the number of nano seconds
  */
 typedef struct etTime {
-	etInt32 sec;
-	etInt32 nSec;
+	etInt32 sec;		/**< seconds */
+	etInt32 nSec;		/**< nanoseconds */
 } etTime;
 
 /**

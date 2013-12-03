@@ -22,29 +22,20 @@ typedef struct etFreeListObj {
 } etFreeListObj;
 
 typedef struct etFreeListInfo {
-	/** the size in bytes of the objects in this list */
-	etUInt16 objsize;
-
-	/** the list head */
-	etFreeListObj* head;
+	etUInt16 objsize;		/**< the size in bytes of the objects in this list */
+	etFreeListObj* head;	/**< the list head */
 
 #if DEBUG_FREE_LISTS
-	etUInt16 nobjects;
+	etUInt16 nobjects;		/**< the number of objects in the list */
 #endif
 
 } etFreeListInfo;
 
 typedef struct etFreeListMemory {
-	etMemory base;
-
-	/** next free position on the heap */
-	etUInt8* current;
-
-	/** number of free lists */
-	etUInt16 nslots;
-
-	/** array of free list infos (array used with size nslots) */
-	etFreeListInfo freelists[1];
+	etMemory base;					/** the "base class" */
+	etUInt8* current;				/**< next free position on the heap */
+	etUInt16 nslots;				/**< number of free lists */
+	etFreeListInfo freelists[1];	/**< array of free list infos (array used with size nslots) */
 } etFreeListMemory;
 
 /*

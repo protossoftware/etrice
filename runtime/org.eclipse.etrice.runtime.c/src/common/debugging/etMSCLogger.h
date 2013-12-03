@@ -10,23 +10,84 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etMSCLogger.h
+ *
+ * A collection of methods that can be used to write a message sequence chart (MSC,
+ * also called sequence diagram in UML).
+ * The format used is compatible with Astade Trace2UML, an open source MSC viewer.
+ *
+ * \author Thomas Schuetz
+ */
 #ifndef _ETMSCLOGGER_H_
 #define _ETMSCLOGGER_H_
 
 #include "etRuntimeConfig.h"
 
+/**
+ * opens a log file for the MSC. Only one at a time can be open.
+ *
+ * \param logPath the file path
+ * \param mscName the file name
+ */
 void etMSCLogger_open(const char* logPath, const char* mscName);
+/**
+ * closes the MSC
+ */
 void etMSCLogger_close(void);
 
+/**
+ * sets an object name (for internal use)
+ *
+ * \param objectName the object name
+ */
 void etMSCLogger_setObjectName(const char* objectName);
+/**
+ * returns the object name previously set
+ *
+ * \return the object name
+ */
 const char* etMSCLogger_getObjectName(void);
 
+/**
+ * logs a synchronous call
+ *
+ * \param sourceName the calling instance
+ * \param messageName the message
+ * \param targetName the called instance
+ */
 void etMSCLogger_syncCall(const char* sourceName, const char* messageName, const char* targetName);
+/**
+ * logs a synchronous return
+ *
+ * \param sourceName the calling instance
+ * \param targetName the called instance
+ */
 void etMSCLogger_syncReturn(const char* sourceName, const char* targetName);
 
+/**
+ * logs an outgoing asynchronous message
+ *
+ * \param sourceName the calling instance
+ * \param messageName the message
+ * \param targetName the called instance
+ */
 void etMSCLogger_asyncOut(const char* sourceName, const char* messageName, const char* targetName);
+/**
+ * logs an incoming asynchronous message
+ *
+ * \param sourceName the calling instance
+ * \param messageName the message
+ * \param targetName the called instance
+ */
 void etMSCLogger_asyncIn(const char* sourceName, const char* messageName, const char* targetName);
 
+/**
+ * logs a state change
+ *
+ * \param objectName the stateful instance
+ * \param stateName the new state
+ */
 void etMSCLogger_setState(const char* objectName, const char* stateName);
 
 #ifdef ET_MSC_LOGGER_ACTIVATE
@@ -67,16 +128,65 @@ void etMSCLogger_setState(const char* objectName, const char* stateName);
 
 
 #else
-	#define ET_MSC_LOGGER_OPEN
-	#define ET_MSC_LOGGER_CLOSE
 
-	#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
-	#define ET_MSC_LOGGER_SYNC_EXIT
+/**
+ * calls \ref etMSCLogger_open(const char*, const char*) with <code>tmp/log</code> as path
+ * and <code>msc</code> as file name for the log. Then it calls \ref etMSCLogger_setObjectName(const char*)
+ * with object.
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE isn't defined this macro is void
+ *
+ * \param object the object name to be set
+ */
+#define ET_MSC_LOGGER_OPEN(object)
 
-	#define ET_MSC_LOGGER_ASYNC_OUT(sourceName, message, targetName)
-	#define ET_MSC_LOGGER_ASYNC_IN(sourceName, message, targetName)
+/**
+ * calls \ref etMSCLogger_close()
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE isn't defined this macro is void
+ */
+#define ET_MSC_LOGGER_CLOSE
 
-	#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
+/**
+ * this macro has to be used together with \ref ET_MSC_LOGGER_SYNC_EXIT to log
+ * method entry and exit. It declares local variables and calls \ref etMSCLogger_syncCall
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE or \ref ET_SYNC_MSC_LOGGER_ACTIVATE
+ * aren't defined this macro is void
+ */
+#define ET_MSC_LOGGER_SYNC_ENTRY(object, message)
+/**
+ * this macro has to be used together with \ref ET_MSC_LOGGER_SYNC_ENTRY to log
+ * method entry and exit. It uses local variables defined before by \ref ET_MSC_LOGGER_SYNC_ENTRY and
+ * calls \ref etMSCLogger_syncCall
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE or \ref ET_SYNC_MSC_LOGGER_ACTIVATE
+ * aren't defined this macro is void
+ */
+#define ET_MSC_LOGGER_SYNC_EXIT
+
+/**
+ * calls \ref etMSCLogger_asyncOut(const char*, const char*, const char*)
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE or \ref ET_ASYNC_MSC_LOGGER_ACTIVATE
+ * aren't defined this macro is void
+ */
+#define ET_MSC_LOGGER_ASYNC_OUT(sourceName, message, targetName)
+
+/**
+ * calls \ref etMSCLogger_asyncIn(const char*, const char*, const char*)
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE or \ref ET_ASYNC_MSC_LOGGER_ACTIVATE
+ * aren't defined this macro is void
+ */
+#define ET_MSC_LOGGER_ASYNC_IN(sourceName, message, targetName)
+
+/**
+ * calls \ref etMSCLogger_setState(const char*, const char*)
+ * \par
+ * If \ref ET_MSC_LOGGER_ACTIVATE isn't defined this macro is void
+ */
+#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
 #endif
 
 

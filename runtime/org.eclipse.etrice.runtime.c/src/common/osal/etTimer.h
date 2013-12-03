@@ -10,6 +10,13 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etTimer.h
+ *
+ * a timer abstraction
+ *
+ * \author Thomas Jung
+ */
 #ifndef _ETTIMER_H_
 #define _ETTIMER_H_
 
@@ -25,12 +32,12 @@ typedef void (*etTimerFunction)(void* data);
 /**
  * etThread holds all data needed to handle a thread instance
  * the struct has to be filled before calling etThread_construct except for osData and osId
- **/
+ */
 typedef struct etTimer{
-	etTime timerInterval;				/**< timer interval **/
-	etTimerFunction timerFunction;		/**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct **/
-	void* timerFunctionData;			/**< the data that are passed to the timer function **/
-	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct **/
+	etTime timerInterval;				/**< timer interval */
+	etTimerFunction timerFunction;		/**< call back function to be called by timer -> has to be filled in by caller of etTimer_construct */
+	void* timerFunctionData;			/**< the data that are passed to the timer function */
+	etOSTimerData osTimerData;			/**< OS specific timer id (e.g. handle or id) -> is filled in by etTimer_construct */
 } etTimer;
 
 /**

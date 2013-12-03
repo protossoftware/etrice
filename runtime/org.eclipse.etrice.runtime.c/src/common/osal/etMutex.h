@@ -11,13 +11,16 @@
  *
  *******************************************************************************/
 
-#ifndef _ETMUTEX_H_
-#define _ETMUTEX_H_
-
 /**
+ * \file etMutex.h
+ *
  * etMutex.h defines a generic interface for platform specific implementations of a mutex
  *
- * */
+ * \author Thomas Schuetz, Thomas Jung
+ */
+
+#ifndef _ETMUTEX_H_
+#define _ETMUTEX_H_
 
 #include "etDatatypes.h"
 

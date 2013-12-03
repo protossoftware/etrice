@@ -12,15 +12,34 @@
 
 #include "helpers/etTimeHelpers.h"
 
-void etTimeHelpers_subtract(etTime *first, etTime* second){
-	/* TODO: implement */
+#define _1E9	1000000000
+
+static void normalize(etTime* time) {
+	etInt32 f = time->nSec / _1E9;
+	if (f>0) {
+		time->sec += f;
+		time->nSec -= f*_1E9;
+	}
+	else if (f<0) {
+		++f;
+		time->sec -= f;
+		time->nSec += f*_1E9;
+	}
 }
 
-void etTimeHelpers_add(etTime *first, etTime* second){
-	/* TODO: implement */
+void etTimeHelpers_subtract(etTime *first, const etTime* second){
+	first->sec -= second->sec;
+	first->nSec -= second->nSec;
+	normalize(first);
 }
 
-etInt32 etTimeHelpers_convertToMSec(etTime *time){
+void etTimeHelpers_add(etTime *first, const etTime* second){
+	first->sec += second->sec;
+	first->nSec += second->nSec;
+	normalize(first);
+}
+
+etInt32 etTimeHelpers_convertToMSec(const etTime *time){
 	return time->sec * 1000 + time->nSec / 1000000;
 }
 

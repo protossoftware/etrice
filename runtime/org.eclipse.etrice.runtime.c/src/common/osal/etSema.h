@@ -10,12 +10,15 @@
  *
  *******************************************************************************/
 
+/**
+ * \file etSema.h
+ *
+ * etSema.h defines a generic interface for platform specific implementations of a semaphore
+ *
+ * \author Thomas Schuetz
+ */
 #ifndef _ETSEMA_H_
 #define _ETSEMA_H_
-
-/**
- * etSema.h defines a generic interface for platform specific implementations of a semaphore
- */
 
 #include "etDatatypes.h"
 

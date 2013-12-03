@@ -58,7 +58,7 @@ etMessage* etMessageQueue_pop(etMessageQueue* self){
 		self->first = self->last = NULL;
 	}
 	else {
-		/*more than one message in queue -> set first to nex message*/
+		/*more than one message in queue -> set first to next message*/
 		self->first = self->first->next;
 	}
 
