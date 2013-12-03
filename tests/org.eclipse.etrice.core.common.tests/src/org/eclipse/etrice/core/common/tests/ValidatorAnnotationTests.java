@@ -44,7 +44,7 @@ public class ValidatorAnnotationTests extends AbstractXtextTests {
 		EObject model = getModelAndExpect(readFileIntoString("NonUniqueAnnotationTypeTargets.etbase"), 0);
 		AssertableDiagnostics result = getTester().validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertErrorContains("duplicate target TestTarget");
+		result.assertErrorContains("The target TestTarget is defined more than once");
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class ValidatorAnnotationTests extends AbstractXtextTests {
 		EObject model = getModelAndExpect(readFileIntoString("UndefinedAttributeInAnnotation.etbase"), 0);
 		AssertableDiagnostics result = getTester().validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertErrorContains("undefined attribute");
+		result.assertErrorContains("Attribute xyz is undefined");
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class ValidatorAnnotationTests extends AbstractXtextTests {
 		EObject model = getModelAndExpect(readFileIntoString("MissingMandatoryAttributeInAnnotation.etbase"), 0);
 		AssertableDiagnostics result = getTester().validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertErrorContains("missing mandatory attributes");
+		result.assertErrorContains("Mandatory attribute ");
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class ValidatorAnnotationTests extends AbstractXtextTests {
 		EObject model = getModelAndExpect(readFileIntoString("InvalidEnumValueInAnnotation.etbase"), 0);
 		AssertableDiagnostics result = getTester().validate(model);
 		result.assertDiagnosticsCount(1);
-		result.assertErrorContains("Invalid enum attribute value");
+		result.assertErrorContains("Choose one of the allowed enum values");
 	}
 	
 	@Test

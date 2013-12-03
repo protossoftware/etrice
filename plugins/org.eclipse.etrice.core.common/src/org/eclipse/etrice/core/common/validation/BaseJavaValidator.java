@@ -74,7 +74,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 					}
 				}
 				if (!isDefined) {
-					error("mandatory attribute "+att.getName()+" is missing",
+					error("Mandatory attribute "+att.getName()+" is missing",
 							a,
 							BasePackage.Literals.ANNOTATION__ATTRIBUTES,
 							MANDATORY_ATTRIBUTE_MISSING,
@@ -118,7 +118,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 									}
 								}
 								if (!valueAllowed) {
-									error("choose one of the allowed enum values",
+									error("Choose one of the allowed enum values",
 											kv,
 											BasePackage.Literals.KEY_VALUE__VALUE,
 											UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE,
@@ -126,7 +126,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 								}
 							}
 							else {
-								error("choose one of the allowed enum values (values has to be a string)",
+								error("Choose one of the allowed enum values (values has to be a string)",
 										kv,
 										BasePackage.Literals.KEY_VALUE__VALUE,
 										UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE,
