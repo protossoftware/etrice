@@ -234,8 +234,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		}
 		if (keyword.getValue().equals("=")) {
 			if (!config.getAttribute().eIsProxy())
-				// TODO-Enum
-				if (!(dataType instanceof PrimitiveType))
+				if (!(dataType instanceof PrimitiveType || dataType instanceof EnumerationType))
 					return true;
 		}
 

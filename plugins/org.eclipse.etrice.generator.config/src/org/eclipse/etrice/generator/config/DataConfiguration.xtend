@@ -39,6 +39,7 @@ import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IResourceURIAcceptor
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import java.util.HashSet
 
 class DataConfiguration implements IDataConfiguration {
 
@@ -162,17 +163,17 @@ class DataConfiguration implements IDataConfiguration {
 	}
 
 	override getDynConfigReadAttributes(ActorClass actor) {
-		val result = new ArrayList<Attribute>
+		val result = new HashSet<Attribute>
 		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
 		configs?.forEach(c|if(c.readOnly) result.add(c.attribute))
-		return result
+		return result.toList
 	}
 
 	override getDynConfigWriteAttributes(ActorClass actor) {
-		val result = new ArrayList<Attribute>
+		val result = new HashSet<Attribute>
 		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
 		configs?.forEach(c|if(!c.readOnly) result.add(c.attribute))
-		return result
+		return result.toList
 	}
 
 	override void addReferencedModels(IResourceURIAcceptor acceptor, EObject root) {

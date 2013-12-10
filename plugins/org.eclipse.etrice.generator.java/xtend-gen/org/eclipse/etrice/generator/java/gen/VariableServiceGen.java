@@ -411,8 +411,8 @@ public class VariableServiceGen {
               {
                 RefableType _type = a_2.getType();
                 DataType _type_1 = _type.getType();
-                boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
-                if (_isPrimitive) {
+                boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+                if (_isEnumerationOrPrimitive) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("map.put(id+\"/");
@@ -674,8 +674,8 @@ public class VariableServiceGen {
       CharSequence _xifexpression = null;
       RefableType _type = a.getType();
       DataType _type_1 = _type.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
-      if (_isPrimitive) {
+      boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+      if (_isEnumerationOrPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("values.put(\"");
         String _path = ai.getPath();
@@ -745,8 +745,8 @@ public class VariableServiceGen {
       CharSequence _xifexpression = null;
       RefableType _type = a.getType();
       DataType _type_1 = _type.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
-      if (_isPrimitive) {
+      boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+      if (_isEnumerationOrPrimitive) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("id = \"");
         String _path = ai.getPath();
@@ -895,8 +895,8 @@ public class VariableServiceGen {
       CharSequence _xifexpression = null;
       RefableType _type = a.getType();
       DataType _type_1 = _type.getType();
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_1);
-      if (_isPrimitive) {
+      boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
+      if (_isEnumerationOrPrimitive) {
         CharSequence _xblockexpression_1 = null;
         {
           String _xifexpression_1 = null;

@@ -13,6 +13,7 @@ package org.eclipse.etrice.generator.config;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
@@ -436,8 +437,8 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public List<Attribute> getDynConfigReadAttributes(final ActorClass actor) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    final ArrayList<Attribute> result = _arrayList;
+    HashSet<Attribute> _hashSet = new HashSet<Attribute>();
+    final HashSet<Attribute> result = _hashSet;
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
@@ -451,12 +452,12 @@ public class DataConfiguration implements IDataConfiguration {
       };
       IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
-    return result;
+    return IterableExtensions.<Attribute>toList(result);
   }
   
   public List<Attribute> getDynConfigWriteAttributes(final ActorClass actor) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    final ArrayList<Attribute> result = _arrayList;
+    HashSet<Attribute> _hashSet = new HashSet<Attribute>();
+    final HashSet<Attribute> result = _hashSet;
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
@@ -471,7 +472,7 @@ public class DataConfiguration implements IDataConfiguration {
       };
       IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
-    return result;
+    return IterableExtensions.<Attribute>toList(result);
   }
   
   public void addReferencedModels(final IResourceURIAcceptor acceptor, final EObject root) {

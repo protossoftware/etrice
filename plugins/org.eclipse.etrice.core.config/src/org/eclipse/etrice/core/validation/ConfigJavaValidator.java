@@ -189,12 +189,17 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 			return;
 
 		DataType type = attr.getType().getType();
-
+		
 		if (type instanceof PrimitiveType) {
 			PrimitiveType primitive = (PrimitiveType) type;
 
 			checkAttrConfigMin(primitive, config);
 			checkAttrConfigMax(primitive, config);
+		} else {
+			if(config.getMin() != null)
+				error("min is only allowed for numeric types", ConfigPackage.Literals.ATTR_CLASS_CONFIG__MIN);
+			if(config.getMax() != null)
+				error("max is only allowed for numeric types", ConfigPackage.Literals.ATTR_CLASS_CONFIG__MAX);
 		}
 	}
 

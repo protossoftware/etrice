@@ -461,13 +461,6 @@ public class ConfigGenAddon {
           _switchResult = _xblockexpression_1;
         }
       }
-      if (!_matched) {
-        if (aType instanceof EnumerationType) {
-          final EnumerationType _enumerationType = (EnumerationType)aType;
-          _matched=true;
-          _switchResult = "";
-        }
-      }
       _xblockexpression = (_switchResult);
     }
     return _xblockexpression;

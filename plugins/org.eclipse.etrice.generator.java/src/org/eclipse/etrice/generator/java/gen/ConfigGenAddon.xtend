@@ -141,10 +141,6 @@ class ConfigGenAddon {
 					«ENDIF»
 				'''
 			}
-			EnumerationType: {
-				// TODO-Enum
-				""
-			}
 		}
 	}
 	
