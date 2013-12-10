@@ -238,8 +238,8 @@ class CExtensions implements ILanguageExtension {
 			ExternalType:{
 				if (dt.defaultValueLiteral != null )
 					return dt.getDefaultValueLiteral
-				diagnostician.error("cannot initialize external type "+dt.name, dt.eContainer, dt.eContainingFeature)
-				"cannot instantiate external data type "+dt.name
+				diagnostician.error("external type "+dt.name + "has no default initialization", dt.eContainer, dt.eContainingFeature)
+				""
 			}
 			DataClass:			
 			'''

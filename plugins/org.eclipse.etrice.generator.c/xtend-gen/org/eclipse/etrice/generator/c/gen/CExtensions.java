@@ -516,13 +516,12 @@ public class CExtensions implements ILanguageExtension {
             return _externalType.getDefaultValueLiteral();
           }
           String _name = _externalType.getName();
-          String _plus = ("cannot initialize external type " + _name);
+          String _plus = ("external type " + _name);
+          String _plus_1 = (_plus + "has no default initialization");
           EObject _eContainer = _externalType.eContainer();
           EStructuralFeature _eContainingFeature = _externalType.eContainingFeature();
-          this.diagnostician.error(_plus, _eContainer, _eContainingFeature);
-          String _name_1 = _externalType.getName();
-          String _plus_1 = ("cannot instantiate external data type " + _name_1);
-          _xblockexpression = (_plus_1);
+          this.diagnostician.error(_plus_1, _eContainer, _eContainingFeature);
+          _xblockexpression = ("");
         }
         _switchResult = _xblockexpression;
       }
