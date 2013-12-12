@@ -48,6 +48,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.xml.sax.SAXException;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -561,6 +562,8 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 				ok = false;
 				if (e instanceof FileNotFoundException)
 					logger.logError("couldn't load '"+uri+"' (file not found)", null);
+				if(e instanceof SAXException)
+					logger.logError("couldn't load '"+uri+"' (maybe unknown or wrong file extension, eTrice file extensions have to be lower case)", null);
 				else
 					logger.logError(e.getMessage(), null);
 			}
