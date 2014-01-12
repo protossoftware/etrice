@@ -248,10 +248,10 @@ class RoomExtensions {
 	/**
 	 * makes a valid identifier from a path string
 	 * @param path a slash (/) separated path
-	 * @return the path with slashes replaced by underscores (_)
+	 * @return the path with slashes (and colons as in replicated actors) replaced by underscores (_)
 	 */
 	def String getPathName(String path){
-		path.replaceAll("/","_");
+		path.replaceAll("/","_").replaceAll(":","_")
 	}
 
 	//-------------------------------------------------------

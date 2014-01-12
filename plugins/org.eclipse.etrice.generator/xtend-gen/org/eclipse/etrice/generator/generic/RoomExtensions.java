@@ -293,11 +293,12 @@ public class RoomExtensions {
   /**
    * makes a valid identifier from a path string
    * @param path a slash (/) separated path
-   * @return the path with slashes replaced by underscores (_)
+   * @return the path with slashes (and colons as in replicated actors) replaced by underscores (_)
    */
   public String getPathName(final String path) {
     String _replaceAll = path.replaceAll("/", "_");
-    return _replaceAll;
+    String _replaceAll_1 = _replaceAll.replaceAll(":", "_");
+    return _replaceAll_1;
   }
   
   /**
