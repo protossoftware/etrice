@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
@@ -38,6 +39,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -216,8 +218,10 @@ public class RoomCrossReferencer {
 	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
 		actorClasses.add(ac);
 		
-		for (ActorRef ar : ac.getActorRefs()) {
-			recursivelyAddReferencedClasses(ar.getType(), actorClasses);
+		for (ActorContainerRef ar : RoomHelpers.getAllActorContainerRefs(ac)) {
+			if (ar instanceof ActorRef) {
+				recursivelyAddReferencedClasses(((ActorRef)ar).getType(), actorClasses);
+			}
 		}
 	}
 
