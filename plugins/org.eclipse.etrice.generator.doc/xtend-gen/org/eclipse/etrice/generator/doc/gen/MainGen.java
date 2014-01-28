@@ -35,7 +35,7 @@ public class MainGen implements IGenerator {
   private DocGen docGen;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-    this.prepFS.prepare(resource);
+    this.prepFS.prepareDocTargetPaths(resource);
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {
@@ -44,7 +44,7 @@ public class MainGen implements IGenerator {
     }
   }
   
-  public void doGenerate(final Root e) {
+  private void doGenerate(final Root e) {
     this.instanceDiagramGen.doGenerate(e);
     this.docGen.doGenerate(e);
   }

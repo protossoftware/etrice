@@ -14,6 +14,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.File;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
@@ -44,15 +45,7 @@ public class PrepareFileSystem {
   @Inject
   private ILogger logger;
   
-  /**
-   * Recursively erase all folders receiving generated code
-   * an to place a readme file into those folders.
-   * The folders are determined from the used models of every generator
-   * model found in the resource.
-   * 
-   * @param resource a {@link Resource}
-   */
-  public void prepare(final Resource resource) {
+  public void prepareCodeTargetPaths(final Resource resource) {
     HashSet<String> _hashSet = new HashSet<String>();
     Set<String> pathes = _hashSet;
     EList<EObject> _contents = resource.getContents();
@@ -78,6 +71,47 @@ public class PrepareFileSystem {
         }
       }
     }
+    this.prepare(pathes);
+  }
+  
+  public void prepareDocTargetPaths(final Resource resource) {
+    HashSet<String> _hashSet = new HashSet<String>();
+    Set<String> pathes = _hashSet;
+    EList<EObject> _contents = resource.getContents();
+    for (final EObject e : _contents) {
+      if ((e instanceof Root)) {
+        EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
+        for (final RoomModel mdl : _usedRoomModels) {
+          {
+            final String tgtpath = this._roomExtensions.getDocGenerationTargetPath(mdl);
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(tgtpath, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _isEmpty = tgtpath.isEmpty();
+              boolean _not = (!_isEmpty);
+              _and = (_notEquals && _not);
+            }
+            if (_and) {
+              pathes.add(tgtpath);
+            }
+          }
+        }
+      }
+    }
+    this.prepare(pathes);
+  }
+  
+  /**
+   * Recursively erase all folders receiving generated code
+   * and place a readme file in those folders.
+   * The folders are determined from the used models of every generator
+   * model found in the resource.
+   * 
+   * @param resource a {@link Resource}
+   */
+  public void prepare(final Collection<String> pathes) {
     for (final String path : pathes) {
       {
         String _plus = ("clearing " + path);

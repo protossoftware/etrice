@@ -32,7 +32,7 @@ class MainGen implements IGenerator {
 	@Inject PrepareFileSystem prepFS
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		prepFS.prepare(resource)
+		prepFS.prepareCodeTargetPaths(resource)
 		for (e: resource.contents){
 			if (e instanceof Root) {
 				doGenerate(e as Root)

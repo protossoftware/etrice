@@ -188,13 +188,15 @@ public class GeneratorModelBuilder {
 				}
 			}
 			
-			createOptionalActorInstanceTrees(root);
-			
-			connectPorts(root);
-			checkPortMultiplicity(root);
-			connectServices(root);
-			
-			matchOptionalActorInstances(root);
+			if (!root.getSubSystemInstances().isEmpty()) {
+				createOptionalActorInstanceTrees(root);
+				
+				connectPorts(root);
+				checkPortMultiplicity(root);
+				connectServices(root);
+				
+				matchOptionalActorInstances(root);
+			}
 			
 			setObjectIDs();
 		}
