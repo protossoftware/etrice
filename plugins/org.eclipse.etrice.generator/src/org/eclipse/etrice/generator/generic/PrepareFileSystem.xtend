@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import java.util.Collection
 
 /**
  * A class that is used to recursively erase all folders receiving generated code
@@ -34,15 +35,7 @@ class PrepareFileSystem {
 	@Inject JavaIoFileSystemAccess fileAccess
 	@Inject ILogger logger
 	
-	/**
-	 * Recursively erase all folders receiving generated code
-	 * an to place a readme file into those folders.
-	 * The folders are determined from the used models of every generator
-	 * model found in the resource.
-	 * 
-	 * @param resource a {@link Resource}
-	 */
-	def void prepare(Resource resource) {
+	def void prepareCodeTargetPaths(Resource resource) {
 		var Set<String> pathes = new HashSet<String>();
 		for (e: resource.contents){
 			if (e instanceof Root) {
@@ -53,6 +46,32 @@ class PrepareFileSystem {
 				}
 			}
 		}
+		prepare(pathes)
+	}
+	
+	def void prepareDocTargetPaths(Resource resource) {
+		var Set<String> pathes = new HashSet<String>();
+		for (e: resource.contents){
+			if (e instanceof Root) {
+				for (mdl : (e as Root).usedRoomModels) {
+					val tgtpath = mdl.docGenerationTargetPath
+					if (tgtpath!=null && !tgtpath.empty)
+						pathes.add(tgtpath)
+				}
+			}
+		}
+		prepare(pathes)
+	}
+	
+	/**
+	 * Recursively erase all folders receiving generated code
+	 * and place a readme file in those folders.
+	 * The folders are determined from the used models of every generator
+	 * model found in the resource.
+	 * 
+	 * @param resource a {@link Resource}
+	 */
+	def void prepare(Collection<String> pathes) {
 		for (path : pathes) {
 			logger.logInfo("clearing "+path)
 			var f = new File(path)

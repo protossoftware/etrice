@@ -29,7 +29,7 @@ class MainGen implements IGenerator {
 	@Inject DocGen docGen
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		prepFS.prepare(resource)
+		prepFS.prepareDocTargetPaths(resource)
 		for (e: resource.contents){
 			if (e instanceof Root) {
 				doGenerate(e as Root)
@@ -37,7 +37,7 @@ class MainGen implements IGenerator {
 		}
 	}
 	
-	def void doGenerate(Root e) {
+	def private void doGenerate(Root e) {
 		instanceDiagramGen.doGenerate(e);
 		docGen.doGenerate(e);
 	}

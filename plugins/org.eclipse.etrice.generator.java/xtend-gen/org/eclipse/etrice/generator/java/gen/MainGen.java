@@ -65,7 +65,7 @@ public class MainGen implements IGenerator {
   private PrepareFileSystem prepFS;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-    this.prepFS.prepare(resource);
+    this.prepFS.prepareCodeTargetPaths(resource);
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {

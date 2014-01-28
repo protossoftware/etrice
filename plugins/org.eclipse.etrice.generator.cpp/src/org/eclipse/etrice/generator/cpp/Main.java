@@ -136,7 +136,7 @@ public class Main extends AbstractGenerator {
 		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
 		
 		if (getSettings().isGenerateDocumentation()) {
-			mainDocGenerator.doGenerate(genModel);
+			mainDocGenerator.doGenerate(genModel.eResource(), fileAccess);
 		}
 		
 		if (diagnostician.isFailed()) {
