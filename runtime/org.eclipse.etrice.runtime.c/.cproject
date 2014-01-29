@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.lib.debug.505530637" moduleId="org.eclipse.cdt.core.settings" name="PosixDebug">
@@ -14,11 +12,11 @@
 					</externalSetting>
 				</externalSettings>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -51,7 +49,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="test|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="platforms/MT_WIN_MinGW|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|platforms/MT_WIN_MinGW|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -68,9 +66,9 @@
 					</externalSetting>
 				</externalSettings>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -103,7 +101,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="test|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="platforms/MT_POSIX_GENERIC_GCC|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|platforms/MT_POSIX_GENERIC_GCC|platforms/ST_MSP430_F5438_CCS5_EXP430F5438|platforms/MSP430|platforms/ST_MSP430_F5438_CCS5_HWElevator|platforms/ST_MSP430_G2553_CCS5_LaunchPad|platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Thomas Schuetz (initial contribution)
+ * 		Thomas Schuetz (initial contribution), Thomas Jung
  *
  *******************************************************************************/
 
@@ -63,10 +63,27 @@ typedef uint32 etUInt32;
 
 typedef bool etBool;
 
+#define ALIGNMENT		2	/* power of 2 and >= sizeof(int) ! */
+
 typedef float32 etFloat32;
+typedef float32 etFloat64;
+
+/* string datatypes */
+typedef char* charPtr;
+
 
 typedef FILE* etFileHandle;
 
 typedef int8 etAddressId;
+
+
+/*
+ * typedefs for OS-specific types
+ */
+
+typedef uint16 etOSThreadId;
+
+typedef uint16 etOSTimerId;
+
 
 #endif /* _DATATYPES_H_ */

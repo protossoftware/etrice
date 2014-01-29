@@ -23,6 +23,8 @@
 #define TOGGLE	0x03
 
 
+#include "etTime.h"
+
 void writeTo7Seg(unsigned char data);
 void writeToDoor(unsigned char floor, unsigned char data);
 unsigned char getButtonStatus(unsigned char floor, unsigned int id);
@@ -31,6 +33,15 @@ void shiftMotorDown(void);
 void shiftMotorUp(void);
 unsigned char getMotorPosition(void);
 void toggleTestLed(void);
+void initHw(void);
+void enableInterrupt(void);
+void getTimeFromTarget(etTime *t);
+
+//serial
+void etSendSerialData(unsigned char len, unsigned char chnl, unsigned char * data);
+extern unsigned char etSerialDataReceived;
+extern unsigned char etSerialRxBuffer[];
+
 
 
 #endif /* ETPLATFORM_H_ */
