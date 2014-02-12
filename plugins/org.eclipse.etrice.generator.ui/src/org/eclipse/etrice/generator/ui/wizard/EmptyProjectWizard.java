@@ -29,6 +29,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
@@ -54,6 +55,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject runtimeProject;
 	protected String initialProjectName;
 	protected URI modelURI;
+	protected RoomValidationHelper roomValidator;
 	private EmptyProjectConfigPage config;
 	
 	private static final String[] additionalLaunchConfigLines = new String[] {
@@ -67,6 +69,8 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		runtimeProject = workspace.getRoot().getProject("org.eclipse.etrice.runtime.java");
+		
+		roomValidator = RoomValidationHelper.createInstance();
 	}
 
 	@Override
@@ -76,6 +80,11 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			@Override
 			protected boolean validatePage() {
 				if (super.validatePage()) {
+					
+					String projectName = getProjectName();
+					if(!roomValidator.isValidFQN(projectName))
+						setMessage("RoomModel name will be invalid ("+roomValidator.getMessage()+")", WizardPage.WARNING);
+					
 					IPath locationPath = getLocationPath();
 					projectLocation = Platform.getLocation().equals(
 							locationPath) ? null : locationPath;

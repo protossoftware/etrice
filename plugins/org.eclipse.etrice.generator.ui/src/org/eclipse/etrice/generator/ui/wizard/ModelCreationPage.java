@@ -38,6 +38,7 @@ import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 public class ModelCreationPage extends WizardPage implements Listener {
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 
+	protected RoomValidationHelper roomValidator;
 	private ResourceAndContainerGroup resourceGroup;
 	private IStructuredSelection selection;
 	
@@ -47,6 +48,7 @@ public class ModelCreationPage extends WizardPage implements Listener {
 	 */
 	public ModelCreationPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
+		roomValidator = RoomValidationHelper.createInstance();
 		
 		this.selection = selection;
 	}
@@ -146,10 +148,15 @@ public class ModelCreationPage extends WizardPage implements Listener {
 			setErrorMessage("file '"+file+"' already exists in the workspace");
 			return false;
 		}
+		if(!roomValidator.isValidFQN(getBaseName())){
+			setErrorMessage("Invalid roomModel name ("+roomValidator.getMessage()+")");
+			return false;
+		}
 		if (valid) {
 			setErrorMessage(null);
 			setMessage(null);
 		}
+		
 		return valid;
 	}
 
