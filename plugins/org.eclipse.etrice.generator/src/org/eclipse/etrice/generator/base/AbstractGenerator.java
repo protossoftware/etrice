@@ -716,8 +716,12 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * @throws IOException
 	 */
 	private URI getCanonicalFileURI(String uriString) throws IOException {
+		return getCanonicalFileURI(uriString, getResourceSet());
+	}
+	
+	private static URI getCanonicalFileURI(String uriString, ResourceSet rs) throws IOException {
 		if (uriString.startsWith("classpath:/")) {
-			URIConverter uriConverter = getResourceSet().getURIConverter();
+			URIConverter uriConverter = rs.getURIConverter();
 			URI uri = URI.createURI(uriString);
 			URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
 			return normalized;

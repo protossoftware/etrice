@@ -137,6 +137,19 @@ public class TypeHelpers {
     return (type instanceof PrimitiveType);
   }
   
+  public boolean isBoolean(final DataType type) {
+    boolean _and = false;
+    boolean _isPrimitive = this.isPrimitive(type);
+    if (!_isPrimitive) {
+      _and = false;
+    } else {
+      LiteralType _type = ((PrimitiveType) type).getType();
+      boolean _equals = Objects.equal(_type, LiteralType.BOOL);
+      _and = (_isPrimitive && _equals);
+    }
+    return _and;
+  }
+  
   public boolean isEnumeration(final DataType type) {
     return (type instanceof EnumerationType);
   }

@@ -110,6 +110,10 @@ class TypeHelpers {
 		return type instanceof PrimitiveType
 	}
 	
+	def isBoolean(DataType type){
+		type.primitive && (type as PrimitiveType).type==LiteralType.BOOL
+	}
+	
 	def isEnumeration(DataType type){
 		return type instanceof EnumerationType
 	}

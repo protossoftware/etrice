@@ -42,7 +42,6 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -518,14 +517,31 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
+      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isBoolean = ProtocolClassGen.this._typeHelpers.isBoolean(_type);
+          return Boolean.valueOf(_isBoolean);
+        }
+      };
+      final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
       boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (!_generateMSCInstrumentation) {
         _and = false;
       } else {
+        boolean _and_1 = false;
         boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        boolean _not = (!_isEmpty);
+        if (!_isEmpty) {
+          _and_1 = false;
+        } else {
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
+          _and_1 = (_isEmpty && _isEmpty_1);
+        }
+        boolean _not = (!_and_1);
         _and = (_generateMSCInstrumentation && _not);
       }
       final boolean usesMSC = _and;
@@ -614,39 +630,72 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("\t");
           _builder.append("const char* instName;");
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          final Message msg_1 = ((Message[])Conversions.unwrapArray(enumMsgs, Message.class))[0];
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("\t");
-          VarDecl _data_2 = msg_1.getData();
-          RefableType _refType_2 = _data_2.getRefType();
-          DataType _type_1 = _refType_2.getType();
-          String typeName_1 = this._typeHelpers.typeName(_type_1);
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("\t");
-          String _xifexpression_1 = null;
-          VarDecl _data_3 = msg_1.getData();
-          RefableType _refType_3 = _data_3.getRefType();
-          boolean _isRef_1 = _refType_3.isRef();
-          if (_isRef_1) {
-            _xifexpression_1 = "*";
-          } else {
-            _xifexpression_1 = "";
+          {
+            for(final Message msg_1 : enumMsgs) {
+              _builder.append("\t");
+              _builder.append("\t");
+              VarDecl _data_2 = msg_1.getData();
+              RefableType _refType_2 = _data_2.getRefType();
+              DataType _type_1 = _refType_2.getType();
+              String typeName_1 = this._typeHelpers.typeName(_type_1);
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              String _xifexpression_1 = null;
+              VarDecl _data_3 = msg_1.getData();
+              RefableType _refType_3 = _data_3.getRefType();
+              boolean _isRef_1 = _refType_3.isRef();
+              if (_isRef_1) {
+                _xifexpression_1 = "*";
+              } else {
+                _xifexpression_1 = "";
+              }
+              String refp_1 = _xifexpression_1;
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append(typeName_1, "		");
+              _builder.append(refp_1, "		");
+              _builder.append(" ");
+              String _name_1 = msg_1.getName();
+              _builder.append(_name_1, "		");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
           }
-          String refp_1 = _xifexpression_1;
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append(typeName_1, "		");
-          _builder.append(refp_1, "		");
-          _builder.append(" ");
-          String _name_1 = msg_1.getName();
-          _builder.append(_name_1, "		");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
+          {
+            for(final Message msg_2 : boolMsgs) {
+              _builder.append("\t");
+              _builder.append("\t");
+              VarDecl _data_4 = msg_2.getData();
+              RefableType _refType_4 = _data_4.getRefType();
+              DataType _type_2 = _refType_4.getType();
+              String typeName_2 = this._typeHelpers.typeName(_type_2);
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              String _xifexpression_2 = null;
+              VarDecl _data_5 = msg_2.getData();
+              RefableType _refType_5 = _data_5.getRefType();
+              boolean _isRef_2 = _refType_5.isRef();
+              if (_isRef_2) {
+                _xifexpression_2 = "*";
+              } else {
+                _xifexpression_2 = "";
+              }
+              String refp_2 = _xifexpression_2;
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append(typeName_2, "		");
+              _builder.append(refp_2, "		");
+              _builder.append(" ");
+              String _name_2 = msg_2.getName();
+              _builder.append(_name_2, "		");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t");
           _builder.append("#endif");
           _builder.newLine();
@@ -661,60 +710,60 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       {
         for(final Message message : sentMsgs) {
-          VarDecl _data_4 = message.getData();
-          boolean hasData = (!Objects.equal(_data_4, null));
-          _builder.newLineIfNotEmpty();
-          String _xifexpression_2 = null;
-          if (hasData) {
-            VarDecl _data_5 = message.getData();
-            RefableType _refType_4 = _data_5.getRefType();
-            DataType _type_2 = _refType_4.getType();
-            String _typeName = this._typeHelpers.typeName(_type_2);
-            _xifexpression_2 = _typeName;
-          } else {
-            _xifexpression_2 = "";
-          }
-          String typeName_2 = _xifexpression_2;
+          VarDecl _data_6 = message.getData();
+          boolean hasData = (!Objects.equal(_data_6, null));
           _builder.newLineIfNotEmpty();
           String _xifexpression_3 = null;
-          boolean _and_1 = false;
-          if (!hasData) {
-            _and_1 = false;
-          } else {
-            VarDecl _data_6 = message.getData();
-            RefableType _refType_5 = _data_6.getRefType();
-            DataType _type_3 = _refType_5.getType();
-            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_3);
-            boolean _not_1 = (!_isEnumerationOrPrimitive);
-            _and_1 = (hasData && _not_1);
-          }
-          if (_and_1) {
-            _xifexpression_3 = "*";
+          if (hasData) {
+            VarDecl _data_7 = message.getData();
+            RefableType _refType_6 = _data_7.getRefType();
+            DataType _type_3 = _refType_6.getType();
+            String _typeName = this._typeHelpers.typeName(_type_3);
+            _xifexpression_3 = _typeName;
           } else {
             _xifexpression_3 = "";
           }
-          String refp_2 = _xifexpression_3;
+          String typeName_3 = _xifexpression_3;
           _builder.newLineIfNotEmpty();
           String _xifexpression_4 = null;
-          if (hasData) {
-            String _plus = (", " + typeName_2);
-            String _plus_1 = (_plus + refp_2);
-            String _plus_2 = (_plus_1 + " data");
-            _xifexpression_4 = _plus_2;
+          boolean _and_2 = false;
+          if (!hasData) {
+            _and_2 = false;
+          } else {
+            VarDecl _data_8 = message.getData();
+            RefableType _refType_7 = _data_8.getRefType();
+            DataType _type_4 = _refType_7.getType();
+            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_4);
+            boolean _not_1 = (!_isEnumerationOrPrimitive);
+            _and_2 = (hasData && _not_1);
+          }
+          if (_and_2) {
+            _xifexpression_4 = "*";
           } else {
             _xifexpression_4 = "";
           }
-          String data = _xifexpression_4;
+          String refp_3 = _xifexpression_4;
+          _builder.newLineIfNotEmpty();
+          String _xifexpression_5 = null;
+          if (hasData) {
+            String _plus = (", " + typeName_3);
+            String _plus_1 = (_plus + refp_3);
+            String _plus_2 = (_plus_1 + " data");
+            _xifexpression_5 = _plus_2;
+          } else {
+            _xifexpression_5 = "";
+          }
+          String data = _xifexpression_5;
           _builder.newLineIfNotEmpty();
           String _portClassName_5 = this._roomExtensions.getPortClassName(pc, true);
-          String _name_2 = message.getName();
-          String _messageSetterSignature = this.messageSetterSignature(_portClassName_5, _name_2, data);
+          String _name_3 = message.getName();
+          String _messageSetterSignature = this.messageSetterSignature(_portClassName_5, _name_3, data);
           _builder.append(_messageSetterSignature, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           String _portClassName_6 = this._roomExtensions.getPortClassName(pc, false);
-          String _name_3 = message.getName();
-          String _messageGetterSignature = this.messageGetterSignature(_portClassName_6, _name_3, typeName_2);
+          String _name_4 = message.getName();
+          String _messageGetterSignature = this.messageGetterSignature(_portClassName_6, _name_4, typeName_3);
           _builder.append(_messageGetterSignature, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
@@ -748,14 +797,31 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
+      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isBoolean = ProtocolClassGen.this._typeHelpers.isBoolean(_type);
+          return Boolean.valueOf(_isBoolean);
+        }
+      };
+      final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
       boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (!_generateMSCInstrumentation) {
         _and = false;
       } else {
+        boolean _and_1 = false;
         boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        boolean _not = (!_isEmpty);
+        if (!_isEmpty) {
+          _and_1 = false;
+        } else {
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
+          _and_1 = (_isEmpty && _isEmpty_1);
+        }
+        boolean _not = (!_and_1);
         _and = (_generateMSCInstrumentation && _not);
       }
       final boolean usesMSC = _and;
@@ -791,15 +857,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
-            boolean _and_1 = false;
+            boolean _and_2 = false;
             if (!usesMSC) {
-              _and_1 = false;
+              _and_2 = false;
             } else {
-              Object _get = ((Object[])Conversions.unwrapArray(enumMsgs, Object.class))[0];
-              boolean _equals = Objects.equal(message, _get);
-              _and_1 = (usesMSC && _equals);
+              final Function1<Message,Boolean> _function_3 = new Function1<Message,Boolean>() {
+                public Boolean apply(final Message m) {
+                  boolean _equals = Objects.equal(m, message);
+                  return Boolean.valueOf(_equals);
+                }
+              };
+              boolean _exists = IterableExtensions.<Message>exists(enumMsgs, _function_3);
+              _and_2 = (usesMSC && _exists);
             }
-            if (_and_1) {
+            if (_and_2) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();
@@ -834,6 +905,49 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLine();
             }
           }
+          {
+            boolean _and_3 = false;
+            if (!usesMSC) {
+              _and_3 = false;
+            } else {
+              final Function1<Message,Boolean> _function_4 = new Function1<Message,Boolean>() {
+                public Boolean apply(final Message m) {
+                  boolean _equals = Objects.equal(m, message);
+                  return Boolean.valueOf(_equals);
+                }
+              };
+              boolean _exists_1 = IterableExtensions.<Message>exists(boolMsgs, _function_4);
+              _and_3 = (usesMSC && _exists_1);
+            }
+            if (_and_3) {
+              _builder.append("\t");
+              _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("{");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("const char** peerName;");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("for (peerName=self->peerNames; *peerName!=NULL; ++peerName)");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t\t\t");
+              _builder.append("ET_MSC_LOGGER_ASYNC_OUT(self->instName, data?\"true\":\"false\", *peerName)");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("#endif");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("self->");
           String _name_2 = message.getName();
@@ -851,15 +965,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
-            boolean _and_2 = false;
+            boolean _and_4 = false;
             if (!usesMSC) {
-              _and_2 = false;
+              _and_4 = false;
             } else {
-              Object _get_1 = ((Object[])Conversions.unwrapArray(enumMsgs, Object.class))[0];
-              boolean _equals_1 = Objects.equal(message, _get_1);
-              _and_2 = (usesMSC && _equals_1);
+              final Function1<Message,Boolean> _function_5 = new Function1<Message,Boolean>() {
+                public Boolean apply(final Message m) {
+                  boolean _equals = Objects.equal(m, message);
+                  return Boolean.valueOf(_equals);
+                }
+              };
+              boolean _exists_2 = IterableExtensions.<Message>exists(enumMsgs, _function_5);
+              _and_4 = (usesMSC && _exists_2);
             }
-            if (_and_2) {
+            if (_and_4) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();
@@ -908,10 +1027,67 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLine();
             }
           }
+          {
+            boolean _and_5 = false;
+            if (!usesMSC) {
+              _and_5 = false;
+            } else {
+              final Function1<Message,Boolean> _function_6 = new Function1<Message,Boolean>() {
+                public Boolean apply(final Message m) {
+                  boolean _equals = Objects.equal(m, message);
+                  return Boolean.valueOf(_equals);
+                }
+              };
+              boolean _exists_3 = IterableExtensions.<Message>exists(boolMsgs, _function_6);
+              _and_5 = (usesMSC && _exists_3);
+            }
+            if (_and_5) {
+              _builder.append("\t");
+              _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("if (self->peer->");
+              String _name_10 = message.getName();
+              _builder.append(_name_10, "		");
+              _builder.append("!=self->");
+              String _name_11 = message.getName();
+              _builder.append(_name_11, "		");
+              _builder.append(") {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, (self->peer->");
+              String _name_12 = message.getName();
+              _builder.append(_name_12, "			");
+              _builder.append(")?\"true\":\"false\", self->instName)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("((");
+              String _portClassName_3 = this._roomExtensions.getPortClassName(pc, false);
+              _builder.append(_portClassName_3, "			");
+              _builder.append("*)self)->");
+              String _name_13 = message.getName();
+              _builder.append(_name_13, "			");
+              _builder.append(" = self->peer->");
+              String _name_14 = message.getName();
+              _builder.append(_name_14, "			");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("#endif");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("return self->peer->");
-          String _name_10 = message.getName();
-          _builder.append(_name_10, "	");
+          String _name_15 = message.getName();
+          _builder.append(_name_15, "	");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
