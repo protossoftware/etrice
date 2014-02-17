@@ -45,12 +45,23 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 	@Override
 	public String resolve(EObject object) {
 		String resolve = super.resolve(object);
+		
+		// can't do anything about empty URIs
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
 
 		return resolve(resolve, object.eResource());
 	}
 
+	/**
+	 * resolves a URI against the URI of a resource (usually that of the import).
+	 * The URI is resolved against a base URI (if given), environment variables are replaced
+	 * and the path is normalized. If possible the URI is converted into a platform URI.
+	 * 
+	 * @param resolve the URI to resolve
+	 * @param resource the resource against which to resolve (or @code{null})
+	 * @return the resolved URI as string
+	 */
 	public String resolve(String resolve, Resource resource) {
 		URI baseUri = resource==null? null : resource.getURI();
 		resolve = resolve(resolve, baseUri);
@@ -73,6 +84,8 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 	
 	private String resolve(String resolve, URI baseUri) {
 		resolve = substituteEnvVars(resolve);
+		
+		// replace (double) slashes and backslashes with single slashes
 		resolve = resolve.replaceAll("\\\\", "/");
 		resolve = resolve.replaceAll("//", "/");
 		
@@ -135,7 +148,7 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		return resolve;
 	}
 	
-	public URI getCanonicalFileURI(String uriString, URIConverter uriConverter) throws IOException {
+	private URI getCanonicalFileURI(String uriString, URIConverter uriConverter) throws IOException {
 		URI uri;
 		if (uriString.startsWith("classpath:/") || uriString.startsWith("platform:/") || uriString.startsWith("file:/")) {
 			uri = URI.createURI(uriString);
@@ -150,6 +163,10 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		
 		String can = normalized.toFileString();
 		File f = new File(can);
+		
+		// now we give extensions a chance to locate the model file
+		f = ModelLocator.getInstance().locateModel(f);
+		
 		can = f.getCanonicalPath();	// e.g. remove embedded ../
 		URI canonical = URI.createFileURI(can);
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
