@@ -36,7 +36,7 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.etrice.core.scoping.NormalizingUriResolver;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -378,7 +378,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * The injected platform relative URI resolver
 	 */
 	@Inject
-	protected PlatformRelativeUriResolver uriResolver;
+	protected NormalizingUriResolver uriResolver;
 	
 	/**
 	 * The injected translation provider
@@ -541,7 +541,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		loadedModelURIs.clear();
 		
 		for (String uri : uriList) {
-			addResourceURI(uri);
+			addResourceURI(uriResolver.resolve(uri, null));
 		}
 		
 		boolean ok = true;

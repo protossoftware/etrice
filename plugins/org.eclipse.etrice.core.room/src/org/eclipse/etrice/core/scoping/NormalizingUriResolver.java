@@ -18,10 +18,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,7 +31,7 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
  * @author Henrik Rentz-Reichert
  *
  */
-public class PlatformRelativeUriResolver extends ImportUriResolver {
+public class NormalizingUriResolver extends ImportUriResolver {
 
 	private Map<String, String> env = System.getenv();
 	
@@ -56,7 +52,7 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 	/**
 	 * resolves a URI against the URI of a resource (usually that of the import).
 	 * The URI is resolved against a base URI (if given), environment variables are replaced
-	 * and the path is normalized. If possible the URI is converted into a platform URI.
+	 * and the path is normalized.
 	 * 
 	 * @param resolve the URI to resolve
 	 * @param resource the resource against which to resolve (or @code{null})
@@ -169,14 +165,6 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		
 		can = f.getCanonicalPath();	// e.g. remove embedded ../
 		URI canonical = URI.createFileURI(can);
-		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			IFile[] files = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(java.net.URI.create(canonical.toString()));
-			if (files.length>0) {
-				IPath fullPath = files[0].getFullPath();
-				String loc = fullPath.toString();
-				canonical = URI.createPlatformResourceURI(loc, true);
-			}
-		}
 		return canonical;
 	}
 }
