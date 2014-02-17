@@ -155,7 +155,7 @@ class GenericStateMachineGenerator {
 			else
 				langExt.accessLevelPrivate
 		val privAccess = langExt.accessLevelPrivate
-		val self = langExt.selfPointer(ac.name, true)
+		val selfPtr = langExt.selfPointer(ac.name, true)
 		val selfOnly = langExt.selfPointer(ac.name, false)
 		val getLocalId = 	if (langExt.usesInheritance) {
 								if (langExt.usesPointers)
@@ -213,7 +213,7 @@ class GenericStateMachineGenerator {
 		 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
 		 «ENDIF»
 		 */
-		«privAccess»void «opScopePriv»exitTo(«self»«stateType» current, «stateType» to«IF usesHdlr», «boolType» handler«ENDIF») {
+		«privAccess»void «opScopePriv»exitTo(«selfPtr»«stateType» current, «stateType» to«IF usesHdlr», «boolType» handler«ENDIF») {
 			while (current!=to) {
 				switch (current) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
@@ -237,7 +237,7 @@ class GenericStateMachineGenerator {
 		 * @param generic_data - the generic data pointer
 		 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 		 */
-		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«self»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
+		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«selfPtr»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
 			switch (chain) {
 				«var allchains = xpac.getTransitionChains()»
 				«FOR tc : allchains»
@@ -261,7 +261,7 @@ class GenericStateMachineGenerator {
 		 «ENDIF»
 		 * @return - the ID of the final leaf state
 		 */
-		«privAccess»«stateType» «opScopePriv»enterHistory(«self»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
+		«privAccess»«stateType» «opScopePriv»enterHistory(«selfPtr»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
 			«boolType» skip_entry = «langExt.booleanConstant(false)»;
 			if (state >= STATE_MAX) {
 				state = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state - STATE_MAX);
@@ -678,7 +678,7 @@ class GenericStateMachineGenerator {
 		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
-		val self = langExt.selfPointer(ac.name, true)
+		val selfPtr = langExt.selfPointer(ac.name, true)
 		val usesHdlr = usesHandlerTrPoints(xpac)
 		
 	'''
@@ -720,7 +720,7 @@ class GenericStateMachineGenerator {
 			 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
 			 «ENDIF»
 			 */
-			void exitTo(«self»int current, int to«IF usesHdlr», «boolType» handler«ENDIF»);
+			void exitTo(«selfPtr»int current, int to«IF usesHdlr», «boolType» handler«ENDIF»);
 			
 			/**
 			 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
@@ -729,7 +729,7 @@ class GenericStateMachineGenerator {
 			 * @param generic_data - the generic data pointer
 			 * @return the ID of the final state
 			 */
-			int executeTransitionChain(«self»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data«ENDIF»);
+			int executeTransitionChain(«selfPtr»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data«ENDIF»);
 			
 			/**
 			 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
@@ -739,7 +739,7 @@ class GenericStateMachineGenerator {
 			 «ENDIF»
 			 * @return - the ID of the final leaf state
 			 */
-			int enterHistory(«self»int state«IF usesHdlr», «boolType» handler«ENDIF»);
+			int enterHistory(«selfPtr»int state«IF usesHdlr», «boolType» handler«ENDIF»);
 		
 		public:
 

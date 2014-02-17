@@ -1485,10 +1485,10 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _xblockexpression;
   }
   
-  private String sendMessageCall(final boolean hasData, final String self, final String msg, final String typeName, final String data) {
+  private String sendMessageCall(final boolean hasData, final String selfPtr, final String msg, final String typeName, final String data) {
     String _xifexpression = null;
     if (hasData) {
-      String _plus = ("etPort_sendMessage(" + self);
+      String _plus = ("etPort_sendMessage(" + selfPtr);
       String _plus_1 = (_plus + ", ");
       String _plus_2 = (_plus_1 + msg);
       String _plus_3 = (_plus_2 + ", sizeof(");
@@ -1498,7 +1498,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String _plus_7 = (_plus_6 + ");");
       _xifexpression = _plus_7;
     } else {
-      String _plus_8 = ("etPort_sendMessage(" + self);
+      String _plus_8 = ("etPort_sendMessage(" + selfPtr);
       String _plus_9 = (_plus_8 + ", ");
       String _plus_10 = (_plus_9 + msg);
       String _plus_11 = (_plus_10 + ", 0, NULL);");

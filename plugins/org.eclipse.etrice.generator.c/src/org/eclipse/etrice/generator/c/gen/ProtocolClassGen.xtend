@@ -389,11 +389,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 	}
 
-	def private sendMessageCall(boolean hasData, String self, String msg, String typeName, String data) {
+	def private sendMessageCall(boolean hasData, String selfPtr, String msg, String typeName, String data) {
 		if (hasData)
-			"etPort_sendMessage("+self+", "+msg+", sizeof("+typeName+"), "+data+");"
+			"etPort_sendMessage("+selfPtr+", "+msg+", sizeof("+typeName+"), "+data+");"
 		else
-			"etPort_sendMessage("+self+", "+msg+", 0, NULL);"
+			"etPort_sendMessage("+selfPtr+", "+msg+", 0, NULL);"
 	}
 	
 	def private messageSignature(String className, String messageName, String methodSuffix, String data) {

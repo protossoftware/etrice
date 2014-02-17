@@ -269,7 +269,7 @@ public class GenericStateMachineGenerator {
       final String publicIf = _xifexpression_1;
       final String privAccess = this.langExt.accessLevelPrivate();
       String _name_1 = ac.getName();
-      final String self = this.langExt.selfPointer(_name_1, true);
+      final String selfPtr = this.langExt.selfPointer(_name_1, true);
       String _name_2 = ac.getName();
       final String selfOnly = this.langExt.selfPointer(_name_2, false);
       String _xifexpression_2 = null;
@@ -453,7 +453,7 @@ public class GenericStateMachineGenerator {
       _builder.append("void ");
       _builder.append(opScopePriv, "");
       _builder.append("exitTo(");
-      _builder.append(self, "");
+      _builder.append(selfPtr, "");
       String _stateType = this.stateType();
       _builder.append(_stateType, "");
       _builder.append(" current, ");
@@ -570,7 +570,7 @@ public class GenericStateMachineGenerator {
       _builder.append(" ");
       _builder.append(opScopePriv, "");
       _builder.append("executeTransitionChain(");
-      _builder.append(self, "");
+      _builder.append(selfPtr, "");
       _builder.append("int chain");
       {
         if (handleEvents) {
@@ -656,7 +656,7 @@ public class GenericStateMachineGenerator {
       _builder.append(" ");
       _builder.append(opScopePriv, "");
       _builder.append("enterHistory(");
-      _builder.append(self, "");
+      _builder.append(selfPtr, "");
       String _stateType_4 = this.stateType();
       _builder.append(_stateType_4, "");
       _builder.append(" state");
@@ -1843,7 +1843,7 @@ public class GenericStateMachineGenerator {
       }
       final boolean handleEvents = _or;
       String _name = ac.getName();
-      final String self = this.langExt.selfPointer(_name, true);
+      final String selfPtr = this.langExt.selfPointer(_name, true);
       final boolean usesHdlr = this.usesHandlerTrPoints(xpac);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
@@ -1985,7 +1985,7 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("void exitTo(");
-      _builder.append(self, "	");
+      _builder.append(selfPtr, "	");
       _builder.append("int current, int to");
       {
         if (usesHdlr) {
@@ -2022,7 +2022,7 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int executeTransitionChain(");
-      _builder.append(self, "	");
+      _builder.append(selfPtr, "	");
       _builder.append("int chain");
       {
         if (handleEvents) {
@@ -2063,7 +2063,7 @@ public class GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int enterHistory(");
-      _builder.append(self, "	");
+      _builder.append(selfPtr, "	");
       _builder.append("int state");
       {
         if (usesHdlr) {

@@ -54,10 +54,10 @@ class TypeHelpers {
 		else
 			return type.name
 	}
-	
-	def String getTypeName(DataType t) {
-		typeName(t)
-	}
+//	
+//	def String getTypeName(DataType t) {
+//		typeName(t)
+//	}
 	
 	def String getTypeName(RefableType t) {
 		typeName(t.getType())

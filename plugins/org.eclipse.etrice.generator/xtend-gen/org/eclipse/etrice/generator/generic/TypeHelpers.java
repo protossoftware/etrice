@@ -59,11 +59,6 @@ public class TypeHelpers {
     }
   }
   
-  public String getTypeName(final DataType t) {
-    String _typeName = this.typeName(t);
-    return _typeName;
-  }
-  
   public String getTypeName(final RefableType t) {
     DataType _type = t.getType();
     String _typeName = this.typeName(_type);
