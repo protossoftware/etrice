@@ -13,12 +13,19 @@
 package org.eclipse.etrice.core.scoping;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 /**
@@ -41,13 +48,30 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		if (resolve==null || resolve.trim().isEmpty())
 			return null;
 
-		URI baseUri = object.eResource()==null? null:object.eResource().getURI();
+		return resolve(resolve, object.eResource());
+	}
+
+	public String resolve(String resolve, Resource resource) {
+		URI baseUri = resource==null? null : resource.getURI();
 		resolve = resolve(resolve, baseUri);
+		try {
+			URIConverter converter = resource==null? null : resource.getResourceSet().getURIConverter();
+			URI canonical = getCanonicalFileURI(resolve, converter);
+			if (canonical.isPlatform())
+				resolve = "platform:/resource"+canonical.toPlatformString(true);
+			else {
+				resolve = "file:/"+canonical.toFileString();
+
+				resolve = resolve.replaceAll("\\\\", "/");
+				resolve = resolve.replaceAll("//", "/");
+			}
+		} catch (IOException e) {
+		}
 		
 		return resolve;
 	}
-
-	public String resolve(String resolve, URI baseUri) {
+	
+	private String resolve(String resolve, URI baseUri) {
 		resolve = substituteEnvVars(resolve);
 		resolve = resolve.replaceAll("\\\\", "/");
 		resolve = resolve.replaceAll("//", "/");
@@ -58,7 +82,7 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 		return resolve;
 	}
 
-	public String substituteEnvVars(String text) {
+	private String substituteEnvVars(String text) {
 		String pattern = "\\$\\{([A-Za-z0-9_]+)\\}";
 		Pattern expr = Pattern.compile(pattern);
 		Matcher matcher = expr.matcher(text);
@@ -88,23 +112,6 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 				uri = base.appendSegments(uri.segments());
 				resolve = "platform:/resource"+uri.toPlatformString(true);
 				return resolve;
-//				Path basePath = new Path(base.toPlatformString(true));
-//				if (basePath.segmentCount()<2) {
-//					// it's a project
-//					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(basePath.lastSegment());
-//					if (project!=null) {
-//						String abs = project.getRawLocationURI().toString();
-//						base = URI.createURI(abs);
-//					}
-//				}
-//				else {
-//					// it's a folder
-//					IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(basePath);
-//					if (folder!=null) {
-//						String abs = folder.getRawLocationURI().toString();
-//						base = URI.createURI(abs);
-//					}
-//				}
 			}
 			else if (base.isRelative()) {
 				base = URI.createFileURI(new File(base.toString()).getAbsolutePath());
@@ -126,5 +133,33 @@ public class PlatformRelativeUriResolver extends ImportUriResolver {
 			}
 		}
 		return resolve;
+	}
+	
+	public URI getCanonicalFileURI(String uriString, URIConverter uriConverter) throws IOException {
+		URI uri;
+		if (uriString.startsWith("classpath:/") || uriString.startsWith("platform:/") || uriString.startsWith("file:/")) {
+			uri = URI.createURI(uriString);
+		}
+		else {
+			uri = URI.createFileURI(uriString);
+		}
+		
+		URI normalized = (uriConverter==null) ? uri : uriConverter.normalize(uri);
+		if (normalized.isPlatform())
+			return normalized;
+		
+		String can = normalized.toFileString();
+		File f = new File(can);
+		can = f.getCanonicalPath();	// e.g. remove embedded ../
+		URI canonical = URI.createFileURI(can);
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			IFile[] files = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(java.net.URI.create(canonical.toString()));
+			if (files.length>0) {
+				IPath fullPath = files[0].getFullPath();
+				String loc = fullPath.toString();
+				canonical = URI.createPlatformResourceURI(loc, true);
+			}
+		}
+		return canonical;
 	}
 }

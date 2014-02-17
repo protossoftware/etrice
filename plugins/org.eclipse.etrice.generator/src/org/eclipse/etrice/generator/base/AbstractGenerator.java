@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.generator.base;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -680,59 +678,29 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	protected abstract int runGenerator();
 	
 	/**
-	 * This implementation of the method normalizes the URI and adds it to the
+	 * This implementation of the method assumes the URI is already normalized and adds it to the
 	 * list of models to load if not already loaded.
 	 * 
 	 * @see org.eclipse.etrice.generator.base.IResourceURIAcceptor#addResourceURI(java.lang.String)
 	 */
 	public boolean addResourceURI(String uri) {
-		try {
-			URI can = getCanonicalFileURI(uri);
-			if (loadedModelURIs.contains(can))
-				return false;
-			
-			boolean added = modelURIs.add(can);
-			if (added) {
-				if (loadedModelURIs.isEmpty())
-					logger.logInfo("added model "+uri);
-				else
-					logger.logInfo("added referenced model "+uri);
-			}
-			return added;
-		}
-		catch (IOException e) {
+		URI can = null;
+		if (uri.startsWith("platform:/") || uri.startsWith("classpath:/") || uri.startsWith("file:/"))
+			can = URI.createURI(uri);
+		else
+			can = URI.createFileURI(uri);
+		
+		if (loadedModelURIs.contains(can))
 			return false;
+		
+		boolean added = modelURIs.add(can);
+		if (added) {
+			if (loadedModelURIs.isEmpty())
+				logger.logInfo("added model "+uri);
+			else
+				logger.logInfo("added referenced model "+uri);
 		}
-	}
-
-	/**
-	 * Turns a normal or file URI string into a normalized URI.
-	 * The URI is then converted into a file string which is used to initialize
-	 * a {@link java.io.File.File File}. The {@link java.io.File.getCanonicalPath() getCanonicalPath()} methods
-	 * of File is called and again a URI is created from this path.
-	 * 
-	 * @param uriString a string representation of a URI
-	 * @return a normalized {@link org.eclipse.emf.common.util.URI URI}
-	 * @throws IOException
-	 */
-	private URI getCanonicalFileURI(String uriString) throws IOException {
-		return getCanonicalFileURI(uriString, getResourceSet());
-	}
-	
-	private static URI getCanonicalFileURI(String uriString, ResourceSet rs) throws IOException {
-		if (uriString.startsWith("classpath:/")) {
-			URIConverter uriConverter = rs.getURIConverter();
-			URI uri = URI.createURI(uriString);
-			URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
-			return normalized;
-		}
-		else {
-			URI uri = uriString.startsWith("file:/")? URI.createURI(uriString):URI.createFileURI(uriString);
-			String can = uri.toFileString();
-			File f = new File(can);
-			can = f.getCanonicalPath();	// e.g. remove embedded ../
-			return URI.createFileURI(can);
-		}
+		return added;
 	}
 
 	/**

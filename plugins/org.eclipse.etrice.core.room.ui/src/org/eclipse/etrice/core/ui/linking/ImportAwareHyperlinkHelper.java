@@ -14,7 +14,6 @@ package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
@@ -63,12 +62,10 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 					
 					XtextHyperlink result = hyperlinkProvider.get();
 					result.setHyperlinkRegion(new Region(leaf.getOffset()+1, leaf.getLength()-2)); // omit ""
-					String uritext = uriResolver.resolve(text, resource.getURI());
+					String uritext = uriResolver.resolve(text, resource);
 					URI uri = URI.createURI(uritext);
-					URIConverter uriConverter = resource.getResourceSet().getURIConverter();
-					URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
-					result.setURI(normalized);
-					result.setHyperlinkText(normalized.toFileString());
+					result.setURI(uri);
+					result.setHyperlinkText(uritext);
 					acceptor.accept(result);
 				}
 			}

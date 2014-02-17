@@ -402,6 +402,8 @@ public class ValidationUtil {
 								if (!ns1.equals(ns2))
 									return Result.error("protocols don't match (same name, different name spaces)");
 								
+								String uri1 = pc1.eResource().getURI().path();
+								String uri2 = pc2.eResource().getURI().path();
 								return Result.error("protocols don't match (but have same name)");
 							}
 							return Result.error("protocols don't match");
