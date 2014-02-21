@@ -85,8 +85,10 @@ class PrepareFileSystem {
 		if (f.directory) {
 			var children = f.listFiles
 			for (child : children) {
-				eraseContents(child)
-				child.delete
+				if (!(child.directory && child.name.equals("images"))) {
+					eraseContents(child)
+					child.delete
+				}
 			}
 		}
 	}
