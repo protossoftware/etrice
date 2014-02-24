@@ -12,13 +12,12 @@
 
 package org.eclipse.etrice.core.scoping;
 
-import java.io.File;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
 public interface IModelLocator {
-
-	File locateModel(File path);
+	String resolve(String resolve, Resource resource);
 }

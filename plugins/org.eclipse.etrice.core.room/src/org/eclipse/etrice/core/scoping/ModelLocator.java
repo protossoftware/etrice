@@ -12,12 +12,12 @@
 
 package org.eclipse.etrice.core.scoping;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -58,14 +58,21 @@ public class ModelLocator {
 		return instance;
 	}
 
-	public File locateModel(File path) {
+	public void addLocator(IModelLocator locator) {
+		locators.add(locator);
+	}
+
+	public void removeLocator(IModelLocator locator) {
+		locators.remove(locator);
+	}
+	
+	public String resolve(String resolve, Resource resource) {
 		for (IModelLocator locator : locators) {
-			File result = locator.locateModel(path);
+			String result = locator.resolve(resolve, resource);
 			if (result!=null)
 				return result;
 		}
-		
-		return path;
+		return resolve;
 	}
 	
 }

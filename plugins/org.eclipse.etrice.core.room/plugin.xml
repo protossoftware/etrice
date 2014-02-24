@@ -12,6 +12,12 @@
        genModel = "org/eclipse/etrice/core/Room.genmodel" /> 
 	
   </extension>
+  <extension
+        point="org.eclipse.etrice.core.room.modellocator">
+     <locator
+           class="org.eclipse.etrice.core.scoping.StandardModelLocator">
+     </locator>
+  </extension>
 
 
 

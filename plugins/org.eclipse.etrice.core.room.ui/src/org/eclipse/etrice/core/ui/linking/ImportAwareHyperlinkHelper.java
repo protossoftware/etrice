@@ -14,7 +14,7 @@ package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.scoping.NormalizingUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -39,7 +39,7 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 	protected Provider<XtextHyperlink> hyperlinkProvider;
 
 	@Inject
-	protected NormalizingUriResolver uriResolver;
+	protected ModelLocatorUriResolver uriResolver;
 	
 	public ImportAwareHyperlinkHelper() {
 		super();

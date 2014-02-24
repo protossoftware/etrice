@@ -4713,7 +4713,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		////			ImportedNamespaceAwareLocalScopeProvider
 		//// also configure in the RuntimeModule
 		////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-		////		return NormalizingUriResolver.class;
+		////		return ModelLocatorUriResolver.class;
 		////	}
 		//// and in the UiRuntimeModule
 		////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
@@ -6098,7 +6098,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	////			ImportedNamespaceAwareLocalScopeProvider
 	//// also configure in the RuntimeModule
 	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return NormalizingUriResolver.class;
+	////		return ModelLocatorUriResolver.class;
 	////	}
 	//// and in the UiRuntimeModule
 	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {

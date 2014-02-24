@@ -13,7 +13,7 @@
 package org.eclipse.etrice.core;
 
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
-import org.eclipse.etrice.core.scoping.NormalizingUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
@@ -43,7 +43,7 @@ public class ConfigRuntimeModule extends
 
 	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-		return NormalizingUriResolver.class;
+		return ModelLocatorUriResolver.class;
 	}
 
 	@Override

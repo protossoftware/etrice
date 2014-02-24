@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.cpp.setup;
 
-import org.eclipse.etrice.core.scoping.NormalizingUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
@@ -38,7 +38,7 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		binder.bind(AbstractGenerator.class).to(Main.class);
 		binder.bind(IGenerator.class).to(MainGen.class);
 
-		binder.bind(ImportUriResolver.class).to(NormalizingUriResolver.class);
+		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
 		
 		binder.bind(GlobalGeneratorSettings.class).to(GeneratorSettings.class);
 	}

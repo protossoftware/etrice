@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2014 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,36 +18,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 
-/**
- * This URI resolver tries to resolve against the <code>URI</code> of the object's resource.
- * If this is a platform resource <code>URI</code> then it determines an absolute path and resolves against that.
- * 
- * @author Henrik Rentz-Reichert
- *
- */
-public class NormalizingUriResolver extends ImportUriResolver {
+public class StandardModelLocator implements IModelLocator {
 
-	private Map<String, String> env = System.getenv();
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.scoping.impl.ImportUriResolver#resolve(org.eclipse.emf.ecore.EObject)
-	 */
-	@Override
-	public String resolve(EObject object) {
-		String resolve = super.resolve(object);
-		
-		// can't do anything about empty URIs
-		if (resolve==null || resolve.trim().isEmpty())
-			return null;
-
-		return resolve(resolve, object.eResource());
-	}
+	private static final String CLASSPATH = "classpath:/";
+	private static final Map<String, String> env = System.getenv();
 
 	/**
 	 * resolves a URI against the URI of a resource (usually that of the import).
@@ -58,19 +42,24 @@ public class NormalizingUriResolver extends ImportUriResolver {
 	 * @param resource the resource against which to resolve (or @code{null})
 	 * @return the resolved URI as string
 	 */
+	@Override
 	public String resolve(String resolve, Resource resource) {
 		URI baseUri = resource==null? null : resource.getURI();
+		
 		resolve = resolve(resolve, baseUri);
 		try {
 			URIConverter converter = resource==null? null : resource.getResourceSet().getURIConverter();
 			URI canonical = getCanonicalFileURI(resolve, converter);
-			if (canonical.isPlatform())
-				resolve = "platform:/resource"+canonical.toPlatformString(true);
+			if (canonical.isPlatform()) {
+				resolve = "platform:/resource" + canonical.toPlatformString(true);
+			}
 			else {
-				resolve = "file:/"+canonical.toFileString();
+				resolve = canonical.toFileString();
 
 				resolve = resolve.replaceAll("\\\\", "/");
 				resolve = resolve.replaceAll("//", "/");
+				
+				resolve = "file:/" + resolve;
 			}
 		} catch (IOException e) {
 		}
@@ -119,7 +108,10 @@ public class NormalizingUriResolver extends ImportUriResolver {
 			URI base = baseUri.trimSegments(1);
 			if (base.isPlatformResource()) {
 				uri = base.appendSegments(uri.segments());
-				resolve = "platform:/resource"+uri.toPlatformString(true);
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+				IFile file = root.getFile(new Path(uri.toPlatformString(true)));
+				IPath location = file.getLocation();
+				resolve = location.toOSString();
 				return resolve;
 			}
 			else if (base.isRelative()) {
@@ -146,25 +138,47 @@ public class NormalizingUriResolver extends ImportUriResolver {
 	
 	private URI getCanonicalFileURI(String uriString, URIConverter uriConverter) throws IOException {
 		URI uri;
-		if (uriString.startsWith("classpath:/") || uriString.startsWith("platform:/") || uriString.startsWith("file:/")) {
+		if (uriString.startsWith(CLASSPATH) || uriString.startsWith("platform:/") || uriString.startsWith("file:/")) {
 			uri = URI.createURI(uriString);
 		}
 		else {
-			uri = URI.createFileURI(uriString);
+			try {
+				uri = URI.createFileURI(uriString);
+			}
+			catch (IllegalArgumentException e) {
+				throw new IOException();
+			}
 		}
 		
-		URI normalized = (uriConverter==null) ? uri : uriConverter.normalize(uri);
-		if (normalized.isPlatform())
-			return normalized;
+		URI normalized = uri;
+		if (uriConverter!=null) {
+			try {
+				normalized = uriConverter.normalize(uri);
+			}
+			catch (IllegalStateException e) {
+				throw new IOException();
+			}
+			catch (ClasspathUriResolutionException e) {
+				throw new IOException();
+			}
+		}
 		
-		String can = normalized.toFileString();
-		File f = new File(can);
+		if (normalized.isFile()) {
+			String can = normalized.toFileString();
+			File f = new File(can);
+			
+			// now we give the super class a chance to locate the model file
+			f = locateFile(f);
+			
+			can = f.getCanonicalPath();	// e.g. remove embedded ../
+			URI canonical = URI.createFileURI(can);
+			return canonical;
+		}
 		
-		// now we give extensions a chance to locate the model file
-		f = ModelLocator.getInstance().locateModel(f);
-		
-		can = f.getCanonicalPath();	// e.g. remove embedded ../
-		URI canonical = URI.createFileURI(can);
-		return canonical;
+		return normalized;
+	}
+
+	protected File locateFile(File f) {
+		return f;
 	}
 }

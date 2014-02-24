@@ -12,13 +12,11 @@
 
 package org.eclipse.etrice.generator.base;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,17 +34,16 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.scoping.NormalizingUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocator;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.scoping.StandardModelLocator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.xml.sax.SAXException;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -69,7 +66,7 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractGenerator implements IResourceURIAcceptor {
+public abstract class AbstractGenerator {
 	
 	public static final String OPTION_LIB = "-lib";
 	public static final String OPTION_NOEXIT = "-noexit";
@@ -101,9 +98,6 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	private static Injector injector;
 	
 	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
-	private ResourceSet resourceSet;
-	private HashSet<URI> modelURIs = new HashSet<URI>();
-	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
 
 	/**
 	 * determines the behavior of the generator on exit
@@ -378,7 +372,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * The injected platform relative URI resolver
 	 */
 	@Inject
-	protected NormalizingUriResolver uriResolver;
+	protected ModelLocatorUriResolver uriResolver;
+	
+	private StandardModelLocator modelLocator = null;
 	
 	/**
 	 * The injected translation provider
@@ -388,6 +384,9 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	
 	@Inject
 	protected GlobalGeneratorSettings generatorSettings;
+	
+	@Inject
+	private ModelLoader modelLoader;
 	
 	/**
 	 * The rsource validator which is injected using the ROOM DSL injector
@@ -399,7 +398,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * @return the resource set for the input models
 	 */
 	protected ResourceSet getResourceSet() {
-		return resourceSet;
+		return modelLoader.getResourceSet();
 	}
 
 	/**
@@ -423,7 +422,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
 		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
-		for (Resource resource : resourceSet.getResources()) {
+		for (Resource resource : getResourceSet().getResources()) {
 			List<EObject> contents = resource.getContents();
 			if (!contents.isEmpty() && contents.get(0) instanceof RoomModel) {
 				rml.add((RoomModel)contents.get(0));
@@ -447,7 +446,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 			translateDetailCodes(gmRoot);
 			
 			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
-			Resource genResource = resourceSet.createResource(genModelURI);
+			Resource genResource = getResourceSet().createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
 			if (genModelPath!=null) {
 				try {
@@ -464,6 +463,14 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		}
 	}
 
+	protected void activateModelLocator() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			modelLocator = new StandardModelLocator();
+			ModelLocator.getInstance().addLocator(modelLocator);
+		}
+		// else: if Eclipse is running the locator is active via the extension point
+	}
+	
 	/**
 	 * validate the models
 	 * 
@@ -473,7 +480,7 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		
 		int errors = 0;
 		int warnings = 0;
-		ArrayList<Resource> resources = new ArrayList<Resource>(resourceSet.getResources());
+		ArrayList<Resource> resources = new ArrayList<Resource>(getResourceSet().getResources());
 		for (Resource resource : resources) {
 			List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 			if (!list.isEmpty()) {
@@ -497,30 +504,6 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 		
 		return true;
 	}
-
-	/**
-	 * Called by {@link #loadModels(List)} for each single model.
-	 * 
-	 * @param uri the model URI
-	 * @return <code>true</code> if successfully loaded or already loaded
-	 * @throws RuntimeException
-	 * @throws IOException
-	 */
-	protected boolean loadModel(URI uri)
-			throws RuntimeException, IOException {
-		
-		if (loadedModelURIs.contains(uri))
-			return true;
-		
-		if (resourceSet.getResource(uri, false) != null)
-			// already loaded
-			return false;
-		
-		logger.logInfo("Loading " + uri);
-		resourceSet.getResource(uri, true);	// Could throw an exception...
-		loadedModelURIs.add(uri);
-		return true;
-	}
 	
 	
 	/**
@@ -532,65 +515,13 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 */
 	protected boolean loadModels(List<String> uriList) {
 		logger.logInfo("-- reading models");
-
-		resourceSet = resourceSetProvider.get();
-		if (resourceSet instanceof XtextResourceSet) {
-			((XtextResourceSet) resourceSet).setClasspathURIContext(getClass().getClassLoader());
-		}
-		modelURIs.clear();
-		loadedModelURIs.clear();
 		
-		for (String uri : uriList) {
-			addResourceURI(uriResolver.resolve(uri, null));
-		}
-		
-		boolean ok = true;
-		while (!modelURIs.isEmpty()) {
-			URI uri = modelURIs.iterator().next();
-			//logger.logInfo("Loading " + uriString);
-			try {
-				if (loadModel(uri)) {
-					Resource resource = resourceSet.getResources().get(resourceSet.getResources().size()-1);
-					for (EObject root : resource.getContents()) {
-						addReferencedModels(root, this);
-					}
-				}
-			}
-			catch (Exception e) {
-				ok = false;
-				if (e instanceof FileNotFoundException)
-					logger.logError("couldn't load '"+uri+"' (file not found)", null);
-				if(e instanceof SAXException)
-					logger.logError("couldn't load '"+uri+"' (maybe unknown or wrong file extension, eTrice file extensions have to be lower case)", null);
-				else
-					logger.logError(e.getMessage(), null);
-			}
-			modelURIs.remove(uri);
-		}
-		
-		// make a copy to avoid concurrent modification
-		ArrayList<Resource> resources = new ArrayList<Resource>(resourceSet.getResources());
-		for (Resource res : resources) {
-			EcoreUtil2.resolveAll(res, CancelIndicator.NullImpl);
-		}
-		
-		return ok;
+		return modelLoader.loadModels(uriList, logger);
 	}
-
-	/**
-	 * Called by {@link #loadModels(List)} after a model was loaded successfully.
-	 * This method treats import statements in ROOM models and has to be overridden if
-	 * imports of other models should be treated as well.
-	 *  
-	 * @param resource
-	 * @param acceptor
-	 */
-	protected void addReferencedModels(EObject root, IResourceURIAcceptor acceptor) {
-		if (root instanceof RoomModel) {
-			for (org.eclipse.etrice.core.room.Import imp : ((RoomModel)root).getImports()) {
-				String importURI = uriResolver.resolve(imp);
-				acceptor.addResourceURI(importURI);
-			}
+	
+	protected void deactivateModelLocator() {
+		if (modelLocator!=null) {
+			ModelLocator.getInstance().removeLocator(modelLocator);
 		}
 	}
 
@@ -676,32 +607,6 @@ public abstract class AbstractGenerator implements IResourceURIAcceptor {
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
 	protected abstract int runGenerator();
-	
-	/**
-	 * This implementation of the method assumes the URI is already normalized and adds it to the
-	 * list of models to load if not already loaded.
-	 * 
-	 * @see org.eclipse.etrice.generator.base.IResourceURIAcceptor#addResourceURI(java.lang.String)
-	 */
-	public boolean addResourceURI(String uri) {
-		URI can = null;
-		if (uri.startsWith("platform:/") || uri.startsWith("classpath:/") || uri.startsWith("file:/"))
-			can = URI.createURI(uri);
-		else
-			can = URI.createFileURI(uri);
-		
-		if (loadedModelURIs.contains(can))
-			return false;
-		
-		boolean added = modelURIs.add(can);
-		if (added) {
-			if (loadedModelURIs.isEmpty())
-				logger.logInfo("added model "+uri);
-			else
-				logger.logInfo("added referenced model "+uri);
-		}
-		return added;
-	}
 
 	/**
 	 * The generator settings can also be statically accessed using {@link #getInstance()} followed
