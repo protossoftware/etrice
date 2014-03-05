@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Wire;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataType;
@@ -702,6 +703,28 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       _builder.newLine();
       {
+        boolean _or_1 = false;
+        ActorCommunicationType _commType = ac.getCommType();
+        boolean _equals_1 = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+        if (_equals_1) {
+          _or_1 = true;
+        } else {
+          ActorCommunicationType _commType_1 = ac.getCommType();
+          boolean _equals_2 = Objects.equal(_commType_1, ActorCommunicationType.DATA_DRIVEN);
+          _or_1 = _equals_2;
+        }
+        if (_or_1) {
+          _builder.append("\t\t");
+          _builder.append("// activate polling for data-driven communication");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).addPollingMessageReceiver(this);");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.newLine();
+      {
         boolean _notEquals_3 = (!Objects.equal(ctor, null));
         if (_notEquals_3) {
           _builder.append("\t\t");
@@ -727,19 +750,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       {
-        boolean _or_1 = false;
+        boolean _or_2 = false;
         List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
         boolean _isEmpty_2 = _dynConfigReadAttributes_2.isEmpty();
         boolean _not_2 = (!_isEmpty_2);
         if (_not_2) {
-          _or_1 = true;
+          _or_2 = true;
         } else {
           List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
           boolean _isEmpty_3 = _dynConfigWriteAttributes.isEmpty();
           boolean _not_3 = (!_isEmpty_3);
-          _or_1 = _not_3;
+          _or_2 = _not_3;
         }
-        if (_or_1) {
+        if (_or_2) {
           {
             List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
             for(final Attribute a_1 : _dynConfigReadAttributes_3) {
@@ -874,6 +897,24 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");
+                  _builder.newLine();
+                }
+              }
+              {
+                boolean _or_3 = false;
+                ActorCommunicationType _commType_2 = ac.getCommType();
+                boolean _equals_3 = Objects.equal(_commType_2, ActorCommunicationType.ASYNCHRONOUS);
+                if (_equals_3) {
+                  _or_3 = true;
+                } else {
+                  ActorCommunicationType _commType_3 = ac.getCommType();
+                  boolean _equals_4 = Objects.equal(_commType_3, ActorCommunicationType.DATA_DRIVEN);
+                  _or_3 = _equals_4;
+                }
+                if (_or_3) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);");
                   _builder.newLine();
                 }
               }
@@ -1071,6 +1112,22 @@ public class ActorClassGen extends GenericActorClassGenerator {
               CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
               _builder.append(_genStateMachine, "\t");
               _builder.newLineIfNotEmpty();
+              {
+                ActorCommunicationType _commType_4 = ac.getCommType();
+                boolean _equals_5 = Objects.equal(_commType_4, ActorCommunicationType.DATA_DRIVEN);
+                if (_equals_5) {
+                  _builder.append("\t");
+                  _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("handleSystemEvent(ifitem, evt, generic_data);");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                }
+              }
             } else {
               StateGraph _stateMachine = xpac.getStateMachine();
               boolean _isEmpty_4 = RoomHelpers.isEmpty(_stateMachine);
@@ -1098,6 +1155,45 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
+      _builder.append("\t");
+      _builder.newLine();
+      {
+        boolean _or_4 = false;
+        ActorCommunicationType _commType_5 = ac.getCommType();
+        boolean _equals_6 = Objects.equal(_commType_5, ActorCommunicationType.ASYNCHRONOUS);
+        if (_equals_6) {
+          _or_4 = true;
+        } else {
+          ActorCommunicationType _commType_6 = ac.getCommType();
+          boolean _equals_7 = Objects.equal(_commType_6, ActorCommunicationType.DATA_DRIVEN);
+          _or_4 = _equals_7;
+        }
+        if (_or_4) {
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public void receive(Message msg) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("receiveEvent(");
+          {
+            ActorCommunicationType _commType_7 = ac.getCommType();
+            boolean _equals_8 = Objects.equal(_commType_7, ActorCommunicationType.ASYNCHRONOUS);
+            if (_equals_8) {
+              _builder.append("null, -1, null");
+            }
+          }
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       {
         GlobalSettings _settings_8 = Main.getSettings();
         boolean _isGeneratePersistenceInterface_2 = _settings_8.isGeneratePersistenceInterface();

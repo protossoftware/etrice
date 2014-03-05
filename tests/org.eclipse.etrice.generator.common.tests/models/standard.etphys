@@ -20,6 +20,7 @@ PhysicalModel Standard {
 		NodeRef node17: PC
 		NodeRef node18: PC
 		NodeRef node19: PC
+		NodeRef node20: PC
 	}
 	
 	NodeClass PC {

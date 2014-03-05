@@ -61,6 +61,12 @@ typedef bool boolean;
 #ifndef FALSE
 	#define FALSE 0
 #endif
+#ifndef true
+	#define true 1
+#endif
+#ifndef false
+	#define false 0
+#endif
 
 #define ALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
 

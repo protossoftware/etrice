@@ -60,6 +60,16 @@ public abstract class AbstractMessageService extends RTObject implements IMessag
 	public void removeMessageReceiver(IMessageReceiver receiver) {
 		messageDispatcher.removeMessageReceiver(receiver);
 	}
+	
+	@Override
+	public void addPollingMessageReceiver(IMessageReceiver receiver) {
+		messageDispatcher.addPollingMessageReceiver(receiver);
+	}
+
+	@Override
+	public void removePollingMessageReceiver(IMessageReceiver receiver) {
+		messageDispatcher.removePollingMessageReceiver(receiver);
+	}
 
 	protected MessageSeQueue getMessageQueue() {
 		return messageQueue;

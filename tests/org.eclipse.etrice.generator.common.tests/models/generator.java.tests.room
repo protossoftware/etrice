@@ -12,6 +12,7 @@ RoomModel JavaGenTests {
 	import StaticConfigTest.* from "StaticConfigTest.room"
 	import DynamicConfigTest.* from "DynamicConfigTest_Java.room"
 	import DataDrivenTest.* from "DataDrivenTest.room"
+	import ActorCommunicationTest.* from "ActorCommunicationTest.room"
 	import DynamicActorTest1.* from "DynamicActorTest1.room"
 	import DynamicActorTest2.* from "DynamicActorTest2.room"
 	import DynamicActorTest3.* from "DynamicActorTest3.room"
@@ -33,6 +34,7 @@ RoomModel JavaGenTests {
 		SubSystemRef scTest: SubSystem_StaticConfigTest
 		SubSystemRef dcTest: SubSystem_DynamicConfigTest
 		SubSystemRef ddTest: SubSystem_DataDriven
+		SubSystemRef acTest: SubSystem_ActorCommunicationTest
 		SubSystemRef da1Test: SubSystem_DynamicActorTest1
 		SubSystemRef da2Test: SubSystem_DynamicActorTest2
 		SubSystemRef da3Test: SubSystem_DynamicActorTest3
