@@ -147,59 +147,17 @@ public class InterfaceItemSupport {
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				ContainerShape containerShape =
 					peCreateService.createContainerShape(acShape, true);
-	
+				
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.PORT_TYPE);
 				
 				String kind = getItemKind(port);
 				Graphiti.getPeService().setPropertyValue(containerShape, PROP_KIND, kind);
 				
 				// the context point is the midpoint relative to the invisible rectangle
-				int x = context.getX();
-				int y = context.getY();
 				int width = acShape.getGraphicsAlgorithm().getWidth();
 				int height = acShape.getGraphicsAlgorithm().getHeight();
-				if (internal) {
-					if (x<2*margin)
-						x = 2*margin;
-					else if (x>width-2*margin)
-						x = width-2*margin;
-					if (y<2*margin)
-						y = 2*margin;
-					else if (y>height-2*margin)
-						y = height-2*margin;
-				}
-				else {
-					// TODOHRR: remove duplicate code
-					int dx = (x<=width/2)? x:width-x;
-					int dy = (y<=height/2)? y:height-y;
-					if (dx>dy) {
-						// keep x, project y
-						if (y<=height/2)
-							y = margin;
-						else
-							y = height-margin;
-						
-						if (x<margin)
-							x = margin;
-						else if (x>width-margin)
-							x = width-margin;
-					}
-					else {
-						// keep y, project x
-						if (x<=width/2)
-							x = margin;
-						else
-							x = width-margin;
-						
-						if (y<margin)
-							y = margin;
-						else if (y>height-margin)
-							y = height-margin;
-					}
-				}
-				// finally we subtract the midpoint to get coordinates of the upper left corner
-				x -= margin;
-				y -= margin;
+				int[] pos = layoutInterfaceItem(context.getX(), context.getY(), internal, margin, width, height);
+				int x = pos[0], y = pos[1];
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				IGaService gaService = Graphiti.getGaService();
@@ -512,57 +470,16 @@ public class InterfaceItemSupport {
 				Shape shape = (Shape) context.getPictogramElement();
 				InterfaceItem item = (InterfaceItem) getBusinessObjectForPictogramElement(shape);
 				int margin = isRefItem(shape)?MARGIN_SMALL:MARGIN;
-				int x = shape.getGraphicsAlgorithm().getX();
-				int y = shape.getGraphicsAlgorithm().getY();
+				int midX = shape.getGraphicsAlgorithm().getX() + margin;
+				int midY = shape.getGraphicsAlgorithm().getY() + margin;
 				
 				ContainerShape container = shape.getContainer();
 				int width = container.getGraphicsAlgorithm().getWidth();
 				int height = container.getGraphicsAlgorithm().getHeight();
-				if (isInternal(item)) {
-					if (x<2*margin)
-						x = 2*margin;
-					else if (x>width-2*margin)
-						x = width-2*margin;
-					if (y<2*margin)
-						y = 2*margin;
-					else if (y>height-2*margin)
-						y = height-2*margin;
-				}
-				else {
-					// TODOHRR: remove duplicate code
-					int dx = (x<=width/2)? x:width-x;
-					int dy = (y<=height/2)? y:height-y;
-					if (dx>dy) {
-						// keep x, project y
-						if (y<=height/2)
-							y = margin;
-						else
-							y = height-margin;
-						
-						if (x<margin)
-							x = margin;
-						else if (x>width-margin)
-							x = width-margin;
-					}
-					else {
-						// keep y, project x
-						if (x<=width/2)
-							x = margin;
-						else
-							x = width-margin;
-						
-						if (y<margin)
-							y = margin;
-						else if (y>height-margin)
-							y = height-margin;
-					}
-				}
-				// finally we subtract the midpoint to get coordinates of the upper left corner
-				x -= margin;
-				y -= margin;
+				int[] pos = layoutInterfaceItem(midX, midY, isInternal(item), margin, width, height);
+				int x = pos[0], y = pos[1];
 				
 				Graphiti.getGaLayoutService().setLocation(shape.getGraphicsAlgorithm(), x, y);
-				
 				
 				return true;
 			}
@@ -672,6 +589,56 @@ public class InterfaceItemSupport {
 				return !inStripe;
 			else
 				return inStripe;
+		}
+		
+		/**
+		 * width, height from parent inv rectangle
+		 */
+		protected static int[] layoutInterfaceItem(int midX, int midY, boolean internal, int margin, int width, int height){
+			int x = midX, y = midY;
+			if (internal) {
+				if (x<2*margin)
+					x = 2*margin;
+				else if (x>width-2*margin)
+					x = width-2*margin;
+				if (y<2*margin)
+					y = 2*margin;
+				else if (y>height-2*margin)
+					y = height-2*margin;
+			}
+			else {
+				int dx = (x<=width/2)? x:width-x;
+				int dy = (y<=height/2)? y:height-y;
+				if (dx>dy) {
+					// keep x, project y
+					if (y<=height/2)
+						y = margin;
+					else
+						y = height-margin;
+					
+					if (x<margin)
+						x = margin;
+					else if (x>width-margin)
+						x = width-margin;
+				}
+				else {
+					// keep y, project x
+					if (x<=width/2)
+						x = margin;
+					else
+						x = width-margin;
+					
+					if (y<margin)
+						y = margin;
+					else if (y>height-margin)
+						y = height-margin;
+				}
+			}
+			// finally we subtract the midpoint to get coordinates of the upper left corner
+			x -= margin;
+			y -= margin;
+			
+			return new int[]{x,y};
 		}
 		
 		@Override

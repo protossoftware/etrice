@@ -1693,42 +1693,43 @@ public class NodeGen {
       final Iterable<PortInstance> sendPorts = IterableExtensions.<PortInstance>filter(simplePorts, _function_2);
       final Function1<PortInstance,Boolean> _function_3 = new Function1<PortInstance,Boolean>() {
         public Boolean apply(final PortInstance p) {
-          boolean _and = false;
-          EList<InterfaceItemInstance> _peers = p.getPeers();
-          boolean _isEmpty = _peers.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (!_not) {
-            _and = false;
-          } else {
-            Port _port = p.getPort();
-            List<Message> _outgoing = RoomHelpers.getOutgoing(_port);
-            final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
-              public Boolean apply(final Message m) {
-                VarDecl _data = m.getData();
-                RefableType _refType = _data.getRefType();
-                DataType _type = _refType.getType();
-                boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
-                return Boolean.valueOf(_isEnumeration);
+          Port _port = p.getPort();
+          List<Message> _outgoing = RoomHelpers.getOutgoing(_port);
+          final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+            public Boolean apply(final Message m) {
+              boolean _or = false;
+              VarDecl _data = m.getData();
+              RefableType _refType = _data.getRefType();
+              DataType _type = _refType.getType();
+              boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
+              if (_isEnumeration) {
+                _or = true;
+              } else {
+                VarDecl _data_1 = m.getData();
+                RefableType _refType_1 = _data_1.getRefType();
+                DataType _type_1 = _refType_1.getType();
+                boolean _isBoolean = NodeGen.this._typeHelpers.isBoolean(_type_1);
+                _or = (_isEnumeration || _isBoolean);
               }
-            };
-            Iterable<Message> _filter = IterableExtensions.<Message>filter(_outgoing, _function);
-            boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
-            boolean _not_1 = (!_isEmpty_1);
-            _and = (_not && _not_1);
-          }
-          return Boolean.valueOf(_and);
+              return Boolean.valueOf(_or);
+            }
+          };
+          Iterable<Message> _filter = IterableExtensions.<Message>filter(_outgoing, _function);
+          boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+          boolean _not = (!_isEmpty);
+          return Boolean.valueOf(_not);
         }
       };
-      final Iterable<PortInstance> enumPortsWithPeers = IterableExtensions.<PortInstance>filter(sendPorts, _function_3);
+      final Iterable<PortInstance> loggedPorts = IterableExtensions.<PortInstance>filter(sendPorts, _function_3);
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _isEmpty = IterableExtensions.isEmpty(enumPortsWithPeers);
+        boolean _isEmpty = IterableExtensions.isEmpty(loggedPorts);
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
           _builder.newLine();
           {
-            for(final PortInstance pi : enumPortsWithPeers) {
+            for(final PortInstance pi : loggedPorts) {
               _builder.append("static const char* ");
               String _path = pi.getPath();
               String _pathName = this._roomExtensions.getPathName(_path);
@@ -1898,14 +1899,31 @@ public class NodeGen {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
+      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isBoolean = NodeGen.this._typeHelpers.isBoolean(_type);
+          return Boolean.valueOf(_isBoolean);
+        }
+      };
+      final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
       boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (!_generateMSCInstrumentation) {
         _and = false;
       } else {
+        boolean _and_1 = false;
         boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        boolean _not = (!_isEmpty);
+        if (!_isEmpty) {
+          _and_1 = false;
+        } else {
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
+          _and_1 = (_isEmpty && _isEmpty_1);
+        }
+        boolean _not = (!_and_1);
         _and = (_generateMSCInstrumentation && _not);
       }
       final boolean usesMSC = _and;
@@ -2011,55 +2029,83 @@ public class NodeGen {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
+      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          boolean _isBoolean = NodeGen.this._typeHelpers.isBoolean(_type);
+          return Boolean.valueOf(_isBoolean);
+        }
+      };
+      final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
       boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (!_generateMSCInstrumentation) {
         _and = false;
       } else {
+        boolean _and_1 = false;
         boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        boolean _not = (!_isEmpty);
+        if (!_isEmpty) {
+          _and_1 = false;
+        } else {
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
+          _and_1 = (_isEmpty && _isEmpty_1);
+        }
+        boolean _not = (!_and_1);
         _and = (_generateMSCInstrumentation && _not);
       }
       final boolean usesMSC = _and;
-      String _xifexpression = null;
+      String enumVal = "";
       if (usesMSC) {
         String _path = ai.getPath();
-        String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n, \"" + _path);
-        String _plus_1 = (_plus + "\", ");
-        Message _get = ((Message[])Conversions.unwrapArray(enumMsgs, Message.class))[0];
-        VarDecl _data = _get.getData();
-        RefableType _refType = _data.getRefType();
-        DataType _type = _refType.getType();
-        String _defaultValue = this._cExtensions.defaultValue(_type);
-        String _plus_2 = (_plus_1 + _defaultValue);
-        String _plus_3 = (_plus_2 + "\n#endif\n");
-        _xifexpression = _plus_3;
-      } else {
-        _xifexpression = "";
+        String _plus = ("\n, \"" + _path);
+        String _plus_1 = (_plus + "\"");
+        enumVal = _plus_1;
+        for (final Message msg : enumMsgs) {
+          String _plus_2 = (enumVal + "\n, ");
+          VarDecl _data = msg.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          String _defaultValue = this._cExtensions.defaultValue(_type);
+          String _plus_3 = (_plus_2 + _defaultValue);
+          enumVal = _plus_3;
+        }
+        for (final Message msg_1 : boolMsgs) {
+          String _plus_4 = (enumVal + "\n, ");
+          VarDecl _data_1 = msg_1.getData();
+          RefableType _refType_1 = _data_1.getRefType();
+          DataType _type_1 = _refType_1.getType();
+          String _defaultValue_1 = this._cExtensions.defaultValue(_type_1);
+          String _plus_5 = (_plus_4 + _defaultValue_1);
+          enumVal = _plus_5;
+        }
+        String _plus_6 = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE" + enumVal);
+        String _plus_7 = (_plus_6 + "\n#endif\n");
+        enumVal = _plus_7;
       }
-      final String enumVal = _xifexpression;
       EList<InterfaceItemInstance> _peers = pi.getPeers();
-      boolean _isEmpty_1 = _peers.isEmpty();
-      if (_isEmpty_1) {
-        String _plus_4 = ("{NULL" + enumVal);
-        return (_plus_4 + "}");
+      boolean _isEmpty_2 = _peers.isEmpty();
+      if (_isEmpty_2) {
+        String _plus_8 = ("{NULL" + enumVal);
+        return (_plus_8 + "}");
       }
       EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
       InterfaceItemInstance peer = _peers_1.get(0);
       EList<InterfaceItemInstance> _peers_2 = pi.getPeers();
-      InterfaceItemInstance _get_1 = _peers_2.get(0);
-      EObject _eContainer = _get_1.eContainer();
+      InterfaceItemInstance _get = _peers_2.get(0);
+      EObject _eContainer = _get.eContainer();
       ActorInstance peerInst = ((ActorInstance) _eContainer);
       String _path_1 = peerInst.getPath();
       String instName = this._roomExtensions.getPathName(_path_1);
-      String _plus_5 = ("{&" + instName);
-      String _plus_6 = (_plus_5 + ".");
+      String _plus_9 = ("{&" + instName);
+      String _plus_10 = (_plus_9 + ".");
       String _name = peer.getName();
-      String _plus_7 = (_plus_6 + _name);
-      String _plus_8 = (_plus_7 + enumVal);
-      String _plus_9 = (_plus_8 + "}");
-      _xblockexpression = (_plus_9);
+      String _plus_11 = (_plus_10 + _name);
+      String _plus_12 = (_plus_11 + enumVal);
+      String _plus_13 = (_plus_12 + "}");
+      _xblockexpression = (_plus_13);
     }
     return _xblockexpression;
   }

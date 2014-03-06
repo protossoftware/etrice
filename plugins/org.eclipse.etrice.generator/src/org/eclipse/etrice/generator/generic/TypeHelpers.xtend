@@ -54,10 +54,10 @@ class TypeHelpers {
 		else
 			return type.name
 	}
-	
-	def String getTypeName(DataType t) {
-		typeName(t)
-	}
+//	
+//	def String getTypeName(DataType t) {
+//		typeName(t)
+//	}
 	
 	def String getTypeName(RefableType t) {
 		typeName(t.getType())
@@ -108,6 +108,10 @@ class TypeHelpers {
 	
 	def isPrimitive(DataType type){
 		return type instanceof PrimitiveType
+	}
+	
+	def isBoolean(DataType type){
+		type.primitive && (type as PrimitiveType).type==LiteralType.BOOL
 	}
 	
 	def isEnumeration(DataType type){

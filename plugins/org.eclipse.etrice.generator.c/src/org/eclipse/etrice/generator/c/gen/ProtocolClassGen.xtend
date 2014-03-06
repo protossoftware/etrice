@@ -190,10 +190,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def private genDataDrivenPortHeaders(ProtocolClass pc) {
 		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
-		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.enumeration)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.isEnumeration)
+		val boolMsgs = sentMsgs.filter(m|m.data.refType.type.isBoolean)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
 		/*
-		 * MSC code is generated only for the first enumeration of the messages of this protocol
+		 * MSC code is generated for all enumerations and booleans of the messages of this protocol
 		 */
 		'''
 			/* data driven send port (conjugated) */
@@ -218,10 +219,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«IF usesMSC»
 					#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 						const char* instName;
-						«val msg = enumMsgs.get(0)»
-						«var typeName = msg.data.refType.type.typeName»
-						«var refp = if (msg.data.refType.ref) "*" else ""»
-						«typeName»«refp» «msg.name»;
+						«FOR msg : enumMsgs»
+							«var typeName = msg.data.refType.type.typeName»
+							«var refp = if (msg.data.refType.ref) "*" else ""»
+							«typeName»«refp» «msg.name»;
+						«ENDFOR»
+						«FOR msg : boolMsgs»
+							«var typeName = msg.data.refType.type.typeName»
+							«var refp = if (msg.data.refType.ref) "*" else ""»
+							«typeName»«refp» «msg.name»;
+						«ENDFOR»
 					#endif
 				«ENDIF»
 			}
@@ -241,10 +248,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def private genDataDrivenPortSources(ProtocolClass pc) {
 		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
-		val enumMsgs = messages.filter(m|m.data.refType.type.enumeration)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		val enumMsgs = messages.filter(m|m.data.refType.type.isEnumeration)
+		val boolMsgs = messages.filter(m|m.data.refType.type.isBoolean)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
 		/*
-		 * MSC code is generated only for the first enumeration of the messages of this protocol
+		 * MSC code is generated for all enumerations and all booleans of the messages of this protocol
 		 */
 	'''
 			«FOR message : messages»
@@ -252,7 +260,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var refp = if (!(message.data.refType.type.enumerationOrPrimitive)) "*" else ""»
 				«var data = ", "+typeName+refp+" data"»
 				«messageSetterSignature(pc.getPortClassName(true), message.name, data)» {
-					«IF usesMSC && message==enumMsgs.get(0)»
+					«IF usesMSC && enumMsgs.exists(m|m==message)»
 						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 							{
 								const char** peerName;
@@ -261,13 +269,30 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 							}
 						#endif
 					«ENDIF»
+					«IF usesMSC && boolMsgs.exists(m|m==message)»
+						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+							{
+								const char** peerName;
+								for (peerName=self->peerNames; *peerName!=NULL; ++peerName)
+									ET_MSC_LOGGER_ASYNC_OUT(self->instName, data?"true":"false", *peerName)
+							}
+						#endif
+					«ENDIF»
 					self->«message.name» = «refp»data;
 				}
 				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)» {
-					«IF usesMSC && message==enumMsgs.get(0)»
+					«IF usesMSC && enumMsgs.exists(m|m==message)»
 						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 							if (self->peer->«message.name»!=self->«message.name») {
 								ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, «message.data.refType.type.name»_getLiteralName(self->peer->«message.name»), self->instName)
+								((«pc.getPortClassName(false)»*)self)->«message.name» = self->peer->«message.name»;
+							}
+						#endif
+					«ENDIF»
+					«IF usesMSC && boolMsgs.exists(m|m==message)»
+						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
+							if (self->peer->«message.name»!=self->«message.name») {
+								ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, (self->peer->«message.name»)?"true":"false", self->instName)
 								((«pc.getPortClassName(false)»*)self)->«message.name» = self->peer->«message.name»;
 							}
 						#endif
@@ -364,11 +389,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		'''
 	}
 
-	def private sendMessageCall(boolean hasData, String self, String msg, String typeName, String data) {
+	def private sendMessageCall(boolean hasData, String selfPtr, String msg, String typeName, String data) {
 		if (hasData)
-			"etPort_sendMessage("+self+", "+msg+", sizeof("+typeName+"), "+data+");"
+			"etPort_sendMessage("+selfPtr+", "+msg+", sizeof("+typeName+"), "+data+");"
 		else
-			"etPort_sendMessage("+self+", "+msg+", 0, NULL);"
+			"etPort_sendMessage("+selfPtr+", "+msg+", 0, NULL);"
 	}
 	
 	def private messageSignature(String className, String messageName, String methodSuffix, String data) {

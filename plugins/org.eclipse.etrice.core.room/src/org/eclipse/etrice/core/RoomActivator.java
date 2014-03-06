@@ -1,6 +1,7 @@
 package org.eclipse.etrice.core;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.etrice.core.scoping.ModelLocator;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -15,5 +16,6 @@ public class RoomActivator extends Plugin implements BundleActivator {
 		super.start(context);
 		
 		ValidatorExtensionManager.Registry.getInstance().loadValidatorExtensions();
+		ModelLocator.getInstance().loadExtensions();
 	}
 }

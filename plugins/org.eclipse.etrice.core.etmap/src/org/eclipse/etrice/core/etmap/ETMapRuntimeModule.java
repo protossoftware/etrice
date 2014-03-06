@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.core.etmap;
 
-import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
@@ -33,7 +33,7 @@ public class ETMapRuntimeModule extends org.eclipse.etrice.core.etmap.AbstractET
 
 	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-		return PlatformRelativeUriResolver.class;
+		return ModelLocatorUriResolver.class;
 	}
 
 }

@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.ConfigStandaloneSetup;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
@@ -28,12 +27,10 @@ import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
-import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.ConfigValue;
 import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.EnumConfigValue;
-import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -45,7 +42,6 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
-import org.eclipse.etrice.generator.base.IResourceURIAcceptor;
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -473,17 +469,5 @@ public class DataConfiguration implements IDataConfiguration {
       IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
     return IterableExtensions.<Attribute>toList(result);
-  }
-  
-  public void addReferencedModels(final IResourceURIAcceptor acceptor, final EObject root) {
-    if ((root instanceof ConfigModel)) {
-      EList<Import> _imports = ((ConfigModel) root).getImports();
-      for (final Import imp : _imports) {
-        {
-          final String importURI = this.uriResolver.resolve(imp);
-          acceptor.addResourceURI(importURI);
-        }
-      }
-    }
   }
 }

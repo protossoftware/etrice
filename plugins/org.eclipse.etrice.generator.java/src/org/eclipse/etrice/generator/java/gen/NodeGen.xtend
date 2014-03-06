@@ -156,9 +156,9 @@ class NodeGen {
 				IMessageService msgService;
 				«FOR thread: threads»
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
-						msgService = new MessageService(this, MessageService.ExecMode.«thread.execmode.name», «thread.time», 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */);
+						msgService = new MessageService(this, MessageService.ExecMode.«thread.execmode.getName», «thread.time», 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */);
 					«ELSE»
-						msgService = new MessageService(this, MessageService.ExecMode.«thread.execmode.name», 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */);
+						msgService = new MessageService(this, MessageService.ExecMode.«thread.execmode.getName», 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */);
 					«ENDIF»
 					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(msgService);
 				«ENDFOR»

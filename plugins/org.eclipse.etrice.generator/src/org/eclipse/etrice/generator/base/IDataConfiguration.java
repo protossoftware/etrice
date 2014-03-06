@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
@@ -152,12 +151,5 @@ public interface IDataConfiguration {
 	 * 		dynamic write access
 	 */
 	public List<Attribute> getDynConfigWriteAttributes(ActorClass actor);
-	
-	// for some reason overriding this method isn't accepted if the EObject parameter is in the first place 
-	/**
-	 * @param acceptor an {@link IResourceURIAcceptor}
-	 * @param root the root object of the resource containing the configuration
-	 */
-	public void addReferencedModels(IResourceURIAcceptor acceptor, EObject root);
 	
 }

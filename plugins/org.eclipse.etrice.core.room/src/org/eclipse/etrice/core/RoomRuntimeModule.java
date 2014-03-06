@@ -15,7 +15,7 @@ package org.eclipse.etrice.core;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
-import org.eclipse.etrice.core.scoping.PlatformRelativeUriResolver;
+import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -51,7 +51,7 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	
 	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-		return PlatformRelativeUriResolver.class;
+		return ModelLocatorUriResolver.class;
 	}
 
 	// HOWTO: add a value converter

@@ -59,11 +59,6 @@ public class TypeHelpers {
     }
   }
   
-  public String getTypeName(final DataType t) {
-    String _typeName = this.typeName(t);
-    return _typeName;
-  }
-  
   public String getTypeName(final RefableType t) {
     DataType _type = t.getType();
     String _typeName = this.typeName(_type);
@@ -135,6 +130,19 @@ public class TypeHelpers {
   
   public boolean isPrimitive(final DataType type) {
     return (type instanceof PrimitiveType);
+  }
+  
+  public boolean isBoolean(final DataType type) {
+    boolean _and = false;
+    boolean _isPrimitive = this.isPrimitive(type);
+    if (!_isPrimitive) {
+      _and = false;
+    } else {
+      LiteralType _type = ((PrimitiveType) type).getType();
+      boolean _equals = Objects.equal(_type, LiteralType.BOOL);
+      _and = (_isPrimitive && _equals);
+    }
+    return _and;
   }
   
   public boolean isEnumeration(final DataType type) {

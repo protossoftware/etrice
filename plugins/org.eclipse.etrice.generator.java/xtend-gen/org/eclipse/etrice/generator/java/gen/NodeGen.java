@@ -379,7 +379,7 @@ public class NodeGen {
               _builder.append("\t\t");
               _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
               ExecMode _execmode_2 = thread_1.getExecmode();
-              String _name_1 = _execmode_2.name();
+              String _name_1 = _execmode_2.getName();
               _builder.append(_name_1, "		");
               _builder.append(", ");
               int _time = thread_1.getTime();
@@ -396,7 +396,7 @@ public class NodeGen {
               _builder.append("\t\t");
               _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
               ExecMode _execmode_3 = thread_1.getExecmode();
-              String _name_3 = _execmode_3.name();
+              String _name_3 = _execmode_3.getName();
               _builder.append(_name_3, "		");
               _builder.append(", 0, ");
               String _threadId_2 = this.getThreadId(thread_1);

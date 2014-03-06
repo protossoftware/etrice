@@ -71,39 +71,46 @@ public class Main extends AbstractGenerator {
 	protected int runGenerator() {
 		setupRoomModel();
 
-		if (!loadModels(getSettings().getInputModelURIs())) {
-			logger.logInfo("loading of models failed");
-			logger.logError("-- terminating", null);
-			return GENERATOR_ERROR;
+		try {
+			activateModelLocator();
+			
+			if (!loadModels(getSettings().getInputModelURIs())) {
+				logger.logInfo("loading of models failed");
+				logger.logError("-- terminating", null);
+				return GENERATOR_ERROR;
+			}
+			
+			if (!validateModels()) {
+				logger.logInfo("validation failed");
+				logger.logError("-- terminating", null);
+				return GENERATOR_ERROR;
+			}
+			
+			Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());
+			if (diagnostician.isFailed() || genModel==null) {
+				logger.logInfo("errors during build of generator model");
+				logger.logError("-- terminating", null);
+				return GENERATOR_ERROR;
+			}
+			
+			logger.logInfo("-- starting code generation");
+			fileAccess.setOutputPath("doc-gen/");
+			mainGenerator.doGenerate(genModel.eResource(), fileAccess);
+			
+			if (getSettings().isGenerateInstanceDiagram()) {
+				instanceDiagramGenerator.doGenerate(genModel);
+			}
+			
+			if (diagnostician.isFailed()) {
+				logger.logInfo("errors during code generation");
+				logger.logError("-- terminating", null);
+				return GENERATOR_ERROR;
+			}
+			logger.logInfo("-- finished code generation");
 		}
-
-		if (!validateModels()) {
-			logger.logInfo("validation failed");
-			logger.logError("-- terminating", null);
-			return GENERATOR_ERROR;
+		finally {
+			deactivateModelLocator();
 		}
-		
-		Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());
-		if (diagnostician.isFailed() || genModel==null) {
-			logger.logInfo("errors during build of generator model");
-			logger.logError("-- terminating", null);
-			return GENERATOR_ERROR;
-		}
-	
-		logger.logInfo("-- starting code generation");
-		fileAccess.setOutputPath("doc-gen/");
-		mainGenerator.doGenerate(genModel.eResource(), fileAccess);
-		
-		if (getSettings().isGenerateInstanceDiagram()) {
-			instanceDiagramGenerator.doGenerate(genModel);
-		}
-		
-		if (diagnostician.isFailed()) {
-			logger.logInfo("errors during code generation");
-			logger.logError("-- terminating", null);
-			return GENERATOR_ERROR;
-		}
-		logger.logInfo("-- finished code generation");
 		
 		return GENERATOR_OK;
 	}

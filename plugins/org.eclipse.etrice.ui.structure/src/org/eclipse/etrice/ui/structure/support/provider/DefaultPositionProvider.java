@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -103,11 +104,13 @@ public class DefaultPositionProvider implements IPositionProvider {
 		for(EObject obj : toLayout){
 			if(obj instanceof ActorContainerRef)
 				refs.add((ActorContainerRef) obj);
-			else if(obj instanceof InterfaceItem)
-				if(obj.eContainer() == sc)
-					intPorts.add((InterfaceItem) obj);
+			else if(obj instanceof InterfaceItem){
+				InterfaceItem item = (InterfaceItem)obj;
+				if(item instanceof Port && RoomHelpers.isInternal((Port)item))
+					intPorts.add(item);
 				else
-					ifItems.add((InterfaceItem) obj);
+					ifItems.add(item);
+			}
 		}
 		
 		layoutInterfaceItems(ifItems, width, height, -InterfaceItemSupport.MARGIN);

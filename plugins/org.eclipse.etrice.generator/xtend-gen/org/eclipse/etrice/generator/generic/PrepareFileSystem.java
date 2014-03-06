@@ -131,7 +131,17 @@ public class PrepareFileSystem {
     if (_isDirectory) {
       File[] children = f.listFiles();
       for (final File child : children) {
-        {
+        boolean _and = false;
+        boolean _isDirectory_1 = child.isDirectory();
+        if (!_isDirectory_1) {
+          _and = false;
+        } else {
+          String _name = child.getName();
+          boolean _equals = _name.equals("images");
+          _and = (_isDirectory_1 && _equals);
+        }
+        boolean _not = (!_and);
+        if (_not) {
           this.eraseContents(child);
           child.delete();
         }

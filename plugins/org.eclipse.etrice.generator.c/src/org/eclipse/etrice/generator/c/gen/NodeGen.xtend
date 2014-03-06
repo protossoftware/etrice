@@ -525,11 +525,11 @@ class NodeGen {
 	private def genPeerPortArrays(Root root, ActorInstance ai) {
 		val simplePorts = ai.orderedIfItemInstances.filter(e|e.simple && e instanceof PortInstance).map(inst|inst as PortInstance)
 		val sendPorts = simplePorts.filter(p|p.port.conjugated && p.protocol.commType==CommunicationType::DATA_DRIVEN)
-		val enumPortsWithPeers = sendPorts.filter(p|!p.peers.empty && !p.port.outgoing.filter(m|m.data.refType.type.enumeration).empty)
+		val loggedPorts = sendPorts.filter(p|!p.port.outgoing.filter(m|m.data.refType.type.isEnumeration || m.data.refType.type.isBoolean).empty)
 		'''
-		«IF !enumPortsWithPeers.empty»
+		«IF !loggedPorts.empty»
 			#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
-			«FOR pi: enumPortsWithPeers»
+			«FOR pi: loggedPorts»
 				static const char* «pi.path.pathName»_peers[«pi.peers.size+1»] = {
 					«FOR peer: pi.peers»
 						"«(peer.eContainer as ActorInstance).path»",
@@ -563,8 +563,9 @@ class NodeGen {
 	def private genSendPortInitializer(InterfaceItemInstance pi) {
 		val pc = (pi as PortInstance).port.protocol as ProtocolClass
 		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
-		val enumMsgs = messages.filter(m|m.data.refType.type.enumeration)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
+		val enumMsgs = messages.filter(m|m.data.refType.type.isEnumeration)
+		val boolMsgs = messages.filter(m|m.data.refType.type.isBoolean)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
 		val instName = (pi.eContainer as ActorInstance).path
 		
 		'''
@@ -594,10 +595,20 @@ class NodeGen {
 	
 	def private String genRecvPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var sentMsgs = pi.interfaceItem.incoming.filter(m|m.data!=null)
-		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.enumeration)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !enumMsgs.empty
-		val enumVal = if (usesMSC) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n, \""+ai.path+"\", "+enumMsgs.get(0).data.refType.type.defaultValue+"\n#endif\n"
-					else ""
+		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.isEnumeration)
+		val boolMsgs = sentMsgs.filter(m|m.data.refType.type.isBoolean)
+		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
+		var enumVal = ""
+		if (usesMSC) {
+			enumVal = "\n, \""+ai.path+"\""
+			for (msg : enumMsgs) {
+				enumVal = enumVal + "\n, "+msg.data.refType.type.defaultValue
+			}
+			for (msg : boolMsgs) {
+				enumVal = enumVal + "\n, "+msg.data.refType.type.defaultValue
+			}
+			enumVal = "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE"+enumVal+"\n#endif\n"
+		}
 		
 		if (pi.peers.empty)
 			return "{NULL"+enumVal+"}"

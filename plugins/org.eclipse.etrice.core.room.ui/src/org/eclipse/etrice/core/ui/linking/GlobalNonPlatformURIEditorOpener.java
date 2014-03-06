@@ -63,8 +63,10 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 			String pluri = files[0].toString();
 			// the pluri starts with L/ which we have to omit for URI.createPlatformResourceURI
 			uri = URI.createPlatformResourceURI(pluri.substring(2), true).appendFragment(uri.fragment());
+			return uri;
 		}
-		return uri;
+		
+		return null;
 	}
 
 	private IEditorPart openExternalFile(URI referenceOwnerURI) {

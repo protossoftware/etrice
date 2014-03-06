@@ -23176,7 +23176,7 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
  * //			ImportedNamespaceAwareLocalScopeProvider
  * // also configure in the RuntimeModule
  * //	public Class<? extends ImportUriResolver> bindImportUriResolver() {
- * //		return PlatformRelativeUriResolver.class;
+ * //		return ModelLocatorUriResolver.class;
  * //	}
  * // and in the UiRuntimeModule
  * //	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
