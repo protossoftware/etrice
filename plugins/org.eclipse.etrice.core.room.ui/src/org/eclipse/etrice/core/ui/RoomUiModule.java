@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
+import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
@@ -19,6 +21,8 @@ import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 import com.google.inject.Injector;
 
@@ -53,4 +57,14 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return RoomHyperlinkHelper.class;
 	}
+
+    // HOWTO: inject own highlighting configuration
+    public Class<? extends IHighlightingConfiguration> bindSemanticConfig() {
+        return RoomHighlightingConfiguration.class;
+    }
+
+    // HOWTO: inject own semantic highlighting
+    public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+        return RoomSemanticHighlightingCalculator.class;
+    }
 }
