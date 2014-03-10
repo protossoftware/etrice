@@ -69,11 +69,7 @@ public class DocGen {
         String path = this.roomExt.getDocGenerationTargetPath(model);
         String _name = model.getName();
         String file = (_name + ".tex");
-        String _plus = ("generating LaTeX documentation: \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
+        this.logger.logInfo((((("generating LaTeX documentation: \'" + file) + "\' in \'") + path) + "\'"));
         this.fileAccess.setOutputPath(path);
         CharSequence _generateModelDoc = this.generateModelDoc(root, model);
         this.fileAccess.generateFile(file, _generateModelDoc);
@@ -339,7 +335,7 @@ public class DocGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -393,7 +389,7 @@ public class DocGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -537,13 +533,13 @@ public class DocGen {
     _builder.append("\\level{2} {");
     String _name = pc.getName();
     String _escapedString = this.escapedString(_name);
-    _builder.append(_escapedString, "	");
+    _builder.append(_escapedString, "\t");
     _builder.append("}");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     Documentation _docu = pc.getDocu();
     CharSequence _generateDocText = this.generateDocText(_docu);
-    _builder.append(_generateDocText, "	");
+    _builder.append(_generateDocText, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("\\level{3}{Incoming Messages}");
@@ -567,7 +563,7 @@ public class DocGen {
         _builder.append("\t");
         String _name_1 = ims.getName();
         String _escapedString_1 = this.escapedString(_name_1);
-        _builder.append(_escapedString_1, "	");
+        _builder.append(_escapedString_1, "\t");
         _builder.append(" & ");
         {
           VarDecl _data = ims.getData();
@@ -577,14 +573,14 @@ public class DocGen {
             VarDecl _data_1 = ims.getData();
             String _name_2 = _data_1.getName();
             String _escapedString_2 = this.escapedString(_name_2);
-            _builder.append(_escapedString_2, "	");
+            _builder.append(_escapedString_2, "\t");
             _builder.append(" ");
           }
         }
         _builder.append(" & ");
         Documentation _docu_1 = ims.getDocu();
         CharSequence _generateDocText_1 = this.generateDocText(_docu_1);
-        _builder.append(_generateDocText_1, "	");
+        _builder.append(_generateDocText_1, "\t");
         _builder.append("\\\\");
         _builder.newLineIfNotEmpty();
       }
@@ -618,7 +614,7 @@ public class DocGen {
         _builder.append("\t");
         String _name_3 = oms.getName();
         String _escapedString_3 = this.escapedString(_name_3);
-        _builder.append(_escapedString_3, "	");
+        _builder.append(_escapedString_3, "\t");
         _builder.append(" & ");
         {
           VarDecl _data_2 = oms.getData();
@@ -628,14 +624,14 @@ public class DocGen {
             VarDecl _data_3 = oms.getData();
             String _name_4 = _data_3.getName();
             String _escapedString_4 = this.escapedString(_name_4);
-            _builder.append(_escapedString_4, "	");
+            _builder.append(_escapedString_4, "\t");
             _builder.append(" ");
           }
         }
         _builder.append(" & ");
         Documentation _docu_2 = oms.getDocu();
         CharSequence _generateDocText_2 = this.generateDocText(_docu_2);
-        _builder.append(_generateDocText_2, "	");
+        _builder.append(_generateDocText_2, "\t");
         _builder.append("\\\\");
         _builder.newLineIfNotEmpty();
       }
@@ -767,7 +763,7 @@ public class DocGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -871,7 +867,7 @@ public class DocGen {
           }
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -890,8 +886,7 @@ public class DocGen {
       String _replaceAll = filename.replaceAll("\\\\", "/");
       filename = _replaceAll;
       String latexFilename = filename.replaceAll("/", "//");
-      String _plus_4 = ("Gen Filename: " + filename);
-      this.logger.logInfo(_plus_4);
+      this.logger.logInfo(("Gen Filename: " + filename));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Subgraph ");
       String _genStatePathName_1 = CodegenHelpers.getGenStatePathName(state);
@@ -904,10 +899,10 @@ public class DocGen {
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
           String _name_1 = ac.getName();
-          String _plus_5 = (_name_1 + "_");
+          String _plus_4 = (_name_1 + "_");
           String _genStatePathName_2 = CodegenHelpers.getGenStatePathName(state);
-          String _plus_6 = (_plus_5 + _genStatePathName_2);
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_6);
+          String _plus_5 = (_plus_4 + _genStatePathName_2);
+          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_5);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
         }
@@ -987,7 +982,7 @@ public class DocGen {
           }
         }
       }
-      _xblockexpression = (_builder.toString());
+      _xblockexpression = _builder.toString();
     }
     return _xblockexpression;
   }
@@ -1046,7 +1041,7 @@ public class DocGen {
         _builder.append("Name: & ");
         String _name = op.getName();
         String _escapedString = this.escapedString(_name);
-        _builder.append(_escapedString, "	");
+        _builder.append(_escapedString, "\t");
         _builder.append("\\\\");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1062,7 +1057,7 @@ public class DocGen {
             DataType _type = _returnType_1.getType();
             String _name_1 = _type.getName();
             String _escapedString_1 = this.escapedString(_name_1);
-            _builder.append(_escapedString_1, "	");
+            _builder.append(_escapedString_1, "\t");
           } else {
             _builder.append("void");
           }
@@ -1081,17 +1076,17 @@ public class DocGen {
             if (!_hasElements) {
               _hasElements = true;
             } else {
-              _builder.appendImmediate(", ", "	");
+              _builder.appendImmediate(", ", "\t");
             }
             String _name_2 = pa.getName();
             String _escapedString_2 = this.escapedString(_name_2);
-            _builder.append(_escapedString_2, "	");
+            _builder.append(_escapedString_2, "\t");
             _builder.append(":");
             RefableType _refType = pa.getRefType();
             DataType _type_1 = _refType.getType();
             String _name_3 = _type_1.getName();
             String _escapedString_3 = this.escapedString(_name_3);
-            _builder.append(_escapedString_3, "	");
+            _builder.append(_escapedString_3, "\t");
           }
         }
         _builder.append("\\\\");
@@ -1113,7 +1108,7 @@ public class DocGen {
                 _builder.append("\\multicolumn{2} {|p{13cm}|} {");
                 Documentation _docu_2 = op.getDocu();
                 CharSequence _generateDocText = this.generateDocText(_docu_2);
-                _builder.append(_generateDocText, "	");
+                _builder.append(_generateDocText, "\t");
                 _builder.append("}\\\\");
                 _builder.newLineIfNotEmpty();
               } else {
@@ -1121,7 +1116,7 @@ public class DocGen {
                 _builder.append("\\multicolumn{2} {|l|} {");
                 Documentation _docu_3 = op.getDocu();
                 CharSequence _generateDocText_1 = this.generateDocText(_docu_3);
-                _builder.append(_generateDocText_1, "	");
+                _builder.append(_generateDocText_1, "\t");
                 _builder.append("}\\\\");
                 _builder.newLineIfNotEmpty();
               }
@@ -1162,17 +1157,13 @@ public class DocGen {
   }
   
   private String fileExists(final String f) {
-    File _file = new File(f);
-    final File file = _file;
+    final File file = new File(f);
     final boolean exist = file.exists();
-    boolean _equals = (exist == true);
-    if (_equals) {
-      String _plus = ("File found ! " + f);
-      this.logger.logInfo(_plus);
+    if ((exist == true)) {
+      this.logger.logInfo(("File found ! " + f));
       return "true";
     } else {
-      String _plus_1 = ("File not found ! " + f);
-      this.logger.logInfo(_plus_1);
+      this.logger.logInfo(("File not found ! " + f));
       return "false";
     }
   }
@@ -1196,14 +1187,13 @@ public class DocGen {
       _builder.newLineIfNotEmpty();
       _builder.append("\\end{center}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
   
   private String escapedString(final String text) {
-    String _replace = text.replace("_", "\\_");
-    return _replace;
+    return text.replace("_", "\\_");
   }
   
   private CharSequence generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {

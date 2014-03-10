@@ -122,7 +122,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -131,15 +131,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     EList<MessageFromIf> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
-      EList<MessageFromIf> _ownTriggers = xpac.getOwnTriggers();
-      _xifexpression = _ownTriggers;
+      _xifexpression = xpac.getOwnTriggers();
     } else {
-      EList<MessageFromIf> _triggers = xpac.getTriggers();
-      _xifexpression = _triggers;
+      _xifexpression = xpac.getTriggers();
     }
     final EList<MessageFromIf> triggers = _xifexpression;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
-    final ArrayList<Pair<String,String>> list = _arrayList;
+    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
     Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");
     list.add(_pair);
     for (final MessageFromIf mif : triggers) {
@@ -157,8 +154,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   }
   
   public String constPointer(final String classname) {
-    String _plus = ("const " + classname);
-    return (_plus + "*");
+    return (("const " + classname) + "*");
   }
   
   public String boolType() {

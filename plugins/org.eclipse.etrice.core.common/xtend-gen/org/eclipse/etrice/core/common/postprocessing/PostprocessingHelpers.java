@@ -38,8 +38,7 @@ public class PostprocessingHelpers {
   }
   
   public static void setDocumentation(final EModelElement eModelElement, final String documentation) {
-    String _plus = (PostprocessingHelpers.JAVADOC_NEWLINE + documentation);
-    EcoreUtil.setDocumentation(eModelElement, _plus);
+    EcoreUtil.setDocumentation(eModelElement, (PostprocessingHelpers.JAVADOC_NEWLINE + documentation));
   }
   
   public static EAttribute getAttribute(final EClass cls, final String name) {
@@ -47,12 +46,10 @@ public class PostprocessingHelpers {
     final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
       public Boolean apply(final EAttribute a) {
         String _name = a.getName();
-        boolean _equals = _name.equals(name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(_name.equals(name));
       }
     };
-    EAttribute _findFirst = IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
-    return _findFirst;
+    return IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
   }
   
   public static EReference getReference(final EClass cls, final String name) {
@@ -60,17 +57,14 @@ public class PostprocessingHelpers {
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
       public Boolean apply(final EReference a) {
         String _name = a.getName();
-        boolean _equals = _name.equals(name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(_name.equals(name));
       }
     };
-    EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
-    return _findFirst;
+    return IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
   }
   
   public static boolean addOperation(final EClass owner, final String name, final EClassifier type, final String body) {
-    boolean _addOperation = PostprocessingHelpers.addOperation(owner, name, type, Integer.valueOf(1), body);
-    return _addOperation;
+    return PostprocessingHelpers.addOperation(owner, name, type, Integer.valueOf(1), body);
   }
   
   public static boolean addOperation(final EClass owner, final String name, final EClassifier type, final Integer upperBound, final String body) {
@@ -87,8 +81,7 @@ public class PostprocessingHelpers {
       EList<EAnnotation> _eAnnotations = op.getEAnnotations();
       _eAnnotations.add(anno);
       EList<EOperation> _eOperations = owner.getEOperations();
-      boolean _add = _eOperations.add(op);
-      _xblockexpression = (_add);
+      _xblockexpression = _eOperations.add(op);
     }
     return _xblockexpression;
   }

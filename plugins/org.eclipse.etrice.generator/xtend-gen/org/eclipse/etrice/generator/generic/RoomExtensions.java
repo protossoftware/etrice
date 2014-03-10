@@ -69,39 +69,27 @@ public class RoomExtensions {
   private static String genDocDir = "/doc-gen/";
   
   public static String setDefaultGenDir() {
-    String _genDir = RoomExtensions.genDir = "/src-gen/";
-    return _genDir;
+    return RoomExtensions.genDir = "/src-gen/";
   }
   
   public static String setDefaultGenInfoDir() {
-    String _genInfoDir = RoomExtensions.genInfoDir = "/src-gen-info/";
-    return _genInfoDir;
+    return RoomExtensions.genInfoDir = "/src-gen-info/";
   }
   
   public static String setDefaultGenDocDir() {
-    String _genDocDir = RoomExtensions.genDocDir = "/doc-gen/";
-    return _genDocDir;
+    return RoomExtensions.genDocDir = "/doc-gen/";
   }
   
   public static String setGenDir(final String dir) {
-    String _plus = ("/" + dir);
-    String _plus_1 = (_plus + "/");
-    String _genDir = RoomExtensions.genDir = _plus_1;
-    return _genDir;
+    return RoomExtensions.genDir = (("/" + dir) + "/");
   }
   
   public static String setGenInfoDir(final String dir) {
-    String _plus = ("/" + dir);
-    String _plus_1 = (_plus + "/");
-    String _genInfoDir = RoomExtensions.genInfoDir = _plus_1;
-    return _genInfoDir;
+    return RoomExtensions.genInfoDir = (("/" + dir) + "/");
   }
   
   public static String setGenDocDir(final String dir) {
-    String _plus = ("/" + dir);
-    String _plus_1 = (_plus + "/");
-    String _genDocDir = RoomExtensions.genDocDir = _plus_1;
-    return _genDocDir;
+    return RoomExtensions.genDocDir = (("/" + dir) + "/");
   }
   
   /**
@@ -111,8 +99,7 @@ public class RoomExtensions {
    * @return the union of the iterable and the element as new list
    */
   public <T extends Object> List<T> union(final Iterable<T> l, final T e) {
-    ArrayList<T> _arrayList = new ArrayList<T>();
-    ArrayList<T> ret = _arrayList;
+    ArrayList<T> ret = new ArrayList<T>();
     Iterables.<T>addAll(ret, l);
     ret.add(e);
     return ret;
@@ -125,8 +112,7 @@ public class RoomExtensions {
    * @return the union of the two iterables as new list
    */
   public <T extends Object> List<T> union(final Iterable<T> l1, final Iterable<T> l2) {
-    ArrayList<T> _arrayList = new ArrayList<T>();
-    ArrayList<T> ret = _arrayList;
+    ArrayList<T> ret = new ArrayList<T>();
     Iterables.<T>addAll(ret, l1);
     Iterables.<T>addAll(ret, l2);
     return ret;
@@ -139,8 +125,7 @@ public class RoomExtensions {
    * @return the union of the two iterables as new list
    */
   public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {
-    ArrayList<Port> _arrayList = new ArrayList<Port>();
-    final ArrayList<Port> ret = _arrayList;
+    final ArrayList<Port> ret = new ArrayList<Port>();
     final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
       public void apply(final ExternalPort e) {
         Port _interfacePort = e.getInterfacePort();
@@ -159,8 +144,7 @@ public class RoomExtensions {
    * @return a new list with the contents of l1
    */
   public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
-    ArrayList<T> _arrayList = new ArrayList<T>(l1);
-    ArrayList<T> ret = _arrayList;
+    ArrayList<T> ret = new ArrayList<T>(l1);
     ret.removeAll(l2);
     return ret;
   }
@@ -220,8 +204,7 @@ public class RoomExtensions {
     String _replace = _package.replace(".", "_");
     String _plus = (_replace + "_");
     String _name = rc.getName();
-    String _plus_1 = (_plus + _name);
-    return _plus_1;
+    return (_plus + _name);
   }
   
   /**
@@ -240,8 +223,7 @@ public class RoomExtensions {
    */
   public String getPath(final RoomClass rc) {
     String _package = this.getPackage(rc);
-    String _pathFromPackage = this.getPathFromPackage(_package);
-    return _pathFromPackage;
+    return this.getPathFromPackage(_package);
   }
   
   /**
@@ -297,8 +279,7 @@ public class RoomExtensions {
    */
   public String getPathName(final String path) {
     String _replaceAll = path.replaceAll("/", "_");
-    String _replaceAll_1 = _replaceAll.replaceAll(":", "_");
-    return _replaceAll_1;
+    return _replaceAll.replaceAll(":", "_");
   }
   
   /**
@@ -312,8 +293,7 @@ public class RoomExtensions {
       GeneralProtocolClass _protocol_1 = p.getProtocol();
       boolean _isConjugated = p.isConjugated();
       boolean _isReplicated = p.isReplicated();
-      String _portClassName = this.getPortClassName(((ProtocolClass) _protocol_1), _isConjugated, _isReplicated);
-      _xifexpression = _portClassName;
+      _xifexpression = this.getPortClassName(((ProtocolClass) _protocol_1), _isConjugated, _isReplicated);
     } else {
       _xifexpression = "";
     }
@@ -363,8 +343,7 @@ public class RoomExtensions {
    * @return a name for the associated port class
    */
   public String getPortClassName(final ProtocolClass p, final boolean conj) {
-    String _portClassName = this.getPortClassName(p, conj, false);
-    return _portClassName;
+    return this.getPortClassName(p, conj, false);
   }
   
   /**
@@ -390,8 +369,7 @@ public class RoomExtensions {
       _xifexpression_1 = "";
     }
     String _plus_1 = (_plus + _xifexpression_1);
-    String _plus_2 = (_plus_1 + "Port");
-    return _plus_2;
+    return (_plus_1 + "Port");
   }
   
   /**
@@ -446,8 +424,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        boolean _not = (!conj);
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, _not);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -488,16 +465,13 @@ public class RoomExtensions {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
     if (_equals) {
-      ArrayList<MessageHandler> _arrayList = new ArrayList<MessageHandler>();
-      return _arrayList;
+      return new ArrayList<MessageHandler>();
     } else {
-      ArrayList<MessageHandler> _arrayList_1 = new ArrayList<MessageHandler>();
-      ArrayList<MessageHandler> res = _arrayList_1;
+      ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        boolean _not = (!conj);
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, _not);
+        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -517,11 +491,9 @@ public class RoomExtensions {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
     if (_equals) {
-      ArrayList<MessageHandler> _arrayList = new ArrayList<MessageHandler>();
-      return _arrayList;
+      return new ArrayList<MessageHandler>();
     } else {
-      ArrayList<MessageHandler> _arrayList_1 = new ArrayList<MessageHandler>();
-      ArrayList<MessageHandler> res = _arrayList_1;
+      ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
@@ -547,8 +519,7 @@ public class RoomExtensions {
     final Function1<MessageHandler,Boolean> _function = new Function1<MessageHandler,Boolean>() {
       public Boolean apply(final MessageHandler e) {
         Message _msg = e.getMsg();
-        boolean _equals = Objects.equal(_msg, m);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_msg, m));
       }
     };
     return IterableExtensions.<MessageHandler>findFirst(_sendHandlers, _function);
@@ -589,21 +560,18 @@ public class RoomExtensions {
     {
       final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
         public Boolean apply(final State s) {
-          boolean _isLeaf = RoomHelpers.isLeaf(s);
-          return Boolean.valueOf(_isLeaf);
+          return Boolean.valueOf(RoomHelpers.isLeaf(s));
         }
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
       final Function1<State,Boolean> _function_1 = new Function1<State,Boolean>() {
         public Boolean apply(final State s) {
           boolean _isLeaf = RoomHelpers.isLeaf(s);
-          boolean _not = (!_isLeaf);
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!_isLeaf));
         }
       };
       final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
-      List<State> _union = this.<State>union(nonLeaf, leaf);
-      _xblockexpression = (_union);
+      _xblockexpression = this.<State>union(nonLeaf, leaf);
     }
     return _xblockexpression;
   }
@@ -614,8 +582,7 @@ public class RoomExtensions {
    */
   public List<State> getAllLeafStates(final ActorClass ac) {
     StateGraph _stateMachine = ac.getStateMachine();
-    List<State> _leafStateList = RoomHelpers.getLeafStateList(_stateMachine);
-    return _leafStateList;
+    return RoomHelpers.getLeafStateList(_stateMachine);
   }
   
   /**
@@ -624,8 +591,7 @@ public class RoomExtensions {
    */
   public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
     List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
-    List<State> _leafStatesLast = this.getLeafStatesLast(_allBaseStates);
-    return _leafStatesLast;
+    return this.getLeafStatesLast(_allBaseStates);
   }
   
   /**
@@ -647,14 +613,14 @@ public class RoomExtensions {
         } else {
           EList<VarDecl> _arguments = e.getArguments();
           boolean _isEmpty = _arguments.isEmpty();
-          _and_1 = (_equals && _isEmpty);
+          _and_1 = _isEmpty;
         }
         if (!_and_1) {
           _and = false;
         } else {
           RefableType _returnType = e.getReturnType();
           boolean _equals_1 = Objects.equal(_returnType, null);
-          _and = (_and_1 && _equals_1);
+          _and = _equals_1;
         }
         return Boolean.valueOf(_and);
       }
@@ -671,9 +637,9 @@ public class RoomExtensions {
       } else {
         ActorClass _base_1 = ac.getBase();
         boolean _overridesStop = this.overridesStop(_base_1);
-        _and = (_notEquals && _overridesStop);
+        _and = _overridesStop;
       }
-      _or = (_exists || _and);
+      _or = _and;
     }
     return _or;
   }
@@ -725,8 +691,7 @@ public class RoomExtensions {
    * 		following the logic of evaluation of firing conditions
    */
   public List<Transition> getOutgoingTransitionsHierarchical(final ExpandedActorClass ac, final State s) {
-    ArrayList<Transition> _arrayList = new ArrayList<Transition>();
-    ArrayList<Transition> result = _arrayList;
+    ArrayList<Transition> result = new ArrayList<Transition>();
     EList<Transition> _outgoingTransitions = ac.getOutgoingTransitions(s);
     result.addAll(_outgoingTransitions);
     EObject _eContainer = s.eContainer();
@@ -748,8 +713,7 @@ public class RoomExtensions {
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {
-    BasicEList<AbstractInstance> _basicEList = new BasicEList<AbstractInstance>();
-    final BasicEList<AbstractInstance> result = _basicEList;
+    final BasicEList<AbstractInstance> result = new BasicEList<AbstractInstance>();
     final TreeIterator<EObject> it = ssi.eAllContents();
     boolean _hasNext = it.hasNext();
     boolean _while = _hasNext;

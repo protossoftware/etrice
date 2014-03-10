@@ -99,10 +99,9 @@ public class ImplPostProcessing {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
       _builder_4.newLine();
-      boolean _addOperation = PostprocessingHelpers.addOperation(refSeg, 
+      _xblockexpression = PostprocessingHelpers.addOperation(refSeg, 
         "toString", _eClassifier_4, 
         Integer.valueOf(1), _builder_4.toString());
-      _xblockexpression = (_addOperation);
     }
     return _xblockexpression;
   }

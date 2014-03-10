@@ -50,8 +50,7 @@ public class CExtensions implements ILanguageExtension {
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
     String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
-    String _get = _generateArglistAndTypedData[1];
-    return _get;
+    return _generateArglistAndTypedData[1];
   }
   
   public String accessLevelPrivate() {
@@ -77,8 +76,7 @@ public class CExtensions implements ILanguageExtension {
     } else {
       _xifexpression = "* self";
     }
-    String _plus = (classname + _xifexpression);
-    return _plus;
+    return (classname + _xifexpression);
   }
   
   public String selfPointer(final boolean hasArgs) {
@@ -92,18 +90,15 @@ public class CExtensions implements ILanguageExtension {
   }
   
   public String operationScope(final String classname, final boolean isDeclaration) {
-    String _plus = (classname + "_");
-    return _plus;
+    return (classname + "_");
   }
   
   public String memberInDeclaration(final String namespace, final String member) {
-    String _plus = (namespace + "_");
-    return (_plus + member);
+    return ((namespace + "_") + member);
   }
   
   public String memberInUse(final String namespace, final String member) {
-    String _plus = (namespace + "_");
-    return (_plus + member);
+    return ((namespace + "_") + member);
   }
   
   /**
@@ -179,8 +174,7 @@ public class CExtensions implements ILanguageExtension {
       String _plus = (_replaceAll + "_");
       String _name_1 = rc.getName();
       final String filename = (_plus + _name_1);
-      CharSequence _generateIncludeGuardBegin = this.generateIncludeGuardBegin(filename);
-      _xblockexpression = (_generateIncludeGuardBegin);
+      _xblockexpression = this.generateIncludeGuardBegin(filename);
     }
     return _xblockexpression;
   }
@@ -194,8 +188,7 @@ public class CExtensions implements ILanguageExtension {
       String _plus = (_replaceAll + "_");
       String _name_1 = rc.getName();
       final String filename = (_plus + _name_1);
-      CharSequence _generateIncludeGuardEnd = this.generateIncludeGuardEnd(filename);
-      _xblockexpression = (_generateIncludeGuardEnd);
+      _xblockexpression = this.generateIncludeGuardEnd(filename);
     }
     return _xblockexpression;
   }
@@ -249,21 +242,20 @@ public class CExtensions implements ILanguageExtension {
           if (!_hasElements) {
             _hasElements = true;
           } else {
-            _builder.appendImmediate(",", "	");
+            _builder.appendImmediate(",", "\t");
           }
           _builder.append("\t");
           String _first = entry.getFirst();
-          _builder.append(_first, "	");
+          _builder.append(_first, "\t");
           _builder.append(" = ");
           String _second = entry.getSecond();
-          _builder.append(_second, "	");
+          _builder.append(_second, "\t");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("};");
       _builder.newLine();
-      String _string = _builder.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = _builder.toString();
     }
     return _xblockexpression;
   }
@@ -293,19 +285,9 @@ public class CExtensions implements ILanguageExtension {
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
     String _xifexpression = null;
     if (isRef) {
-      String _plus = (type + "* ");
-      String _plus_1 = (_plus + name);
-      String _plus_2 = (_plus_1 + "[");
-      String _plus_3 = (_plus_2 + Integer.valueOf(size));
-      String _plus_4 = (_plus_3 + "]");
-      _xifexpression = _plus_4;
+      _xifexpression = (((((type + "* ") + name) + "[") + Integer.valueOf(size)) + "]");
     } else {
-      String _plus_5 = (type + " ");
-      String _plus_6 = (_plus_5 + name);
-      String _plus_7 = (_plus_6 + "[");
-      String _plus_8 = (_plus_7 + Integer.valueOf(size));
-      String _plus_9 = (_plus_8 + "]");
-      _xifexpression = _plus_9;
+      _xifexpression = (((((type + " ") + name) + "[") + Integer.valueOf(size)) + "]");
     }
     return _xifexpression;
   }
@@ -333,7 +315,6 @@ public class CExtensions implements ILanguageExtension {
   public String toValueLiteral(final PrimitiveType type, final String value) {
     String _switchResult = null;
     String _targetName = type.getTargetName();
-    final String _switchValue = _targetName;
     boolean _matched = false;
     if (!_matched) {
       boolean _and = false;
@@ -344,13 +325,11 @@ public class CExtensions implements ILanguageExtension {
       } else {
         int _length = value.length();
         boolean _equals_1 = (_length == 1);
-        _and = (_equals && _equals_1);
+        _and = _equals_1;
       }
       if (_and) {
         _matched=true;
-        String _plus = ("\'" + value);
-        String _plus_1 = (_plus + "\'");
-        _switchResult = _plus_1;
+        _switchResult = (("\'" + value) + "\'");
       }
     }
     if (!_matched) {
@@ -358,9 +337,7 @@ public class CExtensions implements ILanguageExtension {
       boolean _equals_2 = Objects.equal(_type, LiteralType.CHAR);
       if (_equals_2) {
         _matched=true;
-        String _plus_2 = ("\"" + value);
-        String _plus_3 = (_plus_2 + "\"");
-        _switchResult = _plus_3;
+        _switchResult = (("\"" + value) + "\"");
       }
     }
     if (!_matched) {
@@ -370,7 +347,7 @@ public class CExtensions implements ILanguageExtension {
         _or = true;
       } else {
         boolean _contains_1 = value.contains("{");
-        _or = (_contains || _contains_1);
+        _or = _contains_1;
       }
       if (_or) {
         _matched=true;
@@ -396,17 +373,15 @@ public class CExtensions implements ILanguageExtension {
             }
           }
           _builder.append(" }");
-          String _string = _builder.toString();
-          _xblockexpression = (_string);
+          _xblockexpression = _builder.toString();
         }
         _switchResult = _xblockexpression;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"boolean")) {
+      if (Objects.equal(_targetName,"boolean")) {
         _matched=true;
-        String _upperCase = value.toUpperCase();
-        _switchResult = _upperCase;
+        _switchResult = value.toUpperCase();
       }
     }
     if (!_matched) {
@@ -423,7 +398,7 @@ public class CExtensions implements ILanguageExtension {
       _or = true;
     } else {
       boolean _contains_1 = value.contains("{");
-      _or = (_contains || _contains_1);
+      _or = _contains_1;
     }
     if (_or) {
       String _xblockexpression = null;
@@ -448,13 +423,11 @@ public class CExtensions implements ILanguageExtension {
           }
         }
         _builder.append(" }");
-        String _string = _builder.toString();
-        _xblockexpression = (_string);
+        _xblockexpression = _builder.toString();
       }
       _xifexpression = _xblockexpression;
     } else {
-      String _convertStringEnumLiteral = this.convertStringEnumLiteral(type, value);
-      _xifexpression = _convertStringEnumLiteral;
+      _xifexpression = this.convertStringEnumLiteral(type, value);
     }
     return _xifexpression;
   }
@@ -489,62 +462,56 @@ public class CExtensions implements ILanguageExtension {
     boolean _matched = false;
     if (!_matched) {
       if (dt instanceof PrimitiveType) {
-        final PrimitiveType _primitiveType = (PrimitiveType)dt;
         _matched=true;
-        String _defaultValueLiteral = _primitiveType.getDefaultValueLiteral();
-        String _valueLiteral = this.toValueLiteral(_primitiveType, _defaultValueLiteral);
-        _switchResult = _valueLiteral;
+        String _defaultValueLiteral = ((PrimitiveType)dt).getDefaultValueLiteral();
+        _switchResult = this.toValueLiteral(((PrimitiveType)dt), _defaultValueLiteral);
       }
     }
     if (!_matched) {
       if (dt instanceof EnumerationType) {
-        final EnumerationType _enumerationType = (EnumerationType)dt;
         _matched=true;
-        String _defaultValue = this.getDefaultValue(_enumerationType);
-        _switchResult = _defaultValue;
+        _switchResult = this.getDefaultValue(((EnumerationType)dt));
       }
     }
     if (!_matched) {
       if (dt instanceof ExternalType) {
-        final ExternalType _externalType = (ExternalType)dt;
         _matched=true;
         String _xblockexpression = null;
         {
-          String _defaultValueLiteral = _externalType.getDefaultValueLiteral();
+          String _defaultValueLiteral = ((ExternalType)dt).getDefaultValueLiteral();
           boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
           if (_notEquals) {
-            return _externalType.getDefaultValueLiteral();
+            return ((ExternalType)dt).getDefaultValueLiteral();
           }
-          String _name = _externalType.getName();
+          String _name = ((ExternalType)dt).getName();
           String _plus = ("external type " + _name);
           String _plus_1 = (_plus + "has no default initialization");
-          EObject _eContainer = _externalType.eContainer();
-          EStructuralFeature _eContainingFeature = _externalType.eContainingFeature();
+          EObject _eContainer = ((ExternalType)dt).eContainer();
+          EStructuralFeature _eContainingFeature = ((ExternalType)dt).eContainingFeature();
           this.diagnostician.error(_plus_1, _eContainer, _eContainingFeature);
-          _xblockexpression = ("");
+          _xblockexpression = "";
         }
         _switchResult = _xblockexpression;
       }
     }
     if (!_matched) {
       if (dt instanceof DataClass) {
-        final DataClass _dataClass = (DataClass)dt;
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("{");
         _builder.newLine();
         {
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_dataClass);
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass)dt));
           boolean _hasElements = false;
           for(final Attribute att : _allAttributes) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
-              _builder.appendImmediate(",", "	");
+              _builder.appendImmediate(",", "\t");
             }
             _builder.append("\t");
             String _initializationWithDefaultValues = this.initializationWithDefaultValues(att);
-            _builder.append(_initializationWithDefaultValues, "	");
+            _builder.append(_initializationWithDefaultValues, "\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -565,8 +532,7 @@ public class CExtensions implements ILanguageExtension {
     } else {
       EList<EnumLiteral> _literals_1 = type.getLiterals();
       EnumLiteral _get = _literals_1.get(0);
-      String _castedValue = this.getCastedValue(_get);
-      _xifexpression = _castedValue;
+      _xifexpression = this.getCastedValue(_get);
     }
     return _xifexpression;
   }
@@ -575,39 +541,30 @@ public class CExtensions implements ILanguageExtension {
     String _xblockexpression = null;
     {
       final String dv = this.defaultValue(dt);
-      String _initializer = this.initializer(dv, size);
-      _xblockexpression = (_initializer);
+      _xblockexpression = this.initializer(dv, size);
     }
     return _xblockexpression;
   }
   
   private String initializer(final String dv, final int size) {
     String _xifexpression = null;
-    boolean _greaterThan = (size > 1);
-    if (_greaterThan) {
+    if ((size > 1)) {
       String _xblockexpression = null;
       {
         String res = "{";
         int i = 0;
-        boolean _lessThan = (i < size);
-        boolean _while = _lessThan;
+        boolean _while = (i < size);
         while (_while) {
           {
-            String _plus = (res + dv);
-            res = _plus;
-            int _plus_1 = (i + 1);
-            i = _plus_1;
-            boolean _lessThan_1 = (i < size);
-            if (_lessThan_1) {
-              String _plus_2 = (res + ",");
-              res = _plus_2;
+            res = (res + dv);
+            i = (i + 1);
+            if ((i < size)) {
+              res = (res + ",");
             }
           }
-          boolean _lessThan_1 = (i < size);
-          _while = _lessThan_1;
+          _while = (i < size);
         }
-        String _plus = (res + "}");
-        _xblockexpression = (_plus);
+        _xblockexpression = (res + "}");
       }
       _xifexpression = _xblockexpression;
     } else {
@@ -629,8 +586,7 @@ public class CExtensions implements ILanguageExtension {
           _xifexpression_1 = dv;
         } else {
           int _size = att.getSize();
-          String _initializer = this.initializer(dv, _size);
-          _xifexpression_1 = _initializer;
+          _xifexpression_1 = this.initializer(dv, _size);
         }
         _xifexpression = _xifexpression_1;
       } else {
@@ -639,18 +595,16 @@ public class CExtensions implements ILanguageExtension {
         boolean _isRef = _type.isRef();
         if (_isRef) {
           int _size_1 = att.getSize();
-          String _initializer_1 = this.initializer("NULL", _size_1);
-          _xifexpression_2 = _initializer_1;
+          _xifexpression_2 = this.initializer("NULL", _size_1);
         } else {
           RefableType _type_1 = att.getType();
           DataType _type_2 = _type_1.getType();
           int _size_2 = att.getSize();
-          String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type_2, _size_2);
-          _xifexpression_2 = _initializationWithDefaultValues;
+          _xifexpression_2 = this.initializationWithDefaultValues(_type_2, _size_2);
         }
         _xifexpression = _xifexpression_2;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -666,8 +620,7 @@ public class CExtensions implements ILanguageExtension {
     if ((_type instanceof PrimitiveType)) {
       RefableType _refType_1 = data.getRefType();
       DataType _type_1 = _refType_1.getType();
-      String _targetName = ((PrimitiveType) _type_1).getTargetName();
-      _xifexpression = _targetName;
+      _xifexpression = ((PrimitiveType) _type_1).getTargetName();
     } else {
       String _xifexpression_1 = null;
       RefableType _refType_2 = data.getRefType();
@@ -675,13 +628,11 @@ public class CExtensions implements ILanguageExtension {
       if ((_type_2 instanceof EnumerationType)) {
         RefableType _refType_3 = data.getRefType();
         DataType _type_3 = _refType_3.getType();
-        String _targetType = this.getTargetType(((EnumerationType) _type_3));
-        _xifexpression_1 = _targetType;
+        _xifexpression_1 = this.getTargetType(((EnumerationType) _type_3));
       } else {
         RefableType _refType_4 = data.getRefType();
         DataType _type_4 = _refType_4.getType();
-        String _name = _type_4.getName();
-        _xifexpression_1 = _name;
+        _xifexpression_1 = _type_4.getName();
       }
       _xifexpression = _xifexpression_1;
     }
@@ -703,14 +654,14 @@ public class CExtensions implements ILanguageExtension {
         } else {
           boolean _isEmpty = ct.isEmpty();
           boolean _not = (!_isEmpty);
-          _and = (_notEquals && _not);
+          _and = _not;
         }
         if (_and) {
           _xifexpression_3 = ct;
         } else {
           _xifexpression_3 = typeName;
         }
-        _xblockexpression = (_xifexpression_3);
+        _xblockexpression = _xifexpression_3;
       }
       _xifexpression_2 = _xblockexpression;
     } else {
@@ -720,16 +671,14 @@ public class CExtensions implements ILanguageExtension {
       if ((_type_6 instanceof EnumerationType)) {
         RefableType _refType_7 = data.getRefType();
         DataType _type_7 = _refType_7.getType();
-        String _castType = this.getCastType(((EnumerationType) _type_7));
-        _xifexpression_3 = _castType;
+        _xifexpression_3 = this.getCastType(((EnumerationType) _type_7));
       } else {
         _xifexpression_3 = typeName;
       }
       _xifexpression_2 = _xifexpression_3;
     }
     String castTypeName = _xifexpression_2;
-    String _plus = (castTypeName + "*");
-    castTypeName = _plus;
+    castTypeName = (castTypeName + "*");
     String deRef = "*";
     RefableType _refType_8 = data.getRefType();
     final boolean isRef = _refType_8.isRef();
@@ -741,36 +690,29 @@ public class CExtensions implements ILanguageExtension {
     } else {
       RefableType _refType_10 = data.getRefType();
       DataType _type_9 = _refType_10.getType();
-      _or = ((_type_8 instanceof PrimitiveType) || (_type_9 instanceof EnumerationType));
+      _or = (_type_9 instanceof EnumerationType);
     }
     final boolean isPrim = _or;
     if (isRef) {
-      String _plus_1 = (typeName + "*");
-      typeName = _plus_1;
-      String _plus_2 = (castTypeName + "*");
-      castTypeName = _plus_2;
+      typeName = (typeName + "*");
+      castTypeName = (castTypeName + "*");
     } else {
-      boolean _not = (!isPrim);
-      if (_not) {
-        String _plus_3 = (typeName + "*");
-        typeName = _plus_3;
+      if ((!isPrim)) {
+        typeName = (typeName + "*");
         deRef = "";
       }
     }
-    String _plus_4 = (typeName + " ");
+    String _name = data.getName();
+    String _plus = ((typeName + " ") + _name);
+    String _plus_1 = (_plus + " = ");
+    String _plus_2 = (_plus_1 + deRef);
+    String _plus_3 = (_plus_2 + "((");
+    String _plus_4 = (_plus_3 + castTypeName);
+    final String typedData = (_plus_4 + ") generic_data);\n");
     String _name_1 = data.getName();
-    String _plus_5 = (_plus_4 + _name_1);
-    String _plus_6 = (_plus_5 + " = ");
-    String _plus_7 = (_plus_6 + deRef);
-    String _plus_8 = (_plus_7 + "((");
-    String _plus_9 = (_plus_8 + castTypeName);
-    final String typedData = (_plus_9 + ") generic_data);\n");
+    final String dataArg = (", " + _name_1);
     String _name_2 = data.getName();
-    final String dataArg = (", " + _name_2);
-    String _plus_10 = (", " + typeName);
-    String _plus_11 = (_plus_10 + " ");
-    String _name_3 = data.getName();
-    final String typedArgList = (_plus_11 + _name_3);
+    final String typedArgList = (((", " + typeName) + " ") + _name_2);
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
   
@@ -782,8 +724,7 @@ public class CExtensions implements ILanguageExtension {
     String _plus_1 = (_plus + "/");
     String _cHeaderFileName = this.getCHeaderFileName(rc);
     String _plus_2 = (_plus_1 + _cHeaderFileName);
-    String _plus_3 = (_plus_2 + "\"");
-    return _plus_3;
+    return (_plus_2 + "\"");
   }
   
   public String getTargetType(final EnumerationType type) {
@@ -792,11 +733,9 @@ public class CExtensions implements ILanguageExtension {
     boolean _notEquals = (!Objects.equal(_primitiveType, null));
     if (_notEquals) {
       PrimitiveType _primitiveType_1 = type.getPrimitiveType();
-      String _targetName = _primitiveType_1.getTargetName();
-      _xifexpression = _targetName;
+      _xifexpression = _primitiveType_1.getTargetName();
     } else {
-      String _name = type.getName();
-      _xifexpression = _name;
+      _xifexpression = type.getName();
     }
     return _xifexpression;
   }
@@ -812,18 +751,14 @@ public class CExtensions implements ILanguageExtension {
       boolean _equals = Objects.equal(_primitiveType, null);
       if (_equals) {
         long _literalValue = literal.getLiteralValue();
-        String _string = Long.toString(_literalValue);
-        _xifexpression = _string;
+        _xifexpression = Long.toString(_literalValue);
       } else {
-        String _plus = ("((" + cast);
-        String _plus_1 = (_plus + ")");
         long _literalValue_1 = literal.getLiteralValue();
-        String _string_1 = Long.toString(_literalValue_1);
-        String _plus_2 = (_plus_1 + _string_1);
-        String _plus_3 = (_plus_2 + ")");
-        _xifexpression = _plus_3;
+        String _string = Long.toString(_literalValue_1);
+        String _plus = ((("((" + cast) + ")") + _string);
+        _xifexpression = (_plus + ")");
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -834,11 +769,9 @@ public class CExtensions implements ILanguageExtension {
     boolean _notEquals = (!Objects.equal(_primitiveType, null));
     if (_notEquals) {
       PrimitiveType _primitiveType_1 = type.getPrimitiveType();
-      String _castName = _primitiveType_1.getCastName();
-      _xifexpression = _castName;
+      _xifexpression = _primitiveType_1.getCastName();
     } else {
-      String _name = type.getName();
-      _xifexpression = _name;
+      _xifexpression = type.getName();
     }
     return _xifexpression;
   }

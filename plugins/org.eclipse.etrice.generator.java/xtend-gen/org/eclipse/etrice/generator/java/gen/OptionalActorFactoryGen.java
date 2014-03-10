@@ -44,8 +44,7 @@ public class OptionalActorFactoryGen {
   private FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
-    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
-    final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
+    final HashMap<ActorClass,WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
@@ -64,8 +63,7 @@ public class OptionalActorFactoryGen {
     final Function1<OptionalActorInstance,Boolean> _function_2 = new Function1<OptionalActorInstance,Boolean>() {
       public Boolean apply(final OptionalActorInstance cl) {
         ActorClass _actorClass = cl.getActorClass();
-        boolean _isValidGenerationLocation = OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass);
-        return Boolean.valueOf(_isValidGenerationLocation);
+        return Boolean.valueOf(OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
       }
     };
     Iterable<OptionalActorInstance> _filter_1 = IterableExtensions.<OptionalActorInstance>filter(_optionalInstances, _function_2);
@@ -122,7 +120,7 @@ public class OptionalActorFactoryGen {
       _builder.append("\t");
       _builder.append("public ");
       String _name_1 = ac.getName();
-      _builder.append(_name_1, "	");
+      _builder.append(_name_1, "\t");
       _builder.append(" create(OptionalActorInterfaceBase ai, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -130,10 +128,10 @@ public class OptionalActorFactoryGen {
       _builder.newLine();
       _builder.append("\t\t");
       String _name_2 = ac.getName();
-      _builder.append(_name_2, "		");
+      _builder.append(_name_2, "\t\t");
       _builder.append(" actor = new ");
       String _name_3 = ac.getName();
-      _builder.append(_name_3, "		");
+      _builder.append(_name_3, "\t\t");
       _builder.append("(ai, name);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -145,8 +143,7 @@ public class OptionalActorFactoryGen {
         List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
         final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
           public Boolean apply(final Port p) {
-            boolean _isExternal = RoomHelpers.isExternal(p);
-            return Boolean.valueOf(_isExternal);
+            return Boolean.valueOf(RoomHelpers.isExternal(p));
           }
         };
         Iterable<Port> _filter = IterableExtensions.<Port>filter(_allEndPorts, _function);
@@ -159,13 +156,13 @@ public class OptionalActorFactoryGen {
           } else {
             _xifexpression = "InterfaceItemBase";
           }
-          _builder.append(_xifexpression, "		");
+          _builder.append(_xifexpression, "\t\t");
           _builder.append(".connect(ai, \"");
           String _name_4 = port.getName();
-          _builder.append(_name_4, "		");
+          _builder.append(_name_4, "\t\t");
           _builder.append("\", name+\"/");
           String _name_5 = port.getName();
-          _builder.append(_name_5, "		");
+          _builder.append(_name_5, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
         }
@@ -182,15 +179,15 @@ public class OptionalActorFactoryGen {
           } else {
             _xifexpression_1 = "InterfaceItemBase";
           }
-          _builder.append(_xifexpression_1, "		");
+          _builder.append(_xifexpression_1, "\t\t");
           _builder.append(".connect(ai, \"");
           Port _port_1 = open.getPort();
           String _name_6 = _port_1.getName();
-          _builder.append(_name_6, "		");
+          _builder.append(_name_6, "\t\t");
           _builder.append("\", name+\"/");
           EList<String> _path = open.getPath();
           String _join = IterableExtensions.join(_path, "/");
-          _builder.append(_join, "		");
+          _builder.append(_join, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
         }
@@ -208,15 +205,15 @@ public class OptionalActorFactoryGen {
           } else {
             _xifexpression_2 = "InterfaceItemBase";
           }
-          _builder.append(_xifexpression_2, "		");
+          _builder.append(_xifexpression_2, "\t\t");
           _builder.append(".connect(ai, \"");
           ProtocolClass _protocol_1 = req.getProtocol();
           String _fullyQualifiedName = this._roomExtensions.getFullyQualifiedName(_protocol_1);
-          _builder.append(_fullyQualifiedName, "		");
+          _builder.append(_fullyQualifiedName, "\t\t");
           _builder.append("\", name+\"/");
           EList<String> _path_1 = req.getPath();
           String _join_1 = IterableExtensions.join(_path_1, "/");
-          _builder.append(_join_1, "		");
+          _builder.append(_join_1, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
         }
@@ -231,7 +228,7 @@ public class OptionalActorFactoryGen {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

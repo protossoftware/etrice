@@ -30,8 +30,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   public CharSequence genExtra(final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
-      ArrayList<State> _arrayList = new ArrayList<State>();
-      final ArrayList<State> states = _arrayList;
+      final ArrayList<State> states = new ArrayList<State>();
       ActorClass ac = xpac.getActorClass();
       boolean _notEquals = (!Objects.equal(ac, null));
       boolean _while = _notEquals;
@@ -56,7 +55,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
         } else {
           GlobalSettings _settings_1 = Main.getSettings();
           boolean _generateWithVerboseOutput = _settings_1.generateWithVerboseOutput();
-          _or = (_generateMSCInstrumentation || _generateWithVerboseOutput);
+          _or = _generateWithVerboseOutput;
         }
         if (_or) {
           _builder.append("// state names");
@@ -75,12 +74,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
               if (!_hasElements) {
                 _hasElements = true;
               } else {
-                _builder.appendImmediate(",", "	");
+                _builder.appendImmediate(",", "\t");
               }
               _builder.append("\t");
               _builder.append("\"");
               String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
-              _builder.append(_genStatePathName, "	");
+              _builder.append(_genStatePathName, "\t");
               _builder.append("\"");
               _builder.newLineIfNotEmpty();
             }
@@ -138,7 +137,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -163,7 +162,6 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     ActorClass _actorClass = xpac.getActorClass();
     List<State> _allBaseStates = RoomHelpers.getAllBaseStates(_actorClass);
     int _size = _allBaseStates.size();
-    int _plus = (_size + 2);
-    return _plus;
+    return (_size + 2);
   }
 }

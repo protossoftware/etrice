@@ -92,13 +92,12 @@ public class ConfigGenAddon {
           if (_notEquals) {
             {
               for(final Attribute a_1 : attribs) {
-                String _plus = (aiVariableName + ".");
                 String _name = pi.getName();
                 CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
-                String _plus_1 = (_plus + _invokeGetter);
+                String _plus = ((aiVariableName + ".") + _invokeGetter);
                 ArrayList<Attribute> _arrayList_1 = new ArrayList<Attribute>();
                 List<Attribute> _union_1 = this._roomExtensions.<Attribute>union(_arrayList_1, a_1);
-                CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus_1, _union_1);
+                CharSequence _applyInstanceConfig_1 = this.applyInstanceConfig(pi, _plus, _union_1);
                 _builder.append(_applyInstanceConfig_1, "");
                 _builder.newLineIfNotEmpty();
               }
@@ -120,7 +119,6 @@ public class ConfigGenAddon {
       boolean _matched = false;
       if (!_matched) {
         if (aType instanceof PrimitiveType) {
-          final PrimitiveType _primitiveType = (PrimitiveType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -128,18 +126,16 @@ public class ConfigGenAddon {
             CharSequence _xifexpression = null;
             boolean _notEquals = (!Objects.equal(value, null));
             if (_notEquals) {
-              String _valueLiteral = this.stdExt.toValueLiteral(_primitiveType, value);
-              CharSequence _genAttributeInitializer = this.initGen.genAttributeInitializer(a, _valueLiteral, invokes);
-              _xifexpression = _genAttributeInitializer;
+              String _valueLiteral = this.stdExt.toValueLiteral(((PrimitiveType)aType), value);
+              _xifexpression = this.initGen.genAttributeInitializer(a, _valueLiteral, invokes);
             }
-            _xblockexpression_1 = (_xifexpression);
+            _xblockexpression_1 = _xifexpression;
           }
           _switchResult = _xblockexpression_1;
         }
       }
       if (!_matched) {
         if (aType instanceof EnumerationType) {
-          final EnumerationType _enumerationType = (EnumerationType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -147,28 +143,25 @@ public class ConfigGenAddon {
             CharSequence _xifexpression = null;
             boolean _notEquals = (!Objects.equal(value, null));
             if (_notEquals) {
-              CharSequence _genAttributeInitializer = this.initGen.genAttributeInitializer(a, value, invokes);
-              _xifexpression = _genAttributeInitializer;
+              _xifexpression = this.initGen.genAttributeInitializer(a, value, invokes);
             }
-            _xblockexpression_1 = (_xifexpression);
+            _xblockexpression_1 = _xifexpression;
           }
           _switchResult = _xblockexpression_1;
         }
       }
       if (!_matched) {
         if (aType instanceof DataClass) {
-          final DataClass _dataClass = (DataClass)aType;
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
             for(final Attribute e : _allAttributes) {
-              String _plus = (invokes + ".");
               String _name = a.getName();
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
-              String _plus_1 = (_plus + _invokeGetter);
+              String _plus = ((invokes + ".") + _invokeGetter);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _applyInstanceConfig = this.applyInstanceConfig(instance, _plus_1, _union);
+              CharSequence _applyInstanceConfig = this.applyInstanceConfig(instance, _plus, _union);
               _builder.append(_applyInstanceConfig, "");
               _builder.newLineIfNotEmpty();
             }
@@ -176,7 +169,7 @@ public class ConfigGenAddon {
           _switchResult = _builder;
         }
       }
-      _xblockexpression = (_switchResult);
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
@@ -207,13 +200,13 @@ public class ConfigGenAddon {
         _builder.append("\t");
         _builder.append("if(lock_");
         String _name_1 = a.getName();
-        _builder.append(_name_1, "	");
+        _builder.append(_name_1, "\t");
         _builder.append(" == null)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
         String _name_2 = a.getName();
-        _builder.append(_name_2, "		");
+        _builder.append(_name_2, "\t\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -222,13 +215,13 @@ public class ConfigGenAddon {
         _builder.append("\t\t");
         _builder.append("synchronized(lock_");
         String _name_3 = a.getName();
-        _builder.append(_name_3, "		");
+        _builder.append(_name_3, "\t\t");
         _builder.append("){");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("return ");
         String _name_4 = a.getName();
-        _builder.append(_name_4, "			");
+        _builder.append(_name_4, "\t\t\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -260,16 +253,16 @@ public class ConfigGenAddon {
         _builder.append("\t");
         _builder.append("if(lock_");
         String _name_7 = a.getName();
-        _builder.append(_name_7, "	");
+        _builder.append(_name_7, "\t");
         _builder.append(" == null)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("this.");
         String _name_8 = a.getName();
-        _builder.append(_name_8, "		");
+        _builder.append(_name_8, "\t\t");
         _builder.append(" = ");
         String _name_9 = a.getName();
-        _builder.append(_name_9, "		");
+        _builder.append(_name_9, "\t\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -278,16 +271,16 @@ public class ConfigGenAddon {
         _builder.append("\t\t");
         _builder.append("synchronized(lock_");
         String _name_10 = a.getName();
-        _builder.append(_name_10, "		");
+        _builder.append(_name_10, "\t\t");
         _builder.append("){");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("this.");
         String _name_11 = a.getName();
-        _builder.append(_name_11, "			");
+        _builder.append(_name_11, "\t\t\t");
         _builder.append(" = ");
         String _name_12 = a.getName();
-        _builder.append(_name_12, "			");
+        _builder.append(_name_12, "\t\t\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -304,7 +297,7 @@ public class ConfigGenAddon {
         _builder.append("\t");
         _builder.append("return lock_");
         String _name_14 = a.getName();
-        _builder.append(_name_14, "	");
+        _builder.append(_name_14, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("}\t");
@@ -339,19 +332,19 @@ public class ConfigGenAddon {
         _builder.append("set");
         String _name_17 = a_1.getName();
         String _firstUpper_4 = StringExtensions.toFirstUpper(_name_17);
-        _builder.append(_firstUpper_4, "		");
+        _builder.append(_firstUpper_4, "\t\t");
         _builder.append("(");
         String _name_18 = a_1.getName();
-        _builder.append(_name_18, "		");
+        _builder.append(_name_18, "\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("getVariableService().write(this.getInstancePath()+\"/");
         String _name_19 = a_1.getName();
-        _builder.append(_name_19, "		");
+        _builder.append(_name_19, "\t\t");
         _builder.append("\", ");
         String _name_20 = a_1.getName();
-        _builder.append(_name_20, "		");
+        _builder.append(_name_20, "\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -396,17 +389,15 @@ public class ConfigGenAddon {
       boolean _matched = false;
       if (!_matched) {
         if (aType instanceof DataClass) {
-          final DataClass _dataClass = (DataClass)aType;
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
+            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
             for(final Attribute e : _allAttributes) {
-              String _plus = (varNamePath + "_");
               String _name = e.getName();
-              String _plus_1 = (_plus + _name);
+              String _plus = ((varNamePath + "_") + _name);
               List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus_1, _union);
+              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus, _union);
               _builder.append(_genMinMaxConstantsRec, "");
               _builder.newLineIfNotEmpty();
             }
@@ -416,7 +407,6 @@ public class ConfigGenAddon {
       }
       if (!_matched) {
         if (aType instanceof PrimitiveType) {
-          final PrimitiveType _primitiveType = (PrimitiveType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -428,12 +418,12 @@ public class ConfigGenAddon {
               boolean _notEquals = (!Objects.equal(_temp, null));
               if (_notEquals) {
                 _builder.append("public static ");
-                String _minMaxType = this.getMinMaxType(_primitiveType);
+                String _minMaxType = this.getMinMaxType(((PrimitiveType)aType));
                 _builder.append(_minMaxType, "");
                 _builder.append(" MIN_");
                 _builder.append(varNamePath, "");
                 _builder.append(" = ");
-                String _valueLiteral = this.stdExt.toValueLiteral(_primitiveType, temp);
+                String _valueLiteral = this.stdExt.toValueLiteral(((PrimitiveType)aType), temp);
                 _builder.append(_valueLiteral, "");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
@@ -445,23 +435,23 @@ public class ConfigGenAddon {
               boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
               if (_notEquals_1) {
                 _builder.append("public static ");
-                String _minMaxType_1 = this.getMinMaxType(_primitiveType);
+                String _minMaxType_1 = this.getMinMaxType(((PrimitiveType)aType));
                 _builder.append(_minMaxType_1, "");
                 _builder.append(" MAX_");
                 _builder.append(varNamePath, "");
                 _builder.append(" = ");
-                String _valueLiteral_1 = this.stdExt.toValueLiteral(_primitiveType, temp);
+                String _valueLiteral_1 = this.stdExt.toValueLiteral(((PrimitiveType)aType), temp);
                 _builder.append(_valueLiteral_1, "");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               }
             }
-            _xblockexpression_1 = (_builder);
+            _xblockexpression_1 = _builder;
           }
           _switchResult = _xblockexpression_1;
         }
       }
-      _xblockexpression = (_switchResult);
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
@@ -469,29 +459,27 @@ public class ConfigGenAddon {
   private String getMinMaxType(final PrimitiveType type) {
     String _switchResult = null;
     String _typeName = this.typeHelpers.typeName(type);
-    final String _switchValue = _typeName;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_switchValue,"byte")) {
+      if (Objects.equal(_typeName,"byte")) {
         _matched=true;
         _switchResult = "int";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"short")) {
+      if (Objects.equal(_typeName,"short")) {
         _matched=true;
         _switchResult = "int";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"float")) {
+      if (Objects.equal(_typeName,"float")) {
         _matched=true;
         _switchResult = "double";
       }
     }
     if (!_matched) {
-      String _typeName_1 = this.typeHelpers.typeName(type);
-      _switchResult = _typeName_1;
+      _switchResult = this.typeHelpers.typeName(type);
     }
     return _switchResult;
   }

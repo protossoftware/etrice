@@ -77,11 +77,7 @@ public class SubSystemClassGen {
         String path = (_generationTargetPath + _path);
         SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
         String file = this._cppExtensions.getCppHeaderFileName(_subSystemClass_2);
-        String _plus = ("generating SubSystemClass declaration: \'" + file);
-        String _plus_1 = (_plus + "\' in \'");
-        String _plus_2 = (_plus_1 + path);
-        String _plus_3 = (_plus_2 + "\'");
-        this.logger.logInfo(_plus_3);
+        this.logger.logInfo((((("generating SubSystemClass declaration: \'" + file) + "\' in \'") + path) + "\'"));
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
         CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi, _subSystemClass_3);
@@ -89,11 +85,7 @@ public class SubSystemClassGen {
         SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
         String _cppSourceFileName = this._cppExtensions.getCppSourceFileName(_subSystemClass_4);
         file = _cppSourceFileName;
-        String _plus_4 = ("generating SubSystemClass implementation: \'" + file);
-        String _plus_5 = (_plus_4 + "\' in \'");
-        String _plus_6 = (_plus_5 + path);
-        String _plus_7 = (_plus_6 + "\'");
-        this.logger.logInfo(_plus_7);
+        this.logger.logInfo((((("generating SubSystemClass implementation: \'" + file) + "\' in \'") + path) + "\'"));
         this.fileAccess.setOutputPath(path);
         SubSystemClass _subSystemClass_5 = ssi.getSubSystemClass();
         CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, _subSystemClass_5);
@@ -118,7 +110,7 @@ public class SubSystemClassGen {
     _builder.append("\t ");
     _builder.append("* Header File of SubSystemClass ");
     String _name = cc.getName();
-    _builder.append(_name, "	 ");
+    _builder.append(_name, "\t ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t ");
     _builder.append("* ");
@@ -130,7 +122,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     String _name_1 = cc.getName();
     CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(_name_1);
-    _builder.append(_generateIncludeGuardBegin, "	");
+    _builder.append(_generateIncludeGuardBegin, "\t");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
@@ -179,21 +171,21 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _userCode = this._procedureHelpers.userCode(cc, 1, false);
-    _builder.append(_userCode, "	");
+    _builder.append(_userCode, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("class ");
     String _name_2 = cc.getName();
-    _builder.append(_name_2, "	");
+    _builder.append(_name_2, "\t");
     _builder.append(" : public etRuntime::SubSystemClassBase{");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t\t");
     CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
-    _builder.append(_userCode_1, "		");
+    _builder.append(_userCode_1, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.newLine();
@@ -202,7 +194,7 @@ public class SubSystemClassGen {
     _builder.newLine();
     _builder.append("\t\t\t");
     String _name_3 = cc.getName();
-    _builder.append(_name_3, "			");
+    _builder.append(_name_3, "\t\t\t");
     _builder.append("(IRTObject* parent, std::string name)");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
@@ -241,7 +233,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     String _name_4 = cc.getName();
     CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(_name_4);
-    _builder.append(_generateIncludeGuardEnd, "	");
+    _builder.append(_generateIncludeGuardEnd, "\t");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -262,7 +254,7 @@ public class SubSystemClassGen {
     _builder.append("\t ");
     _builder.append("* Source File of SubsystemClass ");
     String _name = cc.getName();
-    _builder.append(_name, "	 ");
+    _builder.append(_name, "\t ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t ");
     _builder.append("* ");
@@ -274,7 +266,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.append("#include \"");
     String _cppHeaderFileName = this._cppExtensions.getCppHeaderFileName(cc);
-    _builder.append(_cppHeaderFileName, "	");
+    _builder.append(_cppHeaderFileName, "\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -290,10 +282,10 @@ public class SubSystemClassGen {
         _builder.append("#include \"");
         ActorClass _actorClass = ai.getActorClass();
         String _path = this._roomExtensions.getPath(_actorClass);
-        _builder.append(_path, "	");
+        _builder.append(_path, "\t");
         ActorClass _actorClass_1 = ai.getActorClass();
         String _name_1 = _actorClass_1.getName();
-        _builder.append(_name_1, "	");
+        _builder.append(_name_1, "\t");
         _builder.append(".h\"");
         _builder.newLineIfNotEmpty();
       }
@@ -311,7 +303,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.append("void ");
     String _name_2 = cc.getName();
-    _builder.append(_name_2, "	");
+    _builder.append(_name_2, "\t");
     _builder.append("::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -322,7 +314,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.append("void ");
     String _name_3 = cc.getName();
-    _builder.append(_name_3, "	");
+    _builder.append(_name_3, "\t");
     _builder.append("::instantiateMessageServices(){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -338,10 +330,10 @@ public class SubSystemClassGen {
         EList<LogicalThread> _threads_1 = cc.getThreads();
         int _indexOf = _threads_1.indexOf(thread);
         int _plus = (_indexOf + 1);
-        _builder.append(_plus, "		");
+        _builder.append(_plus, "\t\t");
         _builder.append(", 0),\"MessageService_");
         String _name_4 = thread.getName();
-        _builder.append(_name_4, "		");
+        _builder.append(_name_4, "\t\t");
         _builder.append("\", /* threadprio */ 0));");
         _builder.newLineIfNotEmpty();
       }
@@ -363,7 +355,7 @@ public class SubSystemClassGen {
     _builder.append("\t");
     _builder.append("void ");
     String _name_5 = cc.getName();
-    _builder.append(_name_5, "	");
+    _builder.append(_name_5, "\t");
     _builder.append("::instantiateActors(){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -382,10 +374,10 @@ public class SubSystemClassGen {
         EList<ActorInstance> _allContainedInstances_2 = comp.getAllContainedInstances();
         ActorInstance _value = ai_1.getValue();
         int _indexOf_1 = _allContainedInstances_2.indexOf(_value);
-        _builder.append(_indexOf_1, "	");
+        _builder.append(_indexOf_1, "\t");
         _builder.append("(0,0,");
         int _index1 = ai_1.getIndex1();
-        _builder.append(_index1, "	");
+        _builder.append(_index1, "\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
@@ -398,7 +390,7 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("// actor instance ");
         String _path_1 = ai_2.getPath();
-        _builder.append(_path_1, "	");
+        _builder.append(_path_1, "\t");
         _builder.append(" itself => Systemport Address");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -408,19 +400,19 @@ public class SubSystemClassGen {
         _builder.append("Address addr_item_");
         String _path_2 = ai_2.getPath();
         String _pathName = this._roomExtensions.getPathName(_path_2);
-        _builder.append(_pathName, "	");
+        _builder.append(_pathName, "\t");
         _builder.append("(0,");
         int _threadId = ai_2.getThreadId();
-        _builder.append(_threadId, "	");
+        _builder.append(_threadId, "\t");
         _builder.append(",");
         int _objId = ai_2.getObjId();
-        _builder.append(_objId, "	");
+        _builder.append(_objId, "\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("// interface items of ");
         String _path_3 = ai_2.getPath();
-        _builder.append(_path_3, "	");
+        _builder.append(_path_3, "\t");
         _builder.newLineIfNotEmpty();
         {
           EList<InterfaceItemInstance> _orderedIfItemInstances = ai_2.getOrderedIfItemInstances();
@@ -439,16 +431,16 @@ public class SubSystemClassGen {
                     _builder.append("Address addr_item_");
                     String _path_4 = pi.getPath();
                     String _pathName_1 = this._roomExtensions.getPathName(_path_4);
-                    _builder.append(_pathName_1, "	");
+                    _builder.append(_pathName_1, "\t");
                     _builder.append("_");
-                    _builder.append(i, "	");
+                    _builder.append(i, "\t");
                     _builder.append("(0,");
                     int _threadId_1 = pi.getThreadId();
-                    _builder.append(_threadId_1, "	");
+                    _builder.append(_threadId_1, "\t");
                     _builder.append(",");
                     int _objId_1 = pi.getObjId();
                     int _plus_1 = (_objId_1 + i);
-                    _builder.append(_plus_1, "	");
+                    _builder.append(_plus_1, "\t");
                     _builder.append(");");
                     _builder.newLineIfNotEmpty();
                   }
@@ -458,13 +450,13 @@ public class SubSystemClassGen {
                 _builder.append("Address addr_item_");
                 String _path_5 = pi.getPath();
                 String _pathName_2 = this._roomExtensions.getPathName(_path_5);
-                _builder.append(_pathName_2, "	");
+                _builder.append(_pathName_2, "\t");
                 _builder.append("(0,");
                 int _threadId_2 = ai_2.getThreadId();
-                _builder.append(_threadId_2, "	");
+                _builder.append(_threadId_2, "\t");
                 _builder.append(",");
                 int _objId_2 = pi.getObjId();
-                _builder.append(_objId_2, "	");
+                _builder.append(_objId_2, "\t");
                 _builder.append(");");
                 _builder.newLineIfNotEmpty();
               }
@@ -481,7 +473,7 @@ public class SubSystemClassGen {
     _builder.append("m_instances.reserve(");
     EList<ActorInstance> _allContainedInstances_4 = comp.getAllContainedInstances();
     int _size = _allContainedInstances_4.size();
-    _builder.append(_size, "	");
+    _builder.append(_size, "\t");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     {
@@ -493,18 +485,18 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("// addresses for actor instance: ");
         String _name_6 = ai_3.getName();
-        _builder.append(_name_6, "	");
+        _builder.append(_name_6, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("//----------------------------------------------------------------------------------------------");
         _builder.newLine();
         _builder.append("\t");
         CharSequence _generateOwnInterfaceItemAddresses = this.generateOwnInterfaceItemAddresses(ai_3);
-        _builder.append(_generateOwnInterfaceItemAddresses, "	");
+        _builder.append(_generateOwnInterfaceItemAddresses, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         CharSequence _generatePeerInterfaceItemAddresses = this.generatePeerInterfaceItemAddresses(ai_3, comp);
-        _builder.append(_generatePeerInterfaceItemAddresses, "	");
+        _builder.append(_generatePeerInterfaceItemAddresses, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
@@ -512,11 +504,11 @@ public class SubSystemClassGen {
         _builder.append("m_instances[");
         EList<ActorInstance> _allContainedInstances_6 = comp.getAllContainedInstances();
         int _indexOf_2 = _allContainedInstances_6.indexOf(ai_3);
-        _builder.append(_indexOf_2, "	");
+        _builder.append(_indexOf_2, "\t");
         _builder.append("] = new ");
         ActorClass _actorClass_2 = ai_3.getActorClass();
         String _name_7 = _actorClass_2.getName();
-        _builder.append(_name_7, "	");
+        _builder.append(_name_7, "\t");
         _builder.append("(");
         _builder.newLineIfNotEmpty();
         {
@@ -533,7 +525,7 @@ public class SubSystemClassGen {
             EList<ActorInstance> _allContainedInstances_7 = comp.getAllContainedInstances();
             EObject _eContainer_1 = ai_3.eContainer();
             int _indexOf_3 = _allContainedInstances_7.indexOf(_eContainer_1);
-            _builder.append(_indexOf_3, "		");
+            _builder.append(_indexOf_3, "\t\t");
             _builder.append("],");
             _builder.newLineIfNotEmpty();
           }
@@ -542,19 +534,19 @@ public class SubSystemClassGen {
         _builder.append("\t");
         _builder.append("\"");
         String _name_8 = ai_3.getName();
-        _builder.append(_name_8, "		");
+        _builder.append(_name_8, "\t\t");
         _builder.append("\",");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         String _name_9 = ai_3.getName();
-        _builder.append(_name_9, "		");
+        _builder.append(_name_9, "\t\t");
         _builder.append("_ownInterfaceItemAddresses,");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         String _name_10 = ai_3.getName();
-        _builder.append(_name_10, "		");
+        _builder.append(_name_10, "\t\t");
         _builder.append("_peerInterfaceItemAddresses");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -581,19 +573,19 @@ public class SubSystemClassGen {
             _builder.append("\t");
             ActorClass _actorClass_3 = ai_4.getActorClass();
             String _name_11 = _actorClass_3.getName();
-            _builder.append(_name_11, "	");
+            _builder.append(_name_11, "\t");
             _builder.append(" inst = (");
             ActorClass _actorClass_4 = ai_4.getActorClass();
             String _name_12 = _actorClass_4.getName();
-            _builder.append(_name_12, "	");
+            _builder.append(_name_12, "\t");
             _builder.append(") instances[");
             EList<ActorInstance> _allContainedInstances_9 = comp.getAllContainedInstances();
             int _indexOf_4 = _allContainedInstances_9.indexOf(ai_4);
-            _builder.append(_indexOf_4, "	");
+            _builder.append(_indexOf_4, "\t");
             _builder.append("];");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append(cfg, "	");
+            _builder.append(cfg, "\t");
             _builder.newLineIfNotEmpty();
             _builder.append("}");
             _builder.newLine();
@@ -616,7 +608,7 @@ public class SubSystemClassGen {
     _builder.append("std::vector<Address> ownAddresses(");
     EList<ActorInstance> _allContainedInstances_10 = comp.getAllContainedInstances();
     int _size_1 = _allContainedInstances_10.size();
-    _builder.append(_size_1, "	");
+    _builder.append(_size_1, "\t");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     {
@@ -626,11 +618,11 @@ public class SubSystemClassGen {
         _builder.append("ownAddresses[");
         EList<ActorInstance> _allContainedInstances_12 = comp.getAllContainedInstances();
         int _indexOf_5 = _allContainedInstances_12.indexOf(ai_5);
-        _builder.append(_indexOf_5, "	");
+        _builder.append(_indexOf_5, "\t");
         _builder.append("] = addr_item_SystemPort_");
         EList<ActorInstance> _allContainedInstances_13 = comp.getAllContainedInstances();
         int _indexOf_6 = _allContainedInstances_13.indexOf(ai_5);
-        _builder.append(_indexOf_6, "	");
+        _builder.append(_indexOf_6, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -639,7 +631,7 @@ public class SubSystemClassGen {
     _builder.append("std::vector<Address> peerAddresses(");
     EList<ActorInstance> _allContainedInstances_14 = comp.getAllContainedInstances();
     int _size_2 = _allContainedInstances_14.size();
-    _builder.append(_size_2, "	");
+    _builder.append(_size_2, "\t");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     {
@@ -649,11 +641,11 @@ public class SubSystemClassGen {
         _builder.append("peerAddresses[");
         EList<ActorInstance> _allContainedInstances_16 = comp.getAllContainedInstances();
         int _indexOf_7 = _allContainedInstances_16.indexOf(ai_6);
-        _builder.append(_indexOf_7, "	");
+        _builder.append(_indexOf_7, "\t");
         _builder.append("] = addr_item_");
         String _path_6 = ai_6.getPath();
         String _pathName_3 = this._roomExtensions.getPathName(_path_6);
-        _builder.append(_pathName_3, "	");
+        _builder.append(_pathName_3, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -852,7 +844,7 @@ public class SubSystemClassGen {
           } else {
             EList<InterfaceItemInstance> _peers = pi.getPeers();
             boolean _isEmpty = _peers.isEmpty();
-            _and = (_isReplicated && _isEmpty);
+            _and = _isEmpty;
           }
           if (_and) {
           } else {

@@ -67,9 +67,8 @@ public class NodeRunnerGen {
             String _path = this._roomExtensions.getPath(_subSystemClass_1);
             String _plus_1 = (_generationTargetPath + _path);
             this.fileAccess.setOutputPath(_plus_1);
-            String _plus_2 = (clsname + "_Runner.c");
             CharSequence _generateSourceFile = this.generateSourceFile(root, ssi, first);
-            this.fileAccess.generateFile(_plus_2, _generateSourceFile);
+            this.fileAccess.generateFile((clsname + "_Runner.c"), _generateSourceFile);
             first = false;
           }
         }
@@ -191,11 +190,11 @@ public class NodeRunnerGen {
       _builder.append("/* startup sequence  of lifecycle */");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("_init(); \t\t/* lifecycle init */");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("_start(); \t/* lifecycle start */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -207,7 +206,7 @@ public class NodeRunnerGen {
       _builder.append("/* run Scheduler */");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("_run(runAsTest);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -219,11 +218,11 @@ public class NodeRunnerGen {
       _builder.append("/* shutdown sequence of lifecycle */");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("_stop(); \t\t/* lifecycle stop */");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("_destroy(); \t/* lifecycle destroy */");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -251,7 +250,7 @@ public class NodeRunnerGen {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

@@ -57,24 +57,22 @@ public class DataConfiguration implements IDataConfiguration {
   protected ImportUriResolver uriResolver;
   
   public void doSetup() {
-    boolean _not = (!EMFPlugin.IS_ECLIPSE_RUNNING);
-    if (_not) {
+    if ((!EMFPlugin.IS_ECLIPSE_RUNNING)) {
       ConfigStandaloneSetup.doSetup();
     }
   }
   
   public boolean setResources(final ResourceSet resource, final ILogger logger) {
-    boolean _setConfigModels = DataConfigurationHelper.setConfigModels(resource, logger);
-    return _setConfigModels;
+    return DataConfigurationHelper.setConfigModels(resource, logger);
   }
   
   public String getAttrClassConfigValue(final ActorClass actor, final List<Attribute> path) {
-    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     ConfigValueArray _value = null;
     if (_attrClassConfig!=null) {
       _value=_attrClassConfig.getValue();
     }
+    String _stringExpr = null;
     if (_value!=null) {
       _stringExpr=this.toStringExpr(_value);
     }
@@ -82,12 +80,12 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public String getAttrClassConfigMaxValue(final ActorClass actor, final List<Attribute> path) {
-    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     NumberLiteral _max = null;
     if (_attrClassConfig!=null) {
       _max=_attrClassConfig.getMax();
     }
+    String _stringExpr = null;
     if (_max!=null) {
       _stringExpr=this.toStringExpr(_max);
     }
@@ -95,12 +93,12 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public String getAttrClassConfigMinValue(final ActorClass actor, final List<Attribute> path) {
-    String _stringExpr = null;
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     NumberLiteral _min = null;
     if (_attrClassConfig!=null) {
       _min=_attrClassConfig.getMin();
     }
+    String _stringExpr = null;
     if (_min!=null) {
       _stringExpr=this.toStringExpr(_min);
     }
@@ -118,8 +116,7 @@ public class DataConfiguration implements IDataConfiguration {
       String _stringPath = this.toStringPath(path);
       _builder.append(_stringPath, "");
       String id = _builder.toString();
-      AttrClassConfig _get = DataConfigurationHelper.actorClassAttrMap.get(id);
-      _xblockexpression = (_get);
+      _xblockexpression = DataConfigurationHelper.actorClassAttrMap.get(id);
     }
     return _xblockexpression;
   }
@@ -143,16 +140,16 @@ public class DataConfiguration implements IDataConfiguration {
       String _stringPath = this.toStringPath(path);
       _builder.append(_stringPath, "");
       String id = _builder.toString();
-      String _stringExpr = null;
       AttrClassConfig _get = DataConfigurationHelper.protocolClassAttrMap.get(id);
       ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
       }
+      String _stringExpr = null;
       if (_value!=null) {
         _stringExpr=this.toStringExpr(_value);
       }
-      _xblockexpression = (_stringExpr);
+      _xblockexpression = _stringExpr;
     }
     return _xblockexpression;
   }
@@ -171,8 +168,7 @@ public class DataConfiguration implements IDataConfiguration {
         _builder.append(_name, "");
       }
     }
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public String getAttrInstanceConfigValue(final ActorInstance ai, final List<Attribute> path) {
@@ -182,22 +178,21 @@ public class DataConfiguration implements IDataConfiguration {
       String _plus = (_path + "/");
       String _stringPath = this.toStringPath(path);
       String id = (_plus + _stringPath);
-      String _stringExpr = null;
       AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
       ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
       }
+      String _stringExpr = null;
       if (_value!=null) {
         _stringExpr=this.toStringExpr(_value);
       }
-      _xblockexpression = (_stringExpr);
+      _xblockexpression = _stringExpr;
     }
     return _xblockexpression;
   }
   
   public String getAttrInstanceConfigValue(final InterfaceItemInstance item, final List<Attribute> path) {
-    String _stringExpr = null;
     String _path = item.getPath();
     String _plus = (_path + "/");
     String _stringPath = this.toStringPath(path);
@@ -207,6 +202,7 @@ public class DataConfiguration implements IDataConfiguration {
     if (_get!=null) {
       _value=_get.getValue();
     }
+    String _stringExpr = null;
     if (_value!=null) {
       _stringExpr=this.toStringExpr(_value);
     }
@@ -227,10 +223,9 @@ public class DataConfiguration implements IDataConfiguration {
       if (_equals) {
         _xifexpression = 0;
       } else {
-        int _polling = dynConf.getPolling();
-        _xifexpression = _polling;
+        _xifexpression = dynConf.getPolling();
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -291,8 +286,7 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public List<Attribute> getDynConfigReadAttributes(final ActorInstance ai) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    final ArrayList<Attribute> result = _arrayList;
+    final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
@@ -311,8 +305,7 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public List<Attribute> getDynConfigWriteAttributes(final ActorInstance ai) {
-    ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
-    final ArrayList<Attribute> result = _arrayList;
+    final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
@@ -337,8 +330,7 @@ public class DataConfiguration implements IDataConfiguration {
     if (_config!=null) {
       _dynConfig=_config.getDynConfig();
     }
-    boolean _notEquals = (!Objects.equal(_dynConfig, null));
-    return _notEquals;
+    return (!Objects.equal(_dynConfig, null));
   }
   
   private String toStringExpr(final ConfigValueArray literal) {
@@ -356,8 +348,7 @@ public class DataConfiguration implements IDataConfiguration {
         _builder.append(_stringExpr, "");
       }
     }
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   private String toStringExpr(final ConfigValue configValue) {
@@ -365,20 +356,16 @@ public class DataConfiguration implements IDataConfiguration {
     boolean _matched = false;
     if (!_matched) {
       if (configValue instanceof LiteralConfigValue) {
-        final LiteralConfigValue _literalConfigValue = (LiteralConfigValue)configValue;
         _matched=true;
-        Literal _value = _literalConfigValue.getValue();
-        String _stringExpr = this.toStringExpr(_value);
-        _switchResult = _stringExpr;
+        Literal _value = ((LiteralConfigValue)configValue).getValue();
+        _switchResult = this.toStringExpr(_value);
       }
     }
     if (!_matched) {
       if (configValue instanceof EnumConfigValue) {
-        final EnumConfigValue _enumConfigValue = (EnumConfigValue)configValue;
         _matched=true;
-        EnumLiteral _value = _enumConfigValue.getValue();
-        String _fullName = _value.getFullName();
-        _switchResult = _fullName;
+        EnumLiteral _value = ((EnumConfigValue)configValue).getValue();
+        _switchResult = _value.getFullName();
       }
     }
     return _switchResult;
@@ -389,38 +376,30 @@ public class DataConfiguration implements IDataConfiguration {
     boolean _matched = false;
     if (!_matched) {
       if (literal instanceof BooleanLiteral) {
-        final BooleanLiteral _booleanLiteral = (BooleanLiteral)literal;
         _matched=true;
-        boolean _isIsTrue = _booleanLiteral.isIsTrue();
-        String _string = Boolean.valueOf(_isIsTrue).toString();
-        _switchResult = _string;
+        boolean _isIsTrue = ((BooleanLiteral)literal).isIsTrue();
+        _switchResult = Boolean.valueOf(_isIsTrue).toString();
       }
     }
     if (!_matched) {
       if (literal instanceof IntLiteral) {
-        final IntLiteral _intLiteral = (IntLiteral)literal;
         _matched=true;
-        long _value = _intLiteral.getValue();
-        String _string = Long.valueOf(_value).toString();
-        _switchResult = _string;
+        long _value = ((IntLiteral)literal).getValue();
+        _switchResult = Long.valueOf(_value).toString();
       }
     }
     if (!_matched) {
       if (literal instanceof RealLiteral) {
-        final RealLiteral _realLiteral = (RealLiteral)literal;
         _matched=true;
-        double _value = _realLiteral.getValue();
-        String _string = Double.valueOf(_value).toString();
-        _switchResult = _string;
+        double _value = ((RealLiteral)literal).getValue();
+        _switchResult = Double.valueOf(_value).toString();
       }
     }
     if (!_matched) {
       if (literal instanceof StringLiteral) {
-        final StringLiteral _stringLiteral = (StringLiteral)literal;
         _matched=true;
-        String _value = _stringLiteral.getValue();
-        String _string = _value.toString();
-        _switchResult = _string;
+        String _value = ((StringLiteral)literal).getValue();
+        _switchResult = _value.toString();
       }
     }
     return _switchResult;
@@ -428,13 +407,11 @@ public class DataConfiguration implements IDataConfiguration {
   
   private SubSystemConfig getConfig(final SubSystemInstance cc) {
     String _path = cc.getPath();
-    SubSystemConfig _get = DataConfigurationHelper.subSystemConfigMap.get(_path);
-    return _get;
+    return DataConfigurationHelper.subSystemConfigMap.get(_path);
   }
   
   public List<Attribute> getDynConfigReadAttributes(final ActorClass actor) {
-    HashSet<Attribute> _hashSet = new HashSet<Attribute>();
-    final HashSet<Attribute> result = _hashSet;
+    final HashSet<Attribute> result = new HashSet<Attribute>();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
@@ -452,8 +429,7 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public List<Attribute> getDynConfigWriteAttributes(final ActorClass actor) {
-    HashSet<Attribute> _hashSet = new HashSet<Attribute>();
-    final HashSet<Attribute> result = _hashSet;
+    final HashSet<Attribute> result = new HashSet<Attribute>();
     List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {

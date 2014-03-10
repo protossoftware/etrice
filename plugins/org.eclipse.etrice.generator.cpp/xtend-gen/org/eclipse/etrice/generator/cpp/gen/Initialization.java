@@ -56,7 +56,7 @@ public class Initialization {
                 _or = true;
               } else {
                 boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
-                _or = (_equals || _isCharacterType);
+                _or = _isCharacterType;
               }
               if (_or) {
               } else {
@@ -77,9 +77,9 @@ public class Initialization {
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   String _name_1 = a.getName();
-                  _builder.append(_name_1, "	");
+                  _builder.append(_name_1, "\t");
                   _builder.append("[i] = ");
-                  _builder.append(value, "	");
+                  _builder.append(value, "\t");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
@@ -95,13 +95,12 @@ public class Initialization {
             } else {
               int _size_2 = a.getSize();
               boolean _greaterThan = (_size_2 > 1);
-              _or_2 = ((aType instanceof ComplexType) || _greaterThan);
+              _or_2 = _greaterThan;
             }
             if (_or_2) {
               _or_1 = true;
             } else {
-              boolean _not = (!useClassDefaultsOnly);
-              _or_1 = (_or_2 || _not);
+              _or_1 = (!useClassDefaultsOnly);
             }
             if (_or_1) {
               {
@@ -110,8 +109,7 @@ public class Initialization {
                 if (_equals_1) {
                 } else {
                   {
-                    boolean _not_1 = (!useClassDefaultsOnly);
-                    if (_not_1) {
+                    if ((!useClassDefaultsOnly)) {
                       _builder.append("for (int i=0;i<");
                       int _size_4 = a.getSize();
                       _builder.append(_size_4, "");
@@ -119,17 +117,17 @@ public class Initialization {
                       _builder.newLineIfNotEmpty();
                       _builder.append("\t");
                       String _name_2 = a.getName();
-                      _builder.append(_name_2, "	");
+                      _builder.append(_name_2, "\t");
                       _builder.append("[i] = ");
                       {
                         RefableType _type_1 = a.getType();
                         boolean _isRef = _type_1.isRef();
                         if (_isRef) {
                           String _nullPointer = this.languageExt.nullPointer();
-                          _builder.append(_nullPointer, "	");
+                          _builder.append(_nullPointer, "\t");
                         } else {
                           String _defaultValue = this.languageExt.defaultValue(aType);
-                          _builder.append(_defaultValue, "	");
+                          _builder.append(_defaultValue, "\t");
                         }
                       }
                       _builder.append(";");
@@ -156,8 +154,7 @@ public class Initialization {
       for(final String v : values) {
         _builder.append(varName, "");
         _builder.append("[");
-        int _plus = (i + 1);
-        int _i = i = _plus;
+        int _i = i = (i + 1);
         _builder.append(_i, "");
         _builder.append("] = ");
         _builder.append(v, "");
@@ -185,7 +182,7 @@ public class Initialization {
           _or = true;
         } else {
           boolean _isCharacterType = this._typeHelpers.isCharacterType(aType);
-          _or = (_equals || _isCharacterType);
+          _or = _isCharacterType;
         }
         if (_or) {
           CharSequence _xifexpression_2 = null;
@@ -240,13 +237,12 @@ public class Initialization {
         } else {
           int _size_1 = a.getSize();
           boolean _greaterThan = (_size_1 > 1);
-          _or_2 = ((aType instanceof ComplexType) || _greaterThan);
+          _or_2 = _greaterThan;
         }
         if (_or_2) {
           _or_1 = true;
         } else {
-          boolean _not = (!useClassDefaultsOnly);
-          _or_1 = (_or_2 || _not);
+          _or_1 = (!useClassDefaultsOnly);
         }
         if (_or_1) {
           CharSequence _xifexpression_5 = null;
@@ -287,7 +283,7 @@ public class Initialization {
         }
         _xifexpression = _xifexpression_4;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

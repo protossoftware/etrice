@@ -49,8 +49,7 @@ public class GenericProtocolClassGenerator {
    */
   public String genMessageIDs(final ProtocolClass pc) {
     int offset = 0;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
-    ArrayList<Pair<String,String>> list = _arrayList;
+    ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
     String _name = pc.getName();
     String _memberInDeclaration = this._iLanguageExtension.memberInDeclaration(_name, "MSG_MIN");
     String _string = Integer.valueOf(offset).toString();
@@ -59,12 +58,11 @@ public class GenericProtocolClassGenerator {
     List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
     for (final Message msg : _allOutgoingMessages) {
       {
-        int _plus = (offset + 1);
-        offset = _plus;
+        offset = (offset + 1);
         String _name_1 = pc.getName();
         String _name_2 = msg.getName();
-        String _plus_1 = ("OUT_" + _name_2);
-        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus_1);
+        String _plus = ("OUT_" + _name_2);
+        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus);
         String _string_1 = Integer.valueOf(offset).toString();
         Pair<String,String> _pair_1 = Tuples.<String, String>pair(_memberInDeclaration_1, _string_1);
         list.add(_pair_1);
@@ -73,19 +71,17 @@ public class GenericProtocolClassGenerator {
     List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
     for (final Message msg_1 : _allIncomingMessages) {
       {
-        int _plus = (offset + 1);
-        offset = _plus;
+        offset = (offset + 1);
         String _name_1 = pc.getName();
         String _name_2 = msg_1.getName();
-        String _plus_1 = ("IN_" + _name_2);
-        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus_1);
+        String _plus = ("IN_" + _name_2);
+        String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, _plus);
         String _string_1 = Integer.valueOf(offset).toString();
         Pair<String,String> _pair_1 = Tuples.<String, String>pair(_memberInDeclaration_1, _string_1);
         list.add(_pair_1);
       }
     }
-    int _plus = (offset + 1);
-    offset = _plus;
+    offset = (offset + 1);
     String _name_1 = pc.getName();
     String _memberInDeclaration_1 = this._iLanguageExtension.memberInDeclaration(_name_1, "MSG_MAX");
     String _string_1 = Integer.valueOf(offset).toString();

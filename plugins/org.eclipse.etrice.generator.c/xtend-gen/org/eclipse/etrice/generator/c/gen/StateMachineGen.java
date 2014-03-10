@@ -55,7 +55,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("_HISTORY_SIZE ");
       _builder.append(historySize, "");
       _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -75,7 +75,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append(_upperCase, "");
       _builder.append("_HISTORY_SIZE];");
       _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -96,7 +96,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("for (i=0; i<");
       String _name = ac.getName();
       String _upperCase = _name.toUpperCase();
-      _builder.append(_upperCase, "	");
+      _builder.append(_upperCase, "\t");
       _builder.append("_HISTORY_SIZE; ++i)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -109,7 +109,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append(_operationScope, "");
       _builder.append("executeInitTransition(self);");
       _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -188,7 +188,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

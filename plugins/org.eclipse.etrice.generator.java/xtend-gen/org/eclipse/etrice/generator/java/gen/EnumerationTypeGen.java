@@ -48,8 +48,7 @@ public class EnumerationTypeGen {
     EList<EnumerationType> _usedEnumClasses = root.getUsedEnumClasses();
     final Function1<EnumerationType,Boolean> _function = new Function1<EnumerationType,Boolean>() {
       public Boolean apply(final EnumerationType cl) {
-        boolean _isValidGenerationLocation = EnumerationTypeGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
-        return Boolean.valueOf(_isValidGenerationLocation);
+        return Boolean.valueOf(EnumerationTypeGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
     };
     Iterable<EnumerationType> _filter = IterableExtensions.<EnumerationType>filter(_usedEnumClasses, _function);
@@ -89,20 +88,20 @@ public class EnumerationTypeGen {
         for(final EnumLiteral lit : _literals) {
           _builder.append("\t");
           _builder.append("static final ");
-          _builder.append(type, "	");
+          _builder.append(type, "\t");
           _builder.append(" ");
           String _name_1 = lit.getName();
-          _builder.append(_name_1, "	");
+          _builder.append(_name_1, "\t");
           _builder.append(" = ");
           long _literalValue = lit.getLiteralValue();
-          _builder.append(_literalValue, "	");
+          _builder.append(_literalValue, "\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

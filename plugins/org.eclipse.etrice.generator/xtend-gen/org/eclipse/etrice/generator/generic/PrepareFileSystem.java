@@ -46,8 +46,7 @@ public class PrepareFileSystem {
   private ILogger logger;
   
   public void prepareCodeTargetPaths(final Resource resource) {
-    HashSet<String> _hashSet = new HashSet<String>();
-    Set<String> pathes = _hashSet;
+    Set<String> pathes = new HashSet<String>();
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {
@@ -62,7 +61,7 @@ public class PrepareFileSystem {
             } else {
               boolean _isEmpty = tgtpath.isEmpty();
               boolean _not = (!_isEmpty);
-              _and = (_notEquals && _not);
+              _and = _not;
             }
             if (_and) {
               pathes.add(tgtpath);
@@ -75,8 +74,7 @@ public class PrepareFileSystem {
   }
   
   public void prepareDocTargetPaths(final Resource resource) {
-    HashSet<String> _hashSet = new HashSet<String>();
-    Set<String> pathes = _hashSet;
+    Set<String> pathes = new HashSet<String>();
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {
@@ -91,7 +89,7 @@ public class PrepareFileSystem {
             } else {
               boolean _isEmpty = tgtpath.isEmpty();
               boolean _not = (!_isEmpty);
-              _and = (_notEquals && _not);
+              _and = _not;
             }
             if (_and) {
               pathes.add(tgtpath);
@@ -114,10 +112,8 @@ public class PrepareFileSystem {
   public void prepare(final Collection<String> pathes) {
     for (final String path : pathes) {
       {
-        String _plus = ("clearing " + path);
-        this.logger.logInfo(_plus);
-        File _file = new File(path);
-        File f = _file;
+        this.logger.logInfo(("clearing " + path));
+        File f = new File(path);
         this.eraseContents(f);
         this.fileAccess.setOutputPath(path);
         CharSequence _readmeText = this.readmeText();
@@ -138,7 +134,7 @@ public class PrepareFileSystem {
         } else {
           String _name = child.getName();
           boolean _equals = _name.equals("images");
-          _and = (_isDirectory_1 && _equals);
+          _and = _equals;
         }
         boolean _not = (!_and);
         if (_not) {
