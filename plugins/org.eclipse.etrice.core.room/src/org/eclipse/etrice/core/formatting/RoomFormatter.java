@@ -37,8 +37,9 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		 
 		// general
 		c.setAutoLinewrap(120);
-		c.setLinewrap(2).before(f.getSL_COMMENTRule());
-		c.setLinewrap(2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
 		
 		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}")) {
 			c.setLinewrap().after(pair.getFirst());
@@ -48,7 +49,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setSpace(" ").between(pair.getFirst(), pair.getSecond());
 		}		
 	
-		for (Keyword k: f.findKeywords("(", "|", ".", "*", "/")) {
+		for (Keyword k: f.findKeywords("(", "|", ".", "*")) {
 			c.setNoSpace().around(k);
 		}
 		
@@ -66,6 +67,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		
 		c.setLinewrap(2).around(f.getImportRule());
 		
+		c.setNoSpace().around(f.getRefPathAccess().getSolidusKeyword_1_0());
 		
 		// classes
 		c.setLinewrap(2).around(f.getLogicalSystemRule());
