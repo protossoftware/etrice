@@ -4,56 +4,74 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 9</title> 
+<head><title>Dynamic Actors 8</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-25 18:01:00" /> 
+<meta name="date" content="2014-03-18 18:29:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 321--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch4.html" >next</a>] [<a 
+<!--l. 290--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse18.html" >next</a>] [<a 
 href="etrice-docse16.html" >prev</a>] [<a 
 href="etrice-docse16.html#tailetrice-docse16.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse17.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse17.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.9   </span> <a 
- id="x22-950003.9"></a>Dynamic Actors 9</h3>
-<!--l. 323--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors9</span>.
-</p><!--l. 325--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3.8   </span> <a 
+ id="x22-990003.8"></a>Dynamic Actors 8</h3>
+<!--l. 292--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors8</span>.
+</p><!--l. 294--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.9.1   </span> <a 
- id="x22-960003.9.1"></a>Purpose</h4>
-<!--l. 327--><p class="noindent" >The example demonstrates the use of SAPs in dynamic actors.
-</p><!--l. 329--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.8.1   </span> <a 
+ id="x22-1000003.8.1"></a>Purpose</h4>
+<!--l. 296--><p class="noindent" >The example demonstrates the use of the persistence interface for dynamic actors.
+</p><!--l. 298--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.9.2   </span> <a 
- id="x22-970003.9.2"></a>Details</h4>
-<!--l. 331--><p class="noindent" >This simple example re-uses the PingPong tutorial. The static part of the system introduces a <span 
-class="ec-lmtt-10">TimingService </span>as SPP and
-the <span 
-class="ec-lmtt-10">Receiver </span>embedded in the optional part uses a SAP of this protocol.
-</p><!--l. 334--><p class="noindent" >The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
-services.
-</p><!--l. 337--><p class="noindent" >On the other hand the factory for the optional actor maps SAPs to those broker ports.
-</p><!--l. 339--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.8.2   </span> <a 
+ id="x22-1010003.8.2"></a>Details</h4>
+<!--l. 300--><p class="noindent" >Dynamic actors can be persisted and restored. To this end the user has to pass an <span 
+class="ec-lmtt-10">java.io.ObjectOutput </span>to
+the creation method (<span 
+class="ec-lmtt-10">createOptionalActor()</span>) and an <span 
+class="ec-lmtt-10">java.io.ObjectInput </span>to the deletion method
+(<span 
+class="ec-lmtt-10">destroyOptionalActor()</span>).
+</p><!--l. 303--><p class="noindent" >The code generation has to be invoked with the <span 
+class="ec-lmtt-10">-persistable </span>(e.g. by setting the &#8217;generate persistence interface&#8217; flag in the
+Java Generator tab of the launch configuration). This lets the generator implement the <span 
+class="ec-lmtt-10">IPersistable </span>interface for actor
+classes.
+</p><!--l. 306--><p class="noindent" >The example adds a manually coded very simple <span 
+class="ec-lmtt-10">FilePersistor </span>with four static methods for creation and deletion of scalar
+and replicated dynamic actors.
+</p><!--l. 309--><p class="noindent" >The <span 
+class="ec-lmtt-10">Container </span>class first creates an optional actor of type <span 
+class="ec-lmtt-10">Optional1 </span>in the scalar reference <span 
+class="ec-lmtt-10">opt</span>. Then messages are sent
+to this actor instance which lead to some state changes. Finally it is saved and destroyed. Now another actor class is
+instantiated in the same actor reference and also destroyed. Then the first instance is loaded from file. It directly starts in the
+state it had when it was saved. The second part of the example loads copies of the two instances created in the beginning
+into the <span 
+class="ec-lmtt-10">optarr </span>reference.
+</p><!--l. 315--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.9.3   </span> <a 
- id="x22-980003.9.3"></a>Noteworthy</h4>
+<h4 class="subsectionHead"><span class="titlemark">3.8.3   </span> <a 
+ id="x22-1020003.8.3"></a>Noteworthy</h4>
      <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmsso-10">Caution: </span>currently the generator informs about unsatisfied services in dynamic actors. But it is still possible to
-     create such an instance. The consequence is an unbound SAP</li></ul>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch4.html" >next</a>] [<a 
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+                                                                                            
+                                                                                            
+<!--l. 321--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse18.html" >next</a>] [<a 
 href="etrice-docse16.html" >prev</a>] [<a 
 href="etrice-docse16.html#tailetrice-docse16.html" >prev-tail</a>] [<a 
 href="etrice-docse17.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse17.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+<!--l. 321--><p class="noindent" ><a 
  id="tailetrice-docse17.html"></a> </p> 
 </body></html> 

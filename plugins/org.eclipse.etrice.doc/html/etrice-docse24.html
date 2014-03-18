@@ -4,100 +4,458 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Model Navigation</title> 
+<head><title>Finite State Machines</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-25 18:01:00" /> 
+<meta name="date" content="2014-03-18 18:24:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse25.html" >next</a>] [<a 
-href="etrice-docch5.html" >prev</a>] [<a 
-href="etrice-docch5.html#tailetrice-docch5.html" >prev-tail</a>] [<a 
+<!--l. 606--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch5.html" >next</a>] [<a 
+href="etrice-docse23.html" >prev</a>] [<a 
+href="etrice-docse23.html#tailetrice-docse23.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse24.html">tail</a>] [<a 
-href="etrice-docch5.html#etrice-docse24.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">5.1   </span> <a 
- id="x31-1320005.1"></a>Model Navigation</h3>
-<!--l. 3--><p class="noindent" >In eTrice the primary source of the models is text based. However, for convenience the structure and the behavior of structure
-classes can be edited with graphical editors using the standard ROOM notation. Further. the textual models can be
-structured hierarchically using the import statement.
-</p><!--l. 7--><p class="noindent" >So jumping between textual models and switching to and between diagrams and back to the textual representation is a
-frequent task. Therefore in this chapter we want to show the various possibilities to navigate the models.
-</p><!--l. 10--><p class="noindent" >
+href="etrice-docch4.html#etrice-docse24.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">4.6   </span> <a 
+ id="x30-1320004.6"></a>Finite State Machines</h3>
+<!--l. 608--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">5.1.1   </span> <a 
- id="x31-1330005.1.1"></a>From Model to Behavior to Structure</h4>
-<!--l. 12--><p class="noindent" >There are three global key bindings (cf. the eTrice main menu item):
+<h4 class="subsectionHead"><span class="titlemark">4.6.1   </span> <a 
+ id="x30-1330004.6.1"></a>Description</h4>
+<!--l. 610--><p class="noindent" >Definition from <a 
+href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
+</p><!--l. 612--><p class="noindent" >
+     </p><div class="quote">
+     <!--l. 613--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine,
+     is a mathematical model used to design computer programs and digital logic circuits. It is conceived as
+     an abstract machine that can be in one of a finite number of states. The machine is in only one state at
+     a time; the state it is in at any given time is called the current state. It can change from one state to
+     another when initiated by a triggering event or condition, this is called a transition. A particular FSM is
+     defined by a list of the possible states it can transition to from each state, and the triggering condition
+     for each transition.
+     </p><!--l. 621--><p class="noindent" >In ROOM each actor class can implement its behavior using a state machine. Events occurring at the
+     end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger
+     state transitions.</p></div>
+<!--l. 626--><p class="noindent" >
 </p>
+<h4 class="subsectionHead"><span class="titlemark">4.6.2   </span> <a 
+ id="x30-1340004.6.2"></a>Motivation</h4>
+<!--l. 628--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new
+events are produced which are sent to peer actors.
+</p><!--l. 631--><p class="noindent" >We distinguish flat and hierarchical state machines.
+</p><!--l. 633--><p class="noindent" >
+</p>
+<h4 class="subsectionHead"><span class="titlemark">4.6.3   </span> <a 
+ id="x30-1350004.6.3"></a>Notation</h4>
+<!--l. 635--><p class="noindent" >We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
+</p><!--l. 637--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x30-1360004.6.3"></a>Flat Finite State Machine</h5>
+<!--l. 639--><p class="noindent" >The simpler flat finite state machines are composed of the elements shown in table <a 
+href="#x30-1360016">4.6<!--tex4ht:ref: tab:flat_fsm_notation --></a>.
+</p>
+<div class="table">
                                                                                             
                                                                                             
-     <ul class="itemize1">
-     <li class="itemize">Alt+M &#8211; jump to the textual model
-     </li>
-     <li class="itemize">Alt+B &#8211; jump to the behavior diagram of the current actor class (determined by the cursor or selection position)
-     </li>
-     <li class="itemize">Alt+S &#8211; jump to the structure of the current structure class (determined by the cursor or selection position)</li></ul>
-<!--l. 20--><p class="noindent" >Jumping from a diagram to the textual model using Alt+M will open (or bring to the front) an editor with the ROOM file
-and will select the structure class of the diagram in the text.
-</p><!--l. 23--><p class="noindent" >The other way round, the position of the cursor or selection in the ROOM file is relevant. If it is enclosed by an actor class
-then for Alt+B a state machine editor is opened. If it is a structure class and Alt+S is pressed then the structure editor is
-opened for this class.
-</p><!--l. 27--><p class="noindent" >As an alternative the context menu of an actor class can be used to open the associated structure or behavior
-diagram.
-</p><!--l. 29--><p class="noindent" >Switching from the behavior to the structure is performed on Alt+S and vice versa on Alt+B.
-</p><!--l. 31--><p class="noindent" >
+<!--l. 642--><p class="noindent" ><a 
+ id="x30-1360016"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                            
+                                                                                            
+ <div class="caption" 
+><span class="id">Table&#x00A0;4.6: </span><span  
+class="content">Flat finite state machine notation</span></div><!--tex4ht:label?: x30-1360016 -->
+<div class="tabular"> <table id="TBL-12" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-12-1g"><col 
+id="TBL-12-1" /></colgroup><colgroup id="TBL-12-2g"><col 
+id="TBL-12-2" /></colgroup><colgroup id="TBL-12-3g"><col 
+id="TBL-12-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-1-1"  
+class="td11"> <!--l. 646--><p class="noindent" ><span 
+class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-1-2"  
+class="td11"> <span 
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-1-3"  
+class="td11"> <!--l. 646--><p class="noindent" ><span 
+class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-2-1"  
+class="td11"> <!--l. 648--><p class="noindent" >State                      </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-2-2"  
+class="td11">        <img 
+src="images/040-State.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-2-3"  
+class="td11"> <!--l. 649-->
+ <div class="lstlisting" id="listing-53"><span class="label"><a 
+ id="x30-136002r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SomeState</span>
+ 
+</div>
+<!--l. 654--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-3-1"  
+class="td11"> <!--l. 655--><p class="noindent" >InitialPoint               </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-3-2"  
+class="td11">        <img 
+src="images/040-InitialPoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-3-3"  
+class="td11"> <!--l. 655--><p class="noindent" ><span 
+class="ec-lmsso-10">implicit</span>                                                    </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-4-1"  
+class="td11"> <!--l. 657--><p class="noindent" >TransitionPoint         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-4-2"  
+class="td11">        <img 
+src="images/040-TransitionPoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-4-3"  
+class="td11"> <!--l. 658-->
+ <div class="lstlisting" id="listing-54"><span class="label"><a 
+ id="x30-136003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">TransitionPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tp</span>
+ 
+</div>
+<!--l. 663--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-5-1"  
+class="td11"> <!--l. 664--><p class="noindent" >ChoicePoint             </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-5-2"  
+class="td11">        <img 
+src="images/040-ChoicePoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-5-3"  
+class="td11"> <!--l. 665-->
+ <div class="lstlisting" id="listing-55"><span class="label"><a 
+ id="x30-136004r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ChoicePoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">cp</span>
+  
+</div>
+<!--l. 670--><p class="noindent" >                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-6-1"  
+class="td11"> <!--l. 671--><p class="noindent" >Initial Transition        </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-6-2"  
+class="td11">        <img 
+src="images/040-InitialTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-6-3"  
+class="td11"> <!--l. 672-->
+ <div class="lstlisting" id="listing-56"><span class="label"><a 
+ id="x30-136005r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 677--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-7-1"  
+class="td11"> <!--l. 678--><p class="noindent" >Triggered Transition   </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-12-7-2"  
+class="td11">        <img 
+src="images/040-TriggeredTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-7-3"  
+class="td11"> <!--l. 679-->
+ <div class="lstlisting" id="listing-57"><span class="label"><a 
+ id="x30-136006r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr0</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DoingThis</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-136007r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-136008r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">doThis</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">fct</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-136009r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-136010r5"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 688--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-12-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-12-8-1"  
+class="td11">                   </td></tr></table></div>
+                                                                                            
+                                                                                            
+</div><hr class="endfloat" />
+</div>
+<h5 class="subsubsectionHead"><a 
+ id="x30-1370004.6.3"></a>Hierarchical Finite State Machine</h5>
+<!--l. 695--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling elements listed
+in table <a 
+href="#x30-1370017">4.7<!--tex4ht:ref: tab:hier_fsm_notation --></a> are added to the set listed above.
 </p>
-<h4 class="subsectionHead"><span class="titlemark">5.1.2   </span> <a 
- id="x31-1340005.1.2"></a>Model Navigation</h4>
-<!--l. 33--><p class="noindent" >Model file paths in import statements are hyper links that can be clicked with the Ctrl key pressed.
-</p><!--l. 35--><p class="noindent" ><img 
-src="images/041-open-declaration.jpg" alt="PIC"  
+<div class="table">
+                                                                                            
+                                                                                            
+<!--l. 699--><p class="noindent" ><a 
+ id="x30-1370017"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                            
+                                                                                            
+ <div class="caption" 
+><span class="id">Table&#x00A0;4.7: </span><span  
+class="content">Additional notation elements of hierarchical finite state machines</span></div><!--tex4ht:label?: x30-1370017 -->
+<div class="tabular"> <table id="TBL-13" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-13-1g"><col 
+id="TBL-13-1" /></colgroup><colgroup id="TBL-13-2g"><col 
+id="TBL-13-2" /></colgroup><colgroup id="TBL-13-3g"><col 
+id="TBL-13-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-1"  
+class="td11"> <!--l. 703--><p class="noindent" ><span 
+class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-2"  
+class="td11">                                       <span 
+class="ec-lmssbx-10">Graphical Notation                                                        </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-3"  
+class="td11"> <!--l. 703--><p class="noindent" ><span 
+class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-1"  
+class="td11"> <!--l. 705--><p class="noindent" >State with sub state
+  machine                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-14" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-14-1g"><col 
+id="TBL-14-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-14-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-1-1"  
+class="td00">Parent State</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-14-2-1"  
+class="td00"> <img 
+src="images/040-StateWithSubFSM.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                                             </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-3"  
+class="td11"> <div class="tabular"> <table id="TBL-15" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-15-1g"><col 
+id="TBL-15-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-15-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-15-1-1"  
+class="td11">Sub state machine                                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-15-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-15-2-1"  
+class="td11"><!--l. 710-->    <!--l. 710--><p class="noindent" ><div class="lstlisting" id="listing-58"><span class="label"><a 
+ id="x30-137002r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Running</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-137003r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">subgraph</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-137004r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Process</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-137005r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Process</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-137006r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x30-137007r6"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </div> </p></td>
+</tr></table></div>
+ <!--l. 722--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-1"  
+class="td11"> <!--l. 723--><p class="noindent" >Entry Point              </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-16" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-16-1g"><col 
+id="TBL-16-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-16-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-1-1"  
+class="td00">In sub state machine</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-16-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-16-2-1"  
+class="td00"> <img 
+src="images/040-EntryPoint.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                                   </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-3"  
+class="td11"> <!--l. 726-->
+ <div class="lstlisting" id="listing-59"><span class="label"><a 
+ id="x30-137008r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">EntryPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">reInit</span>
+ 
+</div>
+<!--l. 730--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-1"  
+class="td11"> <!--l. 731--><p class="noindent" >Exit Point                </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
+class="td11">                                              <img 
+src="images/040-ExitPoint.jpg" alt="PIC"  
+ />                                                                        </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-3"  
+class="td11"> <!--l. 733-->
+ <div class="lstlisting" id="listing-60"><span class="label"><a 
+ id="x30-137009r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ExitPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tp0</span>
+ 
+</div>
+<!--l. 736--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-5-1"  
+class="td11">                   </td></tr></table>
+</div>
+                                                                                            
+                                                                                            
+</div><hr class="endfloat" />
+</div>
+<h4 class="subsectionHead"><span class="titlemark">4.6.4   </span> <a 
+ id="x30-1380004.6.4"></a>Examples</h4>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x30-1380011"></a>
+                                                                                            
+                                                                                            
+<!--l. 743--><p class="noindent" ><img 
+src="images/040-FlatFSM.jpg" alt="PIC"  
  />
-</p><!--l. 37--><p class="noindent" >An alternative is to use F3 (open declaration) with the cursor inside the file name.
-</p><!--l. 39--><p class="noindent" >In a similar way references to model elements can be navigated using F3 or Ctrl-Click, e.g. the protocol class of a port or the
-actor class of an actor reference or the data class of an attribute and many more.
-</p><!--l. 42--><p class="noindent" >The "quick outline" is a means that allows fast navigation in a single model. Ctrl-O opens a window similar to the outline
-view. Typing text (with possible wild cards * and ?) filters the view and selecting an element and pressing return locates the
-element in the editor.
-</p><!--l. 46--><p class="noindent" >Ctrl-Shift-G searches references to model elements. E.g. "Find references" for a selected actor class lists all locations in
-ROOM models and diagrams that refer to this actor class.
-</p><!--l. 49--><p class="noindent" >Using the outline, also imported elements can be browsed and navigated.
-</p><!--l. 51--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">5.1.3   </span> <a 
- id="x31-1350005.1.3"></a>Navigating Behavior Diagrams</h4>
-<!--l. 53--><p class="noindent" >The behavior editor displays a hierarchical state machine. States can have a sub state graph and thus the hierarchy of states
-and state graphs forms a tree like structure. The eTrice behavior editor always shows only one level of the hierarchy. The
-editor switches to the sub state graph of a state by double clicking it. The path of the currently displayed
-state graph is indicated in the upper right corner using state names separated by slashes (/). A single slash
-indicates the top level. Double click into the empty space of a state graph will switch to the state graph one level
-up.
-</p><!--l. 60--><p class="noindent" >A double click on a transition (or its label), a transition point or a choice point opens their property dialog. A
-double click on a state opens its property dialog if it has no sub state graph or it switches to its sub state
-graph.
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.1: </span><span  
+class="content">Example of a flat finite state machine</span></div><!--tex4ht:label?: x30-1380011 -->
                                                                                             
                                                                                             
-</p><!--l. 63--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">5.1.4   </span> <a 
- id="x31-1360005.1.4"></a>Navigating Structure Diagrams</h4>
-<!--l. 65--><p class="noindent" >The context menu of a structure diagram (invoked in the empty space inside the bounding rectangle) contains an entry
-"Open Class Behavior" which opens the behavior diagram (same as Alt+B).
-</p><!--l. 68--><p class="noindent" >The context menu of an actor reference contains entries: "Open Ref Structure" and "Open Ref Behavior" that allow to open
-the associated diagrams of the referenced actor class.
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
                                                                                             
                                                                                             
-</p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse25.html" >next</a>] [<a 
-href="etrice-docch5.html" >prev</a>] [<a 
-href="etrice-docch5.html#tailetrice-docch5.html" >prev-tail</a>] [<a 
+<a 
+ id="x30-1380022"></a>
+                                                                                            
+                                                                                            
+<!--l. 748--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMTop.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.2: </span><span  
+class="content">Example of a hierarchical finite state machine &#8211; top level</span></div><!--tex4ht:label?: x30-1380022 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x30-1380033"></a>
+                                                                                            
+                                                                                            
+<!--l. 753--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMInitializing.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.3: </span><span  
+class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
+class="ec-lmsso-10">Initializing</span></span></div><!--tex4ht:label?: x30-1380033 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x30-1380044"></a><a 
+ id="x33-14800097"></a>
+                                                                                            
+                                                                                            
+<!--l. 758--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMRunning.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.4: </span><span  
+class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
+class="ec-lmsso-10">Running</span></span></div><!--tex4ht:label?: x30-1380044 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+                                                                                            
+                                                                                            
+<!--l. 90--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch5.html" >next</a>] [<a 
+href="etrice-docse23.html" >prev</a>] [<a 
+href="etrice-docse23.html#tailetrice-docse23.html" >prev-tail</a>] [<a 
 href="etrice-docse24.html" >front</a>] [<a 
-href="etrice-docch5.html#etrice-docse24.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch4.html#etrice-docse24.html" >up</a>] </p></div>
+<!--l. 90--><p class="noindent" ><a 
  id="tailetrice-docse24.html"></a> </p> 
 </body></html> 
