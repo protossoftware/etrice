@@ -394,7 +394,7 @@ public class ProjectCreator {
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/run_" + baseName + ".launch", true),
 					project.getName(), baseName,
-					"Node_nodeRef1_subSysRef1Runner");
+					"Node_nodeRef1_mainRunner");
 		} else if (project.hasNature("org.eclipse.cdt.core.cnature")) {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
