@@ -14,21 +14,34 @@ package org.eclipse.etrice.generator.base;
 
 /**
  * This class implements an intelligent separator for continued
- * enumerations that are generated from multiple list where each of
+ * enumerations that are generated from multiple lists where each of
  * those list might be empty.
  * 
  * @author Henrik Rentz-Reichert
  */
 public class IntelligentSeparator {
 
+	private String firstSep;
 	private String sep;
 	private boolean firstUse = true;
+
+	/**
+	 * returns {@code firstSep} on the first call to {@link #toString()}.
+	 * The following times it return {@code sep}.
+	 * 
+	 * @param firstSep the first separator string to be used
+	 * @param sep the separator string to be used
+	 */
+	public IntelligentSeparator(String firstSep, String sep) {
+		this.firstSep = firstSep;
+		this.sep = sep;
+	}
 
 	/**
 	 * @param sep the separator string to be used
 	 */
 	public IntelligentSeparator(String sep) {
-		this.sep = sep;
+		this("", sep);
 	}
 
 	/**
@@ -52,7 +65,7 @@ public class IntelligentSeparator {
 	public String toString() {
 		if (firstUse) {
 			firstUse = false;
-			return "";
+			return firstSep;
 		}
 		else
 			return sep;
