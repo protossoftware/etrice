@@ -17,7 +17,6 @@ import java.io.File;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
-import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
@@ -64,11 +63,7 @@ public class InstanceDiagramGen {
           {
             String _name = sys.getName();
             String file = (_name + "_instanceTree.dot");
-            String _plus = ("generating instance tree diagram: \'" + file);
-            String _plus_1 = (_plus + "\' in \'");
-            String _plus_2 = (_plus_1 + path);
-            String _plus_3 = (_plus_2 + "\'");
-            this.logger.logInfo(_plus_3);
+            this.logger.logInfo((((("generating instance tree diagram: \'" + file) + "\' in \'") + path) + "\'"));
             CharSequence _generate = this.generate(root, sys);
             this.fileAccess.generateFile(file, _generate);
           }
@@ -114,13 +109,13 @@ public class InstanceDiagramGen {
     _builder.append("\t");
     String _path = sys.getPath();
     String _pathName = this.roomExt.getPathName(_path);
-    _builder.append(_pathName, "	");
+    _builder.append(_pathName, "\t");
     _builder.append(" [label=\"");
     String _name_1 = sys.getName();
-    _builder.append(_name_1, "	");
+    _builder.append(_name_1, "\t");
     _builder.append("\\n(");
     String _name_2 = sys.getName();
-    _builder.append(_name_2, "	");
+    _builder.append(_name_2, "\t");
     _builder.append(")\" style=filled color=red];");
     _builder.newLineIfNotEmpty();
     {
@@ -129,24 +124,24 @@ public class InstanceDiagramGen {
         _builder.append("\t");
         String _path_1 = ssi.getPath();
         String _pathName_1 = this.roomExt.getPathName(_path_1);
-        _builder.append(_pathName_1, "	");
+        _builder.append(_pathName_1, "\t");
         _builder.append(" [label=\"");
         String _name_3 = ssi.getName();
-        _builder.append(_name_3, "	");
+        _builder.append(_name_3, "\t");
         _builder.append("\\n(");
         SubSystemClass _subSystemClass = ssi.getSubSystemClass();
         String _name_4 = _subSystemClass.getName();
-        _builder.append(_name_4, "	");
+        _builder.append(_name_4, "\t");
         _builder.append(")\" style=filled color=yellow];");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _path_2 = sys.getPath();
         String _pathName_2 = this.roomExt.getPathName(_path_2);
-        _builder.append(_pathName_2, "	");
+        _builder.append(_pathName_2, "\t");
         _builder.append(" -> ");
         String _path_3 = ssi.getPath();
         String _pathName_3 = this.roomExt.getPathName(_path_3);
-        _builder.append(_pathName_3, "	");
+        _builder.append(_pathName_3, "\t");
         _builder.append(";  ");
         _builder.newLineIfNotEmpty();
         {
@@ -154,7 +149,7 @@ public class InstanceDiagramGen {
           for(final AbstractInstance ai : _instances_1) {
             _builder.append("\t");
             String _instance = this.instance(ai);
-            _builder.append(_instance, "	");
+            _builder.append(_instance, "\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -170,15 +165,14 @@ public class InstanceDiagramGen {
     {
       EObject _eContainer = ai.eContainer();
       final StructureInstance parent = ((StructureInstance) _eContainer);
-      final MappedThread pthread = ETMapUtil.getMappedThread(ai);
+      final ETMapUtil.MappedThread pthread = ETMapUtil.getMappedThread(ai);
       String _xifexpression = null;
       boolean _equals = Objects.equal(pthread, null);
       if (_equals) {
         _xifexpression = "?";
       } else {
         PhysicalThread _thread = pthread.getThread();
-        String _name = _thread.getName();
-        _xifexpression = _name;
+        _xifexpression = _thread.getName();
       }
       final String tname = _xifexpression;
       final NodeRef node = ETMapUtil.getNodeRef(ai);
@@ -187,8 +181,7 @@ public class InstanceDiagramGen {
       if (_equals_1) {
         _xifexpression_1 = "?";
       } else {
-        String _name_1 = node.getName();
-        _xifexpression_1 = _name_1;
+        _xifexpression_1 = node.getName();
       }
       final String nname = _xifexpression_1;
       String _xifexpression_2 = null;
@@ -201,14 +194,12 @@ public class InstanceDiagramGen {
       String _xifexpression_3 = null;
       if ((ai instanceof ActorInstance)) {
         ActorClass _actorClass = ((ActorInstance) ai).getActorClass();
-        String _name_2 = _actorClass.getName();
-        _xifexpression_3 = _name_2;
+        _xifexpression_3 = _actorClass.getName();
       } else {
         String _xifexpression_4 = null;
         if ((ai instanceof ActorInterfaceInstance)) {
           ActorClass _actorClass_1 = ((ActorInterfaceInstance) ai).getActorClass();
-          String _name_3 = _actorClass_1.getName();
-          _xifexpression_4 = _name_3;
+          _xifexpression_4 = _actorClass_1.getName();
         } else {
           _xifexpression_4 = "?";
         }
@@ -221,8 +212,8 @@ public class InstanceDiagramGen {
       _builder.append(_pathName, "");
       _builder.append(" [label=\"");
       _builder.append(optional, "");
-      String _name_4 = ai.getName();
-      _builder.append(_name_4, "");
+      String _name = ai.getName();
+      _builder.append(_name, "");
       _builder.append("\\n(");
       _builder.append(clsname, "");
       _builder.append(")\\n@");
@@ -260,22 +251,19 @@ public class InstanceDiagramGen {
           }
         }
       }
-      _xblockexpression = (_builder.toString());
+      _xblockexpression = _builder.toString();
     }
     return _xblockexpression;
   }
   
   private void runDot2Jpg(final String path, final String bat) {
-    File _file = new File(path);
-    File wdir = _file;
+    File wdir = new File(path);
     try {
       Runtime _runtime = Runtime.getRuntime();
-      String _plus = ("cmd /C " + bat);
-      final Process p = _runtime.exec(_plus, null, wdir);
-      String _plus_1 = (bat + " finished with ");
+      final Process p = _runtime.exec(("cmd /C " + bat), null, wdir);
       int _waitFor = p.waitFor();
-      String _plus_2 = (_plus_1 + Integer.valueOf(_waitFor));
-      this.logger.logInfo(_plus_2);
+      String _plus = ((bat + " finished with ") + Integer.valueOf(_waitFor));
+      this.logger.logInfo(_plus);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

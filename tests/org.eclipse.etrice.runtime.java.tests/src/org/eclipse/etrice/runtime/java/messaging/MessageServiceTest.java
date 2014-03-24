@@ -92,9 +92,13 @@ public class MessageServiceTest extends TestCase {
 		int max_iter=10;
 		
 		// create and register message receivers
+		Address firstAddress = null;
 		DummyMessageReceiver receiver[]=new DummyMessageReceiver[max];
 		for (int i=0; i<max; i++){
-			receiver[i] = new DummyMessageReceiver(new Address(0,0,1+i));
+			Address address = msg_service.getFreeAddress();
+			if(i==0)
+				firstAddress = address;
+			receiver[i] = new DummyMessageReceiver(address);
 			msg_service.getMessageDispatcher().addMessageReceiver(receiver[i]);
 		}
 		
@@ -103,7 +107,7 @@ public class MessageServiceTest extends TestCase {
 		Message msg[][]=new Message[max][max_iter];
 		for (int j=0; j<max_iter; j++){
 			for (int i=0; i<max; i++){
-				msg[i][j] = new Message(new Address(0,0,i+1));
+				msg[i][j] = new Message(new Address(firstAddress.nodeID, firstAddress.threadID, firstAddress.objectID + i));
 			}
 		}
 
@@ -132,6 +136,29 @@ public class MessageServiceTest extends TestCase {
 			assertEquals(msg[i][max_iter-1], receiver[i].getLastReceivedMessage());
 		}
 		
+	}
+	
+	public void testPollingMessage() throws InterruptedException{
+		{
+			MessageService msg_service = new MessageService(null, ExecMode.POLLED, 100, 0, 0, "MessageService");
+			start(msg_service);
+			DummyMessageReceiver dummyReceiver = new DummyMessageReceiver(msg_service.getFreeAddress());
+			msg_service.addPollingMessageReceiver(dummyReceiver);
+			
+			Thread.sleep(300);
+			assertNotNull(dummyReceiver.getLastReceivedMessage());
+			msg_service.destroy();
+		}
+		{
+			MessageService msg_service = new MessageService(null, ExecMode.MIXED, 100, 0, 0, "MessageService");
+			start(msg_service);
+			DummyMessageReceiver dummyReceiver = new DummyMessageReceiver(msg_service.getFreeAddress());
+			msg_service.addPollingMessageReceiver(dummyReceiver);
+			
+			Thread.sleep(300);
+			assertNotNull(dummyReceiver.getLastReceivedMessage());
+			msg_service.destroy();
+		}
 	}
 
 	public void testMessageService() {

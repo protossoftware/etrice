@@ -8,8 +8,10 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * The message dispatcher class used by the MessageService.
@@ -22,6 +24,7 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 
 	private HashMap<Number, IMessageReceiver> local_map = new HashMap<Number, IMessageReceiver>();
 	private LinkedList<Address> freeAdresses = new LinkedList<Address>();
+	private Set<IMessageReceiver> pollingMessageReceiver = new HashSet<IMessageReceiver>();
 	
 	private Address address = null;
 	private int nextFreeObjId;
@@ -30,6 +33,8 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 		super(parent, name);
 		address = addr;
 		nextFreeObjId = addr.objectID+1;
+		
+		local_map.put(address.objectID, this);
 	}
 	
 	public Address getFreeAddress() {
@@ -64,12 +69,23 @@ public class MessageDispatcher extends RTObject implements IMessageReceiver {
 		}
 	}
 	
+	public void addPollingMessageReceiver(IMessageReceiver receiver){
+		pollingMessageReceiver.add(receiver);
+	}
+	
+	public void removePollingMessageReceiver(IMessageReceiver receiver){
+		pollingMessageReceiver.remove(receiver);
+	}
+	
 	@Override
 	public void receive(Message msg) {
 		if (msg.getAddress().nodeID == address.nodeID
 				&& msg.getAddress().threadID == address.threadID) {
 			IMessageReceiver receiver = local_map.get(msg.getAddress().objectID);
-			if(receiver!=null) {
+			if(receiver == this){
+				for(IMessageReceiver rcv : pollingMessageReceiver)
+					rcv.receive(new Message(getAddress()));
+			}else if(receiver!=null) {
 				receiver.receive(msg);
 			}
 			else {

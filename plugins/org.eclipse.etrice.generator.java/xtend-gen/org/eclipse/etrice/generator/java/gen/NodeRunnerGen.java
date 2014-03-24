@@ -63,7 +63,7 @@ public class NodeRunnerGen {
           } else {
             SubSystemClass _subSystemClass = ssi.getSubSystemClass();
             boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-            _and = (_notEquals && _isValidGenerationLocation);
+            _and = _isValidGenerationLocation;
           }
           if (_and) {
             String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
@@ -128,8 +128,7 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("class ");
-      String _plus = (clsname + "Runner");
-      _builder.append(_plus, "");
+      _builder.append((clsname + "Runner"), "");
       _builder.append(" extends SubSystemRunnerBase {");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -159,7 +158,7 @@ public class NodeRunnerGen {
           _builder.append("new RTSystem(\"");
           EObject _eContainer_1 = ssc.eContainer();
           String _name_2 = ((SystemInstance) _eContainer_1).getName();
-          _builder.append(_name_2, "		");
+          _builder.append(_name_2, "\t\t");
           _builder.append("\")");
         } else {
           _builder.append("null");
@@ -168,12 +167,12 @@ public class NodeRunnerGen {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append(clsname, "		");
+      _builder.append(clsname, "\t\t");
       _builder.append(" main_component = new ");
-      _builder.append(clsname, "		");
+      _builder.append(clsname, "\t\t");
       _builder.append("(sys, \"");
       String _name_3 = ssc.getName();
-      _builder.append(_name_3, "		");
+      _builder.append(_name_3, "\t\t");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -186,7 +185,7 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.append("};");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

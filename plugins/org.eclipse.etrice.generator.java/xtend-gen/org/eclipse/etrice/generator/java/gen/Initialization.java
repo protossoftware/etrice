@@ -95,15 +95,13 @@ public class Initialization {
           boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
           if (_notEquals) {
             String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
-            CharSequence _attributeInit = this.attributeInit(a, _defaultValueLiteral_1);
-            _xifexpression = _attributeInit;
+            _xifexpression = this.attributeInit(a, _defaultValueLiteral_1);
           } else {
             CharSequence _xifexpression_1 = null;
             boolean _needsInitialization = this.languageExt.needsInitialization(a);
             if (_needsInitialization) {
               String _nullPointer = this.languageExt.nullPointer();
-              CharSequence _attributeInit_1 = this.attributeInit(a, _nullPointer);
-              _xifexpression_1 = _attributeInit_1;
+              _xifexpression_1 = this.attributeInit(a, _nullPointer);
             }
             _xifexpression = _xifexpression_1;
           }
@@ -112,7 +110,6 @@ public class Initialization {
       }
       if (!_matched) {
         if (aType instanceof PrimitiveType) {
-          final PrimitiveType _primitiveType = (PrimitiveType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -127,34 +124,30 @@ public class Initialization {
             CharSequence _xifexpression_2 = null;
             boolean _notEquals_1 = (!Objects.equal(value, null));
             if (_notEquals_1) {
-              String _valueLiteral = this.languageExt.toValueLiteral(_primitiveType, value);
-              CharSequence _attributeInit_2 = this.attributeInit(a, _valueLiteral);
-              _xifexpression_2 = _attributeInit_2;
+              String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType)aType), value);
+              _xifexpression_2 = this.attributeInit(a, _valueLiteral);
             } else {
               CharSequence _xifexpression_3 = null;
               boolean _or = false;
-              boolean _not = (!useClassDefaultsOnly);
-              if (_not) {
+              if ((!useClassDefaultsOnly)) {
                 _or = true;
               } else {
                 boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
-                _or = (_not || _needsInitialization_1);
+                _or = _needsInitialization_1;
               }
               if (_or) {
-                String _defaultValue = this.languageExt.defaultValue(_primitiveType);
-                CharSequence _attributeInit_3 = this.attributeInit(a, _defaultValue);
-                _xifexpression_3 = _attributeInit_3;
+                String _defaultValue = this.languageExt.defaultValue(aType);
+                _xifexpression_3 = this.attributeInit(a, _defaultValue);
               }
               _xifexpression_2 = _xifexpression_3;
             }
-            _xblockexpression_1 = (_xifexpression_2);
+            _xblockexpression_1 = _xifexpression_2;
           }
           _switchResult = _xblockexpression_1;
         }
       }
       if (!_matched) {
         if (aType instanceof EnumerationType) {
-          final EnumerationType _enumerationType = (EnumerationType)aType;
           _matched=true;
           CharSequence _xblockexpression_1 = null;
           {
@@ -169,106 +162,91 @@ public class Initialization {
             CharSequence _xifexpression_2 = null;
             boolean _notEquals_1 = (!Objects.equal(value, null));
             if (_notEquals_1) {
-              String _enumLiteral = this.languageExt.toEnumLiteral(_enumerationType, value);
-              CharSequence _attributeInit_2 = this.attributeInit(a, _enumLiteral);
-              _xifexpression_2 = _attributeInit_2;
+              String _enumLiteral = this.languageExt.toEnumLiteral(((EnumerationType)aType), value);
+              _xifexpression_2 = this.attributeInit(a, _enumLiteral);
             } else {
               CharSequence _xifexpression_3 = null;
               boolean _or = false;
-              boolean _not = (!useClassDefaultsOnly);
-              if (_not) {
+              if ((!useClassDefaultsOnly)) {
                 _or = true;
               } else {
                 boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
-                _or = (_not || _needsInitialization_1);
+                _or = _needsInitialization_1;
               }
               if (_or) {
-                String _defaultValue = this.languageExt.defaultValue(_enumerationType);
-                CharSequence _attributeInit_3 = this.attributeInit(a, _defaultValue);
-                _xifexpression_3 = _attributeInit_3;
+                String _defaultValue = this.languageExt.defaultValue(aType);
+                _xifexpression_3 = this.attributeInit(a, _defaultValue);
               }
               _xifexpression_2 = _xifexpression_3;
             }
-            _xblockexpression_1 = (_xifexpression_2);
+            _xblockexpression_1 = _xifexpression_2;
           }
           _switchResult = _xblockexpression_1;
         }
       }
       if (!_matched) {
         String _defaultValue = this.languageExt.defaultValue(aType);
-        CharSequence _attributeInit_2 = this.attributeInit(a, _defaultValue);
-        _switchResult = _attributeInit_2;
+        _switchResult = this.attributeInit(a, _defaultValue);
       }
-      _xblockexpression = (_switchResult);
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
   
   private CharSequence attributeInitPrimitiveRec(final List<Attribute> path, final EObject roomClass) {
-    CharSequence _xblockexpression = null;
-    {
-      Attribute a = IterableExtensions.<Attribute>last(path);
-      RefableType _type = a.getType();
-      DataType aType = _type.getType();
-      CharSequence _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (aType instanceof DataClass) {
-          final DataClass _dataClass = (DataClass)aType;
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) _dataClass));
-            for(final Attribute e : _allAttributes) {
-              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
-              _builder.append(_attributeInitPrimitiveRec, "");
-              _builder.newLineIfNotEmpty();
-            }
+    Attribute a = IterableExtensions.<Attribute>last(path);
+    RefableType _type = a.getType();
+    DataType aType = _type.getType();
+    boolean _matched = false;
+    if (!_matched) {
+      if (aType instanceof DataClass) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        {
+          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+          for(final Attribute e : _allAttributes) {
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+            CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
+            _builder.append(_attributeInitPrimitiveRec, "");
+            _builder.newLineIfNotEmpty();
           }
-          return _builder;
         }
+        return _builder;
       }
-      if (!_matched) {
-        if (aType instanceof PrimitiveType) {
-          final PrimitiveType _primitiveType = (PrimitiveType)aType;
-          _matched=true;
-          String value = this.getDataConfigValue(path, roomClass);
-          CharSequence _xifexpression = null;
-          boolean _notEquals = (!Objects.equal(value, null));
-          if (_notEquals) {
-            String _valueLiteral = this.languageExt.toValueLiteral(_primitiveType, value);
-            CharSequence _attributeInit = this.attributeInit(path, _valueLiteral);
-            _xifexpression = _attributeInit;
-          }
-          return _xifexpression;
-        }
-      }
-      if (!_matched) {
-        if (aType instanceof EnumerationType) {
-          final EnumerationType _enumerationType = (EnumerationType)aType;
-          _matched=true;
-          String value = this.getDataConfigValue(path, roomClass);
-          CharSequence _xifexpression = null;
-          boolean _notEquals = (!Objects.equal(value, null));
-          if (_notEquals) {
-            String _enumLiteral = this.languageExt.toEnumLiteral(_enumerationType, value);
-            CharSequence _attributeInit = this.attributeInit(path, _enumLiteral);
-            _xifexpression = _attributeInit;
-          }
-          return _xifexpression;
-        }
-      }
-      _xblockexpression = (_switchResult);
     }
-    return _xblockexpression;
+    if (!_matched) {
+      if (aType instanceof PrimitiveType) {
+        _matched=true;
+        String value = this.getDataConfigValue(path, roomClass);
+        CharSequence _xifexpression = null;
+        boolean _notEquals = (!Objects.equal(value, null));
+        if (_notEquals) {
+          String _valueLiteral = this.languageExt.toValueLiteral(((PrimitiveType)aType), value);
+          _xifexpression = this.attributeInit(path, _valueLiteral);
+        }
+        return _xifexpression;
+      }
+    }
+    if (!_matched) {
+      if (aType instanceof EnumerationType) {
+        _matched=true;
+        String value = this.getDataConfigValue(path, roomClass);
+        CharSequence _xifexpression = null;
+        boolean _notEquals = (!Objects.equal(value, null));
+        if (_notEquals) {
+          String _enumLiteral = this.languageExt.toEnumLiteral(((EnumerationType)aType), value);
+          _xifexpression = this.attributeInit(path, _enumLiteral);
+        }
+        return _xifexpression;
+      }
+    }
+    return null;
   }
   
   private CharSequence attributeInit(final Attribute a, final String value) {
     ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
     List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
-    CharSequence _attributeInit = this.attributeInit(_union, value);
-    return _attributeInit;
+    return this.attributeInit(_union, value);
   }
   
   private CharSequence attributeInit(final List<Attribute> path, final String value) {
@@ -282,8 +260,7 @@ public class Initialization {
       int _minus = (_size_1 - 1);
       Iterable<Attribute> _take = IterableExtensions.<Attribute>take(path, _minus);
       CharSequence _invokeGetters = this.procedureHelpers.invokeGetters(_take, null);
-      String _string = _invokeGetters.toString();
-      _xifexpression = _string;
+      _xifexpression = _invokeGetters.toString();
     }
     final String getter = _xifexpression;
     Attribute _last = IterableExtensions.<Attribute>last(path);
@@ -312,16 +289,16 @@ public class Initialization {
           } else {
             String _typeName = this.typeHelpers.typeName(aType);
             boolean _equals_1 = "char".equals(_typeName);
-            _and_1 = (_greaterThan && _equals_1);
+            _and_1 = _equals_1;
           }
           if (!_and_1) {
             _and = false;
           } else {
             boolean _matches = value.matches("\'.\'|\\(char\\).*");
             boolean _not = (!_matches);
-            _and = (_and_1 && _not);
+            _and = _not;
           }
-          _or = (_equals || _and);
+          _or = _and;
         }
         if (_or) {
           _builder.append(invokes, "");
@@ -341,20 +318,20 @@ public class Initialization {
           } else {
             String _typeName_1 = this.typeHelpers.typeName(aType);
             boolean _equals_2 = "char".equals(_typeName_1);
-            _or_1 = (_not_1 || _equals_2);
+            _or_1 = _equals_2;
           }
           if (_or_1) {
             _builder.append("{");
             _builder.newLine();
             _builder.append("\t");
             String _typeName_2 = this.typeHelpers.typeName(aType);
-            _builder.append(_typeName_2, "	");
+            _builder.append(_typeName_2, "\t");
             _builder.append("[] array = new ");
             String _typeName_3 = this.typeHelpers.typeName(aType);
-            _builder.append(_typeName_3, "	");
+            _builder.append(_typeName_3, "\t");
             _builder.append("[");
             int _size_2 = a.getSize();
-            _builder.append(_size_2, "	");
+            _builder.append(_size_2, "\t");
             _builder.append("];");
             _builder.newLineIfNotEmpty();
             {
@@ -365,20 +342,20 @@ public class Initialization {
                 _and_2 = false;
               } else {
                 boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-                _and_2 = (_isRef && _isPrimitive);
+                _and_2 = _isPrimitive;
               }
               boolean _not_2 = (!_and_2);
               if (_not_2) {
                 _builder.append("\t");
                 _builder.append("for (int i=0;i<");
                 int _size_3 = a.getSize();
-                _builder.append(_size_3, "	");
+                _builder.append(_size_3, "\t");
                 _builder.append(";i++){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("array[i] = ");
-                _builder.append(value, "		");
+                _builder.append(value, "\t\t");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -387,11 +364,11 @@ public class Initialization {
               }
             }
             _builder.append("\t");
-            _builder.append(invokes, "	");
+            _builder.append(invokes, "\t");
             _builder.append(".");
             String _name_1 = a.getName();
             CharSequence _invokeSetter_1 = this.procedureHelpers.invokeSetter(_name_1, null, "array");
-            _builder.append(_invokeSetter_1, "	");
+            _builder.append(_invokeSetter_1, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             _builder.append("}");
@@ -413,7 +390,7 @@ public class Initialization {
           }
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -423,23 +400,18 @@ public class Initialization {
     boolean _matched = false;
     if (!_matched) {
       if (roomClass instanceof ActorClass) {
-        final ActorClass _actorClass = (ActorClass)roomClass;
         _matched=true;
-        String _attrClassConfigValue = this.typeHelpers.getAttrClassConfigValue(path, _actorClass, false);
-        _switchResult = _attrClassConfigValue;
+        _switchResult = this.typeHelpers.getAttrClassConfigValue(path, ((ActorClass)roomClass), false);
       }
     }
     if (!_matched) {
       if (roomClass instanceof PortClass) {
-        final PortClass _portClass = (PortClass)roomClass;
         _matched=true;
-        String _attrClassConfigValue = this.typeHelpers.getAttrClassConfigValue(path, _portClass);
-        _switchResult = _attrClassConfigValue;
+        _switchResult = this.typeHelpers.getAttrClassConfigValue(path, ((PortClass)roomClass));
       }
     }
     if (!_matched) {
       if (roomClass instanceof DataClass) {
-        final DataClass _dataClass = (DataClass)roomClass;
         _matched=true;
         _switchResult = null;
       }

@@ -10,7 +10,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="etphys"
-              icon="icons/etphys.gif"
+              icon="icons/etphys_doc.ico"
               id="org.eclipse.etrice.core.etphys.ETPhys"
               name="ETPhys Editor">
         </editor>

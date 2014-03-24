@@ -4,62 +4,62 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 4</title> 
+<head><title>Dynamic Actors 3</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-25 18:01:00" /> 
+<meta name="date" content="2014-03-18 18:29:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 204--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 176--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
 href="etrice-docse11.html" >prev</a>] [<a 
 href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse12.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse12.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.4   </span> <a 
- id="x17-750003.4"></a>Dynamic Actors 4</h3>
-<!--l. 206--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors4</span>.
-</p><!--l. 208--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x17-790003.3"></a>Dynamic Actors 3</h3>
+<!--l. 178--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors3</span>.
+</p><!--l. 180--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.4.1   </span> <a 
- id="x17-760003.4.1"></a>Purpose</h4>
-<!--l. 210--><p class="noindent" >The example demonstrates the usage of an optional actor. But here not the actor containing the optional reference is
-communicating with the optional actor but one level above.
-</p><!--l. 213--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.3.1   </span> <a 
+ id="x17-800003.3.1"></a>Purpose</h4>
+<!--l. 182--><p class="noindent" >The example demonstrates the usage of an optional actor array. It is shown that several actor classes derived from the type of
+the optional actor reference can be created as array members. The array members can be destroyed in arbitrary order and the
+array size grows and shrinks as appropriate.
+</p><!--l. 186--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.4.2   </span> <a 
- id="x17-770003.4.2"></a>Details</h4>
-<!--l. 215--><p class="noindent" >The <span 
-class="ec-lmtt-10">Controller </span>which has a reference to the <span 
-class="ec-lmtt-10">Container </span>is asking the latter for the creation of the dynamic actor. When it
-receives <span 
-class="ec-lmtt-10">ok() </span>it is requesting <span 
-class="ec-lmtt-10">sayHello() </span>from the newly created actor.
-</p><!--l. 219--><p class="noindent" >After the <span 
-class="ec-lmtt-10">Controller </span>receives <span 
-class="ec-lmtt-10">hello() </span>it tells the <span 
-class="ec-lmtt-10">Container </span>to create another actor which fails because the old one is still
-in place.
-</p><!--l. 222--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.3.2   </span> <a 
+ id="x17-810003.3.2"></a>Details</h4>
+<!--l. 188--><p class="noindent" >This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a replicated
+optional actor (or array of optional actors if you wish). The port of the <span 
+class="ec-lmtt-10">Container </span>was also changed to a replicated port. All
+replication factors in this example are of arbitrary multiplicity (*). The sizes vary dynamically and are unbound as far as the
+model is concerned.
+</p><!--l. 193--><p class="noindent" >The behavior was changed to the following: Two instances of different classes are created as members of this array and both
+are deleted and one is created again. The replicated port is used to send (broadcast) messages to the optional
+actors.
+</p><!--l. 197--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.4.3   </span> <a 
- id="x17-780003.4.3"></a>Noteworthy</h4>
+<h4 class="subsectionHead"><span class="titlemark">3.3.3   </span> <a 
+ id="x17-820003.3.3"></a>Noteworthy</h4>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
-class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
+     </li>
+     <li class="itemize">careful inspection of the console output reveals that objects are created and destroyed as expected</li></ul>
                                                                                             
                                                                                             
-<!--l. 228--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 204--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse13.html" >next</a>] [<a 
 href="etrice-docse11.html" >prev</a>] [<a 
 href="etrice-docse11.html#tailetrice-docse11.html" >prev-tail</a>] [<a 
 href="etrice-docse12.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse12.html" >up</a>] </p></div>
-<!--l. 228--><p class="noindent" ><a 
+<!--l. 204--><p class="noindent" ><a 
  id="tailetrice-docse12.html"></a> </p> 
 </body></html> 

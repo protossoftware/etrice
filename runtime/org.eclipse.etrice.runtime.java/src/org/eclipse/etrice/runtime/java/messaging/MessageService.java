@@ -13,6 +13,10 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * The MessageService is the backbone of the asynchronous communication inside a SubSystem
@@ -29,6 +33,9 @@ public class MessageService extends AbstractMessageService {
 	private Thread thread;
 	private int priority;
 	private long lastMessageTimestamp;
+	
+	private int pollingInterval = -1;
+	private ScheduledExecutorService pollingScheduler = null;
 
 	public MessageService(IRTObject parent, ExecMode mode, int node, int thread, String name) {
 		this(parent, mode, 0, node, thread, name, Thread.NORM_PRIORITY);
@@ -45,10 +52,20 @@ public class MessageService extends AbstractMessageService {
 
 		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
 		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
+		
+		if(mode == ExecMode.MIXED || mode == ExecMode.POLLED){
+			pollingInterval = nsec;
+			pollingScheduler = Executors.newScheduledThreadPool(1);
+			
+			assert pollingInterval > 0 : ("polling interval is 0 or negative");
+		}
 	}
 
 	public void run() {
 		running = true;
+		
+		if(pollingScheduler != null)
+			pollingScheduler.scheduleAtFixedRate(new PollingTask(), pollingInterval, pollingInterval, TimeUnit.NANOSECONDS);
 		
 		while (running) {
 			Message msg = null;
@@ -113,6 +130,16 @@ public class MessageService extends AbstractMessageService {
 		super.removeMessageReceiver(receiver);
 	}
 	
+	@Override
+	public synchronized void addPollingMessageReceiver(IMessageReceiver receiver) {
+		super.addPollingMessageReceiver(receiver);
+	}
+	
+	@Override
+	public synchronized void removePollingMessageReceiver(IMessageReceiver receiver) {
+		super.removePollingMessageReceiver(receiver);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#freeAddress(org.eclipse.etrice.runtime.java.messaging.Address)
 	 */
@@ -126,6 +153,9 @@ public class MessageService extends AbstractMessageService {
 			running = false;
 			notifyAll();
 		}
+		
+		if(pollingScheduler != null)
+			pollingScheduler.shutdown();
 	}
 
 	/* (non-Javadoc)
@@ -146,6 +176,18 @@ public class MessageService extends AbstractMessageService {
 
 	protected long getLastMessageTimestamp() {
 		return lastMessageTimestamp;
+	}
+	
+	private class PollingTask implements Runnable{
+		
+		@Override
+		public void run() {
+			if(running){
+				Message msg = new Message(getMessageDispatcher().getAddress());
+				receive(msg);
+			} 
+		}
+		
 	}
 
 }

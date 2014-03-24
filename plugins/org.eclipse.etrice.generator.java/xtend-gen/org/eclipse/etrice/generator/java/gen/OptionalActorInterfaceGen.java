@@ -52,8 +52,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
     EList<ActorClass> _optionalActorClasses = root.getOptionalActorClasses();
     final Function1<ActorClass,Boolean> _function = new Function1<ActorClass,Boolean>() {
       public Boolean apply(final ActorClass cl) {
-        boolean _isValidGenerationLocation = OptionalActorInterfaceGen.this._fileSystemHelpers.isValidGenerationLocation(cl);
-        return Boolean.valueOf(_isValidGenerationLocation);
+        return Boolean.valueOf(OptionalActorInterfaceGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
     };
     Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_optionalActorClasses, _function);
@@ -126,7 +125,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("protected InterfaceItemBroker ");
           String _name = ep.getName();
-          _builder.append(_name, "	");
+          _builder.append(_name, "\t");
           _builder.append(" = null;");
           _builder.newLineIfNotEmpty();
         }
@@ -137,7 +136,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       String _genInterfaceItemConstantsForOptionalActor = this.genInterfaceItemConstantsForOptionalActor(ac);
-      _builder.append(_genInterfaceItemConstantsForOptionalActor, "	");
+      _builder.append(_genInterfaceItemConstantsForOptionalActor, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
@@ -147,13 +146,13 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("public ");
       String _javaInterfaceName_1 = this._javaExtensions.getJavaInterfaceName(ac, replicated);
-      _builder.append(_javaInterfaceName_1, "	");
+      _builder.append(_javaInterfaceName_1, "\t");
       _builder.append(" (IEventReceiver parent, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("super(parent, name, \"");
       String _name_1 = ac.getName();
-      _builder.append(_name_1, "		");
+      _builder.append(_name_1, "\t\t");
       _builder.append("\");");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -166,25 +165,25 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
             if (_isReplicated) {
               _builder.append("\t\t");
               String _name_2 = ep_1.getName();
-              _builder.append(_name_2, "		");
+              _builder.append(_name_2, "\t\t");
               _builder.append(" = new ReplicatedInterfaceItemBroker(this, \"");
               String _name_3 = ep_1.getName();
-              _builder.append(_name_3, "		");
+              _builder.append(_name_3, "\t\t");
               _builder.append("\", IFITEM_");
               String _name_4 = ep_1.getName();
-              _builder.append(_name_4, "		");
+              _builder.append(_name_4, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t\t");
               String _name_5 = ep_1.getName();
-              _builder.append(_name_5, "		");
+              _builder.append(_name_5, "\t\t");
               _builder.append(" = new InterfaceItemBroker(this, \"");
               String _name_6 = ep_1.getName();
-              _builder.append(_name_6, "		");
+              _builder.append(_name_6, "\t\t");
               _builder.append("\", IFITEM_");
               String _name_7 = ep_1.getName();
-              _builder.append(_name_7, "		");
+              _builder.append(_name_7, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
@@ -232,7 +231,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       }
       _builder.append("}");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

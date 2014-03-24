@@ -187,7 +187,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							+baseName+"/run_"+baseName+".launch", true),
 							baseName,
 							baseName,
-							"Node_nodeRef1_subSysRef1Runner");
+							"Node_nodeRef1_mainRunner");
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/tmp/log"),

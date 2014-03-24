@@ -126,17 +126,17 @@ public class EnumerationTypeGen {
             if (!_hasElements) {
               _hasElements = true;
             } else {
-              _builder.appendImmediate(",", "	");
+              _builder.appendImmediate(",", "\t");
             }
             _builder.append("\t");
             String _name_4 = et.getName();
-            _builder.append(_name_4, "	");
+            _builder.append(_name_4, "\t");
             _builder.append("_");
             String _name_5 = lit_1.getName();
-            _builder.append(_name_5, "	");
+            _builder.append(_name_5, "\t");
             _builder.append(" = ");
             long _literalValue = lit_1.getLiteralValue();
-            _builder.append(_literalValue, "	");
+            _builder.append(_literalValue, "\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -209,13 +209,13 @@ public class EnumerationTypeGen {
         _builder.append("\t\t");
         _builder.append("case ");
         String _name_2 = et.getName();
-        _builder.append(_name_2, "		");
+        _builder.append(_name_2, "\t\t");
         _builder.append("_");
         String _name_3 = lit.getName();
-        _builder.append(_name_3, "		");
+        _builder.append(_name_3, "\t\t");
         _builder.append(": return \"");
         String _name_4 = lit.getName();
-        _builder.append(_name_4, "		");
+        _builder.append(_name_4, "\t\t");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
       }

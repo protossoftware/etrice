@@ -59,7 +59,6 @@ RoomModel DataDrivenTest {
 		}
 		Structure {
 			external Port p0
-			SAP timer: PTimer
 			
 			Attribute caseId: int32
 			Attribute counter: int32
@@ -75,7 +74,6 @@ RoomModel DataDrivenTest {
 			StateMachine {
 				Transition init: initial -> Idle {
 					action {
-						"timer.startTimer(20);"
 						"counter = 0;"
 					}
 				}

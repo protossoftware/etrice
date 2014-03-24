@@ -52,8 +52,7 @@ public class ActorClassDataGen {
   private ProcedureHelpers _procedureHelpers;
   
   public void doGenerate(final Root root) {
-    HashMap<ActorClass,WiredActorClass> _hashMap = new HashMap<ActorClass, WiredActorClass>();
-    final HashMap<ActorClass,WiredActorClass> ac2wired = _hashMap;
+    final HashMap<ActorClass,WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
@@ -72,8 +71,7 @@ public class ActorClassDataGen {
     final Function1<ExpandedActorClass,Boolean> _function_2 = new Function1<ExpandedActorClass,Boolean>() {
       public Boolean apply(final ExpandedActorClass cl) {
         ActorClass _actorClass = cl.getActorClass();
-        boolean _isValidGenerationLocation = ActorClassDataGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass);
-        return Boolean.valueOf(_isValidGenerationLocation);
+        return Boolean.valueOf(ActorClassDataGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
       }
     };
     Iterable<ExpandedActorClass> _filter_1 = IterableExtensions.<ExpandedActorClass>filter(_xpActorClasses, _function_2);
@@ -114,8 +112,7 @@ public class ActorClassDataGen {
         ActorClass _base_1 = ac.getBase();
         String _name_1 = _base_1.getName();
         String _plus = ("extends " + _name_1);
-        String _plus_1 = (_plus + "_DataObject ");
-        _xifexpression = _plus_1;
+        _xifexpression = (_plus + "_DataObject ");
       } else {
         _xifexpression = "";
       }
@@ -166,7 +163,7 @@ public class ActorClassDataGen {
       _builder.append("\t");
       EList<Attribute> _attributes = ac.getAttributes();
       CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
-      _builder.append(_attributes_1, "	");
+      _builder.append(_attributes_1, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
@@ -227,13 +224,13 @@ public class ActorClassDataGen {
       EList<Attribute> _attributes_2 = ac.getAttributes();
       String _name_3 = ac.getName();
       CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_3);
-      _builder.append(_attributeSettersGettersImplementation, "	");
+      _builder.append(_attributeSettersGettersImplementation, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("};");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

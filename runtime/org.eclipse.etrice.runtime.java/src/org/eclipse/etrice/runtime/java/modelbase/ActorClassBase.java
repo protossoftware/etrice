@@ -137,7 +137,7 @@ public abstract class ActorClassBase extends SystemPortOwner implements IMessage
 	}
 	
 	protected boolean handleSystemEvent(InterfaceItemBase ifitem, int evt, Object generic_data){
-		if (ifitem.getLocalId()!=0){
+		if (ifitem == null || ifitem.getLocalId()!=0){
 			return false;
 		}
 		

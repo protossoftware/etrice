@@ -1,0 +1,325 @@
+RoomModel ActorCommunicationTest {
+
+	import room.basic.types.* from "Types.room"
+	import room.basic.service.timing.* from "TimingService.room"
+
+	SubSystemClass SubSystem_ActorCommunicationTest {
+		ActorRef singleThread_Appl: Appl
+		ActorRef timing: ATimingService
+		LayerConnection ref singleThread_Appl satisfied_by timing.timer
+
+		// all unmapped instances are mapped to the default *physical* thread
+		LogicalThread dflt_thread
+		ActorInstanceMapping timing -> dflt_thread
+		ActorInstanceMapping singleThread_Appl -> dflt_thread
+	}
+
+	/*
+ 	 * On each timing event Tester sends a message with a counter to all Testees
+ 	 * From counter=1-9: each Testee does an expect order
+ 	 * On counter=10: each Testee sends finish message to Tester, that does last expect order
+ 	 */
+	ActorClass Appl {
+		Structure {
+			ActorRef tester: Tester
+			ActorRef datadriven_Testee: Datadriven_Testee
+			ActorRef eventdriven_Testee: Eventdriven_Testee
+			ActorRef async_Testee: Async_Testee
+			Binding tester.data_counter and datadriven_Testee.data_counter
+			Binding tester.data_counter_finish and datadriven_Testee.counter_finish
+			Binding tester.event_counter and eventdriven_Testee.event_counter
+			Binding tester.async_counter1 and async_Testee.event_counter
+			Binding tester.async_counter2 and async_Testee.data_counter
+		}
+		Behavior { }
+	}
+
+	async ActorClass Tester {
+		Interface {
+			conjugated Port event_counter: Eventdriven_PC
+			conjugated Port data_counter: Datadriven_PC
+			Port data_counter_finish: Datadriven_PC
+			conjugated Port async_counter1: Eventdriven_PC
+			conjugated Port async_counter2: Datadriven_PC
+		}
+		Structure {
+			external Port event_counter
+			external Port data_counter
+			external Port data_counter_finish
+			external Port async_counter1
+			external Port async_counter2
+			SAP timer: PTimer
+			Attribute data_caseId: int32
+			Attribute event_caseId: int32
+			Attribute async_caseId: int32
+			Attribute counter: int32
+			Attribute finish_counter: int32
+			Attribute data_finish_flag: boolean
+			Attribute data_result [ 10 ]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
+			Attribute event_result [ 10 ]: int16 = "{101,102,103,104,105,106,107,108,109,110}"
+			Attribute async_result [ 10 ]: int16 = "{1051,1002,1053,1004,1055,1006,1057,1008,1059,1010}"
+		}
+		Behavior {
+			Operation Tester() {
+				"etUnit_open(\"tmp\", \"ActorCommunicationTest\");"
+				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests\");"
+			}
+			Operation ~Tester() {
+				"etUnit_closeTestSuite();"
+				"etUnit_close();"
+			}
+			StateMachine {
+				Transition init: initial -> tester_run {
+					action {
+						"data_caseId = etUnit_openTestCase(\"Datadriven ActorCommunicationTest\");"
+						"event_caseId = etUnit_openTestCase(\"Eventdriven ActorCommunicationTest\");"
+						"async_caseId = etUnit_openTestCase(\"Async ActorCommunicationTest\");"
+						""
+						"event_counter.caseId(event_caseId);"
+						"data_counter.caseId(data_caseId);"
+						"async_counter2.caseId(async_caseId);"
+						""
+						"counter = 0;"
+						"finish_counter = 0;"
+						"data_finish_flag = false;"
+						"EXPECT_ORDER_START(data_caseId, data_result, 10);"
+						"EXPECT_ORDER_START(event_caseId, event_result, 10);"
+						"EXPECT_ORDER_START(async_caseId, async_result, 10);"
+						"timer.startTimer(400);"
+					}
+				}
+				Transition tr0: tester_run -> tester_run {
+					triggers {
+						<timeout: timer guard {
+							"counter < 10"
+						}>
+					}
+					action {
+						"counter++;"
+						// "System.out.println(\"Timer: \"+counter);"
+						"event_counter.in1(counter);"
+						"data_counter.in1(counter);"
+						"async_counter1.in1(counter);"
+						"async_counter2.in1(counter);"
+					}
+				}
+				Transition tr1: tester_run -> tester_run {
+					triggers {
+						<finish: event_counter>
+					}
+					action {
+						// "System.out.println(\"Finish event\");"
+						"EXPECT_ORDER_END(event_caseId,\"<|MODEL_LOCATION|>\", 110);"
+						"etUnit_closeTestCase(event_caseId);"
+						"finish_counter++;"
+					}
+				}
+				Transition tr2: tester_run -> tester_run {
+					guard {
+						"data_counter_finish.finish == true && data_finish_flag == false"
+					}
+					action {
+
+					//"System.out.println(\"Finish data\");"
+						"data_finish_flag = true;"
+						"EXPECT_ORDER_END(data_caseId,\"<|MODEL_LOCATION|>\", 10);"
+						"etUnit_closeTestCase(data_caseId);"
+						"finish_counter++;"
+					}
+				}
+				Transition tr3: tester_run -> tester_run {
+					triggers {
+						<finish: async_counter1>
+					}
+					action {
+					//"System.out.println(\"Finish async\");"
+						"EXPECT_ORDER_END(async_caseId,\"<|MODEL_LOCATION|>\", 1010);"
+						"etUnit_closeTestCase(async_caseId);"
+						"finish_counter++;"
+					}
+				}
+				Transition terminate: my tp0 -> my tp0 {
+					guard {
+						"finish_counter == 3"
+					}
+					action {
+						"etUnit_testFinished(event_caseId);"
+					}
+				}
+				TransitionPoint tp0
+				State tester_run
+			}
+		}
+	}
+
+	async ActorClass Async_Testee {
+		Interface {
+			Port event_counter: Eventdriven_PC
+			Port data_counter: Datadriven_PC
+		}
+		Structure {
+			external Port event_counter
+			external Port data_counter
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle {
+					action {
+						"counter = 0;"
+					}
+				}
+				Transition tr0: Idle -> Idle {
+					guard {
+						"data_counter.in1 != counter && data_counter.in1 % 2 == 1"
+					}
+					action {
+						"counter = data_counter.in1;"
+
+						//"System.out.println(\"Async data \"+counter);"
+						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1050);"
+					}
+				}
+				Transition tr1: Idle -> Idle {
+					triggers {
+						<in1: event_counter guard {
+							"data % 2 == 0 && data < 10"
+						}>
+					}
+					action {
+						"counter = data;"
+
+						//"System.out.println(\"Async event \"+counter);"
+						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1000);"
+					}
+				}
+				Transition tr2: Idle -> state0 {
+					triggers {
+						<in1: event_counter guard {
+							"data == 10"
+						}>
+					}
+					action {
+						"event_counter.finish();"
+					}
+				}
+				State Idle
+				State state0
+			}
+		}
+	}
+
+	ActorClass Eventdriven_Testee {
+		Interface {
+			Port event_counter: Eventdriven_PC
+		}
+		Structure {
+			external Port event_counter
+			Attribute caseId: int32
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"counter = 0;"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<in1: event_counter guard {
+							"data < 10"
+						}>
+					}
+					action {
+
+					//"System.out.println(\"event \"+data);"
+						"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", data+100);"
+					}
+				}
+				Transition tr1: state0 -> state1 {
+					triggers {
+						<in1: event_counter guard {
+							"data == 10"
+						}>
+					}
+					action {
+						"event_counter.finish();"
+					}
+				}
+				Transition tr2: state0 -> state0 {
+					triggers {
+						<caseId: event_counter>
+					}
+					action {
+						"caseId = data;"
+					}
+				}
+				State state0
+				State state1
+			}
+		}
+	}
+
+	datadriven ActorClass Datadriven_Testee {
+		Interface {
+			Port data_counter: Datadriven_PC
+			conjugated Port counter_finish: Datadriven_PC
+		}
+		Structure {
+			external Port data_counter
+			external Port counter_finish
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"counter = 0;"
+						"counter_finish.finish(false);"
+					}
+				}
+				Transition tr0: state0 -> state1 {
+					guard {
+						"data_counter.in1 == 10"
+					}
+					action {
+						"counter_finish.finish(true);"
+					}
+				}
+				Transition tr1: state0 -> state0 {
+					guard {
+						"data_counter.in1 != counter && counter < 10"
+					}
+					action {
+						"counter = data_counter.in1;"
+
+						//"System.out.println(\"data \"+counter);"
+						"EXPECT_ORDER(data_counter.caseId, \"<|MODEL_LOCATION|>\", counter);"
+					}
+				}
+				State state0
+				State state1
+			}
+		}
+	}
+
+	datadriven ProtocolClass Datadriven_PC {
+		incoming {
+			Message caseId(data: int32)
+			Message in1(data: int32)
+			Message finish(data: boolean)
+		}
+	}
+
+	ProtocolClass Eventdriven_PC {
+		incoming {
+			Message caseId(data: int32)
+			Message in1(data: int32)
+		}
+		outgoing {
+			Message finish()
+		}
+	}
+
+}

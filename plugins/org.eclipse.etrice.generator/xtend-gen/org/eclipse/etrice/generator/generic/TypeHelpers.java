@@ -61,21 +61,18 @@ public class TypeHelpers {
   
   public String getTypeName(final RefableType t) {
     DataType _type = t.getType();
-    String _typeName = this.typeName(_type);
-    return _typeName;
+    return this.typeName(_type);
   }
   
   public String getTypeName(final Message m) {
     VarDecl _data = m.getData();
     RefableType _refType = _data.getRefType();
-    String _typeName = this.getTypeName(_refType);
-    return _typeName;
+    return this.getTypeName(_refType);
   }
   
   public String getTypeName(final Attribute att) {
     RefableType _type = att.getType();
-    String _typeName = this.getTypeName(_type);
-    return _typeName;
+    return this.getTypeName(_type);
   }
   
   /**
@@ -87,21 +84,18 @@ public class TypeHelpers {
    */
   public String getPrimitiveTypeName(final RefableType t) {
     DataType _type = t.getType();
-    String _name = _type.getName();
-    return _name;
+    return _type.getName();
   }
   
   public String getPrimitiveTypeName(final Message m) {
     VarDecl _data = m.getData();
     RefableType _refType = _data.getRefType();
-    String _primitiveTypeName = this.getPrimitiveTypeName(_refType);
-    return _primitiveTypeName;
+    return this.getPrimitiveTypeName(_refType);
   }
   
   public String getPrimitiveTypeName(final Attribute att) {
     RefableType _type = att.getType();
-    String _primitiveTypeName = this.getPrimitiveTypeName(_type);
-    return _primitiveTypeName;
+    return this.getPrimitiveTypeName(_type);
   }
   
   public String defaultValue(final VarDecl a) {
@@ -112,20 +106,17 @@ public class TypeHelpers {
   
   public String getArgumentList(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = _generateArglistAndTypedData[0];
-    return _get;
+    return _generateArglistAndTypedData[0];
   }
   
   public String getTypedDataDefinition(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = _generateArglistAndTypedData[1];
-    return _get;
+    return _generateArglistAndTypedData[1];
   }
   
   public String generateTypedArgumentList(final VarDecl data) {
     String[] _generateArglistAndTypedData = this.languageExt.generateArglistAndTypedData(data);
-    String _get = _generateArglistAndTypedData[2];
-    return _get;
+    return _generateArglistAndTypedData[2];
   }
   
   public boolean isPrimitive(final DataType type) {
@@ -140,7 +131,7 @@ public class TypeHelpers {
     } else {
       LiteralType _type = ((PrimitiveType) type).getType();
       boolean _equals = Objects.equal(_type, LiteralType.BOOL);
-      _and = (_isPrimitive && _equals);
+      _and = _equals;
     }
     return _and;
   }
@@ -154,7 +145,7 @@ public class TypeHelpers {
     if ((type instanceof EnumerationType)) {
       _or = true;
     } else {
-      _or = ((type instanceof EnumerationType) || (type instanceof PrimitiveType));
+      _or = (type instanceof PrimitiveType);
     }
     return _or;
   }
@@ -165,8 +156,7 @@ public class TypeHelpers {
   
   public boolean isCharacterType(final PrimitiveType type) {
     LiteralType _type = type.getType();
-    boolean _equals = Objects.equal(_type, LiteralType.CHAR);
-    return _equals;
+    return Objects.equal(_type, LiteralType.CHAR);
   }
   
   public boolean isCharacterType(final DataType type) {
@@ -176,7 +166,7 @@ public class TypeHelpers {
       _and = false;
     } else {
       boolean _isCharacterType = this.isCharacterType(((PrimitiveType) type));
-      _and = (_isPrimitive && _isCharacterType);
+      _and = _isCharacterType;
     }
     return _and;
   }
@@ -186,18 +176,14 @@ public class TypeHelpers {
     boolean _matched = false;
     if (!_matched) {
       if (instance instanceof ActorInstance) {
-        final ActorInstance _actorInstance = (ActorInstance)instance;
         _matched=true;
-        String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_actorInstance, attributePath);
-        _switchResult = _attrInstanceConfigValue;
+        _switchResult = this.dataConfigExt.getAttrInstanceConfigValue(((ActorInstance)instance), attributePath);
       }
     }
     if (!_matched) {
       if (instance instanceof InterfaceItemInstance) {
-        final InterfaceItemInstance _interfaceItemInstance = (InterfaceItemInstance)instance;
         _matched=true;
-        String _attrInstanceConfigValue = this.dataConfigExt.getAttrInstanceConfigValue(_interfaceItemInstance, attributePath);
-        _switchResult = _attrInstanceConfigValue;
+        _switchResult = this.dataConfigExt.getAttrInstanceConfigValue(((InterfaceItemInstance)instance), attributePath);
       }
     }
     return _switchResult;
@@ -210,7 +196,7 @@ public class TypeHelpers {
     if (!_equals) {
       _and = false;
     } else {
-      _and = (_equals && inherite);
+      _and = inherite;
     }
     if (_and) {
       ActorClass base = actor.getBase();
@@ -220,7 +206,7 @@ public class TypeHelpers {
         _and_1 = false;
       } else {
         boolean _equals_1 = Objects.equal(result, null);
-        _and_1 = (_notEquals && _equals_1);
+        _and_1 = _equals_1;
       }
       boolean _while = _and_1;
       while (_while) {
@@ -236,7 +222,7 @@ public class TypeHelpers {
           _and_2 = false;
         } else {
           boolean _equals_2 = Objects.equal(result, null);
-          _and_2 = (_notEquals_1 && _equals_2);
+          _and_2 = _equals_2;
         }
         _while = _and_2;
       }

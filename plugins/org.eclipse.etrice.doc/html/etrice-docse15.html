@@ -4,52 +4,64 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 7</title> 
+<head><title>Dynamic Actors 6</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-25 18:01:00" /> 
+<meta name="date" content="2014-03-18 18:29:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 271--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 247--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse16.html" >next</a>] [<a 
 href="etrice-docse14.html" >prev</a>] [<a 
 href="etrice-docse14.html#tailetrice-docse14.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse15.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse15.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.7   </span> <a 
- id="x20-870003.7"></a>Dynamic Actors 7</h3>
-<!--l. 273--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors7</span>.
-</p><!--l. 275--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3.6   </span> <a 
+ id="x20-910003.6"></a>Dynamic Actors 6</h3>
+<!--l. 249--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors6</span>.
+</p><!--l. 251--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.7.1   </span> <a 
- id="x20-880003.7.1"></a>Purpose</h4>
-<!--l. 277--><p class="noindent" >The example demonstrates the use of communication between two optional actors.
-</p><!--l. 279--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.6.1   </span> <a 
+ id="x20-920003.6.1"></a>Purpose</h4>
+<!--l. 253--><p class="noindent" >The example demonstrates the use of nested dynamic actors.
+</p><!--l. 255--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.7.2   </span> <a 
- id="x20-890003.7.2"></a>Details</h4>
-<!--l. 281--><p class="noindent" >In this example two sub trees of dynamic actors are created. The container is sending a message to one of them which is
-forwarding it to the other one which in turn is replying back to the container.
-</p><!--l. 284--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.6.2   </span> <a 
+ id="x20-930003.6.2"></a>Details</h4>
+<!--l. 257--><p class="noindent" >In this example the dynamically created actor <span 
+class="ec-lmtt-10">Optional2 </span>has again an optional reference two levels down in its hierarchy. On
+creation it immediately creates a nested dynamic actor of class <span 
+class="ec-lmtt-10">Optional1 </span>which is sending <span 
+class="ec-lmtt-10">hello() </span>back to the outer
+<span 
+class="ec-lmtt-10">Container</span>.
+</p><!--l. 261--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.7.3   </span> <a 
- id="x20-900003.7.3"></a>Noteworthy</h4>
+<h4 class="subsectionHead"><span class="titlemark">3.6.3   </span> <a 
+ id="x20-940003.6.3"></a>Noteworthy</h4>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
-class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
+     </li>
+     <li class="itemize">when a dynamic actor is created its structure is there immediately and all ports are connected. But the initial
+     transition is executed asynchronously. So after the outer dynamic actor is created the port of the <span 
+class="ec-lmtt-10">Container</span>
+     is not yet connected because the initial transition which is responsible for the creation of the inner dynamic
+     actor wasn&#8217;t executed yet. So a message sent from this port directly after creation of the outer dynamic actor
+     would get lost.</li></ul>
                                                                                             
                                                                                             
-<!--l. 290--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 271--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse16.html" >next</a>] [<a 
 href="etrice-docse14.html" >prev</a>] [<a 
 href="etrice-docse14.html#tailetrice-docse14.html" >prev-tail</a>] [<a 
 href="etrice-docse15.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse15.html" >up</a>] </p></div>
-<!--l. 290--><p class="noindent" ><a 
+<!--l. 271--><p class="noindent" ><a 
  id="tailetrice-docse15.html"></a> </p> 
 </body></html> 

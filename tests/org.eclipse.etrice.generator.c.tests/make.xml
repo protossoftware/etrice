@@ -136,6 +136,7 @@
 				<include name="org.antlr.runtime_3.2*.jar" />
 				<include name="javax.inject_1.0*.jar" />
 			</fileset>
+			<!-- If some plugins are located in user folder, then duplicate fileset with own path -->
 		</path>
 
 		<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.c.Main" fork="true" failonerror="true">
@@ -484,6 +485,51 @@
 			<arg value="-lpthread"/>
 			<arg value="-lrt"/>
 		</exec>
+		
+		<!-- compile and link ActorCommunicationTest -->
+		<mkdir dir="bin/ActorCommunicationTest"/>
+		<exec dir="bin/ActorCommunicationTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-I../../src-gen/"/>
+			<arg value="-I${c-runtime.path}/src/common"/>
+			<arg value="-I${c-runtime.path}/src/config"/>
+			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
+			<arg value="-c"/>
+			<arg value="-g3"/>
+			<arg value="-O0"/>
+			<arg value="-Wall"/>
+			<!--<arg value="-ansi"/>-->
+			<arg value="../../src-gen/ActorCommunicationTest/Appl.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Async_Testee.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Datadriven_Testee.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Eventdriven_Testee.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Tester.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/node8_acTest.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/node8_acTest_Runner.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Datadriven_PC.c"/>
+			<arg value="../../src-gen/ActorCommunicationTest/Eventdriven_PC.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/ATimingService.c"/>
+			<arg value="../../src-gen/room/basic/service/timing/PTimer.c"/>
+		</exec>
+		<exec dir="bin/ActorCommunicationTest" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
+			<arg value="-L${c-runtime.path}/bin"/>
+			<arg value="-oActorCommunicationTest.exe"/>
+			<arg value="Appl.o"/>
+			<arg value="Async_Testee.o"/>
+			<arg value="Datadriven_Testee.o"/>
+			<arg value="Eventdriven_Testee.o"/>
+			<arg value="Tester.o"/>
+			<arg value="node8_acTest.o"/>
+			<arg value="node8_acTest_Runner.o"/>
+			<arg value="Datadriven_PC.o"/>
+			<arg value="Eventdriven_PC.o"/>
+			<arg value="ATimingService.o"/>
+			<arg value="PTimer.o"/>
+			
+			<!-- library has to be in the last position -->
+			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<arg value="-lpthread"/>
+			<arg value="-lrt"/>
+		</exec>
 	</target>
 
 	<!--
@@ -523,6 +569,11 @@
 			<arg value="-run_as_test"/>
 		</exec>
 		<echo>end   DataDrivenTest</echo>
+		<echo>start ActorCommunicationTest</echo>
+		<exec dir="./" resolveexecutable="true" executable="./bin/ActorCommunicationTest/ActorCommunicationTest.exe">
+			<arg value="-run_as_test"/>
+		</exec>
+		<echo>end   ActorCommunicationTest</echo>
 	</target>
 	
 	<!--
@@ -582,6 +633,13 @@
 			<arg value="./tmp/DataDrivenTest.etu"/>
 			<classpath refid="clspath"/>
 		</java>
+		
+		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite"/>
+			<arg value="org.eclipse.etrice.generator.c.tests.ActorCommunicationTest"/>
+			<arg value="./tmp/ActorCommunicationTest.etu"/>
+			<classpath refid="clspath"/>
+		</java>
 	</target>
 	
 	<!--
@@ -596,6 +654,7 @@
 		-->
 		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/CStaticConfigTest.xml"/>
 		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/CDataDrivenTest.xml"/>
+		<move file="./tmp/ActorCommunicationTest.xml" tofile="./tmp/CActorCommunicationTest.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./tmp">
 				<include name="*.xml"/>

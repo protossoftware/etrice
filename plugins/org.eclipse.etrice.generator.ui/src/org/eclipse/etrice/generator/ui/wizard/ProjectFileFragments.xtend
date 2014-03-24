@@ -21,14 +21,14 @@ class ProjectFileFragments {
 	def static String getBasicRoomModel(String baseName) {
 		'''
 			RoomModel «baseName» {
-				LogicalSystem LogSys1 {
-					SubSystemRef subSysRef1:SubSysClass1
+				LogicalSystem «baseName» {
+					SubSystemRef main: MainSubSystem
 				}
-				SubSystemClass SubSysClass1 {
-					ActorRef actorRef1:ActorClass1
+				SubSystemClass MainSubSystem {
+					ActorRef appl: Application
 					LogicalThread defaultThread
 				}
-				ActorClass ActorClass1 {
+				ActorClass Application {
 				}
 			}
 		'''
@@ -69,8 +69,8 @@ class ProjectFileFragments {
 			MappingModel «baseName» {
 				import «baseName».* from "«baseName».room"
 				import «baseName».* from "«baseName».etphys"
-				Mapping LogSys1 -> PhysSys1 {
-					SubSystemMapping subSysRef1 -> nodeRef1 {
+				Mapping «baseName» -> PhysSys1 {
+					SubSystemMapping main -> nodeRef1 {
 						ThreadMapping defaultThread -> PhysicalThread1
 					}
 				}

@@ -47,6 +47,12 @@ typedef bool boolean;
 #ifndef FALSE
 	#define FALSE 0
 #endif
+#ifndef true
+	#define true 1
+#endif
+#ifndef false
+	#define false 0
+#endif
 
 /*
  * typedefs for eTrice Runtime and Testing

@@ -10,15 +10,15 @@
 	@author Henrik Rentz-Reichert
 -->
 <project name="project" default="all">
-	
-	<property name="java.tests.model.path" value="./models"/>
-	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java"/>
-	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.java"/>
-	<property name="bin.path" value="./bin"/>
-	<property name="xml.output" value="./tmp"/>
-	<property name="output" value="./output"/>
-	<property environment="env"/>
-	
+
+	<property name="java.tests.model.path" value="./models" />
+	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.java" />
+	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.java" />
+	<property name="bin.path" value="./bin" />
+	<property name="xml.output" value="./tmp" />
+	<property name="output" value="./output" />
+	<property environment="env" />
+
 	<!--
 		all: copies the models, generates, compiles, runs, converts and copies the results
 	-->
@@ -31,7 +31,7 @@
 	-->
 	<target name="set_tp" unless="target.platform">
 		<echo>using local target platform</echo>
-		<property name="target.platform" value="${env.ETRICE_TARGET_PLATFORM}"/>
+		<property name="target.platform" value="${env.ETRICE_TARGET_PLATFORM}" />
 	</target>
 
 	<!--
@@ -39,58 +39,58 @@
 	-->
 	<target name="set_tr" unless="test.results">
 		<echo>using local test result folder</echo>
-		<property name="test.results" value="./results"/>
+		<property name="test.results" value="./results" />
 	</target>
-	
+
 	<!--
 		clean: deletes all folders created by this script
 	-->
 	<target name="clean" depends="set_tr">
-		<delete dir="${bin.path}"/>
-		<delete dir="models"/>
-		<delete dir="${output}"/>
-		<delete dir="src-gen"/>
-		<delete dir="tmp"/>
+		<delete dir="${bin.path}" />
+		<delete dir="models" />
+		<delete dir="${output}" />
+		<delete dir="src-gen" />
+		<delete dir="tmp" />
 	</target>
-	
+
 	<!--
 		copy_models: copies the models from their original folders to the build location
 	-->
 	<target name="copy_models" depends="clean">
-		<copy todir="models" >
+		<copy todir="models">
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models">
-				<include name="*.room"/>
-				<include name="*.config"/>
-				<include name="*.etmap"/>
-				<include name="*.etphys"/>
-				<include name="*.rt-config"/>
+				<include name="*.room" />
+				<include name="*.config" />
+				<include name="*.etmap" />
+				<include name="*.etphys" />
+				<include name="*.rt-config" />
 			</fileset>
 			<fileset dir="../../runtime/org.eclipse.etrice.modellib.java/model">
-				<include name="TimingService.room"/>
-				<include name="Types.room"/>
-				<include name="TcpService.room"/>
-				<include name="Language.room"/>
+				<include name="TimingService.room" />
+				<include name="Types.room" />
+				<include name="TcpService.room" />
+				<include name="Language.room" />
 			</fileset>
 		</copy>
-		<move file="models/StaticConfigTest_Java.room" toFile="models/StaticConfigTest.room"/>
+		<move file="models/StaticConfigTest_Java.room" toFile="models/StaticConfigTest.room" />
 	</target>
-	
+
 	<!--
 		generate: invokes the Java generator for the ROOM models
 	-->
 	<target name="generate" depends="set_tp,copy_models">
-		<mkdir dir="${output}"/>
+		<mkdir dir="${output}" />
 		<path id="clspath">
-			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin" />
 			<fileset dir="${target.platform}/plugins/">
 				<include name="org.eclipse.emf.ecore_2.9*.jar" />
 				<include name="org.eclipse.emf.common_2.9*.jar" />
@@ -107,19 +107,20 @@
 				<include name="org.antlr.runtime_3.2*.jar" />
 				<include name="javax.inject_1.0*.jar" />
 			</fileset>
+			<!-- If some plugins are located in user folder, then duplicate fileset with own path -->
 		</path>
 
 		<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.java.Main" fork="true" failonerror="true">
-			<arg value="${java.tests.model.path}/generator.java.tests.config"/>
-			<arg value="${java.tests.model.path}/generator.java.tests.etmap"/>
-			<arg value="-persistable"/>
-			<arg value="-storeDataObj"/>
-			<arg value="-gen_as_verbose"/>
-			<arg value="-msc_instr"/>
-			<classpath refid="clspath"/>
+			<arg value="${java.tests.model.path}/generator.java.tests.config" />
+			<arg value="${java.tests.model.path}/generator.java.tests.etmap" />
+			<arg value="-persistable" />
+			<arg value="-storeDataObj" />
+			<arg value="-gen_as_verbose" />
+			<arg value="-msc_instr" />
+			<classpath refid="clspath" />
 		</java>
 	</target>
-	
+
 	<!--
 		compile: compiles the generated Java sources
 	-->
@@ -131,142 +132,143 @@
 
 	<!-- set debug and verbose to on to produce more output -->
 	<target name="logged_compile">
-		<mkdir dir="${bin.path}"/>
-		<javac srcdir="src-gen:src"
-			 destdir="${bin.path}"
-			 classpath="${runtime.path}/target/classes"
-			 debug="off"
-			 verbose="off"
-			/>
+		<mkdir dir="${bin.path}" />
+		<javac srcdir="src-gen:src" destdir="${bin.path}" classpath="${runtime.path}/target/classes" debug="off" verbose="off" />
 	</target>
-	
+
 	<!--
 		run: runs all executables
 	-->
 	<target name="run" depends="compile">
-		<mkdir dir="tmp/log"/>
+		<mkdir dir="tmp/log" />
+		<echo>start ActorCommunicationTest</echo>
+		<java output="${output}/runActorCommunicationTest.txt" classname="ActorCommunicationTest.Node_node20_acTestRunner" fork="true" failonerror="true">
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
+		</java>
+		<echo>end   ActorCommunicationTest</echo>
 		<echo>start PingPongThreadTestReplPort</echo>
 		<java output="${output}/runPingPongThreadReplPortTest.txt" classname="PingPongThreadTestReplPort.Node_node7_prTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   PingPongThreadTestReplPort</echo>
 		<echo>start HandlerTest</echo>
 		<java output="${output}/runHandlerTest.txt" classname="HandlerTest.Node_node3_hdTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   HandlerTest</echo>
 		<echo>start ChoicePointTest</echo>
 		<java output="${output}/runChoicePointTest.txt" classname="ChoicePointTest.Node_node1_cpTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   ChoicePointTest</echo>
 		<echo>start EnumTest</echo>
 		<java output="${output}/runEnumTest.txt" classname="EnumTest.Node_node18_enTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   EnumTest</echo>
 		<echo>start StoreRestore</echo>
 		<java output="${output}/runStoreRestore.txt" classname="StoreRestore.Node_node19_stTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   StoreRestore</echo>
 		<echo>start ChoicePointTestExtended</echo>
-			<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
-				<arg value="-headless"/>
-				<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
-			</java>
+		<java output="${output}/runChoicePointTestExtended.txt" classname="ChoicePointTestExtended.Node_node17_cpExtTestRunner" fork="true" failonerror="true">
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
+		</java>
 		<echo>end   ChoicePointTestExtended</echo>
 		<echo>start PingPongThreadTest</echo>
 		<java output="${output}/runPingPongThreadTest.txt" classname="PingPongThreadTest.Node_node6_ppTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   PingPongThreadTest</echo>
 		<echo>start SendingDataTestJava</echo>
 		<java output="${output}/runSendingDataTestJava.txt" classname="SendingDataTestJava.Node_node4_sdTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   SendingDataTestJava</echo>
 		<echo>start TCPTest</echo>
 		<java output="${output}/runTCPTest.txt" classname="TCPTest.Node_node8_tcTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   TCPTest</echo>
 		<echo>start StaticConfigTest</echo>
 		<java output="${output}/runStaticConfigTest.txt" classname="StaticConfigTest.Node_node5_scTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   StaticConfigTest</echo>
 		<echo>start DynamicConfigTest</echo>
 		<java output="${output}/runDynamicConfigTest.txt" classname="DynamicConfigTest.Node_node9_dcTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicConfigTest</echo>
 		<echo>start DataDrivenTest</echo>
 		<java output="${output}/runDataDrivenTest.txt" classname="DataDrivenTest.Node_node2_ddTestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DataDrivenTest</echo>
 		<echo>start DynamicActorTest1</echo>
 		<java output="${output}/runDynamicActorTest1.txt" classname="DynamicActorTest1.Node_node10_da1TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest1</echo>
 		<echo>start DynamicActorTest2</echo>
 		<java output="${output}/runDynamicActorTest2.txt" classname="DynamicActorTest2.Node_node11_da2TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest2</echo>
 		<echo>start DynamicActorTest3</echo>
 		<java output="${output}/runDynamicActorTest3.txt" classname="DynamicActorTest3.Node_node12_da3TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest3</echo>
 		<echo>start DynamicActorTest4</echo>
 		<java output="${output}/runDynamicActorTest4.txt" classname="DynamicActorTest4.Node_node13_da4TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest4</echo>
 		<echo>start DynamicActorTest5</echo>
 		<java output="${output}/runDynamicActorTest5.txt" classname="DynamicActorTest5.Node_node14_da5TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest5</echo>
 		<echo>start DynamicActorTest6</echo>
 		<java output="${output}/runDynamicActorTest6.txt" classname="DynamicActorTest6.Node_node15_da6TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest6</echo>
 		<echo>start DynamicActorTest7</echo>
 		<java output="${output}/runDynamicActorTest7.txt" classname="DynamicActorTest7.Node_node16_da7TestRunner" fork="true" failonerror="true">
-			<arg value="-headless"/>
-			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin"/>
+			<arg value="-headless" />
+			<classpath path="${bin.path};${runtime.path}/target/classes;${modellib.path}/bin" />
 		</java>
 		<echo>end   DynamicActorTest7</echo>
 	</target>
-	
+
 	<!--
 		convert: converts etu- into xunit xml-format
 	-->
 	<target name="convert" depends="run,set_tp">
 		<path id="clspath">
-			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin" />
 			<fileset dir="${target.platform}/plugins/">
 				<include name="org.eclipse.core.runtime_3.9*.jar" />
 				<include name="org.eclipse.emf.ecore_2.9*.jar" />
@@ -275,156 +277,165 @@
 			</fileset>
 		</path>
 
-		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTest"/>
-			<arg value="./tmp/ChoicePointTest.etu"/>
-			<classpath refid="clspath"/>
-		</java>
 
 		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.EnumTest"/>
-			<arg value="./tmp/EnumTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.ActorCommunicationTest" />
+			<arg value="./tmp/ActorCommunicationTest.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.StoreRestore"/>
-			<arg value="./tmp/StoreRestore.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTest" />
+			<arg value="./tmp/ChoicePointTest.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTestExtended"/>
-			<arg value="./tmp/ChoicePointTestExtended.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.EnumTest" />
+			<arg value="./tmp/EnumTest.etu" />
+			<classpath refid="clspath" />
+		</java>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.StoreRestore" />
+			<arg value="./tmp/StoreRestore.etu" />
+			<classpath refid="clspath" />
+		</java>
+
+		<java output="${output}/convert.txt" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.ChoicePointTestExtended" />
+			<arg value="./tmp/ChoicePointTestExtended.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.HandlerTest"/>
-			<arg value="./tmp/HandlerTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.HandlerTest" />
+			<arg value="./tmp/HandlerTest.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.PingPongThreadTest"/>
-			<arg value="./tmp/PingPongThreadTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.PingPongThreadTest" />
+			<arg value="./tmp/PingPongThreadTest.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.PingPongThreadTestReplPort"/>
-			<arg value="./tmp/PingPongThreadTestReplPort.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.PingPongThreadTestReplPort" />
+			<arg value="./tmp/PingPongThreadTestReplPort.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.SendingDataTest"/>
-			<arg value="./tmp/SendingDataTestJava.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.SendingDataTest" />
+			<arg value="./tmp/SendingDataTestJava.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.TCPTest"/>
-			<arg value="./tmp/TCPTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.TCPTest" />
+			<arg value="./tmp/TCPTest.etu" />
+			<classpath refid="clspath" />
 		</java>
 
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.StaticConfigTest"/>
-			<arg value="./tmp/StaticConfigTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.StaticConfigTest" />
+			<arg value="./tmp/StaticConfigTest.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicConfigTest"/>
-			<arg value="./tmp/DynamicConfigTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicConfigTest" />
+			<arg value="./tmp/DynamicConfigTest.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DataDrivenTest"/>
-			<arg value="./tmp/DataDrivenTest.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DataDrivenTest" />
+			<arg value="./tmp/DataDrivenTest.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest1"/>
-			<arg value="./tmp/DynamicActorTest1.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest1" />
+			<arg value="./tmp/DynamicActorTest1.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest2"/>
-			<arg value="./tmp/DynamicActorTest2.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest2" />
+			<arg value="./tmp/DynamicActorTest2.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest3"/>
-			<arg value="./tmp/DynamicActorTest3.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest3" />
+			<arg value="./tmp/DynamicActorTest3.etu" />
+			<classpath refid="clspath" />
 		</java>
-				
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest4"/>
-			<arg value="./tmp/DynamicActorTest4.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest4" />
+			<arg value="./tmp/DynamicActorTest4.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest5"/>
-			<arg value="./tmp/DynamicActorTest5.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest5" />
+			<arg value="./tmp/DynamicActorTest5.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest6"/>
-			<arg value="./tmp/DynamicActorTest6.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest6" />
+			<arg value="./tmp/DynamicActorTest6.etu" />
+			<classpath refid="clspath" />
 		</java>
-		
+
 		<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
-			<arg value="-suite"/>
-			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest7"/>
-			<arg value="./tmp/DynamicActorTest7.etu"/>
-			<classpath refid="clspath"/>
+			<arg value="-suite" />
+			<arg value="org.eclipse.etrice.generator.java.tests.DynamicActorTest7" />
+			<arg value="./tmp/DynamicActorTest7.etu" />
+			<classpath refid="clspath" />
 		</java>
 	</target>
-	
+
 	<!--
 		copy_results: copies the *.xml results to their final destination
 	-->
 	<target name="copy_results" depends="set_tr">
-		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml"/>
-		<move file="./tmp/EnumTest.xml" tofile="./tmp/JavaEnumTest.xml"/>
-		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml"/>
-		<move file="./tmp/ChoicePointTestExtended.xml" tofile="./tmp/JavaChoicePointTestExtended.xml"/>
-		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml"/>
-		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/JavaDynamicConfigTest.xml"/>
-		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/JavaDataDrivenTest.xml"/>
-		<copy todir="${test.results}" >
+		<move file="./tmp/ActorCommunicationTest.xml" tofile="./tmp/JavaActorCommunicationTest.xml" />
+		<move file="./tmp/HandlerTest.xml" tofile="./tmp/JavaHandlerTest.xml" />
+		<move file="./tmp/EnumTest.xml" tofile="./tmp/JavaEnumTest.xml" />
+		<move file="./tmp/ChoicePointTest.xml" tofile="./tmp/JavaChoicePointTest.xml" />
+		<move file="./tmp/ChoicePointTestExtended.xml" tofile="./tmp/JavaChoicePointTestExtended.xml" />
+		<move file="./tmp/StaticConfigTest.xml" tofile="./tmp/JavaStaticConfigTest.xml" />
+		<move file="./tmp/DynamicConfigTest.xml" tofile="./tmp/JavaDynamicConfigTest.xml" />
+		<move file="./tmp/DataDrivenTest.xml" tofile="./tmp/JavaDataDrivenTest.xml" />
+		<copy todir="${test.results}">
 			<fileset dir="./tmp">
-				<include name="*.xml"/>
+				<include name="*.xml" />
 			</fileset>
 		</copy>
 	</target>
-	
+
 </project>

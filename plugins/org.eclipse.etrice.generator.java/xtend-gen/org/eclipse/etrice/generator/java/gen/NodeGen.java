@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
-import org.eclipse.etrice.core.etmap.util.ETMapUtil.MappedThread;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
@@ -108,8 +107,7 @@ public class NodeGen {
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
-    HashMap<SubSystemClass,WiredSubSystemClass> _hashMap = new HashMap<SubSystemClass, WiredSubSystemClass>();
-    final HashMap<SubSystemClass,WiredSubSystemClass> sscc2wired = _hashMap;
+    final HashMap<SubSystemClass,WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
@@ -138,7 +136,7 @@ public class NodeGen {
           } else {
             SubSystemClass _subSystemClass = ssi.getSubSystemClass();
             boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-            _and = (_notEquals && _isValidGenerationLocation);
+            _and = _isValidGenerationLocation;
           }
           if (_and) {
             SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
@@ -155,8 +153,7 @@ public class NodeGen {
             final String infopath = (_generationInfoPath + _path_1);
             final String file = this._javaExtensions.getJavaFileName(nr, ssi);
             this.checkDataPorts(ssi);
-            HashSet<PhysicalThread> _hashSet = new HashSet<PhysicalThread>();
-            final HashSet<PhysicalThread> usedThreads = _hashSet;
+            final HashSet<PhysicalThread> usedThreads = new HashSet<PhysicalThread>();
             NodeClass _type = nr.getType();
             EList<PhysicalThread> _threads = _type.getThreads();
             for (final PhysicalThread thread : _threads) {
@@ -164,10 +161,9 @@ public class NodeGen {
                 EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
                 final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
                   public Boolean apply(final ActorInstance ai) {
-                    MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+                    ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
                     PhysicalThread _thread = _mappedThread.getThread();
-                    boolean _equals = Objects.equal(_thread, thread);
-                    return Boolean.valueOf(_equals);
+                    return Boolean.valueOf(Objects.equal(_thread, thread));
                   }
                 };
                 final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_2);
@@ -210,8 +206,7 @@ public class NodeGen {
     final ArrayList<ActorInterfaceInstance> aifs = Lists.<ActorInterfaceInstance>newArrayList(_map);
     final Function1<ActorInterfaceInstance,ActorClass> _function_2 = new Function1<ActorInterfaceInstance,ActorClass>() {
       public ActorClass apply(final ActorInterfaceInstance aii) {
-        ActorClass _actorClass = ((ActorInterfaceInstance) aii).getActorClass();
-        return _actorClass;
+        return ((ActorInterfaceInstance) aii).getActorClass();
       }
     };
     List<ActorClass> _map_1 = ListExtensions.<ActorInterfaceInstance, ActorClass>map(aifs, _function_2);
@@ -237,8 +232,7 @@ public class NodeGen {
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
         public Boolean apply(final PhysicalThread t) {
-          boolean _contains = usedThreads.contains(t);
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(usedThreads.contains(t));
         }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
@@ -312,10 +306,10 @@ public class NodeGen {
           _builder.append("public static final int ");
           PhysicalThread _value = thread.getValue();
           String _threadId = this.getThreadId(_value);
-          _builder.append(_threadId, "	");
+          _builder.append(_threadId, "\t");
           _builder.append(" = ");
           int _index0 = thread.getIndex0();
-          _builder.append(_index0, "	");
+          _builder.append(_index0, "\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -323,13 +317,13 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("\t");
       CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
-      _builder.append(_userCode_1, "	");
+      _builder.append(_userCode_1, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      _builder.append(clsname, "	");
+      _builder.append(clsname, "\t");
       _builder.append("(IRTObject parent, String name) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -373,23 +367,23 @@ public class NodeGen {
             } else {
               ExecMode _execmode_1 = thread_1.getExecmode();
               boolean _equals_1 = Objects.equal(_execmode_1, ExecMode.MIXED);
-              _or = (_equals || _equals_1);
+              _or = _equals_1;
             }
             if (_or) {
               _builder.append("\t\t");
               _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
               ExecMode _execmode_2 = thread_1.getExecmode();
               String _name_1 = _execmode_2.getName();
-              _builder.append(_name_1, "		");
+              _builder.append(_name_1, "\t\t");
               _builder.append(", ");
               int _time = thread_1.getTime();
-              _builder.append(_time, "		");
+              _builder.append(_time, "\t\t");
               _builder.append(", 0, ");
               String _threadId_1 = this.getThreadId(thread_1);
-              _builder.append(_threadId_1, "		");
+              _builder.append(_threadId_1, "\t\t");
               _builder.append(", \"MessageService_");
               String _name_2 = thread_1.getName();
-              _builder.append(_name_2, "		");
+              _builder.append(_name_2, "\t\t");
               _builder.append("\" /*, thread_prio */);");
               _builder.newLineIfNotEmpty();
             } else {
@@ -397,13 +391,13 @@ public class NodeGen {
               _builder.append("msgService = new MessageService(this, MessageService.ExecMode.");
               ExecMode _execmode_3 = thread_1.getExecmode();
               String _name_3 = _execmode_3.getName();
-              _builder.append(_name_3, "		");
+              _builder.append(_name_3, "\t\t");
               _builder.append(", 0, ");
               String _threadId_2 = this.getThreadId(thread_1);
-              _builder.append(_threadId_2, "		");
+              _builder.append(_threadId_2, "\t\t");
               _builder.append(", \"MessageService_");
               String _name_4 = thread_1.getName();
-              _builder.append(_name_4, "		");
+              _builder.append(_name_4, "\t\t");
               _builder.append("\" /*, thread_prio */);");
               _builder.newLineIfNotEmpty();
             }
@@ -432,7 +426,7 @@ public class NodeGen {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
         for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t\t");
-          final MappedThread mapped = ETMapUtil.getMappedThread(ai);
+          final ETMapUtil.MappedThread mapped = ETMapUtil.getMappedThread(ai);
           _builder.newLineIfNotEmpty();
           {
             boolean _or_1 = false;
@@ -441,18 +435,18 @@ public class NodeGen {
               _or_1 = true;
             } else {
               boolean _isAsParent = mapped.isAsParent();
-              _or_1 = (_isImplicit || _isAsParent);
+              _or_1 = _isAsParent;
             }
             boolean _not = (!_or_1);
             if (_not) {
               _builder.append("\t\t");
               _builder.append("addPathToThread(\"");
               String _path = ai.getPath();
-              _builder.append(_path, "		");
+              _builder.append(_path, "\t\t");
               _builder.append("\", ");
               PhysicalThread _thread = mapped.getThread();
               String _threadId_3 = this.getThreadId(_thread);
-              _builder.append(_threadId_3, "		");
+              _builder.append(_threadId_3, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
@@ -473,7 +467,7 @@ public class NodeGen {
               _builder.append("\t\t");
               _builder.append("for (int i=0; i<");
               int _multiplicity_1 = sub.getMultiplicity();
-              _builder.append(_multiplicity_1, "		");
+              _builder.append(_multiplicity_1, "\t\t");
               _builder.append("; ++i) {");
               _builder.newLineIfNotEmpty();
               {
@@ -484,7 +478,7 @@ public class NodeGen {
                   _builder.append("\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                   String _name_5 = sub.getName();
-                  _builder.append(_name_5, "			");
+                  _builder.append(_name_5, "\t\t\t");
                   _builder.append("_\"+i);");
                   _builder.newLineIfNotEmpty();
                 }
@@ -494,10 +488,10 @@ public class NodeGen {
               _builder.append("new ");
               ActorClass _type_1 = sub.getType();
               String _name_6 = _type_1.getName();
-              _builder.append(_name_6, "			");
+              _builder.append(_name_6, "\t\t\t");
               _builder.append("(this, \"");
               String _name_7 = sub.getName();
-              _builder.append(_name_7, "			");
+              _builder.append(_name_7, "\t\t\t");
               _builder.append("_\"+i);");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -511,7 +505,7 @@ public class NodeGen {
                   _builder.append("\t\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                   String _name_8 = sub.getName();
-                  _builder.append(_name_8, "		");
+                  _builder.append(_name_8, "\t\t");
                   _builder.append("\");");
                   _builder.newLineIfNotEmpty();
                 }
@@ -520,10 +514,10 @@ public class NodeGen {
               _builder.append("new ");
               ActorClass _type_2 = sub.getType();
               String _name_9 = _type_2.getName();
-              _builder.append(_name_9, "		");
+              _builder.append(_name_9, "\t\t");
               _builder.append("(this, \"");
               String _name_10 = sub.getName();
-              _builder.append(_name_10, "		");
+              _builder.append(_name_10, "\t\t");
               _builder.append("\"); ");
               _builder.newLineIfNotEmpty();
             }
@@ -557,7 +551,7 @@ public class NodeGen {
           _builder.append("\t");
           _builder.append("OptionalActorInterfaceBase oai = (OptionalActorInterfaceBase) getObject(\"");
           String _path_1 = aii.getPath();
-          _builder.append(_path_1, "			");
+          _builder.append(_path_1, "\t\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
           {
@@ -568,21 +562,21 @@ public class NodeGen {
               _builder.append("new InterfaceItemBroker(oai, \"");
               ProtocolClass _protocol = svc.getProtocol();
               String _fullyQualifiedName = this._roomExtensions.getFullyQualifiedName(_protocol);
-              _builder.append(_fullyQualifiedName, "			");
+              _builder.append(_fullyQualifiedName, "\t\t\t");
               _builder.append("\", 0);");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("InterfaceItemBase.connect(this, \"");
               String _path_2 = svc.getPath();
-              _builder.append(_path_2, "			");
+              _builder.append(_path_2, "\t\t\t");
               _builder.append("\", \"");
               String _path_3 = aii.getPath();
               String _plus = (_path_3 + Character.valueOf(InstanceBase.pathDelim));
               ProtocolClass _protocol_1 = svc.getProtocol();
               String _fullyQualifiedName_1 = this._roomExtensions.getFullyQualifiedName(_protocol_1);
               String _plus_1 = (_plus + _fullyQualifiedName_1);
-              _builder.append(_plus_1, "			");
+              _builder.append(_plus_1, "\t\t\t");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
             }
@@ -608,15 +602,15 @@ public class NodeGen {
           } else {
             _xifexpression = "InterfaceItemBase";
           }
-          _builder.append(_xifexpression, "		");
+          _builder.append(_xifexpression, "\t\t");
           _builder.append(".connect(this, \"");
           EList<String> _path1 = wire.getPath1();
           String _join = IterableExtensions.join(_path1, "/");
-          _builder.append(_join, "		");
+          _builder.append(_join, "\t\t");
           _builder.append("\", \"");
           EList<String> _path2 = wire.getPath2();
           String _join_1 = IterableExtensions.join(_path2, "/");
-          _builder.append(_join_1, "		");
+          _builder.append(_join_1, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
         }
@@ -643,14 +637,14 @@ public class NodeGen {
               _builder.append("\t");
               ActorClass _actorClass = ai_1.getActorClass();
               String _name_11 = _actorClass.getName();
-              _builder.append(_name_11, "			");
+              _builder.append(_name_11, "\t\t\t");
               _builder.append(" inst = (");
               ActorClass _actorClass_1 = ai_1.getActorClass();
               String _name_12 = _actorClass_1.getName();
-              _builder.append(_name_12, "			");
+              _builder.append(_name_12, "\t\t\t");
               _builder.append(") getObject(\"");
               String _path_4 = ai_1.getPath();
-              _builder.append(_path_4, "			");
+              _builder.append(_path_4, "\t\t\t");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -659,7 +653,7 @@ public class NodeGen {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t");
-              _builder.append(cfg, "				");
+              _builder.append(cfg, "\t\t\t\t");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -697,7 +691,7 @@ public class NodeGen {
         if (_hasVariableService) {
           _builder.append("\t\t");
           _builder.append("variableService = new ");
-          _builder.append(clsname, "		");
+          _builder.append(clsname, "\t\t");
           _builder.append("VariableService(this);");
           _builder.newLineIfNotEmpty();
         }
@@ -797,22 +791,20 @@ public class NodeGen {
       _builder.append("public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {");
       _builder.newLine();
       _builder.append("\t\t");
-      IntelligentSeparator _intelligentSeparator = new IntelligentSeparator("else ");
-      final IntelligentSeparator else1 = _intelligentSeparator;
+      final IntelligentSeparator else1 = new IntelligentSeparator("else ");
       _builder.newLineIfNotEmpty();
       {
         for(final ActorClass oa : opt) {
           _builder.append("\t\t");
-          _builder.append(else1, "		");
+          _builder.append(else1, "\t\t");
           _builder.append("if (optionalActorClass.equals(\"");
           String _name_13 = oa.getName();
-          _builder.append(_name_13, "		");
+          _builder.append(_name_13, "\t\t");
           _builder.append("\")) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t");
-          IntelligentSeparator _intelligentSeparator_1 = new IntelligentSeparator("else ");
-          final IntelligentSeparator else2 = _intelligentSeparator_1;
+          final IntelligentSeparator else2 = new IntelligentSeparator("else ");
           _builder.newLineIfNotEmpty();
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
@@ -820,18 +812,17 @@ public class NodeGen {
             final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
               public Boolean apply(final ActorClass s) {
                 boolean _isAbstract = s.isAbstract();
-                boolean _not = (!_isAbstract);
-                return Boolean.valueOf(_not);
+                return Boolean.valueOf((!_isAbstract));
               }
             };
             Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
             for(final ActorClass subcls : _filter_1) {
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append(else2, "			");
+              _builder.append(else2, "\t\t\t");
               _builder.append("if (\"");
               String _name_14 = subcls.getName();
-              _builder.append(_name_14, "			");
+              _builder.append(_name_14, "\t\t\t");
               _builder.append("\".equals(actorClass)) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -839,7 +830,7 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("return new ");
               String _javaFactoryName = this._javaExtensions.getJavaFactoryName(subcls);
-              _builder.append(_javaFactoryName, "				");
+              _builder.append(_javaFactoryName, "\t\t\t\t");
               _builder.append("();");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -863,7 +854,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("};");
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -871,13 +862,11 @@ public class NodeGen {
   private String getThreadId(final PhysicalThread thread) {
     String _name = thread.getName();
     String _upperCase = _name.toUpperCase();
-    String _plus = ("THREAD_" + _upperCase);
-    return _plus;
+    return ("THREAD_" + _upperCase);
   }
   
   private void checkDataPorts(final SubSystemInstance comp) {
-    HashSet<String> _hashSet = new HashSet<String>();
-    final HashSet<String> found = _hashSet;
+    final HashSet<String> found = new HashSet<String>();
     EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
     for (final ActorInstance ai : _allContainedInstances) {
       {
@@ -894,32 +883,26 @@ public class NodeGen {
                 EObject _eContainer = peer.eContainer();
                 final ActorInstance peer_ai = ((ActorInstance) _eContainer);
                 final int peer_thread = peer_ai.getThreadId();
-                boolean _notEquals = (thread != peer_thread);
-                if (_notEquals) {
+                if ((thread != peer_thread)) {
                   final String path = pi.getPath();
                   final String ppath = peer.getPath();
                   String _xifexpression = null;
                   int _compareTo = path.compareTo(ppath);
                   boolean _lessThan = (_compareTo < 0);
                   if (_lessThan) {
-                    String _plus = (path + " and ");
-                    String _plus_1 = (_plus + ppath);
-                    _xifexpression = _plus_1;
+                    _xifexpression = ((path + " and ") + ppath);
                   } else {
-                    String _plus_2 = (ppath + " and ");
-                    String _plus_3 = (_plus_2 + path);
-                    _xifexpression = _plus_3;
+                    _xifexpression = ((ppath + " and ") + path);
                   }
                   final String pair = _xifexpression;
                   boolean _contains = found.contains(pair);
                   boolean _not = (!_contains);
                   if (_not) {
                     found.add(pair);
-                    String _plus_4 = (pair + ": data ports placed on different threads (not supported yet)");
                     InterfaceItem _interfaceItem = pi.getInterfaceItem();
                     InterfaceItem _interfaceItem_1 = pi.getInterfaceItem();
                     EStructuralFeature _eContainingFeature = _interfaceItem_1.eContainingFeature();
-                    this.diagnostician.error(_plus_4, _interfaceItem, _eContainingFeature);
+                    this.diagnostician.error((pair + ": data ports placed on different threads (not supported yet)"), _interfaceItem, _eContainingFeature);
                   }
                 }
               }

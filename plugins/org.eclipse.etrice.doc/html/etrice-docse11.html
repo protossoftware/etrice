@@ -4,62 +4,99 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 3</title> 
+<head><title>Dynamic Actors 2</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2013-11-25 18:01:00" /> 
+<meta name="date" content="2014-03-18 18:29:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 176--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 129--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse12.html" >next</a>] [<a 
 href="etrice-docse10.html" >prev</a>] [<a 
 href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse11.html">tail</a>] [<a 
 href="etrice-docch3.html#etrice-docse11.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
- id="x16-710003.3"></a>Dynamic Actors 3</h3>
-<!--l. 178--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors3</span>.
-</p><!--l. 180--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x16-750003.2"></a>Dynamic Actors 2</h3>
+<!--l. 131--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors2</span>.
+</p><!--l. 133--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.3.1   </span> <a 
- id="x16-720003.3.1"></a>Purpose</h4>
-<!--l. 182--><p class="noindent" >The example demonstrates the usage of an optional actor array. It is shown that several actor classes derived from the type of
-the optional actor reference can be created as array members. The array members can be destroyed in arbitrary order and the
-array size grows and shrinks as appropriate.
-</p><!--l. 186--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
+ id="x16-760003.2.1"></a>Purpose</h4>
+<!--l. 135--><p class="noindent" >A modified version of <span 
+class="ec-lmtt-10">dynamicactors1 </span>is used to analyze eventual memory leaks of the application.
+</p><!--l. 137--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.3.2   </span> <a 
- id="x16-730003.3.2"></a>Details</h4>
-<!--l. 188--><p class="noindent" >This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a replicated
-optional actor (or array of optional actors if you wish). The port of the <span 
-class="ec-lmtt-10">Container </span>was also changed to a replicated port. All
-replication factors in this example are of arbitrary multiplicity (*). The sizes vary dynamically and are unbound as far as the
-model is concerned.
-</p><!--l. 193--><p class="noindent" >The behavior was changed to the following: Two instances of different classes are created as members of this array and both
-are deleted and one is created again. The replicated port is used to send (broadcast) messages to the optional
-actors.
-</p><!--l. 197--><p class="noindent" >
-</p>
-<h4 class="subsectionHead"><span class="titlemark">3.3.3   </span> <a 
- id="x16-740003.3.3"></a>Noteworthy</h4>
-     <ul class="itemize1">
-     <li class="itemize">the generated MSC <span 
-class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
+<h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
+ id="x16-770003.2.2"></a>Details</h4>
+<!--l. 139--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
+</p><!--l. 142--><p class="noindent" >
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x16-77002x1">create an instance of <span 
+class="ec-lmtt-10">Optional2</span>
      </li>
-     <li class="itemize">careful inspection of the console output reveals that objects are created and destroyed as expected</li></ul>
+     <li 
+  class="enumerate" id="x16-77004x2">destroy the instance
+     </li>
+     <li 
+  class="enumerate" id="x16-77006x3">create an instance of <span 
+class="ec-lmtt-10">Optional1</span>
+     </li>
+     <li 
+  class="enumerate" id="x16-77008x4">destroy the instance</li></ol>
+<!--l. 149--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
+</p><!--l. 151--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
+analyzed using <span 
+class="ec-lmtt-10">JConsole </span>(which is a part of the Java6 distribution) to dump the heap and <a 
+href="http://www.eclipse.org/mat/" ><span 
+class="ec-lmtt-10">org.eclipse.mat</span></a> to analyze
+it.
+</p><!--l. 156--><p class="noindent" >The measured total execution time on a Intel Core 2 Duo at 2.66 GHz was 110 ms. This corresponds to about 370
+<span 
+class="lmmi-10">&#x03BC;</span>s.
+</p><!--l. 159--><p class="noindent" >The result of the heap analysis for <span 
+class="ec-lmtt-10">org.eclipse.etrice.* </span>objects is listed in figure <a 
+href="#x16-770092">3.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
+the retained heap size indicate that the application has no memory leak.
+</p>
+<hr class="figure" /><div class="figure" 
+>
                                                                                             
                                                                                             
-<!--l. 204--><div class="crosslinks"><p class="noindent">[<a 
+<a 
+ id="x16-770092"></a>
+                                                                                            
+                                                                                            
+<!--l. 163--><p class="noindent" ><img 
+src="images/039-DynAct2-HeapAnalysis.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;3.2: </span><span  
+class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x16-770092 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
+ id="x16-780003.2.3"></a>Noteworthy</h4>
+     <ul class="itemize1">
+     <li class="itemize">Calling the garbage collector every time before the free memory is dumped costs a significant amount of time
+     and the execution time is increased to the order of seconds.
+     </li>
+     <li class="itemize">The measured free memory is close to constant. Only a small step is observed which wasn&#8217;t analyzed further.</li></ul>
+                                                                                            
+                                                                                            
+<!--l. 176--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse12.html" >next</a>] [<a 
 href="etrice-docse10.html" >prev</a>] [<a 
 href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="etrice-docse11.html" >front</a>] [<a 
 href="etrice-docch3.html#etrice-docse11.html" >up</a>] </p></div>
-<!--l. 204--><p class="noindent" ><a 
+<!--l. 176--><p class="noindent" ><a 
  id="tailetrice-docse11.html"></a> </p> 
 </body></html> 

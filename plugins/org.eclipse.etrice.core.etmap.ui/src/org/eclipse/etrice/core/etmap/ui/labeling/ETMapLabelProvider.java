@@ -15,6 +15,7 @@ package org.eclipse.etrice.core.etmap.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.etrice.core.etmap.eTMap.Import;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
+import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 import org.eclipse.jface.resource.FontDescriptor;
@@ -25,6 +26,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
 import org.eclipse.xtext.ui.label.StylerFactory;
  
+
 import com.google.inject.Inject;
 
 /**
@@ -45,6 +47,26 @@ public class ETMapLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
+	String image(MappingModel mdl) {
+		return "etmap_MappingModel.png";
+	}
+
+	String image(Import mdl) {
+		return "etmap_Import.png";
+	}
+
+	String image(SubSystemMapping mdl) {
+		return "etmap_SubSystemMapping.png";
+	}
+
+	String image(Mapping mdl) {
+		return "etmap_Mapping.png";
+	}
+
+	String image(ThreadMapping mdl) {
+		return "etmap_ThreadMapping.png";
+	}
+	
 	String text(Mapping m) {
 		return "Mapping "+m.getLogicalSys().getName()+" -> "+m.getPhysicalSys().getName();
 	}

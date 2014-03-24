@@ -13,7 +13,6 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
@@ -53,35 +52,28 @@ public class GenericActorClassGenerator {
     List<Port> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {
-      List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
-      _xifexpression = _endPorts;
+      _xifexpression = RoomHelpers.getEndPorts(ac);
     } else {
-      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
-      _xifexpression = _allEndPorts;
+      _xifexpression = RoomHelpers.getAllEndPorts(ac);
     }
     final List<Port> endPorts = _xifexpression;
     List<SAP> _xifexpression_1 = null;
     boolean _usesInheritance_1 = this.langExt.usesInheritance();
     if (_usesInheritance_1) {
-      EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-      _xifexpression_1 = _serviceAccessPoints;
+      _xifexpression_1 = ac.getServiceAccessPoints();
     } else {
-      List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
-      _xifexpression_1 = _allSAPs;
+      _xifexpression_1 = RoomHelpers.getAllSAPs(ac);
     }
     final List<SAP> strSAPs = _xifexpression_1;
     List<ServiceImplementation> _xifexpression_2 = null;
     boolean _usesInheritance_2 = this.langExt.usesInheritance();
     if (_usesInheritance_2) {
-      EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      _xifexpression_2 = _serviceImplementations;
+      _xifexpression_2 = ac.getServiceImplementations();
     } else {
-      List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
-      _xifexpression_2 = _allServiceImplementations;
+      _xifexpression_2 = RoomHelpers.getAllServiceImplementations(ac);
     }
     final List<ServiceImplementation> svcImpls = _xifexpression_2;
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
-    final ArrayList<Pair<String,String>> list = _arrayList;
+    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
     for (final Port ep : endPorts) {
       String _name = ep.getName();
       String _plus = ("IFITEM_" + _name);
@@ -116,8 +108,7 @@ public class GenericActorClassGenerator {
   
   public String genInterfaceItemConstantsForOptionalActor(final ActorClass ac) {
     final List<Port> ports = RoomHelpers.getAllInterfacePorts(ac);
-    ArrayList<Pair<String,String>> _arrayList = new ArrayList<Pair<String, String>>();
-    final ArrayList<Pair<String,String>> list = _arrayList;
+    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
     Iterable<Indexed<Port>> _indexed = Indexed.<Port>indexed(ports);
     for (final Indexed<Port> ep : _indexed) {
       Port _value = ep.getValue();

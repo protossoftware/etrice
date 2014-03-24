@@ -31,6 +31,9 @@ public interface IMessageService extends IRTObject, IMessageReceiver, Runnable {
 	void addMessageReceiver(IMessageReceiver receiver);
 	void removeMessageReceiver(IMessageReceiver receiver);
 	
+	void addPollingMessageReceiver(IMessageReceiver receiver);
+	void removePollingMessageReceiver(IMessageReceiver receiver);
+	
 	/**
 	 * set the thread of this service
 	 * (also sets the thread priority)

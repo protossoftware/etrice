@@ -122,8 +122,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.EVENT_DRIVEN);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
         }
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
@@ -138,7 +137,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             _and = false;
           } else {
             boolean _isConjugated = p.isConjugated();
-            _and = (_equals && _isConjugated);
+            _and = _isConjugated;
           }
           return Boolean.valueOf(_and);
         }
@@ -156,7 +155,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           } else {
             boolean _isConjugated = p.isConjugated();
             boolean _not = (!_isConjugated);
-            _and = (_equals && _not);
+            _and = _not;
           }
           return Boolean.valueOf(_and);
         }
@@ -175,21 +174,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _and_2 = false;
       } else {
         boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
-        _and_2 = (_isEmpty && _isEmpty_1);
+        _and_2 = _isEmpty_1;
       }
       if (!_and_2) {
         _and_1 = false;
       } else {
         List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
         boolean _isEmpty_2 = _allSAPs.isEmpty();
-        _and_1 = (_and_2 && _isEmpty_2);
+        _and_1 = _isEmpty_2;
       }
       if (!_and_1) {
         _and = false;
       } else {
         List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
         boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
-        _and = (_and_1 && _isEmpty_3);
+        _and = _isEmpty_3;
       }
       boolean _not = (!_and);
       if (_not) {
@@ -197,7 +196,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       } else {
         GlobalGeneratorSettings _settings = Main.getSettings();
         boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        _or = (_not || _generateMSCInstrumentation);
+        _or = _generateMSCInstrumentation;
       }
       final boolean hasConstData = _or;
       boolean _and_3 = false;
@@ -209,20 +208,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
       } else {
         List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
         boolean _isEmpty_5 = _allAttributes.isEmpty();
-        _and_5 = (_isEmpty_4 && _isEmpty_5);
+        _and_5 = _isEmpty_5;
       }
       if (!_and_5) {
         _and_4 = false;
       } else {
         StateGraph _stateMachine = xpac.getStateMachine();
         boolean _isEmpty_6 = RoomHelpers.isEmpty(_stateMachine);
-        _and_4 = (_and_5 && _isEmpty_6);
+        _and_4 = _isEmpty_6;
       }
       if (!_and_4) {
         _and_3 = false;
       } else {
-        boolean _not_1 = (!hasConstData);
-        _and_3 = (_and_4 && _not_1);
+        _and_3 = (!hasConstData);
       }
       final boolean hasVarData = (!_and_3);
       StringConcatenation _builder = new StringConcatenation();
@@ -328,10 +326,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t");
                   _builder.append("const ");
                   String _portClassName = this._roomExtensions.getPortClassName(ep);
-                  _builder.append(_portClassName, "	");
+                  _builder.append(_portClassName, "\t");
                   _builder.append(" ");
                   String _name_4 = ep.getName();
-                  _builder.append(_name_4, "	");
+                  _builder.append(_name_4, "\t");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 }
@@ -352,10 +350,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t");
                   _builder.append("const ");
                   String _portClassName_1 = this._roomExtensions.getPortClassName(ep_1);
-                  _builder.append(_portClassName_1, "	");
+                  _builder.append(_portClassName_1, "\t");
                   _builder.append(" ");
                   String _name_5 = ep_1.getName();
-                  _builder.append(_name_5, "	");
+                  _builder.append(_name_5, "\t");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 }
@@ -372,10 +370,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               _builder.append("const ");
               String _portClassName_2 = this._roomExtensions.getPortClassName(sap);
-              _builder.append(_portClassName_2, "	");
+              _builder.append(_portClassName_2, "\t");
               _builder.append(" ");
               String _name_6 = sap.getName();
-              _builder.append(_name_6, "	");
+              _builder.append(_name_6, "\t");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
             }
@@ -395,7 +393,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t");
                   _builder.append("const etReplPort ");
                   String _name_7 = ep_2.getName();
-                  _builder.append(_name_7, "	");
+                  _builder.append(_name_7, "\t");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 }
@@ -414,7 +412,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("const etReplPort ");
               SPP _spp = svc.getSpp();
               String _name_8 = _spp.getName();
-              _builder.append(_name_8, "	");
+              _builder.append(_name_8, "\t");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
             }
@@ -433,8 +431,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
         boolean _isEmpty_7 = RoomHelpers.isEmpty(_stateMachine_1);
-        boolean _not_2 = (!_isEmpty_7);
-        if (_not_2) {
+        boolean _not_1 = (!_isEmpty_7);
+        if (_not_1) {
           _builder.newLine();
           CharSequence _genHeaderConstants = this._stateMachineGen.genHeaderConstants(xpac);
           _builder.append(_genHeaderConstants, "");
@@ -456,7 +454,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               _builder.append("const ");
               String _name_11 = ac.getName();
-              _builder.append(_name_11, "	");
+              _builder.append(_name_11, "\t");
               _builder.append("_const* const constData;");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -474,10 +472,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 if (_equals_2) {
                   _builder.append("\t");
                   String _portClassName_3 = this._roomExtensions.getPortClassName(ep_3);
-                  _builder.append(_portClassName_3, "	");
+                  _builder.append(_portClassName_3, "\t");
                   _builder.append(" ");
                   String _name_12 = ep_3.getName();
-                  _builder.append(_name_12, "	");
+                  _builder.append(_name_12, "\t");
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
                 }
@@ -489,20 +487,20 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(ac);
           CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes_1);
-          _builder.append(_attributes, "	");
+          _builder.append(_attributes, "\t");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.newLine();
           {
             StateGraph _stateMachine_2 = xpac.getStateMachine();
             boolean _isEmpty_8 = RoomHelpers.isEmpty(_stateMachine_2);
-            boolean _not_3 = (!_isEmpty_8);
-            if (_not_3) {
+            boolean _not_2 = (!_isEmpty_8);
+            if (_not_2) {
               _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");
               CharSequence _genDataMembers = this._stateMachineGen.genDataMembers(xpac);
-              _builder.append(_genDataMembers, "	");
+              _builder.append(_genDataMembers, "\t");
               _builder.newLineIfNotEmpty();
             }
           }
@@ -554,7 +552,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (dataDriven) {
           _or_1 = true;
         } else {
-          _or_1 = (dataDriven || async);
+          _or_1 = async;
         }
         if (_or_1) {
           _builder.append("void ");
@@ -582,7 +580,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -601,7 +599,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (async) {
         _or = true;
       } else {
-        _or = (async || eventDriven);
+        _or = eventDriven;
       }
       final boolean handleEvents = _or;
       StringConcatenation _builder = new StringConcatenation();
@@ -684,7 +682,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
       String _name_3 = ac.getName();
-      _builder.append(_name_3, "	");
+      _builder.append(_name_3, "\t");
       _builder.append("\", \"init\")");
       _builder.newLineIfNotEmpty();
       {
@@ -694,7 +692,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (_not_1) {
           _builder.append("\t");
           CharSequence _genInitialization = this._stateMachineGen.genInitialization(xpac);
-          _builder.append(_genInitialization, "	");
+          _builder.append(_genInitialization, "\t");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -713,7 +711,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
       String _name_5 = ac.getName();
-      _builder.append(_name_5, "	");
+      _builder.append(_name_5, "\t");
       _builder.append("\", \"_receiveMessage\")");
       _builder.newLineIfNotEmpty();
       {
@@ -726,7 +724,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           String _name_6 = ac.getName();
           String _operationScope = this.langExt.operationScope(_name_6, false);
-          _builder.append(_operationScope, "	");
+          _builder.append(_operationScope, "\t");
           _builder.append("receiveEvent(self");
           {
             if (handleEvents) {
@@ -750,7 +748,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         if (dataDriven) {
           _or_1 = true;
         } else {
-          _or_1 = (dataDriven || async);
+          _or_1 = async;
         }
         if (_or_1) {
           _builder.append("void ");
@@ -764,7 +762,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
           String _name_9 = ac.getName();
-          _builder.append(_name_9, "	");
+          _builder.append(_name_9, "\t");
           _builder.append("\", \"_execute\")");
           _builder.newLineIfNotEmpty();
           {
@@ -777,7 +775,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               String _name_10 = ac.getName();
               String _operationScope_1 = this.langExt.operationScope(_name_10, false);
-              _builder.append(_operationScope_1, "	");
+              _builder.append(_operationScope_1, "\t");
               _builder.append("receiveEvent(self");
               {
                 if (handleEvents) {
@@ -802,7 +800,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }

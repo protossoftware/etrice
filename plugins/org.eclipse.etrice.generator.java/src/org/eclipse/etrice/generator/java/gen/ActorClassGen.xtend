@@ -14,26 +14,27 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.HashMap
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.java.Main
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.ReferenceType
-import org.eclipse.etrice.core.room.Attribute
-import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
-import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
-import org.eclipse.etrice.core.room.ActorClass
-import java.util.HashMap
-import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.base.FileSystemHelpers
-import org.eclipse.etrice.core.room.EnumerationType
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -192,6 +193,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 				«ENDFOR»
 				
+				«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+					// activate polling for data-driven communication
+					RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).addPollingMessageReceiver(this);
+				«ENDIF»
+				
 				«IF ctor!=null»
 					
 					{
@@ -243,6 +249,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorDestroy(this);
 						«ENDIF»
+						«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+							RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);
+						«ENDIF»
 						super.destroy();
 					}
 				«ENDIF»
@@ -283,6 +292,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
 					«xpac.genStateMachine()»
+					«IF ac.commType == ActorCommunicationType::DATA_DRIVEN»
+						public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
+							handleSystemEvent(ifitem, evt, generic_data);
+						}
+					«ENDIF»
 				«ELSEIF xpac.stateMachine.empty»
 «««					no state machine in the super classes 
 					//--------------------- no state machine
@@ -293,6 +307,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 					public void executeInitTransition() {}
 				«ENDIF»
 			«ENDIF»
+			
+			«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+				@Override
+				public void receive(Message msg) {
+					receiveEvent(«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS»null, -1, null«ENDIF»);
+				}
+			«ENDIF»
+			
 			«IF Main::settings.generatePersistenceInterface»
 				
 				@Override

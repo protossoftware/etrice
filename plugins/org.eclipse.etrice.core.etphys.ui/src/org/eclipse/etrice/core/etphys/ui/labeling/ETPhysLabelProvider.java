@@ -14,7 +14,11 @@ package org.eclipse.etrice.core.etphys.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.etrice.core.etphys.eTPhys.Import;
+import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
+import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -24,6 +28,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
 import org.eclipse.xtext.ui.label.StylerFactory;
  
+
+
+
+
 import com.google.inject.Inject;
 
 /**
@@ -45,6 +53,50 @@ public class ETPhysLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
+	String image(PhysicalModel mdl) {
+		return "etphys_PhysicalModel.png";
+	}
+
+	String image(Import mdl) {
+		return "etphys_Import.png";
+	}
+
+	String image(NodeClass mdl) {
+		return "etphys_NodeClass.png";
+	}
+
+	String image(NodeRef mdl) {
+		return "etphys_NodeRef.png";
+	}
+
+	String image(PhysicalSystem mdl) {
+		return "etphys_PhysicalSystem.png";
+	}
+
+	String image(PhysicalThread mdl) {
+		return "etphys_PhysicalThread.png";
+	}
+
+	String image(RuntimeClass mdl) {
+		return "etphys_RuntimeClass.png";
+	}
+
+	String text(PhysicalModel mdl) {
+		return "PhysicalModel "+mdl.getName();
+	}
+
+	String text(NodeClass mdl) {
+		return "NodeClass "+mdl.getName();
+	}
+
+	String text(PhysicalSystem mdl) {
+		return "PhysicalSystem "+mdl.getName();
+	}
+
+	String text(PhysicalThread mdl) {
+		return "PhysicalThread "+mdl.getName();
+	}
+	
 	String text(RuntimeClass rc) {
 		return rc.getName()+"("+rc.getThreadModel().getLiteral()+")";
 	}

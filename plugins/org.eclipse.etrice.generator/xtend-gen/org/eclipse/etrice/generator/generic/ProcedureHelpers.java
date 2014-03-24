@@ -61,30 +61,19 @@ public class ProcedureHelpers {
    */
   public CharSequence userCode(final DataClass dc, final int id) {
     CharSequence _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(id,1)) {
-        _matched=true;
+    switch (id) {
+      case 1:
         String _deepUserCode1 = RoomHelpers.getDeepUserCode1(dc);
-        CharSequence _userCode = this.userCode(_deepUserCode1);
-        _switchResult = _userCode;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,2)) {
-        _matched=true;
+        _switchResult = this.userCode(_deepUserCode1);
+        break;
+      case 2:
         String _deepUserCode2 = RoomHelpers.getDeepUserCode2(dc);
-        CharSequence _userCode_1 = this.userCode(_deepUserCode2);
-        _switchResult = _userCode_1;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,3)) {
-        _matched=true;
+        _switchResult = this.userCode(_deepUserCode2);
+        break;
+      case 3:
         String _deepUserCode3 = RoomHelpers.getDeepUserCode3(dc);
-        CharSequence _userCode_2 = this.userCode(_deepUserCode3);
-        _switchResult = _userCode_2;
-      }
+        _switchResult = this.userCode(_deepUserCode3);
+        break;
     }
     return _switchResult;
   }
@@ -96,30 +85,19 @@ public class ProcedureHelpers {
    */
   public CharSequence userCode(final ProtocolClass pc, final int id) {
     CharSequence _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(id,1)) {
-        _matched=true;
+    switch (id) {
+      case 1:
         String _deepUserCode1 = RoomHelpers.getDeepUserCode1(pc);
-        CharSequence _userCode = this.userCode(_deepUserCode1);
-        _switchResult = _userCode;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,2)) {
-        _matched=true;
+        _switchResult = this.userCode(_deepUserCode1);
+        break;
+      case 2:
         String _deepUserCode2 = RoomHelpers.getDeepUserCode2(pc);
-        CharSequence _userCode_1 = this.userCode(_deepUserCode2);
-        _switchResult = _userCode_1;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id,3)) {
-        _matched=true;
+        _switchResult = this.userCode(_deepUserCode2);
+        break;
+      case 3:
         String _deepUserCode3 = RoomHelpers.getDeepUserCode3(pc);
-        CharSequence _userCode_2 = this.userCode(_deepUserCode3);
-        _switchResult = _userCode_2;
-      }
+        _switchResult = this.userCode(_deepUserCode3);
+        break;
     }
     return _switchResult;
   }
@@ -133,58 +111,36 @@ public class ProcedureHelpers {
     CharSequence _xifexpression = null;
     if (includeInherited) {
       CharSequence _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(id,1)) {
-          _matched=true;
+      switch (id) {
+        case 1:
           String _deepUserCode1 = RoomHelpers.getDeepUserCode1(ac);
-          CharSequence _userCode = this.userCode(_deepUserCode1);
-          _switchResult = _userCode;
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(id,2)) {
-          _matched=true;
+          _switchResult = this.userCode(_deepUserCode1);
+          break;
+        case 2:
           String _deepUserCode2 = RoomHelpers.getDeepUserCode2(ac);
-          CharSequence _userCode_1 = this.userCode(_deepUserCode2);
-          _switchResult = _userCode_1;
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(id,3)) {
-          _matched=true;
+          _switchResult = this.userCode(_deepUserCode2);
+          break;
+        case 3:
           String _deepUserCode3 = RoomHelpers.getDeepUserCode3(ac);
-          CharSequence _userCode_2 = this.userCode(_deepUserCode3);
-          _switchResult = _userCode_2;
-        }
+          _switchResult = this.userCode(_deepUserCode3);
+          break;
       }
       _xifexpression = _switchResult;
     } else {
       CharSequence _switchResult_1 = null;
-      boolean _matched_1 = false;
-      if (!_matched_1) {
-        if (Objects.equal(id,1)) {
-          _matched_1=true;
+      switch (id) {
+        case 1:
           DetailCode _userCode1 = ac.getUserCode1();
-          CharSequence _userCode_3 = this.userCode(_userCode1);
-          _switchResult_1 = _userCode_3;
-        }
-      }
-      if (!_matched_1) {
-        if (Objects.equal(id,2)) {
-          _matched_1=true;
+          _switchResult_1 = this.userCode(_userCode1);
+          break;
+        case 2:
           DetailCode _userCode2 = ac.getUserCode2();
-          CharSequence _userCode_4 = this.userCode(_userCode2);
-          _switchResult_1 = _userCode_4;
-        }
-      }
-      if (!_matched_1) {
-        if (Objects.equal(id,3)) {
-          _matched_1=true;
+          _switchResult_1 = this.userCode(_userCode2);
+          break;
+        case 3:
           DetailCode _userCode3 = ac.getUserCode3();
-          CharSequence _userCode_5 = this.userCode(_userCode3);
-          _switchResult_1 = _userCode_5;
-        }
+          _switchResult_1 = this.userCode(_userCode3);
+          break;
       }
       _xifexpression = _switchResult_1;
     }
@@ -198,8 +154,7 @@ public class ProcedureHelpers {
    */
   public CharSequence userCode(final DetailCode dc) {
     String _detailCode = RoomHelpers.getDetailCode(dc);
-    CharSequence _userCode = this.userCode(_detailCode);
-    return _userCode;
+    return this.userCode(_detailCode);
   }
   
   private CharSequence userCode(final String code) {
@@ -212,7 +167,7 @@ public class ProcedureHelpers {
       } else {
         boolean _isEmpty = code.isEmpty();
         boolean _not = (!_isEmpty);
-        _and = (_notEquals && _not);
+        _and = _not;
       }
       if (_and) {
         _builder.append("/*--------------------- begin user code ---------------------*/");
@@ -297,13 +252,11 @@ public class ProcedureHelpers {
     String _defaultValueLiteral = att.getDefaultValueLiteral();
     boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
     if (_notEquals) {
-      String _defaultValueLiteral_1 = att.getDefaultValueLiteral();
-      _xifexpression = _defaultValueLiteral_1;
+      _xifexpression = att.getDefaultValueLiteral();
     } else {
       RefableType _type = att.getType();
       DataType _type_1 = _type.getType();
-      String _defaultValue = this.languageExt.defaultValue(_type_1);
-      _xifexpression = _defaultValue;
+      _xifexpression = this.languageExt.defaultValue(_type_1);
     }
     final String dflt = _xifexpression;
     boolean _startsWith = dflt.startsWith("{");
@@ -332,15 +285,12 @@ public class ProcedureHelpers {
     boolean _while = _lessThan;
     while (_while) {
       {
-        String _plus_6 = (result + dflt);
-        result = _plus_6;
-        int _plus_7 = (i + 1);
-        i = _plus_7;
+        result = (result + dflt);
+        i = (i + 1);
         int _size_4 = att.getSize();
         boolean _lessThan_1 = (i < _size_4);
         if (_lessThan_1) {
-          String _plus_8 = (result + ", ");
-          result = _plus_8;
+          result = (result + ", ");
         }
       }
       int _size_4 = att.getSize();
@@ -391,12 +341,12 @@ public class ProcedureHelpers {
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
         String _memberAccess = this.languageExt.memberAccess();
-        _builder.append(_memberAccess, "	 ");
+        _builder.append(_memberAccess, "\t ");
         String _name = attribute.getName();
-        _builder.append(_name, "	 ");
+        _builder.append(_name, "\t ");
         _builder.append(" = ");
         String _name_1 = attribute.getName();
-        _builder.append(_name_1, "	 ");
+        _builder.append(_name_1, "\t ");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -408,9 +358,9 @@ public class ProcedureHelpers {
         _builder.append("\t");
         _builder.append("return ");
         String _memberAccess_1 = this.languageExt.memberAccess();
-        _builder.append(_memberAccess_1, "	");
+        _builder.append(_memberAccess_1, "\t");
         String _name_2 = attribute.getName();
-        _builder.append(_name_2, "	");
+        _builder.append(_name_2, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -563,8 +513,8 @@ public class ProcedureHelpers {
     _builder.append("\t");
     _builder.append("return ");
     String _memberAccess = this.languageExt.memberAccess();
-    _builder.append(_memberAccess, "	");
-    _builder.append(name, "	");
+    _builder.append(_memberAccess, "\t");
+    _builder.append(name, "\t");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -626,7 +576,7 @@ public class ProcedureHelpers {
             _and = false;
           } else {
             boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
+            _and = _isConstructor;
           }
           boolean _not = (!_and);
           if (_not) {
@@ -659,7 +609,7 @@ public class ProcedureHelpers {
             _and = false;
           } else {
             boolean _isConstructor = RoomHelpers.isConstructor(operation);
-            _and = (_usesInheritance && _isConstructor);
+            _and = _isConstructor;
           }
           boolean _not = (!_and);
           if (_not) {
@@ -671,7 +621,7 @@ public class ProcedureHelpers {
             AbstractGenerator _instance = AbstractGenerator.getInstance();
             DetailCode _detailCode = operation.getDetailCode();
             String _translatedCode = _instance.getTranslatedCode(_detailCode);
-            _builder.append(_translatedCode, "	");
+            _builder.append(_translatedCode, "\t");
             _builder.newLineIfNotEmpty();
             _builder.append("}");
             _builder.newLine();
@@ -689,8 +639,7 @@ public class ProcedureHelpers {
   public CharSequence operationsImplementation(final ActorClass ac) {
     EList<StandardOperation> _operations = ac.getOperations();
     String _name = ac.getName();
-    CharSequence _operationsImplementation = this.operationsImplementation(_operations, _name);
-    return _operationsImplementation;
+    return this.operationsImplementation(_operations, _name);
   }
   
   /**
@@ -699,8 +648,7 @@ public class ProcedureHelpers {
    */
   public String destructorCall(final String classname) {
     String _destructorName = this.languageExt.destructorName(classname);
-    String _plus = (_destructorName + "()");
-    return _plus;
+    return (_destructorName + "()");
   }
   
   /**
@@ -714,16 +662,14 @@ public class ProcedureHelpers {
     if (_isConstructor) {
       String _constructorName = this.languageExt.constructorName(classname);
       String _constructorReturnType = this.languageExt.constructorReturnType();
-      CharSequence _classOperationSignature = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
-      _xifexpression = _classOperationSignature;
+      _xifexpression = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
     } else {
       CharSequence _xifexpression_1 = null;
       boolean _isDestructor = RoomHelpers.isDestructor(operation);
       if (_isDestructor) {
         String _destructorName = this.languageExt.destructorName(classname);
         String _destructorReturnType = this.languageExt.destructorReturnType();
-        CharSequence _classOperationSignature_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
-        _xifexpression_1 = _classOperationSignature_1;
+        _xifexpression_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
       } else {
         String _name = operation.getName();
         EList<VarDecl> _arguments = operation.getArguments();
@@ -731,8 +677,7 @@ public class ProcedureHelpers {
         String _string = _BuildArgumentList.toString();
         RefableType _returnType = operation.getReturnType();
         String _dataTypeToString = this.dataTypeToString(_returnType);
-        CharSequence _classOperationSignature_2 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
-        _xifexpression_1 = _classOperationSignature_2;
+        _xifexpression_1 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
       }
       _xifexpression = _xifexpression_1;
     }
@@ -755,12 +700,10 @@ public class ProcedureHelpers {
         DataType _type = type.getType();
         String _typeName = this._typeHelpers.typeName(_type);
         String _pointerLiteral = this.languageExt.pointerLiteral();
-        String _plus = (_typeName + _pointerLiteral);
-        _xifexpression_1 = _plus;
+        _xifexpression_1 = (_typeName + _pointerLiteral);
       } else {
         DataType _type_1 = type.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type_1);
-        _xifexpression_1 = _typeName_1;
+        _xifexpression_1 = this._typeHelpers.typeName(_type_1);
       }
       _xifexpression = _xifexpression_1;
     }

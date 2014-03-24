@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.Import;
+import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
@@ -36,10 +37,12 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
+import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -202,7 +205,7 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 		return "actorInstanceMapping.gif";
 	}
 	String image(LogicalThread lt) {
-		return "LogicalThread.gif";
+		return "LogicalThread.png";
 	} 
 	
 	String image(AnnotationType at) {
@@ -219,6 +222,14 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String image(EnumLiteral lit) {
 		return "EnumLiteral.gif";
+	}
+	
+	String image(ProtocolSemantics ps) {
+		return "ProtocolSemantics.png";
+	}
+	
+	String image(SemanticsRule ps) {
+		return "SemanticsRule.png";
 	}
 	
 	// custom labels
@@ -372,6 +383,17 @@ public class RoomLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text (EnumLiteral lit) {
 		return lit.getName()+" = "+lit.getLiteralValue();		
+	}
+	
+	String text(ProtocolSemantics ps) {
+		return "ProtocolSemantics";
+	}
+	
+	String text(SemanticsRule rule) {
+		if (rule instanceof InSemanticsRule)
+			return "in: "+rule.getMsg();
+		else
+			return "out: "+rule.getMsg();
 	}
 	
 	private Styler getKeywordStyler() {

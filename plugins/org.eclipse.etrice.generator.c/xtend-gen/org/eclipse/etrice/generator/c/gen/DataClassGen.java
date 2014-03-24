@@ -130,7 +130,7 @@ public class DataClassGen {
     _builder.append("\t");
     List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
     CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
-    _builder.append(_attributes, "	");
+    _builder.append(_attributes, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("} ");
     String _name_1 = dc.getName();
@@ -245,7 +245,7 @@ public class DataClassGen {
     _builder.append("\t");
     _builder.append("memcpy(target, source, sizeof(");
     String _name_5 = dc.getName();
-    _builder.append(_name_5, "	");
+    _builder.append(_name_5, "\t");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
