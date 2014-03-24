@@ -10,7 +10,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="config"
-              icon="icons/config_icon.gif"
+              icon="icons/Config_doc.ico"
               id="org.eclipse.etrice.core.Config"
               name="Config Editor">
         </editor>

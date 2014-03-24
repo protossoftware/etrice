@@ -4,7 +4,29 @@
 package org.eclipse.etrice.core.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.etrice.core.config.ActorClassConfig;
+import org.eclipse.etrice.core.config.ActorInstanceConfig;
+import org.eclipse.etrice.core.config.AttrClassConfig;
+import org.eclipse.etrice.core.config.AttrInstanceConfig;
+import org.eclipse.etrice.core.config.ConfigModel;
+import org.eclipse.etrice.core.config.DynamicConfig;
+import org.eclipse.etrice.core.config.Import;
+import org.eclipse.etrice.core.config.PortClassConfig;
+import org.eclipse.etrice.core.config.PortInstanceConfig;
+import org.eclipse.etrice.core.config.ProtocolClassConfig;
+import org.eclipse.etrice.core.config.RefPath;
+import org.eclipse.etrice.core.config.SubSystemConfig;
+import org.eclipse.etrice.core.config.util.ConfigUtil;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.ui.label.StylerFactory;
 
 import com.google.inject.Inject;
 
@@ -15,20 +37,131 @@ import com.google.inject.Inject;
  */
 public class ConfigLabelProvider extends DefaultEObjectLabelProvider {
 
+	private static final String KEYWORD_COLOR = "KEYWORD_COLOR";
+	
+	@Inject
+	private StylerFactory stylerFactory;
+	private Styler keywordStyler = null;
+
 	@Inject
 	public ConfigLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+		
+		JFaceResources.getColorRegistry().put(KEYWORD_COLOR, new RGB(50, 50, 50));
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	String image(ConfigModel mdl) {
+		return "Config_ConfigModel.png";
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+
+	String image(Import mdl) {
+		return "Config_Import.png";
+	}
+
+	String image(ActorClassConfig mdl) {
+		return "Config_ActorClassConfig.png";
+	}
+
+	String image(ActorInstanceConfig mdl) {
+		return "Config_ActorInstanceConfig.png";
+	}
+
+	String image(AttrClassConfig mdl) {
+		return "Config_AttrClassConfig.png";
+	}
+
+	String image(AttrInstanceConfig mdl) {
+		return "Config_AttrInstanceConfig.png";
+	}
+
+	String image(DynamicConfig mdl) {
+		return "Config_DynamicConfig.png";
+	}
+
+	String image(PortClassConfig mdl) {
+		return "Config_PortClassConfig.png";
+	}
+
+	String image(PortInstanceConfig mdl) {
+		return "Config_PortInstanceConfig.png";
+	}
+
+	String image(ProtocolClassConfig mdl) {
+		return "Config_ProtocolClassConfig.png";
+	}
+
+	String image(SubSystemConfig mdl) {
+		return "Config_SubSystemConfig.png";
+	}
+
+	// texts
+
+
+	String text(ConfigModel mdl) {
+		return "ConfigModel "+mdl.getName();
+	}
+	
+	StyledString text(Import im) {
+		if (im.getImportedNamespace()==null) {
+			StyledString txt = new StyledString("import model "+im.getImportURI());
+			txt.setStyle(0, 12, getKeywordStyler());
+			return txt;
+		}
+		else {
+			StyledString txt = new StyledString("import ns "+im.getImportedNamespace());
+			txt.setStyle(0, 9, getKeywordStyler());
+			return txt;
+		}
+	}
+
+	String text(ActorClassConfig mdl) {
+		return "Config of ActorClass "+mdl.getActor().getName();
+	}
+
+	String text(ActorInstanceConfig mdl) {
+		ActorContainerClass root = mdl.getSubSystem().getType();
+		RefPath path = mdl.getPath();
+		ActorRef ref = ConfigUtil.getLastActorRef(root, path);
+		return "Config of ActorInstance "+ConfigUtil.getPath(mdl)+" ("+ref.getType().getName()+")";
+	}
+
+	String text(AttrClassConfig mdl) {
+		return "Config of Attribute "+mdl.getAttribute().getName();
+	}
+
+	String text(AttrInstanceConfig mdl) {
+		return "Config of Attribute "+mdl.getAttribute().getName();
+	}
+
+	String text(DynamicConfig mdl) {
+		return "Dynamic Config";
+	}
+
+	String text(PortClassConfig mdl) {
+		ProtocolClassConfig pcc = (ProtocolClassConfig) mdl.eContainer();
+		String kind = (mdl==pcc.getRegular()) ? "regular" : "conjugated";
+		return "Config of "+kind+" PortClass "+pcc.getProtocol().getName();
+	}
+
+	String text(PortInstanceConfig mdl) {
+		return "Config of Port Instance "+mdl.getItem().getName();
+	}
+
+	String text(ProtocolClassConfig mdl) {
+		return "Config of Protocol Class "+mdl.getProtocol().getName();
+	}
+
+	String text(SubSystemConfig mdl) {
+		return "Config of SubSystem "+mdl.getSubSystem().getName();
+	}
+
+	
+	private Styler getKeywordStyler() {
+		if (keywordStyler==null) {
+			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
+			FontDescriptor boldFont = font.setStyle(SWT.BOLD);
+			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null);
+		}
+		return keywordStyler;
+	}
 }

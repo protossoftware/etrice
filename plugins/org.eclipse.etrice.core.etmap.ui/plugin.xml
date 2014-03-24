@@ -10,7 +10,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="etmap"
-              icon="icons/etmap.gif"
+              icon="icons/etmap_doc.ico"
               id="org.eclipse.etrice.core.etmap.ETMap"
               name="ETMap Editor">
         </editor>

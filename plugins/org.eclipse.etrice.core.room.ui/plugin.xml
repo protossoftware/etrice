@@ -11,7 +11,7 @@
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="room"
-              icon="icons/etrice_doc16.ico"
+              icon="icons/Room_doc.ico"
               id="org.eclipse.etrice.core.Room"
               name="Room Editor">
         </editor>
