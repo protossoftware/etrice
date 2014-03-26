@@ -39,6 +39,12 @@ void etTimeHelpers_add(etTime *first, const etTime* second){
 	normalize(first);
 }
 
+void etTimeHelpers_copy(const etTime* source, etTime* target){
+	target->sec = source->sec;
+	target->nSec = source->nSec;
+}
+
+
 etInt32 etTimeHelpers_convertToMSec(const etTime *time){
 	return time->sec * 1000 + time->nSec / 1000000;
 }

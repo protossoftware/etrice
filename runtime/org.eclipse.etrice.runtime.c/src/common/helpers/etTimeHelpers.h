@@ -29,7 +29,7 @@
  * \param self the this pointer
  * \param subtractValue the time to be subtracted
  */
-void etTime_subtract(etTime *self, const etTime* subtractValue);
+void etTimeHelpers_subtract(etTime *self, const etTime* subtractValue);
 
 /**
  * computes the sum of two times
@@ -37,7 +37,15 @@ void etTime_subtract(etTime *self, const etTime* subtractValue);
  * \param self the this pointer
  * \param addValue the time to be added
  */
-void etTime_add(etTime *self, const etTime* addValue);
+void etTimeHelpers_add(etTime *self, const etTime* addValue);
+
+/**
+ * copies time from source to target
+ *
+ * \param source source of values to copy from
+ * \param target target to copy to
+ */
+void etTimeHelpers_copy(const etTime* source, etTime* target);
 
 /**
  * convert a time to milliseconds
