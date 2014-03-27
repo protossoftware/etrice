@@ -216,7 +216,7 @@ class NodeGen {
 		static void «clsname»_startMessageServices(void) {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "startMessageServices")
 			
-			«FOR thread: threads»
+			«FOR thread: threads.sortBy[getPrio].reverse»
 				etMessageService_start(&msgService_«thread.name»);
 			«ENDFOR»
 			
