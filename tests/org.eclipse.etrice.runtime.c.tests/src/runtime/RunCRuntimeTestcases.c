@@ -39,13 +39,13 @@ void RunCRuntimeTestcases(void){
 	etMSCLogger_open("tmp/testlog", "test.log");
 	etUnit_open("tmp/testlog","TestCRuntime");
 
-	TestEtQueue_runSuite();
-	TestEtMemory_runSuite();
-	TestEtMessage_runSuite();
-	TestEtMessageQueue_runSuite();
-	TestEtMessageService_runSuite();
-	TestEtUnit_runSuite();
-	TestEtTimer_runSuite();
+//	TestEtQueue_runSuite();
+//	TestEtMemory_runSuite();
+//	TestEtMessage_runSuite();
+//	TestEtMessageQueue_runSuite();
+//	TestEtMessageService_runSuite();
+//	TestEtUnit_runSuite();
+//	TestEtTimer_runSuite();
 	TestEtTimeHelpers_runSuite();
 
 	etUnit_close();

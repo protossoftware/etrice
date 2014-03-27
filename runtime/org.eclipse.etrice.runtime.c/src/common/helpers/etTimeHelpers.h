@@ -24,6 +24,13 @@
 #include "osal/etTime.h"
 
 /**
+ * normalizes the time value to ensure that part is always 0 <= nSec < 1E9
+ *
+ * \param self the this pointer
+ */
+void etTimeHelpers_normalize(etTime* self);
+
+/**
  * computes the difference of two times
  *
  * \param self the this pointer
