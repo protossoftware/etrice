@@ -14,30 +14,43 @@
 
 #define _1E9	1000000000
 
-static void normalize(etTime* time) {
-	etInt32 f = time->nSec / _1E9;
-	if (f>0) {
-		time->sec += f;
-		time->nSec -= f*_1E9;
+void etTimeHelpers_normalize(etTime* time) {
+	if (time->nSec < 0){
+		/* precondition: -1e9 < nSec < 0 */
+		time->sec -= 1;
+		time->nSec += _1E9;
+		/* postcondition: 0<nSec<1e9 ==> no overflow possible */
 	}
-	else if (f<0) {
-		++f;
-		time->sec -= f;
-		time->nSec += f*_1E9;
+	else {
+		/* treat possible overflow */
+		if (time->nSec < _1E9){
+			/* no overflow ==> nothing to do */
+		}
+		else {
+			/* overflow ==> shift both values */
+			time->sec += 1;
+			time->nSec -= _1E9;
+		}
 	}
 }
 
 void etTimeHelpers_subtract(etTime *first, const etTime* second){
 	first->sec -= second->sec;
 	first->nSec -= second->nSec;
-	normalize(first);
+	etTimeHelpers_normalize(first);
 }
 
 void etTimeHelpers_add(etTime *first, const etTime* second){
 	first->sec += second->sec;
 	first->nSec += second->nSec;
-	normalize(first);
+	etTimeHelpers_normalize(first);
 }
+
+void etTimeHelpers_copy(const etTime* source, etTime* target){
+	target->sec = source->sec;
+	target->nSec = source->nSec;
+}
+
 
 etInt32 etTimeHelpers_convertToMSec(const etTime *time){
 	return time->sec * 1000 + time->nSec / 1000000;

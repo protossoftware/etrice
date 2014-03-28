@@ -63,7 +63,7 @@ class InstanceDiagramGen {
 	def private generate(Root root, SystemInstance sys) {
 		'''
 			digraph «sys.name» {
-				rankdir=TD;
+				rankdir=LR;
 				node [shape=box];
 				«sys.path.getPathName()» [label="«sys.name»\n(«sys.name»)" style=filled color=red];
 				«FOR ssi : sys.instances»

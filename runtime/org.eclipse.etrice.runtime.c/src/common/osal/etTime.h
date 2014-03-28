@@ -25,6 +25,9 @@
 
 /**
  * time definition composed by the number of seconds and the number of nano seconds
+ * negative values have only negative sec, nSec is always positive
+ * for nSec always holds and 0 <= nSec < 1E9 (1 second in nano seconds)
+ * all functions in etTimeHelpers also have those preconditions
  */
 typedef struct etTime {
 	etInt32 sec;		/**< seconds */
