@@ -59,17 +59,17 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	@Override
 	public String getAttributeGetter(Attribute att, String index, String orig) {
 		if (index==null)
-			return self+att.getName() + getOrigComment(orig);
+			return getTranslationSwitch(orig, self+att.getName());
 		else
-			return self+att.getName()+"["+index+"]"+getOrigComment(orig);
+			return getTranslationSwitch(orig, self+att.getName()+"["+index+"]");
 	}
 
 	@Override
 	public String getAttributeSetter(Attribute att, String index, String value, String orig) {
 		if (index==null)
-			return self+att.getName()+" = "+value + getOrigComment(orig);
+			return getTranslationSwitch(orig, self+att.getName()+" = "+value);
 		else
-			return self+att.getName()+"["+index+"] = "+value + getOrigComment(orig);
+			return getTranslationSwitch(orig, self+att.getName()+"["+index+"] = "+value);
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 		for (String arg : args) {
 			result.append(", "+arg);
 		}
-		result.append(")"+getOrigComment(orig));
-		return result.toString();
+		result.append(")");
+		return getTranslationSwitch(orig, result.toString());
 	}
 
 	@Override
@@ -105,30 +105,26 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 						else
 							result = roomExt.getPortClassName(p)+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
 					}
-					result += getOrigComment(orig);
 				}
 				else if (pc.getCommType()==CommunicationType.DATA_DRIVEN) {
 					if (p.isConjugated())
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_set(&(self->"+item.getName()+")"+argtext+")";
 					else
 						result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
-					result += getOrigComment(orig);
 				}
 			}
 		}
 		else if (item instanceof SAP) {
 			result = roomExt.getPortClassName(((SAP)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+argtext+")";
-			result += getOrigComment(orig);
 		}
 		else if (item instanceof SPP) {
 			if (index==null)
 				result = roomExt.getPortClassName(((SPP)item))+"_"+msg.getName()+"_broadcast(&self->constData->"+item.getName()+argtext+")";
 			else
 				result = roomExt.getPortClassName(((SPP)item))+"_"+msg.getName()+"(&self->constData->"+item.getName()+", "+index+argtext+")";
-			result += getOrigComment(orig);
 		}
 		
-		return result;
+		return getTranslationSwitch(orig, result);
 	}
 
 	@Override
@@ -137,9 +133,8 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 		if (item instanceof Port) {
 			Port p = (Port) item;
 			result = roomExt.getPortClassName(p)+"_"+msg.getName()+"_get(&(self->constData->"+item.getName()+"))";
-			result += getOrigComment(orig);
 		}
-		return result;
+		return getTranslationSwitch(orig, result);
 	}
 
 	@Override
@@ -154,10 +149,6 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 
 		return super.translateTag(tag, code);
 	}
-	
-	private String getOrigComment(String orig) {
-		return " /* ORIG: "+orig +" */";
-	}
 
 	@Override
 	public boolean translateEnums() {
@@ -167,7 +158,11 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	@Override
 	public String getEnumText(EnumLiteral literal) {
 		EnumerationType et = (EnumerationType) literal.eContainer();
-		return et.getName()+"_"+literal.getName()+getOrigComment(et.getName()+" dot "+literal.getName());
+		return getTranslationSwitch(et.getName()+" dot "+literal.getName(), et.getName()+"_"+literal.getName());
+	}
+	
+	private String getTranslationSwitch(String orig, String translated) {
+		return "\n#ifdef ET_USE_ORIG_CODE\n"+orig +"\n#else\n"+translated+"\n#endif\n";
 	}
 
 }
