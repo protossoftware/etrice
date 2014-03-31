@@ -63,7 +63,7 @@ import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/
 \end{lstlisting}
 
 Then we open the structure of \textit{Main} and add an actor reference \textit{timingSvc} of type \textit{ATimingService}.
-The we create a layer connection from \textit{pedLight} to \textit{timingSvc}.
+After that we create a layer connection from \textit{pedLight} to \textit{timingSvc}.
 
 \includegraphics[width=0.6\textwidth]{images/018-timingSvc.png}
 
@@ -81,7 +81,7 @@ import room.basic.service.tcp.* from "../../org.eclipse.etrice.modellib.java/mod
 \end{lstlisting}
 
 Then we can add the TCP client as \textit{socketClient}.
-As we see the TCP client hast two ports on its interface. One is for controlling the connection, the other one
+As we see the TCP client has two ports on its interface. One is for controlling the connection, the other one
 is used for the data. Therefore we add internal end ports to our actor and connect them
 (make sure to add the ports as conjugated):
 
