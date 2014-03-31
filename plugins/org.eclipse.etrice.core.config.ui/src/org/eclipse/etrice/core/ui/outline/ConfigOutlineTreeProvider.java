@@ -3,6 +3,9 @@
 */
 package org.eclipse.etrice.core.ui.outline;
 
+import org.eclipse.etrice.core.config.AttrClassConfig;
+import org.eclipse.etrice.core.config.AttrInstanceConfig;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
 /**
@@ -11,4 +14,23 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  */
 public class ConfigOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
+	protected boolean _isLeaf(AttrClassConfig att) {
+		return att.getAttributes().isEmpty();
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, AttrClassConfig att) {
+		for (AttrClassConfig child : att.getAttributes()) {
+			createNode(parentNode, child);
+		}
+	}
+	
+	protected boolean _isLeaf(AttrInstanceConfig att) {
+		return att.getAttributes().isEmpty();
+	}
+	
+	protected void _createChildren(IOutlineNode parentNode, AttrInstanceConfig att) {
+		for (AttrInstanceConfig child : att.getAttributes()) {
+			createNode(parentNode, child);
+		}
+	}
 }
