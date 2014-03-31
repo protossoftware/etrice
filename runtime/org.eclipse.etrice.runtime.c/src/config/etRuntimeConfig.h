@@ -21,8 +21,10 @@
 #ifndef ETGLOBALFLAGS_H_
 #define ETGLOBALFLAGS_H_
 
-/* flags for debugging */
+/* runner */
+#define ET_RUNNER_ACTIVATE
 
+/* flags for debugging */
 
 /* MSC logger */
 

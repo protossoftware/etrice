@@ -276,6 +276,7 @@ class NodeGen {
 		}
 		
 		void «clsname»_run(etBool runAsTest) {
+		#ifdef ET_RUNNER_ACTIVATE 
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "run")
 			
 			if (runAsTest) {
@@ -295,6 +296,7 @@ class NodeGen {
 			}
 			
 			ET_MSC_LOGGER_SYNC_EXIT
+		#endif	
 		}
 		
 		void «clsname»_stop(void){
