@@ -12,8 +12,12 @@
 
 package org.eclipse.etrice.runtime.java.messaging;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,12 +63,29 @@ public class MessageServiceController {
 	}
 	
 	public void start() {
+		Comparator<Thread> descendingPrioComparator = new Comparator<Thread>(){
+
+			@Override
+			public int compare(Thread o1, Thread o2) {
+				if(o1.getPriority() > o2.getPriority())
+					return -1;
+				if(o1.getPriority() < o2.getPriority())
+					return 1;
+				return 0;
+			}
+		};
+		
 		// start all message services
+		List<Thread> threads = new ArrayList<Thread>(messageServices.size());
 		for (IMessageService msgSvc : messageServices.values()){
 			Thread thread = new Thread(msgSvc, msgSvc.getName());
 			msgSvc.setThread(thread);
+			threads.add(thread);
+		}
+		
+		Collections.sort(threads, descendingPrioComparator);
+		for(Thread thread : threads){
 			thread.start();
-			// TODOTS: start in order of priorities
 		}
 		running = true;
 	}
