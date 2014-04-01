@@ -280,7 +280,7 @@ RoomModel room.basic.service.timing {
 		}
 	}
 	ExternalType tcb -> "etTimerControlBlock"
-	ExternalType targetTime -> "etTime"
+	ExternalType targetTime -> "etTime" default "{0,0}"
 }
 	
 	
