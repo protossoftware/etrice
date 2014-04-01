@@ -722,6 +722,8 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append("_run(etBool runAsTest) {");
       _builder.newLineIfNotEmpty();
+      _builder.append("#ifdef ET_RUNNER_ACTIVATE ");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
       _builder.append(clsname, "\t");
@@ -776,6 +778,8 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
+      _builder.newLine();
+      _builder.append("#endif\t");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
