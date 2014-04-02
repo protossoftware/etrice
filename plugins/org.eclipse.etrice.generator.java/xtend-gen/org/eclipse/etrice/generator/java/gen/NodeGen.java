@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -153,27 +154,7 @@ public class NodeGen {
             final String infopath = (_generationInfoPath + _path_1);
             final String file = this._javaExtensions.getJavaFileName(nr, ssi);
             this.checkDataPorts(ssi);
-            final HashSet<PhysicalThread> usedThreads = new HashSet<PhysicalThread>();
-            NodeClass _type = nr.getType();
-            EList<PhysicalThread> _threads = _type.getThreads();
-            for (final PhysicalThread thread : _threads) {
-              {
-                EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-                final Function1<ActorInstance,Boolean> _function_2 = new Function1<ActorInstance,Boolean>() {
-                  public Boolean apply(final ActorInstance ai) {
-                    ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-                    PhysicalThread _thread = _mappedThread.getThread();
-                    return Boolean.valueOf(Objects.equal(_thread, thread));
-                  }
-                };
-                final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_2);
-                boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  usedThreads.add(thread);
-                }
-              }
-            }
+            final Set<PhysicalThread> usedThreads = ETMapUtil.getUsedThreads(nr, ssi);
             CharSequence _generate = this.generate(root, ssi, wired, usedThreads);
             this.fileIO.generateFile("generating Node implementation", path, infopath, file, _generate);
             boolean _hasVariableService = this.dataConfigExt.hasVariableService(ssi);
@@ -221,7 +202,7 @@ public class NodeGen {
     return result;
   }
   
-  public CharSequence generate(final Root root, final SubSystemInstance comp, final WiredSubSystemClass wired, final HashSet<PhysicalThread> usedThreads) {
+  public CharSequence generate(final Root root, final SubSystemInstance comp, final WiredSubSystemClass wired, final Collection<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final SubSystemClass cc = comp.getSubSystemClass();

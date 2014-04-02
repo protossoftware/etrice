@@ -14,33 +14,34 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.Collection
+import java.util.HashMap
 import java.util.HashSet
+import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.java.Main
 
 import static extension org.eclipse.etrice.generator.base.Indexed.*
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
-import org.eclipse.etrice.core.room.ActorClass
-import com.google.common.collect.Sets
 import com.google.common.collect.Lists
-import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
-import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
-import java.util.HashMap
-import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
-import org.eclipse.etrice.core.etmap.util.ETMapUtil
-import org.eclipse.etrice.generator.base.FileSystemHelpers
+import com.google.common.collect.Sets
 
 @Singleton
 class NodeGen {
@@ -70,12 +71,7 @@ class NodeGen {
 					
 					checkDataPorts(ssi)
 					
-					val usedThreads = new HashSet<PhysicalThread>();
-					for (thread: nr.type.threads) {
-						val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
-						if (!instancesOnThread.empty)
-							usedThreads.add(thread)
-					}
+					val usedThreads = ETMapUtil::getUsedThreads(nr, ssi)
 					
 					fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, wired, usedThreads))
 					if (dataConfigExt.hasVariableService(ssi))
@@ -100,7 +96,7 @@ class NodeGen {
 		return result
 	}
 	
-	def generate(Root root, SubSystemInstance comp, WiredSubSystemClass wired, HashSet<PhysicalThread> usedThreads) {
+	def generate(Root root, SubSystemInstance comp, WiredSubSystemClass wired, Collection<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)

@@ -15,6 +15,7 @@ package org.eclipse.etrice.runtime.java.messaging;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 
@@ -47,15 +48,18 @@ public class MessageService extends AbstractMessageService {
 	
 	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name, int priority) {
 		super(parent, "MessageService_"+name, node, thread);
-		
+
+		// Java thread priority is limited to 1-10 and cannot be changed
+		// thus priorities from physical mapping are not generated
+		// priority = Thread.NORM_PRIORITY generated fixed
 		this.priority = priority;
 
-		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (1)"); 
-		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (10)"); 
+		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (" + "Thread.MIN_PRIORITY" + ")"); 
+		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (" + "Thread.MAX_PRIORITY" + ")"); 
 		
 		if(mode == ExecMode.MIXED || mode == ExecMode.POLLED){
 			pollingInterval = nsec;
-			pollingScheduler = Executors.newScheduledThreadPool(1);
+			pollingScheduler = Executors.newScheduledThreadPool(1, new PollingThreadFactory());
 			
 			assert pollingInterval > 0 : ("polling interval is 0 or negative");
 		}
@@ -186,6 +190,18 @@ public class MessageService extends AbstractMessageService {
 				Message msg = new Message(getMessageDispatcher().getAddress());
 				receive(msg);
 			} 
+		}
+		
+	}
+	
+	private class PollingThreadFactory implements ThreadFactory{
+
+		@Override
+		public Thread newThread(Runnable arg0) {
+			Thread thread = new Thread(arg0, getName()+"_PollingThread");
+			thread.setPriority(priority);
+			
+			return thread;
 		}
 		
 	}

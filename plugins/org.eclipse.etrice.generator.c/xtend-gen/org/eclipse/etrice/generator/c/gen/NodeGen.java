@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -138,27 +139,7 @@ public class NodeGen {
             final String infopath = (_generationInfoPath + _path_1);
             String file = this._cExtensions.getCHeaderFileName(nr, ssi);
             this.checkDataPorts(ssi);
-            final HashSet<PhysicalThread> usedThreads = new HashSet<PhysicalThread>();
-            NodeClass _type = nr.getType();
-            EList<PhysicalThread> _threads = _type.getThreads();
-            for (final PhysicalThread thread : _threads) {
-              {
-                EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-                final Function1<ActorInstance,Boolean> _function = new Function1<ActorInstance,Boolean>() {
-                  public Boolean apply(final ActorInstance ai) {
-                    ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-                    PhysicalThread _thread = _mappedThread.getThread();
-                    return Boolean.valueOf(Objects.equal(_thread, thread));
-                  }
-                };
-                final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function);
-                boolean _isEmpty = IterableExtensions.isEmpty(instancesOnThread);
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  usedThreads.add(thread);
-                }
-              }
-            }
+            final Set<PhysicalThread> usedThreads = ETMapUtil.getUsedThreads(nr, ssi);
             CharSequence _generateHeaderFile = this.generateHeaderFile(root, ssi);
             this.fileIO.generateFile("generating Node declaration", filepath, infopath, file, _generateHeaderFile);
             String _cSourceFileName = this._cExtensions.getCSourceFileName(nr, ssi);
@@ -277,7 +258,7 @@ public class NodeGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
+  private CharSequence generateSourceFile(final Root root, final SubSystemInstance ssi, final Collection<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
@@ -999,7 +980,7 @@ public class NodeGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateInstanceFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
+  private CharSequence generateInstanceFile(final Root root, final SubSystemInstance ssi, final Collection<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
@@ -2162,7 +2143,7 @@ public class NodeGen {
     return result;
   }
   
-  private CharSequence generateDispatcherFile(final Root root, final SubSystemInstance ssi, final HashSet<PhysicalThread> usedThreads) {
+  private CharSequence generateDispatcherFile(final Root root, final SubSystemInstance ssi, final Collection<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);

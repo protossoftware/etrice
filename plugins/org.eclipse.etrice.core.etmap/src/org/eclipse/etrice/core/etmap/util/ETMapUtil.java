@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -123,6 +124,15 @@ public class ETMapUtil {
 		String path = ai.getPath();
 		MappedThread thread = path2pthread.get(path);
 		return thread;
+	}
+	
+	public static Set<PhysicalThread> getUsedThreads(NodeRef nr, SubSystemInstance ssi){
+		Set<PhysicalThread> usedThreads = new HashSet<PhysicalThread>();
+		for(ActorInstance ai : ssi.getAllContainedInstances())
+			usedThreads.add(getMappedThread(ai).getThread());
+		usedThreads.retainAll(nr.getType().getThreads());
+		
+		return usedThreads;
 	}
 	
 	public static String dumpMappings() {

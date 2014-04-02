@@ -46,6 +46,7 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.room.EnumerationType
+import java.util.Collection
 
 @Singleton
 class NodeGen {
@@ -72,12 +73,7 @@ class NodeGen {
 				
 					checkDataPorts(ssi)
 					
-					val usedThreads = new HashSet<PhysicalThread>();
-					for (thread: nr.type.threads) {
-						val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)
-						if (!instancesOnThread.empty)
-							usedThreads.add(thread)
-					}
+					val usedThreads = ETMapUtil::getUsedThreads(nr, ssi)
 					
 					fileIO.generateFile("generating Node declaration", filepath, infopath, file, root.generateHeaderFile(ssi))
 					
@@ -137,7 +133,7 @@ class NodeGen {
 	'''
 	}
 	
-	def private generateSourceFile(Root root, SubSystemInstance ssi, HashSet<PhysicalThread> usedThreads) {
+	def private generateSourceFile(Root root, SubSystemInstance ssi, Collection<PhysicalThread> usedThreads) {
 	val nr = ETMapUtil::getNodeRef(ssi)
 	val ssc = ssi.subSystemClass
 	val clsname = nr.name+"_"+ssi.name
@@ -356,7 +352,7 @@ class NodeGen {
 	'''
 	}
 
-	def private generateInstanceFile(Root root, SubSystemInstance ssi, HashSet<PhysicalThread> usedThreads) {
+	def private generateInstanceFile(Root root, SubSystemInstance ssi, Collection<PhysicalThread> usedThreads) {
 	val nr = ETMapUtil::getNodeRef(ssi)
 	'''
 		/**
@@ -650,7 +646,7 @@ class NodeGen {
 		return result
 	}
 	
-	def private generateDispatcherFile(Root root, SubSystemInstance ssi, HashSet<PhysicalThread> usedThreads) {
+	def private generateDispatcherFile(Root root, SubSystemInstance ssi, Collection<PhysicalThread> usedThreads) {
 	val nr = ETMapUtil::getNodeRef(ssi)
 	val loggedPorts = ssi.loggedPorts
 	val logData = ssi.subSystemClass.annotations.isAnnotationPresent("DataLogging")
