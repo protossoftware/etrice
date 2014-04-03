@@ -83,6 +83,8 @@ public class DocGen {
     _builder.newLine();
     _builder.append("\\usepackage{graphicx}");
     _builder.newLine();
+    _builder.append("\\IfFileExists{../doc/userinputs.tex}{\\input{../doc/userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... ");
+    _builder.newLine();
     _builder.append("\\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}");
     _builder.newLine();
     _builder.append("\\usepackage{nonfloat}");

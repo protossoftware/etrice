@@ -56,6 +56,7 @@ class DocGen {
 	def private generateModelDoc(Root root, RoomModel model) {'''
 		\documentclass[titlepage]{article}
 		\usepackage{graphicx}
+		\IfFileExists{../doc/userinputs.tex}{\input{../doc/userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... 
 		\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}
 		\usepackage{nonfloat}
 		\parindent 0pt
