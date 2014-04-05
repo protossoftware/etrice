@@ -30,6 +30,7 @@ void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data)
 	int totalSize = offset+size;
 	etMessage* msg = NULL;
 	ET_MSC_LOGGER_SYNC_ENTRY("etPort", "sendMessage")
+	if(self->msgService == NULL) return;
 	msg = etMessageService_getMessageBuffer(self->msgService, totalSize);
 	if (msg!=NULL) {
 		msg->address = self->peerAddress;
