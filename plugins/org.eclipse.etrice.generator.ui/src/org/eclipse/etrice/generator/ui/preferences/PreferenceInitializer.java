@@ -21,6 +21,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.GEN_DIR, "src-gen");
 		store.setDefault(PreferenceConstants.GEN_INFO_DIR, "src-gen-info");
 		store.setDefault(PreferenceConstants.GEN_DOC_DIR, "doc-gen");
+		store.setDefault(PreferenceConstants.GEN_USE_TRANSLATION, true);
 	}
 
 }

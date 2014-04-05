@@ -12,6 +12,10 @@
 
 package org.eclipse.etrice.generator.ui.wizard
 
+import org.eclipse.ui.preferences.ScopedPreferenceStore
+import org.eclipse.core.runtime.preferences.InstanceScope
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants
+
 /**
  * @author Henrik Rentz-Reichert
  *
@@ -79,10 +83,13 @@ class ProjectFileFragments {
 	}
 	
 	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String baseName, String[] addLines) {
+		val prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+		val useTranslation = prefStore.getBoolean(PreferenceConstants::GEN_USE_TRANSLATION)
 		'''
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<launchConfiguration type="org.eclipse.etrice.generator.launch.«targetLanguage».launchConfigurationType">
 			<booleanAttribute key="MSC" value="true"/>
+			<booleanAttribute key="UseTranslation" value="«useTranslation»"/>
 			<listAttribute key="ModelFiles">
 			<listEntry value="${workspace_loc:«modelPath»/«baseName».etmap}"/>
 			</listAttribute>

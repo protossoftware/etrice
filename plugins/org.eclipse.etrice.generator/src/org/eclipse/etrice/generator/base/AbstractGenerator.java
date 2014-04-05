@@ -79,6 +79,7 @@ public abstract class AbstractGenerator {
 	public static final String OPTION_MSC = "-msc_instr";
 	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 	public static final String OPTION_DEBUG = "-debug";
+	public static final String OPTION_NOTRANSLATE = "-notranslate";
 
 	/**
 	 * constant used as return value of {@link #runGenerator())}
@@ -205,6 +206,7 @@ public abstract class AbstractGenerator {
 	 * The following options are recognized
 	 * <ul>
 	 * <li>{@value #OPTION_DEBUG}</li>
+	 * <li>{@value #OPTION_NOTRANSLATE}</li>
 	 * <li>{@value #OPTION_DOCUMENTATION}</li>
 	 * <li>{@value #OPTION_GEN_DIR}</li>
 	 * <li>{@value #OPTION_GEN_DOC_DIR}</li>
@@ -269,6 +271,9 @@ public abstract class AbstractGenerator {
 		}
 		else if (arg.equals(OPTION_MSC)) {
 			generatorSettings.setGenerateMSCInstrumentation(true);
+		}
+		else if (arg.equals(OPTION_NOTRANSLATE)) {
+			generatorSettings.setNoTranslation(true);
 		}
 		else if (arg.equals(OPTION_VERBOSE_RT)) {
 			generatorSettings.setGenerateWithVerboseOutput(true);
@@ -443,7 +448,9 @@ public abstract class AbstractGenerator {
 				return null;
 			}
 			
-			translateDetailCodes(gmRoot);
+			if (!generatorSettings.isNoTranslation()) {
+				translateDetailCodes(gmRoot);
+			}
 			
 			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = getResourceSet().createResource(genModelURI);
