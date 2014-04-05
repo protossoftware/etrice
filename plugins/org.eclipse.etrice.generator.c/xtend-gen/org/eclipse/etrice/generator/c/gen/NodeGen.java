@@ -544,7 +544,14 @@ public class NodeGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        for(final PhysicalThread thread_1 : threads) {
+        final Function1<PhysicalThread,Integer> _function_1 = new Function1<PhysicalThread,Integer>() {
+          public Integer apply(final PhysicalThread it) {
+            return Integer.valueOf(it.getPrio());
+          }
+        };
+        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Integer>sortBy(threads, _function_1);
+        List<PhysicalThread> _reverse = ListExtensions.<PhysicalThread>reverse(_sortBy);
+        for(final PhysicalThread thread_1 : _reverse) {
           _builder.append("\t");
           _builder.append("etMessageService_start(&msgService_");
           String _name_11 = thread_1.getName();
@@ -832,12 +839,12 @@ public class NodeGen {
           {
             ActorClass _actorClass = ai.getActorClass();
             EList<StandardOperation> _operations = _actorClass.getOperations();
-            final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+            final Function1<StandardOperation,Boolean> _function_2 = new Function1<StandardOperation,Boolean>() {
               public Boolean apply(final StandardOperation op) {
                 return Boolean.valueOf(op.isDestructor());
               }
             };
-            Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function_1);
+            Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function_2);
             boolean _isEmpty = IterableExtensions.isEmpty(_filter);
             boolean _not = (!_isEmpty);
             if (_not) {
@@ -919,12 +926,12 @@ public class NodeGen {
           {
             ActorClass _actorClass_3 = ai_1.getActorClass();
             EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
-            final Function1<StandardOperation,Boolean> _function_2 = new Function1<StandardOperation,Boolean>() {
+            final Function1<StandardOperation,Boolean> _function_3 = new Function1<StandardOperation,Boolean>() {
               public Boolean apply(final StandardOperation op) {
                 return Boolean.valueOf(RoomHelpers.isConstructor(op));
               }
             };
-            Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_2);
+            Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_3);
             boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
             boolean _not_1 = (!_isEmpty_1);
             if (_not_1) {

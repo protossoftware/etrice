@@ -117,43 +117,44 @@ public class DiagnosingModelObserver extends EContentAdapter {
 
 		// Inspect each child diagnostic
 		for (Diagnostic diagnostic : diagnostics.getChildren()) {
-
-			// for each child diagnostic, find the associated EObject
-			FeatureBasedDiagnostic featureBasedDiagnostic = (FeatureBasedDiagnostic) diagnostic;
-			EObject source = featureBasedDiagnostic.getSourceEObject();
-
-			EObject eObject = null;
-			if (source instanceof StateGraph) {
-				EStructuralFeature feature = featureBasedDiagnostic
-						.getFeature();
-				int index = featureBasedDiagnostic.getIndex();
-
-				if (!feature.isMany())
-					eObject = (EObject) source.eGet(feature);
-				else if (index != ValidationMessageAcceptor.INSIGNIFICANT_INDEX) {
-					List<?> list = (List<?>) source.eGet(feature);
-					eObject = (EObject) list.get(index);
-				}
-			} else if (source instanceof Trigger)
-				eObject = source.eContainer();
-			else
-				eObject = source;
-
-			if (eObject != null) {
-				// Add diagnostic to elementDiagnosticMap keyed on model element
-				if (elementDiagnosticMap.get(eObject) == null){
-					elementDiagnosticMap.put(eObject,
-							new ArrayList<Diagnostic>());
-					uniqueEnsurer.put(eObject, new HashSet<String>());
-				}
-
-				//Insert only if the Diagnostic reports a new error/warning  
-				String certificate = featureBasedDiagnostic.getIssueCode();
-				for(String data : featureBasedDiagnostic.getIssueData())
-					certificate += data;
-				if (!(uniqueEnsurer.get(eObject).contains(certificate))){
-					uniqueEnsurer.get(eObject).add(certificate);
-					elementDiagnosticMap.get(eObject).add(diagnostic);
+			if (diagnostic instanceof FeatureBasedDiagnostic) {
+				// for each child diagnostic, find the associated EObject
+				FeatureBasedDiagnostic featureBasedDiagnostic = (FeatureBasedDiagnostic) diagnostic;
+				EObject source = featureBasedDiagnostic.getSourceEObject();
+				
+				EObject eObject = null;
+				if (source instanceof StateGraph) {
+					EStructuralFeature feature = featureBasedDiagnostic
+							.getFeature();
+					int index = featureBasedDiagnostic.getIndex();
+					
+					if (!feature.isMany())
+						eObject = (EObject) source.eGet(feature);
+					else if (index != ValidationMessageAcceptor.INSIGNIFICANT_INDEX) {
+						List<?> list = (List<?>) source.eGet(feature);
+						eObject = (EObject) list.get(index);
+					}
+				} else if (source instanceof Trigger)
+					eObject = source.eContainer();
+				else
+					eObject = source;
+				
+				if (eObject != null) {
+					// Add diagnostic to elementDiagnosticMap keyed on model element
+					if (elementDiagnosticMap.get(eObject) == null){
+						elementDiagnosticMap.put(eObject,
+								new ArrayList<Diagnostic>());
+						uniqueEnsurer.put(eObject, new HashSet<String>());
+					}
+					
+					//Insert only if the Diagnostic reports a new error/warning  
+					String certificate = featureBasedDiagnostic.getIssueCode();
+					for(String data : featureBasedDiagnostic.getIssueData())
+						certificate += data;
+					if (!(uniqueEnsurer.get(eObject).contains(certificate))){
+						uniqueEnsurer.get(eObject).add(certificate);
+						elementDiagnosticMap.get(eObject).add(diagnostic);
+					}
 				}
 			}
 		}
