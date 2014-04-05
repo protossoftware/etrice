@@ -34,6 +34,8 @@ public class ETricePreferencePage
 	private StringFieldEditor hor;
 	private StringFieldEditor ver;
 	private Button useGridCheck;
+	private StringFieldEditor maxLineLength;
+	private StringFieldEditor maxLines;
 
 	public ETricePreferencePage() {
 		super(GRID);
@@ -63,6 +65,12 @@ public class ETricePreferencePage
 				"Auto-save diagram when focus changes",
 				getFieldEditorParent());
 		addField(autoSave);
+		
+		maxLineLength = new StringFieldEditor(PreferenceConstants.MAX_LABEL_LINE_LENGTH, "Max Transition Lable Line Length::", getFieldEditorParent());
+		addField(maxLineLength);
+		
+		maxLines = new StringFieldEditor(PreferenceConstants.MAX_LABEL_LINES, "Max Transition Lable Lines::", getFieldEditorParent());
+		addField(maxLines);
 
 		StringFieldEditor exportPath = new StringFieldEditor(PreferenceConstants.EXPORT_DIAGRAM_PATH, "&Export Diagram Path:", getFieldEditorParent());
 		addField(exportPath);

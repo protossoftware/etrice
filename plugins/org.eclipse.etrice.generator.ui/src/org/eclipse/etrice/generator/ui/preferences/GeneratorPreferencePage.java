@@ -39,6 +39,11 @@ public class GeneratorPreferencePage
 						"Generate &incrementally",
 						getFieldEditorParent()));
 		addField(
+				new BooleanFieldEditor(
+						PreferenceConstants.GEN_USE_TRANSLATION,
+						"Let wizard create new launchers with detail code translation on initially",
+						getFieldEditorParent()));
+		addField(
 				new StringFieldEditor(
 						PreferenceConstants.GEN_DIR,
 						"The directory for &generated code:",

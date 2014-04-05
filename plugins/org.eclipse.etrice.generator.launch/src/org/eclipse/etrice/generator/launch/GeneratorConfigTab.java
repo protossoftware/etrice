@@ -15,10 +15,12 @@ package org.eclipse.etrice.generator.launch;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -30,6 +32,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -67,6 +70,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String DEBUG = "Debug";
 	public static final String MSC = "MSC";
 	public static final String VERBOSE = "Verbose";
+	public static final String USE_TRAANSLATION = "UseTranslation";
 	
 	private Button libButton;
 	private Button documentationButton;
@@ -76,6 +80,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button debugButton;
 	private Button mscButton;
 	private Button verboseButton;
+	private Button useTranslationButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -134,6 +139,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		documentationButton = createCheckButton(mainComposite, "generate documentation");
 		documentationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		documentationButton.addSelectionListener(new UpdateConfig());
+
+		useTranslationButton = createCheckButton(mainComposite, "perform code translation");
+		useTranslationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		useTranslationButton.addSelectionListener(new UpdateConfig());
 
 		debugButton = createCheckButton(mainComposite, "generate debug output");
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -229,6 +238,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
 			mscButton.setSelection(configuration.getAttribute(MSC, true));
 			verboseButton.setSelection(configuration.getAttribute(VERBOSE, false));
+			
+			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+			boolean useTranslation = prefStore.getBoolean(PreferenceConstants.GEN_USE_TRANSLATION);
+			useTranslationButton.setSelection(configuration.getAttribute(USE_TRAANSLATION, useTranslation));
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -248,6 +261,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
 		configuration.setAttribute(MSC, mscButton.getSelection());
 		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
+		configuration.setAttribute(USE_TRAANSLATION, useTranslationButton.getSelection());
 	}
 
 	/* (non-Javadoc)

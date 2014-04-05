@@ -29,6 +29,7 @@ public class GlobalGeneratorSettings {
 	private boolean generateDocumentation = false;
 	private boolean generateAsLibrary = false;
 	private boolean debugMode = false;
+	private boolean noTranslation = false;
 	
 	public boolean generateMSCInstrumentation() {
 		return generateMSCInstrumentation;
@@ -81,6 +82,14 @@ public class GlobalGeneratorSettings {
 
 	public void setDebugMode(boolean debugMode) {
 		this.debugMode = debugMode;
+	}
+
+	public void setNoTranslation(boolean b) {
+		this.noTranslation = b;
+	}
+
+	public boolean isNoTranslation() {
+		return noTranslation;
 	}
 
 }

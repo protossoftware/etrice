@@ -10,6 +10,9 @@
  */
 package org.eclipse.etrice.generator.ui.wizard;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 /**
@@ -175,40 +178,50 @@ public class ProjectFileFragments {
   }
   
   public static String getGeneratorLaunchConfig(final String targetLanguage, final String modelPath, final String baseName, final String[] addLines) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-    _builder.newLine();
-    _builder.append("<launchConfiguration type=\"org.eclipse.etrice.generator.launch.");
-    _builder.append(targetLanguage, "");
-    _builder.append(".launchConfigurationType\">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("<booleanAttribute key=\"MSC\" value=\"true\"/>");
-    _builder.newLine();
-    _builder.append("<listAttribute key=\"ModelFiles\">");
-    _builder.newLine();
-    _builder.append("<listEntry value=\"${workspace_loc:");
-    _builder.append(modelPath, "");
-    _builder.append("/");
-    _builder.append(baseName, "");
-    _builder.append(".etmap}\"/>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</listAttribute>");
-    _builder.newLine();
-    _builder.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
-    _builder.newLine();
-    _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
-    _builder.newLine();
-    _builder.append("</listAttribute>");
-    _builder.newLine();
+    String _xblockexpression = null;
     {
-      for(final String line : addLines) {
-        _builder.append(line, "");
-        _builder.newLineIfNotEmpty();
+      final ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+      final boolean useTranslation = prefStore.getBoolean(PreferenceConstants.GEN_USE_TRANSLATION);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder.newLine();
+      _builder.append("<launchConfiguration type=\"org.eclipse.etrice.generator.launch.");
+      _builder.append(targetLanguage, "");
+      _builder.append(".launchConfigurationType\">");
+      _builder.newLineIfNotEmpty();
+      _builder.append("<booleanAttribute key=\"MSC\" value=\"true\"/>");
+      _builder.newLine();
+      _builder.append("<booleanAttribute key=\"UseTranslation\" value=\"");
+      _builder.append(useTranslation, "");
+      _builder.append("\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("<listAttribute key=\"ModelFiles\">");
+      _builder.newLine();
+      _builder.append("<listEntry value=\"${workspace_loc:");
+      _builder.append(modelPath, "");
+      _builder.append("/");
+      _builder.append(baseName, "");
+      _builder.append(".etmap}\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("</listAttribute>");
+      _builder.newLine();
+      _builder.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+      _builder.newLine();
+      _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+      _builder.newLine();
+      _builder.append("</listAttribute>");
+      _builder.newLine();
+      {
+        for(final String line : addLines) {
+          _builder.append(line, "");
+          _builder.newLineIfNotEmpty();
+        }
       }
+      _builder.append("</launchConfiguration>");
+      _builder.newLine();
+      _xblockexpression = _builder.toString();
     }
-    _builder.append("</launchConfiguration>");
-    _builder.newLine();
-    return _builder.toString();
+    return _xblockexpression;
   }
   
   public static String getLaunchJavaApplicationConfig(final String project, final String mdlName, final String mainClass) {

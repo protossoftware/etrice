@@ -41,6 +41,8 @@ import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
+import org.eclipse.etrice.ui.common.Activator;
+import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.common.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
@@ -97,9 +99,11 @@ import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.util.Strings;
 
 public class TransitionSupport {
 
@@ -107,8 +111,9 @@ public class TransitionSupport {
 	private static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	private static final IColorConstant FILL_COLOR = new ColorConstant(255, 255, 255);
 	private static final int LINE_WIDTH = 1;
-	private static final int MAX_LABEL_LENGTH = 20;
-
+	private static final String newLine = Strings.newLine();
+	private static final int newLineLength = Strings.newLine().length();
+	
 	static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends ChangeAwareCreateConnectionFeature {
@@ -830,10 +835,21 @@ public class TransitionSupport {
 		}
 		
 		protected static String getLabel(Transition trans) {
+			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+			int MAX_LINE_LENGTH = store.getInt(PreferenceConstants.MAX_LABEL_LINE_LENGTH);
+			int MAX_LINES = store.getInt(PreferenceConstants.MAX_LABEL_LINES);
 			String label = RoomNameProvider.getTransitionLabelName(trans);
-			if (label.length()>MAX_LABEL_LENGTH)
-				label = label.substring(0, MAX_LABEL_LENGTH)+"...";
-			return label;
+			StringBuilder result = new StringBuilder();
+			int i = 0;
+			for (; i+MAX_LINE_LENGTH<label.length(); i+=MAX_LINE_LENGTH) {
+				result.append(label.substring(i, i+MAX_LINE_LENGTH)+newLine);
+			}
+			result.append(label.subSequence(i, label.length()));
+			int maxLen = (MAX_LINE_LENGTH+newLineLength)*MAX_LINES-newLineLength;
+			if (result.length()>maxLen)
+				return result.substring(0, maxLen)+"...";
+			else
+				return result.toString();
 		}
 	}
 	

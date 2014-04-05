@@ -38,6 +38,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH, "doc-gen/images");
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO, PreferenceConstants.PATH_REL_TO_PROJECT);
 		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_FORMAT, PreferenceConstants.FORMAT_JPG);
+		store.setDefault(PreferenceConstants.MAX_LABEL_LINE_LENGTH, PreferenceConstants.MAX_LINE_LENGTH_DEFAULT);
+		store.setDefault(PreferenceConstants.MAX_LABEL_LINES, PreferenceConstants.MAX_LINES_DEFAULT);
 	}
 
 }
