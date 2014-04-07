@@ -448,9 +448,7 @@ public abstract class AbstractGenerator {
 				return null;
 			}
 			
-			if (!generatorSettings.isNoTranslation()) {
-				translateDetailCodes(gmRoot);
-			}
+			translateDetailCodes(gmRoot);
 			
 			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = getResourceSet().createResource(genModelURI);
@@ -545,28 +543,30 @@ public abstract class AbstractGenerator {
 	 * @param gmRoot
 	 */
 	protected void translateDetailCodes(Root gmRoot) {
+		boolean doTranslate = !generatorSettings.isNoTranslation();
+		
 		for (ExpandedActorClass xpac : gmRoot.getXpActorClasses()) {
-			DetailCodeTranslator dct = new DetailCodeTranslator(xpac.getActorClass(), translationProvider);
+			DetailCodeTranslator dct = new DetailCodeTranslator(xpac.getActorClass(), translationProvider, doTranslate);
 			translateDetailCodesOfTree(xpac.getActorClass(), dct);
 			translateDetailCodesOfTree(xpac.getStateMachine(), dct);
 		}
 		
 		for (DataClass dc : gmRoot.getUsedDataClasses()) {
-			DetailCodeTranslator dct = new DetailCodeTranslator(dc, translationProvider);
+			DetailCodeTranslator dct = new DetailCodeTranslator(dc, translationProvider, doTranslate);
 			translateDetailCodesOfTree(dc, dct);
 		}
 		
 		for (ProtocolClass pc : gmRoot.getUsedProtocolClasses()) {
 			if (pc.getConjugated()!=null) {
-				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugated(), translationProvider);
+				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugated(), translationProvider, doTranslate);
 				translateDetailCodesOfTree(pc.getConjugated(), dct);
 			}
 			if (pc.getRegular()!=null) {
-				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getRegular(), translationProvider);
+				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getRegular(), translationProvider, doTranslate);
 				translateDetailCodesOfTree(pc.getRegular(), dct);
 			}
 			
-			DetailCodeTranslator dct = new DetailCodeTranslator(pc, translationProvider);
+			DetailCodeTranslator dct = new DetailCodeTranslator(pc, translationProvider, doTranslate);
 			translateDetailCodesOfTree(pc.getUserCode1(), dct);
 			translateDetailCodesOfTree(pc.getUserCode2(), dct);
 			translateDetailCodesOfTree(pc.getUserCode3(), dct);

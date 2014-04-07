@@ -68,6 +68,7 @@ public class DetailCodeTranslator {
 	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
 	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
 	private EObject container;
+	private boolean doTranslate;
 	
 	/**
 	 * Constructor to be used with actor classes
@@ -75,37 +76,38 @@ public class DetailCodeTranslator {
 	 * @param ac an {@link ActorClass}
 	 * @param provider a {@link ITranslationProvider}
 	 */
-	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider) {
-		this((EObject) ac, provider);
+	public DetailCodeTranslator(ActorClass ac, ITranslationProvider provider, boolean doTranslate) {
+		this((EObject) ac, provider, doTranslate);
 	}
 	
 	/**
 	 * @param pc a {@link ProtocolClass}
 	 * @param provider a {@link ITranslationProvider}
 	 */
-	public DetailCodeTranslator(ProtocolClass pc, ITranslationProvider provider) {
-		this((EObject) pc, provider);
+	public DetailCodeTranslator(ProtocolClass pc, ITranslationProvider provider, boolean doTranslate) {
+		this((EObject) pc, provider, doTranslate);
 	}
 	
 	/**
 	 * @param pc a {@link PortClass}
 	 * @param provider a {@link ITranslationProvider}
 	 */
-	public DetailCodeTranslator(PortClass pc, ITranslationProvider provider) {
-		this((EObject) pc, provider);
+	public DetailCodeTranslator(PortClass pc, ITranslationProvider provider, boolean doTranslate) {
+		this((EObject) pc, provider, doTranslate);
 	}
 	
 	/**
 	 * @param dc a {@link DataClass}
 	 * @param provider a {@link ITranslationProvider}
 	 */
-	public DetailCodeTranslator(DataClass dc, ITranslationProvider provider) {
-		this((EObject) dc, provider);
+	public DetailCodeTranslator(DataClass dc, ITranslationProvider provider, boolean doTranslate) {
+		this((EObject) dc, provider, doTranslate);
 	}
 	
-	private DetailCodeTranslator(EObject container, ITranslationProvider provider) {
+	private DetailCodeTranslator(EObject container, ITranslationProvider provider, boolean doTranslate) {
 		this.provider = provider;
 		this.container = container;
+		this.doTranslate = doTranslate;
 		prepare(container);
 	}
 	
@@ -124,6 +126,9 @@ public class DetailCodeTranslator {
 		}
 
 		String result = text.substring(0, Math.max(0, text.length()-1));
+		
+		if (!doTranslate)
+			return result;
 		
 		if (provider.translateMembers())
 			result = translateText(result);

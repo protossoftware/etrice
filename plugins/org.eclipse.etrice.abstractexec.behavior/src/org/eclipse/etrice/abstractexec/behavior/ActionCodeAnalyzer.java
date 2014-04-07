@@ -69,7 +69,7 @@ public class ActionCodeAnalyzer {
 
 	public ActionCodeAnalyzer(ActorClass ac) {
 		collector = new Collector();
-		translator = new DetailCodeTranslator(ac, collector);
+		translator = new DetailCodeTranslator(ac, collector, true);
 	}
 	
 	public List<HandledMessage> analyze(DetailCode dc) {

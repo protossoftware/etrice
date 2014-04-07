@@ -241,7 +241,7 @@ public class TestDetailCodeTranslator {
 		op2.getArguments().add(param2);
 		ac.getOperations().add(op2);
 		
-		translator = new DetailCodeTranslator(ac, new TestTranslationProvider());
+		translator = new DetailCodeTranslator(ac, new TestTranslationProvider(), true);
 	}
 	
 	@Test
