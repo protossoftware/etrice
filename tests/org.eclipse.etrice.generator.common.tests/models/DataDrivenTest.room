@@ -36,7 +36,7 @@ RoomModel DataDrivenTest {
 			StateMachine {
 				Transition init: initial -> Idle {
 					action {
-						"timer.startTimer(100);"
+						"timer.startTimer(300);"
 						"counter = 0;"
 					}
 				}
