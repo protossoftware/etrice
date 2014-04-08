@@ -16,13 +16,11 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
 import org.eclipse.etrice.generator.java.Main
 
 @Singleton
-class MainGen implements IGenerator {
+class MainGen {
 	
 	@Inject DataClassGen dataClassGen
 	@Inject EnumerationTypeGen enumTypeGen
@@ -35,7 +33,7 @@ class MainGen implements IGenerator {
 	@Inject NodeRunnerGen nodeRunnerGen
 	@Inject PrepareFileSystem prepFS
 	
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+	def void doGenerate(Resource resource) {
 		prepFS.prepareCodeTargetPaths(resource)
 		for (e: resource.contents){
 			if (e instanceof Root) {

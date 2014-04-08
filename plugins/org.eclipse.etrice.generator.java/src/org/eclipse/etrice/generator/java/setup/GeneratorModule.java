@@ -18,18 +18,12 @@ import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
-import org.eclipse.etrice.generator.java.gen.MainGen;
-import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
-import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
-
-
-
-
+import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
 
@@ -40,7 +34,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		super.configure(binder);
 		
 		binder.bind(AbstractGenerator.class).to(Main.class);
-		binder.bind(IGenerator.class).to(MainGen.class);
 
 		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
 		

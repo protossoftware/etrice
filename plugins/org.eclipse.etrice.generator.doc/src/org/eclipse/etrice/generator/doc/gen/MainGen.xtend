@@ -16,19 +16,16 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
 
-
 @Singleton
-class MainGen implements IGenerator {
+class MainGen {
 	
 	@Inject InstanceDiagramGen instanceDiagramGen
 	@Inject PrepareFileSystem prepFS
 	@Inject DocGen docGen
 	
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+	def void doGenerate(Resource resource) {
 		prepFS.prepareDocTargetPaths(resource)
 		for (e: resource.contents){
 			if (e instanceof Root) {

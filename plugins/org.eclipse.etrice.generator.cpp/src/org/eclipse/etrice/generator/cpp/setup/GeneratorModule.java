@@ -22,9 +22,7 @@ import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.CppTranslationProvider;
 import org.eclipse.etrice.generator.cpp.gen.GeneratorSettings;
-import org.eclipse.etrice.generator.cpp.gen.MainGen;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
@@ -36,7 +34,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		super.configure(binder);
 		
 		binder.bind(AbstractGenerator.class).to(Main.class);
-		binder.bind(IGenerator.class).to(MainGen.class);
 
 		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
 		

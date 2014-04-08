@@ -19,9 +19,7 @@ import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.doc.Main;
 import org.eclipse.etrice.generator.doc.gen.GlobalSettings;
-import org.eclipse.etrice.generator.doc.gen.MainGen;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Binder;
 
@@ -32,7 +30,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		super.configure(binder);
 		
 		binder.bind(AbstractGenerator.class).to(Main.class);
-		binder.bind(IGenerator.class).to(MainGen.class);
 		
 		binder.bind(GlobalGeneratorSettings.class).to(GlobalSettings.class);
 	}

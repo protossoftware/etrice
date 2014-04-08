@@ -19,12 +19,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.doc.gen.DocGen;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
 
 @Singleton
 @SuppressWarnings("all")
-public class MainGen implements IGenerator {
+public class MainGen {
   @Inject
   private InstanceDiagramGen instanceDiagramGen;
   
@@ -34,7 +32,7 @@ public class MainGen implements IGenerator {
   @Inject
   private DocGen docGen;
   
-  public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+  public void doGenerate(final Resource resource) {
     this.prepFS.prepareDocTargetPaths(resource);
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {

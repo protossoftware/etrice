@@ -23,12 +23,10 @@ import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.cpp.gen.SubSystemClassGen;
 import org.eclipse.etrice.generator.cpp.gen.SubSystemRunnerGen;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
 
 @Singleton
 @SuppressWarnings("all")
-public class MainGen implements IGenerator {
+public class MainGen {
   @Inject
   private DataClassGen dataClassGen;
   
@@ -47,7 +45,7 @@ public class MainGen implements IGenerator {
   @Inject
   private PrepareFileSystem prepFS;
   
-  public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+  public void doGenerate(final Resource resource) {
     this.prepFS.prepareCodeTargetPaths(resource);
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {

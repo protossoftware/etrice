@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.cpp.gen.GeneratorSettings;
+import org.eclipse.etrice.generator.cpp.gen.MainGen;
 import org.eclipse.etrice.generator.cpp.gen.Validator;
 import org.eclipse.etrice.generator.cpp.setup.GeneratorModule;
 import org.eclipse.etrice.generator.doc.gen.GlobalSettings;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Inject;
@@ -47,7 +47,7 @@ public class Main extends AbstractGenerator {
 	}
 
 	@Inject
-	private IGenerator mainGenerator;
+	private MainGen mainGenerator;
 
 	@Inject
 	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
@@ -132,11 +132,10 @@ public class Main extends AbstractGenerator {
 			}
 			
 			logger.logInfo("-- starting code generation");
-			fileAccess.setOutputPath("src-gen/");
-			mainGenerator.doGenerate(genModel.eResource(), fileAccess);
+			mainGenerator.doGenerate(genModel.eResource());
 			
 			if (getSettings().isGenerateDocumentation()) {
-				mainDocGenerator.doGenerate(genModel.eResource(), fileAccess);
+				mainDocGenerator.doGenerate(genModel.eResource());
 			}
 			
 			if (diagnostician.isFailed()) {

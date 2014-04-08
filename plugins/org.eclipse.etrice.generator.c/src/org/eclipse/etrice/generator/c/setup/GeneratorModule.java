@@ -17,12 +17,11 @@ import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.c.Main;
-import org.eclipse.etrice.generator.c.gen.CTranslationProvider;
-import org.eclipse.etrice.generator.c.gen.MainGen;
-import org.eclipse.etrice.generator.generic.ILanguageExtension;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.c.gen.CTranslationProvider;
 import org.eclipse.etrice.generator.config.DataConfiguration;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
+
 import com.google.inject.Binder;
 
 public class GeneratorModule extends AbstractGeneratorBaseModule {
@@ -32,7 +31,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		super.configure(binder);
 		
 		binder.bind(AbstractGenerator.class).to(Main.class);
-		binder.bind(IGenerator.class).to(MainGen.class);
 	}
 
 	@Override

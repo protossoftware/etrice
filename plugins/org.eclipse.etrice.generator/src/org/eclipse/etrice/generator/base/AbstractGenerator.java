@@ -39,7 +39,6 @@ import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.scoping.StandardModelLocator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -366,12 +365,6 @@ public abstract class AbstractGenerator {
 	 */
 	@Inject
 	protected IDiagnostician diagnostician;
-	
-	/**
-	 * The injected Java IO file access
-	 */
-	@Inject
-	protected JavaIoFileSystemAccess fileAccess;
 	
 	/**
 	 * The injected platform relative URI resolver

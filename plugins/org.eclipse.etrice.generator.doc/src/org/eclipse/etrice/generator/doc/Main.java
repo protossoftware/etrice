@@ -13,12 +13,13 @@
 package org.eclipse.etrice.generator.doc;
 
 import java.util.Iterator;
+
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.doc.gen.GlobalSettings;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
+import org.eclipse.etrice.generator.doc.gen.MainGen;
 import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
-import org.eclipse.xtext.generator.IGenerator;
 
 import com.google.inject.Inject;
 
@@ -63,7 +64,7 @@ public class Main extends AbstractGenerator {
 	}
 	
 	@Inject
-	private IGenerator mainGenerator;
+	private MainGen mainGenerator;
 
 	@Inject
 	protected InstanceDiagramGen instanceDiagramGenerator;
@@ -94,8 +95,7 @@ public class Main extends AbstractGenerator {
 			}
 			
 			logger.logInfo("-- starting code generation");
-			fileAccess.setOutputPath("doc-gen/");
-			mainGenerator.doGenerate(genModel.eResource(), fileAccess);
+			mainGenerator.doGenerate(genModel.eResource());
 			
 			if (getSettings().isGenerateInstanceDiagram()) {
 				instanceDiagramGenerator.doGenerate(genModel);
