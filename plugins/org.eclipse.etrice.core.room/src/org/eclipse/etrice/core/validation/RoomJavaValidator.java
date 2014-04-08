@@ -77,6 +77,7 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.inject.Inject;
@@ -100,6 +101,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
+	public static final String MULTI_LINE_DETAILCODE = "RoomJavaValidator.MultiLineDetailCode";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -731,6 +733,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkDetailCode(DetailCode dc) {
 		if (dc.getLines().isEmpty())
 			error("detail code must not be empty", dc, RoomPackage.Literals.DETAIL_CODE__LINES);
+		
+		for(String line : dc.getLines()){
+			// bad: "\r\n" is affected too
+			if(line.contains(Strings.newLine()))
+				warning("multi line string", dc, RoomPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
+		}
 	}
 	
 	@Check
