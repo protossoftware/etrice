@@ -35,6 +35,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.Port
 
 @Singleton
 class DocGen {
@@ -299,14 +300,24 @@ class DocGen {
 			«includeGraphics(latexFilename,"0.4",ac.name + " Structure")»
 		«ENDIF»
 		
-		\level{3}{Attributes}
-		«ac.attributes.generateAttributesDoc»
+		«IF !ac.allPorts.empty»
+			\level{3}{Ports}
+			«generatePortDoc(ac)»
+		«ENDIF»
 		
-		\level{3}{Operations}
-		«ac.operations.generateOperationsDoc»
 		«IF ac.hasNonEmptyStateMachine»
 			\level{3}{Statemachine}
 			«generateFsmDoc(model, ac)»
+		«ENDIF»
+		
+		«IF !ac.attributes.empty»
+			\level{3}{Attributes}
+			«ac.attributes.generateAttributesDoc»
+		«ENDIF»
+		
+		«IF !ac.operations.empty»
+			\level{3}{Operations}
+			«ac.operations.generateOperationsDoc»
 		«ENDIF»
 		'''
 	}
@@ -349,7 +360,43 @@ class DocGen {
 		«ENDFOR»		
 		'''
 	}
-		
+	
+	def private getType(Port p) {
+		if (p.conjugated) "conj." else "reg."
+	}
+	
+	def private getKind(Port p) {
+		if (p.internal)
+			"internal"
+		else if (p.external)
+			"external"
+		else if (p.relay)
+			"relay"
+		else
+			"?"
+	}
+	
+	def private String getMultAsText(Port p) {
+		if (p.multiplicity==-1)
+			"*"
+		else
+			p.multiplicity.toString
+	}
+	
+	def private String generatePortDoc(ActorClass ac) {
+		'''
+			\begin{tabular}[ht]{|l|l|l|l|l|l|}
+			\hline
+			\textbf{Name} & \textbf{Protocol} & \textbf{Type} & \textbf{Kind} & \textbf{Multiplicity} & \textbf{Description}\\
+			«FOR at : ac.allPorts»
+				\hline
+				«at.name.escapedString» & «at.protocol.name.escapedString» & «at.type» & «at.kind» & «at.multAsText» & «generateDocText(at.docu)»\\
+			«ENDFOR»	
+			\hline
+			\end{tabular}
+		'''
+	}
+	
 	def private String generateStateDoc(RoomModel model, ActorClass ac, State state){
 		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.genStatePathName + "_behavior.jpg"
 		filename = filename.replaceAll("\\\\","/");

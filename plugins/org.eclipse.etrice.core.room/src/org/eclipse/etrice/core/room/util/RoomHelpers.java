@@ -1342,7 +1342,7 @@ public class RoomHelpers extends BaseHelpers {
 	}
 	
 	/**
-	 * Returns a list of all {@link SAP}s of an {@link ActorClass}
+	 * Returns a list of all {@link Port}s of an {@link ActorClass}
 	 * including base classes.
 	 * 
 	 * @param ac an {@link ActorClass}

@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
@@ -742,19 +743,19 @@ public class DocGen {
         }
       }
       _builder.newLine();
-      _builder.append("\\level{3}{Attributes}");
+      {
+        List<Port> _allPorts = RoomHelpers.getAllPorts(ac);
+        boolean _isEmpty = _allPorts.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("\\level{3}{Ports}");
+          _builder.newLine();
+          String _generatePortDoc = this.generatePortDoc(ac);
+          _builder.append(_generatePortDoc, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
-      EList<Attribute> _attributes = ac.getAttributes();
-      CharSequence _generateAttributesDoc = this.generateAttributesDoc(_attributes);
-      _builder.append(_generateAttributesDoc, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\\level{3}{Operations}");
-      _builder.newLine();
-      EList<StandardOperation> _operations = ac.getOperations();
-      CharSequence _generateOperationsDoc = this.generateOperationsDoc(_operations);
-      _builder.append(_generateOperationsDoc, "");
-      _builder.newLineIfNotEmpty();
       {
         boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
@@ -762,6 +763,34 @@ public class DocGen {
           _builder.newLine();
           CharSequence _generateFsmDoc = this.generateFsmDoc(model, ac);
           _builder.append(_generateFsmDoc, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<Attribute> _attributes = ac.getAttributes();
+        boolean _isEmpty_1 = _attributes.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          _builder.append("\\level{3}{Attributes}");
+          _builder.newLine();
+          EList<Attribute> _attributes_1 = ac.getAttributes();
+          CharSequence _generateAttributesDoc = this.generateAttributesDoc(_attributes_1);
+          _builder.append(_generateAttributesDoc, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<StandardOperation> _operations = ac.getOperations();
+        boolean _isEmpty_2 = _operations.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
+          _builder.append("\\level{3}{Operations}");
+          _builder.newLine();
+          EList<StandardOperation> _operations_1 = ac.getOperations();
+          CharSequence _generateOperationsDoc = this.generateOperationsDoc(_operations_1);
+          _builder.append(_generateOperationsDoc, "");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -872,6 +901,100 @@ public class DocGen {
       _xblockexpression = _builder;
     }
     return _xblockexpression;
+  }
+  
+  private String getType(final Port p) {
+    String _xifexpression = null;
+    boolean _isConjugated = p.isConjugated();
+    if (_isConjugated) {
+      _xifexpression = "conj.";
+    } else {
+      _xifexpression = "reg.";
+    }
+    return _xifexpression;
+  }
+  
+  private String getKind(final Port p) {
+    String _xifexpression = null;
+    boolean _isInternal = RoomHelpers.isInternal(p);
+    if (_isInternal) {
+      _xifexpression = "internal";
+    } else {
+      String _xifexpression_1 = null;
+      boolean _isExternal = RoomHelpers.isExternal(p);
+      if (_isExternal) {
+        _xifexpression_1 = "external";
+      } else {
+        String _xifexpression_2 = null;
+        boolean _isRelay = RoomHelpers.isRelay(p);
+        if (_isRelay) {
+          _xifexpression_2 = "relay";
+        } else {
+          _xifexpression_2 = "?";
+        }
+        _xifexpression_1 = _xifexpression_2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  private String getMultAsText(final Port p) {
+    String _xifexpression = null;
+    int _multiplicity = p.getMultiplicity();
+    boolean _equals = (_multiplicity == (-1));
+    if (_equals) {
+      _xifexpression = "*";
+    } else {
+      int _multiplicity_1 = p.getMultiplicity();
+      _xifexpression = Integer.valueOf(_multiplicity_1).toString();
+    }
+    return _xifexpression;
+  }
+  
+  private String generatePortDoc(final ActorClass ac) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\\begin{tabular}[ht]{|l|l|l|l|l|l|}");
+    _builder.newLine();
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\\textbf{Name} & \\textbf{Protocol} & \\textbf{Type} & \\textbf{Kind} & \\textbf{Multiplicity} & \\textbf{Description}\\\\");
+    _builder.newLine();
+    {
+      List<Port> _allPorts = RoomHelpers.getAllPorts(ac);
+      for(final Port at : _allPorts) {
+        _builder.append("\\hline");
+        _builder.newLine();
+        String _name = at.getName();
+        String _escapedString = this.escapedString(_name);
+        _builder.append(_escapedString, "");
+        _builder.append(" & ");
+        GeneralProtocolClass _protocol = at.getProtocol();
+        String _name_1 = _protocol.getName();
+        String _escapedString_1 = this.escapedString(_name_1);
+        _builder.append(_escapedString_1, "");
+        _builder.append(" & ");
+        String _type = this.getType(at);
+        _builder.append(_type, "");
+        _builder.append(" & ");
+        String _kind = this.getKind(at);
+        _builder.append(_kind, "");
+        _builder.append(" & ");
+        String _multAsText = this.getMultAsText(at);
+        _builder.append(_multAsText, "");
+        _builder.append(" & ");
+        Documentation _docu = at.getDocu();
+        CharSequence _generateDocText = this.generateDocText(_docu);
+        _builder.append(_generateDocText, "");
+        _builder.append("\\\\");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\\hline");
+    _builder.newLine();
+    _builder.append("\\end{tabular}");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   private String generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
