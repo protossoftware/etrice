@@ -22,7 +22,7 @@ public class ResourceModule extends
 	 */
 	@Override
 	protected String getLanguageName() {
-		return "org.eclipse.etrice.structure.diagrams";
+		return "org.eclipse.etrice.ui.behavior.editor.BehaviorEditor";
 	}
 
 	/* (non-Javadoc)
@@ -30,7 +30,7 @@ public class ResourceModule extends
 	 */
 	@Override
 	protected String getFileExtensions() {
-		return "structure";
+		return "behavior";
 	}
 
 }

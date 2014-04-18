@@ -22,7 +22,7 @@ public class ResourceModule extends
 	 */
 	@Override
 	protected String getLanguageName() {
-		return "org.eclipse.etrice.structure.diagrams";
+		return "org.eclipse.etrice.ui.structure.editor.StructureEditor";
 	}
 
 	/* (non-Javadoc)
