@@ -21,7 +21,7 @@
       provider-name="%providerName"
       plugin="org.eclipse.etrice.core.room.ui"
       license-feature="org.eclipse.license"
-      license-feature-version="1.0.1">
+      license-feature-version="1.0.1.v20140414-1359">
 
    <description>
       %description
