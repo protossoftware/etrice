@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Logging Fragment
 Bundle-SymbolicName: org.eclipse.etrice.logging
-Bundle-Version: 0.4.0.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-Vendor: Eclipse eTrice (Incubation)
 Fragment-Host: org.apache.log4j;bundle-version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Config DSL
 Bundle-Vendor: Eclipse eTrice (Incubation)
-Bundle-Version: 0.4.0.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.config; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.1.1";visibility:=reexport,
@@ -19,8 +19,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.1";visibility:=reexport,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types;bundle-version="2.1.1",
- org.eclipse.etrice.core.room;bundle-version="0.4.0",
- org.eclipse.etrice.core.common;bundle-version="0.4.0"
+ org.eclipse.etrice.core.room;bundle-version="0.5.0",
+ org.eclipse.etrice.core.common;bundle-version="0.5.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtend.lib,
