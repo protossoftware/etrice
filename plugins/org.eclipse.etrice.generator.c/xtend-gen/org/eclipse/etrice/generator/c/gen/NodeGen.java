@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
+import org.eclipse.etrice.core.etphys.converters.TimeConverter;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
@@ -424,12 +425,17 @@ public class NodeGen {
             }
             if (_or) {
               _builder.append("\t\t");
-              _builder.append("interval.sec = 0;");
-              _builder.newLine();
+              _builder.append("interval.sec = ");
+              long _time = thread.getTime();
+              long _split = TimeConverter.split(_time, TimeConverter.SEC, true);
+              _builder.append(_split, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("interval.nSec = ");
-              int _time = thread.getTime();
-              _builder.append(_time, "\t\t");
+              long _time_1 = thread.getTime();
+              long _split_1 = TimeConverter.split(_time_1, TimeConverter.MILLI_SEC, false);
+              _builder.append(_split_1, "\t\t");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
             }

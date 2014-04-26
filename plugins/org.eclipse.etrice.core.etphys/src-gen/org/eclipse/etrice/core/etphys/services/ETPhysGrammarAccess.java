@@ -699,7 +699,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_3_0 = (RuleCall)cGroup_3.eContents().get(0);
 		private final Keyword cNsKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		
-		//TIME returns ecore::EInt:
+		//TIME returns ecore::ELong:
 		//	INT "s" | INT "ms" | INT "us" | INT "ns";
 		public ParserRule getRule() { return rule; }
 
@@ -995,7 +995,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getFQNAccess().getRule();
 	}
 
-	//TIME returns ecore::EInt:
+	//TIME returns ecore::ELong:
 	//	INT "s" | INT "ms" | INT "us" | INT "ns";
 	public TIMEElements getTIMEAccess() {
 		return (pTIME != null) ? pTIME : (pTIME = new TIMEElements());

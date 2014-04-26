@@ -124,12 +124,12 @@ public interface PhysicalThread extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Time</em>' attribute.
-   * @see #setTime(int)
+   * @see #setTime(long)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Time()
    * @model
    * @generated
    */
-  int getTime();
+  long getTime();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getTime <em>Time</em>}' attribute.
@@ -139,7 +139,7 @@ public interface PhysicalThread extends EObject
    * @see #getTime()
    * @generated
    */
-  void setTime(int value);
+  void setTime(long value);
 
   /**
    * Returns the value of the '<em><b>Prio</b></em>' attribute.

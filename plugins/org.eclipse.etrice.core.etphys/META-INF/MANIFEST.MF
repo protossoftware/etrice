@@ -21,15 +21,16 @@ Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.etphys,
- org.eclipse.etrice.core.etphys.services,
+ org.eclipse.etrice.core.etphys.converters,
  org.eclipse.etrice.core.etphys.eTPhys,
  org.eclipse.etrice.core.etphys.eTPhys.impl,
  org.eclipse.etrice.core.etphys.eTPhys.util,
- org.eclipse.etrice.core.etphys.serializer,
+ org.eclipse.etrice.core.etphys.formatting,
+ org.eclipse.etrice.core.etphys.generator,
  org.eclipse.etrice.core.etphys.parser.antlr,
  org.eclipse.etrice.core.etphys.parser.antlr.internal,
- org.eclipse.etrice.core.etphys.validation,
  org.eclipse.etrice.core.etphys.scoping,
- org.eclipse.etrice.core.etphys.generator,
- org.eclipse.etrice.core.etphys.formatting
+ org.eclipse.etrice.core.etphys.serializer,
+ org.eclipse.etrice.core.etphys.services,
+ org.eclipse.etrice.core.etphys.validation
 

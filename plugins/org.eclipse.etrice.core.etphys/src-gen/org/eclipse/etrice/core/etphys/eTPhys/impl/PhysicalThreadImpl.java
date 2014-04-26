@@ -103,7 +103,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected static final int TIME_EDEFAULT = 0;
+  protected static final long TIME_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getTime() <em>Time</em>}' attribute.
@@ -113,7 +113,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected int time = TIME_EDEFAULT;
+  protected long time = TIME_EDEFAULT;
 
   /**
    * The default value of the '{@link #getPrio() <em>Prio</em>}' attribute.
@@ -290,7 +290,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getTime()
+  public long getTime()
   {
     return time;
   }
@@ -300,9 +300,9 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTime(int newTime)
+  public void setTime(long newTime)
   {
-    int oldTime = time;
+    long oldTime = time;
     time = newTime;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__TIME, oldTime, time));
@@ -450,7 +450,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         setExecmode((ExecMode)newValue);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__TIME:
-        setTime((Integer)newValue);
+        setTime((Long)newValue);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
         setPrio((Integer)newValue);

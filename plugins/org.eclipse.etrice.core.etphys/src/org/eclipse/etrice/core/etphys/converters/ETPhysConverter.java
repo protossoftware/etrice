@@ -25,7 +25,7 @@ public class ETPhysConverter extends DefaultTerminalConverters {
 	private TimeConverter timeConverter = new TimeConverter();
 	
 	@ValueConverter(rule="TIME")
-	public IValueConverter<Integer> getTimeConverter() {
+	public IValueConverter<Long> getTimeConverter() {
 		return timeConverter;
 	}
 }

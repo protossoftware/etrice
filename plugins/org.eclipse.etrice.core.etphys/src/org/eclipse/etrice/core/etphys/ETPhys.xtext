@@ -89,4 +89,4 @@ ImportedFQN:
 FQN:
 	ID ('.' ID)*;
 	
-TIME returns ecore::EInt: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
+TIME returns ecore::ELong: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');

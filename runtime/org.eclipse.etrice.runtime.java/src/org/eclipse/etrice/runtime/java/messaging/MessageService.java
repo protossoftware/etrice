@@ -35,18 +35,18 @@ public class MessageService extends AbstractMessageService {
 	private int priority;
 	private long lastMessageTimestamp;
 	
-	private int pollingInterval = -1;
+	private long pollingInterval = -1;
 	private ScheduledExecutorService pollingScheduler = null;
 
 	public MessageService(IRTObject parent, ExecMode mode, int node, int thread, String name) {
 		this(parent, mode, 0, node, thread, name, Thread.NORM_PRIORITY);
 	}
 	
-	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name) {
+	public MessageService(IRTObject parent, ExecMode mode, long nsec, int node, int thread, String name) {
 		this(parent, mode, nsec, node, thread, name, Thread.NORM_PRIORITY);
 	}
 	
-	public MessageService(IRTObject parent, ExecMode mode, int nsec, int node, int thread, String name, int priority) {
+	public MessageService(IRTObject parent, ExecMode mode, long nsec, int node, int thread, String name, int priority) {
 		super(parent, "MessageService_"+name, node, thread);
 
 		// Java thread priority is limited to 1-10 and cannot be changed

@@ -16,11 +16,15 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
+import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
+import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.core.etphys.converters.TimeConverter
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
+import org.eclipse.etrice.core.genmodel.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
@@ -29,7 +33,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
+import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
@@ -41,12 +47,8 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
+import static extension org.eclipse.etrice.core.common.base.util.BaseHelpers.*
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.PrimitiveType
-import org.eclipse.etrice.core.common.base.LiteralType
-import org.eclipse.etrice.core.genmodel.base.ILogger
-import org.eclipse.etrice.core.room.EnumerationType
-import java.util.Collection
 
 @Singleton
 class NodeGen {
@@ -188,9 +190,8 @@ class NodeGen {
 				/* initialization of all message services */
 				«FOR thread: threads»
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
-«««						interval.sec = «thread.sec» <-- use convenience functions to split time in sec and nsec
-						interval.sec = 0;
-						interval.nSec = «thread.time»;
+						interval.sec = «TimeConverter::split(thread.time, TimeConverter.SEC, true)»;
+						interval.nSec = «TimeConverter::split(thread.time, TimeConverter.MILLI_SEC, false)»;
 					«ENDIF»
 					etMessageService_init(
 						&msgService_«thread.name»,

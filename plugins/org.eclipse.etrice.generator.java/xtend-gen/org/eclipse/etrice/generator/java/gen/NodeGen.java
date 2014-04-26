@@ -357,9 +357,9 @@ public class NodeGen {
               String _name_1 = _execmode_2.getName();
               _builder.append(_name_1, "\t\t");
               _builder.append(", ");
-              int _time = thread_1.getTime();
+              long _time = thread_1.getTime();
               _builder.append(_time, "\t\t");
-              _builder.append(", 0, ");
+              _builder.append("L, 0, ");
               String _threadId_1 = this.getThreadId(thread_1);
               _builder.append(_threadId_1, "\t\t");
               _builder.append(", \"MessageService_");
