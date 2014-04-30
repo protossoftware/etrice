@@ -201,18 +201,6 @@ class DocuPostprocessor {
 			''')
 
 		//------------------------------------------------------------------
-		cls = pckg.getClass("Documentation")
-		cls.setDocumentation('''
-			A piece of documentation that can be optionally attached at
-			certain places in the model.
-		''')
-		
-		cls.getAttribute("text").setDocumentation(
-			'''
-				This is the documentation's contents.
-			''')
-
-		//------------------------------------------------------------------
 		cls = pckg.getClass("Import")
 		cls.setDocumentation('''
 			The import declares an imported model (given as a URI) and

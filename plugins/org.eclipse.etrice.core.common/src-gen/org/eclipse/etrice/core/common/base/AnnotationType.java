@@ -88,7 +88,7 @@ public interface AnnotationType extends EObject
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
    * <br>A list of names representing the locations in which 
-   * 			{@Annotation}s of this AnnotationType can occur
+   * 			{@link Annotation}s of this AnnotationType can occur
    * <!-- end-model-doc -->
    * @return the value of the '<em>Targets</em>' attribute list.
    * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationType_Targets()
@@ -103,8 +103,8 @@ public interface AnnotationType extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>Defines the {@link Attribute}s that are required or allowed in 
-   * 			{@Annotation} instances of this AnnotationType
+   * <br>Defines the {@link AnnotationAttribute}s that are required or allowed in 
+   * 			{@link Annotation} instances of this AnnotationType
    * <!-- end-model-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationType_Attributes()

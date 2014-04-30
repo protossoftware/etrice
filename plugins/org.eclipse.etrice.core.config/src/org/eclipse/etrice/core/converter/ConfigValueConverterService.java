@@ -12,21 +12,9 @@
  *******************************************************************************/
 package org.eclipse.etrice.core.converter;
 
-import org.eclipse.etrice.core.common.converter.DoubleConverter;
-import org.eclipse.etrice.core.common.converter.LongConverter;
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
-import org.eclipse.xtext.conversion.IValueConverter;
-import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.etrice.core.common.converter.BaseConverterService;
 
-public class ConfigValueConverterService extends DefaultTerminalConverters {
+public class ConfigValueConverterService extends BaseConverterService {
 
-	@ValueConverter(rule = "Integer")
-	public IValueConverter<Long> getLongConverter() {
-		return new LongConverter();
-	}
-
-	@ValueConverter(rule = "Real")
-	public IValueConverter<Double> getRealConverter() {
-		return new DoubleConverter();
-	}
+	
 }

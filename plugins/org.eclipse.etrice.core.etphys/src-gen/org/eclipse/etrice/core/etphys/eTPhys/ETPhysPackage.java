@@ -424,34 +424,6 @@ public interface ETPhysPackage extends EPackage
   int RUNTIME_CLASS_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.DocumentationImpl <em>Documentation</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.DocumentationImpl
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getDocumentation()
-   * @generated
-   */
-  int DOCUMENTATION = 6;
-
-  /**
-   * The feature id for the '<em><b>Text</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOCUMENTATION__TEXT = 0;
-
-  /**
-   * The number of structural features of the '<em>Documentation</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DOCUMENTATION_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -459,7 +431,7 @@ public interface ETPhysPackage extends EPackage
    * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 7;
+  int IMPORT = 6;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -496,7 +468,7 @@ public interface ETPhysPackage extends EPackage
    * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getExecMode()
    * @generated
    */
-  int EXEC_MODE = 8;
+  int EXEC_MODE = 7;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.ThreadModel <em>Thread Model</em>}' enum.
@@ -506,7 +478,7 @@ public interface ETPhysPackage extends EPackage
    * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getThreadModel()
    * @generated
    */
-  int THREAD_MODEL = 9;
+  int THREAD_MODEL = 8;
 
 
   /**
@@ -878,27 +850,6 @@ public interface ETPhysPackage extends EPackage
   EAttribute getRuntimeClass_ThreadModel();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.Documentation <em>Documentation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Documentation</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Documentation
-   * @generated
-   */
-  EClass getDocumentation();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.etphys.eTPhys.Documentation#getText <em>Text</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Text</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Documentation#getText()
-   * @see #getDocumentation()
-   * @generated
-   */
-  EAttribute getDocumentation_Text();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.Import <em>Import</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1256,24 +1207,6 @@ public interface ETPhysPackage extends EPackage
      * @generated
      */
     EAttribute RUNTIME_CLASS__THREAD_MODEL = eINSTANCE.getRuntimeClass_ThreadModel();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.DocumentationImpl <em>Documentation</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.DocumentationImpl
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getDocumentation()
-     * @generated
-     */
-    EClass DOCUMENTATION = eINSTANCE.getDocumentation();
-
-    /**
-     * The meta object literal for the '<em><b>Text</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DOCUMENTATION__TEXT = eINSTANCE.getDocumentation_Text();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl <em>Import</em>}' class.

@@ -209,8 +209,8 @@ public class DataConfiguration implements IDataConfiguration {
     return _stringExpr;
   }
   
-  public int getPollingTimerUser(final SubSystemInstance subsystem) {
-    int _xblockexpression = (int) 0;
+  public long getPollingTimerUser(final SubSystemInstance subsystem) {
+    long _xblockexpression = (long) 0;
     {
       SubSystemConfig _config = this.getConfig(subsystem);
       DynamicConfig _dynConfig = null;
@@ -218,7 +218,7 @@ public class DataConfiguration implements IDataConfiguration {
         _dynConfig=_config.getDynConfig();
       }
       final DynamicConfig dynConf = _dynConfig;
-      int _xifexpression = (int) 0;
+      long _xifexpression = (long) 0;
       boolean _equals = Objects.equal(dynConf, null);
       if (_equals) {
         _xifexpression = 0;

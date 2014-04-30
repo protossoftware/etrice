@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.etphys.eTPhys;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.Documentation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Node Ref</b></em>'.

@@ -12,20 +12,12 @@
 
 package org.eclipse.etrice.core.etphys.converters;
 
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
-import org.eclipse.xtext.conversion.IValueConverter;
-import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.etrice.core.common.converter.BaseConverterService;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class ETPhysConverter extends DefaultTerminalConverters {
+public class ETPhysConverter extends BaseConverterService {
 
-	private TimeConverter timeConverter = new TimeConverter();
-	
-	@ValueConverter(rule="TIME")
-	public IValueConverter<Long> getTimeConverter() {
-		return timeConverter;
-	}
 }

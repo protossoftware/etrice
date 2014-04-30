@@ -175,18 +175,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUserCode2Assignment_2_0_1_1_1 = (Assignment)cGroup_2_0_1_1.eContents().get(1);
 		private final RuleCall cUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0 = (RuleCall)cUserCode2Assignment_2_0_1_1_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cPollingTimerMsKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cPollingIntervalKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cPollingAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cPollingINTTerminalRuleCall_2_1_1_0 = (RuleCall)cPollingAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cPollingTIMEParserRuleCall_2_1_1_0 = (RuleCall)cPollingAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DynamicConfig:
 		//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-		//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
+		//	userCode2=STRING)) & ("polling interval" polling=TIME)?) "}";
 		public ParserRule getRule() { return rule; }
 
 		//"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-		//userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}"
+		//userCode2=STRING)) & ("polling interval" polling=TIME)?) "}"
 		public Group getGroup() { return cGroup; }
 
 		//"dynamic configuration"
@@ -196,7 +196,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor" userCode2=STRING)) &
-		//("polling timer [ms]" polling=INT)?
+		//("polling interval" polling=TIME)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
 		//"file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor" userCode2=STRING)
@@ -241,17 +241,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0() { return cUserCode2STRINGTerminalRuleCall_2_0_1_1_1_0; }
 
-		//("polling timer [ms]" polling=INT)?
+		//("polling interval" polling=TIME)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"polling timer [ms]"
-		public Keyword getPollingTimerMsKeyword_2_1_0() { return cPollingTimerMsKeyword_2_1_0; }
+		//"polling interval"
+		public Keyword getPollingIntervalKeyword_2_1_0() { return cPollingIntervalKeyword_2_1_0; }
 
-		//polling=INT
+		//polling=TIME
 		public Assignment getPollingAssignment_2_1_1() { return cPollingAssignment_2_1_1; }
 
-		//INT
-		public RuleCall getPollingINTTerminalRuleCall_2_1_1_0() { return cPollingINTTerminalRuleCall_2_1_1_0; }
+		//TIME
+		public RuleCall getPollingTIMEParserRuleCall_2_1_1_0() { return cPollingTIMEParserRuleCall_2_1_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
@@ -401,18 +401,20 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRegularAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
 		private final RuleCall cRegularPortClassConfigParserRuleCall_3_0_1_0 = (RuleCall)cRegularAssignment_3_0_1.eContents().get(0);
 		private final Group cGroup_3_1 = (Group)cUnorderedGroup_3.eContents().get(1);
-		private final Keyword cConjugateKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Alternatives cAlternatives_3_1_0 = (Alternatives)cGroup_3_1.eContents().get(0);
+		private final Keyword cConjugateKeyword_3_1_0_0 = (Keyword)cAlternatives_3_1_0.eContents().get(0);
+		private final Keyword cConjugatedKeyword_3_1_0_1 = (Keyword)cAlternatives_3_1_0.eContents().get(1);
 		private final Assignment cConjugatedAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cConjugatedPortClassConfigParserRuleCall_3_1_1_0 = (RuleCall)cConjugatedAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ProtocolClassConfig:
-		//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-		//	conjugated=PortClassConfig)?) "}";
+		//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & (("conjugate" |
+		//	"conjugated") conjugated=PortClassConfig)?) "}";
 		public ParserRule getRule() { return rule; }
 
-		//"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-		//conjugated=PortClassConfig)?) "}"
+		//"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & (("conjugate" |
+		//"conjugated") conjugated=PortClassConfig)?) "}"
 		public Group getGroup() { return cGroup; }
 
 		//"ProtocolClassConfig"
@@ -430,7 +432,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//("regular" regular=PortClassConfig)? & ("conjugate" conjugated=PortClassConfig)?
+		//("regular" regular=PortClassConfig)? & (("conjugate" | "conjugated") conjugated=PortClassConfig)?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//("regular" regular=PortClassConfig)?
@@ -445,11 +447,17 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//PortClassConfig
 		public RuleCall getRegularPortClassConfigParserRuleCall_3_0_1_0() { return cRegularPortClassConfigParserRuleCall_3_0_1_0; }
 
-		//("conjugate" conjugated=PortClassConfig)?
+		//(("conjugate" | "conjugated") conjugated=PortClassConfig)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
+		//"conjugate" | "conjugated"
+		public Alternatives getAlternatives_3_1_0() { return cAlternatives_3_1_0; }
+
 		//"conjugate"
-		public Keyword getConjugateKeyword_3_1_0() { return cConjugateKeyword_3_1_0; }
+		public Keyword getConjugateKeyword_3_1_0_0() { return cConjugateKeyword_3_1_0_0; }
+
+		//"conjugated"
+		public Keyword getConjugatedKeyword_3_1_0_1() { return cConjugatedKeyword_3_1_0_1; }
 
 		//conjugated=PortClassConfig
 		public Assignment getConjugatedAssignment_3_1_1() { return cConjugatedAssignment_3_1_1; }
@@ -1143,7 +1151,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DynamicConfig:
 	//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
-	//	userCode2=STRING)) & ("polling timer [ms]" polling=INT)?) "}";
+	//	userCode2=STRING)) & ("polling interval" polling=TIME)?) "}";
 	public DynamicConfigElements getDynamicConfigAccess() {
 		return (pDynamicConfig != null) ? pDynamicConfig : (pDynamicConfig = new DynamicConfigElements());
 	}
@@ -1174,8 +1182,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ProtocolClassConfig:
-	//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & ("conjugate"
-	//	conjugated=PortClassConfig)?) "}";
+	//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & (("conjugate" |
+	//	"conjugated") conjugated=PortClassConfig)?) "}";
 	public ProtocolClassConfigElements getProtocolClassConfigAccess() {
 		return (pProtocolClassConfig != null) ? pProtocolClassConfig : (pProtocolClassConfig = new ProtocolClassConfigElements());
 	}
@@ -1418,6 +1426,18 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDocumentationRule() {
 		return getDocumentationAccess().getRule();
+	}
+
+	//// **************************************************************
+	//// Time Rule
+	//TIME returns ecore::ELong:
+	//	INT "s" | INT "ms" | INT "us" | INT "ns";
+	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
+		return gaBase.getTIMEAccess();
+	}
+	
+	public ParserRule getTIMERule() {
+		return getTIMEAccess().getRule();
 	}
 
 	//// **************************************************************

@@ -409,25 +409,25 @@ ruleDynamicConfig returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getDynamicConfigAccess().getUnorderedGroup_2(), 1);
 	 				}
-					({true}?=>(	otherlv_9='polling timer [ms]' 
+					({true}?=>(	otherlv_9='polling interval' 
     {
-    	newLeafNode(otherlv_9, grammarAccess.getDynamicConfigAccess().getPollingTimerMsKeyword_2_1_0());
+    	newLeafNode(otherlv_9, grammarAccess.getDynamicConfigAccess().getPollingIntervalKeyword_2_1_0());
     }
 (
 (
-		lv_polling_10_0=RULE_INT
-		{
-			newLeafNode(lv_polling_10_0, grammarAccess.getDynamicConfigAccess().getPollingINTTerminalRuleCall_2_1_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getDynamicConfigAccess().getPollingTIMEParserRuleCall_2_1_1_0()); 
+	    }
+		lv_polling_10_0=ruleTIME		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDynamicConfigRule());
+	            $current = createModelElementForParent(grammarAccess.getDynamicConfigRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"polling",
         		lv_polling_10_0, 
-        		"INT");
+        		"TIME");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -771,23 +771,28 @@ ruleProtocolClassConfig returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3(), 1);
 	 				}
-					({true}?=>(	otherlv_6='conjugate' 
+					({true}?=>((	otherlv_6='conjugate' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getProtocolClassConfigAccess().getConjugateKeyword_3_1_0());
+    	newLeafNode(otherlv_6, grammarAccess.getProtocolClassConfigAccess().getConjugateKeyword_3_1_0_0());
     }
-(
+
+    |	otherlv_7='conjugated' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getProtocolClassConfigAccess().getConjugatedKeyword_3_1_0_1());
+    }
+)(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getProtocolClassConfigAccess().getConjugatedPortClassConfigParserRuleCall_3_1_1_0()); 
 	    }
-		lv_conjugated_7_0=rulePortClassConfig		{
+		lv_conjugated_8_0=rulePortClassConfig		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getProtocolClassConfigRule());
 	        }
        		set(
        			$current, 
        			"conjugated",
-        		lv_conjugated_7_0, 
+        		lv_conjugated_8_0, 
         		"PortClassConfig");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -807,9 +812,9 @@ ruleProtocolClassConfig returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getProtocolClassConfigAccess().getUnorderedGroup_3());
 	}
 
-)	otherlv_8='}' 
+)	otherlv_9='}' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getProtocolClassConfigAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_9, grammarAccess.getProtocolClassConfigAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;
@@ -2043,6 +2048,82 @@ ruleDocumentation returns [EObject current=null]
     }
 )
 ;
+
+
+
+
+
+// Entry rule entryRuleTIME
+entryRuleTIME returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTIMERule()); } 
+	 iv_ruleTIME=ruleTIME 
+	 { $current=$iv_ruleTIME.current.getText(); }  
+	 EOF 
+;
+
+// Rule TIME
+ruleTIME returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
+    }
+
+    { 
+    newLeafNode(this_INT_0, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_0_0()); 
+    }
+
+	kw='s' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getSKeyword_0_1()); 
+    }
+)
+    |(    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
+    }
+
+    { 
+    newLeafNode(this_INT_2, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_1_0()); 
+    }
+
+	kw='ms' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getMsKeyword_1_1()); 
+    }
+)
+    |(    this_INT_4=RULE_INT    {
+		$current.merge(this_INT_4);
+    }
+
+    { 
+    newLeafNode(this_INT_4, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_2_0()); 
+    }
+
+	kw='us' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getUsKeyword_2_1()); 
+    }
+)
+    |(    this_INT_6=RULE_INT    {
+		$current.merge(this_INT_6);
+    }
+
+    { 
+    newLeafNode(this_INT_6, grammarAccess.getTIMEAccess().getINTTerminalRuleCall_3_0()); 
+    }
+
+	kw='ns' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTIMEAccess().getNsKeyword_3_1()); 
+    }
+))
+    ;
 
 
 

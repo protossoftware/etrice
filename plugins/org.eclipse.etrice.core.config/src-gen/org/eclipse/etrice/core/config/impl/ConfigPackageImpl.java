@@ -1008,7 +1008,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEAttribute(getDynamicConfig_FilePath(), ecorePackage.getEString(), "filePath", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDynamicConfig_UserCode1(), ecorePackage.getEString(), "userCode1", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDynamicConfig_UserCode2(), ecorePackage.getEString(), "userCode2", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getDynamicConfig_Polling(), ecorePackage.getEInt(), "polling", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDynamicConfig_Polling(), ecorePackage.getELong(), "polling", null, 0, 1, DynamicConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actorClassConfigEClass, ActorClassConfig.class, "ActorClassConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActorClassConfig_Actor(), theRoomPackage.getActorClass(), null, "actor", null, 0, 1, ActorClassConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

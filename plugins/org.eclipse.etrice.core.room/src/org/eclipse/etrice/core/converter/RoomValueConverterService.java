@@ -13,9 +13,7 @@
 
 package org.eclipse.etrice.core.converter;
 
-import org.eclipse.etrice.core.common.converter.DoubleConverter;
-import org.eclipse.etrice.core.common.converter.LongConverter;
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
+import org.eclipse.etrice.core.common.converter.BaseConverterService;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 
@@ -23,22 +21,12 @@ import org.eclipse.xtext.conversion.ValueConverter;
  * @author Henrik Rentz-Reichert
  *
  */
-public class RoomValueConverterService extends DefaultTerminalConverters {
+public class RoomValueConverterService extends BaseConverterService {
 	
 	private MultiplicityConverter multiplicityConverter = new MultiplicityConverter();
 
 	@ValueConverter(rule = "MULTIPLICITY")
 	public IValueConverter<Integer> MULTIPLICITY() {
 		return multiplicityConverter;
-	}
-	
-	@ValueConverter(rule = "Integer")
-	public IValueConverter<Long> getLongConverter() {
-		return new LongConverter();
-	}
-
-	@ValueConverter(rule = "Real")
-	public IValueConverter<Double> getRealConverter() {
-		return new DoubleConverter();
 	}
 }

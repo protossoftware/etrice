@@ -34,8 +34,8 @@ RULE_WS=11
 '{'=28
 'optional'=33
 'ptCharacter'=20
-'false'=14
 '='=25
+'false'=14
 ':'=27
 '@'=21
 '('=22

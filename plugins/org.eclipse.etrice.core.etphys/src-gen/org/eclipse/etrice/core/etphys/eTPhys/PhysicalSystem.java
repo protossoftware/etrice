@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.Documentation;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Physical System</b></em>'.

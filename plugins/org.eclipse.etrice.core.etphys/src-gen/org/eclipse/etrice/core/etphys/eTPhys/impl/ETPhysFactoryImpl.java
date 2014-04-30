@@ -71,7 +71,6 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
       case ETPhysPackage.NODE_CLASS: return createNodeClass();
       case ETPhysPackage.PHYSICAL_THREAD: return createPhysicalThread();
       case ETPhysPackage.RUNTIME_CLASS: return createRuntimeClass();
-      case ETPhysPackage.DOCUMENTATION: return createDocumentation();
       case ETPhysPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -180,17 +179,6 @@ public class ETPhysFactoryImpl extends EFactoryImpl implements ETPhysFactory
   {
     RuntimeClassImpl runtimeClass = new RuntimeClassImpl();
     return runtimeClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Documentation createDocumentation()
-  {
-    DocumentationImpl documentation = new DocumentationImpl();
-    return documentation;
   }
 
   /**

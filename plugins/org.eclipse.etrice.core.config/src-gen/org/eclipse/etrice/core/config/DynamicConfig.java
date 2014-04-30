@@ -120,12 +120,12 @@ public interface DynamicConfig extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Polling</em>' attribute.
-   * @see #setPolling(int)
+   * @see #setPolling(long)
    * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig_Polling()
    * @model
    * @generated
    */
-  int getPolling();
+  long getPolling();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.config.DynamicConfig#getPolling <em>Polling</em>}' attribute.
@@ -135,6 +135,6 @@ public interface DynamicConfig extends EObject
    * @see #getPolling()
    * @generated
    */
-  void setPolling(int value);
+  void setPolling(long value);
 
 } // DynamicConfig

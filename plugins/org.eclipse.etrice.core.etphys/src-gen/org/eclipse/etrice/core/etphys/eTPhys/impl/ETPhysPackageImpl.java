@@ -10,7 +10,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
+import org.eclipse.etrice.core.common.base.BasePackage;
+
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysFactory;
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
@@ -72,13 +73,6 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * @generated
    */
   private EClass runtimeClassEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass documentationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -148,6 +142,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     ETPhysPackageImpl theETPhysPackage = (ETPhysPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ETPhysPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ETPhysPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    BasePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theETPhysPackage.createPackageContents();
@@ -509,26 +506,6 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDocumentation()
-  {
-    return documentationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getDocumentation_Text()
-  {
-    return (EAttribute)documentationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getImport()
   {
     return importEClass;
@@ -644,9 +621,6 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     createEReference(runtimeClassEClass, RUNTIME_CLASS__DOCU);
     createEAttribute(runtimeClassEClass, RUNTIME_CLASS__THREAD_MODEL);
 
-    documentationEClass = createEClass(DOCUMENTATION);
-    createEAttribute(documentationEClass, DOCUMENTATION__TEXT);
-
     importEClass = createEClass(IMPORT);
     createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
     createEAttribute(importEClass, IMPORT__IMPORT_URI);
@@ -680,6 +654,9 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -696,17 +673,17 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
 
     initEClass(physicalSystemEClass, PhysicalSystem.class, "PhysicalSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPhysicalSystem_Name(), ecorePackage.getEString(), "name", null, 0, 1, PhysicalSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPhysicalSystem_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, PhysicalSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPhysicalSystem_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, PhysicalSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPhysicalSystem_NodeRefs(), this.getNodeRef(), null, "nodeRefs", null, 0, -1, PhysicalSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nodeRefEClass, NodeRef.class, "NodeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNodeRef_Name(), ecorePackage.getEString(), "name", null, 0, 1, NodeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNodeRef_Type(), this.getNodeClass(), null, "type", null, 0, 1, NodeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNodeRef_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, NodeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNodeRef_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, NodeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nodeClassEClass, NodeClass.class, "NodeClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNodeClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNodeClass_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNodeClass_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNodeClass_Runtime(), this.getRuntimeClass(), null, "runtime", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getNodeClass_Priomin(), ecorePackage.getEInt(), "priomin", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getNodeClass_Priomax(), ecorePackage.getEInt(), "priomax", null, 0, 1, NodeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -724,11 +701,8 @@ public class ETPhysPackageImpl extends EPackageImpl implements ETPhysPackage
 
     initEClass(runtimeClassEClass, RuntimeClass.class, "RuntimeClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRuntimeClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, RuntimeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRuntimeClass_Docu(), this.getDocumentation(), null, "docu", null, 0, 1, RuntimeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuntimeClass_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, RuntimeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRuntimeClass_ThreadModel(), this.getThreadModel(), "threadModel", null, 0, 1, RuntimeClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(documentationEClass, Documentation.class, "Documentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDocumentation_Text(), ecorePackage.getEString(), "text", null, 0, -1, Documentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

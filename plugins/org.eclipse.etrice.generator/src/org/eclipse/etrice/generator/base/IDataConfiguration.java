@@ -116,7 +116,7 @@ public interface IDataConfiguration {
 	 * @param subsystem the {@link SubSystemInstance}
 	 * @return the configured value
 	 */
-	public int getPollingTimerUser(SubSystemInstance subsystem);
+	public long getPollingTimerUser(SubSystemInstance subsystem);
 	
 	/**
 	 * @param subsystem the {@link SubSystemInstance}

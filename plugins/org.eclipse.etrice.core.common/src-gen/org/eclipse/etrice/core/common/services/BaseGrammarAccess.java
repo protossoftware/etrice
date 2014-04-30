@@ -36,11 +36,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//// **************************************************************
-		//
 		//// AnnotationType and Annotation Rules
-		//
 		//Annotation:
-		//
 		//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 		public ParserRule getRule() { return rule; }
 
@@ -97,7 +94,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueLiteralParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//KeyValue:
-		//
 		//	key=ID "=" value=Literal;
 		public ParserRule getRule() { return rule; }
 
@@ -148,14 +144,11 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//AnnotationType:
-		//
 		//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
-		//
 		//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
-		//
 		//targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}"
 		public Group getGroup() { return cGroup; }
 
@@ -234,23 +227,14 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		////
-		//
 		//// Sub-grammars should use AnnotationTargetType to refer to 
-		//
 		//// specific sub-grammar targets. For example, valid values for 
-		//
 		//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-		//
 		//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-		//
 		//// implementing validation, quick-fixes, and code completion proposals via the 
-		//
 		//// usual Xtext mechanisms.
-		//
 		////
-		//
 		//AnnotationTargetType:
-		//
 		//	ID;
 		public ParserRule getRule() { return rule; }
 
@@ -265,7 +249,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEnumAnnotationAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AnnotationAttribute:
-		//
 		//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 		public ParserRule getRule() { return rule; }
 
@@ -294,7 +277,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeLiteralTypeEnumRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
 		
 		//SimpleAnnotationAttribute:
-		//
 		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
 		public ParserRule getRule() { return rule; }
 
@@ -353,7 +335,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//EnumAnnotationAttribute:
-		//
 		//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -419,11 +400,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//// **************************************************************
-		//
 		//// Documentation Rule
-		//
 		//Documentation:
-		//
 		//	{Documentation} "[" lines+=STRING* "]";
 		public ParserRule getRule() { return rule; }
 
@@ -446,6 +424,68 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 
+	public class TIMEElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TIME");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Keyword cSKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Keyword cMsKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final RuleCall cINTTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
+		private final Keyword cUsKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final RuleCall cINTTerminalRuleCall_3_0 = (RuleCall)cGroup_3.eContents().get(0);
+		private final Keyword cNsKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		
+		//// **************************************************************
+		//// Time Rule
+		//TIME returns ecore::ELong:
+		//	INT "s" | INT "ms" | INT "us" | INT "ns";
+		public ParserRule getRule() { return rule; }
+
+		//INT "s" | INT "ms" | INT "us" | INT "ns"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//INT "s"
+		public Group getGroup_0() { return cGroup_0; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_0_0() { return cINTTerminalRuleCall_0_0; }
+
+		//"s"
+		public Keyword getSKeyword_0_1() { return cSKeyword_0_1; }
+
+		//INT "ms"
+		public Group getGroup_1() { return cGroup_1; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_0() { return cINTTerminalRuleCall_1_0; }
+
+		//"ms"
+		public Keyword getMsKeyword_1_1() { return cMsKeyword_1_1; }
+
+		//INT "us"
+		public Group getGroup_2() { return cGroup_2; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_2_0() { return cINTTerminalRuleCall_2_0; }
+
+		//"us"
+		public Keyword getUsKeyword_2_1() { return cUsKeyword_2_1; }
+
+		//INT "ns"
+		public Group getGroup_3() { return cGroup_3; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_3_0() { return cINTTerminalRuleCall_3_0; }
+
+		//"ns"
+		public Keyword getNsKeyword_3_1() { return cNsKeyword_3_1; }
+	}
+
 	public class LiteralArrayElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralArray");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -457,7 +497,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLiteralsLiteralParserRuleCall_1_1_0 = (RuleCall)cLiteralsAssignment_1_1.eContents().get(0);
 		
 		//LiteralArray:
-		//
 		//	literals+=Literal ("," literals+=Literal)*;
 		public ParserRule getRule() { return rule; }
 
@@ -491,9 +530,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStringLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//// Value Types for Attributes
-		//
 		//Literal:
-		//
 		//	BooleanLiteral | NumberLiteral | StringLiteral;
 		public ParserRule getRule() { return rule; }
 
@@ -520,7 +557,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cIsTrueTrueKeyword_1_1_0 = (Keyword)cIsTrueAssignment_1_1.eContents().get(0);
 		
 		//BooleanLiteral:
-		//
 		//	{BooleanLiteral} ("false" | isTrue?="true");
 		public ParserRule getRule() { return rule; }
 
@@ -550,7 +586,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRealLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//NumberLiteral:
-		//
 		//	IntLiteral | RealLiteral;
 		public ParserRule getRule() { return rule; }
 
@@ -572,7 +607,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueRealParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//RealLiteral:
-		//
 		//	{RealLiteral} value=Real;
 		public ParserRule getRule() { return rule; }
 
@@ -597,7 +631,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueIntegerParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//IntLiteral:
-		//
 		//	{IntLiteral} value=Integer;
 		public ParserRule getRule() { return rule; }
 
@@ -622,7 +655,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//StringLiteral:
-		//
 		//	{StringLiteral} value=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -646,7 +678,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cHexadecimalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Integer returns ecore::ELong:
-		//
 		//	SignedInteger | Hexadecimal;
 		public ParserRule getRule() { return rule; }
 
@@ -669,7 +700,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//SignedInteger hidden():
-		//
 		//	("+" | "-")? INT;
 		public ParserRule getRule() { return rule; }
 
@@ -694,7 +724,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cHEXTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Hexadecimal hidden():
-		//
 		//	HEX;
 		public ParserRule getRule() { return rule; }
 
@@ -711,7 +740,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDecimalExpParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Real returns ecore::EDouble:
-		//
 		//	Decimal | DotDecimal | DecimalDot | DecimalExp;
 		public ParserRule getRule() { return rule; }
 
@@ -742,7 +770,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//Decimal hidden():
-		//
 		//	("+" | "-")? INT "." INT;
 		public ParserRule getRule() { return rule; }
 
@@ -778,7 +805,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//DotDecimal hidden():
-		//
 		//	("+" | "-")? "." INT;
 		public ParserRule getRule() { return rule; }
 
@@ -811,7 +837,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//DecimalDot hidden():
-		//
 		//	("+" | "-")? INT ".";
 		public ParserRule getRule() { return rule; }
 
@@ -846,7 +871,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEXPTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//DecimalExp hidden():
-		//
 		//	("+" | "-")? INT "." INT EXP;
 		public ParserRule getRule() { return rule; }
 
@@ -884,7 +908,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -918,11 +941,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCHARPtCharacterKeyword_3_0 = (Keyword)cCHAREnumLiteralDeclaration_3.eContents().get(0);
 		
 		//// **************************************************************
-		//
 		//// Literal Rules
-		//
 		//enum LiteralType:
-		//
 		//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 		public EnumRule getRule() { return rule; }
 
@@ -962,6 +982,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	private SimpleAnnotationAttributeElements pSimpleAnnotationAttribute;
 	private EnumAnnotationAttributeElements pEnumAnnotationAttribute;
 	private DocumentationElements pDocumentation;
+	private TIMEElements pTIME;
 	private LiteralTypeElements unknownRuleLiteralType;
 	private LiteralArrayElements pLiteralArray;
 	private LiteralElements pLiteral;
@@ -1021,11 +1042,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//// **************************************************************
-	//
 	//// AnnotationType and Annotation Rules
-	//
 	//Annotation:
-	//
 	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 	public AnnotationElements getAnnotationAccess() {
 		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
@@ -1036,7 +1054,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//KeyValue:
-	//
 	//	key=ID "=" value=Literal;
 	public KeyValueElements getKeyValueAccess() {
 		return (pKeyValue != null) ? pKeyValue : (pKeyValue = new KeyValueElements());
@@ -1047,9 +1064,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnnotationType:
-	//
 	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
-	//
 	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public AnnotationTypeElements getAnnotationTypeAccess() {
 		return (pAnnotationType != null) ? pAnnotationType : (pAnnotationType = new AnnotationTypeElements());
@@ -1060,23 +1075,14 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////
-	//
 	//// Sub-grammars should use AnnotationTargetType to refer to 
-	//
 	//// specific sub-grammar targets. For example, valid values for 
-	//
 	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
-	//
 	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
-	//
 	//// implementing validation, quick-fixes, and code completion proposals via the 
-	//
 	//// usual Xtext mechanisms.
-	//
 	////
-	//
 	//AnnotationTargetType:
-	//
 	//	ID;
 	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return (pAnnotationTargetType != null) ? pAnnotationTargetType : (pAnnotationTargetType = new AnnotationTargetTypeElements());
@@ -1087,7 +1093,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnnotationAttribute:
-	//
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public AnnotationAttributeElements getAnnotationAttributeAccess() {
 		return (pAnnotationAttribute != null) ? pAnnotationAttribute : (pAnnotationAttribute = new AnnotationAttributeElements());
@@ -1098,7 +1103,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleAnnotationAttribute:
-	//
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
 	public SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
 		return (pSimpleAnnotationAttribute != null) ? pSimpleAnnotationAttribute : (pSimpleAnnotationAttribute = new SimpleAnnotationAttributeElements());
@@ -1109,7 +1113,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EnumAnnotationAttribute:
-	//
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 	public EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
 		return (pEnumAnnotationAttribute != null) ? pEnumAnnotationAttribute : (pEnumAnnotationAttribute = new EnumAnnotationAttributeElements());
@@ -1120,11 +1123,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//
 	//// Documentation Rule
-	//
 	//Documentation:
-	//
 	//	{Documentation} "[" lines+=STRING* "]";
 	public DocumentationElements getDocumentationAccess() {
 		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
@@ -1135,11 +1135,20 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//
+	//// Time Rule
+	//TIME returns ecore::ELong:
+	//	INT "s" | INT "ms" | INT "us" | INT "ns";
+	public TIMEElements getTIMEAccess() {
+		return (pTIME != null) ? pTIME : (pTIME = new TIMEElements());
+	}
+	
+	public ParserRule getTIMERule() {
+		return getTIMEAccess().getRule();
+	}
+
+	//// **************************************************************
 	//// Literal Rules
-	//
 	//enum LiteralType:
-	//
 	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 	public LiteralTypeElements getLiteralTypeAccess() {
 		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
@@ -1150,7 +1159,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LiteralArray:
-	//
 	//	literals+=Literal ("," literals+=Literal)*;
 	public LiteralArrayElements getLiteralArrayAccess() {
 		return (pLiteralArray != null) ? pLiteralArray : (pLiteralArray = new LiteralArrayElements());
@@ -1161,9 +1169,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Value Types for Attributes
-	//
 	//Literal:
-	//
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
@@ -1174,7 +1180,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BooleanLiteral:
-	//
 	//	{BooleanLiteral} ("false" | isTrue?="true");
 	public BooleanLiteralElements getBooleanLiteralAccess() {
 		return (pBooleanLiteral != null) ? pBooleanLiteral : (pBooleanLiteral = new BooleanLiteralElements());
@@ -1185,7 +1190,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NumberLiteral:
-	//
 	//	IntLiteral | RealLiteral;
 	public NumberLiteralElements getNumberLiteralAccess() {
 		return (pNumberLiteral != null) ? pNumberLiteral : (pNumberLiteral = new NumberLiteralElements());
@@ -1196,7 +1200,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral:
-	//
 	//	{RealLiteral} value=Real;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
@@ -1207,7 +1210,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntLiteral:
-	//
 	//	{IntLiteral} value=Integer;
 	public IntLiteralElements getIntLiteralAccess() {
 		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
@@ -1218,7 +1220,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StringLiteral:
-	//
 	//	{StringLiteral} value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
 		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
@@ -1229,7 +1230,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//
 	//	SignedInteger | Hexadecimal;
 	public IntegerElements getIntegerAccess() {
 		return (pInteger != null) ? pInteger : (pInteger = new IntegerElements());
@@ -1240,7 +1240,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SignedInteger hidden():
-	//
 	//	("+" | "-")? INT;
 	public SignedIntegerElements getSignedIntegerAccess() {
 		return (pSignedInteger != null) ? pSignedInteger : (pSignedInteger = new SignedIntegerElements());
@@ -1251,7 +1250,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Hexadecimal hidden():
-	//
 	//	HEX;
 	public HexadecimalElements getHexadecimalAccess() {
 		return (pHexadecimal != null) ? pHexadecimal : (pHexadecimal = new HexadecimalElements());
@@ -1262,7 +1260,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real returns ecore::EDouble:
-	//
 	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
 	public RealElements getRealAccess() {
 		return (pReal != null) ? pReal : (pReal = new RealElements());
@@ -1273,7 +1270,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Decimal hidden():
-	//
 	//	("+" | "-")? INT "." INT;
 	public DecimalElements getDecimalAccess() {
 		return (pDecimal != null) ? pDecimal : (pDecimal = new DecimalElements());
@@ -1284,7 +1280,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DotDecimal hidden():
-	//
 	//	("+" | "-")? "." INT;
 	public DotDecimalElements getDotDecimalAccess() {
 		return (pDotDecimal != null) ? pDotDecimal : (pDotDecimal = new DotDecimalElements());
@@ -1295,7 +1290,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DecimalDot hidden():
-	//
 	//	("+" | "-")? INT ".";
 	public DecimalDotElements getDecimalDotAccess() {
 		return (pDecimalDot != null) ? pDecimalDot : (pDecimalDot = new DecimalDotElements());
@@ -1306,7 +1300,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DecimalExp hidden():
-	//
 	//	("+" | "-")? INT "." INT EXP;
 	public DecimalExpElements getDecimalExpAccess() {
 		return (pDecimalExp != null) ? pDecimalExp : (pDecimalExp = new DecimalExpElements());
@@ -1317,21 +1310,18 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal EXP:
-	//
 	//	("e" | "E") ("+" | "-")? "0".."9"+;
 	public TerminalRule getEXPRule() {
 		return (tEXP != null) ? tEXP : (tEXP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXP"));
 	} 
 
 	//terminal HEX:
-	//
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
 	public TerminalRule getHEXRule() {
 		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
 	} 
 
 	//FQN:
-	//
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -1342,51 +1332,43 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

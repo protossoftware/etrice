@@ -35,6 +35,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 
 import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.core.common.converter.TimeConverter
 
 @Singleton
 class VariableServiceGen {
@@ -156,7 +157,7 @@ class VariableServiceGen {
 			
 			@Override
 			protected int getPollingTimerUser(){
-				return «configExt.getPollingTimerUser(comp)»;
+				return «TimeConverter::split(configExt.getPollingTimerUser(comp), TimeConverter.MILLI_SEC, true)»;
 			}
 			
 		}

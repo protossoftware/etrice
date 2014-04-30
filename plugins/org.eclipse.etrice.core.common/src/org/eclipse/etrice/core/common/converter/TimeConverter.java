@@ -10,11 +10,12 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.etphys.converters;
+package org.eclipse.etrice.core.common.converter;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -36,8 +37,12 @@ public class TimeConverter extends AbstractLexerBasedConverter<Long> {
 	 */
 	@Override
 	public Long toValue(String string, INode node) throws ValueConverterException {
-		if (string == null || string.isEmpty())
-			throw new ValueConverterException("Couldn't convert empty string to time.", node, null);
+		if (Strings.isEmpty(string)) {
+			if (node != null && !Strings.isEmpty(node.getText()))
+				throw new ValueConverterException("No valid time value.", node, null);
+			else
+				throw new ValueConverterException("Couldn't convert empty string to time.", node, null);
+		}
 		else {
 			// determine power and extract number
 			int power;
@@ -64,6 +69,7 @@ public class TimeConverter extends AbstractLexerBasedConverter<Long> {
 
 			try {
 				long val = Long.parseLong(value.trim());
+				// TIME rule implies val >= 0
 				return val * power;
 			}
 			catch (NumberFormatException e) {

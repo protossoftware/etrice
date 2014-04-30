@@ -10,12 +10,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.ComposedChecks;
 
 @ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class, org.eclipse.xtext.validation.NamesAreUniqueValidator.class})
-public class AbstractETPhysJavaValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
+public class AbstractETPhysJavaValidator extends org.eclipse.etrice.core.common.validation.BaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage.eINSTANCE);
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/etrice/core/common/Base"));
 		return result;
 	}
 

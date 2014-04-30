@@ -3,7 +3,19 @@ package org.eclipse.etrice.core.etphys.serializer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.etphys.eTPhys.Documentation;
+import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
+import org.eclipse.etrice.core.common.base.Documentation;
+import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.IntLiteral;
+import org.eclipse.etrice.core.common.base.KeyValue;
+import org.eclipse.etrice.core.common.base.LiteralArray;
+import org.eclipse.etrice.core.common.base.RealLiteral;
+import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.etrice.core.common.serializer.BaseSemanticSequencer;
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 import org.eclipse.etrice.core.etphys.eTPhys.Import;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
@@ -16,25 +28,94 @@ import org.eclipse.etrice.core.etphys.services.ETPhysGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
-public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 
 	@Inject
 	private ETPhysGrammarAccess grammarAccess;
 	
 	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ETPhysPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case ETPhysPackage.DOCUMENTATION:
+		if(semanticObject.eClass().getEPackage() == BasePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case BasePackage.ANNOTATION:
+				if(context == grammarAccess.getAnnotationRule()) {
+					sequence_Annotation(context, (Annotation) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.ANNOTATION_TYPE:
+				if(context == grammarAccess.getAnnotationTypeRule()) {
+					sequence_AnnotationType(context, (AnnotationType) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.BOOLEAN_LITERAL:
+				if(context == grammarAccess.getBooleanLiteralRule() ||
+				   context == grammarAccess.getLiteralRule()) {
+					sequence_BooleanLiteral(context, (BooleanLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.DOCUMENTATION:
 				if(context == grammarAccess.getDocumentationRule()) {
 					sequence_Documentation(context, (Documentation) semanticObject); 
 					return; 
 				}
 				else break;
+			case BasePackage.ENUM_ANNOTATION_ATTRIBUTE:
+				if(context == grammarAccess.getAnnotationAttributeRule() ||
+				   context == grammarAccess.getEnumAnnotationAttributeRule()) {
+					sequence_EnumAnnotationAttribute(context, (EnumAnnotationAttribute) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.INT_LITERAL:
+				if(context == grammarAccess.getIntLiteralRule() ||
+				   context == grammarAccess.getLiteralRule() ||
+				   context == grammarAccess.getNumberLiteralRule()) {
+					sequence_IntLiteral(context, (IntLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.KEY_VALUE:
+				if(context == grammarAccess.getKeyValueRule()) {
+					sequence_KeyValue(context, (KeyValue) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.LITERAL_ARRAY:
+				if(context == grammarAccess.getLiteralArrayRule()) {
+					sequence_LiteralArray(context, (LiteralArray) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.REAL_LITERAL:
+				if(context == grammarAccess.getLiteralRule() ||
+				   context == grammarAccess.getNumberLiteralRule() ||
+				   context == grammarAccess.getRealLiteralRule()) {
+					sequence_RealLiteral(context, (RealLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE:
+				if(context == grammarAccess.getAnnotationAttributeRule() ||
+				   context == grammarAccess.getSimpleAnnotationAttributeRule()) {
+					sequence_SimpleAnnotationAttribute(context, (SimpleAnnotationAttribute) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.STRING_LITERAL:
+				if(context == grammarAccess.getLiteralRule() ||
+				   context == grammarAccess.getStringLiteralRule()) {
+					sequence_StringLiteral(context, (StringLiteral) semanticObject); 
+					return; 
+				}
+				else break;
+			}
+		else if(semanticObject.eClass().getEPackage() == ETPhysPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ETPhysPackage.IMPORT:
 				if(context == grammarAccess.getImportRule()) {
 					sequence_Import(context, (Import) semanticObject); 
@@ -80,15 +161,6 @@ public class ETPhysSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
-	
-	/**
-	 * Constraint:
-	 *     text+=STRING+
-	 */
-	protected void sequence_Documentation(EObject context, Documentation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
 	
 	/**
 	 * Constraint:

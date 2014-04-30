@@ -88,7 +88,7 @@
         <details key="documentation" value="&lt;br>This is the constructor statement for the implemenation of the configuration source.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="polling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="polling" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>Defines the time interval in milliseconds to query changes from the configuration source.&#xD;&#xA;"/>
       </eAnnotations>

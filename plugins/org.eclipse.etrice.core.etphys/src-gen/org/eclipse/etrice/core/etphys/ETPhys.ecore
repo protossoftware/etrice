@@ -45,7 +45,7 @@
         <details key="documentation" value="&lt;br>The name of the physical system by which it is referred to in the model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -72,7 +72,7 @@
         <details key="documentation" value="&lt;br>The node class of this reference.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -88,7 +88,7 @@
         <details key="documentation" value="&lt;br>The name of the node class by which it is referred to in the model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -171,7 +171,7 @@
         <details key="documentation" value="&lt;br>The name of the runtime class by which it is referred to in the model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -186,17 +186,6 @@
   <eClassifiers xsi:type="ecore:EEnum" name="ThreadModel">
     <eLiterals name="SINGLE_THREADED" literal="singleThreaded"/>
     <eLiterals name="MULTI_THREADED" value="1" literal="multiThreaded"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Documentation">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>A piece of documentation that can be optionally attached at&#xD;&#xA;certain places in the model.&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is the documentation's contents.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

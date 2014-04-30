@@ -18,7 +18,8 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 // **************************************************************
 // AnnotationType and Annotation Rules
 
-Annotation: '@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
+Annotation:'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?
+;
 KeyValue: key=ID '=' value=Literal;
 
 AnnotationType:
@@ -58,6 +59,11 @@ Documentation:
 	'['
 		lines+=STRING*
 	']';
+
+// **************************************************************
+// Time Rule
+
+TIME returns ecore::ELong: (INT 's') | (INT 'ms') | (INT 'us') | (INT 'ns');
 
 // **************************************************************
 // Literal Rules

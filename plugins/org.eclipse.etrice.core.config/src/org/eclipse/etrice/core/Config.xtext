@@ -35,7 +35,7 @@ DynamicConfig:
 	((('file path' filePath=STRING) |
 	(('user import' userCode1=STRING)
 	('user constructor' userCode2=STRING))) &
-	('polling timer [ms]' polling=INT)?)
+	('polling interval' polling=TIME)?)
 	'}';
 
 ActorClassConfig:
@@ -52,7 +52,7 @@ ActorInstanceConfig:
 ProtocolClassConfig:
 	'ProtocolClassConfig' protocol=[room::ProtocolClass|FQN] '{'
 	(('regular' regular=PortClassConfig)? &
-	('conjugate' conjugated=PortClassConfig)?)
+	(('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
 	'}';
 
 PortClassConfig:

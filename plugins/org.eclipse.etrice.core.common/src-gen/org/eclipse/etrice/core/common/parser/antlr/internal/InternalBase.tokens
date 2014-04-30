@@ -49,5 +49,5 @@ RULE_WS=11
 ')'=16
 'ptBoolean'=31
 'ptInteger'=32
-'mandatory'=19
 ']'=25
+'mandatory'=19

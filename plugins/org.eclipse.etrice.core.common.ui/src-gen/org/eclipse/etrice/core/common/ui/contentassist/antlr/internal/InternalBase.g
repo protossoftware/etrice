@@ -256,6 +256,8 @@ finally {
 
 
 
+
+
 // Entry rule entryRuleLiteral
 entryRuleLiteral 
 :
@@ -814,6 +816,7 @@ rule__EnumAnnotationAttribute__Alternatives_0
 finally {
 	restoreStackSize(stackSize);
 }
+
 
 rule__Literal__Alternatives
     @init {
@@ -2091,6 +2094,10 @@ rule__Documentation__Group__3__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+
+
 
 
 

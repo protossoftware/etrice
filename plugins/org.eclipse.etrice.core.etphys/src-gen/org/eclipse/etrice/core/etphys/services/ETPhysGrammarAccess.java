@@ -12,7 +12,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
 
 @Singleton
 public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
@@ -531,34 +531,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
-	public class DocumentationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Documentation");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTextAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTextSTRINGTerminalRuleCall_1_0 = (RuleCall)cTextAssignment_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//Documentation:
-		//	"[" text+=STRING+ "]";
-		public ParserRule getRule() { return rule; }
-
-		//"[" text+=STRING+ "]"
-		public Group getGroup() { return cGroup; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
-
-		//text+=STRING+
-		public Assignment getTextAssignment_1() { return cTextAssignment_1; }
-
-		//STRING
-		public RuleCall getTextSTRINGTerminalRuleCall_1_0() { return cTextSTRINGTerminalRuleCall_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
-	}
-
 	public class PRIOElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PRIO");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -682,66 +654,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
-
-	public class TIMEElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TIME");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
-		private final Keyword cSKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
-		private final Keyword cMsKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final RuleCall cINTTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Keyword cUsKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final RuleCall cINTTerminalRuleCall_3_0 = (RuleCall)cGroup_3.eContents().get(0);
-		private final Keyword cNsKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
-		
-		//TIME returns ecore::ELong:
-		//	INT "s" | INT "ms" | INT "us" | INT "ns";
-		public ParserRule getRule() { return rule; }
-
-		//INT "s" | INT "ms" | INT "us" | INT "ns"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//INT "s"
-		public Group getGroup_0() { return cGroup_0; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_0_0() { return cINTTerminalRuleCall_0_0; }
-
-		//"s"
-		public Keyword getSKeyword_0_1() { return cSKeyword_0_1; }
-
-		//INT "ms"
-		public Group getGroup_1() { return cGroup_1; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_1_0() { return cINTTerminalRuleCall_1_0; }
-
-		//"ms"
-		public Keyword getMsKeyword_1_1() { return cMsKeyword_1_1; }
-
-		//INT "us"
-		public Group getGroup_2() { return cGroup_2; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_2_0() { return cINTTerminalRuleCall_2_0; }
-
-		//"us"
-		public Keyword getUsKeyword_2_1() { return cUsKeyword_2_1; }
-
-		//INT "ns"
-		public Group getGroup_3() { return cGroup_3; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_3_0() { return cINTTerminalRuleCall_3_0; }
-
-		//"ns"
-		public Keyword getNsKeyword_3_1() { return cNsKeyword_3_1; }
-	}
 	
 	
 	public class ExecModeElements extends AbstractEnumRuleElementFinder {
@@ -816,22 +728,20 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	private ExecModeElements unknownRuleExecMode;
 	private RuntimeClassElements pRuntimeClass;
 	private ThreadModelElements unknownRuleThreadModel;
-	private DocumentationElements pDocumentation;
 	private PRIOElements pPRIO;
 	private ImportElements pImport;
 	private ImportedFQNElements pImportedFQN;
 	private FQNElements pFQN;
-	private TIMEElements pTIME;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private BaseGrammarAccess gaBase;
 
 	@Inject
 	public ETPhysGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaTerminals = gaTerminals;
+		this.gaBase = gaBase;
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -856,8 +766,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 
-	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return gaTerminals;
+	public BaseGrammarAccess getBaseGrammarAccess() {
+		return gaBase;
 	}
 
 	
@@ -945,16 +855,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getThreadModelAccess().getRule();
 	}
 
-	//Documentation:
-	//	"[" text+=STRING+ "]";
-	public DocumentationElements getDocumentationAccess() {
-		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
-	}
-	
-	public ParserRule getDocumentationRule() {
-		return getDocumentationAccess().getRule();
-	}
-
 	//PRIO returns ecore::EInt hidden():
 	//	("+" | "-")? INT;
 	public PRIOElements getPRIOAccess() {
@@ -995,56 +895,326 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getFQNAccess().getRule();
 	}
 
+	//// **************************************************************
+	//// AnnotationType and Annotation Rules
+	//Annotation:
+	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
+	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
+		return gaBase.getAnnotationAccess();
+	}
+	
+	public ParserRule getAnnotationRule() {
+		return getAnnotationAccess().getRule();
+	}
+
+	//KeyValue:
+	//	key=ID "=" value=Literal;
+	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
+		return gaBase.getKeyValueAccess();
+	}
+	
+	public ParserRule getKeyValueRule() {
+		return getKeyValueAccess().getRule();
+	}
+
+	//AnnotationType:
+	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
+	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
+	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
+		return gaBase.getAnnotationTypeAccess();
+	}
+	
+	public ParserRule getAnnotationTypeRule() {
+		return getAnnotationTypeAccess().getRule();
+	}
+
+	////
+	//// Sub-grammars should use AnnotationTargetType to refer to 
+	//// specific sub-grammar targets. For example, valid values for 
+	//// AnnotationTargetType in the Room.xtext sub-grammar include "ActorClass", 
+	//// "ActorBehavior", "ProtocolClass", etc. The sub-grammar is responsible for 
+	//// implementing validation, quick-fixes, and code completion proposals via the 
+	//// usual Xtext mechanisms.
+	////
+	//AnnotationTargetType:
+	//	ID;
+	public BaseGrammarAccess.AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
+		return gaBase.getAnnotationTargetTypeAccess();
+	}
+	
+	public ParserRule getAnnotationTargetTypeRule() {
+		return getAnnotationTargetTypeAccess().getRule();
+	}
+
+	//AnnotationAttribute:
+	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
+	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
+		return gaBase.getAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getAnnotationAttributeRule() {
+		return getAnnotationAttributeAccess().getRule();
+	}
+
+	//SimpleAnnotationAttribute:
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
+	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
+		return gaBase.getSimpleAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getSimpleAnnotationAttributeRule() {
+		return getSimpleAnnotationAttributeAccess().getRule();
+	}
+
+	//EnumAnnotationAttribute:
+	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
+	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
+		return gaBase.getEnumAnnotationAttributeAccess();
+	}
+	
+	public ParserRule getEnumAnnotationAttributeRule() {
+		return getEnumAnnotationAttributeAccess().getRule();
+	}
+
+	//// **************************************************************
+	//// Documentation Rule
+	//Documentation:
+	//	{Documentation} "[" lines+=STRING* "]";
+	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
+		return gaBase.getDocumentationAccess();
+	}
+	
+	public ParserRule getDocumentationRule() {
+		return getDocumentationAccess().getRule();
+	}
+
+	//// **************************************************************
+	//// Time Rule
 	//TIME returns ecore::ELong:
 	//	INT "s" | INT "ms" | INT "us" | INT "ns";
-	public TIMEElements getTIMEAccess() {
-		return (pTIME != null) ? pTIME : (pTIME = new TIMEElements());
+	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
+		return gaBase.getTIMEAccess();
 	}
 	
 	public ParserRule getTIMERule() {
 		return getTIMEAccess().getRule();
 	}
 
+	//// **************************************************************
+	//// Literal Rules
+	//enum LiteralType:
+	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
+	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
+		return gaBase.getLiteralTypeAccess();
+	}
+	
+	public EnumRule getLiteralTypeRule() {
+		return getLiteralTypeAccess().getRule();
+	}
+
+	//LiteralArray:
+	//	literals+=Literal ("," literals+=Literal)*;
+	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
+		return gaBase.getLiteralArrayAccess();
+	}
+	
+	public ParserRule getLiteralArrayRule() {
+		return getLiteralArrayAccess().getRule();
+	}
+
+	//// Value Types for Attributes
+	//Literal:
+	//	BooleanLiteral | NumberLiteral | StringLiteral;
+	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
+		return gaBase.getLiteralAccess();
+	}
+	
+	public ParserRule getLiteralRule() {
+		return getLiteralAccess().getRule();
+	}
+
+	//BooleanLiteral:
+	//	{BooleanLiteral} ("false" | isTrue?="true");
+	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
+		return gaBase.getBooleanLiteralAccess();
+	}
+	
+	public ParserRule getBooleanLiteralRule() {
+		return getBooleanLiteralAccess().getRule();
+	}
+
+	//NumberLiteral:
+	//	IntLiteral | RealLiteral;
+	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
+		return gaBase.getNumberLiteralAccess();
+	}
+	
+	public ParserRule getNumberLiteralRule() {
+		return getNumberLiteralAccess().getRule();
+	}
+
+	//RealLiteral:
+	//	{RealLiteral} value=Real;
+	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
+		return gaBase.getRealLiteralAccess();
+	}
+	
+	public ParserRule getRealLiteralRule() {
+		return getRealLiteralAccess().getRule();
+	}
+
+	//IntLiteral:
+	//	{IntLiteral} value=Integer;
+	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
+		return gaBase.getIntLiteralAccess();
+	}
+	
+	public ParserRule getIntLiteralRule() {
+		return getIntLiteralAccess().getRule();
+	}
+
+	//StringLiteral:
+	//	{StringLiteral} value=STRING;
+	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
+		return gaBase.getStringLiteralAccess();
+	}
+	
+	public ParserRule getStringLiteralRule() {
+		return getStringLiteralAccess().getRule();
+	}
+
+	//Integer returns ecore::ELong:
+	//	SignedInteger | Hexadecimal;
+	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
+		return gaBase.getIntegerAccess();
+	}
+	
+	public ParserRule getIntegerRule() {
+		return getIntegerAccess().getRule();
+	}
+
+	//SignedInteger hidden():
+	//	("+" | "-")? INT;
+	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
+		return gaBase.getSignedIntegerAccess();
+	}
+	
+	public ParserRule getSignedIntegerRule() {
+		return getSignedIntegerAccess().getRule();
+	}
+
+	//Hexadecimal hidden():
+	//	HEX;
+	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
+		return gaBase.getHexadecimalAccess();
+	}
+	
+	public ParserRule getHexadecimalRule() {
+		return getHexadecimalAccess().getRule();
+	}
+
+	//Real returns ecore::EDouble:
+	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	public BaseGrammarAccess.RealElements getRealAccess() {
+		return gaBase.getRealAccess();
+	}
+	
+	public ParserRule getRealRule() {
+		return getRealAccess().getRule();
+	}
+
+	//Decimal hidden():
+	//	("+" | "-")? INT "." INT;
+	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
+		return gaBase.getDecimalAccess();
+	}
+	
+	public ParserRule getDecimalRule() {
+		return getDecimalAccess().getRule();
+	}
+
+	//DotDecimal hidden():
+	//	("+" | "-")? "." INT;
+	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
+		return gaBase.getDotDecimalAccess();
+	}
+	
+	public ParserRule getDotDecimalRule() {
+		return getDotDecimalAccess().getRule();
+	}
+
+	//DecimalDot hidden():
+	//	("+" | "-")? INT ".";
+	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
+		return gaBase.getDecimalDotAccess();
+	}
+	
+	public ParserRule getDecimalDotRule() {
+		return getDecimalDotAccess().getRule();
+	}
+
+	//DecimalExp hidden():
+	//	("+" | "-")? INT "." INT EXP;
+	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
+		return gaBase.getDecimalExpAccess();
+	}
+	
+	public ParserRule getDecimalExpRule() {
+		return getDecimalExpAccess().getRule();
+	}
+
+	//terminal EXP:
+	//	("e" | "E") ("+" | "-")? "0".."9"+;
+	public TerminalRule getEXPRule() {
+		return gaBase.getEXPRule();
+	} 
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return gaBase.getHEXRule();
+	} 
+
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
+		return gaBase.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
-		return gaTerminals.getINTRule();
+		return gaBase.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return gaTerminals.getSTRINGRule();
+		return gaBase.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return gaTerminals.getML_COMMENTRule();
+		return gaBase.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaTerminals.getSL_COMMENTRule();
+		return gaBase.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return gaTerminals.getWSRule();
+		return gaBase.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaTerminals.getANY_OTHERRule();
+		return gaBase.getANY_OTHERRule();
 	} 
 }

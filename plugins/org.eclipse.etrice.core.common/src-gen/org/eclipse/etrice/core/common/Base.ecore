@@ -4,11 +4,11 @@
     nsPrefix="base">
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>An annotation similar to Java annotations that can be used&#xD;&#xA;to add {@link KeyValue} pairs to certain model items. The structure &#xD;&#xA;of Annotations are defined by {@AnnotationType}s.&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>An annotation similar to Java annotations that can be used&#xD;&#xA;to add {@link KeyValue} pairs to certain model items. The structure &#xD;&#xA;of Annotations are defined by {@link AnnotationType}s.&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnnotationType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>The {@AnnotationType} that defines the structure of &#xD;&#xA;the annotation.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>The {@link AnnotationType} that defines the structure of &#xD;&#xA;the annotation.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
@@ -52,13 +52,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="targets" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>A list of names representing the locations in which &#xD;&#xA;&#x9;&#x9;&#x9;{@Annotation}s of this AnnotationType can occur"/>
+        <details key="documentation" value="&lt;br>A list of names representing the locations in which &#xD;&#xA;&#x9;&#x9;&#x9;{@link Annotation}s of this AnnotationType can occur"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//AnnotationAttribute" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>Defines the {@link Attribute}s that are required or allowed in &#xD;&#xA;&#x9;&#x9;&#x9;{@Annotation} instances of this AnnotationType"/>
+        <details key="documentation" value="&lt;br>Defines the {@link AnnotationAttribute}s that are required or allowed in &#xD;&#xA;&#x9;&#x9;&#x9;{@link Annotation} instances of this AnnotationType"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

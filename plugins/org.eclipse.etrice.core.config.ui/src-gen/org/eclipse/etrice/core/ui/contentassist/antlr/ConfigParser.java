@@ -39,6 +39,7 @@ public class ConfigParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getConfigElementAccess().getAlternatives(), "rule__ConfigElement__Alternatives");
 					put(grammarAccess.getDynamicConfigAccess().getAlternatives_2_0(), "rule__DynamicConfig__Alternatives_2_0");
+					put(grammarAccess.getProtocolClassConfigAccess().getAlternatives_3_1_0(), "rule__ProtocolClassConfig__Alternatives_3_1_0");
 					put(grammarAccess.getAttrConfigAccess().getAlternatives(), "rule__AttrConfig__Alternatives");
 					put(grammarAccess.getAttrInstanceConfigAccess().getAlternatives_3_1_0_1(), "rule__AttrInstanceConfig__Alternatives_3_1_0_1");
 					put(grammarAccess.getConfigValueAccess().getAlternatives(), "rule__ConfigValue__Alternatives");
@@ -47,6 +48,7 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0(), "rule__EnumAnnotationAttribute__Alternatives_0");
+					put(grammarAccess.getTIMEAccess().getAlternatives(), "rule__TIME__Alternatives");
 					put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives_1(), "rule__BooleanLiteral__Alternatives_1");
 					put(grammarAccess.getNumberLiteralAccess().getAlternatives(), "rule__NumberLiteral__Alternatives");
@@ -107,6 +109,10 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup(), "rule__EnumAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6(), "rule__EnumAnnotationAttribute__Group_6__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
+					put(grammarAccess.getTIMEAccess().getGroup_0(), "rule__TIME__Group_0__0");
+					put(grammarAccess.getTIMEAccess().getGroup_1(), "rule__TIME__Group_1__0");
+					put(grammarAccess.getTIMEAccess().getGroup_2(), "rule__TIME__Group_2__0");
+					put(grammarAccess.getTIMEAccess().getGroup_3(), "rule__TIME__Group_3__0");
 					put(grammarAccess.getLiteralArrayAccess().getGroup(), "rule__LiteralArray__Group__0");
 					put(grammarAccess.getLiteralArrayAccess().getGroup_1(), "rule__LiteralArray__Group_1__0");
 					put(grammarAccess.getBooleanLiteralAccess().getGroup(), "rule__BooleanLiteral__Group__0");

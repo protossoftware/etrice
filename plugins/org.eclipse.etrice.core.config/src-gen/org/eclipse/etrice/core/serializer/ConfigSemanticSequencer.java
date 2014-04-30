@@ -292,7 +292,7 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((filePath=STRING | (userCode1=STRING userCode2=STRING)) polling=INT?)
+	 *     ((filePath=STRING | (userCode1=STRING userCode2=STRING)) polling=TIME?)
 	 */
 	protected void sequence_DynamicConfig(EObject context, DynamicConfig semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

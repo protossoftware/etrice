@@ -98,7 +98,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * @generated
    * @ordered
    */
-  protected static final int POLLING_EDEFAULT = 0;
+  protected static final long POLLING_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getPolling() <em>Polling</em>}' attribute.
@@ -108,7 +108,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * @generated
    * @ordered
    */
-  protected int polling = POLLING_EDEFAULT;
+  protected long polling = POLLING_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -205,7 +205,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getPolling()
+  public long getPolling()
   {
     return polling;
   }
@@ -215,9 +215,9 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPolling(int newPolling)
+  public void setPolling(long newPolling)
   {
-    int oldPolling = polling;
+    long oldPolling = polling;
     polling = newPolling;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ConfigPackage.DYNAMIC_CONFIG__POLLING, oldPolling, polling));
@@ -265,7 +265,7 @@ public class DynamicConfigImpl extends MinimalEObjectImpl.Container implements D
         setUserCode2((String)newValue);
         return;
       case ConfigPackage.DYNAMIC_CONFIG__POLLING:
-        setPolling((Integer)newValue);
+        setPolling((Long)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -22,9 +22,11 @@ var projectName = "org.eclipse.etrice.core.etphys"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-    bean = StandaloneSetup {
+    	bean = StandaloneSetup {
             scanClassPath = true
             platformUri = "${runtimeProject}/.."
+            registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel"
+        	registerGeneratedEPackage = "org.eclipse.etrice.core.common.base.BasePackage"
         }
     
         component = DirectoryCleaner {

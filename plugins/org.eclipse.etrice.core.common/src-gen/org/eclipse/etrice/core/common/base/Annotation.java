@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- begin-model-doc -->
  * <br>An annotation similar to Java annotations that can be used
  * to add {@link KeyValue} pairs to certain model items. The structure 
- * of Annotations are defined by {@AnnotationType}s.
+ * of Annotations are defined by {@link AnnotationType}s.
  * 
  * <!-- end-model-doc -->
  *
@@ -37,7 +37,7 @@ public interface Annotation extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>The {@AnnotationType} that defines the structure of 
+   * <br>The {@link AnnotationType} that defines the structure of 
    * the annotation.
    * 
    * <!-- end-model-doc -->
