@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
