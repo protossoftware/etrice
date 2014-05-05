@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.config;
+package org.eclipse.etrice.core.common.base;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.config.Import#getImportedNamespace <em>Imported Namespace</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.config.Import#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.Import#getImportedNamespace <em>Imported Namespace</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.Import#getImportURI <em>Import URI</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.config.ConfigPackage#getImport()
+ * @see org.eclipse.etrice.core.common.base.BasePackage#getImport()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface Import extends EObject
    * <!-- end-model-doc -->
    * @return the value of the '<em>Imported Namespace</em>' attribute.
    * @see #setImportedNamespace(String)
-   * @see org.eclipse.etrice.core.config.ConfigPackage#getImport_ImportedNamespace()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getImport_ImportedNamespace()
    * @model
    * @generated
    */
   String getImportedNamespace();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.config.Import#getImportedNamespace <em>Imported Namespace</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.Import#getImportedNamespace <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Imported Namespace</em>' attribute.
@@ -76,14 +76,14 @@ public interface Import extends EObject
    * <!-- end-model-doc -->
    * @return the value of the '<em>Import URI</em>' attribute.
    * @see #setImportURI(String)
-   * @see org.eclipse.etrice.core.config.ConfigPackage#getImport_ImportURI()
+   * @see org.eclipse.etrice.core.common.base.BasePackage#getImport_ImportURI()
    * @model
    * @generated
    */
   String getImportURI();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.config.Import#getImportURI <em>Import URI</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.common.base.Import#getImportURI <em>Import URI</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Import URI</em>' attribute.

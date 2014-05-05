@@ -776,43 +776,6 @@ public interface ConfigPackage extends EPackage
    */
   int REF_SEGMENT_FEATURE_COUNT = 2;
 
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.config.impl.ImportImpl
-   * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
-   * @generated
-   */
-  int IMPORT = 18;
-
-  /**
-   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT__IMPORTED_NAMESPACE = 0;
-
-  /**
-   * The feature id for the '<em><b>Import URI</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT__IMPORT_URI = 1;
-
-  /**
-   * The number of structural features of the '<em>Import</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT_FEATURE_COUNT = 2;
-
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.config.ConfigModel <em>Model</em>}'.
@@ -1413,38 +1376,6 @@ public interface ConfigPackage extends EPackage
   EAttribute getRefSegment_Idx();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.config.Import <em>Import</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import</em>'.
-   * @see org.eclipse.etrice.core.config.Import
-   * @generated
-   */
-  EClass getImport();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-   * @see org.eclipse.etrice.core.config.Import#getImportedNamespace()
-   * @see #getImport()
-   * @generated
-   */
-  EAttribute getImport_ImportedNamespace();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.config.Import#getImportURI <em>Import URI</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Import URI</em>'.
-   * @see org.eclipse.etrice.core.config.Import#getImportURI()
-   * @see #getImport()
-   * @generated
-   */
-  EAttribute getImport_ImportURI();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1950,32 +1881,6 @@ public interface ConfigPackage extends EPackage
      * @generated
      */
     EAttribute REF_SEGMENT__IDX = eINSTANCE.getRefSegment_Idx();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.config.impl.ImportImpl <em>Import</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.config.impl.ImportImpl
-     * @see org.eclipse.etrice.core.config.impl.ConfigPackageImpl#getImport()
-     * @generated
-     */
-    EClass IMPORT = eINSTANCE.getImport();
-
-    /**
-     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
-
-    /**
-     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
   }
 

@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.core.etmap.ui;
 
-import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
-import org.eclipse.etrice.core.ui.linking.ImportAwareHyperlinkHelper;
+import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
+import org.eclipse.etrice.core.common.ui.linking.ImportAwareHyperlinkHelper;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 

@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.LiteralArray;
@@ -17,7 +18,6 @@ import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.common.serializer.BaseSemanticSequencer;
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
@@ -72,6 +72,12 @@ public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case BasePackage.IMPORT:
+				if(context == grammarAccess.getImportRule()) {
+					sequence_Import(context, (Import) semanticObject); 
+					return; 
+				}
+				else break;
 			case BasePackage.INT_LITERAL:
 				if(context == grammarAccess.getIntLiteralRule() ||
 				   context == grammarAccess.getLiteralRule() ||
@@ -116,12 +122,6 @@ public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == ETPhysPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case ETPhysPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
 			case ETPhysPackage.NODE_CLASS:
 				if(context == grammarAccess.getNodeClassRule()) {
 					sequence_NodeClass(context, (NodeClass) semanticObject); 
@@ -161,15 +161,6 @@ public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
-	
-	/**
-	 * Constraint:
-	 *     (importedNamespace=ImportedFQN? importURI=STRING)
-	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
 	
 	/**
 	 * Constraint:

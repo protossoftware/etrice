@@ -424,43 +424,6 @@ public interface ETPhysPackage extends EPackage
   int RUNTIME_CLASS_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl <em>Import</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl
-   * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getImport()
-   * @generated
-   */
-  int IMPORT = 6;
-
-  /**
-   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT__IMPORTED_NAMESPACE = 0;
-
-  /**
-   * The feature id for the '<em><b>Import URI</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT__IMPORT_URI = 1;
-
-  /**
-   * The number of structural features of the '<em>Import</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IMPORT_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.ExecMode <em>Exec Mode</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -468,7 +431,7 @@ public interface ETPhysPackage extends EPackage
    * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getExecMode()
    * @generated
    */
-  int EXEC_MODE = 7;
+  int EXEC_MODE = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.etphys.eTPhys.ThreadModel <em>Thread Model</em>}' enum.
@@ -478,7 +441,7 @@ public interface ETPhysPackage extends EPackage
    * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getThreadModel()
    * @generated
    */
-  int THREAD_MODEL = 8;
+  int THREAD_MODEL = 7;
 
 
   /**
@@ -850,38 +813,6 @@ public interface ETPhysPackage extends EPackage
   EAttribute getRuntimeClass_ThreadModel();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.etphys.eTPhys.Import <em>Import</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Import
-   * @generated
-   */
-  EClass getImport();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Import#getImportedNamespace()
-   * @see #getImport()
-   * @generated
-   */
-  EAttribute getImport_ImportedNamespace();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.etphys.eTPhys.Import#getImportURI <em>Import URI</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Import URI</em>'.
-   * @see org.eclipse.etrice.core.etphys.eTPhys.Import#getImportURI()
-   * @see #getImport()
-   * @generated
-   */
-  EAttribute getImport_ImportURI();
-
-  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.etphys.eTPhys.ExecMode <em>Exec Mode</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1207,32 +1138,6 @@ public interface ETPhysPackage extends EPackage
      * @generated
      */
     EAttribute RUNTIME_CLASS__THREAD_MODEL = eINSTANCE.getRuntimeClass_ThreadModel();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl <em>Import</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl
-     * @see org.eclipse.etrice.core.etphys.eTPhys.impl.ETPhysPackageImpl#getImport()
-     * @generated
-     */
-    EClass IMPORT = eINSTANCE.getImport();
-
-    /**
-     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
-
-    /**
-     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.etphys.eTPhys.ExecMode <em>Exec Mode</em>}' enum.

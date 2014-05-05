@@ -71,6 +71,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
       case BasePackage.ANNOTATION_ATTRIBUTE: return createAnnotationAttribute();
       case BasePackage.SIMPLE_ANNOTATION_ATTRIBUTE: return createSimpleAnnotationAttribute();
       case BasePackage.ENUM_ANNOTATION_ATTRIBUTE: return createEnumAnnotationAttribute();
+      case BasePackage.IMPORT: return createImport();
       case BasePackage.DOCUMENTATION: return createDocumentation();
       case BasePackage.LITERAL_ARRAY: return createLiteralArray();
       case BasePackage.LITERAL: return createLiteral();
@@ -182,6 +183,17 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory
   {
     EnumAnnotationAttributeImpl enumAnnotationAttribute = new EnumAnnotationAttributeImpl();
     return enumAnnotationAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Import createImport()
+  {
+    ImportImpl import_ = new ImportImpl();
+    return import_;
   }
 
   /**

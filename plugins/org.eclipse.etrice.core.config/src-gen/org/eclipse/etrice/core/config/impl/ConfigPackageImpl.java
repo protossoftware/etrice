@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.config.ConfigValue;
 import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.EnumConfigValue;
-import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
@@ -168,13 +167,6 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * @generated
    */
   private EClass refSegmentEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass importEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -807,36 +799,6 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
-  {
-    return importEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getImport_ImportedNamespace()
-  {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getImport_ImportURI()
-  {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ConfigFactory getConfigFactory()
   {
     return (ConfigFactory)getEFactoryInstance();
@@ -935,10 +897,6 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     refSegmentEClass = createEClass(REF_SEGMENT);
     createEAttribute(refSegmentEClass, REF_SEGMENT__REF);
     createEAttribute(refSegmentEClass, REF_SEGMENT__IDX);
-
-    importEClass = createEClass(IMPORT);
-    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
-    createEAttribute(importEClass, IMPORT__IMPORT_URI);
   }
 
   /**
@@ -966,8 +924,8 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    RoomPackage theRoomPackage = (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
     BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+    RoomPackage theRoomPackage = (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
 
     // Create type parameters
 
@@ -986,7 +944,7 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     // Initialize classes and features; add operations and parameters
     initEClass(configModelEClass, ConfigModel.class, "ConfigModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getConfigModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getConfigModel_Imports(), this.getImport(), null, "imports", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConfigModel_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConfigModel_ConfigElements(), this.getConfigElement(), null, "configElements", null, 0, -1, ConfigModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(configModelEClass, this.getActorClassConfig(), "getActorClassConfigs", 0, -1, IS_UNIQUE, IS_ORDERED);
@@ -1067,10 +1025,6 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     initEAttribute(getRefSegment_Idx(), ecorePackage.getEInt(), "idx", "-1", 0, 1, RefSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(refSegmentEClass, ecorePackage.getEString(), "toString", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

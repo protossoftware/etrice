@@ -15,12 +15,15 @@ Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare
+ org.eclipse.compare,
+ org.eclipse.core.filesystem;bundle-version="1.4.0"
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.etrice.core.common.ui.quickfix,
- org.eclipse.etrice.core.common.ui.contentassist,
+Export-Package: org.eclipse.etrice.core.common.ui.contentassist,
  org.eclipse.etrice.core.common.ui.contentassist.antlr,
- org.eclipse.etrice.core.common.ui.internal
+ org.eclipse.etrice.core.common.ui.internal,
+ org.eclipse.etrice.core.common.ui.labeling,
+ org.eclipse.etrice.core.common.ui.linking,
+ org.eclipse.etrice.core.common.ui.quickfix
 Bundle-Activator: org.eclipse.etrice.core.common.ui.internal.BaseActivator

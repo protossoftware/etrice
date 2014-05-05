@@ -150,10 +150,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:14:7: ( 'model' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:14:9: 'model'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:14:7: ( 'mandatory' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:14:9: 'mandatory'
             {
-            match("model"); 
+            match("mandatory"); 
 
 
             }
@@ -171,10 +171,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:15:7: ( 'mandatory' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:15:9: 'mandatory'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:15:7: ( 'model' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:15:9: 'model'
             {
-            match("mandatory"); 
+            match("model"); 
 
 
             }
@@ -776,10 +776,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:44:7: ( 'import' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:44:9: 'import'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:44:7: ( 'attribute' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:44:9: 'attribute'
             {
-            match("import"); 
+            match("attribute"); 
 
 
             }
@@ -797,11 +797,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:45:7: ( 'from' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:45:9: 'from'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:45:7: ( ',' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:45:9: ','
             {
-            match("from"); 
-
+            match(','); 
 
             }
 
@@ -818,10 +817,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:46:7: ( '.*' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:46:9: '.*'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:46:7: ( 'import' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:46:9: 'import'
             {
-            match(".*"); 
+            match("import"); 
 
 
             }
@@ -839,10 +838,11 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:47:7: ( '.' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:47:9: '.'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:47:7: ( 'from' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:47:9: 'from'
             {
-            match('.'); 
+            match("from"); 
+
 
             }
 
@@ -859,10 +859,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:48:7: ( 'attribute' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:48:9: 'attribute'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:48:7: ( '.*' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:48:9: '.*'
             {
-            match("attribute"); 
+            match(".*"); 
 
 
             }
@@ -880,10 +880,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:49:7: ( ',' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:49:9: ','
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:49:7: ( '[' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:49:9: '['
             {
-            match(','); 
+            match('['); 
 
             }
 
@@ -900,10 +900,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:50:7: ( '[' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:50:9: '['
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:50:7: ( ']' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:50:9: ']'
             {
-            match('['); 
+            match(']'); 
 
             }
 
@@ -920,10 +920,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:51:7: ( ']' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:51:9: ']'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:51:7: ( 's' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:51:9: 's'
             {
-            match(']'); 
+            match('s'); 
 
             }
 
@@ -940,10 +940,11 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:52:7: ( 's' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:52:9: 's'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:52:7: ( 'ms' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:52:9: 'ms'
             {
-            match('s'); 
+            match("ms"); 
+
 
             }
 
@@ -960,10 +961,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:53:7: ( 'ms' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:53:9: 'ms'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:53:7: ( 'us' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:53:9: 'us'
             {
-            match("ms"); 
+            match("us"); 
 
 
             }
@@ -981,10 +982,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:54:7: ( 'us' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:54:9: 'us'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:54:7: ( 'ns' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:54:9: 'ns'
             {
-            match("us"); 
+            match("ns"); 
 
 
             }
@@ -1002,11 +1003,10 @@ public class InternalETPhysLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:55:7: ( 'ns' )
-            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:55:9: 'ns'
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:55:7: ( '.' )
+            // ../org.eclipse.etrice.core.etphys.ui/src-gen/org/eclipse/etrice/core/etphys/ui/contentassist/antlr/internal/InternalETPhys.g:55:9: '.'
             {
-            match("ns"); 
-
+            match('.'); 
 
             }
 
@@ -2195,103 +2195,102 @@ public class InternalETPhysLexer extends Lexer {
     protected DFA16 dfa16 = new DFA16(this);
     static final String DFA16_eotS =
         "\1\uffff\1\50\2\uffff\4\50\1\70\1\50\2\uffff\1\50\1\uffff\1\50"+
-        "\1\uffff\3\50\1\107\1\50\3\uffff\6\50\1\122\1\46\2\uffff\3\46\2"+
-        "\uffff\1\50\3\uffff\4\50\1\135\10\50\1\uffff\1\50\2\uffff\1\50\1"+
-        "\uffff\1\50\1\uffff\1\50\1\102\1\uffff\3\50\2\uffff\1\50\3\uffff"+
-        "\1\161\1\162\3\50\6\uffff\6\50\1\uffff\23\50\2\uffff\13\50\1\u009b"+
-        "\5\50\1\u00a2\15\50\1\u00b1\1\50\1\u00b3\1\50\1\u00b5\3\50\1\u00b9"+
-        "\1\uffff\6\50\1\uffff\16\50\1\uffff\1\u00cf\1\uffff\1\50\1\uffff"+
-        "\3\50\1\uffff\1\u00d4\2\50\1\u00d7\14\50\1\u00e4\4\50\1\uffff\4"+
-        "\50\1\uffff\2\50\1\uffff\1\50\1\u00f0\1\u00f1\1\u00f2\3\50\1\u00f6"+
-        "\1\50\1\u00f8\2\50\1\uffff\13\50\3\uffff\3\50\1\uffff\1\50\1\uffff"+
-        "\1\u010b\1\u010c\3\50\1\u0110\1\u0111\3\50\1\u0115\1\u0116\2\50"+
-        "\1\u0119\2\50\1\u011c\2\uffff\1\50\1\u011e\1\50\2\uffff\3\50\2\uffff"+
-        "\2\50\1\uffff\2\50\1\uffff\1\50\1\uffff\3\50\1\u012b\1\u012c\6\50"+
-        "\1\u0133\2\uffff\3\50\1\u0137\1\50\1\u0139\1\uffff\1\50\1\u013b"+
-        "\1\50\1\uffff\1\u013d\1\uffff\1\u013e\1\uffff\1\u013f\3\uffff";
+        "\1\uffff\4\50\1\uffff\1\111\2\uffff\6\50\1\122\1\46\2\uffff\3\46"+
+        "\2\uffff\1\50\3\uffff\4\50\1\135\10\50\1\uffff\1\50\2\uffff\1\50"+
+        "\1\uffff\1\50\1\uffff\1\50\1\102\1\uffff\4\50\5\uffff\1\161\1\162"+
+        "\3\50\6\uffff\6\50\1\uffff\23\50\2\uffff\13\50\1\u009b\5\50\1\u00a2"+
+        "\15\50\1\u00b1\2\50\1\u00b4\1\u00b5\3\50\1\u00b9\1\uffff\6\50\1"+
+        "\uffff\16\50\1\uffff\1\u00cf\1\50\2\uffff\3\50\1\uffff\1\u00d4\2"+
+        "\50\1\u00d7\14\50\1\u00e4\4\50\1\uffff\4\50\1\uffff\2\50\1\uffff"+
+        "\1\50\1\u00f0\1\u00f1\1\u00f2\3\50\1\u00f6\1\50\1\u00f8\2\50\1\uffff"+
+        "\13\50\3\uffff\3\50\1\uffff\1\50\1\uffff\1\u010b\1\u010c\3\50\1"+
+        "\u0110\1\u0111\3\50\1\u0115\1\u0116\2\50\1\u0119\2\50\1\u011c\2"+
+        "\uffff\1\50\1\u011e\1\50\2\uffff\3\50\2\uffff\2\50\1\uffff\2\50"+
+        "\1\uffff\1\50\1\uffff\3\50\1\u012b\1\u012c\6\50\1\u0133\2\uffff"+
+        "\3\50\1\u0137\1\50\1\u0139\1\uffff\1\50\1\u013b\1\50\1\uffff\1\u013d"+
+        "\1\uffff\1\u013e\1\uffff\1\u013f\3\uffff";
     static final String DFA16_eofS =
         "\u0140\uffff";
     static final String DFA16_minS =
         "\1\0\1\150\2\uffff\2\141\1\157\1\154\1\60\1\150\2\uffff\1\157\1"+
-        "\uffff\1\165\1\uffff\1\53\1\155\1\165\1\52\1\164\3\uffff\2\163\1"+
-        "\145\1\160\1\162\1\53\1\130\1\101\2\uffff\2\0\1\52\2\uffff\1\162"+
-        "\3\uffff\1\144\1\156\1\170\1\154\1\60\1\154\1\157\1\154\1\102\1"+
-        "\151\1\157\1\156\1\141\1\uffff\1\171\2\uffff\1\144\1\uffff\1\156"+
-        "\1\uffff\1\145\1\60\1\uffff\1\164\1\160\1\156\2\uffff\1\164\3\uffff"+
-        "\2\60\1\146\1\164\1\165\6\uffff\2\145\1\144\1\145\1\164\1\142\1"+
+        "\uffff\1\165\1\uffff\1\53\1\155\1\165\1\164\1\uffff\1\52\2\uffff"+
+        "\2\163\1\145\1\160\1\162\1\53\1\130\1\101\2\uffff\2\0\1\52\2\uffff"+
+        "\1\162\3\uffff\1\156\1\144\1\170\1\154\1\60\1\154\1\157\1\154\1"+
+        "\102\1\151\1\157\1\156\1\141\1\uffff\1\171\2\uffff\1\144\1\uffff"+
+        "\1\156\1\uffff\1\145\1\60\1\uffff\1\164\1\160\1\156\1\164\5\uffff"+
+        "\2\60\1\146\1\164\1\165\6\uffff\1\145\1\144\2\145\1\164\1\142\1"+
         "\uffff\1\163\1\155\1\154\1\157\1\156\1\145\1\150\1\157\1\143\1\147"+
         "\1\143\1\163\1\145\1\164\1\143\1\145\1\157\1\164\1\162\2\uffff\1"+
-        "\141\1\151\1\145\1\141\1\154\1\141\1\144\1\151\1\154\1\157\1\145"+
-        "\1\60\1\145\1\157\1\164\2\141\1\60\1\153\1\154\1\153\1\151\1\103"+
-        "\1\151\1\155\2\162\2\151\1\165\1\157\1\60\1\144\1\60\1\164\1\60"+
-        "\1\124\2\157\1\60\1\uffff\1\144\1\154\1\145\1\154\1\162\1\141\1"+
-        "\uffff\2\145\1\163\1\143\1\145\1\154\1\155\1\157\1\166\1\164\1\155"+
-        "\1\142\1\154\1\156\1\uffff\1\60\1\uffff\1\157\1\uffff\1\150\1\143"+
-        "\1\154\1\uffff\1\60\1\145\1\147\1\60\1\141\1\156\1\170\1\144\1\124"+
-        "\1\151\1\141\1\146\1\141\1\145\1\144\1\141\1\60\1\145\1\165\1\164"+
-        "\1\141\1\uffff\2\162\1\153\1\163\1\uffff\1\141\1\145\1\uffff\1\143"+
-        "\3\60\1\150\1\172\1\154\1\60\1\163\1\60\1\145\1\154\1\uffff\1\103"+
-        "\1\164\1\124\1\154\1\171\1\145\1\163\1\151\1\156\1\162\1\164\3\uffff"+
-        "\1\162\1\145\1\115\1\uffff\1\163\1\uffff\2\60\1\154\1\145\1\150"+
-        "\2\60\1\141\1\151\1\172\2\60\2\145\1\60\1\157\1\171\1\60\2\uffff"+
-        "\1\141\1\60\1\162\2\uffff\1\144\1\172\1\145\2\uffff\1\162\1\141"+
-        "\1\uffff\1\144\1\163\1\uffff\1\163\1\uffff\3\145\2\60\1\144\1\145"+
-        "\1\164\1\163\1\141\1\144\1\60\2\uffff\1\145\1\154\1\145\1\60\1\144"+
-        "\1\60\1\uffff\1\144\1\60\1\155\1\uffff\1\60\1\uffff\1\60\1\uffff"+
-        "\1\60\3\uffff";
+        "\141\1\151\1\145\2\141\1\154\1\144\1\151\1\154\1\157\1\145\1\60"+
+        "\1\145\1\157\1\164\2\141\1\60\1\153\1\154\1\153\1\151\1\103\1\151"+
+        "\1\155\2\162\2\151\1\165\1\157\1\60\1\144\1\164\2\60\1\124\2\157"+
+        "\1\60\1\uffff\1\144\1\154\1\145\1\154\1\162\1\141\1\uffff\2\145"+
+        "\1\163\1\143\1\145\1\154\1\155\1\157\1\166\1\164\1\155\1\142\1\154"+
+        "\1\156\1\uffff\1\60\1\157\2\uffff\1\150\1\143\1\154\1\uffff\1\60"+
+        "\1\145\1\147\1\60\1\141\1\156\1\170\1\144\1\124\1\151\1\141\1\146"+
+        "\1\141\1\145\1\144\1\141\1\60\1\145\1\165\1\164\1\141\1\uffff\2"+
+        "\162\1\153\1\163\1\uffff\1\141\1\145\1\uffff\1\143\3\60\1\150\1"+
+        "\172\1\154\1\60\1\163\1\60\1\145\1\154\1\uffff\1\103\1\164\1\124"+
+        "\1\154\1\171\1\145\1\163\1\151\1\156\1\162\1\164\3\uffff\1\162\1"+
+        "\145\1\115\1\uffff\1\163\1\uffff\2\60\1\154\1\145\1\150\2\60\1\141"+
+        "\1\151\1\172\2\60\2\145\1\60\1\157\1\171\1\60\2\uffff\1\141\1\60"+
+        "\1\162\2\uffff\1\144\1\172\1\145\2\uffff\1\162\1\141\1\uffff\1\144"+
+        "\1\163\1\uffff\1\163\1\uffff\3\145\2\60\1\144\1\145\1\164\1\163"+
+        "\1\141\1\144\1\60\2\uffff\1\145\1\154\1\145\1\60\1\144\1\60\1\uffff"+
+        "\1\144\1\60\1\155\1\uffff\1\60\1\uffff\1\60\1\uffff\1\60\3\uffff";
     static final String DFA16_maxS =
         "\1\uffff\1\150\2\uffff\1\165\1\162\1\164\1\154\1\172\1\150\2\uffff"+
-        "\1\157\1\uffff\1\165\1\uffff\1\170\1\156\1\165\1\52\1\164\3\uffff"+
-        "\2\163\1\145\1\160\1\162\1\71\1\170\1\172\2\uffff\2\uffff\1\57\2"+
-        "\uffff\1\162\3\uffff\1\144\1\156\1\170\1\154\1\172\1\154\1\157\1"+
-        "\154\1\122\1\151\1\157\1\156\1\141\1\uffff\1\171\2\uffff\1\144\1"+
-        "\uffff\1\156\1\uffff\1\145\1\172\1\uffff\1\164\1\160\1\156\2\uffff"+
-        "\1\164\3\uffff\2\172\1\146\1\164\1\165\6\uffff\2\145\1\144\1\145"+
+        "\1\157\1\uffff\1\165\1\uffff\1\170\1\156\1\165\1\164\1\uffff\1\52"+
+        "\2\uffff\2\163\1\145\1\160\1\162\1\71\1\170\1\172\2\uffff\2\uffff"+
+        "\1\57\2\uffff\1\162\3\uffff\1\156\1\144\1\170\1\154\1\172\1\154"+
+        "\1\157\1\154\1\122\1\151\1\157\1\156\1\141\1\uffff\1\171\2\uffff"+
+        "\1\144\1\uffff\1\156\1\uffff\1\145\1\172\1\uffff\1\164\1\160\1\156"+
+        "\1\164\5\uffff\2\172\1\146\1\164\1\165\6\uffff\1\145\1\144\2\145"+
         "\1\164\1\160\1\uffff\1\163\1\155\1\154\1\157\1\156\1\145\1\150\1"+
         "\157\1\143\1\147\1\143\1\163\1\145\1\164\1\143\1\145\1\157\1\164"+
-        "\1\162\2\uffff\1\141\1\151\1\145\1\141\1\154\1\141\1\144\1\151\1"+
-        "\154\1\157\1\145\1\172\1\145\1\157\1\164\2\141\1\172\1\153\1\154"+
-        "\1\153\1\151\1\122\1\151\1\155\2\162\2\151\1\165\1\157\1\172\1\144"+
-        "\1\172\1\164\1\172\1\124\2\157\1\172\1\uffff\1\144\1\154\1\145\1"+
-        "\154\1\162\1\151\1\uffff\2\145\1\163\1\143\1\145\1\154\1\155\1\157"+
-        "\1\166\1\164\1\155\1\142\1\154\1\156\1\uffff\1\172\1\uffff\1\157"+
-        "\1\uffff\1\150\1\143\1\154\1\uffff\1\172\1\145\1\147\1\172\1\141"+
-        "\1\156\1\170\1\144\1\124\1\151\1\141\1\146\1\141\1\145\1\144\1\141"+
-        "\1\172\1\145\1\165\1\164\1\141\1\uffff\2\162\1\153\1\163\1\uffff"+
-        "\1\141\1\145\1\uffff\1\143\3\172\1\150\1\172\1\154\1\172\1\163\1"+
-        "\172\1\145\1\154\1\uffff\1\103\1\164\1\124\1\154\1\171\1\145\1\163"+
-        "\1\151\1\156\1\162\1\164\3\uffff\1\162\1\145\1\123\1\uffff\1\163"+
-        "\1\uffff\2\172\1\154\1\145\1\150\2\172\1\141\1\151\3\172\2\145\1"+
-        "\172\1\157\1\171\1\172\2\uffff\1\141\1\172\1\162\2\uffff\1\144\1"+
-        "\172\1\145\2\uffff\1\162\1\141\1\uffff\1\144\1\163\1\uffff\1\163"+
-        "\1\uffff\3\145\2\172\1\144\1\145\1\164\1\163\1\141\1\144\1\172\2"+
-        "\uffff\1\145\1\154\1\145\1\172\1\144\1\172\1\uffff\1\144\1\172\1"+
-        "\155\1\uffff\1\172\1\uffff\1\172\1\uffff\1\172\3\uffff";
+        "\1\162\2\uffff\1\141\1\151\1\145\2\141\1\154\1\144\1\151\1\154\1"+
+        "\157\1\145\1\172\1\145\1\157\1\164\2\141\1\172\1\153\1\154\1\153"+
+        "\1\151\1\122\1\151\1\155\2\162\2\151\1\165\1\157\1\172\1\144\1\164"+
+        "\2\172\1\124\2\157\1\172\1\uffff\1\144\1\154\1\145\1\154\1\162\1"+
+        "\151\1\uffff\2\145\1\163\1\143\1\145\1\154\1\155\1\157\1\166\1\164"+
+        "\1\155\1\142\1\154\1\156\1\uffff\1\172\1\157\2\uffff\1\150\1\143"+
+        "\1\154\1\uffff\1\172\1\145\1\147\1\172\1\141\1\156\1\170\1\144\1"+
+        "\124\1\151\1\141\1\146\1\141\1\145\1\144\1\141\1\172\1\145\1\165"+
+        "\1\164\1\141\1\uffff\2\162\1\153\1\163\1\uffff\1\141\1\145\1\uffff"+
+        "\1\143\3\172\1\150\1\172\1\154\1\172\1\163\1\172\1\145\1\154\1\uffff"+
+        "\1\103\1\164\1\124\1\154\1\171\1\145\1\163\1\151\1\156\1\162\1\164"+
+        "\3\uffff\1\162\1\145\1\123\1\uffff\1\163\1\uffff\2\172\1\154\1\145"+
+        "\1\150\2\172\1\141\1\151\3\172\2\145\1\172\1\157\1\171\1\172\2\uffff"+
+        "\1\141\1\172\1\162\2\uffff\1\144\1\172\1\145\2\uffff\1\162\1\141"+
+        "\1\uffff\1\144\1\163\1\uffff\1\163\1\uffff\3\145\2\172\1\144\1\145"+
+        "\1\164\1\163\1\141\1\144\1\172\2\uffff\1\145\1\154\1\145\1\172\1"+
+        "\144\1\172\1\uffff\1\144\1\172\1\155\1\uffff\1\172\1\uffff\1\172"+
+        "\1\uffff\1\172\3\uffff";
     static final String DFA16_acceptS =
-        "\2\uffff\1\2\1\3\6\uffff\1\21\1\22\1\uffff\1\25\1\uffff\1\30\5"+
-        "\uffff\1\47\1\50\1\51\10\uffff\1\63\1\64\3\uffff\1\70\1\71\1\uffff"+
-        "\1\63\1\2\1\3\15\uffff\1\52\1\uffff\1\21\1\22\1\uffff\1\25\1\uffff"+
-        "\1\30\2\uffff\1\61\3\uffff\1\44\1\45\1\uffff\1\47\1\50\1\51\5\uffff"+
-        "\1\62\1\64\1\65\1\66\1\67\1\70\6\uffff\1\53\23\uffff\1\54\1\55\50"+
-        "\uffff\1\43\6\uffff\1\35\16\uffff\1\60\1\uffff\1\4\1\uffff\1\11"+
-        "\3\uffff\1\6\25\uffff\1\1\4\uffff\1\7\2\uffff\1\16\14\uffff\1\42"+
+        "\2\uffff\1\2\1\3\6\uffff\1\21\1\22\1\uffff\1\25\1\uffff\1\30\4"+
+        "\uffff\1\43\1\uffff\1\47\1\50\10\uffff\1\63\1\64\3\uffff\1\70\1"+
+        "\71\1\uffff\1\63\1\2\1\3\15\uffff\1\51\1\uffff\1\21\1\22\1\uffff"+
+        "\1\25\1\uffff\1\30\2\uffff\1\61\4\uffff\1\43\1\46\1\55\1\47\1\50"+
+        "\5\uffff\1\62\1\64\1\65\1\66\1\67\1\70\6\uffff\1\52\23\uffff\1\53"+
+        "\1\54\50\uffff\1\45\6\uffff\1\35\16\uffff\1\60\2\uffff\1\5\1\11"+
+        "\3\uffff\1\6\25\uffff\1\1\4\uffff\1\7\2\uffff\1\16\14\uffff\1\44"+
         "\13\uffff\1\31\1\32\1\10\3\uffff\1\24\1\uffff\1\27\22\uffff\1\33"+
-        "\1\34\3\uffff\1\57\1\5\3\uffff\1\14\1\15\2\uffff\1\36\2\uffff\1"+
-        "\26\1\uffff\1\46\14\uffff\1\40\1\17\6\uffff\1\37\3\uffff\1\41\1"+
+        "\1\34\3\uffff\1\57\1\4\3\uffff\1\14\1\15\2\uffff\1\36\2\uffff\1"+
+        "\26\1\uffff\1\42\14\uffff\1\40\1\17\6\uffff\1\37\3\uffff\1\41\1"+
         "\uffff\1\13\1\uffff\1\20\1\uffff\1\56\1\12\1\23";
     static final String DFA16_specialS =
         "\1\1\41\uffff\1\0\1\2\u011c\uffff}>";
     static final String[] DFA16_transitionS = {
             "\11\46\2\45\2\46\1\45\22\46\1\45\1\46\1\42\4\46\1\43\3\46\1"+
-            "\2\1\25\1\3\1\23\1\44\1\36\11\41\1\15\2\46\1\17\3\46\3\40\1"+
+            "\2\1\24\1\3\1\25\1\44\1\36\11\41\1\15\2\46\1\17\3\46\3\40\1"+
             "\32\1\35\10\40\1\14\1\40\1\11\1\40\1\22\1\40\1\1\6\40\1\26\1"+
-            "\46\1\27\1\37\1\40\1\46\1\24\1\7\2\40\1\20\1\5\2\40\1\21\3\40"+
+            "\46\1\27\1\37\1\40\1\46\1\23\1\7\2\40\1\20\1\5\2\40\1\21\3\40"+
             "\1\4\1\31\1\33\1\6\1\40\1\16\1\10\1\34\1\30\5\40\1\12\1\46\1"+
             "\13\uff82\46",
             "\1\47",
             "",
             "",
-            "\1\54\7\uffff\1\55\5\uffff\1\53\3\uffff\1\57\1\uffff\1\56",
+            "\1\53\7\uffff\1\55\5\uffff\1\54\3\uffff\1\57\1\uffff\1\56",
             "\1\60\20\uffff\1\61",
             "\1\62\2\uffff\1\64\1\uffff\1\63",
             "\1\65",
@@ -2308,8 +2307,8 @@ public class InternalETPhysLexer extends Lexer {
             "\1\104\1\103",
             "\1\105",
             "\1\106",
-            "\1\110",
             "",
+            "\1\110",
             "",
             "",
             "\1\114",
@@ -2358,9 +2357,9 @@ public class InternalETPhysLexer extends Lexer {
             "\1\155",
             "\1\156",
             "\1\157",
-            "",
-            "",
             "\1\160",
+            "",
+            "",
             "",
             "",
             "",
@@ -2437,8 +2436,8 @@ public class InternalETPhysLexer extends Lexer {
             "\1\u00b0",
             "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
             "\1\u00b2",
+            "\1\u00b3",
             "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\1\u00b4",
             "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
             "\1\u00b6",
             "\1\u00b7",
@@ -2468,8 +2467,8 @@ public class InternalETPhysLexer extends Lexer {
             "\1\u00ce",
             "",
             "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "",
             "\1\u00d0",
+            "",
             "",
             "\1\u00d1",
             "\1\u00d2",
@@ -2697,11 +2696,11 @@ public class InternalETPhysLexer extends Lexer {
 
                         else if ( (LA16_0=='R') ) {s = 18;}
 
-                        else if ( (LA16_0=='.') ) {s = 19;}
+                        else if ( (LA16_0=='a') ) {s = 19;}
 
-                        else if ( (LA16_0=='a') ) {s = 20;}
+                        else if ( (LA16_0==',') ) {s = 20;}
 
-                        else if ( (LA16_0==',') ) {s = 21;}
+                        else if ( (LA16_0=='.') ) {s = 21;}
 
                         else if ( (LA16_0=='[') ) {s = 22;}
 

@@ -18,8 +18,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
-import org.eclipse.etrice.core.etmap.eTMap.Import;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
 import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
@@ -122,38 +123,38 @@ public class ETMapJavaValidator extends AbstractETMapJavaValidator {
 				return;
 			
 			if (res.getContents().isEmpty()) {
-				error("referenced model is empty", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+				error("referenced model is empty", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
 			
 			if (uri.lastSegment().endsWith(".room")) {
 				if (!(res.getContents().get(0) instanceof RoomModel)) {
-					error("referenced model is no ROOM model (but has .room extension)", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+					error("referenced model is no ROOM model (but has .room extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
 					return;
 				}
 				
 				RoomModel model = (RoomModel) res.getContents().get(0);
 				if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-					error("the imported namespace should be '"+model.getName()+".*'", ETMapPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
+					error("the imported namespace should be '"+model.getName()+".*'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
 				}
 			}
 			else if (uri.lastSegment().endsWith(".etphys")) {
 				if (!(res.getContents().get(0) instanceof PhysicalModel)) {
-					error("referenced model is no eTrice physical model (but has .etphys extension)", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+					error("referenced model is no eTrice physical model (but has .etphys extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
 					return;
 				}
 				
 				PhysicalModel model = (PhysicalModel) res.getContents().get(0);
 				if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-					error("the imported namespace should be '"+model.getName()+".*'", ETMapPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
+					error("the imported namespace should be '"+model.getName()+".*'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
 				}
 			}
 			else {
-				error("referenced model has unexpected file extension", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+				error("referenced model has unexpected file extension", BasePackage.Literals.IMPORT__IMPORT_URI);
 			}
 		}
 		catch (RuntimeException re) {
-			warning("could not load referenced model", ETMapPackage.Literals.IMPORT__IMPORT_URI);
+			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
 	}

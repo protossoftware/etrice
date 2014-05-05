@@ -105,6 +105,11 @@ public class BaseAdapterFactory extends AdapterFactoryImpl
         return createEnumAnnotationAttributeAdapter();
       }
       @Override
+      public Adapter caseImport(Import object)
+      {
+        return createImportAdapter();
+      }
+      @Override
       public Adapter caseDocumentation(Documentation object)
       {
         return createDocumentationAdapter();
@@ -252,6 +257,21 @@ public class BaseAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEnumAnnotationAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.common.base.Import <em>Import</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.common.base.Import
+   * @generated
+   */
+  public Adapter createImportAdapter()
   {
     return null;
   }

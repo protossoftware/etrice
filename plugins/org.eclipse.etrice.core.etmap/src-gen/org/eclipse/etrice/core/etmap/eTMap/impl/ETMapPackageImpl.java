@@ -9,9 +9,10 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.etrice.core.common.base.BasePackage;
+
 import org.eclipse.etrice.core.etmap.eTMap.ETMapFactory;
 import org.eclipse.etrice.core.etmap.eTMap.ETMapPackage;
-import org.eclipse.etrice.core.etmap.eTMap.Import;
 import org.eclipse.etrice.core.etmap.eTMap.Mapping;
 import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
 import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
@@ -56,13 +57,6 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * @generated
    */
   private EClass threadMappingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass importEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -286,36 +280,6 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
-  {
-    return importEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getImport_ImportedNamespace()
-  {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getImport_ImportURI()
-  {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ETMapFactory getETMapFactory()
   {
     return (ETMapFactory)getEFactoryInstance();
@@ -359,10 +323,6 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     threadMappingEClass = createEClass(THREAD_MAPPING);
     createEReference(threadMappingEClass, THREAD_MAPPING__LOGICAL_THREAD);
     createEReference(threadMappingEClass, THREAD_MAPPING__PHYSICAL_THREAD);
-
-    importEClass = createEClass(IMPORT);
-    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
-    createEAttribute(importEClass, IMPORT__IMPORT_URI);
   }
 
   /**
@@ -390,6 +350,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
+    BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
     RoomPackage theRoomPackage = (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
     ETPhysPackage theETPhysPackage = (ETPhysPackage)EPackage.Registry.INSTANCE.getEPackage(ETPhysPackage.eNS_URI);
 
@@ -402,7 +363,7 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     // Initialize classes and features; add operations and parameters
     initEClass(mappingModelEClass, MappingModel.class, "MappingModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMappingModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, MappingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMappingModel_Imports(), this.getImport(), null, "imports", null, 0, -1, MappingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMappingModel_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MappingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMappingModel_Mappings(), this.getMapping(), null, "mappings", null, 0, -1, MappingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -418,10 +379,6 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     initEClass(threadMappingEClass, ThreadMapping.class, "ThreadMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getThreadMapping_LogicalThread(), theRoomPackage.getLogicalThread(), null, "logicalThread", null, 0, 1, ThreadMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getThreadMapping_PhysicalThread(), theETPhysPackage.getPhysicalThread(), null, "physicalThread", null, 0, 1, ThreadMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -7670,114 +7670,6 @@ ruleGuard returns [EObject current=null]
 
 
 
-// Entry rule entryRuleImport
-entryRuleImport returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getImportRule()); }
-	 iv_ruleImport=ruleImport 
-	 { $current=$iv_ruleImport.current; } 
-	 EOF 
-;
-
-// Rule Import
-ruleImport returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='import' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
-    }
-(((
-(
-		{ 
-	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
-	    }
-		lv_importedNamespace_1_0=ruleImportedFQN		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getImportRule());
-	        }
-       		set(
-       			$current, 
-       			"importedNamespace",
-        		lv_importedNamespace_1_0, 
-        		"ImportedFQN");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_2='from' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
-    }
-)
-    |	otherlv_3='model' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
-    }
-)(
-(
-		lv_importURI_4_0=RULE_STRING
-		{
-			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getImportRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"importURI",
-        		lv_importURI_4_0, 
-        		"STRING");
-	    }
-
-)
-))
-;
-
-
-
-
-
-// Entry rule entryRuleImportedFQN
-entryRuleImportedFQN returns [String current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getImportedFQNRule()); } 
-	 iv_ruleImportedFQN=ruleImportedFQN 
-	 { $current=$iv_ruleImportedFQN.current.getText(); }  
-	 EOF 
-;
-
-// Rule ImportedFQN
-ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
-    }
-    this_FQN_0=ruleFQN    {
-		$current.merge(this_FQN_0);
-    }
-
-    { 
-        afterParserOrEnumRuleCall();
-    }
-(
-	kw='.*' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
-    }
-)?)
-    ;
-
-
-
-
-
 // Entry rule entryRuleMULTIPLICITY
 entryRuleMULTIPLICITY returns [String current=null] 
 	:
@@ -8445,6 +8337,114 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 
 
 
+// Entry rule entryRuleImport
+entryRuleImport returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getImportRule()); }
+	 iv_ruleImport=ruleImport 
+	 { $current=$iv_ruleImport.current; } 
+	 EOF 
+;
+
+// Rule Import
+ruleImport returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='import' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
+    }
+(((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
+	    }
+		lv_importedNamespace_1_0=ruleImportedFQN		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getImportRule());
+	        }
+       		set(
+       			$current, 
+       			"importedNamespace",
+        		lv_importedNamespace_1_0, 
+        		"ImportedFQN");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2='from' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
+    }
+)
+    |	otherlv_3='model' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
+    }
+)(
+(
+		lv_importURI_4_0=RULE_STRING
+		{
+			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getImportRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"importURI",
+        		lv_importURI_4_0, 
+        		"STRING");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleImportedFQN
+entryRuleImportedFQN returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getImportedFQNRule()); } 
+	 iv_ruleImportedFQN=ruleImportedFQN 
+	 { $current=$iv_ruleImportedFQN.current.getText(); }  
+	 EOF 
+;
+
+// Rule ImportedFQN
+ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
+    }
+    this_FQN_0=ruleFQN    {
+		$current.merge(this_FQN_0);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+(
+	kw='.*' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
+    }
+)?)
+    ;
+
+
+
+
+
 // Entry rule entryRuleDocumentation
 entryRuleDocumentation returns [EObject current=null] 
 	:
@@ -8493,6 +8493,8 @@ ruleDocumentation returns [EObject current=null]
     }
 )
 ;
+
+
 
 
 

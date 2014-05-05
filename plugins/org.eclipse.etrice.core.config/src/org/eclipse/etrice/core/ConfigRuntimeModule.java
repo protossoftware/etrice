@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.core;
 
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
-import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 

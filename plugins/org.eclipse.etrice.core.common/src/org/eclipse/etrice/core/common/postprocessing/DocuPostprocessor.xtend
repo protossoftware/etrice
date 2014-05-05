@@ -22,7 +22,37 @@ class DocuPostprocessor {
 		val pckg = metamodel.EPackage
 		
 		//------------------------------------------------------------------
-		var cls = pckg.getClass("LiteralArray")
+		
+		var cls = pckg.getClass("Import")
+		cls.setDocumentation(
+			'''
+				The import declares an imported {@link org.eclipse.etrice.core.room.RoomModel room model} (given as a URI) and
+				an optional imported namespace.
+			''')
+		
+		cls.getAttribute("importedNamespace").setDocumentation(
+			'''
+				The imported name space has to be a dot separated qualified name followed by .*.
+				Example: my.namespace.*
+			''')
+		
+		cls.getAttribute("importURI").setDocumentation(
+			'''
+				The import URI can be a relative or absolute file system path.
+				It may contain environment variables in ${} which will be expanded.
+				<p>
+				Examples:
+				<ul>
+				  <li>import model "AnotherModel.room"</li>
+				  <li>import my.namespace.* from "AnotherModel.room"</li>
+				  <li>import my.namespace.* from "../../AnotherProject/models/AnotherModel.room"</li>
+				  <li>import my.namespace.* from "/${ROOM_MODELS}/SomeModel.room"</li>
+				</ul>
+				</p>
+			''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("LiteralArray")
 		cls.setDocumentation(
 			'''
 				Aggregates one or more {@link Literal literals}.		

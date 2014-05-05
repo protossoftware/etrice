@@ -181,6 +181,46 @@ public class BaseTestGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//// Import rules
+	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+	//// this is configured in the work flow by
+	////			fragment = scoping.ImportURIScopingFragment {}
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
+	////			ImportedNamespaceAwareLocalScopeProvider
+	//// also configure in the RuntimeModule
+	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	////		return PlatformRelativeUriResolver.class;
+	////	}
+	//// and in the UiRuntimeModule
+	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	////		return GlobalNonPlatformURIEditorOpener.class;
+	////	}
+	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	////		return ImportAwareHyperlinkHelper.class;
+	////	}
+	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
+	//Import:
+	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
+	public BaseGrammarAccess.ImportElements getImportAccess() {
+		return gaBase.getImportAccess();
+	}
+	
+	public ParserRule getImportRule() {
+		return getImportAccess().getRule();
+	}
+
+	//ImportedFQN:
+	//	FQN ".*"?;
+	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
+		return gaBase.getImportedFQNAccess();
+	}
+	
+	public ParserRule getImportedFQNRule() {
+		return getImportedFQNAccess().getRule();
+	}
+
+	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
 	//	{Documentation} "[" lines+=STRING* "]";

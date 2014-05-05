@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_EXP", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'conjugate'", "'conjugated'", "'write'", "'model'", "'mandatory'", "'false'", "'+'", "'-'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'ConfigModel'", "'{'", "'}'", "'SubSystemConfig'", "'/'", "'dynamic configuration'", "'file path'", "'user import'", "'user constructor'", "'polling interval'", "'ActorClassConfig'", "'ActorInstanceConfig'", "'ProtocolClassConfig'", "'regular'", "'Port'", "'InterfaceItem'", "'Attr'", "'='", "'min'", "'max'", "','", "'.'", "':'", "'import'", "'from'", "'.*'", "'attribute'", "'['", "']'", "'s'", "'ms'", "'us'", "'ns'", "'read'", "'optional'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_EXP", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'conjugate'", "'conjugated'", "'write'", "'mandatory'", "'model'", "'false'", "'+'", "'-'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'ConfigModel'", "'{'", "'}'", "'SubSystemConfig'", "'/'", "'dynamic configuration'", "'file path'", "'user import'", "'user constructor'", "'polling interval'", "'ActorClassConfig'", "'ActorInstanceConfig'", "'ProtocolClassConfig'", "'regular'", "'Port'", "'InterfaceItem'", "'Attr'", "'='", "'min'", "'max'", "','", "'.'", "':'", "'attribute'", "'import'", "'from'", "'.*'", "'['", "']'", "'s'", "'ms'", "'us'", "'ns'", "'read'", "'optional'", "'true'"
     };
     public static final int RULE_EXP=7;
     public static final int RULE_ID=4;
@@ -1566,272 +1566,17 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleRefSegment"
 
 
-    // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:538:1: entryRuleImport : ruleImport EOF ;
-    public final void entryRuleImport() throws RecognitionException {
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:539:1: ( ruleImport EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:540:1: ruleImport EOF
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportRule()); 
-            }
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport1083);
-            ruleImport();
-
-            state._fsp--;
-            if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportRule()); 
-            }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport1090); if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleImport"
-
-
-    // $ANTLR start "ruleImport"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:547:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
-    public final void ruleImport() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:551:2: ( ( ( rule__Import__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:552:1: ( ( rule__Import__Group__0 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:552:1: ( ( rule__Import__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:553:1: ( rule__Import__Group__0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getGroup()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:554:1: ( rule__Import__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:554:2: rule__Import__Group__0
-            {
-            pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport1116);
-            rule__Import__Group__0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getGroup()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleImport"
-
-
-    // $ANTLR start "entryRuleImportedFQN"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:566:1: entryRuleImportedFQN : ruleImportedFQN EOF ;
-    public final void entryRuleImportedFQN() throws RecognitionException {
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:567:1: ( ruleImportedFQN EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:568:1: ruleImportedFQN EOF
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportedFQNRule()); 
-            }
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1143);
-            ruleImportedFQN();
-
-            state._fsp--;
-            if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportedFQNRule()); 
-            }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN1150); if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleImportedFQN"
-
-
-    // $ANTLR start "ruleImportedFQN"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:575:1: ruleImportedFQN : ( ( rule__ImportedFQN__Group__0 ) ) ;
-    public final void ruleImportedFQN() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:579:2: ( ( ( rule__ImportedFQN__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:580:1: ( ( rule__ImportedFQN__Group__0 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:580:1: ( ( rule__ImportedFQN__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:581:1: ( rule__ImportedFQN__Group__0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportedFQNAccess().getGroup()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:582:1: ( rule__ImportedFQN__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:582:2: rule__ImportedFQN__Group__0
-            {
-            pushFollow(FOLLOW_rule__ImportedFQN__Group__0_in_ruleImportedFQN1176);
-            rule__ImportedFQN__Group__0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportedFQNAccess().getGroup()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleImportedFQN"
-
-
-    // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:594:1: entryRuleFQN : ruleFQN EOF ;
-    public final void entryRuleFQN() throws RecognitionException {
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:595:1: ( ruleFQN EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:596:1: ruleFQN EOF
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNRule()); 
-            }
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1203);
-            ruleFQN();
-
-            state._fsp--;
-            if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNRule()); 
-            }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1210); if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleFQN"
-
-
-    // $ANTLR start "ruleFQN"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:603:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
-    public final void ruleFQN() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:607:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:608:1: ( ( rule__FQN__Group__0 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:608:1: ( ( rule__FQN__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:609:1: ( rule__FQN__Group__0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNAccess().getGroup()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:610:1: ( rule__FQN__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:610:2: rule__FQN__Group__0
-            {
-            pushFollow(FOLLOW_rule__FQN__Group__0_in_ruleFQN1236);
-            rule__FQN__Group__0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNAccess().getGroup()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleFQN"
-
-
     // $ANTLR start "entryRuleKeyValue"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:624:1: entryRuleKeyValue : ruleKeyValue EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:540:1: entryRuleKeyValue : ruleKeyValue EOF ;
     public final void entryRuleKeyValue() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:625:1: ( ruleKeyValue EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:626:1: ruleKeyValue EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:541:1: ( ruleKeyValue EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:542:1: ruleKeyValue EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueRule()); 
             }
-            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue1265);
+            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue1085);
             ruleKeyValue();
 
             state._fsp--;
@@ -1839,7 +1584,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyValueRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue1272); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue1092); if (state.failed) return ;
 
             }
 
@@ -1856,25 +1601,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleKeyValue"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:633:1: ruleKeyValue : ( ( rule__KeyValue__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:549:1: ruleKeyValue : ( ( rule__KeyValue__Group__0 ) ) ;
     public final void ruleKeyValue() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:637:2: ( ( ( rule__KeyValue__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:638:1: ( ( rule__KeyValue__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:553:2: ( ( ( rule__KeyValue__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:554:1: ( ( rule__KeyValue__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:638:1: ( ( rule__KeyValue__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:639:1: ( rule__KeyValue__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:554:1: ( ( rule__KeyValue__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:555:1: ( rule__KeyValue__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:640:1: ( rule__KeyValue__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:640:2: rule__KeyValue__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:556:1: ( rule__KeyValue__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:556:2: rule__KeyValue__Group__0
             {
-            pushFollow(FOLLOW_rule__KeyValue__Group__0_in_ruleKeyValue1298);
+            pushFollow(FOLLOW_rule__KeyValue__Group__0_in_ruleKeyValue1118);
             rule__KeyValue__Group__0();
 
             state._fsp--;
@@ -1907,16 +1652,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleAnnotationTargetType"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:654:1: entryRuleAnnotationTargetType : ruleAnnotationTargetType EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:570:1: entryRuleAnnotationTargetType : ruleAnnotationTargetType EOF ;
     public final void entryRuleAnnotationTargetType() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:655:1: ( ruleAnnotationTargetType EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:656:1: ruleAnnotationTargetType EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:571:1: ( ruleAnnotationTargetType EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:572:1: ruleAnnotationTargetType EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAnnotationTargetTypeRule()); 
             }
-            pushFollow(FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType1327);
+            pushFollow(FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType1147);
             ruleAnnotationTargetType();
 
             state._fsp--;
@@ -1924,7 +1669,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAnnotationTargetTypeRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationTargetType1334); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationTargetType1154); if (state.failed) return ;
 
             }
 
@@ -1941,22 +1686,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleAnnotationTargetType"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:663:1: ruleAnnotationTargetType : ( RULE_ID ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:579:1: ruleAnnotationTargetType : ( RULE_ID ) ;
     public final void ruleAnnotationTargetType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:667:2: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:668:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:583:2: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:584:1: ( RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:668:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:669:1: RULE_ID
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:584:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:585:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAnnotationTargetTypeAccess().getIDTerminalRuleCall()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotationTargetType1360); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotationTargetType1180); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAnnotationTargetTypeAccess().getIDTerminalRuleCall()); 
             }
@@ -1982,16 +1727,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:682:1: entryRuleAnnotationAttribute : ruleAnnotationAttribute EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:598:1: entryRuleAnnotationAttribute : ruleAnnotationAttribute EOF ;
     public final void entryRuleAnnotationAttribute() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:683:1: ( ruleAnnotationAttribute EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:684:1: ruleAnnotationAttribute EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:599:1: ( ruleAnnotationAttribute EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:600:1: ruleAnnotationAttribute EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAnnotationAttributeRule()); 
             }
-            pushFollow(FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute1386);
+            pushFollow(FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute1206);
             ruleAnnotationAttribute();
 
             state._fsp--;
@@ -1999,7 +1744,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAnnotationAttributeRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationAttribute1393); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationAttribute1213); if (state.failed) return ;
 
             }
 
@@ -2016,25 +1761,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:691:1: ruleAnnotationAttribute : ( ( rule__AnnotationAttribute__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:607:1: ruleAnnotationAttribute : ( ( rule__AnnotationAttribute__Alternatives ) ) ;
     public final void ruleAnnotationAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:695:2: ( ( ( rule__AnnotationAttribute__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:696:1: ( ( rule__AnnotationAttribute__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:611:2: ( ( ( rule__AnnotationAttribute__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:612:1: ( ( rule__AnnotationAttribute__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:696:1: ( ( rule__AnnotationAttribute__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:697:1: ( rule__AnnotationAttribute__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:612:1: ( ( rule__AnnotationAttribute__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:613:1: ( rule__AnnotationAttribute__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAnnotationAttributeAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:698:1: ( rule__AnnotationAttribute__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:698:2: rule__AnnotationAttribute__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:614:1: ( rule__AnnotationAttribute__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:614:2: rule__AnnotationAttribute__Alternatives
             {
-            pushFollow(FOLLOW_rule__AnnotationAttribute__Alternatives_in_ruleAnnotationAttribute1419);
+            pushFollow(FOLLOW_rule__AnnotationAttribute__Alternatives_in_ruleAnnotationAttribute1239);
             rule__AnnotationAttribute__Alternatives();
 
             state._fsp--;
@@ -2067,16 +1812,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleSimpleAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:710:1: entryRuleSimpleAnnotationAttribute : ruleSimpleAnnotationAttribute EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:626:1: entryRuleSimpleAnnotationAttribute : ruleSimpleAnnotationAttribute EOF ;
     public final void entryRuleSimpleAnnotationAttribute() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:711:1: ( ruleSimpleAnnotationAttribute EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:712:1: ruleSimpleAnnotationAttribute EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:627:1: ( ruleSimpleAnnotationAttribute EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:628:1: ruleSimpleAnnotationAttribute EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeRule()); 
             }
-            pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute1446);
+            pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute1266);
             ruleSimpleAnnotationAttribute();
 
             state._fsp--;
@@ -2084,7 +1829,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleAnnotationAttributeRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute1453); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute1273); if (state.failed) return ;
 
             }
 
@@ -2101,25 +1846,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleSimpleAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:719:1: ruleSimpleAnnotationAttribute : ( ( rule__SimpleAnnotationAttribute__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:635:1: ruleSimpleAnnotationAttribute : ( ( rule__SimpleAnnotationAttribute__Group__0 ) ) ;
     public final void ruleSimpleAnnotationAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:723:2: ( ( ( rule__SimpleAnnotationAttribute__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:724:1: ( ( rule__SimpleAnnotationAttribute__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:639:2: ( ( ( rule__SimpleAnnotationAttribute__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:640:1: ( ( rule__SimpleAnnotationAttribute__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:724:1: ( ( rule__SimpleAnnotationAttribute__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:725:1: ( rule__SimpleAnnotationAttribute__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:640:1: ( ( rule__SimpleAnnotationAttribute__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:641:1: ( rule__SimpleAnnotationAttribute__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:726:1: ( rule__SimpleAnnotationAttribute__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:726:2: rule__SimpleAnnotationAttribute__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:642:1: ( rule__SimpleAnnotationAttribute__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:642:2: rule__SimpleAnnotationAttribute__Group__0
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__0_in_ruleSimpleAnnotationAttribute1479);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__0_in_ruleSimpleAnnotationAttribute1299);
             rule__SimpleAnnotationAttribute__Group__0();
 
             state._fsp--;
@@ -2152,16 +1897,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleEnumAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:738:1: entryRuleEnumAnnotationAttribute : ruleEnumAnnotationAttribute EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:654:1: entryRuleEnumAnnotationAttribute : ruleEnumAnnotationAttribute EOF ;
     public final void entryRuleEnumAnnotationAttribute() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:739:1: ( ruleEnumAnnotationAttribute EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:740:1: ruleEnumAnnotationAttribute EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:655:1: ( ruleEnumAnnotationAttribute EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:656:1: ruleEnumAnnotationAttribute EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeRule()); 
             }
-            pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute1506);
+            pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute1326);
             ruleEnumAnnotationAttribute();
 
             state._fsp--;
@@ -2169,7 +1914,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute1513); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute1333); if (state.failed) return ;
 
             }
 
@@ -2186,25 +1931,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleEnumAnnotationAttribute"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:747:1: ruleEnumAnnotationAttribute : ( ( rule__EnumAnnotationAttribute__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:663:1: ruleEnumAnnotationAttribute : ( ( rule__EnumAnnotationAttribute__Group__0 ) ) ;
     public final void ruleEnumAnnotationAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:751:2: ( ( ( rule__EnumAnnotationAttribute__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:752:1: ( ( rule__EnumAnnotationAttribute__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:667:2: ( ( ( rule__EnumAnnotationAttribute__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:668:1: ( ( rule__EnumAnnotationAttribute__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:752:1: ( ( rule__EnumAnnotationAttribute__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:753:1: ( rule__EnumAnnotationAttribute__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:668:1: ( ( rule__EnumAnnotationAttribute__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:669:1: ( rule__EnumAnnotationAttribute__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:754:1: ( rule__EnumAnnotationAttribute__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:754:2: rule__EnumAnnotationAttribute__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:670:1: ( rule__EnumAnnotationAttribute__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:670:2: rule__EnumAnnotationAttribute__Group__0
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__0_in_ruleEnumAnnotationAttribute1539);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__0_in_ruleEnumAnnotationAttribute1359);
             rule__EnumAnnotationAttribute__Group__0();
 
             state._fsp--;
@@ -2236,17 +1981,187 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleEnumAnnotationAttribute"
 
 
+    // $ANTLR start "entryRuleImport"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:682:1: entryRuleImport : ruleImport EOF ;
+    public final void entryRuleImport() throws RecognitionException {
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:683:1: ( ruleImport EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:684:1: ruleImport EOF
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportRule()); 
+            }
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport1386);
+            ruleImport();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportRule()); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport1393); if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleImport"
+
+
+    // $ANTLR start "ruleImport"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:691:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    public final void ruleImport() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:695:2: ( ( ( rule__Import__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:696:1: ( ( rule__Import__Group__0 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:696:1: ( ( rule__Import__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:697:1: ( rule__Import__Group__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getGroup()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:698:1: ( rule__Import__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:698:2: rule__Import__Group__0
+            {
+            pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport1419);
+            rule__Import__Group__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getGroup()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleImport"
+
+
+    // $ANTLR start "entryRuleImportedFQN"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:710:1: entryRuleImportedFQN : ruleImportedFQN EOF ;
+    public final void entryRuleImportedFQN() throws RecognitionException {
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:711:1: ( ruleImportedFQN EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:712:1: ruleImportedFQN EOF
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportedFQNRule()); 
+            }
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1446);
+            ruleImportedFQN();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportedFQNRule()); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN1453); if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleImportedFQN"
+
+
+    // $ANTLR start "ruleImportedFQN"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:719:1: ruleImportedFQN : ( ( rule__ImportedFQN__Group__0 ) ) ;
+    public final void ruleImportedFQN() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:723:2: ( ( ( rule__ImportedFQN__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:724:1: ( ( rule__ImportedFQN__Group__0 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:724:1: ( ( rule__ImportedFQN__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:725:1: ( rule__ImportedFQN__Group__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportedFQNAccess().getGroup()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:726:1: ( rule__ImportedFQN__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:726:2: rule__ImportedFQN__Group__0
+            {
+            pushFollow(FOLLOW_rule__ImportedFQN__Group__0_in_ruleImportedFQN1479);
+            rule__ImportedFQN__Group__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportedFQNAccess().getGroup()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleImportedFQN"
+
+
     // $ANTLR start "entryRuleDocumentation"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:766:1: entryRuleDocumentation : ruleDocumentation EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:738:1: entryRuleDocumentation : ruleDocumentation EOF ;
     public final void entryRuleDocumentation() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:767:1: ( ruleDocumentation EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:768:1: ruleDocumentation EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:739:1: ( ruleDocumentation EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:740:1: ruleDocumentation EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationRule()); 
             }
-            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation1566);
+            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation1506);
             ruleDocumentation();
 
             state._fsp--;
@@ -2254,7 +2169,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDocumentationRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation1573); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation1513); if (state.failed) return ;
 
             }
 
@@ -2271,25 +2186,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDocumentation"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:775:1: ruleDocumentation : ( ( rule__Documentation__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:747:1: ruleDocumentation : ( ( rule__Documentation__Group__0 ) ) ;
     public final void ruleDocumentation() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:779:2: ( ( ( rule__Documentation__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:780:1: ( ( rule__Documentation__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:751:2: ( ( ( rule__Documentation__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:752:1: ( ( rule__Documentation__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:780:1: ( ( rule__Documentation__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:781:1: ( rule__Documentation__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:752:1: ( ( rule__Documentation__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:753:1: ( rule__Documentation__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:782:1: ( rule__Documentation__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:782:2: rule__Documentation__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:754:1: ( rule__Documentation__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:754:2: rule__Documentation__Group__0
             {
-            pushFollow(FOLLOW_rule__Documentation__Group__0_in_ruleDocumentation1599);
+            pushFollow(FOLLOW_rule__Documentation__Group__0_in_ruleDocumentation1539);
             rule__Documentation__Group__0();
 
             state._fsp--;
@@ -2322,16 +2237,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleTIME"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:794:1: entryRuleTIME : ruleTIME EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:766:1: entryRuleTIME : ruleTIME EOF ;
     public final void entryRuleTIME() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:795:1: ( ruleTIME EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:796:1: ruleTIME EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:767:1: ( ruleTIME EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:768:1: ruleTIME EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMERule()); 
             }
-            pushFollow(FOLLOW_ruleTIME_in_entryRuleTIME1626);
+            pushFollow(FOLLOW_ruleTIME_in_entryRuleTIME1566);
             ruleTIME();
 
             state._fsp--;
@@ -2339,7 +2254,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMERule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTIME1633); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTIME1573); if (state.failed) return ;
 
             }
 
@@ -2356,25 +2271,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleTIME"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:803:1: ruleTIME : ( ( rule__TIME__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:775:1: ruleTIME : ( ( rule__TIME__Alternatives ) ) ;
     public final void ruleTIME() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:807:2: ( ( ( rule__TIME__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:808:1: ( ( rule__TIME__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:779:2: ( ( ( rule__TIME__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:780:1: ( ( rule__TIME__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:808:1: ( ( rule__TIME__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:809:1: ( rule__TIME__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:780:1: ( ( rule__TIME__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:781:1: ( rule__TIME__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:810:1: ( rule__TIME__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:810:2: rule__TIME__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:782:1: ( rule__TIME__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:782:2: rule__TIME__Alternatives
             {
-            pushFollow(FOLLOW_rule__TIME__Alternatives_in_ruleTIME1659);
+            pushFollow(FOLLOW_rule__TIME__Alternatives_in_ruleTIME1599);
             rule__TIME__Alternatives();
 
             state._fsp--;
@@ -2407,16 +2322,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:824:1: entryRuleLiteral : ruleLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:796:1: entryRuleLiteral : ruleLiteral EOF ;
     public final void entryRuleLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:825:1: ( ruleLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:826:1: ruleLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:797:1: ( ruleLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:798:1: ruleLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral1688);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral1628);
             ruleLiteral();
 
             state._fsp--;
@@ -2424,7 +2339,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral1695); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral1635); if (state.failed) return ;
 
             }
 
@@ -2441,25 +2356,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:833:1: ruleLiteral : ( ( rule__Literal__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:805:1: ruleLiteral : ( ( rule__Literal__Alternatives ) ) ;
     public final void ruleLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:837:2: ( ( ( rule__Literal__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:838:1: ( ( rule__Literal__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:809:2: ( ( ( rule__Literal__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:810:1: ( ( rule__Literal__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:838:1: ( ( rule__Literal__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:839:1: ( rule__Literal__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:810:1: ( ( rule__Literal__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:811:1: ( rule__Literal__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLiteralAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:840:1: ( rule__Literal__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:840:2: rule__Literal__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:812:1: ( rule__Literal__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:812:2: rule__Literal__Alternatives
             {
-            pushFollow(FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1721);
+            pushFollow(FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1661);
             rule__Literal__Alternatives();
 
             state._fsp--;
@@ -2492,16 +2407,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleBooleanLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:852:1: entryRuleBooleanLiteral : ruleBooleanLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:824:1: entryRuleBooleanLiteral : ruleBooleanLiteral EOF ;
     public final void entryRuleBooleanLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:853:1: ( ruleBooleanLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:854:1: ruleBooleanLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:825:1: ( ruleBooleanLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:826:1: ruleBooleanLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1748);
+            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1688);
             ruleBooleanLiteral();
 
             state._fsp--;
@@ -2509,7 +2424,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBooleanLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral1755); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral1695); if (state.failed) return ;
 
             }
 
@@ -2526,25 +2441,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleBooleanLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:861:1: ruleBooleanLiteral : ( ( rule__BooleanLiteral__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:833:1: ruleBooleanLiteral : ( ( rule__BooleanLiteral__Group__0 ) ) ;
     public final void ruleBooleanLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:865:2: ( ( ( rule__BooleanLiteral__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:866:1: ( ( rule__BooleanLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:837:2: ( ( ( rule__BooleanLiteral__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:838:1: ( ( rule__BooleanLiteral__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:866:1: ( ( rule__BooleanLiteral__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:867:1: ( rule__BooleanLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:838:1: ( ( rule__BooleanLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:839:1: ( rule__BooleanLiteral__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:868:1: ( rule__BooleanLiteral__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:868:2: rule__BooleanLiteral__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:840:1: ( rule__BooleanLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:840:2: rule__BooleanLiteral__Group__0
             {
-            pushFollow(FOLLOW_rule__BooleanLiteral__Group__0_in_ruleBooleanLiteral1781);
+            pushFollow(FOLLOW_rule__BooleanLiteral__Group__0_in_ruleBooleanLiteral1721);
             rule__BooleanLiteral__Group__0();
 
             state._fsp--;
@@ -2577,16 +2492,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleNumberLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:880:1: entryRuleNumberLiteral : ruleNumberLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:852:1: entryRuleNumberLiteral : ruleNumberLiteral EOF ;
     public final void entryRuleNumberLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:881:1: ( ruleNumberLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:882:1: ruleNumberLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:853:1: ( ruleNumberLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:854:1: ruleNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNumberLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1808);
+            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1748);
             ruleNumberLiteral();
 
             state._fsp--;
@@ -2594,7 +2509,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getNumberLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral1815); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral1755); if (state.failed) return ;
 
             }
 
@@ -2611,25 +2526,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleNumberLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:889:1: ruleNumberLiteral : ( ( rule__NumberLiteral__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:861:1: ruleNumberLiteral : ( ( rule__NumberLiteral__Alternatives ) ) ;
     public final void ruleNumberLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:893:2: ( ( ( rule__NumberLiteral__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:894:1: ( ( rule__NumberLiteral__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:865:2: ( ( ( rule__NumberLiteral__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:866:1: ( ( rule__NumberLiteral__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:894:1: ( ( rule__NumberLiteral__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:895:1: ( rule__NumberLiteral__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:866:1: ( ( rule__NumberLiteral__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:867:1: ( rule__NumberLiteral__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNumberLiteralAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:896:1: ( rule__NumberLiteral__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:896:2: rule__NumberLiteral__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:868:1: ( rule__NumberLiteral__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:868:2: rule__NumberLiteral__Alternatives
             {
-            pushFollow(FOLLOW_rule__NumberLiteral__Alternatives_in_ruleNumberLiteral1841);
+            pushFollow(FOLLOW_rule__NumberLiteral__Alternatives_in_ruleNumberLiteral1781);
             rule__NumberLiteral__Alternatives();
 
             state._fsp--;
@@ -2662,16 +2577,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleRealLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:908:1: entryRuleRealLiteral : ruleRealLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:880:1: entryRuleRealLiteral : ruleRealLiteral EOF ;
     public final void entryRuleRealLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:909:1: ( ruleRealLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:910:1: ruleRealLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:881:1: ( ruleRealLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:882:1: ruleRealLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral1868);
+            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral1808);
             ruleRealLiteral();
 
             state._fsp--;
@@ -2679,7 +2594,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRealLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral1875); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral1815); if (state.failed) return ;
 
             }
 
@@ -2696,25 +2611,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleRealLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:917:1: ruleRealLiteral : ( ( rule__RealLiteral__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:889:1: ruleRealLiteral : ( ( rule__RealLiteral__Group__0 ) ) ;
     public final void ruleRealLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:921:2: ( ( ( rule__RealLiteral__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:922:1: ( ( rule__RealLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:893:2: ( ( ( rule__RealLiteral__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:894:1: ( ( rule__RealLiteral__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:922:1: ( ( rule__RealLiteral__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:923:1: ( rule__RealLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:894:1: ( ( rule__RealLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:895:1: ( rule__RealLiteral__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:924:1: ( rule__RealLiteral__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:924:2: rule__RealLiteral__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:896:1: ( rule__RealLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:896:2: rule__RealLiteral__Group__0
             {
-            pushFollow(FOLLOW_rule__RealLiteral__Group__0_in_ruleRealLiteral1901);
+            pushFollow(FOLLOW_rule__RealLiteral__Group__0_in_ruleRealLiteral1841);
             rule__RealLiteral__Group__0();
 
             state._fsp--;
@@ -2747,16 +2662,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleIntLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:936:1: entryRuleIntLiteral : ruleIntLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:908:1: entryRuleIntLiteral : ruleIntLiteral EOF ;
     public final void entryRuleIntLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:937:1: ( ruleIntLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:938:1: ruleIntLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:909:1: ( ruleIntLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:910:1: ruleIntLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral1928);
+            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral1868);
             ruleIntLiteral();
 
             state._fsp--;
@@ -2764,7 +2679,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIntLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral1935); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral1875); if (state.failed) return ;
 
             }
 
@@ -2781,25 +2696,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleIntLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:945:1: ruleIntLiteral : ( ( rule__IntLiteral__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:917:1: ruleIntLiteral : ( ( rule__IntLiteral__Group__0 ) ) ;
     public final void ruleIntLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:949:2: ( ( ( rule__IntLiteral__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:950:1: ( ( rule__IntLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:921:2: ( ( ( rule__IntLiteral__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:922:1: ( ( rule__IntLiteral__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:950:1: ( ( rule__IntLiteral__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:951:1: ( rule__IntLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:922:1: ( ( rule__IntLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:923:1: ( rule__IntLiteral__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntLiteralAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:952:1: ( rule__IntLiteral__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:952:2: rule__IntLiteral__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:924:1: ( rule__IntLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:924:2: rule__IntLiteral__Group__0
             {
-            pushFollow(FOLLOW_rule__IntLiteral__Group__0_in_ruleIntLiteral1961);
+            pushFollow(FOLLOW_rule__IntLiteral__Group__0_in_ruleIntLiteral1901);
             rule__IntLiteral__Group__0();
 
             state._fsp--;
@@ -2832,16 +2747,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:964:1: entryRuleStringLiteral : ruleStringLiteral EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:936:1: entryRuleStringLiteral : ruleStringLiteral EOF ;
     public final void entryRuleStringLiteral() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:965:1: ( ruleStringLiteral EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:966:1: ruleStringLiteral EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:937:1: ( ruleStringLiteral EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:938:1: ruleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral1988);
+            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral1928);
             ruleStringLiteral();
 
             state._fsp--;
@@ -2849,7 +2764,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getStringLiteralRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral1995); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral1935); if (state.failed) return ;
 
             }
 
@@ -2866,25 +2781,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleStringLiteral"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:973:1: ruleStringLiteral : ( ( rule__StringLiteral__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:945:1: ruleStringLiteral : ( ( rule__StringLiteral__Group__0 ) ) ;
     public final void ruleStringLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:977:2: ( ( ( rule__StringLiteral__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:978:1: ( ( rule__StringLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:949:2: ( ( ( rule__StringLiteral__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:950:1: ( ( rule__StringLiteral__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:978:1: ( ( rule__StringLiteral__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:979:1: ( rule__StringLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:950:1: ( ( rule__StringLiteral__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:951:1: ( rule__StringLiteral__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:980:1: ( rule__StringLiteral__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:980:2: rule__StringLiteral__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:952:1: ( rule__StringLiteral__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:952:2: rule__StringLiteral__Group__0
             {
-            pushFollow(FOLLOW_rule__StringLiteral__Group__0_in_ruleStringLiteral2021);
+            pushFollow(FOLLOW_rule__StringLiteral__Group__0_in_ruleStringLiteral1961);
             rule__StringLiteral__Group__0();
 
             state._fsp--;
@@ -2917,16 +2832,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleInteger"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:992:1: entryRuleInteger : ruleInteger EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:964:1: entryRuleInteger : ruleInteger EOF ;
     public final void entryRuleInteger() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:993:1: ( ruleInteger EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:994:1: ruleInteger EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:965:1: ( ruleInteger EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:966:1: ruleInteger EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerRule()); 
             }
-            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger2048);
+            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger1988);
             ruleInteger();
 
             state._fsp--;
@@ -2934,7 +2849,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIntegerRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger2055); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger1995); if (state.failed) return ;
 
             }
 
@@ -2951,25 +2866,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleInteger"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1001:1: ruleInteger : ( ( rule__Integer__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:973:1: ruleInteger : ( ( rule__Integer__Alternatives ) ) ;
     public final void ruleInteger() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1005:2: ( ( ( rule__Integer__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1006:1: ( ( rule__Integer__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:977:2: ( ( ( rule__Integer__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:978:1: ( ( rule__Integer__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1006:1: ( ( rule__Integer__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1007:1: ( rule__Integer__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:978:1: ( ( rule__Integer__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:979:1: ( rule__Integer__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1008:1: ( rule__Integer__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1008:2: rule__Integer__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:980:1: ( rule__Integer__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:980:2: rule__Integer__Alternatives
             {
-            pushFollow(FOLLOW_rule__Integer__Alternatives_in_ruleInteger2081);
+            pushFollow(FOLLOW_rule__Integer__Alternatives_in_ruleInteger2021);
             rule__Integer__Alternatives();
 
             state._fsp--;
@@ -3002,19 +2917,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleSignedInteger"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1020:1: entryRuleSignedInteger : ruleSignedInteger EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:992:1: entryRuleSignedInteger : ruleSignedInteger EOF ;
     public final void entryRuleSignedInteger() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1024:1: ( ruleSignedInteger EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1025:1: ruleSignedInteger EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:996:1: ( ruleSignedInteger EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:997:1: ruleSignedInteger EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSignedIntegerRule()); 
             }
-            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2113);
+            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2053);
             ruleSignedInteger();
 
             state._fsp--;
@@ -3022,7 +2937,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSignedIntegerRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger2120); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger2060); if (state.failed) return ;
 
             }
 
@@ -3042,26 +2957,26 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleSignedInteger"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1035:1: ruleSignedInteger : ( ( rule__SignedInteger__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1007:1: ruleSignedInteger : ( ( rule__SignedInteger__Group__0 ) ) ;
     public final void ruleSignedInteger() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1040:2: ( ( ( rule__SignedInteger__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1041:1: ( ( rule__SignedInteger__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1012:2: ( ( ( rule__SignedInteger__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1013:1: ( ( rule__SignedInteger__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1041:1: ( ( rule__SignedInteger__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1042:1: ( rule__SignedInteger__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1013:1: ( ( rule__SignedInteger__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1014:1: ( rule__SignedInteger__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSignedIntegerAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1043:1: ( rule__SignedInteger__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1043:2: rule__SignedInteger__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1015:1: ( rule__SignedInteger__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1015:2: rule__SignedInteger__Group__0
             {
-            pushFollow(FOLLOW_rule__SignedInteger__Group__0_in_ruleSignedInteger2150);
+            pushFollow(FOLLOW_rule__SignedInteger__Group__0_in_ruleSignedInteger2090);
             rule__SignedInteger__Group__0();
 
             state._fsp--;
@@ -3095,19 +3010,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleHexadecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1056:1: entryRuleHexadecimal : ruleHexadecimal EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1028:1: entryRuleHexadecimal : ruleHexadecimal EOF ;
     public final void entryRuleHexadecimal() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1060:1: ( ruleHexadecimal EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1061:1: ruleHexadecimal EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1032:1: ( ruleHexadecimal EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1033:1: ruleHexadecimal EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getHexadecimalRule()); 
             }
-            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2182);
+            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2122);
             ruleHexadecimal();
 
             state._fsp--;
@@ -3115,7 +3030,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getHexadecimalRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal2189); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal2129); if (state.failed) return ;
 
             }
 
@@ -3135,23 +3050,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleHexadecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1071:1: ruleHexadecimal : ( RULE_HEX ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1043:1: ruleHexadecimal : ( RULE_HEX ) ;
     public final void ruleHexadecimal() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1076:2: ( ( RULE_HEX ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1077:1: ( RULE_HEX )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1048:2: ( ( RULE_HEX ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1049:1: ( RULE_HEX )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1077:1: ( RULE_HEX )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1078:1: RULE_HEX
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1049:1: ( RULE_HEX )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1050:1: RULE_HEX
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getHexadecimalAccess().getHEXTerminalRuleCall()); 
             }
-            match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal2219); if (state.failed) return ;
+            match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal2159); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getHexadecimalAccess().getHEXTerminalRuleCall()); 
             }
@@ -3178,16 +3093,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleReal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1092:1: entryRuleReal : ruleReal EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1064:1: entryRuleReal : ruleReal EOF ;
     public final void entryRuleReal() throws RecognitionException {
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1093:1: ( ruleReal EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1094:1: ruleReal EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1065:1: ( ruleReal EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1066:1: ruleReal EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealRule()); 
             }
-            pushFollow(FOLLOW_ruleReal_in_entryRuleReal2245);
+            pushFollow(FOLLOW_ruleReal_in_entryRuleReal2185);
             ruleReal();
 
             state._fsp--;
@@ -3195,7 +3110,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRealRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReal2252); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReal2192); if (state.failed) return ;
 
             }
 
@@ -3212,25 +3127,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleReal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1101:1: ruleReal : ( ( rule__Real__Alternatives ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1073:1: ruleReal : ( ( rule__Real__Alternatives ) ) ;
     public final void ruleReal() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1105:2: ( ( ( rule__Real__Alternatives ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1106:1: ( ( rule__Real__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1077:2: ( ( ( rule__Real__Alternatives ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1078:1: ( ( rule__Real__Alternatives ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1106:1: ( ( rule__Real__Alternatives ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1107:1: ( rule__Real__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1078:1: ( ( rule__Real__Alternatives ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1079:1: ( rule__Real__Alternatives )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealAccess().getAlternatives()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1108:1: ( rule__Real__Alternatives )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1108:2: rule__Real__Alternatives
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1080:1: ( rule__Real__Alternatives )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1080:2: rule__Real__Alternatives
             {
-            pushFollow(FOLLOW_rule__Real__Alternatives_in_ruleReal2278);
+            pushFollow(FOLLOW_rule__Real__Alternatives_in_ruleReal2218);
             rule__Real__Alternatives();
 
             state._fsp--;
@@ -3263,19 +3178,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1120:1: entryRuleDecimal : ruleDecimal EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1092:1: entryRuleDecimal : ruleDecimal EOF ;
     public final void entryRuleDecimal() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1124:1: ( ruleDecimal EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1125:1: ruleDecimal EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1096:1: ( ruleDecimal EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1097:1: ruleDecimal EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalRule()); 
             }
-            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal2310);
+            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal2250);
             ruleDecimal();
 
             state._fsp--;
@@ -3283,7 +3198,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal2317); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal2257); if (state.failed) return ;
 
             }
 
@@ -3303,26 +3218,26 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1135:1: ruleDecimal : ( ( rule__Decimal__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1107:1: ruleDecimal : ( ( rule__Decimal__Group__0 ) ) ;
     public final void ruleDecimal() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1140:2: ( ( ( rule__Decimal__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1141:1: ( ( rule__Decimal__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1112:2: ( ( ( rule__Decimal__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1113:1: ( ( rule__Decimal__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1141:1: ( ( rule__Decimal__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1142:1: ( rule__Decimal__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1113:1: ( ( rule__Decimal__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1114:1: ( rule__Decimal__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1143:1: ( rule__Decimal__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1143:2: rule__Decimal__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1115:1: ( rule__Decimal__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1115:2: rule__Decimal__Group__0
             {
-            pushFollow(FOLLOW_rule__Decimal__Group__0_in_ruleDecimal2347);
+            pushFollow(FOLLOW_rule__Decimal__Group__0_in_ruleDecimal2287);
             rule__Decimal__Group__0();
 
             state._fsp--;
@@ -3356,19 +3271,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDotDecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1156:1: entryRuleDotDecimal : ruleDotDecimal EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1128:1: entryRuleDotDecimal : ruleDotDecimal EOF ;
     public final void entryRuleDotDecimal() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1160:1: ( ruleDotDecimal EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1161:1: ruleDotDecimal EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1132:1: ( ruleDotDecimal EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1133:1: ruleDotDecimal EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDotDecimalRule()); 
             }
-            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal2379);
+            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal2319);
             ruleDotDecimal();
 
             state._fsp--;
@@ -3376,7 +3291,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDotDecimalRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal2386); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal2326); if (state.failed) return ;
 
             }
 
@@ -3396,26 +3311,26 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDotDecimal"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1171:1: ruleDotDecimal : ( ( rule__DotDecimal__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1143:1: ruleDotDecimal : ( ( rule__DotDecimal__Group__0 ) ) ;
     public final void ruleDotDecimal() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1176:2: ( ( ( rule__DotDecimal__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1177:1: ( ( rule__DotDecimal__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1148:2: ( ( ( rule__DotDecimal__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1149:1: ( ( rule__DotDecimal__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1177:1: ( ( rule__DotDecimal__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1178:1: ( rule__DotDecimal__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1149:1: ( ( rule__DotDecimal__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1150:1: ( rule__DotDecimal__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDotDecimalAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1179:1: ( rule__DotDecimal__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1179:2: rule__DotDecimal__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1151:1: ( rule__DotDecimal__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1151:2: rule__DotDecimal__Group__0
             {
-            pushFollow(FOLLOW_rule__DotDecimal__Group__0_in_ruleDotDecimal2416);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__0_in_ruleDotDecimal2356);
             rule__DotDecimal__Group__0();
 
             state._fsp--;
@@ -3449,19 +3364,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDecimalDot"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1192:1: entryRuleDecimalDot : ruleDecimalDot EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1164:1: entryRuleDecimalDot : ruleDecimalDot EOF ;
     public final void entryRuleDecimalDot() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1196:1: ( ruleDecimalDot EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1197:1: ruleDecimalDot EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1168:1: ( ruleDecimalDot EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1169:1: ruleDecimalDot EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalDotRule()); 
             }
-            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot2448);
+            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot2388);
             ruleDecimalDot();
 
             state._fsp--;
@@ -3469,7 +3384,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalDotRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot2455); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot2395); if (state.failed) return ;
 
             }
 
@@ -3489,26 +3404,26 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDecimalDot"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1207:1: ruleDecimalDot : ( ( rule__DecimalDot__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1179:1: ruleDecimalDot : ( ( rule__DecimalDot__Group__0 ) ) ;
     public final void ruleDecimalDot() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1212:2: ( ( ( rule__DecimalDot__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1213:1: ( ( rule__DecimalDot__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1184:2: ( ( ( rule__DecimalDot__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1185:1: ( ( rule__DecimalDot__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1213:1: ( ( rule__DecimalDot__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1214:1: ( rule__DecimalDot__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1185:1: ( ( rule__DecimalDot__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1186:1: ( rule__DecimalDot__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalDotAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1215:1: ( rule__DecimalDot__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1215:2: rule__DecimalDot__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1187:1: ( rule__DecimalDot__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1187:2: rule__DecimalDot__Group__0
             {
-            pushFollow(FOLLOW_rule__DecimalDot__Group__0_in_ruleDecimalDot2485);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__0_in_ruleDecimalDot2425);
             rule__DecimalDot__Group__0();
 
             state._fsp--;
@@ -3542,19 +3457,19 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDecimalExp"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1228:1: entryRuleDecimalExp : ruleDecimalExp EOF ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1200:1: entryRuleDecimalExp : ruleDecimalExp EOF ;
     public final void entryRuleDecimalExp() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1232:1: ( ruleDecimalExp EOF )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1233:1: ruleDecimalExp EOF
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1204:1: ( ruleDecimalExp EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1205:1: ruleDecimalExp EOF
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpRule()); 
             }
-            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp2517);
+            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp2457);
             ruleDecimalExp();
 
             state._fsp--;
@@ -3562,7 +3477,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalExpRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp2524); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp2464); if (state.failed) return ;
 
             }
 
@@ -3582,26 +3497,26 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDecimalExp"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1243:1: ruleDecimalExp : ( ( rule__DecimalExp__Group__0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1215:1: ruleDecimalExp : ( ( rule__DecimalExp__Group__0 ) ) ;
     public final void ruleDecimalExp() throws RecognitionException {
 
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1248:2: ( ( ( rule__DecimalExp__Group__0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1249:1: ( ( rule__DecimalExp__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1220:2: ( ( ( rule__DecimalExp__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1221:1: ( ( rule__DecimalExp__Group__0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1249:1: ( ( rule__DecimalExp__Group__0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1250:1: ( rule__DecimalExp__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1221:1: ( ( rule__DecimalExp__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1222:1: ( rule__DecimalExp__Group__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getGroup()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1251:1: ( rule__DecimalExp__Group__0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1251:2: rule__DecimalExp__Group__0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1223:1: ( rule__DecimalExp__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1223:2: rule__DecimalExp__Group__0
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__0_in_ruleDecimalExp2554);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__0_in_ruleDecimalExp2494);
             rule__DecimalExp__Group__0();
 
             state._fsp--;
@@ -3632,6 +3547,91 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
         return ;
     }
     // $ANTLR end "ruleDecimalExp"
+
+
+    // $ANTLR start "entryRuleFQN"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1236:1: entryRuleFQN : ruleFQN EOF ;
+    public final void entryRuleFQN() throws RecognitionException {
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1237:1: ( ruleFQN EOF )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1238:1: ruleFQN EOF
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNRule()); 
+            }
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN2521);
+            ruleFQN();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNRule()); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN2528); if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleFQN"
+
+
+    // $ANTLR start "ruleFQN"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1245:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    public final void ruleFQN() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1249:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1250:1: ( ( rule__FQN__Group__0 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1250:1: ( ( rule__FQN__Group__0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1251:1: ( rule__FQN__Group__0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNAccess().getGroup()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1252:1: ( rule__FQN__Group__0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1252:2: rule__FQN__Group__0
+            {
+            pushFollow(FOLLOW_rule__FQN__Group__0_in_ruleFQN2554);
+            rule__FQN__Group__0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNAccess().getGroup()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleFQN"
 
 
     // $ANTLR start "ruleLiteralType"
@@ -4191,22 +4191,116 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ConfigValue__Alternatives"
 
 
-    // $ANTLR start "rule__Import__Alternatives_1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1412:1: rule__Import__Alternatives_1 : ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) );
-    public final void rule__Import__Alternatives_1() throws RecognitionException {
+    // $ANTLR start "rule__AnnotationAttribute__Alternatives"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1413:1: rule__AnnotationAttribute__Alternatives : ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) );
+    public final void rule__AnnotationAttribute__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1416:1: ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1417:1: ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==RULE_ID) ) {
-                alt6=1;
+            if ( (LA6_0==59) ) {
+                int LA6_1 = input.LA(2);
+
+                if ( (LA6_1==48) ) {
+                    int LA6_3 = input.LA(3);
+
+                    if ( (LA6_3==RULE_ID) ) {
+                        int LA6_4 = input.LA(4);
+
+                        if ( (LA6_4==47) ) {
+                            int LA6_5 = input.LA(5);
+
+                            if ( ((LA6_5>=21 && LA6_5<=24)) ) {
+                                alt6=1;
+                            }
+                            else if ( (LA6_5==26) ) {
+                                alt6=2;
+                            }
+                            else {
+                                if (state.backtracking>0) {state.failed=true; return ;}
+                                NoViableAltException nvae =
+                                    new NoViableAltException("", 6, 5, input);
+
+                                throw nvae;
+                            }
+                        }
+                        else {
+                            if (state.backtracking>0) {state.failed=true; return ;}
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 6, 4, input);
+
+                            throw nvae;
+                        }
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return ;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 6, 3, input);
+
+                        throw nvae;
+                    }
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return ;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 6, 1, input);
+
+                    throw nvae;
+                }
             }
             else if ( (LA6_0==16) ) {
-                alt6=2;
+                int LA6_2 = input.LA(2);
+
+                if ( (LA6_2==48) ) {
+                    int LA6_3 = input.LA(3);
+
+                    if ( (LA6_3==RULE_ID) ) {
+                        int LA6_4 = input.LA(4);
+
+                        if ( (LA6_4==47) ) {
+                            int LA6_5 = input.LA(5);
+
+                            if ( ((LA6_5>=21 && LA6_5<=24)) ) {
+                                alt6=1;
+                            }
+                            else if ( (LA6_5==26) ) {
+                                alt6=2;
+                            }
+                            else {
+                                if (state.backtracking>0) {state.failed=true; return ;}
+                                NoViableAltException nvae =
+                                    new NoViableAltException("", 6, 5, input);
+
+                                throw nvae;
+                            }
+                        }
+                        else {
+                            if (state.backtracking>0) {state.failed=true; return ;}
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 6, 4, input);
+
+                            throw nvae;
+                        }
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return ;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 6, 3, input);
+
+                        throw nvae;
+                    }
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return ;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 6, 2, input);
+
+                    throw nvae;
+                }
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
@@ -4217,199 +4311,15 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1417:1: ( ( rule__Import__Group_1_0__0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1418:1: ( ruleSimpleAnnotationAttribute )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1417:1: ( ( rule__Import__Group_1_0__0 ) )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1418:1: ( rule__Import__Group_1_0__0 )
-                    {
-                    if ( state.backtracking==0 ) {
-                       before(grammarAccess.getImportAccess().getGroup_1_0()); 
-                    }
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1419:1: ( rule__Import__Group_1_0__0 )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1419:2: rule__Import__Group_1_0__0
-                    {
-                    pushFollow(FOLLOW_rule__Import__Group_1_0__0_in_rule__Import__Alternatives_12918);
-                    rule__Import__Group_1_0__0();
-
-                    state._fsp--;
-                    if (state.failed) return ;
-
-                    }
-
-                    if ( state.backtracking==0 ) {
-                       after(grammarAccess.getImportAccess().getGroup_1_0()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1423:6: ( 'model' )
-                    {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1423:6: ( 'model' )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1424:1: 'model'
-                    {
-                    if ( state.backtracking==0 ) {
-                       before(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
-                    }
-                    match(input,16,FOLLOW_16_in_rule__Import__Alternatives_12937); if (state.failed) return ;
-                    if ( state.backtracking==0 ) {
-                       after(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Alternatives_1"
-
-
-    // $ANTLR start "rule__AnnotationAttribute__Alternatives"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1437:1: rule__AnnotationAttribute__Alternatives : ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) );
-    public final void rule__AnnotationAttribute__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1441:1: ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
-
-            if ( (LA7_0==59) ) {
-                int LA7_1 = input.LA(2);
-
-                if ( (LA7_1==51) ) {
-                    int LA7_3 = input.LA(3);
-
-                    if ( (LA7_3==RULE_ID) ) {
-                        int LA7_4 = input.LA(4);
-
-                        if ( (LA7_4==47) ) {
-                            int LA7_5 = input.LA(5);
-
-                            if ( (LA7_5==26) ) {
-                                alt7=2;
-                            }
-                            else if ( ((LA7_5>=21 && LA7_5<=24)) ) {
-                                alt7=1;
-                            }
-                            else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
-                                NoViableAltException nvae =
-                                    new NoViableAltException("", 7, 5, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 7, 4, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 7, 3, input);
-
-                        throw nvae;
-                    }
-                }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 7, 1, input);
-
-                    throw nvae;
-                }
-            }
-            else if ( (LA7_0==17) ) {
-                int LA7_2 = input.LA(2);
-
-                if ( (LA7_2==51) ) {
-                    int LA7_3 = input.LA(3);
-
-                    if ( (LA7_3==RULE_ID) ) {
-                        int LA7_4 = input.LA(4);
-
-                        if ( (LA7_4==47) ) {
-                            int LA7_5 = input.LA(5);
-
-                            if ( (LA7_5==26) ) {
-                                alt7=2;
-                            }
-                            else if ( ((LA7_5>=21 && LA7_5<=24)) ) {
-                                alt7=1;
-                            }
-                            else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
-                                NoViableAltException nvae =
-                                    new NoViableAltException("", 7, 5, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 7, 4, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 7, 3, input);
-
-                        throw nvae;
-                    }
-                }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 7, 2, input);
-
-                    throw nvae;
-                }
-            }
-            else {
-                if (state.backtracking>0) {state.failed=true; return ;}
-                NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
-
-                throw nvae;
-            }
-            switch (alt7) {
-                case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1442:1: ( ruleSimpleAnnotationAttribute )
-                    {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1442:1: ( ruleSimpleAnnotationAttribute )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1443:1: ruleSimpleAnnotationAttribute
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1418:1: ( ruleSimpleAnnotationAttribute )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1419:1: ruleSimpleAnnotationAttribute
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAnnotationAttributeAccess().getSimpleAnnotationAttributeParserRuleCall_0()); 
                     }
-                    pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2972);
+                    pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2919);
                     ruleSimpleAnnotationAttribute();
 
                     state._fsp--;
@@ -4424,15 +4334,15 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1448:6: ( ruleEnumAnnotationAttribute )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1424:6: ( ruleEnumAnnotationAttribute )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1448:6: ( ruleEnumAnnotationAttribute )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1449:1: ruleEnumAnnotationAttribute
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1424:6: ( ruleEnumAnnotationAttribute )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1425:1: ruleEnumAnnotationAttribute
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAnnotationAttributeAccess().getEnumAnnotationAttributeParserRuleCall_1()); 
                     }
-                    pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2989);
+                    pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2936);
                     ruleEnumAnnotationAttribute();
 
                     state._fsp--;
@@ -4464,43 +4374,43 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Alternatives_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1459:1: rule__SimpleAnnotationAttribute__Alternatives_0 : ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) );
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1435:1: rule__SimpleAnnotationAttribute__Alternatives_0 : ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) );
     public final void rule__SimpleAnnotationAttribute__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1463:1: ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1439:1: ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA8_0==59) ) {
-                alt8=1;
+            if ( (LA7_0==59) ) {
+                alt7=1;
             }
-            else if ( (LA8_0==17) ) {
-                alt8=2;
+            else if ( (LA7_0==16) ) {
+                alt7=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
-            switch (alt8) {
+            switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1464:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1440:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1464:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1465:1: ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1440:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1441:1: ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalAssignment_0_0()); 
                     }
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1466:1: ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1466:2: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1442:1: ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1442:2: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0
                     {
-                    pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__OptionalAssignment_0_0_in_rule__SimpleAnnotationAttribute__Alternatives_03021);
+                    pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__OptionalAssignment_0_0_in_rule__SimpleAnnotationAttribute__Alternatives_02968);
                     rule__SimpleAnnotationAttribute__OptionalAssignment_0_0();
 
                     state._fsp--;
@@ -4518,15 +4428,15 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1470:6: ( 'mandatory' )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1446:6: ( 'mandatory' )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1470:6: ( 'mandatory' )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1471:1: 'mandatory'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1446:6: ( 'mandatory' )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1447:1: 'mandatory'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
                     }
-                    match(input,17,FOLLOW_17_in_rule__SimpleAnnotationAttribute__Alternatives_03040); if (state.failed) return ;
+                    match(input,16,FOLLOW_16_in_rule__SimpleAnnotationAttribute__Alternatives_02987); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
                     }
@@ -4554,43 +4464,43 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Alternatives_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1483:1: rule__EnumAnnotationAttribute__Alternatives_0 : ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) );
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1459:1: rule__EnumAnnotationAttribute__Alternatives_0 : ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) );
     public final void rule__EnumAnnotationAttribute__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1487:1: ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1463:1: ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA9_0==59) ) {
-                alt9=1;
+            if ( (LA8_0==59) ) {
+                alt8=1;
             }
-            else if ( (LA9_0==17) ) {
-                alt9=2;
+            else if ( (LA8_0==16) ) {
+                alt8=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 9, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
-            switch (alt9) {
+            switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1488:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1464:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1488:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1489:1: ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1464:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1465:1: ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalAssignment_0_0()); 
                     }
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1490:1: ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1490:2: rule__EnumAnnotationAttribute__OptionalAssignment_0_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1466:1: ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1466:2: rule__EnumAnnotationAttribute__OptionalAssignment_0_0
                     {
-                    pushFollow(FOLLOW_rule__EnumAnnotationAttribute__OptionalAssignment_0_0_in_rule__EnumAnnotationAttribute__Alternatives_03074);
+                    pushFollow(FOLLOW_rule__EnumAnnotationAttribute__OptionalAssignment_0_0_in_rule__EnumAnnotationAttribute__Alternatives_03021);
                     rule__EnumAnnotationAttribute__OptionalAssignment_0_0();
 
                     state._fsp--;
@@ -4608,15 +4518,15 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1494:6: ( 'mandatory' )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1470:6: ( 'mandatory' )
                     {
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1494:6: ( 'mandatory' )
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1495:1: 'mandatory'
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1470:6: ( 'mandatory' )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1471:1: 'mandatory'
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
                     }
-                    match(input,17,FOLLOW_17_in_rule__EnumAnnotationAttribute__Alternatives_03093); if (state.failed) return ;
+                    match(input,16,FOLLOW_16_in_rule__EnumAnnotationAttribute__Alternatives_03040); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
                        after(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
                     }
@@ -4643,6 +4553,96 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EnumAnnotationAttribute__Alternatives_0"
 
 
+    // $ANTLR start "rule__Import__Alternatives_1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1483:1: rule__Import__Alternatives_1 : ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) );
+    public final void rule__Import__Alternatives_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1487:1: ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) )
+            int alt9=2;
+            int LA9_0 = input.LA(1);
+
+            if ( (LA9_0==RULE_ID) ) {
+                alt9=1;
+            }
+            else if ( (LA9_0==17) ) {
+                alt9=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return ;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 9, 0, input);
+
+                throw nvae;
+            }
+            switch (alt9) {
+                case 1 :
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1488:1: ( ( rule__Import__Group_1_0__0 ) )
+                    {
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1488:1: ( ( rule__Import__Group_1_0__0 ) )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1489:1: ( rule__Import__Group_1_0__0 )
+                    {
+                    if ( state.backtracking==0 ) {
+                       before(grammarAccess.getImportAccess().getGroup_1_0()); 
+                    }
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1490:1: ( rule__Import__Group_1_0__0 )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1490:2: rule__Import__Group_1_0__0
+                    {
+                    pushFollow(FOLLOW_rule__Import__Group_1_0__0_in_rule__Import__Alternatives_13074);
+                    rule__Import__Group_1_0__0();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+
+                    if ( state.backtracking==0 ) {
+                       after(grammarAccess.getImportAccess().getGroup_1_0()); 
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1494:6: ( 'model' )
+                    {
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1494:6: ( 'model' )
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1495:1: 'model'
+                    {
+                    if ( state.backtracking==0 ) {
+                       before(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
+                    }
+                    match(input,17,FOLLOW_17_in_rule__Import__Alternatives_13093); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
+                       after(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Alternatives_1"
+
+
     // $ANTLR start "rule__TIME__Alternatives"
     // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:1507:1: rule__TIME__Alternatives : ( ( ( rule__TIME__Group_0__0 ) ) | ( ( rule__TIME__Group_1__0 ) ) | ( ( rule__TIME__Group_2__0 ) ) | ( ( rule__TIME__Group_3__0 ) ) );
     public final void rule__TIME__Alternatives() throws RecognitionException {
@@ -4656,14 +4656,14 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
             if ( (LA10_0==RULE_INT) ) {
                 switch ( input.LA(2) ) {
+                case 57:
+                    {
+                    alt10=4;
+                    }
+                    break;
                 case 54:
                     {
                     alt10=1;
-                    }
-                    break;
-                case 56:
-                    {
-                    alt10=3;
                     }
                     break;
                 case 55:
@@ -4671,9 +4671,9 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                     alt10=2;
                     }
                     break;
-                case 57:
+                case 56:
                     {
-                    alt10=4;
+                    alt10=3;
                     }
                     break;
                 default:
@@ -5058,11 +5058,11 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                 if ( (LA13_1==RULE_INT) ) {
                     int LA13_3 = input.LA(3);
 
-                    if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
-                        alt13=1;
-                    }
-                    else if ( (LA13_3==46) ) {
+                    if ( (LA13_3==46) ) {
                         alt13=2;
+                    }
+                    else if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
+                        alt13=1;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -5091,11 +5091,11 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                 if ( (LA13_2==RULE_INT) ) {
                     int LA13_3 = input.LA(3);
 
-                    if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
-                        alt13=1;
-                    }
-                    else if ( (LA13_3==46) ) {
+                    if ( (LA13_3==46) ) {
                         alt13=2;
+                    }
+                    else if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
+                        alt13=1;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -5121,11 +5121,11 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                 {
                 int LA13_3 = input.LA(2);
 
-                if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
-                    alt13=1;
-                }
-                else if ( (LA13_3==46) ) {
+                if ( (LA13_3==46) ) {
                     alt13=2;
+                }
+                else if ( (LA13_3==EOF||(LA13_3>=26 && LA13_3<=27)||(LA13_3>=40 && LA13_3<=41)||(LA13_3>=44 && LA13_3<=45)) ) {
+                    alt13=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -6289,7 +6289,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
                 int alt22=2;
                 int LA22_0 = input.LA(1);
 
-                if ( (LA22_0==48) ) {
+                if ( (LA22_0==49) ) {
                     alt22=1;
                 }
 
@@ -15011,945 +15011,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__RefSegment__Group_1__1__Impl"
 
 
-    // $ANTLR start "rule__Import__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5192:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
-    public final void rule__Import__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5196:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5197:2: rule__Import__Group__0__Impl rule__Import__Group__1
-            {
-            pushFollow(FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__010473);
-            rule__Import__Group__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Import__Group__1_in_rule__Import__Group__010476);
-            rule__Import__Group__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__0"
-
-
-    // $ANTLR start "rule__Import__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5204:1: rule__Import__Group__0__Impl : ( 'import' ) ;
-    public final void rule__Import__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5208:1: ( ( 'import' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5209:1: ( 'import' )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5209:1: ( 'import' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5210:1: 'import'
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getImportKeyword_0()); 
-            }
-            match(input,48,FOLLOW_48_in_rule__Import__Group__0__Impl10504); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getImportKeyword_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__0__Impl"
-
-
-    // $ANTLR start "rule__Import__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5223:1: rule__Import__Group__1 : rule__Import__Group__1__Impl rule__Import__Group__2 ;
-    public final void rule__Import__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5227:1: ( rule__Import__Group__1__Impl rule__Import__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5228:2: rule__Import__Group__1__Impl rule__Import__Group__2
-            {
-            pushFollow(FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__110535);
-            rule__Import__Group__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Import__Group__2_in_rule__Import__Group__110538);
-            rule__Import__Group__2();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__1"
-
-
-    // $ANTLR start "rule__Import__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5235:1: rule__Import__Group__1__Impl : ( ( rule__Import__Alternatives_1 ) ) ;
-    public final void rule__Import__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5239:1: ( ( ( rule__Import__Alternatives_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5240:1: ( ( rule__Import__Alternatives_1 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5240:1: ( ( rule__Import__Alternatives_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5241:1: ( rule__Import__Alternatives_1 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getAlternatives_1()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5242:1: ( rule__Import__Alternatives_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5242:2: rule__Import__Alternatives_1
-            {
-            pushFollow(FOLLOW_rule__Import__Alternatives_1_in_rule__Import__Group__1__Impl10565);
-            rule__Import__Alternatives_1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getAlternatives_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__1__Impl"
-
-
-    // $ANTLR start "rule__Import__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5252:1: rule__Import__Group__2 : rule__Import__Group__2__Impl ;
-    public final void rule__Import__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5256:1: ( rule__Import__Group__2__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5257:2: rule__Import__Group__2__Impl
-            {
-            pushFollow(FOLLOW_rule__Import__Group__2__Impl_in_rule__Import__Group__210595);
-            rule__Import__Group__2__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__2"
-
-
-    // $ANTLR start "rule__Import__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5263:1: rule__Import__Group__2__Impl : ( ( rule__Import__ImportURIAssignment_2 ) ) ;
-    public final void rule__Import__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5267:1: ( ( ( rule__Import__ImportURIAssignment_2 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5268:1: ( ( rule__Import__ImportURIAssignment_2 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5268:1: ( ( rule__Import__ImportURIAssignment_2 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5269:1: ( rule__Import__ImportURIAssignment_2 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5270:1: ( rule__Import__ImportURIAssignment_2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5270:2: rule__Import__ImportURIAssignment_2
-            {
-            pushFollow(FOLLOW_rule__Import__ImportURIAssignment_2_in_rule__Import__Group__2__Impl10622);
-            rule__Import__ImportURIAssignment_2();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__2__Impl"
-
-
-    // $ANTLR start "rule__Import__Group_1_0__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5286:1: rule__Import__Group_1_0__0 : rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 ;
-    public final void rule__Import__Group_1_0__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5290:1: ( rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5291:2: rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1
-            {
-            pushFollow(FOLLOW_rule__Import__Group_1_0__0__Impl_in_rule__Import__Group_1_0__010658);
-            rule__Import__Group_1_0__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Import__Group_1_0__1_in_rule__Import__Group_1_0__010661);
-            rule__Import__Group_1_0__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group_1_0__0"
-
-
-    // $ANTLR start "rule__Import__Group_1_0__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5298:1: rule__Import__Group_1_0__0__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) ;
-    public final void rule__Import__Group_1_0__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5302:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5303:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5303:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5304:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5305:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5305:2: rule__Import__ImportedNamespaceAssignment_1_0_0
-            {
-            pushFollow(FOLLOW_rule__Import__ImportedNamespaceAssignment_1_0_0_in_rule__Import__Group_1_0__0__Impl10688);
-            rule__Import__ImportedNamespaceAssignment_1_0_0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group_1_0__0__Impl"
-
-
-    // $ANTLR start "rule__Import__Group_1_0__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5315:1: rule__Import__Group_1_0__1 : rule__Import__Group_1_0__1__Impl ;
-    public final void rule__Import__Group_1_0__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5319:1: ( rule__Import__Group_1_0__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5320:2: rule__Import__Group_1_0__1__Impl
-            {
-            pushFollow(FOLLOW_rule__Import__Group_1_0__1__Impl_in_rule__Import__Group_1_0__110718);
-            rule__Import__Group_1_0__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group_1_0__1"
-
-
-    // $ANTLR start "rule__Import__Group_1_0__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5326:1: rule__Import__Group_1_0__1__Impl : ( 'from' ) ;
-    public final void rule__Import__Group_1_0__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5330:1: ( ( 'from' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5331:1: ( 'from' )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5331:1: ( 'from' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5332:1: 'from'
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
-            }
-            match(input,49,FOLLOW_49_in_rule__Import__Group_1_0__1__Impl10746); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group_1_0__1__Impl"
-
-
-    // $ANTLR start "rule__ImportedFQN__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5349:1: rule__ImportedFQN__Group__0 : rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 ;
-    public final void rule__ImportedFQN__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5353:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5354:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
-            {
-            pushFollow(FOLLOW_rule__ImportedFQN__Group__0__Impl_in_rule__ImportedFQN__Group__010781);
-            rule__ImportedFQN__Group__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__ImportedFQN__Group__1_in_rule__ImportedFQN__Group__010784);
-            rule__ImportedFQN__Group__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ImportedFQN__Group__0"
-
-
-    // $ANTLR start "rule__ImportedFQN__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5361:1: rule__ImportedFQN__Group__0__Impl : ( ruleFQN ) ;
-    public final void rule__ImportedFQN__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5365:1: ( ( ruleFQN ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5366:1: ( ruleFQN )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5366:1: ( ruleFQN )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5367:1: ruleFQN
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
-            }
-            pushFollow(FOLLOW_ruleFQN_in_rule__ImportedFQN__Group__0__Impl10811);
-            ruleFQN();
-
-            state._fsp--;
-            if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ImportedFQN__Group__0__Impl"
-
-
-    // $ANTLR start "rule__ImportedFQN__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5378:1: rule__ImportedFQN__Group__1 : rule__ImportedFQN__Group__1__Impl ;
-    public final void rule__ImportedFQN__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5382:1: ( rule__ImportedFQN__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5383:2: rule__ImportedFQN__Group__1__Impl
-            {
-            pushFollow(FOLLOW_rule__ImportedFQN__Group__1__Impl_in_rule__ImportedFQN__Group__110840);
-            rule__ImportedFQN__Group__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ImportedFQN__Group__1"
-
-
-    // $ANTLR start "rule__ImportedFQN__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5389:1: rule__ImportedFQN__Group__1__Impl : ( ( '.*' )? ) ;
-    public final void rule__ImportedFQN__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5393:1: ( ( ( '.*' )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5394:1: ( ( '.*' )? )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5394:1: ( ( '.*' )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5395:1: ( '.*' )?
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5396:1: ( '.*' )?
-            int alt39=2;
-            int LA39_0 = input.LA(1);
-
-            if ( (LA39_0==50) ) {
-                alt39=1;
-            }
-            switch (alt39) {
-                case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5397:2: '.*'
-                    {
-                    match(input,50,FOLLOW_50_in_rule__ImportedFQN__Group__1__Impl10869); if (state.failed) return ;
-
-                    }
-                    break;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ImportedFQN__Group__1__Impl"
-
-
-    // $ANTLR start "rule__FQN__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5412:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
-    public final void rule__FQN__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5416:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5417:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
-            {
-            pushFollow(FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__010906);
-            rule__FQN__Group__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__010909);
-            rule__FQN__Group__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group__0"
-
-
-    // $ANTLR start "rule__FQN__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5424:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
-    public final void rule__FQN__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5428:1: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5429:1: ( RULE_ID )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5429:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5430:1: RULE_ID
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl10936); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group__0__Impl"
-
-
-    // $ANTLR start "rule__FQN__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5441:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
-    public final void rule__FQN__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5445:1: ( rule__FQN__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5446:2: rule__FQN__Group__1__Impl
-            {
-            pushFollow(FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__110965);
-            rule__FQN__Group__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group__1"
-
-
-    // $ANTLR start "rule__FQN__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5452:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
-    public final void rule__FQN__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5456:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5457:1: ( ( rule__FQN__Group_1__0 )* )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5457:1: ( ( rule__FQN__Group_1__0 )* )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5458:1: ( rule__FQN__Group_1__0 )*
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNAccess().getGroup_1()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5459:1: ( rule__FQN__Group_1__0 )*
-            loop40:
-            do {
-                int alt40=2;
-                int LA40_0 = input.LA(1);
-
-                if ( (LA40_0==46) ) {
-                    alt40=1;
-                }
-
-
-                switch (alt40) {
-            	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5459:2: rule__FQN__Group_1__0
-            	    {
-            	    pushFollow(FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl10992);
-            	    rule__FQN__Group_1__0();
-
-            	    state._fsp--;
-            	    if (state.failed) return ;
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop40;
-                }
-            } while (true);
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNAccess().getGroup_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group__1__Impl"
-
-
-    // $ANTLR start "rule__FQN__Group_1__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5473:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
-    public final void rule__FQN__Group_1__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5477:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5478:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
-            {
-            pushFollow(FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__011027);
-            rule__FQN__Group_1__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__011030);
-            rule__FQN__Group_1__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group_1__0"
-
-
-    // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5485:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
-    public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5489:1: ( ( '.' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5490:1: ( '.' )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5490:1: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5491:1: '.'
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            }
-            match(input,46,FOLLOW_46_in_rule__FQN__Group_1__0__Impl11058); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group_1__0__Impl"
-
-
-    // $ANTLR start "rule__FQN__Group_1__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5504:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
-    public final void rule__FQN__Group_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5508:1: ( rule__FQN__Group_1__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5509:2: rule__FQN__Group_1__1__Impl
-            {
-            pushFollow(FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__111089);
-            rule__FQN__Group_1__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group_1__1"
-
-
-    // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5515:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
-    public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5519:1: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5520:1: ( RULE_ID )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5520:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5521:1: RULE_ID
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl11116); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__FQN__Group_1__1__Impl"
-
-
     // $ANTLR start "rule__KeyValue__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5539:1: rule__KeyValue__Group__0 : rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5195:1: rule__KeyValue__Group__0 : rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 ;
     public final void rule__KeyValue__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5543:1: ( rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5544:2: rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5199:1: ( rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5200:2: rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1
             {
-            pushFollow(FOLLOW_rule__KeyValue__Group__0__Impl_in_rule__KeyValue__Group__011152);
+            pushFollow(FOLLOW_rule__KeyValue__Group__0__Impl_in_rule__KeyValue__Group__010476);
             rule__KeyValue__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__KeyValue__Group__1_in_rule__KeyValue__Group__011155);
+            pushFollow(FOLLOW_rule__KeyValue__Group__1_in_rule__KeyValue__Group__010479);
             rule__KeyValue__Group__1();
 
             state._fsp--;
@@ -15973,25 +15050,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5551:1: rule__KeyValue__Group__0__Impl : ( ( rule__KeyValue__KeyAssignment_0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5207:1: rule__KeyValue__Group__0__Impl : ( ( rule__KeyValue__KeyAssignment_0 ) ) ;
     public final void rule__KeyValue__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5555:1: ( ( ( rule__KeyValue__KeyAssignment_0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5556:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5211:1: ( ( ( rule__KeyValue__KeyAssignment_0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5212:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5556:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5557:1: ( rule__KeyValue__KeyAssignment_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5212:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5213:1: ( rule__KeyValue__KeyAssignment_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getKeyAssignment_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5558:1: ( rule__KeyValue__KeyAssignment_0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5558:2: rule__KeyValue__KeyAssignment_0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5214:1: ( rule__KeyValue__KeyAssignment_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5214:2: rule__KeyValue__KeyAssignment_0
             {
-            pushFollow(FOLLOW_rule__KeyValue__KeyAssignment_0_in_rule__KeyValue__Group__0__Impl11182);
+            pushFollow(FOLLOW_rule__KeyValue__KeyAssignment_0_in_rule__KeyValue__Group__0__Impl10506);
             rule__KeyValue__KeyAssignment_0();
 
             state._fsp--;
@@ -16024,21 +15101,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5568:1: rule__KeyValue__Group__1 : rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5224:1: rule__KeyValue__Group__1 : rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 ;
     public final void rule__KeyValue__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5572:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5573:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5228:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5229:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
             {
-            pushFollow(FOLLOW_rule__KeyValue__Group__1__Impl_in_rule__KeyValue__Group__111212);
+            pushFollow(FOLLOW_rule__KeyValue__Group__1__Impl_in_rule__KeyValue__Group__110536);
             rule__KeyValue__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__KeyValue__Group__2_in_rule__KeyValue__Group__111215);
+            pushFollow(FOLLOW_rule__KeyValue__Group__2_in_rule__KeyValue__Group__110539);
             rule__KeyValue__Group__2();
 
             state._fsp--;
@@ -16062,22 +15139,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5580:1: rule__KeyValue__Group__1__Impl : ( '=' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5236:1: rule__KeyValue__Group__1__Impl : ( '=' ) ;
     public final void rule__KeyValue__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5584:1: ( ( '=' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5585:1: ( '=' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5240:1: ( ( '=' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5241:1: ( '=' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5585:1: ( '=' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5586:1: '='
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5241:1: ( '=' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5242:1: '='
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1()); 
             }
-            match(input,42,FOLLOW_42_in_rule__KeyValue__Group__1__Impl11243); if (state.failed) return ;
+            match(input,42,FOLLOW_42_in_rule__KeyValue__Group__1__Impl10567); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1()); 
             }
@@ -16103,16 +15180,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5599:1: rule__KeyValue__Group__2 : rule__KeyValue__Group__2__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5255:1: rule__KeyValue__Group__2 : rule__KeyValue__Group__2__Impl ;
     public final void rule__KeyValue__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5603:1: ( rule__KeyValue__Group__2__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5604:2: rule__KeyValue__Group__2__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5259:1: ( rule__KeyValue__Group__2__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5260:2: rule__KeyValue__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__KeyValue__Group__2__Impl_in_rule__KeyValue__Group__211274);
+            pushFollow(FOLLOW_rule__KeyValue__Group__2__Impl_in_rule__KeyValue__Group__210598);
             rule__KeyValue__Group__2__Impl();
 
             state._fsp--;
@@ -16136,25 +15213,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5610:1: rule__KeyValue__Group__2__Impl : ( ( rule__KeyValue__ValueAssignment_2 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5266:1: rule__KeyValue__Group__2__Impl : ( ( rule__KeyValue__ValueAssignment_2 ) ) ;
     public final void rule__KeyValue__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5614:1: ( ( ( rule__KeyValue__ValueAssignment_2 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5615:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5270:1: ( ( ( rule__KeyValue__ValueAssignment_2 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5271:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5615:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5616:1: ( rule__KeyValue__ValueAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5271:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5272:1: ( rule__KeyValue__ValueAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getValueAssignment_2()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5617:1: ( rule__KeyValue__ValueAssignment_2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5617:2: rule__KeyValue__ValueAssignment_2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5273:1: ( rule__KeyValue__ValueAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5273:2: rule__KeyValue__ValueAssignment_2
             {
-            pushFollow(FOLLOW_rule__KeyValue__ValueAssignment_2_in_rule__KeyValue__Group__2__Impl11301);
+            pushFollow(FOLLOW_rule__KeyValue__ValueAssignment_2_in_rule__KeyValue__Group__2__Impl10625);
             rule__KeyValue__ValueAssignment_2();
 
             state._fsp--;
@@ -16187,21 +15264,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5636:1: rule__SimpleAnnotationAttribute__Group__0 : rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5292:1: rule__SimpleAnnotationAttribute__Group__0 : rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 ;
     public final void rule__SimpleAnnotationAttribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5640:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5641:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5296:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5297:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__0__Impl_in_rule__SimpleAnnotationAttribute__Group__011340);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__0__Impl_in_rule__SimpleAnnotationAttribute__Group__010664);
             rule__SimpleAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__1_in_rule__SimpleAnnotationAttribute__Group__011343);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__1_in_rule__SimpleAnnotationAttribute__Group__010667);
             rule__SimpleAnnotationAttribute__Group__1();
 
             state._fsp--;
@@ -16225,25 +15302,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5648:1: rule__SimpleAnnotationAttribute__Group__0__Impl : ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5304:1: rule__SimpleAnnotationAttribute__Group__0__Impl : ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5652:1: ( ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5653:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5308:1: ( ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5309:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5653:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5654:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5309:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5310:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5655:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5655:2: rule__SimpleAnnotationAttribute__Alternatives_0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5311:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5311:2: rule__SimpleAnnotationAttribute__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Alternatives_0_in_rule__SimpleAnnotationAttribute__Group__0__Impl11370);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Alternatives_0_in_rule__SimpleAnnotationAttribute__Group__0__Impl10694);
             rule__SimpleAnnotationAttribute__Alternatives_0();
 
             state._fsp--;
@@ -16276,21 +15353,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5665:1: rule__SimpleAnnotationAttribute__Group__1 : rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5321:1: rule__SimpleAnnotationAttribute__Group__1 : rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 ;
     public final void rule__SimpleAnnotationAttribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5669:1: ( rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5670:2: rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5325:1: ( rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5326:2: rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__1__Impl_in_rule__SimpleAnnotationAttribute__Group__111400);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__1__Impl_in_rule__SimpleAnnotationAttribute__Group__110724);
             rule__SimpleAnnotationAttribute__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__2_in_rule__SimpleAnnotationAttribute__Group__111403);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__2_in_rule__SimpleAnnotationAttribute__Group__110727);
             rule__SimpleAnnotationAttribute__Group__2();
 
             state._fsp--;
@@ -16314,22 +15391,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5677:1: rule__SimpleAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5333:1: rule__SimpleAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
     public final void rule__SimpleAnnotationAttribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5681:1: ( ( 'attribute' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5682:1: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5337:1: ( ( 'attribute' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5338:1: ( 'attribute' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5682:1: ( 'attribute' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5683:1: 'attribute'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5338:1: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5339:1: 'attribute'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1()); 
             }
-            match(input,51,FOLLOW_51_in_rule__SimpleAnnotationAttribute__Group__1__Impl11431); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__SimpleAnnotationAttribute__Group__1__Impl10755); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1()); 
             }
@@ -16355,21 +15432,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5696:1: rule__SimpleAnnotationAttribute__Group__2 : rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5352:1: rule__SimpleAnnotationAttribute__Group__2 : rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 ;
     public final void rule__SimpleAnnotationAttribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5700:1: ( rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5701:2: rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5356:1: ( rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5357:2: rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__2__Impl_in_rule__SimpleAnnotationAttribute__Group__211462);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__2__Impl_in_rule__SimpleAnnotationAttribute__Group__210786);
             rule__SimpleAnnotationAttribute__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__3_in_rule__SimpleAnnotationAttribute__Group__211465);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__3_in_rule__SimpleAnnotationAttribute__Group__210789);
             rule__SimpleAnnotationAttribute__Group__3();
 
             state._fsp--;
@@ -16393,25 +15470,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5708:1: rule__SimpleAnnotationAttribute__Group__2__Impl : ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5364:1: rule__SimpleAnnotationAttribute__Group__2__Impl : ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5712:1: ( ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5713:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5368:1: ( ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5369:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5713:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5714:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5369:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5370:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getNameAssignment_2()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5715:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5715:2: rule__SimpleAnnotationAttribute__NameAssignment_2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5371:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5371:2: rule__SimpleAnnotationAttribute__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__NameAssignment_2_in_rule__SimpleAnnotationAttribute__Group__2__Impl11492);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__NameAssignment_2_in_rule__SimpleAnnotationAttribute__Group__2__Impl10816);
             rule__SimpleAnnotationAttribute__NameAssignment_2();
 
             state._fsp--;
@@ -16444,21 +15521,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__3"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5725:1: rule__SimpleAnnotationAttribute__Group__3 : rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5381:1: rule__SimpleAnnotationAttribute__Group__3 : rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 ;
     public final void rule__SimpleAnnotationAttribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5729:1: ( rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5730:2: rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5385:1: ( rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5386:2: rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__3__Impl_in_rule__SimpleAnnotationAttribute__Group__311522);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__3__Impl_in_rule__SimpleAnnotationAttribute__Group__310846);
             rule__SimpleAnnotationAttribute__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__4_in_rule__SimpleAnnotationAttribute__Group__311525);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__4_in_rule__SimpleAnnotationAttribute__Group__310849);
             rule__SimpleAnnotationAttribute__Group__4();
 
             state._fsp--;
@@ -16482,22 +15559,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__3__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5737:1: rule__SimpleAnnotationAttribute__Group__3__Impl : ( ':' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5393:1: rule__SimpleAnnotationAttribute__Group__3__Impl : ( ':' ) ;
     public final void rule__SimpleAnnotationAttribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5741:1: ( ( ':' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5742:1: ( ':' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5397:1: ( ( ':' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5398:1: ( ':' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5742:1: ( ':' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5743:1: ':'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5398:1: ( ':' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5399:1: ':'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3()); 
             }
-            match(input,47,FOLLOW_47_in_rule__SimpleAnnotationAttribute__Group__3__Impl11553); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__SimpleAnnotationAttribute__Group__3__Impl10877); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3()); 
             }
@@ -16523,16 +15600,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__4"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5756:1: rule__SimpleAnnotationAttribute__Group__4 : rule__SimpleAnnotationAttribute__Group__4__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5412:1: rule__SimpleAnnotationAttribute__Group__4 : rule__SimpleAnnotationAttribute__Group__4__Impl ;
     public final void rule__SimpleAnnotationAttribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5760:1: ( rule__SimpleAnnotationAttribute__Group__4__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5761:2: rule__SimpleAnnotationAttribute__Group__4__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5416:1: ( rule__SimpleAnnotationAttribute__Group__4__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5417:2: rule__SimpleAnnotationAttribute__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__4__Impl_in_rule__SimpleAnnotationAttribute__Group__411584);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__Group__4__Impl_in_rule__SimpleAnnotationAttribute__Group__410908);
             rule__SimpleAnnotationAttribute__Group__4__Impl();
 
             state._fsp--;
@@ -16556,25 +15633,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__4__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5767:1: rule__SimpleAnnotationAttribute__Group__4__Impl : ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5423:1: rule__SimpleAnnotationAttribute__Group__4__Impl : ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5771:1: ( ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5772:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5427:1: ( ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5428:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5772:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5773:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5428:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5429:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeAssignment_4()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5774:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5774:2: rule__SimpleAnnotationAttribute__TypeAssignment_4
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5430:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5430:2: rule__SimpleAnnotationAttribute__TypeAssignment_4
             {
-            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__TypeAssignment_4_in_rule__SimpleAnnotationAttribute__Group__4__Impl11611);
+            pushFollow(FOLLOW_rule__SimpleAnnotationAttribute__TypeAssignment_4_in_rule__SimpleAnnotationAttribute__Group__4__Impl10935);
             rule__SimpleAnnotationAttribute__TypeAssignment_4();
 
             state._fsp--;
@@ -16607,21 +15684,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5794:1: rule__EnumAnnotationAttribute__Group__0 : rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5450:1: rule__EnumAnnotationAttribute__Group__0 : rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 ;
     public final void rule__EnumAnnotationAttribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5798:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5799:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5454:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5455:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__0__Impl_in_rule__EnumAnnotationAttribute__Group__011651);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__0__Impl_in_rule__EnumAnnotationAttribute__Group__010975);
             rule__EnumAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__1_in_rule__EnumAnnotationAttribute__Group__011654);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__1_in_rule__EnumAnnotationAttribute__Group__010978);
             rule__EnumAnnotationAttribute__Group__1();
 
             state._fsp--;
@@ -16645,25 +15722,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5806:1: rule__EnumAnnotationAttribute__Group__0__Impl : ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5462:1: rule__EnumAnnotationAttribute__Group__0__Impl : ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5810:1: ( ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5811:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5466:1: ( ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5467:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5811:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5812:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5467:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5468:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5813:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5813:2: rule__EnumAnnotationAttribute__Alternatives_0
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5469:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5469:2: rule__EnumAnnotationAttribute__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Alternatives_0_in_rule__EnumAnnotationAttribute__Group__0__Impl11681);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Alternatives_0_in_rule__EnumAnnotationAttribute__Group__0__Impl11005);
             rule__EnumAnnotationAttribute__Alternatives_0();
 
             state._fsp--;
@@ -16696,21 +15773,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5823:1: rule__EnumAnnotationAttribute__Group__1 : rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5479:1: rule__EnumAnnotationAttribute__Group__1 : rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 ;
     public final void rule__EnumAnnotationAttribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5827:1: ( rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5828:2: rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5483:1: ( rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5484:2: rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__1__Impl_in_rule__EnumAnnotationAttribute__Group__111711);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__1__Impl_in_rule__EnumAnnotationAttribute__Group__111035);
             rule__EnumAnnotationAttribute__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__2_in_rule__EnumAnnotationAttribute__Group__111714);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__2_in_rule__EnumAnnotationAttribute__Group__111038);
             rule__EnumAnnotationAttribute__Group__2();
 
             state._fsp--;
@@ -16734,22 +15811,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5835:1: rule__EnumAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5491:1: rule__EnumAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
     public final void rule__EnumAnnotationAttribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5839:1: ( ( 'attribute' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5840:1: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5495:1: ( ( 'attribute' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5496:1: ( 'attribute' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5840:1: ( 'attribute' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5841:1: 'attribute'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5496:1: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5497:1: 'attribute'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1()); 
             }
-            match(input,51,FOLLOW_51_in_rule__EnumAnnotationAttribute__Group__1__Impl11742); if (state.failed) return ;
+            match(input,48,FOLLOW_48_in_rule__EnumAnnotationAttribute__Group__1__Impl11066); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1()); 
             }
@@ -16775,21 +15852,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5854:1: rule__EnumAnnotationAttribute__Group__2 : rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5510:1: rule__EnumAnnotationAttribute__Group__2 : rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 ;
     public final void rule__EnumAnnotationAttribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5858:1: ( rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5859:2: rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5514:1: ( rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5515:2: rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__2__Impl_in_rule__EnumAnnotationAttribute__Group__211773);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__2__Impl_in_rule__EnumAnnotationAttribute__Group__211097);
             rule__EnumAnnotationAttribute__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__3_in_rule__EnumAnnotationAttribute__Group__211776);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__3_in_rule__EnumAnnotationAttribute__Group__211100);
             rule__EnumAnnotationAttribute__Group__3();
 
             state._fsp--;
@@ -16813,25 +15890,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5866:1: rule__EnumAnnotationAttribute__Group__2__Impl : ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5522:1: rule__EnumAnnotationAttribute__Group__2__Impl : ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5870:1: ( ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5871:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5526:1: ( ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5527:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5871:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5872:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5527:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5528:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getNameAssignment_2()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5873:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5873:2: rule__EnumAnnotationAttribute__NameAssignment_2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5529:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5529:2: rule__EnumAnnotationAttribute__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__NameAssignment_2_in_rule__EnumAnnotationAttribute__Group__2__Impl11803);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__NameAssignment_2_in_rule__EnumAnnotationAttribute__Group__2__Impl11127);
             rule__EnumAnnotationAttribute__NameAssignment_2();
 
             state._fsp--;
@@ -16864,21 +15941,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__3"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5883:1: rule__EnumAnnotationAttribute__Group__3 : rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5539:1: rule__EnumAnnotationAttribute__Group__3 : rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 ;
     public final void rule__EnumAnnotationAttribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5887:1: ( rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5888:2: rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5543:1: ( rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5544:2: rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__3__Impl_in_rule__EnumAnnotationAttribute__Group__311833);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__3__Impl_in_rule__EnumAnnotationAttribute__Group__311157);
             rule__EnumAnnotationAttribute__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__4_in_rule__EnumAnnotationAttribute__Group__311836);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__4_in_rule__EnumAnnotationAttribute__Group__311160);
             rule__EnumAnnotationAttribute__Group__4();
 
             state._fsp--;
@@ -16902,22 +15979,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__3__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5895:1: rule__EnumAnnotationAttribute__Group__3__Impl : ( ':' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5551:1: rule__EnumAnnotationAttribute__Group__3__Impl : ( ':' ) ;
     public final void rule__EnumAnnotationAttribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5899:1: ( ( ':' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5900:1: ( ':' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5555:1: ( ( ':' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5556:1: ( ':' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5900:1: ( ':' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5901:1: ':'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5556:1: ( ':' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5557:1: ':'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3()); 
             }
-            match(input,47,FOLLOW_47_in_rule__EnumAnnotationAttribute__Group__3__Impl11864); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__EnumAnnotationAttribute__Group__3__Impl11188); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3()); 
             }
@@ -16943,21 +16020,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__4"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5914:1: rule__EnumAnnotationAttribute__Group__4 : rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5570:1: rule__EnumAnnotationAttribute__Group__4 : rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 ;
     public final void rule__EnumAnnotationAttribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5918:1: ( rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5919:2: rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5574:1: ( rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5575:2: rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__4__Impl_in_rule__EnumAnnotationAttribute__Group__411895);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__4__Impl_in_rule__EnumAnnotationAttribute__Group__411219);
             rule__EnumAnnotationAttribute__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__5_in_rule__EnumAnnotationAttribute__Group__411898);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__5_in_rule__EnumAnnotationAttribute__Group__411222);
             rule__EnumAnnotationAttribute__Group__5();
 
             state._fsp--;
@@ -16981,22 +16058,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__4__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5926:1: rule__EnumAnnotationAttribute__Group__4__Impl : ( '{' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5582:1: rule__EnumAnnotationAttribute__Group__4__Impl : ( '{' ) ;
     public final void rule__EnumAnnotationAttribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5930:1: ( ( '{' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5931:1: ( '{' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5586:1: ( ( '{' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5587:1: ( '{' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5931:1: ( '{' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5932:1: '{'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5587:1: ( '{' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5588:1: '{'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4()); 
             }
-            match(input,26,FOLLOW_26_in_rule__EnumAnnotationAttribute__Group__4__Impl11926); if (state.failed) return ;
+            match(input,26,FOLLOW_26_in_rule__EnumAnnotationAttribute__Group__4__Impl11250); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4()); 
             }
@@ -17022,21 +16099,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__5"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5945:1: rule__EnumAnnotationAttribute__Group__5 : rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5601:1: rule__EnumAnnotationAttribute__Group__5 : rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 ;
     public final void rule__EnumAnnotationAttribute__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5949:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5950:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5605:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5606:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__5__Impl_in_rule__EnumAnnotationAttribute__Group__511957);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__5__Impl_in_rule__EnumAnnotationAttribute__Group__511281);
             rule__EnumAnnotationAttribute__Group__5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__6_in_rule__EnumAnnotationAttribute__Group__511960);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__6_in_rule__EnumAnnotationAttribute__Group__511284);
             rule__EnumAnnotationAttribute__Group__6();
 
             state._fsp--;
@@ -17060,25 +16137,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__5__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5957:1: rule__EnumAnnotationAttribute__Group__5__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5613:1: rule__EnumAnnotationAttribute__Group__5__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5961:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5962:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5617:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5618:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5962:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5963:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5618:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5619:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_5()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5964:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5964:2: rule__EnumAnnotationAttribute__ValuesAssignment_5
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5620:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5620:2: rule__EnumAnnotationAttribute__ValuesAssignment_5
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_5_in_rule__EnumAnnotationAttribute__Group__5__Impl11987);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_5_in_rule__EnumAnnotationAttribute__Group__5__Impl11311);
             rule__EnumAnnotationAttribute__ValuesAssignment_5();
 
             state._fsp--;
@@ -17111,21 +16188,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__6"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5974:1: rule__EnumAnnotationAttribute__Group__6 : rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5630:1: rule__EnumAnnotationAttribute__Group__6 : rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 ;
     public final void rule__EnumAnnotationAttribute__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5978:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5979:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5634:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5635:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__6__Impl_in_rule__EnumAnnotationAttribute__Group__612017);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__6__Impl_in_rule__EnumAnnotationAttribute__Group__611341);
             rule__EnumAnnotationAttribute__Group__6__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__7_in_rule__EnumAnnotationAttribute__Group__612020);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__7_in_rule__EnumAnnotationAttribute__Group__611344);
             rule__EnumAnnotationAttribute__Group__7();
 
             state._fsp--;
@@ -17149,37 +16226,37 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__6__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5986:1: rule__EnumAnnotationAttribute__Group__6__Impl : ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5642:1: rule__EnumAnnotationAttribute__Group__6__Impl : ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) ;
     public final void rule__EnumAnnotationAttribute__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5990:1: ( ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5991:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5646:1: ( ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5647:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5991:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5992:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5647:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5648:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5993:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
-            loop41:
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5649:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
+            loop39:
             do {
-                int alt41=2;
-                int LA41_0 = input.LA(1);
+                int alt39=2;
+                int LA39_0 = input.LA(1);
 
-                if ( (LA41_0==45) ) {
-                    alt41=1;
+                if ( (LA39_0==45) ) {
+                    alt39=1;
                 }
 
 
-                switch (alt41) {
+                switch (alt39) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5993:2: rule__EnumAnnotationAttribute__Group_6__0
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5649:2: rule__EnumAnnotationAttribute__Group_6__0
             	    {
-            	    pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__0_in_rule__EnumAnnotationAttribute__Group__6__Impl12047);
+            	    pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__0_in_rule__EnumAnnotationAttribute__Group__6__Impl11371);
             	    rule__EnumAnnotationAttribute__Group_6__0();
 
             	    state._fsp--;
@@ -17189,7 +16266,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop41;
+            	    break loop39;
                 }
             } while (true);
 
@@ -17218,16 +16295,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__7"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6003:1: rule__EnumAnnotationAttribute__Group__7 : rule__EnumAnnotationAttribute__Group__7__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5659:1: rule__EnumAnnotationAttribute__Group__7 : rule__EnumAnnotationAttribute__Group__7__Impl ;
     public final void rule__EnumAnnotationAttribute__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6007:1: ( rule__EnumAnnotationAttribute__Group__7__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6008:2: rule__EnumAnnotationAttribute__Group__7__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5663:1: ( rule__EnumAnnotationAttribute__Group__7__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5664:2: rule__EnumAnnotationAttribute__Group__7__Impl
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__7__Impl_in_rule__EnumAnnotationAttribute__Group__712078);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group__7__Impl_in_rule__EnumAnnotationAttribute__Group__711402);
             rule__EnumAnnotationAttribute__Group__7__Impl();
 
             state._fsp--;
@@ -17251,22 +16328,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__7__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6014:1: rule__EnumAnnotationAttribute__Group__7__Impl : ( '}' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5670:1: rule__EnumAnnotationAttribute__Group__7__Impl : ( '}' ) ;
     public final void rule__EnumAnnotationAttribute__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6018:1: ( ( '}' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6019:1: ( '}' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5674:1: ( ( '}' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5675:1: ( '}' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6019:1: ( '}' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6020:1: '}'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5675:1: ( '}' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5676:1: '}'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7()); 
             }
-            match(input,27,FOLLOW_27_in_rule__EnumAnnotationAttribute__Group__7__Impl12106); if (state.failed) return ;
+            match(input,27,FOLLOW_27_in_rule__EnumAnnotationAttribute__Group__7__Impl11430); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7()); 
             }
@@ -17292,21 +16369,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6049:1: rule__EnumAnnotationAttribute__Group_6__0 : rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5705:1: rule__EnumAnnotationAttribute__Group_6__0 : rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 ;
     public final void rule__EnumAnnotationAttribute__Group_6__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6053:1: ( rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6054:2: rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5709:1: ( rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5710:2: rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__0__Impl_in_rule__EnumAnnotationAttribute__Group_6__012153);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__0__Impl_in_rule__EnumAnnotationAttribute__Group_6__011477);
             rule__EnumAnnotationAttribute__Group_6__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__1_in_rule__EnumAnnotationAttribute__Group_6__012156);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__1_in_rule__EnumAnnotationAttribute__Group_6__011480);
             rule__EnumAnnotationAttribute__Group_6__1();
 
             state._fsp--;
@@ -17330,22 +16407,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6061:1: rule__EnumAnnotationAttribute__Group_6__0__Impl : ( ',' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5717:1: rule__EnumAnnotationAttribute__Group_6__0__Impl : ( ',' ) ;
     public final void rule__EnumAnnotationAttribute__Group_6__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6065:1: ( ( ',' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6066:1: ( ',' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5721:1: ( ( ',' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5722:1: ( ',' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6066:1: ( ',' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6067:1: ','
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5722:1: ( ',' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5723:1: ','
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0()); 
             }
-            match(input,45,FOLLOW_45_in_rule__EnumAnnotationAttribute__Group_6__0__Impl12184); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__EnumAnnotationAttribute__Group_6__0__Impl11508); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0()); 
             }
@@ -17371,16 +16448,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6080:1: rule__EnumAnnotationAttribute__Group_6__1 : rule__EnumAnnotationAttribute__Group_6__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5736:1: rule__EnumAnnotationAttribute__Group_6__1 : rule__EnumAnnotationAttribute__Group_6__1__Impl ;
     public final void rule__EnumAnnotationAttribute__Group_6__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6084:1: ( rule__EnumAnnotationAttribute__Group_6__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6085:2: rule__EnumAnnotationAttribute__Group_6__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5740:1: ( rule__EnumAnnotationAttribute__Group_6__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5741:2: rule__EnumAnnotationAttribute__Group_6__1__Impl
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__1__Impl_in_rule__EnumAnnotationAttribute__Group_6__112215);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__Group_6__1__Impl_in_rule__EnumAnnotationAttribute__Group_6__111539);
             rule__EnumAnnotationAttribute__Group_6__1__Impl();
 
             state._fsp--;
@@ -17404,25 +16481,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6091:1: rule__EnumAnnotationAttribute__Group_6__1__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5747:1: rule__EnumAnnotationAttribute__Group_6__1__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group_6__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6095:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6096:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5751:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5752:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6096:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6097:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5752:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5753:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6098:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6098:2: rule__EnumAnnotationAttribute__ValuesAssignment_6_1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5754:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5754:2: rule__EnumAnnotationAttribute__ValuesAssignment_6_1
             {
-            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_6_1_in_rule__EnumAnnotationAttribute__Group_6__1__Impl12242);
+            pushFollow(FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_6_1_in_rule__EnumAnnotationAttribute__Group_6__1__Impl11566);
             rule__EnumAnnotationAttribute__ValuesAssignment_6_1();
 
             state._fsp--;
@@ -17454,22 +16531,611 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__EnumAnnotationAttribute__Group_6__1__Impl"
 
 
+    // $ANTLR start "rule__Import__Group__0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5768:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    public final void rule__Import__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5772:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5773:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            {
+            pushFollow(FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__011600);
+            rule__Import__Group__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Import__Group__1_in_rule__Import__Group__011603);
+            rule__Import__Group__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__0"
+
+
+    // $ANTLR start "rule__Import__Group__0__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5780:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    public final void rule__Import__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5784:1: ( ( 'import' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5785:1: ( 'import' )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5785:1: ( 'import' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5786:1: 'import'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getImportKeyword_0()); 
+            }
+            match(input,49,FOLLOW_49_in_rule__Import__Group__0__Impl11631); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getImportKeyword_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__0__Impl"
+
+
+    // $ANTLR start "rule__Import__Group__1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5799:1: rule__Import__Group__1 : rule__Import__Group__1__Impl rule__Import__Group__2 ;
+    public final void rule__Import__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5803:1: ( rule__Import__Group__1__Impl rule__Import__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5804:2: rule__Import__Group__1__Impl rule__Import__Group__2
+            {
+            pushFollow(FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__111662);
+            rule__Import__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Import__Group__2_in_rule__Import__Group__111665);
+            rule__Import__Group__2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__1"
+
+
+    // $ANTLR start "rule__Import__Group__1__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5811:1: rule__Import__Group__1__Impl : ( ( rule__Import__Alternatives_1 ) ) ;
+    public final void rule__Import__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5815:1: ( ( ( rule__Import__Alternatives_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5816:1: ( ( rule__Import__Alternatives_1 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5816:1: ( ( rule__Import__Alternatives_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5817:1: ( rule__Import__Alternatives_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getAlternatives_1()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5818:1: ( rule__Import__Alternatives_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5818:2: rule__Import__Alternatives_1
+            {
+            pushFollow(FOLLOW_rule__Import__Alternatives_1_in_rule__Import__Group__1__Impl11692);
+            rule__Import__Alternatives_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getAlternatives_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__1__Impl"
+
+
+    // $ANTLR start "rule__Import__Group__2"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5828:1: rule__Import__Group__2 : rule__Import__Group__2__Impl ;
+    public final void rule__Import__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5832:1: ( rule__Import__Group__2__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5833:2: rule__Import__Group__2__Impl
+            {
+            pushFollow(FOLLOW_rule__Import__Group__2__Impl_in_rule__Import__Group__211722);
+            rule__Import__Group__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__2"
+
+
+    // $ANTLR start "rule__Import__Group__2__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5839:1: rule__Import__Group__2__Impl : ( ( rule__Import__ImportURIAssignment_2 ) ) ;
+    public final void rule__Import__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5843:1: ( ( ( rule__Import__ImportURIAssignment_2 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5844:1: ( ( rule__Import__ImportURIAssignment_2 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5844:1: ( ( rule__Import__ImportURIAssignment_2 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5845:1: ( rule__Import__ImportURIAssignment_2 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5846:1: ( rule__Import__ImportURIAssignment_2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5846:2: rule__Import__ImportURIAssignment_2
+            {
+            pushFollow(FOLLOW_rule__Import__ImportURIAssignment_2_in_rule__Import__Group__2__Impl11749);
+            rule__Import__ImportURIAssignment_2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group__2__Impl"
+
+
+    // $ANTLR start "rule__Import__Group_1_0__0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5862:1: rule__Import__Group_1_0__0 : rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 ;
+    public final void rule__Import__Group_1_0__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5866:1: ( rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5867:2: rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1
+            {
+            pushFollow(FOLLOW_rule__Import__Group_1_0__0__Impl_in_rule__Import__Group_1_0__011785);
+            rule__Import__Group_1_0__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__Import__Group_1_0__1_in_rule__Import__Group_1_0__011788);
+            rule__Import__Group_1_0__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0__0"
+
+
+    // $ANTLR start "rule__Import__Group_1_0__0__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5874:1: rule__Import__Group_1_0__0__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) ;
+    public final void rule__Import__Group_1_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5878:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5879:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5879:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5880:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5881:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5881:2: rule__Import__ImportedNamespaceAssignment_1_0_0
+            {
+            pushFollow(FOLLOW_rule__Import__ImportedNamespaceAssignment_1_0_0_in_rule__Import__Group_1_0__0__Impl11815);
+            rule__Import__ImportedNamespaceAssignment_1_0_0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0__0__Impl"
+
+
+    // $ANTLR start "rule__Import__Group_1_0__1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5891:1: rule__Import__Group_1_0__1 : rule__Import__Group_1_0__1__Impl ;
+    public final void rule__Import__Group_1_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5895:1: ( rule__Import__Group_1_0__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5896:2: rule__Import__Group_1_0__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Import__Group_1_0__1__Impl_in_rule__Import__Group_1_0__111845);
+            rule__Import__Group_1_0__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0__1"
+
+
+    // $ANTLR start "rule__Import__Group_1_0__1__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5902:1: rule__Import__Group_1_0__1__Impl : ( 'from' ) ;
+    public final void rule__Import__Group_1_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5906:1: ( ( 'from' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5907:1: ( 'from' )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5907:1: ( 'from' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5908:1: 'from'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
+            }
+            match(input,50,FOLLOW_50_in_rule__Import__Group_1_0__1__Impl11873); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0__1__Impl"
+
+
+    // $ANTLR start "rule__ImportedFQN__Group__0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5925:1: rule__ImportedFQN__Group__0 : rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 ;
+    public final void rule__ImportedFQN__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5929:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5930:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
+            {
+            pushFollow(FOLLOW_rule__ImportedFQN__Group__0__Impl_in_rule__ImportedFQN__Group__011908);
+            rule__ImportedFQN__Group__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__ImportedFQN__Group__1_in_rule__ImportedFQN__Group__011911);
+            rule__ImportedFQN__Group__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ImportedFQN__Group__0"
+
+
+    // $ANTLR start "rule__ImportedFQN__Group__0__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5937:1: rule__ImportedFQN__Group__0__Impl : ( ruleFQN ) ;
+    public final void rule__ImportedFQN__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5941:1: ( ( ruleFQN ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5942:1: ( ruleFQN )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5942:1: ( ruleFQN )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5943:1: ruleFQN
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
+            }
+            pushFollow(FOLLOW_ruleFQN_in_rule__ImportedFQN__Group__0__Impl11938);
+            ruleFQN();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ImportedFQN__Group__0__Impl"
+
+
+    // $ANTLR start "rule__ImportedFQN__Group__1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5954:1: rule__ImportedFQN__Group__1 : rule__ImportedFQN__Group__1__Impl ;
+    public final void rule__ImportedFQN__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5958:1: ( rule__ImportedFQN__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5959:2: rule__ImportedFQN__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__ImportedFQN__Group__1__Impl_in_rule__ImportedFQN__Group__111967);
+            rule__ImportedFQN__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ImportedFQN__Group__1"
+
+
+    // $ANTLR start "rule__ImportedFQN__Group__1__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5965:1: rule__ImportedFQN__Group__1__Impl : ( ( '.*' )? ) ;
+    public final void rule__ImportedFQN__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5969:1: ( ( ( '.*' )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5970:1: ( ( '.*' )? )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5970:1: ( ( '.*' )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5971:1: ( '.*' )?
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5972:1: ( '.*' )?
+            int alt40=2;
+            int LA40_0 = input.LA(1);
+
+            if ( (LA40_0==51) ) {
+                alt40=1;
+            }
+            switch (alt40) {
+                case 1 :
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5973:2: '.*'
+                    {
+                    match(input,51,FOLLOW_51_in_rule__ImportedFQN__Group__1__Impl11996); if (state.failed) return ;
+
+                    }
+                    break;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ImportedFQN__Group__1__Impl"
+
+
     // $ANTLR start "rule__Documentation__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6112:1: rule__Documentation__Group__0 : rule__Documentation__Group__0__Impl rule__Documentation__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5988:1: rule__Documentation__Group__0 : rule__Documentation__Group__0__Impl rule__Documentation__Group__1 ;
     public final void rule__Documentation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6116:1: ( rule__Documentation__Group__0__Impl rule__Documentation__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6117:2: rule__Documentation__Group__0__Impl rule__Documentation__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5992:1: ( rule__Documentation__Group__0__Impl rule__Documentation__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:5993:2: rule__Documentation__Group__0__Impl rule__Documentation__Group__1
             {
-            pushFollow(FOLLOW_rule__Documentation__Group__0__Impl_in_rule__Documentation__Group__012276);
+            pushFollow(FOLLOW_rule__Documentation__Group__0__Impl_in_rule__Documentation__Group__012033);
             rule__Documentation__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Documentation__Group__1_in_rule__Documentation__Group__012279);
+            pushFollow(FOLLOW_rule__Documentation__Group__1_in_rule__Documentation__Group__012036);
             rule__Documentation__Group__1();
 
             state._fsp--;
@@ -17493,23 +17159,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6124:1: rule__Documentation__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6000:1: rule__Documentation__Group__0__Impl : ( () ) ;
     public final void rule__Documentation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6128:1: ( ( () ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6129:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6004:1: ( ( () ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6005:1: ( () )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6129:1: ( () )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6130:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6005:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6006:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationAccess().getDocumentationAction_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6131:1: ()
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6133:1: 
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6007:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6009:1: 
             {
             }
 
@@ -17534,21 +17200,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6143:1: rule__Documentation__Group__1 : rule__Documentation__Group__1__Impl rule__Documentation__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6019:1: rule__Documentation__Group__1 : rule__Documentation__Group__1__Impl rule__Documentation__Group__2 ;
     public final void rule__Documentation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6147:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6148:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6023:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6024:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
             {
-            pushFollow(FOLLOW_rule__Documentation__Group__1__Impl_in_rule__Documentation__Group__112337);
+            pushFollow(FOLLOW_rule__Documentation__Group__1__Impl_in_rule__Documentation__Group__112094);
             rule__Documentation__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Documentation__Group__2_in_rule__Documentation__Group__112340);
+            pushFollow(FOLLOW_rule__Documentation__Group__2_in_rule__Documentation__Group__112097);
             rule__Documentation__Group__2();
 
             state._fsp--;
@@ -17572,22 +17238,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6155:1: rule__Documentation__Group__1__Impl : ( '[' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6031:1: rule__Documentation__Group__1__Impl : ( '[' ) ;
     public final void rule__Documentation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6159:1: ( ( '[' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6160:1: ( '[' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6035:1: ( ( '[' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6036:1: ( '[' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6160:1: ( '[' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6161:1: '['
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6036:1: ( '[' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6037:1: '['
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
             }
-            match(input,52,FOLLOW_52_in_rule__Documentation__Group__1__Impl12368); if (state.failed) return ;
+            match(input,52,FOLLOW_52_in_rule__Documentation__Group__1__Impl12125); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
             }
@@ -17613,21 +17279,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6174:1: rule__Documentation__Group__2 : rule__Documentation__Group__2__Impl rule__Documentation__Group__3 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6050:1: rule__Documentation__Group__2 : rule__Documentation__Group__2__Impl rule__Documentation__Group__3 ;
     public final void rule__Documentation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6178:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6179:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6054:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6055:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
             {
-            pushFollow(FOLLOW_rule__Documentation__Group__2__Impl_in_rule__Documentation__Group__212399);
+            pushFollow(FOLLOW_rule__Documentation__Group__2__Impl_in_rule__Documentation__Group__212156);
             rule__Documentation__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Documentation__Group__3_in_rule__Documentation__Group__212402);
+            pushFollow(FOLLOW_rule__Documentation__Group__3_in_rule__Documentation__Group__212159);
             rule__Documentation__Group__3();
 
             state._fsp--;
@@ -17651,37 +17317,37 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6186:1: rule__Documentation__Group__2__Impl : ( ( rule__Documentation__LinesAssignment_2 )* ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6062:1: rule__Documentation__Group__2__Impl : ( ( rule__Documentation__LinesAssignment_2 )* ) ;
     public final void rule__Documentation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6190:1: ( ( ( rule__Documentation__LinesAssignment_2 )* ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6191:1: ( ( rule__Documentation__LinesAssignment_2 )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6066:1: ( ( ( rule__Documentation__LinesAssignment_2 )* ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6067:1: ( ( rule__Documentation__LinesAssignment_2 )* )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6191:1: ( ( rule__Documentation__LinesAssignment_2 )* )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6192:1: ( rule__Documentation__LinesAssignment_2 )*
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6067:1: ( ( rule__Documentation__LinesAssignment_2 )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6068:1: ( rule__Documentation__LinesAssignment_2 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationAccess().getLinesAssignment_2()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6193:1: ( rule__Documentation__LinesAssignment_2 )*
-            loop42:
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6069:1: ( rule__Documentation__LinesAssignment_2 )*
+            loop41:
             do {
-                int alt42=2;
-                int LA42_0 = input.LA(1);
+                int alt41=2;
+                int LA41_0 = input.LA(1);
 
-                if ( (LA42_0==RULE_STRING) ) {
-                    alt42=1;
+                if ( (LA41_0==RULE_STRING) ) {
+                    alt41=1;
                 }
 
 
-                switch (alt42) {
+                switch (alt41) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6193:2: rule__Documentation__LinesAssignment_2
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6069:2: rule__Documentation__LinesAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Documentation__LinesAssignment_2_in_rule__Documentation__Group__2__Impl12429);
+            	    pushFollow(FOLLOW_rule__Documentation__LinesAssignment_2_in_rule__Documentation__Group__2__Impl12186);
             	    rule__Documentation__LinesAssignment_2();
 
             	    state._fsp--;
@@ -17691,7 +17357,7 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop42;
+            	    break loop41;
                 }
             } while (true);
 
@@ -17720,16 +17386,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__3"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6203:1: rule__Documentation__Group__3 : rule__Documentation__Group__3__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6079:1: rule__Documentation__Group__3 : rule__Documentation__Group__3__Impl ;
     public final void rule__Documentation__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6207:1: ( rule__Documentation__Group__3__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6208:2: rule__Documentation__Group__3__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6083:1: ( rule__Documentation__Group__3__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6084:2: rule__Documentation__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Documentation__Group__3__Impl_in_rule__Documentation__Group__312460);
+            pushFollow(FOLLOW_rule__Documentation__Group__3__Impl_in_rule__Documentation__Group__312217);
             rule__Documentation__Group__3__Impl();
 
             state._fsp--;
@@ -17753,22 +17419,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__3__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6214:1: rule__Documentation__Group__3__Impl : ( ']' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6090:1: rule__Documentation__Group__3__Impl : ( ']' ) ;
     public final void rule__Documentation__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6218:1: ( ( ']' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6219:1: ( ']' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6094:1: ( ( ']' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6095:1: ( ']' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6219:1: ( ']' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6220:1: ']'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6095:1: ( ']' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6096:1: ']'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
             }
-            match(input,53,FOLLOW_53_in_rule__Documentation__Group__3__Impl12488); if (state.failed) return ;
+            match(input,53,FOLLOW_53_in_rule__Documentation__Group__3__Impl12245); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
             }
@@ -17794,21 +17460,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_0__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6241:1: rule__TIME__Group_0__0 : rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6117:1: rule__TIME__Group_0__0 : rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1 ;
     public final void rule__TIME__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6245:1: ( rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6246:2: rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6121:1: ( rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6122:2: rule__TIME__Group_0__0__Impl rule__TIME__Group_0__1
             {
-            pushFollow(FOLLOW_rule__TIME__Group_0__0__Impl_in_rule__TIME__Group_0__012527);
+            pushFollow(FOLLOW_rule__TIME__Group_0__0__Impl_in_rule__TIME__Group_0__012284);
             rule__TIME__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TIME__Group_0__1_in_rule__TIME__Group_0__012530);
+            pushFollow(FOLLOW_rule__TIME__Group_0__1_in_rule__TIME__Group_0__012287);
             rule__TIME__Group_0__1();
 
             state._fsp--;
@@ -17832,22 +17498,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_0__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6253:1: rule__TIME__Group_0__0__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6129:1: rule__TIME__Group_0__0__Impl : ( RULE_INT ) ;
     public final void rule__TIME__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6257:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6258:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6133:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6134:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6258:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6259:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6134:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6135:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_0__0__Impl12557); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_0__0__Impl12314); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_0_0()); 
             }
@@ -17873,16 +17539,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_0__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6270:1: rule__TIME__Group_0__1 : rule__TIME__Group_0__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6146:1: rule__TIME__Group_0__1 : rule__TIME__Group_0__1__Impl ;
     public final void rule__TIME__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6274:1: ( rule__TIME__Group_0__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6275:2: rule__TIME__Group_0__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6150:1: ( rule__TIME__Group_0__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6151:2: rule__TIME__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__TIME__Group_0__1__Impl_in_rule__TIME__Group_0__112586);
+            pushFollow(FOLLOW_rule__TIME__Group_0__1__Impl_in_rule__TIME__Group_0__112343);
             rule__TIME__Group_0__1__Impl();
 
             state._fsp--;
@@ -17906,22 +17572,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_0__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6281:1: rule__TIME__Group_0__1__Impl : ( 's' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6157:1: rule__TIME__Group_0__1__Impl : ( 's' ) ;
     public final void rule__TIME__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6285:1: ( ( 's' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6286:1: ( 's' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6161:1: ( ( 's' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6162:1: ( 's' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6286:1: ( 's' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6287:1: 's'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6162:1: ( 's' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6163:1: 's'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getSKeyword_0_1()); 
             }
-            match(input,54,FOLLOW_54_in_rule__TIME__Group_0__1__Impl12614); if (state.failed) return ;
+            match(input,54,FOLLOW_54_in_rule__TIME__Group_0__1__Impl12371); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getSKeyword_0_1()); 
             }
@@ -17947,21 +17613,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_1__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6304:1: rule__TIME__Group_1__0 : rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6180:1: rule__TIME__Group_1__0 : rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1 ;
     public final void rule__TIME__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6308:1: ( rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6309:2: rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6184:1: ( rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6185:2: rule__TIME__Group_1__0__Impl rule__TIME__Group_1__1
             {
-            pushFollow(FOLLOW_rule__TIME__Group_1__0__Impl_in_rule__TIME__Group_1__012649);
+            pushFollow(FOLLOW_rule__TIME__Group_1__0__Impl_in_rule__TIME__Group_1__012406);
             rule__TIME__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TIME__Group_1__1_in_rule__TIME__Group_1__012652);
+            pushFollow(FOLLOW_rule__TIME__Group_1__1_in_rule__TIME__Group_1__012409);
             rule__TIME__Group_1__1();
 
             state._fsp--;
@@ -17985,22 +17651,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_1__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6316:1: rule__TIME__Group_1__0__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6192:1: rule__TIME__Group_1__0__Impl : ( RULE_INT ) ;
     public final void rule__TIME__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6320:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6321:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6196:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6197:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6321:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6322:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6197:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6198:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_1__0__Impl12679); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_1__0__Impl12436); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_1_0()); 
             }
@@ -18026,16 +17692,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_1__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6333:1: rule__TIME__Group_1__1 : rule__TIME__Group_1__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6209:1: rule__TIME__Group_1__1 : rule__TIME__Group_1__1__Impl ;
     public final void rule__TIME__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6337:1: ( rule__TIME__Group_1__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6338:2: rule__TIME__Group_1__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6213:1: ( rule__TIME__Group_1__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6214:2: rule__TIME__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__TIME__Group_1__1__Impl_in_rule__TIME__Group_1__112708);
+            pushFollow(FOLLOW_rule__TIME__Group_1__1__Impl_in_rule__TIME__Group_1__112465);
             rule__TIME__Group_1__1__Impl();
 
             state._fsp--;
@@ -18059,22 +17725,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_1__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6344:1: rule__TIME__Group_1__1__Impl : ( 'ms' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6220:1: rule__TIME__Group_1__1__Impl : ( 'ms' ) ;
     public final void rule__TIME__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6348:1: ( ( 'ms' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6349:1: ( 'ms' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6224:1: ( ( 'ms' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6225:1: ( 'ms' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6349:1: ( 'ms' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6350:1: 'ms'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6225:1: ( 'ms' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6226:1: 'ms'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getMsKeyword_1_1()); 
             }
-            match(input,55,FOLLOW_55_in_rule__TIME__Group_1__1__Impl12736); if (state.failed) return ;
+            match(input,55,FOLLOW_55_in_rule__TIME__Group_1__1__Impl12493); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getMsKeyword_1_1()); 
             }
@@ -18100,21 +17766,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_2__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6367:1: rule__TIME__Group_2__0 : rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6243:1: rule__TIME__Group_2__0 : rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1 ;
     public final void rule__TIME__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6371:1: ( rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6372:2: rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6247:1: ( rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6248:2: rule__TIME__Group_2__0__Impl rule__TIME__Group_2__1
             {
-            pushFollow(FOLLOW_rule__TIME__Group_2__0__Impl_in_rule__TIME__Group_2__012771);
+            pushFollow(FOLLOW_rule__TIME__Group_2__0__Impl_in_rule__TIME__Group_2__012528);
             rule__TIME__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TIME__Group_2__1_in_rule__TIME__Group_2__012774);
+            pushFollow(FOLLOW_rule__TIME__Group_2__1_in_rule__TIME__Group_2__012531);
             rule__TIME__Group_2__1();
 
             state._fsp--;
@@ -18138,22 +17804,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_2__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6379:1: rule__TIME__Group_2__0__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6255:1: rule__TIME__Group_2__0__Impl : ( RULE_INT ) ;
     public final void rule__TIME__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6383:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6384:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6259:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6260:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6384:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6385:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6260:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6261:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_2__0__Impl12801); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_2__0__Impl12558); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_2_0()); 
             }
@@ -18179,16 +17845,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_2__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6396:1: rule__TIME__Group_2__1 : rule__TIME__Group_2__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6272:1: rule__TIME__Group_2__1 : rule__TIME__Group_2__1__Impl ;
     public final void rule__TIME__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6400:1: ( rule__TIME__Group_2__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6401:2: rule__TIME__Group_2__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6276:1: ( rule__TIME__Group_2__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6277:2: rule__TIME__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__TIME__Group_2__1__Impl_in_rule__TIME__Group_2__112830);
+            pushFollow(FOLLOW_rule__TIME__Group_2__1__Impl_in_rule__TIME__Group_2__112587);
             rule__TIME__Group_2__1__Impl();
 
             state._fsp--;
@@ -18212,22 +17878,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_2__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6407:1: rule__TIME__Group_2__1__Impl : ( 'us' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6283:1: rule__TIME__Group_2__1__Impl : ( 'us' ) ;
     public final void rule__TIME__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6411:1: ( ( 'us' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6412:1: ( 'us' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6287:1: ( ( 'us' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6288:1: ( 'us' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6412:1: ( 'us' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6413:1: 'us'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6288:1: ( 'us' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6289:1: 'us'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getUsKeyword_2_1()); 
             }
-            match(input,56,FOLLOW_56_in_rule__TIME__Group_2__1__Impl12858); if (state.failed) return ;
+            match(input,56,FOLLOW_56_in_rule__TIME__Group_2__1__Impl12615); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getUsKeyword_2_1()); 
             }
@@ -18253,21 +17919,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_3__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6430:1: rule__TIME__Group_3__0 : rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6306:1: rule__TIME__Group_3__0 : rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1 ;
     public final void rule__TIME__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6434:1: ( rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6435:2: rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6310:1: ( rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6311:2: rule__TIME__Group_3__0__Impl rule__TIME__Group_3__1
             {
-            pushFollow(FOLLOW_rule__TIME__Group_3__0__Impl_in_rule__TIME__Group_3__012893);
+            pushFollow(FOLLOW_rule__TIME__Group_3__0__Impl_in_rule__TIME__Group_3__012650);
             rule__TIME__Group_3__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TIME__Group_3__1_in_rule__TIME__Group_3__012896);
+            pushFollow(FOLLOW_rule__TIME__Group_3__1_in_rule__TIME__Group_3__012653);
             rule__TIME__Group_3__1();
 
             state._fsp--;
@@ -18291,22 +17957,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_3__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6442:1: rule__TIME__Group_3__0__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6318:1: rule__TIME__Group_3__0__Impl : ( RULE_INT ) ;
     public final void rule__TIME__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6446:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6447:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6322:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6323:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6447:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6448:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6323:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6324:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_3_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_3__0__Impl12923); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TIME__Group_3__0__Impl12680); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getINTTerminalRuleCall_3_0()); 
             }
@@ -18332,16 +17998,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_3__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6459:1: rule__TIME__Group_3__1 : rule__TIME__Group_3__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6335:1: rule__TIME__Group_3__1 : rule__TIME__Group_3__1__Impl ;
     public final void rule__TIME__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6463:1: ( rule__TIME__Group_3__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6464:2: rule__TIME__Group_3__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6339:1: ( rule__TIME__Group_3__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6340:2: rule__TIME__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__TIME__Group_3__1__Impl_in_rule__TIME__Group_3__112952);
+            pushFollow(FOLLOW_rule__TIME__Group_3__1__Impl_in_rule__TIME__Group_3__112709);
             rule__TIME__Group_3__1__Impl();
 
             state._fsp--;
@@ -18365,22 +18031,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TIME__Group_3__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6470:1: rule__TIME__Group_3__1__Impl : ( 'ns' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6346:1: rule__TIME__Group_3__1__Impl : ( 'ns' ) ;
     public final void rule__TIME__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6474:1: ( ( 'ns' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6475:1: ( 'ns' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6350:1: ( ( 'ns' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6351:1: ( 'ns' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6475:1: ( 'ns' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6476:1: 'ns'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6351:1: ( 'ns' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6352:1: 'ns'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTIMEAccess().getNsKeyword_3_1()); 
             }
-            match(input,57,FOLLOW_57_in_rule__TIME__Group_3__1__Impl12980); if (state.failed) return ;
+            match(input,57,FOLLOW_57_in_rule__TIME__Group_3__1__Impl12737); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTIMEAccess().getNsKeyword_3_1()); 
             }
@@ -18406,21 +18072,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6495:1: rule__BooleanLiteral__Group__0 : rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6371:1: rule__BooleanLiteral__Group__0 : rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 ;
     public final void rule__BooleanLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6499:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6500:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6375:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6376:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__BooleanLiteral__Group__0__Impl_in_rule__BooleanLiteral__Group__013017);
+            pushFollow(FOLLOW_rule__BooleanLiteral__Group__0__Impl_in_rule__BooleanLiteral__Group__012774);
             rule__BooleanLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__BooleanLiteral__Group__1_in_rule__BooleanLiteral__Group__013020);
+            pushFollow(FOLLOW_rule__BooleanLiteral__Group__1_in_rule__BooleanLiteral__Group__012777);
             rule__BooleanLiteral__Group__1();
 
             state._fsp--;
@@ -18444,23 +18110,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6507:1: rule__BooleanLiteral__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6383:1: rule__BooleanLiteral__Group__0__Impl : ( () ) ;
     public final void rule__BooleanLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6511:1: ( ( () ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6512:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6387:1: ( ( () ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6388:1: ( () )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6512:1: ( () )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6513:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6388:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6389:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6514:1: ()
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6516:1: 
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6390:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6392:1: 
             {
             }
 
@@ -18485,16 +18151,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6526:1: rule__BooleanLiteral__Group__1 : rule__BooleanLiteral__Group__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6402:1: rule__BooleanLiteral__Group__1 : rule__BooleanLiteral__Group__1__Impl ;
     public final void rule__BooleanLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6530:1: ( rule__BooleanLiteral__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6531:2: rule__BooleanLiteral__Group__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6406:1: ( rule__BooleanLiteral__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6407:2: rule__BooleanLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__BooleanLiteral__Group__1__Impl_in_rule__BooleanLiteral__Group__113078);
+            pushFollow(FOLLOW_rule__BooleanLiteral__Group__1__Impl_in_rule__BooleanLiteral__Group__112835);
             rule__BooleanLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -18518,25 +18184,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6537:1: rule__BooleanLiteral__Group__1__Impl : ( ( rule__BooleanLiteral__Alternatives_1 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6413:1: rule__BooleanLiteral__Group__1__Impl : ( ( rule__BooleanLiteral__Alternatives_1 ) ) ;
     public final void rule__BooleanLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6541:1: ( ( ( rule__BooleanLiteral__Alternatives_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6542:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6417:1: ( ( ( rule__BooleanLiteral__Alternatives_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6418:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6542:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6543:1: ( rule__BooleanLiteral__Alternatives_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6418:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6419:1: ( rule__BooleanLiteral__Alternatives_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralAccess().getAlternatives_1()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6544:1: ( rule__BooleanLiteral__Alternatives_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6544:2: rule__BooleanLiteral__Alternatives_1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6420:1: ( rule__BooleanLiteral__Alternatives_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6420:2: rule__BooleanLiteral__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__BooleanLiteral__Alternatives_1_in_rule__BooleanLiteral__Group__1__Impl13105);
+            pushFollow(FOLLOW_rule__BooleanLiteral__Alternatives_1_in_rule__BooleanLiteral__Group__1__Impl12862);
             rule__BooleanLiteral__Alternatives_1();
 
             state._fsp--;
@@ -18569,21 +18235,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6558:1: rule__RealLiteral__Group__0 : rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6434:1: rule__RealLiteral__Group__0 : rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 ;
     public final void rule__RealLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6562:1: ( rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6563:2: rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6438:1: ( rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6439:2: rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__RealLiteral__Group__0__Impl_in_rule__RealLiteral__Group__013139);
+            pushFollow(FOLLOW_rule__RealLiteral__Group__0__Impl_in_rule__RealLiteral__Group__012896);
             rule__RealLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__RealLiteral__Group__1_in_rule__RealLiteral__Group__013142);
+            pushFollow(FOLLOW_rule__RealLiteral__Group__1_in_rule__RealLiteral__Group__012899);
             rule__RealLiteral__Group__1();
 
             state._fsp--;
@@ -18607,23 +18273,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6570:1: rule__RealLiteral__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6446:1: rule__RealLiteral__Group__0__Impl : ( () ) ;
     public final void rule__RealLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6574:1: ( ( () ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6575:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6450:1: ( ( () ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6451:1: ( () )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6575:1: ( () )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6576:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6451:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6452:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getRealLiteralAction_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6577:1: ()
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6579:1: 
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6453:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6455:1: 
             {
             }
 
@@ -18648,16 +18314,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6589:1: rule__RealLiteral__Group__1 : rule__RealLiteral__Group__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6465:1: rule__RealLiteral__Group__1 : rule__RealLiteral__Group__1__Impl ;
     public final void rule__RealLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6593:1: ( rule__RealLiteral__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6594:2: rule__RealLiteral__Group__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6469:1: ( rule__RealLiteral__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6470:2: rule__RealLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__RealLiteral__Group__1__Impl_in_rule__RealLiteral__Group__113200);
+            pushFollow(FOLLOW_rule__RealLiteral__Group__1__Impl_in_rule__RealLiteral__Group__112957);
             rule__RealLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -18681,25 +18347,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6600:1: rule__RealLiteral__Group__1__Impl : ( ( rule__RealLiteral__ValueAssignment_1 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6476:1: rule__RealLiteral__Group__1__Impl : ( ( rule__RealLiteral__ValueAssignment_1 ) ) ;
     public final void rule__RealLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6604:1: ( ( ( rule__RealLiteral__ValueAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6605:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6480:1: ( ( ( rule__RealLiteral__ValueAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6481:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6605:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6606:1: ( rule__RealLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6481:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6482:1: ( rule__RealLiteral__ValueAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralAccess().getValueAssignment_1()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6607:1: ( rule__RealLiteral__ValueAssignment_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6607:2: rule__RealLiteral__ValueAssignment_1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6483:1: ( rule__RealLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6483:2: rule__RealLiteral__ValueAssignment_1
             {
-            pushFollow(FOLLOW_rule__RealLiteral__ValueAssignment_1_in_rule__RealLiteral__Group__1__Impl13227);
+            pushFollow(FOLLOW_rule__RealLiteral__ValueAssignment_1_in_rule__RealLiteral__Group__1__Impl12984);
             rule__RealLiteral__ValueAssignment_1();
 
             state._fsp--;
@@ -18732,21 +18398,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6621:1: rule__IntLiteral__Group__0 : rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6497:1: rule__IntLiteral__Group__0 : rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 ;
     public final void rule__IntLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6625:1: ( rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6626:2: rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6501:1: ( rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6502:2: rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__IntLiteral__Group__0__Impl_in_rule__IntLiteral__Group__013261);
+            pushFollow(FOLLOW_rule__IntLiteral__Group__0__Impl_in_rule__IntLiteral__Group__013018);
             rule__IntLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__IntLiteral__Group__1_in_rule__IntLiteral__Group__013264);
+            pushFollow(FOLLOW_rule__IntLiteral__Group__1_in_rule__IntLiteral__Group__013021);
             rule__IntLiteral__Group__1();
 
             state._fsp--;
@@ -18770,23 +18436,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6633:1: rule__IntLiteral__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6509:1: rule__IntLiteral__Group__0__Impl : ( () ) ;
     public final void rule__IntLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6637:1: ( ( () ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6638:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6513:1: ( ( () ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6514:1: ( () )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6638:1: ( () )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6639:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6514:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6515:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntLiteralAccess().getIntLiteralAction_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6640:1: ()
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6642:1: 
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6516:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6518:1: 
             {
             }
 
@@ -18811,16 +18477,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6652:1: rule__IntLiteral__Group__1 : rule__IntLiteral__Group__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6528:1: rule__IntLiteral__Group__1 : rule__IntLiteral__Group__1__Impl ;
     public final void rule__IntLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6656:1: ( rule__IntLiteral__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6657:2: rule__IntLiteral__Group__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6532:1: ( rule__IntLiteral__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6533:2: rule__IntLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__IntLiteral__Group__1__Impl_in_rule__IntLiteral__Group__113322);
+            pushFollow(FOLLOW_rule__IntLiteral__Group__1__Impl_in_rule__IntLiteral__Group__113079);
             rule__IntLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -18844,25 +18510,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6663:1: rule__IntLiteral__Group__1__Impl : ( ( rule__IntLiteral__ValueAssignment_1 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6539:1: rule__IntLiteral__Group__1__Impl : ( ( rule__IntLiteral__ValueAssignment_1 ) ) ;
     public final void rule__IntLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6667:1: ( ( ( rule__IntLiteral__ValueAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6668:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6543:1: ( ( ( rule__IntLiteral__ValueAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6544:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6668:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6669:1: ( rule__IntLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6544:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6545:1: ( rule__IntLiteral__ValueAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntLiteralAccess().getValueAssignment_1()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6670:1: ( rule__IntLiteral__ValueAssignment_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6670:2: rule__IntLiteral__ValueAssignment_1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6546:1: ( rule__IntLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6546:2: rule__IntLiteral__ValueAssignment_1
             {
-            pushFollow(FOLLOW_rule__IntLiteral__ValueAssignment_1_in_rule__IntLiteral__Group__1__Impl13349);
+            pushFollow(FOLLOW_rule__IntLiteral__ValueAssignment_1_in_rule__IntLiteral__Group__1__Impl13106);
             rule__IntLiteral__ValueAssignment_1();
 
             state._fsp--;
@@ -18895,21 +18561,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6684:1: rule__StringLiteral__Group__0 : rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6560:1: rule__StringLiteral__Group__0 : rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 ;
     public final void rule__StringLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6688:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6689:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6564:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6565:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__StringLiteral__Group__0__Impl_in_rule__StringLiteral__Group__013383);
+            pushFollow(FOLLOW_rule__StringLiteral__Group__0__Impl_in_rule__StringLiteral__Group__013140);
             rule__StringLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__StringLiteral__Group__1_in_rule__StringLiteral__Group__013386);
+            pushFollow(FOLLOW_rule__StringLiteral__Group__1_in_rule__StringLiteral__Group__013143);
             rule__StringLiteral__Group__1();
 
             state._fsp--;
@@ -18933,23 +18599,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6696:1: rule__StringLiteral__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6572:1: rule__StringLiteral__Group__0__Impl : ( () ) ;
     public final void rule__StringLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6700:1: ( ( () ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6701:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6576:1: ( ( () ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6577:1: ( () )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6701:1: ( () )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6702:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6577:1: ( () )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6578:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralAccess().getStringLiteralAction_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6703:1: ()
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6705:1: 
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6579:1: ()
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6581:1: 
             {
             }
 
@@ -18974,16 +18640,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6715:1: rule__StringLiteral__Group__1 : rule__StringLiteral__Group__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6591:1: rule__StringLiteral__Group__1 : rule__StringLiteral__Group__1__Impl ;
     public final void rule__StringLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6719:1: ( rule__StringLiteral__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6720:2: rule__StringLiteral__Group__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6595:1: ( rule__StringLiteral__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6596:2: rule__StringLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__StringLiteral__Group__1__Impl_in_rule__StringLiteral__Group__113444);
+            pushFollow(FOLLOW_rule__StringLiteral__Group__1__Impl_in_rule__StringLiteral__Group__113201);
             rule__StringLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -19007,25 +18673,25 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6726:1: rule__StringLiteral__Group__1__Impl : ( ( rule__StringLiteral__ValueAssignment_1 ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6602:1: rule__StringLiteral__Group__1__Impl : ( ( rule__StringLiteral__ValueAssignment_1 ) ) ;
     public final void rule__StringLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6730:1: ( ( ( rule__StringLiteral__ValueAssignment_1 ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6731:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6606:1: ( ( ( rule__StringLiteral__ValueAssignment_1 ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6607:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6731:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6732:1: ( rule__StringLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6607:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6608:1: ( rule__StringLiteral__ValueAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralAccess().getValueAssignment_1()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6733:1: ( rule__StringLiteral__ValueAssignment_1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6733:2: rule__StringLiteral__ValueAssignment_1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6609:1: ( rule__StringLiteral__ValueAssignment_1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6609:2: rule__StringLiteral__ValueAssignment_1
             {
-            pushFollow(FOLLOW_rule__StringLiteral__ValueAssignment_1_in_rule__StringLiteral__Group__1__Impl13471);
+            pushFollow(FOLLOW_rule__StringLiteral__ValueAssignment_1_in_rule__StringLiteral__Group__1__Impl13228);
             rule__StringLiteral__ValueAssignment_1();
 
             state._fsp--;
@@ -19058,21 +18724,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SignedInteger__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6747:1: rule__SignedInteger__Group__0 : rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6623:1: rule__SignedInteger__Group__0 : rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1 ;
     public final void rule__SignedInteger__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6751:1: ( rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6752:2: rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6627:1: ( rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6628:2: rule__SignedInteger__Group__0__Impl rule__SignedInteger__Group__1
             {
-            pushFollow(FOLLOW_rule__SignedInteger__Group__0__Impl_in_rule__SignedInteger__Group__013505);
+            pushFollow(FOLLOW_rule__SignedInteger__Group__0__Impl_in_rule__SignedInteger__Group__013262);
             rule__SignedInteger__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__SignedInteger__Group__1_in_rule__SignedInteger__Group__013508);
+            pushFollow(FOLLOW_rule__SignedInteger__Group__1_in_rule__SignedInteger__Group__013265);
             rule__SignedInteger__Group__1();
 
             state._fsp--;
@@ -19096,33 +18762,33 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SignedInteger__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6759:1: rule__SignedInteger__Group__0__Impl : ( ( rule__SignedInteger__Alternatives_0 )? ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6635:1: rule__SignedInteger__Group__0__Impl : ( ( rule__SignedInteger__Alternatives_0 )? ) ;
     public final void rule__SignedInteger__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6763:1: ( ( ( rule__SignedInteger__Alternatives_0 )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6764:1: ( ( rule__SignedInteger__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6639:1: ( ( ( rule__SignedInteger__Alternatives_0 )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6640:1: ( ( rule__SignedInteger__Alternatives_0 )? )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6764:1: ( ( rule__SignedInteger__Alternatives_0 )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6765:1: ( rule__SignedInteger__Alternatives_0 )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6640:1: ( ( rule__SignedInteger__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6641:1: ( rule__SignedInteger__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSignedIntegerAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6766:1: ( rule__SignedInteger__Alternatives_0 )?
-            int alt43=2;
-            int LA43_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6642:1: ( rule__SignedInteger__Alternatives_0 )?
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( ((LA43_0>=19 && LA43_0<=20)) ) {
-                alt43=1;
+            if ( ((LA42_0>=19 && LA42_0<=20)) ) {
+                alt42=1;
             }
-            switch (alt43) {
+            switch (alt42) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6766:2: rule__SignedInteger__Alternatives_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6642:2: rule__SignedInteger__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__SignedInteger__Alternatives_0_in_rule__SignedInteger__Group__0__Impl13535);
+                    pushFollow(FOLLOW_rule__SignedInteger__Alternatives_0_in_rule__SignedInteger__Group__0__Impl13292);
                     rule__SignedInteger__Alternatives_0();
 
                     state._fsp--;
@@ -19158,16 +18824,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SignedInteger__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6776:1: rule__SignedInteger__Group__1 : rule__SignedInteger__Group__1__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6652:1: rule__SignedInteger__Group__1 : rule__SignedInteger__Group__1__Impl ;
     public final void rule__SignedInteger__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6780:1: ( rule__SignedInteger__Group__1__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6781:2: rule__SignedInteger__Group__1__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6656:1: ( rule__SignedInteger__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6657:2: rule__SignedInteger__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__SignedInteger__Group__1__Impl_in_rule__SignedInteger__Group__113566);
+            pushFollow(FOLLOW_rule__SignedInteger__Group__1__Impl_in_rule__SignedInteger__Group__113323);
             rule__SignedInteger__Group__1__Impl();
 
             state._fsp--;
@@ -19191,22 +18857,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SignedInteger__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6787:1: rule__SignedInteger__Group__1__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6663:1: rule__SignedInteger__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__SignedInteger__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6791:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6792:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6667:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6668:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6792:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6793:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6668:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6669:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSignedIntegerAccess().getINTTerminalRuleCall_1()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__SignedInteger__Group__1__Impl13593); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__SignedInteger__Group__1__Impl13350); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSignedIntegerAccess().getINTTerminalRuleCall_1()); 
             }
@@ -19232,21 +18898,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6808:1: rule__Decimal__Group__0 : rule__Decimal__Group__0__Impl rule__Decimal__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6684:1: rule__Decimal__Group__0 : rule__Decimal__Group__0__Impl rule__Decimal__Group__1 ;
     public final void rule__Decimal__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6812:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6813:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6688:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6689:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
             {
-            pushFollow(FOLLOW_rule__Decimal__Group__0__Impl_in_rule__Decimal__Group__013626);
+            pushFollow(FOLLOW_rule__Decimal__Group__0__Impl_in_rule__Decimal__Group__013383);
             rule__Decimal__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Decimal__Group__1_in_rule__Decimal__Group__013629);
+            pushFollow(FOLLOW_rule__Decimal__Group__1_in_rule__Decimal__Group__013386);
             rule__Decimal__Group__1();
 
             state._fsp--;
@@ -19270,33 +18936,33 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6820:1: rule__Decimal__Group__0__Impl : ( ( rule__Decimal__Alternatives_0 )? ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6696:1: rule__Decimal__Group__0__Impl : ( ( rule__Decimal__Alternatives_0 )? ) ;
     public final void rule__Decimal__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6824:1: ( ( ( rule__Decimal__Alternatives_0 )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6825:1: ( ( rule__Decimal__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6700:1: ( ( ( rule__Decimal__Alternatives_0 )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6701:1: ( ( rule__Decimal__Alternatives_0 )? )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6825:1: ( ( rule__Decimal__Alternatives_0 )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6826:1: ( rule__Decimal__Alternatives_0 )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6701:1: ( ( rule__Decimal__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6702:1: ( rule__Decimal__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6827:1: ( rule__Decimal__Alternatives_0 )?
-            int alt44=2;
-            int LA44_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6703:1: ( rule__Decimal__Alternatives_0 )?
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( ((LA44_0>=19 && LA44_0<=20)) ) {
-                alt44=1;
+            if ( ((LA43_0>=19 && LA43_0<=20)) ) {
+                alt43=1;
             }
-            switch (alt44) {
+            switch (alt43) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6827:2: rule__Decimal__Alternatives_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6703:2: rule__Decimal__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__Decimal__Alternatives_0_in_rule__Decimal__Group__0__Impl13656);
+                    pushFollow(FOLLOW_rule__Decimal__Alternatives_0_in_rule__Decimal__Group__0__Impl13413);
                     rule__Decimal__Alternatives_0();
 
                     state._fsp--;
@@ -19332,21 +18998,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6837:1: rule__Decimal__Group__1 : rule__Decimal__Group__1__Impl rule__Decimal__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6713:1: rule__Decimal__Group__1 : rule__Decimal__Group__1__Impl rule__Decimal__Group__2 ;
     public final void rule__Decimal__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6841:1: ( rule__Decimal__Group__1__Impl rule__Decimal__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6842:2: rule__Decimal__Group__1__Impl rule__Decimal__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6717:1: ( rule__Decimal__Group__1__Impl rule__Decimal__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6718:2: rule__Decimal__Group__1__Impl rule__Decimal__Group__2
             {
-            pushFollow(FOLLOW_rule__Decimal__Group__1__Impl_in_rule__Decimal__Group__113687);
+            pushFollow(FOLLOW_rule__Decimal__Group__1__Impl_in_rule__Decimal__Group__113444);
             rule__Decimal__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Decimal__Group__2_in_rule__Decimal__Group__113690);
+            pushFollow(FOLLOW_rule__Decimal__Group__2_in_rule__Decimal__Group__113447);
             rule__Decimal__Group__2();
 
             state._fsp--;
@@ -19370,22 +19036,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6849:1: rule__Decimal__Group__1__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6725:1: rule__Decimal__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__Decimal__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6853:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6854:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6729:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6730:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6854:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6855:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6730:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6731:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Decimal__Group__1__Impl13717); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Decimal__Group__1__Impl13474); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
             }
@@ -19411,21 +19077,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6866:1: rule__Decimal__Group__2 : rule__Decimal__Group__2__Impl rule__Decimal__Group__3 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6742:1: rule__Decimal__Group__2 : rule__Decimal__Group__2__Impl rule__Decimal__Group__3 ;
     public final void rule__Decimal__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6870:1: ( rule__Decimal__Group__2__Impl rule__Decimal__Group__3 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6871:2: rule__Decimal__Group__2__Impl rule__Decimal__Group__3
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6746:1: ( rule__Decimal__Group__2__Impl rule__Decimal__Group__3 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6747:2: rule__Decimal__Group__2__Impl rule__Decimal__Group__3
             {
-            pushFollow(FOLLOW_rule__Decimal__Group__2__Impl_in_rule__Decimal__Group__213746);
+            pushFollow(FOLLOW_rule__Decimal__Group__2__Impl_in_rule__Decimal__Group__213503);
             rule__Decimal__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__Decimal__Group__3_in_rule__Decimal__Group__213749);
+            pushFollow(FOLLOW_rule__Decimal__Group__3_in_rule__Decimal__Group__213506);
             rule__Decimal__Group__3();
 
             state._fsp--;
@@ -19449,22 +19115,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6878:1: rule__Decimal__Group__2__Impl : ( '.' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6754:1: rule__Decimal__Group__2__Impl : ( '.' ) ;
     public final void rule__Decimal__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6882:1: ( ( '.' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6883:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6758:1: ( ( '.' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6759:1: ( '.' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6883:1: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6884:1: '.'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6759:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6760:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
             }
-            match(input,46,FOLLOW_46_in_rule__Decimal__Group__2__Impl13777); if (state.failed) return ;
+            match(input,46,FOLLOW_46_in_rule__Decimal__Group__2__Impl13534); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
             }
@@ -19490,16 +19156,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__3"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6897:1: rule__Decimal__Group__3 : rule__Decimal__Group__3__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6773:1: rule__Decimal__Group__3 : rule__Decimal__Group__3__Impl ;
     public final void rule__Decimal__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6901:1: ( rule__Decimal__Group__3__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6902:2: rule__Decimal__Group__3__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6777:1: ( rule__Decimal__Group__3__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6778:2: rule__Decimal__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Decimal__Group__3__Impl_in_rule__Decimal__Group__313808);
+            pushFollow(FOLLOW_rule__Decimal__Group__3__Impl_in_rule__Decimal__Group__313565);
             rule__Decimal__Group__3__Impl();
 
             state._fsp--;
@@ -19523,22 +19189,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__3__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6908:1: rule__Decimal__Group__3__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6784:1: rule__Decimal__Group__3__Impl : ( RULE_INT ) ;
     public final void rule__Decimal__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6912:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6913:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6788:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6789:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6913:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6914:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6789:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6790:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_3()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Decimal__Group__3__Impl13835); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Decimal__Group__3__Impl13592); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_3()); 
             }
@@ -19564,21 +19230,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6933:1: rule__DotDecimal__Group__0 : rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6809:1: rule__DotDecimal__Group__0 : rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1 ;
     public final void rule__DotDecimal__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6937:1: ( rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6938:2: rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6813:1: ( rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6814:2: rule__DotDecimal__Group__0__Impl rule__DotDecimal__Group__1
             {
-            pushFollow(FOLLOW_rule__DotDecimal__Group__0__Impl_in_rule__DotDecimal__Group__013872);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__0__Impl_in_rule__DotDecimal__Group__013629);
             rule__DotDecimal__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DotDecimal__Group__1_in_rule__DotDecimal__Group__013875);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__1_in_rule__DotDecimal__Group__013632);
             rule__DotDecimal__Group__1();
 
             state._fsp--;
@@ -19602,33 +19268,33 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6945:1: rule__DotDecimal__Group__0__Impl : ( ( rule__DotDecimal__Alternatives_0 )? ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6821:1: rule__DotDecimal__Group__0__Impl : ( ( rule__DotDecimal__Alternatives_0 )? ) ;
     public final void rule__DotDecimal__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6949:1: ( ( ( rule__DotDecimal__Alternatives_0 )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6950:1: ( ( rule__DotDecimal__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6825:1: ( ( ( rule__DotDecimal__Alternatives_0 )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6826:1: ( ( rule__DotDecimal__Alternatives_0 )? )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6950:1: ( ( rule__DotDecimal__Alternatives_0 )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6951:1: ( rule__DotDecimal__Alternatives_0 )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6826:1: ( ( rule__DotDecimal__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6827:1: ( rule__DotDecimal__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDotDecimalAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6952:1: ( rule__DotDecimal__Alternatives_0 )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6828:1: ( rule__DotDecimal__Alternatives_0 )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            if ( ((LA45_0>=19 && LA45_0<=20)) ) {
-                alt45=1;
+            if ( ((LA44_0>=19 && LA44_0<=20)) ) {
+                alt44=1;
             }
-            switch (alt45) {
+            switch (alt44) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6952:2: rule__DotDecimal__Alternatives_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6828:2: rule__DotDecimal__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__DotDecimal__Alternatives_0_in_rule__DotDecimal__Group__0__Impl13902);
+                    pushFollow(FOLLOW_rule__DotDecimal__Alternatives_0_in_rule__DotDecimal__Group__0__Impl13659);
                     rule__DotDecimal__Alternatives_0();
 
                     state._fsp--;
@@ -19664,21 +19330,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6962:1: rule__DotDecimal__Group__1 : rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6838:1: rule__DotDecimal__Group__1 : rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2 ;
     public final void rule__DotDecimal__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6966:1: ( rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6967:2: rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6842:1: ( rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6843:2: rule__DotDecimal__Group__1__Impl rule__DotDecimal__Group__2
             {
-            pushFollow(FOLLOW_rule__DotDecimal__Group__1__Impl_in_rule__DotDecimal__Group__113933);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__1__Impl_in_rule__DotDecimal__Group__113690);
             rule__DotDecimal__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DotDecimal__Group__2_in_rule__DotDecimal__Group__113936);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__2_in_rule__DotDecimal__Group__113693);
             rule__DotDecimal__Group__2();
 
             state._fsp--;
@@ -19702,22 +19368,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6974:1: rule__DotDecimal__Group__1__Impl : ( '.' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6850:1: rule__DotDecimal__Group__1__Impl : ( '.' ) ;
     public final void rule__DotDecimal__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6978:1: ( ( '.' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6979:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6854:1: ( ( '.' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6855:1: ( '.' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6979:1: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6980:1: '.'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6855:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6856:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDotDecimalAccess().getFullStopKeyword_1()); 
             }
-            match(input,46,FOLLOW_46_in_rule__DotDecimal__Group__1__Impl13964); if (state.failed) return ;
+            match(input,46,FOLLOW_46_in_rule__DotDecimal__Group__1__Impl13721); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDotDecimalAccess().getFullStopKeyword_1()); 
             }
@@ -19743,16 +19409,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6993:1: rule__DotDecimal__Group__2 : rule__DotDecimal__Group__2__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6869:1: rule__DotDecimal__Group__2 : rule__DotDecimal__Group__2__Impl ;
     public final void rule__DotDecimal__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6997:1: ( rule__DotDecimal__Group__2__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6998:2: rule__DotDecimal__Group__2__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6873:1: ( rule__DotDecimal__Group__2__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6874:2: rule__DotDecimal__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__DotDecimal__Group__2__Impl_in_rule__DotDecimal__Group__213995);
+            pushFollow(FOLLOW_rule__DotDecimal__Group__2__Impl_in_rule__DotDecimal__Group__213752);
             rule__DotDecimal__Group__2__Impl();
 
             state._fsp--;
@@ -19776,22 +19442,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DotDecimal__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7004:1: rule__DotDecimal__Group__2__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6880:1: rule__DotDecimal__Group__2__Impl : ( RULE_INT ) ;
     public final void rule__DotDecimal__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7008:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7009:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6884:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6885:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7009:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7010:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6885:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6886:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDotDecimalAccess().getINTTerminalRuleCall_2()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DotDecimal__Group__2__Impl14022); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DotDecimal__Group__2__Impl13779); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDotDecimalAccess().getINTTerminalRuleCall_2()); 
             }
@@ -19817,21 +19483,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7027:1: rule__DecimalDot__Group__0 : rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6903:1: rule__DecimalDot__Group__0 : rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1 ;
     public final void rule__DecimalDot__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7031:1: ( rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7032:2: rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6907:1: ( rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6908:2: rule__DecimalDot__Group__0__Impl rule__DecimalDot__Group__1
             {
-            pushFollow(FOLLOW_rule__DecimalDot__Group__0__Impl_in_rule__DecimalDot__Group__014057);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__0__Impl_in_rule__DecimalDot__Group__013814);
             rule__DecimalDot__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalDot__Group__1_in_rule__DecimalDot__Group__014060);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__1_in_rule__DecimalDot__Group__013817);
             rule__DecimalDot__Group__1();
 
             state._fsp--;
@@ -19855,33 +19521,33 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7039:1: rule__DecimalDot__Group__0__Impl : ( ( rule__DecimalDot__Alternatives_0 )? ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6915:1: rule__DecimalDot__Group__0__Impl : ( ( rule__DecimalDot__Alternatives_0 )? ) ;
     public final void rule__DecimalDot__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7043:1: ( ( ( rule__DecimalDot__Alternatives_0 )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7044:1: ( ( rule__DecimalDot__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6919:1: ( ( ( rule__DecimalDot__Alternatives_0 )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6920:1: ( ( rule__DecimalDot__Alternatives_0 )? )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7044:1: ( ( rule__DecimalDot__Alternatives_0 )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7045:1: ( rule__DecimalDot__Alternatives_0 )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6920:1: ( ( rule__DecimalDot__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6921:1: ( rule__DecimalDot__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalDotAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7046:1: ( rule__DecimalDot__Alternatives_0 )?
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6922:1: ( rule__DecimalDot__Alternatives_0 )?
+            int alt45=2;
+            int LA45_0 = input.LA(1);
 
-            if ( ((LA46_0>=19 && LA46_0<=20)) ) {
-                alt46=1;
+            if ( ((LA45_0>=19 && LA45_0<=20)) ) {
+                alt45=1;
             }
-            switch (alt46) {
+            switch (alt45) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7046:2: rule__DecimalDot__Alternatives_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6922:2: rule__DecimalDot__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__DecimalDot__Alternatives_0_in_rule__DecimalDot__Group__0__Impl14087);
+                    pushFollow(FOLLOW_rule__DecimalDot__Alternatives_0_in_rule__DecimalDot__Group__0__Impl13844);
                     rule__DecimalDot__Alternatives_0();
 
                     state._fsp--;
@@ -19917,21 +19583,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7056:1: rule__DecimalDot__Group__1 : rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6932:1: rule__DecimalDot__Group__1 : rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2 ;
     public final void rule__DecimalDot__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7060:1: ( rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7061:2: rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6936:1: ( rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6937:2: rule__DecimalDot__Group__1__Impl rule__DecimalDot__Group__2
             {
-            pushFollow(FOLLOW_rule__DecimalDot__Group__1__Impl_in_rule__DecimalDot__Group__114118);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__1__Impl_in_rule__DecimalDot__Group__113875);
             rule__DecimalDot__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalDot__Group__2_in_rule__DecimalDot__Group__114121);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__2_in_rule__DecimalDot__Group__113878);
             rule__DecimalDot__Group__2();
 
             state._fsp--;
@@ -19955,22 +19621,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7068:1: rule__DecimalDot__Group__1__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6944:1: rule__DecimalDot__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__DecimalDot__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7072:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7073:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6948:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6949:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7073:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7074:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6949:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6950:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalDotAccess().getINTTerminalRuleCall_1()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalDot__Group__1__Impl14148); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalDot__Group__1__Impl13905); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalDotAccess().getINTTerminalRuleCall_1()); 
             }
@@ -19996,16 +19662,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7085:1: rule__DecimalDot__Group__2 : rule__DecimalDot__Group__2__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6961:1: rule__DecimalDot__Group__2 : rule__DecimalDot__Group__2__Impl ;
     public final void rule__DecimalDot__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7089:1: ( rule__DecimalDot__Group__2__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7090:2: rule__DecimalDot__Group__2__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6965:1: ( rule__DecimalDot__Group__2__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6966:2: rule__DecimalDot__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__DecimalDot__Group__2__Impl_in_rule__DecimalDot__Group__214177);
+            pushFollow(FOLLOW_rule__DecimalDot__Group__2__Impl_in_rule__DecimalDot__Group__213934);
             rule__DecimalDot__Group__2__Impl();
 
             state._fsp--;
@@ -20029,22 +19695,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalDot__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7096:1: rule__DecimalDot__Group__2__Impl : ( '.' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6972:1: rule__DecimalDot__Group__2__Impl : ( '.' ) ;
     public final void rule__DecimalDot__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7100:1: ( ( '.' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7101:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6976:1: ( ( '.' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6977:1: ( '.' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7101:1: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7102:1: '.'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6977:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6978:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalDotAccess().getFullStopKeyword_2()); 
             }
-            match(input,46,FOLLOW_46_in_rule__DecimalDot__Group__2__Impl14205); if (state.failed) return ;
+            match(input,46,FOLLOW_46_in_rule__DecimalDot__Group__2__Impl13962); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalDotAccess().getFullStopKeyword_2()); 
             }
@@ -20070,21 +19736,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7121:1: rule__DecimalExp__Group__0 : rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:6997:1: rule__DecimalExp__Group__0 : rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 ;
     public final void rule__DecimalExp__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7125:1: ( rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7126:2: rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7001:1: ( rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7002:2: rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__0__Impl_in_rule__DecimalExp__Group__014242);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__0__Impl_in_rule__DecimalExp__Group__013999);
             rule__DecimalExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalExp__Group__1_in_rule__DecimalExp__Group__014245);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__1_in_rule__DecimalExp__Group__014002);
             rule__DecimalExp__Group__1();
 
             state._fsp--;
@@ -20108,33 +19774,33 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__0__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7133:1: rule__DecimalExp__Group__0__Impl : ( ( rule__DecimalExp__Alternatives_0 )? ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7009:1: rule__DecimalExp__Group__0__Impl : ( ( rule__DecimalExp__Alternatives_0 )? ) ;
     public final void rule__DecimalExp__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7137:1: ( ( ( rule__DecimalExp__Alternatives_0 )? ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7138:1: ( ( rule__DecimalExp__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7013:1: ( ( ( rule__DecimalExp__Alternatives_0 )? ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7014:1: ( ( rule__DecimalExp__Alternatives_0 )? )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7138:1: ( ( rule__DecimalExp__Alternatives_0 )? )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7139:1: ( rule__DecimalExp__Alternatives_0 )?
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7014:1: ( ( rule__DecimalExp__Alternatives_0 )? )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7015:1: ( rule__DecimalExp__Alternatives_0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getAlternatives_0()); 
             }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7140:1: ( rule__DecimalExp__Alternatives_0 )?
-            int alt47=2;
-            int LA47_0 = input.LA(1);
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7016:1: ( rule__DecimalExp__Alternatives_0 )?
+            int alt46=2;
+            int LA46_0 = input.LA(1);
 
-            if ( ((LA47_0>=19 && LA47_0<=20)) ) {
-                alt47=1;
+            if ( ((LA46_0>=19 && LA46_0<=20)) ) {
+                alt46=1;
             }
-            switch (alt47) {
+            switch (alt46) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7140:2: rule__DecimalExp__Alternatives_0
+                    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7016:2: rule__DecimalExp__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__DecimalExp__Alternatives_0_in_rule__DecimalExp__Group__0__Impl14272);
+                    pushFollow(FOLLOW_rule__DecimalExp__Alternatives_0_in_rule__DecimalExp__Group__0__Impl14029);
                     rule__DecimalExp__Alternatives_0();
 
                     state._fsp--;
@@ -20170,21 +19836,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7150:1: rule__DecimalExp__Group__1 : rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7026:1: rule__DecimalExp__Group__1 : rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 ;
     public final void rule__DecimalExp__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7154:1: ( rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7155:2: rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7030:1: ( rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7031:2: rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__1__Impl_in_rule__DecimalExp__Group__114303);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__1__Impl_in_rule__DecimalExp__Group__114060);
             rule__DecimalExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalExp__Group__2_in_rule__DecimalExp__Group__114306);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__2_in_rule__DecimalExp__Group__114063);
             rule__DecimalExp__Group__2();
 
             state._fsp--;
@@ -20208,22 +19874,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__1__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7162:1: rule__DecimalExp__Group__1__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7038:1: rule__DecimalExp__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__DecimalExp__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7166:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7167:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7042:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7043:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7167:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7168:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7043:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7044:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalExp__Group__1__Impl14333); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalExp__Group__1__Impl14090); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
             }
@@ -20249,21 +19915,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7179:1: rule__DecimalExp__Group__2 : rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7055:1: rule__DecimalExp__Group__2 : rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 ;
     public final void rule__DecimalExp__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7183:1: ( rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7184:2: rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7059:1: ( rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7060:2: rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__2__Impl_in_rule__DecimalExp__Group__214362);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__2__Impl_in_rule__DecimalExp__Group__214119);
             rule__DecimalExp__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalExp__Group__3_in_rule__DecimalExp__Group__214365);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__3_in_rule__DecimalExp__Group__214122);
             rule__DecimalExp__Group__3();
 
             state._fsp--;
@@ -20287,22 +19953,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__2__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7191:1: rule__DecimalExp__Group__2__Impl : ( '.' ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7067:1: rule__DecimalExp__Group__2__Impl : ( '.' ) ;
     public final void rule__DecimalExp__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7195:1: ( ( '.' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7196:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7071:1: ( ( '.' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7072:1: ( '.' )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7196:1: ( '.' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7197:1: '.'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7072:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7073:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
             }
-            match(input,46,FOLLOW_46_in_rule__DecimalExp__Group__2__Impl14393); if (state.failed) return ;
+            match(input,46,FOLLOW_46_in_rule__DecimalExp__Group__2__Impl14150); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
             }
@@ -20328,21 +19994,21 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__3"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7210:1: rule__DecimalExp__Group__3 : rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7086:1: rule__DecimalExp__Group__3 : rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 ;
     public final void rule__DecimalExp__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7214:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7215:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7090:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7091:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__3__Impl_in_rule__DecimalExp__Group__314424);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__3__Impl_in_rule__DecimalExp__Group__314181);
             rule__DecimalExp__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__DecimalExp__Group__4_in_rule__DecimalExp__Group__314427);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__4_in_rule__DecimalExp__Group__314184);
             rule__DecimalExp__Group__4();
 
             state._fsp--;
@@ -20366,22 +20032,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__3__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7222:1: rule__DecimalExp__Group__3__Impl : ( RULE_INT ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7098:1: rule__DecimalExp__Group__3__Impl : ( RULE_INT ) ;
     public final void rule__DecimalExp__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7226:1: ( ( RULE_INT ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7227:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7102:1: ( ( RULE_INT ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7103:1: ( RULE_INT )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7227:1: ( RULE_INT )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7228:1: RULE_INT
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7103:1: ( RULE_INT )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7104:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalExp__Group__3__Impl14454); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__DecimalExp__Group__3__Impl14211); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
             }
@@ -20407,16 +20073,16 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__4"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7239:1: rule__DecimalExp__Group__4 : rule__DecimalExp__Group__4__Impl ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7115:1: rule__DecimalExp__Group__4 : rule__DecimalExp__Group__4__Impl ;
     public final void rule__DecimalExp__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7243:1: ( rule__DecimalExp__Group__4__Impl )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7244:2: rule__DecimalExp__Group__4__Impl
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7119:1: ( rule__DecimalExp__Group__4__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7120:2: rule__DecimalExp__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__DecimalExp__Group__4__Impl_in_rule__DecimalExp__Group__414483);
+            pushFollow(FOLLOW_rule__DecimalExp__Group__4__Impl_in_rule__DecimalExp__Group__414240);
             rule__DecimalExp__Group__4__Impl();
 
             state._fsp--;
@@ -20440,22 +20106,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__4__Impl"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7250:1: rule__DecimalExp__Group__4__Impl : ( RULE_EXP ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7126:1: rule__DecimalExp__Group__4__Impl : ( RULE_EXP ) ;
     public final void rule__DecimalExp__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7254:1: ( ( RULE_EXP ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7255:1: ( RULE_EXP )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7130:1: ( ( RULE_EXP ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7131:1: ( RULE_EXP )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7255:1: ( RULE_EXP )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7256:1: RULE_EXP
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7131:1: ( RULE_EXP )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7132:1: RULE_EXP
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDecimalExpAccess().getEXPTerminalRuleCall_4()); 
             }
-            match(input,RULE_EXP,FOLLOW_RULE_EXP_in_rule__DecimalExp__Group__4__Impl14510); if (state.failed) return ;
+            match(input,RULE_EXP,FOLLOW_RULE_EXP_in_rule__DecimalExp__Group__4__Impl14267); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDecimalExpAccess().getEXPTerminalRuleCall_4()); 
             }
@@ -20478,6 +20144,340 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
         return ;
     }
     // $ANTLR end "rule__DecimalExp__Group__4__Impl"
+
+
+    // $ANTLR start "rule__FQN__Group__0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7153:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    public final void rule__FQN__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7157:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7158:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            {
+            pushFollow(FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__014306);
+            rule__FQN__Group__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__014309);
+            rule__FQN__Group__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group__0"
+
+
+    // $ANTLR start "rule__FQN__Group__0__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7165:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    public final void rule__FQN__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7169:1: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7170:1: ( RULE_ID )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7170:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7171:1: RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+            }
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl14336); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group__0__Impl"
+
+
+    // $ANTLR start "rule__FQN__Group__1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7182:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    public final void rule__FQN__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7186:1: ( rule__FQN__Group__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7187:2: rule__FQN__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__114365);
+            rule__FQN__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group__1"
+
+
+    // $ANTLR start "rule__FQN__Group__1__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7193:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    public final void rule__FQN__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7197:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7198:1: ( ( rule__FQN__Group_1__0 )* )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7198:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7199:1: ( rule__FQN__Group_1__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNAccess().getGroup_1()); 
+            }
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7200:1: ( rule__FQN__Group_1__0 )*
+            loop47:
+            do {
+                int alt47=2;
+                int LA47_0 = input.LA(1);
+
+                if ( (LA47_0==46) ) {
+                    alt47=1;
+                }
+
+
+                switch (alt47) {
+            	case 1 :
+            	    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7200:2: rule__FQN__Group_1__0
+            	    {
+            	    pushFollow(FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl14392);
+            	    rule__FQN__Group_1__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop47;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNAccess().getGroup_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group__1__Impl"
+
+
+    // $ANTLR start "rule__FQN__Group_1__0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7214:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    public final void rule__FQN__Group_1__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7218:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7219:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            {
+            pushFollow(FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__014427);
+            rule__FQN__Group_1__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__014430);
+            rule__FQN__Group_1__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group_1__0"
+
+
+    // $ANTLR start "rule__FQN__Group_1__0__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7226:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7230:1: ( ( '.' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7231:1: ( '.' )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7231:1: ( '.' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7232:1: '.'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+            }
+            match(input,46,FOLLOW_46_in_rule__FQN__Group_1__0__Impl14458); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group_1__0__Impl"
+
+
+    // $ANTLR start "rule__FQN__Group_1__1"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7245:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    public final void rule__FQN__Group_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7249:1: ( rule__FQN__Group_1__1__Impl )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7250:2: rule__FQN__Group_1__1__Impl
+            {
+            pushFollow(FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__114489);
+            rule__FQN__Group_1__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group_1__1"
+
+
+    // $ANTLR start "rule__FQN__Group_1__1__Impl"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7256:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7260:1: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7261:1: ( RULE_ID )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7261:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:7262:1: RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
+            }
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl14516); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__FQN__Group_1__1__Impl"
 
 
     // $ANTLR start "rule__DynamicConfig__UnorderedGroup_2"
@@ -23442,109 +23442,23 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__RefSegment__IdxAssignment_1_1"
 
 
-    // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1_0_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8267:1: rule__Import__ImportedNamespaceAssignment_1_0_0 : ( ruleImportedFQN ) ;
-    public final void rule__Import__ImportedNamespaceAssignment_1_0_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8271:1: ( ( ruleImportedFQN ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8272:1: ( ruleImportedFQN )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8272:1: ( ruleImportedFQN )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8273:1: ruleImportedFQN
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
-            }
-            pushFollow(FOLLOW_ruleImportedFQN_in_rule__Import__ImportedNamespaceAssignment_1_0_016955);
-            ruleImportedFQN();
-
-            state._fsp--;
-            if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__ImportedNamespaceAssignment_1_0_0"
-
-
-    // $ANTLR start "rule__Import__ImportURIAssignment_2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8282:1: rule__Import__ImportURIAssignment_2 : ( RULE_STRING ) ;
-    public final void rule__Import__ImportURIAssignment_2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8286:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8287:1: ( RULE_STRING )
-            {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8287:1: ( RULE_STRING )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8288:1: RULE_STRING
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
-            }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_216986); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__ImportURIAssignment_2"
-
-
     // $ANTLR start "rule__KeyValue__KeyAssignment_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8300:1: rule__KeyValue__KeyAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8270:1: rule__KeyValue__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__KeyValue__KeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8304:1: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8305:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8274:1: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8275:1: ( RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8305:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8306:1: RULE_ID
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8275:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8276:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__KeyValue__KeyAssignment_017020); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__KeyValue__KeyAssignment_016958); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             }
@@ -23570,22 +23484,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__ValueAssignment_2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8315:1: rule__KeyValue__ValueAssignment_2 : ( ruleLiteral ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8285:1: rule__KeyValue__ValueAssignment_2 : ( ruleLiteral ) ;
     public final void rule__KeyValue__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8319:1: ( ( ruleLiteral ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8320:1: ( ruleLiteral )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8289:1: ( ( ruleLiteral ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8290:1: ( ruleLiteral )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8320:1: ( ruleLiteral )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8321:1: ruleLiteral
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8290:1: ( ruleLiteral )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8291:1: ruleLiteral
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getKeyValueAccess().getValueLiteralParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleLiteral_in_rule__KeyValue__ValueAssignment_217051);
+            pushFollow(FOLLOW_ruleLiteral_in_rule__KeyValue__ValueAssignment_216989);
             ruleLiteral();
 
             state._fsp--;
@@ -23615,28 +23529,28 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__OptionalAssignment_0_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8336:1: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8306:1: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
     public final void rule__SimpleAnnotationAttribute__OptionalAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8340:1: ( ( ( 'optional' ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8341:1: ( ( 'optional' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8310:1: ( ( ( 'optional' ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8311:1: ( ( 'optional' ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8341:1: ( ( 'optional' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8342:1: ( 'optional' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8343:1: ( 'optional' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8344:1: 'optional'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8311:1: ( ( 'optional' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8312:1: ( 'optional' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
             }
-            match(input,59,FOLLOW_59_in_rule__SimpleAnnotationAttribute__OptionalAssignment_0_017093); if (state.failed) return ;
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8313:1: ( 'optional' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8314:1: 'optional'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
+            }
+            match(input,59,FOLLOW_59_in_rule__SimpleAnnotationAttribute__OptionalAssignment_0_017031); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
             }
@@ -23668,22 +23582,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__NameAssignment_2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8359:1: rule__SimpleAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8329:1: rule__SimpleAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__SimpleAnnotationAttribute__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8363:1: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8364:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8333:1: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8334:1: ( RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8364:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8365:1: RULE_ID
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8334:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8335:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleAnnotationAttribute__NameAssignment_217132); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleAnnotationAttribute__NameAssignment_217070); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -23709,22 +23623,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__TypeAssignment_4"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8374:1: rule__SimpleAnnotationAttribute__TypeAssignment_4 : ( ruleLiteralType ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8344:1: rule__SimpleAnnotationAttribute__TypeAssignment_4 : ( ruleLiteralType ) ;
     public final void rule__SimpleAnnotationAttribute__TypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8378:1: ( ( ruleLiteralType ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8379:1: ( ruleLiteralType )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8348:1: ( ( ruleLiteralType ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8349:1: ( ruleLiteralType )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8379:1: ( ruleLiteralType )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8380:1: ruleLiteralType
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8349:1: ( ruleLiteralType )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8350:1: ruleLiteralType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeLiteralTypeEnumRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleLiteralType_in_rule__SimpleAnnotationAttribute__TypeAssignment_417163);
+            pushFollow(FOLLOW_ruleLiteralType_in_rule__SimpleAnnotationAttribute__TypeAssignment_417101);
             ruleLiteralType();
 
             state._fsp--;
@@ -23754,28 +23668,28 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__OptionalAssignment_0_0"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8389:1: rule__EnumAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8359:1: rule__EnumAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
     public final void rule__EnumAnnotationAttribute__OptionalAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8393:1: ( ( ( 'optional' ) ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8394:1: ( ( 'optional' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8363:1: ( ( ( 'optional' ) ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8364:1: ( ( 'optional' ) )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8394:1: ( ( 'optional' ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8395:1: ( 'optional' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            }
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8396:1: ( 'optional' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8397:1: 'optional'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8364:1: ( ( 'optional' ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8365:1: ( 'optional' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
             }
-            match(input,59,FOLLOW_59_in_rule__EnumAnnotationAttribute__OptionalAssignment_0_017199); if (state.failed) return ;
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8366:1: ( 'optional' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8367:1: 'optional'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
+            }
+            match(input,59,FOLLOW_59_in_rule__EnumAnnotationAttribute__OptionalAssignment_0_017137); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
             }
@@ -23807,22 +23721,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__NameAssignment_2"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8412:1: rule__EnumAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8382:1: rule__EnumAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EnumAnnotationAttribute__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8416:1: ( ( RULE_ID ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8417:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8386:1: ( ( RULE_ID ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8387:1: ( RULE_ID )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8417:1: ( RULE_ID )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8418:1: RULE_ID
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8387:1: ( RULE_ID )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8388:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnumAnnotationAttribute__NameAssignment_217238); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnumAnnotationAttribute__NameAssignment_217176); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -23848,22 +23762,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__ValuesAssignment_5"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8427:1: rule__EnumAnnotationAttribute__ValuesAssignment_5 : ( RULE_STRING ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8397:1: rule__EnumAnnotationAttribute__ValuesAssignment_5 : ( RULE_STRING ) ;
     public final void rule__EnumAnnotationAttribute__ValuesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8431:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8432:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8401:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8402:1: ( RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8432:1: ( RULE_STRING )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8433:1: RULE_STRING
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8402:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8403:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_517269); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_517207); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0()); 
             }
@@ -23889,22 +23803,22 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__ValuesAssignment_6_1"
-    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8442:1: rule__EnumAnnotationAttribute__ValuesAssignment_6_1 : ( RULE_STRING ) ;
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8412:1: rule__EnumAnnotationAttribute__ValuesAssignment_6_1 : ( RULE_STRING ) ;
     public final void rule__EnumAnnotationAttribute__ValuesAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8446:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8447:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8416:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8417:1: ( RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8447:1: ( RULE_STRING )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8448:1: RULE_STRING
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8417:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8418:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_6_117300); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_6_117238); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0()); 
             }
@@ -23927,6 +23841,92 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
         return ;
     }
     // $ANTLR end "rule__EnumAnnotationAttribute__ValuesAssignment_6_1"
+
+
+    // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1_0_0"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8427:1: rule__Import__ImportedNamespaceAssignment_1_0_0 : ( ruleImportedFQN ) ;
+    public final void rule__Import__ImportedNamespaceAssignment_1_0_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8431:1: ( ( ruleImportedFQN ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8432:1: ( ruleImportedFQN )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8432:1: ( ruleImportedFQN )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8433:1: ruleImportedFQN
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
+            }
+            pushFollow(FOLLOW_ruleImportedFQN_in_rule__Import__ImportedNamespaceAssignment_1_0_017269);
+            ruleImportedFQN();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__ImportedNamespaceAssignment_1_0_0"
+
+
+    // $ANTLR start "rule__Import__ImportURIAssignment_2"
+    // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8442:1: rule__Import__ImportURIAssignment_2 : ( RULE_STRING ) ;
+    public final void rule__Import__ImportURIAssignment_2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8446:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8447:1: ( RULE_STRING )
+            {
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8447:1: ( RULE_STRING )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:8448:1: RULE_STRING
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+            }
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_217300); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__ImportURIAssignment_2"
 
 
     // $ANTLR start "rule__Documentation__LinesAssignment_2"
@@ -24327,78 +24327,78 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleRefSegment_in_entryRuleRefSegment1023 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRefSegment1030 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefSegment__Group__0_in_ruleRefSegment1056 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport1083 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport1090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport1116 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1143 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN1150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ImportedFQN__Group__0_in_ruleImportedFQN1176 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1203 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group__0_in_ruleFQN1236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue1265 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue1272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__0_in_ruleKeyValue1298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType1327 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationTargetType1334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotationTargetType1360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute1386 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationAttribute1393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AnnotationAttribute__Alternatives_in_ruleAnnotationAttribute1419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute1446 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute1453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__0_in_ruleSimpleAnnotationAttribute1479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute1506 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute1513 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__0_in_ruleEnumAnnotationAttribute1539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation1566 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation1573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__0_in_ruleDocumentation1599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTIME_in_entryRuleTIME1626 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTIME1633 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Alternatives_in_ruleTIME1659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral1688 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral1695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1748 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral1755 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__0_in_ruleBooleanLiteral1781 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1808 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral1815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumberLiteral__Alternatives_in_ruleNumberLiteral1841 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral1868 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral1875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RealLiteral__Group__0_in_ruleRealLiteral1901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral1928 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral1935 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IntLiteral__Group__0_in_ruleIntLiteral1961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral1988 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral1995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StringLiteral__Group__0_in_ruleStringLiteral2021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger2048 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInteger2055 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Integer__Alternatives_in_ruleInteger2081 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2113 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger2120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignedInteger__Group__0_in_ruleSignedInteger2150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2182 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal2189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal2219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal2245 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReal2252 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Real__Alternatives_in_ruleReal2278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal2310 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal2317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__0_in_ruleDecimal2347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal2379 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal2386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__0_in_ruleDotDecimal2416 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot2448 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot2455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__0_in_ruleDecimalDot2485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp2517 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp2524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__0_in_ruleDecimalExp2554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue1085 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue1092 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__0_in_ruleKeyValue1118 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType1147 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationTargetType1154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotationTargetType1180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute1206 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationAttribute1213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AnnotationAttribute__Alternatives_in_ruleAnnotationAttribute1239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute1266 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute1273 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__0_in_ruleSimpleAnnotationAttribute1299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute1326 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute1333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__0_in_ruleEnumAnnotationAttribute1359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport1386 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport1393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport1419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN1446 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN1453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ImportedFQN__Group__0_in_ruleImportedFQN1479 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation1506 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation1513 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__0_in_ruleDocumentation1539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTIME_in_entryRuleTIME1566 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTIME1573 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Alternatives_in_ruleTIME1599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral1628 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral1635 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1661 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral1688 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral1695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__0_in_ruleBooleanLiteral1721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1748 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral1755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumberLiteral__Alternatives_in_ruleNumberLiteral1781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral1808 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral1815 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RealLiteral__Group__0_in_ruleRealLiteral1841 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral1868 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral1875 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IntLiteral__Group__0_in_ruleIntLiteral1901 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral1928 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral1935 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StringLiteral__Group__0_in_ruleStringLiteral1961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger1988 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInteger1995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Integer__Alternatives_in_ruleInteger2021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger2053 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger2060 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SignedInteger__Group__0_in_ruleSignedInteger2090 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal2122 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal2129 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal2159 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal2185 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReal2192 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Real__Alternatives_in_ruleReal2218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal2250 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal2257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__0_in_ruleDecimal2287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal2319 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal2326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__0_in_ruleDotDecimal2356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot2388 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot2395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__0_in_ruleDecimalDot2425 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp2457 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp2464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__0_in_ruleDecimalExp2494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN2521 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN2528 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group__0_in_ruleFQN2554 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LiteralType__Alternatives_in_ruleLiteralType2591 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSubSystemConfig_in_rule__ConfigElement__Alternatives2626 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleActorClassConfig_in_rule__ConfigElement__Alternatives2643 = new BitSet(new long[]{0x0000000000000002L});
@@ -24412,14 +24412,14 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_15_in_rule__AttrInstanceConfig__Alternatives_3_1_0_12835 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLiteralConfigValue_in_rule__ConfigValue__Alternatives2869 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnumConfigValue_in_rule__ConfigValue__Alternatives2886 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group_1_0__0_in_rule__Import__Alternatives_12918 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Import__Alternatives_12937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__OptionalAssignment_0_0_in_rule__SimpleAnnotationAttribute__Alternatives_03021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__SimpleAnnotationAttribute__Alternatives_03040 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__OptionalAssignment_0_0_in_rule__EnumAnnotationAttribute__Alternatives_03074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__EnumAnnotationAttribute__Alternatives_03093 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_rule__AnnotationAttribute__Alternatives2936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__OptionalAssignment_0_0_in_rule__SimpleAnnotationAttribute__Alternatives_02968 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__SimpleAnnotationAttribute__Alternatives_02987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__OptionalAssignment_0_0_in_rule__EnumAnnotationAttribute__Alternatives_03021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__EnumAnnotationAttribute__Alternatives_03040 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group_1_0__0_in_rule__Import__Alternatives_13074 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Import__Alternatives_13093 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TIME__Group_0__0_in_rule__TIME__Alternatives3127 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TIME__Group_1__0_in_rule__TIME__Alternatives3145 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TIME__Group_2__0_in_rule__TIME__Alternatives3163 = new BitSet(new long[]{0x0000000000000002L});
@@ -24457,13 +24457,13 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ConfigModel__Group__1__Impl_in_rule__ConfigModel__Group__13948 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_rule__ConfigModel__Group__2_in_rule__ConfigModel__Group__13951 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ConfigModel__NameAssignment_1_in_rule__ConfigModel__Group__1__Impl3978 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConfigModel__Group__2__Impl_in_rule__ConfigModel__Group__24008 = new BitSet(new long[]{0x0001003818000000L});
+    public static final BitSet FOLLOW_rule__ConfigModel__Group__2__Impl_in_rule__ConfigModel__Group__24008 = new BitSet(new long[]{0x0002003818000000L});
     public static final BitSet FOLLOW_rule__ConfigModel__Group__3_in_rule__ConfigModel__Group__24011 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_26_in_rule__ConfigModel__Group__2__Impl4039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConfigModel__Group__3__Impl_in_rule__ConfigModel__Group__34070 = new BitSet(new long[]{0x0001003818000000L});
+    public static final BitSet FOLLOW_rule__ConfigModel__Group__3__Impl_in_rule__ConfigModel__Group__34070 = new BitSet(new long[]{0x0002003818000000L});
     public static final BitSet FOLLOW_rule__ConfigModel__Group__4_in_rule__ConfigModel__Group__34073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConfigModel__ImportsAssignment_3_in_rule__ConfigModel__Group__3__Impl4100 = new BitSet(new long[]{0x0001000000000002L});
-    public static final BitSet FOLLOW_rule__ConfigModel__Group__4__Impl_in_rule__ConfigModel__Group__44131 = new BitSet(new long[]{0x0001003818000000L});
+    public static final BitSet FOLLOW_rule__ConfigModel__ImportsAssignment_3_in_rule__ConfigModel__Group__3__Impl4100 = new BitSet(new long[]{0x0002000000000002L});
+    public static final BitSet FOLLOW_rule__ConfigModel__Group__4__Impl_in_rule__ConfigModel__Group__44131 = new BitSet(new long[]{0x0002003818000000L});
     public static final BitSet FOLLOW_rule__ConfigModel__Group__5_in_rule__ConfigModel__Group__44134 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ConfigModel__ConfigElementsAssignment_4_in_rule__ConfigModel__Group__4__Impl4161 = new BitSet(new long[]{0x0000003810000002L});
     public static final BitSet FOLLOW_rule__ConfigModel__Group__5__Impl_in_rule__ConfigModel__Group__54192 = new BitSet(new long[]{0x0000000000000002L});
@@ -24735,176 +24735,176 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_47_in_rule__RefSegment__Group_1__0__Impl10381 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefSegment__Group_1__1__Impl_in_rule__RefSegment__Group_1__110412 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefSegment__IdxAssignment_1_1_in_rule__RefSegment__Group_1__1__Impl10439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__010473 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__010476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__Import__Group__0__Impl10504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__110535 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__Import__Group__2_in_rule__Import__Group__110538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Alternatives_1_in_rule__Import__Group__1__Impl10565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__2__Impl_in_rule__Import__Group__210595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__ImportURIAssignment_2_in_rule__Import__Group__2__Impl10622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group_1_0__0__Impl_in_rule__Import__Group_1_0__010658 = new BitSet(new long[]{0x0002000000000000L});
-    public static final BitSet FOLLOW_rule__Import__Group_1_0__1_in_rule__Import__Group_1_0__010661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__ImportedNamespaceAssignment_1_0_0_in_rule__Import__Group_1_0__0__Impl10688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group_1_0__1__Impl_in_rule__Import__Group_1_0__110718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__Import__Group_1_0__1__Impl10746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ImportedFQN__Group__0__Impl_in_rule__ImportedFQN__Group__010781 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_rule__ImportedFQN__Group__1_in_rule__ImportedFQN__Group__010784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_rule__ImportedFQN__Group__0__Impl10811 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ImportedFQN__Group__1__Impl_in_rule__ImportedFQN__Group__110840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_rule__ImportedFQN__Group__1__Impl10869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__010906 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__010909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl10936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__110965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl10992 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__011027 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__011030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__FQN__Group_1__0__Impl11058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__111089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl11116 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__0__Impl_in_rule__KeyValue__Group__011152 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__1_in_rule__KeyValue__Group__011155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__KeyAssignment_0_in_rule__KeyValue__Group__0__Impl11182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__1__Impl_in_rule__KeyValue__Group__111212 = new BitSet(new long[]{0x10004000001C0160L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__2_in_rule__KeyValue__Group__111215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__KeyValue__Group__1__Impl11243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__Group__2__Impl_in_rule__KeyValue__Group__211274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__KeyValue__ValueAssignment_2_in_rule__KeyValue__Group__2__Impl11301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__0__Impl_in_rule__SimpleAnnotationAttribute__Group__011340 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__1_in_rule__SimpleAnnotationAttribute__Group__011343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Alternatives_0_in_rule__SimpleAnnotationAttribute__Group__0__Impl11370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__1__Impl_in_rule__SimpleAnnotationAttribute__Group__111400 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__2_in_rule__SimpleAnnotationAttribute__Group__111403 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__SimpleAnnotationAttribute__Group__1__Impl11431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__2__Impl_in_rule__SimpleAnnotationAttribute__Group__211462 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__3_in_rule__SimpleAnnotationAttribute__Group__211465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__NameAssignment_2_in_rule__SimpleAnnotationAttribute__Group__2__Impl11492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__3__Impl_in_rule__SimpleAnnotationAttribute__Group__311522 = new BitSet(new long[]{0x0000000001E00000L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__4_in_rule__SimpleAnnotationAttribute__Group__311525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__SimpleAnnotationAttribute__Group__3__Impl11553 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__4__Impl_in_rule__SimpleAnnotationAttribute__Group__411584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__TypeAssignment_4_in_rule__SimpleAnnotationAttribute__Group__4__Impl11611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__0__Impl_in_rule__EnumAnnotationAttribute__Group__011651 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__1_in_rule__EnumAnnotationAttribute__Group__011654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Alternatives_0_in_rule__EnumAnnotationAttribute__Group__0__Impl11681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__1__Impl_in_rule__EnumAnnotationAttribute__Group__111711 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__2_in_rule__EnumAnnotationAttribute__Group__111714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__EnumAnnotationAttribute__Group__1__Impl11742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__2__Impl_in_rule__EnumAnnotationAttribute__Group__211773 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__3_in_rule__EnumAnnotationAttribute__Group__211776 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__NameAssignment_2_in_rule__EnumAnnotationAttribute__Group__2__Impl11803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__3__Impl_in_rule__EnumAnnotationAttribute__Group__311833 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__4_in_rule__EnumAnnotationAttribute__Group__311836 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__EnumAnnotationAttribute__Group__3__Impl11864 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__4__Impl_in_rule__EnumAnnotationAttribute__Group__411895 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__5_in_rule__EnumAnnotationAttribute__Group__411898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__EnumAnnotationAttribute__Group__4__Impl11926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__5__Impl_in_rule__EnumAnnotationAttribute__Group__511957 = new BitSet(new long[]{0x0000200008000000L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__6_in_rule__EnumAnnotationAttribute__Group__511960 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_5_in_rule__EnumAnnotationAttribute__Group__5__Impl11987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__6__Impl_in_rule__EnumAnnotationAttribute__Group__612017 = new BitSet(new long[]{0x0000200008000000L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__7_in_rule__EnumAnnotationAttribute__Group__612020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__0_in_rule__EnumAnnotationAttribute__Group__6__Impl12047 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__7__Impl_in_rule__EnumAnnotationAttribute__Group__712078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__EnumAnnotationAttribute__Group__7__Impl12106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__0__Impl_in_rule__EnumAnnotationAttribute__Group_6__012153 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__1_in_rule__EnumAnnotationAttribute__Group_6__012156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__EnumAnnotationAttribute__Group_6__0__Impl12184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__1__Impl_in_rule__EnumAnnotationAttribute__Group_6__112215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_6_1_in_rule__EnumAnnotationAttribute__Group_6__1__Impl12242 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__0__Impl_in_rule__Documentation__Group__012276 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__1_in_rule__Documentation__Group__012279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__1__Impl_in_rule__Documentation__Group__112337 = new BitSet(new long[]{0x0020000000000100L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__2_in_rule__Documentation__Group__112340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__Documentation__Group__1__Impl12368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__2__Impl_in_rule__Documentation__Group__212399 = new BitSet(new long[]{0x0020000000000100L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__3_in_rule__Documentation__Group__212402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Documentation__LinesAssignment_2_in_rule__Documentation__Group__2__Impl12429 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_rule__Documentation__Group__3__Impl_in_rule__Documentation__Group__312460 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__Documentation__Group__3__Impl12488 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_0__0__Impl_in_rule__TIME__Group_0__012527 = new BitSet(new long[]{0x0040000000000000L});
-    public static final BitSet FOLLOW_rule__TIME__Group_0__1_in_rule__TIME__Group_0__012530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_0__0__Impl12557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_0__1__Impl_in_rule__TIME__Group_0__112586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_rule__TIME__Group_0__1__Impl12614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_1__0__Impl_in_rule__TIME__Group_1__012649 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__TIME__Group_1__1_in_rule__TIME__Group_1__012652 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_1__0__Impl12679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_1__1__Impl_in_rule__TIME__Group_1__112708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__TIME__Group_1__1__Impl12736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_2__0__Impl_in_rule__TIME__Group_2__012771 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_rule__TIME__Group_2__1_in_rule__TIME__Group_2__012774 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_2__0__Impl12801 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_2__1__Impl_in_rule__TIME__Group_2__112830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__TIME__Group_2__1__Impl12858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_3__0__Impl_in_rule__TIME__Group_3__012893 = new BitSet(new long[]{0x0200000000000000L});
-    public static final BitSet FOLLOW_rule__TIME__Group_3__1_in_rule__TIME__Group_3__012896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_3__0__Impl12923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIME__Group_3__1__Impl_in_rule__TIME__Group_3__112952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_rule__TIME__Group_3__1__Impl12980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__0__Impl_in_rule__BooleanLiteral__Group__013017 = new BitSet(new long[]{0x1000000000040000L});
-    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__1_in_rule__BooleanLiteral__Group__013020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__1__Impl_in_rule__BooleanLiteral__Group__113078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__BooleanLiteral__Alternatives_1_in_rule__BooleanLiteral__Group__1__Impl13105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RealLiteral__Group__0__Impl_in_rule__RealLiteral__Group__013139 = new BitSet(new long[]{0x0000400000180060L});
-    public static final BitSet FOLLOW_rule__RealLiteral__Group__1_in_rule__RealLiteral__Group__013142 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RealLiteral__Group__1__Impl_in_rule__RealLiteral__Group__113200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RealLiteral__ValueAssignment_1_in_rule__RealLiteral__Group__1__Impl13227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IntLiteral__Group__0__Impl_in_rule__IntLiteral__Group__013261 = new BitSet(new long[]{0x0000000000180060L});
-    public static final BitSet FOLLOW_rule__IntLiteral__Group__1_in_rule__IntLiteral__Group__013264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IntLiteral__Group__1__Impl_in_rule__IntLiteral__Group__113322 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IntLiteral__ValueAssignment_1_in_rule__IntLiteral__Group__1__Impl13349 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StringLiteral__Group__0__Impl_in_rule__StringLiteral__Group__013383 = new BitSet(new long[]{0x10004000001C0160L});
-    public static final BitSet FOLLOW_rule__StringLiteral__Group__1_in_rule__StringLiteral__Group__013386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StringLiteral__Group__1__Impl_in_rule__StringLiteral__Group__113444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StringLiteral__ValueAssignment_1_in_rule__StringLiteral__Group__1__Impl13471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignedInteger__Group__0__Impl_in_rule__SignedInteger__Group__013505 = new BitSet(new long[]{0x0000000000180040L});
-    public static final BitSet FOLLOW_rule__SignedInteger__Group__1_in_rule__SignedInteger__Group__013508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignedInteger__Alternatives_0_in_rule__SignedInteger__Group__0__Impl13535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignedInteger__Group__1__Impl_in_rule__SignedInteger__Group__113566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__SignedInteger__Group__1__Impl13593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__0__Impl_in_rule__Decimal__Group__013626 = new BitSet(new long[]{0x0000000000180040L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__1_in_rule__Decimal__Group__013629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Alternatives_0_in_rule__Decimal__Group__0__Impl13656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__1__Impl_in_rule__Decimal__Group__113687 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__2_in_rule__Decimal__Group__113690 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Decimal__Group__1__Impl13717 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__2__Impl_in_rule__Decimal__Group__213746 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__3_in_rule__Decimal__Group__213749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__Decimal__Group__2__Impl13777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Decimal__Group__3__Impl_in_rule__Decimal__Group__313808 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Decimal__Group__3__Impl13835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__0__Impl_in_rule__DotDecimal__Group__013872 = new BitSet(new long[]{0x0000400000180000L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__1_in_rule__DotDecimal__Group__013875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Alternatives_0_in_rule__DotDecimal__Group__0__Impl13902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__1__Impl_in_rule__DotDecimal__Group__113933 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__2_in_rule__DotDecimal__Group__113936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__DotDecimal__Group__1__Impl13964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DotDecimal__Group__2__Impl_in_rule__DotDecimal__Group__213995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__DotDecimal__Group__2__Impl14022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__0__Impl_in_rule__DecimalDot__Group__014057 = new BitSet(new long[]{0x0000000000180040L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__1_in_rule__DecimalDot__Group__014060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Alternatives_0_in_rule__DecimalDot__Group__0__Impl14087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__1__Impl_in_rule__DecimalDot__Group__114118 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__2_in_rule__DecimalDot__Group__114121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalDot__Group__1__Impl14148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalDot__Group__2__Impl_in_rule__DecimalDot__Group__214177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__DecimalDot__Group__2__Impl14205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__0__Impl_in_rule__DecimalExp__Group__014242 = new BitSet(new long[]{0x0000400000180060L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__1_in_rule__DecimalExp__Group__014245 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Alternatives_0_in_rule__DecimalExp__Group__0__Impl14272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__1__Impl_in_rule__DecimalExp__Group__114303 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__2_in_rule__DecimalExp__Group__114306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalExp__Group__1__Impl14333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__2__Impl_in_rule__DecimalExp__Group__214362 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__3_in_rule__DecimalExp__Group__214365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__DecimalExp__Group__2__Impl14393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__3__Impl_in_rule__DecimalExp__Group__314424 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__4_in_rule__DecimalExp__Group__314427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalExp__Group__3__Impl14454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DecimalExp__Group__4__Impl_in_rule__DecimalExp__Group__414483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EXP_in_rule__DecimalExp__Group__4__Impl14510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__0__Impl_in_rule__KeyValue__Group__010476 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__1_in_rule__KeyValue__Group__010479 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__KeyAssignment_0_in_rule__KeyValue__Group__0__Impl10506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__1__Impl_in_rule__KeyValue__Group__110536 = new BitSet(new long[]{0x10004000001C0160L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__2_in_rule__KeyValue__Group__110539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__KeyValue__Group__1__Impl10567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__Group__2__Impl_in_rule__KeyValue__Group__210598 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__KeyValue__ValueAssignment_2_in_rule__KeyValue__Group__2__Impl10625 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__0__Impl_in_rule__SimpleAnnotationAttribute__Group__010664 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__1_in_rule__SimpleAnnotationAttribute__Group__010667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Alternatives_0_in_rule__SimpleAnnotationAttribute__Group__0__Impl10694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__1__Impl_in_rule__SimpleAnnotationAttribute__Group__110724 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__2_in_rule__SimpleAnnotationAttribute__Group__110727 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__SimpleAnnotationAttribute__Group__1__Impl10755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__2__Impl_in_rule__SimpleAnnotationAttribute__Group__210786 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__3_in_rule__SimpleAnnotationAttribute__Group__210789 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__NameAssignment_2_in_rule__SimpleAnnotationAttribute__Group__2__Impl10816 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__3__Impl_in_rule__SimpleAnnotationAttribute__Group__310846 = new BitSet(new long[]{0x0000000001E00000L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__4_in_rule__SimpleAnnotationAttribute__Group__310849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__SimpleAnnotationAttribute__Group__3__Impl10877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__Group__4__Impl_in_rule__SimpleAnnotationAttribute__Group__410908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleAnnotationAttribute__TypeAssignment_4_in_rule__SimpleAnnotationAttribute__Group__4__Impl10935 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__0__Impl_in_rule__EnumAnnotationAttribute__Group__010975 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__1_in_rule__EnumAnnotationAttribute__Group__010978 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Alternatives_0_in_rule__EnumAnnotationAttribute__Group__0__Impl11005 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__1__Impl_in_rule__EnumAnnotationAttribute__Group__111035 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__2_in_rule__EnumAnnotationAttribute__Group__111038 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__EnumAnnotationAttribute__Group__1__Impl11066 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__2__Impl_in_rule__EnumAnnotationAttribute__Group__211097 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__3_in_rule__EnumAnnotationAttribute__Group__211100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__NameAssignment_2_in_rule__EnumAnnotationAttribute__Group__2__Impl11127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__3__Impl_in_rule__EnumAnnotationAttribute__Group__311157 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__4_in_rule__EnumAnnotationAttribute__Group__311160 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__EnumAnnotationAttribute__Group__3__Impl11188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__4__Impl_in_rule__EnumAnnotationAttribute__Group__411219 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__5_in_rule__EnumAnnotationAttribute__Group__411222 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__EnumAnnotationAttribute__Group__4__Impl11250 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__5__Impl_in_rule__EnumAnnotationAttribute__Group__511281 = new BitSet(new long[]{0x0000200008000000L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__6_in_rule__EnumAnnotationAttribute__Group__511284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_5_in_rule__EnumAnnotationAttribute__Group__5__Impl11311 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__6__Impl_in_rule__EnumAnnotationAttribute__Group__611341 = new BitSet(new long[]{0x0000200008000000L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__7_in_rule__EnumAnnotationAttribute__Group__611344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__0_in_rule__EnumAnnotationAttribute__Group__6__Impl11371 = new BitSet(new long[]{0x0000200000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group__7__Impl_in_rule__EnumAnnotationAttribute__Group__711402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__EnumAnnotationAttribute__Group__7__Impl11430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__0__Impl_in_rule__EnumAnnotationAttribute__Group_6__011477 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__1_in_rule__EnumAnnotationAttribute__Group_6__011480 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__EnumAnnotationAttribute__Group_6__0__Impl11508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__Group_6__1__Impl_in_rule__EnumAnnotationAttribute__Group_6__111539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumAnnotationAttribute__ValuesAssignment_6_1_in_rule__EnumAnnotationAttribute__Group_6__1__Impl11566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__011600 = new BitSet(new long[]{0x0000000000020010L});
+    public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__011603 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_rule__Import__Group__0__Impl11631 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__111662 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__Import__Group__2_in_rule__Import__Group__111665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Alternatives_1_in_rule__Import__Group__1__Impl11692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group__2__Impl_in_rule__Import__Group__211722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__ImportURIAssignment_2_in_rule__Import__Group__2__Impl11749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group_1_0__0__Impl_in_rule__Import__Group_1_0__011785 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_rule__Import__Group_1_0__1_in_rule__Import__Group_1_0__011788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__ImportedNamespaceAssignment_1_0_0_in_rule__Import__Group_1_0__0__Impl11815 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group_1_0__1__Impl_in_rule__Import__Group_1_0__111845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__Import__Group_1_0__1__Impl11873 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ImportedFQN__Group__0__Impl_in_rule__ImportedFQN__Group__011908 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_rule__ImportedFQN__Group__1_in_rule__ImportedFQN__Group__011911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_rule__ImportedFQN__Group__0__Impl11938 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ImportedFQN__Group__1__Impl_in_rule__ImportedFQN__Group__111967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__ImportedFQN__Group__1__Impl11996 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__0__Impl_in_rule__Documentation__Group__012033 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__1_in_rule__Documentation__Group__012036 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__1__Impl_in_rule__Documentation__Group__112094 = new BitSet(new long[]{0x0020000000000100L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__2_in_rule__Documentation__Group__112097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_rule__Documentation__Group__1__Impl12125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__2__Impl_in_rule__Documentation__Group__212156 = new BitSet(new long[]{0x0020000000000100L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__3_in_rule__Documentation__Group__212159 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Documentation__LinesAssignment_2_in_rule__Documentation__Group__2__Impl12186 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_rule__Documentation__Group__3__Impl_in_rule__Documentation__Group__312217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__Documentation__Group__3__Impl12245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_0__0__Impl_in_rule__TIME__Group_0__012284 = new BitSet(new long[]{0x0040000000000000L});
+    public static final BitSet FOLLOW_rule__TIME__Group_0__1_in_rule__TIME__Group_0__012287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_0__0__Impl12314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_0__1__Impl_in_rule__TIME__Group_0__112343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_rule__TIME__Group_0__1__Impl12371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_1__0__Impl_in_rule__TIME__Group_1__012406 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_rule__TIME__Group_1__1_in_rule__TIME__Group_1__012409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_1__0__Impl12436 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_1__1__Impl_in_rule__TIME__Group_1__112465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__TIME__Group_1__1__Impl12493 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_2__0__Impl_in_rule__TIME__Group_2__012528 = new BitSet(new long[]{0x0100000000000000L});
+    public static final BitSet FOLLOW_rule__TIME__Group_2__1_in_rule__TIME__Group_2__012531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_2__0__Impl12558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_2__1__Impl_in_rule__TIME__Group_2__112587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__TIME__Group_2__1__Impl12615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_3__0__Impl_in_rule__TIME__Group_3__012650 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_rule__TIME__Group_3__1_in_rule__TIME__Group_3__012653 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__TIME__Group_3__0__Impl12680 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TIME__Group_3__1__Impl_in_rule__TIME__Group_3__112709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_rule__TIME__Group_3__1__Impl12737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__0__Impl_in_rule__BooleanLiteral__Group__012774 = new BitSet(new long[]{0x1000000000040000L});
+    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__1_in_rule__BooleanLiteral__Group__012777 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanLiteral__Group__1__Impl_in_rule__BooleanLiteral__Group__112835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__BooleanLiteral__Alternatives_1_in_rule__BooleanLiteral__Group__1__Impl12862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RealLiteral__Group__0__Impl_in_rule__RealLiteral__Group__012896 = new BitSet(new long[]{0x0000400000180060L});
+    public static final BitSet FOLLOW_rule__RealLiteral__Group__1_in_rule__RealLiteral__Group__012899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RealLiteral__Group__1__Impl_in_rule__RealLiteral__Group__112957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RealLiteral__ValueAssignment_1_in_rule__RealLiteral__Group__1__Impl12984 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IntLiteral__Group__0__Impl_in_rule__IntLiteral__Group__013018 = new BitSet(new long[]{0x0000000000180060L});
+    public static final BitSet FOLLOW_rule__IntLiteral__Group__1_in_rule__IntLiteral__Group__013021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IntLiteral__Group__1__Impl_in_rule__IntLiteral__Group__113079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IntLiteral__ValueAssignment_1_in_rule__IntLiteral__Group__1__Impl13106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StringLiteral__Group__0__Impl_in_rule__StringLiteral__Group__013140 = new BitSet(new long[]{0x10004000001C0160L});
+    public static final BitSet FOLLOW_rule__StringLiteral__Group__1_in_rule__StringLiteral__Group__013143 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StringLiteral__Group__1__Impl_in_rule__StringLiteral__Group__113201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StringLiteral__ValueAssignment_1_in_rule__StringLiteral__Group__1__Impl13228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SignedInteger__Group__0__Impl_in_rule__SignedInteger__Group__013262 = new BitSet(new long[]{0x0000000000180040L});
+    public static final BitSet FOLLOW_rule__SignedInteger__Group__1_in_rule__SignedInteger__Group__013265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SignedInteger__Alternatives_0_in_rule__SignedInteger__Group__0__Impl13292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SignedInteger__Group__1__Impl_in_rule__SignedInteger__Group__113323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__SignedInteger__Group__1__Impl13350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__0__Impl_in_rule__Decimal__Group__013383 = new BitSet(new long[]{0x0000000000180040L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__1_in_rule__Decimal__Group__013386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Alternatives_0_in_rule__Decimal__Group__0__Impl13413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__1__Impl_in_rule__Decimal__Group__113444 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__2_in_rule__Decimal__Group__113447 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Decimal__Group__1__Impl13474 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__2__Impl_in_rule__Decimal__Group__213503 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__3_in_rule__Decimal__Group__213506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__Decimal__Group__2__Impl13534 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Decimal__Group__3__Impl_in_rule__Decimal__Group__313565 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Decimal__Group__3__Impl13592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__0__Impl_in_rule__DotDecimal__Group__013629 = new BitSet(new long[]{0x0000400000180000L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__1_in_rule__DotDecimal__Group__013632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Alternatives_0_in_rule__DotDecimal__Group__0__Impl13659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__1__Impl_in_rule__DotDecimal__Group__113690 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__2_in_rule__DotDecimal__Group__113693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__DotDecimal__Group__1__Impl13721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DotDecimal__Group__2__Impl_in_rule__DotDecimal__Group__213752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__DotDecimal__Group__2__Impl13779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__0__Impl_in_rule__DecimalDot__Group__013814 = new BitSet(new long[]{0x0000000000180040L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__1_in_rule__DecimalDot__Group__013817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Alternatives_0_in_rule__DecimalDot__Group__0__Impl13844 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__1__Impl_in_rule__DecimalDot__Group__113875 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__2_in_rule__DecimalDot__Group__113878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalDot__Group__1__Impl13905 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalDot__Group__2__Impl_in_rule__DecimalDot__Group__213934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__DecimalDot__Group__2__Impl13962 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__0__Impl_in_rule__DecimalExp__Group__013999 = new BitSet(new long[]{0x0000400000180060L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__1_in_rule__DecimalExp__Group__014002 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Alternatives_0_in_rule__DecimalExp__Group__0__Impl14029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__1__Impl_in_rule__DecimalExp__Group__114060 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__2_in_rule__DecimalExp__Group__114063 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalExp__Group__1__Impl14090 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__2__Impl_in_rule__DecimalExp__Group__214119 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__3_in_rule__DecimalExp__Group__214122 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__DecimalExp__Group__2__Impl14150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__3__Impl_in_rule__DecimalExp__Group__314181 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__4_in_rule__DecimalExp__Group__314184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__DecimalExp__Group__3__Impl14211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DecimalExp__Group__4__Impl_in_rule__DecimalExp__Group__414240 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EXP_in_rule__DecimalExp__Group__4__Impl14267 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__014306 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__014309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl14336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__114365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl14392 = new BitSet(new long[]{0x0000400000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__014427 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__014430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__FQN__Group_1__0__Impl14458 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__114489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl14516 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DynamicConfig__UnorderedGroup_2__0_in_rule__DynamicConfig__UnorderedGroup_214550 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DynamicConfig__Alternatives_2_0_in_rule__DynamicConfig__UnorderedGroup_2__Impl14639 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DynamicConfig__Group_2_1__0_in_rule__DynamicConfig__UnorderedGroup_2__Impl14730 = new BitSet(new long[]{0x0000000000000002L});
@@ -24967,17 +24967,17 @@ public class InternalConfigParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleRefSegment_in_rule__RefPath__RefsAssignment_1_116862 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__RefSegment__RefAssignment_016893 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_INT_in_rule__RefSegment__IdxAssignment_1_116924 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_rule__Import__ImportedNamespaceAssignment_1_0_016955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_216986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__KeyValue__KeyAssignment_017020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rule__KeyValue__ValueAssignment_217051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rule__SimpleAnnotationAttribute__OptionalAssignment_0_017093 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleAnnotationAttribute__NameAssignment_217132 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteralType_in_rule__SimpleAnnotationAttribute__TypeAssignment_417163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rule__EnumAnnotationAttribute__OptionalAssignment_0_017199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EnumAnnotationAttribute__NameAssignment_217238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_517269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_6_117300 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__KeyValue__KeyAssignment_016958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rule__KeyValue__ValueAssignment_216989 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_rule__SimpleAnnotationAttribute__OptionalAssignment_0_017031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleAnnotationAttribute__NameAssignment_217070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteralType_in_rule__SimpleAnnotationAttribute__TypeAssignment_417101 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_rule__EnumAnnotationAttribute__OptionalAssignment_0_017137 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__EnumAnnotationAttribute__NameAssignment_217176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_517207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__EnumAnnotationAttribute__ValuesAssignment_6_117238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_rule__Import__ImportedNamespaceAssignment_1_0_017269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_217300 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_rule__Documentation__LinesAssignment_217331 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_60_in_rule__BooleanLiteral__IsTrueAssignment_1_117369 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleReal_in_rule__RealLiteral__ValueAssignment_117408 = new BitSet(new long[]{0x0000000000000002L});

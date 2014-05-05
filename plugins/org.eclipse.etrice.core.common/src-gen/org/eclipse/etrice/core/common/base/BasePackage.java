@@ -316,6 +316,43 @@ public interface BasePackage extends EPackage
   int ENUM_ANNOTATION_ATTRIBUTE_FEATURE_COUNT = ANNOTATION_ATTRIBUTE_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.common.base.impl.ImportImpl <em>Import</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.common.base.impl.ImportImpl
+   * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getImport()
+   * @generated
+   */
+  int IMPORT = 6;
+
+  /**
+   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORTED_NAMESPACE = 0;
+
+  /**
+   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT__IMPORT_URI = 1;
+
+  /**
+   * The number of structural features of the '<em>Import</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.common.base.impl.DocumentationImpl <em>Documentation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -323,7 +360,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getDocumentation()
    * @generated
    */
-  int DOCUMENTATION = 6;
+  int DOCUMENTATION = 7;
 
   /**
    * The feature id for the '<em><b>Lines</b></em>' attribute list.
@@ -351,7 +388,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getLiteralArray()
    * @generated
    */
-  int LITERAL_ARRAY = 7;
+  int LITERAL_ARRAY = 8;
 
   /**
    * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -379,7 +416,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 8;
+  int LITERAL = 9;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -398,7 +435,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 9;
+  int BOOLEAN_LITERAL = 10;
 
   /**
    * The feature id for the '<em><b>Is True</b></em>' attribute.
@@ -426,7 +463,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 10;
+  int NUMBER_LITERAL = 11;
 
   /**
    * The number of structural features of the '<em>Number Literal</em>' class.
@@ -445,7 +482,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getRealLiteral()
    * @generated
    */
-  int REAL_LITERAL = 11;
+  int REAL_LITERAL = 12;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -473,7 +510,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 12;
+  int INT_LITERAL = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -501,7 +538,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 13;
+  int STRING_LITERAL = 14;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -529,7 +566,7 @@ public interface BasePackage extends EPackage
    * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getLiteralType()
    * @generated
    */
-  int LITERAL_TYPE = 14;
+  int LITERAL_TYPE = 15;
 
 
   /**
@@ -723,6 +760,38 @@ public interface BasePackage extends EPackage
    * @generated
    */
   EAttribute getEnumAnnotationAttribute_Values();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.common.base.Import <em>Import</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Import</em>'.
+   * @see org.eclipse.etrice.core.common.base.Import
+   * @generated
+   */
+  EClass getImport();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.common.base.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+   * @see org.eclipse.etrice.core.common.base.Import#getImportedNamespace()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportedNamespace();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.common.base.Import#getImportURI <em>Import URI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Import URI</em>'.
+   * @see org.eclipse.etrice.core.common.base.Import#getImportURI()
+   * @see #getImport()
+   * @generated
+   */
+  EAttribute getImport_ImportURI();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.common.base.Documentation <em>Documentation</em>}'.
@@ -1058,6 +1127,32 @@ public interface BasePackage extends EPackage
      * @generated
      */
     EAttribute ENUM_ANNOTATION_ATTRIBUTE__VALUES = eINSTANCE.getEnumAnnotationAttribute_Values();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.common.base.impl.ImportImpl <em>Import</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.common.base.impl.ImportImpl
+     * @see org.eclipse.etrice.core.common.base.impl.BasePackageImpl#getImport()
+     * @generated
+     */
+    EClass IMPORT = eINSTANCE.getImport();
+
+    /**
+     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+    /**
+     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPORT__IMPORT_URI = eINSTANCE.getImport_ImportURI();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.common.base.impl.DocumentationImpl <em>Documentation</em>}' class.

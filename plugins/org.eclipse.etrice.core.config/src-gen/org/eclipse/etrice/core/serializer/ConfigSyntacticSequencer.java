@@ -71,7 +71,7 @@ public class ConfigSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     'conjugated' | 'conjugate'
+	 *     'conjugate' | 'conjugated'
 	 */
 	protected void emit_ProtocolClassConfig_ConjugateKeyword_3_1_0_0_or_ConjugatedKeyword_3_1_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

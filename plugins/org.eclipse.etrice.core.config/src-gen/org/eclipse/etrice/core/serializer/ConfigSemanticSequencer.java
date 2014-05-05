@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.LiteralArray;
@@ -25,7 +26,6 @@ import org.eclipse.etrice.core.config.ConfigPackage;
 import org.eclipse.etrice.core.config.ConfigValueArray;
 import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.EnumConfigValue;
-import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
@@ -81,6 +81,12 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				if(context == grammarAccess.getAnnotationAttributeRule() ||
 				   context == grammarAccess.getEnumAnnotationAttributeRule()) {
 					sequence_EnumAnnotationAttribute(context, (EnumAnnotationAttribute) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.IMPORT:
+				if(context == grammarAccess.getImportRule()) {
+					sequence_Import(context, (Import) semanticObject); 
 					return; 
 				}
 				else break;
@@ -178,12 +184,6 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				if(context == grammarAccess.getConfigValueRule() ||
 				   context == grammarAccess.getEnumConfigValueRule()) {
 					sequence_EnumConfigValue(context, (EnumConfigValue) semanticObject); 
-					return; 
-				}
-				else break;
-			case ConfigPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
 					return; 
 				}
 				else break;
@@ -315,15 +315,6 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 		feeder.accept(grammarAccess.getEnumConfigValueAccess().getTypeEnumerationTypeIDTerminalRuleCall_0_0_1(), semanticObject.getType());
 		feeder.accept(grammarAccess.getEnumConfigValueAccess().getValueEnumLiteralIDTerminalRuleCall_2_0_1(), semanticObject.getValue());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (importedNamespace=ImportedFQN? importURI=STRING)
-	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

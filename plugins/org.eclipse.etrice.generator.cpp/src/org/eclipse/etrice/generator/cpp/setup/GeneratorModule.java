@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.cpp.setup;
 
-import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;

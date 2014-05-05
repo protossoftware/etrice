@@ -152,10 +152,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:14:7: ( 'model' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:14:9: 'model'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:14:7: ( 'mandatory' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:14:9: 'mandatory'
             {
-            match("model"); 
+            match("mandatory"); 
 
 
             }
@@ -173,10 +173,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:15:7: ( 'mandatory' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:15:9: 'mandatory'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:15:7: ( 'model' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:15:9: 'model'
             {
-            match("mandatory"); 
+            match("model"); 
 
 
             }
@@ -815,10 +815,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:7: ( 'import' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:9: 'import'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:7: ( 'attribute' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:46:9: 'attribute'
             {
-            match("import"); 
+            match("attribute"); 
 
 
             }
@@ -836,10 +836,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:7: ( 'from' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:9: 'from'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:7: ( 'import' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:47:9: 'import'
             {
-            match("from"); 
+            match("import"); 
 
 
             }
@@ -857,10 +857,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:7: ( '.*' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:9: '.*'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:7: ( 'from' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:48:9: 'from'
             {
-            match(".*"); 
+            match("from"); 
 
 
             }
@@ -878,10 +878,10 @@ public class InternalConfigLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:49:7: ( 'attribute' )
-            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:49:9: 'attribute'
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:49:7: ( '.*' )
+            // ../org.eclipse.etrice.core.config.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalConfig.g:49:9: '.*'
             {
-            match("attribute"); 
+            match(".*"); 
 
 
             }
@@ -2196,94 +2196,94 @@ public class InternalConfigLexer extends Lexer {
         "\1\uffff\4\51\2\uffff\2\51\2\uffff\1\51\1\74\6\51\2\uffff\1\110"+
         "\1\uffff\2\51\2\uffff\1\116\4\51\1\125\1\47\2\uffff\2\47\2\uffff"+
         "\1\51\1\uffff\4\51\1\136\3\51\2\uffff\3\51\2\uffff\1\51\3\uffff"+
-        "\1\51\1\153\6\51\5\uffff\2\51\3\uffff\1\165\2\51\1\123\5\uffff\4"+
-        "\51\1\174\1\175\1\uffff\14\51\1\uffff\11\51\1\uffff\6\51\2\uffff"+
-        "\2\51\1\u009b\12\51\1\u00a6\1\51\1\u00a8\1\51\1\u00aa\4\51\1\u00af"+
-        "\1\51\1\u00b1\1\u00b2\1\51\1\u00b4\2\uffff\10\51\1\uffff\1\51\1"+
-        "\uffff\1\51\1\uffff\1\51\1\uffff\4\51\1\uffff\1\51\2\uffff\1\51"+
-        "\1\uffff\2\51\1\u00cb\5\51\2\uffff\5\51\1\u00d6\6\51\1\uffff\10"+
-        "\51\1\u00e5\1\51\1\uffff\7\51\1\uffff\2\51\1\uffff\3\51\1\uffff"+
-        "\2\51\1\u00f5\1\u00f7\1\u00f8\1\u00f9\1\u00fa\7\51\1\u0102\1\uffff"+
-        "\1\u0103\4\uffff\7\51\2\uffff\1\u010b\1\u010c\5\51\2\uffff\11\51"+
-        "\1\u011b\4\51\1\uffff\1\u0120\3\51\1\uffff\1\u0124\2\51\1\uffff"+
-        "\4\51\1\u012b\1\u012c\2\uffff";
+        "\1\51\1\153\6\51\5\uffff\2\51\3\uffff\1\165\2\51\1\123\5\uffff\3"+
+        "\51\1\173\1\51\1\175\1\uffff\14\51\1\uffff\11\51\1\uffff\5\51\1"+
+        "\uffff\1\51\1\uffff\2\51\1\u009b\12\51\1\u00a6\1\51\1\u00a8\1\51"+
+        "\1\u00aa\4\51\1\u00af\1\51\1\u00b1\1\51\1\u00b3\1\u00b4\2\uffff"+
+        "\10\51\1\uffff\1\51\1\uffff\1\51\1\uffff\1\51\1\uffff\4\51\1\uffff"+
+        "\1\51\1\uffff\1\51\2\uffff\2\51\1\u00cb\5\51\2\uffff\6\51\1\u00d7"+
+        "\5\51\1\uffff\10\51\1\u00e5\2\51\1\uffff\6\51\1\uffff\2\51\1\uffff"+
+        "\3\51\1\uffff\2\51\1\u00f5\1\u00f7\1\u00f8\1\u00f9\1\u00fa\7\51"+
+        "\1\u0102\1\uffff\1\u0103\4\uffff\7\51\2\uffff\1\u010b\1\u010c\5"+
+        "\51\2\uffff\11\51\1\u011b\4\51\1\uffff\1\u0120\3\51\1\uffff\1\u0124"+
+        "\2\51\1\uffff\4\51\1\u012b\1\u012c\2\uffff";
     static final String DFA16_eofS =
         "\u012d\uffff";
     static final String DFA16_minS =
         "\1\0\1\157\1\162\2\141\2\uffff\2\157\2\uffff\1\165\1\52\1\171\1"+
-        "\163\1\143\1\157\1\145\1\156\2\uffff\1\52\1\uffff\1\155\1\164\2"+
+        "\163\1\143\1\157\1\145\1\156\2\uffff\1\52\1\uffff\1\164\1\155\2"+
         "\uffff\1\60\1\163\1\160\1\162\1\53\1\130\1\101\2\uffff\2\0\2\uffff"+
-        "\1\156\1\uffff\1\151\1\144\2\156\1\60\2\154\1\157\2\uffff\1\102"+
-        "\1\154\1\156\2\uffff\1\142\3\uffff\1\156\1\60\2\164\1\157\1\162"+
-        "\1\141\1\164\5\uffff\1\160\1\164\3\uffff\1\60\1\164\1\165\1\60\5"+
-        "\uffff\1\152\1\164\1\145\1\144\2\60\1\uffff\1\163\1\145\1\155\1"+
-        "\157\1\156\1\145\1\150\1\154\1\146\1\123\1\141\1\162\1\uffff\1\157"+
-        "\1\162\2\164\1\165\1\144\1\145\1\157\1\162\1\uffff\1\151\1\145\1"+
-        "\165\1\145\1\154\1\141\2\uffff\1\145\1\40\1\60\1\157\1\164\2\141"+
-        "\2\151\1\171\1\155\1\40\1\162\1\60\1\157\1\60\1\154\1\60\2\162\1"+
-        "\151\1\157\1\60\1\147\2\60\1\164\1\60\2\uffff\1\154\1\145\1\154"+
-        "\1\162\1\156\1\147\1\163\1\151\1\143\1\103\1\uffff\1\143\1\uffff"+
-        "\1\141\1\uffff\1\146\1\164\1\142\1\156\1\uffff\1\141\2\uffff\1\157"+
-        "\1\uffff\1\145\1\147\1\60\1\141\1\147\1\115\1\164\1\143\2\uffff"+
-        "\1\154\1\156\1\157\1\162\1\141\1\60\1\165\1\141\1\164\1\162\1\141"+
-        "\1\145\1\uffff\1\143\1\40\1\157\1\145\1\40\1\141\1\163\1\154\1\60"+
-        "\1\143\1\uffff\1\164\1\154\1\145\1\171\1\156\1\162\1\164\1\uffff"+
-        "\1\144\1\155\1\uffff\1\163\1\164\1\103\1\uffff\2\145\5\60\2\145"+
-        "\1\103\1\163\1\141\1\154\1\111\1\60\1\uffff\1\60\4\uffff\1\162\1"+
-        "\154\1\157\1\103\1\156\1\141\1\164\2\uffff\2\60\1\156\1\157\1\143"+
-        "\1\163\1\145\2\uffff\1\146\1\156\1\145\1\163\1\155\1\151\1\146\2"+
-        "\103\1\60\1\147\1\151\2\157\1\uffff\1\60\1\147\2\156\1\uffff\1\60"+
-        "\2\146\1\uffff\2\151\2\147\2\60\2\uffff";
+        "\1\156\1\uffff\1\151\1\156\1\144\1\156\1\60\2\154\1\157\2\uffff"+
+        "\1\102\1\154\1\156\2\uffff\1\142\3\uffff\1\156\1\60\2\164\1\157"+
+        "\1\162\1\141\1\164\5\uffff\1\164\1\160\3\uffff\1\60\1\164\1\165"+
+        "\1\60\5\uffff\1\152\1\164\1\144\1\60\1\145\1\60\1\uffff\1\163\1"+
+        "\145\1\155\1\157\1\156\1\145\1\150\1\154\1\146\1\123\1\141\1\162"+
+        "\1\uffff\1\157\1\162\2\164\1\165\1\144\1\145\1\162\1\157\1\uffff"+
+        "\1\151\1\145\1\165\1\145\1\141\1\uffff\1\154\1\uffff\1\145\1\40"+
+        "\1\60\1\157\1\164\2\141\2\151\1\171\1\155\1\40\1\162\1\60\1\157"+
+        "\1\60\1\154\1\60\1\162\1\151\1\162\1\157\1\60\1\147\1\60\1\164\2"+
+        "\60\2\uffff\1\154\1\145\1\154\1\162\1\156\1\147\1\163\1\151\1\143"+
+        "\1\103\1\uffff\1\143\1\uffff\1\141\1\uffff\1\146\1\142\1\164\1\156"+
+        "\1\uffff\1\141\1\uffff\1\157\2\uffff\1\145\1\147\1\60\1\141\1\147"+
+        "\1\115\1\164\1\143\2\uffff\1\154\1\156\1\157\1\162\1\141\1\165\1"+
+        "\60\1\141\1\164\1\162\1\141\1\145\1\uffff\1\143\1\40\1\157\1\145"+
+        "\1\40\1\141\1\163\1\154\1\60\1\143\1\164\1\uffff\1\154\1\145\1\171"+
+        "\1\156\1\162\1\164\1\uffff\1\144\1\155\1\uffff\1\163\1\164\1\103"+
+        "\1\uffff\2\145\5\60\2\145\1\103\1\163\1\141\1\154\1\111\1\60\1\uffff"+
+        "\1\60\4\uffff\1\162\1\154\1\157\1\103\1\156\1\141\1\164\2\uffff"+
+        "\2\60\1\156\1\157\1\143\1\163\1\145\2\uffff\1\146\1\156\1\145\1"+
+        "\163\1\155\1\151\1\146\2\103\1\60\1\147\1\151\2\157\1\uffff\1\60"+
+        "\1\147\2\156\1\uffff\1\60\2\146\1\uffff\2\151\2\147\2\60\2\uffff";
     static final String DFA16_maxS =
         "\1\uffff\1\157\1\162\1\163\1\162\2\uffff\1\164\1\157\2\uffff\1"+
         "\165\1\57\1\171\1\163\1\164\1\162\1\145\1\156\2\uffff\1\52\1\uffff"+
-        "\1\155\1\164\2\uffff\1\172\1\163\1\160\1\162\1\71\1\170\1\172\2"+
-        "\uffff\2\uffff\2\uffff\1\156\1\uffff\1\151\1\144\1\170\1\156\1\172"+
+        "\1\164\1\155\2\uffff\1\172\1\163\1\160\1\162\1\71\1\170\1\172\2"+
+        "\uffff\2\uffff\2\uffff\1\156\1\uffff\1\151\1\170\1\144\1\156\1\172"+
         "\2\154\1\157\2\uffff\1\122\1\154\1\156\2\uffff\1\142\3\uffff\1\156"+
-        "\1\172\2\164\1\157\1\162\1\147\1\164\5\uffff\1\160\1\164\3\uffff"+
-        "\1\172\1\164\1\165\1\172\5\uffff\1\152\1\164\1\145\1\144\2\172\1"+
-        "\uffff\1\163\1\145\1\155\1\157\1\156\1\145\1\150\1\154\1\146\1\123"+
-        "\1\141\1\162\1\uffff\1\157\1\162\2\164\1\165\1\144\1\145\1\157\1"+
-        "\162\1\uffff\1\151\1\145\1\165\1\145\1\154\1\141\2\uffff\1\145\1"+
-        "\40\1\172\1\157\1\164\2\141\2\151\1\171\1\155\1\40\1\162\1\172\1"+
-        "\157\1\172\1\154\1\172\2\162\1\151\1\157\1\172\1\147\2\172\1\164"+
-        "\1\172\2\uffff\1\154\1\145\1\154\1\162\1\156\1\147\1\163\2\151\1"+
-        "\111\1\uffff\1\143\1\uffff\1\141\1\uffff\1\146\1\164\1\142\1\156"+
-        "\1\uffff\1\141\2\uffff\1\157\1\uffff\1\145\1\147\1\172\1\141\1\147"+
-        "\1\115\1\164\1\143\2\uffff\1\154\1\156\1\157\1\162\1\141\1\172\1"+
-        "\165\1\141\1\164\1\162\1\141\1\145\1\uffff\1\143\1\40\1\157\1\145"+
-        "\1\40\1\141\1\163\1\154\1\172\1\143\1\uffff\1\164\1\154\1\145\1"+
-        "\171\1\156\1\162\1\164\1\uffff\1\144\1\155\1\uffff\1\163\1\164\1"+
-        "\103\1\uffff\2\145\5\172\2\145\1\103\1\163\1\141\1\154\1\111\1\172"+
-        "\1\uffff\1\172\4\uffff\1\162\1\154\1\157\1\103\1\156\1\141\1\164"+
-        "\2\uffff\2\172\1\156\1\157\1\143\1\163\1\145\2\uffff\1\146\1\156"+
-        "\1\145\1\163\1\155\1\151\1\146\2\103\1\172\1\147\1\151\2\157\1\uffff"+
-        "\1\172\1\147\2\156\1\uffff\1\172\2\146\1\uffff\2\151\2\147\2\172"+
-        "\2\uffff";
+        "\1\172\2\164\1\157\1\162\1\147\1\164\5\uffff\1\164\1\160\3\uffff"+
+        "\1\172\1\164\1\165\1\172\5\uffff\1\152\1\164\1\144\1\172\1\145\1"+
+        "\172\1\uffff\1\163\1\145\1\155\1\157\1\156\1\145\1\150\1\154\1\146"+
+        "\1\123\1\141\1\162\1\uffff\1\157\1\162\2\164\1\165\1\144\1\145\1"+
+        "\162\1\157\1\uffff\1\151\1\145\1\165\1\145\1\141\1\uffff\1\154\1"+
+        "\uffff\1\145\1\40\1\172\1\157\1\164\2\141\2\151\1\171\1\155\1\40"+
+        "\1\162\1\172\1\157\1\172\1\154\1\172\1\162\1\151\1\162\1\157\1\172"+
+        "\1\147\1\172\1\164\2\172\2\uffff\1\154\1\145\1\154\1\162\1\156\1"+
+        "\147\1\163\2\151\1\111\1\uffff\1\143\1\uffff\1\141\1\uffff\1\146"+
+        "\1\142\1\164\1\156\1\uffff\1\141\1\uffff\1\157\2\uffff\1\145\1\147"+
+        "\1\172\1\141\1\147\1\115\1\164\1\143\2\uffff\1\154\1\156\1\157\1"+
+        "\162\1\141\1\165\1\172\1\141\1\164\1\162\1\141\1\145\1\uffff\1\143"+
+        "\1\40\1\157\1\145\1\40\1\141\1\163\1\154\1\172\1\143\1\164\1\uffff"+
+        "\1\154\1\145\1\171\1\156\1\162\1\164\1\uffff\1\144\1\155\1\uffff"+
+        "\1\163\1\164\1\103\1\uffff\2\145\5\172\2\145\1\103\1\163\1\141\1"+
+        "\154\1\111\1\172\1\uffff\1\172\4\uffff\1\162\1\154\1\157\1\103\1"+
+        "\156\1\141\1\164\2\uffff\2\172\1\156\1\157\1\143\1\163\1\145\2\uffff"+
+        "\1\146\1\156\1\145\1\163\1\155\1\151\1\146\2\103\1\172\1\147\1\151"+
+        "\2\157\1\uffff\1\172\1\147\2\156\1\uffff\1\172\2\146\1\uffff\2\151"+
+        "\2\147\2\172\2\uffff";
     static final String DFA16_acceptS =
         "\5\uffff\1\7\1\10\2\uffff\1\16\1\17\10\uffff\1\36\1\41\1\uffff"+
         "\1\43\2\uffff\1\50\1\51\7\uffff\1\63\1\64\2\uffff\1\70\1\71\1\uffff"+
         "\1\63\10\uffff\1\7\1\10\3\uffff\1\16\1\17\1\uffff\1\66\1\67\1\21"+
-        "\10\uffff\1\36\1\41\1\46\1\42\1\43\2\uffff\1\50\1\51\1\52\4\uffff"+
+        "\10\uffff\1\36\1\41\1\47\1\42\1\43\2\uffff\1\50\1\51\1\52\4\uffff"+
         "\1\61\1\62\1\64\1\65\1\70\6\uffff\1\53\14\uffff\1\54\11\uffff\1"+
-        "\55\6\uffff\1\40\1\37\34\uffff\1\23\1\45\12\uffff\1\35\1\uffff\1"+
-        "\33\1\uffff\1\56\4\uffff\1\60\1\uffff\1\3\1\4\1\uffff\1\6\10\uffff"+
-        "\1\24\1\25\14\uffff\1\13\12\uffff\1\44\7\uffff\1\26\2\uffff\1\22"+
-        "\3\uffff\1\32\17\uffff\1\57\1\uffff\1\1\1\5\1\11\1\12\7\uffff\1"+
-        "\47\1\2\7\uffff\1\14\1\15\16\uffff\1\34\4\uffff\1\20\3\uffff\1\27"+
-        "\6\uffff\1\30\1\31";
+        "\55\5\uffff\1\40\1\uffff\1\37\34\uffff\1\23\1\46\12\uffff\1\35\1"+
+        "\uffff\1\33\1\uffff\1\56\4\uffff\1\60\1\uffff\1\3\1\uffff\1\5\1"+
+        "\6\10\uffff\1\24\1\25\14\uffff\1\13\13\uffff\1\45\6\uffff\1\26\2"+
+        "\uffff\1\22\3\uffff\1\32\17\uffff\1\57\1\uffff\1\1\1\4\1\11\1\12"+
+        "\7\uffff\1\44\1\2\7\uffff\1\14\1\15\16\uffff\1\34\4\uffff\1\20\3"+
+        "\uffff\1\27\6\uffff\1\30\1\31";
     static final String DFA16_specialS =
         "\1\2\43\uffff\1\1\1\0\u0107\uffff}>";
     static final String[] DFA16_transitionS = {
             "\11\47\2\46\2\47\1\46\22\47\1\46\1\47\1\44\4\47\1\45\3\47\1"+
             "\5\1\24\1\6\1\25\1\14\1\40\11\43\1\26\2\47\1\23\3\47\1\17\1"+
             "\42\1\10\1\42\1\37\3\42\1\22\6\42\1\20\2\42\1\13\7\42\1\31\1"+
-            "\47\1\32\1\41\1\42\1\47\1\30\1\42\1\1\1\15\1\37\1\4\2\42\1\27"+
+            "\47\1\32\1\41\1\42\1\47\1\27\1\42\1\1\1\15\1\37\1\4\2\42\1\30"+
             "\3\42\1\3\1\34\1\35\1\7\1\42\1\21\1\33\1\36\1\16\1\42\1\2\3"+
             "\42\1\11\1\47\1\12\uff82\47",
             "\1\50",
             "\1\52",
-            "\1\54\7\uffff\1\55\5\uffff\1\53\3\uffff\1\56",
+            "\1\53\7\uffff\1\55\5\uffff\1\54\3\uffff\1\56",
             "\1\57\7\uffff\1\60\10\uffff\1\61",
             "",
             "",
@@ -2323,8 +2323,8 @@ public class InternalConfigLexer extends Lexer {
             "\1\130",
             "",
             "\1\131",
-            "\1\132",
-            "\1\133\11\uffff\1\134",
+            "\1\132\11\uffff\1\133",
+            "\1\134",
             "\1\135",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\137",
@@ -2371,8 +2371,8 @@ public class InternalConfigLexer extends Lexer {
             "\1\170",
             "\1\171",
             "\1\172",
-            "\1\173",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\174",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "\1\176",
@@ -2403,8 +2403,8 @@ public class InternalConfigLexer extends Lexer {
             "\1\u0095",
             "\1\u0096",
             "\1\u0097",
-            "\1\u0098",
             "",
+            "\1\u0098",
             "",
             "\1\u0099",
             "\1\u009a",
@@ -2431,8 +2431,8 @@ public class InternalConfigLexer extends Lexer {
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u00b0",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\u00b2",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
-            "\1\u00b3",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
@@ -2458,8 +2458,8 @@ public class InternalConfigLexer extends Lexer {
             "",
             "\1\u00c7",
             "",
-            "",
             "\1\u00c8",
+            "",
             "",
             "\1\u00c9",
             "\1\u00ca",
@@ -2476,8 +2476,8 @@ public class InternalConfigLexer extends Lexer {
             "\1\u00d3",
             "\1\u00d4",
             "\1\u00d5",
+            "\1\u00d6",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
-            "\1\u00d7",
             "\1\u00d8",
             "\1\u00d9",
             "\1\u00da",
@@ -2494,8 +2494,8 @@ public class InternalConfigLexer extends Lexer {
             "\1\u00e4",
             "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u00e6",
-            "",
             "\1\u00e7",
+            "",
             "\1\u00e8",
             "\1\u00e9",
             "\1\u00ea",
@@ -2688,9 +2688,9 @@ public class InternalConfigLexer extends Lexer {
 
                         else if ( (LA16_0==':') ) {s = 22;}
 
-                        else if ( (LA16_0=='i') ) {s = 23;}
+                        else if ( (LA16_0=='a') ) {s = 23;}
 
-                        else if ( (LA16_0=='a') ) {s = 24;}
+                        else if ( (LA16_0=='i') ) {s = 24;}
 
                         else if ( (LA16_0=='[') ) {s = 25;}
 

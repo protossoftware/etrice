@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -46,7 +47,6 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.Import;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -124,25 +124,25 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				return;
 			
 			if (res.getContents().isEmpty()) {
-				error("referenced model is empty", RoomPackage.Literals.IMPORT__IMPORT_URI);
+				error("referenced model is empty", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
 			
 			if (!(res.getContents().get(0) instanceof RoomModel)) {
 				if (uri.lastSegment().endsWith(".room"))
-					error("referenced model is no ROOM model (but has .room extension)", RoomPackage.Literals.IMPORT__IMPORT_URI);
+					error("referenced model is no ROOM model (but has .room extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
 				else
-					warning("referenced model is no ROOM model", RoomPackage.Literals.IMPORT__IMPORT_URI);
+					warning("referenced model is no ROOM model", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
 			
 			RoomModel model = (RoomModel) res.getContents().get(0);
 			if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-				error("the imported namespace should be '"+model.getName()+".*'", RoomPackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
+				error("the imported namespace should be '"+model.getName()+".*'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
 			}
 		}
 		catch (RuntimeException re) {
-			warning("could not load referenced model", RoomPackage.Literals.IMPORT__IMPORT_URI);
+			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
 	}

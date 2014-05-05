@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.ComposedChecks;
 
 @ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class})
-public class AbstractETMapJavaValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
+public class AbstractETMapJavaValidator extends org.eclipse.etrice.core.common.validation.BaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {

@@ -2,6 +2,7 @@
 <?eclipse version="3.0"?>
 
 <plugin>
+   <extension-point id="modellocator" name="Model Locator" schema="schema/modellocator.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -9,6 +10,12 @@
        class = "org.eclipse.etrice.core.common.base.BasePackage"
        genModel = "org/eclipse/etrice/core/common/Base.genmodel" /> 
 	
+  </extension>
+  <extension
+        point="org.eclipse.etrice.core.common.modellocator">
+     <locator
+           class="org.eclipse.etrice.core.common.scoping.StandardModelLocator">
+     </locator>
   </extension>
 
 

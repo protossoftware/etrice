@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-grammar org.eclipse.etrice.core.etmap.ETMap with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.etrice.core.etmap.ETMap with org.eclipse.etrice.core.common.Base
 
 generate eTMap "http://www.eclipse.org/etrice/core/etmap/ETMap"
 
@@ -40,13 +40,3 @@ SubSystemMapping:
 ThreadMapping:
 	'ThreadMapping' logicalThread=[room::LogicalThread|ID] '->' physicalThread=[phys::PhysicalThread|ID]
 ;
-
-
-Import :
-	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
-
-ImportedFQN:
-	FQN ('.*')?;
-
-FQN:
-	ID ('.' ID)*;

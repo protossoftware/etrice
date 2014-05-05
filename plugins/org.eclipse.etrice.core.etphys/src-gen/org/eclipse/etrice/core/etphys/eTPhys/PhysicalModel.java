@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.Import;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Physical Model</b></em>'.
@@ -63,7 +65,7 @@ public interface PhysicalModel extends EObject
 
   /**
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.etphys.eTPhys.Import}.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Import}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->

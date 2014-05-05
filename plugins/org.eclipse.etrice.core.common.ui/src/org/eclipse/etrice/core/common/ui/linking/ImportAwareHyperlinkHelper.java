@@ -10,11 +10,11 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.linking;
+package org.eclipse.etrice.core.common.ui.linking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;

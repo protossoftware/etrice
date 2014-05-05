@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.core;
 
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
-import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;

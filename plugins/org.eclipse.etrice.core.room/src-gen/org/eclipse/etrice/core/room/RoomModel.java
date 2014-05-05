@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Documentation;
+import org.eclipse.etrice.core.common.base.Import;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,7 +103,7 @@ public interface RoomModel extends EObject
 
   /**
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Import}.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Import}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->

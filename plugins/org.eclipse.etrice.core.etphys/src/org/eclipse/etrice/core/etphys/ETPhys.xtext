@@ -76,12 +76,3 @@ enum ThreadModel:
 ;
 
 PRIO returns ecore::EInt hidden(): ('+'|'-')? INT;
-
-Import :
-	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
-
-ImportedFQN:
-	FQN ('.*')?;
-
-FQN:
-	ID ('.' ID)*;

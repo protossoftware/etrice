@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.core.etmap;
 
-import org.eclipse.etrice.core.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;

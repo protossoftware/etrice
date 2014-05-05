@@ -67,13 +67,14 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
 					put(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives(), "rule__TransitionChainStartTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
-					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getMULTIPLICITYAccess().getAlternatives_1(), "rule__MULTIPLICITY__Alternatives_1");
 					put(grammarAccess.getAnnotationTargetTypeAccess().getAlternatives(), "rule__AnnotationTargetType__Alternatives");
 					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0(), "rule__EnumAnnotationAttribute__Alternatives_0");
+					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
+					put(grammarAccess.getTIMEAccess().getAlternatives(), "rule__TIME__Alternatives");
 					put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives_1(), "rule__BooleanLiteral__Alternatives_1");
 					put(grammarAccess.getNumberLiteralAccess().getAlternatives(), "rule__NumberLiteral__Alternatives");
@@ -217,9 +218,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTriggerAccess().getGroup_2(), "rule__Trigger__Group_2__0");
 					put(grammarAccess.getMessageFromIfAccess().getGroup(), "rule__MessageFromIf__Group__0");
 					put(grammarAccess.getGuardAccess().getGroup(), "rule__Guard__Group__0");
-					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
-					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getMULTIPLICITYAccess().getGroup(), "rule__MULTIPLICITY__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2(), "rule__Annotation__Group_2__0");
@@ -231,7 +229,14 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getGroup(), "rule__SimpleAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup(), "rule__EnumAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6(), "rule__EnumAnnotationAttribute__Group_6__0");
+					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
+					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
+					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
+					put(grammarAccess.getTIMEAccess().getGroup_0(), "rule__TIME__Group_0__0");
+					put(grammarAccess.getTIMEAccess().getGroup_1(), "rule__TIME__Group_1__0");
+					put(grammarAccess.getTIMEAccess().getGroup_2(), "rule__TIME__Group_2__0");
+					put(grammarAccess.getTIMEAccess().getGroup_3(), "rule__TIME__Group_3__0");
 					put(grammarAccess.getLiteralArrayAccess().getGroup(), "rule__LiteralArray__Group__0");
 					put(grammarAccess.getLiteralArrayAccess().getGroup_1(), "rule__LiteralArray__Group_1__0");
 					put(grammarAccess.getBooleanLiteralAccess().getGroup(), "rule__BooleanLiteral__Group__0");
@@ -498,8 +503,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageFromIfAccess().getMessageAssignment_0(), "rule__MessageFromIf__MessageAssignment_0");
 					put(grammarAccess.getMessageFromIfAccess().getFromAssignment_2(), "rule__MessageFromIf__FromAssignment_2");
 					put(grammarAccess.getGuardAccess().getGuardAssignment_1(), "rule__Guard__GuardAssignment_1");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
-					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 					put(grammarAccess.getAnnotationAccess().getTypeAssignment_1(), "rule__Annotation__TypeAssignment_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_1(), "rule__Annotation__AttributesAssignment_2_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");
@@ -518,6 +521,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getNameAssignment_2(), "rule__EnumAnnotationAttribute__NameAssignment_2");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_5(), "rule__EnumAnnotationAttribute__ValuesAssignment_5");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1(), "rule__EnumAnnotationAttribute__ValuesAssignment_6_1");
+					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
+					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 					put(grammarAccess.getDocumentationAccess().getLinesAssignment_2(), "rule__Documentation__LinesAssignment_2");
 					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_0(), "rule__LiteralArray__LiteralsAssignment_0");
 					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_1_1(), "rule__LiteralArray__LiteralsAssignment_1_1");

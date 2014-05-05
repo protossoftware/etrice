@@ -3,7 +3,6 @@
 
 <plugin>
    <extension-point id="validation" name="Room Validator" schema="schema/validation.exsd"/>
-   <extension-point id="modellocator" name="Model Locator" schema="schema/modellocator.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -11,12 +10,6 @@
        class = "org.eclipse.etrice.core.room.RoomPackage"
        genModel = "org/eclipse/etrice/core/Room.genmodel" /> 
 	
-  </extension>
-  <extension
-        point="org.eclipse.etrice.core.room.modellocator">
-     <locator
-           class="org.eclipse.etrice.core.scoping.StandardModelLocator">
-     </locator>
   </extension>
 
 

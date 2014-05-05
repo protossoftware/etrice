@@ -37,6 +37,10 @@
     <genClasses ecoreClass="Base.ecore#//EnumAnnotationAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//EnumAnnotationAttribute/values"/>
     </genClasses>
+    <genClasses ecoreClass="Base.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//Import/importedNamespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//Import/importURI"/>
+    </genClasses>
     <genClasses ecoreClass="Base.ecore#//Documentation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Base.ecore#//Documentation/lines"/>
     </genClasses>

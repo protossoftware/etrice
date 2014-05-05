@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.scoping;
+package org.eclipse.etrice.core.common.scoping;
 
 import java.io.File;
 import java.io.IOException;

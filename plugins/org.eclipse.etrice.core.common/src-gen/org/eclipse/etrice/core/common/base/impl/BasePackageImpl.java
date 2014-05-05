@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.Literal;
@@ -77,6 +78,13 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * @generated
    */
   private EClass enumAnnotationAttributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass importEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -389,6 +397,36 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getImport()
+  {
+    return importEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getImport_ImportedNamespace()
+  {
+    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getImport_ImportURI()
+  {
+    return (EAttribute)importEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDocumentation()
   {
     return documentationEClass;
@@ -588,6 +626,10 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
     enumAnnotationAttributeEClass = createEClass(ENUM_ANNOTATION_ATTRIBUTE);
     createEAttribute(enumAnnotationAttributeEClass, ENUM_ANNOTATION_ATTRIBUTE__VALUES);
 
+    importEClass = createEClass(IMPORT);
+    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+    createEAttribute(importEClass, IMPORT__IMPORT_URI);
+
     documentationEClass = createEClass(DOCUMENTATION);
     createEAttribute(documentationEClass, DOCUMENTATION__LINES);
 
@@ -675,6 +717,10 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage
 
     initEClass(enumAnnotationAttributeEClass, EnumAnnotationAttribute.class, "EnumAnnotationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumAnnotationAttribute_Values(), ecorePackage.getEString(), "values", null, 0, -1, EnumAnnotationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImport_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(documentationEClass, Documentation.class, "Documentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDocumentation_Lines(), ecorePackage.getEString(), "lines", null, 0, -1, Documentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

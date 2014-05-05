@@ -96,14 +96,3 @@ RefPath:
 
 RefSegment:
 	ref=ID (':' idx=INT)?;
-
-	// -------------------- from org.eclipse.etrice.core.Room.xtext ---------------
-Import:
-	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
-
-ImportedFQN:
-	FQN ('.*')?;
-
-FQN:
-	ID ('.' ID)*;
-

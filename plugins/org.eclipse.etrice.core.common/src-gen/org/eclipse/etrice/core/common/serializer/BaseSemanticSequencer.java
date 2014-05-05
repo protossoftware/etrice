@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.LiteralArray;
@@ -64,6 +65,12 @@ public class BaseSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getAnnotationAttributeRule() ||
 				   context == grammarAccess.getEnumAnnotationAttributeRule()) {
 					sequence_EnumAnnotationAttribute(context, (EnumAnnotationAttribute) semanticObject); 
+					return; 
+				}
+				else break;
+			case BasePackage.IMPORT:
+				if(context == grammarAccess.getImportRule()) {
+					sequence_Import(context, (Import) semanticObject); 
 					return; 
 				}
 				else break;
@@ -159,6 +166,15 @@ public class BaseSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (optional?='optional'? name=ID values+=STRING values+=STRING*)
 	 */
 	protected void sequence_EnumAnnotationAttribute(EObject context, EnumAnnotationAttribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (importedNamespace=ImportedFQN? importURI=STRING)
+	 */
+	protected void sequence_Import(EObject context, Import semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

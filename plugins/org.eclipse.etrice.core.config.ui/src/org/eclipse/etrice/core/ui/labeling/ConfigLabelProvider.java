@@ -4,13 +4,14 @@
 package org.eclipse.etrice.core.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider;
 import org.eclipse.etrice.core.config.ActorClassConfig;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrClassConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;
 import org.eclipse.etrice.core.config.ConfigModel;
 import org.eclipse.etrice.core.config.DynamicConfig;
-import org.eclipse.etrice.core.config.Import;
 import org.eclipse.etrice.core.config.PortClassConfig;
 import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
@@ -19,14 +20,6 @@ import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.jface.resource.FontDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.eclipse.xtext.ui.label.StylerFactory;
 
 import com.google.inject.Inject;
 
@@ -35,26 +28,19 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class ConfigLabelProvider extends DefaultEObjectLabelProvider {
-
-	private static final String KEYWORD_COLOR = "KEYWORD_COLOR";
-	
-	@Inject
-	private StylerFactory stylerFactory;
-	private Styler keywordStyler = null;
+public class ConfigLabelProvider extends BaseLabelProvider {
 
 	@Inject
 	public ConfigLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
-		
-		JFaceResources.getColorRegistry().put(KEYWORD_COLOR, new RGB(50, 50, 50));
 	}
 
 	String image(ConfigModel mdl) {
 		return "Config_ConfigModel.png";
 	}
-
-	String image(Import mdl) {
+	
+	@Override
+	public String image(Import mdl) {
 		return "Config_Import.png";
 	}
 
@@ -101,19 +87,6 @@ public class ConfigLabelProvider extends DefaultEObjectLabelProvider {
 		return "ConfigModel "+mdl.getName();
 	}
 	
-	StyledString text(Import im) {
-		if (im.getImportedNamespace()==null) {
-			StyledString txt = new StyledString("import model "+im.getImportURI());
-			txt.setStyle(0, 12, getKeywordStyler());
-			return txt;
-		}
-		else {
-			StyledString txt = new StyledString("import ns "+im.getImportedNamespace());
-			txt.setStyle(0, 9, getKeywordStyler());
-			return txt;
-		}
-	}
-
 	String text(ActorClassConfig mdl) {
 		return "Config of ActorClass "+mdl.getActor().getName();
 	}
@@ -153,15 +126,5 @@ public class ConfigLabelProvider extends DefaultEObjectLabelProvider {
 
 	String text(SubSystemConfig mdl) {
 		return "Config of SubSystem "+mdl.getSubSystem().getName();
-	}
-
-	
-	private Styler getKeywordStyler() {
-		if (keywordStyler==null) {
-			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
-			FontDescriptor boldFont = font.setStyle(SWT.BOLD);
-			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null);
-		}
-		return keywordStyler;
 	}
 }

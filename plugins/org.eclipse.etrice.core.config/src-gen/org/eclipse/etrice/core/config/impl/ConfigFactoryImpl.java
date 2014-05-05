@@ -82,7 +82,6 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
       case ConfigPackage.ENUM_CONFIG_VALUE: return createEnumConfigValue();
       case ConfigPackage.REF_PATH: return createRefPath();
       case ConfigPackage.REF_SEGMENT: return createRefSegment();
-      case ConfigPackage.IMPORT: return createImport();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -284,17 +283,6 @@ public class ConfigFactoryImpl extends EFactoryImpl implements ConfigFactory
   {
     RefSegmentImpl refSegment = new RefSegmentImpl();
     return refSegment;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Import createImport()
-  {
-    ImportImpl import_ = new ImportImpl();
-    return import_;
   }
 
   /**

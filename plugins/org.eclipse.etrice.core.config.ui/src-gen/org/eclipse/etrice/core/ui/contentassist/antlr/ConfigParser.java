@@ -43,11 +43,11 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttrConfigAccess().getAlternatives(), "rule__AttrConfig__Alternatives");
 					put(grammarAccess.getAttrInstanceConfigAccess().getAlternatives_3_1_0_1(), "rule__AttrInstanceConfig__Alternatives_3_1_0_1");
 					put(grammarAccess.getConfigValueAccess().getAlternatives(), "rule__ConfigValue__Alternatives");
-					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0(), "rule__EnumAnnotationAttribute__Alternatives_0");
+					put(grammarAccess.getImportAccess().getAlternatives_1(), "rule__Import__Alternatives_1");
 					put(grammarAccess.getTIMEAccess().getAlternatives(), "rule__TIME__Alternatives");
 					put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives_1(), "rule__BooleanLiteral__Alternatives_1");
@@ -93,11 +93,6 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefPathAccess().getGroup_1(), "rule__RefPath__Group_1__0");
 					put(grammarAccess.getRefSegmentAccess().getGroup(), "rule__RefSegment__Group__0");
 					put(grammarAccess.getRefSegmentAccess().getGroup_1(), "rule__RefSegment__Group_1__0");
-					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
-					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
-					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
-					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2(), "rule__Annotation__Group_2__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
@@ -108,6 +103,9 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getGroup(), "rule__SimpleAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup(), "rule__EnumAnnotationAttribute__Group__0");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6(), "rule__EnumAnnotationAttribute__Group_6__0");
+					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
+					put(grammarAccess.getImportAccess().getGroup_1_0(), "rule__Import__Group_1_0__0");
+					put(grammarAccess.getImportedFQNAccess().getGroup(), "rule__ImportedFQN__Group__0");
 					put(grammarAccess.getDocumentationAccess().getGroup(), "rule__Documentation__Group__0");
 					put(grammarAccess.getTIMEAccess().getGroup_0(), "rule__TIME__Group_0__0");
 					put(grammarAccess.getTIMEAccess().getGroup_1(), "rule__TIME__Group_1__0");
@@ -124,6 +122,8 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDotDecimalAccess().getGroup(), "rule__DotDecimal__Group__0");
 					put(grammarAccess.getDecimalDotAccess().getGroup(), "rule__DecimalDot__Group__0");
 					put(grammarAccess.getDecimalExpAccess().getGroup(), "rule__DecimalExp__Group__0");
+					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
+					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getConfigModelAccess().getNameAssignment_1(), "rule__ConfigModel__NameAssignment_1");
 					put(grammarAccess.getConfigModelAccess().getImportsAssignment_3(), "rule__ConfigModel__ImportsAssignment_3");
 					put(grammarAccess.getConfigModelAccess().getConfigElementsAssignment_4(), "rule__ConfigModel__ConfigElementsAssignment_4");
@@ -166,8 +166,6 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefPathAccess().getRefsAssignment_1_1(), "rule__RefPath__RefsAssignment_1_1");
 					put(grammarAccess.getRefSegmentAccess().getRefAssignment_0(), "rule__RefSegment__RefAssignment_0");
 					put(grammarAccess.getRefSegmentAccess().getIdxAssignment_1_1(), "rule__RefSegment__IdxAssignment_1_1");
-					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
-					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 					put(grammarAccess.getAnnotationAccess().getTypeAssignment_1(), "rule__Annotation__TypeAssignment_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_1(), "rule__Annotation__AttributesAssignment_2_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");
@@ -186,6 +184,8 @@ public class ConfigParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getNameAssignment_2(), "rule__EnumAnnotationAttribute__NameAssignment_2");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_5(), "rule__EnumAnnotationAttribute__ValuesAssignment_5");
 					put(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1(), "rule__EnumAnnotationAttribute__ValuesAssignment_6_1");
+					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0(), "rule__Import__ImportedNamespaceAssignment_1_0_0");
+					put(grammarAccess.getImportAccess().getImportURIAssignment_2(), "rule__Import__ImportURIAssignment_2");
 					put(grammarAccess.getDocumentationAccess().getLinesAssignment_2(), "rule__Documentation__LinesAssignment_2");
 					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_0(), "rule__LiteralArray__LiteralsAssignment_0");
 					put(grammarAccess.getLiteralArrayAccess().getLiteralsAssignment_1_1(), "rule__LiteralArray__LiteralsAssignment_1_1");

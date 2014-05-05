@@ -84,9 +84,5 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//RefSegment/idx"/>
       <genOperations ecoreOperation="Config.ecore#//RefSegment/toString"/>
     </genClasses>
-    <genClasses ecoreClass="Config.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importedNamespace"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Config.ecore#//Import/importURI"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

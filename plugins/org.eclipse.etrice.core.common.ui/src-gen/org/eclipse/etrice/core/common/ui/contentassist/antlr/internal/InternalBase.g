@@ -226,6 +226,36 @@ finally {
 
 
 
+
+
+// Entry rule entryRuleImportedFQN
+entryRuleImportedFQN 
+:
+{ before(grammarAccess.getImportedFQNRule()); }
+	 ruleImportedFQN
+{ after(grammarAccess.getImportedFQNRule()); } 
+	 EOF 
+;
+
+// Rule ImportedFQN
+ruleImportedFQN
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getImportedFQNAccess().getGroup()); }
+(rule__ImportedFQN__Group__0)
+{ after(grammarAccess.getImportedFQNAccess().getGroup()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleDocumentation
 entryRuleDocumentation 
 :
@@ -816,6 +846,7 @@ rule__EnumAnnotationAttribute__Alternatives_0
 finally {
 	restoreStackSize(stackSize);
 }
+
 
 
 rule__Literal__Alternatives
@@ -1963,6 +1994,71 @@ rule__EnumAnnotationAttribute__Group_6__1__Impl
 { before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1()); }
 (rule__EnumAnnotationAttribute__ValuesAssignment_6_1)
 { after(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+
+
+rule__ImportedFQN__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__ImportedFQN__Group__0__Impl
+	rule__ImportedFQN__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ImportedFQN__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); }
+	ruleFQN
+{ after(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__ImportedFQN__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__ImportedFQN__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ImportedFQN__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); }
+(
+	'.*' 
+)?
+{ after(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); }
 )
 
 ;
@@ -3222,6 +3318,8 @@ rule__EnumAnnotationAttribute__ValuesAssignment_6_1
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 rule__Documentation__LinesAssignment_2
     @init {

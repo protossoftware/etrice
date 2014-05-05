@@ -2053,11 +2053,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__104;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:102:8: ( 'import' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:102:10: 'import'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:102:8: ( '*' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:102:10: '*'
             {
-            match("import"); 
-
+            match('*'); 
 
             }
 
@@ -2074,10 +2073,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__105;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:103:8: ( 'from' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:103:10: 'from'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:103:8: ( 'ActorBehavior' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:103:10: 'ActorBehavior'
             {
-            match("from"); 
+            match("ActorBehavior"); 
 
 
             }
@@ -2095,11 +2094,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__106;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:104:8: ( 'model' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:104:10: 'model'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:104:8: ( '@' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:104:10: '@'
             {
-            match("model"); 
-
+            match('@'); 
 
             }
 
@@ -2116,10 +2114,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__107;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:105:8: ( '.*' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:105:10: '.*'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:105:8: ( 'AnnotationType' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:105:10: 'AnnotationType'
             {
-            match(".*"); 
+            match("AnnotationType"); 
 
 
             }
@@ -2137,10 +2135,11 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__108;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:106:8: ( '*' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:106:10: '*'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:106:8: ( 'target' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:106:10: 'target'
             {
-            match('*'); 
+            match("target"); 
+
 
             }
 
@@ -2157,10 +2156,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__109;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:107:8: ( 'ActorBehavior' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:107:10: 'ActorBehavior'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:107:8: ( 'optional' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:107:10: 'optional'
             {
-            match("ActorBehavior"); 
+            match("optional"); 
 
 
             }
@@ -2178,10 +2177,11 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__110;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:108:8: ( '@' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:108:10: '@'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:108:8: ( 'mandatory' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:108:10: 'mandatory'
             {
-            match('@'); 
+            match("mandatory"); 
+
 
             }
 
@@ -2198,10 +2198,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__111;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:109:8: ( 'AnnotationType' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:109:10: 'AnnotationType'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:109:8: ( 'attribute' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:109:10: 'attribute'
             {
-            match("AnnotationType"); 
+            match("attribute"); 
 
 
             }
@@ -2219,10 +2219,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__112;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:110:8: ( 'target' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:110:10: 'target'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:110:8: ( 'import' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:110:10: 'import'
             {
-            match("target"); 
+            match("import"); 
 
 
             }
@@ -2240,10 +2240,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__113;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:111:8: ( 'optional' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:111:10: 'optional'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:111:8: ( 'from' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:111:10: 'from'
             {
-            match("optional"); 
+            match("from"); 
 
 
             }
@@ -2261,10 +2261,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__114;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:112:8: ( 'mandatory' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:112:10: 'mandatory'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:112:8: ( 'model' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:112:10: 'model'
             {
-            match("mandatory"); 
+            match("model"); 
 
 
             }
@@ -2282,10 +2282,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = T__115;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:113:8: ( 'attribute' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:113:10: 'attribute'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:113:8: ( '.*' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:113:10: '.*'
             {
-            match("attribute"); 
+            match(".*"); 
 
 
             }
@@ -2574,8 +2574,8 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_EXP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9374:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9374:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -2586,7 +2586,7 @@ public class InternalRoomLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9374:22: ( '+' | '-' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:22: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -2612,7 +2612,7 @@ public class InternalRoomLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9374:33: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:33: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -2626,7 +2626,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9374:34: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:34: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2658,10 +2658,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:12: ( '0x' | '0X' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:12: ( '0x' | '0X' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -2689,7 +2689,7 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:13: '0x'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:13: '0x'
                     {
                     match("0x"); 
 
@@ -2697,7 +2697,7 @@ public class InternalRoomLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:18: '0X'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:18: '0X'
                     {
                     match("0X"); 
 
@@ -2707,7 +2707,7 @@ public class InternalRoomLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9376:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt4=0;
             loop4:
             do {
@@ -2761,10 +2761,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:11: ( '^' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -2773,7 +2773,7 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:11: '^'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:11: '^'
                     {
                     match('^'); 
 
@@ -2791,7 +2791,7 @@ public class InternalRoomLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9378:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -2840,10 +2840,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -2857,7 +2857,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9380:13: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2889,10 +2889,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2910,10 +2910,10 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -2929,7 +2929,7 @@ public class InternalRoomLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2945,7 +2945,7 @@ public class InternalRoomLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2970,10 +2970,10 @@ public class InternalRoomLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -2989,7 +2989,7 @@ public class InternalRoomLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3005,7 +3005,7 @@ public class InternalRoomLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9382:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -3048,12 +3048,12 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -3078,7 +3078,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9384:52: .
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:52: .
             	    {
             	    matchAny(); 
 
@@ -3108,12 +3108,12 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -3126,7 +3126,7 @@ public class InternalRoomLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3146,7 +3146,7 @@ public class InternalRoomLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -3155,9 +3155,9 @@ public class InternalRoomLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:41: ( '\\r' )?
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -3166,7 +3166,7 @@ public class InternalRoomLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9386:41: '\\r'
+                            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:41: '\\r'
                             {
                             match('\r'); 
 
@@ -3198,10 +3198,10 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9390:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9390:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9388:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9390:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -3255,8 +3255,8 @@ public class InternalRoomLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9390:16: ( . )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9390:18: .
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9392:16: ( . )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9392:18: .
             {
             matchAny(); 
 
@@ -4159,20 +4159,20 @@ public class InternalRoomLexer extends Lexer {
     protected DFA16 dfa16 = new DFA16(this);
     static final String DFA16_eotS =
         "\1\uffff\1\73\3\uffff\2\73\1\103\2\uffff\3\73\2\uffff\4\73\2\uffff"+
-        "\1\73\1\uffff\15\73\1\177\1\u0081\4\73\3\uffff\1\73\3\uffff\1\u0093"+
+        "\1\73\1\uffff\15\73\1\177\1\u0081\4\73\5\uffff\1\73\1\uffff\1\u0093"+
         "\1\70\2\uffff\2\70\2\uffff\2\73\4\uffff\3\73\4\uffff\1\73\1\u009f"+
         "\3\73\1\uffff\1\113\1\u00a5\1\73\1\u00a7\1\73\2\uffff\10\73\2\uffff"+
         "\1\73\1\uffff\5\73\1\u00bb\2\73\1\u00be\25\73\5\uffff\4\73\1\u00dd"+
-        "\2\73\3\uffff\3\73\7\uffff\2\73\1\u00e5\6\73\1\uffff\5\73\1\uffff"+
+        "\2\73\5\uffff\3\73\5\uffff\2\73\1\u00e5\6\73\1\uffff\5\73\1\uffff"+
         "\1\u00f2\1\uffff\16\73\1\u0102\4\73\1\uffff\2\73\1\uffff\5\73\1"+
         "\u0110\1\u0111\11\73\1\u011b\15\73\1\uffff\7\73\1\uffff\4\73\1\u0135"+
         "\7\73\1\uffff\3\73\1\u0141\7\73\1\u0149\3\73\1\uffff\1\73\1\u014e"+
         "\4\73\1\u0153\6\73\2\uffff\11\73\1\uffff\12\73\1\u016d\4\73\1\u0172"+
         "\11\73\1\uffff\13\73\1\uffff\1\u0187\6\73\1\uffff\1\u0191\3\73\1"+
         "\uffff\4\73\1\uffff\5\73\1\u019f\13\73\1\u01ab\7\73\1\uffff\1\73"+
-        "\1\u01b4\1\u01b5\1\73\1\uffff\1\u01b7\1\u01b8\22\73\1\uffff\11\73"+
+        "\1\u01b4\1\73\1\u01b6\1\uffff\1\u01b7\1\u01b8\22\73\1\uffff\11\73"+
         "\1\uffff\5\73\1\u01d9\7\73\1\uffff\4\73\1\u01e5\2\73\1\u01e9\1\73"+
-        "\1\u01eb\1\73\1\uffff\7\73\1\u01f4\2\uffff\1\73\2\uffff\2\73\1\u01f9"+
+        "\1\u01eb\1\73\1\uffff\7\73\1\u01f4\1\uffff\1\73\3\uffff\2\73\1\u01f9"+
         "\4\73\1\u01fe\10\73\1\u0207\16\73\1\u0216\1\uffff\10\73\1\u021f"+
         "\2\73\1\uffff\1\73\1\u0223\1\u0224\1\uffff\1\73\1\uffff\3\73\1\u0229"+
         "\4\73\1\uffff\4\73\1\uffff\4\73\1\uffff\5\73\1\u023c\1\u023d\1\73"+
@@ -4199,42 +4199,42 @@ public class InternalRoomLexer extends Lexer {
         "\1\0\1\145\3\uffff\1\145\1\157\1\76\2\uffff\1\141\1\53\1\146\2"+
         "\uffff\1\141\1\53\1\163\1\143\2\uffff\1\160\1\uffff\1\157\1\141"+
         "\1\155\1\157\1\150\1\101\1\162\1\145\1\141\1\142\1\156\1\145\1\141"+
-        "\2\52\1\162\1\141\1\165\1\141\3\uffff\1\141\3\uffff\1\130\1\101"+
+        "\2\52\1\162\1\141\1\165\1\141\5\uffff\1\141\1\uffff\1\130\1\101"+
         "\2\uffff\2\0\2\uffff\1\157\1\146\4\uffff\1\146\1\151\1\162\4\uffff"+
         "\1\146\1\60\2\164\1\151\1\uffff\2\60\1\164\1\60\1\164\2\uffff\1"+
         "\164\1\151\1\164\2\145\2\164\1\156\2\uffff\1\145\1\uffff\1\151\1"+
         "\155\1\142\1\164\1\156\1\60\1\160\1\156\1\60\1\155\1\157\1\142\1"+
         "\141\2\120\1\162\1\151\1\102\1\163\1\156\1\163\1\144\2\164\1\171"+
         "\1\164\1\150\1\156\1\147\1\171\5\uffff\1\141\1\151\1\162\1\141\1"+
-        "\60\1\144\1\156\3\uffff\1\157\1\154\1\170\7\uffff\1\155\1\151\1"+
+        "\60\1\156\1\144\5\uffff\1\157\1\154\1\170\5\uffff\1\155\1\151\1"+
         "\60\1\165\1\141\1\155\2\164\1\141\1\uffff\1\141\1\155\1\162\1\145"+
         "\1\164\1\uffff\1\60\1\uffff\1\151\1\141\1\145\1\164\1\162\1\156"+
         "\2\162\2\157\1\162\2\144\1\141\1\60\1\151\1\143\1\157\1\164\1\uffff"+
         "\1\157\1\144\1\uffff\1\160\1\151\1\120\1\165\1\164\2\60\2\166\1"+
         "\157\1\156\1\145\1\150\1\163\1\144\1\164\1\60\1\151\1\162\1\156"+
         "\1\145\1\141\1\144\1\151\1\145\1\156\1\147\1\145\1\147\1\162\1\uffff"+
-        "\1\145\1\144\1\155\1\163\1\145\1\115\1\156\1\uffff\1\154\1\171\1"+
+        "\1\144\1\145\1\155\1\163\1\145\1\115\1\156\1\uffff\1\154\1\171\1"+
         "\151\1\157\1\60\1\165\1\144\1\145\1\171\1\162\1\120\1\157\1\uffff"+
         "\1\157\1\103\1\156\1\60\1\171\1\164\1\143\1\151\1\162\1\164\1\141"+
         "\1\60\1\163\1\156\1\162\1\uffff\1\163\1\60\1\155\1\151\1\162\1\165"+
         "\1\60\1\157\1\143\1\162\1\171\1\143\1\145\2\uffff\1\151\1\141\1"+
         "\157\1\164\3\141\1\154\1\162\1\uffff\1\157\1\151\1\143\1\162\1\166"+
-        "\1\151\1\143\1\162\1\163\1\147\1\60\1\145\1\144\1\154\1\141\1\60"+
+        "\1\151\1\143\1\162\1\163\1\147\1\60\1\145\1\144\1\141\1\154\1\60"+
         "\1\145\1\144\1\157\1\145\1\141\1\137\1\164\1\143\1\154\1\uffff\1"+
         "\154\2\162\1\120\1\156\1\157\1\151\1\156\1\154\1\144\1\156\1\uffff"+
         "\1\60\1\144\1\157\1\142\1\102\1\141\1\164\1\uffff\1\60\1\164\1\141"+
         "\1\146\1\uffff\1\151\1\141\1\164\1\147\1\uffff\1\165\1\145\1\157"+
         "\1\163\1\164\1\60\1\143\1\164\1\154\1\145\1\154\1\162\1\147\1\145"+
         "\1\141\1\156\1\142\1\60\1\146\1\151\1\156\1\141\1\103\1\151\1\145"+
-        "\1\uffff\1\164\2\60\1\164\1\uffff\2\60\2\144\1\162\1\163\1\151\1"+
-        "\157\1\141\1\164\1\151\1\141\1\157\1\141\1\151\1\156\2\141\1\163"+
-        "\1\141\1\uffff\1\162\1\144\1\165\1\154\1\156\2\145\1\164\1\151\1"+
-        "\uffff\1\151\1\160\1\151\1\156\1\154\1\60\1\141\1\156\1\120\2\164"+
-        "\1\165\1\141\1\uffff\3\145\1\147\1\60\1\141\1\145\1\60\1\143\1\60"+
-        "\1\165\1\uffff\1\141\1\157\1\147\1\154\1\157\1\164\1\162\1\60\2"+
-        "\uffff\1\157\2\uffff\1\145\1\123\1\60\1\141\1\166\1\154\1\163\1"+
-        "\60\1\166\1\164\1\151\1\154\1\156\1\147\1\154\1\163\1\60\1\154\1"+
-        "\151\1\145\1\164\1\141\1\163\1\146\1\150\1\151\1\157\1\143\1\150"+
+        "\1\uffff\1\164\1\60\1\164\1\60\1\uffff\2\60\2\144\1\162\1\163\1"+
+        "\151\1\157\1\141\1\164\1\151\1\141\1\157\1\141\1\151\1\156\2\141"+
+        "\1\163\1\141\1\uffff\1\162\1\144\1\165\1\154\1\156\2\145\1\164\1"+
+        "\151\1\uffff\1\151\1\160\1\151\1\156\1\154\1\60\1\141\1\156\1\120"+
+        "\2\164\1\165\1\141\1\uffff\3\145\1\147\1\60\1\141\1\145\1\60\1\143"+
+        "\1\60\1\165\1\uffff\1\141\1\157\1\147\1\154\1\157\1\164\1\162\1"+
+        "\60\1\uffff\1\157\3\uffff\1\145\1\123\1\60\1\141\1\166\1\154\1\163"+
+        "\1\60\1\166\1\164\1\151\1\154\1\156\1\147\1\154\1\163\1\60\1\154"+
+        "\1\151\1\145\1\164\1\141\1\163\1\146\1\150\1\151\1\157\1\143\1\150"+
         "\1\145\1\147\1\60\1\uffff\1\164\1\144\2\157\1\145\1\162\1\143\1"+
         "\111\1\60\1\141\1\145\1\uffff\1\143\2\60\1\uffff\1\164\1\uffff\1"+
         "\164\1\143\1\162\1\60\1\123\1\156\1\151\1\163\1\uffff\1\162\1\154"+
@@ -4266,103 +4266,103 @@ public class InternalRoomLexer extends Lexer {
         "\1\uffff\1\157\3\uffff\1\145\1\162\1\76\2\uffff\1\157\1\170\1\165"+
         "\2\uffff\1\141\1\170\1\163\1\164\2\uffff\1\160\1\uffff\1\157\1\171"+
         "\1\156\1\160\1\157\1\165\1\164\1\145\1\141\1\164\1\156\1\151\1\157"+
-        "\1\57\1\52\2\162\1\165\1\171\3\uffff\1\162\3\uffff\1\170\1\172\2"+
+        "\1\57\1\52\2\162\1\165\1\171\5\uffff\1\162\1\uffff\1\170\1\172\2"+
         "\uffff\2\uffff\2\uffff\1\157\1\146\4\uffff\1\154\1\157\1\162\4\uffff"+
         "\1\146\1\172\1\164\1\165\1\164\1\uffff\2\172\1\164\1\172\1\164\2"+
         "\uffff\3\164\2\145\2\164\1\156\2\uffff\1\145\1\uffff\1\151\1\156"+
         "\1\142\1\164\1\156\1\172\1\160\1\156\1\172\1\155\1\157\1\142\1\162"+
         "\2\120\1\162\1\151\1\122\1\163\1\156\1\163\1\144\2\164\1\171\1\164"+
         "\1\150\1\156\1\147\1\171\5\uffff\1\141\1\165\1\162\1\141\1\172\1"+
-        "\144\1\156\3\uffff\1\157\1\154\1\170\7\uffff\1\155\1\151\1\172\1"+
+        "\156\1\144\5\uffff\1\157\1\154\1\170\5\uffff\1\155\1\151\1\172\1"+
         "\165\1\141\1\155\2\164\1\141\1\uffff\1\141\1\155\1\162\1\145\1\164"+
         "\1\uffff\1\172\1\uffff\1\151\1\141\1\145\1\164\1\162\1\156\2\162"+
         "\2\157\1\162\2\144\1\141\1\172\1\151\1\143\1\157\1\164\1\uffff\1"+
         "\157\1\152\1\uffff\1\160\1\151\1\123\1\165\1\164\2\172\2\166\1\157"+
         "\1\156\1\145\1\150\1\163\1\144\1\164\1\172\1\151\1\162\1\156\1\145"+
         "\1\141\1\144\1\151\1\145\1\156\1\147\1\145\1\147\1\162\1\uffff\1"+
-        "\145\1\144\1\155\1\163\1\145\1\115\1\156\1\uffff\1\154\1\171\1\151"+
+        "\144\1\145\1\155\1\163\1\145\1\115\1\156\1\uffff\1\154\1\171\1\151"+
         "\1\157\1\172\1\165\1\144\1\145\1\171\1\162\1\120\1\157\1\uffff\1"+
         "\157\1\103\1\162\1\172\1\171\1\164\1\143\1\151\1\162\1\164\1\141"+
         "\1\172\1\163\1\156\1\162\1\uffff\1\163\1\172\1\155\1\151\1\162\1"+
         "\165\1\172\1\157\1\143\1\162\1\171\1\143\1\145\2\uffff\1\151\1\141"+
         "\1\157\1\164\3\141\1\154\1\162\1\uffff\1\157\1\151\1\143\1\162\1"+
-        "\166\1\151\1\143\1\162\1\163\1\147\1\172\1\145\1\144\1\154\1\141"+
+        "\166\1\151\1\143\1\162\1\163\1\147\1\172\1\145\1\144\1\141\1\154"+
         "\1\172\1\145\1\144\1\157\1\145\1\141\1\137\1\164\1\143\1\154\1\uffff"+
         "\1\154\2\162\1\120\1\156\1\157\1\151\1\156\1\154\1\144\1\156\1\uffff"+
         "\1\172\1\144\1\157\1\142\1\122\1\141\1\164\1\uffff\1\172\1\164\1"+
         "\141\1\146\1\uffff\1\151\1\141\1\164\1\147\1\uffff\1\165\1\145\1"+
         "\157\1\163\1\164\1\172\1\143\1\164\1\154\1\145\1\154\1\162\1\147"+
         "\1\145\1\141\1\156\1\142\1\172\1\146\1\151\1\156\1\141\1\103\1\151"+
-        "\1\145\1\uffff\1\164\2\172\1\164\1\uffff\2\172\2\144\1\162\1\163"+
-        "\1\151\1\157\1\141\1\164\1\151\1\141\1\157\1\141\1\151\1\156\2\141"+
-        "\1\163\1\141\1\uffff\1\162\1\144\1\165\1\154\1\156\2\145\1\164\1"+
-        "\151\1\uffff\1\151\1\160\1\151\1\156\1\154\1\172\1\141\1\156\1\120"+
-        "\2\164\1\165\1\141\1\uffff\3\145\1\147\1\172\1\141\1\145\1\172\1"+
-        "\143\1\172\1\165\1\uffff\1\141\1\157\1\147\1\154\1\157\1\164\1\162"+
-        "\1\172\2\uffff\1\157\2\uffff\1\145\1\124\1\172\1\141\1\166\1\154"+
-        "\1\163\1\172\1\166\1\164\1\151\1\154\1\156\1\147\1\154\1\163\1\172"+
-        "\1\154\1\151\1\145\1\164\1\141\1\163\1\146\1\150\1\151\1\157\1\143"+
-        "\1\150\1\145\1\147\1\172\1\uffff\1\164\1\144\2\157\1\145\1\162\1"+
-        "\143\1\111\1\172\1\141\1\145\1\uffff\1\143\2\172\1\uffff\1\164\1"+
-        "\uffff\1\164\1\143\1\162\1\172\1\124\1\156\1\151\1\163\1\uffff\1"+
-        "\162\1\154\1\164\1\162\1\uffff\1\160\1\145\1\103\1\163\1\uffff\1"+
-        "\145\1\151\1\156\1\124\1\164\2\172\1\163\1\uffff\1\172\1\166\1\172"+
-        "\1\145\1\163\1\164\1\172\1\141\1\157\1\156\1\163\1\172\1\144\1\172"+
-        "\1\uffff\1\145\1\120\1\151\1\143\1\155\1\145\1\150\1\155\1\uffff"+
-        "\1\156\1\162\1\164\2\uffff\1\172\2\145\1\172\1\uffff\1\171\1\150"+
-        "\1\156\1\157\1\172\1\171\1\172\2\141\1\172\1\124\1\154\1\172\1\156"+
-        "\1\157\1\164\1\171\1\172\2\uffff\1\172\1\uffff\1\145\3\172\1\uffff"+
-        "\1\172\1\163\1\141\1\uffff\1\166\1\156\2\172\1\uffff\1\137\1\uffff"+
-        "\1\144\1\162\1\156\1\157\1\122\1\172\1\151\1\160\2\172\1\145\1\uffff"+
-        "\2\172\1\uffff\1\163\1\162\1\145\1\156\1\uffff\1\172\1\uffff\1\164"+
-        "\1\156\1\uffff\1\171\1\141\1\uffff\1\172\1\156\1\172\1\160\2\uffff"+
-        "\1\156\4\uffff\1\172\1\156\1\151\1\124\2\uffff\1\142\1\172\1\157"+
-        "\1\164\1\154\1\145\1\154\1\uffff\1\156\1\154\2\uffff\1\162\2\uffff"+
-        "\1\164\1\145\1\143\1\172\1\uffff\1\145\1\163\1\160\1\163\1\uffff"+
-        "\1\172\1\uffff\1\145\1\172\1\uffff\1\143\1\157\2\171\1\uffff\1\164"+
-        "\2\172\1\146\1\141\2\145\1\172\1\145\1\141\1\164\1\157\1\uffff\1"+
-        "\172\1\151\1\145\1\163\1\uffff\1\172\1\uffff\1\145\1\162\1\160\1"+
-        "\172\1\157\2\uffff\1\172\1\163\1\172\1\155\1\uffff\1\155\1\144\2"+
-        "\151\1\uffff\1\164\2\172\1\uffff\1\115\1\172\1\145\1\uffff\1\143"+
-        "\1\uffff\1\163\1\uffff\1\145\2\172\1\157\1\156\1\151\2\uffff\1\141"+
-        "\1\uffff\1\172\1\157\1\172\1\156\2\uffff\1\156\1\164\1\157\1\160"+
-        "\1\uffff\1\154\1\uffff\1\164\2\172\1\156\1\160\1\103\1\141\2\uffff"+
-        "\1\172\1\151\1\154\1\164\1\uffff\1\156\1\141\1\151\1\147\1\163\1"+
-        "\157\1\172\1\163\1\156\1\uffff\2\172\2\uffff";
+        "\1\145\1\uffff\1\164\1\172\1\164\1\172\1\uffff\2\172\2\144\1\162"+
+        "\1\163\1\151\1\157\1\141\1\164\1\151\1\141\1\157\1\141\1\151\1\156"+
+        "\2\141\1\163\1\141\1\uffff\1\162\1\144\1\165\1\154\1\156\2\145\1"+
+        "\164\1\151\1\uffff\1\151\1\160\1\151\1\156\1\154\1\172\1\141\1\156"+
+        "\1\120\2\164\1\165\1\141\1\uffff\3\145\1\147\1\172\1\141\1\145\1"+
+        "\172\1\143\1\172\1\165\1\uffff\1\141\1\157\1\147\1\154\1\157\1\164"+
+        "\1\162\1\172\1\uffff\1\157\3\uffff\1\145\1\124\1\172\1\141\1\166"+
+        "\1\154\1\163\1\172\1\166\1\164\1\151\1\154\1\156\1\147\1\154\1\163"+
+        "\1\172\1\154\1\151\1\145\1\164\1\141\1\163\1\146\1\150\1\151\1\157"+
+        "\1\143\1\150\1\145\1\147\1\172\1\uffff\1\164\1\144\2\157\1\145\1"+
+        "\162\1\143\1\111\1\172\1\141\1\145\1\uffff\1\143\2\172\1\uffff\1"+
+        "\164\1\uffff\1\164\1\143\1\162\1\172\1\124\1\156\1\151\1\163\1\uffff"+
+        "\1\162\1\154\1\164\1\162\1\uffff\1\160\1\145\1\103\1\163\1\uffff"+
+        "\1\145\1\151\1\156\1\124\1\164\2\172\1\163\1\uffff\1\172\1\166\1"+
+        "\172\1\145\1\163\1\164\1\172\1\141\1\157\1\156\1\163\1\172\1\144"+
+        "\1\172\1\uffff\1\145\1\120\1\151\1\143\1\155\1\145\1\150\1\155\1"+
+        "\uffff\1\156\1\162\1\164\2\uffff\1\172\2\145\1\172\1\uffff\1\171"+
+        "\1\150\1\156\1\157\1\172\1\171\1\172\2\141\1\172\1\124\1\154\1\172"+
+        "\1\156\1\157\1\164\1\171\1\172\2\uffff\1\172\1\uffff\1\145\3\172"+
+        "\1\uffff\1\172\1\163\1\141\1\uffff\1\166\1\156\2\172\1\uffff\1\137"+
+        "\1\uffff\1\144\1\162\1\156\1\157\1\122\1\172\1\151\1\160\2\172\1"+
+        "\145\1\uffff\2\172\1\uffff\1\163\1\162\1\145\1\156\1\uffff\1\172"+
+        "\1\uffff\1\164\1\156\1\uffff\1\171\1\141\1\uffff\1\172\1\156\1\172"+
+        "\1\160\2\uffff\1\156\4\uffff\1\172\1\156\1\151\1\124\2\uffff\1\142"+
+        "\1\172\1\157\1\164\1\154\1\145\1\154\1\uffff\1\156\1\154\2\uffff"+
+        "\1\162\2\uffff\1\164\1\145\1\143\1\172\1\uffff\1\145\1\163\1\160"+
+        "\1\163\1\uffff\1\172\1\uffff\1\145\1\172\1\uffff\1\143\1\157\2\171"+
+        "\1\uffff\1\164\2\172\1\146\1\141\2\145\1\172\1\145\1\141\1\164\1"+
+        "\157\1\uffff\1\172\1\151\1\145\1\163\1\uffff\1\172\1\uffff\1\145"+
+        "\1\162\1\160\1\172\1\157\2\uffff\1\172\1\163\1\172\1\155\1\uffff"+
+        "\1\155\1\144\2\151\1\uffff\1\164\2\172\1\uffff\1\115\1\172\1\145"+
+        "\1\uffff\1\143\1\uffff\1\163\1\uffff\1\145\2\172\1\157\1\156\1\151"+
+        "\2\uffff\1\141\1\uffff\1\172\1\157\1\172\1\156\2\uffff\1\156\1\164"+
+        "\1\157\1\160\1\uffff\1\154\1\uffff\1\164\2\172\1\156\1\160\1\103"+
+        "\1\141\2\uffff\1\172\1\151\1\154\1\164\1\uffff\1\156\1\141\1\151"+
+        "\1\147\1\163\1\157\1\172\1\163\1\156\1\uffff\2\172\2\uffff";
     static final String DFA16_acceptS =
         "\2\uffff\1\2\1\3\1\4\3\uffff\1\10\1\11\3\uffff\1\15\1\16\4\uffff"+
-        "\1\26\1\27\1\uffff\1\31\23\uffff\1\131\1\132\1\133\1\uffff\1\140"+
-        "\1\142\1\152\2\uffff\1\167\1\170\2\uffff\1\174\1\175\2\uffff\1\167"+
+        "\1\26\1\27\1\uffff\1\31\23\uffff\1\131\1\132\1\133\1\134\1\136\1"+
+        "\uffff\1\152\2\uffff\1\167\1\170\2\uffff\1\174\1\175\2\uffff\1\167"+
         "\1\2\1\3\1\4\3\uffff\1\7\1\153\1\10\1\11\5\uffff\1\165\5\uffff\1"+
         "\15\1\16\10\uffff\1\26\1\27\1\uffff\1\31\36\uffff\1\172\1\173\1"+
-        "\72\1\137\1\75\7\uffff\1\131\1\132\1\133\3\uffff\1\140\1\142\1\152"+
+        "\72\1\147\1\75\7\uffff\1\131\1\132\1\133\1\134\1\136\3\uffff\1\152"+
         "\1\166\1\170\1\171\1\174\11\uffff\1\107\5\uffff\1\14\1\uffff\1\123"+
         "\23\uffff\1\51\2\uffff\1\130\36\uffff\1\127\7\uffff\1\5\14\uffff"+
         "\1\52\17\uffff\1\76\15\uffff\1\62\1\63\11\uffff\1\74\31\uffff\1"+
         "\60\13\uffff\1\106\7\uffff\1\32\4\uffff\1\156\4\uffff\1\125\31\uffff"+
-        "\1\151\4\uffff\1\135\24\uffff\1\105\11\uffff\1\33\15\uffff\1\104"+
-        "\13\uffff\1\157\10\uffff\1\124\1\136\1\uffff\1\150\1\160\40\uffff"+
-        "\1\134\13\uffff\1\163\3\uffff\1\47\1\uffff\1\121\10\uffff\1\144"+
+        "\1\151\4\uffff\1\145\24\uffff\1\105\11\uffff\1\33\15\uffff\1\104"+
+        "\13\uffff\1\157\10\uffff\1\124\1\uffff\1\146\1\150\1\160\40\uffff"+
+        "\1\144\13\uffff\1\163\3\uffff\1\47\1\uffff\1\121\10\uffff\1\140"+
         "\4\uffff\1\37\4\uffff\1\12\10\uffff\1\21\16\uffff\1\120\10\uffff"+
-        "\1\44\3\uffff\1\45\1\112\4\uffff\1\73\22\uffff\1\36\1\145\1\uffff"+
+        "\1\44\3\uffff\1\45\1\112\4\uffff\1\73\22\uffff\1\36\1\141\1\uffff"+
         "\1\61\4\uffff\1\46\3\uffff\1\102\4\uffff\1\110\1\uffff\1\35\13\uffff"+
         "\1\53\2\uffff\1\57\4\uffff\1\122\1\uffff\1\1\2\uffff\1\101\2\uffff"+
         "\1\40\4\uffff\1\115\1\20\1\uffff\1\22\1\23\1\24\1\25\4\uffff\1\30"+
-        "\1\50\7\uffff\1\56\2\uffff\1\161\1\162\1\uffff\1\147\1\55\4\uffff"+
-        "\1\146\4\uffff\1\155\1\uffff\1\114\2\uffff\1\54\4\uffff\1\41\14"+
+        "\1\50\7\uffff\1\56\2\uffff\1\161\1\162\1\uffff\1\143\1\55\4\uffff"+
+        "\1\142\4\uffff\1\155\1\uffff\1\114\2\uffff\1\54\4\uffff\1\41\14"+
         "\uffff\1\117\4\uffff\1\13\1\uffff\1\154\5\uffff\1\116\1\43\4\uffff"+
         "\1\164\4\uffff\1\111\3\uffff\1\17\3\uffff\1\100\1\uffff\1\66\1\uffff"+
-        "\1\103\6\uffff\1\6\1\34\1\uffff\1\141\4\uffff\1\65\1\70\4\uffff"+
-        "\1\143\1\uffff\1\67\7\uffff\1\77\1\113\4\uffff\1\126\11\uffff\1"+
+        "\1\103\6\uffff\1\6\1\34\1\uffff\1\135\4\uffff\1\65\1\70\4\uffff"+
+        "\1\137\1\uffff\1\67\7\uffff\1\77\1\113\4\uffff\1\126\11\uffff\1"+
         "\71\2\uffff\1\42\1\64";
     static final String DFA16_specialS =
         "\1\2\64\uffff\1\1\1\0\u02cd\uffff}>";
     static final String[] DFA16_transitionS = {
             "\11\70\2\67\2\70\1\67\22\70\1\67\1\70\1\65\4\70\1\66\1\10\1"+
-            "\11\1\56\1\60\1\15\1\7\1\45\1\44\1\61\11\64\1\4\1\70\1\52\1"+
-            "\16\1\54\1\70\1\57\1\22\1\42\1\33\1\17\1\13\3\63\1\41\2\63\1"+
+            "\11\1\55\1\60\1\15\1\7\1\45\1\44\1\61\11\64\1\4\1\70\1\52\1"+
+            "\16\1\54\1\70\1\56\1\22\1\42\1\33\1\17\1\13\3\63\1\41\2\63\1"+
             "\43\1\36\1\63\1\25\1\6\1\63\1\1\1\34\1\46\6\63\1\23\1\70\1\24"+
-            "\1\62\1\63\1\70\1\40\1\63\1\32\1\12\1\20\1\55\1\50\1\37\1\31"+
+            "\1\62\1\63\1\70\1\40\1\63\1\32\1\12\1\20\1\57\1\50\1\37\1\31"+
             "\3\63\1\51\1\63\1\14\1\35\1\63\1\5\1\30\1\47\1\21\1\27\4\63"+
             "\1\2\1\53\1\3\1\26\uff81\70",
             "\1\72\11\uffff\1\71",
@@ -4407,13 +4407,13 @@ public class InternalRoomLexer extends Lexer {
             "\1\u0082",
             "\1\u0084\20\uffff\1\u0083",
             "\1\u0085",
-            "\1\u0088\15\uffff\1\u0087\11\uffff\1\u0086",
+            "\1\u0087\15\uffff\1\u0088\11\uffff\1\u0086",
             "",
             "",
             "",
-            "\1\u008d\7\uffff\1\u008e\10\uffff\1\u008c",
             "",
             "",
+            "\1\u008f\7\uffff\1\u0090\10\uffff\1\u008e",
             "",
             "\1\u0092\37\uffff\1\u0092",
             "\32\73\4\uffff\1\73\1\uffff\32\73",
@@ -4507,11 +4507,11 @@ public class InternalRoomLexer extends Lexer {
             "",
             "",
             "",
+            "",
+            "",
             "\1\u00e0",
             "\1\u00e1",
             "\1\u00e2",
-            "",
-            "",
             "",
             "",
             "",
@@ -4739,8 +4739,8 @@ public class InternalRoomLexer extends Lexer {
             "",
             "\1\u01b3",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
+            "\1\u01b5",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
-            "\1\u01b6",
             "",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
@@ -4809,8 +4809,8 @@ public class InternalRoomLexer extends Lexer {
             "\1\u01f3",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "",
-            "",
             "\1\u01f5",
+            "",
             "",
             "",
             "\1\u01f6",
@@ -5296,11 +5296,11 @@ public class InternalRoomLexer extends Lexer {
 
                         else if ( (LA16_0=='>') ) {s = 44;}
 
-                        else if ( (LA16_0=='f') ) {s = 45;}
+                        else if ( (LA16_0=='*') ) {s = 45;}
 
-                        else if ( (LA16_0=='*') ) {s = 46;}
+                        else if ( (LA16_0=='@') ) {s = 46;}
 
-                        else if ( (LA16_0=='@') ) {s = 47;}
+                        else if ( (LA16_0=='f') ) {s = 47;}
 
                         else if ( (LA16_0=='+') ) {s = 48;}
 

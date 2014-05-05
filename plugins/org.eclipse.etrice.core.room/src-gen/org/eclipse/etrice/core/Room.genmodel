@@ -364,9 +364,5 @@
     <genClasses ecoreClass="Room.ecore#//Guard">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Guard/guard"/>
     </genClasses>
-    <genClasses ecoreClass="Room.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importedNamespace"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Import/importURI"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

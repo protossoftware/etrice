@@ -56,9 +56,5 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ETPhys.ecore#//RuntimeClass/docu"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//RuntimeClass/threadModel"/>
     </genClasses>
-    <genClasses ecoreClass="ETPhys.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//Import/importedNamespace"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//Import/importURI"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

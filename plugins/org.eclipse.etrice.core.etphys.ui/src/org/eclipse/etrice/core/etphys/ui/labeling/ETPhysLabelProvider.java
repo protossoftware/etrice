@@ -13,24 +13,15 @@
 package org.eclipse.etrice.core.etphys.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
+import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
-import org.eclipse.jface.resource.FontDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
-import org.eclipse.swt.SWT;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider; 
-import org.eclipse.xtext.ui.label.StylerFactory;
- 
-
-
-
 
 import com.google.inject.Inject;
 
@@ -39,14 +30,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class ETPhysLabelProvider extends DefaultEObjectLabelProvider {
-
-	private static final String KEYWORD_COLOR = "KEYWORD_COLOR";
-
-	@Inject
-	private StylerFactory stylerFactory;
-	private Styler keywordStyler = null;
-	private Styler typeStyler = null;
+public class ETPhysLabelProvider extends BaseLabelProvider {
 
 	@Inject
 	public ETPhysLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -57,7 +41,8 @@ public class ETPhysLabelProvider extends DefaultEObjectLabelProvider {
 		return "etphys_PhysicalModel.png";
 	}
 
-	String image(Import mdl) {
+	@Override
+	public String image(Import mdl) {
 		return "etphys_Import.png";
 	}
 
@@ -109,34 +94,4 @@ public class ETPhysLabelProvider extends DefaultEObjectLabelProvider {
 		return txt;
 	}
 	
-	StyledString text(Import im) {
-		if (im.getImportedNamespace()==null) {
-			StyledString txt = new StyledString("import model "+im.getImportURI());
-			txt.setStyle(0, 12, getKeywordStyler());
-			return txt;
-		}
-		else {
-			StyledString txt = new StyledString("import ns "+im.getImportedNamespace());
-			txt.setStyle(0, 9, getKeywordStyler());
-			return txt;
-		}
-	}
-	
-	private Styler getKeywordStyler() {
-		if (keywordStyler==null) {
-			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
-			FontDescriptor boldFont = font.setStyle(SWT.BOLD);
-			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null);
-		}
-		return keywordStyler;
-	}
-
-	private Styler getTypeStyler() {
-		if (typeStyler==null) {
-			FontDescriptor font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT);
-			FontDescriptor italicFont = font.setStyle(SWT.ITALIC);
-			typeStyler = stylerFactory.createStyler(italicFont, null, null);
-		}
-		return typeStyler;
-	}
 }

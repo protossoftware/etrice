@@ -1,6 +1,6 @@
 /**
  */
-package org.eclipse.etrice.core.etphys.eTPhys.impl;
+package org.eclipse.etrice.core.common.base.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.Import;
+import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.Import;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,8 +19,8 @@ import org.eclipse.etrice.core.etphys.eTPhys.Import;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.ImportImpl#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.common.base.impl.ImportImpl#getImportURI <em>Import URI</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,7 +86,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   @Override
   protected EClass eStaticClass()
   {
-    return ETPhysPackage.Literals.IMPORT;
+    return BasePackage.Literals.IMPORT;
   }
 
   /**
@@ -109,7 +109,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
     String oldImportedNamespace = importedNamespace;
     importedNamespace = newImportedNamespace;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
   }
 
   /**
@@ -132,7 +132,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
     String oldImportURI = importURI;
     importURI = newImportURI;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.IMPORT__IMPORT_URI, oldImportURI, importURI));
+      eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.IMPORT__IMPORT_URI, oldImportURI, importURI));
   }
 
   /**
@@ -145,9 +145,9 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ETPhysPackage.IMPORT__IMPORTED_NAMESPACE:
+      case BasePackage.IMPORT__IMPORTED_NAMESPACE:
         return getImportedNamespace();
-      case ETPhysPackage.IMPORT__IMPORT_URI:
+      case BasePackage.IMPORT__IMPORT_URI:
         return getImportURI();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -163,10 +163,10 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ETPhysPackage.IMPORT__IMPORTED_NAMESPACE:
+      case BasePackage.IMPORT__IMPORTED_NAMESPACE:
         setImportedNamespace((String)newValue);
         return;
-      case ETPhysPackage.IMPORT__IMPORT_URI:
+      case BasePackage.IMPORT__IMPORT_URI:
         setImportURI((String)newValue);
         return;
     }
@@ -183,10 +183,10 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ETPhysPackage.IMPORT__IMPORTED_NAMESPACE:
+      case BasePackage.IMPORT__IMPORTED_NAMESPACE:
         setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
         return;
-      case ETPhysPackage.IMPORT__IMPORT_URI:
+      case BasePackage.IMPORT__IMPORT_URI:
         setImportURI(IMPORT_URI_EDEFAULT);
         return;
     }
@@ -203,9 +203,9 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ETPhysPackage.IMPORT__IMPORTED_NAMESPACE:
+      case BasePackage.IMPORT__IMPORTED_NAMESPACE:
         return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
-      case ETPhysPackage.IMPORT__IMPORT_URI:
+      case BasePackage.IMPORT__IMPORT_URI:
         return IMPORT_URI_EDEFAULT == null ? importURI != null : !IMPORT_URI_EDEFAULT.equals(importURI);
     }
     return super.eIsSet(featureID);

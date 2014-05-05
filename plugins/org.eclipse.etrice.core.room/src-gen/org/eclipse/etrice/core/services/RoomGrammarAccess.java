@@ -4691,94 +4691,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getGuardDetailCodeParserRuleCall_1_0() { return cGuardDetailCodeParserRuleCall_1_0; }
 	}
 
-	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0 = (RuleCall)cImportedNamespaceAssignment_1_0_0.eContents().get(0);
-		private final Keyword cFromKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
-		private final Keyword cModelKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
-		private final Assignment cImportURIAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
-		
-		//// **************************************************************
-		//// general
-		//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
-		//// this is configured in the work flow by
-		////			fragment = scoping.ImportURIScopingFragment {}
-		//// and by overriding configureIScopeProviderDelegate in the runtime module with 
-		////			ImportedNamespaceAwareLocalScopeProvider
-		//// also configure in the RuntimeModule
-		////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-		////		return ModelLocatorUriResolver.class;
-		////	}
-		//// and in the UiRuntimeModule
-		////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
-		////		return GlobalNonPlatformURIEditorOpener.class;
-		////	}
-		////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-		////		return ImportAwareHyperlinkHelper.class;
-		////	}
-		//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
-		//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-		//Import:
-		//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
-		public ParserRule getRule() { return rule; }
-
-		//"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING
-		public Group getGroup() { return cGroup; }
-
-		//"import"
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-
-		//importedNamespace=ImportedFQN "from" | "model"
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
-		//importedNamespace=ImportedFQN "from"
-		public Group getGroup_1_0() { return cGroup_1_0; }
-
-		//importedNamespace=ImportedFQN
-		public Assignment getImportedNamespaceAssignment_1_0_0() { return cImportedNamespaceAssignment_1_0_0; }
-
-		//ImportedFQN
-		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0; }
-
-		//"from"
-		public Keyword getFromKeyword_1_0_1() { return cFromKeyword_1_0_1; }
-
-		//"model"
-		public Keyword getModelKeyword_1_1() { return cModelKeyword_1_1; }
-
-		//importURI=STRING
-		public Assignment getImportURIAssignment_2() { return cImportURIAssignment_2; }
-
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_2_0() { return cImportURISTRINGTerminalRuleCall_2_0; }
-	}
-
-	public class ImportedFQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImportedFQN");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cFQNParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//ImportedFQN:
-		//	FQN ".*"?;
-		public ParserRule getRule() { return rule; }
-
-		//FQN ".*"?
-		public Group getGroup() { return cGroup; }
-
-		//FQN
-		public RuleCall getFQNParserRuleCall_0() { return cFQNParserRuleCall_0; }
-
-		//".*"?
-		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
-	}
-
 	public class MULTIPLICITYElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MULTIPLICITY");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -5127,8 +5039,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private TriggerElements pTrigger;
 	private MessageFromIfElements pMessageFromIf;
 	private GuardElements pGuard;
-	private ImportElements pImport;
-	private ImportedFQNElements pImportedFQN;
 	private MULTIPLICITYElements pMULTIPLICITY;
 	private AnnotationTargetTypeElements pAnnotationTargetType;
 	private RoomAnnotationTargetEnumElements unknownRuleRoomAnnotationTargetEnum;
@@ -6089,46 +5999,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getGuardAccess().getRule();
 	}
 
-	//// **************************************************************
-	//// general
-	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
-	//// this is configured in the work flow by
-	////			fragment = scoping.ImportURIScopingFragment {}
-	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
-	////			ImportedNamespaceAwareLocalScopeProvider
-	//// also configure in the RuntimeModule
-	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return ModelLocatorUriResolver.class;
-	////	}
-	//// and in the UiRuntimeModule
-	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
-	////		return GlobalNonPlatformURIEditorOpener.class;
-	////	}
-	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-	////		return ImportAwareHyperlinkHelper.class;
-	////	}
-	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
-	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-	//Import:
-	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
-	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
-	}
-	
-	public ParserRule getImportRule() {
-		return getImportAccess().getRule();
-	}
-
-	//ImportedFQN:
-	//	FQN ".*"?;
-	public ImportedFQNElements getImportedFQNAccess() {
-		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
-	}
-	
-	public ParserRule getImportedFQNRule() {
-		return getImportedFQNAccess().getRule();
-	}
-
 	//// the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
 	//// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
 	//MULTIPLICITY returns ecore::EInt:
@@ -6228,6 +6098,46 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
+	//// Import rules
+	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+	//// this is configured in the work flow by
+	////			fragment = scoping.ImportURIScopingFragment {}
+	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
+	////			ImportedNamespaceAwareLocalScopeProvider
+	//// also configure in the RuntimeModule
+	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+	////		return PlatformRelativeUriResolver.class;
+	////	}
+	//// and in the UiRuntimeModule
+	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	////		return GlobalNonPlatformURIEditorOpener.class;
+	////	}
+	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+	////		return ImportAwareHyperlinkHelper.class;
+	////	}
+	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
+	//Import:
+	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
+	public BaseGrammarAccess.ImportElements getImportAccess() {
+		return gaBase.getImportAccess();
+	}
+	
+	public ParserRule getImportRule() {
+		return getImportAccess().getRule();
+	}
+
+	//ImportedFQN:
+	//	FQN ".*"?;
+	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
+		return gaBase.getImportedFQNAccess();
+	}
+	
+	public ParserRule getImportedFQNRule() {
+		return getImportedFQNAccess().getRule();
+	}
+
+	//// **************************************************************
 	//// Documentation Rule
 	//Documentation:
 	//	{Documentation} "[" lines+=STRING* "]";
@@ -6237,6 +6147,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDocumentationRule() {
 		return getDocumentationAccess().getRule();
+	}
+
+	//// **************************************************************
+	//// Time Rule
+	//TIME returns ecore::ELong:
+	//	INT "s" | INT "ms" | INT "us" | INT "ns";
+	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
+		return gaBase.getTIMEAccess();
+	}
+	
+	public ParserRule getTIMERule() {
+		return getTIMEAccess().getRule();
 	}
 
 	//// **************************************************************

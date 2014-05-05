@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.ui.linking.ImportAwareHyperlinkHelper;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.room.ActorContainerClass;

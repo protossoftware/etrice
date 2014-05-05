@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.scoping;
+package org.eclipse.etrice.core.common.scoping;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  *
  */
 public class ModelLocator {
-	private static final String IMODEL_LOCATOR_ID = "org.eclipse.etrice.core.room.modellocator";
+	private static final String IMODEL_LOCATOR_ID = "org.eclipse.etrice.core.common.modellocator";
 
 	private static ModelLocator instance = null;
 	private ArrayList<IModelLocator> locators = new ArrayList<IModelLocator>();

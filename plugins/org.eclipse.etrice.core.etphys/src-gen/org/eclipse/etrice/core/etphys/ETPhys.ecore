@@ -12,7 +12,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true">
+        eType="ecore:EClass ../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Import"
+        containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>A list of all imported models.&#xD;&#xA;"/>
       </eAnnotations>
@@ -186,20 +187,5 @@
   <eClassifiers xsi:type="ecore:EEnum" name="ThreadModel">
     <eLiterals name="SINGLE_THREADED" literal="singleThreaded"/>
     <eLiterals name="MULTI_THREADED" value="1" literal="multiThreaded"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The import declares an imported model (given as a URI) and&#xD;&#xA;an optional imported namespace.&#xD;&#xA;"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>The imported name space has to be a dot separated qualified name followed by .*.&#xD;&#xA;Example: my.namespace.*&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>The import URI can be a relative or absolute file system path.&#xD;&#xA;It may contain environment variables in ${} which will be expanded.&#xD;&#xA;&lt;p>&#xD;&#xA;Examples:&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>import model &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;../../AnotherProject/models/AnotherModel.room&quot;&lt;/li>&#xD;&#xA;  &lt;li>import my.namespace.* from &quot;/${ROOM_MODELS}/SomeModel.room&quot;&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

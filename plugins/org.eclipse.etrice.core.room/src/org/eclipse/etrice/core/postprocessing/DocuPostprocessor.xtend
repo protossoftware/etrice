@@ -1739,34 +1739,7 @@ class DocuPostprocessor {
 				This is a guard condition specified in the code generator's target language.
 				It has to evaluate to a boolean value.
 			''')
-			
-		//------------------------------------------------------------------
-		cls = pckg.getClass("Import")
-		cls.setDocumentation('''
-			The import declares an imported model (given as a URI) and
-			an optional imported namespace.
-		''')
-		
-		cls.getAttribute("importedNamespace").setDocumentation(
-			'''
-				The imported name space has to be a dot separated qualified name followed by .*.
-				Example: my.namespace.*
-			''')
-		
-		cls.getAttribute("importURI").setDocumentation(
-			'''
-				The import URI can be a relative or absolute file system path.
-				It may contain environment variables in ${} which will be expanded.
-				<p>
-				Examples:
-				<ul>
-				  <li>import model "AnotherModel.room"</li>
-				  <li>import my.namespace.* from "AnotherModel.room"</li>
-				  <li>import my.namespace.* from "../../AnotherProject/models/AnotherModel.room"</li>
-				  <li>import my.namespace.* from "/${ROOM_MODELS}/SomeModel.room"</li>
-				</ul>
-				</p>
-			''')
+	
 	}
 	
 }

@@ -700,6 +700,46 @@ ruleEnumAnnotationAttribute returns [EObject current=null]
 
 
 
+
+
+// Entry rule entryRuleImportedFQN
+entryRuleImportedFQN returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getImportedFQNRule()); } 
+	 iv_ruleImportedFQN=ruleImportedFQN 
+	 { $current=$iv_ruleImportedFQN.current.getText(); }  
+	 EOF 
+;
+
+// Rule ImportedFQN
+ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
+    }
+    this_FQN_0=ruleFQN    {
+		$current.merge(this_FQN_0);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+(
+	kw='.*' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
+    }
+)?)
+    ;
+
+
+
+
+
 // Entry rule entryRuleDocumentation
 entryRuleDocumentation returns [EObject current=null] 
 	:

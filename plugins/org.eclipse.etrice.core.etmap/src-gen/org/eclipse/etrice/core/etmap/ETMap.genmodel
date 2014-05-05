@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.etmap.editor/src" modelPluginID="org.eclipse.etrice.core.etmap"
     forceOverwrite="true" modelName="ETMap" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.etmap.edit"
-    editorPluginID="org.eclipse.etrice.core.etmap.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.genmodel#//eTPhys ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
+    editorPluginID="org.eclipse.etrice.core.etmap.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../../../../../../org.eclipse.etrice.core.etphys/src-gen/org/eclipse/etrice/core/etphys/ETPhys.genmodel#//eTPhys ../../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
   <genPackages prefix="ETMap" basePackage="org.eclipse.etrice.core.etmap" disposableProviderFactory="true"
       ecorePackage="ETMap.ecore#/">
     <genClasses ecoreClass="ETMap.ecore#//MappingModel">
@@ -25,10 +25,6 @@
     <genClasses ecoreClass="ETMap.ecore#//ThreadMapping">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ETMap.ecore#//ThreadMapping/logicalThread"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ETMap.ecore#//ThreadMapping/physicalThread"/>
-    </genClasses>
-    <genClasses ecoreClass="ETMap.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETMap.ecore#//Import/importedNamespace"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETMap.ecore#//Import/importURI"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
 import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
-import org.eclipse.etrice.core.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
