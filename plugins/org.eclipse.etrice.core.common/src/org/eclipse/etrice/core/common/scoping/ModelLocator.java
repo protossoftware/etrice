@@ -19,17 +19,22 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 /**
  * @author Henrik Rentz-Reichert
  *
  */
+@Singleton
 public class ModelLocator {
 	private static final String IMODEL_LOCATOR_ID = "org.eclipse.etrice.core.common.modellocator";
 
-	private static ModelLocator instance = null;
 	private ArrayList<IModelLocator> locators = new ArrayList<IModelLocator>();
 	
-	private ModelLocator() {
+	@Inject
+	public ModelLocator(IModelLocator defaultLocator) {
+		addLocator(defaultLocator);
 	}
 	
 	public void loadExtensions() {
@@ -50,16 +55,10 @@ public class ModelLocator {
 		}
 	}
 
-	public static ModelLocator getInstance() {
-		if (instance==null) {
-			instance = new ModelLocator();
-		}
-		
-		return instance;
-	}
-
 	public void addLocator(IModelLocator locator) {
-		locators.add(locator);
+		if (locator!=null) {
+			locators.add(0, locator);
+		}
 	}
 
 	public void removeLocator(IModelLocator locator) {

@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
+import com.google.inject.Inject;
+
 /**
  * This URI resolver delegates to {@link ModelLocator}.
  * 
@@ -23,6 +25,9 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
  *
  */
 public class ModelLocatorUriResolver extends ImportUriResolver {
+	
+	@Inject
+	private ModelLocator modelLocator;
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.scoping.impl.ImportUriResolver#resolve(org.eclipse.emf.ecore.EObject)
@@ -39,6 +44,6 @@ public class ModelLocatorUriResolver extends ImportUriResolver {
 	}
 	
 	public String resolve(String resolve, Resource resource) {
-		return ModelLocator.getInstance().resolve(resolve, resource);
+		return modelLocator.resolve(resolve, resource);
 	}
 }

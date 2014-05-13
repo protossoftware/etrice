@@ -14,10 +14,13 @@ package org.eclipse.etrice.core.common.scoping;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Henrik Rentz-Reichert
  *
  */
+@ImplementedBy(StandardModelLocator.class)
 public interface IModelLocator {
 	String resolve(String resolve, Resource resource);
 }

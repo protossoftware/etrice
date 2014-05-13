@@ -11,12 +11,6 @@
        genModel = "org/eclipse/etrice/core/common/Base.genmodel" /> 
 	
   </extension>
-  <extension
-        point="org.eclipse.etrice.core.common.modellocator">
-     <locator
-           class="org.eclipse.etrice.core.common.scoping.StandardModelLocator">
-     </locator>
-  </extension>
 
 
 

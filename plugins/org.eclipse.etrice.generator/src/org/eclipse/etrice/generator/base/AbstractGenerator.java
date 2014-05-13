@@ -26,9 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.etrice.core.common.scoping.ModelLocator;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
-import org.eclipse.etrice.core.common.scoping.StandardModelLocator;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -372,8 +370,6 @@ public abstract class AbstractGenerator {
 	@Inject
 	protected ModelLocatorUriResolver uriResolver;
 	
-	private StandardModelLocator modelLocator = null;
-	
 	/**
 	 * The injected translation provider
 	 */
@@ -462,11 +458,6 @@ public abstract class AbstractGenerator {
 	}
 
 	protected void activateModelLocator() {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			modelLocator = new StandardModelLocator();
-			ModelLocator.getInstance().addLocator(modelLocator);
-		}
-		// else: if Eclipse is running the locator is active via the extension point
 	}
 	
 	/**
@@ -518,9 +509,6 @@ public abstract class AbstractGenerator {
 	}
 	
 	protected void deactivateModelLocator() {
-		if (modelLocator!=null) {
-			ModelLocator.getInstance().removeLocator(modelLocator);
-		}
 	}
 
 	/**
