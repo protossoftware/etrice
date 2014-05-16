@@ -34,11 +34,6 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		super(plugin);
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.etrice.core.validation.RoomJavaValidator> bindRoomJavaValidator() {
-		return org.eclipse.etrice.core.ui.RoomModelValidator.class;
-	}
-
 	@Override
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return RoomOutlinePage.class;

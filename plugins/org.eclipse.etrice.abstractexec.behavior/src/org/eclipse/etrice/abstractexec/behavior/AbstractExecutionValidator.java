@@ -13,11 +13,15 @@
 
 package org.eclipse.etrice.abstractexec.behavior;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.base.NullLogger;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
@@ -29,12 +33,12 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.IRoomValidator;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
@@ -42,7 +46,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  * @author rentzhnr
  * 
  */
-public class AbstractExecutionValidator implements IRoomValidator {
+public class AbstractExecutionValidator implements ICustomValidator {
 
 	// c&p in tests
 	public static final String DIAG_CODE_VIOLATION_TRIGGER = "etrice.violation_trigger";
@@ -50,10 +54,13 @@ public class AbstractExecutionValidator implements IRoomValidator {
 	public static final String DIAG_CODE_MISSING_TRIGGER = "etrice.receive_message";
 	public static final String DIAG_CODE_MISSING_MESSAGESEND = "etrice.send_message";
 	
+	private static final Set<EClass> classesToCheck = new HashSet<EClass>();
 	private static boolean traceExec = false;
 	private static String traceName = "";
 	static {
-		if (Activator.getDefault().isDebugging()) {
+		classesToCheck.add(RoomPackage.Literals.ACTOR_CLASS);
+		
+		if (Activator.getDefault() != null && Activator.getDefault().isDebugging()) {
 			String value = Platform
 					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/abstractexec");
 			if (value != null && value.equalsIgnoreCase(Boolean.toString(true))) {
@@ -64,19 +71,14 @@ public class AbstractExecutionValidator implements IRoomValidator {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.etrice.core.validation.IRoomValidator#validate(org.eclipse
-	 * .emf.ecore.EObject,
-	 * org.eclipse.xtext.validation.ValidationMessageAcceptor)
-	 */
 	@Override
 	public void validate(EObject object,
-			ValidationMessageAcceptor messageAcceptor) {
+			ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
 
 		if (!(object instanceof ActorClass))
+			return;
+		
+		if(context.isGeneration())
 			return;
 		
 		ActorClass ac = (ActorClass) object;
@@ -169,6 +171,11 @@ public class AbstractExecutionValidator implements IRoomValidator {
 	@Override
 	public String getDescription() {
 		return "This validator checks the state machine against the protocol semantics of its ports.";
+	}
+	
+	@Override
+	public Set<EClass> getClassesToCheck() {
+		return classesToCheck;
 	}
 
 	private void createMarkersForProposals(ProposalGenerator propGen,

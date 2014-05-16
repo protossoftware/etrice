@@ -14,31 +14,43 @@
 
 package org.eclipse.etrice.abstractexec.behavior;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.base.NullLogger;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.validation.IRoomValidator;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 
-public class ReachabilityValidator implements IRoomValidator {
+public class ReachabilityValidator implements ICustomValidator {
 
 	public static final String DIAG_CODE_UNREACHABLE = "etrice.unreachable";
 	
+	private static final Set<EClass> classesToCheck = new HashSet<EClass>();
+	{
+		classesToCheck.add(RoomPackage.Literals.ACTOR_CLASS);
+	}
+	
 	@Override
-	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor) {
+	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
 
 		if (!(object instanceof ActorClass))
 			return;
-
+		
+		if(context.isGeneration())
+			return;
+		
 		ActorClass ac = (ActorClass) object;
 		
 		if (ac.isAbstract())
@@ -91,6 +103,11 @@ public class ReachabilityValidator implements IRoomValidator {
 	@Override
 	public String getDescription() {
 		return "This validator checks the reachability of state graph items.";
+	}
+
+	@Override
+	public Set<EClass> getClassesToCheck() {
+		return classesToCheck;
 	}
 
 }

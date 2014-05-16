@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -382,9 +383,7 @@ public abstract class AbstractGenerator {
 	@Inject
 	private ModelLoader modelLoader;
 	
-	/**
-	 * The rsource validator which is injected using the ROOM DSL injector
-	 */
+	@Inject
 	protected IResourceValidator validator;
 
 	/**
@@ -399,12 +398,9 @@ public abstract class AbstractGenerator {
 	 * setup the ROOM core model plug-in and create a validator using injection
 	 */
 	protected void setupRoomModel() {
-		Injector roomInjector;
-		if (EMFPlugin.IS_ECLIPSE_RUNNING)
-			roomInjector = new org.eclipse.etrice.core.RoomStandaloneSetup().createInjector();
-		else
-			roomInjector = new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-		validator = roomInjector.getInstance(IResourceValidator.class);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING)
+			new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
+		
 		org.eclipse.etrice.core.genmodel.SetupGenmodel.doSetup();
 	}
 

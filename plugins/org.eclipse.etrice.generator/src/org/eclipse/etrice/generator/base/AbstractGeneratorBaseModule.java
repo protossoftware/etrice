@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
@@ -63,8 +64,11 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 			binder.bind(ITranslationProvider.class).to(bindITranslationProvider());
 		if (bindIDataConfiguration()!=null)
 			binder.bind(IDataConfiguration.class).to(bindIDataConfiguration());
+		
+		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
+		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();
 	}
-	
+
 	/**
 	 * Abstract method that retrieves a class to which {@link ILanguageExtension} is bound
 	 * @return a Class extending {@link ILanguageExtension}
