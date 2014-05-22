@@ -14,12 +14,15 @@ package org.eclipse.etrice.core.ui.preferences;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.etrice.core.ui.RoomUiActivator;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager.Registry;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager.ValidatorInfo;
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -45,11 +48,33 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  */
 public class ValidationExtensionPreferences extends PreferencePage implements IWorkbenchPreferencePage {
 
-	/**
-	 * 
-	 */
 	private static final String VALIDATION_EXTENSIONS_EXCLUDED = "ValidationExtensionPreferences.excluded";
 	private static final String SEP = "#";
+	
+	public static void initValidationPreferencesFromStore(){
+		Set<String> excludedIds = readExcludedFromPreferences();
+		Registry registry = ValidatorExtensionManager.Registry.getInstance();
+		registry.setIncluded(new ArrayList<ValidatorInfo>());
+		List<ValidatorInfo> all = registry.getInfos();
+		for(ValidatorInfo val : all)
+			if(!excludedIds.contains(val.getName()))
+				registry.include(val);
+	}
+	
+	private static IPreferenceStore getDefaultPreferenceStore(){
+		return RoomUiActivator.getDefault().getPreferenceStore();
+	}
+	
+	private static Set<String> readExcludedFromPreferences(){
+		String stored = getDefaultPreferenceStore().getString(VALIDATION_EXTENSIONS_EXCLUDED);
+		String[] excl = stored.split(SEP);
+		HashSet<String> excludedIds = new HashSet<String>();
+		for (String ex : excl) {
+			excludedIds.add(ex);
+		}
+		
+		return excludedIds;
+	}
 
 	private class ValidationExtensionContentProvider implements IStructuredContentProvider {
 
@@ -104,7 +129,7 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 	 */
 	@Override
 	public void init(IWorkbench workbench) {
-		setPreferenceStore(RoomUiActivator.getDefault().getPreferenceStore());
+		setPreferenceStore(getDefaultPreferenceStore());
 	}
 
 	/* (non-Javadoc)
@@ -171,12 +196,8 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 	}
 
 	private void setChecks() {
-		String stored = getPreferenceStore().getString(VALIDATION_EXTENSIONS_EXCLUDED);
-		String[] excl = stored.split(SEP);
-		HashSet<String> excludedIds = new HashSet<String>();
-		for (String ex : excl) {
-			excludedIds.add(ex);
-		}
+		Set<String> excludedIds = readExcludedFromPreferences();
+		
 		ArrayList<ValidatorInfo> allChecked = new ArrayList<ValidatorInfo>();
 		for (ValidatorInfo vi : ValidatorExtensionManager.Registry.getInstance().getInfos()) {
 			if (!excludedIds.contains(vi.getName()))
@@ -194,9 +215,7 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 		}
 		
 		Registry registry = ValidatorExtensionManager.Registry.getInstance();
-		registry.getExcludedInfos().clear();
-		registry.getExcludedInfos().addAll(registry.getInfos());
-		registry.getExcludedInfos().removeAll(included);
+		registry.setIncluded(included);
 		
 		StringBuilder ex = new StringBuilder();
 		for (ValidatorInfo vi : registry.getExcludedInfos()) {

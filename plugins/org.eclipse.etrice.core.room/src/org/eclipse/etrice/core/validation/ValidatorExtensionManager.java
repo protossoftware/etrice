@@ -13,8 +13,12 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -149,12 +153,24 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			excluded.remove(info.getValidator());
 		}
 
-		public ArrayList<ValidatorInfo> getInfos() {
-			return infos;
+		public void setIncluded(Collection<ValidatorInfo> includedInfos) {
+			excluded.clear();
+			excludedInfos.clear();
+
+			Set<ValidatorInfo> toExclude = new HashSet<ValidatorInfo>(infos);
+			toExclude.removeAll(includedInfos);
+			excludedInfos.addAll(toExclude);
+
+			for (ValidatorInfo info : excludedInfos)
+				excluded.add(info.getValidator());
 		}
 
-		public ArrayList<ValidatorInfo> getExcludedInfos() {
-			return excludedInfos;
+		public List<ValidatorInfo> getInfos() {
+			return Collections.unmodifiableList(infos);
+		}
+
+		public List<ValidatorInfo> getExcludedInfos() {
+			return Collections.unmodifiableList(excludedInfos);
 		}
 		
 		public void validate(EObject object, CheckMode checkMode, ValidationMessageAcceptor messageAcceptor) {

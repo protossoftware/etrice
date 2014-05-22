@@ -2,6 +2,7 @@ package org.eclipse.etrice.core.ui;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.core.ui.preferences.ValidationExtensionPreferences;
 import org.eclipse.etrice.core.ui.quickfix.QuickfixExtensionManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -18,6 +19,7 @@ public class RoomUiActivator extends RoomActivator {
 
 		plugin = this;
 		
+		ValidationExtensionPreferences.initValidationPreferencesFromStore();
 		QuickfixExtensionManager.getInstance().loadQuickfixExtensions();
 	}
 
