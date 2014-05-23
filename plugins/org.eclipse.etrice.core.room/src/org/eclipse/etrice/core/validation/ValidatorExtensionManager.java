@@ -9,7 +9,6 @@
  * 		Henrik Rentz-Reichert (initial contribution)
  * 
  *******************************************************************************/
-
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
@@ -22,40 +21,40 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SafeRunner;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.validation.CustomValidatorManager;
+import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
- * @author Henrik Rentz-Reichert
- *
+ * Custom validator manager for room language, that provides registration via an
+ * extension point.
+ * 
  */
-public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
-	
+public class ValidatorExtensionManager extends CustomValidatorManager {
+
 	public static class ValidatorInfo {
 		public static final String SEP = "@";
-		
-		private IRoomValidator validator;
+
+		private ICustomValidator validator;
 		private String id;
-		
-		public ValidatorInfo(IRoomValidator validator, String id) {
+
+		public ValidatorInfo(ICustomValidator validator, String id) {
 			super();
 			this.validator = validator;
 			this.id = id;
 		}
-		
-		public IRoomValidator getValidator() {
+
+		public ICustomValidator getValidator() {
 			return validator;
 		}
 
@@ -71,31 +70,35 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			return id;
 		}
 	}
-	
+
 	public static class Registry {
-		
-		private static final String PACKAGE = RoomPackage.class.getPackage().getName()+".";
+
+		private static final String PACKAGE = RoomPackage.class.getPackage().getName() + ".";
 		private static final String IVALIDATOR_ID = "org.eclipse.etrice.core.room.validation";
 		private static Registry instance = null;
-		private HashMap<String, ArrayList<IRoomValidator>> fastClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
-		private HashMap<String, ArrayList<IRoomValidator>> normalClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
-		private HashMap<String, ArrayList<IRoomValidator>> expensiveClass2Ext = new HashMap<String, ArrayList<IRoomValidator>>();
-		private ArrayList<ValidatorInfo> infos = new ArrayList<ValidatorExtensionManager.ValidatorInfo>();
-		private ArrayList<ValidatorInfo> excludedInfos = new ArrayList<ValidatorExtensionManager.ValidatorInfo>();
-		private HashSet<IRoomValidator> excluded = new HashSet<IRoomValidator>();
-		
+		private HashMap<String, ArrayList<ICustomValidator>> fastClass2Ext = new HashMap<String, ArrayList<ICustomValidator>>();
+		private HashMap<String, ArrayList<ICustomValidator>> normalClass2Ext = new HashMap<String, ArrayList<ICustomValidator>>();
+		private HashMap<String, ArrayList<ICustomValidator>> expensiveClass2Ext = new HashMap<String, ArrayList<ICustomValidator>>();
+		private ArrayList<ValidatorInfo> infos = new ArrayList<ValidatorInfo>();
+		private ArrayList<ValidatorInfo> excludedInfos = new ArrayList<ValidatorInfo>();
+		private HashSet<ICustomValidator> excluded = new HashSet<ICustomValidator>();
+
 		public static Registry getInstance() {
-			if (instance==null)
+			if (instance == null)
 				instance = new Registry();
-			
+
 			return instance;
 		}
-		
+
+		public static boolean isAvailable() {
+			return EMFPlugin.IS_ECLIPSE_RUNNING && Platform.getExtensionRegistry() != null
+					&& Platform.getExtensionRegistry().getExtensionPoint(IVALIDATOR_ID) != null;
+		}
+
 		public void loadValidatorExtensions() {
-			IConfigurationElement[] config = Platform.getExtensionRegistry()
-					.getConfigurationElementsFor(IVALIDATOR_ID);
-			
-			// compute all sub classes for all classes of the Room package 
+			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(IVALIDATOR_ID);
+
+			// compute all sub classes for all classes of the Room package
 			HashMap<String, ArrayList<String>> cls2sub = new HashMap<String, ArrayList<String>>();
 			for (EClassifier cls : RoomPackage.eINSTANCE.getEClassifiers()) {
 				if (cls instanceof EClass) {
@@ -105,30 +108,28 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 					}
 				}
 			}
-			
+
 			// now we add each extension to our maps
 			for (IConfigurationElement e : config) {
 				try {
 					final Object ext = e.createExecutableExtension("class");
-					if (ext instanceof IRoomValidator) {
-						IRoomValidator validator = (IRoomValidator) ext;
-						infos.add(new ValidatorInfo(
-								validator,
-								e.getName()+ValidatorInfo.SEP+e.getNamespaceIdentifier()
-							));
+					if (ext instanceof ICustomValidator) {
+						ICustomValidator validator = (ICustomValidator) ext;
+						infos.add(new ValidatorInfo(validator, e.getName() + ValidatorInfo.SEP
+								+ e.getNamespaceIdentifier()));
 						String mode = e.getAttribute("mode");
 						String classToCheck = e.getAttribute("classToCheck");
 						if (classToCheck.startsWith(PACKAGE))
 							classToCheck = classToCheck.substring(PACKAGE.length());
 						EClassifier cls = RoomPackage.eINSTANCE.getEClassifier(classToCheck);
 						if (cls instanceof EClass) {
-							HashMap<String,ArrayList<IRoomValidator>> map = getMap(mode);
-							if (map!=null) {
-								put(map, ((EClass) cls).getName(), (IRoomValidator) ext);
+							HashMap<String, ArrayList<ICustomValidator>> map = getMap(mode);
+							if (map != null) {
+								put(map, ((EClass) cls).getName(), (ICustomValidator) ext);
 								ArrayList<String> subTypes = cls2sub.get(cls.getName());
-								if (subTypes!=null)
+								if (subTypes != null)
 									for (String type : subTypes) {
-										put(map, type, (IRoomValidator) ext);
+										put(map, type, (ICustomValidator) ext);
 									}
 							}
 						}
@@ -142,12 +143,12 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 				}
 			}
 		}
-		
+
 		public void exclude(ValidatorInfo info) {
 			excludedInfos.add(info);
 			excluded.add(info.getValidator());
 		}
-		
+
 		public void include(ValidatorInfo info) {
 			excludedInfos.remove(info);
 			excluded.remove(info.getValidator());
@@ -172,54 +173,60 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 		public List<ValidatorInfo> getExcludedInfos() {
 			return Collections.unmodifiableList(excludedInfos);
 		}
-		
-		public void validate(EObject object, CheckMode checkMode, ValidationMessageAcceptor messageAcceptor) {
-			
-			// we initialize the set of executed validators with the excluded ones
-			HashSet<IRoomValidator> executed = new HashSet<IRoomValidator>(excluded);
-			
+
+		public List<ICustomValidator> getValidatorsToExecute(EObject object, CheckMode checkMode,
+				ValidationMessageAcceptor messageAcceptor) {
+			// we initialize the set of executed validators with the excluded
+			// ones
+			HashSet<ICustomValidator> executed = new HashSet<ICustomValidator>(excluded);
+
 			if (checkMode.shouldCheck(CheckType.FAST))
-				validate(object, messageAcceptor, fastClass2Ext, executed);
+				return validate(object, messageAcceptor, fastClass2Ext, executed);
 			if (checkMode.shouldCheck(CheckType.NORMAL))
-				validate(object, messageAcceptor, normalClass2Ext, executed);
+				return validate(object, messageAcceptor, normalClass2Ext, executed);
 			if (checkMode.shouldCheck(CheckType.EXPENSIVE))
-				validate(object, messageAcceptor, expensiveClass2Ext, executed);
+				return validate(object, messageAcceptor, expensiveClass2Ext, executed);
+
+			assert (false) : "unexpected CheckType";
+			return new ArrayList<ICustomValidator>();
 		}
 
-		private void validate(EObject object,
-				ValidationMessageAcceptor messageAcceptor,
-				HashMap<String, ArrayList<IRoomValidator>> map, HashSet<IRoomValidator> executed) {
-			ArrayList<IRoomValidator> validators = map.get(object.eClass().getName());
-			if (validators!=null)
-				for (IRoomValidator validator : validators) {
+		private List<ICustomValidator> validate(EObject object, ValidationMessageAcceptor messageAcceptor,
+				HashMap<String, ArrayList<ICustomValidator>> map, HashSet<ICustomValidator> executed) {
+			ArrayList<ICustomValidator> result = new ArrayList<ICustomValidator>();
+
+			ArrayList<ICustomValidator> validators = map.get(object.eClass().getName());
+			if (validators != null)
+				for (ICustomValidator validator : validators) {
 					if (!executed.contains(validator)) {
 						executed.add(validator);
-						executeExtension(validator, object, messageAcceptor);
+						result.add(validator);
 					}
 				}
+
+			return result;
 		}
-		
-		private void put(String cls, String sub,
-				HashMap<String,ArrayList<String>> cls2sub) {
-			
+
+		private void put(String cls, String sub, HashMap<String, ArrayList<String>> cls2sub) {
+
 			ArrayList<String> list = cls2sub.get(cls);
-			if (list==null) {
+			if (list == null) {
 				list = new ArrayList<String>();
 				cls2sub.put(cls, list);
 			}
 			list.add(sub);
 		}
 
-		private void put(HashMap<String, ArrayList<IRoomValidator>> map, String cls, IRoomValidator val) {
-			ArrayList<IRoomValidator> list = map.get(cls);
-			if (list==null) {
-				list = new ArrayList<IRoomValidator>();
+		private void put(HashMap<String, ArrayList<ICustomValidator>> map, String cls, ICustomValidator val) {
+			ArrayList<ICustomValidator> list = map.get(cls);
+			if (list == null) {
+				list = new ArrayList<ICustomValidator>();
 				map.put(cls, list);
 			}
 			list.add(val);
 		}
-		
-		private HashMap<String, ArrayList<IRoomValidator>> getMap(String mode) {
+
+		private HashMap<String, ArrayList<ICustomValidator>> getMap(String mode) {
 			if (mode.equals(CheckType.FAST.name()))
 				return fastClass2Ext;
 			else if (mode.equals(CheckType.NORMAL.name()))
@@ -229,48 +236,28 @@ public class ValidatorExtensionManager extends AbstractDeclarativeValidator {
 			else
 				return null;
 		}
-		
-		private void executeExtension(
-				final IRoomValidator validator,
-				final EObject object,
-				final ValidationMessageAcceptor messageAcceptor) {
-			
-			ISafeRunnable runnable = new ISafeRunnable() {
-				@Override
-				public void handleException(Throwable exception) {
-					System.out.println("Exception in IRoomValidator " + validator.getName());
-					exception.printStackTrace();
-				}
-
-				@Override
-				public void run() throws Exception {
-					validator.validate(object, messageAcceptor);
-				}
-			};
-			SafeRunner.run(runnable);
-		}
 	}
 
-	public ValidatorExtensionManager() {
-		
+	protected boolean isRegistryAvailable;
+	
+	public ValidatorExtensionManager(){
+		super();
+		isRegistryAvailable = Registry.isAvailable();
 	}
 	
 	@Check
 	public void checkObject(EObject object) {
-		//EcoreUtil.resolveAll(object.eResource().getResourceSet());
-		Registry.getInstance().validate(object, getCheckMode(), getMessageAcceptor());
-	}
+		if (isRegistryAvailable) {
+			ICustomValidator.ValidationContext context = new ValidationContextImpl(isStandalone(), isGeneration(),
+					getCheckMode());
+			for (ICustomValidator val : Registry.getInstance().getValidatorsToExecute(object, getCheckMode(),
+					getMessageAcceptor()))
+				executeValidator(val, object, null, getMessageAcceptor(), context);
 
-	@Override
-	public void register(EValidatorRegistrar registrar) {
-		// HOWTO: if this validator is registered for the RoomPackage then it is called twice
+		}
+		else
+			// use default registry
+			super.checkObject(object);
 	}
-
-//	@Override
-//	protected List<EPackage> getEPackages() {
-//	    List<EPackage> result = new ArrayList<EPackage>();
-//	    result.add(RoomPackage.eINSTANCE);
-//	    return result;
-//	}
 
 }

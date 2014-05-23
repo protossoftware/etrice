@@ -13,15 +13,18 @@
 package org.eclipse.etrice.core;
 
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.validation.CustomValidatorManager.StandaloneValidatorExtension;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
+import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 
 
 /**
@@ -29,6 +32,30 @@ import com.google.inject.Binder;
  */
 public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRuntimeModule {
 
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		
+		if(!ValidatorExtensionManager.Registry.isAvailable())
+			bindCustomValidator(binder);
+	}
+	
+	protected void bindCustomValidator(Binder binder){
+		binder.bind(StandaloneValidatorExtension.class).toProvider(new Provider<StandaloneValidatorExtension>(){
+
+			@Override
+			public StandaloneValidatorExtension get() {
+				StandaloneValidatorExtension classNames = new StandaloneValidatorExtension();
+				classNames.add("org.eclipse.etrice.core.genmodel.RoomGenmodelValidator");
+				classNames.add("org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator");
+				classNames.add("org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator");
+				
+				return classNames;
+			}
+			
+		});
+	}
+	
 	@Override
     public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
         return RoomQualifiedNameProvider.class;

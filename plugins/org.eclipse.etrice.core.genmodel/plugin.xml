@@ -22,5 +22,13 @@
             type="etricegen"
             class="org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenResourceFactoryImpl"/>
    </extension>
+   <extension
+         point="org.eclipse.etrice.core.room.validation">
+      <validator
+            class="org.eclipse.etrice.core.genmodel.RoomGenmodelValidator"
+            classToCheck="org.eclipse.etrice.core.room.RoomModel"
+            mode="FAST">
+      </validator>
+   </extension>
 
 </plugin>
