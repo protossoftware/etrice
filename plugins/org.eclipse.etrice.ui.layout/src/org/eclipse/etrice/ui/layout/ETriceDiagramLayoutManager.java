@@ -548,20 +548,27 @@ public abstract class ETriceDiagramLayoutManager extends
 			Shape shape) {
 
 		// get label width and height for the node
+		// these would be added to the node width and height
 		float labelWidth = 0.0f;
 		float labelHeight = 0.0f;
 
 		if (!node.getLabels().isEmpty()) {
 			KShapeLayout labelLayout = node.getLabels().get(0)
 					.getData(KShapeLayout.class);
-			labelWidth = labelLayout.getWidth();
-			labelHeight = labelLayout.getHeight();
+			// halh of the label width is taken to avoid too much widening of
+			// node due to labels
+			labelWidth = labelLayout.getWidth() * 0.5f;
 		}
+
+		Dimension defaultSize = getDefaultSize(shape);
+		float ratio = (float) defaultSize.height() / defaultSize.width();
+		// label height is not the original label height but the increase is
+		// node height due to label; it is in ratio with the increase in label
+		// width.
+		labelHeight = ratio * labelWidth;
 
 		VolatileLayoutConfig staticConfig = mapping
 				.getProperty(KimlGraphitiUtil.STATIC_CONFIG);
-
-		Dimension defaultSize = getDefaultSize(shape);
 		staticConfig.setValue(LayoutOptions.MIN_WIDTH, node,
 				LayoutContext.GRAPH_ELEM, defaultSize.width() + labelWidth);
 		staticConfig.setValue(LayoutOptions.MIN_HEIGHT, node,

@@ -18,7 +18,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
@@ -54,9 +53,6 @@ public class BehaviorLayoutCommand extends ETriceLayoutCommand {
 	protected void applyNodeLayout(KNode knode, PictogramElement pelem) {
 		setCalculatedPositionAndSize(knode, knode.getParent(),
 				(ContainerShape) pelem);
-
-		getFeatureProvider().layoutIfPossible(new LayoutContext(pelem));
-
 	};
 
 	/**
@@ -87,9 +83,6 @@ public class BehaviorLayoutCommand extends ETriceLayoutCommand {
 		Text label = (Text) (shape.getChildren().get(0).getGraphicsAlgorithm());
 
 		adjustLabel(label, ga.getX(), ga.getY(), ga.getWidth(), margin, size);
-
-		getFeatureProvider().layoutIfPossible(new LayoutContext(shape));
-
 	}
 
 	/**

@@ -19,7 +19,6 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.ui.structure.support.InterfaceItemSupport;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
@@ -63,9 +62,6 @@ public class StructureLayoutCommand extends ETriceLayoutCommand {
 			// adjust label for internal port
 			adjustLabelForPort((ContainerShape) pelem);
 		}
-
-		getFeatureProvider().layoutIfPossible(new LayoutContext(pelem));
-
 	};
 
 	/**
@@ -82,8 +78,6 @@ public class StructureLayoutCommand extends ETriceLayoutCommand {
 
 		// adjust label for this (boundary)port
 		adjustLabelForPort(shape);
-
-		getFeatureProvider().layoutIfPossible(new LayoutContext(shape));
 	}
 
 	/**

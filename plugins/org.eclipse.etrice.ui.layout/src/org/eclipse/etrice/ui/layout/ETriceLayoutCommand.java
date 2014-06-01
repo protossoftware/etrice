@@ -13,12 +13,15 @@
 
 package org.eclipse.etrice.ui.layout;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.impl.LayoutContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
+import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -31,9 +34,11 @@ import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.math.KVector;
 import de.cau.cs.kieler.core.math.KVectorChain;
+import de.cau.cs.kieler.core.util.Pair;
 import de.cau.cs.kieler.kiml.graphiti.GraphitiLayoutCommand;
 import de.cau.cs.kieler.kiml.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.klayoutdata.impl.KShapeLayoutImpl;
 
 /**
  * An abstract class to support creation of commands for applying the result of
@@ -44,9 +49,70 @@ import de.cau.cs.kieler.kiml.klayoutdata.KShapeLayout;
  */
 public abstract class ETriceLayoutCommand extends GraphitiLayoutCommand {
 
+	/** list of graph elements(nodes & ports) and pictogram elements to layout. */
+	private List<Pair<KGraphElement, PictogramElement>> elements =
+            new LinkedList<Pair<KGraphElement, PictogramElement>>();
+
 	public ETriceLayoutCommand(TransactionalEditingDomain domain,
 			IFeatureProvider thefeatureProvider) {
 		super(domain, thefeatureProvider);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @author jayant
+	 */
+	@Override
+	public void add(KGraphElement graphElement,
+			PictogramElement pictogramElement) {
+
+		super.add(graphElement, pictogramElement);
+
+		// Prepare a local list of modified nodes and ports.
+		// This list is used in doExecute() method below.
+		if (graphElement instanceof KPort || graphElement instanceof KNode) {
+			KShapeLayoutImpl shapeLayout = graphElement
+					.getData(KShapeLayoutImpl.class);
+			if (shapeLayout.isModified()) {
+				elements.add(new Pair<KGraphElement, PictogramElement>(
+						graphElement, pictogramElement));
+			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @author jayant
+	 */
+	@Override
+	protected void doExecute() {
+		super.doExecute();
+
+		/*
+		 * Re-layout diagram elements according to eTrice after performing
+		 * complete KIELER Layout.
+		 *
+		 * Note: This operation needs to be carried after completing the KIELER
+		 * layout since eTrice positioning depend not only on current diagram
+		 * element but also on the parameters of its parent element.
+		 */
+		for (Pair<KGraphElement, PictogramElement> entry : elements) {
+			KGraphElement element = entry.getFirst();
+			if (element instanceof KPort) {
+				PictogramElement pelem = ((Anchor) entry.getSecond())
+						.getParent();
+				getFeatureProvider().layoutIfPossible(new LayoutContext(pelem));
+			} else if (element instanceof KNode) {
+				PictogramElement pelem = entry.getSecond();
+				getFeatureProvider().layoutIfPossible(new LayoutContext(pelem));
+			}
+		}
+
+		// refresh the diagram editor after re-placement by eTrice.
+		getFeatureProvider().getDiagramTypeProvider().getDiagramBehavior()
+				.refresh();
 	}
 
 	/**
@@ -129,7 +195,7 @@ public abstract class ETriceLayoutCommand extends GraphitiLayoutCommand {
 					.getProperty(INVIS_INSETS);
 			if (parentInsets != null) {
 				xpos += parentInsets.getLeft();
-				ypos += parentInsets.getRight();
+				ypos += parentInsets.getTop();
 			}
 		}
 
