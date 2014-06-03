@@ -48,5 +48,20 @@
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.etrice.core.ui.wizardCategory"
+            name="eTrice">
+      </category>
+      <wizard
+            category="org.eclipse.etrice.core.ui.wizardCategory"
+            class="org.eclipse.etrice.generator.ui.wizard.MappingWizard"
+            hasPages="true"
+            icon="icons/NewETriceProject.gif"
+            id="org.eclipse.etrice.generator.ui.MappingWizard"
+            name="eTrice Physical Mapping Wizard">
+      </wizard>
+   </extension>
 
 </plugin>

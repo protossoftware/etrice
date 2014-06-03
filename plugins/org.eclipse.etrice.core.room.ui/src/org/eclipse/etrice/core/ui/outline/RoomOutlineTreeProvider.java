@@ -289,4 +289,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private void createExtraNode(EObject obj, IOutlineNode parent, Object text){		
 		createEObjectNode(parent, obj, RoomActivator.getInstance().getImageRegistry().get("defaultoutlinenode.gif"), text, false);
 	}
+	
+	protected boolean _isLeaf(ActorInstanceMapping aim){
+		return true;
+	}
 }

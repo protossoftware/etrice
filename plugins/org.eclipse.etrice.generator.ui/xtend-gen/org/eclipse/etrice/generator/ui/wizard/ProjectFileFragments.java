@@ -11,6 +11,7 @@
 package org.eclipse.etrice.generator.ui.wizard;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.etrice.core.etphys.util.ETPhysUtil;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -60,6 +61,9 @@ public class ProjectFileFragments {
     return _builder.toString();
   }
   
+  /**
+   * @see ETPhysUtil
+   */
   public static String getBasicPhysicalModel(final String baseName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("PhysicalModel ");

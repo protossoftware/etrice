@@ -12,9 +12,10 @@
 
 package org.eclipse.etrice.generator.ui.wizard
 
-import org.eclipse.ui.preferences.ScopedPreferenceStore
 import org.eclipse.core.runtime.preferences.InstanceScope
+import org.eclipse.etrice.core.etphys.util.ETPhysUtil
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants
+import org.eclipse.ui.preferences.ScopedPreferenceStore
 
 /**
  * @author Henrik Rentz-Reichert
@@ -38,6 +39,9 @@ class ProjectFileFragments {
 		'''
 	}
 	
+	/**
+	 * @see ETPhysUtil
+	 */
 	def static String getBasicPhysicalModel(String baseName) {
 		'''
 			PhysicalModel «baseName» {

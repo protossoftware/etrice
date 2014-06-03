@@ -32,5 +32,6 @@ Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.scoping,
  org.eclipse.etrice.core.etphys.serializer,
  org.eclipse.etrice.core.etphys.services,
+ org.eclipse.etrice.core.etphys.util,
  org.eclipse.etrice.core.etphys.validation
 
