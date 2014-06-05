@@ -12,19 +12,23 @@
 
 package org.eclipse.etrice.generator.base;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
- * a simple logger class implementing the {@link org.eclipse.etrice.generator.base.ILineOutputLogger ILineOutputLogger} interface.
- * If no ILineOutputLogger is set then output is sent to {@link java.lang.System#out System.out}.
+ * a simple logger class implementing the
+ * {@link org.eclipse.etrice.generator.base.ILineOutputLogger ILineOutputLogger}
+ * interface. If no ILineOutputLogger is set then output is sent to
+ * {@link java.lang.System#out System.out}.
  * 
  * @author Henrik Rentz-Reichert
- *
+ * 
  */
 public class Logger implements ILineOutputLogger {
 
 	private ILineOutput output = null;
-	
+
 	public void logInfo(String text) {
 		println("Info: " + text);
 	}
@@ -32,19 +36,27 @@ public class Logger implements ILineOutputLogger {
 	public void logError(String text, EObject obj) {
 		if (obj == null)
 			println("Error: " + text);
-		else
-			println("Error: " + text + " " + obj.toString());
+		else {
+			// prefer location to toString()
+			URI uri = EcoreUtil.getURI(obj);
+			String objInfo = (uri != null && !obj.eIsProxy()) ? uri.toString() : obj.toString();
+			println("Error: " + text + " " + objInfo);
+		}
 	}
 
 	private void println(String txt) {
-		if (output!=null)
+		if (output != null)
 			output.println(txt);
 		else
 			System.out.println(txt);
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.generator.ILineOutputLogger#setOutput(org.eclipse.etrice.generator.ILineOutput)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.etrice.generator.ILineOutputLogger#setOutput(org.eclipse.
+	 * etrice.generator.ILineOutput)
 	 */
 	@Override
 	public void setOutput(ILineOutput lo) {

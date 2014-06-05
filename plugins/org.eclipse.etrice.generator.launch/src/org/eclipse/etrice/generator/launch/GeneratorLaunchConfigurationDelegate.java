@@ -51,20 +51,6 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
  */
 public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaLaunchConfigurationDelegate{
 	
-	protected static class ConsoleLineOutput implements ILineOutput {
-	
-		private MessageConsoleStream stream;
-	
-		public ConsoleLineOutput(MessageConsoleStream stream) {
-			this.stream = stream;
-		}
-		
-		@Override
-		public void println(String txt) {
-			stream.println(txt);
-		}
-	}
-
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
@@ -131,7 +117,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			});
 			MessageConsoleStream out = myConsole.newMessageStream();
 			out.getConsole().clearConsole();
-			ConsoleLineOutput output = new ConsoleLineOutput(out);
+			ConsoleOutput output = new ConsoleOutput(out);
 			runGenerator(args, output);
 
 			// check for cancellation
