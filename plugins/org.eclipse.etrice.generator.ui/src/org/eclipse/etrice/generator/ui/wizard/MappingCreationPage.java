@@ -67,9 +67,12 @@ public class MappingCreationPage extends WizardPage {
 		topLevel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		topLevel.setFont(parent.getFont());
 
-		SashForm sash = new SashForm(topLevel, SWT.VERTICAL);
+		// both editor side-by-side
+		SashForm sash = new SashForm(topLevel, SWT.HORIZONTAL);
 		sash.setLayout(new GridLayout(1, false));
-		sash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		GridData sash_data = new GridData(SWT.FILL, SWT.FILL, true, true);
+		sash_data.heightHint = convertHeightInCharsToPixels(11);
+		sash.setLayoutData(sash_data);
 		// 1. etMap editor
 		{
 			IEditedResourceProvider resourceProvider = new IEditedResourceProvider() {
@@ -85,6 +88,10 @@ public class MappingCreationPage extends WizardPage {
 			};
 			EmbeddedEditorFactory factory = etMapInjector.getInstance(EmbeddedEditorFactory.class);
 			etMapEditor = factory.newEditor(resourceProvider).readOnly().withParent(sash);
+			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
+			data.widthHint= convertWidthInCharsToPixels(120);
+			data.heightHint= convertHeightInCharsToPixels(10);
+			etMapEditor.getViewer().getControl().setLayoutData(data);
 		}
 		// 2. etPhys editor
 		{
@@ -101,6 +108,10 @@ public class MappingCreationPage extends WizardPage {
 			};
 			EmbeddedEditorFactory factory = etPhysInjector.getInstance(EmbeddedEditorFactory.class);
 			etPhysEditor = factory.newEditor(resourceProvider).readOnly().withParent(sash);
+			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
+			data.widthHint= convertWidthInCharsToPixels(80);
+			data.heightHint= convertHeightInCharsToPixels(10);
+			etPhysEditor.getViewer().getControl().setLayoutData(data);
 		}
 		setControl(topLevel);
 
@@ -133,7 +144,6 @@ public class MappingCreationPage extends WizardPage {
 		for (RuntimeClass item : builder.physicalModel.getRuntimeClasses())
 			physEditorContent.append(serializer.serialize(item, options));
 		etPhysEditor.createPartialEditor("", physEditorContent.toString(), "", false);
-
 	}
 
 	public Resource getMappingModelResource(String setPhysModelImport) {
