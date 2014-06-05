@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.releng" componentType="buckminster" version="0.4.0.qualifier">
+<?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.releng" componentType="buckminster" version="0.5.0.qualifier">
     <cs:dependencies>
         <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.generator.c.tests" componentType="buckminster"/>

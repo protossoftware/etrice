@@ -71,7 +71,7 @@ but the model is read-only. It is found on the class path of the project which i
 <dependency>
 	<groupId>org.eclipse.etrice</groupId>
 	<artifactId>org.eclipse.etrice.modellib.java</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
+	<version>0.5.0-SNAPSHOT</version>
 </dependency>
 \end{lstlisting}
 
@@ -84,14 +84,14 @@ our eTrice generator plug-in:
 		<plugin>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
-			<version>0.4.0-SNAPSHOT</version>
+			<version>0.5.0-SNAPSHOT</version>
 			<!-- [...] -->
 			<dependencies>
 				<!-- put the modellib on the class path to allow resolution of models by the generator -->
 				<dependency>
 					<groupId>org.eclipse.etrice</groupId>
 					<artifactId>org.eclipse.etrice.modellib.java</artifactId>
-					<version>0.4.0-SNAPSHOT</version>
+					<version>0.5.0-SNAPSHOT</version>
 				</dependency>
 			</dependencies>
 		</plugin>
@@ -111,7 +111,7 @@ output:
 [INFO] Info: added referenced model file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
 [INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.room
 [INFO] Info: added referenced model classpath:/TimingService.room
-[INFO] Info: Loading jar:file:/C:/Users/hrentz/.m2/repository/org/eclipse/etrice/org.eclipse.etrice.modellib.java/0.4.0-SNAPSHOT/org.eclipse.etrice.modellib.java-0.4.0-SNAPSHOT.jar!/TimingService.room
+[INFO] Info: Loading jar:file:/C:/Users/hrentz/.m2/repository/org/eclipse/etrice/org.eclipse.etrice.modellib.java/0.5.0-SNAPSHOT/org.eclipse.etrice.modellib.java-0.5.0-SNAPSHOT.jar!/TimingService.room
 [INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
 [INFO] Info: -- validating models
 [INFO] Info: validation finished with 0 errors and 0 warnings
@@ -141,7 +141,7 @@ In the pom you can find the most commonly used ones in xml comments together wit
 <plugin>
 	<groupId>org.eclipse.etrice</groupId>
 	<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
+	<version>0.5.0-SNAPSHOT</version>
 	<executions>
 		<execution>
 			<goals>

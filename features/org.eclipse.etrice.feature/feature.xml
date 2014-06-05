@@ -17,7 +17,7 @@
 <feature
       id="org.eclipse.etrice.feature"
       label="%featureName"
-      version="0.4.0.qualifier"
+      version="0.5.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.etrice.core.room.ui"
       license-feature="org.eclipse.license"
@@ -112,7 +112,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.hamcrest.core"/>
       <import plugin="org.eclipse.xtext.common.types.ui" version="2.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui" version="2.1.1" match="greaterOrEqual"/>
-      <import feature="org.eclipse.etrice.layout.feature" version="0.4.0.qualifier"/>
+      <import feature="org.eclipse.etrice.layout.feature" version="0.5.0.qualifier"/>
    </requires>
 
    <plugin

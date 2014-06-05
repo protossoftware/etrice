@@ -202,7 +202,7 @@ class ProjectFileFragments {
 						<plugin>
 							<groupId>org.eclipse.etrice</groupId>
 							<artifactId>org.eclipse.etrice.generator.java.mvn</artifactId>
-							<version>0.4.0-SNAPSHOT</version>
+							<version>0.5.0-SNAPSHOT</version>
 							<executions>
 								<execution>
 									<goals>
@@ -239,7 +239,7 @@ class ProjectFileFragments {
 								<dependency>
 									<groupId>org.eclipse.etrice</groupId>
 									<artifactId>org.eclipse.etrice.modellib.java</artifactId>
-									<version>0.4.0-SNAPSHOT</version>
+									<version>0.5.0-SNAPSHOT</version>
 								</dependency>
 							</dependencies>
 						</plugin>
@@ -292,7 +292,7 @@ class ProjectFileFragments {
 														org.eclipse.etrice.generator.java.mvn
 													</artifactId>
 													<versionRange>
-														[0.4.0-SNAPSHOT,)
+														[0.5.0-SNAPSHOT,)
 													</versionRange>
 													<goals>
 														<goal>
@@ -334,12 +334,12 @@ class ProjectFileFragments {
 					<dependency>
 						<groupId>org.eclipse.etrice</groupId>
 						<artifactId>org.eclipse.etrice.runtime.java</artifactId>
-						<version>0.4.0-SNAPSHOT</version>
+						<version>0.5.0-SNAPSHOT</version>
 				  	</dependency>
 				  	<dependency>
 				  		<groupId>org.eclipse.etrice</groupId>
 				  		<artifactId>org.eclipse.etrice.modellib.java</artifactId>
-				  		<version>0.4.0-SNAPSHOT</version>
+				  		<version>0.5.0-SNAPSHOT</version>
 				  	</dependency>
 				</dependencies>
 			</project>
