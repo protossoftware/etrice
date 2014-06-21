@@ -1,5 +1,6 @@
 package org.eclipse.etrice.ui.behavior.fsm;
 
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -36,6 +37,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		ActionCodeEditorRegistry.INSTANCE.dispose();
 		plugin = null;
 		super.stop(context);
 	}

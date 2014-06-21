@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ROOM Action Code Editor
+Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.actioneditor;singleton:=true
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.etrice.ui.behavior.actioneditor.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.etrice.core.room,
+ org.eclipse.emf.common,
+ org.eclipse.etrice.core.fsm,
+ org.eclipse.jface.text,
+ org.eclipse.jdt.ui,
+ org.eclipse.etrice.ui.behavior,
+ org.eclipse.etrice.ui.behavior.fsm
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.etrice.ui.behavior.actioneditor,
+ org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer
+Bundle-Vendor: eTrice (Incubation)

@@ -7,15 +7,28 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Jayant Gupta (contributed Action Code Editor)
  * 
  *******************************************************************************/
 
 package org.eclipse.etrice.ui.behavior.fsm.dialogs;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.conversion.IConverter;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.ui.behavior.fsm.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.base.dialogs.MultiValidator2;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
@@ -27,6 +40,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -38,22 +52,23 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractMemberAwarePropertyDialog extends AbstractPropertyDialog implements IMemberAwareConfiguration {
 	
-	private class LastTextListener implements FocusListener {
+	private class LastControlListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			if (e.getSource() instanceof Text) {
-				boolean enableMemberButton = memberAware.contains(e.getSource());
-				boolean enableMessageButton = messageAware.contains(e.getSource());
+			if (e.getSource() instanceof Control) {
+				boolean enableMemberButton = memberAware
+						.contains(e.getSource());
+				boolean enableMessageButton = messageAware.contains(e
+						.getSource());
 				if (enableMemberButton || enableMessageButton)
-					lastTextField = (Text) e.getSource();
+					lastFocusedField = (Control) e.getSource();
 				else
-					lastTextField = null;
+					lastFocusedField = null;
 				members.setEnabled(enableMemberButton);
 				messages.setEnabled(enableMessageButton);
-			}
-			else {
-				lastTextField = null;
+			} else {
+				lastFocusedField = null;
 				members.setEnabled(false);
 				messages.setEnabled(false);
 			}
@@ -67,15 +82,21 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	@Inject
 	protected IFSMDialogFactory dialogFactory;
 	
-	private Text lastTextField = null;
+	private Control lastFocusedField = null;
 	private Button members;
 	private Button messages;
 	private ModelComponent mc;
-	private LastTextListener listener = new LastTextListener();
+	private LastControlListener listener = new LastControlListener();
 	private HashSet<Control> memberAware = new HashSet<Control>();
 	private HashSet<Control> messageAware = new HashSet<Control>();
 	private HashSet<Control> recvOnly = new HashSet<Control>();
-	
+
+	/**
+	 * 
+	 * @author jayant
+	 */
+	private HashMap<Control, IActionCodeEditor> actionEditorControlMap = new HashMap<Control, IActionCodeEditor>();
+
 	/**
 	 * @param shell
 	 * @param title
@@ -104,7 +125,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		gd.horizontalAlignment = GridData.FILL;
 		gd.horizontalSpan = 2;
 		buttonsArea.setLayoutData(gd);
-		
+
 		members = new Button(buttonsArea, SWT.PUSH);
 		members.setText("Mem&bers");
 		gd = new GridData();
@@ -113,18 +134,18 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		members.setLayoutData(gd);
 		members.setEnabled(false);
 		members.addSelectionListener(new SelectionListener() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleMembersPressed();
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				handleMembersPressed();
 			}
 		});
-		
+
 		messages = new Button(buttonsArea, SWT.PUSH);
 		messages.setText("Me&ssages");
 		gd = new GridData();
@@ -133,17 +154,114 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		messages.setLayoutData(gd);
 		messages.setEnabled(false);
 		messages.addSelectionListener(new SelectionListener() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleMessagesPressed();
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				handleMessagesPressed();
 			}
 		});
+	}
+
+	/**
+	 * A delegate to
+	 * {@link #createActionCodeEditor(Composite, String, DetailCode, EObject, EStructuralFeature, IValidator, MultiValidator2, IConverter, IConverter, boolean, boolean, boolean)}
+	 * 
+	 * @author jayant
+	 */
+	protected IActionCodeEditor createActionCodeEditor(Composite parent,
+			String label, DetailCode detailCode, EObject obj,
+			EStructuralFeature feat, IConverter s2m, IConverter m2s) {
+		return createActionCodeEditor(parent, label, detailCode, obj, feat,
+				null, null, s2m, m2s, true, true, false);
+	}
+
+	/**
+	 * Creates Action Code Editor with the given parameters and binds it with the
+	 * model.
+	 * 
+	 * @author jayant
+	 * 
+	 * @param parent
+	 *            the {@link Composite} which will hold the editor
+	 * @param label
+	 *            the label for the editor
+	 * @param detailCode
+	 *            the {@link DetailCode} object to be represented
+	 * @param obj
+	 *            the EMF object containing the detailCode code
+	 * @param feat
+	 *            the {@link EStructuralFeature} associated with the code
+	 * @param singleValidator
+	 *            an {@link IValidator} for the JFace Data binding
+	 * @param multiValidator
+	 *            a {@link MultiValidator2} for the JFace Data binding
+	 * @param s2m
+	 *            a String to Model converter
+	 * @param m2s
+	 *            a Model to string converter
+	 * @param useMembers
+	 *            true if the editor is to be member aware
+	 * @param useMessages
+	 *            true if the editor is to be message aware
+	 * @param useRecvMessagesOnly
+	 *            true if the editor could use receive messages only
+	 * 
+	 * @return the constructed instance of {@link IActionCodeEditor}
+	 */
+	protected IActionCodeEditor createActionCodeEditor(Composite parent,
+			String label, DetailCode detailCode, EObject obj,
+			EStructuralFeature feat, IValidator singleValidator,
+			MultiValidator2 multiValidator, IConverter s2m, IConverter m2s,
+			boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
+		Label l = getToolkit().createLabel(parent, label, SWT.NONE);
+		l.setLayoutData(new GridData(SWT.NONE));
+
+		// TODO Auto-detect target language.
+		String targetLanguage = PreferenceConstants.JAVA_EDITOR_PREFERENCE;
+
+		// Get editor id from preferences for the given target language.
+		String id = Activator.getDefault().getPreferenceStore()
+				.getString(targetLanguage);
+
+		// Create new editor instance
+		IActionCodeEditor actionCodeEditor = ActionCodeEditorRegistry.INSTANCE
+				.getEditorWithId(id).newActionCodeEditor(detailCode, parent,
+						mc, useMembers, useMessages, useRecvMessagesOnly);
+		if (actionCodeEditor != null) {
+			configureMemberAwareness(actionCodeEditor, useMembers, useMessages,
+					useRecvMessagesOnly);
+			getToolkit().adapt(actionCodeEditor.getControl(), true, true);
+
+			// JFace Data-binding of editor's control with model.
+			UpdateValueStrategy t2m = null;
+			UpdateValueStrategy m2t = null;
+			if (singleValidator != null || s2m != null || m2s != null) {
+				t2m = new UpdateValueStrategy();
+				if (s2m != null)
+					t2m.setConverter(s2m);
+				if (singleValidator != null) {
+					t2m.setAfterConvertValidator(singleValidator);
+					t2m.setBeforeSetValidator(singleValidator);
+				}
+				m2t = new UpdateValueStrategy();
+				if (m2s != null)
+					m2t.setConverter(m2s);
+				if (singleValidator != null) {
+					m2t.setAfterConvertValidator(singleValidator);
+					m2t.setBeforeSetValidator(singleValidator);
+				}
+			}
+			Object type = (s2m != null) ? s2m.getToType() : String.class;
+			createBinding(actionCodeEditor.getControl(), obj, feat, type, t2m,
+					m2t, multiValidator);
+		}
+
+		return actionCodeEditor;
 	}
 
 	protected void handleMembersPressed() {
@@ -154,7 +272,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	}
 
 	protected void handleMessagesPressed() {
-		boolean receiveOnly = recvOnly.contains(lastTextField);
+		boolean receiveOnly = recvOnly.contains(lastFocusedField);
 		ISelectionDialog dlg = dialogFactory.createMessageSelectionDialog(getShell(), mc, receiveOnly);
 		if (dlg.open()==Window.OK) {
 			insertText(dlg.getSelected());
@@ -162,14 +280,20 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	}
 
 	private void insertText(String txt) {
-		if (lastTextField!=null) {
-			int begin = txt.indexOf('(');
-			int end = txt.indexOf(')');
-			int offset = lastTextField.getSelection().x;
-			lastTextField.insert(txt);
-			if (begin>=0 && end>=0 && end>begin+1)
-				lastTextField.setSelection(offset+begin+1, offset+end);
-			lastTextField.setFocus();
+		if (lastFocusedField != null) {
+			if (actionEditorControlMap.containsKey(lastFocusedField)) {
+				(actionEditorControlMap.get(lastFocusedField)).insertText(txt);
+			} else if (lastFocusedField instanceof Text) {
+				Text lastTextField = (Text) lastFocusedField;
+				int begin = txt.indexOf('(');
+				int end = txt.indexOf(')');
+				int offset = lastTextField.getSelection().x;
+				lastTextField.insert(txt);
+				if (begin >= 0 && end >= 0 && end > begin + 1)
+					lastTextField
+							.setSelection(offset + begin + 1, offset + end);
+				lastTextField.setFocus();
+			}
 		}
 	}
 
@@ -192,5 +316,27 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		if (useRecvMessagesOnly)
 			recvOnly.add(ctrl);
 		ctrl.addFocusListener(listener);
+	}
+
+	/**
+	 * Configure an action code editor to the level of awareness. Helps activate
+	 * and deactivate member and message buttons.
+	 * 
+	 * @author jayant
+	 * 
+	 * @param actionCodeEditor
+	 *            the {@link IActionCodeEditor} instance to configure
+	 * @param useMembers
+	 *            true if the editor is to be member aware
+	 * @param useMessages
+	 *            true if the editor is to be message aware
+	 * @param useRecvMessagesOnly
+	 *            true if the editor could use receive messages only
+	 */
+	public void configureMemberAwareness(IActionCodeEditor actionCodeEditor,
+			boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
+		Control ctrl = actionCodeEditor.getControl();
+		actionEditorControlMap.put(ctrl, actionCodeEditor);
+		configureMemberAwareness(ctrl, useMembers, useMessages, useRecvMessagesOnly);
 	}
 }

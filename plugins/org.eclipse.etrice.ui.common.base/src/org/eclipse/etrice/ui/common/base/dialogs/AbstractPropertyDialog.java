@@ -48,6 +48,7 @@ import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.graphics.Image;
@@ -529,9 +530,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return combo;
 	}
 	
-	private void createBinding(Widget widget, EObject obj, EStructuralFeature feature, Object objType, UpdateValueStrategy t2m, UpdateValueStrategy m2t, MultiValidator2 multiValidator){
+	protected void createBinding(Widget widget, EObject obj, EStructuralFeature feature, Object objType, UpdateValueStrategy t2m, UpdateValueStrategy m2t, MultiValidator2 multiValidator){
 		IObservableValue observableWidget = null;
-		if(widget instanceof Text)
+		if(widget instanceof Text || widget instanceof StyledText)
 			observableWidget = WidgetProperties.text(SWT.Modify).observe(widget);
 		else if(widget instanceof Button || widget instanceof Combo)
 			observableWidget = WidgetProperties.selection().observe(widget);
@@ -638,7 +639,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	}
 	
 	/**
-	 * Selects the string {@code selectSring(...)} inside the Text & shifts the
+	 * Selects the string {@code selectSring} inside the Text & shifts the
 	 * keyboard focus to it. If the select string is empty or not present inside
 	 * the text, it does nothing.
 	 * 

@@ -9,6 +9,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
@@ -58,7 +59,12 @@ public class DetailCodeIndentHelper {
           String _xifexpression_1 = null;
           if ((((lineCount).intValue() != 0) && (indentCount > 0))) {
             StringConcatenation _builder = new StringConcatenation();
-            _builder.append("�FOR i : (1 .. indentCount)�\t�ENDFOR�");
+            {
+              IntegerRange _upTo = new IntegerRange(1, indentCount);
+              for(final Integer i : _upTo) {
+                _builder.append("\t");
+              }
+            }
             _xifexpression_1 = _builder.toString();
           }
           String indent = _xifexpression_1;
@@ -72,7 +78,10 @@ public class DetailCodeIndentHelper {
           }
           String end = _xifexpression_2;
           StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("�front��indent��noneWSLine��end�");
+          _builder_1.append(front, "");
+          _builder_1.append(indent, "");
+          _builder_1.append(noneWSLine, "");
+          _builder_1.append(end, "");
           String newEditorLine = _builder_1.toString();
           newEditorLines.add(newEditorLine);
         }

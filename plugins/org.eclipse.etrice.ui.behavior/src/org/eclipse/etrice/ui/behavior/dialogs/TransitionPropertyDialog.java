@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -25,6 +28,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
@@ -36,6 +40,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
@@ -178,14 +183,12 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("guard must not be empty");
-				
-				Text cond = createText(body, "&Guard:", trans, FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
-				configureMemberAwareness(cond, true, true, true);
-				GridData gd = new GridData(GridData.FILL_BOTH);
-				gd.heightHint = 100;
-				cond.setLayoutData(gd);
-				
-				createDecorator(cond, "empty guard");
+
+				createActionCodeEditor(body, "&Guard:", trans.getAction(),
+						trans,
+						FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv,
+						s2m_not_null, m2s_null_empty, true, true, true,
+						"empty guard");
 			}
 		}
 		
@@ -196,14 +199,15 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("condition must not be empty");
-				
-				Text cond = createText(body, "&Condition:", trans, FSMPackage.eINSTANCE.getCPBranchTransition_Condition(), gv, s2m_not_null, m2s_null_empty, true);
-				configureMemberAwareness(cond, true, true, true);
-				GridData gd = new GridData(GridData.FILL_BOTH);
-				gd.heightHint = 100;
-				cond.setLayoutData(gd);
-				
-				createDecorator(cond, "empty condition");
+
+				createActionCodeEditor(
+						body,
+						"&Condition:",
+						trans.getAction(),
+						trans,
+						FSMPackage.eINSTANCE.getCPBranchTransition_Condition(),
+						gv, s2m_not_null, m2s_null_empty, true, true, true,
+						"empty condition");
 			}
 		}
 
@@ -217,22 +221,17 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (inherited) {
 			if (refined!=null) {
-				Text action = createText(body, "&Action Code:", refined, FSMPackage.eINSTANCE.getRefinedTransition_Action(), null, s2m, m2s, true);
-				configureMemberAwareness(action, true, true);
-				GridData gd = new GridData(GridData.FILL_BOTH);
-				gd.heightHint = 100;
-				action.setLayoutData(gd);
-				setTextSelectionAndFocus(action, codeSelectionString);
+				createActionCodeEditor(body, "&Action Code:",
+						refined.getAction(), refined,
+						FSMPackage.eINSTANCE.getRefinedTransition_Action(),
+						null, s2m, m2s, true, true, false, null);
 			}
 		}
 		else
 		{
-			Text action = createText(body, "&Action Code:", trans, FSMPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
-			configureMemberAwareness(action, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			action.setLayoutData(gd);
-			setTextSelectionAndFocus(action, codeSelectionString);
+			createActionCodeEditor(body, "&Action Code:", trans.getAction(),
+					trans, FSMPackage.eINSTANCE.getTransition_Action(), null,
+					s2m, m2s, true, true, false, null);
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -278,5 +277,74 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	public void setMessageDialogContents(String message, String title) {
 		messageToDisplay = message;
 		messageTitle = title; 
+	}
+	
+	
+	/**
+	 * Creates Action Code Editor for the Transition/Guard with the given
+	 * parameters and binds it with the model.
+	 * 
+	 * @author jayant
+	 * 
+	 * @param parent
+	 *            the {@link Composite} which will hold the editor
+	 * @param label
+	 *            the label for the editor
+	 * @param detailCode
+	 *            the {@link DetailCode} object to be represented
+	 * @param obj
+	 *            the EMF object containing the detailCode code
+	 * @param feat
+	 *            the {@link EStructuralFeature} associated with the code
+	 * @param singleValidator
+	 *            an {@link IValidator} for the JFace Data binding
+	 * @param s2m
+	 *            a String to Model converter
+	 * @param m2s
+	 *            a Model to string converter
+	 * @param useMembers
+	 *            true if the editor is to be member aware
+	 * @param useMessages
+	 *            true if the editor is to be message aware
+	 * @param useRecvMessagesOnly
+	 *            true if the editor could use receive messages only
+	 * @param decoratorString
+	 *            the decorator string to attach to the editor's control
+	 * 
+	 * @return the constructed instance of {@link IActionCodeEditor}
+	 */
+	private void createActionCodeEditor(Composite parent, String label,
+			DetailCode detailCode, EObject obj, EStructuralFeature feat,
+			IValidator singleValidator, IConverter s2m, IConverter m2s,
+			boolean useMembers, boolean useMessages,
+			boolean useRecvMessagesOnly, String decoratorString) {
+
+		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
+				detailCode, obj, feat, singleValidator, null, s2m, m2s,
+				useMembers, useMessages, useRecvMessagesOnly);
+
+		Control control;
+		if (entry != null)
+			control = entry.getControl();
+		else {
+			// if action editor cannot be created, create a simple SWT Text
+			// widget.
+			Text textEntry = createText(parent, label, obj, feat, null, s2m,
+					m2s, true);
+			configureMemberAwareness(textEntry, useMembers, useMessages,
+					useRecvMessagesOnly);
+			control = textEntry;
+		}
+
+		// set layout for the created control
+		GridData gd = new GridData(GridData.FILL_BOTH);
+		gd.heightHint = 100;
+		control.setLayoutData(gd);
+		if (decoratorString != null)
+			createDecorator(control, decoratorString);
+
+		// TODO Change IActionCodeEditor API to allow append or change
+		// the quick fix method
+		// setTextSelectionAndFocus(entry, codeSelectionString);
 	}
 }
