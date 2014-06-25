@@ -29,6 +29,7 @@
 #include "TestEtQueue.h"
 #include "TestEtTimer.h"
 #include "helpers/TestEtTimeHelpers.h"
+#include "util/TestUtil.h"
 
 #include "etUnit/etUnit.h"
 #include "debugging/etMSCLogger.h"
@@ -47,6 +48,7 @@ void RunCRuntimeTestcases(void){
 	TestEtUnit_runSuite();
 	TestEtTimer_runSuite();
 	TestEtTimeHelpers_runSuite();
+	TestUtil_runSuite();
 
 	etUnit_close();
 
