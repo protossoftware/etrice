@@ -159,6 +159,7 @@
 			<arg value="-I${c-runtime.path}/src/common"/>
 			<arg value="-I${c-runtime.path}/src/config"/>
 			<arg value="-I${c-runtime.path}/src/platforms/${runtime.platform}"/>
+			<arg value="-I${c-runtime.path}/src/util"/>
 			<arg value="-c"/>
 			<arg value="-g3"/>
 			<arg value="-O0"/>
