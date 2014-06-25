@@ -109,7 +109,7 @@
 			<arg value="../src/common/runtime/etRuntime.c"/>
 			<arg value="../src/common/modelbase/etActor.c"/>
 			<arg value="../src/common/modelbase/etPort.c"/>
-			<arg value="../src/common/util/RandomGenerator.c"/>
+			<arg value="../src/util/RandomGenerator.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etLogger.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etMutex.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etPlatformLifecycle.c"/>
