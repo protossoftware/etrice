@@ -109,6 +109,7 @@
 			<arg value="../src/common/runtime/etRuntime.c"/>
 			<arg value="../src/common/modelbase/etActor.c"/>
 			<arg value="../src/common/modelbase/etPort.c"/>
+			<arg value="../src/common/util/RandomGenerator.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etLogger.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etMutex.c"/>
 			<arg value="../src/platforms/${runtime.platform}/etPlatformLifecycle.c"/>
@@ -132,6 +133,7 @@
 			<arg value="etMutex.o"/>
 			<arg value="etPlatformLifecycle.o"/>
 			<arg value="etPort.o"/>
+			<arg value="RandomGenerator.o"/>
 			<arg value="etSema.o"/>
 			<arg value="etThread.o"/>
 			<arg value="etTime.o"/>
@@ -171,6 +173,7 @@
 			<arg value="../../src/runtime/TestEtTimer.c"/>
 			<arg value="../../src/runtime/TestEtUnit.c"/>
 			<arg value="../../src/runtime/helpers/TestEtTimeHelpers.c"/>
+			<arg value="../../src/runtime/util/TestUtil.c"/>
 		</exec>
 		<exec dir="bin/test" executable="${gcc.path}/gcc" failonerror="true" output="${output}/build.txt" append="true">
 			<arg value="-L${c-runtime.path}/bin"/>
@@ -185,7 +188,7 @@
 			<arg value="TestEtTimer.o"/>
 			<arg value="TestEtUnit.o"/>
 			<arg value="TestEtTimeHelpers.o"/>
-			
+			<arg value="TestUtil.o"/>
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
