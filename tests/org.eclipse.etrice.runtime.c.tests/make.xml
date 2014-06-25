@@ -195,6 +195,7 @@
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
 			<arg value="-lpthread"/>
 			<arg value="-lrt"/>
+			<arg value="-lm"/>
 		</exec>
 	</target>
 
