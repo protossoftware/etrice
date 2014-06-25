@@ -135,6 +135,9 @@ void etUnit_closeAll(etInt16 id);
 /** calls \ref expectEqualFloat64() */
 #define EXPECT_EQUAL_FLOAT64(id, msg, expected, actual, precision)		expectEqualFloat64(id, msg, expected, actual, precision, __FILE__, __LINE__)
 
+#define EXPECT_RANGE_FLOAT32(id, msg, min, max, actual)		expectRangeFloat32(id, msg, min, max, actual, __FILE__, __LINE__)
+#define EXPECT_RANGE_FLOAT64(id, msg, min, max, actual)		expectRangeFloat64(id, msg, min, max, actual, __FILE__, __LINE__)
+
 /*
  * Pointers
  */
@@ -204,6 +207,20 @@ void expectFalse(etInt16 id, const char* msg, etBool condition, const char* file
  * \param line the line
  */
 void expectEqualInt8(etInt16 id, const char* msg, etInt8 expected, etInt8 actual, const char* file, int line);
+
+/**
+ * reports an error if a value is not inside a range e.g. [2, 123]
+ *
+ * \param id the test case id
+ * \param msg the result message
+ * \param min the lower limit (inclusive)
+ * \param max the upper limit (inclusive)
+ * \param actual the actual value
+ * \param file the file name with the test case
+ * \param line the line
+ */
+void expectRangeInt8(etInt16 id, const char* msg, etInt8 min, etInt8 max, etInt8 actual, const char* file, int line);
+
 /**
  * reports an error if two integers aren't equal
  *
@@ -266,6 +283,7 @@ void expectEqualUInt32(etInt16 id, const char* msg, etUInt32 expected, etUInt32 
  * \param msg the result message
  * \param expected the expected value
  * \param actual the actual value
+ * \param precision expected +/- precision defines the window for acceptance of an actual value
  * \param file the file name with the test case
  * \param line the line
  */
@@ -277,10 +295,38 @@ void expectEqualFloat32(etInt16 id, const char* msg, etFloat32 expected, etFloat
  * \param msg the result message
  * \param expected the expected value
  * \param actual the actual value
+ * \param precision expected +/- precision defines the window for acceptance of an actual value
  * \param file the file name with the test case
  * \param line the line
  */
 void expectEqualFloat64(etInt16 id, const char* msg, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
+
+/**
+ * reports an error if a value is not inside a range e.g. [-5.1, +3.0]
+ *
+ * \param id the test case id
+ * \param msg the result message
+ * \param min the lower limit (inclusive)
+ * \param max the upper limit (inclusive)
+ * \param actual the actual value
+ * \param file the file name with the test case
+ * \param line the line
+ */
+void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat32 max, etFloat32 actual, const char* file, int line) ;
+
+/**
+ * reports an error if a value is not inside a range e.g. [-5.1, +3.0]
+ *
+ * \param id the test case id
+ * \param msg the result message
+ * \param min the lower limit (inclusive)
+ * \param max the upper limit (inclusive)
+ * \param actual the actual value
+ * \param file the file name with the test case
+ * \param line the line
+ */
+void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) ;
+
 /**
  * reports an error if two pointers aren't equal
  *
@@ -327,3 +373,5 @@ void expectOrder(etInt16 id, const char* msg, etInt16 identifier, const char* fi
 void expectOrderEnd(etInt16 id, const char* msg, etInt16 identifier, const char* file, int line);
 
 #endif /* _ETUNIT_H_ */
+
+

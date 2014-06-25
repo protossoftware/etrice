@@ -18,7 +18,6 @@
 #include "osal/etSema.h"
 #include "runtime/etRuntime.h"
 
-
 /*** member variables */
 
 /* file handling */
@@ -44,14 +43,17 @@ typedef struct OrderInfo {
 	etInt16 currentIndex;
 	etInt16 size;
 	etInt16* list;
-}
-OrderInfo;
+} OrderInfo;
 static OrderInfo etUnit_orderInfo[ETUNIT_ORDER_MAX];
 
 /* forward declarations of private functions */
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line);
+static void expect_range_int(etInt16 id, const char* message, etInt32 min, etInt32 max, etInt32 actual, const char* file, int line);
 static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected, etUInt32 actual, const char* file, int line);
+static void expect_range_uint(etInt16 id, const char* message, etUInt32 min, etUInt32 max, etUInt32 actual, const char* file, int line);
+
 static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
+static void expect_range_float(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line);
 static void etUnit_handleExpect(etInt16 id, etBool result, const char *trace, const char* expected, const char* actual, const char* file, int line);
 
 /* public functions */
@@ -63,15 +65,15 @@ void etUnit_open(const char* testResultPath, const char* testFileName) {
 		char filename[ETUNIT_FAILURE_TEXT_LEN];
 		int i;
 
-		if (testResultPath!=NULL)
+		if (testResultPath != NULL)
 			sprintf(filename, "%s/%s.etu", testResultPath, testFileName);
 		else
 			sprintf(filename, "%s.etu", testFileName);
 
 		/* init global data */
-		for (i=0; i<ETUNIT_ORDER_MAX; ++i)
+		for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
 			etUnit_orderInfo[i].id = 0;
-		for (i=0; i<ETUNIT_MAX_TEST_CASES; ++i)
+		for (i = 0; i < ETUNIT_MAX_TEST_CASES; ++i)
 			etUnit_testcaseSuccess[i] = TRUE;
 
 		if (etUnit_reportfile == NULL) {
@@ -97,7 +99,7 @@ void etUnit_close(void) {
 		etUnit_reportfile = NULL;
 	}
 	etLogger_logInfoF("End Time: %ld", clock());
-	if (etUnit_errorCounter==0)
+	if (etUnit_errorCounter == 0)
 		etLogger_logInfoF("Error Counter: %ld", etUnit_errorCounter);
 	else
 		etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
@@ -117,8 +119,10 @@ etInt16 etUnit_openTestCase(const char* testCaseName) {
 	etInt16 caseId = etUnit_nextCaseId++;
 
 	if (caseId >= ETUNIT_MAX_TEST_CASES) {
-		etLogger_logErrorF("Too many test cases. Maximum number of test cases is %d\n", ETUNIT_MAX_TEST_CASES);
-		etLogger_logErrorF("ETUNIT_MAX_TEST_CASES (etUnit_openTestCase, %s: %d)", __FILE__, __LINE__);
+		etLogger_logErrorF("Too many test cases. Maximum number of test cases is %d\n",
+		ETUNIT_MAX_TEST_CASES);
+		etLogger_logErrorF("ETUNIT_MAX_TEST_CASES (etUnit_openTestCase, %s: %d)", __FILE__,
+		__LINE__);
 		exit(-1);
 	}
 	if (etUnit_reportfile != NULL) {
@@ -137,13 +141,13 @@ void etUnit_closeTestCase(etInt16 id) {
 	}
 }
 
-etInt16 etUnit_openAll(const char* testResultPath, const char* testFileName, const char* testSuiteName, const char* testCaseName){
+etInt16 etUnit_openAll(const char* testResultPath, const char* testFileName, const char* testSuiteName, const char* testCaseName) {
 	etUnit_open(testResultPath, testFileName);
 	etUnit_openTestSuite(testSuiteName);
 	return etUnit_openTestCase(testCaseName);
 }
 
-void etUnit_closeAll(etInt16 id){
+void etUnit_closeAll(etInt16 id) {
 	etUnit_closeTestCase(id);
 	etUnit_closeTestSuite();
 	etUnit_close();
@@ -218,19 +222,27 @@ void expectEqualFloat64(etInt16 id, const char* message, etFloat64 expected, etF
 	expect_equal_float(id, message, expected, actual, precision, file, line);
 }
 
+void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat32 max, etFloat32 actual, const char* file, int line) {
+	expect_range_float(id, message, min, max, actual, file, line);
+}
+
+void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) {
+	expect_range_float(id, message, min, max, actual, file, line);
+}
+
 static OrderInfo* getOrderInfo(etInt16 id) {
 	int i;
-	for (i=0; i<ETUNIT_ORDER_MAX; ++i)
-		if (etUnit_orderInfo[i].id==id)
-			return etUnit_orderInfo+i;
+	for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
+		if (etUnit_orderInfo[i].id == id)
+			return etUnit_orderInfo + i;
 
 	return NULL;
 }
 
 void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file, int line) {
 	int i;
-	for (i=0; i<ETUNIT_ORDER_MAX; ++i)
-		if (etUnit_orderInfo[i].id==0) {
+	for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
+		if (etUnit_orderInfo[i].id == 0) {
 			etUnit_orderInfo[i].id = id;
 			etUnit_orderInfo[i].currentIndex = 0;
 			etUnit_orderInfo[i].size = size;
@@ -239,24 +251,23 @@ void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file,
 		}
 }
 
-void expectOrder(etInt16 id, const char* message, etInt16 identifier, const char* file, int line){
+void expectOrder(etInt16 id, const char* message, etInt16 identifier, const char* file, int line) {
 	OrderInfo* info = getOrderInfo(id);
-	if (info!=NULL) {
+	if (info != NULL) {
 		if (info->currentIndex < info->size) {
-			if (info->list[info->currentIndex] != identifier){
+			if (info->list[info->currentIndex] != identifier) {
 				char testresult[ETUNIT_FAILURE_TEXT_LEN];
 				char exp[16], act[16];
-				sprintf(testresult, "EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", message, info->currentIndex, identifier, info->list[info->currentIndex]);
+				sprintf(testresult, "EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", message, info->currentIndex, identifier,
+						info->list[info->currentIndex]);
 				sprintf(exp, "%d", identifier);
 				sprintf(act, "%d", info->list[info->currentIndex]);
 				etUnit_handleExpect(id, FALSE, testresult, exp, act, file, line);
-			}
-			else {
+			} else {
 				etUnit_handleExpect(id, TRUE, "", NULL, NULL, file, line);
 				info->currentIndex++;
 			}
-		}
-		else {
+		} else {
 			char testresult[ETUNIT_FAILURE_TEXT_LEN];
 			sprintf(testresult, "EXPECT_ORDER: index(%d) is too big in %s", info->currentIndex, message);
 			etUnit_handleExpect(id, FALSE, testresult, NULL, NULL, file, line);
@@ -268,7 +279,7 @@ void expectOrder(etInt16 id, const char* message, etInt16 identifier, const char
 void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const char* file, int line) {
 	OrderInfo* info = getOrderInfo(id);
 	expectOrder(id, message, identifier, file, line);
-	if (info->currentIndex != info->size){
+	if (info->currentIndex != info->size) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		sprintf(testresult, "EXPECT_ORDER_END %s: wrong index at the end: expected=%d, actual=%d", message, info->size, info->currentIndex);
 		etUnit_handleExpect(id, FALSE, testresult, NULL, NULL, file, line);
@@ -294,6 +305,24 @@ static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, 
 	}
 }
 
+static void expect_range_int(etInt16 id, const char* message, etInt32 min, etInt32 max, etInt32 actual, const char* file, int line) {
+	if (actual < min || actual > max) {
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		char exp[64], act[16];
+		sprintf(testresult, "%s: min=%ld, max=%ld, actual=%ld", message, min, max, actual);
+		if (actual < min) {
+			sprintf(exp, ">=%ld(min)", min);
+			sprintf(act, "%ld", actual);
+		} else {
+			sprintf(exp, "<=%ld(max)", max);
+			sprintf(act, "%ld", actual);
+		}
+		etUnit_handleExpect(id, FALSE, testresult, exp, act, file, line);
+	} else {
+		etUnit_handleExpect(id, TRUE, "", NULL, NULL, file, line);
+	}
+}
+
 static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected, etUInt32 actual, const char* file, int line) {
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
@@ -307,6 +336,23 @@ static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected
 	}
 }
 
+static void expect_range_uint(etInt16 id, const char* message, etUInt32 min, etUInt32 max, etUInt32 actual, const char* file, int line) {
+	if (actual < min || actual > max) {
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		char exp[64], act[16];
+		sprintf(testresult, "%s: min=%lu, max=%lu, actual=%lu", message, min, max, actual);
+		if (actual < min) {
+			sprintf(exp, ">=%lu(min)", min);
+			sprintf(act, "%lu", actual);
+		} else {
+			sprintf(exp, "<=%lu(max)", max);
+			sprintf(act, "%lu", actual);
+		}
+		etUnit_handleExpect(id, FALSE, testresult, exp, act, file, line);
+	} else {
+		etUnit_handleExpect(id, TRUE, "", NULL, NULL, file, line);
+	}
+}
 
 static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
 	if (expected - actual < -precision || expected - actual > precision) {
@@ -321,22 +367,38 @@ static void expect_equal_float(etInt16 id, const char* message, etFloat64 expect
 	}
 }
 
+static void expect_range_float(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) {
+	if (actual < min || actual > max) {
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		char exp[64], act[16];
+		sprintf(testresult, "%s: min=%f, max=%f, actual=%f", message, min, max, actual);
+		if (actual < min) {
+			sprintf(exp, ">=%f(min)", min);
+			sprintf(act, "%f", actual);
+		} else {
+			sprintf(exp, "<=%f(max)", max);
+			sprintf(act, "%f", actual);
+		}
+		etUnit_handleExpect(id, FALSE, testresult, exp, act, file, line);
+	} else {
+		etUnit_handleExpect(id, TRUE, "", NULL, NULL, file, line);
+	}
+}
+
 static void etUnit_handleExpect(etInt16 id, etBool result, const char *resulttext, const char* exp, const char* act, const char* file, int line) {
 	if (result == TRUE) {
 		/* nothing to do because no failure */
-	}
-	else {
+	} else {
 		etUnit_errorCounter++;
-		if (etUnit_testcaseSuccess[id] == TRUE){
+		if (etUnit_testcaseSuccess[id] == TRUE) {
 			/* first failure will be remembered */
 			etUnit_testcaseSuccess[id] = FALSE;
 
-			if (act!=NULL && exp!=NULL)
+			if (act != NULL && exp != NULL)
 				etLogger_fprintf(etUnit_reportfile, "tc fail %d: #%s#%s#%s:%d#%s\n", id, exp, act, file, line, resulttext);
 			else
 				etLogger_fprintf(etUnit_reportfile, "tc fail %d: ###%s:%d#%s\n", id, file, line, resulttext);
-		}
-		else{
+		} else {
 			/* more than one error will be ignored */
 		}
 	}
