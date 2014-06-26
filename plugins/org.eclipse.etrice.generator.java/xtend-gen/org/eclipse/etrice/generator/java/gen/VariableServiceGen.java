@@ -98,7 +98,7 @@ public class VariableServiceGen {
     {
       final NodeRef nr = ETMapUtil.getNodeRef(comp);
       final String clsname = this.stdExt.getJavaClassName(nr, comp);
-      final HashMap<ActorInstance,List<Attribute>> aisAttrMap = new HashMap<ActorInstance, List<Attribute>>();
+      final HashMap<ActorInstance, List<Attribute>> aisAttrMap = new HashMap<ActorInstance, List<Attribute>>();
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
       final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
         public void apply(final ActorInstance ai) {

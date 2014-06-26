@@ -89,6 +89,11 @@ class CExtensions implements ILanguageExtension {
 		return rc.name+".c";
 	}
 
+	// used
+	def String getCUtilsFileName(RoomClass rc) {
+		return rc.name+"_Utils.h";
+	}
+
 	def String getInstSourceFileName(RoomClass rc) {
 		return rc.name+"_Inst.h";
 	}

@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -26,13 +27,17 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
@@ -95,16 +100,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
         CharSequence _generateHeaderFile = this.generateHeaderFile(root, xpac);
         this.fileIO.generateFile("generating ActorClass header", path, infopath, file, _generateHeaderFile);
         ActorClass _actorClass_5 = xpac.getActorClass();
-        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_5, "BehaviorManual");
+        String _cUtilsFileName = this._cExtensions.getCUtilsFileName(_actorClass_5);
+        file = _cUtilsFileName;
+        CharSequence _generateUtilsFile = this.generateUtilsFile(root, xpac);
+        this.fileIO.generateFile("generating ActorClass utils", path, infopath, file, _generateUtilsFile);
+        ActorClass _actorClass_6 = xpac.getActorClass();
+        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_6, "BehaviorManual");
         if (_isBehaviorAnnotationPresent) {
-          ActorClass _actorClass_6 = xpac.getActorClass();
-          String _name = _actorClass_6.getName();
+          ActorClass _actorClass_7 = xpac.getActorClass();
+          String _name = _actorClass_7.getName();
           String _plus = ("omitting ActorClass source for \'" + _name);
           String _plus_1 = (_plus + "\' since @BehaviorManual is specified");
           this.logger.logInfo(_plus_1);
         } else {
-          ActorClass _actorClass_7 = xpac.getActorClass();
-          String _cSourceFileName = this._cExtensions.getCSourceFileName(_actorClass_7);
+          ActorClass _actorClass_8 = xpac.getActorClass();
+          String _cSourceFileName = this._cExtensions.getCSourceFileName(_actorClass_8);
           file = _cSourceFileName;
           CharSequence _generateSourceFile = this.generateSourceFile(root, xpac);
           this.fileIO.generateFile("generating ActorClass source", path, infopath, file, _generateSourceFile);
@@ -118,7 +128,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
-      final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
+      final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
@@ -127,7 +137,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
-      final Function1<Port,Boolean> _function_1 = new Function1<Port,Boolean>() {
+      final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
           GeneralProtocolClass _protocol = p.getProtocol();
@@ -144,7 +154,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
-      final Function1<Port,Boolean> _function_2 = new Function1<Port,Boolean>() {
+      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
           GeneralProtocolClass _protocol = p.getProtocol();
@@ -585,6 +595,542 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
+  private CharSequence generateUtilsFile(final Root root, final ExpandedActorClass xpac) {
+    CharSequence _xblockexpression = null;
+    {
+      final ActorClass ac = xpac.getActorClass();
+      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
+      final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+        public Boolean apply(final Port p) {
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+        }
+      };
+      final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
+      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
+      final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and_1 = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            _and_1 = _isConjugated;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            int _multiplicity = p.getMultiplicity();
+            boolean _equals_1 = (_multiplicity == 1);
+            _and = _equals_1;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
+      List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
+      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
+          if (!_equals) {
+            _and_1 = false;
+          } else {
+            boolean _isConjugated = p.isConjugated();
+            boolean _not = (!_isConjugated);
+            _and_1 = _not;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            int _multiplicity = p.getMultiplicity();
+            boolean _equals_1 = (_multiplicity == 1);
+            _and = _equals_1;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
+      EObject _eContainer = ac.eContainer();
+      String _name = ((RoomModel) _eContainer).getName();
+      String _replaceAll = _name.replaceAll("\\.", "_");
+      String _plus = (_replaceAll + "_");
+      String _name_1 = ac.getName();
+      String _plus_1 = (_plus + _name_1);
+      final String filename = (_plus_1 + "_Utils");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* @author generated by eTrice");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Utils File of ActorClass ");
+      String _name_2 = ac.getName();
+      _builder.append(_name_2, " ");
+      _builder.newLineIfNotEmpty();
+      _builder.append(" ");
+      _builder.append("* ");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.newLine();
+      CharSequence _generateIncludeGuardBegin = this._cExtensions.generateIncludeGuardBegin(filename);
+      _builder.append(_generateIncludeGuardBegin, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("#include ");
+      String _includePath = this._cExtensions.getIncludePath(ac);
+      _builder.append(_includePath, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("/*");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* access macros for ports, operations and attributes");
+      _builder.newLine();
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("/* simple event ports */");
+      _builder.newLine();
+      {
+        final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
+          public Boolean apply(final Port it) {
+            int _multiplicity = it.getMultiplicity();
+            return Boolean.valueOf((_multiplicity == 1));
+          }
+        };
+        Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_3);
+        for(final Port ep : _filter) {
+          {
+            List<Message> _outgoing = RoomHelpers.getOutgoing(ep);
+            for(final Message msg : _outgoing) {
+              String _xifexpression = null;
+              VarDecl _data = msg.getData();
+              boolean _notEquals = (!Objects.equal(_data, null));
+              if (_notEquals) {
+                _xifexpression = "data";
+              } else {
+                _xifexpression = "";
+              }
+              final String data1 = _xifexpression;
+              _builder.newLineIfNotEmpty();
+              String _xifexpression_1 = null;
+              VarDecl _data_1 = msg.getData();
+              boolean _notEquals_1 = (!Objects.equal(_data_1, null));
+              if (_notEquals_1) {
+                _xifexpression_1 = ", data";
+              } else {
+                _xifexpression_1 = "";
+              }
+              final String data2 = _xifexpression_1;
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_3 = ep.getName();
+              _builder.append(_name_3, "");
+              _builder.append("_");
+              String _name_4 = msg.getName();
+              _builder.append(_name_4, "");
+              _builder.append("(");
+              _builder.append(data1, "");
+              _builder.append(") ");
+              String _portClassName = this._roomExtensions.getPortClassName(ep);
+              _builder.append(_portClassName, "");
+              _builder.append("_");
+              String _name_5 = msg.getName();
+              _builder.append(_name_5, "");
+              _builder.append("(&self->constData->");
+              String _name_6 = ep.getName();
+              _builder.append(_name_6, "");
+              _builder.append(data2, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* data receive ports */");
+      _builder.newLine();
+      {
+        for(final Port ep_1 : recvPorts) {
+          {
+            List<Message> _incoming = RoomHelpers.getIncoming(ep_1);
+            for(final Message msg_1 : _incoming) {
+              _builder.append("#define ");
+              String _name_7 = ep_1.getName();
+              _builder.append(_name_7, "");
+              _builder.append("_");
+              String _name_8 = msg_1.getName();
+              _builder.append(_name_8, "");
+              _builder.append("() ");
+              String _portClassName_1 = this._roomExtensions.getPortClassName(ep_1);
+              _builder.append(_portClassName_1, "");
+              _builder.append("_");
+              String _name_9 = msg_1.getName();
+              _builder.append(_name_9, "");
+              _builder.append("_get(&self->constData->");
+              String _name_10 = ep_1.getName();
+              _builder.append(_name_10, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* data send ports */");
+      _builder.newLine();
+      {
+        for(final Port ep_2 : sendPorts) {
+          {
+            List<Message> _incoming_1 = RoomHelpers.getIncoming(ep_2);
+            for(final Message msg_2 : _incoming_1) {
+              String _xifexpression_2 = null;
+              VarDecl _data_2 = msg_2.getData();
+              boolean _notEquals_2 = (!Objects.equal(_data_2, null));
+              if (_notEquals_2) {
+                _xifexpression_2 = "data";
+              } else {
+                _xifexpression_2 = "";
+              }
+              final String data1_1 = _xifexpression_2;
+              _builder.newLineIfNotEmpty();
+              String _xifexpression_3 = null;
+              VarDecl _data_3 = msg_2.getData();
+              boolean _notEquals_3 = (!Objects.equal(_data_3, null));
+              if (_notEquals_3) {
+                _xifexpression_3 = ", data";
+              } else {
+                _xifexpression_3 = "";
+              }
+              final String data2_1 = _xifexpression_3;
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_11 = ep_2.getName();
+              _builder.append(_name_11, "");
+              _builder.append("_");
+              String _name_12 = msg_2.getName();
+              _builder.append(_name_12, "");
+              _builder.append("(");
+              _builder.append(data1_1, "");
+              _builder.append(") ");
+              String _portClassName_2 = this._roomExtensions.getPortClassName(ep_2);
+              _builder.append(_portClassName_2, "");
+              _builder.append("_");
+              String _name_13 = msg_2.getName();
+              _builder.append(_name_13, "");
+              _builder.append("_set(&self->constData->");
+              String _name_14 = ep_2.getName();
+              _builder.append(_name_14, "");
+              _builder.append(data2_1, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* saps */");
+      _builder.newLine();
+      {
+        List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
+        for(final SAP sap : _allSAPs) {
+          {
+            List<Message> _outgoing_1 = RoomHelpers.getOutgoing(sap);
+            for(final Message msg_3 : _outgoing_1) {
+              String _xifexpression_4 = null;
+              VarDecl _data_4 = msg_3.getData();
+              boolean _notEquals_4 = (!Objects.equal(_data_4, null));
+              if (_notEquals_4) {
+                _xifexpression_4 = "data";
+              } else {
+                _xifexpression_4 = "";
+              }
+              final String data1_2 = _xifexpression_4;
+              _builder.newLineIfNotEmpty();
+              String _xifexpression_5 = null;
+              VarDecl _data_5 = msg_3.getData();
+              boolean _notEquals_5 = (!Objects.equal(_data_5, null));
+              if (_notEquals_5) {
+                _xifexpression_5 = ", data";
+              } else {
+                _xifexpression_5 = "";
+              }
+              final String data2_2 = _xifexpression_5;
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_15 = sap.getName();
+              _builder.append(_name_15, "");
+              _builder.append("_");
+              String _name_16 = msg_3.getName();
+              _builder.append(_name_16, "");
+              _builder.append("(");
+              _builder.append(data1_2, "");
+              _builder.append(") ");
+              String _portClassName_3 = this._roomExtensions.getPortClassName(sap);
+              _builder.append(_portClassName_3, "");
+              _builder.append("_");
+              String _name_17 = msg_3.getName();
+              _builder.append(_name_17, "");
+              _builder.append("(&self->constData->");
+              String _name_18 = sap.getName();
+              _builder.append(_name_18, "");
+              _builder.append(data2_2, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* replicated event ports */");
+      _builder.newLine();
+      {
+        final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
+          public Boolean apply(final Port it) {
+            int _multiplicity = it.getMultiplicity();
+            return Boolean.valueOf((_multiplicity != 1));
+          }
+        };
+        Iterable<Port> _filter_1 = IterableExtensions.<Port>filter(eventPorts, _function_4);
+        for(final Port ep_3 : _filter_1) {
+          {
+            List<Message> _outgoing_2 = RoomHelpers.getOutgoing(ep_3);
+            for(final Message msg_4 : _outgoing_2) {
+              String _xifexpression_6 = null;
+              VarDecl _data_6 = msg_4.getData();
+              boolean _notEquals_6 = (!Objects.equal(_data_6, null));
+              if (_notEquals_6) {
+                _xifexpression_6 = "data";
+              } else {
+                _xifexpression_6 = "";
+              }
+              final String data1_3 = _xifexpression_6;
+              _builder.newLineIfNotEmpty();
+              String _xifexpression_7 = null;
+              VarDecl _data_7 = msg_4.getData();
+              boolean _notEquals_7 = (!Objects.equal(_data_7, null));
+              if (_notEquals_7) {
+                _xifexpression_7 = ", data";
+              } else {
+                _xifexpression_7 = "";
+              }
+              final String data2_3 = _xifexpression_7;
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_19 = ep_3.getName();
+              _builder.append(_name_19, "");
+              _builder.append("_");
+              String _name_20 = msg_4.getName();
+              _builder.append(_name_20, "");
+              _builder.append("_broadcast(");
+              _builder.append(data1_3, "");
+              _builder.append(") ");
+              String _portClassName_4 = this._roomExtensions.getPortClassName(ep_3);
+              _builder.append(_portClassName_4, "");
+              _builder.append("_");
+              String _name_21 = msg_4.getName();
+              _builder.append(_name_21, "");
+              _builder.append("_broadcast(&self->constData->");
+              String _name_22 = ep_3.getName();
+              _builder.append(_name_22, "");
+              _builder.append(data2_3, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_23 = ep_3.getName();
+              _builder.append(_name_23, "");
+              _builder.append("_");
+              String _name_24 = msg_4.getName();
+              _builder.append(_name_24, "");
+              _builder.append("(idx");
+              _builder.append(data2_3, "");
+              _builder.append(") ");
+              String _portClassName_5 = this._roomExtensions.getPortClassName(ep_3);
+              _builder.append(_portClassName_5, "");
+              _builder.append("_");
+              String _name_25 = msg_4.getName();
+              _builder.append(_name_25, "");
+              _builder.append("(&self->constData->");
+              String _name_26 = ep_3.getName();
+              _builder.append(_name_26, "");
+              _builder.append(", idx");
+              _builder.append(data2_3, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* services */");
+      _builder.newLine();
+      {
+        List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
+        for(final ServiceImplementation svc : _allServiceImplementations) {
+          {
+            SPP _spp = svc.getSpp();
+            List<Message> _outgoing_3 = RoomHelpers.getOutgoing(_spp);
+            for(final Message msg_5 : _outgoing_3) {
+              String _xifexpression_8 = null;
+              VarDecl _data_8 = msg_5.getData();
+              boolean _notEquals_8 = (!Objects.equal(_data_8, null));
+              if (_notEquals_8) {
+                _xifexpression_8 = "data";
+              } else {
+                _xifexpression_8 = "";
+              }
+              final String data1_4 = _xifexpression_8;
+              _builder.newLineIfNotEmpty();
+              String _xifexpression_9 = null;
+              VarDecl _data_9 = msg_5.getData();
+              boolean _notEquals_9 = (!Objects.equal(_data_9, null));
+              if (_notEquals_9) {
+                _xifexpression_9 = ", data";
+              } else {
+                _xifexpression_9 = "";
+              }
+              final String data2_4 = _xifexpression_9;
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              SPP _spp_1 = svc.getSpp();
+              String _name_27 = _spp_1.getName();
+              _builder.append(_name_27, "");
+              _builder.append("_");
+              String _name_28 = msg_5.getName();
+              _builder.append(_name_28, "");
+              _builder.append("_broadcast(");
+              _builder.append(data1_4, "");
+              _builder.append(") ");
+              SPP _spp_2 = svc.getSpp();
+              String _portClassName_6 = this._roomExtensions.getPortClassName(_spp_2);
+              _builder.append(_portClassName_6, "");
+              _builder.append("_");
+              String _name_29 = msg_5.getName();
+              _builder.append(_name_29, "");
+              _builder.append("_broadcast(&self->constData->");
+              SPP _spp_3 = svc.getSpp();
+              String _name_30 = _spp_3.getName();
+              _builder.append(_name_30, "");
+              _builder.append(data2_4, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              SPP _spp_4 = svc.getSpp();
+              String _name_31 = _spp_4.getName();
+              _builder.append(_name_31, "");
+              _builder.append("_");
+              String _name_32 = msg_5.getName();
+              _builder.append(_name_32, "");
+              _builder.append("(idx");
+              _builder.append(data2_4, "");
+              _builder.append(") ");
+              SPP _spp_5 = svc.getSpp();
+              String _portClassName_7 = this._roomExtensions.getPortClassName(_spp_5);
+              _builder.append(_portClassName_7, "");
+              _builder.append("_");
+              String _name_33 = msg_5.getName();
+              _builder.append(_name_33, "");
+              _builder.append("(&self->constData->");
+              SPP _spp_6 = svc.getSpp();
+              String _name_34 = _spp_6.getName();
+              _builder.append(_name_34, "");
+              _builder.append(", idx");
+              _builder.append(data2_4, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* operations */");
+      _builder.newLine();
+      {
+        List<Operation> _allOperations = RoomHelpers.getAllOperations(ac);
+        for(final Operation op : _allOperations) {
+          final CharSequence args = this.argList(op);
+          _builder.newLineIfNotEmpty();
+          _builder.append("#define ");
+          String _name_35 = op.getName();
+          _builder.append(_name_35, "");
+          _builder.append("(");
+          _builder.append(args, "");
+          _builder.append(") ");
+          String _name_36 = op.getName();
+          _builder.append(_name_36, "");
+          _builder.append("(self");
+          {
+            EList<VarDecl> _arguments = op.getArguments();
+            boolean _isEmpty = _arguments.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              _builder.append(", ");
+              _builder.append(args, "");
+            }
+          }
+          _builder.append(")");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* attributes */");
+      _builder.newLine();
+      {
+        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
+        for(final Attribute a : _allAttributes) {
+          _builder.append("#define ");
+          String _name_37 = a.getName();
+          _builder.append(_name_37, "");
+          _builder.append(" (self->");
+          String _name_38 = a.getName();
+          _builder.append(_name_38, "");
+          _builder.append(")");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      CharSequence _generateIncludeGuardEnd = this._cExtensions.generateIncludeGuardEnd(filename);
+      _builder.append(_generateIncludeGuardEnd, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence argList(final Operation op) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<VarDecl> _arguments = op.getArguments();
+      boolean _hasElements = false;
+      for(final VarDecl a : _arguments) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(", ", "");
+        }
+        String _name = a.getName();
+        _builder.append(_name, "");
+      }
+    }
+    return _builder;
+  }
+  
   private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
@@ -626,6 +1172,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("#include \"");
       String _cHeaderFileName = this._cExtensions.getCHeaderFileName(ac);
       _builder.append(_cHeaderFileName, "");
+      _builder.append("\"");
+      _builder.newLineIfNotEmpty();
+      _builder.append("#include \"");
+      String _cUtilsFileName = this._cExtensions.getCUtilsFileName(ac);
+      _builder.append(_cUtilsFileName, "");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -796,7 +1347,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(ac);
+      List<Operation> _allOperations = RoomHelpers.getAllOperations(ac);
+      String _name_11 = ac.getName();
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_allOperations, _name_11);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

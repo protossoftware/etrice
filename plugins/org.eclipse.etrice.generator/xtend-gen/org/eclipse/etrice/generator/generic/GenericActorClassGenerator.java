@@ -73,14 +73,14 @@ public class GenericActorClassGenerator {
       _xifexpression_2 = RoomHelpers.getAllServiceImplementations(ac);
     }
     final List<ServiceImplementation> svcImpls = _xifexpression_2;
-    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
+    final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
     for (final Port ep : endPorts) {
       String _name = ep.getName();
       String _plus = ("IFITEM_" + _name);
       int _interfaceItemLocalId = xpac.getInterfaceItemLocalId(ep);
       int _plus_1 = (1 + _interfaceItemLocalId);
       String _string = Integer.valueOf(_plus_1).toString();
-      Pair<String,String> _pair = Tuples.<String, String>pair(_plus, _string);
+      Pair<String, String> _pair = Tuples.<String, String>pair(_plus, _string);
       list.add(_pair);
     }
     for (final SAP sap : strSAPs) {
@@ -89,7 +89,7 @@ public class GenericActorClassGenerator {
       int _interfaceItemLocalId_1 = xpac.getInterfaceItemLocalId(sap);
       int _plus_3 = (1 + _interfaceItemLocalId_1);
       String _string_1 = Integer.valueOf(_plus_3).toString();
-      Pair<String,String> _pair_1 = Tuples.<String, String>pair(_plus_2, _string_1);
+      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_plus_2, _string_1);
       list.add(_pair_1);
     }
     for (final ServiceImplementation svc : svcImpls) {
@@ -100,7 +100,7 @@ public class GenericActorClassGenerator {
       int _interfaceItemLocalId_2 = xpac.getInterfaceItemLocalId(_spp_1);
       int _plus_5 = (1 + _interfaceItemLocalId_2);
       String _string_2 = Integer.valueOf(_plus_5).toString();
-      Pair<String,String> _pair_2 = Tuples.<String, String>pair(_plus_4, _string_2);
+      Pair<String, String> _pair_2 = Tuples.<String, String>pair(_plus_4, _string_2);
       list.add(_pair_2);
     }
     return this.langExt.genEnumeration("interface_items", list);
@@ -108,7 +108,7 @@ public class GenericActorClassGenerator {
   
   public String genInterfaceItemConstantsForOptionalActor(final ActorClass ac) {
     final List<Port> ports = RoomHelpers.getAllInterfacePorts(ac);
-    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
+    final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
     Iterable<Indexed<Port>> _indexed = Indexed.<Port>indexed(ports);
     for (final Indexed<Port> ep : _indexed) {
       Port _value = ep.getValue();
@@ -116,7 +116,7 @@ public class GenericActorClassGenerator {
       String _plus = ("IFITEM_" + _name);
       int _index1 = ep.getIndex1();
       String _string = Integer.valueOf(_index1).toString();
-      Pair<String,String> _pair = Tuples.<String, String>pair(_plus, _string);
+      Pair<String, String> _pair = Tuples.<String, String>pair(_plus, _string);
       list.add(_pair);
     }
     return this.langExt.genEnumeration("interface_items", list);

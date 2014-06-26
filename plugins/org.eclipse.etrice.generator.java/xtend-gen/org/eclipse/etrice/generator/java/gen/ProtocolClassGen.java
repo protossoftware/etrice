@@ -86,7 +86,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    final Function1<ProtocolClass,Boolean> _function = new Function1<ProtocolClass,Boolean>() {
+    final Function1<ProtocolClass, Boolean> _function = new Function1<ProtocolClass, Boolean>() {
       public Boolean apply(final ProtocolClass cl) {
         return Boolean.valueOf(ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
@@ -859,7 +859,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));

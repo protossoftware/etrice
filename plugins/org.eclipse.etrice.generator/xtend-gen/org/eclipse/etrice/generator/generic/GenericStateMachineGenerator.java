@@ -99,26 +99,26 @@ public class GenericStateMachineGenerator {
     List<State> baseStates = _xifexpression_1;
     List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(baseStates);
     baseStates = _leafStatesLast;
-    ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
+    ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
     boolean _usesInheritance_2 = this.langExt.usesInheritance();
     boolean _not = (!_usesInheritance_2);
     if (_not) {
-      Pair<String,String> _pair = Tuples.<String, String>pair("NO_STATE", "0");
+      Pair<String, String> _pair = Tuples.<String, String>pair("NO_STATE", "0");
       list.add(_pair);
-      Pair<String,String> _pair_1 = Tuples.<String, String>pair("STATE_TOP", "1");
+      Pair<String, String> _pair_1 = Tuples.<String, String>pair("STATE_TOP", "1");
       list.add(_pair_1);
     }
     for (final State state : baseStates) {
       {
         String _genStateId = CodegenHelpers.getGenStateId(state);
         String _string = Integer.valueOf(offset).toString();
-        Pair<String,String> _pair_2 = Tuples.<String, String>pair(_genStateId, _string);
+        Pair<String, String> _pair_2 = Tuples.<String, String>pair(_genStateId, _string);
         list.add(_pair_2);
         offset = (offset + 1);
       }
     }
     String _string = Integer.valueOf(offset).toString();
-    Pair<String,String> _pair_2 = Tuples.<String, String>pair("STATE_MAX", _string);
+    Pair<String, String> _pair_2 = Tuples.<String, String>pair("STATE_MAX", _string);
     list.add(_pair_2);
     return this.langExt.genEnumeration("state_ids", list);
   }
@@ -150,13 +150,13 @@ public class GenericStateMachineGenerator {
       _xifexpression_1 = 0;
     }
     int offset = _xifexpression_1;
-    ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
+    ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
     for (final TransitionChain chain : chains) {
       {
         offset = (offset + 1);
         String _genChainId = CodegenHelpers.getGenChainId(chain);
         String _string = Integer.valueOf(offset).toString();
-        Pair<String,String> _pair = Tuples.<String, String>pair(_genChainId, _string);
+        Pair<String, String> _pair = Tuples.<String, String>pair(_genChainId, _string);
         list.add(_pair);
       }
     }
@@ -181,8 +181,8 @@ public class GenericStateMachineGenerator {
       _xifexpression = RoomHelpers.getAllMessagesFromInterfaces(_actorClass_1);
     }
     final List<MessageFromIf> triggers = _xifexpression;
-    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
-    Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");
+    final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
+    Pair<String, String> _pair = Tuples.<String, String>pair("POLLING", "0");
     list.add(_pair);
     for (final MessageFromIf mif : triggers) {
       String _triggerCodeName = xpac.getTriggerCodeName(mif);
@@ -192,7 +192,7 @@ public class GenericStateMachineGenerator {
       String _plus_1 = (_plus + " + EVT_SHIFT*");
       String _messageID = this.pcGen.getMessageID(mif);
       String _plus_2 = (_plus_1 + _messageID);
-      Pair<String,String> _pair_1 = Tuples.<String, String>pair(_triggerCodeName, _plus_2);
+      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_triggerCodeName, _plus_2);
       list.add(_pair_1);
     }
     return this.langExt.genEnumeration("triggers", list);
@@ -1260,7 +1260,7 @@ public class GenericStateMachineGenerator {
     _builder.append(_genDoCodes, "");
     _builder.newLineIfNotEmpty();
     List<Transition> _outgoingTransitionsHierarchical = this._roomExtensions.getOutgoingTransitionsHierarchical(xpac, state);
-    final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
+    final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
       public Boolean apply(final Transition t) {
         return Boolean.valueOf((t instanceof GuardedTransition));
       }
@@ -1523,7 +1523,7 @@ public class GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       EList<Trigger> _triggers = tt.getTriggers();
-      final Function1<Trigger,Boolean> _function = new Function1<Trigger,Boolean>() {
+      final Function1<Trigger, Boolean> _function = new Function1<Trigger, Boolean>() {
         public Boolean apply(final Trigger e) {
           return Boolean.valueOf(ac.isMatching(e, trigger));
         }
@@ -2102,7 +2102,7 @@ public class GenericStateMachineGenerator {
       }
       StateGraph _stateMachine_1 = xpac.getStateMachine();
       List<TrPoint> _allTrPointsRecursive = RoomHelpers.getAllTrPointsRecursive(_stateMachine_1);
-      final Function1<TrPoint,Boolean> _function = new Function1<TrPoint,Boolean>() {
+      final Function1<TrPoint, Boolean> _function = new Function1<TrPoint, Boolean>() {
         public Boolean apply(final TrPoint t) {
           boolean _and = false;
           if (!(t instanceof TransitionPoint)) {

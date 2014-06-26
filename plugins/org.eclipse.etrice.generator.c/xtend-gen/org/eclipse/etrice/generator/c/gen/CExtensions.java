@@ -114,6 +114,11 @@ public class CExtensions implements ILanguageExtension {
     return (_name + ".c");
   }
   
+  public String getCUtilsFileName(final RoomClass rc) {
+    String _name = rc.getName();
+    return (_name + "_Utils.h");
+  }
+  
   public String getInstSourceFileName(final RoomClass rc) {
     String _name = rc.getName();
     return (_name + "_Inst.h");
@@ -224,7 +229,7 @@ public class CExtensions implements ILanguageExtension {
     return true;
   }
   
-  public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
+  public String genEnumeration(final String name, final List<Pair<String, String>> entries) {
     String _xblockexpression = null;
     {
       boolean _isEmpty = entries.isEmpty();
@@ -379,7 +384,7 @@ public class CExtensions implements ILanguageExtension {
       }
     }
     if (!_matched) {
-      if (Objects.equal(_targetName,"boolean")) {
+      if (Objects.equal(_targetName, "boolean")) {
         _matched=true;
         _switchResult = value.toUpperCase();
       }

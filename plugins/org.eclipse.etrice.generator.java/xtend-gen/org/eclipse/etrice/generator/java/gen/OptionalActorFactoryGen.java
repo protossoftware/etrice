@@ -44,9 +44,9 @@ public class OptionalActorFactoryGen {
   private FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
-    final HashMap<ActorClass,WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
+    final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
-    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+    final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredActorClass));
       }
@@ -60,7 +60,7 @@ public class OptionalActorFactoryGen {
     };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<OptionalActorInstance> _optionalInstances = root.getOptionalInstances();
-    final Function1<OptionalActorInstance,Boolean> _function_2 = new Function1<OptionalActorInstance,Boolean>() {
+    final Function1<OptionalActorInstance, Boolean> _function_2 = new Function1<OptionalActorInstance, Boolean>() {
       public Boolean apply(final OptionalActorInstance cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
@@ -141,7 +141,7 @@ public class OptionalActorFactoryGen {
       _builder.newLine();
       {
         List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
-        final Function1<Port,Boolean> _function = new Function1<Port,Boolean>() {
+        final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
           public Boolean apply(final Port p) {
             return Boolean.valueOf(RoomHelpers.isExternal(p));
           }

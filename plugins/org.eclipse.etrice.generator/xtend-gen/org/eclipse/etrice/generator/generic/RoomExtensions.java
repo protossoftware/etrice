@@ -516,7 +516,7 @@ public class RoomExtensions {
   public MessageHandler getSendHandler(final Message m, final boolean conj) {
     EObject _eContainer = m.eContainer();
     List<MessageHandler> _sendHandlers = this.getSendHandlers(((ProtocolClass) _eContainer), conj);
-    final Function1<MessageHandler,Boolean> _function = new Function1<MessageHandler,Boolean>() {
+    final Function1<MessageHandler, Boolean> _function = new Function1<MessageHandler, Boolean>() {
       public Boolean apply(final MessageHandler e) {
         Message _msg = e.getMsg();
         return Boolean.valueOf(Objects.equal(_msg, m));
@@ -558,13 +558,13 @@ public class RoomExtensions {
   public List<State> getLeafStatesLast(final List<State> states) {
     List<State> _xblockexpression = null;
     {
-      final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
+      final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
           return Boolean.valueOf(RoomHelpers.isLeaf(s));
         }
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
-      final Function1<State,Boolean> _function_1 = new Function1<State,Boolean>() {
+      final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
           boolean _isLeaf = RoomHelpers.isLeaf(s);
           return Boolean.valueOf((!_isLeaf));
@@ -602,7 +602,7 @@ public class RoomExtensions {
   public boolean overridesStop(final ActorClass ac) {
     boolean _or = false;
     EList<StandardOperation> _operations = ac.getOperations();
-    final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+    final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
       public Boolean apply(final StandardOperation e) {
         boolean _and = false;
         boolean _and_1 = false;

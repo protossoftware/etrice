@@ -491,14 +491,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
         }
       };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
-      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -507,7 +507,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
-      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -764,14 +764,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message,Boolean> _function = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
         }
       };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
-      final Function1<Message,Boolean> _function_1 = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -780,7 +780,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
-      final Function1<Message,Boolean> _function_2 = new Function1<Message,Boolean>() {
+      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -841,7 +841,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             if (!usesMSC) {
               _and_2 = false;
             } else {
-              final Function1<Message,Boolean> _function_3 = new Function1<Message,Boolean>() {
+              final Function1<Message, Boolean> _function_3 = new Function1<Message, Boolean>() {
                 public Boolean apply(final Message m) {
                   return Boolean.valueOf(Objects.equal(m, message));
                 }
@@ -889,7 +889,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             if (!usesMSC) {
               _and_3 = false;
             } else {
-              final Function1<Message,Boolean> _function_4 = new Function1<Message,Boolean>() {
+              final Function1<Message, Boolean> _function_4 = new Function1<Message, Boolean>() {
                 public Boolean apply(final Message m) {
                   return Boolean.valueOf(Objects.equal(m, message));
                 }
@@ -947,7 +947,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             if (!usesMSC) {
               _and_4 = false;
             } else {
-              final Function1<Message,Boolean> _function_5 = new Function1<Message,Boolean>() {
+              final Function1<Message, Boolean> _function_5 = new Function1<Message, Boolean>() {
                 public Boolean apply(final Message m) {
                   return Boolean.valueOf(Objects.equal(m, message));
                 }
@@ -1009,7 +1009,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             if (!usesMSC) {
               _and_5 = false;
             } else {
-              final Function1<Message,Boolean> _function_6 = new Function1<Message,Boolean>() {
+              final Function1<Message, Boolean> _function_6 = new Function1<Message, Boolean>() {
                 public Boolean apply(final Message m) {
                   return Boolean.valueOf(Objects.equal(m, message));
                 }

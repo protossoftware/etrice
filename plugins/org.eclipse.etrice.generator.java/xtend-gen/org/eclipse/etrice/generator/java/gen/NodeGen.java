@@ -108,9 +108,9 @@ public class NodeGen {
   private IDiagnostician diagnostician;
   
   public void doGenerate(final Root root) {
-    final HashMap<SubSystemClass,WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>();
+    final HashMap<SubSystemClass, WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
-    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+    final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredSubSystemClass));
       }
@@ -172,20 +172,20 @@ public class NodeGen {
    */
   private HashSet<ActorClass> getOptionalActorClasses(final Root root, final StructureInstance si) {
     TreeIterator<EObject> _eAllContents = si.eAllContents();
-    final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+    final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
       public Boolean apply(final EObject i) {
         return Boolean.valueOf((i instanceof ActorInterfaceInstance));
       }
     };
     Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function);
-    final Function1<EObject,ActorInterfaceInstance> _function_1 = new Function1<EObject,ActorInterfaceInstance>() {
+    final Function1<EObject, ActorInterfaceInstance> _function_1 = new Function1<EObject, ActorInterfaceInstance>() {
       public ActorInterfaceInstance apply(final EObject aii) {
         return ((ActorInterfaceInstance) aii);
       }
     };
     Iterator<ActorInterfaceInstance> _map = IteratorExtensions.<EObject, ActorInterfaceInstance>map(_filter, _function_1);
     final ArrayList<ActorInterfaceInstance> aifs = Lists.<ActorInterfaceInstance>newArrayList(_map);
-    final Function1<ActorInterfaceInstance,ActorClass> _function_2 = new Function1<ActorInterfaceInstance,ActorClass>() {
+    final Function1<ActorInterfaceInstance, ActorClass> _function_2 = new Function1<ActorInterfaceInstance, ActorClass>() {
       public ActorClass apply(final ActorInterfaceInstance aii) {
         return ((ActorInterfaceInstance) aii).getActorClass();
       }
@@ -211,7 +211,7 @@ public class NodeGen {
       final String clsname = this._javaExtensions.getJavaClassName(nr, comp);
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
-      final Function1<PhysicalThread,Boolean> _function = new Function1<PhysicalThread,Boolean>() {
+      final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
         public Boolean apply(final PhysicalThread t) {
           return Boolean.valueOf(usedThreads.contains(t));
         }
@@ -512,13 +512,13 @@ public class NodeGen {
       _builder.newLine();
       {
         BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
-        final Function1<AbstractInstance,Boolean> _function_1 = new Function1<AbstractInstance,Boolean>() {
+        final Function1<AbstractInstance, Boolean> _function_1 = new Function1<AbstractInstance, Boolean>() {
           public Boolean apply(final AbstractInstance inst) {
             return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
           }
         };
         Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_1);
-        final Function1<AbstractInstance,ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance,ActorInterfaceInstance>() {
+        final Function1<AbstractInstance, ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance, ActorInterfaceInstance>() {
           public ActorInterfaceInstance apply(final AbstractInstance inst) {
             return ((ActorInterfaceInstance) inst);
           }
@@ -790,7 +790,7 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass,Boolean> _function_3 = new Function1<ActorClass,Boolean>() {
+            final Function1<ActorClass, Boolean> _function_3 = new Function1<ActorClass, Boolean>() {
               public Boolean apply(final ActorClass s) {
                 boolean _isAbstract = s.isAbstract();
                 return Boolean.valueOf((!_isAbstract));

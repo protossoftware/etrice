@@ -64,7 +64,7 @@ public class DataClassGen {
   
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
-    final Function1<DataClass,Boolean> _function = new Function1<DataClass,Boolean>() {
+    final Function1<DataClass, Boolean> _function = new Function1<DataClass, Boolean>() {
       public Boolean apply(final DataClass cl) {
         return Boolean.valueOf(DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
@@ -89,7 +89,7 @@ public class DataClassGen {
     CharSequence _xblockexpression = null;
     {
       EList<StandardOperation> _operations = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(RoomHelpers.isConstructor(op));
         }

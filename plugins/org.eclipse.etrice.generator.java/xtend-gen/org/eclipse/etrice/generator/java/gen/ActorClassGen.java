@@ -106,9 +106,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
-    final HashMap<ActorClass,WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
+    final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
-    final Function1<WiredStructureClass,Boolean> _function = new Function1<WiredStructureClass,Boolean>() {
+    final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredActorClass));
       }
@@ -122,7 +122,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     };
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
-    final Function1<ExpandedActorClass,Boolean> _function_2 = new Function1<ExpandedActorClass,Boolean>() {
+    final Function1<ExpandedActorClass, Boolean> _function_2 = new Function1<ExpandedActorClass, Boolean>() {
       public Boolean apply(final ExpandedActorClass cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(ActorClassGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
@@ -169,7 +169,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       final String clsname = _xifexpression;
       EList<StandardOperation> _operations = ac.getOperations();
-      final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(RoomHelpers.isConstructor(op));
         }
@@ -177,7 +177,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = ac.getOperations();
-      final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function_1 = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(op.isDestructor());
         }
@@ -295,7 +295,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
-        final Function1<ActorRef,Boolean> _function_2 = new Function1<ActorRef,Boolean>() {
+        final Function1<ActorRef, Boolean> _function_2 = new Function1<ActorRef, Boolean>() {
           public Boolean apply(final ActorRef r) {
             ReferenceType _refType = r.getRefType();
             return Boolean.valueOf(Objects.equal(_refType, ReferenceType.OPTIONAL));
@@ -412,7 +412,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
-        final Function1<ActorRef,Boolean> _function_3 = new Function1<ActorRef,Boolean>() {
+        final Function1<ActorRef, Boolean> _function_3 = new Function1<ActorRef, Boolean>() {
           public Boolean apply(final ActorRef r) {
             ReferenceType _refType = r.getRefType();
             return Boolean.valueOf(Objects.equal(_refType, ReferenceType.OPTIONAL));
@@ -1846,55 +1846,55 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(type,"boolean")) {
+      if (Objects.equal(type, "boolean")) {
         _matched=true;
         _switchResult = "writeBoolean";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"char")) {
+      if (Objects.equal(type, "char")) {
         _matched=true;
         _switchResult = "writeChar";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"byte")) {
+      if (Objects.equal(type, "byte")) {
         _matched=true;
         _switchResult = "writeByte";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"short")) {
+      if (Objects.equal(type, "short")) {
         _matched=true;
         _switchResult = "writeShort";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"int")) {
+      if (Objects.equal(type, "int")) {
         _matched=true;
         _switchResult = "write";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"long")) {
+      if (Objects.equal(type, "long")) {
         _matched=true;
         _switchResult = "writeLong";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"float")) {
+      if (Objects.equal(type, "float")) {
         _matched=true;
         _switchResult = "writeFloat";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"double")) {
+      if (Objects.equal(type, "double")) {
         _matched=true;
         _switchResult = "writeDouble";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"String")) {
+      if (Objects.equal(type, "String")) {
         _matched=true;
         _switchResult = "writeUTF";
       }
@@ -1954,55 +1954,55 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(type,"boolean")) {
+      if (Objects.equal(type, "boolean")) {
         _matched=true;
         _switchResult = "readBoolean";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"char")) {
+      if (Objects.equal(type, "char")) {
         _matched=true;
         _switchResult = "readChar";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"byte")) {
+      if (Objects.equal(type, "byte")) {
         _matched=true;
         _switchResult = "readByte";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"short")) {
+      if (Objects.equal(type, "short")) {
         _matched=true;
         _switchResult = "readShort";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"int")) {
+      if (Objects.equal(type, "int")) {
         _matched=true;
         _switchResult = "read";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"long")) {
+      if (Objects.equal(type, "long")) {
         _matched=true;
         _switchResult = "readLong";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"float")) {
+      if (Objects.equal(type, "float")) {
         _matched=true;
         _switchResult = "readFloat";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"double")) {
+      if (Objects.equal(type, "double")) {
         _matched=true;
         _switchResult = "readDouble";
       }
     }
     if (!_matched) {
-      if (Objects.equal(type,"String")) {
+      if (Objects.equal(type, "String")) {
         _matched=true;
         _switchResult = "readUTF";
       }
