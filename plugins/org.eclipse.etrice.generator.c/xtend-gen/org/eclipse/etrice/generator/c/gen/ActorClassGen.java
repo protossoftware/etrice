@@ -776,7 +776,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("_");
               String _name_8 = msg_1.getName();
               _builder.append(_name_8, "");
-              _builder.append("() ");
+              _builder.append(" ");
               String _portClassName_1 = this._roomExtensions.getPortClassName(ep_1);
               _builder.append(_portClassName_1, "");
               _builder.append("_");
@@ -797,8 +797,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final Port ep_2 : sendPorts) {
           {
-            List<Message> _incoming_1 = RoomHelpers.getIncoming(ep_2);
-            for(final Message msg_2 : _incoming_1) {
+            List<Message> _outgoing_1 = RoomHelpers.getOutgoing(ep_2);
+            for(final Message msg_2 : _outgoing_1) {
               String _xifexpression_2 = null;
               VarDecl _data_2 = msg_2.getData();
               boolean _notEquals_2 = (!Objects.equal(_data_2, null));
@@ -833,7 +833,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("_");
               String _name_13 = msg_2.getName();
               _builder.append(_name_13, "");
-              _builder.append("_set(&self->constData->");
+              _builder.append("_set(&self->");
               String _name_14 = ep_2.getName();
               _builder.append(_name_14, "");
               _builder.append(data2_1, "");
@@ -850,8 +850,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
         for(final SAP sap : _allSAPs) {
           {
-            List<Message> _outgoing_1 = RoomHelpers.getOutgoing(sap);
-            for(final Message msg_3 : _outgoing_1) {
+            List<Message> _outgoing_2 = RoomHelpers.getOutgoing(sap);
+            for(final Message msg_3 : _outgoing_2) {
               String _xifexpression_4 = null;
               VarDecl _data_4 = msg_3.getData();
               boolean _notEquals_4 = (!Objects.equal(_data_4, null));
@@ -909,8 +909,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         Iterable<Port> _filter_1 = IterableExtensions.<Port>filter(eventPorts, _function_4);
         for(final Port ep_3 : _filter_1) {
           {
-            List<Message> _outgoing_2 = RoomHelpers.getOutgoing(ep_3);
-            for(final Message msg_4 : _outgoing_2) {
+            List<Message> _outgoing_3 = RoomHelpers.getOutgoing(ep_3);
+            for(final Message msg_4 : _outgoing_3) {
               String _xifexpression_6 = null;
               VarDecl _data_6 = msg_4.getData();
               boolean _notEquals_6 = (!Objects.equal(_data_6, null));
@@ -984,8 +984,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc : _allServiceImplementations) {
           {
             SPP _spp = svc.getSpp();
-            List<Message> _outgoing_3 = RoomHelpers.getOutgoing(_spp);
-            for(final Message msg_5 : _outgoing_3) {
+            List<Message> _outgoing_4 = RoomHelpers.getOutgoing(_spp);
+            for(final Message msg_5 : _outgoing_4) {
               String _xifexpression_8 = null;
               VarDecl _data_8 = msg_5.getData();
               boolean _notEquals_8 = (!Objects.equal(_data_8, null));
@@ -1071,8 +1071,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("(");
           _builder.append(args, "");
           _builder.append(") ");
-          String _name_36 = op.getName();
+          String _name_36 = ac.getName();
           _builder.append(_name_36, "");
+          _builder.append("_");
+          String _name_37 = op.getName();
+          _builder.append(_name_37, "");
           _builder.append("(self");
           {
             EList<VarDecl> _arguments = op.getArguments();
@@ -1094,11 +1097,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
         List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
         for(final Attribute a : _allAttributes) {
           _builder.append("#define ");
-          String _name_37 = a.getName();
-          _builder.append(_name_37, "");
-          _builder.append(" (self->");
           String _name_38 = a.getName();
           _builder.append(_name_38, "");
+          _builder.append(" (self->");
+          String _name_39 = a.getName();
+          _builder.append(_name_39, "");
           _builder.append(")");
           _builder.newLineIfNotEmpty();
         }

@@ -80,7 +80,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 					if (p.isConjugated())
 						result = item.getName()+"_"+msg.getName()+"("+argtext2+")";
 					else
-						result = item.getName()+"_"+msg.getName()+"()";
+						result = item.getName()+"_"+msg.getName();
 				}
 			}
 		}
@@ -101,7 +101,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	public String getInterfaceItemMessageValue(InterfaceItem item, Message msg, String orig) {
 		String result = orig;
 		if (item instanceof Port) {
-			result = item.getName()+"_"+msg.getName()+"()";
+			result = item.getName()+"_"+msg.getName();
 		}
 		return result;
 	}

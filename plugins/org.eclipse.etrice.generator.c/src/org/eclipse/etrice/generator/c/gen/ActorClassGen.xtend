@@ -236,16 +236,16 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* data receive ports */
 		«FOR ep : recvPorts»
 			«FOR msg : ep.incoming»
-				#define «ep.name»_«msg.name»() «ep.portClassName»_«msg.name»_get(&self->constData->«ep.name»)
+				#define «ep.name»_«msg.name» «ep.portClassName»_«msg.name»_get(&self->constData->«ep.name»)
 			«ENDFOR»
 		«ENDFOR»
 		
 		/* data send ports */
 		«FOR ep : sendPorts»
-			«FOR msg : ep.incoming»
+			«FOR msg : ep.outgoing»
 				«val data1 = if (msg.data!=null) "data" else ""»
 				«val data2 = if (msg.data!=null) ", data" else ""»
-				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»_set(&self->constData->«ep.name»«data2»)
+				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»_set(&self->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
 
@@ -281,7 +281,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* operations */
 		«FOR op : ac.allOperations»
 			«val args = op.argList»
-			#define «op.name»(«args») «op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
+			#define «op.name»(«args») «ac.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
 		«ENDFOR»
 		
 		/* attributes */
