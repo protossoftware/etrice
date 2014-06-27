@@ -367,7 +367,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 		«ENDIF»
 		
-		«operationsImplementation(ac.allOperations, ac.name)»
+«««		TODO: should be allOperations but how to deal with ctor/dtor and overridden methods?
+		«operationsImplementation(ac.operations, ac.name)»
 		
 		'''
 	}

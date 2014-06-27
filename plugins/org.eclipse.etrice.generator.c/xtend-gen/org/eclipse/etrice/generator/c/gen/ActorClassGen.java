@@ -1351,9 +1351,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      List<Operation> _allOperations = RoomHelpers.getAllOperations(ac);
+      EList<StandardOperation> _operations = ac.getOperations();
       String _name_11 = ac.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_allOperations, _name_11);
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_11);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
