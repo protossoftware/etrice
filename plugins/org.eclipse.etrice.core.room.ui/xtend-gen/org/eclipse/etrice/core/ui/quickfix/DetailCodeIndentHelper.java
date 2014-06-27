@@ -38,7 +38,7 @@ public class DetailCodeIndentHelper {
       String _newLine = Strings.newLine();
       final List<String> editorLines = Strings.split(editorString, _newLine);
       Iterable<String> _tail = IterableExtensions.<String>tail(editorLines);
-      final Function1<String,Integer> _function = new Function1<String,Integer>() {
+      final Function1<String, Integer> _function = new Function1<String, Integer>() {
         public Integer apply(final String it) {
           return Integer.valueOf(DetailCodeIndentHelper.countIndent(it));
         }
@@ -47,7 +47,7 @@ public class DetailCodeIndentHelper {
       String _head = IterableExtensions.<String>head(_sortBy);
       final int minIndent = DetailCodeIndentHelper.countIndent(_head);
       final ArrayList<String> newEditorLines = new ArrayList<String>();
-      final Procedure2<String,Integer> _function_1 = new Procedure2<String,Integer>() {
+      final Procedure2<String, Integer> _function_1 = new Procedure2<String, Integer>() {
         public void apply(final String line, final Integer lineCount) {
           String _xifexpression = null;
           if (((lineCount).intValue() != 0)) {

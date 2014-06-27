@@ -136,8 +136,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _xifexpression = xpac.getTriggers();
     }
     final EList<MessageFromIf> triggers = _xifexpression;
-    final ArrayList<Pair<String,String>> list = new ArrayList<Pair<String, String>>();
-    Pair<String,String> _pair = Tuples.<String, String>pair("POLLING", "0");
+    final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
+    Pair<String, String> _pair = Tuples.<String, String>pair("POLLING", "0");
     list.add(_pair);
     for (final MessageFromIf mif : triggers) {
       String _triggerCodeName = xpac.getTriggerCodeName(mif);
@@ -147,7 +147,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       String _plus_1 = (_plus + " + EVT_SHIFT*");
       String _messageID = this.cppProtGen.getMessageID(mif);
       String _plus_2 = (_plus_1 + _messageID);
-      Pair<String,String> _pair_1 = Tuples.<String, String>pair(_triggerCodeName, _plus_2);
+      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_triggerCodeName, _plus_2);
       list.add(_pair_1);
     }
     return this.langExt.genEnumeration("triggers", list);

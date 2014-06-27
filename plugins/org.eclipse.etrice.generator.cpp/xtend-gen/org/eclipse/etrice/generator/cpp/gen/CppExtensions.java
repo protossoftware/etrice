@@ -124,7 +124,7 @@ public class CppExtensions implements ILanguageExtension {
     return true;
   }
   
-  public String genEnumeration(final String name, final List<Pair<String,String>> entries) {
+  public String genEnumeration(final String name, final List<Pair<String, String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("typedef enum {");
     _builder.newLine();

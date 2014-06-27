@@ -558,19 +558,19 @@ public class ConfigGenAddon {
     String _typeName = this.typeHelpers.typeName(type);
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_typeName,"byte")) {
+      if (Objects.equal(_typeName, "byte")) {
         _matched=true;
         _switchResult = "int";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_typeName,"short")) {
+      if (Objects.equal(_typeName, "short")) {
         _matched=true;
         _switchResult = "int";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_typeName,"float")) {
+      if (Objects.equal(_typeName, "float")) {
         _matched=true;
         _switchResult = "double";
       }

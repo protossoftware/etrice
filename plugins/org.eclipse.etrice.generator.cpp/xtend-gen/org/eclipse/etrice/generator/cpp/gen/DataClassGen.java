@@ -108,7 +108,7 @@ public class DataClassGen {
     CharSequence _xblockexpression = null;
     {
       EList<StandardOperation> _operations = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(RoomHelpers.isConstructor(op));
         }
@@ -116,7 +116,7 @@ public class DataClassGen {
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function_1 = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(op.isDestructor());
         }
@@ -313,7 +313,7 @@ public class DataClassGen {
     CharSequence _xblockexpression = null;
     {
       EList<StandardOperation> _operations = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(RoomHelpers.isConstructor(op));
         }
@@ -321,7 +321,7 @@ public class DataClassGen {
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = dc.getOperations();
-      final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function_1 = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(op.isDestructor());
         }

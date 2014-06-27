@@ -43,7 +43,7 @@ public class PostprocessingHelpers {
   
   public static EAttribute getAttribute(final EClass cls, final String name) {
     EList<EAttribute> _eAllAttributes = cls.getEAllAttributes();
-    final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
+    final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
       public Boolean apply(final EAttribute a) {
         String _name = a.getName();
         return Boolean.valueOf(_name.equals(name));
@@ -54,7 +54,7 @@ public class PostprocessingHelpers {
   
   public static EReference getReference(final EClass cls, final String name) {
     EList<EReference> _eAllReferences = cls.getEAllReferences();
-    final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+    final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
       public Boolean apply(final EReference a) {
         String _name = a.getName();
         return Boolean.valueOf(_name.equals(name));
@@ -76,7 +76,7 @@ public class PostprocessingHelpers {
       op.setUpperBound((upperBound).intValue());
       final EAnnotation anno = EcoreFactory.eINSTANCE.createEAnnotation();
       anno.setSource("http://www.eclipse.org/emf/2002/GenModel");
-      EMap<String,String> _details = anno.getDetails();
+      EMap<String, String> _details = anno.getDetails();
       _details.put("body", body);
       EList<EAnnotation> _eAnnotations = op.getEAnnotations();
       _eAnnotations.add(anno);

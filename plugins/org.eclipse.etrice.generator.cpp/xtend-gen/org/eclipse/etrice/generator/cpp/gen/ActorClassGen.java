@@ -273,7 +273,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
-    final Function1<Port,String> _function = new Function1<Port,String>() {
+    final Function1<Port, String> _function = new Function1<Port, String>() {
       public String apply(final Port port) {
         StringConcatenation _builder = new StringConcatenation();
         String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(port);
@@ -294,7 +294,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-    final Function1<SAP,String> _function_1 = new Function1<SAP,String>() {
+    final Function1<SAP, String> _function_1 = new Function1<SAP, String>() {
       public String apply(final SAP sap) {
         StringConcatenation _builder = new StringConcatenation();
         String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(sap);
@@ -315,7 +315,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-    final Function1<ServiceImplementation,String> _function_2 = new Function1<ServiceImplementation,String>() {
+    final Function1<ServiceImplementation, String> _function_2 = new Function1<ServiceImplementation, String>() {
       public String apply(final ServiceImplementation svc) {
         StringConcatenation _builder = new StringConcatenation();
         String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(svc);
@@ -604,7 +604,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     CharSequence _xblockexpression = null;
     {
       EList<StandardOperation> _operations = ac.getOperations();
-      final Function1<StandardOperation,Boolean> _function = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(RoomHelpers.isConstructor(op));
         }
@@ -612,7 +612,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
       final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
       EList<StandardOperation> _operations_1 = ac.getOperations();
-      final Function1<StandardOperation,Boolean> _function_1 = new Function1<StandardOperation,Boolean>() {
+      final Function1<StandardOperation, Boolean> _function_1 = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
           return Boolean.valueOf(op.isDestructor());
         }
