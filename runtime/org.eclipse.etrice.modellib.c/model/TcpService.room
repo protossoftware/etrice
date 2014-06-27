@@ -100,13 +100,13 @@ RoomModel room.basic.service.tcp {
 "static int8* bufferProvider(void* slf, int* size) {
 	ATcpClient* self = (ATcpClient*) slf;
 	*size = 1000;
-	return self->payload.data;
+	return payload.data;
 }
 
 static int socketReceiver(void* slf, int channel, int size, const int8* data) {
 	ATcpClient* self = (ATcpClient*) slf;
-	self->payload.length = size;
-	PTcpPayloadPort_receive(&self->constData->PayloadPort, &self->payload);
+	payload.length = size;
+	PTcpPayloadPort_receive(&self->constData->PayloadPort, &payload);
 	return ETSOCKET_OK;
 }"
 			}

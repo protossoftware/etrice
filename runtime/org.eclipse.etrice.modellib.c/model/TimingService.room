@@ -245,14 +245,14 @@ RoomModel room.basic.service.timing {
 			handle incoming startTimer{
 			"if (status==0){
 				status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
-				etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data);
+				etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
 				}
 			"	
 			}
 			handle incoming startTimeout{
 			"if (status==0){
 				status = ET_TIMER_RUNNING;
-				etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data);
+				etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
 				}
 			"	
 			}
