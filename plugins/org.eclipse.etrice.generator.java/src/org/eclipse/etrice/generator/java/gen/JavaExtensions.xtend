@@ -260,7 +260,7 @@ class JavaExtensions implements ILanguageExtension {
 			castTypeName = (data.refType.type as EnumerationType).castType
 		}
 		
-		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data;\n";
+		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data__et;\n";
 		val dataArg = ", "+data.getName();
 		val typedArgList = ", "+typeName+" "+data.getName();
 		

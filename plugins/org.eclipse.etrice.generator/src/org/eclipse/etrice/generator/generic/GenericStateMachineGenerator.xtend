@@ -325,9 +325,8 @@ class GenericStateMachineGenerator {
 			«IF usesHdlr»
 			«boolType» is_handler__et = «langExt.booleanConstant(false)»;
 			«ENDIF»
-			
 			«IF async || eventDriven»
-				((void)trigger__et);	/* avoids unused warning */
+				«markVariableUsed("trigger__et")»
 			«ENDIF»
 			
 			«IF handleEvents»
@@ -356,6 +355,12 @@ class GenericStateMachineGenerator {
 		''''''
 	}
 
+	/**
+	 * empty, but may be overridden
+	 */
+	def markVariableUsed(String varname) {
+		''''''
+	}
 	
 	/**
 	 * helper method which generates the state switch.

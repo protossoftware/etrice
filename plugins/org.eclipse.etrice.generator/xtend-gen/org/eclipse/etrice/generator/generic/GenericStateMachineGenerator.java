@@ -996,8 +996,6 @@ public class GenericStateMachineGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
-      _builder.newLine();
       {
         boolean _or_3 = false;
         if (async) {
@@ -1007,8 +1005,9 @@ public class GenericStateMachineGenerator {
         }
         if (_or_3) {
           _builder.append("\t");
-          _builder.append("((void)trigger__et);\t/* avoids unused warning */");
-          _builder.newLine();
+          CharSequence _markVariableUsed = this.markVariableUsed("trigger__et");
+          _builder.append(_markVariableUsed, "\t");
+          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t");
@@ -1112,6 +1111,14 @@ public class GenericStateMachineGenerator {
    * empty, but may be overridden
    */
   public CharSequence finalAction() {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder;
+  }
+  
+  /**
+   * empty, but may be overridden
+   */
+  public CharSequence markVariableUsed(final String varname) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder;
   }

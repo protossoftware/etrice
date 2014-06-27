@@ -197,6 +197,13 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return "etInt16";
   }
   
+  public CharSequence markVariableUsed(final String varname) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("((void)trigger__et);\t/* avoids unused warning */");
+    _builder.newLine();
+    return _builder;
+  }
+  
   protected String unreachableReturn() {
     return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }

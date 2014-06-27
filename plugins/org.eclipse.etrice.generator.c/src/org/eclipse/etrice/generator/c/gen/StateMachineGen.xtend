@@ -85,6 +85,11 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		"etInt16"
 	}
 	
+	override markVariableUsed(String varname) {
+		'''
+			((void)trigger__et);	/* avoids unused warning */
+		'''
+	}
 	override protected unreachableReturn() {
 		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
 	}

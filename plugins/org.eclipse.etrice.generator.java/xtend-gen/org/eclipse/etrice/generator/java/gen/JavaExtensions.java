@@ -597,7 +597,7 @@ public class JavaExtensions implements ILanguageExtension {
     String _plus = ((typeName + " ") + _name);
     String _plus_1 = (_plus + " = (");
     String _plus_2 = (_plus_1 + castTypeName);
-    final String typedData = (_plus_2 + ") generic_data;\n");
+    final String typedData = (_plus_2 + ") generic_data__et;\n");
     String _name_1 = data.getName();
     final String dataArg = (", " + _name_1);
     String _name_2 = data.getName();
