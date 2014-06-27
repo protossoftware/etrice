@@ -608,8 +608,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
-      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        public Boolean apply(final Port it) {
+          int _multiplicity = it.getMultiplicity();
+          return Boolean.valueOf((_multiplicity != 1));
+        }
+      };
+      final Iterable<Port> replEventPorts = IterableExtensions.<Port>filter(eventPorts, _function_1);
+      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
+      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -632,9 +639,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return Boolean.valueOf(_and);
         }
       };
-      final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
+      final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_2);
       List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+      final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -658,7 +665,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return Boolean.valueOf(_and);
         }
       };
-      final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
+      final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_3);
       EObject _eContainer = ac.eContainer();
       String _name = ((RoomModel) _eContainer).getName();
       String _replaceAll = _name.replaceAll("\\.", "_");
@@ -707,13 +714,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* simple event ports */");
       _builder.newLine();
       {
-        final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
+        final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
           public Boolean apply(final Port it) {
             int _multiplicity = it.getMultiplicity();
             return Boolean.valueOf((_multiplicity == 1));
           }
         };
-        Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_3);
+        Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_4);
         for(final Port ep : _filter) {
           {
             List<Message> _outgoing = RoomHelpers.getOutgoing(ep);
@@ -900,14 +907,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* replicated event ports */");
       _builder.newLine();
       {
-        final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
-          public Boolean apply(final Port it) {
-            int _multiplicity = it.getMultiplicity();
-            return Boolean.valueOf((_multiplicity != 1));
-          }
-        };
-        Iterable<Port> _filter_1 = IterableExtensions.<Port>filter(eventPorts, _function_4);
-        for(final Port ep_3 : _filter_1) {
+        boolean _isEmpty = IterableExtensions.isEmpty(replEventPorts);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("#define ifitem_index (((etReplSubPort*)ifitem)->index)");
+          _builder.newLine();
+        }
+      }
+      {
+        for(final Port ep_3 : replEventPorts) {
           {
             List<Message> _outgoing_3 = RoomHelpers.getOutgoing(ep_3);
             for(final Message msg_4 : _outgoing_3) {
@@ -1079,9 +1087,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("(self");
           {
             EList<VarDecl> _arguments = op.getArguments();
-            boolean _isEmpty = _arguments.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
+            boolean _isEmpty_1 = _arguments.isEmpty();
+            boolean _not_1 = (!_isEmpty_1);
+            if (_not_1) {
               _builder.append(", ");
               _builder.append(args, "");
             }

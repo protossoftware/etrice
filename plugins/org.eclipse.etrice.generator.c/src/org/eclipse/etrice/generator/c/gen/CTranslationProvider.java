@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.c.gen;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DetailCode;
@@ -34,10 +33,6 @@ import com.google.inject.Inject;
 public class CTranslationProvider extends DefaultTranslationProvider {
 
 	@Inject ILanguageExtension langExt;
-	
-	@Override
-	public void setContainerClass(EObject container) {
-	}
 
 	@Override
 	public boolean translateMembers() {
@@ -114,7 +109,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	@Override
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("ifitem.index"))
-			return "((etReplSubPort*)ifitem)->index";
+			return "ifitem_index";
 
 		return super.translateTag(tag, code);
 	}

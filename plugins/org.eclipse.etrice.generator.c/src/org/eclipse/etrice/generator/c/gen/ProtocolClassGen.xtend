@@ -376,8 +376,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var refp = if (hasData && ((message.data.refType.ref))) "*" else ""»
 				«var refpd = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive)||(message.data.refType.ref))) "*" else ""»
 				«var refa = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive))&&(!(message.data.refType.ref))) "" else "&"»
-				«var data = if (hasData) ", "+typeName+refpd+" data" else ""»
-				«var dataCall = if (hasData) ", data" else ""»
+				«var data = if (hasData) ", "+typeName+refpd+" data__et" else ""»
+				«var dataCall = if (hasData) ", data__et" else ""»
 				«var hdlr = message.getSendHandler(conj)»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
@@ -385,7 +385,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						«AbstractGenerator::getInstance().getTranslatedCode(hdlr.detailCode)»
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
-							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
 							«IF Main::settings.generateMSCInstrumentation»
 								ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, "«message.name»", self->peerInstName)
 							«ENDIF»
@@ -403,7 +403,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						int i;
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
-							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[i].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[i].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
 							«IF Main::settings.generateMSCInstrumentation»
 								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[i].port.peerInstName)
 							«ENDIF»
@@ -412,15 +412,15 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ENDIF»
 				}
 				
-				«messageSignature(replPortClassName, message.name, "", ", int idx"+data)» {
+				«messageSignature(replPortClassName, message.name, "", ", int idx__et"+data)» {
 					«IF hdlr != null»
-						«portClassName»_«message.name»(&((etReplPort*)self)->ports[idx].port«dataCall»);
+						«portClassName»_«message.name»(&((etReplPort*)self)->ports[idx__et].port«dataCall»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
-						if (0<=idx && idx<((etReplPort*)self)->size) {
-							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[idx].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data")»
+						if (0<=idx__et && idx__et<((etReplPort*)self)->size) {
+							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[idx__et].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
 							«IF Main::settings.generateMSCInstrumentation»
-								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[idx].port.peerInstName)
+								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx__et].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[idx__et].port.peerInstName)
 							«ENDIF»
 						}
 						ET_MSC_LOGGER_SYNC_EXIT

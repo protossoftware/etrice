@@ -204,6 +204,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def private generateUtilsFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
+		val replEventPorts = eventPorts.filter[multiplicity!=1]
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN &&  p.conjugated && p.multiplicity==1)
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated && p.multiplicity==1)
 		val filename = (ac.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+ac.name+"_Utils"
@@ -259,7 +260,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDFOR»
 		
 		/* replicated event ports */
-		«FOR ep : eventPorts.filter[multiplicity!=1]»
+		«IF !replEventPorts.empty»
+			#define ifitem_index (((etReplSubPort*)ifitem)->index)
+		«ENDIF»
+		«FOR ep : replEventPorts»
 			«FOR msg : ep.outgoing»
 				«val data1 = if (msg.data!=null) "data" else ""»
 				«val data2 = if (msg.data!=null) ", data" else ""»

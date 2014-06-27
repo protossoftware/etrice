@@ -207,20 +207,20 @@ class GenericStateMachineGenerator {
 		/**
 		 * calls exit codes while exiting from the current state to one of its
 		 * parent states while remembering the history
-		 * @param current - the current state
+		 * @param current__et - the current state
 		 * @param to - the final parent state
 		 «IF usesHdlr»
-		 * @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)
+		 * @param handler__et - entry and exit codes are called only if not handler (for handler TransitionPoints)
 		 «ENDIF»
 		 */
-		«privAccess»void «opScopePriv»exitTo(«selfPtr»«stateType» current, «stateType» to«IF usesHdlr», «boolType» handler«ENDIF») {
-			while (current!=to) {
-				switch (current) {
+		«privAccess»void «opScopePriv»exitTo(«selfPtr»«stateType» current__et, «stateType» to«IF usesHdlr», «boolType» handler__et«ENDIF») {
+			while (current__et!=to) {
+				switch (current__et) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
 						case «state.getGenStateId()»:
-							«IF state.hasExitCode(true)»«IF usesHdlr»if (!handler) «ENDIF»«state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
+							«IF state.hasExitCode(true)»«IF usesHdlr»if (!handler__et) «ENDIF»«state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 							«setHistory(state.getParentStateId(), state.getGenStateId())»;
-							current = «state.getParentStateId()»;
+							current__et = «state.getParentStateId()»;
 							break;
 					«ENDFOR»
 					default:
@@ -233,12 +233,12 @@ class GenericStateMachineGenerator {
 		/**
 		 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 		 * matching the trigger of this chain. The ID of the final state is returned
-		 * @param chain - the chain ID
-		 * @param generic_data - the generic data pointer
+		 * @param chain__et - the chain ID
+		 * @param generic_data__et - the generic data pointer
 		 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 		 */
-		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«selfPtr»int chain«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data«ENDIF») {
-			switch (chain) {
+		«privAccess»«stateType» «opScopePriv»executeTransitionChain(«selfPtr»int chain__et«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data__et«ENDIF») {
+			switch (chain__et) {
 				«var allchains = xpac.getTransitionChains()»
 				«FOR tc : allchains»
 					case «tc.genChainId»:
@@ -255,23 +255,23 @@ class GenericStateMachineGenerator {
 		
 		/**
 		 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
-		 * @param state - the state which is entered
+		 * @param state__et - the state which is entered
 		 «IF usesHdlr»
-		 * @param handler - entry code is executed if not handler
+		 * @param handler__et - entry code is executed if not handler
 		 «ENDIF»
 		 * @return - the ID of the final leaf state
 		 */
-		«privAccess»«stateType» «opScopePriv»enterHistory(«selfPtr»«stateType» state«IF usesHdlr», «boolType» handler«ENDIF») {
-			«boolType» skip_entry = «langExt.booleanConstant(false)»;
-			if (state >= STATE_MAX) {
-				state = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state - STATE_MAX);
-				skip_entry = «langExt.booleanConstant(true)»;
+		«privAccess»«stateType» «opScopePriv»enterHistory(«selfPtr»«stateType» state__et«IF usesHdlr», «boolType» handler__et«ENDIF») {
+			«boolType» skip_entry__et = «langExt.booleanConstant(false)»;
+			if (state__et >= STATE_MAX) {
+				state__et = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state__et - STATE_MAX);
+				skip_entry__et = «langExt.booleanConstant(true)»;
 			}
 			while («langExt.booleanConstant(true)») {
-				switch (state) {
+				switch (state__et) {
 					«FOR state : xpac.stateMachine.getBaseStateList()»
 					case «state.getGenStateId()»:
-						«IF state.hasEntryCode(true)»if (!(skip_entry«IF usesHdlr» || handler«ENDIF»)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
+						«IF state.hasEntryCode(true)»if (!(skip_entry__et«IF usesHdlr» || handler__et«ENDIF»)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 						«IF state.isLeaf()»
 							/* in leaf state: return state id */
 							return «state.getGenStateId()»;
@@ -281,64 +281,68 @@ class GenericStateMachineGenerator {
 								/* with init transition */
 								if («getHistory(state.getGenStateId())»==NO_STATE) {
 									«var sub_initt = state.subgraph.getInitTransition()»
-									state = executeTransitionChain(«langExt.selfPointer(true)»«xpac.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+									state__et = executeTransitionChain(«langExt.selfPointer(true)»«xpac.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
 								}
 								else {
-									state = «getHistory(state.getGenStateId())»;
+									state__et = «getHistory(state.getGenStateId())»;
 								}
 							«ELSE»
 								/* without init transition */
-								state = «getHistory(state.getGenStateId())»;
+								state__et = «getHistory(state.getGenStateId())»;
 							«ENDIF»
 							break;
 						«ENDIF»
 					«ENDFOR»
 					case STATE_TOP:
-						state = «getHistory("STATE_TOP")»;
+						state__et = «getHistory("STATE_TOP")»;
 						break;
 					default:
 						/* should not occur */
 						break;
 				}
-				skip_entry = «langExt.booleanConstant(false)»;
+				skip_entry__et = «langExt.booleanConstant(false)»;
 			}
 			«unreachableReturn»
 		}
 		
 		«publicIf»void «opScope»executeInitTransition(«selfOnly») {
 			«var initt = xpac.stateMachine.getInitTransition()»
-			int chain = «xpac.getChain(initt).genChainId»;
-			«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-			next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
-			setState(«langExt.selfPointer(true)»next);
+			int chain__et = «xpac.getChain(initt).genChainId»;
+			«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+			next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
+			setState(«langExt.selfPointer(true)»next__et);
 		}
 		
 		/* receiveEvent contains the main implementation of the FSM */
-		«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF») {
+		«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int evt, «langExt.voidPointer» generic_data__et«ENDIF») {
 			«IF async»
-				int trigger = (ifitem==«langExt.nullPointer»)? POLLING : ifitem«getLocalId» + EVT_SHIFT*evt;
+				int trigger__et = (ifitem==«langExt.nullPointer»)? POLLING : ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ELSEIF eventDriven»
-				int trigger = ifitem«getLocalId» + EVT_SHIFT*evt;
+				int trigger__et = ifitem«getLocalId» + EVT_SHIFT*evt;
 			«ENDIF»
-			int chain = NOT_CAUGHT;
-			«stateType» catching_state = NO_STATE;
+			int chain__et = NOT_CAUGHT;
+			«stateType» catching_state__et = NO_STATE;
 			«IF usesHdlr»
-			«boolType» is_handler = «langExt.booleanConstant(false)»;
+			«boolType» is_handler__et = «langExt.booleanConstant(false)»;
+			«ENDIF»
+			
+			«IF async || eventDriven»
+				((void)trigger__et);	/* avoids unused warning */
 			«ENDIF»
 			
 			«IF handleEvents»
-				if (!handleSystemEvent(ifitem, evt, generic_data)) {
+				if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 					«genStateSwitch(xpac, usesHdlr)»
 				}
 			«ELSE»
 				«genStateSwitch(xpac, usesHdlr)»
 			«ENDIF»
-			if (chain != NOT_CAUGHT) {
-				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state«IF usesHdlr», is_handler«ENDIF»);
+			if (chain__et != NOT_CAUGHT) {
+				«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state__et«IF usesHdlr», is_handler__et«ENDIF»);
 				{
-					«stateType» next = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain«IF handleEvents», ifitem, generic_data«ENDIF»);
-					next = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next«IF usesHdlr», is_handler«ENDIF»);
-					setState(«langExt.selfPointer(true)»next);
+					«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», ifitem, generic_data__et«ENDIF»);
+					next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», is_handler__et«ENDIF»);
+					setState(«langExt.selfPointer(true)»next__et);
 					«finalAction()»
 				}
 			}
@@ -373,7 +377,7 @@ class GenericStateMachineGenerator {
 					«IF async»
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
-							switch(trigger) {
+							switch(trigger__et) {
 								case POLLING:
 									«genDataDrivenTriggers(xpac, state, usesHdlr)»
 									break;
@@ -387,7 +391,7 @@ class GenericStateMachineGenerator {
 					«ELSEIF eventDriven»
 						«var atlist =  xpac.getActiveTriggers(state)»
 						«IF !atlist.isEmpty»
-							switch(trigger) {
+							switch(trigger__et) {
 									«genEventDrivenTriggers(xpac, state, atlist, usesHdlr)»
 							}
 						«ENDIF»
@@ -418,10 +422,10 @@ class GenericStateMachineGenerator {
 				if («AbstractGenerator::getInstance().getTranslatedCode((tr as GuardedTransition).guard)»)
 				{
 					«var chain = xpac.getChain(tr)»
-					chain = «chain.genChainId»;
-					catching_state = «chain.stateContext.genStateId»;
+					chain__et = «chain.genChainId»;
+					catching_state__et = «chain.stateContext.genStateId»;
 					«IF chain.isHandler() && usesHdlr»
-						is_handler = TRUE;
+						is_handler__et = TRUE;
 					«ENDIF»
 				}
 				«IF tr!=transitions.last»
@@ -451,10 +455,10 @@ class GenericStateMachineGenerator {
 						«var chain = xpac.getChain(tt)»
 						«guard(chain.transition, at.trigger, xpac)»
 						{
-							chain = «chain.genChainId»;
-							catching_state = «chain.stateContext.genStateId»;
+							chain__et = «chain.genChainId»;
+							catching_state__et = «chain.stateContext.genStateId»;
 							«IF chain.isHandler() && usesHdlr»
-								is_handler = «langExt.booleanConstant(true)»;
+								is_handler__et = «langExt.booleanConstant(true)»;
 							«ENDIF»
 						}
 					«ENDFOR»
@@ -726,10 +730,10 @@ class GenericStateMachineGenerator {
 			 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 			 * matching the trigger of this chain. The ID of the final state is returned
 			 * @param chain - the chain ID
-			 * @param generic_data - the generic data pointer
+			 * @param generic_data__et - the generic data pointer
 			 * @return the ID of the final state
 			 */
-			int executeTransitionChain(«selfPtr»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data«ENDIF»);
+			int executeTransitionChain(«selfPtr»int chain«IF handleEvents», «constPointer("etRuntime::InterfaceItemBase")» ifitem, «langExt.voidPointer» generic_data__et«ENDIF»);
 			
 			/**
 			 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
@@ -746,7 +750,7 @@ class GenericStateMachineGenerator {
 			void executeInitTransition(«langExt.selfPointer(ac.name, false)»);
 			
 			/* receiveEvent contains the main implementation of the FSM */
-			void receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»etRuntime::InterfaceItemBase* ifitem, int evt, «langExt.voidPointer» generic_data«ENDIF»);
+			void receiveEvent(«langExt.selfPointer(ac.name, handleEvents)»«IF handleEvents»etRuntime::InterfaceItemBase* ifitem, int evt, «langExt.voidPointer» generic_data__et«ENDIF»);
 	'''
 	}
 	

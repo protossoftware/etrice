@@ -339,7 +339,7 @@ class CExtensions implements ILanguageExtension {
 			}
 		}
 			
-		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data);\n"
+		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
 
 		val dataArg = ", "+data.getName()
 		val typedArgList = ", "+typeName+" "+data.getName()

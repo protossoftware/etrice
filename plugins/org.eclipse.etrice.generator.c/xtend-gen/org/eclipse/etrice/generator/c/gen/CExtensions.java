@@ -713,7 +713,7 @@ public class CExtensions implements ILanguageExtension {
     String _plus_2 = (_plus_1 + deRef);
     String _plus_3 = (_plus_2 + "((");
     String _plus_4 = (_plus_3 + castTypeName);
-    final String typedData = (_plus_4 + ") generic_data);\n");
+    final String typedData = (_plus_4 + ") generic_data__et);\n");
     String _name_1 = data.getName();
     final String dataArg = (", " + _name_1);
     String _name_2 = data.getName();
