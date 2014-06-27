@@ -1177,11 +1177,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_cHeaderFileName, "");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
-      _builder.append("#include \"");
-      String _cUtilsFileName = this._cExtensions.getCUtilsFileName(ac);
-      _builder.append(_cUtilsFileName, "");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("#include \"modelbase/etActor.h\"");
       _builder.newLine();
@@ -1203,6 +1198,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.newLine();
+      _builder.append("#include \"");
+      String _cUtilsFileName = this._cExtensions.getCUtilsFileName(ac);
+      _builder.append(_cUtilsFileName, "");
+      _builder.append("\"");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       CharSequence _userCode = this._procedureHelpers.userCode(ac, 3, true);
       _builder.append(_userCode, "");

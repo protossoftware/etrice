@@ -314,7 +314,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		 */
 
 		#include "«ac.getCHeaderFileName»"
-		#include "«ac.getCUtilsFileName»"
 		
 		#include "modelbase/etActor.h"
 		#include "debugging/etLogger.h"
@@ -325,6 +324,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			#include «pc.includePath»
 		«ENDFOR»
+		
+		#include "«ac.getCUtilsFileName»"
 		
 		«ac.userCode(3, true)»
 

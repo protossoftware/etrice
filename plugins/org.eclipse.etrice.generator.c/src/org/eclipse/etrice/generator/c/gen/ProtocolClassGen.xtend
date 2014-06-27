@@ -175,8 +175,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 */
 
 		#include "«pc.getCHeaderFileName»"
-		#include "«pc.getCUtilsFileName»"
 		#include "debugging/etMSCLogger.h"
+		#include "«pc.getCUtilsFileName»"
 
 		«pc.userCode(3)»
 		
