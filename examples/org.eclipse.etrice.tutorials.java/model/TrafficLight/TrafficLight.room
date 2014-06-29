@@ -63,12 +63,12 @@ RoomModel TrafficLight_Model {
 			Operation getCmd(light: Light): string
 			[ "convenience function for getting a command string" ]
 			{
-				"switch(light) {
-				case Light.RED: return \"red\";
-				case Light.GREEN: return \"green\";
-				case Light.YELLOW: return \"yellow\";
-				default: return \"\";
-				}"
+				"switch(light) {"
+				"	case Light.RED: return \"red\";"
+				"	case Light.GREEN: return \"green\";"
+				"	case Light.YELLOW: return \"yellow\";"
+				"	default: return \"\";"
+				"}"
 			}
 			StateMachine {
 				Transition init: initial -> OpenSocket {
