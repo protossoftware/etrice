@@ -84,9 +84,15 @@ public abstract class DiagramAccessBase {
 		boolean exists = false;
 		if (uri.isPlatformResource()) {
 			uri = uri.trimSegments(1);
-			IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
-	
-			IFolder diagramFolder = parentFolder.getFolder(DIAGRAMS_FOLDER_NAME);
+			IFolder diagramFolder = null;
+			if (uri.segmentCount()==2) {
+				IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(uri.lastSegment());
+				diagramFolder = project.getFolder(DIAGRAMS_FOLDER_NAME);
+			}
+			else {
+				IFolder parentFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(uri.toPlatformString(true)));
+				diagramFolder = parentFolder.getFolder(DIAGRAMS_FOLDER_NAME);
+			}
 			
 			IFile diagramFile = diagramFolder.getFile(modelName+"."+sc.getName()+getFileExtension());
 			diagURI = URI.createPlatformResourceURI(diagramFile.getFullPath().toString(), true);
