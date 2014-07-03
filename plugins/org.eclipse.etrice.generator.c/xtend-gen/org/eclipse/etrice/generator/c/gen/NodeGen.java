@@ -2315,9 +2315,6 @@ public class NodeGen {
                       _builder.newLineIfNotEmpty();
                     }
                   }
-                  _builder.append("\t");
-                  _builder.append("ET_DATA_LOGGER_NEW_ROW");
-                  _builder.newLine();
                   _builder.append("}");
                   _builder.newLine();
                   _builder.append("static void MsgDispatcher_");
@@ -2325,6 +2322,9 @@ public class NodeGen {
                   _builder.append(_name_7, "");
                   _builder.append("_logData(void){");
                   _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("ET_DATA_LOGGER_NEW_ROW");
+                  _builder.newLine();
                   {
                     for(final PortInstance pi_1 : loggedPorts) {
                       _builder.append("\t");
@@ -2333,9 +2333,6 @@ public class NodeGen {
                       _builder.newLineIfNotEmpty();
                     }
                   }
-                  _builder.append("\t");
-                  _builder.append("ET_DATA_LOGGER_NEW_ROW");
-                  _builder.newLine();
                   _builder.append("}");
                   _builder.newLine();
                 }

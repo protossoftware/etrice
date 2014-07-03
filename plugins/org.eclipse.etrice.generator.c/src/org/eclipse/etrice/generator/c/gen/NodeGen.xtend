@@ -685,13 +685,12 @@ class NodeGen {
 						«FOR pi: loggedPorts»
 							ET_DATA_LOGGER_LOG_STRING("«pi.path»")
 						«ENDFOR»
-						ET_DATA_LOGGER_NEW_ROW
 					}
 					static void MsgDispatcher_«thread.name»_logData(void){
+						ET_DATA_LOGGER_NEW_ROW
 						«FOR pi: loggedPorts»
 							«pi.createLoggerCall»
 						«ENDFOR»
-						ET_DATA_LOGGER_NEW_ROW
 					}
 				«ENDIF»
 			«ENDIF»
