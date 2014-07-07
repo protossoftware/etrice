@@ -1794,7 +1794,7 @@ public class NodeGen {
       if (_generateMSCInstrumentation) {
         EObject _eContainer_1 = pi.eContainer();
         String _path = ((ActorInstance) _eContainer_1).getPath();
-        String _plus = (",\"" + _path);
+        String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
         _xifexpression_3 = (_plus + "\",");
       } else {
         _xifexpression_3 = "";
@@ -1818,7 +1818,7 @@ public class NodeGen {
         EObject _eContainer_2 = _get_3.eContainer();
         String _path_1 = ((ActorInstance) _eContainer_2).getPath();
         String _plus_1 = ("\"" + _path_1);
-        _xifexpression_4 = (_plus_1 + "\"");
+        _xifexpression_4 = (_plus_1 + "\"\n#endif\n");
       } else {
         _xifexpression_4 = "";
       }
@@ -2076,7 +2076,7 @@ public class NodeGen {
       EObject _eContainer = pi.eContainer();
       String _path = ((ActorInstance) _eContainer).getPath();
       String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
-      _xifexpression = (_plus + "\",\n#endif\n");
+      _xifexpression = (_plus + "\"\n");
     } else {
       _xifexpression = "";
     }
@@ -2108,8 +2108,8 @@ public class NodeGen {
         if (_generateMSCInstrumentation_1) {
           EObject _eContainer_2 = p.eContainer();
           String _path_1 = ((ActorInstance) _eContainer_2).getPath();
-          String _plus_1 = ("\"" + _path_1);
-          _xifexpression_2 = (_plus_1 + "\"");
+          String _plus_1 = (",\"" + _path_1);
+          _xifexpression_2 = (_plus_1 + "\"\n#endif\n");
         } else {
           _xifexpression_2 = "";
         }

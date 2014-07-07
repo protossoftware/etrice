@@ -545,9 +545,9 @@ class NodeGen {
 		val objId = if (pi.peers.empty) 0 else pi.peers.get(0).objId
 		val idx = if (pi.peers.empty) 0 else pi.peers.get(0).peers.indexOf(pi)
 		val msgSvc = if (pi.peers.empty) "NULL" else "&msgService_"+ETMapUtil::getMappedThread(pi.peers.get(0).eContainer as ActorInstance).thread.name
-		val myInst = if (Main::settings.generateMSCInstrumentation) ",\""+(pi.eContainer as ActorInstance).path+"\","
+		val myInst = if (Main::settings.generateMSCInstrumentation) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\""+(pi.eContainer as ActorInstance).path+"\","
 			else ""
-		val peerInst = if (Main::settings.generateMSCInstrumentation && !pi.peers.empty) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\""
+		val peerInst = if (Main::settings.generateMSCInstrumentation && !pi.peers.empty) "\""+(pi.peers.get(0).eContainer as ActorInstance).path+"\"\n#endif\n"
 			else ""
 		
 		"{"+getInterfaceItemInstanceData(pi)+", " 
@@ -621,7 +621,7 @@ class NodeGen {
 	
 	def private String genReplSubPortInitializers(Root root, ActorInstance ai, InterfaceItemInstance pi) {
 		var result = ""
-		val myInst = if (Main::settings.generateMSCInstrumentation) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\""+(pi.eContainer as ActorInstance).path+"\",\n#endif\n"
+		val myInst = if (Main::settings.generateMSCInstrumentation) "\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\""+(pi.eContainer as ActorInstance).path+"\"\n"
 			else ""
 		
 		for (p: pi.peers) {
@@ -629,7 +629,7 @@ class NodeGen {
 			val comma = if (idx<pi.peers.size-1) "," else ""
 			val thread = ETMapUtil::getMappedThread(p.eContainer as ActorInstance).thread.name
 			var iiiD = getInterfaceItemInstanceData(pi)
-			val peerInst = if (Main::settings.generateMSCInstrumentation) "\""+(p.eContainer as ActorInstance).path+"\""
+			val peerInst = if (Main::settings.generateMSCInstrumentation) ",\""+(p.eContainer as ActorInstance).path+"\"\n#endif\n"
 				else ""
 			iiiD = if (iiiD.equals("NULL")) iiiD+"," else iiiD+"["+idx+"],"
 			result = result +
