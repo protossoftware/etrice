@@ -322,8 +322,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 							{
 								const char** peerName;
-								for (peerName=self->peerNames; *peerName!=NULL; ++peerName)
+								for (peerName=self->peerNames; *peerName!=NULL; ++peerName) {
 									ET_MSC_LOGGER_ASYNC_OUT(self->instName, «message.data.refType.type.name»_getLiteralName(data), *peerName)
+									ET_MSC_LOGGER_ASYNC_IN(self->instName, «message.data.refType.type.name»_getLiteralName(data), *peerName)
+								}
 							}
 						#endif
 					«ENDIF»
@@ -331,30 +333,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 							{
 								const char** peerName;
-								for (peerName=self->peerNames; *peerName!=NULL; ++peerName)
+								for (peerName=self->peerNames; *peerName!=NULL; ++peerName) {
 									ET_MSC_LOGGER_ASYNC_OUT(self->instName, data?"true":"false", *peerName)
+									ET_MSC_LOGGER_ASYNC_IN(self->instName, data?"true":"false", *peerName)
+								}
 							}
 						#endif
 					«ENDIF»
 					self->«message.name» = «refp»data;
 				}
 				«messageGetterSignature(pc.getPortClassName(false), message.name, typeName)» {
-					«IF usesMSC && enumMsgs.exists(m|m==message)»
-						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
-							if (self->peer->«message.name»!=self->«message.name») {
-								ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, «message.data.refType.type.name»_getLiteralName(self->peer->«message.name»), self->instName)
-								((«pc.getPortClassName(false)»*)self)->«message.name» = self->peer->«message.name»;
-							}
-						#endif
-					«ENDIF»
-					«IF usesMSC && boolMsgs.exists(m|m==message)»
-						#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
-							if (self->peer->«message.name»!=self->«message.name») {
-								ET_MSC_LOGGER_ASYNC_IN(self->peer->instName, (self->peer->«message.name»)?"true":"false", self->instName)
-								((«pc.getPortClassName(false)»*)self)->«message.name» = self->peer->«message.name»;
-							}
-						#endif
-					«ENDIF»
 					return self->peer->«message.name»;
 				}
 				
