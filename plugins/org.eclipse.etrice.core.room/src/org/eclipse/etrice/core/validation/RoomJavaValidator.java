@@ -114,6 +114,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 		
 		String uriString = importUriResolver.resolve(imp);
+		if(uriString == null) {
+			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
+			return;
+		}
 		
 		URI uri = URI.createURI(uriString);
 		ResourceSet rs = imp.eResource().getResourceSet();
