@@ -71,7 +71,7 @@ public class ModelLocator {
 			if (result!=null)
 				return result;
 		}
-		return resolve;
+		return null;
 	}
 	
 }
