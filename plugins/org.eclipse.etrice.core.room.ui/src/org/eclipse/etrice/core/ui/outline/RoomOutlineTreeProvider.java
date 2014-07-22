@@ -52,6 +52,7 @@ import com.google.inject.Inject;
  */
 public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
+	// extra node labels should be != valid room name/id
 	private static final String STATE_MACHINE_LABEL = "StateMachine";
 	private static final String BEHAVIOR_LABEL = "Behavior";
 	private static final String STRUCTURE_LABEL = "Structure";
@@ -83,13 +84,14 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (parentNode.getText() instanceof StyledString)
 			nodeName = ((StyledString)parentNode.getText()).getString();
 		
+		// Labels have to be distinct from actor class name due recursion
+		// Identify extra node by label name or
 		// if the parent is the top node of an actor class it starts with the actor class name
 		// (eventually followed by 'extends')
-		// otherwise it is one of the Interface/Structure/Behavior nodes
-		if (((String)nodeName).startsWith(ac.getName()))
-			createChildren1(parentNode, ac);
-		else
+		if(nodeName.equals(INTERFACE_LABEL) || nodeName.equals(STRUCTURE_LABEL) || nodeName.equals(BEHAVIOR_LABEL))
 			createChildren2(parentNode, ac);
+		else if (((String)nodeName).startsWith(ac.getName()))
+			createChildren1(parentNode, ac);
 	}
 	
 	private void createChildren1(IOutlineNode parentNode, ActorClass ac) {
