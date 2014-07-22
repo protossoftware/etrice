@@ -1788,59 +1788,50 @@ public class NodeGen {
         _xifexpression_2 = ("&msgService_" + _name);
       }
       final String msgSvc = _xifexpression_2;
-      String _xifexpression_3 = null;
+      String myInst = "";
+      String peerInst = "";
       GlobalGeneratorSettings _settings = Main.getSettings();
       boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
       if (_generateMSCInstrumentation) {
         EObject _eContainer_1 = pi.eContainer();
         String _path = ((ActorInstance) _eContainer_1).getPath();
         String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
-        _xifexpression_3 = (_plus + "\",");
-      } else {
-        _xifexpression_3 = "";
-      }
-      final String myInst = _xifexpression_3;
-      String _xifexpression_4 = null;
-      boolean _and = false;
-      GlobalGeneratorSettings _settings_1 = Main.getSettings();
-      boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-      if (!_generateMSCInstrumentation_1) {
-        _and = false;
-      } else {
+        String _plus_1 = (_plus + "\",");
+        myInst = _plus_1;
+        String _xifexpression_3 = null;
         EList<InterfaceItemInstance> _peers_7 = pi.getPeers();
         boolean _isEmpty_3 = _peers_7.isEmpty();
         boolean _not = (!_isEmpty_3);
-        _and = _not;
+        if (_not) {
+          EList<InterfaceItemInstance> _peers_8 = pi.getPeers();
+          InterfaceItemInstance _get_3 = _peers_8.get(0);
+          EObject _eContainer_2 = _get_3.eContainer();
+          String _path_1 = ((ActorInstance) _eContainer_2).getPath();
+          String _plus_2 = ("\"" + _path_1);
+          _xifexpression_3 = (_plus_2 + "\"\n#endif\n");
+        } else {
+          _xifexpression_3 = "\n#endif\n";
+        }
+        peerInst = _xifexpression_3;
       }
-      if (_and) {
-        EList<InterfaceItemInstance> _peers_8 = pi.getPeers();
-        InterfaceItemInstance _get_3 = _peers_8.get(0);
-        EObject _eContainer_2 = _get_3.eContainer();
-        String _path_1 = ((ActorInstance) _eContainer_2).getPath();
-        String _plus_1 = ("\"" + _path_1);
-        _xifexpression_4 = (_plus_1 + "\"\n#endif\n");
-      } else {
-        _xifexpression_4 = "";
-      }
-      final String peerInst = _xifexpression_4;
       String _interfaceItemInstanceData = this.getInterfaceItemInstanceData(pi);
-      String _plus_2 = ("{" + _interfaceItemInstanceData);
-      String _plus_3 = (_plus_2 + ", ");
-      String _plus_4 = (_plus_3 + msgSvc);
-      String _plus_5 = (_plus_4 + ", ");
-      String _plus_6 = (_plus_5 + Integer.valueOf((objId + idx)));
-      String _plus_7 = (_plus_6 + "+BASE_ADDRESS, ");
+      String _plus_3 = ("{" + _interfaceItemInstanceData);
+      String _plus_4 = (_plus_3 + ", ");
+      String _plus_5 = (_plus_4 + msgSvc);
+      String _plus_6 = (_plus_5 + ", ");
+      String _plus_7 = (_plus_6 + Integer.valueOf((objId + idx)));
+      String _plus_8 = (_plus_7 + "+BASE_ADDRESS, ");
       ExpandedActorClass _expandedActorClass = root.getExpandedActorClass(ai);
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
       int _interfaceItemLocalId = _expandedActorClass.getInterfaceItemLocalId(_interfaceItem);
-      int _plus_8 = (_interfaceItemLocalId + 1);
-      String _plus_9 = (_plus_7 + Integer.valueOf(_plus_8));
-      String _plus_10 = (_plus_9 + myInst);
-      String _plus_11 = (_plus_10 + peerInst);
-      String _plus_12 = (_plus_11 + "} /* Port ");
+      int _plus_9 = (_interfaceItemLocalId + 1);
+      String _plus_10 = (_plus_8 + Integer.valueOf(_plus_9));
+      String _plus_11 = (_plus_10 + myInst);
+      String _plus_12 = (_plus_11 + peerInst);
+      String _plus_13 = (_plus_12 + "} /* Port ");
       String _name_1 = pi.getName();
-      String _plus_13 = (_plus_12 + _name_1);
-      _xblockexpression = (_plus_13 + " */");
+      String _plus_14 = (_plus_13 + _name_1);
+      _xblockexpression = (_plus_14 + " */");
     }
     return _xblockexpression;
   }
