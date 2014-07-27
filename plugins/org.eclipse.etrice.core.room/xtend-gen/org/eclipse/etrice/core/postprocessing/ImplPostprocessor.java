@@ -89,6 +89,7 @@ public class ImplPostprocessor {
       PostprocessingHelpers.addOperation(interfaceItem, "getGeneralProtocol", _eClassifier_3, Integer.valueOf(1), _builder_3.toString());
       final EClass actorClass = PostprocessingHelpers.getClass(roomPackage, "ActorClass");
       EClassifier _eClassifier_4 = roomPackage.getEClassifier("Port");
+      int _minus = (-1);
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();");
       _builder_4.newLine();
@@ -101,8 +102,9 @@ public class ImplPostprocessor {
       _builder_4.newLine();
       _builder_4.append("return ports;");
       _builder_4.newLine();
-      PostprocessingHelpers.addOperation(actorClass, "getExternalEndPorts", _eClassifier_4, Integer.valueOf((-1)), _builder_4.toString());
+      PostprocessingHelpers.addOperation(actorClass, "getExternalEndPorts", _eClassifier_4, Integer.valueOf(_minus), _builder_4.toString());
       EClassifier _eClassifier_5 = roomPackage.getEClassifier("Port");
+      int _minus_1 = (-1);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());");
       _builder_5.newLine();
@@ -115,8 +117,9 @@ public class ImplPostprocessor {
       _builder_5.newLine();
       _builder_5.append("return ports;");
       _builder_5.newLine();
-      PostprocessingHelpers.addOperation(actorClass, "getRelayPorts", _eClassifier_5, Integer.valueOf((-1)), _builder_5.toString());
+      PostprocessingHelpers.addOperation(actorClass, "getRelayPorts", _eClassifier_5, Integer.valueOf(_minus_1), _builder_5.toString());
       EClassifier _eClassifier_6 = roomPackage.getEClassifier("SPP");
+      int _minus_2 = (-1);
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();");
       _builder_6.newLine();
@@ -129,7 +132,7 @@ public class ImplPostprocessor {
       _builder_6.newLine();
       _builder_6.append("return spps;");
       _builder_6.newLine();
-      PostprocessingHelpers.addOperation(actorClass, "getImplementedSPPs", _eClassifier_6, Integer.valueOf((-1)), _builder_6.toString());
+      PostprocessingHelpers.addOperation(actorClass, "getImplementedSPPs", _eClassifier_6, Integer.valueOf(_minus_2), _builder_6.toString());
       final EClass actorContainerRef = PostprocessingHelpers.getClass(roomPackage, "ActorContainerRef");
       EClassifier _eClassifier_7 = roomPackage.getEClassifier("StructureClass");
       StringConcatenation _builder_7 = new StringConcatenation();
@@ -209,9 +212,10 @@ public class ImplPostprocessor {
       _builder_11.newLine();
       _builder_11.append("return et.getName() + \".\" + this.getName();");
       _builder_11.newLine();
-      _xblockexpression = PostprocessingHelpers.addOperation(enumLiteral, 
+      boolean _addOperation = PostprocessingHelpers.addOperation(enumLiteral, 
         "getFullName", _eClassifier_11, 
         Integer.valueOf(1), _builder_11.toString());
+      _xblockexpression = (_addOperation);
     }
     return _xblockexpression;
   }

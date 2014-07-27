@@ -64,12 +64,15 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+
+import com.google.inject.Inject;
 
 
 /**
@@ -83,6 +86,9 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	public static final String STATE_PATH_DELIMITER = ".";
 
+	@Inject
+	private IQualifiedNameProvider nameProvider;
+	
 	/**
 	 * first container of type {@link StateGraph} ({@link State}, {@link StateMachine})
 	 * @param obj
@@ -546,11 +552,13 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		ac = ac.getBase();
 		while (ac!=null) {
 			if (ac.getStateMachine()!=null) {
+				int acNameSegments = nameProvider.getFullyQualifiedName(ac).getSegmentCount();
 				TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
 				while (it.hasNext()) {
 					EObject obj = it.next();
 					if (obj instanceof Transition) {
-						scopes.add(EObjectDescription.create(((Transition)obj).getName(), obj));
+						// use qualified name but skip ac FQN and also omit state machine name 'sm'
+						scopes.add(EObjectDescription.create(nameProvider.getFullyQualifiedName(obj).skipFirst(acNameSegments+1), obj));
 					}
 				}
 			}

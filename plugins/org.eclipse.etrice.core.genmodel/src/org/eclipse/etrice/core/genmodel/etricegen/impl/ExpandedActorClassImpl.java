@@ -313,7 +313,10 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private void validationError(String msg, EObject obj, EStructuralFeature feature, int idx) {
-		assert obj.eResource() != null : "val error in artificial model object";
+//		assert obj.eResource() != null : "val error in artificial model object";
+		if (obj.eResource()==null) {
+			obj = copy2orig.get(obj);
+		}
 		validator.error(msg, obj, feature, idx);
 	}
 	

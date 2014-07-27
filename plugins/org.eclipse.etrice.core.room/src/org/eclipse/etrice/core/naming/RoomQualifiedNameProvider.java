@@ -20,8 +20,8 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
@@ -77,7 +77,7 @@ public class RoomQualifiedNameProvider extends
     
     public QualifiedName qualifiedName(StateGraph sg) {
     	if (sg.eContainer() instanceof State)
-    		return getFullyQualifiedName(sg.eContainer()).append("subgraph");
+    		return getFullyQualifiedName(sg.eContainer()).append("sg");
     	else if (sg.eContainer() instanceof ActorClass)
     		return getFullyQualifiedName(sg.eContainer()).append("sm");
     	
