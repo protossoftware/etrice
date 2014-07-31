@@ -200,6 +200,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 
 	private boolean prepared = false;
 	private HashSet<StateGraphItem> ownObjects = null;
+	private HashSet<Transition> targetsOfRefinedTransitions = null;
 	private HashMap<InterfaceItem, Integer> ifitem2localId = null;
 	private HashMap<StateGraphNode, NodeData> node2data = null;
 	private HashMap<State, LinkedList<ActiveTrigger>> state2triggers = null;
@@ -370,6 +371,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// we can do this since the target is a copy just for this class
 		for (Entry<Transition, DetailCode> entry : trans2refinedAction.entrySet()) {
 			ownObjects.add(entry.getKey());
+			targetsOfRefinedTransitions.add(entry.getKey());
 			if (entry.getKey().getAction()==null)
 				entry.getKey().setAction(entry.getValue());
 			else
@@ -865,6 +867,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		ifitem2localId = new HashMap<InterfaceItem, Integer>();
 		ownObjects = new HashSet<StateGraphItem>();
+		targetsOfRefinedTransitions = new HashSet<Transition>();
 		node2data = new HashMap<StateGraphNode, NodeData>();
 		state2triggers = new HashMap<State, LinkedList<ActiveTrigger>>();
 		triggerstring2mif = new HashMap<String, MessageFromIf>();
@@ -1199,7 +1202,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		BasicEList<TransitionChain> result = new BasicEList<TransitionChain>();
 		
 		for (TransitionChain tc : trchains) {
-			if (isOwnObject(tc.getTransition()))
+			if (!targetsOfRefinedTransitions.contains(tc.getTransition()) && isOwnObject(tc.getTransition()))
 				result.add(tc);
 		}
 		
