@@ -986,16 +986,12 @@ public class ActorContainerRefSupport {
 			@Override
 			public void resizeShape(IResizeShapeContext context) {
 				ContainerShape containerShape = (ContainerShape) context.getShape();
-				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
 				Object bo = getBusinessObjectForPictogramElement(containerShape);
-				
-				if(bo instanceof ActorRef && ((ActorRef)bo).getMultiplicity() != 1)
-					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(1));
-				else
-					resizeChildrenInterfaceItems(context, containerGa.getGraphicsAlgorithmChildren().get(0));
-				
+				if(bo instanceof ActorRef) {
+					ActorRefGraphicsAccess arga = new ActorRefGraphicsAccess(containerShape, getDiagram());
+					resizeChildrenInterfaceItems(context, arga.getMainBorder());
+				}
 				super.resizeShape(context);
-				
 			}
 			
 			
@@ -1011,26 +1007,26 @@ public class ActorContainerRefSupport {
 						GraphicsAlgorithm childGa = childShape.getGraphicsAlgorithm();
 						
 						PosAndSize childPos = DiagramUtil.getPosAndSize(childGa);
-						// calc mid point & align to inner rect
-						int midX = childPos.getX() + childPos.getW()/2 - innerRectPos.getX();
-						int midY = childPos.getY() + childPos.getH()/2 - innerRectPos.getY();
-						// scale
-						midX = (int) (sx*midX);
-						midY = (int) (sy*midY);
-						// first step reverse
-						midX = midX - childPos.getW()/2 + innerRectPos.getX();
-						midY = midY - childPos.getH()/2 + innerRectPos.getY();
+						double portMidX = (double)childPos.getW()/2.0F;
+						double portMidY = (double)childPos.getH()/2.0F;
 						
-						Graphiti.getGaService().setLocation(childGa, midX, midY);
+						// calc mid point & align to inner rect
+						double midX = childPos.getX() + portMidX - innerRectPos.getX();
+						double midY = childPos.getY() + portMidY - innerRectPos.getY();
+						// scale
+						midX = sx*midX;
+						midY = sy*midY;
+						// first step reverse
+						midX = midX - portMidX + innerRectPos.getX();
+						midY = midY - portMidY + innerRectPos.getY();
+						
+						Graphiti.getGaService().setLocation(childGa, (int)Math.round(midX), (int)Math.round(midY));
 						updatePictogramElement(childShape);
 					}
 					
 				}
 				
 			}
-			
-			
-			
 		}
 		
 		private IFeatureProvider fp;
