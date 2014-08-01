@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
@@ -29,12 +30,14 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.State;
@@ -48,10 +51,23 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
 public class DocGen {
+  public static class DocGenContext {
+    private final Root root;
+    
+    private final RoomModel model;
+    
+    public DocGenContext(final Root r, final RoomModel m) {
+      this.root = r;
+      this.model = m;
+    }
+  }
+  
   @Inject
   @Extension
   private JavaIoFileSystemAccess fileAccess;
@@ -63,262 +79,396 @@ public class DocGen {
   @Inject
   private ILogger logger;
   
+  private final String IMGDIR_DEFAULT = "./images";
+  
+  private final String IMGWIDTH_DEFAULT = "1.0\\textwidth";
+  
   public void doGenerate(final Root root) {
     EList<RoomModel> _models = root.getModels();
     for (final RoomModel model : _models) {
       {
+        final DocGen.DocGenContext ctx = new DocGen.DocGenContext(root, model);
         String path = this.roomExt.getDocGenerationTargetPath(model);
         String _name = model.getName();
         String file = (_name + ".tex");
         this.logger.logInfo((((("generating LaTeX documentation: \'" + file) + "\' in \'") + path) + "\'"));
         this.fileAccess.setOutputPath(path);
-        CharSequence _generateModelDoc = this.generateModelDoc(root, model);
-        this.fileAccess.generateFile(file, _generateModelDoc);
+        EList<LogicalSystem> _systems = model.getSystems();
+        final Procedure1<LogicalSystem> _function = new Procedure1<LogicalSystem>() {
+          public void apply(final LogicalSystem it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<LogicalSystem>forEach(_systems, _function);
+        EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
+        final Procedure1<SubSystemClass> _function_1 = new Procedure1<SubSystemClass>() {
+          public void apply(final SubSystemClass it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses, _function_1);
+        EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
+        final Procedure1<GeneralProtocolClass> _function_2 = new Procedure1<GeneralProtocolClass>() {
+          public void apply(final GeneralProtocolClass it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses, _function_2);
+        EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
+        final Procedure1<EnumerationType> _function_3 = new Procedure1<EnumerationType>() {
+          public void apply(final EnumerationType it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<EnumerationType>forEach(_enumerationTypes, _function_3);
+        EList<DataClass> _dataClasses = model.getDataClasses();
+        final Procedure1<DataClass> _function_4 = new Procedure1<DataClass>() {
+          public void apply(final DataClass it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<DataClass>forEach(_dataClasses, _function_4);
+        EList<ActorClass> _actorClasses = model.getActorClasses();
+        final Procedure1<ActorClass> _function_5 = new Procedure1<ActorClass>() {
+          public void apply(final ActorClass it) {
+            CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
+            String _docFragmentName = DocGen.this.docFragmentName(it);
+            DocGen.this.saveAs(_generateDoc, _docFragmentName);
+          }
+        };
+        IterableExtensions.<ActorClass>forEach(_actorClasses, _function_5);
+        CharSequence _generateModelDoc = this.generateModelDoc(ctx);
+        this.saveAs(_generateModelDoc, file);
       }
     }
   }
   
-  private CharSequence generateModelDoc(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\\documentclass[titlepage]{article}");
-    _builder.newLine();
-    _builder.append("\\usepackage{graphicx}");
-    _builder.newLine();
-    _builder.append("\\IfFileExists{../doc/userinputs.tex}{\\input{../doc/userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... ");
-    _builder.newLine();
-    _builder.append("\\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}");
-    _builder.newLine();
-    _builder.append("\\usepackage{nonfloat}");
-    _builder.newLine();
-    _builder.append("\\parindent 0pt");
-    _builder.newLine();
-    _builder.append("\\makeatletter");
-    _builder.newLine();
-    _builder.append("\\newcommand\\level[1]{%");
-    _builder.newLine();
-    _builder.append("   ");
-    _builder.append("\\ifcase#1\\relax\\expandafter\\chapter\\or");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\expandafter\\section\\or");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\expandafter\\subsection\\or");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\expandafter\\subsubsection\\else");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\def\\next{\\@level{#1}}\\expandafter\\next");
-    _builder.newLine();
-    _builder.append("   ");
-    _builder.append("\\fi}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\newcommand{\\@level}[1]{%");
-    _builder.newLine();
-    _builder.append("\\@startsection{level#1}");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("{#1}");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("{\\z@}%");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("{-3.25ex\\@plus -1ex \\@minus -.2ex}%");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("{1.5ex \\@plus .2ex}%");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("{\\normalfont\\normalsize\\bfseries}}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\newdimen\\@leveldim");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\newdimen\\@dotsdim");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("{\\normalfont\\normalsize");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("\\sbox\\z@{0}\\global\\@leveldim=\\wd\\z@");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("\\sbox\\z@{.}\\global\\@dotsdim=\\wd\\z@");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("}  ");
-    _builder.newLine();
-    _builder.append("\\newcounter{level4}[subsubsection]");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\@namedef{thelevel4}{\\thesubsubsection.\\arabic{level4}}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\@namedef{level4mark}#1{}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\def\\l@section{\\@dottedtocline{1}{0pt}{\\dimexpr\\@leveldim*4+\\@dotsdim*1+6pt\\relax}}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\def\\l@subsection{\\@dottedtocline{2}{0pt}{\\dimexpr\\@leveldim*5+\\@dotsdim*2+6pt\\relax}}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\def\\l@subsubsection{\\@dottedtocline{3}{0pt}{\\dimexpr\\@leveldim*6+\\@dotsdim*3+6pt\\relax}}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\@namedef{l@level4}{\\@dottedtocline{4}{0pt}{\\dimexpr\\@leveldim*7+\\@dotsdim*4+6pt\\relax}}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\count@=4");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\def\\@ncp#1{\\number\\numexpr\\count@+#1\\relax}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\loop\\ifnum\\count@<100");
-    _builder.newLine();
-    _builder.append("   ");
-    _builder.append("\\begingroup\\edef\\x{\\endgroup");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\noexpand\\newcounter{level\\@ncp{1}}[level\\number\\count@]");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\noexpand\\@namedef{thelevel\\@ncp{1}}{%");
-    _builder.newLine();
-    _builder.append("       ");
-    _builder.append("\\noexpand\\@nameuse{thelevel\\@ncp{0}}.\\noexpand\\arabic{level\\@ncp{0}}}");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\noexpand\\@namedef{level\\@ncp{1}mark}####1{}%");
-    _builder.newLine();
-    _builder.append("     ");
-    _builder.append("\\noexpand\\@namedef{l@level\\@ncp{1}}%");
-    _builder.newLine();
-    _builder.append("       ");
-    _builder.append("{\\noexpand\\@dottedtocline{\\@ncp{1}}{0pt}{\\the\\dimexpr\\@leveldim*\\@ncp{5}+\\@dotsdim*\\@ncp{0}\\relax}}}%");
-    _builder.newLine();
-    _builder.append("   ");
-    _builder.append("\\x");
-    _builder.newLine();
-    _builder.append("   ");
-    _builder.append("\\advance\\count@\\@ne");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\repeat");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\makeatother");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\setcounter{secnumdepth}{100}");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("\\setcounter{tocdepth}{100}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\title{");
-    String _name = model.getName();
-    String _escapedString = this.escapedString(_name);
-    _builder.append(_escapedString, "");
-    _builder.append(" Model Documentation}");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\date{\\today}");
-    _builder.newLine();
-    _builder.append("\\author{generated by eTrice}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\begin{document}");
-    _builder.newLine();
-    _builder.append("\\pagestyle{plain}");
-    _builder.newLine();
-    _builder.append("\\maketitle");
-    _builder.newLine();
-    _builder.append("\\tableofcontents");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\\newpage");
-    _builder.newLine();
-    _builder.append("\\listoffigures");
-    _builder.newLine();
-    _builder.append("\\newpage");
-    _builder.newLine();
-    _builder.append("\\section{Model Description}");
-    _builder.newLine();
-    Documentation _docu = model.getDocu();
-    CharSequence _generateDocText = this.generateDocText(_docu);
-    _builder.append(_generateDocText, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Logical System Description}");
-    _builder.newLine();
-    CharSequence _generateAllLogicalSystemDocs = this.generateAllLogicalSystemDocs(root, model);
-    _builder.append(_generateAllLogicalSystemDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Subsystem Description}");
-    _builder.newLine();
-    CharSequence _generateAllSubSysClassDocs = this.generateAllSubSysClassDocs(root, model);
-    _builder.append(_generateAllSubSysClassDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Protocol Class Description}");
-    _builder.newLine();
-    CharSequence _generateAllProtocolClassDocs = this.generateAllProtocolClassDocs(root, model);
-    _builder.append(_generateAllProtocolClassDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Enumeration Description}");
-    _builder.newLine();
-    CharSequence _generateAllEnumerationDocs = this.generateAllEnumerationDocs(root, model);
-    _builder.append(_generateAllEnumerationDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Data Class Description}");
-    _builder.newLine();
-    CharSequence _generateAllDataClassDocs = this.generateAllDataClassDocs(root, model);
-    _builder.append(_generateAllDataClassDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\section{Actor Class Description}");
-    _builder.newLine();
-    CharSequence _generateAllActorClassDocs = this.generateAllActorClassDocs(root, model);
-    _builder.append(_generateAllActorClassDocs, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\\end{document}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  private CharSequence generateAllLogicalSystemDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<LogicalSystem> _systems = model.getSystems();
-      for(final LogicalSystem sys : _systems) {
-        CharSequence _generateLogicalSystemDoc = this.generateLogicalSystemDoc(root, model, sys);
-        _builder.append(_generateLogicalSystemDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence generateLogicalSystemDoc(final Root root, final RoomModel model, final LogicalSystem system) {
+  private CharSequence generateModelDoc(final DocGen.DocGenContext ctx) {
     CharSequence _xblockexpression = null;
     {
-      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus = (_docGenerationTargetPath + "images\\");
-      String _name = system.getName();
+      RoomModel model = ctx.model;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\\documentclass[titlepage]{article}");
+      _builder.newLine();
+      _builder.append("\\usepackage{import}");
+      _builder.newLine();
+      _builder.append("\\usepackage{graphicx}");
+      _builder.newLine();
+      _builder.append("\\IfFileExists{../doc/userinputs.tex}{\\subimport{../doc/}{userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... ");
+      _builder.newLine();
+      _builder.append("\\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}");
+      _builder.newLine();
+      _builder.append("\\usepackage{nonfloat}");
+      _builder.newLine();
+      _builder.append("\\parindent 0pt");
+      _builder.newLine();
+      _builder.append("\\makeatletter");
+      _builder.newLine();
+      _builder.append("\\newcommand\\level[1]{%");
+      _builder.newLine();
+      _builder.append("   ");
+      _builder.append("\\ifcase#1\\relax\\expandafter\\chapter\\or");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\expandafter\\section\\or");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\expandafter\\subsection\\or");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\expandafter\\subsubsection\\else");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\def\\next{\\@level{#1}}\\expandafter\\next");
+      _builder.newLine();
+      _builder.append("   ");
+      _builder.append("\\fi}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\newcommand{\\@level}[1]{%");
+      _builder.newLine();
+      _builder.append("\\@startsection{level#1}");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("{#1}");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("{\\z@}%");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("{-3.25ex\\@plus -1ex \\@minus -.2ex}%");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("{1.5ex \\@plus .2ex}%");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("{\\normalfont\\normalsize\\bfseries}}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\newdimen\\@leveldim");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\newdimen\\@dotsdim");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("{\\normalfont\\normalsize");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("\\sbox\\z@{0}\\global\\@leveldim=\\wd\\z@");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("\\sbox\\z@{.}\\global\\@dotsdim=\\wd\\z@");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("}  ");
+      _builder.newLine();
+      _builder.append("\\newcounter{level4}[subsubsection]");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\@namedef{thelevel4}{\\thesubsubsection.\\arabic{level4}}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\@namedef{level4mark}#1{}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\def\\l@section{\\@dottedtocline{1}{0pt}{\\dimexpr\\@leveldim*4+\\@dotsdim*1+6pt\\relax}}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\def\\l@subsection{\\@dottedtocline{2}{0pt}{\\dimexpr\\@leveldim*5+\\@dotsdim*2+6pt\\relax}}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\def\\l@subsubsection{\\@dottedtocline{3}{0pt}{\\dimexpr\\@leveldim*6+\\@dotsdim*3+6pt\\relax}}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\@namedef{l@level4}{\\@dottedtocline{4}{0pt}{\\dimexpr\\@leveldim*7+\\@dotsdim*4+6pt\\relax}}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\count@=4");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\def\\@ncp#1{\\number\\numexpr\\count@+#1\\relax}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\loop\\ifnum\\count@<100");
+      _builder.newLine();
+      _builder.append("   ");
+      _builder.append("\\begingroup\\edef\\x{\\endgroup");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\noexpand\\newcounter{level\\@ncp{1}}[level\\number\\count@]");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\noexpand\\@namedef{thelevel\\@ncp{1}}{%");
+      _builder.newLine();
+      _builder.append("       ");
+      _builder.append("\\noexpand\\@nameuse{thelevel\\@ncp{0}}.\\noexpand\\arabic{level\\@ncp{0}}}");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\noexpand\\@namedef{level\\@ncp{1}mark}####1{}%");
+      _builder.newLine();
+      _builder.append("     ");
+      _builder.append("\\noexpand\\@namedef{l@level\\@ncp{1}}%");
+      _builder.newLine();
+      _builder.append("       ");
+      _builder.append("{\\noexpand\\@dottedtocline{\\@ncp{1}}{0pt}{\\the\\dimexpr\\@leveldim*\\@ncp{5}+\\@dotsdim*\\@ncp{0}\\relax}}}%");
+      _builder.newLine();
+      _builder.append("   ");
+      _builder.append("\\x");
+      _builder.newLine();
+      _builder.append("   ");
+      _builder.append("\\advance\\count@\\@ne");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\repeat");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\makeatother");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\setcounter{secnumdepth}{100}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("\\setcounter{tocdepth}{100}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\title{");
+      String _name = model.getName();
       String _escapedString = this.escapedString(_name);
-      String _plus_1 = (_plus + _escapedString);
-      String filenamei = (_plus_1 + "_instanceTree.jpg");
-      String _replaceAll = filenamei.replaceAll("\\\\", "/");
-      filenamei = _replaceAll;
-      String latexFilenamei = filenamei.replaceAll("/", "//");
+      _builder.append(_escapedString, "");
+      _builder.append(" Model Documentation}");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\\date{\\today}");
+      _builder.newLine();
+      _builder.append("\\author{generated by eTrice}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\begin{document}");
+      _builder.newLine();
+      _builder.append("\\pagestyle{plain}");
+      _builder.newLine();
+      _builder.append("\\maketitle");
+      _builder.newLine();
+      _builder.append("\\tableofcontents");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\\newpage");
+      _builder.newLine();
+      _builder.append("\\listoffigures");
+      _builder.newLine();
+      _builder.append("\\newpage");
+      _builder.newLine();
+      _builder.append("\\section{Model Description}");
+      _builder.newLine();
+      Documentation _docu = model.getDocu();
+      CharSequence _generateDocText = this.generateDocText(_docu);
+      _builder.append(_generateDocText, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        EList<LogicalSystem> _systems = model.getSystems();
+        boolean _isEmpty = _systems.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("\\section{Logical System Classes}");
+          _builder.newLine();
+          {
+            EList<LogicalSystem> _systems_1 = model.getSystems();
+            for(final LogicalSystem s : _systems_1) {
+              CharSequence _generateImport = this.generateImport(s);
+              _builder.append(_generateImport, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
+        boolean _isEmpty_1 = _subSystemClasses.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          _builder.append("\\section{Subsystem Classes}");
+          _builder.newLine();
+          {
+            EList<SubSystemClass> _subSystemClasses_1 = model.getSubSystemClasses();
+            for(final SubSystemClass s_1 : _subSystemClasses_1) {
+              CharSequence _generateImport_1 = this.generateImport(s_1);
+              _builder.append(_generateImport_1, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
+        boolean _isEmpty_2 = _protocolClasses.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
+          _builder.append("\\section{Protocol Classes}");
+          _builder.newLine();
+          {
+            EList<GeneralProtocolClass> _protocolClasses_1 = model.getProtocolClasses();
+            for(final GeneralProtocolClass c : _protocolClasses_1) {
+              CharSequence _generateImport_2 = this.generateImport(c);
+              _builder.append(_generateImport_2, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
+        boolean _isEmpty_3 = _enumerationTypes.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
+          _builder.append("\\section{Enumeration Types}");
+          _builder.newLine();
+          {
+            EList<EnumerationType> _enumerationTypes_1 = model.getEnumerationTypes();
+            for(final EnumerationType e : _enumerationTypes_1) {
+              CharSequence _generateImport_3 = this.generateImport(e);
+              _builder.append(_generateImport_3, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<DataClass> _dataClasses = model.getDataClasses();
+        boolean _isEmpty_4 = _dataClasses.isEmpty();
+        boolean _not_4 = (!_isEmpty_4);
+        if (_not_4) {
+          _builder.append("\\section{Data Classes}");
+          _builder.newLine();
+          {
+            EList<DataClass> _dataClasses_1 = model.getDataClasses();
+            for(final DataClass c_1 : _dataClasses_1) {
+              CharSequence _generateImport_4 = this.generateImport(c_1);
+              _builder.append(_generateImport_4, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      {
+        EList<ActorClass> _actorClasses = model.getActorClasses();
+        boolean _isEmpty_5 = _actorClasses.isEmpty();
+        boolean _not_5 = (!_isEmpty_5);
+        if (_not_5) {
+          _builder.append("\\section{Actor Classes}");
+          _builder.newLine();
+          {
+            EList<ActorClass> _actorClasses_1 = model.getActorClasses();
+            for(final ActorClass c_2 : _actorClasses_1) {
+              CharSequence _generateImport_5 = this.generateImport(c_2);
+              _builder.append(_generateImport_5, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.append("\\end{document}");
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence _generateDoc(final LogicalSystem system, final DocGen.DocGenContext ctx) {
+    CharSequence _xblockexpression = null;
+    {
+      String _name = system.getName();
+      final String filename = (_name + "_instanceTree.jpg");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = system.getName();
-      String _escapedString_1 = this.escapedString(_name_1);
-      _builder.append(_escapedString_1, "");
+      String _escapedString = this.escapedString(_name_1);
+      _builder.append(_escapedString, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       Documentation _docu = system.getDocu();
@@ -328,12 +478,14 @@ public class DocGen {
       _builder.append("\\level{3}{Instance Tree}");
       _builder.newLine();
       {
-        String _fileExists = this.fileExists(filenamei);
+        String _imagePath = this.getImagePath(filename);
+        String _fileExists = this.fileExists(ctx.model, _imagePath);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
+          String _imagePath_1 = this.getImagePath(filename);
           String _name_2 = system.getName();
-          String _plus_2 = (_name_2 + " Instance Tree");
-          CharSequence _includeGraphics = this.includeGraphics(latexFilenamei, "0.5", _plus_2);
+          String _plus = (_name_2 + " Instance Tree");
+          CharSequence _includeGraphics = this.includeGraphics(_imagePath_1, this.IMGWIDTH_DEFAULT, _plus);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
         }
@@ -343,31 +495,12 @@ public class DocGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateAllSubSysClassDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
-      for(final SubSystemClass ssc : _subSystemClasses) {
-        CharSequence _generateSubSysClassDoc = this.generateSubSysClassDoc(root, model, ssc);
-        _builder.append(_generateSubSysClassDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence generateSubSysClassDoc(final Root root, final RoomModel model, final SubSystemClass ssc) {
+  private CharSequence _generateDoc(final SubSystemClass ssc, final DocGen.DocGenContext ctx) {
     CharSequence _xblockexpression = null;
     {
-      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus = (_docGenerationTargetPath + "images\\");
       String _name = ssc.getName();
       String _escapedString = this.escapedString(_name);
-      String _plus_1 = (_plus + _escapedString);
-      String filename = (_plus_1 + "_structure.jpg");
-      String _replaceAll = filename.replaceAll("\\\\", "/");
-      filename = _replaceAll;
-      String latexFilename = filename.replaceAll("/", "//");
+      final String filename = (_escapedString + "_structure.jpg");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = ssc.getName();
@@ -382,12 +515,14 @@ public class DocGen {
       _builder.append("\\level{3}{Structure}");
       _builder.newLine();
       {
-        String _fileExists = this.fileExists(filename);
+        String _imagePath = this.getImagePath(filename);
+        String _fileExists = this.fileExists(ctx.model, _imagePath);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
+          String _imagePath_1 = this.getImagePath(filename);
           String _name_2 = ssc.getName();
-          String _plus_2 = (_name_2 + " Structure");
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_2);
+          String _plus = (_name_2 + " Structure");
+          CharSequence _includeGraphics = this.includeGraphics(_imagePath_1, this.IMGWIDTH_DEFAULT, _plus);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
         }
@@ -397,20 +532,7 @@ public class DocGen {
     return _xblockexpression;
   }
   
-  private CharSequence generateAllEnumerationDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
-      for(final EnumerationType et : _enumerationTypes) {
-        CharSequence _generateEnumerationDoc = this.generateEnumerationDoc(root, et);
-        _builder.append(_generateEnumerationDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence generateEnumerationDoc(final Root root, final EnumerationType dc) {
+  private CharSequence _generateDoc(final EnumerationType dc, final DocGen.DocGenContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = dc.getName();
@@ -476,20 +598,7 @@ public class DocGen {
     return _builder;
   }
   
-  private CharSequence generateAllDataClassDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<DataClass> _dataClasses = model.getDataClasses();
-      for(final DataClass dc : _dataClasses) {
-        CharSequence _generateDataClassDoc = this.generateDataClassDoc(root, dc);
-        _builder.append(_generateDataClassDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence generateDataClassDoc(final Root root, final DataClass dc) {
+  private CharSequence _generateDoc(final DataClass dc, final DocGen.DocGenContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = dc.getName();
@@ -517,138 +626,149 @@ public class DocGen {
     return _builder;
   }
   
-  private CharSequence generateAllProtocolClassDocs(final Root root, final RoomModel model) {
+  private CharSequence _generateDoc(final ProtocolClass pc, final DocGen.DocGenContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
-      for(final GeneralProtocolClass pc : _protocolClasses) {
-        CharSequence _generateProtocolClassDoc = this.generateProtocolClassDoc(root, pc);
-        _builder.append(_generateProtocolClassDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence _generateProtocolClassDoc(final Root root, final ProtocolClass pc) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
     _builder.append("\\level{2} {");
     String _name = pc.getName();
     String _escapedString = this.escapedString(_name);
-    _builder.append(_escapedString, "\t");
+    _builder.append(_escapedString, "");
     _builder.append("}");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     Documentation _docu = pc.getDocu();
     CharSequence _generateDocText = this.generateDocText(_docu);
-    _builder.append(_generateDocText, "\t");
+    _builder.append(_generateDocText, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("\\level{3}{Incoming Messages}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\begin{tabular}[ht]{|l|l|l|}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\hline");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("Message & Data & Description\\\\");
-    _builder.newLine();
     {
       List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
-      for(final Message ims : _allIncomingMessages) {
-        _builder.append("\t");
+      boolean _isEmpty = _allIncomingMessages.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\\level{3}{Incoming Messages}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\\begin{tabular}[ht]{|l|l|l|p{8cm}|}");
+        _builder.newLine();
         _builder.append("\\hline");
         _builder.newLine();
-        _builder.append("\t");
-        String _name_1 = ims.getName();
-        String _escapedString_1 = this.escapedString(_name_1);
-        _builder.append(_escapedString_1, "\t");
-        _builder.append(" & ");
+        _builder.append("Message & Data & Type & Description\\\\");
+        _builder.newLine();
         {
-          VarDecl _data = ims.getData();
-          boolean _notEquals = (!Objects.equal(_data, null));
-          if (_notEquals) {
-            _builder.append(" ");
-            VarDecl _data_1 = ims.getData();
-            String _name_2 = _data_1.getName();
-            String _escapedString_2 = this.escapedString(_name_2);
-            _builder.append(_escapedString_2, "\t");
-            _builder.append(" ");
+          List<Message> _allIncomingMessages_1 = RoomHelpers.getAllIncomingMessages(pc);
+          for(final Message ims : _allIncomingMessages_1) {
+            _builder.append("\\hline");
+            _builder.newLine();
+            String _name_1 = ims.getName();
+            String _escapedString_1 = this.escapedString(_name_1);
+            _builder.append(_escapedString_1, "");
+            _builder.append(" & ");
+            {
+              VarDecl _data = ims.getData();
+              boolean _notEquals = (!Objects.equal(_data, null));
+              if (_notEquals) {
+                _builder.append(" ");
+                VarDecl _data_1 = ims.getData();
+                String _name_2 = _data_1.getName();
+                String _escapedString_2 = this.escapedString(_name_2);
+                _builder.append(_escapedString_2, "");
+                _builder.append(" ");
+              }
+            }
+            _builder.append(" & ");
+            {
+              VarDecl _data_2 = ims.getData();
+              boolean _notEquals_1 = (!Objects.equal(_data_2, null));
+              if (_notEquals_1) {
+                _builder.append(" ");
+                VarDecl _data_3 = ims.getData();
+                RefableType _refType = _data_3.getRefType();
+                DataType _type = _refType.getType();
+                String _name_3 = _type.getName();
+                String _escapedString_3 = this.escapedString(_name_3);
+                _builder.append(_escapedString_3, "");
+                _builder.append(" ");
+              }
+            }
+            _builder.append(" & ");
+            Documentation _docu_1 = ims.getDocu();
+            CharSequence _generateDocText_1 = this.generateDocText(_docu_1);
+            _builder.append(_generateDocText_1, "");
+            _builder.append("\\\\");
+            _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append(" & ");
-        Documentation _docu_1 = ims.getDocu();
-        CharSequence _generateDocText_1 = this.generateDocText(_docu_1);
-        _builder.append(_generateDocText_1, "\t");
-        _builder.append("\\\\");
-        _builder.newLineIfNotEmpty();
+        _builder.append("\\hline");
+        _builder.newLine();
+        _builder.append("\\end{tabular}");
+        _builder.newLine();
       }
     }
-    _builder.append("\t");
-    _builder.append("\\hline");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\end{tabular}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\level{3}{Outgoing Messages}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\begin{tabular}[ht]{|l|l|l|}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\hline");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("Message & Data & Description\\\\");
-    _builder.newLine();
     {
       List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
-      for(final Message oms : _allOutgoingMessages) {
-        _builder.append("\t");
+      boolean _isEmpty_1 = _allOutgoingMessages.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("\\level{3}{Outgoing Messages}");
+        _builder.newLine();
+        _builder.append("\\begin{tabular}[ht]{|l|l|l|p{8cm}|}");
+        _builder.newLine();
         _builder.append("\\hline");
         _builder.newLine();
-        _builder.append("\t");
-        String _name_3 = oms.getName();
-        String _escapedString_3 = this.escapedString(_name_3);
-        _builder.append(_escapedString_3, "\t");
-        _builder.append(" & ");
+        _builder.append("Message & Data & Type & Description\\\\");
+        _builder.newLine();
         {
-          VarDecl _data_2 = oms.getData();
-          boolean _notEquals_1 = (!Objects.equal(_data_2, null));
-          if (_notEquals_1) {
-            _builder.append(" ");
-            VarDecl _data_3 = oms.getData();
-            String _name_4 = _data_3.getName();
+          List<Message> _allOutgoingMessages_1 = RoomHelpers.getAllOutgoingMessages(pc);
+          for(final Message oms : _allOutgoingMessages_1) {
+            _builder.append("\\hline");
+            _builder.newLine();
+            String _name_4 = oms.getName();
             String _escapedString_4 = this.escapedString(_name_4);
-            _builder.append(_escapedString_4, "\t");
-            _builder.append(" ");
+            _builder.append(_escapedString_4, "");
+            _builder.append(" & ");
+            {
+              VarDecl _data_4 = oms.getData();
+              boolean _notEquals_2 = (!Objects.equal(_data_4, null));
+              if (_notEquals_2) {
+                _builder.append(" ");
+                VarDecl _data_5 = oms.getData();
+                String _name_5 = _data_5.getName();
+                String _escapedString_5 = this.escapedString(_name_5);
+                _builder.append(_escapedString_5, "");
+                _builder.append(" ");
+              }
+            }
+            _builder.append(" & ");
+            {
+              VarDecl _data_6 = oms.getData();
+              boolean _notEquals_3 = (!Objects.equal(_data_6, null));
+              if (_notEquals_3) {
+                _builder.append(" ");
+                VarDecl _data_7 = oms.getData();
+                RefableType _refType_1 = _data_7.getRefType();
+                DataType _type_1 = _refType_1.getType();
+                String _name_6 = _type_1.getName();
+                String _escapedString_6 = this.escapedString(_name_6);
+                _builder.append(_escapedString_6, "");
+                _builder.append(" ");
+              }
+            }
+            _builder.append(" & ");
+            Documentation _docu_2 = oms.getDocu();
+            CharSequence _generateDocText_2 = this.generateDocText(_docu_2);
+            _builder.append(_generateDocText_2, "");
+            _builder.append("\\\\");
+            _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append(" & ");
-        Documentation _docu_2 = oms.getDocu();
-        CharSequence _generateDocText_2 = this.generateDocText(_docu_2);
-        _builder.append(_generateDocText_2, "\t");
-        _builder.append("\\\\");
-        _builder.newLineIfNotEmpty();
+        _builder.append("\\hline");
+        _builder.newLine();
+        _builder.append("\\end{tabular}");
+        _builder.newLine();
       }
     }
-    _builder.append("\t");
-    _builder.append("\\hline");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("\\end{tabular}\t\t\t");
-    _builder.newLine();
     return _builder;
   }
   
-  private CharSequence _generateProtocolClassDoc(final Root root, final CompoundProtocolClass pc) {
+  private CharSequence _generateDoc(final CompoundProtocolClass pc, final DocGen.DocGenContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\\level{2} {");
     String _name = pc.getName();
@@ -693,30 +813,11 @@ public class DocGen {
     return _builder;
   }
   
-  private CharSequence generateAllActorClassDocs(final Root root, final RoomModel model) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<ActorClass> _actorClasses = model.getActorClasses();
-      for(final ActorClass ac : _actorClasses) {
-        CharSequence _generateActorClassDoc = this.generateActorClassDoc(root, model, ac);
-        _builder.append(_generateActorClassDoc, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder;
-  }
-  
-  private CharSequence generateActorClassDoc(final Root root, final RoomModel model, final ActorClass ac) {
+  private CharSequence _generateDoc(final ActorClass ac, final DocGen.DocGenContext ctx) {
     CharSequence _xblockexpression = null;
     {
-      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus = (_docGenerationTargetPath + "images\\");
       String _name = ac.getName();
-      String _plus_1 = (_plus + _name);
-      String filename = (_plus_1 + "_structure.jpg");
-      String _replaceAll = filename.replaceAll("\\\\", "/");
-      filename = _replaceAll;
-      String latexFilename = filename.replaceAll("/", "//");
+      final String filename = (_name + "_structure.jpg");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{2}{");
       String _name_1 = ac.getName();
@@ -728,26 +829,61 @@ public class DocGen {
       CharSequence _generateDocText = this.generateDocText(_docu);
       _builder.append(_generateDocText, "");
       _builder.newLineIfNotEmpty();
-      _builder.append("\\level{3}{Structure}");
-      _builder.newLine();
       _builder.newLine();
       {
-        String _fileExists = this.fileExists(filename);
+        boolean _and = false;
+        String _imagePath = this.getImagePath(filename);
+        String _fileExists = this.fileExists(ctx.model, _imagePath);
         boolean _equals = _fileExists.equals("true");
-        if (_equals) {
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _or = false;
+          List<InterfaceItem> _allInterfaceItems = RoomHelpers.getAllInterfaceItems(ac);
+          boolean _isEmpty = _allInterfaceItems.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _or = true;
+          } else {
+            EList<ActorRef> _actorRefs = ac.getActorRefs();
+            boolean _isEmpty_1 = _actorRefs.isEmpty();
+            boolean _not_1 = (!_isEmpty_1);
+            _or = _not_1;
+          }
+          _and = _or;
+        }
+        if (_and) {
+          _builder.append("\\level{3}{Structure}");
+          _builder.newLine();
+          Documentation _structureDocu = ac.getStructureDocu();
+          CharSequence _generateDocText_1 = this.generateDocText(_structureDocu);
+          _builder.append(_generateDocText_1, "");
+          _builder.newLineIfNotEmpty();
+          String _imagePath_1 = this.getImagePath(filename);
           String _name_2 = ac.getName();
-          String _plus_2 = (_name_2 + " Structure");
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_2);
+          String _plus = (_name_2 + " Structure");
+          CharSequence _includeGraphics = this.includeGraphics(_imagePath_1, this.IMGWIDTH_DEFAULT, _plus);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
+        } else {
+          Documentation _structureDocu_1 = ac.getStructureDocu();
+          boolean _notEquals = (!Objects.equal(_structureDocu_1, null));
+          if (_notEquals) {
+            _builder.append("\\level{3}{Structure}");
+            _builder.newLine();
+            Documentation _structureDocu_2 = ac.getStructureDocu();
+            CharSequence _generateDocText_2 = this.generateDocText(_structureDocu_2);
+            _builder.append(_generateDocText_2, "");
+            _builder.newLineIfNotEmpty();
+          }
         }
       }
       _builder.newLine();
       {
         List<Port> _allPorts = RoomHelpers.getAllPorts(ac);
-        boolean _isEmpty = _allPorts.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
+        boolean _isEmpty_2 = _allPorts.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
           _builder.append("\\level{3}{Ports}");
           _builder.newLine();
           String _generatePortDoc = this.generatePortDoc(ac);
@@ -757,21 +893,51 @@ public class DocGen {
       }
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
-        if (_hasNonEmptyStateMachine) {
-          _builder.append("\\level{3}{Statemachine}");
+        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(ac, "BehaviorManual");
+        if (_isBehaviorAnnotationPresent) {
+          _builder.append("\\level{3}{Behavior}");
           _builder.newLine();
-          CharSequence _generateFsmDoc = this.generateFsmDoc(model, ac);
-          _builder.append(_generateFsmDoc, "");
+          Documentation _behaviorDocu = ac.getBehaviorDocu();
+          CharSequence _generateDocText_3 = this.generateDocText(_behaviorDocu);
+          _builder.append(_generateDocText_3, "");
           _builder.newLineIfNotEmpty();
+          _builder.append("The behavior for ActorClass ");
+          String _name_3 = ac.getName();
+          _builder.append(_name_3, "");
+          _builder.append(" is implemented manually.");
+          _builder.newLineIfNotEmpty();
+        } else {
+          boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+          if (_hasNonEmptyStateMachine) {
+            _builder.append("\\level{3}{Behavior}");
+            _builder.newLine();
+            Documentation _behaviorDocu_1 = ac.getBehaviorDocu();
+            CharSequence _generateDocText_4 = this.generateDocText(_behaviorDocu_1);
+            _builder.append(_generateDocText_4, "");
+            _builder.newLineIfNotEmpty();
+            CharSequence _generateFsmDoc = this.generateFsmDoc(ctx.model, ac);
+            _builder.append(_generateFsmDoc, "");
+            _builder.newLineIfNotEmpty();
+          } else {
+            Documentation _behaviorDocu_2 = ac.getBehaviorDocu();
+            boolean _notEquals_1 = (!Objects.equal(_behaviorDocu_2, null));
+            if (_notEquals_1) {
+              _builder.append("\\level{3}{Behavior}");
+              _builder.newLine();
+              Documentation _behaviorDocu_3 = ac.getBehaviorDocu();
+              CharSequence _generateDocText_5 = this.generateDocText(_behaviorDocu_3);
+              _builder.append(_generateDocText_5, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _builder.newLine();
       {
         EList<Attribute> _attributes = ac.getAttributes();
-        boolean _isEmpty_1 = _attributes.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
+        boolean _isEmpty_3 = _attributes.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
           _builder.append("\\level{3}{Attributes}");
           _builder.newLine();
           EList<Attribute> _attributes_1 = ac.getAttributes();
@@ -783,9 +949,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<StandardOperation> _operations = ac.getOperations();
-        boolean _isEmpty_2 = _operations.isEmpty();
-        boolean _not_2 = (!_isEmpty_2);
-        if (_not_2) {
+        boolean _isEmpty_4 = _operations.isEmpty();
+        boolean _not_4 = (!_isEmpty_4);
+        if (_not_4) {
           _builder.append("\\level{3}{Operations}");
           _builder.newLine();
           EList<StandardOperation> _operations_1 = ac.getOperations();
@@ -802,24 +968,20 @@ public class DocGen {
   private CharSequence generateFsmDoc(final RoomModel model, final ActorClass ac) {
     CharSequence _xblockexpression = null;
     {
-      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus = (_docGenerationTargetPath + "images\\");
       String _name = ac.getName();
-      String _plus_1 = (_plus + _name);
-      String filename = (_plus_1 + "_behavior.jpg");
-      String _replaceAll = filename.replaceAll("\\\\", "/");
-      filename = _replaceAll;
-      String latexFilename = filename.replaceAll("/", "//");
+      final String filename = (_name + "_behavior.jpg");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Top Level}");
       _builder.newLine();
       {
-        String _fileExists = this.fileExists(filename);
+        String _imagePath = this.getImagePath(filename);
+        String _fileExists = this.fileExists(model, _imagePath);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
+          String _imagePath_1 = this.getImagePath(filename);
           String _name_1 = ac.getName();
-          String _plus_2 = (_name_1 + " Top State");
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_2);
+          String _plus = (_name_1 + " Top State");
+          CharSequence _includeGraphics = this.includeGraphics(_imagePath_1, this.IMGWIDTH_DEFAULT, _plus);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
         }
@@ -837,8 +999,8 @@ public class DocGen {
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
               String _genStatePathName = CodegenHelpers.getGenStatePathName(s);
-              String _replaceAll_1 = _genStatePathName.replaceAll("_", "\\\\_");
-              _builder.append(_replaceAll_1, "");
+              String _replaceAll = _genStatePathName.replaceAll("_", "\\\\_");
+              _builder.append(_replaceAll, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
               _builder.append("\\newline");
@@ -954,7 +1116,7 @@ public class DocGen {
   
   private String generatePortDoc(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\\begin{tabular}[ht]{|l|l|l|l|l|l|}");
+    _builder.append("\\begin{tabular}[ht]{|l|l|l|l|l|p{5cm}|}");
     _builder.newLine();
     _builder.append("\\hline");
     _builder.newLine();
@@ -1000,34 +1162,30 @@ public class DocGen {
   private String generateStateDoc(final RoomModel model, final ActorClass ac, final State state) {
     String _xblockexpression = null;
     {
-      String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
-      String _plus = (_docGenerationTargetPath + "images\\");
       String _name = ac.getName();
-      String _plus_1 = (_plus + _name);
-      String _plus_2 = (_plus_1 + "_");
+      String _plus = (_name + "_");
       String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
-      String _plus_3 = (_plus_2 + _genStatePathName);
-      String filename = (_plus_3 + "_behavior.jpg");
-      String _replaceAll = filename.replaceAll("\\\\", "/");
-      filename = _replaceAll;
-      String latexFilename = filename.replaceAll("/", "//");
+      String _plus_1 = (_plus + _genStatePathName);
+      final String filename = (_plus_1 + "_behavior.jpg");
       this.logger.logInfo(("Gen Filename: " + filename));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Subgraph ");
       String _genStatePathName_1 = CodegenHelpers.getGenStatePathName(state);
-      String _replaceAll_1 = _genStatePathName_1.replaceAll("_", "\\\\_");
-      _builder.append(_replaceAll_1, "");
+      String _replaceAll = _genStatePathName_1.replaceAll("_", "\\\\_");
+      _builder.append(_replaceAll, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
       {
-        String _fileExists = this.fileExists(filename);
+        String _imagePath = this.getImagePath(filename);
+        String _fileExists = this.fileExists(model, _imagePath);
         boolean _equals = _fileExists.equals("true");
         if (_equals) {
+          String _imagePath_1 = this.getImagePath(filename);
           String _name_1 = ac.getName();
-          String _plus_4 = (_name_1 + "_");
+          String _plus_2 = (_name_1 + "_");
           String _genStatePathName_2 = CodegenHelpers.getGenStatePathName(state);
-          String _plus_5 = (_plus_4 + _genStatePathName_2);
-          CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_5);
+          String _plus_3 = (_plus_2 + _genStatePathName_2);
+          CharSequence _includeGraphics = this.includeGraphics(_imagePath_1, this.IMGWIDTH_DEFAULT, _plus_3);
           _builder.append(_includeGraphics, "");
           _builder.newLineIfNotEmpty();
         }
@@ -1045,8 +1203,8 @@ public class DocGen {
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
               String _genStatePathName_3 = CodegenHelpers.getGenStatePathName(s);
-              String _replaceAll_2 = _genStatePathName_3.replaceAll("_", "\\\\_");
-              _builder.append(_replaceAll_2, "");
+              String _replaceAll_1 = _genStatePathName_3.replaceAll("_", "\\\\_");
+              _builder.append(_replaceAll_1, "");
               _builder.append("}:");
               _builder.newLineIfNotEmpty();
               _builder.append("\\newline");
@@ -1118,7 +1276,7 @@ public class DocGen {
       boolean _isEmpty = attributes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        _builder.append("\\begin{tabular}[ht]{|l|l|l|}");
+        _builder.append("\\begin{tabular}[ht]{|l|l|p{8cm}|}");
         _builder.newLine();
         _builder.append("\\hline");
         _builder.newLine();
@@ -1270,7 +1428,8 @@ public class DocGen {
         {
           EList<String> _lines = doc.getLines();
           for(final String line : _lines) {
-            _builder.append(line, "");
+            String _escapedString = this.escapedString(line);
+            _builder.append(_escapedString, "");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -1281,8 +1440,10 @@ public class DocGen {
     return _builder;
   }
   
-  private String fileExists(final String f) {
-    final File file = new File(f);
+  private String fileExists(final RoomModel model, final String f) {
+    String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+    final String absPath = (_docGenerationTargetPath + f);
+    final File file = new File(absPath);
     final boolean exist = file.exists();
     if ((exist == true)) {
       this.logger.logInfo(("File found ! " + f));
@@ -1293,15 +1454,17 @@ public class DocGen {
     }
   }
   
-  private CharSequence includeGraphics(final String filename, final String scale, final String caption) {
+  private CharSequence includeGraphics(final String filename, final String width, final String caption) {
     CharSequence _xblockexpression = null;
     {
       String latexCaption = caption.replaceAll("_", "\\\\_");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\\begin{center}");
+      _builder.append("{");
       _builder.newLine();
-      _builder.append("\\includegraphics[scale=");
-      _builder.append(scale, "");
+      _builder.append("\\centering{}");
+      _builder.newLine();
+      _builder.append("\\includegraphics[width=");
+      _builder.append(width, "");
       _builder.append("]{");
       _builder.append(filename, "");
       _builder.append("}");
@@ -1310,7 +1473,7 @@ public class DocGen {
       _builder.append(latexCaption, "");
       _builder.append("}");
       _builder.newLineIfNotEmpty();
-      _builder.append("\\end{center}");
+      _builder.append("}");
       _builder.newLine();
       _xblockexpression = _builder;
     }
@@ -1321,14 +1484,57 @@ public class DocGen {
     return text.replace("_", "\\_");
   }
   
-  private CharSequence generateProtocolClassDoc(final Root root, final GeneralProtocolClass pc) {
-    if (pc instanceof CompoundProtocolClass) {
-      return _generateProtocolClassDoc(root, (CompoundProtocolClass)pc);
-    } else if (pc instanceof ProtocolClass) {
-      return _generateProtocolClassDoc(root, (ProtocolClass)pc);
+  private String getImagePath(final String filename) {
+    String filenamei = ((this.IMGDIR_DEFAULT + "/") + filename);
+    String _replaceAll = filenamei.replaceAll("\\\\", "/");
+    filenamei = _replaceAll;
+    return filenamei;
+  }
+  
+  private void saveAs(final CharSequence content, final String filename) {
+    this.fileAccess.generateFile(filename, content);
+  }
+  
+  private String docFragmentName(final RoomClass rc) {
+    String _name = rc.getName();
+    return (_name + ".tex");
+  }
+  
+  private CharSequence generateImport(final RoomClass rc) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _docFragmentName = this.docFragmentName(rc);
+    CharSequence _generateImport = this.generateImport(_docFragmentName);
+    _builder.append(_generateImport, "");
+    return _builder;
+  }
+  
+  private CharSequence generateImport(final String name) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\\subimport*{./}{");
+    _builder.append(name, "");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  private CharSequence generateDoc(final RoomClass ac, final DocGen.DocGenContext ctx) {
+    if (ac instanceof ActorClass) {
+      return _generateDoc((ActorClass)ac, ctx);
+    } else if (ac instanceof DataClass) {
+      return _generateDoc((DataClass)ac, ctx);
+    } else if (ac instanceof SubSystemClass) {
+      return _generateDoc((SubSystemClass)ac, ctx);
+    } else if (ac instanceof CompoundProtocolClass) {
+      return _generateDoc((CompoundProtocolClass)ac, ctx);
+    } else if (ac instanceof EnumerationType) {
+      return _generateDoc((EnumerationType)ac, ctx);
+    } else if (ac instanceof LogicalSystem) {
+      return _generateDoc((LogicalSystem)ac, ctx);
+    } else if (ac instanceof ProtocolClass) {
+      return _generateDoc((ProtocolClass)ac, ctx);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(root, pc).toString());
+        Arrays.<Object>asList(ac, ctx).toString());
     }
   }
 }

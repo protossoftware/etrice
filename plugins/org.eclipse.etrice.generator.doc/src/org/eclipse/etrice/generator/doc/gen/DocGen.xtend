@@ -36,6 +36,7 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
+import org.eclipse.etrice.core.room.RoomClass
 
 @Singleton
 class DocGen {
@@ -44,20 +45,46 @@ class DocGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger
 	
+	final val IMGDIR_DEFAULT = "./images"
+	final val IMGWIDTH_DEFAULT = "1.0\\textwidth"
+	
+	static class DocGenContext {
+		val Root root
+		val RoomModel model
+		
+		new(Root r, RoomModel m) {
+			root = r
+			model = m
+		}
+		
+	}
+	
 	def doGenerate(Root root) {
 		for (model: root.models) {
+			val ctx = new DocGenContext(root,model)
 			var path = model.docGenerationTargetPath
 			var file = model.name+".tex"
 			logger.logInfo("generating LaTeX documentation: '"+file+"' in '"+path+"'")
 			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(file, root.generateModelDoc(model))
+			// Save documentation fragments for RoomModel children
+			model.systems.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.subSystemClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.protocolClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.enumerationTypes.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.dataClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.actorClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			// Save top-level documentation for RoomModel
+			generateModelDoc(ctx).saveAs(file)
 		}
 	}
 	
-	def private generateModelDoc(Root root, RoomModel model) {'''
+	def private generateModelDoc(DocGenContext ctx) {
+		var model = ctx.model
+		'''
 		\documentclass[titlepage]{article}
+		\usepackage{import}
 		\usepackage{graphicx}
-		\IfFileExists{../doc/userinputs.tex}{\input{../doc/userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... 
+		\IfFileExists{../doc/userinputs.tex}{\subimport{../doc/}{userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... 
 		\usepackage[a4paper,text={160mm,255mm},centering,headsep=5mm,footskip=10mm]{geometry}
 		\usepackage{nonfloat}
 		\parindent 0pt
@@ -124,72 +151,83 @@ class DocGen {
 		\newpage
 		\section{Model Description}
 		«model.docu.generateDocText»
-		\section{Logical System Description}
-		«root.generateAllLogicalSystemDocs(model)»
-		\section{Subsystem Description}
-		«root.generateAllSubSysClassDocs(model)»
-		\section{Protocol Class Description}
-		«root.generateAllProtocolClassDocs(model)»
-		\section{Enumeration Description}
-		«root.generateAllEnumerationDocs(model)»
-		\section{Data Class Description}
-		«root.generateAllDataClassDocs(model)»
-		\section{Actor Class Description}
-		«root.generateAllActorClassDocs(model)»
+		
+		«IF !model.systems.empty»
+			\section{Logical System Classes}
+			«FOR s : model.systems»
+				«s.generateImport»
+			«ENDFOR»
+			\newpage
+		«ENDIF»
+		
+		«IF !model.subSystemClasses.empty»
+			\section{Subsystem Classes}
+			«FOR s : model.subSystemClasses»
+				«s.generateImport»
+			«ENDFOR»
+			\newpage
+		«ENDIF»
+		
+		«IF !model.protocolClasses.empty»
+			\section{Protocol Classes}
+			«FOR c : model.protocolClasses»
+				«c.generateImport»
+			«ENDFOR»
+			\newpage
+		«ENDIF»
+		
+		«IF !model.enumerationTypes.empty»
+			\section{Enumeration Types}
+			«FOR e : model.enumerationTypes»
+				«e.generateImport»
+			«ENDFOR»
+			\newpage
+		«ENDIF»
+		
+		«IF !model.dataClasses.empty»
+			\section{Data Classes}
+			«FOR c : model.dataClasses»
+				«c.generateImport»
+			«ENDFOR»
+			\newpage
+		«ENDIF»
+		
+		«IF !model.actorClasses.empty»
+			\section{Actor Classes}
+			«FOR c : model.actorClasses»
+				«c.generateImport»
+			«ENDFOR»
+		«ENDIF»
 		\end{document}
 	'''
 	}
 	
-	def private generateAllLogicalSystemDocs(Root root, RoomModel model){'''
-	«FOR sys : model.systems»
-		«root.generateLogicalSystemDoc(model, sys)»
-	«ENDFOR»
-	'''
-	}
-	
-	def private generateLogicalSystemDoc(Root root, RoomModel model, LogicalSystem system) {
-		var filenamei = model.docGenerationTargetPath + "images\\" + system.name.escapedString + "_instanceTree.jpg"
-		filenamei = filenamei.replaceAll("\\\\","/");
-		var latexFilenamei = filenamei.replaceAll("/","//") 
+	def private dispatch generateDoc(LogicalSystem system, DocGenContext ctx) {
+		val filename = system.name + "_instanceTree.jpg"
 		'''
 		\level{2}{«system.name.escapedString»}
 		«system.docu.generateDocText»
 		\level{3}{Instance Tree}
-		«IF fileExists(filenamei).equals("true")»
-			«includeGraphics(latexFilenamei,"0.5",system.name + " Instance Tree")»
+		«IF ctx.model.fileExists(filename.imagePath).equals("true")»
+			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,system.name + " Instance Tree")»
 		«ENDIF»
 		'''
 	}
 	
-	def private generateAllSubSysClassDocs(Root root, RoomModel model){'''
-	«FOR ssc : model.subSystemClasses»
-		«root.generateSubSysClassDoc(model, ssc)»
-	«ENDFOR»
-	'''
-	}
-
-	def private generateSubSysClassDoc(Root root, RoomModel model, SubSystemClass ssc) {
-		var filename = model.docGenerationTargetPath + "images\\" + ssc.name.escapedString + "_structure.jpg"
-		filename = filename.replaceAll("\\\\","/");
-		var latexFilename = filename.replaceAll("/","//")
+	def private dispatch generateDoc(SubSystemClass ssc, DocGenContext ctx) {
+		val filename = ssc.name.escapedString + "_structure.jpg"
 		
 		'''
 		\level{2}{«ssc.name.escapedString»}
 		«ssc.docu.generateDocText»
 		\level{3}{Structure}
-		«IF fileExists(filename).equals("true")»
-			«includeGraphics(latexFilename,"0.4",ssc.name + " Structure")»
+		«IF ctx.model.fileExists(filename.imagePath).equals("true")»
+			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,ssc.name + " Structure")»
 		«ENDIF»
 		'''
 	}
 	
-	def private generateAllEnumerationDocs(Root root, RoomModel model){'''
-		«FOR et : model.enumerationTypes»
-			«root.generateEnumerationDoc(et)»
-		«ENDFOR»		
-	'''}
-
-	def private generateEnumerationDoc(Root root, EnumerationType dc) {
+	def private dispatch generateDoc(EnumerationType dc, DocGenContext ctx) {
 	'''
 		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
@@ -211,13 +249,7 @@ class DocGen {
 	'''	
 	}
 	
-	def private generateAllDataClassDocs(Root root, RoomModel model){'''
-		«FOR dc : model.dataClasses»
-			«root.generateDataClassDoc(dc)»
-		«ENDFOR»		
-	'''}
-
-	def private generateDataClassDoc(Root root, DataClass dc) {'''
+	def private dispatch generateDoc(DataClass dc, DocGenContext ctx) {'''
 		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
 		\level{3}{Attributes}
@@ -227,43 +259,39 @@ class DocGen {
 		«dc.operations.generateOperationsDoc»
 	'''	
 	}
-
-	def private generateAllProtocolClassDocs(Root root, RoomModel model) {'''
-		«FOR pc : model.protocolClasses»
-			«root.generateProtocolClassDoc(pc)»
-		«ENDFOR»
-	'''	
-	}
 	
-	def private dispatch generateProtocolClassDoc(Root root, ProtocolClass pc) {'''
+	def private dispatch generateDoc(ProtocolClass pc, DocGenContext ctx) {'''
 		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
-		\level{3}{Incoming Messages}
-	
-		\begin{tabular}[ht]{|l|l|l|}
-		\hline
-		Message & Data & Description\\
-		«FOR ims : pc.allIncomingMessages»
+		«IF !pc.allIncomingMessages.empty»
+			\level{3}{Incoming Messages}
+			
+			\begin{tabular}[ht]{|l|l|l|p{8cm}|}
 			\hline
-			«ims.name.escapedString» & «IF ims.data != null» «ims.data.name.escapedString» «ENDIF» & «ims.docu.generateDocText»\\
-		«ENDFOR»
-		\hline
-		\end{tabular}
-		
-		\level{3}{Outgoing Messages}
-		\begin{tabular}[ht]{|l|l|l|}
-		\hline
-		Message & Data & Description\\
-		«FOR oms : pc.allOutgoingMessages»
+			Message & Data & Type & Description\\
+			«FOR ims : pc.allIncomingMessages»
+				\hline
+				«ims.name.escapedString» & «IF ims.data != null» «ims.data.name.escapedString» «ENDIF» & «IF ims.data != null» «ims.data.refType.type.name.escapedString» «ENDIF» & «ims.docu.generateDocText»\\
+			«ENDFOR»
 			\hline
-			«oms.name.escapedString» & «IF oms.data != null» «oms.data.name.escapedString» «ENDIF» & «oms.docu.generateDocText»\\
-		«ENDFOR»
-		\hline
-		\end{tabular}			
+			\end{tabular}
+		«ENDIF»
+		«IF !pc.allOutgoingMessages.empty»
+			\level{3}{Outgoing Messages}
+			\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+			\hline
+			Message & Data & Type & Description\\
+			«FOR oms : pc.allOutgoingMessages»
+				\hline
+				«oms.name.escapedString» & «IF oms.data != null» «oms.data.name.escapedString» «ENDIF» & «IF oms.data != null» «oms.data.refType.type.name.escapedString» «ENDIF» & «oms.docu.generateDocText»\\
+			«ENDFOR»
+			\hline
+			\end{tabular}
+		«ENDIF»
 	'''	
 	}
 	
-	def private dispatch generateProtocolClassDoc(Root root, CompoundProtocolClass pc) {'''
+	def private dispatch generateDoc(CompoundProtocolClass pc, DocGenContext ctx) {'''
 		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
 		\level{3}{Sub Protocols}
@@ -280,24 +308,19 @@ class DocGen {
 	'''
 	}
 	
-	def private generateAllActorClassDocs(Root root, RoomModel model) {'''
-		«FOR ac : model.actorClasses»
-			«root.generateActorClassDoc(model,ac)»
-		«ENDFOR»			
-		'''
-	}
-	
-	def private generateActorClassDoc(Root root, RoomModel model, ActorClass ac) {
-		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_structure.jpg"
-		filename = filename.replaceAll("\\\\","/");
-		var latexFilename = filename.replaceAll("/","//") 
+	def dispatch private generateDoc(ActorClass ac, DocGenContext ctx) {
+		val filename = ac.name + "_structure.jpg"
 		'''
 		\level{2}{«ac.name.escapedString»}
 		«ac.docu.generateDocText»
-		\level{3}{Structure}
 		
-		«IF fileExists(filename).equals("true")»
-			«includeGraphics(latexFilename,"0.4",ac.name + " Structure")»
+		«IF ctx.model.fileExists(filename.imagePath).equals("true") && (!ac.allInterfaceItems.empty || !ac.actorRefs.empty)»
+			\level{3}{Structure}
+			«ac.structureDocu.generateDocText»
+			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,ac.name + " Structure")»
+		«ELSEIF ac.structureDocu != null»
+			\level{3}{Structure}
+			«ac.structureDocu.generateDocText»
 		«ENDIF»
 		
 		«IF !ac.allPorts.empty»
@@ -305,9 +328,17 @@ class DocGen {
 			«generatePortDoc(ac)»
 		«ENDIF»
 		
-		«IF ac.hasNonEmptyStateMachine»
-			\level{3}{Statemachine}
-			«generateFsmDoc(model, ac)»
+		«IF ac.isBehaviorAnnotationPresent("BehaviorManual")»
+			\level{3}{Behavior}
+			«ac.behaviorDocu.generateDocText»
+			The behavior for ActorClass «ac.name» is implemented manually.
+		«ELSEIF ac.hasNonEmptyStateMachine»
+			\level{3}{Behavior}
+			«ac.behaviorDocu.generateDocText»
+			«generateFsmDoc(ctx.model, ac)»
+		«ELSEIF ac.behaviorDocu != null»
+			\level{3}{Behavior}
+			«ac.behaviorDocu.generateDocText»
 		«ENDIF»
 		
 		«IF !ac.attributes.empty»
@@ -323,14 +354,11 @@ class DocGen {
 	}
 
 	def private generateFsmDoc(RoomModel model, ActorClass ac){
-		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_behavior.jpg"
-		filename = filename.replaceAll("\\\\","/");
-		var latexFilename = filename.replaceAll("/","//")
-		 
+		val filename = ac.name + "_behavior.jpg"
 		'''
 		\level{4}{Top Level}
-		«IF fileExists(filename).equals("true")»
-			«includeGraphics(latexFilename,"0.4",ac.name + " Top State")»
+		«IF model.fileExists(filename.imagePath).equals("true")»
+			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,ac.name + " Top State")»
 		«ENDIF»
 		
 		\begin{par}
@@ -385,7 +413,7 @@ class DocGen {
 	
 	def private String generatePortDoc(ActorClass ac) {
 		'''
-			\begin{tabular}[ht]{|l|l|l|l|l|l|}
+			\begin{tabular}[ht]{|l|l|l|l|l|p{5cm}|}
 			\hline
 			\textbf{Name} & \textbf{Protocol} & \textbf{Type} & \textbf{Kind} & \textbf{Multiplicity} & \textbf{Description}\\
 			«FOR at : ac.allPorts»
@@ -398,15 +426,13 @@ class DocGen {
 	}
 	
 	def private String generateStateDoc(RoomModel model, ActorClass ac, State state){
-		var filename = model.docGenerationTargetPath + "images\\" + ac.name + "_" + state.genStatePathName + "_behavior.jpg"
-		filename = filename.replaceAll("\\\\","/");
-		var latexFilename = filename.replaceAll("/","//"); 
+		val filename = ac.name + "_" + state.genStatePathName + "_behavior.jpg"
 
 		logger.logInfo("Gen Filename: " + filename); 
 		'''
 		\level{4}{Subgraph «state.genStatePathName.replaceAll("_","\\\\_")»}
-		«IF fileExists(filename).equals("true")»
-			«includeGraphics(latexFilename,"0.4",ac.name + "_" + state.genStatePathName)»
+		«IF model.fileExists(filename.imagePath).equals("true")»
+			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,ac.name + "_" + state.genStatePathName)»
 		«ENDIF»
 		
 		\begin{par}
@@ -440,7 +466,7 @@ class DocGen {
 	def private generateAttributesDoc(List<Attribute> attributes) {
 		'''
 		«IF !attributes.empty»
-			\begin{tabular}[ht]{|l|l|l|}
+			\begin{tabular}[ht]{|l|l|p{8cm}|}
 			\hline
 			\textbf{Name} & \textbf{Type} & \textbf{Description}\\
 			«FOR at : attributes»
@@ -483,17 +509,17 @@ class DocGen {
 		«IF doc!=null»
 			% begin text from user Documentation
 			«FOR line: doc.lines»
-				«line»
+				«line.escapedString»
 			«ENDFOR»
 			% end text from user Documentation
 		«ENDIF»
 		'''
 	}
 	
-	def private fileExists(String f){
-		val file = new File(f);
+	def private fileExists(RoomModel model, String f){
+		val absPath = model.docGenerationTargetPath + f
+		val file = new File(absPath);
 		val exist = file.exists();
-		
 			if (exist == true) {
 				// File or directory exists
 				logger.logInfo("File found ! " + f); 
@@ -504,18 +530,40 @@ class DocGen {
 				return "false"
 		}
 	}
-		
-	def private includeGraphics(String filename, String scale, String caption){
+	
+	def private includeGraphics(String filename, String width, String caption){
 		var latexCaption = caption.replaceAll("_","\\\\_");
 		'''
-			\begin{center}
-			\includegraphics[scale=«scale»]{«filename»}
+			{
+			\centering{}
+			\includegraphics[width=«width»]{«filename»}
 			\figcaption{«latexCaption»}
-			\end{center}
+			}
 		'''
 	}
 	
 	def private escapedString(String text) {
 		text.replace("_","\\_")
 	}
+	
+	def private getImagePath(String filename) {
+		var filenamei = IMGDIR_DEFAULT + "/" + filename
+		filenamei = filenamei.replaceAll("\\\\","/")
+		return filenamei
+	}
+	
+	def private saveAs(CharSequence content, String filename) {
+		fileAccess.generateFile(filename, content)
+	}
+	
+	def private docFragmentName(RoomClass rc) {
+		rc.name + ".tex"
+	}
+	
+	def private generateImport(RoomClass rc)
+		'''«rc.docFragmentName.generateImport»'''
+	
+	def private generateImport(String name)
+		'''\subimport*{./}{«name»}
+		'''
 }
