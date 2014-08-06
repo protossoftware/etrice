@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
@@ -28,6 +29,10 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.room.util.RoomUtil;
+import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
@@ -39,6 +44,9 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 /**
  * description
  *
@@ -49,18 +57,69 @@ public class SupportUtil {
 
 	public static final String SEP = "#";
 	
-	public static EObject getOwnObject(EObject obj, ResourceSet rs) {
+	private static SupportUtil instance = null;
+	
+	
+	/**
+	 * @return the instance
+	 */
+	public static SupportUtil getInstance() {
+		if (instance==null) {
+			Injector injector = RoomUiModule.getInjector();
+	        instance = injector.getInstance(SupportUtil.class);
+		}
+		return instance;
+	}
+	
+	@Inject
+	private RoomHelpers roomHelpers;
+	@Inject
+	private ValidationUtil validationUtil;
+	@Inject
+	private RoomNameProvider roomNameProvider;
+	@Inject
+	private RoomUtil roomUtil;
+
+	/**
+	 * @return the roomHelpers
+	 */
+	public RoomHelpers getRoomHelpers() {
+		return roomHelpers;
+	}
+
+	/**
+	 * @return the validationUtil
+	 */
+	public ValidationUtil getValidationUtil() {
+		return validationUtil;
+	}
+	
+	/**
+	 * @return the roomUtil
+	 */
+	public RoomUtil getRoomUtil() {
+		return roomUtil;
+	}
+
+	/**
+	 * @return the roomNameProvider
+	 */
+	public RoomNameProvider getRoomNameProvider() {
+		return roomNameProvider;
+	}
+	
+	public EObject getOwnObject(EObject obj, ResourceSet rs) {
 		URI uri = EcoreUtil.getURI(obj);
 		EObject own = rs.getEObject(uri, true);
 		assert(own!=null): "own object must exist";
 		return own;
 	}
 	
-	public static ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, IFeatureProvider fp) {
+	public ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, IFeatureProvider fp) {
 		return addItem(obj, x, y, container, null, fp);
 	}
 	
-	public static ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
+	public ContainerShape addItem(EObject obj, int x, int y, ContainerShape container, Map<String,Anchor> ifitem2anchor, IFeatureProvider fp) {
 		AddContext addContext = new AddContext();
 
 		addContext.setNewObject(obj);
@@ -82,7 +141,7 @@ public class SupportUtil {
 		return newShape;
 	}
 
-	public static void getAnchors(ActorContainerRef acr, PictogramElement refShape,
+	public void getAnchors(ActorContainerRef acr, PictogramElement refShape,
 			final Map<String, Anchor> ifitem2anchor) {
 		
 		if (refShape instanceof ContainerShape) {
@@ -106,7 +165,7 @@ public class SupportUtil {
 		}
 	}
 	
-	public static void addRefItem(ActorContainerRef obj, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
+	public void addRefItem(ActorContainerRef obj, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(obj);
 		addContext.setTargetContainer(acShape);
@@ -115,10 +174,10 @@ public class SupportUtil {
 		
 		ContainerShape refShape = (ContainerShape) featureProvider.addIfPossible(addContext);
 		
-		SupportUtil.getAnchors(obj, refShape, ifitem2anchor);
+		getAnchors(obj, refShape, ifitem2anchor);
 	}
 
-	public static void addInterfaceItem(InterfaceItem item, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
+	public void addInterfaceItem(InterfaceItem item, ContainerShape acShape, int x, int y, IFeatureProvider featureProvider, final Map<String, Anchor> ifitem2anchor) {
 		AddContext addContext = new AddContext();
 		addContext.setNewObject(item);
 		addContext.setTargetContainer(acShape);
@@ -130,7 +189,7 @@ public class SupportUtil {
 		ifitem2anchor.put(SEP+item.getName(), pe.getAnchors().get(0));
 	}
 
-	public static void addBinding(Binding bind, IFeatureProvider featureProvider,
+	public void addBinding(Binding bind, IFeatureProvider featureProvider,
 			final Map<String, Anchor> ifitem2anchor) {
 		String ep1 = getName(bind.getEndpoint1());
 		String ep2 = getName(bind.getEndpoint2());
@@ -143,7 +202,7 @@ public class SupportUtil {
 		featureProvider.addIfPossible(context);
 	}
 
-	public static void addLayerConnection(LayerConnection lc, IFeatureProvider featureProvider,
+	public void addLayerConnection(LayerConnection lc, IFeatureProvider featureProvider,
 			final Map<String, Anchor> ifitem2anchor) {
 		String ep1 = getName(lc.getFrom());
 		String ep2 = getName(lc.getTo());
@@ -156,7 +215,7 @@ public class SupportUtil {
 		featureProvider.addIfPossible(context);
 	}
 
-	public static void addInterfaceItems(List<? extends InterfaceItem> items, int y, ContainerShape acShape, int width,
+	public void addInterfaceItems(List<? extends InterfaceItem> items, int y, ContainerShape acShape, int width,
 			IFeatureProvider fp,
 			final Map<String, Anchor> ifitem2anchor) {
 		
@@ -164,12 +223,12 @@ public class SupportUtil {
 		int delta = width/(n+1);
 		int pos = delta;
 		for (InterfaceItem item : items) {
-			SupportUtil.addInterfaceItem(item, acShape, pos+StructureClassSupport.MARGIN, y, fp, ifitem2anchor);
+			addInterfaceItem(item, acShape, pos+StructureClassSupport.MARGIN, y, fp, ifitem2anchor);
 			pos += delta;
 		}
 	}
 	
-	public static void addRefItems(List<? extends ActorContainerRef> actorRefs,
+	public void addRefItems(List<? extends ActorContainerRef> actorRefs,
 			ContainerShape acShape, int width,
 			IFeatureProvider fp, final Map<String, Anchor> ifitem2anchor) {
 		int ncols = width/ActorContainerRefSupport.DEFAULT_SIZE_X;
@@ -190,18 +249,18 @@ public class SupportUtil {
 			}
 			int x = x0+delta*col;
 			int y = y0+(ActorContainerRefSupport.MARGIN+ActorContainerRefSupport.DEFAULT_SIZE_Y)*row;
-			SupportUtil.addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, fp, ifitem2anchor);
+			addRefItem(ar, acShape, x+StructureClassSupport.MARGIN, y+StructureClassSupport.MARGIN, fp, ifitem2anchor);
 			++i;
 		}
 	}
 
-	public static String getName(BindingEndPoint ep) {
+	public String getName(BindingEndPoint ep) {
 		String ar = ep.getActorRef()==null? "":ep.getActorRef().getName();
 		String p = ep.getPort().getName();
 		return ar+SEP+p;
 	}
 
-	public static String getName(SAPoint sapt) {
+	public String getName(SAPoint sapt) {
 		if (sapt instanceof RelaySAPoint) {
 			return SEP+((RelaySAPoint)sapt).getRelay().getName();
 		}
@@ -213,15 +272,15 @@ public class SupportUtil {
 		return null;
 	}
 
-	public static String getName(SPPoint sppt) {
+	public String getName(SPPoint sppt) {
 		return sppt.getRef().getName()+SEP+sppt.getService().getName();
 	}
 
-	public static List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp) {
+	public List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp) {
 		return getInterfaceItems(shape, fp, null);
 	}
 	
-	public static List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
+	public List<InterfaceItem> getInterfaceItems(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
 		List<InterfaceItem> items = new ArrayList<InterfaceItem>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -234,11 +293,11 @@ public class SupportUtil {
 		return items;
 	}
 	
-	public static List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp) {
+	public List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp) {
 		return getRefs(shape, fp, null);
 	}
 	
-	public static List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
+	public List<ActorContainerRef> getRefs(ContainerShape shape, IFeatureProvider fp, Map<String, Anchor> ifitem2anchor) {
 		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
 		for (Shape ch : shape.getChildren()) {
 			Object bo = fp.getBusinessObjectForPictogramElement(ch);
@@ -251,7 +310,7 @@ public class SupportUtil {
 		return refs;
 	}
 
-	public static List<Binding> getBindings(Diagram diag, IFeatureProvider fp) {
+	public List<Binding> getBindings(Diagram diag, IFeatureProvider fp) {
 		List<Binding> bindings = new ArrayList<Binding>();
 		
 		for (Connection conn : diag.getConnections()) {
@@ -262,7 +321,7 @@ public class SupportUtil {
 		return bindings;
 	}
 
-	public static List<LayerConnection> getConnections(Diagram diag, IFeatureProvider fp) {
+	public List<LayerConnection> getConnections(Diagram diag, IFeatureProvider fp) {
 		List<LayerConnection> bindings = new ArrayList<LayerConnection>();
 		
 		for (Connection conn : diag.getConnections()) {
@@ -273,12 +332,12 @@ public class SupportUtil {
 		return bindings;
 	}
 	
-	public static StructureClass getParent(ICreateConnectionContext context, IFeatureProvider fp) {
+	public StructureClass getParent(ICreateConnectionContext context, IFeatureProvider fp) {
 		ContainerShape shape = (ContainerShape) context.getSourcePictogramElement().eContainer();
 		return getParent(shape, fp);
 	}
 	
-	public static StructureClass getParent(ContainerShape shape, IFeatureProvider fp) {
+	public StructureClass getParent(ContainerShape shape, IFeatureProvider fp) {
 		if(shape == null)
 			return null;
 		
@@ -294,7 +353,7 @@ public class SupportUtil {
 		return null;
 	}
 
-	public static Port getPort(Anchor anchor, IFeatureProvider fp) {
+	public Port getPort(Anchor anchor, IFeatureProvider fp) {
 		if (anchor != null) {
 			Object obj = fp.getBusinessObjectForPictogramElement(anchor.getParent());
 			if (obj instanceof Port) {
@@ -304,7 +363,7 @@ public class SupportUtil {
 		return null;
 	}
 
-	public static SPP getSPP(Anchor anchor, IFeatureProvider fp) {
+	public SPP getSPP(Anchor anchor, IFeatureProvider fp) {
 		if (anchor != null) {
 			Object obj = fp.getBusinessObjectForPictogramElement(anchor.getParent());
 			if (obj instanceof SPP) {
@@ -314,7 +373,7 @@ public class SupportUtil {
 		return null;
 	}
 	
-	public static ActorContainerRef getRef(Anchor anchor, IFeatureProvider fp) {
+	public ActorContainerRef getRef(Anchor anchor, IFeatureProvider fp) {
 		if (anchor != null) {
 			ContainerShape shape = (ContainerShape) anchor.getParent().eContainer();
 			Object bo = fp.getBusinessObjectForPictogramElement(shape);

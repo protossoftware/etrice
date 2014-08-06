@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
@@ -31,7 +30,6 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog.Where;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
@@ -98,16 +96,16 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							return false;
 
 						// find matching interface item and message
-						ActorClass ac = SupportUtil.getActorClass(diagram);
+						ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 
 						// it is crucial that we consider all emitters of
 						// messages (port, saps, spps)
 						// including base classes
-						List<InterfaceItem> items = RoomHelpers
+						List<InterfaceItem> items = SupportUtil.getInstance().getRoomHelpers()
 								.getAllInterfaceItems(ac);
 						for (InterfaceItem item : items) {
 							if (item.getName().equals(ifItemName)) {
-								List<Message> msgs = RoomHelpers
+								List<Message> msgs = SupportUtil.getInstance().getRoomHelpers()
 										.getIncoming(item);
 								for (Message msg : msgs) {
 									if (msg.getName().equals(msgName)) {
@@ -115,7 +113,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 										// trigger and add it to the state graph
 										TriggeredTransition trans = RoomFactory.eINSTANCE
 												.createTriggeredTransition();
-										trans.setName(RoomNameProvider
+										trans.setName(SupportUtil.getInstance().getRoomUtil()
 												.getUniqueTransitionName((StateGraph) state
 														.eContainer()));
 										Trigger tri = RoomFactory.eINSTANCE
@@ -139,12 +137,10 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 												.get(0);
 										Anchor anchor = shape.getAnchors().get(
 												0);
-										TransitionTerminal src = SupportUtil
-												.getTransitionTerminal(anchor,
-														fp);
-										TransitionTerminal tgt = SupportUtil
-												.getTransitionTerminal(anchor,
-														fp);
+										TransitionTerminal src = SupportUtil.getInstance()
+												.getTransitionTerminal(anchor, fp);
+										TransitionTerminal tgt = SupportUtil.getInstance()
+												.getTransitionTerminal(anchor, fp);
 										trans.setFrom(src);
 										trans.setTo(tgt);
 
@@ -196,7 +192,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							return false;
 
 						// Open StatePropertyDialog, add line, select added line
-						ActorClass ac = SupportUtil.getActorClass(diagram);
+						ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 						Shell shell = PlatformUI.getWorkbench()
 								.getActiveWorkbenchWindow().getShell();
 						StatePropertyDialog dlg = new StatePropertyDialog(
@@ -240,7 +236,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							return false;
 
 						// Open StatePropertyDialog, add line, select added line
-						ActorClass ac = SupportUtil.getActorClass(diagram);
+						ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 						Shell shell = PlatformUI.getWorkbench()
 								.getActiveWorkbenchWindow().getShell();
 						StatePropertyDialog dlg = new StatePropertyDialog(
@@ -385,7 +381,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 
 							// Open StatePropertyDialog & select the offending
 							// code
-							ActorClass ac = SupportUtil.getActorClass(diagram);
+							ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 							Shell shell = PlatformUI.getWorkbench()
 									.getActiveWorkbenchWindow().getShell();
 							StatePropertyDialog dlg = new StatePropertyDialog(
@@ -421,7 +417,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 							Shell shell = PlatformUI.getWorkbench()
 									.getActiveWorkbenchWindow().getShell();
 							TransitionPropertyDialog dlg = new TransitionPropertyDialog(
-									shell, SupportUtil.getActorClass(diagram),
+									shell, SupportUtil.getInstance().getActorClass(diagram),
 									transition);
 							dlg.setCodeSelectionString(codeString);
 							dlg.setMessageDialogContents(

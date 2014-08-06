@@ -36,6 +36,7 @@ import com.google.inject.Inject;
 public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	@Inject private ILanguageExtension langExt;
+	@Inject private CodegenHelpers codegenHelpers;
 	private ExpandedActorClass xpac;
 	private boolean dataDriven;
 
@@ -65,25 +66,25 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 		if (tr.getAction()!=null && !tr.getAction().getLines().isEmpty()) {
 			if (tr instanceof InitialTransition)
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
 				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
 				String dataArg = result[0];
 				
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 			}
 		}
 		return "";
 	}
 
 	public String genEntryOperationCall(State state) {
-		return CodegenHelpers.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return codegenHelpers.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genExitOperationCall(State state) {
-		return CodegenHelpers.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return codegenHelpers.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {
@@ -108,9 +109,9 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	public String genReturnState(State state, boolean executeEntryCode) {
 		if (executeEntryCode)
-			return "return " + CodegenHelpers.getGenStateId(state) + ";";
+			return "return " + codegenHelpers.getGenStateId(state) + ";";
 		else
-			return "return " + CodegenHelpers.getGenStateId(state) + " + STATE_MAX;";
+			return "return " + codegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
 	public String genTypedData(TransitionChain tc) {

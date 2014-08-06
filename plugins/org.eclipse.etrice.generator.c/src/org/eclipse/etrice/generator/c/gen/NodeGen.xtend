@@ -45,14 +45,14 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import static extension org.eclipse.etrice.core.common.base.util.BaseHelpers.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.common.converter.TimeConverter
 
 @Singleton
 class NodeGen {
 	
+	@Inject extension RoomHelpers
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers

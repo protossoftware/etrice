@@ -34,7 +34,8 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 	
 	private Root root;
 	private ExpandedActorClass xpac;
-
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -108,7 +109,7 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
 		
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
-		assertEquals("choicepoint name", "CP1", RoomNameProvider.getFullPath(cp));
+		assertEquals("choicepoint name", "CP1", roomNameProvider.getFullPath(cp));
 		assertEquals("number of incoming transitions", 1, xpac.getIncomingTransitions(cp).size());
 		assertEquals("number of outgoing transitions", 4, xpac.getOutgoingTransitions(cp).size());
 		
@@ -128,13 +129,13 @@ public class TestStatesInheritance extends TestInstanceModelBuilderBase {
 
 		TransitionChain chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", roomNameProvider.getFullPath(chain.getTransition()));
 		
 		t = (Transition) getStateGraphItem(cts, "State3_TRANS_tr8_FROM_tp6_TO_State2");
 		assertNotNull("transition", t);
 
 		chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tr12_FROM_State5_TO_State3_tp6_BY_aport", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr12_FROM_State5_TO_State3_tp6_BY_aport", roomNameProvider.getFullPath(chain.getTransition()));
 	}
 }

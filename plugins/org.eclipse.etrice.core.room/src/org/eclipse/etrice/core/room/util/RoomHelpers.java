@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -79,8 +80,8 @@ import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+
+import com.google.common.base.Function;
 
 /**
  * This class provides a collection of convenience functions that extract implicit information
@@ -103,7 +104,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param ac the {@link ActorClass}
 	 * @return a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 */
-	public static List<ActorClass> getClassHierarchy(ActorClass ac) {
+	public List<ActorClass> getClassHierarchy(ActorClass ac) {
 		ArrayList<ActorClass> result = new ArrayList<ActorClass>();
 		
 		while (ac!=null) {
@@ -124,7 +125,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all (external) interface items
 	 */
-	public static List<InterfaceItem> getInterfaceItems(StructureClass sc, boolean includeInherited) {
+	public List<InterfaceItem> getInterfaceItems(StructureClass sc, boolean includeInherited) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 		
 		if (sc instanceof ActorClass) {
@@ -160,7 +161,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link ActorContainerRef}s of a structure class.
 	 */
-	public static List<ActorContainerRef> getRefs(StructureClass sc, boolean includeInherited) {
+	public List<ActorContainerRef> getRefs(StructureClass sc, boolean includeInherited) {
 		ArrayList<ActorContainerRef> result = new ArrayList<ActorContainerRef>();
 
 		if (sc instanceof ActorClass) {
@@ -192,7 +193,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Binding}s of a {@link StructureClass}.
 	 */
-	public static List<Binding> getBindings(StructureClass sc, boolean includeInherited) {
+	public List<Binding> getBindings(StructureClass sc, boolean includeInherited) {
 		ArrayList<Binding> result = new ArrayList<Binding>();
 
 		if (sc instanceof ActorClass) {
@@ -225,7 +226,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link LayerConnection}s of a {@link StructureClass}.
 	 */
-	public static List<LayerConnection> getConnections(StructureClass sc, boolean includeInherited) {
+	public List<LayerConnection> getConnections(StructureClass sc, boolean includeInherited) {
 		ArrayList<LayerConnection> result = new ArrayList<LayerConnection>();
 
 		if (sc instanceof ActorClass) {
@@ -257,7 +258,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 1 of a {@link DataClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode1(DataClass dc) {
+	public String getDeepUserCode1(DataClass dc) {
 		return getDeepUserCode(dc, RoomPackage.Literals.DATA_CLASS__USER_CODE1);
 	}
 
@@ -270,7 +271,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 2 of a {@link DataClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode2(DataClass dc) {
+	public String getDeepUserCode2(DataClass dc) {
 		return getDeepUserCode(dc, RoomPackage.Literals.DATA_CLASS__USER_CODE2);
 	}
 
@@ -283,7 +284,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 3 of a {@link DataClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode3(DataClass dc) {
+	public String getDeepUserCode3(DataClass dc) {
 		return getDeepUserCode(dc, RoomPackage.Literals.DATA_CLASS__USER_CODE3);
 	}
 
@@ -296,7 +297,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 1 of a {@link ProtocolClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode1(ProtocolClass pc) {
+	public String getDeepUserCode1(ProtocolClass pc) {
 		return getDeepUserCode(pc, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE1);
 	}
 
@@ -308,7 +309,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 2 of a {@link ProtocolClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode2(ProtocolClass pc) {
+	public String getDeepUserCode2(ProtocolClass pc) {
 		return getDeepUserCode(pc, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE2);
 	}
 
@@ -320,7 +321,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 3 of a {@link ProtocolClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode3(ProtocolClass pc) {
+	public String getDeepUserCode3(ProtocolClass pc) {
 		return getDeepUserCode(pc, RoomPackage.Literals.PROTOCOL_CLASS__USER_CODE3);
 	}
 
@@ -332,7 +333,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 1 of a {@link ActorContainerClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode1(ActorContainerClass ac) {
+	public String getDeepUserCode1(ActorContainerClass ac) {
 		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE1);
 	}
 
@@ -344,7 +345,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 2 of a {@link ActorContainerClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode2(ActorContainerClass ac) {
+	public String getDeepUserCode2(ActorContainerClass ac) {
 		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE2);
 	}
 
@@ -356,11 +357,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the user code 3 of a {@link ActorContainerClass} including inherited case class code as String
 	 */
-	public static String getDeepUserCode3(ActorContainerClass ac) {
+	public String getDeepUserCode3(ActorContainerClass ac) {
 		return getDeepUserCode(ac, RoomPackage.Literals.ACTOR_CONTAINER_CLASS__USER_CODE3);
 	}
 	
-	private static String getDeepUserCode(EObject obj, EStructuralFeature code) {
+	private String getDeepUserCode(EObject obj, EStructuralFeature code) {
 		StringBuilder result = new StringBuilder();
 		
 		while (obj!=null) {
@@ -395,7 +396,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return whether a {@link State} has sub structure
 	 */
-	public static boolean hasSubStructure(State state, ActorClass ac) {
+	public boolean hasSubStructure(State state, ActorClass ac) {
 		if (hasDirectSubStructure(state))
 			return true;
 		
@@ -443,7 +444,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return whether a {@link State} has direct sub structure
 	 */
-	public static boolean hasDirectSubStructure(State s) {
+	public boolean hasDirectSubStructure(State s) {
 		return !isEmpty(s.getSubgraph());
 	}
 
@@ -454,11 +455,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return whether an {@link ActorClass} has a non-empty {@link StateGraph}
 	 */
-	public static boolean hasNonEmptyStateMachine(ActorClass ac) {
+	public boolean hasNonEmptyStateMachine(ActorClass ac) {
 		return !isEmpty(ac.getStateMachine());
 	}
 	
-	public static boolean isEmpty(StateGraph sg) {
+	public boolean isEmpty(StateGraph sg) {
 		if (sg==null)
 			return true;
 		
@@ -481,7 +482,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return <code>true</code> if the state resides in the top level (i.e.
 	 * directly in the actor's state machine)
 	 */
-	public static boolean isTopLevel(StateGraphNode s) {
+	public boolean isTopLevel(StateGraphNode s) {
 		return !(s.eContainer().eContainer() instanceof State);
 	}
 	
@@ -489,7 +490,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param s a {@link State}
 	 * @return <code>true</code> if the state has no sub-graph
 	 */
-	public static boolean isLeaf(State s) {
+	public boolean isLeaf(State s) {
 		return s.getSubgraph()==null;
 	}
 	
@@ -497,7 +498,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param state a {@link State}
 	 * @return a list of all leaf states recursively
 	 */
-	public static List<State> getLeafStateList(State state) {
+	public List<State> getLeafStateList(State state) {
 		return getLeafStateList(state.getSubgraph());
 	}
 	
@@ -505,7 +506,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param sg a {@link StateGraph}
 	 * @return a list of all leaf states recursively
 	 */
-	public static List<State> getLeafStateList(StateGraph sg) {
+	public List<State> getLeafStateList(StateGraph sg) {
 		ArrayList<State> res = new ArrayList<State>();
 		
 		if (sg!=null) {
@@ -524,7 +525,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param sg a {@link StateGraph}
 	 * @return a list of all states recursively
 	 */
-	public static List<State> getStateList(StateGraph sg) {
+	public List<State> getStateList(StateGraph sg) {
 		ArrayList<State> res = new ArrayList<State>();
 		
 		if (sg!=null) {
@@ -543,7 +544,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param sg a {@link StateGraph}
 	 * @return a list of all base states recursively
 	 */
-	public static List<State> getBaseStateList(StateGraph sg) {
+	public List<State> getBaseStateList(StateGraph sg) {
 		ArrayList<State> res = new ArrayList<State>();
 		
 		if (sg!=null) {
@@ -562,7 +563,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param ac an {@link ActorClass} 
 	 * @return all base states of the actor class
 	 */
-	public static List<State> getAllBaseStates(ActorClass ac) {
+	public List<State> getAllBaseStates(ActorClass ac) {
 		return getBaseStateList(ac.getStateMachine());
 	}
 	
@@ -571,7 +572,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return the parent state of s if there is such. If the state is on
 	 * the top level then <code>null</code> is returned
 	 */
-	public static State getParentState(StateGraphNode s) {
+	public State getParentState(StateGraphNode s) {
 		if (isTopLevel(s))
 			return null;
 		else
@@ -588,7 +589,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return the {@link RefinedState} in the derived state machine of the {@link ActorClass}
 	 * which is (indirectly) targeting the state
 	 */
-	public static State getTargettingState(State state, ActorClass ac) {
+	public State getTargettingState(State state, ActorClass ac) {
 		State targetting = state;
 		for (State s : getAllStatesRecursive(ac.getStateMachine())) {
 			State predecessor = s;
@@ -607,7 +608,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param dc the {@link DetailCode}
 	 * @return <code>true</code> if the {@link DetailCode} is null or empty.
 	 */
-	public static boolean hasDetailCode(DetailCode dc) {
+	public boolean hasDetailCode(DetailCode dc) {
 		if (dc==null)
 			return false;
 		
@@ -623,7 +624,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param trig a {@link Trigger}
 	 * @return <code>true</code> if a guard condition is defined for this trigger
 	 */
-	public static boolean hasGuard(Trigger trig) {
+	public boolean hasGuard(Trigger trig) {
 		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
 	}
 	
@@ -635,7 +636,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the entry code of a {@link State} is empty
 	 */
-	public static boolean hasEntryCode(State s, boolean includeInherited) {
+	public boolean hasEntryCode(State s, boolean includeInherited) {
 		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__ENTRY_CODE);
 	}
 
@@ -647,7 +648,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the exit code of a {@link State} is empty
 	 */
-	public static boolean hasExitCode(State s, boolean includeInherited) {
+	public boolean hasExitCode(State s, boolean includeInherited) {
 		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__EXIT_CODE);
 	}
 
@@ -659,11 +660,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the do code of a {@link State} is empty
 	 */
-	public static boolean hasDoCode(State s, boolean includeInherited) {
+	public boolean hasDoCode(State s, boolean includeInherited) {
 		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__DO_CODE);
 	}
 	
-	private static boolean hasDetailCode(State s, boolean includeInherited, EReference feature) {
+	private boolean hasDetailCode(State s, boolean includeInherited, EReference feature) {
 		DetailCode dc = (DetailCode) s.eGet(feature);
 		if (hasDetailCode(dc))
 			return true;
@@ -681,7 +682,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return  the {@link DetailCode} as String with a newline character after each command.
 	 */
-	public static String getDetailCode(DetailCode code) {
+	public String getDetailCode(DetailCode code) {
 		if (code==null || code.getLines().isEmpty())
 			return "";
 		
@@ -700,7 +701,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a concatenation of inherited entry codes as {@link DetailCode}
 	 */
-	public static DetailCode getInheritedEntryCode(RefinedState rs) {
+	public DetailCode getInheritedEntryCode(RefinedState rs) {
 		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE, true);
 	}
 
@@ -712,7 +713,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a concatenation of inherited exit codes as {@link DetailCode}
 	 */
-	public static DetailCode getInheritedExitCode(RefinedState rs) {
+	public DetailCode getInheritedExitCode(RefinedState rs) {
 		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE, false);
 	}
 
@@ -724,7 +725,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a concatenation of inherited do codes as {@link DetailCode}
 	 */
-	public static DetailCode getInheritedDoCode(RefinedState rs) {
+	public DetailCode getInheritedDoCode(RefinedState rs) {
 		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE, true);
 	}
 	
@@ -733,7 +734,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param code
 	 * @return
 	 */
-	private static DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
+	private DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
 		DetailCode result = RoomFactory.eINSTANCE.createDetailCode();
 		State s = rs.getTarget();
 		while (s!=null) {
@@ -762,7 +763,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a refined state targeting state or state itself
 	 */
-	public static State getRefinedStateFor(StateGraph sg, State state) {
+	public State getRefinedStateFor(StateGraph sg, State state) {
 		// first we look for RefinedStates in the current context
 		for (State s : sg.getStates()) {
 			if (s instanceof RefinedState && s.getName().equals(state.getName())) {
@@ -793,8 +794,8 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return whether a {@link Trigger} contains a guard
 	 */
-	public static boolean isGuarded(Trigger trig) {
-		return trig.getGuard()!=null && RoomHelpers.hasDetailCode(trig.getGuard().getGuard());
+	public boolean isGuarded(Trigger trig) {
+		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
 	}
 
 	/**
@@ -804,7 +805,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the destination {@link StateGraphNode} of a {@link TransitionTerminal}
 	 */
-	public static StateGraphNode getNode(TransitionTerminal tt) {
+	public StateGraphNode getNode(TransitionTerminal tt) {
 		if (tt instanceof StateTerminal)
 			return ((StateTerminal)tt).getState();
 		else if (tt instanceof TrPointTerminal)
@@ -824,7 +825,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link State}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<State> getAllStates(StateGraph sg) {
+	public List<State> getAllStates(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), false);
 	}
 
@@ -836,7 +837,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link State}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<State> getAllStatesRecursive(StateGraph sg) {
+	public List<State> getAllStatesRecursive(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), true);
 	}
 
@@ -847,7 +848,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<TrPoint> getAllTrPoints(StateGraph sg) {
+	public List<TrPoint> getAllTrPoints(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), false);
 	}
 
@@ -859,7 +860,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<TrPoint> getAllTrPointsRecursive(StateGraph sg) {
+	public List<TrPoint> getAllTrPointsRecursive(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), true);
 	}
 
@@ -870,7 +871,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link ChoicePoint}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
+	public List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), false);
 	}
 
@@ -881,7 +882,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<Transition> getAllTransitions(StateGraph sg) {
+	public List<Transition> getAllTransitions(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), false);
 	}
 
@@ -893,12 +894,12 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
 	 */
-	public static List<Transition> getAllTransitionsRecursive(StateGraph sg) {
+	public List<Transition> getAllTransitionsRecursive(StateGraph sg) {
 		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), true);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature, boolean recurse) {
+	private <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature, boolean recurse) {
 		ArrayList<T> result = new ArrayList<T>();
 		
 		while (sg!=null) {
@@ -942,7 +943,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
 	 * 	getAllNames(StateGraph, StateGraphItem)
 	 */
-	public static Set<String> getAllNames(StateGraph sg) {
+	public Set<String> getAllNames(StateGraph sg) {
 		return getAllNames(sg, null);
 	}
 	
@@ -956,7 +957,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 */
-	public static Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
+	public Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
 		HashSet<String> result = new HashSet<String>();
 		do {
 			for (State st : sg.getStates()) {
@@ -1004,7 +1005,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
 	 * 	getAllStateNames(StateGraph, State)
 	 */
-	public static Set<String> getAllStateNames(StateGraph sg) {
+	public Set<String> getAllStateNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
 	}
 
@@ -1018,7 +1019,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link State}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 */
-	public static Set<String> getAllStateNames(StateGraph sg, State skip) {
+	public Set<String> getAllStateNames(StateGraph sg, State skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
 	}
 	
@@ -1034,7 +1035,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
 	 * 	getAllStateNames(StateGraph, TrPoint)
 	 */
-	public static Set<String> getAllTrPointNames(StateGraph sg) {
+	public Set<String> getAllTrPointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
 	}
 	
@@ -1048,7 +1049,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 */
-	public static Set<String> getAllTrPointNames(StateGraph sg, TrPoint skip) {
+	public Set<String> getAllTrPointNames(StateGraph sg, TrPoint skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
 	}
 	
@@ -1064,7 +1065,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
 	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)
 	 */
-	public static Set<String> getAllChoicePointNames(StateGraph sg) {
+	public Set<String> getAllChoicePointNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
 	}
 	
@@ -1078,7 +1079,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 */
-	public static Set<String> getAllChoicePointNames(StateGraph sg, ChoicePoint skip) {
+	public Set<String> getAllChoicePointNames(StateGraph sg, ChoicePoint skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
 	}
 	
@@ -1094,7 +1095,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
 	 * 	getAllTransitionNames(StateGraph, Transition)
 	 */
-	public static Set<String> getAllTransitionNames(StateGraph sg) {
+	public Set<String> getAllTransitionNames(StateGraph sg) {
 		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 	}
 	
@@ -1108,12 +1109,12 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
 	 * including parent state graphs recursively
 	 */
-	public static Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
+	public Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
 		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
 	}
 	
-	private static <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
-		List<T> items = RoomHelpers.getAllStateGraphItems(sg, feature, false);
+	private <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
+		List<T> items = getAllStateGraphItems(sg, feature, false);
 		
 		HashSet<String> names = new HashSet<String>();
 		for (T item : items) {
@@ -1128,7 +1129,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param pc a {@link ProtocolClass}
 	 * @return all incoming {@link Message}s including base class with base class messages first
 	 */
-	public static List<Message> getAllIncomingMessages(ProtocolClass pc) {
+	public List<Message> getAllIncomingMessages(ProtocolClass pc) {
 		return getAllMessages(pc, true);
 	}
 	
@@ -1136,7 +1137,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param pc a {@link ProtocolClass}
 	 * @return all outgoing {@link Message}s including base class with base class messages first
 	 */
-	public static List<Message> getAllOutgoingMessages(ProtocolClass pc) {
+	public List<Message> getAllOutgoingMessages(ProtocolClass pc) {
 		return getAllMessages(pc, false);
 	}
 	
@@ -1149,7 +1150,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Message}s of one direction a {@link ProtocolClass} including base classes
 	 */
-	public static List<Message> getAllMessages(ProtocolClass pc, boolean incoming) {
+	public List<Message> getAllMessages(ProtocolClass pc, boolean incoming) {
 		ArrayList<Message> result = new ArrayList<Message>();
 		
 		while (pc!=null) {
@@ -1168,7 +1169,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param item an {@link InterfaceItem}
 	 * @return a list of all incoming {@link Message}s of this item
 	 */
-	public static List<Message> getIncoming(InterfaceItem item) {
+	public List<Message> getIncoming(InterfaceItem item) {
 		if (getProtocol(item)!=null)
 			return getAllMessages(getProtocol(item), !isConjugated(item));
 		else
@@ -1179,7 +1180,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param item an {@link InterfaceItem}
 	 * @return a list of all outgoing {@link Message}s of this item
 	 */
-	public static List<Message> getOutgoing(InterfaceItem item) {
+	public List<Message> getOutgoing(InterfaceItem item) {
 		if (getProtocol(item)!=null)
 			return getAllMessages(getProtocol(item), isConjugated(item));
 		else
@@ -1190,7 +1191,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param item an {@link InterfaceItem}
 	 * @return <code>true</code> if the item is logically conjugate
 	 */
-	public static boolean isConjugated(InterfaceItem item) {
+	public boolean isConjugated(InterfaceItem item) {
 		if (item instanceof Port)
 			return ((Port) item).isConjugated();
 		else if (item instanceof SAP)
@@ -1210,7 +1211,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Attribute}s of an {@link ActorClass}
 	 */
-	public static List<Attribute> getAllAttributes(ActorClass ac) {
+	public List<Attribute> getAllAttributes(ActorClass ac) {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (ac!=null) {
@@ -1230,7 +1231,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Attribute}s of a {@link DataClass}
 	 */
-	public static List<Attribute> getAllAttributes(DataClass dc) {
+	public List<Attribute> getAllAttributes(DataClass dc) {
 		ArrayList<Attribute> result = new ArrayList<Attribute>();
 		
 		while (dc!=null) {
@@ -1250,7 +1251,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Operation}s of an {@link ActorClass}
 	 */
-	public static List<Operation> getAllOperations(ActorClass ac) {
+	public List<Operation> getAllOperations(ActorClass ac) {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (ac!=null) {
@@ -1270,7 +1271,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Operation}s of a {@link DataClass}
 	 */
-	public static List<Operation> getAllOperations(DataClass dc) {
+	public List<Operation> getAllOperations(DataClass dc) {
 		ArrayList<Operation> result = new ArrayList<Operation>();
 		
 		while (dc!=null) {
@@ -1289,7 +1290,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of the end {@link Port}s of an {@link ActorClass}
 	 */
-	public static List<Port> getEndPorts(ActorClass ac) {
+	public List<Port> getEndPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>(ac.getInternalPorts());
 
 		// to preserve the order of external ports we use insertAt
@@ -1310,7 +1311,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of all end {@link SAP}s of an {@link ActorClass}
 	 * 		with base class items first
 	 */
-	public static List<SAP> getAllSAPs(ActorClass ac) {
+	public List<SAP> getAllSAPs(ActorClass ac) {
 		ArrayList<SAP> result = new ArrayList<SAP>();
 		
 		while (ac!=null) {
@@ -1330,7 +1331,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of all end {@link ServiceImplementation}s of an {@link ActorClass}
 	 * 		with base class items first
 	 */
-	public static List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
+	public List<ServiceImplementation> getAllServiceImplementations(ActorClass ac) {
 		ArrayList<ServiceImplementation> result = new ArrayList<ServiceImplementation>();
 		
 		while (ac!=null) {
@@ -1350,7 +1351,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of all end {@link Port}s of an {@link ActorClass}
 	 * 		with base class items first
 	 */
-	public static List<Port> getAllEndPorts(ActorClass ac) {
+	public List<Port> getAllEndPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>();
 		
 		while (ac!=null) {
@@ -1372,7 +1373,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param ac an {@link ActorClass}
 	 * @return a list of the interface ports
 	 */
-	public static List<Port> getInterfacePorts(ActorContainerClass ac) {
+	public List<Port> getInterfacePorts(ActorContainerClass ac) {
 		if (ac instanceof ActorClass)
 			return ((ActorClass) ac).getInterfacePorts();
 		else if (ac instanceof SubSystemClass)
@@ -1388,7 +1389,7 @@ public class RoomHelpers extends BaseHelpers {
 	 *         class ports first
 	 * @see #getInterfaceItems(ActorClass)
 	 */
-	public static List<Port> getAllInterfacePorts(ActorContainerClass ac) {
+	public List<Port> getAllInterfacePorts(ActorContainerClass ac) {
 		if (ac instanceof ActorClass) {
 			ArrayList<Port> result = new ArrayList<Port>();
 			ActorClass curr = (ActorClass) ac;
@@ -1409,7 +1410,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of all interface items <i>without</i> inherited ones
 	 * @see #getAllInterfaceItems(ActorClass)
 	 */
-	public static List<InterfaceItem> getInterfaceItems(ActorClass ac) {
+	public List<InterfaceItem> getInterfaceItems(ActorClass ac) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 
 		result.addAll(ac.getInternalPorts());
@@ -1425,7 +1426,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
 	 * event driven interface items of this actor class (<i>without</i> inherited ones)
 	 */
-	public static List<MessageFromIf> getMessagesFromInterfaces(ActorClass ac) {
+	public List<MessageFromIf> getMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
 		
 		List<InterfaceItem> items = getInterfaceItems(ac);
@@ -1451,7 +1452,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
 	 * event driven interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
 	 */
-	public static List<MessageFromIf> getOwnMessagesFromInterfaces(ActorClass ac) {
+	public List<MessageFromIf> getOwnMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
 		
 		result.addAll(getMessagesFromInterfaces(ac));
@@ -1486,7 +1487,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return a list of {@link MessageFromIf} that may come in through one of the
 	 * event driven interface items of this actor class(<i>including</i> inherited ones)
 	 */
-	public static List<MessageFromIf> getAllMessagesFromInterfaces(ActorClass ac) {
+	public List<MessageFromIf> getAllMessagesFromInterfaces(ActorClass ac) {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
 		
 		while (ac!=null) {
@@ -1510,6 +1511,63 @@ public class RoomHelpers extends BaseHelpers {
 		
 		return result;
 	}
+
+	/**
+	 * @param ac the actor class to check
+	 * @return {@code true} if the class hierarchy is circular (i.e. a base class refers to one of its sub classes)
+	 */
+	public boolean isCircularClassHierarchy(ActorClass ac) {
+		HashSet<ActorClass> classes = new HashSet<ActorClass>();
+		classes.add(ac);
+		
+		while (ac.getBase()!=null) {
+			ac = ac.getBase();
+			if (classes.contains(ac))
+				return true;
+			
+			classes.add(ac);
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * @param dc the data class to check
+	 * @return {@code true} if the class hierarchy is circular (i.e. a base class refers to one of its sub classes)
+	 */
+	public boolean isCircularClassHierarchy(DataClass dc) {
+		HashSet<DataClass> classes = new HashSet<DataClass>();
+		classes.add(dc);
+		
+		while (dc.getBase()!=null) {
+			dc = dc.getBase();
+			if (classes.contains(dc))
+				return true;
+			
+			classes.add(dc);
+		}
+		
+		return false;
+	}
+
+	/**
+	 * @param pc the protocol class to check
+	 * @return {@code true} if the class hierarchy is circular (i.e. a base class refers to one of its sub classes)
+	 */
+	public boolean isCircularClassHierarchy(ProtocolClass pc) {
+		HashSet<ProtocolClass> classes = new HashSet<ProtocolClass>();
+		classes.add(pc);
+		
+		while (pc.getBase()!=null) {
+			pc = pc.getBase();
+			if (classes.contains(pc))
+				return true;
+			
+			classes.add(pc);
+		}
+		
+		return false;
+	}
 	
 	/**
 	 * Returns a list of all end {@link InterfaceItem}s of an {@link ActorClass}
@@ -1519,9 +1577,9 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all end {@link InterfaceItem}s of an {@link ActorClass}
 	 */
-	public static List<InterfaceItem> getAllInterfaceItems(ActorClass ac) {
+	public List<InterfaceItem> getAllInterfaceItems(ActorClass ac) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (isCircularClassHierarchy(ac))
 			return result;
 		
 		while (ac!=null) {
@@ -1544,9 +1602,9 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Port}s of an {@link ActorClass}
 	 */
-	public static List<Port> getAllPorts(ActorClass ac) {
+	public List<Port> getAllPorts(ActorClass ac) {
 		ArrayList<Port> result = new ArrayList<Port>();
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (isCircularClassHierarchy(ac))
 			return result;
 		
 		while (ac!=null) {
@@ -1559,7 +1617,7 @@ public class RoomHelpers extends BaseHelpers {
 		return result;
 	}
 	
-	public static List<ActorContainerRef> getAllActorContainerRefs(StructureClass sc) {
+	public List<ActorContainerRef> getAllActorContainerRefs(StructureClass sc) {
 		List<ActorContainerRef> refs = new ArrayList<ActorContainerRef>();
 		
 		if(sc instanceof LogicalSystem)
@@ -1584,9 +1642,9 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link Binding}s of an {@link ActorClass}
 	 */
-	public static List<Binding> getAllBindings(ActorClass ac) {
+	public List<Binding> getAllBindings(ActorClass ac) {
 		ArrayList<Binding> result = new ArrayList<Binding>();
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (isCircularClassHierarchy(ac))
 			return result;
 		
 		while (ac!=null) {
@@ -1606,9 +1664,9 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of all {@link LayerConnection}s of an {@link ActorClass}
 	 */
-	public static List<LayerConnection> getAllLayerConnections(ActorClass ac) {
+	public List<LayerConnection> getAllLayerConnections(ActorClass ac) {
 		ArrayList<LayerConnection> result = new ArrayList<LayerConnection>();
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (isCircularClassHierarchy(ac))
 			return result;
 		
 		while (ac!=null) {
@@ -1627,7 +1685,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the parent {@link ActorClass} of a {@link StateGraphItem}
 	 */
-	public static ActorClass getActorClass(StateGraphItem item) {
+	public ActorClass getActorClass(StateGraphItem item) {
 		EObject parent = item;
 		while (parent!=null) {
 			parent = parent.eContainer();
@@ -1645,7 +1703,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the parent {@link ActorClass} of an arbitrary EObject (result may be null)
 	 */
-	public static ActorClass getActorClass(EObject obj) {
+	public ActorClass getActorClass(EObject obj) {
 		EObject parent = obj;
 		while (parent!=null) {
 			parent = parent.eContainer();
@@ -1662,7 +1720,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the parent {@link ProtocolClass} of an arbitrary EObject (result may be null)
 	 */
-	public static ProtocolClass getProtocolClass(EObject obj) {
+	public ProtocolClass getProtocolClass(EObject obj) {
 		EObject ctx = obj.eContainer();
 		while (!(ctx instanceof ProtocolClass) && ctx.eContainer()!=null)
 			ctx = ctx.eContainer();
@@ -1680,7 +1738,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the named annotation is present in the {@link ActorClass}
 	 */
-	public static boolean isAnnotationPresent(ActorClass ac, String name) {
+	public boolean isAnnotationPresent(ActorClass ac, String name) {
 		return isAnnotationPresent(ac.getAnnotations(), name);
 	}
 	
@@ -1694,7 +1752,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return <code>true</code> if the named annotation is present in the <em>behavior</em>
 	 * of the {@link ActorClass}
 	 */
-	public static boolean isBehaviorAnnotationPresent(ActorClass ac, String name) {
+	public boolean isBehaviorAnnotationPresent(ActorClass ac, String name) {
 		return isAnnotationPresent(ac.getBehaviorAnnotations(), name);
 	}
 	
@@ -1707,7 +1765,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of the {@link Annotation} attributes of the named annotation
 	 */
-	public static List<KeyValue> getAttributes(ActorClass ac, String name) {
+	public List<KeyValue> getAttributes(ActorClass ac, String name) {
 		return getAttributes(ac.getAnnotations(), name);
 	}
 	
@@ -1721,7 +1779,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of the {@link Annotation} attributes of the named annotation
 	 */
-	public static List<KeyValue> getBehaviorAttributes(ActorClass ac, String name) {
+	public List<KeyValue> getBehaviorAttributes(ActorClass ac, String name) {
 		return getAttributes(ac.getBehaviorAnnotations(), name);
 	}
 	
@@ -1736,7 +1794,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @see #isBehaviorAttributePresent(ActorClass, String, String)
 	 */
-	public static boolean isAttributePresent(ActorClass ac, String name, String key) {
+	public boolean isAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getAnnotations(), name, key);
 	}
 	
@@ -1751,7 +1809,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @see #isAttributePresent(ActorClass, String, String)
 	 */
-	public static boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
+	public boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getBehaviorAnnotations(), name, key);
 	}
 	
@@ -1764,7 +1822,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the string value of the attribute or an empty string if not found
 	 */
-	public static String getAttribute(ActorClass ac, String name, String key) {
+	public String getAttribute(ActorClass ac, String name, String key) {
 		return getAttribute(ac.getAnnotations(), name, key);
 	}
 	
@@ -1777,7 +1835,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the string value of the attribute or an empty string if not found
 	 */
-	public static String getBehaviorAttribute(ActorClass ac, String name, String key) {
+	public String getBehaviorAttribute(ActorClass ac, String name, String key) {
 		return getAttribute(ac.getBehaviorAnnotations(), name, key);
 	}
 	
@@ -1789,7 +1847,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the state machine is flat
 	 */
-	public static boolean hasFlatStateMachine(ActorClass ac) {
+	public boolean hasFlatStateMachine(ActorClass ac) {
 		if (isEmpty(ac.getStateMachine()))
 			return false;
 
@@ -1815,7 +1873,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @see #getAllMessages(ProtocolClass, boolean)
 	 */
-	public static List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
+	public List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
 		ProtocolClass protocol = null;
 		if (item instanceof Port) {
 			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
@@ -1840,7 +1898,7 @@ public class RoomHelpers extends BaseHelpers {
 			return null;
 		}
 		
-		return RoomHelpers.getAllMessages(protocol, !outgoing);
+		return getAllMessages(protocol, !outgoing);
 	}
 	
 	/**
@@ -1852,7 +1910,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the PortClass or null if not defined
 	 */
-	public static PortClass getPortClass(InterfaceItem item) {
+	public PortClass getPortClass(InterfaceItem item) {
 		ProtocolClass protocol = null;
 		boolean conjugated = false;
 		if (item instanceof Port) {
@@ -1886,7 +1944,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param port
 	 * @return true if relay port
 	 */
-	public static boolean isRelay(Port port) {
+	public boolean isRelay(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
 			if (((ActorClass)acc).getInterfacePorts().contains(port)) {
@@ -1908,7 +1966,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param port
 	 * @return true if internal port
 	 */
-	public static boolean isInternal(Port port) {
+	public boolean isInternal(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
 			if (((ActorClass)acc).getInternalPorts().contains(port)) {
@@ -1926,7 +1984,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param port
 	 * @return true if external port
 	 */
-	public static boolean isExternal(Port port) {
+	public boolean isExternal(Port port) {
 		ActorContainerClass acc = (ActorContainerClass) port.eContainer();
 		if (acc instanceof ActorClass) {
 			for (ExternalPort ep : ((ActorClass)acc).getExternalPorts()) {
@@ -1947,7 +2005,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the operation is a constructor
 	 */
-	public static boolean isConstructor(Operation op) {
+	public boolean isConstructor(Operation op) {
 		if (op instanceof PortOperation)
 			return false;
 		
@@ -1967,7 +2025,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the operation is a destructor
 	 */
-	public static boolean isDestructor(Operation op) {
+	public boolean isDestructor(Operation op) {
 		if (op instanceof PortOperation)
 			return false;
 		
@@ -1985,7 +2043,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the actor class has a constructor
 	 */
-	public static boolean hasConstructor(ActorClass ac) {
+	public boolean hasConstructor(ActorClass ac) {
 		for (StandardOperation op : ac.getOperations()) {
 			if (op.getName().equals(ac.getName()))
 				if (!op.isDestructor())
@@ -2002,7 +2060,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the actor class has a destructor
 	 */
-	public static boolean hasDestructor(ActorClass ac) {
+	public boolean hasDestructor(ActorClass ac) {
 		for (StandardOperation op : ac.getOperations()) {
 			if (op.getName().equals(ac.getName()))
 				if (op.isDestructor())
@@ -2013,71 +2071,11 @@ public class RoomHelpers extends BaseHelpers {
 	}
 
 	/**
-	 * Returns an operation's typed argument list as a string.
-	 * 
-	 * @param op the operation
-	 * 
-	 * @return the argument list string
-	 */
-	public static String getTypedArgumentList(Operation op) {
-		String signature = "";
-		for (VarDecl arg : op.getArguments()) {
-			if (signature.isEmpty())
-				signature = arg.getName()+": "+arg.getRefType().getType().getName();
-			else
-				signature += ", "+arg.getName()+": "+arg.getRefType().getType().getName();
-		}
-		signature = "("+signature+")";
-		return signature;
-	}
-	
-	/**
-	 * Returns an operation's signature as a string.
-	 * 
-	 * @param op the operation
-	 * 
-	 * @return the signature string
-	 */
-	public static String getSignature(Operation op) {
-		String signature = "";
-		for (VarDecl arg : op.getArguments()) {
-			if (signature.isEmpty())
-				signature = arg.getName()+": "+arg.getRefType().getType().getName();
-			else
-				signature += ", "+arg.getName()+": "+arg.getRefType().getType().getName();
-		}
-		String rt = op.getReturnType()!=null? ": "+op.getReturnType().getType().getName():"";
-		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null)
-			rt = " sends "+((PortOperation) op).getSendsMsg().getName();
-		signature = op.getName()+"("+signature+")"+rt;
-		return signature;
-	}
-
-	/**
-	 * Returns an operation's argument list as a string.
-	 * 
-	 * @param op the operation
-	 * 
-	 * @return the argument list string
-	 */
-	public static String getArguments(Operation op) {
-		String signature = "";
-		for (VarDecl arg : op.getArguments()) {
-			if (signature.isEmpty())
-				signature = arg.getName();
-			else
-				signature += ", "+arg.getName();
-		}
-		signature = "("+signature+")";
-		return signature;
-	}
-
-	/**
 	 * return the {@link SimpleState} of a {@link State}
 	 * @param s
 	 * @return the state itself if a SimpleState or the base state for a {@link RefinedState}
 	 */
-	public static SimpleState getBaseState(State s) {
+	public SimpleState getBaseState(State s) {
 		if (s instanceof SimpleState)
 			return (SimpleState) s;
 		else if (s instanceof RefinedState)
@@ -2093,7 +2091,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a list of target states of a {@link RefinedState} recursively
 	 */
-	public static List<State> getReferencedStatesRecursively(RefinedState rs) {
+	public List<State> getReferencedStatesRecursively(RefinedState rs) {
 		ArrayList<State> result = new ArrayList<State>();
 		
 		State target = rs.getTarget();
@@ -2115,7 +2113,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return <code>true</code> if a state is referenced recursively by a refined state
 	 */
-	public static boolean referencesStateRecursively(RefinedState rs, State referenced) {
+	public boolean referencesStateRecursively(RefinedState rs, State referenced) {
 		State target = rs.getTarget();
 		if (target==referenced)
 			return true;
@@ -2137,10 +2135,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * are checked if they are semantically nested in another state of the same state machine.
 	 * 
 	 * @param ac the actor class
+	 * @param nameProvider a function that returns the full path of a refined state
 	 * 
 	 * @return a map of refined states to potential parent refined states
 	 */
-	public static Map<RefinedState, RefinedState> getRefinedStatesToRelocate(ActorClass ac) {
+	public Map<RefinedState, RefinedState> getRefinedStatesToRelocate(ActorClass ac, Function<RefinedState, String> nameProvider) {
 		
 		// collect RefinedStates and some information
 		ArrayList<RefinedState> refinedStates = new ArrayList<RefinedState>();
@@ -2151,7 +2150,7 @@ public class RoomHelpers extends BaseHelpers {
 			EObject obj = it.next();
 			if (obj instanceof RefinedState) {
 				refinedStates.add((RefinedState) obj);
-				String path = RoomNameProvider.getFullPath((RefinedState) obj);
+				String path = nameProvider.apply((RefinedState) obj);
 				paths.add(path);
 				path2rs.put(path, (RefinedState) obj);
 			}
@@ -2163,7 +2162,7 @@ public class RoomHelpers extends BaseHelpers {
 		// find the best matching context
 		HashMap<RefinedState, RefinedState> rs2parent = new HashMap<RefinedState, RefinedState>();
 		for (RefinedState rs : refinedStates) {
-			String fullPath = RoomNameProvider.getFullPath(rs);
+			String fullPath = nameProvider.apply(rs);
 			for (String path : paths) {
 				if (!fullPath.equals(path) && fullPath.startsWith(path) && fullPath.charAt(path.length())==RoomNameProvider.PATH_SEP.charAt(0)) {
 					RefinedState parent = path2rs.get(path);
@@ -2184,7 +2183,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the {@link ProtocolClass} of an {@link InterfaceItem}
 	 */
-	public static ProtocolClass getProtocol(InterfaceItem item) {
+	public ProtocolClass getProtocol(InterfaceItem item) {
 		GeneralProtocolClass pc = getGeneralProtocol(item);
 		if (pc instanceof ProtocolClass)
 			return (ProtocolClass) pc;
@@ -2198,7 +2197,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param item an {@link InterfaceItem}
 	 * @return {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}
 	 */
-	public static boolean isDataDriven(InterfaceItem item) {
+	public boolean isDataDriven(InterfaceItem item) {
 		ProtocolClass pc = getProtocol(item);
 		if (pc!=null && pc.getCommType()==CommunicationType.DATA_DRIVEN)
 			return true;
@@ -2213,7 +2212,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the {@link GeneralProtocolClass} of an {@link InterfaceItem}
 	 */
-	public static GeneralProtocolClass getGeneralProtocol(InterfaceItem item) {
+	public GeneralProtocolClass getGeneralProtocol(InterfaceItem item) {
 		if (item instanceof Port) {
 			return ((Port)item).getProtocol();
 		}
@@ -2233,7 +2232,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the recursive base class entry code of a {@link RefinedState} as string
 	 */
-	public static String getBaseEntryCode(RefinedState state) {
+	public String getBaseEntryCode(RefinedState state) {
 		return getBaseCode(state, RoomPackage.Literals.STATE__ENTRY_CODE);
 	}
 
@@ -2244,7 +2243,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the recursive base class exit code of a {@link RefinedState} as string
 	 */
-	public static String getBaseExitCode(RefinedState state) {
+	public String getBaseExitCode(RefinedState state) {
 		return getBaseCode(state, RoomPackage.Literals.STATE__EXIT_CODE);
 	}
 
@@ -2255,11 +2254,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the recursive base class do code of a {@link RefinedState} as string
 	 */
-	public static String getBaseDoCode(RefinedState state) {
+	public String getBaseDoCode(RefinedState state) {
 		return getBaseCode(state, RoomPackage.Literals.STATE__DO_CODE);
 	}
 	
-	private static String getBaseCode(RefinedState state, EStructuralFeature feat) {
+	private String getBaseCode(RefinedState state, EStructuralFeature feat) {
 		StringBuilder result = new StringBuilder();
 		
 		State base = state.getTarget();
@@ -2282,7 +2281,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the last common super type of a list of types or <code>null</code> if no such exists
 	 */
-	public static RefableType getLastCommonSuperType(List<RefableType> types) {
+	public RefableType getLastCommonSuperType(List<RefableType> types) {
 		int nref = 0;
 		int ndc = 0;
 		for (RefableType rt : types) {
@@ -2362,7 +2361,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the recursive base class code of a transition
 	 */
-	public static String getInheritedActionCode(Transition trans, ActorClass ac) {
+	public String getInheritedActionCode(Transition trans, ActorClass ac) {
 		return getActionCode(trans, ac, false);
 	}
 
@@ -2370,7 +2369,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param sg a {@link StateGraph}
 	 * @return the initial transition or <code>null</code> if no such is available
 	 */
-	public static Transition getInitTransition(StateGraph sg) {
+	public Transition getInitTransition(StateGraph sg) {
 		for (Transition tr : sg.getTransitions()) {
 			if (tr instanceof InitialTransition)
 				return tr;
@@ -2382,7 +2381,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param sg a {@link StateGraph}
 	 * @return <code>true</code> if an initial transition is available
 	 */
-	public static boolean hasInitTransition(StateGraph sg) {
+	public boolean hasInitTransition(StateGraph sg) {
 		return getInitTransition(sg)!=null;
 	}
 	
@@ -2394,11 +2393,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the complete action code including base class code of a {@link Transition}
 	 */
-	public static String getAllActionCode(Transition trans, ActorClass ac) {
+	public String getAllActionCode(Transition trans, ActorClass ac) {
 		return getActionCode(trans, ac, true);
 	}
 	
-	private static String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
+	private String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
 		StringBuilder result = new StringBuilder();
 		
 		ActorClass baseAC = getActorClass(trans);
@@ -2434,7 +2433,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the parent container of an {@link ActorInstanceMapping}
 	 */
-	public static ActorContainerClass getParentContainer(ActorInstanceMapping aim) {
+	public ActorContainerClass getParentContainer(ActorInstanceMapping aim) {
 		ActorContainerClass root = null;
 		if (aim.eContainer() instanceof ActorInstanceMapping) {
 			ActorInstanceMapping parent = (ActorInstanceMapping) aim.eContainer();
@@ -2453,12 +2452,12 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the target {@link ActorContainerClass} of an instance mapping
 	 */
-	public static ActorContainerClass getActorContainerClass(ActorInstanceMapping aim) {
+	public ActorContainerClass getActorContainerClass(ActorInstanceMapping aim) {
 		// follow segments
 		ActorContainerClass result = getParentContainer(aim);
 		for (RefSegment ref : aim.getPath().getRefs()) {
 			ActorRef match = null;
-			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+			for (ActorContainerRef actor : getRefs(result, true)) {
 				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
@@ -2481,7 +2480,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return a {@link RefPath} as string
 	 */
-	public static String asString(RefPath path) {
+	public String asString(RefPath path) {
 		StringBuilder sb = new StringBuilder();
 		for (RefSegment ref : path.getRefs()) {
 			sb.append("/"+ref);
@@ -2498,7 +2497,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return the last {@link ActorRef} of a {@link RefPath}
 	 */
-	public static ActorRef getLastActorRef(ActorContainerClass root, RefPath path) {
+	public ActorRef getLastActorRef(ActorContainerClass root, RefPath path) {
 		if (path.getRefs().isEmpty())
 			return null;
 		
@@ -2506,7 +2505,7 @@ public class RoomHelpers extends BaseHelpers {
 		ActorContainerClass result = root;
 		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
-			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+			for (ActorContainerRef actor : getRefs(result, true)) {
 				if (actor instanceof ActorRef && actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
 					break;
@@ -2530,7 +2529,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param path
 	 * @return first invalid path segment else {@code null}
 	 */
-	public static String checkPath(ActorContainerClass root, RefPath path) {
+	public String checkPath(ActorContainerClass root, RefPath path) {
 		if (path == null)
 			return null;
 
@@ -2590,7 +2589,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * 
 	 * @return true if pc1 is derived from pc2
 	 */
-	public static boolean isDerivedFrom(ProtocolClass pc1, ProtocolClass pc2) {
+	public boolean isDerivedFrom(ProtocolClass pc1, ProtocolClass pc2) {
 		if (pc1==pc2)
 			return false;
 		
@@ -2608,8 +2607,11 @@ public class RoomHelpers extends BaseHelpers {
 	 * @param ac2
 	 * @return <code>true</code> if ac1 or one of its base types is identical to ac2
 	 */
-	public static boolean isKindOf(ActorClass ac1, ActorClass ac2) {
+	public boolean isKindOf(ActorClass ac1, ActorClass ac2) {
 		if (ac2==null)
+			return false;
+
+		if (ac1==null || isCircularClassHierarchy(ac1))
 			return false;
 		
 		while (ac1!=null) {
@@ -2618,6 +2620,38 @@ public class RoomHelpers extends BaseHelpers {
 			
 			ac1 = ac1.getBase();
 		}
+		return false;
+	}
+	
+	/**
+	 * check if ref recursively is referencing ac
+	 * @param ref
+	 * @param ac
+	 * @return <code>true</code> if ref recursively is referencing ac
+	 */
+	public boolean isReferencing(ActorClass ref, ActorClass ac) {
+		if (isKindOf(ref,ac))
+			return true;
+		
+		Set<ActorClass> visited = new HashSet<ActorClass>();
+		LinkedList<ActorClass> stack = new LinkedList<ActorClass>();
+		visited.add(ac);
+		stack.push(ref);
+		
+		ActorClass next;
+		while(!stack.isEmpty()){
+			next = stack.pop();
+			if(visited.contains(next))
+				continue;
+			
+			for (ActorRef ar : next.getActorRefs()) {
+				if (isKindOf(ar.getType(), ac) || isKindOf(next, ar.getType()))
+					return true;
+				stack.push(ar.getType());
+			}
+			visited.add(next);
+		}
+		
 		return false;
 	}
 }

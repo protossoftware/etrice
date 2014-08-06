@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.CPBranchTransition;
@@ -35,8 +34,6 @@ import org.eclipse.etrice.core.room.TrPointTerminal;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -129,31 +126,31 @@ public class TransitionSupport {
 	
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
-				return SupportUtil.canConnect(
+				return SupportUtil.getInstance().canConnect(
 						context.getSourceAnchor(),
 						context.getTargetAnchor(),
 						(ContainerShape)context.getSourcePictogramElement().eContainer(), fp);
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
-				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
-				if (src==null && !SupportUtil.isInitialPoint(context.getSourceAnchor(), fp))
+				TransitionTerminal src = SupportUtil.getInstance().getTransitionTerminal(context.getSourceAnchor(), fp);
+				if (src==null && !SupportUtil.getInstance().isInitialPoint(context.getSourceAnchor(), fp))
 					return false;
 				
-				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
+				StateGraph sg = SupportUtil.getInstance().getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
 				if (sg==null)
 					return false;
 				
-				return ValidationUtil.isConnectable(src, sg).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, sg).isOk();
 			}
 			
 			@Override
 			public Connection doCreate(ICreateConnectionContext context) {
-				ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 				
-				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getSourceAnchor(), fp);
-				TransitionTerminal dst = SupportUtil.getTransitionTerminal(context.getTargetAnchor(), fp);
-				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
+				TransitionTerminal src = SupportUtil.getInstance().getTransitionTerminal(context.getSourceAnchor(), fp);
+				TransitionTerminal dst = SupportUtil.getInstance().getTransitionTerminal(context.getTargetAnchor(), fp);
+				StateGraph sg = SupportUtil.getInstance().getStateGraph((ContainerShape) context.getSourcePictogramElement().eContainer(), fp);
 				if (dst!=null && sg!=null) {
 
 					// TODOHRR-B transition dialog
@@ -174,7 +171,7 @@ public class TransitionSupport {
 					}
 					else if (src instanceof ChoicepointTerminal) {
 						boolean dfltBranch = true;
-						for (Transition tr : RoomHelpers.getAllTransitions(sg)) {
+						for (Transition tr : SupportUtil.getInstance().getRoomHelpers().getAllTransitions(sg)) {
 							if (tr instanceof ContinuationTransition) {
 								TransitionTerminal from = ((ContinuationTransition) tr).getFrom();
 								if (from instanceof ChoicepointTerminal) {
@@ -242,22 +239,22 @@ public class TransitionSupport {
 					}
 
 					if (trans instanceof InitialTransition) {
-						trans.setName(RoomNameProvider.getUniqueInitialTransitionName(sg));
+						trans.setName(SupportUtil.getInstance().getRoomUtil().getUniqueInitialTransitionName(sg));
 					}
 					else {
-						trans.setName(RoomNameProvider.getUniqueTransitionName(sg));
+						trans.setName(SupportUtil.getInstance().getRoomUtil().getUniqueTransitionName(sg));
 					}
 
-					ContainerShape targetContainer = SupportUtil.getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
-					boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+					ContainerShape targetContainer = SupportUtil.getInstance().getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
+					boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), sg);
 					if (inherited) {
-						sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+						sg = SupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 					}
 
 					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
+		        	TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getInstance().getActorClass(getDiagram()), trans);
 					if (dlg.open()==Window.OK) {
 						AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
 						addContext.setNewObject(trans);
@@ -294,7 +291,7 @@ public class TransitionSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (!(bo instanceof StateGraph))
 					container = container.getContainer();
-				boolean inherited = SupportUtil.isInherited(trans, container);
+				boolean inherited = SupportUtil.getInstance().isInherited(trans, container);
 				
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				FreeFormConnection connection = peCreateService.createFreeFormConnection(getDiagram());
@@ -316,7 +313,7 @@ public class TransitionSupport {
 
 		        ConnectionDecorator cd = peCreateService
 		              .createConnectionDecorator(connection, false, 1.0, true);
-		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+		        Color fillColor = SupportUtil.getInstance().getRoomHelpers().hasDetailCode(trans.getAction())?
 		        		lineColor:manageColor(FILL_COLOR);
 				createArrow(cd, lineColor, fillColor);
 		        
@@ -373,7 +370,7 @@ public class TransitionSupport {
 					return false;
 				
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
-				boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), trans);
 				if (inherited)
 					return false;
 
@@ -384,21 +381,21 @@ public class TransitionSupport {
 				else
 					tgt = context.getNewAnchor();
 				
-				return SupportUtil.canConnect(src, tgt, trans, (ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
+				return SupportUtil.getInstance().canConnect(src, tgt, trans, (ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
 			}
 			
 			@Override
 			public void postReconnect(IReconnectionContext context) {
 				super.postReconnect(context);
 
-				TransitionTerminal src = SupportUtil.getTransitionTerminal(context.getConnection().getStart(), fp);
-				TransitionTerminal dst = SupportUtil.getTransitionTerminal(context.getConnection().getEnd(), fp);
-				StateGraph sg = SupportUtil.getStateGraph((ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
+				TransitionTerminal src = SupportUtil.getInstance().getTransitionTerminal(context.getConnection().getStart(), fp);
+				TransitionTerminal dst = SupportUtil.getInstance().getTransitionTerminal(context.getConnection().getEnd(), fp);
+				StateGraph sg = SupportUtil.getInstance().getStateGraph((ContainerShape) context.getTargetPictogramElement().eContainer(), fp);
 
 				// in the following we set source and target of the connection regardless of whether they have changed
 				// if the type of the transition changed we create a new one and open the property dialog
 				
-				ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 				Transition orig = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
 				Transition trans = null;
 				if (src==null) {
@@ -419,7 +416,7 @@ public class TransitionSupport {
 					NonInitialTransition t = null;
 					if (context.getReconnectType().equals(ReconnectionContext.RECONNECT_SOURCE)) {
 						boolean dfltBranch = true;
-						for (Transition tr : RoomHelpers.getAllTransitions(sg)) {
+						for (Transition tr : SupportUtil.getInstance().getRoomHelpers().getAllTransitions(sg)) {
 							if (tr instanceof ContinuationTransition) {
 								TransitionTerminal from = ((ContinuationTransition) tr).getFrom();
 								if (from instanceof ChoicepointTerminal) {
@@ -483,7 +480,7 @@ public class TransitionSupport {
 				}
 				
 				doneChanges = true;
-		        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+		        Color fillColor = SupportUtil.getInstance().getRoomHelpers().hasDetailCode(trans.getAction())?
 		        		manageColor(LINE_COLOR):manageColor(FILL_COLOR);
 				updateLabel(trans, context.getConnection(), fillColor);
 			}
@@ -525,10 +522,10 @@ public class TransitionSupport {
 					if (conn.getConnectionDecorators().size()>=2) {
 						ConnectionDecorator cd = conn.getConnectionDecorators().get(0);
 						if (cd.getGraphicsAlgorithm() instanceof Polygon) {
-							ActorClass ac = SupportUtil.getActorClass(getDiagram());
-							boolean inherited = SupportUtil.isInherited(getDiagram(), t);
+							ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
+							boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), t);
 							Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-							String code = RoomHelpers.getAllActionCode(t, ac);
+							String code = SupportUtil.getInstance().getRoomHelpers().getAllActionCode(t, ac);
 							boolean hasActionCode = code!=null && !code.isEmpty();
 							Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
 							if (!equal(cd.getGraphicsAlgorithm().getBackground(), fillColor))
@@ -568,12 +565,12 @@ public class TransitionSupport {
 				boolean updated = false;
 				
 				if (bo instanceof Transition) {
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
+					ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 					Transition trans = (Transition) bo;
 					Connection conn = (Connection)context.getPictogramElement();
-					boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
+					boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), trans);
 					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-			        String code = RoomHelpers.getAllActionCode(trans, ac);
+			        String code = SupportUtil.getInstance().getRoomHelpers().getAllActionCode(trans, ac);
 					boolean hasActionCode = code!=null && !code.isEmpty();
 			        Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
 					updateLabel(trans, conn, fillColor);
@@ -633,11 +630,11 @@ public class TransitionSupport {
 				Connection conn = (Connection) pe;
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getActorClass(getDiagram()), trans);
+				TransitionPropertyDialog dlg = new TransitionPropertyDialog(shell, SupportUtil.getInstance().getActorClass(getDiagram()), trans);
 				if (dlg.open()==Window.OK){
-					boolean inherited = SupportUtil.isInherited(getDiagram(), trans);
+					boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), trans);
 					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-			        Color fillColor = RoomHelpers.hasDetailCode(trans.getAction())?
+			        Color fillColor = SupportUtil.getInstance().getRoomHelpers().hasDetailCode(trans.getAction())?
 			        		lineColor:manageColor(FILL_COLOR);
 					updateLabel(trans, conn, fillColor);
 				
@@ -691,7 +688,7 @@ public class TransitionSupport {
 				if (pe instanceof ConnectionDecorator)
 					pe = (PictogramElement) pe.eContainer();
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
-				ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 				if (ac.getStateMachine()==null)
 					ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
 				
@@ -727,7 +724,7 @@ public class TransitionSupport {
 				
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof Transition) {
-					boolean inherited = SupportUtil.isInherited(getDiagram(), (Transition) bo);
+					boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), (Transition) bo);
 					if (inherited)
 						return false;
 
@@ -785,8 +782,8 @@ public class TransitionSupport {
 
 			if (bo instanceof Transition) {
 				Transition trans = (Transition) bo;
-				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
-				boolean editable = RoomHelpers.getActorClass(trans)==ac;
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagramTypeProvider().getDiagram());
+				boolean editable = SupportUtil.getInstance().getRoomHelpers().getActorClass(trans)==ac;
 				
 				// let's check whether we already refined this transition
 				if (!editable)
@@ -838,7 +835,7 @@ public class TransitionSupport {
 			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 			int MAX_LINE_LENGTH = store.getInt(PreferenceConstants.MAX_LABEL_LINE_LENGTH);
 			int MAX_LINES = store.getInt(PreferenceConstants.MAX_LABEL_LINES);
-			String label = RoomNameProvider.getTransitionLabelName(trans);
+			String label = SupportUtil.getInstance().getRoomNameProvider().getTransitionLabelName(trans);
 			StringBuilder result = new StringBuilder();
 			int i = 0;
 			for (; i+MAX_LINE_LENGTH<label.length(); i+=MAX_LINE_LENGTH) {
@@ -867,8 +864,8 @@ public class TransitionSupport {
 			Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof Transition) {
 				Transition trans = (Transition) bo;
-				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
-				boolean editable = RoomHelpers.getActorClass(trans)==ac;
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagramTypeProvider().getDiagram());
+				boolean editable = SupportUtil.getInstance().getRoomHelpers().getActorClass(trans)==ac;
 				return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
 			}
 			
@@ -885,9 +882,9 @@ public class TransitionSupport {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof Transition) {
 				Transition tr = (Transition) bo;
-				String label = RoomNameProvider.getTransitionLabelName(tr);
-				ActorClass ac = SupportUtil.getActorClass(getDiagramTypeProvider().getDiagram());
-				String code = RoomHelpers.getAllActionCode(tr, ac);
+				String label = SupportUtil.getInstance().getRoomNameProvider().getTransitionLabelName(tr);
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagramTypeProvider().getDiagram());
+				String code = SupportUtil.getInstance().getRoomHelpers().getAllActionCode(tr, ac);
 				if (code!=null && !code.isEmpty()) {
 					if (label.length()>0)
 						label += "\n";

@@ -15,32 +15,32 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.core.room.State
-import org.eclipse.etrice.core.room.Transition
-import org.eclipse.etrice.core.room.GuardedTransition
-import org.eclipse.etrice.core.room.TriggeredTransition
-import org.eclipse.etrice.core.room.NonInitialTransition
+import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.generator.generic.TransitionChainGenerator
+import org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil
+import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.room.GuardedTransition
+import org.eclipse.etrice.core.room.NonInitialTransition
+import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
+import org.eclipse.etrice.core.room.TriggeredTransition
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.base.CodegenHelpers
+import org.eclipse.xtext.util.Pair
 
 import static org.eclipse.xtext.util.Tuples.*
-
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil.*
 
 /**
  * A target language independent generator of the state machine implementation-
  */
 class GenericStateMachineGenerator {
 
+	@Inject protected extension RoomHelpers
+	@Inject protected extension ETriceGenUtil
+	@Inject protected extension CodegenHelpers
 	@Inject protected extension RoomExtensions
 	@Inject protected ILanguageExtension langExt
 	@Inject protected GenericProtocolClassGenerator pcGen

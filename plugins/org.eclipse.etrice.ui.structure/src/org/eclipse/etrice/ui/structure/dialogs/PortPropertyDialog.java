@@ -24,8 +24,22 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
+import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.room.CompoundProtocolClass;
+import org.eclipse.etrice.core.room.ExternalPort;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
+import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.structure.Activator;
+import org.eclipse.etrice.ui.structure.support.SupportUtil;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -41,21 +55,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.CompoundProtocolClass;
-import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
-import org.eclipse.etrice.ui.structure.Activator;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-
 public class PortPropertyDialog extends AbstractPropertyDialog {
 
 	class NameValidator implements IValidator {
@@ -65,7 +64,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = ValidationUtil.isUniqueName(port, name);
+				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(port, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
@@ -226,11 +225,11 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	
 	@Override
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
-		Result notReferenced = ValidationUtil.isFreeOfReferences(port);
+		Result notReferenced = SupportUtil.getInstance().getValidationUtil().isFreeOfReferences(port);
 		boolean multiplicityAnyAllowed = true;
 		ActorContainerClass parent = (ActorContainerClass) port.eContainer();
 		if (parent instanceof ActorClass) {
-			 if (ValidationUtil.isReferencedAsReplicatedInModel((ActorClass) parent))
+			 if (SupportUtil.getInstance().getValidationUtil().isReferencedAsReplicatedInModel((ActorClass) parent))
 				 multiplicityAnyAllowed = false;
 		}
 		NameValidator nv = new NameValidator();

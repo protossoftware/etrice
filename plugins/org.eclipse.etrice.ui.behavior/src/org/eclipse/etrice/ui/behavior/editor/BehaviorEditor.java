@@ -40,6 +40,8 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.swt.graphics.Image;
 
+import com.google.common.base.Function;
+
 
 public class BehaviorEditor extends RoomDiagramEditor {
 
@@ -135,7 +137,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 */
 	protected void removeUnusedRefinedStates() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		ActorClass ac = SupportUtil.getActorClass(diagram);
+		ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 		
 		if (ac.getStateMachine()!=null) {
 			ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
@@ -155,11 +157,12 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 * @return
 	 */
 	private boolean isUnused(RefinedState s) {
-		if (RoomHelpers.hasDirectSubStructure(s))
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		if (roomHelpers.hasDirectSubStructure(s))
 			return false;
-		if (RoomHelpers.hasDetailCode(s.getEntryCode()))
+		if (roomHelpers.hasDetailCode(s.getEntryCode()))
 			return false;
-		if (RoomHelpers.hasDetailCode(s.getExitCode()))
+		if (roomHelpers.hasDetailCode(s.getExitCode()))
 			return false;
 		
 		return true;
@@ -167,12 +170,13 @@ public class BehaviorEditor extends RoomDiagramEditor {
 
 	protected void removeEmptySubgraphs() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
 
 		// if our current context is an empty state graph we go one level up
 		StateGraph current = ContextSwitcher.getCurrentStateGraph(diagram);
 		if (current!=null && current.eContainer() instanceof State) {
 			State s = (State) current.eContainer();
-			if (!RoomHelpers.hasDirectSubStructure(s)) {
+			if (!roomHelpers.hasDirectSubStructure(s)) {
 				ContextSwitcher.goUp(diagram, current);
 			}
 		}
@@ -190,7 +194,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 			StateGraph sg = (StateGraph) bo;
 			if (sg.eContainer() instanceof State) {
 				State s = (State) sg.eContainer();
-				if (!RoomHelpers.hasDirectSubStructure(s)) {
+				if (!roomHelpers.hasDirectSubStructure(s)) {
 					EcoreUtil.delete(sg);
 					toBeRemoved.add(ctxShape);
 				}
@@ -209,7 +213,8 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		if (ac.getStateMachine()==null)
 			return;
 		
-		Map<RefinedState, RefinedState> rs2parent = RoomHelpers.getRefinedStatesToRelocate(ac);
+		Function<RefinedState, String> nameProvider = SupportUtil.getInstance().getRoomNameProvider().getRefinedStateNameProvider();
+		Map<RefinedState, RefinedState> rs2parent = SupportUtil.getInstance().getRoomHelpers().getRefinedStatesToRelocate(ac, nameProvider);
 		
 		// move all to the new context
 		for (RefinedState rs : rs2parent.keySet()) {

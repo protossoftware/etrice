@@ -31,6 +31,9 @@ import com.google.inject.Inject;
 public class ConfigLabelProvider extends BaseLabelProvider {
 
 	@Inject
+	private ConfigUtil configUtil;
+
+	@Inject
 	public ConfigLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
@@ -94,8 +97,8 @@ public class ConfigLabelProvider extends BaseLabelProvider {
 	String text(ActorInstanceConfig mdl) {
 		ActorContainerClass root = mdl.getSubSystem().getType();
 		RefPath path = mdl.getPath();
-		ActorRef ref = ConfigUtil.getLastActorRef(root, path);
-		return "Config of ActorInstance "+ConfigUtil.getPath(mdl)+" ("+ref.getType().getName()+")";
+		ActorRef ref = configUtil.getLastActorRef(root, path);
+		return "Config of ActorInstance "+configUtil.getPath(mdl)+" ("+ref.getType().getName()+")";
 	}
 
 	String text(AttrClassConfig mdl) {

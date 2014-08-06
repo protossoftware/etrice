@@ -41,6 +41,9 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver
 class DataConfiguration implements IDataConfiguration {
 
 	@Inject
+	protected extension DataConfigurationHelper
+	
+	@Inject
 	protected ILogger logger;
 
 	@Inject
@@ -53,7 +56,7 @@ class DataConfiguration implements IDataConfiguration {
 	}
 
 	override setResources(ResourceSet resource, ILogger logger) {
-		DataConfigurationHelper::setConfigModels(resource, logger)
+		setConfigModels(resource, logger)
 	}
 
 	// static
@@ -71,12 +74,12 @@ class DataConfiguration implements IDataConfiguration {
 
 	def private getAttrClassConfig(ActorClass actor, List<Attribute> path) {
 		var id = '''/«actor.name»/«path.toStringPath»'''.toString
-		DataConfigurationHelper::actorClassAttrMap.get(id)
+		actorClassAttrMap.get(id)
 	}
 
 	override getAttrClassConfigValue(ProtocolClass pc, boolean regular, List<Attribute> path) {
 		var id = '''/«pc.name»/«IF regular»regular«ELSE»conjugated«ENDIF»/«path.toStringPath»'''.toString
-		DataConfigurationHelper::protocolClassAttrMap.get(id)?.value?.toStringExpr
+		protocolClassAttrMap.get(id)?.value?.toStringExpr
 	}
 
 	def private toStringPath(List<Attribute> path) {
@@ -85,11 +88,11 @@ class DataConfiguration implements IDataConfiguration {
 
 	override getAttrInstanceConfigValue(ActorInstance ai, List<Attribute> path) {
 		var id = ai.path + "/" + path.toStringPath
-		DataConfigurationHelper::actorInstanceAttrMap.get(id)?.value?.toStringExpr
+		actorInstanceAttrMap.get(id)?.value?.toStringExpr
 	}
 
 	override getAttrInstanceConfigValue(InterfaceItemInstance item, List<Attribute> path) {
-		DataConfigurationHelper::actorInstanceAttrMap.get(item.path + "/" + path.toStringPath)?.value?.toStringExpr
+		actorInstanceAttrMap.get(item.path + "/" + path.toStringPath)?.value?.toStringExpr
 	}
 
 	// dynamic
@@ -117,7 +120,7 @@ class DataConfiguration implements IDataConfiguration {
 
 	override getDynConfigReadAttributes(ActorInstance ai) {
 		val result = new ArrayList<Attribute>
-		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(ai.path)
+		var configs = dynActorInstanceAttrMap.get(ai.path)
 		configs?.forEach(c|if(c.readOnly) result.add(c.attribute))
 
 		return result
@@ -125,7 +128,7 @@ class DataConfiguration implements IDataConfiguration {
 
 	override getDynConfigWriteAttributes(ActorInstance ai) {
 		val result = new ArrayList<Attribute>
-		var configs = DataConfigurationHelper::dynActorInstanceAttrMap.get(ai.path)
+		var configs = dynActorInstanceAttrMap.get(ai.path)
 		configs?.forEach(c|if(!c.readOnly) result.add(c.attribute))
 
 		return result
@@ -156,19 +159,19 @@ class DataConfiguration implements IDataConfiguration {
 	}
 
 	def private getConfig(SubSystemInstance cc) {
-		DataConfigurationHelper::subSystemConfigMap.get(cc.path)
+		subSystemConfigMap.get(cc.path)
 	}
 
 	override getDynConfigReadAttributes(ActorClass actor) {
 		val result = new HashSet<Attribute>
-		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
+		val configs = dynActorClassAttrMap.get(actor)
 		configs?.forEach(c|if(c.readOnly) result.add(c.attribute))
 		return result.toList
 	}
 
 	override getDynConfigWriteAttributes(ActorClass actor) {
 		val result = new HashSet<Attribute>
-		var configs = DataConfigurationHelper::dynActorClassAttrMap.get(actor)
+		val configs = dynActorClassAttrMap.get(actor)
 		configs?.forEach(c|if(!c.readOnly) result.add(c.attribute))
 		return result.toList
 	}

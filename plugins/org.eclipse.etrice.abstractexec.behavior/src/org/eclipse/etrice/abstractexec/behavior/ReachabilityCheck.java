@@ -18,6 +18,7 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.EntryPoint;
@@ -31,7 +32,6 @@ import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 
 public class ReachabilityCheck {
@@ -67,7 +67,7 @@ public class ReachabilityCheck {
 			for (Transition trans : transitions)
 				if (trans instanceof InitialTransition) {
 					visited.add(trans);
-					StateGraphNode cur = RoomHelpers.getNode(trans.getTo());
+					StateGraphNode cur = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 					if (!visited.contains(cur))
 						queue.add(cur);
 					break;
@@ -101,7 +101,7 @@ public class ReachabilityCheck {
 		visited.add(node);
 		if (node instanceof State) {
 			State st = (State) node;
-			if (RoomHelpers.hasDirectSubStructure(st)) {
+			if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st)) {
 				addStartingPoints(st.getSubgraph(), true);
 			} else {
 				// visit outgoing triggered transitions
@@ -129,7 +129,7 @@ public class ReachabilityCheck {
 	
 	private void visit(Transition trans){
 		visited.add(trans);
-		StateGraphNode target = RoomHelpers.getNode(trans.getTo());
+		StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 		if (!visited.contains(target))
 			queue.add(target);
 	}

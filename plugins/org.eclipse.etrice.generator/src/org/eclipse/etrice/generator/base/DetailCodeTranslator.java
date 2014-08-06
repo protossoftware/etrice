@@ -63,6 +63,7 @@ public class DetailCodeTranslator {
 		int pos = 0;
 	}
 	
+	private RoomHelpers roomHelpers = new RoomHelpers();
 	private ITranslationProvider provider;
 	private HashMap<String, InterfaceItem> name2item = new HashMap<String, InterfaceItem>();
 	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
@@ -357,7 +358,7 @@ public class DetailCodeTranslator {
 		
 		String token = getToken(text, curr);
 		
-		List<Message> messages = RoomHelpers.getMessageListDeep(item, outgoing);
+		List<Message> messages = roomHelpers.getMessageListDeep(item, outgoing);
 		for (Message message : messages) {
 			if (message.getName().equals(token))
 				return message;
@@ -485,7 +486,7 @@ public class DetailCodeTranslator {
 		if (container instanceof ActorClass) {
 			ActorClass ac = (ActorClass) container;
 
-			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
+			List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(ac);
 			for (InterfaceItem item : items) {
 				name2item.put(item.getName(), item);
 			}
@@ -493,9 +494,9 @@ public class DetailCodeTranslator {
 
 		List<Attribute> attributes = null;
 		if (container instanceof ActorClass)
-			attributes = RoomHelpers.getAllAttributes((ActorClass) container);
+			attributes = roomHelpers.getAllAttributes((ActorClass) container);
 		else if (container instanceof DataClass)
-			attributes = RoomHelpers.getAllAttributes((DataClass) container);
+			attributes = roomHelpers.getAllAttributes((DataClass) container);
 		else if (container instanceof PortClass)
 			attributes = ((PortClass) container).getAttributes();
 		if (attributes!=null)
@@ -505,9 +506,9 @@ public class DetailCodeTranslator {
 		
 		List<? extends Operation> operations = null;
 		if (container instanceof ActorClass)
-			operations = RoomHelpers.getAllOperations((ActorClass) container);
+			operations = roomHelpers.getAllOperations((ActorClass) container);
 		else if (container instanceof DataClass)
-			operations = RoomHelpers.getAllOperations((DataClass) container);
+			operations = roomHelpers.getAllOperations((DataClass) container);
 		else if (container instanceof PortClass)
 			operations = ((PortClass) container).getOperations();
 		if (operations!=null)

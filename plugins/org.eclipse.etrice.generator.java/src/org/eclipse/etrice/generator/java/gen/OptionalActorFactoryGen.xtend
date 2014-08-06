@@ -15,6 +15,7 @@ import org.eclipse.etrice.generator.base.FileSystemHelpers
 class OptionalActorFactoryGen {
 
 	@Inject IGeneratorFileIo fileIO
+	@Inject extension RoomHelpers
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension FileSystemHelpers
@@ -50,11 +51,11 @@ class OptionalActorFactoryGen {
 					«ac.name» actor = new «ac.name»(ai, name);
 					
 					// wiring
-					«FOR port: RoomHelpers::getAllEndPorts(ac).filter(p|RoomHelpers::isExternal(p))»
-						«if (RoomHelpers::isDataDriven(port)) "DataPortBase" else "InterfaceItemBase"».connect(ai, "«port.name»", name+"/«port.name»");
+					«FOR port: getAllEndPorts(ac).filter(p|isExternal(p))»
+						«if (isDataDriven(port)) "DataPortBase" else "InterfaceItemBase"».connect(ai, "«port.name»", name+"/«port.name»");
 					«ENDFOR»
 					«FOR open: wired.openBindings»
-						«if (RoomHelpers::isDataDriven(open.port)) "DataPortBase" else "InterfaceItemBase"».connect(ai, "«open.port.name»", name+"/«open.path.join('/')»");
+						«if (isDataDriven(open.port)) "DataPortBase" else "InterfaceItemBase"».connect(ai, "«open.port.name»", name+"/«open.path.join('/')»");
 					«ENDFOR»
 					«FOR req: wired.requiredServices»
 						«if (req.protocol.commType==CommunicationType::DATA_DRIVEN) "DataPortBase" else "InterfaceItemBase"».connect(ai, "«req.protocol.fullyQualifiedName»", name+"/«req.path.join('/')»");

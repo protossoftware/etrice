@@ -54,6 +54,14 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class DocGen {
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
+  private CodegenHelpers _codegenHelpers;
+  
+  @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
@@ -558,7 +566,7 @@ public class DocGen {
     _builder.append("Message & Data & Description\\\\");
     _builder.newLine();
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       for(final Message ims : _allIncomingMessages) {
         _builder.append("\t");
         _builder.append("\\hline");
@@ -609,7 +617,7 @@ public class DocGen {
     _builder.append("Message & Data & Description\\\\");
     _builder.newLine();
     {
-      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
       for(final Message oms : _allOutgoingMessages) {
         _builder.append("\t");
         _builder.append("\\hline");
@@ -744,7 +752,7 @@ public class DocGen {
       }
       _builder.newLine();
       {
-        List<Port> _allPorts = RoomHelpers.getAllPorts(ac);
+        List<Port> _allPorts = this._roomHelpers.getAllPorts(ac);
         boolean _isEmpty = _allPorts.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
@@ -757,7 +765,7 @@ public class DocGen {
       }
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\\level{3}{Statemachine}");
           _builder.newLine();
@@ -836,7 +844,7 @@ public class DocGen {
             boolean _notEquals = (!Objects.equal(_docu, null));
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
-              String _genStatePathName = CodegenHelpers.getGenStatePathName(s);
+              String _genStatePathName = this._codegenHelpers.getGenStatePathName(s);
               String _replaceAll_1 = _genStatePathName.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_1, "");
               _builder.append("}:");
@@ -888,7 +896,7 @@ public class DocGen {
         EList<State> _states_1 = _stateMachine_2.getStates();
         for(final State s_1 : _states_1) {
           {
-            boolean _isLeaf = RoomHelpers.isLeaf(s_1);
+            boolean _isLeaf = this._roomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
               String _generateStateDoc = this.generateStateDoc(model, ac, s_1);
@@ -916,17 +924,17 @@ public class DocGen {
   
   private String getKind(final Port p) {
     String _xifexpression = null;
-    boolean _isInternal = RoomHelpers.isInternal(p);
+    boolean _isInternal = this._roomHelpers.isInternal(p);
     if (_isInternal) {
       _xifexpression = "internal";
     } else {
       String _xifexpression_1 = null;
-      boolean _isExternal = RoomHelpers.isExternal(p);
+      boolean _isExternal = this._roomHelpers.isExternal(p);
       if (_isExternal) {
         _xifexpression_1 = "external";
       } else {
         String _xifexpression_2 = null;
-        boolean _isRelay = RoomHelpers.isRelay(p);
+        boolean _isRelay = this._roomHelpers.isRelay(p);
         if (_isRelay) {
           _xifexpression_2 = "relay";
         } else {
@@ -961,7 +969,7 @@ public class DocGen {
     _builder.append("\\textbf{Name} & \\textbf{Protocol} & \\textbf{Type} & \\textbf{Kind} & \\textbf{Multiplicity} & \\textbf{Description}\\\\");
     _builder.newLine();
     {
-      List<Port> _allPorts = RoomHelpers.getAllPorts(ac);
+      List<Port> _allPorts = this._roomHelpers.getAllPorts(ac);
       for(final Port at : _allPorts) {
         _builder.append("\\hline");
         _builder.newLine();
@@ -1005,7 +1013,7 @@ public class DocGen {
       String _name = ac.getName();
       String _plus_1 = (_plus + _name);
       String _plus_2 = (_plus_1 + "_");
-      String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+      String _genStatePathName = this._codegenHelpers.getGenStatePathName(state);
       String _plus_3 = (_plus_2 + _genStatePathName);
       String filename = (_plus_3 + "_behavior.jpg");
       String _replaceAll = filename.replaceAll("\\\\", "/");
@@ -1014,7 +1022,7 @@ public class DocGen {
       this.logger.logInfo(("Gen Filename: " + filename));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\\level{4}{Subgraph ");
-      String _genStatePathName_1 = CodegenHelpers.getGenStatePathName(state);
+      String _genStatePathName_1 = this._codegenHelpers.getGenStatePathName(state);
       String _replaceAll_1 = _genStatePathName_1.replaceAll("_", "\\\\_");
       _builder.append(_replaceAll_1, "");
       _builder.append("}");
@@ -1025,7 +1033,7 @@ public class DocGen {
         if (_equals) {
           String _name_1 = ac.getName();
           String _plus_4 = (_name_1 + "_");
-          String _genStatePathName_2 = CodegenHelpers.getGenStatePathName(state);
+          String _genStatePathName_2 = this._codegenHelpers.getGenStatePathName(state);
           String _plus_5 = (_plus_4 + _genStatePathName_2);
           CharSequence _includeGraphics = this.includeGraphics(latexFilename, "0.4", _plus_5);
           _builder.append(_includeGraphics, "");
@@ -1044,7 +1052,7 @@ public class DocGen {
             boolean _notEquals = (!Objects.equal(_docu, null));
             if (_notEquals) {
               _builder.append("\\textbf{State description} \\textit{");
-              String _genStatePathName_3 = CodegenHelpers.getGenStatePathName(s);
+              String _genStatePathName_3 = this._codegenHelpers.getGenStatePathName(s);
               String _replaceAll_2 = _genStatePathName_3.replaceAll("_", "\\\\_");
               _builder.append(_replaceAll_2, "");
               _builder.append("}:");
@@ -1097,7 +1105,7 @@ public class DocGen {
         EList<State> _states_1 = _subgraph_2.getStates();
         for(final State s_1 : _states_1) {
           {
-            boolean _isLeaf = RoomHelpers.isLeaf(s_1);
+            boolean _isLeaf = this._roomHelpers.isLeaf(s_1);
             boolean _not = (!_isLeaf);
             if (_not) {
               String _generateStateDoc = this.generateStateDoc(model, ac, s_1);

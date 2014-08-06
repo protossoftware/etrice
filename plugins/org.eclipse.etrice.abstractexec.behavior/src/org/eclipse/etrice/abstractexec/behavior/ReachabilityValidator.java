@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.base.NullLogger;
@@ -29,7 +30,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 
@@ -56,7 +56,7 @@ public class ReachabilityValidator implements ICustomValidator {
 		if (ac.isAbstract())
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(ac))
 			// is checked elsewhere
 			return;
 

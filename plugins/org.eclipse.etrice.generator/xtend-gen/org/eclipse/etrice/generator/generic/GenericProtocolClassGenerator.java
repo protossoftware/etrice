@@ -35,6 +35,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class GenericProtocolClassGenerator {
   @Inject
   @Extension
+  protected RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   protected ILanguageExtension _iLanguageExtension;
   
   @Inject
@@ -55,7 +59,7 @@ public class GenericProtocolClassGenerator {
     String _string = Integer.valueOf(offset).toString();
     Pair<String, String> _pair = Tuples.<String, String>pair(_memberInDeclaration, _string);
     list.add(_pair);
-    List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+    List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
     for (final Message msg : _allOutgoingMessages) {
       {
         offset = (offset + 1);
@@ -68,7 +72,7 @@ public class GenericProtocolClassGenerator {
         list.add(_pair_1);
       }
     }
-    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+    List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
     for (final Message msg_1 : _allIncomingMessages) {
       {
         offset = (offset + 1);

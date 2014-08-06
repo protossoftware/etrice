@@ -38,12 +38,13 @@ import org.eclipse.etrice.core.room.StateGraph
 import org.eclipse.etrice.core.room.Transition
 import org.eclipse.etrice.core.room.TransitionPoint
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.etrice.generator.base.FileSystemHelpers
+import javax.inject.Inject
 
 /**
 	collection of convenience functions for code generation
@@ -54,6 +55,8 @@ class RoomExtensions {
 	private static String genDir = "/src-gen/"
 	private static String genInfoDir = "/src-gen-info/"
 	private static String genDocDir = "/doc-gen/"
+	
+	@Inject protected extension RoomHelpers
 	
 	def static setDefaultGenDir() {
 		genDir = "/src-gen/"

@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -100,24 +101,25 @@ public class PortMessageSelectionDialog extends FormDialog {
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			item2pairs = new HashMap<InterfaceItem, ArrayList<MethodItemPair>>();
-			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
+			RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+			List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(ac);
 			for (InterfaceItem item : items) {
 				ArrayList<MethodItemPair> pairs = new ArrayList<MethodItemPair>();
-				List<Message> out = RoomHelpers.getMessageListDeep(item, true);
+				List<Message> out = roomHelpers.getMessageListDeep(item, true);
 				if (!recvOnly) {
 					for (Message msg : out) {
 						if (!msg.isPriv())
 							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
-				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
-					List<Message> in = RoomHelpers.getMessageListDeep(item, false);
+				if (roomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
+					List<Message> in = roomHelpers.getMessageListDeep(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())
 							pairs.add(new MsgItemPair(item, msg, false));
 					}
 				}
-				PortClass pcls = RoomHelpers.getPortClass(item);
+				PortClass pcls = roomHelpers.getPortClass(item);
 				if (pcls!=null) {
 					for (PortOperation op : pcls.getOperations()) {
 						if (op.getSendsMsg()!=null)
@@ -134,7 +136,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 
 		@Override
 		public Object[] getElements(Object inputElement) {
-			return RoomHelpers.getAllInterfaceItems(ac).toArray();
+			return SupportUtil.getInstance().getRoomHelpers().getAllInterfaceItems(ac).toArray();
 		}
 
 		@Override
@@ -158,11 +160,11 @@ public class PortMessageSelectionDialog extends FormDialog {
 		public boolean hasChildren(Object element) {
 			if (element instanceof InterfaceItem) {
 				InterfaceItem item = (InterfaceItem)element;
-				if (!RoomHelpers.getMessageListDeep(item, true).isEmpty())
+				if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, true).isEmpty())
 					return true;
 				
-				if (RoomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN)
-					if (!RoomHelpers.getMessageListDeep(item, false).isEmpty())
+				if (SupportUtil.getInstance().getRoomHelpers().getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN)
+					if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false).isEmpty())
 						return true;
 			}
 			
@@ -224,7 +226,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 						return msg.getData().getName()+" : "+msg.getData().getRefType().getType().getName();
 				}
 				else if (element instanceof OperationItemPair) {
-					String sig = RoomHelpers.getTypedArgumentList(((OperationItemPair) element).op);
+					String sig = SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList(((OperationItemPair) element).op);
 					return sig.substring(1, sig.length()-1);	// omit round brackets
 				}
 				break;

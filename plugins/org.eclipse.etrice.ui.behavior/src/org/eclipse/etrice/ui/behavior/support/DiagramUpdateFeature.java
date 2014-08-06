@@ -60,7 +60,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
-		ActorClass ac = SupportUtil.getActorClass(getDiagram());
+		ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 		
 		usedShapes.clear();
@@ -104,7 +104,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public boolean update(IUpdateContext context) {
-		ActorClass ac = SupportUtil.getActorClass(getDiagram());
+		ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 		StateGraphContext tree = StateGraphContext.createContextTree(ac);
 
 		usedShapes.clear();
@@ -206,7 +206,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		ContainerShape cont = findStateGraphContainer(sg);
 		if (cont==null) {
 			// create
-			cont = SupportUtil.addStateGraph(ctx, getDiagram(), getFeatureProvider());
+			cont = SupportUtil.getInstance().addStateGraph(ctx, getDiagram(), getFeatureProvider());
 			changed = true;
 			usedShapes.add(cont);
 		}

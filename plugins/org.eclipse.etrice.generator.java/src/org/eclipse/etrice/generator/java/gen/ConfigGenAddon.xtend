@@ -20,14 +20,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.EnumerationType
 
 class ConfigGenAddon {
 	
@@ -35,6 +34,7 @@ class ConfigGenAddon {
 	@Inject extension TypeHelpers typeHelpers
 	@Inject extension ProcedureHelpers helpers
 	@Inject IDataConfiguration dataConfigExt
+	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
 	@Inject Initialization initGen
 	
@@ -45,7 +45,7 @@ class ConfigGenAddon {
 				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
 			«FOR pi : ai.orderedIfItemInstances»
-				«var attribs = RoomHelpers::getPortClass(pi.interfaceItem)?.attributes»
+				«var attribs = getPortClass(pi.interfaceItem)?.attributes»
 				«IF attribs != null»
 					«FOR a : attribs»
 						«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»

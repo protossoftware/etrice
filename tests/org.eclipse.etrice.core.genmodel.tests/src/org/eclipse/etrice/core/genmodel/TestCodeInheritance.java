@@ -42,7 +42,8 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 	private HashMap<EClass, ArrayList<EObject>> derivedInstances;
 	private ExpandedActorClass base;
 	private ExpandedActorClass derived;
-
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -99,26 +100,26 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 		State s = getState(derived, "BaseEntryExit");
 		assertTrue("is ExpandedRefinedState", s instanceof ExpandedRefinedState);
 		ExpandedRefinedState rs = (ExpandedRefinedState) s;
-		assertEquals("entry code", "// derived entry\n", RoomHelpers.getDetailCode(rs.getEntryCode()));
+		assertEquals("entry code", "// derived entry\n", roomHelpers.getDetailCode(rs.getEntryCode()));
 		assertNull("exit code", rs.getExitCode());
-		assertEquals("inherited entry", "// base entry\n", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
-		assertEquals("inherited exit", "// base exit\n", RoomHelpers.getDetailCode(rs.getInheritedExit()));
+		assertEquals("inherited entry", "// base entry\n", roomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "// base exit\n", roomHelpers.getDetailCode(rs.getInheritedExit()));
 		
 		s = getState(derived, "Base");
 		assertTrue("is ExpandedRefinedState", s instanceof ExpandedRefinedState);
 		rs = (ExpandedRefinedState) s;
 		assertNull("entry code", rs.getEntryCode());
-		assertEquals("exit code", "// derived exit\n", RoomHelpers.getDetailCode(rs.getExitCode()));
-		assertEquals("inherited entry", "", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
-		assertEquals("inherited exit", "", RoomHelpers.getDetailCode(rs.getInheritedExit()));
+		assertEquals("exit code", "// derived exit\n", roomHelpers.getDetailCode(rs.getExitCode()));
+		assertEquals("inherited entry", "", roomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "", roomHelpers.getDetailCode(rs.getInheritedExit()));
 		
 		s = getState(derived, "BaseSub");
 		assertTrue("is ExpandedRefinedState", s instanceof ExpandedRefinedState);
 		rs = (ExpandedRefinedState) s;
-		assertEquals("entry code", "// derived entry\n", RoomHelpers.getDetailCode(rs.getEntryCode()));
+		assertEquals("entry code", "// derived entry\n", roomHelpers.getDetailCode(rs.getEntryCode()));
 		assertNull("exit code", rs.getExitCode());
-		assertEquals("inherited entry", "", RoomHelpers.getDetailCode(rs.getInheritedEntry()));
-		assertEquals("inherited exit", "", RoomHelpers.getDetailCode(rs.getInheritedExit()));
+		assertEquals("inherited entry", "", roomHelpers.getDetailCode(rs.getInheritedEntry()));
+		assertEquals("inherited exit", "", roomHelpers.getDetailCode(rs.getInheritedExit()));
 	}
 
 }

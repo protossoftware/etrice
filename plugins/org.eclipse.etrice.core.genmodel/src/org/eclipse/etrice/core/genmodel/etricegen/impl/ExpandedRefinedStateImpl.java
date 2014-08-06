@@ -47,6 +47,9 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * @generated
  */
 public class ExpandedRefinedStateImpl extends SimpleStateImpl implements ExpandedRefinedState {
+	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	/**
 	 * The cached value of the '{@link #getInheritedEntry() <em>Inherited Entry</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -242,15 +245,15 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 		setSubgraph(rs.getSubgraph());
 		
 		// now we collect the inherited detail code
-		setInheritedEntry(RoomHelpers.getInheritedEntryCode(rs));
-		setInheritedExit(RoomHelpers.getInheritedExitCode(rs));
-		setInheritedDo(RoomHelpers.getInheritedDoCode(rs));
+		setInheritedEntry(roomHelpers.getInheritedEntryCode(rs));
+		setInheritedExit(roomHelpers.getInheritedExitCode(rs));
+		setInheritedDo(roomHelpers.getInheritedDoCode(rs));
 		
 		// remove refined state from its container
 		((StateGraph)rs.eContainer()).getStates().remove(rs);
 		
 		// put new state in place of SimpleState which is the ultimate target of the refined state
-		State bs = RoomHelpers.getBaseState(rs);
+		State bs = roomHelpers.getBaseState(rs);
 		StateGraph parent = (StateGraph) bs.eContainer();
 		parent.getStates().add(this);
 		parent.getStates().remove(bs);

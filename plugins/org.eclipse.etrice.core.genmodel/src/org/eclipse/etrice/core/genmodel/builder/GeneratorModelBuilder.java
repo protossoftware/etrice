@@ -93,6 +93,8 @@ public class GeneratorModelBuilder {
 		CREATE_OPTIONAL_INSTANCES
 	}
 	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	HashSet<WorkItem> alreadyDone = new HashSet<WorkItem>();
 
 	/**
@@ -744,7 +746,7 @@ public class GeneratorModelBuilder {
 			((OptionalActorInstance)ai).setActorClass(ac);
 
 		// get a list of super classes, super first, sub-classes last
-		List<ActorClass> classes = RoomHelpers.getClassHierarchy(ac);
+		List<ActorClass> classes = roomHelpers.getClassHierarchy(ac);
 		
 		// create instances for super classes recursively (ports, actor refs and bindings)
 		// super classes first ensures that actor refs are present when bindings are created
@@ -791,7 +793,7 @@ public class GeneratorModelBuilder {
 		ai.setActorClass(ac);
 		ai.setArray(aref.getMultiplicity()<0);
 		
-		for (ActorClass acl : RoomHelpers.getClassHierarchy(ac)) {
+		for (ActorClass acl : roomHelpers.getClassHierarchy(ac)) {
 			createPortInstances(ai, acl);
 		}
 		

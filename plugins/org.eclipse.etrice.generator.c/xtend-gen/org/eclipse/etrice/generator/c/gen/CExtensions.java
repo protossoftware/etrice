@@ -40,12 +40,17 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class CExtensions implements ILanguageExtension {
   @Inject
-  private IDiagnostician diagnostician;
+  protected IDiagnostician diagnostician;
+  
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
   
   public String getTypedDataDefinition(final Message m) {
     VarDecl _data = m.getData();
@@ -506,7 +511,7 @@ public class CExtensions implements ILanguageExtension {
         _builder.append("{");
         _builder.newLine();
         {
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass)dt));
+          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass)dt));
           boolean _hasElements = false;
           for(final Attribute att : _allAttributes) {
             if (!_hasElements) {

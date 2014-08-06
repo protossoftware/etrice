@@ -83,6 +83,9 @@ import com.google.inject.Inject;
  *
  */
 public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
+
+	@Inject
+	private RoomHelpers roomHelpers;
 	
 	public static final String STATE_PATH_DELIMITER = ".";
 
@@ -225,13 +228,13 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @param scopes
 	 */
 	private void getStateScopes(StateGraph parent, final List<IEObjectDescription> scopes) {
-		List<State> states = RoomHelpers.getAllStates(parent);
+		List<State> states = roomHelpers.getAllStates(parent);
 		HashMap<String, SimpleState> name2state = new HashMap<String, SimpleState>();
 		for (State s : states) {
 			// returning SimpleStates only simplifies the relocation task in the generator model:
 			// there we shuffle RefinedState contents to SimpleStates and remove the RefinedStates.
 			// If we had references to RefinedStates we had to redirect those
-			name2state.put(s.getName(), RoomHelpers.getBaseState(s));
+			name2state.put(s.getName(), roomHelpers.getBaseState(s));
 		}
 		for (Entry<String, SimpleState> entry : name2state.entrySet()) {
 			scopes.add(EObjectDescription.create(entry.getKey(), entry.getValue()));
@@ -248,7 +251,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		StateGraph parent = getStateGraph(ep);
-		List<TrPoint> tps = RoomHelpers.getAllTrPoints(parent);
+		List<TrPoint> tps = roomHelpers.getAllTrPoints(parent);
 		for (TrPoint tp : tps) {
 			scopes.add(EObjectDescription.create(tp.getName(), tp));
 		}
@@ -270,10 +273,10 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			State epState = ep.getState();
 			
 			// check if there is a refined state for this state
-			epState = RoomHelpers.getRefinedStateFor(parent, epState);
+			epState = roomHelpers.getRefinedStateFor(parent, epState);
 			
 			if (epState.getSubgraph()!=null) {
-				List<TrPoint> tps = RoomHelpers.getAllTrPoints(epState.getSubgraph());
+				List<TrPoint> tps = roomHelpers.getAllTrPoints(epState.getSubgraph());
 				for (TrPoint tp : tps) {
 					scopes.add(EObjectDescription.create(tp.getName(), tp));
 				}
@@ -310,7 +313,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		// first state graph in container hierarchy
 		StateGraph parent = getStateGraph(ct);
-		List<ChoicePoint> choicePoints = RoomHelpers.getAllChoicePoints(parent);
+		List<ChoicePoint> choicePoints = roomHelpers.getAllChoicePoints(parent);
 		for (ChoicePoint cp : choicePoints) {
 			scopes.add(EObjectDescription.create(cp.getName(), cp));
 		}
@@ -345,7 +348,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 			
 			if (protocol!=null)
-				for (Message msg : conjugated?RoomHelpers.getAllMessages(protocol,false):RoomHelpers.getAllMessages(protocol,true)) {
+				for (Message msg : conjugated?roomHelpers.getAllMessages(protocol,false):roomHelpers.getAllMessages(protocol,true)) {
 					scopes.add(EObjectDescription.create(msg.getName(), msg));
 				}
 		}
@@ -383,7 +386,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		ActorClass ac = getActorClass(mfi);
-		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
+		List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(ac);
 		
 		for (InterfaceItem item : items) {
 			scopes.add(EObjectDescription.create(item.getName(), item));
@@ -599,7 +602,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_SemanticsRule_msg(SemanticsRule sr, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ProtocolClass pc = RoomHelpers.getProtocolClass(sr);
+		ProtocolClass pc = roomHelpers.getProtocolClass(sr);
 		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
 		for (ProtocolClass bpc : classes) {
 			if (sr instanceof InSemanticsRule)
@@ -722,7 +725,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_MessageHandler_msg(MessageHandler handler, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
-		ProtocolClass pc = RoomHelpers.getProtocolClass(handler);
+		ProtocolClass pc = roomHelpers.getProtocolClass(handler);
 		if (pc!=null) {
 			if (handler instanceof InMessageHandler)
 				for (Message m : pc.getIncomingMessages()) {
@@ -741,7 +744,7 @@ public class RoomScopeProvider extends AbstractDeclarativeScopeProvider {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 		
 		PortClass pcls = (PortClass) op.eContainer();
-		ProtocolClass pc = RoomHelpers.getProtocolClass(op);
+		ProtocolClass pc = roomHelpers.getProtocolClass(op);
 		if (pc!=null) {
 			if (pcls==pc.getConjugated())
 				for (Message m : pc.getIncomingMessages()) {

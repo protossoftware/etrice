@@ -142,7 +142,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		private VarDecl commonData = null;
 	}
 	
-	private static class TransitionToChainBundleMap extends HashMap<Transition, TransitionChainBundle> {
+	private class TransitionToChainBundleMap extends HashMap<Transition, TransitionChainBundle> {
 		private static final long serialVersionUID = 1L;
 
 		void put(Transition t, TransitionChain tc) {
@@ -161,11 +161,11 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		public String toString() {
 			StringBuffer result = new StringBuffer();
 			for (java.util.Map.Entry<Transition, TransitionChainBundle> entry : entrySet()) {
-				result.append("transition "+RoomNameProvider.getFullPath(entry.getKey())+":\n");
+				result.append("transition "+roomNameProvider.getFullPath(entry.getKey())+":\n");
 				TransitionChainBundle bundle = entry.getValue();
 				for (TransitionChain tc : bundle.chains) {
 					String data = tc.getData()!=null? " with data "+tc.getData().getRefType().getType().getName() : "";
-					result.append("  chain starting at "+RoomNameProvider.getFullPath(tc.getTransition())+data+"\n");
+					result.append("  chain starting at "+roomNameProvider.getFullPath(tc.getTransition())+data+"\n");
 				}
 				String data = bundle.commonData!=null? bundle.commonData.getRefType().getType().getName() : "-";
 				result.append("  bundle data "+data+"\n");
@@ -208,6 +208,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	private LinkedList<TransitionChain> trchains = null;
 	private TransitionToChainBundleMap trans2chainBundle = null;
 	private HashMap<EObject, EObject> copy2orig = null;
+	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -463,7 +466,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		for (Transition t : sg.getTransitions()) {
 			addIncomingTransition(getAdjustedTargetNode(t), t);
 			if (t instanceof NonInitialTransition) {
-				addOutgoingTransition(RoomHelpers.getNode(((NonInitialTransition)t).getFrom()), t);
+				addOutgoingTransition(roomHelpers.getNode(((NonInitialTransition)t).getFrom()), t);
 			}
 		}
 	}
@@ -478,7 +481,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				if (!getActorClass().isAbstract()) {
 					int idx = sg.getTransitions().indexOf(t);
 					Transition orig = (Transition) copy2orig.get(t);
-					String name = RoomNameProvider.getName(orig);
+					String name = roomNameProvider.getName(orig);
 					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 				}
 		}
@@ -555,32 +558,32 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" is not connected", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" is not connected", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!getActorClass().isAbstract() && data.getInTrans().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getActorClass().getName()+": TrPoint "+RoomNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -641,7 +644,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 							for (TriggeredTransition t2 : at.getTransitions()) {
 								for (Trigger trig2 : t2.getTriggers()) {
 									if (isMatching(trig2, tr)) {
-										if (!RoomHelpers.isGuarded(trig2)) {
+										if (!roomHelpers.isGuarded(trig2)) {
 											unguarded = t2;
 											if (!sameLevelTransitions.contains(t2))
 												accepted = false;
@@ -652,7 +655,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 							if (accepted) {
 								if (unguarded!=null) {
 									// there already is an unguarded transition: require a quard
-									if (!RoomHelpers.isGuarded(trig)) {
+									if (!roomHelpers.isGuarded(trig)) {
 										validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									}
 									else {
@@ -712,10 +715,10 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		// improve performance using maps name2ifitem and name2msgs
 		HashMap<String, InterfaceItem> name2ifitem = new HashMap<String, InterfaceItem>();
 		HashMap<String, List<Message>> name2msgs = new HashMap<String, List<Message>>();
-		List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(getActorClass());
+		List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(getActorClass());
 		for (InterfaceItem item : items) {
 			name2ifitem.put(item.getName(), item);
-			name2msgs.put(item.getName(),RoomHelpers.getMessageListDeep(item, false));      								
+			name2msgs.put(item.getName(),roomHelpers.getMessageListDeep(item, false));      								
 		}
 		
 		// compute a set of all trigger strings
@@ -811,14 +814,14 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	private void collectChainTransitions(TransitionChain tc, Transition t) {
 		trans2chainBundle.put(t, tc);
 		
-		StateGraphNode node = RoomHelpers.getNode(t.getTo());
+		StateGraphNode node = roomHelpers.getNode(t.getTo());
 		
 		// the chain ends if a state is reached
 		if (node instanceof State)
 			return;
 		
 		// the chain ends if source and destination coincide
-		if (tc.getTransition() instanceof NonInitialTransition && node==RoomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
+		if (tc.getTransition() instanceof NonInitialTransition && node==roomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
 			return;
 		
 		for (Transition next : getOutgoingTransitions(node)) {
@@ -919,7 +922,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 					else
 						types.add(null);
 				}
-				RefableType rt = RoomHelpers.getLastCommonSuperType(types);
+				RefableType rt = roomHelpers.getLastCommonSuperType(types);
 				if (rt!=null) {
 					VarDecl vd = RoomFactory.eINSTANCE.createVarDecl();
 					vd.setName("data");
@@ -1210,7 +1213,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 
 			@Override
 			public int compare(TransitionChain o1, TransitionChain o2) {
-				return RoomNameProvider.getFullPath(o1.getTransition()).compareTo(RoomNameProvider.getFullPath(o2.getTransition()));
+				return roomNameProvider.getFullPath(o1.getTransition()).compareTo(roomNameProvider.getFullPath(o2.getTransition()));
 			}
 			
 		});
@@ -1219,7 +1222,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private StateGraphNode getAdjustedTargetNode(Transition t) {
-		StateGraphNode node = RoomHelpers.getNode(t.getTo());
+		StateGraphNode node = roomHelpers.getNode(t.getTo());
 		if (node instanceof EntryPoint) {
 			NodeData data = node2data.get(node);
 			if (data==null || data.getOutTrans().isEmpty()) {

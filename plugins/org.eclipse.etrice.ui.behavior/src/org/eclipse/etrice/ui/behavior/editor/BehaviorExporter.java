@@ -14,12 +14,11 @@ package org.eclipse.etrice.ui.behavior.editor;
 
 import java.io.File;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.DiagramExporter;
 import org.eclipse.ui.PlatformUI;
 
@@ -53,9 +52,9 @@ public class BehaviorExporter {
 			return;
 		
 		for (State state : sg.getStates()) {
-			if (RoomHelpers.hasDirectSubStructure(state)) {
+			if (SupportUtil.getInstance().getRoomHelpers().hasDirectSubStructure(state)) {
 				if (editor.showStateGraph(state.getSubgraph())) {
-					String filename = basename+"_"+RoomNameProvider.getStatePathName(state)+SUFFIX;
+					String filename = basename+"_"+SupportUtil.getInstance().getRoomNameProvider().getStatePathName(state)+SUFFIX;
 					DiagramExporter.export(editor, filename);
 				}
 				

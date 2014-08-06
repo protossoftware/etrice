@@ -45,7 +45,8 @@ public class TestMultipleConnectedChoicepoint extends
 	
 	private Root root;
 	private ExpandedActorClass xpac;
-
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -107,7 +108,7 @@ public class TestMultipleConnectedChoicepoint extends
 	public void testGraph() {
 		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
-		assertEquals("choicepoint name", "cp0", RoomNameProvider.getFullPath(cp));
+		assertEquals("choicepoint name", "cp0", roomNameProvider.getFullPath(cp));
 		assertEquals("number of incoming transitions", 2, xpac.getIncomingTransitions(cp).size());
 		assertEquals("number of outgoing transitions", 2, xpac.getOutgoingTransitions(cp).size());
 	}

@@ -14,13 +14,17 @@ package org.eclipse.etrice.core.scoping;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 
 
 public class ActorRefFilter implements Predicate<IEObjectDescription> {
+
+	@Inject
+	private RoomHelpers roomHelpers;
 
 	private ActorClass ac;
 
@@ -42,7 +46,7 @@ public class ActorRefFilter implements Predicate<IEObjectDescription> {
 			if (ref.getName()==null)
 				return true;
 			
-			return !ValidationUtil.isReferencing(ref, ac);
+			return !roomHelpers.isReferencing(ref, ac);
 		}
 		
 		return true;

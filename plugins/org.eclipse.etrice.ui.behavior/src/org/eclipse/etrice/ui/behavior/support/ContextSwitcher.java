@@ -22,7 +22,7 @@ public class ContextSwitcher {
 	public static void goUp(Diagram diagram, StateGraph sg) {
 		// if the container is a state we can go up, else we are already on top
 		if (sg.eContainer() instanceof State) {
-			ActorClass ac = SupportUtil.getActorClass(diagram);
+			ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
 			StateGraph parent = getVirtualParent(sg, ac);
 			
 			if (parent.eContainer() instanceof ActorClass)

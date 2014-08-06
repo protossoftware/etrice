@@ -17,17 +17,16 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.ChoicePointPropertyDialog;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
@@ -116,16 +115,16 @@ public class ChoicePointSupport {
 				
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-				ActorClass ac = SupportUtil.getActorClass(getDiagram());
+				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 
-				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					sg = SupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 
 				// create choice point and add it
 		    	ChoicePoint cp = RoomFactory.eINSTANCE.createChoicePoint();
-				cp.setName(RoomNameProvider.getUniqueChoicePointName(sg));
+				cp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueChoicePointName(sg));
 				sg.getChPoints().add(cp);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -177,7 +176,7 @@ public class ChoicePointSupport {
 			public PictogramElement add(IAddContext context) {
 				ChoicePoint cp = (ChoicePoint) context.getNewObject();
 				ContainerShape sgShape = context.getTargetContainer();
-				boolean inherited = SupportUtil.isInherited(cp, sgShape);
+				boolean inherited = SupportUtil.getInstance().isInherited(cp, sgShape);
 	
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
@@ -245,7 +244,7 @@ public class ChoicePointSupport {
 						ChoicePoint cp = (ChoicePoint) bo;
 						
 						ContainerShape acShape = context.getTargetContainer();
-						if (SupportUtil.isInherited(cp, acShape))
+						if (SupportUtil.getInstance().isInherited(cp, acShape))
 							return false;
 						
 						return true;
@@ -284,7 +283,7 @@ public class ChoicePointSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ChoicePoint) {
-						return !SupportUtil.isInherited(getDiagram(), (ChoicePoint)bo);
+						return !SupportUtil.getInstance().isInherited(getDiagram(), (ChoicePoint)bo);
 					}
 				}
 				return false;
@@ -367,7 +366,7 @@ public class ChoicePointSupport {
 				}
 				ChoicePoint cp = (ChoicePoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(cp, (ContainerShape)containerShape.eContainer());
+				boolean inherited = SupportUtil.getInstance().isInherited(cp, (ContainerShape)containerShape.eContainer());
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateFigure(cp, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -399,7 +398,7 @@ public class ChoicePointSupport {
 				if (bo instanceof ChoicePoint) {
 					ChoicePoint cp = (ChoicePoint) bo;
 					
-					return !SupportUtil.isInherited(getDiagram(), cp);
+					return !SupportUtil.getInstance().isInherited(getDiagram(), cp);
 				}
 				return false;
 			}

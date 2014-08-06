@@ -48,6 +48,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class Wiring {
 	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	private static class EndPoint {
 		ActorContainerRef ref;
 		Port port;
@@ -88,11 +90,11 @@ public class Wiring {
 		int psize;
 		int pidx = 0;
 		
-		public EndPointCreator(BindingEndPoint ep) {
-			this(ep.getActorRef(), ep.getPort());
+		public EndPointCreator(BindingEndPoint ep, RoomHelpers roomHelpers) {
+			this(ep.getActorRef(), ep.getPort(), roomHelpers);
 		}
 		
-		public EndPointCreator(ActorContainerRef ref, Port port) {
+		public EndPointCreator(ActorContainerRef ref, Port port, RoomHelpers roomHelpers) {
 			this.ref = ref;
 			this.port = port;
 			
@@ -102,7 +104,7 @@ public class Wiring {
 				rsize = ar.getMultiplicity();
 			}
 			
-			ProtocolClass pc = RoomHelpers.getProtocol(port);
+			ProtocolClass pc = roomHelpers.getProtocol(port);
 			boolean implicitMany = pc==null || pc.getCommType() == CommunicationType.DATA_DRIVEN;
 			if (implicitMany)
 				psize = -1;
@@ -193,12 +195,12 @@ public class Wiring {
 		WiredActorClass wired = ETriceGenFactory.eINSTANCE.createWiredActorClass();
 		wired.setActorClass(ac);
 		
-		wireBindings(wired, RoomHelpers.getAllBindings(ac));
+		wireBindings(wired, roomHelpers.getAllBindings(ac));
 		wireServices(wired,
-				RoomHelpers.getAllActorContainerRefs(ac),
-				RoomHelpers.getAllLayerConnections(ac),
-				RoomHelpers.getAllSAPs(ac),
-				RoomHelpers.getAllServiceImplementations(ac));
+				roomHelpers.getAllActorContainerRefs(ac),
+				roomHelpers.getAllLayerConnections(ac),
+				roomHelpers.getAllSAPs(ac),
+				roomHelpers.getAllServiceImplementations(ac));
 		handled.put(ac, wired);
 		root.getWiredInstances().add(wired);
 		
@@ -213,7 +215,7 @@ public class Wiring {
 		wired.setSubSystemClass(ssc);
 		
 		wireBindings(wired, ssc.getBindings());
-		wireServices(wired, RoomHelpers.getAllActorContainerRefs(ssc), ssc.getConnections(), null, null);
+		wireServices(wired, roomHelpers.getAllActorContainerRefs(ssc), ssc.getConnections(), null, null);
 
 		root.getWiredInstances().add(wired);
 		
@@ -268,7 +270,7 @@ public class Wiring {
 		String key = getEndPointKey(ep);
 		EndPointCreator creator = epkey2creator.get(key);
 		if (creator==null) {
-			creator = new EndPointCreator(ep);
+			creator = new EndPointCreator(ep, roomHelpers);
 			epkey2creator.put(key, creator);
 		}
 		return creator;
@@ -301,7 +303,7 @@ public class Wiring {
 			if (path2!=null) {
 				// we can wire and just have to assemble the paths
 				Wire wire = ETriceGenFactory.eINSTANCE.createWire();
-				wire.setDataDriven(RoomHelpers.isDataDriven(ep1.port) && RoomHelpers.isDataDriven(ep2.port));
+				wire.setDataDriven(roomHelpers.isDataDriven(ep1.port) && roomHelpers.isDataDriven(ep2.port));
 				wire.getPath1().addAll(path1);
 				wire.getPath2().addAll(path2);
 				wired.getWires().add(wire);
@@ -319,7 +321,7 @@ public class Wiring {
 		
 		ActorRef ar = (ActorRef) ep.getActorRef();
 		
-		if (ar.getRefType()==ReferenceType.FIXED && RoomHelpers.isRelay(ep.getPort())) {
+		if (ar.getRefType()==ReferenceType.FIXED && roomHelpers.isRelay(ep.getPort())) {
 			OpenBinding open = getOpenBinding(ep);
 			if (open!=null) {
 				ArrayList<String> path = new ArrayList<String>();
@@ -362,7 +364,7 @@ public class Wiring {
 	private void handleBindingToLocal(WiredStructureClass wired, EndPoint localEnd, EndPoint refEnd) {
 		List<String> refPath = getPath(refEnd);
 		if (refPath!=null) {
-			if (RoomHelpers.isRelay(localEnd.getPort())) {
+			if (roomHelpers.isRelay(localEnd.getPort())) {
 				// create an OpenBinding for ourselves
 				OpenBinding myOpen = ETriceGenFactory.eINSTANCE.createOpenBinding();
 				myOpen.getPath().addAll(refPath);
@@ -372,7 +374,7 @@ public class Wiring {
 			else {
 				// we can create a wire
 				Wire wire = ETriceGenFactory.eINSTANCE.createWire();
-				wire.setDataDriven(RoomHelpers.isDataDriven(localEnd.port) && RoomHelpers.isDataDriven(refEnd.port));
+				wire.setDataDriven(roomHelpers.isDataDriven(localEnd.port) && roomHelpers.isDataDriven(refEnd.port));
 				wire.getPath1().addAll(refPath);
 				wire.getPath2().add(localEnd.getPortName());
 				wired.getWires().add(wire);
@@ -433,7 +435,7 @@ public class Wiring {
 										if (req.getProtocol()==prv.getProtocol()) {
 											// can satisfy: do wire and remember as satisfied
 											Wire wire = ETriceGenFactory.eINSTANCE.createWire();
-											wire.setDataDriven(RoomHelpers.isDataDriven(conn.getTo().getService()));
+											wire.setDataDriven(roomHelpers.isDataDriven(conn.getTo().getService()));
 											wire.getPath1().add(prvRef.getName());
 											wire.getPath1().addAll(prv.getPath());
 											wire.getPath2().add(reqRef.getName());

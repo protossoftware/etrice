@@ -37,7 +37,6 @@ import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -77,12 +76,18 @@ import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers;
 import org.eclipse.etrice.core.room.util.CompoundProtocolHelpers.Match;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
-public class ValidationUtil {
+import com.google.common.base.Function;
+import com.google.inject.Inject;
 
-	/**
-	 * 
-	 */
+public class ValidationUtil {
+	
 	public static final String CONNECTED_SUB_COMPONENT_PORTS_MUST_BE_CONJUGATED_TO_EACH_OTHER = "connected sub component ports must be conjugated to each other";
+	
+	@Inject
+	private RoomHelpers roomHelpers;
+	
+	@Inject
+	private RoomNameProvider roomNameProvider;
 
 	public static class Result {
 		private boolean ok;
@@ -128,113 +133,14 @@ public class ValidationUtil {
 			return index;
 		}
 	}
-	
-	public static boolean isCircularClassHierarchy(DataClass dc) {
-		HashSet<DataClass> classes = new HashSet<DataClass>();
-		classes.add(dc);
-		
-		while (dc.getBase()!=null) {
-			dc = dc.getBase();
-			if (classes.contains(dc))
-				return true;
-			
-			classes.add(dc);
-		}
-		
-		return false;
-	}
 
-	public static boolean isCircularClassHierarchy(ProtocolClass pc) {
-		HashSet<ProtocolClass> classes = new HashSet<ProtocolClass>();
-		classes.add(pc);
-		
-		while (pc.getBase()!=null) {
-			pc = pc.getBase();
-			if (classes.contains(pc))
-				return true;
-			
-			classes.add(pc);
-		}
-		
-		return false;
-	}
-
-	/**
-	 * check whether ac2 is super type of ac1 
-	 * @param ac1
-	 * @param ac2
-	 * @return <code>true</code> if ac1 or one of its base types is identical to ac2
-	 */
-	private static boolean isKindOf(ActorClass ac1, ActorClass ac2) {
-		if (ac2==null)
-			return false;
-
-		if (ac1==null || isCircularClassHierarchy(ac1))
-			return false;
-		
-		while (ac1!=null) {
-			if (ac2==ac1)
-				return true;
-			
-			ac1 = ac1.getBase();
-		}
-		return false;
-	}
-
-	public static boolean isCircularClassHierarchy(ActorClass ac) {
-		HashSet<ActorClass> classes = new HashSet<ActorClass>();
-		classes.add(ac);
-		
-		while (ac.getBase()!=null) {
-			ac = ac.getBase();
-			if (classes.contains(ac))
-				return true;
-			
-			classes.add(ac);
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * check if ref recursively is referencing ac
-	 * @param ref
-	 * @param ac
-	 * @return <code>true</code> if ref recursively is referencing ac
-	 */
-	public static boolean isReferencing(ActorClass ref, ActorClass ac) {
-		if (isKindOf(ref,ac))
-			return true;
-		
-		Set<ActorClass> visited = new HashSet<ActorClass>();
-		LinkedList<ActorClass> stack = new LinkedList<ActorClass>();
-		visited.add(ac);
-		stack.push(ref);
-		
-		ActorClass next;
-		while(!stack.isEmpty()){
-			next = stack.pop();
-			if(visited.contains(next))
-				continue;
-			
-			for (ActorRef ar : next.getActorRefs()) {
-				if (isKindOf(ar.getType(), ac) || isKindOf(next, ar.getType()))
-					return true;
-				stack.push(ar.getType());
-			}
-			visited.add(next);
-		}
-		
-		return false;
-	}
-	
 	/**
 	 * check if compound protocol is circular
 	 * @param ref
 	 * @param cpc
 	 * @return <code>true</code> if cpc contains a cycle
 	 */
-	public static boolean isCircular(CompoundProtocolClass ref, CompoundProtocolClass cpc) {
+	public boolean isCircular(CompoundProtocolClass ref, CompoundProtocolClass cpc) {
 		Set<CompoundProtocolClass> visited = new HashSet<CompoundProtocolClass>();
 		LinkedList<CompoundProtocolClass> stack = new LinkedList<CompoundProtocolClass>();
 		visited.add(cpc);
@@ -265,11 +171,11 @@ public class ValidationUtil {
 	 * @param port
 	 * @return ok if connectable
 	 */
-	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc) {
+	public Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc) {
 		return isConnectable(port, ref, acc, null);
 	}
 	
-	public static Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
+	public Result isConnectable(Port port, ActorContainerRef ref, StructureClass acc, Binding exclude) {
 		if (!isMultipleConnectable(port, ref) && isConnected(port, ref, acc, exclude))
 			return Result.error("port with multiplicity 1 is already connected");
 
@@ -283,20 +189,20 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static boolean isMultipleConnectable(Port port, ActorContainerRef ref) {
+	public boolean isMultipleConnectable(Port port, ActorContainerRef ref) {
 		if (port.isReplicated())
 			return true;
 
 		if (ref!=null && ref instanceof ActorRef && ((ActorRef)ref).getMultiplicity()>1)
 			return true;
 		
-		if (RoomHelpers.isRelay(port) && port.getProtocol() instanceof CompoundProtocolClass)
+		if (roomHelpers.isRelay(port) && port.getProtocol() instanceof CompoundProtocolClass)
 			return true;
 		
 		if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType() == CommunicationType.DATA_DRIVEN) {
 			if (ref == null) {
 				// this port is local in the structure class
-				if (RoomHelpers.isRelay(port))
+				if (roomHelpers.isRelay(port))
 					return !port.isConjugated();
 				else
 					return port.isConjugated();
@@ -308,24 +214,24 @@ public class ValidationUtil {
 		return false;
 	}
 
-	public static Result isValid(Binding bind) {
+	public Result isValid(Binding bind) {
 		return isConnectable(
 				bind.getEndpoint1().getPort(), bind.getEndpoint1().getActorRef(),  bind.getEndpoint1().getSub(),
 				bind.getEndpoint2().getPort(), bind.getEndpoint2().getActorRef(),  bind.getEndpoint2().getSub(),
 				(StructureClass)bind.eContainer(), bind, true);
 	}
 
-	public static Result isConnectable(BindingEndPoint ep1, BindingEndPoint ep2, StructureClass sc) {
+	public Result isConnectable(BindingEndPoint ep1, BindingEndPoint ep2, StructureClass sc) {
 		return isConnectable(ep1.getPort(), ep1.getActorRef(), ep1.getSub(), ep2.getPort(), ep2.getActorRef(), ep2.getSub(), sc);
 	}
 	
-	public static Result isConnectable(
+	public Result isConnectable(
 			Port p1, ActorContainerRef ref1, SubProtocol sub1,
 			Port p2, ActorContainerRef ref2, SubProtocol sub2, StructureClass sc) {
 		return isConnectable(p1, ref1, sub1, p2, ref2, sub2, sc, null, true);
 	}
 	
-	public static Result isConnectable(
+	public Result isConnectable(
 			Port p1, ActorContainerRef ref1, SubProtocol sub1,
 			Port p2, ActorContainerRef ref2, SubProtocol sub2,
 			StructureClass sc, Binding exclude,
@@ -378,19 +284,19 @@ public class ValidationUtil {
 						if (!(pc1 instanceof ProtocolClass && pc2 instanceof ProtocolClass))
 							return Result.error("protocols don't match");
 						
-						if (RoomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
-							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
+						if (roomHelpers.isDerivedFrom((ProtocolClass)pc1, (ProtocolClass)pc2)) {
+							if (roomHelpers.getAllMessages((ProtocolClass)pc1,true).size() > roomHelpers.getAllMessages((ProtocolClass)pc2,true).size())
 								pc1extendsIncoming = true;
-							if (RoomHelpers.getAllMessages((ProtocolClass)pc1,false).size()>RoomHelpers.getAllMessages((ProtocolClass)pc2,false).size())
+							if (roomHelpers.getAllMessages((ProtocolClass)pc1,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc2,false).size())
 								pc1extendsOutgoing = true;
 							if (pc1extendsIncoming && pc1extendsOutgoing)
 								return Result.error("derived protocols not connectable (both directions extended)");
 
 						}
-						else if (RoomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
-							if (RoomHelpers.getAllMessages((ProtocolClass)pc2,true).size()>RoomHelpers.getAllMessages((ProtocolClass)pc1,true).size())
+						else if (roomHelpers.isDerivedFrom((ProtocolClass)pc2, (ProtocolClass)pc1)) {
+							if (roomHelpers.getAllMessages((ProtocolClass)pc2,true).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,true).size())
 								pc2extendsIncoming = true;
-							if (RoomHelpers.getAllMessages((ProtocolClass)pc2,false).size()>RoomHelpers.getAllMessages((ProtocolClass)pc1,false).size())	
+							if (roomHelpers.getAllMessages((ProtocolClass)pc2,false).size()>roomHelpers.getAllMessages((ProtocolClass)pc1,false).size())	
 								pc2extendsOutgoing = true;
 							if (pc2extendsIncoming && pc2extendsOutgoing)
 								return Result.error("derived protocols not connectable (both directions extended)");
@@ -484,7 +390,7 @@ public class ValidationUtil {
 						return Result.error("local port '"+local.getName()+"' must have multiplicity any");
 				}
 			}
-			if (RoomHelpers.isRelay(local)) {
+			if (roomHelpers.isRelay(local)) {
 				if (local.isConjugated()!=sub.isConjugated())
 					return Result.error("relay port must have same direction as local port");
 
@@ -553,7 +459,7 @@ public class ValidationUtil {
 	 * @param exclude
 	 * @return
 	 */
-	private static boolean alreadyConnected(Port p1, ActorContainerRef ref1,
+	private boolean alreadyConnected(Port p1, ActorContainerRef ref1,
 			Port p2, ActorContainerRef ref2, StructureClass sc, Binding exclude) {
 		
 		HashSet<String> bindings = new HashSet<String>();
@@ -571,7 +477,7 @@ public class ValidationUtil {
 		return false;
 	}
 
-	private static String getKey(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2) {
+	private String getKey(Port p1, ActorContainerRef ref1, Port p2, ActorContainerRef ref2) {
 		String ep1 = getEndpointName(p1, ref1);
 		String ep2 = getEndpointName(p2, ref2);
 		// we order endpoint names to be able to identify bindings with exchanged endpoints
@@ -582,14 +488,14 @@ public class ValidationUtil {
 	 * @param ref1
 	 * @return
 	 */
-	private static String getEndpointName(Port p1, ActorContainerRef ref1) {
+	private String getEndpointName(Port p1, ActorContainerRef ref1) {
 		if (ref1==null)
 			return p1.getName()+"#.";
 		else
 			return p1.getName()+"#"+ref1.getName();
 	}
 
-	public static Result isFreeOfReferences(Port port) {
+	public Result isFreeOfReferences(Port port) {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(port, port.eResource().getResourceSet());
 		boolean bound = false;
 		boolean usedByFSM = false;
@@ -610,7 +516,7 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
-	public static boolean isReferencedAsReplicatedInModel(ActorClass ac) {
+	public boolean isReferencedAsReplicatedInModel(ActorClass ac) {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(ac, ac.eResource().getResourceSet());
 		for (Setting ref : refs) {
 			if (ref.getEObject() instanceof ActorRef)
@@ -620,11 +526,11 @@ public class ValidationUtil {
 		return false;
 	}
 	
-	public static boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc) {
+	public boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc) {
 		return isConnected(port, ref, sc, null);
 	}
 	
-	public static boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc, Binding exclude) {
+	public boolean isConnected(Port port, ActorContainerRef ref, StructureClass sc, Binding exclude) {
 		for (Binding bind : sc.getBindings()) {
 			if (bind!=exclude) {
 				if (isEndpoint(bind.getEndpoint1(), port, ref))
@@ -641,11 +547,11 @@ public class ValidationUtil {
 		return false;
 	}
 
-	private static boolean isEndpoint(BindingEndPoint ep, Port port, ActorContainerRef ref) {
+	private boolean isEndpoint(BindingEndPoint ep, Port port, ActorContainerRef ref) {
 		return ep.getActorRef()==ref && ep.getPort()==port;
 	}
 
-	public static boolean isRelay(SPP spp) {
+	public boolean isRelay(SPP spp) {
 		ActorContainerClass acc = (ActorContainerClass) spp.eContainer();
 		if (acc instanceof ActorClass) {
 			ActorClass ac = (ActorClass) acc;
@@ -657,7 +563,7 @@ public class ValidationUtil {
 		return true;
 	}
 	
-	public static Result isValid(LayerConnection lc) {
+	public Result isValid(LayerConnection lc) {
 		if (lc.getFrom() instanceof RelaySAPoint)
 			return isConnectable(((RelaySAPoint)lc.getFrom()).getRelay(), null, lc.getTo().getService(), lc.getTo().getRef(), (StructureClass)lc.eContainer(), lc);
 		else if (lc.getFrom() instanceof RefSAPoint)
@@ -668,12 +574,12 @@ public class ValidationUtil {
 		}
 	}
 	
-	public static Result isConnectable(SPP src, ActorContainerRef srcRef,
+	public Result isConnectable(SPP src, ActorContainerRef srcRef,
 			SPP tgt, ActorContainerRef tgtRef, StructureClass ac) {
 		return isConnectable(src, srcRef, tgt, tgtRef, ac, null);
 	}
 	
-	public static Result isConnectable(SPP src, ActorContainerRef srcRef,
+	public Result isConnectable(SPP src, ActorContainerRef srcRef,
 			SPP dst, ActorContainerRef dstRef, StructureClass sc, LayerConnection exclude) {
 
 		if (sc==null) {
@@ -697,12 +603,12 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
-	public static boolean isConnectableSrc(SPP src, ActorContainerRef ref,
+	public boolean isConnectableSrc(SPP src, ActorContainerRef ref,
 			StructureClass sc) {
 		return isConnectableSrc(src, ref, sc, null);
 	}
 	
-	public static boolean isConnectableSrc(SPP src, ActorContainerRef ref,
+	public boolean isConnectableSrc(SPP src, ActorContainerRef ref,
 			StructureClass sc, LayerConnection exclude) {
 		
 		if (sc==null) {
@@ -728,7 +634,7 @@ public class ValidationUtil {
 		return true;
 	}
 
-	public static boolean isReferencedInModel(SPP spp) {
+	public boolean isReferencedInModel(SPP spp) {
 		Collection<Setting> refs = EcoreUtil.UsageCrossReferencer.find(spp, spp.eResource().getResourceSet());
 		for (Setting ref : refs) {
 			if (ref.getEObject() instanceof ServiceImplementation)
@@ -742,11 +648,11 @@ public class ValidationUtil {
 		return false;
 	}
 	
-	public static boolean isConnectedSrc(SPP src, StructureClass sc) {
+	public boolean isConnectedSrc(SPP src, StructureClass sc) {
 		return isConnectedSrc(src, sc, null);
 	}
 	
-	public static boolean isConnectedSrc(SPP src, StructureClass sc, LayerConnection exclude) {
+	public boolean isConnectedSrc(SPP src, StructureClass sc, LayerConnection exclude) {
 		for (LayerConnection lc : sc.getConnections()) {
 			if (lc!=exclude)
 				if (lc.getFrom() instanceof RelaySAPoint) {
@@ -771,12 +677,12 @@ public class ValidationUtil {
 		return false;
 	}
 
-	public static boolean isConnectableDst(SPP src, ActorContainerRef ref,
+	public boolean isConnectableDst(SPP src, ActorContainerRef ref,
 			StructureClass sc) {
 		return isConnectableDst(src, ref, sc, null);
 	}
 	
-	public static boolean isConnectableDst(SPP dst, ActorContainerRef ref,
+	public boolean isConnectableDst(SPP dst, ActorContainerRef ref,
 			StructureClass sc, LayerConnection exclude) {
 		
 		if (sc==null) {
@@ -794,11 +700,11 @@ public class ValidationUtil {
 		return true;
 	}
 	
-	public static boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc) {
+	public boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc) {
 		return isConnectedDst(src, acr, sc, null);
 	}
 	
-	public static boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc, LayerConnection exclude) {
+	public boolean isConnectedDst(SPP src, ActorContainerRef acr, StructureClass sc, LayerConnection exclude) {
 		for (LayerConnection lc : sc.getConnections()) {
 			if (lc!=exclude)
 					if (lc.getTo().getService()==src && lc.getTo().getRef()==acr)
@@ -812,11 +718,11 @@ public class ValidationUtil {
 		return false;
 	}
 	
-	public static Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, StateGraph sg) {
+	public Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, StateGraph sg) {
 		return isConnectable(src, tgt, null, sg);
 	}
 	
-	public static Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, Transition trans, StateGraph sg) {
+	public Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, Transition trans, StateGraph sg) {
 		Result result = isConnectableSrc(src, trans, sg);
 		if (!result.isOk())
 			return result;
@@ -872,11 +778,11 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static Result isConnectable(TransitionTerminal src, StateGraph sg) {
+	public Result isConnectable(TransitionTerminal src, StateGraph sg) {
 		return isConnectableSrc(src, null, sg);
 	}
 	
-	public static Result isConnectableSrc(TransitionTerminal src, Transition trans, StateGraph sg) {
+	public Result isConnectableSrc(TransitionTerminal src, Transition trans, StateGraph sg) {
 		if (src==null) {
 			for (Transition t : sg.getTransitions()) {
 				if (t==trans)
@@ -927,7 +833,7 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 
-	public static Result isValid(TrPoint tp) {
+	public Result isValid(TrPoint tp) {
 		if (!isUniqueName(tp, tp.getName()).isOk())
 			return Result.error("name is not unique", tp, RoomPackage.Literals.TR_POINT__NAME);
 		
@@ -943,11 +849,11 @@ public class ValidationUtil {
 		
 	}
 
-	public static Result isUniqueName(InterfaceItem item) {
+	public Result isUniqueName(InterfaceItem item) {
 		return isUniqueName(item, item.getName());
 	}
 	
-	public static boolean isConnectedOutside(TrPoint tp) {
+	public boolean isConnectedOutside(TrPoint tp) {
 		if (tp instanceof TransitionPoint)
 			return false;
 		
@@ -970,7 +876,7 @@ public class ValidationUtil {
 		return false;
 	}
 	
-	public static Result isUniqueName(InterfaceItem item, String name) {
+	public Result isUniqueName(InterfaceItem item, String name) {
 		if (name.isEmpty())
 			return Result.error("name must not be empty");
 		
@@ -980,7 +886,7 @@ public class ValidationUtil {
 		if (item.eContainer() instanceof ActorClass) {
 			ArrayList<InterfaceItem> all = new ArrayList<InterfaceItem>();
 			ActorClass ac = (ActorClass) item.eContainer();
-			if (isCircularClassHierarchy(ac))
+			if (roomHelpers.isCircularClassHierarchy(ac))
 				return Result.ok();
 			
 			do {
@@ -1018,7 +924,7 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static Result isUniqueName(StateGraphItem s, String name) {
+	public Result isUniqueName(StateGraphItem s, String name) {
 		if (name.trim().isEmpty())
 			return Result.error("name must not be empty");
 		
@@ -1026,7 +932,7 @@ public class ValidationUtil {
 			return Result.error("name is no valid ID");
 		
 		StateGraph sg = (StateGraph) s.eContainer();
-		Set<String> names = RoomHelpers.getAllNames(sg, s);
+		Set<String> names = roomHelpers.getAllNames(sg, s);
 		
 		if (names.contains(name))
 			return Result.error("name already used");
@@ -1038,8 +944,8 @@ public class ValidationUtil {
 	 * @param tr
 	 * @return the {@link Result} of the check
 	 */
-	public static Result checkTransition(Transition tr) {
-		ActorClass ac = RoomHelpers.getActorClass(tr);
+	public Result checkTransition(Transition tr) {
+		ActorClass ac = roomHelpers.getActorClass(tr);
 		if (ac.getCommType()==ActorCommunicationType.DATA_DRIVEN) {
 			if (tr instanceof TriggeredTransition)
 				return Result.error("data driven state machine must not contain triggered transition",
@@ -1056,7 +962,7 @@ public class ValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 			else if (tr instanceof GuardedTransition)
-				if (!RoomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
+				if (!roomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, RoomPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
 		else if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
@@ -1090,9 +996,9 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static Result checkState(State state) {
+	public Result checkState(State state) {
 		if (state.getDoCode()!=null) {
-			ActorClass ac = RoomHelpers.getActorClass(state);
+			ActorClass ac = roomHelpers.getActorClass(state);
 			if (ac.getCommType()==ActorCommunicationType.EVENT_DRIVEN) {
 				return Result.error("event driven state machines must not have 'do' action code",
 						state,
@@ -1102,15 +1008,16 @@ public class ValidationUtil {
 		return Result.ok();
 	}
 	
-	public static List<Result> checkTopLevelRefinedStates(ActorClass ac) {
+	public List<Result> checkTopLevelRefinedStates(ActorClass ac) {
 		ArrayList<Result> errors = new ArrayList<ValidationUtil.Result>();
 		if (ac.getStateMachine()==null)
 			return errors;
 		
-		Map<RefinedState, RefinedState> rs2parent = RoomHelpers.getRefinedStatesToRelocate(ac);
+		Function<RefinedState, String> nameProvider = roomNameProvider.getRefinedStateNameProvider();
+		Map<RefinedState, RefinedState> rs2parent = roomHelpers.getRefinedStatesToRelocate(ac, nameProvider);
 		for (RefinedState rs : rs2parent.keySet()) {
 			RefinedState parent = rs2parent.get(rs);
-			String path = RoomNameProvider.getFullPath(parent);
+			String path = roomNameProvider.getFullPath(parent);
 			int idx = ((StateGraph)rs.eContainer()).getStates().indexOf(rs);
 			errors.add(Result.error(
 					"RefinedState has to be in the context of "+path,
@@ -1122,7 +1029,7 @@ public class ValidationUtil {
 		return errors;
 	}
 	
-	public static boolean isValidID(String name) {
+	public boolean isValidID(String name) {
 		return name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}
 }

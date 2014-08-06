@@ -18,7 +18,6 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
@@ -29,7 +28,6 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -99,7 +97,7 @@ public class SPPSupport extends InterfaceItemSupport {
 
 				// create SPP
 		        SPP spp = RoomFactory.eINSTANCE.createSPP();
-		        spp.setName(RoomNameProvider.getUniqueInterfaceItemName("spp", acc));
+		        spp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueInterfaceItemName("spp", acc));
 				
 				acc.getServiceProvisionPoints().add(spp);
 		        
@@ -331,7 +329,7 @@ public class SPPSupport extends InterfaceItemSupport {
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightDolor) {
 
-			boolean relay = ValidationUtil.isRelay(spp);
+			boolean relay = SupportUtil.getInstance().getValidationUtil().isRelay(spp);
 			
 			int size = refspp?ITEM_SIZE_SMALL:ITEM_SIZE;
 			int margin = refspp?MARGIN_SMALL:MARGIN;
@@ -467,7 +465,7 @@ public class SPPSupport extends InterfaceItemSupport {
 	
 	protected static String getSPPKind(SPP spp) {
 		String kind = "";
-		if (ValidationUtil.isRelay(spp))
+		if (SupportUtil.getInstance().getValidationUtil().isRelay(spp))
 			kind += "R";
 		return kind;
 	}

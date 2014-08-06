@@ -17,8 +17,6 @@ import java.util.List;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
@@ -36,7 +34,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       boolean _while = _notEquals;
       while (_while) {
         {
-          List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
+          List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
           List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(_allBaseStates);
           states.addAll(0, _leafStatesLast);
           ActorClass _base = ac.getBase();
@@ -78,7 +76,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
               }
               _builder.append("\t");
               _builder.append("\"");
-              String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+              String _genStatePathName = this._codegenHelpers.getGenStatePathName(state);
               _builder.append(_genStatePathName, "\t");
               _builder.append("\"");
               _builder.newLineIfNotEmpty();
@@ -160,7 +158,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   
   public int getHistorySize(final ExpandedActorClass xpac) {
     ActorClass _actorClass = xpac.getActorClass();
-    List<State> _allBaseStates = RoomHelpers.getAllBaseStates(_actorClass);
+    List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(_actorClass);
     int _size = _allBaseStates.size();
     return (_size + 2);
   }

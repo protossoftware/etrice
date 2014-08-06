@@ -75,6 +75,10 @@ public class VariableServiceGen {
   @Extension
   private TypeHelpers _typeHelpers;
   
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
   public void doGenerate(final Root root, final SubSystemInstance ssi) {
     final NodeRef nr = ETMapUtil.getNodeRef(ssi);
     final String clsname = this.stdExt.getJavaClassName(nr, ssi);
@@ -406,7 +410,7 @@ public class VariableServiceGen {
           _builder.append(" object, Map<String, Object> map){");
           _builder.newLineIfNotEmpty();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc_1);
+            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc_1);
             for(final Attribute a_2 : _allAttributes) {
               {
                 RefableType _type = a_2.getType();
@@ -591,7 +595,7 @@ public class VariableServiceGen {
     while (_while) {
       {
         DataClass dc = visit.pop();
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
         final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
           public void apply(final Attribute a) {
             RefableType _type = a.getType();
@@ -708,7 +712,7 @@ public class VariableServiceGen {
             DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genGetAttributeValues = this.genGetAttributeValues(_union, ai);
@@ -858,7 +862,7 @@ public class VariableServiceGen {
             DataClass dataClass = ((DataClass) _type_15);
             StringConcatenation _builder_1 = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genSetAttributeValues1 = this.genSetAttributeValues1(_union, ai);
@@ -945,7 +949,7 @@ public class VariableServiceGen {
             final DataClass dataClass = ((DataClass) _type_5);
             StringConcatenation _builder = new StringConcatenation();
             {
-              List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dataClass);
+              List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dataClass);
               for(final Attribute at : _allAttributes) {
                 List<Attribute> _union = this.roomExt.<Attribute>union(path, at);
                 CharSequence _genSetAttributeValues2 = this.genSetAttributeValues2(_union, ai);

@@ -29,12 +29,12 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.DiagramUtil;
 import org.eclipse.etrice.ui.structure.support.InterfaceItemSupport;
 import org.eclipse.etrice.ui.structure.support.StructureClassSupport;
+import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -106,7 +106,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 				refs.add((ActorContainerRef) obj);
 			else if(obj instanceof InterfaceItem){
 				InterfaceItem item = (InterfaceItem)obj;
-				if(item instanceof Port && RoomHelpers.isInternal((Port)item))
+				if(item instanceof Port && SupportUtil.getInstance().getRoomHelpers().isInternal((Port)item))
 					intPorts.add(item);
 				else
 					ifItems.add(item);
@@ -129,7 +129,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		int height = StructureClassSupport.DEFAULT_SIZE_Y;
 		int y = - InterfaceItemSupport.MARGIN + 2*ActorContainerRefSupport.MARGIN;
 		
-		layoutInterfaceItems(RoomHelpers.getInterfaceItems(sc, true), width, height, -InterfaceItemSupport.MARGIN);
+		layoutInterfaceItems(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(sc, true), width, height, -InterfaceItemSupport.MARGIN);
 		
 		List<InterfaceItem> intPorts = new ArrayList<InterfaceItem>();
 		if(sc instanceof ActorClass){
@@ -142,7 +142,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		layoutInterfaceItems(intPorts, width, height, y);
 		
 		y += InterfaceItemSupport.ITEM_SIZE + 2*ActorContainerRefSupport.MARGIN;
-		layoutActorRefs(RoomHelpers.getAllActorContainerRefs(sc), width, height, y);
+		layoutActorRefs(SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(sc), width, height, y);
 		
 	}
 

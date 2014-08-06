@@ -66,12 +66,12 @@ public class TestInstanceModelBuilderBase {
 
 		@Override
 		public void error(String msg, EObject source, EStructuralFeature feature) {
-			fail(msg+RoomNameProvider.getLocation(source));
+			fail(msg+roomNameProvider.getLocation(source));
 		}
 
 		@Override
 		public void error(String msg, EObject source, EStructuralFeature feature, int index) {
-			fail(msg+RoomNameProvider.getLocation(source));
+			fail(msg+roomNameProvider.getLocation(source));
 		}
 
 		@Override
@@ -83,7 +83,8 @@ public class TestInstanceModelBuilderBase {
 
 	private String basePath;
 	protected HashMap<EClass, ArrayList<EObject>> instances;
-
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	
 	protected void prepare() {
 		try {
 			URL modelsDir = GenmodelTestsActivator.getInstance().getBundle().getEntry("models");
@@ -150,7 +151,7 @@ public class TestInstanceModelBuilderBase {
 		for (EObject obj : objects) {
 			if (obj instanceof StateGraphItem) {
 				StateGraphItem item = (StateGraphItem) obj;
-				if (RoomNameProvider.getFullPath(item).equals(path))
+				if (roomNameProvider.getFullPath(item).equals(path))
 					return item;
 			}
 		}

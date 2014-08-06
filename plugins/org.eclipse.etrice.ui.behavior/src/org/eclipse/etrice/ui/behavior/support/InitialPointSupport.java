@@ -17,7 +17,6 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
@@ -94,10 +93,10 @@ public class InitialPointSupport {
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 
-				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					ActorClass ac = SupportUtil.getActorClass(getDiagram());
-					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
+					sg = SupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 		        
 				// We don't create anything here since in the model the initial point is
@@ -120,7 +119,7 @@ public class InitialPointSupport {
 							ContainerShape parent = context.getTargetContainer().getContainer();
 							if (! (parent instanceof StateGraph)) {
 								StateGraph sg = (StateGraph) obj;
-								for (Transition t : RoomHelpers.getAllTransitions(sg)) {
+								for (Transition t : SupportUtil.getInstance().getRoomHelpers().getAllTransitions(sg)) {
 									if (t instanceof InitialTransition)
 										return false;
 								}
@@ -156,7 +155,7 @@ public class InitialPointSupport {
 				ContainerShape sgShape = context.getTargetContainer();
 				StateGraph sg = (StateGraph) context.getNewObject();
 	
-				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), sg);
 				
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
@@ -216,7 +215,7 @@ public class InitialPointSupport {
 				if (canMove) {
 					Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 					if (bo instanceof StateGraph) {
-						return !SupportUtil.isInherited(getDiagram(), (StateGraph)bo);
+						return !SupportUtil.getInstance().isInherited(getDiagram(), (StateGraph)bo);
 					}
 					return false;
 				}
@@ -234,7 +233,7 @@ public class InitialPointSupport {
 			public boolean canRemove(IRemoveContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof StateGraph) {
-					return !SupportUtil.isInherited(getDiagram(), (StateGraph) bo);
+					return !SupportUtil.getInstance().isInherited(getDiagram(), (StateGraph) bo);
 				}
 				return false;
 			}

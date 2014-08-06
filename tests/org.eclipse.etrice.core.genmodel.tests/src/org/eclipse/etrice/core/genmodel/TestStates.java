@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.Transition;
 public class TestStates extends TestInstanceModelBuilderBase {
 	
 	private Root root;
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
 	
 	@Before
 	public void setUp() {
@@ -90,7 +91,7 @@ public class TestStates extends TestInstanceModelBuilderBase {
 		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
 		
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
-		assertEquals("choicepoint name", "CP1", RoomNameProvider.getFullPath(cp));
+		assertEquals("choicepoint name", "CP1", roomNameProvider.getFullPath(cp));
 		assertEquals("number of incoming transitions", 1, xpac.getIncomingTransitions(cp).size());
 		assertEquals("number of outgoing transitions", 3, xpac.getOutgoingTransitions(cp).size());
 		
@@ -111,6 +112,6 @@ public class TestStates extends TestInstanceModelBuilderBase {
 		ExpandedActorClass xpac = root.getXpActorClasses().get(0);
 		TransitionChain chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", roomNameProvider.getFullPath(chain.getTransition()));
 	}
 }

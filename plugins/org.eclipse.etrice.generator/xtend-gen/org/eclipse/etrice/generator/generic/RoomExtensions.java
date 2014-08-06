@@ -16,6 +16,7 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.inject.Inject;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -52,6 +53,7 @@ import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.FileSystemHelpers;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -67,6 +69,10 @@ public class RoomExtensions {
   private static String genInfoDir = "/src-gen-info/";
   
   private static String genDocDir = "/doc-gen/";
+  
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
   
   public static String setDefaultGenDir() {
     return RoomExtensions.genDir = "/src-gen/";
@@ -399,7 +405,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -424,7 +430,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -471,7 +477,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -497,7 +503,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -531,7 +537,7 @@ public class RoomExtensions {
    */
   public boolean isIncoming(final Message m) {
     EObject _eContainer = m.eContainer();
-    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(((ProtocolClass) _eContainer));
+    List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(((ProtocolClass) _eContainer));
     return _allIncomingMessages.contains(m);
   }
   
@@ -560,13 +566,13 @@ public class RoomExtensions {
     {
       final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
-          return Boolean.valueOf(RoomHelpers.isLeaf(s));
+          return Boolean.valueOf(RoomExtensions.this._roomHelpers.isLeaf(s));
         }
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
       final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
-          boolean _isLeaf = RoomHelpers.isLeaf(s);
+          boolean _isLeaf = RoomExtensions.this._roomHelpers.isLeaf(s);
           return Boolean.valueOf((!_isLeaf));
         }
       };
@@ -582,7 +588,7 @@ public class RoomExtensions {
    */
   public List<State> getAllLeafStates(final ActorClass ac) {
     StateGraph _stateMachine = ac.getStateMachine();
-    return RoomHelpers.getLeafStateList(_stateMachine);
+    return this._roomHelpers.getLeafStateList(_stateMachine);
   }
   
   /**
@@ -590,7 +596,7 @@ public class RoomExtensions {
    * @return a list of simple states with leaf states last
    */
   public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
-    List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
+    List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
     return this.getLeafStatesLast(_allBaseStates);
   }
   
@@ -656,7 +662,7 @@ public class RoomExtensions {
     } else {
       ActorClass _base_1 = ac.getBase();
       StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _stateList = RoomHelpers.getStateList(_stateMachine);
+      List<State> _stateList = this._roomHelpers.getStateList(_stateMachine);
       int _size = _stateList.size();
       ActorClass _base_2 = ac.getBase();
       int _numberOfInheritedStates = this.getNumberOfInheritedStates(_base_2);
@@ -676,7 +682,7 @@ public class RoomExtensions {
     } else {
       ActorClass _base_1 = ac.getBase();
       StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       ActorClass _base_2 = ac.getBase();
       int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_base_2);

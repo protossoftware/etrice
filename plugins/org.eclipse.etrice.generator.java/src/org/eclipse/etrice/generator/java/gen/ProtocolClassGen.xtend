@@ -20,15 +20,13 @@ import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.generator.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {

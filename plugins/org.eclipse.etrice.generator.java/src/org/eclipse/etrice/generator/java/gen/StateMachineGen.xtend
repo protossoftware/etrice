@@ -13,13 +13,10 @@
 package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
-
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
-import org.eclipse.etrice.core.room.State
 import java.util.ArrayList
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.java.Main
 
 @Singleton

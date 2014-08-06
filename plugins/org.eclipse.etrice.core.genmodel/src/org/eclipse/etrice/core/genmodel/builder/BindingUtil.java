@@ -44,6 +44,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class BindingUtil {
 	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	private static class BindingInfo {
 		private Binding binding;
 		private int multiplicity;
@@ -108,7 +110,7 @@ public class BindingUtil {
 			else {
 				assert(false): "unexpected sub type";
 			}
-			bindings.addAll(RoomHelpers.getAllBindings(ac));
+			bindings.addAll(roomHelpers.getAllBindings(ac));
 		}
 	}
 

@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InSemanticsRule;
@@ -26,7 +27,6 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.SemanticsRule;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ActiveRules {
 	private HashMap<InterfaceItem, List<SemanticsRule>> rules;
@@ -148,7 +148,7 @@ public class ActiveRules {
 	public void buildInitLocalRules(ExpandedActorClass xpAct) {
 		// HashMap<InterfaceItem, EList<SemanticsRule>> locals = new
 		// HashMap<InterfaceItem, EList<SemanticsRule>>();
-		List<InterfaceItem> portList = RoomHelpers.getAllInterfaceItems(xpAct
+		List<InterfaceItem> portList = AbstractExecutionUtil.getInstance().getRoomHelpers().getAllInterfaceItems(xpAct
 				.getActorClass());
 		for (InterfaceItem ifitem : portList) {
 			GeneralProtocolClass gpc = ifitem.getGeneralProtocol();

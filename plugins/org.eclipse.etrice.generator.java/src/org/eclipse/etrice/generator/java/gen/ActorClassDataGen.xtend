@@ -24,12 +24,13 @@ import org.eclipse.etrice.generator.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 @Singleton
 class ActorClassDataGen {
 	
 	@Inject IGeneratorFileIo fileIO
+	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
 	@Inject extension FileSystemHelpers
 	@Inject extension ProcedureHelpers

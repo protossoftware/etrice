@@ -15,17 +15,20 @@ package org.eclipse.etrice.ui.commands.handlers;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.util.RoomUtil;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+import com.google.inject.Injector;
 
 /**
  * Handler for outline menu item to open behavior editor.
@@ -57,25 +60,28 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 			@Override
 			public void process(XtextResource resource) throws Exception {
 				if (resource != null) {
+					Injector injector = RoomUiModule.getInjector();
+					RoomUtil util = injector.getInstance(RoomUtil.class);
+					
 					EObject object = resource.getEObject(fragment);
 					if (object instanceof ActorClass) {
-						createTransitionNames(((ActorClass) object).getStateMachine());
+						createTransitionNames(((ActorClass) object).getStateMachine(), util);
 					}
 				}
 			}
 
-			private void createTransitionNames(StateGraph sg) {
+			private void createTransitionNames(StateGraph sg, RoomUtil util) {
 				if (sg==null)
 					return;
 				
 				for (Transition tr : sg.getTransitions()) {
 					if (tr.getName()==null || tr.getName().isEmpty()) {
-						tr.setName(RoomNameProvider.getUniqueTransitionName(sg));
+						tr.setName(util.getUniqueTransitionName(sg));
 					}
 				}
 				
 				for (State s : sg.getStates()) {
-					createTransitionNames(s.getSubgraph());
+					createTransitionNames(s.getSubgraph(), util);
 				}
 			}
 			

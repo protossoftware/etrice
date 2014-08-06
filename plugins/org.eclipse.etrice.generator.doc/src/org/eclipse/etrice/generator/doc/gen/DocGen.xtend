@@ -32,14 +32,16 @@ import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.CodegenHelpers
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
 
 @Singleton
 class DocGen {
 
+	@Inject extension RoomHelpers
+	@Inject extension CodegenHelpers
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger

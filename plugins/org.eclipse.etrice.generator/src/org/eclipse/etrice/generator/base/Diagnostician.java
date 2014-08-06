@@ -32,6 +32,9 @@ public class Diagnostician implements IDiagnostician {
 	@Inject
 	private ILineOutputLogger logger;
 	
+	@Inject
+	private RoomNameProvider roomNameProvider;
+	
 	public void warning(String msg, EObject source, EStructuralFeature feature) {
 		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
 	}
@@ -59,10 +62,10 @@ public class Diagnostician implements IDiagnostician {
 			return msg;
 
 		if (idx==INSIGNIFICANT_INDEX)
-			return msg + " (" + RoomNameProvider.getName(source) + ", "
+			return msg + " (" + roomNameProvider.getName(source) + ", "
 							+ feature.getName()+")";
 		else
-			return msg + " (" + RoomNameProvider.getName(source) + ", "
+			return msg + " (" + roomNameProvider.getName(source) + ", "
 							+ feature.getName() + " at index "+idx+")";
 	}
 

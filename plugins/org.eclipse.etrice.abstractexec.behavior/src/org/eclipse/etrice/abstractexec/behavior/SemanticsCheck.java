@@ -22,6 +22,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.InitialTransition;
@@ -30,7 +31,6 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StateGraphNode;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class SemanticsCheck {
 	private Queue<StateGraphNode> queue;
@@ -86,7 +86,7 @@ public class SemanticsCheck {
 		EList<Transition> transitions = graph.getTransitions();
 		for (Transition trans : transitions)
 			if (trans instanceof InitialTransition) {
-				StateGraphNode cur = RoomHelpers.getNode(trans.getTo());
+				StateGraphNode cur = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
 				if (cur instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
@@ -117,7 +117,7 @@ public class SemanticsCheck {
 		visited.add(node);
 		if (node instanceof State) {
 			State st = (State) node;
-			if (RoomHelpers.hasDirectSubStructure(st)) {
+			if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st)) {
 				addStartingPoints(st.getSubgraph(), mapToRules.get(st));
 			}
 			else {
@@ -128,7 +128,7 @@ public class SemanticsCheck {
 					}
 					
 					for (Transition trans : trigger.getTransitions()) {
-						StateGraphNode target = RoomHelpers.getNode(trans.getTo());
+						StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
@@ -188,7 +188,7 @@ public class SemanticsCheck {
 			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
 				ActiveRules tempRule = mapToRules.get(node).createCopy();
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
-				StateGraphNode target = RoomHelpers.getNode(trans.getTo());
+				StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 				if (target instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}

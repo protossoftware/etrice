@@ -9,7 +9,6 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -28,9 +27,9 @@ import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -87,7 +86,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		public String getText(Object element) {
 			if (element instanceof Trigger) {
 				Trigger trig = (Trigger) element;
-				return RoomNameProvider.getTriggerLabel(trig);
+				return SupportUtil.getInstance().getRoomNameProvider().getTriggerLabel(trig);
 			}
 			return super.getText(element);
 		}
@@ -126,7 +125,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		public String getText(Object element) {
 			if (element instanceof MessageFromIf) {
 				MessageFromIf mif = (MessageFromIf) element;
-				return RoomNameProvider.getMsgFromIfLabel(mif);
+				return SupportUtil.getInstance().getRoomNameProvider().getMsgFromIfLabel(mif);
 			}
 			return super.getText(element);
 		}
@@ -139,7 +138,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = ValidationUtil.isUniqueName(trans, name);
+				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(trans, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
@@ -162,7 +161,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 					return ValidationStatus.error(text);
 			}
 			else if (value instanceof DetailCode) {
-				if (RoomHelpers.getDetailCode((DetailCode)value).trim().isEmpty())
+				if (SupportUtil.getInstance().getRoomHelpers().getDetailCode((DetailCode)value).trim().isEmpty())
 					return ValidationStatus.error(text);
 			}
 			return Status.OK_STATUS;
@@ -199,13 +198,14 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		s2m_not_null = new StringToDetailCode(false);
 		
 		interfaceItems = new ArrayList<InterfaceItem>();
-		for(InterfaceItem item : RoomHelpers.getAllInterfaceItems(ac)){
-			ProtocolClass pc = RoomHelpers.getProtocol(item);
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		for(InterfaceItem item : roomHelpers.getAllInterfaceItems(ac)){
+			ProtocolClass pc = roomHelpers.getProtocol(item);
 			if(pc != null && pc.getCommType() == CommunicationType.EVENT_DRIVEN)
 				interfaceItems.add(item);
 		}
 		
-		inherited = RoomHelpers.getActorClass(trans)!=ac;
+		inherited = roomHelpers.getActorClass(trans)!=ac;
 		
 		refined = null;
 		if (inherited) {
@@ -270,10 +270,12 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				triggerError  = true;
 			}
 		}
+		
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
 
 		if (trans instanceof GuardedTransition) {
 			if (inherited) {
-				String code = RoomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				String code = roomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
 				createFixedText(body, "&Guard:", code, true);
 			}
 			else {
@@ -291,7 +293,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (trans instanceof CPBranchTransition) {
 			if (inherited) {
-				String code = RoomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
+				String code = roomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
 				createFixedText(body, "&Condition", code, true);
 			}
 			else {
@@ -308,7 +310,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		{
-			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
+			String code = roomHelpers.getInheritedActionCode(trans, getActorClass());
 			if (code!=null){
 				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);
@@ -360,7 +362,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			return false;
 		
 		for (InterfaceItem item : interfaceItems) {
-			if (!RoomHelpers.getMessageListDeep(item, false).isEmpty())
+			if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false).isEmpty())
 				return true;
 		}
 		return false;
@@ -656,7 +658,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						currentMsgs = RoomHelpers.getMessageListDeep(mif.getFrom(), false);
+						currentMsgs = SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(mif.getFrom(), false);
 						int pos = 0;
 						int idx = -1;
 						for (Message message : currentMsgs) {
@@ -696,7 +698,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	private MessageFromIf createDefaultMif() {
 		MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
 		for (InterfaceItem item : interfaceItems) {
-			List<Message> msgs = RoomHelpers.getMessageListDeep(item, false);
+			List<Message> msgs = SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false);
 			if (!msgs.isEmpty()) {
 				mif.setFrom(item);
 				mif.setMessage(msgs.get(0));

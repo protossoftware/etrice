@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.base.NullLogger;
@@ -38,8 +39,6 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
@@ -93,12 +92,12 @@ public class AbstractExecutionValidator implements ICustomValidator {
 		if (ac.isAbstract())
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(ac))
 			// is checked elsewhere
 			return;
 
 		boolean oneProtocolsWithSemantics = false;
-		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
+		List<InterfaceItem> ifItems = AbstractExecutionUtil.getInstance().getRoomHelpers().getAllInterfaceItems(ac);
 		for (InterfaceItem item : ifItems) {
 			GeneralProtocolClass pc = item.getGeneralProtocol();
 			if (!(pc instanceof ProtocolClass))

@@ -17,8 +17,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
@@ -38,10 +36,10 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StateGraph _stateMachine = xpac.getStateMachine();
-      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       StateGraph _stateMachine_1 = xpac.getStateMachine();
-      List<State> _leafStateList = RoomHelpers.getLeafStateList(_stateMachine_1);
+      List<State> _leafStateList = this._roomHelpers.getLeafStateList(_stateMachine_1);
       int _size_1 = _leafStateList.size();
       int _minus = (_size - _size_1);
       final int historySize = (_minus + 2);
@@ -119,7 +117,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StateGraph _stateMachine = xpac.getStateMachine();
-      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
       final List<State> states = this._roomExtensions.getLeafStatesLast(_baseStateList);
       StringConcatenation _builder = new StringConcatenation();
       {
@@ -138,7 +136,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
                 _builder.appendImmediate(",", "");
               }
               _builder.append("\"");
-              String _genStatePathName = CodegenHelpers.getGenStatePathName(state);
+              String _genStatePathName = this._codegenHelpers.getGenStatePathName(state);
               _builder.append(_genStatePathName, "");
               _builder.append("\"");
               _builder.newLineIfNotEmpty();

@@ -33,10 +33,15 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class TypeHelpers {
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
+  
   @Inject
   private ILanguageExtension languageExt;
   
@@ -231,7 +236,7 @@ public class TypeHelpers {
   }
   
   public String getAttrClassConfigValue(final List<Attribute> attributePath, final PortClass port) {
-    ProtocolClass pc = RoomHelpers.getProtocolClass(port);
+    ProtocolClass pc = this._roomHelpers.getProtocolClass(port);
     boolean _equals = Objects.equal(pc, null);
     if (_equals) {
       return null;

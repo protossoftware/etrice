@@ -46,13 +46,17 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class ProcedureHelpers {
   @Inject
   @Extension
-  private TypeHelpers _typeHelpers;
+  protected RoomHelpers _roomHelpers;
   
   @Inject
-  private ILanguageExtension languageExt;
+  @Extension
+  protected TypeHelpers _typeHelpers;
   
   @Inject
-  private ILogger logger;
+  protected ILanguageExtension languageExt;
+  
+  @Inject
+  protected ILogger logger;
   
   /**
    * @param dc a {@link DataClass}
@@ -63,15 +67,15 @@ public class ProcedureHelpers {
     CharSequence _switchResult = null;
     switch (id) {
       case 1:
-        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(dc);
+        String _deepUserCode1 = this._roomHelpers.getDeepUserCode1(dc);
         _switchResult = this.userCode(_deepUserCode1);
         break;
       case 2:
-        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(dc);
+        String _deepUserCode2 = this._roomHelpers.getDeepUserCode2(dc);
         _switchResult = this.userCode(_deepUserCode2);
         break;
       case 3:
-        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(dc);
+        String _deepUserCode3 = this._roomHelpers.getDeepUserCode3(dc);
         _switchResult = this.userCode(_deepUserCode3);
         break;
     }
@@ -87,15 +91,15 @@ public class ProcedureHelpers {
     CharSequence _switchResult = null;
     switch (id) {
       case 1:
-        String _deepUserCode1 = RoomHelpers.getDeepUserCode1(pc);
+        String _deepUserCode1 = this._roomHelpers.getDeepUserCode1(pc);
         _switchResult = this.userCode(_deepUserCode1);
         break;
       case 2:
-        String _deepUserCode2 = RoomHelpers.getDeepUserCode2(pc);
+        String _deepUserCode2 = this._roomHelpers.getDeepUserCode2(pc);
         _switchResult = this.userCode(_deepUserCode2);
         break;
       case 3:
-        String _deepUserCode3 = RoomHelpers.getDeepUserCode3(pc);
+        String _deepUserCode3 = this._roomHelpers.getDeepUserCode3(pc);
         _switchResult = this.userCode(_deepUserCode3);
         break;
     }
@@ -113,15 +117,15 @@ public class ProcedureHelpers {
       CharSequence _switchResult = null;
       switch (id) {
         case 1:
-          String _deepUserCode1 = RoomHelpers.getDeepUserCode1(ac);
+          String _deepUserCode1 = this._roomHelpers.getDeepUserCode1(ac);
           _switchResult = this.userCode(_deepUserCode1);
           break;
         case 2:
-          String _deepUserCode2 = RoomHelpers.getDeepUserCode2(ac);
+          String _deepUserCode2 = this._roomHelpers.getDeepUserCode2(ac);
           _switchResult = this.userCode(_deepUserCode2);
           break;
         case 3:
-          String _deepUserCode3 = RoomHelpers.getDeepUserCode3(ac);
+          String _deepUserCode3 = this._roomHelpers.getDeepUserCode3(ac);
           _switchResult = this.userCode(_deepUserCode3);
           break;
       }
@@ -153,7 +157,7 @@ public class ProcedureHelpers {
    * 		comments (no tag replacement will happen)
    */
   public CharSequence userCode(final DetailCode dc) {
-    String _detailCode = RoomHelpers.getDetailCode(dc);
+    String _detailCode = this._roomHelpers.getDetailCode(dc);
     return this.userCode(_detailCode);
   }
   
@@ -575,7 +579,7 @@ public class ProcedureHelpers {
           if (!_usesInheritance) {
             _and = false;
           } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
+            boolean _isConstructor = this._roomHelpers.isConstructor(operation);
             _and = _isConstructor;
           }
           boolean _not = (!_and);
@@ -608,7 +612,7 @@ public class ProcedureHelpers {
           if (!_usesInheritance) {
             _and = false;
           } else {
-            boolean _isConstructor = RoomHelpers.isConstructor(operation);
+            boolean _isConstructor = this._roomHelpers.isConstructor(operation);
             _and = _isConstructor;
           }
           boolean _not = (!_and);
@@ -658,14 +662,14 @@ public class ProcedureHelpers {
    */
   private CharSequence operationSignature(final Operation operation, final String classname) {
     CharSequence _xifexpression = null;
-    boolean _isConstructor = RoomHelpers.isConstructor(operation);
+    boolean _isConstructor = this._roomHelpers.isConstructor(operation);
     if (_isConstructor) {
       String _constructorName = this.languageExt.constructorName(classname);
       String _constructorReturnType = this.languageExt.constructorReturnType();
       _xifexpression = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
     } else {
       CharSequence _xifexpression_1 = null;
-      boolean _isDestructor = RoomHelpers.isDestructor(operation);
+      boolean _isDestructor = this._roomHelpers.isDestructor(operation);
       if (_isDestructor) {
         String _destructorName = this.languageExt.destructorName(classname);
         String _destructorReturnType = this.languageExt.destructorReturnType();

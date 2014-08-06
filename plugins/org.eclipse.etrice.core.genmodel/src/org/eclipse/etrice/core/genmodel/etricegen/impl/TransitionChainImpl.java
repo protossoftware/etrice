@@ -55,6 +55,10 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * @generated
  */
 public class TransitionChainImpl extends EObjectImpl implements TransitionChain {
+	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -223,11 +227,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		
 		result.append(tcv.genActionOperationCall(tr));
 		
-		StateGraphNode node = RoomHelpers.getNode(tr.getTo());
+		StateGraphNode node = roomHelpers.getNode(tr.getTo());
 		EList<Transition> out = ac.getOutgoingTransitions(node);
 		if (node instanceof ChoicePoint) {
 			ContinuationTransition dflt = ac.getDefaultBranch(out);
-			assert(dflt!=null): "ChoicePoint "+RoomNameProvider.getFullPath(node)+" has no default branch!";
+			assert(dflt!=null): "ChoicePoint "+roomNameProvider.getFullPath(node)+" has no default branch!";
 			
 			// generate if/else
 			boolean isFirst = true;
@@ -236,7 +240,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 					continue;
 				
 				assert(cond instanceof CPBranchTransition): "The non default ChoicePoint branch "
-					+RoomNameProvider.getFullPath(cond)+" must be of type CPBranchTransition!";
+					+roomNameProvider.getFullPath(cond)+" must be of type CPBranchTransition!";
 				
 				result.append(tcv.genElseIfBranch((CPBranchTransition)cond, isFirst));
 				isFirst = false;
@@ -259,7 +263,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 					return;
 				}
 				else {
-					assert(out.size()<=1): "TrPoint "+RoomNameProvider.getFullPath(node)
+					assert(out.size()<=1): "TrPoint "+roomNameProvider.getFullPath(node)
 					+" is expected to have at most one outgoing transition!";
 					if (out.size()==1) {
 						State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;

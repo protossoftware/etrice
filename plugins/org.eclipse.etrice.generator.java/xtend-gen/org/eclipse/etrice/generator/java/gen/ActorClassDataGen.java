@@ -41,6 +41,10 @@ public class ActorClassDataGen {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
@@ -145,7 +149,7 @@ public class ActorClassDataGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\t");
           _builder.append("// state and history");
@@ -168,7 +172,7 @@ public class ActorClassDataGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine_1 = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine_1 = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine_1) {
           _builder.append("\t");
           _builder.append("public int getState() {");

@@ -20,12 +20,12 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
-
-import static extension org.eclipse.etrice.core.common.base.util.BaseHelpers.*
+import org.eclipse.etrice.core.common.base.util.BaseHelpers
 
 @Singleton
 class NodeRunnerGen {
 
+	@Inject extension BaseHelpers
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions

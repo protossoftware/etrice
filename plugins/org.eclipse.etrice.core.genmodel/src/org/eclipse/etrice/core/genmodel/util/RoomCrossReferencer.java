@@ -47,6 +47,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class RoomCrossReferencer {
 	
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	public Set<RoomModel> getReferencedModels(RoomClass cls) {
 
 		HashSet<DataClass> dataClasses = new HashSet<DataClass>();
@@ -218,7 +220,7 @@ public class RoomCrossReferencer {
 	private void recursivelyAddReferencedClasses(ActorClass ac, HashSet<ActorClass> actorClasses) {
 		actorClasses.add(ac);
 		
-		for (ActorContainerRef ar : RoomHelpers.getAllActorContainerRefs(ac)) {
+		for (ActorContainerRef ar : roomHelpers.getAllActorContainerRefs(ac)) {
 			if (ar instanceof ActorRef) {
 				recursivelyAddReferencedClasses(((ActorRef)ar).getType(), actorClasses);
 			}

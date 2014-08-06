@@ -8,9 +8,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -27,7 +27,7 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = ValidationUtil.isUniqueName(tp, name);
+				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(tp, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}

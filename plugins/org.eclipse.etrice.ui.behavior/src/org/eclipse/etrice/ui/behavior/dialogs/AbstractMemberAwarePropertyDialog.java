@@ -18,9 +18,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.MsgItemPair;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.OperationItemPair;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
@@ -153,8 +153,10 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 			Object selected = dlg.getSelected();
 			if (selected instanceof Attribute)
 				insertText(((Attribute)selected).getName());
-			else if (selected instanceof Operation)
-				insertText(((Operation)selected).getName()+RoomHelpers.getTypedArgumentList((Operation) selected));
+			else if (selected instanceof Operation) {
+				String typedArgumentList = SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList((Operation) selected);
+				insertText(((Operation)selected).getName()+typedArgumentList);
+			}
 		}
 	}
 
@@ -177,7 +179,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 				}
 				if (dlg.getMethodItemPair() instanceof OperationItemPair) {
 					OperationItemPair pair = (OperationItemPair) dlg.getMethodItemPair();
-					String arglist = RoomHelpers.getArguments(pair.op);
+					String arglist = SupportUtil.getInstance().getRoomNameProvider().getArguments(pair.op);
 					insertText(pair.item.getName()+"."+pair.op.getName()+arglist);
 				}
 			}

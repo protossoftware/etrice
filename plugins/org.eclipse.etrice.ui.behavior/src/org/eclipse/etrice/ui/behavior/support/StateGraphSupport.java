@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
@@ -151,7 +150,8 @@ public class StateGraphSupport {
 				
 				{
 					Shape labelShape = peCreateService.createShape(containerShape, false);
-					Text label = gaService.createDefaultText(getDiagram(), labelShape, RoomNameProvider.getStateGraphLabel(sg));
+					Text label = gaService.createDefaultText(getDiagram(), labelShape,
+							SupportUtil.getInstance().getRoomNameProvider().getStateGraphLabel(sg));
 					label.setForeground(manageColor(LINE_COLOR));
 					label.setBackground(manageColor(LINE_COLOR));
 					label.setHorizontalAlignment(Orientation.ALIGNMENT_RIGHT);
@@ -316,7 +316,7 @@ public class StateGraphSupport {
 					// check for states added in model not present in diagram (including inherited)
 					{
 						List<State> expectedStates = ctx.getStates();
-						List<State> presentStates = SupportUtil.getStates(shape, fp);
+						List<State> presentStates = SupportUtil.getInstance().getStates(shape, fp);
 						for (State state : expectedStates) {
 							if (!presentStates.contains(state))
 								++missing;
@@ -329,7 +329,7 @@ public class StateGraphSupport {
 					{
 						missing = 0;
 						List<TrPoint> expectedTrPoints = ctx.getTrPoints();
-						List<TrPoint> presentTrPoints = SupportUtil.getTrPoints(sg, shape, fp);
+						List<TrPoint> presentTrPoints = SupportUtil.getInstance().getTrPoints(sg, shape, fp);
 						for (TrPoint tp : expectedTrPoints) {
 							if (!presentTrPoints.contains(tp))
 								++missing;
@@ -342,7 +342,7 @@ public class StateGraphSupport {
 					{
 						missing = 0;
 						List<ChoicePoint> expectedCPs = ctx.getChPoints();
-						List<ChoicePoint> presentCPs = SupportUtil.getChoicePoints(shape, fp);
+						List<ChoicePoint> presentCPs = SupportUtil.getInstance().getChoicePoints(shape, fp);
 						for (ChoicePoint cp : expectedCPs) {
 							if (!presentCPs.contains(cp))
 								++missing;
@@ -355,7 +355,7 @@ public class StateGraphSupport {
 					{
 						missing = 0;
 						List<Transition> expectedTrans = ctx.getTransitions();
-						List<Transition> presentTrans = SupportUtil.getTransitions(getDiagram(), fp);
+						List<Transition> presentTrans = SupportUtil.getInstance().getTransitions(getDiagram(), fp);
 						for (Transition trans : expectedTrans) {
 							if (!presentTrans.contains(trans))
 								++missing;
@@ -370,7 +370,7 @@ public class StateGraphSupport {
 					Shape labelShape = shape.getChildren().get(0);
 					GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
 					if (ga instanceof Text)
-						if (!RoomNameProvider.getStateGraphLabel(sg).equals(((Text)ga).getValue()))
+						if (!SupportUtil.getInstance().getRoomNameProvider().getStateGraphLabel(sg).equals(((Text)ga).getValue()))
 							reason += "state graph label changed\n";
 				}
 
@@ -402,14 +402,14 @@ public class StateGraphSupport {
 				if (context instanceof StateGraphUpdateContext) {
 					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 
-					SupportUtil.updateStateGraph(sg, ctx, sgShape, fp);
+					SupportUtil.getInstance().updateStateGraph(sg, ctx, sgShape, fp);
 				}
 				
 				if (!sgShape.getChildren().isEmpty()) {
 					Shape labelShape = sgShape.getChildren().get(0);
 					GraphicsAlgorithm ga = labelShape.getGraphicsAlgorithm();
 					if (ga instanceof Text)
-						((Text)ga).setValue(RoomNameProvider.getStateGraphLabel(sg));
+						((Text)ga).setValue(SupportUtil.getInstance().getRoomNameProvider().getStateGraphLabel(sg));
 				}
 				
 				return true;

@@ -86,6 +86,15 @@ import com.google.inject.Inject;
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
+	@Inject
+	private RoomHelpers roomHelpers;
+
+	@Inject
+	private RoomNameProvider roomNameProvider;
+	
+	@Inject
+	private ValidationUtil ValidationUtil;
+	
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
 	public static final String MULTIPLICITY_ANY_REQUIRES_OPTIONAL = "multiplicity any [*] requires optional";
@@ -156,7 +165,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (ar.eContainer() instanceof ActorClass) {
 			ActorClass ac = (ActorClass) ar.eContainer();
 			
-			if (ValidationUtil.isReferencing(ar.getType(), ac)) {
+			if (roomHelpers.isReferencing(ar.getType(), ac)) {
 				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type());
 			}
 		}
@@ -203,7 +212,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (dc==null)
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(dc))
+		if (roomHelpers.isCircularClassHierarchy(dc))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getDataClass_Base());
 	}
 
@@ -223,7 +232,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		
 		DataClass dc = (DataClass) att.eContainer();
-		if (ValidationUtil.isCircularClassHierarchy(dc))
+		if (roomHelpers.isCircularClassHierarchy(dc))
 			return;
 		
 		while (dc!=null) {
@@ -256,7 +265,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (pc==null)
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(pc))
+		if (roomHelpers.isCircularClassHierarchy(pc))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getProtocolClass_Base());
 	}
 
@@ -265,13 +274,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (ac==null)
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (roomHelpers.isCircularClassHierarchy(ac))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
 	}
 	
 	@Check
 	public void checkUniqueNames(ActorClass ac) {
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (roomHelpers.isCircularClassHierarchy(ac))
 			return;
 		
 		HashMap<String, EObject> name2obj = new HashMap<String, EObject>();
@@ -279,22 +288,22 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		// first add all base class objects (we'll add no errors for them)
 		if (ac.getBase()!=null) {
 			ActorClass base = ac.getBase();
-			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(base);
+			List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(base);
 			for (InterfaceItem item : items) {
 				name2obj.put(item.getName(), item);
 			}
-			List<ActorContainerRef> refs = RoomHelpers.getAllActorContainerRefs(base);
+			List<ActorContainerRef> refs = roomHelpers.getAllActorContainerRefs(base);
 			for (ActorContainerRef ref : refs) {
 				name2obj.put(ref.getName(), ref);
 			}
 		}
 		
 		// now we check our own items and refs
-		List<InterfaceItem> items = RoomHelpers.getInterfaceItems(ac);
+		List<InterfaceItem> items = roomHelpers.getInterfaceItems(ac);
 		for (InterfaceItem item : items) {
 			if (name2obj.containsKey(item.getName())) {
 				EObject duplicate = name2obj.get(item.getName());
-				String location = RoomNameProvider.getLocation(duplicate);
+				String location = roomNameProvider.getLocation(duplicate);
 				EObject parent = item.eContainer();
 				@SuppressWarnings("unchecked")
 				int idx = ((List<EObject>)parent.eGet(item.eContainingFeature())).indexOf(item);
@@ -304,11 +313,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				name2obj.put(item.getName(), item);
 		}
 		
-		List<ActorContainerRef> refs = RoomHelpers.getRefs(ac, false);
+		List<ActorContainerRef> refs = roomHelpers.getRefs(ac, false);
 		for (ActorContainerRef ref : refs) {
 			if (name2obj.containsKey(ref.getName())) {
 				EObject duplicate = name2obj.get(ref.getName());
-				String location = RoomNameProvider.getLocation(duplicate);
+				String location = roomNameProvider.getLocation(duplicate);
 				EObject parent = ref.eContainer();
 				@SuppressWarnings("unchecked")
 				int idx = ((List<EObject>)parent.eGet(ref.eContainingFeature())).indexOf(ref);
@@ -321,7 +330,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkExecModelConsistent(ActorClass ac) {
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (roomHelpers.isCircularClassHierarchy(ac))
 			return;
 		
 		ActorCommunicationType commType = ac.getCommType();
@@ -396,16 +405,16 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkActorInstanceMapping(ActorInstanceMapping aim) {
-		ActorContainerClass root = RoomHelpers.getParentContainer(aim);
+		ActorContainerClass root = roomHelpers.getParentContainer(aim);
 		if (root != null && !root.eIsProxy()) {
 			RefPath path = aim.getPath();
 			if (path != null) {
-				String invalidSegment = RoomHelpers.checkPath(root, path);
+				String invalidSegment = roomHelpers.checkPath(root, path);
 				if (invalidSegment != null)
 					error("no match for segment '" + invalidSegment + "'",
 							RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
 				else {
-					ActorRef aRef = RoomHelpers.getLastActorRef(root, path);
+					ActorRef aRef = roomHelpers.getLastActorRef(root, path);
 					if (aRef == null)
 						error("invalid actor reference",
 								RoomPackage.Literals.ACTOR_INSTANCE_MAPPING__PATH);
@@ -517,7 +526,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		//boolean synchronous = ac.getCommType() == ActorCommunicationType.SYNCHRONOUS;
 		
 		for(InterfaceItem item : items){
-			ProtocolClass pc = RoomHelpers.getProtocol(item);
+			ProtocolClass pc = roomHelpers.getProtocol(item);
 			if (pc!=null)
 				switch(pc.getCommType()){
 					case DATA_DRIVEN:
@@ -547,22 +556,22 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkProtocol(ProtocolClass pc) {
-		if (ValidationUtil.isCircularClassHierarchy(pc))
+		if (roomHelpers.isCircularClassHierarchy(pc))
 			return;
 		
 		switch (pc.getCommType()) {
 		case DATA_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.DATA_DRIVEN)
 				error("super protocol has to have same communication type", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
-			if (RoomHelpers.getAllMessages(pc, true).isEmpty())
+			if (roomHelpers.getAllMessages(pc, true).isEmpty())
 				error("at least one incoming message must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
-			if (!RoomHelpers.getAllMessages(pc, false).isEmpty())
+			if (!roomHelpers.getAllMessages(pc, false).isEmpty())
 				error("data driven protocols must have no outgoing messages", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
 			break;
 		case EVENT_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.EVENT_DRIVEN)
 				error("super protocol has to have same communication type", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
-			if (RoomHelpers.getAllMessages(pc, true).isEmpty() && RoomHelpers.getAllMessages(pc, false).isEmpty())
+			if (roomHelpers.getAllMessages(pc, true).isEmpty() && roomHelpers.getAllMessages(pc, false).isEmpty())
 				error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
 			break;
 		case SYNCHRONOUS:
@@ -577,7 +586,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				warning("a derived protocol should add either incoming or outgoing messages, not both", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
 			
 			{
-				List<Message> incoming = RoomHelpers.getAllMessages(pc, true);
+				List<Message> incoming = roomHelpers.getAllMessages(pc, true);
 				HashSet<String> inNames = new HashSet<String>();
 				for (Message in : incoming) {
 					if (!inNames.add(in.getName())) {
@@ -589,7 +598,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 
 			{
-				List<Message> outgoing = RoomHelpers.getAllMessages(pc, true);
+				List<Message> outgoing = roomHelpers.getAllMessages(pc, true);
 				HashSet<String> outNames = new HashSet<String>();
 				for (Message out : outgoing) {
 					if (!outNames.add(out.getName())) {
@@ -613,20 +622,20 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
 		if(mfi.getFrom() != null){
-			if(RoomHelpers.getProtocol(mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
+			if(roomHelpers.getProtocol(mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
 				error("port must have event driven protocol", mfi, RoomPackage.eINSTANCE.getMessageFromIf_From());
 		}
 	}
 
 	@Check
 	public void checkOperation(StandardOperation op) {
-		if (RoomHelpers.isConstructor(op)) {
+		if (roomHelpers.isConstructor(op)) {
 			if (!op.getArguments().isEmpty())
 				error("Constructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
 			if (op.getReturnType()!=null)
 				error("Constructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}
-		else if (RoomHelpers.isDestructor(op)) {
+		else if (roomHelpers.isDestructor(op)) {
 			if (!op.getArguments().isEmpty())
 				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
 			if (op.getReturnType()!=null)
@@ -679,7 +688,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		
 		if (att.eContainer() instanceof ActorClass) {
 			ActorClass ac = (ActorClass) att.eContainer();
-			if (ValidationUtil.isCircularClassHierarchy(ac))
+			if (roomHelpers.isCircularClassHierarchy(ac))
 				// is checked elsewhere
 				return;
 			
@@ -691,7 +700,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		else if (att.eContainer() instanceof DataClass) {
 			DataClass dc = (DataClass) att.eContainer();
-			if (ValidationUtil.isCircularClassHierarchy(dc))
+			if (roomHelpers.isCircularClassHierarchy(dc))
 				// is checked elsewhere
 				return;
 			

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -26,7 +27,6 @@ import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 public class ProposalGenerator {
 	private ExpandedActorClass xpac;
@@ -65,7 +65,7 @@ public class ProposalGenerator {
 			return;
 
 		// ignore substates
-		if (RoomHelpers.hasDirectSubStructure(st))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st))
 			return;
 
 		outgoingProposal.clear();
@@ -85,7 +85,7 @@ public class ProposalGenerator {
 								.createMessageFromIf();
 						mif.setFrom(port);
 						mif.setMessage(curRule.getMsg());
-						boolean isOutgoing = RoomHelpers.getMessageListDeep(
+						boolean isOutgoing = AbstractExecutionUtil.getInstance().getRoomHelpers().getMessageListDeep(
 								port, true).contains(curRule.getMsg());
 						if (isOutgoing) {
 							outgoingProposal.add(mif);

@@ -64,6 +64,12 @@ import com.google.inject.Inject;
 public class RoomLabelProvider extends BaseLabelProvider {
 
 	@Inject
+	private RoomHelpers roomHelpers;
+
+	@Inject
+	private RoomNameProvider roomNameProvider;
+	
+	@Inject
 	public RoomLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
@@ -162,7 +168,7 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String image(Port p) {
-		boolean relay = RoomHelpers.isRelay(p);
+		boolean relay = roomHelpers.isRelay(p);
 		if (relay)
 			if (p.isConjugated())
 				if (p.isReplicated())
@@ -249,9 +255,9 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	
 	String text(Port p) {
 		String location = null;
-		if (RoomHelpers.isInternal(p))
+		if (roomHelpers.isInternal(p))
 			location = "internal";
-		else if (RoomHelpers.isExternal(p)) {
+		else if (roomHelpers.isExternal(p)) {
 			location = "external";
 		}
 		else
@@ -263,7 +269,7 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String text(Binding bind) {
-		return RoomNameProvider.getDisplayName(bind);
+		return roomNameProvider.getDisplayName(bind);
 	}
 	
 	String text(ExternalPort ep) {
@@ -312,8 +318,8 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	StyledString text(Operation op) {
 		/* TODO TS: create complete signature including return type and ref */
 
-		String signature = RoomHelpers.getSignature(op);
-		String special = RoomHelpers.isConstructor(op)? "ctor " : RoomHelpers.isDestructor(op)? "dtor " : "";
+		String signature = roomNameProvider.getSignature(op);
+		String special = roomHelpers.isConstructor(op)? "ctor " : roomHelpers.isDestructor(op)? "dtor " : "";
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null) {
 		}
 		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";

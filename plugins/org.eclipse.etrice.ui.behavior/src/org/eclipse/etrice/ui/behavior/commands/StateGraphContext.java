@@ -15,9 +15,9 @@ import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.support.DefaultPositionProvider;
 import org.eclipse.etrice.ui.behavior.support.IPositionProvider;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 
 public class StateGraphContext {
 	private ArrayList<StateGraphContext> children = new ArrayList<StateGraphContext>();
@@ -139,7 +139,7 @@ public class StateGraphContext {
 				obj2ctx.put(refined, this);
 				
 				// merge sub contexts
-				if (RoomHelpers.hasDirectSubStructure(base)) {
+				if (SupportUtil.getInstance().getRoomHelpers().hasDirectSubStructure(base)) {
 					StateGraphContext basesub = null;
 					for (StateGraphContext bs : ctx.getChildren()) {
 						if (bs.getParentState()==base) {
@@ -148,7 +148,7 @@ public class StateGraphContext {
 						}
 					}
 					if (basesub!=null) {
-						if (RoomHelpers.hasDirectSubStructure(refined)) {
+						if (SupportUtil.getInstance().getRoomHelpers().hasDirectSubStructure(refined)) {
 							basesub.merge(refined.getSubgraph());
 						}
 					}
@@ -156,7 +156,7 @@ public class StateGraphContext {
 						assert(false): "context not found";
 					}
 				}
-				else if (RoomHelpers.hasDirectSubStructure(refined)) {
+				else if (SupportUtil.getInstance().getRoomHelpers().hasDirectSubStructure(refined)) {
 					StateGraphContext sub = new StateGraphContext(refined.getSubgraph(), obj2ctx);
 					ctx.getChildren().add(sub);
 				}

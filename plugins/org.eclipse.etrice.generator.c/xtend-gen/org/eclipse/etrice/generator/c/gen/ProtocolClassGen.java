@@ -34,7 +34,6 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
@@ -477,9 +476,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
       if ((conj).booleanValue()) {
-        _xifexpression = RoomHelpers.getAllIncomingMessages(pc);
+        _xifexpression = this._roomHelpers.getAllIncomingMessages(pc);
       } else {
-        _xifexpression = RoomHelpers.getAllOutgoingMessages(pc);
+        _xifexpression = this._roomHelpers.getAllOutgoingMessages(pc);
       }
       List<Message> messages = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
@@ -660,7 +659,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence genDataDrivenPortHeaders(final ProtocolClass pc) {
     CharSequence _xblockexpression = null;
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -933,7 +932,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence genDataDrivenPortSources(final ProtocolClass pc) {
     CharSequence _xblockexpression = null;
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -1158,9 +1157,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       final String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
       if ((conj).booleanValue()) {
-        _xifexpression = RoomHelpers.getAllIncomingMessages(pc);
+        _xifexpression = this._roomHelpers.getAllIncomingMessages(pc);
       } else {
-        _xifexpression = RoomHelpers.getAllOutgoingMessages(pc);
+        _xifexpression = this._roomHelpers.getAllOutgoingMessages(pc);
       }
       final List<Message> messages = _xifexpression;
       String _xifexpression_1 = null;
@@ -1595,7 +1594,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append(_name, "");
     _builder.append("_messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_1 = m.getName();
@@ -1604,7 +1603,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
     }
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_2 = m_1.getName();

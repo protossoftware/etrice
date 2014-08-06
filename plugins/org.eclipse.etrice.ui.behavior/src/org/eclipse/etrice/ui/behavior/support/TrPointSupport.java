@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.EntryPoint;
 import org.eclipse.etrice.core.room.ExitPoint;
@@ -27,8 +26,6 @@ import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -142,11 +139,11 @@ public class TrPointSupport {
 			@Override
 			public Object[] doCreate(ICreateContext context) {
 				ContainerShape targetContainer = context.getTargetContainer();
-		        ActorClass ac = SupportUtil.getActorClass(getDiagram());
+		        ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-				boolean inherited = SupportUtil.isInherited(getDiagram(), sg);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					sg = SupportUtil.insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					sg = SupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
 				
 		        // create transition point
@@ -162,7 +159,7 @@ public class TrPointSupport {
 					tp = RoomFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
-		        tp.setName(RoomNameProvider.getUniqueTrPointName(sg));
+		        tp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueTrPointName(sg));
 				sg.getTrPoints().add(tp);
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -223,7 +220,7 @@ public class TrPointSupport {
 				ContainerShape parentShape = context.getTargetContainer();
 				Object bo = getBusinessObjectForPictogramElement(parentShape);
 				boolean subtp = (bo instanceof State);
-				boolean inherited = subtp?SupportUtil.isInherited(getDiagram(), (State)bo):SupportUtil.isInherited(tp, parentShape);
+				boolean inherited = subtp?SupportUtil.getInstance().isInherited(getDiagram(), (State)bo):SupportUtil.getInstance().isInherited(tp, parentShape);
 	
 				int margin = subtp?MARGIN_SMALL:MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;
@@ -340,8 +337,8 @@ public class TrPointSupport {
 					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
 				}
 				if (elements.isEmpty()) {
-			        ActorClass ac = SupportUtil.getActorClass(getDiagram());
-					s = RoomHelpers.getTargettingState(s, ac);
+			        ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
+					s = SupportUtil.getInstance().getRoomHelpers().getTargettingState(s, ac);
 					assert(s!=null): "a refined state should point to our parent state";
 					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
 				}
@@ -381,7 +378,7 @@ public class TrPointSupport {
 					if (bo instanceof TrPoint) {
 						TrPoint tp = (TrPoint) bo;
 						
-						if (SupportUtil.isInherited(getDiagram(), tp))
+						if (SupportUtil.getInstance().isInherited(getDiagram(), tp))
 							return false;
 						
 						if (isSubTP(context.getPictogramElement()))
@@ -525,7 +522,7 @@ public class TrPointSupport {
 				if (pes != null && pes.length == 1 && pes[0] instanceof ContainerShape) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof TrPoint) {
-						return !SupportUtil.isInherited(getDiagram(), (TrPoint) bo);
+						return !SupportUtil.getInstance().isInherited(getDiagram(), (TrPoint) bo);
 					}
 				}
 				return false;
@@ -620,7 +617,7 @@ public class TrPointSupport {
 				}
 				TrPoint tp = (TrPoint) bo;
 				
-				boolean inherited = SupportUtil.isInherited(getDiagram(), tp);
+				boolean inherited = SupportUtil.getInstance().isInherited(getDiagram(), tp);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateTrPointFigure(tp, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -655,10 +652,10 @@ public class TrPointSupport {
 
 				ContainerShape containerShape = (ContainerShape) context.getPictogramElement();
 				TrPoint tp = (TrPoint) getBusinessObjectForPictogramElement(containerShape);
-				if (SupportUtil.isInherited(getDiagram(), tp))
+				if (SupportUtil.getInstance().isInherited(getDiagram(), tp))
 					return false;
 				
-				if (ValidationUtil.isConnectedOutside(tp))
+				if (SupportUtil.getInstance().getValidationUtil().isConnectedOutside(tp))
 					return false;
 				
 				return true;

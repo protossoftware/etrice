@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.LiteralType;
-import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.common.converter.TimeConverter;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
@@ -87,6 +86,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class NodeGen {
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
   @Inject
   @Extension
   private CExtensions _cExtensions;
@@ -277,7 +280,7 @@ public class NodeGen {
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       EList<Annotation> _annotations = ssc.getAnnotations();
-      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -915,7 +918,7 @@ public class NodeGen {
             EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
             final Function1<StandardOperation, Boolean> _function_3 = new Function1<StandardOperation, Boolean>() {
               public Boolean apply(final StandardOperation op) {
-                return Boolean.valueOf(RoomHelpers.isConstructor(op));
+                return Boolean.valueOf(NodeGen.this._roomHelpers.isConstructor(op));
               }
             };
             Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_3);
@@ -1193,7 +1196,7 @@ public class NodeGen {
                           }
                           _builder.append("\t");
                           InterfaceItem _interfaceItem = pi.getInterfaceItem();
-                          PortClass _portClass_1 = RoomHelpers.getPortClass(_interfaceItem);
+                          PortClass _portClass_1 = this._roomHelpers.getPortClass(_interfaceItem);
                           EList<Attribute> _attributes_1 = _portClass_1.getAttributes();
                           CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(pi, _attributes_1);
                           _builder.append(_generateAttributeInit, "\t");
@@ -1614,7 +1617,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("\t");
       ActorClass _actorClass_2 = ai.getActorClass();
-      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_actorClass_2);
       CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
       _builder.append(_generateAttributeInit, "\t");
       _builder.newLineIfNotEmpty();
@@ -1673,7 +1676,7 @@ public class NodeGen {
       final Function1<PortInstance, Boolean> _function_3 = new Function1<PortInstance, Boolean>() {
         public Boolean apply(final PortInstance p) {
           Port _port = p.getPort();
-          List<Message> _outgoing = RoomHelpers.getOutgoing(_port);
+          List<Message> _outgoing = NodeGen.this._roomHelpers.getOutgoing(_port);
           final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
             public Boolean apply(final Message m) {
               boolean _or = false;
@@ -1842,7 +1845,7 @@ public class NodeGen {
       Port _port = ((PortInstance) pi).getPort();
       GeneralProtocolClass _protocol = _port.getProtocol();
       final ProtocolClass pc = ((ProtocolClass) _protocol);
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -1969,7 +1972,7 @@ public class NodeGen {
     String _xblockexpression = null;
     {
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
-      List<Message> _incoming = RoomHelpers.getIncoming(_interfaceItem);
+      List<Message> _incoming = this._roomHelpers.getIncoming(_interfaceItem);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -2147,7 +2150,7 @@ public class NodeGen {
       final ArrayList<PortInstance> loggedPorts = this.loggedPorts(ssi);
       SubSystemClass _subSystemClass = ssi.getSubSystemClass();
       EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -2911,12 +2914,12 @@ public class NodeGen {
     final ArrayList<PortInstance> result = CollectionLiterals.<PortInstance>newArrayList();
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-    boolean _isAnnotationPresent = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+    boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
     if (_isAnnotationPresent) {
       this.logger.logInfo("Data Logging is configured by annotation");
       SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
       EList<Annotation> _annotations_1 = _subSystemClass_1.getAnnotations();
-      final String filters = BaseHelpers.getAttribute(_annotations_1, "DataLogging", "pathlist");
+      final String filters = this._roomHelpers.getAttribute(_annotations_1, "DataLogging", "pathlist");
       final String[] filterList = filters.split(",");
       for (final String filter : filterList) {
         this.logger.logInfo(("  filter: " + filter));
@@ -2932,7 +2935,7 @@ public class NodeGen {
           if ((obj instanceof PortInstance)) {
             final PortInstance pi = ((PortInstance) obj);
             Port _port = pi.getPort();
-            boolean _isRelay = RoomHelpers.isRelay(_port);
+            boolean _isRelay = this._roomHelpers.isRelay(_port);
             boolean _not = (!_isRelay);
             if (_not) {
               ProtocolClass _protocol = pi.getProtocol();

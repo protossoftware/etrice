@@ -39,6 +39,11 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	 * the logger used for issuing informations
 	 */
 	@Inject ILogger logger;
+	
+	/**
+	 * the name provider for model objects
+	 */
+	@Inject RoomNameProvider roomNameProvider;
 
 	/**
 	 * @return <code>false</code>
@@ -115,12 +120,12 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	@Override
 	public String translateTag(String tag, DetailCode code) {
 		if (tag.equals("MODEL_LOCATION")) {
-			return RoomNameProvider.getDetailCodeLocation(code);
+			return roomNameProvider.getDetailCodeLocation(code);
 		}
 		
 		logger.logInfo("unrecognized tag '"+tag+"' in "
-				+RoomNameProvider.getDetailCodeLocation(code)+" of "
-				+RoomNameProvider.getClassLocation(RoomNameProvider.getModelClass(code)));
+				+roomNameProvider.getDetailCodeLocation(code)+" of "
+				+roomNameProvider.getClassLocation(roomNameProvider.getModelClass(code)));
 		return TAG_START+"?"+tag+"?"+TAG_END;
 	}
 

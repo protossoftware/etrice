@@ -33,12 +33,12 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.common.dialogs.MultiValidator2;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.Multiplicity2StringConverter;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog.String2MultiplicityConverter;
+import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Combo;
@@ -194,7 +194,7 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
         	EObject obj = desc.getEObjectOrProxy();
         	if (refIsActor && obj instanceof ActorClass) {
         		if (containerIsActor) {
-        			if (!ValidationUtil.isReferencing((ActorClass)obj, (ActorClass)sc))
+        			if (!SupportUtil.getInstance().getRoomHelpers().isReferencing((ActorClass)obj, (ActorClass)sc))
         				actors.add(desc);
         		}
         		else

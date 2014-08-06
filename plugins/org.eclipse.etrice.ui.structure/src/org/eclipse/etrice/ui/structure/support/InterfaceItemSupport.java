@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
@@ -722,7 +721,7 @@ public class InterfaceItemSupport {
 			if (bo instanceof InterfaceItem) {
 				InterfaceItem ifitem = (InterfaceItem) bo;
 				String name = ifitem.getName();
-				String protocol = RoomHelpers.getGeneralProtocol(ifitem).getName();
+				String protocol = SupportUtil.getInstance().getRoomHelpers().getGeneralProtocol(ifitem).getName();
 				if (ifitem instanceof Port) {
 					Port port = (Port) ifitem;
 					if (port.getMultiplicity()==-1)

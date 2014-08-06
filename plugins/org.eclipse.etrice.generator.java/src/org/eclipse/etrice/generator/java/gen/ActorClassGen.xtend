@@ -34,8 +34,6 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 	
@@ -43,13 +41,18 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject IDataConfiguration dataConfigExt
-	@Inject ConfigGenAddon configGenAddon
+	final ConfigGenAddon configGenAddon
 	
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
 	@Inject extension TypeHelpers
 	@Inject extension FileSystemHelpers
+	
+	@Inject
+	new (ConfigGenAddon configGenAddon) {
+		this.configGenAddon = configGenAddon
+	}
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>

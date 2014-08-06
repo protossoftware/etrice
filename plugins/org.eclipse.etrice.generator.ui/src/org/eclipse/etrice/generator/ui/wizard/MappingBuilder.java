@@ -53,7 +53,8 @@ public class MappingBuilder {
 	private ETPhysFactory physFactory = ETPhysFactory.eINSTANCE;
 	private BaseFactory baseFactory = BaseFactory.eINSTANCE;
 	private Map<SubSystemClass, NodeClass> nodeMap = Maps.newHashMap();
-
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	XtextResourceSet resourceSet = null;
 	XtextResource etPhysRes = null;
 	XtextResource etMapRes = null;
@@ -161,7 +162,7 @@ public class MappingBuilder {
 			if (!aim.getThread().equals(logThread))
 				continue;
 
-			ActorContainerClass ac = RoomHelpers.getActorContainerClass(aim);
+			ActorContainerClass ac = roomHelpers.getActorContainerClass(aim);
 			if (ac instanceof ActorClass) {
 				eventOnly &= ((ActorClass) ac).getCommType() == ActorCommunicationType.EVENT_DRIVEN;
 				dataOnly &= ((ActorClass) ac).getCommType() == ActorCommunicationType.DATA_DRIVEN;

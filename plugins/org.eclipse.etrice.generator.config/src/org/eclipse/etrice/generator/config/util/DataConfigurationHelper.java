@@ -36,19 +36,26 @@ import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class DataConfigurationHelper {
 
+	@Inject
+	private ConfigUtil ConfigUtil;
+	
 	// static
-	public static Map<String, AttrClassConfig> actorClassAttrMap = new HashMap<String, AttrClassConfig>();
-	public static Map<String, AttrClassConfig> protocolClassAttrMap = new HashMap<String, AttrClassConfig>();
-	public static Map<String, AttrInstanceConfig> actorInstanceAttrMap = new HashMap<String, AttrInstanceConfig>();
+	public Map<String, AttrClassConfig> actorClassAttrMap = new HashMap<String, AttrClassConfig>();
+	public Map<String, AttrClassConfig> protocolClassAttrMap = new HashMap<String, AttrClassConfig>();
+	public Map<String, AttrInstanceConfig> actorInstanceAttrMap = new HashMap<String, AttrInstanceConfig>();
 
 	// dynamic
-	public static Map<String, SubSystemConfig> subSystemConfigMap = new HashMap<String, SubSystemConfig>();
-	public static Map<String, List<AttrInstanceConfig>> dynActorInstanceAttrMap = new HashMap<String, List<AttrInstanceConfig>>();
-	public static Map<ActorClass, List<AttrInstanceConfig>> dynActorClassAttrMap = new HashMap<ActorClass, List<AttrInstanceConfig>>();
+	public Map<String, SubSystemConfig> subSystemConfigMap = new HashMap<String, SubSystemConfig>();
+	public Map<String, List<AttrInstanceConfig>> dynActorInstanceAttrMap = new HashMap<String, List<AttrInstanceConfig>>();
+	public Map<ActorClass, List<AttrInstanceConfig>> dynActorClassAttrMap = new HashMap<ActorClass, List<AttrInstanceConfig>>();
 
-	public static boolean setConfigModels(ResourceSet rs, ILogger logger) {
+	public boolean setConfigModels(ResourceSet rs, ILogger logger) {
 		actorClassAttrMap.clear();
 		protocolClassAttrMap.clear();
 		actorInstanceAttrMap.clear();
@@ -121,7 +128,7 @@ public class DataConfigurationHelper {
 		return !error;
 	}
 
-	private static void collectConfigs(ActorInstanceConfig actorConfig,
+	private void collectConfigs(ActorInstanceConfig actorConfig,
 			String path, Map<String, AttrInstanceConfig> map) {
 		for (AttrInstanceConfig c : actorConfig.getAttributes()) {
 			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
@@ -150,7 +157,7 @@ public class DataConfigurationHelper {
 		}
 	}
 
-	private static void collectConfigs(ProtocolClassConfig protocolConfig,
+	private void collectConfigs(ProtocolClassConfig protocolConfig,
 			Map<String, AttrClassConfig> map) {
 		String path = "/" + protocolConfig.getProtocol().getName();
 		if (protocolConfig.getRegular() != null)
@@ -165,14 +172,14 @@ public class DataConfigurationHelper {
 						+ c.getAttribute().getName(), map);
 	}
 
-	private static void collectConfigs(ActorClassConfig actorConfig,
+	private void collectConfigs(ActorClassConfig actorConfig,
 			Map<String, AttrClassConfig> map) {
 		String path = "/" + actorConfig.getActor().getName();
 		for (AttrClassConfig c : actorConfig.getAttributes())
 			collectConfigs(c, path + "/" + c.getAttribute().getName(), map);
 	}
 
-	private static void collectConfigs(AttrClassConfig config, String path,
+	private void collectConfigs(AttrClassConfig config, String path,
 			Map<String, AttrClassConfig> map) {
 		Attribute a = config.getAttribute();
 		if (a.getType().getType() instanceof DataClass)
@@ -181,7 +188,7 @@ public class DataConfigurationHelper {
 		map.put(path, config);
 	}
 
-	private static void collectConfigs(AttrInstanceConfig config, String path,
+	private void collectConfigs(AttrInstanceConfig config, String path,
 			Map<String, AttrInstanceConfig> map) {
 		Attribute a = config.getAttribute();
 		if (a.getType().getType() instanceof DataClass)
@@ -190,7 +197,7 @@ public class DataConfigurationHelper {
 		map.put(path, config);
 	}
 
-	public static String toStringPath(Iterable<String> path, String pathDelim) {
+	public String toStringPath(Iterable<String> path, String pathDelim) {
 		StringBuilder b = new StringBuilder();
 		for (String p : path)
 			b.append(pathDelim + p);

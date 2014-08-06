@@ -54,6 +54,7 @@ import org.junit.Test;
  */
 public class TestDetailCodeTranslator {
 
+	private RoomHelpers roomHelpers = new RoomHelpers();
 	
 	/**
 	 * @author Henrik Rentz-Reichert
@@ -523,7 +524,7 @@ public class TestDetailCodeTranslator {
 		DetailCode dc = getLargeFile();
 		
 		// this adds a trailing \n
-		String orig = RoomHelpers.getDetailCode(dc);
+		String orig = roomHelpers.getDetailCode(dc);
 		
 		// remove trailing \n
 		orig = orig.substring(0, orig.length()-1);

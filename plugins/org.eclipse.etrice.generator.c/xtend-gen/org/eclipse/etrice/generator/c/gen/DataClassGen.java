@@ -42,6 +42,10 @@ public class DataClassGen {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private CExtensions _cExtensions;
   
   @Inject
@@ -136,7 +140,7 @@ public class DataClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.append("\t");
-    List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
+    List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
     CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
     _builder.append(_attributes, "\t");
     _builder.newLineIfNotEmpty();
@@ -147,7 +151,7 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(dc);
+      List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
       for(final Attribute a : _allAttributes_1) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
@@ -248,7 +252,7 @@ public class DataClassGen {
       _builder.append("/* operations */");
       _builder.newLine();
       {
-        List<Operation> _allOperations = RoomHelpers.getAllOperations(dc);
+        List<Operation> _allOperations = this._roomHelpers.getAllOperations(dc);
         for(final Operation op : _allOperations) {
           final CharSequence args = this.argList(op);
           _builder.newLineIfNotEmpty();
@@ -281,7 +285,7 @@ public class DataClassGen {
       _builder.append("/* attributes */");
       _builder.newLine();
       {
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
         for(final Attribute a : _allAttributes) {
           _builder.append("#define ");
           String _name_6 = a.getName();

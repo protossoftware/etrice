@@ -33,6 +33,10 @@ public class OptionalActorFactoryGen {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private JavaExtensions _javaExtensions;
   
   @Inject
@@ -140,17 +144,17 @@ public class OptionalActorFactoryGen {
       _builder.append("// wiring");
       _builder.newLine();
       {
-        List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
+        List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
         final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
           public Boolean apply(final Port p) {
-            return Boolean.valueOf(RoomHelpers.isExternal(p));
+            return Boolean.valueOf(OptionalActorFactoryGen.this._roomHelpers.isExternal(p));
           }
         };
         Iterable<Port> _filter = IterableExtensions.<Port>filter(_allEndPorts, _function);
         for(final Port port : _filter) {
           _builder.append("\t\t");
           String _xifexpression = null;
-          boolean _isDataDriven = RoomHelpers.isDataDriven(port);
+          boolean _isDataDriven = this._roomHelpers.isDataDriven(port);
           if (_isDataDriven) {
             _xifexpression = "DataPortBase";
           } else {
@@ -173,7 +177,7 @@ public class OptionalActorFactoryGen {
           _builder.append("\t\t");
           String _xifexpression_1 = null;
           Port _port = open.getPort();
-          boolean _isDataDriven_1 = RoomHelpers.isDataDriven(_port);
+          boolean _isDataDriven_1 = this._roomHelpers.isDataDriven(_port);
           if (_isDataDriven_1) {
             _xifexpression_1 = "DataPortBase";
           } else {

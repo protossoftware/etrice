@@ -59,7 +59,12 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.xtext.validation.Check;
 
+import com.google.inject.Inject;
+
 public class ConfigJavaValidator extends AbstractConfigJavaValidator {
+
+	@Inject
+	private ConfigUtil configUtil;
 
 	@SuppressWarnings("unused")
 	private ConfigValueConverterService converter = new ConfigValueConverterService();
@@ -78,7 +83,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		// duplicate actor instance config check
 		Set<String> actorRefs = new HashSet<String>();
 		for (ActorInstanceConfig instanceConfig : model.getActorInstanceConfigs()) {
-			String ref = ConfigUtil.getPath(instanceConfig);
+			String ref = configUtil.getPath(instanceConfig);
 			if (actorRefs.contains(ref))
 				error("duplicate actor instance config", model, ConfigPackage.Literals.CONFIG_MODEL__CONFIG_ELEMENTS,
 						model.getConfigElements().indexOf(instanceConfig));
@@ -110,12 +115,12 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		if (root != null && !root.eIsProxy()) {
 			RefPath path = config.getPath();
 			if (path != null) {
-				String invalidSegment = ConfigUtil.checkPath(root, path);
+				String invalidSegment = configUtil.checkPath(root, path);
 				if (invalidSegment != null)
 					error("no match for segment '" + invalidSegment + "'",
 							ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				else {
-					ActorRef aRef = ConfigUtil.getLastActorRef(root, path);
+					ActorRef aRef = configUtil.getLastActorRef(root, path);
 					if (aRef == null)
 						error("invalid actor reference", ConfigPackage.Literals.ACTOR_INSTANCE_CONFIG__PATH);
 				}
@@ -513,7 +518,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				ProtocolClass protocol = (ProtocolClass) generalProtocol;
 				for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
 					if (cf.getProtocol().equals(protocol)) {
-						if (protocol.getRegular().equals(ConfigUtil.getPortClass(portInstanceConfig)))
+						if (protocol.getRegular().equals(configUtil.getPortClass(portInstanceConfig)))
 							portClassConfig = cf.getRegular();
 						else
 							portClassConfig = cf.getConjugated();
@@ -526,7 +531,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 		}
 		else if (source.eContainer() instanceof ActorInstanceConfig) {
 			ActorInstanceConfig aiConfig = (ActorInstanceConfig) source.eContainer();
-			ActorClass actor = ConfigUtil.getLastActorRef(aiConfig.getSubSystem().getType(), aiConfig.getPath())
+			ActorClass actor = configUtil.getLastActorRef(aiConfig.getSubSystem().getType(), aiConfig.getPath())
 					.getType();
 			// find ActorClassConfig
 			for (ActorClassConfig cf : model.getActorClassConfigs()) {

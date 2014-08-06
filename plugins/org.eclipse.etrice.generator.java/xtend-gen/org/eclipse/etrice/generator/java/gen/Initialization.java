@@ -38,11 +38,15 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class Initialization {
   @Inject
   @Extension
-  private TypeHelpers typeHelpers;
+  private RoomHelpers _roomHelpers;
   
   @Inject
   @Extension
   private RoomExtensions _roomExtensions;
+  
+  @Inject
+  @Extension
+  private TypeHelpers typeHelpers;
   
   @Inject
   @Extension
@@ -203,7 +207,7 @@ public class Initialization {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         {
-          List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
           for(final Attribute e : _allAttributes) {
             List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
             CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);

@@ -44,6 +44,10 @@ public class DataClassGen {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private JavaExtensions _javaExtensions;
   
   @Inject
@@ -91,7 +95,7 @@ public class DataClassGen {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);

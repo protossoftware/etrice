@@ -17,9 +17,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -111,7 +111,7 @@ public class MemberSelectionDialog extends FormDialog {
 				break;
 			case 2:
 				if (element instanceof Operation)
-					return RoomHelpers.getTypedArgumentList((Operation) element);
+					return SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList((Operation) element);
 			}
 			return null;
 		}

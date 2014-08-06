@@ -29,7 +29,7 @@ import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.base.AbstractGenerator
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 /**
  * A collection of methods for generation of user code, attributes with getters and setters
@@ -38,9 +38,10 @@ import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 @Singleton
 class ProcedureHelpers {
 
-	@Inject extension TypeHelpers
-	@Inject ILanguageExtension languageExt
-	@Inject ILogger logger
+	@Inject protected extension RoomHelpers
+	@Inject protected extension TypeHelpers
+	@Inject protected ILanguageExtension languageExt
+	@Inject protected ILogger logger
 
 	/**
 	 * @param dc a {@link DataClass}
