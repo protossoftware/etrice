@@ -12,6 +12,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
+import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
 import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
 
 @Singleton
@@ -5045,13 +5046,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final Grammar grammar;
 
-	private BaseGrammarAccess gaBase;
+	private FSMGrammarAccess gaFSM;
 
 	@Inject
 	public RoomGrammarAccess(GrammarProvider grammarProvider,
-		BaseGrammarAccess gaBase) {
+		FSMGrammarAccess gaFSM) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaBase = gaBase;
+		this.gaFSM = gaFSM;
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -5076,8 +5077,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 
-	public BaseGrammarAccess getBaseGrammarAccess() {
-		return gaBase;
+	public FSMGrammarAccess getFSMGrammarAccess() {
+		return gaFSM;
 	}
 
 	
@@ -6034,12 +6035,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRoomAnnotationTargetEnumAccess().getRule();
 	}
 
+	//FSMModel:
+	//	greetings+=Greeting*;
+	public FSMGrammarAccess.FSMModelElements getFSMModelAccess() {
+		return gaFSM.getFSMModelAccess();
+	}
+	
+	public ParserRule getFSMModelRule() {
+		return getFSMModelAccess().getRule();
+	}
+
+	//Greeting:
+	//	"Hello" name=ID "!";
+	public FSMGrammarAccess.GreetingElements getGreetingAccess() {
+		return gaFSM.getGreetingAccess();
+	}
+	
+	public ParserRule getGreetingRule() {
+		return getGreetingAccess().getRule();
+	}
+
 	//// **************************************************************
 	//// AnnotationType and Annotation Rules
 	//Annotation:
 	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
-		return gaBase.getAnnotationAccess();
+		return gaFSM.getAnnotationAccess();
 	}
 	
 	public ParserRule getAnnotationRule() {
@@ -6049,7 +6070,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//KeyValue:
 	//	key=ID "=" value=Literal;
 	public BaseGrammarAccess.KeyValueElements getKeyValueAccess() {
-		return gaBase.getKeyValueAccess();
+		return gaFSM.getKeyValueAccess();
 	}
 	
 	public ParserRule getKeyValueRule() {
@@ -6060,7 +6081,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
-		return gaBase.getAnnotationTypeAccess();
+		return gaFSM.getAnnotationTypeAccess();
 	}
 	
 	public ParserRule getAnnotationTypeRule() {
@@ -6070,7 +6091,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//AnnotationAttribute:
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public BaseGrammarAccess.AnnotationAttributeElements getAnnotationAttributeAccess() {
-		return gaBase.getAnnotationAttributeAccess();
+		return gaFSM.getAnnotationAttributeAccess();
 	}
 	
 	public ParserRule getAnnotationAttributeRule() {
@@ -6080,7 +6101,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SimpleAnnotationAttribute:
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
 	public BaseGrammarAccess.SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
-		return gaBase.getSimpleAnnotationAttributeAccess();
+		return gaFSM.getSimpleAnnotationAttributeAccess();
 	}
 	
 	public ParserRule getSimpleAnnotationAttributeRule() {
@@ -6090,7 +6111,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//EnumAnnotationAttribute:
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 	public BaseGrammarAccess.EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
-		return gaBase.getEnumAnnotationAttributeAccess();
+		return gaFSM.getEnumAnnotationAttributeAccess();
 	}
 	
 	public ParserRule getEnumAnnotationAttributeRule() {
@@ -6120,7 +6141,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Import:
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public BaseGrammarAccess.ImportElements getImportAccess() {
-		return gaBase.getImportAccess();
+		return gaFSM.getImportAccess();
 	}
 	
 	public ParserRule getImportRule() {
@@ -6130,7 +6151,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ImportedFQN:
 	//	FQN ".*"?;
 	public BaseGrammarAccess.ImportedFQNElements getImportedFQNAccess() {
-		return gaBase.getImportedFQNAccess();
+		return gaFSM.getImportedFQNAccess();
 	}
 	
 	public ParserRule getImportedFQNRule() {
@@ -6142,7 +6163,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Documentation:
 	//	{Documentation} "[" lines+=STRING* "]";
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
-		return gaBase.getDocumentationAccess();
+		return gaFSM.getDocumentationAccess();
 	}
 	
 	public ParserRule getDocumentationRule() {
@@ -6154,7 +6175,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//TIME returns ecore::ELong:
 	//	INT "s" | INT "ms" | INT "us" | INT "ns";
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
-		return gaBase.getTIMEAccess();
+		return gaFSM.getTIMEAccess();
 	}
 	
 	public ParserRule getTIMERule() {
@@ -6166,7 +6187,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//enum LiteralType:
 	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
-		return gaBase.getLiteralTypeAccess();
+		return gaFSM.getLiteralTypeAccess();
 	}
 	
 	public EnumRule getLiteralTypeRule() {
@@ -6176,7 +6197,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//LiteralArray:
 	//	literals+=Literal ("," literals+=Literal)*;
 	public BaseGrammarAccess.LiteralArrayElements getLiteralArrayAccess() {
-		return gaBase.getLiteralArrayAccess();
+		return gaFSM.getLiteralArrayAccess();
 	}
 	
 	public ParserRule getLiteralArrayRule() {
@@ -6187,7 +6208,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
-		return gaBase.getLiteralAccess();
+		return gaFSM.getLiteralAccess();
 	}
 	
 	public ParserRule getLiteralRule() {
@@ -6197,7 +6218,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//BooleanLiteral:
 	//	{BooleanLiteral} ("false" | isTrue?="true");
 	public BaseGrammarAccess.BooleanLiteralElements getBooleanLiteralAccess() {
-		return gaBase.getBooleanLiteralAccess();
+		return gaFSM.getBooleanLiteralAccess();
 	}
 	
 	public ParserRule getBooleanLiteralRule() {
@@ -6207,7 +6228,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//NumberLiteral:
 	//	IntLiteral | RealLiteral;
 	public BaseGrammarAccess.NumberLiteralElements getNumberLiteralAccess() {
-		return gaBase.getNumberLiteralAccess();
+		return gaFSM.getNumberLiteralAccess();
 	}
 	
 	public ParserRule getNumberLiteralRule() {
@@ -6217,7 +6238,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RealLiteral:
 	//	{RealLiteral} value=Real;
 	public BaseGrammarAccess.RealLiteralElements getRealLiteralAccess() {
-		return gaBase.getRealLiteralAccess();
+		return gaFSM.getRealLiteralAccess();
 	}
 	
 	public ParserRule getRealLiteralRule() {
@@ -6227,7 +6248,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//IntLiteral:
 	//	{IntLiteral} value=Integer;
 	public BaseGrammarAccess.IntLiteralElements getIntLiteralAccess() {
-		return gaBase.getIntLiteralAccess();
+		return gaFSM.getIntLiteralAccess();
 	}
 	
 	public ParserRule getIntLiteralRule() {
@@ -6237,7 +6258,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//StringLiteral:
 	//	{StringLiteral} value=STRING;
 	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
-		return gaBase.getStringLiteralAccess();
+		return gaFSM.getStringLiteralAccess();
 	}
 	
 	public ParserRule getStringLiteralRule() {
@@ -6247,7 +6268,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Integer returns ecore::ELong:
 	//	SignedInteger | Hexadecimal;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
-		return gaBase.getIntegerAccess();
+		return gaFSM.getIntegerAccess();
 	}
 	
 	public ParserRule getIntegerRule() {
@@ -6257,7 +6278,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SignedInteger hidden():
 	//	("+" | "-")? INT;
 	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
-		return gaBase.getSignedIntegerAccess();
+		return gaFSM.getSignedIntegerAccess();
 	}
 	
 	public ParserRule getSignedIntegerRule() {
@@ -6267,7 +6288,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Hexadecimal hidden():
 	//	HEX;
 	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
-		return gaBase.getHexadecimalAccess();
+		return gaFSM.getHexadecimalAccess();
 	}
 	
 	public ParserRule getHexadecimalRule() {
@@ -6277,7 +6298,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Real returns ecore::EDouble:
 	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
-		return gaBase.getRealAccess();
+		return gaFSM.getRealAccess();
 	}
 	
 	public ParserRule getRealRule() {
@@ -6287,7 +6308,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Decimal hidden():
 	//	("+" | "-")? INT "." INT;
 	public BaseGrammarAccess.DecimalElements getDecimalAccess() {
-		return gaBase.getDecimalAccess();
+		return gaFSM.getDecimalAccess();
 	}
 	
 	public ParserRule getDecimalRule() {
@@ -6297,7 +6318,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//DotDecimal hidden():
 	//	("+" | "-")? "." INT;
 	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
-		return gaBase.getDotDecimalAccess();
+		return gaFSM.getDotDecimalAccess();
 	}
 	
 	public ParserRule getDotDecimalRule() {
@@ -6307,7 +6328,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//DecimalDot hidden():
 	//	("+" | "-")? INT ".";
 	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
-		return gaBase.getDecimalDotAccess();
+		return gaFSM.getDecimalDotAccess();
 	}
 	
 	public ParserRule getDecimalDotRule() {
@@ -6317,7 +6338,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//DecimalExp hidden():
 	//	("+" | "-")? INT "." INT EXP;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
-		return gaBase.getDecimalExpAccess();
+		return gaFSM.getDecimalExpAccess();
 	}
 	
 	public ParserRule getDecimalExpRule() {
@@ -6327,19 +6348,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal EXP:
 	//	("e" | "E") ("+" | "-")? "0".."9"+;
 	public TerminalRule getEXPRule() {
-		return gaBase.getEXPRule();
+		return gaFSM.getEXPRule();
 	} 
 
 	//terminal HEX:
 	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
 	public TerminalRule getHEXRule() {
-		return gaBase.getHEXRule();
+		return gaFSM.getHEXRule();
 	} 
 
 	//FQN:
 	//	ID ("." ID)*;
 	public BaseGrammarAccess.FQNElements getFQNAccess() {
-		return gaBase.getFQNAccess();
+		return gaFSM.getFQNAccess();
 	}
 	
 	public ParserRule getFQNRule() {
@@ -6349,43 +6370,43 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return gaBase.getIDRule();
+		return gaFSM.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
-		return gaBase.getINTRule();
+		return gaFSM.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return gaBase.getSTRINGRule();
+		return gaFSM.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return gaBase.getML_COMMENTRule();
+		return gaFSM.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaBase.getSL_COMMENTRule();
+		return gaFSM.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return gaBase.getWSRule();
+		return gaFSM.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaBase.getANY_OTHERRule();
+		return gaFSM.getANY_OTHERRule();
 	} 
 }

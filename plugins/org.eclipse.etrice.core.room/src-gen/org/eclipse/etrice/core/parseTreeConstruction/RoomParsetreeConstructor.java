@@ -113,21 +113,23 @@ protected class ThisRootNode extends RootToken {
 			case 80: return new Trigger_Group(this, this, 80, inst);
 			case 81: return new MessageFromIf_Group(this, this, 81, inst);
 			case 82: return new Guard_Group(this, this, 82, inst);
-			case 83: return new Annotation_Group(this, this, 83, inst);
-			case 84: return new KeyValue_Group(this, this, 84, inst);
-			case 85: return new AnnotationType_Group(this, this, 85, inst);
-			case 86: return new AnnotationAttribute_Alternatives(this, this, 86, inst);
-			case 87: return new SimpleAnnotationAttribute_Group(this, this, 87, inst);
-			case 88: return new EnumAnnotationAttribute_Group(this, this, 88, inst);
-			case 89: return new Import_Group(this, this, 89, inst);
-			case 90: return new Documentation_Group(this, this, 90, inst);
-			case 91: return new LiteralArray_Group(this, this, 91, inst);
-			case 92: return new Literal_Alternatives(this, this, 92, inst);
-			case 93: return new BooleanLiteral_Group(this, this, 93, inst);
-			case 94: return new NumberLiteral_Alternatives(this, this, 94, inst);
-			case 95: return new RealLiteral_Group(this, this, 95, inst);
-			case 96: return new IntLiteral_Group(this, this, 96, inst);
-			case 97: return new StringLiteral_Group(this, this, 97, inst);
+			case 83: return new FSMModel_GreetingsAssignment(this, this, 83, inst);
+			case 84: return new Greeting_Group(this, this, 84, inst);
+			case 85: return new Annotation_Group(this, this, 85, inst);
+			case 86: return new KeyValue_Group(this, this, 86, inst);
+			case 87: return new AnnotationType_Group(this, this, 87, inst);
+			case 88: return new AnnotationAttribute_Alternatives(this, this, 88, inst);
+			case 89: return new SimpleAnnotationAttribute_Group(this, this, 89, inst);
+			case 90: return new EnumAnnotationAttribute_Group(this, this, 90, inst);
+			case 91: return new Import_Group(this, this, 91, inst);
+			case 92: return new Documentation_Group(this, this, 92, inst);
+			case 93: return new LiteralArray_Group(this, this, 93, inst);
+			case 94: return new Literal_Alternatives(this, this, 94, inst);
+			case 95: return new BooleanLiteral_Group(this, this, 95, inst);
+			case 96: return new NumberLiteral_Alternatives(this, this, 96, inst);
+			case 97: return new RealLiteral_Group(this, this, 97, inst);
+			case 98: return new IntLiteral_Group(this, this, 98, inst);
+			case 99: return new StringLiteral_Group(this, this, 99, inst);
 			default: return null;
 		}	
 	}	
@@ -23165,6 +23167,179 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
 /************ end Rule Guard ****************/
 
 
+
+
+/************ begin Rule FSMModel ****************
+ *
+ * FSMModel:
+ * 	greetings+=Greeting*;
+ *
+ **/
+
+// greetings+=Greeting*
+protected class FSMModel_GreetingsAssignment extends AssignmentToken  {
+	
+	public FSMModel_GreetingsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFSMModelAccess().getGreetingsAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Greeting_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("greetings",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("greetings");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getFSMModelAccess().getGreetingsGreetingParserRuleCall_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new FSMModel_GreetingsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+/************ end Rule FSMModel ****************/
+
+
+/************ begin Rule Greeting ****************
+ *
+ * Greeting:
+ * 	"Hello" name=ID "!";
+ *
+ **/
+
+// "Hello" name=ID "!"
+protected class Greeting_Group extends GroupToken {
+	
+	public Greeting_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getGreetingAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Greeting_ExclamationMarkKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getGreetingRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "Hello"
+protected class Greeting_HelloKeyword_0 extends KeywordToken  {
+	
+	public Greeting_HelloKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGreetingAccess().getHelloKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// name=ID
+protected class Greeting_NameAssignment_1 extends AssignmentToken  {
+	
+	public Greeting_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGreetingAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Greeting_HelloKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "!"
+protected class Greeting_ExclamationMarkKeyword_2 extends KeywordToken  {
+	
+	public Greeting_ExclamationMarkKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Greeting_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule Greeting ****************/
 
 
 /************ begin Rule Annotation ****************

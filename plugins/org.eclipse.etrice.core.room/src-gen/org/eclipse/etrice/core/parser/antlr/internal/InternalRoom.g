@@ -7786,6 +7786,55 @@ ruleAnnotationTargetType returns [AntlrDatatypeRuleToken current=new AntlrDataty
 
 
 
+
+
+// Entry rule entryRuleGreeting
+entryRuleGreeting returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getGreetingRule()); }
+	 iv_ruleGreeting=ruleGreeting 
+	 { $current=$iv_ruleGreeting.current; } 
+	 EOF 
+;
+
+// Rule Greeting
+ruleGreeting returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='Hello' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHelloKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getGreetingRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID");
+	    }
+
+)
+)	otherlv_2='!' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleAnnotation
 entryRuleAnnotation returns [EObject current=null] 
 	:

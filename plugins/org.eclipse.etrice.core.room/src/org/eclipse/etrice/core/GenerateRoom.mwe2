@@ -29,6 +29,8 @@ Workflow {
         platformUri = "${runtimeProject}/.."
         registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel"
         registerGeneratedEPackage = "org.eclipse.etrice.core.common.base.BasePackage"
+        registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel"
+        registerGeneratedEPackage = "org.eclipse.etrice.core.fsm.fSM.FSMPackage"
     }
 	
 	component = DirectoryCleaner {
