@@ -70,6 +70,10 @@ public class DataClassGen {
   private Initialization _initialization;
   
   @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
   private ILogger logger;
   
   public void doGenerate(final Root root) {
@@ -110,7 +114,7 @@ public class DataClassGen {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
@@ -315,7 +319,7 @@ public class DataClassGen {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);

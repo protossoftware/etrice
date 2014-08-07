@@ -25,8 +25,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.cpp.gen.Initialization
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.cpp.Main
 
 /**
@@ -42,6 +41,7 @@ class DataClassGen {
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers typeHelpers
 	@Inject extension Initialization
+	@Inject extension RoomHelpers
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
