@@ -24,6 +24,8 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -35,7 +37,6 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
@@ -245,7 +246,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
         		protocols.add(desc);
 		}
 		
-		Text name = createText(body, "&Name:", port, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
+		Text name = createText(body, "&Name:", port, FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name(), nv);
 		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, GeneralProtocolClass.class, RoomPackage.eINSTANCE.getPort_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))

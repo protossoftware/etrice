@@ -15,8 +15,8 @@ package org.eclipse.etrice.ui.behavior.editor;
 import java.io.File;
 
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.editor.DiagramExporter;

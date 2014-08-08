@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.fsm.fSM.FSMModel;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.fsm.fSM.Greeting;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +27,7 @@ import org.eclipse.etrice.core.fsm.fSM.Greeting;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.FSMModelImpl#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.FSMModelImpl#getComponents <em>Components</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +36,14 @@ import org.eclipse.etrice.core.fsm.fSM.Greeting;
 public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMModel
 {
   /**
-   * The cached value of the '{@link #getGreetings() <em>Greetings</em>}' containment reference list.
+   * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getGreetings()
+   * @see #getComponents()
    * @generated
    * @ordered
    */
-  protected EList<Greeting> greetings;
+  protected EList<ModelComponent> components;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +71,13 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Greeting> getGreetings()
+  public EList<ModelComponent> getComponents()
   {
-    if (greetings == null)
+    if (components == null)
     {
-      greetings = new EObjectContainmentEList<Greeting>(Greeting.class, this, FSMPackage.FSM_MODEL__GREETINGS);
+      components = new EObjectContainmentEList<ModelComponent>(ModelComponent.class, this, FSMPackage.FSM_MODEL__COMPONENTS);
     }
-    return greetings;
+    return components;
   }
 
   /**
@@ -90,8 +90,8 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
   {
     switch (featureID)
     {
-      case FSMPackage.FSM_MODEL__GREETINGS:
-        return ((InternalEList<?>)getGreetings()).basicRemove(otherEnd, msgs);
+      case FSMPackage.FSM_MODEL__COMPONENTS:
+        return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
   {
     switch (featureID)
     {
-      case FSMPackage.FSM_MODEL__GREETINGS:
-        return getGreetings();
+      case FSMPackage.FSM_MODEL__COMPONENTS:
+        return getComponents();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
   {
     switch (featureID)
     {
-      case FSMPackage.FSM_MODEL__GREETINGS:
-        getGreetings().clear();
-        getGreetings().addAll((Collection<? extends Greeting>)newValue);
+      case FSMPackage.FSM_MODEL__COMPONENTS:
+        getComponents().clear();
+        getComponents().addAll((Collection<? extends ModelComponent>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
   {
     switch (featureID)
     {
-      case FSMPackage.FSM_MODEL__GREETINGS:
-        getGreetings().clear();
+      case FSMPackage.FSM_MODEL__COMPONENTS:
+        getComponents().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,8 +158,8 @@ public class FSMModelImpl extends MinimalEObjectImpl.Container implements FSMMod
   {
     switch (featureID)
     {
-      case FSMPackage.FSM_MODEL__GREETINGS:
-        return greetings != null && !greetings.isEmpty();
+      case FSMPackage.FSM_MODEL__COMPONENTS:
+        return components != null && !components.isEmpty();
     }
     return super.eIsSet(featureID);
   }

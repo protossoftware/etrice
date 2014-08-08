@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.cpp.gen;
 
 import java.util.ArrayList;
 
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;

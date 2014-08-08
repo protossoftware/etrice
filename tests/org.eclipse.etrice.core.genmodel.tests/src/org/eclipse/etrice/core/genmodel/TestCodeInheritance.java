@@ -21,12 +21,12 @@ import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,26 +73,26 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		assertEquals("number of states", 6, baseInstances.get(RoomPackage.eINSTANCE.getSimpleState()).size());
-		assertNull("number of choice points", baseInstances.get(RoomPackage.eINSTANCE.getChoicePoint()));
-		assertNull("number of transition points", baseInstances.get(RoomPackage.eINSTANCE.getTransitionPoint()));
-		assertNull("number of entry points", baseInstances.get(RoomPackage.eINSTANCE.getEntryPoint()));
-		assertNull("number of exit points", baseInstances.get(RoomPackage.eINSTANCE.getExitPoint()));
-		assertEquals("number of initial transitions", 3, baseInstances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
-		assertEquals("number of triggered transitions", 3, baseInstances.get(RoomPackage.eINSTANCE.getTriggeredTransition()).size());
-		assertNull("number of continuation transitions", baseInstances.get(RoomPackage.eINSTANCE.getContinuationTransition()));
-		assertNull("number of branch transitions", baseInstances.get(RoomPackage.eINSTANCE.getCPBranchTransition()));
+		assertEquals("number of states", 6, baseInstances.get(FSMPackage.eINSTANCE.getSimpleState()).size());
+		assertNull("number of choice points", baseInstances.get(FSMPackage.eINSTANCE.getChoicePoint()));
+		assertNull("number of transition points", baseInstances.get(FSMPackage.eINSTANCE.getTransitionPoint()));
+		assertNull("number of entry points", baseInstances.get(FSMPackage.eINSTANCE.getEntryPoint()));
+		assertNull("number of exit points", baseInstances.get(FSMPackage.eINSTANCE.getExitPoint()));
+		assertEquals("number of initial transitions", 3, baseInstances.get(FSMPackage.eINSTANCE.getInitialTransition()).size());
+		assertEquals("number of triggered transitions", 3, baseInstances.get(FSMPackage.eINSTANCE.getTriggeredTransition()).size());
+		assertNull("number of continuation transitions", baseInstances.get(FSMPackage.eINSTANCE.getContinuationTransition()));
+		assertNull("number of branch transitions", baseInstances.get(FSMPackage.eINSTANCE.getCPBranchTransition()));
 
-		assertEquals("number of states", 4, derivedInstances.get(RoomPackage.eINSTANCE.getSimpleState()).size());
+		assertEquals("number of states", 4, derivedInstances.get(FSMPackage.eINSTANCE.getSimpleState()).size());
 		assertEquals("number of states", 3, derivedInstances.get(ETriceGenPackage.eINSTANCE.getExpandedRefinedState()).size());
-		assertNull("number of choice points", derivedInstances.get(RoomPackage.eINSTANCE.getChoicePoint()));
-		assertNull("number of transition points", derivedInstances.get(RoomPackage.eINSTANCE.getTransitionPoint()));
-		assertNull("number of entry points", derivedInstances.get(RoomPackage.eINSTANCE.getEntryPoint()));
-		assertNull("number of exit points", derivedInstances.get(RoomPackage.eINSTANCE.getExitPoint()));
-		assertEquals("number of initial transitions", 4, derivedInstances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
-		assertEquals("number of triggered transitions", 3, derivedInstances.get(RoomPackage.eINSTANCE.getTriggeredTransition()).size());
-		assertNull("number of continuation transitions", derivedInstances.get(RoomPackage.eINSTANCE.getContinuationTransition()));
-		assertNull("number of branch transitions", derivedInstances.get(RoomPackage.eINSTANCE.getCPBranchTransition()));
+		assertNull("number of choice points", derivedInstances.get(FSMPackage.eINSTANCE.getChoicePoint()));
+		assertNull("number of transition points", derivedInstances.get(FSMPackage.eINSTANCE.getTransitionPoint()));
+		assertNull("number of entry points", derivedInstances.get(FSMPackage.eINSTANCE.getEntryPoint()));
+		assertNull("number of exit points", derivedInstances.get(FSMPackage.eINSTANCE.getExitPoint()));
+		assertEquals("number of initial transitions", 4, derivedInstances.get(FSMPackage.eINSTANCE.getInitialTransition()).size());
+		assertEquals("number of triggered transitions", 3, derivedInstances.get(FSMPackage.eINSTANCE.getTriggeredTransition()).size());
+		assertNull("number of continuation transitions", derivedInstances.get(FSMPackage.eINSTANCE.getContinuationTransition()));
+		assertNull("number of branch transitions", derivedInstances.get(FSMPackage.eINSTANCE.getCPBranchTransition()));
 	}
 	
 	@Test

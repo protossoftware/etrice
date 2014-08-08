@@ -14,18 +14,17 @@ package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.Trigger;
 import org.eclipse.etrice.core.room.VarDecl;
 
 /**
@@ -118,7 +117,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * This is for <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -127,8 +125,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param obj a state graph item of the state machine
-	 * @return <code>true</code> if the item is not inherited
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -158,9 +154,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param mif a message/interface item pair
-	 * @return a string that can serve as the name of a constant representing this trigger.
-	 * @see #getTriggerCodeName(ActiveTrigger)
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -180,8 +173,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param node a state graph node
-	 * @return a list of all outgoing transitions of this node
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -190,8 +181,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param node a state graph node
-	 * @return a list of all incoming transitions of this node
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -200,8 +189,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param state the state
-	 * @return a list of the active triggers of a state
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -232,7 +219,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @return a string that may serve as a constant name for a message/interface item pair
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -241,8 +227,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param trans a transition
-	 * @return the associated {@link TransitionChain}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -269,9 +253,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param trig the trigger
-	 * @param trigstr the encoded trigger string
-	 * @return <code>true</code> if the encoded trigger string is matching the {@link Trigger}
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -304,8 +285,6 @@ public interface ExpandedActorClass extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param trans a {@link Transition}
-	 * @return the common data type of the TransitionChainBundle (see  {@link ExpandedActorClassImpl}) associated with the transition
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

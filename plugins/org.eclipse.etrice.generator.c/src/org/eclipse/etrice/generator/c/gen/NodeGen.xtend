@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
@@ -669,8 +669,8 @@ class NodeGen {
 		
 		«FOR thread: nr.type.threads.filter(t|usedThreads.contains(t)) SEPARATOR "\n"»
 			«val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)»
-			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
-			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
+			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ComponentCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ComponentCommunicationType::ASYNCHRONOUS)»
+			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ComponentCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ComponentCommunicationType::ASYNCHRONOUS)»
 			
 			«IF executedInstances.size > 0»
 				/**

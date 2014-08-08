@@ -18,8 +18,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;

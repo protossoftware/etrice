@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -154,7 +154,7 @@ public class StateSupport {
 				}
 				
 				// create new State and add it
-				SimpleState s = RoomFactory.eINSTANCE.createSimpleState();
+				SimpleState s = FSMFactory.eINSTANCE.createSimpleState();
 				s.setName(SupportUtil.getInstance().getRoomUtil().getUniqueStateName(sg));
 				sg.getStates().add(s);
 		        
@@ -521,7 +521,7 @@ public class StateSupport {
 						link(container, s);
 					}
 					else {
-						s.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+						s.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 						newSG = s.getSubgraph();
 					}
 
@@ -625,7 +625,7 @@ public class StateSupport {
 					do {
 						if (tmp==ac)
 							found = true;
-						tmp = tmp.getBase();
+						tmp = tmp.getActorBase();
 					}
 					while (!found && tmp!=null);
 					

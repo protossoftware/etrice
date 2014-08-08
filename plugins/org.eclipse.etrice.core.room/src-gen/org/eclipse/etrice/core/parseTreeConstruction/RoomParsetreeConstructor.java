@@ -60,76 +60,78 @@ protected class ThisRootNode extends RootToken {
 			case 27: return new SemanticsRule_Alternatives(this, this, 27, inst);
 			case 28: return new InSemanticsRule_Group(this, this, 28, inst);
 			case 29: return new OutSemanticsRule_Group(this, this, 29, inst);
-			case 30: return new ActorClass_Group(this, this, 30, inst);
-			case 31: return new InterfaceItem_Alternatives(this, this, 31, inst);
-			case 32: return new Port_Group(this, this, 32, inst);
-			case 33: return new ExternalPort_Group(this, this, 33, inst);
-			case 34: return new SAP_Group(this, this, 34, inst);
-			case 35: return new SPP_Group(this, this, 35, inst);
-			case 36: return new ServiceImplementation_Group(this, this, 36, inst);
-			case 37: return new LogicalSystem_Group(this, this, 37, inst);
-			case 38: return new ActorContainerRef_Alternatives(this, this, 38, inst);
-			case 39: return new SubSystemRef_Group(this, this, 39, inst);
-			case 40: return new SubSystemClass_Group(this, this, 40, inst);
-			case 41: return new LogicalThread_Group(this, this, 41, inst);
-			case 42: return new ActorInstanceMapping_Group(this, this, 42, inst);
-			case 43: return new RefPath_Group(this, this, 43, inst);
-			case 44: return new RefSegment_Group(this, this, 44, inst);
-			case 45: return new Binding_Group(this, this, 45, inst);
-			case 46: return new BindingEndPoint_Group(this, this, 46, inst);
-			case 47: return new LayerConnection_Group(this, this, 47, inst);
-			case 48: return new SAPoint_Alternatives(this, this, 48, inst);
-			case 49: return new RefSAPoint_Group(this, this, 49, inst);
-			case 50: return new RelaySAPoint_Group(this, this, 50, inst);
-			case 51: return new SPPoint_Group(this, this, 51, inst);
-			case 52: return new ActorRef_Group(this, this, 52, inst);
-			case 53: return new StateGraphNode_Alternatives(this, this, 53, inst);
-			case 54: return new StateGraphItem_Alternatives(this, this, 54, inst);
-			case 55: return new State_Alternatives(this, this, 55, inst);
-			case 56: return new StateGraph_Group(this, this, 56, inst);
-			case 57: return new StateMachine_Group(this, this, 57, inst);
-			case 58: return new SimpleState_Group(this, this, 58, inst);
-			case 59: return new RefinedState_Group(this, this, 59, inst);
-			case 60: return new DetailCode_Group(this, this, 60, inst);
-			case 61: return new TrPoint_Alternatives(this, this, 61, inst);
-			case 62: return new TransitionPoint_Group(this, this, 62, inst);
-			case 63: return new EntryPoint_Group(this, this, 63, inst);
-			case 64: return new ExitPoint_Group(this, this, 64, inst);
-			case 65: return new ChoicePoint_Group(this, this, 65, inst);
-			case 66: return new Transition_Alternatives(this, this, 66, inst);
-			case 67: return new NonInitialTransition_Alternatives(this, this, 67, inst);
-			case 68: return new TransitionChainStartTransition_Alternatives(this, this, 68, inst);
-			case 69: return new InitialTransition_Group(this, this, 69, inst);
-			case 70: return new ContinuationTransition_Group(this, this, 70, inst);
-			case 71: return new TriggeredTransition_Group(this, this, 71, inst);
-			case 72: return new GuardedTransition_Group(this, this, 72, inst);
-			case 73: return new CPBranchTransition_Group(this, this, 73, inst);
-			case 74: return new RefinedTransition_Group(this, this, 74, inst);
-			case 75: return new TransitionTerminal_Alternatives(this, this, 75, inst);
-			case 76: return new StateTerminal_StateAssignment(this, this, 76, inst);
-			case 77: return new TrPointTerminal_Group(this, this, 77, inst);
-			case 78: return new SubStateTrPointTerminal_Group(this, this, 78, inst);
-			case 79: return new ChoicepointTerminal_Group(this, this, 79, inst);
-			case 80: return new Trigger_Group(this, this, 80, inst);
-			case 81: return new MessageFromIf_Group(this, this, 81, inst);
-			case 82: return new Guard_Group(this, this, 82, inst);
-			case 83: return new FSMModel_GreetingsAssignment(this, this, 83, inst);
-			case 84: return new Greeting_Group(this, this, 84, inst);
-			case 85: return new Annotation_Group(this, this, 85, inst);
-			case 86: return new KeyValue_Group(this, this, 86, inst);
-			case 87: return new AnnotationType_Group(this, this, 87, inst);
-			case 88: return new AnnotationAttribute_Alternatives(this, this, 88, inst);
-			case 89: return new SimpleAnnotationAttribute_Group(this, this, 89, inst);
-			case 90: return new EnumAnnotationAttribute_Group(this, this, 90, inst);
-			case 91: return new Import_Group(this, this, 91, inst);
-			case 92: return new Documentation_Group(this, this, 92, inst);
-			case 93: return new LiteralArray_Group(this, this, 93, inst);
-			case 94: return new Literal_Alternatives(this, this, 94, inst);
-			case 95: return new BooleanLiteral_Group(this, this, 95, inst);
-			case 96: return new NumberLiteral_Alternatives(this, this, 96, inst);
-			case 97: return new RealLiteral_Group(this, this, 97, inst);
-			case 98: return new IntLiteral_Group(this, this, 98, inst);
-			case 99: return new StringLiteral_Group(this, this, 99, inst);
+			case 30: return new ModelComponent_ActorClassParserRuleCall(this, this, 30, inst);
+			case 31: return new ActorClass_Group(this, this, 31, inst);
+			case 32: return new InterfaceItem_Alternatives(this, this, 32, inst);
+			case 33: return new Port_Group(this, this, 33, inst);
+			case 34: return new ExternalPort_Group(this, this, 34, inst);
+			case 35: return new SAP_Group(this, this, 35, inst);
+			case 36: return new SPP_Group(this, this, 36, inst);
+			case 37: return new ServiceImplementation_Group(this, this, 37, inst);
+			case 38: return new LogicalSystem_Group(this, this, 38, inst);
+			case 39: return new ActorContainerRef_Alternatives(this, this, 39, inst);
+			case 40: return new SubSystemRef_Group(this, this, 40, inst);
+			case 41: return new SubSystemClass_Group(this, this, 41, inst);
+			case 42: return new LogicalThread_Group(this, this, 42, inst);
+			case 43: return new ActorInstanceMapping_Group(this, this, 43, inst);
+			case 44: return new RefPath_Group(this, this, 44, inst);
+			case 45: return new RefSegment_Group(this, this, 45, inst);
+			case 46: return new Binding_Group(this, this, 46, inst);
+			case 47: return new BindingEndPoint_Group(this, this, 47, inst);
+			case 48: return new LayerConnection_Group(this, this, 48, inst);
+			case 49: return new SAPoint_Alternatives(this, this, 49, inst);
+			case 50: return new RefSAPoint_Group(this, this, 50, inst);
+			case 51: return new RelaySAPoint_Group(this, this, 51, inst);
+			case 52: return new SPPoint_Group(this, this, 52, inst);
+			case 53: return new ActorRef_Group(this, this, 53, inst);
+			case 54: return new AbstractMessage_MessageParserRuleCall(this, this, 54, inst);
+			case 55: return new AbstractInterfaceItem_InterfaceItemParserRuleCall(this, this, 55, inst);
+			case 56: return new FSMModel_ComponentsAssignment(this, this, 56, inst);
+			case 57: return new StateGraphNode_Alternatives(this, this, 57, inst);
+			case 58: return new StateGraphItem_Alternatives(this, this, 58, inst);
+			case 59: return new State_Alternatives(this, this, 59, inst);
+			case 60: return new StateGraph_Group(this, this, 60, inst);
+			case 61: return new StateMachine_Group(this, this, 61, inst);
+			case 62: return new SimpleState_Group(this, this, 62, inst);
+			case 63: return new RefinedState_Group(this, this, 63, inst);
+			case 64: return new DetailCode_Group(this, this, 64, inst);
+			case 65: return new TrPoint_Alternatives(this, this, 65, inst);
+			case 66: return new TransitionPoint_Group(this, this, 66, inst);
+			case 67: return new EntryPoint_Group(this, this, 67, inst);
+			case 68: return new ExitPoint_Group(this, this, 68, inst);
+			case 69: return new ChoicePoint_Group(this, this, 69, inst);
+			case 70: return new Transition_Alternatives(this, this, 70, inst);
+			case 71: return new NonInitialTransition_Alternatives(this, this, 71, inst);
+			case 72: return new TransitionChainStartTransition_Alternatives(this, this, 72, inst);
+			case 73: return new InitialTransition_Group(this, this, 73, inst);
+			case 74: return new ContinuationTransition_Group(this, this, 74, inst);
+			case 75: return new TriggeredTransition_Group(this, this, 75, inst);
+			case 76: return new GuardedTransition_Group(this, this, 76, inst);
+			case 77: return new CPBranchTransition_Group(this, this, 77, inst);
+			case 78: return new RefinedTransition_Group(this, this, 78, inst);
+			case 79: return new TransitionTerminal_Alternatives(this, this, 79, inst);
+			case 80: return new StateTerminal_StateAssignment(this, this, 80, inst);
+			case 81: return new TrPointTerminal_Group(this, this, 81, inst);
+			case 82: return new SubStateTrPointTerminal_Group(this, this, 82, inst);
+			case 83: return new ChoicepointTerminal_Group(this, this, 83, inst);
+			case 84: return new Trigger_Group(this, this, 84, inst);
+			case 85: return new MessageFromIf_Group(this, this, 85, inst);
+			case 86: return new Guard_Group(this, this, 86, inst);
+			case 87: return new Annotation_Group(this, this, 87, inst);
+			case 88: return new KeyValue_Group(this, this, 88, inst);
+			case 89: return new AnnotationType_Group(this, this, 89, inst);
+			case 90: return new AnnotationAttribute_Alternatives(this, this, 90, inst);
+			case 91: return new SimpleAnnotationAttribute_Group(this, this, 91, inst);
+			case 92: return new EnumAnnotationAttribute_Group(this, this, 92, inst);
+			case 93: return new Import_Group(this, this, 93, inst);
+			case 94: return new Documentation_Group(this, this, 94, inst);
+			case 95: return new LiteralArray_Group(this, this, 95, inst);
+			case 96: return new Literal_Alternatives(this, this, 96, inst);
+			case 97: return new BooleanLiteral_Group(this, this, 97, inst);
+			case 98: return new NumberLiteral_Alternatives(this, this, 98, inst);
+			case 99: return new RealLiteral_Group(this, this, 99, inst);
+			case 100: return new IntLiteral_Group(this, this, 100, inst);
+			case 101: return new StringLiteral_Group(this, this, 101, inst);
 			default: return null;
 		}	
 	}	
@@ -9474,6 +9476,54 @@ protected class OutSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends Keyword
 /************ end Rule OutSemanticsRule ****************/
 
 
+/************ begin Rule ModelComponent ****************
+ *
+ * // **************************************************************
+ * // actor class
+ * ModelComponent:
+ * 	ActorClass;
+ *
+ **/
+
+// ActorClass
+protected class ModelComponent_ActorClassParserRuleCall extends RuleCallToken {
+	
+	public ModelComponent_ActorClassParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelComponentAccess().getActorClassParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ActorClass_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getActorClassRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(ActorClass_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule ModelComponent ****************/
+
+
 /************ begin Rule ActorClass ****************
  *
  * // some notes on ports
@@ -9484,7 +9534,7 @@ protected class OutSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends Keyword
  * // p in i and p in s ==> external end port
  * // since double containment is not supported we decided to define external ports as reference to interface ports
  * ActorClass:
- * 	(abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+ * 	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
  * 	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
  * 	serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
  * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
@@ -9495,7 +9545,7 @@ protected class OutSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends Keyword
  *
  **/
 
-// (abstract?="abstract"? & commType=ActorCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+// (abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
 // base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
 // serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
 // ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
@@ -9531,7 +9581,7 @@ protected class ActorClass_Group extends GroupToken {
 
 }
 
-// abstract?="abstract"? & commType=ActorCommunicationType?
+// abstract?="abstract"? & commType=ComponentCommunicationType?
 protected class ActorClass_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public ActorClass_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9587,7 +9637,7 @@ protected class ActorClass_AbstractAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// commType=ActorCommunicationType?
+// commType=ComponentCommunicationType?
 protected class ActorClass_CommTypeAssignment_0_1 extends AssignmentToken  {
 	
 	public ActorClass_CommTypeAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9611,9 +9661,9 @@ protected class ActorClass_CommTypeAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("commType",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("commType");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getActorClassAccess().getCommTypeActorCommunicationTypeEnumRuleCall_0_1_0(), value, null)) { 
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getActorClassAccess().getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0(), value, null)) { 
 			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getActorClassAccess().getCommTypeActorCommunicationTypeEnumRuleCall_0_1_0();
+			element = grammarAccess.getActorClassAccess().getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0();
 			return obj;
 		}
 		return null;
@@ -15922,10 +15972,162 @@ protected class ActorRef_DocuAssignment_6 extends AssignmentToken  {
 /************ end Rule ActorRef ****************/
 
 
-/************ begin Rule StateGraphNode ****************
+/************ begin Rule AbstractMessage ****************
  *
  * // **************************************************************
- * // state machine
+ * // concrete message and interface item for state machines 
+ * AbstractMessage:
+ * 	Message;
+ *
+ **/
+
+// Message
+protected class AbstractMessage_MessageParserRuleCall extends RuleCallToken {
+	
+	public AbstractMessage_MessageParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractMessageAccess().getMessageParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Message_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getMessageRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Message_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule AbstractMessage ****************/
+
+
+/************ begin Rule AbstractInterfaceItem ****************
+ *
+ * AbstractInterfaceItem:
+ * 	InterfaceItem;
+ *
+ **/
+
+// InterfaceItem
+protected class AbstractInterfaceItem_InterfaceItemParserRuleCall extends RuleCallToken {
+	
+	public AbstractInterfaceItem_InterfaceItemParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractInterfaceItemAccess().getInterfaceItemParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InterfaceItem_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getPortRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getSAPRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getSPPRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(InterfaceItem_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule AbstractInterfaceItem ****************/
+
+
+
+
+/************ begin Rule FSMModel ****************
+ *
+ * FSMModel:
+ * 	components+=ModelComponent*;
+ *
+ **/
+
+// components+=ModelComponent*
+protected class FSMModel_ComponentsAssignment extends AssignmentToken  {
+	
+	public FSMModel_ComponentsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFSMModelAccess().getComponentsAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ModelComponent_ActorClassParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("components",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("components");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getModelComponentRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getFSMModelAccess().getComponentsModelComponentParserRuleCall_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new FSMModel_ComponentsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+/************ end Rule FSMModel ****************/
+
+
+/************ begin Rule StateGraphNode ****************
+ *
  * StateGraphNode:
  * 	State | ChoicePoint | TrPoint;
  *
@@ -22928,11 +23130,11 @@ protected class Trigger_GreaterThanSignKeyword_4 extends KeywordToken  {
 /************ begin Rule MessageFromIf ****************
  *
  * MessageFromIf:
- * 	message=[Message] ":" from=[InterfaceItem];
+ * 	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
  *
  **/
 
-// message=[Message] ":" from=[InterfaceItem]
+// message=[AbstractMessage] ":" from=[AbstractInterfaceItem]
 protected class MessageFromIf_Group extends GroupToken {
 	
 	public MessageFromIf_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -22961,7 +23163,7 @@ protected class MessageFromIf_Group extends GroupToken {
 
 }
 
-// message=[Message]
+// message=[AbstractMessage]
 protected class MessageFromIf_MessageAssignment_0 extends AssignmentToken  {
 	
 	public MessageFromIf_MessageAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -22986,9 +23188,9 @@ protected class MessageFromIf_MessageAssignment_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("message");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getMessageMessageCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getMessageFromIfAccess().getMessageMessageCrossReference_0_0(); 
+				element = grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0(); 
 				return obj;
 			}
 		}
@@ -23019,7 +23221,7 @@ protected class MessageFromIf_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// from=[InterfaceItem]
+// from=[AbstractInterfaceItem]
 protected class MessageFromIf_FromAssignment_2 extends AssignmentToken  {
 	
 	public MessageFromIf_FromAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -23045,9 +23247,9 @@ protected class MessageFromIf_FromAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("from");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getFromInterfaceItemCrossReference_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getMessageFromIfAccess().getFromInterfaceItemCrossReference_2_0(); 
+				element = grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemCrossReference_2_0(); 
 				return obj;
 			}
 		}
@@ -23165,181 +23367,6 @@ protected class Guard_GuardAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Guard ****************/
-
-
-
-
-/************ begin Rule FSMModel ****************
- *
- * FSMModel:
- * 	greetings+=Greeting*;
- *
- **/
-
-// greetings+=Greeting*
-protected class FSMModel_GreetingsAssignment extends AssignmentToken  {
-	
-	public FSMModel_GreetingsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getFSMModelAccess().getGreetingsAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Greeting_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("greetings",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("greetings");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getFSMModelAccess().getGreetingsGreetingParserRuleCall_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new FSMModel_GreetingsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
-		}	
-	}	
-}
-
-/************ end Rule FSMModel ****************/
-
-
-/************ begin Rule Greeting ****************
- *
- * Greeting:
- * 	"Hello" name=ID "!";
- *
- **/
-
-// "Hello" name=ID "!"
-protected class Greeting_Group extends GroupToken {
-	
-	public Greeting_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getGreetingAccess().getGroup();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Greeting_ExclamationMarkKeyword_2(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getGreetingRule().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// "Hello"
-protected class Greeting_HelloKeyword_0 extends KeywordToken  {
-	
-	public Greeting_HelloKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getGreetingAccess().getHelloKeyword_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
-		}	
-	}
-
-}
-
-// name=ID
-protected class Greeting_NameAssignment_1 extends AssignmentToken  {
-	
-	public Greeting_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getGreetingAccess().getNameAssignment_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Greeting_HelloKeyword_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// "!"
-protected class Greeting_ExclamationMarkKeyword_2 extends KeywordToken  {
-	
-	public Greeting_ExclamationMarkKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Greeting_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-
-/************ end Rule Greeting ****************/
 
 
 /************ begin Rule Annotation ****************

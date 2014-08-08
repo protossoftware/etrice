@@ -15,7 +15,7 @@ package org.eclipse.etrice.ui.behavior.support;
 import java.util.ArrayList;
 
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;

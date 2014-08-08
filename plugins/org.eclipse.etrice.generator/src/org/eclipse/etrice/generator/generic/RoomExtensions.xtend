@@ -33,10 +33,10 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.ServiceImplementation
-import org.eclipse.etrice.core.room.State
-import org.eclipse.etrice.core.room.StateGraph
-import org.eclipse.etrice.core.room.Transition
-import org.eclipse.etrice.core.room.TransitionPoint
+import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.fsm.fSM.StateGraph
+import org.eclipse.etrice.core.fsm.fSM.Transition
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
 
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.emf.common.util.BasicEList
@@ -489,7 +489,7 @@ class RoomExtensions {
 	 */
 	def boolean overridesStop(ActorClass ac) {
 		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType==null)
-			|| (ac.base!=null && ac.base.overridesStop())
+			|| (ac.actorBase!=null && ac.actorBase.overridesStop())
 	}
 
 	/**
@@ -497,10 +497,10 @@ class RoomExtensions {
 	 * @return the number of all inherited states
 	 */
 	def int getNumberOfInheritedStates(ActorClass ac) {
-		if (ac.base==null)
+		if (ac.actorBase==null)
 			return 0
 		else
-			return ac.base.stateMachine.getStateList().size+ac.base.getNumberOfInheritedStates()
+			return ac.base.stateMachine.getStateList().size+ac.actorBase.getNumberOfInheritedStates()
 	}
 	
 	/**
@@ -508,10 +508,10 @@ class RoomExtensions {
 	 * @return the number of all inherited base (or simple) states
 	 */
 	def int getNumberOfInheritedBaseStates(ActorClass ac) {
-		if (ac.base==null)
+		if (ac.actorBase==null)
 			return 0
 		else
-			return ac.base.stateMachine.getBaseStateList().size+ac.base.getNumberOfInheritedBaseStates()
+			return ac.base.stateMachine.getBaseStateList().size+ac.actorBase.getNumberOfInheritedBaseStates()
 	}
 
 	/**

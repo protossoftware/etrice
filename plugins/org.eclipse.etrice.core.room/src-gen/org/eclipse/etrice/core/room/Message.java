@@ -2,9 +2,9 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.Documentation;
+
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +12,8 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
+ * <br>This is a concrete sub class of an {@link AbstractMessage}.
+ * A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
  * For event driven protocols the message is an object that is deliverd using a message
  * service of the runtime. For data driven systems only messages holding data are valid. In this
  * case the conjugate port is the one holding (and writing) the data and the regular port is
@@ -24,7 +25,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -34,7 +34,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * @model
  * @generated
  */
-public interface Message extends EObject
+public interface Message extends AbstractMessage
 {
   /**
    * Returns the value of the '<em><b>Priv</b></em>' attribute.
@@ -62,32 +62,6 @@ public interface Message extends EObject
    * @generated
    */
   void setPriv(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>By this name the message is referred to in the model.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
 
   /**
    * Returns the value of the '<em><b>Data</b></em>' containment reference.

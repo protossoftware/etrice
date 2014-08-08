@@ -14,9 +14,9 @@ import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.GlobalSettings;
@@ -37,8 +37,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
           List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(_allBaseStates);
           states.addAll(0, _leafStatesLast);
-          ActorClass _base = ac.getBase();
-          ac = _base;
+          ActorClass _actorBase = ac.getActorBase();
+          ac = _actorBase;
         }
         boolean _notEquals_1 = (!Objects.equal(ac, null));
         _while = _notEquals_1;

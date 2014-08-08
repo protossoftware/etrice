@@ -30,25 +30,6 @@ class ImplPostprocessor {
 		
 		val actorRef = roomPackage.getClass("ActorRef")
 		actorRef.getAttribute("multiplicity").setDefaultValueLiteral("1")
-		
-		val state = roomPackage.getClass("State")
-		state.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
-		// HOWTO: putting a fully qualified type name in <% %> makes ecore generate an import statement
-			'''return (this instanceof <%org.eclipse.etrice.core.room.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof <%org.eclipse.etrice.core.room.RefinedState%>)? (((RefinedState)this).getTarget()==null? "":((RefinedState)this).getTarget().getName()) :"";''')
-		
-		val stateGraphItem = roomPackage.getClass("StateGraphItem")
-		stateGraphItem.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
-			'''
-			if (this instanceof <%org.eclipse.etrice.core.room.State%>) 
-				return ((State)this).getName();
-			else if (this instanceof <%org.eclipse.etrice.core.room.TrPoint%>)
-				return ((TrPoint)this).getName();
-			else if (this instanceof <%org.eclipse.etrice.core.room.ChoicePoint%>)
-				return ((ChoicePoint)this).getName();
-			else if (this instanceof <%org.eclipse.etrice.core.room.Transition%>)
-				return ((Transition)this).getName();
-			return "";
-			''')
 			
 		val interfaceItem = roomPackage.getClass("InterfaceItem")
 		interfaceItem.addOperation("getGeneralProtocol", roomPackage.getEClassifier("GeneralProtocolClass"), 1, 
@@ -88,6 +69,11 @@ class ImplPostprocessor {
 					spps.add(spp.getSpp());
 				}
 				return spps;
+			'''
+		)
+		actorClass.addOperation("getActorBase", roomPackage.getEClassifier("ActorClass"), 1,
+			'''
+				return (ActorClass)getBase();
 			'''
 		)
 		

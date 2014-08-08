@@ -20,8 +20,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Port;
@@ -30,7 +34,6 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateGraph;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +44,9 @@ import org.eclipse.etrice.core.room.StateGraph;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getCommType <em>Comm Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getComponentName <em>Component Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInternalPorts <em>Internal Ports</em>}</li>
@@ -52,7 +57,6 @@ import org.eclipse.etrice.core.room.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,7 +92,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected static final ActorCommunicationType COMM_TYPE_EDEFAULT = ActorCommunicationType.EVENT_DRIVEN;
+  protected static final ComponentCommunicationType COMM_TYPE_EDEFAULT = ComponentCommunicationType.EVENT_DRIVEN;
 
   /**
    * The cached value of the '{@link #getCommType() <em>Comm Type</em>}' attribute.
@@ -98,7 +102,27 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected ActorCommunicationType commType = COMM_TYPE_EDEFAULT;
+  protected ComponentCommunicationType commType = COMM_TYPE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getComponentName() <em>Component Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getComponentName()
+   * @generated
+   * @ordered
+   */
+  protected static final String COMPONENT_NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getComponentName() <em>Component Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getComponentName()
+   * @generated
+   * @ordered
+   */
+  protected String componentName = COMPONENT_NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getBase() <em>Base</em>}' reference.
@@ -108,7 +132,17 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @generated
    * @ordered
    */
-  protected ActorClass base;
+  protected ModelComponent base;
+
+  /**
+   * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStateMachine()
+   * @generated
+   * @ordered
+   */
+  protected StateGraph stateMachine;
 
   /**
    * The cached value of the '{@link #getInterfacePorts() <em>Interface Ports</em>}' containment reference list.
@@ -211,16 +245,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected EList<StandardOperation> operations;
 
   /**
-   * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStateMachine()
-   * @generated
-   * @ordered
-   */
-  protected StateGraph stateMachine;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -269,7 +293,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorCommunicationType getCommType()
+  public ComponentCommunicationType getCommType()
   {
     return commType;
   }
@@ -279,9 +303,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCommType(ActorCommunicationType newCommType)
+  public void setCommType(ComponentCommunicationType newCommType)
   {
-    ActorCommunicationType oldCommType = commType;
+    ComponentCommunicationType oldCommType = commType;
     commType = newCommType == null ? COMM_TYPE_EDEFAULT : newCommType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__COMM_TYPE, oldCommType, commType));
@@ -292,12 +316,35 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorClass getBase()
+  public String getComponentName()
+  {
+    return componentName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setComponentName(String newComponentName)
+  {
+    String oldComponentName = componentName;
+    componentName = newComponentName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__COMPONENT_NAME, oldComponentName, componentName));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ModelComponent getBase()
   {
     if (base != null && base.eIsProxy())
     {
       InternalEObject oldBase = (InternalEObject)base;
-      base = (ActorClass)eResolveProxy(oldBase);
+      base = (ModelComponent)eResolveProxy(oldBase);
       if (base != oldBase)
       {
         if (eNotificationRequired())
@@ -312,7 +359,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActorClass basicGetBase()
+  public ModelComponent basicGetBase()
   {
     return base;
   }
@@ -322,12 +369,60 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBase(ActorClass newBase)
+  public void setBase(ModelComponent newBase)
   {
-    ActorClass oldBase = base;
+    ModelComponent oldBase = base;
     base = newBase;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__BASE, oldBase, base));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StateGraph getStateMachine()
+  {
+    return stateMachine;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetStateMachine(StateGraph newStateMachine, NotificationChain msgs)
+  {
+    StateGraph oldStateMachine = stateMachine;
+    stateMachine = newStateMachine;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STATE_MACHINE, oldStateMachine, newStateMachine);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStateMachine(StateGraph newStateMachine)
+  {
+    if (newStateMachine != stateMachine)
+    {
+      NotificationChain msgs = null;
+      if (stateMachine != null)
+        msgs = ((InternalEObject)stateMachine).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STATE_MACHINE, null, msgs);
+      if (newStateMachine != null)
+        msgs = ((InternalEObject)newStateMachine).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STATE_MACHINE, null, msgs);
+      msgs = basicSetStateMachine(newStateMachine, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STATE_MACHINE, newStateMachine, newStateMachine));
   }
 
   /**
@@ -543,54 +638,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateGraph getStateMachine()
-  {
-    return stateMachine;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetStateMachine(StateGraph newStateMachine, NotificationChain msgs)
-  {
-    StateGraph oldStateMachine = stateMachine;
-    stateMachine = newStateMachine;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STATE_MACHINE, oldStateMachine, newStateMachine);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStateMachine(StateGraph newStateMachine)
-  {
-    if (newStateMachine != stateMachine)
-    {
-      NotificationChain msgs = null;
-      if (stateMachine != null)
-        msgs = ((InternalEObject)stateMachine).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STATE_MACHINE, null, msgs);
-      if (newStateMachine != null)
-        msgs = ((InternalEObject)newStateMachine).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RoomPackage.ACTOR_CLASS__STATE_MACHINE, null, msgs);
-      msgs = basicSetStateMachine(newStateMachine, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.ACTOR_CLASS__STATE_MACHINE, newStateMachine, newStateMachine));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<Port> getExternalEndPorts()
   {
     EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
@@ -636,11 +683,24 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  public ActorClass getActorBase()
+  {
+    return (ActorClass)getBase();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
+      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
+        return basicSetStateMachine(null, msgs);
       case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
         return ((InternalEList<?>)getInterfacePorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
@@ -661,8 +721,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ((InternalEList<?>)getBehaviorAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        return basicSetStateMachine(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -681,9 +739,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return isAbstract();
       case RoomPackage.ACTOR_CLASS__COMM_TYPE:
         return getCommType();
+      case RoomPackage.ACTOR_CLASS__COMPONENT_NAME:
+        return getComponentName();
       case RoomPackage.ACTOR_CLASS__BASE:
         if (resolve) return getBase();
         return basicGetBase();
+      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
+        return getStateMachine();
       case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
         return getInterfacePorts();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
@@ -704,8 +766,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getBehaviorAnnotations();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return getOperations();
-      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        return getStateMachine();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -725,10 +785,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         setAbstract((Boolean)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__COMM_TYPE:
-        setCommType((ActorCommunicationType)newValue);
+        setCommType((ComponentCommunicationType)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__COMPONENT_NAME:
+        setComponentName((String)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__BASE:
-        setBase((ActorClass)newValue);
+        setBase((ModelComponent)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
+        setStateMachine((StateGraph)newValue);
         return;
       case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
         getInterfacePorts().clear();
@@ -768,9 +834,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getOperations().clear();
         getOperations().addAll((Collection<? extends StandardOperation>)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateGraph)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -791,8 +854,14 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__COMM_TYPE:
         setCommType(COMM_TYPE_EDEFAULT);
         return;
+      case RoomPackage.ACTOR_CLASS__COMPONENT_NAME:
+        setComponentName(COMPONENT_NAME_EDEFAULT);
+        return;
       case RoomPackage.ACTOR_CLASS__BASE:
-        setBase((ActorClass)null);
+        setBase((ModelComponent)null);
+        return;
+      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
+        setStateMachine((StateGraph)null);
         return;
       case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
         getInterfacePorts().clear();
@@ -824,9 +893,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         return;
-      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        setStateMachine((StateGraph)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -845,8 +911,12 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return abstract_ != ABSTRACT_EDEFAULT;
       case RoomPackage.ACTOR_CLASS__COMM_TYPE:
         return commType != COMM_TYPE_EDEFAULT;
+      case RoomPackage.ACTOR_CLASS__COMPONENT_NAME:
+        return COMPONENT_NAME_EDEFAULT == null ? componentName != null : !COMPONENT_NAME_EDEFAULT.equals(componentName);
       case RoomPackage.ACTOR_CLASS__BASE:
         return base != null;
+      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
+        return stateMachine != null;
       case RoomPackage.ACTOR_CLASS__INTERFACE_PORTS:
         return interfacePorts != null && !interfacePorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
@@ -867,10 +937,54 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return behaviorAnnotations != null && !behaviorAnnotations.isEmpty();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
-      case RoomPackage.ACTOR_CLASS__STATE_MACHINE:
-        return stateMachine != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == ModelComponent.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case RoomPackage.ACTOR_CLASS__ABSTRACT: return FSMPackage.MODEL_COMPONENT__ABSTRACT;
+        case RoomPackage.ACTOR_CLASS__COMM_TYPE: return FSMPackage.MODEL_COMPONENT__COMM_TYPE;
+        case RoomPackage.ACTOR_CLASS__COMPONENT_NAME: return FSMPackage.MODEL_COMPONENT__COMPONENT_NAME;
+        case RoomPackage.ACTOR_CLASS__BASE: return FSMPackage.MODEL_COMPONENT__BASE;
+        case RoomPackage.ACTOR_CLASS__STATE_MACHINE: return FSMPackage.MODEL_COMPONENT__STATE_MACHINE;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == ModelComponent.class)
+    {
+      switch (baseFeatureID)
+      {
+        case FSMPackage.MODEL_COMPONENT__ABSTRACT: return RoomPackage.ACTOR_CLASS__ABSTRACT;
+        case FSMPackage.MODEL_COMPONENT__COMM_TYPE: return RoomPackage.ACTOR_CLASS__COMM_TYPE;
+        case FSMPackage.MODEL_COMPONENT__COMPONENT_NAME: return RoomPackage.ACTOR_CLASS__COMPONENT_NAME;
+        case FSMPackage.MODEL_COMPONENT__BASE: return RoomPackage.ACTOR_CLASS__BASE;
+        case FSMPackage.MODEL_COMPONENT__STATE_MACHINE: return RoomPackage.ACTOR_CLASS__STATE_MACHINE;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**
@@ -888,6 +1002,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
     result.append(abstract_);
     result.append(", commType: ");
     result.append(commType);
+    result.append(", componentName: ");
+    result.append(componentName);
     result.append(')');
     return result.toString();
   }

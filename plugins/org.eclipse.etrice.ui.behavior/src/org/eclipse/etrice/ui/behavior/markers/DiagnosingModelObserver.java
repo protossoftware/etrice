@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 

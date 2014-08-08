@@ -136,7 +136,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 			ActorClass base = (ActorClass)sc;
 			while(base != null){
 				intPorts.addAll(base.getInternalPorts());
-				base = base.getBase();
+				base = base.getActorBase();
 			}
 		}
 		layoutInterfaceItems(intPorts, width, height, y);

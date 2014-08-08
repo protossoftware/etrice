@@ -23,6 +23,12 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
@@ -45,11 +51,6 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.FileSystemHelpers;
@@ -636,13 +637,13 @@ public class RoomExtensions {
       _or = true;
     } else {
       boolean _and = false;
-      ActorClass _base = ac.getBase();
-      boolean _notEquals = (!Objects.equal(_base, null));
+      ActorClass _actorBase = ac.getActorBase();
+      boolean _notEquals = (!Objects.equal(_actorBase, null));
       if (!_notEquals) {
         _and = false;
       } else {
-        ActorClass _base_1 = ac.getBase();
-        boolean _overridesStop = this.overridesStop(_base_1);
+        ActorClass _actorBase_1 = ac.getActorBase();
+        boolean _overridesStop = this.overridesStop(_actorBase_1);
         _and = _overridesStop;
       }
       _or = _and;
@@ -655,17 +656,17 @@ public class RoomExtensions {
    * @return the number of all inherited states
    */
   public int getNumberOfInheritedStates(final ActorClass ac) {
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       return 0;
     } else {
-      ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
+      ModelComponent _base = ac.getBase();
+      StateGraph _stateMachine = _base.getStateMachine();
       List<State> _stateList = this._roomHelpers.getStateList(_stateMachine);
       int _size = _stateList.size();
-      ActorClass _base_2 = ac.getBase();
-      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_base_2);
+      ActorClass _actorBase_1 = ac.getActorBase();
+      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_actorBase_1);
       return (_size + _numberOfInheritedStates);
     }
   }
@@ -675,17 +676,17 @@ public class RoomExtensions {
    * @return the number of all inherited base (or simple) states
    */
   public int getNumberOfInheritedBaseStates(final ActorClass ac) {
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       return 0;
     } else {
-      ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
+      ModelComponent _base = ac.getBase();
+      StateGraph _stateMachine = _base.getStateMachine();
       List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
-      ActorClass _base_2 = ac.getBase();
-      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_base_2);
+      ActorClass _actorBase_1 = ac.getActorBase();
+      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_actorBase_1);
       return (_size + _numberOfInheritedBaseStates);
     }
   }

@@ -101,7 +101,7 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		}
 		
 		if (ac.getBase()!=null)
-			return getPort(ac.getBase(), name);
+			return getPort(ac.getActorBase(), name);
 		
 		fail("port "+name+" not found");
 		return null;
@@ -114,7 +114,7 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		}
 		
 		if (ac.getBase()!=null)
-			return getSAP(ac.getBase(), name);
+			return getSAP(ac.getActorBase(), name);
 		
 		fail("sap "+name+" not found");
 		return null;

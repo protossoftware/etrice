@@ -33,49 +33,50 @@ import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil.Result;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
@@ -275,7 +276,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 		
 		if (roomHelpers.isCircularClassHierarchy(ac))
-			error("Base classes are circular", RoomPackage.eINSTANCE.getActorClass_Base());
+			error("Base classes are circular", FSMPackage.eINSTANCE.getModelComponent_Base());
 	}
 	
 	@Check
@@ -286,8 +287,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		HashMap<String, EObject> name2obj = new HashMap<String, EObject>();
 		
 		// first add all base class objects (we'll add no errors for them)
-		if (ac.getBase()!=null) {
-			ActorClass base = ac.getBase();
+		if (ac.getActorBase()!=null) {
+			ActorClass base = ac.getActorBase();
 			List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(base);
 			for (InterfaceItem item : items) {
 				name2obj.put(item.getName(), item);
@@ -333,7 +334,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (roomHelpers.isCircularClassHierarchy(ac))
 			return;
 		
-		ActorCommunicationType commType = ac.getCommType();
+		ComponentCommunicationType commType = ac.getCommType();
 		
 		switch (commType) {
 		case ASYNCHRONOUS:
@@ -343,14 +344,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		case EVENT_DRIVEN:
 			break;
 		case SYNCHRONOUS:
-			error("synchronous communication type not supported yet", RoomPackage.eINSTANCE.getActorClass_CommType());
+			error("synchronous communication type not supported yet", FSMPackage.eINSTANCE.getModelComponent_CommType());
 		}
 		
-		while (ac.getBase()!=null) {
-			ac = ac.getBase();
+		while (ac.getActorBase()!=null) {
+			ac = ac.getActorBase();
 
 			if (commType!=ac.getCommType())
-				error("data_driven attribute not consistent in inheritance hierarchy", RoomPackage.eINSTANCE.getActorClass_CommType());
+				error("data_driven attribute not consistent in inheritance hierarchy", FSMPackage.eINSTANCE.getModelComponent_CommType());
 		}
 	}
 	
@@ -371,9 +372,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (obj!=rs && obj instanceof RefinedState)
 				if (rs.getTarget()==((RefinedState)obj).getTarget()) {
 					if (rs.eContainer().eContainer() instanceof ActorClass)
-						error("refined state conflicts with nested refined state with same target", RoomPackage.Literals.REFINED_STATE__TARGET);
+						error("refined state conflicts with nested refined state with same target", FSMPackage.Literals.REFINED_STATE__TARGET);
 					else
-						error("refined state not unique", RoomPackage.Literals.REFINED_STATE__TARGET);
+						error("refined state not unique", FSMPackage.Literals.REFINED_STATE__TARGET);
 				}
 		}
 	}
@@ -382,7 +383,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkStateNameUnique(SimpleState s) {
 		Result result = ValidationUtil.isUniqueName(s, s.getName());
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.Literals.SIMPLE_STATE__NAME);
+			error(result.getMsg(), FSMPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
 	@Check  
@@ -463,14 +464,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkChoicePoint(ChoicePoint cp) {
 		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
-			error("name is not unique", RoomPackage.Literals.CHOICE_POINT__NAME);
+			error("name is not unique", FSMPackage.Literals.CHOICE_POINT__NAME);
 	}
 	
 	@Check
 	public void checkInterfaceItemUniqueName(InterfaceItem item) {
 		Result result = ValidationUtil.isUniqueName(item);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.eINSTANCE.getInterfaceItem_Name());
+			error(result.getMsg(), FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name());
 	}
 	
 	@Check
@@ -490,7 +491,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkState(org.eclipse.etrice.core.room.State state) {
+	public void checkState(org.eclipse.etrice.core.fsm.fSM.State state) {
 		Result result = ValidationUtil.checkState(state);
 		if (!result.isOk())
 			error(result);
@@ -498,7 +499,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkPortCommunicationCompatibility(ActorClass ac){
-		if(ac.getCommType() == ActorCommunicationType.SYNCHRONOUS){
+		if(ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS){
 			// not supported yet
 			return;
 		}
@@ -520,10 +521,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	private void checkPortCommunicationCompatibility(ActorClass ac, List<? extends InterfaceItem> items, EReference ref){
-		boolean datadriven = ac.getCommType() == ActorCommunicationType.DATA_DRIVEN;
-		boolean eventdriven = ac.getCommType() == ActorCommunicationType.EVENT_DRIVEN;
-		boolean async = ac.getCommType() == ActorCommunicationType.ASYNCHRONOUS;
-		//boolean synchronous = ac.getCommType() == ActorCommunicationType.SYNCHRONOUS;
+		boolean datadriven = ac.getCommType() == ComponentCommunicationType.DATA_DRIVEN;
+		boolean eventdriven = ac.getCommType() == ComponentCommunicationType.EVENT_DRIVEN;
+		boolean async = ac.getCommType() == ComponentCommunicationType.ASYNCHRONOUS;
+		//boolean synchronous = ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS;
 		
 		for(InterfaceItem item : items){
 			ProtocolClass pc = roomHelpers.getProtocol(item);
@@ -622,8 +623,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
 		if(mfi.getFrom() != null){
-			if(roomHelpers.getProtocol(mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
-				error("port must have event driven protocol", mfi, RoomPackage.eINSTANCE.getMessageFromIf_From());
+			if(roomHelpers.getProtocol((InterfaceItem)mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
+				error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
 		}
 	}
 
@@ -672,7 +673,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (!(rt.eContainer().eContainer() instanceof ActorClass)) {
 			StateGraph sg = (StateGraph) rt.eContainer();
 			int idx = sg.getRefinedTransitions().indexOf(rt);
-			error("RefinedTransition only allowed in top level state graph of an actor", sg, RoomPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
+			error("RefinedTransition only allowed in top level state graph of an actor", sg, FSMPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
 		}
 	}
 	
@@ -694,7 +695,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			
 			do {
 				all.addAll(ac.getAttributes());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (ac!=null);
 		}
@@ -745,12 +746,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkDetailCode(DetailCode dc) {
 		if (dc.getLines().isEmpty())
-			error("detail code must not be empty", dc, RoomPackage.Literals.DETAIL_CODE__LINES);
+			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
 		
 		for(String line : dc.getLines()){
 			// bad: "\r\n" is affected too
 			if(line.contains(Strings.newLine()))
-				warning("multi line string", dc, RoomPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
+				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
 		}
 	}
 	

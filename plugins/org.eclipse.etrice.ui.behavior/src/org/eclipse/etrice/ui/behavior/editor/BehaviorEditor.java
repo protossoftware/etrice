@@ -18,12 +18,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
@@ -220,7 +220,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		for (RefinedState rs : rs2parent.keySet()) {
 			RefinedState parent = rs2parent.get(rs);
 			if (parent.getSubgraph()==null)
-				parent.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+				parent.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 			parent.getSubgraph().getStates().add(rs);
 		}
 	}

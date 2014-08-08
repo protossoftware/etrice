@@ -204,7 +204,7 @@ public class TypeHelpers {
       _and = inherite;
     }
     if (_and) {
-      ActorClass base = actor.getBase();
+      ActorClass base = actor.getActorBase();
       boolean _and_1 = false;
       boolean _notEquals = (!Objects.equal(base, null));
       if (!_notEquals) {
@@ -218,8 +218,8 @@ public class TypeHelpers {
         {
           String _attrClassConfigValue = this.dataConfigExt.getAttrClassConfigValue(base, attributePath);
           result = _attrClassConfigValue;
-          ActorClass _base = base.getBase();
-          base = _base;
+          ActorClass _actorBase = base.getActorBase();
+          base = _actorBase;
         }
         boolean _and_2 = false;
         boolean _notEquals_1 = (!Objects.equal(base, null));

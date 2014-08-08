@@ -13,10 +13,12 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAP;
@@ -101,9 +103,9 @@ public class GenericProtocolClassGenerator {
    * @return an identifier for the message
    */
   public String getMessageID(final MessageFromIf mif) {
-    Message _message = mif.getMessage();
-    InterfaceItem _from = mif.getFrom();
-    return this.getMessageID(_message, _from);
+    AbstractMessage _message = mif.getMessage();
+    AbstractInterfaceItem _from = mif.getFrom();
+    return this.getMessageID(((Message) _message), ((InterfaceItem) _from));
   }
   
   /**

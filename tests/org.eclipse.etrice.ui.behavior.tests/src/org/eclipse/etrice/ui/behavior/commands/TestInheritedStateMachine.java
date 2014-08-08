@@ -18,8 +18,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -88,8 +88,8 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 		
 		// have to use the actor class from the diagram since this is another instance
 		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
-		assertTrue("is derived", ac.getBase()!=null);
-		assertTrue("extends Base", ac.getBase().getName().equals("Base"));
+		assertTrue("is derived", ac.getActorBase()!=null);
+		assertTrue("extends Base", ac.getActorBase().getName().equals("Base"));
 		
 		testSGItems(ac.getStateMachine(), diagram);
 		
@@ -112,8 +112,8 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 		
 		// have to use the actor class from the diagram since this is another instance
 		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
-		assertTrue("is derived", ac.getBase()!=null);
-		assertTrue("extends Base", ac.getBase().getName().equals("Derived"));
+		assertTrue("is derived", ac.getActorBase()!=null);
+		assertTrue("extends Base", ac.getActorBase().getName().equals("Derived"));
 		
 		testSGItems(ac.getStateMachine(), diagram);
 		
@@ -158,8 +158,8 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 		
 		// have to use the actor class from the diagram since this is another instance
 		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
-		assertTrue("is derived", ac.getBase()!=null);
-		assertTrue("extends Base2", ac.getBase().getName().equals("Base2"));
+		assertTrue("is derived", ac.getActorBase()!=null);
+		assertTrue("extends Base2", ac.getActorBase().getName().equals("Base2"));
 		
 		testSGItems(ac.getStateMachine(), diagram);
 		

@@ -21,10 +21,11 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
@@ -103,7 +104,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
         		protocols.add(desc);
 		}
 		
-		Text name = createText(body, "Name:", spp, RoomPackage.eINSTANCE.getInterfaceItem_Name(), nv);
+		Text name = createText(body, "Name:", spp, FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name(), nv);
 		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getSPP_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
 		
 		if (!newSPP) {

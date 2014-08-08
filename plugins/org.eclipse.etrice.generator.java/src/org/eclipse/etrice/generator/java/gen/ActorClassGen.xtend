@@ -20,7 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ReferenceType
@@ -77,7 +77,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
 		val dataObjClass = ac.name+"_DataObject"
-		val baseClass = if (ac.base!=null) ac.base.name
+		val baseClass = if (ac.actorBase!=null) ac.actorBase.name
 			else if (!ac.getAttribute("ActorBaseClass", "class").empty) ac.getAttribute("ActorBaseClass", "class")
 			else if (Main::settings.generateStoreDataObj) "ActorClassFinalActionBase"
 			else "ActorClassBase"
@@ -196,7 +196,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 				«ENDFOR»
 				
-				«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+				«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 					// activate polling for data-driven communication
 					RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).addPollingMessageReceiver(this);
 				«ENDIF»
@@ -252,7 +252,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorDestroy(this);
 						«ENDIF»
-						«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+						«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 							RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);
 						«ENDIF»
 						super.destroy();
@@ -295,7 +295,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
 					«xpac.genStateMachine()»
-					«IF ac.commType == ActorCommunicationType::DATA_DRIVEN»
+					«IF ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
 							handleSystemEvent(ifitem, evt, generic_data);
 						}
@@ -311,10 +311,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			«ENDIF»
 			
-			«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS || ac.commType == ActorCommunicationType::DATA_DRIVEN»
+			«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 				@Override
 				public void receive(Message msg) {
-					receiveEvent(«IF ac.commType == ActorCommunicationType::ASYNCHRONOUS»null, -1, null«ENDIF»);
+					receiveEvent(«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»null, -1, null«ENDIF»);
 				}
 			«ENDIF»
 			
@@ -357,7 +357,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						return;
 					
 					«dataObjClass» dataObject = («dataObjClass») obj;
-					«IF ac.base!=null»
+					«IF ac.actorBase!=null»
 						
 						super.store(dataObject);
 					«ENDIF»
@@ -396,7 +396,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						return;
 					
 					«dataObjClass» dataObject = («dataObjClass») obj;
-					«IF ac.base!=null»
+					«IF ac.actorBase!=null»
 						
 						super.restore(dataObject);
 					«ENDIF»
@@ -441,7 +441,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genSaveImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF ac.base!=null»
+			«IF ac.actorBase!=null»
 				super.saveAttributes(output);
 				
 			«ENDIF»
@@ -465,7 +465,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genLoadImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF ac.base!=null»
+			«IF ac.actorBase!=null»
 				super.loadAttributes(input);
 				
 			«ENDIF»

@@ -1,8 +1,8 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 
 public class StringToDetailCode extends Converter {
 
@@ -30,7 +30,7 @@ public class StringToDetailCode extends Converter {
 			
 			// TODOHRR: make work also for UNIX/Mac line endings
 			String[] cmds = code.split("\r\n");
-			DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+			DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
 			for (int i = 0; i < cmds.length; i++) {
 				dc.getLines().add(cmds[i]);
 			}
@@ -46,7 +46,7 @@ public class StringToDetailCode extends Converter {
 	 * @return
 	 */
 	private DetailCode createEmptyDetailCode() {
-		DetailCode dc = RoomFactory.eINSTANCE.createDetailCode();
+		DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
 		dc.getLines().add("");
 		return dc;
 	}

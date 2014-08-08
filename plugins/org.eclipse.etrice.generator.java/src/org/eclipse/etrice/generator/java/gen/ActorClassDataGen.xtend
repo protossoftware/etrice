@@ -51,7 +51,7 @@ class ActorClassDataGen {
 		val ac = xpac.actorClass
 		val clsname = ac.name+"_DataObject"
 		val models = root.getReferencedModels(ac)
-		val baseClass = if (ac.base!=null) "extends "+ac.base.name+"_DataObject " else ""
+		val baseClass = if (ac.base!=null) "extends "+ac.actorBase.name+"_DataObject " else ""
 		
 	'''
 		package «ac.getPackage»;

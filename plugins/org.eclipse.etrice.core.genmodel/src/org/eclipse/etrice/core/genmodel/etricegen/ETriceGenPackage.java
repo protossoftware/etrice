@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -1931,7 +1931,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__DOCU = RoomPackage.SIMPLE_STATE__DOCU;
+	int EXPANDED_REFINED_STATE__DOCU = FSMPackage.SIMPLE_STATE__DOCU;
 
 	/**
 	 * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
@@ -1940,7 +1940,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__ENTRY_CODE = RoomPackage.SIMPLE_STATE__ENTRY_CODE;
+	int EXPANDED_REFINED_STATE__ENTRY_CODE = FSMPackage.SIMPLE_STATE__ENTRY_CODE;
 
 	/**
 	 * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
@@ -1949,7 +1949,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__EXIT_CODE = RoomPackage.SIMPLE_STATE__EXIT_CODE;
+	int EXPANDED_REFINED_STATE__EXIT_CODE = FSMPackage.SIMPLE_STATE__EXIT_CODE;
 
 	/**
 	 * The feature id for the '<em><b>Do Code</b></em>' containment reference.
@@ -1958,7 +1958,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__DO_CODE = RoomPackage.SIMPLE_STATE__DO_CODE;
+	int EXPANDED_REFINED_STATE__DO_CODE = FSMPackage.SIMPLE_STATE__DO_CODE;
 
 	/**
 	 * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -1967,7 +1967,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__SUBGRAPH = RoomPackage.SIMPLE_STATE__SUBGRAPH;
+	int EXPANDED_REFINED_STATE__SUBGRAPH = FSMPackage.SIMPLE_STATE__SUBGRAPH;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1976,7 +1976,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__NAME = RoomPackage.SIMPLE_STATE__NAME;
+	int EXPANDED_REFINED_STATE__NAME = FSMPackage.SIMPLE_STATE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Inherited Entry</b></em>' containment reference.
@@ -1985,7 +1985,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__INHERITED_ENTRY = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 0;
+	int EXPANDED_REFINED_STATE__INHERITED_ENTRY = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Inherited Exit</b></em>' containment reference.
@@ -1994,7 +1994,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__INHERITED_EXIT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 1;
+	int EXPANDED_REFINED_STATE__INHERITED_EXIT = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Inherited Do</b></em>' containment reference.
@@ -2003,7 +2003,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE__INHERITED_DO = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 2;
+	int EXPANDED_REFINED_STATE__INHERITED_DO = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Expanded Refined State</em>' class.
@@ -2012,7 +2012,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_REFINED_STATE_FEATURE_COUNT = RoomPackage.SIMPLE_STATE_FEATURE_COUNT + 3;
+	int EXPANDED_REFINED_STATE_FEATURE_COUNT = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.

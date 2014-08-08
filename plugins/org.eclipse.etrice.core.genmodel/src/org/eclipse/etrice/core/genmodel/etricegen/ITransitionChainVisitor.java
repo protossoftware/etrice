@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
-import org.eclipse.etrice.core.room.CPBranchTransition;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 
 /**
  * This interface describes the transition chain visitor.

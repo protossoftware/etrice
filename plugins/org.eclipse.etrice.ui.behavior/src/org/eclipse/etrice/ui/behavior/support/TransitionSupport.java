@@ -17,23 +17,23 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.CPBranchTransition;
-import org.eclipse.etrice.core.room.ChoicepointTerminal;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.RefinedTransition;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
-import org.eclipse.etrice.core.room.TrPointTerminal;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionTerminal;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -158,13 +158,13 @@ public class TransitionSupport {
 					
 					Transition trans = null;
 					if (src==null) {
-						InitialTransition t = RoomFactory.eINSTANCE.createInitialTransition();
+						InitialTransition t = FSMFactory.eINSTANCE.createInitialTransition();
 						t.setTo(dst);
 						trans = t;
 					}
 					else if (src instanceof SubStateTrPointTerminal
 							|| (src instanceof TrPointTerminal && ((TrPointTerminal)src).getTrPoint() instanceof EntryPoint)) {
-						ContinuationTransition t = RoomFactory.eINSTANCE.createContinuationTransition();
+						ContinuationTransition t = FSMFactory.eINSTANCE.createContinuationTransition();
 						t.setFrom(src);
 						t.setTo(dst);
 						trans = t;
@@ -180,11 +180,11 @@ public class TransitionSupport {
 								}
 							}
 						}
-						NonInitialTransition t = dfltBranch? RoomFactory.eINSTANCE.createContinuationTransition()
-								: RoomFactory.eINSTANCE.createCPBranchTransition();
+						NonInitialTransition t = dfltBranch? FSMFactory.eINSTANCE.createContinuationTransition()
+								: FSMFactory.eINSTANCE.createCPBranchTransition();
 						
 						if (t instanceof CPBranchTransition) {
-							((CPBranchTransition) t).setCondition(RoomFactory.eINSTANCE.createDetailCode());
+							((CPBranchTransition) t).setCondition(FSMFactory.eINSTANCE.createDetailCode());
 						}
 						
 						t.setFrom(src);
@@ -195,7 +195,7 @@ public class TransitionSupport {
 						NonInitialTransition t = null;
 						switch (ac.getCommType()) {
 						case DATA_DRIVEN:
-							t = RoomFactory.eINSTANCE.createGuardedTransition();
+							t = FSMFactory.eINSTANCE.createGuardedTransition();
 							break;
 						case ASYNCHRONOUS:
 							// let user choose between triggered and guarded transition
@@ -215,15 +215,15 @@ public class TransitionSupport {
 				        	
 				        	switch (dlg.open()) {	// open returns index of pressed button
 							case 0:
-								t = RoomFactory.eINSTANCE.createTriggeredTransition();
+								t = FSMFactory.eINSTANCE.createTriggeredTransition();
 								break;
 							case 1:
-								t = RoomFactory.eINSTANCE.createGuardedTransition();
+								t = FSMFactory.eINSTANCE.createGuardedTransition();
 								break;
 				        	}
 							break;
 						case EVENT_DRIVEN:
-							t = RoomFactory.eINSTANCE.createTriggeredTransition();
+							t = FSMFactory.eINSTANCE.createTriggeredTransition();
 							break;
 						case SYNCHRONOUS:
 							break;
@@ -400,14 +400,14 @@ public class TransitionSupport {
 				Transition trans = null;
 				if (src==null) {
 					InitialTransition t = (orig instanceof InitialTransition)?
-							(InitialTransition)orig : RoomFactory.eINSTANCE.createInitialTransition();
+							(InitialTransition)orig : FSMFactory.eINSTANCE.createInitialTransition();
 					t.setTo(dst);
 					trans = t;
 				}
 				else if (src instanceof SubStateTrPointTerminal
 						|| (src instanceof TrPointTerminal && ((TrPointTerminal)src).getTrPoint() instanceof EntryPoint)) {
 					ContinuationTransition t = (orig instanceof ContinuationTransition)?
-							(ContinuationTransition)orig : RoomFactory.eINSTANCE.createContinuationTransition();
+							(ContinuationTransition)orig : FSMFactory.eINSTANCE.createContinuationTransition();
 					t.setFrom(src);
 					t.setTo(dst);
 					trans = t;
@@ -425,8 +425,8 @@ public class TransitionSupport {
 								}
 							}
 						}
-						t = dfltBranch? RoomFactory.eINSTANCE.createContinuationTransition()
-								: RoomFactory.eINSTANCE.createCPBranchTransition();
+						t = dfltBranch? FSMFactory.eINSTANCE.createContinuationTransition()
+								: FSMFactory.eINSTANCE.createCPBranchTransition();
 					}
 					else
 						t = (NonInitialTransition) orig;
@@ -436,13 +436,13 @@ public class TransitionSupport {
 					trans = t;
 				}
 				else {
-					NonInitialTransition t = ac.getCommType()==ActorCommunicationType.DATA_DRIVEN?
+					NonInitialTransition t = ac.getCommType()==ComponentCommunicationType.DATA_DRIVEN?
 						((orig instanceof GuardedTransition)?
-							(GuardedTransition)orig : RoomFactory.eINSTANCE.createGuardedTransition()
+							(GuardedTransition)orig : FSMFactory.eINSTANCE.createGuardedTransition()
 						)
 						:
 						((orig instanceof TriggeredTransition)?
-							(TriggeredTransition)orig : RoomFactory.eINSTANCE.createTriggeredTransition()
+							(TriggeredTransition)orig : FSMFactory.eINSTANCE.createTriggeredTransition()
 						)
 						;
 					t.setFrom(src);
@@ -690,9 +690,9 @@ public class TransitionSupport {
 				Transition trans = (Transition) getBusinessObjectForPictogramElement(pe);
 				ActorClass ac = SupportUtil.getInstance().getActorClass(getDiagram());
 				if (ac.getStateMachine()==null)
-					ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
+					ac.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
 				
-				RefinedTransition rt = RoomFactory.eINSTANCE.createRefinedTransition();
+				RefinedTransition rt = FSMFactory.eINSTANCE.createRefinedTransition();
 				rt.setTarget(trans);
 				ac.getStateMachine().getRefinedTransitions().add(rt);
 				// the connection pe is still linked to the former transition that was refined!

@@ -21,17 +21,17 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 
 public class ReachabilityCheck {

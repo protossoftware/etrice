@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.room.DetailCode
+import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefableType

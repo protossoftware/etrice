@@ -33,6 +33,31 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
+import org.eclipse.etrice.core.fsm.fSM.ExitPoint;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
@@ -42,39 +67,15 @@ import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExitPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.StateTerminal;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.TrPointTerminal;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -330,8 +331,8 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		ActorClass orig = getActorClass();
 		if (orig.getStateMachine()!=null)
 			stateMachines.add(orig.getStateMachine());
-		while (orig.getBase()!=null) {
-			orig = orig.getBase();
+		while (orig.getActorBase()!=null) {
+			orig = orig.getActorBase();
 			if (orig.getStateMachine()!=null)
 				stateMachines.add(orig.getStateMachine());
 		}
@@ -345,7 +346,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 
 	private void collectContentsInNewStateMachine(Collection<StateGraph> copiedStateMachines) {
 		// move all state machine contents to our state machine (which we create newly)
-		StateGraph myStateMachine = RoomFactory.eINSTANCE.createStateGraph();
+		StateGraph myStateMachine = FSMFactory.eINSTANCE.createStateGraph();
 		setStateMachine(myStateMachine);
 
 		HashMap<Transition, DetailCode> trans2refinedAction = new HashMap<Transition, DetailCode>();
@@ -362,7 +363,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				
 				DetailCode code = trans2refinedAction.get(rt.getTarget());
 				if (code==null) {
-					code = RoomFactory.eINSTANCE.createDetailCode();
+					code = FSMFactory.eINSTANCE.createDetailCode();
 					trans2refinedAction.put(rt.getTarget(), code);
 				}
 				
@@ -482,7 +483,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 					int idx = sg.getTransitions().indexOf(t);
 					Transition orig = (Transition) copy2orig.get(t);
 					String name = roomNameProvider.getName(orig);
-					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), FSMPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 				}
 		}
 		
@@ -514,16 +515,16 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 					NodeData data = node2data.get((State)sg.eContainer());
 					if (data!=null && data.getLoopTransitions().size()!=data.getInTrans().size())
 						validationError(getActorClass().getName()+": Having no initial transition in a nested state is valid only if there is no transition to history except of self transitions!",
-								sg.eContainer(), RoomPackage.eINSTANCE.getState_Subgraph());
+								sg.eContainer(), FSMPackage.eINSTANCE.getState_Subgraph());
 				}
 			}
 			else {
-				validationError(getActorClass().getName()+": The TOP level has to have an initial transition!", getActorClass().getStateMachine(), RoomPackage.eINSTANCE.getStateGraph_Transitions());
+				validationError(getActorClass().getName()+": The TOP level has to have an initial transition!", getActorClass().getStateMachine(), FSMPackage.eINSTANCE.getStateGraph_Transitions());
 			}
 		}
 		else {
 			if (initCount>1)
-				validationError(getActorClass().getName()+": There has to be exactly one initial transition!", getActorClass().getStateMachine(), RoomPackage.eINSTANCE.getStateGraph_Transitions());
+				validationError(getActorClass().getName()+": There has to be exactly one initial transition!", getActorClass().getStateMachine(), FSMPackage.eINSTANCE.getStateGraph_Transitions());
 		}
 		
 		for (ChoicePoint cp : sg.getChPoints()) {
@@ -534,18 +535,18 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			int idx = origContainer.getChPoints().indexOf(orig);
 			
 			if (data==null) {
-				validationError(getActorClass().getName()+": ChoicePoint is not connected!", origContainer, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+				validationError(getActorClass().getName()+": ChoicePoint is not connected!", origContainer, FSMPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 			else {
 				// several incoming transitions possible, see bug 340496
 //				if (data.getInTrans().size()!=1)
-//					validationError(getActorClass().getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+//					validationError(getActorClass().getName()+": ChoicePoint has "+data.getInTrans().size()+" incoming transitions!", sg, FSMPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (data.getOutTrans().size()<2)
-					validationError(getActorClass().getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), origContainer, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint should have 2 or more branches but has "+data.getOutTrans().size(), origContainer, FSMPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (getDefaultBranch(data.getOutTrans())==null)
-					validationError(getActorClass().getName()+": ChoicePoint has no default branch!", origContainer, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint has no default branch!", origContainer, FSMPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 				if (!data.getLoopTransitions().isEmpty())
-					validationError(getActorClass().getName()+": ChoicePoint is connected to itself!", origContainer, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
+					validationError(getActorClass().getName()+": ChoicePoint is connected to itself!", origContainer, FSMPackage.eINSTANCE.getStateGraph_ChPoints(), idx);
 			}
 		}
 		
@@ -558,32 +559,32 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			
 			if (data==null) {
 				if (!getActorClass(tp).isAbstract())
-					validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" is not connected", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" is not connected", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!getActorClass().isAbstract() && data.getInTrans().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getActorClass(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getActorClass().getName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -656,7 +657,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 								if (unguarded!=null) {
 									// there already is an unguarded transition: require a quard
 									if (!roomHelpers.isGuarded(trig)) {
-										validationError("Transitions with same trigger on same level have to be guarded!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+										validationError("Transitions with same trigger on same level have to be guarded!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									}
 									else {
 										int idx = at.getTransitions().indexOf(unguarded);
@@ -756,7 +757,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			// this should always hold true
 			assert(msg!=null): "The message '"+parts[1]+"' did not match a message!";
 			
-			MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+			MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 			mif.setFrom(ii);
 			mif.setMessage(msg);
 			triggerstring2mif.put(trig, mif);
@@ -775,33 +776,34 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 			boolean first = true;
 			for (Trigger tr : ((TriggeredTransition)t).getTriggers()) {
 				for (MessageFromIf mif : tr.getMsgFromIfPairs()) {
+					VarDecl msgData = ((Message)mif.getMessage()).getData();
 					if (first) {
 						first = false;
-						data = mif.getMessage().getData();
+						data = msgData;
 					}
 					else {
 						if (data!=null) {
-							if (mif.getMessage().getData()==null) {
-								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+							if (msgData==null) {
+								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 							else {
-								VarDecl a = mif.getMessage().getData();
+								VarDecl a = msgData;
 								if (data.getRefType().getType()!=a.getRefType().getType())
-									validationError("The data types of all MessageFromIf have to be the same!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+									validationError("The data types of all MessageFromIf have to be the same!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 								if (data.getRefType().isRef() !=a.getRefType().isRef())
-									validationError("The data types of all MessageFromIf have to be the same ref type!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+									validationError("The data types of all MessageFromIf have to be the same ref type!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 							}
 						}
 						else {
-							if (mif.getMessage().getData()!=null)
-								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+							if (msgData!=null)
+								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 						}
 					}
 				}
 			}
 	
 			if (first)
-				validationError("Triggered transition has to have a message from interface!", t, RoomPackage.eINSTANCE.getTriggeredTransition_Triggers());
+				validationError("Triggered transition has to have a message from interface!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 			
 			tc.setData(data);
 		}
@@ -830,7 +832,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 				TriggeredTransition orig = (TriggeredTransition)copy2orig.get(next);
 				StateGraph origContainer = (StateGraph) orig.eContainer();
 				int idx = origContainer.getTransitions().indexOf(orig);
-				validationError("Segments following the triggering transition can have no triggers!\n", origContainer, RoomPackage.eINSTANCE.getStateGraph_Transitions(), idx);
+				validationError("Segments following the triggering transition can have no triggers!\n", origContainer, FSMPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 			}
 			
 			collectChainTransitions(tc, next);
@@ -886,10 +888,10 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		if (validator.isFailed())
 			return;
 		
-		if (getActorClass().getCommType()==ActorCommunicationType.DATA_DRIVEN) {
+		if (getActorClass().getCommType()==ComponentCommunicationType.DATA_DRIVEN) {
 			findTransitionChains(getStateMachine(), GuardedTransition.class);
 		}
-		else if (getActorClass().getCommType()==ActorCommunicationType.ASYNCHRONOUS) {
+		else if (getActorClass().getCommType()==ComponentCommunicationType.ASYNCHRONOUS) {
 			findLeafStateTriggers(getStateMachine());
 			fillTriggerStringMap();
 			findTransitionChains(getStateMachine(), TriggeredTransition.class);
@@ -974,9 +976,9 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 	}
 	
 	private int computeInterfaceItemLocalIds(ActorClass ac, int offset) {
-		if (ac.getBase()!=null)
+		if (ac.getActorBase()!=null)
 			// first recurse into base class
-			offset = computeInterfaceItemLocalIds(ac.getBase(), offset);
+			offset = computeInterfaceItemLocalIds(ac.getActorBase(), offset);
 		
 		for (ExternalPort ep : ac.getExternalPorts()) {
 			ifitem2localId.put(ep.getInterfacePort(), offset);
@@ -1022,7 +1024,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		while (ac!=null) {
 			if (ac.getStateMachine()!=null)
 				return true;
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		return false;
 	}
@@ -1220,7 +1222,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 		
 		return result;
 	}
-	
+
 	private StateGraphNode getAdjustedTargetNode(Transition t) {
 		StateGraphNode node = roomHelpers.getNode(t.getTo());
 		if (node instanceof EntryPoint) {
@@ -1231,7 +1233,7 @@ public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActor
 						// in this case 
 						State newTarget = (State) node.eContainer().eContainer();
 						
-						StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
+						StateTerminal st = FSMFactory.eINSTANCE.createStateTerminal();
 						st.setState(newTarget);
 						t.setTo(st);
 						

@@ -19,17 +19,17 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionTerminal;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog.Where;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
@@ -111,15 +111,15 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 									if (msg.getName().equals(msgName)) {
 										// create triggered transition with our
 										// trigger and add it to the state graph
-										TriggeredTransition trans = RoomFactory.eINSTANCE
+										TriggeredTransition trans = FSMFactory.eINSTANCE
 												.createTriggeredTransition();
 										trans.setName(SupportUtil.getInstance().getRoomUtil()
 												.getUniqueTransitionName((StateGraph) state
 														.eContainer()));
-										Trigger tri = RoomFactory.eINSTANCE
+										Trigger tri = FSMFactory.eINSTANCE
 												.createTrigger();
 										trans.getTriggers().add(tri);
-										MessageFromIf mif = RoomFactory.eINSTANCE
+										MessageFromIf mif = FSMFactory.eINSTANCE
 												.createMessageFromIf();
 										mif.setFrom(item);
 										mif.setMessage(msg);

@@ -1,7 +1,7 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 
 public class DetailCodeToString extends Converter {
 

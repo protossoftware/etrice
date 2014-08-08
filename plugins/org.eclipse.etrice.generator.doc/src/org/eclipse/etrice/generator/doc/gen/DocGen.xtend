@@ -27,7 +27,7 @@ import org.eclipse.etrice.core.room.LogicalSystem
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StandardOperation
-import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess

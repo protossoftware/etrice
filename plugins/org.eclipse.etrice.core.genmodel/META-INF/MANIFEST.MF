@@ -14,8 +14,9 @@ Export-Package: org.eclipse.etrice.core.genmodel,
  org.eclipse.etrice.core.genmodel.etricegen.impl,
  org.eclipse.etrice.core.genmodel.etricegen.util,
  org.eclipse.etrice.core.genmodel.util
-Require-Bundle: org.eclipse.etrice.core.room;visibility:=reexport;bundle-version="0.5.0",
- org.eclipse.etrice.core.common;visibility:=reexport,
+Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
+ org.eclipse.etrice.core.fsm;bundle-version="0.5.0";visibility:=reexport,
+ org.eclipse.etrice.core.room;bundle-version="0.5.0";visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport

@@ -6,9 +6,9 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
@@ -45,7 +45,7 @@ public class ContextSwitcher {
 			ArrayList<ActorClass> hierarchy = new ArrayList<ActorClass>();
 			do {
 				hierarchy.add(0, ac);
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (ac!=null);
 			

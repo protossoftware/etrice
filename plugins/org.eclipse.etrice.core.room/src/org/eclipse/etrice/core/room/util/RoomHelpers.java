@@ -10,23 +10,29 @@ package org.eclipse.etrice.core.room.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.KeyValue;
-import org.eclipse.etrice.core.common.base.util.BaseHelpers;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -34,20 +40,15 @@ import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ChoicepointTerminal;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -56,32 +57,16 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.StateTerminal;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.TrPointTerminal;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionTerminal;
-import org.eclipse.etrice.core.room.Trigger;
-
-import com.google.common.base.Function;
 
 /**
  * This class provides a collection of convenience functions that extract implicit information
@@ -96,7 +81,7 @@ import com.google.common.base.Function;
  *
  * @see org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder eTrice Generator Model
  */
-public class RoomHelpers extends BaseHelpers {
+public class RoomHelpers extends FSMHelpers {
 	
 	/**
 	 * Compute a list of the class itself and its base classes in reverse order (super classes to sub classes)
@@ -109,7 +94,7 @@ public class RoomHelpers extends BaseHelpers {
 		
 		while (ac!=null) {
 			result.add(0, ac);
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -133,7 +118,7 @@ public class RoomHelpers extends BaseHelpers {
 			do {
 				result.addAll(ac.getServiceProvisionPoints());
 				result.addAll(ac.getInterfacePorts());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (includeInherited && ac!=null);
 		}
@@ -168,7 +153,7 @@ public class RoomHelpers extends BaseHelpers {
 			ActorClass ac = (ActorClass) sc;
 			do {
 				result.addAll(ac.getActorRefs());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (includeInherited && ac!=null);
 		}
@@ -200,7 +185,7 @@ public class RoomHelpers extends BaseHelpers {
 			ActorClass ac = (ActorClass) sc;
 			do {
 				result.addAll(ac.getBindings());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (includeInherited && ac!=null);
 		}
@@ -233,7 +218,7 @@ public class RoomHelpers extends BaseHelpers {
 			ActorClass ac = (ActorClass) sc;
 			do {
 				result.addAll(ac.getConnections());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (includeInherited && ac!=null);
 		}
@@ -382,750 +367,6 @@ public class RoomHelpers extends BaseHelpers {
 	}
 	
 	/**
-	 * Returns whether a {@link State} has sub structure.
-	 * That means either of
-	 * <ul>
-	 * <li>the state has a non-empty sub graph</li>
-	 * <li>the state is a RefinedState and its target state has sub structure</li>
-	 * <li>a RefinedState of a sub ActorClass pointing to this state has sub structure</li>
-	 * </ul>
-	 * 
-	 * @param state the {@link State}
-	 * @param ac the containing {@link ActorClass} (which might be a sub class of the
-	 * 		ActorClass containing the State in the containment hierarchy) 
-	 * 
-	 * @return whether a {@link State} has sub structure
-	 */
-	public boolean hasSubStructure(State state, ActorClass ac) {
-		if (hasDirectSubStructure(state))
-			return true;
-		
-		if (state instanceof RefinedState) {
-			State target = ((RefinedState) state).getTarget();
-			while (target!=null) {
-				if (hasDirectSubStructure(target))
-					return true;
-				if (target instanceof RefinedState)
-					target = ((RefinedState) target).getTarget();
-				else
-					break;
-			}
-		}
-		
-		if (ac.getStateMachine()!=null) {
-			for (State s : getAllStatesRecursive(ac.getStateMachine())) {
-				State predecessor = s;
-				while (predecessor instanceof RefinedState) {
-					predecessor = ((RefinedState) predecessor).getTarget();
-					if (predecessor==state) {
-						// we have a chain from s -> state
-						// check this chain
-						predecessor = s;
-						while (predecessor instanceof RefinedState) {
-							if (hasDirectSubStructure(predecessor))
-								return true;
-							predecessor = ((RefinedState) s).getTarget();
-							if (predecessor==state)
-								break;
-						}
-						break;
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * Returns whether a {@link State} has direct sub structure.
-	 * This is equivalent with having a non-empty sub graph.
-	 * 
-	 * @param s the {@link State}
-	 * 
-	 * @return whether a {@link State} has direct sub structure
-	 */
-	public boolean hasDirectSubStructure(State s) {
-		return !isEmpty(s.getSubgraph());
-	}
-
-	/**
-	 * Returns whether an {@link ActorClass} has a non-empty {@link StateGraph}.
-	 * 
-	 * @param ac the {@link ActorClass}
-	 * 
-	 * @return whether an {@link ActorClass} has a non-empty {@link StateGraph}
-	 */
-	public boolean hasNonEmptyStateMachine(ActorClass ac) {
-		return !isEmpty(ac.getStateMachine());
-	}
-	
-	public boolean isEmpty(StateGraph sg) {
-		if (sg==null)
-			return true;
-		
-		if (!sg.getStates().isEmpty())
-			return false;
-		if (!sg.getTransitions().isEmpty())
-			return false;
-		if (!sg.getTrPoints().isEmpty())
-			return false;
-		if (!sg.getChPoints().isEmpty())
-			return false;
-		if (!sg.getRefinedTransitions().isEmpty())
-			return false;
-		
-		return true;
-	}
-	
-	/**
-	 * @param s a {@link State}
-	 * @return <code>true</code> if the state resides in the top level (i.e.
-	 * directly in the actor's state machine)
-	 */
-	public boolean isTopLevel(StateGraphNode s) {
-		return !(s.eContainer().eContainer() instanceof State);
-	}
-	
-	/**
-	 * @param s a {@link State}
-	 * @return <code>true</code> if the state has no sub-graph
-	 */
-	public boolean isLeaf(State s) {
-		return s.getSubgraph()==null;
-	}
-	
-	/**
-	 * @param state a {@link State}
-	 * @return a list of all leaf states recursively
-	 */
-	public List<State> getLeafStateList(State state) {
-		return getLeafStateList(state.getSubgraph());
-	}
-	
-	/**
-	 * @param sg a {@link StateGraph}
-	 * @return a list of all leaf states recursively
-	 */
-	public List<State> getLeafStateList(StateGraph sg) {
-		ArrayList<State> res = new ArrayList<State>();
-		
-		if (sg!=null) {
-			TreeIterator<EObject> it = sg.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				if ((obj instanceof State) && isLeaf((State) obj))
-					res.add((State) obj);
-			}
-		}
-		
-		return res;
-	}
-	
-	/**
-	 * @param sg a {@link StateGraph}
-	 * @return a list of all states recursively
-	 */
-	public List<State> getStateList(StateGraph sg) {
-		ArrayList<State> res = new ArrayList<State>();
-		
-		if (sg!=null) {
-			TreeIterator<EObject> it = sg.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				if (obj instanceof State)
-					res.add((State) obj);
-			}
-		}
-		
-		return res;
-	}
-	
-	/**
-	 * @param sg a {@link StateGraph}
-	 * @return a list of all base states recursively
-	 */
-	public List<State> getBaseStateList(StateGraph sg) {
-		ArrayList<State> res = new ArrayList<State>();
-		
-		if (sg!=null) {
-			TreeIterator<EObject> it = sg.eAllContents();
-			while (it.hasNext()) {
-				EObject obj = it.next();
-				if (obj instanceof SimpleState)
-					res.add((State) obj);
-			}
-		}
-		
-		return res;
-	}
-	
-	/**
-	 * @param ac an {@link ActorClass} 
-	 * @return all base states of the actor class
-	 */
-	public List<State> getAllBaseStates(ActorClass ac) {
-		return getBaseStateList(ac.getStateMachine());
-	}
-	
-	/**
-	 * @param s a {@link State}
-	 * @return the parent state of s if there is such. If the state is on
-	 * the top level then <code>null</code> is returned
-	 */
-	public State getParentState(StateGraphNode s) {
-		if (isTopLevel(s))
-			return null;
-		else
-			return (State) s.eContainer().eContainer();
-	}
-
-	/**
-	 * Returns the {@link RefinedState} in the derived state machine of the {@link ActorClass}
-	 * which is (indirectly) targeting the state.
-	 * 
-	 * @param state the {@link State}
-	 * @param ac the {@link ActorClass}
-	 * 
-	 * @return the {@link RefinedState} in the derived state machine of the {@link ActorClass}
-	 * which is (indirectly) targeting the state
-	 */
-	public State getTargettingState(State state, ActorClass ac) {
-		State targetting = state;
-		for (State s : getAllStatesRecursive(ac.getStateMachine())) {
-			State predecessor = s;
-			while (predecessor instanceof RefinedState) {
-				predecessor = ((RefinedState) predecessor).getTarget();
-				if (predecessor==state)
-					targetting = s;
-			}
-		}
-		return targetting;
-	}
-	
-	/**
-	 * Returns <code>true</code> if the {@link DetailCode} is null or empty.
-	 * 
-	 * @param dc the {@link DetailCode}
-	 * @return <code>true</code> if the {@link DetailCode} is null or empty.
-	 */
-	public boolean hasDetailCode(DetailCode dc) {
-		if (dc==null)
-			return false;
-		
-		for (String cmd : dc.getLines()) {
-			if (!cmd.isEmpty())
-				return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * @param trig a {@link Trigger}
-	 * @return <code>true</code> if a guard condition is defined for this trigger
-	 */
-	public boolean hasGuard(Trigger trig) {
-		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
-	}
-	
-	/**
-	 * Returns <code>true</code> if the entry code of a {@link State} is empty.
-	 * 
-	 * @param s the {@link State}
-	 * @param includeInherited if <code>true</code> also parent states are considered
-	 * 
-	 * @return <code>true</code> if the entry code of a {@link State} is empty
-	 */
-	public boolean hasEntryCode(State s, boolean includeInherited) {
-		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__ENTRY_CODE);
-	}
-
-	/**
-	 * Returns <code>true</code> if the exit code of a {@link State} is empty.
-	 * 
-	 * @param s the {@link State}
-	 * @param includeInherited if <code>true</code> also parent states are considered
-	 * 
-	 * @return <code>true</code> if the exit code of a {@link State} is empty
-	 */
-	public boolean hasExitCode(State s, boolean includeInherited) {
-		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__EXIT_CODE);
-	}
-
-	/**
-	 * Returns <code>true</code> if the do code of a {@link State} is empty.
-	 * 
-	 * @param s the {@link State}
-	 * @param includeInherited if <code>true</code> also parent states are considered
-	 * 
-	 * @return <code>true</code> if the do code of a {@link State} is empty
-	 */
-	public boolean hasDoCode(State s, boolean includeInherited) {
-		return hasDetailCode(s, includeInherited, RoomPackage.Literals.STATE__DO_CODE);
-	}
-	
-	private boolean hasDetailCode(State s, boolean includeInherited, EReference feature) {
-		DetailCode dc = (DetailCode) s.eGet(feature);
-		if (hasDetailCode(dc))
-			return true;
-		
-		if (includeInherited && s instanceof RefinedState)
-			return !getInheritedCode((RefinedState) s, feature, true /* order doesn't matter here */).getLines().isEmpty();
-		
-		return false;
-	}
-
-	/**
-	 * Returns the {@link DetailCode} as String with a newline character after each command.
-	 * 
-	 * @param code a {@link DetailCode}
-	 * 
-	 * @return  the {@link DetailCode} as String with a newline character after each command.
-	 */
-	public String getDetailCode(DetailCode code) {
-		if (code==null || code.getLines().isEmpty())
-			return "";
-		
-		StringBuilder result = new StringBuilder();
-		for (String cmd : code.getLines()) {
-			result.append(cmd + "\n");
-		}
-		return result.toString();
-	}
-
-	/**
-	 * Returns a concatenation of inherited entry codes as {@link DetailCode}.
-	 * The codes are ordered base class to sub class.
-	 * 
-	 * @param rs {@link RefinedState}
-	 * 
-	 * @return a concatenation of inherited entry codes as {@link DetailCode}
-	 */
-	public DetailCode getInheritedEntryCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__ENTRY_CODE, true);
-	}
-
-	/**
-	 * Returns a concatenation of inherited exit codes as {@link DetailCode}.
-	 * The codes are ordered sub class to base class.
-	 * 
-	 * @param rs {@link RefinedState}
-	 * 
-	 * @return a concatenation of inherited exit codes as {@link DetailCode}
-	 */
-	public DetailCode getInheritedExitCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__EXIT_CODE, false);
-	}
-
-	/**
-	 * Returns a concatenation of inherited do codes as {@link DetailCode}.
-	 * The codes are ordered base class to sub class.
-	 * 
-	 * @param rs {@link RefinedState}
-	 * 
-	 * @return a concatenation of inherited do codes as {@link DetailCode}
-	 */
-	public DetailCode getInheritedDoCode(RefinedState rs) {
-		return getInheritedCode(rs, RoomPackage.Literals.STATE__DO_CODE, true);
-	}
-	
-	/**
-	 * @param rs
-	 * @param code
-	 * @return
-	 */
-	private DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
-		DetailCode result = RoomFactory.eINSTANCE.createDetailCode();
-		State s = rs.getTarget();
-		while (s!=null) {
-			DetailCode dc = (DetailCode) s.eGet(code);
-			if (dc!=null) {
-				if (addFront)
-					result.getLines().addAll(0, dc.getLines());
-				else
-					result.getLines().addAll(dc.getLines());
-				
-			}
-			if (s instanceof RefinedState)
-				s = ((RefinedState) s).getTarget();
-			else
-				break;
-		}
-		return result;
-	}
-
-	/**
-	 * The default resolution mechanism will return a SimpleState.
-	 * This method searches for RefinedStates targeting the simple state.
-	 * 
-	 * @param sg the context for the search
-	 * @param state the target state
-	 * 
-	 * @return a refined state targeting state or state itself
-	 */
-	public State getRefinedStateFor(StateGraph sg, State state) {
-		// first we look for RefinedStates in the current context
-		for (State s : sg.getStates()) {
-			if (s instanceof RefinedState && s.getName().equals(state.getName())) {
-				return s;
-			}
-		}
-		
-		// then we check whether our container has a base state/class
-		if (sg.eContainer() instanceof State) {
-			if (sg.eContainer() instanceof RefinedState) {
-				return getRefinedStateFor(((RefinedState)sg.eContainer()).getTarget().getSubgraph(), state);
-			}
-		}
-		else if (sg.eContainer() instanceof ActorClass) {
-			ActorClass ac = (ActorClass) sg.eContainer();
-			if (ac.getBase()!=null && ac.getBase().getStateMachine()!=null)
-				return getRefinedStateFor(ac.getBase().getStateMachine(), state);
-		}
-		
-		// nothing found, return original state
-		return state;
-	}
-
-	/**
-	 * Returns whether a {@link Trigger} contains a guard.
-	 * 
-	 * @param trig {@link Trigger}
-	 * 
-	 * @return whether a {@link Trigger} contains a guard
-	 */
-	public boolean isGuarded(Trigger trig) {
-		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
-	}
-
-	/**
-	 * Returns the destination {@link StateGraphNode} of a {@link TransitionTerminal}.
-	 * 
-	 * @param tt the transition terminal
-	 * 
-	 * @return the destination {@link StateGraphNode} of a {@link TransitionTerminal}
-	 */
-	public StateGraphNode getNode(TransitionTerminal tt) {
-		if (tt instanceof StateTerminal)
-			return ((StateTerminal)tt).getState();
-		else if (tt instanceof TrPointTerminal)
-			return ((TrPointTerminal)tt).getTrPoint();
-		else if (tt instanceof SubStateTrPointTerminal)
-			return ((SubStateTrPointTerminal)tt).getTrPoint();
-		else if (tt instanceof ChoicepointTerminal)
-			return ((ChoicepointTerminal)tt).getCp();
-		
-		return null;
-	}
-
-	/**
-	 * Returns all {@link State}s of a {@link StateGraph} including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link State}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<State> getAllStates(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), false);
-	}
-
-	/**
-	 * Returns all {@link State}s of a {@link StateGraph} including parent state graphs recursively
-	 * and descend also into sub graphs.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link State}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<State> getAllStatesRecursive(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_States(), true);
-	}
-
-	/**
-	 * Returns all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<TrPoint> getAllTrPoints(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), false);
-	}
-
-	/**
-	 * Returns all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively
-	 * and descend also into sub graphs.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link TrPoint}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<TrPoint> getAllTrPointsRecursive(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_TrPoints(), true);
-	}
-
-	/**
-	 * Returns all {@link ChoicePoint}s of a {@link StateGraph} including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link ChoicePoint}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<ChoicePoint> getAllChoicePoints(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_ChPoints(), false);
-	}
-
-	/**
-	 * Returns all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<Transition> getAllTransitions(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), false);
-	}
-
-	/**
-	 * Returns all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
-	 * and descend also into sub graphs.
-
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return all {@link Transition}s of a {@link StateGraph} including parent state graphs recursively
-	 */
-	public List<Transition> getAllTransitionsRecursive(StateGraph sg) {
-		return getAllStateGraphItems(sg, RoomPackage.eINSTANCE.getStateGraph_Transitions(), true);
-	}
-	
-	@SuppressWarnings("unchecked")
-	private <T extends StateGraphItem> List<T> getAllStateGraphItems(StateGraph sg, EReference feature, boolean recurse) {
-		ArrayList<T> result = new ArrayList<T>();
-		
-		while (sg!=null) {
-			Object items = sg.eGet(feature);
-			if (items instanceof List<?>)
-				result.addAll((List<? extends T>) items);
-			
-			if (recurse) {
-				for (State s : sg.getStates()) {
-					if (s.getSubgraph()!=null) {
-						List<T> subItems = getAllStateGraphItems(s.getSubgraph(), feature, recurse);
-						result.addAll(subItems);
-					}
-				}
-			}
-			
-			if (sg.eContainer() instanceof RefinedState) {
-				sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
-			}
-			else if (sg.eContainer() instanceof ActorClass) {
-				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
-				sg = base!=null? base.getStateMachine():null;
-			}
-			else {
-				break;
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 * 
-	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllNames(StateGraph, StateGraphItem)
-	 * 	getAllNames(StateGraph, StateGraphItem)
-	 */
-	public Set<String> getAllNames(StateGraph sg) {
-		return getAllNames(sg, null);
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * @param skip a {@link StateGraphItem} to be skipped
-	 * 
-	 * @return a complete list of all names used by the {@link StateGraphItem}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 */
-	public Set<String> getAllNames(StateGraph sg, StateGraphItem skip) {
-		HashSet<String> result = new HashSet<String>();
-		do {
-			for (State st : sg.getStates()) {
-				if (st!=skip)
-					result.add(st.getName());
-			}
-			for (TrPoint tp : sg.getTrPoints()) {
-				if (tp!=skip)
-					result.add(tp.getName());
-			}
-			for (ChoicePoint cp : sg.getChPoints()) {
-				if (cp!=skip)
-					result.add(cp.getName());
-			}
-			for (Transition tr : sg.getTransitions()) {
-				if (tr!=skip)
-					result.add(tr.getName());
-			}
-			
-			if (sg.eContainer() instanceof RefinedState) {
-				sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
-			}
-			else if (sg.eContainer() instanceof ActorClass) {
-				ActorClass base = ((ActorClass)sg.eContainer()).getBase();
-				sg = base!=null? base.getStateMachine():null;
-			}
-			else {
-				break;
-			}
-		}
-		while (sg!=null);
-		
-		return result;
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link State}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return a complete list of all names used by the {@link State}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 * 
-	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllStateNames(StateGraph, State)
-	 * 	getAllStateNames(StateGraph, State)
-	 */
-	public Set<String> getAllStateNames(StateGraph sg) {
-		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_States());
-	}
-
-	/**
-	 * Returns a complete list of all names used by the {@link State}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * @param skip a {@link State} to be skipped
-	 * 
-	 * @return a complete list of all names used by the {@link State}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 */
-	public Set<String> getAllStateNames(StateGraph sg, State skip) {
-		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_States());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 * 
-	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTrPointNames(StateGraph, TrPoint)
-	 * 	getAllStateNames(StateGraph, TrPoint)
-	 */
-	public Set<String> getAllTrPointNames(StateGraph sg) {
-		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * @param skip a {@link TrPoint} to be skipped
-	 * 
-	 * @return a complete list of all names used by the {@link TrPoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 */
-	public Set<String> getAllTrPointNames(StateGraph sg, TrPoint skip) {
-		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_TrPoints());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 * 
-	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllChoicePointNames(StateGraph, ChoicePoint)
-	 * 	getAllChoicePointNames(StateGraph, ChoicePoint)
-	 */
-	public Set<String> getAllChoicePointNames(StateGraph sg) {
-		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * @param skip a {@link ChoicePoint} to be skipped
-	 * 
-	 * @return a complete list of all names used by the {@link ChoicePoint}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 */
-	public Set<String> getAllChoicePointNames(StateGraph sg, ChoicePoint skip) {
-		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_ChPoints());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * 
-	 * @return a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 * 
-	 * @see org.eclipse.etrice.core.room.util.RoomHelpers#getAllTransitionNames(StateGraph, Transition)
-	 * 	getAllTransitionNames(StateGraph, Transition)
-	 */
-	public Set<String> getAllTransitionNames(StateGraph sg) {
-		return getAllNames(sg, null, RoomPackage.eINSTANCE.getStateGraph_Transitions());
-	}
-	
-	/**
-	 * Returns a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
-	 * including parent state graphs recursively.
-	 * 
-	 * @param sg the {@link StateGraph}
-	 * @param skip a {@link Transition} to be skipped
-	 * 
-	 * @return a complete list of all names used by the {@link Transition}s of a {@link StateGraph}
-	 * including parent state graphs recursively
-	 */
-	public Set<String> getAllTransitionNames(StateGraph sg, Transition skip) {
-		return getAllNames(sg, skip, RoomPackage.eINSTANCE.getStateGraph_Transitions());
-	}
-	
-	private <T extends StateGraphItem> Set<String> getAllNames(StateGraph sg, T skip, EReference feature) {
-		List<T> items = getAllStateGraphItems(sg, feature, false);
-		
-		HashSet<String> names = new HashSet<String>();
-		for (T item : items) {
-			if (item!=skip)
-				names.add(item.getName());
-		}
-		
-		return names;
-	}
-	
-	/**
 	 * @param pc a {@link ProtocolClass}
 	 * @return all incoming {@link Message}s including base class with base class messages first
 	 */
@@ -1217,7 +458,7 @@ public class RoomHelpers extends BaseHelpers {
 		while (ac!=null) {
 			result.addAll(0, ac.getAttributes());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1257,7 +498,7 @@ public class RoomHelpers extends BaseHelpers {
 		while (ac!=null) {
 			result.addAll(0, ac.getOperations());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1316,7 +557,7 @@ public class RoomHelpers extends BaseHelpers {
 		
 		while (ac!=null) {
 			result.addAll(0, ac.getServiceAccessPoints());
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1336,7 +577,7 @@ public class RoomHelpers extends BaseHelpers {
 		
 		while (ac!=null) {
 			result.addAll(0, ac.getServiceImplementations());
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1363,7 +604,7 @@ public class RoomHelpers extends BaseHelpers {
 				result.add(insertAt++, p.getInterfacePort());
 			}
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1395,7 +636,7 @@ public class RoomHelpers extends BaseHelpers {
 			ActorClass curr = (ActorClass) ac;
 			while (curr != null) {
 				result.addAll(0, curr.getInterfacePorts());
-				curr = curr.getBase();
+				curr = curr.getActorBase();
 			}
 			return result;
 		} else if (ac instanceof SubSystemClass)
@@ -1435,7 +676,7 @@ public class RoomHelpers extends BaseHelpers {
 				ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
 				if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
 					for (Message msg : getIncoming(item)) {
-						MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+						MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 						mif.setMessage(msg);
 						mif.setFrom(item);
 						result.add(mif);
@@ -1456,7 +697,7 @@ public class RoomHelpers extends BaseHelpers {
 		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
 		
 		result.addAll(getMessagesFromInterfaces(ac));
-		ac = ac.getBase();
+		ac = ac.getActorBase();
 		while (ac!=null) {
 			if (hasNonEmptyStateMachine(ac))
 				break;
@@ -1467,7 +708,7 @@ public class RoomHelpers extends BaseHelpers {
 					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
 					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
 						for (Message msg : getIncoming(item)) {
-							MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+							MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 							mif.setMessage(msg);
 							mif.setFrom(item);
 							result.add(mif);
@@ -1476,7 +717,7 @@ public class RoomHelpers extends BaseHelpers {
 				}
 			}
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1497,7 +738,7 @@ public class RoomHelpers extends BaseHelpers {
 					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
 					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
 						for (Message msg : getIncoming(item)) {
-							MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+							MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 							mif.setMessage(msg);
 							mif.setFrom(item);
 							result.add(mif);
@@ -1506,29 +747,10 @@ public class RoomHelpers extends BaseHelpers {
 				}
 			}
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
-	}
-
-	/**
-	 * @param ac the actor class to check
-	 * @return {@code true} if the class hierarchy is circular (i.e. a base class refers to one of its sub classes)
-	 */
-	public boolean isCircularClassHierarchy(ActorClass ac) {
-		HashSet<ActorClass> classes = new HashSet<ActorClass>();
-		classes.add(ac);
-		
-		while (ac.getBase()!=null) {
-			ac = ac.getBase();
-			if (classes.contains(ac))
-				return true;
-			
-			classes.add(ac);
-		}
-		
-		return false;
 	}
 	
 	/**
@@ -1588,7 +810,7 @@ public class RoomHelpers extends BaseHelpers {
 			result.addAll(ac.getServiceAccessPoints());
 			result.addAll(ac.getImplementedSPPs());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1611,7 +833,7 @@ public class RoomHelpers extends BaseHelpers {
 			result.addAll(ac.getInternalPorts());
 			result.addAll(ac.getInterfacePorts());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1626,7 +848,7 @@ public class RoomHelpers extends BaseHelpers {
 			refs.addAll(((ActorContainerClass)sc).getActorRefs());
 			if(sc instanceof ActorClass){
 				ActorClass base = (ActorClass)sc;
-				while((base = base.getBase()) != null)
+				while((base = base.getActorBase()) != null)
 					refs.addAll(base.getActorRefs());
 			}
 		}
@@ -1650,7 +872,7 @@ public class RoomHelpers extends BaseHelpers {
 		while (ac!=null) {
 			result.addAll(ac.getBindings());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1672,7 +894,7 @@ public class RoomHelpers extends BaseHelpers {
 		while (ac!=null) {
 			result.addAll(ac.getConnections());
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return result;
@@ -1709,6 +931,20 @@ public class RoomHelpers extends BaseHelpers {
 			parent = parent.eContainer();
 			if (parent instanceof ActorClass)
 				return (ActorClass) parent;
+		}
+		return null;
+	}
+
+	/**
+	 * @param obj an {@link EObject}
+	 * @return the {@link RoomClass} containing this object or null
+	 */
+	public RoomClass getRoomClass(EObject obj) {
+		while (obj!=null) {
+			if (obj instanceof RoomClass) {
+				return (RoomClass) obj;
+			}
+			obj = obj.eContainer();
 		}
 		return null;
 	}
@@ -1837,29 +1073,6 @@ public class RoomHelpers extends BaseHelpers {
 	 */
 	public String getBehaviorAttribute(ActorClass ac, String name, String key) {
 		return getAttribute(ac.getBehaviorAnnotations(), name, key);
-	}
-	
-	/**
-	 * Checks whether the state machine of an {@link ActorClass} is flat
-	 * in the sense that no state has a non-empty sub graph
-	 * 
-	 * @param ac the actor class
-	 * 
-	 * @return <code>true</code> if the state machine is flat
-	 */
-	public boolean hasFlatStateMachine(ActorClass ac) {
-		if (isEmpty(ac.getStateMachine()))
-			return false;
-
-		if (!ac.getStateMachine().getTrPoints().isEmpty())
-			return false;
-		
-		for (State st : ac.getStateMachine().getStates()) {
-			if (hasDirectSubStructure(st))
-				return false;
-		}
-		
-		return true;
 	}
 	
 	/**
@@ -2069,111 +1282,6 @@ public class RoomHelpers extends BaseHelpers {
 		
 		return false;
 	}
-
-	/**
-	 * return the {@link SimpleState} of a {@link State}
-	 * @param s
-	 * @return the state itself if a SimpleState or the base state for a {@link RefinedState}
-	 */
-	public SimpleState getBaseState(State s) {
-		if (s instanceof SimpleState)
-			return (SimpleState) s;
-		else if (s instanceof RefinedState)
-			return getBaseState(((RefinedState) s).getTarget());
-		else
-			return null;
-	}
-
-	/**
-	 * Returns a list of target states of a {@link RefinedState} recursively.
-	 * 
-	 * @param rs the refined state
-	 * 
-	 * @return a list of target states of a {@link RefinedState} recursively
-	 */
-	public List<State> getReferencedStatesRecursively(RefinedState rs) {
-		ArrayList<State> result = new ArrayList<State>();
-		
-		State target = rs.getTarget();
-		result.add(target);
-		
-		if (target instanceof RefinedState) {
-			List<State> refs = getReferencedStatesRecursively((RefinedState) target);
-			result.addAll(refs);
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Checks whether a {@link RefinedState} references a state recursively.
-	 * 
-	 * @param rs the refined state
-	 * @param referenced the potential target state
-	 * 
-	 * @return <code>true</code> if a state is referenced recursively by a refined state
-	 */
-	public boolean referencesStateRecursively(RefinedState rs, State referenced) {
-		State target = rs.getTarget();
-		if (target==referenced)
-			return true;
-		
-		if (target instanceof SimpleState)
-			return false;
-		
-		if (target instanceof RefinedState)
-			return referencesStateRecursively((RefinedState) target, referenced);
-		
-		assert(false): "unexpected sub type";
-		return false;
-	}
-
-	/**
-	 * This highly specialized method is for <b>internal use only</b>.<br/><br/>
-	 * 
-	 * All refined states of the state machine of an actor class (without inherited states)
-	 * are checked if they are semantically nested in another state of the same state machine.
-	 * 
-	 * @param ac the actor class
-	 * @param nameProvider a function that returns the full path of a refined state
-	 * 
-	 * @return a map of refined states to potential parent refined states
-	 */
-	public Map<RefinedState, RefinedState> getRefinedStatesToRelocate(ActorClass ac, Function<RefinedState, String> nameProvider) {
-		
-		// collect RefinedStates and some information
-		ArrayList<RefinedState> refinedStates = new ArrayList<RefinedState>();
-		ArrayList<String> paths = new ArrayList<String>();
-		HashMap<String, RefinedState> path2rs = new HashMap<String, RefinedState>();
-		TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
-		while (it.hasNext()) {
-			EObject obj = it.next();
-			if (obj instanceof RefinedState) {
-				refinedStates.add((RefinedState) obj);
-				String path = nameProvider.apply((RefinedState) obj);
-				paths.add(path);
-				path2rs.put(path, (RefinedState) obj);
-			}
-		}
-		
-		// we sort the paths to have paths with same beginning in descending length
-		java.util.Collections.sort(paths, java.util.Collections.reverseOrder());
-		
-		// find the best matching context
-		HashMap<RefinedState, RefinedState> rs2parent = new HashMap<RefinedState, RefinedState>();
-		for (RefinedState rs : refinedStates) {
-			String fullPath = nameProvider.apply(rs);
-			for (String path : paths) {
-				if (!fullPath.equals(path) && fullPath.startsWith(path) && fullPath.charAt(path.length())==RoomNameProvider.PATH_SEP.charAt(0)) {
-					RefinedState parent = path2rs.get(path);
-					if (!(parent.getSubgraph()!=null && parent.getSubgraph().getStates().contains(rs)))
-						rs2parent.put(rs, parent);
-					break;
-				}
-			}
-		}
-		return rs2parent;
-	}
 	
 	/**
 	 * Returns the {@link ProtocolClass} of an {@link InterfaceItem}.
@@ -2233,7 +1341,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return the recursive base class entry code of a {@link RefinedState} as string
 	 */
 	public String getBaseEntryCode(RefinedState state) {
-		return getBaseCode(state, RoomPackage.Literals.STATE__ENTRY_CODE);
+		return getBaseCode(state, FSMPackage.Literals.STATE__ENTRY_CODE);
 	}
 
 	/**
@@ -2244,7 +1352,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return the recursive base class exit code of a {@link RefinedState} as string
 	 */
 	public String getBaseExitCode(RefinedState state) {
-		return getBaseCode(state, RoomPackage.Literals.STATE__EXIT_CODE);
+		return getBaseCode(state, FSMPackage.Literals.STATE__EXIT_CODE);
 	}
 
 	/**
@@ -2255,7 +1363,7 @@ public class RoomHelpers extends BaseHelpers {
 	 * @return the recursive base class do code of a {@link RefinedState} as string
 	 */
 	public String getBaseDoCode(RefinedState state) {
-		return getBaseCode(state, RoomPackage.Literals.STATE__DO_CODE);
+		return getBaseCode(state, FSMPackage.Literals.STATE__DO_CODE);
 	}
 	
 	private String getBaseCode(RefinedState state, EStructuralFeature feat) {
@@ -2405,7 +1513,7 @@ public class RoomHelpers extends BaseHelpers {
 		if (!includeOwn) {
 			if (ac==baseAC)
 				return null;
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		while (ac!=null) {
@@ -2420,7 +1528,7 @@ public class RoomHelpers extends BaseHelpers {
 						result.insert(0, getDetailCode(rt.getAction()));
 				}
 			
-			ac = ac.getBase();
+			ac = ac.getActorBase();
 		}
 		
 		return null;
@@ -2618,7 +1726,7 @@ public class RoomHelpers extends BaseHelpers {
 			if (ac2==ac1)
 				return true;
 			
-			ac1 = ac1.getBase();
+			ac1 = ac1.getActorBase();
 		}
 		return false;
 	}

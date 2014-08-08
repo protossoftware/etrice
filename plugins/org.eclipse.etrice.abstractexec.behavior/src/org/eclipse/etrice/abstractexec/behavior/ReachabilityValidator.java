@@ -29,7 +29,7 @@ import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 

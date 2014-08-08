@@ -13,8 +13,8 @@
 package org.eclipse.etrice.generator.base;
 
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 

@@ -95,8 +95,8 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 				if (ar!=ref && ar.getName().equals(name))
 					return true;
 			}
-			if (ac.getBase()!=null)
-				return nameExists(ac.getBase(), name);
+			if (ac.getActorBase()!=null)
+				return nameExists(ac.getActorBase(), name);
 			
 			return false;
 		}

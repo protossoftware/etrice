@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,7 +113,6 @@ public interface ExpandedRefinedState extends SimpleState {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * For <b>internal use</b> only.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

@@ -39,15 +39,15 @@ import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolSemantics;
-import org.eclipse.etrice.core.room.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.State;
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -249,7 +249,7 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String text(ActorClass ac) {
-		String base = ac.getBase()!=null? " extends "+ac.getBase().getName():"";
+		String base = ac.getBase()!=null? " extends "+ac.getActorBase().getName():"";
 		return ac.getName()+base;
 	}
 	

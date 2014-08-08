@@ -16,14 +16,14 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -248,11 +248,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append(_name_4, "\t");
     _builder.append(" : public ");
     {
-      ActorClass _base = ac.getBase();
-      boolean _notEquals = (!Objects.equal(_base, null));
+      ActorClass _actorBase = ac.getActorBase();
+      boolean _notEquals = (!Objects.equal(_actorBase, null));
       if (_notEquals) {
-        ActorClass _base_1 = ac.getBase();
-        String _name_5 = _base_1.getName();
+        ActorClass _actorBase_1 = ac.getActorBase();
+        String _name_5 = _actorBase_1.getName();
         _builder.append(_name_5, "\t");
       } else {
         _builder.append("etRuntime::ActorClassBase");
@@ -484,16 +484,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   private String generateConstructorInitalizerList(final ActorClass ac) {
     ArrayList<CharSequence> initializerList = new ArrayList<CharSequence>();
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0])");
       initializerList.add(_builder);
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
-      ActorClass _base_1 = ac.getBase();
-      String _name = _base_1.getName();
+      ActorClass _actorBase_1 = ac.getActorBase();
+      String _name = _actorBase_1.getName();
       _builder_1.append(_name, "");
       _builder_1.append("(*this, parent, name, port_addr, peer_addr)");
       initializerList.add(_builder_1);
@@ -619,8 +619,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       ActorClass _actorClass = xpac.getActorClass();
-      ActorCommunicationType _commType = _actorClass.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType = _actorClass.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();

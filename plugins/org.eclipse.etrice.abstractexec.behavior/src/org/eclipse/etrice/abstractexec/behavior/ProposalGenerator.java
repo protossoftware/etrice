@@ -19,14 +19,14 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SemanticsRule;
-import org.eclipse.etrice.core.room.State;
 
 public class ProposalGenerator {
 	private ExpandedActorClass xpac;
@@ -76,12 +76,12 @@ public class ProposalGenerator {
 			Set<Message> messages = new HashSet<Message>();
 			for (ActiveTrigger t : xpac.getActiveTriggers(st))
 				if (t.getIfitem().equals(port))
-					messages.add(t.getMsg());
+					messages.add((Message)t.getMsg());
 			// check if every rule has its messages
 			if (rules.getPortList().contains(port)) {
 				for (SemanticsRule curRule : rules.getRulesForPort(port)) {
 					if (!messages.contains(curRule.getMsg())) {
-						MessageFromIf mif = RoomFactory.eINSTANCE
+						MessageFromIf mif = FSMFactory.eINSTANCE
 								.createMessageFromIf();
 						mif.setFrom(port);
 						mif.setMessage(curRule.getMsg());

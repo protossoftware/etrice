@@ -14,14 +14,14 @@ package org.eclipse.etrice.core.genmodel.etricegen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.Guard;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.Guard;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,12 +60,12 @@ public interface ActiveTrigger extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Msg</em>' reference.
-	 * @see #setMsg(Message)
+	 * @see #setMsg(AbstractMessage)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Msg()
 	 * @model
 	 * @generated
 	 */
-	Message getMsg();
+	AbstractMessage getMsg();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getMsg <em>Msg</em>}' reference.
@@ -75,7 +75,7 @@ public interface ActiveTrigger extends EObject {
 	 * @see #getMsg()
 	 * @generated
 	 */
-	void setMsg(Message value);
+	void setMsg(AbstractMessage value);
 
 	/**
 	 * Returns the value of the '<em><b>Ifitem</b></em>' reference.
@@ -85,12 +85,12 @@ public interface ActiveTrigger extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ifitem</em>' reference.
-	 * @see #setIfitem(InterfaceItem)
+	 * @see #setIfitem(AbstractInterfaceItem)
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Ifitem()
 	 * @model
 	 * @generated
 	 */
-	InterfaceItem getIfitem();
+	AbstractInterfaceItem getIfitem();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getIfitem <em>Ifitem</em>}' reference.
@@ -100,7 +100,7 @@ public interface ActiveTrigger extends EObject {
 	 * @see #getIfitem()
 	 * @generated
 	 */
-	void setIfitem(InterfaceItem value);
+	void setIfitem(AbstractInterfaceItem value);
 
 	/**
 	 * Returns the value of the '<em><b>Trigger</b></em>' attribute.
@@ -129,7 +129,7 @@ public interface ActiveTrigger extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Transitions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.TriggeredTransition}.
+	 * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.TriggeredTransition}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * An ordered list of {@link Transition}s with this trigger.

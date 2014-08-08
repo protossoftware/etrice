@@ -1,0 +1,61 @@
+/**
+ * Copyright (c) 2014 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert
+ */
+package org.eclipse.etrice.core.fsm.postprocessing;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.GeneratedMetamodel;
+
+@SuppressWarnings("all")
+public class ImplPostprocessor {
+  public boolean process(final GeneratedMetamodel metamodel) {
+    boolean _xblockexpression = false;
+    {
+      final EPackage fsmPackage = metamodel.getEPackage();
+      final EClass state = PostprocessingHelpers.getClass(fsmPackage, "State");
+      EClassifier _eClassifier = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("return (this instanceof <%org.eclipse.etrice.core.fsm.fSM.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof <%org.eclipse.etrice.core.fsm.fSM.RefinedState%>)? (((RefinedState)this).getTarget()==null? \"\":((RefinedState)this).getTarget().getName()) :\"\";");
+      PostprocessingHelpers.addOperation(state, "getName", _eClassifier, Integer.valueOf(1), _builder.toString());
+      final EClass stateGraphItem = PostprocessingHelpers.getClass(fsmPackage, "StateGraphItem");
+      EClassifier _eClassifier_1 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.State%>) ");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("return ((State)this).getName();");
+      _builder_1.newLine();
+      _builder_1.append("else if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.TrPoint%>)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("return ((TrPoint)this).getName();");
+      _builder_1.newLine();
+      _builder_1.append("else if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.ChoicePoint%>)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("return ((ChoicePoint)this).getName();");
+      _builder_1.newLine();
+      _builder_1.append("else if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.Transition%>)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("return ((Transition)this).getName();");
+      _builder_1.newLine();
+      _builder_1.append("return \"\";");
+      _builder_1.newLine();
+      _xblockexpression = PostprocessingHelpers.addOperation(stateGraphItem, "getName", _eClassifier_1, Integer.valueOf(1), _builder_1.toString());
+    }
+    return _xblockexpression;
+  }
+}

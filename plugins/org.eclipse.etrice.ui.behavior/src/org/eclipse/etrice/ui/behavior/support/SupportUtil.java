@@ -15,30 +15,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
+import org.eclipse.etrice.core.fsm.fSM.ExitPoint;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
+import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ChoicepointTerminal;
-import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExitPoint;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.StateTerminal;
-import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.TrPointTerminal;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionTerminal;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.room.util.RoomUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
@@ -65,7 +66,6 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.ILinkService;
-import org.eclipse.core.runtime.Assert;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -234,7 +234,7 @@ public class SupportUtil {
 		RefinedState rs = getRefinedStateFor(s, ac);
 		
 		if (rs.getSubgraph()==null)
-			rs.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+			rs.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 	
 		return rs.getSubgraph();
 	}
@@ -261,7 +261,7 @@ public class SupportUtil {
 				if (target2rs.containsKey(parent)) {
 					RefinedState bestFitting = target2rs.get(parent);
 					if (bestFitting.getSubgraph()==null)
-						bestFitting.setSubgraph(RoomFactory.eINSTANCE.createStateGraph());
+						bestFitting.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 					sg = bestFitting.getSubgraph();
 					break;
 				}
@@ -270,7 +270,7 @@ public class SupportUtil {
 			if (sg==null)
 				sg = ac.getStateMachine();
 			
-			rs = RoomFactory.eINSTANCE.createRefinedState();
+			rs = FSMFactory.eINSTANCE.createRefinedState();
 			rs.setTarget(s);
 			sg.getStates().add(rs);
 		}
@@ -322,25 +322,25 @@ public class SupportUtil {
 				Object parent = fp.getBusinessObjectForPictogramElement((ContainerShape) anchor.getParent().eContainer());
 				if (parent instanceof State) {
 					State state = (parent instanceof RefinedState)? ((RefinedState)parent).getTarget() : (State)parent;
-					SubStateTrPointTerminal sstpt = RoomFactory.eINSTANCE.createSubStateTrPointTerminal();
+					SubStateTrPointTerminal sstpt = FSMFactory.eINSTANCE.createSubStateTrPointTerminal();
 					sstpt.setState(state);
 					sstpt.setTrPoint((TrPoint) obj);
 					return sstpt;
 				}
 				else {
-					TrPointTerminal tpt = RoomFactory.eINSTANCE.createTrPointTerminal();
+					TrPointTerminal tpt = FSMFactory.eINSTANCE.createTrPointTerminal();
 					tpt.setTrPoint((TrPoint) obj);
 					return tpt;
 				}
 			}
 			else if (obj instanceof State) {
 				State state = (obj instanceof RefinedState)? ((RefinedState)obj).getTarget() : (State)obj;
-				StateTerminal st = RoomFactory.eINSTANCE.createStateTerminal();
+				StateTerminal st = FSMFactory.eINSTANCE.createStateTerminal();
 				st.setState(state);
 				return st;
 			}
 			else if (obj instanceof ChoicePoint) {
-				ChoicepointTerminal ct = RoomFactory.eINSTANCE.createChoicepointTerminal();
+				ChoicepointTerminal ct = FSMFactory.eINSTANCE.createChoicepointTerminal();
 				ct.setCp((ChoicePoint) obj);
 				return ct;
 			}

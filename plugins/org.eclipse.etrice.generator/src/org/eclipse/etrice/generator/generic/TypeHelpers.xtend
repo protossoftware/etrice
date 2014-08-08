@@ -145,10 +145,10 @@ class TypeHelpers {
 	def String getAttrClassConfigValue(List<Attribute> attributePath, ActorClass actor, boolean inherite){
 		var result = dataConfigExt.getAttrClassConfigValue(actor, attributePath)
 		if(result == null && inherite){
-			var base = actor.base
+			var base = actor.actorBase
 			while(base != null && result == null){
 				result = dataConfigExt.getAttrClassConfigValue(base, attributePath)
-				base = base.base
+				base = base.actorBase
 			}
 		}
 		

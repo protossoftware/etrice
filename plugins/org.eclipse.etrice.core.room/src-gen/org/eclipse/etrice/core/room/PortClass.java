@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Port Class</b></em>'.

@@ -17,27 +17,28 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.Guard;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Guard;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionPoint;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
@@ -198,7 +199,7 @@ public class GenericStateMachineGenerator {
     list.add(_pair);
     for (final MessageFromIf mif : triggers) {
       String _triggerCodeName = xpac.getTriggerCodeName(mif);
-      InterfaceItem _from = mif.getFrom();
+      AbstractInterfaceItem _from = mif.getFrom();
       String _name = _from.getName();
       String _plus = ("IFITEM_" + _name);
       String _plus_1 = (_plus + " + EVT_SHIFT*");
@@ -234,10 +235,10 @@ public class GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;
@@ -1148,14 +1149,14 @@ public class GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       ActorClass _actorClass = xpac.getActorClass();
-      ActorCommunicationType _commType = _actorClass.getCommType();
-      boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType = _actorClass.getCommType();
+      boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
       ActorClass _actorClass_1 = xpac.getActorClass();
-      ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-      boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
+      ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
+      boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
       ActorClass _actorClass_2 = xpac.getActorClass();
-      ActorCommunicationType _commType_2 = _actorClass_2.getCommType();
-      boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
+      ComponentCommunicationType _commType_2 = _actorClass_2.getCommType();
+      boolean dataDriven = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("switch (getState(");
       String _selfPointer = this.langExt.selfPointer(false);
@@ -1383,8 +1384,8 @@ public class GenericStateMachineGenerator {
         {
           if (needData) {
             _builder.append("{ ");
-            Message _msg = at.getMsg();
-            String _typedDataDefinition = this.langExt.getTypedDataDefinition(_msg);
+            AbstractMessage _msg = at.getMsg();
+            String _typedDataDefinition = this.langExt.getTypedDataDefinition(((Message) _msg));
             _builder.append(_typedDataDefinition, "\t");
           }
         }
@@ -1688,8 +1689,8 @@ public class GenericStateMachineGenerator {
         boolean _usesInheritance_1 = this.langExt.usesInheritance();
         if (_usesInheritance_1) {
           ActorClass _actorClass_1 = xpac.getActorClass();
-          ActorClass _base = _actorClass_1.getBase();
-          final String baseName = _base.getName();
+          ActorClass _actorBase = _actorClass_1.getActorBase();
+          final String baseName = _actorBase.getName();
           DetailCode _inheritedEntry_1 = rs.getInheritedEntry();
           boolean _hasDetailCode = this._roomHelpers.hasDetailCode(_inheritedEntry_1);
           if (_hasDetailCode) {
@@ -1840,10 +1841,10 @@ public class GenericStateMachineGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;

@@ -17,11 +17,12 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
@@ -36,7 +37,6 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.base.IGeneratorFileIo;
@@ -170,10 +170,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean async = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean dataDriven = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean async = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
       boolean _or = false;
       boolean _and = false;
       boolean _and_1 = false;
@@ -1145,12 +1145,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
-      ActorCommunicationType _commType_2 = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
+      ComponentCommunicationType _commType_2 = ac.getCommType();
+      final boolean dataDriven = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;

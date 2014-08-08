@@ -11,25 +11,26 @@
  *******************************************************************************/
 package org.eclipse.etrice.core.genmodel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.SAP;
 import org.junit.Before;
 import org.junit.Test;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SAP;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
 
 public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
@@ -56,15 +57,15 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		checkSize(7, RoomPackage.eINSTANCE.getSimpleState());
-		checkSize(1, RoomPackage.eINSTANCE.getChoicePoint());
-		checkSize(4, RoomPackage.eINSTANCE.getTransitionPoint());
-		checkSize(1, RoomPackage.eINSTANCE.getEntryPoint());
-		checkSize(1, RoomPackage.eINSTANCE.getExitPoint());
-		checkSize(2, RoomPackage.eINSTANCE.getInitialTransition());
-		checkSize(11, RoomPackage.eINSTANCE.getTriggeredTransition());
-		checkSize(3, RoomPackage.eINSTANCE.getContinuationTransition());
-		checkSize(2, RoomPackage.eINSTANCE.getCPBranchTransition());
+		checkSize(7, FSMPackage.eINSTANCE.getSimpleState());
+		checkSize(1, FSMPackage.eINSTANCE.getChoicePoint());
+		checkSize(4, FSMPackage.eINSTANCE.getTransitionPoint());
+		checkSize(1, FSMPackage.eINSTANCE.getEntryPoint());
+		checkSize(1, FSMPackage.eINSTANCE.getExitPoint());
+		checkSize(2, FSMPackage.eINSTANCE.getInitialTransition());
+		checkSize(11, FSMPackage.eINSTANCE.getTriggeredTransition());
+		checkSize(3, FSMPackage.eINSTANCE.getContinuationTransition());
+		checkSize(2, FSMPackage.eINSTANCE.getCPBranchTransition());
 	}
 	
 	@Test
@@ -76,7 +77,7 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testGraph() {
-		ArrayList<EObject> states = instances.get(RoomPackage.eINSTANCE.getSimpleState());
+		ArrayList<EObject> states = instances.get(FSMPackage.eINSTANCE.getSimpleState());
 //		for (EObject obj : states) {
 //			LogicalSystem.out.println("state "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}
@@ -95,7 +96,7 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 		
 		assertEquals("active triggers", 3, xpac.getActiveTriggers(s).size());
 
-		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
+		ArrayList<EObject> cps = instances.get(FSMPackage.eINSTANCE.getChoicePoint());
 		
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
 		assertEquals("choicepoint name", "CP1", roomNameProvider.getFullPath(cp));
@@ -108,7 +109,7 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testChains() {
-		ArrayList<EObject> cts = instances.get(RoomPackage.eINSTANCE.getContinuationTransition());
+		ArrayList<EObject> cts = instances.get(FSMPackage.eINSTANCE.getContinuationTransition());
 //		for (EObject obj : cts) {
 //			LogicalSystem.out.println("ct "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}

@@ -36,7 +36,7 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 

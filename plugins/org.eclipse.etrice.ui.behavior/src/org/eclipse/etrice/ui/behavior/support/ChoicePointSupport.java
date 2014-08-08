@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.ChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -123,7 +123,7 @@ public class ChoicePointSupport {
 				}
 
 				// create choice point and add it
-		    	ChoicePoint cp = RoomFactory.eINSTANCE.createChoicePoint();
+		    	ChoicePoint cp = FSMFactory.eINSTANCE.createChoicePoint();
 				cp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueChoicePointName(sg));
 				sg.getChPoints().add(cp);
 

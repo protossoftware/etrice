@@ -23,14 +23,16 @@ Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.fsm,
- org.eclipse.etrice.core.fsm.services,
  org.eclipse.etrice.core.fsm.fSM,
  org.eclipse.etrice.core.fsm.fSM.impl,
  org.eclipse.etrice.core.fsm.fSM.util,
- org.eclipse.etrice.core.fsm.serializer,
+ org.eclipse.etrice.core.fsm.formatting,
+ org.eclipse.etrice.core.fsm.generator,
+ org.eclipse.etrice.core.fsm.naming,
  org.eclipse.etrice.core.fsm.parser.antlr,
  org.eclipse.etrice.core.fsm.parser.antlr.internal,
- org.eclipse.etrice.core.fsm.validation,
  org.eclipse.etrice.core.fsm.scoping,
- org.eclipse.etrice.core.fsm.generator,
- org.eclipse.etrice.core.fsm.formatting
+ org.eclipse.etrice.core.fsm.serializer,
+ org.eclipse.etrice.core.fsm.services,
+ org.eclipse.etrice.core.fsm.util,
+ org.eclipse.etrice.core.fsm.validation

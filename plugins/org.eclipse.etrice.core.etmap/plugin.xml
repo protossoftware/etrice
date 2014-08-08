@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipse.org/etrice/core/etmap/ETMap" 
        class = "org.eclipse.etrice.core.etmap.eTMap.ETMapPackage"
-       genModel = "org/eclipse/etrice/core/etmap/ETMap.genmodel" /> 
+       genModel = "src-gen/org/eclipse/etrice/core/etmap/ETMap.genmodel" /> 
 	
   </extension>
 

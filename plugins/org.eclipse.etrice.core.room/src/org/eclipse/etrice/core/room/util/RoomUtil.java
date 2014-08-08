@@ -13,126 +13,26 @@
 package org.eclipse.etrice.core.room.util;
 
 import java.util.HashSet;
-import java.util.Set;
 
+import org.eclipse.etrice.core.fsm.util.FSMUtil;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-
-import com.google.inject.Inject;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class RoomUtil {
-
-	@Inject
-	private RoomHelpers roomHelpers;
-
-	/**
-	 * @param sg a {@link StateGraph} serving as name space
-	 * @return a unique name for a new {@link Transition} (has to be unique among
-	 * 		all {@link StateGraphItem}s of the state graph)
-	 */
-	public String getUniqueTransitionName(StateGraph sg) {
-		Set<String> names = roomHelpers.getAllNames(sg);
-		
-		for (int i = 0; i < 1000; i++) {
-			String name = "tr"+i;
-			if (!names.contains(name))
-				return name;
-		}
-		
-		return "not_unique";
-	}
-
-	/**
-	 * @param sg a {@link StateGraph} serving as name space
-	 * @return a unique name for a new {@link InitialTransition} (has to be unique among
-	 * 		all {@link StateGraphItem}s of the state graph)
-	 */
-	public String getUniqueInitialTransitionName(StateGraph sg) {
-		Set<String> names = roomHelpers.getAllNames(sg);
-		
-		if (!names.contains("init"))
-			return "init";
-		
-		for (int i = 0; i < 1000; i++) {
-			String name = "init"+i;
-			if (!names.contains(name))
-				return name;
-		}
-		
-		return "not_unique";
-	}
-
-	/**
-	 * @param sg a {@link StateGraph} serving as name space
-	 * @return a unique name for a new {@link ChoicePoint} (has to be unique among
-	 * 		all {@link StateGraphItem}s of the state graph)
-	 */
-	public String getUniqueChoicePointName(StateGraph sg) {
-		Set<String> names = roomHelpers.getAllNames(sg);
-		
-		for (int i = 0; i < 1000; i++) {
-			String name = "cp"+i;
-			if (!names.contains(name))
-				return name;
-		}
-		
-		return "not_unique";
-	}
-
-	/**
-	 * @param sg a {@link StateGraph} serving as name space
-	 * @return a unique name for a new {@link TrPoint} (has to be unique among
-	 * 		all {@link StateGraphItem}s of the state graph)
-	 */
-	public String getUniqueTrPointName(StateGraph sg) {
-		Set<String> names = roomHelpers.getAllNames(sg);
-		
-		for (int i = 0; i < 1000; i++) {
-			String name = "tp"+i;
-			if (!names.contains(name))
-				return name;
-		}
-		
-		return "not_unique";
-	}
-
-	/**
-	 * @param sg a {@link StateGraph} serving as name space
-	 * @return a unique name for a new {@link State} (has to be unique among
-	 * 		all {@link StateGraphItem}s of the state graph)
-	 */
-	public String getUniqueStateName(StateGraph sg) {
-		Set<String> names = roomHelpers.getAllNames(sg);
-		
-		for (int i = 0; i < 1000; i++) {
-			String name = "state"+i;
-			if (!names.contains(name))
-				return name;
-		}
-		
-		return "not_unique";
-	}
+public class RoomUtil extends FSMUtil {
 
 	/**
 	 * @param sc a {@link StructureClass}
@@ -183,7 +83,7 @@ public class RoomUtil {
 					names.add(spp.getName());
 				}
 				
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			}
 			while (ac!=null);
 		}

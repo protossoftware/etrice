@@ -7,6 +7,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Actor Class</b></em>'.
@@ -52,9 +54,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInternalPorts <em>Internal Ports</em>}</li>
@@ -65,7 +64,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,91 +71,8 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * @model
  * @generated
  */
-public interface ActorClass extends ActorContainerClass
+public interface ActorClass extends ActorContainerClass, ModelComponent
 {
-  /**
-   * Returns the value of the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>If {@code true} this actor class can not be instantiated and can only be base class
-   * for other actor classes.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Abstract</em>' attribute.
-   * @see #setAbstract(boolean)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Abstract()
-   * @model
-   * @generated
-   */
-  boolean isAbstract();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Abstract</em>' attribute.
-   * @see #isAbstract()
-   * @generated
-   */
-  void setAbstract(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Comm Type</b></em>' attribute.
-   * The literals are from the enumeration {@link org.eclipse.etrice.core.room.ActorCommunicationType}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>The communication type of this actor class.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Comm Type</em>' attribute.
-   * @see org.eclipse.etrice.core.room.ActorCommunicationType
-   * @see #setCommType(ActorCommunicationType)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_CommType()
-   * @model
-   * @generated
-   */
-  ActorCommunicationType getCommType();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comm Type</em>' attribute.
-   * @see org.eclipse.etrice.core.room.ActorCommunicationType
-   * @see #getCommType()
-   * @generated
-   */
-  void setCommType(ActorCommunicationType value);
-
-  /**
-   * Returns the value of the '<em><b>Base</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>The base class from which all attributes, operations, ports, SAPs
-   * and state machine are inherited.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Base</em>' reference.
-   * @see #setBase(ActorClass)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Base()
-   * @model
-   * @generated
-   */
-  ActorClass getBase();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Base</em>' reference.
-   * @see #getBase()
-   * @generated
-   */
-  void setBase(ActorClass value);
-
   /**
    * Returns the value of the '<em><b>Interface Ports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.Port}.
@@ -339,32 +254,6 @@ public interface ActorClass extends ActorContainerClass
   EList<StandardOperation> getOperations();
 
   /**
-   * Returns the value of the '<em><b>State Machine</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is the actor's optional state machine.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>State Machine</em>' containment reference.
-   * @see #setStateMachine(StateGraph)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_StateMachine()
-   * @model containment="true"
-   * @generated
-   */
-  StateGraph getStateMachine();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State Machine</em>' containment reference.
-   * @see #getStateMachine()
-   * @generated
-   */
-  void setStateMachine(StateGraph value);
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
@@ -390,5 +279,14 @@ public interface ActorClass extends ActorContainerClass
    * @generated
    */
   EList<SPP> getImplementedSPPs();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (ActorClass)getBase();\r\n'"
+   * @generated
+   */
+  ActorClass getActorBase();
 
 } // ActorClass

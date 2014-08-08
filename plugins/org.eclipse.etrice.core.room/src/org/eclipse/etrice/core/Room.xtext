@@ -191,12 +191,7 @@ OutSemanticsRule: 'out' ':' msg=[Message|ID]
 // **************************************************************
 // actor class
 
-enum ActorCommunicationType:
-	EVENT_DRIVEN='eventdriven' |
-	DATA_DRIVEN='datadriven' |
-	ASYNCHRONOUS='async' |
-	SYNCHRONOUS='sync'
-;
+ModelComponent: ActorClass;
 
 // some notes on ports
 //
@@ -206,7 +201,7 @@ enum ActorCommunicationType:
 // p in i and p in s ==> external end port
 // since double containment is not supported we decided to define external ports as reference to interface ports
 ActorClass:
-	(abstract?='abstract'? & commType=ActorCommunicationType?)
+	(abstract?='abstract'? & commType=ComponentCommunicationType?)
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		annotations+=Annotation*
 		('Interface' '{'
@@ -326,150 +321,13 @@ enum ReferenceType:
 ;
 
 // **************************************************************
-// state machine
+// concrete message and interface item for state machines 
 
-StateGraphNode: State | ChoicePoint | TrPoint;
-StateGraphItem: StateGraphNode | Transition;
+AbstractMessage: Message;
+AbstractInterfaceItem: InterfaceItem;
 
-State: SimpleState | RefinedState;
-
-StateGraph:
-	{StateGraph}
-	'{'
-		(
-			states+=State |
-			trPoints+=TrPoint |
-			chPoints+=ChoicePoint |
-			transitions+=Transition |
-			refinedTransitions+=RefinedTransition
-		)*
-	'}';
-
-StateMachine returns StateGraph:
-	{StateGraph}
-	'StateMachine' '{'
-		(
-			states+=State |
-			trPoints+=TrPoint |
-			chPoints+=ChoicePoint |
-			transitions+=Transition |
-			refinedTransitions+=RefinedTransition
-		)*
-	'}';
-
-SimpleState:
-	'State' name=ID (docu=Documentation)? ('{'
-		('entry' entryCode=DetailCode)?
-		('exit' exitCode=DetailCode)?
-		('do' doCode=DetailCode)?
-		('subgraph' subgraph=StateGraph)?
-	'}')?;
-
-RefinedState:
-	'RefinedState' target=[State|FQN] (docu=Documentation)? '{'
-		('entry' entryCode=DetailCode)?
-		('exit' exitCode=DetailCode)?
-		('do' doCode=DetailCode)?
-		('subgraph' subgraph=StateGraph)?
-	'}';
-
-// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
-// super() keyword or flag like in Trice
-DetailCode:
-	{DetailCode}
-	'{'
-		lines+=STRING*
-	'}';
-
-TrPoint: TransitionPoint | EntryPoint | ExitPoint;
-
-TransitionPoint:
-	(handler?='handler')? 'TransitionPoint' name=ID;
-
-EntryPoint:
-	'EntryPoint' name=ID;
-
-ExitPoint:
-	'ExitPoint' name=ID;
-
-ChoicePoint:
-	'ChoicePoint' name=ID (docu=Documentation)?;
-
-Transition: InitialTransition | NonInitialTransition;
-NonInitialTransition: TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
-TransitionChainStartTransition: TriggeredTransition | GuardedTransition;
-
-InitialTransition:
-	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
-	(docu=Documentation)?
-	'{'
-		('action' action=DetailCode)? 
-	'}';
-
-ContinuationTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
-	(docu=Documentation)?
-	('{'
-		('action' action=DetailCode)? 
-	'}')?;
-
-TriggeredTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
-	(docu=Documentation)?
-	'{'
-		'triggers' '{'
-			triggers+=Trigger ('or' triggers+=Trigger)*
-		'}'
-		('action' action=DetailCode)? 
-	'}';
-
-GuardedTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
-	(docu=Documentation)?
-	'{'
-		'guard' guard=DetailCode
-		('action' action=DetailCode)? 
-	'}';
-
-CPBranchTransition:
-	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
-	(docu=Documentation)?
-	'{'
-		'cond' condition=DetailCode
-		('action' action=DetailCode)? 
-	'}';
-
-// by validation RefinedTransition can only be contained in the top level state graph
-RefinedTransition:
-	'RefinedTransition' target=[Transition|FQN]
-	(docu=Documentation)?
-	'{'
-		'action' action=DetailCode
-	'}'
-;
-
-TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
-
-StateTerminal:
-	state=[State|ID];
-TrPointTerminal:
-	'my' trPoint=[TrPoint|ID];
-SubStateTrPointTerminal:
-	trPoint=[TrPoint|ID] 'of' state=[State|ID];
-ChoicepointTerminal:
-	'cp' cp=[ChoicePoint|ID];
-
-Trigger:
-		'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*
-		(guard=Guard)? '>'
-;
-
-MessageFromIf:
-	message=[Message|ID] ':' from=[InterfaceItem|ID]
-;
-
-Guard:
-	'guard' guard=DetailCode;
+// **************************************************************
+// general
 
 // the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
 // (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)

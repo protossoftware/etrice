@@ -4,6 +4,8 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Message Handler</b></em>'.

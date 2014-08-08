@@ -14,9 +14,9 @@ package org.eclipse.etrice.ui.behavior.support;
 
 import java.util.List;
 
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)

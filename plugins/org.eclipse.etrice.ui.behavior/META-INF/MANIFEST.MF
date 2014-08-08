@@ -7,6 +7,7 @@ Bundle-Activator: org.eclipse.etrice.ui.behavior.Activator
 Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.5.0",
  org.eclipse.etrice.core.common.ui;bundle-version="0.5.0",
  org.eclipse.etrice.ui.common;bundle-version="0.5.0",
+ org.eclipse.etrice.core.fsm;bundle-version="0.5.0",
  org.eclipse.graphiti;bundle-version="0.8.0",
  org.eclipse.graphiti.ui;bundle-version="0.8.0",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",

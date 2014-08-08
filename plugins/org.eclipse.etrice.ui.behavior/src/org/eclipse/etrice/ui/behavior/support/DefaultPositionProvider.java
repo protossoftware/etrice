@@ -19,13 +19,13 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -61,7 +61,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	private int posX, posY;
 	
 	public DefaultPositionProvider(ActorClass ac) {
-		mapPositions(ac.getBase());
+		mapPositions(ac.getActorBase());
 	}
 	
 	/* (non-Javadoc)
@@ -283,7 +283,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 		}
 		
 		// recursion
-		mapPositions(ac.getBase());
+		mapPositions(ac.getActorBase());
 	}
 
 	private int getMargin(StateGraphNode node) {

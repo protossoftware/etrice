@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.tests
 Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.behavior.BehaviorTestActivator
 Bundle-Vendor: Eclipse eTrice (Incubation)
-Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.5.0",
+Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="0.5.0",
+ org.eclipse.etrice.core.room;bundle-version="0.5.0",
  org.eclipse.etrice.ui.behavior;bundle-version="0.5.0",
  org.eclipse.etrice.ui.common;bundle-version="0.5.0",
  org.eclipse.etrice.ui.tests.base;bundle-version="0.5.0",

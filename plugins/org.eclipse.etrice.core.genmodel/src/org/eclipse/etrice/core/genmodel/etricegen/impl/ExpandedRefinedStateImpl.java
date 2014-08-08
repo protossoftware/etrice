@@ -17,18 +17,18 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
+import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.impl.SimpleStateImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.NonInitialTransition;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateTerminal;
-import org.eclipse.etrice.core.room.SubStateTrPointTerminal;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.impl.SimpleStateImpl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -283,7 +283,7 @@ public class ExpandedRefinedStateImpl extends SimpleStateImpl implements Expande
 		if (fromSG!=null) {
 			StateGraph toSG = getSubgraph();
 			if (toSG==null) {
-				toSG = RoomFactory.eINSTANCE.createStateGraph();
+				toSG = FSMFactory.eINSTANCE.createStateGraph();
 				setSubgraph(toSG);
 			}
 			toSG.getChPoints().addAll(fromSG.getChPoints());

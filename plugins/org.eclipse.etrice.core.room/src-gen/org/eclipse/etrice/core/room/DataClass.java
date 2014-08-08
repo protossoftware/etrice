@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.etrice.core.common.base.Annotation;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Data Class</b></em>'.

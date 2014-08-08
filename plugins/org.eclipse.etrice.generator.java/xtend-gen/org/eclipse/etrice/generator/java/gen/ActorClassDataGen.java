@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.HashMap;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
@@ -110,11 +111,11 @@ public class ActorClassDataGen {
       final String clsname = (_name + "_DataObject");
       final EList<RoomModel> models = root.getReferencedModels(ac);
       String _xifexpression = null;
-      ActorClass _base = ac.getBase();
+      ModelComponent _base = ac.getBase();
       boolean _notEquals = (!Objects.equal(_base, null));
       if (_notEquals) {
-        ActorClass _base_1 = ac.getBase();
-        String _name_1 = _base_1.getName();
+        ActorClass _actorBase = ac.getActorBase();
+        String _name_1 = _actorBase.getName();
         String _plus = ("extends " + _name_1);
         _xifexpression = (_plus + "_DataObject ");
       } else {

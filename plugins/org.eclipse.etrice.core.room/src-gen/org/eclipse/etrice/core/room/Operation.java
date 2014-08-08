@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.etrice.core.common.base.Documentation;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation</b></em>'.

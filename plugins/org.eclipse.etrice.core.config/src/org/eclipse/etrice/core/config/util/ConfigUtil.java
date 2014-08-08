@@ -207,7 +207,7 @@ public class ConfigUtil {
 				result.addAll(ac.getServiceAccessPoints());
 				for (ExternalPort ext : ac.getExternalPorts())
 					result.add(ext.getInterfacePort());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			} while (includeInherited && ac != null);
 		} else if (acc instanceof SubSystemClass) {
 			// nothing

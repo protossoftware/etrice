@@ -25,12 +25,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 
 public class SemanticsCheck {
 	private Queue<StateGraphNode> queue;
@@ -132,7 +134,7 @@ public class SemanticsCheck {
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
-						msgList.add(new HandledMessage(trigger.getIfitem(), trigger.getMsg(), trigger));
+						msgList.add(new HandledMessage((InterfaceItem)trigger.getIfitem(), (Message)trigger.getMsg(), trigger));
 						StateGraph triggerContext = (StateGraph) trans.eContainer();
 						State exitCalled = st;
 						while (true) {

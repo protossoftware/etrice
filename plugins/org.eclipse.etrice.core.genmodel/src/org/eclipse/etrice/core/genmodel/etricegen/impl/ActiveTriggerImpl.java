@@ -15,23 +15,17 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +52,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * @generated
 	 * @ordered
 	 */
-	protected Message msg;
+	protected AbstractMessage msg;
 
 	/**
 	 * The cached value of the '{@link #getIfitem() <em>Ifitem</em>}' reference.
@@ -68,7 +62,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * @generated
 	 * @ordered
 	 */
-	protected InterfaceItem ifitem;
+	protected AbstractInterfaceItem ifitem;
 
 	/**
 	 * The default value of the '{@link #getTrigger() <em>Trigger</em>}' attribute.
@@ -124,10 +118,10 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Message getMsg() {
+	public AbstractMessage getMsg() {
 		if (msg != null && msg.eIsProxy()) {
 			InternalEObject oldMsg = (InternalEObject)msg;
-			msg = (Message)eResolveProxy(oldMsg);
+			msg = (AbstractMessage)eResolveProxy(oldMsg);
 			if (msg != oldMsg) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
@@ -141,7 +135,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Message basicGetMsg() {
+	public AbstractMessage basicGetMsg() {
 		return msg;
 	}
 
@@ -150,8 +144,8 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMsg(Message newMsg) {
-		Message oldMsg = msg;
+	public void setMsg(AbstractMessage newMsg) {
+		AbstractMessage oldMsg = msg;
 		msg = newMsg;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
@@ -162,10 +156,10 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InterfaceItem getIfitem() {
+	public AbstractInterfaceItem getIfitem() {
 		if (ifitem != null && ifitem.eIsProxy()) {
 			InternalEObject oldIfitem = (InternalEObject)ifitem;
-			ifitem = (InterfaceItem)eResolveProxy(oldIfitem);
+			ifitem = (AbstractInterfaceItem)eResolveProxy(oldIfitem);
 			if (ifitem != oldIfitem) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
@@ -179,7 +173,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InterfaceItem basicGetIfitem() {
+	public AbstractInterfaceItem basicGetIfitem() {
 		return ifitem;
 	}
 
@@ -188,8 +182,8 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIfitem(InterfaceItem newIfitem) {
-		InterfaceItem oldIfitem = ifitem;
+	public void setIfitem(AbstractInterfaceItem newIfitem) {
+		AbstractInterfaceItem oldIfitem = ifitem;
 		ifitem = newIfitem;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
@@ -260,10 +254,10 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
-				setMsg((Message)newValue);
+				setMsg((AbstractMessage)newValue);
 				return;
 			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
-				setIfitem((InterfaceItem)newValue);
+				setIfitem((AbstractInterfaceItem)newValue);
 				return;
 			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				setTrigger((String)newValue);
@@ -285,10 +279,10 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
-				setMsg((Message)null);
+				setMsg((AbstractMessage)null);
 				return;
 			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
-				setIfitem((InterfaceItem)null);
+				setIfitem((AbstractInterfaceItem)null);
 				return;
 			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				setTrigger(TRIGGER_EDEFAULT);

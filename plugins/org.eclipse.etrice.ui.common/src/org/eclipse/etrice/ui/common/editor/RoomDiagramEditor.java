@@ -264,7 +264,7 @@ public abstract class RoomDiagramEditor extends DiagramEditor implements IInputU
 			URI editorResURI = toCurrentPlatformURI(editorSc.eResource().getURI());
 			
 			ActorClass base = (ActorClass) getStructureClass();
-			while((base = base.getBase()) != null){
+			while((base = base.getActorBase()) != null){
 				URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
 				if(editorResURI.equals(baseResURI))
 					if(editorSc.getName().equals(base.getName()))
@@ -297,7 +297,7 @@ public abstract class RoomDiagramEditor extends DiagramEditor implements IInputU
 					return false;
 				
 				ActorClass base = (ActorClass) getStructureClass();
-				while((base = base.getBase()) != null){
+				while((base = base.getActorBase()) != null){
 					URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
 					if(editorResURI.equals(baseResURI))
 						return true;

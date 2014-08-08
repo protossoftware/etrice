@@ -5,16 +5,16 @@ import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.support.DefaultPositionProvider;
 import org.eclipse.etrice.ui.behavior.support.IPositionProvider;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
@@ -34,7 +34,7 @@ public class StateGraphContext {
 		
 		// the top level state graph is always the one of our actor class
 		if (ac.getStateMachine()==null || ac.getStateMachine().eIsProxy()) {
-			ac.setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
+			ac.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
 		}
 		
 		// base classes in reverse order
@@ -43,7 +43,7 @@ public class StateGraphContext {
 			ActorClass a = ac;
 			while (a!=null) {
 				classes.add(0, a);
-				a = a.getBase();
+				a = a.getActorBase();
 			}
 		}
 		

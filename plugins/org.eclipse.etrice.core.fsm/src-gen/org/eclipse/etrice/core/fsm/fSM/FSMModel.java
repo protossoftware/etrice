@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.FSMModel#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.FSMModel#getComponents <em>Components</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,19 +25,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface FSMModel extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Greetings</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.Greeting}.
+   * Returns the value of the '<em><b>Components</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.fsm.fSM.ModelComponent}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Greetings</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Components</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Greetings</em>' containment reference list.
-   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getFSMModel_Greetings()
+   * @return the value of the '<em>Components</em>' containment reference list.
+   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getFSMModel_Components()
    * @model containment="true"
    * @generated
    */
-  EList<Greeting> getGreetings();
+  EList<ModelComponent> getComponents();
 
 } // FSMModel

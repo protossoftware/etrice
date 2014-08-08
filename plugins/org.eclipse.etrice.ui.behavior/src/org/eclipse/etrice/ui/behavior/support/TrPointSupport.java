@@ -18,14 +18,14 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
+import org.eclipse.etrice.core.fsm.fSM.ExitPoint;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.EntryPoint;
-import org.eclipse.etrice.core.room.ExitPoint;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
@@ -150,13 +150,13 @@ public class TrPointSupport {
 				TrPoint tp = null;
 				switch (type) {
 				case ENTRY_POINT:
-					tp = RoomFactory.eINSTANCE.createEntryPoint();
+					tp = FSMFactory.eINSTANCE.createEntryPoint();
 					break;
 				case EXIT_POINT:
-					tp = RoomFactory.eINSTANCE.createExitPoint();
+					tp = FSMFactory.eINSTANCE.createExitPoint();
 					break;
 				case TRANS_POINT:
-					tp = RoomFactory.eINSTANCE.createTransitionPoint();
+					tp = FSMFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
 		        tp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueTrPointName(sg));

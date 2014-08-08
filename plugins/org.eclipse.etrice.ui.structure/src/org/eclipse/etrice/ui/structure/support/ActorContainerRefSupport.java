@@ -779,7 +779,7 @@ public class ActorContainerRefSupport {
 					do {
 						if (ac==acr.eContainer())
 							found = true;
-						ac = ac.getBase();
+						ac = ac.getActorBase();
 					}
 					while (!found && ac!=null);
 					

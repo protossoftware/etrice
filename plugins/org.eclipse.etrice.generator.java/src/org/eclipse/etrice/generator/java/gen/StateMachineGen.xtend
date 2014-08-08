@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Singleton
 import java.util.ArrayList
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.java.Main
 
@@ -30,7 +30,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 //		that means we have to collect base classes first and each base class list with leaf states last
 		while (ac!=null) {
 			states.addAll(0, ac.allBaseStates.leafStatesLast)
-			ac = ac.base
+			ac = ac.actorBase
 		}
 	'''
 		«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»

@@ -14,9 +14,9 @@ package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 

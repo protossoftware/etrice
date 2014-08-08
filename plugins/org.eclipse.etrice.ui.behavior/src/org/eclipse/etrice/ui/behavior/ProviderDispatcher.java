@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.util.FSMSwitch;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.RefinedTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomSwitch;
 import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
 import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
 import org.eclipse.etrice.ui.behavior.support.InitialPointSupport;
@@ -77,7 +77,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 public class ProviderDispatcher {
 
-	private class FeatureProviderSwitch extends RoomSwitch<IFeatureProvider> {
+	private class FeatureProviderSwitch extends FSMSwitch<IFeatureProvider> {
 		private ContainerShape parent = null;
 
 		@Override
@@ -162,7 +162,7 @@ public class ProviderDispatcher {
 		}
 	}
 
-	private class ToolBehaviorProviderSwitch extends RoomSwitch<IToolBehaviorProvider> {
+	private class ToolBehaviorProviderSwitch extends FSMSwitch<IToolBehaviorProvider> {
 		private ContainerShape parent = null;
 
 		@Override

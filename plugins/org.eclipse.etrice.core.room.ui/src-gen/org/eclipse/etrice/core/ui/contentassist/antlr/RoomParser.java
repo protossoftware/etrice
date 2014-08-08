@@ -57,6 +57,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInterfaceItemAccess().getAlternatives(), "rule__InterfaceItem__Alternatives");
 					put(grammarAccess.getActorContainerRefAccess().getAlternatives(), "rule__ActorContainerRef__Alternatives");
 					put(grammarAccess.getSAPointAccess().getAlternatives(), "rule__SAPoint__Alternatives");
+					put(grammarAccess.getMULTIPLICITYAccess().getAlternatives_1(), "rule__MULTIPLICITY__Alternatives_1");
+					put(grammarAccess.getAnnotationTargetTypeAccess().getAlternatives(), "rule__AnnotationTargetType__Alternatives");
 					put(grammarAccess.getStateGraphNodeAccess().getAlternatives(), "rule__StateGraphNode__Alternatives");
 					put(grammarAccess.getStateGraphItemAccess().getAlternatives(), "rule__StateGraphItem__Alternatives");
 					put(grammarAccess.getStateAccess().getAlternatives(), "rule__State__Alternatives");
@@ -67,8 +69,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
 					put(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives(), "rule__TransitionChainStartTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
-					put(grammarAccess.getMULTIPLICITYAccess().getAlternatives_1(), "rule__MULTIPLICITY__Alternatives_1");
-					put(grammarAccess.getAnnotationTargetTypeAccess().getAlternatives(), "rule__AnnotationTargetType__Alternatives");
 					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
@@ -86,9 +86,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDecimalDotAccess().getAlternatives_0(), "rule__DecimalDot__Alternatives_0");
 					put(grammarAccess.getDecimalExpAccess().getAlternatives_0(), "rule__DecimalExp__Alternatives_0");
 					put(grammarAccess.getCommunicationTypeAccess().getAlternatives(), "rule__CommunicationType__Alternatives");
-					put(grammarAccess.getActorCommunicationTypeAccess().getAlternatives(), "rule__ActorCommunicationType__Alternatives");
 					put(grammarAccess.getReferenceTypeAccess().getAlternatives(), "rule__ReferenceType__Alternatives");
 					put(grammarAccess.getRoomAnnotationTargetEnumAccess().getAlternatives(), "rule__RoomAnnotationTargetEnum__Alternatives");
+					put(grammarAccess.getComponentCommunicationTypeAccess().getAlternatives(), "rule__ComponentCommunicationType__Alternatives");
 					put(grammarAccess.getLiteralTypeAccess().getAlternatives(), "rule__LiteralType__Alternatives");
 					put(grammarAccess.getRoomModelAccess().getGroup(), "rule__RoomModel__Group__0");
 					put(grammarAccess.getVarDeclAccess().getGroup(), "rule__VarDecl__Group__0");
@@ -180,6 +180,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRelaySAPointAccess().getGroup(), "rule__RelaySAPoint__Group__0");
 					put(grammarAccess.getSPPointAccess().getGroup(), "rule__SPPoint__Group__0");
 					put(grammarAccess.getActorRefAccess().getGroup(), "rule__ActorRef__Group__0");
+					put(grammarAccess.getMULTIPLICITYAccess().getGroup(), "rule__MULTIPLICITY__Group__0");
 					put(grammarAccess.getStateGraphAccess().getGroup(), "rule__StateGraph__Group__0");
 					put(grammarAccess.getStateMachineAccess().getGroup(), "rule__StateMachine__Group__0");
 					put(grammarAccess.getSimpleStateAccess().getGroup(), "rule__SimpleState__Group__0");
@@ -218,8 +219,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTriggerAccess().getGroup_2(), "rule__Trigger__Group_2__0");
 					put(grammarAccess.getMessageFromIfAccess().getGroup(), "rule__MessageFromIf__Group__0");
 					put(grammarAccess.getGuardAccess().getGroup(), "rule__Guard__Group__0");
-					put(grammarAccess.getMULTIPLICITYAccess().getGroup(), "rule__MULTIPLICITY__Group__0");
-					put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2(), "rule__Annotation__Group_2__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
@@ -433,6 +432,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorRefAccess().getMultiplicityAssignment_3(), "rule__ActorRef__MultiplicityAssignment_3");
 					put(grammarAccess.getActorRefAccess().getTypeAssignment_5(), "rule__ActorRef__TypeAssignment_5");
 					put(grammarAccess.getActorRefAccess().getDocuAssignment_6(), "rule__ActorRef__DocuAssignment_6");
+					put(grammarAccess.getFSMModelAccess().getComponentsAssignment(), "rule__FSMModel__ComponentsAssignment");
 					put(grammarAccess.getStateGraphAccess().getStatesAssignment_2_0(), "rule__StateGraph__StatesAssignment_2_0");
 					put(grammarAccess.getStateGraphAccess().getTrPointsAssignment_2_1(), "rule__StateGraph__TrPointsAssignment_2_1");
 					put(grammarAccess.getStateGraphAccess().getChPointsAssignment_2_2(), "rule__StateGraph__ChPointsAssignment_2_2");
@@ -504,8 +504,6 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageFromIfAccess().getMessageAssignment_0(), "rule__MessageFromIf__MessageAssignment_0");
 					put(grammarAccess.getMessageFromIfAccess().getFromAssignment_2(), "rule__MessageFromIf__FromAssignment_2");
 					put(grammarAccess.getGuardAccess().getGuardAssignment_1(), "rule__Guard__GuardAssignment_1");
-					put(grammarAccess.getFSMModelAccess().getGreetingsAssignment(), "rule__FSMModel__GreetingsAssignment");
-					put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
 					put(grammarAccess.getAnnotationAccess().getTypeAssignment_1(), "rule__Annotation__TypeAssignment_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_1(), "rule__Annotation__AttributesAssignment_2_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");

@@ -33,6 +33,8 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
@@ -43,11 +45,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -2212,14 +2212,14 @@ public class NodeGen {
             public Boolean apply(final ActorInstance ai) {
               boolean _or = false;
               ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.EVENT_DRIVEN);
+              ComponentCommunicationType _commType = _actorClass.getCommType();
+              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.EVENT_DRIVEN);
               if (_equals) {
                 _or = true;
               } else {
                 ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
+                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
                 _or = _equals_1;
               }
               return Boolean.valueOf(_or);
@@ -2231,14 +2231,14 @@ public class NodeGen {
             public Boolean apply(final ActorInstance ai) {
               boolean _or = false;
               ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
+              ComponentCommunicationType _commType = _actorClass.getCommType();
+              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
               if (_equals) {
                 _or = true;
               } else {
                 ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
+                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
                 _or = _equals_1;
               }
               return Boolean.valueOf(_or);

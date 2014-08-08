@@ -18,12 +18,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 import com.google.inject.Inject;
 
@@ -44,6 +45,11 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 	 * the name provider for model objects
 	 */
 	@Inject RoomNameProvider roomNameProvider;
+	
+	/**
+	 * utility methods
+	 */
+	@Inject RoomHelpers roomHelpers;
 
 	/**
 	 * @return <code>false</code>
@@ -125,7 +131,7 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 		
 		logger.logInfo("unrecognized tag '"+tag+"' in "
 				+roomNameProvider.getDetailCodeLocation(code)+" of "
-				+roomNameProvider.getClassLocation(roomNameProvider.getModelClass(code)));
+				+roomNameProvider.getClassLocation(roomHelpers.getRoomClass(code)));
 		return TAG_START+"?"+tag+"?"+TAG_END;
 	}
 
