@@ -217,9 +217,9 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
 			<fileset dir="${target.platform}/plugins/">
 				<include name="org.eclipse.core.runtime_3.9*.jar" />
-				<include name="org.eclipse.emf.ecore_2.9*.jar" />
-				<include name="org.eclipse.emf.ecore.xmi_2.9*.jar" />
-				<include name="org.eclipse.emf.common_2.9*.jar" />
+				<include name="org.eclipse.emf.ecore_2.10*.jar" />
+				<include name="org.eclipse.emf.ecore.xmi_2.10*.jar" />
+				<include name="org.eclipse.emf.common_2.10*.jar" />
 			</fileset>
 		</path>
 
