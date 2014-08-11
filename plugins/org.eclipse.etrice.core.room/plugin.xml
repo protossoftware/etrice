@@ -8,7 +8,7 @@
     <package 
        uri = "http://www.eclipse.org/etrice/Room" 
        class = "org.eclipse.etrice.core.room.RoomPackage"
-       genModel = "org/eclipse/etrice/core/Room.genmodel" /> 
+       genModel = "src-gen/org/eclipse/etrice/core/Room.genmodel" /> 
 	
   </extension>
 
