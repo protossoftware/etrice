@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
@@ -29,7 +28,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
@@ -44,11 +42,11 @@ import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.genmodel.etricegen.Wire;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -175,42 +173,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass activeTriggerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass transitionChainEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iTransitionChainVisitorEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iDiagnosticianEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass expandedActorClassEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass expandedRefinedStateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -308,7 +271,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		RoomPackage.eINSTANCE.eClass();
+		FsmGenPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theETriceGenPackage.createPackageContents();
@@ -996,96 +959,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getActiveTrigger() {
-		return activeTriggerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getActiveTrigger_Msg() {
-		return (EReference)activeTriggerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getActiveTrigger_Ifitem() {
-		return (EReference)activeTriggerEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getActiveTrigger_Trigger() {
-		return (EAttribute)activeTriggerEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getActiveTrigger_Transitions() {
-		return (EReference)activeTriggerEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTransitionChain() {
-		return transitionChainEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTransitionChain_Transition() {
-		return (EReference)transitionChainEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTransitionChain_Data() {
-		return (EReference)transitionChainEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getITransitionChainVisitor() {
-		return iTransitionChainVisitorEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIDiagnostician() {
-		return iDiagnosticianEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getExpandedActorClass() {
 		return expandedActorClassEClass;
 	}
@@ -1097,51 +970,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 	 */
 	public EReference getExpandedActorClass_ActorClass() {
 		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpandedActorClass_StateMachine() {
-		return (EReference)expandedActorClassEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getExpandedRefinedState() {
-		return expandedRefinedStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpandedRefinedState_InheritedEntry() {
-		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpandedRefinedState_InheritedExit() {
-		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpandedRefinedState_InheritedDo() {
-		return (EReference)expandedRefinedStateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1442,29 +1270,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		createEReference(connectionInstanceEClass, CONNECTION_INSTANCE__TO_SPP);
 		createEReference(connectionInstanceEClass, CONNECTION_INSTANCE__CONNECTION);
 
-		activeTriggerEClass = createEClass(ACTIVE_TRIGGER);
-		createEReference(activeTriggerEClass, ACTIVE_TRIGGER__MSG);
-		createEReference(activeTriggerEClass, ACTIVE_TRIGGER__IFITEM);
-		createEAttribute(activeTriggerEClass, ACTIVE_TRIGGER__TRIGGER);
-		createEReference(activeTriggerEClass, ACTIVE_TRIGGER__TRANSITIONS);
-
-		transitionChainEClass = createEClass(TRANSITION_CHAIN);
-		createEReference(transitionChainEClass, TRANSITION_CHAIN__TRANSITION);
-		createEReference(transitionChainEClass, TRANSITION_CHAIN__DATA);
-
-		iTransitionChainVisitorEClass = createEClass(ITRANSITION_CHAIN_VISITOR);
-
-		iDiagnosticianEClass = createEClass(IDIAGNOSTICIAN);
-
-		expandedActorClassEClass = createEClass(EXPANDED_ACTOR_CLASS);
-		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__ACTOR_CLASS);
-		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__STATE_MACHINE);
-
-		expandedRefinedStateEClass = createEClass(EXPANDED_REFINED_STATE);
-		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_ENTRY);
-		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_EXIT);
-		createEReference(expandedRefinedStateEClass, EXPANDED_REFINED_STATE__INHERITED_DO);
-
 		wiredStructureClassEClass = createEClass(WIRED_STRUCTURE_CLASS);
 		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__WIRES);
 		createEReference(wiredStructureClassEClass, WIRED_STRUCTURE_CLASS__OPEN_BINDINGS);
@@ -1489,6 +1294,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		wiredSubSystemClassEClass = createEClass(WIRED_SUB_SYSTEM_CLASS);
 		createEReference(wiredSubSystemClassEClass, WIRED_SUB_SYSTEM_CLASS__SUB_SYSTEM_CLASS);
+
+		expandedActorClassEClass = createEClass(EXPANDED_ACTOR_CLASS);
+		createEReference(expandedActorClassEClass, EXPANDED_ACTOR_CLASS__ACTOR_CLASS);
 
 		// Create enums
 		portKindEEnum = createEEnum(PORT_KIND);
@@ -1519,6 +1327,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		// Obtain other dependent packages
 		RoomPackage theRoomPackage = (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
+		FsmGenPackage theFsmGenPackage = (FsmGenPackage)EPackage.Registry.INSTANCE.getEPackage(FsmGenPackage.eNS_URI);
 		FSMPackage theFSMPackage = (FSMPackage)EPackage.Registry.INSTANCE.getEPackage(FSMPackage.eNS_URI);
 
 		// Create type parameters
@@ -1538,9 +1347,9 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		sapInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
 		sppInstanceEClass.getESuperTypes().add(this.getInstanceBase());
 		serviceImplInstanceEClass.getESuperTypes().add(this.getInterfaceItemInstance());
-		expandedRefinedStateEClass.getESuperTypes().add(theFSMPackage.getSimpleState());
 		wiredActorClassEClass.getESuperTypes().add(this.getWiredStructureClass());
 		wiredSubSystemClassEClass.getESuperTypes().add(this.getWiredStructureClass());
+		expandedActorClassEClass.getESuperTypes().add(theFsmGenPackage.getExpandedModelComponent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1672,97 +1481,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		initEReference(getConnectionInstance_ToSPP(), this.getSPPInstance(), this.getSPPInstance_Incoming(), "toSPP", null, 0, 1, ConnectionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnectionInstance_Connection(), theRoomPackage.getLayerConnection(), null, "connection", null, 0, 1, ConnectionInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(activeTriggerEClass, ActiveTrigger.class, "ActiveTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getActiveTrigger_Msg(), theFSMPackage.getAbstractMessage(), null, "msg", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActiveTrigger_Ifitem(), theFSMPackage.getAbstractInterfaceItem(), null, "ifitem", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActiveTrigger_Trigger(), ecorePackage.getEString(), "trigger", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActiveTrigger_Transitions(), theFSMPackage.getTriggeredTransition(), null, "transitions", null, 0, -1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(transitionChainEClass, TransitionChain.class, "TransitionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTransitionChain_Transition(), theFSMPackage.getTransition(), null, "transition", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransitionChain_Data(), theRoomPackage.getVarDecl(), null, "data", null, 0, 1, TransitionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(transitionChainEClass, theFSMPackage.getState(), "getStateContext", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(transitionChainEClass, ecorePackage.getEBoolean(), "isHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(transitionChainEClass, ecorePackage.getEString(), "genExecuteChain", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getITransitionChainVisitor(), "tcv", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(iTransitionChainVisitorEClass, Object.class, "ITransitionChainVisitor", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(iDiagnosticianEClass, Object.class, "IDiagnostician", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(expandedActorClassEClass, ExpandedActorClass.class, "ExpandedActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpandedActorClass_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExpandedActorClass_StateMachine(), theFSMPackage.getStateGraph(), null, "stateMachine", null, 0, 1, ExpandedActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, null, "prepare", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getIDiagnostician(), "validator", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, null, "release", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, null, "addOwnObject", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getStateGraphItem(), "obj", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "isOwnObject", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getStateGraphItem(), "obj", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEInt(), "getInterfaceItemLocalId", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theRoomPackage.getInterfaceItem(), "ifitem", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "hasStateMachine", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getMessageFromIf(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getActiveTrigger(), "at", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theFSMPackage.getTransition(), "getOutgoingTransitions", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getStateGraphNode(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theFSMPackage.getTransition(), "getIncomingTransitions", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getStateGraphNode(), "node", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, this.getActiveTrigger(), "getActiveTriggers", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getState(), "state", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, theFSMPackage.getMessageFromIf(), "getTriggers", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, theFSMPackage.getMessageFromIf(), "getOwnTriggers", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEString(), "getMessageID", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getMessageFromIf(), "mif", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getChain", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, this.getTransitionChain(), "getOwnTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEBoolean(), "isMatching", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getTrigger(), "trig", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "trigstr", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theFSMPackage.getContinuationTransition(), "getDefaultBranch", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getTransition(), "out", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, ecorePackage.getEObject(), "getOrig", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEObject(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(expandedActorClassEClass, theRoomPackage.getVarDecl(), "getData", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(expandedRefinedStateEClass, ExpandedRefinedState.class, "ExpandedRefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpandedRefinedState_InheritedEntry(), theFSMPackage.getDetailCode(), null, "inheritedEntry", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExpandedRefinedState_InheritedExit(), theFSMPackage.getDetailCode(), null, "inheritedExit", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExpandedRefinedState_InheritedDo(), theFSMPackage.getDetailCode(), null, "inheritedDo", null, 0, 1, ExpandedRefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(expandedRefinedStateEClass, null, "init", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theFSMPackage.getRefinedState(), "rs", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(wiredStructureClassEClass, WiredStructureClass.class, "WiredStructureClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWiredStructureClass_Wires(), this.getWire(), null, "wires", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWiredStructureClass_OpenBindings(), this.getOpenBinding(), null, "openBindings", null, 0, -1, WiredStructureClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1787,6 +1505,14 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		initEClass(wiredSubSystemClassEClass, WiredSubSystemClass.class, "WiredSubSystemClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWiredSubSystemClass_SubSystemClass(), theRoomPackage.getSubSystemClass(), null, "subSystemClass", null, 0, 1, WiredSubSystemClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(expandedActorClassEClass, ExpandedActorClass.class, "ExpandedActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpandedActorClass_ActorClass(), theRoomPackage.getActorClass(), null, "actorClass", null, 0, 1, ExpandedActorClass.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(expandedActorClassEClass, theRoomPackage.getVarDecl(), "getVarDeclData", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(expandedActorClassEClass, theFSMPackage.getMessageFromIf(), "getOwnTriggers", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");

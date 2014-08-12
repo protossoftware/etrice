@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen.impl;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
@@ -37,7 +37,6 @@ import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -47,14 +46,14 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl#getData <em>Data</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.TransitionChainImpl#getTransition <em>Transition</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.TransitionChainImpl#getData <em>Data</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TransitionChainImpl extends EObjectImpl implements TransitionChain {
+public class TransitionChainImpl extends MinimalEObjectImpl.Container implements TransitionChain {
 	
 	private RoomHelpers roomHelpers = new RoomHelpers();
 	private RoomNameProvider roomNameProvider = new RoomNameProvider();
@@ -77,7 +76,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @generated
 	 * @ordered
 	 */
-	protected VarDecl data;
+	protected EObject data;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,7 +94,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ETriceGenPackage.Literals.TRANSITION_CHAIN;
+		return FsmGenPackage.Literals.TRANSITION_CHAIN;
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 			transition = (Transition)eResolveProxy(oldTransition);
 			if (transition != oldTransition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
 			}
 		}
 		return transition;
@@ -133,7 +132,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		Transition oldTransition = transition;
 		transition = newTransition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
+			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.TRANSITION_CHAIN__TRANSITION, oldTransition, transition));
 	}
 
 	/**
@@ -141,13 +140,13 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VarDecl getData() {
+	public EObject getData() {
 		if (data != null && data.eIsProxy()) {
 			InternalEObject oldData = (InternalEObject)data;
-			data = (VarDecl)eResolveProxy(oldData);
+			data = eResolveProxy(oldData);
 			if (data != oldData) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
 			}
 		}
 		return data;
@@ -158,7 +157,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VarDecl basicGetData() {
+	public EObject basicGetData() {
 		return data;
 	}
 
@@ -167,11 +166,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setData(VarDecl newData) {
-		VarDecl oldData = data;
+	public void setData(EObject newData) {
+		EObject oldData = data;
 		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
+			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.TRANSITION_CHAIN__DATA, oldData, data));
 	}
 
 	/**
@@ -214,23 +213,23 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	 * @generated NOT
 	 */
 	public String genExecuteChain(ITransitionChainVisitor tcv) {
-		ExpandedActorClass ac = getExpandedActorClass();
+		ExpandedModelComponent emc = getExpandedModelComponent();
 		
 		StringBuilder result = new StringBuilder();
 		result.append(tcv.genTypedData(this));
-		genChainCode(getTransition(), ac, tcv, result);
+		genChainCode(getTransition(), emc, tcv, result);
 		return result.toString();
 	}
 	
 	private void genChainCode(Transition tr,
-			ExpandedActorClass ac, ITransitionChainVisitor tcv, StringBuilder result) {
+			ExpandedModelComponent emc, ITransitionChainVisitor tcv, StringBuilder result) {
 		
 		result.append(tcv.genActionOperationCall(tr));
 		
 		StateGraphNode node = roomHelpers.getNode(tr.getTo());
-		EList<Transition> out = ac.getOutgoingTransitions(node);
+		EList<Transition> out = emc.getOutgoingTransitions(node);
 		if (node instanceof ChoicePoint) {
-			ContinuationTransition dflt = ac.getDefaultBranch(out);
+			ContinuationTransition dflt = emc.getDefaultBranch(out);
 			assert(dflt!=null): "ChoicePoint "+roomNameProvider.getFullPath(node)+" has no default branch!";
 			
 			// generate if/else
@@ -245,13 +244,13 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 				result.append(tcv.genElseIfBranch((CPBranchTransition)cond, isFirst));
 				isFirst = false;
 
-				genChainCode(cond, ac, tcv, result);
+				genChainCode(cond, emc, tcv, result);
 			}
 			
 			// generate default
 			result.append(tcv.genElseBranch(dflt));
 			
-			genChainCode(dflt, ac, tcv, result);
+			genChainCode(dflt, emc, tcv, result);
 			
 			result.append(tcv.genEndIf());
 		}
@@ -268,11 +267,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 					if (out.size()==1) {
 						State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;
 						if (node instanceof EntryPoint) {
-							if (state!=null && ac.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getLines().isEmpty())
+							if (state!=null && emc.isOwnObject(state) && state.getEntryCode()!=null && !state.getEntryCode().getLines().isEmpty())
 								result.append(tcv.genEntryOperationCall(state));
 						}
 						else if (node instanceof ExitPoint) {
-							if (state!=null && ac.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getLines().isEmpty())
+							if (state!=null && emc.isOwnObject(state) && state.getExitCode()!=null && !state.getExitCode().getLines().isEmpty())
 								result.append(tcv.genExitOperationCall(state));
 						}
 						else {
@@ -280,7 +279,7 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 						}
 					}
 				}
-				genChainCode(out.get(0), ac, tcv, result);
+				genChainCode(out.get(0), emc, tcv, result);
 			}
 			else {
 				// the following assertion should always hold true
@@ -291,12 +290,12 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 		}
 	}
 
-	private ExpandedActorClass getExpandedActorClass() {
+	private ExpandedModelComponent getExpandedModelComponent() {
 		EObject obj = getTransition();
 		while (obj!=null) {
 			obj = obj.eContainer();
-			if (obj instanceof ExpandedActorClass)
-				return (ExpandedActorClass) obj;
+			if (obj instanceof ExpandedModelComponent)
+				return (ExpandedModelComponent) obj;
 		}
 		return null;
 	}
@@ -309,10 +308,10 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
+			case FsmGenPackage.TRANSITION_CHAIN__TRANSITION:
 				if (resolve) return getTransition();
 				return basicGetTransition();
-			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+			case FsmGenPackage.TRANSITION_CHAIN__DATA:
 				if (resolve) return getData();
 				return basicGetData();
 		}
@@ -327,11 +326,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
+			case FsmGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)newValue);
 				return;
-			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
-				setData((VarDecl)newValue);
+			case FsmGenPackage.TRANSITION_CHAIN__DATA:
+				setData((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -345,11 +344,11 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
+			case FsmGenPackage.TRANSITION_CHAIN__TRANSITION:
 				setTransition((Transition)null);
 				return;
-			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
-				setData((VarDecl)null);
+			case FsmGenPackage.TRANSITION_CHAIN__DATA:
+				setData((EObject)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -363,9 +362,9 @@ public class TransitionChainImpl extends EObjectImpl implements TransitionChain 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ETriceGenPackage.TRANSITION_CHAIN__TRANSITION:
+			case FsmGenPackage.TRANSITION_CHAIN__TRANSITION:
 				return transition != null;
-			case ETriceGenPackage.TRANSITION_CHAIN__DATA:
+			case FsmGenPackage.TRANSITION_CHAIN__DATA:
 				return data != null;
 		}
 		return super.eIsSet(featureID);

@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 
 import com.google.inject.Inject;
 

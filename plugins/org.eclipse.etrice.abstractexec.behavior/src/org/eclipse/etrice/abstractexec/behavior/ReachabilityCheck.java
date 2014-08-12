@@ -19,8 +19,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;

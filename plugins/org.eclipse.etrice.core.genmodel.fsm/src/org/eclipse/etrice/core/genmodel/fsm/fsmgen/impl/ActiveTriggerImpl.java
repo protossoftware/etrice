@@ -10,22 +10,21 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen.impl;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,16 +33,16 @@ import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl#getMsg <em>Msg</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl#getIfitem <em>Ifitem</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ActiveTriggerImpl#getMsg <em>Msg</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ActiveTriggerImpl#getIfitem <em>Ifitem</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ActiveTriggerImpl#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ActiveTriggerImpl#getTransitions <em>Transitions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
+public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements ActiveTrigger {
 	/**
 	 * The cached value of the '{@link #getMsg() <em>Msg</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -110,7 +109,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ETriceGenPackage.Literals.ACTIVE_TRIGGER;
+		return FsmGenPackage.Literals.ACTIVE_TRIGGER;
 	}
 
 	/**
@@ -124,7 +123,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 			msg = (AbstractMessage)eResolveProxy(oldMsg);
 			if (msg != oldMsg) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
 			}
 		}
 		return msg;
@@ -148,7 +147,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 		AbstractMessage oldMsg = msg;
 		msg = newMsg;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
+			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 			ifitem = (AbstractInterfaceItem)eResolveProxy(oldIfitem);
 			if (ifitem != oldIfitem) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ETriceGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
 			}
 		}
 		return ifitem;
@@ -186,7 +185,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 		AbstractInterfaceItem oldIfitem = ifitem;
 		ifitem = newIfitem;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
+			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.ACTIVE_TRIGGER__IFITEM, oldIfitem, ifitem));
 	}
 
 	/**
@@ -207,7 +206,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 		String oldTrigger = trigger;
 		trigger = newTrigger;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER, oldTrigger, trigger));
+			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.ACTIVE_TRIGGER__TRIGGER, oldTrigger, trigger));
 	}
 
 	/**
@@ -217,7 +216,7 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	 */
 	public EList<TriggeredTransition> getTransitions() {
 		if (transitions == null) {
-			transitions = new EObjectResolvingEList<TriggeredTransition>(TriggeredTransition.class, this, ETriceGenPackage.ACTIVE_TRIGGER__TRANSITIONS);
+			transitions = new EObjectResolvingEList<TriggeredTransition>(TriggeredTransition.class, this, FsmGenPackage.ACTIVE_TRIGGER__TRANSITIONS);
 		}
 		return transitions;
 	}
@@ -230,15 +229,15 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
+			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
 				if (resolve) return getMsg();
 				return basicGetMsg();
-			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
+			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				if (resolve) return getIfitem();
 				return basicGetIfitem();
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				return getTrigger();
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
 				return getTransitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -253,16 +252,16 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
+			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
 				setMsg((AbstractMessage)newValue);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
+			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				setIfitem((AbstractInterfaceItem)newValue);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				setTrigger((String)newValue);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
 				getTransitions().clear();
 				getTransitions().addAll((Collection<? extends TriggeredTransition>)newValue);
 				return;
@@ -278,16 +277,16 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
+			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
 				setMsg((AbstractMessage)null);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
+			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				setIfitem((AbstractInterfaceItem)null);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				setTrigger(TRIGGER_EDEFAULT);
 				return;
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
 				getTransitions().clear();
 				return;
 		}
@@ -302,13 +301,13 @@ public class ActiveTriggerImpl extends EObjectImpl implements ActiveTrigger {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ETriceGenPackage.ACTIVE_TRIGGER__MSG:
+			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
 				return msg != null;
-			case ETriceGenPackage.ACTIVE_TRIGGER__IFITEM:
+			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				return ifitem != null;
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRIGGER:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRIGGER:
 				return TRIGGER_EDEFAULT == null ? trigger != null : !TRIGGER_EDEFAULT.equals(trigger);
-			case ETriceGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
+			case FsmGenPackage.ACTIVE_TRIGGER__TRANSITIONS:
 				return transitions != null && !transitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

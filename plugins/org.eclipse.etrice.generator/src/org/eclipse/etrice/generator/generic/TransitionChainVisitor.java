@@ -12,22 +12,23 @@
 
 package org.eclipse.etrice.generator.generic;
 
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 
 import com.google.inject.Inject;
 
 /**
- * Implementation of the {@link org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor ITransitionChainVisitor} interface.
+ * Implementation of the {@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor ITransitionChainVisitor} interface.
  * Uses an {@link org.eclipse.etrice.generator.generic.ILanguageExtension ILanguageExtension} for target language specific things.
  * 
  * @author Henrik Rentz-Reichert
@@ -70,7 +71,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 			else if (dataDriven)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
-				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
+				String[] result = langExt.generateArglistAndTypedData((VarDecl) xpac.getData(tr));
 				String dataArg = result[0];
 				
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
@@ -115,7 +116,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genTypedData(TransitionChain tc) {
-		String[] result = langExt.generateArglistAndTypedData(tc.getData());
+		String[] result = langExt.generateArglistAndTypedData((VarDecl) tc.getData());
 		return result[1];
 	}
 

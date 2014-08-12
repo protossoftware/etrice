@@ -120,6 +120,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etphys/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.etmap/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.config/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel.fsm/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.core.genmodel/bin"/>
 			<fileset dir="${target.platform}/plugins/">
 				<include name="org.eclipse.emf.ecore_2.10*.jar" />

@@ -16,39 +16,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.fsm.fSM.SimpleState;
-import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
-import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
-import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
-import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
-import org.eclipse.etrice.core.genmodel.etricegen.Wire;
-import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
-import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
+import org.eclipse.etrice.core.genmodel.etricegen.*;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -171,30 +140,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 				return createConnectionInstanceAdapter();
 			}
 			@Override
-			public Adapter caseActiveTrigger(ActiveTrigger object) {
-				return createActiveTriggerAdapter();
-			}
-			@Override
-			public Adapter caseTransitionChain(TransitionChain object) {
-				return createTransitionChainAdapter();
-			}
-			@Override
-			public Adapter caseITransitionChainVisitor(ITransitionChainVisitor object) {
-				return createITransitionChainVisitorAdapter();
-			}
-			@Override
-			public Adapter caseIDiagnostician(IDiagnostician object) {
-				return createIDiagnosticianAdapter();
-			}
-			@Override
-			public Adapter caseExpandedActorClass(ExpandedActorClass object) {
-				return createExpandedActorClassAdapter();
-			}
-			@Override
-			public Adapter caseExpandedRefinedState(ExpandedRefinedState object) {
-				return createExpandedRefinedStateAdapter();
-			}
-			@Override
 			public Adapter caseWiredStructureClass(WiredStructureClass object) {
 				return createWiredStructureClassAdapter();
 			}
@@ -219,20 +164,12 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 				return createWiredSubSystemClassAdapter();
 			}
 			@Override
-			public Adapter caseStateGraphItem(StateGraphItem object) {
-				return createStateGraphItemAdapter();
+			public Adapter caseExpandedActorClass(ExpandedActorClass object) {
+				return createExpandedActorClassAdapter();
 			}
 			@Override
-			public Adapter caseStateGraphNode(StateGraphNode object) {
-				return createStateGraphNodeAdapter();
-			}
-			@Override
-			public Adapter caseState(State object) {
-				return createStateAdapter();
-			}
-			@Override
-			public Adapter caseSimpleState(SimpleState object) {
-				return createSimpleStateAdapter();
+			public Adapter caseExpandedModelComponent(ExpandedModelComponent object) {
+				return createExpandedModelComponentAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -479,58 +416,16 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger <em>Active Trigger</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent <em>Expanded Model Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
 	 * @generated
 	 */
-	public Adapter createActiveTriggerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain <em>Transition Chain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
-	 * @generated
-	 */
-	public Adapter createTransitionChainAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ITransitionChainVisitor
-	 * @generated
-	 */
-	public Adapter createITransitionChainVisitorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link IDiagnostician <em>IDiagnostician</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see IDiagnostician
-	 * @generated
-	 */
-	public Adapter createIDiagnosticianAdapter() {
+	public Adapter createExpandedModelComponentAdapter() {
 		return null;
 	}
 
@@ -545,20 +440,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpandedActorClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState <em>Expanded Refined State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
-	 * @generated
-	 */
-	public Adapter createExpandedRefinedStateAdapter() {
 		return null;
 	}
 
@@ -643,62 +524,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWiredSubSystemClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.StateGraphItem <em>State Graph Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.fsm.fSM.StateGraphItem
-	 * @generated
-	 */
-	public Adapter createStateGraphItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.StateGraphNode <em>State Graph Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.fsm.fSM.StateGraphNode
-	 * @generated
-	 */
-	public Adapter createStateGraphNodeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.State <em>State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.fsm.fSM.State
-	 * @generated
-	 */
-	public Adapter createStateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.SimpleState <em>Simple State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.fsm.fSM.SimpleState
-	 * @generated
-	 */
-	public Adapter createSimpleStateAdapter() {
 		return null;
 	}
 

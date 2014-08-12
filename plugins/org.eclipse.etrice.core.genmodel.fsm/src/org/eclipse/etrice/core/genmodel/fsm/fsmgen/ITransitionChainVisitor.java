@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;

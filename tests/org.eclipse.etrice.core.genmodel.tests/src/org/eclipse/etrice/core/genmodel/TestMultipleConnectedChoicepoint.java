@@ -29,7 +29,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.VarDecl;
@@ -116,37 +116,37 @@ public class TestMultipleConnectedChoicepoint extends
 	@Test
 	public void testData() {
 		Transition tr = getTransition("tr0");
-		VarDecl data = xpac.getData(tr);
+		VarDecl data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC2", data.getRefType().getType().getName());
 		
 		tr = getState1Transition("tr2");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC2", data.getRefType().getType().getName());
 		
 		tr = getState1Transition("tr3");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC4", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr1");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC3", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr3");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is ContinuationTransition", tr instanceof ContinuationTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr4");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is CPBranchTransition", tr instanceof CPBranchTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC", data.getRefType().getType().getName());

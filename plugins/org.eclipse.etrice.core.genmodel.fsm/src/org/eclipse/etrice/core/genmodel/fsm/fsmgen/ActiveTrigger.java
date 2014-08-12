@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -40,14 +40,14 @@ import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getMsg <em>Msg</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getIfitem <em>Ifitem</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getMsg <em>Msg</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getIfitem <em>Ifitem</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getTransitions <em>Transitions</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger()
+ * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger()
  * @model
  * @generated
  */
@@ -61,14 +61,14 @@ public interface ActiveTrigger extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Msg</em>' reference.
 	 * @see #setMsg(AbstractMessage)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Msg()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger_Msg()
 	 * @model
 	 * @generated
 	 */
 	AbstractMessage getMsg();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getMsg <em>Msg</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getMsg <em>Msg</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Msg</em>' reference.
@@ -86,14 +86,14 @@ public interface ActiveTrigger extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ifitem</em>' reference.
 	 * @see #setIfitem(AbstractInterfaceItem)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Ifitem()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger_Ifitem()
 	 * @model
 	 * @generated
 	 */
 	AbstractInterfaceItem getIfitem();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getIfitem <em>Ifitem</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getIfitem <em>Ifitem</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ifitem</em>' reference.
@@ -111,14 +111,14 @@ public interface ActiveTrigger extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Trigger</em>' attribute.
 	 * @see #setTrigger(String)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Trigger()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger_Trigger()
 	 * @model
 	 * @generated
 	 */
 	String getTrigger();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTrigger <em>Trigger</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getTrigger <em>Trigger</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Trigger</em>' attribute.
@@ -136,7 +136,7 @@ public interface ActiveTrigger extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Transitions</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActiveTrigger_Transitions()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger_Transitions()
 	 * @model
 	 * @generated
 	 */

@@ -16,11 +16,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.etrice.core.genmodel.etricegen.*;
 
 /**
@@ -81,15 +78,12 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 			case ETriceGenPackage.SPP_INSTANCE: return createSPPInstance();
 			case ETriceGenPackage.SERVICE_IMPL_INSTANCE: return createServiceImplInstance();
 			case ETriceGenPackage.CONNECTION_INSTANCE: return createConnectionInstance();
-			case ETriceGenPackage.ACTIVE_TRIGGER: return createActiveTrigger();
-			case ETriceGenPackage.TRANSITION_CHAIN: return createTransitionChain();
-			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: return createExpandedActorClass();
-			case ETriceGenPackage.EXPANDED_REFINED_STATE: return createExpandedRefinedState();
 			case ETriceGenPackage.OPEN_BINDING: return createOpenBinding();
 			case ETriceGenPackage.OPEN_SERVICE_CONNECTION: return createOpenServiceConnection();
 			case ETriceGenPackage.WIRE: return createWire();
 			case ETriceGenPackage.WIRED_ACTOR_CLASS: return createWiredActorClass();
 			case ETriceGenPackage.WIRED_SUB_SYSTEM_CLASS: return createWiredSubSystemClass();
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: return createExpandedActorClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -270,39 +264,9 @@ public class ETriceGenFactoryImpl extends EFactoryImpl implements ETriceGenFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActiveTrigger createActiveTrigger() {
-		ActiveTriggerImpl activeTrigger = new ActiveTriggerImpl();
-		return activeTrigger;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TransitionChain createTransitionChain() {
-		TransitionChainImpl transitionChain = new TransitionChainImpl();
-		return transitionChain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ExpandedActorClass createExpandedActorClass() {
 		ExpandedActorClassImpl expandedActorClass = new ExpandedActorClassImpl();
 		return expandedActorClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExpandedRefinedState createExpandedRefinedState() {
-		ExpandedRefinedStateImpl expandedRefinedState = new ExpandedRefinedStateImpl();
-		return expandedRefinedState;
 	}
 
 	/**

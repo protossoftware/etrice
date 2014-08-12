@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -1748,136 +1748,6 @@ public interface ETriceGenPackage extends EPackage {
 	int CONNECTION_INSTANCE_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl <em>Active Trigger</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActiveTrigger()
-	 * @generated
-	 */
-	int ACTIVE_TRIGGER = 16;
-
-	/**
-	 * The feature id for the '<em><b>Msg</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVE_TRIGGER__MSG = 0;
-
-	/**
-	 * The feature id for the '<em><b>Ifitem</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVE_TRIGGER__IFITEM = 1;
-
-	/**
-	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVE_TRIGGER__TRIGGER = 2;
-
-	/**
-	 * The feature id for the '<em><b>Transitions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVE_TRIGGER__TRANSITIONS = 3;
-
-	/**
-	 * The number of structural features of the '<em>Active Trigger</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVE_TRIGGER_FEATURE_COUNT = 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl <em>Transition Chain</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getTransitionChain()
-	 * @generated
-	 */
-	int TRANSITION_CHAIN = 17;
-
-	/**
-	 * The feature id for the '<em><b>Transition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_CHAIN__TRANSITION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Data</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_CHAIN__DATA = 1;
-
-	/**
-	 * The number of structural features of the '<em>Transition Chain</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_CHAIN_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ITransitionChainVisitor
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getITransitionChainVisitor()
-	 * @generated
-	 */
-	int ITRANSITION_CHAIN_VISITOR = 18;
-
-	/**
-	 * The number of structural features of the '<em>ITransition Chain Visitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITRANSITION_CHAIN_VISITOR_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link IDiagnostician <em>IDiagnostician</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see IDiagnostician
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getIDiagnostician()
-	 * @generated
-	 */
-	int IDIAGNOSTICIAN = 19;
-
-	/**
-	 * The number of structural features of the '<em>IDiagnostician</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDIAGNOSTICIAN_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl <em>Expanded Actor Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1885,134 +1755,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedActorClass()
 	 * @generated
 	 */
-	int EXPANDED_ACTOR_CLASS = 20;
-
-	/**
-	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = 0;
-
-	/**
-	 * The feature id for the '<em><b>State Machine</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__STATE_MACHINE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Expanded Actor Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl <em>Expanded Refined State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedRefinedState()
-	 * @generated
-	 */
-	int EXPANDED_REFINED_STATE = 21;
-
-	/**
-	 * The feature id for the '<em><b>Docu</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__DOCU = FSMPackage.SIMPLE_STATE__DOCU;
-
-	/**
-	 * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__ENTRY_CODE = FSMPackage.SIMPLE_STATE__ENTRY_CODE;
-
-	/**
-	 * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__EXIT_CODE = FSMPackage.SIMPLE_STATE__EXIT_CODE;
-
-	/**
-	 * The feature id for the '<em><b>Do Code</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__DO_CODE = FSMPackage.SIMPLE_STATE__DO_CODE;
-
-	/**
-	 * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__SUBGRAPH = FSMPackage.SIMPLE_STATE__SUBGRAPH;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__NAME = FSMPackage.SIMPLE_STATE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Inherited Entry</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__INHERITED_ENTRY = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Inherited Exit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__INHERITED_EXIT = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Inherited Do</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE__INHERITED_DO = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Expanded Refined State</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_REFINED_STATE_FEATURE_COUNT = FSMPackage.SIMPLE_STATE_FEATURE_COUNT + 3;
+	int EXPANDED_ACTOR_CLASS = 22;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.
@@ -2022,7 +1765,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredStructureClass()
 	 * @generated
 	 */
-	int WIRED_STRUCTURE_CLASS = 22;
+	int WIRED_STRUCTURE_CLASS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -2077,7 +1820,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenBinding()
 	 * @generated
 	 */
-	int OPEN_BINDING = 23;
+	int OPEN_BINDING = 17;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute list.
@@ -2114,7 +1857,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getOpenServiceConnection()
 	 * @generated
 	 */
-	int OPEN_SERVICE_CONNECTION = 24;
+	int OPEN_SERVICE_CONNECTION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute list.
@@ -2151,7 +1894,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWire()
 	 * @generated
 	 */
-	int WIRE = 25;
+	int WIRE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Data Driven</b></em>' attribute.
@@ -2197,7 +1940,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredActorClass()
 	 * @generated
 	 */
-	int WIRED_ACTOR_CLASS = 26;
+	int WIRED_ACTOR_CLASS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -2261,7 +2004,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getWiredSubSystemClass()
 	 * @generated
 	 */
-	int WIRED_SUB_SYSTEM_CLASS = 27;
+	int WIRED_SUB_SYSTEM_CLASS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -2318,6 +2061,51 @@ public interface ETriceGenPackage extends EPackage {
 	int WIRED_SUB_SYSTEM_CLASS_FEATURE_COUNT = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Model Component</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__MODEL_COMPONENT = FsmGenPackage.EXPANDED_MODEL_COMPONENT__MODEL_COMPONENT;
+
+	/**
+	 * The feature id for the '<em><b>State Machine</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__STATE_MACHINE = FsmGenPackage.EXPANDED_MODEL_COMPONENT__STATE_MACHINE;
+
+	/**
+	 * The feature id for the '<em><b>Transition Chains</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__TRANSITION_CHAINS = FsmGenPackage.EXPANDED_MODEL_COMPONENT__TRANSITION_CHAINS;
+
+	/**
+	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = FsmGenPackage.EXPANDED_MODEL_COMPONENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Expanded Actor Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = FsmGenPackage.EXPANDED_MODEL_COMPONENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2325,7 +2113,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getPortKind()
 	 * @generated
 	 */
-	int PORT_KIND = 28;
+	int PORT_KIND = 23;
 
 
 	/**
@@ -3127,114 +2915,6 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getConnectionInstance_Connection();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger <em>Active Trigger</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Active Trigger</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
-	 * @generated
-	 */
-	EClass getActiveTrigger();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getMsg <em>Msg</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Msg</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getMsg()
-	 * @see #getActiveTrigger()
-	 * @generated
-	 */
-	EReference getActiveTrigger_Msg();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getIfitem <em>Ifitem</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ifitem</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getIfitem()
-	 * @see #getActiveTrigger()
-	 * @generated
-	 */
-	EReference getActiveTrigger_Ifitem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTrigger <em>Trigger</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Trigger</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTrigger()
-	 * @see #getActiveTrigger()
-	 * @generated
-	 */
-	EAttribute getActiveTrigger_Trigger();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Transitions</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger#getTransitions()
-	 * @see #getActiveTrigger()
-	 * @generated
-	 */
-	EReference getActiveTrigger_Transitions();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain <em>Transition Chain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Transition Chain</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.TransitionChain
-	 * @generated
-	 */
-	EClass getTransitionChain();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getTransition <em>Transition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Transition</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getTransition()
-	 * @see #getTransitionChain()
-	 * @generated
-	 */
-	EReference getTransitionChain_Transition();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData <em>Data</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Data</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.TransitionChain#getData()
-	 * @see #getTransitionChain()
-	 * @generated
-	 */
-	EReference getTransitionChain_Data();
-
-	/**
-	 * Returns the meta object for class '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>ITransition Chain Visitor</em>'.
-	 * @see ITransitionChainVisitor
-	 * @model instanceClass="ITransitionChainVisitor"
-	 * @generated
-	 */
-	EClass getITransitionChainVisitor();
-
-	/**
-	 * Returns the meta object for class '{@link IDiagnostician <em>IDiagnostician</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IDiagnostician</em>'.
-	 * @see IDiagnostician
-	 * @model instanceClass="IDiagnostician"
-	 * @generated
-	 */
-	EClass getIDiagnostician();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass <em>Expanded Actor Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3254,60 +2934,6 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExpandedActorClass_ActorClass();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getStateMachine <em>State Machine</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>State Machine</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getStateMachine()
-	 * @see #getExpandedActorClass()
-	 * @generated
-	 */
-	EReference getExpandedActorClass_StateMachine();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState <em>Expanded Refined State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expanded Refined State</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
-	 * @generated
-	 */
-	EClass getExpandedRefinedState();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Inherited Entry</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry()
-	 * @see #getExpandedRefinedState()
-	 * @generated
-	 */
-	EReference getExpandedRefinedState_InheritedEntry();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Inherited Exit</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit()
-	 * @see #getExpandedRefinedState()
-	 * @generated
-	 */
-	EReference getExpandedRefinedState_InheritedExit();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Inherited Do</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo()
-	 * @see #getExpandedRefinedState()
-	 * @generated
-	 */
-	EReference getExpandedRefinedState_InheritedDo();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass <em>Wired Structure Class</em>}'.
@@ -4169,94 +3795,6 @@ public interface ETriceGenPackage extends EPackage {
 		EReference CONNECTION_INSTANCE__CONNECTION = eINSTANCE.getConnectionInstance_Connection();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl <em>Active Trigger</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ActiveTriggerImpl
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getActiveTrigger()
-		 * @generated
-		 */
-		EClass ACTIVE_TRIGGER = eINSTANCE.getActiveTrigger();
-
-		/**
-		 * The meta object literal for the '<em><b>Msg</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVE_TRIGGER__MSG = eINSTANCE.getActiveTrigger_Msg();
-
-		/**
-		 * The meta object literal for the '<em><b>Ifitem</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVE_TRIGGER__IFITEM = eINSTANCE.getActiveTrigger_Ifitem();
-
-		/**
-		 * The meta object literal for the '<em><b>Trigger</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTIVE_TRIGGER__TRIGGER = eINSTANCE.getActiveTrigger_Trigger();
-
-		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVE_TRIGGER__TRANSITIONS = eINSTANCE.getActiveTrigger_Transitions();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl <em>Transition Chain</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.TransitionChainImpl
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getTransitionChain()
-		 * @generated
-		 */
-		EClass TRANSITION_CHAIN = eINSTANCE.getTransitionChain();
-
-		/**
-		 * The meta object literal for the '<em><b>Transition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRANSITION_CHAIN__TRANSITION = eINSTANCE.getTransitionChain_Transition();
-
-		/**
-		 * The meta object literal for the '<em><b>Data</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRANSITION_CHAIN__DATA = eINSTANCE.getTransitionChain_Data();
-
-		/**
-		 * The meta object literal for the '{@link ITransitionChainVisitor <em>ITransition Chain Visitor</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ITransitionChainVisitor
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getITransitionChainVisitor()
-		 * @generated
-		 */
-		EClass ITRANSITION_CHAIN_VISITOR = eINSTANCE.getITransitionChainVisitor();
-
-		/**
-		 * The meta object literal for the '{@link IDiagnostician <em>IDiagnostician</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see IDiagnostician
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getIDiagnostician()
-		 * @generated
-		 */
-		EClass IDIAGNOSTICIAN = eINSTANCE.getIDiagnostician();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl <em>Expanded Actor Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4273,48 +3811,6 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_ACTOR_CLASS__ACTOR_CLASS = eINSTANCE.getExpandedActorClass_ActorClass();
-
-		/**
-		 * The meta object literal for the '<em><b>State Machine</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPANDED_ACTOR_CLASS__STATE_MACHINE = eINSTANCE.getExpandedActorClass_StateMachine();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl <em>Expanded Refined State</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedRefinedStateImpl
-		 * @see org.eclipse.etrice.core.genmodel.etricegen.impl.ETriceGenPackageImpl#getExpandedRefinedState()
-		 * @generated
-		 */
-		EClass EXPANDED_REFINED_STATE = eINSTANCE.getExpandedRefinedState();
-
-		/**
-		 * The meta object literal for the '<em><b>Inherited Entry</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPANDED_REFINED_STATE__INHERITED_ENTRY = eINSTANCE.getExpandedRefinedState_InheritedEntry();
-
-		/**
-		 * The meta object literal for the '<em><b>Inherited Exit</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPANDED_REFINED_STATE__INHERITED_EXIT = eINSTANCE.getExpandedRefinedState_InheritedExit();
-
-		/**
-		 * The meta object literal for the '<em><b>Inherited Do</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPANDED_REFINED_STATE__INHERITED_DO = eINSTANCE.getExpandedRefinedState_InheritedDo();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.

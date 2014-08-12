@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 		assertNull("number of branch transitions", baseInstances.get(FSMPackage.eINSTANCE.getCPBranchTransition()));
 
 		assertEquals("number of states", 4, derivedInstances.get(FSMPackage.eINSTANCE.getSimpleState()).size());
-		assertEquals("number of states", 3, derivedInstances.get(ETriceGenPackage.eINSTANCE.getExpandedRefinedState()).size());
+		assertEquals("number of states", 3, derivedInstances.get(FsmGenPackage.eINSTANCE.getExpandedRefinedState()).size());
 		assertNull("number of choice points", derivedInstances.get(FSMPackage.eINSTANCE.getChoicePoint()));
 		assertNull("number of transition points", derivedInstances.get(FSMPackage.eINSTANCE.getTransitionPoint()));
 		assertNull("number of entry points", derivedInstances.get(FSMPackage.eINSTANCE.getEntryPoint()));

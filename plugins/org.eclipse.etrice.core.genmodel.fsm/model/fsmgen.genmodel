@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2014 protos software gmbh (http://www.protos.de).&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; CONTRIBUTORS:&#xD;&#xA; &#x9;&#x9;Henrik Rentz-Reichert (initial contribution)&#xD;&#xA; "
+    modelDirectory="/org.eclipse.etrice.core.genmodel.fsm/src" modelPluginID="org.eclipse.etrice.core.genmodel.fsm"
+    modelName="FsmGen" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room"
+    importOrganizing="true">
+  <foreignModel>fsmgen.ecore</foreignModel>
+  <genPackages prefix="FsmGen" basePackage="org.eclipse.etrice.core.genmodel.fsm"
+      resource="XMI" disposableProviderFactory="true" ecorePackage="fsmgen.ecore#/">
+    <genClasses ecoreClass="fsmgen.ecore#//ActiveTrigger">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ActiveTrigger/msg"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ActiveTrigger/ifitem"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fsmgen.ecore#//ActiveTrigger/trigger"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ActiveTrigger/transitions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="fsmgen.ecore#//ExpandedModelComponent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedModelComponent/modelComponent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedModelComponent/stateMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedModelComponent/transitionChains"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/prepare">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/prepare/validator"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/release"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/addOwnObject">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/addOwnObject/obj"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/isOwnObject">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/isOwnObject/obj"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/hasStateMachine"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getTriggerCodeName">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getTriggerCodeName/mif"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getTriggerCodeName.1">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getTriggerCodeName.1/at"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getOutgoingTransitions">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getOutgoingTransitions/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getIncomingTransitions">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getIncomingTransitions/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getActiveTriggers">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getActiveTriggers/state"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getTriggers"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getOwnTriggers"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getMessageID">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getMessageID/mif"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getChain">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getChain/trans"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getOwnTransitionChains"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getOwnInterfaceItems"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getAllInterfaceItems"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/isMatching">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/isMatching/trig"/>
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/isMatching/trigstr"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getDefaultBranch">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getDefaultBranch/out"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getOrig">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getOrig/copy"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getModelComponentName"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getData">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getData/trans"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getIncomingMessages">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getIncomingMessages/ifitem"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/addTransitionChain">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/addTransitionChain/trans"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/getInterfaceItemLocalId">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/getInterfaceItemLocalId/ifitem"/>
+      </genOperations>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedModelComponent/computeCommonChainData">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedModelComponent/computeCommonChainData/chains"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="fsmgen.ecore#//ExpandedRefinedState">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedRefinedState/inheritedEntry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedRefinedState/inheritedExit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsmgen.ecore#//ExpandedRefinedState/inheritedDo"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//ExpandedRefinedState/init">
+        <genParameters ecoreParameter="fsmgen.ecore#//ExpandedRefinedState/init/rs"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="fsmgen.ecore#//IDiagnostician"/>
+    <genClasses image="false" ecoreClass="fsmgen.ecore#//ITransitionChainVisitor"/>
+    <genClasses ecoreClass="fsmgen.ecore#//TransitionChain">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//TransitionChain/transition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fsmgen.ecore#//TransitionChain/data"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//TransitionChain/getStateContext"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//TransitionChain/isHandler"/>
+      <genOperations ecoreOperation="fsmgen.ecore#//TransitionChain/genExecuteChain">
+        <genParameters ecoreParameter="fsmgen.ecore#//TransitionChain/genExecuteChain/tcv"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -15,9 +15,9 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState
 import org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition
@@ -197,7 +197,7 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
-				«var start = xpac.getChain(tr)?.transition»
+				«var start = xpac.getChain(tr)?.getTransition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
@@ -459,7 +459,7 @@ class GenericStateMachineGenerator {
 					«IF needData»{ «langExt.getTypedDataDefinition(at.msg as Message)»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»
 						«var chain = xpac.getChain(tt)»
-						«guard(chain.transition, at.trigger, xpac)»
+						«guard(chain.getTransition, at.trigger, xpac)»
 						{
 							chain__et = «chain.genChainId»;
 							catching_state__et = «chain.stateContext.genStateId»;
@@ -714,7 +714,7 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
-				«var start = xpac.getChain(tr).transition»
+				«var start = xpac.getChain(tr).getTransition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constPointer("etRuntime::InterfaceItemBase")» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF»);
 			«ENDIF»

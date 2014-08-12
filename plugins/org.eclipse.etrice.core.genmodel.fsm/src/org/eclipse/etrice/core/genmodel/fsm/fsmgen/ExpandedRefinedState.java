@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
@@ -25,13 +25,13 @@ import org.eclipse.etrice.core.fsm.fSM.RefinedState;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState()
+ * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getExpandedRefinedState()
  * @model
  * @generated
  */
@@ -45,14 +45,14 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Entry</em>' containment reference.
 	 * @see #setInheritedEntry(DetailCode)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedEntry()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getExpandedRefinedState_InheritedEntry()
 	 * @model containment="true"
 	 * @generated
 	 */
 	DetailCode getInheritedEntry();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedEntry <em>Inherited Entry</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Inherited Entry</em>' containment reference.
@@ -70,14 +70,14 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Exit</em>' containment reference.
 	 * @see #setInheritedExit(DetailCode)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedExit()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getExpandedRefinedState_InheritedExit()
 	 * @model containment="true"
 	 * @generated
 	 */
 	DetailCode getInheritedExit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedExit <em>Inherited Exit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Inherited Exit</em>' containment reference.
@@ -95,14 +95,14 @@ public interface ExpandedRefinedState extends SimpleState {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inherited Do</em>' containment reference.
 	 * @see #setInheritedDo(DetailCode)
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedRefinedState_InheritedDo()
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getExpandedRefinedState_InheritedDo()
 	 * @model containment="true"
 	 * @generated
 	 */
 	DetailCode getInheritedDo();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState#getInheritedDo <em>Inherited Do</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Inherited Do</em>' containment reference.

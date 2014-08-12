@@ -13,7 +13,7 @@
 package org.eclipse.etrice.generator.generic;
 
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
@@ -48,7 +48,7 @@ public class TransitionChainGenerator {
 		if (!(chain.getTransition() instanceof TriggeredTransition))
 			return "";
 		
-		return generateTypedArgumentList(xpac.getData(t));
+		return generateTypedArgumentList((VarDecl) xpac.getData(t));
 	}
 
 	public String generateTypedArgumentList(VarDecl data) {

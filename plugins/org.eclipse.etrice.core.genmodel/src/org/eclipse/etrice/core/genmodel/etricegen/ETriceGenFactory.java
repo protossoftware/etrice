@@ -158,24 +158,6 @@ public interface ETriceGenFactory extends EFactory {
 	ConnectionInstance createConnectionInstance();
 
 	/**
-	 * Returns a new object of class '<em>Active Trigger</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Active Trigger</em>'.
-	 * @generated
-	 */
-	ActiveTrigger createActiveTrigger();
-
-	/**
-	 * Returns a new object of class '<em>Transition Chain</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transition Chain</em>'.
-	 * @generated
-	 */
-	TransitionChain createTransitionChain();
-
-	/**
 	 * Returns a new object of class '<em>Expanded Actor Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -183,15 +165,6 @@ public interface ETriceGenFactory extends EFactory {
 	 * @generated
 	 */
 	ExpandedActorClass createExpandedActorClass();
-
-	/**
-	 * Returns a new object of class '<em>Expanded Refined State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expanded Refined State</em>'.
-	 * @generated
-	 */
-	ExpandedRefinedState createExpandedRefinedState();
 
 	/**
 	 * Returns a new object of class '<em>Open Binding</em>'.

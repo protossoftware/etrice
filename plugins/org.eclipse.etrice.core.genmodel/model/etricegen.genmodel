@@ -5,7 +5,7 @@
     editorDirectory="/org.eclipse.etrice.core.genmodel.editor/src" modelPluginID="org.eclipse.etrice.core.genmodel"
     modelName="eTriceGen" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
     copyrightFields="false" editPluginID="org.eclipse.etrice.core.genmodel.edit" editorPluginID="org.eclipse.etrice.core.genmodel.editor"
-    usedGenPackages="../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room">
+    usedGenPackages="../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM ../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../org.eclipse.etrice.core.genmodel.fsm/model/fsmgen.genmodel#//fsmgen">
   <foreignModel>etricegen.ecore</foreignModel>
   <genPackages prefix="ETriceGen" basePackage="org.eclipse.etrice.core.genmodel" resource="XMI"
       disposableProviderFactory="true" ecorePackage="etricegen.ecore#/">
@@ -29,6 +29,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/subSystemClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/optionalInstances"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/optionalActorClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/wiredInstances"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//Root/usedEnumClasses"/>
       <genOperations ecoreOperation="etricegen.ecore#//Root/getReferencedModels">
         <genParameters ecoreParameter="etricegen.ecore#//Root/getReferencedModels/cls"/>
       </genOperations>
@@ -37,6 +39,9 @@
       </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//Root/getReferencedDataClasses">
         <genParameters ecoreParameter="etricegen.ecore#//Root/getReferencedDataClasses/cls"/>
+      </genOperations>
+      <genOperations ecoreOperation="etricegen.ecore#//Root/getReferencedEnumClasses">
+        <genParameters ecoreParameter="etricegen.ecore#//Root/getReferencedEnumClasses/cls"/>
       </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//Root/getReferencedActorClasses">
         <genParameters ecoreParameter="etricegen.ecore#//Root/getReferencedActorClasses/cls"/>
@@ -133,86 +138,39 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ConnectionInstance/toSPP"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ConnectionInstance/connection"/>
     </genClasses>
-    <genClasses ecoreClass="etricegen.ecore#//ActiveTrigger">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ActiveTrigger/msg"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ActiveTrigger/ifitem"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//ActiveTrigger/trigger"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ActiveTrigger/transitions"/>
+    <genClasses image="false" ecoreClass="etricegen.ecore#//WiredStructureClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredStructureClass/wires"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredStructureClass/openBindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredStructureClass/providedServices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredStructureClass/requiredServices"/>
     </genClasses>
-    <genClasses ecoreClass="etricegen.ecore#//TransitionChain">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/transition"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/data"/>
-      <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/getStateContext"/>
-      <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/isHandler"/>
-      <genOperations ecoreOperation="etricegen.ecore#//TransitionChain/genExecuteChain">
-        <genParameters ecoreParameter="etricegen.ecore#//TransitionChain/genExecuteChain/tcv"/>
-      </genOperations>
+    <genClasses ecoreClass="etricegen.ecore#//OpenBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//OpenBinding/path"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//OpenBinding/port"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="etricegen.ecore#//ITransitionChainVisitor"/>
-    <genClasses image="false" ecoreClass="etricegen.ecore#//IDiagnostician"/>
+    <genClasses ecoreClass="etricegen.ecore#//OpenServiceConnection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//OpenServiceConnection/path"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//OpenServiceConnection/protocol"/>
+    </genClasses>
+    <genClasses ecoreClass="etricegen.ecore#//Wire">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//Wire/dataDriven"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//Wire/path1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute etricegen.ecore#//Wire/path2"/>
+    </genClasses>
+    <genClasses ecoreClass="etricegen.ecore#//WiredActorClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredActorClass/actorClass"/>
+    </genClasses>
+    <genClasses ecoreClass="etricegen.ecore#//WiredSubSystemClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//WiredSubSystemClass/subSystemClass"/>
+    </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//ExpandedActorClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/actorClass"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/stateMachine"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/prepare">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/prepare/validator"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/release"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/addOwnObject">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/addOwnObject/obj"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/isOwnObject">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/isOwnObject/obj"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getInterfaceItemLocalId">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getInterfaceItemLocalId/ifitem"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/hasStateMachine"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName/mif"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName.1">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getTriggerCodeName.1/at"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getOutgoingTransitions">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getOutgoingTransitions/node"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getIncomingTransitions">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getIncomingTransitions/node"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getActiveTriggers">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getActiveTriggers/state"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getTriggers"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getOwnTriggers"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getMessageID">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getMessageID/mif"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getChain">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getChain/trans"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getTransitionChains"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getOwnTransitionChains"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/isMatching">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/isMatching/trig"/>
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/isMatching/trigstr"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getDefaultBranch">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getDefaultBranch/out"/>
-      </genOperations>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getOrig">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getOrig/copy"/>
-      </genOperations>
       <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getData">
         <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getData/trans"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="etricegen.ecore#//ExpandedRefinedState">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedEntry"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedExit"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedRefinedState/inheritedDo"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedRefinedState/init">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedRefinedState/init/rs"/>
-      </genOperations>
+    <genClasses ecoreClass="etricegen.ecore#//TransitionChain">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/data"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
