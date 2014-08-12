@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -913,11 +914,12 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	}
 	
 	private int computeInterfaceItemLocalIds(ModelComponent ac, int offset) {
-		if (ac.getBase()!=null)
+		if (ac.getBase()!=null) {
 			// first recurse into base class
 			offset = computeInterfaceItemLocalIds(ac.getBase(), offset);
+		}
 		
-		EList<AbstractInterfaceItem> items = getAllInterfaceItems();
+		EList<AbstractInterfaceItem> items = getOwnInterfaceItems(ac);
 		for (AbstractInterfaceItem item : items) {
 			ifitem2localId.put(item, offset);
 			++offset;
@@ -1039,7 +1041,7 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	public EList<MessageFromIf> getOwnTriggers() {
 		BasicEList<MessageFromIf> result = new BasicEList<MessageFromIf>();
 		
-		EList<AbstractInterfaceItem> ownIfItems = getOwnInterfaceItems();
+		EList<AbstractInterfaceItem> ownIfItems = getOwnInterfaceItems(getModelComponent());
 		
 		for(MessageFromIf mif : triggerstring2mif.values()) {
 			if (ownIfItems.contains(mif.getFrom()))
@@ -1169,7 +1171,7 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<AbstractInterfaceItem> getOwnInterfaceItems() {
+	public EList<AbstractInterfaceItem> getOwnInterfaceItems(ModelComponent mc) {
 		// to be implemented by derived class
 		throw new UnsupportedOperationException();
 	}

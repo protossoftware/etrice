@@ -231,10 +231,10 @@ public interface ExpandedModelComponent extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model
 	 * @generated
 	 */
-	EList<AbstractInterfaceItem> getOwnInterfaceItems();
+	EList<AbstractInterfaceItem> getOwnInterfaceItems(ModelComponent mc);
 
 	/**
 	 * <!-- begin-user-doc -->

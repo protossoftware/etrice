@@ -12,7 +12,6 @@
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -23,6 +22,7 @@ import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
@@ -140,19 +140,20 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getOwnInterfaceItems()
 	 */
 	@Override
-	public EList<AbstractInterfaceItem> getOwnInterfaceItems() {
-		HashSet<InterfaceItem> ownIfItems = new HashSet<InterfaceItem>();
+	public EList<AbstractInterfaceItem> getOwnInterfaceItems(ModelComponent mc) {
+		BasicEList<AbstractInterfaceItem> ownIfItems = new BasicEList<AbstractInterfaceItem>();
 		
-		ownIfItems.addAll(getActorClass().getInternalPorts());
-		for (ExternalPort ep : getActorClass().getExternalPorts()) {
+		ActorClass ac = (ActorClass) mc;
+		for (ExternalPort ep : ac.getExternalPorts()) {
 			ownIfItems.add(ep.getInterfacePort());
 		}
-		ownIfItems.addAll(getActorClass().getServiceAccessPoints());
-		for (ServiceImplementation svc : getActorClass().getServiceImplementations()) {
+		ownIfItems.addAll(ac.getInternalPorts());
+		ownIfItems.addAll(ac.getServiceAccessPoints());
+		for (ServiceImplementation svc : ac.getServiceImplementations()) {
 			ownIfItems.add(svc.getSpp());
 		}
 		
-		return new BasicEList<AbstractInterfaceItem>(ownIfItems);
+		return ownIfItems;
 	}
 	
 	/* (non-Javadoc)
@@ -269,4 +270,13 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 			}
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getModelComponentName()
+	 */
+	@Override
+	public String getModelComponentName() {
+		return getActorClass().getName();
+	}
+	
 } //ExpandedActorClassImpl
