@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.ComposedSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.util.BaseSwitch;
 import org.eclipse.etrice.core.common.naming.BaseFragmentProvider;
@@ -42,7 +43,11 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 
 	protected class FSMPathProvider extends FSMSwitch<String> {
 		
-		public FSMPathProvider() {}
+		private Switch<String> topSwitch;
+		
+		public FSMPathProvider(Switch<String> topSwitch) {
+			this.topSwitch = topSwitch;
+		}
 
 		@Override
 		public String caseModelComponent(ModelComponent mc) {
@@ -52,25 +57,25 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 		@Override
 		public String caseState(State s) {
 			// going up two steps in the containment hierarchy either hits another state or a ModelComponent
-			return doSwitch(s.eContainer().eContainer())+SEP+s.getName();
+			return topSwitch.doSwitch(s.eContainer().eContainer())+SEP+s.getName();
 		}
 		
 		@Override
 		public String caseTrPoint(TrPoint trp) {
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(trp.eContainer().eContainer())+SEP+trp.getName();
+			return topSwitch.doSwitch(trp.eContainer().eContainer())+SEP+trp.getName();
 		}
 		
 		@Override
 		public String caseChoicePoint(ChoicePoint cp) {
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(cp.eContainer().eContainer())+SEP+cp.getName();
+			return topSwitch.doSwitch(cp.eContainer().eContainer())+SEP+cp.getName();
 		}
 		
 		@Override
 		public String caseInitialTransition(InitialTransition t) {
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(t.eContainer().eContainer())+SEP+INIT_TRANS;
+			return topSwitch.doSwitch(t.eContainer().eContainer())+SEP+INIT_TRANS;
 		}
 		
 		@Override
@@ -79,7 +84,7 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 			// by the Behavior Editor
 			
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(t.eContainer().eContainer())+SEP+t.getName();
+			return topSwitch.doSwitch(t.eContainer().eContainer())+SEP+t.getName();
 		}
 		
 		@Override
@@ -88,13 +93,13 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 			// by the Behavior Editor
 			
 			// going up two steps in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
+			return topSwitch.doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
 		}
 		
 		@Override
 		public String caseStateGraph(StateGraph sg) {
 			// going up one step in the containment hierarchy either hits a state or a ModelComponent
-			return doSwitch(sg.eContainer())+SEP+STATE_GRAPH;
+			return topSwitch.doSwitch(sg.eContainer())+SEP+STATE_GRAPH;
 		}
 	}
 	
@@ -113,7 +118,7 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	private class CombinedPathProvider extends ComposedSwitch<String> {
 		public CombinedPathProvider() {
 			this.addSwitch(new BasePathProvider());
-			this.addSwitch(new FSMPathProvider());
+			this.addSwitch(new FSMPathProvider(this));
 		}
 	}
 

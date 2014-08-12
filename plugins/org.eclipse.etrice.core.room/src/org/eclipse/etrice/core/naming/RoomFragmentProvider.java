@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.ComposedSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -56,7 +57,13 @@ import org.eclipse.etrice.core.room.util.RoomSwitch;
 public class RoomFragmentProvider extends FSMFragmentProvider {
 
 	protected class RoomPathProvider extends RoomSwitch<String> {
+		
+		private Switch<String> topSwitch;
 
+		public RoomPathProvider(Switch<String> topSwitch) {
+			this.topSwitch = topSwitch;
+		}
+		
 		@Override
 		public String caseRoomClass(RoomClass rc) {
 			return rc.getName();
@@ -64,22 +71,22 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		
 		@Override
 		public String casePort(Port port) {
-			return doSwitch(port.eContainer())+SEP+port.getName();
+			return topSwitch.doSwitch(port.eContainer())+SEP+port.getName();
 		}
 		
 		@Override
 		public String caseSPP(SPP spp) {
-			return doSwitch(spp.eContainer())+SEP+spp.getName();
+			return topSwitch.doSwitch(spp.eContainer())+SEP+spp.getName();
 		}
 		
 		@Override
 		public String caseActorContainerRef(ActorContainerRef acr) {
-			return doSwitch(acr.eContainer())+SEP+acr.getName();
+			return topSwitch.doSwitch(acr.eContainer())+SEP+acr.getName();
 		}
 		
 		@Override
 		public String caseBinding(Binding bi) {
-			return doSwitch(bi.eContainer())+SEP
+			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseBindingEndPointShort(bi.getEndpoint1())+BIND_SEP
 			+caseBindingEndPointShort(bi.getEndpoint2());
 		}
@@ -94,7 +101,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		
 		@Override
 		public String caseLayerConnection(LayerConnection bi) {
-			return doSwitch(bi.eContainer())+SEP
+			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseSAPointShort(bi.getFrom())+CONN_SEP
 			+caseSPPointShort(bi.getTo());
 		}
@@ -119,8 +126,8 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	private class CombinedPathProvider extends ComposedSwitch<String> {
 		public CombinedPathProvider() {
 			this.addSwitch(new BasePathProvider());
-			this.addSwitch(new FSMPathProvider());
-			this.addSwitch(new RoomPathProvider());
+			this.addSwitch(new FSMPathProvider(this));
+			this.addSwitch(new RoomPathProvider(this));
 		}
 	}
 	
