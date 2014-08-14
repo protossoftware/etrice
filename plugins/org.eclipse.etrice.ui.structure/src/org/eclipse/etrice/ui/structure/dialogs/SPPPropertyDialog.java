@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.swt.graphics.Image;

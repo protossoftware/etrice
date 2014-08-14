@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;

@@ -20,8 +20,9 @@ Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="0.5.0",
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.etrice.core.fsm.ui.quickfix,
+Export-Package: org.eclipse.etrice.core.fsm.ui,
  org.eclipse.etrice.core.fsm.ui.contentassist,
  org.eclipse.etrice.core.fsm.ui.contentassist.antlr,
- org.eclipse.etrice.core.fsm.ui.internal
+ org.eclipse.etrice.core.fsm.ui.internal,
+ org.eclipse.etrice.core.fsm.ui.quickfix
 Bundle-Activator: org.eclipse.etrice.core.fsm.ui.internal.FSMActivator

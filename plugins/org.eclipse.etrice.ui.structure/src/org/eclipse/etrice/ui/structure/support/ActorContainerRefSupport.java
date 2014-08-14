@@ -33,11 +33,11 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
-import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
+import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -733,7 +733,7 @@ public class ActorContainerRefSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
-				boolean autoSave = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				boolean autoSave = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
 				if (autoSave)
 					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
 				else

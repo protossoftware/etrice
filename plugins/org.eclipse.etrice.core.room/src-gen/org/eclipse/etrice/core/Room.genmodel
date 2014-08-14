@@ -177,6 +177,7 @@
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getRelayPorts"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getImplementedSPPs"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getActorBase"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getComponentName"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
       <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getGeneralProtocol"/>

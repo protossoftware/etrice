@@ -76,6 +76,11 @@ class ImplPostprocessor {
 				return (ActorClass)getBase();
 			'''
 		)
+		actorClass.addOperation("getComponentName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
+			'''
+				return getName();
+			'''
+		)
 		
 		val actorContainerRef = roomPackage.getClass("ActorContainerRef")
 		actorContainerRef.addOperation("getStructureClass",

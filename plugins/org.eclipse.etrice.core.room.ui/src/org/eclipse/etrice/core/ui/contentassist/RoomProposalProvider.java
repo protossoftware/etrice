@@ -28,7 +28,6 @@ import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;

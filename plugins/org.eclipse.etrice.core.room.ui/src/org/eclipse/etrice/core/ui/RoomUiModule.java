@@ -40,7 +40,7 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	}
 	
 	public static Injector getInjector() {
-		return RoomActivator.getInstance().getInjector("org.eclipse.etrice.core.Room");
+		return RoomActivator.getInstance().getInjector(RoomActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM);
 	}
 
 	// HOWTO: use URI imports - need special editor opener

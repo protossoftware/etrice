@@ -37,7 +37,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.SupportUtil;
 import org.eclipse.jface.databinding.swt.SWTObservables;

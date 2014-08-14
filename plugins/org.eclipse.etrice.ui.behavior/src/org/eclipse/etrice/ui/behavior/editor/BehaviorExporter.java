@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
-import org.eclipse.etrice.ui.common.editor.DiagramExporter;
+import org.eclipse.etrice.ui.common.base.editor.DiagramExporter;
 import org.eclipse.ui.PlatformUI;
 
 public class BehaviorExporter {

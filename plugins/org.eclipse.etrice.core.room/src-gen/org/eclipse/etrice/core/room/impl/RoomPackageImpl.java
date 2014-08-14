@@ -2866,6 +2866,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     addEOperation(actorClassEClass, this.getActorClass(), "getActorBase", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+    addEOperation(actorClassEClass, ecorePackage.getEString(), "getComponentName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     addEOperation(interfaceItemEClass, this.getGeneralProtocolClass(), "getGeneralProtocol", 0, 1, IS_UNIQUE, IS_ORDERED);

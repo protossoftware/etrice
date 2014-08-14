@@ -18,7 +18,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.common.quickfix.IssueResolution;
+import org.eclipse.etrice.ui.common.base.quickfix.IssueResolution;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;

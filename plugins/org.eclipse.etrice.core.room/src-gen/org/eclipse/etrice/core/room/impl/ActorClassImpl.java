@@ -316,7 +316,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getComponentName()
+  public String getComponentName_()
   {
     return componentName;
   }
@@ -686,6 +686,17 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   public ActorClass getActorBase()
   {
     return (ActorClass)getBase();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getComponentName()
+  {
+    return getName();
     
   }
 

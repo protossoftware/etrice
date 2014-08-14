@@ -38,12 +38,12 @@ import org.eclipse.etrice.ui.behavior.ImageProvider;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.markers.DecoratorUtil;
-import org.eclipse.etrice.ui.common.Activator;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
-import org.eclipse.etrice.ui.common.support.CantRemoveFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
+import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -832,9 +832,9 @@ public class TransitionSupport {
 		}
 		
 		protected static String getLabel(Transition trans) {
-			IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-			int MAX_LINE_LENGTH = store.getInt(PreferenceConstants.MAX_LABEL_LINE_LENGTH);
-			int MAX_LINES = store.getInt(PreferenceConstants.MAX_LABEL_LINES);
+			IPreferenceStore store = UIBaseActivator.getDefault().getPreferenceStore();
+			int MAX_LINE_LENGTH = store.getInt(UIBasePreferenceConstants.MAX_LABEL_LINE_LENGTH);
+			int MAX_LINES = store.getInt(UIBasePreferenceConstants.MAX_LABEL_LINES);
 			String label = SupportUtil.getInstance().getRoomNameProvider().getTransitionLabelName(trans);
 			StringBuilder result = new StringBuilder();
 			int i = 0;

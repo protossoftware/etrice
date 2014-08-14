@@ -47,7 +47,7 @@ import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.etrice.ui.behavior.commands.StateGraphContext;
 import org.eclipse.etrice.ui.behavior.support.IPositionProvider.Pos;
 import org.eclipse.etrice.ui.behavior.support.IPositionProvider.PosAndSize;
-import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
+import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;

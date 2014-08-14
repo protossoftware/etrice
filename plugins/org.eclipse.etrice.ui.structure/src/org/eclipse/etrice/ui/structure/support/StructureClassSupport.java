@@ -19,9 +19,9 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
@@ -261,7 +261,7 @@ public class StructureClassSupport {
 
 			@Override
 			public void execute(ICustomContext context) {
-				RoomDiagramEditor editor = (RoomDiagramEditor) getDiagramBehavior().getDiagramContainer();
+				DiagramEditorBase editor = (DiagramEditorBase) getDiagramBehavior().getDiagramContainer();
 				
 				Job job = new ChangeDiagramInputJob("blub", editor);
 				job.setUser(true);

@@ -28,7 +28,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.ui.common.support.NoResizeFeature;
+import org.eclipse.etrice.ui.common.base.support.NoResizeFeature;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.SPPPropertyDialog;

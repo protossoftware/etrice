@@ -10,7 +10,7 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;

@@ -104,88 +104,93 @@ public class ImplPostprocessor {
       _builder_5.append("return (ActorClass)getBase();");
       _builder_5.newLine();
       PostprocessingHelpers.addOperation(actorClass, "getActorBase", _eClassifier_5, Integer.valueOf(1), _builder_5.toString());
-      final EClass actorContainerRef = PostprocessingHelpers.getClass(roomPackage, "ActorContainerRef");
-      EClassifier _eClassifier_6 = roomPackage.getEClassifier("StructureClass");
+      EClassifier _eClassifier_6 = EcorePackage.eINSTANCE.getEClassifier("EString");
       StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append("if (this instanceof <%org.eclipse.etrice.core.room.ActorRef%>)");
+      _builder_6.append("return getName();");
       _builder_6.newLine();
-      _builder_6.append("\t");
-      _builder_6.append("return ((ActorRef)this).getType();");
-      _builder_6.newLine();
-      _builder_6.append("else if (this instanceof <%org.eclipse.etrice.core.room.SubSystemRef%>)");
-      _builder_6.newLine();
-      _builder_6.append("\t");
-      _builder_6.append("return ((SubSystemRef)this).getType();");
-      _builder_6.newLine();
-      _builder_6.append("else");
-      _builder_6.newLine();
-      _builder_6.append("\t");
-      _builder_6.append("return null;");
-      _builder_6.newLine();
-      PostprocessingHelpers.addOperation(actorContainerRef, "getStructureClass", _eClassifier_6, 
-        Integer.valueOf(1), _builder_6.toString());
-      final EClass refPath = PostprocessingHelpers.getClass(roomPackage, "RefPath");
-      EClassifier _eClassifier_7 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      PostprocessingHelpers.addOperation(actorClass, "getComponentName", _eClassifier_6, Integer.valueOf(1), _builder_6.toString());
+      final EClass actorContainerRef = PostprocessingHelpers.getClass(roomPackage, "ActorContainerRef");
+      EClassifier _eClassifier_7 = roomPackage.getEClassifier("StructureClass");
       StringConcatenation _builder_7 = new StringConcatenation();
-      _builder_7.append("StringBuilder sb = new StringBuilder();");
-      _builder_7.newLine();
-      _builder_7.append("for (RefSegment ref : getRefs()) {");
+      _builder_7.append("if (this instanceof <%org.eclipse.etrice.core.room.ActorRef%>)");
       _builder_7.newLine();
       _builder_7.append("\t");
-      _builder_7.append("sb.append(\"/\"+ref.toString());");
+      _builder_7.append("return ((ActorRef)this).getType();");
       _builder_7.newLine();
-      _builder_7.append("}");
+      _builder_7.append("else if (this instanceof <%org.eclipse.etrice.core.room.SubSystemRef%>)");
       _builder_7.newLine();
-      _builder_7.append("return sb.toString();");
+      _builder_7.append("\t");
+      _builder_7.append("return ((SubSystemRef)this).getType();");
       _builder_7.newLine();
-      PostprocessingHelpers.addOperation(refPath, 
-        "toString", _eClassifier_7, 
+      _builder_7.append("else");
+      _builder_7.newLine();
+      _builder_7.append("\t");
+      _builder_7.append("return null;");
+      _builder_7.newLine();
+      PostprocessingHelpers.addOperation(actorContainerRef, "getStructureClass", _eClassifier_7, 
         Integer.valueOf(1), _builder_7.toString());
+      final EClass refPath = PostprocessingHelpers.getClass(roomPackage, "RefPath");
+      EClassifier _eClassifier_8 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("StringBuilder sb = new StringBuilder();");
+      _builder_8.newLine();
+      _builder_8.append("for (RefSegment ref : getRefs()) {");
+      _builder_8.newLine();
+      _builder_8.append("\t");
+      _builder_8.append("sb.append(\"/\"+ref.toString());");
+      _builder_8.newLine();
+      _builder_8.append("}");
+      _builder_8.newLine();
+      _builder_8.append("return sb.toString();");
+      _builder_8.newLine();
+      PostprocessingHelpers.addOperation(refPath, 
+        "toString", _eClassifier_8, 
+        Integer.valueOf(1), _builder_8.toString());
       final EClass refSeg = PostprocessingHelpers.getClass(roomPackage, "RefSegment");
       EAttribute _attribute_2 = PostprocessingHelpers.getAttribute(refSeg, "idx");
       _attribute_2.setDefaultValueLiteral("-1");
-      EClassifier _eClassifier_8 = EcorePackage.eINSTANCE.getEClassifier("EString");
-      StringConcatenation _builder_8 = new StringConcatenation();
-      _builder_8.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
-      _builder_8.newLine();
-      PostprocessingHelpers.addOperation(refSeg, 
-        "toString", _eClassifier_8, 
-        Integer.valueOf(1), _builder_8.toString());
-      final EClass enumLiteral = PostprocessingHelpers.getClass(roomPackage, "EnumLiteral");
-      EClassifier _eClassifier_9 = EcorePackage.eINSTANCE.getEClassifier("ELong");
+      EClassifier _eClassifier_9 = EcorePackage.eINSTANCE.getEClassifier("EString");
       StringConcatenation _builder_9 = new StringConcatenation();
-      _builder_9.append("if (this.getLiteral() != null)");
+      _builder_9.append("return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");");
       _builder_9.newLine();
-      _builder_9.append("\t");
-      _builder_9.append("return this.getLiteral().getValue();");
-      _builder_9.newLine();
-      _builder_9.newLine();
-      _builder_9.append("// recursively from predecessor");
-      _builder_9.newLine();
-      _builder_9.append("<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());");
-      _builder_9.newLine();
-      _builder_9.append("int idx = et.getLiterals().indexOf(this);");
-      _builder_9.newLine();
-      _builder_9.append("if (idx > 0)");
-      _builder_9.newLine();
-      _builder_9.append("\t");
-      _builder_9.append("return et.getLiterals().get(idx - 1).getLiteralValue() + 1;");
-      _builder_9.newLine();
-      _builder_9.newLine();
-      _builder_9.append("return 0;");
-      _builder_9.newLine();
-      PostprocessingHelpers.addOperation(enumLiteral, 
-        "getLiteralValue", _eClassifier_9, 
+      PostprocessingHelpers.addOperation(refSeg, 
+        "toString", _eClassifier_9, 
         Integer.valueOf(1), _builder_9.toString());
-      EClassifier _eClassifier_10 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      final EClass enumLiteral = PostprocessingHelpers.getClass(roomPackage, "EnumLiteral");
+      EClassifier _eClassifier_10 = EcorePackage.eINSTANCE.getEClassifier("ELong");
       StringConcatenation _builder_10 = new StringConcatenation();
+      _builder_10.append("if (this.getLiteral() != null)");
+      _builder_10.newLine();
+      _builder_10.append("\t");
+      _builder_10.append("return this.getLiteral().getValue();");
+      _builder_10.newLine();
+      _builder_10.newLine();
+      _builder_10.append("// recursively from predecessor");
+      _builder_10.newLine();
       _builder_10.append("<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());");
       _builder_10.newLine();
-      _builder_10.append("return et.getName() + \".\" + this.getName();");
+      _builder_10.append("int idx = et.getLiterals().indexOf(this);");
       _builder_10.newLine();
-      _xblockexpression = PostprocessingHelpers.addOperation(enumLiteral, 
-        "getFullName", _eClassifier_10, 
+      _builder_10.append("if (idx > 0)");
+      _builder_10.newLine();
+      _builder_10.append("\t");
+      _builder_10.append("return et.getLiterals().get(idx - 1).getLiteralValue() + 1;");
+      _builder_10.newLine();
+      _builder_10.newLine();
+      _builder_10.append("return 0;");
+      _builder_10.newLine();
+      PostprocessingHelpers.addOperation(enumLiteral, 
+        "getLiteralValue", _eClassifier_10, 
         Integer.valueOf(1), _builder_10.toString());
+      EClassifier _eClassifier_11 = EcorePackage.eINSTANCE.getEClassifier("EString");
+      StringConcatenation _builder_11 = new StringConcatenation();
+      _builder_11.append("<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());");
+      _builder_11.newLine();
+      _builder_11.append("return et.getName() + \".\" + this.getName();");
+      _builder_11.newLine();
+      _xblockexpression = PostprocessingHelpers.addOperation(enumLiteral, 
+        "getFullName", _eClassifier_11, 
+        Integer.valueOf(1), _builder_11.toString());
     }
     return _xblockexpression;
   }

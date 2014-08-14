@@ -21,7 +21,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.MsgItemPair;
 import org.eclipse.etrice.ui.behavior.dialogs.PortMessageSelectionDialog.OperationItemPair;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
-import org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog;
+import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
