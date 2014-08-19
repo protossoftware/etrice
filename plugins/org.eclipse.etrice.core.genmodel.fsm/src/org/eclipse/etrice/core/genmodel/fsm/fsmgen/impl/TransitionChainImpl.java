@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -55,7 +56,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class TransitionChainImpl extends MinimalEObjectImpl.Container implements TransitionChain {
 	
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers roomHelpers = new RoomHelpers();
 	private RoomNameProvider roomNameProvider = new RoomNameProvider();
 	
 	/**

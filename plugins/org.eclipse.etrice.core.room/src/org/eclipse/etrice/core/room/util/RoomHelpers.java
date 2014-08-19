@@ -23,12 +23,8 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
-import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.RefinedState;
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
-import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
@@ -1334,54 +1330,6 @@ public class RoomHelpers extends FSMHelpers {
 	}
 
 	/**
-	 * Returns the recursive base class entry code of a {@link RefinedState} as string.
-	 * 
-	 * @param state the state
-	 * 
-	 * @return the recursive base class entry code of a {@link RefinedState} as string
-	 */
-	public String getBaseEntryCode(RefinedState state) {
-		return getBaseCode(state, FSMPackage.Literals.STATE__ENTRY_CODE);
-	}
-
-	/**
-	 * Returns the recursive base class exit code of a {@link RefinedState} as string.
-	 * 
-	 * @param state the state
-	 * 
-	 * @return the recursive base class exit code of a {@link RefinedState} as string
-	 */
-	public String getBaseExitCode(RefinedState state) {
-		return getBaseCode(state, FSMPackage.Literals.STATE__EXIT_CODE);
-	}
-
-	/**
-	 * Returns the recursive base class do code of a {@link RefinedState} as string.
-	 * 
-	 * @param state the state
-	 * 
-	 * @return the recursive base class do code of a {@link RefinedState} as string
-	 */
-	public String getBaseDoCode(RefinedState state) {
-		return getBaseCode(state, FSMPackage.Literals.STATE__DO_CODE);
-	}
-	
-	private String getBaseCode(RefinedState state, EStructuralFeature feat) {
-		StringBuilder result = new StringBuilder();
-		
-		State base = state.getTarget();
-		while (base!=null) {
-			String code = getDetailCode((DetailCode) base.eGet(feat));
-			result.append(code);
-			if (base instanceof RefinedState)
-				base = ((RefinedState)base).getTarget();
-			else
-				break;
-		}
-		return result.toString();
-	}
-
-	/**
 	 * Determines the last common super type of a list of types or <code>null</code> if no such exists.
 	 * If a  {@link RefableType} is returned then it is an independent copy not part of the model.
 	 * 
@@ -1462,18 +1410,6 @@ public class RoomHelpers extends FSMHelpers {
 	}
 
 	/**
-	 * Returns the recursive base class code of a transition.
-	 * 
-	 * @param trans the transition
-	 * @param ac the actor class
-	 * 
-	 * @return the recursive base class code of a transition
-	 */
-	public String getInheritedActionCode(Transition trans, ActorClass ac) {
-		return getActionCode(trans, ac, false);
-	}
-
-	/**
 	 * @param sg a {@link StateGraph}
 	 * @return the initial transition or <code>null</code> if no such is available
 	 */
@@ -1491,47 +1427,6 @@ public class RoomHelpers extends FSMHelpers {
 	 */
 	public boolean hasInitTransition(StateGraph sg) {
 		return getInitTransition(sg)!=null;
-	}
-	
-	/**
-	 * Returns the complete action code including base class code of a {@link Transition}.
-	 * 
-	 * @param trans the transition
-	 * @param ac the actor class
-	 * 
-	 * @return the complete action code including base class code of a {@link Transition}
-	 */
-	public String getAllActionCode(Transition trans, ActorClass ac) {
-		return getActionCode(trans, ac, true);
-	}
-	
-	private String getActionCode(Transition trans, ActorClass ac, boolean includeOwn) {
-		StringBuilder result = new StringBuilder();
-		
-		ActorClass baseAC = getActorClass(trans);
-		
-		if (!includeOwn) {
-			if (ac==baseAC)
-				return null;
-			ac = ac.getActorBase();
-		}
-		
-		while (ac!=null) {
-			if (ac==baseAC) {
-				result.insert(0, getDetailCode(trans.getAction()));
-				return result.toString();
-			}
-			
-			if (ac.getStateMachine()!=null)
-				for (RefinedTransition rt : ac.getStateMachine().getRefinedTransitions()) {
-					if (rt.getTarget()==trans)
-						result.insert(0, getDetailCode(rt.getAction()));
-				}
-			
-			ac = ac.getActorBase();
-		}
-		
-		return null;
 	}
 	
 	/**

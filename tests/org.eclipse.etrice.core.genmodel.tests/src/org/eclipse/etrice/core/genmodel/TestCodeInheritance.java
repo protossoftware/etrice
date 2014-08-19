@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState;
@@ -42,7 +43,7 @@ public class TestCodeInheritance extends TestInstanceModelBuilderBase {
 	private HashMap<EClass, ArrayList<EObject>> derivedInstances;
 	private ExpandedActorClass base;
 	private ExpandedActorClass derived;
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers roomHelpers = new RoomHelpers();
 	
 	@Before
 	public void setUp() {

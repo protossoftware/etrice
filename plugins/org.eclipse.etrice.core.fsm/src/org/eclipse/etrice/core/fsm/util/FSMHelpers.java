@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -976,6 +978,107 @@ public class FSMHelpers extends BaseHelpers {
 			}
 		}
 		return rs2parent;
+	}
+
+	/**
+	 * Returns the recursive base class entry code of a {@link RefinedState} as string.
+	 * 
+	 * @param state the state
+	 * 
+	 * @return the recursive base class entry code of a {@link RefinedState} as string
+	 */
+	public String getBaseEntryCode(RefinedState state) {
+		return getBaseCode(state, FSMPackage.Literals.STATE__ENTRY_CODE);
+	}
+
+	/**
+	 * Returns the recursive base class exit code of a {@link RefinedState} as string.
+	 * 
+	 * @param state the state
+	 * 
+	 * @return the recursive base class exit code of a {@link RefinedState} as string
+	 */
+	public String getBaseExitCode(RefinedState state) {
+		return getBaseCode(state, FSMPackage.Literals.STATE__EXIT_CODE);
+	}
+
+	/**
+	 * Returns the recursive base class do code of a {@link RefinedState} as string.
+	 * 
+	 * @param state the state
+	 * 
+	 * @return the recursive base class do code of a {@link RefinedState} as string
+	 */
+	public String getBaseDoCode(RefinedState state) {
+		return getBaseCode(state, FSMPackage.Literals.STATE__DO_CODE);
+	}
+
+	private String getBaseCode(RefinedState state, EStructuralFeature feat) {
+		StringBuilder result = new StringBuilder();
+		
+		State base = state.getTarget();
+		while (base!=null) {
+			String code = getDetailCode((DetailCode) base.eGet(feat));
+			result.append(code);
+			if (base instanceof RefinedState)
+				base = ((RefinedState)base).getTarget();
+			else
+				break;
+		}
+		return result.toString();
+	}
+
+	/**
+	 * Returns the recursive base class code of a transition.
+	 * 
+	 * @param trans the transition
+	 * @param mc the model component
+	 * 
+	 * @return the recursive base class code of a transition
+	 */
+	public String getInheritedActionCode(Transition trans, ModelComponent mc) {
+		return getActionCode(trans, mc, false);
+	}
+
+	/**
+	 * Returns the complete action code including base class code of a {@link Transition}.
+	 * 
+	 * @param trans the transition
+	 * @param ac the model component
+	 * 
+	 * @return the complete action code including base class code of a {@link Transition}
+	 */
+	public String getAllActionCode(Transition trans, ModelComponent mc) {
+		return getActionCode(trans, mc, true);
+	}
+
+	private String getActionCode(Transition trans, ModelComponent mc, boolean includeOwn) {
+		StringBuilder result = new StringBuilder();
+		
+		ModelComponent baseMC = getModelComponent(trans);
+		
+		if (!includeOwn) {
+			if (mc==baseMC)
+				return null;
+			mc = mc.getBase();
+		}
+		
+		while (mc!=null) {
+			if (mc==baseMC) {
+				result.insert(0, getDetailCode(trans.getAction()));
+				return result.toString();
+			}
+			
+			if (mc.getStateMachine()!=null)
+				for (RefinedTransition rt : mc.getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans)
+						result.insert(0, getDetailCode(rt.getAction()));
+				}
+			
+			mc = mc.getBase();
+		}
+		
+		return null;
 	}
 
 }

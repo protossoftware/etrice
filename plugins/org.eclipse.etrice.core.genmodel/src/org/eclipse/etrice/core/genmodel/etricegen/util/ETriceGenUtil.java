@@ -16,6 +16,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -24,7 +25,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class ETriceGenUtil {
 	
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers roomHelpers = new RoomHelpers();
 
 	/**
 	 * @param trig the trigger

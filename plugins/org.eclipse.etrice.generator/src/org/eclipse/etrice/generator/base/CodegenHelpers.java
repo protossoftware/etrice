@@ -15,6 +15,7 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 
@@ -24,7 +25,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
  */
 public class CodegenHelpers {
 	
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers roomHelpers = new RoomHelpers();
 	private RoomNameProvider roomNameProvider = new RoomNameProvider();
 	
 	/**
