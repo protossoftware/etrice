@@ -71,13 +71,15 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 
 	protected ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 	protected URI inputUri;
-	protected Object textEditorClass;
+	private Object textEditorClass;
 
 	private SaveOnFocusLostListener saveOnFocusListener;
 
 	private SuperClassListener superClassListener;
 
-	public DiagramEditorBase() {
+	public DiagramEditorBase(Object textEditorClass) {
+		this.textEditorClass = textEditorClass;
+		
 		Injector injector = FSMUiModule.getInjector();
 		injector.injectMembers(this);
 		
@@ -169,18 +171,21 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	 */
 	@Override
 	public void setFocus() {
-		super.setFocus();
-		
 		boolean dirtyAlready = isDirty();
 		
 		// inside this call auto refresh will happen if (and turn the editor dirty)
 		super.setFocus();
 		
-		if(superClassListener.isChangeInSuperClass())
+		if (superClassListener.isChangeInSuperClass())
 			superClassChanged();
 		
 		if (!dirtyAlready && isDirty())
 			doSave(null);
+		
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		EObject diagramBo = diagram.getLink().getBusinessObjects().iterator().next();
+		if(diagramBo == null || diagramBo.eIsProxy())
+			handleMissingDiagramBo(diagram);
 	}
 	
 	public ModelComponent getModelComponent() {
@@ -297,7 +302,9 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		return null;
 	}
 
+	protected abstract void handleMissingDiagramBo(Diagram diagram);
 	protected abstract void superClassChanged();
+	protected abstract EObject getModel();
 
 	public URI getInputUri() {
 		return inputUri;

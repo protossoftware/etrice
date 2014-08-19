@@ -19,18 +19,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.ui.editor.RoomEditor;
 import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.behavior.markers.DiagnosingModelObserver;
-import org.eclipse.etrice.ui.behavior.support.ContextSwitcher;
+import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
+import org.eclipse.etrice.ui.behavior.fsm.support.ContextSwitcher;
+import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -38,22 +40,19 @@ import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 
 import com.google.common.base.Function;
 
 
-public class BehaviorEditor extends RoomDiagramEditor {
+public class BehaviorEditor extends AbstractFSMEditor {
 
 	public static final String BEHAVIOR_EDITOR_ID = "org.eclipse.etrice.ui.behavior.editor.BehaviorEditor";
-	private DiagnosingModelObserver diagnosingModelObserver;
+	private boolean showLostDiagramInputDialog = true;
 	
 	public BehaviorEditor() {
-		super();
-	}
-	
-	public DiagnosingModelObserver getDiagnosingModelObserver() {
-		return diagnosingModelObserver;
+		super(RoomEditor.class);
 	}
 	
 	@Override
@@ -61,24 +60,6 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		return Activator.getImage("icons/Behavior.gif");
 	}
 
-	@Override
-	public void initializeGraphicalViewer() {
-		// Start observing the Room Model for rendering Markers
-		diagnosingModelObserver = new DiagnosingModelObserver();
-		diagnosingModelObserver.observeRoomModel((RoomModel)getActorClass().eResource().getContents().get(0));
-		
-		super.initializeGraphicalViewer();
-		
-		Command cmd = new RecordingCommand(getEditingDomain()) {
-			@Override
-			protected void doExecute() {
-				ContextSwitcher.switchTop(getDiagramTypeProvider().getDiagram());
-			}
-		};
-		getEditingDomain().getCommandStack().execute(cmd);
-		getEditingDomain().getCommandStack().flush();
-	}
-	
 	@Override
 	public void dispose() {
 		// Stop observing the Room Model
@@ -137,7 +118,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 */
 	protected void removeUnusedRefinedStates() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		ActorClass ac = SupportUtil.getInstance().getActorClass(diagram);
+		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(diagram);
 		
 		if (ac.getStateMachine()!=null) {
 			ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
@@ -157,7 +138,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	 * @return
 	 */
 	private boolean isUnused(RefinedState s) {
-		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
 		if (roomHelpers.hasDirectSubStructure(s))
 			return false;
 		if (roomHelpers.hasDetailCode(s.getEntryCode()))
@@ -170,7 +151,7 @@ public class BehaviorEditor extends RoomDiagramEditor {
 
 	protected void removeEmptySubgraphs() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		// if our current context is an empty state graph we go one level up
 		StateGraph current = ContextSwitcher.getCurrentStateGraph(diagram);
@@ -208,13 +189,13 @@ public class BehaviorEditor extends RoomDiagramEditor {
 	}
 	
 	protected void rebaseRefinedStates() {
-		ActorClass ac = getActorClass();
+		ModelComponent ac = getModelComponent();
 
 		if (ac.getStateMachine()==null)
 			return;
 		
-		Function<RefinedState, String> nameProvider = SupportUtil.getInstance().getRoomNameProvider().getRefinedStateNameProvider();
-		Map<RefinedState, RefinedState> rs2parent = SupportUtil.getInstance().getRoomHelpers().getRefinedStatesToRelocate(ac, nameProvider);
+		Function<RefinedState, String> nameProvider = SupportUtil.getInstance().getFSMNameProvider().getRefinedStateNameProvider();
+		Map<RefinedState, RefinedState> rs2parent = SupportUtil.getInstance().getFSMHelpers().getRefinedStatesToRelocate(ac, nameProvider);
 		
 		// move all to the new context
 		for (RefinedState rs : rs2parent.keySet()) {
@@ -235,8 +216,33 @@ public class BehaviorEditor extends RoomDiagramEditor {
 		diagramTypeProvider.getDiagramBehavior().refresh();
 	}
 
-	@Override
 	protected StructureClass getStructureClass() {
-		return getActorClass();
+		return (StructureClass) getModelComponent();
+	}
+
+	
+	protected void handleMissingDiagramBo(Diagram diagram){
+		if(!showLostDiagramInputDialog)
+			return;
+		
+		// show only once
+		showLostDiagramInputDialog = false;
+		MessageDialog dialog = new MessageDialog(getGraphicalControl().getShell(),
+				"Diagram out-dated", null,
+				"Diagram input lost. Cannot find ROOM file or class for "+diagram.getName() +"\n\n"
+				+ "Please ensure that no whitespace or special characters are contained in any related path, file or project",
+				MessageDialog.ERROR, new String[] { "OK", "Reconnect Diagram" }, 0);
+		int result = dialog.open();
+		
+		if(result == 1)
+			new ChangeDiagramInputJob("Change input for "+diagram.getName(), this).schedule();	
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase#getModel()
+	 */
+	@Override
+	public EObject getModel() {
+		return getActorClass().eContainer();
 	}
 }

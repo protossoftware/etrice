@@ -25,7 +25,6 @@ Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="0.5.0",
  org.eclipse.emf.workspace;bundle-version="1.5.0"
 Export-Package: org.eclipse.etrice.ui.common,
  org.eclipse.etrice.ui.common.commands,
- org.eclipse.etrice.ui.common.editor,
  org.eclipse.etrice.ui.common.preferences
 Bundle-Activator: org.eclipse.etrice.ui.common.Activator
 Bundle-ActivationPolicy: lazy

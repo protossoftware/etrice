@@ -16,6 +16,11 @@ import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.QuickFixDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.StringToDetailCode;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
@@ -25,7 +30,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
+public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog implements IStatePropertyDialog {
 
 	class NameValidator implements IValidator {
 
@@ -34,7 +39,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(state, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(state, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}

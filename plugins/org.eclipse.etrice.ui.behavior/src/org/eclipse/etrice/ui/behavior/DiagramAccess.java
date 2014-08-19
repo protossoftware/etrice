@@ -15,11 +15,12 @@ package org.eclipse.etrice.ui.behavior;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.ui.behavior.commands.PopulateDiagramCommand;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
-import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
+import org.eclipse.etrice.ui.behavior.fsm.commands.PopulateDiagramCommand;
+import org.eclipse.etrice.ui.behavior.fsm.support.DiagramUpdateFeature;
 import org.eclipse.etrice.ui.common.base.commands.UpdateCommand;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -29,6 +30,19 @@ import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 public class DiagramAccess extends DiagramAccessBase {
 
+	public DiagramAccess() {
+		super();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.base.support.DiagramAccessBase#injectMembers()
+	 */
+	@Override
+	protected void injectMembers() {
+		Activator activator = Activator.getDefault();
+		activator.getInjector().injectMembers(this);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getDiagramName(org.eclipse.etrice.core.room.StructureClass)
 	 */
@@ -75,8 +89,8 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain) {
-		if (rootObject instanceof ActorClass) {
-			return new PopulateDiagramCommand(diagram, (ActorClass) rootObject, editingDomain);
+		if (rootObject instanceof ModelComponent) {
+			return new PopulateDiagramCommand(diagram, (ModelComponent) rootObject, Activator.getDefault().getInjector(), editingDomain);
 		}
 		return null;
 	}
@@ -88,7 +102,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new DiagramUpdateFeature(featureProvider));
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new DiagramUpdateFeature(featureProvider, Activator.getDefault().getInjector()));
 		if (cmd.updateNeeded())
 			return cmd;
 		

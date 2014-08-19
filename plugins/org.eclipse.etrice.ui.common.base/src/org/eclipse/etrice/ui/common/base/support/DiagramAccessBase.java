@@ -31,7 +31,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
-import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
@@ -46,7 +45,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -64,9 +62,7 @@ public abstract class DiagramAccessBase {
 	 */
 	public DiagramAccessBase() {
 		super();
-		
-		Injector injector = FSMUiModule.getInjector();
-        injector.injectMembers(this);
+		injectMembers();
 	}
 
 	public Diagram getDiagram(EObject rootObject) {
@@ -248,4 +244,6 @@ public abstract class DiagramAccessBase {
 	abstract protected String getEditorId();
 	abstract protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain);
 	abstract protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain);
+	abstract protected void injectMembers();
+	
 }

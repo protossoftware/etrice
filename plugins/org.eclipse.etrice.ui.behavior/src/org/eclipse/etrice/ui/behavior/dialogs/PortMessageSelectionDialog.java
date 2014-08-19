@@ -20,11 +20,13 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ISelectionDialog;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -59,9 +61,9 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert
  *
  */
-public class PortMessageSelectionDialog extends FormDialog {
+public class PortMessageSelectionDialog extends FormDialog implements ISelectionDialog {
 
-	public static class MethodItemPair {
+	private static class MethodItemPair {
 		InterfaceItem item;
 
 		public MethodItemPair(InterfaceItem item) {
@@ -70,7 +72,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 		}
 	}
 	
-	public static class MsgItemPair extends MethodItemPair {
+	private static class MsgItemPair extends MethodItemPair {
 		Message msg;
 		boolean out;
 		
@@ -81,7 +83,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 		}
 	}
 	
-	public static class OperationItemPair extends MethodItemPair {
+	private static class OperationItemPair extends MethodItemPair {
 		PortOperation op;
 		
 		public OperationItemPair(InterfaceItem item, PortOperation op) {
@@ -248,7 +250,7 @@ public class PortMessageSelectionDialog extends FormDialog {
 	private ActorClass ac;
 	private boolean recvOnly;
 	private TreeViewer viewer;
-	private MethodItemPair selected = null;
+	private String selected = null;
 
 	@Inject
 	ILabelProvider labelProvider;
@@ -328,14 +330,28 @@ public class PortMessageSelectionDialog extends FormDialog {
 		ISelection selection = viewer.getSelection();
 		if (selection instanceof IStructuredSelection) {
 			Object element = ((IStructuredSelection) selection).getFirstElement();
-			if (element instanceof MethodItemPair) {
-				selected = (MethodItemPair) element;
+			if (element instanceof MsgItemPair) {
+				MsgItemPair pair = (MsgItemPair) element;
+				if (pair.out) {
+					String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
+					String index = "";
+					if (pair.item instanceof Port && ((Port)pair.item).getMultiplicity()!=1)
+						index = "[idx]";
+					selected = pair.item.getName()+index+"."+pair.msg.getName()+"("+data+")";
+				}
+				else
+					selected = pair.item.getName()+"."+pair.msg.getName();
+			}
+			if (element instanceof OperationItemPair) {
+				OperationItemPair pair = (OperationItemPair) element;
+				String arglist = SupportUtil.getInstance().getRoomNameProvider().getArguments(pair.op);
+				selected = pair.item.getName()+"."+pair.op.getName()+arglist;
 			}
 		}
 		super.okPressed();
 	}
 
-	public MethodItemPair getMethodItemPair() {
+	public String getSelected() {
 		return selected;
 	}
 }

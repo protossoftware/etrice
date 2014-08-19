@@ -20,12 +20,20 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 
+import com.google.inject.Injector;
+
 public abstract class ChangeAwareCustomFeature extends AbstractCustomFeature {
 
+	private Injector injector;
 	boolean hasDoneChanges;
 	
 	public ChangeAwareCustomFeature(IFeatureProvider fp) {
+		this(fp, null);
+	}
+	
+	public ChangeAwareCustomFeature(IFeatureProvider fp, Injector injector) {
 		super(fp);
+		this.injector = injector;
 		this.hasDoneChanges = false;
 	}
 
@@ -60,5 +68,12 @@ public abstract class ChangeAwareCustomFeature extends AbstractCustomFeature {
 	 */
 	protected EObject getContainerModelObject(ICustomContext context){
 		return (EObject) getBusinessObjectForPictogramElement(getDiagram());
+	}
+
+	/**
+	 * @return the Guice injector
+	 */
+	public Injector getInjector() {
+		return injector;
 	}
 }

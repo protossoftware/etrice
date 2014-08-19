@@ -25,9 +25,16 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.core.ui.RoomUiModule;
+
+import com.google.inject.Injector;
 
 public class DiagramAccess extends DiagramAccessBase {
 
+	public DiagramAccess() {
+		super();
+	}
+	
 	public String getDiagramName(EObject rootObject) {
 		if (rootObject instanceof StructureClass) {
 			StructureClass sc = (StructureClass) rootObject;
@@ -71,5 +78,14 @@ public class DiagramAccess extends DiagramAccessBase {
 			return cmd;
 
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.base.support.DiagramAccessBase#injectMembers()
+	 */
+	@Override
+	protected void injectMembers() {
+		Injector injector = RoomUiModule.getInjector();
+        injector.injectMembers(this);
 	}
 }

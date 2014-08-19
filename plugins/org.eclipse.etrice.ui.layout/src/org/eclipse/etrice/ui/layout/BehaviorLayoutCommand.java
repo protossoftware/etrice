@@ -16,7 +16,7 @@ package org.eclipse.etrice.ui.layout;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.TrPointSupport;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Text;

@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.dialogs.StatePropertyDialog.Where;
 import org.eclipse.etrice.ui.behavior.dialogs.TransitionPropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.support.IBehaviorQuickfixProvider;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.base.quickfix.AbstractQuickfixProvider;
 import org.eclipse.etrice.ui.common.base.quickfix.IDiagramModification;
@@ -60,7 +61,7 @@ import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
  * @author jayant
  * 
  */
-public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
+public class BehaviorQuickfixProvider extends AbstractQuickfixProvider implements IBehaviorQuickfixProvider {
 
 	private static final String ADD_IMG = "icons/quickfix/add.gif";
 	private static final String SUB_IMG = "icons/quickfix/add.gif";
@@ -113,7 +114,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider {
 										// trigger and add it to the state graph
 										TriggeredTransition trans = FSMFactory.eINSTANCE
 												.createTriggeredTransition();
-										trans.setName(SupportUtil.getInstance().getRoomUtil()
+										trans.setName(SupportUtil.getInstance().getFSMUtil()
 												.getUniqueTransitionName((StateGraph) state
 														.eContainer()));
 										Trigger tri = FSMFactory.eINSTANCE

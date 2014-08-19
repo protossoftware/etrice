@@ -14,11 +14,11 @@ package org.eclipse.etrice.ui.behavior.editor;
 
 import java.io.File;
 
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
-import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.editor.DiagramExporter;
 import org.eclipse.ui.PlatformUI;
 
@@ -26,7 +26,7 @@ public class BehaviorExporter {
 
 	private static final String SUFFIX = "_behavior";
 
-	public static void export(ActorClass ac, String folder) {
+	public static void export(ModelComponent ac, String folder) {
 		DiagramAccess da = new DiagramAccess();
 
 		boolean wasOpen = false;
@@ -37,10 +37,10 @@ public class BehaviorExporter {
 			editor = (BehaviorEditor) da.openDiagramEditor(ac);
 
 		if (editor!=null) {
-			String filename = folder+File.separatorChar+ac.getName()+SUFFIX;
+			String filename = folder+File.separatorChar+ac.getComponentName()+SUFFIX;
 			DiagramExporter.export(editor, filename);
 			
-			exportSubGraphsRecursively(ac.getStateMachine(), editor, folder+File.separatorChar+ac.getName());
+			exportSubGraphsRecursively(ac.getStateMachine(), editor, folder+File.separatorChar+ac.getComponentName());
 			
 			if (!wasOpen)
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
@@ -52,9 +52,9 @@ public class BehaviorExporter {
 			return;
 		
 		for (State state : sg.getStates()) {
-			if (SupportUtil.getInstance().getRoomHelpers().hasDirectSubStructure(state)) {
+			if (FSMSupportUtil.getInstance().getFSMHelpers().hasDirectSubStructure(state)) {
 				if (editor.showStateGraph(state.getSubgraph())) {
-					String filename = basename+"_"+SupportUtil.getInstance().getRoomNameProvider().getStatePathName(state)+SUFFIX;
+					String filename = basename+"_"+FSMSupportUtil.getInstance().getFSMNameProvider().getStatePathName(state)+SUFFIX;
 					DiagramExporter.export(editor, filename);
 				}
 				

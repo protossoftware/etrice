@@ -24,13 +24,14 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.util.FSMSwitch;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
-import org.eclipse.etrice.ui.behavior.support.ChoicePointSupport;
-import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
-import org.eclipse.etrice.ui.behavior.support.InitialPointSupport;
-import org.eclipse.etrice.ui.behavior.support.StateGraphSupport;
-import org.eclipse.etrice.ui.behavior.support.StateSupport;
-import org.eclipse.etrice.ui.behavior.support.TrPointSupport;
-import org.eclipse.etrice.ui.behavior.support.TransitionSupport;
+import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.ChoicePointSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.DiagramUpdateFeature;
+import org.eclipse.etrice.ui.behavior.fsm.support.InitialPointSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.StateGraphSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.StateSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.TrPointSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.TransitionSupport;
 import org.eclipse.etrice.ui.common.base.support.CantDeleteFeature;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.RemoveBendpointsFeature;
@@ -72,8 +73,9 @@ import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IShapeSelectionInfo;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ShapeSelectionInfoImpl;
-import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.IColorConstant;
+
+import com.google.inject.Injector;
 
 public class ProviderDispatcher {
 
@@ -228,10 +230,10 @@ public class ProviderDispatcher {
 		
 	}
 
-	private class DispatchingFeatureProvider extends DefaultFeatureProvider {
+	private class DispatchingFeatureProvider extends InjectingFeatureProvider {
 
-		public DispatchingFeatureProvider(IDiagramTypeProvider dtp) {
-			super(dtp);
+		public DispatchingFeatureProvider(IDiagramTypeProvider dtp, Injector injector) {
+			super(dtp, injector);
 		}
 		
 		@Override
@@ -284,7 +286,7 @@ public class ProviderDispatcher {
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			if (context.getPictogramElement() instanceof Diagram)
-				return new DiagramUpdateFeature(this);
+				return new DiagramUpdateFeature(this, getInjector());
 			
 			IFeatureProvider fp = getFeatureProvider(context);
 			if (fp!=null)
@@ -500,17 +502,17 @@ public class ProviderDispatcher {
 	private DispatchingToolBehaviorProvider dispatchingBP;
 	
 	
-	public ProviderDispatcher(IDiagramTypeProvider dtp) {
+	public ProviderDispatcher(IDiagramTypeProvider dtp, Injector injector) {
 		// create those first before using them
-		dispatchingFP = new DispatchingFeatureProvider(dtp);
+		dispatchingFP = new DispatchingFeatureProvider(dtp, injector);
 		dispatchingBP = new DispatchingToolBehaviorProvider(dtp);
 
-		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP);
-		trPointSupport = new TrPointSupport(dtp, dispatchingFP);
-		initialPointSupport = new InitialPointSupport(dtp, dispatchingFP);
-		choicePointSupport = new ChoicePointSupport(dtp, dispatchingFP);
-		stateSupport = new StateSupport(dtp, dispatchingFP);
-		transitionSupport = new TransitionSupport(dtp, dispatchingFP);
+		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP, injector);
+		trPointSupport = new TrPointSupport(dtp, dispatchingFP, injector);
+		initialPointSupport = new InitialPointSupport(dtp, dispatchingFP, injector);
+		choicePointSupport = new ChoicePointSupport(dtp, dispatchingFP, injector);
+		stateSupport = new StateSupport(dtp, dispatchingFP, injector);
+		transitionSupport = new TransitionSupport(dtp, dispatchingFP, injector);
 		
 		featureSwitch = new FeatureProviderSwitch();
 		behaviorSwitch = new ToolBehaviorProviderSwitch();

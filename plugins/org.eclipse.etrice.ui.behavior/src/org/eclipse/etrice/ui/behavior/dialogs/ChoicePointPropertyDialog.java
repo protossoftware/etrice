@@ -9,6 +9,7 @@ import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.IChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
@@ -17,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class ChoicePointPropertyDialog extends AbstractPropertyDialog {
+public class ChoicePointPropertyDialog extends AbstractPropertyDialog implements IChoicePointPropertyDialog {
 	
 	class NameValidator implements IValidator {
 
@@ -26,7 +27,7 @@ public class ChoicePointPropertyDialog extends AbstractPropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(cp, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(cp, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}

@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -29,6 +30,10 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.StringToDetailCode;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -60,14 +65,21 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog {
+public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog implements ITransitionPropertyDialog {
 	
-	private class TriggerContentProvider implements IStructuredContentProvider {
+	protected static class TriggerContentProvider implements IStructuredContentProvider {
+		
+		private Transition trans;
+		
 		@Override
 		public void dispose() {}
 		
 		@Override
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			if (newInput instanceof Transition) {
+				trans = (Transition) newInput;
+			}
+		}
 
 		@Override
 		public Object[] getElements(Object inputElement) {
@@ -79,20 +91,20 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 	}
 
-	private class TriggerLabelProvider extends LabelProvider implements
+	protected static class TriggerLabelProvider extends LabelProvider implements
 			IBaseLabelProvider {
 
 		@Override
 		public String getText(Object element) {
 			if (element instanceof Trigger) {
 				Trigger trig = (Trigger) element;
-				return SupportUtil.getInstance().getRoomNameProvider().getTriggerLabel(trig);
+				return SupportUtil.getInstance().getFSMNameProvider().getTriggerLabel(trig);
 			}
 			return super.getText(element);
 		}
 	}
 
-	private class MessageFromInterfaceContentProvider implements IStructuredContentProvider {
+	protected static class MessageFromInterfaceContentProvider implements IStructuredContentProvider {
 		private Trigger currentTrigger = null;
 
 		@Override
@@ -102,6 +114,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput instanceof Trigger)
 				currentTrigger = (Trigger) newInput;
+			else
+				currentTrigger = null;
 		}
 
 		@Override
@@ -118,34 +132,41 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 	}
 
-	private class MessageFromInterfaceLabelProvider extends LabelProvider implements
+	protected static class MessageFromInterfaceLabelProvider extends LabelProvider implements
 			IBaseLabelProvider {
 
 		@Override
 		public String getText(Object element) {
 			if (element instanceof MessageFromIf) {
 				MessageFromIf mif = (MessageFromIf) element;
-				return SupportUtil.getInstance().getRoomNameProvider().getMsgFromIfLabel(mif);
+				return SupportUtil.getInstance().getFSMNameProvider().getMsgFromIfLabel(mif);
 			}
 			return super.getText(element);
 		}
 	}
 
-	private class NameValidator implements IValidator {
+	protected static class NameValidator implements IValidator {
 
+		private Transition trans;
+
+		public NameValidator(Transition trans) {
+			this.trans = trans;
+		}
+		
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(trans, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(trans, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
 	}
-	private class GuardValidator implements IValidator {
+	
+	protected static class GuardValidator implements IValidator {
 
 		private String text;
 		
@@ -161,7 +182,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 					return ValidationStatus.error(text);
 			}
 			else if (value instanceof DetailCode) {
-				if (SupportUtil.getInstance().getRoomHelpers().getDetailCode((DetailCode)value).trim().isEmpty())
+				if (SupportUtil.getInstance().getFSMHelpers().getDetailCode((DetailCode)value).trim().isEmpty())
 					return ValidationStatus.error(text);
 			}
 			return Status.OK_STATUS;
@@ -192,6 +213,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		super(shell, "Edit Transition", ac);
 		this.trans = trans;
 
+		Activator.getDefault().getInjector().injectMembers(this);
+		
 		m2s = new DetailCodeToString();
 		m2s_null_empty = new DetailCodeToString(true);
 		s2m = new StringToDetailCode();
@@ -209,8 +232,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		refined = null;
 		if (inherited) {
-			if (getActorClass().getStateMachine()!=null)
-				for (RefinedTransition rt : getActorClass().getStateMachine().getRefinedTransitions()) {
+			if (getModelComponent().getStateMachine()!=null)
+				for (RefinedTransition rt : getModelComponent().getStateMachine().getRefinedTransitions()) {
 					if (rt.getTarget()==trans) {
 						refined = rt;
 						break;
@@ -231,7 +254,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
 		
 		if (!(trans instanceof InitialTransition)) {
-			NameValidator nv = new NameValidator();
+			NameValidator nv = new NameValidator(trans);
 			
 			if (inherited) {
 				createFixedText(body, "&Name:", trans.getName(), false);
@@ -271,7 +294,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 		}
 		
-		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		if (trans instanceof GuardedTransition) {
 			if (inherited) {
@@ -310,7 +333,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		{
-			String code = roomHelpers.getInheritedActionCode(trans, getActorClass());
+			String code = roomHelpers.getInheritedActionCode(trans, getModelComponent());
 			if (code!=null){
 				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);

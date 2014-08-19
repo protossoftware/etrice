@@ -23,14 +23,21 @@ import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 
+import com.google.inject.Injector;
+
 public abstract class ChangeAwareCreateConnectionFeature extends
 		AbstractCreateConnectionFeature {
 
 	boolean hasDoneChanges;
+	private Injector injector;
 	
-	public ChangeAwareCreateConnectionFeature(IFeatureProvider fp, String name,
-			String description) {
+	public ChangeAwareCreateConnectionFeature(IFeatureProvider fp, String name, String description) {
+		this(fp, null, name, description);
+	}
+	
+	public ChangeAwareCreateConnectionFeature(IFeatureProvider fp, Injector injector, String name, String description) {
 		super(fp, name, description);
+		this.injector = injector;
 		this.hasDoneChanges = false;
 	}
 
@@ -72,5 +79,13 @@ public abstract class ChangeAwareCreateConnectionFeature extends
 	 */
 	protected EObject getContainerModelObject(ICreateConnectionContext context){
 		return (EObject) getBusinessObjectForPictogramElement(getDiagram());
+	}
+
+
+	/**
+	 * @return the Guice injector
+	 */
+	public Injector getInjector() {
+		return injector;
 	}
 }

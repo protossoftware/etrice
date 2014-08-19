@@ -10,6 +10,7 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
@@ -18,16 +19,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class TrPointPropertyDialog extends AbstractPropertyDialog {
+public class TrPointPropertyDialog extends AbstractPropertyDialog implements ITrPointPropertyDialog {
 	
-	class NameValidator implements IValidator {
+	protected class NameValidator implements IValidator {
 
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = SupportUtil.getInstance().getValidationUtil().isUniqueName(tp, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(tp, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
