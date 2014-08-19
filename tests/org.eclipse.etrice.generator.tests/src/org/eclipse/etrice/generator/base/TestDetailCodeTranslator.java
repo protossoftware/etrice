@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -55,7 +56,7 @@ import org.junit.Test;
  */
 public class TestDetailCodeTranslator {
 
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers roomHelpers = new RoomHelpers();
 	
 	/**
 	 * @author Henrik Rentz-Reichert
