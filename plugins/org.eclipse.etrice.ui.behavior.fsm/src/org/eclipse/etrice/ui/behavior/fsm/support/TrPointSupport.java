@@ -30,9 +30,8 @@ import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -88,10 +87,12 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ImageDecorator;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
@@ -115,14 +116,14 @@ public class TrPointSupport {
 	
 	enum Type { TRANS_POINT, ENTRY_POINT, EXIT_POINT }
 	
-	private static class FeatureProvider extends InjectingFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private static class CreateFeature extends ChangeAwareCreateFeature {
 	
 			protected Type type;
 			
-			public CreateFeature(IFeatureProvider fp, Injector injector, Type type, String name, String description) {
-				super(fp, injector, name, description);
+			public CreateFeature(IFeatureProvider fp, Type type, String name, String description) {
+				super(fp, name, description);
 				this.type = type;
 			}
 			
@@ -166,7 +167,8 @@ public class TrPointSupport {
 				sg.getTrPoints().add(tp);
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				ITrPointPropertyDialog dlg = factory.createTrPointPropertyDialog(shell, tp, false);
 				if (dlg.open()==Window.OK) {
 					 // do the add
@@ -504,8 +506,8 @@ public class TrPointSupport {
 			private String name;
 			private String description;
 
-			public PropertyFeature(IFeatureProvider fp, Injector injector) {
-				super(fp, injector);
+			public PropertyFeature(IFeatureProvider fp) {
+				super(fp);
 				this.name = "Edit Transition Point";
 				this.description = "Edit Transition Point";
 			}
@@ -539,7 +541,8 @@ public class TrPointSupport {
 				boolean subtp = isSubTP(pe);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				ITrPointPropertyDialog dlg = factory.createTrPointPropertyDialog(shell, tp, subtp);
 				if (dlg.open()==Window.OK){
 					String kind = getItemKind(tp);
@@ -696,17 +699,17 @@ public class TrPointSupport {
 		
 		protected IFeatureProvider fp;
 		
-		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 		
 		@Override
 		public ICreateFeature[] getCreateFeatures() {
 			return new ICreateFeature[] {
-					new CreateFeature(fp, getInjector(), Type.TRANS_POINT, "Transition Point", "Create Transition Point"),
-					new CreateFeature(fp, getInjector(), Type.ENTRY_POINT, "Entry Point", "Create Entry Point"),
-					new CreateFeature(fp, getInjector(), Type.EXIT_POINT, "Exit Point", "Create Exit Point")
+					new CreateFeature(fp, Type.TRANS_POINT, "Transition Point", "Create Transition Point"),
+					new CreateFeature(fp, Type.ENTRY_POINT, "Entry Point", "Create Entry Point"),
+					new CreateFeature(fp, Type.EXIT_POINT, "Exit Point", "Create Exit Point")
 				};
 		}
 		
@@ -732,7 +735,7 @@ public class TrPointSupport {
 			
 			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
 			
-			result.add(new PropertyFeature(fp, getInjector()));
+			result.add(new PropertyFeature(fp));
 			
 			// Provide quick fix feature only for those edit parts which have
 			// errors, warnings or infos.
@@ -741,7 +744,7 @@ public class TrPointSupport {
 					.getDiagnosingModelObserver().getElementDiagonsticMap()
 					.get(bo);
 			if (diagnostics != null)
-				result.add(new QuickFixFeature(fp, getInjector()));
+				result.add(new QuickFixFeature(fp));
 
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
@@ -927,10 +930,10 @@ public class TrPointSupport {
 		
 	}
 
-	private class BehaviorProvider extends InjectingBehaviorProvider {
+	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -952,7 +955,7 @@ public class TrPointSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), getInjector());
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 		
 		@Override
@@ -1032,9 +1035,9 @@ public class TrPointSupport {
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
 	
-	public TrPointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		pfp = new FeatureProvider(dtp, fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public TrPointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		pfp = new FeatureProvider(dtp, fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {

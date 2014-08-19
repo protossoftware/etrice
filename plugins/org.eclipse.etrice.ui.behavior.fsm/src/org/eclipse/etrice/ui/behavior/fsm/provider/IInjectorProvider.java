@@ -12,32 +12,13 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.provider;
 
-import org.eclipse.graphiti.dt.IDiagramTypeProvider;
-import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
-
 import com.google.inject.Injector;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class InjectingBehaviorProvider extends DefaultToolBehaviorProvider {
+public interface IInjectorProvider {
 
-	private Injector injector;
-
-	/**
-	 * @param diagramTypeProvider
-	 */
-	public InjectingBehaviorProvider(IDiagramTypeProvider diagramTypeProvider, Injector injector) {
-		super(diagramTypeProvider);
-		this.injector = injector;
-	}
-
-	/**
-	 * @return the Guice injector
-	 */
-	public Injector getInjector() {
-		return injector;
-	}
-
+	Injector getInjector();
 }

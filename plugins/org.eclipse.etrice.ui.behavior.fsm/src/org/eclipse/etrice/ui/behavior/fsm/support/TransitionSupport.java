@@ -38,9 +38,8 @@ import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
@@ -91,9 +90,11 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ImageDecorator;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -115,12 +116,12 @@ public class TransitionSupport {
 	private static final String newLine = Strings.newLine();
 	private static final int newLineLength = Strings.newLine().length();
 	
-	static class FeatureProvider extends InjectingFeatureProvider {
+	static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private class CreateFeature extends ChangeAwareCreateConnectionFeature {
 
-			public CreateFeature(IFeatureProvider fp, Injector injector) {
-				super(fp, injector, "Transition", "create Transition");
+			public CreateFeature(IFeatureProvider fp) {
+				super(fp, "Transition", "create Transition");
 			}
 			
 			@Override
@@ -258,7 +259,8 @@ public class TransitionSupport {
 					sg.getTransitions().add(trans);
 					
 		        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+		        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+		        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 		        	ITransitionPropertyDialog dlg = factory.createTransitionPropertyDialog(shell, FSMSupportUtil.getInstance().getModelComponent(getDiagram()), trans);
 					if (dlg.open()==Window.OK) {
 						AddConnectionContext addContext = new AddConnectionContext(context.getSourceAnchor(), context.getTargetAnchor());
@@ -470,7 +472,8 @@ public class TransitionSupport {
 					sg.getTransitions().add(trans);
 					
 					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+		        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+		        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 					ITransitionPropertyDialog dlg = factory.createTransitionPropertyDialog(shell, mc, trans);
 					if (dlg.open()!=Window.OK) {
 						sg.getTransitions().add(orig);
@@ -593,8 +596,8 @@ public class TransitionSupport {
 
 			private boolean editable;
 
-			public PropertyFeature(IFeatureProvider fp, Injector injector, boolean editable) {
-				super(fp, injector);
+			public PropertyFeature(IFeatureProvider fp, boolean editable) {
+				super(fp);
 				this.editable = editable;
 			}
 
@@ -637,7 +640,8 @@ public class TransitionSupport {
 				Connection conn = pair.getKey();
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				ITransitionPropertyDialog dlg = factory.createTransitionPropertyDialog(shell, FSMSupportUtil.getInstance().getModelComponent(getDiagram()), trans);
 				if (dlg.open()==Window.OK){
 					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
@@ -744,14 +748,14 @@ public class TransitionSupport {
 		
 		private IFeatureProvider fp;
 		
-		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 
 		@Override
 		public ICreateConnectionFeature[] getCreateConnectionFeatures() {
-			return new ICreateConnectionFeature[] { new CreateFeature(fp, getInjector()) };
+			return new ICreateConnectionFeature[] { new CreateFeature(fp) };
 		}
 		
 		@Override
@@ -803,7 +807,7 @@ public class TransitionSupport {
 							}
 						}
 				
-				result.add(new PropertyFeature(fp, getInjector(), editable));
+				result.add(new PropertyFeature(fp, editable));
 				
 				if (!editable)
 					result.add(new RefineTransitionFeature(fp));
@@ -816,7 +820,7 @@ public class TransitionSupport {
 					.getDiagnosingModelObserver().getElementDiagonsticMap()
 					.get(bo);
 			if (diagnostics != null)
-				result.add(new QuickFixFeature(fp, getInjector()));
+				result.add(new QuickFixFeature(fp));
 			
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
@@ -858,10 +862,10 @@ public class TransitionSupport {
 		}
 	}
 	
-	class BehaviorProvider extends InjectingBehaviorProvider {
+	class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -874,7 +878,7 @@ public class TransitionSupport {
 				Transition trans = (Transition) bo;
 				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagramTypeProvider().getDiagram());
 				boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(trans)==mc;
-				return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), getInjector(), editable);
+				return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
 			}
 			
 			return null;
@@ -949,9 +953,9 @@ public class TransitionSupport {
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
 	
-	public TransitionSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		pfp = new FeatureProvider(dtp,fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public TransitionSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		pfp = new FeatureProvider(dtp,fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {

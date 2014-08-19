@@ -102,7 +102,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
 		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new DiagramUpdateFeature(featureProvider, Activator.getDefault().getInjector()));
+		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new DiagramUpdateFeature(featureProvider));
 		if (cmd.updateNeeded())
 			return cmd;
 		

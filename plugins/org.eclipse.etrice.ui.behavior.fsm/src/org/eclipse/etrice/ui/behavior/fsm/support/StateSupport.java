@@ -28,9 +28,8 @@ import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -89,10 +88,12 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ImageDecorator;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -119,12 +120,12 @@ public class StateSupport {
 	private static final IColorConstant BACKGROUND = new ColorConstant(200, 200, 200);
 	private static final IColorConstant INHERITED_BACKGROUND = new ColorConstant(230, 230, 230);
 
-	private static class FeatureProvider extends InjectingFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 
 		private class CreateFeature extends ChangeAwareCreateFeature {
 	
-			public CreateFeature(IFeatureProvider fp, Injector injector) {
-				super(fp, injector, "State", "create State");
+			public CreateFeature(IFeatureProvider fp) {
+				super(fp, "State", "create State");
 			}
 			
 			@Override
@@ -162,7 +163,8 @@ public class StateSupport {
 				sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 	        	IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, ac, s, true);
 				if (dlg.open()==Window.OK) {
 					addGraphicalRepresentation(context, s);
@@ -330,8 +332,8 @@ public class StateSupport {
 
 			private boolean editable;
 			
-			public PropertyFeature(IFeatureProvider fp, Injector injector, boolean editable) {
-				super(fp, injector);
+			public PropertyFeature(IFeatureProvider fp, boolean editable) {
+				super(fp);
 				this.editable = editable;
 			}
 
@@ -363,7 +365,8 @@ public class StateSupport {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+				IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, ac, s, editable);
 				if (dlg.open()==Window.OK){
 					updateFigure(s, context);
@@ -846,8 +849,8 @@ public class StateSupport {
 		
 		private IFeatureProvider fp;
 	
-		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 	
@@ -870,7 +873,7 @@ public class StateSupport {
 
 		@Override
 		public ICreateFeature[] getCreateFeatures() {
-			return new ICreateFeature[] { new CreateFeature(fp, getInjector()) };
+			return new ICreateFeature[] { new CreateFeature(fp) };
 		}
 	
 		@Override
@@ -921,7 +924,7 @@ public class StateSupport {
 				ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagramTypeProvider().getDiagram());
 				//boolean inherited = FSMSupportUtil.isInherited(getDiagramTypeProvider().getDiagram(), s);
 				boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==ac;
-				result.add(new PropertyFeature(fp, getInjector(), editable));
+				result.add(new PropertyFeature(fp, editable));
 				if (!editable)
 					result.add(new CreateRefinedStateFeature(fp));
 				
@@ -938,17 +941,17 @@ public class StateSupport {
 					.getDiagnosingModelObserver().getElementDiagonsticMap()
 					.get(bo);
 			if (diagnostics != null)
-				result.add(new QuickFixFeature(fp, getInjector()));
+				result.add(new QuickFixFeature(fp));
 			
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
 		}
 	}
 	
-	private class BehaviorProvider extends InjectingBehaviorProvider {
+	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -978,7 +981,7 @@ public class StateSupport {
 				State s = (State) bo;
 				if (!FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, ac)) {
 					boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==ac;
-					return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), getInjector(), editable);
+					return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
 				}
 			}
 			return new FeatureProvider.GoDownFeature(getDiagramTypeProvider().getFeatureProvider());
@@ -1118,9 +1121,9 @@ public class StateSupport {
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
 	
-	public StateSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		pfp = new FeatureProvider(dtp,fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public StateSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		pfp = new FeatureProvider(dtp,fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {

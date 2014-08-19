@@ -18,8 +18,6 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.base.support.NoResizeFeature;
@@ -60,12 +58,12 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import com.google.inject.Injector;
 
 public class InitialPointSupport {
 	
@@ -77,7 +75,7 @@ public class InitialPointSupport {
 	protected static final IColorConstant BRIGHT_COLOR = new ColorConstant(255, 255, 255);
 	protected static final String PROP_KIND = "item-kind";
 	
-	private static class FeatureProvider extends InjectingFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private static class CreateFeature extends AbstractCreateFeature {
 	
@@ -265,8 +263,8 @@ public class InitialPointSupport {
 		
 		protected IFeatureProvider fp;
 		
-		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 		
@@ -330,10 +328,10 @@ public class InitialPointSupport {
 		
 	}
 
-	private class BehaviorProvider extends InjectingBehaviorProvider {
+	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -389,9 +387,9 @@ public class InitialPointSupport {
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
 	
-	public InitialPointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		pfp = new FeatureProvider(dtp, fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public InitialPointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		pfp = new FeatureProvider(dtp, fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {

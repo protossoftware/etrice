@@ -15,8 +15,6 @@ package org.eclipse.etrice.ui.behavior;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
-import com.google.inject.Injector;
-
 public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
 	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.behavior.diagramTypeProvider";
@@ -28,8 +26,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 
 	public DiagramTypeProvider() {
 		super();
-		Injector injector = Activator.getDefault().getInjector();
-		dispatcher = new ProviderDispatcher(this, injector);
+		dispatcher = new ProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
 	}
 

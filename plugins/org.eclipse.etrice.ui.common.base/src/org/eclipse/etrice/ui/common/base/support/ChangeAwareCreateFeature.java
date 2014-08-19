@@ -24,16 +24,10 @@ import com.google.inject.Injector;
 
 public abstract class ChangeAwareCreateFeature extends AbstractCreateFeature {
 	
-	private Injector injector;
 	boolean hasDoneChanges;
 	
 	public ChangeAwareCreateFeature(IFeatureProvider fp, String name, String description) {
-		this(fp, null, name, description);
-	}
-	
-	public ChangeAwareCreateFeature(IFeatureProvider fp, Injector injector, String name, String description) {
 		super(fp, name, description);
-		this.injector = injector;
 		this.hasDoneChanges = false;
 	}
 
@@ -74,12 +68,5 @@ public abstract class ChangeAwareCreateFeature extends AbstractCreateFeature {
 	 */
 	protected EObject getContainerModelObject(ICreateContext context){
 		return (EObject) getBusinessObjectForPictogramElement(getDiagram());
-	}
-
-	/**
-	 * @return the Guice injector
-	 */
-	public Injector getInjector() {
-		return injector;
 	}
 }

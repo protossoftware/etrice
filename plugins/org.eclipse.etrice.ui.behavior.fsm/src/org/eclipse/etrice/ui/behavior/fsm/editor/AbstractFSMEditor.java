@@ -53,5 +53,4 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 		getEditingDomain().getCommandStack().execute(cmd);
 		getEditingDomain().getCommandStack().flush();
 	}
-
 }

@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.QuickFixDialog;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
 import org.eclipse.etrice.ui.common.base.quickfix.IssueResolution;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
@@ -37,8 +38,8 @@ public class QuickFixFeature extends ChangeAwareCustomFeature {
 	
 	private HashMap<FeatureBasedDiagnostic, List<IssueResolution>> issueResolutionsMap;
 
-	public QuickFixFeature(IFeatureProvider fp, Injector injector) {
-		super(fp, injector);
+	public QuickFixFeature(IFeatureProvider fp) {
+		super(fp);
 	}
 
 	@Override
@@ -105,7 +106,8 @@ public class QuickFixFeature extends ChangeAwareCustomFeature {
 					.getElementDiagonsticMap().get(bo);
 			
 			issueResolutionsMap = new HashMap<FeatureBasedDiagnostic, List<IssueResolution>>();
-			IBehaviorQuickfixProvider behaviorQuickfixProvider = getInjector().getInstance(IBehaviorQuickfixProvider.class);
+        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+			IBehaviorQuickfixProvider behaviorQuickfixProvider = injector.getInstance(IBehaviorQuickfixProvider.class);
 			for (Diagnostic issue : issues) {
 				if (((FeatureBasedDiagnostic) issue).getIssueCode()!=null) {
 					issueResolutionsMap.put((FeatureBasedDiagnostic) issue,

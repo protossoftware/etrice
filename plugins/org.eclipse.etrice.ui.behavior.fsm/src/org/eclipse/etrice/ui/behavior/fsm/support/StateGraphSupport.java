@@ -26,8 +26,6 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -67,13 +65,13 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ImageDecorator;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-
-import com.google.inject.Injector;
 
 public class StateGraphSupport {
 	
@@ -86,7 +84,7 @@ public class StateGraphSupport {
 	private static final IColorConstant LINE_COLOR = new ColorConstant(0, 0, 0);
 	private static final IColorConstant BACKGROUND = new ColorConstant(255, 255, 255);
 
-	private static class FeatureProvider extends InjectingFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 	
 		private class AddFeature extends AbstractAddFeature {
 	
@@ -527,8 +525,8 @@ public class StateGraphSupport {
 		
 		private IFeatureProvider fp;
 	
-		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 		
@@ -578,18 +576,19 @@ public class StateGraphSupport {
 					.getDiagramBehavior().getDiagramContainer())
 					.getDiagnosingModelObserver().getElementDiagonsticMap()
 					.get(bo);
-			if (diagnostics != null)
-				result.add(new QuickFixFeature(fp, getInjector()));
+			if (diagnostics != null) {
+				result.add(new QuickFixFeature(fp));
+			}
 
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
 		}
 	}
 
-	private class BehaviorProvider extends InjectingBehaviorProvider {
+	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -660,9 +659,9 @@ public class StateGraphSupport {
 	private FeatureProvider afp;
 	private BehaviorProvider tbp;
 		
-	public StateGraphSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		afp = new FeatureProvider(dtp, fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public StateGraphSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		afp = new FeatureProvider(dtp, fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {

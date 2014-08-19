@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
-import org.eclipse.etrice.ui.behavior.fsm.support.StateGraphUpdateContext;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IRemoveFeature;
@@ -42,14 +42,12 @@ import com.google.inject.Injector;
 public class DiagramUpdateFeature extends AbstractUpdateFeature {
 
 	private ArrayList<Shape> usedShapes = new ArrayList<Shape>();
-	private Injector injector;
 	
 	/**
 	 * @param fp
 	 */
-	public DiagramUpdateFeature(IFeatureProvider fp, Injector injector) {
+	public DiagramUpdateFeature(IFeatureProvider fp) {
 		super(fp);
-		this.injector = injector;
 	}
 
 	/* (non-Javadoc)
@@ -66,6 +64,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
 		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+    	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 		StateGraphContext tree = StateGraphContext.createContextTree(ac, injector);
 		
 		usedShapes.clear();
@@ -110,6 +109,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	@Override
 	public boolean update(IUpdateContext context) {
 		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+    	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 		StateGraphContext tree = StateGraphContext.createContextTree(ac, injector);
 
 		usedShapes.clear();

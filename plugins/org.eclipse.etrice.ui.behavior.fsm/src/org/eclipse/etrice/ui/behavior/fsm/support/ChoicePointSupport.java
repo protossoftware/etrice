@@ -25,9 +25,8 @@ import org.eclipse.etrice.ui.behavior.fsm.dialogs.IChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingBehaviorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.provider.InjectingFeatureProvider;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -78,10 +77,12 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
+import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IDecorator;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.tb.ImageDecorator;
+import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.jface.window.Window;
@@ -100,12 +101,12 @@ public class ChoicePointSupport {
 	protected static final IColorConstant BRIGHT_COLOR = new ColorConstant(255, 255, 255);
 	protected static final String PROP_KIND = "item-kind";
 	
-	private static class FeatureProvider extends InjectingFeatureProvider {
+	private static class FeatureProvider extends DefaultFeatureProvider {
 		
 		private static class CreateFeature extends ChangeAwareCreateFeature {
 	
-			public CreateFeature(IFeatureProvider fp, Injector injector, String name, String description) {
-				super(fp, injector, name, description);
+			public CreateFeature(IFeatureProvider fp, String name, String description) {
+				super(fp, name, description);
 			}
 			
 			@Override
@@ -131,7 +132,8 @@ public class ChoicePointSupport {
 				sg.getChPoints().add(cp);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				IChoicePointPropertyDialog dlg = factory.createChoicePointPropertyDialog(shell, cp);
 				if (dlg.open()==Window.OK) {
 					// do the add
@@ -265,8 +267,8 @@ public class ChoicePointSupport {
 			private String name;
 			private String description;
 			
-			public PropertyFeature(IFeatureProvider fp, Injector injector) {
-				super(fp, injector);
+			public PropertyFeature(IFeatureProvider fp) {
+				super(fp);
 				this.name = "Edit Choice Point";
 				this.description = "Edit Choice Point";
 			}
@@ -299,7 +301,8 @@ public class ChoicePointSupport {
 				ChoicePoint cp = (ChoicePoint) getBusinessObjectForPictogramElement(pe);
 				
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	        	IFSMDialogFactory factory = getInjector().getInstance(IFSMDialogFactory.class);
+				Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
 				IChoicePointPropertyDialog dlg = factory.createChoicePointPropertyDialog(shell, cp);
 				if (dlg.open()==Window.OK){
 					updateFigure(cp, pe, manageColor(DARK_COLOR), manageColor(BRIGHT_COLOR));
@@ -418,15 +421,15 @@ public class ChoicePointSupport {
 		
 		protected IFeatureProvider fp;
 		
-		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-			super(dtp, injector);
+		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+			super(dtp);
 			this.fp = fp;
 		}
 		
 		@Override
 		public ICreateFeature[] getCreateFeatures() {
 			return new ICreateFeature[] {
-					new CreateFeature(fp, getInjector(), "Choice Point", "Create Choice Point")
+					new CreateFeature(fp, "Choice Point", "Create Choice Point")
 				};
 		}
 		
@@ -447,7 +450,7 @@ public class ChoicePointSupport {
 		
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp, getInjector()) };
+			return new ICustomFeature[] { new PropertyFeature(fp) };
 		}
 		
 		@Override
@@ -505,10 +508,10 @@ public class ChoicePointSupport {
 		
 	}
 
-	private class BehaviorProvider extends InjectingBehaviorProvider {
+	private class BehaviorProvider extends DefaultToolBehaviorProvider {
 
-		public BehaviorProvider(IDiagramTypeProvider dtp, Injector injector) {
-			super(dtp, injector);
+		public BehaviorProvider(IDiagramTypeProvider dtp) {
+			super(dtp);
 		}
 		
 		@Override
@@ -530,7 +533,7 @@ public class ChoicePointSupport {
 		
 		@Override
 		public ICustomFeature getDoubleClickFeature(IDoubleClickContext context) {
-			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), getInjector());
+			return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider());
 		}
 		
 		@Override
@@ -622,9 +625,9 @@ public class ChoicePointSupport {
 	private FeatureProvider pfp;
 	private BehaviorProvider tbp;
 	
-	public ChoicePointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp, Injector injector) {
-		pfp = new FeatureProvider(dtp, fp, injector);
-		tbp = new BehaviorProvider(dtp, injector);
+	public ChoicePointSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
+		pfp = new FeatureProvider(dtp, fp);
+		tbp = new BehaviorProvider(dtp);
 	}
 	
 	public IFeatureProvider getFeatureProvider() {
