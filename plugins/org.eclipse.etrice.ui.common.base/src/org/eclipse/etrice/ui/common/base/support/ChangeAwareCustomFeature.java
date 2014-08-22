@@ -20,8 +20,6 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 
-import com.google.inject.Injector;
-
 public abstract class ChangeAwareCustomFeature extends AbstractCustomFeature {
 
 	boolean hasDoneChanges;

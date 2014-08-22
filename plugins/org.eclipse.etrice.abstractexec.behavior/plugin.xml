@@ -5,12 +5,12 @@
          point="org.eclipse.etrice.core.room.validation">
       <validator
             class="org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator"
-            classToCheck="org.eclipse.etrice.core.room.ActorClass"
+            classToCheck="org.eclipse.etrice.core.fsm.fSM.ModelComponent"
             mode="FAST">
       </validator>
       <validator
             class="org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator"
-            classToCheck="org.eclipse.etrice.core.room.ActorClass"
+            classToCheck="org.eclipse.etrice.core.fsm.fSM.ModelComponent"
             mode="FAST">
       </validator>
    </extension>

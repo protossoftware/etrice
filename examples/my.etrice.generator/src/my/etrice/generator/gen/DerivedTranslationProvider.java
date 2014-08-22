@@ -12,7 +12,7 @@
 
 package my.etrice.generator.gen;
 
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
 
 

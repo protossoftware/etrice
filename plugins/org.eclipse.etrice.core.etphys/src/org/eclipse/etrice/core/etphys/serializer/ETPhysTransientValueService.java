@@ -25,6 +25,7 @@ import org.eclipse.xtext.serializer.sequencer.LegacyTransientValueService;
 /**
  * Bug: sometimes xtext does not serialize the default values of required rules
  */
+@SuppressWarnings("restriction")
 public class ETPhysTransientValueService extends LegacyTransientValueService {
 
 	// Serialize default values of features

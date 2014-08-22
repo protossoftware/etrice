@@ -20,8 +20,6 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 
-import com.google.inject.Injector;
-
 public abstract class ChangeAwareCreateFeature extends AbstractCreateFeature {
 	
 	boolean hasDoneChanges;
