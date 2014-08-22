@@ -13,6 +13,18 @@ subsequent sections.
 \item core
 
 \begin{itemize}
+\item core.common is an Xtext based language which serves as a base for other \eTrice{} languages.
+It consists of the plug-ins
+\texttt{org.eclipse.etrice.core.common} and
+\texttt{org.eclipse.etrice.core.common.ui}.
+The base grammar defines recurring items like numbers with literals, annotations and the like.
+\item core.fsm is an Xtext based language that defines state machines in an abstract way.
+It consists of the plug-ins
+\texttt{org.eclipse.etrice.core.fsm} and
+\texttt{org.eclipse.etrice.core.fsm.ui}.
+The FSM language is abstract and has to be embedded in a model that defines containers for the state machine
+with interface items (e.g. ROOM ports or Franca interfaces) and messages.
+The ROOM grammar of \eTrice{} is derived from this grammar.
 \item core.room is an Xtext based language called ROOM. It consists of the plug-ins
 \texttt{org.eclipse.etrice.core.room} and
 \texttt{org.eclipse.etrice.core.room.ui}. ROOM is the basic modeling language of \eTrice{}.
@@ -37,6 +49,9 @@ easy access to implicit relations of the Room model.
 \item textual
 \begin{itemize}
 
+\item fsm.ui is the ui counterpart of core.fsm.  It consists of the plug-in 
+\texttt{org.eclipse.etrice.core.fsm.ui}. This plug-in realizes IDE concepts like content assist, error 
+markers and navigation by hyper links for the FSM language.
 \item room.ui is the ui counterpart of core.room.  It consists of the plug-in 
 \texttt{org.eclipse.etrice.core.room.ui}. This plug-in realizes IDE concepts like content assist, error 
 markers and navigation by hyper links for the Room language.
@@ -53,19 +68,26 @@ markers and navigation by hyper links for the etPhys language.
 
 \item graphical
 \begin{itemize}
+\item ui.common.base is a set of common code for the diagram editors. It consists of the plug-in 
+\texttt{org.eclipse.etrice.ui.common.base}. It depends only on the FSM part but not on ROOM.
 \item ui.common is a set of common code for the two diagram editors. It consists of the plug-in 
 \texttt{org.eclipse.etrice.ui.common}.
 \item ui.commands encapsulates some commands related to the navigation between \eTrice{} editors. It consists 
 of the plug-in \texttt{org.eclipse.etrice.ui.commands}.
 \item ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in 
 \texttt{org.eclipse.etrice.ui.structure}.
+\item ui.behavior.fsm is implementing the major part for the graphical state machine editor. It consists of the plug-in 
+\texttt{org.eclipse.etrice.ui.behavior.fsm}. All property dialogs are handled in an abstract way
+using a factory.
 \item ui.behavior is the Graphiti based editor for the Actor behavior. It consists of the plug-in 
-\texttt{org.eclipse.etrice.ui.behavior}.
+\texttt{org.eclipse.etrice.ui.behavior}. It utilizes the ui.behavior.fsm and provides concrete property dialogs.
 \end{itemize}
 \end{itemize}
 
 \item generators
 \begin{itemize}
+\item generator.fsm is a set of general classes and language independent parts of all generators. It consists 
+of the plug-in \textit{org.eclipse.etrice.generator.fsm}. It depends only on FSM but not on ROOM.
 \item generator is a set of general classes and language independent parts of all generators. It consists 
 of the plug-in \textit{org.eclipse.etrice.generator}.
 \item generator.c is the generator for the ANSI-C target language. It consists of the plug-in 
@@ -98,20 +120,52 @@ implementation that are worth to be pointed out.
 
 \subsubsection{Model Tweaks}
 
-The Room EMF model is inferred from the grammar. However, this powerful mechanism has to be tweaked at 
-some places.
-This is done in the 
-\textit{/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext} which is written 
-in the legacy Xtend language.
+All language EMF models of \eTrice{} are inferred from their respective grammar.
+However, this powerful mechanism has to be tweaked in some places.
+
+In order to do so post processors are added that are invoked by the Xtext framework on language generation.
+This is done for the FSM language by \texttt{/org.eclipse.etrice.core.fsm/src/org/eclipse/etrice/core/fsm/postprocessing/ImplPostprocessor.xtend}.
+
+The following parts of the model are changed or added:
+\begin{itemize}
+\item an operation \texttt{getName} is added to the \texttt{State} class
+\item an operation \texttt{getName} is added to the \texttt{StateGraphItem} class
+\item an operation \texttt{getSemantics} is added to the \texttt{AbstractInterfaceItem}
+\item an operation \texttt{getAllIncomingAbstractMessages} is added to the \texttt{AbstractInterfaceItem}
+\item an operation \texttt{getAllOutgoingAbstractMessages} is added to the \texttt{AbstractInterfaceItem}
+\item an interface class \texttt{IInterfaceItemOwner} is added
+\item an operation \texttt{getAbstractInterfaceItems} is added to the \texttt{AbstractInterfaceItem}
+\item an operation \texttt{getAllAbstractInterfaceItems} is added to the \texttt{AbstractInterfaceItem}
+\item \texttt{IInterfaceItemOwner} is made a super class of \texttt{ModelComponent}
+\end{itemize}
+All but the first two items in the list are part of the abstract FSM definition and are used to interface
+to the model embedding the FSM language, e.g. ROOM.
+
+For the ROOM language the post processor is
+\textit{/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext}.
 
 The following parts of the model are changed or added:
 \begin{itemize}
 \item the default \begin{verbatim}multiplicity\end{verbatim} of the \texttt{Port} is set to 1
 \item the operation \texttt{isReplicated} is added to the \texttt{Port}
-\item the default \texttt{size} of the \texttt{ActorRef} is set to 1
-\item an operation \texttt{getName} is add to the \texttt{State} class
-\item an operation \texttt{getName} is add to the \texttt{StateGraphItem} class
+\item the default \begin{verbatim}multiplicity\end{verbatim} of the \texttt{ActorRef} is set to 1
 \item an operation \texttt{getGeneralProtocol} is added to the \texttt{InterfaceItem}
+\item an operation \texttt{getSemantics} is added to the \texttt{InterfaceItem}
+\item an operation \texttt{getAllIncomingAbstractMessages} is added to the \texttt{InterfaceItem}
+\item an operation \texttt{getAllOutgoingAbstractMessages} is added to the \texttt{InterfaceItem}
+\item an operation \texttt{getExternalEndPorts} is added to the \texttt{ActorClass}
+\item an operation \texttt{getRelayPorts} is added to the \texttt{ActorClass}
+\item an operation \texttt{getImplementedSPPs} is added to the \texttt{ActorClass}
+\item an operation \texttt{getActorBase} is added to the \texttt{ActorClass}
+\item an operation \texttt{getComponentName} is added to the \texttt{ActorClass}
+\item an operation \texttt{getAbstractInterfaceItems} is added to the \texttt{ActorClass}
+\item an operation \texttt{getAllAbstractInterfaceItems} is added to the \texttt{ActorClass}
+\item an operation \texttt{getStructureClass} is added to the \texttt{ActorContainerRef}
+\item an operation \texttt{toString} is added to the \texttt{RefPath}
+\item for attribute \texttt{idx} of \texttt{RefSegment} the default is changed to -1
+\item an operation \texttt{toString} is added to the \texttt{RefSegment}
+\item an operation \texttt{getLiteralValue} is added to the \texttt{EnumLiteral}
+\item an operation \texttt{getFullName} is added to the \texttt{EnumLiteral}
 \end{itemize}
 
 \subsubsection{Imports by URI Using Namespaces}
