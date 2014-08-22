@@ -17,7 +17,10 @@ import org.eclipse.xtext.GeneratedMetamodel;
 public class PostprocessorController {
 
 	public static void process(GeneratedMetamodel metamodel){
-		new DocuPostprocessor().process(metamodel);
+		// first tweak the model
 		new ImplPostprocessor().process(metamodel);
+		
+		// then add documentation (also to the new elements)
+		new DocuPostprocessor().process(metamodel);
 	}
 }
