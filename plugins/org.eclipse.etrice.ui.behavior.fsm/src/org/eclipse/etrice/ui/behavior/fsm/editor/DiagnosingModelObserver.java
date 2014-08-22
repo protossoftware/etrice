@@ -48,10 +48,33 @@ public class DiagnosingModelObserver extends EContentAdapter {
 	 */
 	private EObject mdel;
 
+	private boolean enabled;
+
 	public DiagnosingModelObserver() {
 		elementDiagnosticMap = new HashMap<EObject, ArrayList<Diagnostic>>();
 	}
 
+	/**
+	 * @param enable diagnostics updates due to change notifications
+	 */
+	public void enable() {
+		this.enabled = true;
+	}
+	
+	/**
+	 * @param disable diagnostics updates due to change notifications
+	 */
+	public void disable() {
+		this.enabled = false;
+	}
+
+	/**
+	 * @return whether the observer is enabled (i.e. whether change notifications will update the diagnostics) 
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
 	/**
 	 * Starts listening to changes of the given {@link RoomModel}.
 	 * 
@@ -62,9 +85,10 @@ public class DiagnosingModelObserver extends EContentAdapter {
 		// Start observing the room model
 		this.mdel = model;
 		setTarget(model);
+		enable();
 
 		// Validate and Populate HashMap for rendering markers initially.
-		updateElementDiagonosticMap();
+		updateElementDiagnosticMap();
 	}
 
 	/**
@@ -73,7 +97,12 @@ public class DiagnosingModelObserver extends EContentAdapter {
 	 * @author jayant
 	 */
 	public void removeObserver() {
-		unsetTarget(mdel);
+		disable();
+		elementDiagnosticMap.clear();
+		if(mdel != null) {
+			unsetTarget(mdel);
+			mdel = null;
+		}
 	}
 
 	/**
@@ -90,7 +119,7 @@ public class DiagnosingModelObserver extends EContentAdapter {
 		// This prevents the editor to hang on dispose (since all adapters are
 		// then removed).
 		if (notification.getEventType() < Notification.REMOVING_ADAPTER) {
-			updateElementDiagonosticMap();
+			updateElementDiagnosticMap();
 		}
 	}
 
@@ -103,7 +132,9 @@ public class DiagnosingModelObserver extends EContentAdapter {
 	 * 
 	 * @author jayant
 	 */
-	private void updateElementDiagonosticMap() {
+	private void updateElementDiagnosticMap() {
+		if(!isEnabled()) return;
+		
 		// Clear HashMap to remove orphaned element references
 		elementDiagnosticMap.clear();
 

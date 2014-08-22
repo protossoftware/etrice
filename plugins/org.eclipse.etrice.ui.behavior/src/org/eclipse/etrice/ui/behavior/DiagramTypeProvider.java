@@ -14,10 +14,10 @@ package org.eclipse.etrice.ui.behavior;
 
 import org.eclipse.etrice.ui.behavior.fsm.support.AbstractFSMProviderDispatcher;
 import org.eclipse.etrice.ui.behavior.support.ProviderDispatcher;
-import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
+import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
-public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
+public class DiagramTypeProvider extends AbstractFSMDiagramTypeProvider {
 
 	public static final String PROVIDER_ID = "org.eclipse.etrice.ui.behavior.diagramTypeProvider";
 

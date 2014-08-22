@@ -37,10 +37,14 @@ import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 
 import com.google.common.base.Function;
 
 /**
+ * Plugins that extend and use this class should also extend and use 
+ * {@link AbstractFSMDiagramTypeProvider}.
+ * 
  * @author Henrik Rentz-Reichert
  *
  */
@@ -58,10 +62,36 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	public DiagnosingModelObserver getDiagnosingModelObserver() {
 		return diagnosingModelObserver;
 	}
+	
+	/**
+	 * Attaches the DiagnosingModelObserver to the current RoomModel. If the 
+	 * Observer is already attached, it is first detached.
+	 */
+	public void attachDiagnosingModelObserver() {
+		DiagnosingModelObserver dmObserver = this.getDiagnosingModelObserver();
+		// dmObserver may be null if graphical viewer is not yet initialized
+		if(dmObserver != null) {
+			// Ensure that the dmObserver is not bound to the previous RoomModel
+			dmObserver.removeObserver();
+			dmObserver.observeModel(getModel());
+		}
+	}
+	
+	/**
+	 * Detaches the DiagnosingModelObserver from the diagram's associated 
+	 * business model.
+	 */
+	public void detachDiagnosingModelObserver() {
+		DiagnosingModelObserver dmObserver = this.getDiagnosingModelObserver();
+		// dmObserver may be null if graphical viewer is not yet initialized
+		if(dmObserver != null) {
+			dmObserver.removeObserver();
+		}
+	}
 
 	@Override
 	public void initializeGraphicalViewer() {
-		// Start observing the Room Model for rendering Markers
+		// Start observing the diagram business model for rendering Markers
 		diagnosingModelObserver = new DiagnosingModelObserver();
 		diagnosingModelObserver.observeModel(getModel());
 		
@@ -97,9 +127,14 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 
 	@Override
 	public void dispose() {
-		// Stop observing the Room Model
+		// Stop observing the diagram business model
 		diagnosingModelObserver.removeObserver();
 		super.dispose();
+	}
+	
+	@Override
+	protected DiagramBehavior createDiagramBehavior() {
+		return new AbstractFSMDiagramBehavior(this);
 	}
 
 	@Override
