@@ -5,6 +5,7 @@ package org.eclipse.etrice.core.room;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 /**
  * <!-- begin-user-doc -->

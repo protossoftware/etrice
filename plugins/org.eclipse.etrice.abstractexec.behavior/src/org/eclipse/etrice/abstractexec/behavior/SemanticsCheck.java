@@ -23,21 +23,19 @@ import java.util.Set;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 public class SemanticsCheck {
 	private Queue<StateGraphNode> queue;
 	private Set<StateGraphNode> visited;
-	private ExpandedActorClass xpAct;
+	private ExpandedModelComponent xpAct;
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>();
 	private ActionCodeAnalyzer codeAnalyzer;
 	private HashMap<StateGraphItem, List<HandledMessage>> mapToWarnings = new HashMap<StateGraphItem, List<HandledMessage>>();
@@ -59,16 +57,16 @@ public class SemanticsCheck {
 	private static final int TRACE_RESULT = 1;
 	private static final int TRACE_DETAILS = 2;
 	
-	public SemanticsCheck(ExpandedActorClass xpac) {
+	public SemanticsCheck(ExpandedModelComponent xpac) {
 		queue = new LinkedList<StateGraphNode>();
 		xpAct = xpac;
 		visited = new HashSet<StateGraphNode>();
-		codeAnalyzer = new ActionCodeAnalyzer(xpac.getActorClass());
+		codeAnalyzer = new ActionCodeAnalyzer(xpac.getModelComponent());
 	}
 
 	public void checkSemantics() {
 		if (traceChecks)
-			System.out.println("checkSemantics: check of ActorClass "+xpAct.getActorClass().getName());
+			System.out.println("checkSemantics: check of ActorClass "+xpAct.getModelComponent().getComponentName());
 		
 		StateGraph graph = xpAct.getStateMachine();
 		ActiveRules localRules = new ActiveRules();
@@ -80,7 +78,7 @@ public class SemanticsCheck {
 			if (traceLevel>=TRACE_RESULT)
 				printRules();
 			
-			System.out.println("checkSemantics: done with check of ActorClass "+xpAct.getActorClass().getName());
+			System.out.println("checkSemantics: done with check of ActorClass "+xpAct.getModelComponent().getComponentName());
 		}
 	}
 
@@ -134,7 +132,7 @@ public class SemanticsCheck {
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
-						msgList.add(new HandledMessage((InterfaceItem)trigger.getIfitem(), (Message)trigger.getMsg(), trigger));
+						msgList.add(new HandledMessage(trigger.getIfitem(), trigger.getMsg(), trigger));
 						StateGraph triggerContext = (StateGraph) trans.eContainer();
 						State exitCalled = st;
 						while (true) {

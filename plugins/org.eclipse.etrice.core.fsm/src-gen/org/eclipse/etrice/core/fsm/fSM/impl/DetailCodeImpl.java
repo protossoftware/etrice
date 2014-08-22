@@ -4,10 +4,13 @@ package org.eclipse.etrice.core.fsm.fSM.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
@@ -22,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#isUsed <em>Used</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
@@ -30,6 +34,26 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  */
 public class DetailCodeImpl extends MinimalEObjectImpl.Container implements DetailCode
 {
+  /**
+   * The default value of the '{@link #isUsed() <em>Used</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isUsed()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean USED_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isUsed() <em>Used</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isUsed()
+   * @generated
+   * @ordered
+   */
+  protected boolean used = USED_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
    * <!-- begin-user-doc -->
@@ -66,6 +90,29 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isUsed()
+  {
+    return used;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setUsed(boolean newUsed)
+  {
+    boolean oldUsed = used;
+    used = newUsed;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.DETAIL_CODE__USED, oldUsed, used));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<String> getLines()
   {
     if (lines == null)
@@ -85,6 +132,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
+      case FSMPackage.DETAIL_CODE__USED:
+        return isUsed();
       case FSMPackage.DETAIL_CODE__LINES:
         return getLines();
     }
@@ -102,6 +151,9 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
+      case FSMPackage.DETAIL_CODE__USED:
+        setUsed((Boolean)newValue);
+        return;
       case FSMPackage.DETAIL_CODE__LINES:
         getLines().clear();
         getLines().addAll((Collection<? extends String>)newValue);
@@ -120,6 +172,9 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
+      case FSMPackage.DETAIL_CODE__USED:
+        setUsed(USED_EDEFAULT);
+        return;
       case FSMPackage.DETAIL_CODE__LINES:
         getLines().clear();
         return;
@@ -137,6 +192,8 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
+      case FSMPackage.DETAIL_CODE__USED:
+        return used != USED_EDEFAULT;
       case FSMPackage.DETAIL_CODE__LINES:
         return lines != null && !lines.isEmpty();
     }
@@ -154,7 +211,9 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (lines: ");
+    result.append(" (used: ");
+    result.append(used);
+    result.append(", lines: ");
     result.append(lines);
     result.append(')');
     return result.toString();

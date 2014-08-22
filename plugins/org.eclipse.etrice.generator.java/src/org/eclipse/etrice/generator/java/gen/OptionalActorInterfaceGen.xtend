@@ -16,8 +16,8 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.base.FileSystemHelpers
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.java.Main

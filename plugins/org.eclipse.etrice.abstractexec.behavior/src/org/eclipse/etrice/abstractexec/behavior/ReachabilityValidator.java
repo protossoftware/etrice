@@ -23,12 +23,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
-import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.base.NullLogger;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
@@ -39,19 +39,19 @@ public class ReachabilityValidator implements ICustomValidator {
 	
 	private static final Set<EClass> classesToCheck = new HashSet<EClass>();
 	{
-		classesToCheck.add(RoomPackage.Literals.ACTOR_CLASS);
+		classesToCheck.add(FSMPackage.Literals.MODEL_COMPONENT);
 	}
 	
 	@Override
 	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
 
-		if (!(object instanceof ActorClass))
+		if (!(object instanceof ModelComponent))
 			return;
 		
 		if(context.isGeneration())
 			return;
 		
-		ActorClass ac = (ActorClass) object;
+		ModelComponent ac = (ModelComponent) object;
 		
 		if (ac.isAbstract())
 			return;
@@ -61,10 +61,10 @@ public class ReachabilityValidator implements ICustomValidator {
 			return;
 
 		NullDiagnostician diagnostician = new NullDiagnostician();
-		GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
-		ExpandedActorClass xpac = null;
+		FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(new NullLogger(), diagnostician);
+		ExpandedModelComponent xpac = null;
 		try {
-			xpac = builder.createExpandedActorClass(ac);
+			xpac = builder.createExpandedModelComponent(ac);
 		}
 		catch (Throwable t) {
 			return;

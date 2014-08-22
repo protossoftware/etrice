@@ -95,14 +95,14 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
         return createStateGraphItemAdapter();
       }
       @Override
-      public Adapter caseState(State object)
-      {
-        return createStateAdapter();
-      }
-      @Override
       public Adapter caseStateGraph(StateGraph object)
       {
         return createStateGraphAdapter();
+      }
+      @Override
+      public Adapter caseState(State object)
+      {
+        return createStateAdapter();
       }
       @Override
       public Adapter caseSimpleState(SimpleState object)
@@ -240,6 +240,31 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
         return createGuardAdapter();
       }
       @Override
+      public Adapter caseProtocolSemantics(ProtocolSemantics object)
+      {
+        return createProtocolSemanticsAdapter();
+      }
+      @Override
+      public Adapter caseSemanticsRule(SemanticsRule object)
+      {
+        return createSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseInSemanticsRule(InSemanticsRule object)
+      {
+        return createInSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseOutSemanticsRule(OutSemanticsRule object)
+      {
+        return createOutSemanticsRuleAdapter();
+      }
+      @Override
+      public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object)
+      {
+        return createIInterfaceItemOwnerAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -322,21 +347,6 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.State <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.State
-   * @generated
-   */
-  public Adapter createStateAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.StateGraph <em>State Graph</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -347,6 +357,21 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStateGraphAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.State
+   * @generated
+   */
+  public Adapter createStateAdapter()
   {
     return null;
   }
@@ -752,6 +777,81 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGuardAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics <em>Protocol Semantics</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics
+   * @generated
+   */
+  public Adapter createProtocolSemanticsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.SemanticsRule <em>Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.SemanticsRule
+   * @generated
+   */
+  public Adapter createSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.InSemanticsRule <em>In Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.InSemanticsRule
+   * @generated
+   */
+  public Adapter createInSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule <em>Out Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule
+   * @generated
+   */
+  public Adapter createOutSemanticsRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+   * @generated
+   */
+  public Adapter createIInterfaceItemOwnerAdapter()
   {
     return null;
   }

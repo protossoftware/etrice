@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.abstractexec.behavior.util;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.fsm.FSMStandaloneSetupGenerated;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -33,39 +33,39 @@ public class AbstractExecutionUtil {
 	 */
 	public static AbstractExecutionUtil getInstance() {
 		if (instance==null) {
-			Injector injector = RoomUiModule.getInjector();
+			Injector injector = new FSMStandaloneSetupGenerated().createInjector();
 	        instance = injector.getInstance(AbstractExecutionUtil.class);
 	    }
 		return instance;
 	}
 	
 	@Inject
-	private ValidationUtil validationUtil;
+	private FSMValidationUtil validationUtil;
 	
 	@Inject
-	private RoomHelpers roomHelpers;
+	private FSMHelpers roomHelpers;
 	
 	@Inject
-	private RoomNameProvider roomNameProvider;
+	private FSMNameProvider roomNameProvider;
 
 	/**
 	 * @return the validationUtil
 	 */
-	public ValidationUtil getValidationUtil() {
+	public FSMValidationUtil getValidationUtil() {
 		return validationUtil;
 	}
 
 	/**
 	 * @return the roomHelpers
 	 */
-	public RoomHelpers getRoomHelpers() {
+	public FSMHelpers getRoomHelpers() {
 		return roomHelpers;
 	}
 
 	/**
 	 * @return the roomNameProvider
 	 */
-	public RoomNameProvider getRoomNameProvider() {
+	public FSMNameProvider getRoomNameProvider() {
 		return roomNameProvider;
 	}
 }

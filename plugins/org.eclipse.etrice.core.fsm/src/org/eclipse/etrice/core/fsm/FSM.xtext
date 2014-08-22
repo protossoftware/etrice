@@ -20,25 +20,30 @@ generate fSM "http://www.eclipse.org/etrice/core/fsm/FSM"
 FSMModel:
 	components+=ModelComponent*;
 
-
+// the state machine communication type
 enum ComponentCommunicationType:
 	EVENT_DRIVEN='eventdriven' |
 	DATA_DRIVEN='datadriven' |
 	ASYNCHRONOUS='async' |
 	SYNCHRONOUS='sync'
 ;
-	
+
+// the owner of a state machine. It also implements inheritance
 ModelComponent:
 	(abstract?='abstract'? & commType=ComponentCommunicationType?)
 	'ModelComponent' componentName=ID ('extends' base=[ModelComponent|FQN])?
 	stateMachine=StateMachine
 ;
 
+//
+// state machine
+//
+
+// the building blocks of a state machine: nodes and items
 StateGraphNode: State | ChoicePoint | TrPoint;
 StateGraphItem: StateGraphNode | Transition;
 
-State: SimpleState | RefinedState;
-
+// state graph and state machine are two rules for the same model class
 StateGraph:
 	{StateGraph}
 	'{'
@@ -63,6 +68,12 @@ StateMachine returns StateGraph:
 		)*
 	'}';
 
+//
+// states
+//
+
+State: SimpleState | RefinedState;
+
 SimpleState:
 	'State' name=ID (docu=Documentation)? ('{'
 		('entry' entryCode=DetailCode)?
@@ -79,13 +90,17 @@ RefinedState:
 		('subgraph' subgraph=StateGraph)?
 	'}';
 
-// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
-// super() keyword or flag like in Trice
+// the detail level (or target language) code
+// the used flag might be used when overriding in derived grammars
 DetailCode:
 	{DetailCode}
-	'{'
+	used?='{'
 		lines+=STRING*
 	'}';
+
+//
+// transition points
+//
 
 TrPoint: TransitionPoint | EntryPoint | ExitPoint;
 
@@ -98,8 +113,16 @@ EntryPoint:
 ExitPoint:
 	'ExitPoint' name=ID;
 
+//
+// choice point
+//
+
 ChoicePoint:
 	'ChoicePoint' name=ID (docu=Documentation)?;
+
+//
+// transitions
+//
 
 Transition: InitialTransition | NonInitialTransition;
 NonInitialTransition: TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
@@ -154,6 +177,10 @@ RefinedTransition:
 	'}'
 ;
 
+//
+// transition terminals: start and end points of transitions
+//
+
 TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 
 StateTerminal:
@@ -165,10 +192,18 @@ SubStateTrPointTerminal:
 ChoicepointTerminal:
 	'cp' cp=[ChoicePoint|ID];
 
+//
+// transition triggers
+//
+
 Trigger:
 		'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*
 		(guard=Guard)? '>'
 ;
+
+//
+// pairs of (message, interface) are triggering events
+//
 
 MessageFromIf:
 	message=[AbstractMessage|ID] ':' from=[AbstractInterfaceItem|ID]
@@ -179,3 +214,35 @@ AbstractInterfaceItem: name=ID;
 
 Guard:
 	'guard' guard=DetailCode;
+	
+//
+// semantics for state machine validation
+//
+
+ProtocolSemantics:
+	{ProtocolSemantics}
+	'semantics' '{'
+		rules+=SemanticsRule*
+	'}';
+
+SemanticsRule: InSemanticsRule | OutSemanticsRule;
+
+InSemanticsRule: 'in' ':' msg=[AbstractMessage|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;
+
+OutSemanticsRule: 'out' ':' msg=[AbstractMessage|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;

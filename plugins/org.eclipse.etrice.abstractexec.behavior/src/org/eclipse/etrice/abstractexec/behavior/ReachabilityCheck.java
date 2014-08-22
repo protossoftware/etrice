@@ -19,8 +19,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
@@ -32,20 +32,20 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
 
 public class ReachabilityCheck {
 	
-	private static RoomExtensions roomExt;
+	private static FSMExtensions fsmExt;
 	
 	Queue<StateGraphNode> queue;
 	public Set<StateGraphItem> visited;
 	private Set<State> visitedSubStates;
-	private ExpandedActorClass xpAct;
+	private ExpandedModelComponent xpAct;
 	//private Set<StateGraphItem> exitUsed;
 
-	public ReachabilityCheck(ExpandedActorClass xpac) {
-		roomExt = new RoomExtensions();
+	public ReachabilityCheck(ExpandedModelComponent xpac) {
+		fsmExt = new FSMExtensions();
 		queue = new LinkedList<StateGraphNode>();
 		xpAct = xpac;
 		visited = new HashSet<StateGraphItem>();
@@ -110,7 +110,7 @@ public class ReachabilityCheck {
 						visit(trans);
 				}
 				// visit outgoing guarded transitions
-				for(Transition trans : roomExt.getOutgoingTransitionsHierarchical(xpAct, st)){
+				for(Transition trans : fsmExt.getOutgoingTransitionsHierarchical(xpAct, st)){
 					if(trans instanceof GuardedTransition)
 						visit(trans);
 				}

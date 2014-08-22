@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
@@ -37,8 +36,8 @@ import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,8 +55,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class TransitionChainImpl extends MinimalEObjectImpl.Container implements TransitionChain {
 	
-	private FSMHelpers roomHelpers = new RoomHelpers();
-	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	private FSMHelpers roomHelpers = new FSMHelpers();
+	private FSMNameProvider roomNameProvider = new FSMNameProvider();
 	
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' reference.

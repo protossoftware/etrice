@@ -40,6 +40,15 @@ public interface FsmGenFactory extends EFactory {
 	ActiveTrigger createActiveTrigger();
 
 	/**
+	 * Returns a new object of class '<em>Expanded Model Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expanded Model Component</em>'.
+	 * @generated
+	 */
+	ExpandedModelComponent createExpandedModelComponent();
+
+	/**
 	 * Returns a new object of class '<em>Expanded Refined State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

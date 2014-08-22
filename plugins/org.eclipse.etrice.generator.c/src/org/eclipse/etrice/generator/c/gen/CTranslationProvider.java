@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -48,7 +50,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	}
 
 	@Override
-	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg, ArrayList<String> args, String index, String orig) {
 		StringBuilder argtext = new StringBuilder();
 		for (String arg : args) {
 			argtext.append(", "+arg);

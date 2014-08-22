@@ -66,6 +66,7 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case FsmGenPackage.ACTIVE_TRIGGER: return createActiveTrigger();
+			case FsmGenPackage.EXPANDED_MODEL_COMPONENT: return createExpandedModelComponent();
 			case FsmGenPackage.EXPANDED_REFINED_STATE: return createExpandedRefinedState();
 			case FsmGenPackage.TRANSITION_CHAIN: return createTransitionChain();
 			default:
@@ -81,6 +82,16 @@ public class FsmGenFactoryImpl extends EFactoryImpl implements FsmGenFactory {
 	public ActiveTrigger createActiveTrigger() {
 		ActiveTriggerImpl activeTrigger = new ActiveTriggerImpl();
 		return activeTrigger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpandedModelComponent createExpandedModelComponent() {
+		ExpandedModelComponentImpl expandedModelComponent = new ExpandedModelComponentImpl();
+		return expandedModelComponent;
 	}
 
 	/**

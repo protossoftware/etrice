@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.core.fsm.postprocessing;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -54,7 +55,24 @@ public class ImplPostprocessor {
       _builder_1.newLine();
       _builder_1.append("return \"\";");
       _builder_1.newLine();
-      _xblockexpression = PostprocessingHelpers.addOperation(stateGraphItem, "getName", _eClassifier_1, Integer.valueOf(1), _builder_1.toString());
+      PostprocessingHelpers.addOperation(stateGraphItem, "getName", _eClassifier_1, Integer.valueOf(1), _builder_1.toString());
+      final EClass ifItem = PostprocessingHelpers.getClass(fsmPackage, "AbstractInterfaceItem");
+      EClassifier _eClassifier_2 = fsmPackage.getEClassifier("ProtocolSemantics");
+      PostprocessingHelpers.addOperation(ifItem, "getSemantics", _eClassifier_2);
+      EClassifier _eClassifier_3 = fsmPackage.getEClassifier("AbstractMessage");
+      PostprocessingHelpers.addOperation(ifItem, "getAllIncomingAbstractMessages", _eClassifier_3, Integer.valueOf((-1)), null);
+      EClassifier _eClassifier_4 = fsmPackage.getEClassifier("AbstractMessage");
+      PostprocessingHelpers.addOperation(ifItem, "getAllOutgoingAbstractMessages", _eClassifier_4, Integer.valueOf((-1)), null);
+      final EClass itemOwner = PostprocessingHelpers.addClass(fsmPackage, "IInterfaceItemOwner");
+      itemOwner.setAbstract(true);
+      itemOwner.setInterface(true);
+      EClassifier _eClassifier_5 = fsmPackage.getEClassifier("AbstractInterfaceItem");
+      PostprocessingHelpers.addOperation(itemOwner, "getAbstractInterfaceItems", _eClassifier_5, Integer.valueOf((-1)), null);
+      EClassifier _eClassifier_6 = fsmPackage.getEClassifier("AbstractInterfaceItem");
+      PostprocessingHelpers.addOperation(itemOwner, "getAllAbstractInterfaceItems", _eClassifier_6, Integer.valueOf((-1)), null);
+      final EClass comp = PostprocessingHelpers.getClass(fsmPackage, "ModelComponent");
+      EList<EClass> _eSuperTypes = comp.getESuperTypes();
+      _xblockexpression = _eSuperTypes.add(itemOwner);
     }
     return _xblockexpression;
   }

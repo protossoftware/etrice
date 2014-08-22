@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType

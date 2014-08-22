@@ -2,6 +2,8 @@
  */
 package org.eclipse.etrice.core.fsm.fSM;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -52,5 +54,29 @@ public interface AbstractInterfaceItem extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   * @generated
+   */
+  ProtocolSemantics getSemantics();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   * @generated
+   */
+  EList<AbstractMessage> getAllIncomingAbstractMessages();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   * @generated
+   */
+  EList<AbstractMessage> getAllOutgoingAbstractMessages();
 
 } // AbstractInterfaceItem

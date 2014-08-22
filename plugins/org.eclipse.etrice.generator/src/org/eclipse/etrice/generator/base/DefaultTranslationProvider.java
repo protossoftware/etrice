@@ -14,17 +14,16 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.fsm.base.DefaultFSMTranslationProvider;
 
 import com.google.inject.Inject;
 
@@ -34,31 +33,19 @@ import com.google.inject.Inject;
  * @author Henrik Rentz-Reichert
  *
  */
-public class DefaultTranslationProvider implements ITranslationProvider {
-
-	/**
-	 * the logger used for issuing informations
-	 */
-	@Inject ILogger logger;
+public class DefaultTranslationProvider extends DefaultFSMTranslationProvider implements ITranslationProvider {
 	
 	/**
 	 * the name provider for model objects
 	 */
-	@Inject RoomNameProvider roomNameProvider;
+	@Inject
+	RoomNameProvider roomNameProvider;
 	
 	/**
 	 * utility methods
 	 */
-	@Inject RoomHelpers roomHelpers;
-
-	/**
-	 * @return <code>false</code>
-	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#translateMembers()
-	 */
-	@Override
-	public boolean translateMembers() {
-		return false;
-	}
+	@Inject
+	RoomHelpers roomHelpers;
 
 	/**
 	 * @return the original String
@@ -89,15 +76,6 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 
 	/**
 	 * @return the original String
-	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemMessageText(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.util.ArrayList, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
-		return orig;
-	}
-
-	/**
-	 * @return the original String
 	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemMessageValue(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.lang.String)
 	 */
 	@Override
@@ -105,23 +83,8 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 		return orig;
 	}
 
-	/**
-	 * @return <code>false</code>
-	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#translateTags()
-	 */
-	@Override
-	public boolean translateTags() {
-		return false;
-	}
-
-	/**
-	 * translates only the tag <code>MODEL_LOCATION</code> and returns the location of the
-	 * detail code <code>code</code> in the model.
-	 * 
-	 * <p>
-	 * Issues an information and returns <code><|?<i>tag</i>?|><code>.
-	 * </p>
-	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#translateTag(java.lang.String, org.eclipse.etrice.core.room.DetailCode)
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.fsm.base.DefaultFSMTranslationProvider#translateTag(java.lang.String, org.eclipse.etrice.core.fsm.fSM.DetailCode)
 	 */
 	@Override
 	public String translateTag(String tag, DetailCode code) {
@@ -132,13 +95,9 @@ public class DefaultTranslationProvider implements ITranslationProvider {
 		logger.logInfo("unrecognized tag '"+tag+"' in "
 				+roomNameProvider.getDetailCodeLocation(code)+" of "
 				+roomNameProvider.getClassLocation(roomHelpers.getRoomClass(code)));
-		return TAG_START+"?"+tag+"?"+TAG_END;
+		
+		return super.translateTag(tag, code);
 	}
-
-	@Override
-	public void setContainerClass(EObject container) {
-	}
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#translateEnums()
 	 */

@@ -1644,242 +1644,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_3_0() { return cDetailCodeDetailCodeParserRuleCall_3_0; }
 	}
 
-	public class ProtocolSemanticsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ProtocolSemantics");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cProtocolSemanticsAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cSemanticsKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cRulesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cRulesSemanticsRuleParserRuleCall_3_0 = (RuleCall)cRulesAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//ProtocolSemantics:
-		//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
-		public ParserRule getRule() { return rule; }
-
-		//{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}"
-		public Group getGroup() { return cGroup; }
-
-		//{ProtocolSemantics}
-		public Action getProtocolSemanticsAction_0() { return cProtocolSemanticsAction_0; }
-
-		//"semantics"
-		public Keyword getSemanticsKeyword_1() { return cSemanticsKeyword_1; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
-		//rules+=SemanticsRule*
-		public Assignment getRulesAssignment_3() { return cRulesAssignment_3; }
-
-		//SemanticsRule
-		public RuleCall getRulesSemanticsRuleParserRuleCall_3_0() { return cRulesSemanticsRuleParserRuleCall_3_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
-	}
-
-	public class SemanticsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SemanticsRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cInSemanticsRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cOutSemanticsRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//SemanticsRule:
-		//	InSemanticsRule | OutSemanticsRule;
-		public ParserRule getRule() { return rule; }
-
-		//InSemanticsRule | OutSemanticsRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//InSemanticsRule
-		public RuleCall getInSemanticsRuleParserRuleCall_0() { return cInSemanticsRuleParserRuleCall_0; }
-
-		//OutSemanticsRule
-		public RuleCall getOutSemanticsRuleParserRuleCall_1() { return cOutSemanticsRuleParserRuleCall_1; }
-	}
-
-	public class InSemanticsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InSemanticsRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cInKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
-		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
-		private final Assignment cFollowUpsAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0 = (RuleCall)cFollowUpsAssignment_3_1_0.eContents().get(0);
-		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_1.eContents().get(0);
-		private final Group cGroup_3_1_1_2 = (Group)cGroup_3_1_1.eContents().get(2);
-		private final Keyword cCommaKeyword_3_1_1_2_0 = (Keyword)cGroup_3_1_1_2.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_3_1_1_2_1 = (Assignment)cGroup_3_1_1_2.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_2_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
-		
-		//InSemanticsRule:
-		//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-		//	")"))?;
-		public ParserRule getRule() { return rule; }
-
-		//"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-		//")"))?
-		public Group getGroup() { return cGroup; }
-
-		//"in"
-		public Keyword getInKeyword_0() { return cInKeyword_0; }
-
-		//":"
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
-		//msg=[Message]
-		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
-
-		//[Message]
-		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
-
-		//ID
-		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
-
-		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
-
-		//followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
-
-		//"(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
-
-		//("," followUps+=SemanticsRule)+
-		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
-	}
-
-	public class OutSemanticsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OutSemanticsRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOutKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cMsgMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
-		private final RuleCall cMsgMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgMessageCrossReference_2_0.eContents().get(1);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
-		private final Assignment cFollowUpsAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0 = (RuleCall)cFollowUpsAssignment_3_1_0.eContents().get(0);
-		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_1.eContents().get(0);
-		private final Group cGroup_3_1_1_2 = (Group)cGroup_3_1_1.eContents().get(2);
-		private final Keyword cCommaKeyword_3_1_1_2_0 = (Keyword)cGroup_3_1_1_2.eContents().get(0);
-		private final Assignment cFollowUpsAssignment_3_1_1_2_1 = (Assignment)cGroup_3_1_1_2.eContents().get(1);
-		private final RuleCall cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0 = (RuleCall)cFollowUpsAssignment_3_1_1_2_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
-		
-		//OutSemanticsRule:
-		//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
-		//	followUps+=SemanticsRule)+ ")"))?;
-		public ParserRule getRule() { return rule; }
-
-		//"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-		//")"))?
-		public Group getGroup() { return cGroup; }
-
-		//"out"
-		public Keyword getOutKeyword_0() { return cOutKeyword_0; }
-
-		//":"
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-
-		//msg=[Message]
-		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
-
-		//[Message]
-		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
-
-		//ID
-		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
-
-		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"->"
-		public Keyword getHyphenMinusGreaterThanSignKeyword_3_0() { return cHyphenMinusGreaterThanSignKeyword_3_0; }
-
-		//followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_0() { return cFollowUpsAssignment_3_1_0; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_0_0; }
-
-		//"(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"
-		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_3_1_1_0() { return cLeftParenthesisKeyword_3_1_1_0; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_1_1() { return cFollowUpsAssignment_3_1_1_1; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0; }
-
-		//("," followUps+=SemanticsRule)+
-		public Group getGroup_3_1_1_2() { return cGroup_3_1_1_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_1_1_2_0() { return cCommaKeyword_3_1_1_2_0; }
-
-		//followUps+=SemanticsRule
-		public Assignment getFollowUpsAssignment_3_1_1_2_1() { return cFollowUpsAssignment_3_1_1_2_1; }
-
-		//SemanticsRule
-		public RuleCall getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0() { return cFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_3_1_1_3() { return cRightParenthesisKeyword_3_1_1_3; }
-	}
-
 	public class ModelComponentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelComponent");
 		private final RuleCall cActorClassParserRuleCall = (RuleCall)rule.eContents().get(1);
@@ -3524,10 +3288,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private MessageHandlerElements pMessageHandler;
 	private InMessageHandlerElements pInMessageHandler;
 	private OutMessageHandlerElements pOutMessageHandler;
-	private ProtocolSemanticsElements pProtocolSemantics;
-	private SemanticsRuleElements pSemanticsRule;
-	private InSemanticsRuleElements pInSemanticsRule;
-	private OutSemanticsRuleElements pOutSemanticsRule;
 	private ModelComponentElements pModelComponent;
 	private ActorClassElements pActorClass;
 	private InterfaceItemElements pInterfaceItem;
@@ -3886,48 +3646,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getOutMessageHandlerAccess().getRule();
 	}
 
-	//ProtocolSemantics:
-	//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
-	public ProtocolSemanticsElements getProtocolSemanticsAccess() {
-		return (pProtocolSemantics != null) ? pProtocolSemantics : (pProtocolSemantics = new ProtocolSemanticsElements());
-	}
-	
-	public ParserRule getProtocolSemanticsRule() {
-		return getProtocolSemanticsAccess().getRule();
-	}
-
-	//SemanticsRule:
-	//	InSemanticsRule | OutSemanticsRule;
-	public SemanticsRuleElements getSemanticsRuleAccess() {
-		return (pSemanticsRule != null) ? pSemanticsRule : (pSemanticsRule = new SemanticsRuleElements());
-	}
-	
-	public ParserRule getSemanticsRuleRule() {
-		return getSemanticsRuleAccess().getRule();
-	}
-
-	//InSemanticsRule:
-	//	"in" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+
-	//	")"))?;
-	public InSemanticsRuleElements getInSemanticsRuleAccess() {
-		return (pInSemanticsRule != null) ? pInSemanticsRule : (pInSemanticsRule = new InSemanticsRuleElements());
-	}
-	
-	public ParserRule getInSemanticsRuleRule() {
-		return getInSemanticsRuleAccess().getRule();
-	}
-
-	//OutSemanticsRule:
-	//	"out" ":" msg=[Message] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
-	//	followUps+=SemanticsRule)+ ")"))?;
-	public OutSemanticsRuleElements getOutSemanticsRuleAccess() {
-		return (pOutSemanticsRule != null) ? pOutSemanticsRule : (pOutSemanticsRule = new OutSemanticsRuleElements());
-	}
-	
-	public ParserRule getOutSemanticsRuleRule() {
-		return getOutSemanticsRuleAccess().getRule();
-	}
-
 	//// **************************************************************
 	//// actor class
 	//ModelComponent:
@@ -4270,6 +3988,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getFSMModelAccess().getRule();
 	}
 
+	//// the state machine communication type
 	//enum ComponentCommunicationType:
 	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | ASYNCHRONOUS="async" | SYNCHRONOUS="sync";
 	public FSMGrammarAccess.ComponentCommunicationTypeElements getComponentCommunicationTypeAccess() {
@@ -4280,6 +3999,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getComponentCommunicationTypeAccess().getRule();
 	}
 
+	////
+	//// state machine
+	////
+	//// the building blocks of a state machine: nodes and items
 	//StateGraphNode:
 	//	State | ChoicePoint | TrPoint;
 	public FSMGrammarAccess.StateGraphNodeElements getStateGraphNodeAccess() {
@@ -4300,16 +4023,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getStateGraphItemAccess().getRule();
 	}
 
-	//State:
-	//	SimpleState | RefinedState;
-	public FSMGrammarAccess.StateElements getStateAccess() {
-		return gaFSM.getStateAccess();
-	}
-	
-	public ParserRule getStateRule() {
-		return getStateAccess().getRule();
-	}
-
+	//// state graph and state machine are two rules for the same model class
 	//StateGraph:
 	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 	//	refinedTransitions+=RefinedTransition)* "}";
@@ -4330,6 +4044,19 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStateMachineRule() {
 		return getStateMachineAccess().getRule();
+	}
+
+	////
+	//// states
+	////
+	//State:
+	//	SimpleState | RefinedState;
+	public FSMGrammarAccess.StateElements getStateAccess() {
+		return gaFSM.getStateAccess();
+	}
+	
+	public ParserRule getStateRule() {
+		return getStateAccess().getRule();
 	}
 
 	//SimpleState:
@@ -4354,10 +4081,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefinedStateAccess().getRule();
 	}
 
-	//// TODOHRR: provide a means to call super class code (cf. ROOM p. 310f)
-	//// super() keyword or flag like in Trice
+	//// the detail level (or target language) code
+	//// the used flag might be used when overriding in derived grammars
 	//DetailCode:
-	//	{DetailCode} "{" lines+=STRING* "}";
+	//	{DetailCode} used?="{" lines+=STRING* "}";
 	public FSMGrammarAccess.DetailCodeElements getDetailCodeAccess() {
 		return gaFSM.getDetailCodeAccess();
 	}
@@ -4366,6 +4093,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getDetailCodeAccess().getRule();
 	}
 
+	////
+	//// transition points
+	////
 	//TrPoint:
 	//	TransitionPoint | EntryPoint | ExitPoint;
 	public FSMGrammarAccess.TrPointElements getTrPointAccess() {
@@ -4406,6 +4136,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getExitPointAccess().getRule();
 	}
 
+	////
+	//// choice point
+	////
 	//ChoicePoint:
 	//	"ChoicePoint" name=ID docu=Documentation?;
 	public FSMGrammarAccess.ChoicePointElements getChoicePointAccess() {
@@ -4416,6 +4149,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getChoicePointAccess().getRule();
 	}
 
+	////
+	//// transitions
+	////
 	//Transition:
 	//	InitialTransition | NonInitialTransition;
 	public FSMGrammarAccess.TransitionElements getTransitionAccess() {
@@ -4512,6 +4248,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefinedTransitionAccess().getRule();
 	}
 
+	////
+	//// transition terminals: start and end points of transitions
+	////
 	//TransitionTerminal:
 	//	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 	public FSMGrammarAccess.TransitionTerminalElements getTransitionTerminalAccess() {
@@ -4562,6 +4301,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getChoicepointTerminalAccess().getRule();
 	}
 
+	////
+	//// transition triggers
+	////
 	//Trigger:
 	//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 	public FSMGrammarAccess.TriggerElements getTriggerAccess() {
@@ -4572,6 +4314,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getTriggerAccess().getRule();
 	}
 
+	////
+	//// pairs of (message, interface) are triggering events
+	////
 	//MessageFromIf:
 	//	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
 	public FSMGrammarAccess.MessageFromIfElements getMessageFromIfAccess() {
@@ -4590,6 +4335,51 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getGuardRule() {
 		return getGuardAccess().getRule();
+	}
+
+	////
+	//// semantics for state machine validation
+	////
+	//ProtocolSemantics:
+	//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
+	public FSMGrammarAccess.ProtocolSemanticsElements getProtocolSemanticsAccess() {
+		return gaFSM.getProtocolSemanticsAccess();
+	}
+	
+	public ParserRule getProtocolSemanticsRule() {
+		return getProtocolSemanticsAccess().getRule();
+	}
+
+	//SemanticsRule:
+	//	InSemanticsRule | OutSemanticsRule;
+	public FSMGrammarAccess.SemanticsRuleElements getSemanticsRuleAccess() {
+		return gaFSM.getSemanticsRuleAccess();
+	}
+	
+	public ParserRule getSemanticsRuleRule() {
+		return getSemanticsRuleAccess().getRule();
+	}
+
+	//InSemanticsRule:
+	//	"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	followUps+=SemanticsRule)+ ")"))?;
+	public FSMGrammarAccess.InSemanticsRuleElements getInSemanticsRuleAccess() {
+		return gaFSM.getInSemanticsRuleAccess();
+	}
+	
+	public ParserRule getInSemanticsRuleRule() {
+		return getInSemanticsRuleAccess().getRule();
+	}
+
+	//OutSemanticsRule:
+	//	"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	followUps+=SemanticsRule)+ ")"))?;
+	public FSMGrammarAccess.OutSemanticsRuleElements getOutSemanticsRuleAccess() {
+		return gaFSM.getOutSemanticsRuleAccess();
+	}
+	
+	public ParserRule getOutSemanticsRuleRule() {
+		return getOutSemanticsRuleAccess().getRule();
 	}
 
 	//// **************************************************************

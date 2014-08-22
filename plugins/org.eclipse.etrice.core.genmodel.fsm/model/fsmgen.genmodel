@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.etrice.core.genmodel.fsm/src" modelPluginID="org.eclipse.etrice.core.genmodel.fsm"
     modelName="FsmGen" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.genmodel#//room"
+    usedGenPackages="../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base ../../org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM"
     importOrganizing="true">
   <foreignModel>fsmgen.ecore</foreignModel>
   <genPackages prefix="FsmGen" basePackage="org.eclipse.etrice.core.genmodel.fsm"

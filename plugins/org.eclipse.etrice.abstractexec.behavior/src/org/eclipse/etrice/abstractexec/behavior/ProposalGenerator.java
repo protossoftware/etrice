@@ -19,17 +19,17 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.SemanticsRule;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
 
 public class ProposalGenerator {
-	private ExpandedActorClass xpac;
+	private ExpandedModelComponent xpac;
 	private SemanticsCheck checker;
 	private List<MessageFromIf> outgoingProposal = new LinkedList<MessageFromIf>();
 	private List<MessageFromIf> incomingProposal = new LinkedList<MessageFromIf>();
@@ -44,7 +44,7 @@ public class ProposalGenerator {
 		}
 	}
 
-	public ProposalGenerator(ExpandedActorClass xp, SemanticsCheck chk) {
+	public ProposalGenerator(ExpandedModelComponent xp, SemanticsCheck chk) {
 		xpac = xp;
 		checker = chk;
 	}
@@ -71,12 +71,12 @@ public class ProposalGenerator {
 		outgoingProposal.clear();
 		incomingProposal.clear();
 
-		for (InterfaceItem port : rules.getPortList()) {
+		for (AbstractInterfaceItem port : rules.getPortList()) {
 			// collect all messages from active triggers
-			Set<Message> messages = new HashSet<Message>();
+			Set<AbstractMessage> messages = new HashSet<AbstractMessage>();
 			for (ActiveTrigger t : xpac.getActiveTriggers(st))
 				if (t.getIfitem().equals(port))
-					messages.add((Message)t.getMsg());
+					messages.add((AbstractMessage)t.getMsg());
 			// check if every rule has its messages
 			if (rules.getPortList().contains(port)) {
 				for (SemanticsRule curRule : rules.getRulesForPort(port)) {
@@ -85,8 +85,7 @@ public class ProposalGenerator {
 								.createMessageFromIf();
 						mif.setFrom(port);
 						mif.setMessage(curRule.getMsg());
-						boolean isOutgoing = AbstractExecutionUtil.getInstance().getRoomHelpers().getMessageListDeep(
-								port, true).contains(curRule.getMsg());
+						boolean isOutgoing = port.getAllOutgoingAbstractMessages().contains(curRule.getMsg());
 						if (isOutgoing) {
 							outgoingProposal.add(mif);
 						} else {

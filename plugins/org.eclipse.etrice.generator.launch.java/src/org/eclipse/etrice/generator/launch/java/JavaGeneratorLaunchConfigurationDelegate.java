@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.launch.java;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 

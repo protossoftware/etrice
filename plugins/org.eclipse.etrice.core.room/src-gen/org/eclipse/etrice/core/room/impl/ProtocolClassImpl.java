@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**

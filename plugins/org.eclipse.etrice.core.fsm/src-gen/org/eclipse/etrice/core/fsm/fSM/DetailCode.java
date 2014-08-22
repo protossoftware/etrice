@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#getLines <em>Lines</em>}</li>
  * </ul>
  * </p>
@@ -37,6 +38,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DetailCode extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Used</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Used</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Used</em>' attribute.
+   * @see #setUsed(boolean)
+   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getDetailCode_Used()
+   * @model
+   * @generated
+   */
+  boolean isUsed();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Used</em>' attribute.
+   * @see #isUsed()
+   * @generated
+   */
+  void setUsed(boolean value);
+
   /**
    * Returns the value of the '<em><b>Lines</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.

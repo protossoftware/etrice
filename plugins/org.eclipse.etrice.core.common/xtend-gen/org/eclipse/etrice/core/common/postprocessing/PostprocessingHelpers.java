@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.core.common.postprocessing;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -63,6 +64,10 @@ public class PostprocessingHelpers {
     return IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
   }
   
+  public static boolean addOperation(final EClass owner, final String name, final EClassifier type) {
+    return PostprocessingHelpers.addOperation(owner, name, type, Integer.valueOf(1), null);
+  }
+  
   public static boolean addOperation(final EClass owner, final String name, final EClassifier type, final String body) {
     return PostprocessingHelpers.addOperation(owner, name, type, Integer.valueOf(1), body);
   }
@@ -74,15 +79,26 @@ public class PostprocessingHelpers {
       op.setName(name);
       op.setEType(type);
       op.setUpperBound((upperBound).intValue());
-      final EAnnotation anno = EcoreFactory.eINSTANCE.createEAnnotation();
-      anno.setSource("http://www.eclipse.org/emf/2002/GenModel");
-      EMap<String, String> _details = anno.getDetails();
-      _details.put("body", body);
-      EList<EAnnotation> _eAnnotations = op.getEAnnotations();
-      _eAnnotations.add(anno);
+      boolean _notEquals = (!Objects.equal(body, null));
+      if (_notEquals) {
+        final EAnnotation anno = EcoreFactory.eINSTANCE.createEAnnotation();
+        anno.setSource("http://www.eclipse.org/emf/2002/GenModel");
+        EMap<String, String> _details = anno.getDetails();
+        _details.put("body", body);
+        EList<EAnnotation> _eAnnotations = op.getEAnnotations();
+        _eAnnotations.add(anno);
+      }
       EList<EOperation> _eOperations = owner.getEOperations();
       _xblockexpression = _eOperations.add(op);
     }
     return _xblockexpression;
+  }
+  
+  public static EClass addClass(final EPackage pck, final String name) {
+    final EClass cls = EcoreFactory.eINSTANCE.createEClass();
+    cls.setName(name);
+    EList<EClassifier> _eClassifiers = pck.getEClassifiers();
+    _eClassifiers.add(cls);
+    return cls;
   }
 }

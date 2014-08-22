@@ -23,22 +23,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
-import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.base.NullLogger;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
@@ -57,7 +55,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 	private static boolean traceExec = false;
 	private static String traceName = "";
 	static {
-		classesToCheck.add(RoomPackage.Literals.ACTOR_CLASS);
+		classesToCheck.add(FSMPackage.Literals.MODEL_COMPONENT);
 		
 		if (Activator.getDefault() != null && Activator.getDefault().isDebugging()) {
 			String value = Platform
@@ -74,19 +72,19 @@ public class AbstractExecutionValidator implements ICustomValidator {
 	public void validate(EObject object,
 			ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
 
-		if (!(object instanceof ActorClass))
+		if (!(object instanceof ModelComponent))
 			return;
 		
 		if(context.isGeneration())
 			return;
 		
-		ActorClass ac = (ActorClass) object;
+		ModelComponent ac = (ModelComponent) object;
 		
 		if (traceExec) {
-			if (!(traceName.isEmpty() || ac.getName().equals(traceName)))
+			if (!(traceName.isEmpty() || ac.getComponentName().equals(traceName)))
 				return;
 			System.out.println("AbstractExecutionValidator checking class "
-					+ ac.getName());
+					+ ac.getComponentName());
 		}
 		
 		if (ac.isAbstract())
@@ -97,21 +95,14 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			return;
 
 		boolean oneProtocolsWithSemantics = false;
-		List<InterfaceItem> ifItems = AbstractExecutionUtil.getInstance().getRoomHelpers().getAllInterfaceItems(ac);
-		for (InterfaceItem item : ifItems) {
-			GeneralProtocolClass pc = item.getGeneralProtocol();
-			if (!(pc instanceof ProtocolClass))
-				continue;
-
-			if (traceExec)
-				System.out.println("  Checking protocolClass " + pc.getName()
-						+ " for semantics");
-			if (((ProtocolClass) pc).getSemantics() != null) {
+		List<AbstractInterfaceItem> ifItems = ac.getAllAbstractInterfaceItems();
+		for (AbstractInterfaceItem item : ifItems) {
+			if (item.getSemantics()!=null) {
 				oneProtocolsWithSemantics = true;
 				if (traceExec)
 					System.out
-							.println("  Will execute because semantics defined for "
-									+ pc.getName());
+					.println("  Will execute because semantics defined for interface item "
+							+ item.getName());
 				break;
 			}
 		}
@@ -120,9 +111,15 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			if (traceExec)
 				System.out.println("  Reached where at least one interface items has semantics");
 			NullDiagnostician diagnostician = new NullDiagnostician();
-			GeneratorModelBuilder builder = new GeneratorModelBuilder(
+			FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(
 					new NullLogger(), diagnostician);
-			ExpandedActorClass xpac = builder.createExpandedActorClass(ac);
+			ExpandedModelComponent xpac;
+			try {
+				xpac = builder.createExpandedModelComponent(ac);
+			}
+			catch (Throwable t) {
+				return;
+			}
 
 			if (xpac != null && !diagnostician.isFailed()) {
 				SemanticsCheck checker = new SemanticsCheck(xpac);
@@ -130,7 +127,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 				if (traceExec)
 					System.out.println("  Rule checking for "
-							+ xpac.getActorClass().getName() + " is over");
+							+ xpac.getModelComponent().getComponentName() + " is over");
 
 				TreeIterator<EObject> it = xpac.getStateMachine()
 						.eAllContents();
@@ -154,7 +151,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 				if (traceExec)
 					System.out
 							.println("AbstractExecutionValidator done checking class "
-									+ ac.getName());
+									+ ac.getComponentName());
 			}
 			else
 				if(traceExec)
@@ -179,7 +176,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 	private void createMarkersForProposals(ProposalGenerator propGen,
 			ValidationMessageAcceptor messageAcceptor, State st,
-			ExpandedActorClass xpac) {
+			ExpandedModelComponent xpac) {
 		List<MessageFromIf> incoming = propGen.getIncomingProposals();
 		EObject orig = xpac.getOrig(st);
 		EObject container = orig.eContainer();
@@ -210,7 +207,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 	private void createMarkersForWarnings(SemanticsCheck checker,
 			ValidationMessageAcceptor messageAcceptor, StateGraphItem item,
-			ExpandedActorClass xpac) {
+			ExpandedModelComponent xpac) {
 		List<HandledMessage> warningList = checker.getWarningMsg(item);
 		if (traceExec && warningList != null) {
 			System.out.println("Messages in the warning list for item "

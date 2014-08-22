@@ -9,7 +9,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//TriggeredTransition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpandedModelComponent" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedModelComponent">
     <eOperations name="prepare">
       <eParameters name="validator" eType="#//IDiagnostician"/>
     </eOperations>

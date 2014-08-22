@@ -41,6 +41,10 @@ class PostprocessingHelpers {
 		cls.EAllReferences.findFirst(a | a.name.equals(name))
 	}
 	
+	def static addOperation(EClass owner, String name, EClassifier type) {
+		addOperation(owner, name, type, 1, null)
+	}
+	
 	def static addOperation(EClass owner, String name, EClassifier type, String body) {
 		addOperation(owner, name, type, 1, body)
 	}
@@ -51,12 +55,22 @@ class PostprocessingHelpers {
 		op.setEType(type)
 		op.setUpperBound(upperBound)
 		
-		val anno = EcoreFactory::eINSTANCE.createEAnnotation
-		anno.setSource("http://www.eclipse.org/emf/2002/GenModel")
-		anno.details.put("body", body)
-		op.EAnnotations.add(anno)
+		if (body!=null) {
+			val anno = EcoreFactory::eINSTANCE.createEAnnotation
+			anno.setSource("http://www.eclipse.org/emf/2002/GenModel")
+			anno.details.put("body", body)
+			op.EAnnotations.add(anno)
+		}
 		
 		owner.EOperations.add(op)
+	}
+	
+	def static addClass(EPackage pck, String name) {
+		val cls = EcoreFactory::eINSTANCE.createEClass
+		cls.name = name
+		pck.EClassifiers.add(cls)
+		
+		return cls
 	}
 	
 	/* this does not work because the EMF generator doesn't pick up the annotation

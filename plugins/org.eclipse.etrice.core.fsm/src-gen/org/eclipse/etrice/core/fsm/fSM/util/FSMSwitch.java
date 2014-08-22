@@ -83,6 +83,7 @@ public class FSMSwitch<T> extends Switch<T>
       {
         ModelComponent modelComponent = (ModelComponent)theEObject;
         T result = caseModelComponent(modelComponent);
+        if (result == null) result = caseIInterfaceItemOwner(modelComponent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -101,19 +102,19 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FSMPackage.STATE_GRAPH:
+      {
+        StateGraph stateGraph = (StateGraph)theEObject;
+        T result = caseStateGraph(stateGraph);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FSMPackage.STATE:
       {
         State state = (State)theEObject;
         T result = caseState(state);
         if (result == null) result = caseStateGraphNode(state);
         if (result == null) result = caseStateGraphItem(state);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FSMPackage.STATE_GRAPH:
-      {
-        StateGraph stateGraph = (StateGraph)theEObject;
-        T result = caseStateGraph(stateGraph);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -351,6 +352,43 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FSMPackage.PROTOCOL_SEMANTICS:
+      {
+        ProtocolSemantics protocolSemantics = (ProtocolSemantics)theEObject;
+        T result = caseProtocolSemantics(protocolSemantics);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FSMPackage.SEMANTICS_RULE:
+      {
+        SemanticsRule semanticsRule = (SemanticsRule)theEObject;
+        T result = caseSemanticsRule(semanticsRule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FSMPackage.IN_SEMANTICS_RULE:
+      {
+        InSemanticsRule inSemanticsRule = (InSemanticsRule)theEObject;
+        T result = caseInSemanticsRule(inSemanticsRule);
+        if (result == null) result = caseSemanticsRule(inSemanticsRule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FSMPackage.OUT_SEMANTICS_RULE:
+      {
+        OutSemanticsRule outSemanticsRule = (OutSemanticsRule)theEObject;
+        T result = caseOutSemanticsRule(outSemanticsRule);
+        if (result == null) result = caseSemanticsRule(outSemanticsRule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FSMPackage.IINTERFACE_ITEM_OWNER:
+      {
+        IInterfaceItemOwner iInterfaceItemOwner = (IInterfaceItemOwner)theEObject;
+        T result = caseIInterfaceItemOwner(iInterfaceItemOwner);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -420,22 +458,6 @@ public class FSMSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseState(State object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>State Graph</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -447,6 +469,22 @@ public class FSMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStateGraph(StateGraph object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>State</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>State</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseState(State object)
   {
     return null;
   }
@@ -879,6 +917,86 @@ public class FSMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGuard(Guard object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Protocol Semantics</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Protocol Semantics</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseProtocolSemantics(ProtocolSemantics object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Semantics Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSemanticsRule(SemanticsRule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>In Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>In Semantics Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInSemanticsRule(InSemanticsRule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Out Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Out Semantics Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOutSemanticsRule(OutSemanticsRule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>IInterface Item Owner</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>IInterface Item Owner</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIInterfaceItemOwner(IInterfaceItemOwner object)
   {
     return null;
   }

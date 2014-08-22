@@ -27,8 +27,12 @@ Workflow {
 	bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
+        
+        // common base model
         registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel"
         registerGeneratedEPackage = "org.eclipse.etrice.core.common.base.BasePackage"
+        
+        // FSM model
         registerGenModelFile = "platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel"
         registerGeneratedEPackage = "org.eclipse.etrice.core.fsm.fSM.FSMPackage"
     }

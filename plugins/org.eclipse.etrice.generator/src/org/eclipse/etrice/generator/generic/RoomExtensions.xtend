@@ -15,12 +15,17 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.List
+import javax.inject.Inject
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ExternalPort
 import org.eclipse.etrice.core.room.Message
@@ -33,24 +38,15 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.ServiceImplementation
-import org.eclipse.etrice.core.fsm.fSM.State
-import org.eclipse.etrice.core.fsm.fSM.StateGraph
-import org.eclipse.etrice.core.fsm.fSM.Transition
-import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
-
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.emf.common.util.BasicEList
-import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
-import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
-import org.eclipse.emf.common.util.TreeIterator
-import org.eclipse.etrice.generator.base.FileSystemHelpers
-import javax.inject.Inject
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.generic.FSMExtensions
 
 /**
 	collection of convenience functions for code generation
 */
 @Singleton
-class RoomExtensions {
+class RoomExtensions extends FSMExtensions {
 
 	private static String genDir = "/src-gen/"
 	private static String genInfoDir = "/src-gen-info/"
@@ -79,32 +75,6 @@ class RoomExtensions {
 	
 	//-------------------------------------------------------
 	// union methods
-	
-	/**
-	 * the template type is T
-	 * @param l an iterable of type T
-	 * @param e a single element of type T
-	 * @return the union of the iterable and the element as new list
-	 */
-	def <T> List<T> union(Iterable<T> l, T e) {
-		var ret = new ArrayList<T>()
-		ret.addAll(l)
-		ret.add(e)
-		return ret
-	}
-	
-	/**
-	 * the template type is T
-	 * @param l1 an iterable of type T
-	 * @param l2 a second iterable of type T
-	 * @return the union of the two iterables as new list
-	 */
-	def <T> List<T> union(Iterable<T> l1, Iterable<T> l2) {
-		var ret = new ArrayList<T>()
-		ret.addAll(l1)
-		ret.addAll(l2)
-		return ret
-	}
     
 	/**
 	 * a specialized version of {@link #union(Iterable, Iterable)}
@@ -117,18 +87,6 @@ class RoomExtensions {
 		in2.forEach(e|ret.add(e.interfacePort))
 		ret.addAll(in1)
 		return ret
-	}
-	
-	/**
-	 * the template type is T
-	 * @param l1 a list of elements of type T
-	 * @param l2 a second list of elements of type T
-	 * @return a new list with the contents of l1 
-	 */
-	def <T> List<T> minus(List<T> l1, List<T> l2){
-		var ret = new ArrayList<T>(l1)
-		ret.removeAll(l2)
-		return ret;
 	}
 	
 	//-------------------------------------------------------
@@ -512,33 +470,6 @@ class RoomExtensions {
 			return 0
 		else
 			return ac.base.stateMachine.getBaseStateList().size+ac.actorBase.getNumberOfInheritedBaseStates()
-	}
-
-	/**
-	 * @param ac an {@link ExpandedActorClass}
-	 * @param s a {@link State}
-	 * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
-	 * 		following the logic of evaluation of firing conditions
-	 */
-	def List<Transition> getOutgoingTransitionsHierarchical(ExpandedActorClass ac, State s) {
-		var result = new ArrayList<Transition>()
-		
-		// own transitions
-		result.addAll(ac.getOutgoingTransitions(s))
-
-		// transition points on same level
-		var sg = s.eContainer() as StateGraph
-		for (tp : sg.getTrPoints()) {
-			if (tp instanceof TransitionPoint)
-				result.addAll(ac.getOutgoingTransitions(tp))
-		}
-		
-		// recurse to super states
-		if (sg.eContainer() instanceof State) {
-			result.addAll(getOutgoingTransitionsHierarchical(ac, sg.eContainer() as State))
-		}
-		
-		return result;
 	}
 	
 	def getAllSubInstances(StructureInstance ssi) {

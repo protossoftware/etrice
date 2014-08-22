@@ -702,58 +702,6 @@ class DocuPostprocessor {
 		''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("ProtocolSemantics")
-		cls.setDocumentation('''
-			An optional semantics specification as part of a {@link ProtocolClass}.
-			The semantic is defined as a <em>legal execution tree</em>.
-			This tree is composed of incoming and outgoing messages and each path through
-			this tree is a valid sequence of messages exchanged through a port instance.
-			
-			<p>
-			The semantics are composed using {@link SemanticsRule}s.
-			</p>
-		''')
-		
-		cls.getReference("rules").setDocumentation(
-			'''
-				This is a list of semantic rules.
-			''')
-		
-		//------------------------------------------------------------------
-		cls = pckg.getClass("SemanticsRule")
-		cls.setDocumentation('''
-			The super class of
-			<ul>
-			  <li>{@link InSemanticsRule}</li>
-			  <li>{@link OutSemanticsRule}</li>
-			</ul>
-		''')
-		
-		cls.getReference("msg").setDocumentation(
-			'''
-				The message to which this rule applies.
-			''')
-		
-		cls.getReference("followUps").setDocumentation(
-			'''
-				The possible follow up rules.
-			''')
-		
-		//------------------------------------------------------------------
-		cls = pckg.getClass("InSemanticsRule")
-		cls.setDocumentation('''
-			A {@link SemanticsRule} for incoming messages.
-			The rule points to an incoming messages and allows follow-up rules.
-		''')
-		
-		//------------------------------------------------------------------
-		cls = pckg.getClass("OutSemanticsRule")
-		cls.setDocumentation('''
-			A {@link SemanticsRule} for outgoing messages.
-			The rule points to an outgoing messages and allows follow-up rules.
-		''')
-		
-		//------------------------------------------------------------------
 		cls = pckg.getClass("ActorClass")
 		cls.setDocumentation('''
 			Together with {@link ProtocolClass} and {@link DataClass} one of

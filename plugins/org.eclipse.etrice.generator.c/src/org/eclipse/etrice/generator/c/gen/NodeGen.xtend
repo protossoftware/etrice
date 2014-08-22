@@ -23,7 +23,7 @@ import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
@@ -38,8 +38,8 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
-import org.eclipse.etrice.generator.base.IntelligentSeparator
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers

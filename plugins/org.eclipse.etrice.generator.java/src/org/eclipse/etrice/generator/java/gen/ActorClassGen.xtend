@@ -25,9 +25,9 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.generator.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions

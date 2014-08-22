@@ -33,7 +33,6 @@ import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InMessageHandler;
-import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
@@ -42,13 +41,11 @@ import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.OutMessageHandler;
-import org.eclipse.etrice.core.room.OutSemanticsRule;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.ProtocolSemantics;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.RefSegment;
@@ -62,7 +59,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
@@ -260,34 +256,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * @generated
    */
   private EClass outMessageHandlerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass protocolSemanticsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass semanticsRuleEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass inSemanticsRuleEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass outSemanticsRuleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1582,76 +1550,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getProtocolSemantics()
-  {
-    return protocolSemanticsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getProtocolSemantics_Rules()
-  {
-    return (EReference)protocolSemanticsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSemanticsRule()
-  {
-    return semanticsRuleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSemanticsRule_Msg()
-  {
-    return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSemanticsRule_FollowUps()
-  {
-    return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInSemanticsRule()
-  {
-    return inSemanticsRuleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getOutSemanticsRule()
-  {
-    return outSemanticsRuleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getActorClass()
   {
     return actorClassEClass;
@@ -2527,17 +2425,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     outMessageHandlerEClass = createEClass(OUT_MESSAGE_HANDLER);
 
-    protocolSemanticsEClass = createEClass(PROTOCOL_SEMANTICS);
-    createEReference(protocolSemanticsEClass, PROTOCOL_SEMANTICS__RULES);
-
-    semanticsRuleEClass = createEClass(SEMANTICS_RULE);
-    createEReference(semanticsRuleEClass, SEMANTICS_RULE__MSG);
-    createEReference(semanticsRuleEClass, SEMANTICS_RULE__FOLLOW_UPS);
-
-    inSemanticsRuleEClass = createEClass(IN_SEMANTICS_RULE);
-
-    outSemanticsRuleEClass = createEClass(OUT_SEMANTICS_RULE);
-
     actorClassEClass = createEClass(ACTOR_CLASS);
     createEReference(actorClassEClass, ACTOR_CLASS__INTERFACE_PORTS);
     createEReference(actorClassEClass, ACTOR_CLASS__STRUCTURE_DOCU);
@@ -2685,8 +2572,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     messageEClass.getESuperTypes().add(theFSMPackage.getAbstractMessage());
     inMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     outMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
-    inSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
-    outSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
     actorClassEClass.getESuperTypes().add(this.getActorContainerClass());
     actorClassEClass.getESuperTypes().add(theFSMPackage.getModelComponent());
     interfaceItemEClass.getESuperTypes().add(theFSMPackage.getAbstractInterfaceItem());
@@ -2807,7 +2692,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEReference(getProtocolClass_OutgoingMessages(), this.getMessage(), null, "outgoingMessages", null, 0, -1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_Regular(), this.getPortClass(), null, "regular", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProtocolClass_Conjugated(), this.getPortClass(), null, "conjugated", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getProtocolClass_Semantics(), this.getProtocolSemantics(), null, "semantics", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProtocolClass_Semantics(), theFSMPackage.getProtocolSemantics(), null, "semantics", null, 0, 1, ProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(compoundProtocolClassEClass, CompoundProtocolClass.class, "CompoundProtocolClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCompoundProtocolClass_SubProtocols(), this.getSubProtocol(), null, "subProtocols", null, 0, -1, CompoundProtocolClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2835,17 +2720,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(outMessageHandlerEClass, OutMessageHandler.class, "OutMessageHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(protocolSemanticsEClass, ProtocolSemantics.class, "ProtocolSemantics", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getProtocolSemantics_Rules(), this.getSemanticsRule(), null, "rules", null, 0, -1, ProtocolSemantics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(semanticsRuleEClass, SemanticsRule.class, "SemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSemanticsRule_Msg(), this.getMessage(), null, "msg", null, 0, 1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSemanticsRule_FollowUps(), this.getSemanticsRule(), null, "followUps", null, 0, -1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(inSemanticsRuleEClass, InSemanticsRule.class, "InSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(outSemanticsRuleEClass, OutSemanticsRule.class, "OutSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(actorClassEClass, ActorClass.class, "ActorClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActorClass_InterfacePorts(), this.getPort(), null, "interfacePorts", null, 0, -1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorClass_StructureDocu(), theBasePackage.getDocumentation(), null, "structureDocu", null, 0, 1, ActorClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2868,9 +2742,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     addEOperation(actorClassEClass, ecorePackage.getEString(), "getComponentName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+    addEOperation(actorClassEClass, theFSMPackage.getAbstractInterfaceItem(), "getAbstractInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(actorClassEClass, theFSMPackage.getAbstractInterfaceItem(), "getAllAbstractInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);
+
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     addEOperation(interfaceItemEClass, this.getGeneralProtocolClass(), "getGeneralProtocol", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(interfaceItemEClass, theFSMPackage.getProtocolSemantics(), "getSemantics", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(interfaceItemEClass, theFSMPackage.getAbstractMessage(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(interfaceItemEClass, theFSMPackage.getAbstractMessage(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPort_Conjugated(), ecorePackage.getEBoolean(), "conjugated", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

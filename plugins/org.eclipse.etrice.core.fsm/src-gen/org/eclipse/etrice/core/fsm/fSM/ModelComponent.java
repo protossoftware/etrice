@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.fsm.fSM;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ModelComponent extends EObject
+public interface ModelComponent extends IInterfaceItemOwner
 {
   /**
    * Returns the value of the '<em><b>Abstract</b></em>' attribute.

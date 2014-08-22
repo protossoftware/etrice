@@ -28,6 +28,8 @@ import org.eclipse.etrice.core.common.base.BaseFactory;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
@@ -91,7 +93,7 @@ public class TestDetailCodeTranslator {
 		}
 
 		@Override
-		public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
+		public String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg, ArrayList<String> args, String index, String orig) {
 			if (index==null)
 				return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
 			else

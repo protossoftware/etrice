@@ -14,25 +14,25 @@
 package org.eclipse.etrice.abstractexec.behavior;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 
 public class HandledMessage {
-	private InterfaceItem ifitem;
-	private Message msg;
+	private AbstractInterfaceItem ifitem;
+	private AbstractMessage msg;
 	private EObject origin;
 
-	public HandledMessage(InterfaceItem ifitem, Message msg, EObject origin) {
+	public HandledMessage(AbstractInterfaceItem ifitem, AbstractMessage msg, EObject origin) {
 		this.ifitem = ifitem;
 		this.msg = msg;
 		this.origin = origin;
 	}
 
-	public InterfaceItem getIfitem() {
+	public AbstractInterfaceItem getIfitem() {
 		return ifitem;
 	}
 
-	public Message getMsg() {
+	public AbstractMessage getMsg() {
 		return msg;
 	}
 

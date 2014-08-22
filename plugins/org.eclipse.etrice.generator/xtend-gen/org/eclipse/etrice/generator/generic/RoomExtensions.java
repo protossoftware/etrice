@@ -26,11 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.core.fsm.fSM.TrPoint;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
@@ -53,7 +49,8 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -64,7 +61,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class RoomExtensions {
+public class RoomExtensions extends FSMExtensions {
   private static String genDir = "/src-gen/";
   
   private static String genInfoDir = "/src-gen-info/";
@@ -100,32 +97,6 @@ public class RoomExtensions {
   }
   
   /**
-   * the template type is T
-   * @param l an iterable of type T
-   * @param e a single element of type T
-   * @return the union of the iterable and the element as new list
-   */
-  public <T extends Object> List<T> union(final Iterable<T> l, final T e) {
-    ArrayList<T> ret = new ArrayList<T>();
-    Iterables.<T>addAll(ret, l);
-    ret.add(e);
-    return ret;
-  }
-  
-  /**
-   * the template type is T
-   * @param l1 an iterable of type T
-   * @param l2 a second iterable of type T
-   * @return the union of the two iterables as new list
-   */
-  public <T extends Object> List<T> union(final Iterable<T> l1, final Iterable<T> l2) {
-    ArrayList<T> ret = new ArrayList<T>();
-    Iterables.<T>addAll(ret, l1);
-    Iterables.<T>addAll(ret, l2);
-    return ret;
-  }
-  
-  /**
    * a specialized version of {@link #union(Iterable, Iterable)}
    * @param in1 an iterable of type T
    * @param in2 a second iterable of type T
@@ -141,18 +112,6 @@ public class RoomExtensions {
     };
     IterableExtensions.<ExternalPort>forEach(in2, _function);
     Iterables.<Port>addAll(ret, in1);
-    return ret;
-  }
-  
-  /**
-   * the template type is T
-   * @param l1 a list of elements of type T
-   * @param l2 a second list of elements of type T
-   * @return a new list with the contents of l1
-   */
-  public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
-    ArrayList<T> ret = new ArrayList<T>(l1);
-    ret.removeAll(l2);
     return ret;
   }
   
@@ -689,34 +648,6 @@ public class RoomExtensions {
       int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_actorBase_1);
       return (_size + _numberOfInheritedBaseStates);
     }
-  }
-  
-  /**
-   * @param ac an {@link ExpandedActorClass}
-   * @param s a {@link State}
-   * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
-   * 		following the logic of evaluation of firing conditions
-   */
-  public List<Transition> getOutgoingTransitionsHierarchical(final ExpandedActorClass ac, final State s) {
-    ArrayList<Transition> result = new ArrayList<Transition>();
-    EList<Transition> _outgoingTransitions = ac.getOutgoingTransitions(s);
-    result.addAll(_outgoingTransitions);
-    EObject _eContainer = s.eContainer();
-    StateGraph sg = ((StateGraph) _eContainer);
-    EList<TrPoint> _trPoints = sg.getTrPoints();
-    for (final TrPoint tp : _trPoints) {
-      if ((tp instanceof TransitionPoint)) {
-        EList<Transition> _outgoingTransitions_1 = ac.getOutgoingTransitions(tp);
-        result.addAll(_outgoingTransitions_1);
-      }
-    }
-    EObject _eContainer_1 = sg.eContainer();
-    if ((_eContainer_1 instanceof State)) {
-      EObject _eContainer_2 = sg.eContainer();
-      List<Transition> _outgoingTransitionsHierarchical = this.getOutgoingTransitionsHierarchical(ac, ((State) _eContainer_2));
-      result.addAll(_outgoingTransitionsHierarchical);
-    }
-    return result;
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {

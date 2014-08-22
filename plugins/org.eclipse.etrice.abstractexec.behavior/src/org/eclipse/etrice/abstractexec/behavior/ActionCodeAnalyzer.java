@@ -15,12 +15,12 @@ package org.eclipse.etrice.abstractexec.behavior;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
-import org.eclipse.etrice.generator.base.DetailCodeTranslator;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.generator.fsm.base.DefaultFSMTranslationProvider;
+import org.eclipse.etrice.generator.fsm.base.FSMDetailCodeTranslator;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -28,7 +28,7 @@ import org.eclipse.etrice.generator.base.DetailCodeTranslator;
  */
 public class ActionCodeAnalyzer {
 
-	private class Collector extends DefaultTranslationProvider {
+	private class Collector extends DefaultFSMTranslationProvider {
 		
 		private ArrayList<HandledMessage> mifs = new ArrayList<HandledMessage>();
 		
@@ -40,8 +40,8 @@ public class ActionCodeAnalyzer {
 		 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemMessageText(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.util.ArrayList, java.lang.String, java.lang.String)
 		 */
 		@Override
-		public String getInterfaceItemMessageText(InterfaceItem item,
-				Message msg, ArrayList<String> args, String index, String orig) {
+		public String getInterfaceItemMessageText(AbstractInterfaceItem item,
+				AbstractMessage msg, ArrayList<String> args, String index, String orig) {
 			
 			HandledMessage sm = new HandledMessage(item, msg, origin);
 			mifs.add(sm);
@@ -64,12 +64,12 @@ public class ActionCodeAnalyzer {
 	}
 	
 	private Collector collector;
-	private DetailCodeTranslator translator;
+	private FSMDetailCodeTranslator translator;
 	private DetailCode origin;
 
-	public ActionCodeAnalyzer(ActorClass ac) {
+	public ActionCodeAnalyzer(ModelComponent ac) {
 		collector = new Collector();
-		translator = new DetailCodeTranslator(ac, collector, true);
+		translator = new FSMDetailCodeTranslator(ac, collector, true);
 	}
 	
 	public List<HandledMessage> analyze(DetailCode dc) {

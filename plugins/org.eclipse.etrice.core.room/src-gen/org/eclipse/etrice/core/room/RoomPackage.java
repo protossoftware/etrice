@@ -1634,145 +1634,6 @@ public interface RoomPackage extends EPackage
   int OUT_MESSAGE_HANDLER_FEATURE_COUNT = MESSAGE_HANDLER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getProtocolSemantics()
-   * @generated
-   */
-  int PROTOCOL_SEMANTICS = 26;
-
-  /**
-   * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROTOCOL_SEMANTICS__RULES = 0;
-
-  /**
-   * The number of structural features of the '<em>Protocol Semantics</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROTOCOL_SEMANTICS_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.SemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSemanticsRule()
-   * @generated
-   */
-  int SEMANTICS_RULE = 27;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE__MSG = 0;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE__FOLLOW_UPS = 1;
-
-  /**
-   * The number of structural features of the '<em>Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInSemanticsRule()
-   * @generated
-   */
-  int IN_SEMANTICS_RULE = 28;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
-
-  /**
-   * The number of structural features of the '<em>In Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getOutSemanticsRule()
-   * @generated
-   */
-  int OUT_SEMANTICS_RULE = 29;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
-
-  /**
-   * The number of structural features of the '<em>Out Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorClassImpl <em>Actor Class</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1780,7 +1641,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorClass()
    * @generated
    */
-  int ACTOR_CLASS = 30;
+  int ACTOR_CLASS = 26;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2024,7 +1885,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInterfaceItem()
    * @generated
    */
-  int INTERFACE_ITEM = 31;
+  int INTERFACE_ITEM = 27;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2052,7 +1913,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getPort()
    * @generated
    */
-  int PORT = 32;
+  int PORT = 28;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2116,7 +1977,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExternalPort()
    * @generated
    */
-  int EXTERNAL_PORT = 33;
+  int EXTERNAL_PORT = 29;
 
   /**
    * The feature id for the '<em><b>Interface Port</b></em>' reference.
@@ -2144,7 +2005,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSAP()
    * @generated
    */
-  int SAP = 34;
+  int SAP = 30;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2181,7 +2042,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSPP()
    * @generated
    */
-  int SPP = 35;
+  int SPP = 31;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2218,7 +2079,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getServiceImplementation()
    * @generated
    */
-  int SERVICE_IMPLEMENTATION = 36;
+  int SERVICE_IMPLEMENTATION = 32;
 
   /**
    * The feature id for the '<em><b>Spp</b></em>' reference.
@@ -2246,7 +2107,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLogicalSystem()
    * @generated
    */
-  int LOGICAL_SYSTEM = 37;
+  int LOGICAL_SYSTEM = 33;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2319,7 +2180,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorContainerRef()
    * @generated
    */
-  int ACTOR_CONTAINER_REF = 38;
+  int ACTOR_CONTAINER_REF = 34;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2356,7 +2217,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubSystemRef()
    * @generated
    */
-  int SUB_SYSTEM_REF = 39;
+  int SUB_SYSTEM_REF = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2402,7 +2263,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubSystemClass()
    * @generated
    */
-  int SUB_SYSTEM_CLASS = 40;
+  int SUB_SYSTEM_CLASS = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2538,7 +2399,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLogicalThread()
    * @generated
    */
-  int LOGICAL_THREAD = 41;
+  int LOGICAL_THREAD = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2566,7 +2427,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstanceMapping()
    * @generated
    */
-  int ACTOR_INSTANCE_MAPPING = 42;
+  int ACTOR_INSTANCE_MAPPING = 38;
 
   /**
    * The feature id for the '<em><b>Path</b></em>' containment reference.
@@ -2612,7 +2473,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefPath()
    * @generated
    */
-  int REF_PATH = 43;
+  int REF_PATH = 39;
 
   /**
    * The feature id for the '<em><b>Refs</b></em>' containment reference list.
@@ -2640,7 +2501,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefSegment()
    * @generated
    */
-  int REF_SEGMENT = 44;
+  int REF_SEGMENT = 40;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' attribute.
@@ -2677,7 +2538,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBinding()
    * @generated
    */
-  int BINDING = 45;
+  int BINDING = 41;
 
   /**
    * The feature id for the '<em><b>Endpoint1</b></em>' containment reference.
@@ -2714,7 +2575,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBindingEndPoint()
    * @generated
    */
-  int BINDING_END_POINT = 46;
+  int BINDING_END_POINT = 42;
 
   /**
    * The feature id for the '<em><b>Actor Ref</b></em>' reference.
@@ -2760,7 +2621,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLayerConnection()
    * @generated
    */
-  int LAYER_CONNECTION = 47;
+  int LAYER_CONNECTION = 43;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -2797,7 +2658,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSAPoint()
    * @generated
    */
-  int SA_POINT = 48;
+  int SA_POINT = 44;
 
   /**
    * The number of structural features of the '<em>SA Point</em>' class.
@@ -2816,7 +2677,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefSAPoint()
    * @generated
    */
-  int REF_SA_POINT = 49;
+  int REF_SA_POINT = 45;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2844,7 +2705,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRelaySAPoint()
    * @generated
    */
-  int RELAY_SA_POINT = 50;
+  int RELAY_SA_POINT = 46;
 
   /**
    * The feature id for the '<em><b>Relay</b></em>' reference.
@@ -2872,7 +2733,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSPPoint()
    * @generated
    */
-  int SP_POINT = 51;
+  int SP_POINT = 47;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2909,7 +2770,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorRef()
    * @generated
    */
-  int ACTOR_REF = 52;
+  int ACTOR_REF = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2973,7 +2834,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 53;
+  int COMMUNICATION_TYPE = 49;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.
@@ -2983,7 +2844,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getReferenceType()
    * @generated
    */
-  int REFERENCE_TYPE = 54;
+  int REFERENCE_TYPE = 50;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.RoomAnnotationTargetEnum <em>Annotation Target Enum</em>}' enum.
@@ -2993,7 +2854,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRoomAnnotationTargetEnum()
    * @generated
    */
-  int ROOM_ANNOTATION_TARGET_ENUM = 55;
+  int ROOM_ANNOTATION_TARGET_ENUM = 51;
 
 
   /**
@@ -4113,79 +3974,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getOutMessageHandler();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ProtocolSemantics <em>Protocol Semantics</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Protocol Semantics</em>'.
-   * @see org.eclipse.etrice.core.room.ProtocolSemantics
-   * @generated
-   */
-  EClass getProtocolSemantics();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ProtocolSemantics#getRules <em>Rules</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Rules</em>'.
-   * @see org.eclipse.etrice.core.room.ProtocolSemantics#getRules()
-   * @see #getProtocolSemantics()
-   * @generated
-   */
-  EReference getProtocolSemantics_Rules();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SemanticsRule <em>Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule
-   * @generated
-   */
-  EClass getSemanticsRule();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.SemanticsRule#getMsg <em>Msg</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Msg</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule#getMsg()
-   * @see #getSemanticsRule()
-   * @generated
-   */
-  EReference getSemanticsRule_Msg();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SemanticsRule#getFollowUps <em>Follow Ups</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Follow Ups</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule#getFollowUps()
-   * @see #getSemanticsRule()
-   * @generated
-   */
-  EReference getSemanticsRule_FollowUps();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InSemanticsRule <em>In Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>In Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.InSemanticsRule
-   * @generated
-   */
-  EClass getInSemanticsRule();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.OutSemanticsRule <em>Out Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Out Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.OutSemanticsRule
-   * @generated
-   */
-  EClass getOutSemanticsRule();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
@@ -5859,70 +5647,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass OUT_MESSAGE_HANDLER = eINSTANCE.getOutMessageHandler();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getProtocolSemantics()
-     * @generated
-     */
-    EClass PROTOCOL_SEMANTICS = eINSTANCE.getProtocolSemantics();
-
-    /**
-     * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PROTOCOL_SEMANTICS__RULES = eINSTANCE.getProtocolSemantics_Rules();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.SemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSemanticsRule()
-     * @generated
-     */
-    EClass SEMANTICS_RULE = eINSTANCE.getSemanticsRule();
-
-    /**
-     * The meta object literal for the '<em><b>Msg</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SEMANTICS_RULE__MSG = eINSTANCE.getSemanticsRule_Msg();
-
-    /**
-     * The meta object literal for the '<em><b>Follow Ups</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SEMANTICS_RULE__FOLLOW_UPS = eINSTANCE.getSemanticsRule_FollowUps();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInSemanticsRule()
-     * @generated
-     */
-    EClass IN_SEMANTICS_RULE = eINSTANCE.getInSemanticsRule();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getOutSemanticsRule()
-     * @generated
-     */
-    EClass OUT_SEMANTICS_RULE = eINSTANCE.getOutSemanticsRule();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ActorClassImpl <em>Actor Class</em>}' class.

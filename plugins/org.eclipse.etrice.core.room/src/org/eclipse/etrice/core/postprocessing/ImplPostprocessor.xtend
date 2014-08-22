@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.core.postprocessing
 
-import org.eclipse.xtext.GeneratedMetamodel
-
 import org.eclipse.emf.ecore.EcorePackage
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage
+import org.eclipse.xtext.GeneratedMetamodel
 
 import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
 
@@ -25,7 +25,7 @@ class ImplPostprocessor {
 		
 		val port = roomPackage.getClass("Port")
 		port.getAttribute("multiplicity").setDefaultValueLiteral("1")
-		port.addOperation("isReplicated", EcorePackage::eINSTANCE.getEClassifier("EBoolean"), 1, 
+		port.addOperation("isReplicated", EcorePackage.eINSTANCE.getEClassifier("EBoolean"), 1, 
 			'''return multiplicity>1 || multiplicity==-1;''')
 		
 		val actorRef = roomPackage.getClass("ActorRef")
@@ -42,11 +42,27 @@ class ImplPostprocessor {
 				return ((SPP) this).getProtocol();
 			return null;
 			''')
+		interfaceItem.addOperation("getSemantics", FSMPackage.Literals.PROTOCOL_SEMANTICS, 1, 
+			'''
+			if (getGeneralProtocol() instanceof <%org.eclipse.etrice.core.room.ProtocolClass%>)
+				return ((ProtocolClass)getGeneralProtocol()).getSemantics();
+			else
+				return null;
+			''')
+		interfaceItem.addOperation("getAllIncomingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, -1,
+			'''
+			return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));
+			''')
+		interfaceItem.addOperation("getAllOutgoingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, -1,
+			'''
+			return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));
+			'''
+		)
 			
 		val actorClass = roomPackage.getClass("ActorClass")
 		actorClass.addOperation("getExternalEndPorts", roomPackage.getEClassifier("Port"), -1,
 			'''
-				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
+				EList<Port> ports = new BasicEList<Port>();
 				for (ExternalPort ep : getExternalPorts()) {
 					ports.add(ep.getInterfacePort());
 				}
@@ -55,7 +71,7 @@ class ImplPostprocessor {
 		)
 		actorClass.addOperation("getRelayPorts", roomPackage.getEClassifier("Port"), -1,
 			'''
-				EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());
+				EList<Port> ports = new BasicEList<Port>(getInterfacePorts());
 				for (ExternalPort ep : getExternalPorts()) {
 					ports.remove(ep.getInterfacePort());
 				}
@@ -64,7 +80,7 @@ class ImplPostprocessor {
 		)
 		actorClass.addOperation("getImplementedSPPs", roomPackage.getEClassifier("SPP"), -1,
 			'''
-				EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();
+				EList<SPP> spps = new BasicEList<SPP>();
 				for (ServiceImplementation spp : getServiceImplementations()) {
 					spps.add(spp.getSpp());
 				}
@@ -81,6 +97,14 @@ class ImplPostprocessor {
 				return getName();
 			'''
 		)
+		actorClass.addOperation("getAbstractInterfaceItems", FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM, -1,
+			'''
+				return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));
+			''')
+		actorClass.addOperation("getAllAbstractInterfaceItems", FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM, -1,
+			'''
+				return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));
+			''')
 		
 		val actorContainerRef = roomPackage.getClass("ActorContainerRef")
 		actorContainerRef.addOperation("getStructureClass",

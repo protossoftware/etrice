@@ -160,34 +160,6 @@ OutMessageHandler:
 		detailCode=DetailCode
 	;
 
-ProtocolSemantics:
-	{ProtocolSemantics}
-	'semantics' '{'
-		rules+=SemanticsRule*
-	'}';
-
-SemanticsRule: InSemanticsRule | OutSemanticsRule;
-
-InSemanticsRule: 'in' ':' msg=[Message|ID]
-	('->'
-		(
-			followUps+=SemanticsRule
-			|
-			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
-		)
-	)?
-;
-
-OutSemanticsRule: 'out' ':' msg=[Message|ID]
-	('->'
-		(
-			followUps+=SemanticsRule
-			|
-			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
-		)
-	)?
-;
-
 // **************************************************************
 // actor class
 

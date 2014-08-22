@@ -41,6 +41,20 @@ class ImplPostprocessor {
 				return ((Transition)this).getName();
 			return "";
 			''')
+		
+		val ifItem = fsmPackage.getClass("AbstractInterfaceItem")
+		ifItem.addOperation("getSemantics", fsmPackage.getEClassifier("ProtocolSemantics"))
+		ifItem.addOperation("getAllIncomingAbstractMessages", fsmPackage.getEClassifier("AbstractMessage"), -1, null)
+		ifItem.addOperation("getAllOutgoingAbstractMessages", fsmPackage.getEClassifier("AbstractMessage"), -1, null)
+		
+		val itemOwner = fsmPackage.addClass("IInterfaceItemOwner")
+		itemOwner.setAbstract(true)
+		itemOwner.setInterface(true)
+		itemOwner.addOperation("getAbstractInterfaceItems", fsmPackage.getEClassifier("AbstractInterfaceItem"), -1, null)
+		itemOwner.addOperation("getAllAbstractInterfaceItems", fsmPackage.getEClassifier("AbstractInterfaceItem"), -1, null)
+		
+		val comp = fsmPackage.getClass("ModelComponent")
+		comp.ESuperTypes.add(itemOwner)
 	}
 }
 

@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenFactory;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
-import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,7 +121,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		RoomPackage.eINSTANCE.eClass();
+		FSMPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theFsmGenPackage.createPackageContents();
@@ -394,7 +393,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		initEAttribute(getActiveTrigger_Trigger(), ecorePackage.getEString(), "trigger", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActiveTrigger_Transitions(), theFSMPackage.getTriggeredTransition(), null, "transitions", null, 0, -1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(expandedModelComponentEClass, ExpandedModelComponent.class, "ExpandedModelComponent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(expandedModelComponentEClass, ExpandedModelComponent.class, "ExpandedModelComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpandedModelComponent_ModelComponent(), theFSMPackage.getModelComponent(), null, "modelComponent", null, 0, 1, ExpandedModelComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExpandedModelComponent_StateMachine(), theFSMPackage.getStateGraph(), null, "stateMachine", null, 0, 1, ExpandedModelComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExpandedModelComponent_TransitionChains(), this.getTransitionChain(), null, "transitionChains", null, 0, -1, ExpandedModelComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

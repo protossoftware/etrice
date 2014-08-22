@@ -86,6 +86,25 @@ public interface FSMPackage extends EPackage
   int FSM_MODEL_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getIInterfaceItemOwner()
+   * @generated
+   */
+  int IINTERFACE_ITEM_OWNER = 37;
+
+  /**
+   * The number of structural features of the '<em>IInterface Item Owner</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IINTERFACE_ITEM_OWNER_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.ModelComponentImpl <em>Model Component</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -102,7 +121,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT__ABSTRACT = 0;
+  int MODEL_COMPONENT__ABSTRACT = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Comm Type</b></em>' attribute.
@@ -111,7 +130,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT__COMM_TYPE = 1;
+  int MODEL_COMPONENT__COMM_TYPE = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Component Name</b></em>' attribute.
@@ -120,7 +139,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT__COMPONENT_NAME = 2;
+  int MODEL_COMPONENT__COMPONENT_NAME = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Base</b></em>' reference.
@@ -129,7 +148,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT__BASE = 3;
+  int MODEL_COMPONENT__BASE = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -138,7 +157,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT__STATE_MACHINE = 4;
+  int MODEL_COMPONENT__STATE_MACHINE = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Model Component</em>' class.
@@ -147,7 +166,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_COMPONENT_FEATURE_COUNT = 5;
+  int MODEL_COMPONENT_FEATURE_COUNT = IINTERFACE_ITEM_OWNER_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphItemImpl <em>State Graph Item</em>}' class.
@@ -188,70 +207,6 @@ public interface FSMPackage extends EPackage
   int STATE_GRAPH_NODE_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl <em>State</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.StateImpl
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getState()
-   * @generated
-   */
-  int STATE = 4;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__DOCU = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__ENTRY_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
-
-  /**
-   * The number of structural features of the '<em>State</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl <em>State Graph</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -259,7 +214,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getStateGraph()
    * @generated
    */
-  int STATE_GRAPH = 5;
+  int STATE_GRAPH = 4;
 
   /**
    * The feature id for the '<em><b>States</b></em>' containment reference list.
@@ -314,6 +269,70 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int STATE_GRAPH_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl <em>State</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.StateImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getState()
+   * @generated
+   */
+  int STATE = 5;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__DOCU = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__ENTRY_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>State</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.SimpleStateImpl <em>Simple State</em>}' class.
@@ -472,13 +491,22 @@ public interface FSMPackage extends EPackage
   int DETAIL_CODE = 8;
 
   /**
+   * The feature id for the '<em><b>Used</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DETAIL_CODE__USED = 0;
+
+  /**
    * The feature id for the '<em><b>Lines</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DETAIL_CODE__LINES = 0;
+  int DETAIL_CODE__LINES = 1;
 
   /**
    * The number of structural features of the '<em>Detail Code</em>' class.
@@ -487,7 +515,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DETAIL_CODE_FEATURE_COUNT = 1;
+  int DETAIL_CODE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TrPointImpl <em>Tr Point</em>}' class.
@@ -1513,6 +1541,145 @@ public interface FSMPackage extends EPackage
   int GUARD_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.ProtocolSemanticsImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getProtocolSemantics()
+   * @generated
+   */
+  int PROTOCOL_SEMANTICS = 33;
+
+  /**
+   * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_SEMANTICS__RULES = 0;
+
+  /**
+   * The number of structural features of the '<em>Protocol Semantics</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL_SEMANTICS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getSemanticsRule()
+   * @generated
+   */
+  int SEMANTICS_RULE = 34;
+
+  /**
+   * The feature id for the '<em><b>Msg</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SEMANTICS_RULE__MSG = 0;
+
+  /**
+   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SEMANTICS_RULE__FOLLOW_UPS = 1;
+
+  /**
+   * The number of structural features of the '<em>Semantics Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SEMANTICS_RULE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.InSemanticsRuleImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getInSemanticsRule()
+   * @generated
+   */
+  int IN_SEMANTICS_RULE = 35;
+
+  /**
+   * The feature id for the '<em><b>Msg</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IN_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
+
+  /**
+   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IN_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
+
+  /**
+   * The number of structural features of the '<em>In Semantics Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IN_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.OutSemanticsRuleImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getOutSemanticsRule()
+   * @generated
+   */
+  int OUT_SEMANTICS_RULE = 36;
+
+  /**
+   * The feature id for the '<em><b>Msg</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OUT_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
+
+  /**
+   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OUT_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
+
+  /**
+   * The number of structural features of the '<em>Out Semantics Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OUT_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType <em>Component Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1520,7 +1687,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getComponentCommunicationType()
    * @generated
    */
-  int COMPONENT_COMMUNICATION_TYPE = 33;
+  int COMPONENT_COMMUNICATION_TYPE = 38;
 
 
   /**
@@ -1630,71 +1797,6 @@ public interface FSMPackage extends EPackage
   EClass getStateGraphItem();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.State <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State
-   * @generated
-   */
-  EClass getState();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State#getDocu()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getEntryCode <em>Entry Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Entry Code</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State#getEntryCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_EntryCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getExitCode <em>Exit Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Exit Code</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State#getExitCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_ExitCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getDoCode <em>Do Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Do Code</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State#getDoCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_DoCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getSubgraph <em>Subgraph</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Subgraph</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.State#getSubgraph()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_Subgraph();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.StateGraph <em>State Graph</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1760,6 +1862,71 @@ public interface FSMPackage extends EPackage
   EReference getStateGraph_RefinedTransitions();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>State</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State
+   * @generated
+   */
+  EClass getState();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getDocu <em>Docu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Docu</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getDocu()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_Docu();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getEntryCode <em>Entry Code</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Entry Code</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getEntryCode()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_EntryCode();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getExitCode <em>Exit Code</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Exit Code</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getExitCode()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_ExitCode();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getDoCode <em>Do Code</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Do Code</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getDoCode()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_DoCode();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getSubgraph <em>Subgraph</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Subgraph</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getSubgraph()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_Subgraph();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.SimpleState <em>Simple State</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1810,6 +1977,17 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EClass getDetailCode();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Used</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed()
+   * @see #getDetailCode()
+   * @generated
+   */
+  EAttribute getDetailCode_Used();
 
   /**
    * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#getLines <em>Lines</em>}'.
@@ -2360,6 +2538,89 @@ public interface FSMPackage extends EPackage
   EReference getGuard_Guard();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics <em>Protocol Semantics</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Protocol Semantics</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics
+   * @generated
+   */
+  EClass getProtocolSemantics();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics#getRules <em>Rules</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Rules</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics#getRules()
+   * @see #getProtocolSemantics()
+   * @generated
+   */
+  EReference getProtocolSemantics_Rules();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.SemanticsRule <em>Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Semantics Rule</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.SemanticsRule
+   * @generated
+   */
+  EClass getSemanticsRule();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.fsm.fSM.SemanticsRule#getMsg <em>Msg</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Msg</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.SemanticsRule#getMsg()
+   * @see #getSemanticsRule()
+   * @generated
+   */
+  EReference getSemanticsRule_Msg();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.fsm.fSM.SemanticsRule#getFollowUps <em>Follow Ups</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Follow Ups</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.SemanticsRule#getFollowUps()
+   * @see #getSemanticsRule()
+   * @generated
+   */
+  EReference getSemanticsRule_FollowUps();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.InSemanticsRule <em>In Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>In Semantics Rule</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.InSemanticsRule
+   * @generated
+   */
+  EClass getInSemanticsRule();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule <em>Out Semantics Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Out Semantics Rule</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule
+   * @generated
+   */
+  EClass getOutSemanticsRule();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>IInterface Item Owner</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+   * @generated
+   */
+  EClass getIInterfaceItemOwner();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType <em>Component Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2481,56 +2742,6 @@ public interface FSMPackage extends EPackage
     EClass STATE_GRAPH_ITEM = eINSTANCE.getStateGraphItem();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl <em>State</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.fsm.fSM.impl.StateImpl
-     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getState()
-     * @generated
-     */
-    EClass STATE = eINSTANCE.getState();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__DOCU = eINSTANCE.getState_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Entry Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__ENTRY_CODE = eINSTANCE.getState_EntryCode();
-
-    /**
-     * The meta object literal for the '<em><b>Exit Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__EXIT_CODE = eINSTANCE.getState_ExitCode();
-
-    /**
-     * The meta object literal for the '<em><b>Do Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__DO_CODE = eINSTANCE.getState_DoCode();
-
-    /**
-     * The meta object literal for the '<em><b>Subgraph</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__SUBGRAPH = eINSTANCE.getState_Subgraph();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl <em>State Graph</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2581,6 +2792,56 @@ public interface FSMPackage extends EPackage
     EReference STATE_GRAPH__REFINED_TRANSITIONS = eINSTANCE.getStateGraph_RefinedTransitions();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl <em>State</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.StateImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getState()
+     * @generated
+     */
+    EClass STATE = eINSTANCE.getState();
+
+    /**
+     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__DOCU = eINSTANCE.getState_Docu();
+
+    /**
+     * The meta object literal for the '<em><b>Entry Code</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__ENTRY_CODE = eINSTANCE.getState_EntryCode();
+
+    /**
+     * The meta object literal for the '<em><b>Exit Code</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__EXIT_CODE = eINSTANCE.getState_ExitCode();
+
+    /**
+     * The meta object literal for the '<em><b>Do Code</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__DO_CODE = eINSTANCE.getState_DoCode();
+
+    /**
+     * The meta object literal for the '<em><b>Subgraph</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__SUBGRAPH = eINSTANCE.getState_Subgraph();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.SimpleStateImpl <em>Simple State</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2625,6 +2886,14 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EClass DETAIL_CODE = eINSTANCE.getDetailCode();
+
+    /**
+     * The meta object literal for the '<em><b>Used</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DETAIL_CODE__USED = eINSTANCE.getDetailCode_Used();
 
     /**
      * The meta object literal for the '<em><b>Lines</b></em>' attribute list feature.
@@ -3089,6 +3358,80 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EReference GUARD__GUARD = eINSTANCE.getGuard_Guard();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.ProtocolSemanticsImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getProtocolSemantics()
+     * @generated
+     */
+    EClass PROTOCOL_SEMANTICS = eINSTANCE.getProtocolSemantics();
+
+    /**
+     * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROTOCOL_SEMANTICS__RULES = eINSTANCE.getProtocolSemantics_Rules();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getSemanticsRule()
+     * @generated
+     */
+    EClass SEMANTICS_RULE = eINSTANCE.getSemanticsRule();
+
+    /**
+     * The meta object literal for the '<em><b>Msg</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SEMANTICS_RULE__MSG = eINSTANCE.getSemanticsRule_Msg();
+
+    /**
+     * The meta object literal for the '<em><b>Follow Ups</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SEMANTICS_RULE__FOLLOW_UPS = eINSTANCE.getSemanticsRule_FollowUps();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.InSemanticsRuleImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getInSemanticsRule()
+     * @generated
+     */
+    EClass IN_SEMANTICS_RULE = eINSTANCE.getInSemanticsRule();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.OutSemanticsRuleImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getOutSemanticsRule()
+     * @generated
+     */
+    EClass OUT_SEMANTICS_RULE = eINSTANCE.getOutSemanticsRule();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getIInterfaceItemOwner()
+     * @generated
+     */
+    EClass IINTERFACE_ITEM_OWNER = eINSTANCE.getIInterfaceItemOwner();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType <em>Component Communication Type</em>}' enum.

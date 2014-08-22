@@ -16,13 +16,12 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
-import org.eclipse.xtext.util.Pair
-import static org.eclipse.xtext.util.Tuples.*
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.util.Pair
 
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import static org.eclipse.xtext.util.Tuples.*
 
 /**
  * @author Peter Karlitschek

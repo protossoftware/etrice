@@ -40,7 +40,7 @@ import org.eclipse.etrice.core.fsm.fSM.Trigger;
  * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getExpandedModelComponent()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface ExpandedModelComponent extends EObject {

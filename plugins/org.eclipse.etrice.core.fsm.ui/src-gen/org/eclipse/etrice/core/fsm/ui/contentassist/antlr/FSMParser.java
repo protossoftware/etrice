@@ -39,14 +39,17 @@ public class FSMParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getStateGraphNodeAccess().getAlternatives(), "rule__StateGraphNode__Alternatives");
 					put(grammarAccess.getStateGraphItemAccess().getAlternatives(), "rule__StateGraphItem__Alternatives");
-					put(grammarAccess.getStateAccess().getAlternatives(), "rule__State__Alternatives");
 					put(grammarAccess.getStateGraphAccess().getAlternatives_2(), "rule__StateGraph__Alternatives_2");
 					put(grammarAccess.getStateMachineAccess().getAlternatives_3(), "rule__StateMachine__Alternatives_3");
+					put(grammarAccess.getStateAccess().getAlternatives(), "rule__State__Alternatives");
 					put(grammarAccess.getTrPointAccess().getAlternatives(), "rule__TrPoint__Alternatives");
 					put(grammarAccess.getTransitionAccess().getAlternatives(), "rule__Transition__Alternatives");
 					put(grammarAccess.getNonInitialTransitionAccess().getAlternatives(), "rule__NonInitialTransition__Alternatives");
 					put(grammarAccess.getTransitionChainStartTransitionAccess().getAlternatives(), "rule__TransitionChainStartTransition__Alternatives");
 					put(grammarAccess.getTransitionTerminalAccess().getAlternatives(), "rule__TransitionTerminal__Alternatives");
+					put(grammarAccess.getSemanticsRuleAccess().getAlternatives(), "rule__SemanticsRule__Alternatives");
+					put(grammarAccess.getInSemanticsRuleAccess().getAlternatives_3_1(), "rule__InSemanticsRule__Alternatives_3_1");
+					put(grammarAccess.getOutSemanticsRuleAccess().getAlternatives_3_1(), "rule__OutSemanticsRule__Alternatives_3_1");
 					put(grammarAccess.getAnnotationTypeAccess().getAlternatives_6(), "rule__AnnotationType__Alternatives_6");
 					put(grammarAccess.getAnnotationAttributeAccess().getAlternatives(), "rule__AnnotationAttribute__Alternatives");
 					put(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0(), "rule__SimpleAnnotationAttribute__Alternatives_0");
@@ -105,6 +108,15 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTriggerAccess().getGroup_2(), "rule__Trigger__Group_2__0");
 					put(grammarAccess.getMessageFromIfAccess().getGroup(), "rule__MessageFromIf__Group__0");
 					put(grammarAccess.getGuardAccess().getGroup(), "rule__Guard__Group__0");
+					put(grammarAccess.getProtocolSemanticsAccess().getGroup(), "rule__ProtocolSemantics__Group__0");
+					put(grammarAccess.getInSemanticsRuleAccess().getGroup(), "rule__InSemanticsRule__Group__0");
+					put(grammarAccess.getInSemanticsRuleAccess().getGroup_3(), "rule__InSemanticsRule__Group_3__0");
+					put(grammarAccess.getInSemanticsRuleAccess().getGroup_3_1_1(), "rule__InSemanticsRule__Group_3_1_1__0");
+					put(grammarAccess.getInSemanticsRuleAccess().getGroup_3_1_1_2(), "rule__InSemanticsRule__Group_3_1_1_2__0");
+					put(grammarAccess.getOutSemanticsRuleAccess().getGroup(), "rule__OutSemanticsRule__Group__0");
+					put(grammarAccess.getOutSemanticsRuleAccess().getGroup_3(), "rule__OutSemanticsRule__Group_3__0");
+					put(grammarAccess.getOutSemanticsRuleAccess().getGroup_3_1_1(), "rule__OutSemanticsRule__Group_3_1_1__0");
+					put(grammarAccess.getOutSemanticsRuleAccess().getGroup_3_1_1_2(), "rule__OutSemanticsRule__Group_3_1_1_2__0");
 					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2(), "rule__Annotation__Group_2__0");
 					put(grammarAccess.getAnnotationAccess().getGroup_2_2(), "rule__Annotation__Group_2_2__0");
@@ -164,6 +176,7 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefinedStateAccess().getExitCodeAssignment_5_1(), "rule__RefinedState__ExitCodeAssignment_5_1");
 					put(grammarAccess.getRefinedStateAccess().getDoCodeAssignment_6_1(), "rule__RefinedState__DoCodeAssignment_6_1");
 					put(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_7_1(), "rule__RefinedState__SubgraphAssignment_7_1");
+					put(grammarAccess.getDetailCodeAccess().getUsedAssignment_1(), "rule__DetailCode__UsedAssignment_1");
 					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_2(), "rule__DetailCode__LinesAssignment_2");
 					put(grammarAccess.getTransitionPointAccess().getHandlerAssignment_0(), "rule__TransitionPoint__HandlerAssignment_0");
 					put(grammarAccess.getTransitionPointAccess().getNameAssignment_2(), "rule__TransitionPoint__NameAssignment_2");
@@ -215,6 +228,15 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAbstractMessageAccess().getNameAssignment(), "rule__AbstractMessage__NameAssignment");
 					put(grammarAccess.getAbstractInterfaceItemAccess().getNameAssignment(), "rule__AbstractInterfaceItem__NameAssignment");
 					put(grammarAccess.getGuardAccess().getGuardAssignment_1(), "rule__Guard__GuardAssignment_1");
+					put(grammarAccess.getProtocolSemanticsAccess().getRulesAssignment_3(), "rule__ProtocolSemantics__RulesAssignment_3");
+					put(grammarAccess.getInSemanticsRuleAccess().getMsgAssignment_2(), "rule__InSemanticsRule__MsgAssignment_2");
+					put(grammarAccess.getInSemanticsRuleAccess().getFollowUpsAssignment_3_1_0(), "rule__InSemanticsRule__FollowUpsAssignment_3_1_0");
+					put(grammarAccess.getInSemanticsRuleAccess().getFollowUpsAssignment_3_1_1_1(), "rule__InSemanticsRule__FollowUpsAssignment_3_1_1_1");
+					put(grammarAccess.getInSemanticsRuleAccess().getFollowUpsAssignment_3_1_1_2_1(), "rule__InSemanticsRule__FollowUpsAssignment_3_1_1_2_1");
+					put(grammarAccess.getOutSemanticsRuleAccess().getMsgAssignment_2(), "rule__OutSemanticsRule__MsgAssignment_2");
+					put(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsAssignment_3_1_0(), "rule__OutSemanticsRule__FollowUpsAssignment_3_1_0");
+					put(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsAssignment_3_1_1_1(), "rule__OutSemanticsRule__FollowUpsAssignment_3_1_1_1");
+					put(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsAssignment_3_1_1_2_1(), "rule__OutSemanticsRule__FollowUpsAssignment_3_1_1_2_1");
 					put(grammarAccess.getAnnotationAccess().getTypeAssignment_1(), "rule__Annotation__TypeAssignment_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_1(), "rule__Annotation__AttributesAssignment_2_1");
 					put(grammarAccess.getAnnotationAccess().getAttributesAssignment_2_2_1(), "rule__Annotation__AttributesAssignment_2_2_1");

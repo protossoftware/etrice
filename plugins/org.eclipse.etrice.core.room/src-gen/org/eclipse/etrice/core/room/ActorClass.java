@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
 /**
@@ -257,7 +258,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.add(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>();\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.add(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getExternalEndPorts();
@@ -266,7 +267,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.remove(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>(getInterfacePorts());\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.remove(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getRelayPorts();
@@ -275,7 +276,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPP> spps = new BasicEList<SPP>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
    * @generated
    */
   EList<SPP> getImplementedSPPs();
@@ -297,5 +298,23 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * @generated
    */
   String getComponentName();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));\r\n'"
+   * @generated
+   */
+  EList<AbstractInterfaceItem> getAbstractInterfaceItems();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));\r\n'"
+   * @generated
+   */
+  EList<AbstractInterfaceItem> getAllAbstractInterfaceItems();
 
 } // ActorClass

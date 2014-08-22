@@ -27,7 +27,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;

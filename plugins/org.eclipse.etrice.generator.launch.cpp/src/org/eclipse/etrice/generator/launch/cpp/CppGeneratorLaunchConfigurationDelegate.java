@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.launch.cpp;
 
-import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**

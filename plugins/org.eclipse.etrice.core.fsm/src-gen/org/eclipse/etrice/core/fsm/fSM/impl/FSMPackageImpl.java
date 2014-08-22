@@ -27,12 +27,17 @@ import org.eclipse.etrice.core.fsm.fSM.FSMModel;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.Guard;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
+import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -90,14 +95,14 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stateEClass = null;
+  private EClass stateGraphEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stateGraphEClass = null;
+  private EClass stateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -293,6 +298,41 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass protocolSemanticsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass semanticsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass inSemanticsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass outSemanticsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass iInterfaceItemOwnerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EEnum componentCommunicationTypeEEnum = null;
 
   /**
@@ -466,66 +506,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getState()
-  {
-    return stateEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getState_Docu()
-  {
-    return (EReference)stateEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getState_EntryCode()
-  {
-    return (EReference)stateEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getState_ExitCode()
-  {
-    return (EReference)stateEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getState_DoCode()
-  {
-    return (EReference)stateEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getState_Subgraph()
-  {
-    return (EReference)stateEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getStateGraph()
   {
     return stateGraphEClass;
@@ -586,6 +566,66 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getState()
+  {
+    return stateEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_Docu()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_EntryCode()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_ExitCode()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_DoCode()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_Subgraph()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getSimpleState()
   {
     return simpleStateEClass;
@@ -636,9 +676,19 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDetailCode_Lines()
+  public EAttribute getDetailCode_Used()
   {
     return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDetailCode_Lines()
+  {
+    return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1156,6 +1206,86 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getProtocolSemantics()
+  {
+    return protocolSemanticsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProtocolSemantics_Rules()
+  {
+    return (EReference)protocolSemanticsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSemanticsRule()
+  {
+    return semanticsRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSemanticsRule_Msg()
+  {
+    return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSemanticsRule_FollowUps()
+  {
+    return (EReference)semanticsRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInSemanticsRule()
+  {
+    return inSemanticsRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOutSemanticsRule()
+  {
+    return outSemanticsRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIInterfaceItemOwner()
+  {
+    return iInterfaceItemOwnerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getComponentCommunicationType()
   {
     return componentCommunicationTypeEEnum;
@@ -1205,19 +1335,19 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     stateGraphItemEClass = createEClass(STATE_GRAPH_ITEM);
 
-    stateEClass = createEClass(STATE);
-    createEReference(stateEClass, STATE__DOCU);
-    createEReference(stateEClass, STATE__ENTRY_CODE);
-    createEReference(stateEClass, STATE__EXIT_CODE);
-    createEReference(stateEClass, STATE__DO_CODE);
-    createEReference(stateEClass, STATE__SUBGRAPH);
-
     stateGraphEClass = createEClass(STATE_GRAPH);
     createEReference(stateGraphEClass, STATE_GRAPH__STATES);
     createEReference(stateGraphEClass, STATE_GRAPH__TR_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__CH_POINTS);
     createEReference(stateGraphEClass, STATE_GRAPH__TRANSITIONS);
     createEReference(stateGraphEClass, STATE_GRAPH__REFINED_TRANSITIONS);
+
+    stateEClass = createEClass(STATE);
+    createEReference(stateEClass, STATE__DOCU);
+    createEReference(stateEClass, STATE__ENTRY_CODE);
+    createEReference(stateEClass, STATE__EXIT_CODE);
+    createEReference(stateEClass, STATE__DO_CODE);
+    createEReference(stateEClass, STATE__SUBGRAPH);
 
     simpleStateEClass = createEClass(SIMPLE_STATE);
     createEAttribute(simpleStateEClass, SIMPLE_STATE__NAME);
@@ -1226,6 +1356,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     createEReference(refinedStateEClass, REFINED_STATE__TARGET);
 
     detailCodeEClass = createEClass(DETAIL_CODE);
+    createEAttribute(detailCodeEClass, DETAIL_CODE__USED);
     createEAttribute(detailCodeEClass, DETAIL_CODE__LINES);
 
     trPointEClass = createEClass(TR_POINT);
@@ -1303,6 +1434,19 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     guardEClass = createEClass(GUARD);
     createEReference(guardEClass, GUARD__GUARD);
 
+    protocolSemanticsEClass = createEClass(PROTOCOL_SEMANTICS);
+    createEReference(protocolSemanticsEClass, PROTOCOL_SEMANTICS__RULES);
+
+    semanticsRuleEClass = createEClass(SEMANTICS_RULE);
+    createEReference(semanticsRuleEClass, SEMANTICS_RULE__MSG);
+    createEReference(semanticsRuleEClass, SEMANTICS_RULE__FOLLOW_UPS);
+
+    inSemanticsRuleEClass = createEClass(IN_SEMANTICS_RULE);
+
+    outSemanticsRuleEClass = createEClass(OUT_SEMANTICS_RULE);
+
+    iInterfaceItemOwnerEClass = createEClass(IINTERFACE_ITEM_OWNER);
+
     // Create enums
     componentCommunicationTypeEEnum = createEEnum(COMPONENT_COMMUNICATION_TYPE);
   }
@@ -1339,6 +1483,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    modelComponentEClass.getESuperTypes().add(this.getIInterfaceItemOwner());
     stateGraphNodeEClass.getESuperTypes().add(this.getStateGraphItem());
     stateEClass.getESuperTypes().add(this.getStateGraphNode());
     simpleStateEClass.getESuperTypes().add(this.getState());
@@ -1360,6 +1505,8 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     subStateTrPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     choicepointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
+    inSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
+    outSemanticsRuleEClass.getESuperTypes().add(this.getSemanticsRule());
 
     // Initialize classes and features; add operations and parameters
     initEClass(fsmModelEClass, FSMModel.class, "FSMModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1378,6 +1525,13 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     addEOperation(stateGraphItemEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+    initEClass(stateGraphEClass, StateGraph.class, "StateGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStateGraph_States(), this.getState(), null, "states", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateGraph_TrPoints(), this.getTrPoint(), null, "trPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateGraph_ChPoints(), this.getChoicePoint(), null, "chPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateGraph_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateGraph_RefinedTransitions(), this.getRefinedTransition(), null, "refinedTransitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getState_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_EntryCode(), this.getDetailCode(), null, "entryCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1387,13 +1541,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     addEOperation(stateEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-    initEClass(stateGraphEClass, StateGraph.class, "StateGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateGraph_States(), this.getState(), null, "states", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateGraph_TrPoints(), this.getTrPoint(), null, "trPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateGraph_ChPoints(), this.getChoicePoint(), null, "chPoints", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateGraph_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateGraph_RefinedTransitions(), this.getRefinedTransition(), null, "refinedTransitions", null, 0, -1, StateGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(simpleStateEClass, SimpleState.class, "SimpleState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleState_Name(), ecorePackage.getEString(), "name", null, 0, 1, SimpleState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1401,6 +1548,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEReference(getRefinedState_Target(), this.getState(), null, "target", null, 0, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(detailCodeEClass, DetailCode.class, "DetailCode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDetailCode_Used(), ecorePackage.getEBoolean(), "used", null, 0, 1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDetailCode_Lines(), ecorePackage.getEString(), "lines", null, 0, -1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trPointEClass, TrPoint.class, "TrPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1475,8 +1623,31 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEClass(abstractInterfaceItemEClass, AbstractInterfaceItem.class, "AbstractInterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractInterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    addEOperation(abstractInterfaceItemEClass, this.getProtocolSemantics(), "getSemantics", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(abstractInterfaceItemEClass, this.getAbstractMessage(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(abstractInterfaceItemEClass, this.getAbstractMessage(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+
     initEClass(guardEClass, Guard.class, "Guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGuard_Guard(), this.getDetailCode(), null, "guard", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(protocolSemanticsEClass, ProtocolSemantics.class, "ProtocolSemantics", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getProtocolSemantics_Rules(), this.getSemanticsRule(), null, "rules", null, 0, -1, ProtocolSemantics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(semanticsRuleEClass, SemanticsRule.class, "SemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSemanticsRule_Msg(), this.getAbstractMessage(), null, "msg", null, 0, 1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSemanticsRule_FollowUps(), this.getSemanticsRule(), null, "followUps", null, 0, -1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(inSemanticsRuleEClass, InSemanticsRule.class, "InSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(outSemanticsRuleEClass, OutSemanticsRule.class, "OutSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(iInterfaceItemOwnerEClass, IInterfaceItemOwner.class, "IInterfaceItemOwner", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    addEOperation(iInterfaceItemOwnerEClass, this.getAbstractInterfaceItem(), "getAbstractInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(iInterfaceItemOwnerEClass, this.getAbstractInterfaceItem(), "getAllAbstractInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(componentCommunicationTypeEEnum, ComponentCommunicationType.class, "ComponentCommunicationType");

@@ -69,8 +69,8 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
       case FSMPackage.MODEL_COMPONENT: return createModelComponent();
       case FSMPackage.STATE_GRAPH_NODE: return createStateGraphNode();
       case FSMPackage.STATE_GRAPH_ITEM: return createStateGraphItem();
-      case FSMPackage.STATE: return createState();
       case FSMPackage.STATE_GRAPH: return createStateGraph();
+      case FSMPackage.STATE: return createState();
       case FSMPackage.SIMPLE_STATE: return createSimpleState();
       case FSMPackage.REFINED_STATE: return createRefinedState();
       case FSMPackage.DETAIL_CODE: return createDetailCode();
@@ -98,6 +98,10 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
       case FSMPackage.ABSTRACT_MESSAGE: return createAbstractMessage();
       case FSMPackage.ABSTRACT_INTERFACE_ITEM: return createAbstractInterfaceItem();
       case FSMPackage.GUARD: return createGuard();
+      case FSMPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
+      case FSMPackage.SEMANTICS_RULE: return createSemanticsRule();
+      case FSMPackage.IN_SEMANTICS_RULE: return createInSemanticsRule();
+      case FSMPackage.OUT_SEMANTICS_RULE: return createOutSemanticsRule();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -186,10 +190,10 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public State createState()
+  public StateGraph createStateGraph()
   {
-    StateImpl state = new StateImpl();
-    return state;
+    StateGraphImpl stateGraph = new StateGraphImpl();
+    return stateGraph;
   }
 
   /**
@@ -197,10 +201,10 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateGraph createStateGraph()
+  public State createState()
   {
-    StateGraphImpl stateGraph = new StateGraphImpl();
-    return stateGraph;
+    StateImpl state = new StateImpl();
+    return state;
   }
 
   /**
@@ -498,6 +502,50 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
   {
     GuardImpl guard = new GuardImpl();
     return guard;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ProtocolSemantics createProtocolSemantics()
+  {
+    ProtocolSemanticsImpl protocolSemantics = new ProtocolSemanticsImpl();
+    return protocolSemantics;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SemanticsRule createSemanticsRule()
+  {
+    SemanticsRuleImpl semanticsRule = new SemanticsRuleImpl();
+    return semanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InSemanticsRule createInSemanticsRule()
+  {
+    InSemanticsRuleImpl inSemanticsRule = new InSemanticsRuleImpl();
+    return inSemanticsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutSemanticsRule createOutSemanticsRule()
+  {
+    OutSemanticsRuleImpl outSemanticsRule = new OutSemanticsRuleImpl();
+    return outSemanticsRule;
   }
 
   /**

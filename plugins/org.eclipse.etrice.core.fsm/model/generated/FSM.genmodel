@@ -27,6 +27,13 @@
     <genClasses ecoreClass="FSM.ecore#//StateGraphItem">
       <genOperations ecoreOperation="FSM.ecore#//StateGraphItem/getName"/>
     </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//StateGraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/states"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/trPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/chPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/transitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/refinedTransitions"/>
+    </genClasses>
     <genClasses ecoreClass="FSM.ecore#//State">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/docu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/entryCode"/>
@@ -35,13 +42,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/subgraph"/>
       <genOperations ecoreOperation="FSM.ecore#//State/getName"/>
     </genClasses>
-    <genClasses ecoreClass="FSM.ecore#//StateGraph">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/states"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/trPoints"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/chPoints"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/transitions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/refinedTransitions"/>
-    </genClasses>
     <genClasses ecoreClass="FSM.ecore#//SimpleState">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//SimpleState/name"/>
     </genClasses>
@@ -49,6 +49,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedState/target"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//DetailCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/used"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/lines"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//TrPoint">
@@ -116,9 +117,25 @@
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//AbstractInterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//AbstractInterfaceItem/name"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getSemantics"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllIncomingAbstractMessages"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllOutgoingAbstractMessages"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//Guard">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Guard/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//ProtocolSemantics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//ProtocolSemantics/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//SemanticsRule">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//SemanticsRule/msg"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//SemanticsRule/followUps"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//InSemanticsRule"/>
+    <genClasses ecoreClass="FSM.ecore#//OutSemanticsRule"/>
+    <genClasses image="false" ecoreClass="FSM.ecore#//IInterfaceItemOwner">
+      <genOperations ecoreOperation="FSM.ecore#//IInterfaceItemOwner/getAbstractInterfaceItems"/>
+      <genOperations ecoreOperation="FSM.ecore#//IInterfaceItemOwner/getAllAbstractInterfaceItems"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

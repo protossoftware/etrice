@@ -14,9 +14,9 @@ package org.eclipse.etrice.generator.cpp.gen;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
 
 /**
@@ -36,7 +36,7 @@ public class CppTranslationProvider extends DefaultTranslationProvider {
 	}
 	
 	@Override
-	public String getInterfaceItemMessageText(InterfaceItem item, Message msg, ArrayList<String> args, String index, String orig) {
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg, ArrayList<String> args, String index, String orig) {
 		if (index==null)
 			return orig;
 		

@@ -153,15 +153,6 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InMessageHandler"/>
     <genClasses ecoreClass="Room.ecore#//OutMessageHandler"/>
-    <genClasses ecoreClass="Room.ecore#//ProtocolSemantics">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ProtocolSemantics/rules"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//SemanticsRule">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/msg"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SemanticsRule/followUps"/>
-    </genClasses>
-    <genClasses ecoreClass="Room.ecore#//InSemanticsRule"/>
-    <genClasses ecoreClass="Room.ecore#//OutSemanticsRule"/>
     <genClasses ecoreClass="Room.ecore#//ActorClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/interfacePorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structureDocu"/>
@@ -178,9 +169,14 @@
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getImplementedSPPs"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getActorBase"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getComponentName"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getAbstractInterfaceItems"/>
+      <genOperations ecoreOperation="Room.ecore#//ActorClass/getAllAbstractInterfaceItems"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//InterfaceItem">
       <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getGeneralProtocol"/>
+      <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getSemantics"/>
+      <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getAllIncomingAbstractMessages"/>
+      <genOperations ecoreOperation="Room.ecore#//InterfaceItem/getAllOutgoingAbstractMessages"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>

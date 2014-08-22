@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -87,7 +86,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
  *
  * @generated
  */
-public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container implements ExpandedModelComponent {
+public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container implements ExpandedModelComponent {
 	
 	/**
 	 * The cached value of the '{@link #getModelComponent() <em>Model Component</em>}' reference.
@@ -1112,8 +1111,7 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	 * @generated NOT
 	 */
 	public EList<AbstractMessage> getIncomingMessages(AbstractInterfaceItem ifitem) {
-		// to be implemented by derived class
-		throw new UnsupportedOperationException();
+		return ifitem.getAllIncomingAbstractMessages();
 	}
 
 	/**
@@ -1172,8 +1170,7 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	 * @generated NOT
 	 */
 	public EList<AbstractInterfaceItem> getOwnInterfaceItems(ModelComponent mc) {
-		// to be implemented by derived class
-		throw new UnsupportedOperationException();
+		return mc.getAbstractInterfaceItems();
 	}
 
 	/**
@@ -1182,8 +1179,7 @@ public abstract class ExpandedModelComponentImpl extends MinimalEObjectImpl.Cont
 	 * @generated NOT
 	 */
 	public EList<AbstractInterfaceItem> getAllInterfaceItems() {
-		// to be implemented by derived class
-		throw new UnsupportedOperationException();
+		return getModelComponent().getAllAbstractInterfaceItems();
 	}
 
 	private StateGraphNode getAdjustedTargetNode(Transition t) {

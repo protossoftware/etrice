@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
 import org.eclipse.etrice.core.room.*;
@@ -209,26 +210,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createOutMessageHandlerAdapter();
       }
       @Override
-      public Adapter caseProtocolSemantics(ProtocolSemantics object)
-      {
-        return createProtocolSemanticsAdapter();
-      }
-      @Override
-      public Adapter caseSemanticsRule(SemanticsRule object)
-      {
-        return createSemanticsRuleAdapter();
-      }
-      @Override
-      public Adapter caseInSemanticsRule(InSemanticsRule object)
-      {
-        return createInSemanticsRuleAdapter();
-      }
-      @Override
-      public Adapter caseOutSemanticsRule(OutSemanticsRule object)
-      {
-        return createOutSemanticsRuleAdapter();
-      }
-      @Override
       public Adapter caseActorClass(ActorClass object)
       {
         return createActorClassAdapter();
@@ -347,6 +328,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAbstractMessage(AbstractMessage object)
       {
         return createAbstractMessageAdapter();
+      }
+      @Override
+      public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object)
+      {
+        return createIInterfaceItemOwnerAdapter();
       }
       @Override
       public Adapter caseModelComponent(ModelComponent object)
@@ -771,66 +757,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ProtocolSemantics <em>Protocol Semantics</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.ProtocolSemantics
-   * @generated
-   */
-  public Adapter createProtocolSemanticsAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.SemanticsRule <em>Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.SemanticsRule
-   * @generated
-   */
-  public Adapter createSemanticsRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.InSemanticsRule <em>In Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.InSemanticsRule
-   * @generated
-   */
-  public Adapter createInSemanticsRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.OutSemanticsRule <em>Out Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.room.OutSemanticsRule
-   * @generated
-   */
-  public Adapter createOutSemanticsRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1186,6 +1112,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAbstractMessageAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner <em>IInterface Item Owner</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner
+   * @generated
+   */
+  public Adapter createIInterfaceItemOwnerAdapter()
   {
     return null;
   }

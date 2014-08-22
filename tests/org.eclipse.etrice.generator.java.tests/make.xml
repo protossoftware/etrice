@@ -84,6 +84,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.fsm/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.core.fsm/bin" />

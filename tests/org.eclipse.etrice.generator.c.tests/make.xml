@@ -111,9 +111,10 @@
 		<mkdir dir="${output}"/>
 		<path id="clspath">
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.c/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
-			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.fsm/bin" />
+			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.fsm/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>

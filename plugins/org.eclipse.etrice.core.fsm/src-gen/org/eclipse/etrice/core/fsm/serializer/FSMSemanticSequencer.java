@@ -30,9 +30,12 @@ import org.eclipse.etrice.core.fsm.fSM.FSMModel;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.Guard;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
@@ -235,6 +238,13 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case FSMPackage.IN_SEMANTICS_RULE:
+				if(context == grammarAccess.getInSemanticsRuleRule() ||
+				   context == grammarAccess.getSemanticsRuleRule()) {
+					sequence_InSemanticsRule(context, (InSemanticsRule) semanticObject); 
+					return; 
+				}
+				else break;
 			case FSMPackage.INITIAL_TRANSITION:
 				if(context == grammarAccess.getInitialTransitionRule() ||
 				   context == grammarAccess.getStateGraphItemRule() ||
@@ -252,6 +262,19 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 			case FSMPackage.MODEL_COMPONENT:
 				if(context == grammarAccess.getModelComponentRule()) {
 					sequence_ModelComponent(context, (ModelComponent) semanticObject); 
+					return; 
+				}
+				else break;
+			case FSMPackage.OUT_SEMANTICS_RULE:
+				if(context == grammarAccess.getOutSemanticsRuleRule() ||
+				   context == grammarAccess.getSemanticsRuleRule()) {
+					sequence_OutSemanticsRule(context, (OutSemanticsRule) semanticObject); 
+					return; 
+				}
+				else break;
+			case FSMPackage.PROTOCOL_SEMANTICS:
+				if(context == grammarAccess.getProtocolSemanticsRule()) {
+					sequence_ProtocolSemantics(context, (ProtocolSemantics) semanticObject); 
 					return; 
 				}
 				else break;
@@ -423,7 +446,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (lines+=STRING*)
+	 *     (used?='{' lines+=STRING*)
 	 */
 	protected void sequence_DetailCode(EObject context, DetailCode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -505,6 +528,15 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (msg=[AbstractMessage|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
+	 */
+	protected void sequence_InSemanticsRule(EObject context, InSemanticsRule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (name=ID? to=TransitionTerminal docu=Documentation? action=DetailCode?)
 	 */
 	protected void sequence_InitialTransition(EObject context, InitialTransition semanticObject) {
@@ -536,6 +568,24 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     (abstract?='abstract'? commType=ComponentCommunicationType? componentName=ID base=[ModelComponent|FQN]? stateMachine=StateMachine)
 	 */
 	protected void sequence_ModelComponent(EObject context, ModelComponent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (msg=[AbstractMessage|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
+	 */
+	protected void sequence_OutSemanticsRule(EObject context, OutSemanticsRule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (rules+=SemanticsRule*)
+	 */
+	protected void sequence_ProtocolSemantics(EObject context, ProtocolSemantics semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

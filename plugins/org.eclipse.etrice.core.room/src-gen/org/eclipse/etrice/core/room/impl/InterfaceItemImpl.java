@@ -2,16 +2,25 @@
  */
 package org.eclipse.etrice.core.room.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 import org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl;
 
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
+
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,6 +68,42 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
     else if (this instanceof SPP)
       return ((SPP) this).getProtocol();
     return null;
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ProtocolSemantics getSemantics()
+  {
+    if (getGeneralProtocol() instanceof ProtocolClass)
+      return ((ProtocolClass)getGeneralProtocol()).getSemantics();
+    else
+      return null;
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractMessage> getAllIncomingAbstractMessages()
+  {
+    return new BasicEList<AbstractMessage>(new RoomHelpers().getMessageListDeep(this, false));
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractMessage> getAllOutgoingAbstractMessages()
+  {
+    return new BasicEList<AbstractMessage>(new RoomHelpers().getMessageListDeep(this, true));
     
   }
 

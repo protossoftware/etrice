@@ -7,6 +7,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -20,8 +21,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 
@@ -34,6 +37,8 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
+
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -640,7 +645,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    */
   public EList<Port> getExternalEndPorts()
   {
-    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>();
+    EList<Port> ports = new BasicEList<Port>();
     for (ExternalPort ep : getExternalPorts()) {
       ports.add(ep.getInterfacePort());
     }
@@ -655,7 +660,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    */
   public EList<Port> getRelayPorts()
   {
-    EList<Port> ports = new org.eclipse.emf.common.util.BasicEList<Port>(getInterfacePorts());
+    EList<Port> ports = new BasicEList<Port>(getInterfacePorts());
     for (ExternalPort ep : getExternalPorts()) {
       ports.remove(ep.getInterfacePort());
     }
@@ -670,7 +675,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    */
   public EList<SPP> getImplementedSPPs()
   {
-    EList<SPP> spps = new org.eclipse.emf.common.util.BasicEList<SPP>();
+    EList<SPP> spps = new BasicEList<SPP>();
     for (ServiceImplementation spp : getServiceImplementations()) {
       spps.add(spp.getSpp());
     }
@@ -697,6 +702,28 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   public String getComponentName()
   {
     return getName();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractInterfaceItem> getAbstractInterfaceItems()
+  {
+    return new BasicEList<AbstractInterfaceItem>(new RoomHelpers().getInterfaceItems(this));
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractInterfaceItem> getAllAbstractInterfaceItems()
+  {
+    return new BasicEList<AbstractInterfaceItem>(new RoomHelpers().getAllInterfaceItems(this));
     
   }
 
@@ -960,6 +987,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
+    if (baseClass == IInterfaceItemOwner.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == ModelComponent.class)
     {
       switch (derivedFeatureID)
@@ -983,6 +1017,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
+    if (baseClass == IInterfaceItemOwner.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == ModelComponent.class)
     {
       switch (baseFeatureID)

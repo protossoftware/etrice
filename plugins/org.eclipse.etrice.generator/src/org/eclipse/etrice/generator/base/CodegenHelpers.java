@@ -12,11 +12,11 @@
 
 package org.eclipse.etrice.generator.base;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 
 /**
@@ -25,15 +25,15 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
  */
 public class CodegenHelpers {
 	
-	private FSMHelpers roomHelpers = new RoomHelpers();
-	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	/**
 	 * @param t a {@link Transition}
 	 * @return a name for the action code operation the generator will generate
 	 */
 	public String getActionCodeOperationName(Transition t) {
-		return "action_"+roomNameProvider.getFullPath(t);
+		return "action_"+fsmNameProvider.getFullPath(t);
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class CodegenHelpers {
 	 * @return a name for the constant transition chain ID the generator will generate
 	 */
 	public String getGenChainId(TransitionChain tc) {
-		return "CHAIN_"+roomNameProvider.getFullPath(tc.getTransition());
+		return "CHAIN_"+fsmNameProvider.getFullPath(tc.getTransition());
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class CodegenHelpers {
 	 * @see org.eclipse.etrice.core.naming.RoomNameProvider#getFullPath(StateGraphItem)
 	 */
 	public String getGenStatePathName(State s) {
-		return roomNameProvider.getFullPath(s);
+		return fsmNameProvider.getFullPath(s);
 	}
 	
 	/**
@@ -84,9 +84,9 @@ public class CodegenHelpers {
 	 */
 	public String getGenStateId(State s) {
 		if (s==null)
-			return "STATE_"+roomNameProvider.getStateName(s);
+			return "STATE_"+fsmNameProvider.getStateName(s);
 		else
-			return "STATE_"+roomNameProvider.getFullPath(s);
+			return "STATE_"+fsmNameProvider.getFullPath(s);
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class CodegenHelpers {
 	 * @see #getGenStateId(State)
 	 */
 	public String getParentStateId(State s) {
-		return getGenStateId(roomHelpers.getParentState(s));
+		return getGenStateId(fsmHelpers.getParentState(s));
 	}
 
 }

@@ -59,15 +59,6 @@ public interface FSMFactory extends EFactory
   StateGraphItem createStateGraphItem();
 
   /**
-   * Returns a new object of class '<em>State</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>State</em>'.
-   * @generated
-   */
-  State createState();
-
-  /**
    * Returns a new object of class '<em>State Graph</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -75,6 +66,15 @@ public interface FSMFactory extends EFactory
    * @generated
    */
   StateGraph createStateGraph();
+
+  /**
+   * Returns a new object of class '<em>State</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>State</em>'.
+   * @generated
+   */
+  State createState();
 
   /**
    * Returns a new object of class '<em>Simple State</em>'.
@@ -318,6 +318,42 @@ public interface FSMFactory extends EFactory
    * @generated
    */
   Guard createGuard();
+
+  /**
+   * Returns a new object of class '<em>Protocol Semantics</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Protocol Semantics</em>'.
+   * @generated
+   */
+  ProtocolSemantics createProtocolSemantics();
+
+  /**
+   * Returns a new object of class '<em>Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Semantics Rule</em>'.
+   * @generated
+   */
+  SemanticsRule createSemanticsRule();
+
+  /**
+   * Returns a new object of class '<em>In Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>In Semantics Rule</em>'.
+   * @generated
+   */
+  InSemanticsRule createInSemanticsRule();
+
+  /**
+   * Returns a new object of class '<em>Out Semantics Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Out Semantics Rule</em>'.
+   * @generated
+   */
+  OutSemanticsRule createOutSemanticsRule();
 
   /**
    * Returns the package supported by this factory.

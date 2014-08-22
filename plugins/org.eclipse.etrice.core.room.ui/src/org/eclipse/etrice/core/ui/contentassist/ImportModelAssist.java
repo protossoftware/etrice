@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.core.room.util.RelativePathHelpers;
+import org.eclipse.etrice.core.common.base.util.RelativePathHelpers;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
