@@ -13,6 +13,7 @@
 package org.eclipse.etrice.abstractexec.behavior.tests;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -58,8 +59,8 @@ public class TestReachability extends TestBase {
 			}
 		}
 
-		for (AbstractValidationDiagnostic d : getIssueCode2diagnostic().get(
-				ReachabilityValidator.DIAG_CODE_UNREACHABLE)) {
+		List<AbstractValidationDiagnostic> diagnostics = getIssueCode2diagnostic().get(ReachabilityValidator.DIAG_CODE_UNREACHABLE);
+		for (AbstractValidationDiagnostic d : diagnostics) {
 			if (d instanceof FeatureBasedDiagnostic) {
 				FeatureBasedDiagnostic dx = (FeatureBasedDiagnostic) d;
 				StateGraph graph = (StateGraph) dx.getSourceEObject();

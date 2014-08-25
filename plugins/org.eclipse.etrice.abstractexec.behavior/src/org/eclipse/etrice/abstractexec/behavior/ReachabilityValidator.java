@@ -48,7 +48,7 @@ public class ReachabilityValidator implements ICustomValidator {
 		if (!(object instanceof ModelComponent))
 			return;
 		
-		if(context.isGeneration())
+		if (context.isGeneration())
 			return;
 		
 		ModelComponent ac = (ModelComponent) object;
