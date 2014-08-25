@@ -132,10 +132,10 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		SAP timeout = getSAP(xpac.getActorClass(), "timeout");
 		
 		int lid = 0;
-		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(base));
 		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(subbase));
-		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(ctrl));
+		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(base));
 		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(subctrl));
+		assertEquals("port local id", lid++, xpac.getInterfaceItemLocalId(ctrl));
 		assertEquals("sap local id", lid++, xpac.getInterfaceItemLocalId(ctrltimeout));
 		assertEquals("sap local id", lid++, xpac.getInterfaceItemLocalId(timeout));
 		assertEquals("relay port local id", -1, xpac.getInterfaceItemLocalId(fct1));

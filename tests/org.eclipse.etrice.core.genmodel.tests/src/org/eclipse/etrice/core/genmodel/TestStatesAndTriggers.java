@@ -134,8 +134,8 @@ public class TestStatesAndTriggers extends TestInstanceModelBuilderBase {
 		assertEquals("sap name", "timer", timer.getName());
 		assertEquals("sap name", "timeout", timeout.getName());
 		
-		assertEquals("port local id", 0, xpac.getInterfaceItemLocalId(fct));
-		assertEquals("port local id", 1, xpac.getInterfaceItemLocalId(sub));
+		assertEquals("port local id", 0, xpac.getInterfaceItemLocalId(sub));
+		assertEquals("port local id", 1, xpac.getInterfaceItemLocalId(fct));
 		assertEquals("sap local id", 2, xpac.getInterfaceItemLocalId(timer));
 		assertEquals("sap local id", 3, xpac.getInterfaceItemLocalId(timeout));
 	}
