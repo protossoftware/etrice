@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.behavior;
+package org.eclipse.etrice.ui.behavior.fsm.support;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,15 +23,8 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.util.FSMSwitch;
-import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.core.fsm.naming.FSMFragmentProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
-import org.eclipse.etrice.ui.behavior.fsm.support.ChoicePointSupport;
-import org.eclipse.etrice.ui.behavior.fsm.support.DiagramUpdateFeature;
-import org.eclipse.etrice.ui.behavior.fsm.support.InitialPointSupport;
-import org.eclipse.etrice.ui.behavior.fsm.support.StateGraphSupport;
-import org.eclipse.etrice.ui.behavior.fsm.support.StateSupport;
-import org.eclipse.etrice.ui.behavior.fsm.support.TrPointSupport;
-import org.eclipse.etrice.ui.behavior.fsm.support.TransitionSupport;
 import org.eclipse.etrice.ui.common.base.support.CantDeleteFeature;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.RemoveBendpointsFeature;
@@ -78,7 +71,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 import com.google.inject.Injector;
 
-public class ProviderDispatcher {
+public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider {
 
 	private class FeatureProviderSwitch extends FSMSwitch<IFeatureProvider> {
 		private ContainerShape parent = null;
@@ -90,17 +83,17 @@ public class ProviderDispatcher {
 				return null;
 			
 			if (theEObject.eIsProxy()) {
-        		if (RoomFragmentProvider.isState(theEObject))
+        		if (FSMFragmentProvider.isState(theEObject))
         			return stateSupport.getFeatureProvider();
-        		if (RoomFragmentProvider.isTrPoint(theEObject))
+        		if (FSMFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getFeatureProvider();
-        		if (RoomFragmentProvider.isChoicePoint(theEObject))
+        		if (FSMFragmentProvider.isChoicePoint(theEObject))
         			return choicePointSupport.getFeatureProvider();
-        		if (RoomFragmentProvider.isStateGraph(theEObject))
+        		if (FSMFragmentProvider.isStateGraph(theEObject))
         			return stateGraphSupport.getFeatureProvider();
-        		if (RoomFragmentProvider.isTransition(theEObject))
+        		if (FSMFragmentProvider.isTransition(theEObject))
         			return transitionSupport.getFeatureProvider();
-        		if (RoomFragmentProvider.isTransition(theEObject))
+        		if (FSMFragmentProvider.isTransition(theEObject))
         			return transitionSupport.getFeatureProvider();
         	}
 			return super.doSwitch(theEObject);
@@ -175,15 +168,15 @@ public class ProviderDispatcher {
 				return null;
       	
 			if (theEObject.eIsProxy()) {
-        		if (RoomFragmentProvider.isState(theEObject))
+        		if (FSMFragmentProvider.isState(theEObject))
         			return stateGraphSupport.getToolBehaviorProvider();
-        		if (RoomFragmentProvider.isTrPoint(theEObject))
+        		if (FSMFragmentProvider.isTrPoint(theEObject))
         			return trPointSupport.getToolBehaviorProvider();
-        		if (RoomFragmentProvider.isChoicePoint(theEObject))
+        		if (FSMFragmentProvider.isChoicePoint(theEObject))
         			return choicePointSupport.getToolBehaviorProvider();
-        		if (RoomFragmentProvider.isStateGraph(theEObject))
+        		if (FSMFragmentProvider.isStateGraph(theEObject))
         			return stateGraphSupport.getToolBehaviorProvider();
-        		if (RoomFragmentProvider.isTransition(theEObject))
+        		if (FSMFragmentProvider.isTransition(theEObject))
         			return transitionSupport.getToolBehaviorProvider();
         	}
 			
@@ -233,8 +226,11 @@ public class ProviderDispatcher {
 
 	private class DispatchingFeatureProvider extends DefaultFeatureProvider implements IInjectorProvider {
 
-		public DispatchingFeatureProvider(IDiagramTypeProvider dtp) {
+		private IInjectorProvider injectorProvider;
+
+		public DispatchingFeatureProvider(IDiagramTypeProvider dtp, IInjectorProvider injectorProvider) {
 			super(dtp);
+			this.injectorProvider = injectorProvider;
 		}
 		
 		@Override
@@ -398,7 +394,7 @@ public class ProviderDispatcher {
 		 */
 		@Override
 		public Injector getInjector() {
-			return Activator.getDefault().getInjector();
+			return injectorProvider.getInjector();
 		}
 	}
 	
@@ -511,9 +507,9 @@ public class ProviderDispatcher {
 	private DispatchingToolBehaviorProvider dispatchingBP;
 	
 	
-	public ProviderDispatcher(IDiagramTypeProvider dtp) {
+	public AbstractFSMProviderDispatcher(IDiagramTypeProvider dtp) {
 		// create those first before using them
-		dispatchingFP = new DispatchingFeatureProvider(dtp);
+		dispatchingFP = new DispatchingFeatureProvider(dtp, this);
 		dispatchingBP = new DispatchingToolBehaviorProvider(dtp);
 
 		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP);

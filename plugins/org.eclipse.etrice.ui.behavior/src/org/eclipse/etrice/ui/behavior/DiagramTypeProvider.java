@@ -12,6 +12,8 @@
 
 package org.eclipse.etrice.ui.behavior;
 
+import org.eclipse.etrice.ui.behavior.fsm.support.AbstractFSMProviderDispatcher;
+import org.eclipse.etrice.ui.behavior.support.ProviderDispatcher;
 import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
@@ -22,7 +24,7 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	private static final boolean USE_AUTO_UPDATE = true;
 	
 	private IToolBehaviorProvider[] toolBehaviorProviders;
-	private ProviderDispatcher dispatcher;
+	private AbstractFSMProviderDispatcher dispatcher;
 
 	public DiagramTypeProvider() {
 		super();
