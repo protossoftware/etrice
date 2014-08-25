@@ -5077,8 +5077,6 @@ ruleActorRef returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleMULTIPLICITY
 entryRuleMULTIPLICITY returns [String current=null] 
 	:
@@ -7487,7 +7485,7 @@ ruleMessageFromIf returns [EObject current=null]
         }
 	otherlv_0=RULE_ID
 	{
-		newLeafNode(otherlv_0, grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0()); 
+		newLeafNode(otherlv_0, grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0()); 
 	}
 
 )
@@ -7686,7 +7684,7 @@ ruleInSemanticsRule returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_2, grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
 	}
 
 )
@@ -7799,7 +7797,7 @@ ruleOutSemanticsRule returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		newLeafNode(otherlv_2, grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); 
+		newLeafNode(otherlv_2, grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
 	}
 
 )

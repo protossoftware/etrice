@@ -15,7 +15,6 @@ package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.Guard;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
@@ -60,12 +59,12 @@ public interface ActiveTrigger extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Msg</em>' reference.
-	 * @see #setMsg(AbstractMessage)
+	 * @see #setMsg(EObject)
 	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage#getActiveTrigger_Msg()
 	 * @model
 	 * @generated
 	 */
-	AbstractMessage getMsg();
+	EObject getMsg();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger#getMsg <em>Msg</em>}' reference.
@@ -75,7 +74,7 @@ public interface ActiveTrigger extends EObject {
 	 * @see #getMsg()
 	 * @generated
 	 */
-	void setMsg(AbstractMessage value);
+	void setMsg(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Ifitem</b></em>' reference.

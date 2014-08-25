@@ -1380,8 +1380,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleMULTIPLICITY
 entryRuleMULTIPLICITY 
 :
@@ -27758,12 +27756,12 @@ rule__MessageFromIf__MessageAssignment_0
     }
 :
 (
-{ before(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0()); }
+{ before(grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0()); }
 (
-{ before(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageIDTerminalRuleCall_0_0_1()); }
-	RULE_ID{ after(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageIDTerminalRuleCall_0_0_1()); }
+{ before(grammarAccess.getMessageFromIfAccess().getMessageEObjectIDTerminalRuleCall_0_0_1()); }
+	RULE_ID{ after(grammarAccess.getMessageFromIfAccess().getMessageEObjectIDTerminalRuleCall_0_0_1()); }
 )
-{ after(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0()); }
+{ after(grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0()); }
 )
 
 ;
@@ -27826,12 +27824,12 @@ rule__InSemanticsRule__MsgAssignment_2
     }
 :
 (
-{ before(grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); }
+{ before(grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); }
 (
-{ before(grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageIDTerminalRuleCall_2_0_1()); }
-	RULE_ID{ after(grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageIDTerminalRuleCall_2_0_1()); }
+{ before(grammarAccess.getInSemanticsRuleAccess().getMsgEObjectIDTerminalRuleCall_2_0_1()); }
+	RULE_ID{ after(grammarAccess.getInSemanticsRuleAccess().getMsgEObjectIDTerminalRuleCall_2_0_1()); }
 )
-{ after(grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); }
+{ after(grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); }
 )
 
 ;
@@ -27890,12 +27888,12 @@ rule__OutSemanticsRule__MsgAssignment_2
     }
 :
 (
-{ before(grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); }
+{ before(grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); }
 (
-{ before(grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageIDTerminalRuleCall_2_0_1()); }
-	RULE_ID{ after(grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageIDTerminalRuleCall_2_0_1()); }
+{ before(grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectIDTerminalRuleCall_2_0_1()); }
+	RULE_ID{ after(grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectIDTerminalRuleCall_2_0_1()); }
 )
-{ after(grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0()); }
+{ after(grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); }
 )
 
 ;

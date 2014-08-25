@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
@@ -62,7 +61,7 @@ public class DefaultFSMTranslationProvider implements IFSMTranslationProvider {
 	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemMessageText(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.util.ArrayList, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg,
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject msg,
 			ArrayList<String> args, String index, String orig) {
 				return orig;
 			}

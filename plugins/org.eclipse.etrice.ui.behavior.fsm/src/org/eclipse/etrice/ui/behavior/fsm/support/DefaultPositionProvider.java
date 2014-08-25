@@ -204,7 +204,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 			return;
 		
 		StateGraphContext tree = StateGraphContext.createContextTree(FSMSupportUtil.getInstance().getModelComponent(diagram), injector);
-		FSMNameProvider roomNameProvider = FSMSupportUtil.getInstance().getFSMNameProvider();
+		FSMNameProvider fsmNameProvider = FSMSupportUtil.getInstance().getFSMNameProvider();
 		
 		ILinkService linkService = Graphiti.getLinkService();
 		for (Shape sgShape : diagram.getChildren()) {
@@ -217,7 +217,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 				PosAndSize sz = new PosAndSize(
 						sgShape.getGraphicsAlgorithm().getX(), sgShape.getGraphicsAlgorithm().getY(),
 						borderRect.getWidth(), borderRect.getHeight());
-				sg2sz.put(roomNameProvider.getFullPath((StateGraph) obj), sz);
+				sg2sz.put(fsmNameProvider.getFullPath((StateGraph) obj), sz);
 				for (Shape sgItemShape : ((ContainerShape)sgShape).getChildren()) {
 					// this is the level of States, TrPoints and ChoicePoints
 					obj = linkService.getBusinessObjectForLinkedPictogramElement(sgItemShape);
@@ -229,14 +229,14 @@ public class DefaultPositionProvider implements IPositionProvider {
 					if (obj instanceof StateGraphNode) {
 						StateGraphNode node = (StateGraphNode)obj;
 						margin = getMargin(node);
-						path = roomNameProvider.getFullPath((StateGraphItem) obj);						
+						path = fsmNameProvider.getFullPath((StateGraphItem) obj);						
 					} else if(obj instanceof StateGraph){
 						StateGraph graph = (StateGraph)obj;
 						margin = getMargin(graph);
 						EObject container = graph.eContainer();
 						path = "#init";
 						if(container instanceof StateGraphNode)
-							path = roomNameProvider.getFullPath((StateGraphNode)container) + path;
+							path = fsmNameProvider.getFullPath((StateGraphNode)container) + path;
 						initialPointObj.put(path, graph);
 					}
 					if(path != null){
@@ -262,9 +262,9 @@ public class DefaultPositionProvider implements IPositionProvider {
 					StateGraph sg = tree.getContext(trans).getStateGraph();
 					
 					// graph size
-					PosAndSize sz = sg2sz.get(roomNameProvider.getFullPath(sg));
+					PosAndSize sz = sg2sz.get(fsmNameProvider.getFullPath(sg));
 					ArrayList<Position> points = new  ArrayList<Position>();
-					trans2points.put(roomNameProvider.getFullPath((Transition) obj), points);
+					trans2points.put(fsmNameProvider.getFullPath((Transition) obj), points);
 					
 					// label position
 					Position pos = new Position();

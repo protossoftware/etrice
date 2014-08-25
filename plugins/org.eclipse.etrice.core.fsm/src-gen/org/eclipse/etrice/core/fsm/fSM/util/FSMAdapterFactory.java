@@ -225,11 +225,6 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
         return createMessageFromIfAdapter();
       }
       @Override
-      public Adapter caseAbstractMessage(AbstractMessage object)
-      {
-        return createAbstractMessageAdapter();
-      }
-      @Override
       public Adapter caseAbstractInterfaceItem(AbstractInterfaceItem object)
       {
         return createAbstractInterfaceItemAdapter();
@@ -732,21 +727,6 @@ public class FSMAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMessageFromIfAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractMessage <em>Abstract Message</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.AbstractMessage
-   * @generated
-   */
-  public Adapter createAbstractMessageAdapter()
   {
     return null;
   }

@@ -43,12 +43,12 @@ public interface SemanticsRule extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Msg</em>' reference.
-   * @see #setMsg(AbstractMessage)
+   * @see #setMsg(EObject)
    * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getSemanticsRule_Msg()
    * @model
    * @generated
    */
-  AbstractMessage getMsg();
+  EObject getMsg();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.fsm.fSM.SemanticsRule#getMsg <em>Msg</em>}' reference.
@@ -58,7 +58,7 @@ public interface SemanticsRule extends EObject
    * @see #getMsg()
    * @generated
    */
-  void setMsg(AbstractMessage value);
+  void setMsg(EObject value);
 
   /**
    * Returns the value of the '<em><b>Follow Ups</b></em>' containment reference list.

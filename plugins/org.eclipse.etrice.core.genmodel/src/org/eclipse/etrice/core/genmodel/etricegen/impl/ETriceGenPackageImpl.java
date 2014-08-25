@@ -271,6 +271,7 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 		isInited = true;
 
 		// Initialize simple dependencies
+		RoomPackage.eINSTANCE.eClass();
 		FsmGenPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -1511,8 +1512,6 @@ public class ETriceGenPackageImpl extends EPackageImpl implements ETriceGenPacka
 
 		op = addEOperation(expandedActorClassEClass, theRoomPackage.getVarDecl(), "getVarDeclData", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(expandedActorClassEClass, theFSMPackage.getMessageFromIf(), "getOwnTriggers", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portKindEEnum, PortKind.class, "PortKind");

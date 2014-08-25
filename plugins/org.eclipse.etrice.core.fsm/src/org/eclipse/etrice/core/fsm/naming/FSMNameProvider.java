@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.fsm.naming;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
@@ -53,8 +54,8 @@ public class FSMNameProvider {
 	 */
 	public static final String PATH_SEP = "_";
 
-	protected class FSMProvider extends FSMSwitch<String> {
-		public FSMProvider() {}
+	protected class FSMNameProviderSwitch extends FSMSwitch<String> {
+		public FSMNameProviderSwitch() {}
 		
 		@Override
 		public String caseState(State object) { return getStateName(object); }
@@ -66,7 +67,7 @@ public class FSMNameProvider {
 		public String caseTransition(Transition object) { return getTransitionName(object); }
 	}
 	
-	private FSMProvider fsmNameProvider = new FSMProvider();
+	private FSMNameProviderSwitch fsmNameProvider = new FSMNameProviderSwitch();
 	
 	/**
 	 * Explicitly supported types are
@@ -192,6 +193,19 @@ public class FSMNameProvider {
 	}
 	
 	/**
+	 * @param obj an abstract message which has to have a name attribute of type {@link String}
+	 * @return the name of the message
+	 */
+	public String getMessageName(EObject obj) {
+		EStructuralFeature name = obj.eClass().getEStructuralFeature("name");
+		assert(name!=null) : "org.eclipse.etrice.core.fsm.naming.FSMNameProvider.getMessageName(EObject)"
+				+ " should be called with an abstract message which has to have a name attribute";
+		if (name==null)
+			return "";
+		return (String) obj.eGet(name);
+	}
+	
+	/**
 	 * @param tr a {@link TriggeredTransition}
 	 * @return a unique name for the transition triggers
 	 */
@@ -199,7 +213,7 @@ public class FSMNameProvider {
 		String result = "";
 		for (Trigger tri : tr.getTriggers()) {
 			for (MessageFromIf mif : tri.getMsgFromIfPairs()) {
-				result += mif.getMessage().getName()+mif.getFrom().getName();
+				result += getMessageName(mif.getMessage())+mif.getFrom().getName();
 			}
 		}
 		return result;
@@ -332,7 +346,7 @@ public class FSMNameProvider {
 	 */
 	public String getMsgFromIfLabel(MessageFromIf mif) {
 		String from = (mif.getFrom()!=null) ? (":"+mif.getFrom().getName()) : "";
-		return mif.getMessage().getName()+from;
+		return getMessageName(mif.getMessage())+from;
 	}
 
 	/**

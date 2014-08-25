@@ -70,13 +70,13 @@ public class ImplPostprocessor {
       _builder_2.newLine();
       PostprocessingHelpers.addOperation(interfaceItem, "getSemantics", FSMPackage.Literals.PROTOCOL_SEMANTICS, Integer.valueOf(1), _builder_2.toString());
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));");
+      _builder_3.append("return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));");
       _builder_3.newLine();
-      PostprocessingHelpers.addOperation(interfaceItem, "getAllIncomingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, Integer.valueOf((-1)), _builder_3.toString());
+      PostprocessingHelpers.addOperation(interfaceItem, "getAllIncomingAbstractMessages", EcorePackage.Literals.EOBJECT, Integer.valueOf((-1)), _builder_3.toString());
       StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append("return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));");
+      _builder_4.append("return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));");
       _builder_4.newLine();
-      PostprocessingHelpers.addOperation(interfaceItem, "getAllOutgoingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, Integer.valueOf((-1)), _builder_4.toString());
+      PostprocessingHelpers.addOperation(interfaceItem, "getAllOutgoingAbstractMessages", EcorePackage.Literals.EOBJECT, Integer.valueOf((-1)), _builder_4.toString());
       final EClass actorClass = PostprocessingHelpers.getClass(roomPackage, "ActorClass");
       EClassifier _eClassifier_2 = roomPackage.getEClassifier("Port");
       StringConcatenation _builder_5 = new StringConcatenation();

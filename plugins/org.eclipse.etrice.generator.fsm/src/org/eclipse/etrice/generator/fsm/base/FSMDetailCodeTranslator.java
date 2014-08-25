@@ -18,9 +18,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -36,6 +36,7 @@ public class FSMDetailCodeTranslator {
 	protected EObject container;
 	protected boolean doTranslate;
 	private boolean isPrepared = false;
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	protected HashMap<String, AbstractInterfaceItem> name2item = new HashMap<String, AbstractInterfaceItem>();
 	
@@ -155,7 +156,7 @@ public class FSMDetailCodeTranslator {
 			String index = getArrayIndex(text, curr);
 			if (index==null)
 				curr.pos = start;
-			AbstractMessage msg = getMessage(text, curr, item, true);
+			EObject msg = getMessage(text, curr, item, true);
 			if (msg!=null) {
 				ArrayList<String> args = getArgs(text, curr);
 				if (args!=null) {
@@ -184,7 +185,7 @@ public class FSMDetailCodeTranslator {
 		return null;
 	}
 
-	protected AbstractMessage getMessage(String text, Position curr, AbstractInterfaceItem item, boolean outgoing) {
+	protected EObject getMessage(String text, Position curr, AbstractInterfaceItem item, boolean outgoing) {
 		proceedToToken(text, curr);
 
 		if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
@@ -195,9 +196,9 @@ public class FSMDetailCodeTranslator {
 		
 		String token = getToken(text, curr);
 		
-		List<AbstractMessage> messages = outgoing? item.getAllOutgoingAbstractMessages() : item.getAllIncomingAbstractMessages();
-		for (AbstractMessage message : messages) {
-			if (message.getName().equals(token))
+		List<EObject> messages = outgoing? item.getAllOutgoingAbstractMessages() : item.getAllIncomingAbstractMessages();
+		for (EObject message : messages) {
+			if (fsmNameProvider.getMessageName(message).equals(token))
 				return message;
 		}
 		
@@ -376,7 +377,7 @@ public class FSMDetailCodeTranslator {
 			++curr.pos;
 	}
 	
-	protected boolean argsMatching(AbstractMessage msg, ArrayList<String> args) {
+	protected boolean argsMatching(EObject msg, ArrayList<String> args) {
 		return true;
 	}
 

@@ -7,12 +7,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
@@ -112,7 +112,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractMessage> getAllIncomingAbstractMessages()
+  public EList<EObject> getAllIncomingAbstractMessages()
   {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
@@ -124,7 +124,7 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractMessage> getAllOutgoingAbstractMessages()
+  public EList<EObject> getAllOutgoingAbstractMessages()
   {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT

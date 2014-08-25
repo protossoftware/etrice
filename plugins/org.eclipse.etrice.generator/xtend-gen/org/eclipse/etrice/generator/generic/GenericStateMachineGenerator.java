@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.Guard;
@@ -1384,7 +1383,7 @@ public class GenericStateMachineGenerator {
         {
           if (needData) {
             _builder.append("{ ");
-            AbstractMessage _msg = at.getMsg();
+            EObject _msg = at.getMsg();
             String _typedDataDefinition = this.langExt.getTypedDataDefinition(((Message) _msg));
             _builder.append(_typedDataDefinition, "\t");
           }

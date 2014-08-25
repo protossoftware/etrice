@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
@@ -251,7 +250,6 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Message message = (Message)theEObject;
         T result = caseMessage(message);
-        if (result == null) result = caseAbstractMessage(message);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1251,22 +1249,6 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseActorRef(ActorRef object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract Message</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract Message</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAbstractMessage(AbstractMessage object)
   {
     return null;
   }

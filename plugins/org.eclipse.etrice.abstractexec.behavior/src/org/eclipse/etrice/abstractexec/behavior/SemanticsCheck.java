@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
@@ -39,6 +40,8 @@ public class SemanticsCheck {
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>();
 	private ActionCodeAnalyzer codeAnalyzer;
 	private HashMap<StateGraphItem, List<HandledMessage>> mapToWarnings = new HashMap<StateGraphItem, List<HandledMessage>>();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	
 	private static boolean traceChecks = false;
 	private static int traceLevel = 0;
 	static {
@@ -124,7 +127,7 @@ public class SemanticsCheck {
 				for (ActiveTrigger trigger : xpAct.getActiveTriggers(st)) {
 					if (traceChecks && traceLevel>=TRACE_DETAILS) {
 						System.out.println("  Currently visiting: " + st.getName());
-						System.out.println("  Trigger: " + trigger.getMsg().getName());
+						System.out.println("  Trigger: " + fsmNameProvider.getMessageName(trigger.getMsg()));
 					}
 					
 					for (Transition trans : trigger.getTransitions()) {
@@ -151,7 +154,7 @@ public class SemanticsCheck {
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {
 							System.out.println("  Messages in msglist before consuming: ");
 							for (HandledMessage msg : msgList) {
-								System.out.println("  Msg: "+ msg.getMsg().getName());
+								System.out.println("  Msg: "+ fsmNameProvider.getMessageName(msg.getMsg()));
 							}
 						}
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {

@@ -12,8 +12,6 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -59,13 +57,5 @@ public interface ExpandedActorClass extends ExpandedModelComponent {
 	 * @generated
 	 */
 	VarDecl getVarDeclData(Transition trans);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	EList<MessageFromIf> getOwnTriggers();
 
 } // ExpandedActorClass

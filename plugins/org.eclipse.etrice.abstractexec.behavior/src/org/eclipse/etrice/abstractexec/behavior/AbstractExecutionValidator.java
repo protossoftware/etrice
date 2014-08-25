@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
 import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
@@ -67,6 +68,8 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/abstractexec/name");
 		}
 	}
+	
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 
 	@Override
 	public void validate(EObject object,
@@ -186,20 +189,20 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 		for (MessageFromIf msg : incoming) {
 			messageAcceptor.acceptWarning("State should handle the message "
-					+ msg.getMessage().getName() + " from port "
+					+ fsmNameProvider.getMessageName(msg.getMessage()) + " from port "
 					+ msg.getFrom().getName() + " ", container, orig
 					.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER, st
-					.getName(), msg.getMessage().getName(), msg.getFrom()
+					.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 					.getName());
 		}
 		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
 
 		for (MessageFromIf msg : outgoing) {
 			messageAcceptor.acceptInfo("State should send the message "
-					+ msg.getMessage().getName() + " to port "
+					+ fsmNameProvider.getMessageName(msg.getMessage()) + " to port "
 					+ msg.getFrom().getName() + " ", container, orig
 					.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND,
-					st.getName(), msg.getMessage().getName(), msg.getFrom()
+					st.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 							.getName());
 		}
 
@@ -235,11 +238,10 @@ public class AbstractExecutionValidator implements ICustomValidator {
 													"The message violates the semantic rule",
 													trig,
 													mif.eContainingFeature(),
-													trig.getMsgFromIfPairs()
-															.indexOf(trig),
+													trig.getMsgFromIfPairs().indexOf(trig),
 													DIAG_CODE_VIOLATION_TRIGGER,
-													trigger.getMsg().getName(),
-													mif.getMessage().getName(),
+													fsmNameProvider.getMessageName(trigger.getMsg()),
+													fsmNameProvider.getMessageName(mif.getMessage()),
 													mif.getFrom().getName());
 								}
 							}
@@ -249,11 +251,12 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					DetailCode dc = (DetailCode) origin;
 					EObject orig = xpac.getOrig(dc);
 					messageAcceptor.acceptWarning(
-							"The message violates the semantic rule", orig
-									.eContainer(), orig.eContainingFeature(),
+							"The message violates the semantic rule",
+							orig.eContainer(), orig.eContainingFeature(),
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							DIAG_CODE_VIOLATION_MESSAGESEND, msg.getMsg()
-									.getName(), msg.getIfitem().getName());
+							DIAG_CODE_VIOLATION_MESSAGESEND,
+							fsmNameProvider.getMessageName(msg.getMsg()),
+							msg.getIfitem().getName());
 
 				}
 			}

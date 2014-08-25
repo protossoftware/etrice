@@ -18,7 +18,6 @@ import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.common.serializer.BaseSemanticSequencer;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
@@ -150,12 +149,6 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 			case FSMPackage.ABSTRACT_INTERFACE_ITEM:
 				if(context == grammarAccess.getAbstractInterfaceItemRule()) {
 					sequence_AbstractInterfaceItem(context, (AbstractInterfaceItem) semanticObject); 
-					return; 
-				}
-				else break;
-			case FSMPackage.ABSTRACT_MESSAGE:
-				if(context == grammarAccess.getAbstractMessageRule()) {
-					sequence_AbstractMessage(context, (AbstractMessage) semanticObject); 
 					return; 
 				}
 				else break;
@@ -380,22 +373,6 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_AbstractMessage(EObject context, AbstractMessage semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FSMPackage.Literals.ABSTRACT_MESSAGE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.ABSTRACT_MESSAGE__NAME));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAbstractMessageAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (
 	 *         name=ID? 
 	 *         from=TransitionTerminal 
@@ -528,7 +505,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (msg=[AbstractMessage|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
+	 *     (msg=[EObject|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
 	 */
 	protected void sequence_InSemanticsRule(EObject context, InSemanticsRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -546,7 +523,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (message=[AbstractMessage|ID] from=[AbstractInterfaceItem|ID])
+	 *     (message=[EObject|ID] from=[AbstractInterfaceItem|ID])
 	 */
 	protected void sequence_MessageFromIf(EObject context, MessageFromIf semanticObject) {
 		if(errorAcceptor != null) {
@@ -557,7 +534,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageIDTerminalRuleCall_0_0_1(), semanticObject.getMessage());
+		feeder.accept(grammarAccess.getMessageFromIfAccess().getMessageEObjectIDTerminalRuleCall_0_0_1(), semanticObject.getMessage());
 		feeder.accept(grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1(), semanticObject.getFrom());
 		feeder.finish();
 	}
@@ -574,7 +551,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (msg=[AbstractMessage|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
+	 *     (msg=[EObject|ID] (followUps+=SemanticsRule | (followUps+=SemanticsRule followUps+=SemanticsRule+))?)
 	 */
 	protected void sequence_OutSemanticsRule(EObject context, OutSemanticsRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

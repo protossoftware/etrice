@@ -55,10 +55,10 @@ import com.google.inject.Inject;
 public class FSMValidationUtil {
 	
 	@Inject
-	private FSMHelpers roomHelpers;
+	private FSMHelpers fsmHelpers;
 	
 	@Inject
-	private FSMNameProvider roomNameProvider;
+	private FSMNameProvider fsmNameProvider;
 
 	public static class Result {
 		private boolean ok;
@@ -264,7 +264,7 @@ public class FSMValidationUtil {
 	 * @return the {@link Result} of the check
 	 */
 	public Result checkTransition(Transition tr) {
-		ModelComponent ac = roomHelpers.getModelComponent(tr);
+		ModelComponent ac = fsmHelpers.getModelComponent(tr);
 		if (ac.getCommType()==ComponentCommunicationType.DATA_DRIVEN) {
 			if (tr instanceof TriggeredTransition)
 				return Result.error("data driven state machine must not contain triggered transition",
@@ -281,7 +281,7 @@ public class FSMValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 			else if (tr instanceof GuardedTransition)
-				if (!roomHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
+				if (!fsmHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, FSMPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
 		else if (ac.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
@@ -317,7 +317,7 @@ public class FSMValidationUtil {
 	
 	public Result checkState(State state) {
 		if (state.getDoCode()!=null) {
-			ModelComponent ac = roomHelpers.getModelComponent(state);
+			ModelComponent ac = fsmHelpers.getModelComponent(state);
 			if (ac.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
 				return Result.error("event driven state machines must not have 'do' action code",
 						state,
@@ -332,11 +332,11 @@ public class FSMValidationUtil {
 		if (ac.getStateMachine()==null)
 			return errors;
 		
-		Function<RefinedState, String> nameProvider = roomNameProvider.getRefinedStateNameProvider();
-		Map<RefinedState, RefinedState> rs2parent = roomHelpers.getRefinedStatesToRelocate(ac, nameProvider);
+		Function<RefinedState, String> nameProvider = fsmNameProvider.getRefinedStateNameProvider();
+		Map<RefinedState, RefinedState> rs2parent = fsmHelpers.getRefinedStatesToRelocate(ac, nameProvider);
 		for (RefinedState rs : rs2parent.keySet()) {
 			RefinedState parent = rs2parent.get(rs);
-			String path = roomNameProvider.getFullPath(parent);
+			String path = fsmNameProvider.getFullPath(parent);
 			int idx = ((StateGraph)rs.eContainer()).getStates().indexOf(rs);
 			errors.add(Result.error(
 					"RefinedState has to be in the context of "+path,
@@ -356,7 +356,7 @@ public class FSMValidationUtil {
 			return Result.error("name is no valid ID");
 		
 		StateGraph sg = (StateGraph) s.eContainer();
-		Set<String> names = roomHelpers.getAllNames(sg, s);
+		Set<String> names = fsmHelpers.getAllNames(sg, s);
 		
 		if (names.contains(name))
 			return Result.error("name already used");

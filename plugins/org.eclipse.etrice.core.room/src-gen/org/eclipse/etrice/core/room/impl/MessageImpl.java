@@ -9,10 +9,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.common.base.Documentation;
-
-import org.eclipse.etrice.core.fsm.fSM.impl.AbstractMessageImpl;
 
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -26,6 +25,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#isPriv <em>Priv</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -33,7 +33,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  *
  * @generated
  */
-public class MessageImpl extends AbstractMessageImpl implements Message
+public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 {
   /**
    * The default value of the '{@link #isPriv() <em>Priv</em>}' attribute.
@@ -54,6 +54,26 @@ public class MessageImpl extends AbstractMessageImpl implements Message
    * @ordered
    */
   protected boolean priv = PRIV_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getData() <em>Data</em>}' containment reference.
@@ -117,6 +137,29 @@ public class MessageImpl extends AbstractMessageImpl implements Message
     priv = newPriv;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.MESSAGE__PRIV, oldPriv, priv));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.MESSAGE__NAME, oldName, name));
   }
 
   /**
@@ -245,6 +288,8 @@ public class MessageImpl extends AbstractMessageImpl implements Message
     {
       case RoomPackage.MESSAGE__PRIV:
         return isPriv();
+      case RoomPackage.MESSAGE__NAME:
+        return getName();
       case RoomPackage.MESSAGE__DATA:
         return getData();
       case RoomPackage.MESSAGE__DOCU:
@@ -265,6 +310,9 @@ public class MessageImpl extends AbstractMessageImpl implements Message
     {
       case RoomPackage.MESSAGE__PRIV:
         setPriv((Boolean)newValue);
+        return;
+      case RoomPackage.MESSAGE__NAME:
+        setName((String)newValue);
         return;
       case RoomPackage.MESSAGE__DATA:
         setData((VarDecl)newValue);
@@ -289,6 +337,9 @@ public class MessageImpl extends AbstractMessageImpl implements Message
       case RoomPackage.MESSAGE__PRIV:
         setPriv(PRIV_EDEFAULT);
         return;
+      case RoomPackage.MESSAGE__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case RoomPackage.MESSAGE__DATA:
         setData((VarDecl)null);
         return;
@@ -311,6 +362,8 @@ public class MessageImpl extends AbstractMessageImpl implements Message
     {
       case RoomPackage.MESSAGE__PRIV:
         return priv != PRIV_EDEFAULT;
+      case RoomPackage.MESSAGE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.MESSAGE__DATA:
         return data != null;
       case RoomPackage.MESSAGE__DOCU:
@@ -332,6 +385,8 @@ public class MessageImpl extends AbstractMessageImpl implements Message
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (priv: ");
     result.append(priv);
+    result.append(", name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

@@ -5,13 +5,13 @@ package org.eclipse.etrice.core.fsm.fSM.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 
@@ -39,7 +39,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * @generated
    * @ordered
    */
-  protected AbstractMessage message;
+  protected EObject message;
 
   /**
    * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
@@ -77,12 +77,12 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractMessage getMessage()
+  public EObject getMessage()
   {
     if (message != null && message.eIsProxy())
     {
       InternalEObject oldMessage = (InternalEObject)message;
-      message = (AbstractMessage)eResolveProxy(oldMessage);
+      message = eResolveProxy(oldMessage);
       if (message != oldMessage)
       {
         if (eNotificationRequired())
@@ -97,7 +97,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractMessage basicGetMessage()
+  public EObject basicGetMessage()
   {
     return message;
   }
@@ -107,9 +107,9 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMessage(AbstractMessage newMessage)
+  public void setMessage(EObject newMessage)
   {
-    AbstractMessage oldMessage = message;
+    EObject oldMessage = message;
     message = newMessage;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.MESSAGE_FROM_IF__MESSAGE, oldMessage, message));
@@ -189,7 +189,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
     switch (featureID)
     {
       case FSMPackage.MESSAGE_FROM_IF__MESSAGE:
-        setMessage((AbstractMessage)newValue);
+        setMessage((EObject)newValue);
         return;
       case FSMPackage.MESSAGE_FROM_IF__FROM:
         setFrom((AbstractInterfaceItem)newValue);
@@ -209,7 +209,7 @@ public class MessageFromIfImpl extends MinimalEObjectImpl.Container implements M
     switch (featureID)
     {
       case FSMPackage.MESSAGE_FROM_IF__MESSAGE:
-        setMessage((AbstractMessage)null);
+        setMessage((EObject)null);
         return;
       case FSMPackage.MESSAGE_FROM_IF__FROM:
         setFrom((AbstractInterfaceItem)null);

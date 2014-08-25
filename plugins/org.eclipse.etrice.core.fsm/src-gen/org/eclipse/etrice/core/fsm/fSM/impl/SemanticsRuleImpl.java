@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -18,7 +19,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
 
@@ -46,7 +46,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    * @ordered
    */
-  protected AbstractMessage msg;
+  protected EObject msg;
 
   /**
    * The cached value of the '{@link #getFollowUps() <em>Follow Ups</em>}' containment reference list.
@@ -84,12 +84,12 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractMessage getMsg()
+  public EObject getMsg()
   {
     if (msg != null && msg.eIsProxy())
     {
       InternalEObject oldMsg = (InternalEObject)msg;
-      msg = (AbstractMessage)eResolveProxy(oldMsg);
+      msg = eResolveProxy(oldMsg);
       if (msg != oldMsg)
       {
         if (eNotificationRequired())
@@ -104,7 +104,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractMessage basicGetMsg()
+  public EObject basicGetMsg()
   {
     return msg;
   }
@@ -114,9 +114,9 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMsg(AbstractMessage newMsg)
+  public void setMsg(EObject newMsg)
   {
-    AbstractMessage oldMsg = msg;
+    EObject oldMsg = msg;
     msg = newMsg;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.SEMANTICS_RULE__MSG, oldMsg, msg));
@@ -183,7 +183,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
     switch (featureID)
     {
       case FSMPackage.SEMANTICS_RULE__MSG:
-        setMsg((AbstractMessage)newValue);
+        setMsg((EObject)newValue);
         return;
       case FSMPackage.SEMANTICS_RULE__FOLLOW_UPS:
         getFollowUps().clear();
@@ -204,7 +204,7 @@ public class SemanticsRuleImpl extends MinimalEObjectImpl.Container implements S
     switch (featureID)
     {
       case FSMPackage.SEMANTICS_RULE__MSG:
-        setMsg((AbstractMessage)null);
+        setMsg((EObject)null);
         return;
       case FSMPackage.SEMANTICS_RULE__FOLLOW_UPS:
         getFollowUps().clear();

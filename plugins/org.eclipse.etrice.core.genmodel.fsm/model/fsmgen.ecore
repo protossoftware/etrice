@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsmgen" nsURI="http://www.eclipse.org/etrice/generator/fsm"
     nsPrefix="fsmgen">
   <eClassifiers xsi:type="ecore:EClass" name="ActiveTrigger">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractMessage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
@@ -63,7 +63,7 @@
     <eOperations name="getData" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
       <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
     </eOperations>
-    <eOperations name="getIncomingMessages" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractMessage">
+    <eOperations name="getIncomingMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
       <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
     </eOperations>
     <eOperations name="addTransitionChain" eType="#//TransitionChain">

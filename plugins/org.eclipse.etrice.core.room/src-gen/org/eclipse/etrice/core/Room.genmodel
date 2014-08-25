@@ -138,6 +138,7 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/priv"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/data"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/docu"/>
     </genClasses>

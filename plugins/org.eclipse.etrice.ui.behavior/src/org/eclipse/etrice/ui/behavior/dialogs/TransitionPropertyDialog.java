@@ -294,11 +294,11 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 		}
 		
-		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
+		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		if (trans instanceof GuardedTransition) {
 			if (inherited) {
-				String code = roomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				String code = fsmHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
 				createFixedText(body, "&Guard:", code, true);
 			}
 			else {
@@ -316,7 +316,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (trans instanceof CPBranchTransition) {
 			if (inherited) {
-				String code = roomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
+				String code = fsmHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
 				createFixedText(body, "&Condition", code, true);
 			}
 			else {
@@ -333,7 +333,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		{
-			String code = roomHelpers.getInheritedActionCode(trans, getModelComponent());
+			String code = fsmHelpers.getInheritedActionCode(trans, getModelComponent());
 			if (code!=null){
 				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);

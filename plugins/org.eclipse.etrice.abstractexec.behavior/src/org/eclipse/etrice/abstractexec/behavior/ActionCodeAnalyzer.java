@@ -15,8 +15,8 @@ package org.eclipse.etrice.abstractexec.behavior;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.generator.fsm.base.DefaultFSMTranslationProvider;
@@ -41,7 +41,7 @@ public class ActionCodeAnalyzer {
 		 */
 		@Override
 		public String getInterfaceItemMessageText(AbstractInterfaceItem item,
-				AbstractMessage msg, ArrayList<String> args, String index, String orig) {
+				EObject msg, ArrayList<String> args, String index, String orig) {
 			
 			HandledMessage sm = new HandledMessage(item, msg, origin);
 			mifs.add(sm);

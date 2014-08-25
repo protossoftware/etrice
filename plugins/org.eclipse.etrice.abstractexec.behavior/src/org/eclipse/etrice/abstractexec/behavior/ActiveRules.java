@@ -23,12 +23,14 @@ import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 public class ActiveRules {
 	private HashMap<AbstractInterfaceItem, List<SemanticsRule>> rules;
 	private static boolean traceRules = false;
 	private static int traceLevel = 0;
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	// HOWTO: use debug options to configure tracing (see also the .options file in the plug-in)
 	static {
@@ -83,7 +85,7 @@ public class ActiveRules {
 				if (match != null) {
 					if (traceRules && traceLevel >= TRACE_DETAILS)
 						System.out.println("  found match for "
-								+ msg.getMsg().getName());
+								+ fsmNameProvider.getMessageName(msg.getMsg()));
 
 					// discard all alternatives
 					localRules.clear();
@@ -166,9 +168,9 @@ public class ActiveRules {
 
 	public void printRule(SemanticsRule rule, String indent) {
 		if (rule instanceof InSemanticsRule)
-			System.out.println(indent + "in: " + rule.getMsg().getName());
+			System.out.println(indent + "in: " + fsmNameProvider.getMessageName(rule.getMsg()));
 		else
-			System.out.println(indent + "out: " + rule.getMsg().getName());
+			System.out.println(indent + "out: " + fsmNameProvider.getMessageName(rule.getMsg()));
 		// recursion
 		for (SemanticsRule sr : rule.getFollowUps()) {
 			printRule(sr, indent + "  ");

@@ -206,10 +206,10 @@ Trigger:
 //
 
 MessageFromIf:
-	message=[AbstractMessage|ID] ':' from=[AbstractInterfaceItem|ID]
+	message=[ecore::EObject|ID] ':' from=[AbstractInterfaceItem|ID]
 ;
 
-AbstractMessage: name=ID;
+// AbstractMessage: name=ID; --> ecore::EObject
 AbstractInterfaceItem: name=ID;
 
 Guard:
@@ -227,7 +227,7 @@ ProtocolSemantics:
 
 SemanticsRule: InSemanticsRule | OutSemanticsRule;
 
-InSemanticsRule: 'in' ':' msg=[AbstractMessage|ID]
+InSemanticsRule: 'in' ':' msg=[ecore::EObject|ID]
 	('->'
 		(
 			followUps+=SemanticsRule
@@ -237,7 +237,7 @@ InSemanticsRule: 'in' ':' msg=[AbstractMessage|ID]
 	)?
 ;
 
-OutSemanticsRule: 'out' ':' msg=[AbstractMessage|ID]
+OutSemanticsRule: 'out' ':' msg=[ecore::EObject|ID]
 	('->'
 		(
 			followUps+=SemanticsRule

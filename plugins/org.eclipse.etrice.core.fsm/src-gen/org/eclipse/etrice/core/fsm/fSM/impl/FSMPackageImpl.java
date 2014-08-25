@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.etrice.core.common.base.BasePackage;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
@@ -271,13 +270,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * @generated
    */
   private EClass messageFromIfEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass abstractMessageEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1146,26 +1138,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractMessage()
-  {
-    return abstractMessageEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getAbstractMessage_Name()
-  {
-    return (EAttribute)abstractMessageEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getAbstractInterfaceItem()
   {
     return abstractInterfaceItemEClass;
@@ -1425,9 +1397,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     createEReference(messageFromIfEClass, MESSAGE_FROM_IF__MESSAGE);
     createEReference(messageFromIfEClass, MESSAGE_FROM_IF__FROM);
 
-    abstractMessageEClass = createEClass(ABSTRACT_MESSAGE);
-    createEAttribute(abstractMessageEClass, ABSTRACT_MESSAGE__NAME);
-
     abstractInterfaceItemEClass = createEClass(ABSTRACT_INTERFACE_ITEM);
     createEAttribute(abstractInterfaceItemEClass, ABSTRACT_INTERFACE_ITEM__NAME);
 
@@ -1614,20 +1583,17 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEReference(getTrigger_Guard(), this.getGuard(), null, "guard", null, 0, 1, Trigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageFromIfEClass, MessageFromIf.class, "MessageFromIf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMessageFromIf_Message(), this.getAbstractMessage(), null, "message", null, 0, 1, MessageFromIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMessageFromIf_Message(), ecorePackage.getEObject(), null, "message", null, 0, 1, MessageFromIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessageFromIf_From(), this.getAbstractInterfaceItem(), null, "from", null, 0, 1, MessageFromIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(abstractMessageEClass, AbstractMessage.class, "AbstractMessage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAbstractMessage_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractInterfaceItemEClass, AbstractInterfaceItem.class, "AbstractInterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractInterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(abstractInterfaceItemEClass, this.getProtocolSemantics(), "getSemantics", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-    addEOperation(abstractInterfaceItemEClass, this.getAbstractMessage(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractInterfaceItemEClass, ecorePackage.getEObject(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-    addEOperation(abstractInterfaceItemEClass, this.getAbstractMessage(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractInterfaceItemEClass, ecorePackage.getEObject(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(guardEClass, Guard.class, "Guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGuard_Guard(), this.getDetailCode(), null, "guard", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1636,7 +1602,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEReference(getProtocolSemantics_Rules(), this.getSemanticsRule(), null, "rules", null, 0, -1, ProtocolSemantics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(semanticsRuleEClass, SemanticsRule.class, "SemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSemanticsRule_Msg(), this.getAbstractMessage(), null, "msg", null, 0, 1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSemanticsRule_Msg(), ecorePackage.getEObject(), null, "msg", null, 0, 1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSemanticsRule_FollowUps(), this.getSemanticsRule(), null, "followUps", null, 0, -1, SemanticsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inSemanticsRuleEClass, InSemanticsRule.class, "InSemanticsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

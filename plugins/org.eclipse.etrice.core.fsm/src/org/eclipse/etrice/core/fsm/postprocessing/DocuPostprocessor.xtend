@@ -27,23 +27,23 @@ class DocuPostprocessor {
 		val pckg = metamodel.getEPackage
 		
 		//------------------------------------------------------------------
-		var cls = pckg.getClass("AbstractMessage")
-		cls.setDocumentation('''
-			A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
-			For event driven protocols the message is an object that is deliverd using a message
-			service of the runtime. For data driven systems only messages holding data are valid. In this
-			case the conjugate port is the one holding (and writing) the data and the regular port is
-			reading the data.
-		''')
-		
-		cls.getAttribute("name").setDocumentation(
-			'''
-				An abstract message to be overridden in derived grammars.
-				By this name the message is referred to in the model.
-			''')
+//		var cls = pckg.getClass("AbstractMessage")
+//		cls.setDocumentation('''
+//			A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
+//			For event driven protocols the message is an object that is delivered using a message
+//			service of the runtime. For data driven systems only messages holding data are valid. In this
+//			case the conjugate port is the one holding (and writing) the data and the regular port is
+//			reading the data.
+//		''')
+//		
+//		cls.getAttribute("name").setDocumentation(
+//			'''
+//				An abstract message to be overridden in derived grammars.
+//				By this name the message is referred to in the model.
+//			''')
 		
 		//------------------------------------------------------------------
-		cls = pckg.getClass("AbstractInterfaceItem")
+		var cls = pckg.getClass("AbstractInterfaceItem")
 		cls.setDocumentation('''
 			An abstract interface item to be overridden in derived grammars.
 		''')

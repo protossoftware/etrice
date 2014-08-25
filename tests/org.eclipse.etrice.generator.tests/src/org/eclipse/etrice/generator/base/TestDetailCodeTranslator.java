@@ -26,13 +26,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.BaseFactory;
 import org.eclipse.etrice.core.common.base.IntLiteral;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
@@ -47,7 +46,6 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.InstanceTestsActivator;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +56,7 @@ import org.junit.Test;
  */
 public class TestDetailCodeTranslator {
 
-	private FSMHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers fsmHelpers = new FSMHelpers();
 	
 	/**
 	 * @author Henrik Rentz-Reichert
@@ -93,7 +91,12 @@ public class TestDetailCodeTranslator {
 		}
 
 		@Override
-		public String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg, ArrayList<String> args, String index, String orig) {
+		public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, ArrayList<String> args, String index, String orig) {
+			if (!(abstractMsg instanceof Message))
+				return orig;
+			
+			Message msg = (Message) abstractMsg;
+			
 			if (index==null)
 				return ">"+item.getName()+"."+msg.getName()+"("+getArgList(args)+")<";
 			else
@@ -528,7 +531,7 @@ public class TestDetailCodeTranslator {
 		DetailCode dc = getLargeFile();
 		
 		// this adds a trailing \n
-		String orig = roomHelpers.getDetailCode(dc);
+		String orig = fsmHelpers.getDetailCode(dc);
 		
 		// remove trailing \n
 		orig = orig.substring(0, orig.length()-1);

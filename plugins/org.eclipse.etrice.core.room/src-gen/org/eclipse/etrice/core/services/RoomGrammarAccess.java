@@ -3017,24 +3017,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
-	public class AbstractMessageElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMessage");
-		private final RuleCall cMessageParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//// **************************************************************
-		//// concrete message and interface item for state machines 
-		//AbstractMessage:
-		//	Message;
-		public ParserRule getRule() { return rule; }
-
-		//Message
-		public RuleCall getMessageParserRuleCall() { return cMessageParserRuleCall; }
-	}
-
 	public class AbstractInterfaceItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractInterfaceItem");
 		private final RuleCall cInterfaceItemParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
+		//// **************************************************************
+		//// concrete message and interface item for state machines 
+		////AbstractMessage: Message;
 		//AbstractInterfaceItem:
 		//	InterfaceItem;
 		public ParserRule getRule() { return rule; }
@@ -3313,7 +3302,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	private SPPointElements pSPPoint;
 	private ActorRefElements pActorRef;
 	private ReferenceTypeElements unknownRuleReferenceType;
-	private AbstractMessageElements pAbstractMessage;
 	private AbstractInterfaceItemElements pAbstractInterfaceItem;
 	private MULTIPLICITYElements pMULTIPLICITY;
 	private AnnotationTargetTypeElements pAnnotationTargetType;
@@ -3921,16 +3909,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// **************************************************************
 	//// concrete message and interface item for state machines 
-	//AbstractMessage:
-	//	Message;
-	public AbstractMessageElements getAbstractMessageAccess() {
-		return (pAbstractMessage != null) ? pAbstractMessage : (pAbstractMessage = new AbstractMessageElements());
-	}
-	
-	public ParserRule getAbstractMessageRule() {
-		return getAbstractMessageAccess().getRule();
-	}
-
+	////AbstractMessage: Message;
 	//AbstractInterfaceItem:
 	//	InterfaceItem;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
@@ -4318,7 +4297,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// pairs of (message, interface) are triggering events
 	////
 	//MessageFromIf:
-	//	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
+	//	message=[ecore::EObject] ":" from=[AbstractInterfaceItem];
 	public FSMGrammarAccess.MessageFromIfElements getMessageFromIfAccess() {
 		return gaFSM.getMessageFromIfAccess();
 	}
@@ -4361,7 +4340,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InSemanticsRule:
-	//	"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public FSMGrammarAccess.InSemanticsRuleElements getInSemanticsRuleAccess() {
 		return gaFSM.getInSemanticsRuleAccess();
@@ -4372,7 +4351,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OutSemanticsRule:
-	//	"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public FSMGrammarAccess.OutSemanticsRuleElements getOutSemanticsRuleAccess() {
 		return gaFSM.getOutSemanticsRuleAccess();

@@ -18,21 +18,24 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 
 public class ProposalGenerator {
 	private ExpandedModelComponent xpac;
 	private SemanticsCheck checker;
 	private List<MessageFromIf> outgoingProposal = new LinkedList<MessageFromIf>();
 	private List<MessageFromIf> incomingProposal = new LinkedList<MessageFromIf>();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	
 	private static boolean traceProposals = false;
 	static {
 		if (Activator.getDefault().isDebugging()) {
@@ -73,10 +76,10 @@ public class ProposalGenerator {
 
 		for (AbstractInterfaceItem port : rules.getPortList()) {
 			// collect all messages from active triggers
-			Set<AbstractMessage> messages = new HashSet<AbstractMessage>();
+			Set<EObject> messages = new HashSet<EObject>();
 			for (ActiveTrigger t : xpac.getActiveTriggers(st))
 				if (t.getIfitem().equals(port))
-					messages.add((AbstractMessage)t.getMsg());
+					messages.add((EObject)t.getMsg());
 			// check if every rule has its messages
 			if (rules.getPortList().contains(port)) {
 				for (SemanticsRule curRule : rules.getRulesForPort(port)) {
@@ -102,11 +105,11 @@ public class ProposalGenerator {
 			for (MessageFromIf msg : outgoingProposal) {
 				System.out.println("    Outgoing msg proposal : "
 						+ msg.getFrom().getName() + "."
-						+ msg.getMessage().getName() + "()");
+						+ fsmNameProvider.getMessageName(msg.getMessage()) + "()");
 			}
 			for (MessageFromIf msg : incomingProposal) {
 				System.out.println("    Incoming msg proposal : "
-						+ msg.getMessage().getName() + " from "
+						+ fsmNameProvider.getMessageName(msg.getMessage()) + " from "
 						+ msg.getFrom().getName());
 			}
 		}

@@ -217,7 +217,6 @@
     <eOperations name="getVarDeclData" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl">
       <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
     </eOperations>
-    <eOperations name="getOwnTriggers" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//MessageFromIf"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>

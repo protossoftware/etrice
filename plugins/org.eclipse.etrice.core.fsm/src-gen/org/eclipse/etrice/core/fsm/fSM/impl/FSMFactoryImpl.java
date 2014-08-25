@@ -95,7 +95,6 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
       case FSMPackage.CHOICEPOINT_TERMINAL: return createChoicepointTerminal();
       case FSMPackage.TRIGGER: return createTrigger();
       case FSMPackage.MESSAGE_FROM_IF: return createMessageFromIf();
-      case FSMPackage.ABSTRACT_MESSAGE: return createAbstractMessage();
       case FSMPackage.ABSTRACT_INTERFACE_ITEM: return createAbstractInterfaceItem();
       case FSMPackage.GUARD: return createGuard();
       case FSMPackage.PROTOCOL_SEMANTICS: return createProtocolSemantics();
@@ -469,17 +468,6 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
   {
     MessageFromIfImpl messageFromIf = new MessageFromIfImpl();
     return messageFromIf;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AbstractMessage createAbstractMessage()
-  {
-    AbstractMessageImpl abstractMessage = new AbstractMessageImpl();
-    return abstractMessage;
   }
 
   /**

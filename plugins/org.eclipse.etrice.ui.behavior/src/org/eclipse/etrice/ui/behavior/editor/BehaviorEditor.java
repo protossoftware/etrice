@@ -138,12 +138,12 @@ public class BehaviorEditor extends AbstractFSMEditor {
 	 * @return
 	 */
 	private boolean isUnused(RefinedState s) {
-		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
-		if (roomHelpers.hasDirectSubStructure(s))
+		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
+		if (fsmHelpers.hasDirectSubStructure(s))
 			return false;
-		if (roomHelpers.hasDetailCode(s.getEntryCode()))
+		if (fsmHelpers.hasDetailCode(s.getEntryCode()))
 			return false;
-		if (roomHelpers.hasDetailCode(s.getExitCode()))
+		if (fsmHelpers.hasDetailCode(s.getExitCode()))
 			return false;
 		
 		return true;
@@ -151,13 +151,13 @@ public class BehaviorEditor extends AbstractFSMEditor {
 
 	protected void removeEmptySubgraphs() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		FSMHelpers roomHelpers = SupportUtil.getInstance().getFSMHelpers();
+		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		// if our current context is an empty state graph we go one level up
 		StateGraph current = ContextSwitcher.getCurrentStateGraph(diagram);
 		if (current!=null && current.eContainer() instanceof State) {
 			State s = (State) current.eContainer();
-			if (!roomHelpers.hasDirectSubStructure(s)) {
+			if (!fsmHelpers.hasDirectSubStructure(s)) {
 				ContextSwitcher.goUp(diagram, current);
 			}
 		}
@@ -175,7 +175,7 @@ public class BehaviorEditor extends AbstractFSMEditor {
 			StateGraph sg = (StateGraph) bo;
 			if (sg.eContainer() instanceof State) {
 				State s = (State) sg.eContainer();
-				if (!roomHelpers.hasDirectSubStructure(s)) {
+				if (!fsmHelpers.hasDirectSubStructure(s)) {
 					EcoreUtil.delete(sg);
 					toBeRemoved.add(ctxShape);
 				}

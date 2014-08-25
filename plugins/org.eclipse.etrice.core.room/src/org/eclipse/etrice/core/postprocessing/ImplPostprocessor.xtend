@@ -49,13 +49,13 @@ class ImplPostprocessor {
 			else
 				return null;
 			''')
-		interfaceItem.addOperation("getAllIncomingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, -1,
+		interfaceItem.addOperation("getAllIncomingAbstractMessages", EcorePackage.Literals.EOBJECT, -1,
 			'''
-			return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));
+			return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));
 			''')
-		interfaceItem.addOperation("getAllOutgoingAbstractMessages", FSMPackage.Literals.ABSTRACT_MESSAGE, -1,
+		interfaceItem.addOperation("getAllOutgoingAbstractMessages", EcorePackage.Literals.EOBJECT, -1,
 			'''
-			return new <%org.eclipse.emf.common.util.BasicEList%><AbstractMessage>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));
+			return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));
 			'''
 		)
 			

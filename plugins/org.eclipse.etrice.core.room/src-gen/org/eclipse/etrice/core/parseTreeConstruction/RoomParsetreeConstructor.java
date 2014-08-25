@@ -80,58 +80,57 @@ protected class ThisRootNode extends RootToken {
 			case 47: return new RelaySAPoint_Group(this, this, 47, inst);
 			case 48: return new SPPoint_Group(this, this, 48, inst);
 			case 49: return new ActorRef_Group(this, this, 49, inst);
-			case 50: return new AbstractMessage_MessageParserRuleCall(this, this, 50, inst);
-			case 51: return new AbstractInterfaceItem_InterfaceItemParserRuleCall(this, this, 51, inst);
-			case 52: return new FSMModel_ComponentsAssignment(this, this, 52, inst);
-			case 53: return new StateGraphNode_Alternatives(this, this, 53, inst);
-			case 54: return new StateGraphItem_Alternatives(this, this, 54, inst);
-			case 55: return new StateGraph_Group(this, this, 55, inst);
-			case 56: return new StateMachine_Group(this, this, 56, inst);
-			case 57: return new State_Alternatives(this, this, 57, inst);
-			case 58: return new SimpleState_Group(this, this, 58, inst);
-			case 59: return new RefinedState_Group(this, this, 59, inst);
-			case 60: return new DetailCode_Group(this, this, 60, inst);
-			case 61: return new TrPoint_Alternatives(this, this, 61, inst);
-			case 62: return new TransitionPoint_Group(this, this, 62, inst);
-			case 63: return new EntryPoint_Group(this, this, 63, inst);
-			case 64: return new ExitPoint_Group(this, this, 64, inst);
-			case 65: return new ChoicePoint_Group(this, this, 65, inst);
-			case 66: return new Transition_Alternatives(this, this, 66, inst);
-			case 67: return new NonInitialTransition_Alternatives(this, this, 67, inst);
-			case 68: return new TransitionChainStartTransition_Alternatives(this, this, 68, inst);
-			case 69: return new InitialTransition_Group(this, this, 69, inst);
-			case 70: return new ContinuationTransition_Group(this, this, 70, inst);
-			case 71: return new TriggeredTransition_Group(this, this, 71, inst);
-			case 72: return new GuardedTransition_Group(this, this, 72, inst);
-			case 73: return new CPBranchTransition_Group(this, this, 73, inst);
-			case 74: return new RefinedTransition_Group(this, this, 74, inst);
-			case 75: return new TransitionTerminal_Alternatives(this, this, 75, inst);
-			case 76: return new StateTerminal_StateAssignment(this, this, 76, inst);
-			case 77: return new TrPointTerminal_Group(this, this, 77, inst);
-			case 78: return new SubStateTrPointTerminal_Group(this, this, 78, inst);
-			case 79: return new ChoicepointTerminal_Group(this, this, 79, inst);
-			case 80: return new Trigger_Group(this, this, 80, inst);
-			case 81: return new MessageFromIf_Group(this, this, 81, inst);
-			case 82: return new Guard_Group(this, this, 82, inst);
-			case 83: return new ProtocolSemantics_Group(this, this, 83, inst);
-			case 84: return new SemanticsRule_Alternatives(this, this, 84, inst);
-			case 85: return new InSemanticsRule_Group(this, this, 85, inst);
-			case 86: return new OutSemanticsRule_Group(this, this, 86, inst);
-			case 87: return new Annotation_Group(this, this, 87, inst);
-			case 88: return new KeyValue_Group(this, this, 88, inst);
-			case 89: return new AnnotationType_Group(this, this, 89, inst);
-			case 90: return new AnnotationAttribute_Alternatives(this, this, 90, inst);
-			case 91: return new SimpleAnnotationAttribute_Group(this, this, 91, inst);
-			case 92: return new EnumAnnotationAttribute_Group(this, this, 92, inst);
-			case 93: return new Import_Group(this, this, 93, inst);
-			case 94: return new Documentation_Group(this, this, 94, inst);
-			case 95: return new LiteralArray_Group(this, this, 95, inst);
-			case 96: return new Literal_Alternatives(this, this, 96, inst);
-			case 97: return new BooleanLiteral_Group(this, this, 97, inst);
-			case 98: return new NumberLiteral_Alternatives(this, this, 98, inst);
-			case 99: return new RealLiteral_Group(this, this, 99, inst);
-			case 100: return new IntLiteral_Group(this, this, 100, inst);
-			case 101: return new StringLiteral_Group(this, this, 101, inst);
+			case 50: return new AbstractInterfaceItem_InterfaceItemParserRuleCall(this, this, 50, inst);
+			case 51: return new FSMModel_ComponentsAssignment(this, this, 51, inst);
+			case 52: return new StateGraphNode_Alternatives(this, this, 52, inst);
+			case 53: return new StateGraphItem_Alternatives(this, this, 53, inst);
+			case 54: return new StateGraph_Group(this, this, 54, inst);
+			case 55: return new StateMachine_Group(this, this, 55, inst);
+			case 56: return new State_Alternatives(this, this, 56, inst);
+			case 57: return new SimpleState_Group(this, this, 57, inst);
+			case 58: return new RefinedState_Group(this, this, 58, inst);
+			case 59: return new DetailCode_Group(this, this, 59, inst);
+			case 60: return new TrPoint_Alternatives(this, this, 60, inst);
+			case 61: return new TransitionPoint_Group(this, this, 61, inst);
+			case 62: return new EntryPoint_Group(this, this, 62, inst);
+			case 63: return new ExitPoint_Group(this, this, 63, inst);
+			case 64: return new ChoicePoint_Group(this, this, 64, inst);
+			case 65: return new Transition_Alternatives(this, this, 65, inst);
+			case 66: return new NonInitialTransition_Alternatives(this, this, 66, inst);
+			case 67: return new TransitionChainStartTransition_Alternatives(this, this, 67, inst);
+			case 68: return new InitialTransition_Group(this, this, 68, inst);
+			case 69: return new ContinuationTransition_Group(this, this, 69, inst);
+			case 70: return new TriggeredTransition_Group(this, this, 70, inst);
+			case 71: return new GuardedTransition_Group(this, this, 71, inst);
+			case 72: return new CPBranchTransition_Group(this, this, 72, inst);
+			case 73: return new RefinedTransition_Group(this, this, 73, inst);
+			case 74: return new TransitionTerminal_Alternatives(this, this, 74, inst);
+			case 75: return new StateTerminal_StateAssignment(this, this, 75, inst);
+			case 76: return new TrPointTerminal_Group(this, this, 76, inst);
+			case 77: return new SubStateTrPointTerminal_Group(this, this, 77, inst);
+			case 78: return new ChoicepointTerminal_Group(this, this, 78, inst);
+			case 79: return new Trigger_Group(this, this, 79, inst);
+			case 80: return new MessageFromIf_Group(this, this, 80, inst);
+			case 81: return new Guard_Group(this, this, 81, inst);
+			case 82: return new ProtocolSemantics_Group(this, this, 82, inst);
+			case 83: return new SemanticsRule_Alternatives(this, this, 83, inst);
+			case 84: return new InSemanticsRule_Group(this, this, 84, inst);
+			case 85: return new OutSemanticsRule_Group(this, this, 85, inst);
+			case 86: return new Annotation_Group(this, this, 86, inst);
+			case 87: return new KeyValue_Group(this, this, 87, inst);
+			case 88: return new AnnotationType_Group(this, this, 88, inst);
+			case 89: return new AnnotationAttribute_Alternatives(this, this, 89, inst);
+			case 90: return new SimpleAnnotationAttribute_Group(this, this, 90, inst);
+			case 91: return new EnumAnnotationAttribute_Group(this, this, 91, inst);
+			case 92: return new Import_Group(this, this, 92, inst);
+			case 93: return new Documentation_Group(this, this, 93, inst);
+			case 94: return new LiteralArray_Group(this, this, 94, inst);
+			case 95: return new Literal_Alternatives(this, this, 95, inst);
+			case 96: return new BooleanLiteral_Group(this, this, 96, inst);
+			case 97: return new NumberLiteral_Alternatives(this, this, 97, inst);
+			case 98: return new RealLiteral_Group(this, this, 98, inst);
+			case 99: return new IntLiteral_Group(this, this, 99, inst);
+			case 100: return new StringLiteral_Group(this, this, 100, inst);
 			default: return null;
 		}	
 	}	
@@ -14792,56 +14791,11 @@ protected class ActorRef_DocuAssignment_6 extends AssignmentToken  {
 /************ end Rule ActorRef ****************/
 
 
-/************ begin Rule AbstractMessage ****************
+/************ begin Rule AbstractInterfaceItem ****************
  *
  * // **************************************************************
  * // concrete message and interface item for state machines 
- * AbstractMessage:
- * 	Message;
- *
- **/
-
-// Message
-protected class AbstractMessage_MessageParserRuleCall extends RuleCallToken {
-	
-	public AbstractMessage_MessageParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getAbstractMessageAccess().getMessageParserRuleCall();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Message_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getMessageRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(Message_Group.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-/************ end Rule AbstractMessage ****************/
-
-
-/************ begin Rule AbstractInterfaceItem ****************
- *
+ * //AbstractMessage: Message;
  * AbstractInterfaceItem:
  * 	InterfaceItem;
  *
@@ -21988,11 +21942,11 @@ protected class Trigger_GreaterThanSignKeyword_4 extends KeywordToken  {
  * // pairs of (message, interface) are triggering events
  * //
  * MessageFromIf:
- * 	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
+ * 	message=[ecore::EObject] ":" from=[AbstractInterfaceItem];
  *
  **/
 
-// message=[AbstractMessage] ":" from=[AbstractInterfaceItem]
+// message=[ecore::EObject] ":" from=[AbstractInterfaceItem]
 protected class MessageFromIf_Group extends GroupToken {
 	
 	public MessageFromIf_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -22021,7 +21975,7 @@ protected class MessageFromIf_Group extends GroupToken {
 
 }
 
-// message=[AbstractMessage]
+// message=[ecore::EObject]
 protected class MessageFromIf_MessageAssignment_0 extends AssignmentToken  {
 	
 	public MessageFromIf_MessageAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -22046,9 +22000,9 @@ protected class MessageFromIf_MessageAssignment_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("message");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getMessageFromIfAccess().getMessageAbstractMessageCrossReference_0_0(); 
+				element = grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0(); 
 				return obj;
 			}
 		}
@@ -22527,12 +22481,12 @@ protected class SemanticsRule_OutSemanticsRuleParserRuleCall_1 extends RuleCallT
 /************ begin Rule InSemanticsRule ****************
  *
  * InSemanticsRule:
- * 	"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+ * 	"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
  * 	followUps+=SemanticsRule)+ ")"))?;
  *
  **/
 
-// "in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+// "in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 // followUps+=SemanticsRule)+ ")"))?
 protected class InSemanticsRule_Group extends GroupToken {
 	
@@ -22606,7 +22560,7 @@ protected class InSemanticsRule_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// msg=[AbstractMessage]
+// msg=[ecore::EObject]
 protected class InSemanticsRule_MsgAssignment_2 extends AssignmentToken  {
 	
 	public InSemanticsRule_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -22632,9 +22586,9 @@ protected class InSemanticsRule_MsgAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msg");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getInSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0(); 
+				element = grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0(); 
 				return obj;
 			}
 		}
@@ -22970,12 +22924,12 @@ protected class InSemanticsRule_RightParenthesisKeyword_3_1_1_3 extends KeywordT
 /************ begin Rule OutSemanticsRule ****************
  *
  * OutSemanticsRule:
- * 	"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+ * 	"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
  * 	followUps+=SemanticsRule)+ ")"))?;
  *
  **/
 
-// "out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+// "out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 // followUps+=SemanticsRule)+ ")"))?
 protected class OutSemanticsRule_Group extends GroupToken {
 	
@@ -23049,7 +23003,7 @@ protected class OutSemanticsRule_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// msg=[AbstractMessage]
+// msg=[ecore::EObject]
 protected class OutSemanticsRule_MsgAssignment_2 extends AssignmentToken  {
 	
 	public OutSemanticsRule_MsgAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -23075,9 +23029,9 @@ protected class OutSemanticsRule_MsgAssignment_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msg");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getOutSemanticsRuleAccess().getMsgAbstractMessageCrossReference_2_0(); 
+				element = grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0(); 
 				return obj;
 			}
 		}

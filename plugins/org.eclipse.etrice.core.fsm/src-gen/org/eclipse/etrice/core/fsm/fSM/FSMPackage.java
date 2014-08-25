@@ -93,7 +93,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getIInterfaceItemOwner()
    * @generated
    */
-  int IINTERFACE_ITEM_OWNER = 37;
+  int IINTERFACE_ITEM_OWNER = 36;
 
   /**
    * The number of structural features of the '<em>IInterface Item Owner</em>' class.
@@ -1457,34 +1457,6 @@ public interface FSMPackage extends EPackage
   int MESSAGE_FROM_IF_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.AbstractMessageImpl <em>Abstract Message</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.AbstractMessageImpl
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getAbstractMessage()
-   * @generated
-   */
-  int ABSTRACT_MESSAGE = 30;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ABSTRACT_MESSAGE__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Abstract Message</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ABSTRACT_MESSAGE_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl <em>Abstract Interface Item</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1492,7 +1464,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getAbstractInterfaceItem()
    * @generated
    */
-  int ABSTRACT_INTERFACE_ITEM = 31;
+  int ABSTRACT_INTERFACE_ITEM = 30;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1520,7 +1492,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getGuard()
    * @generated
    */
-  int GUARD = 32;
+  int GUARD = 31;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -1548,7 +1520,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getProtocolSemantics()
    * @generated
    */
-  int PROTOCOL_SEMANTICS = 33;
+  int PROTOCOL_SEMANTICS = 32;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -1576,7 +1548,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getSemanticsRule()
    * @generated
    */
-  int SEMANTICS_RULE = 34;
+  int SEMANTICS_RULE = 33;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1613,7 +1585,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getInSemanticsRule()
    * @generated
    */
-  int IN_SEMANTICS_RULE = 35;
+  int IN_SEMANTICS_RULE = 34;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1650,7 +1622,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getOutSemanticsRule()
    * @generated
    */
-  int OUT_SEMANTICS_RULE = 36;
+  int OUT_SEMANTICS_RULE = 35;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1687,7 +1659,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getComponentCommunicationType()
    * @generated
    */
-  int COMPONENT_COMMUNICATION_TYPE = 38;
+  int COMPONENT_COMMUNICATION_TYPE = 37;
 
 
   /**
@@ -2473,27 +2445,6 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EReference getMessageFromIf_From();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractMessage <em>Abstract Message</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Message</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.AbstractMessage
-   * @generated
-   */
-  EClass getAbstractMessage();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.fsm.fSM.AbstractMessage#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.AbstractMessage#getName()
-   * @see #getAbstractMessage()
-   * @generated
-   */
-  EAttribute getAbstractMessage_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem <em>Abstract Interface Item</em>}'.
@@ -3304,24 +3255,6 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EReference MESSAGE_FROM_IF__FROM = eINSTANCE.getMessageFromIf_From();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.AbstractMessageImpl <em>Abstract Message</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.fsm.fSM.impl.AbstractMessageImpl
-     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getAbstractMessage()
-     * @generated
-     */
-    EClass ABSTRACT_MESSAGE = eINSTANCE.getAbstractMessage();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ABSTRACT_MESSAGE__NAME = eINSTANCE.getAbstractMessage_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl <em>Abstract Interface Item</em>}' class.

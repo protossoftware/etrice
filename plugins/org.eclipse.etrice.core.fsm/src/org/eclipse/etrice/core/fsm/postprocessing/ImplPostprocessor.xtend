@@ -24,7 +24,7 @@ class ImplPostprocessor {
 		val fsmPackage = metamodel.getEPackage
 		
 		val state = fsmPackage.getClass("State")
-		state.addOperation("getName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
+		state.addOperation("getName", EcorePackage.Literals.ESTRING, 1,
 		// HOWTO: putting a fully qualified type name in <% %> makes ecore generate an import statement
 			'''return (this instanceof <%org.eclipse.etrice.core.fsm.fSM.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof <%org.eclipse.etrice.core.fsm.fSM.RefinedState%>)? (((RefinedState)this).getTarget()==null? "":((RefinedState)this).getTarget().getName()) :"";''')
 		
@@ -44,8 +44,8 @@ class ImplPostprocessor {
 		
 		val ifItem = fsmPackage.getClass("AbstractInterfaceItem")
 		ifItem.addOperation("getSemantics", fsmPackage.getEClassifier("ProtocolSemantics"))
-		ifItem.addOperation("getAllIncomingAbstractMessages", fsmPackage.getEClassifier("AbstractMessage"), -1, null)
-		ifItem.addOperation("getAllOutgoingAbstractMessages", fsmPackage.getEClassifier("AbstractMessage"), -1, null)
+		ifItem.addOperation("getAllIncomingAbstractMessages", EcorePackage.Literals.EOBJECT, -1, null)
+		ifItem.addOperation("getAllOutgoingAbstractMessages", EcorePackage.Literals.EOBJECT, -1, null)
 		
 		val itemOwner = fsmPackage.addClass("IInterfaceItemOwner")
 		itemOwner.setAbstract(true)

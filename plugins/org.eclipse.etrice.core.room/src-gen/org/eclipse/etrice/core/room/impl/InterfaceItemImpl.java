@@ -6,8 +6,8 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 import org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl;
@@ -90,9 +90,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractMessage> getAllIncomingAbstractMessages()
+  public EList<EObject> getAllIncomingAbstractMessages()
   {
-    return new BasicEList<AbstractMessage>(new RoomHelpers().getMessageListDeep(this, false));
+    return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, false));
     
   }
 
@@ -101,9 +101,9 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractMessage> getAllOutgoingAbstractMessages()
+  public EList<EObject> getAllOutgoingAbstractMessages()
   {
-    return new BasicEList<AbstractMessage>(new RoomHelpers().getMessageListDeep(this, true));
+    return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
     
   }
 

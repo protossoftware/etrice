@@ -14,7 +14,6 @@ package org.eclipse.etrice.core.genmodel.fsm.fsmgen;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
@@ -290,7 +289,7 @@ public interface ExpandedModelComponent extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EList<AbstractMessage> getIncomingMessages(AbstractInterfaceItem ifitem);
+	EList<EObject> getIncomingMessages(AbstractInterfaceItem ifitem);
 
 	/**
 	 * <!-- begin-user-doc -->

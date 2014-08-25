@@ -43,10 +43,10 @@ public class AbstractExecutionUtil {
 	private FSMValidationUtil validationUtil;
 	
 	@Inject
-	private FSMHelpers roomHelpers;
+	private FSMHelpers fsmHelpers;
 	
 	@Inject
-	private FSMNameProvider roomNameProvider;
+	private FSMNameProvider fsmNameProvider;
 
 	/**
 	 * @return the validationUtil
@@ -56,16 +56,16 @@ public class AbstractExecutionUtil {
 	}
 
 	/**
-	 * @return the roomHelpers
+	 * @return the fsmHelpers
 	 */
 	public FSMHelpers getRoomHelpers() {
-		return roomHelpers;
+		return fsmHelpers;
 	}
 
 	/**
-	 * @return the roomNameProvider
+	 * @return the fsmNameProvider
 	 */
 	public FSMNameProvider getRoomNameProvider() {
-		return roomNameProvider;
+		return fsmNameProvider;
 	}
 }

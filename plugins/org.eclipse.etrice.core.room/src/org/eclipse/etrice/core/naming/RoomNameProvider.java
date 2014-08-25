@@ -74,7 +74,7 @@ public class RoomNameProvider extends FSMNameProvider {
 	private class CombinedProvider  extends ComposedSwitch<String> {
 		public CombinedProvider() {
 			addSwitch(new RoomProvider());
-			addSwitch(new FSMProvider());
+			addSwitch(new FSMNameProviderSwitch());
 		}
 	}
 	private CombinedProvider roomNameProvider = new CombinedProvider();

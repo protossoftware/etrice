@@ -55,8 +55,8 @@ import org.eclipse.etrice.core.fsm.util.FSMHelpers;
  */
 public class TransitionChainImpl extends MinimalEObjectImpl.Container implements TransitionChain {
 	
-	private FSMHelpers roomHelpers = new FSMHelpers();
-	private FSMNameProvider roomNameProvider = new FSMNameProvider();
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	/**
 	 * The cached value of the '{@link #getTransition() <em>Transition</em>}' reference.
@@ -226,11 +226,11 @@ public class TransitionChainImpl extends MinimalEObjectImpl.Container implements
 		
 		result.append(tcv.genActionOperationCall(tr));
 		
-		StateGraphNode node = roomHelpers.getNode(tr.getTo());
+		StateGraphNode node = fsmHelpers.getNode(tr.getTo());
 		EList<Transition> out = emc.getOutgoingTransitions(node);
 		if (node instanceof ChoicePoint) {
 			ContinuationTransition dflt = emc.getDefaultBranch(out);
-			assert(dflt!=null): "ChoicePoint "+roomNameProvider.getFullPath(node)+" has no default branch!";
+			assert(dflt!=null): "ChoicePoint "+fsmNameProvider.getFullPath(node)+" has no default branch!";
 			
 			// generate if/else
 			boolean isFirst = true;
@@ -239,7 +239,7 @@ public class TransitionChainImpl extends MinimalEObjectImpl.Container implements
 					continue;
 				
 				assert(cond instanceof CPBranchTransition): "The non default ChoicePoint branch "
-					+roomNameProvider.getFullPath(cond)+" must be of type CPBranchTransition!";
+					+fsmNameProvider.getFullPath(cond)+" must be of type CPBranchTransition!";
 				
 				result.append(tcv.genElseIfBranch((CPBranchTransition)cond, isFirst));
 				isFirst = false;
@@ -262,7 +262,7 @@ public class TransitionChainImpl extends MinimalEObjectImpl.Container implements
 					return;
 				}
 				else {
-					assert(out.size()<=1): "TrPoint "+roomNameProvider.getFullPath(node)
+					assert(out.size()<=1): "TrPoint "+fsmNameProvider.getFullPath(node)
 					+" is expected to have at most one outgoing transition!";
 					if (out.size()==1) {
 						State state = (node.eContainer().eContainer() instanceof State)? (State)node.eContainer().eContainer():null;

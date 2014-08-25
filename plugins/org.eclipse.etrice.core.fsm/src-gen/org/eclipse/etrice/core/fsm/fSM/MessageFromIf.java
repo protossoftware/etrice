@@ -38,12 +38,12 @@ public interface MessageFromIf extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Message</em>' reference.
-   * @see #setMessage(AbstractMessage)
+   * @see #setMessage(EObject)
    * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getMessageFromIf_Message()
    * @model
    * @generated
    */
-  AbstractMessage getMessage();
+  EObject getMessage();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.fsm.fSM.MessageFromIf#getMessage <em>Message</em>}' reference.
@@ -53,7 +53,7 @@ public interface MessageFromIf extends EObject
    * @see #getMessage()
    * @generated
    */
-  void setMessage(AbstractMessage value);
+  void setMessage(EObject value);
 
   /**
    * Returns the value of the '<em><b>From</b></em>' reference.

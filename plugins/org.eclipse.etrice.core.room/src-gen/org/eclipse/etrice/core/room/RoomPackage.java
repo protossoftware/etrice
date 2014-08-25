@@ -1423,22 +1423,22 @@ public interface RoomPackage extends EPackage
   int MESSAGE = 21;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESSAGE__NAME = FSMPackage.ABSTRACT_MESSAGE__NAME;
-
-  /**
    * The feature id for the '<em><b>Priv</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MESSAGE__PRIV = FSMPackage.ABSTRACT_MESSAGE_FEATURE_COUNT + 0;
+  int MESSAGE__PRIV = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MESSAGE__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Data</b></em>' containment reference.
@@ -1447,7 +1447,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MESSAGE__DATA = FSMPackage.ABSTRACT_MESSAGE_FEATURE_COUNT + 1;
+  int MESSAGE__DATA = 2;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1456,7 +1456,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MESSAGE__DOCU = FSMPackage.ABSTRACT_MESSAGE_FEATURE_COUNT + 2;
+  int MESSAGE__DOCU = 3;
 
   /**
    * The number of structural features of the '<em>Message</em>' class.
@@ -1465,7 +1465,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MESSAGE_FEATURE_COUNT = FSMPackage.ABSTRACT_MESSAGE_FEATURE_COUNT + 3;
+  int MESSAGE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PortClassImpl <em>Port Class</em>}' class.
@@ -3848,6 +3848,17 @@ public interface RoomPackage extends EPackage
   EAttribute getMessage_Priv();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.etrice.core.room.Message#getName()
+   * @see #getMessage()
+   * @generated
+   */
+  EAttribute getMessage_Name();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5543,6 +5554,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EAttribute MESSAGE__PRIV = eINSTANCE.getMessage_Priv();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MESSAGE__NAME = eINSTANCE.getMessage_Name();
 
     /**
      * The meta object literal for the '<em><b>Data</b></em>' containment reference feature.

@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  */
 public class ETriceGenUtil {
 	
-	private FSMHelpers roomHelpers = new RoomHelpers();
+	private FSMHelpers fsmHelpers = new RoomHelpers();
 
 	/**
 	 * @param trig the trigger
@@ -46,7 +46,7 @@ public class ETriceGenUtil {
 		for (TriggeredTransition t : at.getTransitions()) {
 			for (Trigger trig : t.getTriggers()) {
 				if (isMatching(trig, at.getTrigger())
-						&& roomHelpers.hasGuard(trig))
+						&& fsmHelpers.hasGuard(trig))
 					return true;
 			}
 		}

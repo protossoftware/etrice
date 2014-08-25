@@ -295,7 +295,7 @@ enum ReferenceType:
 // **************************************************************
 // concrete message and interface item for state machines 
 
-AbstractMessage: Message;
+//AbstractMessage: Message;
 AbstractInterfaceItem: InterfaceItem;
 
 // **************************************************************

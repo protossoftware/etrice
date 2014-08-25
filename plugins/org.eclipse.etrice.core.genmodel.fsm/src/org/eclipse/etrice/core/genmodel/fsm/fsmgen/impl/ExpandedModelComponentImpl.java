@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
@@ -165,11 +164,11 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 //		public String toString() {
 //			StringBuffer result = new StringBuffer();
 //			for (java.util.Map.Entry<Transition, TransitionChainBundle> entry : entrySet()) {
-//				result.append("transition "+roomNameProvider.getFullPath(entry.getKey())+":\n");
+//				result.append("transition "+fsmNameProvider.getFullPath(entry.getKey())+":\n");
 //				TransitionChainBundle bundle = entry.getValue();
 //				for (TransitionChain tc : bundle.chains) {
 //					String data = tc.getData()!=null? " with data "+tc.getData().getRefType().getType().getName() : "";
-//					result.append("  chain starting at "+roomNameProvider.getFullPath(tc.getTransition())+data+"\n");
+//					result.append("  chain starting at "+fsmNameProvider.getFullPath(tc.getTransition())+data+"\n");
 //				}
 //				String data = bundle.commonData!=null? bundle.commonData.getRefType().getType().getName() : "-";
 //				result.append("  bundle data "+data+"\n");
@@ -213,8 +212,8 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private TransitionToChainBundleMap trans2chainBundle = null;
 	private HashMap<EObject, EObject> copy2orig = null;
 	
-	private FSMHelpers roomHelpers = new FSMHelpers();
-	private FSMNameProvider roomNameProvider = new FSMNameProvider();
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	protected FSMNameProvider fsmNameProvider = new FSMNameProvider();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -470,7 +469,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		for (Transition t : sg.getTransitions()) {
 			addIncomingTransition(getAdjustedTargetNode(t), t);
 			if (t instanceof NonInitialTransition) {
-				addOutgoingTransition(roomHelpers.getNode(((NonInitialTransition)t).getFrom()), t);
+				addOutgoingTransition(fsmHelpers.getNode(((NonInitialTransition)t).getFrom()), t);
 			}
 		}
 	}
@@ -485,7 +484,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 				if (!getModelComponent().isAbstract()) {
 					int idx = sg.getTransitions().indexOf(t);
 					Transition orig = (Transition) copy2orig.get(t);
-					String name = roomNameProvider.getName(orig);
+					String name = fsmNameProvider.getName(orig);
 					validator.error("transition '"+name+"' is not part of a transition chain (only allowed for abstract actor classes)", orig.eContainer(), FSMPackage.eINSTANCE.getStateGraph_Transitions(), idx);
 				}
 		}
@@ -562,32 +561,32 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 			
 			if (data==null) {
 				if (!getModelComponent(tp).isAbstract())
-					validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" is not connected", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+					validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" is not connected", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 			}
 			else {
 				if ((tp instanceof EntryPoint)||(tp instanceof ExitPoint)) {
 					// non-abstract classes must have incoming transitions for entry and exit points
 					if (!getModelComponent().isAbstract() && data.getInTrans().isEmpty())
-						validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" has no incoming transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					
 					if (getModelComponent(tp).isAbstract()) {
 						// transition points inherited from abstract base classes
 						// (of from abstract classes themselves) must not have more than one outgoing transition
 						if (data.getOutTrans().size()>1)
-							validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" must have at most one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					else {
 						// non-abstract or non-inherited transition points must have one outgoing transition
 						if (data.getOutTrans().size()!=1)
-							validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+							validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" must have exactly one outgoing transition!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 					}
 					
 					if (!data.getLoopTransitions().isEmpty())
-						validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" must have no self transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 				else if (tp instanceof TransitionPoint) {
 					if (data.getOutTrans().size()<data.getLoopTransitions().size())
-						validationError(getModelComponentName()+": TrPoint "+roomNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
+						validationError(getModelComponentName()+": TrPoint "+fsmNameProvider.getFullPath(tp)+" must have no incoming transitions!", origContainer, FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 				}
 			}
 		}
@@ -608,8 +607,8 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	
 	private String getTriggerString(MessageFromIf mifp) {
 		assert(mifp.getFrom().getName()!=null) : "ifitem name must not be null";
-		assert(mifp.getMessage().getName()!=null) : "message name must not be null";
-		return mifp.getFrom().getName()+TRIGGER_SEP+mifp.getMessage().getName();
+		assert(fsmNameProvider.getMessageName(mifp.getMessage())!=null) : "message name must not be null";
+		return mifp.getFrom().getName()+TRIGGER_SEP+fsmNameProvider.getMessageName(mifp.getMessage());
 	}
 
 	private void collectOutgoingTransitions(EList<Transition> sameLevelTransitions,
@@ -648,7 +647,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 							for (TriggeredTransition t2 : at.getTransitions()) {
 								for (Trigger trig2 : t2.getTriggers()) {
 									if (isMatching(trig2, tr)) {
-										if (!roomHelpers.isGuarded(trig2)) {
+										if (!fsmHelpers.isGuarded(trig2)) {
 											unguarded = t2;
 											if (!sameLevelTransitions.contains(t2))
 												accepted = false;
@@ -659,7 +658,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 							if (accepted) {
 								if (unguarded!=null) {
 									// there already is an unguarded transition: require a quard
-									if (!roomHelpers.isGuarded(trig)) {
+									if (!fsmHelpers.isGuarded(trig)) {
 										validationError("Transitions with same trigger on same level have to be guarded!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
 									}
 									else {
@@ -718,7 +717,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private void fillTriggerStringMap() {
 		// improve performance using maps name2ifitem and name2msgs
 		HashMap<String, AbstractInterfaceItem> name2ifitem = new HashMap<String, AbstractInterfaceItem>();
-		HashMap<String, List<AbstractMessage>> name2msgs = new HashMap<String, List<AbstractMessage>>();
+		HashMap<String, List<EObject>> name2msgs = new HashMap<String, List<EObject>>();
 		List<AbstractInterfaceItem> items = getAllInterfaceItems();
 		for (AbstractInterfaceItem item : items) {
 			name2ifitem.put(item.getName(), item);
@@ -746,14 +745,14 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 			// this should always hold true
 			assert(ii!=null): "The name '"+parts[0]+"' did not match an interface item (in name2ifitem)!";
 
-			List<AbstractMessage> msgs = name2msgs.get(parts[0]);
+			List<EObject> msgs = name2msgs.get(parts[0]);
 			
 			// this should always hold true
 			assert(msgs!=null): "The name '"+parts[0]+"' did not match an interface item (in name2msgs)!";
 
-			AbstractMessage msg = null;
-			for (AbstractMessage m : msgs) {
-				if (m.getName().equals(parts[1]))
+			EObject msg = null;
+			for (EObject m : msgs) {
+				if (fsmNameProvider.getMessageName(m).equals(parts[1]))
 					msg  = m;
 			}
 			
@@ -770,14 +769,14 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private void collectChainTransitions(TransitionChain tc, Transition t) {
 		trans2chainBundle.put(t, tc);
 		
-		StateGraphNode node = roomHelpers.getNode(t.getTo());
+		StateGraphNode node = fsmHelpers.getNode(t.getTo());
 		
 		// the chain ends if a state is reached
 		if (node instanceof State)
 			return;
 		
 		// the chain ends if source and destination coincide
-		if (tc.getTransition() instanceof NonInitialTransition && node==roomHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
+		if (tc.getTransition() instanceof NonInitialTransition && node==fsmHelpers.getNode(((NonInitialTransition)tc.getTransition()).getFrom()))
 			return;
 		
 		for (Transition next : getOutgoingTransitions(node)) {
@@ -971,7 +970,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	 * @generated NOT
 	 */
 	public String getTriggerCodeName(MessageFromIf mif) {
-		return "TRIG_"+mif.getFrom().getName()+"__"+mif.getMessage().getName();
+		return "TRIG_"+mif.getFrom().getName()+"__"+fsmNameProvider.getMessageName(mif.getMessage());
 	}
 
 	/**
@@ -1110,7 +1109,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<AbstractMessage> getIncomingMessages(AbstractInterfaceItem ifitem) {
+	public EList<EObject> getIncomingMessages(AbstractInterfaceItem ifitem) {
 		return ifitem.getAllIncomingAbstractMessages();
 	}
 
@@ -1156,7 +1155,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 
 			@Override
 			public int compare(TransitionChain o1, TransitionChain o2) {
-				return roomNameProvider.getFullPath(o1.getTransition()).compareTo(roomNameProvider.getFullPath(o2.getTransition()));
+				return fsmNameProvider.getFullPath(o1.getTransition()).compareTo(fsmNameProvider.getFullPath(o2.getTransition()));
 			}
 			
 		});
@@ -1183,7 +1182,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	}
 
 	private StateGraphNode getAdjustedTargetNode(Transition t) {
-		StateGraphNode node = roomHelpers.getNode(t.getTo());
+		StateGraphNode node = fsmHelpers.getNode(t.getTo());
 		if (node instanceof EntryPoint) {
 			NodeData data = node2data.get(node);
 			if (data==null || data.getOutTrans().isEmpty()) {

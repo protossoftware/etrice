@@ -1430,9 +1430,19 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getMessage_Name()
+  {
+    return (EAttribute)messageEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getMessage_Data()
   {
-    return (EReference)messageEClass.getEStructuralFeatures().get(1);
+    return (EReference)messageEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1442,7 +1452,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    */
   public EReference getMessage_Docu()
   {
-    return (EReference)messageEClass.getEStructuralFeatures().get(2);
+    return (EReference)messageEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2408,6 +2418,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     messageEClass = createEClass(MESSAGE);
     createEAttribute(messageEClass, MESSAGE__PRIV);
+    createEAttribute(messageEClass, MESSAGE__NAME);
     createEReference(messageEClass, MESSAGE__DATA);
     createEReference(messageEClass, MESSAGE__DOCU);
 
@@ -2569,7 +2580,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     generalProtocolClassEClass.getESuperTypes().add(this.getRoomClass());
     protocolClassEClass.getESuperTypes().add(this.getGeneralProtocolClass());
     compoundProtocolClassEClass.getESuperTypes().add(this.getGeneralProtocolClass());
-    messageEClass.getESuperTypes().add(theFSMPackage.getAbstractMessage());
     inMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     outMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     actorClassEClass.getESuperTypes().add(this.getActorContainerClass());
@@ -2703,6 +2713,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMessage_Priv(), ecorePackage.getEBoolean(), "priv", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMessage_Name(), ecorePackage.getEString(), "name", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessage_Data(), this.getVarDecl(), null, "data", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessage_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2752,9 +2763,9 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
     addEOperation(interfaceItemEClass, theFSMPackage.getProtocolSemantics(), "getSemantics", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-    addEOperation(interfaceItemEClass, theFSMPackage.getAbstractMessage(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(interfaceItemEClass, ecorePackage.getEObject(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-    addEOperation(interfaceItemEClass, theFSMPackage.getAbstractMessage(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(interfaceItemEClass, ecorePackage.getEObject(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(portEClass, Port.class, "Port", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPort_Conjugated(), ecorePackage.getEBoolean(), "conjugated", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

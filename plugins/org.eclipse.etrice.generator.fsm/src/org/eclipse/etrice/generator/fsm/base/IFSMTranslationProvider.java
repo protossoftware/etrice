@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
@@ -67,7 +66,7 @@ public interface IFSMTranslationProvider {
 	 * @param orig the original text
 	 * @return the translation
 	 */
-	String getInterfaceItemMessageText(AbstractInterfaceItem item, AbstractMessage msg, ArrayList<String> args, String index, String orig);
+	String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject msg, ArrayList<String> args, String index, String orig);
 
 	/**
 	 * @return true if translations are provided for tags

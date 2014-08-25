@@ -294,7 +294,7 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider implement
 
 						// Test Remove the message from the trigger
 						for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
-							if (mif.getMessage().getName() == msgName
+							if (((Message)mif.getMessage()).getName() == msgName
 									&& mif.getFrom().getName() == ifItemName) {
 								mifToDelete = mif;
 								break;

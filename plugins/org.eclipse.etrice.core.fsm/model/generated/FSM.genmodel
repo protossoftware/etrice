@@ -112,9 +112,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//MessageFromIf/message"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//MessageFromIf/from"/>
     </genClasses>
-    <genClasses ecoreClass="FSM.ecore#//AbstractMessage">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//AbstractMessage/name"/>
-    </genClasses>
     <genClasses ecoreClass="FSM.ecore#//AbstractInterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//AbstractInterfaceItem/name"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getSemantics"/>

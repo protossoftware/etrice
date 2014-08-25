@@ -293,15 +293,6 @@ public interface FSMFactory extends EFactory
   MessageFromIf createMessageFromIf();
 
   /**
-   * Returns a new object of class '<em>Abstract Message</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Abstract Message</em>'.
-   * @generated
-   */
-  AbstractMessage createAbstractMessage();
-
-  /**
    * Returns a new object of class '<em>Abstract Interface Item</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

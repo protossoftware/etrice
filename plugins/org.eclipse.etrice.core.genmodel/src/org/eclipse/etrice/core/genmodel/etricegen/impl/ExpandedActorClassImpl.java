@@ -19,10 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
@@ -31,7 +29,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
@@ -39,7 +36,6 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
@@ -137,34 +133,6 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getOwnInterfaceItems()
-	 */
-	@Override
-	public EList<AbstractInterfaceItem> getOwnInterfaceItems(ModelComponent mc) {
-		BasicEList<AbstractInterfaceItem> ownIfItems = new BasicEList<AbstractInterfaceItem>();
-		
-		ActorClass ac = (ActorClass) mc;
-		for (ExternalPort ep : ac.getExternalPorts()) {
-			ownIfItems.add(ep.getInterfacePort());
-		}
-		ownIfItems.addAll(ac.getInternalPorts());
-		ownIfItems.addAll(ac.getServiceAccessPoints());
-		for (ServiceImplementation svc : ac.getServiceImplementations()) {
-			ownIfItems.add(svc.getSpp());
-		}
-		
-		return ownIfItems;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getAllInterfaceItems()
-	 */
-	@Override
-	public EList<AbstractInterfaceItem> getAllInterfaceItems() {
-		return new BasicEList<AbstractInterfaceItem>(roomHelpers.getAllInterfaceItems(getActorClass()));
-	}
-	
-	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#addTransitionChain(org.eclipse.etrice.core.fsm.fSM.Transition)
 	 */
 	@Override
@@ -218,8 +186,8 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getIncomingMessages(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem)
 	 */
 	@Override
-	public EList<AbstractMessage> getIncomingMessages(AbstractInterfaceItem ifitem) {
-		return new BasicEList<AbstractMessage>(roomHelpers.getMessageListDeep((InterfaceItem) ifitem, false));
+	public EList<EObject> getIncomingMessages(AbstractInterfaceItem ifitem) {
+		return new BasicEList<EObject>(roomHelpers.getMessageListDeep((InterfaceItem) ifitem, false));
 	}
 
 	/* (non-Javadoc)
@@ -229,15 +197,15 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	public String getMessageID(MessageFromIf mif) {
 		if (mif.getFrom() instanceof Port) {
 			Port p = (Port) mif.getFrom();
-			return p.getProtocol().getName()+(p.isConjugated()?".OUT_":".IN_")+mif.getMessage().getName();
+			return p.getProtocol().getName()+(p.isConjugated()?".OUT_":".IN_")+fsmNameProvider.getMessageName(mif.getMessage());
 		}
 		else if (mif.getFrom() instanceof SAP) {
 			SAP sap = (SAP) mif.getFrom();
-			return sap.getProtocol().getName()+".OUT_"+mif.getMessage().getName();
+			return sap.getProtocol().getName()+".OUT_"+fsmNameProvider.getMessageName(mif.getMessage());
 		}
 		else if (mif.getFrom() instanceof SPP) {
 			SPP spp = (SPP) mif.getFrom();
-			return spp.getProtocol().getName()+".IN_"+mif.getMessage().getName();
+			return spp.getProtocol().getName()+".IN_"+fsmNameProvider.getMessageName(mif.getMessage());
 		}
 
 		return "unknown interface item";

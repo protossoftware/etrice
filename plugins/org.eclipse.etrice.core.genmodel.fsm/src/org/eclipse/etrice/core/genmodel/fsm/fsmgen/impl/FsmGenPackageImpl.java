@@ -388,7 +388,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(activeTriggerEClass, ActiveTrigger.class, "ActiveTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getActiveTrigger_Msg(), theFSMPackage.getAbstractMessage(), null, "msg", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActiveTrigger_Msg(), ecorePackage.getEObject(), null, "msg", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActiveTrigger_Ifitem(), theFSMPackage.getAbstractInterfaceItem(), null, "ifitem", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActiveTrigger_Trigger(), ecorePackage.getEString(), "trigger", null, 0, 1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActiveTrigger_Transitions(), theFSMPackage.getTriggeredTransition(), null, "transitions", null, 0, -1, ActiveTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -458,7 +458,7 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEObject(), "getData", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(expandedModelComponentEClass, theFSMPackage.getAbstractMessage(), "getIncomingMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEObject(), "getIncomingMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getAbstractInterfaceItem(), "ifitem", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedModelComponentEClass, this.getTransitionChain(), "addTransitionChain", 0, 1, IS_UNIQUE, IS_ORDERED);

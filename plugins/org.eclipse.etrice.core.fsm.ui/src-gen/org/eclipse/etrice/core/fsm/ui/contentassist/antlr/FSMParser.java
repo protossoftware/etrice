@@ -225,7 +225,6 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTriggerAccess().getGuardAssignment_3(), "rule__Trigger__GuardAssignment_3");
 					put(grammarAccess.getMessageFromIfAccess().getMessageAssignment_0(), "rule__MessageFromIf__MessageAssignment_0");
 					put(grammarAccess.getMessageFromIfAccess().getFromAssignment_2(), "rule__MessageFromIf__FromAssignment_2");
-					put(grammarAccess.getAbstractMessageAccess().getNameAssignment(), "rule__AbstractMessage__NameAssignment");
 					put(grammarAccess.getAbstractInterfaceItemAccess().getNameAssignment(), "rule__AbstractInterfaceItem__NameAssignment");
 					put(grammarAccess.getGuardAccess().getGuardAssignment_1(), "rule__Guard__GuardAssignment_1");
 					put(grammarAccess.getProtocolSemanticsAccess().getRulesAssignment_3(), "rule__ProtocolSemantics__RulesAssignment_3");

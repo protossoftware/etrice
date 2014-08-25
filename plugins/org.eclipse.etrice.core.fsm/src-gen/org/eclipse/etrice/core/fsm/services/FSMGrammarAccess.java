@@ -1527,8 +1527,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MessageFromIf");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cMessageAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cMessageAbstractMessageCrossReference_0_0 = (CrossReference)cMessageAssignment_0.eContents().get(0);
-		private final RuleCall cMessageAbstractMessageIDTerminalRuleCall_0_0_1 = (RuleCall)cMessageAbstractMessageCrossReference_0_0.eContents().get(1);
+		private final CrossReference cMessageEObjectCrossReference_0_0 = (CrossReference)cMessageAssignment_0.eContents().get(0);
+		private final RuleCall cMessageEObjectIDTerminalRuleCall_0_0_1 = (RuleCall)cMessageEObjectCrossReference_0_0.eContents().get(1);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cFromAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cFromAbstractInterfaceItemCrossReference_2_0 = (CrossReference)cFromAssignment_2.eContents().get(0);
@@ -1538,20 +1538,20 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//// pairs of (message, interface) are triggering events
 		////
 		//MessageFromIf:
-		//	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
+		//	message=[ecore::EObject] ":" from=[AbstractInterfaceItem];
 		public ParserRule getRule() { return rule; }
 
-		//message=[AbstractMessage] ":" from=[AbstractInterfaceItem]
+		//message=[ecore::EObject] ":" from=[AbstractInterfaceItem]
 		public Group getGroup() { return cGroup; }
 
-		//message=[AbstractMessage]
+		//message=[ecore::EObject]
 		public Assignment getMessageAssignment_0() { return cMessageAssignment_0; }
 
-		//[AbstractMessage]
-		public CrossReference getMessageAbstractMessageCrossReference_0_0() { return cMessageAbstractMessageCrossReference_0_0; }
+		//[ecore::EObject]
+		public CrossReference getMessageEObjectCrossReference_0_0() { return cMessageEObjectCrossReference_0_0; }
 
 		//ID
-		public RuleCall getMessageAbstractMessageIDTerminalRuleCall_0_0_1() { return cMessageAbstractMessageIDTerminalRuleCall_0_0_1; }
+		public RuleCall getMessageEObjectIDTerminalRuleCall_0_0_1() { return cMessageEObjectIDTerminalRuleCall_0_0_1; }
 
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
@@ -1566,27 +1566,12 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1() { return cFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1; }
 	}
 
-	public class AbstractMessageElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMessage");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//AbstractMessage:
-		//	name=ID;
-		public ParserRule getRule() { return rule; }
-
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
-	}
-
 	public class AbstractInterfaceItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractInterfaceItem");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
+		//// AbstractMessage: name=ID; --> ecore::EObject
 		//AbstractInterfaceItem:
 		//	name=ID;
 		public ParserRule getRule() { return rule; }
@@ -1687,8 +1672,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cMsgAbstractMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
-		private final RuleCall cMsgAbstractMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgAbstractMessageCrossReference_2_0.eContents().get(1);
+		private final CrossReference cMsgEObjectCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgEObjectIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgEObjectCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
@@ -1705,11 +1690,11 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
 		
 		//InSemanticsRule:
-		//	"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+		//	"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 		//	followUps+=SemanticsRule)+ ")"))?;
 		public ParserRule getRule() { return rule; }
 
-		//"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+		//"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 		//followUps+=SemanticsRule)+ ")"))?
 		public Group getGroup() { return cGroup; }
 
@@ -1719,14 +1704,14 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//msg=[AbstractMessage]
+		//msg=[ecore::EObject]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
-		//[AbstractMessage]
-		public CrossReference getMsgAbstractMessageCrossReference_2_0() { return cMsgAbstractMessageCrossReference_2_0; }
+		//[ecore::EObject]
+		public CrossReference getMsgEObjectCrossReference_2_0() { return cMsgEObjectCrossReference_2_0; }
 
 		//ID
-		public RuleCall getMsgAbstractMessageIDTerminalRuleCall_2_0_1() { return cMsgAbstractMessageIDTerminalRuleCall_2_0_1; }
+		public RuleCall getMsgEObjectIDTerminalRuleCall_2_0_1() { return cMsgEObjectIDTerminalRuleCall_2_0_1; }
 
 		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
 		public Group getGroup_3() { return cGroup_3; }
@@ -1777,8 +1762,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cOutKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cMsgAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cMsgAbstractMessageCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
-		private final RuleCall cMsgAbstractMessageIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgAbstractMessageCrossReference_2_0.eContents().get(1);
+		private final CrossReference cMsgEObjectCrossReference_2_0 = (CrossReference)cMsgAssignment_2.eContents().get(0);
+		private final RuleCall cMsgEObjectIDTerminalRuleCall_2_0_1 = (RuleCall)cMsgEObjectCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
@@ -1795,11 +1780,11 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_3_1_1_3 = (Keyword)cGroup_3_1_1.eContents().get(3);
 		
 		//OutSemanticsRule:
-		//	"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+		//	"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 		//	followUps+=SemanticsRule)+ ")"))?;
 		public ParserRule getRule() { return rule; }
 
-		//"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+		//"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 		//followUps+=SemanticsRule)+ ")"))?
 		public Group getGroup() { return cGroup; }
 
@@ -1809,14 +1794,14 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//msg=[AbstractMessage]
+		//msg=[ecore::EObject]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
-		//[AbstractMessage]
-		public CrossReference getMsgAbstractMessageCrossReference_2_0() { return cMsgAbstractMessageCrossReference_2_0; }
+		//[ecore::EObject]
+		public CrossReference getMsgEObjectCrossReference_2_0() { return cMsgEObjectCrossReference_2_0; }
 
 		//ID
-		public RuleCall getMsgAbstractMessageIDTerminalRuleCall_2_0_1() { return cMsgAbstractMessageIDTerminalRuleCall_2_0_1; }
+		public RuleCall getMsgEObjectIDTerminalRuleCall_2_0_1() { return cMsgEObjectIDTerminalRuleCall_2_0_1; }
 
 		//("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule ("," followUps+=SemanticsRule)+ ")"))?
 		public Group getGroup_3() { return cGroup_3; }
@@ -1939,7 +1924,6 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	private ChoicepointTerminalElements pChoicepointTerminal;
 	private TriggerElements pTrigger;
 	private MessageFromIfElements pMessageFromIf;
-	private AbstractMessageElements pAbstractMessage;
 	private AbstractInterfaceItemElements pAbstractInterfaceItem;
 	private GuardElements pGuard;
 	private ProtocolSemanticsElements pProtocolSemantics;
@@ -2337,7 +2321,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//// pairs of (message, interface) are triggering events
 	////
 	//MessageFromIf:
-	//	message=[AbstractMessage] ":" from=[AbstractInterfaceItem];
+	//	message=[ecore::EObject] ":" from=[AbstractInterfaceItem];
 	public MessageFromIfElements getMessageFromIfAccess() {
 		return (pMessageFromIf != null) ? pMessageFromIf : (pMessageFromIf = new MessageFromIfElements());
 	}
@@ -2346,16 +2330,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		return getMessageFromIfAccess().getRule();
 	}
 
-	//AbstractMessage:
-	//	name=ID;
-	public AbstractMessageElements getAbstractMessageAccess() {
-		return (pAbstractMessage != null) ? pAbstractMessage : (pAbstractMessage = new AbstractMessageElements());
-	}
-	
-	public ParserRule getAbstractMessageRule() {
-		return getAbstractMessageAccess().getRule();
-	}
-
+	//// AbstractMessage: name=ID; --> ecore::EObject
 	//AbstractInterfaceItem:
 	//	name=ID;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
@@ -2400,7 +2375,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InSemanticsRule:
-	//	"in" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public InSemanticsRuleElements getInSemanticsRuleAccess() {
 		return (pInSemanticsRule != null) ? pInSemanticsRule : (pInSemanticsRule = new InSemanticsRuleElements());
@@ -2411,7 +2386,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OutSemanticsRule:
-	//	"out" ":" msg=[AbstractMessage] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
+	//	"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public OutSemanticsRuleElements getOutSemanticsRuleAccess() {
 		return (pOutSemanticsRule != null) ? pOutSemanticsRule : (pOutSemanticsRule = new OutSemanticsRuleElements());

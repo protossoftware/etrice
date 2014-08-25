@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 
@@ -323,11 +322,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
       public Adapter caseActorRef(ActorRef object)
       {
         return createActorRefAdapter();
-      }
-      @Override
-      public Adapter caseAbstractMessage(AbstractMessage object)
-      {
-        return createAbstractMessageAdapter();
       }
       @Override
       public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object)
@@ -1097,21 +1091,6 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActorRefAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.fsm.fSM.AbstractMessage <em>Abstract Message</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.etrice.core.fsm.fSM.AbstractMessage
-   * @generated
-   */
-  public Adapter createAbstractMessageAdapter()
   {
     return null;
   }

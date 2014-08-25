@@ -16,12 +16,12 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
@@ -51,7 +51,7 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractMessage msg;
+	protected EObject msg;
 
 	/**
 	 * The cached value of the '{@link #getIfitem() <em>Ifitem</em>}' reference.
@@ -117,10 +117,10 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractMessage getMsg() {
+	public EObject getMsg() {
 		if (msg != null && msg.eIsProxy()) {
 			InternalEObject oldMsg = (InternalEObject)msg;
-			msg = (AbstractMessage)eResolveProxy(oldMsg);
+			msg = eResolveProxy(oldMsg);
 			if (msg != oldMsg) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
@@ -134,7 +134,7 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractMessage basicGetMsg() {
+	public EObject basicGetMsg() {
 		return msg;
 	}
 
@@ -143,8 +143,8 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMsg(AbstractMessage newMsg) {
-		AbstractMessage oldMsg = msg;
+	public void setMsg(EObject newMsg) {
+		EObject oldMsg = msg;
 		msg = newMsg;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FsmGenPackage.ACTIVE_TRIGGER__MSG, oldMsg, msg));
@@ -253,7 +253,7 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
-				setMsg((AbstractMessage)newValue);
+				setMsg((EObject)newValue);
 				return;
 			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				setIfitem((AbstractInterfaceItem)newValue);
@@ -278,7 +278,7 @@ public class ActiveTriggerImpl extends MinimalEObjectImpl.Container implements A
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FsmGenPackage.ACTIVE_TRIGGER__MSG:
-				setMsg((AbstractMessage)null);
+				setMsg((EObject)null);
 				return;
 			case FsmGenPackage.ACTIVE_TRIGGER__IFITEM:
 				setIfitem((AbstractInterfaceItem)null);

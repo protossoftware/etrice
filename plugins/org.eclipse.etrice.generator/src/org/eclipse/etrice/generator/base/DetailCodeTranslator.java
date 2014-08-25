@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.util.RoomCrossReferencer;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -182,7 +181,7 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 		ITranslationProvider prov = (ITranslationProvider) provider;
 		String translated = null;
 		
-		AbstractMessage msg = getMessage(text, curr, item, false);
+		EObject msg = getMessage(text, curr, item, false);
 		if (msg!=null) {
 			if (curr.pos>=text.length() || text.charAt(curr.pos)!='(') {
 				String orig = text.substring(last, curr.pos);
@@ -231,7 +230,7 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 	}
 
 	@Override
-	protected boolean argsMatching(AbstractMessage amsg, ArrayList<String> args) {
+	protected boolean argsMatching(EObject amsg, ArrayList<String> args) {
 		if (!(amsg instanceof Message))
 			return super.argsMatching(amsg, args);
 		

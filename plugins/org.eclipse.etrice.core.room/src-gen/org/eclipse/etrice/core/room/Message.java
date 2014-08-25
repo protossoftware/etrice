@@ -2,9 +2,9 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.etrice.core.common.base.Documentation;
+import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
+import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}</li>
  * </ul>
@@ -34,7 +35,7 @@ import org.eclipse.etrice.core.fsm.fSM.AbstractMessage;
  * @model
  * @generated
  */
-public interface Message extends AbstractMessage
+public interface Message extends EObject
 {
   /**
    * Returns the value of the '<em><b>Priv</b></em>' attribute.
@@ -62,6 +63,32 @@ public interface Message extends AbstractMessage
    * @generated
    */
   void setPriv(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>By this name the message is referred to in the model.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
 
   /**
    * Returns the value of the '<em><b>Data</b></em>' containment reference.

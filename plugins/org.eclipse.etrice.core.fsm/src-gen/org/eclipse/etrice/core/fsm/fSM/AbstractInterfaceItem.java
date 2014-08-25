@@ -69,7 +69,7 @@ public interface AbstractInterfaceItem extends EObject
    * @model kind="operation"
    * @generated
    */
-  EList<AbstractMessage> getAllIncomingAbstractMessages();
+  EList<EObject> getAllIncomingAbstractMessages();
 
   /**
    * <!-- begin-user-doc -->
@@ -77,6 +77,6 @@ public interface AbstractInterfaceItem extends EObject
    * @model kind="operation"
    * @generated
    */
-  EList<AbstractMessage> getAllOutgoingAbstractMessages();
+  EList<EObject> getAllOutgoingAbstractMessages();
 
 } // AbstractInterfaceItem
