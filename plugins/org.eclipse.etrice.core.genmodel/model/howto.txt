@@ -1,3 +1,3 @@
 The etricegen.ecore model references the Room.ecore model.
 Therefore the etricegen.genmodel also has to reference the Room.genmodel
-(this can be done in the lower part of the Create Genmodel Wizzard).
+(this can be done in the lower part of the Create Genmodel Wizard).

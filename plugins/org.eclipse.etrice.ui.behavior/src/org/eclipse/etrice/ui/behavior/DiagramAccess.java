@@ -13,15 +13,16 @@
 package org.eclipse.etrice.ui.behavior;
 
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.ui.behavior.commands.PopulateDiagramCommand;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
-import org.eclipse.etrice.ui.behavior.support.DiagramUpdateFeature;
-import org.eclipse.etrice.ui.common.DiagramAccessBase;
-import org.eclipse.etrice.ui.common.commands.UpdateCommand;
-import org.eclipse.etrice.ui.behavior.DiagramTypeProvider;
+import org.eclipse.etrice.ui.behavior.fsm.commands.PopulateDiagramCommand;
+import org.eclipse.etrice.ui.behavior.fsm.support.DiagramUpdateFeature;
+import org.eclipse.etrice.ui.common.base.commands.UpdateCommand;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -29,12 +30,29 @@ import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 public class DiagramAccess extends DiagramAccessBase {
 
+	public DiagramAccess() {
+		super();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.base.support.DiagramAccessBase#injectMembers()
+	 */
+	@Override
+	protected void injectMembers() {
+		Activator activator = Activator.getDefault();
+		activator.getInjector().injectMembers(this);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getDiagramName(org.eclipse.etrice.core.room.StructureClass)
 	 */
 	@Override
-	public String getDiagramName(StructureClass sc) {
-		return "Behavior of "+sc.getName();
+	public String getDiagramName(EObject rootObject) {
+		if (rootObject instanceof ActorClass) {
+			ActorClass ac = (ActorClass) rootObject;
+			return "Behavior of "+ac.getName();
+		}
+		return "unknown";
 	}
 
 	/* (non-Javadoc)
@@ -57,17 +75,24 @@ public class DiagramAccess extends DiagramAccessBase {
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getFileExtension()
 	 */
 	@Override
-	protected String getFileExtension() {
-		return ".behavior";
+	protected String getDigramFileName(EObject rootObject) {
+		if (rootObject instanceof ActorClass) {
+			ActorClass ac = (ActorClass) rootObject;
+			String modelName = ((RoomModel) ac.eContainer()).getName();
+			return modelName+"."+ac.getName()+".behavior";
+		}
+		return "unknown";
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getInitialCommand(org.eclipse.etrice.core.room.StructureClass, org.eclipse.graphiti.mm.pictograms.Diagram, org.eclipse.emf.transaction.TransactionalEditingDomain)
 	 */
 	@Override
-	protected Command getInitialCommand(StructureClass ac, Diagram diagram,
-			TransactionalEditingDomain editingDomain) {
-		return new PopulateDiagramCommand(diagram, (ActorClass) ac, editingDomain);
+	protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain) {
+		if (rootObject instanceof ModelComponent) {
+			return new PopulateDiagramCommand(diagram, (ModelComponent) rootObject, Activator.getDefault().getInjector(), editingDomain);
+		}
+		return null;
 	}
 
 	/* (non-Javadoc)

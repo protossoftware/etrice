@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.doc.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance

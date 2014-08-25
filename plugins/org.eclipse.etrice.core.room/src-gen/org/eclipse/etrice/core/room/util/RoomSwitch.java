@@ -7,6 +7,10 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.IInterfaceItemOwner;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+
 import org.eclipse.etrice.core.room.*;
 
 /**
@@ -279,42 +283,14 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RoomPackage.PROTOCOL_SEMANTICS:
-      {
-        ProtocolSemantics protocolSemantics = (ProtocolSemantics)theEObject;
-        T result = caseProtocolSemantics(protocolSemantics);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.SEMANTICS_RULE:
-      {
-        SemanticsRule semanticsRule = (SemanticsRule)theEObject;
-        T result = caseSemanticsRule(semanticsRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.IN_SEMANTICS_RULE:
-      {
-        InSemanticsRule inSemanticsRule = (InSemanticsRule)theEObject;
-        T result = caseInSemanticsRule(inSemanticsRule);
-        if (result == null) result = caseSemanticsRule(inSemanticsRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.OUT_SEMANTICS_RULE:
-      {
-        OutSemanticsRule outSemanticsRule = (OutSemanticsRule)theEObject;
-        T result = caseOutSemanticsRule(outSemanticsRule);
-        if (result == null) result = caseSemanticsRule(outSemanticsRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case RoomPackage.ACTOR_CLASS:
       {
         ActorClass actorClass = (ActorClass)theEObject;
         T result = caseActorClass(actorClass);
         if (result == null) result = caseActorContainerClass(actorClass);
+        if (result == null) result = caseModelComponent(actorClass);
         if (result == null) result = caseStructureClass(actorClass);
+        if (result == null) result = caseIInterfaceItemOwner(actorClass);
         if (result == null) result = caseRoomClass(actorClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -323,6 +299,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         InterfaceItem interfaceItem = (InterfaceItem)theEObject;
         T result = caseInterfaceItem(interfaceItem);
+        if (result == null) result = caseAbstractInterfaceItem(interfaceItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -331,6 +308,7 @@ public class RoomSwitch<T> extends Switch<T>
         Port port = (Port)theEObject;
         T result = casePort(port);
         if (result == null) result = caseInterfaceItem(port);
+        if (result == null) result = caseAbstractInterfaceItem(port);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -346,6 +324,7 @@ public class RoomSwitch<T> extends Switch<T>
         SAP sap = (SAP)theEObject;
         T result = caseSAP(sap);
         if (result == null) result = caseInterfaceItem(sap);
+        if (result == null) result = caseAbstractInterfaceItem(sap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -354,6 +333,7 @@ public class RoomSwitch<T> extends Switch<T>
         SPP spp = (SPP)theEObject;
         T result = caseSPP(spp);
         if (result == null) result = caseInterfaceItem(spp);
+        if (result == null) result = caseAbstractInterfaceItem(spp);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -482,257 +462,6 @@ public class RoomSwitch<T> extends Switch<T>
         ActorRef actorRef = (ActorRef)theEObject;
         T result = caseActorRef(actorRef);
         if (result == null) result = caseActorContainerRef(actorRef);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.STATE_GRAPH_NODE:
-      {
-        StateGraphNode stateGraphNode = (StateGraphNode)theEObject;
-        T result = caseStateGraphNode(stateGraphNode);
-        if (result == null) result = caseStateGraphItem(stateGraphNode);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.STATE_GRAPH_ITEM:
-      {
-        StateGraphItem stateGraphItem = (StateGraphItem)theEObject;
-        T result = caseStateGraphItem(stateGraphItem);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.STATE:
-      {
-        State state = (State)theEObject;
-        T result = caseState(state);
-        if (result == null) result = caseStateGraphNode(state);
-        if (result == null) result = caseStateGraphItem(state);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.STATE_GRAPH:
-      {
-        StateGraph stateGraph = (StateGraph)theEObject;
-        T result = caseStateGraph(stateGraph);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.SIMPLE_STATE:
-      {
-        SimpleState simpleState = (SimpleState)theEObject;
-        T result = caseSimpleState(simpleState);
-        if (result == null) result = caseState(simpleState);
-        if (result == null) result = caseStateGraphNode(simpleState);
-        if (result == null) result = caseStateGraphItem(simpleState);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.REFINED_STATE:
-      {
-        RefinedState refinedState = (RefinedState)theEObject;
-        T result = caseRefinedState(refinedState);
-        if (result == null) result = caseState(refinedState);
-        if (result == null) result = caseStateGraphNode(refinedState);
-        if (result == null) result = caseStateGraphItem(refinedState);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.DETAIL_CODE:
-      {
-        DetailCode detailCode = (DetailCode)theEObject;
-        T result = caseDetailCode(detailCode);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TR_POINT:
-      {
-        TrPoint trPoint = (TrPoint)theEObject;
-        T result = caseTrPoint(trPoint);
-        if (result == null) result = caseStateGraphNode(trPoint);
-        if (result == null) result = caseStateGraphItem(trPoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRANSITION_POINT:
-      {
-        TransitionPoint transitionPoint = (TransitionPoint)theEObject;
-        T result = caseTransitionPoint(transitionPoint);
-        if (result == null) result = caseTrPoint(transitionPoint);
-        if (result == null) result = caseStateGraphNode(transitionPoint);
-        if (result == null) result = caseStateGraphItem(transitionPoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.ENTRY_POINT:
-      {
-        EntryPoint entryPoint = (EntryPoint)theEObject;
-        T result = caseEntryPoint(entryPoint);
-        if (result == null) result = caseTrPoint(entryPoint);
-        if (result == null) result = caseStateGraphNode(entryPoint);
-        if (result == null) result = caseStateGraphItem(entryPoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.EXIT_POINT:
-      {
-        ExitPoint exitPoint = (ExitPoint)theEObject;
-        T result = caseExitPoint(exitPoint);
-        if (result == null) result = caseTrPoint(exitPoint);
-        if (result == null) result = caseStateGraphNode(exitPoint);
-        if (result == null) result = caseStateGraphItem(exitPoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.CHOICE_POINT:
-      {
-        ChoicePoint choicePoint = (ChoicePoint)theEObject;
-        T result = caseChoicePoint(choicePoint);
-        if (result == null) result = caseStateGraphNode(choicePoint);
-        if (result == null) result = caseStateGraphItem(choicePoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRANSITION:
-      {
-        Transition transition = (Transition)theEObject;
-        T result = caseTransition(transition);
-        if (result == null) result = caseStateGraphItem(transition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.NON_INITIAL_TRANSITION:
-      {
-        NonInitialTransition nonInitialTransition = (NonInitialTransition)theEObject;
-        T result = caseNonInitialTransition(nonInitialTransition);
-        if (result == null) result = caseTransition(nonInitialTransition);
-        if (result == null) result = caseStateGraphItem(nonInitialTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRANSITION_CHAIN_START_TRANSITION:
-      {
-        TransitionChainStartTransition transitionChainStartTransition = (TransitionChainStartTransition)theEObject;
-        T result = caseTransitionChainStartTransition(transitionChainStartTransition);
-        if (result == null) result = caseNonInitialTransition(transitionChainStartTransition);
-        if (result == null) result = caseTransition(transitionChainStartTransition);
-        if (result == null) result = caseStateGraphItem(transitionChainStartTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.INITIAL_TRANSITION:
-      {
-        InitialTransition initialTransition = (InitialTransition)theEObject;
-        T result = caseInitialTransition(initialTransition);
-        if (result == null) result = caseTransition(initialTransition);
-        if (result == null) result = caseStateGraphItem(initialTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.CONTINUATION_TRANSITION:
-      {
-        ContinuationTransition continuationTransition = (ContinuationTransition)theEObject;
-        T result = caseContinuationTransition(continuationTransition);
-        if (result == null) result = caseNonInitialTransition(continuationTransition);
-        if (result == null) result = caseTransition(continuationTransition);
-        if (result == null) result = caseStateGraphItem(continuationTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRIGGERED_TRANSITION:
-      {
-        TriggeredTransition triggeredTransition = (TriggeredTransition)theEObject;
-        T result = caseTriggeredTransition(triggeredTransition);
-        if (result == null) result = caseTransitionChainStartTransition(triggeredTransition);
-        if (result == null) result = caseNonInitialTransition(triggeredTransition);
-        if (result == null) result = caseTransition(triggeredTransition);
-        if (result == null) result = caseStateGraphItem(triggeredTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.GUARDED_TRANSITION:
-      {
-        GuardedTransition guardedTransition = (GuardedTransition)theEObject;
-        T result = caseGuardedTransition(guardedTransition);
-        if (result == null) result = caseTransitionChainStartTransition(guardedTransition);
-        if (result == null) result = caseNonInitialTransition(guardedTransition);
-        if (result == null) result = caseTransition(guardedTransition);
-        if (result == null) result = caseStateGraphItem(guardedTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.CP_BRANCH_TRANSITION:
-      {
-        CPBranchTransition cpBranchTransition = (CPBranchTransition)theEObject;
-        T result = caseCPBranchTransition(cpBranchTransition);
-        if (result == null) result = caseNonInitialTransition(cpBranchTransition);
-        if (result == null) result = caseTransition(cpBranchTransition);
-        if (result == null) result = caseStateGraphItem(cpBranchTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.REFINED_TRANSITION:
-      {
-        RefinedTransition refinedTransition = (RefinedTransition)theEObject;
-        T result = caseRefinedTransition(refinedTransition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRANSITION_TERMINAL:
-      {
-        TransitionTerminal transitionTerminal = (TransitionTerminal)theEObject;
-        T result = caseTransitionTerminal(transitionTerminal);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.STATE_TERMINAL:
-      {
-        StateTerminal stateTerminal = (StateTerminal)theEObject;
-        T result = caseStateTerminal(stateTerminal);
-        if (result == null) result = caseTransitionTerminal(stateTerminal);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TR_POINT_TERMINAL:
-      {
-        TrPointTerminal trPointTerminal = (TrPointTerminal)theEObject;
-        T result = caseTrPointTerminal(trPointTerminal);
-        if (result == null) result = caseTransitionTerminal(trPointTerminal);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.SUB_STATE_TR_POINT_TERMINAL:
-      {
-        SubStateTrPointTerminal subStateTrPointTerminal = (SubStateTrPointTerminal)theEObject;
-        T result = caseSubStateTrPointTerminal(subStateTrPointTerminal);
-        if (result == null) result = caseTransitionTerminal(subStateTrPointTerminal);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.CHOICEPOINT_TERMINAL:
-      {
-        ChoicepointTerminal choicepointTerminal = (ChoicepointTerminal)theEObject;
-        T result = caseChoicepointTerminal(choicepointTerminal);
-        if (result == null) result = caseTransitionTerminal(choicepointTerminal);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.TRIGGER:
-      {
-        Trigger trigger = (Trigger)theEObject;
-        T result = caseTrigger(trigger);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.MESSAGE_FROM_IF:
-      {
-        MessageFromIf messageFromIf = (MessageFromIf)theEObject;
-        T result = caseMessageFromIf(messageFromIf);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RoomPackage.GUARD:
-      {
-        Guard guard = (Guard)theEObject;
-        T result = caseGuard(guard);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1157,70 +886,6 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Protocol Semantics</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Protocol Semantics</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseProtocolSemantics(ProtocolSemantics object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Semantics Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Semantics Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSemanticsRule(SemanticsRule object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>In Semantics Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>In Semantics Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseInSemanticsRule(InSemanticsRule object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Out Semantics Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Out Semantics Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOutSemanticsRule(OutSemanticsRule object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Actor Class</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1589,465 +1254,49 @@ public class RoomSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State Graph Node</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>IInterface Item Owner</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Graph Node</em>'.
+   * @return the result of interpreting the object as an instance of '<em>IInterface Item Owner</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStateGraphNode(StateGraphNode object)
+  public T caseIInterfaceItemOwner(IInterfaceItemOwner object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State Graph Item</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Model Component</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Graph Item</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Model Component</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStateGraphItem(StateGraphItem object)
+  public T caseModelComponent(ModelComponent object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>State</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Interface Item</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Interface Item</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseState(State object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>State Graph</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Graph</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStateGraph(StateGraph object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Simple State</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Simple State</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSimpleState(SimpleState object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Refined State</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Refined State</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRefinedState(RefinedState object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Detail Code</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Detail Code</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDetailCode(DetailCode object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Tr Point</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Tr Point</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTrPoint(TrPoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Point</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Point</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionPoint(TransitionPoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Entry Point</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entry Point</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEntryPoint(EntryPoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Exit Point</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Exit Point</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExitPoint(ExitPoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Choice Point</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Choice Point</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseChoicePoint(ChoicePoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransition(Transition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Non Initial Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Non Initial Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNonInitialTransition(NonInitialTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Chain Start Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Chain Start Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionChainStartTransition(TransitionChainStartTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Initial Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Initial Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseInitialTransition(InitialTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Continuation Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Continuation Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseContinuationTransition(ContinuationTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Triggered Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Triggered Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTriggeredTransition(TriggeredTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Guarded Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Guarded Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseGuardedTransition(GuardedTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>CP Branch Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>CP Branch Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCPBranchTransition(CPBranchTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Refined Transition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Refined Transition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRefinedTransition(RefinedTransition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Transition Terminal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Transition Terminal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTransitionTerminal(TransitionTerminal object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>State Terminal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>State Terminal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStateTerminal(StateTerminal object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Tr Point Terminal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Tr Point Terminal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTrPointTerminal(TrPointTerminal object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Sub State Tr Point Terminal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Sub State Tr Point Terminal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSubStateTrPointTerminal(SubStateTrPointTerminal object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Choicepoint Terminal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Choicepoint Terminal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseChoicepointTerminal(ChoicepointTerminal object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Trigger</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Trigger</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTrigger(Trigger object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Message From If</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Message From If</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMessageFromIf(MessageFromIf object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Guard</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Guard</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseGuard(Guard object)
+  public T caseAbstractInterfaceItem(AbstractInterfaceItem object)
   {
     return null;
   }

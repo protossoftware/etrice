@@ -26,6 +26,7 @@ import com.google.inject.Binder;
  */
 public class ETPhysRuntimeModule extends org.eclipse.etrice.core.etphys.AbstractETPhysRuntimeModule {
 
+	@SuppressWarnings("restriction")
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)

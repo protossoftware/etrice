@@ -7,16 +7,21 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
-import org.eclipse.etrice.core.room.RefinedState;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
-import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.QuickFixDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.StringToDetailCode;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -25,7 +30,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
+public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog implements IStatePropertyDialog {
 
 	class NameValidator implements IValidator {
 
@@ -34,7 +39,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = ValidationUtil.isUniqueName(state, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(state, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
@@ -66,7 +71,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		super(shell, edit?"Edit State":"View State", ac);
 		this.state = s;
 		
-		inherited = RoomHelpers.getActorClass(s)!=ac;
+		inherited = SupportUtil.getInstance().getRoomHelpers().getActorClass(s)!=ac;
 	}
 
 	@Override
@@ -81,7 +86,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		if (state instanceof SimpleState && !inherited) {
 			NameValidator nv = new NameValidator();
 			
-			Text name = createText(body, "&Name:", state, RoomPackage.eINSTANCE.getSimpleState_Name(), nv);
+			Text name = createText(body, "&Name:", state, FSMPackage.eINSTANCE.getSimpleState_Name(), nv);
 			configureMemberAware(name);
 			
 			createDecorator(name, "invalid name");
@@ -99,10 +104,12 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		DetailCodeToString m2s = new DetailCodeToString();
 		StringToDetailCode s2m = new StringToDetailCode();
 		
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		
 		if (inherited) {
-			String code = RoomHelpers.getDetailCode(state.getEntryCode());
+			String code = roomHelpers.getDetailCode(state.getEntryCode());
 			if (state instanceof RefinedState)
-				code += RoomHelpers.getBaseEntryCode((RefinedState)state);
+				code += roomHelpers.getBaseEntryCode((RefinedState)state);
 			Text entry = createFixedText(body, "Entry Code:", code, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
@@ -117,7 +124,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		else {
 			if (state instanceof RefinedState)
 			{
-				String code = RoomHelpers.getBaseEntryCode((RefinedState)state);
+				String code = roomHelpers.getBaseEntryCode((RefinedState)state);
 				Text entry = createFixedText(body, "Base Entry Code:", code, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -131,7 +138,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			}
 			
 			{
-				Text entry = createText(body, "&Entry Code:", state, RoomPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
+				Text entry = createText(body, "&Entry Code:", state, FSMPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
 				configureMemberAware(entry, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -146,9 +153,9 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		}
 		
 		if (inherited) {
-			String code = RoomHelpers.getDetailCode(state.getExitCode());
+			String code = roomHelpers.getDetailCode(state.getExitCode());
 			if (state instanceof RefinedState)
-				code = RoomHelpers.getBaseExitCode((RefinedState)state) + code;
+				code = roomHelpers.getBaseExitCode((RefinedState)state) + code;
 			Text entry = createFixedText(body, "Exit Code:", code, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
@@ -162,7 +169,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 		}
 		else {
 			{
-				Text exit = createText(body, "E&xit Code:", state, RoomPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
+				Text exit = createText(body, "E&xit Code:", state, FSMPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
 				configureMemberAware(exit, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -177,7 +184,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			
 			if (state instanceof RefinedState)
 			{
-				String code = RoomHelpers.getBaseExitCode((RefinedState)state);
+				String code = roomHelpers.getBaseExitCode((RefinedState)state);
 				Text entry = createFixedText(body, "Base Exit Code:", code, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -191,10 +198,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog {
 			}
 		}
 		
-		ActorClass ac = RoomHelpers.getActorClass(state);
-		if (ac.getCommType()!=ActorCommunicationType.EVENT_DRIVEN)
+		ActorClass ac = roomHelpers.getActorClass(state);
+		if (ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN)
 		{
-			Text dotxt = createText(body, "&Do Code:", state, RoomPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
+			Text dotxt = createText(body, "&Do Code:", state, FSMPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
 			configureMemberAware(dotxt, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;

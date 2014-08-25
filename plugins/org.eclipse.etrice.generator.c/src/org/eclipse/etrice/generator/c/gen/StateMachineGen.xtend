@@ -15,11 +15,9 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {

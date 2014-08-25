@@ -17,6 +17,12 @@ import org.eclipse.etrice.core.common.base.AnnotationAttribute;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider;
+import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
@@ -29,7 +35,6 @@ import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.ExternalType;
-import org.eclipse.etrice.core.room.InSemanticsRule;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
@@ -38,16 +43,11 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.ProtocolSemantics;
-import org.eclipse.etrice.core.room.RefinedState;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.SemanticsRule;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.State;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -63,6 +63,12 @@ import com.google.inject.Inject;
  */
 public class RoomLabelProvider extends BaseLabelProvider {
 
+	@Inject
+	private RoomHelpers roomHelpers;
+
+	@Inject
+	private RoomNameProvider roomNameProvider;
+	
 	@Inject
 	public RoomLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
@@ -162,7 +168,7 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String image(Port p) {
-		boolean relay = RoomHelpers.isRelay(p);
+		boolean relay = roomHelpers.isRelay(p);
 		if (relay)
 			if (p.isConjugated())
 				if (p.isReplicated())
@@ -243,15 +249,15 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String text(ActorClass ac) {
-		String base = ac.getBase()!=null? " extends "+ac.getBase().getName():"";
+		String base = ac.getBase()!=null? " extends "+ac.getActorBase().getName():"";
 		return ac.getName()+base;
 	}
 	
 	String text(Port p) {
 		String location = null;
-		if (RoomHelpers.isInternal(p))
+		if (roomHelpers.isInternal(p))
 			location = "internal";
-		else if (RoomHelpers.isExternal(p)) {
+		else if (roomHelpers.isExternal(p)) {
 			location = "external";
 		}
 		else
@@ -263,7 +269,7 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	}
 	
 	String text(Binding bind) {
-		return RoomNameProvider.getDisplayName(bind);
+		return roomNameProvider.getDisplayName(bind);
 	}
 	
 	String text(ExternalPort ep) {
@@ -312,8 +318,8 @@ public class RoomLabelProvider extends BaseLabelProvider {
 	StyledString text(Operation op) {
 		/* TODO TS: create complete signature including return type and ref */
 
-		String signature = RoomHelpers.getSignature(op);
-		String special = RoomHelpers.isConstructor(op)? "ctor " : RoomHelpers.isDestructor(op)? "dtor " : "";
+		String signature = roomNameProvider.getSignature(op);
+		String special = roomHelpers.isConstructor(op)? "ctor " : roomHelpers.isDestructor(op)? "dtor " : "";
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null) {
 		}
 		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";

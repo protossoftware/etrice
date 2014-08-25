@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.eclipse.etrice.generator.launch.java;singleton:=true
 Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.etrice.generator.launch.java.Activator
 Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.5.0",
+ org.eclipse.etrice.generator.fsm;bundle-version="0.5.0",
  org.eclipse.etrice.generator.java;bundle-version="0.5.0",
  org.eclipse.etrice.generator.launch;bundle-version="0.5.0",
  org.eclipse.ui,
@@ -14,7 +15,7 @@ Require-Bundle: org.eclipse.etrice.generator;bundle-version="0.5.0",
  org.eclipse.jdt.ui;bundle-version="3.7.0",
  org.eclipse.jdt.core;bundle-version="3.7.0",
  org.eclipse.core.variables;bundle-version="3.2.500",
- org.eclipse.etrice.generator.ui;bundle-version="0.3.0"
+ org.eclipse.etrice.generator.ui;bundle-version="0.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.jdt.launching,

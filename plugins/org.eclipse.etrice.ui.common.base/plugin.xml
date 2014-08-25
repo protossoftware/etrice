@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.eclipse.etrice.ui.common.base.concurrency.ConcurrentModificationObserver$Initializer">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.etrice.ui.common.base.refactoring.DiagramRenameParticipant"
+            id="org.eclipse.etrice.ui.common.renameParticipant"
+            name="eTrice Diagram Rename Participant">
+         <enablement>
+            <with
+                  variable="element">
+               <adapt
+                     type="org.eclipse.core.resources.IFile">
+                  <test
+                        property="org.eclipse.core.resources.extension"
+                        value="room">
+                  </test>
+               </adapt>
+            </with>
+         </enablement>
+      </renameParticipant>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceInitializer">
+      </initializer>
+   </extension>
+
+</plugin>

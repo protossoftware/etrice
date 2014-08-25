@@ -12,7 +12,8 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
+ * <br>This is a concrete sub class of an {@link AbstractMessage}.
+ * A message in ROOM is part of a {@link ProtocolClass}. Messages are exchanged via {@link Port}s.
  * For event driven protocols the message is an object that is deliverd using a message
  * service of the runtime. For data driven systems only messages holding data are valid. In this
  * case the conjugate port is the one holding (and writing) the data and the regular port is

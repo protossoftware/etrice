@@ -24,7 +24,7 @@ import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 
 /**
- * This class provides a convenience methods for eTrice's common base language 
+ * This class provides convenience methods for eTrice's common base language 
  * elements, such as Annotations and Literals.
  */
 public class BaseHelpers {
@@ -37,7 +37,7 @@ public class BaseHelpers {
 	 * 
 	 * @return <code>true</code> if the named annotation is present in a list of {@link Annotation}s
 	 */
-	public static boolean isAnnotationPresent(List<Annotation> annotations, String name) {
+	public boolean isAnnotationPresent(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
 			if (annotation.getType().getName().equals(name))
 				return true;
@@ -54,7 +54,7 @@ public class BaseHelpers {
 	 * 
 	 * @return a list of the {@link Annotation} attributes of the named annotation
 	 */
-	public static List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
+	public List<KeyValue> getAttributes(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
 			if (annotation.getType().getName().equals(name))
 				return annotation.getAttributes();
@@ -71,7 +71,7 @@ public class BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 */
-	public static boolean isAttributePresent(List<Annotation> annotations, String name,
+	public boolean isAttributePresent(List<Annotation> annotations, String name,
 			String key) {
 				List<KeyValue> attributes = getAttributes(annotations, name);
 				for (KeyValue attrib : attributes) {
@@ -90,7 +90,7 @@ public class BaseHelpers {
 	 * 
 	 * @return the string value of the attribute or an empty string if not found
 	 */
-	public static String getAttribute(List<Annotation> annotations, String name, String key) {
+	public String getAttribute(List<Annotation> annotations, String name, String key) {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
 			if (attrib.getKey().equals(key))
@@ -107,7 +107,7 @@ public class BaseHelpers {
 	 * 
 	 * @return <code>true</code> if such an attribute is present
 	 */
-	public static boolean isAttributePresent(Annotation annotation, String key) {
+	public boolean isAttributePresent(Annotation annotation, String key) {
 		for (KeyValue attrib : annotation.getAttributes()) {
 			if (attrib.getKey().equals(key))
 				return true;
@@ -123,7 +123,7 @@ public class BaseHelpers {
 	 * 
 	 * @return the string value of the attribute or an empty string if not found
 	 */
-	public static String getAttribute(Annotation annotation, String key) {
+	public String getAttribute(Annotation annotation, String key) {
 		for (KeyValue attrib : annotation.getAttributes()) {
 			if (attrib.getKey().equals(key))
 				return literalToString(attrib.getValue());
@@ -135,7 +135,7 @@ public class BaseHelpers {
 	 * @param l a {@link Literal}
 	 * @return a string representation of the literal
 	 */
-	public static String literalToString(Literal l) {
+	public String literalToString(Literal l) {
 		if (l instanceof BooleanLiteral) {
 			return ((BooleanLiteral) l).isIsTrue()? "true":"false";
 		}

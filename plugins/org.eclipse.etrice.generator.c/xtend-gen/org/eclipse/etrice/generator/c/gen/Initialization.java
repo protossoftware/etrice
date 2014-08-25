@@ -43,6 +43,10 @@ public class Initialization {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
@@ -169,7 +173,7 @@ public class Initialization {
           _builder.append("{");
           _builder.newLine();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
             boolean _hasElements = false;
             for(final Attribute subA : _allAttributes) {
               if (!_hasElements) {
@@ -320,7 +324,7 @@ public class Initialization {
         if (instance instanceof InterfaceItemInstance) {
           _matched=true;
           InterfaceItem _interfaceItem = ((InterfaceItemInstance)instance).getInterfaceItem();
-          PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
+          PortClass _portClass = this._roomHelpers.getPortClass(_interfaceItem);
           _switchResult = this._typeHelpers.getAttrClassConfigValue(path, _portClass);
         }
       }

@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.HashMap;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
@@ -23,8 +24,8 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -38,6 +39,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ActorClassDataGen {
   @Inject
   private IGeneratorFileIo fileIO;
+  
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
   
   @Inject
   @Extension
@@ -106,11 +111,11 @@ public class ActorClassDataGen {
       final String clsname = (_name + "_DataObject");
       final EList<RoomModel> models = root.getReferencedModels(ac);
       String _xifexpression = null;
-      ActorClass _base = ac.getBase();
+      ModelComponent _base = ac.getBase();
       boolean _notEquals = (!Objects.equal(_base, null));
       if (_notEquals) {
-        ActorClass _base_1 = ac.getBase();
-        String _name_1 = _base_1.getName();
+        ActorClass _actorBase = ac.getActorBase();
+        String _name_1 = _actorBase.getName();
         String _plus = ("extends " + _name_1);
         _xifexpression = (_plus + "_DataObject ");
       } else {
@@ -145,7 +150,7 @@ public class ActorClassDataGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\t");
           _builder.append("// state and history");
@@ -168,7 +173,7 @@ public class ActorClassDataGen {
       _builder.append("\t");
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine_1 = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine_1 = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine_1) {
           _builder.append("\t");
           _builder.append("public int getState() {");

@@ -33,10 +33,10 @@ import org.eclipse.etrice.core.config.DynamicConfig;
 import org.eclipse.etrice.core.config.EnumConfigValue;
 import org.eclipse.etrice.core.config.LiteralConfigValue;
 import org.eclipse.etrice.core.config.SubSystemConfig;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.EnumLiteral;
@@ -45,11 +45,16 @@ import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.config.util.DataConfigurationHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class DataConfiguration implements IDataConfiguration {
+  @Inject
+  @Extension
+  protected DataConfigurationHelper _dataConfigurationHelper;
+  
   @Inject
   protected ILogger logger;
   
@@ -63,7 +68,7 @@ public class DataConfiguration implements IDataConfiguration {
   }
   
   public boolean setResources(final ResourceSet resource, final ILogger logger) {
-    return DataConfigurationHelper.setConfigModels(resource, logger);
+    return this._dataConfigurationHelper.setConfigModels(resource, logger);
   }
   
   public String getAttrClassConfigValue(final ActorClass actor, final List<Attribute> path) {
@@ -116,7 +121,7 @@ public class DataConfiguration implements IDataConfiguration {
       String _stringPath = this.toStringPath(path);
       _builder.append(_stringPath, "");
       String id = _builder.toString();
-      _xblockexpression = DataConfigurationHelper.actorClassAttrMap.get(id);
+      _xblockexpression = this._dataConfigurationHelper.actorClassAttrMap.get(id);
     }
     return _xblockexpression;
   }
@@ -140,7 +145,7 @@ public class DataConfiguration implements IDataConfiguration {
       String _stringPath = this.toStringPath(path);
       _builder.append(_stringPath, "");
       String id = _builder.toString();
-      AttrClassConfig _get = DataConfigurationHelper.protocolClassAttrMap.get(id);
+      AttrClassConfig _get = this._dataConfigurationHelper.protocolClassAttrMap.get(id);
       ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
@@ -178,7 +183,7 @@ public class DataConfiguration implements IDataConfiguration {
       String _plus = (_path + "/");
       String _stringPath = this.toStringPath(path);
       String id = (_plus + _stringPath);
-      AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(id);
+      AttrInstanceConfig _get = this._dataConfigurationHelper.actorInstanceAttrMap.get(id);
       ConfigValueArray _value = null;
       if (_get!=null) {
         _value=_get.getValue();
@@ -197,7 +202,7 @@ public class DataConfiguration implements IDataConfiguration {
     String _plus = (_path + "/");
     String _stringPath = this.toStringPath(path);
     String _plus_1 = (_plus + _stringPath);
-    AttrInstanceConfig _get = DataConfigurationHelper.actorInstanceAttrMap.get(_plus_1);
+    AttrInstanceConfig _get = this._dataConfigurationHelper.actorInstanceAttrMap.get(_plus_1);
     ConfigValueArray _value = null;
     if (_get!=null) {
       _value=_get.getValue();
@@ -288,7 +293,7 @@ public class DataConfiguration implements IDataConfiguration {
   public List<Attribute> getDynConfigReadAttributes(final ActorInstance ai) {
     final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
+    List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {
@@ -307,7 +312,7 @@ public class DataConfiguration implements IDataConfiguration {
   public List<Attribute> getDynConfigWriteAttributes(final ActorInstance ai) {
     final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
+    List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {
@@ -407,12 +412,12 @@ public class DataConfiguration implements IDataConfiguration {
   
   private SubSystemConfig getConfig(final SubSystemInstance cc) {
     String _path = cc.getPath();
-    return DataConfigurationHelper.subSystemConfigMap.get(_path);
+    return this._dataConfigurationHelper.subSystemConfigMap.get(_path);
   }
   
   public List<Attribute> getDynConfigReadAttributes(final ActorClass actor) {
     final HashSet<Attribute> result = new HashSet<Attribute>();
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
+    final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {
@@ -430,7 +435,7 @@ public class DataConfiguration implements IDataConfiguration {
   
   public List<Attribute> getDynConfigWriteAttributes(final ActorClass actor) {
     final HashSet<Attribute> result = new HashSet<Attribute>();
-    List<AttrInstanceConfig> configs = DataConfigurationHelper.dynActorClassAttrMap.get(actor);
+    final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
         public void apply(final AttrInstanceConfig c) {

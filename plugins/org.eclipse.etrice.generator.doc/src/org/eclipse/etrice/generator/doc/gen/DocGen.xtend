@@ -16,7 +16,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
 import java.util.List
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
@@ -27,13 +27,13 @@ import org.eclipse.etrice.core.room.LogicalSystem
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StandardOperation
-import org.eclipse.etrice.core.room.State
+import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.CodegenHelpers
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.RoomClass
@@ -41,6 +41,8 @@ import org.eclipse.etrice.core.room.RoomClass
 @Singleton
 class DocGen {
 
+	@Inject extension RoomHelpers
+	@Inject extension CodegenHelpers
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger

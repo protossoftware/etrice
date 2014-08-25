@@ -24,14 +24,15 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.core.room.EnumerationType
 
 @Singleton
 class Initialization {
 
-	@Inject extension TypeHelpers typeHelpers
+	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
+	@Inject extension TypeHelpers typeHelpers
 	@Inject extension JavaExtensions languageExt
 	@Inject extension ProcedureHelpers procedureHelpers
 

@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -58,16 +58,16 @@ import com.google.inject.Injector;
 public class ChangeDiagramInputJob extends Job {
 	
 	@Inject
-	private ILabelProvider roomLabelProvider;
+	private ILabelProvider labelProvider;
 	
 	private Diagram diagram;
-	private RoomDiagramEditor editor;
+	private DiagramEditorBase editor;
 	private boolean close, saveOnClose, reOpen;
 	
 	private IFile roomFile;
 	private StructureClass sc;
 	
-	public ChangeDiagramInputJob(String name, RoomDiagramEditor editor) {
+	public ChangeDiagramInputJob(String name, DiagramEditorBase editor) {
 		super(name);
 		this.editor = editor;
 		
@@ -78,7 +78,7 @@ public class ChangeDiagramInputJob extends Job {
 		close = saveOnClose = reOpen = true;
 	}
 	
-	public ChangeDiagramInputJob(String name, RoomDiagramEditor editor, boolean close, boolean saveOnClose, boolean reOpen) {
+	public ChangeDiagramInputJob(String name, DiagramEditorBase editor, boolean close, boolean saveOnClose, boolean reOpen) {
 		this(name, editor);
 		this.close = close;
 		this.saveOnClose = saveOnClose;
@@ -227,7 +227,7 @@ public class ChangeDiagramInputJob extends Job {
 	
 	private StructureClass selectSc(RoomModel model){
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, roomLabelProvider);
+		ElementListSelectionDialog dialog = new ElementListSelectionDialog(shell, labelProvider);
 		dialog.setMultipleSelection(false);
 		dialog.setMessage("Select a new ROOM class");
 		dialog.setFilter("*");

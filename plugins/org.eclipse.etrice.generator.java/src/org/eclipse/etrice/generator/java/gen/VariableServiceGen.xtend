@@ -28,12 +28,12 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.common.converter.TimeConverter
 
@@ -46,7 +46,8 @@ class VariableServiceGen {
 	@Inject IDataConfiguration configExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
-	 
+	@Inject extension RoomHelpers
+	
 	def doGenerate(Root root, SubSystemInstance ssi) {
 		val nr = ETMapUtil::getNodeRef(ssi)
 		val clsname = nr.getJavaClassName(ssi)

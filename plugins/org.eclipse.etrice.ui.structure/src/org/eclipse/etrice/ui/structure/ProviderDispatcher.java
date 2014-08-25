@@ -24,7 +24,7 @@ import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
-import org.eclipse.etrice.ui.common.support.RemoveBendpointsFeature;
+import org.eclipse.etrice.ui.common.base.support.RemoveBendpointsFeature;
 import org.eclipse.etrice.ui.structure.support.ActorContainerRefSupport;
 import org.eclipse.etrice.ui.structure.support.BindingSupport;
 import org.eclipse.etrice.ui.structure.support.DiagramUpdateFeature;

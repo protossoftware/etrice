@@ -17,8 +17,8 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -27,8 +27,8 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,6 +39,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class DataClassGen {
   @Inject
   private IGeneratorFileIo fileIO;
+  
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
   
   @Inject
   @Extension
@@ -136,7 +140,7 @@ public class DataClassGen {
     _builder.append("typedef struct {");
     _builder.newLine();
     _builder.append("\t");
-    List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
+    List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
     CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
     _builder.append(_attributes, "\t");
     _builder.newLineIfNotEmpty();
@@ -147,7 +151,7 @@ public class DataClassGen {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(dc);
+      List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
       for(final Attribute a : _allAttributes_1) {
         {
           String _defaultValueLiteral = a.getDefaultValueLiteral();
@@ -248,7 +252,7 @@ public class DataClassGen {
       _builder.append("/* operations */");
       _builder.newLine();
       {
-        List<Operation> _allOperations = RoomHelpers.getAllOperations(dc);
+        List<Operation> _allOperations = this._roomHelpers.getAllOperations(dc);
         for(final Operation op : _allOperations) {
           final CharSequence args = this.argList(op);
           _builder.newLineIfNotEmpty();
@@ -281,7 +285,7 @@ public class DataClassGen {
       _builder.append("/* attributes */");
       _builder.newLine();
       {
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(dc);
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
         for(final Attribute a : _allAttributes) {
           _builder.append("#define ");
           String _name_6 = a.getName();

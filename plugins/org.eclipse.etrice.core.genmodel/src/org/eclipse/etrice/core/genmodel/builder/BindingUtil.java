@@ -21,12 +21,12 @@ import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -43,6 +43,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *
  */
 public class BindingUtil {
+	
+	private RoomHelpers roomHelpers = new RoomHelpers();
 	
 	private static class BindingInfo {
 		private Binding binding;
@@ -108,7 +110,7 @@ public class BindingUtil {
 			else {
 				assert(false): "unexpected sub type";
 			}
-			bindings.addAll(RoomHelpers.getAllBindings(ac));
+			bindings.addAll(roomHelpers.getAllBindings(ac));
 		}
 	}
 

@@ -9,28 +9,32 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.Guard;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.CPBranchTransition;
 import org.eclipse.etrice.core.room.CommunicationType;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.Guard;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RefinedTransition;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
-import org.eclipse.etrice.core.validation.ValidationUtil.Result;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.StringToDetailCode;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -61,14 +65,21 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog {
+public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog implements ITransitionPropertyDialog {
 	
-	private class TriggerContentProvider implements IStructuredContentProvider {
+	protected static class TriggerContentProvider implements IStructuredContentProvider {
+		
+		private Transition trans;
+		
 		@Override
 		public void dispose() {}
 		
 		@Override
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {}
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			if (newInput instanceof Transition) {
+				trans = (Transition) newInput;
+			}
+		}
 
 		@Override
 		public Object[] getElements(Object inputElement) {
@@ -80,20 +91,20 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 	}
 
-	private class TriggerLabelProvider extends LabelProvider implements
+	protected static class TriggerLabelProvider extends LabelProvider implements
 			IBaseLabelProvider {
 
 		@Override
 		public String getText(Object element) {
 			if (element instanceof Trigger) {
 				Trigger trig = (Trigger) element;
-				return RoomNameProvider.getTriggerLabel(trig);
+				return SupportUtil.getInstance().getFSMNameProvider().getTriggerLabel(trig);
 			}
 			return super.getText(element);
 		}
 	}
 
-	private class MessageFromInterfaceContentProvider implements IStructuredContentProvider {
+	protected static class MessageFromInterfaceContentProvider implements IStructuredContentProvider {
 		private Trigger currentTrigger = null;
 
 		@Override
@@ -103,6 +114,8 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput instanceof Trigger)
 				currentTrigger = (Trigger) newInput;
+			else
+				currentTrigger = null;
 		}
 
 		@Override
@@ -119,34 +132,41 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 	}
 
-	private class MessageFromInterfaceLabelProvider extends LabelProvider implements
+	protected static class MessageFromInterfaceLabelProvider extends LabelProvider implements
 			IBaseLabelProvider {
 
 		@Override
 		public String getText(Object element) {
 			if (element instanceof MessageFromIf) {
 				MessageFromIf mif = (MessageFromIf) element;
-				return RoomNameProvider.getMsgFromIfLabel(mif);
+				return SupportUtil.getInstance().getFSMNameProvider().getMsgFromIfLabel(mif);
 			}
 			return super.getText(element);
 		}
 	}
 
-	private class NameValidator implements IValidator {
+	protected static class NameValidator implements IValidator {
 
+		private Transition trans;
+
+		public NameValidator(Transition trans) {
+			this.trans = trans;
+		}
+		
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = ValidationUtil.isUniqueName(trans, name);
+				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(trans, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
 			return Status.OK_STATUS;
 		}
 	}
-	private class GuardValidator implements IValidator {
+	
+	protected static class GuardValidator implements IValidator {
 
 		private String text;
 		
@@ -162,7 +182,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 					return ValidationStatus.error(text);
 			}
 			else if (value instanceof DetailCode) {
-				if (RoomHelpers.getDetailCode((DetailCode)value).trim().isEmpty())
+				if (SupportUtil.getInstance().getFSMHelpers().getDetailCode((DetailCode)value).trim().isEmpty())
 					return ValidationStatus.error(text);
 			}
 			return Status.OK_STATUS;
@@ -193,24 +213,27 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		super(shell, "Edit Transition", ac);
 		this.trans = trans;
 
+		Activator.getDefault().getInjector().injectMembers(this);
+		
 		m2s = new DetailCodeToString();
 		m2s_null_empty = new DetailCodeToString(true);
 		s2m = new StringToDetailCode();
 		s2m_not_null = new StringToDetailCode(false);
 		
 		interfaceItems = new ArrayList<InterfaceItem>();
-		for(InterfaceItem item : RoomHelpers.getAllInterfaceItems(ac)){
-			ProtocolClass pc = RoomHelpers.getProtocol(item);
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		for(InterfaceItem item : roomHelpers.getAllInterfaceItems(ac)){
+			ProtocolClass pc = roomHelpers.getProtocol(item);
 			if(pc != null && pc.getCommType() == CommunicationType.EVENT_DRIVEN)
 				interfaceItems.add(item);
 		}
 		
-		inherited = RoomHelpers.getActorClass(trans)!=ac;
+		inherited = roomHelpers.getActorClass(trans)!=ac;
 		
 		refined = null;
 		if (inherited) {
-			if (getActorClass().getStateMachine()!=null)
-				for (RefinedTransition rt : getActorClass().getStateMachine().getRefinedTransitions()) {
+			if (getModelComponent().getStateMachine()!=null)
+				for (RefinedTransition rt : getModelComponent().getStateMachine().getRefinedTransitions()) {
 					if (rt.getTarget()==trans) {
 						refined = rt;
 						break;
@@ -231,13 +254,13 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	protected void createContent(IManagedForm mform, Composite body, DataBindingContext bindingContext) {
 		
 		if (!(trans instanceof InitialTransition)) {
-			NameValidator nv = new NameValidator();
+			NameValidator nv = new NameValidator(trans);
 			
 			if (inherited) {
 				createFixedText(body, "&Name:", trans.getName(), false);
 			}
 			else {
-				Text name = createText(body, "&Name:", trans, RoomPackage.eINSTANCE.getTransition_Name(), nv);
+				Text name = createText(body, "&Name:", trans, FSMPackage.eINSTANCE.getTransition_Name(), nv);
 				configureMemberAware(name);
 				
 				createDecorator(name, "invalid name");
@@ -270,16 +293,18 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				triggerError  = true;
 			}
 		}
+		
+		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		if (trans instanceof GuardedTransition) {
 			if (inherited) {
-				String code = RoomHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				String code = fsmHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
 				createFixedText(body, "&Guard:", code, true);
 			}
 			else {
 				GuardValidator gv = new GuardValidator("guard must not be empty");
 				
-				Text cond = createText(body, "&Guard:", trans, RoomPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
+				Text cond = createText(body, "&Guard:", trans, FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv, s2m_not_null, m2s_null_empty, true);
 				configureMemberAware(cond, true, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -291,13 +316,13 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (trans instanceof CPBranchTransition) {
 			if (inherited) {
-				String code = RoomHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
+				String code = fsmHelpers.getDetailCode(((CPBranchTransition) trans).getCondition());
 				createFixedText(body, "&Condition", code, true);
 			}
 			else {
 				GuardValidator gv = new GuardValidator("condition must not be empty");
 				
-				Text cond = createText(body, "&Condition:", trans, RoomPackage.eINSTANCE.getCPBranchTransition_Condition(), gv, s2m_not_null, m2s_null_empty, true);
+				Text cond = createText(body, "&Condition:", trans, FSMPackage.eINSTANCE.getCPBranchTransition_Condition(), gv, s2m_not_null, m2s_null_empty, true);
 				configureMemberAware(cond, true, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -308,7 +333,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 
 		{
-			String code = RoomHelpers.getInheritedActionCode(trans, getActorClass());
+			String code = fsmHelpers.getInheritedActionCode(trans, getModelComponent());
 			if (code!=null){
 				Text baseActionCode = createFixedText(body, "Base Action Code:", code, true);
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);
@@ -317,7 +342,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		if (inherited) {
 			if (refined!=null) {
-				Text action = createText(body, "&Action Code:", refined, RoomPackage.eINSTANCE.getRefinedTransition_Action(), null, s2m, m2s, true);
+				Text action = createText(body, "&Action Code:", refined, FSMPackage.eINSTANCE.getRefinedTransition_Action(), null, s2m, m2s, true);
 				configureMemberAware(action, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
@@ -327,7 +352,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		else
 		{
-			Text action = createText(body, "&Action Code:", trans, RoomPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
+			Text action = createText(body, "&Action Code:", trans, FSMPackage.eINSTANCE.getTransition_Action(), null, s2m, m2s, true);
 			configureMemberAware(action, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
@@ -360,7 +385,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			return false;
 		
 		for (InterfaceItem item : interfaceItems) {
-			if (!RoomHelpers.getMessageListDeep(item, false).isEmpty())
+			if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false).isEmpty())
 				return true;
 		}
 		return false;
@@ -656,7 +681,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				for (int i = 0; i < items.length; i++) {
 					if (items[i].equals(mif.getFrom().getName())) {
 						interfaceCombo.select(i);
-						currentMsgs = RoomHelpers.getMessageListDeep(mif.getFrom(), false);
+						currentMsgs = SupportUtil.getInstance().getRoomHelpers().getMessageListDeep((InterfaceItem)mif.getFrom(), false);
 						int pos = 0;
 						int idx = -1;
 						for (Message message : currentMsgs) {
@@ -680,7 +705,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	}
 
 	private void addNewTrigger() {
-		Trigger tri = RoomFactory.eINSTANCE.createTrigger();
+		Trigger tri = FSMFactory.eINSTANCE.createTrigger();
 		EList<Trigger> triggers = ((TriggeredTransition) trans).getTriggers();
 		triggers.add(tri);
 
@@ -694,9 +719,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 	}
 
 	private MessageFromIf createDefaultMif() {
-		MessageFromIf mif = RoomFactory.eINSTANCE.createMessageFromIf();
+		MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 		for (InterfaceItem item : interfaceItems) {
-			List<Message> msgs = RoomHelpers.getMessageListDeep(item, false);
+			List<Message> msgs = SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false);
 			if (!msgs.isEmpty()) {
 				mif.setFrom(item);
 				mif.setMessage(msgs.get(0));
@@ -764,7 +789,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			DetailCode dc = (DetailCode) s2m.convert(guardText.getText());
 			Guard guard = null;
 			if (dc!=null) {
-				guard = RoomFactory.eINSTANCE.createGuard();
+				guard = FSMFactory.eINSTANCE.createGuard();
 				guard.setGuard(dc);
 			}
 			((Trigger) element).setGuard(guard);

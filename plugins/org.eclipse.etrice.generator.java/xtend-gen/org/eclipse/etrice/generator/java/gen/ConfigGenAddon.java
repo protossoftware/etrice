@@ -58,6 +58,10 @@ public class ConfigGenAddon {
   
   @Inject
   @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
   private RoomExtensions _roomExtensions;
   
   @Inject
@@ -67,7 +71,7 @@ public class ConfigGenAddon {
     StringConcatenation _builder = new StringConcatenation();
     {
       ActorClass _actorClass = ai.getActorClass();
-      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass);
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_actorClass);
       for(final Attribute a : _allAttributes) {
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
         List<Attribute> _union = this._roomExtensions.<Attribute>union(_arrayList, a);
@@ -80,7 +84,7 @@ public class ConfigGenAddon {
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       for(final InterfaceItemInstance pi : _orderedIfItemInstances) {
         InterfaceItem _interfaceItem = pi.getInterfaceItem();
-        PortClass _portClass = RoomHelpers.getPortClass(_interfaceItem);
+        PortClass _portClass = this._roomHelpers.getPortClass(_interfaceItem);
         EList<Attribute> _attributes = null;
         if (_portClass!=null) {
           _attributes=_portClass.getAttributes();
@@ -155,7 +159,7 @@ public class ConfigGenAddon {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
             for(final Attribute e : _allAttributes) {
               String _name = a.getName();
               CharSequence _invokeGetter = this.helpers.invokeGetter(_name, null);
@@ -357,7 +361,7 @@ public class ConfigGenAddon {
   public String genMinMaxConstants(final ActorClass ac) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(ac);
       for(final Attribute a : _allAttributes) {
         String _name = a.getName();
         ArrayList<Attribute> _arrayList = new ArrayList<Attribute>();
@@ -392,7 +396,7 @@ public class ConfigGenAddon {
           _matched=true;
           StringConcatenation _builder = new StringConcatenation();
           {
-            List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(((DataClass) aType));
+            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
             for(final Attribute e : _allAttributes) {
               String _name = e.getName();
               String _plus = ((varNamePath + "_") + _name);

@@ -15,13 +15,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.PortClass;
@@ -30,9 +30,8 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -200,7 +199,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("\t");
     _builder.append("private static String messageStrings[] = {\"MIN\", ");
     {
-      List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+      List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
       for(final Message m : _allOutgoingMessages) {
         _builder.append("\"");
         String _name_2 = m.getName();
@@ -210,7 +209,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     }
     _builder.append(" ");
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       for(final Message m_1 : _allIncomingMessages) {
         _builder.append("\"");
         String _name_3 = m_1.getName();
@@ -480,7 +479,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (conj).booleanValue());
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (conj).booleanValue());
         for(final Message m : _allMessages) {
           _builder.append("\t");
           CharSequence _sendMessage = this.sendMessage(m, (conj).booleanValue());
@@ -567,7 +566,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// incoming messages");
           _builder.newLine();
           {
-            List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+            List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
             for(final Message m_1 : _allIncomingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature = this.messageSignature(m_1);
@@ -601,7 +600,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("// outgoing messages");
           _builder.newLine();
           {
-            List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+            List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
             for(final Message m_2 : _allOutgoingMessages) {
               _builder.append("\t");
               CharSequence _messageSignature_1 = this.messageSignature(m_2);
@@ -858,7 +857,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public CharSequence generateDataDriven(final Root root, final ProtocolClass pc) {
     CharSequence _xblockexpression = null;
     {
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();

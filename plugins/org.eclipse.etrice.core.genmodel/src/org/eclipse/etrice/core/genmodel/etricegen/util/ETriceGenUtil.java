@@ -12,10 +12,11 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen.util;
 
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
@@ -23,6 +24,8 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *
  */
 public class ETriceGenUtil {
+	
+	private FSMHelpers fsmHelpers = new RoomHelpers();
 
 	/**
 	 * @param trig the trigger
@@ -31,7 +34,7 @@ public class ETriceGenUtil {
 	 * 
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isMatching(Trigger, String)
 	 */
-	public static boolean isMatching(Trigger trig, String trigstr) {
+	public boolean isMatching(Trigger trig, String trigstr) {
 		return ETriceGenFactory.eINSTANCE.createExpandedActorClass().isMatching(trig, trigstr);
 	}
 	
@@ -39,11 +42,11 @@ public class ETriceGenUtil {
 	 * @param at an {@link ActiveTrigger}
 	 * @return <code>true</code> if the active trigger has defined a guard
 	 */
-	public static boolean hasGuard(ActiveTrigger at) {
+	public boolean hasGuard(ActiveTrigger at) {
 		for (TriggeredTransition t : at.getTransitions()) {
 			for (Trigger trig : t.getTriggers()) {
 				if (isMatching(trig, at.getTrigger())
-						&& RoomHelpers.hasGuard(trig))
+						&& fsmHelpers.hasGuard(trig))
 					return true;
 			}
 		}

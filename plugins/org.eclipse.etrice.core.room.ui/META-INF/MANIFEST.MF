@@ -5,7 +5,9 @@ Bundle-Vendor: Eclipse eTrice (Incubation)
 Bundle-Version: 0.5.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.room.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.5.0";visibility:=reexport,
+Require-Bundle: org.eclipse.etrice.core.fsm.ui;bundle-version="0.5.0",
+ org.eclipse.etrice.core.common.ui;bundle-version="0.5.0",
+ org.eclipse.etrice.core.room;bundle-version="0.5.0";visibility:=reexport,
  org.eclipse.etrice.core.genmodel;bundle-version="0.5.0",
  org.eclipse.ui;bundle-version="3.6.0",
  org.eclipse.ui.editors;bundle-version="3.5.0",
@@ -16,8 +18,7 @@ Require-Bundle: org.eclipse.etrice.core.room;bundle-version="0.5.0";visibility:=
  org.antlr.runtime;bundle-version="3.0.0",
  org.eclipse.emf.codegen;bundle-version="2.6.0",
  org.eclipse.compare,
- org.eclipse.core.filesystem;bundle-version="1.3.200",
- org.eclipse.etrice.core.common.ui;bundle-version="0.5.0"
+ org.eclipse.core.filesystem;bundle-version="1.3.200"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.ui,
@@ -26,5 +27,6 @@ Export-Package: org.eclipse.etrice.core.ui,
  org.eclipse.etrice.core.ui.editor,
  org.eclipse.etrice.core.ui.internal,
  org.eclipse.etrice.core.ui.linking,
+ org.eclipse.etrice.core.ui.preferences,
  org.eclipse.etrice.core.ui.quickfix
 Bundle-Activator: org.eclipse.etrice.core.ui.RoomUiActivator

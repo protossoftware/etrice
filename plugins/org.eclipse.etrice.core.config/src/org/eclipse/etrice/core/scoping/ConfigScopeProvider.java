@@ -44,6 +44,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
+import com.google.inject.Inject;
+
 /**
  * This class contains custom scoping description.
  * 
@@ -53,6 +55,12 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
  */
 public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	@Inject
+	private ConfigUtil configUtil;
+	
+	@Inject
+	private RoomHelpers roomHelpers;
+	
 	public IScope scope_SubSystemConfig_subSystem(SubSystemConfig ctx, EReference ref){
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
@@ -82,9 +90,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 				.eContainer();
 		SubSystemClass subsystem = actorConfig.getSubSystem().getType();
 		if (subsystem != null) {
-			ActorClass ac = ConfigUtil
+			ActorClass ac = configUtil
 					.resolve(subsystem, actorConfig.getPath());
-			for (InterfaceItem item : ConfigUtil.getConfigurableInterfaceItems(
+			for (InterfaceItem item : configUtil.getConfigurableInterfaceItems(
 					ac, true))
 				scopes.add(EObjectDescription.create(item.getName(), item));
 		}
@@ -139,8 +147,8 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (config.getAttribute().getType().getType() instanceof DataClass) {
 			DataClass dc = (DataClass) config.getAttribute().getType()
 					.getType();
-			for (Attribute att : ConfigUtil
-					.filterConfigurableAttributes(RoomHelpers
+			for (Attribute att : configUtil
+					.filterConfigurableAttributes(roomHelpers
 							.getAllAttributes(dc))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
@@ -151,8 +159,8 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			List<IEObjectDescription> scopes) {
 		ActorClass actor = config.getActor();
 		if (actor != null) {
-			for (Attribute att : ConfigUtil
-					.filterConfigurableAttributes(RoomHelpers
+			for (Attribute att : configUtil
+					.filterConfigurableAttributes(roomHelpers
 							.getAllAttributes(actor))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
@@ -163,9 +171,9 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			List<IEObjectDescription> scopes) {
 		SubSystemClass subsystem = config.getSubSystem().getType();
 		if (subsystem != null) {
-			ActorClass actor = ConfigUtil.resolve(subsystem, config.getPath());
-			for (Attribute att : ConfigUtil
-					.filterConfigurableAttributes(RoomHelpers
+			ActorClass actor = configUtil.resolve(subsystem, config.getPath());
+			for (Attribute att : configUtil
+					.filterConfigurableAttributes(roomHelpers
 							.getAllAttributes(actor))) {
 				scopes.add(EObjectDescription.create(att.getName(), att));
 			}
@@ -183,16 +191,16 @@ public class ConfigScopeProvider extends AbstractDeclarativeScopeProvider {
 			portClass = protocolConfig.getProtocol().getConjugated();
 
 		if (portClass != null)
-			for (Attribute att : ConfigUtil
+			for (Attribute att : configUtil
 					.filterConfigurableAttributes(portClass.getAttributes()))
 				scopes.add(EObjectDescription.create(att.getName(), att));
 	}
 
 	private void collectAttributes(PortInstanceConfig config,
 			List<IEObjectDescription> scopes) {
-		PortClass portClass = ConfigUtil.getPortClass(config);
+		PortClass portClass = configUtil.getPortClass(config);
 		if (portClass != null)
-			for (Attribute att : ConfigUtil
+			for (Attribute att : configUtil
 					.filterConfigurableAttributes(portClass.getAttributes()))
 				scopes.add(EObjectDescription.create(att.getName(), att));
 	}

@@ -23,14 +23,14 @@ import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.room.ActorCommunicationType
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
@@ -38,21 +38,21 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
-import org.eclipse.etrice.generator.base.IntelligentSeparator
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import static extension org.eclipse.etrice.core.common.base.util.BaseHelpers.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
 import org.eclipse.etrice.core.common.converter.TimeConverter
 
 @Singleton
 class NodeGen {
 	
+	@Inject extension RoomHelpers
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers
@@ -669,8 +669,8 @@ class NodeGen {
 		
 		«FOR thread: nr.type.threads.filter(t|usedThreads.contains(t)) SEPARATOR "\n"»
 			«val instancesOnThread = ssi.allContainedInstances.filter(ai|ETMapUtil::getMappedThread(ai).thread==thread)»
-			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
-			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ActorCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ActorCommunicationType::ASYNCHRONOUS)»
+			«val dispatchedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ComponentCommunicationType::EVENT_DRIVEN || ai.actorClass.commType == ComponentCommunicationType::ASYNCHRONOUS)»
+			«val executedInstances = instancesOnThread.filter(ai|ai.actorClass.commType == ComponentCommunicationType::DATA_DRIVEN || ai.actorClass.commType == ComponentCommunicationType::ASYNCHRONOUS)»
 			
 			«IF executedInstances.size > 0»
 				/**

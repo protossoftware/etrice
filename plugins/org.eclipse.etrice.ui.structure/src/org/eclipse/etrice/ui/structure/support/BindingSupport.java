@@ -13,7 +13,6 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
@@ -23,10 +22,9 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.validation.ValidationUtil;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.SubProtocolSelectionDialog;
 import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
@@ -99,41 +97,41 @@ public class BindingSupport {
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
 				IFeatureProvider featureProvider = getFeatureProvider();
-				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
-				Port tgt = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
+				Port src = SupportUtil.getInstance().getPort(context.getSourceAnchor(), featureProvider);
+				Port tgt = SupportUtil.getInstance().getPort(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(context.getSourceAnchor(), featureProvider);
 				
 				if (src==null || tgt==null) {
 					return false;
 				}
 				
-				StructureClass ac = SupportUtil.getParent(context, featureProvider);
+				StructureClass ac = SupportUtil.getInstance().getParent(context, featureProvider);
 				if (ac==null) {
 					return false;
 				}
 				
-				ActorContainerRef tgtRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(context.getTargetAnchor(), featureProvider);
 				
-				return ValidationUtil.isConnectable(src, srcRef, null, tgt, tgtRef, null, ac, null, false).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, tgt, tgtRef, null, ac, null, false).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
 				if (context.getSourceAnchor()==null)
 					return false;
 				
-				Port src = SupportUtil.getPort(context.getSourceAnchor(), getFeatureProvider());
+				Port src = SupportUtil.getInstance().getPort(context.getSourceAnchor(), getFeatureProvider());
 				boolean canStart = src!=null;
 				if (canStart) {
-					ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), getFeatureProvider());
+					ActorContainerRef ref = SupportUtil.getInstance().getRef(context.getSourceAnchor(), getFeatureProvider());
 					if (ref==null) {
 						// this port is local, i.e. owned by the parent itself
 						ActorContainerClass acc = (ActorContainerClass) src.eContainer();
-						if (!ValidationUtil.isConnectable(src, null, acc).isOk())
+						if (!SupportUtil.getInstance().getValidationUtil().isConnectable(src, null, acc).isOk())
 							canStart = false;
 					}
 					else {
 						StructureClass acc = (StructureClass) ref.eContainer();
-						if (!ValidationUtil.isConnectable(src, ref, acc).isOk())
+						if (!SupportUtil.getInstance().getValidationUtil().isConnectable(src, ref, acc).isOk())
 							canStart = false;
 					}
 				}
@@ -143,9 +141,9 @@ public class BindingSupport {
 			
 			@Override
 			public void attachedToSource(ICreateConnectionContext context) {
-				Port src = SupportUtil.getPort(context.getSourceAnchor(), getFeatureProvider());
-				ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), getFeatureProvider());
-				StructureClass sc = SupportUtil.getParent(context, getFeatureProvider());
+				Port src = SupportUtil.getInstance().getPort(context.getSourceAnchor(), getFeatureProvider());
+				ActorContainerRef ref = SupportUtil.getInstance().getRef(context.getSourceAnchor(), getFeatureProvider());
+				StructureClass sc = SupportUtil.getInstance().getParent(context, getFeatureProvider());
 				
 				beginHighLightMatches(sc, src, ref);
 			}
@@ -168,7 +166,7 @@ public class BindingSupport {
 				for (Shape subShape : scContainer.getChildren()) {
 					Object bo = getBusinessObjectForPictogramElement(subShape);
 					if (bo instanceof Port) {
-						if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, null, null, sc, null, false).isOk()) {
+						if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, (Port) bo, null, null, sc, null, false).isOk()) {
 							DecorationProvider.addAllowedPortShape(subShape);
 							getDiagramBehavior().refreshRenderingDecorators(subShape);
 						}
@@ -178,7 +176,7 @@ public class BindingSupport {
 						for (Shape subSubShape : ((ContainerShape)subShape).getChildren()) {
 							bo = getBusinessObjectForPictogramElement(subSubShape);
 							if (bo instanceof Port) {
-								if (ValidationUtil.isConnectable(src, srcRef, null, (Port) bo, tgtRef, null, sc, null, false).isOk()) {
+								if (SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, null, (Port) bo, tgtRef, null, sc, null, false).isOk()) {
 									DecorationProvider.addAllowedPortShape(subSubShape);
 									getDiagramBehavior().refreshRenderingDecorators(subSubShape);
 								}
@@ -201,17 +199,17 @@ public class BindingSupport {
 				endHighLightMatches();
 				
 				IFeatureProvider featureProvider = getFeatureProvider();
-				Port src = SupportUtil.getPort(context.getSourceAnchor(), featureProvider);
-				Port dst = SupportUtil.getPort(context.getTargetAnchor(), featureProvider);
-				StructureClass sc = SupportUtil.getParent(context, featureProvider);
+				Port src = SupportUtil.getInstance().getPort(context.getSourceAnchor(), featureProvider);
+				Port dst = SupportUtil.getInstance().getPort(context.getTargetAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(context, featureProvider);
 				if (src!=null && dst!=null && sc!=null) {
 					Binding bind = RoomFactory.eINSTANCE.createBinding();
 					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar1 = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
+					ActorContainerRef ar1 = SupportUtil.getInstance().getRef(context.getSourceAnchor(), featureProvider);
 					ep1.setPort(src);
 					ep1.setActorRef(ar1);
 					BindingEndPoint ep2 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar2 = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
+					ActorContainerRef ar2 = SupportUtil.getInstance().getRef(context.getTargetAnchor(), featureProvider);
 					ep2.setPort(dst);
 					ep2.setActorRef(ar2);
 					bind.setEndpoint1(ep1);
@@ -317,22 +315,22 @@ public class BindingSupport {
 					atgt = context.getNewAnchor();
 				
 				IFeatureProvider featureProvider = getFeatureProvider();
-				Port src = SupportUtil.getPort(asrc, featureProvider);
-				Port tgt = SupportUtil.getPort(atgt, featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(asrc, featureProvider);
+				Port src = SupportUtil.getInstance().getPort(asrc, featureProvider);
+				Port tgt = SupportUtil.getInstance().getPort(atgt, featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(asrc, featureProvider);
 				
 				if (src==null || tgt==null) {
 					return false;
 				}
 				
-				StructureClass ac = SupportUtil.getParent(getDiagram(), featureProvider);
+				StructureClass ac = SupportUtil.getInstance().getParent(getDiagram(), featureProvider);
 				if (ac==null) {
 					return false;
 				}
 				
-				ActorContainerRef tgtRef = SupportUtil.getRef(atgt, featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(atgt, featureProvider);
 				
-				return ValidationUtil.isConnectable(
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(
 						src, srcRef, bind.getEndpoint1().getSub(),
 						tgt, tgtRef, bind.getEndpoint2().getSub(),
 						ac, bind, true).isOk();
@@ -343,17 +341,17 @@ public class BindingSupport {
 				super.postReconnect(context);
 
 				IFeatureProvider featureProvider = getFeatureProvider();
-				Port src = SupportUtil.getPort(context.getConnection().getStart(), featureProvider);
-				Port dst = SupportUtil.getPort(context.getConnection().getEnd(), featureProvider);
-				StructureClass sc = SupportUtil.getParent(getDiagram(), featureProvider);
+				Port src = SupportUtil.getInstance().getPort(context.getConnection().getStart(), featureProvider);
+				Port dst = SupportUtil.getInstance().getPort(context.getConnection().getEnd(), featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(getDiagram(), featureProvider);
 				if (src!=null && dst!=null && sc!=null) {
 					Binding bind = (Binding) getBusinessObjectForPictogramElement(context.getConnection());
 					BindingEndPoint ep1 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar1 = SupportUtil.getRef(context.getConnection().getStart(), featureProvider);
+					ActorContainerRef ar1 = SupportUtil.getInstance().getRef(context.getConnection().getStart(), featureProvider);
 					ep1.setPort(src);
 					ep1.setActorRef(ar1);
 					BindingEndPoint ep2 = RoomFactory.eINSTANCE.createBindingEndPoint();
-					ActorContainerRef ar2 = SupportUtil.getRef(context.getConnection().getEnd(), featureProvider);
+					ActorContainerRef ar2 = SupportUtil.getInstance().getRef(context.getConnection().getEnd(), featureProvider);
 					ep2.setPort(dst);
 					ep2.setActorRef(ar2);
 					
@@ -549,7 +547,7 @@ public class BindingSupport {
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof Binding) {
 				Binding bind = (Binding) bo;
-				return RoomNameProvider.getDisplayName(bind);
+				return SupportUtil.getInstance().getRoomNameProvider().getDisplayName(bind);
 			}
 			
 			return super.getToolTip(ga);

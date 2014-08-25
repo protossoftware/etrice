@@ -22,23 +22,26 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 public class SemanticsCheck {
 	private Queue<StateGraphNode> queue;
 	private Set<StateGraphNode> visited;
-	private ExpandedActorClass xpAct;
+	private ExpandedModelComponent xpAct;
 	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>();
 	private ActionCodeAnalyzer codeAnalyzer;
 	private HashMap<StateGraphItem, List<HandledMessage>> mapToWarnings = new HashMap<StateGraphItem, List<HandledMessage>>();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	
 	private static boolean traceChecks = false;
 	private static int traceLevel = 0;
 	static {
@@ -57,16 +60,16 @@ public class SemanticsCheck {
 	private static final int TRACE_RESULT = 1;
 	private static final int TRACE_DETAILS = 2;
 	
-	public SemanticsCheck(ExpandedActorClass xpac) {
+	public SemanticsCheck(ExpandedModelComponent xpac) {
 		queue = new LinkedList<StateGraphNode>();
 		xpAct = xpac;
 		visited = new HashSet<StateGraphNode>();
-		codeAnalyzer = new ActionCodeAnalyzer(xpac.getActorClass());
+		codeAnalyzer = new ActionCodeAnalyzer(xpac.getModelComponent());
 	}
 
 	public void checkSemantics() {
 		if (traceChecks)
-			System.out.println("checkSemantics: check of ActorClass "+xpAct.getActorClass().getName());
+			System.out.println("checkSemantics: check of ActorClass "+xpAct.getModelComponent().getComponentName());
 		
 		StateGraph graph = xpAct.getStateMachine();
 		ActiveRules localRules = new ActiveRules();
@@ -78,7 +81,7 @@ public class SemanticsCheck {
 			if (traceLevel>=TRACE_RESULT)
 				printRules();
 			
-			System.out.println("checkSemantics: done with check of ActorClass "+xpAct.getActorClass().getName());
+			System.out.println("checkSemantics: done with check of ActorClass "+xpAct.getModelComponent().getComponentName());
 		}
 	}
 
@@ -86,7 +89,7 @@ public class SemanticsCheck {
 		EList<Transition> transitions = graph.getTransitions();
 		for (Transition trans : transitions)
 			if (trans instanceof InitialTransition) {
-				StateGraphNode cur = RoomHelpers.getNode(trans.getTo());
+				StateGraphNode cur = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
 				if (cur instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
@@ -117,18 +120,18 @@ public class SemanticsCheck {
 		visited.add(node);
 		if (node instanceof State) {
 			State st = (State) node;
-			if (RoomHelpers.hasDirectSubStructure(st)) {
+			if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st)) {
 				addStartingPoints(st.getSubgraph(), mapToRules.get(st));
 			}
 			else {
 				for (ActiveTrigger trigger : xpAct.getActiveTriggers(st)) {
 					if (traceChecks && traceLevel>=TRACE_DETAILS) {
 						System.out.println("  Currently visiting: " + st.getName());
-						System.out.println("  Trigger: " + trigger.getMsg().getName());
+						System.out.println("  Trigger: " + fsmNameProvider.getMessageName(trigger.getMsg()));
 					}
 					
 					for (Transition trans : trigger.getTransitions()) {
-						StateGraphNode target = RoomHelpers.getNode(trans.getTo());
+						StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
@@ -151,7 +154,7 @@ public class SemanticsCheck {
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {
 							System.out.println("  Messages in msglist before consuming: ");
 							for (HandledMessage msg : msgList) {
-								System.out.println("  Msg: "+ msg.getMsg().getName());
+								System.out.println("  Msg: "+ fsmNameProvider.getMessageName(msg.getMsg()));
 							}
 						}
 						if (traceChecks && traceLevel>=TRACE_DETAILS) {
@@ -188,7 +191,7 @@ public class SemanticsCheck {
 			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
 				ActiveRules tempRule = mapToRules.get(node).createCopy();
 				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
-				StateGraphNode target = RoomHelpers.getNode(trans.getTo());
+				StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
 				if (target instanceof State) {
 					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
 				}

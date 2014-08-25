@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -1632,145 +1634,6 @@ public interface RoomPackage extends EPackage
   int OUT_MESSAGE_HANDLER_FEATURE_COUNT = MESSAGE_HANDLER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getProtocolSemantics()
-   * @generated
-   */
-  int PROTOCOL_SEMANTICS = 26;
-
-  /**
-   * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROTOCOL_SEMANTICS__RULES = 0;
-
-  /**
-   * The number of structural features of the '<em>Protocol Semantics</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROTOCOL_SEMANTICS_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.SemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSemanticsRule()
-   * @generated
-   */
-  int SEMANTICS_RULE = 27;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE__MSG = 0;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE__FOLLOW_UPS = 1;
-
-  /**
-   * The number of structural features of the '<em>Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEMANTICS_RULE_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInSemanticsRule()
-   * @generated
-   */
-  int IN_SEMANTICS_RULE = 28;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
-
-  /**
-   * The number of structural features of the '<em>In Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IN_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getOutSemanticsRule()
-   * @generated
-   */
-  int OUT_SEMANTICS_RULE = 29;
-
-  /**
-   * The feature id for the '<em><b>Msg</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE__MSG = SEMANTICS_RULE__MSG;
-
-  /**
-   * The feature id for the '<em><b>Follow Ups</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE__FOLLOW_UPS = SEMANTICS_RULE__FOLLOW_UPS;
-
-  /**
-   * The number of structural features of the '<em>Out Semantics Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OUT_SEMANTICS_RULE_FEATURE_COUNT = SEMANTICS_RULE_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ActorClassImpl <em>Actor Class</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1778,7 +1641,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorClass()
    * @generated
    */
-  int ACTOR_CLASS = 30;
+  int ACTOR_CLASS = 26;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1889,103 +1752,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__COMM_TYPE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Component Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__COMPONENT_NAME = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Base</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__BASE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Interface Ports</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__INTERFACE_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Internal Ports</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__INTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
-
-  /**
-   * The feature id for the '<em><b>External Ports</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__EXTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
-
-  /**
-   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
-
-  /**
-   * The feature id for the '<em><b>Service Access Points</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__SERVICE_ACCESS_POINTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
-
-  /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
-
-  /**
-   * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
-
-  /**
-   * The feature id for the '<em><b>Behavior Annotations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
-
-  /**
-   * The feature id for the '<em><b>Operations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
+  int ACTOR_CLASS__BASE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>State Machine</b></em>' containment reference.
@@ -1994,7 +1776,97 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
+  int ACTOR_CLASS__STATE_MACHINE = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Interface Ports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__INTERFACE_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Structure Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
+
+  /**
+   * The feature id for the '<em><b>Internal Ports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__INTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
+
+  /**
+   * The feature id for the '<em><b>External Ports</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__EXTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
+
+  /**
+   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
+
+  /**
+   * The feature id for the '<em><b>Service Access Points</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__SERVICE_ACCESS_POINTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+
+  /**
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+
+  /**
+   * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__BEHAVIOR_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 12;
+
+  /**
+   * The feature id for the '<em><b>Behavior Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
+
+  /**
+   * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
 
   /**
    * The number of structural features of the '<em>Actor Class</em>' class.
@@ -2003,7 +1875,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
+  int ACTOR_CLASS_FEATURE_COUNT = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 15;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
@@ -2013,7 +1885,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInterfaceItem()
    * @generated
    */
-  int INTERFACE_ITEM = 31;
+  int INTERFACE_ITEM = 27;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2022,7 +1894,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTERFACE_ITEM__NAME = 0;
+  int INTERFACE_ITEM__NAME = FSMPackage.ABSTRACT_INTERFACE_ITEM__NAME;
 
   /**
    * The number of structural features of the '<em>Interface Item</em>' class.
@@ -2031,7 +1903,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTERFACE_ITEM_FEATURE_COUNT = 1;
+  int INTERFACE_ITEM_FEATURE_COUNT = FSMPackage.ABSTRACT_INTERFACE_ITEM_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PortImpl <em>Port</em>}' class.
@@ -2041,7 +1913,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getPort()
    * @generated
    */
-  int PORT = 32;
+  int PORT = 28;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2105,7 +1977,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExternalPort()
    * @generated
    */
-  int EXTERNAL_PORT = 33;
+  int EXTERNAL_PORT = 29;
 
   /**
    * The feature id for the '<em><b>Interface Port</b></em>' reference.
@@ -2133,7 +2005,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSAP()
    * @generated
    */
-  int SAP = 34;
+  int SAP = 30;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2170,7 +2042,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSPP()
    * @generated
    */
-  int SPP = 35;
+  int SPP = 31;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2207,7 +2079,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getServiceImplementation()
    * @generated
    */
-  int SERVICE_IMPLEMENTATION = 36;
+  int SERVICE_IMPLEMENTATION = 32;
 
   /**
    * The feature id for the '<em><b>Spp</b></em>' reference.
@@ -2235,7 +2107,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLogicalSystem()
    * @generated
    */
-  int LOGICAL_SYSTEM = 37;
+  int LOGICAL_SYSTEM = 33;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2308,7 +2180,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorContainerRef()
    * @generated
    */
-  int ACTOR_CONTAINER_REF = 38;
+  int ACTOR_CONTAINER_REF = 34;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2345,7 +2217,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubSystemRef()
    * @generated
    */
-  int SUB_SYSTEM_REF = 39;
+  int SUB_SYSTEM_REF = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2391,7 +2263,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubSystemClass()
    * @generated
    */
-  int SUB_SYSTEM_CLASS = 40;
+  int SUB_SYSTEM_CLASS = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2527,7 +2399,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLogicalThread()
    * @generated
    */
-  int LOGICAL_THREAD = 41;
+  int LOGICAL_THREAD = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2555,7 +2427,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorInstanceMapping()
    * @generated
    */
-  int ACTOR_INSTANCE_MAPPING = 42;
+  int ACTOR_INSTANCE_MAPPING = 38;
 
   /**
    * The feature id for the '<em><b>Path</b></em>' containment reference.
@@ -2601,7 +2473,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefPath()
    * @generated
    */
-  int REF_PATH = 43;
+  int REF_PATH = 39;
 
   /**
    * The feature id for the '<em><b>Refs</b></em>' containment reference list.
@@ -2629,7 +2501,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefSegment()
    * @generated
    */
-  int REF_SEGMENT = 44;
+  int REF_SEGMENT = 40;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' attribute.
@@ -2666,7 +2538,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBinding()
    * @generated
    */
-  int BINDING = 45;
+  int BINDING = 41;
 
   /**
    * The feature id for the '<em><b>Endpoint1</b></em>' containment reference.
@@ -2703,7 +2575,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getBindingEndPoint()
    * @generated
    */
-  int BINDING_END_POINT = 46;
+  int BINDING_END_POINT = 42;
 
   /**
    * The feature id for the '<em><b>Actor Ref</b></em>' reference.
@@ -2749,7 +2621,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getLayerConnection()
    * @generated
    */
-  int LAYER_CONNECTION = 47;
+  int LAYER_CONNECTION = 43;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -2786,7 +2658,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSAPoint()
    * @generated
    */
-  int SA_POINT = 48;
+  int SA_POINT = 44;
 
   /**
    * The number of structural features of the '<em>SA Point</em>' class.
@@ -2805,7 +2677,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefSAPoint()
    * @generated
    */
-  int REF_SA_POINT = 49;
+  int REF_SA_POINT = 45;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2833,7 +2705,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRelaySAPoint()
    * @generated
    */
-  int RELAY_SA_POINT = 50;
+  int RELAY_SA_POINT = 46;
 
   /**
    * The feature id for the '<em><b>Relay</b></em>' reference.
@@ -2861,7 +2733,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSPPoint()
    * @generated
    */
-  int SP_POINT = 51;
+  int SP_POINT = 47;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2898,7 +2770,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorRef()
    * @generated
    */
-  int ACTOR_REF = 52;
+  int ACTOR_REF = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2955,1313 +2827,6 @@ public interface RoomPackage extends EPackage
   int ACTOR_REF_FEATURE_COUNT = ACTOR_CONTAINER_REF_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphItemImpl <em>State Graph Item</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.StateGraphItemImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphItem()
-   * @generated
-   */
-  int STATE_GRAPH_ITEM = 54;
-
-  /**
-   * The number of structural features of the '<em>State Graph Item</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH_ITEM_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphNodeImpl <em>State Graph Node</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.StateGraphNodeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphNode()
-   * @generated
-   */
-  int STATE_GRAPH_NODE = 53;
-
-  /**
-   * The number of structural features of the '<em>State Graph Node</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH_NODE_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateImpl <em>State</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.StateImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getState()
-   * @generated
-   */
-  int STATE = 55;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__DOCU = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__ENTRY_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
-
-  /**
-   * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
-
-  /**
-   * The number of structural features of the '<em>State</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateGraphImpl <em>State Graph</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.StateGraphImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraph()
-   * @generated
-   */
-  int STATE_GRAPH = 56;
-
-  /**
-   * The feature id for the '<em><b>States</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH__STATES = 0;
-
-  /**
-   * The feature id for the '<em><b>Tr Points</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH__TR_POINTS = 1;
-
-  /**
-   * The feature id for the '<em><b>Ch Points</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH__CH_POINTS = 2;
-
-  /**
-   * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH__TRANSITIONS = 3;
-
-  /**
-   * The feature id for the '<em><b>Refined Transitions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH__REFINED_TRANSITIONS = 4;
-
-  /**
-   * The number of structural features of the '<em>State Graph</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_GRAPH_FEATURE_COUNT = 5;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
-   * @generated
-   */
-  int SIMPLE_STATE = 57;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__DOCU = STATE__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
-
-  /**
-   * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__EXIT_CODE = STATE__EXIT_CODE;
-
-  /**
-   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__DO_CODE = STATE__DO_CODE;
-
-  /**
-   * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__SUBGRAPH = STATE__SUBGRAPH;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE__NAME = STATE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Simple State</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.RefinedStateImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedState()
-   * @generated
-   */
-  int REFINED_STATE = 58;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__DOCU = STATE__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__ENTRY_CODE = STATE__ENTRY_CODE;
-
-  /**
-   * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__EXIT_CODE = STATE__EXIT_CODE;
-
-  /**
-   * The feature id for the '<em><b>Do Code</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__DO_CODE = STATE__DO_CODE;
-
-  /**
-   * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__SUBGRAPH = STATE__SUBGRAPH;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE__TARGET = STATE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Refined State</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl <em>Detail Code</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.DetailCodeImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDetailCode()
-   * @generated
-   */
-  int DETAIL_CODE = 59;
-
-  /**
-   * The feature id for the '<em><b>Lines</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DETAIL_CODE__LINES = 0;
-
-  /**
-   * The number of structural features of the '<em>Detail Code</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DETAIL_CODE_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TrPointImpl <em>Tr Point</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TrPointImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPoint()
-   * @generated
-   */
-  int TR_POINT = 60;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TR_POINT__NAME = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Tr Point</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TR_POINT_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionPointImpl <em>Transition Point</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TransitionPointImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionPoint()
-   * @generated
-   */
-  int TRANSITION_POINT = 61;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_POINT__NAME = TR_POINT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Handler</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_POINT__HANDLER = TR_POINT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Transition Point</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_POINT_FEATURE_COUNT = TR_POINT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.EntryPointImpl <em>Entry Point</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.EntryPointImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getEntryPoint()
-   * @generated
-   */
-  int ENTRY_POINT = 62;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTRY_POINT__NAME = TR_POINT__NAME;
-
-  /**
-   * The number of structural features of the '<em>Entry Point</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTRY_POINT_FEATURE_COUNT = TR_POINT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ExitPointImpl <em>Exit Point</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ExitPointImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExitPoint()
-   * @generated
-   */
-  int EXIT_POINT = 63;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXIT_POINT__NAME = TR_POINT__NAME;
-
-  /**
-   * The number of structural features of the '<em>Exit Point</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXIT_POINT_FEATURE_COUNT = TR_POINT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ChoicePointImpl <em>Choice Point</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ChoicePointImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicePoint()
-   * @generated
-   */
-  int CHOICE_POINT = 64;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHOICE_POINT__NAME = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHOICE_POINT__DOCU = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Choice Point</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHOICE_POINT_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionImpl <em>Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransition()
-   * @generated
-   */
-  int TRANSITION = 65;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__NAME = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__TO = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 3;
-
-  /**
-   * The number of structural features of the '<em>Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 4;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.NonInitialTransitionImpl <em>Non Initial Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.NonInitialTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getNonInitialTransition()
-   * @generated
-   */
-  int NON_INITIAL_TRANSITION = 66;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__NAME = TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__TO = TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__DOCU = TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__ACTION = TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__FROM = TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Non Initial Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl <em>Transition Chain Start Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionChainStartTransition()
-   * @generated
-   */
-  int TRANSITION_CHAIN_START_TRANSITION = 67;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
-
-  /**
-   * The number of structural features of the '<em>Transition Chain Start Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.InitialTransitionImpl <em>Initial Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.InitialTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInitialTransition()
-   * @generated
-   */
-  int INITIAL_TRANSITION = 68;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__NAME = TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__TO = TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__DOCU = TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__ACTION = TRANSITION__ACTION;
-
-  /**
-   * The number of structural features of the '<em>Initial Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION_FEATURE_COUNT = TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ContinuationTransitionImpl <em>Continuation Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ContinuationTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getContinuationTransition()
-   * @generated
-   */
-  int CONTINUATION_TRANSITION = 69;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
-
-  /**
-   * The number of structural features of the '<em>Continuation Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TriggeredTransitionImpl <em>Triggered Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TriggeredTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTriggeredTransition()
-   * @generated
-   */
-  int TRIGGERED_TRANSITION = 70;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__FROM = TRANSITION_CHAIN_START_TRANSITION__FROM;
-
-  /**
-   * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__TRIGGERS = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Triggered Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION_FEATURE_COUNT = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.GuardedTransitionImpl <em>Guarded Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.GuardedTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuardedTransition()
-   * @generated
-   */
-  int GUARDED_TRANSITION = 71;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__FROM = TRANSITION_CHAIN_START_TRANSITION__FROM;
-
-  /**
-   * The feature id for the '<em><b>Guard</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__GUARD = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Guarded Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION_FEATURE_COUNT = TRANSITION_CHAIN_START_TRANSITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.CPBranchTransitionImpl <em>CP Branch Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.CPBranchTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCPBranchTransition()
-   * @generated
-   */
-  int CP_BRANCH_TRANSITION = 72;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__FROM = NON_INITIAL_TRANSITION__FROM;
-
-  /**
-   * The feature id for the '<em><b>Condition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__CONDITION = NON_INITIAL_TRANSITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>CP Branch Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION_FEATURE_COUNT = NON_INITIAL_TRANSITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RefinedTransitionImpl <em>Refined Transition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.RefinedTransitionImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedTransition()
-   * @generated
-   */
-  int REFINED_TRANSITION = 73;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_TRANSITION__TARGET = 0;
-
-  /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_TRANSITION__DOCU = 1;
-
-  /**
-   * The feature id for the '<em><b>Action</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_TRANSITION__ACTION = 2;
-
-  /**
-   * The number of structural features of the '<em>Refined Transition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_TRANSITION_FEATURE_COUNT = 3;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TransitionTerminalImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionTerminal()
-   * @generated
-   */
-  int TRANSITION_TERMINAL = 74;
-
-  /**
-   * The number of structural features of the '<em>Transition Terminal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_TERMINAL_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.StateTerminalImpl <em>State Terminal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.StateTerminalImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateTerminal()
-   * @generated
-   */
-  int STATE_TERMINAL = 75;
-
-  /**
-   * The feature id for the '<em><b>State</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_TERMINAL__STATE = TRANSITION_TERMINAL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>State Terminal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATE_TERMINAL_FEATURE_COUNT = TRANSITION_TERMINAL_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TrPointTerminalImpl <em>Tr Point Terminal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TrPointTerminalImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPointTerminal()
-   * @generated
-   */
-  int TR_POINT_TERMINAL = 76;
-
-  /**
-   * The feature id for the '<em><b>Tr Point</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TR_POINT_TERMINAL__TR_POINT = TRANSITION_TERMINAL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Tr Point Terminal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TR_POINT_TERMINAL_FEATURE_COUNT = TRANSITION_TERMINAL_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.SubStateTrPointTerminalImpl <em>Sub State Tr Point Terminal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.SubStateTrPointTerminalImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubStateTrPointTerminal()
-   * @generated
-   */
-  int SUB_STATE_TR_POINT_TERMINAL = 77;
-
-  /**
-   * The feature id for the '<em><b>Tr Point</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUB_STATE_TR_POINT_TERMINAL__TR_POINT = TRANSITION_TERMINAL_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>State</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUB_STATE_TR_POINT_TERMINAL__STATE = TRANSITION_TERMINAL_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Sub State Tr Point Terminal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUB_STATE_TR_POINT_TERMINAL_FEATURE_COUNT = TRANSITION_TERMINAL_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ChoicepointTerminalImpl <em>Choicepoint Terminal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.ChoicepointTerminalImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicepointTerminal()
-   * @generated
-   */
-  int CHOICEPOINT_TERMINAL = 78;
-
-  /**
-   * The feature id for the '<em><b>Cp</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHOICEPOINT_TERMINAL__CP = TRANSITION_TERMINAL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Choicepoint Terminal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHOICEPOINT_TERMINAL_FEATURE_COUNT = TRANSITION_TERMINAL_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.TriggerImpl <em>Trigger</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.TriggerImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrigger()
-   * @generated
-   */
-  int TRIGGER = 79;
-
-  /**
-   * The feature id for the '<em><b>Msg From If Pairs</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGER__MSG_FROM_IF_PAIRS = 0;
-
-  /**
-   * The feature id for the '<em><b>Guard</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGER__GUARD = 1;
-
-  /**
-   * The number of structural features of the '<em>Trigger</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGER_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.MessageFromIfImpl <em>Message From If</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.MessageFromIfImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getMessageFromIf()
-   * @generated
-   */
-  int MESSAGE_FROM_IF = 80;
-
-  /**
-   * The feature id for the '<em><b>Message</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESSAGE_FROM_IF__MESSAGE = 0;
-
-  /**
-   * The feature id for the '<em><b>From</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESSAGE_FROM_IF__FROM = 1;
-
-  /**
-   * The number of structural features of the '<em>Message From If</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MESSAGE_FROM_IF_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.GuardImpl <em>Guard</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.impl.GuardImpl
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuard()
-   * @generated
-   */
-  int GUARD = 81;
-
-  /**
-   * The feature id for the '<em><b>Guard</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARD__GUARD = 0;
-
-  /**
-   * The number of structural features of the '<em>Guard</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARD_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4269,17 +2834,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCommunicationType()
    * @generated
    */
-  int COMMUNICATION_TYPE = 82;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.room.ActorCommunicationType
-   * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
-   * @generated
-   */
-  int ACTOR_COMMUNICATION_TYPE = 83;
+  int COMMUNICATION_TYPE = 49;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.
@@ -4289,7 +2844,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getReferenceType()
    * @generated
    */
-  int REFERENCE_TYPE = 84;
+  int REFERENCE_TYPE = 50;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.RoomAnnotationTargetEnum <em>Annotation Target Enum</em>}' enum.
@@ -4299,7 +2854,7 @@ public interface RoomPackage extends EPackage
    * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRoomAnnotationTargetEnum()
    * @generated
    */
-  int ROOM_ANNOTATION_TARGET_ENUM = 85;
+  int ROOM_ANNOTATION_TARGET_ENUM = 51;
 
 
   /**
@@ -5432,79 +3987,6 @@ public interface RoomPackage extends EPackage
   EClass getOutMessageHandler();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ProtocolSemantics <em>Protocol Semantics</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Protocol Semantics</em>'.
-   * @see org.eclipse.etrice.core.room.ProtocolSemantics
-   * @generated
-   */
-  EClass getProtocolSemantics();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ProtocolSemantics#getRules <em>Rules</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Rules</em>'.
-   * @see org.eclipse.etrice.core.room.ProtocolSemantics#getRules()
-   * @see #getProtocolSemantics()
-   * @generated
-   */
-  EReference getProtocolSemantics_Rules();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SemanticsRule <em>Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule
-   * @generated
-   */
-  EClass getSemanticsRule();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.SemanticsRule#getMsg <em>Msg</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Msg</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule#getMsg()
-   * @see #getSemanticsRule()
-   * @generated
-   */
-  EReference getSemanticsRule_Msg();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SemanticsRule#getFollowUps <em>Follow Ups</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Follow Ups</em>'.
-   * @see org.eclipse.etrice.core.room.SemanticsRule#getFollowUps()
-   * @see #getSemanticsRule()
-   * @generated
-   */
-  EReference getSemanticsRule_FollowUps();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InSemanticsRule <em>In Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>In Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.InSemanticsRule
-   * @generated
-   */
-  EClass getInSemanticsRule();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.OutSemanticsRule <em>Out Semantics Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Out Semantics Rule</em>'.
-   * @see org.eclipse.etrice.core.room.OutSemanticsRule
-   * @generated
-   */
-  EClass getOutSemanticsRule();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ActorClass <em>Actor Class</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5513,39 +3995,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getActorClass();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorClass#isAbstract <em>Abstract</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Abstract</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#isAbstract()
-   * @see #getActorClass()
-   * @generated
-   */
-  EAttribute getActorClass_Abstract();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ActorClass#getCommType <em>Comm Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Comm Type</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getCommType()
-   * @see #getActorClass()
-   * @generated
-   */
-  EAttribute getActorClass_CommType();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ActorClass#getBase <em>Base</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Base</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getBase()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_Base();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getInterfacePorts <em>Interface Ports</em>}'.
@@ -5658,17 +4107,6 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_Operations();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ActorClass#getStateMachine <em>State Machine</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>State Machine</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getStateMachine()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_StateMachine();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InterfaceItem <em>Interface Item</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5677,17 +4115,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EClass getInterfaceItem();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.InterfaceItem#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.InterfaceItem#getName()
-   * @see #getInterfaceItem()
-   * @generated
-   */
-  EAttribute getInterfaceItem_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Port <em>Port</em>}'.
@@ -6296,714 +4723,6 @@ public interface RoomPackage extends EPackage
   EReference getActorRef_Type();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.StateGraphNode <em>State Graph Node</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Graph Node</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraphNode
-   * @generated
-   */
-  EClass getStateGraphNode();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.StateGraphItem <em>State Graph Item</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Graph Item</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraphItem
-   * @generated
-   */
-  EClass getStateGraphItem();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.State <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State</em>'.
-   * @see org.eclipse.etrice.core.room.State
-   * @generated
-   */
-  EClass getState();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.room.State#getDocu()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getEntryCode <em>Entry Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Entry Code</em>'.
-   * @see org.eclipse.etrice.core.room.State#getEntryCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_EntryCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getExitCode <em>Exit Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Exit Code</em>'.
-   * @see org.eclipse.etrice.core.room.State#getExitCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_ExitCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getDoCode <em>Do Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Do Code</em>'.
-   * @see org.eclipse.etrice.core.room.State#getDoCode()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_DoCode();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.State#getSubgraph <em>Subgraph</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Subgraph</em>'.
-   * @see org.eclipse.etrice.core.room.State#getSubgraph()
-   * @see #getState()
-   * @generated
-   */
-  EReference getState_Subgraph();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.StateGraph <em>State Graph</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Graph</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph
-   * @generated
-   */
-  EClass getStateGraph();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getStates <em>States</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>States</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph#getStates()
-   * @see #getStateGraph()
-   * @generated
-   */
-  EReference getStateGraph_States();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getTrPoints <em>Tr Points</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tr Points</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph#getTrPoints()
-   * @see #getStateGraph()
-   * @generated
-   */
-  EReference getStateGraph_TrPoints();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getChPoints <em>Ch Points</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Ch Points</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph#getChPoints()
-   * @see #getStateGraph()
-   * @generated
-   */
-  EReference getStateGraph_ChPoints();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getTransitions <em>Transitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Transitions</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph#getTransitions()
-   * @see #getStateGraph()
-   * @generated
-   */
-  EReference getStateGraph_Transitions();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StateGraph#getRefinedTransitions <em>Refined Transitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Refined Transitions</em>'.
-   * @see org.eclipse.etrice.core.room.StateGraph#getRefinedTransitions()
-   * @see #getStateGraph()
-   * @generated
-   */
-  EReference getStateGraph_RefinedTransitions();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SimpleState <em>Simple State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Simple State</em>'.
-   * @see org.eclipse.etrice.core.room.SimpleState
-   * @generated
-   */
-  EClass getSimpleState();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.SimpleState#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.SimpleState#getName()
-   * @see #getSimpleState()
-   * @generated
-   */
-  EAttribute getSimpleState_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefinedState <em>Refined State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Refined State</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedState
-   * @generated
-   */
-  EClass getRefinedState();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedState#getTarget <em>Target</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Target</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedState#getTarget()
-   * @see #getRefinedState()
-   * @generated
-   */
-  EReference getRefinedState_Target();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.DetailCode <em>Detail Code</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Detail Code</em>'.
-   * @see org.eclipse.etrice.core.room.DetailCode
-   * @generated
-   */
-  EClass getDetailCode();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.room.DetailCode#getLines <em>Lines</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Lines</em>'.
-   * @see org.eclipse.etrice.core.room.DetailCode#getLines()
-   * @see #getDetailCode()
-   * @generated
-   */
-  EAttribute getDetailCode_Lines();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TrPoint <em>Tr Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Tr Point</em>'.
-   * @see org.eclipse.etrice.core.room.TrPoint
-   * @generated
-   */
-  EClass getTrPoint();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.TrPoint#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.TrPoint#getName()
-   * @see #getTrPoint()
-   * @generated
-   */
-  EAttribute getTrPoint_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TransitionPoint <em>Transition Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Point</em>'.
-   * @see org.eclipse.etrice.core.room.TransitionPoint
-   * @generated
-   */
-  EClass getTransitionPoint();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.TransitionPoint#isHandler <em>Handler</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Handler</em>'.
-   * @see org.eclipse.etrice.core.room.TransitionPoint#isHandler()
-   * @see #getTransitionPoint()
-   * @generated
-   */
-  EAttribute getTransitionPoint_Handler();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.EntryPoint <em>Entry Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Entry Point</em>'.
-   * @see org.eclipse.etrice.core.room.EntryPoint
-   * @generated
-   */
-  EClass getEntryPoint();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ExitPoint <em>Exit Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Exit Point</em>'.
-   * @see org.eclipse.etrice.core.room.ExitPoint
-   * @generated
-   */
-  EClass getExitPoint();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ChoicePoint <em>Choice Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Choice Point</em>'.
-   * @see org.eclipse.etrice.core.room.ChoicePoint
-   * @generated
-   */
-  EClass getChoicePoint();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.ChoicePoint#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.ChoicePoint#getName()
-   * @see #getChoicePoint()
-   * @generated
-   */
-  EAttribute getChoicePoint_Name();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ChoicePoint#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.room.ChoicePoint#getDocu()
-   * @see #getChoicePoint()
-   * @generated
-   */
-  EReference getChoicePoint_Docu();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Transition <em>Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition</em>'.
-   * @see org.eclipse.etrice.core.room.Transition
-   * @generated
-   */
-  EClass getTransition();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.Transition#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.etrice.core.room.Transition#getName()
-   * @see #getTransition()
-   * @generated
-   */
-  EAttribute getTransition_Name();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Transition#getTo <em>To</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>To</em>'.
-   * @see org.eclipse.etrice.core.room.Transition#getTo()
-   * @see #getTransition()
-   * @generated
-   */
-  EReference getTransition_To();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Transition#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.room.Transition#getDocu()
-   * @see #getTransition()
-   * @generated
-   */
-  EReference getTransition_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Transition#getAction <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Action</em>'.
-   * @see org.eclipse.etrice.core.room.Transition#getAction()
-   * @see #getTransition()
-   * @generated
-   */
-  EReference getTransition_Action();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.NonInitialTransition <em>Non Initial Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Non Initial Transition</em>'.
-   * @see org.eclipse.etrice.core.room.NonInitialTransition
-   * @generated
-   */
-  EClass getNonInitialTransition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.NonInitialTransition#getFrom <em>From</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>From</em>'.
-   * @see org.eclipse.etrice.core.room.NonInitialTransition#getFrom()
-   * @see #getNonInitialTransition()
-   * @generated
-   */
-  EReference getNonInitialTransition_From();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TransitionChainStartTransition <em>Transition Chain Start Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Chain Start Transition</em>'.
-   * @see org.eclipse.etrice.core.room.TransitionChainStartTransition
-   * @generated
-   */
-  EClass getTransitionChainStartTransition();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InitialTransition <em>Initial Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Initial Transition</em>'.
-   * @see org.eclipse.etrice.core.room.InitialTransition
-   * @generated
-   */
-  EClass getInitialTransition();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ContinuationTransition <em>Continuation Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Continuation Transition</em>'.
-   * @see org.eclipse.etrice.core.room.ContinuationTransition
-   * @generated
-   */
-  EClass getContinuationTransition();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TriggeredTransition <em>Triggered Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Triggered Transition</em>'.
-   * @see org.eclipse.etrice.core.room.TriggeredTransition
-   * @generated
-   */
-  EClass getTriggeredTransition();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.TriggeredTransition#getTriggers <em>Triggers</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Triggers</em>'.
-   * @see org.eclipse.etrice.core.room.TriggeredTransition#getTriggers()
-   * @see #getTriggeredTransition()
-   * @generated
-   */
-  EReference getTriggeredTransition_Triggers();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.GuardedTransition <em>Guarded Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Guarded Transition</em>'.
-   * @see org.eclipse.etrice.core.room.GuardedTransition
-   * @generated
-   */
-  EClass getGuardedTransition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.GuardedTransition#getGuard <em>Guard</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Guard</em>'.
-   * @see org.eclipse.etrice.core.room.GuardedTransition#getGuard()
-   * @see #getGuardedTransition()
-   * @generated
-   */
-  EReference getGuardedTransition_Guard();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.CPBranchTransition <em>CP Branch Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>CP Branch Transition</em>'.
-   * @see org.eclipse.etrice.core.room.CPBranchTransition
-   * @generated
-   */
-  EClass getCPBranchTransition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.CPBranchTransition#getCondition <em>Condition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Condition</em>'.
-   * @see org.eclipse.etrice.core.room.CPBranchTransition#getCondition()
-   * @see #getCPBranchTransition()
-   * @generated
-   */
-  EReference getCPBranchTransition_Condition();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RefinedTransition <em>Refined Transition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Refined Transition</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedTransition
-   * @generated
-   */
-  EClass getRefinedTransition();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getTarget <em>Target</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Target</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedTransition#getTarget()
-   * @see #getRefinedTransition()
-   * @generated
-   */
-  EReference getRefinedTransition_Target();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedTransition#getDocu()
-   * @see #getRefinedTransition()
-   * @generated
-   */
-  EReference getRefinedTransition_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.RefinedTransition#getAction <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Action</em>'.
-   * @see org.eclipse.etrice.core.room.RefinedTransition#getAction()
-   * @see #getRefinedTransition()
-   * @generated
-   */
-  EReference getRefinedTransition_Action();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TransitionTerminal <em>Transition Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Transition Terminal</em>'.
-   * @see org.eclipse.etrice.core.room.TransitionTerminal
-   * @generated
-   */
-  EClass getTransitionTerminal();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.StateTerminal <em>State Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>State Terminal</em>'.
-   * @see org.eclipse.etrice.core.room.StateTerminal
-   * @generated
-   */
-  EClass getStateTerminal();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.StateTerminal#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>State</em>'.
-   * @see org.eclipse.etrice.core.room.StateTerminal#getState()
-   * @see #getStateTerminal()
-   * @generated
-   */
-  EReference getStateTerminal_State();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.TrPointTerminal <em>Tr Point Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Tr Point Terminal</em>'.
-   * @see org.eclipse.etrice.core.room.TrPointTerminal
-   * @generated
-   */
-  EClass getTrPointTerminal();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.TrPointTerminal#getTrPoint <em>Tr Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Tr Point</em>'.
-   * @see org.eclipse.etrice.core.room.TrPointTerminal#getTrPoint()
-   * @see #getTrPointTerminal()
-   * @generated
-   */
-  EReference getTrPointTerminal_TrPoint();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.SubStateTrPointTerminal <em>Sub State Tr Point Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Sub State Tr Point Terminal</em>'.
-   * @see org.eclipse.etrice.core.room.SubStateTrPointTerminal
-   * @generated
-   */
-  EClass getSubStateTrPointTerminal();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.SubStateTrPointTerminal#getTrPoint <em>Tr Point</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Tr Point</em>'.
-   * @see org.eclipse.etrice.core.room.SubStateTrPointTerminal#getTrPoint()
-   * @see #getSubStateTrPointTerminal()
-   * @generated
-   */
-  EReference getSubStateTrPointTerminal_TrPoint();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.SubStateTrPointTerminal#getState <em>State</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>State</em>'.
-   * @see org.eclipse.etrice.core.room.SubStateTrPointTerminal#getState()
-   * @see #getSubStateTrPointTerminal()
-   * @generated
-   */
-  EReference getSubStateTrPointTerminal_State();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ChoicepointTerminal <em>Choicepoint Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Choicepoint Terminal</em>'.
-   * @see org.eclipse.etrice.core.room.ChoicepointTerminal
-   * @generated
-   */
-  EClass getChoicepointTerminal();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.ChoicepointTerminal#getCp <em>Cp</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Cp</em>'.
-   * @see org.eclipse.etrice.core.room.ChoicepointTerminal#getCp()
-   * @see #getChoicepointTerminal()
-   * @generated
-   */
-  EReference getChoicepointTerminal_Cp();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Trigger <em>Trigger</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Trigger</em>'.
-   * @see org.eclipse.etrice.core.room.Trigger
-   * @generated
-   */
-  EClass getTrigger();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Trigger#getMsgFromIfPairs <em>Msg From If Pairs</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Msg From If Pairs</em>'.
-   * @see org.eclipse.etrice.core.room.Trigger#getMsgFromIfPairs()
-   * @see #getTrigger()
-   * @generated
-   */
-  EReference getTrigger_MsgFromIfPairs();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Trigger#getGuard <em>Guard</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Guard</em>'.
-   * @see org.eclipse.etrice.core.room.Trigger#getGuard()
-   * @see #getTrigger()
-   * @generated
-   */
-  EReference getTrigger_Guard();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.MessageFromIf <em>Message From If</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Message From If</em>'.
-   * @see org.eclipse.etrice.core.room.MessageFromIf
-   * @generated
-   */
-  EClass getMessageFromIf();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.MessageFromIf#getMessage <em>Message</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Message</em>'.
-   * @see org.eclipse.etrice.core.room.MessageFromIf#getMessage()
-   * @see #getMessageFromIf()
-   * @generated
-   */
-  EReference getMessageFromIf_Message();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.etrice.core.room.MessageFromIf#getFrom <em>From</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>From</em>'.
-   * @see org.eclipse.etrice.core.room.MessageFromIf#getFrom()
-   * @see #getMessageFromIf()
-   * @generated
-   */
-  EReference getMessageFromIf_From();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Guard <em>Guard</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Guard</em>'.
-   * @see org.eclipse.etrice.core.room.Guard
-   * @generated
-   */
-  EClass getGuard();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Guard#getGuard <em>Guard</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Guard</em>'.
-   * @see org.eclipse.etrice.core.room.Guard#getGuard()
-   * @see #getGuard()
-   * @generated
-   */
-  EReference getGuard_Guard();
-
-  /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -7012,16 +4731,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EEnum getCommunicationType();
-
-  /**
-   * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Actor Communication Type</em>'.
-   * @see org.eclipse.etrice.core.room.ActorCommunicationType
-   * @generated
-   */
-  EEnum getActorCommunicationType();
 
   /**
    * Returns the meta object for enum '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}'.
@@ -7959,70 +5668,6 @@ public interface RoomPackage extends EPackage
     EClass OUT_MESSAGE_HANDLER = eINSTANCE.getOutMessageHandler();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl <em>Protocol Semantics</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ProtocolSemanticsImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getProtocolSemantics()
-     * @generated
-     */
-    EClass PROTOCOL_SEMANTICS = eINSTANCE.getProtocolSemantics();
-
-    /**
-     * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PROTOCOL_SEMANTICS__RULES = eINSTANCE.getProtocolSemantics_Rules();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SemanticsRuleImpl <em>Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.SemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSemanticsRule()
-     * @generated
-     */
-    EClass SEMANTICS_RULE = eINSTANCE.getSemanticsRule();
-
-    /**
-     * The meta object literal for the '<em><b>Msg</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SEMANTICS_RULE__MSG = eINSTANCE.getSemanticsRule_Msg();
-
-    /**
-     * The meta object literal for the '<em><b>Follow Ups</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SEMANTICS_RULE__FOLLOW_UPS = eINSTANCE.getSemanticsRule_FollowUps();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl <em>In Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.InSemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInSemanticsRule()
-     * @generated
-     */
-    EClass IN_SEMANTICS_RULE = eINSTANCE.getInSemanticsRule();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl <em>Out Semantics Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.OutSemanticsRuleImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getOutSemanticsRule()
-     * @generated
-     */
-    EClass OUT_SEMANTICS_RULE = eINSTANCE.getOutSemanticsRule();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ActorClassImpl <em>Actor Class</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -8031,30 +5676,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass ACTOR_CLASS = eINSTANCE.getActorClass();
-
-    /**
-     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTOR_CLASS__ABSTRACT = eINSTANCE.getActorClass_Abstract();
-
-    /**
-     * The meta object literal for the '<em><b>Comm Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACTOR_CLASS__COMM_TYPE = eINSTANCE.getActorClass_CommType();
-
-    /**
-     * The meta object literal for the '<em><b>Base</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__BASE = eINSTANCE.getActorClass_Base();
 
     /**
      * The meta object literal for the '<em><b>Interface Ports</b></em>' containment reference list feature.
@@ -8137,14 +5758,6 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__OPERATIONS = eINSTANCE.getActorClass_Operations();
 
     /**
-     * The meta object literal for the '<em><b>State Machine</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__STATE_MACHINE = eINSTANCE.getActorClass_StateMachine();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -8153,14 +5766,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EClass INTERFACE_ITEM = eINSTANCE.getInterfaceItem();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INTERFACE_ITEM__NAME = eINSTANCE.getInterfaceItem_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.PortImpl <em>Port</em>}' class.
@@ -8661,600 +6266,6 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_REF__TYPE = eINSTANCE.getActorRef_Type();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.StateGraphNodeImpl <em>State Graph Node</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.StateGraphNodeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphNode()
-     * @generated
-     */
-    EClass STATE_GRAPH_NODE = eINSTANCE.getStateGraphNode();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.StateGraphItemImpl <em>State Graph Item</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.StateGraphItemImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraphItem()
-     * @generated
-     */
-    EClass STATE_GRAPH_ITEM = eINSTANCE.getStateGraphItem();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.StateImpl <em>State</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.StateImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getState()
-     * @generated
-     */
-    EClass STATE = eINSTANCE.getState();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__DOCU = eINSTANCE.getState_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Entry Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__ENTRY_CODE = eINSTANCE.getState_EntryCode();
-
-    /**
-     * The meta object literal for the '<em><b>Exit Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__EXIT_CODE = eINSTANCE.getState_ExitCode();
-
-    /**
-     * The meta object literal for the '<em><b>Do Code</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__DO_CODE = eINSTANCE.getState_DoCode();
-
-    /**
-     * The meta object literal for the '<em><b>Subgraph</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE__SUBGRAPH = eINSTANCE.getState_Subgraph();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.StateGraphImpl <em>State Graph</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.StateGraphImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateGraph()
-     * @generated
-     */
-    EClass STATE_GRAPH = eINSTANCE.getStateGraph();
-
-    /**
-     * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_GRAPH__STATES = eINSTANCE.getStateGraph_States();
-
-    /**
-     * The meta object literal for the '<em><b>Tr Points</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_GRAPH__TR_POINTS = eINSTANCE.getStateGraph_TrPoints();
-
-    /**
-     * The meta object literal for the '<em><b>Ch Points</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_GRAPH__CH_POINTS = eINSTANCE.getStateGraph_ChPoints();
-
-    /**
-     * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_GRAPH__TRANSITIONS = eINSTANCE.getStateGraph_Transitions();
-
-    /**
-     * The meta object literal for the '<em><b>Refined Transitions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_GRAPH__REFINED_TRANSITIONS = eINSTANCE.getStateGraph_RefinedTransitions();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SimpleStateImpl <em>Simple State</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.SimpleStateImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSimpleState()
-     * @generated
-     */
-    EClass SIMPLE_STATE = eINSTANCE.getSimpleState();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SIMPLE_STATE__NAME = eINSTANCE.getSimpleState_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefinedStateImpl <em>Refined State</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.RefinedStateImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedState()
-     * @generated
-     */
-    EClass REFINED_STATE = eINSTANCE.getRefinedState();
-
-    /**
-     * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_STATE__TARGET = eINSTANCE.getRefinedState_Target();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.DetailCodeImpl <em>Detail Code</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.DetailCodeImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getDetailCode()
-     * @generated
-     */
-    EClass DETAIL_CODE = eINSTANCE.getDetailCode();
-
-    /**
-     * The meta object literal for the '<em><b>Lines</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DETAIL_CODE__LINES = eINSTANCE.getDetailCode_Lines();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TrPointImpl <em>Tr Point</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TrPointImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPoint()
-     * @generated
-     */
-    EClass TR_POINT = eINSTANCE.getTrPoint();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TR_POINT__NAME = eINSTANCE.getTrPoint_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionPointImpl <em>Transition Point</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TransitionPointImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionPoint()
-     * @generated
-     */
-    EClass TRANSITION_POINT = eINSTANCE.getTransitionPoint();
-
-    /**
-     * The meta object literal for the '<em><b>Handler</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION_POINT__HANDLER = eINSTANCE.getTransitionPoint_Handler();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.EntryPointImpl <em>Entry Point</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.EntryPointImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getEntryPoint()
-     * @generated
-     */
-    EClass ENTRY_POINT = eINSTANCE.getEntryPoint();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ExitPointImpl <em>Exit Point</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ExitPointImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getExitPoint()
-     * @generated
-     */
-    EClass EXIT_POINT = eINSTANCE.getExitPoint();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ChoicePointImpl <em>Choice Point</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ChoicePointImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicePoint()
-     * @generated
-     */
-    EClass CHOICE_POINT = eINSTANCE.getChoicePoint();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute CHOICE_POINT__NAME = eINSTANCE.getChoicePoint_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CHOICE_POINT__DOCU = eINSTANCE.getChoicePoint_Docu();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionImpl <em>Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransition()
-     * @generated
-     */
-    EClass TRANSITION = eINSTANCE.getTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TRANSITION__NAME = eINSTANCE.getTransition_Name();
-
-    /**
-     * The meta object literal for the '<em><b>To</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION__TO = eINSTANCE.getTransition_To();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION__DOCU = eINSTANCE.getTransition_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION__ACTION = eINSTANCE.getTransition_Action();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.NonInitialTransitionImpl <em>Non Initial Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.NonInitialTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getNonInitialTransition()
-     * @generated
-     */
-    EClass NON_INITIAL_TRANSITION = eINSTANCE.getNonInitialTransition();
-
-    /**
-     * The meta object literal for the '<em><b>From</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NON_INITIAL_TRANSITION__FROM = eINSTANCE.getNonInitialTransition_From();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl <em>Transition Chain Start Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TransitionChainStartTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionChainStartTransition()
-     * @generated
-     */
-    EClass TRANSITION_CHAIN_START_TRANSITION = eINSTANCE.getTransitionChainStartTransition();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InitialTransitionImpl <em>Initial Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.InitialTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getInitialTransition()
-     * @generated
-     */
-    EClass INITIAL_TRANSITION = eINSTANCE.getInitialTransition();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ContinuationTransitionImpl <em>Continuation Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ContinuationTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getContinuationTransition()
-     * @generated
-     */
-    EClass CONTINUATION_TRANSITION = eINSTANCE.getContinuationTransition();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TriggeredTransitionImpl <em>Triggered Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TriggeredTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTriggeredTransition()
-     * @generated
-     */
-    EClass TRIGGERED_TRANSITION = eINSTANCE.getTriggeredTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Triggers</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRIGGERED_TRANSITION__TRIGGERS = eINSTANCE.getTriggeredTransition_Triggers();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.GuardedTransitionImpl <em>Guarded Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.GuardedTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuardedTransition()
-     * @generated
-     */
-    EClass GUARDED_TRANSITION = eINSTANCE.getGuardedTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GUARDED_TRANSITION__GUARD = eINSTANCE.getGuardedTransition_Guard();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.CPBranchTransitionImpl <em>CP Branch Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.CPBranchTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getCPBranchTransition()
-     * @generated
-     */
-    EClass CP_BRANCH_TRANSITION = eINSTANCE.getCPBranchTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CP_BRANCH_TRANSITION__CONDITION = eINSTANCE.getCPBranchTransition_Condition();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RefinedTransitionImpl <em>Refined Transition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.RefinedTransitionImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getRefinedTransition()
-     * @generated
-     */
-    EClass REFINED_TRANSITION = eINSTANCE.getRefinedTransition();
-
-    /**
-     * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_TRANSITION__TARGET = eINSTANCE.getRefinedTransition_Target();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_TRANSITION__DOCU = eINSTANCE.getRefinedTransition_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_TRANSITION__ACTION = eINSTANCE.getRefinedTransition_Action();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TransitionTerminalImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTransitionTerminal()
-     * @generated
-     */
-    EClass TRANSITION_TERMINAL = eINSTANCE.getTransitionTerminal();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.StateTerminalImpl <em>State Terminal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.StateTerminalImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getStateTerminal()
-     * @generated
-     */
-    EClass STATE_TERMINAL = eINSTANCE.getStateTerminal();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATE_TERMINAL__STATE = eINSTANCE.getStateTerminal_State();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TrPointTerminalImpl <em>Tr Point Terminal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TrPointTerminalImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrPointTerminal()
-     * @generated
-     */
-    EClass TR_POINT_TERMINAL = eINSTANCE.getTrPointTerminal();
-
-    /**
-     * The meta object literal for the '<em><b>Tr Point</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TR_POINT_TERMINAL__TR_POINT = eINSTANCE.getTrPointTerminal_TrPoint();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.SubStateTrPointTerminalImpl <em>Sub State Tr Point Terminal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.SubStateTrPointTerminalImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getSubStateTrPointTerminal()
-     * @generated
-     */
-    EClass SUB_STATE_TR_POINT_TERMINAL = eINSTANCE.getSubStateTrPointTerminal();
-
-    /**
-     * The meta object literal for the '<em><b>Tr Point</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SUB_STATE_TR_POINT_TERMINAL__TR_POINT = eINSTANCE.getSubStateTrPointTerminal_TrPoint();
-
-    /**
-     * The meta object literal for the '<em><b>State</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SUB_STATE_TR_POINT_TERMINAL__STATE = eINSTANCE.getSubStateTrPointTerminal_State();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ChoicepointTerminalImpl <em>Choicepoint Terminal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.ChoicepointTerminalImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getChoicepointTerminal()
-     * @generated
-     */
-    EClass CHOICEPOINT_TERMINAL = eINSTANCE.getChoicepointTerminal();
-
-    /**
-     * The meta object literal for the '<em><b>Cp</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CHOICEPOINT_TERMINAL__CP = eINSTANCE.getChoicepointTerminal_Cp();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.TriggerImpl <em>Trigger</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.TriggerImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getTrigger()
-     * @generated
-     */
-    EClass TRIGGER = eINSTANCE.getTrigger();
-
-    /**
-     * The meta object literal for the '<em><b>Msg From If Pairs</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRIGGER__MSG_FROM_IF_PAIRS = eINSTANCE.getTrigger_MsgFromIfPairs();
-
-    /**
-     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRIGGER__GUARD = eINSTANCE.getTrigger_Guard();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.MessageFromIfImpl <em>Message From If</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.MessageFromIfImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getMessageFromIf()
-     * @generated
-     */
-    EClass MESSAGE_FROM_IF = eINSTANCE.getMessageFromIf();
-
-    /**
-     * The meta object literal for the '<em><b>Message</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MESSAGE_FROM_IF__MESSAGE = eINSTANCE.getMessageFromIf_Message();
-
-    /**
-     * The meta object literal for the '<em><b>From</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MESSAGE_FROM_IF__FROM = eINSTANCE.getMessageFromIf_From();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.GuardImpl <em>Guard</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.impl.GuardImpl
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getGuard()
-     * @generated
-     */
-    EClass GUARD = eINSTANCE.getGuard();
-
-    /**
-     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GUARD__GUARD = eINSTANCE.getGuard_Guard();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.CommunicationType <em>Communication Type</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9263,16 +6274,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EEnum COMMUNICATION_TYPE = eINSTANCE.getCommunicationType();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.etrice.core.room.ActorCommunicationType <em>Actor Communication Type</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.etrice.core.room.ActorCommunicationType
-     * @see org.eclipse.etrice.core.room.impl.RoomPackageImpl#getActorCommunicationType()
-     * @generated
-     */
-    EEnum ACTOR_COMMUNICATION_TYPE = eINSTANCE.getActorCommunicationType();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.ReferenceType <em>Reference Type</em>}' enum.

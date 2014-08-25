@@ -12,17 +12,15 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import com.google.inject.Singleton
 import com.google.inject.Inject
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
+import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.generator.base.FileSystemHelpers
 
 @Singleton
 class OptionalActorInterfaceGen extends GenericActorClassGenerator {

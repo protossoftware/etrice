@@ -14,8 +14,10 @@ package org.eclipse.etrice.ui.structure.editor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.ui.common.editor.CustomDiagramBehavior;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.etrice.core.ui.editor.RoomEditor;
+import org.eclipse.etrice.ui.common.base.editor.CustomDiagramBehavior;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
+import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
 import org.eclipse.etrice.ui.structure.Activator;
 import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.provider.SuperDiagramPositionProvider;
@@ -26,15 +28,17 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 
 
-public class StructureEditor extends RoomDiagramEditor {
+public class StructureEditor extends DiagramEditorBase {
 
 	public static final String STRUCTURE_EDITOR_ID = "org.eclipse.etrice.ui.structure.editor.StructureEditor";
+	private boolean showLostDiagramInputDialog = true;
 	
 	public StructureEditor() {
-		super();
+		super(RoomEditor.class);
 	}
 	
 	@Override
@@ -45,7 +49,6 @@ public class StructureEditor extends RoomDiagramEditor {
 	/**
 	 * @return the actor class of this editor
 	 */
-	@Override
 	public StructureClass getStructureClass() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
@@ -76,5 +79,28 @@ public class StructureEditor extends RoomDiagramEditor {
 		};
 	}
 	
-	
+	protected void handleMissingDiagramBo(Diagram diagram){
+		if(!showLostDiagramInputDialog)
+			return;
+		
+		// show only once
+		showLostDiagramInputDialog = false;
+		MessageDialog dialog = new MessageDialog(getGraphicalControl().getShell(),
+				"Diagram out-dated", null,
+				"Diagram input lost. Cannot find ROOM file or class for "+diagram.getName() +"\n\n"
+				+ "Please ensure that no whitespace or special characters are contained in any related path, file or project",
+				MessageDialog.ERROR, new String[] { "OK", "Reconnect Diagram" }, 0);
+		int result = dialog.open();
+		
+		if(result == 1)
+			new ChangeDiagramInputJob("Change input for "+diagram.getName(), this).schedule();	
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase#getModel()
+	 */
+	@Override
+	protected EObject getModel() {
+		return getStructureClass().eContainer();
+	}
 }

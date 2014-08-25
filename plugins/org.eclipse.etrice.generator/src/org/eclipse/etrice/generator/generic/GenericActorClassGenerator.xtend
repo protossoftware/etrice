@@ -18,8 +18,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.generator.base.Indexed.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import org.eclipse.etrice.core.room.ActorClass
 
 /**
@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.ActorClass
  */
 class GenericActorClassGenerator {
 
+	@Inject protected extension RoomHelpers
 	@Inject protected extension RoomExtensions
 	@Inject protected ILanguageExtension langExt
 

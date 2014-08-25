@@ -16,29 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.etrice.core.genmodel.etricegen.*;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
-import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
-import org.eclipse.etrice.core.room.SimpleState;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.StateGraphNode;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 /**
  * <!-- begin-user-doc -->
@@ -216,46 +194,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ETriceGenPackage.ACTIVE_TRIGGER: {
-				ActiveTrigger activeTrigger = (ActiveTrigger)theEObject;
-				T result = caseActiveTrigger(activeTrigger);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.TRANSITION_CHAIN: {
-				TransitionChain transitionChain = (TransitionChain)theEObject;
-				T result = caseTransitionChain(transitionChain);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.ITRANSITION_CHAIN_VISITOR: {
-				ITransitionChainVisitor iTransitionChainVisitor = (ITransitionChainVisitor)theEObject;
-				T result = caseITransitionChainVisitor(iTransitionChainVisitor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.IDIAGNOSTICIAN: {
-				IDiagnostician iDiagnostician = (IDiagnostician)theEObject;
-				T result = caseIDiagnostician(iDiagnostician);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: {
-				ExpandedActorClass expandedActorClass = (ExpandedActorClass)theEObject;
-				T result = caseExpandedActorClass(expandedActorClass);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ETriceGenPackage.EXPANDED_REFINED_STATE: {
-				ExpandedRefinedState expandedRefinedState = (ExpandedRefinedState)theEObject;
-				T result = caseExpandedRefinedState(expandedRefinedState);
-				if (result == null) result = caseSimpleState(expandedRefinedState);
-				if (result == null) result = caseState(expandedRefinedState);
-				if (result == null) result = caseStateGraphNode(expandedRefinedState);
-				if (result == null) result = caseStateGraphItem(expandedRefinedState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ETriceGenPackage.WIRED_STRUCTURE_CLASS: {
 				WiredStructureClass wiredStructureClass = (WiredStructureClass)theEObject;
 				T result = caseWiredStructureClass(wiredStructureClass);
@@ -291,6 +229,13 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 				WiredSubSystemClass wiredSubSystemClass = (WiredSubSystemClass)theEObject;
 				T result = caseWiredSubSystemClass(wiredSubSystemClass);
 				if (result == null) result = caseWiredStructureClass(wiredSubSystemClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: {
+				ExpandedActorClass expandedActorClass = (ExpandedActorClass)theEObject;
+				T result = caseExpandedActorClass(expandedActorClass);
+				if (result == null) result = caseExpandedModelComponent(expandedActorClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -539,66 +484,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Active Trigger</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Active Trigger</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseActiveTrigger(ActiveTrigger object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transition Chain</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transition Chain</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTransitionChain(TransitionChain object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>ITransition Chain Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>ITransition Chain Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseITransitionChainVisitor(ITransitionChainVisitor object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>IDiagnostician</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IDiagnostician</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIDiagnostician(IDiagnostician object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Expanded Actor Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -614,17 +499,17 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expanded Refined State</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Expanded Model Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expanded Refined State</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Expanded Model Component</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpandedRefinedState(ExpandedRefinedState object) {
+	public T caseExpandedModelComponent(ExpandedModelComponent object) {
 		return null;
 	}
 
@@ -715,66 +600,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseWiredSubSystemClass(WiredSubSystemClass object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State Graph Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State Graph Item</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStateGraphItem(StateGraphItem object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State Graph Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State Graph Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStateGraphNode(StateGraphNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseState(State object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleState(SimpleState object) {
 		return null;
 	}
 

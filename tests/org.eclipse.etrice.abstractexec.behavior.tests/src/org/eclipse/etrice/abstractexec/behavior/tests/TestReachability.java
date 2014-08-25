@@ -13,6 +13,7 @@
 package org.eclipse.etrice.abstractexec.behavior.tests;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -20,11 +21,11 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.junit.Assert;
@@ -58,8 +59,8 @@ public class TestReachability extends TestBase {
 			}
 		}
 
-		for (AbstractValidationDiagnostic d : getIssueCode2diagnostic().get(
-				ReachabilityValidator.DIAG_CODE_UNREACHABLE)) {
+		List<AbstractValidationDiagnostic> diagnostics = getIssueCode2diagnostic().get(ReachabilityValidator.DIAG_CODE_UNREACHABLE);
+		for (AbstractValidationDiagnostic d : diagnostics) {
 			if (d instanceof FeatureBasedDiagnostic) {
 				FeatureBasedDiagnostic dx = (FeatureBasedDiagnostic) d;
 				StateGraph graph = (StateGraph) dx.getSourceEObject();

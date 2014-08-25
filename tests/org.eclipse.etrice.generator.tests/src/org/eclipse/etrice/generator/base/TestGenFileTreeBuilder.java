@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.eclipse.etrice.generator.fsm.base.FolderFilter;
+import org.eclipse.etrice.generator.fsm.base.GenDir;
+import org.eclipse.etrice.generator.fsm.base.GenFile;
+import org.eclipse.etrice.generator.fsm.base.GenFileTreeBuilder;
+import org.eclipse.etrice.generator.fsm.base.GenItem;
 import org.junit.Test;
 
 /**

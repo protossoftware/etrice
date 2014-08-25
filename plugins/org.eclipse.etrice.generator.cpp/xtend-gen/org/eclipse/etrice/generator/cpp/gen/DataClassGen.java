@@ -15,13 +15,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -70,6 +70,10 @@ public class DataClassGen {
   private Initialization _initialization;
   
   @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
   private ILogger logger;
   
   public void doGenerate(final Root root) {
@@ -110,7 +114,7 @@ public class DataClassGen {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
@@ -315,7 +319,7 @@ public class DataClassGen {
       EList<StandardOperation> _operations = dc.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);

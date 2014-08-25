@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fSM" nsURI="http://www.eclipse.org/etrice/core/fsm/FSM" nsPrefix="fSM">
+  <eClassifiers xsi:type="ecore:EClass" name="FSMModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//ModelComponent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComponentCommunicationType">
+    <eLiterals name="EVENT_DRIVEN" literal="eventdriven"/>
+    <eLiterals name="DATA_DRIVEN" value="1" literal="datadriven"/>
+    <eLiterals name="ASYNCHRONOUS" value="2" literal="async"/>
+    <eLiterals name="SYNCHRONOUS" value="3" literal="sync"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelComponent" eSuperTypes="#//IInterfaceItemOwner">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commType" eType="#//ComponentCommunicationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//ModelComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="#//StateGraph"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateGraphNode" eSuperTypes="#//StateGraphItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link State}&lt;/li>&#xD;&#xA;  &lt;li>{@link ChoicePoint}&lt;/li>&#xD;&#xA;  &lt;li>{@link TrPoint}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateGraphItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link StateGraphNode}&lt;/li>&#xD;&#xA;  &lt;li>{@link Transition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.State%>) &#xD;&#xA;&#x9;return ((State)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.TrPoint%>)&#xD;&#xA;&#x9;return ((TrPoint)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.ChoicePoint%>)&#xD;&#xA;&#x9;return ((ChoicePoint)this).getName();&#xD;&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.Transition%>)&#xD;&#xA;&#x9;return ((Transition)this).getName();&#xD;&#xA;return &quot;&quot;;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateGraph">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A state graph is a directed graph composed of&#xD;&#xA;{@link StateGraphNode}s as nodes and {@link Transition}s as edges.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all states of this state graph.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoints" upperBound="-1"
+        eType="#//TrPoint" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all transition, entry and exit points of this state graph.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chPoints" upperBound="-1"
+        eType="#//ChoicePoint" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all choice points of this state graph.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all transitions of this state graph.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refinedTransitions" upperBound="-1"
+        eType="#//RefinedTransition" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all refined transitions of this state graph.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//StateGraphNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link SimpleState}&lt;/li>&#xD;&#xA;  &lt;li>{@link RefinedState}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedState%>)? (((RefinedState)this).getTarget()==null? &quot;&quot;:((RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryCode" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional entry code written in the code generator's target language.&#xD;&#xA;It is executed when the state is entered.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitCode" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional entry code written in the code generator's target language.&#xD;&#xA;It is executed when the state is left.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="doCode" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional do code written in the code generator's target language.&#xD;&#xA;It is executed whenever the actor instance is polled (applies only to&#xD;&#xA;data driven and sync actor classes).&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraph" eType="#//StateGraph"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional sub state graph of this state.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//State">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A simple state is the standard case of a @link State}.&#xD;&#xA;It comprises and &lt;em>entry&lt;/em>, &lt;em>exit&lt;/em> and &lt;em>do&lt;/em> code&#xD;&#xA;and it can contain another {@link StateGraph} as sub state&#xD;&#xA;graph.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the state is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//State">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A refined state can be used only in a derived {@link ActorClass}.&#xD;&#xA;It refers to a {@link State} in the inherited state machine&#xD;&#xA;which is refined by adding detail code and/or&#xD;&#xA;{@link StateGraphItem}s in the sub state graph.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced state in the base class state machine.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DetailCode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="used" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of commands in the code generator's target language.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrPoint" eSuperTypes="#//StateGraphNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link TransitionPoint}&lt;/li>&#xD;&#xA;  &lt;li>{@link EntryPoint}&lt;/li>&#xD;&#xA;  &lt;li>{@link ExitPoint}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the transition, entry or exit point is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionPoint" eSuperTypes="#//TrPoint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A transition point is located at the border of a {@link State}&#xD;&#xA;and is not visible or accessible outside. It is used&#xD;&#xA;to globally handle messages. If a {@link Transition} starting&#xD;&#xA;at a transition point triggers then exit and entry codes&#xD;&#xA;are executed as usual as long as the handler flag of the&#xD;&#xA;transition point isn't set.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="handler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>If this flag is {@code true} then for a transition triggerd from this point&#xD;&#xA;no exit and entry codes of the states left and entered are executed.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPoint" eSuperTypes="#//TrPoint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An entry point is located at the border of a {@link State}&#xD;&#xA;and is visible and accessible outside. Outside&#xD;&#xA;it can be the target of a {@link Transition} and inside the source.&#xD;&#xA;If it is not connected in the interior then it is a&#xD;&#xA;&lt;em>transition to history&lt;/em>.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitPoint" eSuperTypes="#//TrPoint">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An exit point is located at the border of a {@link State}&#xD;&#xA;and is visible and accessible outside. Outside&#xD;&#xA;it can be the source of a {@link Transition} and inside the target.&#xD;&#xA;If it is not connected in the interior then it is a&#xD;&#xA;&lt;em>group transition&lt;/em>.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoicePoint" eSuperTypes="#//StateGraphNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A choice point corresponds to an {@code if else} construct.&#xD;&#xA;It is the target of one or more {@link Transition}s and the&#xD;&#xA;source of several {@link Transition}s.&#xD;&#xA;One outgoing transitions must be a {@link ContinuationTransition}&#xD;&#xA;and corresponds to the final else. It is called the&#xD;&#xA;&lt;em>default branch&lt;/em> of the choice point.&#xD;&#xA;All other outgoing transitions have to be {@link CPBranchTransition}s.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the choice point is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//StateGraphItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link InitialTransition}&lt;/li>&#xD;&#xA;  &lt;li>{@link NonInitialTransition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional name of the transition.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//TransitionTerminal"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target node of the transition.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional code in the code generator's target language.&#xD;&#xA;It is execute when the transition fires.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonInitialTransition" eSuperTypes="#//Transition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link TransitionChainStartTransition}&lt;/li>&#xD;&#xA;  &lt;li>{@link ContinuationTransition}&lt;/li>&#xD;&#xA;  &lt;li>{@link CPBranchTransition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//TransitionTerminal"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the source node of the transition.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionChainStartTransition" eSuperTypes="#//NonInitialTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link TriggeredTransition}&lt;/li>&#xD;&#xA;  &lt;li>{@link GuardedTransition}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialTransition" eSuperTypes="#//Transition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>There can be at most one initial transition in a {@link StateGraph}.&#xD;&#xA;It defines the starting point of the state graph and is traversed&#xD;&#xA;exactly once when the state graph is accessed for the first time.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContinuationTransition" eSuperTypes="#//NonInitialTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Continuation transitions start at entry or exit points&#xD;&#xA;({@link EntryPoint}s or {@link ExitPoint}s) or form&#xD;&#xA;the default branch of a {@link ChoicePoint}.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggeredTransition" eSuperTypes="#//TransitionChainStartTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Triggered transitions start at a {@link State} or a {@link TransitionPoint}.&#xD;&#xA;It defines a list of {@link Trigger}s that specify the conditions&#xD;&#xA;when the transition fires and is traversed. This kind of&#xD;&#xA;transition is only allowed in event driven and mixed (async) state&#xD;&#xA;machines.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
+        eType="#//Trigger" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all triggers of the transition.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardedTransition" eSuperTypes="#//TransitionChainStartTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A guarded transition is very similar to a {@link CPBranchTransition}.&#xD;&#xA;It defines a guard condition which lets the transition fire if&#xD;&#xA;evaluated to {@code true}. This kind of transition is only&#xD;&#xA;allowed in data driven or moixed (async) state machines.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the guard condition of the transition specified in the code generator's target language.&#xD;&#xA;It has to evaluate to a boolean value.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPBranchTransition" eSuperTypes="#//NonInitialTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The choice point branch transitions is allowed only as outgoing&#xD;&#xA;transition of {@link ChoicePoint}s.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the condition of the choice point branch specified in the code generator's target language.&#xD;&#xA;It has to evaluate to a boolean value.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedTransition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The refined transition is only allowed in {@link StateGraph}s&#xD;&#xA;of derived {@link ActorClass}es. It targets a {@link Transition}&#xD;&#xA;of the base class state machine.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Transition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the referenced transition in the base class state machine.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional code in the code generator's target language.&#xD;&#xA;It is execute when the transition fires.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionTerminal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link StateTerminal}&lt;/li>&#xD;&#xA;  &lt;li>{@link TrPointTerminal}&lt;/li>&#xD;&#xA;  &lt;li>{@link SubStateTrPointTerminal}&lt;/li>&#xD;&#xA;  &lt;li>{@link ChoicepointTerminal}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateTerminal" eSuperTypes="#//TransitionTerminal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The terminal point (source or target) of a transition ending&#xD;&#xA;at a {@link State}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target state.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrPointTerminal" eSuperTypes="#//TransitionTerminal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The terminal point (source or target) of a transition ending&#xD;&#xA;at a local {@link TrPoint}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target transition, entry or exit point.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubStateTrPointTerminal" eSuperTypes="#//TransitionTerminal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The terminal point (source or target) of a transition ending&#xD;&#xA;at a {@link TrPoint} of a sub {@link State}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trPoint" eType="#//TrPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target entry or exit point contained in the target state.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target state.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoicepointTerminal" eSuperTypes="#//TransitionTerminal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The terminal point (source or target) of a transition ending&#xD;&#xA;at a {@link ChoicepointTerminal}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cp" eType="#//ChoicePoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the target choice point.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trigger">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A transition trigger is a list of {@link MessageFromIf} pairs&#xD;&#xA;and an optional {@link Guard}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msgFromIfPairs" upperBound="-1"
+        eType="#//MessageFromIf" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of message/interface item pairs.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//Guard"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is an optional guard condition of the trigger specified in the code generator's target language.&#xD;&#xA;It has to evaluate to a boolean value.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageFromIf">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A pair consisting of a {@link Message} arising from an&#xD;&#xA;{@link InterfaceItem}.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the triggerering message (or event).&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//AbstractInterfaceItem">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is the interface item where the message occurred.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractInterfaceItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An abstract interface item to be overridden in derived grammars.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getSemantics" eType="#//ProtocolSemantics"/>
+    <eOperations name="getAllIncomingAbstractMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eOperations name="getAllOutgoingAbstractMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>By this name the interface item is referred to in the model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Guard">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A detail code that evaluates to a boolean in the target&#xD;&#xA;language.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="#//DetailCode"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a guard condition specified in the code generator's target language.&#xD;&#xA;It has to evaluate to a boolean value.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtocolSemantics">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>An optional semantics specification as part of a {@link ProtocolClass}.&#xD;&#xA;The semantic is defined as a &lt;em>legal execution tree&lt;/em>.&#xD;&#xA;This tree is composed of incoming and outgoing messages and each path through&#xD;&#xA;this tree is a valid sequence of messages exchanged through a port instance.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The semantics are composed using {@link SemanticsRule}s.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//SemanticsRule" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of semantic rules.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticsRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>The super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;  &lt;li>{@link InSemanticsRule}&lt;/li>&#xD;&#xA;  &lt;li>{@link OutSemanticsRule}&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The message to which this rule applies.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="followUps" upperBound="-1"
+        eType="#//SemanticsRule" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>The possible follow up rules.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InSemanticsRule" eSuperTypes="#//SemanticsRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A {@link SemanticsRule} for incoming messages.&#xD;&#xA;The rule points to an incoming messages and allows follow-up rules.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutSemanticsRule" eSuperTypes="#//SemanticsRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>A {@link SemanticsRule} for outgoing messages.&#xD;&#xA;The rule points to an outgoing messages and allows follow-up rules.&#xD;&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IInterfaceItemOwner" abstract="true"
+      interface="true">
+    <eOperations name="getAbstractInterfaceItems" upperBound="-1" eType="#//AbstractInterfaceItem"/>
+    <eOperations name="getAllAbstractInterfaceItems" upperBound="-1" eType="#//AbstractInterfaceItem"/>
+  </eClassifiers>
+</ecore:EPackage>

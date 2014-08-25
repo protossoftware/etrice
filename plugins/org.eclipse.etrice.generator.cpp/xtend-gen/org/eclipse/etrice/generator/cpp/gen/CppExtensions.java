@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;

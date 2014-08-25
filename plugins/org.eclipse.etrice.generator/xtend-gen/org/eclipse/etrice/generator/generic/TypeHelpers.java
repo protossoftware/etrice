@@ -33,10 +33,15 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @Singleton
 @SuppressWarnings("all")
 public class TypeHelpers {
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
+  
   @Inject
   private ILanguageExtension languageExt;
   
@@ -199,7 +204,7 @@ public class TypeHelpers {
       _and = inherite;
     }
     if (_and) {
-      ActorClass base = actor.getBase();
+      ActorClass base = actor.getActorBase();
       boolean _and_1 = false;
       boolean _notEquals = (!Objects.equal(base, null));
       if (!_notEquals) {
@@ -213,8 +218,8 @@ public class TypeHelpers {
         {
           String _attrClassConfigValue = this.dataConfigExt.getAttrClassConfigValue(base, attributePath);
           result = _attrClassConfigValue;
-          ActorClass _base = base.getBase();
-          base = _base;
+          ActorClass _actorBase = base.getActorBase();
+          base = _actorBase;
         }
         boolean _and_2 = false;
         boolean _notEquals_1 = (!Objects.equal(base, null));
@@ -231,7 +236,7 @@ public class TypeHelpers {
   }
   
   public String getAttrClassConfigValue(final List<Attribute> attributePath, final PortClass port) {
-    ProtocolClass pc = RoomHelpers.getProtocolClass(port);
+    ProtocolClass pc = this._roomHelpers.getProtocolClass(port);
     boolean _equals = Objects.equal(pc, null);
     if (_equals) {
       return null;

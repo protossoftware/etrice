@@ -110,11 +110,13 @@
 
 	<modules>
 		<module>../../plugins/org.eclipse.etrice.core.common</module>
+		<module>../../plugins/org.eclipse.etrice.core.fsm</module>
 		<module>../../plugins/org.eclipse.etrice.core.room</module>
 		<module>../../plugins/org.eclipse.etrice.core.config</module>
 		<module>../../plugins/org.eclipse.etrice.core.etphys</module>
 		<module>../../plugins/org.eclipse.etrice.core.etmap</module>
 		<module>../../plugins/org.eclipse.etrice.core.genmodel</module>
+		<module>../../plugins/org.eclipse.etrice.generator.fsm</module>
 		<module>../../plugins/org.eclipse.etrice.generator</module>
 		<module>../../plugins/org.eclipse.etrice.generator.config</module>
 		<module>../../plugins/org.eclipse.etrice.generator.doc</module>

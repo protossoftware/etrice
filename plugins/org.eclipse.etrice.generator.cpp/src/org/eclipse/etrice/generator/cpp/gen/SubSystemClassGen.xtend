@@ -14,7 +14,7 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
@@ -23,7 +23,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
-import static extension org.eclipse.etrice.generator.base.Indexed.*
+import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import org.eclipse.etrice.generator.base.IDataConfiguration
 
 /**

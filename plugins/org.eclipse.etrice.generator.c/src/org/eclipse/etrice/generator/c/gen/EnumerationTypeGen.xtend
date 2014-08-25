@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.c.gen
 
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import com.google.inject.Inject
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.genmodel.etricegen.Root

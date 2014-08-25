@@ -2,7 +2,12 @@
  */
 package org.eclipse.etrice.core.room;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 /**
  * <!-- begin-user-doc -->
@@ -10,7 +15,9 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>The super class of
+ * <br>This is a concrete sub class of an {@link AbstractInterfaceItem}.
+ * 
+ * It is the super class of
  * <ul>
  *   <li>{@link Port}</li>
  *   <li>{@link SAP}</li>
@@ -19,45 +26,13 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.InterfaceItem#getName <em>Name</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getInterfaceItem()
  * @model
  * @generated
  */
-public interface InterfaceItem extends EObject
+public interface InterfaceItem extends AbstractInterfaceItem
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>By this name the interface item is referred to in the model.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getInterfaceItem_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.InterfaceItem#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,5 +41,32 @@ public interface InterfaceItem extends EObject
    * @generated
    */
   GeneralProtocolClass getGeneralProtocol();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof <%org.eclipse.etrice.core.room.ProtocolClass%>)\r\n\treturn ((ProtocolClass)getGeneralProtocol()).getSemantics();\r\nelse\r\n\treturn null;\r\n'"
+   * @generated
+   */
+  ProtocolSemantics getSemantics();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));\r\n'"
+   * @generated
+   */
+  EList<EObject> getAllIncomingAbstractMessages();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));\r\n'"
+   * @generated
+   */
+  EList<EObject> getAllOutgoingAbstractMessages();
 
 } // InterfaceItem

@@ -28,7 +28,6 @@ import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -38,6 +37,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
@@ -97,7 +97,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 			
 			if (objectOrProxy instanceof ActorClass) {
 				ActorClass referenced = (ActorClass) objectOrProxy;
-				return !ValidationUtil.isReferencing(referenced, ac);
+				return !roomHelpers.isReferencing(referenced, ac);
 			}
 			
 			return false;
@@ -105,6 +105,9 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		
 	}
 
+	@Inject
+	private RoomHelpers roomHelpers;
+	
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		if (contentAssistContext!=null && contentAssistContext.getCurrentModel().eClass()==RoomPackage.eINSTANCE.getActorRef())
 			return new FilteredProposalCreator(new ActorRefFilter(), contentAssistContext, ruleName);
@@ -167,13 +170,13 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	private List<ActorRef> collectInstances(ActorInstanceMapping aim) {
 		List<ActorRef> refs = new ArrayList<ActorRef>();
 
-		ActorContainerClass root = RoomHelpers.getParentContainer(aim);
+		ActorContainerClass root = roomHelpers.getParentContainer(aim);
 		if (root != null) {
 			RefPath path = aim.getPath();
 			if (path != null && !path.getRefs().isEmpty())
-				root = RoomHelpers.getActorContainerClass(aim);
+				root = roomHelpers.getActorContainerClass(aim);
 			if (root != null) {
-				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
+				for (ActorContainerRef ref : roomHelpers.getRefs(root, true)) {
 					if (ref instanceof ActorRef) {
 						ActorRef aRef = (ActorRef) ref;
 						if (aRef.getMultiplicity() == 1)

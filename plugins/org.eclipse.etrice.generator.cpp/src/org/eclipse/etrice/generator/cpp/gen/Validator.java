@@ -13,7 +13,7 @@
 package org.eclipse.etrice.generator.cpp.gen;
 
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 
 import com.google.inject.Inject;
 

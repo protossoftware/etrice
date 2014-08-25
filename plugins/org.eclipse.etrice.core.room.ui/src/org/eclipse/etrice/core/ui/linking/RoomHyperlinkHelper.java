@@ -28,12 +28,17 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 
+import com.google.inject.Inject;
+
 /**
  * @author Henrik Rentz-Reichert
  *
  */
 public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 
+	@Inject
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		IParseResult parseResult = resource.getParseResult();
@@ -64,7 +69,7 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 	}
 
 	private EObject getCrossLinkedEObject(ActorInstanceMapping aim) {
-		ActorContainerClass lastAcContainer = RoomHelpers.getParentContainer(aim);
+		ActorContainerClass lastAcContainer = roomHelpers.getParentContainer(aim);
 		ActorRef lastRef = null;
 		for (RefSegment ref : aim.getPath().getRefs()) {
 			for (ActorRef r : lastAcContainer.getActorRefs())

@@ -79,7 +79,7 @@
          <attribute name="classToCheck" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Only the last two segments of the fully qualified class name are considered.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EObject"/>

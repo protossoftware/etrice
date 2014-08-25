@@ -15,18 +15,17 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.generator.cpp.Main
 
 /**
  * @author Peter Karlitschek
@@ -103,7 +102,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ac.userCode(1, true)»
 		
 		
-		class «ac.name» : public «IF ac.base!=null»«ac.base.name»«ELSE»etRuntime::ActorClassBase«ENDIF» {
+		class «ac.name» : public «IF ac.actorBase!=null»«ac.actorBase.name»«ELSE»etRuntime::ActorClassBase«ENDIF» {
 		
 			
 			protected:
@@ -165,11 +164,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 	def private generateConstructorInitalizerList(ActorClass ac) { 
 		var initializerList = new ArrayList<CharSequence>();
-		if (ac.base==null) {
+		if (ac.actorBase==null) {
 			initializerList.add('''ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0])''')
 		}
 		else {
-			initializerList.add('''«ac.base.name»(*this, parent, name, port_addr, peer_addr)''')
+			initializerList.add('''«ac.actorBase.name»(*this, parent, name, port_addr, peer_addr)''')
 		}
 	    // own ports
 		for ( ep : ac.getEndPorts() ) {
@@ -196,7 +195,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def private generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
 		val ctor = ac.operations.filter(op|op.constructor).head
 		val dtor = ac.operations.filter(op|op.destructor).head
-		val async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
+		val async = xpac.actorClass.commType==ComponentCommunicationType::ASYNCHRONOUS
 		
 		'''
 		/**

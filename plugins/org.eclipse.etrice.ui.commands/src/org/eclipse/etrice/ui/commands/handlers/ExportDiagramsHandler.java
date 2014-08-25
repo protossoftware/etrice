@@ -35,8 +35,8 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorExporter;
-import org.eclipse.etrice.ui.common.Activator;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
+import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.structure.editor.StructureExporter;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -79,7 +79,7 @@ public class ExportDiagramsHandler extends AbstractHandler {
 		Injector injector = RoomUiModule.getInjector();
 		injector.injectMembers(this);
 		
-		this.store = Activator.getDefault().getPreferenceStore();
+		this.store = UIBaseActivator.getDefault().getPreferenceStore();
 	}
 
 	// TODO: code copied from org.eclipse.etrice.ui.commands.handlers.AbstractEditHandler - refactor
@@ -120,9 +120,9 @@ public class ExportDiagramsHandler extends AbstractHandler {
 
 	protected void exportDiagrams(RoomModel model, IPath modelPath, Shell shell) {
 		IContainer container = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(modelPath.removeLastSegments(1));
-		String relPath = store.getString(PreferenceConstants.EXPORT_DIAGRAM_PATH);
-		boolean projectRelative = PreferenceConstants.PATH_REL_TO_PROJECT.equals(
-				store.getString(PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO));
+		String relPath = store.getString(UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH);
+		boolean projectRelative = UIBasePreferenceConstants.PATH_REL_TO_PROJECT.equals(
+				store.getString(UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO));
 		
 		IFolder folder;
 		if (projectRelative) {

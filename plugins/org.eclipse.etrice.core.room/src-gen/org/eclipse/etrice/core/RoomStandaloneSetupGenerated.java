@@ -17,7 +17,7 @@ import com.google.inject.Injector;
 public class RoomStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.etrice.core.common.BaseStandaloneSetup.doSetup();
+		org.eclipse.etrice.core.fsm.FSMStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

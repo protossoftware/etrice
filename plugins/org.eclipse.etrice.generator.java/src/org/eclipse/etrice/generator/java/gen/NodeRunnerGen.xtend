@@ -17,10 +17,10 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
-import org.eclipse.etrice.generator.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 
 @Singleton
 class NodeRunnerGen {

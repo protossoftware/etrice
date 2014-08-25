@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipse.org/etrice/core/Config" 
        class = "org.eclipse.etrice.core.config.ConfigPackage"
-       genModel = "org/eclipse/etrice/core/Config.genmodel" /> 
+       genModel = "src-gen/org/eclipse/etrice/core/Config.genmodel" /> 
 	
   </extension>
 

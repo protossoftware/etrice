@@ -17,11 +17,12 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
@@ -36,14 +37,12 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.StateMachineGen;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -105,7 +104,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         CharSequence _generateUtilsFile = this.generateUtilsFile(root, xpac);
         this.fileIO.generateFile("generating ActorClass utils", path, infopath, file, _generateUtilsFile);
         ActorClass _actorClass_6 = xpac.getActorClass();
-        boolean _isBehaviorAnnotationPresent = RoomHelpers.isBehaviorAnnotationPresent(_actorClass_6, "BehaviorManual");
+        boolean _isBehaviorAnnotationPresent = this._roomHelpers.isBehaviorAnnotationPresent(_actorClass_6, "BehaviorManual");
         if (_isBehaviorAnnotationPresent) {
           ActorClass _actorClass_7 = xpac.getActorClass();
           String _name = _actorClass_7.getName();
@@ -127,7 +126,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
@@ -136,7 +135,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
-      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
@@ -153,7 +152,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
-      List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
@@ -171,10 +170,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean async = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean dataDriven = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean async = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
       boolean _or = false;
       boolean _and = false;
       boolean _and_1 = false;
@@ -189,14 +188,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (!_and_2) {
         _and_1 = false;
       } else {
-        List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
+        List<SAP> _allSAPs = this._roomHelpers.getAllSAPs(ac);
         boolean _isEmpty_2 = _allSAPs.isEmpty();
         _and_1 = _isEmpty_2;
       }
       if (!_and_1) {
         _and = false;
       } else {
-        List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
+        List<ServiceImplementation> _allServiceImplementations = this._roomHelpers.getAllServiceImplementations(ac);
         boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
         _and = _isEmpty_3;
       }
@@ -216,7 +215,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       if (!_isEmpty_4) {
         _and_5 = false;
       } else {
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(ac);
         boolean _isEmpty_5 = _allAttributes.isEmpty();
         _and_5 = _isEmpty_5;
       }
@@ -224,7 +223,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _and_4 = false;
       } else {
         StateGraph _stateMachine = xpac.getStateMachine();
-        boolean _isEmpty_6 = RoomHelpers.isEmpty(_stateMachine);
+        boolean _isEmpty_6 = this._roomHelpers.isEmpty(_stateMachine);
         _and_4 = _isEmpty_6;
       }
       if (!_and_4) {
@@ -375,7 +374,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* saps */");
           _builder.newLine();
           {
-            List<SAP> _allSAPs_1 = RoomHelpers.getAllSAPs(ac);
+            List<SAP> _allSAPs_1 = this._roomHelpers.getAllSAPs(ac);
             for(final SAP sap : _allSAPs_1) {
               _builder.append("\t");
               _builder.append("const ");
@@ -394,7 +393,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* replicated ports */");
           _builder.newLine();
           {
-            List<Port> _allEndPorts_3 = RoomHelpers.getAllEndPorts(ac);
+            List<Port> _allEndPorts_3 = this._roomHelpers.getAllEndPorts(ac);
             for(final Port ep_2 : _allEndPorts_3) {
               {
                 int _multiplicity_2 = ep_2.getMultiplicity();
@@ -416,7 +415,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* services */");
           _builder.newLine();
           {
-            List<ServiceImplementation> _allServiceImplementations_1 = RoomHelpers.getAllServiceImplementations(ac);
+            List<ServiceImplementation> _allServiceImplementations_1 = this._roomHelpers.getAllServiceImplementations(ac);
             for(final ServiceImplementation svc : _allServiceImplementations_1) {
               _builder.append("\t");
               _builder.append("const etReplPort ");
@@ -440,7 +439,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
-        boolean _isEmpty_7 = RoomHelpers.isEmpty(_stateMachine_1);
+        boolean _isEmpty_7 = this._roomHelpers.isEmpty(_stateMachine_1);
         boolean _not_1 = (!_isEmpty_7);
         if (_not_1) {
           _builder.newLine();
@@ -495,7 +494,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
-          List<Attribute> _allAttributes_1 = RoomHelpers.getAllAttributes(ac);
+          List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(ac);
           CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes_1);
           _builder.append(_attributes, "\t");
           _builder.newLineIfNotEmpty();
@@ -503,7 +502,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
           {
             StateGraph _stateMachine_2 = xpac.getStateMachine();
-            boolean _isEmpty_8 = RoomHelpers.isEmpty(_stateMachine_2);
+            boolean _isEmpty_8 = this._roomHelpers.isEmpty(_stateMachine_2);
             boolean _not_2 = (!_isEmpty_8);
             if (_not_2) {
               _builder.append("\t");
@@ -599,7 +598,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      List<Port> _allEndPorts = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
@@ -615,7 +614,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> replEventPorts = IterableExtensions.<Port>filter(eventPorts, _function_1);
-      List<Port> _allEndPorts_1 = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
@@ -640,7 +639,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_2);
-      List<Port> _allEndPorts_2 = RoomHelpers.getAllEndPorts(ac);
+      List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
         public Boolean apply(final Port p) {
           boolean _and = false;
@@ -723,7 +722,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_4);
         for(final Port ep : _filter) {
           {
-            List<Message> _outgoing = RoomHelpers.getOutgoing(ep);
+            List<Message> _outgoing = this._roomHelpers.getOutgoing(ep);
             for(final Message msg : _outgoing) {
               String _xifexpression = null;
               VarDecl _data = msg.getData();
@@ -775,7 +774,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final Port ep_1 : recvPorts) {
           {
-            List<Message> _incoming = RoomHelpers.getIncoming(ep_1);
+            List<Message> _incoming = this._roomHelpers.getIncoming(ep_1);
             for(final Message msg_1 : _incoming) {
               _builder.append("#define ");
               String _name_7 = ep_1.getName();
@@ -804,7 +803,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final Port ep_2 : sendPorts) {
           {
-            List<Message> _outgoing_1 = RoomHelpers.getOutgoing(ep_2);
+            List<Message> _outgoing_1 = this._roomHelpers.getOutgoing(ep_2);
             for(final Message msg_2 : _outgoing_1) {
               String _xifexpression_2 = null;
               VarDecl _data_2 = msg_2.getData();
@@ -854,10 +853,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* saps */");
       _builder.newLine();
       {
-        List<SAP> _allSAPs = RoomHelpers.getAllSAPs(ac);
+        List<SAP> _allSAPs = this._roomHelpers.getAllSAPs(ac);
         for(final SAP sap : _allSAPs) {
           {
-            List<Message> _outgoing_2 = RoomHelpers.getOutgoing(sap);
+            List<Message> _outgoing_2 = this._roomHelpers.getOutgoing(sap);
             for(final Message msg_3 : _outgoing_2) {
               String _xifexpression_4 = null;
               VarDecl _data_4 = msg_3.getData();
@@ -917,7 +916,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         for(final Port ep_3 : replEventPorts) {
           {
-            List<Message> _outgoing_3 = RoomHelpers.getOutgoing(ep_3);
+            List<Message> _outgoing_3 = this._roomHelpers.getOutgoing(ep_3);
             for(final Message msg_4 : _outgoing_3) {
               String _xifexpression_6 = null;
               VarDecl _data_6 = msg_4.getData();
@@ -988,11 +987,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* services */");
       _builder.newLine();
       {
-        List<ServiceImplementation> _allServiceImplementations = RoomHelpers.getAllServiceImplementations(ac);
+        List<ServiceImplementation> _allServiceImplementations = this._roomHelpers.getAllServiceImplementations(ac);
         for(final ServiceImplementation svc : _allServiceImplementations) {
           {
             SPP _spp = svc.getSpp();
-            List<Message> _outgoing_4 = RoomHelpers.getOutgoing(_spp);
+            List<Message> _outgoing_4 = this._roomHelpers.getOutgoing(_spp);
             for(final Message msg_5 : _outgoing_4) {
               String _xifexpression_8 = null;
               VarDecl _data_8 = msg_5.getData();
@@ -1069,7 +1068,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* operations */");
       _builder.newLine();
       {
-        List<Operation> _allOperations = RoomHelpers.getAllOperations(ac);
+        List<Operation> _allOperations = this._roomHelpers.getAllOperations(ac);
         for(final Operation op : _allOperations) {
           final CharSequence args = this.argList(op);
           _builder.newLineIfNotEmpty();
@@ -1102,7 +1101,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* attributes */");
       _builder.newLine();
       {
-        List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(ac);
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(ac);
         for(final Attribute a : _allAttributes) {
           _builder.append("#define ");
           String _name_38 = a.getName();
@@ -1146,12 +1145,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
-      ActorCommunicationType _commType = ac.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
-      ActorCommunicationType _commType_1 = ac.getCommType();
-      final boolean eventDriven = Objects.equal(_commType_1, ActorCommunicationType.EVENT_DRIVEN);
-      ActorCommunicationType _commType_2 = ac.getCommType();
-      final boolean dataDriven = Objects.equal(_commType_2, ActorCommunicationType.DATA_DRIVEN);
+      ComponentCommunicationType _commType = ac.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType_1 = ac.getCommType();
+      final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
+      ComponentCommunicationType _commType_2 = ac.getCommType();
+      final boolean dataDriven = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
       boolean _or = false;
       if (async) {
         _or = true;
@@ -1225,7 +1224,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         StateGraph _stateMachine = xpac.getStateMachine();
-        boolean _isEmpty = RoomHelpers.isEmpty(_stateMachine);
+        boolean _isEmpty = this._roomHelpers.isEmpty(_stateMachine);
         boolean _not = (!_isEmpty);
         if (_not) {
           CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac);
@@ -1250,7 +1249,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       {
         StateGraph _stateMachine_1 = xpac.getStateMachine();
-        boolean _isEmpty_1 = RoomHelpers.isEmpty(_stateMachine_1);
+        boolean _isEmpty_1 = this._roomHelpers.isEmpty(_stateMachine_1);
         boolean _not_1 = (!_isEmpty_1);
         if (_not_1) {
           _builder.append("\t");
@@ -1279,7 +1278,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       {
         StateGraph _stateMachine_2 = xpac.getStateMachine();
-        boolean _isEmpty_2 = RoomHelpers.isEmpty(_stateMachine_2);
+        boolean _isEmpty_2 = this._roomHelpers.isEmpty(_stateMachine_2);
         boolean _not_2 = (!_isEmpty_2);
         if (_not_2) {
           _builder.append("\t");
@@ -1330,7 +1329,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
           {
             StateGraph _stateMachine_3 = xpac.getStateMachine();
-            boolean _isEmpty_3 = RoomHelpers.isEmpty(_stateMachine_3);
+            boolean _isEmpty_3 = this._roomHelpers.isEmpty(_stateMachine_3);
             boolean _not_3 = (!_isEmpty_3);
             if (_not_3) {
               _builder.append("\t");

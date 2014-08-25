@@ -23,9 +23,8 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.validation.ValidationUtil;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateConnectionFeature;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.context.InitialAddConnectionContext;
@@ -90,31 +89,31 @@ public class LayerConnectionSupport {
 			@Override
 			public boolean canCreate(ICreateConnectionContext context) {
 				IFeatureProvider featureProvider = getFeatureProvider();
-				SPP src = SupportUtil.getSPP(context.getSourceAnchor(), featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
-				SPP tgt = SupportUtil.getSPP(context.getTargetAnchor(), featureProvider);
-				ActorContainerRef tgtRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
-				StructureClass sc = SupportUtil.getParent(context, featureProvider);
+				SPP src = SupportUtil.getInstance().getSPP(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(context.getSourceAnchor(), featureProvider);
+				SPP tgt = SupportUtil.getInstance().getSPP(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(context.getTargetAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(context, featureProvider);
 				
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
 			}
 			
 			public boolean canStartConnection(ICreateConnectionContext context) {
 				IFeatureProvider featureProvider = getFeatureProvider();
-				SPP src = SupportUtil.getSPP(context.getSourceAnchor(), featureProvider);
-				ActorContainerRef ref = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
-				StructureClass sc = SupportUtil.getParent(context, featureProvider);
-				return ValidationUtil.isConnectableSrc(src, ref, sc);
+				SPP src = SupportUtil.getInstance().getSPP(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef ref = SupportUtil.getInstance().getRef(context.getSourceAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(context, featureProvider);
+				return SupportUtil.getInstance().getValidationUtil().isConnectableSrc(src, ref, sc);
 			}
 			
 			@Override
 			protected Connection doCreate(ICreateConnectionContext context) {
 				IFeatureProvider featureProvider = getFeatureProvider();
-				SPP src = SupportUtil.getSPP(context.getSourceAnchor(), featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(context.getSourceAnchor(), featureProvider);
-				SPP dst = SupportUtil.getSPP(context.getTargetAnchor(), featureProvider);
-				ActorContainerRef dstRef = SupportUtil.getRef(context.getTargetAnchor(), featureProvider);
-				StructureClass sc = SupportUtil.getParent(context, featureProvider);
+				SPP src = SupportUtil.getInstance().getSPP(context.getSourceAnchor(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(context.getSourceAnchor(), featureProvider);
+				SPP dst = SupportUtil.getInstance().getSPP(context.getTargetAnchor(), featureProvider);
+				ActorContainerRef dstRef = SupportUtil.getInstance().getRef(context.getTargetAnchor(), featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(context, featureProvider);
 				
 				LayerConnection lc = RoomFactory.eINSTANCE.createLayerConnection();
 				SAPoint sapt = null;
@@ -310,13 +309,13 @@ public class LayerConnectionSupport {
 					atgt = context.getNewAnchor();
 
 				IFeatureProvider featureProvider = getFeatureProvider();
-				SPP src = SupportUtil.getSPP(asrc, featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(asrc, featureProvider);
-				SPP tgt = SupportUtil.getSPP(atgt, featureProvider);
-				ActorContainerRef tgtRef = SupportUtil.getRef(atgt, featureProvider);
-				StructureClass sc = SupportUtil.getParent(getDiagram(), featureProvider);
+				SPP src = SupportUtil.getInstance().getSPP(asrc, featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(asrc, featureProvider);
+				SPP tgt = SupportUtil.getInstance().getSPP(atgt, featureProvider);
+				ActorContainerRef tgtRef = SupportUtil.getInstance().getRef(atgt, featureProvider);
+				StructureClass sc = SupportUtil.getInstance().getParent(getDiagram(), featureProvider);
 
-				return ValidationUtil.isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
+				return SupportUtil.getInstance().getValidationUtil().isConnectable(src, srcRef, tgt, tgtRef, sc).isOk();
 			}
 			
 			@Override
@@ -324,10 +323,10 @@ public class LayerConnectionSupport {
 				super.postReconnect(context);
 
 				IFeatureProvider featureProvider = getFeatureProvider();
-				SPP src = SupportUtil.getSPP(context.getConnection().getStart(), featureProvider);
-				ActorContainerRef srcRef = SupportUtil.getRef(context.getConnection().getStart(), featureProvider);
-				SPP dst = SupportUtil.getSPP(context.getConnection().getEnd(), featureProvider);
-				ActorContainerRef dstRef = SupportUtil.getRef(context.getConnection().getEnd(), featureProvider);
+				SPP src = SupportUtil.getInstance().getSPP(context.getConnection().getStart(), featureProvider);
+				ActorContainerRef srcRef = SupportUtil.getInstance().getRef(context.getConnection().getStart(), featureProvider);
+				SPP dst = SupportUtil.getInstance().getSPP(context.getConnection().getEnd(), featureProvider);
+				ActorContainerRef dstRef = SupportUtil.getInstance().getRef(context.getConnection().getEnd(), featureProvider);
 				
 				doneChanges = true;
 				

@@ -16,14 +16,14 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -31,7 +31,6 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
@@ -249,11 +248,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append(_name_4, "\t");
     _builder.append(" : public ");
     {
-      ActorClass _base = ac.getBase();
-      boolean _notEquals = (!Objects.equal(_base, null));
+      ActorClass _actorBase = ac.getActorBase();
+      boolean _notEquals = (!Objects.equal(_actorBase, null));
       if (_notEquals) {
-        ActorClass _base_1 = ac.getBase();
-        String _name_5 = _base_1.getName();
+        ActorClass _actorBase_1 = ac.getActorBase();
+        String _name_5 = _actorBase_1.getName();
         _builder.append(_name_5, "\t");
       } else {
         _builder.append("etRuntime::ActorClassBase");
@@ -272,7 +271,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("//--------------------- ports");
     _builder.newLine();
     _builder.append("\t\t\t");
-    List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
+    List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
     final Function1<Port, String> _function = new Function1<Port, String>() {
       public String apply(final Port port) {
         StringConcatenation _builder = new StringConcatenation();
@@ -374,7 +373,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("//--------------------- port getters");
     _builder.newLine();
     {
-      List<Port> _endPorts_1 = RoomHelpers.getEndPorts(ac);
+      List<Port> _endPorts_1 = this._roomHelpers.getEndPorts(ac);
       for(final Port ep : _endPorts_1) {
         _builder.append("\t\t");
         String _portClassName = this._roomExtensions.getPortClassName(ep);
@@ -434,7 +433,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     _builder.append("virtual void destroy();\t\t\t");
     _builder.newLine();
     {
-      boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+      boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
       if (_hasNonEmptyStateMachine) {
         _builder.append("\t\t");
         CharSequence _genStateMachineMethodDeclarations = this._stateMachineGen.genStateMachineMethodDeclarations(xpac);
@@ -485,21 +484,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   private String generateConstructorInitalizerList(final ActorClass ac) {
     ArrayList<CharSequence> initializerList = new ArrayList<CharSequence>();
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("ActorClassBase( parent, name, port_addr[0][0], peer_addr[0][0])");
       initializerList.add(_builder);
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
-      ActorClass _base_1 = ac.getBase();
-      String _name = _base_1.getName();
+      ActorClass _actorBase_1 = ac.getActorBase();
+      String _name = _actorBase_1.getName();
       _builder_1.append(_name, "");
       _builder_1.append("(*this, parent, name, port_addr, peer_addr)");
       initializerList.add(_builder_1);
     }
-    List<Port> _endPorts = RoomHelpers.getEndPorts(ac);
+    List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
     for (final Port ep : _endPorts) {
       StringConcatenation _builder_2 = new StringConcatenation();
       String _name_1 = ep.getName();
@@ -606,7 +605,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       EList<StandardOperation> _operations = ac.getOperations();
       final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
         public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(RoomHelpers.isConstructor(op));
+          return Boolean.valueOf(ActorClassGen.this._roomHelpers.isConstructor(op));
         }
       };
       Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
@@ -620,8 +619,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_1);
       final StandardOperation dtor = IterableExtensions.<StandardOperation>head(_filter_1);
       ActorClass _actorClass = xpac.getActorClass();
-      ActorCommunicationType _commType = _actorClass.getCommType();
-      final boolean async = Objects.equal(_commType, ActorCommunicationType.ASYNCHRONOUS);
+      ComponentCommunicationType _commType = _actorClass.getCommType();
+      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -674,7 +673,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("{");
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine) {
           _builder.append("\t");
           _builder.append("history = new int[s_numberOfStates];");
@@ -793,7 +792,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _hasNonEmptyStateMachine_1 = RoomHelpers.hasNonEmptyStateMachine(ac);
+        boolean _hasNonEmptyStateMachine_1 = this._roomHelpers.hasNonEmptyStateMachine(ac);
         if (_hasNonEmptyStateMachine_1) {
           CharSequence _genStateMachine = this._stateMachineGen.genStateMachine(xpac, false);
           _builder.append(_genStateMachine, "");

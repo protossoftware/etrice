@@ -19,9 +19,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.common.base.Annotation;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 

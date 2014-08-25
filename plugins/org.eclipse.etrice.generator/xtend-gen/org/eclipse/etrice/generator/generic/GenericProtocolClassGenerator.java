@@ -13,10 +13,12 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAP;
@@ -33,6 +35,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class GenericProtocolClassGenerator {
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
+  
   @Inject
   @Extension
   protected ILanguageExtension _iLanguageExtension;
@@ -55,7 +61,7 @@ public class GenericProtocolClassGenerator {
     String _string = Integer.valueOf(offset).toString();
     Pair<String, String> _pair = Tuples.<String, String>pair(_memberInDeclaration, _string);
     list.add(_pair);
-    List<Message> _allOutgoingMessages = RoomHelpers.getAllOutgoingMessages(pc);
+    List<Message> _allOutgoingMessages = this._roomHelpers.getAllOutgoingMessages(pc);
     for (final Message msg : _allOutgoingMessages) {
       {
         offset = (offset + 1);
@@ -68,7 +74,7 @@ public class GenericProtocolClassGenerator {
         list.add(_pair_1);
       }
     }
-    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+    List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
     for (final Message msg_1 : _allIncomingMessages) {
       {
         offset = (offset + 1);
@@ -97,9 +103,9 @@ public class GenericProtocolClassGenerator {
    * @return an identifier for the message
    */
   public String getMessageID(final MessageFromIf mif) {
-    Message _message = mif.getMessage();
-    InterfaceItem _from = mif.getFrom();
-    return this.getMessageID(_message, _from);
+    EObject _message = mif.getMessage();
+    AbstractInterfaceItem _from = mif.getFrom();
+    return this.getMessageID(((Message) _message), ((InterfaceItem) _from));
   }
   
   /**

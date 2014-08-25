@@ -25,7 +25,6 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.support.context.ConnectionUpdateContext;
 import org.eclipse.etrice.ui.structure.support.context.InitialAddConnectionContext;
 import org.eclipse.etrice.ui.structure.support.context.PositionUpdateContext;
@@ -73,7 +72,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// ACTOR_CONTAINER_REF
 		{
 			Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.ACTOR_CONTAINER_REF);
-			List<ActorContainerRef> toAdd = RoomHelpers.getAllActorContainerRefs(sc);
+			List<ActorContainerRef> toAdd = SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(sc);
 			toAdd.removeAll(present.keySet());
 			
 			Map<EObject, Shape> newShapes = addShapesInitial(toAdd, containerShape);
@@ -88,12 +87,12 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// INTERFACE_ITEM
 		{
 			Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
-			List<InterfaceItem> toAdd = RoomHelpers.getInterfaceItems(sc, true);
+			List<InterfaceItem> toAdd = SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(sc, true);
 			if(sc instanceof ActorClass){
 				ActorClass base = (ActorClass)sc;
 				while(base != null){
 					toAdd.addAll(base.getInternalPorts());
-					base = base.getBase();
+					base = base.getActorBase();
 				}
 			}
 			toAdd.removeAll(present.keySet());
@@ -108,7 +107,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// LAYER_CONNECTION		
 		{
 			Map<EObject, Connection> present = getAllConnectionsForBoClass(getDiagram(), RoomPackage.Literals.LAYER_CONNECTION);
-			List<LayerConnection> toAdd = RoomHelpers.getConnections(sc, true);
+			List<LayerConnection> toAdd = SupportUtil.getInstance().getRoomHelpers().getConnections(sc, true);
 			toAdd.removeAll(present.keySet());
 			
 			Map<EObject, Connection> newConns = addConnectionsInitial(toAdd, connectionProvider);
@@ -118,7 +117,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// BINDING
 		{
 			Map<EObject, Connection> present = getAllConnectionsForBoClass(getDiagram(), RoomPackage.Literals.BINDING);
-			List<Binding> toAdd = RoomHelpers.getBindings(sc, true);
+			List<Binding> toAdd = SupportUtil.getInstance().getRoomHelpers().getBindings(sc, true);
 			toAdd.removeAll(present.keySet());
 			
 			Map<EObject, Connection> newConns = addConnectionsInitial(toAdd, connectionProvider);

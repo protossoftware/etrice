@@ -15,22 +15,20 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.base.ILogger
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.room.ActorCommunicationType
 import org.eclipse.etrice.core.room.CommunicationType
+import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
+import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import org.eclipse.etrice.generator.c.Main
-import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.Operation
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -73,8 +71,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
-		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
-		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
+		val dataDriven = ac.commType==ComponentCommunicationType::DATA_DRIVEN
+		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
 							|| Main::settings.generateMSCInstrumentation
 		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
@@ -304,9 +302,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 	
 	def private generateSourceFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
-		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
-		val dataDriven = ac.commType==ActorCommunicationType::DATA_DRIVEN
+		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
+		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN
+		val dataDriven = ac.commType==ComponentCommunicationType::DATA_DRIVEN
 		val handleEvents = async || eventDriven
 		
 	'''

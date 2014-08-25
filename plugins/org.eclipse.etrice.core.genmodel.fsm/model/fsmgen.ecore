@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsmgen" nsURI="http://www.eclipse.org/etrice/generator/fsm"
+    nsPrefix="fsmgen">
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveTrigger">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msg" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//TriggeredTransition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedModelComponent">
+    <eOperations name="prepare">
+      <eParameters name="validator" eType="#//IDiagnostician"/>
+    </eOperations>
+    <eOperations name="release"/>
+    <eOperations name="addOwnObject">
+      <eParameters name="obj" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//StateGraphItem"/>
+    </eOperations>
+    <eOperations name="isOwnObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="obj" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//StateGraphItem"/>
+    </eOperations>
+    <eOperations name="hasStateMachine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getTriggerCodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="mif" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//MessageFromIf"/>
+    </eOperations>
+    <eOperations name="getTriggerCodeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="at" eType="#//ActiveTrigger"/>
+    </eOperations>
+    <eOperations name="getOutgoingTransitions" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition">
+      <eParameters name="node" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//StateGraphNode"/>
+    </eOperations>
+    <eOperations name="getIncomingTransitions" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition">
+      <eParameters name="node" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//StateGraphNode"/>
+    </eOperations>
+    <eOperations name="getActiveTriggers" upperBound="-1" eType="#//ActiveTrigger">
+      <eParameters name="state" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//State"/>
+    </eOperations>
+    <eOperations name="getTriggers" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//MessageFromIf"/>
+    <eOperations name="getOwnTriggers" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//MessageFromIf"/>
+    <eOperations name="getMessageID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="mif" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//MessageFromIf"/>
+    </eOperations>
+    <eOperations name="getChain" eType="#//TransitionChain">
+      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    </eOperations>
+    <eOperations name="getOwnTransitionChains" upperBound="-1" eType="#//TransitionChain"/>
+    <eOperations name="getOwnInterfaceItems" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
+      <eParameters name="mc" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ModelComponent"/>
+    </eOperations>
+    <eOperations name="getAllInterfaceItems" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
+    <eOperations name="isMatching" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="trig" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Trigger"/>
+      <eParameters name="trigstr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getDefaultBranch" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ContinuationTransition">
+      <eParameters name="out" upperBound="-1" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    </eOperations>
+    <eOperations name="getOrig" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="copy" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="getModelComponentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getData" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    </eOperations>
+    <eOperations name="getIncomingMessages" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
+    </eOperations>
+    <eOperations name="addTransitionChain" eType="#//TransitionChain">
+      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    </eOperations>
+    <eOperations name="getInterfaceItemLocalId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
+    </eOperations>
+    <eOperations name="computeCommonChainData" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+      <eParameters name="chains" upperBound="-1" eType="#//TransitionChain"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelComponent" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ModelComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//StateGraph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionChains" upperBound="-1"
+        eType="#//TransitionChain" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedRefinedState" eSuperTypes="../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//SimpleState">
+    <eOperations name="init">
+      <eParameters name="rs" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//RefinedState"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedEntry" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedExit" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inheritedDo" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//DetailCode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IDiagnostician" instanceTypeName="IDiagnostician"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ITransitionChainVisitor" instanceTypeName="ITransitionChainVisitor"
+      abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionChain">
+    <eOperations name="getStateContext" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//State"/>
+    <eOperations name="isHandler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="genExecuteChain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="tcv" eType="#//ITransitionChainVisitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+</ecore:EPackage>

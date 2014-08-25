@@ -18,11 +18,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.util.RoomCrossReferencer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -31,6 +32,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.fsm.base.FSMDetailCodeTranslator;
 
 /**
  * This class parses detail code in a pretty naive and heuristic way to recognize
@@ -55,20 +57,13 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * @author Henrik Rentz-Reichert
  *
  */
-public class DetailCodeTranslator {
+public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 
 	private static final String ATTR_SET = ".set";
 	
-	private static class Position {
-		int pos = 0;
-	}
-	
-	private ITranslationProvider provider;
-	private HashMap<String, InterfaceItem> name2item = new HashMap<String, InterfaceItem>();
+	private RoomHelpers roomHelpers = new RoomHelpers();
 	private HashMap<String, Attribute> name2attr = new HashMap<String, Attribute>();
 	private HashMap<String, Operation> name2op = new HashMap<String, Operation>();
-	private EObject container;
-	private boolean doTranslate;
 	
 	/**
 	 * Constructor to be used with actor classes
@@ -104,11 +99,8 @@ public class DetailCodeTranslator {
 		this((EObject) dc, provider, doTranslate);
 	}
 	
-	private DetailCodeTranslator(EObject container, ITranslationProvider provider, boolean doTranslate) {
-		this.provider = provider;
-		this.container = container;
-		this.doTranslate = doTranslate;
-		prepare(container);
+	protected DetailCodeTranslator(EObject container, ITranslationProvider provider, boolean doTranslate) {
+		super(container, provider, doTranslate);
 	}
 	
 	/**
@@ -116,135 +108,97 @@ public class DetailCodeTranslator {
 	 * @return the translated code as string
 	 */
 	public String translateDetailCode(DetailCode code) {
-		if (code==null)
-			return "";
+		String result = super.translateDetailCode(code);
 		
-		// concatenate lines
-		StringBuilder text = new StringBuilder();
-		for (String line : code.getLines()) {
-			text.append(line+"\n");
-		}
-
-		String result = text.substring(0, Math.max(0, text.length()-1));
-		
-		if (!doTranslate)
-			return result;
-		
-		if (provider.translateMembers())
-			result = translateText(result);
-		
-		if (provider.translateTags())
-			result = translateTags(result, code);
-		
-		if (provider.translateEnums())
+		if (doTranslate && provider instanceof ITranslationProvider && ((ITranslationProvider)provider).translateEnums())
 			result = translateEnums(result);
 		
 		return result;
 	}
 	
-	private String translateText(String text) {
-		StringBuilder result = new StringBuilder();
-		Position curr = new Position();
-		int last = 0;
+	// translate token if possible
+	protected String translateToken(String text, Position curr, int last, String token) {
+		if (!(provider instanceof ITranslationProvider))
+			return null;
 		
-		while (curr.pos<text.length()) {
-			proceedToToken(text, curr);
-			
-			last = appendParsed(text, curr, last, result);
-			
-			String token = getToken(text, curr);
-			if (token.isEmpty()) {
-				if (curr.pos<text.length() && !isTokenChar(text.charAt(curr.pos)))
-					++curr.pos;
-				last = appendParsed(text, curr, last, result);
+		ITranslationProvider prov = (ITranslationProvider) provider;
+		
+		String translated = null;
+		
+		// first try attributes
+		Attribute attribute = name2attr.get(token);
+		if (attribute!=null) {
+			int start = curr.pos;
+			String index = getArrayIndex(text, curr);
+			if (index==null)
+				curr.pos = start;
+			int endSet = curr.pos+ATTR_SET.length();
+			if (text.length()>=endSet && text.substring(curr.pos, endSet).equals(ATTR_SET)) {
+				curr.pos = endSet;
+				ArrayList<String> args = getArgs(text, curr);
+				if (args!=null && args.size()==1) {
+					String orig = text.substring(last, curr.pos);
+					String transArg = translateText(args.get(0));
+					translated = prov.getAttributeSetter(attribute, index, transArg, orig);
+				}
 			}
 			else {
-				// translate token if possible
-				String translated = null;
-				Attribute attribute = name2attr.get(token);
-				if (attribute!=null) {
-					int start = curr.pos;
-					String index = getArrayIndex(text, curr);
-					if (index==null)
-						curr.pos = start;
-					int endSet = curr.pos+ATTR_SET.length();
-					if (text.length()>=endSet && text.substring(curr.pos, endSet).equals(ATTR_SET)) {
-						curr.pos = endSet;
-						ArrayList<String> args = getArgs(text, curr);
-						if (args!=null && args.size()==1) {
-							String orig = text.substring(last, curr.pos);
-							String transArg = translateText(args.get(0));
-							translated = provider.getAttributeSetter(attribute, index, transArg, orig);
-						}
-					}
-					else {
-						String orig = text.substring(last, curr.pos);
-						translated = provider.getAttributeGetter(attribute, index, orig);
-					}
-				}
-				else {
-					Operation operation = name2op.get(token);
-					if (operation!=null && (operation.eContainer() instanceof ActorClass || operation.eContainer() instanceof DataClass)) {
-						ArrayList<String> args = getArgs(text, curr);
-						if (args!=null && operation.getArguments().size()==args.size()) {
-							// recursively apply this algorithm to each argument
-							for (int i=0; i<args.size(); ++i) {
-								String transArg = translateText(args.remove(i));
-								args.add(i, transArg);
-							}
-							String orig = text.substring(last, curr.pos);
-							translated = provider.getOperationText(operation, args, orig);
-						}
-					}
-					else {
-						InterfaceItem item = name2item.get(token);
-						if (item!=null) {
-							int start = curr.pos;
-							String index = getArrayIndex(text, curr);
-							if (index==null)
-								curr.pos = start;
-							Message msg = getMessage(text, curr, item, true);
-							if (msg!=null) {
-								ArrayList<String> args = getArgs(text, curr);
-								if (args!=null) {
-									if (argsMatching(msg, args)) {
-										// recursively apply this algorithm to each argument
-										for (int i=0; i<args.size(); ++i) {
-											String transArg = translateText(args.remove(i));
-											args.add(i, transArg);
-										}
-										String orig = text.substring(last, curr.pos);
-										translated = provider.getInterfaceItemMessageText(item, msg, args, index, orig);
-									}
-								}
-							}
-							else {
-								curr.pos = start;
-								msg = getMessage(text, curr, item, false);
-								if (msg!=null) {
-									if (curr.pos>=text.length() || text.charAt(curr.pos)!='(') {
-										String orig = text.substring(last, curr.pos);
-										translated = provider.getInterfaceItemMessageValue(item, msg, orig);
-									}
-								}
-							}
-						}
-					}
-				}
-				if (translated!=null) {
-					last = curr.pos;
-					result.append(translated);
-				}
-				else
-					last = appendParsed(text, curr, last, result);
+				String orig = text.substring(last, curr.pos);
+				translated = prov.getAttributeGetter(attribute, index, orig);
 			}
 		}
 		
-		return translateEnums(result.toString());
+		if (translated==null) {
+			// if not successful try operations
+			
+			Operation operation = name2op.get(token);
+			if (operation!=null && (operation.eContainer() instanceof ActorClass || operation.eContainer() instanceof DataClass)) {
+				ArrayList<String> args = getArgs(text, curr);
+				if (args!=null && operation.getArguments().size()==args.size()) {
+					// recursively apply this algorithm to each argument
+					for (int i=0; i<args.size(); ++i) {
+						String transArg = translateText(args.remove(i));
+						args.add(i, transArg);
+					}
+					String orig = text.substring(last, curr.pos);
+					translated = prov.getOperationText(operation, args, orig);
+				}
+			}
+		}
+		
+		if (translated==null) {
+			// if still not successful call super
+			translated = super.translateToken(text, curr, last, token);
+		}
+		
+		return translated;
 	}
 	
-	private String translateEnums(String text) {
-		if (provider.translateEnums()) {
+	protected String translateInterfaceItemToken(AbstractInterfaceItem item, String text, Position curr, int last, String token) {
+		if (!(provider instanceof ITranslationProvider))
+			return null;
+		
+		ITranslationProvider prov = (ITranslationProvider) provider;
+		String translated = null;
+		
+		EObject msg = getMessage(text, curr, item, false);
+		if (msg!=null) {
+			if (curr.pos>=text.length() || text.charAt(curr.pos)!='(') {
+				String orig = text.substring(last, curr.pos);
+				translated = prov.getInterfaceItemMessageValue((InterfaceItem)item, (Message)msg, orig);
+			}
+		}
+		
+		return translated;
+	}
+	
+	protected String translateEnums(String text) {
+		if (!(provider instanceof ITranslationProvider))
+			return text;
+		
+		ITranslationProvider prov = (ITranslationProvider) provider;
+		
+		if (prov.translateEnums()) {
 			
 			RoomCrossReferencer crossReferencer = new RoomCrossReferencer();
 			
@@ -263,7 +217,7 @@ public class DetailCodeTranslator {
 					for (EnumLiteral lit : et.getLiterals()) {
 						String pattern = et.getName()+"."+lit.getName();
 						if (text.contains(pattern)) {
-							String replacement = provider.getEnumText(lit);
+							String replacement = prov.getEnumText(lit);
 							text = text.replace(pattern, replacement);
 						}
 					}
@@ -275,34 +229,12 @@ public class DetailCodeTranslator {
 			return text;
 	}
 
-	private String getArrayIndex(String text, Position curr) {
-		proceedToToken(text, curr);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!='[')
-			return null;
-		++curr.pos;
+	@Override
+	protected boolean argsMatching(EObject amsg, ArrayList<String> args) {
+		if (!(amsg instanceof Message))
+			return super.argsMatching(amsg, args);
 		
-		String token = getIndex(text, curr);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!=']')
-			return null;
-		++curr.pos;
-		
-		return translateText(token);
-	}
-
-	/**
-	 * @param text
-	 * @param result
-	 * @return 
-	 */
-	private int appendParsed(String text, Position curr, int last, StringBuilder result) {
-		String str = text.substring(last, curr.pos);
-		result.append(str);
-		return curr.pos;
-	}
-
-	private boolean argsMatching(Message msg, ArrayList<String> args) {
+		Message msg = (Message) amsg;
 		if (msg.getData()==null && args.isEmpty())
 			return true;
 		if (msg.getData()!=null && args.size()==1)
@@ -310,192 +242,16 @@ public class DetailCodeTranslator {
 		
 		return false;
 	}
-
-	private void proceedToToken(String text, Position curr) {
-		proceedToToken(text, curr, true);
-	}
 	
-	private void proceedToToken(String text, Position curr, boolean skipString) {
-		boolean stop = false;
-		while (curr.pos<text.length() && !stop) {
-			if (text.charAt(curr.pos)=='"') {
-				if (skipString)
-					skipString(text, curr);
-				else
-					stop = true;
-			}
-			else if (text.charAt(curr.pos)=='/') {
-				if (curr.pos+1<text.length()) {
-					if (text.charAt(curr.pos+1)=='/') {
-						skipSingleComment(text, curr);
-					}
-					else if (text.charAt(curr.pos+1)=='*') {
-						skipMultiComment(text, curr);
-					}
-					else
-						stop = true;
-				}
-				else
-					stop = true;
-			}
-			else if (Character.isWhitespace(text.charAt(curr.pos))) {
-				skipWhiteSpace(text, curr);
-			}
-			else
-				stop = true;
-		}
-	}
-	
-	private Message getMessage(String text, Position curr, InterfaceItem item, boolean outgoing) {
-		proceedToToken(text, curr);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
-			return null;
-		++curr.pos;
-		
-		proceedToToken(text, curr);
-		
-		String token = getToken(text, curr);
-		
-		List<Message> messages = RoomHelpers.getMessageListDeep(item, outgoing);
-		for (Message message : messages) {
-			if (message.getName().equals(token))
-				return message;
-		}
-		
-		return null;
-	}
-	
-	private ArrayList<String> getArgs(String text, Position curr) {
-		proceedToToken(text, curr);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!='(')
-			return null;
-		++curr.pos;
-		
-		ArrayList<String> result = new ArrayList<String>();
-		
-		boolean stop = false;
-		do {
-			proceedToToken(text, curr, false);
-			if (curr.pos<text.length() && text.charAt(curr.pos)!=')') {
-				String arg = getParam(text, curr);
-				result.add(arg);
-				proceedToToken(text, curr);
-			}
-			if (curr.pos<text.length() && text.charAt(curr.pos)==',')
-				++curr.pos;
-			else
-				stop = true;
-		}
-		while (!stop);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!=')')
-			return null;
-		
-		++curr.pos;
-		
-		return result;
-	}
-
-	private String getToken(String text, Position curr) {
-		int begin = curr.pos;
-		while (curr.pos<text.length() && isTokenChar(text.charAt(curr.pos)))
-			++curr.pos;
-		String token = text.substring(begin, curr.pos);
-		return token;
-	}
-
-	private String getParam(String text, Position curr) {
-		int begin = curr.pos;
-		int parenthesisLevel = 0;
-		while (curr.pos<text.length()) {
-			if (text.charAt(curr.pos)=='(')
-				++parenthesisLevel;
-			else if (text.charAt(curr.pos)==')') {
-				if (parenthesisLevel==0)
-					break;
-				else
-					--parenthesisLevel;
-			}
-			else if (parenthesisLevel==0) {
-				if (text.charAt(curr.pos)==',')
-					break;
-			}
-			++curr.pos;
-		}
-		String token = text.substring(begin, curr.pos).trim();
-		return token;
-	}
-
-	private String getIndex(String text, Position curr) {
-		int begin = curr.pos;
-		int parenthesisLevel = 0;
-		while (curr.pos<text.length()) {
-			if (text.charAt(curr.pos)=='[')
-				++parenthesisLevel;
-			else if (text.charAt(curr.pos)==']') {
-				if (parenthesisLevel==0)
-					break;
-				else
-					--parenthesisLevel;
-			}
-			++curr.pos;
-		}
-		String token = text.substring(begin, curr.pos).trim();
-		return token;
-	}
-
-	private void skipWhiteSpace(String text, Position curr) {
-		while (curr.pos<text.length() && Character.isWhitespace(text.charAt(curr.pos)))
-			++curr.pos;
-	}
-
-	private void skipMultiComment(String text, Position curr) {
-		curr.pos += 2;
-		while (curr.pos<text.length()-1 && text.charAt(curr.pos++)!='*')
-			if (text.charAt(curr.pos)=='/')
-				break;
-		if (curr.pos<text.length())
-			++curr.pos;
-	}
-
-	private void skipSingleComment(String text, Position curr) {
-		while (curr.pos<text.length() && text.charAt(curr.pos)!='\n')
-			++curr.pos;
-		if (curr.pos<text.length())
-			++curr.pos;
-	}
-
-	private void skipString(String text, Position curr) {
-		while (++curr.pos<text.length() && text.charAt(curr.pos)!='"')
-			if (text.charAt(curr.pos)=='\\')
-				++curr.pos;
-		if (curr.pos<text.length())
-			++curr.pos;
-	}
-
-	private boolean isTokenChar(char c) {
-		return Character.isDigit(c) || Character.isLetter(c) || c=='_';
-	}
-
-	private void prepare(EObject container) {
-		provider.setContainerClass(container);
-
-		if (container instanceof ActorClass) {
-			ActorClass ac = (ActorClass) container;
-
-			List<InterfaceItem> items = RoomHelpers.getAllInterfaceItems(ac);
-			for (InterfaceItem item : items) {
-				name2item.put(item.getName(), item);
-			}
-		}
+	@Override
+	protected void prepare() {
+		super.prepare();
 
 		List<Attribute> attributes = null;
 		if (container instanceof ActorClass)
-			attributes = RoomHelpers.getAllAttributes((ActorClass) container);
+			attributes = roomHelpers.getAllAttributes((ActorClass) container);
 		else if (container instanceof DataClass)
-			attributes = RoomHelpers.getAllAttributes((DataClass) container);
+			attributes = roomHelpers.getAllAttributes((DataClass) container);
 		else if (container instanceof PortClass)
 			attributes = ((PortClass) container).getAttributes();
 		if (attributes!=null)
@@ -505,36 +261,14 @@ public class DetailCodeTranslator {
 		
 		List<? extends Operation> operations = null;
 		if (container instanceof ActorClass)
-			operations = RoomHelpers.getAllOperations((ActorClass) container);
+			operations = roomHelpers.getAllOperations((ActorClass) container);
 		else if (container instanceof DataClass)
-			operations = RoomHelpers.getAllOperations((DataClass) container);
+			operations = roomHelpers.getAllOperations((DataClass) container);
 		else if (container instanceof PortClass)
 			operations = ((PortClass) container).getOperations();
 		if (operations!=null)
 			for (Operation operation : operations) {
 				name2op.put(operation.getName(), operation);
 			}
-	}
-
-	private String translateTags(String text, DetailCode code) {
-		StringBuilder result = new StringBuilder();
-		
-		int last = 0;
-		int next = text.indexOf(ITranslationProvider.TAG_START, last);
-		while (next>=0) {
-			result.append(text.substring(last, next));
-			last = next+ITranslationProvider.TAG_START.length();
-			next = text.indexOf(ITranslationProvider.TAG_END, last);
-			if (next<0)
-				break;
-			
-			String tag = text.substring(last, next);
-			result.append(provider.translateTag(tag, code));
-			last = next+ITranslationProvider.TAG_END.length();
-			
-			next = text.indexOf(ITranslationProvider.TAG_START, last);
-		}
-		result.append(text.substring(last));
-		return result.toString();
 	}
 }

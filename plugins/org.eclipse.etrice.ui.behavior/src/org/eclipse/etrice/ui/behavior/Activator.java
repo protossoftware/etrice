@@ -15,7 +15,11 @@ package org.eclipse.etrice.ui.behavior;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -27,6 +31,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
+
+	private Injector injector;
 
 	/**
 	 * The constructor
@@ -48,6 +54,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		injector = null;
 		plugin = null;
 		super.stop(context);
 	}
@@ -83,4 +90,10 @@ public class Activator extends AbstractUIPlugin {
 		return img;
 	}
 
+	public Injector getInjector() {
+		if (injector==null) {
+			injector = Guice.createInjector(new BehaviorModule(), new SharedStateModule());
+		}
+		return injector;
+	}
 }

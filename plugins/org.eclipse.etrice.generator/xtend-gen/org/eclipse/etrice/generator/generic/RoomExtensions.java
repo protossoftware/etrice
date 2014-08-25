@@ -16,14 +16,17 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.inject.Inject;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
@@ -44,14 +47,11 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TransitionPoint;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -61,12 +61,16 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class RoomExtensions {
+public class RoomExtensions extends FSMExtensions {
   private static String genDir = "/src-gen/";
   
   private static String genInfoDir = "/src-gen-info/";
   
   private static String genDocDir = "/doc-gen/";
+  
+  @Inject
+  @Extension
+  protected RoomHelpers _roomHelpers;
   
   public static String setDefaultGenDir() {
     return RoomExtensions.genDir = "/src-gen/";
@@ -93,32 +97,6 @@ public class RoomExtensions {
   }
   
   /**
-   * the template type is T
-   * @param l an iterable of type T
-   * @param e a single element of type T
-   * @return the union of the iterable and the element as new list
-   */
-  public <T extends Object> List<T> union(final Iterable<T> l, final T e) {
-    ArrayList<T> ret = new ArrayList<T>();
-    Iterables.<T>addAll(ret, l);
-    ret.add(e);
-    return ret;
-  }
-  
-  /**
-   * the template type is T
-   * @param l1 an iterable of type T
-   * @param l2 a second iterable of type T
-   * @return the union of the two iterables as new list
-   */
-  public <T extends Object> List<T> union(final Iterable<T> l1, final Iterable<T> l2) {
-    ArrayList<T> ret = new ArrayList<T>();
-    Iterables.<T>addAll(ret, l1);
-    Iterables.<T>addAll(ret, l2);
-    return ret;
-  }
-  
-  /**
    * a specialized version of {@link #union(Iterable, Iterable)}
    * @param in1 an iterable of type T
    * @param in2 a second iterable of type T
@@ -134,18 +112,6 @@ public class RoomExtensions {
     };
     IterableExtensions.<ExternalPort>forEach(in2, _function);
     Iterables.<Port>addAll(ret, in1);
-    return ret;
-  }
-  
-  /**
-   * the template type is T
-   * @param l1 a list of elements of type T
-   * @param l2 a second list of elements of type T
-   * @return a new list with the contents of l1
-   */
-  public <T extends Object> List<T> minus(final List<T> l1, final List<T> l2) {
-    ArrayList<T> ret = new ArrayList<T>(l1);
-    ret.removeAll(l2);
     return ret;
   }
   
@@ -399,7 +365,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -424,7 +390,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -471,7 +437,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, (!conj));
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -497,7 +463,7 @@ public class RoomExtensions {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = RoomHelpers.getAllMessages(pc, conj);
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
         Message _msg = hdlr.getMsg();
         boolean _contains = _allMessages.contains(_msg);
         if (_contains) {
@@ -531,7 +497,7 @@ public class RoomExtensions {
    */
   public boolean isIncoming(final Message m) {
     EObject _eContainer = m.eContainer();
-    List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(((ProtocolClass) _eContainer));
+    List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(((ProtocolClass) _eContainer));
     return _allIncomingMessages.contains(m);
   }
   
@@ -560,13 +526,13 @@ public class RoomExtensions {
     {
       final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
-          return Boolean.valueOf(RoomHelpers.isLeaf(s));
+          return Boolean.valueOf(RoomExtensions.this._roomHelpers.isLeaf(s));
         }
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
       final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
         public Boolean apply(final State s) {
-          boolean _isLeaf = RoomHelpers.isLeaf(s);
+          boolean _isLeaf = RoomExtensions.this._roomHelpers.isLeaf(s);
           return Boolean.valueOf((!_isLeaf));
         }
       };
@@ -582,7 +548,7 @@ public class RoomExtensions {
    */
   public List<State> getAllLeafStates(final ActorClass ac) {
     StateGraph _stateMachine = ac.getStateMachine();
-    return RoomHelpers.getLeafStateList(_stateMachine);
+    return this._roomHelpers.getLeafStateList(_stateMachine);
   }
   
   /**
@@ -590,7 +556,7 @@ public class RoomExtensions {
    * @return a list of simple states with leaf states last
    */
   public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
-    List<State> _allBaseStates = RoomHelpers.getAllBaseStates(ac);
+    List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
     return this.getLeafStatesLast(_allBaseStates);
   }
   
@@ -630,13 +596,13 @@ public class RoomExtensions {
       _or = true;
     } else {
       boolean _and = false;
-      ActorClass _base = ac.getBase();
-      boolean _notEquals = (!Objects.equal(_base, null));
+      ActorClass _actorBase = ac.getActorBase();
+      boolean _notEquals = (!Objects.equal(_actorBase, null));
       if (!_notEquals) {
         _and = false;
       } else {
-        ActorClass _base_1 = ac.getBase();
-        boolean _overridesStop = this.overridesStop(_base_1);
+        ActorClass _actorBase_1 = ac.getActorBase();
+        boolean _overridesStop = this.overridesStop(_actorBase_1);
         _and = _overridesStop;
       }
       _or = _and;
@@ -649,17 +615,17 @@ public class RoomExtensions {
    * @return the number of all inherited states
    */
   public int getNumberOfInheritedStates(final ActorClass ac) {
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       return 0;
     } else {
-      ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _stateList = RoomHelpers.getStateList(_stateMachine);
+      ModelComponent _base = ac.getBase();
+      StateGraph _stateMachine = _base.getStateMachine();
+      List<State> _stateList = this._roomHelpers.getStateList(_stateMachine);
       int _size = _stateList.size();
-      ActorClass _base_2 = ac.getBase();
-      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_base_2);
+      ActorClass _actorBase_1 = ac.getActorBase();
+      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_actorBase_1);
       return (_size + _numberOfInheritedStates);
     }
   }
@@ -669,47 +635,19 @@ public class RoomExtensions {
    * @return the number of all inherited base (or simple) states
    */
   public int getNumberOfInheritedBaseStates(final ActorClass ac) {
-    ActorClass _base = ac.getBase();
-    boolean _equals = Objects.equal(_base, null);
+    ActorClass _actorBase = ac.getActorBase();
+    boolean _equals = Objects.equal(_actorBase, null);
     if (_equals) {
       return 0;
     } else {
-      ActorClass _base_1 = ac.getBase();
-      StateGraph _stateMachine = _base_1.getStateMachine();
-      List<State> _baseStateList = RoomHelpers.getBaseStateList(_stateMachine);
+      ModelComponent _base = ac.getBase();
+      StateGraph _stateMachine = _base.getStateMachine();
+      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
-      ActorClass _base_2 = ac.getBase();
-      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_base_2);
+      ActorClass _actorBase_1 = ac.getActorBase();
+      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_actorBase_1);
       return (_size + _numberOfInheritedBaseStates);
     }
-  }
-  
-  /**
-   * @param ac an {@link ExpandedActorClass}
-   * @param s a {@link State}
-   * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
-   * 		following the logic of evaluation of firing conditions
-   */
-  public List<Transition> getOutgoingTransitionsHierarchical(final ExpandedActorClass ac, final State s) {
-    ArrayList<Transition> result = new ArrayList<Transition>();
-    EList<Transition> _outgoingTransitions = ac.getOutgoingTransitions(s);
-    result.addAll(_outgoingTransitions);
-    EObject _eContainer = s.eContainer();
-    StateGraph sg = ((StateGraph) _eContainer);
-    EList<TrPoint> _trPoints = sg.getTrPoints();
-    for (final TrPoint tp : _trPoints) {
-      if ((tp instanceof TransitionPoint)) {
-        EList<Transition> _outgoingTransitions_1 = ac.getOutgoingTransitions(tp);
-        result.addAll(_outgoingTransitions_1);
-      }
-    }
-    EObject _eContainer_1 = sg.eContainer();
-    if ((_eContainer_1 instanceof State)) {
-      EObject _eContainer_2 = sg.eContainer();
-      List<Transition> _outgoingTransitionsHierarchical = this.getOutgoingTransitionsHierarchical(ac, ((State) _eContainer_2));
-      result.addAll(_outgoingTransitionsHierarchical);
-    }
-    return result;
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {

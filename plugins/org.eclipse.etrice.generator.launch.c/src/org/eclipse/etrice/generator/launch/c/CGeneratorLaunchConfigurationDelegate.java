@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.generator.launch.c;
 
-import org.eclipse.etrice.generator.base.ILineOutput;
 import org.eclipse.etrice.generator.c.Main;
+import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**

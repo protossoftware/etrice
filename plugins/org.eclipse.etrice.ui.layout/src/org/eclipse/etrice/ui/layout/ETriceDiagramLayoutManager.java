@@ -22,7 +22,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
-import org.eclipse.etrice.ui.common.editor.RoomDiagramEditor;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.gef.EditPart;
 import org.eclipse.graphiti.mm.algorithms.AbstractText;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -203,9 +203,9 @@ public abstract class ETriceDiagramLayoutManager extends
 		mapping.setProperty(KimlGraphitiUtil.STATIC_CONFIG,
 				new VolatileLayoutConfig());
 
-		if (workbenchPart instanceof RoomDiagramEditor) {
+		if (workbenchPart instanceof DiagramEditorBase) {
 			mapping.setProperty(KimlGraphitiUtil.DIAGRAM_EDITOR,
-					(RoomDiagramEditor) workbenchPart);
+					(DiagramEditorBase) workbenchPart);
 		}
 
 		EditPart layoutRootPart = null;

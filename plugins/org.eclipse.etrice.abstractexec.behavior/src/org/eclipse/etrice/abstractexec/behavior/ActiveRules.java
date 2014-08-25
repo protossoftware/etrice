@@ -19,19 +19,20 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InSemanticsRule;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.ProtocolSemantics;
-import org.eclipse.etrice.core.room.SemanticsRule;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
+import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 public class ActiveRules {
-	private HashMap<InterfaceItem, List<SemanticsRule>> rules;
+	private HashMap<AbstractInterfaceItem, List<SemanticsRule>> rules;
 	private static boolean traceRules = false;
 	private static int traceLevel = 0;
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	
+	// HOWTO: use debug options to configure tracing (see also the .options file in the plug-in)
 	static {
 		if (Activator.getDefault().isDebugging()) {
 			String value = Platform
@@ -51,18 +52,18 @@ public class ActiveRules {
 	private static final int TRACE_DETAILS = 2;
 
 	public ActiveRules() {
-		rules = new HashMap<InterfaceItem, List<SemanticsRule>>();
+		rules = new HashMap<AbstractInterfaceItem, List<SemanticsRule>>();
 	}
 
-	private ActiveRules(HashMap<InterfaceItem, List<SemanticsRule>> r) {
+	private ActiveRules(HashMap<AbstractInterfaceItem, List<SemanticsRule>> r) {
 		rules = r;
 	}
 
-	public Set<InterfaceItem> getPortList() {
+	public Set<AbstractInterfaceItem> getPortList() {
 		return rules.keySet();
 	}
 
-	public List<SemanticsRule> getRulesForPort(InterfaceItem port) {
+	public List<SemanticsRule> getRulesForPort(AbstractInterfaceItem port) {
 		return rules.get(port);
 	}
 
@@ -84,7 +85,7 @@ public class ActiveRules {
 				if (match != null) {
 					if (traceRules && traceLevel >= TRACE_DETAILS)
 						System.out.println("  found match for "
-								+ msg.getMsg().getName());
+								+ fsmNameProvider.getMessageName(msg.getMsg()));
 
 					// discard all alternatives
 					localRules.clear();
@@ -92,7 +93,7 @@ public class ActiveRules {
 					if (match.getFollowUps().isEmpty()) {
 						// all rules of this branch consumed
 						// restart at root of semantic rules
-						ProtocolSemantics semantics = ((ProtocolClass)msg.getIfitem().getGeneralProtocol()).getSemantics();
+						ProtocolSemantics semantics = msg.getIfitem().getSemantics();
 						localRules.addAll(semantics.getRules());
 					}
 					else {
@@ -112,10 +113,10 @@ public class ActiveRules {
 	// merges the rules with the destination active rules
 	public boolean merge(ActiveRules ar) {
 		boolean added_at_least_one = false;
-		for (Entry<InterfaceItem, List<SemanticsRule>> entry : ar.rules
+		for (Entry<AbstractInterfaceItem, List<SemanticsRule>> entry : ar.rules
 				.entrySet()) {
 			for (SemanticsRule rule : entry.getValue()) {
-				InterfaceItem ifitem = entry.getKey();
+				AbstractInterfaceItem ifitem = entry.getKey();
 				if (rules.containsKey(ifitem)) {
 					if (!rules.get(ifitem).contains(rule)) {
 						rules.get(ifitem).add(rule);
@@ -137,32 +138,27 @@ public class ActiveRules {
 	}
 
 	public ActiveRules createCopy() {
-		HashMap<InterfaceItem, List<SemanticsRule>> newRules = new HashMap<InterfaceItem, List<SemanticsRule>>();
-		for (InterfaceItem ifitem : rules.keySet()) {
+		HashMap<AbstractInterfaceItem, List<SemanticsRule>> newRules = new HashMap<AbstractInterfaceItem, List<SemanticsRule>>();
+		for (AbstractInterfaceItem ifitem : rules.keySet()) {
 			newRules.put(ifitem,
 					new ArrayList<SemanticsRule>(rules.get(ifitem)));
 		}
 		return new ActiveRules(newRules);
 	}
 
-	public void buildInitLocalRules(ExpandedActorClass xpAct) {
-		// HashMap<InterfaceItem, EList<SemanticsRule>> locals = new
-		// HashMap<InterfaceItem, EList<SemanticsRule>>();
-		List<InterfaceItem> portList = RoomHelpers.getAllInterfaceItems(xpAct
-				.getActorClass());
-		for (InterfaceItem ifitem : portList) {
-			GeneralProtocolClass gpc = ifitem.getGeneralProtocol();
-			if (gpc instanceof ProtocolClass) {
-				ProtocolClass pc = (ProtocolClass) gpc;
-				if (pc.getSemantics() != null)
-					rules.put(ifitem, new ArrayList<SemanticsRule>(pc
-							.getSemantics().getRules()));
+	public void buildInitLocalRules(ExpandedModelComponent xpAct) {
+		// HashMap<AbstractInterfaceItem, EList<SemanticsRule>> locals = new
+		// HashMap<AbstractInterfaceItem, EList<SemanticsRule>>();
+		List<AbstractInterfaceItem> portList = xpAct.getModelComponent().getAllAbstractInterfaceItems();
+		for (AbstractInterfaceItem ifitem : portList) {
+			if (ifitem.getSemantics()!=null) {
+				rules.put(ifitem, new ArrayList<SemanticsRule>(ifitem.getSemantics().getRules()));
 			}
 		}
 	}
 
 	public void print() {
-		for (InterfaceItem port : rules.keySet()) {
+		for (AbstractInterfaceItem port : rules.keySet()) {
 			System.out.println("      Rules for Port " + port.getName() + ":");
 			for (SemanticsRule rule : rules.get(port)) {
 				printRule(rule, "        ");
@@ -172,9 +168,9 @@ public class ActiveRules {
 
 	public void printRule(SemanticsRule rule, String indent) {
 		if (rule instanceof InSemanticsRule)
-			System.out.println(indent + "in: " + rule.getMsg().getName());
+			System.out.println(indent + "in: " + fsmNameProvider.getMessageName(rule.getMsg()));
 		else
-			System.out.println(indent + "out: " + rule.getMsg().getName());
+			System.out.println(indent + "out: " + fsmNameProvider.getMessageName(rule.getMsg()));
 		// recursion
 		for (SemanticsRule sr : rule.getFollowUps()) {
 			printRule(sr, indent + "  ");

@@ -27,28 +27,27 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.LiteralType;
-import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.common.converter.TimeConverter;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
-import org.eclipse.etrice.core.room.DetailCode;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -66,11 +65,11 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
-import org.eclipse.etrice.generator.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.c.gen.Initialization;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
@@ -87,6 +86,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class NodeGen {
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
   @Inject
   @Extension
   private CExtensions _cExtensions;
@@ -277,7 +280,7 @@ public class NodeGen {
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       EList<Annotation> _annotations = ssc.getAnnotations();
-      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -915,7 +918,7 @@ public class NodeGen {
             EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
             final Function1<StandardOperation, Boolean> _function_3 = new Function1<StandardOperation, Boolean>() {
               public Boolean apply(final StandardOperation op) {
-                return Boolean.valueOf(RoomHelpers.isConstructor(op));
+                return Boolean.valueOf(NodeGen.this._roomHelpers.isConstructor(op));
               }
             };
             Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_3);
@@ -1193,7 +1196,7 @@ public class NodeGen {
                           }
                           _builder.append("\t");
                           InterfaceItem _interfaceItem = pi.getInterfaceItem();
-                          PortClass _portClass_1 = RoomHelpers.getPortClass(_interfaceItem);
+                          PortClass _portClass_1 = this._roomHelpers.getPortClass(_interfaceItem);
                           EList<Attribute> _attributes_1 = _portClass_1.getAttributes();
                           CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(pi, _attributes_1);
                           _builder.append(_generateAttributeInit, "\t");
@@ -1614,7 +1617,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("\t");
       ActorClass _actorClass_2 = ai.getActorClass();
-      List<Attribute> _allAttributes = RoomHelpers.getAllAttributes(_actorClass_2);
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_actorClass_2);
       CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
       _builder.append(_generateAttributeInit, "\t");
       _builder.newLineIfNotEmpty();
@@ -1673,7 +1676,7 @@ public class NodeGen {
       final Function1<PortInstance, Boolean> _function_3 = new Function1<PortInstance, Boolean>() {
         public Boolean apply(final PortInstance p) {
           Port _port = p.getPort();
-          List<Message> _outgoing = RoomHelpers.getOutgoing(_port);
+          List<Message> _outgoing = NodeGen.this._roomHelpers.getOutgoing(_port);
           final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
             public Boolean apply(final Message m) {
               boolean _or = false;
@@ -1842,7 +1845,7 @@ public class NodeGen {
       Port _port = ((PortInstance) pi).getPort();
       GeneralProtocolClass _protocol = _port.getProtocol();
       final ProtocolClass pc = ((ProtocolClass) _protocol);
-      List<Message> _allIncomingMessages = RoomHelpers.getAllIncomingMessages(pc);
+      List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -1969,7 +1972,7 @@ public class NodeGen {
     String _xblockexpression = null;
     {
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
-      List<Message> _incoming = RoomHelpers.getIncoming(_interfaceItem);
+      List<Message> _incoming = this._roomHelpers.getIncoming(_interfaceItem);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
@@ -2147,7 +2150,7 @@ public class NodeGen {
       final ArrayList<PortInstance> loggedPorts = this.loggedPorts(ssi);
       SubSystemClass _subSystemClass = ssi.getSubSystemClass();
       EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -2209,14 +2212,14 @@ public class NodeGen {
             public Boolean apply(final ActorInstance ai) {
               boolean _or = false;
               ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.EVENT_DRIVEN);
+              ComponentCommunicationType _commType = _actorClass.getCommType();
+              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.EVENT_DRIVEN);
               if (_equals) {
                 _or = true;
               } else {
                 ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
+                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
                 _or = _equals_1;
               }
               return Boolean.valueOf(_or);
@@ -2228,14 +2231,14 @@ public class NodeGen {
             public Boolean apply(final ActorInstance ai) {
               boolean _or = false;
               ActorClass _actorClass = ai.getActorClass();
-              ActorCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ActorCommunicationType.DATA_DRIVEN);
+              ComponentCommunicationType _commType = _actorClass.getCommType();
+              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
               if (_equals) {
                 _or = true;
               } else {
                 ActorClass _actorClass_1 = ai.getActorClass();
-                ActorCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ActorCommunicationType.ASYNCHRONOUS);
+                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
+                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
                 _or = _equals_1;
               }
               return Boolean.valueOf(_or);
@@ -2911,12 +2914,12 @@ public class NodeGen {
     final ArrayList<PortInstance> result = CollectionLiterals.<PortInstance>newArrayList();
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-    boolean _isAnnotationPresent = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+    boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
     if (_isAnnotationPresent) {
       this.logger.logInfo("Data Logging is configured by annotation");
       SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
       EList<Annotation> _annotations_1 = _subSystemClass_1.getAnnotations();
-      final String filters = BaseHelpers.getAttribute(_annotations_1, "DataLogging", "pathlist");
+      final String filters = this._roomHelpers.getAttribute(_annotations_1, "DataLogging", "pathlist");
       final String[] filterList = filters.split(",");
       for (final String filter : filterList) {
         this.logger.logInfo(("  filter: " + filter));
@@ -2932,7 +2935,7 @@ public class NodeGen {
           if ((obj instanceof PortInstance)) {
             final PortInstance pi = ((PortInstance) obj);
             Port _port = pi.getPort();
-            boolean _isRelay = RoomHelpers.isRelay(_port);
+            boolean _isRelay = this._roomHelpers.isRelay(_port);
             boolean _not = (!_isRelay);
             if (_not) {
               ProtocolClass _protocol = pi.getProtocol();

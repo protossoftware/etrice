@@ -17,9 +17,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ISelectionDialog;
+import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -52,7 +53,7 @@ import com.google.inject.Injector;
  * @author Henrik Rentz-Reichert
  *
  */
-public class MemberSelectionDialog extends FormDialog {
+public class MemberSelectionDialog extends FormDialog implements ISelectionDialog {
 
 	private class MemberContentProvider implements IStructuredContentProvider {
 
@@ -111,7 +112,7 @@ public class MemberSelectionDialog extends FormDialog {
 				break;
 			case 2:
 				if (element instanceof Operation)
-					return RoomHelpers.getTypedArgumentList((Operation) element);
+					return SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList((Operation) element);
 			}
 			return null;
 		}
@@ -123,7 +124,7 @@ public class MemberSelectionDialog extends FormDialog {
 
 	@Inject
 	ILabelProvider labelProvider;
-	private Object selected;
+	private String text;
 	
 	/**
 	 * @param shell
@@ -200,13 +201,20 @@ public class MemberSelectionDialog extends FormDialog {
 	protected void okPressed() {
 		ISelection selection = viewer.getSelection();
 		if (selection instanceof IStructuredSelection) {
-			selected = ((IStructuredSelection) selection).getFirstElement();
+			Object selected = ((IStructuredSelection) selection).getFirstElement();
+			if (selected instanceof Attribute) {
+				text = ((Attribute)selected).getName();
+			}
+			else if (selected instanceof Operation) {
+				String typedArgumentList = SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList((Operation) selected);
+				text = ((Operation)selected).getName()+typedArgumentList;
+			}
 		}
 		super.okPressed();
 	}
 	
-	public Object getSelected() {
-		return selected;
+	public String getSelected() {
+		return text;
 	}
 	
 }

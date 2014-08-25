@@ -18,8 +18,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;

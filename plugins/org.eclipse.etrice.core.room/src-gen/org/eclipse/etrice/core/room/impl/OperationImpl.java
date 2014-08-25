@@ -20,7 +20,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.etrice.core.common.base.Documentation;
 
-import org.eclipse.etrice.core.room.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomPackage;

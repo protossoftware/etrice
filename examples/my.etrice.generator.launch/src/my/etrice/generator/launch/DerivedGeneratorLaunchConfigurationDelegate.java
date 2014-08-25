@@ -14,7 +14,7 @@ package my.etrice.generator.launch;
 
 import my.etrice.generator.DerivedGenerator;
 
-import org.eclipse.etrice.generator.base.ILineOutput;
+import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.java.JavaGeneratorLaunchConfigurationDelegate;
 
 /**

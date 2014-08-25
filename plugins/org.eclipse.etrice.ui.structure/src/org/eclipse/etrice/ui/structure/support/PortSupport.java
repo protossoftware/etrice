@@ -18,20 +18,18 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.PortPropertyDialog;
@@ -100,7 +98,7 @@ public class PortSupport extends InterfaceItemSupport {
 
 				// create Port
 		        Port port = RoomFactory.eINSTANCE.createPort();
-		        port.setName(RoomNameProvider.getUniqueInterfaceItemName("p", acc));
+		        port.setName(SupportUtil.getInstance().getRoomUtil().getUniqueInterfaceItemName("p", acc));
 		        ExternalPort xp = null;
 		        
 		        if (acc instanceof ActorClass) {
@@ -371,7 +369,7 @@ public class PortSupport extends InterfaceItemSupport {
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightDolor) {
 
-			boolean relay = RoomHelpers.isRelay(port);
+			boolean relay = SupportUtil.getInstance().getRoomHelpers().isRelay(port);
 			
 			int size = refport?ITEM_SIZE_SMALL:ITEM_SIZE;
 			int margin = refport?MARGIN_SMALL:MARGIN;
@@ -529,7 +527,7 @@ public class PortSupport extends InterfaceItemSupport {
 		String kind = "";
 		if (port.isConjugated())
 			kind += "C";
-		if (RoomHelpers.isRelay(port))
+		if (SupportUtil.getInstance().getRoomHelpers().isRelay(port))
 			kind += "R";
 		if (port.isReplicated())
 			kind += "M";

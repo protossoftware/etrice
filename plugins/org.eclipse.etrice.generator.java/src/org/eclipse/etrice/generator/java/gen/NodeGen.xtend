@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
@@ -31,15 +31,15 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.generator.base.FileSystemHelpers
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.base.IGeneratorFileIo
-import org.eclipse.etrice.generator.base.IntelligentSeparator
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.java.Main
 
-import static extension org.eclipse.etrice.generator.base.Indexed.*
+import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 

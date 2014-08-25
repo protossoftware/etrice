@@ -74,7 +74,7 @@ public class SuperDiagramPositionProvider implements IPositionProvider {
 		// parent.inv & parent.inner at mapPositions()
 		
 		if (sc instanceof ActorClass) {
-			ActorClass base = ((ActorClass) sc).getBase();
+			ActorClass base = ((ActorClass) sc).getActorBase();
 			if (base != null)
 				mapPositions(base);
 		}

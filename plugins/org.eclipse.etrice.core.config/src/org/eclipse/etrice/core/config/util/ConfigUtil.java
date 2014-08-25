@@ -40,9 +40,14 @@ import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 
+import com.google.inject.Inject;
+
 public class ConfigUtil {
 
-	public static LiteralType getLiteralType(Attribute attr) {
+	@Inject
+	private RoomHelpers roomHelpers;
+	
+	public LiteralType getLiteralType(Attribute attr) {
 		if (attr == null)
 			return null;
 
@@ -55,14 +60,14 @@ public class ConfigUtil {
 		return null;
 	}
 
-	public static ActorClass resolve(ActorContainerClass root, RefPath path) {
+	public ActorClass resolve(ActorContainerClass root, RefPath path) {
 		if (path.getRefs().isEmpty())
 			return null;
 
 		ActorContainerClass result = root;
 		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
-			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+			for (ActorContainerRef actor : roomHelpers.getRefs(result, true)) {
 				if (actor instanceof ActorRef
 						&& actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
@@ -86,7 +91,7 @@ public class ConfigUtil {
 		return (ActorClass) result;
 	}
 
-	public static ActorRef getLastActorRef(ActorContainerClass root,
+	public ActorRef getLastActorRef(ActorContainerClass root,
 			RefPath path) {
 		if (path.getRefs().isEmpty())
 			return null;
@@ -95,7 +100,7 @@ public class ConfigUtil {
 		ActorContainerClass result = root;
 		for (RefSegment ref : path.getRefs()) {
 			ActorRef match = null;
-			for (ActorContainerRef actor : RoomHelpers.getRefs(result, true)) {
+			for (ActorContainerRef actor : roomHelpers.getRefs(result, true)) {
 				if (actor instanceof ActorRef
 						&& actor.getName().equals(ref.getRef())) {
 					match = (ActorRef) actor;
@@ -119,7 +124,7 @@ public class ConfigUtil {
 	 * @param path
 	 * @return the first invalid path segment else {@code null}
 	 */
-	public static String checkPath(ActorContainerClass root, RefPath path) {
+	public String checkPath(ActorContainerClass root, RefPath path) {
 		if (path == null)
 			return null;
 
@@ -170,7 +175,7 @@ public class ConfigUtil {
 		return null;
 	}
 
-	public static PortClass getPortClass(PortInstanceConfig config) {
+	public PortClass getPortClass(PortInstanceConfig config) {
 		InterfaceItem item = config.getItem();
 		PortClass portClass = null;
 		if (item instanceof Port) {
@@ -191,7 +196,7 @@ public class ConfigUtil {
 		return portClass;
 	}
 
-	public static List<InterfaceItem> getConfigurableInterfaceItems(
+	public List<InterfaceItem> getConfigurableInterfaceItems(
 			ActorContainerClass acc, boolean includeInherited) {
 		ArrayList<InterfaceItem> result = new ArrayList<InterfaceItem>();
 
@@ -202,7 +207,7 @@ public class ConfigUtil {
 				result.addAll(ac.getServiceAccessPoints());
 				for (ExternalPort ext : ac.getExternalPorts())
 					result.add(ext.getInterfacePort());
-				ac = ac.getBase();
+				ac = ac.getActorBase();
 			} while (includeInherited && ac != null);
 		} else if (acc instanceof SubSystemClass) {
 			// nothing
@@ -211,7 +216,7 @@ public class ConfigUtil {
 		return result;
 	}
 
-	public static String getPath(ActorInstanceConfig config) {
+	public String getPath(ActorInstanceConfig config) {
 		String path = "/" + config.getRoot().getName() + "/"
 				+ config.getSubSystem().getName();
 		for (RefSegment s : config.getPath().getRefs())
@@ -220,12 +225,12 @@ public class ConfigUtil {
 		return path;
 	}
 
-	public static String getPath(SubSystemConfig config) {
+	public String getPath(SubSystemConfig config) {
 		return "/" + config.getRoot().getName() + "/"
 				+ config.getSubSystem().getName();
 	}
 
-	public static List<Attribute> filterConfigurableAttributes(
+	public List<Attribute> filterConfigurableAttributes(
 			List<Attribute> attributes) {
 		List<Attribute> result = new ArrayList<Attribute>();
 		for (Attribute a : attributes) {

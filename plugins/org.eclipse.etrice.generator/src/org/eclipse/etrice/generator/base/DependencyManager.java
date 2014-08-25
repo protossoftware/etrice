@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 
 /**
  * a class that computes dependencies of ROOM models.

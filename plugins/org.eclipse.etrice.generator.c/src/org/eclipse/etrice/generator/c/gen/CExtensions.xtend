@@ -22,7 +22,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
@@ -38,13 +38,14 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.EnumerationType
 
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.core.room.EnumLiteral
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
-	@Inject IDiagnostician diagnostician
+	@Inject protected IDiagnostician diagnostician
+	@Inject protected extension RoomHelpers
 
 	override String getTypedDataDefinition(Message m) {
 		generateArglistAndTypedData(m.data).get(1)

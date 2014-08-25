@@ -17,9 +17,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.FileSystemHelpers;
-import org.eclipse.etrice.generator.base.IGeneratorFileIo;
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.java.Main;
@@ -120,7 +119,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- brokers for ports on the interface");
       _builder.newLine();
       {
-        List<Port> _allInterfacePorts = RoomHelpers.getAllInterfacePorts(ac);
+        List<Port> _allInterfacePorts = this._roomHelpers.getAllInterfacePorts(ac);
         for(final Port ep : _allInterfacePorts) {
           _builder.append("\t");
           _builder.append("protected InterfaceItemBroker ");
@@ -158,7 +157,7 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       _builder.newLine();
       {
-        List<Port> _allInterfacePorts_1 = RoomHelpers.getAllInterfacePorts(ac);
+        List<Port> _allInterfacePorts_1 = this._roomHelpers.getAllInterfacePorts(ac);
         for(final Port ep_1 : _allInterfacePorts_1) {
           {
             boolean _isReplicated = ep_1.isReplicated();

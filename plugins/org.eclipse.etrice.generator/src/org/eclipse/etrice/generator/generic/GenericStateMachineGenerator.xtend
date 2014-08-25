@@ -15,32 +15,33 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.etrice.core.room.ActorCommunicationType
-import org.eclipse.etrice.core.room.State
-import org.eclipse.etrice.core.room.Transition
-import org.eclipse.etrice.core.room.GuardedTransition
-import org.eclipse.etrice.core.room.TriggeredTransition
-import org.eclipse.etrice.core.room.NonInitialTransition
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedRefinedState
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState
+import org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition
+import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition
+import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.fsm.fSM.Transition
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.base.CodegenHelpers
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.generator.generic.TransitionChainGenerator
-import org.eclipse.etrice.core.room.TransitionPoint
 
 import static org.eclipse.xtext.util.Tuples.*
-
-import static extension org.eclipse.etrice.generator.base.CodegenHelpers.*
-import static extension org.eclipse.etrice.core.room.util.RoomHelpers.*
-import static extension org.eclipse.etrice.core.genmodel.etricegen.util.ETriceGenUtil.*
+import org.eclipse.etrice.core.room.Message
 
 /**
  * A target language independent generator of the state machine implementation-
  */
 class GenericStateMachineGenerator {
 
+	@Inject protected extension RoomHelpers
+	@Inject protected extension ETriceGenUtil
+	@Inject protected extension CodegenHelpers
 	@Inject protected extension RoomExtensions
 	@Inject protected ILanguageExtension langExt
 	@Inject protected GenericProtocolClassGenerator pcGen
@@ -142,8 +143,8 @@ class GenericStateMachineGenerator {
 	 */
 	def genStateMachine(ExpandedActorClass xpac, boolean shallGenerateOneFile) {
 		val ac = xpac.actorClass
-		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
-		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
+		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
+		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
 		val opScope = langExt.operationScope(ac.name, false)
 		val opScopePriv = if (langExt.usesInheritance)
@@ -196,7 +197,7 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
-				«var start = xpac.getChain(tr)?.transition»
+				«var start = xpac.getChain(tr)?.getTransition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF») {
 					«AbstractGenerator::getInstance().getTranslatedCode(tr.action)»
@@ -372,9 +373,9 @@ class GenericStateMachineGenerator {
 	 * @return the generated code
 	 */
 	def protected genStateSwitch(ExpandedActorClass xpac, boolean usesHdlr) {
-		var async = xpac.actorClass.commType==ActorCommunicationType::ASYNCHRONOUS
-		var eventDriven = xpac.actorClass.commType==ActorCommunicationType::EVENT_DRIVEN
-		var dataDriven = xpac.actorClass.commType==ActorCommunicationType::DATA_DRIVEN
+		var async = xpac.actorClass.commType==ComponentCommunicationType::ASYNCHRONOUS
+		var eventDriven = xpac.actorClass.commType==ComponentCommunicationType::EVENT_DRIVEN
+		var dataDriven = xpac.actorClass.commType==ComponentCommunicationType::DATA_DRIVEN
 		'''
 			switch (getState(«langExt.selfPointer(false)»)) {
 				«FOR state : xpac.stateMachine.getLeafStateList()»
@@ -455,10 +456,10 @@ class GenericStateMachineGenerator {
 			«FOR at : atlist»
 				case «xpac.getTriggerCodeName(at)»:
 					«var needData = at.hasGuard»
-					«IF needData»{ «langExt.getTypedDataDefinition(at.msg)»«ENDIF»
+					«IF needData»{ «langExt.getTypedDataDefinition(at.msg as Message)»«ENDIF»
 					«FOR tt : at.transitions SEPARATOR " else "»
 						«var chain = xpac.getChain(tt)»
-						«guard(chain.transition, at.trigger, xpac)»
+						«guard(chain.getTransition, at.trigger, xpac)»
 						{
 							chain__et = «chain.genChainId»;
 							catching_state__et = «chain.stateContext.genStateId»;
@@ -619,7 +620,7 @@ class GenericStateMachineGenerator {
 			val inhDo = AbstractGenerator::getInstance().getTranslatedCode(rs.inheritedDo)
 			if (langExt.usesInheritance) {
 				// we call the super method in the generated code
-				val baseName = xpac.actorClass.base.name
+				val baseName = xpac.actorClass.actorBase.name
 				if (rs.inheritedEntry.hasDetailCode)
 					entry = langExt.superCall(baseName, entryOp, "") + entry
 				if (rs.inheritedExit.hasDetailCode)
@@ -684,8 +685,8 @@ class GenericStateMachineGenerator {
 	def genStateMachineMethodDeclarations(ExpandedActorClass xpac)
 	{
 		val ac = xpac.actorClass
-		val async = ac.commType==ActorCommunicationType::ASYNCHRONOUS
-		val eventDriven = ac.commType==ActorCommunicationType::EVENT_DRIVEN
+		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
+		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val handleEvents = async || eventDriven
 		val selfPtr = langExt.selfPointer(ac.name, true)
 		val usesHdlr = usesHandlerTrPoints(xpac)
@@ -713,7 +714,7 @@ class GenericStateMachineGenerator {
 		/* Action Codes */
 		«FOR tr : xpac.stateMachine.allTransitionsRecursive»
 			«IF (!langExt.usesInheritance || xpac.isOwnObject(tr)) && tr.action.hasDetailCode»
-				«var start = xpac.getChain(tr).transition»
+				«var start = xpac.getChain(tr).getTransition»
 				«var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)»
 				«langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(ac.name, hasArgs)»«IF hasArgs»«constPointer("etRuntime::InterfaceItemBase")» ifitem«transitionChainGenerator.generateArgumentList(xpac, tr)»«ENDIF»);
 			«ENDIF»

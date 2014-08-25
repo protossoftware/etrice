@@ -1,0 +1,248 @@
+/*******************************************************************************
+ * Copyright (c) 2014 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ * 		Henrik Rentz-Reichert
+ * 
+ *******************************************************************************/
+
+grammar org.eclipse.etrice.core.fsm.FSM with org.eclipse.etrice.core.common.Base
+
+import "http://www.eclipse.org/etrice/core/common/Base"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+generate fSM "http://www.eclipse.org/etrice/core/fsm/FSM"
+
+FSMModel:
+	components+=ModelComponent*;
+
+// the state machine communication type
+enum ComponentCommunicationType:
+	EVENT_DRIVEN='eventdriven' |
+	DATA_DRIVEN='datadriven' |
+	ASYNCHRONOUS='async' |
+	SYNCHRONOUS='sync'
+;
+
+// the owner of a state machine. It also implements inheritance
+ModelComponent:
+	(abstract?='abstract'? & commType=ComponentCommunicationType?)
+	'ModelComponent' componentName=ID ('extends' base=[ModelComponent|FQN])?
+	stateMachine=StateMachine
+;
+
+//
+// state machine
+//
+
+// the building blocks of a state machine: nodes and items
+StateGraphNode: State | ChoicePoint | TrPoint;
+StateGraphItem: StateGraphNode | Transition;
+
+// state graph and state machine are two rules for the same model class
+StateGraph:
+	{StateGraph}
+	'{'
+		(
+			states+=State |
+			trPoints+=TrPoint |
+			chPoints+=ChoicePoint |
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
+		)*
+	'}';
+
+StateMachine returns StateGraph:
+	{StateGraph}
+	'StateMachine' '{'
+		(
+			states+=State |
+			trPoints+=TrPoint |
+			chPoints+=ChoicePoint |
+			transitions+=Transition |
+			refinedTransitions+=RefinedTransition
+		)*
+	'}';
+
+//
+// states
+//
+
+State: SimpleState | RefinedState;
+
+SimpleState:
+	'State' name=ID (docu=Documentation)? ('{'
+		('entry' entryCode=DetailCode)?
+		('exit' exitCode=DetailCode)?
+		('do' doCode=DetailCode)?
+		('subgraph' subgraph=StateGraph)?
+	'}')?;
+
+RefinedState:
+	'RefinedState' target=[State|FQN] (docu=Documentation)? '{'
+		('entry' entryCode=DetailCode)?
+		('exit' exitCode=DetailCode)?
+		('do' doCode=DetailCode)?
+		('subgraph' subgraph=StateGraph)?
+	'}';
+
+// the detail level (or target language) code
+// the used flag might be used when overriding in derived grammars
+DetailCode:
+	{DetailCode}
+	used?='{'
+		lines+=STRING*
+	'}';
+
+//
+// transition points
+//
+
+TrPoint: TransitionPoint | EntryPoint | ExitPoint;
+
+TransitionPoint:
+	(handler?='handler')? 'TransitionPoint' name=ID;
+
+EntryPoint:
+	'EntryPoint' name=ID;
+
+ExitPoint:
+	'ExitPoint' name=ID;
+
+//
+// choice point
+//
+
+ChoicePoint:
+	'ChoicePoint' name=ID (docu=Documentation)?;
+
+//
+// transitions
+//
+
+Transition: InitialTransition | NonInitialTransition;
+NonInitialTransition: TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
+TransitionChainStartTransition: TriggeredTransition | GuardedTransition;
+
+InitialTransition:
+	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
+	(docu=Documentation)?
+	'{'
+		('action' action=DetailCode)? 
+	'}';
+
+ContinuationTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	('{'
+		('action' action=DetailCode)? 
+	'}')?;
+
+TriggeredTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
+		'triggers' '{'
+			triggers+=Trigger ('or' triggers+=Trigger)*
+		'}'
+		('action' action=DetailCode)? 
+	'}';
+
+GuardedTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
+		'guard' guard=DetailCode
+		('action' action=DetailCode)? 
+	'}';
+
+CPBranchTransition:
+	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
+	(docu=Documentation)?
+	'{'
+		'cond' condition=DetailCode
+		('action' action=DetailCode)? 
+	'}';
+
+// by validation RefinedTransition can only be contained in the top level state graph
+RefinedTransition:
+	'RefinedTransition' target=[Transition|FQN]
+	(docu=Documentation)?
+	'{'
+		'action' action=DetailCode
+	'}'
+;
+
+//
+// transition terminals: start and end points of transitions
+//
+
+TransitionTerminal: StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
+
+StateTerminal:
+	state=[State|ID];
+TrPointTerminal:
+	'my' trPoint=[TrPoint|ID];
+SubStateTrPointTerminal:
+	trPoint=[TrPoint|ID] 'of' state=[State|ID];
+ChoicepointTerminal:
+	'cp' cp=[ChoicePoint|ID];
+
+//
+// transition triggers
+//
+
+Trigger:
+		'<' msgFromIfPairs+=MessageFromIf ('|' msgFromIfPairs+=MessageFromIf)*
+		(guard=Guard)? '>'
+;
+
+//
+// pairs of (message, interface) are triggering events
+//
+
+MessageFromIf:
+	message=[ecore::EObject|ID] ':' from=[AbstractInterfaceItem|ID]
+;
+
+// AbstractMessage: name=ID; --> ecore::EObject
+AbstractInterfaceItem: name=ID;
+
+Guard:
+	'guard' guard=DetailCode;
+	
+//
+// semantics for state machine validation
+//
+
+ProtocolSemantics:
+	{ProtocolSemantics}
+	'semantics' '{'
+		rules+=SemanticsRule*
+	'}';
+
+SemanticsRule: InSemanticsRule | OutSemanticsRule;
+
+InSemanticsRule: 'in' ':' msg=[ecore::EObject|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;
+
+OutSemanticsRule: 'out' ':' msg=[ecore::EObject|ID]
+	('->'
+		(
+			followUps+=SemanticsRule
+			|
+			('(' followUps+=SemanticsRule (',' followUps+=SemanticsRule)+ ')')
+		)
+	)?
+;

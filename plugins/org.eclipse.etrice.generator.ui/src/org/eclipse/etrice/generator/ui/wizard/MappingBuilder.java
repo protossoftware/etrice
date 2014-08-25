@@ -32,7 +32,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 import org.eclipse.etrice.core.etphys.util.ETPhysUtil;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.LogicalSystem;
@@ -53,7 +53,8 @@ public class MappingBuilder {
 	private ETPhysFactory physFactory = ETPhysFactory.eINSTANCE;
 	private BaseFactory baseFactory = BaseFactory.eINSTANCE;
 	private Map<SubSystemClass, NodeClass> nodeMap = Maps.newHashMap();
-
+	private RoomHelpers roomHelpers = new RoomHelpers();
+	
 	XtextResourceSet resourceSet = null;
 	XtextResource etPhysRes = null;
 	XtextResource etMapRes = null;
@@ -161,10 +162,10 @@ public class MappingBuilder {
 			if (!aim.getThread().equals(logThread))
 				continue;
 
-			ActorContainerClass ac = RoomHelpers.getActorContainerClass(aim);
+			ActorContainerClass ac = roomHelpers.getActorContainerClass(aim);
 			if (ac instanceof ActorClass) {
-				eventOnly &= ((ActorClass) ac).getCommType() == ActorCommunicationType.EVENT_DRIVEN;
-				dataOnly &= ((ActorClass) ac).getCommType() == ActorCommunicationType.DATA_DRIVEN;
+				eventOnly &= ((ActorClass) ac).getCommType() == ComponentCommunicationType.EVENT_DRIVEN;
+				dataOnly &= ((ActorClass) ac).getCommType() == ComponentCommunicationType.DATA_DRIVEN;
 			} // else ??
 		}
 

@@ -560,13 +560,13 @@ public class RootImpl extends EObjectImpl implements Root {
 	public void computeSubClasses() {
 		for (RoomModel mdl : getModels()) {
 			for (ActorClass ac : mdl.getActorClasses()) {
-				ActorClass base = ac.getBase();
+				ActorClass base = ac.getActorBase();
 				while (base!=null) {
 					BasicEList<ActorClass> subs = subClasses.get(base);
 					if (subs==null)
 						subClasses.put(base, subs = new BasicEList<ActorClass>());
 					subs.add(ac);
-					base = base.getBase();
+					base = base.getActorBase();
 				}
 			}
 		}

@@ -21,25 +21,23 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
-import org.eclipse.etrice.core.genmodel.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.base.NullLogger;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.DetailCode;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.MessageFromIf;
-import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.Trigger;
-import org.eclipse.etrice.core.room.TriggeredTransition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.validation.ValidationUtil;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 /**
@@ -58,7 +56,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 	private static boolean traceExec = false;
 	private static String traceName = "";
 	static {
-		classesToCheck.add(RoomPackage.Literals.ACTOR_CLASS);
+		classesToCheck.add(FSMPackage.Literals.MODEL_COMPONENT);
 		
 		if (Activator.getDefault() != null && Activator.getDefault().isDebugging()) {
 			String value = Platform
@@ -70,49 +68,44 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					.getDebugOption("org.eclipse.etrice.abstractexec.behavior/trace/abstractexec/name");
 		}
 	}
+	
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 
 	@Override
 	public void validate(EObject object,
 			ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
 
-		if (!(object instanceof ActorClass))
+		if (!(object instanceof ModelComponent))
 			return;
 		
 		if(context.isGeneration())
 			return;
 		
-		ActorClass ac = (ActorClass) object;
+		ModelComponent ac = (ModelComponent) object;
 		
 		if (traceExec) {
-			if (!(traceName.isEmpty() || ac.getName().equals(traceName)))
+			if (!(traceName.isEmpty() || ac.getComponentName().equals(traceName)))
 				return;
 			System.out.println("AbstractExecutionValidator checking class "
-					+ ac.getName());
+					+ ac.getComponentName());
 		}
 		
 		if (ac.isAbstract())
 			return;
 		
-		if (ValidationUtil.isCircularClassHierarchy(ac))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(ac))
 			// is checked elsewhere
 			return;
 
 		boolean oneProtocolsWithSemantics = false;
-		List<InterfaceItem> ifItems = RoomHelpers.getAllInterfaceItems(ac);
-		for (InterfaceItem item : ifItems) {
-			GeneralProtocolClass pc = item.getGeneralProtocol();
-			if (!(pc instanceof ProtocolClass))
-				continue;
-
-			if (traceExec)
-				System.out.println("  Checking protocolClass " + pc.getName()
-						+ " for semantics");
-			if (((ProtocolClass) pc).getSemantics() != null) {
+		List<AbstractInterfaceItem> ifItems = ac.getAllAbstractInterfaceItems();
+		for (AbstractInterfaceItem item : ifItems) {
+			if (item.getSemantics()!=null) {
 				oneProtocolsWithSemantics = true;
 				if (traceExec)
 					System.out
-							.println("  Will execute because semantics defined for "
-									+ pc.getName());
+					.println("  Will execute because semantics defined for interface item "
+							+ item.getName());
 				break;
 			}
 		}
@@ -121,9 +114,15 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			if (traceExec)
 				System.out.println("  Reached where at least one interface items has semantics");
 			NullDiagnostician diagnostician = new NullDiagnostician();
-			GeneratorModelBuilder builder = new GeneratorModelBuilder(
+			FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(
 					new NullLogger(), diagnostician);
-			ExpandedActorClass xpac = builder.createExpandedActorClass(ac);
+			ExpandedModelComponent xpac;
+			try {
+				xpac = builder.createExpandedModelComponent(ac);
+			}
+			catch (Throwable t) {
+				return;
+			}
 
 			if (xpac != null && !diagnostician.isFailed()) {
 				SemanticsCheck checker = new SemanticsCheck(xpac);
@@ -131,7 +130,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 				if (traceExec)
 					System.out.println("  Rule checking for "
-							+ xpac.getActorClass().getName() + " is over");
+							+ xpac.getModelComponent().getComponentName() + " is over");
 
 				TreeIterator<EObject> it = xpac.getStateMachine()
 						.eAllContents();
@@ -155,7 +154,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 				if (traceExec)
 					System.out
 							.println("AbstractExecutionValidator done checking class "
-									+ ac.getName());
+									+ ac.getComponentName());
 			}
 			else
 				if(traceExec)
@@ -180,7 +179,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 	private void createMarkersForProposals(ProposalGenerator propGen,
 			ValidationMessageAcceptor messageAcceptor, State st,
-			ExpandedActorClass xpac) {
+			ExpandedModelComponent xpac) {
 		List<MessageFromIf> incoming = propGen.getIncomingProposals();
 		EObject orig = xpac.getOrig(st);
 		EObject container = orig.eContainer();
@@ -190,20 +189,20 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 		for (MessageFromIf msg : incoming) {
 			messageAcceptor.acceptWarning("State should handle the message "
-					+ msg.getMessage().getName() + " from port "
+					+ fsmNameProvider.getMessageName(msg.getMessage()) + " from port "
 					+ msg.getFrom().getName() + " ", container, orig
 					.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER, st
-					.getName(), msg.getMessage().getName(), msg.getFrom()
+					.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 					.getName());
 		}
 		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
 
 		for (MessageFromIf msg : outgoing) {
 			messageAcceptor.acceptInfo("State should send the message "
-					+ msg.getMessage().getName() + " to port "
+					+ fsmNameProvider.getMessageName(msg.getMessage()) + " to port "
 					+ msg.getFrom().getName() + " ", container, orig
 					.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND,
-					st.getName(), msg.getMessage().getName(), msg.getFrom()
+					st.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 							.getName());
 		}
 
@@ -211,7 +210,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 
 	private void createMarkersForWarnings(SemanticsCheck checker,
 			ValidationMessageAcceptor messageAcceptor, StateGraphItem item,
-			ExpandedActorClass xpac) {
+			ExpandedModelComponent xpac) {
 		List<HandledMessage> warningList = checker.getWarningMsg(item);
 		if (traceExec && warningList != null) {
 			System.out.println("Messages in the warning list for item "
@@ -239,11 +238,10 @@ public class AbstractExecutionValidator implements ICustomValidator {
 													"The message violates the semantic rule",
 													trig,
 													mif.eContainingFeature(),
-													trig.getMsgFromIfPairs()
-															.indexOf(trig),
+													trig.getMsgFromIfPairs().indexOf(trig),
 													DIAG_CODE_VIOLATION_TRIGGER,
-													trigger.getMsg().getName(),
-													mif.getMessage().getName(),
+													fsmNameProvider.getMessageName(trigger.getMsg()),
+													fsmNameProvider.getMessageName(mif.getMessage()),
 													mif.getFrom().getName());
 								}
 							}
@@ -253,11 +251,12 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					DetailCode dc = (DetailCode) origin;
 					EObject orig = xpac.getOrig(dc);
 					messageAcceptor.acceptWarning(
-							"The message violates the semantic rule", orig
-									.eContainer(), orig.eContainingFeature(),
+							"The message violates the semantic rule",
+							orig.eContainer(), orig.eContainingFeature(),
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							DIAG_CODE_VIOLATION_MESSAGESEND, msg.getMsg()
-									.getName(), msg.getIfitem().getName());
+							DIAG_CODE_VIOLATION_MESSAGESEND,
+							fsmNameProvider.getMessageName(msg.getMsg()),
+							msg.getIfitem().getName());
 
 				}
 			}

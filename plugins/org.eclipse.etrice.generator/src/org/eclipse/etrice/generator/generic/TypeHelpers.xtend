@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.room.EnumerationType
 @Singleton
 class TypeHelpers {
 
+	@Inject protected extension RoomHelpers
 	@Inject ILanguageExtension languageExt
 	@Inject IDataConfiguration dataConfigExt
 	
@@ -144,10 +145,10 @@ class TypeHelpers {
 	def String getAttrClassConfigValue(List<Attribute> attributePath, ActorClass actor, boolean inherite){
 		var result = dataConfigExt.getAttrClassConfigValue(actor, attributePath)
 		if(result == null && inherite){
-			var base = actor.base
+			var base = actor.actorBase
 			while(base != null && result == null){
 				result = dataConfigExt.getAttrClassConfigValue(base, attributePath)
-				base = base.base
+				base = base.actorBase
 			}
 		}
 		
@@ -155,7 +156,7 @@ class TypeHelpers {
 	}
 	
 	def String getAttrClassConfigValue(List<Attribute> attributePath, PortClass port){
-		var pc = RoomHelpers::getProtocolClass(port)
+		var pc = port.protocolClass
 		if(pc == null)
 			return null
 		return dataConfigExt.getAttrClassConfigValue(pc, port.equals(pc.regular), attributePath)

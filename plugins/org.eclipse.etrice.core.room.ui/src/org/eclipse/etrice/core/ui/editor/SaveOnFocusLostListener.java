@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.ui.editor;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -60,8 +61,8 @@ public class SaveOnFocusLostListener implements IPartListener {
 			return;
 		
 		boolean save =  Platform.getPreferencesService().getBoolean(
-				"org.eclipse.etrice.ui.common",
-				PreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false, null);
+				"org.eclipse.etrice.ui.common.base",
+				RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false, null);
 		
 		if (save && editor.isDirty())
 			if (((IValidatingEditor)editor).isValid())

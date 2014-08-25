@@ -17,29 +17,28 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.ComposedSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
-import org.eclipse.etrice.core.common.base.util.BaseSwitch;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.naming.FSMFragmentProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
-import org.eclipse.etrice.core.room.ChoicePoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
-import org.eclipse.etrice.core.room.InitialTransition;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefSAPoint;
-import org.eclipse.etrice.core.room.RefinedTransition;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomFactory;
@@ -48,22 +47,23 @@ import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.TrPoint;
-import org.eclipse.etrice.core.room.Transition;
 import org.eclipse.etrice.core.room.util.RoomSwitch;
-import org.eclipse.xtext.resource.IFragmentProvider;
 
 
-public class RoomFragmentProvider implements IFragmentProvider {
+public class RoomFragmentProvider extends FSMFragmentProvider {
 
-	private class RoomPathProvider extends RoomSwitch<String> {
+	protected class RoomPathProvider extends RoomSwitch<String> {
+		
+		private Switch<String> topSwitch;
 
+		public RoomPathProvider(Switch<String> topSwitch) {
+			this.topSwitch = topSwitch;
+		}
+		
 		@Override
 		public String caseRoomClass(RoomClass rc) {
 			return rc.getName();
@@ -71,22 +71,22 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		@Override
 		public String casePort(Port port) {
-			return doSwitch(port.eContainer())+SEP+port.getName();
+			return topSwitch.doSwitch(port.eContainer())+SEP+port.getName();
 		}
 		
 		@Override
 		public String caseSPP(SPP spp) {
-			return doSwitch(spp.eContainer())+SEP+spp.getName();
+			return topSwitch.doSwitch(spp.eContainer())+SEP+spp.getName();
 		}
 		
 		@Override
 		public String caseActorContainerRef(ActorContainerRef acr) {
-			return doSwitch(acr.eContainer())+SEP+acr.getName();
+			return topSwitch.doSwitch(acr.eContainer())+SEP+acr.getName();
 		}
 		
 		@Override
 		public String caseBinding(Binding bi) {
-			return doSwitch(bi.eContainer())+SEP
+			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseBindingEndPointShort(bi.getEndpoint1())+BIND_SEP
 			+caseBindingEndPointShort(bi.getEndpoint2());
 		}
@@ -101,7 +101,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		
 		@Override
 		public String caseLayerConnection(LayerConnection bi) {
-			return doSwitch(bi.eContainer())+SEP
+			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseSAPointShort(bi.getFrom())+CONN_SEP
 			+caseSPPointShort(bi.getTo());
 		}
@@ -121,88 +121,27 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		private String caseSPPointShort(SPPoint sppt) {
 			return sppt.getRef().getName()+EP_SEP+sppt.getService().getName();
 		}
-		
-		@Override
-		public String caseState(State s) {
-			// going up two steps in the containment hierarchy either hits another state or a RoomClass
-			return doSwitch(s.eContainer().eContainer())+SEP+s.getName();
-		}
-		
-		@Override
-		public String caseTrPoint(TrPoint trp) {
-			// going up two steps in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(trp.eContainer().eContainer())+SEP+trp.getName();
-		}
-		
-		@Override
-		public String caseChoicePoint(ChoicePoint cp) {
-			// going up two steps in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(cp.eContainer().eContainer())+SEP+cp.getName();
-		}
-		
-		@Override
-		public String caseInitialTransition(InitialTransition t) {
-			// going up two steps in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(t.eContainer().eContainer())+SEP+INIT_TRANS;
-		}
-		
-		@Override
-		public String caseNonInitialTransition(NonInitialTransition t) {
-			// the transition name is optional in the ROOM DSL but will be automatically assigned
-			// by the Behavior Editor
-			
-			// going up two steps in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(t.eContainer().eContainer())+SEP+t.getName();
-		}
-		
-		@Override
-		public String caseRefinedTransition(RefinedTransition t) {
-			// the transition name is optional in the ROOM DSL but will be automatically assigned
-			// by the Behavior Editor
-			
-			// going up two steps in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(t.eContainer().eContainer())+SEP+t.getTarget().getName();
-		}
-		
-		@Override
-		public String caseStateGraph(StateGraph sg) {
-			// going up one step in the containment hierarchy either hits a state or a RoomClass
-			return doSwitch(sg.eContainer())+SEP+STATE_GRAPH;
-		}
 	}
 	
-	private class BasePathProvider extends BaseSwitch<String> {
-		/* (non-Javadoc)
-		 * @see org.eclipse.etrice.core.common.base.util.BaseSwitch#caseAnnotationType(org.eclipse.etrice.core.common.base.AnnotationType)
-		 */
-		@Override
-		public String caseAnnotationType(AnnotationType object) {
-			return object.getName();
-		}
-	}
-	
-	private class PathProvider extends ComposedSwitch<String> {
-		public PathProvider() {
+	private class CombinedPathProvider extends ComposedSwitch<String> {
+		public CombinedPathProvider() {
 			this.addSwitch(new BasePathProvider());
-			this.addSwitch(new RoomPathProvider());
+			this.addSwitch(new FSMPathProvider(this));
+			this.addSwitch(new RoomPathProvider(this));
 		}
 	}
 	
-	private static final char SEP = '$';
 	private static final char BIND_SEP = '-';
 	private static final char SUB_SEP = '/';
 	private static final char CONN_SEP = '-';
-	private static final String INIT_TRANS = "initial";
-	private static final String STATE_GRAPH = "sg";
 	private static final char EP_SEP = '!';
 	private static final String LOCAL = ".";
-	private static final char TYPE_SEP = ':';
 
-	private PathProvider pathProvider = new PathProvider();
+	private CombinedPathProvider roomPathProvider = new CombinedPathProvider();
 	
 	@Override
 	public String getFragment(EObject obj, Fallback fallback) {
-		String path = pathProvider.doSwitch(obj);
+		String path = roomPathProvider.doSwitch(obj);
 		if (path!=null)
 			return obj.eClass().getName()+TYPE_SEP+path;
 		
@@ -280,59 +219,6 @@ public class RoomFragmentProvider implements IFragmentProvider {
 		return false;
 	}
 
-	public static boolean isState(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		if (uri!=null && uri.fragment()!=null) {
-			if (uri.fragment().startsWith("BaseState"))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getSimpleState().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getRefinedState().getName()))
-				return true;
-		}
-		return false;
-	}
-
-	public static boolean isTrPoint(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		if (uri!=null && uri.fragment()!=null) {
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getTransitionPoint().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getEntryPoint().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getExitPoint().getName()))
-				return true;
-		}
-		return false;
-	}
-
-	public static boolean isChoicePoint(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getChoicePoint().getName());
-	}
-
-	public static boolean isStateGraph(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getStateGraph().getName());
-	}
-
-	public static boolean isTransition(EObject obj) {
-		URI uri = EcoreUtil.getURI(obj);
-		if (uri!=null && uri.fragment()!=null) {
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getInitialTransition().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getContinuationTransition().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getCPBranchTransition().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getTriggeredTransition().getName()))
-				return true;
-			if (uri.fragment().startsWith(RoomPackage.eINSTANCE.getRefinedTransition().getName()))
-				return true;
-		}
-		return false;
-	}
-	
 	private EObject getEObject(RoomModel model, String fragment) {
 		int begin = 0;
 		int end = fragment.indexOf(TYPE_SEP);
@@ -398,183 +284,42 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			else if (type.equals(RoomPackage.eINSTANCE.getLayerConnection().getName())) {
 				return getLayerConnection(rc, remainder);
 			}
-			else if (type.equals("BaseState")
-					|| type.equals(RoomPackage.eINSTANCE.getSimpleState().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getRefinedState().getName())) {
-				return getState(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getTransitionPoint().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getEntryPoint().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getExitPoint().getName())) {
-				return getTrPoint(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getChoicePoint().getName())) {
-				return getChoicePoint(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getInitialTransition().getName())) {
-				return getInitialTransition(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getRefinedTransition().getName())) {
-				return getRefinedTransition(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getContinuationTransition().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getCPBranchTransition().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getTriggeredTransition().getName())
-					|| type.equals(RoomPackage.eINSTANCE.getGuardedTransition().getName())) {
-				return getTransition(rc, remainder);
-			}
-			else if (type.equals(RoomPackage.eINSTANCE.getStateGraph().getName())
-					|| type.equals("StateMachine")) {
-				return getStateGraph(rc, remainder);
-			}
-		}
-		
-		return null;
-	}
-
-	private Transition getTransition(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (Transition t : sg.getTransitions()) {
-			if (t.getName().equals(name)) {
-				return t;
-			}
-		}
-
-		return null;
-	}
-
-	private InitialTransition getInitialTransition(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		if (name.equals(INIT_TRANS)) {
-			for (Transition t : sg.getTransitions()) {
-				if (t instanceof InitialTransition)
-					return (InitialTransition) t;
-			}
-		}
-		
-		return null;
-	}
-
-	private RefinedTransition getRefinedTransition(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (RefinedTransition t : sg.getRefinedTransitions()) {
-			if (t.getTarget().getName().equals(name))
-				return t;
-		}
-		
-		return null;
-	}
-
-	private ChoicePoint getChoicePoint(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (ChoicePoint cp : sg.getChPoints()) {
-			if (cp.getName().equals(name)) {
-				return cp;
-			}
-		}
-
-		return null;
-	}
-
-	private TrPoint getTrPoint(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (TrPoint tp : sg.getTrPoints()) {
-			if (tp.getName().equals(name)) {
-				return tp;
-			}
-		}
-
-		return null;
-	}
-
-	private State getState(RoomClass rc, String remainder) {
-		StateGraph sg = getStateGraph(rc, remainder);
-		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (State s : sg.getStates()) {
-			if (s.getName().equals(name)) {
-				return s;
-			}
-		}
-
-		return null;
-	}
-
-	private StateGraph getStateGraph(RoomClass rc, String remainder) {
-		if (rc instanceof ActorClass) {
-			StateGraph sg = ((ActorClass) rc).getStateMachine();
-			if (sg==null) {
-				((ActorClass) rc).setStateMachine(RoomFactory.eINSTANCE.createStateGraph());
-				sg = ((ActorClass) rc).getStateMachine();
-			}
-			int begin = 0;
-			int end = remainder.indexOf(SEP);
-			while (end>=0) {
-				String name = remainder.substring(begin, end);
-				boolean found = false;
-				for (State s : sg.getStates()) {
-					if (s.getName().equals(name)) {
-						sg = s.getSubgraph();
-						found = true;
-						break;
-					}
-				}
-				if (!found)
-					return null;
-				
-				begin = end+1;
-				end = remainder.indexOf(SEP, begin);
-			}
 			
-			return sg;
+			if (rc instanceof ModelComponent) {
+				ModelComponent mc = (ModelComponent) rc;
+				
+				if (type.equals("BaseState")
+						|| type.equals(FSMPackage.eINSTANCE.getSimpleState().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getRefinedState().getName())) {
+					return getState(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getTransitionPoint().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getEntryPoint().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getExitPoint().getName())) {
+					return getTrPoint(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getChoicePoint().getName())) {
+					return getChoicePoint(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getInitialTransition().getName())) {
+					return getInitialTransition(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getRefinedTransition().getName())) {
+					return getRefinedTransition(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getContinuationTransition().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getCPBranchTransition().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getTriggeredTransition().getName())
+						|| type.equals(FSMPackage.eINSTANCE.getGuardedTransition().getName())) {
+					return getTransition(mc, remainder);
+				}
+				else if (type.equals(FSMPackage.eINSTANCE.getStateGraph().getName())
+						|| type.equals("StateMachine")) {
+					return getStateGraph(mc, remainder);
+				}
+			}
 		}
-
+		
 		return null;
 	}
 
@@ -789,7 +534,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			}
 			if (rc instanceof ActorClass)
 				if (((ActorClass) rc).getBase()!=null)
-					return getActorContainerRef(((ActorClass) rc).getBase(), name);
+					return getActorContainerRef(((ActorClass) rc).getActorBase(), name);
 		}
 		else if (rc instanceof LogicalSystem) {
 			for (SubSystemRef ssr : ((LogicalSystem) rc).getSubSystems()) {
@@ -811,7 +556,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 					return p;
 			}
 			if (((ActorClass) rc).getBase()!=null)
-				return getPort(((ActorClass) rc).getBase(), name);
+				return getPort(((ActorClass) rc).getActorBase(), name);
 		}
 		else if (rc instanceof SubSystemClass) {
 			for (Port p : ((SubSystemClass) rc).getRelayPorts()) {
@@ -830,7 +575,7 @@ public class RoomFragmentProvider implements IFragmentProvider {
 			}
 			if (rc instanceof ActorClass)
 				if (((ActorClass)rc).getBase()!=null)
-					return getSPP(((ActorClass)rc).getBase(), name);
+					return getSPP(((ActorClass)rc).getActorBase(), name);
 		}
 		return null;
 	}

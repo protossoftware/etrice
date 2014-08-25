@@ -18,21 +18,22 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.junit.Before;
 import org.junit.Test;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 
 public class TestStates extends TestInstanceModelBuilderBase {
 	
 	private Root root;
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
 	
 	@Before
 	public void setUp() {
@@ -44,15 +45,15 @@ public class TestStates extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testNumbers() {
-		checkSize(7, RoomPackage.eINSTANCE.getSimpleState());
-		checkSize(1, RoomPackage.eINSTANCE.getChoicePoint());
-		checkSize(2, RoomPackage.eINSTANCE.getTransitionPoint());
-		checkSize(1, RoomPackage.eINSTANCE.getEntryPoint());
-		checkSize(1, RoomPackage.eINSTANCE.getExitPoint());
-		checkSize(2, RoomPackage.eINSTANCE.getInitialTransition());
-		checkSize(9, RoomPackage.eINSTANCE.getTriggeredTransition());
-		checkSize(3, RoomPackage.eINSTANCE.getContinuationTransition());
-		checkSize(2, RoomPackage.eINSTANCE.getCPBranchTransition());
+		checkSize(7, FSMPackage.eINSTANCE.getSimpleState());
+		checkSize(1, FSMPackage.eINSTANCE.getChoicePoint());
+		checkSize(2, FSMPackage.eINSTANCE.getTransitionPoint());
+		checkSize(1, FSMPackage.eINSTANCE.getEntryPoint());
+		checkSize(1, FSMPackage.eINSTANCE.getExitPoint());
+		checkSize(2, FSMPackage.eINSTANCE.getInitialTransition());
+		checkSize(9, FSMPackage.eINSTANCE.getTriggeredTransition());
+		checkSize(3, FSMPackage.eINSTANCE.getContinuationTransition());
+		checkSize(2, FSMPackage.eINSTANCE.getCPBranchTransition());
 	}
 	
 	@Test
@@ -66,7 +67,7 @@ public class TestStates extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testGraph() {
-		ArrayList<EObject> states = instances.get(RoomPackage.eINSTANCE.getSimpleState());
+		ArrayList<EObject> states = instances.get(FSMPackage.eINSTANCE.getSimpleState());
 //		for (EObject obj : states) {
 //			LogicalSystem.out.println("state "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}
@@ -87,10 +88,10 @@ public class TestStates extends TestInstanceModelBuilderBase {
 		
 		assertEquals("active triggers", 2, xpac.getActiveTriggers(s).size());
 
-		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
+		ArrayList<EObject> cps = instances.get(FSMPackage.eINSTANCE.getChoicePoint());
 		
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
-		assertEquals("choicepoint name", "CP1", RoomNameProvider.getFullPath(cp));
+		assertEquals("choicepoint name", "CP1", roomNameProvider.getFullPath(cp));
 		assertEquals("number of incoming transitions", 1, xpac.getIncomingTransitions(cp).size());
 		assertEquals("number of outgoing transitions", 3, xpac.getOutgoingTransitions(cp).size());
 		
@@ -100,7 +101,7 @@ public class TestStates extends TestInstanceModelBuilderBase {
 	
 	@Test
 	public void testChains() {
-		ArrayList<EObject> cts = instances.get(RoomPackage.eINSTANCE.getContinuationTransition());
+		ArrayList<EObject> cts = instances.get(FSMPackage.eINSTANCE.getContinuationTransition());
 //		for (EObject obj : cts) {
 //			LogicalSystem.out.println("ct "+RoomNameProvider.getFullPath((StateGraphItem) obj));
 //		}
@@ -111,6 +112,6 @@ public class TestStates extends TestInstanceModelBuilderBase {
 		ExpandedActorClass xpac = root.getXpActorClasses().get(0);
 		TransitionChain chain = xpac.getChain(t);
 		assertNotNull("chain", chain);
-		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", RoomNameProvider.getFullPath(chain.getTransition()));
+		assertEquals("chain name", "TRANS_tr5_FROM_tp0_TO_State3_tp1_BY_afct", roomNameProvider.getFullPath(chain.getTransition()));
 	}
 }

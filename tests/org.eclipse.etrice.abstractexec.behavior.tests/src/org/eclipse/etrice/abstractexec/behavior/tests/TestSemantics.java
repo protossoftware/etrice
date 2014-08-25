@@ -19,13 +19,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.StateGraphItem;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.Trigger;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
 import org.junit.Assert;
@@ -111,7 +111,7 @@ public class TestSemantics {
 				Object source = list.get(d.getIndex());
 				if (source instanceof StateGraphItem) {
 					StateGraphItem sgi = (StateGraphItem) source;
-					checkItem(sgi.getName(), RoomNameProvider.getName(sgi), marker);
+					checkItem(sgi.getName(), AbstractExecutionUtil.getInstance().getRoomNameProvider().getName(sgi), marker);
 					items.remove(source);
 				}
 			}
@@ -119,7 +119,7 @@ public class TestSemantics {
 			if (container.eContainer() instanceof Transition) {
 				Transition transition = (Transition) container.eContainer();
 				checkItem(transition.getName(),
-						RoomNameProvider.getName(transition),
+						AbstractExecutionUtil.getInstance().getRoomNameProvider().getName(transition),
 						marker);
 				items.remove(container.eContainer());
 			} else
@@ -127,13 +127,13 @@ public class TestSemantics {
 		} else if (container instanceof Transition) {
 			Transition transition = (Transition) container;
 			checkItem(transition.getName(),
-					RoomNameProvider.getName(transition),
+					AbstractExecutionUtil.getInstance().getRoomNameProvider().getName(transition),
 					marker);
 			items.remove(container);
 		} else if (container instanceof State) {
 			State state = (State) container;
 			checkItem(state.getName(),
-					RoomNameProvider.getName(state),
+					AbstractExecutionUtil.getInstance().getRoomNameProvider().getName(state),
 					marker);
 			items.remove(container);
 		} else

@@ -39,12 +39,20 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
+import com.google.inject.Inject;
+
 /**
  * see
  * http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on
  * how to customize content assistant
  */
 public class ConfigProposalProvider extends AbstractConfigProposalProvider {
+
+	@Inject
+	private RoomHelpers roomHelpers;
+
+	@Inject
+	private ConfigUtil configUtil;
 	
 	@Override
 	public void completeImport_ImportURI(EObject model, Assignment assignment,
@@ -94,9 +102,9 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		if (root != null) {
 			RefPath path = config.getPath();
 			if (path != null && !path.getRefs().isEmpty())
-				root = ConfigUtil.resolve(root, path);
+				root = configUtil.resolve(root, path);
 			if (root != null) {
-				for (ActorContainerRef ref : RoomHelpers.getRefs(root, true)) {
+				for (ActorContainerRef ref : roomHelpers.getRefs(root, true)) {
 					if (ref instanceof ActorRef) {
 						ActorRef aRef = (ActorRef) ref;
 						if (aRef.getMultiplicity() == 1)
@@ -114,7 +122,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		Attribute attr = getAttribute(model);
 		if (attr != null) {
-			LiteralType type = ConfigUtil.getLiteralType(attr);
+			LiteralType type = configUtil.getLiteralType(attr);
 			if (type != LiteralType.CHAR)
 				return;
 		}
@@ -129,7 +137,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		Attribute attr = getAttribute(model);
 		if (attr != null) {
 			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
-			LiteralType type = ConfigUtil.getLiteralType(attr);
+			LiteralType type = configUtil.getLiteralType(attr);
 			if (type != LiteralType.BOOL)
 				return;
 		}
@@ -148,7 +156,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		Attribute attr = getAttribute(model);
 		if (attr != null) {
 			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
-			LiteralType type = ConfigUtil.getLiteralType(attr);
+			LiteralType type = configUtil.getLiteralType(attr);
 			if (type != LiteralType.INT && type != LiteralType.REAL)
 				return;
 		}
@@ -166,7 +174,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		Attribute attr = getAttribute(model);
 		if (attr != null) {
 			mult = (attr.getSize() > 0) ? "[" + attr.getSize() + "]" : "";
-			LiteralType type = ConfigUtil.getLiteralType(attr);
+			LiteralType type = configUtil.getLiteralType(attr);
 			if (type != LiteralType.REAL)
 				return;
 		}
@@ -221,7 +229,7 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 	}
 
 	private boolean hideKeyword(AttrConfig config, Keyword keyword) {
-		LiteralType type = ConfigUtil.getLiteralType(config.getAttribute());
+		LiteralType type = configUtil.getLiteralType(config.getAttribute());
 		DataType dataType = config.getAttribute().getType().getType();
 		if (keyword.getValue().equals("min")
 				|| keyword.getValue().equals("max")) {

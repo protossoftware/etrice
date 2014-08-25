@@ -12,11 +12,12 @@
 
 package org.eclipse.etrice.generator.base;
 
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -24,19 +25,22 @@ import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
  */
 public class CodegenHelpers {
 	
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	
 	/**
 	 * @param t a {@link Transition}
 	 * @return a name for the action code operation the generator will generate
 	 */
-	public static String getActionCodeOperationName(Transition t) {
-		return "action_"+RoomNameProvider.getFullPath(t);
+	public String getActionCodeOperationName(Transition t) {
+		return "action_"+fsmNameProvider.getFullPath(t);
 	}
 	
 	/**
 	 * @param s a {@link State}
 	 * @return a name for the entry code operation the generator will generate
 	 */
-	public static String getEntryCodeOperationName(State s) {
+	public String getEntryCodeOperationName(State s) {
 		return "entry_"+getGenStatePathName(s);
 	}
 	
@@ -44,7 +48,7 @@ public class CodegenHelpers {
 	 * @param s a {@link State}
 	 * @return a name for the exit code operation the generator will generate
 	 */
-	public static String getExitCodeOperationName(State s) {
+	public String getExitCodeOperationName(State s) {
 		return "exit_"+getGenStatePathName(s);
 	}
 	
@@ -52,7 +56,7 @@ public class CodegenHelpers {
 	 * @param s a {@link State}
 	 * @return a name for the do code operation the generator will generate
 	 */
-	public static String getDoCodeOperationName(State s) {
+	public String getDoCodeOperationName(State s) {
 		return "do_"+getGenStatePathName(s);
 	}
 	
@@ -60,8 +64,8 @@ public class CodegenHelpers {
 	 * @param tc a {@link TransitionChain}
 	 * @return a name for the constant transition chain ID the generator will generate
 	 */
-	public static String getGenChainId(TransitionChain tc) {
-		return "CHAIN_"+RoomNameProvider.getFullPath(tc.getTransition());
+	public String getGenChainId(TransitionChain tc) {
+		return "CHAIN_"+fsmNameProvider.getFullPath(tc.getTransition());
 	}
 	
 	/**
@@ -70,19 +74,19 @@ public class CodegenHelpers {
 	 * 
 	 * @see org.eclipse.etrice.core.naming.RoomNameProvider#getFullPath(StateGraphItem)
 	 */
-	public static String getGenStatePathName(State s) {
-		return RoomNameProvider.getFullPath(s);
+	public String getGenStatePathName(State s) {
+		return fsmNameProvider.getFullPath(s);
 	}
 	
 	/**
 	 * @param s a {@link State} (may be <code>null</code>)
 	 * @return a unique identifier used by the generator for state IDs
 	 */
-	public static String getGenStateId(State s) {
+	public String getGenStateId(State s) {
 		if (s==null)
-			return "STATE_"+RoomNameProvider.getStateName(s);
+			return "STATE_"+fsmNameProvider.getStateName(s);
 		else
-			return "STATE_"+RoomNameProvider.getFullPath(s);
+			return "STATE_"+fsmNameProvider.getFullPath(s);
 	}
 	
 	/**
@@ -90,8 +94,8 @@ public class CodegenHelpers {
 	 * @return an ID for the parent state of s
 	 * @see #getGenStateId(State)
 	 */
-	public static String getParentStateId(State s) {
-		return getGenStateId(RoomHelpers.getParentState(s));
+	public String getParentStateId(State s) {
+		return getGenStateId(fsmHelpers.getParentState(s));
 	}
 
 }

@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.genmodel.base.ILogger;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
@@ -34,7 +33,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
@@ -49,6 +47,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -92,6 +92,8 @@ public class GeneratorModelBuilder {
 		CONNECT_SERVICES,
 		CREATE_OPTIONAL_INSTANCES
 	}
+	
+	private RoomHelpers roomHelpers = new RoomHelpers();
 	
 	HashSet<WorkItem> alreadyDone = new HashSet<WorkItem>();
 
@@ -744,7 +746,7 @@ public class GeneratorModelBuilder {
 			((OptionalActorInstance)ai).setActorClass(ac);
 
 		// get a list of super classes, super first, sub-classes last
-		List<ActorClass> classes = RoomHelpers.getClassHierarchy(ac);
+		List<ActorClass> classes = roomHelpers.getClassHierarchy(ac);
 		
 		// create instances for super classes recursively (ports, actor refs and bindings)
 		// super classes first ensures that actor refs are present when bindings are created
@@ -791,7 +793,7 @@ public class GeneratorModelBuilder {
 		ai.setActorClass(ac);
 		ai.setArray(aref.getMultiplicity()<0);
 		
-		for (ActorClass acl : RoomHelpers.getClassHierarchy(ac)) {
+		for (ActorClass acl : roomHelpers.getClassHierarchy(ac)) {
 			createPortInstances(ai, acl);
 		}
 		
@@ -1236,7 +1238,7 @@ public class GeneratorModelBuilder {
 					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
-		xpac.setActorClass(ac);
+		xpac.setModelComponent(ac);
 		
 		xpac.prepare(diagnostician);
 		

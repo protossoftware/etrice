@@ -12,22 +12,23 @@
 
 package org.eclipse.etrice.generator.generic;
 
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
-import org.eclipse.etrice.core.room.CPBranchTransition;
-import org.eclipse.etrice.core.room.ContinuationTransition;
-import org.eclipse.etrice.core.room.GuardedTransition;
-import org.eclipse.etrice.core.room.InitialTransition;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.CodegenHelpers;
 
 import com.google.inject.Inject;
 
 /**
- * Implementation of the {@link org.eclipse.etrice.core.genmodel.etricegen.ITransitionChainVisitor ITransitionChainVisitor} interface.
+ * Implementation of the {@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor ITransitionChainVisitor} interface.
  * Uses an {@link org.eclipse.etrice.generator.generic.ILanguageExtension ILanguageExtension} for target language specific things.
  * 
  * @author Henrik Rentz-Reichert
@@ -36,6 +37,7 @@ import com.google.inject.Inject;
 public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	@Inject private ILanguageExtension langExt;
+	@Inject private CodegenHelpers codegenHelpers;
 	private ExpandedActorClass xpac;
 	private boolean dataDriven;
 
@@ -65,25 +67,25 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 		if (tr.getAction()!=null && !tr.getAction().getLines().isEmpty()) {
 			if (tr instanceof InitialTransition)
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
-				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
+				String[] result = langExt.generateArglistAndTypedData((VarDecl) xpac.getData(tr));
 				String dataArg = result[0];
 				
-				return CodegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
+				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 			}
 		}
 		return "";
 	}
 
 	public String genEntryOperationCall(State state) {
-		return CodegenHelpers.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return codegenHelpers.getEntryCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genExitOperationCall(State state) {
-		return CodegenHelpers.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
+		return codegenHelpers.getExitCodeOperationName(state)+"("+langExt.selfPointer(false)+");\n";
 	}
 
 	public String genElseIfBranch(CPBranchTransition tr, boolean isFirst) {
@@ -108,13 +110,13 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 
 	public String genReturnState(State state, boolean executeEntryCode) {
 		if (executeEntryCode)
-			return "return " + CodegenHelpers.getGenStateId(state) + ";";
+			return "return " + codegenHelpers.getGenStateId(state) + ";";
 		else
-			return "return " + CodegenHelpers.getGenStateId(state) + " + STATE_MAX;";
+			return "return " + codegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
 	public String genTypedData(TransitionChain tc) {
-		String[] result = langExt.generateArglistAndTypedData(tc.getData());
+		String[] result = langExt.generateArglistAndTypedData((VarDecl) tc.getData());
 		return result[1];
 	}
 

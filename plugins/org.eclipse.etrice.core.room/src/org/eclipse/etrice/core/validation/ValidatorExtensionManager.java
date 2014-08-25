@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.etrice.core.common.validation.CustomValidatorManager;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -73,7 +74,6 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 
 	public static class Registry {
 
-		private static final String PACKAGE = RoomPackage.class.getPackage().getName() + ".";
 		private static final String IVALIDATOR_ID = "org.eclipse.etrice.core.room.validation";
 		private static Registry instance = null;
 		private HashMap<String, ArrayList<ICustomValidator>> fastClass2Ext = new HashMap<String, ArrayList<ICustomValidator>>();
@@ -98,13 +98,19 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 		public void loadValidatorExtensions() {
 			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(IVALIDATOR_ID);
 
+			// we use parent-package.class-name as key in our tables
+			
 			// compute all sub classes for all classes of the Room package
 			HashMap<String, ArrayList<String>> cls2sub = new HashMap<String, ArrayList<String>>();
 			for (EClassifier cls : RoomPackage.eINSTANCE.getEClassifiers()) {
 				if (cls instanceof EClass) {
 					EList<EClass> superTypes = ((EClass) cls).getESuperTypes();
-					for (EClass sup : superTypes) {
-						put(sup.getName(), ((EClass) cls).getName(), cls2sub);
+					if (cls.getName().equals("ActorClass")) {
+						for (EClass sup : superTypes) {
+							EPackage pckg = (EPackage) sup.eContainer();
+							String path = pckg.getName();
+							put(path+"."+sup.getName(), ((EClass) cls).getName(), cls2sub);
+						}
 					}
 				}
 			}
@@ -119,19 +125,21 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 								+ e.getNamespaceIdentifier()));
 						String mode = e.getAttribute("mode");
 						String classToCheck = e.getAttribute("classToCheck");
-						if (classToCheck.startsWith(PACKAGE))
-							classToCheck = classToCheck.substring(PACKAGE.length());
-						EClassifier cls = RoomPackage.eINSTANCE.getEClassifier(classToCheck);
-						if (cls instanceof EClass) {
-							HashMap<String, ArrayList<ICustomValidator>> map = getMap(mode);
-							if (map != null) {
-								put(map, ((EClass) cls).getName(), (ICustomValidator) ext);
-								ArrayList<String> subTypes = cls2sub.get(cls.getName());
-								if (subTypes != null)
-									for (String type : subTypes) {
-										put(map, type, (ICustomValidator) ext);
-									}
+						int pos = classToCheck.lastIndexOf('.');
+						if (pos>=0) {
+							pos = classToCheck.lastIndexOf('.', pos-1);
+							if (pos>=0) {
+								classToCheck = classToCheck.substring(pos+1);
 							}
+						}
+						HashMap<String, ArrayList<ICustomValidator>> map = getMap(mode);
+						if (map != null) {
+							put(map, classToCheck, (ICustomValidator) ext);
+							ArrayList<String> subTypes = cls2sub.get(classToCheck);
+							if (subTypes != null)
+								for (String type : subTypes) {
+									put(map, type, (ICustomValidator) ext);
+								}
 						}
 					}
 					else {

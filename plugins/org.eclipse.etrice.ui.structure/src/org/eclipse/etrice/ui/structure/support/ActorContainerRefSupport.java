@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -34,12 +33,11 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.ui.common.preferences.PreferenceConstants;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCreateFeature;
-import org.eclipse.etrice.ui.common.support.ChangeAwareCustomFeature;
-import org.eclipse.etrice.ui.common.support.CommonSupportUtil;
-import org.eclipse.etrice.ui.common.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
+import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
+import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
+import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -430,7 +428,7 @@ public class ActorContainerRefSupport {
 			        	newRef = ssr;
 			        }
 			        
-			        newRef.setName(RoomNameProvider.getUniqueActorContainerRefName(sc));
+			        newRef.setName(SupportUtil.getInstance().getRoomUtil().getUniqueActorContainerRefName(sc));
 
 			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
 			        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();
@@ -735,7 +733,7 @@ public class ActorContainerRefSupport {
 			@Override
 			public boolean hasDoneChanges() {
 				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
-				boolean autoSave = store.getBoolean(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				boolean autoSave = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
 				if (autoSave)
 					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
 				else
@@ -781,7 +779,7 @@ public class ActorContainerRefSupport {
 					do {
 						if (ac==acr.eContainer())
 							found = true;
-						ac = ac.getBase();
+						ac = ac.getActorBase();
 					}
 					while (!found && ac!=null);
 					
@@ -800,7 +798,7 @@ public class ActorContainerRefSupport {
 				
 				// check class name
 				if (bo instanceof ActorContainerRef) {
-					String label = RoomNameProvider.getRefLabelName((ActorContainerRef) bo);
+					String label = SupportUtil.getInstance().getRoomNameProvider().getRefLabelName((ActorContainerRef) bo);
 					if (!label.equals(graphics.getNameLabel().getValue()))
 						reason += "Class name is out of date\n";
 				}
@@ -817,8 +815,8 @@ public class ActorContainerRefSupport {
 				// check interface ports and spps added to model not present in diagram
 				{
 					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-					List<InterfaceItem> interfaceItems = RoomHelpers.getInterfaceItems(acc, true);
-					List<InterfaceItem> presentItems = SupportUtil.getInterfaceItems(containerShape, fp);
+					List<InterfaceItem> interfaceItems = SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true);
+					List<InterfaceItem> presentItems = SupportUtil.getInstance().getInterfaceItems(containerShape, fp);
 					int missing = 0;
 					for (InterfaceItem interfaceItem : interfaceItems) {
 						if (!presentItems.contains(interfaceItem))
@@ -855,7 +853,7 @@ public class ActorContainerRefSupport {
 				
 				Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
 				ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-				List<InterfaceItem> expected = new ArrayList<InterfaceItem>(RoomHelpers.getInterfaceItems(acc, true));
+				List<InterfaceItem> expected = new ArrayList<InterfaceItem>(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
 				
 				expected.removeAll(present.keySet());
 				Map<EObject, Shape> newShapes = addShapesInitial(expected, containerShape);
@@ -1155,7 +1153,7 @@ public class ActorContainerRefSupport {
 			{
 				// acr name
 				Text label = graphics.getNameLabel();
-				label.setValue(RoomNameProvider.getRefLabelName(acr));
+				label.setValue(SupportUtil.getInstance().getRoomNameProvider().getRefLabelName(acr));
 				label.setForeground(lineColor);
 				label.setBackground(bgColor);
 			}

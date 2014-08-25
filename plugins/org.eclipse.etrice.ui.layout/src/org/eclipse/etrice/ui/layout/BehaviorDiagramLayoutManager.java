@@ -15,10 +15,10 @@ package org.eclipse.etrice.ui.layout;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.StateGraph;
-import org.eclipse.etrice.core.room.TrPoint;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
-import org.eclipse.etrice.ui.behavior.support.StateSupport;
+import org.eclipse.etrice.ui.behavior.fsm.support.StateSupport;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;

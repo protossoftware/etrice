@@ -20,18 +20,18 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.etricegen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.etrice.core.room.CPBranchTransition;
-import org.eclipse.etrice.core.room.ChoicePoint;
-import org.eclipse.etrice.core.room.ContinuationTransition;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.State;
-import org.eclipse.etrice.core.room.Transition;
-import org.eclipse.etrice.core.room.TriggeredTransition;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +45,8 @@ public class TestMultipleConnectedChoicepoint extends
 	
 	private Root root;
 	private ExpandedActorClass xpac;
-
+	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	
 	@Before
 	public void setUp() {
 		prepare();
@@ -85,15 +86,15 @@ public class TestMultipleConnectedChoicepoint extends
 	
 	@Test
 	public void testNumbers() {
-		assertEquals("number of states", 6, instances.get(RoomPackage.eINSTANCE.getSimpleState()).size());
-		assertEquals("number of choice points", 1, instances.get(RoomPackage.eINSTANCE.getChoicePoint()).size());
-		assertNull("number of transition points", instances.get(RoomPackage.eINSTANCE.getTransitionPoint()));
-		assertEquals("number of entry points", 1, instances.get(RoomPackage.eINSTANCE.getEntryPoint()).size());
-		assertEquals("number of exit points", 1, instances.get(RoomPackage.eINSTANCE.getExitPoint()).size());
-		assertEquals("number of initial transitions", 1, instances.get(RoomPackage.eINSTANCE.getInitialTransition()).size());
-		assertEquals("number of triggered transitions", 5, instances.get(RoomPackage.eINSTANCE.getTriggeredTransition()).size());
-		assertEquals("number of continuation transitions", 3, instances.get(RoomPackage.eINSTANCE.getContinuationTransition()).size());
-		assertEquals("number of branch transitions", 1, instances.get(RoomPackage.eINSTANCE.getCPBranchTransition()).size());
+		assertEquals("number of states", 6, instances.get(FSMPackage.eINSTANCE.getSimpleState()).size());
+		assertEquals("number of choice points", 1, instances.get(FSMPackage.eINSTANCE.getChoicePoint()).size());
+		assertNull("number of transition points", instances.get(FSMPackage.eINSTANCE.getTransitionPoint()));
+		assertEquals("number of entry points", 1, instances.get(FSMPackage.eINSTANCE.getEntryPoint()).size());
+		assertEquals("number of exit points", 1, instances.get(FSMPackage.eINSTANCE.getExitPoint()).size());
+		assertEquals("number of initial transitions", 1, instances.get(FSMPackage.eINSTANCE.getInitialTransition()).size());
+		assertEquals("number of triggered transitions", 5, instances.get(FSMPackage.eINSTANCE.getTriggeredTransition()).size());
+		assertEquals("number of continuation transitions", 3, instances.get(FSMPackage.eINSTANCE.getContinuationTransition()).size());
+		assertEquals("number of branch transitions", 1, instances.get(FSMPackage.eINSTANCE.getCPBranchTransition()).size());
 	}
 	
 	@Test
@@ -105,9 +106,9 @@ public class TestMultipleConnectedChoicepoint extends
 	
 	@Test
 	public void testGraph() {
-		ArrayList<EObject> cps = instances.get(RoomPackage.eINSTANCE.getChoicePoint());
+		ArrayList<EObject> cps = instances.get(FSMPackage.eINSTANCE.getChoicePoint());
 		ChoicePoint cp = (ChoicePoint) cps.get(0);
-		assertEquals("choicepoint name", "cp0", RoomNameProvider.getFullPath(cp));
+		assertEquals("choicepoint name", "cp0", roomNameProvider.getFullPath(cp));
 		assertEquals("number of incoming transitions", 2, xpac.getIncomingTransitions(cp).size());
 		assertEquals("number of outgoing transitions", 2, xpac.getOutgoingTransitions(cp).size());
 	}
@@ -115,37 +116,37 @@ public class TestMultipleConnectedChoicepoint extends
 	@Test
 	public void testData() {
 		Transition tr = getTransition("tr0");
-		VarDecl data = xpac.getData(tr);
+		VarDecl data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC2", data.getRefType().getType().getName());
 		
 		tr = getState1Transition("tr2");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC2", data.getRefType().getType().getName());
 		
 		tr = getState1Transition("tr3");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC4", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr1");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is TriggeredTransition", tr instanceof TriggeredTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC3", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr3");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is ContinuationTransition", tr instanceof ContinuationTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC", data.getRefType().getType().getName());
 		
 		tr = getTransition("tr4");
-		data = xpac.getData(tr);
+		data = (VarDecl) xpac.getData(tr);
 		assertTrue("transition is CPBranchTransition", tr instanceof CPBranchTransition);
 		assertTrue("data is DataClass", data.getRefType().getType() instanceof DataClass);
 		assertEquals("data of "+tr.getName(), "DC", data.getRefType().getType().getName());

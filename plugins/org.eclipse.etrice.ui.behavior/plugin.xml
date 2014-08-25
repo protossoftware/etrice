@@ -19,7 +19,7 @@
                id="org.eclipse.etrice.ui.behavior.diagramType">
          </diagramType>
          <imageProvider
-               id="org.eclipse.etrice.ui.behavior.ImageProvider">
+               id="org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider">
          </imageProvider>
       </diagramTypeProvider>
    </extension>
@@ -43,8 +43,8 @@
    <extension
          point="org.eclipse.graphiti.ui.imageProviders">
       <imageProvider
-            class="org.eclipse.etrice.ui.behavior.ImageProvider"
-            id="org.eclipse.etrice.ui.behavior.ImageProvider">
+            class="org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider"
+            id="org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider">
       </imageProvider>
    </extension>
 

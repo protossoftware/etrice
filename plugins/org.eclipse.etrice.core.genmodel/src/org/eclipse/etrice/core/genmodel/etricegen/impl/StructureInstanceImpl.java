@@ -256,7 +256,7 @@ public class StructureInstanceImpl extends AbstractInstanceImpl implements Struc
 				ActorClass ac = ai.getActorClass();
 				while (ac!=null) {
 					classes.addFirst(ac);
-					ac = ac.getBase();
+					ac = ac.getActorBase();
 				}
 				
 				for (ActorClass a : classes) {

@@ -36,6 +36,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class NodeRunnerGen {
   @Inject
   @Extension
+  private BaseHelpers _baseHelpers;
+  
+  @Inject
+  @Extension
   private JavaIoFileSystemAccess fileAccess;
   
   @Inject
@@ -86,7 +90,7 @@ public class NodeRunnerGen {
       final String clsname = (_plus + _name_1);
       SubSystemClass _subSystemClass = ssi.getSubSystemClass();
       EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final boolean logData = BaseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      final boolean logData = this._baseHelpers.isAnnotationPresent(_annotations, "DataLogging");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();

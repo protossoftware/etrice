@@ -15,7 +15,7 @@ package org.eclipse.etrice.ui.structure.editor;
 import java.io.File;
 
 import org.eclipse.etrice.core.room.StructureClass;
-import org.eclipse.etrice.ui.common.editor.DiagramExporter;
+import org.eclipse.etrice.ui.common.base.editor.DiagramExporter;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 
 public class StructureExporter {

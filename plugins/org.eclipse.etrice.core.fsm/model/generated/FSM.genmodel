@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.fsm/src-gen" editDirectory="/org.eclipse.etrice.core.fsm.edit/src"
+    editorDirectory="/org.eclipse.etrice.core.fsm.editor/src" modelPluginID="org.eclipse.etrice.core.fsm"
+    forceOverwrite="true" modelName="FSM" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.fsm.edit"
+    editorPluginID="org.eclipse.etrice.core.fsm.editor" runtimeVersion="2.10" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
+  <genPackages prefix="FSM" basePackage="org.eclipse.etrice.core.fsm" disposableProviderFactory="true"
+      fileExtensions="fsm" ecorePackage="FSM.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FSM.ecore#//ComponentCommunicationType">
+      <genEnumLiterals ecoreEnumLiteral="FSM.ecore#//ComponentCommunicationType/EVENT_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="FSM.ecore#//ComponentCommunicationType/DATA_DRIVEN"/>
+      <genEnumLiterals ecoreEnumLiteral="FSM.ecore#//ComponentCommunicationType/ASYNCHRONOUS"/>
+      <genEnumLiterals ecoreEnumLiteral="FSM.ecore#//ComponentCommunicationType/SYNCHRONOUS"/>
+    </genEnums>
+    <genClasses ecoreClass="FSM.ecore#//FSMModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//FSMModel/components"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//ModelComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//ModelComponent/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//ModelComponent/commType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//ModelComponent/componentName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//ModelComponent/base"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//ModelComponent/stateMachine"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//StateGraphNode"/>
+    <genClasses ecoreClass="FSM.ecore#//StateGraphItem">
+      <genOperations ecoreOperation="FSM.ecore#//StateGraphItem/getName"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//StateGraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/states"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/trPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/chPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/transitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//StateGraph/refinedTransitions"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/entryCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/exitCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/doCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/subgraph"/>
+      <genOperations ecoreOperation="FSM.ecore#//State/getName"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//SimpleState">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//SimpleState/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//RefinedState">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedState/target"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//DetailCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/used"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/lines"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//TrPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//TrPoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//TransitionPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//TransitionPoint/handler"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//EntryPoint"/>
+    <genClasses ecoreClass="FSM.ecore#//ExitPoint"/>
+    <genClasses ecoreClass="FSM.ecore#//ChoicePoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//ChoicePoint/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//ChoicePoint/docu"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//Transition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Transition/to"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Transition/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Transition/action"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//NonInitialTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//NonInitialTransition/from"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//TransitionChainStartTransition"/>
+    <genClasses ecoreClass="FSM.ecore#//InitialTransition"/>
+    <genClasses ecoreClass="FSM.ecore#//ContinuationTransition"/>
+    <genClasses ecoreClass="FSM.ecore#//TriggeredTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//TriggeredTransition/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//GuardedTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//GuardedTransition/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//CPBranchTransition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//CPBranchTransition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//RefinedTransition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedTransition/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedTransition/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedTransition/action"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//TransitionTerminal"/>
+    <genClasses ecoreClass="FSM.ecore#//StateTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//StateTerminal/state"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//TrPointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//TrPointTerminal/trPoint"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//SubStateTrPointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//SubStateTrPointTerminal/trPoint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//SubStateTrPointTerminal/state"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//ChoicepointTerminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//ChoicepointTerminal/cp"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//Trigger">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Trigger/msgFromIfPairs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Trigger/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//MessageFromIf">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//MessageFromIf/message"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//MessageFromIf/from"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//AbstractInterfaceItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//AbstractInterfaceItem/name"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getSemantics"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllIncomingAbstractMessages"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllOutgoingAbstractMessages"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//Guard">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Guard/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//ProtocolSemantics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//ProtocolSemantics/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//SemanticsRule">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//SemanticsRule/msg"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//SemanticsRule/followUps"/>
+    </genClasses>
+    <genClasses ecoreClass="FSM.ecore#//InSemanticsRule"/>
+    <genClasses ecoreClass="FSM.ecore#//OutSemanticsRule"/>
+    <genClasses image="false" ecoreClass="FSM.ecore#//IInterfaceItemOwner">
+      <genOperations ecoreOperation="FSM.ecore#//IInterfaceItemOwner/getAbstractInterfaceItems"/>
+      <genOperations ecoreOperation="FSM.ecore#//IInterfaceItemOwner/getAllAbstractInterfaceItems"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

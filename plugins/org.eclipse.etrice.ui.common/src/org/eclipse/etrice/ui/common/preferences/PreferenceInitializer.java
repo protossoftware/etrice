@@ -13,9 +13,9 @@
 package org.eclipse.etrice.ui.common.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
+import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import org.eclipse.etrice.ui.common.Activator;
 
 /**
  * Class used to initialize default preference values.
@@ -28,18 +28,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setDefault(PreferenceConstants.USE_GRID, true);
-		store.setDefault(PreferenceConstants.SNAP_TO_GRID, false);
-		store.setDefault(PreferenceConstants.HOR_GRID_UNIT, 10);
-		store.setDefault(PreferenceConstants.VER_GRID_UNIT, 10);
-		store.setDefault(PreferenceConstants.CONFIRM_DELETE, true);
-		store.setDefault(PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, false);
-		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH, "doc-gen/images");
-		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO, PreferenceConstants.PATH_REL_TO_PROJECT);
-		store.setDefault(PreferenceConstants.EXPORT_DIAGRAM_FORMAT, PreferenceConstants.FORMAT_JPG);
-		store.setDefault(PreferenceConstants.MAX_LABEL_LINE_LENGTH, PreferenceConstants.MAX_LINE_LENGTH_DEFAULT);
-		store.setDefault(PreferenceConstants.MAX_LABEL_LINES, PreferenceConstants.MAX_LINES_DEFAULT);
+		IPreferenceStore store = UIBaseActivator.getDefault().getPreferenceStore();
+		store.setDefault(RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false);
 	}
 
 }

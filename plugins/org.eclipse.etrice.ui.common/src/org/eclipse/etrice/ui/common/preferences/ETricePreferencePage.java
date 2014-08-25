@@ -12,7 +12,9 @@
 
 package org.eclipse.etrice.ui.common.preferences;
 
-import org.eclipse.etrice.ui.common.Activator;
+import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
+import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
@@ -39,7 +41,7 @@ public class ETricePreferencePage
 
 	public ETricePreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(UIBaseActivator.getDefault().getPreferenceStore());
 		setDescription("eTrice Preferences");
 	}
 	
@@ -47,7 +49,7 @@ public class ETricePreferencePage
 		addLabel("");
 		addLabel("Textual Model Editor");
 		BooleanFieldEditor autoSaveText = new BooleanFieldEditor(
-				PreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST,
+				RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST,
 				"Auto-save textual model when focus changes",
 				getFieldEditorParent());
 		addField(autoSaveText);
@@ -56,67 +58,67 @@ public class ETricePreferencePage
 		addLabel("Diagram Editors");
 		addField(
 				new BooleanFieldEditor(
-					PreferenceConstants.CONFIRM_DELETE,
+					UIBasePreferenceConstants.CONFIRM_DELETE,
 					"&Confirm diagram element deletion",
 					getFieldEditorParent()));
 		
 		BooleanFieldEditor autoSave = new BooleanFieldEditor(
-				PreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST,
+				UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST,
 				"Auto-save diagram when focus changes",
 				getFieldEditorParent());
 		addField(autoSave);
 		
-		maxLineLength = new StringFieldEditor(PreferenceConstants.MAX_LABEL_LINE_LENGTH, "Max Transition Lable Line Length::", getFieldEditorParent());
+		maxLineLength = new StringFieldEditor(UIBasePreferenceConstants.MAX_LABEL_LINE_LENGTH, "Max Transition Lable Line Length::", getFieldEditorParent());
 		addField(maxLineLength);
 		
-		maxLines = new StringFieldEditor(PreferenceConstants.MAX_LABEL_LINES, "Max Transition Lable Lines::", getFieldEditorParent());
+		maxLines = new StringFieldEditor(UIBasePreferenceConstants.MAX_LABEL_LINES, "Max Transition Lable Lines::", getFieldEditorParent());
 		addField(maxLines);
 
-		StringFieldEditor exportPath = new StringFieldEditor(PreferenceConstants.EXPORT_DIAGRAM_PATH, "&Export Diagram Path:", getFieldEditorParent());
+		StringFieldEditor exportPath = new StringFieldEditor(UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH, "&Export Diagram Path:", getFieldEditorParent());
 		addField(exportPath);
 
 		RadioGroupFieldEditor exportRelTo = new RadioGroupFieldEditor(
-				PreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO,
+				UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO,
 				"Export Path Relative to",
 				2,
 				new String[][] {
-					{"Project", PreferenceConstants.PATH_REL_TO_PROJECT},
-					{"Model", PreferenceConstants.PATH_REL_TO_MODEL}
+					{"Project", UIBasePreferenceConstants.PATH_REL_TO_PROJECT},
+					{"Model", UIBasePreferenceConstants.PATH_REL_TO_MODEL}
 				},
 				getFieldEditorParent(),
 				true);
 		addField(exportRelTo);
 
 		RadioGroupFieldEditor imgFormat = new RadioGroupFieldEditor(
-				PreferenceConstants.EXPORT_DIAGRAM_FORMAT,
+				UIBasePreferenceConstants.EXPORT_DIAGRAM_FORMAT,
 				"Image Format for Export:",
 				4,
 				new String[][] {
-					{"BMP", PreferenceConstants.FORMAT_BMP},
-					{"GIF", PreferenceConstants.FORMAT_GIF},
-					{"JPG", PreferenceConstants.FORMAT_JPG},
-					{"PNG", PreferenceConstants.FORMAT_PNG}
+					{"BMP", UIBasePreferenceConstants.FORMAT_BMP},
+					{"GIF", UIBasePreferenceConstants.FORMAT_GIF},
+					{"JPG", UIBasePreferenceConstants.FORMAT_JPG},
+					{"PNG", UIBasePreferenceConstants.FORMAT_PNG}
 				},
 				getFieldEditorParent(),
 				true);
 		addField(imgFormat);
 		
 		BooleanFieldEditor useGrid = new BooleanFieldEditor(
-			PreferenceConstants.USE_GRID,
+			UIBasePreferenceConstants.USE_GRID,
 			"Use &Grid (grid settings apply to new diagrams only)",
 			getFieldEditorParent());
 		addField(useGrid);
 		
 		snap = new BooleanFieldEditor(
-			PreferenceConstants.SNAP_TO_GRID,
+			UIBasePreferenceConstants.SNAP_TO_GRID,
 			"&Snap to Grid",
 			getFieldEditorParent());
 		addField(snap);
 		
-		hor = new StringFieldEditor(PreferenceConstants.HOR_GRID_UNIT, "&Horizontal Grid Unit [px]:", getFieldEditorParent());
+		hor = new StringFieldEditor(UIBasePreferenceConstants.HOR_GRID_UNIT, "&Horizontal Grid Unit [px]:", getFieldEditorParent());
 		addField(hor);
 		
-		ver = new StringFieldEditor(PreferenceConstants.VER_GRID_UNIT, "&Vertical Grid Unit [px]:", getFieldEditorParent());
+		ver = new StringFieldEditor(UIBasePreferenceConstants.VER_GRID_UNIT, "&Vertical Grid Unit [px]:", getFieldEditorParent());
 		addField(ver);
 
 		useGridCheck = (Button) useGrid.getDescriptionControl(getFieldEditorParent());
