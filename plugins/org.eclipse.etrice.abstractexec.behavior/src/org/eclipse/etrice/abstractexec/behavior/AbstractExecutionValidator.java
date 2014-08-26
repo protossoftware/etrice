@@ -81,24 +81,24 @@ public class AbstractExecutionValidator implements ICustomValidator {
 		if(context.isGeneration())
 			return;
 		
-		ModelComponent ac = (ModelComponent) object;
+		ModelComponent mc = (ModelComponent) object;
 		
 		if (traceExec) {
-			if (!(traceName.isEmpty() || ac.getComponentName().equals(traceName)))
+			if (!(traceName.isEmpty() || mc.getComponentName().equals(traceName)))
 				return;
 			System.out.println("AbstractExecutionValidator checking class "
-					+ ac.getComponentName());
+					+ mc.getComponentName());
 		}
 		
-		if (ac.isAbstract())
+		if (mc.isAbstract())
 			return;
 		
-		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(ac))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(mc))
 			// is checked elsewhere
 			return;
 
 		boolean oneProtocolsWithSemantics = false;
-		List<AbstractInterfaceItem> ifItems = ac.getAllAbstractInterfaceItems();
+		List<AbstractInterfaceItem> ifItems = mc.getAllAbstractInterfaceItems();
 		for (AbstractInterfaceItem item : ifItems) {
 			if (item.getSemantics()!=null) {
 				oneProtocolsWithSemantics = true;
@@ -118,7 +118,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					new NullLogger(), diagnostician);
 			ExpandedModelComponent xpac;
 			try {
-				xpac = builder.createExpandedModelComponent(ac);
+				xpac = builder.createExpandedModelComponent(mc);
 			}
 			catch (Throwable t) {
 				return;
@@ -154,7 +154,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 				if (traceExec)
 					System.out
 							.println("AbstractExecutionValidator done checking class "
-									+ ac.getComponentName());
+									+ mc.getComponentName());
 			}
 			else
 				if(traceExec)

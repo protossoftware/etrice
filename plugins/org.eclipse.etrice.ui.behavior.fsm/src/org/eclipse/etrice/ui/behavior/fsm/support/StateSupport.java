@@ -361,16 +361,16 @@ public class StateSupport {
 
 			@Override
 			public boolean doExecute(ICustomContext context) {
-				ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 				IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
-				IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, ac, s, editable);
+				IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, mc, s, editable);
 				if (dlg.open()==Window.OK){
 					updateFigure(s, context);
-					adjustSubgraphLabels(s, ac);
+					adjustSubgraphLabels(s, mc);
 				
 					return true;
 				}
@@ -378,7 +378,7 @@ public class StateSupport {
 				return false;
 			}
 
-			private void adjustSubgraphLabels(State s, ModelComponent ac) {
+			private void adjustSubgraphLabels(State s, ModelComponent mc) {
 				if (s instanceof RefinedState)
 					// the name hasn't changed, nothing to do
 					return;
@@ -394,7 +394,7 @@ public class StateSupport {
 					}
 					if (s.getSubgraph()!=null)
 						for (State sub : s.getSubgraph().getStates()) {
-							adjustSubgraphLabels(sub, ac);
+							adjustSubgraphLabels(sub, mc);
 						}
 				}
 			}
@@ -501,9 +501,9 @@ public class StateSupport {
 				PictogramElement pe = context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
-					ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-					boolean isBaseClassState = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent((State) bo)!=ac;
-					return isBaseClassState || !FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure((State) bo, ac);
+					ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+					boolean isBaseClassState = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent((State) bo)!=mc;
+					return isBaseClassState || !FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure((State) bo, mc);
 				}
 				return false;
 			}
@@ -570,8 +570,8 @@ public class StateSupport {
 				PictogramElement pe = context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(pe);
 				if (bo instanceof State) {
-					ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-					boolean isBaseClassState = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent((State) bo)!=ac;
+					ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+					boolean isBaseClassState = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent((State) bo)!=mc;
 					return isBaseClassState;
 				}
 				return false;
@@ -626,11 +626,11 @@ public class StateSupport {
 				
 				// check if state still owned/inherited
 				{
-					ModelComponent ac = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
+					ModelComponent mc = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
 					ModelComponent tmp = mainAc;
 					boolean found = false;
 					do {
-						if (tmp==ac)
+						if (tmp==mc)
 							found = true;
 						tmp = tmp.getBase();
 					}
@@ -839,8 +839,8 @@ public class StateSupport {
 				State s = (State) getBusinessObjectForPictogramElement(context.getPictogramElement());
 				IFeatureProvider fp = getFeatureProvider();
 				Diagram diagram = getDiagram();
-				ModelComponent ac = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
-				FSMSupportUtil.getInstance().deleteSubStructureRecursive(s, ac, diagram, fp);
+				ModelComponent mc = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
+				FSMSupportUtil.getInstance().deleteSubStructureRecursive(s, mc, diagram, fp);
 				
 				ContainerShape container = (ContainerShape) context.getPictogramElement();
 				CommonSupportUtil.deleteConnectionsRecursive(container, fp);
@@ -921,14 +921,14 @@ public class StateSupport {
 			
 			if (bo instanceof State) {
 				State s = (State) bo;
-				ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagramTypeProvider().getDiagram());
+				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagramTypeProvider().getDiagram());
 				//boolean inherited = FSMSupportUtil.isInherited(getDiagramTypeProvider().getDiagram(), s);
-				boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==ac;
+				boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==mc;
 				result.add(new PropertyFeature(fp, editable));
 				if (!editable)
 					result.add(new CreateRefinedStateFeature(fp));
 				
-				if (FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, ac))
+				if (FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, mc))
 					result.add(new GoDownFeature(fp));
 				else
 					result.add(new CreateSubGraphFeature(fp));
@@ -977,10 +977,10 @@ public class StateSupport {
 			
 			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
 			if (bo instanceof State) {
-				ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(pe));
+				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(pe));
 				State s = (State) bo;
-				if (!FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, ac)) {
-					boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==ac;
+				if (!FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, mc)) {
+					boolean editable = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)==mc;
 					return new FeatureProvider.PropertyFeature(getDiagramTypeProvider().getFeatureProvider(), editable);
 				}
 			}
@@ -1148,8 +1148,8 @@ public class StateSupport {
 			hint.setLineWidth(LINE_WIDTH);
 			gaService.setLocationAndSize(hint, x, y, 15, 8);
 			
-			ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(border));
-			if (!FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, ac)) {
+			ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(border));
+			if (!FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, mc)) {
 				hint.setLineVisible(false);
 			}
 		}
@@ -1193,11 +1193,11 @@ public class StateSupport {
 	}
 	
 	protected static void updateHints(State s, GraphicsAlgorithm border) {
-		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(border));
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(FSMSupportUtil.getInstance().getDiagram(border));
 		
 		// sub structure
 		GraphicsAlgorithm hint = border.getGraphicsAlgorithmChildren().get(0);
-		hint.setLineVisible(FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, ac));
+		hint.setLineVisible(FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, mc));
 		
 		// entry and exit code
 		hint = border.getGraphicsAlgorithmChildren().get(1);

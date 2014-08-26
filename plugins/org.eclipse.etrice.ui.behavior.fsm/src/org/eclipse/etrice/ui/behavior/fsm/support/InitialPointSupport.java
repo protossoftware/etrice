@@ -95,8 +95,8 @@ public class InitialPointSupport {
 
 				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 		        
 				// We don't create anything here since in the model the initial point is

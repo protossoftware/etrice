@@ -911,13 +911,13 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		return ownObjects.contains(obj);
 	}
 	
-	private int computeInterfaceItemLocalIds(ModelComponent ac, int offset) {
-		if (ac.getBase()!=null) {
+	private int computeInterfaceItemLocalIds(ModelComponent mc, int offset) {
+		if (mc.getBase()!=null) {
 			// first recurse into base class
-			offset = computeInterfaceItemLocalIds(ac.getBase(), offset);
+			offset = computeInterfaceItemLocalIds(mc.getBase(), offset);
 		}
 		
-		EList<AbstractInterfaceItem> items = getOwnInterfaceItems(ac);
+		EList<AbstractInterfaceItem> items = getOwnInterfaceItems(mc);
 		for (AbstractInterfaceItem item : items) {
 			ifitem2localId.put(item, offset);
 			++offset;
@@ -955,11 +955,11 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	 * @generated NOT
 	 */
 	public boolean hasStateMachine() {
-		ModelComponent ac = getModelComponent();
-		while (ac!=null) {
-			if (ac.getStateMachine()!=null)
+		ModelComponent mc = getModelComponent();
+		while (mc!=null) {
+			if (mc.getStateMachine()!=null)
 				return true;
-			ac = ac.getBase();
+			mc = mc.getBase();
 		}
 		return false;
 	}

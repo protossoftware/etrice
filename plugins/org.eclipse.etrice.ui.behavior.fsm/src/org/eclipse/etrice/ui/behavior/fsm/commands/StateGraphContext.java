@@ -32,17 +32,17 @@ public class StateGraphContext {
 	private IPositionProvider positionProvider;
 	private HashMap<StateGraphItem, StateGraphContext> obj2ctx;
 	
-	public static StateGraphContext createContextTree(ModelComponent ac, Injector injector) {
+	public static StateGraphContext createContextTree(ModelComponent mc, Injector injector) {
 		
 		// the top level state graph is always the one of our actor class
-		if (ac.getStateMachine()==null || ac.getStateMachine().eIsProxy()) {
-			ac.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
+		if (mc.getStateMachine()==null || mc.getStateMachine().eIsProxy()) {
+			mc.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
 		}
 		
 		// base classes in reverse order
 		ArrayList<ModelComponent> classes = new ArrayList<ModelComponent>();
 		{
-			ModelComponent a = ac;
+			ModelComponent a = mc;
 			while (a!=null) {
 				classes.add(0, a);
 				a = a.getBase();
@@ -60,7 +60,7 @@ public class StateGraphContext {
 			}
 		}
 		
-		tree.positionProvider = new DefaultPositionProvider(ac, injector);
+		tree.positionProvider = new DefaultPositionProvider(mc, injector);
 		makePositionsAvailableToChildrenContexts(tree);
 		
 		return tree;
@@ -240,15 +240,15 @@ public class StateGraphContext {
 	}
 
 	private String getText(StateGraph sg) {
-		ModelComponent ac = getModelComponent(sg);
+		ModelComponent mc = getModelComponent(sg);
 		EObject parent = sg.eContainer();
 		String item = parent instanceof ModelComponent? "diagram" : (parent.eClass().getName()+" "+((State)parent).getName());
-		return "state graph of "+item+" of "+(ac==null? "?":ac.getComponentName());
+		return "state graph of "+item+" of "+(mc==null? "?":mc.getComponentName());
 	}
 
 	private String getText(StateGraphItem item) {
-		ModelComponent ac = getModelComponent(item);
-		return item.eClass().getName()+" "+item.getName()+" of "+(ac==null? "?":ac.getComponentName());
+		ModelComponent mc = getModelComponent(item);
+		return item.eClass().getName()+" "+item.getName()+" of "+(mc==null? "?":mc.getComponentName());
 	}
 
 	private ModelComponent getModelComponent(EObject obj) {

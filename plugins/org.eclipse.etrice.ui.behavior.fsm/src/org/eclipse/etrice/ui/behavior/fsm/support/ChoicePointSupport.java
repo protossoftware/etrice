@@ -119,11 +119,11 @@ public class ChoicePointSupport {
 				
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-				ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 
 				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 
 				// create choice point and add it

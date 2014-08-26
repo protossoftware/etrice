@@ -27,15 +27,15 @@ import com.google.inject.Injector;
 
 public class PopulateDiagramCommand extends RecordingCommand {
 
-	private ModelComponent ac;
+	private ModelComponent mc;
 	private Diagram diagram;
 	private IFeatureProvider fp;
 	private Injector injector;
 
-	public PopulateDiagramCommand(Diagram diag, ModelComponent ac, Injector injector, TransactionalEditingDomain domain) {
+	public PopulateDiagramCommand(Diagram diag, ModelComponent mc, Injector injector, TransactionalEditingDomain domain) {
 		super(domain);
 		this.diagram = diag;
-		this.ac = ac;
+		this.mc = mc;
 		this.injector = injector;
 
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, "org.eclipse.etrice.ui.behavior.diagramTypeProvider"); //$NON-NLS-1$
@@ -45,10 +45,10 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	@Override
 	protected void doExecute() {
 		
-		fp.link(diagram, ac);
+		fp.link(diagram, mc);
 		
 		// we use a temporary structure to create the whole tree
-		StateGraphContext tree = StateGraphContext.createContextTree(ac, injector);
+		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
 		//System.out.println(tree);
 		
 		FSMSupportUtil.getInstance().addStateGraph(tree, diagram, fp);

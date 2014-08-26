@@ -79,11 +79,11 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	/**
 	 * @param shell
 	 * @param title
-	 * @param ac
+	 * @param mc
 	 */
-	public AbstractMemberAwarePropertyDialog(Shell shell, String title, ModelComponent ac) {
+	public AbstractMemberAwarePropertyDialog(Shell shell, String title, ModelComponent mc) {
 		super(shell, title);
-		this.mc = ac;
+		this.mc = mc;
 	}
 
 	/**

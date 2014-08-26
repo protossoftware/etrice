@@ -22,8 +22,8 @@ public class ContextSwitcher {
 	public static void goUp(Diagram diagram, StateGraph sg) {
 		// if the container is a state we can go up, else we are already on top
 		if (sg.eContainer() instanceof State) {
-			ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(diagram);
-			StateGraph parent = getVirtualParent(sg, ac);
+			ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(diagram);
+			StateGraph parent = getVirtualParent(sg, mc);
 			
 			if (parent.eContainer() instanceof ModelComponent)
 				ContextSwitcher.switchTop(diagram);
@@ -34,20 +34,20 @@ public class ContextSwitcher {
 
 	/**
 	 * @param sg
-	 * @param ac
+	 * @param mc
 	 * @return
 	 */
-	private static StateGraph getVirtualParent(StateGraph sg, ModelComponent ac) {
+	private static StateGraph getVirtualParent(StateGraph sg, ModelComponent mc) {
 		State s = (State) sg.eContainer();
 		
 		// try to find a RefinedState pointing to the parent of s
 		if (s.eContainer().eContainer() instanceof State) {
 			ArrayList<ModelComponent> hierarchy = new ArrayList<ModelComponent>();
 			do {
-				hierarchy.add(0, ac);
-				ac = ac.getBase();
+				hierarchy.add(0, mc);
+				mc = mc.getBase();
 			}
-			while (ac!=null);
+			while (mc!=null);
 			
 			RefinedState targeting = getTargetingState(hierarchy.iterator(), (State) s.eContainer().eContainer());
 			if (targeting!=null)
@@ -67,8 +67,8 @@ public class ContextSwitcher {
 	 * @return
 	 */
 	private static RefinedState getTargetingState(Iterator<ModelComponent> acit, State s) {
-		ModelComponent ac = acit.next();
-		TreeIterator<EObject> it = ac.getStateMachine().eAllContents();
+		ModelComponent mc = acit.next();
+		TreeIterator<EObject> it = mc.getStateMachine().eAllContents();
 		while (it.hasNext()) {
 			EObject next = it.next();
 			if (next instanceof RefinedState) {

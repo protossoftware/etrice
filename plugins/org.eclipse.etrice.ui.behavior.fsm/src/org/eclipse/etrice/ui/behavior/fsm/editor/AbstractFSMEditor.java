@@ -120,18 +120,18 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	 */
 	protected void removeUnusedRefinedStates() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(diagram);
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(diagram);
 		
-		if (ac.getStateMachine()!=null) {
+		if (mc.getStateMachine()!=null) {
 			ArrayList<RefinedState> toBeRemoved = new ArrayList<RefinedState>();
-			for (State s : ac.getStateMachine().getStates()) {
+			for (State s : mc.getStateMachine().getStates()) {
 				if (s instanceof RefinedState) {
 					if (isUnused((RefinedState)s))
 						toBeRemoved.add((RefinedState) s);
 				}
 			}
 			
-			ac.getStateMachine().getStates().removeAll(toBeRemoved);
+			mc.getStateMachine().getStates().removeAll(toBeRemoved);
 		}
 	}
 
@@ -191,13 +191,13 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	}
 
 	protected void rebaseRefinedStates() {
-		ModelComponent ac = getModelComponent();
+		ModelComponent mc = getModelComponent();
 	
-		if (ac.getStateMachine()==null)
+		if (mc.getStateMachine()==null)
 			return;
 		
 		Function<RefinedState, String> nameProvider = FSMSupportUtil.getInstance().getFSMNameProvider().getRefinedStateNameProvider();
-		Map<RefinedState, RefinedState> rs2parent = FSMSupportUtil.getInstance().getFSMHelpers().getRefinedStatesToRelocate(ac, nameProvider);
+		Map<RefinedState, RefinedState> rs2parent = FSMSupportUtil.getInstance().getFSMHelpers().getRefinedStatesToRelocate(mc, nameProvider);
 		
 		// move all to the new context
 		for (RefinedState rs : rs2parent.keySet()) {

@@ -67,9 +67,9 @@ public class ActionCodeAnalyzer {
 	private FSMDetailCodeTranslator translator;
 	private DetailCode origin;
 
-	public ActionCodeAnalyzer(ModelComponent ac) {
+	public ActionCodeAnalyzer(ModelComponent mc) {
 		collector = new Collector();
-		translator = new FSMDetailCodeTranslator(ac, collector, true);
+		translator = new FSMDetailCodeTranslator(mc, collector, true);
 	}
 	
 	public List<HandledMessage> analyze(DetailCode dc) {

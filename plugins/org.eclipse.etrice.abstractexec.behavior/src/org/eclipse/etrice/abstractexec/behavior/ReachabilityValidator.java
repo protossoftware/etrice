@@ -51,12 +51,12 @@ public class ReachabilityValidator implements ICustomValidator {
 		if (context.isGeneration())
 			return;
 		
-		ModelComponent ac = (ModelComponent) object;
+		ModelComponent mc = (ModelComponent) object;
 		
-		if (ac.isAbstract())
+		if (mc.isAbstract())
 			return;
 		
-		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(ac))
+		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(mc))
 			// is checked elsewhere
 			return;
 
@@ -64,7 +64,7 @@ public class ReachabilityValidator implements ICustomValidator {
 		FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(new NullLogger(), diagnostician);
 		ExpandedModelComponent xpac = null;
 		try {
-			xpac = builder.createExpandedModelComponent(ac);
+			xpac = builder.createExpandedModelComponent(mc);
 		}
 		catch (Throwable t) {
 			return;

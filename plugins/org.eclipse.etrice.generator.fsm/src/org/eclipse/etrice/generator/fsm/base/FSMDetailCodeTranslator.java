@@ -54,9 +54,9 @@ public class FSMDetailCodeTranslator {
 		provider.setContainerClass(container);
 
 		if (container instanceof ModelComponent) {
-			ModelComponent ac = (ModelComponent) container;
+			ModelComponent mc = (ModelComponent) container;
 
-			List<AbstractInterfaceItem> items = ac.getAllAbstractInterfaceItems();
+			List<AbstractInterfaceItem> items = mc.getAllAbstractInterfaceItems();
 			for (AbstractInterfaceItem item : items) {
 				name2item.put(item.getName(), item);
 			}

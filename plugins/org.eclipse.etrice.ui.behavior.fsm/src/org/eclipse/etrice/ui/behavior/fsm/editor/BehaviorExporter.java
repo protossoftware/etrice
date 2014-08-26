@@ -31,20 +31,20 @@ public class BehaviorExporter {
 	@Inject
 	private DiagramAccessBase da;
 
-	public void export(ModelComponent ac, String folder) {
+	public void export(ModelComponent mc, String folder) {
 
 		boolean wasOpen = false;
-		AbstractFSMEditor editor = (AbstractFSMEditor) da.findDiagramEditor(ac);
+		AbstractFSMEditor editor = (AbstractFSMEditor) da.findDiagramEditor(mc);
 		if (editor!=null)
 			wasOpen = true;
 		else
-			editor = (AbstractFSMEditor) da.openDiagramEditor(ac);
+			editor = (AbstractFSMEditor) da.openDiagramEditor(mc);
 
 		if (editor!=null) {
-			String filename = folder+File.separatorChar+ac.getComponentName()+SUFFIX;
+			String filename = folder+File.separatorChar+mc.getComponentName()+SUFFIX;
 			DiagramExporter.export(editor, filename);
 			
-			exportSubGraphsRecursively(ac.getStateMachine(), editor, folder+File.separatorChar+ac.getComponentName());
+			exportSubGraphsRecursively(mc.getStateMachine(), editor, folder+File.separatorChar+mc.getComponentName());
 			
 			if (!wasOpen)
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);

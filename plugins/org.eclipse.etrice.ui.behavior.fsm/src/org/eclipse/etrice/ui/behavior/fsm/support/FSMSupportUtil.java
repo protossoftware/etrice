@@ -204,40 +204,40 @@ public class FSMSupportUtil {
 
 	/**
 	 * @param sg
-	 * @param ac
+	 * @param mc
 	 * @param targetContainer
 	 * @param fp
 	 * @return
 	 */
-	public StateGraph insertRefinedState(StateGraph sg, ModelComponent ac, ContainerShape targetContainer,
+	public StateGraph insertRefinedState(StateGraph sg, ModelComponent mc, ContainerShape targetContainer,
 			IFeatureProvider fp) {
-				sg = getSubGraphOfRefinedStateFor((State) sg.eContainer(), ac);
+				sg = getSubGraphOfRefinedStateFor((State) sg.eContainer(), mc);
 				fp.link(targetContainer, sg);
 				return sg;
 			}
 
 	/**
 	 * @param sg
-	 * @param ac
+	 * @param mc
 	 * @param targetContainer
 	 */
-	public void undoInsertRefinedState(StateGraph sg, ModelComponent ac,
+	public void undoInsertRefinedState(StateGraph sg, ModelComponent mc,
 			ContainerShape targetContainer, IFeatureProvider fp) {
 				RefinedState rs = (RefinedState) sg.eContainer();
 				fp.link(targetContainer, rs.getTarget().getSubgraph());
 				
 				if (!(fsmHelpers.hasDetailCode(rs.getEntryCode()) || fsmHelpers.hasDetailCode(rs.getExitCode()))) {
-					ac.getStateMachine().getStates().remove(rs);
+					mc.getStateMachine().getStates().remove(rs);
 				}
 			}
 
 	/**
 	 * @param s
-	 * @param ac
+	 * @param mc
 	 * @return
 	 */
-	public StateGraph getSubGraphOfRefinedStateFor(State s, ModelComponent ac) {
-		RefinedState rs = getRefinedStateFor(s, ac);
+	public StateGraph getSubGraphOfRefinedStateFor(State s, ModelComponent mc) {
+		RefinedState rs = getRefinedStateFor(s, mc);
 		
 		if (rs.getSubgraph()==null)
 			rs.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
@@ -245,9 +245,9 @@ public class FSMSupportUtil {
 		return rs.getSubgraph();
 	}
 
-	public RefinedState getRefinedStateFor(State s, ModelComponent ac) {
+	public RefinedState getRefinedStateFor(State s, ModelComponent mc) {
 		HashMap<State, RefinedState> target2rs = new HashMap<State, RefinedState>();
-		for (State st : ac.getStateMachine().getStates()) {
+		for (State st : mc.getStateMachine().getStates()) {
 			if (st instanceof RefinedState)
 				target2rs.put(((RefinedState) st).getTarget(), (RefinedState) st);
 		}
@@ -274,7 +274,7 @@ public class FSMSupportUtil {
 			}
 			
 			if (sg==null)
-				sg = ac.getStateMachine();
+				sg = mc.getStateMachine();
 			
 			rs = FSMFactory.eINSTANCE.createRefinedState();
 			rs.setTarget(s);
@@ -289,8 +289,8 @@ public class FSMSupportUtil {
 	 * @return
 	 */
 	public State getTargettingState(State state, Diagram diagram) {
-		ModelComponent ac = getModelComponent(diagram);
-		return fsmHelpers.getTargettingState(state, ac);
+		ModelComponent mc = getModelComponent(diagram);
+		return fsmHelpers.getTargettingState(state, mc);
 	}
 
 	/**
@@ -389,18 +389,18 @@ public class FSMSupportUtil {
 
 	/**
 	 * @param s the state whose sub structure should be deleted
-	 * @param ac the ModelComponent
+	 * @param mc the ModelComponent
 	 * @param diagram the current diagram
 	 * @param fp the feature provider
 	 */
-	public void deleteSubStructureRecursive(State s, ModelComponent ac,
+	public void deleteSubStructureRecursive(State s, ModelComponent mc,
 			Diagram diagram, IFeatureProvider fp) {
-				if (fsmHelpers.hasSubStructure(s, ac)) {
+				if (fsmHelpers.hasSubStructure(s, mc)) {
 					StateGraph subgraph = s.getSubgraph();
 					
 					// depth first
 					for (State st : subgraph.getStates()) {
-						deleteSubStructureRecursive(st, ac, diagram, fp);
+						deleteSubStructureRecursive(st, mc, diagram, fp);
 					}
 					
 					ContainerShape subShape = ContextSwitcher.getContext(diagram, subgraph);

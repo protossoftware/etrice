@@ -143,11 +143,11 @@ public class TrPointSupport {
 			@Override
 			public Object[] doCreate(ICreateContext context) {
 				ContainerShape targetContainer = context.getTargetContainer();
-		        ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+		        ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
 				if (inherited) {
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 				
 		        // create transition point
@@ -343,8 +343,8 @@ public class TrPointSupport {
 					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
 				}
 				if (elements.isEmpty()) {
-					ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-					s = FSMSupportUtil.getInstance().getFSMHelpers().getTargettingState(s, ac);
+					ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+					s = FSMSupportUtil.getInstance().getFSMHelpers().getTargettingState(s, mc);
 					assert(s!=null): "a refined state should point to our parent state";
 					elements = Graphiti.getLinkService().getPictogramElements(getDiagram(), s);
 				}

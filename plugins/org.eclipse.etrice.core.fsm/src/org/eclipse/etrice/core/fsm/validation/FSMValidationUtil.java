@@ -264,8 +264,8 @@ public class FSMValidationUtil {
 	 * @return the {@link Result} of the check
 	 */
 	public Result checkTransition(Transition tr) {
-		ModelComponent ac = fsmHelpers.getModelComponent(tr);
-		if (ac.getCommType()==ComponentCommunicationType.DATA_DRIVEN) {
+		ModelComponent mc = fsmHelpers.getModelComponent(tr);
+		if (mc.getCommType()==ComponentCommunicationType.DATA_DRIVEN) {
 			if (tr instanceof TriggeredTransition)
 				return Result.error("data driven state machine must not contain triggered transition",
 						tr.eContainer(),
@@ -284,7 +284,7 @@ public class FSMValidationUtil {
 				if (!fsmHelpers.hasDetailCode(((GuardedTransition) tr).getGuard()))
 					return Result.error("guard must not be empty", tr, FSMPackage.eINSTANCE.getGuardedTransition_Guard());
 		}
-		else if (ac.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
+		else if (mc.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
 			if (tr instanceof GuardedTransition) {
 				return Result.error("event driven state machine must not contain guarded transition",
 						tr.eContainer(),
@@ -301,7 +301,7 @@ public class FSMValidationUtil {
 							((StateGraph)tr.eContainer()).getTransitions().indexOf(tr));
 			}
 		}
-		else if (ac.getCommType()==ComponentCommunicationType.ASYNCHRONOUS) {
+		else if (mc.getCommType()==ComponentCommunicationType.ASYNCHRONOUS) {
 			if (tr instanceof ContinuationTransition) {
 				// if at this point no continuation transition is allowed it probably should be a triggered or guarded transition
 				TransitionTerminal term = ((ContinuationTransition) tr).getFrom();
@@ -317,8 +317,8 @@ public class FSMValidationUtil {
 	
 	public Result checkState(State state) {
 		if (state.getDoCode()!=null) {
-			ModelComponent ac = fsmHelpers.getModelComponent(state);
-			if (ac.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
+			ModelComponent mc = fsmHelpers.getModelComponent(state);
+			if (mc.getCommType()==ComponentCommunicationType.EVENT_DRIVEN) {
 				return Result.error("event driven state machines must not have 'do' action code",
 						state,
 						FSMPackage.eINSTANCE.getState_DoCode());
@@ -327,13 +327,13 @@ public class FSMValidationUtil {
 		return Result.ok();
 	}
 	
-	public List<Result> checkTopLevelRefinedStates(ModelComponent ac) {
+	public List<Result> checkTopLevelRefinedStates(ModelComponent mc) {
 		ArrayList<Result> errors = new ArrayList<Result>();
-		if (ac.getStateMachine()==null)
+		if (mc.getStateMachine()==null)
 			return errors;
 		
 		Function<RefinedState, String> nameProvider = fsmNameProvider.getRefinedStateNameProvider();
-		Map<RefinedState, RefinedState> rs2parent = fsmHelpers.getRefinedStatesToRelocate(ac, nameProvider);
+		Map<RefinedState, RefinedState> rs2parent = fsmHelpers.getRefinedStatesToRelocate(mc, nameProvider);
 		for (RefinedState rs : rs2parent.keySet()) {
 			RefinedState parent = rs2parent.get(rs);
 			String path = fsmNameProvider.getFullPath(parent);

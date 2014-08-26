@@ -63,9 +63,9 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
-		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
     	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
-		StateGraphContext tree = StateGraphContext.createContextTree(ac, injector);
+		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
 		
 		usedShapes.clear();
 		
@@ -108,9 +108,9 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public boolean update(IUpdateContext context) {
-		ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
     	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
-		StateGraphContext tree = StateGraphContext.createContextTree(ac, injector);
+		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
 
 		usedShapes.clear();
 		
