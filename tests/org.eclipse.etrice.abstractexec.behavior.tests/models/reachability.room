@@ -264,7 +264,7 @@ RoomModel Reachability {
 		Structure { }
 		Behavior {
 			StateMachine {
-				RefinedTransition tr4zzz_0 {
+				RefinedTransition state0_1.sg.tr4zzz_0 {
 					action {
 						""
 					}
