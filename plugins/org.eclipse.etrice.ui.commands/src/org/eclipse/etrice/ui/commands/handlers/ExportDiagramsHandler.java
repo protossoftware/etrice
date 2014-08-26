@@ -34,7 +34,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.ui.behavior.editor.BehaviorExporter;
+import org.eclipse.etrice.ui.behavior.fsm.editor.BehaviorExporter;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.structure.editor.StructureExporter;
@@ -143,9 +143,10 @@ public class ExportDiagramsHandler extends AbstractHandler {
 			if (folder.exists()) {
 				String folderPath = folder.getLocation().toOSString();
 				
+				BehaviorExporter exporter = org.eclipse.etrice.ui.behavior.Activator.getDefault().getInjector().getInstance(BehaviorExporter.class);
 				for (ActorClass ac : model.getActorClasses()) {
 					if (ac.getStateMachine()!=null)
-						BehaviorExporter.export(ac, folderPath);
+						exporter.export(ac, folderPath);
 					
 					StructureExporter.export(ac, folderPath);
 				}

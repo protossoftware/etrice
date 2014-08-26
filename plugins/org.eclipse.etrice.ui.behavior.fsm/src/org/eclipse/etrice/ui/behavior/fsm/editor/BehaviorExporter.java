@@ -10,31 +10,35 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.behavior.editor;
+package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import java.io.File;
 
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.editor.DiagramExporter;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.ui.PlatformUI;
+
+import com.google.inject.Inject;
 
 public class BehaviorExporter {
 
 	private static final String SUFFIX = "_behavior";
+	
+	@Inject
+	private DiagramAccessBase da;
 
-	public static void export(ModelComponent ac, String folder) {
-		DiagramAccess da = new DiagramAccess();
+	public void export(ModelComponent ac, String folder) {
 
 		boolean wasOpen = false;
-		BehaviorEditor editor = (BehaviorEditor) da.findDiagramEditor(ac);
+		AbstractFSMEditor editor = (AbstractFSMEditor) da.findDiagramEditor(ac);
 		if (editor!=null)
 			wasOpen = true;
 		else
-			editor = (BehaviorEditor) da.openDiagramEditor(ac);
+			editor = (AbstractFSMEditor) da.openDiagramEditor(ac);
 
 		if (editor!=null) {
 			String filename = folder+File.separatorChar+ac.getComponentName()+SUFFIX;
@@ -47,7 +51,7 @@ public class BehaviorExporter {
 		}
 	}
 
-	private static void exportSubGraphsRecursively(StateGraph sg, BehaviorEditor editor, String basename) {
+	private void exportSubGraphsRecursively(StateGraph sg, AbstractFSMEditor editor, String basename) {
 		if (sg==null)
 			return;
 		
