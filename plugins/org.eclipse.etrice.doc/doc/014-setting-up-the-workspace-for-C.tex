@@ -60,6 +60,11 @@ If the compilation does not succeed, make sure to clean and compile the projects
 
 After the successful compilation you can run the application as \emph{Local C/C++ Application}.
 
+If the binaries are not detected by CDT then in the project properties go to C/C++ Build > Settings > Binary Parsers and select "PE Windows Parser" (for Windows)
+or "GNU Elf Parser" (for Linux/Unix). Then the binary will be detected.
+
+If this still doesn't help then an alternative is to create a C/C++ launch configuration manually and enter the path to the executable.
+
 \includegraphics[width=0.7\textwidth]{images/014-08-RunAsC-CPP-Application.png}
 
 To terminate the application type \emph{quit} in the console window. If your Console contains the lines

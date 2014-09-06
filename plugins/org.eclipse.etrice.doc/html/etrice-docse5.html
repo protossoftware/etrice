@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2014-08-25 19:15:00" /> 
+<meta name="date" content="2014-09-06 19:28:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -111,10 +111,15 @@ class="ec-lmsso-10">MinGWDebug </span>or
 class="ec-lmsso-10">PosixDebug</span>.
 </p><!--l. 61--><p class="noindent" >After the successful compilation you can run the application as <span 
 class="ec-lmsso-10">Local C/C++ Application</span>.
-</p><!--l. 63--><p class="noindent" ><img 
+</p><!--l. 63--><p class="noindent" >If the binaries are not detected by CDT then in the project properties go to C/C++ Build &#x003E; Settings &#x003E; Binary Parsers and
+select "PE Windows Parser" (for Windows) or "GNU Elf Parser" (for Linux/Unix). Then the binary will be
+detected.
+</p><!--l. 66--><p class="noindent" >If this still doesn&#8217;t help then an alternative is to create a C/C++ launch configuration manually and enter the path to the
+executable.
+</p><!--l. 68--><p class="noindent" ><img 
 src="images/014-08-RunAsC-CPP-Application.png" alt="PIC"  
  />
-</p><!--l. 65--><p class="noindent" >To terminate the application type <span 
+</p><!--l. 70--><p class="noindent" >To terminate the application type <span 
 class="ec-lmsso-10">quit </span>in the console window. If your Console contains the lines
                                                                                             
                                                                                             
@@ -124,11 +129,11 @@ class="ec-lmsso-10">quit </span>in the console window. If your Console contains 
 &#x00A0;<br />***&#x00A0;Setup&#x00A0;OK&#x00A0;***
 &#x00A0;<br />******************
 </div>
-<!--l. 70--><p class="nopar" > your setup should be ok.
-</p><!--l. 73--><p class="noindent" ><img 
+<!--l. 75--><p class="nopar" > your setup should be ok.
+</p><!--l. 78--><p class="noindent" ><img 
 src="images/014-09-ConsoleWithSetupOk.png" alt="PIC"  
  />
-</p><!--l. 75--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
+</p><!--l. 80--><p class="noindent" >Now the workspace is set up and you can perform the tutorials or start with your work.
                                                                                             
                                                                                             
 </p>
