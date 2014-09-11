@@ -1,17 +1,15 @@
-package org.eclipse.etrice.ui.behavior.dialogs;
+package org.eclipse.etrice.ui.behavior.fsm.dialogs;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.fsm.fSM.TrPoint;
-import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
-import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
-import org.eclipse.etrice.ui.behavior.Activator;
-import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITrPointPropertyDialog;
-import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
+import org.eclipse.etrice.ui.behavior.fsm.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -19,16 +17,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 
-public class TrPointPropertyDialog extends AbstractPropertyDialog implements ITrPointPropertyDialog {
+public class ChoicePointPropertyDialog extends AbstractPropertyDialog implements IChoicePointPropertyDialog {
 	
-	protected class NameValidator implements IValidator {
+	class NameValidator implements IValidator {
 
 		@Override
 		public IStatus validate(Object value) {
 			if (value instanceof String) {
 				String name = (String) value;
 				
-				Result result = SupportUtil.getInstance().getFSMValidationUtil().isUniqueName(tp, name);
+				Result result = FSMSupportUtil.getInstance().getFSMValidationUtil().isUniqueName(cp, name);
 				if (!result.isOk())
 					return ValidationStatus.error(result.getMsg());
 			}
@@ -36,11 +34,11 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog implements ITr
 		}
 	}
 
-	private TrPoint tp;
+	private ChoicePoint cp;
 
-	public TrPointPropertyDialog(Shell shell, TrPoint tp, boolean subtp) {
-		super(shell, "Edit Transition Point");
-		this.tp = tp;
+	public ChoicePointPropertyDialog(Shell shell, ChoicePoint cp) {
+		super(shell, "Edit Choice Point");
+		this.cp = cp;
 	}
 
 	@Override
@@ -54,11 +52,7 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog implements ITr
 
 		NameValidator nv = new NameValidator();
 		
-		Text name = createText(body, "&Name:", tp, FSMPackage.eINSTANCE.getTrPoint_Name(), nv);
-		
-		if (tp instanceof TransitionPoint) {
-			createCheck(body, "Is &Handler:", tp, FSMPackage.eINSTANCE.getTransitionPoint_Handler());
-		}
+		Text name = createText(body, "&Name:", cp, FSMPackage.eINSTANCE.getChoicePoint_Name(), nv);
 		
 		createDecorator(name, "invalid name");
 		

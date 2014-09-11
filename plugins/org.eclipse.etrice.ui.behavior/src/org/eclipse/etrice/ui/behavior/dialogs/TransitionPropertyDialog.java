@@ -22,7 +22,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;

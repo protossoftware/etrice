@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPP;

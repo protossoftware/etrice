@@ -18,12 +18,14 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.ChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IChoicePointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ISelectionDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITrPointPropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
+import org.eclipse.etrice.ui.behavior.fsm.dialogs.TrPointPropertyDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
