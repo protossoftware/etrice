@@ -88,7 +88,7 @@ public interface EnumLiteral extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this.getLiteral() != null)\r\n\treturn this.getLiteral().getValue();\r\n\r\n// recursively from predecessor\r\n<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());\r\nint idx = et.getLiterals().indexOf(this);\r\nif (idx > 0)\r\n\treturn et.getLiterals().get(idx - 1).getLiteralValue() + 1;\r\n\r\nreturn 0;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this.getLiteral() != null)\n\treturn this.getLiteral().getValue();\n\n// recursively from predecessor\n<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());\nint idx = et.getLiterals().indexOf(this);\nif (idx > 0)\n\treturn et.getLiterals().get(idx - 1).getLiteralValue() + 1;\n\nreturn 0;\n'"
    * @generated
    */
   long getLiteralValue();
@@ -97,7 +97,7 @@ public interface EnumLiteral extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());\r\nreturn et.getName() + \".\" + this.getName();\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='<%org.eclipse.etrice.core.room.EnumerationType%> et = ((EnumerationType) this.eContainer());\nreturn et.getName() + \".\" + this.getName();\n'"
    * @generated
    */
   String getFullName();

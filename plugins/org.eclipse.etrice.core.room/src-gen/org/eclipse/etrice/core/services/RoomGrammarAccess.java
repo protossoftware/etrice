@@ -4015,8 +4015,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
-	//	| refinedTransitions+=RefinedTransition)* "}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+	//	refinedTransitions+=RefinedTransition)* "}";
 	public FSMGrammarAccess.StateMachineElements getStateMachineAccess() {
 		return gaFSM.getStateMachineAccess();
 	}
@@ -4162,8 +4162,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InitialTransition:
-	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
-	//	"}";
+	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+	//	"}")?;
 	public FSMGrammarAccess.InitialTransitionElements getInitialTransitionAccess() {
 		return gaFSM.getInitialTransitionAccess();
 	}

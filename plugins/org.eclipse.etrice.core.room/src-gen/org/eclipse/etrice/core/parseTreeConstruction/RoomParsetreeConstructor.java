@@ -15574,8 +15574,8 @@ protected class StateGraph_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule StateMachine ****************
  *
  * StateMachine returns StateGraph:
- * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
- * 	| refinedTransitions+=RefinedTransition)* "}";
+ * 	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+ * 	refinedTransitions+=RefinedTransition)* "}";
  *
  **/
 
@@ -18411,12 +18411,13 @@ protected class TransitionChainStartTransition_GuardedTransitionParserRuleCall_1
 /************ begin Rule InitialTransition ****************
  *
  * InitialTransition:
- * 	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
- * 	"}";
+ * 	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+ * 	"}")?;
  *
  **/
 
-// "Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)? "}"
+// "Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+// "}")?
 protected class InitialTransition_Group extends GroupToken {
 	
 	public InitialTransition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -18431,7 +18432,9 @@ protected class InitialTransition_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InitialTransition_RightCurlyBracketKeyword_9(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InitialTransition_Group_7(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new InitialTransition_DocuAssignment_6(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new InitialTransition_ToAssignment_5(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -18659,16 +18662,38 @@ protected class InitialTransition_DocuAssignment_6 extends AssignmentToken  {
 	}	
 }
 
-// "{"
-protected class InitialTransition_LeftCurlyBracketKeyword_7 extends KeywordToken  {
+// ("{" ("action" action=DetailCode)? "}")?
+protected class InitialTransition_Group_7 extends GroupToken {
 	
-	public InitialTransition_LeftCurlyBracketKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InitialTransition_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getInitialTransitionAccess().getGroup_7();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new InitialTransition_RightCurlyBracketKeyword_7_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "{"
+protected class InitialTransition_LeftCurlyBracketKeyword_7_0 extends KeywordToken  {
+	
+	public InitialTransition_LeftCurlyBracketKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7();
+		return grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0();
 	}
 
     @Override
@@ -18683,21 +18708,21 @@ protected class InitialTransition_LeftCurlyBracketKeyword_7 extends KeywordToken
 }
 
 // ("action" action=DetailCode)?
-protected class InitialTransition_Group_8 extends GroupToken {
+protected class InitialTransition_Group_7_1 extends GroupToken {
 	
-	public InitialTransition_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InitialTransition_Group_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getInitialTransitionAccess().getGroup_8();
+		return grammarAccess.getInitialTransitionAccess().getGroup_7_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InitialTransition_ActionAssignment_8_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InitialTransition_ActionAssignment_7_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -18705,21 +18730,21 @@ protected class InitialTransition_Group_8 extends GroupToken {
 }
 
 // "action"
-protected class InitialTransition_ActionKeyword_8_0 extends KeywordToken  {
+protected class InitialTransition_ActionKeyword_7_1_0 extends KeywordToken  {
 	
-	public InitialTransition_ActionKeyword_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InitialTransition_ActionKeyword_7_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getInitialTransitionAccess().getActionKeyword_8_0();
+		return grammarAccess.getInitialTransitionAccess().getActionKeyword_7_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InitialTransition_LeftCurlyBracketKeyword_7(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InitialTransition_LeftCurlyBracketKeyword_7_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -18727,15 +18752,15 @@ protected class InitialTransition_ActionKeyword_8_0 extends KeywordToken  {
 }
 
 // action=DetailCode
-protected class InitialTransition_ActionAssignment_8_1 extends AssignmentToken  {
+protected class InitialTransition_ActionAssignment_7_1_1 extends AssignmentToken  {
 	
-	public InitialTransition_ActionAssignment_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InitialTransition_ActionAssignment_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInitialTransitionAccess().getActionAssignment_8_1();
+		return grammarAccess.getInitialTransitionAccess().getActionAssignment_7_1_1();
 	}
 
     @Override
@@ -18754,7 +18779,7 @@ protected class InitialTransition_ActionAssignment_8_1 extends AssignmentToken  
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getDetailCodeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_8_1_0(); 
+				element = grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_7_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -18766,7 +18791,7 @@ protected class InitialTransition_ActionAssignment_8_1 extends AssignmentToken  
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InitialTransition_ActionKeyword_8_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InitialTransition_ActionKeyword_7_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -18774,27 +18799,27 @@ protected class InitialTransition_ActionAssignment_8_1 extends AssignmentToken  
 
 
 // "}"
-protected class InitialTransition_RightCurlyBracketKeyword_9 extends KeywordToken  {
+protected class InitialTransition_RightCurlyBracketKeyword_7_2 extends KeywordToken  {
 	
-	public InitialTransition_RightCurlyBracketKeyword_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InitialTransition_RightCurlyBracketKeyword_7_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_9();
+		return grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InitialTransition_Group_8(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new InitialTransition_LeftCurlyBracketKeyword_7(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new InitialTransition_Group_7_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
+
 
 
 /************ end Rule InitialTransition ****************/

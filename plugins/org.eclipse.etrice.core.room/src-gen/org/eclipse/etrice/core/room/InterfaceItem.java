@@ -37,7 +37,7 @@ public interface InterfaceItem extends AbstractInterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof <%org.eclipse.etrice.core.room.Port%>)\r\n\treturn ((Port) this).getProtocol();\r\nelse if (this instanceof <%org.eclipse.etrice.core.room.SAP%>)\r\n\treturn ((SAP) this).getProtocol();\r\nelse if (this instanceof <%org.eclipse.etrice.core.room.SPP%>)\r\n\treturn ((SPP) this).getProtocol();\r\nreturn null;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof <%org.eclipse.etrice.core.room.Port%>)\n\treturn ((Port) this).getProtocol();\nelse if (this instanceof <%org.eclipse.etrice.core.room.SAP%>)\n\treturn ((SAP) this).getProtocol();\nelse if (this instanceof <%org.eclipse.etrice.core.room.SPP%>)\n\treturn ((SPP) this).getProtocol();\nreturn null;\n'"
    * @generated
    */
   GeneralProtocolClass getGeneralProtocol();
@@ -46,7 +46,7 @@ public interface InterfaceItem extends AbstractInterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof <%org.eclipse.etrice.core.room.ProtocolClass%>)\r\n\treturn ((ProtocolClass)getGeneralProtocol()).getSemantics();\r\nelse\r\n\treturn null;\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof <%org.eclipse.etrice.core.room.ProtocolClass%>)\n\treturn ((ProtocolClass)getGeneralProtocol()).getSemantics();\nelse\n\treturn null;\n'"
    * @generated
    */
   ProtocolSemantics getSemantics();
@@ -55,7 +55,7 @@ public interface InterfaceItem extends AbstractInterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, false));\n'"
    * @generated
    */
   EList<EObject> getAllIncomingAbstractMessages();
@@ -64,7 +64,7 @@ public interface InterfaceItem extends AbstractInterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));\r\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));\n'"
    * @generated
    */
   EList<EObject> getAllOutgoingAbstractMessages();

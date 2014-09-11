@@ -6393,18 +6393,18 @@ ruleInitialTransition returns [EObject current=null]
 	    }
 
 )
-)?	otherlv_7='{' 
+)?(	otherlv_7='{' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7());
+    	newLeafNode(otherlv_7, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0());
     }
 (	otherlv_8='action' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getInitialTransitionAccess().getActionKeyword_8_0());
+    	newLeafNode(otherlv_8, grammarAccess.getInitialTransitionAccess().getActionKeyword_7_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_8_1_0()); 
+	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_7_1_1_0()); 
 	    }
 		lv_action_9_0=ruleDetailCode		{
 	        if ($current==null) {
@@ -6421,9 +6421,9 @@ ruleInitialTransition returns [EObject current=null]
 )
 ))?	otherlv_10='}' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_9());
+    	newLeafNode(otherlv_10, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_2());
     }
-)
+)?)
 ;
 
 
