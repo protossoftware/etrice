@@ -10,11 +10,10 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.editor;
+package org.eclipse.etrice.core.common.ui.editor;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -26,9 +25,13 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 public class SaveOnFocusLostListener implements IPartListener {
 
 	private XtextEditor editor;
+	private String store;
+	private String key;
 
-	public SaveOnFocusLostListener(XtextEditor editor) {
+	public SaveOnFocusLostListener(XtextEditor editor, String store, String key) {
 		this.editor = editor;
+		this.store = store;
+		this.key = key;
 	}
 
 	/* (non-Javadoc)
@@ -60,9 +63,7 @@ public class SaveOnFocusLostListener implements IPartListener {
 		if (!(editor instanceof IValidatingEditor))
 			return;
 		
-		boolean save =  Platform.getPreferencesService().getBoolean(
-				"org.eclipse.etrice.ui.common.base",
-				RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false, null);
+		boolean save =  Platform.getPreferencesService().getBoolean(store, key, false, null);
 		
 		if (save && editor.isDirty())
 			if (((IValidatingEditor)editor).isValid())

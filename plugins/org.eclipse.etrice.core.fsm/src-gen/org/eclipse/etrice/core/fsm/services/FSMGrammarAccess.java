@@ -249,8 +249,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//StateMachine returns StateGraph:
-		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
-		//	| refinedTransitions+=RefinedTransition)* "}";
+		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+		//	refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
@@ -808,19 +808,21 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cToTransitionTerminalParserRuleCall_5_0 = (RuleCall)cToAssignment_5.eContents().get(0);
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cActionKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cActionAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cActionDetailCodeParserRuleCall_8_1_0 = (RuleCall)cActionAssignment_8_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cLeftCurlyBracketKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Group cGroup_7_1 = (Group)cGroup_7.eContents().get(1);
+		private final Keyword cActionKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
+		private final Assignment cActionAssignment_7_1_1 = (Assignment)cGroup_7_1.eContents().get(1);
+		private final RuleCall cActionDetailCodeParserRuleCall_7_1_1_0 = (RuleCall)cActionAssignment_7_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7_2 = (Keyword)cGroup_7.eContents().get(2);
 		
 		//InitialTransition:
-		//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
-		//	"}";
+		//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)? "}"
+		//"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+		//"}")?
 		public Group getGroup() { return cGroup; }
 
 		//"Transition"
@@ -853,23 +855,26 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 
+		//("{" ("action" action=DetailCode)? "}")?
+		public Group getGroup_7() { return cGroup_7; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
+		public Keyword getLeftCurlyBracketKeyword_7_0() { return cLeftCurlyBracketKeyword_7_0; }
 
 		//("action" action=DetailCode)?
-		public Group getGroup_8() { return cGroup_8; }
+		public Group getGroup_7_1() { return cGroup_7_1; }
 
 		//"action"
-		public Keyword getActionKeyword_8_0() { return cActionKeyword_8_0; }
+		public Keyword getActionKeyword_7_1_0() { return cActionKeyword_7_1_0; }
 
 		//action=DetailCode
-		public Assignment getActionAssignment_8_1() { return cActionAssignment_8_1; }
+		public Assignment getActionAssignment_7_1_1() { return cActionAssignment_7_1_1; }
 
 		//DetailCode
-		public RuleCall getActionDetailCodeParserRuleCall_8_1_0() { return cActionDetailCodeParserRuleCall_8_1_0; }
+		public RuleCall getActionDetailCodeParserRuleCall_7_1_1_0() { return cActionDetailCodeParserRuleCall_7_1_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+		public Keyword getRightCurlyBracketKeyword_7_2() { return cRightCurlyBracketKeyword_7_2; }
 	}
 
 	public class ContinuationTransitionElements extends AbstractParserRuleElementFinder {
@@ -2039,8 +2044,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
-	//	| refinedTransitions+=RefinedTransition)* "}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
+	//	refinedTransitions+=RefinedTransition)* "}";
 	public StateMachineElements getStateMachineAccess() {
 		return (pStateMachine != null) ? pStateMachine : (pStateMachine = new StateMachineElements());
 	}
@@ -2186,8 +2191,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InitialTransition:
-	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? "{" ("action" action=DetailCode)?
-	//	"}";
+	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
+	//	"}")?;
 	public InitialTransitionElements getInitialTransitionAccess() {
 		return (pInitialTransition != null) ? pInitialTransition : (pInitialTransition = new InitialTransitionElements());
 	}

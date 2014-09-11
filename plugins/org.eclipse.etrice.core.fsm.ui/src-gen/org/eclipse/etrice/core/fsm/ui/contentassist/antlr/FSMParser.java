@@ -89,7 +89,8 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExitPointAccess().getGroup(), "rule__ExitPoint__Group__0");
 					put(grammarAccess.getChoicePointAccess().getGroup(), "rule__ChoicePoint__Group__0");
 					put(grammarAccess.getInitialTransitionAccess().getGroup(), "rule__InitialTransition__Group__0");
-					put(grammarAccess.getInitialTransitionAccess().getGroup_8(), "rule__InitialTransition__Group_8__0");
+					put(grammarAccess.getInitialTransitionAccess().getGroup_7(), "rule__InitialTransition__Group_7__0");
+					put(grammarAccess.getInitialTransitionAccess().getGroup_7_1(), "rule__InitialTransition__Group_7_1__0");
 					put(grammarAccess.getContinuationTransitionAccess().getGroup(), "rule__ContinuationTransition__Group__0");
 					put(grammarAccess.getContinuationTransitionAccess().getGroup_7(), "rule__ContinuationTransition__Group_7__0");
 					put(grammarAccess.getContinuationTransitionAccess().getGroup_7_1(), "rule__ContinuationTransition__Group_7_1__0");
@@ -187,7 +188,7 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInitialTransitionAccess().getNameAssignment_1(), "rule__InitialTransition__NameAssignment_1");
 					put(grammarAccess.getInitialTransitionAccess().getToAssignment_5(), "rule__InitialTransition__ToAssignment_5");
 					put(grammarAccess.getInitialTransitionAccess().getDocuAssignment_6(), "rule__InitialTransition__DocuAssignment_6");
-					put(grammarAccess.getInitialTransitionAccess().getActionAssignment_8_1(), "rule__InitialTransition__ActionAssignment_8_1");
+					put(grammarAccess.getInitialTransitionAccess().getActionAssignment_7_1_1(), "rule__InitialTransition__ActionAssignment_7_1_1");
 					put(grammarAccess.getContinuationTransitionAccess().getNameAssignment_1(), "rule__ContinuationTransition__NameAssignment_1");
 					put(grammarAccess.getContinuationTransitionAccess().getFromAssignment_3(), "rule__ContinuationTransition__FromAssignment_3");
 					put(grammarAccess.getContinuationTransitionAccess().getToAssignment_5(), "rule__ContinuationTransition__ToAssignment_5");

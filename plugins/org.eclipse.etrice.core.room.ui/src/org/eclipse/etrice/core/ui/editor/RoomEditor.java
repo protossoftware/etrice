@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.ui.editor;
 
 import java.util.List;
 
+import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
@@ -23,6 +24,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.etrice.core.common.ui.editor.IValidatingEditor;
+import org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostListener;
 
 import com.google.inject.Inject;
 
@@ -44,7 +47,7 @@ public class RoomEditor extends XtextEditor implements IValidatingEditor {
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 		
-		partListener = new SaveOnFocusLostListener(this);
+		partListener = new SaveOnFocusLostListener(this, "org.eclipse.etrice.ui.common.base", RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST);
 		getSite().getPage().addPartListener(partListener);
 	}
 	

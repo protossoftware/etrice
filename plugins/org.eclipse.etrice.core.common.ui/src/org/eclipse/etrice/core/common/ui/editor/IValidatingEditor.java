@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.editor;
+package org.eclipse.etrice.core.common.ui.editor;
 
 /**
  * @author Henrik Rentz-Reichert

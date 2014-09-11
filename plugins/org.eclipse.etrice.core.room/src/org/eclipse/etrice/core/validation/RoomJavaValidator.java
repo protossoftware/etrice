@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -31,54 +30,43 @@ import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalPort;
-import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
-import org.eclipse.etrice.core.fsm.fSM.RefinedState;
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.fsm.fSM.TrPoint;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.inject.Inject;
@@ -111,7 +99,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
-	public static final String MULTI_LINE_DETAILCODE = "RoomJavaValidator.MultiLineDetailCode";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -363,29 +350,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 	}
 	
-	@Check
-	public void checkRefinedStateUnique(RefinedState rs) {
-		StateGraph sg = (StateGraph) rs.eContainer();
-		TreeIterator<EObject> it = sg.eAllContents();
-		while (it.hasNext()) {
-			EObject obj = it.next();
-			if (obj!=rs && obj instanceof RefinedState)
-				if (rs.getTarget()==((RefinedState)obj).getTarget()) {
-					if (rs.eContainer().eContainer() instanceof ActorClass)
-						error("refined state conflicts with nested refined state with same target", FSMPackage.Literals.REFINED_STATE__TARGET);
-					else
-						error("refined state not unique", FSMPackage.Literals.REFINED_STATE__TARGET);
-				}
-		}
-	}
-	
-	@Check
-	public void checkStateNameUnique(SimpleState s) {
-		Result result = ValidationUtil.isUniqueName(s, s.getName());
-		if (!result.isOk())
-			error(result.getMsg(), FSMPackage.Literals.SIMPLE_STATE__NAME);
-	}
-	
 	@Check  
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
@@ -455,46 +419,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkTrPoint(TrPoint tp) {
-		Result result = ValidationUtil.isValid(tp);
-		if (!result.isOk())
-			error(result);
-	}
-	
-	@Check
-	public void checkChoicePoint(ChoicePoint cp) {
-		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
-			error("name is not unique", FSMPackage.Literals.CHOICE_POINT__NAME);
-	}
-	
-	@Check
 	public void checkInterfaceItemUniqueName(InterfaceItem item) {
 		Result result = ValidationUtil.isUniqueName(item);
 		if (!result.isOk())
 			error(result.getMsg(), FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name());
-	}
-	
-	@Check
-	public void checkTransition(Transition trans) {
-		Result result = ValidationUtil.checkTransition(trans);
-		if (!result.isOk())
-			error(result);
-
-		if (trans instanceof InitialTransition) {
-			result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
-		}
-		else {
-			result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
-		}
-		if (!result.isOk())
-			error(result);
-	}
-	
-	@Check
-	public void checkState(org.eclipse.etrice.core.fsm.fSM.State state) {
-		Result result = ValidationUtil.checkState(state);
-		if (!result.isOk())
-			error(result);
 	}
 	
 	@Check
@@ -669,15 +597,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkRefinedTransition(RefinedTransition rt) {
-		if (!(rt.eContainer().eContainer() instanceof ActorClass)) {
-			StateGraph sg = (StateGraph) rt.eContainer();
-			int idx = sg.getRefinedTransitions().indexOf(rt);
-			error("RefinedTransition only allowed in top level state graph of an actor", sg, FSMPackage.Literals.STATE_GRAPH__REFINED_TRANSITIONS, idx);
-		}
-	}
-	
-	@Check
 	public void checkDataClass(DataClass dc) {
 		if (dc.getAttributes().isEmpty() && dc.getBase()==null)
 			error("Non-derived data classes have to define at least one attribute", RoomPackage.Literals.DATA_CLASS__ATTRIBUTES);
@@ -740,18 +659,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 							bind,
 							RoomPackage.Literals.BINDING__ENDPOINT2);
 			}
-		}
-	}
-	
-	@Check
-	public void checkDetailCode(DetailCode dc) {
-		if (dc.getLines().isEmpty())
-			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
-		
-		for(String line : dc.getLines()){
-			// bad: "\r\n" is affected too
-			if(line.contains(Strings.newLine()))
-				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
 		}
 	}
 	

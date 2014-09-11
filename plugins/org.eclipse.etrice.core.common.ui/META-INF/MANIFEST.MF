@@ -22,6 +22,7 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.common.ui.contentassist,
  org.eclipse.etrice.core.common.ui.contentassist.antlr,
+ org.eclipse.etrice.core.common.ui.editor,
  org.eclipse.etrice.core.common.ui.internal,
  org.eclipse.etrice.core.common.ui.labeling,
  org.eclipse.etrice.core.common.ui.linking,

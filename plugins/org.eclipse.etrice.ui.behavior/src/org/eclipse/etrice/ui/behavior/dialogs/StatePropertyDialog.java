@@ -12,7 +12,7 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil.Result;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;

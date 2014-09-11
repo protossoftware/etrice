@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
@@ -52,58 +50,13 @@ import com.google.inject.Inject;
  * @author Henrik Rentz-Reichert
  *
  */
-public class FSMValidationUtil {
+public class FSMValidationUtil extends FSMValidationUtilXtend {
 	
 	@Inject
 	private FSMHelpers fsmHelpers;
 	
 	@Inject
 	private FSMNameProvider fsmNameProvider;
-
-	public static class Result {
-		private boolean ok;
-		private String msg;
-		private EObject source;
-		private EStructuralFeature feature;
-		private int index;
-
-		public static Result ok() {
-			return new Result(true, "", null, null, 0);
-		}
-		public static Result error(String msg) {
-			return new Result(false, msg, null, null, -1);
-		}
-		public static Result error(String msg, EObject source, EStructuralFeature feature) {
-			return new Result(false, msg, source, feature, -1);
-		}
-		public static Result error(String msg, EObject source, EStructuralFeature feature, int index) {
-			return new Result(false, msg, source, feature, index);
-		}
-		
-		private Result(boolean ok, String msg, EObject source, EStructuralFeature feature, int index) {
-			this.ok = ok;
-			this.msg = msg;
-			this.source = source;
-			this.feature = feature;
-			this.index = index;
-		}
-
-		public boolean isOk() {
-			return ok;
-		}
-		public String getMsg() {
-			return msg;
-		}
-		public EObject getSource() {
-			return source;
-		}
-		public EStructuralFeature getFeature() {
-			return feature;
-		}
-		public int getIndex() {
-			return index;
-		}
-	}
 	
 	public Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, StateGraph sg) {
 		return isConnectable(src, tgt, null, sg);

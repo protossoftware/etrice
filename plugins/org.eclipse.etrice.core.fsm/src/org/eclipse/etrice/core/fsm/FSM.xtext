@@ -131,9 +131,9 @@ TransitionChainStartTransition: TriggeredTransition | GuardedTransition;
 InitialTransition:
 	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
 	(docu=Documentation)?
-	'{'
+	('{'
 		('action' action=DetailCode)? 
-	'}';
+	'}')?;
 
 ContinuationTransition:
 	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal

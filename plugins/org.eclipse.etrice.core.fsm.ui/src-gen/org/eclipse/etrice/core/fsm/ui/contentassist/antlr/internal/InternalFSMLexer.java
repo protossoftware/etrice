@@ -1302,8 +1302,8 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_EXP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11807:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11807:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11837:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11837:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -1314,7 +1314,7 @@ public class InternalFSMLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11807:22: ( '+' | '-' )?
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11837:22: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1340,7 +1340,7 @@ public class InternalFSMLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11807:33: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11837:33: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -1354,7 +1354,7 @@ public class InternalFSMLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11807:34: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11837:34: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1386,10 +1386,10 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:12: ( '0x' | '0X' )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:12: ( '0x' | '0X' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1417,7 +1417,7 @@ public class InternalFSMLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:13: '0x'
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:13: '0x'
                     {
                     match("0x"); 
 
@@ -1425,7 +1425,7 @@ public class InternalFSMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:18: '0X'
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:18: '0X'
                     {
                     match("0X"); 
 
@@ -1435,7 +1435,7 @@ public class InternalFSMLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11809:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11839:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt4=0;
             loop4:
             do {
@@ -1489,10 +1489,10 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11811:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11811:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11841:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11841:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11811:11: ( '^' )?
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11841:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1501,7 +1501,7 @@ public class InternalFSMLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11811:11: '^'
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11841:11: '^'
                     {
                     match('^'); 
 
@@ -1519,7 +1519,7 @@ public class InternalFSMLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11811:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11841:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1568,10 +1568,10 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11813:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11813:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11843:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11843:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11813:12: ( '0' .. '9' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11843:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1585,7 +1585,7 @@ public class InternalFSMLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11813:13: '0' .. '9'
+            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11843:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1617,10 +1617,10 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1638,10 +1638,10 @@ public class InternalFSMLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1657,7 +1657,7 @@ public class InternalFSMLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1673,7 +1673,7 @@ public class InternalFSMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1698,10 +1698,10 @@ public class InternalFSMLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1717,7 +1717,7 @@ public class InternalFSMLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1733,7 +1733,7 @@ public class InternalFSMLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11815:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11845:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1776,12 +1776,12 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11817:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11817:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11847:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11847:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11817:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11847:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1806,7 +1806,7 @@ public class InternalFSMLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11817:52: .
+            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11847:52: .
             	    {
             	    matchAny(); 
 
@@ -1836,12 +1836,12 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1854,7 +1854,7 @@ public class InternalFSMLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1874,7 +1874,7 @@ public class InternalFSMLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1883,9 +1883,9 @@ public class InternalFSMLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:41: ( '\\r' )?
+                    // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1894,7 +1894,7 @@ public class InternalFSMLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11819:41: '\\r'
+                            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11849:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1926,10 +1926,10 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11821:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11821:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11851:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11851:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11821:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11851:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1983,8 +1983,8 @@ public class InternalFSMLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11823:16: ( . )
-            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11823:18: .
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11853:16: ( . )
+            // ../org.eclipse.etrice.core.fsm.ui/src-gen/org/eclipse/etrice/core/fsm/ui/contentassist/antlr/internal/InternalFSM.g:11853:18: .
             {
             matchAny(); 
 
