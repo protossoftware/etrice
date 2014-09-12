@@ -370,6 +370,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 				}
 				
 				code.getLines().addAll(0, rt.getAction().getLines());
+				code.setUsed(fsmHelpers.hasDetailCode(code));
 			}
 		}
 		

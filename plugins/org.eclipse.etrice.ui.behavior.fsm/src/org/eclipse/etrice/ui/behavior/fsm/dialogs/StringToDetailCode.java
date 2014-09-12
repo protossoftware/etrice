@@ -37,6 +37,9 @@ public class StringToDetailCode extends Converter {
 			// trim last command if empty
 			if (cmds[cmds.length-1].isEmpty())
 				dc.getLines().remove(cmds.length-1);
+			
+			dc.setUsed(true);
+			
 			return dc;
 		}
 		return null;
@@ -48,6 +51,7 @@ public class StringToDetailCode extends Converter {
 	private DetailCode createEmptyDetailCode() {
 		DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
 		dc.getLines().add("");
+		dc.setUsed(false);
 		return dc;
 	}
 
