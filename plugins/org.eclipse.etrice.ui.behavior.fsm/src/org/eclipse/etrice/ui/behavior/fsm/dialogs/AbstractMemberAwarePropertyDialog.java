@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractMemberAwarePropertyDialog extends AbstractPropertyDialog {
+public abstract class AbstractMemberAwarePropertyDialog extends AbstractPropertyDialog implements IMemberAwareConfiguration {
 	
 	private class LastTextListener implements FocusListener {
 
@@ -173,15 +173,18 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		}
 	}
 
-	public void configureMemberAware(Control ctrl) {
-		configureMemberAware(ctrl, false, false);
+	@Override
+	public void configureMemberAwareness(Control ctrl) {
+		configureMemberAwareness(ctrl, false, false);
 	}
 	
-	public void configureMemberAware(Control ctrl, boolean useMembers, boolean useMessages) {
-		configureMemberAware(ctrl, useMembers, useMembers, false);
+	@Override
+	public void configureMemberAwareness(Control ctrl, boolean useMembers, boolean useMessages) {
+		configureMemberAwareness(ctrl, useMembers, useMembers, false);
 	}
 	
-	public void configureMemberAware(Control ctrl, boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
+	@Override
+	public void configureMemberAwareness(Control ctrl, boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
 		if (useMembers)
 			memberAware.add(ctrl);
 		if (useMessages)

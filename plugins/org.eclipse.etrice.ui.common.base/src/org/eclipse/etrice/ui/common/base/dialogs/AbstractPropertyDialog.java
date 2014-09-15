@@ -71,6 +71,47 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 public abstract class AbstractPropertyDialog extends FormDialog {
 	
+	private class GlobalStatus extends ComputedValue {
+		Collection<ControlDecoration> decorations = decoratorMap.keySet();
+
+		/**
+		 * @param valueType
+		 */
+		private GlobalStatus(Object valueType) {
+			super(valueType);
+		}
+		
+		@Override
+		protected Object calculate() {
+			boolean ok = true;
+			IStatus newStatus = getGlobalValidationStatus();
+			if (newStatus.getSeverity() > IStatus.OK)
+				if (!newStatus.getMessage().isEmpty())
+					validationText.setText(newStatus.getMessage());
+			
+			// iterate over all decoration and there validation status
+			for(ControlDecoration decoration: decorations){
+				IObservableValue observableValue = decoratorMap.get(decoration);
+				IStatus status = (IStatus) observableValue.getValue();
+				
+				if (!status.isOK()) {
+					// validation error
+					ok = false;
+					decoration.setDescriptionText(status.getMessage());
+					decoration.show();
+					// select severest and meaningful message
+					if (status.getSeverity() > newStatus.getSeverity())
+						if (!status.getMessage().isEmpty())
+							newStatus = status;
+				} else
+					decoration.hide();
+			}
+			
+			updateValidationFeedback(ok && newStatus.isOK());
+			return newStatus;
+		}
+	}
+
 	static class DescriptionBased_Reference2StringConverter extends Converter {
 
 		private EAttribute nameAttr;
@@ -198,7 +239,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	private HashMap<ControlDecoration, IObservableValue> decoratorMap = new HashMap<ControlDecoration, IObservableValue>();
 	
 	// top validation message
-	private IObservableValue displayedValidationStatus;
+	private GlobalStatus displayedValidationStatus;
 	private Label validationLabel;
 	private Label validationText;
 
@@ -248,37 +289,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 
 		createContent(mform, body, bindingContext);
 				
-		displayedValidationStatus = new ComputedValue(IStatus.class) {
-			
-			Collection<ControlDecoration> decorations = decoratorMap.keySet();
-			
-			@Override
-			protected Object calculate() {
-				boolean ok = true;
-				IStatus newStatus = ValidationStatus.ok();
-				
-				// iterate over all decoration and there validation status
-				for(ControlDecoration decoration: decorations){
-					IObservableValue observableValue = decoratorMap.get(decoration);
-					IStatus status = (IStatus) observableValue.getValue();
-					
-					if (!status.isOK()) {
-						// validation error
-						ok = false;
-						decoration.setDescriptionText(status.getMessage());
-						decoration.show();
-						// select severest and meaningful message
-						if(status.getSeverity() > newStatus.getSeverity())
-							if(!status.getMessage().isEmpty())
-								newStatus = status;
-					} else
-						decoration.hide();
-				}
-				
-				updateValidationFeedback(ok && newStatus.isOK());
-				return newStatus;
-			}
-		};
+		displayedValidationStatus = new GlobalStatus(IStatus.class);
 		
 		bindingContext.bindValue(WidgetProperties.text().observe(validationText), displayedValidationStatus);
 	}
@@ -566,6 +577,16 @@ public abstract class AbstractPropertyDialog extends FormDialog {
         return controlDecoration;
 	}
 
+	protected IStatus getGlobalValidationStatus() {
+		return ValidationStatus.ok();
+	}
+	
+	public void checkValidation() {
+		if (displayedValidationStatus!=null && !displayedValidationStatus.isDisposed()) {
+			displayedValidationStatus.calculate();
+		}
+	}
+	
 	protected DataBindingContext getBindingContext() {
 		return bindingContext;
 	}

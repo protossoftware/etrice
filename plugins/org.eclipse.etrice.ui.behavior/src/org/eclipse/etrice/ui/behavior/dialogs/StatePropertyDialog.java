@@ -87,7 +87,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			NameValidator nv = new NameValidator();
 			
 			Text name = createText(body, "&Name:", state, FSMPackage.eINSTANCE.getSimpleState_Name(), nv);
-			configureMemberAware(name);
+			configureMemberAwareness(name);
 			
 			createDecorator(name, "invalid name");
 			
@@ -139,7 +139,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			
 			{
 				Text entry = createText(body, "&Entry Code:", state, FSMPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
-				configureMemberAware(entry, true, true);
+				configureMemberAwareness(entry, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
@@ -170,7 +170,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		else {
 			{
 				Text exit = createText(body, "E&xit Code:", state, FSMPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
-				configureMemberAware(exit, true, true);
+				configureMemberAwareness(exit, true, true);
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				exit.setLayoutData(gd);
@@ -202,7 +202,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		if (ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN)
 		{
 			Text dotxt = createText(body, "&Do Code:", state, FSMPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
-			configureMemberAware(dotxt, true, true);
+			configureMemberAwareness(dotxt, true, true);
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			dotxt.setLayoutData(gd);

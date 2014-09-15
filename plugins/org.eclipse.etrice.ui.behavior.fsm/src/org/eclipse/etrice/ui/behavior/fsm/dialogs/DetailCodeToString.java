@@ -23,6 +23,9 @@ public class DetailCodeToString extends Converter {
 			for (String cmd : ((DetailCode) fromObject).getLines()) {
 				result += cmd+"\n";
 			}
+			if (!result.isEmpty()) {
+				result = result.substring(0, result.length()-1);
+			}
 			return result;
 		}
 		return nullIsEmpty? "":null;

@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
@@ -189,7 +190,9 @@ public class TransitionSupport {
 								: FSMFactory.eINSTANCE.createCPBranchTransition();
 						
 						if (t instanceof CPBranchTransition) {
-							((CPBranchTransition) t).setCondition(FSMFactory.eINSTANCE.createDetailCode());
+							DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
+							dc.setUsed(false);
+							((CPBranchTransition) t).setCondition(dc);
 						}
 						
 						t.setFrom(src);
