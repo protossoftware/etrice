@@ -62,7 +62,7 @@
         </resourceServiceProvider>
     </extension>
  <extension
-       point="org.eclipse.etrice.ui.common.refactoring.rename">
+       point="org.eclipse.etrice.ui.common.base.refactoring.rename">
     <participant
           diagram_extension="behavior"
           editor_id="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">

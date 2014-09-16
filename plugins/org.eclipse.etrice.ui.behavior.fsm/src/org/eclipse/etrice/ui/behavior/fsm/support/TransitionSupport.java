@@ -537,8 +537,7 @@ public class TransitionSupport {
 							ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 							boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), t);
 							Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-							String code = FSMSupportUtil.getInstance().getFSMHelpers().getAllActionCode(t, mc);
-							boolean hasActionCode = code!=null && !code.isEmpty();
+							boolean hasActionCode = FSMSupportUtil.getInstance().getFSMHelpers().hasActionCode(t, mc);
 							Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
 							if (!equal(cd.getGraphicsAlgorithm().getBackground(), fillColor))
 								return Reason.createTrueReason("Arrow head needs update");
@@ -582,8 +581,7 @@ public class TransitionSupport {
 					Connection conn = (Connection)context.getPictogramElement();
 					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
 					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-			        String code = FSMSupportUtil.getInstance().getFSMHelpers().getAllActionCode(trans, mc);
-					boolean hasActionCode = code!=null && !code.isEmpty();
+					boolean hasActionCode = FSMSupportUtil.getInstance().getFSMHelpers().hasActionCode(trans, mc);
 			        Color fillColor = hasActionCode? lineColor : manageColor(FILL_COLOR);
 					updateLabel(trans, conn, fillColor);
 					updated = true;
