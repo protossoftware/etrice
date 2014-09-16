@@ -330,14 +330,17 @@ public class FSMHelpers extends BaseHelpers {
 	}
 	
 	/**
-	 * Returns <code>true</code> if the {@link DetailCode} is null or empty.
+	 * Returns <code>false</code> if the {@link DetailCode} is null or empty.
 	 * 
 	 * @param dc the {@link DetailCode}
-	 * @return <code>true</code> if the {@link DetailCode} is null or empty.
+	 * @return <code>false</code> if the {@link DetailCode} is null or empty.
 	 */
 	public boolean hasDetailCode(DetailCode dc) {
 		if (dc==null)
 			return false;
+		
+		if (dc.getLines().isEmpty() && dc.isUsed())
+			return true;
 		
 		for (String cmd : dc.getLines()) {
 			if (!cmd.isEmpty())
@@ -1030,6 +1033,36 @@ public class FSMHelpers extends BaseHelpers {
 	}
 
 	/**
+	 * <code>true</code> if the transition or one of its refinements has action code
+	 * as determined by {@link #hasDetailCode(DetailCode)}.
+	 * 
+	 * @param trans the transition
+	 * @param mc the current model class
+	 * @return <code>true</code> if the transition or one of its refined transitions has action code
+	 */
+	public boolean hasActionCode(Transition trans, ModelComponent mc) {
+		
+		ModelComponent baseMC = getModelComponent(trans);
+		
+		while (mc!=null) {
+			if (mc==baseMC) {
+				return hasDetailCode((trans.getAction()));
+			}
+			
+			if (mc.getStateMachine()!=null)
+				for (RefinedTransition rt : mc.getStateMachine().getRefinedTransitions()) {
+					if (rt.getTarget()==trans)
+						if (hasDetailCode((rt.getAction())))
+							return true;
+				}
+			
+			mc = mc.getBase();
+		}
+		
+		return false;
+	}
+
+	/**
 	 * Returns the recursive base class code of a transition.
 	 * 
 	 * @param trans the transition
@@ -1040,7 +1073,7 @@ public class FSMHelpers extends BaseHelpers {
 	public String getInheritedActionCode(Transition trans, ModelComponent mc) {
 		return getActionCode(trans, mc, false);
 	}
-
+	
 	/**
 	 * Returns the complete action code including base class code of a {@link Transition}.
 	 * 
