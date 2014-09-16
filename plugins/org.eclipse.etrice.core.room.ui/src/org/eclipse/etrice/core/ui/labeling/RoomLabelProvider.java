@@ -16,13 +16,10 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.etrice.core.common.base.AnnotationAttribute;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Import;
-import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider;
 import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
-import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
-import org.eclipse.etrice.core.fsm.fSM.SimpleState;
-import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.ui.labeling.FSMLabelProvider;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
@@ -61,7 +58,7 @@ import com.google.inject.Inject;
  * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class RoomLabelProvider extends BaseLabelProvider {
+public class RoomLabelProvider extends FSMLabelProvider {
 
 	@Inject
 	private RoomHelpers roomHelpers;
@@ -139,14 +136,6 @@ public class RoomLabelProvider extends BaseLabelProvider {
 
 	String image(SubSystemRef ar) {
 		return "SubSystemRef.gif";
-	}
-
-	String image(SimpleState state) {
-		return "State.gif";
-	}
-
-	String image(RefinedState state) {
-		return "RefinedState.gif";
 	}
 	
 	String image(ServiceImplementation svc) {
@@ -340,10 +329,6 @@ public class RoomLabelProvider extends BaseLabelProvider {
 			signature = m.getData().getName()+":"+m.getData().getRefType().getType().getName();
 		signature = "("+signature+")";
 		return m.getName()+signature;
-	}
-	
-	String text(State s) {
-		return s.getName();
 	}
 
 	String text(ActorInstanceMapping aim) {

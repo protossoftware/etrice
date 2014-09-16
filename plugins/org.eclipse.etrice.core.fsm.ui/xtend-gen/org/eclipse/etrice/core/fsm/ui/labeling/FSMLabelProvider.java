@@ -4,8 +4,16 @@
 package org.eclipse.etrice.core.fsm.ui.labeling;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.SimpleState;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.Trigger;
 
 /**
  * Provides labels for a EObjects.
@@ -13,9 +21,42 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
  * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
  */
 @SuppressWarnings("all")
-public class FSMLabelProvider extends DefaultEObjectLabelProvider {
+public class FSMLabelProvider extends BaseLabelProvider {
   @Inject
   public FSMLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
+  }
+  
+  public String image(final SimpleState state) {
+    return "State.gif";
+  }
+  
+  public String image(final RefinedState state) {
+    return "RefinedState.gif";
+  }
+  
+  public String text(final State s) {
+    String _name = s.getName();
+    return ("state " + _name);
+  }
+  
+  public String text(final Transition trans) {
+    String _name = trans.getName();
+    return ("transition " + _name);
+  }
+  
+  public String text(final Trigger tr) {
+    return "trigger";
+  }
+  
+  public String text(final StateGraph sm) {
+    String _xifexpression = null;
+    EObject _eContainer = sm.eContainer();
+    if ((_eContainer instanceof ModelComponent)) {
+      _xifexpression = "state machine";
+    } else {
+      _xifexpression = "state graph";
+    }
+    return _xifexpression;
   }
 }

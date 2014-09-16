@@ -4,26 +4,52 @@
 package org.eclipse.etrice.core.fsm.ui.labeling
 
 import com.google.inject.Inject
+import org.eclipse.etrice.core.fsm.fSM.SimpleState
+import org.eclipse.etrice.core.fsm.fSM.RefinedState
+import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.common.ui.labeling.BaseLabelProvider
+import org.eclipse.etrice.core.fsm.fSM.StateGraph
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
+import org.eclipse.etrice.core.fsm.fSM.Transition
+import org.eclipse.etrice.core.fsm.fSM.Trigger
 
 /**
  * Provides labels for a EObjects.
  * 
  * see http://www.eclipse.org/Xtext/documentation.html#labelProvider
  */
-class FSMLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider {
+class FSMLabelProvider extends BaseLabelProvider {
 
 	@Inject
 	new(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-	// Labels and icons can be computed like this:
+
+	def String image(SimpleState state) {
+		"State.gif"
+	}
+
+	def String image(RefinedState state) {
+		"RefinedState.gif"
+	}
 	
-//	def text(Greeting ele) {
-//		'A greeting to ' + ele.name
-//	}
-//
-//	def image(Greeting ele) {
-//		'Greeting.gif'
-//	}
+	def String text(State s) {
+		"state " + s.name
+	}
+	
+	def String text(Transition trans) {
+		"transition " + trans.name
+	}
+	
+	def String text(Trigger tr) {
+		"trigger"
+	}
+	
+	def String text(StateGraph sm) {
+		if (sm.eContainer instanceof ModelComponent)
+			"state machine"
+		else
+			"state graph"
+	}
 }
