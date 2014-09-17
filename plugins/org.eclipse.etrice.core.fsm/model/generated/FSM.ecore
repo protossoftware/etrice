@@ -78,7 +78,7 @@
         <details key="body" value="return (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedState%>)? (((RefinedState)this).getTarget()==null? &quot;&quot;:((RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xA;"/>
@@ -180,7 +180,7 @@
         <details key="documentation" value="&lt;br>By this name the choice point is referred to in the model.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xA;"/>
@@ -202,7 +202,7 @@
         <details key="documentation" value="&lt;br>This is the target node of the transition.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xA;"/>
@@ -283,7 +283,7 @@
         <details key="documentation" value="&lt;br>This is the referenced transition in the base class state machine.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xA;"/>
