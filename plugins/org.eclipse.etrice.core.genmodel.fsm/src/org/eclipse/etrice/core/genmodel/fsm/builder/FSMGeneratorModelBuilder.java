@@ -13,10 +13,10 @@
 package org.eclipse.etrice.core.genmodel.fsm.builder;
 
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenFactory;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -25,14 +25,14 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenFactory;
 public class FSMGeneratorModelBuilder {
 
 	private boolean debug = false;
-	private NullLogger logger;
-	private NullDiagnostician diagnostician;
+	private ILogger logger;
+	private IDiagnostician diagnostician;
 
 	/**
 	 * @param nullLogger
 	 * @param diagnostician
 	 */
-	public FSMGeneratorModelBuilder(NullLogger logger, NullDiagnostician diagnostician) {
+	public FSMGeneratorModelBuilder(ILogger logger, IDiagnostician diagnostician) {
 		this.logger = logger;
 		this.diagnostician = diagnostician;
 	}
