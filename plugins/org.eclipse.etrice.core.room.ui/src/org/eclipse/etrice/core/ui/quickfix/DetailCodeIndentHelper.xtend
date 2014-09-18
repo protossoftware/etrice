@@ -31,10 +31,10 @@ class DetailCodeIndentHelper {
 		editorLines.forEach [ line, lineCount |
 			var front = if(lineCount != 0) editorIndent + mark
 			var indentCount = line.countIndent - minIndent
-			var indent = if (lineCount != 0 && indentCount > 0) '''Â«FOR i : (1 .. indentCount)Â»	Â«ENDFORÂ»''' // \t
+			var indent = if (lineCount != 0 && indentCount > 0) '''«FOR i : (1 .. indentCount)»	«ENDFOR»''' // \t
 			var noneWSLine = Strings::removeLeadingWhitespace(line)
 			var end = if(lineCount != editorLines.size - 1) mark
-			var newEditorLine = '''Â«frontÂ»Â«indentÂ»Â«noneWSLineÂ»Â«endÂ»'''
+			var newEditorLine = '''«front»«indent»«noneWSLine»«end»'''
 			newEditorLines.add(newEditorLine)
 		]
 
