@@ -466,7 +466,7 @@ public class FSMHelpers extends BaseHelpers {
 	 */
 	private DetailCode getInheritedCode(RefinedState rs, EReference code, boolean addFront) {
 		DetailCode result = FSMFactory.eINSTANCE.createDetailCode();
-		result.setUsed(true);
+		boolean used = false;
 		State s = rs.getTarget();
 		while (s!=null) {
 			DetailCode dc = (DetailCode) s.eGet(code);
@@ -477,11 +477,14 @@ public class FSMHelpers extends BaseHelpers {
 					result.getLines().addAll(dc.getLines());
 				
 			}
+			used = hasDetailCode(dc);
+			
 			if (s instanceof RefinedState)
 				s = ((RefinedState) s).getTarget();
 			else
 				break;
 		}
+		result.setUsed(used);
 		return result;
 	}
 
