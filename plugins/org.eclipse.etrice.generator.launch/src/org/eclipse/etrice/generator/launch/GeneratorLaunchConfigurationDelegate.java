@@ -196,7 +196,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		if (configuration.getAttribute(GeneratorConfigTab.VERBOSE, false)) {
 			argString.append(" "+AbstractGenerator.OPTION_VERBOSE_RT);
 		}
-		if (!configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, false)) {
+		if (!configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, true)) {
 			argString.append(" "+AbstractGenerator.OPTION_NOTRANSLATE);
 		}
 		
