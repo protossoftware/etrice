@@ -70,6 +70,8 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
 		super(shell, edit?"Edit State":"View State", ac);
 		this.state = s;
+
+		Activator.getDefault().getInjector().injectMembers(this);
 		
 		inherited = SupportUtil.getInstance().getRoomHelpers().getActorClass(s)!=ac;
 	}
