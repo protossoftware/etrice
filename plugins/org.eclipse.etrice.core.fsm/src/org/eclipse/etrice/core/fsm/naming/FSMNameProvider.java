@@ -197,6 +197,9 @@ public class FSMNameProvider {
 	 * @return the name of the message
 	 */
 	public String getMessageName(EObject obj) {
+		if (obj.eIsProxy())
+			return "";
+		
 		EStructuralFeature name = obj.eClass().getEStructuralFeature("name");
 		assert(name!=null) : "org.eclipse.etrice.core.fsm.naming.FSMNameProvider.getMessageName(EObject)"
 				+ " should be called with an abstract message which has to have a name attribute";
