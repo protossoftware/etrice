@@ -109,10 +109,10 @@ RoomModel room.basic.service.timing {
 			}
 			"}
 			Operation isTimeGreater(t1:targetTime ref, t2 :targetTime ref):boolean{"
-				if (t1->sec > t2->sec) return TRUE;
-				if (t1->sec < t2->sec) return FALSE;
-				if (t1->nSec > t2->nSec) return TRUE;
-				return FALSE;
+				if (t1->sec > t2->sec) return ET_TRUE;
+				if (t1->sec < t2->sec) return ET_FALSE;
+				if (t1->nSec > t2->nSec) return ET_TRUE;
+				return ET_FALSE;
 			"}
 			
 			Operation addTime(t1:targetTime ref, t2:targetTime ref){"

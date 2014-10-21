@@ -273,9 +273,9 @@ public class CExtensions implements ILanguageExtension {
   public String booleanConstant(final boolean b) {
     String _xifexpression = null;
     if (b) {
-      _xifexpression = "TRUE";
+      _xifexpression = "ET_TRUE";
     } else {
-      _xifexpression = "FALSE";
+      _xifexpression = "ET_FALSE";
     }
     return _xifexpression;
   }

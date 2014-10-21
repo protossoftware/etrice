@@ -747,7 +747,7 @@ public class NodeGen {
       _builder.append("fflush(stdout);");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("while (TRUE) {");
+      _builder.append("while (ET_TRUE) {");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("char line[64];");
@@ -2401,7 +2401,7 @@ public class NodeGen {
           _builder.append("if (msg->evtID == etSystemProtocol_IN_terminate)");
           _builder.newLine();
           _builder.append("\t\t\t\t");
-          _builder.append("return FALSE;");
+          _builder.append("return ET_FALSE;");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("break;");
@@ -2825,7 +2825,7 @@ public class NodeGen {
           _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("return TRUE;");
+          _builder.append("return ET_TRUE;");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();

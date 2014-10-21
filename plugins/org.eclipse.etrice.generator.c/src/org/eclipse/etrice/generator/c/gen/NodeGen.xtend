@@ -282,7 +282,7 @@ class NodeGen {
 			else {
 				printf("type quit to exit\n");
 				fflush(stdout);
-				while (TRUE) {
+				while (ET_TRUE) {
 					char line[64];
 		
 					if (fgets(line, 64, stdin) != NULL) {
@@ -716,7 +716,7 @@ class NodeGen {
 							else
 						«ENDIF»
 						if (msg->evtID == etSystemProtocol_IN_terminate)
-							return FALSE;
+							return ET_FALSE;
 						break;
 					«FOR ai : dispatchedInstances»
 						
@@ -779,7 +779,7 @@ class NodeGen {
 						break;
 				}
 				ET_MSC_LOGGER_SYNC_EXIT
-				return TRUE;
+				return ET_TRUE;
 			}
 		«ENDFOR»
 		'''

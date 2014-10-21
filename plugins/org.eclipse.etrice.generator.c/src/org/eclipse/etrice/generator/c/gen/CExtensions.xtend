@@ -169,7 +169,7 @@ class CExtensions implements ILanguageExtension {
 	}
 
 	override String booleanConstant(boolean b) {
-		if (b) "TRUE" else "FALSE"
+		if (b) "ET_TRUE" else "ET_FALSE"
 	}
 	
 	override String pointerLiteral() { "*" }

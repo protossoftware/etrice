@@ -73,12 +73,12 @@ class NodeRunnerGen {
 		 */
 		
 		int main(int argc, char** argv) {
-			etBool runAsTest = FALSE;
+			etBool runAsTest = ET_FALSE;
 		
 			if (argc>1 && strcmp(argv[1], "-headless")==0)
-				runAsTest = TRUE;
+				runAsTest = ET_TRUE;
 			if (argc>1 && strcmp(argv[1], "-run_as_test")==0)
-				runAsTest = TRUE;
+				runAsTest = ET_TRUE;
 		
 			etUserEntry(); /* platform specific */
 			
