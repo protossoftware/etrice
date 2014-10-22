@@ -45,11 +45,11 @@ typedef float float32;
 /* boolean datatypes and values */
 typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
 typedef bool boolean;
-#ifndef TRUE
-	#define TRUE 1
+#ifndef ET_TRUE
+	#define ET_TRUE 1
 #endif
-#ifndef FALSE
-	#define FALSE 0
+#ifndef ET_FALSE
+	#define ET_FALSE 0
 #endif
 
 /*
