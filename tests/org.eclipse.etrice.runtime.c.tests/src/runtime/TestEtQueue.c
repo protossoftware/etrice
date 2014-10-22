@@ -45,15 +45,15 @@ static void TestEtQueue_test(etInt16 id){
 			etTestObject* obj = (etTestObject*) etQueue_pop(&queue);
 			// EXPECTS are hidden to avoid too many testcases in log
 			if (obj == NULL){
-				EXPECT_FALSE(id, "obj == NULL", TRUE);
+				EXPECT_FALSE(id, "obj == NULL", ET_TRUE);
 				break;
 			}
 			if (2*obj->a != obj->b){
-				EXPECT_FALSE(id, "2*obj->a != obj->b", TRUE);
+				EXPECT_FALSE(id, "2*obj->a != obj->b", ET_TRUE);
 				break;
 			}
 			if (obj->a != i){
-				EXPECT_FALSE(id, "obj->a != i", TRUE);
+				EXPECT_FALSE(id, "obj->a != i", ET_TRUE);
 				break;
 			}
 		}

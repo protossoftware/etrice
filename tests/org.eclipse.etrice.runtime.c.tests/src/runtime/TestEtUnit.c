@@ -22,8 +22,8 @@
 #include "etUnit/etUnit.h"
 
 void TestEtUnit_Expect(etInt16 id){
-	EXPECT_TRUE(id, "EXPECT_TRUE", TRUE);
-	EXPECT_FALSE(id, "EXPECT_FALSE", FALSE);
+	EXPECT_TRUE(id, "EXPECT_TRUE", ET_TRUE);
+	EXPECT_FALSE(id, "EXPECT_FALSE", ET_FALSE);
 
 	/* signed integer values */
 	EXPECT_EQUAL_INT8(id, "EXPECT_EQUAL_INT8", -123, -123);

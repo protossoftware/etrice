@@ -75,15 +75,15 @@ void TestEtMessageQueue_testMassiveMessaging(etInt16 id){
 			etMessage* msg = etMessageQueue_pop(&queue1);
 			// EXPECTS are hidden to avoid too many testcases in log
 			if (msg == NULL){
-				EXPECT_FALSE(id, "msg == NULL", TRUE);
+				EXPECT_FALSE(id, "msg == NULL", ET_TRUE);
 				break;
 			}
 			if (msg->address != msg->evtID){
-				EXPECT_FALSE(id, "msg->address != msg->evtID", TRUE);
+				EXPECT_FALSE(id, "msg->address != msg->evtID", ET_TRUE);
 				break;
 			}
 			if (msg->address != i){
-				EXPECT_FALSE(id, "msg->address != i", TRUE);
+				EXPECT_FALSE(id, "msg->address != i", ET_TRUE);
 				break;
 			}
 		}

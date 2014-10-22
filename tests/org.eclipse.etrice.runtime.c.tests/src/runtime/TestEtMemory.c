@@ -45,7 +45,7 @@ static void TestEtMemory_testFixedSize(etInt16 id) {
 	for (i=0; i<TEST_BLOCKS; ++i) {
 		objects[i] = mem->alloc(mem, TEST_BLOCK_SIZE);
 		if (objects[i]==NULL)
-			EXPECT_TRUE(id, "objects[i]==NULL", FALSE);
+			EXPECT_TRUE(id, "objects[i]==NULL", ET_FALSE);
 
 		memset(objects[i], i%4, TEST_BLOCK_SIZE);
 	}
@@ -55,7 +55,7 @@ static void TestEtMemory_testFixedSize(etInt16 id) {
 	for (i=0; i<TEST_BLOCKS/2; ++i) {
 		objects[i*2] = mem->alloc(mem, TEST_BLOCK_SIZE);
 		if (objects[i*2]==NULL)
-			EXPECT_TRUE(id, "objects[i*2]==NULL", FALSE);
+			EXPECT_TRUE(id, "objects[i*2]==NULL", ET_FALSE);
 	}
 }
 
@@ -66,7 +66,7 @@ static void local_alloc(etInt16 id, etMemory* mem, etUInt8* objects[NSIZES][NOBJ
 		for (i=0; i<NOBJ; ++i) {
 			objects[kind][i] = mem->alloc(mem, sizes[kind]);
 			if (objects[kind][i]==NULL)
-				EXPECT_TRUE(id, "objects[kind][i]==NULL", FALSE);
+				EXPECT_TRUE(id, "objects[kind][i]==NULL", ET_FALSE);
 		}
 	}
 }
