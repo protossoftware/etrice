@@ -63,7 +63,7 @@ static void readThreadFunc(void* threadData) {
 	int len, retval;
 	int8* buffer = (self->data.bufferProvider)(self->data.userData, &len);
 
-	while (TRUE) {
+	while (ET_TRUE) {
 		retval = recv(self->socket, buffer, len, 0);
 		if (retval<=0) {
 			/* TODO: call  WSAGetLastError and do error handling */

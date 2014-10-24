@@ -5,7 +5,7 @@
 
 static etTargetTime_t targetTime;
 static etTargetTime_t lastTargetTime;
-static volatile etBool etTimer_executeFlag = FALSE;
+static volatile etBool etTimer_executeFlag = ET_FALSE;
 
 void etTimer_init(void){
 	targetTime.nSec=0;
@@ -15,12 +15,12 @@ void etTimer_init(void){
 }
 
 etBool etTimer_executeNeeded(void){
-	if (etTimer_executeFlag == TRUE){
-		etTimer_executeFlag = FALSE;
-		return TRUE;
+	if (etTimer_executeFlag == ET_TRUE){
+		etTimer_executeFlag = ET_FALSE;
+		return ET_TRUE;
 	}
 	else {
-		return FALSE;
+		return ET_FALSE;
 	}
 }
 
@@ -51,7 +51,7 @@ void wdt_isr(void) {
 // this interrupt will be called every 15,625ms
 
 	static unsigned char secCounter = 0;
-	etTimer_executeFlag = TRUE;
+	etTimer_executeFlag = ET_TRUE;
 
 	targetTime.nSec += 15625000L;
 

@@ -17,10 +17,10 @@
 static etSema terminateSemaphore;
 
 etSema* etRuntime_getTerminateSemaphore() {
-	static etBool initialized = FALSE;
+	static etBool initialized = ET_FALSE;
 
 	if (!initialized) {
-		initialized = TRUE;
+		initialized = ET_TRUE;
 		etSema_construct(&terminateSemaphore);
 	}
 

@@ -60,17 +60,17 @@ void etSema_wakeup(etSema* self){
 void etSema_waitForWakeup(etSema* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "waitForWakeup")
 	{
-		int again = FALSE;
+		int again = ET_FALSE;
 
 #ifdef DEBUG_SEMA
 		printf("etSema_waitForWakeup: %p wait %ld\n", (void*)self, pthread_self()); fflush(stdout);
 #endif
 		do {
 			errno = 0;
-			again = FALSE;
+			again = ET_FALSE;
 			if (sem_wait(&(self->osData))==-1) {
 				if (errno==EINTR) {
-					again = TRUE;
+					again = ET_TRUE;
 #ifdef DEBUG_SEMA
 					printf("etSema_waitForWakeup: %p interrupted - again %ld (val=%d)\n", (void*)self, pthread_self(), sval); fflush(stdout);
 #endif

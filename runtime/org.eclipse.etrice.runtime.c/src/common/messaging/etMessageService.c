@@ -168,12 +168,12 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 static void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
 	{
-		etBool cont = TRUE;
+		etBool cont = ET_TRUE;
 		while (cont){
 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
 				etMessage* msg = etMessageService_popMessage(self);
 				if (!self->msgDispatcher(msg))
-					cont = FALSE;
+					cont = ET_FALSE;
 				etMessageService_returnMessageBuffer(self, msg);
 			}
 			if (cont)

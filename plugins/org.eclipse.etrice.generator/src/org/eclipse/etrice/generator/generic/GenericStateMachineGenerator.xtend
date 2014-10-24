@@ -431,7 +431,7 @@ class GenericStateMachineGenerator {
 					chain__et = «chain.genChainId»;
 					catching_state__et = «chain.stateContext.genStateId»;
 					«IF chain.isHandler() && usesHdlr»
-						is_handler__et = TRUE;
+						is_handler__et = ET_TRUE;
 					«ENDIF»
 				}
 				«IF tr!=transitions.last»

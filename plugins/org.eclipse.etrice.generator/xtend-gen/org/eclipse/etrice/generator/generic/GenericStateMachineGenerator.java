@@ -1338,7 +1338,7 @@ public class GenericStateMachineGenerator {
           }
           if (_and) {
             _builder.append("\t");
-            _builder.append("is_handler__et = TRUE;");
+            _builder.append("is_handler__et = ET_TRUE;");
             _builder.newLine();
           }
         }

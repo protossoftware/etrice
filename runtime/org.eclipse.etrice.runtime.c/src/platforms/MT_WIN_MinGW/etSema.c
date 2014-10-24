@@ -24,7 +24,7 @@
 
 void etSema_construct(etSema* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "construct")
-	self->osData = CreateEvent( NULL, FALSE, FALSE, NULL );
+	self->osData = CreateEvent( NULL, ET_FALSE, ET_FALSE, NULL );
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 void etSema_destruct(etSema* self){

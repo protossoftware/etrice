@@ -46,7 +46,7 @@
 static etTimer* timers = NULL;
 
 /* control initialization */
-static etBool timer_initialized = FALSE;
+static etBool timer_initialized = ET_FALSE;
 
 /* thread calling the timer functions */
 #define TIMER_THREAD_STACK_SIZE		1024
@@ -61,10 +61,10 @@ static etSema timer_sema;
 static etMutex timer_mutex;
 
 static void timerThreadFunction(void* data) {
-	while (TRUE) {
+	while (ET_TRUE) {
 		etTimer* it;
 		int idx;
-		int signaled = FALSE;
+		int signaled = ET_FALSE;
 
 #ifdef DEBUG_TIMER
 		printf("timerThreadFunction: waiting\n"); fflush(stdout);
@@ -81,9 +81,9 @@ static void timerThreadFunction(void* data) {
 #ifdef DEBUG_TIMER
 				printf("timerThreadFunction: signaled %d, calling user fct %p\n", idx, (void*)it->timerFunction); fflush(stdout);
 #endif
-				it->osTimerData.signaled = FALSE;
+				it->osTimerData.signaled = ET_FALSE;
 				it->timerFunction(it->timerFunctionData);
-				signaled = TRUE;
+				signaled = ET_TRUE;
 			}
 		}
 		etMutex_leave(&timer_mutex);
@@ -99,7 +99,7 @@ static void timerHandler(int sig, siginfo_t *si, void *uc) {
 	int sval = 0;
 
 	etMutex_enter(&timer_mutex);
-	timer->osTimerData.signaled = TRUE;
+	timer->osTimerData.signaled = ET_TRUE;
 	etMutex_leave(&timer_mutex);
 
 	sem_getvalue(&(timer_sema.osData), &sval);
@@ -116,7 +116,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 		self->timerInterval.nSec = timerInterval->nSec;
 		self->timerFunction = timerFunction;
 		self->timerFunctionData = timerFunctionData;
-		self->osTimerData.signaled = FALSE;
+		self->osTimerData.signaled = ET_FALSE;
 
 		if (!timer_initialized) {
 			/*
@@ -125,7 +125,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			 */
 			struct sigaction sa;
 
-			timer_initialized = TRUE;
+			timer_initialized = ET_TRUE;
 
 			/* initialize our mutex and semaphore */
 			etMutex_construct(&timer_mutex);

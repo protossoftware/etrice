@@ -14,5 +14,5 @@
 
 etBool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
 	/* TODO */
-	return FALSE;
+	return ET_FALSE;
 }
