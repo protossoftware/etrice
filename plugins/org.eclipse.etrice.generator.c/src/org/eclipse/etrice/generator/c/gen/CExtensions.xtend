@@ -212,7 +212,7 @@ class CExtensions implements ILanguageExtension {
 					'''{ «FOR v: singleValues SEPARATOR ', '»«toValueLiteral(type, v.trim)»«ENDFOR» }'''.toString
 				}
 			case "boolean":
-				value.toUpperCase
+				if (value.equals("true")) "ET_TRUE" else "ET_FALSE"
 			default:
 				value	
 		}

@@ -391,7 +391,14 @@ public class CExtensions implements ILanguageExtension {
     if (!_matched) {
       if (Objects.equal(_targetName, "boolean")) {
         _matched=true;
-        _switchResult = value.toUpperCase();
+        String _xifexpression = null;
+        boolean _equals_3 = value.equals("true");
+        if (_equals_3) {
+          _xifexpression = "ET_TRUE";
+        } else {
+          _xifexpression = "ET_FALSE";
+        }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {
