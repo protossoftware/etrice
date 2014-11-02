@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
@@ -108,6 +109,22 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.ArrayList, java.lang.String)
+	 */
+	@Override
+	public String getInterfaceItemOperationText(AbstractInterfaceItem item,
+			PortOperation op, ArrayList<String> args, String orig) {
+		
+		StringBuilder argtext = new StringBuilder();
+		for (String arg : args) {
+			argtext.append(", "+arg);
+		}
+		String argtext2 = argtext.length()==0? "" : argtext.substring(2);
+
+		return item.getName()+"_"+op.getName()+"("+argtext2+")";
+	}
+	
 	@Override
 	public boolean translateTags() {
 		return true;

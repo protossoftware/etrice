@@ -379,7 +379,7 @@ public class RoomHelpers extends FSMHelpers {
 	}
 	
 	/**
-	 * Returns a list of all {@link Message}s of one direction a {@link ProtocolClass}
+	 * Returns a list of all {@link Message}s of one direction of a {@link ProtocolClass}
 	 * including base classes.
 	 * 
 	 * @param pc a {@link ProtocolClass}
@@ -395,6 +395,33 @@ public class RoomHelpers extends FSMHelpers {
 				result.addAll(0, pc.getIncomingMessages());
 			else
 				result.addAll(0, pc.getOutgoingMessages());
+			
+			pc = pc.getBase();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * returns a list of {@link PortOperation}s of a {@link ProtocolClass} for one direction
+	 * including base classes.
+	 *  
+	 * @param pc a {@link ProtocolClass}
+	 * @param incoming if <code>true</code> the operations of the regular port are returned, else those of the conjugate
+	 * @return a list of all {@link PortOperation}s for one direction
+	 */
+	public List<PortOperation> getAllOperations(ProtocolClass pc, boolean incoming) {
+		ArrayList<PortOperation> result = new ArrayList<PortOperation>();
+		
+		while (pc!=null) {
+			if (incoming) {
+				if (pc.getRegular()!=null)
+					result.addAll(0, pc.getRegular().getOperations());
+			}
+			else {
+				if (pc.getConjugated()!=null)
+					result.addAll(0, pc.getConjugated().getOperations());
+			}
 			
 			pc = pc.getBase();
 		}

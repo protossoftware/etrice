@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.fsm.base.FSMDetailCodeTranslator;
@@ -181,6 +182,8 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 		ITranslationProvider prov = (ITranslationProvider) provider;
 		String translated = null;
 		
+		// try message value (for data driven port)
+		int start = curr.pos;
 		EObject msg = getMessage(text, curr, item, false);
 		if (msg!=null) {
 			if (curr.pos>=text.length() || text.charAt(curr.pos)!='(') {
@@ -189,7 +192,54 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 			}
 		}
 		
+		if (translated==null) {
+			// try port operation
+			
+			curr.pos = start;
+			if (item instanceof InterfaceItem) {
+				PortOperation operation = getPortOperation((InterfaceItem)item, text, curr);
+				ArrayList<String> args = getArgs(text, curr);
+				if (argsMatching(operation, args)) {
+					// recursively apply this algorithm to each argument
+					for (int i=0; i<args.size(); ++i) {
+						String transArg = translateText(args.remove(i));
+						args.add(i, transArg);
+					}
+					String orig = text.substring(last, curr.pos);
+					translated = prov.getInterfaceItemOperationText(item, operation, args, orig);
+				}
+			}
+		}
+		
 		return translated;
+	}
+
+	/**
+	 * @param item
+	 * @param text
+	 * @param curr
+	 * @return
+	 */
+	private PortOperation getPortOperation(InterfaceItem item, String text, Position curr) {
+		PortClass portClass = roomHelpers.getPortClass(item);
+		
+		proceedToToken(text, curr);
+
+		if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
+			return null;
+		++curr.pos;
+		
+		proceedToToken(text, curr);
+		
+		PortOperation operation = null;
+		String token = getToken(text, curr);
+		for (PortOperation op : portClass.getOperations()) {
+			if (op.getName().equals(token)) {
+				operation = op;
+				break;
+			}
+		}
+		return operation;
 	}
 	
 	protected String translateEnums(String text) {
@@ -238,6 +288,15 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 		if (msg.getData()==null && args.isEmpty())
 			return true;
 		if (msg.getData()!=null && args.size()==1)
+			return true;
+		
+		return false;
+	}
+	
+	protected boolean argsMatching(PortOperation op, ArrayList<String> args) {
+		if (op.getArguments()==null && args.isEmpty())
+			return true;
+		if (op.getArguments().size()==args.size())
 			return true;
 		
 		return false;

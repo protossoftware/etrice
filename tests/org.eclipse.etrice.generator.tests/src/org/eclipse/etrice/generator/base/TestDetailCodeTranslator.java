@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
@@ -140,6 +141,15 @@ public class TestDetailCodeTranslator {
 		public String getEnumText(EnumLiteral literal) {
 			EnumerationType et = (EnumerationType) literal.eContainer();
 			return ">"+et.getName()+"_"+literal.getName()+"<";
+		}
+
+		/* (non-Javadoc)
+		 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.ArrayList, java.lang.String)
+		 */
+		@Override
+		public String getInterfaceItemOperationText(AbstractInterfaceItem item,
+				PortOperation op, ArrayList<String> args, String orig) {
+			return null;
 		}
 	}
 

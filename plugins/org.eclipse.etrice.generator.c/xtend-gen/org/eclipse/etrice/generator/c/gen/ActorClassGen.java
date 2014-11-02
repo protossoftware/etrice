@@ -31,6 +31,8 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
+import org.eclipse.etrice.core.room.PortClass;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
@@ -665,6 +667,25 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_3);
+      List<Port> _allEndPorts_3 = this._roomHelpers.getAllEndPorts(ac);
+      final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
+        public Boolean apply(final Port p) {
+          boolean _and = false;
+          PortClass _portClass = ActorClassGen.this._roomHelpers.getPortClass(p);
+          boolean _notEquals = (!Objects.equal(_portClass, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            PortClass _portClass_1 = ActorClassGen.this._roomHelpers.getPortClass(p);
+            EList<PortOperation> _operations = _portClass_1.getOperations();
+            int _size = _operations.size();
+            boolean _greaterThan = (_size > 0);
+            _and = _greaterThan;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final Iterable<Port> portsWithOperations = IterableExtensions.<Port>filter(_allEndPorts_3, _function_4);
       EObject _eContainer = ac.eContainer();
       String _name = ((RoomModel) _eContainer).getName();
       String _replaceAll = _name.replaceAll("\\.", "_");
@@ -713,13 +734,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* simple event ports */");
       _builder.newLine();
       {
-        final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
+        final Function1<Port, Boolean> _function_5 = new Function1<Port, Boolean>() {
           public Boolean apply(final Port it) {
             int _multiplicity = it.getMultiplicity();
             return Boolean.valueOf((_multiplicity == 1));
           }
         };
-        Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_4);
+        Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_5);
         for(final Port ep : _filter) {
           {
             List<Message> _outgoing = this._roomHelpers.getOutgoing(ep);
@@ -1111,6 +1132,52 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_name_39, "");
           _builder.append(")");
           _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
+      _builder.append("/* port operations */");
+      _builder.newLine();
+      {
+        for(final Port p : portsWithOperations) {
+          {
+            PortClass _portClass = this._roomHelpers.getPortClass(p);
+            EList<PortOperation> _operations = _portClass.getOperations();
+            for(final PortOperation op_1 : _operations) {
+              final CharSequence args_1 = this.argList(op_1);
+              _builder.newLineIfNotEmpty();
+              _builder.append("#define ");
+              String _name_40 = p.getName();
+              _builder.append(_name_40, "");
+              _builder.append("_");
+              String _name_41 = op_1.getName();
+              _builder.append(_name_41, "");
+              _builder.append("(");
+              _builder.append(args_1, "");
+              _builder.append(") ");
+              String _portClassName_8 = this._roomExtensions.getPortClassName(p);
+              _builder.append(_portClassName_8, "");
+              _builder.append("_");
+              String _name_42 = op_1.getName();
+              _builder.append(_name_42, "");
+              _builder.append("((");
+              String _portClassName_9 = this._roomExtensions.getPortClassName(p);
+              _builder.append(_portClassName_9, "");
+              _builder.append("*)&self->constData->");
+              String _name_43 = p.getName();
+              _builder.append(_name_43, "");
+              {
+                EList<VarDecl> _arguments_1 = op_1.getArguments();
+                boolean _isEmpty_2 = _arguments_1.isEmpty();
+                boolean _not_2 = (!_isEmpty_2);
+                if (_not_2) {
+                  _builder.append(", ");
+                  _builder.append(args_1, "");
+                }
+              }
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _builder.newLine();

@@ -14,11 +14,13 @@ package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
+import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.generator.fsm.base.IFSMTranslationProvider;
 
 /**
@@ -102,4 +104,16 @@ public interface ITranslationProvider extends IFSMTranslationProvider {
 	 * @return the translated enumeration literal
 	 */
 	String getEnumText(EnumLiteral literal);
+
+	/**
+	 * yields a call to an operation of an interface item
+	 * 
+	 * @param item the interface item
+	 * @param op the port class operation
+	 * @param args the argument list
+	 * @param orig the original test
+	 * @return the translation
+	 */
+	String getInterfaceItemOperationText(AbstractInterfaceItem item,
+			PortOperation op, ArrayList<String> args, String orig);
 }

@@ -500,8 +500,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		case EVENT_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.EVENT_DRIVEN)
 				error("super protocol has to have same communication type", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
-			if (roomHelpers.getAllMessages(pc, true).isEmpty() && roomHelpers.getAllMessages(pc, false).isEmpty())
-				error("at least one message (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
+			if (roomHelpers.getAllMessages(pc, true).isEmpty()
+					&& roomHelpers.getAllMessages(pc, false).isEmpty()
+					&& roomHelpers.getAllOperations(pc, true).isEmpty()
+					&& roomHelpers.getAllOperations(pc, false).isEmpty())
+				error("at least one message/port operation (incoming or outgoing) must be defined", RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES);
 			break;
 		case SYNCHRONOUS:
 			error("synchronous communication type not supported yet", RoomPackage.Literals.PROTOCOL_CLASS__COMM_TYPE);
