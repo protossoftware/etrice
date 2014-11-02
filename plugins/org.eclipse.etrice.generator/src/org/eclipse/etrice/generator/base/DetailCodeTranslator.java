@@ -225,22 +225,25 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 	private PortOperation getPortOperation(InterfaceItem item, String text, Position curr) {
 		PortClass portClass = roomHelpers.getPortClass(item);
 		
-		proceedToToken(text, curr);
-
-		if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
-			return null;
-		++curr.pos;
-		
-		proceedToToken(text, curr);
-		
 		PortOperation operation = null;
-		String token = getToken(text, curr);
-		for (PortOperation op : portClass.getOperations()) {
-			if (op.getName().equals(token)) {
-				operation = op;
-				break;
+		if (portClass!=null) {
+			proceedToToken(text, curr);
+			
+			if (curr.pos>=text.length() || text.charAt(curr.pos)!='.')
+				return null;
+			++curr.pos;
+			
+			proceedToToken(text, curr);
+			
+			String token = getToken(text, curr);
+			for (PortOperation op : portClass.getOperations()) {
+				if (op.getName().equals(token)) {
+					operation = op;
+					break;
+				}
 			}
 		}
+		
 		return operation;
 	}
 	
