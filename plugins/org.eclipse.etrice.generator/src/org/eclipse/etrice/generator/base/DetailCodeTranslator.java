@@ -198,15 +198,17 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 			curr.pos = start;
 			if (item instanceof InterfaceItem) {
 				PortOperation operation = getPortOperation((InterfaceItem)item, text, curr);
-				ArrayList<String> args = getArgs(text, curr);
-				if (argsMatching(operation, args)) {
-					// recursively apply this algorithm to each argument
-					for (int i=0; i<args.size(); ++i) {
-						String transArg = translateText(args.remove(i));
-						args.add(i, transArg);
+				if (operation!=null) {
+					ArrayList<String> args = getArgs(text, curr);
+					if (argsMatching(operation, args)) {
+						// recursively apply this algorithm to each argument
+						for (int i=0; i<args.size(); ++i) {
+							String transArg = translateText(args.remove(i));
+							args.add(i, transArg);
+						}
+						String orig = text.substring(last, curr.pos);
+						translated = prov.getInterfaceItemOperationText(item, operation, args, orig);
 					}
-					String orig = text.substring(last, curr.pos);
-					translated = prov.getInterfaceItemOperationText(item, operation, args, orig);
 				}
 			}
 		}
