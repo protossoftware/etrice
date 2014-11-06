@@ -30,6 +30,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -71,6 +72,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String MSC = "MSC";
 	public static final String VERBOSE = "Verbose";
 	public static final String USE_TRAANSLATION = "UseTranslation";
+	public static final String OVERRIDE_DIRECTORIES = "OverrideDirectories";
+	public static final String SRCGEN_PATH = "SrcgenPath";
+	public static final String INFO_PATH = "InfoPath";
+	public static final String DOC_PATH = "DocPath";
 	
 	private Button libButton;
 	private Button documentationButton;
@@ -81,6 +86,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button mscButton;
 	private Button verboseButton;
 	private Button useTranslationButton;
+	private Button overrideDirectories;
+	private Text srcgenPath;
+	private Text infoPath;
+	private Text docPath;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -155,6 +164,61 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		verboseButton = createCheckButton(mainComposite, "generate instrumentation for verbose output");
 		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		verboseButton.addSelectionListener(new UpdateConfig());
+
+		createSeparator(mainComposite, 2);
+		
+		overrideDirectories = createCheckButton(mainComposite, "override generation directories");
+		overrideDirectories.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		overrideDirectories.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				handleOverrideDirectories();
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				handleOverrideDirectories();
+			}
+			
+		});
+		
+		Label label = new Label(mainComposite, SWT.NONE);
+		label.setText("The directory for &generated code:");
+		srcgenPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
+		srcgenPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		srcgenPath.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				validate();
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
+		
+		label = new Label(mainComposite, SWT.NONE);
+		label.setText("The directory for i&nformation about generated code:");
+		infoPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
+		infoPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		infoPath.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				validate();
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
+		
+		label = new Label(mainComposite, SWT.NONE);
+		label.setText("The directory for generated &documentation:");
+		docPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
+		docPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		docPath.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				validate();
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
 		
 		addFurtherControls(mainComposite);
 	}
@@ -165,13 +229,26 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	protected void addFurtherControls(Composite mainComposite) {
 	}
 
-	/**
-	 * 
-	 */
 	protected void handleSaveGenModelSelected() {
 		boolean save = saveGenModel.getSelection();
 		genModelPath.setEnabled(save);
 		browsePath.setEnabled(save);
+		validate();
+		setDirty(true);
+		updateLaunchConfigurationDialog();
+	}
+
+	protected void handleOverrideDirectories() {
+		boolean override = overrideDirectories.getSelection();
+		srcgenPath.setEnabled(override);
+		infoPath.setEnabled(override);
+		docPath.setEnabled(override);
+		if (!override) {
+			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+			srcgenPath.setText(prefStore.getString(PreferenceConstants.GEN_DIR));
+			infoPath.setText(prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
+			docPath.setText(prefStore.getString(PreferenceConstants.GEN_DOC_DIR));
+		}
 		validate();
 		setDirty(true);
 		updateLaunchConfigurationDialog();
@@ -242,6 +319,25 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 			boolean useTranslation = prefStore.getBoolean(PreferenceConstants.GEN_USE_TRANSLATION);
 			useTranslationButton.setSelection(configuration.getAttribute(USE_TRAANSLATION, useTranslation));
+			
+			boolean override = configuration.getAttribute(OVERRIDE_DIRECTORIES, false);
+			String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
+			String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
+			String docDir = prefStore.getString(PreferenceConstants.GEN_DOC_DIR);
+			overrideDirectories.setSelection(override);
+			srcgenPath.setEnabled(override);
+			infoPath.setEnabled(override);
+			docPath.setEnabled(override);
+			if (override) {
+				srcgenPath.setText(configuration.getAttribute(SRCGEN_PATH, srcgenDir));
+				infoPath.setText(configuration.getAttribute(INFO_PATH, infoDir));
+				docPath.setText(configuration.getAttribute(DOC_PATH, docDir));
+			}
+			else {
+				srcgenPath.setText(srcgenDir);
+				infoPath.setText(infoDir);
+				docPath.setText(docDir);
+			}
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -262,6 +358,14 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(MSC, mscButton.getSelection());
 		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
 		configuration.setAttribute(USE_TRAANSLATION, useTranslationButton.getSelection());
+		
+		boolean override = overrideDirectories.getSelection();
+		configuration.setAttribute(OVERRIDE_DIRECTORIES, override);
+		if (override) {
+			configuration.setAttribute(SRCGEN_PATH, srcgenPath.getText());
+			configuration.setAttribute(INFO_PATH, infoPath.getText());
+			configuration.setAttribute(DOC_PATH, docPath.getText());
+		}
 	}
 
 	/* (non-Javadoc)

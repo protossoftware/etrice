@@ -205,14 +205,23 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" "+AbstractGenerator.OPTION_GEN_INCREMENTAL);
 		}
 		
+		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
+		String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
+		String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
+		String docDir = prefStore.getString(PreferenceConstants.GEN_DOC_DIR);
+		if (override) {
+			srcgenDir = configuration.getAttribute(GeneratorConfigTab.SRCGEN_PATH, srcgenDir);
+			infoDir = configuration.getAttribute(GeneratorConfigTab.INFO_PATH, infoDir);
+			docDir = configuration.getAttribute(GeneratorConfigTab.DOC_PATH, docDir);
+		}
 		argString.append(" "+AbstractGenerator.OPTION_GEN_DIR);
-		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DIR));
+		argString.append(" "+srcgenDir);
 		
 		argString.append(" "+AbstractGenerator.OPTION_GEN_INFO_DIR);
-		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
+		argString.append(" "+infoDir);
 		
 		argString.append(" "+AbstractGenerator.OPTION_GEN_DOC_DIR);
-		argString.append(" "+prefStore.getString(PreferenceConstants.GEN_DOC_DIR));
+		argString.append(" "+docDir);
 	}
 	
 	/**

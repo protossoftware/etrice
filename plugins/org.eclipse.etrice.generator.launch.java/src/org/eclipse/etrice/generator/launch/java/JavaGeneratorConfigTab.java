@@ -47,7 +47,8 @@ public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 	 */
 	@Override
 	protected void addFurtherControls(Composite mainComposite) {
-
+		createSeparator(mainComposite, 2);
+		
 		genPersist = createCheckButton(mainComposite, "generate persistence interface");
 		genPersist.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		genPersist.addSelectionListener(new UpdateConfig());
