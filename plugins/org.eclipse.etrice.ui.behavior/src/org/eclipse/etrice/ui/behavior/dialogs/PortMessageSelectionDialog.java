@@ -123,10 +123,12 @@ public class PortMessageSelectionDialog extends FormDialog implements ISelection
 				}
 				PortClass pcls = roomHelpers.getPortClass(item);
 				if (pcls!=null) {
+					// first add messages that are 'send' messages
 					for (PortOperation op : pcls.getOperations()) {
 						if (op.getSendsMsg()!=null)
 							pairs.add(new OperationItemPair(item, op));
 					}
+					// then add all others
 					for (PortOperation op : pcls.getOperations()) {
 						if (op.getSendsMsg()==null)
 							pairs.add(new OperationItemPair(item, op));
@@ -161,13 +163,7 @@ public class PortMessageSelectionDialog extends FormDialog implements ISelection
 		@Override
 		public boolean hasChildren(Object element) {
 			if (element instanceof InterfaceItem) {
-				InterfaceItem item = (InterfaceItem)element;
-				if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, true).isEmpty())
-					return true;
-				
-				if (SupportUtil.getInstance().getRoomHelpers().getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN)
-					if (!SupportUtil.getInstance().getRoomHelpers().getMessageListDeep(item, false).isEmpty())
-						return true;
+				return !item2pairs.get(element).isEmpty();
 			}
 			
 			return false;
