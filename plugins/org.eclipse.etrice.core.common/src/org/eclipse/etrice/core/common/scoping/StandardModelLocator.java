@@ -132,6 +132,12 @@ public class StandardModelLocator implements IModelLocator {
 				}
 				else {
 					// platUri exists in the workspace
+					
+					// check whether a simple concatenation with the base gives a valid file system path
+					URI fileUri = resolveFileUriFromPlatformBase(uri, baseUri);
+					if (!existsInFileSys(fileUri))
+						return null;
+					
 					removeURIMapEntry(res, platUri);
 					return platUri.toString();
 				}
