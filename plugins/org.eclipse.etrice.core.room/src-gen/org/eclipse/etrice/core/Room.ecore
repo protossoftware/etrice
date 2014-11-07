@@ -696,7 +696,7 @@
         <details key="body" value="if (this instanceof &lt;%org.eclipse.etrice.core.room.Port%>)&#xA;&#x9;return ((Port) this).getProtocol();&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SAP%>)&#xA;&#x9;return ((SAP) this).getProtocol();&#xA;else if (this instanceof &lt;%org.eclipse.etrice.core.room.SPP%>)&#xA;&#x9;return ((SPP) this).getProtocol();&#xA;return null;&#xA;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getSemantics" eType="ecore:EClass http://www.eclipse.org/etrice/core/fsm/FSM#//ProtocolSemantics">
+    <eOperations name="getSemantics" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//ProtocolSemantics">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="if (getGeneralProtocol() instanceof &lt;%org.eclipse.etrice.core.room.ProtocolClass%>)&#xA;&#x9;return ((ProtocolClass)getGeneralProtocol()).getSemantics();&#xA;else&#xA;&#x9;return null;&#xA;"/>
       </eAnnotations>

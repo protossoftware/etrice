@@ -30,6 +30,9 @@ import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.common.validation.ValidationHelpers;
+import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObject;
+import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObjectList;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
@@ -512,34 +515,31 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		default:
 		}
 		
+		checkDuplicates(pc, true);
+		checkDuplicates(pc, false);
+		
 		if (pc.getBase()!=null) {
 			// derived protocol
-			if (pc.getIncomingMessages().size()>0 && pc.getOutgoingMessages().size()>0)
+			if (pc.getIncomingMessages().size()>0 && pc.getOutgoingMessages().size()>0) {
 				warning("a derived protocol should add either incoming or outgoing messages, not both", RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES);
-			
-			{
-				List<Message> incoming = roomHelpers.getAllMessages(pc, true);
-				HashSet<String> inNames = new HashSet<String>();
-				for (Message in : incoming) {
-					if (!inNames.add(in.getName())) {
-						int idx = pc.getIncomingMessages().indexOf(in);
-						if (idx>=0)
-							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__INCOMING_MESSAGES, idx);
-					}
-				}
 			}
+		}
+	}
 
-			{
-				List<Message> outgoing = roomHelpers.getAllMessages(pc, true);
-				HashSet<String> outNames = new HashSet<String>();
-				for (Message out : outgoing) {
-					if (!outNames.add(out.getName())) {
-						int idx = pc.getOutgoingMessages().indexOf(out);
-						if (idx>=0)
-							error("duplicate message name", pc, RoomPackage.Literals.PROTOCOL_CLASS__OUTGOING_MESSAGES, idx);
-					}
-				}
-			}
+	/**
+	 * checks duplicates in the set of messages and operations including inherited items
+	 * per direction
+	 * 
+	 * @param pc the protocol class
+	 * @param incoming a flag giving the direction to be checked
+	 */
+	private void checkDuplicates(ProtocolClass pc, boolean incoming) {
+		NamedObjectList all = new NamedObjectList();
+		all.addAll(roomHelpers.getAllMessages(pc, incoming), RoomPackage.Literals.MESSAGE__NAME);
+		all.addAll(roomHelpers.getAllOperations(pc, incoming), RoomPackage.Literals.OPERATION__NAME);
+		Iterable<NamedObject> duplicates = ValidationHelpers.inSameResource(ValidationHelpers.removeUniques(all), pc.eResource());
+		for (NamedObject dupl : duplicates) {
+			error("duplicate message name", dupl.getObj(), dupl.getFeature());
 		}
 	}
 	
