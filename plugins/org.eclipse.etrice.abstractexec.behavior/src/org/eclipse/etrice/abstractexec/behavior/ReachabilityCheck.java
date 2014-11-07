@@ -17,10 +17,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
@@ -28,10 +25,10 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
-import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
 
 public class ReachabilityCheck {
@@ -61,10 +58,8 @@ public class ReachabilityCheck {
 	}
 
 	private void addStartingPoints(StateGraph graph, boolean add_initial) {
-		EList<Transition> transitions = graph.getTransitions();
-		EList<TrPoint> trPoint = graph.getTrPoints();
 		if (add_initial)
-			for (Transition trans : transitions)
+			for (Transition trans : graph.getTransitions())
 				if (trans instanceof InitialTransition) {
 					visited.add(trans);
 					StateGraphNode cur = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
@@ -72,11 +67,6 @@ public class ReachabilityCheck {
 						queue.add(cur);
 					break;
 				}
-		for (TrPoint tp : trPoint) {
-			if (tp instanceof TransitionPoint && !visited.contains(tp)) {
-				queue.add(tp);
-			}
-		}
 	}
 
 	private void doTraversal() {

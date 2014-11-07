@@ -78,10 +78,13 @@ public class ReachabilityValidator implements ICustomValidator {
 				EObject item = it.next();
 				if (item instanceof StateGraphItem)
 				{
-					
 					StateGraphItem toCheck = (StateGraphItem) item;
 					if (!checker.isReachable(toCheck)) {
 						EObject orig = xpac.getOrig(toCheck);
+						if (toCheck.getName()==null)
+							// we cannot create an error message
+							continue;
+						
 						EObject container = orig.eContainer();
 						@SuppressWarnings("unchecked")
 						int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
