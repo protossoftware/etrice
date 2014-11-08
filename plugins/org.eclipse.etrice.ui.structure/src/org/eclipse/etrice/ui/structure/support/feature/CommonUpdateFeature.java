@@ -85,11 +85,7 @@ public abstract class CommonUpdateFeature extends AbstractUpdateFeature {
 		if (bo instanceof EObject){
 			EObject eBo = (EObject)bo;
 			if(eBo.eIsProxy()) {
-				IRemoveContext rc = new RemoveContext(pe);
-				IFeatureProvider featureProvider = getFeatureProvider();
-				IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
-				if (removeFeature != null)
-					removeFeature.remove(rc);
+				removeGraphicalRepresentation(pe);
 				EcoreUtil.delete((EObject) bo);
 				return true;
 			}
@@ -99,6 +95,13 @@ public abstract class CommonUpdateFeature extends AbstractUpdateFeature {
 		}
 		
 		return false;
+	}
+	
+	protected void removeGraphicalRepresentation(PictogramElement pe){
+		IRemoveContext rc = new RemoveContext(pe);
+		IRemoveFeature removeFeature = getFeatureProvider().getRemoveFeature(rc);
+		if (removeFeature != null)
+			removeFeature.remove(rc);
 	}
 	
 	protected abstract boolean update(EObject bo, IUpdateContext context);

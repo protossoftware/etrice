@@ -16,18 +16,25 @@ import org.eclipse.etrice.ui.structure.support.provider.IPositionProvider;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 
+/**
+ * Normal update + position update.
+ */
 public class PositionUpdateContext extends UpdateContext {
 
 	IPositionProvider positionProvider;
-	
 
+	/**
+	 * {@link PositionUpdateContext}
+	 * @param pictogramElement
+	 * @param positionProvider
+	 */
 	public PositionUpdateContext(PictogramElement pictogramElement, IPositionProvider positionProvider) {
 		super(pictogramElement);
 		this.positionProvider = positionProvider;
 	}
-	
+
 	public IPositionProvider getPositionProvider() {
 		return positionProvider;
 	}
-	
+
 }

@@ -14,11 +14,12 @@ package org.eclipse.etrice.ui.structure.support;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -43,8 +44,10 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 
-public class StructureClassUpdate extends ShapeUpdateFeature {
+import com.google.common.collect.Sets;
 
+public class StructureClassUpdate extends ShapeUpdateFeature {
+	
 	public StructureClassUpdate(IFeatureProvider fp) {
 		super(fp);
 	}
@@ -72,10 +75,12 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// ACTOR_CONTAINER_REF
 		{
 			Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.ACTOR_CONTAINER_REF);
-			List<ActorContainerRef> toAdd = SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(sc);
-			toAdd.removeAll(present.keySet());
+			Set<ActorContainerRef> expected = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(sc));
 			
-			Map<EObject, Shape> newShapes = addShapesInitial(toAdd, containerShape);
+			for(EObject obj : Sets.difference(present.keySet(), expected))
+				removeGraphicalRepresentation(present.get(obj));
+			
+			Map<EObject, Shape> newShapes = addShapesInitial(Sets.difference(expected, present.keySet()), containerShape);
 			// initial add on actorRef does not create anchors of its interface items
 			updateShapes(newShapes.values(), positionProvider);
 			connectionProvider.insertAnchors(newShapes.values());
@@ -87,17 +92,19 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// INTERFACE_ITEM
 		{
 			Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
-			List<InterfaceItem> toAdd = SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(sc, true);
+			Set<InterfaceItem> expected = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(sc, true));
 			if(sc instanceof ActorClass){
 				ActorClass base = (ActorClass)sc;
 				while(base != null){
-					toAdd.addAll(base.getInternalPorts());
+					expected.addAll(base.getInternalPorts());
 					base = base.getActorBase();
 				}
 			}
-			toAdd.removeAll(present.keySet());
 			
-			Map<EObject, Shape> newShapes = addShapesInitial(toAdd, containerShape);
+			for(EObject obj : Sets.difference(present.keySet(), expected))
+				removeGraphicalRepresentation(present.get(obj));
+			
+			Map<EObject, Shape> newShapes = addShapesInitial(Sets.difference(expected, present.keySet()), containerShape);
 			connectionProvider.insertAnchors(newShapes.values());
 			newPes.putAll(newShapes);
 			
@@ -107,20 +114,24 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 		// LAYER_CONNECTION		
 		{
 			Map<EObject, Connection> present = getAllConnectionsForBoClass(getDiagram(), RoomPackage.Literals.LAYER_CONNECTION);
-			List<LayerConnection> toAdd = SupportUtil.getInstance().getRoomHelpers().getConnections(sc, true);
-			toAdd.removeAll(present.keySet());
+			Set<LayerConnection> expected = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getConnections(sc, true));
 			
-			Map<EObject, Connection> newConns = addConnectionsInitial(toAdd, connectionProvider);
+			for(EObject obj : Sets.difference(present.keySet(), expected))
+				removeGraphicalRepresentation(present.get(obj));
+			
+			Map<EObject, Connection> newConns = addConnectionsInitial(Sets.difference(expected, present.keySet()), connectionProvider);
 			updateConnections(newConns.values(), null, positionProvider);
 			updateConnections(present.values(), connectionProvider, positionProvider);
 		}
 		// BINDING
 		{
 			Map<EObject, Connection> present = getAllConnectionsForBoClass(getDiagram(), RoomPackage.Literals.BINDING);
-			List<Binding> toAdd = SupportUtil.getInstance().getRoomHelpers().getBindings(sc, true);
-			toAdd.removeAll(present.keySet());
+			Set<Binding> expected = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getBindings(sc, true));
 			
-			Map<EObject, Connection> newConns = addConnectionsInitial(toAdd, connectionProvider);
+			for(EObject obj : Sets.difference(present.keySet(), expected))
+				removeGraphicalRepresentation(present.get(obj));
+			
+			Map<EObject, Connection> newConns = addConnectionsInitial(Sets.difference(expected, present.keySet()), connectionProvider);
 			updateConnections(newConns.values(), null, positionProvider);
 			updateConnections(present.values(), connectionProvider, positionProvider);
 		}
@@ -171,10 +182,36 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 
 	@Override
 	protected IReason updateNeeded(EObject bo, IUpdateContext context) {
+		ActorContainerClass acc = (ActorContainerClass) bo;
+		ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
+		String reason = "";
+		
+		// TODO: refactor to single method for updateNeeded/update
+		Set<InterfaceItem> expectedItems = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
+		Set<InterfaceItem> presentItems = Sets.newHashSet(SupportUtil.getInstance().getInterfaceItems(containerShape, getFeatureProvider()));
+		if(acc instanceof ActorClass){
+			ActorClass base = (ActorClass)acc;
+			while(base != null){
+				expectedItems.addAll(base.getInternalPorts());
+				base = base.getActorBase();
+			}
+		}
+		if(!expectedItems.equals(presentItems))
+			reason += "interface item(s) missing or outdated\n";
+		
+		
+		Set<ActorContainerRef> expectedRefs = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(acc));
+		Set<ActorContainerRef> presentRefs = Sets.newHashSet(SupportUtil.getInstance().getRefs(containerShape, getFeatureProvider()));
+		if(!expectedRefs.equals(presentRefs))
+			reason += "actor ref(s) missing or outdated\n";
+		
+		if(!reason.isEmpty())
+			return Reason.createTrueReason();
+		
 		return Reason.createFalseReason();
 	}
 	
-	private Map<EObject,Connection> addConnectionsInitial(List<? extends EObject> toAdd, ConnectionProvider cp){
+	private Map<EObject,Connection> addConnectionsInitial(Collection<? extends EObject> toAdd, ConnectionProvider cp){
 		Map<EObject,Connection> created = new HashMap<EObject, Connection>();
 		
 		for(EObject bo : toAdd){

@@ -16,10 +16,19 @@ import org.eclipse.etrice.ui.structure.support.provider.ConnectionProvider;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 
+/**
+ * Used to trigger update of connection after all anchors are up to date.
+ *
+ */
 public class ConnectionUpdateContext extends UpdateContext{
 
 	private ConnectionProvider connectionProvider;
 	
+	/**
+	 * {@link ConnectionUpdateContext}
+	 * @param pictogramElement
+	 * @param connectionProvider
+	 */
 	public ConnectionUpdateContext(PictogramElement pictogramElement, ConnectionProvider connectionProvider) {
 		super(pictogramElement);
 		this.connectionProvider = connectionProvider;

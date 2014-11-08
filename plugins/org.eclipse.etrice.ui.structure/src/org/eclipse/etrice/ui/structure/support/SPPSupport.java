@@ -469,4 +469,5 @@ public class SPPSupport extends InterfaceItemSupport {
 			kind += "R";
 		return kind;
 	}
+	
 }

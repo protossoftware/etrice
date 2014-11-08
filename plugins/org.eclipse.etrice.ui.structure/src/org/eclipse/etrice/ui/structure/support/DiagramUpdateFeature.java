@@ -77,7 +77,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 
 	/**
 	 * This just removes dangling connections (bindings and layer connections).
-	 * New ones are added by the structure class support.
+	 * New or changed ones are handled by the structure class support.
 	 * 
 	 * @param diagram
 	 * @return
@@ -86,7 +86,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		boolean needed = false;
 
 		for (Connection conn : new ArrayList<Connection>(diagram.getConnections())) {
-			UpdateContext context = new UpdateContext(conn);
+			UpdateContext context = new DeleteContext(conn);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
 			if (updateFeature!=null && updateFeature.canUpdate(context))
 				if (updateFeature.updateNeeded(context).toBoolean())
@@ -160,7 +160,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 
 	/**
 	 * This just removes dangling connections (bindings and layer connections).
-	 * New ones are added by the structure class support.
+	 * New or changed ones are handled by the structure class support.
 	 * 
 	 * @param diagram
 	 * @return
@@ -198,7 +198,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		
 		// avoid infinite recursion by not entering with diagram again
 		if (!(container instanceof Diagram)) {
-			UpdateContext context = new DeleteContext(container);
+			UpdateContext context = new UpdateContext(container);
 			IUpdateFeature updateFeature = getFeatureProvider().getUpdateFeature(context);
 			if (updateFeature!=null && updateFeature.canUpdate(context))
 				if (updateFeature.updateNeeded(context).toBoolean())

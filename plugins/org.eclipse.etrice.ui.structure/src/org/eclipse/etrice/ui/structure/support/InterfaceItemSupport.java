@@ -79,6 +79,7 @@ public class InterfaceItemSupport {
 	protected static final IColorConstant INHERITED_COLOR = new ColorConstant(100, 100, 100);
 	protected static final IColorConstant BRIGHT_COLOR = new ColorConstant(255, 255, 255);
 	protected static final String PROP_KIND = "item-kind";
+	protected static final String PROP_INHERITED = "inherited";
 	
 	protected static class FeatureProvider extends DefaultFeatureProvider {
 
@@ -328,20 +329,10 @@ public class InterfaceItemSupport {
 				
 				// check if port still owned/inherited
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				Object containerBo = getBusinessObjectForPictogramElement(containerShape);
-				if (containerBo instanceof ActorClass) {
-					ActorClass ac = (ActorClass) containerBo;
-					boolean found = false;
-					do {
-						if (ac==port.eContainer())
-							found = true;
-						ac = ac.getActorBase();
-					}
-					while (!found && ac!=null);
-					
-					if (!found)
-						reason += "InterfaceItem not inherited anymore\n";
-				}
+				Object parentShapeBo = getBusinessObjectForPictogramElement(containerShape.getContainer());
+				String inherited = Graphiti.getPeService().getPropertyValue(containerShape, PROP_INHERITED);
+				if(inherited != null && !Boolean.toString(isInherited(port, parentShapeBo, containerShape)).equals(inherited))
+					reason += "Inheritance changed\n";
 				
 				GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
@@ -349,7 +340,7 @@ public class InterfaceItemSupport {
 						reason += "Name is out of date\n";
 
 					String kind = getItemKind(port);
-					if (!kind.equals(Graphiti.getPeService().getPropertyValue(context.getPictogramElement(), PROP_KIND)))
+					if (!kind.equals(Graphiti.getPeService().getPropertyValue(containerShape, PROP_KIND)))
 						reason += "Figure is out of date\n";
 				}
 				
@@ -365,7 +356,9 @@ public class InterfaceItemSupport {
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 				InterfaceItem port = (InterfaceItem) bo;
 				
-				boolean inherited = isInherited(port, getBusinessObjectForPictogramElement(containerShape.getContainer()), containerShape);
+				Object parentShapeBo = getBusinessObjectForPictogramElement(containerShape.getContainer());
+				boolean inherited = isInherited(port, parentShapeBo, containerShape);
+				Graphiti.getPeService().setPropertyValue(containerShape, PROP_INHERITED, Boolean.toString(inherited));
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateFigure(port, containerShape, dark, manageColor(BRIGHT_COLOR));
@@ -528,15 +521,15 @@ public class InterfaceItemSupport {
 			return false;
 		}
 		
-		protected static boolean isInherited(InterfaceItem item, Object container, ContainerShape cs) {
-			if (container instanceof ActorClass) {
-				ActorClass ac = (ActorClass) container;
+		protected static boolean isInherited(InterfaceItem item, Object parentShapeBo, ContainerShape cs) {
+			if (parentShapeBo instanceof ActorClass) {
+				ActorClass ac = (ActorClass) parentShapeBo;
 				return item.eContainer()!=ac;
 			}
-			else if (container instanceof ActorRef) {
+			else if (parentShapeBo instanceof ActorRef) {
 				// have to check whether the ActorRef is inherited
-				ActorRef ar = (ActorRef) container;
-				ContainerShape arCont = cs.getContainer();
+				ActorRef ar = (ActorRef) parentShapeBo;
+				ContainerShape arCont = cs.getContainer().getContainer();
 				EObject cls = arCont.getLink().getBusinessObjects().get(0);
 				if (cls instanceof ActorClass)
 					return ar.eContainer()!=cls;
@@ -544,7 +537,7 @@ public class InterfaceItemSupport {
 				// cls is a SubSystemClass
 				return false;
 			}
-			else if (container instanceof SubSystemRef) {
+			else if (parentShapeBo instanceof SubSystemRef) {
 				// SubSystemRefs only occur in LogicalSystems, no inheritance
 				return false;
 			}

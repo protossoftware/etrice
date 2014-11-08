@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.EList;
@@ -116,6 +117,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class ActorContainerRefSupport {
 	
@@ -815,15 +817,10 @@ public class ActorContainerRefSupport {
 				// check interface ports and spps added to model not present in diagram
 				{
 					ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-					List<InterfaceItem> interfaceItems = SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true);
-					List<InterfaceItem> presentItems = SupportUtil.getInstance().getInterfaceItems(containerShape, fp);
-					int missing = 0;
-					for (InterfaceItem interfaceItem : interfaceItems) {
-						if (!presentItems.contains(interfaceItem))
-							++missing;
-					}
-					if (missing>0)
-						reason += missing+" interface item(s) missing\n";
+					Set<InterfaceItem> expectedItems = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
+					Set<InterfaceItem> presentItems = Sets.newHashSet(SupportUtil.getInstance().getInterfaceItems(containerShape, fp));
+					if(!expectedItems.equals(presentItems))
+						reason += "interface item(s) missing or outdated\n";
 				}
 				
 				if (!reason.isEmpty())
@@ -851,12 +848,15 @@ public class ActorContainerRefSupport {
 					positionProvider = positionProvider.setNewParent(acr, DiagramUtil.getPosAndSize(invisibleRect), DiagramUtil.getPosAndSize(mainBorder));
 				}
 				
-				Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
 				ActorContainerClass acc = (acr instanceof ActorRef)?((ActorRef)acr).getType():((SubSystemRef)acr).getType();
-				List<InterfaceItem> expected = new ArrayList<InterfaceItem>(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
+				Map<EObject, Shape> present = getChildrenShapesForBoClass(containerShape, RoomPackage.Literals.INTERFACE_ITEM);
+				Set<InterfaceItem> expected = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
 				
-				expected.removeAll(present.keySet());
-				Map<EObject, Shape> newShapes = addShapesInitial(expected, containerShape);
+				// add new items
+				Map<EObject, Shape> newShapes = addShapesInitial(Sets.difference(expected, present.keySet()), containerShape);
+				// remove outdated items
+				for(EObject item : Sets.difference(present.keySet(), expected))
+					removeGraphicalRepresentation(present.get(item));
 				
 				if(positionProvider != null)
 					updatePictogramElements(newShapes.values(), positionProvider);

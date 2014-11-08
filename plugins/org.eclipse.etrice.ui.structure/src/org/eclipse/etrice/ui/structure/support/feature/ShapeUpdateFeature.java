@@ -14,7 +14,6 @@ package org.eclipse.etrice.ui.structure.support.feature;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
@@ -61,7 +60,7 @@ public abstract class ShapeUpdateFeature extends CommonUpdateFeature {
 		return items;
 	}
 	
-	protected Map<EObject, Shape> addShapesInitial(List<? extends EObject> toAdd, ContainerShape containerShape) {
+	protected Map<EObject, Shape> addShapesInitial(Collection<? extends EObject> toAdd, ContainerShape containerShape) {
 		Map<EObject, Shape> shapes = new HashMap<EObject, Shape>();
 		for(EObject bo : toAdd){
 			PictogramElement pe = getFeatureProvider().addIfPossible(new InitialAddShapeContext(bo, containerShape));
