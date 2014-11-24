@@ -81,6 +81,7 @@ public abstract class AbstractGenerator {
 	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 	public static final String OPTION_DEBUG = "-debug";
 	public static final String OPTION_NOTRANSLATE = "-notranslate";
+	public static final String OPTION_HELP = "-help";
 
 	/**
 	 * constant used as return value of {@link #runGenerator())}
@@ -218,6 +219,7 @@ public abstract class AbstractGenerator {
 	 * <li>{@value #OPTION_NOEXIT}</li>
 	 * <li>{@value #OPTION_SAVE_GEN_MODEL}</li>
 	 * <li>{@value #OPTION_VERBOSE_RT}</li>
+	 * <li>{@value #OPTION_HELP}</li>
 	 * </ul>
 	 * </p>
 	 * 
@@ -282,6 +284,13 @@ public abstract class AbstractGenerator {
 		else if (arg.equals(OPTION_DEBUG)) {
 			generatorSettings.setDebugMode(true);
 		}
+		else if (arg.equals(OPTION_HELP)) {
+			printUsage();
+			return false;
+		}
+		else if (arg.startsWith("-")) {
+			return usageError("unrecognized option '"+arg+"'");
+		}
 		else {
 			generatorSettings.getInputModelURIs().add(arg);
 		}
@@ -320,7 +329,9 @@ public abstract class AbstractGenerator {
 				+" ["+OPTION_GEN_DOC_DIR+" <gen documentation directory>]"
 				+" ["+OPTION_DEBUG+"]"
 				+" ["+OPTION_MSC+"]"
-				+" ["+OPTION_VERBOSE_RT+"]";
+				+" ["+OPTION_VERBOSE_RT+"]"
+				+" ["+OPTION_HELP+"]"
+				;
 	}
 	
 	protected String getCommonOptionDescriptions() {
@@ -337,7 +348,9 @@ public abstract class AbstractGenerator {
 			+"      -genDocDir <gen documentation dir> # the directory for generated documentation files\n"
 			+"      -debug                             # if specified create debug output\n"
 			+"      -msc_instr                         # generate instrumentation for MSC generation\n"
-			+"      -gen_as_verbose                    # generate instrumentation for verbose console output";
+			+"      -gen_as_verbose                    # generate instrumentation for verbose console output\n"
+			+"      -help                              # display this help text\n"
+			;
 	}
 	
 	/**
