@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Abstract FSM Diagram Editor
-Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.fsm
+Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.fsm;singleton:=true
 Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.behavior.fsm.Activator
 Bundle-Vendor: eTrice (Incubation)
@@ -20,7 +20,9 @@ Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="0.5.0",
  org.eclipse.etrice.abstractexec.behavior;bundle-version="0.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.etrice.ui.behavior.fsm.commands,
+Export-Package: org.eclipse.etrice.ui.behavior.fsm.actioneditor,
+ org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences,
+ org.eclipse.etrice.ui.behavior.fsm.commands,
  org.eclipse.etrice.ui.behavior.fsm.dialogs,
  org.eclipse.etrice.ui.behavior.fsm.editor,
  org.eclipse.etrice.ui.behavior.fsm.provider,

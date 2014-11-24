@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.etrice.ui.behavior.fsm.actionCodeEditor">
+      <editor
+            class="org.eclipse.etrice.ui.behavior.actioneditor.text.TextActionCodeEditorFactory"
+            editorName="Plain Text"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.textActionCodeEditor"
+            targetLanguage="ALL">
+      </editor>
+      <editor
+            class="org.eclipse.etrice.ui.behavior.actioneditor.modelaware.ModelAwareActionCodeEditorFactory"
+            editorName="Model Aware Rich Editor"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.modelAwareActionCodeEditor"
+            targetLanguage="ALL">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="Context in Action Code Editor"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.context"
+            name="Action Editor Context"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.etrice.ui.behavior.actioneditor.contentAssist"
+            contextId="org.eclipse.etrice.ui.behavior.actioneditor.context"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SPACE">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.ui.behavior.actioneditor.undo"
+            contextId="org.eclipse.etrice.ui.behavior.actioneditor.context"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+Z">
+      </key>
+      <key
+            commandId="org.eclipse.etrice.ui.behavior.actioneditor.redo"
+            contextId="org.eclipse.etrice.ui.behavior.actioneditor.context"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+Z">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            description="Content Assist Command for SourceViewerActionCodeEditor"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.contentAssist"
+            name="Action Editor Content Assist">
+      </command>
+      <command
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            description="Undo Command for SourceViewerActionCodeEditor"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.undo"
+            name="Action Editor Undo">
+      </command>
+      <command
+            categoryId="org.eclipse.etrice.ui.commands.category"
+            description="Redo Command for SourceViewerActionCodeEditor"
+            id="org.eclipse.etrice.ui.behavior.actioneditor.redo"
+            name="Action Editor Redo">
+      </command>
+   </extension>
+
+</plugin>

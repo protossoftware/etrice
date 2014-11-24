@@ -7,7 +7,9 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
@@ -16,6 +18,7 @@ import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
@@ -26,6 +29,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
@@ -116,12 +120,6 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
-
-			if (where.contains(Where.ENTRY)) {
-				if (addCode)
-					entry.append(codeSelectionString + "();\n");
-				setTextSelectionAndFocus(entry, codeSelectionString);
-			}
 		}
 		else {
 			if (state instanceof RefinedState)
@@ -138,22 +136,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 					setTextSelectionAndFocus(entry, codeSelectionString);
 				}
 			}
-			
-			{
-				Text entry = createText(body, "&Entry Code:", state, FSMPackage.eINSTANCE.getState_EntryCode(), null, s2m, m2s, true);
-				configureMemberAwareness(entry, true, true);
-				GridData gd = new GridData(GridData.FILL_BOTH);
-				gd.heightHint = 100;
-				entry.setLayoutData(gd);
 
-				if (where.contains(Where.ENTRY)) {
-					if (addCode)
-						entry.append(codeSelectionString + "();\n");
-					setTextSelectionAndFocus(entry, codeSelectionString);
-				}
-			}
+			createActionCodeEditor(body, "&Entry Code:", state.getEntryCode(),
+					FSMPackage.eINSTANCE.getState_EntryCode(), s2m, m2s);
 		}
-		
+
 		if (inherited) {
 			String code = roomHelpers.getDetailCode(state.getExitCode());
 			if (state instanceof RefinedState)
@@ -162,28 +149,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			GridData gd = new GridData(GridData.FILL_BOTH);
 			gd.heightHint = 100;
 			entry.setLayoutData(gd);
-
-			if (where.contains(Where.EXIT)) {
-				if (addCode)
-					entry.append(codeSelectionString + "();\n");
-				setTextSelectionAndFocus(entry, codeSelectionString);
-			}
 		}
 		else {
-			{
-				Text exit = createText(body, "E&xit Code:", state, FSMPackage.eINSTANCE.getState_ExitCode(), null, s2m, m2s, true);
-				configureMemberAwareness(exit, true, true);
-				GridData gd = new GridData(GridData.FILL_BOTH);
-				gd.heightHint = 100;
-				exit.setLayoutData(gd);
+			createActionCodeEditor(body, "E&xit Code:", state.getExitCode(),
+					FSMPackage.eINSTANCE.getState_ExitCode(), s2m, m2s);
 
-				if (where.contains(Where.EXIT)) {
-					if (addCode)
-						exit.append(codeSelectionString + "();\n");
-					setTextSelectionAndFocus(exit, codeSelectionString);
-				}
-			}
-			
 			if (state instanceof RefinedState)
 			{
 				String code = roomHelpers.getBaseExitCode((RefinedState)state);
@@ -191,31 +161,14 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 				GridData gd = new GridData(GridData.FILL_BOTH);
 				gd.heightHint = 100;
 				entry.setLayoutData(gd);
-
-				if (where.contains(Where.EXIT)) {
-					if (addCode)
-						entry.append(codeSelectionString + "();\n");
-					setTextSelectionAndFocus(entry, codeSelectionString);
-				}
 			}
 		}
-		
+
 		ActorClass ac = roomHelpers.getActorClass(state);
 		if (ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN)
-		{
-			Text dotxt = createText(body, "&Do Code:", state, FSMPackage.eINSTANCE.getState_DoCode(), null, s2m, m2s, true);
-			configureMemberAwareness(dotxt, true, true);
-			GridData gd = new GridData(GridData.FILL_BOTH);
-			gd.heightHint = 100;
-			dotxt.setLayoutData(gd);
+			createActionCodeEditor(body, "&Do Code:", state.getDoCode(),
+					FSMPackage.eINSTANCE.getState_DoCode(), s2m, m2s);
 
-			if (where.contains(Where.DO)) {
-				if (addCode)
-					dotxt.append(codeSelectionString + "();\n");
-				setTextSelectionAndFocus(dotxt, codeSelectionString);
-			}
-		}
-		
 		createMembersAndMessagesButtons(body);
 
 		if (!messageToDisplay.isEmpty()) {
@@ -226,6 +179,60 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 				}
 			});
 		}
+	}
+
+	/**
+	 * Creates Action Code Editor with the given parameters for the
+	 * {@link #state} and binds it with the model.
+	 * 
+	 * @author jayant
+	 * 
+	 * @param parent
+	 *            the {@link Composite} which will hold the editor
+	 * @param label
+	 *            the label for the editor
+	 * @param detailCode
+	 *            the {@link DetailCode} object to be represented
+	 * @param feat
+	 *            the {@link EStructuralFeature} associated with the code
+	 * @param s2m
+	 *            a String to Model converter
+	 * @param m2s
+	 *            a Model to string converter
+	 * 
+	 * @return the constructed instance of {@link IActionCodeEditor}
+	 */
+	private void createActionCodeEditor(Composite parent, String label,
+			DetailCode detailCode, EStructuralFeature feat,
+			StringToDetailCode s2m, DetailCodeToString m2s) {
+
+		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
+				detailCode, state, feat, s2m, m2s);
+
+		Control control;
+		if (entry != null)
+			control = entry.getControl();
+		else {
+			// if action editor cannot be created, create a simple SWT Text
+			// widget.
+			Text textEntry = createText(parent, label, state, feat, null, s2m,
+					m2s, true);
+			configureMemberAwareness(textEntry, true, true);
+			control = textEntry;
+		}
+
+		//set layout for the created control
+		GridData gd = new GridData(GridData.FILL_BOTH);
+		gd.heightHint = 100;
+		control.setLayoutData(gd);
+
+		// TODO Change IActionCodeEditor API to allow append or change
+		// the quick fix method
+		/*if (where.contains(Where.ENTRY)) {
+			if (addCode)
+				entry.append(codeSelectionString + "();\n");
+			setTextSelectionAndFocus(entry, codeSelectionString);
+		}*/
 	}
 
 	public void setAddCode(boolean add) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="actionCodeEditor" name="Action Code Editor" schema="schema/actionCodeEditor.exsd"/>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.etrice.ui.common.preferences.ETricePreferencePage"
+            class="org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.ActionEditorPreferencePage"
+            id="org.eclipse.etrice.ui.behavior.preferences.ActionEditorPreferencePage"
+            name="Action Editor">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+</plugin>
