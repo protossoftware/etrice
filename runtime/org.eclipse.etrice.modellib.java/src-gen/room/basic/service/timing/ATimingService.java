@@ -59,6 +59,7 @@ public class ATimingService extends ActorClassBase {
 		
 		// wiring
 		
+		
 
 	}
 	
@@ -137,15 +138,15 @@ public class ATimingService extends ActorClassBase {
 	/**
 	 * calls exit codes while exiting from the current state to one of its
 	 * parent states while remembering the history
-	 * @param current - the current state
+	 * @param current__et - the current state
 	 * @param to - the final parent state
 	 */
-	private void exitTo(int current, int to) {
-		while (current!=to) {
-			switch (current) {
+	private void exitTo(int current__et, int to) {
+		while (current__et!=to) {
+			switch (current__et) {
 				case STATE_Operational:
 					this.history[STATE_TOP] = STATE_Operational;
-					current = STATE_TOP;
+					current__et = STATE_TOP;
 					break;
 				default:
 					/* should not occur */
@@ -157,12 +158,12 @@ public class ATimingService extends ActorClassBase {
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
-	 * @param chain - the chain ID
-	 * @param generic_data - the generic data pointer
+	 * @param chain__et - the chain ID
+	 * @param generic_data__et - the generic data pointer
 	 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 	 */
-	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
-		switch (chain) {
+	private int executeTransitionChain(int chain__et, InterfaceItemBase ifitem, Object generic_data__et) {
+		switch (chain__et) {
 			case CHAIN_TRANS_INITIAL_TO__Operational:
 			{
 				action_TRANS_INITIAL_TO__Operational();
@@ -170,13 +171,13 @@ public class ATimingService extends ActorClassBase {
 			}
 			case CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1:
 			{
-				TimerData td = (TimerData) generic_data;
+				TimerData td = (TimerData) generic_data__et;
 				action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(ifitem, td);
 				return STATE_Operational;
 			}
 			case CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3:
 			{
-				TimerData td = (TimerData) generic_data;
+				TimerData td = (TimerData) generic_data__et;
 				action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(ifitem, td);
 				return STATE_Operational;
 			}
@@ -194,66 +195,66 @@ public class ATimingService extends ActorClassBase {
 	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
-	 * @param state - the state which is entered
+	 * @param state__et - the state which is entered
 	 * @return - the ID of the final leaf state
 	 */
-	private int enterHistory(int state) {
-		boolean skip_entry = false;
-		if (state >= STATE_MAX) {
-			state =  (state - STATE_MAX);
-			skip_entry = true;
+	private int enterHistory(int state__et) {
+		boolean skip_entry__et = false;
+		if (state__et >= STATE_MAX) {
+			state__et =  (state__et - STATE_MAX);
+			skip_entry__et = true;
 		}
 		while (true) {
-			switch (state) {
+			switch (state__et) {
 				case STATE_Operational:
-					if (!(skip_entry)) entry_Operational();
+					if (!(skip_entry__et)) entry_Operational();
 					/* in leaf state: return state id */
 					return STATE_Operational;
 				case STATE_TOP:
-					state = this.history[STATE_TOP];
+					state__et = this.history[STATE_TOP];
 					break;
 				default:
 					/* should not occur */
 					break;
 			}
-			skip_entry = false;
+			skip_entry__et = false;
 		}
 		/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */
 	}
 	
 	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__Operational;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next);
-		setState(next);
+		int chain__et = CHAIN_TRANS_INITIAL_TO__Operational;
+		int next__et = executeTransitionChain(chain__et, null, null);
+		next__et = enterHistory(next__et);
+		setState(next__et);
 	}
 	
 	/* receiveEvent contains the main implementation of the FSM */
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data__et) {
+		int trigger__et = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain__et = NOT_CAUGHT;
+		int catching_state__et = NO_STATE;
 		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+		if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 			switch (getState()) {
 				case STATE_Operational:
-					switch(trigger) {
+					switch(trigger__et) {
 							case TRIG_timer__internalStartTimer:
 								{
-									chain = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							case TRIG_timer__internalStartTimeout:
 								{
-									chain = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							case TRIG_timer__kill:
 								{
-									chain = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							default:
@@ -266,13 +267,15 @@ public class ATimingService extends ActorClassBase {
 					break;
 			}
 		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(getState(), catching_state);
+		if (chain__et != NOT_CAUGHT) {
+			exitTo(getState(), catching_state__et);
 			{
-				int next = executeTransitionChain(chain, ifitem, generic_data);
-				next = enterHistory(next);
-				setState(next);
+				int next__et = executeTransitionChain(chain__et, ifitem, generic_data__et);
+				next__et = enterHistory(next__et);
+				setState(next__et);
 			}
 		}
 	}
+	
+	
 };

@@ -8,17 +8,15 @@ RoomModel room.basic.service.timing {
 		}
 		Structure {
 			usercode1 {
-			"
-			#include \"osal/etTime.h\" 
-			#define ET_NB_OF_TCBS 30
-			typedef struct etTCB etTimerControlBlock; 
-			struct etTCB {
-				etTime expTime;
-				etTime pTime;
-				int32 portIdx;
-				etTimerControlBlock* next;
-				};
-			"
+				"#include \"osal/etTime.h\" "
+				"#define ET_NB_OF_TCBS 30"
+				"typedef struct etTCB etTimerControlBlock; "
+				"struct etTCB {"
+				"	etTime expTime;"
+				"	etTime pTime;"
+				"	int32 portIdx;"
+				"	etTimerControlBlock* next;"
+				"	};"
 			}
 			usercode2 {
 				"/*uc2*/"
@@ -34,105 +32,105 @@ RoomModel room.basic.service.timing {
 //		Attribute freeTcbsRoot : tcb ref
 		}
 		Behavior {
-			Operation getTcb():tcb ref{"
-			etTimerControlBlock* temp = freeTcbsRoot;
-			
-			if(freeTcbsRoot!=0) {
-				freeTcbsRoot=freeTcbsRoot->next;
-				temp->next=0;
-				}
-			return temp;
-			"}
-			Operation returnTcb(block:tcb ref){"
-			block->next=freeTcbsRoot;
-			freeTcbsRoot=block;
-			"}
-			Operation removeTcbFromUsedList(idx:int32){"
-			etTimerControlBlock* temp=usedTcbsRoot;
-			etTimerControlBlock* temp2=usedTcbsRoot;
-			
-			if (temp==0) return;
-
-			if (usedTcbsRoot->portIdx == idx){
-				/* element found, the first one */
-				usedTcbsRoot = usedTcbsRoot->next;
-				returnTcb(temp);
-				return;
-				}
-
-			temp=temp->next;
-			while(temp!=0){
-				if(temp->portIdx==idx){
-					temp2->next=temp->next;
-					returnTcb(temp);
-					return;			
-				}else{
-					/* try next */
-					temp2=temp;
-					temp=temp->next;
-					}
-				}
-			"}
-			Operation putTcbToUsedList(block:tcb ref){"
-			etTimerControlBlock* temp=usedTcbsRoot;
-			etTimerControlBlock* temp2=usedTcbsRoot;
-
-			if (temp==0){
-				/* list empty put new block to root */
-				block->next=0;
-				usedTcbsRoot=block;
-				return;
-				}
-			
-			while(1){
-				if (temp != 0){
-					if (isTimeGreater(&block->expTime,&temp->expTime)){
-						/* try next position */
-						temp2=temp;	
-						temp=temp->next;
-						}else{
-						/* right position found */
-						block->next=temp;
-						if(temp==usedTcbsRoot){
-							usedTcbsRoot=block;
-							}else{
-							temp2->next=block;
-							}
-						return;
-						}
-					}else{
-					/* end of list reached */
-					block->next=0;
-					temp2->next=block;
-					return;
-				}
+			Operation getTcb():tcb ref{
+				"etTimerControlBlock* temp = freeTcbsRoot;"
+				""
+				"if(freeTcbsRoot!=0) {"
+				"	freeTcbsRoot=freeTcbsRoot->next;"
+				"	temp->next=0;"
+				"	}"
+				"return temp;"
 			}
-			"}
-			Operation isTimeGreater(t1:targetTime ref, t2 :targetTime ref):boolean{"
-				if (t1->sec > t2->sec) return ET_TRUE;
-				if (t1->sec < t2->sec) return ET_FALSE;
-				if (t1->nSec > t2->nSec) return ET_TRUE;
-				return ET_FALSE;
-			"}
+			Operation returnTcb(block:tcb ref){
+				"block->next=freeTcbsRoot;"
+				"freeTcbsRoot=block;"
+			}
+			Operation removeTcbFromUsedList(idx:int32){
+				"etTimerControlBlock* temp=usedTcbsRoot;"
+				"etTimerControlBlock* temp2=usedTcbsRoot;"
+				""
+				"if (temp==0) return;"
+				""
+				"if (usedTcbsRoot->portIdx == idx){"
+				"	/* element found, the first one */"
+				"	usedTcbsRoot = usedTcbsRoot->next;"
+				"	returnTcb(temp);"
+				"	return;"
+				"}"
+				""
+				"temp=temp->next;"
+				"while(temp!=0){"
+				"	if(temp->portIdx==idx){"
+				"		temp2->next=temp->next;"
+				"		returnTcb(temp);"
+				"		return;			"
+				"	}else{"
+				"		/* try next */"
+				"		temp2=temp;"
+				"		temp=temp->next;"
+				"		}"
+				"}"
+			}
+			Operation putTcbToUsedList(block:tcb ref){
+				"etTimerControlBlock* temp=usedTcbsRoot;"
+				"etTimerControlBlock* temp2=usedTcbsRoot;"
+				""
+				"if (temp==0){"
+				"	/* list empty put new block to root */"
+				"	block->next=0;"
+				"	usedTcbsRoot=block;"
+				"	return;"
+				"	}"
+				""
+				"while(1){"
+				"	if (temp != 0){"
+				"		if (isTimeGreater(&block->expTime,&temp->expTime)){"
+				"			/* try next position */"
+				"			temp2=temp;	"
+				"			temp=temp->next;"
+				"			}else{"
+				"			/* right position found */"
+				"			block->next=temp;"
+				"			if(temp==usedTcbsRoot){"
+				"				usedTcbsRoot=block;"
+				"				}else{"
+				"				temp2->next=block;"
+				"				}"
+				"			return;"
+				"			}"
+				"		}else{"
+				"		/* end of list reached */"
+				"		block->next=0;"
+				"		temp2->next=block;"
+				"		return;"
+				"	}"
+				"}"
+			}
+			Operation isTimeGreater(t1:targetTime ref, t2 :targetTime ref):boolean{
+				"if (t1->sec > t2->sec) return ET_TRUE;"
+				"if (t1->sec < t2->sec) return ET_FALSE;"
+				"if (t1->nSec > t2->nSec) return ET_TRUE;"
+				"return ET_FALSE;"
+			}
 			
-			Operation addTime(t1:targetTime ref, t2:targetTime ref){"
-				t1->sec += t2->sec;
-				t1->nSec += t2->nSec;
-				while(t1->nSec >= 1000000000L){
-					t1->sec++;
-					t1->nSec-=1000000000L;
-					}
-			"}
+			Operation addTime(t1:targetTime ref, t2:targetTime ref){
+				"t1->sec += t2->sec;"
+				"t1->nSec += t2->nSec;"
+				"while(t1->nSec >= 1000000000L){"
+				"	t1->sec++;"
+				"	t1->nSec-=1000000000L;"
+				"}"
+			}
 			
-			Operation printList(){"
-			etTimerControlBlock* temp=usedTcbsRoot;
-				printf(\"list: \");
-				while (temp!=0){
-					printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);
-					temp=temp->next;
-				}
-				printf(\"\\n\");
-			"}
+			Operation printList(){
+				"etTimerControlBlock* temp=usedTcbsRoot;"
+				"	printf(\"list: \");"
+				"	while (temp!=0){"
+				"		printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);"
+				"		temp=temp->next;"
+				"	}"
+				"	printf(\"\\n\");"
+			}
 			StateMachine {
 				Transition tr0: initial -> Operational {
 					action {
@@ -224,10 +222,9 @@ RoomModel room.basic.service.timing {
 
 
 	ProtocolClass PTimer {
-		usercode1 {"
-			#define ET_TIMER_RUNNING	0x01
-			#define ET_TIMER_PERIODIC	0x02
-			"
+		usercode1 {
+			"#define ET_TIMER_RUNNING	0x01"
+			"#define ET_TIMER_PERIODIC	0x02"
 		}
 		usercode2 {
 			"/*uc2*/"
@@ -243,38 +240,33 @@ RoomModel room.basic.service.timing {
 		conjugated PortClass
 		{
 			handle incoming startTimer{
-			"if (status==0){
-				status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
-				etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);
-				}
-			"	
+				"if (status==0){"
+				"	status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;"
+				"	etPort_sendMessage(self, PTimer_IN_startTimer, sizeof(int32), &data__et);"
+				"}"
 			}
 			handle incoming startTimeout{
-			"if (status==0){
-				status = ET_TIMER_RUNNING;
-				etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);
-				}
-			"	
+				"if (status==0){"
+				"	status = ET_TIMER_RUNNING;"
+				"	etPort_sendMessage(self, PTimer_IN_startTimeout, sizeof(int32), &data__et);"
+				"}"
 			}
 			handle outgoing timeout{
-			"/* TODO: clear active bit in case of single shot timer */
-			if (status!=0){
-				if (status==ET_TIMER_RUNNING){
-					/* single shot timer */
-					status=0;
-					}
-				/* msg to fsm */
-				(*receiveMessageFunc)(actor, self, msg);
-				}
-			"
+				"/* TODO: clear active bit in case of single shot timer */"
+				"if (status!=0){"
+				"	if (status==ET_TIMER_RUNNING){"
+				"		/* single shot timer */"
+				"		status=0;"
+				"		}"
+				"	/* msg to fsm */"
+				"	(*receiveMessageFunc)(actor, self, msg);"
+				"}"
 			}
 			handle incoming kill {	
-			"
-			if (status!=0){
-				status=0;
-				etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);
-				}
-			"
+			"if (status!=0){"
+			"	status=0;"
+			"	etPort_sendMessage(self, PTimer_IN_kill, 0,NULL);"
+			"}"
 			}
 			Attribute status:int8="0"
 		}

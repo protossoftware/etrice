@@ -97,18 +97,18 @@ RoomModel room.basic.service.tcp {
 				"#include \"osal/etTcpSockets.h\""
 			}
 			usercode3 {
-"static int8* bufferProvider(void* slf, int* size) {
-	ATcpClient* self = (ATcpClient*) slf;
-	*size = 1000;
-	return payload.data;
-}
-
-static int socketReceiver(void* slf, int channel, int size, const int8* data) {
-	ATcpClient* self = (ATcpClient*) slf;
-	payload.length = size;
-	PTcpPayloadPort_receive(&self->constData->PayloadPort, &payload);
-	return ETSOCKET_OK;
-}"
+				"static int8* bufferProvider(void* slf, int* size) {"
+				"	ATcpClient* self = (ATcpClient*) slf;"
+				"	*size = 1000;"
+				"	return payload.data;"
+				"}"
+				""
+				"static int socketReceiver(void* slf, int channel, int size, const int8* data) {"
+				"	ATcpClient* self = (ATcpClient*) slf;"
+				"	payload.length = size;"
+				"	PTcpPayloadPort_receive(&self->constData->PayloadPort, &payload);"
+				"	return ETSOCKET_OK;"
+				"}"
 			}
 			external Port ControlPort
 			external Port PayloadPort

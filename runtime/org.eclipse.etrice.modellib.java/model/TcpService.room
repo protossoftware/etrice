@@ -14,69 +14,69 @@ RoomModel room.basic.service.tcp {
 				"import java.net.Socket;"
 				"import java.io.*;"
 				"import java.util.*;"
-				"
-				class ServerRxThread extends Thread{
-					private int connectionId;
-					private Socket sock;
-					PTcpPayloadPort port;
-
-					public ServerRxThread (int connectionId, PTcpPayloadPort port, Socket sock){
-						this.sock = sock;
-						this.connectionId = connectionId;
-						this.port = port;
-					}
-
-					public void run(){
-						try{
-							InputStream in = sock.getInputStream();
-							DTcpPayload d = new DTcpPayload();
-							d.setConnectionId(connectionId);
-							int c;
-							while ((c=in.read(d.getData()))!=-1){
-								d.setLength(c);
-								port.receive(d);	
-							}
-						}catch (IOException e){
-							System.err.println(\"ServerRx: \" + e.toString());
-						}
-					}
-				}
-		
-			class ServerAcceptThread extends Thread{
-				private ServerSocket sock;
-				private PTcpPayloadPort port;
-				private ATcpServer parent;
-				public ServerAcceptThread (PTcpPayloadPort port, ServerSocket sock, ATcpServer parent){
-					this.sock = sock;
-					this.port = port;
-					this.parent = parent;
-				}
-				public void run(){
-					int cnt=0;
-					try{
-						while (true){
-							Socket s = sock.accept();
-							parent.addOutStreamToHashmap(cnt, s.getOutputStream());
-							(new ServerRxThread(cnt, port, s)).start();
-							cnt++;
-						}
-					}catch (IOException e){
-						System.err.println(\"Server Accept: \" + e.toString());
-					}
-				}
-			}
-		"
+				""
+				"class ServerRxThread extends Thread{"
+				"	private int connectionId;"
+				"	private Socket sock;"
+				"	PTcpPayloadPort port;"
+				""
+				"	public ServerRxThread (int connectionId, PTcpPayloadPort port, Socket sock){"
+				"		this.sock = sock;"
+				"		this.connectionId = connectionId;"
+				"		this.port = port;"
+				"	}"
+				""
+				"	public void run(){"
+				"		try{"
+				"			InputStream in = sock.getInputStream();"
+				"			DTcpPayload d = new DTcpPayload();"
+				"			d.setConnectionId(connectionId);"
+				"			int c;"
+				"			while ((c=in.read(d.getData()))!=-1){"
+				"				d.setLength(c);"
+				"				port.receive(d);	"
+				"			}"
+				"		}catch (IOException e){"
+				"			System.err.println(\"ServerRx: \" + e.toString());"
+				"		}"
+				"	}"
+				"}"
+				""
+				"class ServerAcceptThread extends Thread{"
+				"	private ServerSocket sock;"
+				"	private PTcpPayloadPort port;"
+				"	private ATcpServer parent;"
+				"	public ServerAcceptThread (PTcpPayloadPort port, ServerSocket sock, ATcpServer parent){"
+				"		this.sock = sock;"
+				"		this.port = port;"
+				"		this.parent = parent;"
+				"	}"
+				"	public void run(){"
+				"		int cnt=0;"
+				"		try{"
+				"			while (true){"
+				"				Socket s = sock.accept();"
+				"				parent.addOutStreamToHashmap(cnt, s.getOutputStream());"
+				"				(new ServerRxThread(cnt, port, s)).start();"
+				"				cnt++;"
+				"			}"
+				"		}catch (IOException e){"
+				"			System.err.println(\"Server Accept: \" + e.toString());"
+				"		}"
+				"	}"
+				"}"
+				"		"
 			}
 			usercode2 {
 				"ServerSocket socket = null;"
 				"InputStream in = null;"
 				"OutputStream out = null;"
 				"Hashtable<Integer,OutputStream> outStreams = new Hashtable<Integer,OutputStream>();"
-				"
-				synchronized protected void addOutStreamToHashmap(int cnt, OutputStream out){
-					outStreams.put(cnt,out);
-				}
-				"
+				""
+				"synchronized protected void addOutStreamToHashmap(int cnt, OutputStream out){"
+				"	outStreams.put(cnt,out);"
+				"}"
+				""
 			}
 			external Port ControlPort
 			external Port PayloadPort
@@ -172,30 +172,31 @@ RoomModel room.basic.service.tcp {
 				"import java.net.Socket;"
 				"import java.io.*;"
 				
-				"	
-			class ClientRxThread extends Thread{	
-				private Socket sock;
-				PTcpPayloadPort port;
-				public ClientRxThread (PTcpPayloadPort port, Socket sock){
-					this.sock = sock;
-					this.port = port;
-				}
-				public void run(){
-					try{
-						InputStream in = sock.getInputStream();
-						DTcpPayload d = new DTcpPayload();
-						d.setConnectionId(0);
-						int c;
-						while ((c=in.read(d.getData()))!=-1){
-							d.setLength(c);
-							port.receive(d);
-						}
-					}catch (IOException e){
-						System.err.println(\"ClientRx: \" + e.toString());
-					}
-				
-				}
-			}"
+				"	"
+				"class ClientRxThread extends Thread{	"
+				"	private Socket sock;"
+				"	PTcpPayloadPort port;"
+				"	public ClientRxThread (PTcpPayloadPort port, Socket sock){"
+				"		this.sock = sock;"
+				"		this.port = port;"
+				"	}"
+				"	public void run(){"
+				"		try{"
+				"			InputStream in = sock.getInputStream();"
+				"			DTcpPayload d = new DTcpPayload();"
+				"			d.setConnectionId(0);"
+				"			int c;"
+				"			while ((c=in.read(d.getData()))!=-1){"
+				"				d.setLength(c);"
+				"				port.receive(d);"
+				"			}"
+				"		}catch (IOException e){"
+				"			System.err.println(\"ClientRx: \" + e.toString());"
+				"		}"
+				"	"
+				"	}"
+				"}"
+				""
 			}
 			usercode2 {
 				"Socket socket;"

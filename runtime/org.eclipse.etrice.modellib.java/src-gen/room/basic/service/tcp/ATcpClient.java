@@ -93,6 +93,7 @@ public class ATcpClient extends ActorClassBase {
 		
 		// wiring
 		
+		
 
 	}
 	
@@ -207,23 +208,23 @@ public class ATcpClient extends ActorClassBase {
 	/**
 	 * calls exit codes while exiting from the current state to one of its
 	 * parent states while remembering the history
-	 * @param current - the current state
+	 * @param current__et - the current state
 	 * @param to - the final parent state
 	 */
-	private void exitTo(int current, int to) {
-		while (current!=to) {
-			switch (current) {
+	private void exitTo(int current__et, int to) {
+		while (current__et!=to) {
+			switch (current__et) {
 				case STATE_closed:
 					this.history[STATE_TOP] = STATE_closed;
-					current = STATE_TOP;
+					current__et = STATE_TOP;
 					break;
 				case STATE_opened:
 					this.history[STATE_TOP] = STATE_opened;
-					current = STATE_TOP;
+					current__et = STATE_TOP;
 					break;
 				case STATE_error:
 					this.history[STATE_TOP] = STATE_error;
-					current = STATE_TOP;
+					current__et = STATE_TOP;
 					break;
 				default:
 					/* should not occur */
@@ -235,12 +236,12 @@ public class ATcpClient extends ActorClassBase {
 	/**
 	 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
 	 * matching the trigger of this chain. The ID of the final state is returned
-	 * @param chain - the chain ID
-	 * @param generic_data - the generic data pointer
+	 * @param chain__et - the chain ID
+	 * @param generic_data__et - the generic data pointer
 	 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 	 */
-	private int executeTransitionChain(int chain, InterfaceItemBase ifitem, Object generic_data) {
-		switch (chain) {
+	private int executeTransitionChain(int chain__et, InterfaceItemBase ifitem, Object generic_data__et) {
+		switch (chain__et) {
 			case CHAIN_TRANS_INITIAL_TO__closed:
 			{
 				action_TRANS_INITIAL_TO__closed();
@@ -248,7 +249,7 @@ public class ATcpClient extends ActorClassBase {
 			}
 			case CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort:
 			{
-				DTcpControl data = (DTcpControl) generic_data;
+				DTcpControl data = (DTcpControl) generic_data__et;
 				action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(ifitem, data);
 				if (lastError!=0) {
 				action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(ifitem, data);
@@ -264,7 +265,7 @@ public class ATcpClient extends ActorClassBase {
 			}
 			case CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3:
 			{
-				DTcpPayload data = (DTcpPayload) generic_data;
+				DTcpPayload data = (DTcpPayload) generic_data__et;
 				action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(ifitem, data);
 				return STATE_opened;
 			}
@@ -277,17 +278,17 @@ public class ATcpClient extends ActorClassBase {
 	
 	/**
 	 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
-	 * @param state - the state which is entered
+	 * @param state__et - the state which is entered
 	 * @return - the ID of the final leaf state
 	 */
-	private int enterHistory(int state) {
-		boolean skip_entry = false;
-		if (state >= STATE_MAX) {
-			state =  (state - STATE_MAX);
-			skip_entry = true;
+	private int enterHistory(int state__et) {
+		boolean skip_entry__et = false;
+		if (state__et >= STATE_MAX) {
+			state__et =  (state__et - STATE_MAX);
+			skip_entry__et = true;
 		}
 		while (true) {
-			switch (state) {
+			switch (state__et) {
 				case STATE_closed:
 					/* in leaf state: return state id */
 					return STATE_closed;
@@ -298,38 +299,38 @@ public class ATcpClient extends ActorClassBase {
 					/* in leaf state: return state id */
 					return STATE_error;
 				case STATE_TOP:
-					state = this.history[STATE_TOP];
+					state__et = this.history[STATE_TOP];
 					break;
 				default:
 					/* should not occur */
 					break;
 			}
-			skip_entry = false;
+			skip_entry__et = false;
 		}
 		/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */
 	}
 	
 	public void executeInitTransition() {
-		int chain = CHAIN_TRANS_INITIAL_TO__closed;
-		int next = executeTransitionChain(chain, null, null);
-		next = enterHistory(next);
-		setState(next);
+		int chain__et = CHAIN_TRANS_INITIAL_TO__closed;
+		int next__et = executeTransitionChain(chain__et, null, null);
+		next__et = enterHistory(next__et);
+		setState(next__et);
 	}
 	
 	/* receiveEvent contains the main implementation of the FSM */
-	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
-		int trigger = ifitem.getLocalId() + EVT_SHIFT*evt;
-		int chain = NOT_CAUGHT;
-		int catching_state = NO_STATE;
+	public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data__et) {
+		int trigger__et = ifitem.getLocalId() + EVT_SHIFT*evt;
+		int chain__et = NOT_CAUGHT;
+		int catching_state__et = NO_STATE;
 		
-		if (!handleSystemEvent(ifitem, evt, generic_data)) {
+		if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 			switch (getState()) {
 				case STATE_closed:
-					switch(trigger) {
+					switch(trigger__et) {
 							case TRIG_ControlPort__open:
 								{
-									chain = CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							default:
@@ -338,17 +339,17 @@ public class ATcpClient extends ActorClassBase {
 					}
 					break;
 				case STATE_opened:
-					switch(trigger) {
+					switch(trigger__et) {
 							case TRIG_ControlPort__close:
 								{
-									chain = CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							case TRIG_PayloadPort__send:
 								{
-									chain = CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
-									catching_state = STATE_TOP;
+									chain__et = CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
+									catching_state__et = STATE_TOP;
 								}
 							break;
 							default:
@@ -363,13 +364,15 @@ public class ATcpClient extends ActorClassBase {
 					break;
 			}
 		}
-		if (chain != NOT_CAUGHT) {
-			exitTo(getState(), catching_state);
+		if (chain__et != NOT_CAUGHT) {
+			exitTo(getState(), catching_state__et);
 			{
-				int next = executeTransitionChain(chain, ifitem, generic_data);
-				next = enterHistory(next);
-				setState(next);
+				int next__et = executeTransitionChain(chain__et, ifitem, generic_data__et);
+				next__et = enterHistory(next__et);
+				setState(next__et);
 			}
 		}
 	}
+	
+	
 };
