@@ -1,3 +1,4 @@
 bin
 *._trace
 *.smap
+jar-in-jar-loader.zip
