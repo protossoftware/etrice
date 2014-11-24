@@ -41,11 +41,12 @@ public class GeneralActionCodeScanner extends ActionCodeScanner {
 	// general language keywords
 	private static String[] fgKeywords = { "while", "do", "for", "if", "else",
 		"break", "continue", "switch", "case", "default", "static", "return",
-		"struct", "union", "sizeof", "explicit", "export", "extern",
+		"struct", "union", "sizeof", "explicit", "export", "extern", "goto",
 		"this", "throw", "try", "catch", "new", "delete",
-		"public", "private", "protected",
-		"typedef", "virtual", "union", "using", "template", "volatile", "mutable", "friend",
-		"typeid", "typename"};
+		"public", "private", "protected", "sizeof",
+		"typedef", "virtual", "class", "using", "template", "volatile", "mutable", "friend", "inline",
+		"typeid", "typename", "namespace",
+		"const", "int", "float", "double", "short", "long", "unsigned", "signed", "void"};
 
 	/**
 	 * {@inheritDoc}
