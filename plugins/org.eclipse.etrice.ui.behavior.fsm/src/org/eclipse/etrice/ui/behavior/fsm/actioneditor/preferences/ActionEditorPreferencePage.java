@@ -18,8 +18,9 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class ActionEditorPreferencePage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
 
-	public static final String CHOOSE_JAVA_EDITOR = "Choose editor for Java :-";
-	public static final String CHOOSE_CPP_EDITOR = "Choose editor for C/C++ :-";
+	public static final String CHOOSE_EDITOR_LANGUAGE = "Choose editor language:";
+	public static final String CHOOSE_JAVA_EDITOR = "Choose editor for Java:";
+	public static final String CHOOSE_CPP_EDITOR = "Choose editor for C/C++:";
 
 	public ActionEditorPreferencePage() {
 		super(GRID);
@@ -34,6 +35,16 @@ public class ActionEditorPreferencePage extends FieldEditorPreferencePage
 	 */
 	public void createFieldEditors() {
 
+		addField(new RadioGroupFieldEditor(
+				PreferenceConstants.JAVA_EDITOR_LANGUAGE,
+				CHOOSE_EDITOR_LANGUAGE,
+				1,
+				new String[][] {
+						{"Java", PreferenceConstants.JAVA_LANGUAGE},
+						{"C/C++", PreferenceConstants.CPP_LANGUAGE}
+				},
+				getFieldEditorParent()));
+		
 		// Choice for Java Editor
 		addField(new RadioGroupFieldEditor(
 				PreferenceConstants.JAVA_EDITOR_PREFERENCE,
