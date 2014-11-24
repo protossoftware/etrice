@@ -5,8 +5,7 @@
              label="Introduction to the ROOM Language"/>
    </topic>
    <topic href="html/etrice-docch2.html#x6-250002" label="Tutorials">
-      <topic href="html/etrice-docse3.html#x7-260002.1"
-             label="Working with the tutorials"/>
+      <topic href="html/etrice-docse3.html#x7-260002.1" label="Working with the tutorials"/>
       <topic href="html/etrice-docse4.html#x8-270002.2"
              label="Setting up the Workspace for Java Projects"/>
       <topic href="html/etrice-docse5.html#x9-300002.3"
@@ -17,41 +16,39 @@
              label="Ping Pong Tutorial (Java and C)"/>
       <topic href="html/etrice-docse9.html#x13-620002.7" label="Traffic Light"/>
    </topic>
-   <topic href="html/etrice-docch3.html#x14-700003" label="Examples">
-      <topic href="html/etrice-docse10.html#x15-710003.1" label="Dynamic Actors 1"/>
-      <topic href="html/etrice-docse11.html#x16-750003.2" label="Dynamic Actors 2"/>
-      <topic href="html/etrice-docse12.html#x17-790003.3" label="Dynamic Actors 3"/>
-      <topic href="html/etrice-docse13.html#x18-830003.4" label="Dynamic Actors 4"/>
-      <topic href="html/etrice-docse14.html#x19-870003.5" label="Dynamic Actors 5"/>
-      <topic href="html/etrice-docse15.html#x20-910003.6" label="Dynamic Actors 6"/>
-      <topic href="html/etrice-docse16.html#x21-950003.7" label="Dynamic Actors 7"/>
-      <topic href="html/etrice-docse17.html#x22-990003.8" label="Dynamic Actors 8"/>
-      <topic href="html/etrice-docse18.html#x23-1030003.9" label="Dynamic Actors 9"/>
+   <topic href="html/etrice-docch3.html#x14-700003" label="Standalone Generators"/>
+   <topic href="html/etrice-docch4.html#x15-710004" label="Examples">
+      <topic href="html/etrice-docse10.html#x16-720004.1" label="Dynamic Actors 1"/>
+      <topic href="html/etrice-docse11.html#x17-760004.2" label="Dynamic Actors 2"/>
+      <topic href="html/etrice-docse12.html#x18-800004.3" label="Dynamic Actors 3"/>
+      <topic href="html/etrice-docse13.html#x19-840004.4" label="Dynamic Actors 4"/>
+      <topic href="html/etrice-docse14.html#x20-880004.5" label="Dynamic Actors 5"/>
+      <topic href="html/etrice-docse15.html#x21-920004.6" label="Dynamic Actors 6"/>
+      <topic href="html/etrice-docse16.html#x22-960004.7" label="Dynamic Actors 7"/>
+      <topic href="html/etrice-docse17.html#x23-1000004.8" label="Dynamic Actors 8"/>
+      <topic href="html/etrice-docse18.html#x24-1040004.9" label="Dynamic Actors 9"/>
    </topic>
-   <topic href="html/etrice-docch4.html#x24-1070004" label="ROOM Concepts">
-      <topic href="html/etrice-docse19.html#x25-1080004.1" label="Actors"/>
-      <topic href="html/etrice-docse20.html#x26-1160004.2" label="Protocols"/>
-      <topic href="html/etrice-docse21.html#x27-1200004.3" label="Ports"/>
-      <topic href="html/etrice-docse22.html#x28-1260004.4" label="DataClass"/>
-      <topic href="html/etrice-docse23.html#x29-1290004.5" label="Layering"/>
-      <topic href="html/etrice-docse24.html#x30-1320004.6"
-             label="Finite State Machines"/>
+   <topic href="html/etrice-docch5.html#x25-1080005" label="ROOM Concepts">
+      <topic href="html/etrice-docse19.html#x26-1090005.1" label="Actors"/>
+      <topic href="html/etrice-docse20.html#x27-1170005.2" label="Protocols"/>
+      <topic href="html/etrice-docse21.html#x28-1210005.3" label="Ports"/>
+      <topic href="html/etrice-docse22.html#x29-1270005.4" label="DataClass"/>
+      <topic href="html/etrice-docse23.html#x30-1300005.5" label="Layering"/>
+      <topic href="html/etrice-docse24.html#x31-1330005.6" label="Finite State Machines"/>
    </topic>
-   <topic href="html/etrice-docch5.html#x31-1390005" label="eTrice Features">
-      <topic href="html/etrice-docse25.html#x32-1400005.1" label="Model Navigation"/>
-      <topic href="html/etrice-docse26.html#x33-1450005.2"
-             label="eTrice Java Projects"/>
-      <topic href="html/etrice-docse27.html#x34-1490005.3"
+   <topic href="html/etrice-docch6.html#x32-1400006" label="eTrice Features">
+      <topic href="html/etrice-docse25.html#x33-1410006.1" label="Model Navigation"/>
+      <topic href="html/etrice-docse26.html#x34-1460006.2" label="eTrice Java Projects"/>
+      <topic href="html/etrice-docse27.html#x35-1500006.3"
              label="Automatic Diagram Layout with KIELER"/>
-      <topic href="html/etrice-docse28.html#x35-1620005.4" label="Annotations"/>
-      <topic href="html/etrice-docse29.html#x36-1670005.5" label="Enumerations"/>
-      <topic href="html/etrice-docse30.html#x37-1680005.6"
+      <topic href="html/etrice-docse28.html#x36-1630006.4" label="Annotations"/>
+      <topic href="html/etrice-docse29.html#x37-1680006.5" label="Enumerations"/>
+      <topic href="html/etrice-docse30.html#x38-1690006.6"
              label="eTrice Models and Their Relations"/>
    </topic>
-   <topic href="html/etrice-docch6.html#x38-1730006"
+   <topic href="html/etrice-docch7.html#x39-1740007"
           label="eTrice Tool Developer’s Reference">
-      <topic href="html/etrice-docse31.html#x39-1740006.1" label="Architecture"/>
-      <topic href="html/etrice-docse32.html#x40-1810006.2"
-             label="Component Overview"/>
+      <topic href="html/etrice-docse31.html#x40-1750007.1" label="Architecture"/>
+      <topic href="html/etrice-docse32.html#x41-1820007.2" label="Component Overview"/>
    </topic>
 </toc>

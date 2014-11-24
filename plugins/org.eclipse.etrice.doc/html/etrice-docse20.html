@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2014-09-06 19:28:00" /> 
+<meta name="date" content="2014-11-24 14:37:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -19,49 +19,49 @@ href="etrice-docse21.html" >next</a>] [<a
 href="etrice-docse19.html" >prev</a>] [<a 
 href="etrice-docse19.html#tailetrice-docse19.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse20.html">tail</a>] [<a 
-href="etrice-docch4.html#etrice-docse20.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
- id="x26-1160004.2"></a>Protocols</h3>
+href="etrice-docch5.html#etrice-docse20.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x27-1170005.2"></a>Protocols</h3>
 <!--l. 169--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
- id="x26-1170004.2.1"></a>Description</h4>
+<h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
+ id="x27-1180005.2.1"></a>Description</h4>
 <!--l. 171--><p class="noindent" >A <span id="textcolor40"><span 
 class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
 class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports. The exact
 semantics of a message is defined by the execution model.
 </p><!--l. 174--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
- id="x26-1180004.2.2"></a>Motivation</h4>
+<h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
+ id="x27-1190005.2.2"></a>Motivation</h4>
      <ul class="itemize1">
      <li class="itemize">Protocol classes provide a reusable interface specification for ports
      </li>
      <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
 <!--l. 181--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">4.2.3   </span> <a 
- id="x26-1190004.2.3"></a>Notation</h4>
+<h4 class="subsectionHead"><span class="titlemark">5.2.3   </span> <a 
+ id="x27-1200005.2.3"></a>Notation</h4>
 <!--l. 183--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing
 messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a data
 class.
 </p>
 <!--l. 188-->
 <div class="lstlisting" id="listing-35"><span class="label"><a 
- id="x26-119001r1"></a></span><span 
+ id="x27-120001r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ProtocolClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119002r2"></a></span><span 
+ id="x27-120002r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">incoming</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119003r3"></a></span><span 
+ id="x27-120003r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -75,7 +75,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">int32</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119004r4"></a></span><span 
+ id="x27-120004r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -84,17 +84,17 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">m2</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119005r5"></a></span><span 
+ id="x27-120005r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119006r6"></a></span><span 
+ id="x27-120006r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">outgoing</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119007r7"></a></span><span 
+ id="x27-120007r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -108,7 +108,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">DataClass1</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119008r8"></a></span><span 
+ id="x27-120008r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -117,11 +117,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">m4</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119009r9"></a></span><span 
+ id="x27-120009r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x26-119010r10"></a></span><span 
+ id="x27-120010r10"></a></span><span 
 class="ec-lmtt-9">}</span>
 </div>
                                                                                             
@@ -131,7 +131,7 @@ href="etrice-docse21.html" >next</a>] [<a
 href="etrice-docse19.html" >prev</a>] [<a 
 href="etrice-docse19.html#tailetrice-docse19.html" >prev-tail</a>] [<a 
 href="etrice-docse20.html" >front</a>] [<a 
-href="etrice-docch4.html#etrice-docse20.html" >up</a>] </p></div>
+href="etrice-docch5.html#etrice-docse20.html" >up</a>] </p></div>
 <!--l. 201--><p class="noindent" ><a 
  id="tailetrice-docse20.html"></a> </p> 
 </body></html> 

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2014-09-06 19:28:00" /> 
+<meta name="date" content="2014-11-24 14:37:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -19,37 +19,37 @@ href="etrice-docse12.html" >next</a>] [<a
 href="etrice-docse10.html" >prev</a>] [<a 
 href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse11.html">tail</a>] [<a 
-href="etrice-docch3.html#etrice-docse11.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
- id="x16-750003.2"></a>Dynamic Actors 2</h3>
+href="etrice-docch4.html#etrice-docse11.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x17-760004.2"></a>Dynamic Actors 2</h3>
 <!--l. 131--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors2</span>.
 </p><!--l. 133--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
- id="x16-760003.2.1"></a>Purpose</h4>
+<h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
+ id="x17-770004.2.1"></a>Purpose</h4>
 <!--l. 135--><p class="noindent" >A modified version of <span 
 class="ec-lmtt-10">dynamicactors1 </span>is used to analyze eventual memory leaks of the application.
 </p><!--l. 137--><p class="noindent" >
 </p>
-<h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
- id="x16-770003.2.2"></a>Details</h4>
+<h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
+ id="x17-780004.2.2"></a>Details</h4>
 <!--l. 139--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
 </p><!--l. 142--><p class="noindent" >
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x16-77002x1">create an instance of <span 
+  class="enumerate" id="x17-78002x1">create an instance of <span 
 class="ec-lmtt-10">Optional2</span>
      </li>
      <li 
-  class="enumerate" id="x16-77004x2">destroy the instance
+  class="enumerate" id="x17-78004x2">destroy the instance
      </li>
      <li 
-  class="enumerate" id="x16-77006x3">create an instance of <span 
+  class="enumerate" id="x17-78006x3">create an instance of <span 
 class="ec-lmtt-10">Optional1</span>
      </li>
      <li 
-  class="enumerate" id="x16-77008x4">destroy the instance</li></ol>
+  class="enumerate" id="x17-78008x4">destroy the instance</li></ol>
 <!--l. 149--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
 </p><!--l. 151--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
 analyzed using <span 
@@ -62,7 +62,7 @@ it.
 class="lmmi-10">&#x03BC;</span>s.
 </p><!--l. 159--><p class="noindent" >The result of the heap analysis for <span 
 class="ec-lmtt-10">org.eclipse.etrice.* </span>objects is listed in figure <a 
-href="#x16-770092">3.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
+href="#x17-780092">4.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
 the retained heap size indicate that the application has no memory leak.
 </p>
 <hr class="figure" /><div class="figure" 
@@ -70,20 +70,20 @@ the retained heap size indicate that the application has no memory leak.
                                                                                             
                                                                                             
 <a 
- id="x16-770092"></a>
+ id="x17-780092"></a>
                                                                                             
                                                                                             
 <!--l. 163--><p class="noindent" ><img 
 src="images/039-DynAct2-HeapAnalysis.jpg" alt="PIC"  
  />
 <br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;3.2: </span><span  
-class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x16-770092 -->
+><span class="id">Figure&#x00A0;4.2: </span><span  
+class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x17-780092 -->
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
-<h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
- id="x16-780003.2.3"></a>Noteworthy</h4>
+<h4 class="subsectionHead"><span class="titlemark">4.2.3   </span> <a 
+ id="x17-790004.2.3"></a>Noteworthy</h4>
      <ul class="itemize1">
      <li class="itemize">Calling the garbage collector every time before the free memory is dumped costs a significant amount of time
      and the execution time is increased to the order of seconds.
@@ -96,7 +96,7 @@ href="etrice-docse12.html" >next</a>] [<a
 href="etrice-docse10.html" >prev</a>] [<a 
 href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="etrice-docse11.html" >front</a>] [<a 
-href="etrice-docch3.html#etrice-docse11.html" >up</a>] </p></div>
+href="etrice-docch4.html#etrice-docse11.html" >up</a>] </p></div>
 <!--l. 176--><p class="noindent" ><a 
  id="tailetrice-docse11.html"></a> </p> 
 </body></html> 

@@ -4,115 +4,96 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>3 Examples</title> 
+<head><title>3 Standalone Generators</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2014-09-06 19:28:00" /> 
+<meta name="date" content="2014-11-24 14:37:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse10.html" >next</a>] [<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="#tailetrice-docch3.html">tail</a>] [<a 
 href="etrice-doc.html#etrice-docch3.html" >up</a>] </p></div>
 <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;3</span><br /><a 
- id="x14-700003"></a>Examples</h2>
-<!--l. 3--><p class="noindent" >Each example can be installed separately in the workspace using the new wizard.
-</p><!--l. 5--><p class="noindent" >Choose File &#x003E; New &#x003E; Other (or Ctrl-N), open category "eTrice Examples and Tutorials" and select the example you are
-interested in. Click Next and Finish and you are ready to go.
-</p><!--l. 8--><p class="noindent" >Each example comes with the source code generated already. There are also launch configurations for code
-generation.
+ id="x14-700003"></a>Standalone Generators</h2>
+<!--l. 3--><p class="noindent" >The eTrice generators can be called from the command line. This is useful e.g. if they should participate in a build process
+driven by command line tools like make.
+</p><!--l. 7--><p class="noindent" >The generators are distributed as self contained jars and can be called using
+</p><!--l. 10--><p class="noindent" ><span 
+class="ec-lmtt-10">jave -jar &#x003C;the generator.jar&#x003E; [arguments]</span>.
+</p><!--l. 12--><p class="noindent" >The options for the Java generator are
+                                                                                            
+                                                                                            
 </p>
-<div class="sectionTOCS">
-&#x00A0;<span class="sectionToc" >3.1 <a 
-href="etrice-docse10.html#x15-710003.1">Dynamic Actors 1</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.1 <a 
-href="etrice-docse10.html#x15-720003.1.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.2 <a 
-href="etrice-docse10.html#x15-730003.1.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.1.3 <a 
-href="etrice-docse10.html#x15-740003.1.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.2 <a 
-href="etrice-docse11.html#x16-750003.2">Dynamic Actors 2</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.1 <a 
-href="etrice-docse11.html#x16-760003.2.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.2 <a 
-href="etrice-docse11.html#x16-770003.2.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.2.3 <a 
-href="etrice-docse11.html#x16-780003.2.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.3 <a 
-href="etrice-docse12.html#x17-790003.3">Dynamic Actors 3</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.1 <a 
-href="etrice-docse12.html#x17-800003.3.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.2 <a 
-href="etrice-docse12.html#x17-810003.3.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.3.3 <a 
-href="etrice-docse12.html#x17-820003.3.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.4 <a 
-href="etrice-docse13.html#x18-830003.4">Dynamic Actors 4</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.4.1 <a 
-href="etrice-docse13.html#x18-840003.4.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.4.2 <a 
-href="etrice-docse13.html#x18-850003.4.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.4.3 <a 
-href="etrice-docse13.html#x18-860003.4.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.5 <a 
-href="etrice-docse14.html#x19-870003.5">Dynamic Actors 5</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.5.1 <a 
-href="etrice-docse14.html#x19-880003.5.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.5.2 <a 
-href="etrice-docse14.html#x19-890003.5.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.5.3 <a 
-href="etrice-docse14.html#x19-900003.5.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.6 <a 
-href="etrice-docse15.html#x20-910003.6">Dynamic Actors 6</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.1 <a 
-href="etrice-docse15.html#x20-920003.6.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.2 <a 
-href="etrice-docse15.html#x20-930003.6.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.6.3 <a 
-href="etrice-docse15.html#x20-940003.6.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.7 <a 
-href="etrice-docse16.html#x21-950003.7">Dynamic Actors 7</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.7.1 <a 
-href="etrice-docse16.html#x21-960003.7.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.7.2 <a 
-href="etrice-docse16.html#x21-970003.7.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.7.3 <a 
-href="etrice-docse16.html#x21-980003.7.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.8 <a 
-href="etrice-docse17.html#x22-990003.8">Dynamic Actors 8</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.8.1 <a 
-href="etrice-docse17.html#x22-1000003.8.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.8.2 <a 
-href="etrice-docse17.html#x22-1010003.8.2">Details</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.8.3 <a 
-href="etrice-docse17.html#x22-1020003.8.3">Noteworthy</a></span>
-<br />&#x00A0;<span class="sectionToc" >3.9 <a 
-href="etrice-docse18.html#x23-1030003.9">Dynamic Actors 9</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.9.1 <a 
-href="etrice-docse18.html#x23-1040003.9.1">Purpose</a></span>
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.9.2 <a 
-href="etrice-docse18.html#x23-1050003.9.2">Details</a></span>
-                                                                                            
-                                                                                            
-<br />&#x00A0;&#x00A0;<span class="subsectionToc" >3.9.3 <a 
-href="etrice-docse18.html#x23-1060003.9.3">Noteworthy</a></span>
+<div class="verbatim" id="verbatim-10">
+org.eclipse.etrice.generator.java.Main&#x00A0;[-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;]&#x00A0;[-genDocu]&#x00A0;[-lib]
+&#x00A0;<br />[-noexit]&#x00A0;[-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;]&#x00A0;[-inc]&#x00A0;[-genDir&#x00A0;&#x003C;generation&#x00A0;directory&#x003E;]
+&#x00A0;<br />[-genInfoDir&#x00A0;&#x003C;generation&#x00A0;info&#x00A0;directory&#x003E;]&#x00A0;[-genDocDir&#x00A0;&#x003C;gen&#x00A0;documentation&#x00A0;directory&#x003E;]
+&#x00A0;<br />[-debug]&#x00A0;[-msc_instr]&#x00A0;[-gen_as_verbose]&#x00A0;[-help]&#x00A0;[-persistable]
+&#x00A0;<br />[-storeDataObj]&#x00A0;&#x003C;list&#x00A0;of&#x00A0;model&#x00A0;file&#x00A0;paths&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;list&#x00A0;of&#x00A0;model&#x00A0;file&#x00A0;paths&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;model&#x00A0;file&#x00A0;paths&#x00A0;may&#x00A0;be&#x00A0;specified&#x00A0;as
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;e.g.&#x00A0;C:\path\to\model\mymodel.room
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDocu&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;documentation&#x00A0;is&#x00A0;created
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-lib&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;all&#x00A0;classes&#x00A0;are&#x00A0;generated
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;and&#x00A0;no&#x00A0;instances
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-noexit&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;JVM&#x00A0;is&#x00A0;not&#x00A0;exited
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;generator&#x00A0;model&#x00A0;will
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;be&#x00A0;saved&#x00A0;to&#x00A0;this&#x00A0;location
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-inc&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;generation&#x00A0;is&#x00A0;incremental
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDir&#x00A0;&#x003C;generation&#x00A0;directory&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genInfoDir&#x00A0;&#x003C;generation&#x00A0;info&#x00A0;dir&#x003E;&#x00A0;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;info&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDocDir&#x00A0;&#x003C;gen&#x00A0;documentation&#x00A0;dir&#x003E;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;documentation&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-debug&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;create&#x00A0;debug&#x00A0;output
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-msc_instr&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;generate&#x00A0;instrumentation&#x00A0;for&#x00A0;MSC&#x00A0;generation
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-gen_as_verbose&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;generate&#x00A0;instrumentation&#x00A0;for&#x00A0;verbose&#x00A0;console&#x00A0;output
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-help&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;display&#x00A0;this&#x00A0;help&#x00A0;text
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-persistable&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;make&#x00A0;actor&#x00A0;classes&#x00A0;persistable
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-storeDataObj&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;equip&#x00A0;actor&#x00A0;classes&#x00A0;with
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;store/restore&#x00A0;using&#x00A0;POJOs
 </div>
-
-
-
-
-
-
-
+<!--l. 41--><p class="nopar" >
+</p><!--l. 43--><p class="noindent" >The options for the C generator are
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-11">
+org.eclipse.etrice.generator.c.Main&#x00A0;[-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;]&#x00A0;[-genDocu]&#x00A0;[-lib]
+&#x00A0;<br />[-noexit]&#x00A0;[-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;]&#x00A0;[-inc]&#x00A0;[-genDir&#x00A0;&#x003C;generation&#x00A0;directory&#x003E;]
+&#x00A0;<br />[-genInfoDir&#x00A0;&#x003C;generation&#x00A0;info&#x00A0;directory&#x003E;]&#x00A0;[-genDocDir&#x00A0;&#x003C;gen&#x00A0;documentation&#x00A0;directory&#x003E;]
+&#x00A0;<br />[-debug]&#x00A0;[-msc_instr]&#x00A0;[-gen_as_verbose]&#x00A0;[-help]&#x00A0;[-persistable]
+&#x00A0;<br />[-storeDataObj]&#x00A0;&#x003C;list&#x00A0;of&#x00A0;model&#x00A0;file&#x00A0;paths&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;list&#x00A0;of&#x00A0;model&#x00A0;file&#x00A0;paths&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;model&#x00A0;file&#x00A0;paths&#x00A0;may&#x00A0;be&#x00A0;specified&#x00A0;as
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;e.g.&#x00A0;C:\path\to\model\mymodel.room
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDocu&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;documentation&#x00A0;is&#x00A0;created
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-lib&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;all&#x00A0;classes&#x00A0;are&#x00A0;generated
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;and&#x00A0;no&#x00A0;instances
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-noexit&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;JVM&#x00A0;is&#x00A0;not&#x00A0;exited
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-saveGenModel&#x00A0;&#x003C;genmodel&#x00A0;path&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;generator&#x00A0;model&#x00A0;will
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;be&#x00A0;saved&#x00A0;to&#x00A0;this&#x00A0;location
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-inc&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;the&#x00A0;generation&#x00A0;is&#x00A0;incremental
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDir&#x00A0;&#x003C;generation&#x00A0;directory&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genInfoDir&#x00A0;&#x003C;generation&#x00A0;info&#x00A0;dir&#x003E;&#x00A0;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;info&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-genDocDir&#x00A0;&#x003C;gen&#x00A0;documentation&#x00A0;dir&#x003E;&#x00A0;#&#x00A0;the&#x00A0;directory&#x00A0;for&#x00A0;generated&#x00A0;documentation&#x00A0;files
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-debug&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;if&#x00A0;specified&#x00A0;create&#x00A0;debug&#x00A0;output
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-msc_instr&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;generate&#x00A0;instrumentation&#x00A0;for&#x00A0;MSC&#x00A0;generation
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-gen_as_verbose&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;generate&#x00A0;instrumentation&#x00A0;for&#x00A0;verbose&#x00A0;console&#x00A0;output
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-help&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;display&#x00A0;this&#x00A0;help&#x00A0;text
+</div>
+<!--l. 68--><p class="nopar" >
+                                                                                            
+                                                                                            
+</p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse10.html" >next</a>] [<a 
+href="etrice-docch4.html" >next</a>] [<a 
 href="etrice-docse9.html" >prev</a>] [<a 
 href="etrice-docse9.html#tailetrice-docse9.html" >prev-tail</a>] [<a 
 href="etrice-docch3.html" >front</a>] [<a 
