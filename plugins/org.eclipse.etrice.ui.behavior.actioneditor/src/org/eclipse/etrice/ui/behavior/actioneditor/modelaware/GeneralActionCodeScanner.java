@@ -24,6 +24,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WordRule;
+import org.eclipse.swt.SWT;
 
 /**
  * Extends {@link ActionCodeScanner} with rules to identify general language
@@ -38,7 +39,13 @@ public class GeneralActionCodeScanner extends ActionCodeScanner {
 	}
 
 	// general language keywords
-	private static String[] fgKeywords = { "while", "for", "if", "else" };
+	private static String[] fgKeywords = { "while", "do", "for", "if", "else",
+		"break", "continue", "switch", "case", "default", "static", "return",
+		"struct", "union", "sizeof", "explicit", "export", "extern",
+		"this", "throw", "try", "catch", "new", "delete",
+		"public", "private", "protected",
+		"typedef", "virtual", "union", "using", "template", "volatile", "mutable", "friend",
+		"typeid", "typename"};
 
 	/**
 	 * {@inheritDoc}
@@ -50,7 +57,7 @@ public class GeneralActionCodeScanner extends ActionCodeScanner {
 
 		IToken keywordToken = new Token(new TextAttribute(configuration
 				.getColorManager().getColor(
-						GeneralActionCodeColorManager.KEYWORD)));
+						GeneralActionCodeColorManager.KEYWORD), null, SWT.BOLD));
 		IToken stringToken = new Token(new TextAttribute(configuration
 				.getColorManager().getColor(
 						GeneralActionCodeColorManager.STRING)));

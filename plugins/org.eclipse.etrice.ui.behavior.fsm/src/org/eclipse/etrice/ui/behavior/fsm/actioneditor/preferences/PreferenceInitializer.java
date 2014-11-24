@@ -23,6 +23,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
+		// Set the default preference value for editor language
+		store.setDefault(PreferenceConstants.EDITOR_LANGUAGE,
+				PreferenceConstants.JAVA_LANGUAGE);
+
 		// Set the default preference value for Java Editor
 		store.setDefault(PreferenceConstants.JAVA_EDITOR_PREFERENCE,
 				MODEL_AWARE_ACTION_CODE_EDITOR_ID);

@@ -29,6 +29,7 @@ import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.common.base.dialogs.MultiValidator2;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
@@ -221,12 +222,15 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		Label l = getToolkit().createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 
-		// TODO Auto-detect target language.
-		String targetLanguage = PreferenceConstants.JAVA_EDITOR_PREFERENCE;
+		// get target language and selected editor
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String targetLanguage = store.getString(PreferenceConstants.EDITOR_LANGUAGE);
+		String editor = (targetLanguage.equals(PreferenceConstants.JAVA_LANGUAGE))?
+				PreferenceConstants.JAVA_EDITOR_PREFERENCE : PreferenceConstants.CPP_EDITOR_PREFERENCE;
 
-		// Get editor id from preferences for the given target language.
+		// Get editor id from preferences
 		String id = Activator.getDefault().getPreferenceStore()
-				.getString(targetLanguage);
+				.getString(editor);
 
 		// Create new editor instance
 		IActionCodeEditor actionCodeEditor = ActionCodeEditorRegistry.INSTANCE

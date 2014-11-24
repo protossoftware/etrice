@@ -12,7 +12,7 @@ public class PreferenceConstants {
 	/** indicating C/C++ */
 	public static final String CPP_LANGUAGE = "org.eclipse.etrice.ui.behavior.actioneditor.preferences.cpplanguage";
 	/** the language to be chosen */
-	public static final String JAVA_EDITOR_LANGUAGE = "org.eclipse.etrice.ui.behavior.actioneditor.preferences.language";
+	public static final String EDITOR_LANGUAGE = "org.eclipse.etrice.ui.behavior.actioneditor.preferences.language";
 	/** Preference name for Java Editor */
 	public static final String JAVA_EDITOR_PREFERENCE = "org.eclipse.etrice.ui.behavior.actioneditor.preferences.javaeditor";
 	/** Preference name for C/C++ Editor */

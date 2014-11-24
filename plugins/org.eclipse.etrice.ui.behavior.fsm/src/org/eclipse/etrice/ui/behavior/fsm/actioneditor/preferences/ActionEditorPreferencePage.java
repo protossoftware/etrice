@@ -35,8 +35,9 @@ public class ActionEditorPreferencePage extends FieldEditorPreferencePage
 	 */
 	public void createFieldEditors() {
 
+		// choice for language
 		addField(new RadioGroupFieldEditor(
-				PreferenceConstants.JAVA_EDITOR_LANGUAGE,
+				PreferenceConstants.EDITOR_LANGUAGE,
 				CHOOSE_EDITOR_LANGUAGE,
 				1,
 				new String[][] {
