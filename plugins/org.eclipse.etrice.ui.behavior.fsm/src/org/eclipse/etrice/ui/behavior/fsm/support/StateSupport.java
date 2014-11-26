@@ -624,22 +624,6 @@ public class StateSupport {
 				State s = (State) bo;
 				ModelComponent mainAc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				
-				// check if state still owned/inherited
-				{
-					ModelComponent mc = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
-					ModelComponent tmp = mainAc;
-					boolean found = false;
-					do {
-						if (tmp==mc)
-							found = true;
-						tmp = tmp.getBase();
-					}
-					while (!found && tmp!=null);
-					
-					if (!found)
-						return Reason.createTrueReason("State not inherited anymore");
-				}
-				
 				// check sub structure hint
 				{
 					boolean hasSubStruct = FSMSupportUtil.getInstance().getFSMHelpers().hasSubStructure(s, mainAc);

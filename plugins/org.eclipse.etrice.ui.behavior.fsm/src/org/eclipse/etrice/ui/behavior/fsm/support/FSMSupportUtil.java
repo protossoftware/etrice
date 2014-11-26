@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -49,16 +50,17 @@ import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.util.FSMUtil;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil;
 import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
-import org.eclipse.etrice.ui.behavior.fsm.support.ContextSwitcher;
-import org.eclipse.etrice.ui.behavior.fsm.support.IPositionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.support.IPositionProvider.Pos;
 import org.eclipse.etrice.ui.behavior.fsm.support.IPositionProvider.PosAndSize;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IRemoveFeature;
+import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.LayoutContext;
+import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.styles.Point;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -600,14 +602,20 @@ public class FSMSupportUtil {
 					List<State> expected = ctx.getStates();
 					List<State> toAdd = new ArrayList<State>();
 					List<State> toUpdate = new ArrayList<State>();
+					List<State> toRemove = new ArrayList<State>();
 					for (State item : expected) {
 						if (present.contains(item))
 							toUpdate.add(item);
 						else
 							toAdd.add(item);
 					}
+					for(State item : present){
+						if(!expected.contains(item))
+							toRemove.add(item);
+					}
 			    	addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 			    	updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
+			    	removeGraphicalRepresentation(toRemove, shapes, fp);
 				}
 				
 				// transition points
@@ -618,14 +626,20 @@ public class FSMSupportUtil {
 					List<TrPoint> expected = ctx.getTrPoints();
 					List<TrPoint> toAdd = new ArrayList<TrPoint>();
 					List<TrPoint> toUpdate = new ArrayList<TrPoint>();
+					List<TrPoint> toRemove = new ArrayList<TrPoint>();
 					for (TrPoint item : expected) {
 						if (present.contains(item))
 							toUpdate.add(item);
 						else
 							toAdd.add(item);
 					}
+					for(TrPoint item : present){
+						if(!expected.contains(item))
+							toRemove.add(item);
+					}
 			    	addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 			    	updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
+			    	removeGraphicalRepresentation(toRemove, shapes, fp);
 				}
 				
 				// choice points
@@ -636,14 +650,20 @@ public class FSMSupportUtil {
 					List<ChoicePoint> expected = ctx.getChPoints();
 					List<ChoicePoint> toAdd = new ArrayList<ChoicePoint>();
 					List<ChoicePoint> toUpdate = new ArrayList<ChoicePoint>();
+					List<ChoicePoint> toRemove = new ArrayList<ChoicePoint>();
 					for (ChoicePoint item : expected) {
 						if (present.contains(item))
 							toUpdate.add(item);
 						else
 							toAdd.add(item);
 					}
+					for(ChoicePoint item : present){
+						if(!expected.contains(item))
+							toRemove.add(item);
+					}
 			    	addStateGraphNodes(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 			    	updateStateGraphNodes(toUpdate, shapes, ctx.getPositionProvider(), fp);
+			    	removeGraphicalRepresentation(toRemove, shapes, fp);
 				}
 				
 				getSubTpAnchors(sgShape, node2anchor);
@@ -677,12 +697,17 @@ public class FSMSupportUtil {
 					Map<Transition, Connection> present = getTransitionsMap(sgShape, fp);
 					List<Transition> expected = ctx.getTransitions();
 					List<Transition> toAdd = new ArrayList<Transition>();
+					List<Transition> toRemove = new ArrayList<Transition>();
 					for (Transition trans : expected)
 						if (!present.containsKey(trans))
 							toAdd.add(trans);
-					
+					for(Transition item : present.keySet()){
+						if(!expected.contains(item))
+							toRemove.add(item);
+					}
 					addTransitions(toAdd, ctx.getPositionProvider(), sgShape, fp, node2anchor);
 					updateTransitions(present, ctx.getPositionProvider(), sgShape, fp, node2anchor);
+					removeGraphicalRepresentation(toRemove, present.values(), fp);
 				}
 			}
 
@@ -841,6 +866,18 @@ public class FSMSupportUtil {
 						}
 					}
 				}
+	
+	public void removeGraphicalRepresentation(Collection<? extends EObject> toRemove, Collection<? extends PictogramElement> pictograms, IFeatureProvider fp) {
+		for(EObject bo : toRemove)
+			for(PictogramElement pe : pictograms)
+				if(fp.getBusinessObjectForPictogramElement(pe) == bo){
+					IRemoveContext rc = new RemoveContext(pe);
+					IRemoveFeature removeFeature = fp.getRemoveFeature(rc);
+					if (removeFeature != null)
+						removeFeature.remove(rc);
+					break;
+				}
+	}
 
 	private void updateTransitions(Map<Transition, Connection> transitions, IPositionProvider positionProvider, ContainerShape sgShape,
 			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {

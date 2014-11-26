@@ -336,25 +336,6 @@ public class ChoicePointSupport {
 					return Reason.createTrueReason("ChoicePoint deleted from model");
 				}
 				
-				// check if cp still owned/inherited
-				// TODOHRR-B check inheritance
-//				ChoicePoint cp = (ChoicePoint) bo;
-//				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-//				bo = getBusinessObjectForPictogramElement(containerShape);
-//				if (bo instanceof StateGraph) {
-//					StateGraph sg = (StateGraph) bo;
-//					boolean found = false;
-//					do {
-//						if (sg==cp.eContainer())
-//							found = true;
-//						sg = sg.getBase();
-//					}
-//					while (!found && sg!=null);
-//					
-//					if (!found)
-//						return Reason.createTrueReason("TransitionPoint not inherited anymore");
-//				}
-				
 				return Reason.createFalseReason();
 			}
 

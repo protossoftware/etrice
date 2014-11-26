@@ -13,7 +13,7 @@
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -72,6 +72,8 @@ import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+
+import com.google.common.collect.Sets;
 
 public class StateGraphSupport {
 	
@@ -309,60 +311,59 @@ public class StateGraphSupport {
 				
 				String reason = "";
 				int missing = 0;
+				int obsolete = 0;
 				
 				if (context instanceof StateGraphUpdateContext) {
 					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 					
 					// check for states added in model not present in diagram (including inherited)
 					{
-						List<State> expectedStates = ctx.getStates();
-						List<State> presentStates = FSMSupportUtil.getInstance().getStates(shape, fp);
-						for (State state : expectedStates) {
-							if (!presentStates.contains(state))
-								++missing;
-						}
-						if (missing>0)
-							reason += missing+" missing states\n";
+						Set<State> expected = Sets.newHashSet(ctx.getStates());
+						Set<State> present = Sets.newHashSet(FSMSupportUtil.getInstance().getStates(shape, fp));
+						
+						if((missing = Sets.difference(expected, present).size()) > 0)
+							reason += missing+" missing states\n";	
+						if((obsolete = Sets.difference(present, expected).size()) > 0)
+							reason += obsolete+" obsolete states\n";
 					}
 					
 					// check for transition points added in model not present in diagram (including inherited)
 					{
-						missing = 0;
-						List<TrPoint> expectedTrPoints = ctx.getTrPoints();
-						List<TrPoint> presentTrPoints = FSMSupportUtil.getInstance().getTrPoints(sg, shape, fp);
-						for (TrPoint tp : expectedTrPoints) {
-							if (!presentTrPoints.contains(tp))
-								++missing;
-						}
-						if (missing>0)
-							reason += missing+" missing transition points\n";
+						missing = obsolete = 0;
+						Set<TrPoint> expected = Sets.newHashSet(ctx.getTrPoints());
+						Set<TrPoint> present = Sets.newHashSet(FSMSupportUtil.getInstance().getTrPoints(sg, shape, fp));
+						
+						if((missing = Sets.difference(expected, present).size()) > 0)
+							reason += missing+" missing transition points\n";	
+						if((obsolete = Sets.difference(present, expected).size()) > 0)
+							reason += obsolete+" obsolete transition points\n";
 					}
 					
 					// check for choice points added in model not present in diagram (including inherited)
 					{
-						missing = 0;
-						List<ChoicePoint> expectedCPs = ctx.getChPoints();
-						List<ChoicePoint> presentCPs = FSMSupportUtil.getInstance().getChoicePoints(shape, fp);
-						for (ChoicePoint cp : expectedCPs) {
-							if (!presentCPs.contains(cp))
-								++missing;
-						}
-						if (missing>0)
-							reason += missing+" missing choice points\n";
+						missing = obsolete = 0;
+						Set<ChoicePoint> expected = Sets.newHashSet(ctx.getChPoints());
+						Set<ChoicePoint> present = Sets.newHashSet(FSMSupportUtil.getInstance().getChoicePoints(shape, fp));
+						
+						if((missing = Sets.difference(expected, present).size()) > 0)
+							reason += missing+" missing choice points\n";	
+						if((obsolete = Sets.difference(present, expected).size()) > 0)
+							reason += obsolete+" obsolete choice points\n";
 					}
+					
 					
 					// check for transitions added in model not present in diagram (including inherited)
 					{
-						missing = 0;
-						List<Transition> expectedTrans = ctx.getTransitions();
-						List<Transition> presentTrans = FSMSupportUtil.getInstance().getTransitions(getDiagram(), fp);
-						for (Transition trans : expectedTrans) {
-							if (!presentTrans.contains(trans))
-								++missing;
-						}
-						if (missing>0)
-							reason += missing+" missing transitions\n";
+						missing = obsolete = 0;
+						Set<Transition> expected = Sets.newHashSet(ctx.getTransitions());
+						Set<Transition> present = Sets.newHashSet(FSMSupportUtil.getInstance().getTransitions(getDiagram(), fp));
+						
+						if((missing = Sets.difference(expected, present).size()) > 0)
+							reason += missing+" missing transitions\n";	
+						if((obsolete = Sets.difference(present, expected).size()) > 0)
+							reason += obsolete+" obsolete transitions\n";
 					}
+					
 				}
 
 				// check state path

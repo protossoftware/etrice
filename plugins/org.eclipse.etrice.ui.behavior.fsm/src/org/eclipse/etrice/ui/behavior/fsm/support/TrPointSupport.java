@@ -578,24 +578,7 @@ public class TrPointSupport {
 					return Reason.createTrueReason("Transition Point deleted from model");
 				}
 				TrPoint tp = (TrPoint) bo;
-				
-				// check if tp still owned/inherited
 				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
-				bo = getBusinessObjectForPictogramElement(containerShape);
-				// TODOHRR-B check inheritance
-//				if (bo instanceof StateGraph) {
-//					StateGraph sg = (StateGraph) bo;
-//					boolean found = false;
-//					do {
-//						if (sg==tp.eContainer())
-//							found = true;
-//						sg = sg.getBase();
-//					}
-//					while (!found && sg!=null);
-//					
-//					if (!found)
-//						return Reason.createTrueReason("TransitionPoint not inherited anymore");
-//				}
 				
 				GraphicsAlgorithm ga = containerShape.getChildren().get(0).getGraphicsAlgorithm();
 				if (ga instanceof Text) {
