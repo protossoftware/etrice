@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.ui.behavior.fsm.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry;
+import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry.ActionCodeEditorRegistryEntry;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceConstants;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
@@ -233,8 +234,10 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 				.getString(editor);
 
 		// Create new editor instance
-		IActionCodeEditor actionCodeEditor = ActionCodeEditorRegistry.INSTANCE
-				.getEditorWithId(id).newActionCodeEditor(detailCode, parent,
+		ActionCodeEditorRegistryEntry editorEntry = ActionCodeEditorRegistry.INSTANCE.getEditorWithId(id);
+		if(editorEntry == null)
+			return null;
+		IActionCodeEditor actionCodeEditor = editorEntry.newActionCodeEditor(detailCode, parent,
 						mc, useMembers, useMessages, useRecvMessagesOnly);
 		if (actionCodeEditor != null) {
 			configureMemberAwareness(actionCodeEditor, useMembers, useMessages,
