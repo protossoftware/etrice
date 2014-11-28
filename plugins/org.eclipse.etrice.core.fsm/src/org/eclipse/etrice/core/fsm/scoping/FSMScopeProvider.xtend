@@ -149,7 +149,7 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		var sg = getStateGraph(rs)
 		if (sg.eContainer instanceof ModelComponent) {
 			var comp = sg.eContainer as ModelComponent
-			if (comp.base!=null) {
+			if (comp.base != null && !comp.isCircularClassHierarchy) {
 				comp = comp.base
 				val HashSet<State> covered = newHashSet
 				val ArrayList<State> states = newArrayList
@@ -183,22 +183,23 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		val List<IEObjectDescription> scopes = newArrayList
 		
 		var comp = trans.eContainer.eContainer as ModelComponent
-		comp = comp.base
-		while (comp!=null) {
-			if (comp.stateMachine!=null) {
-				val acNameSegments = comp.fullyQualifiedName.segmentCount
-				val iter = comp.stateMachine.eAllContents
-				while (iter.hasNext) {
-					val EObject obj = iter.next
-					if (obj instanceof Transition) {
-						// use qualified name but skip ac FQN and also omit state machine name 'sm'
-						scopes.add(EObjectDescription.create(obj.fullyQualifiedName.skipFirst(acNameSegments+1), obj))
+		if(!comp.isCircularClassHierarchy){
+			comp = comp.base
+			while (comp!=null) {
+				if (comp.stateMachine!=null) {
+					val acNameSegments = comp.fullyQualifiedName.segmentCount
+					val iter = comp.stateMachine.eAllContents
+					while (iter.hasNext) {
+						val EObject obj = iter.next
+						if (obj instanceof Transition) {
+							// use qualified name but skip ac FQN and also omit state machine name 'sm'
+							scopes.add(EObjectDescription.create(obj.fullyQualifiedName.skipFirst(acNameSegments+1), obj))
+						}
 					}
 				}
+				comp = comp.base
 			}
-			comp = comp.base
 		}
-		
 		return new SimpleScope(IScope.NULLSCOPE, scopes)
 	}
 	

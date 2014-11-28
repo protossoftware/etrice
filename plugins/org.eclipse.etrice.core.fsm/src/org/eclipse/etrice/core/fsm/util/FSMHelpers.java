@@ -655,6 +655,8 @@ public class FSMHelpers extends BaseHelpers {
 			}
 			else if (sg.eContainer() instanceof ModelComponent) {
 				ModelComponent base = ((ModelComponent)sg.eContainer()).getBase();
+				if(base != null && isCircularClassHierarchy(base))
+					break;
 				sg = base!=null? base.getStateMachine():null;
 			}
 			else {
@@ -716,6 +718,8 @@ public class FSMHelpers extends BaseHelpers {
 			}
 			else if (sg.eContainer() instanceof ModelComponent) {
 				ModelComponent base = ((ModelComponent)sg.eContainer()).getBase();
+				if(base != null && isCircularClassHierarchy(base))
+					break;
 				sg = base!=null? base.getStateMachine():null;
 			}
 			else {
