@@ -23,6 +23,7 @@ import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WordRule;
+import org.eclipse.swt.SWT;
 
 /**
  * A extension of the {@link RuleBasedScanner} for
@@ -70,7 +71,7 @@ public class ActionCodeScanner extends RuleBasedScanner {
 				.getColorManager().getColor(ActionCodeColorManager.MEMBER)));
 		IToken interfaceItemToken = new Token(new TextAttribute(configuration
 				.getColorManager().getColor(
-						ActionCodeColorManager.INTERFACE_ITEM)));
+						ActionCodeColorManager.INTERFACE_ITEM), null, SWT.BOLD));
 
 		List<IRule> rules = new ArrayList<IRule>();
 

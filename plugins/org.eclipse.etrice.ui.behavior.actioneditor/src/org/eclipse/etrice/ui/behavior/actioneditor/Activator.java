@@ -13,6 +13,8 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -65,5 +67,18 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-
+	
+	public static Image getImage(String path) {
+		Image img = getDefault().getImageRegistry().get(path);
+		if (img==null) {
+			ImageDescriptor desc = imageDescriptorFromPlugin(PLUGIN_ID, path);
+			if (desc==null)
+				System.err.println("image not found: "+path);
+			else {
+				getDefault().getImageRegistry().put(path, desc);
+				img = getDefault().getImageRegistry().get(path);
+			}
+		}
+		return img;
+	}
 }

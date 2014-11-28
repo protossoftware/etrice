@@ -19,12 +19,14 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.ui.behavior.actioneditor.Activator;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * An Action Editor specific content assist processor. The processor lexically
@@ -155,7 +157,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 			for (String item : fConfiguration.getActionCodeParser()
 					.getInterfaceItemMethods(interfaceItem)) {
 				ICompletionProposal proposal = createPrefixCompletionProposal(
-						context, item);
+						context, item, Activator.getImage("icons/method.gif"));
 				if (proposal != null)
 					proposals.add(proposal);
 			}
@@ -181,7 +183,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 		for (String item : fConfiguration.getActionCodeParser()
 				.getAllMemberNames()) {
 			ICompletionProposal proposal = createPrefixCompletionProposal(
-					context, item);
+					context, item, Activator.getImage("icons/member.gif"));
 			if (proposal != null)
 				proposals.add(proposal);
 		}
@@ -207,7 +209,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 		for (String item : fConfiguration.getActionCodeParser()
 				.getAllInterfaceItemNamesWithIndex()) {
 			ICompletionProposal proposal = createPrefixCompletionProposal(
-					context, item);
+					context, item, Activator.getImage("icons/interfaceitem.gif"));
 			if (proposal != null)
 				proposals.add(proposal);
 		}
@@ -230,7 +232,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 	 * @return completion proposal
 	 */
 	private static ICompletionProposal createPrefixCompletionProposal(
-			ActionCodeContext context, String completion) {
+			ActionCodeContext context, String completion, Image img) {
 
 		String prefix = context.getPrefix();
 		if (completion.startsWith(prefix))
@@ -239,7 +241,9 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 			return new CompletionProposal(completion,
 					context.getInvocationOffset() - prefix.length(),
 					prefix.length() + context.getViewer().getSelectedRange().y,
-					completion.length());
+					completion.length(),
+					img,
+					null, null, null);
 
 		return null;
 	}
