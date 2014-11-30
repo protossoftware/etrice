@@ -127,7 +127,7 @@ public class NodeRunnerGen {
       _builder.append("import org.eclipse.etrice.runtime.java.modelbase.SubSystemRunnerBase;");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("class ");
+      _builder.append("public class ");
       _builder.append((clsname + "Runner"), "");
       _builder.append(" extends SubSystemRunnerBase {");
       _builder.newLineIfNotEmpty();

@@ -62,7 +62,7 @@ class NodeRunnerGen {
 		import org.eclipse.etrice.runtime.java.modelbase.RTSystem;
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemRunnerBase;
 		
-		class «clsname+"Runner"» extends SubSystemRunnerBase {
+		public class «clsname+"Runner"» extends SubSystemRunnerBase {
 		
 			/**
 		     * main function
