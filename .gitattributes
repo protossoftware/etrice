@@ -3,3 +3,5 @@
 
 # let the pdf manual be treated as binary
 *.pdf binary
+*.xtextbin binary
+
