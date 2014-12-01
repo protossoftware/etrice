@@ -16,8 +16,10 @@ import com.google.inject.Singleton;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.base.Documentation;
+import org.eclipse.etrice.core.common.base.util.RelativePathHelpers;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -50,7 +52,9 @@ import org.eclipse.etrice.generator.base.CodegenHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -99,6 +103,7 @@ public class DocGen {
         String path = this.roomExt.getDocGenerationTargetPath(model);
         String _name = model.getName();
         String file = (_name + ".tex");
+        final Set<RoomModel> referencedModels = CollectionLiterals.<RoomModel>newHashSet();
         this.logger.logInfo((((("generating LaTeX documentation: \'" + file) + "\' in \'") + path) + "\'"));
         this.fileAccess.setOutputPath(path);
         EList<LogicalSystem> _systems = model.getSystems();
@@ -110,58 +115,123 @@ public class DocGen {
           }
         };
         IterableExtensions.<LogicalSystem>forEach(_systems, _function);
+        EList<LogicalSystem> _systems_1 = model.getSystems();
+        final Procedure1<LogicalSystem> _function_1 = new Procedure1<LogicalSystem>() {
+          public void apply(final LogicalSystem it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<LogicalSystem>forEach(_systems_1, _function_1);
         EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
-        final Procedure1<SubSystemClass> _function_1 = new Procedure1<SubSystemClass>() {
+        final Procedure1<SubSystemClass> _function_2 = new Procedure1<SubSystemClass>() {
           public void apply(final SubSystemClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses, _function_1);
+        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses, _function_2);
+        EList<SubSystemClass> _subSystemClasses_1 = model.getSubSystemClasses();
+        final Procedure1<SubSystemClass> _function_3 = new Procedure1<SubSystemClass>() {
+          public void apply(final SubSystemClass it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses_1, _function_3);
         EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
-        final Procedure1<GeneralProtocolClass> _function_2 = new Procedure1<GeneralProtocolClass>() {
+        final Procedure1<GeneralProtocolClass> _function_4 = new Procedure1<GeneralProtocolClass>() {
           public void apply(final GeneralProtocolClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses, _function_2);
+        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses, _function_4);
+        EList<GeneralProtocolClass> _protocolClasses_1 = model.getProtocolClasses();
+        final Procedure1<GeneralProtocolClass> _function_5 = new Procedure1<GeneralProtocolClass>() {
+          public void apply(final GeneralProtocolClass it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses_1, _function_5);
         EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
-        final Procedure1<EnumerationType> _function_3 = new Procedure1<EnumerationType>() {
+        final Procedure1<EnumerationType> _function_6 = new Procedure1<EnumerationType>() {
           public void apply(final EnumerationType it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<EnumerationType>forEach(_enumerationTypes, _function_3);
+        IterableExtensions.<EnumerationType>forEach(_enumerationTypes, _function_6);
+        EList<EnumerationType> _enumerationTypes_1 = model.getEnumerationTypes();
+        final Procedure1<EnumerationType> _function_7 = new Procedure1<EnumerationType>() {
+          public void apply(final EnumerationType it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<EnumerationType>forEach(_enumerationTypes_1, _function_7);
         EList<DataClass> _dataClasses = model.getDataClasses();
-        final Procedure1<DataClass> _function_4 = new Procedure1<DataClass>() {
+        final Procedure1<DataClass> _function_8 = new Procedure1<DataClass>() {
           public void apply(final DataClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<DataClass>forEach(_dataClasses, _function_4);
+        IterableExtensions.<DataClass>forEach(_dataClasses, _function_8);
+        EList<DataClass> _dataClasses_1 = model.getDataClasses();
+        final Procedure1<DataClass> _function_9 = new Procedure1<DataClass>() {
+          public void apply(final DataClass it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<DataClass>forEach(_dataClasses_1, _function_9);
         EList<ActorClass> _actorClasses = model.getActorClasses();
-        final Procedure1<ActorClass> _function_5 = new Procedure1<ActorClass>() {
+        final Procedure1<ActorClass> _function_10 = new Procedure1<ActorClass>() {
           public void apply(final ActorClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<ActorClass>forEach(_actorClasses, _function_5);
-        CharSequence _generateModelDoc = this.generateModelDoc(ctx);
+        IterableExtensions.<ActorClass>forEach(_actorClasses, _function_10);
+        EList<ActorClass> _actorClasses_1 = model.getActorClasses();
+        final Procedure1<ActorClass> _function_11 = new Procedure1<ActorClass>() {
+          public void apply(final ActorClass it) {
+            EList<RoomModel> _referencedModels = root.getReferencedModels(it);
+            referencedModels.addAll(_referencedModels);
+          }
+        };
+        IterableExtensions.<ActorClass>forEach(_actorClasses_1, _function_11);
+        CharSequence _generateModelDoc = this.generateModelDoc(ctx, referencedModels);
         this.saveAs(_generateModelDoc, file);
       }
     }
   }
   
-  private CharSequence generateModelDoc(final DocGen.DocGenContext ctx) {
+  private String removeLast(final String str) {
+    int _length = str.length();
+    int _minus = (_length - 1);
+    return str.substring(0, _minus);
+  }
+  
+  private String appendIfNotEmpty(final String txt, final String suffix) {
+    String _xifexpression = null;
+    boolean _isEmpty = txt.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = txt;
+    } else {
+      _xifexpression = (txt + suffix);
+    }
+    return _xifexpression;
+  }
+  
+  private CharSequence generateModelDoc(final DocGen.DocGenContext ctx, final Set<RoomModel> referencedModels) {
     CharSequence _xblockexpression = null;
     {
       RoomModel model = ctx.model;
@@ -171,6 +241,10 @@ public class DocGen {
       _builder.append("\\usepackage{import}");
       _builder.newLine();
       _builder.append("\\usepackage{graphicx}");
+      _builder.newLine();
+      _builder.append("\\usepackage{xr}");
+      _builder.newLine();
+      _builder.append("\\usepackage{hyperref}");
       _builder.newLine();
       _builder.append("\\IfFileExists{../doc/userinputs.tex}{\\subimport{../doc/}{userinputs.tex}}{} %hook for conditional user-specific inputs, includes, macros, ... ");
       _builder.newLine();
@@ -323,6 +397,7 @@ public class DocGen {
       _builder.newLine();
       _builder.append("\\begin{document}");
       _builder.newLine();
+      _builder.newLine();
       _builder.append("\\pagestyle{plain}");
       _builder.newLine();
       _builder.append("\\maketitle");
@@ -338,16 +413,57 @@ public class DocGen {
       _builder.newLine();
       _builder.append("\\section{Model Description}");
       _builder.newLine();
-      Documentation _docu = model.getDocu();
-      CharSequence _generateDocText = this.generateDocText(_docu);
-      _builder.append(_generateDocText, "");
-      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        boolean _isEmpty = referencedModels.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("\\section{Referenced Models}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\\begin{itemize}");
+          _builder.newLine();
+          {
+            final Function1<RoomModel, String> _function = new Function1<RoomModel, String>() {
+              public String apply(final RoomModel it) {
+                return it.getName();
+              }
+            };
+            List<RoomModel> _sortBy = IterableExtensions.<RoomModel, String>sortBy(referencedModels, _function);
+            for(final RoomModel refModel : _sortBy) {
+              String _docGenerationTargetPath = this.roomExt.getDocGenerationTargetPath(model);
+              String _removeLast = this.removeLast(_docGenerationTargetPath);
+              String _docGenerationTargetPath_1 = this.roomExt.getDocGenerationTargetPath(refModel);
+              String _removeLast_1 = this.removeLast(_docGenerationTargetPath_1);
+              String _relativePath = RelativePathHelpers.getRelativePath(_removeLast, _removeLast_1, true);
+              final String relPath = this.appendIfNotEmpty(_relativePath, "/");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\\item \\href{");
+              String _replace = relPath.replace("\\", "/");
+              String _name_1 = refModel.getName();
+              String _plus = (_replace + _name_1);
+              String _escapedString_1 = this.escapedString(_plus);
+              _builder.append(_escapedString_1, "");
+              _builder.append(".pdf}{");
+              String _name_2 = refModel.getName();
+              String _escapedString_2 = this.escapedString(_name_2);
+              _builder.append(_escapedString_2, "");
+              _builder.append("}");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\\end{itemize}");
+          _builder.newLine();
+          _builder.append("\\newpage");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       {
         EList<LogicalSystem> _systems = model.getSystems();
-        boolean _isEmpty = _systems.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
+        boolean _isEmpty_1 = _systems.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
           _builder.append("\\section{Logical System Classes}");
           _builder.newLine();
           {
@@ -365,9 +481,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
-        boolean _isEmpty_1 = _subSystemClasses.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
+        boolean _isEmpty_2 = _subSystemClasses.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
           _builder.append("\\section{Subsystem Classes}");
           _builder.newLine();
           {
@@ -385,9 +501,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
-        boolean _isEmpty_2 = _protocolClasses.isEmpty();
-        boolean _not_2 = (!_isEmpty_2);
-        if (_not_2) {
+        boolean _isEmpty_3 = _protocolClasses.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
           _builder.append("\\section{Protocol Classes}");
           _builder.newLine();
           {
@@ -405,9 +521,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
-        boolean _isEmpty_3 = _enumerationTypes.isEmpty();
-        boolean _not_3 = (!_isEmpty_3);
-        if (_not_3) {
+        boolean _isEmpty_4 = _enumerationTypes.isEmpty();
+        boolean _not_4 = (!_isEmpty_4);
+        if (_not_4) {
           _builder.append("\\section{Enumeration Types}");
           _builder.newLine();
           {
@@ -425,9 +541,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<DataClass> _dataClasses = model.getDataClasses();
-        boolean _isEmpty_4 = _dataClasses.isEmpty();
-        boolean _not_4 = (!_isEmpty_4);
-        if (_not_4) {
+        boolean _isEmpty_5 = _dataClasses.isEmpty();
+        boolean _not_5 = (!_isEmpty_5);
+        if (_not_5) {
           _builder.append("\\section{Data Classes}");
           _builder.newLine();
           {
@@ -445,9 +561,9 @@ public class DocGen {
       _builder.newLine();
       {
         EList<ActorClass> _actorClasses = model.getActorClasses();
-        boolean _isEmpty_5 = _actorClasses.isEmpty();
-        boolean _not_5 = (!_isEmpty_5);
-        if (_not_5) {
+        boolean _isEmpty_6 = _actorClasses.isEmpty();
+        boolean _not_6 = (!_isEmpty_6);
+        if (_not_6) {
           _builder.append("\\section{Actor Classes}");
           _builder.newLine();
           {
