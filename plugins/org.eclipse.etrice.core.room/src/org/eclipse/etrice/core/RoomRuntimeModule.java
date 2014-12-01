@@ -15,6 +15,7 @@ package org.eclipse.etrice.core;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.core.common.validation.CustomValidatorManager.StandaloneValidatorExtension;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
+import org.eclipse.etrice.core.linking.RoomConvertingLazyLinker;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
@@ -85,5 +86,9 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return RoomValueConverterService.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
+		return RoomConvertingLazyLinker.class;
 	}
 }
