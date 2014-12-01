@@ -70,8 +70,9 @@ class DocGen {
 			var file = model.name+".tex"
 			val Set<RoomModel> referencedModels = newHashSet
 			logger.logInfo("generating LaTeX documentation: '"+file+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
+			
 			// Save documentation fragments for RoomModel children
+			fileAccess.setOutputPath(path+model.name)
 			model.systems.forEach[generateDoc(ctx).saveAs(docFragmentName)]
 			model.systems.forEach[referencedModels.addAll(root.getReferencedModels(it))]
 			model.subSystemClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
@@ -84,7 +85,9 @@ class DocGen {
 			model.dataClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
 			model.actorClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
 			model.actorClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
+			
 			// Save top-level documentation for RoomModel
+			fileAccess.setOutputPath(path)
 			generateModelDoc(ctx, referencedModels).saveAs(file)
 			
 //			logger.logInfo("main path "+model.docGenerationTargetPath)
@@ -198,7 +201,7 @@ class DocGen {
 		«IF !model.systems.empty»
 			\section{Logical System Classes}
 			«FOR s : model.systems»
-				«s.generateImport»
+				«s.generateImport(model.name)»
 			«ENDFOR»
 			\newpage
 		«ENDIF»
@@ -206,7 +209,7 @@ class DocGen {
 		«IF !model.subSystemClasses.empty»
 			\section{Subsystem Classes}
 			«FOR s : model.subSystemClasses»
-				«s.generateImport»
+				«s.generateImport(model.name)»
 			«ENDFOR»
 			\newpage
 		«ENDIF»
@@ -214,7 +217,7 @@ class DocGen {
 		«IF !model.protocolClasses.empty»
 			\section{Protocol Classes}
 			«FOR c : model.protocolClasses»
-				«c.generateImport»
+				«c.generateImport(model.name)»
 			«ENDFOR»
 			\newpage
 		«ENDIF»
@@ -222,7 +225,7 @@ class DocGen {
 		«IF !model.enumerationTypes.empty»
 			\section{Enumeration Types}
 			«FOR e : model.enumerationTypes»
-				«e.generateImport»
+				«e.generateImport(model.name)»
 			«ENDFOR»
 			\newpage
 		«ENDIF»
@@ -230,7 +233,7 @@ class DocGen {
 		«IF !model.dataClasses.empty»
 			\section{Data Classes}
 			«FOR c : model.dataClasses»
-				«c.generateImport»
+				«c.generateImport(model.name)»
 			«ENDFOR»
 			\newpage
 		«ENDIF»
@@ -238,7 +241,7 @@ class DocGen {
 		«IF !model.actorClasses.empty»
 			\section{Actor Classes}
 			«FOR c : model.actorClasses»
-				«c.generateImport»
+				«c.generateImport(model.name)»
 			«ENDFOR»
 		«ENDIF»
 		\end{document}
@@ -603,10 +606,9 @@ class DocGen {
 		rc.name + ".tex"
 	}
 	
-	def private generateImport(RoomClass rc)
-		'''«rc.docFragmentName.generateImport»'''
+	def private generateImport(RoomClass rc, String dir)
+		'''«rc.docFragmentName.generateImport(dir)»'''
 	
-	def private generateImport(String name)
-		'''\subimport*{./}{«name»}
-		'''
+	def private generateImport(String name, String dir)
+		'''\subimport*{«dir»/}{«name»}'''
 }

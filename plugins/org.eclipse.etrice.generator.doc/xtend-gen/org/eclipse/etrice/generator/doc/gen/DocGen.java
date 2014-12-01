@@ -105,7 +105,9 @@ public class DocGen {
         String file = (_name + ".tex");
         final Set<RoomModel> referencedModels = CollectionLiterals.<RoomModel>newHashSet();
         this.logger.logInfo((((("generating LaTeX documentation: \'" + file) + "\' in \'") + path) + "\'"));
-        this.fileAccess.setOutputPath(path);
+        String _name_1 = model.getName();
+        String _plus = (path + _name_1);
+        this.fileAccess.setOutputPath(_plus);
         EList<LogicalSystem> _systems = model.getSystems();
         final Procedure1<LogicalSystem> _function = new Procedure1<LogicalSystem>() {
           public void apply(final LogicalSystem it) {
@@ -208,6 +210,7 @@ public class DocGen {
           }
         };
         IterableExtensions.<ActorClass>forEach(_actorClasses_1, _function_11);
+        this.fileAccess.setOutputPath(path);
         CharSequence _generateModelDoc = this.generateModelDoc(ctx, referencedModels);
         this.saveAs(_generateModelDoc, file);
       }
@@ -469,7 +472,8 @@ public class DocGen {
           {
             EList<LogicalSystem> _systems_1 = model.getSystems();
             for(final LogicalSystem s : _systems_1) {
-              CharSequence _generateImport = this.generateImport(s);
+              String _name_3 = model.getName();
+              CharSequence _generateImport = this.generateImport(s, _name_3);
               _builder.append(_generateImport, "");
               _builder.newLineIfNotEmpty();
             }
@@ -489,7 +493,8 @@ public class DocGen {
           {
             EList<SubSystemClass> _subSystemClasses_1 = model.getSubSystemClasses();
             for(final SubSystemClass s_1 : _subSystemClasses_1) {
-              CharSequence _generateImport_1 = this.generateImport(s_1);
+              String _name_4 = model.getName();
+              CharSequence _generateImport_1 = this.generateImport(s_1, _name_4);
               _builder.append(_generateImport_1, "");
               _builder.newLineIfNotEmpty();
             }
@@ -509,7 +514,8 @@ public class DocGen {
           {
             EList<GeneralProtocolClass> _protocolClasses_1 = model.getProtocolClasses();
             for(final GeneralProtocolClass c : _protocolClasses_1) {
-              CharSequence _generateImport_2 = this.generateImport(c);
+              String _name_5 = model.getName();
+              CharSequence _generateImport_2 = this.generateImport(c, _name_5);
               _builder.append(_generateImport_2, "");
               _builder.newLineIfNotEmpty();
             }
@@ -529,7 +535,8 @@ public class DocGen {
           {
             EList<EnumerationType> _enumerationTypes_1 = model.getEnumerationTypes();
             for(final EnumerationType e : _enumerationTypes_1) {
-              CharSequence _generateImport_3 = this.generateImport(e);
+              String _name_6 = model.getName();
+              CharSequence _generateImport_3 = this.generateImport(e, _name_6);
               _builder.append(_generateImport_3, "");
               _builder.newLineIfNotEmpty();
             }
@@ -549,7 +556,8 @@ public class DocGen {
           {
             EList<DataClass> _dataClasses_1 = model.getDataClasses();
             for(final DataClass c_1 : _dataClasses_1) {
-              CharSequence _generateImport_4 = this.generateImport(c_1);
+              String _name_7 = model.getName();
+              CharSequence _generateImport_4 = this.generateImport(c_1, _name_7);
               _builder.append(_generateImport_4, "");
               _builder.newLineIfNotEmpty();
             }
@@ -569,7 +577,8 @@ public class DocGen {
           {
             EList<ActorClass> _actorClasses_1 = model.getActorClasses();
             for(final ActorClass c_2 : _actorClasses_1) {
-              CharSequence _generateImport_5 = this.generateImport(c_2);
+              String _name_8 = model.getName();
+              CharSequence _generateImport_5 = this.generateImport(c_2, _name_8);
               _builder.append(_generateImport_5, "");
               _builder.newLineIfNotEmpty();
             }
@@ -1624,20 +1633,21 @@ public class DocGen {
     return (_name + ".tex");
   }
   
-  private CharSequence generateImport(final RoomClass rc) {
+  private CharSequence generateImport(final RoomClass rc, final String dir) {
     StringConcatenation _builder = new StringConcatenation();
     String _docFragmentName = this.docFragmentName(rc);
-    CharSequence _generateImport = this.generateImport(_docFragmentName);
+    CharSequence _generateImport = this.generateImport(_docFragmentName, dir);
     _builder.append(_generateImport, "");
     return _builder;
   }
   
-  private CharSequence generateImport(final String name) {
+  private CharSequence generateImport(final String name, final String dir) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\\subimport*{./}{");
+    _builder.append("\\subimport*{");
+    _builder.append(dir, "");
+    _builder.append("/}{");
     _builder.append(name, "");
     _builder.append("}");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
