@@ -29,7 +29,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = UIBaseActivator.getDefault().getPreferenceStore();
-		store.setDefault(RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, false);
+		store.setDefault(RoomPreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, true);
 	}
 
 }
