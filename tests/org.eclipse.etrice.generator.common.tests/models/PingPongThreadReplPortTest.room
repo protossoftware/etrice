@@ -57,7 +57,7 @@ RoomModel PingPongThreadTestReplPort {
 				Transition tr0: initial -> waitForTimer {
 					action {
 						"count = 0;"
-						"timer.startTimeout(50);"
+						"timer.startTimeout(200);"
 						"EXPECT_ORDER_START(caseId,resultlist,23);"
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
 					}
@@ -96,7 +96,7 @@ RoomModel PingPongThreadTestReplPort {
 						"count<20"
 					}
 					action {
-						"timer.startTimeout(5);"
+						"timer.startTimeout(20);"
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", count+2);"
 						"count++;"
 					}
