@@ -52,6 +52,9 @@ typedef struct etBuffer{
 	etUInt16 blockSize;		/**< size of blocks for the message pool */
 } etBuffer;
 
+/**
+ * the data structure for the high prio functions (needed from PInterrupt)
+ */
 typedef struct etHighPrioFunc etHighPrioFunc;
 struct etHighPrioFunc{
 	void (*func)(void *);
