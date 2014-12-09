@@ -23,6 +23,7 @@ public interface UIBasePreferenceConstants {
 	public static final String VER_GRID_UNIT = "VerGridUnit";
 	public static final String CONFIRM_DELETE = "ConfirmDelete";
 	public static final String SAVE_DIAG_ON_FOCUS_LOST = "SaveDiagOnFocusLost";
+	public static final String SAVE_TEXT_ON_FOCUS_LOST = "SaveTextOnFocusLost";
 	public static final String EXPORT_DIAGRAM_PATH = "ExportDiagramPath";
 	public static final String EXPORT_DIAGRAM_FORMAT = "ExportDiagramFormat";
 	public static final String EXPORT_DIAGRAM_PATH_RELATIVE_TO = "ExportDiagramPathRelativeTo";

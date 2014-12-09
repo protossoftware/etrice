@@ -63,7 +63,7 @@ public class SaveOnFocusLostListener implements IPartListener {
 		if (!(editor instanceof IValidatingEditor))
 			return;
 		
-		boolean save =  Platform.getPreferencesService().getBoolean(store, key, false, null);
+		boolean save =  Platform.getPreferencesService().getBoolean(store, key, true, null);
 		
 		if (save && editor.isDirty())
 			if (((IValidatingEditor)editor).isValid())

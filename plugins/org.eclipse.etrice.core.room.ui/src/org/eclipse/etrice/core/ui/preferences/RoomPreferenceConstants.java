@@ -12,10 +12,12 @@
 
 package org.eclipse.etrice.core.ui.preferences;
 
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
+
 /**
  * Constant definitions for plug-in preferences
  */
 public interface RoomPreferenceConstants {
 
-	public static final String SAVE_TEXT_ON_FOCUS_LOST = "SaveTextOnFocusLost";
+	public static final String SAVE_TEXT_ON_FOCUS_LOST = UIBasePreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST;
 }

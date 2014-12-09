@@ -34,7 +34,12 @@ public class UIBasePreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(UIBasePreferenceConstants.HOR_GRID_UNIT, 10);
 		store.setDefault(UIBasePreferenceConstants.VER_GRID_UNIT, 10);
 		store.setDefault(UIBasePreferenceConstants.CONFIRM_DELETE, true);
-		store.setDefault(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, false);
+		store.setDefault(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST, true);
+		
+		// TODO: preference should be initialized from org.eclipse.etrice.ui.common.preferences.PreferenceInitializer
+		// but the code there is not called...
+		store.setDefault(UIBasePreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST, true);
+		
 		store.setDefault(UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH, "doc-gen/images");
 		store.setDefault(UIBasePreferenceConstants.EXPORT_DIAGRAM_PATH_RELATIVE_TO, UIBasePreferenceConstants.PATH_REL_TO_PROJECT);
 		store.setDefault(UIBasePreferenceConstants.EXPORT_DIAGRAM_FORMAT, UIBasePreferenceConstants.FORMAT_JPG);
