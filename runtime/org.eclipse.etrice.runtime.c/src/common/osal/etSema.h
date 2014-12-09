@@ -10,6 +10,9 @@
  *
  *******************************************************************************/
 
+#ifndef _ETSEMA_H_
+#define _ETSEMA_H_
+
 /**
  * \file etSema.h
  *
@@ -17,8 +20,6 @@
  *
  * \author Thomas Schuetz
  */
-#ifndef _ETSEMA_H_
-#define _ETSEMA_H_
 
 #include "etDatatypes.h"
 
@@ -46,6 +47,7 @@ void etSema_destruct(etSema* self);
  * \param self the 'this' pointer of the semaphore
  */
 void etSema_wakeup(etSema* self);
+void etSema_wakeupFromISR(etSema* self);
 
 /**
  * make the semaphore waiting for a wakeup

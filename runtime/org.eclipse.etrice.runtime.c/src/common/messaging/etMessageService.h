@@ -52,18 +52,25 @@ typedef struct etBuffer{
 	etUInt16 blockSize;		/**< size of blocks for the message pool */
 } etBuffer;
 
+typedef struct etHighPrioFunc etHighPrioFunc;
+struct etHighPrioFunc{
+	void (*func)(void *);
+	void * param;
+	etHighPrioFunc *next;
+};
+
 typedef struct etMessageService {
-	etMessageQueue messageQueue;				/**< message queue that holds all used messages */
-	etMessageQueue messagePool;					/**< message pool that holds all free messages */
-	etBuffer messageBuffer;						/**< information about the message buffer that holds information about
-													the actual memory position and size for the message pool */
-	etDispatcherReceiveMessage msgDispatcher;	/**< function pointer to the generated message dispatcher function */
-	etThread thread;							/**< thread for the execution of the message service */
-	etMutex poolMutex;							/**< mutex for synchronizing the access to the message pool */
-	etMutex queueMutex;							/**< mutex for synchronizing the access to the message queue */
-	etSema executionSemaphore;					/**< semaphore for waiting and waking up the execution */
-	etTimer timer;								/**< timer for cyclic calls */
-	etMessageService_execmode execmode;			/**< execution mode*/
+	etMessageQueue messageQueue;				/** message queue that holds all used messages */
+	etMessageQueue messagePool;					/** message pool that holds all free messages */
+	etBuffer messageBuffer;						/** information about the message buffer that holds information about the actual memory position and size for the message pool */
+	etDispatcherReceiveMessage msgDispatcher;	/** function pointer to the generated message dispatcher function */
+	etThread thread;							/** thread for the execution of the message service */
+	etMutex poolMutex;							/** mutex for synchronizing the access to the message pool */
+	etMutex queueMutex;							/** mutex for synchronizing the access to the message queue */
+	etSema executionSemaphore; 					/** semaphore for waiting and waking up the execution */
+	etTimer timer;								/** timer for cyclic calls */
+	etMessageService_execmode execmode;			/** execution mode*/
+	etHighPrioFunc *highPrioFuncRoot;
 } etMessageService;
 
 /**
@@ -166,5 +173,8 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
  */
 etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self);
 
+/* functions to register and unregister high prio functions */
+void etMessageService_registerHighPrioFunc(etMessageService* self, etHighPrioFunc* func);
+void etMessageService_unregisterHighPrioFunc(etMessageService* self, etHighPrioFunc*  func);
 
 #endif /* RMESSAGESERVICE_H_ */

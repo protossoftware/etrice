@@ -54,6 +54,9 @@ void etMessageService_init(
 	etMutex_construct( &(self->queueMutex) );
 	etSema_construct( &(self->executionSemaphore) );
 
+	/* init high prio functions */
+	self->highPrioFuncRoot=NULL;
+
 	/* init thread */
 	etThread_construct(&self->thread, stacksize, priority, "MessageService", (etThreadFunction) etMessageService_deliverAllMessages, self);
 
@@ -165,16 +168,54 @@ void etMessageService_returnMessageBuffer(etMessageService* self, etMessage* buf
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+void etMessageService_registerHighPrioFunc(etMessageService* self,etHighPrioFunc *func){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "registerHighPrioFunc")
+	func->next=self->highPrioFuncRoot;
+	self->highPrioFuncRoot=func;
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+void etMessageService_unregisterHighPrioFunc(etMessageService* self,etHighPrioFunc *func){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "unregisterHighPrioFunc")
+	etHighPrioFunc *highPrioFunc;
+	if (self->highPrioFuncRoot==func){
+		self->highPrioFuncRoot=self->highPrioFuncRoot->next;
+	}else{
+		highPrioFunc = self->highPrioFuncRoot;
+		while(highPrioFunc != NULL){
+			if (highPrioFunc->next==func){
+				highPrioFunc->next=highPrioFunc->next->next;
+				break;
+			}
+			highPrioFunc=highPrioFunc->next;
+		}
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+static void etMessageService_callHighPrioFunc(etMessageService* self){
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "callHighPrioFunc")
+	etHighPrioFunc *highPrioFunc;
+	highPrioFunc = self->highPrioFuncRoot;
+	while (highPrioFunc != NULL){
+		(*(highPrioFunc->func))(highPrioFunc->param);
+		highPrioFunc=highPrioFunc->next;
+	}
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
 static void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
 	{
 		etBool cont = ET_TRUE;
 		while (cont){
+			etMessageService_callHighPrioFunc(self);
 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
 				etMessage* msg = etMessageService_popMessage(self);
 				if (!self->msgDispatcher(msg))
 					cont = ET_FALSE;
 				etMessageService_returnMessageBuffer(self, msg);
+				etMessageService_callHighPrioFunc(self);
 			}
 			if (cont)
 				etSema_waitForWakeup(&self->executionSemaphore);
@@ -204,3 +245,5 @@ static void etMessageService_timerCallback(void* data) {
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+
