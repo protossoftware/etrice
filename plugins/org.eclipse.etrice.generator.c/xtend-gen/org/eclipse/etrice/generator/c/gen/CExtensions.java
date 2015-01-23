@@ -647,23 +647,33 @@ public class CExtensions implements ILanguageExtension {
         DataType _type_3 = _refType_3.getType();
         _xifexpression_1 = this.getTargetType(((EnumerationType) _type_3));
       } else {
+        String _xifexpression_2 = null;
         RefableType _refType_4 = data.getRefType();
         DataType _type_4 = _refType_4.getType();
-        _xifexpression_1 = _type_4.getName();
+        if ((_type_4 instanceof ExternalType)) {
+          RefableType _refType_5 = data.getRefType();
+          DataType _type_5 = _refType_5.getType();
+          _xifexpression_2 = ((ExternalType) _type_5).getTargetName();
+        } else {
+          RefableType _refType_6 = data.getRefType();
+          DataType _type_6 = _refType_6.getType();
+          _xifexpression_2 = _type_6.getName();
+        }
+        _xifexpression_1 = _xifexpression_2;
       }
       _xifexpression = _xifexpression_1;
     }
     String typeName = _xifexpression;
-    String _xifexpression_2 = null;
-    RefableType _refType_5 = data.getRefType();
-    DataType _type_5 = _refType_5.getType();
-    if ((_type_5 instanceof PrimitiveType)) {
+    String _xifexpression_3 = null;
+    RefableType _refType_7 = data.getRefType();
+    DataType _type_7 = _refType_7.getType();
+    if ((_type_7 instanceof PrimitiveType)) {
       String _xblockexpression = null;
       {
-        RefableType _refType_6 = data.getRefType();
-        DataType _type_6 = _refType_6.getType();
-        final String ct = ((PrimitiveType) _type_6).getCastName();
-        String _xifexpression_3 = null;
+        RefableType _refType_8 = data.getRefType();
+        DataType _type_8 = _refType_8.getType();
+        final String ct = ((PrimitiveType) _type_8).getCastName();
+        String _xifexpression_4 = null;
         boolean _and = false;
         boolean _notEquals = (!Objects.equal(ct, null));
         if (!_notEquals) {
@@ -674,40 +684,40 @@ public class CExtensions implements ILanguageExtension {
           _and = _not;
         }
         if (_and) {
-          _xifexpression_3 = ct;
+          _xifexpression_4 = ct;
         } else {
-          _xifexpression_3 = typeName;
+          _xifexpression_4 = typeName;
         }
-        _xblockexpression = _xifexpression_3;
+        _xblockexpression = _xifexpression_4;
       }
-      _xifexpression_2 = _xblockexpression;
+      _xifexpression_3 = _xblockexpression;
     } else {
-      String _xifexpression_3 = null;
-      RefableType _refType_6 = data.getRefType();
-      DataType _type_6 = _refType_6.getType();
-      if ((_type_6 instanceof EnumerationType)) {
-        RefableType _refType_7 = data.getRefType();
-        DataType _type_7 = _refType_7.getType();
-        _xifexpression_3 = this.getCastType(((EnumerationType) _type_7));
+      String _xifexpression_4 = null;
+      RefableType _refType_8 = data.getRefType();
+      DataType _type_8 = _refType_8.getType();
+      if ((_type_8 instanceof EnumerationType)) {
+        RefableType _refType_9 = data.getRefType();
+        DataType _type_9 = _refType_9.getType();
+        _xifexpression_4 = this.getCastType(((EnumerationType) _type_9));
       } else {
-        _xifexpression_3 = typeName;
+        _xifexpression_4 = typeName;
       }
-      _xifexpression_2 = _xifexpression_3;
+      _xifexpression_3 = _xifexpression_4;
     }
-    String castTypeName = _xifexpression_2;
+    String castTypeName = _xifexpression_3;
     castTypeName = (castTypeName + "*");
     String deRef = "*";
-    RefableType _refType_8 = data.getRefType();
-    final boolean isRef = _refType_8.isRef();
+    RefableType _refType_10 = data.getRefType();
+    final boolean isRef = _refType_10.isRef();
     boolean _or = false;
-    RefableType _refType_9 = data.getRefType();
-    DataType _type_8 = _refType_9.getType();
-    if ((_type_8 instanceof PrimitiveType)) {
+    RefableType _refType_11 = data.getRefType();
+    DataType _type_10 = _refType_11.getType();
+    if ((_type_10 instanceof PrimitiveType)) {
       _or = true;
     } else {
-      RefableType _refType_10 = data.getRefType();
-      DataType _type_9 = _refType_10.getType();
-      _or = (_type_9 instanceof EnumerationType);
+      RefableType _refType_12 = data.getRefType();
+      DataType _type_11 = _refType_12.getType();
+      _or = (_type_11 instanceof EnumerationType);
     }
     final boolean isPrim = _or;
     if (isRef) {

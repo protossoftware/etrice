@@ -309,6 +309,8 @@ class CExtensions implements ILanguageExtension {
 			(data.getRefType().getType() as PrimitiveType).targetName
 		else if (data.getRefType().getType() instanceof EnumerationType)
 			(data.getRefType().getType() as EnumerationType).targetType
+		else if (data.getRefType().getType() instanceof ExternalType)
+			(data.getRefType().getType() as ExternalType).targetName
 		else
 			data.getRefType().getType().getName()
 			
