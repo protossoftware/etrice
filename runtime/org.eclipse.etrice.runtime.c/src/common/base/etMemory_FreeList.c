@@ -45,7 +45,7 @@ static void* etMemory_getHeapMem(etFreeListMemory* self, etUInt16 size) {
 	etUInt8* obj = NULL;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getHeapListMem")
 
-	if (self->current < ((etUInt8*)self)+self->base.size)
+	if (self->current + size < ((etUInt8*)self) + self->base.size)
 	{
 		obj = self->current;
 		self->current += size;
@@ -96,7 +96,7 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 				((etFreeListObj*)obj)->next = self->freelists[slot].head;
 				self->freelists[slot].head = (etFreeListObj*)obj;
 #if DEBUG_FREE_LISTS
-				++self->freelists[slot].nobjects;
+				++(self->freelists[slot].nobjects);
 #endif
 				break;
 			}
@@ -149,7 +149,7 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	self->base.free = etMemory_FreeList_free;
 	self->nslots = nslots;
 	{
-		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListObj);
+		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListInfo);
 		self->current = ((etUInt8*)self)+MEM_CEIL(used);
 	}
 
