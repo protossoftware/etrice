@@ -18,7 +18,9 @@
 #include "base/etMemory_FixedSize.h"
 #include "base/etMemory_FreeList.h"
 
-#define BUF_SIZE		(256*1024)
+#define KBYTE			1024
+#define BUF_SIZE		(256*KBYTE)
+#define BUF_SIZE_SMALL	(2*KBYTE)
 #define BLOCK_SIZE		128
 #define TEST_BLOCKS		1024
 #define TEST_BLOCK_SIZE	64
@@ -59,6 +61,26 @@ static void TestEtMemory_testFixedSize(etInt16 id) {
 	}
 }
 
+static int local_dump_statistics_line(etMemory* mem, int slot) {
+	int nobj = etMemory_FreeList_nObjects(mem, slot);
+	int size = etMemory_FreeList_sizeObjects(mem, slot);
+	int subtotal = nobj*size;
+
+	printf("  slot %3d with %4d objects of size %4d totaling to %8d\n", slot, nobj, size, subtotal);
+
+	return subtotal;
+}
+
+static void local_dump_statistics(etMemory* mem, etUInt16 nSlots) {
+	int slot;
+	int total = 0;
+	printf("memory statistics of free list memory management at %p\n", mem);
+	for (slot=0; slot<nSlots; ++slot) {
+		total += local_dump_statistics_line(mem, slot);
+	}
+	printf("  total                                           %12d\n", total);
+}
+
 static void local_alloc(etInt16 id, etMemory* mem, etUInt8* objects[NSIZES][NOBJ], etUInt8 sizes[NSIZES]) {
 	int i, kind;
 
@@ -87,16 +109,35 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	static etUInt8 sizes[NSIZES] = { SIZE0, SIZE1, SIZE2, SIZE3, SIZE4, SIZE5, SIZE6 };
 	etUInt8* objects[NSIZES][NOBJ];
 	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE, NSLOTS);
+	etUInt32 free = etMemory_FreeList_freeHeapMem(mem);
+
+	printf("initial free heap is %ld\n", free);
+
 	EXPECT_TRUE(id, "mem!=NULL", mem!=NULL);
 
 	local_alloc(id, mem, objects, sizes);
+	printf("after alloc\n");
+	local_dump_statistics(mem, NSLOTS);
+
 	local_free(id, mem, objects, sizes);
+	printf("after free\n");
+	local_dump_statistics(mem, NSLOTS);
+
+	local_alloc(id, mem, objects, sizes);
+	printf("after 2nd alloc\n");
+	local_dump_statistics(mem, NSLOTS);
+
+	local_free(id, mem, objects, sizes);
+	printf("after 2nd free\n");
+	local_dump_statistics(mem, NSLOTS);
 
 	/* causes problems (due to different alignment?)
 	   Ubuntu 32 bit:  246212
 	   Hudson: 246152
 	 */
-	if (246212==etMemory_FreeList_freeHeapMem(mem)) {
+	free = etMemory_FreeList_freeHeapMem(mem);
+	printf("free heap is %ld\n", free);
+	if (246212==free) {
 
 		EXPECT_EQUAL_UINT32(id, "free heap memory", 246212, etMemory_FreeList_freeHeapMem(mem));
 
@@ -141,10 +182,22 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	}
 }
 
+static void TestEtMemory_testFreeListOverflow(etInt16 id) {
+	static etUInt8 buffer[BUF_SIZE_SMALL];
+	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE_SMALL, NSLOTS);
+	void* obj;
+
+	EXPECT_TRUE(id, "mem!=NULL", mem!=NULL);
+
+	obj = mem->alloc(mem, BUF_SIZE_SMALL+1);
+	EXPECT_TRUE(id, "insufficient space, expect NULL", NULL==obj);
+}
+
 void TestEtMemory_runSuite(void){
 	etUnit_openTestSuite("TestMemory");
 	ADD_TESTCASE(TestEtMemory_testFixedSize);
 	ADD_TESTCASE(TestEtMemory_testFreeList);
+	ADD_TESTCASE(TestEtMemory_testFreeListOverflow);
 	etUnit_closeTestSuite();
 }
 
