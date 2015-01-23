@@ -81,16 +81,20 @@ static void local_dump_statistics(etMemory* mem, etUInt16 nSlots) {
 	printf("  total                                           %12d\n", total);
 }
 
-static void local_alloc(etInt16 id, etMemory* mem, etUInt8* objects[NSIZES][NOBJ], etUInt8 sizes[NSIZES]) {
+static etUInt32 local_alloc(etInt16 id, etMemory* mem, etUInt8* objects[NSIZES][NOBJ], etUInt8 sizes[NSIZES]) {
 	int i, kind;
+	etUInt32 total = 0;
 
 	for (kind=0; kind<NSIZES; ++kind) {
+		total += sizes[kind] * NOBJ;
 		for (i=0; i<NOBJ; ++i) {
 			objects[kind][i] = mem->alloc(mem, sizes[kind]);
 			if (objects[kind][i]==NULL)
 				EXPECT_TRUE(id, "objects[kind][i]==NULL", ET_FALSE);
 		}
 	}
+
+	return total;
 }
 
 
@@ -110,12 +114,13 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	etUInt8* objects[NSIZES][NOBJ];
 	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE, NSLOTS);
 	etUInt32 free = etMemory_FreeList_freeHeapMem(mem);
+	etUInt32 diff, total;
 
 	printf("initial free heap is %ld\n", free);
 
 	EXPECT_TRUE(id, "mem!=NULL", mem!=NULL);
 
-	local_alloc(id, mem, objects, sizes);
+	total = local_alloc(id, mem, objects, sizes);
 	printf("after alloc\n");
 	local_dump_statistics(mem, NSLOTS);
 
@@ -123,63 +128,49 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	printf("after free\n");
 	local_dump_statistics(mem, NSLOTS);
 
-	local_alloc(id, mem, objects, sizes);
-	printf("after 2nd alloc\n");
-	local_dump_statistics(mem, NSLOTS);
-
-	local_free(id, mem, objects, sizes);
-	printf("after 2nd free\n");
-	local_dump_statistics(mem, NSLOTS);
-
-	/* causes problems (due to different alignment?)
-	   Ubuntu 32 bit:  246212
-	   Hudson: 246152
-	 */
+	diff = free;
 	free = etMemory_FreeList_freeHeapMem(mem);
+	diff -= free;
+
 	printf("free heap is %ld\n", free);
-	if (246212==free) {
+	EXPECT_EQUAL_UINT32(id, "allocated total", total, diff);
+	EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
 
-		EXPECT_EQUAL_UINT32(id, "free heap memory", 246212, etMemory_FreeList_freeHeapMem(mem));
+	EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
+	EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
+	EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 1));
+	EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
+	EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 2));
+	EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
+	EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 4));
+	EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
+	EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 5));
+	EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
+	EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 6));
+	EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
+	EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 7));
+	EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 7));
 
-		EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
+	local_alloc(id, mem, objects, sizes);
+	local_free(id, mem, objects, sizes);
 
-		EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
-		EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
-		EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 1));
-		EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
-		EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 2));
-		EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
-		EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 3));
-		EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 3));
-		EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 4));
-		EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
-		EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 5));
-		EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
-		EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 6));
-		EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
+	EXPECT_EQUAL_UINT32(id, "free unchanged", free, etMemory_FreeList_freeHeapMem(mem));
+	EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
 
-		local_alloc(id, mem, objects, sizes);
-		local_free(id, mem, objects, sizes);
-
-		EXPECT_EQUAL_UINT32(id, "free heap memory", 246212, etMemory_FreeList_freeHeapMem(mem));
-
-		EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
-
-		EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
-		EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
-		EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 1));
-		EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
-		EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 2));
-		EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
-		EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 3));
-		EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 3));
-		EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 4));
-		EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
-		EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 5));
-		EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
-		EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 6));
-		EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
-	}
+	EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
+	EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
+	EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 1));
+	EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
+	EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 2));
+	EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
+	EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 4));
+	EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
+	EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 5));
+	EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
+	EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 6));
+	EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
+	EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 7));
+	EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 7));
 }
 
 static void TestEtMemory_testFreeListOverflow(etInt16 id) {
