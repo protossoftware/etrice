@@ -28,8 +28,8 @@ public class StringToDetailCode extends Converter {
 			if (trimmed.isEmpty())
 				return emptyIsNull? null:createEmptyDetailCode();
 			
-			// TODOHRR: make work also for UNIX/Mac line endings
-			String[] cmds = code.split("\r\n");
+			// first check for Windows line endings, if not present then split by Unix line ending
+			String[] cmds = code.indexOf("\r\n")>=0 ? code.split("\r\n") : code.split("\n");
 			DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
 			for (int i = 0; i < cmds.length; i++) {
 				dc.getLines().add(cmds[i]);
