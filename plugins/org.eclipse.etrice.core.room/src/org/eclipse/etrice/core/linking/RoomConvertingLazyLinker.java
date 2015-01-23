@@ -12,11 +12,6 @@
 
 package org.eclipse.etrice.core.linking;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 
 /**
@@ -24,20 +19,20 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
  */
 public class RoomConvertingLazyLinker extends LazyLinker {
 
-	protected static FSMPackage fsm = FSMPackage.eINSTANCE;
-	protected static RoomPackage room = RoomPackage.eINSTANCE;
-		
-	@Override
-	protected EClass getProxyType(EObject obj, EReference eRef) {
-		EClass orig = super.getProxyType(obj, eRef);
-		
-		if(orig == fsm.getModelComponent())
-			return room.getActorClass();
-		if(orig == fsm.getAbstractInterfaceItem())
-			return room.getInterfaceItem();
-//		if(orig == room.getGeneralProtocolClass())
-//			return ? => cannot decide, bad
-		
-		return orig;
-	}
+//	protected static FSMPackage fsm = FSMPackage.eINSTANCE;
+//	protected static RoomPackage room = RoomPackage.eINSTANCE;
+//		
+//	@Override
+//	protected EClass getProxyType(EObject obj, EReference eRef) {
+//		EClass orig = super.getProxyType(obj, eRef);
+//		
+//		if(orig == fsm.getModelComponent())
+//			return room.getActorClass();
+//		if(orig == fsm.getAbstractInterfaceItem())
+//			return room.getInterfaceItem();
+////		if(orig == room.getGeneralProtocolClass())
+////			return ? => cannot decide, bad
+//		
+//		return orig;
+//	}
 }
