@@ -1,7 +1,0 @@
-Issues for codegenerators:
-
-- unify all include guards
-- unify all generated sourcefile documentation
-- unify function signatures, argument lists
-
-SubSystemClassGen.xtend	:	/* TODO: only include used Actor Classes for current SubSystem */
