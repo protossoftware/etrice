@@ -56,9 +56,7 @@ import org.eclipse.graphiti.mm.pictograms.Anchor;
 import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
-import org.eclipse.graphiti.mm.pictograms.ManhattanConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
-import org.eclipse.graphiti.mm.pictograms.PictogramsFactory;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
@@ -195,10 +193,8 @@ public class LayerConnectionSupport {
 			}
 
 			private Connection createConnection() {
-//				IPeCreateService peCreateService = Graphiti.getPeCreateService();
-//				Connection ret = peCreateService.createManhattanConnection(getDiagram());
-				//peCreateService.createFreeFormConnection(getDiagram());
-				ManhattanConnection ret = PictogramsFactory.eINSTANCE.createManhattanConnection();
+				IPeCreateService peCreateService = Graphiti.getPeCreateService();
+				Connection ret = peCreateService.createFreeFormConnection(getDiagram());
 				ret.setVisible(true);
 				ret.setActive(true);
 				ret.setParent(getDiagram());
