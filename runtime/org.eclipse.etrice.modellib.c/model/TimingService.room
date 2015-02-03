@@ -25,7 +25,7 @@ RoomModel room.basic.service.timing {
 				"/*uc3*/"
 			}
 		ServiceImplementation of timer
-		Attribute tcbs[30]:tcb = "{{0,0},{0,0},0,NULL}"
+		Attribute tcbs[30]:tcb
 		Attribute usedTcbsRoot : tcb ref
 		Attribute freeTcbsRoot : tcb ref
 		}
@@ -120,15 +120,15 @@ RoomModel room.basic.service.timing {
 				"}"
 			}
 			
-			Operation printList(){
-				"etTimerControlBlock* temp=usedTcbsRoot;"
-				"	printf(\"list: \");"
-				"	while (temp!=0){"
-				"		printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);"
-				"		temp=temp->next;"
-				"	}"
-				"	printf(\"\\n\");"
-			}
+//			Operation printList(){
+//				"etTimerControlBlock* temp=usedTcbsRoot;"
+//				"	printf(\"list: \");"
+//				"	while (temp!=0){"
+//				"		printf(\"(%ld,%ld),\",temp->expTime.sec,temp->expTime.nSec);"
+//				"		temp=temp->next;"
+//				"	}"
+//				"	printf(\"\\n\");"
+//			}
 			StateMachine {
 				Transition tr0: initial -> Operational {
 					action {
@@ -269,7 +269,7 @@ RoomModel room.basic.service.timing {
 			Attribute status:int8="0"
 		}
 	}
-	ExternalType tcb -> "etTimerControlBlock"
+	ExternalType tcb -> "etTimerControlBlock" default "{{0,0},{0,0},0,NULL}"
 	ExternalType targetTime -> "etTime" default "{0,0}"
 }
 	
