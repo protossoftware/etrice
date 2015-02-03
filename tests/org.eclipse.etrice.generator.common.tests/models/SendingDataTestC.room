@@ -21,9 +21,11 @@ RoomModel SendingDataTestC {
 	ActorClass MrPong {
 		Interface {
 			Port PingPongPort: PingPongProtocol
+			Port extTest: PCExternal
 		}
 		Structure {
 			external Port PingPongPort
+			external Port extTest
 		}
 		Behavior {
 			StateMachine {
@@ -151,8 +153,14 @@ RoomModel SendingDataTestC {
 						"PingPongPort.pongComplexDerived(d);"
 					}
 				}
+				Transition tr16: my tp0 -> my tp0 {
+					triggers {
+						<in1: extTest>
+					}
+				}				
 				ChoicePoint cp0
 				ChoicePoint cp1
+				TransitionPoint tp0				
 				State reply
 			}
 		}
@@ -570,6 +578,15 @@ RoomModel SendingDataTestC {
 			Message pongComplexDerived(d: PingPongDataDerived)
 		}
 	}
+	
+	ProtocolClass PCExternal {
+		usercode1 {
+			"typedef int extMsg;"
+		}
+		incoming {
+			Message in1(can: DExtMsg)
+		}
+	}
 
 	DataClass PingPongData {
 		Attribute i8ValPPD: int8 = "10"
@@ -587,4 +604,6 @@ RoomModel SendingDataTestC {
 	DataClass PingPongDataDerived extends PingPongData {
 		Attribute i32Val3PPDe: int32 = "150"
 	}
+
+	ExternalType DExtMsg -> "extMsg"
 }
