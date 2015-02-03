@@ -22,14 +22,12 @@ RoomModel room.basic.service.timing {
 				"/*uc2*/"
 			}
 			usercode3{
-				"etTimerControlBlock tcbs[ET_NB_OF_TCBS];"
-				"etTimerControlBlock* usedTcbsRoot; "
-				"etTimerControlBlock* freeTcbsRoot;"
+				"/*uc3*/"
 			}
 		ServiceImplementation of timer
-//		Attribute tcbs[10]:tcb
-//		Attribute usedTcbsRoot : tcb ref
-//		Attribute freeTcbsRoot : tcb ref
+		Attribute tcbs[30]:tcb = "{{0,0},{0,0},0,NULL}"
+		Attribute usedTcbsRoot : tcb ref
+		Attribute freeTcbsRoot : tcb ref
 		}
 		Behavior {
 			Operation getTcb():tcb ref{
