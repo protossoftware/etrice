@@ -29,7 +29,7 @@
 		<tycho-extras.version>${tycho.version}</tycho-extras.version>
 
 		<!-- eclipse version etrice is built against -->
-		<eclipse-repo.url>http://download.eclipse.org/releases/kepler</eclipse-repo.url>
+		<eclipse-repo.url>http://download.eclipse.org/releases/luna</eclipse-repo.url>
 
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository</orbit-site>
 	</properties>
