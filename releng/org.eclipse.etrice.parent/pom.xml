@@ -115,6 +115,7 @@
 		<module>../../plugins/org.eclipse.etrice.core.config</module>
 		<module>../../plugins/org.eclipse.etrice.core.etphys</module>
 		<module>../../plugins/org.eclipse.etrice.core.etmap</module>
+		<module>../../plugins/org.eclipse.etrice.core.genmodel.fsm</module>
 		<module>../../plugins/org.eclipse.etrice.core.genmodel</module>
 		<module>../../plugins/org.eclipse.etrice.generator.fsm</module>
 		<module>../../plugins/org.eclipse.etrice.generator</module>
