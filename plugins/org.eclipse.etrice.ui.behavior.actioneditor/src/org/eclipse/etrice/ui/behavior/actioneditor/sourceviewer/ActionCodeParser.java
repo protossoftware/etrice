@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -27,7 +26,6 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 
@@ -41,14 +39,11 @@ import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 public class ActionCodeParser {
 
 	/** the actor class */
-	ActorClass ac;
+	private ActorClass ac;
 	/** use receive only messages */
-	boolean recvOnly;
+	private boolean recvOnly;
 	/** map for interface items and associated messages or operations */
-	HashMap<InterfaceItem, List<MethodItemPair>> item2pairs;
-	/** array of objects for members */
-	Object[] members;
-
+	private HashMap<InterfaceItem, List<MethodItemPair>> item2pairs;
 	public ActionCodeParser(ActorClass ac, boolean recvOnly) {
 		this.ac = ac;
 		this.recvOnly = recvOnly;
@@ -150,35 +145,6 @@ public class ActionCodeParser {
 	}
 
 	/**
-	 * Gets the list of all interface items in the associated actor class.
-	 * 
-	 * @return list of {@link InterfaceItem}s
-	 */
-	public List<InterfaceItem> getAllInterfaceItems() {
-		return new ArrayList<InterfaceItem>(item2pairs.keySet());
-	}
-
-	/**
-	 * Constructs an array of members in the associated actor class.
-	 * 
-	 * @return array of members
-	 */
-	public Object[] getMembers() {
-		if (members == null) {
-			EList<Attribute> attributes = ac.getAttributes();
-			EList<StandardOperation> operations = ac.getOperations();
-
-			members = new Object[attributes.size() + operations.size()];
-			System.arraycopy(attributes.toArray(), 0, members, 0,
-					attributes.size());
-			System.arraycopy(operations.toArray(), 0, members,
-					attributes.size(), operations.size());
-		}
-
-		return members;
-	}
-
-	/**
 	 * Gets the list of the names of all {@link InterfaceItem} in the associated
 	 * actor class.
 	 * 
@@ -213,21 +179,34 @@ public class ActionCodeParser {
 	}
 
 	/**
-	 * Gets a list of the name of all members in the associated actor class.
+	 * Gets a list of the name of all attributes in the associated actor class.
 	 * 
-	 * @return list of member names
+	 * @return list of attribute names
 	 */
-	public List<String> getAllMemberNames() {
-		List<String> memberList = new ArrayList<String>();
-		for (Object member : getMembers()) {
-			if (member instanceof Attribute)
-				memberList.add(((Attribute) member).getName());
-			else if (member instanceof Operation)
-				memberList.add(((Operation) member).getName()
-						+ SupportUtil.getInstance().getRoomNameProvider()
-								.getTypedArgumentList((Operation) member));
+	public List<String> getAllAttributeNames() {
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		List<String> result = new ArrayList<String>();
+		for (Attribute att : roomHelpers.getAllAttributes(ac)) {
+			result.add(att.getName());
 		}
-		return memberList;
+		return result;
+	}
+	
+	/**
+	 * returns a list of all (including inherited) operation names including signature
+	 * 
+	 * @return list of all operation names (including signature)
+	 */
+	public List<String> getAllOperationNames() {
+		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		List<String> result = new ArrayList<String>();
+		for (Operation op : roomHelpers.getAllOperations(ac)) {
+			result.add(op.getName()
+					+ SupportUtil.getInstance().getRoomNameProvider()
+					.getTypedArgumentList(op));
+		}
+		
+		return result;
 	}
 
 	/**

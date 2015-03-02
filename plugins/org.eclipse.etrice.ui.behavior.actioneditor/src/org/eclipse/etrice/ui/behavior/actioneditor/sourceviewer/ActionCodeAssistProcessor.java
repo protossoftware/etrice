@@ -180,10 +180,15 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 		Assert.isNotNull(fConfiguration);
 
 		List<ICompletionProposal> proposals = new ArrayList<ICompletionProposal>();
-		for (String item : fConfiguration.getActionCodeParser()
-				.getAllMemberNames()) {
+		for (String item : fConfiguration.getActionCodeParser().getAllAttributeNames()) {
 			ICompletionProposal proposal = createPrefixCompletionProposal(
 					context, item, Activator.getImage("icons/member.gif"));
+			if (proposal != null)
+				proposals.add(proposal);
+		}
+		for (String item : fConfiguration.getActionCodeParser().getAllOperationNames()) {
+			ICompletionProposal proposal = createPrefixCompletionProposal(
+					context, item, Activator.getImage("icons/method.gif"));
 			if (proposal != null)
 				proposals.add(proposal);
 		}

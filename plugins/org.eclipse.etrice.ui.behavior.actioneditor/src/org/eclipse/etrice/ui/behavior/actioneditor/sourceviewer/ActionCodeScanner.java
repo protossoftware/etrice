@@ -84,7 +84,7 @@ public class ActionCodeScanner extends RuleBasedScanner {
 		// Add word to wordRule rule for each Member names.
 		if (configuration.isMemberAware())
 			for (String member : configuration.getActionCodeParser()
-					.getAllMemberNames())
+					.getAllAttributeNames())
 				wordRule.addWord(member, memberToken);
 
 		// Add wordRule to the list of rules.
