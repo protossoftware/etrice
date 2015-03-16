@@ -116,6 +116,13 @@
 				<include name="org.eclipse.xtend.lib_2.7*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.7*.jar" />
 				
+				<!-- Xtext 2.8 -->
+				<include name="org.eclipse.xtext_2.8*.jar" />
+				<include name="org.eclipse.xtext.util_2.8*.jar" />
+				<include name="org.eclipse.xtext.common.types_2.8*.jar" />
+				<include name="org.eclipse.xtend.lib_2.8*.jar" />
+				<include name="org.eclipse.xtext.xbase.lib_2.8*.jar" />
+				
 				<include name="org.apache.log4j_1.2*.jar" />
 				<include name="org.antlr.runtime_3.2*.jar" />
 				<include name="javax.inject_1.0*.jar" />
