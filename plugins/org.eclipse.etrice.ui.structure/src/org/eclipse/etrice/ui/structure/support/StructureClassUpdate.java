@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -182,15 +181,15 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 
 	@Override
 	protected IReason updateNeeded(EObject bo, IUpdateContext context) {
-		ActorContainerClass acc = (ActorContainerClass) bo;
+		StructureClass sc = (StructureClass) bo;
 		ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
 		String reason = "";
 		
 		// TODO: refactor to single method for updateNeeded/update
-		Set<InterfaceItem> expectedItems = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(acc, true));
+		Set<InterfaceItem> expectedItems = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getInterfaceItems(sc, true));
 		Set<InterfaceItem> presentItems = Sets.newHashSet(SupportUtil.getInstance().getInterfaceItems(containerShape, getFeatureProvider()));
-		if(acc instanceof ActorClass){
-			ActorClass base = (ActorClass)acc;
+		if(sc instanceof ActorClass){
+			ActorClass base = (ActorClass)sc;
 			while(base != null){
 				expectedItems.addAll(base.getInternalPorts());
 				base = base.getActorBase();
@@ -200,7 +199,7 @@ public class StructureClassUpdate extends ShapeUpdateFeature {
 			reason += "interface item(s) missing or outdated\n";
 		
 		
-		Set<ActorContainerRef> expectedRefs = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(acc));
+		Set<ActorContainerRef> expectedRefs = Sets.newHashSet(SupportUtil.getInstance().getRoomHelpers().getAllActorContainerRefs(sc));
 		Set<ActorContainerRef> presentRefs = Sets.newHashSet(SupportUtil.getInstance().getRefs(containerShape, getFeatureProvider()));
 		if(!expectedRefs.equals(presentRefs))
 			reason += "actor ref(s) missing or outdated\n";
