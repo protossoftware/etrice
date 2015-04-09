@@ -381,7 +381,7 @@ public class SPPSupport extends InterfaceItemSupport {
 			}
 			else {
 				// we just set the referenced GA
-				//containerShape.getAnchors().get(0).setReferencedGraphicsAlgorithm(rect);
+				containerShape.getAnchors().get(0).setReferencedGraphicsAlgorithm(rect);
 			}
 		}
 
