@@ -36,14 +36,20 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.EnumerationType
 
 import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
 
 	@Inject TypeHelpers typeHelpers
 
-	override String getTypedDataDefinition(Message m) {
-		generateArglistAndTypedData(m.data).get(1)
+	override String getTypedDataDefinition(EObject msg) {
+	    if (msg instanceof Message) {
+    		generateArglistAndTypedData((msg as Message).data).get(1)
+	    }
+	    else {
+	        ""
+	    }
 	}
 
 	def String getJavaFileName(RoomClass rc) {rc.name+".java"}
@@ -243,10 +249,11 @@ class JavaExtensions implements ILanguageExtension {
 			dv
 	}
 
-	override generateArglistAndTypedData(VarDecl data) {
-		if (data==null)
+	override generateArglistAndTypedData(EObject d) {
+		if (d==null || !(d instanceof VarDecl))
 			return newArrayList("", "", "")
 		
+		val data = d as VarDecl
 		var typeName = data.refType.type.getName();
 		var castTypeName = typeName;
 		if (data.refType.type instanceof PrimitiveType) {

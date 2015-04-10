@@ -53,7 +53,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 /**
- * @author jci
+ * @author Henrik Rentz-Reichert
  *
  */
 public class TransitionTriggerCompartment {
@@ -364,7 +364,7 @@ public class TransitionTriggerCompartment {
 		memberAwareConfiguration.configureMemberAwareness(interfaceCombo);
 		
 		for (AbstractInterfaceItem item : interfaceItems) {
-			interfaceCombo.add(item.getName());
+			interfaceCombo.add(item.getDisplayName());
 		}
 	}
 
@@ -443,7 +443,7 @@ public class TransitionTriggerCompartment {
 	private void updateInterfaceItem() {
 		String ifName = interfaceCombo.getItem(interfaceCombo.getSelectionIndex());
 		for (AbstractInterfaceItem item : interfaceItems) {
-			if (item.getName().equals(ifName)) {
+			if (item.getDisplayName().equals(ifName)) {
 				MessageFromIf mif = (MessageFromIf) ((IStructuredSelection)mifViewer.getSelection()).getFirstElement();
 				mif.setFrom(item);
 				updateCombos();
@@ -464,7 +464,7 @@ public class TransitionTriggerCompartment {
 				MessageFromIf mif = (MessageFromIf) sel;
 				String[] items = interfaceCombo.getItems();
 				for (int i = 0; i < items.length; i++) {
-					if (items[i].equals(mif.getFrom().getName())) {
+					if (items[i].equals(mif.getFrom().getDisplayName())) {
 						interfaceCombo.select(i);
 						currentMsgs = mif.getFrom().getAllIncomingAbstractMessages();
 						int pos = 0;

@@ -19,12 +19,20 @@ import org.eclipse.etrice.core.fsm.fSM.State
 import java.util.ArrayList
 import org.eclipse.etrice.core.fsm.fSM.StateGraph
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
+import org.eclipse.etrice.core.fsm.util.FSMHelpers
+import com.google.inject.Inject
+import org.eclipse.etrice.core.fsm.fSM.DetailCode
+import org.eclipse.etrice.core.fsm.fSM.Guard
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
 class FSMExtensions {
+	
+	@Inject protected extension FSMHelpers
 	
 	//-------------------------------------------------------
 	// union methods
@@ -67,6 +75,9 @@ class FSMExtensions {
 		return ret;
 	}
 
+    //-------------------------------------------------------
+    // state graph related methods
+
 	/**
 	 * @param ac an {@link ExpandedActorClass}
 	 * @param s a {@link State}
@@ -93,5 +104,63 @@ class FSMExtensions {
 		
 		return result;
 	}
+
+    /**
+     * @param states a list of {@link State}s
+     * @return a list ordered such that leaf states are last
+     */
+    def getLeafStatesLast(List<State> states) {
+        val leaf = states.filter(s|s.leaf)
+        val nonLeaf = states.filter(s|!s.leaf)
+        
+        nonLeaf.union(leaf)
+    }
+
+    /**
+     * @param ac an {@link ActorClass}
+     * @return a list of all leaf states
+     */
+    def List<State> getAllLeafStates(ModelComponent mc) {
+        mc.stateMachine.leafStateList
+    }
+
+    /**
+     * @param ac an {@link ActorClass}
+     * @return a list of simple states with leaf states last
+     */
+    def List<State> getAllBaseStatesLeavesLast(ModelComponent mc) {
+        mc.allBaseStates.getLeafStatesLast
+    }
+
+    /**
+     * @param ac an {@link ModelComponent}
+     * @return the number of all inherited states
+     */
+    def int getNumberOfInheritedStates(ModelComponent mc) {
+        if (mc.base==null)
+            return 0
+        else
+            return mc.base.stateMachine.stateList.size+mc.base.numberOfInheritedStates
+    }
+    
+    /**
+     * @param ac an {@link ModelComponent}
+     * @return the number of all inherited base (or simple) states
+     */
+    def int getNumberOfInheritedBaseStates(ModelComponent ac) {
+        if (ac.base==null)
+            return 0
+        else
+            return ac.base.stateMachine.baseStateList.size+ac.base.numberOfInheritedBaseStates
+    }
 	
+	def boolean isConditionOrGuard(DetailCode dc) {
+        val parent = dc.eContainer
+        switch (parent) {
+            Guard: true
+            CPBranchTransition: parent.condition==dc
+            default:
+                false
+        }
+	}
 }

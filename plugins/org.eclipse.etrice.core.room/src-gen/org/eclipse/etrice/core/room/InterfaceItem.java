@@ -69,4 +69,13 @@ public interface InterfaceItem extends AbstractInterfaceItem
    */
   EList<EObject> getAllOutgoingAbstractMessages();
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof ProtocolClass)\n    return ((ProtocolClass) getGeneralProtocol()).getCommType() == <%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;\nelse\n    return false;\n'"
+   * @generated
+   */
+  boolean isEventDriven();
+
 } // InterfaceItem

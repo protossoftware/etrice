@@ -35,6 +35,7 @@ import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.core.room.EnumerationType
 
 import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -43,8 +44,8 @@ class CppExtensions implements ILanguageExtension {
 	@Inject extension TypeHelpers
 	
 
-	override String getTypedDataDefinition(Message m) {
-		generateArglistAndTypedData(m.data).get(1)
+	override String getTypedDataDefinition(EObject msg) {
+		generateArglistAndTypedData((msg as Message).data).get(1)
 	}
 
 
@@ -197,7 +198,8 @@ class CppExtensions implements ILanguageExtension {
 			dv
 	}
 	
-	override generateArglistAndTypedData(VarDecl data) {
+	override generateArglistAndTypedData(EObject d) {
+	    val data = d as VarDecl
 		var deref = "*"
 		if (data==null)
 			return newArrayList("", "", "")

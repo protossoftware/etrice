@@ -43,9 +43,15 @@ class ImplPostprocessor {
 			''')
 		
 		val ifItem = fsmPackage.getClass("AbstractInterfaceItem")
+        ifItem.addOperation("getDisplayName", EcorePackage::eINSTANCE.getEClassifier("EString"), 1,
+            '''
+                return getName();
+            '''
+        )
 		ifItem.addOperation("getSemantics", fsmPackage.getEClassifier("ProtocolSemantics"))
 		ifItem.addOperation("getAllIncomingAbstractMessages", EcorePackage.Literals.EOBJECT, -1, null)
 		ifItem.addOperation("getAllOutgoingAbstractMessages", EcorePackage.Literals.EOBJECT, -1, null)
+        ifItem.addOperation("isEventDriven", EcorePackage.Literals.EBOOLEAN, 1, "return true;")
 		
 		val itemOwner = fsmPackage.addClass("IInterfaceItemOwner")
 		itemOwner.setAbstract(true)

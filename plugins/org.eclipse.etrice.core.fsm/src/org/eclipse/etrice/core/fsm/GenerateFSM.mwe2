@@ -87,7 +87,6 @@ Workflow {
     		// Added for compatibility with existing eTrice subgrammars
     		fragment = validation.JavaValidatorFragment auto-inject {
     		    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-    		    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
     		}
     
     		// old scoping and exporting API

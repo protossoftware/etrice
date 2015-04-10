@@ -204,6 +204,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private boolean prepared = false;
 	private HashSet<StateGraphItem> ownObjects = null;
 	private HashSet<Transition> targetsOfRefinedTransitions = null;
+    private HashSet<Transition> baseTransitionHasDetailCode = null;
 	private HashMap<AbstractInterfaceItem, Integer> ifitem2localId = null;
 	private HashMap<StateGraphNode, NodeData> node2data = null;
 	private HashMap<State, LinkedList<ActiveTrigger>> state2triggers = null;
@@ -379,10 +380,13 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		for (Entry<Transition, DetailCode> entry : trans2refinedAction.entrySet()) {
 			ownObjects.add(entry.getKey());
 			targetsOfRefinedTransitions.add(entry.getKey());
-			if (entry.getKey().getAction()==null)
-				entry.getKey().setAction(entry.getValue());
-			else
-				entry.getKey().getAction().getLines().addAll(entry.getValue().getLines());
+			if (entry.getKey().getAction()==null) {
+			    entry.getKey().setAction(entry.getValue());
+			}
+			else {
+			    baseTransitionHasDetailCode.add(entry.getKey());
+			    entry.getKey().getAction().getLines().addAll(entry.getValue().getLines());
+			}
 		}
 	}
 
@@ -827,6 +831,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		ifitem2localId = new HashMap<AbstractInterfaceItem, Integer>();
 		ownObjects = new HashSet<StateGraphItem>();
 		targetsOfRefinedTransitions = new HashSet<Transition>();
+        baseTransitionHasDetailCode = new HashSet<Transition>();
 		node2data = new HashMap<StateGraphNode, NodeData>();
 		state2triggers = new HashMap<State, LinkedList<ActiveTrigger>>();
 		triggerstring2mif = new HashMap<String, MessageFromIf>();
@@ -912,7 +917,16 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		return ownObjects.contains(obj);
 	}
 	
-	private int computeInterfaceItemLocalIds(ModelComponent mc, int offset) {
+	/**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+    public boolean hasBaseTransitionDetailCode(Transition trans) {
+        return baseTransitionHasDetailCode.contains(trans);
+    }
+
+    private int computeInterfaceItemLocalIds(ModelComponent mc, int offset) {
 		if (mc.getBase()!=null) {
 			// first recurse into base class
 			offset = computeInterfaceItemLocalIds(mc.getBase(), offset);

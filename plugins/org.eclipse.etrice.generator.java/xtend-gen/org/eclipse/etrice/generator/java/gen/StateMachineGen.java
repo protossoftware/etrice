@@ -14,8 +14,10 @@ import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.java.Main;
@@ -25,20 +27,20 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 @Singleton
 @SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
-  public CharSequence genExtra(final ExpandedActorClass xpac) {
+  public CharSequence genExtra(final ExpandedModelComponent xpac) {
     CharSequence _xblockexpression = null;
     {
       final ArrayList<State> states = new ArrayList<State>();
-      ActorClass ac = xpac.getActorClass();
+      ModelComponent ac = xpac.getModelComponent();
       boolean _notEquals = (!Objects.equal(ac, null));
       boolean _while = _notEquals;
       while (_while) {
         {
-          List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
-          List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(_allBaseStates);
+          List<State> _allBaseStates = this._fSMHelpers.getAllBaseStates(ac);
+          List<State> _leafStatesLast = this._fSMExtensions.getLeafStatesLast(_allBaseStates);
           states.addAll(0, _leafStatesLast);
-          ActorClass _actorBase = ac.getActorBase();
-          ac = _actorBase;
+          ModelComponent _base = ac.getBase();
+          ac = _base;
         }
         boolean _notEquals_1 = (!Objects.equal(ac, null));
         _while = _notEquals_1;
@@ -158,7 +160,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   
   public int getHistorySize(final ExpandedActorClass xpac) {
     ActorClass _actorClass = xpac.getActorClass();
-    List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(_actorClass);
+    List<State> _allBaseStates = this._fSMHelpers.getAllBaseStates(_actorClass);
     int _size = _allBaseStates.size();
     return (_size + 2);
   }

@@ -52,10 +52,16 @@ public class CExtensions implements ILanguageExtension {
   @Extension
   protected RoomHelpers _roomHelpers;
   
-  public String getTypedDataDefinition(final Message m) {
-    VarDecl _data = m.getData();
-    String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
-    return _generateArglistAndTypedData[1];
+  public String getTypedDataDefinition(final EObject msg) {
+    String _xifexpression = null;
+    if ((msg instanceof Message)) {
+      VarDecl _data = ((Message) msg).getData();
+      String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
+      _xifexpression = _generateArglistAndTypedData[1];
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
   }
   
   public String accessLevelPrivate() {
@@ -626,9 +632,20 @@ public class CExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
-  public String[] generateArglistAndTypedData(final VarDecl data) {
-    boolean _equals = Objects.equal(data, null);
+  public String[] generateArglistAndTypedData(final EObject d) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(d, null);
     if (_equals) {
+      _or = true;
+    } else {
+      _or = (!(d instanceof VarDecl));
+    }
+    if (_or) {
+      return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
+    }
+    final VarDecl data = ((VarDecl) d);
+    boolean _equals_1 = Objects.equal(data, null);
+    if (_equals_1) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     String _xifexpression = null;
@@ -709,17 +726,17 @@ public class CExtensions implements ILanguageExtension {
     String deRef = "*";
     RefableType _refType_10 = data.getRefType();
     final boolean isRef = _refType_10.isRef();
-    boolean _or = false;
+    boolean _or_1 = false;
     RefableType _refType_11 = data.getRefType();
     DataType _type_10 = _refType_11.getType();
     if ((_type_10 instanceof PrimitiveType)) {
-      _or = true;
+      _or_1 = true;
     } else {
       RefableType _refType_12 = data.getRefType();
       DataType _type_11 = _refType_12.getType();
-      _or = (_type_11 instanceof EnumerationType);
+      _or_1 = (_type_11 instanceof EnumerationType);
     }
-    final boolean isPrim = _or;
+    final boolean isPrim = _or_1;
     if (isRef) {
       typeName = (typeName + "*");
       castTypeName = (castTypeName + "*");

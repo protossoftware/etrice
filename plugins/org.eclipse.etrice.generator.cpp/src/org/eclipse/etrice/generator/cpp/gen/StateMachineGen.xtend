@@ -16,7 +16,8 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
@@ -33,7 +34,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	@Inject extension RoomExtensions
 	@Inject ProtocolClassGen cppProtGen
 	
-	override genExtraDecl(ExpandedActorClass xpac) {
+	override genExtraDecl(ExpandedModelComponent xpac) {
 //		val ac = xpac.actorClass
 	'''
 		protected:
@@ -44,8 +45,8 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			 void setState(int new_state);
 	'''}
 	
-	override genExtra(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
+	override genExtra(ExpandedModelComponent xpac) {
+		val ac = xpac.modelComponent as ActorClass
 	'''
 		std::string «ac.name»::s_stateStrings[] = {"<no state>","<top>",«FOR state : ac.getAllBaseStatesLeavesLast() SEPARATOR ","»"«state.genStatePathName»"
 		«ENDFOR»};
@@ -61,7 +62,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		}
 	'''}
 	
-	override genTriggerConstants(ExpandedActorClass xpac) {
+	override genTriggerConstants(ExpandedModelComponent xpac) {
 		val triggers = if (langExt.usesInheritance)
 			xpac.getOwnTriggers() else xpac.triggers
 

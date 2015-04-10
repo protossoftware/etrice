@@ -174,8 +174,8 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 	}
 
 	public Result isValid(TrPoint tp) {
-		if (!isUniqueName(tp, tp.getName()).isOk())
-			return Result.error("name is not unique", tp, FSMPackage.Literals.TR_POINT__NAME);
+//		if (!isUniqueName(tp, tp.getName()).isOk())
+//			return Result.error("name is not unique", tp, FSMPackage.Literals.TR_POINT__NAME);
 		
 		if (tp instanceof TransitionPoint)
 			return Result.ok();

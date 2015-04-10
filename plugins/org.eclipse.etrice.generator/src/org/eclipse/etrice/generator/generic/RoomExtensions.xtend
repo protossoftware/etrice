@@ -19,7 +19,6 @@ import javax.inject.Inject
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
@@ -410,36 +409,6 @@ class RoomExtensions extends FSMExtensions {
 			return "OUT_"+m.name
 	}
 
-	//-------------------------------------------------------
-	// state graph related methods
-
-	/**
-	 * @param states a list of {@link State}s
-	 * @return a list ordered such that leaf states are last
-	 */
-	def getLeafStatesLast(List<State> states) {
-		val leaf = states.filter(s|s.leaf)
-		val nonLeaf = states.filter(s|!s.leaf)
-		
-		nonLeaf.union(leaf)
-	}
-
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return a list of all leaf states
-	 */
-	def List<State> getAllLeafStates(ActorClass ac) {
-		ac.stateMachine.leafStateList
-	}
-
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return a list of simple states with leaf states last
-	 */
-	def List<State> getAllBaseStatesLeavesLast(ActorClass ac) {
-		ac.allBaseStates.getLeafStatesLast
-	}
-
 	/**
 	 * @param ac an {@link ActorClass}
 	 * @return <code>true</code> if an operation named 'stop' is defined with a void argument list and
@@ -448,28 +417,6 @@ class RoomExtensions extends FSMExtensions {
 	def boolean overridesStop(ActorClass ac) {
 		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType==null)
 			|| (ac.actorBase!=null && ac.actorBase.overridesStop())
-	}
-
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return the number of all inherited states
-	 */
-	def int getNumberOfInheritedStates(ActorClass ac) {
-		if (ac.actorBase==null)
-			return 0
-		else
-			return ac.base.stateMachine.getStateList().size+ac.actorBase.getNumberOfInheritedStates()
-	}
-	
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return the number of all inherited base (or simple) states
-	 */
-	def int getNumberOfInheritedBaseStates(ActorClass ac) {
-		if (ac.actorBase==null)
-			return 0
-		else
-			return ac.base.stateMachine.getBaseStateList().size+ac.actorBase.getNumberOfInheritedBaseStates()
 	}
 	
 	def getAllSubInstances(StructureInstance ssi) {

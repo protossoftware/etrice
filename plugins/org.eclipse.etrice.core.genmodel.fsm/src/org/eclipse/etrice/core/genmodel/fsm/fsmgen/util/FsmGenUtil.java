@@ -10,22 +10,21 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.genmodel.etricegen.util;
+package org.eclipse.etrice.core.genmodel.fsm.fsmgen.util;
 
-import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenFactory;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenFactory;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public class ETriceGenUtil {
+public class FsmGenUtil {
 	
-	private FSMHelpers fsmHelpers = new RoomHelpers();
+	private FSMHelpers fsmHelpers = new FSMHelpers();
 
 	/**
 	 * @param trig the trigger
@@ -35,7 +34,7 @@ public class ETriceGenUtil {
 	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#isMatching(Trigger, String)
 	 */
 	public boolean isMatching(Trigger trig, String trigstr) {
-		return ETriceGenFactory.eINSTANCE.createExpandedActorClass().isMatching(trig, trigstr);
+		return FsmGenFactory.eINSTANCE.createExpandedModelComponent().isMatching(trig, trigstr);
 	}
 	
 	/**

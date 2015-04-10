@@ -39,6 +39,7 @@ import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.fsm.base.ILineOutputLogger;
 import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo;
 import org.eclipse.etrice.generator.fsm.base.StdLineOutput;
+import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -67,7 +68,7 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractGenerator {
+public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	
 	public static final String OPTION_LIB = "-lib";
 	public static final String OPTION_NOEXIT = "-noexit";

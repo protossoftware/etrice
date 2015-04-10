@@ -141,9 +141,7 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	public void doSave(IProgressMonitor monitor) {
 		getEditingDomain().getCommandStack().execute(new RecordingCommand(getEditingDomain()) {
 			protected void doExecute() {
-				removeEmptySubgraphs();
-				rebaseRefinedStates();
-				removeUnusedRefinedStates();
+				cleanupBeforeSave();
 			}
 		});
 		
@@ -151,7 +149,16 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	}
 
 	/**
-	 * 
+	 * is called before actually saving the model
+	 */
+	protected void cleanupBeforeSave() {
+		removeEmptySubgraphs();
+		rebaseRefinedStates();
+		removeUnusedRefinedStates();
+	}
+	
+	/**
+	 * removes dangling refined states
 	 */
 	protected void removeUnusedRefinedStates() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
@@ -171,8 +178,16 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	}
 
 	/**
+	 * determines whether a refined state is actually used.
+	 * I.e. it has at least one of
+	 * <ul>
+	 * <li>direct substructure</li>
+	 * <li>entry code</li>
+	 * <li>exit code</li>
+	 * </ul>
+	 * 
 	 * @param s
-	 * @return
+	 * @return whether a refined state is actually used
 	 */
 	private boolean isUnused(RefinedState s) {
 		FSMHelpers fsmHelpers = FSMSupportUtil.getInstance().getFSMHelpers();
@@ -186,6 +201,9 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 		return true;
 	}
 
+	/**
+	 * removes empty subgraphs
+	 */
 	protected void removeEmptySubgraphs() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		FSMHelpers fsmHelpers = FSMSupportUtil.getInstance().getFSMHelpers();

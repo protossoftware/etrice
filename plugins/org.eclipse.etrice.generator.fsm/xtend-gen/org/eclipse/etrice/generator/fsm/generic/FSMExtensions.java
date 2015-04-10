@@ -10,23 +10,37 @@
  */
 package org.eclipse.etrice.generator.fsm.generic;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.fsm.fSM.Guard;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Henrik Rentz-Reichert
  */
 @SuppressWarnings("all")
 public class FSMExtensions {
+  @Inject
+  @Extension
+  protected FSMHelpers _fSMHelpers;
+  
   /**
    * the template type is T
    * @param l an iterable of type T
@@ -91,5 +105,115 @@ public class FSMExtensions {
       result.addAll(_outgoingTransitionsHierarchical);
     }
     return result;
+  }
+  
+  /**
+   * @param states a list of {@link State}s
+   * @return a list ordered such that leaf states are last
+   */
+  public List<State> getLeafStatesLast(final List<State> states) {
+    List<State> _xblockexpression = null;
+    {
+      final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
+        public Boolean apply(final State s) {
+          return Boolean.valueOf(FSMExtensions.this._fSMHelpers.isLeaf(s));
+        }
+      };
+      final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
+      final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
+        public Boolean apply(final State s) {
+          boolean _isLeaf = FSMExtensions.this._fSMHelpers.isLeaf(s);
+          return Boolean.valueOf((!_isLeaf));
+        }
+      };
+      final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
+      _xblockexpression = this.<State>union(nonLeaf, leaf);
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * @param ac an {@link ActorClass}
+   * @return a list of all leaf states
+   */
+  public List<State> getAllLeafStates(final ModelComponent mc) {
+    StateGraph _stateMachine = mc.getStateMachine();
+    return this._fSMHelpers.getLeafStateList(_stateMachine);
+  }
+  
+  /**
+   * @param ac an {@link ActorClass}
+   * @return a list of simple states with leaf states last
+   */
+  public List<State> getAllBaseStatesLeavesLast(final ModelComponent mc) {
+    List<State> _allBaseStates = this._fSMHelpers.getAllBaseStates(mc);
+    return this.getLeafStatesLast(_allBaseStates);
+  }
+  
+  /**
+   * @param ac an {@link ModelComponent}
+   * @return the number of all inherited states
+   */
+  public int getNumberOfInheritedStates(final ModelComponent mc) {
+    ModelComponent _base = mc.getBase();
+    boolean _equals = Objects.equal(_base, null);
+    if (_equals) {
+      return 0;
+    } else {
+      ModelComponent _base_1 = mc.getBase();
+      StateGraph _stateMachine = _base_1.getStateMachine();
+      List<State> _stateList = this._fSMHelpers.getStateList(_stateMachine);
+      int _size = _stateList.size();
+      ModelComponent _base_2 = mc.getBase();
+      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_base_2);
+      return (_size + _numberOfInheritedStates);
+    }
+  }
+  
+  /**
+   * @param ac an {@link ModelComponent}
+   * @return the number of all inherited base (or simple) states
+   */
+  public int getNumberOfInheritedBaseStates(final ModelComponent ac) {
+    ModelComponent _base = ac.getBase();
+    boolean _equals = Objects.equal(_base, null);
+    if (_equals) {
+      return 0;
+    } else {
+      ModelComponent _base_1 = ac.getBase();
+      StateGraph _stateMachine = _base_1.getStateMachine();
+      List<State> _baseStateList = this._fSMHelpers.getBaseStateList(_stateMachine);
+      int _size = _baseStateList.size();
+      ModelComponent _base_2 = ac.getBase();
+      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_base_2);
+      return (_size + _numberOfInheritedBaseStates);
+    }
+  }
+  
+  public boolean isConditionOrGuard(final DetailCode dc) {
+    boolean _xblockexpression = false;
+    {
+      final EObject parent = dc.eContainer();
+      boolean _switchResult = false;
+      boolean _matched = false;
+      if (!_matched) {
+        if (parent instanceof Guard) {
+          _matched=true;
+          _switchResult = true;
+        }
+      }
+      if (!_matched) {
+        if (parent instanceof CPBranchTransition) {
+          _matched=true;
+          DetailCode _condition = ((CPBranchTransition)parent).getCondition();
+          _switchResult = Objects.equal(_condition, dc);
+        }
+      }
+      if (!_matched) {
+        _switchResult = false;
+      }
+      _xblockexpression = _switchResult;
+    }
+    return _xblockexpression;
   }
 }

@@ -90,7 +90,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	@Override
 	protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain) {
 		if (rootObject instanceof ModelComponent) {
-			return new PopulateDiagramCommand(diagram, (ModelComponent) rootObject, Activator.getDefault().getInjector(), editingDomain);
+			return new PopulateDiagramCommand("org.eclipse.etrice.ui.behavior.diagramTypeProvider", diagram, (ModelComponent) rootObject, Activator.getDefault().getInjector(), editingDomain);
 		}
 		return null;
 	}

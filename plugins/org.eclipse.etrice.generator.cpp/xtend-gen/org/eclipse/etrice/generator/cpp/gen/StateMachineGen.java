@@ -18,8 +18,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
@@ -42,7 +43,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   @Inject
   private ProtocolClassGen cppProtGen;
   
-  public CharSequence genExtraDecl(final ExpandedActorClass xpac) {
+  public CharSequence genExtraDecl(final ExpandedModelComponent xpac) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("protected:");
     _builder.newLine();
@@ -61,10 +62,11 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _builder;
   }
   
-  public CharSequence genExtra(final ExpandedActorClass xpac) {
+  public CharSequence genExtra(final ExpandedModelComponent xpac) {
     CharSequence _xblockexpression = null;
     {
-      final ActorClass ac = xpac.getActorClass();
+      ModelComponent _modelComponent = xpac.getModelComponent();
+      final ActorClass ac = ((ActorClass) _modelComponent);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("std::string ");
       String _name = ac.getName();
@@ -126,7 +128,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  public String genTriggerConstants(final ExpandedActorClass xpac) {
+  public String genTriggerConstants(final ExpandedModelComponent xpac) {
     EList<MessageFromIf> _xifexpression = null;
     boolean _usesInheritance = this.langExt.usesInheritance();
     if (_usesInheritance) {

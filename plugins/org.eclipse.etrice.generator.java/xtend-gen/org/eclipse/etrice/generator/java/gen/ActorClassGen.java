@@ -518,9 +518,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("(this, \"");
           String _name_13 = ep_1.getName();
           _builder.append(_name_13, "\t\t");
-          _builder.append("\", IFITEM_");
-          String _name_14 = ep_1.getName();
-          _builder.append(_name_14, "\t\t");
+          _builder.append("\", ");
+          String _ifItemId = this.getIfItemId(ep_1);
+          _builder.append(_ifItemId, "\t\t");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
         }
@@ -534,17 +534,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
         for(final SAP sap_1 : _serviceAccessPoints_1) {
           _builder.append("\t\t");
-          String _name_15 = sap_1.getName();
-          _builder.append(_name_15, "\t\t");
+          String _name_14 = sap_1.getName();
+          _builder.append(_name_14, "\t\t");
           _builder.append(" = new ");
           String _portClassName_4 = this._roomExtensions.getPortClassName(sap_1);
           _builder.append(_portClassName_4, "\t\t");
           _builder.append("(this, \"");
-          String _name_16 = sap_1.getName();
-          _builder.append(_name_16, "\t\t");
-          _builder.append("\", IFITEM_");
-          String _name_17 = sap_1.getName();
-          _builder.append(_name_17, "\t\t");
+          String _name_15 = sap_1.getName();
+          _builder.append(_name_15, "\t\t");
+          _builder.append("\", ");
+          String _ifItemId_1 = this.getIfItemId(sap_1);
+          _builder.append(_ifItemId_1, "\t\t");
           _builder.append(", 0);");
           _builder.newLineIfNotEmpty();
         }
@@ -559,19 +559,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final ServiceImplementation svc_1 : _serviceImplementations_1) {
           _builder.append("\t\t");
           SPP _spp_1 = svc_1.getSpp();
-          String _name_18 = _spp_1.getName();
-          _builder.append(_name_18, "\t\t");
+          String _name_16 = _spp_1.getName();
+          _builder.append(_name_16, "\t\t");
           _builder.append(" = new ");
           String _portClassName_5 = this._roomExtensions.getPortClassName(svc_1);
           _builder.append(_portClassName_5, "\t\t");
           _builder.append("(this, \"");
           SPP _spp_2 = svc_1.getSpp();
-          String _name_19 = _spp_2.getName();
-          _builder.append(_name_19, "\t\t");
-          _builder.append("\", IFITEM_");
+          String _name_17 = _spp_2.getName();
+          _builder.append(_name_17, "\t\t");
+          _builder.append("\", ");
           SPP _spp_3 = svc_1.getSpp();
-          String _name_20 = _spp_3.getName();
-          _builder.append(_name_20, "\t\t");
+          String _ifItemId_2 = this.getIfItemId(_spp_3);
+          _builder.append(_ifItemId_2, "\t\t");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
         }
@@ -589,12 +589,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _equals = Objects.equal(_refType, ReferenceType.OPTIONAL);
             if (_equals) {
               _builder.append("\t\t");
-              String _name_21 = sub_2.getName();
-              _builder.append(_name_21, "\t\t");
+              String _name_18 = sub_2.getName();
+              _builder.append(_name_18, "\t\t");
               _builder.append(" = new ");
               ActorClass _type_3 = sub_2.getType();
-              String _name_22 = _type_3.getName();
-              _builder.append(_name_22, "\t\t");
+              String _name_19 = _type_3.getName();
+              _builder.append(_name_19, "\t\t");
               {
                 int _multiplicity_1 = sub_2.getMultiplicity();
                 boolean _notEquals_2 = (_multiplicity_1 != 1);
@@ -603,8 +603,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 }
               }
               _builder.append("Interface(this, \"");
-              String _name_23 = sub_2.getName();
-              _builder.append(_name_23, "\t\t");
+              String _name_20 = sub_2.getName();
+              _builder.append(_name_20, "\t\t");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
             } else {
@@ -624,8 +624,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                     _builder.append("\t\t");
                     _builder.append("\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_24 = sub_2.getName();
-                    _builder.append(_name_24, "\t\t\t");
+                    String _name_21 = sub_2.getName();
+                    _builder.append(_name_21, "\t\t\t");
                     _builder.append(GenmodelConstants.INDEX_SEP, "\t\t\t");
                     _builder.append("\"+i);");
                     _builder.newLineIfNotEmpty();
@@ -635,11 +635,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("\t");
                 _builder.append("new ");
                 ActorClass _type_4 = sub_2.getType();
-                String _name_25 = _type_4.getName();
-                _builder.append(_name_25, "\t\t\t");
+                String _name_22 = _type_4.getName();
+                _builder.append(_name_22, "\t\t\t");
                 _builder.append("(this, \"");
-                String _name_26 = sub_2.getName();
-                _builder.append(_name_26, "\t\t\t");
+                String _name_23 = sub_2.getName();
+                _builder.append(_name_23, "\t\t\t");
                 _builder.append(GenmodelConstants.INDEX_SEP, "\t\t\t");
                 _builder.append("\"+i);");
                 _builder.newLineIfNotEmpty();
@@ -653,8 +653,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   if (_generateMSCInstrumentation_1) {
                     _builder.append("\t\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
-                    String _name_27 = sub_2.getName();
-                    _builder.append(_name_27, "\t\t");
+                    String _name_24 = sub_2.getName();
+                    _builder.append(_name_24, "\t\t");
                     _builder.append("\");");
                     _builder.newLineIfNotEmpty();
                   }
@@ -662,11 +662,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.append("\t\t");
                 _builder.append("new ");
                 ActorClass _type_5 = sub_2.getType();
-                String _name_28 = _type_5.getName();
-                _builder.append(_name_28, "\t\t");
+                String _name_25 = _type_5.getName();
+                _builder.append(_name_25, "\t\t");
                 _builder.append("(this, \"");
-                String _name_29 = sub_2.getName();
-                _builder.append(_name_29, "\t\t");
+                String _name_26 = sub_2.getName();
+                _builder.append(_name_26, "\t\t");
                 _builder.append("\");");
                 _builder.newLineIfNotEmpty();
               }
@@ -771,8 +771,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             for(final Attribute a_1 : _dynConfigReadAttributes_3) {
               _builder.append("\t\t");
               _builder.append("lock_");
-              String _name_30 = a_1.getName();
-              _builder.append(_name_30, "\t\t");
+              String _name_27 = a_1.getName();
+              _builder.append(_name_27, "\t\t");
               _builder.append(" = new DynConfigLock();");
               _builder.newLineIfNotEmpty();
             }
@@ -788,8 +788,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       EList<Attribute> _attributes_3 = ac.getAttributes();
       List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
       List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_4);
-      String _name_31 = ac.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_31);
+      String _name_28 = ac.getName();
+      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_28);
       _builder.append(_attributeSettersGettersImplementation, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -808,9 +808,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final Port ep_2 : _endPorts_2) {
           _builder.append("\t");
           String _portClassName_6 = this._roomExtensions.getPortClassName(ep_2);
-          String _name_32 = ep_2.getName();
-          String _name_33 = ac.getName();
-          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_32, _name_33);
+          String _name_29 = ep_2.getName();
+          String _name_30 = ac.getName();
+          CharSequence _terImplementation = this._procedureHelpers.getterImplementation(_portClassName_6, _name_29, _name_30);
           _builder.append(_terImplementation, "\t");
           _builder.newLineIfNotEmpty();
         }
@@ -820,9 +820,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         for(final SAP sap_2 : _serviceAccessPoints_2) {
           _builder.append("\t");
           String _portClassName_7 = this._roomExtensions.getPortClassName(sap_2);
-          String _name_34 = sap_2.getName();
-          String _name_35 = ac.getName();
-          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_34, _name_35);
+          String _name_31 = sap_2.getName();
+          String _name_32 = ac.getName();
+          CharSequence _terImplementation_1 = this._procedureHelpers.getterImplementation(_portClassName_7, _name_31, _name_32);
           _builder.append(_terImplementation_1, "\t");
           _builder.newLineIfNotEmpty();
         }
@@ -833,9 +833,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           String _portClassName_8 = this._roomExtensions.getPortClassName(svc_2);
           SPP _spp_4 = svc_2.getSpp();
-          String _name_36 = _spp_4.getName();
-          String _name_37 = ac.getName();
-          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_36, _name_37);
+          String _name_33 = _spp_4.getName();
+          String _name_34 = ac.getName();
+          CharSequence _terImplementation_2 = this._procedureHelpers.getterImplementation(_portClassName_8, _name_33, _name_34);
           _builder.append(_terImplementation_2, "\t");
           _builder.newLineIfNotEmpty();
         }
@@ -888,8 +888,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
-              String _name_38 = ac.getName();
-              String _destructorCall = this._procedureHelpers.destructorCall(_name_38);
+              String _name_35 = ac.getName();
+              String _destructorCall = this._procedureHelpers.destructorCall(_name_35);
               _builder.append(_destructorCall, "\t\t");
               _builder.append(";");
               _builder.newLineIfNotEmpty();
@@ -969,8 +969,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("if (ifitem==");
-              String _name_39 = ifitem.getName();
-              _builder.append(_name_39, "\t\t");
+              String _name_36 = ifitem.getName();
+              _builder.append(_name_36, "\t\t");
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -986,8 +986,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t\t");
                   _builder.append("case ");
                   ProtocolClass _protocolClass = this._roomHelpers.getProtocolClass(msg);
-                  String _name_40 = _protocolClass.getName();
-                  _builder.append(_name_40, "\t\t\t\t");
+                  String _name_37 = _protocolClass.getName();
+                  _builder.append(_name_37, "\t\t\t\t");
                   _builder.append(".");
                   String _xifexpression_6 = null;
                   boolean _isIncoming = this._roomExtensions.isIncoming(msg);
@@ -997,8 +997,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                     _xifexpression_6 = "OUT_";
                   }
                   _builder.append(_xifexpression_6, "\t\t\t\t");
-                  String _name_41 = msg.getName();
-                  _builder.append(_name_41, "\t\t\t\t");
+                  String _name_38 = msg.getName();
+                  _builder.append(_name_38, "\t\t\t\t");
                   _builder.append(":");
                   _builder.newLineIfNotEmpty();
                   {
@@ -1020,11 +1020,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t\t");
                   _builder.append("\t");
                   _builder.append("on_");
-                  String _name_42 = ifitem.getName();
-                  _builder.append(_name_42, "\t\t\t\t\t");
+                  String _name_39 = ifitem.getName();
+                  _builder.append(_name_39, "\t\t\t\t\t");
                   _builder.append("_");
-                  String _name_43 = msg.getName();
-                  _builder.append(_name_43, "\t\t\t\t\t");
+                  String _name_40 = msg.getName();
+                  _builder.append(_name_40, "\t\t\t\t\t");
                   _builder.append("(ifitem");
                   {
                     VarDecl _data_1 = msg.getData();
@@ -1032,8 +1032,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                     if (_notEquals_6) {
                       _builder.append(", ");
                       VarDecl _data_2 = msg.getData();
-                      String _name_44 = _data_2.getName();
-                      _builder.append(_name_44, "\t\t\t\t\t");
+                      String _name_41 = _data_2.getName();
+                      _builder.append(_name_41, "\t\t\t\t\t");
                     }
                   }
                   _builder.append(");");
@@ -1080,11 +1080,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 for(final Message msg_1 : _incoming_1) {
                   _builder.append("\t");
                   _builder.append("protected void on_");
-                  String _name_45 = ifitem_1.getName();
-                  _builder.append(_name_45, "\t");
+                  String _name_42 = ifitem_1.getName();
+                  _builder.append(_name_42, "\t");
                   _builder.append("_");
-                  String _name_46 = msg_1.getName();
-                  _builder.append(_name_46, "\t");
+                  String _name_43 = msg_1.getName();
+                  _builder.append(_name_43, "\t");
                   _builder.append("(InterfaceItemBase ifitem");
                   {
                     VarDecl _data_4 = msg_1.getData();
@@ -1178,18 +1178,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("\t");
           _builder.append("public void receive(Message msg) {");
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("receiveEvent(");
           {
             ComponentCommunicationType _commType_7 = ac.getCommType();
             boolean _equals_8 = Objects.equal(_commType_7, ComponentCommunicationType.ASYNCHRONOUS);
             if (_equals_8) {
-              _builder.append("null, -1, null");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("receiveEvent(null, -1, null);");
+              _builder.newLine();
+            } else {
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("receiveEventInternal();");
+              _builder.newLine();
             }
           }
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -1380,27 +1383,27 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("dataObject.set");
-                          String _name_47 = att.getName();
-                          String _firstUpper = StringExtensions.toFirstUpper(_name_47);
+                          String _name_44 = att.getName();
+                          String _firstUpper = StringExtensions.toFirstUpper(_name_44);
                           _builder.append(_firstUpper, "\t\t");
                           _builder.append("(Arrays.copyOf(");
-                          String _name_48 = att.getName();
-                          _builder.append(_name_48, "\t\t");
+                          String _name_45 = att.getName();
+                          _builder.append(_name_45, "\t\t");
                           _builder.append(", ");
-                          String _name_49 = att.getName();
-                          _builder.append(_name_49, "\t\t");
+                          String _name_46 = att.getName();
+                          _builder.append(_name_46, "\t\t");
                           _builder.append(".length));");
                           _builder.newLineIfNotEmpty();
                         } else {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("dataObject.set");
-                          String _name_50 = att.getName();
-                          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_50);
+                          String _name_47 = att.getName();
+                          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_47);
                           _builder.append(_firstUpper_1, "\t\t");
                           _builder.append("(");
-                          String _name_51 = att.getName();
-                          _builder.append(_name_51, "\t\t");
+                          String _name_48 = att.getName();
+                          _builder.append(_name_48, "\t\t");
                           _builder.append(");");
                           _builder.newLineIfNotEmpty();
                         }
@@ -1419,14 +1422,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           RefableType _type_8 = att.getType();
                           DataType _type_9 = _type_8.getType();
-                          String _name_52 = _type_9.getName();
-                          _builder.append(_name_52, "\t\t\t");
+                          String _name_49 = _type_9.getName();
+                          _builder.append(_name_49, "\t\t\t");
                           _builder.append("[] arr = Arrays.copyOf(");
-                          String _name_53 = att.getName();
-                          _builder.append(_name_53, "\t\t\t");
+                          String _name_50 = att.getName();
+                          _builder.append(_name_50, "\t\t\t");
                           _builder.append(", ");
-                          String _name_54 = att.getName();
-                          _builder.append(_name_54, "\t\t\t");
+                          String _name_51 = att.getName();
+                          _builder.append(_name_51, "\t\t\t");
                           _builder.append(".length);");
                           _builder.newLineIfNotEmpty();
                           _builder.append("\t");
@@ -1438,8 +1441,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("dataObject.set");
-                          String _name_55 = att.getName();
-                          String _firstUpper_2 = StringExtensions.toFirstUpper(_name_55);
+                          String _name_52 = att.getName();
+                          String _firstUpper_2 = StringExtensions.toFirstUpper(_name_52);
                           _builder.append(_firstUpper_2, "\t\t\t");
                           _builder.append("(arr);");
                           _builder.newLineIfNotEmpty();
@@ -1451,12 +1454,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("dataObject.set");
-                          String _name_56 = att.getName();
-                          String _firstUpper_3 = StringExtensions.toFirstUpper(_name_56);
+                          String _name_53 = att.getName();
+                          String _firstUpper_3 = StringExtensions.toFirstUpper(_name_53);
                           _builder.append(_firstUpper_3, "\t\t");
                           _builder.append("(");
-                          String _name_57 = att.getName();
-                          _builder.append(_name_57, "\t\t");
+                          String _name_54 = att.getName();
+                          _builder.append(_name_54, "\t\t");
                           _builder.append(".deepCopy());");
                           _builder.newLineIfNotEmpty();
                         }
@@ -1547,28 +1550,28 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("set");
-                          String _name_58 = att_1.getName();
-                          String _firstUpper_4 = StringExtensions.toFirstUpper(_name_58);
+                          String _name_55 = att_1.getName();
+                          String _firstUpper_4 = StringExtensions.toFirstUpper(_name_55);
                           _builder.append(_firstUpper_4, "\t\t");
                           _builder.append("(Arrays.copyOf(dataObject.get");
-                          String _name_59 = att_1.getName();
-                          String _firstUpper_5 = StringExtensions.toFirstUpper(_name_59);
+                          String _name_56 = att_1.getName();
+                          String _firstUpper_5 = StringExtensions.toFirstUpper(_name_56);
                           _builder.append(_firstUpper_5, "\t\t");
                           _builder.append("(), ");
-                          String _name_60 = att_1.getName();
-                          _builder.append(_name_60, "\t\t");
+                          String _name_57 = att_1.getName();
+                          _builder.append(_name_57, "\t\t");
                           _builder.append(".length));");
                           _builder.newLineIfNotEmpty();
                         } else {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("set");
-                          String _name_61 = att_1.getName();
-                          String _firstUpper_6 = StringExtensions.toFirstUpper(_name_61);
+                          String _name_58 = att_1.getName();
+                          String _firstUpper_6 = StringExtensions.toFirstUpper(_name_58);
                           _builder.append(_firstUpper_6, "\t\t");
                           _builder.append("(dataObject.get");
-                          String _name_62 = att_1.getName();
-                          String _firstUpper_7 = StringExtensions.toFirstUpper(_name_62);
+                          String _name_59 = att_1.getName();
+                          String _firstUpper_7 = StringExtensions.toFirstUpper(_name_59);
                           _builder.append(_firstUpper_7, "\t\t");
                           _builder.append("());");
                           _builder.newLineIfNotEmpty();
@@ -1588,15 +1591,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           RefableType _type_12 = att_1.getType();
                           DataType _type_13 = _type_12.getType();
-                          String _name_63 = _type_13.getName();
-                          _builder.append(_name_63, "\t\t\t");
+                          String _name_60 = _type_13.getName();
+                          _builder.append(_name_60, "\t\t\t");
                           _builder.append("[] arr = Arrays.copyOf(dataObject.get");
-                          String _name_64 = att_1.getName();
-                          String _firstUpper_8 = StringExtensions.toFirstUpper(_name_64);
+                          String _name_61 = att_1.getName();
+                          String _firstUpper_8 = StringExtensions.toFirstUpper(_name_61);
                           _builder.append(_firstUpper_8, "\t\t\t");
                           _builder.append("(), ");
-                          String _name_65 = att_1.getName();
-                          _builder.append(_name_65, "\t\t\t");
+                          String _name_62 = att_1.getName();
+                          _builder.append(_name_62, "\t\t\t");
                           _builder.append(".length);");
                           _builder.newLineIfNotEmpty();
                           _builder.append("\t");
@@ -1608,8 +1611,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("set");
-                          String _name_66 = att_1.getName();
-                          String _firstUpper_9 = StringExtensions.toFirstUpper(_name_66);
+                          String _name_63 = att_1.getName();
+                          String _firstUpper_9 = StringExtensions.toFirstUpper(_name_63);
                           _builder.append(_firstUpper_9, "\t\t\t");
                           _builder.append("(arr);");
                           _builder.newLineIfNotEmpty();
@@ -1621,12 +1624,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
                           _builder.append("\t");
                           _builder.append("\t");
                           _builder.append("set");
-                          String _name_67 = att_1.getName();
-                          String _firstUpper_10 = StringExtensions.toFirstUpper(_name_67);
+                          String _name_64 = att_1.getName();
+                          String _firstUpper_10 = StringExtensions.toFirstUpper(_name_64);
                           _builder.append(_firstUpper_10, "\t\t");
                           _builder.append("(dataObject.get");
-                          String _name_68 = att_1.getName();
-                          String _firstUpper_11 = StringExtensions.toFirstUpper(_name_68);
+                          String _name_65 = att_1.getName();
+                          String _firstUpper_11 = StringExtensions.toFirstUpper(_name_65);
                           _builder.append(_firstUpper_11, "\t\t");
                           _builder.append("().deepCopy());");
                           _builder.newLineIfNotEmpty();

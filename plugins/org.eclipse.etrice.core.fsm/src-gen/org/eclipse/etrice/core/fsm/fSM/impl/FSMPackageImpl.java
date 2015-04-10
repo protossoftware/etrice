@@ -1589,11 +1589,15 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEClass(abstractInterfaceItemEClass, AbstractInterfaceItem.class, "AbstractInterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractInterfaceItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractInterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    addEOperation(abstractInterfaceItemEClass, ecorePackage.getEString(), "getDisplayName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
     addEOperation(abstractInterfaceItemEClass, this.getProtocolSemantics(), "getSemantics", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     addEOperation(abstractInterfaceItemEClass, ecorePackage.getEObject(), "getAllIncomingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     addEOperation(abstractInterfaceItemEClass, ecorePackage.getEObject(), "getAllOutgoingAbstractMessages", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+    addEOperation(abstractInterfaceItemEClass, ecorePackage.getEBoolean(), "isEventDriven", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(guardEClass, Guard.class, "Guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGuard_Guard(), this.getDetailCode(), null, "guard", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

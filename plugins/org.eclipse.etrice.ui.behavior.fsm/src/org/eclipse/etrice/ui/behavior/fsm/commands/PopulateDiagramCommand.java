@@ -32,13 +32,13 @@ public class PopulateDiagramCommand extends RecordingCommand {
 	private IFeatureProvider fp;
 	private Injector injector;
 
-	public PopulateDiagramCommand(Diagram diag, ModelComponent mc, Injector injector, TransactionalEditingDomain domain) {
+	public PopulateDiagramCommand(String providerId, Diagram diag, ModelComponent mc, Injector injector, TransactionalEditingDomain domain) {
 		super(domain);
 		this.diagram = diag;
 		this.mc = mc;
 		this.injector = injector;
 
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, "org.eclipse.etrice.ui.behavior.diagramTypeProvider"); //$NON-NLS-1$
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerId); //$NON-NLS-1$
 		fp = dtp.getFeatureProvider();
 	}
 

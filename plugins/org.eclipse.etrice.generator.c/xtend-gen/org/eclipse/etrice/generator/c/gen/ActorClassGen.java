@@ -1348,20 +1348,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
         boolean _isEmpty_2 = this._roomHelpers.isEmpty(_stateMachine_2);
         boolean _not_2 = (!_isEmpty_2);
         if (_not_2) {
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          String _name_6 = ac.getName();
-          String _operationScope = this.langExt.operationScope(_name_6, false);
-          _builder.append(_operationScope, "\t");
-          _builder.append("receiveEvent(self");
           {
             if (handleEvents) {
-              _builder.append(", (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage)))");
+              _builder.append("\t");
+              String _name_6 = ac.getName();
+              String _operationScope = this.langExt.operationScope(_name_6, false);
+              _builder.append(_operationScope, "\t");
+              _builder.append("receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t");
+              String _name_7 = ac.getName();
+              String _operationScope_1 = this.langExt.operationScope(_name_7, false);
+              _builder.append(_operationScope_1, "\t");
+              _builder.append("receiveEventInternal(self);");
+              _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t");
@@ -1381,17 +1384,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
         if (_or_1) {
           _builder.append("void ");
-          String _name_7 = ac.getName();
-          _builder.append(_name_7, "");
-          _builder.append("_execute(");
           String _name_8 = ac.getName();
           _builder.append(_name_8, "");
+          _builder.append("_execute(");
+          String _name_9 = ac.getName();
+          _builder.append(_name_9, "");
           _builder.append("* self) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
-          String _name_9 = ac.getName();
-          _builder.append(_name_9, "\t");
+          String _name_10 = ac.getName();
+          _builder.append(_name_10, "\t");
           _builder.append("\", \"_execute\")");
           _builder.newLineIfNotEmpty();
           {
@@ -1401,18 +1404,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
             if (_not_3) {
               _builder.append("\t");
               _builder.newLine();
-              _builder.append("\t");
-              String _name_10 = ac.getName();
-              String _operationScope_1 = this.langExt.operationScope(_name_10, false);
-              _builder.append(_operationScope_1, "\t");
-              _builder.append("receiveEvent(self");
               {
                 if (handleEvents) {
-                  _builder.append(", NULL, 0, NULL");
+                  _builder.append("\t");
+                  String _name_11 = ac.getName();
+                  String _operationScope_2 = this.langExt.operationScope(_name_11, false);
+                  _builder.append(_operationScope_2, "\t");
+                  _builder.append("receiveEvent(self, NULL, 0, NULL);");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("\t");
+                  String _name_12 = ac.getName();
+                  String _operationScope_3 = this.langExt.operationScope(_name_12, false);
+                  _builder.append(_operationScope_3, "\t");
+                  _builder.append("receiveEventInternal(self);");
+                  _builder.newLineIfNotEmpty();
                 }
               }
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
             }
           }
           _builder.append("\t");
@@ -1426,8 +1434,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       EList<StandardOperation> _operations = ac.getOperations();
-      String _name_11 = ac.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_11);
+      String _name_13 = ac.getName();
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_13);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();

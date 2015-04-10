@@ -37,6 +37,7 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	public void configure(Binder binder) {
 		super.configure(binder);
 		
+		// HOWTO: bind a validator in stand alone mode (usually contributed by extension point)
 		if(!ValidatorExtensionManager.Registry.isAvailable())
 			bindCustomValidator(binder);
 	}

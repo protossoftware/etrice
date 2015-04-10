@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -56,9 +57,9 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		'''
 	}
 	
-	override protected genExtra(ExpandedActorClass xpac) {
-		val ac = xpac.actorClass
-		val states = xpac.stateMachine.baseStateList.getLeafStatesLast
+	override public genExtra(ExpandedModelComponent xpmc) {
+		val mc = xpmc.modelComponent
+		val states = xpmc.stateMachine.baseStateList.getLeafStatesLast
 		'''
 			«IF Main::settings.generateMSCInstrumentation»
 				/* state names */
@@ -66,20 +67,20 @@ class StateMachineGen extends GenericStateMachineGenerator {
 				«ENDFOR»};
 			«ENDIF»
 			
-			«langExt.accessLevelPrivate»void setState(«ac.name»* self, «stateType» new_state) {
+			«langExt.accessLevelPrivate»void setState(«mc.componentName»* self, «stateType» new_state) {
 				self->state = new_state;
 				«IF Main::settings.generateMSCInstrumentation»
 					ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
 				«ENDIF»
 			}
 			
-			«langExt.accessLevelPrivate»«stateType» getState(«ac.name»* self) {
+			«langExt.accessLevelPrivate»«stateType» getState(«mc.componentName»* self) {
 				return self->state;
 			}
 		'''
 	}
 	
-	override protected stateType() {
+	override public stateType() {
 		"etInt16"
 	}
 	
@@ -88,7 +89,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			((void)trigger__et);	/* avoids unused warning */
 		'''
 	}
-	override protected unreachableReturn() {
+	override public unreachableReturn() {
 		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
 	}
 	

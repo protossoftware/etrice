@@ -59,6 +59,15 @@ public interface AbstractInterfaceItem extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getName();\n'"
+   * @generated
+   */
+  String getDisplayName();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
    * @generated
    */
   ProtocolSemantics getSemantics();
@@ -78,5 +87,14 @@ public interface AbstractInterfaceItem extends EObject
    * @generated
    */
   EList<EObject> getAllOutgoingAbstractMessages();
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @model kind="operation"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return true;'"
+   * @generated
+   */
+  boolean isEventDriven();
 
 } // AbstractInterfaceItem

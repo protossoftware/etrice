@@ -24,11 +24,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.util.BaseHelpers;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
@@ -1085,7 +1088,7 @@ public class FSMHelpers extends BaseHelpers {
 	 * Returns the complete action code including base class code of a {@link Transition}.
 	 * 
 	 * @param trans the transition
-	 * @param ac the model component
+	 * @param mc the model component
 	 * 
 	 * @return the complete action code including base class code of a {@link Transition}
 	 */
@@ -1120,6 +1123,102 @@ public class FSMHelpers extends BaseHelpers {
 		}
 		
 		return null;
+	}
+
+	/**
+	 * @param mc an {@link ModelComponent}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * event driven interface items of this actor class (<i>without</i> inherited ones)
+	 */
+	public List<MessageFromIf> getMessagesFromInterfaces(ModelComponent mc) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		List<AbstractInterfaceItem> items = mc.getAbstractInterfaceItems();
+		for (AbstractInterfaceItem item : items) {
+			for (EObject msg : item.getAllIncomingAbstractMessages()) {
+				MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
+				mif.setMessage(msg);
+				mif.setFrom(item);
+				result.add(mif);
+			}
+		}
+		
+		return result;
+	}
+
+	/**
+	 * @param mc an {@link ModelComponent}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * event driven interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
+	 */
+	public List<MessageFromIf> getOwnMessagesFromInterfaces(ModelComponent mc) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		result.addAll(getMessagesFromInterfaces(mc));
+		mc = mc.getBase();
+		while (mc!=null) {
+			if (hasNonEmptyStateMachine(mc))
+				break;
+			
+			List<AbstractInterfaceItem> items = mc.getAbstractInterfaceItems();
+			for (AbstractInterfaceItem item : items) {
+				for (EObject msg : item.getAllIncomingAbstractMessages()) {
+					MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
+					mif.setMessage(msg);
+					mif.setFrom(item);
+					result.add(mif);
+				}
+			}
+			
+			mc = mc.getBase();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * @param mc an {@link ModelComponent}
+	 * @return a list of {@link MessageFromIf} that may come in through one of the
+	 * event driven interface items of this actor class(<i>including</i> inherited ones)
+	 */
+	public List<MessageFromIf> getAllMessagesFromInterfaces(ModelComponent mc) {
+		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
+		
+		while (mc!=null) {
+			List<AbstractInterfaceItem> items = mc.getAbstractInterfaceItems();
+			for (AbstractInterfaceItem item : items) {
+				for (EObject msg : item.getAllIncomingAbstractMessages()) {
+					MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
+					mif.setMessage(msg);
+					mif.setFrom(item);
+					result.add(mif);
+				}
+			}
+			
+			mc = mc.getBase();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return the initial transition or <code>null</code> if no such is available
+	 */
+	public Transition getInitTransition(StateGraph sg) {
+		for (Transition tr : sg.getTransitions()) {
+			if (tr instanceof InitialTransition)
+				return tr;
+		}
+		return null;
+	}
+
+	/**
+	 * @param sg a {@link StateGraph}
+	 * @return <code>true</code> if an initial transition is available
+	 */
+	public boolean hasInitTransition(StateGraph sg) {
+		return getInitTransition(sg)!=null;
 	}
 
 }

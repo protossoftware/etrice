@@ -12,6 +12,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 
 import org.eclipse.etrice.core.fsm.fSM.impl.AbstractInterfaceItemImpl;
 
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
@@ -104,6 +105,20 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
   public EList<EObject> getAllOutgoingAbstractMessages()
   {
     return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isEventDriven()
+  {
+    if (getGeneralProtocol() instanceof ProtocolClass)
+        return ((ProtocolClass) getGeneralProtocol()).getCommType() == CommunicationType.EVENT_DRIVEN;
+    else
+        return false;
     
   }
 

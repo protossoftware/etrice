@@ -168,21 +168,21 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
               _builder.append(" = new ReplicatedInterfaceItemBroker(this, \"");
               String _name_3 = ep_1.getName();
               _builder.append(_name_3, "\t\t");
-              _builder.append("\", IFITEM_");
-              String _name_4 = ep_1.getName();
-              _builder.append(_name_4, "\t\t");
+              _builder.append("\", ");
+              String _ifItemId = this.getIfItemId(ep_1);
+              _builder.append(_ifItemId, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t\t");
+              String _name_4 = ep_1.getName();
+              _builder.append(_name_4, "\t\t");
+              _builder.append(" = new InterfaceItemBroker(this, \"");
               String _name_5 = ep_1.getName();
               _builder.append(_name_5, "\t\t");
-              _builder.append(" = new InterfaceItemBroker(this, \"");
-              String _name_6 = ep_1.getName();
-              _builder.append(_name_6, "\t\t");
-              _builder.append("\", IFITEM_");
-              String _name_7 = ep_1.getName();
-              _builder.append(_name_7, "\t\t");
+              _builder.append("\", ");
+              String _ifItemId_1 = this.getIfItemId(ep_1);
+              _builder.append(_ifItemId_1, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }

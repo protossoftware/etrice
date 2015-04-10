@@ -135,30 +135,37 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 						return;
 					}
 	
-					// HOWTO: call serializer to validate the concrete syntax
-					// this throws an exception which is caught further up the stack
-					// and a dialog will be displayed
-					serializer.serialize(xres.getContents().get(0));
-					
-					List<Issue> result = resourceValidator.validate(res, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
-						public boolean isCanceled() {
-							return monitor.isCanceled();
-						}
-					});
-					if (!result.isEmpty()) {
-						boolean error = false;
-						MultiStatus ms = new MultiStatus(UIBaseActivator.PLUGIN_ID, Status.ERROR, "validation errors during diagram save", null);
-						for (Issue issue : result) {
-							if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR) {
-								ms.add(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, issue.getMessage()));
-								error = true;
+					try {
+						// HOWTO: call serializer to validate the concrete syntax
+						// this throws an exception which is caught further up the stack
+						// and a dialog will be displayed
+						serializer.serialize(xres.getContents().get(0));
+						
+						List<Issue> result = resourceValidator.validate(res, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
+							public boolean isCanceled() {
+								return monitor.isCanceled();
+							}
+						});
+						if (!result.isEmpty()) {
+							boolean error = false;
+							MultiStatus ms = new MultiStatus(UIBaseActivator.PLUGIN_ID, Status.ERROR, "validation errors during diagram save", null);
+							for (Issue issue : result) {
+								if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR) {
+									ms.add(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, issue.getMessage()));
+									error = true;
+								}
+							}
+							if (error) {
+								MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
+								UIBaseActivator.getDefault().getLog().log(ms);
+								return;
 							}
 						}
-						if (error) {
-							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
-							UIBaseActivator.getDefault().getLog().log(ms);
-							return;
-						}
+					}
+					catch (RuntimeException e) {
+						MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save:\n\n"+e.getMessage());
+						UIBaseActivator.getDefault().getLog().log(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, e.getMessage()));
+						return;
 					}
 				}
 			}
