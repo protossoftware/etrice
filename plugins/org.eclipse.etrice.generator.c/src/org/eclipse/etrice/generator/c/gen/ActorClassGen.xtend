@@ -205,7 +205,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val replEventPorts = eventPorts.filter[multiplicity!=1]
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN &&  p.conjugated && p.multiplicity==1)
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated && p.multiplicity==1)
-		val portsWithOperations = ac.allEndPorts.filter(p|p.portClass!=null && p.portClass.operations.size>0)
+		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!=null && p.portClass.operations.size>0)
 		val filename = (ac.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+ac.name+"_Utils"
 		
 	'''
