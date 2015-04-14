@@ -101,7 +101,8 @@ public class ConfigProposalProvider extends AbstractConfigProposalProvider {
 		ActorContainerClass root = config.getSubSystem().getType();
 		if (root != null) {
 			RefPath path = config.getPath();
-			if (path != null && !path.getRefs().isEmpty())
+			if(path != null && !path.getRefs().isEmpty() && path.getRefs().get(0) != null && 
+					path.getRefs().get(0).getRef() != null)
 				root = configUtil.resolve(root, path);
 			if (root != null) {
 				for (ActorContainerRef ref : roomHelpers.getRefs(root, true)) {
