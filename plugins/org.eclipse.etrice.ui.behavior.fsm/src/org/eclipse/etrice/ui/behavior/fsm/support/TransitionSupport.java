@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal;
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
@@ -33,6 +32,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
@@ -446,15 +446,55 @@ public class TransitionSupport {
 					trans = t;
 				}
 				else {
-					NonInitialTransition t = mc.getCommType()==ComponentCommunicationType.DATA_DRIVEN?
-						((orig instanceof GuardedTransition)?
-							(GuardedTransition)orig : FSMFactory.eINSTANCE.createGuardedTransition()
-						)
-						:
-						((orig instanceof TriggeredTransition)?
-							(TriggeredTransition)orig : FSMFactory.eINSTANCE.createTriggeredTransition()
-						)
-						;
+					TransitionChainStartTransition t = null;
+					switch(mc.getCommType()){
+						case EVENT_DRIVEN:
+							if(orig instanceof TriggeredTransition)
+								t = (TransitionChainStartTransition) orig;
+							else
+								t = FSMFactory.eINSTANCE.createTriggeredTransition();
+							break;
+						case DATA_DRIVEN:
+							if(orig instanceof GuardedTransition)
+								t = (TransitionChainStartTransition) orig;
+							else
+								t = FSMFactory.eINSTANCE.createGuardedTransition();
+							break;
+						case ASYNCHRONOUS:
+							if(orig instanceof TriggeredTransition || orig instanceof GuardedTransition )
+								t = (TransitionChainStartTransition) orig;
+							else {
+								// let user choose between triggered and guarded transition
+					        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					        	MessageDialog dlg = new MessageDialog(
+					        			shell,
+					        			"Create new transition",
+										null, 	// accept the default window icon
+					        			"Select the kind of transition",
+										MessageDialog.QUESTION,
+										new String[] {
+					        				"triggered",
+					        				"guarded"
+					        			},
+										0		// default button index
+									);
+					        	
+					        	switch (dlg.open()) {	// open returns index of pressed button
+									case 0:
+										t = FSMFactory.eINSTANCE.createTriggeredTransition();
+										break;
+									case 1:
+										t = FSMFactory.eINSTANCE.createGuardedTransition();
+										break;
+					        	}
+							}
+						break;
+						case SYNCHRONOUS:
+							break;
+						default:
+							break;
+					}
+					
 					t.setFrom(src);
 					t.setTo(dst);
 					trans = t;

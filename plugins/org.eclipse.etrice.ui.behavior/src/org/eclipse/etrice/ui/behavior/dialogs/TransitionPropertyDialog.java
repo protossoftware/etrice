@@ -177,14 +177,15 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 
 		if (trans instanceof GuardedTransition) {
+			GuardedTransition guardedTrans = (GuardedTransition) trans;
 			if (inherited) {
-				String code = fsmHelpers.getDetailCode(((GuardedTransition) trans).getGuard());
+				String code = fsmHelpers.getDetailCode(guardedTrans.getGuard());
 				createFixedText(body, "&Guard:", code, true);
 			}
 			else {
 				GuardValidator gv = new GuardValidator("guard must not be empty");
 
-				createActionCodeEditor(body, "&Guard:", trans.getAction(),
+				createActionCodeEditor(body, "&Guard:", guardedTrans.getGuard(),
 						trans,
 						FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv,
 						s2m_not_null, m2s_null_empty, true, true, true,
