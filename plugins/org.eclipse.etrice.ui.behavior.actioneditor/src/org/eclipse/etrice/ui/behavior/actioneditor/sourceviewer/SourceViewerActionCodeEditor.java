@@ -29,7 +29,9 @@ import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.ITextOperationTarget;
+import org.eclipse.jface.text.TextEvent;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -258,6 +260,15 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 			}
 		});
 
+		// Workaround: Forward changes, that are applied directly on the underlying document, to widget listeners.
+		// Ensures that content assist changes are registered by swt observables + databinding.
+		fSourceViewer.addTextListener(new ITextListener() {
+			@Override
+			public void textChanged(TextEvent event) {
+				fSourceViewer.getTextWidget().notifyListeners(SWT.Modify, null);
+			}
+		});
+		
 		initializeSourceViewer(getDetailCode());
 
 		getControl()
