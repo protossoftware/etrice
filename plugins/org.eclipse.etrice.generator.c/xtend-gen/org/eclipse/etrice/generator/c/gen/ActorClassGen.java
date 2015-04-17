@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
+import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
@@ -667,9 +668,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_3);
-      List<Port> _allEndPorts_3 = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_4 = new Function1<Port, Boolean>() {
-        public Boolean apply(final Port p) {
+      List<InterfaceItem> _allInterfaceItems = this._roomHelpers.getAllInterfaceItems(ac);
+      final Function1<InterfaceItem, Boolean> _function_4 = new Function1<InterfaceItem, Boolean>() {
+        public Boolean apply(final InterfaceItem p) {
           boolean _and = false;
           PortClass _portClass = ActorClassGen.this._roomHelpers.getPortClass(p);
           boolean _notEquals = (!Objects.equal(_portClass, null));
@@ -685,7 +686,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return Boolean.valueOf(_and);
         }
       };
-      final Iterable<Port> portsWithOperations = IterableExtensions.<Port>filter(_allEndPorts_3, _function_4);
+      final Iterable<InterfaceItem> portsWithOperations = IterableExtensions.<InterfaceItem>filter(_allInterfaceItems, _function_4);
       EObject _eContainer = ac.eContainer();
       String _name = ((RoomModel) _eContainer).getName();
       String _replaceAll = _name.replaceAll("\\.", "_");
@@ -1138,7 +1139,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* port operations */");
       _builder.newLine();
       {
-        for(final Port p : portsWithOperations) {
+        for(final InterfaceItem p : portsWithOperations) {
           {
             PortClass _portClass = this._roomHelpers.getPortClass(p);
             EList<PortOperation> _operations = _portClass.getOperations();
