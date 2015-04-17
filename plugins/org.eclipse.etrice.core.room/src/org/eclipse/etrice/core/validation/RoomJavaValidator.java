@@ -182,7 +182,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				for (Port p : ac.getInterfacePorts()) {
 					if (p.getMultiplicity()<0) {
 						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
-						error("replicated actor must not have replicated port with arbitrary multiplicity", RoomPackage.Literals.ACTOR_CONTAINER_CLASS__ACTOR_REFS, idx);
+						error("replicated actor must not have replicated port with arbitrary multiplicity", null);
 					}
 				}
 			}
@@ -192,10 +192,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkLayerConnectiontarget(LayerConnection lc) {
 		if (lc.getTo().getRef() instanceof ActorRef)
-			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1) {
-				int idx = ((StructureClass)lc.eContainer()).getConnections().indexOf(lc);
-				error("layer connection must not connect to replicated actor", RoomPackage.Literals.STRUCTURE_CLASS__CONNECTIONS, idx);
-			}
+			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1) 
+				error("layer connection must not connect to replicated actor", null);		
 	}
 	
 	@Check
@@ -317,6 +315,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			else
 				name2obj.put(ref.getName(), ref);
 		}
+		
+		
 	}
 	
 	@Check
@@ -561,6 +561,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkOperation(StandardOperation op) {
+		RoomClass cls = (RoomClass) op.eContainer();
+//		if(cls instanceof RoomClass && !roomHelpers.isCircularClassHierarchy((RoomClass)cls)){
+//			
+//		}
 		if (roomHelpers.isConstructor(op)) {
 			if (!op.getArguments().isEmpty())
 				error("Constructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
@@ -574,11 +578,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}
 		else if (op.isDestructor()) {
-			RoomClass cls = (RoomClass) op.eContainer();
 			error("Destructor must have class name", RoomPackage.Literals.OPERATION__NAME, CHANGE_DESTRUCTOR_NAME, cls.getName());
 		}
 		else if (op.getArguments().isEmpty()) {
-			RoomClass cls = (RoomClass) op.eContainer();
 			
 			// check for method with same name with destructor flag set
 			EList<StandardOperation> ops = null;
