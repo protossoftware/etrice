@@ -173,7 +173,8 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		ActorContainerClass root = roomHelpers.getParentContainer(aim);
 		if (root != null) {
 			RefPath path = aim.getPath();
-			if (path != null && !path.getRefs().isEmpty())
+			if(path != null && !path.getRefs().isEmpty() && path.getRefs().get(0) != null && 
+					path.getRefs().get(0).getRef() != null)
 				root = roomHelpers.getActorContainerClass(aim);
 			if (root != null) {
 				for (ActorContainerRef ref : roomHelpers.getRefs(root, true)) {
