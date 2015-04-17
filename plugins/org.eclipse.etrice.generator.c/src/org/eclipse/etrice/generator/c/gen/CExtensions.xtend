@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.room.EnumerationType
 
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -47,8 +48,13 @@ class CExtensions implements ILanguageExtension {
 	@Inject protected IDiagnostician diagnostician
 	@Inject protected extension RoomHelpers
 
-	override String getTypedDataDefinition(Message m) {
-		generateArglistAndTypedData(m.data).get(1)
+	override String getTypedDataDefinition(EObject msg) {
+	    if (msg instanceof Message) {
+    		generateArglistAndTypedData((msg as Message).data).get(1)
+	    }
+	    else {
+	        ""
+	    }
 	}
 
 	// in C no access levels can be defined
@@ -301,7 +307,11 @@ class CExtensions implements ILanguageExtension {
 			att.type.type.initializationWithDefaultValues(att.size)
 	}
 	
-	override generateArglistAndTypedData(VarDecl data) {
+	override generateArglistAndTypedData(EObject d) {
+		if (d==null || !(d instanceof VarDecl))
+			return newArrayList("", "", "")
+			
+		val data = d as VarDecl
 		if (data==null)
 			return newArrayList("", "", "")
 			

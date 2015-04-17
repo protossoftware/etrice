@@ -159,17 +159,17 @@ class ActorClassGen extends GenericActorClassGenerator {
 		
 				// own ports
 				«FOR ep : ac.getEndPorts()»
-					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", IFITEM_«ep.name»);
+					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", «ep.ifItemId»);
 				«ENDFOR»
 				
 				// own saps
 				«FOR sap : ac.serviceAccessPoints»
-					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", IFITEM_«sap.name», 0);
+					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", «sap.ifItemId», 0);
 				«ENDFOR»
 				
 				// own service implementations
 				«FOR svc : ac.serviceImplementations»
-					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»);
+					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", «svc.spp.ifItemId»);
 				«ENDFOR»
 				
 				// sub actors
@@ -314,7 +314,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 				@Override
 				public void receive(Message msg) {
-					receiveEvent(«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»null, -1, null«ENDIF»);
+					«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»
+						receiveEvent(null, -1, null);
+					«ELSE»
+						receiveEventInternal();
+					«ENDIF»
 				}
 			«ENDIF»
 			

@@ -18,19 +18,20 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 	
-	override genExtra(ExpandedActorClass xpac) {
+	override genExtra(ExpandedModelComponent xpac) {
 		val states = new ArrayList<State>()
-		var ac = xpac.actorClass
+		var ac = xpac.modelComponent
 		
 //		it is crucial that we obey the order that is used for state IDs
 //		that means we have to collect base classes first and each base class list with leaf states last
 		while (ac!=null) {
 			states.addAll(0, ac.allBaseStates.leafStatesLast)
-			ac = ac.actorBase
+			ac = ac.base
 		}
 	'''
 		«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»

@@ -19,6 +19,12 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.generator.fsm.base.Diagnostician;
 import org.eclipse.etrice.generator.fsm.base.ILineOutputLogger;
 import org.eclipse.etrice.generator.fsm.base.Logger;
+import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
+import org.eclipse.etrice.generator.fsm.generic.IIfItemIdGenerator;
+import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase;
+import org.eclipse.etrice.generator.fsm.generic.IMessageIdGenerator;
+import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
+import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -61,6 +67,13 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		
 		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
 
+		binder.bind(IMessageIdGenerator.class).to(GenericProtocolClassGenerator.class);
+		binder.bind(IIfItemIdGenerator.class).to(GenericActorClassGenerator.class);
+		
+		binder.bind(IDetailCodeTranslator.class).to(AbstractGenerator.class);
+		
+		binder.bind(ILanguageExtensionBase.class).to(ILanguageExtension.class);
+		
 		if (bindILanguageExtension()!=null)
 			binder.bind(ILanguageExtension.class).to(bindILanguageExtension());
 		if (bindITranslationProvider()!=null)

@@ -409,6 +409,9 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEBoolean(), "isOwnObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getStateGraphItem(), "obj", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEBoolean(), "hasBaseTransitionDetailCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(expandedModelComponentEClass, ecorePackage.getEBoolean(), "hasStateMachine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEString(), "getTriggerCodeName", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -21,12 +21,14 @@ import static org.eclipse.xtext.util.Tuples.*
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.generator.fsm.generic.IIfItemIdGenerator
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem
 
 /**
  * Target language independent part of an actor class generator.
  * It uses the {@link ILanguageExtension}.
  */
-class GenericActorClassGenerator {
+class GenericActorClassGenerator implements IIfItemIdGenerator {
 
 	@Inject protected extension RoomHelpers
 	@Inject protected extension RoomExtensions
@@ -50,13 +52,13 @@ class GenericActorClassGenerator {
 			
 		val list = new ArrayList<Pair<String, String>>()
 		for (ep : endPorts) {
-			list.add(pair("IFITEM_"+ep.name, (1+xpac.getInterfaceItemLocalId(ep)).toString))
+			list.add(pair(ep.ifItemId, (1+xpac.getInterfaceItemLocalId(ep)).toString))
 		}
 		for (sap : strSAPs) {
-			list.add(pair("IFITEM_"+sap.name, (1+xpac.getInterfaceItemLocalId(sap)).toString))
+			list.add(pair(sap.ifItemId, (1+xpac.getInterfaceItemLocalId(sap)).toString))
 		}
 		for (svc : svcImpls) {
-			list.add(pair("IFITEM_"+svc.spp.name, (1+xpac.getInterfaceItemLocalId(svc.spp)).toString))
+			list.add(pair(svc.spp.ifItemId, (1+xpac.getInterfaceItemLocalId(svc.spp)).toString))
 		}
 		
 		return langExt.genEnumeration("interface_items", list)
@@ -66,9 +68,14 @@ class GenericActorClassGenerator {
 		val ports = ac.allInterfacePorts
 		val list = new ArrayList<Pair<String, String>>()
 		for (ep : ports.indexed) {
-			list.add(pair("IFITEM_"+ep.value.name, ep.index1.toString))
+			list.add(pair(ep.value.ifItemId, ep.index1.toString))
 		}
 		
 		return langExt.genEnumeration("interface_items", list)
 	}
+    
+    override getIfItemId(AbstractInterfaceItem item) {
+        "IFITEM_"+item.name
+    }
+
 }

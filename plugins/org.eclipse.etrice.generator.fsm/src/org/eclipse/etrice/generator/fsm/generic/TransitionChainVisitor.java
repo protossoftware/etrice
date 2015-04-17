@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.generic;
+package org.eclipse.etrice.generator.fsm.generic;
 
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
@@ -18,14 +18,11 @@ import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
-import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.base.CodegenHelpers;
-
-import com.google.inject.Inject;
+import org.eclipse.etrice.generator.fsm.base.CodegenHelpers;
 
 /**
  * Implementation of the {@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor ITransitionChainVisitor} interface.
@@ -36,18 +33,32 @@ import com.google.inject.Inject;
  */
 public class TransitionChainVisitor implements ITransitionChainVisitor {
 
-	@Inject private ILanguageExtension langExt;
-	@Inject private CodegenHelpers codegenHelpers;
-	private ExpandedActorClass xpac;
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	
+	// Initialized in constructor
+	private ExpandedModelComponent xpac;
+	private ILanguageExtensionBase langExt;
+	private CodegenHelpers codegenHelpers;
+	private IDetailCodeTranslator translationProvider;
 	private boolean dataDriven;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param xpac an {@link ExpandedActorClass}
+	 * @param xpac an {@link ExpandedModelComponent}
+	 * @param codegenHelpers 
+	 * @param languageExt 
 	 */
-	protected TransitionChainVisitor(ExpandedActorClass xpac) {
+	protected TransitionChainVisitor(
+			ExpandedModelComponent xpac,
+			ILanguageExtensionBase languageExt,
+			CodegenHelpers codegenHelpers,
+			IDetailCodeTranslator translationProvider
+	) {
 		this.xpac = xpac;
+		this.langExt = languageExt;
+		this.codegenHelpers = codegenHelpers;
+		this.translationProvider = translationProvider;
 	}
 	
 	protected void init(TransitionChain tc) {
@@ -65,13 +76,13 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	
 	public String genActionOperationCall(Transition tr) {
 
-		if (tr.getAction()!=null && !tr.getAction().getLines().isEmpty()) {
+		if (fsmHelpers.hasDetailCode(tr.getAction())) {
 			if (tr instanceof InitialTransition)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else if (dataDriven)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
-				String[] result = langExt.generateArglistAndTypedData((VarDecl) xpac.getData(tr));
+				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
 				String dataArg = result[0];
 				
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
@@ -94,7 +105,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 		if (!isFirst )
 			result = "}\nelse ";
 
-		result += "if ("+AbstractGenerator.getInstance().getTranslatedCode(tr.getCondition())+") {\n";
+		result += "if ("+translationProvider.getTranslatedCode(tr.getCondition())+") {\n";
 		
 		return result;
 	}
@@ -116,7 +127,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	}
 
 	public String genTypedData(TransitionChain tc) {
-		String[] result = langExt.generateArglistAndTypedData((VarDecl) tc.getData());
+		String[] result = langExt.generateArglistAndTypedData(tc.getData());
 		return result[1];
 	}
 

@@ -129,6 +129,14 @@ public interface ExpandedModelComponent extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+    boolean hasBaseTransitionDetailCode(Transition trans);
+
+    /**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

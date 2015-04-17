@@ -15,7 +15,7 @@ package org.eclipse.etrice.ui.behavior.fsm.dialogs;
 import org.eclipse.swt.widgets.Control;
 
 /**
- * @author jci
+ * @author Henrik Rentz-Reichert
  *
  */
 public interface IMemberAwareConfiguration {

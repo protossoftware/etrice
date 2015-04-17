@@ -16,29 +16,28 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
 import java.util.List
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import java.util.Set
+import org.eclipse.etrice.core.common.base.Documentation
+import org.eclipse.etrice.core.common.base.util.RelativePathHelpers
+import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.common.base.Documentation
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.LogicalSystem
+import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StandardOperation
-import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-
-import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.base.CodegenHelpers
-import org.eclipse.etrice.core.room.EnumerationType
-import org.eclipse.etrice.core.room.Port
-import org.eclipse.etrice.core.room.RoomClass
-import java.util.Set
-import org.eclipse.etrice.core.common.base.util.RelativePathHelpers
 
 @Singleton
 class DocGen {
@@ -65,7 +64,7 @@ class DocGen {
 	
 	def doGenerate(Root root) {
 		for (model: root.models) {
-			val ctx = new DocGenContext(root,model)
+			val ctx = new DocGen.DocGenContext(root,model)
 			var path = model.docGenerationTargetPath
 			var file = model.name+".tex"
 			val Set<RoomModel> referencedModels = newHashSet
@@ -109,7 +108,7 @@ class DocGen {
 			txt+suffix
 	}
 	
-	def private generateModelDoc(DocGenContext ctx, Set<RoomModel> referencedModels) {
+	def private generateModelDoc(DocGen.DocGenContext ctx, Set<RoomModel> referencedModels) {
 		var model = ctx.model
 		'''
 		\documentclass[titlepage]{article}
@@ -248,7 +247,7 @@ class DocGen {
 	'''
 	}
 	
-	def private dispatch generateDoc(LogicalSystem system, DocGenContext ctx) {
+	def private dispatch generateDoc(LogicalSystem system, DocGen.DocGenContext ctx) {
 		val filename = system.name + "_instanceTree.jpg"
 		'''
 		\level{2}{«system.name.escapedString»}
@@ -260,7 +259,7 @@ class DocGen {
 		'''
 	}
 	
-	def private dispatch generateDoc(SubSystemClass ssc, DocGenContext ctx) {
+	def private dispatch generateDoc(SubSystemClass ssc, DocGen.DocGenContext ctx) {
 		val filename = ssc.name.escapedString + "_structure.jpg"
 		
 		'''
@@ -273,7 +272,7 @@ class DocGen {
 		'''
 	}
 	
-	def private dispatch generateDoc(EnumerationType dc, DocGenContext ctx) {
+	def private dispatch generateDoc(EnumerationType dc, DocGen.DocGenContext ctx) {
 	'''
 		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
@@ -295,7 +294,7 @@ class DocGen {
 	'''	
 	}
 	
-	def private dispatch generateDoc(DataClass dc, DocGenContext ctx) {'''
+	def private dispatch generateDoc(DataClass dc, DocGen.DocGenContext ctx) {'''
 		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
 		\level{3}{Attributes}
@@ -306,7 +305,7 @@ class DocGen {
 	'''	
 	}
 	
-	def private dispatch generateDoc(ProtocolClass pc, DocGenContext ctx) {'''
+	def private dispatch generateDoc(ProtocolClass pc, DocGen.DocGenContext ctx) {'''
 		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
 		«IF !pc.allIncomingMessages.empty»
@@ -337,7 +336,7 @@ class DocGen {
 	'''	
 	}
 	
-	def private dispatch generateDoc(CompoundProtocolClass pc, DocGenContext ctx) {'''
+	def private dispatch generateDoc(CompoundProtocolClass pc, DocGen.DocGenContext ctx) {'''
 		\level{2} {«pc.name.escapedString»}
 		«pc.docu.generateDocText»
 		\level{3}{Sub Protocols}
@@ -354,7 +353,7 @@ class DocGen {
 	'''
 	}
 	
-	def dispatch private generateDoc(ActorClass ac, DocGenContext ctx) {
+	def dispatch private generateDoc(ActorClass ac, DocGen.DocGenContext ctx) {
 		val filename = ac.name + "_structure.jpg"
 		'''
 		\level{2}{«ac.name.escapedString»}

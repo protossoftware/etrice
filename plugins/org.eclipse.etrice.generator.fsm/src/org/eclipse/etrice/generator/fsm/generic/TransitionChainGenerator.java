@@ -10,15 +10,15 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.generic;
+package org.eclipse.etrice.generator.fsm.generic;
 
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
-import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
+import org.eclipse.etrice.generator.fsm.base.CodegenHelpers;
 
 import com.google.inject.Inject;
 
@@ -29,29 +29,30 @@ import com.google.inject.Inject;
  */
 public class TransitionChainGenerator {
 
-	@Inject ILanguageExtension languageExt;
+	@Inject private ILanguageExtensionBase languageExt;
+	@Inject private CodegenHelpers codegenHelpers;
+	@Inject private IDetailCodeTranslator translator;
 
-	public String generateExecuteChain(ExpandedActorClass ac, TransitionChain tc) {
-		TransitionChainVisitor tcv = new TransitionChainVisitor(ac);
-		AbstractGenerator.getInjector().injectMembers(tcv);
+	public String generateExecuteChain(ExpandedModelComponent xpmc, TransitionChain tc) {
+		TransitionChainVisitor tcv = new TransitionChainVisitor(xpmc, languageExt, codegenHelpers, translator);
 		tcv.init(tc);
 		
 		return tc.genExecuteChain(tcv);
 	}
 
-	public String generateArgumentList(ExpandedActorClass xpac, Transition t) {
+	public String generateArgumentList(ExpandedModelComponent xpmc, Transition t) {
 		if (t instanceof InitialTransition)
 			// actually is InitialTransition
 			return "";
 		
-		TransitionChain chain = xpac.getChain(t);
+		TransitionChain chain = xpmc.getChain(t);
 		if (!(chain.getTransition() instanceof TriggeredTransition))
 			return "";
 		
-		return generateTypedArgumentList((VarDecl) xpac.getData(t));
+		return generateTypedArgumentList(xpmc.getData(t));
 	}
 
-	public String generateTypedArgumentList(VarDecl data) {
+	public String generateTypedArgumentList(EObject data) {
 		return languageExt.generateArglistAndTypedData(data)[2];
 	}
 }

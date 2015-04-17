@@ -43,10 +43,16 @@ public class JavaExtensions implements ILanguageExtension {
   @Inject
   private TypeHelpers typeHelpers;
   
-  public String getTypedDataDefinition(final Message m) {
-    VarDecl _data = m.getData();
-    String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
-    return _generateArglistAndTypedData[1];
+  public String getTypedDataDefinition(final EObject msg) {
+    String _xifexpression = null;
+    if ((msg instanceof Message)) {
+      VarDecl _data = ((Message) msg).getData();
+      String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
+      _xifexpression = _generateArglistAndTypedData[1];
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
   }
   
   public String getJavaFileName(final RoomClass rc) {
@@ -548,11 +554,18 @@ public class JavaExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
-  public String[] generateArglistAndTypedData(final VarDecl data) {
-    boolean _equals = Objects.equal(data, null);
+  public String[] generateArglistAndTypedData(final EObject d) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(d, null);
     if (_equals) {
+      _or = true;
+    } else {
+      _or = (!(d instanceof VarDecl));
+    }
+    if (_or) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
+    final VarDecl data = ((VarDecl) d);
     RefableType _refType = data.getRefType();
     DataType _type = _refType.getType();
     String typeName = _type.getName();

@@ -4,9 +4,11 @@
 package org.eclipse.etrice.core.fsm.validation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -17,12 +19,15 @@ import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -55,9 +60,9 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Check
 	public void checkStateNameUnique(SimpleState s) {
-		Result result = ValidationUtil.isUniqueName(s, s.getName());
-		if (!result.isOk())
-			error(result.getMsg(), FSMPackage.Literals.SIMPLE_STATE__NAME);
+//		Result result = ValidationUtil.isUniqueName(s, s.getName());
+//		if (!result.isOk())
+//			error(result.getMsg(), FSMPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
 	@Check
@@ -69,8 +74,8 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Check
 	public void checkChoicePoint(ChoicePoint cp) {
-		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
-			error("name is not unique", FSMPackage.Literals.CHOICE_POINT__NAME);
+//		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
+//			error("name is not unique", FSMPackage.Literals.CHOICE_POINT__NAME);
 	}
 	
 	@Check
@@ -124,7 +129,76 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 	}
 	
-	private void error(Result result) {
+	@Check
+	public void checkUniqueNamesInStateGraph(StateGraph sg) {
+	    Multimap<String, StateGraphItem> names2items = ArrayListMultimap.create();
+	    
+	    // fill the multimap with all objects
+        do {
+            for (org.eclipse.etrice.core.fsm.fSM.State st : sg.getStates()) {
+                // the parent state of refined states is in this scope - so we don't add the name now 
+                if (!(st instanceof RefinedState)) {
+                    names2items.put(st.getName(), st);
+                }
+            }
+            for (TrPoint tp : sg.getTrPoints()) {
+                names2items.put(tp.getName(), tp);
+            }
+            for (ChoicePoint cp : sg.getChPoints()) {
+                names2items.put(cp.getName(), cp);
+            }
+            for (Transition tr : sg.getTransitions()) {
+                names2items.put(tr.getName(), tr);
+            }
+            
+            if (sg.eContainer() instanceof RefinedState) {
+                sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
+            }
+            else if (sg.eContainer() instanceof ModelComponent) {
+                ModelComponent base = ((ModelComponent)sg.eContainer()).getBase();
+                sg = base!=null? base.getStateMachine():null;
+            }
+            else {
+                break;
+            }
+        }
+        while (sg!=null);
+        
+        // check for duplicates
+        for (String key: names2items.keySet()) {
+            Collection<StateGraphItem> list = names2items.get(key);
+            if (list.size()>1) {
+                for (StateGraphItem item: list) {
+                    error("Name is not unique in state graph (including super graph)", item, getNameFeature(item));
+                }
+            }
+        }
+	}
+	
+	/**
+     * @param item
+     * @return
+     */
+    private EStructuralFeature getNameFeature(StateGraphItem item) {
+        if (item instanceof SimpleState) {
+            return FSMPackage.Literals.SIMPLE_STATE__NAME;
+        }
+        else if (item instanceof ChoicePoint) {
+            return FSMPackage.Literals.CHOICE_POINT__NAME;
+        }
+        else if (item instanceof TrPoint) {
+            return FSMPackage.Literals.TR_POINT__NAME;
+        }
+        else if (item instanceof Transition) {
+            return FSMPackage.Literals.TRANSITION__NAME;
+        }
+        else {
+            assert(false): "internal error: unexpected sub type";
+            return null;
+        }
+    }
+
+    private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 	}
 }

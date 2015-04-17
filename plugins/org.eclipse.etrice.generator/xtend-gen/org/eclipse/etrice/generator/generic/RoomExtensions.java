@@ -23,9 +23,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
-import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -518,49 +515,6 @@ public class RoomExtensions extends FSMExtensions {
   }
   
   /**
-   * @param states a list of {@link State}s
-   * @return a list ordered such that leaf states are last
-   */
-  public List<State> getLeafStatesLast(final List<State> states) {
-    List<State> _xblockexpression = null;
-    {
-      final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
-        public Boolean apply(final State s) {
-          return Boolean.valueOf(RoomExtensions.this._roomHelpers.isLeaf(s));
-        }
-      };
-      final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
-      final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
-        public Boolean apply(final State s) {
-          boolean _isLeaf = RoomExtensions.this._roomHelpers.isLeaf(s);
-          return Boolean.valueOf((!_isLeaf));
-        }
-      };
-      final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
-      _xblockexpression = this.<State>union(nonLeaf, leaf);
-    }
-    return _xblockexpression;
-  }
-  
-  /**
-   * @param ac an {@link ActorClass}
-   * @return a list of all leaf states
-   */
-  public List<State> getAllLeafStates(final ActorClass ac) {
-    StateGraph _stateMachine = ac.getStateMachine();
-    return this._roomHelpers.getLeafStateList(_stateMachine);
-  }
-  
-  /**
-   * @param ac an {@link ActorClass}
-   * @return a list of simple states with leaf states last
-   */
-  public List<State> getAllBaseStatesLeavesLast(final ActorClass ac) {
-    List<State> _allBaseStates = this._roomHelpers.getAllBaseStates(ac);
-    return this.getLeafStatesLast(_allBaseStates);
-  }
-  
-  /**
    * @param ac an {@link ActorClass}
    * @return <code>true</code> if an operation named 'stop' is defined with a void argument list and
    * 		void return type
@@ -608,46 +562,6 @@ public class RoomExtensions extends FSMExtensions {
       _or = _and;
     }
     return _or;
-  }
-  
-  /**
-   * @param ac an {@link ActorClass}
-   * @return the number of all inherited states
-   */
-  public int getNumberOfInheritedStates(final ActorClass ac) {
-    ActorClass _actorBase = ac.getActorBase();
-    boolean _equals = Objects.equal(_actorBase, null);
-    if (_equals) {
-      return 0;
-    } else {
-      ModelComponent _base = ac.getBase();
-      StateGraph _stateMachine = _base.getStateMachine();
-      List<State> _stateList = this._roomHelpers.getStateList(_stateMachine);
-      int _size = _stateList.size();
-      ActorClass _actorBase_1 = ac.getActorBase();
-      int _numberOfInheritedStates = this.getNumberOfInheritedStates(_actorBase_1);
-      return (_size + _numberOfInheritedStates);
-    }
-  }
-  
-  /**
-   * @param ac an {@link ActorClass}
-   * @return the number of all inherited base (or simple) states
-   */
-  public int getNumberOfInheritedBaseStates(final ActorClass ac) {
-    ActorClass _actorBase = ac.getActorBase();
-    boolean _equals = Objects.equal(_actorBase, null);
-    if (_equals) {
-      return 0;
-    } else {
-      ModelComponent _base = ac.getBase();
-      StateGraph _stateMachine = _base.getStateMachine();
-      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
-      int _size = _baseStateList.size();
-      ActorClass _actorBase_1 = ac.getActorBase();
-      int _numberOfInheritedBaseStates = this.getNumberOfInheritedBaseStates(_actorBase_1);
-      return (_size + _numberOfInheritedBaseStates);
-    }
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {

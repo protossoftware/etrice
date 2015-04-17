@@ -13,6 +13,7 @@ package org.eclipse.etrice.generator.generic;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Port;
@@ -21,6 +22,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.fsm.base.Indexed;
+import org.eclipse.etrice.generator.fsm.generic.IIfItemIdGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtext.util.Pair;
@@ -32,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * It uses the {@link ILanguageExtension}.
  */
 @SuppressWarnings("all")
-public class GenericActorClassGenerator {
+public class GenericActorClassGenerator implements IIfItemIdGenerator {
   @Inject
   @Extension
   protected RoomHelpers _roomHelpers;
@@ -79,32 +81,29 @@ public class GenericActorClassGenerator {
     final List<ServiceImplementation> svcImpls = _xifexpression_2;
     final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
     for (final Port ep : endPorts) {
-      String _name = ep.getName();
-      String _plus = ("IFITEM_" + _name);
+      String _ifItemId = this.getIfItemId(ep);
       int _interfaceItemLocalId = xpac.getInterfaceItemLocalId(ep);
-      int _plus_1 = (1 + _interfaceItemLocalId);
-      String _string = Integer.valueOf(_plus_1).toString();
-      Pair<String, String> _pair = Tuples.<String, String>pair(_plus, _string);
+      int _plus = (1 + _interfaceItemLocalId);
+      String _string = Integer.valueOf(_plus).toString();
+      Pair<String, String> _pair = Tuples.<String, String>pair(_ifItemId, _string);
       list.add(_pair);
     }
     for (final SAP sap : strSAPs) {
-      String _name_1 = sap.getName();
-      String _plus_2 = ("IFITEM_" + _name_1);
+      String _ifItemId_1 = this.getIfItemId(sap);
       int _interfaceItemLocalId_1 = xpac.getInterfaceItemLocalId(sap);
-      int _plus_3 = (1 + _interfaceItemLocalId_1);
-      String _string_1 = Integer.valueOf(_plus_3).toString();
-      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_plus_2, _string_1);
+      int _plus_1 = (1 + _interfaceItemLocalId_1);
+      String _string_1 = Integer.valueOf(_plus_1).toString();
+      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_ifItemId_1, _string_1);
       list.add(_pair_1);
     }
     for (final ServiceImplementation svc : svcImpls) {
       SPP _spp = svc.getSpp();
-      String _name_2 = _spp.getName();
-      String _plus_4 = ("IFITEM_" + _name_2);
+      String _ifItemId_2 = this.getIfItemId(_spp);
       SPP _spp_1 = svc.getSpp();
       int _interfaceItemLocalId_2 = xpac.getInterfaceItemLocalId(_spp_1);
-      int _plus_5 = (1 + _interfaceItemLocalId_2);
-      String _string_2 = Integer.valueOf(_plus_5).toString();
-      Pair<String, String> _pair_2 = Tuples.<String, String>pair(_plus_4, _string_2);
+      int _plus_2 = (1 + _interfaceItemLocalId_2);
+      String _string_2 = Integer.valueOf(_plus_2).toString();
+      Pair<String, String> _pair_2 = Tuples.<String, String>pair(_ifItemId_2, _string_2);
       list.add(_pair_2);
     }
     return this.langExt.genEnumeration("interface_items", list);
@@ -116,13 +115,17 @@ public class GenericActorClassGenerator {
     Iterable<Indexed<Port>> _indexed = Indexed.<Port>indexed(ports);
     for (final Indexed<Port> ep : _indexed) {
       Port _value = ep.getValue();
-      String _name = _value.getName();
-      String _plus = ("IFITEM_" + _name);
+      String _ifItemId = this.getIfItemId(_value);
       int _index1 = ep.getIndex1();
       String _string = Integer.valueOf(_index1).toString();
-      Pair<String, String> _pair = Tuples.<String, String>pair(_plus, _string);
+      Pair<String, String> _pair = Tuples.<String, String>pair(_ifItemId, _string);
       list.add(_pair);
     }
     return this.langExt.genEnumeration("interface_items", list);
+  }
+  
+  public String getIfItemId(final AbstractInterfaceItem item) {
+    String _name = item.getName();
+    return ("IFITEM_" + _name);
   }
 }

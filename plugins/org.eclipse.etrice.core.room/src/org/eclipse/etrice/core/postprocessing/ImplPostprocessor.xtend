@@ -58,7 +58,15 @@ class ImplPostprocessor {
 			return new <%org.eclipse.emf.common.util.BasicEList%><EObject>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getMessageListDeep(this, true));
 			'''
 		)
-			
+        interfaceItem.addOperation("isEventDriven", EcorePackage.Literals.EBOOLEAN, 1, 
+            '''
+            if (getGeneralProtocol() instanceof ProtocolClass)
+                return ((ProtocolClass) getGeneralProtocol()).getCommType() == <%org.eclipse.etrice.core.room.CommunicationType%>.EVENT_DRIVEN;
+            else
+                return false;
+            '''
+        )
+		
 		val actorClass = roomPackage.getClass("ActorClass")
 		actorClass.addOperation("getExternalEndPorts", roomPackage.getEClassifier("Port"), -1,
 			'''

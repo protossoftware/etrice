@@ -48,8 +48,8 @@ public class CppExtensions implements ILanguageExtension {
   @Extension
   private TypeHelpers _typeHelpers;
   
-  public String getTypedDataDefinition(final Message m) {
-    VarDecl _data = m.getData();
+  public String getTypedDataDefinition(final EObject msg) {
+    VarDecl _data = ((Message) msg).getData();
     String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
     return _generateArglistAndTypedData[1];
   }
@@ -328,7 +328,8 @@ public class CppExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
-  public String[] generateArglistAndTypedData(final VarDecl data) {
+  public String[] generateArglistAndTypedData(final EObject d) {
+    final VarDecl data = ((VarDecl) d);
     String deref = "*";
     boolean _equals = Objects.equal(data, null);
     if (_equals) {

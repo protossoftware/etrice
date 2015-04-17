@@ -25,11 +25,12 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.util.Pair
 import static org.eclipse.xtext.util.Tuples.*
 import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.fsm.generic.IMessageIdGenerator
 
 /**
  * Target language independent protocol class generator.
  */
-class GenericProtocolClassGenerator {
+class GenericProtocolClassGenerator implements IMessageIdGenerator {
 
 	@Inject protected extension RoomHelpers
 	@Inject protected extension ILanguageExtension
@@ -64,7 +65,7 @@ class GenericProtocolClassGenerator {
 	 * @param mif a {@link MessageFromIf}
 	 * @return an identifier for the message
 	 */
-	def getMessageID(MessageFromIf mif) {
+	override getMessageID(MessageFromIf mif) {
 		return getMessageID(mif.message as Message, mif.from as InterfaceItem)
 	}
 	

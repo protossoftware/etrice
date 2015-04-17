@@ -28,7 +28,9 @@ import org.eclipse.etrice.generator.java.setup.GeneratorModule;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class Main extends AbstractGenerator {
 	
 	public static final String OPTION_GEN_PERSIST = "-persistable";

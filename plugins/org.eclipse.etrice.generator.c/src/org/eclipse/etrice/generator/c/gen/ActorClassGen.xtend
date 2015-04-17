@@ -359,8 +359,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !xpac.stateMachine.empty»
-				
-				«langExt.operationScope(ac.name, false)»receiveEvent(self«IF handleEvents», (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage)))«ENDIF»);
+				«IF handleEvents»
+					«langExt.operationScope(ac.name, false)»receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
+				«ELSE»
+					«langExt.operationScope(ac.name, false)»receiveEventInternal(self);
+				«ENDIF»
 			«ENDIF»
 			
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -371,7 +374,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 				ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_execute")
 				«IF !xpac.stateMachine.empty»
 					
-					«langExt.operationScope(ac.name, false)»receiveEvent(self«IF handleEvents», NULL, 0, NULL«ENDIF»);
+					«IF handleEvents»
+						«langExt.operationScope(ac.name, false)»receiveEvent(self, NULL, 0, NULL);
+					«ELSE»
+						«langExt.operationScope(ac.name, false)»receiveEventInternal(self);
+					«ENDIF»
 				«ENDIF»
 				
 				ET_MSC_LOGGER_SYNC_EXIT

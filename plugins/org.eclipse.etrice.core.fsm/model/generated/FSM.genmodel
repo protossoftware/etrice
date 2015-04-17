@@ -114,6 +114,7 @@
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//AbstractInterfaceItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//AbstractInterfaceItem/name"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getDisplayName"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getSemantics"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllIncomingAbstractMessages"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllOutgoingAbstractMessages"/>

@@ -100,6 +100,17 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getDisplayName()
+  {
+    return getName();
+    
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ProtocolSemantics getSemantics()
   {
     // TODO: implement this method
@@ -129,6 +140,16 @@ public class AbstractInterfaceItemImpl extends MinimalEObjectImpl.Container impl
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isEventDriven()
+  {
+    return true;
   }
 
   /**

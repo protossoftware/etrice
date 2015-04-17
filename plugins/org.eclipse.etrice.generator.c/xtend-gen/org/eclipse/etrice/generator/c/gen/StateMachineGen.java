@@ -13,9 +13,11 @@ package org.eclipse.etrice.generator.c.gen;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.c.Main;
@@ -36,10 +38,10 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       StateGraph _stateMachine = xpac.getStateMachine();
-      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
+      List<State> _baseStateList = this._fSMHelpers.getBaseStateList(_stateMachine);
       int _size = _baseStateList.size();
       StateGraph _stateMachine_1 = xpac.getStateMachine();
-      List<State> _leafStateList = this._roomHelpers.getLeafStateList(_stateMachine_1);
+      List<State> _leafStateList = this._fSMHelpers.getLeafStateList(_stateMachine_1);
       int _size_1 = _leafStateList.size();
       int _minus = (_size - _size_1);
       final int historySize = (_minus + 2);
@@ -112,12 +114,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  protected CharSequence genExtra(final ExpandedActorClass xpac) {
+  public CharSequence genExtra(final ExpandedModelComponent xpmc) {
     CharSequence _xblockexpression = null;
     {
-      final ActorClass ac = xpac.getActorClass();
-      StateGraph _stateMachine = xpac.getStateMachine();
-      List<State> _baseStateList = this._roomHelpers.getBaseStateList(_stateMachine);
+      final ModelComponent mc = xpmc.getModelComponent();
+      StateGraph _stateMachine = xpmc.getStateMachine();
+      List<State> _baseStateList = this._fSMHelpers.getBaseStateList(_stateMachine);
       final List<State> states = this._roomExtensions.getLeafStatesLast(_baseStateList);
       StringConcatenation _builder = new StringConcatenation();
       {
@@ -150,8 +152,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       String _accessLevelPrivate = this.langExt.accessLevelPrivate();
       _builder.append(_accessLevelPrivate, "");
       _builder.append("void setState(");
-      String _name = ac.getName();
-      _builder.append(_name, "");
+      String _componentName = mc.getComponentName();
+      _builder.append(_componentName, "");
       _builder.append("* self, ");
       String _stateType = this.stateType();
       _builder.append(_stateType, "");
@@ -177,8 +179,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       String _stateType_1 = this.stateType();
       _builder.append(_stateType_1, "");
       _builder.append(" getState(");
-      String _name_1 = ac.getName();
-      _builder.append(_name_1, "");
+      String _componentName_1 = mc.getComponentName();
+      _builder.append(_componentName_1, "");
       _builder.append("* self) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -191,7 +193,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  protected String stateType() {
+  public String stateType() {
     return "etInt16";
   }
   
@@ -202,7 +204,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _builder;
   }
   
-  protected String unreachableReturn() {
+  public String unreachableReturn() {
     return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }
 }

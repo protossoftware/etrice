@@ -69,9 +69,9 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 					
 					«FOR ep : ac.allInterfacePorts»
 						«IF ep.replicated»
-							«ep.name» = new ReplicatedInterfaceItemBroker(this, "«ep.name»", IFITEM_«ep.name»);
+							«ep.name» = new ReplicatedInterfaceItemBroker(this, "«ep.name»", «ep.ifItemId»);
 						«ELSE»
-							«ep.name» = new InterfaceItemBroker(this, "«ep.name»", IFITEM_«ep.name»);
+							«ep.name» = new InterfaceItemBroker(this, "«ep.name»", «ep.ifItemId»);
 						«ENDIF»
 					«ENDFOR»
 				}

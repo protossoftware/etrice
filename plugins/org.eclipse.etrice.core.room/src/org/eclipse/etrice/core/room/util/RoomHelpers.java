@@ -22,12 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
-import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -681,97 +676,6 @@ public class RoomHelpers extends FSMHelpers {
 		result.addAll(ac.getExternalEndPorts());
 		result.addAll(ac.getServiceAccessPoints());
 		result.addAll(ac.getImplementedSPPs());
-		
-		return result;
-	}
-	
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * event driven interface items of this actor class (<i>without</i> inherited ones)
-	 */
-	public List<MessageFromIf> getMessagesFromInterfaces(ActorClass ac) {
-		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
-		
-		List<InterfaceItem> items = getInterfaceItems(ac);
-		for (InterfaceItem item : items) {
-			if (item.getGeneralProtocol() instanceof ProtocolClass) {
-				ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
-				if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
-					for (Message msg : getIncoming(item)) {
-						MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
-						mif.setMessage(msg);
-						mif.setFrom(item);
-						result.add(mif);
-					}
-				}
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * event driven interface items of this actor class (<i>with</i> inherited ones as far as a base class has its own state machine)
-	 */
-	public List<MessageFromIf> getOwnMessagesFromInterfaces(ActorClass ac) {
-		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
-		
-		result.addAll(getMessagesFromInterfaces(ac));
-		ac = ac.getActorBase();
-		while (ac!=null) {
-			if (hasNonEmptyStateMachine(ac))
-				break;
-			
-			List<InterfaceItem> items = getInterfaceItems(ac);
-			for (InterfaceItem item : items) {
-				if (item.getGeneralProtocol() instanceof ProtocolClass) {
-					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
-					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
-						for (Message msg : getIncoming(item)) {
-							MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
-							mif.setMessage(msg);
-							mif.setFrom(item);
-							result.add(mif);
-						}
-					}
-				}
-			}
-			
-			ac = ac.getActorBase();
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return a list of {@link MessageFromIf} that may come in through one of the
-	 * event driven interface items of this actor class(<i>including</i> inherited ones)
-	 */
-	public List<MessageFromIf> getAllMessagesFromInterfaces(ActorClass ac) {
-		ArrayList<MessageFromIf> result = new ArrayList<MessageFromIf>();
-		
-		while (ac!=null) {
-			List<InterfaceItem> items = getInterfaceItems(ac);
-			for (InterfaceItem item : items) {
-				if (item.getGeneralProtocol() instanceof ProtocolClass) {
-					ProtocolClass pc = (ProtocolClass) item.getGeneralProtocol();
-					if (pc.getCommType()==CommunicationType.EVENT_DRIVEN) {
-						for (Message msg : getIncoming(item)) {
-							MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
-							mif.setMessage(msg);
-							mif.setFrom(item);
-							result.add(mif);
-						}
-					}
-				}
-			}
-			
-			ac = ac.getActorBase();
-		}
 		
 		return result;
 	}
@@ -1436,26 +1340,6 @@ public class RoomHelpers extends FSMHelpers {
 		return null;
 	}
 
-	/**
-	 * @param sg a {@link StateGraph}
-	 * @return the initial transition or <code>null</code> if no such is available
-	 */
-	public Transition getInitTransition(StateGraph sg) {
-		for (Transition tr : sg.getTransitions()) {
-			if (tr instanceof InitialTransition)
-				return tr;
-		}
-		return null;
-	}
-	
-	/**
-	 * @param sg a {@link StateGraph}
-	 * @return <code>true</code> if an initial transition is available
-	 */
-	public boolean hasInitTransition(StateGraph sg) {
-		return getInitTransition(sg)!=null;
-	}
-	
 	/**
 	 * Returns the parent container of an {@link ActorInstanceMapping}.
 	 * 

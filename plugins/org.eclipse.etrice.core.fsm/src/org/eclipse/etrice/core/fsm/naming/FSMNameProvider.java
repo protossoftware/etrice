@@ -222,11 +222,19 @@ public class FSMNameProvider {
 		return result;
 	}
 
+	public String getTerminalLabel(TransitionTerminal tt) {
+		return getTerminalName(tt, "/");
+	}
+	
 	/**
 	 * @param tt a {@link TransitionTerminal}
 	 * @return a name for the terminal
 	 */
 	private String getTerminalName(TransitionTerminal tt) {
+		return getTerminalName(tt, PATH_SEP);
+	}
+	
+	private String getTerminalName(TransitionTerminal tt, String sep) {
 		if (tt instanceof StateTerminal) {
 			return getStateName(((StateTerminal) tt).getState());
 		}
@@ -234,7 +242,7 @@ public class FSMNameProvider {
 			return ((TrPointTerminal) tt).getTrPoint().getName();
 		}
 		else if (tt instanceof SubStateTrPointTerminal) {
-			return getStatePathName(((SubStateTrPointTerminal) tt).getState())+PATH_SEP+((SubStateTrPointTerminal) tt).getTrPoint().getName();
+			return getStatePathName(((SubStateTrPointTerminal) tt).getState())+sep+((SubStateTrPointTerminal) tt).getTrPoint().getName();
 		}
 		else if (tt instanceof ChoicepointTerminal) {
 			return ((ChoicepointTerminal) tt).getCp().getName();
