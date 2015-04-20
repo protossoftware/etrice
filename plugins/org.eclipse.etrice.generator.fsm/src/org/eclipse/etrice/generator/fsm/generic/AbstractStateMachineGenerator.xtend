@@ -231,7 +231,7 @@ abstract class AbstractStateMachineGenerator {
 		val eventDriven = mc.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val ifItemPtr = interfaceItemType()+langExt.pointerLiteral()
 		val handleEvents = async || eventDriven
-		val opScope = langExt.operationScope(mc.className, false)
+		val opScope = langExt.operationScope(mc.className, !generateImplementation)
 		val opScopePriv = if (langExt.usesInheritance)
 							opScope
 						else
@@ -379,7 +379,7 @@ abstract class AbstractStateMachineGenerator {
 				setState(«langExt.selfPointer(true)»next__et);
 			}
 		«ELSE»
-			void executeInitTransition(«selfOnly»);
+			void «opScope»executeInitTransition(«selfOnly»);
 		«ENDIF»
 		
 		/* receiveEvent contains the main implementation of the FSM */
@@ -417,7 +417,7 @@ abstract class AbstractStateMachineGenerator {
 				}
 			}
 		«ELSE»
-			void receiveEventInternal(«langExt.selfPointer(mc.className, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int localId, int evt, «langExt.voidPointer» generic_data__et«ENDIF»);
+			void «opScope»receiveEventInternal(«langExt.selfPointer(mc.className, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int localId, int evt, «langExt.voidPointer» generic_data__et«ENDIF»);
 		«ENDIF»
 		«IF handleEvents»
 			«IF generateImplementation»

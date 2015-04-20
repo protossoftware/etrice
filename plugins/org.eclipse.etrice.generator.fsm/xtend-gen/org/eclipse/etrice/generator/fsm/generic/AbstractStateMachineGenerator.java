@@ -371,7 +371,7 @@ public abstract class AbstractStateMachineGenerator {
       }
       final boolean handleEvents = _or;
       String _className = this.getClassName(mc);
-      final String opScope = this.langExt.operationScope(_className, false);
+      final String opScope = this.langExt.operationScope(_className, (!generateImplementation));
       String _xifexpression = null;
       boolean _usesInheritance = this.langExt.usesInheritance();
       if (_usesInheritance) {
@@ -1014,7 +1014,9 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("}");
           _builder.newLine();
         } else {
-          _builder.append("void executeInitTransition(");
+          _builder.append("void ");
+          _builder.append(opScope, "");
+          _builder.append("executeInitTransition(");
           _builder.append(selfOnly, "");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
@@ -1186,7 +1188,9 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("}");
           _builder.newLine();
         } else {
-          _builder.append("void receiveEventInternal(");
+          _builder.append("void ");
+          _builder.append(opScope, "");
+          _builder.append("receiveEventInternal(");
           String _className_4 = this.getClassName(mc);
           String _selfPointer_12 = this.langExt.selfPointer(_className_4, handleEvents);
           _builder.append(_selfPointer_12, "");
