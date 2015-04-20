@@ -1149,18 +1149,21 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("\t");
                   _builder.append("public void receive(Message msg) {");
                   _builder.newLine();
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("receiveEvent(");
                   {
                     ComponentCommunicationType _commType_7 = ac.getCommType();
                     boolean _equals_8 = Objects.equal(_commType_7, ComponentCommunicationType.ASYNCHRONOUS);
                     if (_equals_8) {
-                      _builder.append("null, -1, null");
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("receiveEvent(null, -1, null);");
+                      _builder.newLine();
+                    } else {
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("receiveEventInternal();");
+                      _builder.newLine();
                     }
                   }
-                  _builder.append(");");
-                  _builder.newLineIfNotEmpty();
                   _builder.append("\t");
                   _builder.append("}");
                   _builder.newLine();
@@ -1191,46 +1194,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             }
           }
-        }
-      }
-      _builder.append("\t");
-      _builder.newLine();
-      {
-        boolean _or_5 = false;
-        ComponentCommunicationType _commType_8 = ac.getCommType();
-        boolean _equals_9 = Objects.equal(_commType_8, ComponentCommunicationType.ASYNCHRONOUS);
-        if (_equals_9) {
-          _or_5 = true;
-        } else {
-          ComponentCommunicationType _commType_9 = ac.getCommType();
-          boolean _equals_10 = Objects.equal(_commType_9, ComponentCommunicationType.DATA_DRIVEN);
-          _or_5 = _equals_10;
-        }
-        if (_or_5) {
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void receive(Message msg) {");
-          _builder.newLine();
-          {
-            ComponentCommunicationType _commType_10 = ac.getCommType();
-            boolean _equals_11 = Objects.equal(_commType_10, ComponentCommunicationType.ASYNCHRONOUS);
-            if (_equals_11) {
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("receiveEvent(null, -1, null);");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("receiveEventInternal();");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
         }
       }
       _builder.append("\t");

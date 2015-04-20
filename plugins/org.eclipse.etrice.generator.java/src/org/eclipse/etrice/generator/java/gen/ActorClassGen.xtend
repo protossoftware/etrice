@@ -303,7 +303,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						@Override
 						public void receive(Message msg) {
-							receiveEvent(«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»null, -1, null«ENDIF»);
+							«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»
+								receiveEvent(null, -1, null);
+							«ELSE»
+								receiveEventInternal();
+							«ENDIF»
 						}
 					«ENDIF»
 				«ELSEIF xpac.stateMachine.empty»
@@ -315,17 +319,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 					
 					public void executeInitTransition() {}
 				«ENDIF»
-			«ENDIF»
-			
-			«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
-				@Override
-				public void receive(Message msg) {
-					«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS»
-						receiveEvent(null, -1, null);
-					«ELSE»
-						receiveEventInternal();
-					«ENDIF»
-				}
 			«ENDIF»
 			
 			«IF Main::settings.generatePersistenceInterface»
