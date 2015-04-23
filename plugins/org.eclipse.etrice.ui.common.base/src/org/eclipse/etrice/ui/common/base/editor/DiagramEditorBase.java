@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
-import org.eclipse.etrice.ui.common.base.concurrency.DirtyResourceTracker;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
@@ -235,8 +234,6 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			 */
 	//		if (AutoUpdateFeature.isLastDoneChanges())
 				doSave(new NullProgressMonitor());
-				
-			DirtyResourceTracker.register(this);
 		}
 
 	/**
