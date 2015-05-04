@@ -1,0 +1,2 @@
+org.eclipse.etrice.ui.common.base/debug = true
+org.eclipse.etrice.ui.common.base/trace/ResourceChangeRecorder = true

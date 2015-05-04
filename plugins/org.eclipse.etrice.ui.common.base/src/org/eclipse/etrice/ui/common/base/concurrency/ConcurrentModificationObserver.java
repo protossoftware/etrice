@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.common.base.concurrency;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
@@ -47,6 +48,9 @@ public class ConcurrentModificationObserver implements IPartListener {
 	}
 
 	public void partOpened(IWorkbenchPart part) {
+		if(!(part instanceof DiagramEditorBase))
+			return;
+		
 		Object adapter = part.getAdapter(IEditingDomainProvider.class);
 		if (adapter instanceof IEditingDomainProvider) {
 			EditingDomain editingDomain = ((IEditingDomainProvider) adapter).getEditingDomain();
@@ -56,6 +60,9 @@ public class ConcurrentModificationObserver implements IPartListener {
 	}
 
 	public void partClosed(IWorkbenchPart part) {
+		if(!(part instanceof DiagramEditorBase))
+			return;
+		
 		Object adapter = part.getAdapter(IEditingDomainProvider.class);
 		if (adapter instanceof IEditingDomainProvider) {
 			EditingDomain editingDomain = ((IEditingDomainProvider) adapter).getEditingDomain();

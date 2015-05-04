@@ -13,47 +13,34 @@
 package org.eclipse.etrice.ui.common.base.support;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.change.ChangeDescription;
-import org.eclipse.emf.ecore.change.util.BasicChangeRecorder;
-import org.eclipse.emf.ecore.change.util.ChangeRecorder;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
 
 public abstract class ChangeAwareCreateFeature extends AbstractCreateFeature {
 	
-	boolean hasDoneChanges;
+	protected ResourceChangeRecorder changeRecorder = null;
 	
 	public ChangeAwareCreateFeature(IFeatureProvider fp, String name, String description) {
 		super(fp, name, description);
-		this.hasDoneChanges = false;
 	}
 
 	@Override
 	public final Object[] create(ICreateContext context) {
-		EObject rootObject = getContainerModelObject(context);
-		BasicChangeRecorder changeRecorder = new ChangeRecorder(rootObject);
+		changeRecorder = new ResourceChangeRecorder(getContainerResource(context));
 
 		Object[] result = doCreate(context);
 		boolean newObjects = result != null && result.length > 0;
 
-		ChangeDescription cd = changeRecorder.endRecording();
-		hasDoneChanges = !(cd.getObjectChanges().isEmpty()
-				&& cd.getObjectsToAttach().isEmpty()
-				&& cd.getObjectsToDetach().isEmpty() && cd.getResourceChanges()
-				.isEmpty());
-
-		if (!newObjects && hasDoneChanges){
-			cd.apply();
-			hasDoneChanges = false;
-		}
+		changeRecorder.endRecording(!newObjects);
 
 		return result;
 	}
 	
 	@Override
 	public final boolean hasDoneChanges() {
-		return hasDoneChanges;
+		return changeRecorder.hasResourceChanged();
 	}
 	
 	/**
@@ -62,9 +49,9 @@ public abstract class ChangeAwareCreateFeature extends AbstractCreateFeature {
 	protected abstract Object[] doCreate(ICreateContext context);
 
 	/**
-	 *  Return the model object, that holds all changed objects for the given context
+	 *  Return the resource, that holds all changed objects for the given context
 	 */
-	protected EObject getContainerModelObject(ICreateContext context){
-		return (EObject) getBusinessObjectForPictogramElement(getDiagram());
+	protected Resource getContainerResource(ICreateContext context){
+		return ((EObject) getBusinessObjectForPictogramElement(getDiagram())).eResource();
 	}
 }

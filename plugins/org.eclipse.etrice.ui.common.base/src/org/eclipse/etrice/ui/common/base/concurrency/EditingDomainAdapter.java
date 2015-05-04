@@ -54,7 +54,7 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 	public static class Factory extends AdapterFactoryImpl {
 		@Override
 		public boolean isFactoryForType(Object type) {
-			return super.isFactoryForType(type == EditingDomainAdapter.class);
+			return type == EditingDomainAdapter.class;
 		}
 
 		@Override
@@ -90,20 +90,9 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 		lifecycle.addTransactionalEditingDomainListener(this);
 	}
 
-	public NotificationFilter getFilter() {
-		return null;
-	}
-
-	public boolean isAggregatePrecommitListener() {
-		return true;
-	}
-
-	public boolean isPostcommitOnly() {
-		return false;
-	}
-
-	public boolean isPrecommitOnly() {
-		return false;
+	@Override
+	public boolean isAdapterForType(Object type) {
+		return EditingDomainAdapter.class == type;
 	}
 
 	public void resourceSetChanged(ResourceSetChangeEvent event) {
@@ -231,6 +220,22 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 							+ "If you apply your changes you are loosing the possibility to save the others.\n"
 							+ "Apply changes anyway?", SWT.NONE);
 		}
+	}
+	
+	public NotificationFilter getFilter() {
+		return null;
+	}
+
+	public boolean isAggregatePrecommitListener() {
+		return true;
+	}
+
+	public boolean isPostcommitOnly() {
+		return false;
+	}
+
+	public boolean isPrecommitOnly() {
+		return false;
 	}
 
 	public void transactionClosed(TransactionalEditingDomainEvent event) {
