@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.ui.common.base.editor;
 
-import org.eclipse.etrice.ui.common.base.editor.CustomUpdateBehavior;
+import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.IDiagramContainerUI;
@@ -36,5 +36,12 @@ public class CustomDiagramBehavior extends DiagramBehavior {
 	@Override
 	protected DefaultUpdateBehavior createUpdateBehavior() {
 		return new CustomUpdateBehavior(this);
+	}
+	
+	@Override
+	protected ContextMenuProvider createContextMenuProvider() {
+		return new CustomContextMenuProvider(getDiagramContainer().getGraphicalViewer(),
+				getDiagramContainer().getActionRegistry(),
+				getConfigurationProvider());
 	}
 }

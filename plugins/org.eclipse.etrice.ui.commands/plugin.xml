@@ -151,9 +151,10 @@
       </menuContribution>
   <menuContribution
         allPopups="false"
-        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
+        locationURI="popup:org.eclipse.etrice.core.room.outline?after=editStructure">
      <command
            commandId="org.eclipse.etrice.core.room.ui.editBehavior"
+           id="editBehavior"
            label="Edit Behavior"
            style="push">
         <visibleWhen
@@ -168,9 +169,10 @@
   </menuContribution>
   <menuContribution
         allPopups="false"
-        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
+        locationURI="popup:org.eclipse.etrice.core.room.outline">
      <command
            commandId="org.eclipse.etrice.core.room.ui.editStructure"
+           id="editStructure"
            label="Edit Structure"
            style="push">
         <visibleWhen
@@ -185,9 +187,10 @@
   </menuContribution>
   <menuContribution
         allPopups="false"
-        locationURI="popup:org.eclipse.etrice.core.room.outline?after=additions">
+        locationURI="popup:org.eclipse.etrice.core.room.outline?after=editBehavior">
      <command
            commandId="org.eclipse.etrice.core.room.ui.exportDiagrams"
+           id="exportDiagrams"
            label="Export Diagrams"
            style="push">
         <visibleWhen
