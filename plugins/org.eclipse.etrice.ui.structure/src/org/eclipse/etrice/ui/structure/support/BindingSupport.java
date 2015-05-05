@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
@@ -54,7 +55,6 @@ import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
-import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -412,18 +412,6 @@ public class BindingSupport {
 			}
 		}
 		
-		private class RemoveFeature extends DefaultRemoveFeature {
-
-			public RemoveFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-			
-			@Override
-			public boolean canRemove(IRemoveContext context) {
-				return false;
-			}
-		}
-		
 		private class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
@@ -521,7 +509,7 @@ public class BindingSupport {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
-			return new RemoveFeature(fp);
+			return new CantRemoveFeature(fp);
 		}
 		
 		@Override

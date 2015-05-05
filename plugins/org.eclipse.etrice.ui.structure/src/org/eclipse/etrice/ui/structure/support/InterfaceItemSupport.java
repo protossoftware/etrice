@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
@@ -49,7 +50,6 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
-import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
@@ -414,17 +414,6 @@ public class InterfaceItemSupport {
 			}
 		}
 		
-		protected static class RemoveFeature extends DefaultRemoveFeature {
-
-			public RemoveFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-
-			public boolean canRemove(IRemoveContext context) {
-				return false;
-			}
-		}
-		
 		protected static class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
@@ -645,7 +634,7 @@ public class InterfaceItemSupport {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
-			return new RemoveFeature(fp);
+			return new CantRemoveFeature(fp);
 		}
 		
 		@Override

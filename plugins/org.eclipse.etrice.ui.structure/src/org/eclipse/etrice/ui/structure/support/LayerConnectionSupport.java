@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -49,7 +50,6 @@ import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
 import org.eclipse.graphiti.features.context.impl.ReconnectionContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
-import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.pictograms.Anchor;
@@ -216,18 +216,6 @@ public class LayerConnectionSupport {
 
 		}
 		
-		private class RemoveFeature extends DefaultRemoveFeature {
-
-			public RemoveFeature(IFeatureProvider fp) {
-				super(fp);
-			}
-			
-			@Override
-			public boolean canRemove(IRemoveContext context) {
-				return false;
-			}
-		}
-		
 		private class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
@@ -374,7 +362,7 @@ public class LayerConnectionSupport {
 		
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
-			return new RemoveFeature(fp);
+			return new CantRemoveFeature(fp);
 		}
 		
 		@Override
