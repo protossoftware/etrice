@@ -60,3 +60,18 @@ void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds){
 	result->sec = milliSeconds/1000;
 	result->nSec = milliSeconds%1000 * 1000000;
 }
+
+boolean etTimeHelpers_isGreater(etTime* t1, etTime* t2) {
+	if (t1->sec > t2->sec) return ET_TRUE;
+	if (t1->sec < t2->sec) return ET_FALSE;
+	if (t1->nSec > t2->nSec) return ET_TRUE;
+	return ET_FALSE;
+}
+
+boolean etTimeHelpers_isGreaterOrEqual(etTime* t1, etTime* t2) {
+	if (t1->sec > t2->sec) return ET_TRUE;
+	if (t1->sec < t2->sec) return ET_FALSE;
+	if (t1->nSec >= t2->nSec) return ET_TRUE;
+	return ET_FALSE;
+}
+

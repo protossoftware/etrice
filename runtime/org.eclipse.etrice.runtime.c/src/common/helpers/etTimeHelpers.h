@@ -69,5 +69,20 @@ etInt32 etTimeHelpers_convertToMSec(const etTime *time);
  */
 void etTimeHelpers_convertToEtTime(etTime *result, etInt32 milliSeconds);
 
+/**
+ * check if t1 is greater than t2
+ *
+ * \param t1 first time
+ * \param t2 second time
+ */
+boolean etTimeHelpers_isGreater(etTime* t1, etTime* t2);
+
+/**
+ * check if t1 is greater than or equal as t2
+ *
+ * \param t1 first time
+ * \param t2 second time
+ */
+boolean etTimeHelpers_isGreaterOrEqual(etTime* t1, etTime* t2);
 
 #endif /* _ETTIMEHELPERS_H_ */
