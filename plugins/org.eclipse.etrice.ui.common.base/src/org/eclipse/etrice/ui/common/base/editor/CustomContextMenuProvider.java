@@ -25,7 +25,7 @@ import com.google.common.collect.Sets;
 
 public class CustomContextMenuProvider extends DiagramEditorContextMenuProvider {
 
-	protected Set<IContributionItem> allowedItems = Sets.newHashSet();
+	protected Set<IContributionItem> graphitiItems = Sets.newHashSet();
 	
 	public CustomContextMenuProvider(EditPartViewer viewer, ActionRegistry registry,
 			IConfigurationProvider configurationProvider) {
@@ -37,15 +37,24 @@ public class CustomContextMenuProvider extends DiagramEditorContextMenuProvider 
 		super.buildContextMenu(manager);
 		
 		// remember built items
-		allowedItems = Sets.newHashSet(getItems());
+		graphitiItems = Sets.newHashSet(getItems());
 	}
 	
 	@Override
 	protected void update(boolean force, boolean recursive) {	
+		
 		// remove external items
-		for(IContributionItem item : getItems().clone())
-			if(!allowedItems.contains(item))
-				remove(item);
+		for(IContributionItem item : getItems().clone()){
+			if(graphitiItems.contains(item))
+				continue;
+			if(item.getId() != null){
+				if(item.getId().startsWith("de.cau.cs.kieler"))
+					continue;
+				
+			}
+				
+			remove(item);
+		}
 		
 		super.update(force, recursive);
 	}
