@@ -40,6 +40,7 @@ import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
@@ -661,18 +662,13 @@ public class ActorContainerRefSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorContainerRef) {
-						final ActorContainerRef ref = (ActorContainerRef) bo;
+						final StructureClass sc = ((ActorContainerRef)bo).getStructureClass();
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								DiagramAccess diagramAccess = new DiagramAccess();
-								if (ref instanceof ActorRef) {
-									diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
-								}
-								else if (ref instanceof SubSystemRef) {
-									diagramAccess.openDiagramEditor(((SubSystemRef) ref).getType());
-								}
+								DiagramAccessBase diagramAccess = new DiagramAccess();
+								diagramAccess.openDiagramEditor(sc);
 							}
 				        });
 					}
@@ -716,16 +712,14 @@ public class ActorContainerRefSupport {
 				PictogramElement[] pes = context.getPictogramElements();
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
-					if (bo instanceof ActorContainerRef) {
-						final ActorContainerRef ref = (ActorContainerRef) bo;
+					if (bo instanceof ActorRef) {
+						final ActorClass ac = ((ActorRef)bo).getType();
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
-								if (ref instanceof ActorRef) {
-									diagramAccess.openDiagramEditor(((ActorRef) ref).getType());
-								}
+								DiagramAccessBase diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+								diagramAccess.openDiagramEditor(ac);
 							}
 				        });
 					}

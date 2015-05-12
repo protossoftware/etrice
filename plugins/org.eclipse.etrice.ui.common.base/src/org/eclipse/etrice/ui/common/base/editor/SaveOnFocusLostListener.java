@@ -12,11 +12,7 @@
 
 package org.eclipse.etrice.ui.common.base.editor;
 
-import java.util.EventObject;
-
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.command.CommandStackListener;
-import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
@@ -28,16 +24,20 @@ import org.eclipse.ui.IWorkbenchPart;
  * @author Henrik Rentz-Reichert
  *
  */
-public class SaveOnFocusLostListener implements IPartListener, CommandStackListener {
+public class SaveOnFocusLostListener implements IPartListener/*, CommandStackListener*/ {
 
 	private DiagramEditor editor;
 	private IPreferenceStore store;
+	
+	private boolean isActive = true;
+	
+	@SuppressWarnings("unused")
 	private boolean saveAfterCurrentCommand = false;
 
 	public SaveOnFocusLostListener(DiagramEditor editor) {
 		this.editor = editor;
 		this.store = UIBaseActivator.getDefault().getPreferenceStore();
-		editor.getEditingDomain().getCommandStack().addCommandStackListener(this);
+		//editor.getEditingDomain().getCommandStack().addCommandStackListener(this);
 	}
 
 	/* (non-Javadoc)
@@ -65,17 +65,20 @@ public class SaveOnFocusLostListener implements IPartListener, CommandStackListe
 	 * @see org.eclipse.ui.IPartListener#partDeactivated(org.eclipse.ui.IWorkbenchPart)
 	 */
 	@Override
-	public void partDeactivated(IWorkbenchPart part) {
-		boolean save = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
-		if (save && editor.isDirty()) {
-			if (editor.getEditingDomain() instanceof TransactionalEditingDomainImpl) {
-				TransactionalEditingDomainImpl ted = (TransactionalEditingDomainImpl) editor.getEditingDomain();
-				if (ted.getActiveTransaction()!=null) {
-					// avoid to run into dead-lock
-					saveAfterCurrentCommand = true;
-					return;
-				}
-			}
+	public void partDeactivated(IWorkbenchPart part) {	
+		if(part != editor)
+			return;
+		
+		boolean isSaveOnFocus = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+		if (isActive && isSaveOnFocus && editor.isDirty()) {
+//			if (editor.getEditingDomain() instanceof TransactionalEditingDomainImpl) {
+//				TransactionalEditingDomainImpl ted = (TransactionalEditingDomainImpl) editor.getEditingDomain();
+//				if (ted.getActiveTransaction()!=null) {
+//					// avoid to run into dead-lock
+//					saveAfterCurrentCommand = true;
+//					return;
+//				}
+//			}
 			editor.doSave(new NullProgressMonitor());
 		}
 	}
@@ -90,13 +93,17 @@ public class SaveOnFocusLostListener implements IPartListener, CommandStackListe
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.common.command.CommandStackListener#commandStackChanged(java.util.EventObject)
 	 */
-	@Override
-	public void commandStackChanged(EventObject event) {
-		
-		if (saveAfterCurrentCommand) {
-			saveAfterCurrentCommand = false;
-			editor.doSave(new NullProgressMonitor());
-		}
+//	@Override
+//	public void commandStackChanged(EventObject event) {
+//		
+//		if (saveAfterCurrentCommand) {
+//			saveAfterCurrentCommand = false;
+//			editor.doSave(new NullProgressMonitor());
+//		}
+//	}
+	
+	public void setActive(boolean isActive){
+		this.isActive = isActive;
 	}
 
 }

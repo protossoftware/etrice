@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -64,6 +65,8 @@ import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class StructureClassSupport {
 	
@@ -241,8 +244,15 @@ public class StructureClassSupport {
 				if (pes != null && pes.length == 1) {
 					Object bo = getBusinessObjectForPictogramElement(pes[0]);
 					if (bo instanceof ActorClass) {
-						org.eclipse.etrice.ui.behavior.DiagramAccess diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
-						diagramAccess.openDiagramEditor((ActorClass)bo);
+						final ActorClass ac = (ActorClass) bo;
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								DiagramAccessBase diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
+								diagramAccess.openDiagramEditor(ac);
+							}
+				        });
 					}
 				}
 			}
