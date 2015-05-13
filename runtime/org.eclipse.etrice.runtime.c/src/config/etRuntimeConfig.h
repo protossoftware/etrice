@@ -23,6 +23,7 @@
 
 /* runner */
 #define ET_RUNNER_ACTIVATE
+#undef 	ET_DO_NOT_USE_ARGC_ARGV
 
 /* flags for debugging */
 

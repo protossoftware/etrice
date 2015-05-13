@@ -158,6 +158,10 @@ public class NodeRunnerGen {
       _builder.append("etBool runAsTest = ET_FALSE;");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("#ifdef ET_DO_NOT_USE_ARGC_ARGV");
+      _builder.newLine();
+      _builder.append("#else");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("if (argc>1 && strcmp(argv[1], \"-headless\")==0)");
       _builder.newLine();
@@ -169,6 +173,8 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("runAsTest = ET_TRUE;");
+      _builder.newLine();
+      _builder.append("#endif\t\t");
       _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
