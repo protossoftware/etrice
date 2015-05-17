@@ -117,10 +117,14 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	}
 
 	@Override
-	public void doSave(final IProgressMonitor monitor) {
+	public void doSave(IProgressMonitor monitor) {
+		if(monitor == null)
+			monitor = new NullProgressMonitor();
+		
 		boolean isValid = validateResourcesBeforeSave(monitor);
 		if(isValid)
 			super.doSave(monitor);
+		
 		// deactivate saveOnFocus for better usability
 		// avoid retrigger loop from message box
 		saveOnFocusListener.setActive(isValid);
@@ -185,6 +189,8 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 					
 					List<Issue> result = resourceValidator.validate(res, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
 						public boolean isCanceled() {
+							if(monitor == null)
+								return false;
 							return monitor.isCanceled();
 						}
 					});
@@ -229,7 +235,7 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			superClassChanged();
 		
 		if (!dirtyAlready && isDirty())
-			doSave(null);
+			doSave(new NullProgressMonitor());
 		
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject diagramBo = diagram.getLink().getBusinessObjects().iterator().next();
