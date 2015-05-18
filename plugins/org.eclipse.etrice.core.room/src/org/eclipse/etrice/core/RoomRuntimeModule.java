@@ -18,11 +18,13 @@ import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.linking.RoomConvertingLazyLinker;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
+import org.eclipse.etrice.core.validation.FQNAreUniqueValidationHelper;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -91,5 +93,9 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return RoomConvertingLazyLinker.class;
+	}
+	
+	public Class<? extends INamesAreUniqueValidationHelper> bindINamesAreUniqueValidationHelper(){
+		return FQNAreUniqueValidationHelper.class;
 	}
 }
