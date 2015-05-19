@@ -68,12 +68,14 @@ public class ContextSwitcher {
 	 */
 	private static RefinedState getTargetingState(Iterator<ModelComponent> acit, State s) {
 		ModelComponent mc = acit.next();
-		TreeIterator<EObject> it = mc.getStateMachine().eAllContents();
-		while (it.hasNext()) {
-			EObject next = it.next();
-			if (next instanceof RefinedState) {
-				if (((RefinedState) next).getTarget()==s)
-					return (RefinedState) next;
+		if (mc.getStateMachine()!=null) {
+			TreeIterator<EObject> it = mc.getStateMachine().eAllContents();
+			while (it.hasNext()) {
+				EObject next = it.next();
+				if (next instanceof RefinedState) {
+					if (((RefinedState) next).getTarget()==s)
+						return (RefinedState) next;
+				}
 			}
 		}
 		
