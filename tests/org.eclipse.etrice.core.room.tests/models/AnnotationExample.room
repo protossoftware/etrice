@@ -23,11 +23,4 @@ RoomModel AnnotationExample {
 			Message x()
 		}
 	}
-	
-	ActorClass SameNameAnnotationTypeRoomClass {
-	}
-	
-	AnnotationType SameNameAnnotationTypeRoomClass {
-		target = ActorClass
-	}
 }

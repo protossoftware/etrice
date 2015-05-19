@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.common.base.AnnotationType;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,22 +48,5 @@ public class TestAnnotations extends TestBase {
 		assertFalse(diag.getChildren().isEmpty());
 		assertTrue(diag.getChildren().size() == 1);
 		assertTrue(diag.getChildren().get(0).getMessage().contains("not allowed for target ProtocolClass"));
-	}
-	
-	@Test
-	public void SameNameAnnotationTypeRoomClass() {
-		// Test RoomClass validator check
-		EObject obj = res.getEObject("ActorClass:SameNameAnnotationTypeRoomClass");
-		ActorClass ac = (ActorClass)obj;
-		Diagnostic diagActorClass = getDiag(ac);
-		assertFalse(diagActorClass.getChildren().isEmpty());
-		assertTrue(diagActorClass.getChildren().size() == 1);
-		assertTrue(diagActorClass.getChildren().get(0).getMessage().contains("already exists as an AnnotationType name"));
-		// Test AnnotationType validator check
-		obj = res.getEObject("AnnotationType:SameNameAnnotationTypeRoomClass");
-		AnnotationType at = (AnnotationType)obj;
-		Diagnostic diagAnnotationType = getDiag(at);
-		assertFalse(diagAnnotationType.getChildren().isEmpty());
-		assertTrue(diagAnnotationType.getChildren().get(0).getMessage().contains("already exists as a RoomClass name"));
 	}
 }

@@ -88,8 +88,8 @@ RoomModel DynamicActorTest3 {
 		}
 		Structure {
 			external Port fct
-			optional ActorRef opt: Optional
-			Binding opt and opt.p0
+			optional ActorRef optRef: Optional
+			Binding opt and optRef.p0
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
@@ -105,7 +105,7 @@ RoomModel DynamicActorTest3 {
 						<create: fct>
 					}
 					action {
-						"if (opt.createOptionalActor(ac, getThread()))"
+						"if (optRef.createOptionalActor(ac, getThread()))"
 						"\tfct.ok();"
 						"else"
 						"\tfct.error();"
