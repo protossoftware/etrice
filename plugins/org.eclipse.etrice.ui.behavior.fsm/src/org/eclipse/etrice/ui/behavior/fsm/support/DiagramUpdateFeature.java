@@ -112,6 +112,8 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
     	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
 
+		StateGraph currentStateGraph = ContextSwitcher.getCurrentStateGraph(getDiagram());
+		
 		usedShapes.clear();
 		
 		boolean changed = update(tree);
@@ -156,6 +158,9 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		IDiagramBehavior diagramBehavior = getFeatureProvider().getDiagramTypeProvider().getDiagramBehavior();
 		if (diagramBehavior != null)
 			diagramBehavior.getDiagramContainer().setPictogramElementForSelection(null);
+		
+		
+		ContextSwitcher.switchTo(getDiagram(), currentStateGraph);
 		
 		return changed;
 	}
