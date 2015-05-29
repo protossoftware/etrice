@@ -29,7 +29,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" 
 			name="eTrice C ModelLib" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
 			category="org.eclipse.etrice.core.ui.wizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
@@ -39,6 +39,11 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.modellib.c" contentURI="contents/org.eclipse.etrice.modellib.c.zip" description="eTrice ModelLib for C"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+         description="eTrice Runtime for C"
+         name="org.eclipse.etrice.runtime.c">
+   </projectDescriptor>
 	  </example>
 	</extension>   
 
@@ -97,7 +102,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" 
 			name="eTrice Java ModelLib" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
 			category="org.eclipse.etrice.core.ui.wizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
@@ -107,6 +112,11 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.modellib.java" contentURI="contents/org.eclipse.etrice.modellib.java.zip" description="eTrice ModelLib for Java"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.java.zip"
+         description="eTrice Runtime for Java"
+         name="org.eclipse.etrice.runtime.java">
+   </projectDescriptor>
 	  </example>
 	</extension>   
 
@@ -120,7 +130,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard" 
 			name="eTrice Java Tutorials" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
 			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
@@ -130,6 +140,16 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.tutorials.java" contentURI="contents/org.eclipse.etrice.tutorials.java.zip" description="eTrice Java Tutorials"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.java.zip"
+         description="eTrice ModelLib for Java"
+         name="org.eclipse.etrice.modellib.java">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.java.zip"
+         description="eTrice Runtime for Java"
+         name="org.eclipse.etrice.runtime.java">
+   </projectDescriptor>
 	  </example>
 	</extension>   
 
@@ -137,7 +157,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" 
 			name="eTrice C Tutorials" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
 			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
 			icon="icons/genproject.gif" 
 			project="true">
@@ -147,6 +167,16 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.tutorials.c" contentURI="contents/org.eclipse.etrice.tutorials.c.zip" description="eTrice C Tutorials"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+         description="eTrice Runtime for C"
+         name="org.eclipse.etrice.runtime.c">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.c.zip"
+         description="eTrice ModelLib for C"
+         name="org.eclipse.etrice.modellib.c">
+   </projectDescriptor>
 	  </example>
 	</extension>   
 
@@ -164,6 +194,16 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.tutorials.simulators.trafficlight" contentURI="contents/org.eclipse.etrice.tutorials.simulators.trafficlight.zip" description="eTrice Traffic Light GUI"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.java.zip"
+         description="eTrice ModelLib for Java"
+         name="org.eclipse.etrice.modellib.java">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.java.zip"
+         description="eTrice Runtime for Java"
+         name="org.eclipse.etrice.runtime.java">
+   </projectDescriptor>
 	  </example>
 	</extension>   
 
