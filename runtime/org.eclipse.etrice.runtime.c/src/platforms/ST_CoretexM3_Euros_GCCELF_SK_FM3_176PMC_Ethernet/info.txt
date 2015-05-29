@@ -1,7 +1,0 @@
-Platform: ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet
-
-Threading:         Single Threaded 
-Processor:         ARM Coretex M3
-Operating System:  Euros
-Compiler:          GCCELF
-Board:             Fujitsu SK_FM3_176PMC_Ethernet
