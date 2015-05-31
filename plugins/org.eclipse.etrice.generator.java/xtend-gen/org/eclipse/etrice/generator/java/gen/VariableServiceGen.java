@@ -589,10 +589,7 @@ public class VariableServiceGen {
     Iterables.<DataClass>addAll(result, dcs);
     final LinkedList<DataClass> visit = new LinkedList<DataClass>();
     Iterables.<DataClass>addAll(visit, dcs);
-    boolean _isEmpty = visit.isEmpty();
-    boolean _not = (!_isEmpty);
-    boolean _while = _not;
-    while (_while) {
+    while ((!visit.isEmpty())) {
       {
         DataClass dc = visit.pop();
         List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
@@ -610,9 +607,6 @@ public class VariableServiceGen {
         };
         IterableExtensions.<Attribute>forEach(_allAttributes, _function);
       }
-      boolean _isEmpty_1 = visit.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      _while = _not_1;
     }
     return result;
   }

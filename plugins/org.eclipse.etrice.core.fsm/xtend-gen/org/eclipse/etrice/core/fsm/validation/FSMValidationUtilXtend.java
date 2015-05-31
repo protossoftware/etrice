@@ -157,9 +157,7 @@ public class FSMValidationUtilXtend {
   
   public StateGraph getStateGraph(final EObject obj) {
     EObject parent = obj.eContainer();
-    boolean _notEquals = (!Objects.equal(parent, null));
-    boolean _while = _notEquals;
-    while (_while) {
+    while ((!Objects.equal(parent, null))) {
       {
         if ((parent instanceof StateGraph)) {
           return ((StateGraph) parent);
@@ -167,8 +165,6 @@ public class FSMValidationUtilXtend {
         EObject _eContainer = parent.eContainer();
         parent = _eContainer;
       }
-      boolean _notEquals_1 = (!Objects.equal(parent, null));
-      _while = _notEquals_1;
     }
     return null;
   }

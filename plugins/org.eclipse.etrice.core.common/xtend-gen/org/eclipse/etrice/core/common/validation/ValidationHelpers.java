@@ -17,10 +17,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author hrentz
@@ -28,8 +30,22 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ValidationHelpers {
   public static class NamedObject {
+    @Property
     private String _name;
     
+    @Property
+    private EObject _obj;
+    
+    @Property
+    private EStructuralFeature _feature;
+    
+    public NamedObject(final String name, final EObject obj, final EStructuralFeature feature) {
+      this.setName(name);
+      this.setObj(obj);
+      this.setFeature(feature);
+    }
+    
+    @Pure
     public String getName() {
       return this._name;
     }
@@ -38,8 +54,7 @@ public class ValidationHelpers {
       this._name = name;
     }
     
-    private EObject _obj;
-    
+    @Pure
     public EObject getObj() {
       return this._obj;
     }
@@ -48,20 +63,13 @@ public class ValidationHelpers {
       this._obj = obj;
     }
     
-    private EStructuralFeature _feature;
-    
+    @Pure
     public EStructuralFeature getFeature() {
       return this._feature;
     }
     
     public void setFeature(final EStructuralFeature feature) {
       this._feature = feature;
-    }
-    
-    public NamedObject(final String name, final EObject obj, final EStructuralFeature feature) {
-      this.setName(name);
-      this.setObj(obj);
-      this.setFeature(feature);
     }
   }
   

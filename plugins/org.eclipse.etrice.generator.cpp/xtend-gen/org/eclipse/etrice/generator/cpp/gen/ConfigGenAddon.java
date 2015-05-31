@@ -511,9 +511,7 @@ public class ConfigGenAddon {
               PrimitiveType aType = ((PrimitiveType) _type_9);
               StringConcatenation _builder_1 = new StringConcatenation();
               {
-                String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
-                String _temp = temp = _attrClassConfigMinValue;
-                boolean _notEquals = (!Objects.equal(_temp, null));
+                boolean _notEquals = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMinValue(ac, path)), null));
                 if (_notEquals) {
                   _builder_1.append("public static ");
                   String _minMaxType = this.getMinMaxType(aType);
@@ -528,9 +526,7 @@ public class ConfigGenAddon {
                 }
               }
               {
-                String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
-                String _temp_1 = temp = _attrClassConfigMaxValue;
-                boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
+                boolean _notEquals_1 = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path)), null));
                 if (_notEquals_1) {
                   _builder_1.append("public static ");
                   String _minMaxType_1 = this.getMinMaxType(aType);
