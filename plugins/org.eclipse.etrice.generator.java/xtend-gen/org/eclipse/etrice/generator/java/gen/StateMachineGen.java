@@ -32,9 +32,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     {
       final ArrayList<State> states = new ArrayList<State>();
       ModelComponent ac = xpac.getModelComponent();
-      boolean _notEquals = (!Objects.equal(ac, null));
-      boolean _while = _notEquals;
-      while (_while) {
+      while ((!Objects.equal(ac, null))) {
         {
           List<State> _allBaseStates = this._fSMHelpers.getAllBaseStates(ac);
           List<State> _leafStatesLast = this._fSMExtensions.getLeafStatesLast(_allBaseStates);
@@ -42,8 +40,6 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           ModelComponent _base = ac.getBase();
           ac = _base;
         }
-        boolean _notEquals_1 = (!Objects.equal(ac, null));
-        _while = _notEquals_1;
       }
       StringConcatenation _builder = new StringConcatenation();
       {

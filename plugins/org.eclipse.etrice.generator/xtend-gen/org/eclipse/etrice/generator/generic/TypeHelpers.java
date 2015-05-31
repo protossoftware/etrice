@@ -205,31 +205,13 @@ public class TypeHelpers {
     }
     if (_and) {
       ActorClass base = actor.getActorBase();
-      boolean _and_1 = false;
-      boolean _notEquals = (!Objects.equal(base, null));
-      if (!_notEquals) {
-        _and_1 = false;
-      } else {
-        boolean _equals_1 = Objects.equal(result, null);
-        _and_1 = _equals_1;
-      }
-      boolean _while = _and_1;
-      while (_while) {
+      while (((!Objects.equal(base, null)) && Objects.equal(result, null))) {
         {
           String _attrClassConfigValue = this.dataConfigExt.getAttrClassConfigValue(base, attributePath);
           result = _attrClassConfigValue;
           ActorClass _actorBase = base.getActorBase();
           base = _actorBase;
         }
-        boolean _and_2 = false;
-        boolean _notEquals_1 = (!Objects.equal(base, null));
-        if (!_notEquals_1) {
-          _and_2 = false;
-        } else {
-          boolean _equals_2 = Objects.equal(result, null);
-          _and_2 = _equals_2;
-        }
-        _while = _and_2;
       }
     }
     return result;

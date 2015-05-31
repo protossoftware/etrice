@@ -324,9 +324,7 @@ public class DataClassGen {
   public String paramList(final DataClass _dc) {
     String result = "";
     DataClass dc = _dc;
-    boolean _notEquals = (!Objects.equal(dc, null));
-    boolean _while = _notEquals;
-    while (_while) {
+    while ((!Objects.equal(dc, null))) {
       {
         EList<Attribute> _attributes = dc.getAttributes();
         CharSequence _paramList = this.paramList(_attributes);
@@ -335,13 +333,11 @@ public class DataClassGen {
         result = _plus;
         DataClass _base = dc.getBase();
         dc = _base;
-        boolean _notEquals_1 = (!Objects.equal(dc, null));
-        if (_notEquals_1) {
+        boolean _notEquals = (!Objects.equal(dc, null));
+        if (_notEquals) {
           result = (", " + result);
         }
       }
-      boolean _notEquals_1 = (!Objects.equal(dc, null));
-      _while = _notEquals_1;
     }
     return result;
   }
@@ -366,9 +362,7 @@ public class DataClassGen {
   public String argList(final DataClass _dc) {
     String result = "";
     DataClass dc = _dc;
-    boolean _notEquals = (!Objects.equal(dc, null));
-    boolean _while = _notEquals;
-    while (_while) {
+    while ((!Objects.equal(dc, null))) {
       {
         EList<Attribute> _attributes = dc.getAttributes();
         CharSequence _argList = this._procedureHelpers.argList(_attributes);
@@ -377,13 +371,11 @@ public class DataClassGen {
         result = _plus;
         DataClass _base = dc.getBase();
         dc = _base;
-        boolean _notEquals_1 = (!Objects.equal(dc, null));
-        if (_notEquals_1) {
+        boolean _notEquals = (!Objects.equal(dc, null));
+        if (_notEquals) {
           result = (", " + result);
         }
       }
-      boolean _notEquals_1 = (!Objects.equal(dc, null));
-      _while = _notEquals_1;
     }
     return result;
   }
@@ -391,9 +383,7 @@ public class DataClassGen {
   private String deepCopy(final DataClass _dc) {
     String result = "";
     DataClass dc = _dc;
-    boolean _notEquals = (!Objects.equal(dc, null));
-    boolean _while = _notEquals;
-    while (_while) {
+    while ((!Objects.equal(dc, null))) {
       {
         EList<Attribute> _attributes = dc.getAttributes();
         CharSequence _deepCopy = this.deepCopy(_attributes);
@@ -403,8 +393,6 @@ public class DataClassGen {
         DataClass _base = dc.getBase();
         dc = _base;
       }
-      boolean _notEquals_1 = (!Objects.equal(dc, null));
-      _while = _notEquals_1;
     }
     return result;
   }

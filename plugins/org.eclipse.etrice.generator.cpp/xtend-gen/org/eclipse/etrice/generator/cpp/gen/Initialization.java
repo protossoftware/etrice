@@ -154,8 +154,7 @@ public class Initialization {
       for(final String v : values) {
         _builder.append(varName, "");
         _builder.append("[");
-        int _i = i = (i + 1);
-        _builder.append(_i, "");
+        _builder.append(i = (i + 1), "");
         _builder.append("] = ");
         _builder.append(v, "");
         _builder.append(";");

@@ -567,17 +567,13 @@ public class RoomExtensions extends FSMExtensions {
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {
     final BasicEList<AbstractInstance> result = new BasicEList<AbstractInstance>();
     final TreeIterator<EObject> it = ssi.eAllContents();
-    boolean _hasNext = it.hasNext();
-    boolean _while = _hasNext;
-    while (_while) {
+    while (it.hasNext()) {
       {
         final EObject obj = it.next();
         if ((obj instanceof AbstractInstance)) {
           result.add(((AbstractInstance) obj));
         }
       }
-      boolean _hasNext_1 = it.hasNext();
-      _while = _hasNext_1;
     }
     return result;
   }

@@ -306,8 +306,7 @@ public class CppExtensions implements ILanguageExtension {
         {
           String res = "{";
           int i = 0;
-          boolean _while = (i < size);
-          while (_while) {
+          while ((i < size)) {
             {
               res = (res + dv);
               i = (i + 1);
@@ -315,7 +314,6 @@ public class CppExtensions implements ILanguageExtension {
                 res = (res + ",");
               }
             }
-            _while = (i < size);
           }
           _xblockexpression_1 = (res + "}");
         }

@@ -284,22 +284,16 @@ public class ProcedureHelpers {
     }
     String result = "{";
     int i = 0;
-    int _size_3 = att.getSize();
-    boolean _lessThan = (i < _size_3);
-    boolean _while = _lessThan;
-    while (_while) {
+    while ((i < att.getSize())) {
       {
         result = (result + dflt);
         i = (i + 1);
-        int _size_4 = att.getSize();
-        boolean _lessThan_1 = (i < _size_4);
-        if (_lessThan_1) {
+        int _size_3 = att.getSize();
+        boolean _lessThan = (i < _size_3);
+        if (_lessThan) {
           result = (result + ", ");
         }
       }
-      int _size_4 = att.getSize();
-      boolean _lessThan_1 = (i < _size_4);
-      _while = _lessThan_1;
     }
     return (result + "}");
   }

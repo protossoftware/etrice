@@ -175,17 +175,13 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
         comp = _base_1;
         final HashSet<State> covered = CollectionLiterals.<State>newHashSet();
         final ArrayList<State> states = CollectionLiterals.<State>newArrayList();
-        boolean _notEquals_1 = (!Objects.equal(comp, null));
-        boolean _while = _notEquals_1;
-        while (_while) {
+        while ((!Objects.equal(comp, null))) {
           {
             StateGraph _stateMachine = comp.getStateMachine();
             this.recursivelyAddStates(_stateMachine, covered, states);
             ModelComponent _base_2 = comp.getBase();
             comp = _base_2;
           }
-          boolean _notEquals_2 = (!Objects.equal(comp, null));
-          _while = _notEquals_2;
         }
         for (final State s : states) {
           QualifiedName _statePath = this.getStatePath(s);
@@ -200,8 +196,8 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
         State _target = ((RefinedState) _eContainer_3).getTarget();
         StateGraph _subgraph = _target.getSubgraph();
         sg = _subgraph;
-        boolean _notEquals_2 = (!Objects.equal(sg, null));
-        if (_notEquals_2) {
+        boolean _notEquals_1 = (!Objects.equal(sg, null));
+        if (_notEquals_1) {
           EList<State> _states = sg.getStates();
           for (final State s_1 : _states) {
             String _name = s_1.getName();
@@ -230,20 +226,16 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
     if (_not) {
       ModelComponent _base = comp.getBase();
       comp = _base;
-      boolean _notEquals = (!Objects.equal(comp, null));
-      boolean _while = _notEquals;
-      while (_while) {
+      while ((!Objects.equal(comp, null))) {
         {
           StateGraph _stateMachine = comp.getStateMachine();
-          boolean _notEquals_1 = (!Objects.equal(_stateMachine, null));
-          if (_notEquals_1) {
+          boolean _notEquals = (!Objects.equal(_stateMachine, null));
+          if (_notEquals) {
             QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(comp);
             final int acNameSegments = _fullyQualifiedName.getSegmentCount();
             StateGraph _stateMachine_1 = comp.getStateMachine();
             final TreeIterator<EObject> iter = _stateMachine_1.eAllContents();
-            boolean _hasNext = iter.hasNext();
-            boolean _while_1 = _hasNext;
-            while (_while_1) {
+            while (iter.hasNext()) {
               {
                 final EObject obj = iter.next();
                 if ((obj instanceof Transition)) {
@@ -253,15 +245,11 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
                   scopes.add(_create);
                 }
               }
-              boolean _hasNext_1 = iter.hasNext();
-              _while_1 = _hasNext_1;
             }
           }
           ModelComponent _base_1 = comp.getBase();
           comp = _base_1;
         }
-        boolean _notEquals_1 = (!Objects.equal(comp, null));
-        _while = _notEquals_1;
       }
     }
     return new SimpleScope(IScope.NULLSCOPE, scopes);
@@ -319,27 +307,9 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
    */
   private StateGraph getStateGraph(final EObject obj) {
     EObject ctx = obj.eContainer();
-    boolean _and = false;
-    if (!(!(ctx instanceof StateGraph))) {
-      _and = false;
-    } else {
+    while (((!(ctx instanceof StateGraph)) && (!Objects.equal(ctx.eContainer(), null)))) {
       EObject _eContainer = ctx.eContainer();
-      boolean _notEquals = (!Objects.equal(_eContainer, null));
-      _and = _notEquals;
-    }
-    boolean _while = _and;
-    while (_while) {
-      EObject _eContainer_1 = ctx.eContainer();
-      ctx = _eContainer_1;
-      boolean _and_1 = false;
-      if (!(!(ctx instanceof StateGraph))) {
-        _and_1 = false;
-      } else {
-        EObject _eContainer_2 = ctx.eContainer();
-        boolean _notEquals_1 = (!Objects.equal(_eContainer_2, null));
-        _and_1 = _notEquals_1;
-      }
-      _while = _and_1;
+      ctx = _eContainer;
     }
     if ((ctx instanceof StateGraph)) {
       return ((StateGraph)ctx);

@@ -2927,9 +2927,7 @@ public class NodeGen {
       final ArrayList<String> notLogged = CollectionLiterals.<String>newArrayList();
       this.logger.logInfo("  logged ports:");
       TreeIterator<EObject> iter = ssi.eAllContents();
-      boolean _hasNext = iter.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      while (iter.hasNext()) {
         {
           final EObject obj = iter.next();
           if ((obj instanceof PortInstance)) {
@@ -3009,8 +3007,6 @@ public class NodeGen {
             }
           }
         }
-        boolean _hasNext_1 = iter.hasNext();
-        _while = _hasNext_1;
       }
       this.logger.logInfo("  NOT logged ports:");
       for (final String nl : notLogged) {
