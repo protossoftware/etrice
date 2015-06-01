@@ -47,7 +47,7 @@
 	  </example>
 	</extension>   
 
-	<!-- ========= org.eclipse.etrice.runtime.cpp ========= -->
+	<!-- ========= org.eclipse.etrice.runtime.cpp ========= --><!--
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" 
 			name="eTrice C++ Runtime" 
@@ -62,9 +62,9 @@
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.runtime.cpp" contentURI="contents/org.eclipse.etrice.runtime.cpp.zip" description="eTrice Runtime for C++"/>
 	  </example>
-	</extension>   
+	</extension> -->   
 
-	<!-- ========= org.eclipse.etrice.modellib.cpp ========= -->
+	<!-- ========= org.eclipse.etrice.modellib.cpp ========= --><!--
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" 
 			name="eTrice C++ ModelLib" 
@@ -79,7 +79,7 @@
 	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.etrice.modellib.cpp" contentURI="contents/org.eclipse.etrice.modellib.cpp.zip" description="eTrice ModelLib for C++"/>
 	  </example>
-	</extension>   
+	</extension>   -->
 
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
