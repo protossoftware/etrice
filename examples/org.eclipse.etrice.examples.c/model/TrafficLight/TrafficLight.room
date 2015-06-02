@@ -7,30 +7,88 @@ RoomModel TrafficLight {
 	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 
 	LogicalSystem TrafficLight {
-		SubSystemRef main: MainSubSystem
+//		SubSystemRef subSystem: TrafficLightStep1_Test
+//		SubSystemRef subSystem: TrafficLightStep2_SingleTrafficLight
+		SubSystemRef subSystem: TrafficLightStep3_MultipleTrafficLights
 	}
 
-	SubSystemClass MainSubSystem {
-		ActorRef appl [2]: Application
+	SubSystemClass TrafficLightStep1_Test {
+		ActorRef step1_TestApplication: TestApplication
 		ActorRef timingService: ATimingService
-		LayerConnection ref appl satisfied_by timingService.timer
+		LayerConnection ref step1_TestApplication satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}
 
-	ActorClass Application {
+	SubSystemClass TrafficLightStep2_SingleTrafficLight {
+		ActorRef timingService: ATimingService
+		ActorRef step2_SingleTrafficLight: SingleTrafficLight
+		LayerConnection ref step2_SingleTrafficLight satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	SubSystemClass TrafficLightStep3_MultipleTrafficLights {
+		ActorRef timingService: ATimingService
+		ActorRef step3_FlatReplication: FlatReplication
+		ActorRef step4_HierarchicalReplication: HierarchicalReplication
+		LayerConnection ref step3_FlatReplication satisfied_by timingService.timer
+		LayerConnection ref step4_HierarchicalReplication satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	ActorClass TestApplication ["The TestApplication contains the PedestrianTrafficLightController and its test harness."] {
 		Structure {
 			ActorRef controller: PedestrianTrafficLightController
 			ActorRef controllerTestHarness: TrafficLightControllerTestHarness
-			ActorRef headquarters: TrafficLightHeadquarters
-			ActorRef trafficLightController: PedestrianTrafficLightController
-			ActorRef trafficLightInterface: TrafficLightInterface
 			Binding controllerTestHarness.fct and controller.fct
 			Binding controller.tlInterface and controllerTestHarness.tlInterface
-			Binding trafficLightController.tlInterface and trafficLightInterface.fct
-			Binding trafficLightController.fct and headquarters.controllers
 		}
 		Behavior { }
 	}
+
+	ActorClass SingleTrafficLight ["OneTrafficLight contains the PedestrianTrafficLightController which is connected via a SocketClient Actor to the traffic light GUI."] {
+		Structure {
+			ActorRef controller: PedestrianTrafficLightController
+			ActorRef headquarters1: TrafficLightHeadquarters
+			ActorRef tlInterface: TrafficLightInterface
+			Binding headquarters1.controllers and controller.fct
+			Binding controller.tlInterface and tlInterface.fct
+		}
+		Behavior { }
+	}
+
+	ActorClass FlatReplication ["FlatReplication uses several replicated Actors in a row to control 2 traffic lights."] {
+		Structure {
+			ActorRef controller [2]: PedestrianTrafficLightController
+			ActorRef headquarters1: TrafficLightHeadquarters
+			ActorRef tlInterface [2]: TrafficLightInterface
+			Binding headquarters1.controllers and controller.fct
+			Binding controller.tlInterface and tlInterface.fct
+		}
+		Behavior { }
+	}
+
+	ActorClass HierarchicalReplication ["HierarchicalReplication structural hierarchy to combine several actors and replicate them 'en bloc'. It controla 2 traffic lights."] {
+		Structure {
+			ActorRef controllerWithInfrastructure [2]: TrafficLightControllerWithInfrastructure
+			ActorRef headquarters2: TrafficLightHeadquarters
+			Binding controllerWithInfrastructure.fct and headquarters2.controllers
+		}
+		Behavior { }
+	}
+
+	ActorClass TrafficLightControllerWithInfrastructure ["The TrafficLightControllerWithInfrastructure encapsules the PedestrianTrafficLightController, the TrafficLightInterface and the SocketClient."] {
+		Interface {
+			Port fct: PTrafficLightController
+		}
+		Structure {
+			ActorRef controller: PedestrianTrafficLightController
+			ActorRef tlInterface: TrafficLightInterface
+			Binding controller.tlInterface and tlInterface.fct
+			Binding fct and controller.fct
+		}
+		Behavior { }
+	}
+
 
 	ActorClass TrafficLightControllerTestHarness [
 	"Test harness for the TrafficLightController. It has the same ports, but conjugated. It can run test cases for the TrafficLightController by completely simulating its environment."
@@ -41,9 +99,9 @@ RoomModel TrafficLight {
 		}
 		Structure {
 			external Port fct
-			external Port tlInterface
-			SAP to: PTimer
-			Attribute counter: int32
+			external Port tlInterface 
+			SAP to: PTimer  
+			Attribute counter: int32 ["FEATURE: Attribute of an ActorClass"]
 		}
 		Behavior {
 			StateMachine {
@@ -353,11 +411,31 @@ RoomModel TrafficLight {
 	ActorClass TrafficLightInterface {
 		Interface {
 			Port fct: PTrafficLightInterface
+			conjugated Port tcpControl: PTcpControl
+			conjugated Port tcpPayload: PTcpPayload
 		}
 		Structure {
 			external Port fct
+			external Port tcpControl
+			external Port tcpPayload
 		}
-		Behavior { }
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Connecting
+				Transition tr0: Connected -> Connected {
+					triggers {
+						<setCarRed: fct>
+					}
+				}
+				Transition tr1: Connecting -> Connected {
+					triggers {
+						<established: tcpControl>
+					}
+				}
+				State Connecting
+				State Connected
+			}
+		}
 	}
 
 	ActorClass TrafficLightInterfaceStub {
@@ -393,7 +471,7 @@ RoomModel TrafficLight {
 
 	ActorClass TrafficLightHeadquarters {
 		Interface {
-			conjugated Port controllers: PTrafficLightController
+			conjugated Port controllers [2]: PTrafficLightController
 		}
 		Structure {
 			external Port controllers

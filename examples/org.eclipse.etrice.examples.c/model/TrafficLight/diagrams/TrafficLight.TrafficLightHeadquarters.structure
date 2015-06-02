@@ -16,15 +16,16 @@
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="port"/>
       <properties key="inherited" value="false"/>
-      <properties key="item-kind" value="C"/>
+      <properties key="item-kind" value="CM"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="373" y="500">
+        <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="25" y="15"/>
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="40" height="40" x="20" y="20"/>
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.2" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="30" y="30"/>
       </graphicsAlgorithm>
       <link>
         <businessObjects href="../TrafficLight.room#Port:TrafficLightHeadquarters$controllers"/>
       </link>
-      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+      <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.1"/>
       <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="20" y="60" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="controllers"/>
       </children>
