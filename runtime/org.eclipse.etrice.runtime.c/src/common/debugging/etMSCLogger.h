@@ -92,7 +92,7 @@ void etMSCLogger_setState(const char* objectName, const char* stateName);
 
 #ifdef ET_MSC_LOGGER_ACTIVATE
 	#define ET_MSC_LOGGER_OPEN(object) \
-		etMSCLogger_open("tmp/log", "msc"); \
+		etMSCLogger_open("log", "msc"); \
 		etMSCLogger_setObjectName(object);
 
 	#define ET_MSC_LOGGER_CLOSE etMSCLogger_close();

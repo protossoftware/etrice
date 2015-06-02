@@ -8,6 +8,7 @@ mkdir ..\..\FlatWorld
 REM examples
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.simulators.trafficlight.example ..\examples\org.eclipse.etrice.tutorials.simulators.trafficlight.example
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.c ..\examples\org.eclipse.etrice.tutorials.c
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.c ..\examples\org.eclipse.etrice.examples.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.java ..\examples\org.eclipse.etrice.tutorials.java
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.generator.c.reference ..\examples\org.eclipse.etrice.generator.c.reference
 
