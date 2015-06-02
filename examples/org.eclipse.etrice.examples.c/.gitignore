@@ -4,5 +4,5 @@ src-gen/*
 !src-gen/readme.txt
 src-gen-info/*
 !src-gen-info/readme.txt
-tmp/*
-!tmp/log/readme.txt
+log/*
+!log/readme.txt
