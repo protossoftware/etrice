@@ -1,0 +1,462 @@
+RoomModel TrafficLight {
+
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+
+	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.c/model/TcpService.room"
+
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	LogicalSystem TrafficLight {
+		SubSystemRef main: MainSubSystem
+	}
+
+	SubSystemClass MainSubSystem {
+		ActorRef appl [2]: Application
+		ActorRef timingService: ATimingService
+		LayerConnection ref appl satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	ActorClass Application {
+		Structure {
+			ActorRef controller: PedestrianTrafficLightController
+			ActorRef controllerTestHarness: TrafficLightControllerTestHarness
+			ActorRef headquarters: TrafficLightHeadquarters
+			ActorRef trafficLightController: PedestrianTrafficLightController
+			ActorRef trafficLightInterface: TrafficLightInterface
+			Binding controllerTestHarness.fct and controller.fct
+			Binding controller.tlInterface and controllerTestHarness.tlInterface
+			Binding trafficLightController.tlInterface and trafficLightInterface.fct
+			Binding trafficLightController.fct and headquarters.controllers
+		}
+		Behavior { }
+	}
+
+	ActorClass TrafficLightControllerTestHarness [
+	"Test harness for the TrafficLightController. It has the same ports, but conjugated. It can run test cases for the TrafficLightController by completely simulating its environment."
+	] {
+		Interface {
+			conjugated Port fct: PTrafficLightController
+			Port tlInterface: PTrafficLightInterface
+		}
+		Structure {
+			external Port fct
+			external Port tlInterface
+			SAP to: PTimer
+			Attribute counter: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> SetStandby
+				Transition tr0: SetStandby -> InStandby {
+					triggers {
+						<doneStandby: fct>
+					}
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr1: InStandby -> SetStart {
+					triggers {
+						<setCarYellow: tlInterface guard {
+							"++counter==5"
+						}>
+					}
+				}
+				Transition tr2: SetStart -> InRunning {
+					triggers {
+						<doneStart: fct>
+					}
+				}
+				Transition tr3: InRunning -> CarGreen {
+					triggers {
+						<setCarGreen: tlInterface guard {
+							"status==1"
+						}>
+					}
+				}
+				Transition tr4: CarGreen -> PressButton {
+					triggers {
+						<timeout: to>
+					}
+				}
+				Transition tr5: PressButton -> CarGreenAgain {
+					triggers {
+						<setCarGreen: tlInterface guard {
+							"status==1"
+						}>
+					}
+				}
+				Transition tr6: CarGreenAgain -> CarYellow {
+					triggers {
+						<setCarYellow: tlInterface guard {
+							"status==1"
+						}>
+					}
+					action {
+						"counter=0;"
+					}
+				}
+				Transition tr7: CarYellow -> SetStop {
+					triggers {
+						<setPedRed: tlInterface guard {
+							"++counter==5"
+						}>
+					}
+				}
+				Transition tr8: SetStop -> Done {
+					triggers {
+						<doneStop: fct>
+					}
+				}
+				State SetStandby {
+					entry {
+						"fct.standby();"
+					}
+				}
+				State InStandby
+				State SetStart {
+					entry {
+						"fct.start();"
+					}
+				}
+				State InRunning
+				State CarGreen {
+					entry {
+						"to.startTimeout(1*10);"
+					}
+				}
+				State PressButton {
+					entry {
+						"tlInterface.pressedRequestButton();"
+					}
+				}
+				State CarGreenAgain {
+					entry {
+						"fct.standby();"
+					}
+				}
+				State CarYellow
+				State SetStop {
+					entry {
+						"fct.stop();"
+					}
+				}
+				State Done
+			}
+		}
+	}
+
+	ActorClass PedestrianTrafficLightController [
+	"Control of a traffic light at a pedestrian crossing with one car traffic light and one pedestrian traffic light." ]
+	{
+		Interface {
+			Port fct: PTrafficLightController
+			conjugated Port tlInterface: PTrafficLightInterface
+		}
+		Structure {
+			external Port fct
+			external Port tlInterface
+			SAP to: PTimer
+			Attribute timeBase: int32
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Stopped {
+					action {
+						"timeBase = 10;"
+					}
+				}
+				Transition tr0: Stopped -> tp0 of Standby {
+					triggers {
+						<standby: fct>
+					}
+				}
+				Transition tr1: Standby -> tpStart of Running {
+					triggers {
+						<start: fct>
+					}
+				}
+				Transition tr2: Running -> AllRedBeforeStandby {
+					triggers {
+						<standby: fct>
+					}
+				}
+				Transition tr3: tpStandby of Running -> AllRedBeforeStandby
+				Transition tr4: AllRedBeforeStandby -> tp0 of Standby {
+					triggers {
+						<timeout: to>
+					}
+				}
+				Transition tr5: Standby -> Stopped {
+					triggers {
+						<stop: fct>
+					}
+				}
+				State Stopped {
+					entry {
+						"tlInterface.setCarRed(0);"
+						"tlInterface.setCarYellow(0);"
+						"tlInterface.setCarGreen(0);"
+						"tlInterface.setPedRed(0);"
+						"tlInterface.setPedGreen(0);"
+						"fct.doneStop();"
+					}
+				}
+				State Standby {
+					entry {
+						"fct.doneStandby();"
+					}
+					subgraph {
+						Transition tr0: my tp0 -> On
+						Transition tr1: On -> Off {
+							triggers {
+								<timeout: to>
+							}
+						}
+						Transition tr2: Off -> On {
+							triggers {
+								<timeout: to>
+							}
+						}
+						EntryPoint tp0
+						State On {
+							entry {
+								"// turn two lights on"
+								"tlInterface.setCarYellow(1);"
+								"tlInterface.setPedRed(1);"
+								""
+								"// start timeout (fire once) for blinking"
+								"// startTimer would start a cyclic timer"
+								"to.startTimeout(5*timeBase);"
+							}
+							exit {
+								"// TIP: turn off lights here in the exit code of state On instead of the entry code of state Off "
+								"// to make sure they are turned off if the superstate Standby is left by a group transition"
+								"tlInterface.setCarYellow(0);"
+								"tlInterface.setPedRed(0);"
+								""
+								"// TIP: kill timer here to make sure it is killed if the state is left by a group transition or any other transition than a timeout"
+								"// ALTERNATIVE: kill() could also be placed in the exit code of the superstate StandbyBlinking and so replacing the two calls in On:exit and Off:exit"
+								"to.kill();"
+							}
+						}
+						State Off {
+							entry {
+								"to.startTimeout(5*timeBase);"
+							}
+							exit {
+								"to.kill();"
+							}
+						}
+					}
+				}
+				State Running {
+					entry {
+						"fct.doneStart();"
+					}
+					exit {
+						"to.kill();"
+					}
+					subgraph {
+						Transition tr0: my tpStart -> AllRed
+						Transition tr1: AllRed -> CarGreen {
+							triggers {
+								<timeout: to>
+							}
+						}
+						Transition tr2: CarGreen -> CarYellow {
+							triggers {
+								<pressedRequestButton: tlInterface>
+							}
+						}
+						Transition tr3: CarYellow -> CarRed {
+							triggers {
+								<timeout: to>
+							}
+						}
+						Transition tr4: CarRed -> PedGreen {
+							triggers {
+								<timeout: to>
+							}
+						}
+						Transition tr5: PedGreen -> AllRed {
+							triggers {
+								<timeout: to>
+							}
+						}
+						Transition tr6: CarGreen -> CarYellowBeforeStandby {
+							triggers {
+								<standby: fct>
+							}
+						}
+						Transition tr7: CarYellowBeforeStandby -> my tpStandby {
+							triggers {
+								<timeout: to>
+							}
+						}
+						EntryPoint tpStart
+						ExitPoint tpStandby
+						State AllRed {
+							entry {
+								"tlInterface.setCarRed(1);"
+								"tlInterface.setPedRed(1);"
+								"to.startTimeout(20*timeBase);"
+							}
+						}
+						State CarYellow {
+							entry {
+								"tlInterface.setCarGreen(0);"
+								"tlInterface.setCarYellow(1);"
+								"to.startTimeout(10*timeBase);"
+							}
+						}
+						State CarGreen {
+							entry {
+								"tlInterface.setCarRed(0);"
+								"tlInterface.setCarGreen(1);"
+							}
+						}
+						State CarRed {
+							entry {
+								"tlInterface.setCarYellow(0);"
+								"tlInterface.setCarRed(1);"
+								"to.startTimeout(10*timeBase);"
+							}
+						}
+						State PedGreen {
+							entry {
+								"tlInterface.setPedGreen(1);"
+								"to.startTimeout(20*timeBase);"
+							}
+						}
+						State CarYellowBeforeStandby {
+							entry {
+								"tlInterface.setCarGreen(0);"
+								"tlInterface.setCarYellow(1);"
+								"to.startTimeout(10*timeBase);"
+							}
+						}
+					}
+				}
+				State AllRedBeforeStandby {
+					entry {
+						"tlInterface.setCarRed(1);"
+						"tlInterface.setPedRed(1);"
+						"to.startTimeout(30*timeBase);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass TrafficLightInterface {
+		Interface {
+			Port fct: PTrafficLightInterface
+		}
+		Structure {
+			external Port fct
+		}
+		Behavior { }
+	}
+
+	ActorClass TrafficLightInterfaceStub {
+		Interface {
+			Port fct: PTrafficLightInterface
+		}
+		Structure {
+			external Port fct
+			SAP to: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitingABit
+				Transition tr0: WaitingABit -> PressButton {
+					triggers {
+						<timeout: to>
+					}
+				}
+				State WaitingABit {
+					entry {
+						"to.startTimeout(80*10);"
+					}
+				}
+				State PressButton {
+					entry {
+						"fct.pressedRequestButton();"
+						"fct.releasedRequestButton();"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass TrafficLightHeadquarters {
+		Interface {
+			conjugated Port controllers: PTrafficLightController
+		}
+		Structure {
+			external Port controllers
+			SAP to: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Standby
+				Transition tr0: Standby -> Running {
+					triggers {
+						<timeout: to>
+					}
+				}
+				Transition tr1: Running -> Stopped {
+					triggers {
+						<timeout: to>
+					}
+				}
+				State Standby {
+					entry {
+						"controllers.standby();"
+						"to.startTimeout(20*10);"
+					}
+				}
+				State Running {
+					entry {
+						"controllers.start();"
+						"to.startTimeout(200*10);"
+					}
+				}
+				State Stopped {
+					entry {
+						"controllers.stop();"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PTrafficLightController {
+		incoming {
+			Message standby()
+			Message start()
+			Message stop()
+		}
+		outgoing {
+			Message doneStandby()
+			Message doneStart()
+			Message doneStop()
+		}
+	}
+
+	ProtocolClass PTrafficLightInterface {
+		incoming {
+			Message setCarRed(status: boolean)
+			Message setCarYellow(status: boolean)
+			Message setCarGreen(status: boolean)
+			Message setPedRed(status: boolean)
+			Message setPedGreen(status: boolean)
+		}
+		outgoing {
+			Message pressedRequestButton()
+		}
+	}
+
+}
