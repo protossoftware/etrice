@@ -23,18 +23,18 @@ public class ButtonActionListener
 implements ActionListener {
 
 	private OutputStream out;
-	private String cmd1 = "requestGreen";
+	private String buttonPressedCmd = "pressedRequestButton\n";
 	
 	public ButtonActionListener(OutputStream out){
 		this.out = out;
 	}
 	
-	public void actionPerformed(ActionEvent arg0) {
-		String s = arg0.getActionCommand();
+	public void actionPerformed(ActionEvent event) {
+		String s = event.getActionCommand();
 		
 		if (s.equals("REQUEST")) {
 			try {
-				out.write(cmd1.getBytes());
+				out.write(buttonPressedCmd.getBytes());
 				out.flush();
 			}
 			catch (IOException e){

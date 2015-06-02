@@ -24,8 +24,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-public class PedastrianLightWnd extends Frame {
+/**
+ * 
+ * @author tschuetz
+ *
+ */
+public class PedestrianLightWnd extends Frame {
 	private static final long serialVersionUID = 1L;
 
 	private TrafficLight3 carLights = null;
@@ -37,12 +41,12 @@ public class PedastrianLightWnd extends Frame {
 	TextField statusLine = null;
 
 
-	public PedastrianLightWnd(int ipPort) {
-		super("PedestrianLightsGUI");
+	public PedestrianLightWnd(int ipPort) {
+		super("Pedestrian Lights GUI");
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints gbc;
-		carLights = new TrafficLight3(4);
-		pedLights = new TrafficLight2(2);
+		carLights = new TrafficLight3();
+		pedLights = new TrafficLight2();
 		statusLine = new TextField();
 		requestButton = new Button("REQUEST");
 		requestButton.setEnabled(false);
@@ -125,45 +129,57 @@ public class PedastrianLightWnd extends Frame {
 
 	private void dispatchCommand(Button requestButton, String cmd) {
 		// check carLights
-		if (cmd.equals("carLights=red")) {
-			carLights.setState(carLights.RED);
+		if (cmd.equals("carLightRed=on")) {
+			carLights.setRedLight(1);
 		}
-		if (cmd.equals("carLights=yellowRed")) {
-			carLights.setState(carLights.YELLOWRED);
+		if (cmd.equals("carLightRed=off")) {
+			carLights.setRedLight(0);
 		}
-		if (cmd.equals("carLights=green")) {
-			carLights.setState(carLights.GREEN);
+		if (cmd.equals("carLightYellow=on")) {
+			carLights.setYellowLight(1);
 		}
-		if (cmd.equals("carLights=yellow")) {
-			carLights.setState(carLights.YELLOW);
+		if (cmd.equals("carLightYellow=off")) {
+			carLights.setYellowLight(0);
 		}
-		if (cmd.equals("carLights=off")) {
-			carLights.setState(carLights.OFF);
+		if (cmd.equals("carLightGreen=on")) {
+			carLights.setGreenLight(1);
+		}
+		if (cmd.equals("carLightGreen=off")) {
+			carLights.setGreenLight(0);
 		}
 		
 		// check pedLights
-		if (cmd.equals("pedLights=red")) {
-			pedLights.setState(pedLights.RED);
+		if (cmd.equals("pedLightRed=on")) {
+			pedLights.setRedLight(1);
 		}
-		if (cmd.equals("pedLights=green")) {
-			pedLights.setState(pedLights.GREEN);
+		if (cmd.equals("pedLightRed=off")) {
+			pedLights.setRedLight(0);
 		}
-		if (cmd.equals("pedLights=off")) {
-			pedLights.setState(pedLights.OFF);
+		if (cmd.equals("pedLightGreen=on")) {
+			pedLights.setGreenLight(1);
+		}
+		if (cmd.equals("pedLightGreen=off")) {
+			pedLights.setGreenLight(0);
 		}
 
 		// check button
-		if (cmd.equals("button=on")) {
+		if (cmd.equals("requestButton=on")) {
 			requestButton.setEnabled(true);
 		}
-		if (cmd.equals("button=off")) {
+		if (cmd.equals("requestButton=off")) {
 			requestButton.setEnabled(false);
 		}
+		carLights.repaint();
+		pedLights.repaint();
 	}
 
 	private void resetLights() {
-		carLights.setState(carLights.OFF);
-		pedLights.setState(pedLights.OFF);
+		carLights.setRedLight(0);
+		carLights.setYellowLight(0);
+		carLights.setGreenLight(0);
+
+		pedLights.setRedLight(0);
+		pedLights.setGreenLight(0);
 	}
 
 	private GridBagConstraints makeGbc(int x, int y, int width, int height) {

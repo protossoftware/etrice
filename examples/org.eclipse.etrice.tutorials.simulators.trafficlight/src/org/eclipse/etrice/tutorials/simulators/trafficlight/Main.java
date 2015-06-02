@@ -25,7 +25,7 @@ public class Main {
 			System.exit(0);
 		}
 
-		new PedastrianLightWnd(Integer.parseInt(args[0]));
+		new PedestrianLightWnd(Integer.parseInt(args[0]));
 	}
 
 	public static boolean checkArgs(String[] args) {
