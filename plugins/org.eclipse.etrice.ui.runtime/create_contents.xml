@@ -29,6 +29,8 @@
 		
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.java" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.c" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.c" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.template.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors1" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors2" />

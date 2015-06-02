@@ -178,7 +178,61 @@
          name="org.eclipse.etrice.modellib.c">
    </projectDescriptor>
 	  </example>
-	</extension>   
+	</extension> 
+	
+	<!-- ========= org.eclipse.etrice.tutorials.c ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.ExamplesCWizard" 
+			name="eTrice C Examples" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice C tutorials accompanying the online help</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.ExamplesCWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.examples.c" contentURI="contents/org.eclipse.etrice.examples.c.zip" description="eTrice C Examples"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+         description="eTrice Runtime for C"
+         name="org.eclipse.etrice.runtime.c">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.c.zip"
+         description="eTrice ModelLib for C"
+         name="org.eclipse.etrice.modellib.c">
+   </projectDescriptor>
+	  </example>
+	</extension>
+	
+	<!-- ========= org.eclipse.etrice.tutorials.c ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.TemplateCWizard" 
+			name="eTrice C Template Project" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice C tutorials accompanying the online help</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.TemplateCWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.etrice.template.c" contentURI="contents/org.eclipse.etrice.template.c.zip" description="eTrice C Template Project"/>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+         description="eTrice Runtime for C"
+         name="org.eclipse.etrice.runtime.c">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.c.zip"
+         description="eTrice ModelLib for C"
+         name="org.eclipse.etrice.modellib.c">
+   </projectDescriptor>
+	  </example>
+	</extension>          
 
 	<!-- ========= org.eclipse.etrice.tutorials.simulators.trafficlight ========= -->
 	<extension point="org.eclipse.ui.newWizards">
