@@ -5,92 +5,129 @@ RoomModel room.basic.service.tcp {
 
 	ActorClass ATcpServer {
 		Interface {
-			Port ControlPort: PTcpControl
-			Port PayloadPort: PTcpPayload
+			Port controlPort: PTcpControl
+			Port payloadPort: PTcpPayload
 		}
 		Structure {
 			usercode1 {
 				"#include \"osal/etTcpSockets.h\""
 			}
 			usercode3 {
-				"/* user code 3 */"
+				"static int8* bufferProvider(void* slf, int* size) {"
+				"	ATcpServer* self = (ATcpServer*) slf;"
+				"	*size = DTcpPayload_getMaxLength(&payloadRecvBuffer);"
+				"	return payloadRecvBuffer.data;"
+				"}"
+				""
+				"static int socketReceiver(void* slf, int channel, int size, const int8* data) {"
+				"	ATcpServer* self = (ATcpServer*) slf;"
+				"	DTcpPayload_setData(&payloadRecvBuffer, data, size);"
+				"	payloadPort_dataPackage(&payloadRecvBuffer);"
+				"	return ETSOCKET_OK;"
+				"}"
 			}
-			external Port ControlPort
-			external Port PayloadPort
+			external Port controlPort
+			external Port payloadPort
 			Attribute lastError: int32
-			Attribute payloadPortReplocation: int32
+			Attribute payloadRecvBuffer : DTcpPayload
 			Attribute server: etSocketServerData ref
 		}
 		Behavior {
 			Operation ATcpServer() {
-				"etInitSockets();"
+				"setErrorCode(etInitSockets());"
 				"server = etCreateSocketServerData();"
+				"server->receiver = socketReceiver;"
+				"server->bufferProvider = bufferProvider;"
+				"server->userData = self;"
 			}
 			Operation ~ATcpServer() {
 				"etCleanupSockets();"
 				"etFreeSocketServerData(server);"
 			}
-			Operation stopUser() {
-				"/* stop user: close socket */"
+//			Operation stopUser() {
+//				"/* stop user: close socket */"
+//			}
+			Operation hasError() : boolean {
+				"return lastError != ETSOCKET_OK;"
+			}
+			Operation setErrorCode(value : int32){
+				"lastError = value;"
 			}
 			StateMachine {
-				Transition init: initial -> closed {
-				}
-				Transition tr0: closed -> cp cp0 {
+				Transition init: initial -> cp cp0
+				Transition tr5: connected -> connected {
 					triggers {
-						<open: ControlPort>
+						<dataPackage: payloadPort>
 					}
 					action {
-						"lastError=0;"
-						"/* start accept thread */"
-						"if (etStartListening(server, data->TcpPort)!=ETSOCKET_OK) lastError = 1;"
+						"/* send payload to connection */"
+						"setErrorCode(etWriteServerSocket(server, data->connectionId, data->length, data->data));"
+						"if(hasError())"
+						"\tcontrolPort.error();"
 					}
 				}
-				Transition tr1: opened -> closed {
+				Transition tr6: connected -> unconnected {
 					triggers {
-						<close: ControlPort>
+						<disconnect: controlPort>
 					}
 					action {
 						"/* close accept thread */"
 						"etCloseAllServerSockets(server);"
 						"etStopSocketServer(server);"
+						""
+						"controlPort.disconnected();"
 					}
 				}
-				Transition tr2: cp cp0 -> opened {
-					action {
-						"ControlPort.established();"
-					}
-				}
-				Transition socketError: cp cp0 -> error {
-					cond {
-						"lastError!=0"
-					}
-					action {
-						"ControlPort.error();"
-						"/* handle not connected */"
-					}
-				}
-				Transition tr3: opened -> opened {
+				Transition tr7: unconnected -> cp cp1 {
 					triggers {
-						<send: PayloadPort>
+						<connect: controlPort>
 					}
 					action {
-						"/* send payload to connection */"
-						"etWriteServerSocket(server, data->connectionId, data->length, data->data);"
+						"/* start accept thread */"
+						"setErrorCode(etStartListening(server, data->TcpPort));"
 					}
 				}
+				Transition tr4: cp cp1 -> connected {
+					action {
+						"controlPort.connected();"
+					}
+				}
+				Transition tr8: cp cp1 -> unconnected {
+					cond {
+						"hasError()"
+					}
+					action {
+						"controlPort.error();"
+					}
+				}
+				Transition tr0: cp cp0 -> unconnected
+				Transition tr1: cp cp0 -> initError {
+					cond {
+						"hasError()"
+					}
+				}
+				Transition tr2: initError -> initError {
+					triggers {
+						<connect: controlPort>
+					}
+				}
+				ChoicePoint cp1
 				ChoicePoint cp0
-				State closed
-				State opened
-				State error
+				State connected
+				State unconnected
+				State initError {
+					entry {
+						"controlPort.error();"
+					}
+				}
 			}
 		}
 	}
 
 	ActorClass ATcpClient {
 		Interface {
-			Port ControlPort: PTcpControl
-			Port PayloadPort: PTcpPayload
+			Port controlPort: PTcpControl
+			Port payloadPort: PTcpPayload
 		}
 		Structure {
 			usercode1 {
@@ -99,25 +136,26 @@ RoomModel room.basic.service.tcp {
 			usercode3 {
 				"static int8* bufferProvider(void* slf, int* size) {"
 				"	ATcpClient* self = (ATcpClient*) slf;"
-				"	*size = 1000;"
-				"	return payload.data;"
+				"	*size = DTcpPayload_getMaxLength(&payloadRecvBuffer);"
+				"	return payloadRecvBuffer.data;"
 				"}"
 				""
 				"static int socketReceiver(void* slf, int channel, int size, const int8* data) {"
 				"	ATcpClient* self = (ATcpClient*) slf;"
-				"	payload.length = size;"
-				"	PTcpPayloadPort_receive(&self->constData->PayloadPort, &payload);"
+				"	DTcpPayload_setData(&payloadRecvBuffer, data, size);"
+				"	payloadPort_dataPackage(&payloadRecvBuffer);"
 				"	return ETSOCKET_OK;"
 				"}"
 			}
-			external Port ControlPort
-			external Port PayloadPort
+			external Port controlPort
+			external Port payloadPort
 			Attribute lastError: int32
-			Attribute payload: DTcpPayload
+			Attribute payloadRecvBuffer: DTcpPayload
 			Attribute client: etSocketConnectionData ref
 		}
 		Behavior {
 			Operation ATcpClient() {
+				"setErrorCode(etInitSockets());"
 				"client = etCreateSocketConnectionData();"
 				"client->receiver = socketReceiver;"
 				"client->bufferProvider = bufferProvider;"
@@ -125,86 +163,109 @@ RoomModel room.basic.service.tcp {
 			}
 			Operation ~ATcpClient() {
 				"etCloseSocket(client);"
+				"etCleanupSockets();"
 				"etFreeSocketConnectionData(client);"
 			}
-			Operation stopUser() {
-				"/* stop user: close socket */"
+//			Operation stopUser() {
+//				"/* stop user: close socket */"
+//			}
+			Operation hasError() : boolean {
+				"return lastError != ETSOCKET_OK;"
+			}
+			Operation setErrorCode(value : int32){
+				"lastError = value;"
 			}
 			StateMachine {
-				Transition init: initial -> closed {
+				Transition init: initial -> cp cp1 {
 					action {
 						"printf(\"Client Init!\\n\");"
 					}
 				}
-				Transition tr0: closed -> cp cp0 {
+				Transition tr0: unconnected -> cp cp0 {
 					triggers {
-						<open: ControlPort>
+						<connect: controlPort>
 					}
 					action {
-						"lastError=0;"
 						"/* connect to server */"
-						"if (etConnectServer(client, data->IPAddr, data->TcpPort)!=ETSOCKET_OK) lastError = 1;"
+						"setErrorCode(etConnectServer(client, data->IPAddr, data->TcpPort));"
 					}
 				}
-				Transition tr1: opened -> closed {
+				Transition tr1: connected -> unconnected {
 					triggers {
-						<close: ControlPort>
+						<disconnect: controlPort>
 					}
 					action {
 						"/* close read thread */"
 						"etCloseSocket(client);"
+						""
+						"controlPort.disconnected();"
 					}
 				}
-				Transition tr2: cp cp0 -> opened {
+				Transition tr2: cp cp0 -> connected {
 					action {
-						"ControlPort.established();"
+						"controlPort.connected();"
 					}
 				}
-				Transition socketError: cp cp0 -> error {
+				Transition tr7: cp cp0 -> unconnected {
 					cond {
-						"lastError!=0"
+						"hasError()"
 					}
 					action {
-						"ControlPort.error();"
-						"/* handle error */"
+						"controlPort.error();"
 					}
 				}
-				Transition tr3: opened -> opened {
+				Transition tr3: connected -> connected {
 					triggers {
-						<send: PayloadPort>
+						<dataPackage: payloadPort>
 					}
 					action {
-						"/* send payload"
-						"\tout.write(data.getData(),0,data.length);"
-						"*/"
-						"etWriteSocket(client, data->length, data->data);"
+						"setErrorCode(etWriteSocket(client, data->length, data->data));"
+						"if(hasError())"
+						"\tcontrolPort.error();"
+					}
+				}
+				Transition tr4: cp cp1 -> unconnected
+				Transition tr5: cp cp1 -> initError {
+					cond {
+						"hasError()"
+					}
+				}
+				Transition tr6: initError -> initError {
+					triggers {
+						<connect: controlPort>
 					}
 				}
 				ChoicePoint cp0
-				State closed
-				State opened
-				State error
+				ChoicePoint cp1
+				State unconnected
+				State connected
+				State initError {
+					entry {
+						"controlPort.error();"
+					}
+				}
 			}
 		}
 	}
 
 	ProtocolClass PTcpControl {
 		incoming {
-			Message open(data: DTcpControl)
-			Message close()
+			Message connect(data: DTcpControl)
+			Message disconnect()
 		}
 		outgoing {
-			Message established()
+			Message connected()
+			Message disconnected()
 			Message error()
 		}
 	}
 
 	ProtocolClass PTcpPayload {
 		incoming {
-			Message send(data: DTcpPayload)
+			Message dataPackage(data: DTcpPayload)
 		}
 		outgoing {
-			Message receive(data: DTcpPayload)
+			Message dataPackage(data: DTcpPayload)
 		}
 	}
 
@@ -216,7 +277,31 @@ RoomModel room.basic.service.tcp {
 	DataClass DTcpPayload {
 		Attribute connectionId: int32
 		Attribute length: int32
-		Attribute data [ 128 ]: int8
+		Attribute data [ 32 ]: int8
+		
+		Operation getMaxLength() : int32 {
+			"return 32;"
+		}
+		
+		Operation setAsString(value : charPtr){
+			"// used macros: data, length"
+			"int valLength = (strlen(value)+1 > 32)? 32 : strlen(value) + 1;"
+			"memcpy(data, value, valLength);"
+			"data[31] = '\\0';"
+			"length = valLength;"
+		}
+		
+		Operation setData(value : int8 ref, size : int32){
+			"// used macros: data, length"
+			"strncpy(data, value, ((size>32)?32:size));"
+			"length = size;"
+		}
+		
+		Operation getAsString() : charPtr{
+			"// used macros: data"
+			"data[31] = '\\0';"
+			"return data;"
+		}
 	}
 
 	ExternalType etSocketServerData -> "etSocketServerData"

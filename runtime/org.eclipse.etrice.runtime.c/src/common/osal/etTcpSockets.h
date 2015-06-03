@@ -69,7 +69,8 @@ etSocketError;
  */
 
 /**
- * to be called once before working with sockets
+ * to be called before working with sockets.
+ * can be called multiple times, but must be aligned with etCleanupSockets
  */
 etSocketError etInitSockets();
 

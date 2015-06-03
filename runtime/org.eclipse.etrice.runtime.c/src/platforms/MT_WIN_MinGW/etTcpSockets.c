@@ -110,6 +110,7 @@ static void listenerThreadFunc(void* threadData) {
 				"etSocketServer",
 				readThreadFunc,
 				&self->connections[slot]);
+		etThread_start(&self->connections[slot].readThread);
 	}
 
 	/* TODO: if maxConnections is reached this thread terminates.
@@ -141,6 +142,7 @@ etSocketError etCleanupSockets() {
 etSocketServerData* etCreateSocketServerData() {
 	etSocketServerDataImpl* data = malloc(sizeof(etSocketServerDataImpl));
 	memset(data, 0, sizeof(etSocketServerDataImpl));
+	data->data.maxConnections = MAX_CONNECTIONS;
 	return &data->data;
 }
 
@@ -189,6 +191,7 @@ etSocketError etStartListening(etSocketServerData* data, short port) {
 			"etSocketServer",
 			listenerThreadFunc,
 			self);
+	etThread_start(&self->listenerThread);
 
 	return ETSOCKET_OK;
 }
@@ -215,6 +218,7 @@ etSocketError etWriteServerSocket(etSocketServerData* dat, int connection, int s
 
 	while (size>0) {
 		int sent = send(self->connections[connection].socket, ((int8*)data)+offset, size, 0);
+
 		if (sent<=0)
 			return ETSOCKET_ERROR;
 
@@ -286,7 +290,7 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 	self->address.sin_family = host->h_addrtype;
 	self->address.sin_port = htons(port);
 
-	self->socket = socket(AF_INET, SOCK_STREAM, 0);
+	self->socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (self->socket==INVALID_SOCKET)
 		return ETSOCKET_ERROR;
 
@@ -303,6 +307,7 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 			"etSocketConnection",
 			readThreadFunc,
 			self);
+	etThread_start(&self->readThread);
 
 	return ETSOCKET_OK;
 }
@@ -313,6 +318,7 @@ etSocketError etWriteSocket(etSocketConnectionData* dat, int size, const int8* d
 
 	while (size>0) {
 		int sent = send(self->socket, ((int8*)data)+offset, size, 0);
+
 		if (sent<=0)
 			return ETSOCKET_ERROR;
 
