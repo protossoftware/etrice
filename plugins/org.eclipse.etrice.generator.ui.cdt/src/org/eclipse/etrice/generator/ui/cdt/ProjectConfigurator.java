@@ -55,6 +55,9 @@ public class ProjectConfigurator implements IProjectConfigurator {
 		List<CLibraryFileEntry> posixLibraries = new ArrayList<CLibraryFileEntry>();
 		posixLibraries.add(new CLibraryFileEntry("pthread", ICSettingEntry.LOCAL));
 		posixLibraries.add(new CLibraryFileEntry("rt", ICSettingEntry.LOCAL));
+		
+		List<CLibraryFileEntry> mingwLibraries = new ArrayList<CLibraryFileEntry>();
+		mingwLibraries.add(new CLibraryFileEntry("ws2_32", ICSettingEntry.LOCAL));
 
 		ICProjectDescription projectDescription = CoreModel.getDefault().getProjectDescription(project, true);
 		// all build configurations e.g. Debug, Release
@@ -100,6 +103,10 @@ public class ProjectConfigurator implements IProjectConfigurator {
 				if (toolChain == POSIX_TOOLCHAIN) {
 					if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.linker"))
 						addSettings(setting, ICSettingEntry.LIBRARY_FILE, posixLibraries);
+				}
+				if(toolChain == MINGW_TOOLCHAIN){
+					if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.linker"))
+						addSettings(setting, ICSettingEntry.LIBRARY_FILE, mingwLibraries);
 				}
 			}
 		}

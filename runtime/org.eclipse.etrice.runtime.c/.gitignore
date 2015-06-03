@@ -4,3 +4,4 @@ PosixRelease
 MinGWDebug
 MinGWRelease
 src-gen-info
+/WindowsMinGW/
