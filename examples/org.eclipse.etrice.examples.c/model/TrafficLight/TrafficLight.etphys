@@ -14,7 +14,7 @@ PhysicalModel TrafficLight {
 			interval = 100ms
 			prio = 0
 			stacksize = 1024
-			msgblocksize = 32
+			msgblocksize = 64
 			msgpoolsize = 100
 		}
 	}

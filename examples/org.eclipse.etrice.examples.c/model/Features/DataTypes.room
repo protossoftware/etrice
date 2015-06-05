@@ -1,0 +1,37 @@
+RoomModel DataTypes {
+
+	Enumeration EOnOff {
+		Off = 0, // explicit value=0
+		On = 1 // explicit value=1 
+
+	}
+
+	Enumeration EDay {
+		SUN,
+		MON,
+		TUE,
+		WED,
+		THU,
+		FRI,
+		SAT // implicit enumeration 0..6
+
+	}
+
+	ProtocolClass ProtocolClass1
+	{
+		incoming {
+			Message setDay(day: EDay)
+		}
+	}
+	ActorClass ActorClass1{
+		Structure {
+			Attribute day: EDay
+		}
+	}
+	DataClass DataClass1 {
+		Attribute day: EDay
+		Operation setDay(day: EDay){
+			""
+		}
+	}
+}

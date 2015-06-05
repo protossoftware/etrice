@@ -1,0 +1,137 @@
+RoomModel Multiplicity {
+
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	ActorClass ExampleMultiplicity {
+		Structure {
+			ActorRef sender1: Sender
+			ActorRef receiver1: Receiver
+			ActorRef multiSender2 [10]: Sender
+			ActorRef multiReceiver2 [10]: Receiver
+			ActorRef multiSender5 [10]: Sender
+			ActorRef receiver5: Receiver
+			ActorRef multiReceiver5 [3]: Receiver
+			ActorRef receiverMultiPort3: ReceiverMultiPort
+			ActorRef multiSender3 [2]: Sender
+			ActorRef receiverMultiPort5: ReceiverMultiPort
+			ActorRef multiReceiverMultiPort5 [2]: ReceiverMultiPort
+			ActorRef multiSender4 [10]: Sender
+			ActorRef multiReceiverMultiPort4 [5]: ReceiverMultiPort
+			Binding sender1.dataPort and receiver1.dataPort
+			Binding multiSender2.dataPort and multiReceiver2.dataPort
+			Binding multiSender5.dataPort and receiver5.dataPort
+			Binding multiSender5.dataPort and multiReceiver5.dataPort
+			Binding multiSender3.dataPort and receiverMultiPort3.dataPort
+			Binding multiSender5.dataPort and receiverMultiPort5.dataPort
+			Binding multiSender5.dataPort and multiReceiverMultiPort5.dataPort
+			Binding multiSender4.dataPort and multiReceiverMultiPort4.dataPort
+		}
+		Behavior { }
+	}
+
+	ActorClass Sender {
+		Interface {
+			conjugated Port dataPort: PSendData
+		}
+		Structure {
+			external Port dataPort
+			Attribute dataBuffer: DDataBuffer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> SendData
+				Transition tr0: SendData -> ReceivedData {
+					triggers {
+						<receivedData: dataPort>
+					}
+					action {
+						"static int counter = 0;"
+						"counter++;"
+						"printf(\"%d: length=%d, buffer=%s\\n\", counter, data->length, data->buffer);"
+					}
+				}
+				Transition tr1: ReceivedData -> ReceivedData {
+					triggers {
+						<receivedData: dataPort>
+					}
+					action {
+						"static int counter = 0;"
+						"counter++;"
+						"printf(\"second receivedData: %d: length=%d, buffer=%s\\n\", counter, data->length, data->buffer);"
+					}
+				}
+				State SendData {
+					entry {
+						"DDataBuffer buf = {16, \"123456789012345\"};"
+						"dataPort.sendData(&buf);"
+					}
+				}
+				State ReceivedData
+			}
+		}
+	}
+
+	ActorClass Receiver {
+		Interface {
+			Port dataPort: PSendData
+		}
+		Structure {
+			external Port dataPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle
+				Transition tr0: Idle -> Idle {
+					triggers {
+						<sendData: dataPort>
+					}
+					action {
+						"data->buffer[14] = \'x\';"
+						"dataPort.receivedData(data);"
+					}
+				}
+				State Idle
+			}
+		}
+	}
+
+	ActorClass ReceiverMultiPort {
+		Interface {
+			Port dataPort [2]: PSendData
+		}
+		Structure {
+			external Port dataPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Idle
+				Transition tr0: Idle -> Idle {
+					triggers {
+						<sendData: dataPort>
+					}
+					action {
+						"data->buffer[14] = \'x\';"
+						"dataPort[ifitem_index].receivedData(data);"
+						"dataPort.receivedData(data);"
+					}
+				}
+				State Idle
+			}
+		}
+	}
+
+	ProtocolClass PSendData {
+		incoming {
+			Message sendData(data: DDataBuffer)
+		}
+		outgoing {
+			Message receivedData(data: DDataBuffer)
+		}
+	}
+
+	DataClass DDataBuffer {
+		Attribute length: int16
+		Attribute buffer [ 16 ]: char
+	}
+
+}
