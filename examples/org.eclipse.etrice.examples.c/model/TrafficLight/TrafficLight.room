@@ -8,8 +8,8 @@ RoomModel TrafficLight {
 
 	LogicalSystem TrafficLight {
 //		SubSystemRef subSystem: TrafficLightStep1_Test
-//		SubSystemRef subSystem: TrafficLightStep2_SingleTrafficLight
-		SubSystemRef subSystem: TrafficLightStep3_MultipleTrafficLights
+		SubSystemRef subSystem: TrafficLightStep2_SingleTrafficLight
+//		SubSystemRef subSystem: TrafficLightStep3_MultipleTrafficLights
 	}
 
 	SubSystemClass TrafficLightStep1_Test {
@@ -49,9 +49,12 @@ RoomModel TrafficLight {
 		Structure {
 			ActorRef controller: PedestrianTrafficLightController
 			ActorRef headquarters1: TrafficLightHeadquarters
-			ActorRef tlInterface: TrafficLightInterface
+			ActorRef tcpClient: ATcpClient
+			ActorRef ref0: TrafficLightInterface
 			Binding headquarters1.controllers and controller.fct
-			Binding controller.tlInterface and tlInterface.fct
+			Binding ref0.ctrl and tcpClient.controlPort
+			Binding ref0.payload and tcpClient.payloadPort
+			Binding ref0.fct and controller.tlInterface
 		}
 		Behavior { }
 	}
@@ -61,30 +64,36 @@ RoomModel TrafficLight {
 			ActorRef controller [2]: PedestrianTrafficLightController
 			ActorRef headquarters1: TrafficLightHeadquarters
 			ActorRef tlInterface [2]: TrafficLightInterface
+			ActorRef tcpClient [2]: ATcpClient
 			Binding headquarters1.controllers and controller.fct
 			Binding controller.tlInterface and tlInterface.fct
+			Binding tlInterface.ctrl and tcpClient.controlPort
+			Binding tlInterface.payload and tcpClient.payloadPort
 		}
 		Behavior { }
 	}
 
-	ActorClass HierarchicalReplication ["HierarchicalReplication structural hierarchy to combine several actors and replicate them 'en bloc'. It controla 2 traffic lights."] {
+	ActorClass HierarchicalReplication ["HierarchicalReplication structural hierarchy to combine several actors and replicate them 'en bloc'. It controls 2 traffic lights."] {
 		Structure {
-			ActorRef controllerWithInfrastructure [2]: TrafficLightControllerWithInfrastructure
+			ActorRef controllerWithInfrastructure [2]: TrafficLightControllerWithInfrastructure ["This is replicated "]   
 			ActorRef headquarters2: TrafficLightHeadquarters
 			Binding controllerWithInfrastructure.fct and headquarters2.controllers
 		}
 		Behavior { }
 	}
 
-	ActorClass TrafficLightControllerWithInfrastructure ["The TrafficLightControllerWithInfrastructure encapsules the PedestrianTrafficLightController, the TrafficLightInterface and the SocketClient."] {
+	ActorClass TrafficLightControllerWithInfrastructure ["The TrafficLightControllerWithInfrastructure encapsulates the PedestrianTrafficLightController, the TrafficLightInterface and the SocketClient."] {
 		Interface {
 			Port fct: PTrafficLightController
 		}
 		Structure {
 			ActorRef controller: PedestrianTrafficLightController
 			ActorRef tlInterface: TrafficLightInterface
+			ActorRef tcpClient: ATcpClient
 			Binding controller.tlInterface and tlInterface.fct
 			Binding fct and controller.fct
+			Binding tlInterface.ctrl and tcpClient.controlPort
+			Binding tlInterface.payload and tcpClient.payloadPort
 		}
 		Behavior { }
 	}
@@ -222,10 +231,10 @@ RoomModel TrafficLight {
 			StateMachine {
 				Transition init: initial -> Stopped {
 					action {
-						"timeBase = 10;"
+						"timeBase = 100;"
 					}
 				}
-				Transition tr0: Stopped -> tp0 of Standby {
+				Transition tr0: Stopped -> Connecting {
 					triggers {
 						<standby: fct>
 					}
@@ -249,6 +258,11 @@ RoomModel TrafficLight {
 				Transition tr5: Standby -> Stopped {
 					triggers {
 						<stop: fct>
+					}
+				}
+				Transition tr6: Connecting -> tp0 of Standby {
+					triggers {
+						<connected: tlInterface>
 					}
 				}
 				State Stopped {
@@ -318,7 +332,7 @@ RoomModel TrafficLight {
 					}
 					subgraph {
 						Transition tr0: my tpStart -> AllRed
-						Transition tr1: AllRed -> CarGreen {
+						Transition tr1: AllRed -> CarRedYellow {
 							triggers {
 								<timeout: to>
 							}
@@ -353,13 +367,20 @@ RoomModel TrafficLight {
 								<timeout: to>
 							}
 						}
+						Transition tr8: CarRedYellow -> CarGreen {
+							triggers {
+								<timeout: to>
+							}
+						}
 						EntryPoint tpStart
 						ExitPoint tpStandby
 						State AllRed {
 							entry {
 								"tlInterface.setCarRed(1);"
 								"tlInterface.setPedRed(1);"
-								"to.startTimeout(20*timeBase);"
+								"tlInterface.setPedGreen(0);"
+								""
+								"to.startTimeout(10*timeBase);"
 							}
 						}
 						State CarYellow {
@@ -372,6 +393,7 @@ RoomModel TrafficLight {
 						State CarGreen {
 							entry {
 								"tlInterface.setCarRed(0);"
+								"tlInterface.setCarYellow(0);"
 								"tlInterface.setCarGreen(1);"
 							}
 						}
@@ -384,6 +406,7 @@ RoomModel TrafficLight {
 						}
 						State PedGreen {
 							entry {
+								"tlInterface.setPedRed(0);"
 								"tlInterface.setPedGreen(1);"
 								"to.startTimeout(20*timeBase);"
 							}
@@ -391,6 +414,12 @@ RoomModel TrafficLight {
 						State CarYellowBeforeStandby {
 							entry {
 								"tlInterface.setCarGreen(0);"
+								"tlInterface.setCarYellow(1);"
+								"to.startTimeout(10*timeBase);"
+							}
+						}
+						State CarRedYellow {
+							entry {
 								"tlInterface.setCarYellow(1);"
 								"to.startTimeout(10*timeBase);"
 							}
@@ -404,6 +433,11 @@ RoomModel TrafficLight {
 						"to.startTimeout(30*timeBase);"
 					}
 				}
+				State Connecting {
+					entry {
+						"tlInterface.connect();"
+					}
+				}
 			}
 		}
 	}
@@ -411,29 +445,116 @@ RoomModel TrafficLight {
 	ActorClass TrafficLightInterface {
 		Interface {
 			Port fct: PTrafficLightInterface
-			conjugated Port tcpControl: PTcpControl
-			conjugated Port tcpPayload: PTcpPayload
+			conjugated Port ctrl: PTcpControl
+			conjugated Port payload: PTcpPayload
 		}
 		Structure {
 			external Port fct
-			external Port tcpControl
-			external Port tcpPayload
+			external Port ctrl
+			external Port payload
 		}
 		Behavior {
+			Operation sendPayloadString(data: char ref){
+				"DTcpPayload package;"
+				"DTcpPayload_setAsString(&package, data);"
+				"payload.dataPackage(&package);"
+			}
+			Operation sendOnOffCommand(lightString: char ref, status: boolean){
+				"DTcpPayload package;"
+				"strcpy(package.data, lightString);"
+				"if (status==0){"
+				"	strcat(package.data, \"=off\\n\");"
+				"}"
+				"else {"
+				"	strcat(package.data, \"=on\\n\");"
+				"}"
+				"printf(\"package=%s\", package.data);"
+				"package.length = strlen(package.data);"
+				"payload_dataPackage(&package);"
+			}
 			StateMachine {
-				Transition init: initial -> Connecting
+				Transition init: initial -> Disconnected
 				Transition tr0: Connected -> Connected {
 					triggers {
 						<setCarRed: fct>
 					}
+					action {
+						"sendOnOffCommand(\"setCarLightRed\", status);"
+					}
 				}
 				Transition tr1: Connecting -> Connected {
 					triggers {
-						<established: tcpControl>
+						<connected: ctrl>
+					}
+					action {
+						"fct.connected();"
 					}
 				}
-				State Connecting
+				Transition tr2: Disconnected -> Connecting {
+					triggers {
+						<connect: fct>
+					}
+				}
+				Transition tr3: Connected -> Connected {
+					triggers {
+						<setCarYellow: fct>
+					}
+					action {
+						"sendOnOffCommand(\"setCarLightYellow\", status);"
+					}
+				}
+				Transition tr4: Connected -> Connected {
+					triggers {
+						<setCarGreen: fct>
+					}
+					action {
+						"sendOnOffCommand(\"setCarLightGreen\", status);"
+					}
+				}
+				Transition tr5: Connected -> Connected {
+					triggers {
+						<setPedRed: fct>
+					}
+					action {
+						"sendOnOffCommand(\"setPedLightRed\", status);"
+					}
+				}
+				Transition tr6: Connected -> Connected {
+					triggers {
+						<setPedGreen: fct>
+					}
+					action {
+						"sendOnOffCommand(\"setPedLightGreen\", status);"
+					}
+				}
+				Transition tr7: Connected -> Connected {
+					triggers {
+						<dataPackage: payload>
+					}
+					action {
+						"char *pressedRequestButtonString = {\"pressedRequestButton\\n\"};"
+						"int32 len = strlen(pressedRequestButtonString);"
+						"if ( (data->length == len) && memcmp(data->data, \"pressedRequestButton\", len)){"
+						"\tfct.pressedRequestButton();"
+						"}"
+					}
+				}
+				Transition tr8: Connected -> Connected {
+					triggers {
+						<setRequestButtonActive: fct>
+					}
+					action {
+						"sendOnOffCommand(\"setRequestButtonActive\", status);"
+					}
+				}
+				State Connecting {
+					entry {
+						"DTcpControl config = {\"localhost\", 4441};"
+						"ctrl.connect(&config);"
+					}
+				}
 				State Connected
+				State Disconnected
 			}
 		}
 	}
@@ -493,7 +614,7 @@ RoomModel TrafficLight {
 				State Standby {
 					entry {
 						"controllers.standby();"
-						"to.startTimeout(20*10);"
+						"to.startTimeout(200*10);"
 					}
 				}
 				State Running {
@@ -526,13 +647,16 @@ RoomModel TrafficLight {
 
 	ProtocolClass PTrafficLightInterface {
 		incoming {
+			Message connect()
 			Message setCarRed(status: boolean)
 			Message setCarYellow(status: boolean)
 			Message setCarGreen(status: boolean)
 			Message setPedRed(status: boolean)
 			Message setPedGreen(status: boolean)
+			Message setRequestButtonActive(status: boolean)
 		}
 		outgoing {
+			Message connected()
 			Message pressedRequestButton()
 		}
 	}

@@ -106,6 +106,7 @@ public class PedestrianLightWnd extends Frame {
 				// read blocking until socket is disconnected 
 				String cmd;
 				while ((cmd = in.readLine()) != null) {
+					System.out.println("Received Command:" + cmd);
 					dispatchCommand(requestButton, cmd);
 				}
 				statusLine.setText("socket disconnected !");
@@ -122,51 +123,51 @@ public class PedestrianLightWnd extends Frame {
 				
 			} catch (IOException e) {
 				System.err.println(e.toString());
-				System.exit(1);
+				//System.exit(1);
 			}
 		}
 	}
 
 	private void dispatchCommand(Button requestButton, String cmd) {
 		// check carLights
-		if (cmd.equals("carLightRed=on")) {
+		if (cmd.equals("setCarLightRed=on")) {
 			carLights.setRedLight(1);
 		}
-		if (cmd.equals("carLightRed=off")) {
+		if (cmd.equals("setCarLightRed=off")) {
 			carLights.setRedLight(0);
 		}
-		if (cmd.equals("carLightYellow=on")) {
+		if (cmd.equals("setCarLightYellow=on")) {
 			carLights.setYellowLight(1);
 		}
-		if (cmd.equals("carLightYellow=off")) {
+		if (cmd.equals("setCarLightYellow=off")) {
 			carLights.setYellowLight(0);
 		}
-		if (cmd.equals("carLightGreen=on")) {
+		if (cmd.equals("setCarLightGreen=on")) {
 			carLights.setGreenLight(1);
 		}
-		if (cmd.equals("carLightGreen=off")) {
+		if (cmd.equals("setCarLightGreen=off")) {
 			carLights.setGreenLight(0);
 		}
 		
 		// check pedLights
-		if (cmd.equals("pedLightRed=on")) {
+		if (cmd.equals("setPedLightRed=on")) {
 			pedLights.setRedLight(1);
 		}
-		if (cmd.equals("pedLightRed=off")) {
+		if (cmd.equals("setPedLightRed=off")) {
 			pedLights.setRedLight(0);
 		}
-		if (cmd.equals("pedLightGreen=on")) {
+		if (cmd.equals("setPedLightGreen=on")) {
 			pedLights.setGreenLight(1);
 		}
-		if (cmd.equals("pedLightGreen=off")) {
+		if (cmd.equals("setPedLightGreen=off")) {
 			pedLights.setGreenLight(0);
 		}
 
 		// check button
-		if (cmd.equals("requestButton=on")) {
+		if (cmd.equals("setRequestButtonActive=on")) {
 			requestButton.setEnabled(true);
 		}
-		if (cmd.equals("requestButton=off")) {
+		if (cmd.equals("setRequestButtonActive=off")) {
 			requestButton.setEnabled(false);
 		}
 		carLights.repaint();
