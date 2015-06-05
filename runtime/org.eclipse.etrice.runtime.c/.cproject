@@ -9,7 +9,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/MinGWDebug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/WindowsMinGW"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
@@ -48,7 +48,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -62,7 +62,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/PosixDebug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/LinuxPosix"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
@@ -103,7 +103,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_WIN_MinGW|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/MT_WIN_MinGW|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

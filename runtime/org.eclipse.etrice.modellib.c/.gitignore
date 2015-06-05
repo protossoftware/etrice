@@ -1,7 +1,5 @@
-PosixDebug
-PosixRelease
-MinGWDebug
-MinGWRelease
+WindowsMinGW
+LinuxPosix
 
 src-gen/*
 !src-gen/readme.txt

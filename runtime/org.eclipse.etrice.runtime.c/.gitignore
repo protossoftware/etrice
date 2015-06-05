@@ -1,7 +1,4 @@
 bin
-PosixDebug
-PosixRelease
-MinGWDebug
-MinGWRelease
 src-gen-info
-/WindowsMinGW/
+WindowsMinGW
+LinuxPosix
