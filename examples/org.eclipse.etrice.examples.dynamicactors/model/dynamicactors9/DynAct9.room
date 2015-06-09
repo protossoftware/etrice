@@ -1,0 +1,121 @@
+RoomModel org.eclipse.etrice.examples.dynamicactors9 {
+
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+
+	LogicalSystem LogSys1 {
+		SubSystemRef subSysRef1: SubSysClass1
+	}
+
+	SubSystemClass SubSysClass1 {
+		ActorRef actorRef1: PingPongTop
+		ActorRef timingService: ATimingService
+		LayerConnection ref actorRef1 satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	ActorClass PingPongTop {
+		Structure {
+			ActorRef container: Container
+		}
+		Behavior { }
+	}
+	
+	ActorClass Container {
+		Structure {
+			optional ActorRef pp: PingPong
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Running { }
+				State Running {
+					entry {
+						"pp.createOptionalActor(\"PingPong\", getThread());"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass PingPong {
+		Structure {
+			ActorRef receiver: Receiver
+			ActorRef sender: Sender
+			Binding receiver.sender and sender.receiver
+		}
+		Behavior { }
+	}
+	ActorClass Sender {
+		Interface {
+			conjugated Port receiver: PingPongProtocol
+		}
+		Structure {
+			external Port receiver
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> SendingPing { }
+				Transition tr0: SendingPing -> ReceivedPong {
+					triggers {
+						<pong: receiver>
+					}
+				}
+				State SendingPing {
+					entry {
+						"receiver.ping();"
+					}
+				}
+				State ReceivedPong {
+					entry {
+						"System.out.println(\"Done, enter \'quit\' to exit\");"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Receiver {
+		Interface {
+			Port sender: PingPongProtocol
+		}
+		Structure {
+			external Port sender
+			SAP timing: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> WaitingForPing { }
+				Transition tr0: WaitingForPing -> WaitingForAWhile {
+					triggers {
+						<ping: sender>
+					}
+				}
+				Transition tr1: WaitingForAWhile -> SentPong {
+					triggers {
+						<timeout: timing>
+					}
+				}
+				State WaitingForPing
+				State WaitingForAWhile {
+					entry {
+						"timing.startTimeout(1000);"
+					}
+				}
+				State SentPong {
+					entry {
+						"sender.pong();"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

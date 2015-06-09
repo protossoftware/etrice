@@ -15,7 +15,7 @@
 		<attribute name="source" default="default" />
 		<sequential>
 			<delete file="${target}/@{name}.zip" />
-			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="pom.xml,bin/**,Debug/**,Release/**,*.cspec,jgen_*,target/**,MinGWDebug/**,PosixDebug/**"  />
+			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="pom.xml,bin/**,Debug/**,Release/**,*.cspec,jgen_*,target/**,WindowsMinGW/**,LinuxPosix/**"  />
 		</sequential>
 	</macrodef>
 
@@ -24,23 +24,13 @@
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.java" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.c" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.c" />
-		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.cpp" />
-		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.cpp" />
 		
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.java" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.template.c" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors1" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors2" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors3" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors4" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors5" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors6" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors7" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors8" />
-		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors9" />
+		<!--<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />-->
+		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors" />
 	</target>
 
 </project>

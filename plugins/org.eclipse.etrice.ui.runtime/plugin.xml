@@ -6,6 +6,26 @@
       <category
             id="org.eclipse.etrice.core.ui.wizardCategory"
             name="eTrice"/>
+      <category
+            id="org.eclipse.etrice.core.ui.wizardCCategory"
+            name="C"
+            parentCategory="org.eclipse.etrice.core.ui.wizardCategory">
+      </category>
+      <category
+            id="org.eclipse.etrice.core.ui.wizardJavaCategory"
+            name="Java"
+            parentCategory="org.eclipse.etrice.core.ui.wizardCategory">
+      </category>
+      <category
+            id="org.eclipse.etrice.core.ui.libraryCCategory"
+            name="Libraries"
+            parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory">
+      </category>
+      <category
+            id="org.eclipse.etrice.core.ui.libraryJavaCategory"
+            name="Libraries"
+            parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory">
+      </category>
    </extension>
 
 	<!-- ========= org.eclipse.etrice.runtime.c ========= -->
@@ -13,7 +33,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" 
 			name="eTrice C Runtime" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory/org.eclipse.etrice.core.ui.libraryCCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>The C Runtime required by eTrice C projects</description>
@@ -30,7 +50,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" 
 			name="eTrice C ModelLib" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory/org.eclipse.etrice.core.ui.libraryCCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>A ROOM Model Library for C with useful services</description>
@@ -47,46 +67,12 @@
 	  </example>
 	</extension>   
 
-	<!-- ========= org.eclipse.etrice.runtime.cpp ========= --><!--
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" 
-			name="eTrice C++ Runtime" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>The C++ Runtime required by eTrice C++ projects</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPRuntimeWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.runtime.cpp" contentURI="contents/org.eclipse.etrice.runtime.cpp.zip" description="eTrice Runtime for C++"/>
-	  </example>
-	</extension> -->   
-
-	<!-- ========= org.eclipse.etrice.modellib.cpp ========= --><!--
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" 
-			name="eTrice C++ ModelLib" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>A ROOM Model Library for C++ with useful services</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.NewCPPModelLibWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.modellib.cpp" contentURI="contents/org.eclipse.etrice.modellib.cpp.zip" description="eTrice ModelLib for C++"/>
-	  </example>
-	</extension>   -->
-
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" 
 			name="eTrice Java Runtime" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory/org.eclipse.etrice.core.ui.libraryJavaCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>The Java Runtime required by eTrice Java projects</description>
@@ -103,7 +89,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" 
 			name="eTrice Java ModelLib" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.wizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory/org.eclipse.etrice.core.ui.libraryJavaCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>A ROOM Model Library for Java with useful services</description>
@@ -120,18 +106,13 @@
 	  </example>
 	</extension>   
 
-	<extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.etrice.core.ui.exampleWizardCategory"
-            name="eTrice Examples and Tutorials"/>
-	</extension>
 
 	<!-- ========= org.eclipse.etrice.tutorials.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard" 
 			name="eTrice Java Tutorials" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice Java tutorials accompanying the online help</description>
@@ -152,13 +133,44 @@
    </projectDescriptor>
 	  </example>
 	</extension>   
+	
+	<!-- ========= org.eclipse.etrice.examples.java ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaExamplesWizard" 
+			name="eTrice Java Examples" 
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>eTrice Java examples</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.etrice.ui.runtime.NewJavaExamplesWizard" pageImage="icons/genproject.gif">
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.modellib.java.zip"
+         description="eTrice ModelLib for Java"
+         name="org.eclipse.etrice.modellib.java">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.runtime.java.zip"
+         description="eTrice Runtime for Java"
+         name="org.eclipse.etrice.runtime.java">
+   </projectDescriptor>
+   <projectDescriptor
+         contentURI="contents/org.eclipse.etrice.examples.dynamicactors.zip"
+         description="Dynamic Actors Examples"
+         name="org.eclipse.etrice.examples.dynamicactors">
+   </projectDescriptor>
+	  </example>
+	</extension>   
 
 	<!-- ========= org.eclipse.etrice.tutorials.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" 
 			name="eTrice C Tutorials" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
@@ -185,7 +197,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.ExamplesCWizard" 
 			name="eTrice C Examples" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
@@ -212,7 +224,7 @@
 		<wizard	id="org.eclipse.etrice.ui.runtime.TemplateCWizard" 
 			name="eTrice C Template Project" 
 			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
@@ -234,7 +246,7 @@
 	  </example>
 	</extension>          
 
-	<!-- ========= org.eclipse.etrice.tutorials.simulators.trafficlight ========= -->
+	<!-- ========= org.eclipse.etrice.tutorials.simulators.trafficlight ========= 
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewTrafficlightlWizard" 
 			name="eTrice Trafficlight for Tutorials" 
@@ -259,159 +271,6 @@
          name="org.eclipse.etrice.runtime.java">
    </projectDescriptor>
 	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors1 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_DynamicActors1" 
-			name="eTrice Dynamic Actors Example 1" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>introductory example for dynamic actors</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_DynamicActors1" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors1" contentURI="contents/org.eclipse.etrice.examples.dynamicactors1.zip" description="Dynamic Actors Example 1"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors2 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors2" 
-			name="eTrice Dynamic Actors Example 2" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>massive construction and destruction of dynamic actors</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors2" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors2" contentURI="contents/org.eclipse.etrice.examples.dynamicactors2.zip" description="Dynamic Actors Example 2"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors3 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" 
-			name="eTrice Dynamic Actors Example 3" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>replicated dynamic actors</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors3" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors3" contentURI="contents/org.eclipse.etrice.examples.dynamicactors3.zip" description="Dynamic Actors Example 3"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors4 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors4" 
-			name="eTrice Dynamic Actors Example 4" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>optional actor with access from level above</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors4" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors4" contentURI="contents/org.eclipse.etrice.examples.dynamicactors4.zip" description="Dynamic Actors Example 4"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors5 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors5" 
-			name="eTrice Dynamic Actors Example 5" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>dynamic actor with external end port</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors5" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors5" contentURI="contents/org.eclipse.etrice.examples.dynamicactors5.zip" description="Dynamic Actors Example 5"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors6 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors6" 
-			name="eTrice Dynamic Actors Example 6" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>nested optional actor</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors6" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors6" contentURI="contents/org.eclipse.etrice.examples.dynamicactors6.zip" description="Dynamic Actors Example 6"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors7 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors7" 
-			name="eTrice Dynamic Actors Example 7" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>direct communication between dynamic actors</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors7" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors7" contentURI="contents/org.eclipse.etrice.examples.dynamicactors7.zip" description="Dynamic Actors Example 7"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors8 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors8" 
-			name="eTrice Dynamic Actors Example 8" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>persistence test for dynamic actors</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors8" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors8" contentURI="contents/org.eclipse.etrice.examples.dynamicactors8.zip" description="Dynamic Actors Example 8"/>
-	  </example>
-	</extension>   
-
-	<!-- ========= org.eclipse.etrice.examples.dynamicactors9 ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.Example_dynamicactors9" 
-			name="eTrice Dynamic Actors Example 9" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.etrice.core.ui.exampleWizardCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>dynamic actor using SAP</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="org.eclipse.etrice.ui.runtime.Example_dynamicactors9" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.etrice.examples.dynamicactors9" contentURI="contents/org.eclipse.etrice.examples.dynamicactors9.zip" description="Dynamic Actors Example 9"/>
-	  </example>
-	</extension>   
+	</extension>   -->
 
 </plugin>

@@ -1,0 +1,1 @@
+This directory is an eTrice directory used for logging e.g. MSC.

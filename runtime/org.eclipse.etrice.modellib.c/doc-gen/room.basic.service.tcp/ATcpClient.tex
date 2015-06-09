@@ -1,0 +1,76 @@
+\level{2}{ATcpClient}
+
+
+\level{3}{Ports}
+\begin{tabular}[ht]{|l|l|l|l|l|p{5cm}|}
+\hline
+\textbf{Name} & \textbf{Protocol} & \textbf{Type} & \textbf{Kind} & \textbf{Multiplicity} & \textbf{Description}\\
+\hline
+controlPort & PTcpControl & reg. & external & 1 & \\
+\hline
+payloadPort & PTcpPayload & reg. & external & 1 & \\
+\hline
+\end{tabular}
+
+\level{3}{Behavior}
+\level{4}{Top Level}
+
+\begin{par}
+
+\end{par}
+
+
+\level{3}{Attributes}
+\begin{tabular}[ht]{|l|l|p{8cm}|}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Description}\\
+\hline
+lastError & int32 & \\
+\hline
+payload & DTcpPayload & \\
+\hline
+client & etSocketConnectionData & \\
+\hline
+\end{tabular}
+
+\level{3}{Operations}
+\begin{tabular}[ht]{|l|l|}
+\hline		
+	Name: & ATcpClient\\
+	\hline
+	ReturnType: &  void\\
+	\hline
+	Arguments: & \\
+	\hline
+\end{tabular}
+\newline\newline\newline
+\begin{tabular}[ht]{|l|l|}
+\hline		
+	Name: & ATcpClient\\
+	\hline
+	ReturnType: &  void\\
+	\hline
+	Arguments: & \\
+	\hline
+\end{tabular}
+\newline\newline\newline
+\begin{tabular}[ht]{|l|l|}
+\hline		
+	Name: & hasError\\
+	\hline
+	ReturnType: &  boolean\\
+	\hline
+	Arguments: & \\
+	\hline
+\end{tabular}
+\newline\newline\newline
+\begin{tabular}[ht]{|l|l|}
+\hline		
+	Name: & setErrorCode\\
+	\hline
+	ReturnType: &  void\\
+	\hline
+	Arguments: & value:int32\\
+	\hline
+\end{tabular}
+\newline\newline\newline

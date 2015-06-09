@@ -20,47 +20,32 @@
    
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.etrice.core.ui.wizardCategory"
-            name="eTrice">
-      </category>
       <wizard
-            category="org.eclipse.etrice.core.ui.wizardCategory"
+            category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
             class="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
             icon="icons/NewETriceProject.gif"
-            id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
+            id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizardJava"
+            name="New Set of eTrice Models">
+      </wizard>
+      <wizard
+            category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
+            class="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
+            icon="icons/NewETriceProject.gif"
+            id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizardC"
             name="New Set of eTrice Models">
       </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.etrice.core.ui.wizardCategory"
-            name="eTrice"/>
       <wizard
             id="org.eclipse.etrice.generator.ui.wizard.EmptyProjectWizard"
-            name="Empty eTrice Java Project"
+            name="eTrice Java Template Project"
             class="org.eclipse.etrice.generator.ui.wizard.EmptyProjectWizard"
-            category="org.eclipse.etrice.core.ui.wizardCategory"
+            category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
             project="true"
             icon="icons/NewETriceProject.gif">
          <description>Create an empty Java plug-in project with eTrice dependencies</description>
          <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.etrice.core.ui.wizardCategory"
-            name="eTrice">
-      </category>
-      <wizard
-            category="org.eclipse.etrice.core.ui.wizardCategory"
-            class="org.eclipse.etrice.generator.ui.wizard.MappingWizard"
-            hasPages="true"
-            icon="icons/NewETriceProject.gif"
-            id="org.eclipse.etrice.generator.ui.MappingWizard"
-            name="eTrice Physical Mapping Wizard">
       </wizard>
    </extension>
 
