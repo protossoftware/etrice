@@ -13,7 +13,9 @@
 .ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-10{ font-family: sans-serif;}
+.ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{font-size:243%; font-family: sans-serif;}
+.ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
@@ -39,6 +41,7 @@
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
+.ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12{font-size:120%; font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
@@ -52,6 +55,8 @@
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
+.ec-lmss-12{ font-family: sans-serif;}
+.ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
@@ -78,6 +83,22 @@
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
+.ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
+.ec-lmssbx-10x-x-120{font-size:120%; font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-120{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
@@ -104,6 +125,8 @@
 .ec-lmss-9{ font-family: sans-serif;}
 .ec-lmss-9{ font-family: sans-serif;}
 .ec-lmss-9{ font-family: sans-serif;}
+.ec-lmss-9{ font-family: sans-serif;}
+.ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
@@ -130,7 +153,9 @@
 .ec-lmtt-9{ font-family: monospace;}
 .ec-lmtt-9{ font-family: monospace;}
 .ec-lmtt-9{ font-family: monospace;}
+.ec-lmtt-9{ font-family: monospace;}
 .ec-lmss-8x-x-62{font-size:49%; font-family: sans-serif;}
+.ec-lmss-8x-x-62{ font-family: sans-serif;}
 .ec-lmss-8x-x-62{ font-family: sans-serif;}
 .ec-lmss-8x-x-62{ font-family: sans-serif;}
 .ec-lmss-8x-x-62{ font-family: sans-serif;}
@@ -156,6 +181,8 @@
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
+.ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
@@ -310,6 +337,7 @@ div.array {text-align:center;}
 div.lstlisting{font-family: monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
 div.lstinputlisting{ font-family: monospace; white-space: nowrap; }
 .lstinputlisting .label{margin-right:0.5em;}
+table.multicols { width:100%; margin-left:1em; margin-top:1em; margin-bottom:1em; }
 span#textcolor1{color:rgb(0,0,235)}
 span#textcolor2{color:rgb(0,0,235)}
 span#textcolor3{color:rgb(0,0,235)}

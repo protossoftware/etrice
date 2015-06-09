@@ -4,321 +4,2432 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Architecture</title> 
+<head><title>ROOMLanguage</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2014-11-24 19:01:00" /> 
+<meta name="date" content="2015-06-09 15:48:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 2--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse32.html" >next</a>] [<a 
 href="etrice-docch7.html" >prev</a>] [<a 
 href="etrice-docch7.html#tailetrice-docch7.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse31.html">tail</a>] [<a 
 href="etrice-docch7.html#etrice-docse31.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">7.1   </span> <a 
- id="x40-1750007.1"></a>Architecture</h3>
-<!--l. 3--><p class="noindent" >The basic components of eTrice are depicted in the following diagram.
-</p><!--l. 5--><p class="noindent" ><img 
-src="images/200-components.jpg" alt="PIC"  
- />
-</p><!--l. 7--><p class="noindent" >Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent
-sections.
-</p><!--l. 10--><p class="noindent" >
+ id="x40-1750007.1"></a>ROOMLanguage</h3>
+<!--l. 3--><p class="noindent" >Real Time Object Oriented Modeling (ROOM) is a language ...
+</p><!--l. 5--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.1.1   </span> <a 
- id="x40-1760007.1.1"></a>Editor and Generator Components</h4>
-     <ul class="itemize1">
-     <li class="itemize">core
-         <ul class="itemize2">
-         <li class="itemize">core.common is an Xtext based language which serves as a base for other eTrice languages. It consists
-         of the plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.common </span>and <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.common.ui</span>. The
-         base grammar defines recurring items like numbers with literals, annotations and the like.
-         </li>
-         <li class="itemize">core.fsm is an Xtext based language that defines state machines in an abstract way. It consists of the
-         plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.fsm </span>and <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.fsm.ui</span>. The FSM language
-         is abstract and has to be embedded in a model that defines containers for the state machine with interface
-         items (e.g. ROOM ports or Franca interfaces) and messages. The ROOM grammar of eTrice is derived
-         from this grammar.
-         </li>
-         <li class="itemize">core.room
-         is an Xtext based language called ROOM. It consists of the plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.room</span>
-         and <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.room.ui</span>. ROOM is the basic modeling language of eTrice.
+ id="x40-1760007.1.1"></a>LogicalModel</h4>
+<!--l. 6--><p class="noindent" >The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can
+be mapped on any PhysicalModel and its elements...
+</p><!--l. 10--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1770007.1.1"></a>ActorClass</h5>
+<!--l. 11--><p class="noindent" ><a 
+ id="ref:ActorClass"></a>
+</p><!--l. 13--><p class="noindent" >The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and
+thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined
+by a finite state machine.
                                                                                             
                                                                                             
-         </li>
-         <li class="itemize">core.config      is      an      Xtext      based      language      called      Config.      It      consists      of
-         the plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.config </span>and <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.config.ui</span>. Config
-         is a language designed for the data configuration of model
-         </li>
-         <li class="itemize">core.etphys                                                        is                                                        an
-         Xtext based language called etPhys. It consists of the plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etphys </span>and
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etphys.ui</span>. etPhys is a language designed for the description of physical
-         systems onto which the logical ROOM systems are deployed.
-         </li>
-         <li class="itemize">core.etmap      is      an      Xtext      based      language      called      etMap.      It      consists      of
-         the plug-ins <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etmap </span>and <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etmap.ui</span>. etMap is
-         a language designed for the mapping of logical to physical systems.
-         </li>
-         <li class="itemize">core.genmodel.fsm  is  an  EMF  based  aggregation  layer  for  finite  state  machines.  It  consists  of  the
-         plugin  <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.genmodel.fsm</span>.  A  <span 
-class="ec-lmtt-10">ModelComponent </span>can  be  transformed  into  a
-         <span 
-class="ec-lmtt-10">ExpandedModelComponent </span>which is an explicit version of the state machine with all the inherited items
-         contained.
-         </li>
-         <li class="itemize">core.genmodel  is  an  EMF  based  aggregation  layer  for  Room  models.  It  consists  of  the  plugin
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.genmodel</span>. A Room model can be transformed into a genmodel which allows
-         easy access to implicit relations of the Room model.</li></ul>
-     </li>
-     <li class="itemize">ui
-         <ul class="itemize2">
-         <li class="itemize">textual
-             <ul class="itemize3">
-             <li class="itemize">fsm.ui                                                                                                                    is
-             the ui counterpart of core.fsm. It consists of the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.fsm.ui</span>. This
-             plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the
-             FSM language.
-             </li>
-             <li class="itemize">room.ui             is             the             ui             counterpart             of             core.room.
-             It consists of the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.room.ui</span>. This plug-in realizes IDE concepts
-             like content assist, error markers and navigation by hyper links for the Room language.
-             </li>
-             <li class="itemize">config.ui                                    is                                    the                                    ui
-             counterpart of core.config. It consists of the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.config.ui</span>. This
-             plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the
-             Config language.
-             </li>
-             <li class="itemize">etphys.ui                                   is                                   the                                   ui
-             counterpart of core.etphys. It consists of the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etphys.ui</span>. This
-             plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the
-             etPhys language.
-             </li>
-             <li class="itemize">etmap.ui    is    the    ui    counterpart    of    core.etmap.    It    consists    of    the    plug-in
-             <span 
-class="ec-lmtt-10">org.eclipse.etrice.core.etmap.ui</span>. This plug-in realizes IDE concepts like content assist, error
-             markers and navigation by hyper links for the etPhys language.</li></ul>
-         </li>
-         <li class="itemize">graphical
-             <ul class="itemize3">
-             <li class="itemize">ui.common.base  is  a  set  of  common  code  for  the  diagram  editors.  It  consists  of  the  plug-in
-             <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.common.base</span>. It depends only on the FSM part but not on ROOM.
-             </li>
-             <li class="itemize">ui.common  is  a  set  of  common  code  for  the  two  diagram  editors.  It  consists  of  the  plug-in
-             <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.common</span>.
+</p><!--l. 37--><p class="noindent" ><a 
+ id="x40-177001r1"></a></p><!--l. 37--><div class="longtable"> <table id="TBL-17" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-17-1g"><col 
+id="TBL-17-1" /><col 
+id="TBL-17-2" /><col 
+id="TBL-17-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-17-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-17-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-1-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-2-1"  
+class="td11"> <div class="multirow"><!-- rows=9 -->
+Contains:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorRef">ActorRef</a>            </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-2-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >An ActorRef ...description                                                                       </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Port">Port</a>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-3-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an ActorClass.
+  It  provides  strong  decoupling  of  ActorClasses  from  each  other,  thus  enabling
+  easy  testability,  reusability  and  deployment  of  Actors  to  different  threads  or
+  nodes.description                                                                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-4-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SAP">SAP</a>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-4-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >An SAP ....description                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-5-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPP">SPP</a>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-5-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >An SPP ... description                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-6-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Binding">Binding</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-6-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >A Binding connects two Ports with each otherdescription                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-7-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LayerConnection">LayerConnection</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-7-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >A LayerConnection ... description                                                              </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-8-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-8-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Attribute">Attribute</a>           </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-8-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass,
+  ...)description                                                                                      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-9-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-9-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Operation">Operation</a>          </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-9-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >An  Operation  is  a  member  function  of  a  class  (ActorClass,  ProtocolClass,
+  DataClass, ...)description                                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-10-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-10-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:StateMachine">StateMachine</a>     </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-10-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >A StateMachine describes the state based, event driven behavior of an ActorClass  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-11-1"  
+class="td11"> Uses:       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-11-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Inheritance">Inheritance</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-11-3"  
+class="td11">
+ <!--l. 37--><p class="noindent" >Inheritance bla                                                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-12-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-13-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-14-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-15-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-17-16-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-17-16-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-17-16-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 56--><p class="noindent" ><a 
+ id="x40-177002r2"></a></p><!--l. 56--><div class="longtable"> <table id="TBL-18" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-18-1g"><col 
+id="TBL-18-1" /><col 
+id="TBL-18-2" /><col 
+id="TBL-18-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-18-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-18-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                       </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-1-3"  
+class="td11">
+ <!--l. 56--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-1"  
+class="td11"> Typecasts:        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorRef">ActorRef</a>                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-2-3"  
+class="td11">
+ <!--l. 56--><p class="noindent" >An ActorRef ...description                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalModel">LogicalModel</a>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-3-3"  
+class="td11">
+ <!--l. 56--><p class="noindent" >The LogicalModel describes the logical structure and behavior of a
+  ROOM application. The LogicalModel an its elements can be mapped
+  on any PhysicalModel and its elements...                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-1"  
+class="td11"> Is edited by:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-4-3"  
+class="td11">
+ <!--l. 56--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-9-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 60--><p class="noindent" >some more about ActorClass, graphical and textual notation, concepts, ...
+</p><!--l. 63--><p class="noindent" ><span 
+class="ec-lmssbx-10">Example </span><br 
+class="newline" /><span 
+class="ec-lmssbx-10">Graphical Notation </span><br 
+class="newline" /><img 
+src="images/300-SimpleActorClassStructure.png" alt="PIC"  
+ /> <br 
+class="newline" /><span 
+class="ec-lmssbx-10">Textual Notation </span><br 
+class="newline" /></p><!--l. 71-->
+<div class="lstlisting" id="listing-66"><span class="label"><a 
+ id="x40-177003r1"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SimpleActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Interface</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177005r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">endPort1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PSimpleProtocolClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177007r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">external</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">endPort1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177009r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">internalPort2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PSimpleProtocolClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177011r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actorRef1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actorRef2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ActorClass2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177013r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Binding</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actorRef1</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">port2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actorRef2</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">port1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Binding</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">internalPort2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">actorRef1</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">port1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177015r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Behavior</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177017r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">StateMachine</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177018r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">State1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177019r17"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">State1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177020r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177021r19"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x40-177022r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span>
                                                                                             
                                                                                             
-             </li>
-             <li class="itemize">ui.commands  encapsulates  some  commands  related  to  the  navigation  between  eTrice  editors.  It
-             consists of the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.commands</span>.
-             </li>
-             <li class="itemize">ui.structure  is  the  Graphiti  based  editor  for  the  Actor  structure.  It  consists  of  the  plug-in
-             <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.structure</span>.
-             </li>
-             <li class="itemize">ui.behavior.fsm is implementing the major part for the graphical state machine editor. It consists of
-             the plug-in <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.behavior.fsm</span>. All property dialogs are handled in an abstract
-             way using a factory.
-             </li>
-             <li class="itemize">ui.behavior  is  the  Graphiti  based  editor  for  the  Actor  behavior.  It  consists  of  the  plug-in
-             <span 
-class="ec-lmtt-10">org.eclipse.etrice.ui.behavior</span>. It utilizes the ui.behavior.fsm and provides concrete property
-             dialogs.</li></ul>
-         </li></ul>
-     </li>
-     <li class="itemize">generators
-         <ul class="itemize2">
-         <li class="itemize">generator.fsm is a set of general classes and language independent parts of all generators. It consists of
-         the plug-in <span 
-class="ec-lmsso-10">org.eclipse.etrice.generator.fsm</span>. It depends only on FSM but not on ROOM.
-         </li>
-         <li class="itemize">generator is a set of general classes and language independent parts of all generators. It consists of the
-         plug-in <span 
-class="ec-lmsso-10">org.eclipse.etrice.generator</span>.
-         </li>
-         <li class="itemize">generator.c   is   the   generator   for   the   ANSI-C   target   language.   It   consists   of   the   plug-in
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.generator.c</span>.
-         </li>
-         <li class="itemize">generator.cpp   is   the   generator   for   the   C++   target   language.   It   consists   of   the   plug-in
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.generator.cpp</span>.
-         </li>
-         <li class="itemize">generator.java   is   the   generator   for   the   Java   target   language.   It   consists   of   the   plug-in
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.generator.java</span>.
-         </li>
-         <li class="itemize">generator.doc   is   the   generator   for   the   model   documentation.   It   consists   of   the   plug-in
-         <span 
-class="ec-lmtt-10">org.eclipse.etrice.generator.doc</span>.</li></ul>
-     </li></ul>
-<!--l. 107--><p class="noindent" >
+</div>
+<!--l. 94--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1780007.1.1"></a>ActorRef</h5>
+<!--l. 95--><p class="noindent" ><a 
+ id="ref:ActorRef"></a>
+</p><!--l. 97--><p class="noindent" >An ActorRef ...description
+</p><!--l. 109--><p class="noindent" ><a 
+ id="x40-178001r3"></a></p><!--l. 109--><div class="longtable"> <table id="TBL-19" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-19-1g"><col 
+id="TBL-19-1" /><col 
+id="TBL-19-2" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-19-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-19-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Properties</span></div></td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-2-1"  
+class="td
+11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;multiplicity  </td><td  style="white-space:wrap; text-align:left;" id="TBL-19-2-2"  
+class="td11">
+ <!--l. 109--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-3-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-4-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-5-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-6-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-19-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-19-7-1"  
+class="td11">               </td><td  style="white-space:wrap; text-align:left;" id="TBL-19-7-2"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 124--><p class="noindent" ><a 
+ id="x40-178002r4"></a></p><!--l. 124--><div class="longtable"> <table id="TBL-20" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-20-1g"><col 
+id="TBL-20-1" /><col 
+id="TBL-20-2" /><col 
+id="TBL-20-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-20-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-20-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-20-1-3"  
+class="td11">
+ <!--l. 124--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-2-1"  
+class="td11"> Is of type:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-20-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-20-2-3"  
+class="td11">
+ <!--l. 124--><p class="noindent" >The actor is the basic structural building block for building systems with ROOM.
+  An actor can be refined hierarchically and thus can be of arbitrarily large scope.
+  Ports define the interface of an actor. An actor can also have a behavior usually
+  defined by a finite state machine.                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-20-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-20-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-20-7-2"  
+class="td11">              </td><td  style="white-space:wrap; text-align:left;" id="TBL-20-7-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 148--><p class="noindent" ><a 
+ id="x40-178003r5"></a></p><!--l. 148--><div class="longtable"> <table id="TBL-21" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-21-1g"><col 
+id="TBL-21-1" /><col 
+id="TBL-21-2" /><col 
+id="TBL-21-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-21-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-21-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                       </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-1-3"  
+class="td11">
+ <!--l. 148--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-2-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-2-3"  
+class="td11">
+ <!--l. 148--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemClass">SubSystemClass</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-3-3"  
+class="td11">
+ <!--l. 148--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It
+  instantiates the Actor instance tree instance of the application ...
+  </p><!--l. 148--><p class="noindent" >Actor instance tree example:                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-4-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is edited by:</div>      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse32.html#ref:ActorRefPropertyDialog">ActorRefPropertyDialog</a>   </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-4-3"  
+class="td11">
+ <!--l. 148--><p class="noindent" >A Dialog to edit structural reference of an ActorRef.                       </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-5-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-5-3"  
+class="td11">
+ <!--l. 148--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-9-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-10-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-10-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-21-10-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 154--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1790007.1.1"></a>Attribute</h5>
+<!--l. 155--><p class="noindent" ><a 
+ id="ref:Attribute"></a>
+</p><!--l. 157--><p class="noindent" >An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description
+</p><!--l. 170--><p class="noindent" ><a 
+ id="x40-179001r6"></a></p><!--l. 170--><div class="longtable"> <table id="TBL-22" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-22-1g"><col 
+id="TBL-22-1" /><col 
+id="TBL-22-2" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-22-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-22-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Properties</span></div></td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-2-1"  
+class="td
+11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;defaultValueLiteral  </td><td  style="white-space:wrap; text-align:left;" id="TBL-22-2-2"  
+class="td11">
+ <!--l. 170--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-3-1"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;size                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-22-3-2"  
+class="td11">
+ <!--l. 170--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-4-1"  
+class="td11">                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-5-1"  
+class="td11">                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-6-1"  
+class="td11">                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-7-1"  
+class="td11">                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-8-1"  
+class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-22-8-2"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 185--><p class="noindent" ><a 
+ id="x40-179002r7"></a></p><!--l. 185--><div class="longtable"> <table id="TBL-23" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-23-1g"><col 
+id="TBL-23-1" /><col 
+id="TBL-23-2" /><col 
+id="TBL-23-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-23-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-23-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-23-1-3"  
+class="td11">
+ <!--l. 185--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-2-1"  
+class="td11"> Is of type:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:DataType">DataType</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-23-2-3"  
+class="td11">
+ <!--l. 185--><p class="noindent" >is abstractdescription                                                                             </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-7-2"  
+class="td11">              </td><td  style="white-space:wrap; text-align:left;" id="TBL-23-7-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 202--><p class="noindent" ><a 
+ id="x40-179003r8"></a></p><!--l. 202--><div class="longtable"> <table id="TBL-24" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-24-1g"><col 
+id="TBL-24-1" /><col 
+id="TBL-24-2" /><col 
+id="TBL-24-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-24-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-24-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-24-1-3"  
+class="td11">
+ <!--l. 202--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-24-2-3"  
+class="td11">
+ <!--l. 202--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:DataClass">DataClass</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-24-3-3"  
+class="td11">
+ <!--l. 202--><p class="noindent" >A DataClass ...description                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-4-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-24-4-3"  
+class="td11">
+ <!--l. 202--><p class="noindent" >A  ProtocolClass  contains  the  Interface  specification  for  a  Port.  It
+  can provide one of three different CommunicationTypes (eventdriven,
+  datadriven, sync).description                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-9-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-9-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-24-9-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 208--><p class="noindent" >
+</p>
+                                                                                            
+                                                                                            
+<h5 class="subsubsectionHead"><a 
+ id="x40-1800007.1.1"></a>Binding</h5>
+<!--l. 209--><p class="noindent" ><a 
+ id="ref:Binding"></a>
+</p><!--l. 211--><p class="noindent" >A Binding connects two Ports with each otherdescription
+</p><!--l. 226--><p class="noindent" ><a 
+ id="x40-180001r9"></a></p><!--l. 226--><div class="longtable"> <table id="TBL-25" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-25-1g"><col 
+id="TBL-25-1" /><col 
+id="TBL-25-2" /><col 
+id="TBL-25-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-25-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-25-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-25-1-3"  
+class="td11">
+ <!--l. 226--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-2-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Uses:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-25-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Port">Port</a> : endpoint1  </td><td  style="white-space:wrap; text-align:left;" id="TBL-25-2-3"  
+class="td11">
+ <!--l. 226--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an ActorClass.
+  It  provides  strong  decoupling  of  ActorClasses  from  each  other,  thus  enabling
+  easy  testability,  reusability  and  deployment  of  Actors  to  different  threads  or
+  nodes.description                                                                                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-3-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-25-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Port">Port</a> : endpoint2  </td><td  style="white-space:wrap; text-align:left;" id="TBL-25-3-3"  
+class="td11">
+ <!--l. 226--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an ActorClass.
+  It  provides  strong  decoupling  of  ActorClasses  from  each  other,  thus  enabling
+  easy  testability,  reusability  and  deployment  of  Actors  to  different  threads  or
+  nodes.description                                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-4-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-5-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-6-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-7-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-8-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-25-8-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-25-8-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 248--><p class="noindent" ><a 
+ id="x40-180002r10"></a></p><!--l. 248--><div class="longtable"> <table id="TBL-26" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-26-1g"><col 
+id="TBL-26-1" /><col 
+id="TBL-26-2" /><col 
+id="TBL-26-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-26-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-26-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                       </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-1-3"  
+class="td11">
+ <!--l. 248--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-2-3"  
+class="td11">
+ <!--l. 248--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalSystem">LogicalSystem</a>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-3-3"  
+class="td11">
+ <!--l. 248--><p class="noindent" >                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-4-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemClass">SubSystemClass</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-4-3"  
+class="td11">
+ <!--l. 248--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It
+  instantiates the Actor instance tree instance of the application ...
+  </p><!--l. 248--><p class="noindent" >Actor instance tree example:                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-5-1"  
+class="td11"> Is edited by:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-5-3"  
+class="td11">
+ <!--l. 248--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-9-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-10-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-10-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-26-10-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 254--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1810007.1.1"></a>CommunicationType</h5>
+<!--l. 255--><p class="noindent" ><a 
+ id="ref:CommunicationType"></a>
+</p><!--l. 257--><p class="noindent" >CommunicationTypedescription
+                                                                                            
+                                                                                            
+</p><!--l. 276--><p class="noindent" ><a 
+ id="x40-181001r11"></a></p><!--l. 276--><div class="longtable"> <table id="TBL-27" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-27-1g"><col 
+id="TBL-27-1" /><col 
+id="TBL-27-2" /><col 
+id="TBL-27-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-27-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-27-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                                </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-1-3"  
+class="td11">
+ <!--l. 276--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Inheriting features:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:datadrivenCommunicationType">datadrivenCommunicationType</a>   </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-2-3"  
+class="td11">
+ <!--l. 276--><p class="noindent" >datadriven bla...description                                                       </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:eventdrivenCommunicationType">eventdrivenCommunicationType</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-3-3"  
+class="td11">
+ <!--l. 276--><p class="noindent" >eventdriven bla...description                                                      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:syncCommunicationType">syncCommunicationType</a>           </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-4-3"  
+class="td11">
+ <!--l. 276--><p class="noindent" >CommunicationType sync bla...description                                    </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-1"  
+class="td11"> Is contained in:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-5-3"  
+class="td11">
+ <!--l. 276--><p class="noindent" >A  ProtocolClass  contains  the  Interface  specification  for  a  Port.  It
+  can provide one of three different CommunicationTypes (eventdriven,
+  datadriven, sync).description                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-2"  
+class="td11">                               </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-10-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 282--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1820007.1.1"></a>DataType</h5>
+<!--l. 283--><p class="noindent" ><a 
+ id="ref:DataType"></a>
+</p><!--l. 285--><p class="noindent" >is abstractdescription
+</p><!--l. 307--><p class="noindent" ><a 
+ id="x40-182001r12"></a></p><!--l. 307--><div class="longtable"> <table id="TBL-28" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-28-1g"><col 
+id="TBL-28-1" /><col 
+id="TBL-28-2" /><col 
+id="TBL-28-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-28-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-28-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-1-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-2-1"  
+class="td11"> <div class="multirow"><!-- rows=4 -->
+Inheriting features:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:DataClass">DataClass</a>           </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-2-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >A DataClass ...description                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-3-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:EnumerationType">EnumerationType</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-3-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >An EnumerationType ...description                                             </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-4-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ExternalType">ExternalType</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-4-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >An ExternalType ...description                                                   </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-5-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:PrimitiveType">PrimitiveType</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-5-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >A PrimitiveType ...description                                                   </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-6-1"  
+class="td11"> Typecasts:            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Attribute">Attribute</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-6-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >An   Attribute   is   a   member   variable   of   a   class   (ActorClass,
+  ProtocolClass, DataClass, ...)description                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-7-1"  
+class="td11"> Is contained in:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-7-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalModel">LogicalModel</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-7-3"  
+class="td11">
+ <!--l. 307--><p class="noindent" >The LogicalModel describes the logical structure and behavior of a
+  ROOM application. The LogicalModel an its elements can be mapped
+  on any PhysicalModel and its elements...                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-8-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-9-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-10-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-11-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-12-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-12-2"  
+class="td11">                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-28-12-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 313--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1830007.1.1"></a>LayerConnection</h5>
+<!--l. 314--><p class="noindent" ><a 
+ id="ref:LayerConnection"></a>
+</p><!--l. 316--><p class="noindent" >A LayerConnection ... description
+                                                                                            
+                                                                                            
+</p><!--l. 331--><p class="noindent" ><a 
+ id="x40-183001r13"></a></p><!--l. 331--><div class="longtable"> <table id="TBL-29" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-29-1g"><col 
+id="TBL-29-1" /><col 
+id="TBL-29-2" /><col 
+id="TBL-29-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-29-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-29-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-29-1-3"  
+class="td11">
+ <!--l. 331--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-2-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Uses:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-29-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SAP">SAP</a> : saPoint  </td><td  style="white-space:wrap; text-align:left;" id="TBL-29-2-3"  
+class="td11">
+ <!--l. 331--><p class="noindent" >An SAP ....description                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-3-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-29-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPP">SPP</a> : spPoint  </td><td  style="white-space:wrap; text-align:left;" id="TBL-29-3-3"  
+class="td11">
+ <!--l. 331--><p class="noindent" >An SPP ... description                                                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-4-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-5-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-6-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-7-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-29-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-29-8-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-29-8-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-29-8-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 353--><p class="noindent" ><a 
+ id="x40-183002r14"></a></p><!--l. 353--><div class="longtable"> <table id="TBL-30" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-30-1g"><col 
+id="TBL-30-1" /><col 
+id="TBL-30-2" /><col 
+id="TBL-30-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-30-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-30-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                       </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-1-3"  
+class="td11">
+ <!--l. 353--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-30-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-2-3"  
+class="td11">
+ <!--l. 353--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-30-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalSystem">LogicalSystem</a>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-3-3"  
+class="td11">
+ <!--l. 353--><p class="noindent" >                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-4-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-30-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemClass">SubSystemClass</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-4-3"  
+class="td11">
+ <!--l. 353--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It
+  instantiates the Actor instance tree instance of the application ...
+  </p><!--l. 353--><p class="noindent" >Actor instance tree example:                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-5-1"  
+class="td11"> Is edited by:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-30-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-5-3"  
+class="td11">
+ <!--l. 353--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-9-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-30-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-30-10-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-30-10-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-30-10-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 359--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1840007.1.1"></a>Operation</h5>
+<!--l. 360--><p class="noindent" ><a 
+ id="ref:Operation"></a>
+</p><!--l. 362--><p class="noindent" >An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description
+</p><!--l. 375--><p class="noindent" ><a 
+ id="x40-184001r15"></a></p><!--l. 375--><div class="longtable"> <table id="TBL-31" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-31-1g"><col 
+id="TBL-31-1" /><col 
+id="TBL-31-2" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-31-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-31-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Properties</span></div></td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-1"  
+class="td
+11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;returnType  </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-2-2"  
+class="td11">
+ <!--l. 375--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-1"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;arguments   </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-3-2"  
+class="td11">
+ <!--l. 375--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-31-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-1"  
+class="td11">               </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-8-2"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 393--><p class="noindent" ><a 
+ id="x40-184002r16"></a></p><!--l. 393--><div class="longtable"> <table id="TBL-32" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-32-1g"><col 
+id="TBL-32-1" /><col 
+id="TBL-32-2" /><col 
+id="TBL-32-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-32-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-32-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-32-1-3"  
+class="td11">
+ <!--l. 393--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-32-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-32-2-3"  
+class="td11">
+ <!--l. 393--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-32-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:DataClass">DataClass</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-32-3-3"  
+class="td11">
+ <!--l. 393--><p class="noindent" >A DataClass ...description                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-4-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-32-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-32-4-3"  
+class="td11">
+ <!--l. 393--><p class="noindent" >A  ProtocolClass  contains  the  Interface  specification  for  a  Port.  It
+  can provide one of three different CommunicationTypes (eventdriven,
+  datadriven, sync).description                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-32-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-32-9-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-32-9-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-32-9-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 399--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1850007.1.1"></a>Port</h5>
+<!--l. 400--><p class="noindent" ><a 
+ id="ref:Port"></a>
+</p><!--l. 402--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of
+ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or
+nodes.description
+</p><!--l. 415--><p class="noindent" ><a 
+ id="x40-185001r17"></a></p><!--l. 415--><div class="longtable"> <table id="TBL-33" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-33-1g"><col 
+id="TBL-33-1" /><col 
+id="TBL-33-2" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-33-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-33-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Properties</span></div></td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-2-1"  
+class="td
+11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;conjugated  </td><td  style="white-space:wrap; text-align:left;" id="TBL-33-2-2"  
+class="td11">
+ <!--l. 415--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-3-1"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;multiplicity  </td><td  style="white-space:wrap; text-align:left;" id="TBL-33-3-2"  
+class="td11">
+ <!--l. 415--><p class="noindent" >                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-4-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-5-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-6-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-7-1"  
+class="td11">               </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-33-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-33-8-1"  
+class="td11">               </td><td  style="white-space:wrap; text-align:left;" id="TBL-33-8-2"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 430--><p class="noindent" ><a 
+ id="x40-185002r18"></a></p><!--l. 430--><div class="longtable"> <table id="TBL-34" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-34-1g"><col 
+id="TBL-34-1" /><col 
+id="TBL-34-2" /><col 
+id="TBL-34-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-34-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-34-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-34-1-3"  
+class="td11">
+ <!--l. 430--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-2-1"  
+class="td11"> Is of type:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-34-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-34-2-3"  
+class="td11">
+ <!--l. 430--><p class="noindent" >A ProtocolClass contains the Interface specification for a Port. It can provide one
+  of three different CommunicationTypes (eventdriven, datadriven, sync).description  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-34-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-34-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-34-7-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-34-7-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 455--><p class="noindent" ><a 
+ id="x40-185003r19"></a></p><!--l. 455--><div class="longtable"> <table id="TBL-35" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-35-1g"><col 
+id="TBL-35-1" /><col 
+id="TBL-35-2" /><col 
+id="TBL-35-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-35-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-35-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-1-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Inheriting features:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ExternalEndPort">ExternalEndPort</a>            </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-2-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >ExternalEndPort description                                                      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:InternalEndPort">InternalEndPort</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-3-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >InternalEndPort description                                                       </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:RelayPort">RelayPort</a>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-4-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >RelayPort description                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-1"  
+class="td11"> Is contained in:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                    </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-5-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is edited by:</div>          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-6-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse32.html#ref:PortPropertyDialog">PortPropertyDialog</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-7-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is used by:</div>            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Binding">Binding</a> : endpoint1        </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-8-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >A Binding connects two Ports with each otherdescription                 </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Binding">Binding</a> : endpoint2        </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-9-3"  
+class="td11">
+ <!--l. 455--><p class="noindent" >A Binding connects two Ports with each otherdescription                 </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-10-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-11-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-12-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-13-1"  
+class="td11">                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-35-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-14-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-14-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-14-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 461--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1860007.1.1"></a>ProtocolClass</h5>
+<!--l. 462--><p class="noindent" ><a 
+ id="ref:ProtocolClass"></a>
+</p><!--l. 464--><p class="noindent" >A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes
+(eventdriven, datadriven, sync).description
+</p><!--l. 482--><p class="noindent" ><a 
+ id="x40-186001r20"></a></p><!--l. 482--><div class="longtable"> <table id="TBL-36" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-36-1g"><col 
+id="TBL-36-1" /><col 
+id="TBL-36-2" /><col 
+id="TBL-36-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-36-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-36-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                        </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-1-3"  
+class="td11">
+ <!--l. 482--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Contains:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-36-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Attribute">Attribute</a>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-2-3"  
+class="td11">
+ <!--l. 482--><p class="noindent" >An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass,
+  ...)description                                                                                      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-36-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Operation">Operation</a>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-3-3"  
+class="td11">
+ <!--l. 482--><p class="noindent" >An  Operation  is  a  member  function  of  a  class  (ActorClass,  ProtocolClass,
+  DataClass, ...)description                                                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-4-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-36-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:CommunicationType">CommunicationType</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-4-3"  
+class="td11">
+ <!--l. 482--><p class="noindent" >CommunicationTypedescription                                                                </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-5-1"  
+class="td11"> Uses:       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-36-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Inheritance">Inheritance</a>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-5-3"  
+class="td11">
+ <!--l. 482--><p class="noindent" >Inheritance bla                                                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-7-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-8-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-9-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-36-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-36-10-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-36-10-2"  
+class="td11">                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-36-10-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 501--><p class="noindent" ><a 
+ id="x40-186002r21"></a></p><!--l. 501--><div class="longtable"> <table id="TBL-37" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-37-1g"><col 
+id="TBL-37-1" /><col 
+id="TBL-37-2" /><col 
+id="TBL-37-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-37-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-37-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>              </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-1-3"  
+class="td11">
+ <!--l. 501--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-2-1"  
+class="td11"> <div class="multirow"><!-- rows=3 -->
+Typecasts:</div>        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-37-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Port">Port</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-2-3"  
+class="td11">
+ <!--l. 501--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an
+  ActorClass. It provides strong decoupling of ActorClasses from each
+  other,  thus  enabling  easy  testability,  reusability  and  deployment  of
+  Actors to different threads or nodes.description                              </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-37-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SAP">SAP</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-3-3"  
+class="td11">
+ <!--l. 501--><p class="noindent" >An SAP ....description                                                             </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-4-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-37-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPP">SPP</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-4-3"  
+class="td11">
+ <!--l. 501--><p class="noindent" >An SPP ... description                                                             </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-5-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-37-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalModel">LogicalModel</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-5-3"  
+class="td11">
+ <!--l. 501--><p class="noindent" >The LogicalModel describes the logical structure and behavior of a
+  ROOM application. The LogicalModel an its elements can be mapped
+  on any PhysicalModel and its elements...                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-9-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-37-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-37-10-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-37-10-2"  
+class="td11">                </td><td  style="white-space:wrap; text-align:left;" id="TBL-37-10-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 507--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1870007.1.1"></a>RelayPort</h5>
+<!--l. 508--><p class="noindent" ><a 
+ id="ref:RelayPort"></a>
+</p><!--l. 510--><p class="noindent" >RelayPort description
+</p><!--l. 524--><p class="noindent" ><a 
+ id="x40-187001r22"></a></p><!--l. 524--><div class="longtable"> <table id="TBL-38" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-38-1g"><col 
+id="TBL-38-1" /><col 
+id="TBL-38-2" /><col 
+id="TBL-38-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-38-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-38-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-38-1-3"  
+class="td11">
+ <!--l. 524--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-2-1"  
+class="td11"> Is a:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-38-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Port">Port</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-38-2-3"  
+class="td11">
+ <!--l. 524--><p class="noindent" >A Port is an instance of a ProtocolClass and the only interface for an ActorClass.
+  It  provides  strong  decoupling  of  ActorClasses  from  each  other,  thus  enabling
+  easy  testability,  reusability  and  deployment  of  Actors  to  different  threads  or
+  nodes.description                                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-3-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-4-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-5-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-6-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-38-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-38-7-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-38-7-2"  
+class="td11">         </td><td  style="white-space:wrap; text-align:left;" id="TBL-38-7-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 542--><p class="noindent" ><a 
+ id="x40-187002r23"></a></p><!--l. 542--><div class="longtable"> <table id="TBL-39" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-39-1g"><col 
+id="TBL-39-1" /><col 
+id="TBL-39-2" /><col 
+id="TBL-39-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-39-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-39-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-1-3"  
+class="td11">
+ <!--l. 542--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemClass">SubSystemClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-2-3"  
+class="td11">
+ <!--l. 542--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It
+  instantiates the Actor instance tree instance of the application ...
+  </p><!--l. 542--><p class="noindent" >Actor instance tree example:                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-39-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-7-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 548--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1880007.1.1"></a>SAP</h5>
+<!--l. 549--><p class="noindent" ><a 
+ id="ref:SAP"></a>
+</p><!--l. 551--><p class="noindent" >An SAP ....description
+</p><!--l. 565--><p class="noindent" ><a 
+ id="x40-188001r24"></a></p><!--l. 565--><div class="longtable"> <table id="TBL-40" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-40-1g"><col 
+id="TBL-40-1" /><col 
+id="TBL-40-2" /><col 
+id="TBL-40-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-40-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-40-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-40-1-3"  
+class="td11">
+ <!--l. 565--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-2-1"  
+class="td11"> Is of type:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-40-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-40-2-3"  
+class="td11">
+ <!--l. 565--><p class="noindent" >A ProtocolClass contains the Interface specification for a Port. It can provide one
+  of three different CommunicationTypes (eventdriven, datadriven, sync).description  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-40-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-40-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-40-7-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-40-7-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 584--><p class="noindent" ><a 
+ id="x40-188002r25"></a></p><!--l. 584--><div class="longtable"> <table id="TBL-41" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-41-1g"><col 
+id="TBL-41-1" /><col 
+id="TBL-41-2" /><col 
+id="TBL-41-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-41-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-41-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                        </td><td  style="white-space:wrap; text-align:left;" id="TBL-41-1-3"  
+class="td11">
+ <!--l. 584--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-2-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-41-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-41-2-3"  
+class="td11">
+ <!--l. 584--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-3-1"  
+class="td11"> Is edited by:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-41-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>    </td><td  style="white-space:wrap; text-align:left;" id="TBL-41-3-3"  
+class="td11">
+ <!--l. 584--><p class="noindent" >The Structure Editor allows to edit the Actor Structure in a convenient
+  way. It is possible to create and arrange actor references and ports and
+  to create bindings and layer connections.                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-4-1"  
+class="td11"> Is used by:        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-41-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LayerConnection">LayerConnection</a> : saPoint  </td><td  style="white-space:wrap; text-align:left;" id="TBL-41-4-3"  
+class="td11">
+ <!--l. 584--><p class="noindent" >A LayerConnection ... description                                               </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-41-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-41-9-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-41-9-2"  
+class="td11">                           </td><td  style="white-space:wrap; text-align:left;" id="TBL-41-9-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 590--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1890007.1.1"></a>SPP</h5>
+<!--l. 591--><p class="noindent" ><a 
+ id="ref:SPP"></a>
+</p><!--l. 593--><p class="noindent" >An SPP ... description
+                                                                                            
+                                                                                            
+</p><!--l. 607--><p class="noindent" ><a 
+ id="x40-189001r26"></a></p><!--l. 607--><div class="longtable"> <table id="TBL-42" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-42-1g"><col 
+id="TBL-42-1" /><col 
+id="TBL-42-2" /><col 
+id="TBL-42-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-42-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-42-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-42-1-3"  
+class="td11">
+ <!--l. 607--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-2-1"  
+class="td11"> Is of type:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ProtocolClass">ProtocolClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-42-2-3"  
+class="td11">
+ <!--l. 607--><p class="noindent" >A ProtocolClass contains the Interface specification for a Port. It can provide one
+  of three different CommunicationTypes (eventdriven, datadriven, sync).description  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-7-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-42-7-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 631--><p class="noindent" ><a 
+ id="x40-189002r27"></a></p><!--l. 631--><div class="longtable"> <table id="TBL-43" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-43-1g"><col 
+id="TBL-43-1" /><col 
+id="TBL-43-2" /><col 
+id="TBL-43-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-43-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-43-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>                        </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-1-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-2-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is contained in:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-2-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-3-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemClass">SubSystemClass</a>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-3-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It
+  instantiates the Actor instance tree instance of the application ...
+  </p><!--l. 631--><p class="noindent" >Actor instance tree example:                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-4-1"  
+class="td11"> Is edited by:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse32.html#ref:SPPPropertyDialog">SPPPropertyDialog</a>          </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-4-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-5-1"  
+class="td11"> <div class="multirow"><!-- rows=2 -->
+Is used by:</div>        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LayerConnection">LayerConnection</a> : spPoint  </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-5-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >A LayerConnection ... description                                               </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ServiceImplementation">ServiceImplementation</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-6-3"  
+class="td11">
+ <!--l. 631--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-8-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-9-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-10-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-43-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-43-11-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-11-2"  
+class="td11">                           </td><td  style="white-space:wrap; text-align:left;" id="TBL-43-11-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 637--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1900007.1.1"></a>StateMachine</h5>
+<!--l. 638--><p class="noindent" ><a 
+ id="ref:StateMachine"></a>
+</p><!--l. 640--><p class="noindent" >A StateMachine describes the state based, event driven behavior of an ActorClass
+</p><!--l. 654--><p class="noindent" ><a 
+ id="x40-190001r28"></a></p><!--l. 654--><div class="longtable"> <table id="TBL-44" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-44-1g"><col 
+id="TBL-44-1" /><col 
+id="TBL-44-2" /><col 
+id="TBL-44-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-44-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-44-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-44-1-3"  
+class="td11">
+ <!--l. 654--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-2-1"  
+class="td11"> Uses:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-44-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Inheritance">Inheritance</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-44-2-3"  
+class="td11">
+ <!--l. 654--><p class="noindent" >Inheritance bla                                                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-3-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-4-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-5-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-6-1"  
+class="td11">      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-44-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-44-7-1"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-44-7-2"  
+class="td11">               </td><td  style="white-space:wrap; text-align:left;" id="TBL-44-7-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 669--><p class="noindent" ><a 
+ id="x40-190002r29"></a></p><!--l. 669--><div class="longtable"> <table id="TBL-45" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-45-1g"><col 
+id="TBL-45-1" /><col 
+id="TBL-45-2" /><col 
+id="TBL-45-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-45-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-45-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>            </td><td  style="white-space:wrap; text-align:left;" id="TBL-45-1-3"  
+class="td11">
+ <!--l. 669--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-2-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-45-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorClass">ActorClass</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-45-2-3"  
+class="td11">
+ <!--l. 669--><p class="noindent" >The actor is the basic structural building block for building systems
+  with ROOM. An actor can be refined hierarchically and thus can be of
+  arbitrarily large scope. Ports define the interface of an actor. An actor
+  can also have a behavior usually defined by a finite state machine.      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-45-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-45-7-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-45-7-2"  
+class="td11">              </td><td  style="white-space:wrap; text-align:left;" id="TBL-45-7-3"  
+class="td11"></td></tr>
+</table></div>
+
+<!--l. 674--><p class="noindent" ><img 
+src="images/300-Pump_behavior.jpg" alt="PIC"  
+ />
+</p><!--l. 676--><p class="noindent" >
+</p>
+<h5 class="subsubsectionHead"><a 
+ id="x40-1910007.1.1"></a>SubSystemClass</h5>
+<!--l. 677--><p class="noindent" ><a 
+ id="ref:SubSystemClass"></a>
+</p><!--l. 679--><p class="noindent" >The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the
+application ...
+</p><!--l. 681--><p class="noindent" >Actor instance tree example:
+</p><!--l. 699--><p class="noindent" ><a 
+ id="x40-191001r30"></a></p><!--l. 699--><div class="longtable"> <table id="TBL-46" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-46-1g"><col 
+id="TBL-46-1" /><col 
+id="TBL-46-2" /><col 
+id="TBL-46-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-46-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-46-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Features</span></div>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-1-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >                                                                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-1"  
+class="td11"> <div class="multirow"><!-- rows=5 -->
+Contains:</div>  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorRef">ActorRef</a>            </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-2-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >An ActorRef ...description                                                                       </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:RelayPort">RelayPort</a>          </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-3-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >RelayPort description                                                                             </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPP">SPP</a>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-4-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >An SPP ... description                                                                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:Binding">Binding</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-5-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >A Binding connects two Ports with each otherdescription                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LayerConnection">LayerConnection</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-6-3"  
+class="td11">
+ <!--l. 699--><p class="noindent" >A LayerConnection ... description                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-7-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-8-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-9-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-10-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-46-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-11-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-11-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-11-3"  
+class="td11"></td></tr>
+</table></div>
+<!--l. 716--><p class="noindent" ><a 
+ id="x40-191002r31"></a></p><!--l. 716--><div class="longtable"> <table id="TBL-47" class="longtable" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-47-1g"><col 
+id="TBL-47-1" /><col 
+id="TBL-47-2" /><col 
+id="TBL-47-3" /></colgroup>
+<tr  
+ style="vertical-align:baseline;" id="TBL-47-1-"><td colspan="2" style="white-space:nowrap; text-align:left;" id="TBL-47-1-1"  
+class="td11"> <div class="multicolumn"  style="white-space:nowrap; text-align:left;"><span 
+class="ec-lmssbx-10x-x-120">Related Features</span></div>               </td><td  style="white-space:wrap; text-align:left;" id="TBL-47-1-3"  
+class="td11">
+ <!--l. 716--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-2-1"  
+class="td11"> Typecasts:        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-47-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SubSystemRef">SubSystemRef</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-47-2-3"  
+class="td11">
+ <!--l. 716--><p class="noindent" >                                                        </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-3-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-47-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:LogicalModel">LogicalModel</a>   </td><td  style="white-space:wrap; text-align:left;" id="TBL-47-3-3"  
+class="td11">
+ <!--l. 716--><p class="noindent" >The LogicalModel describes the logical structure and behavior of a
+  ROOM application. The LogicalModel an its elements can be mapped
+  on any PhysicalModel and its elements...                                      </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-6-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-7-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-47-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-47-8-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-47-8-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-47-8-3"  
+class="td11"></td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+
+<!--l. 720--><p class="noindent" ><img 
+src="images/300-TrainingSystem1_instanceTree.jpg" alt="PIC"  
+ />
+</p><!--l. 722--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.1.2   </span> <a 
- id="x40-1770007.1.2"></a>The Abstract Finite State Machine Concept</h4>
-<!--l. 109--><p class="noindent" >eTrice comes with an easy to re-use concept of hierarchical finite state machines (FSM for short). A powerful inheritance
-concept is used and there is also state machine validation based on semantic rules for messages and abstract execution
-available.
-</p><!--l. 113--><p class="noindent" >State machines are an integral part of the ROOM language. But they can also be used independently from that
-using
-</p>
-     <ul class="itemize1">
-     <li class="itemize">for the model part
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.common</span>
-                                                                                            
-                                                                                            
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.fsm</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.genmodel.fsm</span></li></ul>
-     </li>
-     <li class="itemize">graphical state machine editor
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.common.ui</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.fsm.ui</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.ui.common.base</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.core.ui.common</span></li></ul>
-     </li>
-     <li class="itemize">base classes for code generation
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.generator.fsm</span></li></ul>
-     </li>
-     <li class="itemize">validation by abstract execution
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">org.eclipse.etrice.abstractexec.behavior</span></li></ul>
-     </li></ul>
-<!--l. 144--><p class="noindent" >The first three parts have to be used by concrete implementations that implement the abstract interface. eTrice itself uses the
-abstract FSMs in exactly this way.
-</p><!--l. 147--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x40-1780007.1.2"></a>Extending the FSM Model</h5>
-<!--l. 149--><p class="noindent" >The eTrice FSM model has to be embedded in a model that introduces components, interfaces and messages. We
-recommend to use a new Xtext language with a grammar derived from the FSM grammar. This grammar has to specify a
-component derived from the <span 
-class="ec-lmtt-10">ModelComponent </span>of the FSM model. It further has to introduce concrete realizations
-of interface items derived from <span 
-class="ec-lmtt-10">AbstractInterfaceItem</span>. The interface item is an object contained in a
-component that has a name (role) and holds a reference to some kind of interface of the component (like a
-Franca interface or a ROOM protocol). Finally a concrete message type derived from an <span 
-class="ec-lmtt-10">EObject </span>has to
-be defined. The minimal requirement is that this concrete message has an attribute called &#8217;name&#8217; of type
-String.
-</p><!--l. 158--><p class="noindent" >The minimal interface to be implemented consists of </p>
-     <ul class="itemize1">
-     <li class="itemize">for the concrete interface item
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">EList&#x003C;EObject&#x003E; getAllIncomingAbstractMessages()</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">EList&#x003C;EObject&#x003E; getAllOutgoingAbstractMessages()</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">ProtocolSemantics getSemantics()</span></li></ul>
-     </li>
-     <li class="itemize">for the concrete model component
-                                                                                            
-                                                                                            
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">EList&#x003C;AbstractInterfaceItem&#x003E; getAbstractInterfaceItems </span>&#8211; the interface items contained in
-         this model component
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">EList&#x003C;AbstractInterfaceItem&#x003E; getAllAbstractInterfaceItems </span>&#8211;  all  interface  items  including
-         inherited ones
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">String getComponentName() </span>&#8211; should return the name of the model component</li></ul>
-     </li></ul>
-<!--l. 174--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x40-1790007.1.2"></a>Extending the State Machine Editor</h5>
-<!--l. 176--><p class="noindent" >The concrete state machine editor minimally needs to define </p>
-     <ul class="itemize1">
-     <li class="itemize">the editor class itself by deriving it from the <span 
-class="ec-lmtt-10">AbstractFSMEditor</span>
-     </li>
-     <li class="itemize">a diagram type provider (which may derive from <span 
-class="ec-lmtt-10">AbstractDiagramTypeProvider</span>)
-     </li>
-     <li class="itemize">a Google Guice module with bindings for
-         <ul class="itemize2">
-         <li class="itemize"><span 
-class="ec-lmtt-10">IFSMDialogFactory</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">DiagramAccessBase</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">IBehaviorQuickfixProvider</span>
-         </li>
-         <li class="itemize"><span 
-class="ec-lmtt-10">IResourceSetProvider</span></li></ul>
-     </li>
-     <li class="itemize">concrete implementations of all property dialogs the <span 
-class="ec-lmtt-10">IFSMDialogFactory </span>produces</li></ul>
-<!--l. 191--><p class="noindent" >
+ id="x40-1920007.1.2"></a>PhysicalModel</h4>
+<!--l. 723--><p class="noindent" >The PhysicalModel describes the topology of the targets a distributed system can be deployed (mapped) on.
+</p><!--l. 726--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.1.3   </span> <a 
- id="x40-1800007.1.3"></a>Runtimes</h4>
-<!--l. 193--><p class="noindent" >Currently eTrice ships with a C and a Java runtime. The C++ runtime is still a prototype. The runtimes are libraries written
-in the target language against which the generated code is compiled.
-</p><!--l. 197--><p class="noindent" >
+ id="x40-1930007.1.3"></a>MappingModel</h4>
+<!--l. 727--><p class="noindent" >The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel. It enables the
+complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the
+models.
+</p><!--l. 730--><p class="noindent" >
 </p>
 <h4 class="subsectionHead"><span class="titlemark">7.1.4   </span> <a 
- id="x40-1810007.1.4"></a>Unit Tests</h4>
-<!--l. 199--><p class="noindent" >Most plug-ins and other parts of the code have related unit tests.
+ id="x40-1940007.1.4"></a>ConfigModel</h4>
+<!--l. 731--><p class="noindent" >The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances.
                                                                                             
                                                                                             
 </p>
-<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 734--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse32.html" >next</a>] [<a 
 href="etrice-docch7.html" >prev</a>] [<a 
 href="etrice-docch7.html#tailetrice-docch7.html" >prev-tail</a>] [<a 
 href="etrice-docse31.html" >front</a>] [<a 
 href="etrice-docch7.html#etrice-docse31.html" >up</a>] </p></div>
-<!--l. 201--><p class="noindent" ><a 
+<!--l. 734--><p class="noindent" ><a 
  id="tailetrice-docse31.html"></a> </p> 
 </body></html> 

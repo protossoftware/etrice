@@ -1,0 +1,33 @@
+FeaturizerModel eTriceCodegenerators
+
+Feature CodeGenerators
+	shortName '''Code Generation'''
+	description ''''''
+	contains CCodeGenerator
+	contains JavaCodeGenerator
+	stable
+;
+
+abstract Feature CodeGenerator
+	description ''''''
+	
+	stable
+;
+Feature CCodeGenerator
+	shortName '''C Code Generator'''
+	description ''''''
+	isA CodeGenerator
+	stable
+;
+Feature JavaCodeGenerator
+	shortName '''Java Code Generator'''
+	description ''''''
+	isA CodeGenerator
+	stable
+;
+Feature CPPCodeGenerator
+	shortName '''C++ Code Generator'''
+	description ''''''
+	isA CodeGenerator
+	prototype
+;

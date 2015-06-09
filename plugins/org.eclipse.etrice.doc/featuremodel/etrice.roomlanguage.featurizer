@@ -1,0 +1,430 @@
+FeaturizerModel eTriceROOMLanguage
+
+	imports "etrice.featurizer"
+
+
+Feature ROOMLanguage 
+	description '''Real Time Object Oriented Modeling (ROOM) is a language ... '''
+	contains LogicalModel 
+	contains PhysicalModel 
+	contains MappingModel
+	contains ConfigModel
+	stable
+;
+
+Feature Inheritance
+	description '''Inheritance bla'''
+	prototype	
+;
+
+Feature PhysicalModel
+	shortName '''Physical Model'''
+	description '''The PhysicalModel describes the topology of the targets a distributed system can be deployed (mapped) on.'''
+	
+	stable
+;
+
+Feature MappingModel
+	shortName '''Mapping Model'''
+	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel. It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.'''
+	uses LogicalModel
+	uses PhysicalModel
+	stable
+;
+
+Feature ConfigModel
+	shortName '''Config Model'''
+	description '''The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. '''
+	stable
+;
+
+Feature LogicalModel
+	shortName '''Logical Model'''
+	description '''The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...'''
+	contains SubSystemClass
+	contains ActorClass
+	contains ProtocolClass
+	contains DataType
+	stable
+	;
+
+Feature LogicalSystem
+	description ''''''
+	contains SubSystemRef
+	contains Binding
+	contains LayerConnection
+	stable
+;
+
+Feature ActorClass
+	shortName '''Actor Class'''
+	description '''The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. '''
+	
+	text '''some more about ActorClass, graphical and textual notation, concepts, ...'''
+	
+	example '''
+			\textbf{Example}
+			\\
+			\textbf{Graphical Notation}
+			\\
+				\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
+			\\
+			\textbf{Textual Notation}
+			\\
+				\begin{lstlisting}[language=ROOM]
+				ActorClass SimpleActorClass {
+					Interface {
+						Port endPort1: PSimpleProtocolClass
+					}
+					Structure {
+						external Port endPort1
+						conjugated Port internalPort2: PSimpleProtocolClass
+
+						ActorRef actorRef1: ActorClass1
+						ActorRef actorRef2: ActorClass2
+						Binding actorRef1.port2 and actorRef2.port1
+						Binding internalPort2 and actorRef1.port1
+					}
+					Behavior {
+						StateMachine {
+							Transition init: initial -> State1
+							State State1
+						}
+					}
+				}
+				\end{lstlisting}
+	'''
+	
+	
+//	ActorClass SimpleActorClass {
+//		Interface {
+//			Port endPort1: PSimpleProtocolClass
+//			Port relayPort2: PSimpleProtocolClass
+//		}
+//		Structure {
+//			external Port endPort1
+//			conjugated Port internalEndPort3: PSimpleProtocolClass
+//			ActorRef actorRef1: ActorClass1
+//			ActorRef actorRef2: ActorClass2
+//			Binding actorRef1.port2 and actorRef2.port1
+//			Binding relayPort2 and actorRef1.port1
+//			Binding internalEndPort3 and actorRef1.port3
+//		}
+//		Behavior { }
+//	}
+	
+	
+	contains ActorRef
+	contains Port
+	contains SAP
+	contains SPP
+	contains Binding
+	contains LayerConnection
+	contains Attribute
+	contains Operation
+	contains StateMachine
+	uses Inheritance
+	stable
+;
+
+Feature SubSystemClass
+	shortName '''Sub System Class'''
+	description '''The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
+	
+	Actor instance tree example:
+	'''
+	
+	text '''\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}'''
+	contains ActorRef
+	contains RelayPort
+	contains SPP
+	contains Binding
+	contains LayerConnection
+	stable
+;
+	
+
+
+Feature StateMachine
+	shortName '''State Machine'''
+	description '''A StateMachine describes the state based, event driven behavior of an ActorClass'''
+	example '''\includegraphics[width=\textwidth]{images/300-Pump_behavior.jpg}'''
+	uses Inheritance
+	stable
+	;
+
+Feature SubSystemRef
+	shortName '''Sub System Reference'''
+ 	description ''''''
+ 	isOfType SubSystemClass
+ 	stable
+;
+Feature ActorRef
+	shortName '''Actor Reference '''
+	description '''An ActorRef ...description'''
+	isOfType ActorClass
+	property multiplicity
+	stable
+;
+
+Feature Binding
+	description '''A Binding connects two Ports with each otherdescription'''
+	// todo: how correct do we want to be? -> PortRef, PortInstance
+	uses Port endpoint1
+	uses Port endpoint2
+	stable
+;
+
+Feature LayerConnection
+	description '''A LayerConnection ... description '''
+	uses SAP saPoint
+	uses SPP spPoint
+	stable
+;
+
+Feature eventdrivenCommunicationType
+	shortName '''eventdriven CommunicationType'''
+	description '''eventdriven bla...description'''
+	isA CommunicationType stable
+;  
+
+Feature datadrivenCommunicationType 
+
+	description '''datadriven bla...description'''
+	isA CommunicationType 
+	stable
+;  
+
+Feature syncCommunicationType 
+	
+	description '''CommunicationType sync bla...description '''
+	isA CommunicationType 
+	planned
+;  
+
+abstract Feature CommunicationType 
+	description '''CommunicationTypedescription'''
+	stable
+;
+
+Feature ProtocolClass
+	description '''A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description '''
+	contains Attribute
+	contains Operation
+	contains CommunicationType
+	uses Inheritance
+	
+	stable
+	;
+
+abstract Feature DataType
+	description '''is abstractdescription'''
+	stable
+;
+
+Feature PrimitiveType
+	description '''A PrimitiveType ...description'''
+	isA DataType
+	property targetName
+	stable
+	;
+	
+Feature EnumerationType
+	description '''An EnumerationType ...description '''
+	isA DataType
+	property literals
+	stable;
+
+Feature DataClass 
+	description '''A DataClass ...description '''
+	isA DataType
+	contains Attribute
+	contains Operation
+	uses Inheritance
+	stable;
+
+Feature ExternalType 
+	description '''An ExternalType ...description '''
+	isA DataType
+	property targetName
+	stable;
+
+Feature Attribute
+	description '''An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description '''
+	isOfType DataType
+	property defaultValueLiteral
+	property size
+	stable
+;
+
+Feature Operation
+	description '''An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description '''
+	property returnType
+	property arguments
+	stable
+;
+
+abstract Feature Port
+	description '''A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description '''
+	/* Does not work in Eclipse Doc 
+	text '''
+		\begin{longtable}{|m{2.5cm}|c|m{7cm}|}
+		\caption{Class Port Notation}
+		\label{tab:class_port_notation} \\
+		\hline
+		\textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation}
+		\endhead
+		\hline
+		\raggedright Class End Port & \includegraphics[scale=0.7]{images/040-ClassEndPort.png} & 
+		\begin{tabular}{l}
+			\textit{External Class End Port:} \\
+			\begin{lstlisting}[language=ROOM]
+			ActorClass ActorClass6 {
+				Interface {
+					Port port12: ProtocolClass1
+				}
+				Structure {
+					external Port port12
+			}}
+			\end{lstlisting}
+			\\
+			\textit{Internal Class End Port:} \\ 
+			\begin{lstlisting}[language=ROOM]
+			ActorClass ActorClass6 {
+				Interface {
+				}
+				Structure {
+					Port port20 : ProtocolClass1
+			}}
+			\end{lstlisting}
+		\end{tabular}
+		\\
+		\hline
+		\raggedright Conjugated Class End Port & 
+		\includegraphics[scale=0.7]{images/040-ConjugatedClassEndPort.png} &
+		\begin{tabular}{l} 
+			\textit{External Conjugated Class End Port:} \\ 
+			\begin{lstlisting}[language=ROOM]
+			ActorClass ActorClass6 {
+				Interface {
+					conjugated Port port13: ProtocolClass1
+				}
+				Structure {
+					external Port port13
+			}}
+			\end{lstlisting}
+			\\
+			\textit{Internal Conjugated Class End Port:} \\
+			\begin{lstlisting}[language=ROOM]
+			ActorClass ActorClass6 {
+				Interface {
+				}
+				Structure {
+					conjugated Port port21: ProtocolClass1
+			}}
+			\end{lstlisting}
+		\end{tabular}
+		\\
+		\hline
+		 \raggedright Replicated Class End Port & 
+		 \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPort.png} &
+		 \begin{tabular}{b{5.5cm}} 
+		 	\textit{External Replicated Class End Port:} \\ 
+		 	\begin{lstlisting}[language=ROOM]
+		 	ActorClass ActorClass6 {
+			 	Interface {
+				 	Port port16[3]: ProtocolClass1
+			 	}
+			 	Structure {
+				 	external Port port16
+			}}
+		 	\end{lstlisting}
+		 	\\
+		 	\textit{Internal Replicated Class End Port:} \\
+		 	\begin{lstlisting}[language=ROOM]
+		 	ActorClass ActorClass6 {
+			 	Interface {
+			 	}
+			 	Structure {
+				 	Port port16[3]: ProtocolClass1
+		 	}}
+		 	\end{lstlisting}
+		 	\\ 
+		 \end{tabular}
+		 \tabularnewline
+		 \hline
+		 \raggedright Conjugated Replicated Class End Port & 
+		 \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPort.png} &
+		 \begin{tabular}{b{5.5cm}} 
+		 	\textit{External Conjugated Replicated Class End Port:} \\ 
+		 	\begin{lstlisting}[language=ROOM]
+		 	ActorClass ActorClass6 {
+			 	Interface {
+				 	conjugated Port port17[3]: ProtocolClass1
+			 	}
+			 	Structure {
+				 	external Port port17
+			}}
+		 	\end{lstlisting}
+		 	\\
+		 	\textit{Internal Conjugated Replicated Class End Port:} \\ 
+		 	\begin{lstlisting}[language=ROOM]
+		 	ActorClass ActorClass6 {
+			 	Interface {
+			 	}
+			 	Structure {
+				 	conjugated Port port23[3]: ProtocolClass1
+			}}
+		 	\end{lstlisting}
+		 \end{tabular}
+		 \\
+		 \hline
+	\end{longtable}
+''' */
+	isOfType ProtocolClass
+	property conjugated
+	property multiplicity
+	stable
+;
+
+Feature RelayPort
+	description '''RelayPort description'''
+	isA Port
+	stable
+;
+
+
+Feature ExternalEndPort 
+	description '''ExternalEndPort description'''
+	isA Port
+	stable
+;
+
+Feature InternalEndPort
+	description '''InternalEndPort description'''
+	isA Port
+	stable
+;
+
+Feature SAP
+	shortName '''Service Access Point '''
+	description '''An SAP ....description '''
+	isOfType ProtocolClass
+	stable
+; 
+
+Feature ServiceImplementation
+	shortName '''SPP Implementation'''
+	description ''''''
+	uses SPP
+	stable
+;
+
+Feature SPP
+	shortName '''Service Provision Point'''
+	description '''An SPP ... description'''
+	isOfType ProtocolClass
+	stable
+;
+
+

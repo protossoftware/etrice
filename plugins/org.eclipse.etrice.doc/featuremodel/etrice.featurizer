@@ -1,0 +1,13 @@
+/*
+ * To generate tex file, either do change&save here, or clean project
+ * 
+ */
+
+FeaturizerModel eTrice
+	//'''Eclipse eTrice is an open source tool that provides an implementation of the ROOM language ...description '''
+	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
+	contains ROOMLanguage
+	contains ModelEditors 
+	contains CodeGenerators 
+
+

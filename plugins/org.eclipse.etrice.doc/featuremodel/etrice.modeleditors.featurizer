@@ -1,0 +1,145 @@
+FeaturizerModel eTriceModelEditors
+	imports "etrice.roomlanguage.featurizer"
+
+Feature ModelEditors
+	shortName '''ROOM Modeling'''
+	description ''''''
+	contains TextualROOMEditor
+	contains GraphicalStructureEditor
+	contains GraphicalBehaviorEditor
+	
+	stable
+;
+
+abstract Feature ModelEditor
+	description '''ModelEditor'''
+	
+	stable
+;
+
+Feature TextualROOMEditor
+	shortName '''Textual ROOM Editor'''
+	description '''Textual model editor'''
+	isA ModelEditor
+	stable
+;
+
+Feature GraphicalBehaviorEditor
+	shortName '''Behavior Diagram Editor'''
+	description '''ModelEditor'''
+	isA ModelEditor
+	stable
+;
+
+Feature GraphicalStructureEditor
+	shortName '''Structural Diagram Editor'''
+	description '''The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.'''
+	isA ModelEditor
+	
+	// ??
+	contains StructureEditiorPalette
+	contains ActorRefPropertyDialog
+	contains PortPropertyDialog
+	contains SPPPropertyDialog
+	
+	edits ActorClass
+	edits ActorRef
+	edits Port
+	edits SAP
+	edits Binding
+	edits LayerConnection
+	
+	stable
+;
+
+Feature StructureEditiorPalette
+	description '''creates all Kinds of ...  picture with explanation'''
+	stable
+;
+
+Feature ActorRefPropertyDialog
+	description '''
+		A Dialog to edit structural reference of an ActorRef.
+	'''
+	//\includegraphics[width=0.33\textwidth, angle=30]{../pictures/Application_structure.jpg}
+	edits ActorRef
+	stable
+; 
+
+Feature PortPropertyDialog
+	description ''''''
+	edits Port
+	stable
+;
+
+Feature SPPPropertyDialog
+	description ''''''
+	edits SPP
+	stable
+;
+
+/* 
+Feature GraphicalActorRef
+ 	description ''''''
+ 	views ActorRef
+ 	
+ 	contains GraphicalReferencePort
+ 	contains GraphicalReferenceSPP
+ 	
+ 	property multiplicity
+ 	property replicated
+ 	property optional
+ 	property subStructure
+ 	stable
+;
+ 
+Feature GraphicalReferenceSPP
+ 	description ''''''
+ 	views SPP
+ 	stable
+;
+
+Feature GraphicalClassEndPort
+	description ''''''
+ 	views InternalEndPort
+ 	views ExternalEndPort
+ 	property conjugated
+ 	property replicatd
+ 	stable
+;
+
+Feature GraphicalClassRelayPort
+	description ''''''
+ 	views RelayPort
+ 	property conjugated
+ 	property replicatd
+ 	stable
+;
+
+Feature GraphicalReferencePort
+	description ''''''
+	views ExternalEndPort
+ 	views RelayPort
+ 	property conjugated
+ 	property replicatd
+ 	stable
+;
+
+Feature GraphicalBinding
+	description ''''''
+	text '''\includegraphics[width=\textwidth]{images/300-GraphicalBinding.png}'''
+ 	views Binding
+ 	uses GraphicalActorRef from
+ 	uses GraphicalActorRef to
+ 	stable
+;
+
+Feature GraphicalLayerConnection
+	description ''''''
+ 	views LayerConnection
+ 	uses GraphicalActorRef from
+ 	uses SPP to
+ 	stable
+;
+*/
+
