@@ -1,4 +1,3 @@
-\chapter{eTrice Reference}
 \section{ROOMLanguage}
 	Real Time Object Oriented Modeling (ROOM) is a language ... 
 	
@@ -59,37 +58,36 @@
 			
 			some more about ActorClass, graphical and textual notation, concepts, ...
 			
+			\textbf{Example}
+			\\
+			\textbf{Graphical Notation}
+			\\
+				\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
+			\\
+			\textbf{Textual Notation}
+			\\
+				\begin{lstlisting}[language=ROOM]
+				ActorClass SimpleActorClass {
+					Interface {
+						Port endPort1: PSimpleProtocolClass
+					}
+					Structure {
+						external Port endPort1
+						conjugated Port internalPort2: PSimpleProtocolClass
 			
-						\textbf{Example}
-						\\
-						\textbf{Graphical Notation}
-						\\
-							\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
-						\\
-						\textbf{Textual Notation}
-						\\
-							\begin{lstlisting}[language=ROOM]
-							ActorClass SimpleActorClass {
-								Interface {
-									Port endPort1: PSimpleProtocolClass
-								}
-								Structure {
-									external Port endPort1
-									conjugated Port internalPort2: PSimpleProtocolClass
-			
-									ActorRef actorRef1: ActorClass1
-									ActorRef actorRef2: ActorClass2
-									Binding actorRef1.port2 and actorRef2.port1
-									Binding internalPort2 and actorRef1.port1
-								}
-								Behavior {
-									StateMachine {
-										Transition init: initial -> State1
-										State State1
-									}
-								}
-							}
-							\end{lstlisting}
+						ActorRef actorRef1: ActorClass1
+						ActorRef actorRef2: ActorClass2
+						Binding actorRef1.port2 and actorRef2.port1
+						Binding internalPort2 and actorRef1.port1
+					}
+					Behavior {
+						StateMachine {
+							Transition init: initial -> State1
+							State State1
+						}
+					}
+				}
+				\end{lstlisting}
 		
 		\subsubsection{ActorRef}
 			\hypertarget{ref:ActorRef}{}
@@ -137,11 +135,10 @@
 			& \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
-				 \\
+			 \\
 			\hline
-			\multirow{2}{*}{Is edited by:} & \tabitem \hyperlink{ref:ActorRefPropertyDialog}{ActorRefPropertyDialog}  & 
-					A Dialog to edit structural reference of an ActorRef.
-				\\
+			\multirow{2}{*}{Is edited by:} & \tabitem \hyperlink{ref:ActorRefPropertyDialog}{ActorRefPropertyDialog}  & A Dialog to edit structural reference of an ActorRef.
+			\\
 			& \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections. \\
 			\hline
 			\end{longtable}	
@@ -240,7 +237,7 @@
 			& \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
-				 \\
+			 \\
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
@@ -345,7 +342,7 @@
 			& \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
-				 \\
+			 \\
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
@@ -536,7 +533,7 @@
 			Is contained in: & \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
-				\\
+			\\
 			\hline
 			\end{longtable}	
 			}
@@ -620,7 +617,7 @@
 			& \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
-				 \\
+			 \\
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:SPPPropertyDialog}{SPPPropertyDialog}  & \\
 			\hline
@@ -745,8 +742,7 @@
 		\subsubsection{ActorRefPropertyDialog}
 			\hypertarget{ref:ActorRefPropertyDialog}{}
 			
-			
-					A Dialog to edit structural reference of an ActorRef.
+			A Dialog to edit structural reference of an ActorRef.
 			
 			
 			\vspace{\baselineskip}

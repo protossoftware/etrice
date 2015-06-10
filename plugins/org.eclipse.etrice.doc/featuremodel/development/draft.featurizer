@@ -1,0 +1,35 @@
+/*
+ * test
+ * non user doc
+ */
+
+FeaturizerModel Development
+
+
+Feature DataLogging
+	description '''Logger for polled primitive values.'''
+	text '''
+		 \begin{itemize}
+			\item Annotation of one \textsf{DataLogging} per SubSystemClass
+			\item Specifiy complete port instance path starting from LogicalSystem
+			\item Port have to conjugated and data-driven
+			\item Activates logging of all messages having primitive or enum typed data
+			\item Seperate multiple port instance path through commas
+			\item Within \textsf{pathlist} do NOT use any whitespace (e.g. space or newline)
+		\end{itemize}
+	'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+		
+		LogicalSystem Logging {
+		 	SubSystemRef main: MainSubSystem
+		}
+		
+		SubSystemClass MainSubSystem {
+		 	@DataLogging(pathlist = "/Logging/main/<actorRef>/<Port>,/Logging/main/<actorRef>/<Port>")
+		 	...
+		\end{lstlisting}
+	'''
+	prototype
+;

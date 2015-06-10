@@ -6,7 +6,12 @@
 FeaturizerModel eTrice
 	//'''Eclipse eTrice is an open source tool that provides an implementation of the ROOM language ...description '''
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
-	contains ROOMLanguage
+	
+	texDocGenerator {
+		filePathName "300-eTrice-reference"
+	}
+	
+	contains ROOMLanguage 
 	contains ModelEditors 
 	contains CodeGenerators 
 
