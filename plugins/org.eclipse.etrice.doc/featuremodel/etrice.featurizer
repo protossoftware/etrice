@@ -12,7 +12,7 @@ FeaturizerModel eTrice
 	}
 	
 	contains ROOMLanguage 
-	contains ModelEditors 
+	contains ModelEditors
 	contains CodeGenerators 
 
 

@@ -5,6 +5,51 @@
 
 FeaturizerModel Development
 
+Feature TemplateFeature
+	shortName '''not important for now'''
+	description '''A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.'''
+	text '''
+		It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).
+		Long explanation here
+	'''
+	example '''
+		Examples here
+	'''
+
+	// relations
+	isA Feature123 		//(inherits relations and properties)
+	isOfType Feature123 // instantiation
+	contains Feature123 // sub features
+	edits Feature123 	// ~ ui
+	views Feature123 	// ~ ui
+	uses Feature123 	// if other relations don't fit use this
+	
+	// properties
+	property name123 values { "*", "1..n" }
+	
+	// status
+	stable
+;
+
+Feature Feature123
+	description ''''''
+	stable
+;
+
+Feature LaTexExample
+	description ''''''
+	text '''
+		\begin{lstlisting}[language=ROOM]
+			// .room
+		\end{lstlisting}
+
+		images path = images/
+		naming convention = 300-xxxx
+		\includegraphics[width=\textwidth]{images/300-Test.png}
+		\includegraphics[width=0.7*\textwidth]{images/300-Test.png}
+	'''
+	stable
+;
 
 Feature DataLogging
 	description '''Logger for polled primitive values.'''

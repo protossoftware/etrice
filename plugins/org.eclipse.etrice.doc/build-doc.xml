@@ -8,7 +8,10 @@
      which accompanies this distribution, and is available at 
 	 www.eclipse.org/legal/epl-v10.html
 
-	 environment variables that are needed:
+	 Jars saxon9he.jar and ant_latex_0.0.9_1 have to be downloaded manually
+	 See error message for details and instruction
+	 
+	 Or use environment variables:
 	 ETRICE_SAXON_PATH the folder where the saxon9he.jar resides
 	 ETRICE_ANT_LATEX_PATH the folder where the ant_latex_0.0.9_1 resides
 	 
@@ -18,7 +21,7 @@
 	 =========================================================== --> 
 <project name="ETRICE_HELP" basedir="." default="default">
 
-<!-- ============ setting uo properties ============ --> 
+<!-- ============ setting up properties ============ --> 
 <property name="author" 	value="Frank Lippert" />
 <property name="version" 	value="1.0" />
 
@@ -34,6 +37,8 @@
 <property name="toc.file" 	value="toc.xml" />
 <property name="style.file" value="${styles.dir}\build_eclipse_toc.xsl" />
 
+<property name="xlibs.dir" value="xternalLibs" />	
+	
 <property environment="env"/>
 
 <!-- ============ initialization ================== -->
@@ -41,18 +46,26 @@
 	<tstamp/>
 	<mkdir dir="${manual.dir}" />
 	<mkdir dir="${image.dir}" />
-	
-	<property name="saxon.path" value="${env.ETRICE_SAXON_PATH}"/>
-	<property name="ant_latex.path" value="${env.ETRICE_ANT_LATEX_PATH}"/>
-	
-	<echo message="saxon path: ${saxon.path}" />
-	<echo message="ant_latex:  ${ant_latex.path}" />
+	<mkdir dir="${xlibs.dir}" />
 
 	<path id="project.class.path">
 		<pathelement path="${java.class.path}" />
-		<pathelement path="${saxon.path}/saxon9he.jar" />
-		<pathelement path="${ant_latex.path}/ant_latex_0.0.9_1.jar" />
+		<pathelement path="${env.ETRICE_ANT_LATEX_PATH}/ant_latex_0.0.9_1.jar" />
+		<pathelement path="${xlibs.dir}/ant_latex_0.0.9_1.jar" />
+		<pathelement path="${env.ETRICE_SAXON_PATH}/saxon9he.jar" />
+		<pathelement path="${xlibs.dir}/saxon9he.jar" />
 	</path>
+	
+	<fail message="NOT FOUND ant_latex : Download from http://www.java2s.com/Code/Jar/a/Downloadantlatex0091jar.htm and copy 'ant_latex_0.0.9_1.jar' into 'xternalLibs'">
+	    <condition><not>
+	        <available classname="de.dokutransdata.antlatex.LaTeX" classpathref="project.class.path"/>
+	    </not></condition>
+	</fail>
+	<fail message="NOT FOUND saxon9he : Download from http://sourceforge.net/projects/saxon/files/latest/download and copy 'saxon9he.jar' into 'xternalLibs'">
+	    <condition><not>
+	        <available classname="net.sf.saxon.TransformerFactoryImpl" classpathref="project.class.path"/>
+	    </not></condition>
+	</fail>
 </target>
 
 
