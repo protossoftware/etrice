@@ -8,16 +8,12 @@
      which accompanies this distribution, and is available at 
 	 www.eclipse.org/legal/epl-v10.html
 
-	 Jars saxon9he.jar and ant_latex_0.0.9_1 have to be downloaded manually
-	 See error message for details and instruction
-	 
-	 Or use environment variables:
-	 ETRICE_SAXON_PATH the folder where the saxon9he.jar resides
-	 ETRICE_ANT_LATEX_PATH the folder where the ant_latex_0.0.9_1 resides
-	 
-     CONTRIBUTORS:
+	 Needs external libraries: AntLatex-Task, Sason9HE
+
+	 CONTRIBUTORS:
      Frank Lippert (initial contribution)
      Henrik Rentz-Reichert
+     Juergen Haug
 	 =========================================================== --> 
 <project name="ETRICE_HELP" basedir="." default="default">
 
@@ -38,9 +34,35 @@
 <property name="style.file" value="${styles.dir}\build_eclipse_toc.xsl" />
 
 <property name="xlibs.dir" value="xternalLibs" />	
-	
-<property environment="env"/>
 
+<property environment="env"/>
+	
+<target name="getAntLatex" depends="init" unless="antlatex.loaded">
+	<echo message="Start download of ant_latex_0.0.9_1.jar.zip .........."/>
+	<get src="http://www.java2s.com/Code/JarDownload/ant/ant_latex_0.0.9_1.jar.zip" dest="${xlibs.dir}" verbose="true"/>
+	<unzip src="${xlibs.dir}/ant_latex_0.0.9_1.jar.zip" dest="${xlibs.dir}"/>
+	<fail message="NOT FOUND ant_latex : Download from http://www.java2s.com/Code/Jar/a/Downloadantlatex0091jar.htm and copy 'ant_latex_0.0.9_1.jar' into 'xternalLibs'">
+	    <condition><not>
+	        <available classname="de.dokutransdata.antlatex.LaTeX" classpathref="project.class.path"/>
+		</not></condition>
+	</fail>
+</target>
+	
+<target name="getSaxon" depends="init" unless="saxon.loaded">
+	<echo message="Start download of SaxonHE9-6-0-6J.zip .........."/>
+	<get src="http://downloads.sourceforge.net/project/saxon/Saxon-HE/9.6/SaxonHE9-6-0-6J.zip"  dest="${xlibs.dir}" verbose="true"/>
+	<unzip src="${xlibs.dir}/SaxonHE9-6-0-6J.zip" dest="${xlibs.dir}">
+		<patternset>
+		    <include name="saxon9he.jar"/>
+		  </patternset>
+	</unzip>
+	<fail message="NOT FOUND saxon9he : Download from http://sourceforge.net/projects/saxon/files/latest/download and copy 'saxon9he.jar' into 'xternalLibs'">
+	    <condition><not>
+	        <available classname="net.sf.saxon.TransformerFactoryImpl" classpathref="project.class.path"/>
+	    </not></condition>
+	</fail>
+</target>
+	
 <!-- ============ initialization ================== -->
 <target name="init" >
 	<tstamp/>
@@ -50,22 +72,12 @@
 
 	<path id="project.class.path">
 		<pathelement path="${java.class.path}" />
-		<pathelement path="${env.ETRICE_ANT_LATEX_PATH}/ant_latex_0.0.9_1.jar" />
 		<pathelement path="${xlibs.dir}/ant_latex_0.0.9_1.jar" />
-		<pathelement path="${env.ETRICE_SAXON_PATH}/saxon9he.jar" />
 		<pathelement path="${xlibs.dir}/saxon9he.jar" />
 	</path>
 	
-	<fail message="NOT FOUND ant_latex : Download from http://www.java2s.com/Code/Jar/a/Downloadantlatex0091jar.htm and copy 'ant_latex_0.0.9_1.jar' into 'xternalLibs'">
-	    <condition><not>
-	        <available classname="de.dokutransdata.antlatex.LaTeX" classpathref="project.class.path"/>
-	    </not></condition>
-	</fail>
-	<fail message="NOT FOUND saxon9he : Download from http://sourceforge.net/projects/saxon/files/latest/download and copy 'saxon9he.jar' into 'xternalLibs'">
-	    <condition><not>
-	        <available classname="net.sf.saxon.TransformerFactoryImpl" classpathref="project.class.path"/>
-	    </not></condition>
-	</fail>
+	 <available property="antlatex.loaded" classname="de.dokutransdata.antlatex.LaTeX" classpathref="project.class.path"/>
+	 <available property="saxon.loaded" classname="net.sf.saxon.TransformerFactoryImpl" classpathref="project.class.path"/>
 </target>
 
 
@@ -84,7 +96,7 @@
 </target>
 
 <!-- the actual PDF creation task -->
-<target name="createEtricePDF" depends="init, checkPdfCreationNeeded" unless="pdfCreation.notNeeded"
+<target name="createEtricePDF" depends="init, checkPdfCreationNeeded, getAntLatex" unless="pdfCreation.notNeeded"
 	description="creates PDF manual from TeX files for eTrice documentation">
 	
 	<!-- ============ creating PDF manual ============= --> 
@@ -171,7 +183,7 @@
 </target>
 
 <!-- the actual TOCs creation task --> 
-<target name="createEclipseTocFiles" depends="init, checkTocsCreationNeeded, createEtriceHTML" unless="tocsCreation.notNeeded" 
+<target name="createEclipseTocFiles" depends="init, checkTocsCreationNeeded, createEtriceHTML, getSaxon" unless="tocsCreation.notNeeded" 
 		description="creates Eclipse Table of Content files from HTML file as part of the eTrice documentation">
    <!-- Transform one file into an HTML file -->
    <xslt basedir="html" destdir="."
@@ -182,7 +194,7 @@
 		scanincludeddirectories="false"
 		processor="trax"
 	>
-		<factory name="net.sf.saxon.TransformerFactoryImpl" />
+	<factory name="net.sf.saxon.TransformerFactoryImpl" />
 	</xslt>
 	<delete file="dummy_out.xml"/>
 </target>
