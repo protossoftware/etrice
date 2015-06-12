@@ -63,8 +63,6 @@ Feature ActorClass
 	text '''some more about ActorClass, graphical and textual notation, concepts, ...'''
 	
 	example '''
-			\textbf{Example}
-			\\
 			\textbf{Graphical Notation}
 			\\
 				\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
@@ -182,28 +180,39 @@ Feature LayerConnection
 	stable
 ;
 
-Feature eventdrivenCommunicationType
-	shortName '''eventdriven CommunicationType'''
-	description '''eventdriven bla...description'''
-	isA CommunicationType stable
-;  
-
-Feature datadrivenCommunicationType 
-
-	description '''datadriven bla...description'''
-	isA CommunicationType 
-	stable
-;  
-
-Feature syncCommunicationType 
+Feature CommunicationType 
+	description '''The CommunicationType defines the communication semantics of a ProtocolClass.'''
+	text '''Bla'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
 	
-	description '''CommunicationType sync bla...description '''
-	isA CommunicationType 
-	planned
-;  
-
-abstract Feature CommunicationType 
-	description '''CommunicationTypedescription'''
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	
+		ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
+			// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
+			incoming {
+				Message msg1() ["message without data"]
+				Message msg2(data: int32) ["message with data"]
+			}
+			outgoing {
+				Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
+			}
+		}
+	
+		datadriven ProtocolClass DatadrivenProtocolClass {
+			incoming {
+				Message signal1 (data: int32) ["a datadriven message needs data"]
+			}
+			// datadriven ProtocolClass can only have incoming messages (signals)
+		}
+		
+		//  sync is not supported yet
+		//	sync ProtocolClass SyncProtcolClass { 
+		//		
+		//	}
+		\end{lstlisting}
+	'''
+	property type values {"eventdriven", "datadriven", "sync"}
 	stable
 ;
 
@@ -250,11 +259,30 @@ Feature ExternalType
 	stable;
 
 Feature Attribute
-	description '''An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description '''
+	description '''An Attribute is a member variable of a class. '''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		
+		DataClass SimpleDataClass {
+			Attribute attribute1: int16
+			Attribute attribute2: uint32
+		}
+
+		ActorClass ActorClassWithAttributes {
+			Structure {
+				Attribute attribute1: int32 ["attribute of a PrimitiveType" ]
+				Attribute attribute2: SimpleDataClass [ "attribute of a DataClass" ]
+			}
+		}
+		\end{lstlisting}
+	'''
 	isOfType DataType
 	property defaultValueLiteral
 	property size
 	stable
+	
+	
 ;
 
 Feature Operation

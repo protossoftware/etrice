@@ -1,23 +1,21 @@
-\section{ROOMLanguage}
+\section{\huge ROOMLanguage}
 	Real Time Object Oriented Modeling (ROOM) is a language ... 
 	
-		\subsection{LogicalModel}
+		\subsection{\huge LogicalModel}
 		The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...
 	
 		
 		
-		\subsubsection{ActorClass}
+		\subsubsection{\huge ActorClass}
 			\hypertarget{ref:ActorClass}{}
 			
-			The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. 
+			\textbf{Description:} The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			\multirow{9}{*}{Contains:} & \tabitem \hyperlink{ref:ActorRef}{ActorRef}  & An ActorRef ...description\\
@@ -26,23 +24,19 @@
 			& \tabitem \hyperlink{ref:SPP}{SPP}  & An SPP ... description \\
 			& \tabitem \hyperlink{ref:Binding}{Binding}  & A Binding connects two Ports with each otherdescription \\
 			& \tabitem \hyperlink{ref:LayerConnection}{LayerConnection}  & A LayerConnection ... description  \\
-			& \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description  \\
+			& \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class.  \\
 			& \tabitem \hyperlink{ref:Operation}{Operation}  & An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description  \\
 			& \tabitem \hyperlink{ref:StateMachine}{StateMachine}  & A StateMachine describes the state based, event driven behavior of an ActorClass \\
 			\hline
 			Uses: & \tabitem \hyperlink{ref:Inheritance}{Inheritance}  & Inheritance bla\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Typecasts: & \tabitem \hyperlink{ref:ActorRef}{ActorRef}  & An ActorRef ...description\\
@@ -51,84 +45,75 @@
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			some more about ActorClass, graphical and textual notation, concepts, ...
 			
-			\textbf{Example}
-			\\
-			\textbf{Graphical Notation}
-			\\
-				\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
-			\\
-			\textbf{Textual Notation}
-			\\
-				\begin{lstlisting}[language=ROOM]
-				ActorClass SimpleActorClass {
-					Interface {
-						Port endPort1: PSimpleProtocolClass
-					}
-					Structure {
-						external Port endPort1
-						conjugated Port internalPort2: PSimpleProtocolClass
-			
-						ActorRef actorRef1: ActorClass1
-						ActorRef actorRef2: ActorClass2
-						Binding actorRef1.port2 and actorRef2.port1
-						Binding internalPort2 and actorRef1.port1
-					}
-					Behavior {
-						StateMachine {
-							Transition init: initial -> State1
-							State State1
+			\textbf{Example:} 
+				\textbf{Graphical Notation}
+				\\
+					\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
+				\\
+				\textbf{Textual Notation}
+				\\
+					\begin{lstlisting}[language=ROOM]
+					ActorClass SimpleActorClass {
+						Interface {
+							Port endPort1: PSimpleProtocolClass
+						}
+						Structure {
+							external Port endPort1
+							conjugated Port internalPort2: PSimpleProtocolClass
+				
+							ActorRef actorRef1: ActorClass1
+							ActorRef actorRef2: ActorClass2
+							Binding actorRef1.port2 and actorRef2.port1
+							Binding internalPort2 and actorRef1.port1
+						}
+						Behavior {
+							StateMachine {
+								Transition init: initial -> State1
+								State State1
+							}
 						}
 					}
-				}
-				\end{lstlisting}
+					\end{lstlisting}
 		
-		\subsubsection{ActorRef}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		
+		\subsubsection{\huge ActorRef}
 			\hypertarget{ref:ActorRef}{}
 			
-			An ActorRef ...description
+			\textbf{Description:} An ActorRef ...description
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l p{.8\textwidth}}
+			\begin{longtable}{p{2.5cm}p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Properties}} \\
 				\hline
-			\tabitem multiplicity & \\
-			\end{longtable}	
-			}
+			\tabitem multiplicity &  & Description placeholder\\
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is of type: & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{2}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
@@ -141,95 +126,99 @@
 			\\
 			& \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections. \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{Attribute}
+		\subsubsection{\huge Attribute}
 			\hypertarget{ref:Attribute}{}
 			
-			An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description 
+			\textbf{Description:} An Attribute is a member variable of a class. 
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l p{.8\textwidth}}
+			\begin{longtable}{p{2.5cm}p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Properties}} \\
 				\hline
-			\tabitem defaultValueLiteral & \\
-			\tabitem size & \\
-			\end{longtable}	
-			}
+			\tabitem defaultValueLiteral &  & Description placeholder\\
+			\tabitem size &  & Description placeholder\\
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is of type: & \tabitem \hyperlink{ref:DataType}{DataType}  & is abstractdescription\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
 			& \tabitem \hyperlink{ref:DataClass}{DataClass}  & A DataClass ...description  \\
 			& \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description  \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			\textbf{Example:} 
+				\begin{lstlisting}[language=ROOM]
+				import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+				
+				DataClass SimpleDataClass {
+					Attribute attribute1: int16
+					Attribute attribute2: uint32
+				}
+				
+				ActorClass ActorClassWithAttributes {
+					Structure {
+						Attribute attribute1: int32 ["attribute of a PrimitiveType" ]
+						Attribute attribute2: SimpleDataClass [ "attribute of a DataClass" ]
+					}
+				}
+				\end{lstlisting}
 		
-		\subsubsection{Binding}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		
+		\subsubsection{\huge Binding}
 			\hypertarget{ref:Binding}{}
 			
-			A Binding connects two Ports with each otherdescription
+			\textbf{Description:} A Binding connects two Ports with each otherdescription
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			\multirow{2}{*}{Uses:} & \tabitem \hyperlink{ref:Port}{Port} : endpoint1 & A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description \\
 			& \tabitem \hyperlink{ref:Port}{Port} : endpoint2 & A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description  \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
@@ -241,54 +230,88 @@
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{CommunicationType}
+		\subsubsection{\huge CommunicationType}
 			\hypertarget{ref:CommunicationType}{}
 			
-			CommunicationTypedescription
+			\textbf{Description:} The CommunicationType defines the communication semantics of a ProtocolClass.
 			
-			
-			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}p{4cm} p{.5\textwidth}}
+				\multicolumn{2}{l}{\textbf{\large Properties}} \\
+				\hline
+			\tabitem type & =\{v,v,v\} & Description placeholder\\
+			\end{longtable}
+			\endgroup
+			
+			
+			\begingroup
+			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
+			\renewcommand{\arraystretch}{1.8} % Default value: 1
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
-			\multirow{3}{*}{Inheriting features:} & \tabitem \hyperlink{ref:datadrivenCommunicationType}{datadrivenCommunicationType}  & datadriven bla...description\\
-			& \tabitem \hyperlink{ref:eventdrivenCommunicationType}{eventdrivenCommunicationType}  & eventdriven bla...description \\
-			& \tabitem \hyperlink{ref:syncCommunicationType}{syncCommunicationType}  & CommunicationType sync bla...description  \\
-			\hline
 			Is contained in: & \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
+			Bla
 			
+			\textbf{Example:} 
+					\begin{lstlisting}[language=ROOM]
+				
+					import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+				
+					ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
+						// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
+						incoming {
+							Message msg1() ["message without data"]
+							Message msg2(data: int32) ["message with data"]
+						}
+						outgoing {
+							Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
+						}
+					}
+				
+					datadriven ProtocolClass DatadrivenProtocolClass {
+						incoming {
+							Message signal1 (data: int32) ["a datadriven message needs data"]
+						}
+						// datadriven ProtocolClass can only have incoming messages (signals)
+					}
+					
+					//  sync is not supported yet
+					//	sync ProtocolClass SyncProtcolClass { 
+					//		
+					//	}
+					\end{lstlisting}
 		
-		\subsubsection{DataType}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		
+		\subsubsection{\huge DataType}
 			\hypertarget{ref:DataType}{}
 			
-			is abstractdescription
+			\textbf{Description:} is abstractdescription
 			
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{4}{*}{Inheriting features:} & \tabitem \hyperlink{ref:DataClass}{DataClass}  & A DataClass ...description \\
@@ -296,45 +319,41 @@
 			& \tabitem \hyperlink{ref:ExternalType}{ExternalType}  & An ExternalType ...description  \\
 			& \tabitem \hyperlink{ref:PrimitiveType}{PrimitiveType}  & A PrimitiveType ...description \\
 			\hline
-			Typecasts: & \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description \\
+			Typecasts: & \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class. \\
 			\hline
 			Is contained in: & \tabitem \hyperlink{ref:LogicalModel}{LogicalModel}  & The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{LayerConnection}
+		\subsubsection{\huge LayerConnection}
 			\hypertarget{ref:LayerConnection}{}
 			
-			A LayerConnection ... description 
+			\textbf{Description:} A LayerConnection ... description 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			\multirow{2}{*}{Uses:} & \tabitem \hyperlink{ref:SAP}{SAP} : saPoint & An SAP ....description \\
 			& \tabitem \hyperlink{ref:SPP}{SPP} : spPoint & An SPP ... description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
@@ -346,94 +365,82 @@
 			\hline
 			Is edited by: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{Operation}
+		\subsubsection{\huge Operation}
 			\hypertarget{ref:Operation}{}
 			
-			An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description 
+			\textbf{Description:} An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description 
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l p{.8\textwidth}}
+			\begin{longtable}{p{2.5cm}p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Properties}} \\
 				\hline
-			\tabitem returnType & \\
-			\tabitem arguments & \\
-			\end{longtable}	
-			}
+			\tabitem returnType &  & Description placeholder\\
+			\tabitem arguments &  & Description placeholder\\
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
 			& \tabitem \hyperlink{ref:DataClass}{DataClass}  & A DataClass ...description  \\
 			& \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description  \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{Port}
+		\subsubsection{\huge Port}
 			\hypertarget{ref:Port}{}
 			
-			A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description 
+			\textbf{Description:} A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description 
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l p{.8\textwidth}}
+			\begin{longtable}{p{2.5cm}p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Properties}} \\
 				\hline
-			\tabitem conjugated & \\
-			\tabitem multiplicity & \\
-			\end{longtable}	
-			}
+			\tabitem conjugated &  & Description placeholder\\
+			\tabitem multiplicity &  & Description placeholder\\
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is of type: & \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Inheriting features:} & \tabitem \hyperlink{ref:ExternalEndPort}{ExternalEndPort}  & ExternalEndPort description\\
@@ -448,44 +455,40 @@
 			\multirow{2}{*}{Is used by:} & \tabitem \hyperlink{ref:Binding}{Binding} : endpoint1 & A Binding connects two Ports with each otherdescription\\
 			& \tabitem \hyperlink{ref:Binding}{Binding} : endpoint2 & A Binding connects two Ports with each otherdescription \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{ProtocolClass}
+		\subsubsection{\huge ProtocolClass}
 			\hypertarget{ref:ProtocolClass}{}
 			
-			A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description 
+			\textbf{Description:} A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
-			\multirow{3}{*}{Contains:} & \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class (ActorClass, ProtocolClass, DataClass, ...)description \\
+			\multirow{3}{*}{Contains:} & \tabitem \hyperlink{ref:Attribute}{Attribute}  & An Attribute is a member variable of a class. \\
 			& \tabitem \hyperlink{ref:Operation}{Operation}  & An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description  \\
-			& \tabitem \hyperlink{ref:CommunicationType}{CommunicationType}  & CommunicationTypedescription \\
+			& \tabitem \hyperlink{ref:CommunicationType}{CommunicationType}  & The CommunicationType defines the communication semantics of a ProtocolClass. \\
 			\hline
 			Uses: & \tabitem \hyperlink{ref:Inheritance}{Inheritance}  & Inheritance bla\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{3}{*}{Typecasts:} & \tabitem \hyperlink{ref:Port}{Port}  & A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description \\
@@ -494,40 +497,36 @@
 			\hline
 			Is contained in: & \tabitem \hyperlink{ref:LogicalModel}{LogicalModel}  & The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{RelayPort}
+		\subsubsection{\huge RelayPort}
 			\hypertarget{ref:RelayPort}{}
 			
-			RelayPort description
+			\textbf{Description:} RelayPort description
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is a: & \tabitem \hyperlink{ref:Port}{Port}  & A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:SubSystemClass}{SubSystemClass}  & The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
@@ -535,40 +534,36 @@
 				Actor instance tree example:
 			\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{SAP}
+		\subsubsection{\huge SAP}
 			\hypertarget{ref:SAP}{}
 			
-			An SAP ....description 
+			\textbf{Description:} An SAP ....description 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is of type: & \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
@@ -577,40 +572,36 @@
 			\hline
 			Is used by: & \tabitem \hyperlink{ref:LayerConnection}{LayerConnection} : saPoint & A LayerConnection ... description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{SPP}
+		\subsubsection{\huge SPP}
 			\hypertarget{ref:SPP}{}
 			
-			An SPP ... description
+			\textbf{Description:} An SPP ... description
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Is of type: & \tabitem \hyperlink{ref:ProtocolClass}{ProtocolClass}  & A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			\multirow{2}{*}{Is contained in:} & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
@@ -624,66 +615,63 @@
 			\multirow{2}{*}{Is used by:} & \tabitem \hyperlink{ref:LayerConnection}{LayerConnection} : spPoint & A LayerConnection ... description \\
 			& \tabitem \hyperlink{ref:ServiceImplementation}{ServiceImplementation}  &  \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{StateMachine}
+		\subsubsection{\huge StateMachine}
 			\hypertarget{ref:StateMachine}{}
 			
-			A StateMachine describes the state based, event driven behavior of an ActorClass
+			\textbf{Description:} A StateMachine describes the state based, event driven behavior of an ActorClass
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Uses: & \tabitem \hyperlink{ref:Inheritance}{Inheritance}  & Inheritance bla\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:ActorClass}{ActorClass}  & The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
-			\includegraphics[width=\textwidth]{images/300-Pump_behavior.jpg}
+			\textbf{Example:} 
+				\includegraphics[width=\textwidth]{images/300-Pump_behavior.jpg}
 		
-		\subsubsection{SubSystemClass}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		
+		\subsubsection{\huge SubSystemClass}
 			\hypertarget{ref:SubSystemClass}{}
 			
-			The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
+			\textbf{Description:} The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
 				
 				Actor instance tree example:
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			\multirow{5}{*}{Contains:} & \tabitem \hyperlink{ref:ActorRef}{ActorRef}  & An ActorRef ...description\\
@@ -692,198 +680,186 @@
 			& \tabitem \hyperlink{ref:Binding}{Binding}  & A Binding connects two Ports with each otherdescription \\
 			& \tabitem \hyperlink{ref:LayerConnection}{LayerConnection}  & A LayerConnection ... description  \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Typecasts: & \tabitem \hyperlink{ref:SubSystemRef}{SubSystemRef}  & \\
 			\hline
 			Is contained in: & \tabitem \hyperlink{ref:LogicalModel}{LogicalModel}  & The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}
 			
-		\subsection{PhysicalModel}
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\subsection{\huge PhysicalModel}
 		The PhysicalModel describes the topology of the targets a distributed system can be deployed (mapped) on.
 	
 		
-		\subsection{MappingModel}
+		\subsection{\huge MappingModel}
 		The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel. It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.
 	
 		
-		\subsection{ConfigModel}
+		\subsection{\huge ConfigModel}
 		The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. 
 	
 		
-\section{ModelEditors}
+\section{\huge ModelEditors}
 	
-		\subsection{TextualROOMEditor}
+		\subsection{\huge TextualROOMEditor}
 		Textual model editor
 	
 		
-		\subsection{GraphicalStructureEditor}
+		\subsection{\huge GraphicalStructureEditor}
 		The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.
 	
 		
 		
-		\subsubsection{ActorRefPropertyDialog}
+		\subsubsection{\huge ActorRefPropertyDialog}
 			\hypertarget{ref:ActorRefPropertyDialog}{}
 			
-			A Dialog to edit structural reference of an ActorRef.
+			\textbf{Description:} A Dialog to edit structural reference of an ActorRef.
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Edits: & \tabitem \hyperlink{ref:ActorRef}{ActorRef}  & An ActorRef ...description\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{PortPropertyDialog}
+		\subsubsection{\huge PortPropertyDialog}
 			\hypertarget{ref:PortPropertyDialog}{}
 			
+			\textbf{Description:} 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Edits: & \tabitem \hyperlink{ref:Port}{Port}  & A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description \\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{SPPPropertyDialog}
+		\subsubsection{\huge SPPPropertyDialog}
 			\hypertarget{ref:SPPPropertyDialog}{}
 			
+			\textbf{Description:} 
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.7\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Features}} & \\
 				\hline
 			Edits: & \tabitem \hyperlink{ref:SPP}{SPP}  & An SPP ... description\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
 		
-		\subsubsection{StructureEditiorPalette}
+		\subsubsection{\huge StructureEditiorPalette}
 			\hypertarget{ref:StructureEditiorPalette}{}
 			
-			creates all Kinds of ...  picture with explanation
+			\textbf{Description:} creates all Kinds of ...  picture with explanation
 			
 			
 			
-			\vspace{\baselineskip}
 			\begingroup
 			%\setlength{\tabcolsep}{10pt} % Default value: 6pt
 			\renewcommand{\arraystretch}{1.8} % Default value: 1
-			\parbox{\textwidth}{
-			\begin{longtable}{l l p{.6\textwidth}}
+			\begin{longtable}{p{2.5cm}|p{4cm} p{.5\textwidth}}
 				\multicolumn{2}{l}{\textbf{\large Related Features}} & \\
 				\hline
 			Is contained in: & \tabitem \hyperlink{ref:GraphicalStructureEditor}{GraphicalStructureEditor}  & The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.\\
 			\hline
-			\end{longtable}	
-			}
+			\end{longtable}
 			\endgroup
-			\vspace{\baselineskip}
 			
 			
-		\subsection{GraphicalBehaviorEditor}
+			
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\vspace{\baselineskip}
+		\subsection{\huge GraphicalBehaviorEditor}
 		ModelEditor
 	
 		
-\section{CodeGenerators}
+\section{\huge CodeGenerators}
 	
-		\subsection{CCodeGenerator}
+		\subsection{\huge CCodeGenerator}
 	
 		
-		\subsection{JavaCodeGenerator}
+		\subsection{\huge JavaCodeGenerator}
 	
 		
 
