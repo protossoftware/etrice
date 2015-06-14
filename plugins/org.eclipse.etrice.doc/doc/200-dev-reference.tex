@@ -144,7 +144,7 @@ State machines are an integral part of the ROOM language. But they can also be u
 The first three parts have to be used by concrete implementations that implement the abstract interface.
 \eTrice{} itself uses the abstract FSMs in exactly this way.
 
-\subsubsection{Extending the FSM Model}
+\subsubsection*{Extending the FSM Model}
 
 The \eTrice{} FSM model has to be embedded in a model that introduces components, interfaces and messages.
 We recommend to use a new Xtext language with a grammar derived from the FSM grammar.
@@ -171,7 +171,7 @@ The minimal interface to be implemented consists of
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Extending the State Machine Editor}
+\subsubsection*{Extending the State Machine Editor}
 
 The concrete state machine editor minimally needs to define
 \begin{itemize}
@@ -205,7 +205,7 @@ Most plug-ins and other parts of the code have related unit tests.
 We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our 
 implementation that are worth to be pointed out.
 
-\subsubsection{Model Tweaks}
+\subsubsection*{Model Tweaks}
 
 All language EMF models of \eTrice{} are inferred from their respective grammar.
 However, this powerful mechanism has to be tweaked in some places.
@@ -255,7 +255,7 @@ The following parts of the model are changed or added:
 \item an operation \texttt{getFullName} is added to the \texttt{EnumLiteral}
 \end{itemize}
 
-\subsubsection{Imports by URI Using Namespaces}
+\subsubsection*{Imports by URI Using Namespaces}
 
 The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 
 model workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other 
@@ -270,7 +270,7 @@ platform URIs because editors can only open platform URIs
 \item \texttt{ImportAwareHyperlinkHelper} -- turns the URI part of an import into a navigatable hyper link
 \end{itemize}
 
-\subsubsection{Naming}
+\subsubsection*{Naming}
 
 Two classes provide object names used for link resolution and for labels.
 The \texttt{RoomNameProvider} provides frequently used name strings, some of them are hierarchical like 
@@ -278,7 +278,7 @@ State paths.
 The \texttt{RoomFragmentProvider} serves a more formal purpose since it provides a link between EMF models 
 (as used by the diagram editors) and the textual model representation used by Xtext.
 
-\subsubsection{Helpers}
+\subsubsection*{Helpers}
 
 The \texttt{RoomHelpers} class provides a great deal of static methods that help retrieve frequently used 
 information from the model.
@@ -292,7 +292,7 @@ action code
 a label
 \end{itemize}
 
-\subsubsection{Validation}
+\subsubsection*{Validation}
 
 Validation is used from various places. Therefore all validation code is accumulated in the 
 @ValidationUtil@ class. All methods are static and many of them return a Result object which contains 
@@ -300,7 +300,7 @@ information about the problem detected as well as object and feature as suited f
 
 \subsection{Config Language Overview}
 
-\subsubsection{Model Tweaks}
+\subsubsection*{Model Tweaks}
 
 A couple of operations are added to the ConfigModel
 \begin{itemize}
@@ -310,11 +310,11 @@ A couple of operations are added to the ConfigModel
 \item \texttt{getSubSystemConfigs}
 \end{itemize}
 
-\subsubsection{Imports by URI Using Namespaces}
+\subsubsection*{Imports by URI Using Namespaces}
 
 Imports are treated like in Room language, section \textit{Imports by URI Using Namespaces}.
 
-\subsubsection{Util}
+\subsubsection*{Util}
 
 A set of static utility methods can be found in the \texttt{ConfigUtil} class.
 
@@ -345,13 +345,13 @@ The \texttt{Root} object of the resulting Generator Model provides chiefly two t
 machine containing all inherited state graph items
 \end{itemize}
 
-\subsubsection{The Instance Model}
+\subsubsection*{The Instance Model}
 
 The instance model allows easy access to instances including their unique paths and object IDs. Also it is 
 possible to get a list of all peer port instances for each port instance without having to bother about 
 port and actor replication.
 
-\subsubsection{The Expanded Model Component}
+\subsubsection*{The Expanded Model Component}
 
 The expanded model component contains, as already mentioned, the complete state machine of the model component. 
 This considerably simplifies the task of state machine generation. Note that the generated code always 
@@ -367,7 +367,7 @@ Furthermore the \texttt{ExpandedModelComponent} gives access to
 order they are evaluated
 \end{itemize}
 
-\subsubsection{The Expanded Actor Class}
+\subsubsection*{The Expanded Actor Class}
 
 The \texttt{ExpandedActorClass} is derived from the \texttt{ExpandedModelComponent} and adds only minor new features.
 \begin{itemize}
@@ -375,7 +375,7 @@ The \texttt{ExpandedActorClass} is derived from the \texttt{ExpandedModelCompone
 \item \texttt{getVarDeclData(Transition)} -- for convenience to avoid casts to \texttt{VarDecl}
 \end{itemize}
 
-\subsubsection{Transition Chains}
+\subsubsection*{Transition Chains}
 
 By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a 
 transition starting at a state and continues over transitional state graph nodes (choice points and 
@@ -392,7 +392,7 @@ involved choice points.
 There is one plug-in that consists of base classes and some generic generator parts which are re-used by 
 all language specific generators
  
-\subsubsection{Base Classes and Interfaces}
+\subsubsection*{Base Classes and Interfaces}
 
 We just want to mention the most important classes and interfaces.
 Some of them can be found in the \texttt{org.eclipse.etrice.generator.fsm} and th rest
@@ -410,23 +410,23 @@ detail code\end{flushleft}
 Concrete language generators should use a module that derives from this
 \end{itemize}
 
-\subsubsection{Generic Generator Parts}
+\subsubsection*{Generic Generator Parts}
 
 The generic generator parts provide code generation blocks on a medium granularity. The language dependent 
 top level generators embed those blocks in a larger context (file, class, ...). Language dependent low 
 level constructs are provided by means of an \texttt{ILanguageExtension}. This extension and other parts 
 of the generator be configured using Google Guice dependency injection.
 
-\paragraph{GenericActorClassGenerator}
+\paragraph*{GenericActorClassGenerator}
 
 The \texttt{GenericActorClassGenerator} generates constants for the interface items of a actor. Those 
 constants are used by the generated state machine.
 
-\paragraph{GenericProtocolClassGenerator}
+\paragraph*{GenericProtocolClassGenerator}
 
 The \texttt{GenericProtocolClassGenerator} generates message ID constants for a protocol.
 
-\paragraph{GenericStateMachineGenerator}
+\paragraph*{GenericStateMachineGenerator}
 
 \begin{flushleft}The \texttt{GenericStateMachineGenerator} generates the complete state machine 
 implementation. The skeleton of the generated code is\end{flushleft}
@@ -451,7 +451,7 @@ transition chain action codes are executed and the choice point conditions are e
 \texttt{executeTransitionChain} method. Finally the history of the state where the chain ends is entered 
 and all entry codes are executed by \texttt{enterHistory}.
 
-\subsubsection{The Java Generator}
+\subsubsection*{The Java Generator}
 
 The Java generator employs the generic parts of the generator. The \texttt{JavaTranslationProvider} is 
 very simple and only handles the case of sending a message from a distinct replicated port: 
@@ -466,7 +466,7 @@ and conjugated ports and similar for replicated ports.
 The \texttt{ActorClassGen} uses Java inheritance for the generated actor classes. So ports, SAPs and 
 attributes and detail code methods are inherited. Not inherited is the state machine implementation.
 
-\subsubsection{The ANSI-C Generator}
+\subsubsection*{The ANSI-C Generator}
 
 The C generator translates data, protocol and actor classes into structs together with a set of methods 
 that operate on them and receive a pointer to those data (called \texttt{self} in analogy to the implicit 
@@ -475,7 +475,7 @@ No dynamic memory allocation is employed. All actor instances are statically ini
 One of the design goals for the generated C code was an optimized footprint in terms of memory and 
 performance to be able to utilize modeling with ROOM also for tiny low end micro controllers.
 
-\subsubsection{The Documentation Generator}
+\subsubsection*{The Documentation Generator}
 
 The documentation generator creates documentation in LaTex format which can be converted into PDF and many 
 other formats.

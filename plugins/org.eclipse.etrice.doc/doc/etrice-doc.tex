@@ -21,6 +21,7 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{titlesec}
 
 \input{roomlistings}
 
@@ -46,11 +47,18 @@
 %\usepackage{etoolbox}
 %\newrobustcmd{\eTrice}{{\color{blue}e}{\color{red}Trice}{}}
 
-\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\newcommand{\myparagraph}[1]{\paragraph*{#1}\mbox{}\\}
 %\newcommand{\room}[1]{\textcolor{RedViolet}{\texttt{#1}}}
 \newcommand{\room}[1]{\textcolor{Fuchsia}{\textbf{#1}}}
 \renewcommand{\familydefault}{\sfdefault}
  
+ 
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+		
+\titleformat*{\section}{\huge\bfseries}
+\titleformat*{\subsection}{\LARGE\bfseries}
+\titleformat*{\subsubsection}{\LARGE\bfseries}
 
 \begin{document}
 

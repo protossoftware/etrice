@@ -14,7 +14,7 @@ It will try to answer the following questions:
 \item Which consequences must be taken into account?
 \end{itemize}
 
-\subsubsection{Where does it come from?}
+\subsubsection*{Where does it come from?}
 
 ROOM was developed in the 1990th on the background of the upcoming mobile applications with the goal to
 manage the complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type
@@ -33,7 +33,7 @@ From our point of view ROOM provides still the clearest, simplest, most complete
 concepts for the real time domain. All later proposals like the UML do not fit as well to this kind of problems.
  
 
-\subsubsection{Which kind of SW-Systems will be addressed?}
+\subsubsection*{Which kind of SW-Systems will be addressed?}
 
 As mentioned before ROOM addresses distributed, event driven, real time systems.
 But what is a \emph{real time system}? ROOM defines a set of properties
@@ -65,7 +65,7 @@ world most of the SW systems will be a combination of both. ROOM can be combined
 example an actor provides a \emph{run to completion} context for calculating an image processing algorithm or a
 PID controller.  
 
-\subsubsection{What is the relation between OOP and ROOM?}
+\subsubsection*{What is the relation between OOP and ROOM?}
 
 The relation between classical object oriented programming and ROOM is comparable to the relation between assembler
 programming and C programming. It provides a shift of the object paradigm. The classical object
@@ -87,7 +87,7 @@ encapsulation shell including concurrency issues (see \ref{sec:run_to_completion
 
 This thinking of an object is much more general than the classic one.  
 
-\subsubsection{What are the benefits of ROOM?}
+\subsubsection*{What are the benefits of ROOM?}
 
 ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general
 point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe
@@ -105,7 +105,7 @@ the developer.
 a very early phase. 
 \end{itemize}
 
-\subsubsection{Which consequences must be taken into account?}
+\subsubsection*{Which consequences must be taken into account?}
 
 Generating code from models will introduce some overhead in terms of memory footprint as well as performance.
 For most systems the overhead will be negligible. However, the decision for using ROOM should be made explicitly
@@ -119,7 +119,7 @@ object paradigm, developers and teams need a phase of adaption. Every benefit co
 \subsection{Basic Concepts}
 \label{sec:basic_concepts}
 
-\subsubsection{Actor, Port, Protocol}
+\subsubsection*{Actor, Port, Protocol}
 
 The basic elements of ROOM are the actors with their ports and protocols.
 The protocol provides a formal interface description. The port is an interaction
@@ -151,7 +151,7 @@ other way round: The complex behavior will be provided by a network of relativel
 are communicating with each other via well defined interfaces.
 
 
-\subsubsection{Hierarchy in Structure and Behavior}
+\subsubsection*{Hierarchy in Structure and Behavior}
 
 ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy 
 means that actors can be nested to arbitrary depth. Usually you will add more and more details to your 
@@ -180,7 +180,7 @@ This simple example might give an idea how powerful this mechanisms is.
 
 The hierarchical FSM provides a rich tool box to describe real world problems (see chapter \ref{sec:room_concepts} \nameref{sec:room_concepts}).
 
-\subsubsection{Layering}
+\subsubsection*{Layering}
 
 Layering is another well known form of abstraction to reduce complexity in the structure of systems. ROOM 
 is probably the only language that supports layering directly as a language feature.
@@ -199,7 +199,7 @@ the \textit{ApplicationLayer} that implement an SAP for those services are conne
 implementation of the services. 
 Layering and actor hierarchies with port to port connections can be mixed on every level of granularity. 
 
-\subsubsection{Run to Completion}
+\subsubsection*{Run to Completion}
 \label{sec:run_to_completion}
 
 \emph{Run to completion} (RTC) is a very central concept of ROOM. It enables the developer to 
@@ -232,7 +232,7 @@ driven} and a mixture of both execution models. In future releases maybe also a 
 execution model will be supported, depending on the 
 requirements of the community.
 
-\subsubsection{Communication Methods}
+\subsubsection*{Communication Methods}
 
 \begin{itemize}
 \item \textbf{message driven} -- asynchronous, non blocking, no return value:\\
@@ -250,7 +250,7 @@ programming languages.
 
 \eTrice{} currently supports the two former communication methods.
 
-\subsubsection{Execution Methods}
+\subsubsection*{Execution Methods}
 
 \begin{itemize}
 \item \textbf{execution by receive event}: The message queue or the event dispatcher calls a 
@@ -261,7 +261,7 @@ programming languages.
 
 \eTrice{} currently supports the two former execution methods.
 
-\subsubsection{Execution Models}
+\subsubsection*{Execution Models}
 
 In present-day's embedded systems in most cases one or several of the following execution models are used:
 

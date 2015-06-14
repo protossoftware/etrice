@@ -52,7 +52,7 @@ ActorClass ActorClass1 {
 
 \subsection{Details}
 
-\subsubsection{Actor Classes, Actor References, Ports and Bindings}
+\subsubsection*{Actor Classes, Actor References, Ports and Bindings}
 
 An \room{ActorClass} defines the type (or blueprint) of an actor. Hierarchies are built by \room{ActorClass}es
 that contain \room{ActorRef}erences which have another \room{ActorClass} as type. The interface of an 
@@ -115,7 +115,7 @@ can not be accessed by the behavior of the \room{ActorClass}.
 \item \room{Binding}s can connect ports of the actor class and its contained actor references. 
 \end{itemize}
 
-\subsubsection{Attributes}
+\subsubsection*{Attributes}
 
 \room{Attribute}s are part of the \room{Structure} of an actor class.
 They can be of a \room{PrimitiveType} or a \room{DataClass}.
@@ -132,7 +132,7 @@ ActorClass ActorClass3 {
 }
 \end{lstlisting}
 
-\subsubsection{Operations}
+\subsubsection*{Operations}
 
 \room{Operation}s are part of the \room{Behavior} of an actor class.  Arguments and return values can be of a 
 \room{PrimitiveType} or a \room{DataClass}. Data classes can be passed by value (implicit) or by reference (\room{ref}).
@@ -215,7 +215,7 @@ define layering.
 
 \subsection{Notation}
 
-\subsubsection{Class Ports}
+\subsubsection*{Class Ports}
 
 These symbols can only appear on the border of an actor class symbol.
 
@@ -424,7 +424,7 @@ ActorClass ActorClass6 {
 \end{longtable}
 
 
-\subsubsection{Reference Ports}
+\subsubsection*{Reference Ports}
 
 These symbols can only appear on the border of an actor class. Since the type of port is defined 
 in the actor class, no textual notation for the Reference Ports exists.
@@ -634,7 +634,7 @@ We distinguish flat and hierarchical state machines.
 
 We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
 
-\subsubsection{Flat Finite State Machine}
+\subsubsection*{Flat Finite State Machine}
 
 The simpler flat finite state machines are composed of the elements shown in table \ref{tab:flat_fsm_notation}.
 
@@ -690,7 +690,7 @@ Transition tr0: initial -> DoingThis {
 \end{table}
 
 
-\subsubsection{Hierarchical Finite State Machine}
+\subsubsection*{Hierarchical Finite State Machine}
 
 The hierarchical finite state machine adds the notion of a sub state machine nested in a state.
 A few modeling elements listed in table \ref{tab:hier_fsm_notation} are added to the set listed above.

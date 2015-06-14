@@ -18,22 +18,23 @@
 <project name="ETRICE_HELP" basedir="." default="default">
 
 <!-- ============ setting up properties ============ --> 
-<property name="author" 	value="Frank Lippert" />
-<property name="version" 	value="1.0" />
+<property name="author" 		value="Frank Lippert" />
+<property name="version" 		value="1.0" />
 
-<property name="doc.dir" 	value="doc" />
-<property name="image.dir" 	value="${doc.dir}\images" />
-<property name="manual.dir" value="manual" />
-<property name="html.dir" 	value="html" />
-<property name="styles.dir" value="styles" />
+<property name="doc.dir" 		value="doc" />
+<property name="featuregen.dir" value="feature-gen" />
+<property name="image.dir" 		value="${doc.dir}\images" />
+<property name="manual.dir" 	value="manual" />
+<property name="html.dir" 		value="html" />
+<property name="styles.dir" 	value="styles" />
 
-<property name="tex.file" 	value="etrice-doc.tex" />
-<property name="pdf.file" 	value="${manual.dir}\etrice.pdf" />
-<property name="html.file" 	value="${html.dir}\etrice-doc.html" /> 
-<property name="toc.file" 	value="toc.xml" />
-<property name="style.file" value="${styles.dir}\build_eclipse_toc.xsl" />
+<property name="tex.file" 		value="etrice-doc.tex" />
+<property name="pdf.file" 		value="${manual.dir}\etrice.pdf" />
+<property name="html.file" 		value="${html.dir}\etrice-doc.html" /> 
+<property name="toc.file" 		value="toc.xml" />
+<property name="style.file" 	value="${styles.dir}\build_eclipse_toc.xsl" />
 
-<property name="xlibs.dir" value="xternalLibs" />	
+<property name="xlibs.dir" 		value="xternalLibs" />	
 
 <property environment="env"/>
 	
@@ -91,6 +92,9 @@
 			<uptodate targetfile="${pdf.file}" >
 				<srcfiles dir="${image.dir}" includes="**/*.*" />
 			</uptodate>
+			<uptodate targetfile="${pdf.file}" >
+				<srcfiles dir="${featuregen.dir}" includes="**/*.tex" />
+			</uptodate>
 		</and>
 	</condition>
 </target>
@@ -132,6 +136,9 @@
 			</uptodate>
 			<uptodate targetfile="${html.file}" >
 				<srcfiles dir="${image.dir}" includes="**/*.*" />
+			</uptodate>
+			<uptodate targetfile="${html.file}" >
+				<srcfiles dir="${featuregen.dir}" includes="**/*.tex" />
 			</uptodate>
 		</and>
 	</condition>

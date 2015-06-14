@@ -73,7 +73,7 @@ With \emph{Ctrl-Shift+F} or selecting \textit{Format} from the context menu you 
 the new \textit{ProtocolClass} is displayed in the outline view.
 
 \subsection{Create the Actor Structure}
-\subsubsection{Add two additional actor classes}
+\subsubsection*{Add two additional actor classes}
 
 Position the cursor outside any class definition and call the \textit{Content Assist} with \emph{Ctrl+Space}.
 Select \textit{ActorClass - actor class skeleton or ActorClass} and name the ActorClass \textit{Sender}.
@@ -110,7 +110,7 @@ RoomModel PingPong_Model {
 
 You can should also see the new \emph{ActorClass}es in the outline view.
 
-\subsubsection{Add ports to the actors}
+\subsubsection*{Add ports to the actors}
 
 To open the graphical structure editor, right click \textit{Receiver} in the Outline View and select \textit{Edit Structure}. Drag and Drop an 
 \textit{Interface Port} from the \emph{Palette} to the border of the \textit{Receiver} actor. Note that an \emph{Interface Port} can only be placed on the border of the actor. Name the port \textit{sender} and select \textit{PingPongProtocol} as Protocol from the drop down list. The checkboxes \textit{Conjugated} and \textit{Is Relay Port} stay unchecked. Click \textit{ok}. The 
@@ -125,7 +125,7 @@ Keep in mind that the protocol defines \textit{ping} as incoming message and \te
 \textit{Receiver} receives \emph{ping} and sends \emph{pong}. Therefore the \textit{Receiver}s port must be a 
 regular port. The \textit{Sender} has to send \textit{ping} and receive \textit{pong}. Therefore the \textit{Sender}s port must be a conjugated port.
 
-\subsubsection{Build hierarchical actor structure}
+\subsubsection*{Build hierarchical actor structure}
 
 Now we want to add the new actors to the structure of \emph{ActorClass} \emph{PingPongTop}.
 
@@ -139,7 +139,7 @@ via the binding tool int the \emph{Palette}. The resulting structure should look
 
 We have build the structure of a hierarchical actor system with two actors that send each other messages.
 
-\subsubsection{Import the Timing Service}
+\subsubsection*{Import the Timing Service}
 
 In order to implement the waiting time of the \emph{Receiver} we need a timing service. The timing service is provided by the model library and must be imported before it can be used in your model.
 
@@ -236,7 +236,7 @@ Therefore the SAPs to access the timing service must be added in the .room file.
 
 Now the \emph{Receiver} can use the timing service.
 
-\subsubsection{Inspect the Actor Structure}
+\subsubsection*{Inspect the Actor Structure}
 Before we start with the implementation of the behavior we will have a short look at the instance tree of the application we built so far:
 
 \includegraphics[width=0.4\textwidth]{images/017-09-PingPong_InstanceTree.jpg}
