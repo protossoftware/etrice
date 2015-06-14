@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?p2f version='1.0.0'?>
+<p2f version='1.0.0'>
+  <ius size='2'>
+    <iu id='org.eclipse.cdt.feature.group' name='C/C++ Development Tools' version='8.6.0.201502131403'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/luna/'/>
+      </repositories>
+    </iu>
+    <iu id='epp.package.modeling' name='Eclipse Modeling Tools' version='4.4.2.20150219-0708'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/luna/'/>
+      </repositories>
+    </iu>
+  </ius>
+</p2f>
