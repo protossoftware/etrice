@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.releng" componentType="buckminster" version="0.5.0.qualifier">
     <cs:dependencies>
+        <cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.etrice.cdt-integration.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.generator.c.tests" componentType="buckminster"/>
@@ -17,9 +18,17 @@
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials.java" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle"/>
     </cs:dependencies>
     <cs:actions>
+        <cs:public name="copy.deliveries" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="buckminster.ant"/>
+                <cs:property key="targets" value="copy.deliveries"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="root" value="${WORKSPACE}"/>
+            </cs:properties>
+        </cs:public>
         <cs:public name="copy.sites" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buckminster.ant"/>
@@ -61,6 +70,17 @@
             <cs:products>
                 <cs:public name="readable.index" base="site/"/>
             </cs:products>
+        </cs:public>
+        <cs:public name="export.c.generator" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="../../plugins/org.eclipse.etrice.generator.c/export_c_generator.xml"/>
+                <cs:property key="targets" value="create_run_jar"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="eclipse_home" value="${eclipse.home}"/>
+                <cs:property key="export_destination" value="../../deliveries"/>
+                <cs:property key="repo_loc" value="../../../"/>
+            </cs:properties>
         </cs:public>
         <cs:public name="promote.sites" actor="ant">
             <cs:actorProperties>

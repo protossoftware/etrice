@@ -11,6 +11,10 @@
 		<echo message="eclipse_home = ${eclipse_home}"/>
 		<echo message="repo_loc = ${repo_loc}"/>
 	</target>
+    <!--
+    	use this line below
+    	<zipfileset src="${repo_loc}/plugins/org.eclipse.etrice.generator.c/jar-in-jar-loader.zip"/>
+    -->
 	
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
@@ -20,93 +24,112 @@
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="org.eclipse.etrice.generator.c.Main"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./ org.eclipse.xtext_2.6.2.v201407030533.jar org.eclipse.emf.ecore.xmi_2.10.0.v20140514-1158.jar org.eclipse.emf.ecore_2.10.0.v20140514-1158.jar org.eclipse.emf.common_2.10.0.v20140514-1158.jar org.antlr.runtime_3.2.0.v201101311130.jar com.google.inject_3.0.0.v201312141243.jar org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar org.apache.commons.cli_1.2.0.v201404270220.jar org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar org.eclipse.xtext.util_2.6.2.v201407030533.jar com.google.guava_11.0.2.v201303041551.jar javax.inject_1.0.0.v20091030.jar org.eclipse.xtext.xbase_2.6.2.v201407030533.jar org.eclipse.xtext.common.types_2.6.2.v201407030533.jar org.eclipse.xtend.lib_2.6.2.v201407030533.jar org.eclipse.xtext.xbase.lib_2.6.2.v201407030533.jar org.eclipse.xtext.generator_2.6.2.v201407030533.jar org.eclipse.xtend_2.0.0.v201406030414.jar com.ibm.icu_50.1.1.v201304230130.jar org.eclipse.xpand_2.0.0.v201406030414.jar org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar org.eclipse.emf.codegen.ecore_2.10.0.v20140519-0339.jar org.eclipse.emf.codegen_2.10.0.v20140519-0339.jar de.itemis.xtext.antlr_2.1.1.v201405091103.jar org.antlr.generator_3.2.0.v201405091103.jar org.eclipse.emf.mwe2.lib_2.4.1.v201309030422.jar org.apache.commons.logging_1.1.1.v201101211721.jar org.eclipse.emf.mwe2.launch_2.6.1.v201406120758.jar org.eclipse.emf.mwe2.language_2.6.1.v201406120758.jar org.eclipse.core.runtime_3.9.100.v20131218-1515.jar javax.annotation_1.1.0.v201209060031.jar org.eclipse.osgi_3.9.1.v20140110-1610.jar org.eclipse.equinox.common_3.6.200.v20130402-1505.jar org.eclipse.core.jobs_3.5.300.v20130429-1813.jar runtime_registry_compatibility.jar org.eclipse.equinox.registry_3.5.301.v20130717-1549.jar org.eclipse.equinox.preferences_3.5.100.v20130422-1538.jar org.eclipse.core.contenttype_3.4.200.v20130326-1255.jar org.eclipse.equinox.app_1.3.100.v20130327-1442.jar org.eclipse.core.resources_3.8.101.v20130717-0806.jar org.apache.log4j_1.2.15.v201012070815.jar org.eclipse.xtext.ui_2.6.2.v201407030533.jar org.eclipse.ui_3.105.0.v20130522-1122.jar org.eclipse.swt_3.102.1.v20140206-1334.jar org.eclipse.swt.win32.win32.x86_64_3.102.1.v20140206-1358.jar org.eclipse.jface_3.9.1.v20130725-1141.jar org.eclipse.core.commands_3.6.100.v20130515-1857.jar org.eclipse.ui.workbench_3.105.2.v20140211-1711.jar org.eclipse.e4.ui.workbench3_0.12.0.v20130515-1857.jar org.eclipse.ui.editors_3.8.100.v20130513-1637.jar org.eclipse.core.filebuffers_3.5.300.v20130225-1821.jar org.eclipse.jface.text_3.8.101.v20130802-1147.jar org.eclipse.text_3.5.300.v20130515-1451.jar org.eclipse.emf.edit.ui_2.10.0.v20140519-0339.jar org.eclipse.ui.views_3.6.100.v20130326-1250.jar org.eclipse.emf.edit_2.10.0.v20140519-0339.jar org.eclipse.emf.ecore.change_2.10.0.v20140514-1158.jar org.eclipse.emf.common.ui_2.9.0.v20140519-0339.jar org.eclipse.ltk.core.refactoring_3.6.100.v20130605-1748.jar org.eclipse.ui.ide_3.9.2.v20131004-0923.jar org.eclipse.xtext.ui.shared_2.6.2.v201407030533.jar org.eclipse.xtext.builder_2.6.2.v201407030533.jar org.eclipse.debug.ui_3.9.0.v20130516-1713.jar org.eclipse.debug.core_3.8.0.v20130514-0954.jar org.eclipse.xtext.common.types.ui_2.6.2.v201407030533.jar org.eclipse.xtext.common.types.edit_2.6.2.v201407030533.jar org.eclipse.xtext.ui.codetemplates.ui_2.6.2.v201407030533.jar org.eclipse.xtext.ui.codetemplates_2.6.2.v201407030533.jar org.eclipse.compare_3.5.401.v20130709-1308.jar org.eclipse.compare.core_3.5.300.v20130514-1224.jar org.eclipse.core.filesystem_1.4.0.v20130514-1240.jar org.eclipse.ui.workbench.texteditor_3.8.101.v20130729-1318.jar org.objectweb.asm_5.0.1.v201404251740.jar org.eclipse.emf_2.6.0.v20140519-0339.jar org.apache.commons.io_2.0.1.v201105210651.jar"/>
+                <attribute name="Rsrc-Class-Path" value="./ org.eclipse.xtext_2.7.3.v201411190455.jar org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar org.eclipse.emf.common_2.10.1.v20150123-0348.jar org.antlr.runtime_3.2.0.v201101311130.jar com.google.inject_3.0.0.v201312141243.jar org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar org.apache.commons.cli_1.2.0.v201404270220.jar org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar org.eclipse.xtext.util_2.7.3.v201411190455.jar com.google.guava_15.0.0.v201403281430.jar javax.inject_1.0.0.v20091030.jar org.eclipse.xtext.xbase_2.7.3.v201411190455.jar org.eclipse.xtext.common.types_2.7.3.v201411190455.jar org.eclipse.xtend.lib_2.7.3.v201411190455.jar org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar org.eclipse.xtext.generator_2.7.3.v201411190455.jar org.eclipse.xtend_2.0.0.v201406030414.jar com.ibm.icu_52.1.1.v201501240615.jar org.eclipse.xpand_2.0.0.v201406030414.jar org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar org.apache.commons.logging_1.1.1.v201101211721.jar org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar org.eclipse.core.runtime_3.10.0.v20140318-2214.jar javax.annotation_1.2.0.v201401042248.jar org.eclipse.osgi_3.10.2.v20150203-1939.jar org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar org.eclipse.equinox.common_3.6.200.v20130402-1505.jar org.eclipse.core.jobs_3.6.1.v20141014-1248.jar runtime_registry_compatibility.jar org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar org.eclipse.equinox.app_1.3.200.v20130910-1609.jar org.eclipse.core.resources_3.9.1.v20140825-1431.jar org.apache.log4j_1.2.15.v201012070815.jar org.eclipse.xtext.ui_2.7.3.v201411190455.jar org.eclipse.ui_3.106.1.v20141002-1150.jar org.eclipse.swt_3.103.2.v20150203-1313.jar org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar org.eclipse.jface_3.10.2.v20141021-1035.jar org.eclipse.core.commands_3.6.100.v20140528-1422.jar org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar org.eclipse.ui.editors_3.8.200.v20140401-1310.jar org.eclipse.core.filebuffers_3.5.400.v20140127-1516.jar org.eclipse.jface.text_3.9.2.v20141003-1326.jar org.eclipse.text_3.5.300.v20130515-1451.jar org.eclipse.emf.edit.ui_2.10.2.v20150123-0452.jar org.eclipse.ui.views_3.7.0.v20140408-0703.jar org.eclipse.emf.edit_2.10.1.v20150123-0452.jar org.eclipse.emf.ecore.change_2.10.0.v20150123-0348.jar org.eclipse.emf.common.ui_2.9.0.v20150123-0452.jar org.eclipse.ltk.core.refactoring_3.6.101.v20140817-1500.jar org.eclipse.ui.ide_3.10.2.v20141118-1227.jar org.eclipse.xtext.ui.shared_2.7.3.v201411190455.jar org.eclipse.xtext.builder_2.7.3.v201411190455.jar org.eclipse.debug.ui_3.10.2.v20141014-1039.jar org.eclipse.debug.core_3.9.1.v20140805-1629.jar org.eclipse.xtext.common.types.ui_2.7.3.v201411190455.jar org.eclipse.xtext.common.types.edit_2.7.3.v201411190455.jar org.eclipse.xtext.ui.codetemplates.ui_2.7.3.v201411190455.jar org.eclipse.xtext.ui.codetemplates_2.7.3.v201411190455.jar org.eclipse.compare_3.5.501.v20140817-1445.jar org.eclipse.compare.core_3.5.400.v20130903-0736.jar org.eclipse.core.filesystem_1.4.100.v20140514-1614.jar org.eclipse.ui.workbench.texteditor_3.9.0.v20140411-1521.jar org.objectweb.asm_5.0.1.v201404251740.jar org.eclipse.emf.transaction_1.8.0.201405281451.jar org.eclipse.emf.validation_1.8.0.201405281429.jar org.eclipse.graphiti_0.11.2.v20150204-0954.jar org.eclipse.graphiti.mm_0.11.2.v20150204-0954.jar org.eclipse.emf.databinding_1.3.0.v20150123-0452.jar org.eclipse.core.databinding_1.4.2.v20140729-1044.jar org.eclipse.core.databinding.observable_1.4.1.v20140210-1835.jar org.eclipse.jface.databinding_1.6.200.v20140528-1422.jar org.eclipse.core.databinding.property_1.4.200.v20140214-0004.jar org.eclipse.jdt.core_3.10.2.v20150120-1634.jar org.eclipse.jdt.compiler.apt_1.1.0.v20150122-0735.jar org.eclipse.jdt.compiler.tool_1.0.300.v20150114-1827.jar org.eclipse.graphiti.ui_0.11.2.v20150204-0954.jar org.eclipse.gef_3.9.100.201408150207.jar org.eclipse.draw2d_3.9.101.201408150207.jar org.eclipse.ui.forms_3.6.100.v20140422-1825.jar org.eclipse.emf.workspace_1.5.1.201405281451.jar org.eclipse.ui.views.properties.tabbed_3.6.0.v20140519-0906.jar org.eclipse.emf_2.6.0.v20150123-0452.jar org.apache.commons.io_2.0.1.v201105210651.jar"/>
             </manifest>
-            <zipfileset src="jar-in-jar-loader.zip"/>
+            <zipfileset src="${repo_loc}/plugins/org.eclipse.etrice.generator.c/jar-in-jar-loader.zip"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.room.ui/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.fsm.ui/bin"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore.xmi_2.10.0.v20140514-1158.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore_2.10.0.v20140514-1158.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.common_2.10.0.v20140514-1158.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.common_2.10.1.v20150123-0348.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.antlr.runtime_3.2.0.v201101311130.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="com.google.inject_3.0.0.v201312141243.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.cli_1.2.0.v201404270220.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.util_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="com.google.guava_11.0.2.v201303041551.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.util_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="com.google.guava_15.0.0.v201403281430.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="javax.inject_1.0.0.v20091030.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.lib_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase.lib_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.generator_2.6.2.v201407030533.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.lib_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.generator_2.7.3.v201411190455.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend_2.0.0.v201406030414.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="com.ibm.icu_50.1.1.v201304230130.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="com.ibm.icu_52.1.1.v201501240615.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xpand_2.0.0.v201406030414.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen.ecore_2.10.0.v20140519-0339.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen_2.10.0.v20140519-0339.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="de.itemis.xtext.antlr_2.1.1.v201405091103.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.antlr.generator_3.2.0.v201405091103.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.lib_2.4.1.v201309030422.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.logging_1.1.1.v201101211721.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.launch_2.6.1.v201406120758.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.language_2.6.1.v201406120758.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.runtime_3.9.100.v20131218-1515.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="javax.annotation_1.1.0.v201209060031.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.osgi_3.9.1.v20140110-1610.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.runtime_3.10.0.v20140318-2214.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="javax.annotation_1.2.0.v201401042248.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.osgi_3.10.2.v20150203-1939.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.common_3.6.200.v20130402-1505.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.jobs_3.5.300.v20130429-1813.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins\org.eclipse.core.runtime.compatibility.registry_3.5.200.v20130514-1256" includes="runtime_registry_compatibility.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.registry_3.5.301.v20130717-1549.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.preferences_3.5.100.v20130422-1538.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.contenttype_3.4.200.v20130326-1255.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.app_1.3.100.v20130327-1442.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.resources_3.8.101.v20130717-0806.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.jobs_3.6.1.v20141014-1248.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins\org.eclipse.core.runtime.compatibility.registry_3.5.300.v20140128-0851" includes="runtime_registry_compatibility.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.app_1.3.200.v20130910-1609.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.resources_3.9.1.v20140825-1431.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.log4j_1.2.15.v201012070815.jar"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.common/bin"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui_3.105.0.v20130522-1122.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt_3.102.1.v20140206-1334.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt.win32.win32.x86_64_3.102.1.v20140206-1358.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface_3.9.1.v20130725-1141.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.commands_3.6.100.v20130515-1857.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.workbench_3.105.2.v20140211-1711.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.e4.ui.workbench3_0.12.0.v20130515-1857.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.editors_3.8.100.v20130513-1637.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.filebuffers_3.5.300.v20130225-1821.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface.text_3.8.101.v20130802-1147.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui_3.106.1.v20141002-1150.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt_3.103.2.v20150203-1313.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface_3.10.2.v20141021-1035.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.commands_3.6.100.v20140528-1422.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.editors_3.8.200.v20140401-1310.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.filebuffers_3.5.400.v20140127-1516.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface.text_3.9.2.v20141003-1326.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.text_3.5.300.v20130515-1451.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.edit.ui_2.10.0.v20140519-0339.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.views_3.6.100.v20130326-1250.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.edit_2.10.0.v20140519-0339.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore.change_2.10.0.v20140514-1158.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.common.ui_2.9.0.v20140519-0339.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ltk.core.refactoring_3.6.100.v20130605-1748.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.ide_3.9.2.v20131004-0923.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.shared_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.builder_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.debug.ui_3.9.0.v20130516-1713.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.debug.core_3.8.0.v20130514-0954.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types.ui_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types.edit_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.codetemplates.ui_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.codetemplates_2.6.2.v201407030533.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.compare_3.5.401.v20130709-1308.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.compare.core_3.5.300.v20130514-1224.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.filesystem_1.4.0.v20130514-1240.jar"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.workbench.texteditor_3.8.101.v20130729-1318.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.edit.ui_2.10.2.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.views_3.7.0.v20140408-0703.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.edit_2.10.1.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore.change_2.10.0.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.common.ui_2.9.0.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ltk.core.refactoring_3.6.101.v20140817-1500.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.ide_3.10.2.v20141118-1227.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.shared_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.builder_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.debug.ui_3.10.2.v20141014-1039.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.debug.core_3.9.1.v20140805-1629.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types.ui_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types.edit_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.codetemplates.ui_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.ui.codetemplates_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.compare_3.5.501.v20140817-1445.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.compare.core_3.5.400.v20130903-0736.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.filesystem_1.4.100.v20140514-1614.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.workbench.texteditor_3.9.0.v20140411-1521.jar"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.common.ui/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.fsm/bin"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.objectweb.asm_5.0.1.v201404251740.jar"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.room/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel.fsm/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.transaction_1.8.0.201405281451.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.validation_1.8.0.201405281429.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.graphiti_0.11.2.v20150204-0954.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.graphiti.mm_0.11.2.v20150204-0954.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.databinding_1.3.0.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.databinding_1.4.2.v20140729-1044.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.databinding.observable_1.4.1.v20140210-1835.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface.databinding_1.6.200.v20140528-1422.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.databinding.property_1.4.200.v20140214-0004.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jdt.core_3.10.2.v20150120-1634.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jdt.compiler.apt_1.1.0.v20150122-0735.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jdt.compiler.tool_1.0.300.v20150114-1827.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.graphiti.ui_0.11.2.v20150204-0954.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.gef_3.9.100.201408150207.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.draw2d_3.9.101.201408150207.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.forms_3.6.100.v20140422-1825.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.workspace_1.5.1.201405281451.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.views.properties.tabbed_3.6.0.v20140519-0906.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.ui.common.base/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.fsm/bin"/>
-            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf_2.6.0.v20140519-0339.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf_2.6.0.v20150123-0452.jar"/>
             <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.io_2.0.1.v201105210651.jar"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.etphys/bin"/>
