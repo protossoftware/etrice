@@ -162,7 +162,7 @@
 	
 	<target name="copy.deliveries">
 		<echo message="copy deliveries to last_success area" />
-		<copydir dest="${root}/last_success/deliveries" src="${root}/deliveries" />
+		<copydir dest="${root}/last_success/deliveries" src="${root}/buildroot/deliveries" />
 	</target>
 
 	<!-- Sub targets for copy.sites -->

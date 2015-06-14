@@ -11,3 +11,4 @@ src-gen-info/*
 *.gz
 *.toc
 *.log
+/MinGWDebug/
