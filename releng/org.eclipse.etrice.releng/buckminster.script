@@ -25,9 +25,9 @@ perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" o
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.c.tests#run_tests
 #perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.cpp.tests#run_tests
 
-perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.c.generator
-#perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.java.generator
-perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#copy.deliveries
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.c.generator
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.java.generator
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#copy.deliveries
 
 perform -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.site#site.p2.zip
 

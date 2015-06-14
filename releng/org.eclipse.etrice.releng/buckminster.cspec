@@ -82,6 +82,17 @@
                 <cs:property key="repo_loc" value="${WORKSPACE}/etrice_local_repo"/>
             </cs:properties>
         </cs:public>
+        <cs:public name="export.java.generator" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="../../plugins/org.eclipse.etrice.generator.java/export_java_generator.xml"/>
+                <cs:property key="targets" value="create_run_jar"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="eclipse_home" value="${WORKSPACE}/buildroot/target.platform"/>
+                <cs:property key="export_destination" value="${WORKSPACE}/buildroot/deliveries"/>
+                <cs:property key="repo_loc" value="${WORKSPACE}/etrice_local_repo"/>
+            </cs:properties>
+        </cs:public>
         <cs:public name="promote.sites" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buckminster.ant"/>
