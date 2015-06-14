@@ -1,13 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?p2f version='1.0.0'?>
 <p2f version='1.0.0'>
-  <ius size='2'>
-    <iu id='org.eclipse.cdt.feature.group' name='C/C++ Development Tools' version='8.6.0.201502131403'>
+  <ius size='4'>
+   <iu id='epp.package.modeling' name='Eclipse Modeling Tools'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/luna/'/>
+      </repositories>
+   </iu>
+   <iu id='org.eclipse.cdt.feature.group' name='C/C++ Development Tools'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/luna/'/>
+      </repositories>
+	</iu>
+    <iu id='org.eclipse.graphiti.sdk.feature.feature.group' name='Graphiti SDK (Incubation)'>
       <repositories size='1'>
         <repository location='http://download.eclipse.org/releases/luna/'/>
       </repositories>
     </iu>
-    <iu id='epp.package.modeling' name='Eclipse Modeling Tools' version='4.4.2.20150219-0708'>
+    <iu id='org.eclipse.xtext.sdk.feature.group' name='Xtext Complete SDK'>
       <repositories size='1'>
         <repository location='http://download.eclipse.org/releases/luna/'/>
       </repositories>
