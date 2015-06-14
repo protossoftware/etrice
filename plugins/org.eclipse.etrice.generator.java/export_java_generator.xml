@@ -19,7 +19,7 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar" depends="testProps">
-        <jar destfile="C:/Users/hrentz/Documents/protos/Entwicklung/protos/eTrice/deliveries/org.eclipse.etrice.generator.java.jar">
+        <jar destfile="${export_destination}/org.eclipse.etrice.generator.java.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="org.eclipse.etrice.generator.java.Main"/>
@@ -27,73 +27,73 @@
                 <attribute name="Rsrc-Class-Path" value="./ org.eclipse.xtext_2.7.3.v201411190455.jar org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar org.eclipse.emf.common_2.10.1.v20150123-0348.jar org.antlr.runtime_3.2.0.v201101311130.jar com.google.inject_3.0.0.v201312141243.jar org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar org.apache.commons.cli_1.2.0.v201404270220.jar org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar org.eclipse.xtext.util_2.7.3.v201411190455.jar com.google.guava_15.0.0.v201403281430.jar javax.inject_1.0.0.v20091030.jar org.eclipse.xtext.xbase_2.7.3.v201411190455.jar org.eclipse.xtext.common.types_2.7.3.v201411190455.jar org.eclipse.xtend.lib_2.7.3.v201411190455.jar org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar org.eclipse.xtext.generator_2.7.3.v201411190455.jar org.eclipse.xtend_2.0.0.v201406030414.jar com.ibm.icu_52.1.1.v201501240615.jar org.eclipse.xpand_2.0.0.v201406030414.jar org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar org.apache.commons.logging_1.1.1.v201101211721.jar org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar org.eclipse.core.runtime_3.10.0.v20140318-2214.jar javax.annotation_1.2.0.v201401042248.jar org.eclipse.osgi_3.10.2.v20150203-1939.jar org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar org.eclipse.equinox.common_3.6.200.v20130402-1505.jar org.eclipse.core.jobs_3.6.1.v20141014-1248.jar runtime_registry_compatibility.jar org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar org.eclipse.equinox.app_1.3.200.v20130910-1609.jar org.eclipse.core.resources_3.9.1.v20140825-1431.jar org.apache.log4j_1.2.15.v201012070815.jar org.objectweb.asm_5.0.1.v201404251740.jar org.eclipse.emf_2.6.0.v20150123-0452.jar org.apache.commons.io_2.0.1.v201105210651.jar org.eclipse.ui.ide_3.10.2.v20141118-1227.jar org.eclipse.ui.views_3.7.0.v20140408-0703.jar org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar org.eclipse.ui_3.106.1.v20141002-1150.jar org.eclipse.swt_3.103.2.v20150203-1313.jar org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar org.eclipse.jface_3.10.2.v20141021-1035.jar org.eclipse.core.commands_3.6.100.v20140528-1422.jar org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar"/>
             </manifest>
         	<zipfileset src="${repo_loc}/plugins/org.eclipse.etrice.generator.java/jar-in-jar-loader.zip"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.genmodel/bin"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.common_2.10.1.v20150123-0348.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.antlr.runtime_3.2.0.v201101311130.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="com.google.inject_3.0.0.v201312141243.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.apache.commons.cli_1.2.0.v201404270220.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext.util_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="com.google.guava_15.0.0.v201403281430.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="javax.inject_1.0.0.v20091030.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext.xbase_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext.common.types_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtend.lib_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtext.generator_2.7.3.v201411190455.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtend_2.0.0.v201406030414.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="com.ibm.icu_52.1.1.v201501240615.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xpand_2.0.0.v201406030414.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.apache.commons.logging_1.1.1.v201101211721.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.core.runtime_3.10.0.v20140318-2214.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="javax.annotation_1.2.0.v201401042248.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.osgi_3.10.2.v20150203-1939.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.equinox.common_3.6.200.v20130402-1505.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.core.jobs_3.6.1.v20141014-1248.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins\org.eclipse.core.runtime.compatibility.registry_3.5.300.v20140128-0851" includes="runtime_registry_compatibility.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.equinox.app_1.3.200.v20130910-1609.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.core.resources_3.9.1.v20140825-1431.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.apache.log4j_1.2.15.v201012070815.jar"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.common/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.fsm/bin"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.objectweb.asm_5.0.1.v201404251740.jar"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.room/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.genmodel.fsm/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.etphys/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.etmap/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.generator.fsm/bin"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.emf_2.6.0.v20150123-0452.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.apache.commons.io_2.0.1.v201105210651.jar"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.generator/bin"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.ui.ide_3.10.2.v20141118-1227.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.ui.views_3.7.0.v20140408-0703.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.generator.config/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.core.config/bin"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.ui_3.106.1.v20141002-1150.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.swt_3.103.2.v20150203-1313.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.jface_3.10.2.v20141021-1035.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.core.commands_3.6.100.v20140528-1422.jar"/>
-            <zipfileset dir="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-luna-SR2-incubation-win32-x86_64\eclipse\plugins" includes="org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.generator.doc/bin"/>
-            <fileset dir="C:/Users/hrentz/Documents/git-repos/org.eclipse.etrice/plugins/org.eclipse.etrice.generator.java/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.common_2.10.1.v20150123-0348.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.antlr.runtime_3.2.0.v201101311130.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="com.google.inject_3.0.0.v201312141243.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.cli_1.2.0.v201404270220.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.util_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="com.google.guava_15.0.0.v201403281430.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="javax.inject_1.0.0.v20091030.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.common.types_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.lib_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtext.generator_2.7.3.v201411190455.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend_2.0.0.v201406030414.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="com.ibm.icu_52.1.1.v201501240615.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xpand_2.0.0.v201406030414.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.logging_1.1.1.v201101211721.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.runtime_3.10.0.v20140318-2214.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="javax.annotation_1.2.0.v201401042248.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.osgi_3.10.2.v20150203-1939.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.common_3.6.200.v20130402-1505.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.jobs_3.6.1.v20141014-1248.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins\org.eclipse.core.runtime.compatibility.registry_3.5.300.v20140128-0851" includes="runtime_registry_compatibility.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.equinox.app_1.3.200.v20130910-1609.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.resources_3.9.1.v20140825-1431.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.log4j_1.2.15.v201012070815.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.common/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.fsm/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.objectweb.asm_5.0.1.v201404251740.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.room/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel.fsm/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.etphys/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.etmap/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.fsm/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.emf_2.6.0.v20150123-0452.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.apache.commons.io_2.0.1.v201105210651.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.ide_3.10.2.v20141118-1227.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.views_3.7.0.v20140408-0703.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.config/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.config/bin"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.ui_3.106.1.v20141002-1150.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt_3.103.2.v20150203-1313.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.jface_3.10.2.v20141021-1035.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.core.commands_3.6.100.v20140528-1422.jar"/>
+            <zipfileset dir="${eclipse_home}\plugins" includes="org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.doc/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.java/bin"/>
         </jar>
     </target>
 </project>
