@@ -145,5 +145,6 @@
         <copy failonerror="false" file="${eclipse_home}/plugins/org.eclipse.emf_2.6.0.v20150123-0452.jar" todir="${export_destination}/org.eclipse.etrice.generator.c_lib"/>
         <copy failonerror="false" file="${eclipse_home}/plugins/org.apache.commons.io_2.0.1.v201105210651.jar" todir="${export_destination}/org.eclipse.etrice.generator.c_lib"/>
 		<zip destfile="${zip_destination}/eTrice-C-generator.zip" basedir="${export_destination}" />
+    	<echo message="created ${zip_destination}/eTrice-C-generator.zip" />
     </target>
 </project>

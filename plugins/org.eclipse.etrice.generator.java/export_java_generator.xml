@@ -101,5 +101,6 @@
         <copy failonerror="false" file="${eclipse_home}/plugins/org.eclipse.core.commands_3.6.100.v20140528-1422.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
         <copy failonerror="false" file="${eclipse_home}/plugins/org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
 		<zip destfile="${zip_destination}/eTrice-Java-generator.zip" basedir="${export_destination}" />
+    	<echo message="created ${zip_destination}/eTrice-Java-generator.zip" />
     </target>
 </project>
