@@ -10,11 +10,11 @@
 	-->
 	
 	<property environment="env"/>
-	<property name="export_destination" location="${env.EXPORT_DESTINATION}/C-generator"/>
+	<property name="zip_destination" location="${env.ZIP_DESTINATION}"/>
 	<property name="eclipse_home" location="${env.ECLIPSE_HOME}"/>
 	<property name="repo_loc" location="${env.REPO_LOC}"/>
 	
-	<property name="zip_destination" location="${env.EXPORT_DESTINATION}"/>
+	<property name="export_destination" location="${zip_destination}/C-generator"/>
 	
 	<target name="testProps">
 		<echo message="zip_destination = ${zip_destination}"/>

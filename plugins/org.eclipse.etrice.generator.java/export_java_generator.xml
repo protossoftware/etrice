@@ -10,17 +10,17 @@
 	-->
 	
 	<property environment="env"/>
-	<property name="export_destination" location="${env.EXPORT_DESTINATION}/Java-generator"/>
+	<property name="zip_destination" location="${env.ZIP_DESTINATION}"/>
 	<property name="eclipse_home" location="${env.ECLIPSE_HOME}"/>
 	<property name="repo_loc" location="${env.REPO_LOC}"/>
 	
-	<property name="zip_destination" location="${env.EXPORT_DESTINATION}"/>
+	<property name="export_destination" location="${zip_destination}/Java-generator"/>
 	
 	<target name="testProps">
 		<echo message="zip_destination = ${zip_destination}"/>
-		<echo message="export_destination = ${export_destination}"/>
 		<echo message="eclipse_home = ${eclipse_home}"/>
 		<echo message="repo_loc = ${repo_loc}"/>
+		<echo message="export_destination = ${export_destination}"/>
 	</target>
 	
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->

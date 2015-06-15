@@ -78,8 +78,8 @@
             </cs:actorProperties>
             <cs:properties>
                 <cs:property key="eclipse_home" value="${WORKSPACE}/buildroot/target.platform"/>
-                <cs:property key="export_destination" value="${WORKSPACE}/buildroot/deliveries"/>
                 <cs:property key="repo_loc" value="${WORKSPACE}/etrice_local_repo"/>
+                <cs:property key="zip_destination" value="${WORKSPACE}/buildroot/deliveries"/>
             </cs:properties>
         </cs:public>
         <cs:public name="export.java.generator" actor="ant">
@@ -89,8 +89,8 @@
             </cs:actorProperties>
             <cs:properties>
                 <cs:property key="eclipse_home" value="${WORKSPACE}/buildroot/target.platform"/>
-                <cs:property key="export_destination" value="${WORKSPACE}/buildroot/deliveries"/>
                 <cs:property key="repo_loc" value="${WORKSPACE}/etrice_local_repo"/>
+                <cs:property key="zip_destination" value="${WORKSPACE}/buildroot/deliveries"/>
             </cs:properties>
         </cs:public>
         <cs:public name="promote.sites" actor="ant">
