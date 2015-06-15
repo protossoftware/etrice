@@ -16,6 +16,7 @@
 		<sequential>
 			<delete file="${target}/@{name}.zip" />
 			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="pom.xml,bin/**,Debug/**,Release/**,*.cspec,jgen_*,target/**,WindowsMinGW/**,LinuxPosix/**"  />
+			<echo message="zipped ${target}/@{name}.zip" />
 		</sequential>
 	</macrodef>
 
@@ -31,6 +32,8 @@
 		<zip_project source="../../examples" name="org.eclipse.etrice.template.c" />
 		<!--<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.simulators.trafficlight" />-->
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.dynamicactors" />
+		
+		<echo message="done zipping wizard contents" />
 	</target>
 
 </project>
