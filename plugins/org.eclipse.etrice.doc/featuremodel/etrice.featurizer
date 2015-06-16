@@ -8,7 +8,7 @@ FeaturizerModel eTrice
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
 	
 	texDocGenerator {
-		filePathName "300-eTrice-reference"
+		filePathName "300-eTrice-reference" 
 	} 
 	
 	contains ROOMLanguage

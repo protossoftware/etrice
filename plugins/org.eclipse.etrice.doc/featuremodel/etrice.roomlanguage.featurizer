@@ -4,7 +4,22 @@ FeaturizerModel eTriceROOMLanguage
 
 
 Feature ROOMLanguage 
-	description '''Real Time Object Oriented Modeling (ROOM) is a language ... '''
+	description '''The Real Time Object Oriented Modeling (ROOM).'''
+	text '''
+		eTrice comprises several models:
+
+		\begin{itemize}
+		\item the ROOM model (*.room) -- defines model classes and the logical structure of the model
+		\item the Config model (*.config) -- defines configuration values for attributes
+		\item the Physical model (*.etphys) -- defines the structure and properties of the physical system
+		\item the Mapping model (*.etmap) -- defines a mapping from logical elements to physical elements
+		\end{itemize}
+		
+		In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
+		\begin{center}
+			\includegraphics[width=.5\textwidth]{images/080-models.jpg}
+		\end{center}
+	'''
 	contains LogicalModel 
 	contains PhysicalModel 
 	contains MappingModel
@@ -13,7 +28,46 @@ Feature ROOMLanguage
 ;
 
 Feature Inheritance
-	description '''Inheritance bla'''
+	description '''A class can specify a super class and inherits elements from the super class hierarchy.'''
+	text '''
+		\begin{lstlisting}[language=ROOM]
+		ActorClass ActorSubClass extends ActorBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		ActorClass ActorBaseClass {
+			Interface {
+				Port port1 : ProtocolBaseClass
+			}
+			Structure {
+				Attribute attribute1 : uint32
+			}
+			Behavior {
+				Operation operation1(){
+					"return;"
+				}
+			}
+		}
+		
+		ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		ProtocolClass ProtocolBaseClass {
+			incoming {
+				Message message1()
+			}
+		}
+		
+		DataClass DataSubClass extends DataBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		DataClass DataBaseClass {
+			Attribute attribute1 : uint32
+		}
+	\end{lstlisting}
+	'''
 	prototype	
 ;
 
@@ -26,7 +80,10 @@ Feature PhysicalModel
 
 Feature MappingModel
 	shortName '''Mapping Model'''
-	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel. It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.'''
+	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel.'''
+	text '''
+		It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.
+	'''
 	uses LogicalModel
 	uses PhysicalModel
 	stable
@@ -40,7 +97,17 @@ Feature ConfigModel
 
 Feature LogicalModel
 	shortName '''Logical Model'''
-	description '''The LogicalModel describes the logical structure and behavior of a ROOM application. The LogicalModel an its elements can be mapped on any PhysicalModel and its elements...'''
+	description '''The LogicalModel describes the logical structure and behavior of a ROOM application.'''
+	text '''
+		The ROOM model defines DataTypes, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems.
+		Thereby the three latter form a hierarchy. The LogicalSystem is the top level element of the structure. 
+		It contains references to SubSystemClass elements. The SubSystemClass in turn contains 
+		references to ActorClass elements which again contain (recursively) references to 
+		ActorClass elements. The complete structural hierarchy implies a tree which has the 
+		LogicalSystem as root and where each reference stands for a new node with possibly further 
+		branches.
+	'''
+	contains LogicalSystem
 	contains SubSystemClass
 	contains ActorClass
 	contains ProtocolClass
@@ -49,7 +116,10 @@ Feature LogicalModel
 	;
 
 Feature LogicalSystem
-	description ''''''
+	description '''The top level structural class. It can only contain sub systems using SubSystemRefs.'''
+	text '''
+		The LogicalSystem is composed of sub system instances. It also defines Bindings and LayerConnections between those sub systems. 
+	'''
 	contains SubSystemRef
 	contains Binding
 	contains LayerConnection
@@ -58,60 +128,18 @@ Feature LogicalSystem
 
 Feature ActorClass
 	shortName '''Actor Class'''
-	description '''The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. '''
+	description '''The actor is the basic structural building block for building systems with ROOM.'''
 	
-	text '''some more about ActorClass, graphical and textual notation, concepts, ...'''
-	
-	example '''
-			\textbf{Graphical Notation}
-			\\
-				\includegraphics[width=\textwidth]{images/300-SimpleActorClassStructure.png}
-			\\
-			\textbf{Textual Notation}
-			\\
-				\begin{lstlisting}[language=ROOM]
-				ActorClass SimpleActorClass {
-					Interface {
-						Port endPort1: PSimpleProtocolClass
-					}
-					Structure {
-						external Port endPort1
-						conjugated Port internalPort2: PSimpleProtocolClass
+	text '''
+	An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine. 
 
-						ActorRef actorRef1: ActorClass1
-						ActorRef actorRef2: ActorClass2
-						Binding actorRef1.port2 and actorRef2.port1
-						Binding internalPort2 and actorRef1.port1
-					}
-					Behavior {
-						StateMachine {
-							Transition init: initial -> State1
-							State State1
-						}
-					}
-				}
-				\end{lstlisting}
 	'''
 	
+	example '''
+		
+	'''
 	
-//	ActorClass SimpleActorClass {
-//		Interface {
-//			Port endPort1: PSimpleProtocolClass
-//			Port relayPort2: PSimpleProtocolClass
-//		}
-//		Structure {
-//			external Port endPort1
-//			conjugated Port internalEndPort3: PSimpleProtocolClass
-//			ActorRef actorRef1: ActorClass1
-//			ActorRef actorRef2: ActorClass2
-//			Binding actorRef1.port2 and actorRef2.port1
-//			Binding relayPort2 and actorRef1.port1
-//			Binding internalEndPort3 and actorRef1.port3
-//		}
-//		Behavior { }
-//	}
-	
-	
+	contains ExecutionType
 	contains ActorRef
 	contains Port
 	contains SAP
@@ -127,12 +155,15 @@ Feature ActorClass
 
 Feature SubSystemClass
 	shortName '''Sub System Class'''
-	description '''The SubSystem is main Actor of an executable part of the system. It instantiates the Actor instance tree instance of the application ...
+	description '''The SubSystem is main Actor of an executable part of the system. '''
 	
-	Actor instance tree example:
+	text '''
+		It instantiates the Actor instance tree instance of the application ...
+		
+		Actor instance tree example:
+
+		\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}
 	'''
-	
-	text '''\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}'''
 	contains ActorRef
 	contains RelayPort
 	contains SPP
@@ -146,27 +177,66 @@ Feature SubSystemClass
 Feature StateMachine
 	shortName '''State Machine'''
 	description '''A StateMachine describes the state based, event driven behavior of an ActorClass'''
-	example '''\includegraphics[width=\textwidth]{images/300-Pump_behavior.jpg}'''
+	text '''
+		In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
+		\includegraphics[scale=.7]{images/300-PingPongReceiverFSM.png}
+	'''
 	uses Inheritance
 	stable
 	;
 
 Feature SubSystemRef
 	shortName '''Sub System Reference'''
- 	description ''''''
+ 	description '''A Sub System Reference is an instance of an SubSystemClass'''
  	isOfType SubSystemClass
  	stable
 ;
 Feature ActorRef
-	shortName '''Actor Reference '''
-	description '''An ActorRef ...description'''
+	shortName '''Actor Reference'''
+	description '''An ActorRef is an instance of an ActorClass.'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		SubSystemClass SubSystemExample {
+			ActorRef mainActor : ActorClassExample
+			
+			LogicalThread default_thread
+		}
+		
+		ActorClass ActorClassExample {
+			Structure {
+				ActorRef sender : Sender
+				ActorRef receiver : Receiver
+				
+				Binding receiver.port and sender.port
+			}
+		}
+		
+		ActorClass ActorClassExampleReplicated {
+			Structure {
+				ActorRef sender[3]: Sender
+				ActorRef receiver[3] : Receiver
+				
+				Binding receiver.port and sender.port
+				/* Equivalent to:
+				 *  Binding receiver[1].port and sender[1].port
+				 *  Binding receiver[2].port and sender[2].port
+				 * ....
+				 */		
+			}
+		}
+		\end{lstlisting}
+		\begin{figure}[H]
+		\includegraphics[width=.7\textwidth]{images/300-ActorRefInstanceDiagram.jpg}
+		\caption*{Instance hierarchy of ActorRef Example (\textsf{System(System)} not shown in code snippet)}
+		\end{figure}
+	'''
 	isOfType ActorClass
-	property multiplicity
+	property multiplicity values {"1..n", "*"}
 	stable
 ;
 
 Feature Binding
-	description '''A Binding connects two Ports with each otherdescription'''
+	description '''A Binding connects two Ports with each other.'''
 	// todo: how correct do we want to be? -> PortRef, PortInstance
 	uses Port endpoint1
 	uses Port endpoint2
@@ -174,15 +244,83 @@ Feature Binding
 ;
 
 Feature LayerConnection
-	description '''A LayerConnection ... description '''
-	uses SAP saPoint
-	uses SPP spPoint
+	description '''A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy.'''
+	text '''
+		\begin{itemize}
+		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+		\end{itemize}
+	'''
+	uses SAP SAPoint
+	uses SPP SPPoint
+	stable
+;
+
+Feature ExecutionType
+	description '''Determines the execution type of an actor.'''
+	text '''
+		Since from ROOM models executable code can be generated, it is important to define the way the actors are 
+		executed and communicate with each other. The combination of communication and execution is called the 
+		\emph{execution model}. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
+
+		The ExecutionType of an ActorClass specifies in which way its instance (ActorRef) should be executed:
+		\begin{itemize}
+		\item \textbf{execution by receive event}: The message queue or the event dispatcher calls a 
+		\textbf{receive event} function of the message receiver and thereby executes the processing of the event.
+		\item \textbf{polled execution}: The objects are processed by a cyclic \textbf{execute} call
+		\item \textit{\textbf{execution by function call}: The caller executes the called object via function call} (not supported yet)
+		\item \textbf{mixture}: An asynchronous execution combines an event dispachter and a polled execution.
+		\end{itemize}
+
+		Thereby the ExecutionType determines the execution mode of the actor's logical thread:
+		\includegraphics[width=.7\textwidth]{images/010-RoomIntroduction03.png}
+				
+		The actual execution of the underlying physical thread can be specified in the PhysicalModel in conjunction with the MappingModel.
+
+		ExecutionType relates to the \hyperlink{ref:CommunicationType}{CommunicationType}, e.g. if an actor uses data-driven ports, it should support an polled execution.
+	'''
+	example '''
+		\begin{lstlisting}
+		eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
+			// only event-driven Ports and ActorRefs allowed
+		}
+		
+		datadriven ActorClass DatadrivenActor {
+			// only data-driven Ports and ActorRefs allowed
+		}
+		
+		async ActorClass MixedActor{
+			// both data/event-driven Ports and ActorRefs allowed
+		}
+		\end{lstlisting}
+	'''
+	uses CommunicationType
+	property mode values { "eventdriven", "datadriven", "async", "sync" }
+	
 	stable
 ;
 
 Feature CommunicationType 
 	description '''The CommunicationType defines the communication semantics of a ProtocolClass.'''
-	text '''Bla'''
+	text '''
+		Since from ROOM models executable code can be generated, it is important to define the way the actors are 
+		executed and communicate with each other. The combination of communication and execution is called the 
+		\emph{execution model}. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
+
+		The CommunicationType of a ProtocolClass (and thus of a Port) specifies in which way the communication should happen:
+
+		\begin{itemize}
+		\item \textbf{message driven} -- asynchronous, non blocking, no return value:\\
+		Usually the message driven communication is implemented with message queues. Message queues are inherently asynchronous and enable a very good decoupling of the communicating parties.
+		\item \textbf{data driven} -- asynchronous, non blocking, no return value:\\
+		In data driven communication sender and receiver often have a shared block of data. The sender writes the data and the receiver polls the data.
+		\item \textit{\textbf{function call} -- synchronous, blocking, return value:\\
+		Regular function call as known in most programming languages.} (not supported yet)
+		\end{itemize}
+
+		CommunicationType relates with the \hyperlink{ref:ExecutionType}{ExecutionType} of an ActorClass, e.g. a data-driven port needs a cyclic thread, that polls the shared data.
+	'''
 	example '''
 		\begin{lstlisting}[language=ROOM]
 	
@@ -217,35 +355,146 @@ Feature CommunicationType
 ;
 
 Feature ProtocolClass
-	description '''A ProtocolClass contains the Interface specification for a Port. It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).description '''
+	description '''A ProtocolClass defines messages and is the interface specification for a Port'''
+	text '''
+		A ProtocolClass provides a reusable interface specification for ports. It defines a set of incoming and outgoing Messages that can be exchanged between two ports.
+		The exact semantics of a message is defined by the CommunicationType.
+		Protocol classes have only textual notation.
+
+		\begin{lstlisting}
+		ProtocolClass SimpleProtocolClass {
+			incoming {
+				Message msg1(data: int32}
+				Message msg2()
+			}
+			outgoing {
+				Message msg3(data: DataClass1}
+				Message msg4()
+			}
+		}
+		\end{lstlisting}
+	'''
+	example '''
+	\begin{lstlisting}
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
+	eventdriven ProtocolClass ProtocolClassEvt {
+		// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
+		incoming {
+			// incoming means incoming for a regular port and outgoing for a conjugated port
+			Message message1() // message without data
+			Message message2(data: int32) // message with simple data
+			Message message3(data: DMessageData) // message with complex data (DataClass)
+
+		}
+		outgoing {
+		// outgoing means outgoing for a regular port and incoming for a conjugated port
+			Message message1(data: int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
+		}
+	}
+
+	// DataClass for sending complex data via message
+	DataClass DMessageData {
+		Attribute SomeData: int16
+		Attribute SomeMoreData: int32
+	}
+
+	// datadriven ProtocolClass (asynchronous data flow, unidirectional)
+	datadriven ProtocolClass ProtocolClassData {
+		incoming {
+			// incoming means incoming for a regular port and outgoing for a conjugated port
+			Message value1(value: int32) // a datadriven message (signal) always needs data
+			Message value2(value: int16) // datadriven message with simple data
+			Message value3(value: DMessageData) // datadriven message with complex data (DataClass)
+
+		}
+		// no outgoing messages for datadriven ports allowed 
+	}
+	\end{lstlisting}
+	'''
+	contains CommunicationType
 	contains Attribute
 	contains Operation
-	contains CommunicationType
 	uses Inheritance
 	
 	stable
 	;
 
 abstract Feature DataType
-	description '''is abstractdescription'''
+	description '''A DataType can take 4 forms and types data elements like an Attribute or Operation argument.'''
 	stable
 ;
 
 Feature PrimitiveType
-	description '''A PrimitiveType ...description'''
+	description '''A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean).'''
+	example '''
+		The eTrice built-in types can be found in the \textsf{org.eclipse.etrice.modellib} project. In most cases the \textsf{Types.room} is already included:
+		\begin{lstlisting}[language=ROOM]
+		// Follow import by Open Declaration (F3)
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		\end{lstlisting}
+	'''
 	isA DataType
-	property targetName
+	property targetName values {"<identifer name>"}
 	stable
 	;
 	
 Feature EnumerationType
-	description '''An EnumerationType ...description '''
+	description '''An EnumerationType declares an enumeration similar to most well-known languages.'''
+	example '''
+	\begin{lstlisting}[language=ROOM]
+	Enumeration EOnOff {
+		Off = 0, // explicit value=0
+		On = 1 // explicit value=1 
+
+	}
+
+	Enumeration EDay {
+		SUN,
+		MON,
+		TUE,
+		WED,
+		THU,
+		FRI,
+		SAT // implicit enumeration 0..6
+	}
+	\end{lstlisting}
+	'''
 	isA DataType
-	property literals
+	property literals values {"<name>"}
 	stable;
 
 Feature DataClass 
-	description '''A DataClass ...description '''
+	description '''A DataClass is a composition of Attributes.'''
+	text '''
+		Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C \textsf{struct}s.
+		
+		\begin{lstlisting}[language=ROOM]		
+		DataClass TCPConnectionData {
+			Attribute IPAddr: string
+			Attribute TcpPort: int32
+		}
+		\end{lstlisting}
+	'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		DataClass SimpleDataClass {
+			Attribute attribute1: uint16
+			Attribute attribute2: uint32
+		}
+
+		DataClass DataClassExample {
+			Attribute attribute1: uint32
+			Attribute attribute2: SimpleDataClass
+			Attribute attribute3: voidType ref
+			
+			Operation operation1(param1: uint32, param2: uint16): boolean {
+				"return true;"
+			}
+		}
+		\end{lstlisting}
+	'''
 	isA DataType
 	contains Attribute
 	contains Operation
@@ -253,13 +502,42 @@ Feature DataClass
 	stable;
 
 Feature ExternalType 
-	description '''An ExternalType ...description '''
+	description '''An ExternalType is used to make an target language type accessible in ROOM.'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		// Include is needed when used (e.g. in ActorClassWithExternalType)
+		ExternalType someStructType -> "struct FILE_HANDLE"
+		
+		ActorClass ActorClassWithExternalType{
+			Structure {
+				usercode1 {
+					"// #include <___.h> /* User includes here*/"
+				}
+				Attribute someHandle : someStructType ref // needs include
+			}
+			Behavior {
+				Operation operation1(param1: charPtr) {
+					// external calls or casts may need includes
+					"write(someHandle, param1);"
+				}
+			}
+		}
+		\end{lstlisting}
+	'''
 	isA DataType
-	property targetName
+	property targetName values {"<identifier name>"}
 	stable;
 
 Feature Attribute
-	description '''An Attribute is a member variable of a class. '''
+	description '''An Attribute is a member variable of a class'''
+	text '''
+		An Attribute can be be used to store arbitrary data. There are two common conceptual purpose of use:
+		\begin{itemize}
+			\item model stateful behavior (extended state machine variable)
+			\item store reference to more fine-grained components (e.g. c pointer to handle)
+		\end{itemize}
+		Attributes can be defined in ActorClasses, DataClasses and ProtocolClasses.
+	'''
 	example '''
 		\begin{lstlisting}[language=ROOM]
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
@@ -271,186 +549,203 @@ Feature Attribute
 
 		ActorClass ActorClassWithAttributes {
 			Structure {
-				Attribute attribute1: int32 ["attribute of a PrimitiveType" ]
-				Attribute attribute2: SimpleDataClass [ "attribute of a DataClass" ]
+				Attribute attribute1: int32 			["attribute of a PrimitiveType" ]
+				Attribute attribute2: SimpleDataClass 	[ "attribute of a DataClass" ]
+			}
+		}
+
+		ActorClass ActorClassWithAttributes2 {
+			Structure {
+				Attribute arrayAttribute[8] : uint32 [ "attribute with multiplicity"]
+				Attribute refAttribue : voidType ref [ "attribute as a reference (void pointer)"]
+			}
+		}
+	
+		ActorClass ActorClassWithAttributeInitialization {
+			Structure {
+				Attribute attribute1: uint32 = "3"
+				Attribute attribute2: SimpleDataClass = "{1, 2}"
+				Attribute arrayAttribute[8] : uint32 = "0" // or {0,0,0, ...}
+				Attribute refAttribue : voidType ref = "NULL" // set reference in constructor or in state machine
 			}
 		}
 		\end{lstlisting}
 	'''
 	isOfType DataType
-	property defaultValueLiteral
-	property size
+	property defaultValueLiteral values { "<target code>"}
+	property multiplicity values {"1..n"}
 	stable
 	
 	
 ;
 
 Feature Operation
-	description '''An Operation is a member function of a class (ActorClass, ProtocolClass, DataClass, ...)description '''
-	property returnType
-	property arguments
+	description '''An Operation is a member function of a class'''
+	text ''''''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	
+		DataClass DataClassWithOperation {
+			Attribute attribute1 : uint32
+			
+			Operation operation1(param1: uint32, param2: int32): boolean {
+				"return attribute1 > (param1 - param2);"
+			}
+		}
+		
+		ActorClass ActorClassWithOperation {
+			Structure {
+				Attribute attribute1 : uint32
+			}
+			Behavior {
+				Operation operation1(param1: uint32, param2: int32): boolean {
+					"return attribute1 > (param1 - param2);"
+				}
+			}
+		}
+		
+		ActorClass ActorClassWithOperation2 {
+			Structure {
+				usercode1 {
+					"// #include <___.h> /* User includes here*/"
+				}
+				Attribute someHandle : voidType ref
+			}
+			Behavior {
+				Operation operation1(param1: charPtr) {
+					// external calls or casts may need includes
+					"write(someHandle, param1);"
+				}
+			}
+		}
+		\end{lstlisting}
+	'''
+	uses DataType
+	property returnType values { "<DataType>" }
+	property arguments values { "<name> : <DataType>" }
+	
 	stable
 ;
 
 abstract Feature Port
-	description '''A Port is an instance of a ProtocolClass and the only interface for an ActorClass. It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description '''
-	/* Does not work in Eclipse Doc 
+	description '''A Port is an instance of a ProtocolClass and the interface for an ActorClass.'''
 	text '''
-		\begin{longtable}{|m{2.5cm}|c|m{7cm}|}
-		\caption{Class Port Notation}
-		\label{tab:class_port_notation} \\
-		\hline
-		\textbf{Element} & \textbf{Graphical Notation} & \textbf{Textual Notation}
-		\endhead
-		\hline
-		\raggedright Class End Port & \includegraphics[scale=0.7]{images/040-ClassEndPort.png} & 
-		\begin{tabular}{l}
-			\textit{External Class End Port:} \\
-			\begin{lstlisting}[language=ROOM]
-			ActorClass ActorClass6 {
-				Interface {
-					Port port12: ProtocolClass1
-				}
-				Structure {
-					external Port port12
-			}}
-			\end{lstlisting}
-			\\
-			\textit{Internal Class End Port:} \\ 
-			\begin{lstlisting}[language=ROOM]
-			ActorClass ActorClass6 {
-				Interface {
-				}
-				Structure {
-					Port port20 : ProtocolClass1
-			}}
-			\end{lstlisting}
-		\end{tabular}
-		\\
-		\hline
-		\raggedright Conjugated Class End Port & 
-		\includegraphics[scale=0.7]{images/040-ConjugatedClassEndPort.png} &
-		\begin{tabular}{l} 
-			\textit{External Conjugated Class End Port:} \\ 
-			\begin{lstlisting}[language=ROOM]
-			ActorClass ActorClass6 {
-				Interface {
-					conjugated Port port13: ProtocolClass1
-				}
-				Structure {
-					external Port port13
-			}}
-			\end{lstlisting}
-			\\
-			\textit{Internal Conjugated Class End Port:} \\
-			\begin{lstlisting}[language=ROOM]
-			ActorClass ActorClass6 {
-				Interface {
-				}
-				Structure {
-					conjugated Port port21: ProtocolClass1
-			}}
-			\end{lstlisting}
-		\end{tabular}
-		\\
-		\hline
-		 \raggedright Replicated Class End Port & 
-		 \includegraphics[scale=0.7]{images/040-ReplicatedClassEndPort.png} &
-		 \begin{tabular}{b{5.5cm}} 
-		 	\textit{External Replicated Class End Port:} \\ 
-		 	\begin{lstlisting}[language=ROOM]
-		 	ActorClass ActorClass6 {
-			 	Interface {
-				 	Port port16[3]: ProtocolClass1
-			 	}
-			 	Structure {
-				 	external Port port16
-			}}
-		 	\end{lstlisting}
-		 	\\
-		 	\textit{Internal Replicated Class End Port:} \\
-		 	\begin{lstlisting}[language=ROOM]
-		 	ActorClass ActorClass6 {
-			 	Interface {
-			 	}
-			 	Structure {
-				 	Port port16[3]: ProtocolClass1
-		 	}}
-		 	\end{lstlisting}
-		 	\\ 
-		 \end{tabular}
-		 \tabularnewline
-		 \hline
-		 \raggedright Conjugated Replicated Class End Port & 
-		 \includegraphics[scale=0.7]{images/040-ConjugatedReplicatedClassEndPort.png} &
-		 \begin{tabular}{b{5.5cm}} 
-		 	\textit{External Conjugated Replicated Class End Port:} \\ 
-		 	\begin{lstlisting}[language=ROOM]
-		 	ActorClass ActorClass6 {
-			 	Interface {
-				 	conjugated Port port17[3]: ProtocolClass1
-			 	}
-			 	Structure {
-				 	external Port port17
-			}}
-		 	\end{lstlisting}
-		 	\\
-		 	\textit{Internal Conjugated Replicated Class End Port:} \\ 
-		 	\begin{lstlisting}[language=ROOM]
-		 	ActorClass ActorClass6 {
-			 	Interface {
-			 	}
-			 	Structure {
-				 	conjugated Port port23[3]: ProtocolClass1
-			}}
-		 	\end{lstlisting}
-		 \end{tabular}
-		 \\
-		 \hline
-	\end{longtable}
-''' */
+		It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of Actors to different threads or nodes.description
+	'''
 	isOfType ProtocolClass
-	property conjugated
-	property multiplicity
+	property conjugated values { "regular", "conjugated"}
+	property multiplicity values {"1..n", "*"}
 	stable
 ;
 
 Feature RelayPort
-	description '''RelayPort description'''
+	description '''A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass.'''
+	text '''
+		\begin{lstlisting}[language=ROOM]
+		ActorClass RelayPortExample{
+			Interface {
+				Port relayPort : PSimpleProtocol
+			}
+			Structure {
+				ActorRef actorRef1 : SimpleActorClass2
+				
+				// relayPort can be directed to port of an ActorRef
+				Binding relayPort and actorRef1.externalPort
+			}
+			Behavior {
+				// relayPort not available !
+			}
+		}
+		\end{lstlisting}
+		\includegraphics[scale=.7]{images/300-RelayPort.png}
+	'''
 	isA Port
 	stable
 ;
 
 
 Feature ExternalEndPort 
-	description '''ExternalEndPort description'''
+	description '''A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass.'''
+	text '''
+		\begin{lstlisting}[language=ROOM]
+		ActorClass ExternalEndPortExample {
+			Interface {
+				// externalEndPort is connect from 'outside' and thus needs a Binding from containing ActorClass
+				Port externalEndPort : PSimpleProtocol
+			}
+			Structure {
+				external Port externalEndPort
+			}
+			Behavior {
+				// send/receive messages from externalEndPort
+			}
+		}
+		\end{lstlisting}
+	'''
 	isA Port
 	stable
 ;
 
 Feature InternalEndPort
-	description '''InternalEndPort description'''
+	description '''A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass.'''
+	text '''
+		\begin{lstlisting}[language=ROOM]
+		ActorClass InternalEndPortExample {
+			Structure {
+				Port internalEndPort : PSimpleProtocol
+				ActorRef actorRef1 : SimpleActorClass
+				
+				// internalEndPort lives 'local' and
+				// thus needs a Binding to port of a ActorRef
+				Binding internalEndPort and actorRef1.externalPort2 
+			}
+			Behavior {
+				// send/receive messages from internalEndPorts
+			}
+		}
+		\end{lstlisting}
+		\includegraphics[scale=.7]{images/300-InternalEndPort.png}
+	'''
 	isA Port
 	stable
 ;
 
 Feature SAP
-	shortName '''Service Access Point '''
-	description '''An SAP ....description '''
+	shortName '''Service Access Point'''
+	description '''A Service Access Point is similar to a Port, but uses a LayerConnection for wiring.'''
+	text '''
+		\emph{\large Under construction}
+		\begin{itemize}
+		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+		\end{itemize}
+	'''
 	isOfType ProtocolClass
 	stable
 ; 
 
 Feature ServiceImplementation
 	shortName '''SPP Implementation'''
-	description ''''''
+	description '''The implementation of an Service Provision Point (SPP).'''
+	text '''
+	'''
 	uses SPP
 	stable
 ;
 
 Feature SPP
 	shortName '''Service Provision Point'''
-	description '''An SPP ... description'''
+	description '''A Service Provision Point is the counterpart of a SAP'''
+	text '''
+		\emph{Under construction}
+		\begin{itemize}
+		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+		\end{itemize}
+	'''
 	isOfType ProtocolClass
 	stable
 ;

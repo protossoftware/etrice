@@ -1,4 +1,4 @@
-RoomModel RoomModel1 {
+RoomModel CommunicationAndExecutionTypes {
 
 	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 
@@ -25,6 +25,16 @@ RoomModel RoomModel1 {
 		// datadriven ProtocolClass can only have incoming messages (signals)
 	}
 
-	ActorClass ActorClass1 { }
+	eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
+		// only event-driven Ports and ActorRefs allowed
+	}
+	
+	datadriven ActorClass DatadrivenActor {
+		// only data-driven Ports and ActorRefs allowed
+	}
+	
+	async ActorClass MixedActor{
+		// both data/event-driven Ports and ActorRefs allowed
+	}
 
 }

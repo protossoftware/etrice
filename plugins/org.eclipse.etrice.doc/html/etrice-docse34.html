@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-12 15:10:00" /> 
+<meta name="date" content="2015-06-16 18:34:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,17 +21,18 @@ href="etrice-docch8.html#tailetrice-docch8.html" >prev-tail</a>] [<a
 href="#tailetrice-docse34.html">tail</a>] [<a 
 href="etrice-docch8.html#etrice-docse34.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">8.1   </span> <a 
- id="x44-2070008.1"></a>Architecture</h3>
+ id="x44-2110001"></a>Architecture</h3>
 <!--l. 3--><p class="noindent" >The basic components of eTrice are depicted in the following diagram.
 </p><!--l. 5--><p class="noindent" ><img 
 src="images/200-components.jpg" alt="PIC"  
  />
 </p><!--l. 7--><p class="noindent" >Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent
 sections.
-</p><!--l. 10--><p class="noindent" >
+<a 
+ id="x44-211001r286"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">8.1.1   </span> <a 
- id="x44-2080008.1.1"></a>Editor and Generator Components</h4>
+ id="x44-2120001"></a>Editor and Generator Components</h4>
      <ul class="itemize1">
      <li class="itemize">core
          <ul class="itemize2">
@@ -54,8 +55,6 @@ class="ec-lmtt-10">org.eclipse.etrice.core.fsm.ui</span>. The FSM language
 class="ec-lmtt-10">org.eclipse.etrice.core.room</span>
          and <span 
 class="ec-lmtt-10">org.eclipse.etrice.core.room.ui</span>. ROOM is the basic modeling language of eTrice.
-                                                                                            
-                                                                                            
          </li>
          <li class="itemize">core.config      is      an      Xtext      based      language      called      Config.      It      consists      of
          the plug-ins <span 
@@ -66,6 +65,8 @@ class="ec-lmtt-10">org.eclipse.etrice.core.config.ui</span>. Config
          <li class="itemize">core.etphys                                                        is                                                        an
          Xtext based language called etPhys. It consists of the plug-ins <span 
 class="ec-lmtt-10">org.eclipse.etrice.core.etphys </span>and
+                                                                                            
+                                                                                            
          <span 
 class="ec-lmtt-10">org.eclipse.etrice.core.etphys.ui</span>. etPhys is a language designed for the description of physical
          systems onto which the logical ROOM systems are deployed.
@@ -130,8 +131,6 @@ class="ec-lmtt-10">org.eclipse.etrice.ui.common.base</span>. It depends only on 
              <li class="itemize">ui.common  is  a  set  of  common  code  for  the  two  diagram  editors.  It  consists  of  the  plug-in
              <span 
 class="ec-lmtt-10">org.eclipse.etrice.ui.common</span>.
-                                                                                            
-                                                                                            
              </li>
              <li class="itemize">ui.commands  encapsulates  some  commands  related  to  the  navigation  between  eTrice  editors.  It
              consists of the plug-in <span 
@@ -140,6 +139,8 @@ class="ec-lmtt-10">org.eclipse.etrice.ui.commands</span>.
              <li class="itemize">ui.structure  is  the  Graphiti  based  editor  for  the  Actor  structure.  It  consists  of  the  plug-in
              <span 
 class="ec-lmtt-10">org.eclipse.etrice.ui.structure</span>.
+                                                                                            
+                                                                                            
              </li>
              <li class="itemize">ui.behavior.fsm is implementing the major part for the graphical state machine editor. It consists of
              the plug-in <span 
@@ -178,10 +179,10 @@ class="ec-lmtt-10">org.eclipse.etrice.generator.java</span>.
          <span 
 class="ec-lmtt-10">org.eclipse.etrice.generator.doc</span>.</li></ul>
      </li></ul>
-<!--l. 107--><p class="noindent" >
-</p>
+<a 
+ id="x44-212001r289"></a>
 <h4 class="subsectionHead"><span class="titlemark">8.1.2   </span> <a 
- id="x44-2090008.1.2"></a>The Abstract Finite State Machine Concept</h4>
+ id="x44-2130002"></a>The Abstract Finite State Machine Concept</h4>
 <!--l. 109--><p class="noindent" >eTrice comes with an easy to re-use concept of hierarchical finite state machines (FSM for short). A powerful inheritance
 concept is used and there is also state machine validation based on semantic rules for messages and abstract execution
 available.
@@ -193,8 +194,6 @@ using
          <ul class="itemize2">
          <li class="itemize"><span 
 class="ec-lmtt-10">org.eclipse.etrice.core.common</span>
-                                                                                            
-                                                                                            
          </li>
          <li class="itemize"><span 
 class="ec-lmtt-10">org.eclipse.etrice.core.fsm</span>
@@ -209,6 +208,8 @@ class="ec-lmtt-10">org.eclipse.etrice.core.common.ui</span>
          </li>
          <li class="itemize"><span 
 class="ec-lmtt-10">org.eclipse.etrice.core.fsm.ui</span>
+                                                                                            
+                                                                                            
          </li>
          <li class="itemize"><span 
 class="ec-lmtt-10">org.eclipse.etrice.core.ui.common.base</span>
@@ -228,10 +229,11 @@ class="ec-lmtt-10">org.eclipse.etrice.abstractexec.behavior</span></li></ul>
      </li></ul>
 <!--l. 144--><p class="noindent" >The first three parts have to be used by concrete implementations that implement the abstract interface. eTrice itself uses the
 abstract FSMs in exactly this way.
-</p><!--l. 147--><p class="noindent" >
+<a 
+ id="Q1-44-291"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x44-2100008.1.2"></a>Extending the FSM Model</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x44-2140002"></a>Extending the FSM Model</h5>
 <!--l. 149--><p class="noindent" >The eTrice FSM model has to be embedded in a model that introduces components, interfaces and messages. We
 recommend to use a new Xtext language with a grammar derived from the FSM grammar. This grammar has to specify a
 component derived from the <span 
@@ -257,8 +259,6 @@ class="ec-lmtt-10">EList&#x003C;EObject&#x003E; getAllOutgoingAbstractMessages()
 class="ec-lmtt-10">ProtocolSemantics getSemantics()</span></li></ul>
      </li>
      <li class="itemize">for the concrete model component
-                                                                                            
-                                                                                            
          <ul class="itemize2">
          <li class="itemize"><span 
 class="ec-lmtt-10">EList&#x003C;AbstractInterfaceItem&#x003E; getAbstractInterfaceItems </span>&#8211; the interface items contained in
@@ -271,14 +271,16 @@ class="ec-lmtt-10">EList&#x003C;AbstractInterfaceItem&#x003E; getAllAbstractInte
          <li class="itemize"><span 
 class="ec-lmtt-10">String getComponentName() </span>&#8211; should return the name of the model component</li></ul>
      </li></ul>
-<!--l. 174--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x44-2110008.1.2"></a>Extending the State Machine Editor</h5>
+<a 
+ id="Q1-44-293"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x44-2150002"></a>Extending the State Machine Editor</h5>
 <!--l. 176--><p class="noindent" >The concrete state machine editor minimally needs to define </p>
      <ul class="itemize1">
      <li class="itemize">the editor class itself by deriving it from the <span 
 class="ec-lmtt-10">AbstractFSMEditor</span>
+                                                                                            
+                                                                                            
      </li>
      <li class="itemize">a diagram type provider (which may derive from <span 
 class="ec-lmtt-10">AbstractDiagramTypeProvider</span>)
@@ -299,16 +301,17 @@ class="ec-lmtt-10">IResourceSetProvider</span></li></ul>
      </li>
      <li class="itemize">concrete implementations of all property dialogs the <span 
 class="ec-lmtt-10">IFSMDialogFactory </span>produces</li></ul>
-<!--l. 191--><p class="noindent" >
-</p>
+<a 
+ id="x44-215001r290"></a>
 <h4 class="subsectionHead"><span class="titlemark">8.1.3   </span> <a 
- id="x44-2120008.1.3"></a>Runtimes</h4>
+ id="x44-2160003"></a>Runtimes</h4>
 <!--l. 193--><p class="noindent" >Currently eTrice ships with a C and a Java runtime. The C++ runtime is still a prototype. The runtimes are libraries written
 in the target language against which the generated code is compiled.
-</p><!--l. 197--><p class="noindent" >
+<a 
+ id="x44-216001r295"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">8.1.4   </span> <a 
- id="x44-2130008.1.4"></a>Unit Tests</h4>
+ id="x44-2170004"></a>Unit Tests</h4>
 <!--l. 199--><p class="noindent" >Most plug-ins and other parts of the code have related unit tests.
                                                                                             
                                                                                             
@@ -320,5 +323,5 @@ href="etrice-docch8.html#tailetrice-docch8.html" >prev-tail</a>] [<a
 href="etrice-docse34.html" >front</a>] [<a 
 href="etrice-docch8.html#etrice-docse34.html" >up</a>] </p></div>
 <!--l. 201--><p class="noindent" ><a 
- id="tailetrice-docse34.html"></a> </p> 
+ id="tailetrice-docse34.html"></a></p> 
 </body></html> 

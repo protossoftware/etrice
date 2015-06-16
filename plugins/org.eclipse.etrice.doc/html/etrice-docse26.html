@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-12 15:10:00" /> 
+<meta name="date" content="2015-06-16 18:34:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,14 +21,15 @@ href="etrice-docse25.html#tailetrice-docse25.html" >prev-tail</a>] [<a
 href="#tailetrice-docse26.html">tail</a>] [<a 
 href="etrice-docch6.html#etrice-docse26.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x34-1460006.2"></a>eTrice Java Projects</h3>
+ id="x34-1430002"></a>eTrice Java Projects</h3>
 <!--l. 3--><p class="noindent" >There are two flavors of eTrice Java projects. The first one uses the Eclipse JDT build and the second one uses Maven to
 build and deploy an eTrice application.
 </p><!--l. 6--><p class="noindent" >The kind of build can be selected in the "Empty eTrice Java project" wizard.
-</p><!--l. 8--><p class="noindent" >
+<a 
+ id="x34-143001r196"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.1   </span> <a 
- id="x34-1470006.2.1"></a>Eclipse JDT Build</h4>
+ id="x34-1440001"></a>Eclipse JDT Build</h4>
 <!--l. 10--><p class="noindent" >If this kind of build is chosen the eTrice new project wizard requires the <span 
 class="ec-lmtt-10">org.eclipse.etrice.runtime.java </span>project in the
 workspace and adds a dependency to it.
@@ -47,10 +48,11 @@ build path as well.
      </li>
      <li class="itemize">a launch configuration that launches the main method of the generated code</li></ul>
 <!--l. 25--><p class="noindent" >If "build automatically" is chosen the newly created model can be generated and launched with just two clicks.
-</p><!--l. 27--><p class="noindent" >
+<a 
+ id="x34-144001r198"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.2   </span> <a 
- id="x34-1480006.2.2"></a>Maven Build</h4>
+ id="x34-1450002"></a>Maven Build</h4>
 <!--l. 29--><p class="noindent" >The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed by the Maven
 pom.xml but the m2e builder maps them as JDT visible dependencies to the project class path.
 </p><!--l. 32--><p class="noindent" >The eTrice new project wizard creates the following files for the Maven build </p>
@@ -60,12 +62,12 @@ pom.xml but the m2e builder maps them as JDT visible dependencies to the project
      <li class="itemize">a simple physical model
      </li>
      <li class="itemize">a model mapping the logical entities of the ROOM model to the physical entities
-                                                                                            
-                                                                                            
      </li>
      <li class="itemize">a launch configuration that invokes the eTrice Java code generator for the new models
      </li>
      <li class="itemize">a launch configuration that builds and deploys the generated application
+                                                                                            
+                                                                                            
      </li>
      <li class="itemize">a launch configuration that launches the deployed jar file
      </li>
@@ -73,12 +75,13 @@ pom.xml but the m2e builder maps them as JDT visible dependencies to the project
      code should be launched in debug mode)</li></ul>
 <!--l. 44--><p class="noindent" >After the new project is created the m2e builder creates the dependencies in the project class path. Therefore also JDT can
 compile and launch the application.
-</p><!--l. 47--><p class="noindent" >
+<a 
+ id="Q1-34-200"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x34-1490006.2.2"></a>Example</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x34-1460002"></a>Example</h5>
 <!--l. 49--><p class="noindent" >As an example we want to use the <a 
-href="etrice-docse8.html#x12-500002.6">Ping Pong Tutorial (Java and C)<!--tex4ht:ref: sec:ping_pong_tutorial --></a>.
+href="etrice-docse8.html#x12-470006">Ping Pong Tutorial (Java and C)<!--tex4ht:ref: sec:ping_pong_tutorial --></a>.
 </p><!--l. 51--><p class="noindent" >For this example we start with an empty workspace. We create a new eTrice project using the "Empty eTrice Java Project"
 wizard which results in a workspace looking like:
 </p><!--l. 55--><p class="noindent" ><img 
@@ -90,7 +93,7 @@ scheme:
 </p>
 <!--l. 60-->
 <div class="lstlisting" id="listing-61"><span class="label"><a 
- id="x34-149001r1"></a></span><span 
+ id="x34-146001r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">room</span><span 
@@ -121,12 +124,12 @@ dependencies:
 </p>
 <!--l. 70-->
 <div class="lstlisting" id="listing-62"><span class="label"><a 
- id="x34-149002r1"></a></span><span 
+ id="x34-146002r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149003r2"></a></span><span 
+ id="x34-146003r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">groupId</span><span 
@@ -141,7 +144,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149004r3"></a></span><span 
+ id="x34-146004r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">artifactId</span><span 
@@ -160,7 +163,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149005r4"></a></span><span 
+ id="x34-146005r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmssbx-10x-x-90">version</span><span 
@@ -172,7 +175,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149006r5"></a></span><span 
+ id="x34-146006r5"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">dependency</span><span 
@@ -183,18 +186,18 @@ generator plug-in:
 </p>
 <!--l. 81-->
 <div class="lstlisting" id="listing-63"><span class="label"><a 
- id="x34-149007r1"></a></span><span 
+ id="x34-146007r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">build</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149008r2"></a></span><span 
+ id="x34-146008r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">plugins</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149009r3"></a></span><span 
+ id="x34-146009r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -202,7 +205,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149010r4"></a></span><span 
+ id="x34-146010r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -220,7 +223,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149011r5"></a></span><span 
+ id="x34-146011r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -244,7 +247,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149012r6"></a></span><span 
+ id="x34-146012r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -259,7 +262,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149013r7"></a></span><span 
+ id="x34-146013r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -273,7 +276,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149014r8"></a></span><span 
+ id="x34-146014r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -282,7 +285,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149015r9"></a></span><span 
+ id="x34-146015r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -326,7 +329,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149016r10"></a></span><span 
+ id="x34-146016r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -337,7 +340,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149017r11"></a></span><span 
+ id="x34-146017r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -358,7 +361,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149018r12"></a></span><span 
+ id="x34-146018r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -383,7 +386,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149019r13"></a></span><span 
+ id="x34-146019r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -401,7 +404,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149020r14"></a></span><span 
+ id="x34-146020r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -413,7 +416,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149021r15"></a></span><span 
+ id="x34-146021r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -423,7 +426,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149022r16"></a></span><span 
+ id="x34-146022r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -432,14 +435,14 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149023r17"></a></span><span 
+ id="x34-146023r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">plugins</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149024r18"></a></span><span 
+ id="x34-146024r18"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">build</span><span 
@@ -451,10 +454,8 @@ Maven will download all needed artifacts. The build should succeed and contain s
 output:
 </p>
 <!--l. 106-->
-                                                                                            
-                                                                                            
 <div class="lstlisting" id="listing-64"><span class="label"><a 
- id="x34-149025r1"></a></span><span 
+ id="x34-146025r1"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -468,7 +469,7 @@ class="ec-lmtt-9">reading</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">models</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149026r2"></a></span><span 
+ id="x34-146026r2"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -486,7 +487,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etmap</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149027r3"></a></span><span 
+ id="x34-146027r3"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -514,7 +515,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etmap</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149028r4"></a></span><span 
+ id="x34-146028r4"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -546,7 +547,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149029r5"></a></span><span 
+ id="x34-146029r5"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -578,7 +579,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etphys</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149030r6"></a></span><span 
+ id="x34-146030r6"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -606,7 +607,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149031r7"></a></span><span 
+ id="x34-146031r7"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -626,7 +627,7 @@ class="ec-lmtt-9">TimingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149032r8"></a></span><span 
+ id="x34-146032r8"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -686,7 +687,7 @@ class="ec-lmtt-9">TimingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149033r9"></a></span><span 
+ id="x34-146033r9"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -714,7 +715,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etphys</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149034r10"></a></span><span 
+ id="x34-146034r10"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -728,7 +729,7 @@ class="ec-lmtt-9">validating</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">models</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149035r11"></a></span><span 
+ id="x34-146035r11"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -752,7 +753,7 @@ class="ec-lmtt-9">0</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">warnings</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149036r12"></a></span><span 
+ id="x34-146036r12"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -768,7 +769,7 @@ class="ec-lmtt-9">generator</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">model</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149037r13"></a></span><span 
+ id="x34-146037r13"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -789,7 +790,7 @@ class="ec-lmtt-9">from</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">LogSys1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149038r14"></a></span><span 
+ id="x34-146038r14"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -810,7 +811,7 @@ class="ec-lmtt-9">from</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">subSysRef1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149039r15"></a></span><span 
+ id="x34-146039r15"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -826,7 +827,7 @@ class="ec-lmtt-9">code</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">generation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149040r16"></a></span><span 
+ id="x34-146040r16"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -851,7 +852,7 @@ class="ec-lmtt-9">-</span><span
 class="ec-lmtt-9">gen</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149041r17"></a></span><span 
+ id="x34-146041r17"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -867,7 +868,7 @@ class="ec-lmtt-9">-</span><span
 class="ec-lmtt-9">gen</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149042r18"></a></span><span 
+ id="x34-146042r18"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -907,7 +908,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149043r19"></a></span><span 
+ id="x34-146043r19"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -947,7 +948,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149044r20"></a></span><span 
+ id="x34-146044r20"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -987,7 +988,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149045r21"></a></span><span 
+ id="x34-146045r21"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1027,7 +1028,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149046r22"></a></span><span 
+ id="x34-146046r22"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1067,7 +1068,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149047r23"></a></span><span 
+ id="x34-146047r23"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1107,7 +1108,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149048r24"></a></span><span 
+ id="x34-146048r24"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1128,17 +1129,19 @@ class="ec-lmtt-10">target </span>folder. The larger one with
 "jar-with-dependencies" in its name also contains the referenced Maven components. It can be launched using the <span 
 class="ec-lmtt-10">runjar_*</span>
 launch configuration.
+                                                                                            
+                                                                                            
 </p><!--l. 137--><p class="noindent" >Finally we want to mention that the generator switches are passed as arguments to the plug-in. In the pom you can find the
 most commonly used ones in xml comments together with a comment:
 </p>
 <!--l. 140-->
 <div class="lstlisting" id="listing-65"><span class="label"><a 
- id="x34-149049r1"></a></span><span 
+ id="x34-146049r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149050r2"></a></span><span 
+ id="x34-146050r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">groupId</span><span 
@@ -1153,7 +1156,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149051r3"></a></span><span 
+ id="x34-146051r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">artifactId</span><span 
@@ -1174,7 +1177,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149052r4"></a></span><span 
+ id="x34-146052r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmssbx-10x-x-90">version</span><span 
@@ -1186,13 +1189,13 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149053r5"></a></span><span 
+ id="x34-146053r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">executions</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149054r6"></a></span><span 
+ id="x34-146054r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1200,7 +1203,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">execution</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149055r7"></a></span><span 
+ id="x34-146055r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1209,7 +1212,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">goals</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149056r8"></a></span><span 
+ id="x34-146056r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1225,7 +1228,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">goal</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149057r9"></a></span><span 
+ id="x34-146057r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1235,7 +1238,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">goals</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149058r10"></a></span><span 
+ id="x34-146058r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1244,7 +1247,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">configuration</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149059r11"></a></span><span 
+ id="x34-146059r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1255,7 +1258,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">arguments</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149060r12"></a></span><span 
+ id="x34-146060r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1286,7 +1289,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149061r13"></a></span><span 
+ id="x34-146061r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1316,7 +1319,7 @@ class="ec-lmtt-9">data</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">objects</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149062r14"></a></span><span 
+ id="x34-146062r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1334,7 +1337,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149063r15"></a></span><span 
+ id="x34-146063r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1345,7 +1348,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149064r16"></a></span><span 
+ id="x34-146064r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1363,7 +1366,7 @@ class="ec-lmtt-9">MSC</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">instrumentation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149065r17"></a></span><span 
+ id="x34-146065r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1381,7 +1384,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149066r18"></a></span><span 
+ id="x34-146066r18"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1392,7 +1395,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149067r19"></a></span><span 
+ id="x34-146067r19"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1418,7 +1421,7 @@ class="ec-lmtt-9">dynamic</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">actors</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149068r20"></a></span><span 
+ id="x34-146068r20"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1436,7 +1439,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149069r21"></a></span><span 
+ id="x34-146069r21"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1447,7 +1450,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149070r22"></a></span><span 
+ id="x34-146070r22"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1471,7 +1474,7 @@ class="ec-lmtt-9">as</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">library</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149071r23"></a></span><span 
+ id="x34-146071r23"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1489,7 +1492,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149072r24"></a></span><span 
+ id="x34-146072r24"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1500,7 +1503,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149073r25"></a></span><span 
+ id="x34-146073r25"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1516,7 +1519,7 @@ class="ec-lmtt-9">generate</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">documentation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149074r26"></a></span><span 
+ id="x34-146074r26"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1534,7 +1537,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149075r27"></a></span><span 
+ id="x34-146075r27"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1545,7 +1548,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149076r28"></a></span><span 
+ id="x34-146076r28"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1575,7 +1578,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">changed</span><span 
 class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149077r29"></a></span><span 
+ id="x34-146077r29"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1593,7 +1596,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149078r30"></a></span><span 
+ id="x34-146078r30"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1604,7 +1607,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149079r31"></a></span><span 
+ id="x34-146079r31"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1625,7 +1628,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149080r32"></a></span><span 
+ id="x34-146080r32"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1637,7 +1640,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">arguments</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149081r33"></a></span><span 
+ id="x34-146081r33"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1647,7 +1650,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">configuration</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149082r34"></a></span><span 
+ id="x34-146082r34"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1656,20 +1659,20 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">execution</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149083r35"></a></span><span 
+ id="x34-146083r35"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">executions</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149084r36"></a></span><span 
+ id="x34-146084r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149085r37"></a></span><span 
+ id="x34-146085r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1682,14 +1685,14 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149086r38"></a></span><span 
+ id="x34-146086r38"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149087r39"></a></span><span 
+ id="x34-146087r39"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">plugin</span><span 
@@ -1701,21 +1704,21 @@ class="ec-lmtt-10">-msc_instr </span>switch to generate MSCs.
 </p>
 <!--l. 186--><div class="lstinputlisting">
 <a 
- id="x34-149088r1"></a>
+ id="x34-146088r1"></a>
 <a 
- id="x34-149089"></a>
+ id="x34-146089"></a>
 <span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149090r1"></a></span><span 
+ id="x34-146090r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">RoomModel</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149091r2"></a></span><span 
+ id="x34-146091r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149092r3"></a></span><span 
+ id="x34-146092r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1738,9 +1741,9 @@ class="ec-lmtt-9">.</span><span
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149093r4"></a></span><span 
+ id="x34-146093r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149094r5"></a></span><span 
+ id="x34-146094r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1748,7 +1751,7 @@ class="ec-lmtt-9">LogSys1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149095r6"></a></span><span 
+ id="x34-146095r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1759,13 +1762,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">SubSysClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149096r7"></a></span><span 
+ id="x34-146096r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149097r8"></a></span><span 
+ id="x34-146097r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149098r9"></a></span><span 
+ id="x34-146098r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1773,7 +1776,7 @@ class="ec-lmtt-9">SubSysClass1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149099r10"></a></span><span 
+ id="x34-146099r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1784,7 +1787,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongTop</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149100r11"></a></span><span 
+ id="x34-146100r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1795,7 +1798,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ATimingService</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149101r12"></a></span><span 
+ id="x34-146101r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1811,9 +1814,9 @@ class="ec-lmtt-9">timingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">timer</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149102r13"></a></span><span 
+ id="x34-146102r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149103r14"></a></span><span 
+ id="x34-146103r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1821,13 +1824,13 @@ class="ec-lmssbx-10x-x-90">LogicalThread</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">defaultThread</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149104r15"></a></span><span 
+ id="x34-146104r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149105r16"></a></span><span 
+ id="x34-146105r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149106r17"></a></span><span 
+ id="x34-146106r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1835,7 +1838,7 @@ class="ec-lmtt-9">PingPongTop</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149107r18"></a></span><span 
+ id="x34-146107r18"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1843,7 +1846,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149108r19"></a></span><span 
+ id="x34-146108r19"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1855,7 +1858,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">Sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149109r20"></a></span><span 
+ id="x34-146109r20"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1867,7 +1870,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">Receiver</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149110r21"></a></span><span 
+ id="x34-146110r21"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1884,13 +1887,13 @@ class="ec-lmtt-9">receiver</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149111r22"></a></span><span 
+ id="x34-146111r22"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149112r23"></a></span><span 
+ id="x34-146112r23"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1900,13 +1903,13 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149113r24"></a></span><span 
+ id="x34-146113r24"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149114r25"></a></span><span 
+ id="x34-146114r25"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149115r26"></a></span><span 
+ id="x34-146115r26"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1914,7 +1917,7 @@ class="ec-lmtt-9">Sender</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149116r27"></a></span><span 
+ id="x34-146116r27"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1922,7 +1925,7 @@ class="ec-lmssbx-10x-x-90">Interface</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149117r28"></a></span><span 
+ id="x34-146117r28"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1936,13 +1939,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongProtocol</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149118r29"></a></span><span 
+ id="x34-146118r29"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149119r30"></a></span><span 
+ id="x34-146119r30"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1950,7 +1953,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149120r31"></a></span><span 
+ id="x34-146120r31"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1961,13 +1964,13 @@ class="ec-lmssbx-10x-x-90">Port</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">receiver</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149121r32"></a></span><span 
+ id="x34-146121r32"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149122r33"></a></span><span 
+ id="x34-146122r33"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1975,7 +1978,7 @@ class="ec-lmssbx-10x-x-90">Behavior</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149123r34"></a></span><span 
+ id="x34-146123r34"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1984,7 +1987,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149124r35"></a></span><span 
+ id="x34-146124r35"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2006,7 +2009,7 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149125r36"></a></span><span 
+ id="x34-146125r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2026,7 +2029,7 @@ class="ec-lmtt-9">ReceivedPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149126r37"></a></span><span 
+ id="x34-146126r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2038,7 +2041,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149127r38"></a></span><span 
+ id="x34-146127r38"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2055,7 +2058,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">receiver</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149128r39"></a></span><span 
+ id="x34-146128r39"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2065,7 +2068,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149129r40"></a></span><span 
+ id="x34-146129r40"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2074,7 +2077,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149130r41"></a></span><span 
+ id="x34-146130r41"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2087,7 +2090,7 @@ class="ec-lmtt-9">SendingPing</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149131r42"></a></span><span 
+ id="x34-146131r42"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2099,7 +2102,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149132r43"></a></span><span 
+ id="x34-146132r43"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2117,7 +2120,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149133r44"></a></span><span 
+ id="x34-146133r44"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2127,7 +2130,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149134r45"></a></span><span 
+ id="x34-146134r45"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2136,7 +2139,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149135r46"></a></span><span 
+ id="x34-146135r46"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2147,26 +2150,26 @@ class="ec-lmssbx-10x-x-90">State</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ReceivedPong</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149136r47"></a></span><span 
+ id="x34-146136r47"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149137r48"></a></span><span 
+ id="x34-146137r48"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149138r49"></a></span><span 
+ id="x34-146138r49"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149139r50"></a></span><span 
+ id="x34-146139r50"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149140r51"></a></span><span 
+ id="x34-146140r51"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2174,7 +2177,7 @@ class="ec-lmtt-9">Receiver</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149141r52"></a></span><span 
+ id="x34-146141r52"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2182,7 +2185,7 @@ class="ec-lmssbx-10x-x-90">Interface</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149142r53"></a></span><span 
+ id="x34-146142r53"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2194,13 +2197,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongProtocol</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149143r54"></a></span><span 
+ id="x34-146143r54"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149144r55"></a></span><span 
+ id="x34-146144r55"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2208,7 +2211,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149145r56"></a></span><span 
+ id="x34-146145r56"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2219,7 +2222,7 @@ class="ec-lmssbx-10x-x-90">Port</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149146r57"></a></span><span 
+ id="x34-146146r57"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2232,13 +2235,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PTimer</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149147r58"></a></span><span 
+ id="x34-146147r58"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149148r59"></a></span><span 
+ id="x34-146148r59"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2246,7 +2249,7 @@ class="ec-lmssbx-10x-x-90">Behavior</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149149r60"></a></span><span 
+ id="x34-146149r60"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2255,7 +2258,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149150r61"></a></span><span 
+ id="x34-146150r61"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2277,7 +2280,7 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149151r62"></a></span><span 
+ id="x34-146151r62"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2297,7 +2300,7 @@ class="ec-lmtt-9">WaitingForAWhile</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149152r63"></a></span><span 
+ id="x34-146152r63"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2309,7 +2312,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149153r64"></a></span><span 
+ id="x34-146153r64"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2326,7 +2329,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149154r65"></a></span><span 
+ id="x34-146154r65"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2336,7 +2339,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149155r66"></a></span><span 
+ id="x34-146155r66"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2345,7 +2348,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149156r67"></a></span><span 
+ id="x34-146156r67"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2365,7 +2368,7 @@ class="ec-lmtt-9">SentPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149157r68"></a></span><span 
+ id="x34-146157r68"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2377,7 +2380,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149158r69"></a></span><span 
+ id="x34-146158r69"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2394,7 +2397,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">timing</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149159r70"></a></span><span 
+ id="x34-146159r70"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2404,7 +2407,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149160r71"></a></span><span 
+ id="x34-146160r71"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2413,7 +2416,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149161r72"></a></span><span 
+ id="x34-146161r72"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2424,7 +2427,7 @@ class="ec-lmssbx-10x-x-90">State</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">WaitingForPing</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149162r73"></a></span><span 
+ id="x34-146162r73"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2437,7 +2440,7 @@ class="ec-lmtt-9">SentPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149163r74"></a></span><span 
+ id="x34-146163r74"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2449,7 +2452,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149164r75"></a></span><span 
+ id="x34-146164r75"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2467,7 +2470,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149165r76"></a></span><span 
+ id="x34-146165r76"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2477,7 +2480,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149166r77"></a></span><span 
+ id="x34-146166r77"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2486,7 +2489,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149167r78"></a></span><span 
+ id="x34-146167r78"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2499,7 +2502,7 @@ class="ec-lmtt-9">WaitingForAWhile</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149168r79"></a></span><span 
+ id="x34-146168r79"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2511,7 +2514,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149169r80"></a></span><span 
+ id="x34-146169r80"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2529,7 +2532,7 @@ class="ec-lmtt-9">(1000)</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149170r81"></a></span><span 
+ id="x34-146170r81"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2539,7 +2542,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149171r82"></a></span><span 
+ id="x34-146171r82"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2548,26 +2551,26 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149172r83"></a></span><span 
+ id="x34-146172r83"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149173r84"></a></span><span 
+ id="x34-146173r84"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149174r85"></a></span><span 
+ id="x34-146174r85"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149175r86"></a></span><span 
+ id="x34-146175r86"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149176r87"></a></span><span 
+ id="x34-146176r87"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2575,7 +2578,7 @@ class="ec-lmtt-9">PingPongProtocol</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149177r88"></a></span><span 
+ id="x34-146177r88"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2583,7 +2586,7 @@ class="ec-lmssbx-10x-x-90">incoming</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149178r89"></a></span><span 
+ id="x34-146178r89"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2593,13 +2596,13 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">ping</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149179r90"></a></span><span 
+ id="x34-146179r90"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149180r91"></a></span><span 
+ id="x34-146180r91"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2607,7 +2610,7 @@ class="ec-lmssbx-10x-x-90">outgoing</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149181r92"></a></span><span 
+ id="x34-146181r92"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2617,19 +2620,19 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">pong</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149182r93"></a></span><span 
+ id="x34-146182r93"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149183r94"></a></span><span 
+ id="x34-146183r94"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149184r95"></a></span><span 
+ id="x34-146184r95"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x34-149185r96"></a></span><span 
+ id="x34-146185r96"></a></span><span 
 class="ec-lmtt-9">}</span>
 <br />
     <div class="caption" 
@@ -2637,7 +2640,7 @@ class="ec-lmtt-9">}</span>
     </span><span  
 class="content">ROOM
     example
-    code</span></div><!--tex4ht:label?: x34-1490006.2 -->
+    code</span></div><!--tex4ht:label?: x34-1460006 -->
 </div>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse27.html" >next</a>] [<a 
@@ -2646,5 +2649,5 @@ href="etrice-docse25.html#tailetrice-docse25.html" >prev-tail</a>] [<a
 href="etrice-docse26.html" >front</a>] [<a 
 href="etrice-docch6.html#etrice-docse26.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
- id="tailetrice-docse26.html"></a>  </p> 
+ id="tailetrice-docse26.html"></a></p> 
 </body></html> 

@@ -1,0 +1,42 @@
+RoomModel Inheritance {
+	
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	
+	ActorClass ActorSubClass extends ActorBaseClass {
+		// inherits all elements from super type hierarchy
+	}
+	
+	ActorClass ActorBaseClass {
+		Interface {
+			Port port1 : ProtocolBaseClass
+		}
+		Structure {
+			Attribute attribute1 : uint32
+		}
+		Behavior {
+			Operation operation1(){
+				"return;"
+			}
+		}
+	}
+	
+	ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
+		// inherits elements from super type hierarchy
+	}
+	
+	ProtocolClass ProtocolBaseClass {
+		incoming {
+			Message message1()
+		}
+	}
+	
+	DataClass DataSubClass extends DataBaseClass {
+		// inherits elements from super type hierarchy
+	}
+	
+	DataClass DataBaseClass {
+		Attribute attribute1 : uint32
+	}
+	
+	
+}

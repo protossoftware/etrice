@@ -22,5 +22,6 @@ RoomModel room.basic.types {
 	
 	// et-datatypes for the model
 	PrimitiveType etAddressId:ptInteger -> etAddressId default "0"
-	  
+	
+	ExternalType voidType -> "void" default "NULL"  
 }

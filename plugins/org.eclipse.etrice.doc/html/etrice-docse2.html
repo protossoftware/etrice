@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-12 15:10:00" /> 
+<meta name="date" content="2015-06-16 18:34:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,11 +21,11 @@ href="etrice-docse1.html#tailetrice-docse1.html" >prev-tail</a>] [<a
 href="#tailetrice-docse2.html">tail</a>] [<a 
 href="etrice-docch1.html#etrice-docse2.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">1.2   </span> <a 
- id="x5-60001.2"></a>Introduction to the ROOM Language</h3>
-<!--l. 3--><p class="noindent" >
-</p>
+ id="x5-60002"></a>Introduction to the ROOM Language</h3>
+<a 
+ id="x5-6001r5"></a>
 <h4 class="subsectionHead"><span class="titlemark">1.2.1   </span> <a 
- id="x5-70001.2.1"></a>Scope of ROOM</h4>
+ id="x5-70001"></a>Scope of ROOM</h4>
 <!--l. 5--><p class="noindent" >This chapter will give a rough overview of what ROOM (<span 
 class="ec-lmssbx-10">R</span>eal-time <span 
 class="ec-lmssbx-10">O</span>bject-<span 
@@ -39,16 +39,14 @@ will try to answer the following questions:
      <li class="itemize">Which kind of SW-Systems will be addressed?
      </li>
      <li class="itemize">What is the relation between object oriented programming and ROOM?
-                                                                                            
-                                                                                            
      </li>
      <li class="itemize">What are the benefits of ROOM?
      </li>
      <li class="itemize">Which consequences must be taken into account?</li></ul>
-<!--l. 17--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x5-80001.2.1"></a>Where does it come from?</h5>
+<a 
+ id="Q1-5-8"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-80001"></a>Where does it come from?</h5>
 <!--l. 19--><p class="noindent" >ROOM was developed in the 1990th on the background of the upcoming mobile applications with the goal to manage the
 complexity of such huge SW-Systems. From the very beginning ROOM has focused on a certain type of SW-Systems and is,
 in contrast to the UML, well suited for this kind of systems. In this sense, ROOM is a DSL (Domain Specific Language) for
@@ -72,12 +70,15 @@ for production machines and automotive systems. <span
 class="ec-lmsso-10">Trice</span><sup class="textsuperscript"><span 
 class="ec-lmss-9">TM</span></sup> is the predecessor of eTrice (see Introduction to
 eTrice).
+                                                                                            
+                                                                                            
 </p><!--l. 32--><p class="noindent" >From our point of view ROOM provides still the clearest, simplest, most complete and best suited modeling concepts for the
 real time domain. All later proposals like the UML do not fit as well to this kind of problems.
-</p><!--l. 36--><p class="noindent" >
+<a 
+ id="Q1-5-10"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-90001.2.1"></a>Which kind of SW-Systems will be addressed?</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-90001"></a>Which kind of SW-Systems will be addressed?</h5>
 <!--l. 38--><p class="noindent" >As mentioned before ROOM addresses distributed, event driven, real time systems. But what is a <span 
 class="ec-lmsso-10">real time system</span>? ROOM
 defines a set of properties which are typical for a real time system. These properties are:
@@ -103,18 +104,17 @@ system can be characterized as timely, concurrent and reactive. As long as the w
 transform to a laundry drier by itself, the system has no dynamic internal structure and as long as all functions
 are running on a single micro controller the (SW)-system is not distributed. ROOM fits perfect to such a
 system.
-                                                                                            
-                                                                                            
 </p><!--l. 62--><p class="noindent" >A SW system which mainly consists of data transformations like signal/image processing or a loop controller (e.g. a PID
 controller) cannot be characterized with any of the above mentioned properties. However, in the real world most
 of the SW systems will be a combination of both. ROOM can be combined with such systems, so that for
 example an actor provides a <span 
 class="ec-lmsso-10">run to completion </span>context for calculating an image processing algorithm or a PID
 controller.
-</p><!--l. 68--><p class="noindent" >
+<a 
+ id="Q1-5-12"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-100001.2.1"></a>What is the relation between OOP and ROOM?</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-100001"></a>What is the relation between OOP and ROOM?</h5>
 <!--l. 70--><p class="noindent" >The relation between classical object oriented programming and ROOM is comparable to the relation between assembler
 programming and C programming. It provides a shift of the object paradigm. The classical object paradigm provides some
 kind of information hiding. Attributes can be accessed via access methods. Logical higher level methods provide the requested
@@ -129,19 +129,22 @@ src="images/010-RoomIntroduction02.png" alt="PIC"
 cooperative communication infrastructure with <span 
 class="ec-lmsso-10">run to completion </span>semantics. That makes developing of business logic easy
 and safe (see <a 
-href="#x5-130001.2.2">1.2.2<!--tex4ht:ref: sec:basic_concepts --></a> <a 
-href="#x5-130001.2.2">Basic Concepts<!--tex4ht:ref: sec:basic_concepts --></a>). The logical machine provides an encapsulation shell including concurrency issues (see
+href="#x5-130002">1.2.2<!--tex4ht:ref: sec:basic_concepts --></a> <a 
+href="#x5-130002">Basic Concepts<!--tex4ht:ref: sec:basic_concepts --></a>). The logical machine provides an encapsulation shell including concurrency issues (see
 <a 
-href="#x5-170001.2.2">1.2.2<!--tex4ht:ref: sec:run_to_completion --></a> <a 
-href="#x5-170001.2.2">Run to Completion<!--tex4ht:ref: sec:run_to_completion --></a>).
+href="#x5-170002">1.2.2<!--tex4ht:ref: sec:run_to_completion --></a> <a 
+href="#x5-170002">Run to Completion<!--tex4ht:ref: sec:run_to_completion --></a>).
 </p><!--l. 86--><p class="noindent" ><img 
 src="images/010-RoomIntroduction03.png" alt="PIC"  
  />
 </p><!--l. 88--><p class="noindent" >This thinking of an object is much more general than the classic one.
-</p><!--l. 90--><p class="noindent" >
+                                                                                            
+                                                                                            
+<a 
+ id="Q1-5-14"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-110001.2.1"></a>What are the benefits of ROOM?</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-110001"></a>What are the benefits of ROOM?</h5>
 <!--l. 92--><p class="noindent" >ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general point
 of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact
 that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime
@@ -158,12 +161,10 @@ environment.
      </li>
      <li class="itemize">ROOM provides graphical model execution, which makes it easy to understand the application or find defects
      in a very early phase.</li></ul>
-<!--l. 108--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x5-120001.2.1"></a>Which consequences must be taken into account?</h5>
-                                                                                            
-                                                                                            
+<a 
+ id="Q1-5-16"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-120001"></a>Which consequences must be taken into account?</h5>
 <!--l. 110--><p class="noindent" >Generating code from models will introduce some overhead in terms of memory footprint as well as performance. For most
 systems the overhead will be negligible. However, the decision for using ROOM should be made explicitly and it is always a
 trade off between development costs, time to market and costs in terms of a little bit more of memory and performance.
@@ -172,14 +173,15 @@ their need for reusable core assets.
 </p><!--l. 116--><p class="noindent" >Care must be taken during the introduction of the new methodology. Due to the fact that ROOM provides
 a shift of the object paradigm, developers and teams need a phase of adaption. Every benefit comes at a
 price.
-</p><!--l. 119--><p class="noindent" >
+<a 
+ id="x5-12001r7"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">1.2.2   </span> <a 
- id="x5-130001.2.2"></a>Basic Concepts</h4>
-<!--l. 122--><p class="noindent" >
-</p>
-<h5 class="subsubsectionHead"><a 
- id="x5-140001.2.2"></a>Actor, Port, Protocol</h5>
+ id="x5-130002"></a>Basic Concepts</h4>
+<a 
+ id="Q1-5-19"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-140002"></a>Actor, Port, Protocol</h5>
 <!--l. 124--><p class="noindent" >The basic elements of ROOM are the actors with their ports and protocols. The protocol provides a formal interface
 description. The port is an interaction point where the actor interacts with its outside world. Each port has exactly one
 protocol attached. The sum of all ports builds up the complete interface of an actor. Each port can receive messages, with or
@@ -190,13 +192,13 @@ machine) or will be delegated to the actor&#8217;s internal structure.
                                                                                             
                                                                                             
 <!--l. 132--><p class="noindent" ><a 
- id="x5-140011"></a></p><hr class="float" /><div class="float" 
+ id="x5-14001r1"></a></p><hr class="float" /><div class="float" 
 >
                                                                                             
                                                                                             
  <div class="caption" 
 ><span class="id">Table&#x00A0;1.1: </span><span  
-class="content">Actor and Protocol Class Example</span></div><!--tex4ht:label?: x5-140011 -->
+class="content">Actor and Protocol Class Example</span></div><!--tex4ht:label?: x5-14001r1 -->
 <div class="tabular"> <table id="TBL-1" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-1-1g"><col 
@@ -236,9 +238,11 @@ sent.
 </p><!--l. 149--><p class="noindent" >With this model, a complex behavior can be divided into many relatively simple, linked actors. To put it the other way round:
 The complex behavior will be provided by a network of relatively simple components which are communicating with each
 other via well defined interfaces.
+<a 
+ id="Q1-5-22"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-150001.2.2"></a>Hierarchy in Structure and Behavior</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-150002"></a>Hierarchy in Structure and Behavior</h5>
 <!--l. 156--><p class="noindent" >ROOM provides two types of hierarchy. Behavioral hierarchy and structural hierarchy. Structural hierarchy means that actors
 can be nested to arbitrary depth. Usually you will add more and more details to your application with each nesting level. That
 means you can focus yourself on any level of abstraction with always the same element, the actor. Structural hierarchy
@@ -262,12 +266,13 @@ have to add more details to your model to make a LED blinking, but for the curre
 is realized. This will be done in the next lower level of the hierarchy.
 </p><!--l. 179--><p class="noindent" >This simple example might give an idea how powerful this mechanisms is.
 </p><!--l. 181--><p class="noindent" >The hierarchical FSM provides a rich tool box to describe real world problems (see chapter <a 
-href="etrice-docch5.html#x25-1080005">5<!--tex4ht:ref: sec:room_concepts --></a> <a 
-href="etrice-docch5.html#x25-1080005">ROOM Concepts<!--tex4ht:ref: sec:room_concepts --></a>).
-</p><!--l. 183--><p class="noindent" >
+href="etrice-docch5.html#x25-1050005">5<!--tex4ht:ref: sec:room_concepts --></a> <a 
+href="etrice-docch5.html#x25-1050005">ROOM Concepts<!--tex4ht:ref: sec:room_concepts --></a>).
+<a 
+ id="Q1-5-24"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-160001.2.2"></a>Layering</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-160002"></a>Layering</h5>
 <!--l. 185--><p class="noindent" >Layering is another well known form of abstraction to reduce complexity in the structure of systems. ROOM is
 probably the only language that supports layering directly as a language feature. Layering can be expressed in
 ROOM by actors with specialized ports, called <span 
@@ -288,14 +293,15 @@ class="ec-lmsso-10">CommunicationLayer</span>. Actors inside the <span
 class="ec-lmsso-10">ApplicationLayer </span>that implement an SAP for those services
 are connected directly to the implementation of the services. Layering and actor hierarchies with port to port connections can
 be mixed on every level of granularity.
-                                                                                            
-                                                                                            
-</p><!--l. 202--><p class="noindent" >
+<a 
+ id="Q1-5-26"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-170001.2.2"></a>Run to Completion</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-170002"></a>Run to Completion</h5>
 <!--l. 205--><p class="noindent" ><span 
 class="ec-lmsso-10">Run to completion </span>(RTC) is a very central concept of ROOM. It enables the developer to concentrate on the functional
+                                                                                            
+                                                                                            
 aspects of the system. The developer doesn&#8217;t have to care about concurrency issues all the time. This job is
 concentrated to the system designer in a very flexible way. What does <span 
 class="ec-lmsso-10">run to completion </span>mean: RTC means that
@@ -314,10 +320,11 @@ finished.
 one thread of control, all objects are protected which are accessed from one thread of control but multiple actors. This
 provides the possibility to decompose complex functionality into several actors without the risk to produce access violations or
 dead locks.
-</p><!--l. 225--><p class="noindent" >
+<a 
+ id="x5-17001r18"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">1.2.3   </span> <a 
- id="x5-180001.2.3"></a>Execution Models</h4>
+ id="x5-180003"></a>Execution Models</h4>
 <!--l. 227--><p class="noindent" >Since from ROOM models executable code can be generated, it is important to define the way the actors are executed and
 communicate with each other. The combination of communication and execution is called the <span 
 class="ec-lmsso-10">execution model</span>. Currently the
@@ -326,10 +333,11 @@ class="ec-lmssbx-10">message driven</span>, the <span
 class="ec-lmssbx-10">data driven </span>and a mixture of both execution models. In future
 releases maybe also a synchronous execution model will be supported, depending on the requirements of the
 community.
-</p><!--l. 235--><p class="noindent" >
+<a 
+ id="Q1-5-29"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-190001.2.3"></a>Communication Methods</h5>
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-190003"></a>Communication Methods</h5>
      <ul class="itemize1">
      <li class="itemize"><span 
 class="ec-lmssbx-10">message driven </span>&#8211; asynchronous, non blocking, no return value:<br 
@@ -345,12 +353,11 @@ class="newline" />In data driven communication sender and receiver often have a 
 class="ec-lmssbx-10">function call </span>&#8211; synchronous, blocking, return value:<br 
 class="newline" />Regular function call as known in most programming languages.</li></ul>
 <!--l. 251--><p class="noindent" >eTrice currently supports the two former communication methods.
-</p><!--l. 253--><p class="noindent" >
+<a 
+ id="Q1-5-31"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-200001.2.3"></a>Execution Methods</h5>
-                                                                                            
-                                                                                            
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-200003"></a>Execution Methods</h5>
      <ul class="itemize1">
      <li class="itemize"><span 
 class="ec-lmssbx-10">execution by receive event</span>: The message queue or the event dispatcher calls a <span 
@@ -364,39 +371,39 @@ class="ec-lmssbx-10">execute </span>call
      <li class="itemize"><span 
 class="ec-lmssbx-10">execution by function call</span>: The caller executes the called object via function call</li></ul>
 <!--l. 262--><p class="noindent" >eTrice currently supports the two former execution methods.
-</p><!--l. 264--><p class="noindent" >
+<a 
+ id="Q1-5-33"></a>
 </p>
-<h5 class="subsubsectionHead"><a 
- id="x5-210001.2.3"></a>Execution Models</h5>
+                                                                                            
+                                                                                            
+<h5 class="likesubsubsectionHead"><a 
+ id="x5-210003"></a>Execution Models</h5>
 <!--l. 266--><p class="noindent" >In present-day&#8217;s embedded systems in most cases one or several of the following execution models are used:
-</p>
-<!--l. 268--><p class="noindent" ><span class="paragraphHead"><a 
- id="x5-220001.2.3"></a><span 
-class="ec-lmssbx-10">message driven</span></span>
-<br 
+<a 
+ id="Q1-5-35"></a>
+<span 
+class="ec-lmssbx-10">message driven   </span><br 
 class="newline" />
-</p><!--l. 270--><p class="noindent" >The message driven execution model is a combination of message driven communication and execution by receive event. This
+The message driven execution model is a combination of message driven communication and execution by receive event. This
 model allows for distributed systems with a very high throughput. It can be deterministic but the determinism is hard to
 proof. This execution model is often found in telecommunication systems and high performance automation control
 systems.
-</p>
-<!--l. 277--><p class="noindent" ><span class="paragraphHead"><a 
- id="x5-230001.2.3"></a><span 
-class="ec-lmssbx-10">data driven</span></span>
-<br 
+<a 
+ id="Q1-5-36"></a>
+<span 
+class="ec-lmssbx-10">data driven   </span><br 
 class="newline" />
-</p><!--l. 279--><p class="noindent" >The data driven execution model is a combination of data driven communication and polled execution. This model is highly
+The data driven execution model is a combination of data driven communication and polled execution. This model is highly
 deterministic and very robust, but the polling creates a huge performance overhead. The determinism is easy to proof (simple
 mathematics). The execution model is also compatible with the execution model of control software generated by Tools like
 Matlab(TM) and LabView(TM). This model is usually used for systems with requirements for safety, such as automotive and
 avionic systems.
-</p>
-<!--l. 286--><p class="noindent" ><span class="paragraphHead"><a 
- id="x5-240001.2.3"></a><span 
-class="ec-lmssbx-10">synchronous</span></span>
-<br 
+<a 
+ id="Q1-5-37"></a>
+<span 
+class="ec-lmssbx-10">synchronous   </span><br 
 class="newline" />
-</p><!--l. 288--><p class="noindent" >The synchronous execution model could also be called <span 
+The synchronous execution model could also be called <span 
 class="ec-lmsso-10">function calls</span>. This model in general is not very well suited to support
 the <span 
 class="ec-lmsso-10">run to completion </span>semantics typical for ROOM models, but could also be generated from ROOM models. With this
@@ -405,12 +412,12 @@ models.
                                                                                             
                                                                                             
 </p>
-<!--l. 85--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 93--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch2.html" >next</a>] [<a 
 href="etrice-docse1.html" >prev</a>] [<a 
 href="etrice-docse1.html#tailetrice-docse1.html" >prev-tail</a>] [<a 
 href="etrice-docse2.html" >front</a>] [<a 
 href="etrice-docch1.html#etrice-docse2.html" >up</a>] </p></div>
-<!--l. 85--><p class="noindent" ><a 
- id="tailetrice-docse2.html"></a>   </p> 
+<a 
+ id="tailetrice-docse2.html"></a> 
 </body></html> 
