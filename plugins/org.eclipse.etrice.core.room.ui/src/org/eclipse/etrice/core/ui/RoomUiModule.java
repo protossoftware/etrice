@@ -15,11 +15,15 @@ package org.eclipse.etrice.core.ui;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
 import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
+import org.eclipse.etrice.core.ui.hover.KeywordEObjectTextHover;
+import org.eclipse.etrice.core.ui.hover.KeywordHoverProvider;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -38,7 +42,7 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return RoomOutlinePage.class;
 	}
-	
+
 	public static Injector getInjector() {
 		return RoomActivator.getInstance().getInjector(RoomActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM);
 	}
@@ -48,18 +52,28 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		return GlobalNonPlatformURIEditorOpener.class;
 	}
 
-	// HOWTO: use URI imports - need special class for creating hyper links for imports
+	// HOWTO: use URI imports - need special class for creating hyper links for
+	// imports
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return RoomHyperlinkHelper.class;
 	}
 
-    // HOWTO: inject own highlighting configuration
-    public Class<? extends IHighlightingConfiguration> bindSemanticConfig() {
-        return RoomHighlightingConfiguration.class;
-    }
+	// HOWTO: inject own highlighting configuration
+	public Class<? extends IHighlightingConfiguration> bindSemanticConfig() {
+		return RoomHighlightingConfiguration.class;
+	}
 
-    // HOWTO: inject own semantic highlighting
-    public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
-        return RoomSemanticHighlightingCalculator.class;
-    }
+	// HOWTO: inject own semantic highlighting
+	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+		return RoomSemanticHighlightingCalculator.class;
+	}
+
+//	@Override
+//	public Class<? extends IEObjectHover> bindIEObjectHover() {
+//		return KeywordEObjectTextHover.class;
+//	}
+//
+//	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+//		return KeywordHoverProvider.class;
+//	}
 }
