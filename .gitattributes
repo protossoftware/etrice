@@ -5,7 +5,19 @@
 * text=auto
 
 # Denote all files that are truly binary and should not be modified.
-*.xtextbin binary
-*.pdf binary
-*.jpg binary
-*.png binary
+*.xtextbin 	binary
+*.pdf 		binary
+*.zip		binary
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.gif           binary
+*.ico           binary
+*.jar           binary
+*.jpg           binary
+*.jpeg          binary
+*.png           binary
+*.so            binary
+*.war           binary
+*.ods		binary
+*.odt		binary
