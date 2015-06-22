@@ -1,0 +1,18 @@
+RoomModel TrafficLight_step3 {
+	
+	import TrafficLight.* from "TrafficLight.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+
+	LogicalSystem TrafficLight {
+		SubSystemRef subSystem: TrafficLightStep3_MultipleTrafficLights
+	}
+
+	SubSystemClass TrafficLightStep3_MultipleTrafficLights {
+		ActorRef timingService: ATimingService
+		ActorRef step3_FlatReplication: FlatReplication
+		ActorRef step4_HierarchicalReplication: HierarchicalReplication
+		LayerConnection ref step3_FlatReplication satisfied_by timingService.timer
+		LayerConnection ref step4_HierarchicalReplication satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+}

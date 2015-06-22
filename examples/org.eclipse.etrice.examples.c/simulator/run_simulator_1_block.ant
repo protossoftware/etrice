@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<project name="project" default="run">
+	<target name="run">
+		<java jar="TrafficlightSimulator.jar" fork="true" failonerror="false">
+			<arg value="4441" />
+		</java>
+	</target>
+</project>

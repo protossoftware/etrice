@@ -1,0 +1,16 @@
+RoomModel TrafficLight_step1 {
+	
+	import TrafficLight.* from "TrafficLight.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+
+	LogicalSystem TrafficLight {
+		SubSystemRef subSystem: TrafficLightStep1_Test
+	}
+
+	SubSystemClass TrafficLightStep1_Test {
+		ActorRef step1_TestApplication: TestApplication
+		ActorRef timingService: ATimingService
+		LayerConnection ref step1_TestApplication satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+}

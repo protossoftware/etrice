@@ -1,39 +1,8 @@
 RoomModel TrafficLight {
 
 	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
-
 	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.c/model/TcpService.room"
-
 	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-
-	LogicalSystem TrafficLight {
-//		SubSystemRef subSystem: TrafficLightStep1_Test
-		SubSystemRef subSystem: TrafficLightStep2_SingleTrafficLight
-//		SubSystemRef subSystem: TrafficLightStep3_MultipleTrafficLights
-	}
-
-	SubSystemClass TrafficLightStep1_Test {
-		ActorRef step1_TestApplication: TestApplication
-		ActorRef timingService: ATimingService
-		LayerConnection ref step1_TestApplication satisfied_by timingService.timer
-		LogicalThread defaultThread
-	}
-
-	SubSystemClass TrafficLightStep2_SingleTrafficLight {
-		ActorRef timingService: ATimingService
-		ActorRef step2_SingleTrafficLight: SingleTrafficLight
-		LayerConnection ref step2_SingleTrafficLight satisfied_by timingService.timer
-		LogicalThread defaultThread
-	}
-
-	SubSystemClass TrafficLightStep3_MultipleTrafficLights {
-		ActorRef timingService: ATimingService
-		ActorRef step3_FlatReplication: FlatReplication
-		ActorRef step4_HierarchicalReplication: HierarchicalReplication
-		LayerConnection ref step3_FlatReplication satisfied_by timingService.timer
-		LayerConnection ref step4_HierarchicalReplication satisfied_by timingService.timer
-		LogicalThread defaultThread
-	}
 
 	ActorClass TestApplication ["The TestApplication contains the PedestrianTrafficLightController and its test harness."] {
 		Structure {
