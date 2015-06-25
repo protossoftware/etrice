@@ -17,5 +17,13 @@
             primary="false">
       </toc>
    </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contextHelp.xml"
+            plugin="org.eclipse.etrice.doc">
+      </contexts>
+   </extension>
+   
 
 </plugin>

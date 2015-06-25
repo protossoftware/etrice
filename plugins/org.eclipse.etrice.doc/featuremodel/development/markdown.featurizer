@@ -1,0 +1,76 @@
+FeaturizerModel Markdown
+
+Feature ActorClass
+
+description ''''''
+/*
+ * Markdown:
+ *  *italic text*
+ *  **bold text**
+ *  Hyperlink: [Text](<url>)
+ * 	Image: ![Text](images/___.png)
+ *  Code: ```LANGUAGE .... ```
+ * 
+ */
+text '''
+	> The actor is the basic structural building block for building systems with ROOM.
+
+	An ActorClass consists of three main parts:
+	
+	* **Interface** (external interface) specifies the communication to 'outside' actors and consists of `Port`s.
+	* **Structure** (internal interface) contains [Port]()s, [Attribute]()s and [ActorRef]()s. These elements are accessible from the Behavior part of the actor (in contrary to the external interface above). An ActorClass can be composed of other actors again by declaring ActorRefs. Also this part declares the connection of ports in form of Bindings and LayerConnections.
+	* **Behavior** is described by the `StateMachine`. It can receive and send messages from the ports, declared in the Structure above. The Attributes can be used to store data during an state transition. Furthermore it is possible to declare Operations. They can be used to define reusable logic, that is invoked during a state transition.
+	
+	Graphical notation of an ActorClass:
+	
+	![ActorClass graphical notation](images/300-Application_structure.jpg)
+	
+	Textual notation of an ActorClass:
+	
+	```room
+	ActorClass ExampleActorClass {
+		Interface {
+			Port port1: ProtocolClass1
+			Port port4: ProtocolClass1
+		}
+		Structure {
+			external Port port1
+			conjugated Port port2: ProtocolClass1
+			conjugated Port port3: ProtocolClass1
+	
+			ActorRef ActorRef_A: ActorClass2
+			ActorRef ActorRef_B: ActorClass3
+	
+			Binding port2 and ActorRef_A.port5
+			// ...
+		}
+		Behavior {
+			// StateMachine part here
+		}
+	}
+	```
+	
+	|Contained | Feature|
+	--------- | -------|
+	|[ExecutionType]() | Determines the execution type of an actor.|
+	|[ActorRef]() | An ActorRef is an instance of an ActorClass.|
+	|Port | A Port is an instance of a ProtocolClass and the interface for an ActorClass.|
+	|SAP | A Service Access Point is similar to a Port, but uses a LayerConnection for wiring.|
+	|SPP | A Service Provision Point is the counterpart of a SAP|
+	|Binding | A Binding connects two Ports with each other.|
+	|LayerConnection| A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy.|
+	|Attribute | An Attribute is a member variable of a class|
+	|Operation|  An Operation is a member function of a class.|
+	|StateMachine | A StateMachine describes the state based, event driven behavior of an ActorClass|
+	
+	
+	Relation | Feature | description
+	-------- | ------- | ------
+	Uses | `Inheritance` | A class can specify a super class and inherits elements from the super class hierarchy.
+	Typecasts | **ActorRef** | An ActorRef is an instance of an ActorClass.
+	Is&#160;contained&#160;in | *LogicalModel* | The LogicalModel describes the logical structure and behavior of a ROOM application.
+	Is&#160;edited&#160;by | [GraphicalStructureEditor](#) | The Structure Editor allows to edit the ActorClass’ Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.
+'''
+
+stable
+;

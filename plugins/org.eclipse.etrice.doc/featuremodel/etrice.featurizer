@@ -11,7 +11,7 @@ FeaturizerModel eTrice
 		filePathName "300-eTrice-reference" 
 	} 
 	
-	contains ROOMLanguage
+	contains ROOMLanguage 
 	contains ModelEditors
 	contains CodeGenerators 
 

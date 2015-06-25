@@ -1,43 +1,60 @@
 FeaturizerModel eTriceModelEditors
 	imports "etrice.roomlanguage.featurizer"
 
-Feature ModelEditors
-	shortName '''ROOM Modeling'''
-	description ''''''
+Package ModelEditors
+	description '''All aspects of the ROOMLanguage can be edited by full-blown textual editors. In addition, graphical editing is provided for the structural and behavioral part of ActorClasses.'''
 	contains TextualROOMEditor
 	contains GraphicalStructureEditor
 	contains GraphicalBehaviorEditor
-	
-	stable
-;
 
-abstract Feature ModelEditor
-	description '''ModelEditor'''
-	
-	stable
 ;
 
 Feature TextualROOMEditor
 	shortName '''Textual ROOM Editor'''
 	description '''Textual model editor'''
-	isA ModelEditor
+	text'''
+		\begin{center}
+			\includegraphics[width=0.7\textwidth]{images/300-TextualROOMEditor.png}
+		\end{center}
+	'''
+	contains OutlineView
+	edits ROOMLanguage
 	stable
+;
+
+Feature OutlineView
+description '''Displays an overview of all elements in the textual editor.'''
+text '''
+	Shows the structure of the current opened model in the textual editor. Select the 'Link with Editor' option to synchronize the selection of elements between editor and outline view. This enables a convenient navigation.
+
+	\begin{center}
+	\includegraphics[width=0.7\textwidth]{images/300-OutlineView.png}
+	\end{center}
+'''
+stable
 ;
 
 Feature GraphicalBehaviorEditor
 	shortName '''Behavior Diagram Editor'''
-	description '''ModelEditor'''
-	isA ModelEditor
+	description '''The GraphicalBehaviorEditor allows to edit the ActorClass' StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.'''
+	text '''
+		\begin{center}
+			\includegraphics[width=0.7\textwidth]{images/300-GraphicalBehaviorEditor.png}
+		\end{center}
+	'''
+	edits StateMachine
 	stable
 ;
 
 Feature GraphicalStructureEditor
 	shortName '''Structural Diagram Editor'''
-	description '''The Structure Editor allows to edit the Actor Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.'''
-	isA ModelEditor
-	
-	// ??
-	contains StructureEditiorPalette
+	description '''The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.'''
+	text '''
+		\begin{center}
+			\includegraphics[width=0.7\textwidth]{images/300-GraphicalStructureEditor.png}
+		\end{center}
+	'''
+	contains StructureEditorPalette
 	contains ActorRefPropertyDialog
 	contains PortPropertyDialog
 	contains SPPPropertyDialog
@@ -52,28 +69,49 @@ Feature GraphicalStructureEditor
 	stable
 ;
 
-Feature StructureEditiorPalette
-	description '''creates all Kinds of ...  picture with explanation'''
+Feature StructureEditorPalette
+	description '''The palette creates central structural elements of an ActorClass.'''
+	text '''
+		Selecting an entry from the palette and clicking into the diagram, creates the element at the current position.
+		\begin{center}
+		\includegraphics[width=0.7\textwidth]{images/300-StructurePalette.png}
+		\end{center}
+	'''
 	stable
 ;
 
 Feature ActorRefPropertyDialog
-	description '''
-		A Dialog to edit structural reference of an ActorRef.
+	description '''A dialog to edit properties of an ActorRef.'''
+	text '''
+		The dialog is used to edit an existing ActorRef of an ActorClass. It is also shown when creating a new one.
+		\begin{center}
+		\includegraphics[width=0.7\textwidth]{images/300-ActorRefDialog.png}
+		\end{center}
 	'''
-	//\includegraphics[width=0.33\textwidth, angle=30]{../pictures/Application_structure.jpg}
 	edits ActorRef
 	stable
 ; 
 
 Feature PortPropertyDialog
-	description ''''''
+	description '''A dialog to edit properties of an Port.'''
+	text '''
+		The dialog is used to edit an existing Port of an ActorClass. It is also shown when creating a new one.
+		\begin{center}
+		\includegraphics[width=0.7\textwidth]{images/300-PortDialog.png}
+		\end{center}
+	'''
 	edits Port
 	stable
 ;
 
 Feature SPPPropertyDialog
-	description ''''''
+	description '''A dialog to edit properties of a SPP.'''
+	text '''
+		The dialog is used to edit an existing SPP of an ActorClass. It is also shown when creating a new one.
+		\begin{center}
+		\includegraphics[width=0.7\textwidth]{images/300-SPPDialog.png}
+		\end{center}
+	'''
 	edits SPP
 	stable
 ;

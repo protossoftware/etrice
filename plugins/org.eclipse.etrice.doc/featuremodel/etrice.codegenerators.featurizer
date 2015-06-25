@@ -1,33 +1,100 @@
 FeaturizerModel eTriceCodegenerators
+imports "etrice.roomlanguage.featurizer"
 
-Feature CodeGenerators
-	shortName '''Code Generation'''
+
+Package CodeGenerators
 	description ''''''
 	contains CCodeGenerator
 	contains JavaCodeGenerator
-	stable
 ;
 
-abstract Feature CodeGenerator
-	description ''''''
-	
-	stable
-;
 Feature CCodeGenerator
 	shortName '''C Code Generator'''
 	description ''''''
-	isA CodeGenerator
+	
+	contains GenerationOptions
+	contains MSCLogging
+	contains DataLogging
+	
 	stable
 ;
 Feature JavaCodeGenerator
 	shortName '''Java Code Generator'''
 	description ''''''
-	isA CodeGenerator
+	
+	contains GenerationOptions
+	contains MSCLogging
+	
 	stable
 ;
-Feature CPPCodeGenerator
-	shortName '''C++ Code Generator'''
-	description ''''''
-	isA CodeGenerator
+//Feature CPPCodeGenerator
+//	shortName '''C++ Code Generator'''
+//	description ''''''
+//	prototype
+//;
+
+Feature GenerationOptions
+description '''Mechanism to adjust the generation.'''
+text '''
+	Options for generation are configured in the launch configuration or in case of standalone generation via command line.
+	A list of available options:	
+	\begin{itemize}
+		\item generate as library
+		\item generate documentation
+		\item generate instrumentation for MSC generation
+		\item override output directories
+		\item some debug options
+	\end{itemize}
+'''
+stable
+;
+
+Feature MSCLogging
+	description '''Runtime logger for event-driven Messages, represented as a Message Sequence Chart.'''
+	text '''
+		The MSCLogging is activated by default, but can be set manually in the GenerationOptions.
+		The output file is created upon regular termination of the application.
+		The resulting file can be found in the logging directory and has the name 'msc.seq', which can be open with the free open source tool Trace2UML (\url{http://trace2uml.stage.tigris.org/})
+	
+		\includegraphics[width=\textwidth]{images/300-MSCLogging.png}
+	'''
+	
+	uses GenerationOptions
+	stable
+;
+
+Feature DataLogging
+	description '''Runtime logger for data-driven Messages with primtive data.'''
+	text '''
+		 \begin{itemize}
+			\item Annotation of one \textsf{DataLogging} per SubSystemClass
+			\item Specifiy complete port instance path starting from LogicalSystem
+			\item Port have to conjugated and data-driven
+			\item Activates logging of all messages having primitive or enum typed data
+			\item Seperate multiple port instance path through commas
+			\item Within \textsf{pathlist} do NOT use any whitespace (e.g. space or newline)
+		\end{itemize}
+	'''
+	example '''
+		\begin{lstlisting}[language=ROOM]
+		import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+		
+		LogicalSystem Logging {
+		 	SubSystemRef main: MainSubSystem
+		}
+		
+		SubSystemClass MainSubSystem {
+		 	@DataLogging(pathlist = "/Logging/main/<actorRef>/<Port>,/Logging/main/<actorRef>/<Port>")
+		 	...
+		\end{lstlisting}
+	'''
+	
+	uses Annotation
 	prototype
+;
+
+Feature DocumentationGenerator
+description '''A LaTeX documentation generator from eTrice models.'''
+uses GenerationOptions
+prototype
 ;
