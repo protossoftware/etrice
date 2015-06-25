@@ -190,7 +190,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							"Node_nodeRef1_mainRunner");
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
-							+ baseName + "/tmp/log"),
+							+ baseName + "/log"),
 							true, projectLocation, progressMonitor);
 					
 					if (config.useMVNBuild()) {

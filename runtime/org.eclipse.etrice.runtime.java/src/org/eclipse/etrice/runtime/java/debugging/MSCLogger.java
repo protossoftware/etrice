@@ -93,7 +93,7 @@ public class MSCLogger {
 	    if (is_open){
 		    try{
 			    // Create file 
-			    FileWriter fstream = new FileWriter("tmp/log/"+path+msc_name+".seq");
+			    FileWriter fstream = new FileWriter("log/"+path+msc_name+".seq");
 			    BufferedWriter out = new BufferedWriter(fstream);
 			    //saveMSC(out);
 			    saveMSCforTrace2UML(out);
