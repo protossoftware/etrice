@@ -66,7 +66,7 @@ void etDataLogger_newRow();
 
 #ifdef ET_DATA_LOGGER_ACTIVATE
 	#define ET_DATA_LOGGER_OPEN(name) \
-			etDataLogger_open("tmp/log", name);
+			etDataLogger_open("log", name);
 	#define ET_DATA_LOGGER_CLOSE \
 			etDataLogger_close();
 	#define ET_DATA_LOGGER_LOG_STRING(text) \
