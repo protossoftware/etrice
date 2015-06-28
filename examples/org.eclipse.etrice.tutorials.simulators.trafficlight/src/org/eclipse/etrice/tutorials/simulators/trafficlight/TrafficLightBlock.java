@@ -84,6 +84,7 @@ public class TrafficLightBlock extends Container implements Runnable {
 		ServerSocket socketServer;
 		try {
 			// open Socket
+			System.out.println("listening on port "+ipPort);
 			socketServer = new ServerSocket(ipPort);
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -96,7 +97,7 @@ public class TrafficLightBlock extends Container implements Runnable {
 				// wait blocking for client to connect
 				Socket socket = socketServer.accept();
 				socket.setKeepAlive(true);
-				statusLine.setText("accepting commands");
+				statusLine.setText("accepting commands at port "+ipPort);
 
 				// prepare input and output streams
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

@@ -46,7 +46,7 @@ public class TrafficLightWnd extends Frame {
 		Thread[] lightBlockThreads = new Thread[lightBlocks.length];
 		for (int i = 0; i < ipPorts.length; i++) {
 			lightBlockThreads[i] = new Thread(lightBlocks[i]);
-			lightBlockThreads[i].run();
+			lightBlockThreads[i].start();
 		}
 		
 		try {

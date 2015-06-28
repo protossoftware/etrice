@@ -1,9 +1,0 @@
-MappingModel Features {
-	import Features.* from "Features.room"
-	import Features.* from "Features.etphys"
-	Mapping FeatureLogicalSystem -> FeaturesPhysicalSystem {
-		SubSystemMapping subSystem -> node1 {
-			ThreadMapping DefaultThread -> PhysicalThread1
-		}
-	}
-}

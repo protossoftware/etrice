@@ -147,7 +147,7 @@ RoomModel TrafficLight {
 				}
 				State SetStandby {
 					entry {
-						"fct.standby();"
+						"fct.standby(0); // dummy port not used"
 					}
 				}
 				State InStandby
@@ -169,7 +169,7 @@ RoomModel TrafficLight {
 				}
 				State CarGreenAgain {
 					entry {
-						"fct.standby();"
+						"fct.standby(0); // dummy port"
 					}
 				}
 				State CarYellow
@@ -206,6 +206,10 @@ RoomModel TrafficLight {
 				Transition tr0: Stopped -> Connecting {
 					triggers {
 						<standby: fct>
+					}
+					action {
+						"printf(\"ptlc: connecting to port %d\\n\", port);"
+						"tlInterface.connect(port);"
 					}
 				}
 				Transition tr1: Standby -> tpStart of Running {
@@ -402,11 +406,7 @@ RoomModel TrafficLight {
 						"to.startTimeout(30*timeBase);"
 					}
 				}
-				State Connecting {
-					entry {
-						"tlInterface.connect();"
-					}
-				}
+				State Connecting
 			}
 		}
 	}
@@ -463,6 +463,11 @@ RoomModel TrafficLight {
 					triggers {
 						<connect: fct>
 					}
+					action {
+						"printf(\"tli: connecting to port %d\\n\", port);"
+						"DTcpControl config = {\"localhost\", port};"
+						"ctrl.connect(&config);"
+					}
 				}
 				Transition tr3: Connected -> Connected {
 					triggers {
@@ -516,12 +521,7 @@ RoomModel TrafficLight {
 						"sendOnOffCommand(\"setRequestButtonActive\", status);"
 					}
 				}
-				State Connecting {
-					entry {
-						"DTcpControl config = {\"localhost\", 4441};"
-						"ctrl.connect(&config);"
-					}
-				}
+				State Connecting
 				State Connected
 				State Disconnected
 			}
@@ -582,7 +582,14 @@ RoomModel TrafficLight {
 				}
 				State Standby {
 					entry {
-						"controllers.standby();"
+						"int n = PTrafficLightControllerReplPort_getReplication(&self->constData->controllers);"
+						"int i;"
+						""
+						"printf(\"hq: number of connections is %d\\n\", n);"
+						""
+						"for (i=0; i<n; ++i)"
+						"\tcontrollers[i].standby(4441+i);"
+						""
 						"to.startTimeout(200*10);"
 					}
 				}
@@ -603,7 +610,7 @@ RoomModel TrafficLight {
 
 	ProtocolClass PTrafficLightController {
 		incoming {
-			Message standby()
+			Message standby(port: int32)
 			Message start()
 			Message stop()
 		}
@@ -616,7 +623,7 @@ RoomModel TrafficLight {
 
 	ProtocolClass PTrafficLightInterface {
 		incoming {
-			Message connect()
+			Message connect(port: int32)
 			Message setCarRed(status: boolean)
 			Message setCarYellow(status: boolean)
 			Message setCarGreen(status: boolean)
