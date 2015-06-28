@@ -189,9 +189,17 @@ The latter one
 
 \section{The Java examples project}
 
+The example project \texttt{org.eclipse.etrice.examples.java} currently contains
+a number of examples that are all related to dynamic actors.
+
+The examples can be generated and executed one by one but not several at the same
+time. Inside the model folder there exists a sub folder for each example
+containing all models and launch configurations for code generation and to
+run the application.
+
 \subsection{Dynamic Actors 1}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors1}.
+This example is contained in \texttt{model/dynamicactors1}.
 
 \subsubsection{Purpose}
 
@@ -225,7 +233,7 @@ and the instance tree is dumped a second time.
 As soon as it receives the answer it prints it to the console. Then the optional actor is destroyed again
 and another one, now of type \texttt{Optional1}, is created and once more \texttt{sayHello()} is sent.
 
-\lstinputlisting[language=ROOM, firstnumber=36, firstline=36, lastline=73, caption=Container actor state machine]{../../../examples/org.eclipse.etrice.examples.dynamicactors/model/dynamicactors1/DynAct1.room}
+\lstinputlisting[language=ROOM, firstnumber=36, firstline=36, lastline=73, caption=Container actor state machine]{../../../examples/org.eclipse.etrice.examples.java/model/dynamicactors1/DynAct1.room}
 
 The console output of the running application starts with
 
@@ -310,7 +318,7 @@ In this case no factory classes are generated.
 
 \subsection{Dynamic Actors 2}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors2}.
+This example is contained in \texttt{model/dynamicactors2}.
 
 \subsubsection{Purpose}
 
@@ -357,7 +365,7 @@ costs a significant amount of time and the execution time is increased to the or
 
 \subsection{Dynamic Actors 3}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors3}.
+This example is contained in \texttt{model/dynamicactors3}.
 
 \subsubsection{Purpose}
 
@@ -385,7 +393,7 @@ The replicated port is used to send (broadcast) messages to the optional actors.
 
 \subsection{Dynamic Actors 4}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors4}.
+This example is contained in \texttt{model/dynamicactors4}.
 
 \subsubsection{Purpose}
 
@@ -409,7 +417,7 @@ actor which fails because the old one is still in place.
 
 \subsection{Dynamic Actors 5}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors5}.
+This example is contained in \texttt{model/dynamicactors5}.
 
 \subsubsection{Purpose}
 
@@ -428,7 +436,7 @@ external end port rather than the relay port of the previous examples.
 
 \subsection{Dynamic Actors 6}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors6}.
+This example is contained in \texttt{model/dynamicactors6}.
 
 \subsubsection{Purpose}
 
@@ -452,7 +460,7 @@ So a message sent from this port directly after creation of the outer dynamic ac
 
 \subsection{Dynamic Actors 7}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors7}.
+This example is contained in \texttt{model/dynamicactors7}.
 
 \subsubsection{Purpose}
 
@@ -471,7 +479,7 @@ it to the other one which in turn is replying back to the container.
 
 \subsection{Dynamic Actors 8}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors8}.
+This example is contained in \texttt{model/dynamicactors8}.
 
 \subsubsection{Purpose}
 
@@ -502,7 +510,7 @@ instances created in the beginning into the \texttt{optarr} reference.
 
 \subsection{Dynamic Actors 9}
 
-This example is contained in \texttt{org.eclipse.etrice.examples.dynamicactors9}.
+This example is contained in \texttt{model/dynamicactors9}.
 
 \subsubsection{Purpose}
 
