@@ -20,7 +20,7 @@
    <extension
          point="org.eclipse.help.contexts">
       <contexts
-            file="contextHelp.xml"
+            file="feature-gen/contextHelp.xml"
             plugin="org.eclipse.etrice.doc">
       </contexts>
    </extension>

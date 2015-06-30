@@ -4,784 +4,222 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 1</title> 
+<head><title>The C examples project</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-26 00:33:00" /> 
+<meta name="date" content="2015-06-30 18:08:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 10--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 15--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse11.html" >next</a>] [<a 
 href="etrice-docch4.html" >prev</a>] [<a 
 href="etrice-docch4.html#tailetrice-docch4.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse10.html">tail</a>] [<a 
 href="etrice-docch4.html#etrice-docse10.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
- id="x16-690001"></a>Dynamic Actors 1</h3>
-<!--l. 12--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors1</span>.
+ id="x16-690001"></a>The C examples project</h3>
+<!--l. 17--><p class="noindent" >This example project <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c </span>illustrates a simplified traffic light control. It actually
+consists of four different steps of increasing complexity that can be generated and built one by one (but not in
+parallel).
+</p><!--l. 23--><p class="noindent" >Most of the classes are contained in a common ROOM model <span 
+class="ec-lmtt-10">model/TrafficLight/TrafficLight.room </span>that also shows
+how ROOM classes can form a library and used as building blocks for several systems. Also the physical model is shared by all
+steps of this example.
+</p><!--l. 28--><p class="noindent" >Contained in the example you will find a little Java GUI that some of the example use to simulate a real traffic light. The GUI
+is contacted using TCP/IP ports 4441 and subsequent. The protocol used on the TCP/IP socket connection is a simple text
+protocol with commands for the lights. Three of the example steps make use of this simulator GUI. They also contain a
+launch configuration for it.
+</p><!--l. 35--><p class="noindent" ><span 
+class="ec-lmssbx-10">Note: </span>Before compiling and linking a new step of the example the project should be cleaned to avoid duplicate symbols due
+to artifacts from the previous build.
 <a 
  id="x16-69001r87"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">4.1.1   </span> <a 
- id="x16-700001"></a>Purpose</h4>
-<!--l. 16--><p class="noindent" >The example demonstrates the usage of an optional actor. It is shown that several actor classes derived from the type of the
-optional actor reference can be optionally created in place of the optional actor reference. Optional actor instances can also
-be destroyed and another instance can be created in the free slot.
+ id="x16-700001"></a>Traffic light - step 1</h4>
+<!--l. 41--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step1</span>.
+                                                                                            
+                                                                                            
+It also contains launch configurations for the code generation and for running the application.
 <a 
- id="x16-70001r91"></a>
+ id="x16-70001r1"></a>
 </p>
-<h4 class="subsectionHead"><span class="titlemark">4.1.2   </span> <a 
- id="x16-710002"></a>Details</h4>
-<!--l. 23--><p class="noindent" >The structure of this system is simple.
-</p><!--l. 25--><p class="noindent" ><img 
-src="images/039-DynAct1-Main_instanceTree.jpg" alt="PIC"  
- />
-</p><!--l. 27--><p class="noindent" >However, this is only the initial system structure. The leaf instance is just a place holder for an optional actor instance. In this
-place an instance of a compatible type can be created at run time. Compatible types are the type of the reference itself and
-all of its sub types as long as they are not abstract. Together with the instance all of its contained instances will be created
-and all ports are connected.
-</p><!--l. 33--><p class="noindent" >This example demonstrates how an optional actor is created and destroyed and another one of another type is created to hold
-the same place.
-</p><!--l. 36--><p class="noindent" ><img 
-src="images/039-DynAct1-Container_behavior.jpg" alt="PIC"  
- />
-</p><!--l. 38--><p class="noindent" >When the example is executed the <span 
-class="ec-lmtt-10">Container </span>actor first dumps the instance tree to the console (line 56 of the listing below).
-Then it creates an instance of <span 
-class="ec-lmtt-10">Optional2 </span>(line 57). Now that the <span 
-class="ec-lmtt-10">p0 </span>port of the container is connected a message
-<span 
-class="ec-lmtt-10">sayHello() </span>is sent to the newly created actor instance and the instance tree is dumped a second time. As soon as it receives
-the answer it prints it to the console. Then the optional actor is destroyed again and another one, now of type <span 
-class="ec-lmtt-10">Optional1</span>, is
-created and once more <span 
-class="ec-lmtt-10">sayHello() </span>is sent.
-</p>
-<!--l. 46--><div class="lstinputlisting">
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.1   </span> <a 
+ id="x16-710001"></a>Purpose</h5>
+<!--l. 48--><p class="noindent" >This example illustrates how a single actor can be tested against a test harness.
 <a 
- id="x16-71001r1"></a>
-<a 
- id="x16-71002"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71003r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71004r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71005r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71006r39"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71007r40"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">hello</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">p0</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71008r41"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71009r42"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">action</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71010r43"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">System</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">out</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">println</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">txt</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71011r44"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">opt</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">destroyOptionalActor</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71012r45"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">dumpTree</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">after</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">deletion</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Optional2</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71013r46"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71014r47"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71015r48"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr2</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ReceivedHelloAgain</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71016r49"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71017r50"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">hello</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">p0</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71018r51"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71019r52"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">action</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71020r53"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">System</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">out</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">println</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">txt</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71021r54"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">opt</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">destroyOptionalActor</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71022r55"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71023r56"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71024r57"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71025r58"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71026r59"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">dumpTree</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">before</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Optional2</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71027r60"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">opt</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">createOptionalActor</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">Optional2</span><span 
-class="ec-lmtt-9">\",</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">getThread</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71028r61"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">p0</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">sayHello</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71029r62"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">dumpTree</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">after</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Optional2</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71030r63"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71031r64"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71032r65"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CreateOptional1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71033r66"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71034r67"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">opt</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">createOptionalActor</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">Optional1</span><span 
-class="ec-lmtt-9">\",</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">getThread</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71035r68"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">p0</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">sayHello</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71036r69"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">dumpTree</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">after</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Optional1</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71037r70"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71038r71"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71039r72"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ReceivedHelloAgain</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x16-71040r73"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span>
-<br />
-            <div class="caption" 
-><span class="id">Listing&#x00A0;4.1:
-            </span><span  
-class="content">Container
-            actor
-            state
-            machine</span></div><!--tex4ht:label?: x16-710004 -->
-</div>
-<!--l. 48--><p class="noindent" >The console output of the running application starts with
-                                                                                            
-                                                                                            
+ id="x16-71001r92"></a>
 </p>
-<div class="verbatim" id="verbatim-12">
-***&#x00A0;&#x00A0;&#x00A0;T&#x00A0;H&#x00A0;E&#x00A0;&#x00A0;&#x00A0;B&#x00A0;E&#x00A0;G&#x00A0;I&#x00A0;N&#x00A0;&#x00A0;&#x00A0;***
-&#x00A0;<br />***&#x00A0;MainComponent&#x00A0;/LS/main::init&#x00A0;***
-&#x00A0;<br />type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
-&#x00A0;<br />before&#x00A0;creation&#x00A0;of&#x00A0;Optional2
-&#x00A0;<br />LS
-&#x00A0;<br />&#x00A0;&#x00A0;main
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;MessageService_MessageService_PhysicalThread1
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Dispatcher
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Queue
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Appl,&#x00A0;instancePath=/LS/main/appl)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Container,&#x00A0;instancePath=/LS/main/appl/cont)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ScalarOptionalActorInterface(className=Optional,&#x00A0;instancePath=/LS/main/appl/cont/opt)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
-</div>
-<!--l. 71--><p class="nopar" >
-</p><!--l. 73--><p class="noindent" >The <span 
-class="ec-lmtt-10">ScalarOptionalActorInterface(className=Optional, instancePath=/LS/main/appl/cont/opt) </span>is an object
-which is responsible for the life cycle of the dynamic actor (including its contained instances) and for the mediation of the
-port connections. It contains a replicated <span 
-class="ec-lmtt-10">RTSystemPort </span>which is used to trigger the initial transition and the port <span 
-class="ec-lmtt-10">p0 </span>of the
-interface of the <span 
-class="ec-lmtt-10">Optional </span>actor class.
-</p><!--l. 78--><p class="noindent" >After creation of <span 
-class="ec-lmtt-10">Optional2 </span>the interesting part of the dumped tree is
-                                                                                            
-                                                                                            
-</p>
-<div class="verbatim" id="verbatim-13">
-&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ScalarOptionalActorInterface(className=Optional,&#x00A0;instancePath=/LS/main/appl/cont/opt)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Optional2,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=AC2,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt/sub2)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=AC3,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt/sub2/deep_sub)
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort0
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
-&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort2
-</div>
-<!--l. 94--><p class="nopar" >
-</p><!--l. 96--><p class="noindent" >It can be seen that the sub tree corresponding to <span 
-class="ec-lmtt-10">Optional2 </span>was inserted right below the <span 
-class="ec-lmtt-10">ScalarOptionalActorInterface</span>.
-</p><!--l. 99--><p class="noindent" >After deletion of the optional actor the dumped instance tree looks exactly as in the beginning.
-</p><!--l. 101--><p class="noindent" >To illustrate the dynamic behavior of the system we can finally have a look at the generated sequence diagram <a 
-href="#x16-71041r1">4.1<!--tex4ht:ref: fig:dynact1_msc --></a>.
-During the sub system initialization three actor instances are created. Then the system is started and the
-<span 
-class="ec-lmtt-10">Container </span>actor dynamically creates an instance of <span 
-class="ec-lmtt-10">Optional2</span>. This is indicated by the note on the life line of
-<span 
-class="ec-lmtt-10">/LS/main/appl/cont</span>. Then <span 
-class="ec-lmtt-10">sayHello() </span>is sent and the answer <span 
-class="ec-lmtt-10">hello() </span>is received and the optional actor is destroyed
-again.
-</p><!--l. 108--><p class="noindent" >The same is repeated with a new optional instance of <span 
-class="ec-lmtt-10">Optional1</span>.
-</p>
-<hr class="figure" /><div class="figure" 
->
-                                                                                            
-                                                                                            
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.2   </span> <a 
+ id="x16-720002"></a>Details</h5>
+<!--l. 52--><p class="noindent" >A <span 
+class="ec-lmtt-10">PedestrianTrafficLightController </span>is an actor that controls a traffic light consisting of a traffic light with
+red, yellow and green for the cars, a second traffic light with just red and green and a request button for the
+pedestrians.
+</p><!--l. 56--><p class="noindent" >The controller has two ports, <span 
+class="ec-lmtt-10">fct </span>and <span 
+class="ec-lmtt-10">tlInterface</span>. The first one uses a protocol <span 
+class="ec-lmtt-10">PTrafficLightController </span>that offers
+the high level commands <span 
+class="ec-lmtt-10">standby</span>, <span 
+class="ec-lmtt-10">start </span>and <span 
+class="ec-lmtt-10">stop</span>. The second one uses a conjugated protocol <span 
+class="ec-lmtt-10">PTrafficLightInterface</span>
+which controls each of the lights separately.
+</p><!--l. 62--><p class="noindent" >The test harness <span 
+class="ec-lmtt-10">TrafficLightControllerTestHarness </span>is connected to both ports and drives the test in several
+steps.
+</p><!--l. 65--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step1.launch</span>, then compile and link it (using the
+CDTbuild). Since this step doesn&#8217;t use a GUI you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step1.launch</span>.
 <a 
- id="x16-71041r1"></a>
-                                                                                            
-                                                                                            
-<!--l. 111--><p class="noindent" ><img 
-src="images/039-DynAct1-MSC.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;4.1: </span><span  
-class="content">Sequence diagram of Dynamic Actors Example 1</span></div><!--tex4ht:label?: x16-71041r1 -->
-                                                                                            
-                                                                                            
-</div><hr class="endfigure" />
-<a 
- id="x16-71042r92"></a>
-<h4 class="subsectionHead"><span class="titlemark">4.1.3   </span> <a 
- id="x16-720003"></a>Noteworthy</h4>
+ id="x16-72001r93"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.3   </span> <a 
+ id="x16-730003"></a>Noteworthy</h5>
      <ul class="itemize1">
-     <li class="itemize">To obtain an executable the launch configuration <span 
-class="ec-lmtt-10">gen_DynAct1_sys.launch </span>has to be executed. In this case
-     also the SubsystemClass <span 
-class="ec-lmtt-10">Node_nodeRef1_main </span>is generated as well as factory classes for the valid optional
-     actors. If <span 
-class="ec-lmtt-10">Optional </span>were not <span 
-class="ec-lmtt-10">abstract </span>then also for this class a factory is created. However, in this class the
-     relay port isn&#8217;t connected and a request <span 
-class="ec-lmtt-10">sayHello() </span>would be left without reply.
+     <li class="itemize">usage of a ROOM model as library for several systems
      </li>
-     <li class="itemize">To generate a library the launch configuration <span 
-class="ec-lmtt-10">gen_DynAct1.launch </span>has to be executed. In this case no factory
-     classes are generated.</li></ul>
+     <li class="itemize">creation of a test harness for an actor</li></ul>
+<a 
+ id="x16-73001r91"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.2   </span> <a 
+ id="x16-740002"></a>Traffic light - step 2</h4>
+<!--l. 78--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step2</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x16-74001r94"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.1   </span> <a 
+ id="x16-750001"></a>Purpose</h5>
+<!--l. 86--><p class="noindent" >This example shows the control of a single block of traffic lights containing a car light and a light for the pedestrians. It
+illustrates how a stack of abstraction levels is used to conveniently divide the problem into relatively simple
+parts.
+<a 
+ id="x16-75001r96"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.2   </span> <a 
+ id="x16-760002"></a>Details</h5>
+<!--l. 93--><p class="noindent" >The 4 levels of this application starts with a <span 
+class="ec-lmtt-10">TrafficLightHeadquarters </span>on the top. It controls the global operating mode
+of the traffic light block. The test harness <span 
+class="ec-lmtt-10">TrafficLightControllerTestHarness </span>is connected to both ports and drives the
+test in several steps.
+</p><!--l. 99--><p class="noindent" >On the next level we have a <span 
+class="ec-lmtt-10">PedestrianTrafficLightController </span>which offers some very general commands like <span 
+class="ec-lmtt-10">start</span>,
+<span 
+class="ec-lmtt-10">stop </span>and <span 
+class="ec-lmtt-10">standby</span>.
+</p><!--l. 102--><p class="noindent" >On the second level we find an actor <span 
+class="ec-lmtt-10">PTrafficLightInterface </span>that offers basic traffic light control in the form of switching
+the state of each single light separately.
+</p><!--l. 106--><p class="noindent" >On the base level we have an actor handling a TCP/IP socket connection with a general text protocol.
+</p><!--l. 109--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step2.launch</span>, then compile and link it (using the
+CDTbuild). Since this step uses a GUI with a single block of lights you&#8217;ll have to launch the simulator using
+<span 
+class="ec-lmtt-10">run_simulator_1_block.launch</span>. Then you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step2.launch</span>.
                                                                                             
                                                                                             
-<!--l. 129--><div class="crosslinks"><p class="noindent">[<a 
+</p><!--l. 115--><p class="noindent" >After going through a short initialization and standby phase the traffic light goes into a mode of permanent green for cars.
+After pressing the &#8217;request&#8217; button in the simulator GUI the light switches to red for cars and green for pedestrians and back
+to permanent green for cars.
+<a 
+ id="x16-76001r97"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.3   </span> <a 
+ id="x16-770003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use abstraction levels to break a problem into smaller pieces.</li></ul>
+<a 
+ id="x16-77001r95"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.3   </span> <a 
+ id="x16-780003"></a>Traffic light - step 3</h4>
+<!--l. 128--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step3</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x16-78001r98"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.1   </span> <a 
+ id="x16-790001"></a>Purpose</h5>
+<!--l. 136--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
+uses a replicated stack of actors as introduced in step 2.
+<a 
+ id="x16-79001r100"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.2   </span> <a 
+ id="x16-800002"></a>Details</h5>
+<!--l. 142--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
+connected to a doubled <span 
+class="ec-lmtt-10">PedestrianTrafficLightController</span>. Of course the replication then has also to be applied to the
+other levels of the stack introduced in step 2.
+</p><!--l. 148--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step3.launch</span>, then compile and link it (using the
+CDTbuild). Since this step uses a GUI with a two blocks of lights you&#8217;ll have to launch the simulator using
+<span 
+class="ec-lmtt-10">run_simulator_2_blocks.launch</span>. Then you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step3.launch</span>.
+<a 
+ id="x16-80001r101"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.3   </span> <a 
+ id="x16-810003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use replication for multiple instances of the same.</li></ul>
+<a 
+ id="x16-81001r99"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.4   </span> <a 
+ id="x16-820004"></a>Traffic light - step 4</h4>
+<!--l. 163--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step4</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x16-82001r102"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.1   </span> <a 
+ id="x16-830001"></a>Purpose</h5>
+<!--l. 171--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
+uses a container actor for the three lower levels of the stack introduced in step 2. Then replication has to applied only to the
+container actor which simplifies the task.
+<a 
+ id="x16-83001r104"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.2   </span> <a 
+ id="x16-840002"></a>Details</h5>
+<!--l. 179--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
+connected to a doubled <span 
+class="ec-lmtt-10">TrafficLightControllerWithInfrastructure</span>. The latter one
+<a 
+ id="x16-84001r105"></a>
+                                                                                            
+                                                                                            
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.3   </span> <a 
+ id="x16-850003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use hierarchy to group levels functionality to reusable blocks.</li></ul>
+                                                                                            
+                                                                                            
+<!--l. 190--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse11.html" >next</a>] [<a 
 href="etrice-docch4.html" >prev</a>] [<a 
 href="etrice-docch4.html#tailetrice-docch4.html" >prev-tail</a>] [<a 
 href="etrice-docse10.html" >front</a>] [<a 
 href="etrice-docch4.html#etrice-docse10.html" >up</a>] </p></div>
-<!--l. 129--><p class="noindent" ><a 
+<!--l. 190--><p class="noindent" ><a 
  id="tailetrice-docse10.html"></a></p> 
 </body></html> 

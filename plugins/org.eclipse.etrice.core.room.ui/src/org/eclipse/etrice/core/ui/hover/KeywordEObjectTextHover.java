@@ -6,9 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * CONTRIBUTORS:
+ * 		https://borisdevnotes.wordpress.com/2014/02/28/xtext-usability-hovers-on-keywords/
  * 		Juergen Haug (initial contribution)
- * 
- * https://borisdevnotes.wordpress.com/2014/02/28/xtext-usability-hovers-on-keywords/
  * 
  *******************************************************************************/
 

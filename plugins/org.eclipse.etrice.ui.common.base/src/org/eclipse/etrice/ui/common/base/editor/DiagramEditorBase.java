@@ -42,6 +42,7 @@ import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.graphiti.ui.editor.EditorInputAdapter;
 import org.eclipse.graphiti.ui.editor.IDiagramEditorInput;
+import org.eclipse.help.IContextProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.swt.widgets.Composite;
@@ -78,7 +79,7 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	private Object textEditorClass;
 
 	private SaveOnFocusLostListener saveOnFocusListener;
-
+	
 	private SuperClassListener superClassListener;
 
 	public DiagramEditorBase(Object textEditorClass) {
@@ -265,24 +266,25 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 
 	@Override
 	public void createPartControl(Composite parent) {
-			super.createPartControl(parent);
-	
-			saveOnFocusListener = new SaveOnFocusLostListener(this);
-			getSite().getPage().addPartListener(saveOnFocusListener);
+		super.createPartControl(parent);
+
+		saveOnFocusListener = new SaveOnFocusLostListener(this);
+		getSite().getPage().addPartListener(saveOnFocusListener);
+		
+		superClassListener = new SuperClassListener(this, textEditorClass);
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
+		
+		/* we have to save here whether changes have been done or not to get rid of the dirty state
+		 * CAUTION: save in
+		 * init(IEditorSite site, IEditorInput input)
+		 * or
+		 * setInput(IEditorInput input)
+		 * did not work correctly
+		 */
+//		if (AutoUpdateFeature.isLastDoneChanges())
+			doSave(new NullProgressMonitor());
 			
-			superClassListener = new SuperClassListener(this, textEditorClass);
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
-			
-			/* we have to save here whether changes have been done or not to get rid of the dirty state
-			 * CAUTION: save in
-			 * init(IEditorSite site, IEditorInput input)
-			 * or
-			 * setInput(IEditorInput input)
-			 * did not work correctly
-			 */
-	//		if (AutoUpdateFeature.isLastDoneChanges())
-				doSave(new NullProgressMonitor());
-		}
+	}
 
 	/**
 	 * Check whether the given diagram editor manages a super class
@@ -363,6 +365,15 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 
 	public URI getInputUri() {
 		return inputUri;
+	}
+	
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
+		if (key.equals(IContextProvider.class)) {
+			return new SelectedModelHelpProvider(getDiagramBehavior());
+		}
+		return super.getAdapter(key);
+
 	}
 
 }

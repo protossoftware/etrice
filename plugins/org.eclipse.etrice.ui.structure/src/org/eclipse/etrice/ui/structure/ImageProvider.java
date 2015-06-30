@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.ui.structure;
 
-import org.eclipse.graphiti.ui.platform.AbstractImageProvider;
+import org.eclipse.etrice.ui.common.base.BaseImageProvider;
 
-public class ImageProvider extends AbstractImageProvider {
+public class ImageProvider extends BaseImageProvider {
 
 	// The prefix for all identifiers of this image provider
 	protected static final String PREFIX = "org.eclipse.etrice.ui.structure.";
@@ -24,14 +24,18 @@ public class ImageProvider extends AbstractImageProvider {
 	public static final String IMG_SPP = PREFIX + "spp";
 	public static final String IMG_REF = PREFIX + "ref";
 	public static final String IMG_BINDING = PREFIX + "binding";
+	public static final String IMG_HELP = PREFIX + "help";
 	public static final String IMG_LAYER_CONNECTION = PREFIX + "layer_connection";
 
 	@Override
 	protected void addAvailableImages() {
+		super.addAvailableImages();
+		
 		addImageFilePath(IMG_PORT, "icons/Port.gif");
 		addImageFilePath(IMG_SPP, "icons/SPP.gif");
 		addImageFilePath(IMG_REF, "icons/ActorRef.gif");
 		addImageFilePath(IMG_BINDING, "icons/Binding.gif");
+		addImageFilePath(IMG_HELP, "icons/help.gif");
 		addImageFilePath(IMG_LAYER_CONNECTION, "icons/LayerConnection.gif");
 	}
 

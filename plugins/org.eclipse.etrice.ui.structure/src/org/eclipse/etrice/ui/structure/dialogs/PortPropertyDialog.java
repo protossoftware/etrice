@@ -350,4 +350,9 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 	public void setRelay(boolean relay) {
 		this.relay = relay;
 	}
+
+	@Override
+	protected String getFeatureContextHelpId() {
+		return "PortPropertyDialog";
+	}
 }

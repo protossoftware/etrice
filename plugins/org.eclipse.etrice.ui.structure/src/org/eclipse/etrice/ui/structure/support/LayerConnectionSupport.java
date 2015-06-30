@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.SAPoint;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
@@ -60,7 +61,6 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
-import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -381,7 +381,7 @@ public class LayerConnectionSupport {
 		}
 	}
 	
-	class BehaviorProvider extends DefaultToolBehaviorProvider {
+	class BehaviorProvider extends BaseToolBehaviorProvider {
 
 		public BehaviorProvider(IDiagramTypeProvider dtp) {
 			super(dtp);

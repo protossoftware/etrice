@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
+import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
@@ -58,7 +59,6 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.tb.ContextButtonEntry;
-import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IContextButtonEntry;
 import org.eclipse.graphiti.tb.IContextButtonPadData;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
@@ -442,7 +442,7 @@ public class StructureClassSupport {
 		}
 	}
 
-	private class BehaviorProvider extends DefaultToolBehaviorProvider {
+	private class BehaviorProvider extends BaseToolBehaviorProvider {
 
 		public BehaviorProvider(IDiagramTypeProvider dtp) {
 			super(dtp);

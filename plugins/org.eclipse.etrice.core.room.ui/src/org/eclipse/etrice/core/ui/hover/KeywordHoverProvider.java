@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * CONTRIBUTORS:
+ * 		https://borisdevnotes.wordpress.com/2014/02/28/xtext-usability-hovers-on-keywords/
  * 		Juergen Haug (initial contribution)
  * 
  *******************************************************************************/
@@ -13,6 +14,7 @@
 package org.eclipse.etrice.core.ui.hover;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.doc.ETriceHelp;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -46,7 +48,9 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 	@Override
 	protected String getHoverInfoAsHtml(EObject o) {
 		if(o instanceof Keyword){
-			return "Keyword hover info";
+			String help = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(((Keyword)o).getValue());
+			if(help != null)
+				return help;
 		}
 		return super.getHoverInfoAsHtml(o);
 	}

@@ -4,59 +4,102 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Dynamic Actors 9</title> 
+<head><title>Model Navigation</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-26 00:33:00" /> 
+<meta name="date" content="2015-06-30 18:08:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 321--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
-href="etrice-docse17.html" >prev</a>] [<a 
-href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
-href="#tailetrice-docse18.html">tail</a>] [<a 
-href="etrice-docch4.html#etrice-docse18.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">4.9   </span> <a 
- id="x24-1010009"></a>Dynamic Actors 9</h3>
-<!--l. 323--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">org.eclipse.etrice.examples.dynamicactors9</span>.
-<a 
- id="x24-101001r124"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">4.9.1   </span> <a 
- id="x24-1020001"></a>Purpose</h4>
-<!--l. 327--><p class="noindent" >The example demonstrates the use of SAPs in dynamic actors.
-<a 
- id="x24-102001r126"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">4.9.2   </span> <a 
- id="x24-1030002"></a>Details</h4>
-<!--l. 331--><p class="noindent" >This simple example re-uses the PingPong tutorial. The static part of the system introduces a <span 
-class="ec-lmtt-10">TimingService </span>as SPP and
-the <span 
-class="ec-lmtt-10">Receiver </span>embedded in the optional part uses a SAP of this protocol.
-</p><!--l. 334--><p class="noindent" >The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
-services.
-</p><!--l. 337--><p class="noindent" >On the other hand the factory for the optional actor maps SAPs to those broker ports.
-<a 
- id="x24-103001r127"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">4.9.3   </span> <a 
- id="x24-1040003"></a>Noteworthy</h4>
-     <ul class="itemize1">
-     <li class="itemize"><span 
-class="ec-lmsso-10">Caution: </span>currently the generator informs about unsatisfied services in dynamic actors. But it is still possible to
-     create such an instance. The consequence is an unbound SAP</li></ul>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch5.html" >next</a>] [<a 
-href="etrice-docse17.html" >prev</a>] [<a 
-href="etrice-docse17.html#tailetrice-docse17.html" >prev-tail</a>] [<a 
+href="etrice-docse19.html" >next</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="#tailetrice-docse18.html">tail</a>] [<a 
+href="etrice-docch6.html#etrice-docse18.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+ id="x26-1560001"></a>Model Navigation</h3>
+<!--l. 3--><p class="noindent" >In eTrice the primary source of the models is text based. However, for convenience the structure and the behavior of structure
+classes can be edited with graphical editors using the standard ROOM notation. Further. the textual models can be
+structured hierarchically using the import statement.
+</p><!--l. 7--><p class="noindent" >So jumping between textual models and switching to and between diagrams and back to the textual representation is a
+frequent task. Therefore in this chapter we want to show the various possibilities to navigate the models.
+<a 
+ id="x26-156001r204"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">6.1.1   </span> <a 
+ id="x26-1570001"></a>From Model to Behavior to Structure</h4>
+<!--l. 12--><p class="noindent" >There are three global key bindings (cf. the eTrice main menu item):
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Alt+M &#8211; jump to the textual model
+                                                                                            
+                                                                                            
+     </li>
+     <li class="itemize">Alt+B &#8211; jump to the behavior diagram of the current actor class (determined by the cursor or selection position)
+     </li>
+     <li class="itemize">Alt+S &#8211; jump to the structure of the current structure class (determined by the cursor or selection position)</li></ul>
+<!--l. 20--><p class="noindent" >Jumping from a diagram to the textual model using Alt+M will open (or bring to the front) an editor with the ROOM file
+and will select the structure class of the diagram in the text.
+</p><!--l. 23--><p class="noindent" >The other way round, the position of the cursor or selection in the ROOM file is relevant. If it is enclosed by an actor class
+then for Alt+B a state machine editor is opened. If it is a structure class and Alt+S is pressed then the structure editor is
+opened for this class.
+</p><!--l. 27--><p class="noindent" >As an alternative the context menu of an actor class can be used to open the associated structure or behavior
+diagram.
+</p><!--l. 29--><p class="noindent" >Switching from the behavior to the structure is performed on Alt+S and vice versa on Alt+B.
+<a 
+ id="x26-157001r211"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">6.1.2   </span> <a 
+ id="x26-1580002"></a>Model Navigation</h4>
+<!--l. 33--><p class="noindent" >Model file paths in import statements are hyper links that can be clicked with the Ctrl key pressed.
+</p><!--l. 35--><p class="noindent" ><img 
+src="images/041-open-declaration.jpg" alt="PIC"  
+ />
+</p><!--l. 37--><p class="noindent" >An alternative is to use F3 (open declaration) with the cursor inside the file name.
+</p><!--l. 39--><p class="noindent" >In a similar way references to model elements can be navigated using F3 or Ctrl-Click, e.g. the protocol class of a port or the
+actor class of an actor reference or the data class of an attribute and many more.
+</p><!--l. 42--><p class="noindent" >The "quick outline" is a means that allows fast navigation in a single model. Ctrl-O opens a window similar to the outline
+view. Typing text (with possible wild cards * and ?) filters the view and selecting an element and pressing return locates the
+element in the editor.
+</p><!--l. 46--><p class="noindent" >Ctrl-Shift-G searches references to model elements. E.g. "Find references" for a selected actor class lists all locations in
+ROOM models and diagrams that refer to this actor class.
+</p><!--l. 49--><p class="noindent" >Using the outline, also imported elements can be browsed and navigated.
+<a 
+ id="x26-158001r212"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">6.1.3   </span> <a 
+ id="x26-1590003"></a>Navigating Behavior Diagrams</h4>
+<!--l. 53--><p class="noindent" >The behavior editor displays a hierarchical state machine. States can have a sub state graph and thus the hierarchy of states
+and state graphs forms a tree like structure. The eTrice behavior editor always shows only one level of the hierarchy. The
+editor switches to the sub state graph of a state by double clicking it. The path of the currently displayed
+state graph is indicated in the upper right corner using state names separated by slashes (/). A single slash
+indicates the top level. Double click into the empty space of a state graph will switch to the state graph one level
+up.
+</p><!--l. 60--><p class="noindent" >A double click on a transition (or its label), a transition point or a choice point opens their property dialog. A
+double click on a state opens its property dialog if it has no sub state graph or it switches to its sub state
+graph.
+<a 
+ id="x26-159001r213"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">6.1.4   </span> <a 
+ id="x26-1600004"></a>Navigating Structure Diagrams</h4>
+<!--l. 65--><p class="noindent" >The context menu of a structure diagram (invoked in the empty space inside the bounding rectangle) contains an entry
+"Open Class Behavior" which opens the behavior diagram (same as Alt+B).
+</p><!--l. 68--><p class="noindent" >The context menu of an actor reference contains entries: "Open Ref Structure" and "Open Ref Behavior" that allow to open
+the associated diagrams of the referenced actor class.
+                                                                                            
+                                                                                            
+</p>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse19.html" >next</a>] [<a 
+href="etrice-docch6.html" >prev</a>] [<a 
+href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
 href="etrice-docse18.html" >front</a>] [<a 
-href="etrice-docch4.html#etrice-docse18.html" >up</a>] </p></div>
+href="etrice-docch6.html#etrice-docse18.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse18.html"></a></p> 
 </body></html> 

@@ -26,12 +26,46 @@ Package ROOMLanguage
 	contains ConfigModel
 ;
 
-Feature Annotation
-description '''Similar to Java annotations they can be used to tag ROOM classes for further custom processing.'''
+Feature AnnotationType
+description '''AnnotationTypes can be used to tag ROOM classes for further custom processing.'''
 text '''
+	They provide the ability to associate custom properties to ROOM classes, that adjust or toogle features, like generation or the runtime behavior.
+	eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.
+
 	See section Annotations for further reading.
 '''
-prototype
+stable
+;
+
+Feature Annotation
+description '''An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType.'''
+text '''
+	It refers to an AnnotationType and may have to pass key value pairs. Its notation is similar to Java:
+	\begin{lstlisting}
+		@AnnotationType1
+		@AnnotationType2(key1="STRING", key2=3, ...)
+	\end{lstlisting}
+
+	See section Annotations for further reading.
+'''
+example '''
+	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+
+	ActorClass ComponentAbstraction {
+		Interface {
+			conjugated Port port1: Protocol1
+		}
+		Structure {
+			external Port port1
+		}
+		Behavior {
+			// custom/external state machine implementation
+			@BehaviorManual
+		}
+	}
+'''
+isOfType AnnotationType
+stable
 ;
 
 Feature Inheritance
@@ -82,7 +116,6 @@ Feature Inheritance
 ;
 
 Feature PhysicalModel
-	shortName '''Physical Model'''
 	description '''The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution.'''
 	text '''
 		The model describes the physical view of your system:
@@ -122,11 +155,12 @@ Feature PhysicalModel
 			\item \textbf{msgblocksize}: the size in bytes of a message
 			\item \textbf{msgpoolsize}:  the amount of messages, that the thread's message queue can store
 		\end{itemize}
-		Note: 'msgblocksize' and 'msgpoolsize' also apply to the polled execution due the internal implementation via message passing. The size of the message queue can be calculated as follows: msgpoolsize * msgblocksize bytes 
+		Note: 'msgblocksize' and 'msgpoolsize' also apply to the polled execution due the internal implementation via message passing.
+		 The size of the message queue can be calculated as follows: msgpoolsize * msgblocksize bytes 
 
 		\begin{lstlisting}[language=etPhys]
 		DefaultThread ThreadMessaging {
-			execmode = blocked
+			execmode = polled
 			prio = 0
 			stacksize = 1024
 			msgblocksize = 32
@@ -147,10 +181,26 @@ Feature PhysicalModel
 ;
 
 Feature MappingModel
-	shortName '''Mapping Model'''
 	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel.'''
 	text '''
 		It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.
+		
+		The model starts with an import part, where you can import .room and .etphys models. They should contain at least one LogicalSystem and one PhysicalSystem.
+		The following mapping entry puts both in relation, meaning that all subsystems and actors contained in the hierarchical structure of the LogicalSystem should be executed within the given PhysicalSystem.
+		With an SubSystemMapping you can distribute your subsystems to nodes. Afterwards you can map the logical threads within this subsystems to physical threads.
+		\begin{lstlisting}[language=etMap]
+		MappingModel PingPongMapping {
+			import PingPong_Model.* from "PingPong.room"
+			import GenericPhysicalModel.* from "GenericPhysical.etphys"
+		
+			Mapping LogSys -> PhysSys1 {
+				SubSystemMapping subSystemRef -> nodeRef1 {
+					ThreadMapping defaultThread -> PhysicalThread1
+				}
+			}
+		
+		}
+		\end{lstlisting}
 	'''
 	uses LogicalModel
 	uses PhysicalModel
@@ -158,13 +208,37 @@ Feature MappingModel
 ;
 
 Feature ConfigModel
-	shortName '''Config Model'''
 	description '''The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. '''
+	text '''
+		The scope of this model is the configuration of Attributes of the LogicalModel.
+		Thus it provides enhanced capabilities for assigning default values to Attributes, which are:
+		\begin{itemize}
+			\item type safe value assignment
+			\item setting on class level
+			\item setting on instance level
+		\end{itemize}
+		Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.
+		The configuration is available for actors and ports, thus ActorClasses/ActorRefs and ProtocolClasses/Ports.
+
+		\begin{lstlisting}[language=Config]
+		ConfigModel ExampleConfig {
+			import Example.* from "Example.room"
+
+			ActorClassConfig ActorClass1 {
+				Attr attribute1 = 4
+			}
+
+			ActorInstanceConfig LogSys/subsysRef/actor1 {
+				Attr attribute1 = 7
+			}
+		}
+		\end{lstlisting}
+	'''
+	uses Attribute
 	stable
 ;
 
 Feature LogicalModel
-	shortName '''Logical Model'''
 	description '''The LogicalModel describes the logical structure and behavior of a ROOM application.'''
 	text '''
 		The ROOM model defines DataTypes, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems.
@@ -180,7 +254,7 @@ Feature LogicalModel
 	contains ActorClass
 	contains ProtocolClass
 	contains DataType
-	contains Annotation
+	contains AnnotationType
 	
 	stable
 	;
@@ -193,6 +267,7 @@ Feature LogicalSystem
 	contains SubSystemRef
 	contains Binding
 	contains LayerConnection
+	contains Annotation
 	stable
 ;
 
@@ -247,6 +322,7 @@ Feature ActorClass
 	contains Attribute
 	contains Operation
 	contains StateMachine
+	contains Annotation
 	uses Inheritance
 	stable
 ;
@@ -256,17 +332,15 @@ Feature SubSystemClass
 	description '''The SubSystem is main Actor of an executable part of the system. '''
 	
 	text '''
-		It instantiates the Actor instance tree instance of the application ...
 		
-		Actor instance tree example:
-
-		\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}
 	'''
+//		\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}
 	contains ActorRef
 	contains RelayPort
 	contains SPP
 	contains Binding
 	contains LayerConnection
+	contains Annotation
 	stable
 ;
 	
@@ -289,6 +363,28 @@ Feature SubSystemRef
  	isOfType SubSystemClass
  	stable
 ;
+
+abstract Feature Replication
+	description '''Replication is mechanism for multi instantiation for ActorRefs and Ports.'''
+	text '''
+		ActorRefs and Ports can be instantiated several times under the same name. The notation is similar to arrays in programming languages.
+	
+		This possibility provides an elegant way of scaling of your system without redundancy. Note the ActorRef can be arbitray complex
+		\begin{lstlisting}[language=ROOM]
+			ActorRef sensor : Sensor 			// one instance
+			ActorRef sensor[1] : Sensor			// one instance
+			ActorRef sensorArray[5] : Sensor	// five instances  
+		\end{lstlisting}
+		
+		Replication can also applied to Ports. One use case is to establish a communication with multiple actors through one port interface.
+		\begin{lstlisting}[language=ROOM]
+			Port service[5] : TimingService 	// five instances
+			Port service[*]: TimingService		// automatic, as many as needed
+		\end{lstlisting}
+	'''
+stable
+;
+
 Feature ActorRef
 	shortName '''Actor Reference'''
 	description '''An ActorRef is an instance of an ActorClass.'''
@@ -336,6 +432,7 @@ Feature ActorRef
 		\end{figure}
 	'''
 	isOfType ActorClass
+	uses Replication
 	property multiplicity values {"1..n", "*"}
 	stable
 ;
@@ -535,6 +632,7 @@ Feature ProtocolClass
 	contains CommunicationType
 	contains Attribute
 	contains Operation
+	contains Annotation
 	uses Inheritance
 	
 	stable
@@ -617,6 +715,7 @@ Feature DataClass
 	isA DataType
 	contains Attribute
 	contains Operation
+	contains Annotation
 	uses Inheritance
 	stable;
 
@@ -691,6 +790,12 @@ Feature Attribute
 		}
 		\end{lstlisting}
 	'''
+//	help '''
+//		```room
+//		Attribute attribute1: int32 = "3"
+//		Attribute arrayAttribute[8] : uint32 = "0"
+//		```
+//	'''
 	isOfType DataType
 	property defaultValueLiteral values { "<target code>"}
 	property multiplicity values {"1..n"}
@@ -783,6 +888,7 @@ abstract Feature Port
 		A connection of Ports is denoted by a Binding. 
 	'''
 	isOfType ProtocolClass
+	uses Replication
 	property conjugated values { "regular", "conjugated"}
 	property multiplicity values {"1..n", "*"}
 	stable

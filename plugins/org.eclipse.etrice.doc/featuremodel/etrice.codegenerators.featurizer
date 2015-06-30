@@ -89,6 +89,7 @@ Feature DataLogging
 		\end{lstlisting}
 	'''
 	
+	//isA AnnotationType ?
 	uses Annotation
 	prototype
 ;

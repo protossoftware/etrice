@@ -60,4 +60,10 @@ public class ChoicePointPropertyDialog extends AbstractPropertyDialog implements
 		name.selectAll();
 	}
 
+	@Override
+	protected String getFeatureContextHelpId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

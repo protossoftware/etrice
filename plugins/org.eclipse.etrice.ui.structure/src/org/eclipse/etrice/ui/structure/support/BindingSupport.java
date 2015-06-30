@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
@@ -67,7 +68,6 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
-import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -523,7 +523,7 @@ public class BindingSupport {
 		}
 	}
 	
-	class BehaviorProvider extends DefaultToolBehaviorProvider {
+	class BehaviorProvider extends BaseToolBehaviorProvider {
 		
 		@Override
 		public Object getToolTip(GraphicsAlgorithm ga) {

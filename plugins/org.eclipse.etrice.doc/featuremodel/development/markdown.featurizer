@@ -1,6 +1,6 @@
 FeaturizerModel Markdown
 
-Feature ActorClass
+Feature MarkdownExample
 
 description ''''''
 /*
@@ -14,6 +14,7 @@ description ''''''
  */
 text '''
 	> The actor is the basic structural building block for building systems with ROOM.
+	
 
 	An ActorClass consists of three main parts:
 	
@@ -70,6 +71,8 @@ text '''
 	Typecasts | **ActorRef** | An ActorRef is an instance of an ActorClass.
 	Is&#160;contained&#160;in | *LogicalModel* | The LogicalModel describes the logical structure and behavior of a ROOM application.
 	Is&#160;edited&#160;by | [GraphicalStructureEditor](#) | The Structure Editor allows to edit the ActorClass’ Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.
+
+	> This&#160;is&#160;a&#160;whitespace, that cannot be a line break 
 '''
 
 stable

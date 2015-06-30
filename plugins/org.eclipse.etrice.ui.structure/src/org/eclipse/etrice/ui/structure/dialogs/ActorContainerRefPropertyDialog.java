@@ -262,4 +262,9 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		return Activator.getImage("icons/Structure.gif");
 	}
 
+	@Override
+	protected String getFeatureContextHelpId() {
+		return "ActorRefPropertyDialog";
+	}
+
 }

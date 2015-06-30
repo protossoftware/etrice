@@ -68,12 +68,12 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		return RoomSemanticHighlightingCalculator.class;
 	}
 
-//	@Override
-//	public Class<? extends IEObjectHover> bindIEObjectHover() {
-//		return KeywordEObjectTextHover.class;
-//	}
-//
-//	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-//		return KeywordHoverProvider.class;
-//	}
+	@Override
+	public Class<? extends IEObjectHover> bindIEObjectHover() {
+		return KeywordEObjectTextHover.class;
+	}
+
+	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return KeywordHoverProvider.class;
+	}
 }

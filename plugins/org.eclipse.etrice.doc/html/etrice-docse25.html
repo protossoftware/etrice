@@ -4,102 +4,754 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Model Navigation</title> 
+<head><title>ModelEditors</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-06-26 00:33:00" /> 
+<meta name="date" content="2015-06-30 18:08:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 1761--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse26.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse24.html" >prev</a>] [<a 
+href="etrice-docse24.html#tailetrice-docse24.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse25.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse25.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
- id="x33-1380001"></a>Model Navigation</h3>
-<!--l. 3--><p class="noindent" >In eTrice the primary source of the models is text based. However, for convenience the structure and the behavior of structure
-classes can be edited with graphical editors using the standard ROOM notation. Further. the textual models can be
-structured hierarchically using the import statement.
-</p><!--l. 7--><p class="noindent" >So jumping between textual models and switching to and between diagrams and back to the textual representation is a
-frequent task. Therefore in this chapter we want to show the various possibilities to navigate the models.
+href="etrice-docch7.html#etrice-docse25.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
+ id="x34-2210002"></a>ModelEditors</h3>
+<!--l. 1762--><p class="noindent" ><a 
+ id="ref:ModelEditors"></a> All aspects of the ROOMLanguage can be edited by full-blown textual editors. In addition, graphical editing is provided for
+the structural and behavioral part of ActorClasses.
+</p><!--l. 1767--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
 <a 
- id="x33-138001r186"></a>
+ id="x34-221001r52"></a></p>
+<!--l. 1772--><div class="longtable"> <table id="TBL-68" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-68-1g"><col 
+id="TBL-68-1" /></colgroup><colgroup id="TBL-68-2g"><col 
+id="TBL-68-2" /><col 
+id="TBL-68-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-68-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:TextualROOMEditor">TextualROOMEditor</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-68-1-3"  
+class="td11">
+ <!--l. 1772--><p class="noindent" >Textual model editor                                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-2-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-68-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-68-2-3"  
+class="td11">
+ <!--l. 1773--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-68-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalBehaviorEditor">GraphicalBehaviorEditor</a>   </td><td  style="white-space:wrap; text-align:left;" id="TBL-68-3-3"  
+class="td11">
+ <!--l. 1774--><p class="noindent" >The GraphicalBehaviorEditor allows to edit the ActorClass&#8217;
+  StateMachine. It is possible to create (hierarchical) states
+  and transitions to model complex behavior in a convenient
+  way.                                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-7-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-68-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-68-8-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-68-8-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-68-8-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-221002r297"></a>
+<h4 class="subsectionHead"><span class="titlemark">7.2.1   </span> <a 
+ id="x34-2220001"></a>GraphicalBehaviorEditor</h4>
+<!--l. 1780--><p class="noindent" ><a 
+ id="ref:GraphicalBehaviorEditor"></a> The GraphicalBehaviorEditor allows to edit the ActorClass&#8217; StateMachine. It is possible to create (hierarchical) states and
+transitions to model complex behavior in a convenient way.
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.1.1   </span> <a 
- id="x33-1390001"></a>From Model to Behavior to Structure</h4>
-<!--l. 12--><p class="noindent" >There are three global key bindings (cf. the eTrice main menu item):
-</p>
-     <ul class="itemize1">
-     <li class="itemize">Alt+M &#8211; jump to the textual model
+<div class="center" 
+>
+<!--l. 1783--><p class="noindent" >
+
+</p><!--l. 1784--><p class="noindent" ><img 
+src="images/300-GraphicalBehaviorEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1789--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x34-222001r53"></a></p>
+<!--l. 1794--><div class="longtable"> <table id="TBL-69" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-69-1g"><col 
+id="TBL-69-1" /></colgroup><colgroup id="TBL-69-2g"><col 
+id="TBL-69-2" /><col 
+id="TBL-69-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:StateMachine">StateMachine</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-1-3"  
+class="td11">
+ <!--l. 1794--><p class="noindent" >A StateMachine describes the state based, event driven
+  behavior of an ActorClass                                          </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-6-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-222002r299"></a>
                                                                                             
                                                                                             
-     </li>
-     <li class="itemize">Alt+B &#8211; jump to the behavior diagram of the current actor class (determined by the cursor or selection position)
-     </li>
-     <li class="itemize">Alt+S &#8211; jump to the structure of the current structure class (determined by the cursor or selection position)</li></ul>
-<!--l. 20--><p class="noindent" >Jumping from a diagram to the textual model using Alt+M will open (or bring to the front) an editor with the ROOM file
-and will select the structure class of the diagram in the text.
-</p><!--l. 23--><p class="noindent" >The other way round, the position of the cursor or selection in the ROOM file is relevant. If it is enclosed by an actor class
-then for Alt+B a state machine editor is opened. If it is a structure class and Alt+S is pressed then the structure editor is
-opened for this class.
-</p><!--l. 27--><p class="noindent" >As an alternative the context menu of an actor class can be used to open the associated structure or behavior
-diagram.
-</p><!--l. 29--><p class="noindent" >Switching from the behavior to the structure is performed on Alt+S and vice versa on Alt+B.
-<a 
- id="x33-139001r193"></a>
+<h4 class="subsectionHead"><span class="titlemark">7.2.2   </span> <a 
+ id="x34-2230002"></a>GraphicalStructureEditor</h4>
+<!--l. 1806--><p class="noindent" ><a 
+ id="ref:GraphicalStructureEditor"></a> The Structure Editor allows to edit the ActorClass&#8217; Structure in a convenient way. It is possible to create and arrange actor
+references and ports and to create bindings and layer connections.
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.1.2   </span> <a 
- id="x33-1400002"></a>Model Navigation</h4>
-<!--l. 33--><p class="noindent" >Model file paths in import statements are hyper links that can be clicked with the Ctrl key pressed.
-</p><!--l. 35--><p class="noindent" ><img 
-src="images/041-open-declaration.jpg" alt="PIC"  
- />
-</p><!--l. 37--><p class="noindent" >An alternative is to use F3 (open declaration) with the cursor inside the file name.
-</p><!--l. 39--><p class="noindent" >In a similar way references to model elements can be navigated using F3 or Ctrl-Click, e.g. the protocol class of a port or the
-actor class of an actor reference or the data class of an attribute and many more.
-</p><!--l. 42--><p class="noindent" >The "quick outline" is a means that allows fast navigation in a single model. Ctrl-O opens a window similar to the outline
-view. Typing text (with possible wild cards * and ?) filters the view and selecting an element and pressing return locates the
-element in the editor.
-</p><!--l. 46--><p class="noindent" >Ctrl-Shift-G searches references to model elements. E.g. "Find references" for a selected actor class lists all locations in
-ROOM models and diagrams that refer to this actor class.
-</p><!--l. 49--><p class="noindent" >Using the outline, also imported elements can be browsed and navigated.
+<div class="center" 
+>
+<!--l. 1809--><p class="noindent" >
+
+</p><!--l. 1810--><p class="noindent" ><img 
+src="images/300-GraphicalStructureEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1815--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
 <a 
- id="x33-140001r194"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">6.1.3   </span> <a 
- id="x33-1410003"></a>Navigating Behavior Diagrams</h4>
-<!--l. 53--><p class="noindent" >The behavior editor displays a hierarchical state machine. States can have a sub state graph and thus the hierarchy of states
-and state graphs forms a tree like structure. The eTrice behavior editor always shows only one level of the hierarchy. The
-editor switches to the sub state graph of a state by double clicking it. The path of the currently displayed
-state graph is indicated in the upper right corner using state names separated by slashes (/). A single slash
-indicates the top level. Double click into the empty space of a state graph will switch to the state graph one level
-up.
-</p><!--l. 60--><p class="noindent" >A double click on a transition (or its label), a transition point or a choice point opens their property dialog. A
-double click on a state opens its property dialog if it has no sub state graph or it switches to its sub state
-graph.
+ id="x34-223001r54"></a></p>
+<!--l. 1820--><div class="longtable"> <table id="TBL-70" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-70-1g"><col 
+id="TBL-70-1" /></colgroup><colgroup id="TBL-70-2g"><col 
+id="TBL-70-2" /><col 
+id="TBL-70-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:StructureEditorPalette">StructureEditorPalette</a>    </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-1-3"  
+class="td11">
+ <!--l. 1820--><p class="noindent" >The  palette  creates  central  structural  elements  of  an
+  ActorClass.                                                            </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-2-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorRefPropertyDialog">ActorRefPropertyDialog</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-2-3"  
+class="td11">
+ <!--l. 1821--><p class="noindent" >A dialog to edit properties of an ActorRef.                     </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:PortPropertyDialog">PortPropertyDialog</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-3-3"  
+class="td11">
+ <!--l. 1822--><p class="noindent" >A dialog to edit properties of an Port.                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-4-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPPPropertyDialog">SPPPropertyDialog</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-4-3"  
+class="td11">
+ <!--l. 1823--><p class="noindent" >A dialog to edit properties of a SPP.                            </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-5-1"  
+class="td11"> Edits:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:ActorClass">ActorClass</a>                  </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-5-3"  
+class="td11">
+ <!--l. 1825--><p class="noindent" >The actor is the basic structural building block for building
+  systems with ROOM.                                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-6-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:ActorRef">ActorRef</a>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-6-3"  
+class="td11">
+ <!--l. 1826--><p class="noindent" >An ActorRef is an instance of an ActorClass.                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-7-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:Port">Port</a>                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-7-3"  
+class="td11">
+ <!--l. 1827--><p class="noindent" >A Port is an instance of a ProtocolClass and the interface
+  for an ActorClass.                                                    </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-8-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-8-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:SAP">SAP</a>                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-8-3"  
+class="td11">
+ <!--l. 1828--><p class="noindent" >A Service Access Point is similar to a Port, but uses a
+  LayerConnection for wiring.                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-9-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-9-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:Binding">Binding</a>                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-9-3"  
+class="td11">
+ <!--l. 1829--><p class="noindent" >A Binding connects two Ports with each other.                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-10-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-10-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:LayerConnection">LayerConnection</a>           </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-10-3"  
+class="td11">
+ <!--l. 1830--><p class="noindent" >A  LayerConnection  associates  a  SPP  to  an  ActorRef,
+  resulting  in  an  connection  of  all  SAPs  on  its  instance
+  hierarchy.                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-11-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-12-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-13-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-14-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-15-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-15-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-15-3"  
+class="td11">
+</td></tr>
+</table></div>
 <a 
- id="x33-141001r195"></a>
+ id="x34-223002r295"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.1   </span> <a 
+ id="x34-2240001"></a>ActorRefPropertyDialog</h5>
+<!--l. 1842--><p class="noindent" ><a 
+ id="ref:ActorRefPropertyDialog"></a> A dialog to edit properties of an ActorRef.
+</p><!--l. 1845--><p class="noindent" >The dialog is used to edit an existing ActorRef of an ActorClass. It is also shown when creating a new one.
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.1.4   </span> <a 
- id="x33-1420004"></a>Navigating Structure Diagrams</h4>
-<!--l. 65--><p class="noindent" >The context menu of a structure diagram (invoked in the empty space inside the bounding rectangle) contains an entry
-"Open Class Behavior" which opens the behavior diagram (same as Alt+B).
-</p><!--l. 68--><p class="noindent" >The context menu of an actor reference contains entries: "Open Ref Structure" and "Open Ref Behavior" that allow to open
-the associated diagrams of the referenced actor class.
+<div class="center" 
+>
+<!--l. 1846--><p class="noindent" >
+
+</p><!--l. 1847--><p class="noindent" ><img 
+src="images/300-ActorRefDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1852--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
                                                                                             
                                                                                             
+<a 
+ id="x34-224001r55"></a></p><!--l. 1857--><div class="longtable"> <table id="TBL-71" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-71-1g"><col 
+id="TBL-71-1" /></colgroup><colgroup id="TBL-71-2g"><col 
+id="TBL-71-2" /><col 
+id="TBL-71-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:ActorRef">ActorRef</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-1-3"  
+class="td11">
+ <!--l. 1857--><p class="noindent" >An ActorRef is an instance of an ActorClass.                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-6-2"  
+class="td11">             </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<!--l. 1863--><p class="noindent" ><span 
+class="ec-lmssbx-10">Feature Usage:</span>
+<a 
+ id="x34-224002r56"></a></p>
+<!--l. 1868--><div class="longtable"> <table id="TBL-72" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-72-1g"><col 
+id="TBL-72-1" /></colgroup><colgroup id="TBL-72-2g"><col 
+id="TBL-72-2" /><col 
+id="TBL-72-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-1-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-72-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-72-1-3"  
+class="td11">
+ <!--l. 1868--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-2-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-72-6-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-72-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-224003r301"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.2   </span> <a 
+ id="x34-2250002"></a>PortPropertyDialog</h5>
+<!--l. 1879--><p class="noindent" ><a 
+ id="ref:PortPropertyDialog"></a> A dialog to edit properties of an Port.
+</p><!--l. 1882--><p class="noindent" >The dialog is used to edit an existing Port of an ActorClass. It is also shown when creating a new one. </p>
+<div class="center" 
+>
+<!--l. 1883--><p class="noindent" >
+
+</p><!--l. 1884--><p class="noindent" ><img 
+src="images/300-PortDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1889--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x34-225001r57"></a></p>
+<!--l. 1894--><div class="longtable"> <table id="TBL-73" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-73-1g"><col 
+id="TBL-73-1" /></colgroup><colgroup id="TBL-73-2g"><col 
+id="TBL-73-2" /><col 
+id="TBL-73-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-73-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:Port">Port</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-73-1-3"  
+class="td11">
+ <!--l. 1894--><p class="noindent" >A Port is an instance of a ProtocolClass and the interface
+  for an ActorClass.                                                    </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-73-6-2"  
+class="td11">         </td><td  style="white-space:wrap; text-align:left;" id="TBL-73-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<!--l. 1900--><p class="noindent" ><span 
+class="ec-lmssbx-10">Feature Usage:</span>
+<a 
+ id="x34-225002r58"></a></p>
+<!--l. 1905--><div class="longtable"> <table id="TBL-74" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-74-1g"><col 
+id="TBL-74-1" /></colgroup><colgroup id="TBL-74-2g"><col 
+id="TBL-74-2" /><col 
+id="TBL-74-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-1-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-74-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-74-1-3"  
+class="td11">
+ <!--l. 1905--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-2-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-74-6-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-74-6-3"  
+class="td11">
+</td></tr>
+                                                                                            
+                                                                                            
+</table></div>
+<a 
+ id="x34-225003r302"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.3   </span> <a 
+ id="x34-2260003"></a>SPPPropertyDialog</h5>
+<!--l. 1916--><p class="noindent" ><a 
+ id="ref:SPPPropertyDialog"></a> A dialog to edit properties of a SPP.
+</p><!--l. 1919--><p class="noindent" >The dialog is used to edit an existing SPP of an ActorClass. It is also shown when creating a new one. </p>
+<div class="center" 
+>
+<!--l. 1920--><p class="noindent" >
+
+</p><!--l. 1921--><p class="noindent" ><img 
+src="images/300-SPPDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1926--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x34-226001r59"></a></p>
+<!--l. 1931--><div class="longtable"> <table id="TBL-75" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-75-1g"><col 
+id="TBL-75-1" /></colgroup><colgroup id="TBL-75-2g"><col 
+id="TBL-75-2" /><col 
+id="TBL-75-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-75-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:SPP">SPP</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-75-1-3"  
+class="td11">
+ <!--l. 1931--><p class="noindent" >A Service Provision Point is the counterpart of a SAP       </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-75-6-2"  
+class="td11">         </td><td  style="white-space:wrap; text-align:left;" id="TBL-75-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<!--l. 1937--><p class="noindent" ><span 
+class="ec-lmssbx-10">Feature Usage:</span>
+<a 
+ id="x34-226002r60"></a></p>
+<!--l. 1942--><div class="longtable"> <table id="TBL-76" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-76-1g"><col 
+id="TBL-76-1" /></colgroup><colgroup id="TBL-76-2g"><col 
+id="TBL-76-2" /><col 
+id="TBL-76-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-1-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-76-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-76-1-3"  
+class="td11">
+ <!--l. 1942--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-2-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-76-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-76-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-76-6-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-76-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-226003r303"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.4   </span> <a 
+ id="x34-2270004"></a>StructureEditorPalette</h5>
+<!--l. 1953--><p class="noindent" ><a 
+ id="ref:StructureEditorPalette"></a> The palette creates central structural elements of an ActorClass.
+</p><!--l. 1956--><p class="noindent" >Selecting an entry from the palette and clicking into the diagram, creates the element at the current position.
 </p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<div class="center" 
+>
+<!--l. 1957--><p class="noindent" >
+
+</p><!--l. 1958--><p class="noindent" ><img 
+src="images/300-StructurePalette.png" alt="PIC"  
+ /></p></div>
+<!--l. 1964--><p class="noindent" ><span 
+class="ec-lmssbx-10">Feature Usage:</span>
+<a 
+ id="x34-227001r61"></a></p>
+<!--l. 1969--><div class="longtable"> <table id="TBL-77" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-77-1g"><col 
+id="TBL-77-1" /></colgroup><colgroup id="TBL-77-2g"><col 
+id="TBL-77-2" /><col 
+id="TBL-77-3" /></colgroup>
+                                                                                            
+                                                                                            
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-1-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-77-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-77-1-3"  
+class="td11">
+ <!--l. 1969--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-2-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-4-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-77-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-77-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-77-6-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-77-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-227002r300"></a>
+<h4 class="subsectionHead"><span class="titlemark">7.2.3   </span> <a 
+ id="x34-2280003"></a>TextualROOMEditor</h4>
+<!--l. 1980--><p class="noindent" ><a 
+ id="ref:TextualROOMEditor"></a> Textual model editor
+</p>
+<div class="center" 
+>
+<!--l. 1983--><p class="noindent" >
+
+</p><!--l. 1984--><p class="noindent" ><img 
+src="images/300-TextualROOMEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1989--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x34-228001r62"></a></p>
+<!--l. 1994--><div class="longtable"> <table id="TBL-78" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-78-1g"><col 
+id="TBL-78-1" /></colgroup><colgroup id="TBL-78-2g"><col 
+id="TBL-78-2" /><col 
+id="TBL-78-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:OutlineView">OutlineView</a>        </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-1-3"  
+class="td11">
+ <!--l. 1994--><p class="noindent" >Displays an overview of all elements in the textual editor.  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-2-1"  
+class="td11"> Edits:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse24.html#ref:ROOMLanguage">ROOMLanguage</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-2-3"  
+class="td11">
+ <!--l. 1996--><p class="noindent" >The Real Time Object Oriented Modeling (ROOM).         </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-78-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-7-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-7-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x34-228002r304"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.3.1   </span> <a 
+ id="x34-2290001"></a>OutlineView</h5>
+<!--l. 2008--><p class="noindent" ><a 
+ id="ref:OutlineView"></a> Displays an overview of all elements in the textual editor.
+</p><!--l. 2011--><p class="noindent" >Shows the structure of the current opened model in the textual editor. Select the &#8217;Link with Editor&#8217; option to synchronize the
+selection of elements between editor and outline view. This enables a convenient navigation.
+</p>
+<div class="center" 
+>
+<!--l. 2013--><p class="noindent" >
+
+</p><!--l. 2014--><p class="noindent" ><img 
+src="images/300-OutlineView.png" alt="PIC"  
+ /></p></div>
+<!--l. 2020--><p class="noindent" ><span 
+class="ec-lmssbx-10">Feature Usage:</span>
+<a 
+ id="x34-229001r63"></a></p>
+<!--l. 2025--><div class="longtable"> <table id="TBL-79" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-79-1g"><col 
+id="TBL-79-1" /></colgroup><colgroup id="TBL-79-2g"><col 
+id="TBL-79-2" /><col 
+id="TBL-79-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-1-1"  
+class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:TextualROOMEditor">TextualROOMEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-1-3"  
+class="td11">
+ <!--l. 2025--><p class="noindent" >Textual model editor                                                </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-2-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-3-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-4-1"  
+class="td11">              </td>
+                                                                                            
+                                                                                            
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-5-1"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-79-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-6-1"  
+class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-6-2"  
+class="td11">                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+                                                                                            
+                                                                                            
+<!--l. 2035--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse26.html" >next</a>] [<a 
-href="etrice-docch6.html" >prev</a>] [<a 
-href="etrice-docch6.html#tailetrice-docch6.html" >prev-tail</a>] [<a 
+href="etrice-docse24.html" >prev</a>] [<a 
+href="etrice-docse24.html#tailetrice-docse24.html" >prev-tail</a>] [<a 
 href="etrice-docse25.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse25.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch7.html#etrice-docse25.html" >up</a>] </p></div>
+<!--l. 2035--><p class="noindent" ><a 
  id="tailetrice-docse25.html"></a></p> 
 </body></html> 

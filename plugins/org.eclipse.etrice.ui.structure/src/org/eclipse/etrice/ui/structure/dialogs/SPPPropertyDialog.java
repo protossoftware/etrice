@@ -129,4 +129,9 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 	protected Image getImage() {
 		return Activator.getImage("icons/Structure.gif");
 	}
+
+	@Override
+	protected String getFeatureContextHelpId() {
+		return "SPPPropertyDialog";
+	}
 }

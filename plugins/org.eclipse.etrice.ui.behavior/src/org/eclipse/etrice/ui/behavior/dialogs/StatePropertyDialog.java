@@ -248,4 +248,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		messageToDisplay = message;
 		messageTitle = title;
 	}
+
+	@Override
+	protected String getFeatureContextHelpId() {
+		// TODO add context help
+		return null;
+	}
 }

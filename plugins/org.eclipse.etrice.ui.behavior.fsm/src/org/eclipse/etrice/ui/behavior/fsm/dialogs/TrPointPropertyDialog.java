@@ -65,4 +65,10 @@ public class TrPointPropertyDialog extends AbstractPropertyDialog implements ITr
 		name.selectAll();
 	}
 
+	@Override
+	protected String getFeatureContextHelpId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

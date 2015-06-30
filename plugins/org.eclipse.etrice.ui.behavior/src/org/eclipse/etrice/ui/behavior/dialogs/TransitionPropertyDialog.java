@@ -348,4 +348,10 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		// the quick fix method
 		// setTextSelectionAndFocus(entry, codeSelectionString);
 	}
+
+	@Override
+	protected String getFeatureContextHelpId() {
+		// TODO add context help
+		return null;
+	}
 }

@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.doc.ContextHelpProvider;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -293,6 +294,12 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		displayedValidationStatus = new GlobalStatus(IStatus.class);
 		
 		bindingContext.bindValue(WidgetProperties.text().observe(validationText), displayedValidationStatus);
+		
+		String featureId = getFeatureContextHelpId();
+		if(ContextHelpProvider.isAvailable(featureId)){
+			ContextHelpProvider.setHelp(body, featureId);
+			setHelpAvailable(true);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -670,4 +677,6 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			text.setSelection(start, end);
 		}
 	}
+	
+	protected abstract String getFeatureContextHelpId();
 }
