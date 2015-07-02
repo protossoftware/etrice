@@ -22,11 +22,18 @@ import java.util.Map;
 
 public class HtmlHelpProvider {
 
-	private static final String HTML_CONTENT_DIR = "/feature-gen/html/";
+	private static final String HTML_CONTENT_DIR;
+	static {
+		if(ETriceHelp.DEV_MODE)
+			HTML_CONTENT_DIR = "/feature-gen/html/";
+		else
+			HTML_CONTENT_DIR = "/help/html/";
+	}
+	
 	private final Map<String, String> cache = new HashMap<String, String>();
 
 	public String getHTMLContent(String name) {
-		if (cache.containsKey(name))
+		if (!ETriceHelp.DEV_MODE && cache.containsKey(name))
 			return cache.get(name);
 
 		URL fileURL = ETriceHelp.getDefault().getBundle().getEntry(HTML_CONTENT_DIR + name + ".html");

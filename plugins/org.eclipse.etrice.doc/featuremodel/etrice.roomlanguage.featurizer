@@ -260,9 +260,9 @@ Feature LogicalModel
 	;
 
 Feature LogicalSystem
-	description '''The top level structural class. It can only contain sub systems using SubSystemRefs.'''
+	description '''The LogicalSystem is the top-level structural class. It assembles the overall distributed system by means of sub systems.'''
 	text '''
-		The LogicalSystem is composed of sub system instances. It also defines Bindings and LayerConnections between those sub systems. 
+		It describes the logical topology of your system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.
 	'''
 	contains SubSystemRef
 	contains Binding
@@ -272,8 +272,7 @@ Feature LogicalSystem
 ;
 
 Feature ActorClass
-	shortName '''Actor Class'''
-	description '''The actor is the basic structural building block for building systems with ROOM.'''
+	description '''An actor is the basic structural building block for building systems with ROOM.'''
 	
 	text '''
 		An ActorClass consists of three main parts:
@@ -311,6 +310,35 @@ Feature ActorClass
 	example '''
 		
 	'''
+	help '''
+		```room
+		// prefixes: abstract and (eventdriven, datadriven, async, sync)
+		ActorClass ActorName ["generated doc"] {
+			Interface {
+				Port port1 ...
+				SPP spp1 ...
+			}
+			Structure ["generated doc"] {
+				usercode1 { "" }
+				usercode2 { "" }
+				usercode3 { "" } 
+				external Port port1
+				Port internalPort2 ...
+				ActorRef ...
+				Attribute ...
+				
+				ServiceImplementation of spp1
+				Binding ...
+				LayerConnection ...
+			}
+			Behavior ["generated doc"] {
+				Operation ActorName() { /* constructor */ }
+				Operation ~ActorName() { /* destructor */ }
+				Operation ...
+				StateMachine ...
+			}
+		```
+	'''
 	
 	contains ExecutionType
 	contains ActorRef
@@ -328,13 +356,12 @@ Feature ActorClass
 ;
 
 Feature SubSystemClass
-	shortName '''Sub System Class'''
 	description '''The SubSystem is main Actor of an executable part of the system. '''
 	
 	text '''
 		
 	'''
-//		\includegraphics[width=\textwidth]{images/300-TrainingSystem1_instanceTree.jpg}
+
 	contains ActorRef
 	contains RelayPort
 	contains SPP
@@ -790,12 +817,13 @@ Feature Attribute
 		}
 		\end{lstlisting}
 	'''
-//	help '''
-//		```room
-//		Attribute attribute1: int32 = "3"
-//		Attribute arrayAttribute[8] : uint32 = "0"
-//		```
-//	'''
+	help '''
+		```room
+		Attribute boolAttribute: boolean
+		Attribute arrayAttribute[8] : int32 = "0"
+		Attribute refAttribue : voidType ref = "NULL"
+		```
+	'''
 	isOfType DataType
 	property defaultValueLiteral values { "<target code>"}
 	property multiplicity values {"1..n"}

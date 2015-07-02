@@ -1,0 +1,49 @@
+/* text formatting: XtextHoverStyleSheet.css */
+
+p { margin-top: 0em; margin-bottom: 0.25em; }
+
+.keyword {
+	font-weight: bold;
+	color: #7F0055;
+}
+
+.string {
+	font-weight: normal !important;
+	color: #2A00FF;
+}
+
+.comment {
+	font-style: italic;
+	color: #3F7F5F;
+}
+
+pre, code 
+	{
+	background-color: #fdf7ee;
+	/* BEGIN word wrap */
+	/* Need all the following to word wrap instead of scroll box */
+	/* This will override the overflow:auto if present */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+	/* END word wrap */
+	}
+ 
+code /* All inline code spans */
+	{
+	}
+ 
+p > code, li > code /* Code spans in paragraphs and tight lists */
+	{
+	/* Pad a little from adjacent text */
+	padding-left:  2px;
+	padding-right: 2px;
+	}
+	
+li > p code /* Code span in a loose list */
+	{
+	/* We have room for some more background color above and below */
+	padding: 2px;
+	}

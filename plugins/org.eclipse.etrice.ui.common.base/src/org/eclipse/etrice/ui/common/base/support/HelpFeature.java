@@ -37,8 +37,13 @@ public class HelpFeature extends AbstractCustomFeature {
 	public String getFeatureId(ICustomContext context) {
 		if (context instanceof ICustomContext) {
 			ICustomContext peContext = (ICustomContext) context;
-			if (peContext.getPictogramElements() != null && peContext.getPictogramElements().length == 1)
-				return getBoClassName(peContext.getPictogramElements()[0]);
+			if (peContext.getPictogramElements() != null && peContext.getPictogramElements().length == 1){
+				PictogramElement pe = peContext.getPictogramElements()[0];
+				// don't show help for diagram input
+				if(getBusinessObjectForPictogramElement(pe) == getBusinessObjectForPictogramElement(getDiagram()))
+					return null;
+				return getBoClassName(pe);
+			}
 		}
 
 		return null;

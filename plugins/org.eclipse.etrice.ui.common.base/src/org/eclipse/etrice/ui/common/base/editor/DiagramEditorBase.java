@@ -370,7 +370,7 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
 		if (key.equals(IContextProvider.class)) {
-			return new SelectedModelHelpProvider(getDiagramBehavior());
+			return new SelectedModelHelpProvider(this);
 		}
 		return super.getAdapter(key);
 

@@ -13,7 +13,10 @@
 
 package org.eclipse.etrice.core.ui.hover;
 
+import java.io.IOException;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.ui.RoomUiActivator;
 import org.eclipse.etrice.doc.ETriceHelp;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.IRegion;
@@ -21,14 +24,19 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
+import org.eclipse.xtext.util.Files;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
 public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 
+	private static final String styleSheetFileName = "/eTriceKeywordHoverStyle.css";
+
 	@Inject
 	protected ILabelProvider labelProvider;
+
+	private String styleSheet = null;
 
 	@Override
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
@@ -44,14 +52,31 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 		}
 		return super.getHoverInfo(element, hoverRegion, previous);
 	}
-	
+
 	@Override
 	protected String getHoverInfoAsHtml(EObject o) {
-		if(o instanceof Keyword){
-			String help = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(((Keyword)o).getValue());
-			if(help != null)
+		if (o instanceof Keyword) {
+			String help = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(((Keyword) o).getValue());
+			if (help != null)
 				return help;
 		}
 		return super.getHoverInfoAsHtml(o);
+	}
+
+	@Override
+	protected String loadStyleSheet() {
+		String superStyle = super.loadStyleSheet();
+		if (styleSheet == null || ETriceHelp.DEV_MODE) {
+			styleSheet = "";
+			try {
+				styleSheet = Files.readStreamIntoString(RoomUiActivator.getDefault().getBundle()
+						.getEntry(styleSheetFileName).openStream());
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return superStyle + styleSheet;
 	}
 }

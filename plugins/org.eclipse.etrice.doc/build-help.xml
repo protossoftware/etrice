@@ -1,0 +1,42 @@
+<!-- ===========================================================
+	 Copyright (c) 2015 protos software gmbh (http://www.protos.de).
+	 All rights reserved. This program and the accompanying materials
+	 are made available under the terms of the Eclipse Public License v1.0
+	 which accompanies this distribution, and is available at
+	 http://www.eclipse.org/legal/epl-v10.html
+	  
+	 CONTRIBUTORS:
+	  		Juergen Haug (initial contribution)
+	  		
+	 =========================================================== --> 
+
+<!--
+	## Mainly copies folder 'feature-gen' (temporary local) to 'help'. 
+-->
+<project name="ETRICE_HELP2" basedir="." default="default">
+<property environment="env"/>
+		
+	<!-- ============ TARGET: copyGeneratedHelp ================== -->
+<target name="copyGeneratedHelp" description="copy help files from generation folder to deploy folder">
+	<copy todir="help/html">
+		<fileset dir="feature-gen/html" />
+	</copy>
+	
+	<copy todir="help">
+		<fileset file="feature-gen/contextHelp.xml"/>
+	</copy>
+</target>
+ 
+<!-- ============ TARGET: DEFAULT ================== -->
+<target name="default" depends="copyGeneratedHelp"/>
+
+
+<!-- ============ TARGET: clean ================== -->
+<target name="clean" description="cleans help folder">
+	<delete>
+		<fileset dir="help/html"/>
+		<fileset file="help/contextHelp.xml"/>
+	</delete>
+</target>
+
+</project>

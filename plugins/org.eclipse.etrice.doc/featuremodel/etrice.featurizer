@@ -1,18 +1,16 @@
 /*
- * To generate tex file, either do change&save here, or clean project
- * 
+ * Root model
  */
-
 FeaturizerModel eTrice
-	//'''Eclipse eTrice is an open source tool that provides an implementation of the ROOM language ...description '''
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
 	
+	// Generator settings
 	texDocGenerator {  
-		filePathName "300-eTrice-reference"
-	} 
-	HTMLHelpGenerator { 
-		filePath "html"
-	}
+		filePathName "300-eTrice-reference"    
+	}   
+//	HTMLHelpGenerator {   
+//		filePath "html"    
+//	}
 	eclipseContextHelpGenerator {
 		filePathName "contextHelp"
 	}

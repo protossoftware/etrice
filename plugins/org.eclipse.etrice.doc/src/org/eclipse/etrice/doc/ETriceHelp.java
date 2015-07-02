@@ -17,6 +17,12 @@ import org.osgi.framework.BundleContext;
 
 public class ETriceHelp extends AbstractUIPlugin {
 
+	/**
+	 *  "Hot help replace":
+	 *   deactivate caching of help contents and styling where possible
+	 */
+	public static final boolean DEV_MODE = false;
+	
 	private static ETriceHelp plugin;
 	private HtmlHelpProvider keywordHoverProvider;
 	//private ContextHelpProvider contextHelp;

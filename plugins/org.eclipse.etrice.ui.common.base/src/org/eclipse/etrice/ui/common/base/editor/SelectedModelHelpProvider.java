@@ -16,17 +16,16 @@ import org.eclipse.etrice.doc.ContextHelpProvider;
 import org.eclipse.etrice.ui.common.base.support.HelpFeature;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.impl.CustomContext;
-import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IContext;
 import org.eclipse.help.IContextProvider;
 
 public class SelectedModelHelpProvider implements IContextProvider {
 
-	private DiagramBehavior diagramBehavior;
+	private DiagramEditorBase diagramEditor;
 
-	public SelectedModelHelpProvider(DiagramBehavior diagramBehavior) {
-		this.diagramBehavior = diagramBehavior;
+	public SelectedModelHelpProvider(DiagramEditorBase diagramEditor) {
+		this.diagramEditor = diagramEditor;
 	}
 
 	@Override
@@ -36,13 +35,17 @@ public class SelectedModelHelpProvider implements IContextProvider {
 
 	@Override
 	public IContext getContext(Object target) {
-		HelpFeature help = new HelpFeature(diagramBehavior.getDiagramTypeProvider().getFeatureProvider());
-		ICustomContext context = new CustomContext(diagramBehavior.getSelectedPictogramElements());
-		String featureId = help.getFeatureId(context);
-		if (featureId != null)
-			return HelpSystem.getContext(ContextHelpProvider.getContextId(featureId));
+		HelpFeature helpFeature = new HelpFeature(diagramEditor.getDiagramTypeProvider().getFeatureProvider());
+		ICustomContext featureContext = new CustomContext(diagramEditor.getSelectedPictogramElements());
+		String featureId = helpFeature.getFeatureId(featureContext);
 
-		return null;
+		IContext context = null;
+		if (featureId != null)
+			context = HelpSystem.getContext(ContextHelpProvider.getContextId(featureId));
+		if (context == null)
+			context = HelpSystem.getContext(ContextHelpProvider.getContextId(diagramEditor.getClass().getSimpleName()));
+
+		return context;
 	}
 
 	@Override
