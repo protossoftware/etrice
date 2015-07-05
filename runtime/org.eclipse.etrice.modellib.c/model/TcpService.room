@@ -142,7 +142,7 @@ RoomModel room.basic.service.tcp {
 				""
 				"static int socketReceiver(void* slf, int channel, int size, const int8* data) {"
 				"	ATcpClient* self = (ATcpClient*) slf;"
-				"	DTcpPayload_setData(&payloadRecvBuffer, data, size);"
+				"	DTcpPayload_setData(&payloadRecvBuffer, /* cast away constness to avoid warning*/(int8*)data, size);"
 				"	payloadPort_dataPackage(&payloadRecvBuffer);"
 				"	return ETSOCKET_OK;"
 				"}"

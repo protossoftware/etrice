@@ -208,7 +208,7 @@ RoomModel TrafficLight {
 						<standby: fct>
 					}
 					action {
-						"printf(\"ptlc: connecting to port %d\\n\", port);"
+						"printf(\"ptlc: connecting to port %d\\n\", (int)port);"
 						"tlInterface.connect(port);"
 					}
 				}
@@ -464,7 +464,7 @@ RoomModel TrafficLight {
 						<connect: fct>
 					}
 					action {
-						"printf(\"tli: connecting to port %d\\n\", port);"
+						"printf(\"tli: connecting to port %d\\n\", (int)port);"
 						"DTcpControl config = {\"localhost\", port};"
 						"ctrl.connect(&config);"
 					}
