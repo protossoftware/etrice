@@ -709,13 +709,31 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append(") {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          String _boolType_3 = this.boolType();
-          _builder.append(_boolType_3, "\t");
-          _builder.append(" skip_entry__et = ");
-          String _booleanConstant = this.langExt.booleanConstant(false);
-          _builder.append(_booleanConstant, "\t");
-          _builder.append(";");
+          StateGraph _stateMachine_1 = xpmc.getStateMachine();
+          final List<State> baseStateList = this._fSMHelpers.getBaseStateList(_stateMachine_1);
           _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
+            public Boolean apply(final State s) {
+              return Boolean.valueOf(AbstractStateMachineGenerator.this._fSMHelpers.hasEntryCode(s, true));
+            }
+          };
+          Iterable<State> _filter = IterableExtensions.<State>filter(baseStateList, _function);
+          boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+          final boolean needsSkipVar = (!_isEmpty);
+          _builder.newLineIfNotEmpty();
+          {
+            if (needsSkipVar) {
+              _builder.append("\t");
+              String _boolType_3 = this.boolType();
+              _builder.append(_boolType_3, "\t");
+              _builder.append(" skip_entry__et = ");
+              String _booleanConstant = this.langExt.booleanConstant(false);
+              _builder.append(_booleanConstant, "\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t");
           _builder.append("if (state__et >= STATE_MAX) {");
           _builder.newLine();
@@ -733,12 +751,16 @@ public abstract class AbstractStateMachineGenerator {
           }
           _builder.append(" (state__et - STATE_MAX);");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("skip_entry__et = ");
-          String _booleanConstant_1 = this.langExt.booleanConstant(true);
-          _builder.append(_booleanConstant_1, "\t\t");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
+          {
+            if (needsSkipVar) {
+              _builder.append("\t\t");
+              _builder.append("skip_entry__et = ");
+              String _booleanConstant_1 = this.langExt.booleanConstant(true);
+              _builder.append(_booleanConstant_1, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -752,9 +774,7 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("switch (state__et) {");
           _builder.newLine();
           {
-            StateGraph _stateMachine_1 = xpmc.getStateMachine();
-            List<State> _baseStateList_1 = this._fSMHelpers.getBaseStateList(_stateMachine_1);
-            for(final State state_1 : _baseStateList_1) {
+            for(final State state_1 : baseStateList) {
               _builder.append("\t\t\t");
               _builder.append("case ");
               String _genStateId_2 = this._codegenHelpers.getGenStateId(state_1);
@@ -912,12 +932,16 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("\t\t");
           _builder.append("}");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("skip_entry__et = ");
-          String _booleanConstant_3 = this.langExt.booleanConstant(false);
-          _builder.append(_booleanConstant_3, "\t\t");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
+          {
+            if (needsSkipVar) {
+              _builder.append("\t\t");
+              _builder.append("skip_entry__et = ");
+              String _booleanConstant_3 = this.langExt.booleanConstant(false);
+              _builder.append(_booleanConstant_3, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
