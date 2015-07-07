@@ -21,7 +21,7 @@ public class ETriceHelp extends AbstractUIPlugin {
 	 *  "Hot help replace":
 	 *   deactivate caching of help contents and styling where possible
 	 */
-	public static final boolean DEV_MODE = false;
+	public static final boolean DEV_MODE = true;
 	
 	private static ETriceHelp plugin;
 	private HtmlHelpProvider keywordHoverProvider;

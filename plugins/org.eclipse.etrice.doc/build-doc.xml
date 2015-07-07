@@ -169,7 +169,7 @@
 	</copy>
 	<delete>
 		<fileset dir="${doc.dir}" 
-			includes="**/*.aux **/*.html **/*.css **/*.4ct **/*.4tc **/*.log **/*.dvi **/*.lg **/*.xref **/*.tmp **/*.idv **/*.png" 
+			includes="**/*.aux **/*.html **/*.css **/*.4ct **/*.4tc **/*.log **/*.dvi **/*.lg **/*.xref **/*.tmp **/*.idv" 
 			excludes="images/**" 
 		/> 
 	</delete>

@@ -6,14 +6,17 @@
 FeaturizerModel Development
 
 Feature TemplateFeature
-	shortName '''not important for now'''
-	description '''A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.'''
+	//shortName '''not important for now'''
+	description '''Plain text: A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.'''
 	text '''
-		It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).
+		LaTex: It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).
 		Long explanation here
 	'''
 	example '''
-		Examples here
+		LaTex: Examples here
+	'''
+	help '''
+		Markdown (GMF): Hover help
 	'''
 
 	// relations

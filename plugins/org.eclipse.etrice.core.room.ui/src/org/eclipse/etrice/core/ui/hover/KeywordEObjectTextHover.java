@@ -46,10 +46,10 @@ public class KeywordEObjectTextHover extends DispatchingEObjectTextHover {
 
 	@Override
 	protected Pair<EObject, IRegion> getXtextElementAt(XtextResource resource, int offset) {
-		Pair<EObject, IRegion> result = super.getXtextElementAt(resource, offset);
-		if (result == null) {
-			result = resolveKeywordAt(resource, offset);
-		}
+		Pair<EObject, IRegion> result = resolveKeywordAt(resource, offset);
+		if (result == null)
+			result = super.getXtextElementAt(resource, offset);
+
 		return result;
 	}
 

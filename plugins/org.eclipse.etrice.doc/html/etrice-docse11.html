@@ -10,58 +10,58 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-03 15:56:00" /> 
+<meta name="date" content="2015-07-09 13:04:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 190--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 251--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docch5.html" >next</a>] [<a 
 href="etrice-docse10.html" >prev</a>] [<a 
 href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse11.html">tail</a>] [<a 
 href="etrice-docch4.html#etrice-docse11.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
- id="x17-860002"></a>The Java examples project</h3>
-<!--l. 192--><p class="noindent" >The example project <span 
+ id="x17-900002"></a>The Java examples project</h3>
+<!--l. 253--><p class="noindent" >The example project <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.java </span>currently contains a number of examples that are all related to
 dynamic actors.
-</p><!--l. 195--><p class="noindent" >The examples can be generated and executed one by one but not several at the same time. Inside the model folder there
+</p><!--l. 256--><p class="noindent" >The examples can be generated and executed one by one but not several at the same time. Inside the model folder there
 exists a sub folder for each example containing all models and launch configurations for code generation and to run the
 application.
 <a 
- id="x17-86001r103"></a>
+ id="x17-90001r107"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
- id="x17-870001"></a>Dynamic Actors 1</h4>
-<!--l. 202--><p class="noindent" >This example is contained in <span 
+ id="x17-910001"></a>Dynamic Actors 1</h4>
+<!--l. 263--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors1</span>.
 <a 
- id="x17-87001r106"></a>
+ id="x17-91001r110"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.1.1   </span> <a 
- id="x17-880001"></a>Purpose</h5>
-<!--l. 206--><p class="noindent" >The example demonstrates the usage of an optional actor. It is shown that several actor classes derived from the type of the
+ id="x17-920001"></a>Purpose</h5>
+<!--l. 267--><p class="noindent" >The example demonstrates the usage of an optional actor. It is shown that several actor classes derived from the type of the
 optional actor reference can be optionally created in place of the optional actor reference. Optional actor instances can also
 be destroyed and another instance can be created in the free slot.
 <a 
- id="x17-88001r109"></a>
+ id="x17-92001r113"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.1.2   </span> <a 
- id="x17-890002"></a>Details</h5>
-<!--l. 213--><p class="noindent" >The structure of this system is simple.
-</p><!--l. 215--><p class="noindent" ><img 
+ id="x17-930002"></a>Details</h5>
+<!--l. 274--><p class="noindent" >The structure of this system is simple.
+</p><!--l. 276--><p class="noindent" ><img 
 src="images/039-DynAct1-Main_instanceTree.jpg" alt="PIC"  
  />
-</p><!--l. 217--><p class="noindent" >However, this is only the initial system structure. The leaf instance is just a place holder for an optional actor instance. In this
+</p><!--l. 278--><p class="noindent" >However, this is only the initial system structure. The leaf instance is just a place holder for an optional actor instance. In this
 place an instance of a compatible type can be created at run time. Compatible types are the type of the reference itself and
 all of its sub types as long as they are not abstract. Together with the instance all of its contained instances will be created
 and all ports are connected.
-</p><!--l. 223--><p class="noindent" >This example demonstrates how an optional actor is created and destroyed and another one of another type is created to hold
+</p><!--l. 284--><p class="noindent" >This example demonstrates how an optional actor is created and destroyed and another one of another type is created to hold
 the same place.
-</p><!--l. 226--><p class="noindent" ><img 
+</p><!--l. 287--><p class="noindent" ><img 
 src="images/039-DynAct1-Container_behavior.jpg" alt="PIC"  
  />
-</p><!--l. 228--><p class="noindent" >When the example is executed the <span 
+</p><!--l. 289--><p class="noindent" >When the example is executed the <span 
 class="ec-lmtt-10">Container </span>actor first dumps the instance tree to the console (line 56 of the listing below).
 Then it creates an instance of <span 
 class="ec-lmtt-10">Optional2 </span>(line 57). Now that the <span 
@@ -73,14 +73,14 @@ class="ec-lmtt-10">Optional1</span>, is
 created and once more <span 
 class="ec-lmtt-10">sayHello() </span>is sent.
 </p>
-<!--l. 236--><div class="lstinputlisting">
+<!--l. 297--><div class="lstinputlisting">
 <a 
- id="x17-89001r1"></a>
+ id="x17-93001r1"></a>
 <a 
- id="x17-89002"></a>
+ id="x17-93002"></a>
 <span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89003r36"></a></span><span 
+ id="x17-93003r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -89,7 +89,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89004r37"></a></span><span 
+ id="x17-93004r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -111,7 +111,7 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89005r38"></a></span><span 
+ id="x17-93005r38"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -131,7 +131,7 @@ class="ec-lmtt-9">CreateOptional1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89006r39"></a></span><span 
+ id="x17-93006r39"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -143,7 +143,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89007r40"></a></span><span 
+ id="x17-93007r40"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -160,7 +160,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">p0</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89008r41"></a></span><span 
+ id="x17-93008r41"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -170,7 +170,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89009r42"></a></span><span 
+ id="x17-93009r42"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -182,7 +182,7 @@ class="ec-lmssbx-10x-x-90">action</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89010r43"></a></span><span 
+ id="x17-93010r43"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -206,7 +206,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89011r44"></a></span><span 
+ id="x17-93011r44"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -224,7 +224,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89012r45"></a></span><span 
+ id="x17-93012r45"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -248,7 +248,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89013r46"></a></span><span 
+ id="x17-93013r46"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -258,7 +258,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89014r47"></a></span><span 
+ id="x17-93014r47"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -267,7 +267,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89015r48"></a></span><span 
+ id="x17-93015r48"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -287,7 +287,7 @@ class="ec-lmtt-9">ReceivedHelloAgain</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89016r49"></a></span><span 
+ id="x17-93016r49"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -299,7 +299,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89017r50"></a></span><span 
+ id="x17-93017r50"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -316,7 +316,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">p0</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89018r51"></a></span><span 
+ id="x17-93018r51"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -326,7 +326,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89019r52"></a></span><span 
+ id="x17-93019r52"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -338,7 +338,7 @@ class="ec-lmssbx-10x-x-90">action</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89020r53"></a></span><span 
+ id="x17-93020r53"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -362,7 +362,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89021r54"></a></span><span 
+ id="x17-93021r54"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -380,7 +380,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89022r55"></a></span><span 
+ id="x17-93022r55"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -390,7 +390,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89023r56"></a></span><span 
+ id="x17-93023r56"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -399,7 +399,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89024r57"></a></span><span 
+ id="x17-93024r57"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -412,7 +412,7 @@ class="ec-lmtt-9">CreateOptional2</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89025r58"></a></span><span 
+ id="x17-93025r58"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -424,7 +424,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89026r59"></a></span><span 
+ id="x17-93026r59"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -448,7 +448,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89027r60"></a></span><span 
+ id="x17-93027r60"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -472,7 +472,7 @@ class="ec-lmtt-9">)</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89028r61"></a></span><span 
+ id="x17-93028r61"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -490,7 +490,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89029r62"></a></span><span 
+ id="x17-93029r62"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -514,7 +514,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89030r63"></a></span><span 
+ id="x17-93030r63"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -524,7 +524,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89031r64"></a></span><span 
+ id="x17-93031r64"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -533,7 +533,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89032r65"></a></span><span 
+ id="x17-93032r65"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -546,7 +546,7 @@ class="ec-lmtt-9">CreateOptional1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89033r66"></a></span><span 
+ id="x17-93033r66"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -558,7 +558,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89034r67"></a></span><span 
+ id="x17-93034r67"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -582,7 +582,7 @@ class="ec-lmtt-9">)</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89035r68"></a></span><span 
+ id="x17-93035r68"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -600,7 +600,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89036r69"></a></span><span 
+ id="x17-93036r69"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -624,7 +624,7 @@ class="ec-lmtt-9">\")</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89037r70"></a></span><span 
+ id="x17-93037r70"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -634,7 +634,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89038r71"></a></span><span 
+ id="x17-93038r71"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -643,7 +643,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89039r72"></a></span><span 
+ id="x17-93039r72"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -656,7 +656,7 @@ class="ec-lmtt-9">ReceivedHelloAgain</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x17-89040r73"></a></span><span 
+ id="x17-93040r73"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -674,11 +674,11 @@ class="ec-lmtt-9">{</span>
 class="content">Container
             actor
             state
-            machine</span></div><!--tex4ht:label?: x17-890004 -->
+            machine</span></div><!--tex4ht:label?: x17-930004 -->
                                                                                             
                                                                                             
 </div>
-<!--l. 238--><p class="noindent" >The console output of the running application starts with
+<!--l. 299--><p class="noindent" >The console output of the running application starts with
                                                                                             
                                                                                             
 </p>
@@ -704,8 +704,8 @@ class="content">Container
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort0
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
 </div>
-<!--l. 261--><p class="nopar" >
-</p><!--l. 263--><p class="noindent" >The <span 
+<!--l. 322--><p class="nopar" >
+</p><!--l. 324--><p class="noindent" >The <span 
 class="ec-lmtt-10">ScalarOptionalActorInterface(className=Optional, instancePath=/LS/main/appl/cont/opt) </span>is an object
 which is responsible for the life cycle of the dynamic actor (including its contained instances) and for the mediation of the
 port connections. It contains a replicated <span 
@@ -713,7 +713,7 @@ class="ec-lmtt-10">RTSystemPort </span>which is used to trigger the initial tran
 class="ec-lmtt-10">p0 </span>of the
 interface of the <span 
 class="ec-lmtt-10">Optional </span>actor class.
-</p><!--l. 268--><p class="noindent" >After creation of <span 
+</p><!--l. 329--><p class="noindent" >After creation of <span 
 class="ec-lmtt-10">Optional2 </span>the interesting part of the dumped tree is
                                                                                             
                                                                                             
@@ -733,13 +733,13 @@ class="ec-lmtt-10">Optional2 </span>the interesting part of the dumped tree is
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
 &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort2
 </div>
-<!--l. 284--><p class="nopar" >
-</p><!--l. 286--><p class="noindent" >It can be seen that the sub tree corresponding to <span 
+<!--l. 345--><p class="nopar" >
+</p><!--l. 347--><p class="noindent" >It can be seen that the sub tree corresponding to <span 
 class="ec-lmtt-10">Optional2 </span>was inserted right below the <span 
 class="ec-lmtt-10">ScalarOptionalActorInterface</span>.
-</p><!--l. 289--><p class="noindent" >After deletion of the optional actor the dumped instance tree looks exactly as in the beginning.
-</p><!--l. 291--><p class="noindent" >To illustrate the dynamic behavior of the system we can finally have a look at the generated sequence diagram <a 
-href="#x17-89041r1">4.1<!--tex4ht:ref: fig:dynact1_msc --></a>.
+</p><!--l. 350--><p class="noindent" >After deletion of the optional actor the dumped instance tree looks exactly as in the beginning.
+</p><!--l. 352--><p class="noindent" >To illustrate the dynamic behavior of the system we can finally have a look at the generated sequence diagram <a 
+href="#x17-93041r1">4.1<!--tex4ht:ref: fig:dynact1_msc --></a>.
 During the sub system initialization three actor instances are created. Then the system is started and the
 <span 
 class="ec-lmtt-10">Container </span>actor dynamically creates an instance of <span 
@@ -749,7 +749,7 @@ class="ec-lmtt-10">/LS/main/appl/cont</span>. Then <span
 class="ec-lmtt-10">sayHello() </span>is sent and the answer <span 
 class="ec-lmtt-10">hello() </span>is received and the optional actor is destroyed
 again.
-</p><!--l. 298--><p class="noindent" >The same is repeated with a new optional instance of <span 
+</p><!--l. 359--><p class="noindent" >The same is repeated with a new optional instance of <span 
 class="ec-lmtt-10">Optional1</span>.
 </p>
 <hr class="figure" /><div class="figure" 
@@ -757,22 +757,22 @@ class="ec-lmtt-10">Optional1</span>.
                                                                                             
                                                                                             
 <a 
- id="x17-89041r1"></a>
+ id="x17-93041r1"></a>
                                                                                             
                                                                                             
-<!--l. 301--><p class="noindent" ><img 
+<!--l. 362--><p class="noindent" ><img 
 src="images/039-DynAct1-MSC.jpg" alt="PIC"  
  />
 <br /> </p><div class="caption" 
 ><span class="id">Figure&#x00A0;4.1: </span><span  
-class="content">Sequence diagram of Dynamic Actors Example 1</span></div><!--tex4ht:label?: x17-89041r1 -->
+class="content">Sequence diagram of Dynamic Actors Example 1</span></div><!--tex4ht:label?: x17-93041r1 -->
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
 <a 
- id="x17-89042r110"></a>
+ id="x17-93042r114"></a>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.1.3   </span> <a 
- id="x17-900003"></a>Noteworthy</h5>
+ id="x17-940003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">To obtain an executable the launch configuration <span 
 class="ec-lmtt-10">gen_DynAct1_sys.launch </span>has to be executed. In this case
@@ -788,51 +788,51 @@ class="ec-lmtt-10">sayHello() </span>would be left without reply.
 class="ec-lmtt-10">gen_DynAct1.launch </span>has to be executed. In this case no factory
      classes are generated.</li></ul>
 <a 
- id="x17-90001r108"></a>
+ id="x17-94001r112"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
- id="x17-910002"></a>Dynamic Actors 2</h4>
-<!--l. 321--><p class="noindent" >This example is contained in <span 
+ id="x17-950002"></a>Dynamic Actors 2</h4>
+<!--l. 382--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors2</span>.
 <a 
- id="x17-91001r113"></a>
+ id="x17-95001r117"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.1   </span> <a 
- id="x17-920001"></a>Purpose</h5>
-<!--l. 325--><p class="noindent" >A modified version of <span 
+ id="x17-960001"></a>Purpose</h5>
+<!--l. 386--><p class="noindent" >A modified version of <span 
 class="ec-lmtt-10">dynamicactors1 </span>is used to analyze eventual memory leaks of the application.
 <a 
- id="x17-92001r115"></a>
+ id="x17-96001r119"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.2   </span> <a 
- id="x17-930002"></a>Details</h5>
-<!--l. 329--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
+ id="x17-970002"></a>Details</h5>
+<!--l. 390--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
      </p><ol  class="enumerate1" >
      <li 
-  class="enumerate" id="x17-93002x1">create an instance of <span 
+  class="enumerate" id="x17-97002x1">create an instance of <span 
 class="ec-lmtt-10">Optional2</span>
      </li>
      <li 
-  class="enumerate" id="x17-93004x2">destroy the instance
+  class="enumerate" id="x17-97004x2">destroy the instance
      </li>
      <li 
-  class="enumerate" id="x17-93006x3">create an instance of <span 
+  class="enumerate" id="x17-97006x3">create an instance of <span 
 class="ec-lmtt-10">Optional1</span>
      </li>
      <li 
-  class="enumerate" id="x17-93008x4">destroy the instance</li></ol>
-<!--l. 339--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
-</p><!--l. 341--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
+  class="enumerate" id="x17-97008x4">destroy the instance</li></ol>
+<!--l. 400--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
+</p><!--l. 402--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
 analyzed using <span 
 class="ec-lmtt-10">JConsole </span>(which is a part of the Java6 distribution) to dump the heap and <a 
 href="http://www.eclipse.org/mat/" ><span 
 class="ec-lmtt-10">org.eclipse.mat</span></a> to analyze
 it.
-</p><!--l. 346--><p class="noindent" >The measured total execution time on a Intel Core 2 Duo at 2.66 GHz was 110 ms. This corresponds to about 370
+</p><!--l. 407--><p class="noindent" >The measured total execution time on a Intel Core 2 Duo at 2.66 GHz was 110 ms. This corresponds to about 370
 <span 
 class="lmmi-10">&#x03BC;</span>s.
-</p><!--l. 349--><p class="noindent" >The result of the heap analysis for <span 
+</p><!--l. 410--><p class="noindent" >The result of the heap analysis for <span 
 class="ec-lmtt-10">org.eclipse.etrice.* </span>objects is listed in figure <a 
-href="#x17-93009r2">4.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
+href="#x17-97009r2">4.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
 the retained heap size indicate that the application has no memory leak.
 </p>
 <hr class="figure" /><div class="figure" 
@@ -840,83 +840,83 @@ the retained heap size indicate that the application has no memory leak.
                                                                                             
                                                                                             
 <a 
- id="x17-93009r2"></a>
+ id="x17-97009r2"></a>
                                                                                             
                                                                                             
-<!--l. 353--><p class="noindent" ><img 
+<!--l. 414--><p class="noindent" ><img 
 src="images/039-DynAct2-HeapAnalysis.jpg" alt="PIC"  
  />
 <br /> </p><div class="caption" 
 ><span class="id">Figure&#x00A0;4.2: </span><span  
-class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x17-93009r2 -->
+class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x17-97009r2 -->
                                                                                             
                                                                                             
 </div><hr class="endfigure" />
 <a 
- id="x17-93010r116"></a>
+ id="x17-97010r120"></a>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.3   </span> <a 
- id="x17-940003"></a>Noteworthy</h5>
+ id="x17-980003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">Calling the garbage collector every time before the free memory is dumped costs a significant amount of time
      and the execution time is increased to the order of seconds.
      </li>
      <li class="itemize">The measured free memory is close to constant. Only a small step is observed which wasn&#8217;t analyzed further.</li></ul>
 <a 
- id="x17-94001r114"></a>
+ id="x17-98001r118"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.3   </span> <a 
- id="x17-950003"></a>Dynamic Actors 3</h4>
-<!--l. 368--><p class="noindent" >This example is contained in <span 
+ id="x17-990003"></a>Dynamic Actors 3</h4>
+<!--l. 429--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors3</span>.
 <a 
- id="x17-95001r118"></a>
+ id="x17-99001r122"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.3.1   </span> <a 
- id="x17-960001"></a>Purpose</h5>
-<!--l. 372--><p class="noindent" >The example demonstrates the usage of an optional actor array. It is shown that several actor classes derived from the type of
+ id="x17-1000001"></a>Purpose</h5>
+<!--l. 433--><p class="noindent" >The example demonstrates the usage of an optional actor array. It is shown that several actor classes derived from the type of
 the optional actor reference can be created as array members. The array members can be destroyed in arbitrary order and the
 array size grows and shrinks as appropriate.
 <a 
- id="x17-96001r120"></a>
+ id="x17-100001r124"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.3.2   </span> <a 
- id="x17-970002"></a>Details</h5>
-<!--l. 378--><p class="noindent" >This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a replicated
+ id="x17-1010002"></a>Details</h5>
+<!--l. 439--><p class="noindent" >This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a replicated
 optional actor (or array of optional actors if you wish). The port of the <span 
 class="ec-lmtt-10">Container </span>was also changed to a replicated port. All
 replication factors in this example are of arbitrary multiplicity (*). The sizes vary dynamically and are unbound as far as the
 model is concerned.
-</p><!--l. 383--><p class="noindent" >The behavior was changed to the following: Two instances of different classes are created as members of this array and both
+</p><!--l. 444--><p class="noindent" >The behavior was changed to the following: Two instances of different classes are created as members of this array and both
 are deleted and one is created again. The replicated port is used to send (broadcast) messages to the optional
 actors.
 <a 
- id="x17-97001r121"></a>
+ id="x17-101001r125"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.3.3   </span> <a 
- id="x17-980003"></a>Noteworthy</h5>
+ id="x17-1020003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
 class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
      </li>
      <li class="itemize">careful inspection of the console output reveals that objects are created and destroyed as expected</li></ul>
 <a 
- id="x17-98001r119"></a>
+ id="x17-102001r123"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.4   </span> <a 
- id="x17-990004"></a>Dynamic Actors 4</h4>
-<!--l. 396--><p class="noindent" >This example is contained in <span 
+ id="x17-1030004"></a>Dynamic Actors 4</h4>
+<!--l. 457--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors4</span>.
 <a 
- id="x17-99001r122"></a>
+ id="x17-103001r126"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.4.1   </span> <a 
- id="x17-1000001"></a>Purpose</h5>
-<!--l. 400--><p class="noindent" >The example demonstrates the usage of an optional actor. But here not the actor containing the optional reference is
+ id="x17-1040001"></a>Purpose</h5>
+<!--l. 461--><p class="noindent" >The example demonstrates the usage of an optional actor. But here not the actor containing the optional reference is
 communicating with the optional actor but one level above.
 <a 
- id="x17-100001r124"></a>
+ id="x17-104001r128"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.4.2   </span> <a 
- id="x17-1010002"></a>Details</h5>
-<!--l. 405--><p class="noindent" >The <span 
+ id="x17-1050002"></a>Details</h5>
+<!--l. 466--><p class="noindent" >The <span 
 class="ec-lmtt-10">Controller </span>which has a reference to the <span 
 class="ec-lmtt-10">Container </span>is asking the latter for the creation of the dynamic actor. When it
 receives <span 
@@ -924,64 +924,64 @@ class="ec-lmtt-10">ok() </span>it is requesting <span
 class="ec-lmtt-10">sayHello() </span>from the newly created actor.
                                                                                             
                                                                                             
-</p><!--l. 409--><p class="noindent" >After the <span 
+</p><!--l. 470--><p class="noindent" >After the <span 
 class="ec-lmtt-10">Controller </span>receives <span 
 class="ec-lmtt-10">hello() </span>it tells the <span 
 class="ec-lmtt-10">Container </span>to create another actor which fails because the old one is still
 in place.
 <a 
- id="x17-101001r125"></a>
-</p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.4.3   </span> <a 
- id="x17-1020003"></a>Noteworthy</h5>
-     <ul class="itemize1">
-     <li class="itemize">the generated MSC <span 
-class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
-<a 
- id="x17-102001r123"></a>
-<h4 class="subsectionHead"><span class="titlemark">4.2.5   </span> <a 
- id="x17-1030005"></a>Dynamic Actors 5</h4>
-<!--l. 420--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">model/dynamicactors5</span>.
-<a 
- id="x17-103001r126"></a>
-</p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.1   </span> <a 
- id="x17-1040001"></a>Purpose</h5>
-<!--l. 424--><p class="noindent" >The example shows that the optional actor can not only have relay ports but also external end ports.
-<a 
- id="x17-104001r128"></a>
-</p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.2   </span> <a 
- id="x17-1050002"></a>Details</h5>
-<!--l. 428--><p class="noindent" >This simple example just shows that the optional actor may directly handle inbound messages by using an external end port
-rather than the relay port of the previous examples.
-<a 
  id="x17-105001r129"></a>
 </p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.3   </span> <a 
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.4.3   </span> <a 
  id="x17-1060003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
 class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
 <a 
  id="x17-106001r127"></a>
-<h4 class="subsectionHead"><span class="titlemark">4.2.6   </span> <a 
- id="x17-1070006"></a>Dynamic Actors 6</h4>
-<!--l. 439--><p class="noindent" >This example is contained in <span 
-class="ec-lmtt-10">model/dynamicactors6</span>.
+<h4 class="subsectionHead"><span class="titlemark">4.2.5   </span> <a 
+ id="x17-1070005"></a>Dynamic Actors 5</h4>
+<!--l. 481--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors5</span>.
 <a 
  id="x17-107001r130"></a>
 </p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.1   </span> <a 
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.1   </span> <a 
  id="x17-1080001"></a>Purpose</h5>
-<!--l. 443--><p class="noindent" >The example demonstrates the use of nested dynamic actors.
+<!--l. 485--><p class="noindent" >The example shows that the optional actor can not only have relay ports but also external end ports.
 <a 
  id="x17-108001r132"></a>
 </p>
-<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.2   </span> <a 
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.2   </span> <a 
  id="x17-1090002"></a>Details</h5>
-<!--l. 447--><p class="noindent" >In this example the dynamically created actor <span 
+<!--l. 489--><p class="noindent" >This simple example just shows that the optional actor may directly handle inbound messages by using an external end port
+rather than the relay port of the previous examples.
+<a 
+ id="x17-109001r133"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.3   </span> <a 
+ id="x17-1100003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+<a 
+ id="x17-110001r131"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.6   </span> <a 
+ id="x17-1110006"></a>Dynamic Actors 6</h4>
+<!--l. 500--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors6</span>.
+<a 
+ id="x17-111001r134"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.1   </span> <a 
+ id="x17-1120001"></a>Purpose</h5>
+<!--l. 504--><p class="noindent" >The example demonstrates the use of nested dynamic actors.
+<a 
+ id="x17-112001r136"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.2   </span> <a 
+ id="x17-1130002"></a>Details</h5>
+<!--l. 508--><p class="noindent" >In this example the dynamically created actor <span 
 class="ec-lmtt-10">Optional2 </span>has again an optional reference two levels down in its hierarchy. On
 creation it immediately creates a nested dynamic actor of class <span 
 class="ec-lmtt-10">Optional1 </span>which is sending <span 
@@ -989,10 +989,10 @@ class="ec-lmtt-10">hello() </span>back to the outer
 <span 
 class="ec-lmtt-10">Container</span>.
 <a 
- id="x17-109001r133"></a>
+ id="x17-113001r137"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.6.3   </span> <a 
- id="x17-1100003"></a>Noteworthy</h5>
+ id="x17-1140003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
 class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
@@ -1006,65 +1006,65 @@ class="ec-lmtt-10">Container</span>
                                                                                             
                                                                                             
 <a 
- id="x17-110001r131"></a>
+ id="x17-114001r135"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.7   </span> <a 
- id="x17-1110007"></a>Dynamic Actors 7</h4>
-<!--l. 463--><p class="noindent" >This example is contained in <span 
+ id="x17-1150007"></a>Dynamic Actors 7</h4>
+<!--l. 524--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors7</span>.
 <a 
- id="x17-111001r134"></a>
+ id="x17-115001r138"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.7.1   </span> <a 
- id="x17-1120001"></a>Purpose</h5>
-<!--l. 467--><p class="noindent" >The example demonstrates the use of communication between two optional actors.
+ id="x17-1160001"></a>Purpose</h5>
+<!--l. 528--><p class="noindent" >The example demonstrates the use of communication between two optional actors.
 <a 
- id="x17-112001r136"></a>
+ id="x17-116001r140"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.7.2   </span> <a 
- id="x17-1130002"></a>Details</h5>
-<!--l. 471--><p class="noindent" >In this example two sub trees of dynamic actors are created. The container is sending a message to one of them which is
+ id="x17-1170002"></a>Details</h5>
+<!--l. 532--><p class="noindent" >In this example two sub trees of dynamic actors are created. The container is sending a message to one of them which is
 forwarding it to the other one which in turn is replying back to the container.
 <a 
- id="x17-113001r137"></a>
+ id="x17-117001r141"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.7.3   </span> <a 
- id="x17-1140003"></a>Noteworthy</h5>
+ id="x17-1180003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
 class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
 <a 
- id="x17-114001r135"></a>
+ id="x17-118001r139"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.8   </span> <a 
- id="x17-1150008"></a>Dynamic Actors 8</h4>
-<!--l. 482--><p class="noindent" >This example is contained in <span 
+ id="x17-1190008"></a>Dynamic Actors 8</h4>
+<!--l. 543--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors8</span>.
 <a 
- id="x17-115001r138"></a>
+ id="x17-119001r142"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.8.1   </span> <a 
- id="x17-1160001"></a>Purpose</h5>
-<!--l. 486--><p class="noindent" >The example demonstrates the use of the persistence interface for dynamic actors.
+ id="x17-1200001"></a>Purpose</h5>
+<!--l. 547--><p class="noindent" >The example demonstrates the use of the persistence interface for dynamic actors.
 <a 
- id="x17-116001r140"></a>
+ id="x17-120001r144"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.8.2   </span> <a 
- id="x17-1170002"></a>Details</h5>
-<!--l. 490--><p class="noindent" >Dynamic actors can be persisted and restored. To this end the user has to pass an <span 
+ id="x17-1210002"></a>Details</h5>
+<!--l. 551--><p class="noindent" >Dynamic actors can be persisted and restored. To this end the user has to pass an <span 
 class="ec-lmtt-10">java.io.ObjectOutput </span>to
 the creation method (<span 
 class="ec-lmtt-10">createOptionalActor()</span>) and an <span 
 class="ec-lmtt-10">java.io.ObjectInput </span>to the deletion method
 (<span 
 class="ec-lmtt-10">destroyOptionalActor()</span>).
-</p><!--l. 493--><p class="noindent" >The code generation has to be invoked with the <span 
+</p><!--l. 554--><p class="noindent" >The code generation has to be invoked with the <span 
 class="ec-lmtt-10">-persistable </span>(e.g. by setting the &#8217;generate persistence interface&#8217; flag in the
 Java Generator tab of the launch configuration). This lets the generator implement the <span 
 class="ec-lmtt-10">IPersistable </span>interface for actor
 classes.
-</p><!--l. 496--><p class="noindent" >The example adds a manually coded very simple <span 
+</p><!--l. 557--><p class="noindent" >The example adds a manually coded very simple <span 
 class="ec-lmtt-10">FilePersistor </span>with four static methods for creation and deletion of scalar
 and replicated dynamic actors.
-</p><!--l. 499--><p class="noindent" >The <span 
+</p><!--l. 560--><p class="noindent" >The <span 
 class="ec-lmtt-10">Container </span>class first creates an optional actor of type <span 
 class="ec-lmtt-10">Optional1 </span>in the scalar reference <span 
 class="ec-lmtt-10">opt</span>. Then messages are sent
@@ -1074,44 +1074,44 @@ state it had when it was saved. The second part of the example loads copies of t
 into the <span 
 class="ec-lmtt-10">optarr </span>reference.
 <a 
- id="x17-117001r141"></a>
+ id="x17-121001r145"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.8.3   </span> <a 
- id="x17-1180003"></a>Noteworthy</h5>
+ id="x17-1220003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">the generated MSC <span 
 class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
 <a 
- id="x17-118001r139"></a>
+ id="x17-122001r143"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.2.9   </span> <a 
- id="x17-1190009"></a>Dynamic Actors 9</h4>
-<!--l. 513--><p class="noindent" >This example is contained in <span 
+ id="x17-1230009"></a>Dynamic Actors 9</h4>
+<!--l. 574--><p class="noindent" >This example is contained in <span 
 class="ec-lmtt-10">model/dynamicactors9</span>.
                                                                                             
                                                                                             
 <a 
- id="x17-119001r142"></a>
+ id="x17-123001r146"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.9.1   </span> <a 
- id="x17-1200001"></a>Purpose</h5>
-<!--l. 517--><p class="noindent" >The example demonstrates the use of SAPs in dynamic actors.
+ id="x17-1240001"></a>Purpose</h5>
+<!--l. 578--><p class="noindent" >The example demonstrates the use of SAPs in dynamic actors.
 <a 
- id="x17-120001r144"></a>
+ id="x17-124001r148"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.9.2   </span> <a 
- id="x17-1210002"></a>Details</h5>
-<!--l. 521--><p class="noindent" >This simple example re-uses the PingPong tutorial. The static part of the system introduces a <span 
+ id="x17-1250002"></a>Details</h5>
+<!--l. 582--><p class="noindent" >This simple example re-uses the PingPong tutorial. The static part of the system introduces a <span 
 class="ec-lmtt-10">TimingService </span>as SPP and
 the <span 
 class="ec-lmtt-10">Receiver </span>embedded in the optional part uses a SAP of this protocol.
-</p><!--l. 524--><p class="noindent" >The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
+</p><!--l. 585--><p class="noindent" >The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
 services.
-</p><!--l. 527--><p class="noindent" >On the other hand the factory for the optional actor maps SAPs to those broker ports.
+</p><!--l. 588--><p class="noindent" >On the other hand the factory for the optional actor maps SAPs to those broker ports.
 <a 
- id="x17-121001r145"></a>
+ id="x17-125001r149"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.9.3   </span> <a 
- id="x17-1220003"></a>Noteworthy</h5>
+ id="x17-1260003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize"><span 
 class="ec-lmsso-10">Caution: </span>currently the generator informs about unsatisfied services in dynamic actors. But it is still possible to

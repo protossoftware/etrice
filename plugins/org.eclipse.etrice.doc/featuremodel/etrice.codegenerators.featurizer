@@ -1,5 +1,5 @@
 FeaturizerModel eTriceCodegenerators
-imports "etrice.roomlanguage.featurizer"
+	imports "etrice.roomlanguage.featurizer", "etrice.featurizer"
 
 
 Package CodeGenerators

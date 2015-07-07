@@ -3,14 +3,14 @@
  */
 FeaturizerModel eTrice
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
-	
-	// Generator settings
-	texDocGenerator {  
+	 
+	// Generator settings 
+	texDocGenerator {    
 		filePathName "300-eTrice-reference"    
-	}   
-//	HTMLHelpGenerator {   
-//		filePath "html"    
-//	}
+	}
+	HTMLHelpGenerator {   
+		filePath "html"    
+	} 
 	eclipseContextHelpGenerator {
 		filePathName "contextHelp"
 	}

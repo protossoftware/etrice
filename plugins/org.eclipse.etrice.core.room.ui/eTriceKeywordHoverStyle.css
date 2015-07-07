@@ -1,6 +1,11 @@
-/* text formatting: XtextHoverStyleSheet.css */
+/* for text formatting XtextHoverStyleSheet.css is included*/
 
 p { margin-top: 0em; margin-bottom: 0.25em; }
+pre         { margin-left: 0.3em; }
+
+.fHeader {
+	margin-bottom: 0.5em;
+}
 
 .keyword {
 	font-weight: bold;

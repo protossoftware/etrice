@@ -42,10 +42,11 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
 			XtextBrowserInformationControlInput previous) {
 		if (element instanceof Keyword) {
-			String html = getHoverInfoAsHtml(element);
+			Keyword keyword = (Keyword) element;
+			String html = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(keyword.getValue());
 			if (html != null) {
 				StringBuffer buffer = new StringBuffer(html);
-				HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
+				HTMLPrinter.insertPageProlog(buffer, 0, getKeywordStyleSheet());
 				HTMLPrinter.addPageEpilog(buffer);
 				return new XtextBrowserInformationControlInput(previous, element, buffer.toString(), labelProvider);
 			}
@@ -53,19 +54,8 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 		return super.getHoverInfo(element, hoverRegion, previous);
 	}
 
-	@Override
-	protected String getHoverInfoAsHtml(EObject o) {
-		if (o instanceof Keyword) {
-			String help = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(((Keyword) o).getValue());
-			if (help != null)
-				return help;
-		}
-		return super.getHoverInfoAsHtml(o);
-	}
-
-	@Override
-	protected String loadStyleSheet() {
-		String superStyle = super.loadStyleSheet();
+	protected String getKeywordStyleSheet() {
+		String superStyle = super.getStyleSheet();
 		if (styleSheet == null || ETriceHelp.DEV_MODE) {
 			styleSheet = "";
 			try {

@@ -1,5 +1,5 @@
 FeaturizerModel eTriceModelEditors
-	imports "etrice.roomlanguage.featurizer"
+	imports "etrice.roomlanguage.featurizer", "etrice.featurizer"
 
 Package ModelEditors
 	description '''All aspects of the ROOMLanguage can be edited by full-blown textual editors. In addition, graphical editing is provided for the structural and behavioral part of ActorClasses.'''

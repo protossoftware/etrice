@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-03 15:56:00" /> 
+<meta name="date" content="2015-07-09 13:04:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,15 +21,15 @@ href="etrice-docse18.html#tailetrice-docse18.html" >prev-tail</a>] [<a
 href="#tailetrice-docse19.html">tail</a>] [<a 
 href="etrice-docch6.html#etrice-docse19.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x27-1610002"></a>eTrice Java Projects</h3>
+ id="x27-1650002"></a>eTrice Java Projects</h3>
 <!--l. 3--><p class="noindent" >There are two flavors of eTrice Java projects. The first one uses the Eclipse JDT build and the second one uses Maven to
 build and deploy an eTrice application.
 </p><!--l. 6--><p class="noindent" >The kind of build can be selected in the "Empty eTrice Java project" wizard.
 <a 
- id="x27-161001r214"></a>
+ id="x27-165001r218"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.1   </span> <a 
- id="x27-1620001"></a>Eclipse JDT Build</h4>
+ id="x27-1660001"></a>Eclipse JDT Build</h4>
 <!--l. 10--><p class="noindent" >If this kind of build is chosen the eTrice new project wizard requires the <span 
 class="ec-lmtt-10">org.eclipse.etrice.runtime.java </span>project in the
 workspace and adds a dependency to it.
@@ -49,10 +49,10 @@ build path as well.
      <li class="itemize">a launch configuration that launches the main method of the generated code</li></ul>
 <!--l. 25--><p class="noindent" >If "build automatically" is chosen the newly created model can be generated and launched with just two clicks.
 <a 
- id="x27-162001r216"></a>
+ id="x27-166001r220"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">6.2.2   </span> <a 
- id="x27-1630002"></a>Maven Build</h4>
+ id="x27-1670002"></a>Maven Build</h4>
 <!--l. 29--><p class="noindent" >The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed by the Maven
 pom.xml but the m2e builder maps them as JDT visible dependencies to the project class path.
 </p><!--l. 32--><p class="noindent" >The eTrice new project wizard creates the following files for the Maven build </p>
@@ -76,10 +76,10 @@ pom.xml but the m2e builder maps them as JDT visible dependencies to the project
 <!--l. 44--><p class="noindent" >After the new project is created the m2e builder creates the dependencies in the project class path. Therefore also JDT can
 compile and launch the application.
 <a 
- id="Q1-27-218"></a>
+ id="Q1-27-222"></a>
 </p>
 <h5 class="likesubsubsectionHead"><a 
- id="x27-1640002"></a>Example</h5>
+ id="x27-1680002"></a>Example</h5>
 <!--l. 49--><p class="noindent" >As an example we want to use the <a 
 href="etrice-docse8.html#x12-470006">Ping Pong Tutorial (Java and C)<!--tex4ht:ref: sec:ping_pong_tutorial --></a>.
 </p><!--l. 51--><p class="noindent" >For this example we start with an empty workspace. We create a new eTrice project using the "Empty eTrice Java Project"
@@ -93,7 +93,7 @@ scheme:
 </p>
 <!--l. 60-->
 <div class="lstlisting" id="listing-61"><span class="label"><a 
- id="x27-164001r1"></a></span><span 
+ id="x27-168001r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">room</span><span 
@@ -124,12 +124,12 @@ dependencies:
 </p>
 <!--l. 70-->
 <div class="lstlisting" id="listing-62"><span class="label"><a 
- id="x27-164002r1"></a></span><span 
+ id="x27-168002r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164003r2"></a></span><span 
+ id="x27-168003r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">groupId</span><span 
@@ -144,7 +144,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164004r3"></a></span><span 
+ id="x27-168004r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">artifactId</span><span 
@@ -163,7 +163,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164005r4"></a></span><span 
+ id="x27-168005r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmssbx-10x-x-90">version</span><span 
@@ -175,7 +175,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164006r5"></a></span><span 
+ id="x27-168006r5"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">dependency</span><span 
@@ -186,18 +186,18 @@ generator plug-in:
 </p>
 <!--l. 81-->
 <div class="lstlisting" id="listing-63"><span class="label"><a 
- id="x27-164007r1"></a></span><span 
+ id="x27-168007r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">build</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164008r2"></a></span><span 
+ id="x27-168008r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">plugins</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164009r3"></a></span><span 
+ id="x27-168009r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -205,7 +205,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164010r4"></a></span><span 
+ id="x27-168010r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -223,7 +223,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164011r5"></a></span><span 
+ id="x27-168011r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -247,7 +247,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164012r6"></a></span><span 
+ id="x27-168012r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -262,7 +262,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164013r7"></a></span><span 
+ id="x27-168013r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -276,7 +276,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164014r8"></a></span><span 
+ id="x27-168014r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -285,7 +285,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164015r9"></a></span><span 
+ id="x27-168015r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -329,7 +329,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164016r10"></a></span><span 
+ id="x27-168016r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -340,7 +340,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164017r11"></a></span><span 
+ id="x27-168017r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -361,7 +361,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164018r12"></a></span><span 
+ id="x27-168018r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -386,7 +386,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164019r13"></a></span><span 
+ id="x27-168019r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -404,7 +404,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164020r14"></a></span><span 
+ id="x27-168020r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -416,7 +416,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">dependency</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164021r15"></a></span><span 
+ id="x27-168021r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -426,7 +426,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164022r16"></a></span><span 
+ id="x27-168022r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -435,14 +435,14 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164023r17"></a></span><span 
+ id="x27-168023r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">plugins</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164024r18"></a></span><span 
+ id="x27-168024r18"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">build</span><span 
@@ -455,7 +455,7 @@ output:
 </p>
 <!--l. 106-->
 <div class="lstlisting" id="listing-64"><span class="label"><a 
- id="x27-164025r1"></a></span><span 
+ id="x27-168025r1"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -469,7 +469,7 @@ class="ec-lmtt-9">reading</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">models</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164026r2"></a></span><span 
+ id="x27-168026r2"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -487,7 +487,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etmap</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164027r3"></a></span><span 
+ id="x27-168027r3"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -515,7 +515,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etmap</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164028r4"></a></span><span 
+ id="x27-168028r4"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -547,7 +547,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164029r5"></a></span><span 
+ id="x27-168029r5"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -579,7 +579,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etphys</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164030r6"></a></span><span 
+ id="x27-168030r6"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -607,7 +607,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164031r7"></a></span><span 
+ id="x27-168031r7"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -627,7 +627,7 @@ class="ec-lmtt-9">TimingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164032r8"></a></span><span 
+ id="x27-168032r8"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -687,7 +687,7 @@ class="ec-lmtt-9">TimingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164033r9"></a></span><span 
+ id="x27-168033r9"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -715,7 +715,7 @@ class="ec-lmtt-9">MavenPingPong</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etphys</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164034r10"></a></span><span 
+ id="x27-168034r10"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -729,7 +729,7 @@ class="ec-lmtt-9">validating</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">models</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164035r11"></a></span><span 
+ id="x27-168035r11"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -753,7 +753,7 @@ class="ec-lmtt-9">0</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">warnings</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164036r12"></a></span><span 
+ id="x27-168036r12"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -769,7 +769,7 @@ class="ec-lmtt-9">generator</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">model</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164037r13"></a></span><span 
+ id="x27-168037r13"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -790,7 +790,7 @@ class="ec-lmtt-9">from</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">LogSys1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164038r14"></a></span><span 
+ id="x27-168038r14"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -811,7 +811,7 @@ class="ec-lmtt-9">from</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">subSysRef1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164039r15"></a></span><span 
+ id="x27-168039r15"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -827,7 +827,7 @@ class="ec-lmtt-9">code</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">generation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164040r16"></a></span><span 
+ id="x27-168040r16"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -852,7 +852,7 @@ class="ec-lmtt-9">-</span><span
 class="ec-lmtt-9">gen</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164041r17"></a></span><span 
+ id="x27-168041r17"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -868,7 +868,7 @@ class="ec-lmtt-9">-</span><span
 class="ec-lmtt-9">gen</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164042r18"></a></span><span 
+ id="x27-168042r18"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -908,7 +908,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164043r19"></a></span><span 
+ id="x27-168043r19"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -948,7 +948,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164044r20"></a></span><span 
+ id="x27-168044r20"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -988,7 +988,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164045r21"></a></span><span 
+ id="x27-168045r21"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1028,7 +1028,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164046r22"></a></span><span 
+ id="x27-168046r22"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1068,7 +1068,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164047r23"></a></span><span 
+ id="x27-168047r23"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1108,7 +1108,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">/&#8217;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164048r24"></a></span><span 
+ id="x27-168048r24"></a></span><span 
 class="ec-lmtt-9">[</span><span 
 class="ec-lmtt-9">INFO</span><span 
 class="ec-lmtt-9">]</span><span 
@@ -1136,12 +1136,12 @@ most commonly used ones in xml comments together with a comment:
 </p>
 <!--l. 140-->
 <div class="lstlisting" id="listing-65"><span class="label"><a 
- id="x27-164049r1"></a></span><span 
+ id="x27-168049r1"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">plugin</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164050r2"></a></span><span 
+ id="x27-168050r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">groupId</span><span 
@@ -1156,7 +1156,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">groupId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164051r3"></a></span><span 
+ id="x27-168051r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">artifactId</span><span 
@@ -1177,7 +1177,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">artifactId</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164052r4"></a></span><span 
+ id="x27-168052r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmssbx-10x-x-90">version</span><span 
@@ -1189,13 +1189,13 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmssbx-10x-x-90">version</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164053r5"></a></span><span 
+ id="x27-168053r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">executions</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164054r6"></a></span><span 
+ id="x27-168054r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1203,7 +1203,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">execution</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164055r7"></a></span><span 
+ id="x27-168055r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1212,7 +1212,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">goals</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164056r8"></a></span><span 
+ id="x27-168056r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1228,7 +1228,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">goal</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164057r9"></a></span><span 
+ id="x27-168057r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1238,7 +1238,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">goals</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164058r10"></a></span><span 
+ id="x27-168058r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1247,7 +1247,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">configuration</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164059r11"></a></span><span 
+ id="x27-168059r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1258,7 +1258,7 @@ class="ec-lmtt-9">&#x003C;</span><span
 class="ec-lmtt-9">arguments</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164060r12"></a></span><span 
+ id="x27-168060r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1289,7 +1289,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164061r13"></a></span><span 
+ id="x27-168061r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1319,7 +1319,7 @@ class="ec-lmtt-9">data</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">objects</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164062r14"></a></span><span 
+ id="x27-168062r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1337,7 +1337,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164063r15"></a></span><span 
+ id="x27-168063r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1348,7 +1348,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164064r16"></a></span><span 
+ id="x27-168064r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1366,7 +1366,7 @@ class="ec-lmtt-9">MSC</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">instrumentation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164065r17"></a></span><span 
+ id="x27-168065r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1384,7 +1384,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164066r18"></a></span><span 
+ id="x27-168066r18"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1395,7 +1395,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164067r19"></a></span><span 
+ id="x27-168067r19"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1421,7 +1421,7 @@ class="ec-lmtt-9">dynamic</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">actors</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164068r20"></a></span><span 
+ id="x27-168068r20"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1439,7 +1439,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164069r21"></a></span><span 
+ id="x27-168069r21"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1450,7 +1450,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164070r22"></a></span><span 
+ id="x27-168070r22"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1474,7 +1474,7 @@ class="ec-lmtt-9">as</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">library</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164071r23"></a></span><span 
+ id="x27-168071r23"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1492,7 +1492,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164072r24"></a></span><span 
+ id="x27-168072r24"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1503,7 +1503,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164073r25"></a></span><span 
+ id="x27-168073r25"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1519,7 +1519,7 @@ class="ec-lmtt-9">generate</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">documentation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164074r26"></a></span><span 
+ id="x27-168074r26"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1537,7 +1537,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164075r27"></a></span><span 
+ id="x27-168075r27"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1548,7 +1548,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164076r28"></a></span><span 
+ id="x27-168076r28"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1578,7 +1578,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">changed</span><span 
 class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164077r29"></a></span><span 
+ id="x27-168077r29"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1596,7 +1596,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164078r30"></a></span><span 
+ id="x27-168078r30"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1607,7 +1607,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164079r31"></a></span><span 
+ id="x27-168079r31"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1628,7 +1628,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">param</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164080r32"></a></span><span 
+ id="x27-168080r32"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1640,7 +1640,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">arguments</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164081r33"></a></span><span 
+ id="x27-168081r33"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1650,7 +1650,7 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">configuration</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164082r34"></a></span><span 
+ id="x27-168082r34"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1659,20 +1659,20 @@ class="ec-lmtt-9">/</span><span
 class="ec-lmtt-9">execution</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164083r35"></a></span><span 
+ id="x27-168083r35"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">executions</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164084r36"></a></span><span 
+ id="x27-168084r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164085r37"></a></span><span 
+ id="x27-168085r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1685,14 +1685,14 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">--</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164086r38"></a></span><span 
+ id="x27-168086r38"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">dependencies</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164087r39"></a></span><span 
+ id="x27-168087r39"></a></span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
 class="ec-lmtt-9">/</span><span 
 class="ec-lmtt-9">plugin</span><span 
@@ -1704,21 +1704,21 @@ class="ec-lmtt-10">-msc_instr </span>switch to generate MSCs.
 </p>
 <!--l. 186--><div class="lstinputlisting">
 <a 
- id="x27-164088r1"></a>
+ id="x27-168088r1"></a>
 <a 
- id="x27-164089"></a>
+ id="x27-168089"></a>
 <span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164090r1"></a></span><span 
+ id="x27-168090r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">RoomModel</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">MavenPingPong</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164091r2"></a></span><span 
+ id="x27-168091r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164092r3"></a></span><span 
+ id="x27-168092r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1741,9 +1741,9 @@ class="ec-lmtt-9">.</span><span
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164093r4"></a></span><span 
+ id="x27-168093r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164094r5"></a></span><span 
+ id="x27-168094r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1751,7 +1751,7 @@ class="ec-lmtt-9">LogSys1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164095r6"></a></span><span 
+ id="x27-168095r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1762,13 +1762,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">SubSysClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164096r7"></a></span><span 
+ id="x27-168096r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164097r8"></a></span><span 
+ id="x27-168097r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164098r9"></a></span><span 
+ id="x27-168098r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1776,7 +1776,7 @@ class="ec-lmtt-9">SubSysClass1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164099r10"></a></span><span 
+ id="x27-168099r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1787,7 +1787,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongTop</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164100r11"></a></span><span 
+ id="x27-168100r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1798,7 +1798,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ATimingService</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164101r12"></a></span><span 
+ id="x27-168101r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1814,9 +1814,9 @@ class="ec-lmtt-9">timingService</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">timer</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164102r13"></a></span><span 
+ id="x27-168102r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164103r14"></a></span><span 
+ id="x27-168103r14"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1824,13 +1824,13 @@ class="ec-lmssbx-10x-x-90">LogicalThread</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">defaultThread</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164104r15"></a></span><span 
+ id="x27-168104r15"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164105r16"></a></span><span 
+ id="x27-168105r16"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164106r17"></a></span><span 
+ id="x27-168106r17"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1838,7 +1838,7 @@ class="ec-lmtt-9">PingPongTop</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164107r18"></a></span><span 
+ id="x27-168107r18"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1846,7 +1846,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164108r19"></a></span><span 
+ id="x27-168108r19"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1858,7 +1858,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">Sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164109r20"></a></span><span 
+ id="x27-168109r20"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1870,7 +1870,7 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">Receiver</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164110r21"></a></span><span 
+ id="x27-168110r21"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1887,13 +1887,13 @@ class="ec-lmtt-9">receiver</span><span
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164111r22"></a></span><span 
+ id="x27-168111r22"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164112r23"></a></span><span 
+ id="x27-168112r23"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1903,13 +1903,13 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164113r24"></a></span><span 
+ id="x27-168113r24"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164114r25"></a></span><span 
+ id="x27-168114r25"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164115r26"></a></span><span 
+ id="x27-168115r26"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1917,7 +1917,7 @@ class="ec-lmtt-9">Sender</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164116r27"></a></span><span 
+ id="x27-168116r27"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1925,7 +1925,7 @@ class="ec-lmssbx-10x-x-90">Interface</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164117r28"></a></span><span 
+ id="x27-168117r28"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1939,13 +1939,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongProtocol</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164118r29"></a></span><span 
+ id="x27-168118r29"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164119r30"></a></span><span 
+ id="x27-168119r30"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1953,7 +1953,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164120r31"></a></span><span 
+ id="x27-168120r31"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1964,13 +1964,13 @@ class="ec-lmssbx-10x-x-90">Port</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">receiver</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164121r32"></a></span><span 
+ id="x27-168121r32"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164122r33"></a></span><span 
+ id="x27-168122r33"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1978,7 +1978,7 @@ class="ec-lmssbx-10x-x-90">Behavior</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164123r34"></a></span><span 
+ id="x27-168123r34"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1987,7 +1987,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164124r35"></a></span><span 
+ id="x27-168124r35"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2009,7 +2009,7 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164125r36"></a></span><span 
+ id="x27-168125r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2029,7 +2029,7 @@ class="ec-lmtt-9">ReceivedPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164126r37"></a></span><span 
+ id="x27-168126r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2041,7 +2041,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164127r38"></a></span><span 
+ id="x27-168127r38"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2058,7 +2058,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">receiver</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164128r39"></a></span><span 
+ id="x27-168128r39"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2068,7 +2068,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164129r40"></a></span><span 
+ id="x27-168129r40"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2077,7 +2077,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164130r41"></a></span><span 
+ id="x27-168130r41"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2090,7 +2090,7 @@ class="ec-lmtt-9">SendingPing</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164131r42"></a></span><span 
+ id="x27-168131r42"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2102,7 +2102,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164132r43"></a></span><span 
+ id="x27-168132r43"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2120,7 +2120,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164133r44"></a></span><span 
+ id="x27-168133r44"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2130,7 +2130,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164134r45"></a></span><span 
+ id="x27-168134r45"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2139,7 +2139,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164135r46"></a></span><span 
+ id="x27-168135r46"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2150,26 +2150,26 @@ class="ec-lmssbx-10x-x-90">State</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ReceivedPong</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164136r47"></a></span><span 
+ id="x27-168136r47"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164137r48"></a></span><span 
+ id="x27-168137r48"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164138r49"></a></span><span 
+ id="x27-168138r49"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164139r50"></a></span><span 
+ id="x27-168139r50"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164140r51"></a></span><span 
+ id="x27-168140r51"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2177,7 +2177,7 @@ class="ec-lmtt-9">Receiver</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164141r52"></a></span><span 
+ id="x27-168141r52"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2185,7 +2185,7 @@ class="ec-lmssbx-10x-x-90">Interface</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164142r53"></a></span><span 
+ id="x27-168142r53"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2197,13 +2197,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PingPongProtocol</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164143r54"></a></span><span 
+ id="x27-168143r54"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164144r55"></a></span><span 
+ id="x27-168144r55"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2211,7 +2211,7 @@ class="ec-lmssbx-10x-x-90">Structure</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164145r56"></a></span><span 
+ id="x27-168145r56"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2222,7 +2222,7 @@ class="ec-lmssbx-10x-x-90">Port</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164146r57"></a></span><span 
+ id="x27-168146r57"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2235,13 +2235,13 @@ class="ec-lmtt-9">:</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PTimer</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164147r58"></a></span><span 
+ id="x27-168147r58"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164148r59"></a></span><span 
+ id="x27-168148r59"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2249,7 +2249,7 @@ class="ec-lmssbx-10x-x-90">Behavior</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164149r60"></a></span><span 
+ id="x27-168149r60"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2258,7 +2258,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164150r61"></a></span><span 
+ id="x27-168150r61"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2280,7 +2280,7 @@ class="ec-lmtt-9">{</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164151r62"></a></span><span 
+ id="x27-168151r62"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2300,7 +2300,7 @@ class="ec-lmtt-9">WaitingForAWhile</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164152r63"></a></span><span 
+ id="x27-168152r63"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2312,7 +2312,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164153r64"></a></span><span 
+ id="x27-168153r64"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2329,7 +2329,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">sender</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164154r65"></a></span><span 
+ id="x27-168154r65"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2339,7 +2339,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164155r66"></a></span><span 
+ id="x27-168155r66"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2348,7 +2348,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164156r67"></a></span><span 
+ id="x27-168156r67"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2368,7 +2368,7 @@ class="ec-lmtt-9">SentPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164157r68"></a></span><span 
+ id="x27-168157r68"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2380,7 +2380,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164158r69"></a></span><span 
+ id="x27-168158r69"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2397,7 +2397,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">timing</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164159r70"></a></span><span 
+ id="x27-168159r70"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2407,7 +2407,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164160r71"></a></span><span 
+ id="x27-168160r71"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2416,7 +2416,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164161r72"></a></span><span 
+ id="x27-168161r72"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2427,7 +2427,7 @@ class="ec-lmssbx-10x-x-90">State</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">WaitingForPing</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164162r73"></a></span><span 
+ id="x27-168162r73"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2440,7 +2440,7 @@ class="ec-lmtt-9">SentPong</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164163r74"></a></span><span 
+ id="x27-168163r74"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2452,7 +2452,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164164r75"></a></span><span 
+ id="x27-168164r75"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2470,7 +2470,7 @@ class="ec-lmtt-9">()</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164165r76"></a></span><span 
+ id="x27-168165r76"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2480,7 +2480,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164166r77"></a></span><span 
+ id="x27-168166r77"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2489,7 +2489,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164167r78"></a></span><span 
+ id="x27-168167r78"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2502,7 +2502,7 @@ class="ec-lmtt-9">WaitingForAWhile</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164168r79"></a></span><span 
+ id="x27-168168r79"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2514,7 +2514,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164169r80"></a></span><span 
+ id="x27-168169r80"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2532,7 +2532,7 @@ class="ec-lmtt-9">(1000)</span><span
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164170r81"></a></span><span 
+ id="x27-168170r81"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2542,7 +2542,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164171r82"></a></span><span 
+ id="x27-168171r82"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2551,26 +2551,26 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164172r83"></a></span><span 
+ id="x27-168172r83"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164173r84"></a></span><span 
+ id="x27-168173r84"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164174r85"></a></span><span 
+ id="x27-168174r85"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164175r86"></a></span><span 
+ id="x27-168175r86"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164176r87"></a></span><span 
+ id="x27-168176r87"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2578,7 +2578,7 @@ class="ec-lmtt-9">PingPongProtocol</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164177r88"></a></span><span 
+ id="x27-168177r88"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2586,7 +2586,7 @@ class="ec-lmssbx-10x-x-90">incoming</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164178r89"></a></span><span 
+ id="x27-168178r89"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2596,13 +2596,13 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">ping</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164179r90"></a></span><span 
+ id="x27-168179r90"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164180r91"></a></span><span 
+ id="x27-168180r91"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2610,7 +2610,7 @@ class="ec-lmssbx-10x-x-90">outgoing</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164181r92"></a></span><span 
+ id="x27-168181r92"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2620,19 +2620,19 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">pong</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164182r93"></a></span><span 
+ id="x27-168182r93"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164183r94"></a></span><span 
+ id="x27-168183r94"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164184r95"></a></span><span 
+ id="x27-168184r95"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-164185r96"></a></span><span 
+ id="x27-168185r96"></a></span><span 
 class="ec-lmtt-9">}</span>
 <br />
     <div class="caption" 
@@ -2640,7 +2640,7 @@ class="ec-lmtt-9">}</span>
     </span><span  
 class="content">ROOM
     example
-    code</span></div><!--tex4ht:label?: x27-1640006 -->
+    code</span></div><!--tex4ht:label?: x27-1680006 -->
 </div>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse20.html" >next</a>] [<a 

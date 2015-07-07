@@ -12,9 +12,7 @@
 .ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-10{ font-family: sans-serif;}
-.ec-lmss-10{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{font-size:243%; font-family: sans-serif;}
-.ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
 .ec-lmss-17x-x-143{ font-family: sans-serif;}
@@ -38,7 +36,6 @@
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12x-x-120{ font-family: sans-serif;}
-.ec-lmss-12x-x-120{ font-family: sans-serif;}
 .ec-lmss-12{font-size:120%; font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
@@ -51,8 +48,6 @@
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
 .ec-lmss-12{ font-family: sans-serif;}
-.ec-lmss-12{ font-family: sans-serif;}
-.ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
 .ec-lmtt-10{ font-family: monospace;}
@@ -77,8 +72,6 @@
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
 .ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-10{ font-family: sans-serif; font-style: oblique;}
-.ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10{ font-family: sans-serif; font-weight: bold;}
@@ -103,9 +96,7 @@
 .ec-lmss-9{ font-family: sans-serif;}
 .ec-lmss-9{ font-family: sans-serif;}
 .ec-lmss-9{ font-family: sans-serif;}
-.ec-lmss-9{ font-family: sans-serif;}
 .ec-lmtt-9{font-size:90%; font-family: monospace;}
-.ec-lmtt-9{ font-family: monospace;}
 .ec-lmtt-9{ font-family: monospace;}
 .ec-lmtt-9{ font-family: monospace;}
 .ec-lmtt-9{ font-family: monospace;}
@@ -129,8 +120,6 @@
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
 .ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
-.ec-lmssbx-10x-x-90{ font-family: sans-serif; font-weight: bold;}
-.ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
 .ec-lmtk-10{ font-family: monospace;}
@@ -155,20 +144,6 @@
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
 .ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
-.ec-lmssbo-10{ font-family: sans-serif; font-style: oblique; font-weight: bold;}
-.ec-lmsso-12{font-size:120%; font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
-.ec-lmsso-12{ font-family: sans-serif; font-style: oblique;}
 @media print {span.next {visibility:hidden;}}
 p.noindent { text-indent: 0em }
 td p.noindent { text-indent: 0em; margin-top:0em; }

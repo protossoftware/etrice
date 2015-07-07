@@ -1,5 +1,4 @@
 FeaturizerModel eTriceROOMLanguage
-
 	imports "etrice.featurizer"
 
 
@@ -33,6 +32,15 @@ text '''
 	eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.
 
 	See section Annotations for further reading.
+'''
+help '''
+	```room
+	AnnotationType AnnotationName ["documentation"] {
+		target = ActorClass
+		mandatory attribute name: ptCharacter
+		optional attribute name: ptInteger
+	}
+	```
 '''
 stable
 ;
@@ -121,8 +129,8 @@ Feature PhysicalModel
 		The model describes the physical view of your system:
 		\begin{lstlisting}[language=etPhys]
 		PhysicalSystem PhysSys1 {
-			NodeRef server : ServerNode
-			NodeRef embeddedClient : MCNode
+			NodeRef nodeRef1 : NodeClass1
+			NodeRef nodeRef2 : NodeClass2
 		}
 		\end{lstlisting}
 
@@ -176,6 +184,9 @@ Feature PhysicalModel
 			msgpoolsize = 10
 		}
 		\end{lstlisting}
+		\begin{center}
+		\includegraphics{images/300-PhysicalModelOverview.png}
+		\end{center}
 	'''
 	stable
 ;
@@ -185,9 +196,10 @@ Feature MappingModel
 	text '''
 		It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.
 		
-		The model starts with an import part, where you can import .room and .etphys models. They should contain at least one LogicalSystem and one PhysicalSystem.
-		The following mapping entry puts both in relation, meaning that all subsystems and actors contained in the hierarchical structure of the LogicalSystem should be executed within the given PhysicalSystem.
-		With an SubSystemMapping you can distribute your subsystems to nodes. Afterwards you can map the logical threads within this subsystems to physical threads.
+		The model starts with an import part, where you can import .room and .etphys models. They must contain at least one LogicalSystem and one PhysicalSystem.
+		A Mapping entry puts both in relation, meaning that all sub systems of the LogicalSystem will be distributed to the nodes of the PhysicalSystem.
+		This is carried out by a SubSystemMapping, that maps a SubSystemRef (logical node) to a NodeRef (physical node).
+		In the next step, ThreadMappings provide the same action for the logical and physical threads.
 		\begin{lstlisting}[language=etMap]
 		MappingModel PingPongMapping {
 			import PingPong_Model.* from "PingPong.room"
@@ -202,7 +214,8 @@ Feature MappingModel
 		}
 		\end{lstlisting}
 	'''
-	uses LogicalModel
+	uses LogicalSystem
+	uses SubSystemRef
 	uses PhysicalModel
 	stable
 ;
@@ -260,9 +273,16 @@ Feature LogicalModel
 	;
 
 Feature LogicalSystem
-	description '''The LogicalSystem is the top-level structural class. It assembles the overall distributed system by means of sub systems.'''
+	description '''The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems.'''
 	text '''
 		It describes the logical topology of your system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.
+	'''
+	help '''
+	```room
+	LogicalSystem systemName ["Documentation"] {
+		SubSystemRef ...
+	}
+	```
 	'''
 	contains SubSystemRef
 	contains Binding
@@ -313,12 +333,12 @@ Feature ActorClass
 	help '''
 		```room
 		// prefixes: abstract and (eventdriven, datadriven, async, sync)
-		ActorClass ActorName ["generated doc"] {
+		ActorClass ActorName ["An eventdriven ActorClass by default"] {
 			Interface {
 				Port port1 ...
 				SPP spp1 ...
 			}
-			Structure ["generated doc"] {
+			Structure ["Documentation"] {
 				usercode1 { "" }
 				usercode2 { "" }
 				usercode3 { "" } 
@@ -331,7 +351,7 @@ Feature ActorClass
 				Binding ...
 				LayerConnection ...
 			}
-			Behavior ["generated doc"] {
+			Behavior ["Documentation"] {
 				Operation ActorName() { /* constructor */ }
 				Operation ~ActorName() { /* destructor */ }
 				Operation ...
@@ -356,15 +376,24 @@ Feature ActorClass
 ;
 
 Feature SubSystemClass
-	description '''The SubSystem is main Actor of an executable part of the system. '''
-	
+	description '''A SubSystem is the topmost building block of the executable part of an system.'''
 	text '''
-		
+		It represents a class for an logical node in a distributed system. An instantiation translates to an executable application, that runs on a node or process.
+		A SubSystemClass is the structural starting point of an ROOM application. Thus it declares the topmost actor instances (ActorRefs).
 	'''
+	help '''
+	```room
+	SubSystemClass SubSystemName ["Documentation"]{
+		ActorRef ...
+		Binding ...
+		LayerConnection ...
 
+		LogicalThread threadName
+		ActorInstanceMapping ...
+	}
+	```
+	'''
 	contains ActorRef
-	contains RelayPort
-	contains SPP
 	contains Binding
 	contains LayerConnection
 	contains Annotation
@@ -374,19 +403,45 @@ Feature SubSystemClass
 
 
 Feature StateMachine
-	shortName '''State Machine'''
-	description '''A StateMachine describes the state based, event driven behavior of an ActorClass'''
+	description '''A StateMachine describes the state based, event driven behavior of an ActorClass.'''
 	text '''
 		In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
+		\begin{center}
 		\includegraphics[scale=.7]{images/300-PingPongReceiverFSM.png}
+		\end{center}
+	'''
+	help '''
+	Open the **graphical diagram editor**:
+	
+	* Press `ALT+B` (having focus on an *ActorClass*)
+	* Outline view -> Right click on an *ActorClass* -> Edit Behavior
+
+	```room
+	StateMachine ["Documentation"] {
+		...
+	}
+	```
 	'''
 	uses Inheritance
 	stable
 	;
 
 Feature SubSystemRef
-	shortName '''Sub System Reference'''
  	description '''A Sub System Reference is an instance of an SubSystemClass'''
+ 	text '''
+		It represent a logical node in the structural view of a distributed system. An instantiation translates to an executable application, that runs on a node or process.
+			
+		To be executable, a SubSystemRef has first to be mapped to a physical node, which defines the executional properties.
+		A physical node is denoted by a NodeClass and NodeRef in the PhysicalModel. The mapping is defined in the MappingModel.
+		\begin{center}
+		\includegraphics{images/300-SubSystemRefOverview.png}
+		\end{center}
+	'''
+ 	help '''
+	```room
+	SubSystemRef subSystemName: SubSystemClass1 ["Documentation"]
+	```
+	'''
  	isOfType SubSystemClass
  	stable
 ;
@@ -396,7 +451,7 @@ abstract Feature Replication
 	text '''
 		ActorRefs and Ports can be instantiated several times under the same name. The notation is similar to arrays in programming languages.
 	
-		This possibility provides an elegant way of scaling of your system without redundancy. Note the ActorRef can be arbitray complex
+		This possibility provides an elegant way of scaling of your system without redundancy.
 		\begin{lstlisting}[language=ROOM]
 			ActorRef sensor : Sensor 			// one instance
 			ActorRef sensor[1] : Sensor			// one instance
@@ -413,7 +468,6 @@ stable
 ;
 
 Feature ActorRef
-	shortName '''Actor Reference'''
 	description '''An ActorRef is an instance of an ActorClass.'''
 	text '''
 	\begin{itemize}
@@ -458,6 +512,13 @@ Feature ActorRef
 		\caption*{Instance hierarchy of ActorRef Example (\textsf{System(System)} not shown in code snippet)}
 		\end{figure}
 	'''
+	help '''
+	```room
+	ActorRef actorName: ActorClass1 ["Documentation"]
+	ActorRef actorName[4]: ActorClass1 ["A replicated actor of size 4"]
+	optional ActorRef actorName[*]: ActorClass1 ["A dynamic actor"]
+	```
+	'''
 	isOfType ActorClass
 	uses Replication
 	property multiplicity values {"1..n", "*"}
@@ -481,6 +542,12 @@ Feature Binding
 		 }
 		 \end{lstlisting}
 	'''
+	help '''
+	```room
+	Binding port1 and actorRef.port2
+	Binding actorRef1.port1 and actorRef2.port2
+	```
+	'''
 	uses Port endpoint1
 	uses Port endpoint2
 	stable
@@ -494,6 +561,12 @@ Feature LayerConnection
 		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
 		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
 		\end{itemize}
+	'''
+	help '''
+	```room
+	LayerConnection ref actorRef1 satisfied_by actorRef2.spp2
+	LayerConnection relay_sap spp1 satisfied_by actorRef2.spp2
+	```
 	'''
 	uses SAP SAPoint
 	uses SPP SPPoint
@@ -656,6 +729,35 @@ Feature ProtocolClass
 	}
 	\end{lstlisting}
 	'''
+	help '''
+	```room
+	// prefixes: (eventdriven, datadriven, sync)
+	ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
+		usercode1 { "" }
+		usercode2 { "" }
+		usercode3 { "" } 
+		incoming {
+			Message messageName()
+			Message messageName(data: int32)
+		}
+		outgoing {
+			Message ...
+		}
+		regular PortClass {
+			usercode1 { "" }
+			Attribute ...
+			Operation ...
+		}
+		conjugated PortClass {
+			...
+		}
+	}
+	
+	ProtocolClass ProtocolName extends ProtocolSuperClassName {
+		// inherits all elements from super class
+	}
+	```
+	'''
 	contains CommunicationType
 	contains Attribute
 	contains Operation
@@ -679,19 +781,31 @@ Feature PrimitiveType
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 		\end{lstlisting}
 	'''
+	help '''
+	```room
+	// java
+	PrimitiveType boolean: ptBoolean -> boolean (Boolean) default "false"
+	PrimitiveType int16: ptInteger -> short (Short) default "0"
+	
+	// c
+	PrimitiveType boolean: ptBoolean -> boolean default "false"
+	PrimitiveType int16: ptInteger -> int16 default "0"
+
+	PrimitiveType name: literalType -> targetName (castName) default "value" ["Documentation"]
+	```
+	'''
 	isA DataType
 	property targetName values {"<identifer name>"}
 	stable
 	;
 	
-Feature EnumerationType
+Feature Enumeration
 	description '''An EnumerationType declares an enumeration similar to most well-known languages.'''
 	example '''
 	\begin{lstlisting}[language=ROOM]
 	Enumeration EOnOff {
 		Off = 0, // explicit value=0
 		On = 1 // explicit value=1 
-
 	}
 
 	Enumeration EDay {
@@ -704,6 +818,23 @@ Feature EnumerationType
 		SAT // implicit enumeration 0..6
 	}
 	\end{lstlisting}
+	'''
+	help '''
+	```room
+	Enumeration EOnOff {
+		Off,
+		On
+	}
+	Enumeration EOnOff of int8 {
+		Off = 0,
+		On = 1
+	}
+
+	Enumeration EnumName ["Documentation"] of PrimitiveType1 {
+		// name1 = int
+		// ...
+	}
+	```
 	'''
 	isA DataType
 	property literals values {"<name>"}
@@ -739,6 +870,19 @@ Feature DataClass
 		}
 		\end{lstlisting}
 	'''
+	help '''
+	```room
+	DataClass DataClassName ["Documentation"] {
+		Attribute ... // nested DataClasses possible
+		Operation ...
+	}
+
+	DataClass DataClassName extends DataSuperClassName [""] {
+		// inherits all elements from super class
+		...
+	}
+	```
+	'''
 	isA DataType
 	contains Attribute
 	contains Operation
@@ -769,6 +913,13 @@ Feature ExternalType
 		}
 		\end{lstlisting}
 	'''
+	help '''
+	```room
+	ExternalType voidType -> "void" default "NULL"
+
+	ExternalType typeName -> "targetName" default "value" ["Documentation"]
+	```
+	'''
 	isA DataType
 	property targetName values {"<identifier name>"}
 	stable;
@@ -782,7 +933,7 @@ Feature Attribute
 			\item model current system state (state machine variable)
 			\item store reference to more fine-grained components (e.g. c pointer to handle)
 		\end{itemize}
-		Attributes can be defined in ActorClasses, DataClasses and ProtocolClasses.
+		Attributes can be defined in several ROOM classes.
 	'''
 	example '''
 		\begin{lstlisting}[language=ROOM]
@@ -819,14 +970,15 @@ Feature Attribute
 	'''
 	help '''
 		```room
-		Attribute boolAttribute: boolean
-		Attribute arrayAttribute[8] : int32 = "0"
-		Attribute refAttribue : voidType ref = "NULL"
+		Attribute attributeName: boolean				["An boolean attribute"]
+		Attribute attributeName[8]: int32 = "0"			["An array attribute"]
+		Attribute attributeName: voidType ref = "NULL"	["An external type attribute as reference"]
 		```
 	'''
 	isOfType DataType
 	property defaultValueLiteral values { "<target code>"}
 	property multiplicity values {"1..n"}
+	property ref
 	stable
 	
 	
@@ -881,6 +1033,19 @@ Feature Operation
 		}
 		\end{lstlisting}
 	'''
+	help '''
+		```room
+		Operation operationName() ["A void operation"] {
+			"target code here;"
+			"escaping required and don't forget the \";\" at line end"
+		}
+
+		Operation operationName(param1: int16, param2: int32, ...) : boolean
+			["Operations can have multiple parameters and one return type"] {
+			"return param1 == param2;"
+		}
+		```
+	'''
 	uses DataType
 	property returnType values { "<DataType>" }
 	property arguments values { "<name> : <DataType>" }
@@ -914,6 +1079,13 @@ abstract Feature Port
 		The ProtocolClass' incoming messages are on one side received by the regular Port and on the other sent by the conjugated Port (outgoing message vice versa).
 
 		A connection of Ports is denoted by a Binding. 
+	'''
+	help '''
+		```room
+		Port portName : ProtocolClass1			["generated doc"]
+		Port portName[4] : ProtocolClass1		["generated doc"]
+		conjugated portName : ProtocolClass1	["generated doc"]
+		```
 	'''
 	isOfType ProtocolClass
 	uses Replication
@@ -995,39 +1167,54 @@ Feature InternalEndPort
 ;
 
 Feature SAP
-	shortName '''Service Access Point'''
 	description '''A Service Access Point is similar to a Port, but uses a LayerConnection for wiring.'''
 	text '''
-		\emph{\large Under construction}
 		\begin{itemize}
 		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
 		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
 		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
 		\end{itemize}
+	'''
+	help '''
+	```room
+	SAP sapName: ProtocolClass1
+	```
 	'''
 	isOfType ProtocolClass
 	stable
 ; 
 
 Feature ServiceImplementation
-	shortName '''SPP Implementation'''
 	description '''The implementation of an Service Provision Point (SPP).'''
 	text '''
+	'''
+	help '''
+	```room
+	Interface {
+		SPP sppName: ProtocolClass1
+	}
+	Structure {
+		ServiceImplementation of sppName
+	}
+	```
 	'''
 	uses SPP
 	stable
 ;
 
 Feature SPP
-	shortName '''Service Provision Point'''
 	description '''A Service Provision Point is the counterpart of a SAP'''
 	text '''
-		\emph{Under construction}
 		\begin{itemize}
 		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
 		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
 		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
 		\end{itemize}
+	'''
+	help '''
+	```room
+	SPP sppName: ProtocolClass1
+	```
 	'''
 	isOfType ProtocolClass
 	stable

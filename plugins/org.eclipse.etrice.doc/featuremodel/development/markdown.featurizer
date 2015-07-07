@@ -1,7 +1,7 @@
 FeaturizerModel Markdown
-	HTMLHelpGenerator {
-		filePath "experimental-markdown"
-	}
+//	HTMLHelpGenerator {
+//		filePath "experimental-markdown"
+//	}
 	
 
 Feature SynatxColoring
