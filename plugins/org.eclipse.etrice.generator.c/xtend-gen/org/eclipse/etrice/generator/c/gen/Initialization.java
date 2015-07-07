@@ -251,7 +251,29 @@ public class Initialization {
               _builder.append("}");
               _xifexpression_1 = _builder;
             } else {
-              _xifexpression_1 = value;
+              String _xifexpression_2 = null;
+              boolean _and_2 = false;
+              boolean _and_3 = false;
+              int _size_2 = a.getSize();
+              boolean _greaterThan_1 = (_size_2 > 0);
+              if (!_greaterThan_1) {
+                _and_3 = false;
+              } else {
+                boolean _isCharacterType_1 = this._typeHelpers.isCharacterType(((PrimitiveType)aType));
+                _and_3 = _isCharacterType_1;
+              }
+              if (!_and_3) {
+                _and_2 = false;
+              } else {
+                boolean _startsWith_1 = value.startsWith("\'");
+                _and_2 = _startsWith_1;
+              }
+              if (_and_2) {
+                _xifexpression_2 = (("{" + value) + "}");
+              } else {
+                _xifexpression_2 = value;
+              }
+              _xifexpression_1 = _xifexpression_2;
             }
             _xblockexpression_1 = _xifexpression_1;
           }

@@ -324,14 +324,20 @@ abstract class AbstractStateMachineGenerator {
 		 */
 		«IF generateImplementation»
 			«privAccess»«stateType» «opScopePriv»enterHistory(«selfPtr»«stateType» state__et«IF usesHdlr», «boolType» handler__et«ENDIF») {
-				«boolType» skip_entry__et = «langExt.booleanConstant(false)»;
+				«val baseStateList = xpmc.stateMachine.baseStateList»
+				«val needsSkipVar = !baseStateList.filter(s|s.hasEntryCode(true)).empty»
+				«IF needsSkipVar»
+					«boolType» skip_entry__et = «langExt.booleanConstant(false)»;
+				«ENDIF»
 				if (state__et >= STATE_MAX) {
 					state__et = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state__et - STATE_MAX);
-					skip_entry__et = «langExt.booleanConstant(true)»;
+					«IF needsSkipVar»
+						skip_entry__et = «langExt.booleanConstant(true)»;
+					«ENDIF»
 				}
 				while («langExt.booleanConstant(true)») {
 					switch (state__et) {
-						«FOR state : xpmc.stateMachine.getBaseStateList()»
+						«FOR state : baseStateList»
 						case «state.getGenStateId()»:
 							«IF state.hasEntryCode(true)»if (!(skip_entry__et«IF usesHdlr» || handler__et«ENDIF»)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
 							«IF state.isLeaf()»
@@ -362,7 +368,9 @@ abstract class AbstractStateMachineGenerator {
 							/* should not occur */
 							break;
 					}
-					skip_entry__et = «langExt.booleanConstant(false)»;
+					«IF needsSkipVar»
+						skip_entry__et = «langExt.booleanConstant(false)»;
+					«ENDIF»
 				}
 				«unreachableReturn»
 			}

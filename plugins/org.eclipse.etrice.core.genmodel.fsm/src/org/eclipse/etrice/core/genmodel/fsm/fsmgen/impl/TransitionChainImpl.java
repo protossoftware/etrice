@@ -216,7 +216,15 @@ public class TransitionChainImpl extends MinimalEObjectImpl.Container implements
 		ExpandedModelComponent emc = getExpandedModelComponent();
 		
 		StringBuilder result = new StringBuilder();
+		
+		/* TODO: the next generated code declares a correctly typed variable for the generic data.
+		 * It is hard to determine whether it is actually needed though.
+		 * It is needed in non-initial transitions with action code that are not data driven.
+		 * It might be needed in condition expressions. But this code would have to be parsed
+		 * with uncertain result (because of e.g. comments).
+		 */
 		result.append(tcv.genTypedData(this));
+		
 		genChainCode(getTransition(), emc, tcv, result);
 		return result.toString();
 	}

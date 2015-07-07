@@ -79,6 +79,8 @@ class Initialization {
 				var value = getPrimitiveValue(instance, path)
 				if(a.size > 0 && !aType.characterType && !value.trim.startsWith('{'))
 					'''{«FOR Integer i:1..a.size SEPARATOR ', '»«value»«ENDFOR»}'''
+				else if (a.size > 0 && aType.characterType && value.startsWith("'"))
+					"{"+value+"}"
 				else
 					value
 			}
