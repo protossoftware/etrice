@@ -17,6 +17,7 @@
 #include "debugging/etLogger.h"
 #include "osal/etSema.h"
 #include "runtime/etRuntime.h"
+#include "helpers/etTimeHelpers.h"
 
 /*** member variables */
 
@@ -33,8 +34,7 @@ static etBool etUnit_testcaseSuccess[ETUNIT_MAX_TEST_CASES];
 #define ETUNIT_FAILURE_TEXT_LEN 256
 
 /* time measuring */
-static clock_t etUnit_startTime = 0;
-static clock_t etUnit_currentTime = 0;
+static etTime etUnit_startTime;
 
 /* order */
 #define ETUNIT_ORDER_MAX	16
@@ -45,6 +45,15 @@ typedef struct OrderInfo {
 	etInt16* list;
 } OrderInfo;
 static OrderInfo etUnit_orderInfo[ETUNIT_ORDER_MAX];
+
+static OrderInfo* getOrderInfo(etInt16 id) {
+	int i;
+	for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
+		if (etUnit_orderInfo[i].id == id)
+			return etUnit_orderInfo + i;
+
+	return NULL;
+}
 
 /* forward declarations of private functions */
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line);
@@ -87,9 +96,8 @@ void etUnit_open(const char* testResultPath, const char* testFileName) {
 	}
 
 	/* prepare time measurement */
-	etUnit_startTime = clock();
-	etUnit_currentTime = clock();
-	etLogger_logInfoF("Start Time: %ld", etUnit_startTime);
+	getTimeFromTarget(&etUnit_startTime);
+	etLogger_logInfoF("Start Time: %ld", etTimeHelpers_convertToMSec(&etUnit_startTime));
 
 }
 
@@ -133,11 +141,20 @@ etInt16 etUnit_openTestCase(const char* testCaseName) {
 }
 
 void etUnit_closeTestCase(etInt16 id) {
-	clock_t time = clock() - etUnit_currentTime;
-	etUnit_currentTime = clock();
+	etTime time;
+	getTimeFromTarget(&time);
+	etTimeHelpers_subtract(&time, &etUnit_startTime);
+
+	OrderInfo* info = getOrderInfo(id);
+	if(info != NULL){
+		if (info->currentIndex != info->size) {
+			char testresult[ETUNIT_FAILURE_TEXT_LEN];
+			etUnit_handleExpect(id, ET_FALSE, "EXPECT_ORDER was not completed", NULL, NULL, 0, 0);
+		}
+	}
 
 	if (etUnit_reportfile != NULL) {
-		etLogger_fprintf(etUnit_reportfile, "tc end %d: %d\n", id, time);
+		etLogger_fprintf(etUnit_reportfile, "tc end %d: %d\n", id, etTimeHelpers_convertToMSec(&time));
 	}
 }
 
@@ -228,15 +245,6 @@ void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat3
 
 void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) {
 	expect_range_float(id, message, min, max, actual, file, line);
-}
-
-static OrderInfo* getOrderInfo(etInt16 id) {
-	int i;
-	for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
-		if (etUnit_orderInfo[i].id == id)
-			return etUnit_orderInfo + i;
-
-	return NULL;
 }
 
 void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file, int line) {

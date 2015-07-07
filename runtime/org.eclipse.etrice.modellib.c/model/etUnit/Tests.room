@@ -1,0 +1,145 @@
+RoomModel room.basic.etunit {
+	
+	import room.basic.service.timing.* from "../TimingService.room"
+	import room.basic.types.* from "../Types.room"	
+
+	abstract ActorClass TestSuiteActor {
+		Structure { }
+		Behavior {
+			Operation closeTestSuite(){
+				"etUnit_closeTestSuite();"
+				"etUnit_close();"
+			}
+			Operation startTestSuite(logPath: charPtr, logFileName : charPtr, testSuiteName : charPtr) {
+				"etUnit_open(logPath, logFileName);"
+				"etUnit_openTestSuite(testSuiteName);"
+			}
+			
+		}
+	}
+	
+	abstract async ActorClass TestCaseActor {
+		Structure {
+			SAP tcLifecycle : PTestLifecycle
+			SAP tcTimer : PTimer
+			Attribute tcTimeoutIgnore : boolean
+			Attribute tcCaseId : int16
+		}
+		Behavior {
+			Operation startTimeout(time: uint32){
+				"tcTimeoutIgnore = false;"
+				"tcTimer.startTimeout(time);"
+			}
+			Operation invalidateTimeout(){
+				"tcTimeoutIgnore = true;"
+			}
+			StateMachine {
+				Transition init: initial -> tpEnter of testing {
+					action {
+						"invalidateTimeout();"
+						"tcCaseId = etUnit_openTestCase(self->constData->instName);"
+						"tcLifecycle.startTestCase(tcCaseId);"
+					}
+				}
+				Transition trFinish: tpFinish of testing -> finish
+				Transition trTimeout: testing -> timeout {
+					triggers {
+						<timeout: tcTimer guard {
+							"!tcTimeoutIgnore"
+						}>
+					}
+					action {
+						"invalidateTimeout();"
+					}
+				}
+				State testing {
+					subgraph {
+						EntryPoint tpEnter
+						ExitPoint tpFinish
+					}
+				}
+				State timeout {
+					entry {
+						"EXPECT_FALSE(tcCaseId, \"timeout\", true);"
+						"etUnit_closeTestCase(tcCaseId);"
+						"tcLifecycle.finishedTestCase(tcCaseId);"
+					}
+				}
+				State finish {
+					entry {
+						"etUnit_closeTestCase(tcCaseId);"
+						"tcLifecycle.finishedTestCase(tcCaseId);"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass TestLifecycleActor {
+		Interface {
+			SPP fct: PTestLifecycle
+		}
+		Structure {
+			ServiceImplementation of fct
+			SAP timer : PTimer
+			Attribute tcCount : int32 = "0"
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> idle {
+					action {
+						"timer.startTimeout(5000);"
+					}
+				}
+				Transition tr0: idle -> idle {
+					triggers {
+						<startTestCase: fct>
+					}
+					action {
+						"tcCount++;"
+					}
+				}
+				Transition tr1: idle -> cp cp0 {
+					triggers {
+						<finishedTestCase: fct>
+					}
+					action {
+						"tcCount--;"
+					}
+				}
+				Transition tr2: idle -> terminate {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				Transition tr3: cp cp0 -> idle
+				Transition tr4: cp cp0 -> terminate {
+					cond {
+						"tcCount==0"
+					}
+				}
+				Transition tr5: cp cp0 -> error {
+					cond {
+						"tcCount < 0"
+					}
+				}
+				ChoicePoint cp0
+				State idle
+				State terminate {
+					entry {
+						"etUnit_testFinished(-1);"
+					}
+				}
+				State error
+			}
+		}
+	}
+
+	ProtocolClass PTestLifecycle {
+		incoming {
+			Message startTestCase(id : int16)
+			Message finishedTestCase(id : int16)
+		}
+	}
+
+}

@@ -37,7 +37,6 @@ public class EtUnit {
 	
 	private static BufferedWriter out = null;
 	private static long etUnit_startTime;
-	private static long etUnit_currentTime;
 	private static int etUnit_nextCaseId = 1;
 	private static HashSet<Integer> failed = new HashSet<Integer>();
 	private static HashMap<Integer, OrderInfo> orderInfo = new HashMap<Integer, OrderInfo>();
@@ -65,7 +64,6 @@ public class EtUnit {
 		}
 		
 		etUnit_startTime = System.currentTimeMillis();
-		etUnit_currentTime = etUnit_startTime;
 		
 		System.out.println("Start time: "+etUnit_startTime);
 	}
@@ -113,9 +111,15 @@ public class EtUnit {
 	}
 	
 	public static void etUnit_closeTestCase(int id) {
-		long time = System.currentTimeMillis() - etUnit_currentTime;
-		etUnit_currentTime = System.currentTimeMillis();
+		long time = System.currentTimeMillis() - etUnit_startTime;
 
+		OrderInfo info = orderInfo.get(id);
+		if (info!=null) {
+			if (info.current != info.list.length) {
+				etUnit_handleExpect(id, false, "EXPECT_ORDER was not completed", null, null);
+			}
+		}
+		
 		if (out!=null) {
 			try {
 				out.write("tc end "+id+": "+time+"\n");
