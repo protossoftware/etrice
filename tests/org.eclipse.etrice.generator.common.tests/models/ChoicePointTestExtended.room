@@ -348,6 +348,12 @@ RoomModel ChoicePointTestExtended {
 			Attribute testNodes : int32 = "4"
 		}
 		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTestExtended\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended\", \"ChoicePointTest_case\");"
+			}
+			dtor {
+				"etUnit_closeAll(caseId);"
+			}
 			Operation test(){
 				"
 				if(protocolId == 0)
@@ -386,12 +392,6 @@ RoomModel ChoicePointTestExtended {
 			}
 			Operation check(value : int32){
 				"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", value);"
-			}
-			Operation Tester_event() {
-				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTestExtended\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended\", \"ChoicePointTest_case\");"
-			}
-			Operation ~Tester_event() {
-				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {
 				Transition init: initial -> testInitial {

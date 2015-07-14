@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -54,6 +55,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PrimitiveType;
@@ -72,6 +74,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
  
@@ -102,6 +105,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
+	public static final String OPERATION_MISSING_OVERRIDE = "RoomJavaValidator.OperationMissingOverride";
+	public static final String OPERATION_EXTRANEOUS_OVERRIDE = "RoomJavaValidator.OperationExtraneousOverride";
 	
 	@Inject ImportUriResolver importUriResolver;
 	
@@ -315,8 +320,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			else
 				name2obj.put(ref.getName(), ref);
 		}
-		
-		
 	}
 	
 	@Check
@@ -558,48 +561,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
 		}
 	}
-
-	@Check
-	public void checkOperation(StandardOperation op) {
-		RoomClass cls = (RoomClass) op.eContainer();
-//		if(cls instanceof RoomClass && !roomHelpers.isCircularClassHierarchy((RoomClass)cls)){
-//			
-//		}
-		if (roomHelpers.isConstructor(op)) {
-			if (!op.getArguments().isEmpty())
-				error("Constructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
-			if (op.getReturnType()!=null)
-				error("Constructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
-		}
-		else if (roomHelpers.isDestructor(op)) {
-			if (!op.getArguments().isEmpty())
-				error("Destructor must have no arguments", RoomPackage.Literals.OPERATION__ARGUMENTS);
-			if (op.getReturnType()!=null)
-				error("Destructor must have no return type", RoomPackage.Literals.OPERATION__RETURN_TYPE);
-		}
-		else if (op.isDestructor()) {
-			error("Destructor must have class name", RoomPackage.Literals.OPERATION__NAME, CHANGE_DESTRUCTOR_NAME, cls.getName());
-		}
-		else if (op.getArguments().isEmpty()) {
-			
-			// check for method with same name with destructor flag set
-			EList<StandardOperation> ops = null;
-			if (cls instanceof ActorClass)
-				ops = ((ActorClass) cls).getOperations();
-			else if (cls instanceof DataClass)
-				ops = ((DataClass) cls).getOperations();
-			else {
-				assert(false): "unexpected parent class";
-			}
-			
-			for (StandardOperation o : ops) {
-				if (o.isDestructor() && o.getName().equals(op.getName())) {
-					warning("Constructor meant?", RoomPackage.Literals.OPERATION__NAME, CHANGE_CONSTRUCTOR_NAME, cls.getName());
-				}
-			}
-			
-		}
-	}
 	
 	@Check
 	public void checkDataClass(DataClass dc) {
@@ -759,7 +720,64 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("at least one literal has to be specified", RoomPackage.Literals.ENUMERATION_TYPE__LITERALS);
 	}
 	
+	
 	private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
+	}
+	
+	@Check
+	public void checkOperations(ActorClass ac){
+		if(roomHelpers.isCircularClassHierarchy(ac))
+			return;
+		
+		// issue warning for deprecated ctor/dtor operations
+		for(Operation op : ac.getOperations())
+			if(ac.getName().equals(op.getName()))
+				warning("Operation name is discouraged, may be mistaken for ctor/dtor", op, RoomPackage.Literals.OPERATION__NAME);
+		checkOperationsOverride(roomHelpers.getAllOperations(ac), ac.getOperations());
+	}
+	
+	@Check
+	public void checkOperations(DataClass dc){
+		if(roomHelpers.isCircularClassHierarchy(dc))
+			return;
+		
+		// issue warning for deprecated ctor/dtor operations
+		for(Operation op : dc.getOperations())
+			if(dc.getName().equals(op.getName()))
+				warning("Operation name is discouraged, may be mistaken for ctor/dtor", op, RoomPackage.Literals.OPERATION__NAME);
+		checkOperationsOverride(roomHelpers.getAllOperations(dc), dc.getOperations());
+	}
+	
+	/**
+	 * @param allOperations list of all operations ordered by base class first
+	 * @param toCheck
+	 */
+	private void checkOperationsOverride(List<StandardOperation> allOperations, List<StandardOperation> toCheck){
+		Map<String, StandardOperation> map = Maps.newHashMap();
+		for(StandardOperation op : allOperations){
+			if(!map.containsKey(op.getName()))
+				map.put(op.getName(), op);
+		}
+		for(StandardOperation op : toCheck){
+			if(op.getName() == null)
+				continue;
+			StandardOperation baseOp = map.get(op.getName());
+			if(baseOp == op){
+				if(op.isOverride())
+					error("Operation '"+op.getName()+"' must override an operation in super class", op, RoomPackage.Literals.STANDARD_OPERATION__OVERRIDE, OPERATION_EXTRANEOUS_OVERRIDE);
+				continue;
+			}
+			String baseOpFQN = roomHelpers.getRoomClass(baseOp).getName()+"."+baseOp.getName()+"()";
+			if(!op.isOverride()){
+				error("Implicit override of operation "+baseOpFQN, op, RoomPackage.Literals.OPERATION__NAME, OPERATION_MISSING_OVERRIDE);
+				continue;
+			}
+			if(!roomHelpers.matchingArguments(baseOp, op))
+				error("Arguments must be identical to overriden operation in " +baseOpFQN, op, RoomPackage.Literals.OPERATION__ARGUMENTS);
+			
+			if(!roomHelpers.matchingReturnType(baseOp, op))
+				error("Return type  must be identical to overriden operation " +baseOpFQN, op, RoomPackage.Literals.OPERATION__RETURN_TYPE);
+		}
 	}
 }

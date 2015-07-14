@@ -24,10 +24,10 @@ RoomModel DynamicActorTest2 {
 			Binding p0 and optarray.p0
 		}
 		Behavior {
-			Operation Container() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest2\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest2\", \"DynamicActorTest2_case\");"
 			}
-			Operation ~Container() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 

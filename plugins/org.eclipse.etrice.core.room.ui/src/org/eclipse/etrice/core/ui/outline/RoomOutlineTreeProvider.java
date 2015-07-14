@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
@@ -130,6 +131,8 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 				createNode(parentNode, ar);
 		}
 		else if (parentNode.getText().equals(BEHAVIOR_LABEL)) {
+			for (ClassStructor structor : ac.getStructors())
+				createNode(parentNode, structor);
 			for (Operation op : ac.getOperations())
 				createNode(parentNode, op);
 			if (ac.getStateMachine()!=null) {
@@ -242,6 +245,10 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	protected boolean _isLeaf(Operation o) {
+		return true;
+	}
+	
+	protected boolean _isLeaf(ClassStructor structor) {
 		return true;
 	}
 	

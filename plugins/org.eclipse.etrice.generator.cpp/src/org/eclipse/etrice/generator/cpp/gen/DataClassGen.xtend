@@ -64,8 +64,8 @@ class DataClassGen {
 	}
 	
 	def generateHeaderFile(Root root, DataClass dc) {
-		val ctor = dc.operations.filter(op|op.constructor).head
-		val dtor = dc.operations.filter(op|op.destructor).head
+//		val ctor = dc.operations.filter(op|op.constructor).head
+//		val dtor = dc.operations.filter(op|op.destructor).head
 		//TODO: getReferencedDataClasses does not contain a base class of the own package
 	'''
 		«generateIncludeGuardBegin(dc.path + dc.name)»
@@ -118,8 +118,8 @@ class DataClassGen {
 	}
 	
 	def generateSourceFile(Root root, DataClass dc) {
-		val ctor = dc.operations.filter(op|op.constructor).head
-		val dtor = dc.operations.filter(op|op.destructor).head	
+//		val ctor = dc.operations.filter(op|op.constructor).head
+//		val dtor = dc.operations.filter(op|op.destructor).head	
 		
 		'''
 		/**
@@ -145,14 +145,14 @@ class DataClassGen {
 			«ENDIF»
 		{
 			«dc.attributes.attributeInitialization(false)»
-			«IF ctor!=null»
-			{
-				// user defined constructor body
-				«FOR l : ctor.detailCode.lines»
-					«l»
-				«ENDFOR»
-			}
-			«ENDIF»
+«««			«IF ctor!=null»
+«««			{
+«««				// user defined constructor body
+«««				«FOR l : ctor.detailCode.lines»
+«««					«l»
+«««				«ENDFOR»
+«««			}
+«««			«ENDIF»
 		}
 			
 		// copy constructor

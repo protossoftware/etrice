@@ -47,12 +47,12 @@ RoomModel DynamicConfigTest {
 			Attribute dc: Data_dc
 		}
 		Behavior {
-			Operation Testee_ac() {
+			ctor {
 				"etUnit_open(\"tmp\", \"DynamicConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.DynamicConfigTest\");"
 				"caseId = etUnit_openTestCase(\"DynamicConfigTest_case_Testee_ac\");"
 			}
-			Operation ~Testee_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"

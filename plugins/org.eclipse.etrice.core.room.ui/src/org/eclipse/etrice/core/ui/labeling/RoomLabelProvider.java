@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumLiteral;
@@ -44,7 +45,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
@@ -154,6 +154,12 @@ public class RoomLabelProvider extends FSMLabelProvider {
 			return "OperationMsg.gif";
 		else
 			return "Operation.gif";
+	}
+	
+	String image(ClassStructor structor){
+		if(structor.isConstructor())
+			return "ctor.png";
+		return "dtor.png";
 	}
 	
 	String image(Port p) {
@@ -308,18 +314,13 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		/* TODO TS: create complete signature including return type and ref */
 
 		String signature = roomNameProvider.getSignature(op);
-		String special = roomHelpers.isConstructor(op)? "ctor " : roomHelpers.isDestructor(op)? "dtor " : "";
 		if (op instanceof PortOperation && ((PortOperation) op).getSendsMsg()!=null) {
 		}
-		String destr = (op instanceof StandardOperation && ((StandardOperation)op).isDestructor())? "~":"";
-		StyledString result = new StyledString(special+destr+signature);
+		StyledString result = new StyledString(signature);
 		int pos = result.toString().indexOf(" sends ");
 		if (pos>=0)
 			result.setStyle(pos+1, 5, getKeywordStyler());
 
-		if (!special.isEmpty())
-			result.setStyle(0, 4, getKeywordStyler());
-		
 		return result;
 	}
 	

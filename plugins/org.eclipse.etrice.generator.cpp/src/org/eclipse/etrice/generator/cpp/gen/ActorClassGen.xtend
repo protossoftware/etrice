@@ -118,7 +118,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					
 				«ac.attributes.attributes»
 
-				«ac.operationsImplementation»
+				«operationsImplementation(ac.operations, ac.name)»
 		
 			public:
 				//--------------------- construction
@@ -193,8 +193,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 	
 	def private generateSourceFile(Root root, ExpandedActorClass xpac, ActorClass ac) {
-		val ctor = ac.operations.filter(op|op.constructor).head
-		val dtor = ac.operations.filter(op|op.destructor).head
+//		val ctor = ac.operations.filter(op|op.constructor).head
+//		val dtor = ac.operations.filter(op|op.destructor).head
 		val async = xpac.actorClass.commType==ComponentCommunicationType::ASYNCHRONOUS
 		
 		'''
@@ -228,10 +228,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«IF async»
 			getMsgsvc()->addAsyncActor(*this);
 			«ENDIF»
-			«IF ctor!=null»
-			// user defined constructor body
-			«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
-			«ENDIF»
+«««			«IF ctor!=null»
+«««			// user defined constructor body
+«««			«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
+«««			«ENDIF»
 		}
 		
 		void «ac.name»::init(){
@@ -248,13 +248,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 		«ENDIF»
 		
-		void «ac.name»::destroy(){
-			«IF dtor!=null»
-				
-					// user defined destructor body
-					«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»
-			«ENDIF»
-		}
+«««		void «ac.name»::destroy(){
+«««			«IF dtor!=null»
+«««				
+«««					// user defined destructor body
+«««					«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»
+«««			«ENDIF»
+«««		}
 		
 		«IF ac.hasNonEmptyStateMachine»
 			«xpac.genStateMachine(false)»

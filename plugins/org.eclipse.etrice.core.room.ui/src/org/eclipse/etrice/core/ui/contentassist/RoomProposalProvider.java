@@ -19,24 +19,30 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -106,7 +112,10 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	}
 
 	@Inject
-	private RoomHelpers roomHelpers;
+	protected RoomHelpers roomHelpers;
+	
+	@Inject
+	protected RoomNameProvider roomNameProvider;
 	
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		if (contentAssistContext!=null && contentAssistContext.getCurrentModel().eClass()==RoomPackage.eINSTANCE.getActorRef())
@@ -165,6 +174,26 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 				acceptor.accept(createCompletionProposal(targetName, context));
 			}
 		}
+	}
+	
+	@Override
+	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if(model instanceof StandardOperation){
+			StandardOperation op = (StandardOperation) model;
+			List<? extends Operation> superOps = Lists.newArrayList();
+			EObject roomClass = roomHelpers.getRoomClass(op);
+			if(roomClass instanceof ActorClass && ((ActorClass)roomClass).getActorBase() != null)
+				superOps = roomHelpers.getLatestOperations(((ActorClass)roomClass).getActorBase());
+			else if(roomClass instanceof DataClass && ((DataClass)roomClass).getBase() != null)
+				superOps = roomHelpers.getLatestOperations(((DataClass)roomClass).getBase());
+			for(Operation superOp : superOps){
+				String signature = roomNameProvider.getSignature(superOp);
+				String superClassName = roomHelpers.getRoomClass(superOp).getName();
+				acceptor.accept(createCompletionProposal(signature, signature+" - "+superClassName, getImage(superOp), context));
+			}
+		}
+		super.complete_ID(model, ruleCall, context, acceptor);
 	}
 
 	private List<ActorRef> collectInstances(ActorInstanceMapping aim) {

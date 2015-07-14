@@ -3,16 +3,28 @@ RoomModel room.basic.etunit {
 	import room.basic.service.timing.* from "../TimingService.room"
 	import room.basic.types.* from "../Types.room"	
 
+	/**
+	 * Creates an etUnit test suite. Test cases can be added by creating instances of ActorClass <i>TestSuiteActor</i>.
+	 * <p>
+	 * <i>getTestSuiteName()</i> and <i>getTestSuiteFileName()</i> return actor instances name by default.
+	 * </p>
+	 */
 	abstract ActorClass TestSuiteActor {
 		Structure { }
 		Behavior {
-			Operation closeTestSuite(){
+			ctor {
+				"etUnit_open(\"log\", getTestSuiteFileName());"
+				"etUnit_openTestSuite(getTestSuiteName());"
+			}
+			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
 			}
-			Operation startTestSuite(logPath: charPtr, logFileName : charPtr, testSuiteName : charPtr) {
-				"etUnit_open(logPath, logFileName);"
-				"etUnit_openTestSuite(testSuiteName);"
+			Operation getTestSuiteName() : charPtr {
+				"return self->constData->instName;"
+			}
+			Operation getTestSuiteFileName() : charPtr {
+				"return self->constData->instName;"
 			}
 			
 		}
@@ -23,9 +35,12 @@ RoomModel room.basic.etunit {
 			SAP tcLifecycle : PTestLifecycle
 			SAP tcTimer : PTimer
 			Attribute tcTimeoutIgnore : boolean
-			Attribute tcCaseId : int16
+			Attribute tcCaseId : int32
 		}
 		Behavior {
+			Operation getTestCaseName() : charPtr {
+				"return self->constData->instName;"
+			}
 			Operation startTimeout(time: uint32){
 				"tcTimeoutIgnore = false;"
 				"tcTimer.startTimeout(time);"
@@ -37,8 +52,8 @@ RoomModel room.basic.etunit {
 				Transition init: initial -> tpEnter of testing {
 					action {
 						"invalidateTimeout();"
-						"tcCaseId = etUnit_openTestCase(self->constData->instName);"
-						"tcLifecycle.startTestCase(tcCaseId);"
+						"tcLifecycle.registerTestCase();"
+						"tcCaseId = etUnit_openTestCase(getTestCaseName());"
 					}
 				}
 				Transition trFinish: tpFinish of testing -> finish
@@ -82,18 +97,19 @@ RoomModel room.basic.etunit {
 		Structure {
 			ServiceImplementation of fct
 			SAP timer : PTimer
+			Attribute entireTestTimeout : int32 = "5000"
 			Attribute tcCount : int32 = "0"
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> idle {
 					action {
-						"timer.startTimeout(5000);"
+						"timer.startTimeout(entireTestTimeout);"
 					}
 				}
 				Transition tr0: idle -> idle {
 					triggers {
-						<startTestCase: fct>
+						<registerTestCase: fct>
 					}
 					action {
 						"tcCount++;"
@@ -137,8 +153,8 @@ RoomModel room.basic.etunit {
 
 	ProtocolClass PTestLifecycle {
 		incoming {
-			Message startTestCase(id : int16)
-			Message finishedTestCase(id : int16)
+			Message registerTestCase()
+			Message finishedTestCase()
 		}
 	}
 

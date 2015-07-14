@@ -213,6 +213,13 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.CLASS_STRUCTOR:
+      {
+        ClassStructor classStructor = (ClassStructor)theEObject;
+        T result = caseClassStructor(classStructor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.GENERAL_PROTOCOL_CLASS:
       {
         GeneralProtocolClass generalProtocolClass = (GeneralProtocolClass)theEObject;
@@ -737,6 +744,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePortOperation(PortOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Class Structor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Class Structor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClassStructor(ClassStructor object)
   {
     return null;
   }

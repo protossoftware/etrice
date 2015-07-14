@@ -72,8 +72,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def generate(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
-		val ctor = ac.operations.filter(op|op.constructor).head
-		val dtor = ac.operations.filter(op|op.destructor).head
+		val ctor = ac.structors.findFirst[isConstructor]
+		val dtor = ac.structors.findFirst[!isConstructor]
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
 		val dataObjClass = ac.name+"_DataObject"
@@ -148,7 +148,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 				private DynConfigLock lock_«a.name»;
 			«ENDFOR»
-			«ac.operationsImplementation»
+			«operationsImplementation(ac.operations, ac.name)»
+			
+			// user defined destructor
+			«getDestructorSignature(ac.name)»{
+				«IF ac.base != null»super.dtor();«ENDIF»
+				«IF dtor != null»«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»«ENDIF»
+			}
 		
 			//--------------------- construction
 			public «clsname»(IRTObject parent, String name) {
@@ -202,7 +208,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 				
 				«IF ctor!=null»
-					
 					{
 						// user defined constructor body
 						«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
@@ -243,24 +248,18 @@ class ActorClassGen extends GenericActorClassGenerator {
 				«ENDIF»
 			«ENDIF»
 			
-			«IF dtor!=null»
-				«IF manualBehavior»
-					public abstract void destroy();
-				«ELSE»
-					public void destroy(){
-						«ac.name.destructorCall»;
-						«IF Main::settings.generateMSCInstrumentation»
-							DebuggingService.getInstance().addMessageActorDestroy(this);
-						«ENDIF»
-						«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
-							RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);
-						«ENDIF»
-						super.destroy();
-					}
-				«ENDIF»
-			«ELSEIF Main::settings.generateMSCInstrumentation»
-				public void destroy() {
-					DebuggingService.getInstance().addMessageActorDestroy(this);
+			«IF manualBehavior»
+				public abstract void destroy();
+			«ELSE»
+				public void destroy(){
+					if(this.getClass() == «clsname».class)
+						dtor();
+					«IF Main::settings.generateMSCInstrumentation»
+						DebuggingService.getInstance().addMessageActorDestroy(this);
+					«ENDIF»
+					«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
+						RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);
+					«ENDIF»
 					super.destroy();
 				}
 			«ENDIF»

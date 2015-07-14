@@ -229,9 +229,17 @@ public class ImplPostprocessor {
       _builder_17.newLine();
       _builder_17.append("return et.getName() + \".\" + this.getName();");
       _builder_17.newLine();
-      _xblockexpression = PostprocessingHelpers.addOperation(enumLiteral, 
+      PostprocessingHelpers.addOperation(enumLiteral, 
         "getFullName", _eClassifier_11, 
         Integer.valueOf(1), _builder_17.toString());
+      final EClass classStructor = PostprocessingHelpers.getClass(roomPackage, "ClassStructor");
+      EClassifier _eClassifier_12 = EcorePackage.eINSTANCE.getEClassifier("EBoolean");
+      StringConcatenation _builder_18 = new StringConcatenation();
+      _builder_18.append("return \"ctor\".equals(this.getName());");
+      _builder_18.newLine();
+      _xblockexpression = PostprocessingHelpers.addOperation(classStructor, 
+        "isConstructor", _eClassifier_12, 
+        Integer.valueOf(1), _builder_18.toString());
     }
     return _xblockexpression;
   }

@@ -181,6 +181,16 @@ class ImplPostprocessor {
 				return et.getName() + "." + this.getName();
 			'''
 		)
+		
+		val classStructor = roomPackage.getClass("ClassStructor")
+		classStructor.addOperation(
+			"isConstructor",
+			EcorePackage::eINSTANCE.getEClassifier("EBoolean"),
+			1,
+			'''
+				return "ctor".equals(this.getName());
+			'''
+		)
 	}
 }
 

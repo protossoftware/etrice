@@ -17,19 +17,17 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.emf.common.util.EList
+import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
-import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.generator.base.AbstractGenerator
-
 import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.AbstractGenerator
 
 /**
  * A collection of methods for generation of user code, attributes with getters and setters
@@ -274,40 +272,40 @@ class ProcedureHelpers {
 	 * @param classname the name of the type defining the getter
 	 * @return code declaring the operations
 	 */
-	def operationsDeclaration(List<? extends Operation> operations, String classname) {'''
+	def operationsDeclaration(List<? extends Operation> operations, String classname) '''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«IF !(languageExt.usesInheritance && operation.constructor)»
-				«operationSignature(operation, classname)»;
-			«ENDIF»
+			«operationSignature(operation, classname)»;
 		«ENDFOR»
-		'''
-	}
+	'''
+	
 
 	/**
 	 * @param operations a list of {@link Operation}s
 	 * @param classname the name of the type defining the getter
 	 * @return code defining the operations
 	 */
-	def operationsImplementation(List<? extends Operation> operations, String classname) {
-	'''
+	def operationsImplementation(List<? extends Operation> operations, String classname) '''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«IF !(languageExt.usesInheritance && operation.constructor)»
-				«operationSignature(operation, classname)» {
-					«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
-				}
-			«ENDIF»
+			«operationSignature(operation, classname)» {
+				«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
+			}
 		«ENDFOR»
-		'''
+	'''
+	
+	def asBlock(CharSequence str)'''
+		{
+			«str»
+		}
+	'''
+	
+	def getConstructorSignature(String classname){
+		classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType)
 	}
-
-	/**
-	 * @param ac an {@link ActorClass}
-	 * @return code defining all operations of the actor class
-	 */
-	def operationsImplementation(ActorClass ac) {
-		operationsImplementation(ac.operations, ac.name)
+	
+	def getDestructorSignature(String classname){
+		classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType)
 	}
 	
 	/**
@@ -324,12 +322,7 @@ class ProcedureHelpers {
 	 * 		constructor and destructor
 	 */
 	def private operationSignature(Operation operation, String classname) {
-		if (operation.constructor)
-			classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType)
-		else if (operation.destructor)
-			classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType)
-		else
-			classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returnType))
+		classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returnType))
 	}
 
 	/**

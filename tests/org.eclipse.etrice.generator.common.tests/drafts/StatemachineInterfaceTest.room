@@ -1,0 +1,126 @@
+RoomModel StatemachineInterfaceTest {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	LogicalSystem StatemachineInterfaceTest {
+		SubSystemRef main: MainSubSystem
+	}
+
+	SubSystemClass MainSubSystem {
+		ActorRef app1: AsyncApp
+		ActorRef app2: DataApp
+		ActorRef app3: EventApp
+		ActorRef app4: EmptyAsyncApp
+		ActorRef app5: EmptyDataApp
+		ActorRef app6: EmptyEventApp
+		//ActorRef app7: EmptyAsyncAppManual
+		//ActorRef app8: EmptyDataAppManual
+		ActorRef app9: EmptyEventAppManual
+		
+		LogicalThread defaultThread
+	}
+
+	AnnotationType BehaviorManual { 
+   		target = ActorBehavior 
+ 	} 
+
+	ActorClass EmptyEventApp {
+		Structure {
+			Port p1 : EventProtocol
+		}
+		Behavior { }
+	}
+
+	ActorClass EventApp {
+		Structure {
+			Port p1 : EventProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				State state0
+			}
+		}
+	}
+
+	async ActorClass EmptyAsyncApp {
+		Structure {
+			Port p0 : DataProtocol
+			Port p1 : EventProtocol
+		}
+		Behavior { }
+	}
+
+	async ActorClass AsyncApp { 
+		Structure {
+			Port p0 : DataProtocol
+			Port p1 : EventProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				State state0
+			}
+		}
+	}
+
+	datadriven ActorClass EmptyDataApp {
+		Structure {
+			Port p0 : DataProtocol
+		}
+		Behavior { }
+	}
+
+	datadriven ActorClass DataApp {
+		Structure {
+			Port p0 : DataProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				State state0
+			}
+		}
+	}
+	
+	ActorClass EmptyEventAppManual {
+		Structure {
+			Port p1 : EventProtocol
+		}
+		Behavior {
+			@BehaviorManual
+		}
+	}
+
+	async ActorClass EmptyAsyncAppManual {
+		Structure {
+			Port p0 : DataProtocol
+			Port p1 : EventProtocol
+		}
+		Behavior {
+			@BehaviorManual
+		}
+	}
+
+	datadriven ActorClass EmptyDataAppManual {
+		Structure {
+			Port p0 : DataProtocol
+		}
+		Behavior { 
+			@BehaviorManual
+		}
+	}
+
+	ProtocolClass EventProtocol {
+		incoming {
+			Message in1()
+		}
+	}
+
+	datadriven ProtocolClass DataProtocol {
+		incoming {
+			Message in1(data: boolean)
+		}
+	}
+
+}

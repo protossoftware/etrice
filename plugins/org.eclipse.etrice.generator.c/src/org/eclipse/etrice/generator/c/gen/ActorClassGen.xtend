@@ -16,15 +16,16 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -190,7 +191,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 			void «ac.name»_execute(«ac.name»* self);
 		«ENDIF»
 		
-		«ac.operations.operationsDeclaration(ac.name)»
+		«IF ac.allStructors.exists[isConstructor]»«getConstructorSignature(ac.name)»;«ENDIF»
+		«IF ac.allStructors.exists[!isConstructor]»«getDestructorSignature(ac.name)»;«ENDIF»
+		
+		«ac.latestOperations.operationsDeclaration(ac.name)»
 		
 		«ac.userCode(2, true)»
 		
@@ -282,7 +286,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDFOR»
 		
 		/* operations */
-		«FOR op : ac.allOperations»
+		«FOR op : ac.latestOperations»
 			«val args = op.argList»
 			#define «op.name»(«args») «ac.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
 		«ENDFOR»
@@ -385,9 +389,27 @@ class ActorClassGen extends GenericActorClassGenerator {
 			}
 		«ENDIF»
 		
-«««		TODO: should be allOperations but how to deal with ctor/dtor and overridden methods?
-		«operationsImplementation(ac.operations, ac.name)»
+		«classStructors(ac)»
 		
+		«operationsImplementation(ac.latestOperations, ac.name)»
+		
+		'''
+	}
+	
+	def protected classStructors(ActorClass ac){
+		val ctors = ac.allStructors.filter[isConstructor]
+		val dtors = ac.allStructors.filter[!isConstructor]
+		'''
+			«IF !ctors.isEmpty»
+				«getConstructorSignature(ac.name)»{
+					«ctors.map[translator.getTranslatedCode(detailCode).asBlock].join»
+				}
+			«ENDIF»
+			«IF !dtors.isEmpty»
+				«getDestructorSignature(ac.name)»{
+					«dtors.map[translator.getTranslatedCode(detailCode).asBlock].join»
+				}
+			«ENDIF»
 		'''
 	}
 }

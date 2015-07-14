@@ -18,7 +18,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.impl.StandardOperationImpl#isDestructor <em>Destructor</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.StandardOperationImpl#isOverride <em>Override</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,24 +27,24 @@ import org.eclipse.etrice.core.room.StandardOperation;
 public class StandardOperationImpl extends OperationImpl implements StandardOperation
 {
   /**
-   * The default value of the '{@link #isDestructor() <em>Destructor</em>}' attribute.
+   * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isDestructor()
+   * @see #isOverride()
    * @generated
    * @ordered
    */
-  protected static final boolean DESTRUCTOR_EDEFAULT = false;
+  protected static final boolean OVERRIDE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isDestructor() <em>Destructor</em>}' attribute.
+   * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isDestructor()
+   * @see #isOverride()
    * @generated
    * @ordered
    */
-  protected boolean destructor = DESTRUCTOR_EDEFAULT;
+  protected boolean override = OVERRIDE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,9 +72,9 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isDestructor()
+  public boolean isOverride()
   {
-    return destructor;
+    return override;
   }
 
   /**
@@ -82,12 +82,12 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDestructor(boolean newDestructor)
+  public void setOverride(boolean newOverride)
   {
-    boolean oldDestructor = destructor;
-    destructor = newDestructor;
+    boolean oldOverride = override;
+    override = newOverride;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STANDARD_OPERATION__DESTRUCTOR, oldDestructor, destructor));
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.STANDARD_OPERATION__OVERRIDE, oldOverride, override));
   }
 
   /**
@@ -100,8 +100,8 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     switch (featureID)
     {
-      case RoomPackage.STANDARD_OPERATION__DESTRUCTOR:
-        return isDestructor();
+      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+        return isOverride();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -116,8 +116,8 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     switch (featureID)
     {
-      case RoomPackage.STANDARD_OPERATION__DESTRUCTOR:
-        setDestructor((Boolean)newValue);
+      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+        setOverride((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -133,8 +133,8 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     switch (featureID)
     {
-      case RoomPackage.STANDARD_OPERATION__DESTRUCTOR:
-        setDestructor(DESTRUCTOR_EDEFAULT);
+      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+        setOverride(OVERRIDE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     switch (featureID)
     {
-      case RoomPackage.STANDARD_OPERATION__DESTRUCTOR:
-        return destructor != DESTRUCTOR_EDEFAULT;
+      case RoomPackage.STANDARD_OPERATION__OVERRIDE:
+        return override != OVERRIDE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -167,8 +167,8 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (destructor: ");
-    result.append(destructor);
+    result.append(" (override: ");
+    result.append(override);
     result.append(')');
     return result.toString();
   }

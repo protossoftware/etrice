@@ -19,23 +19,23 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.room.util.RoomHelpers
 
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-
 @Singleton
 class DataClassGen {
 
 	@Inject IGeneratorFileIo fileIO
-	@Inject extension RoomHelpers
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension FileSystemHelpers
+	@Inject RoomHelpers roomHelpers
 	
 	def doGenerate(Root root) {
 		for (dc: root.usedDataClasses.filter(cl|cl.isValidGenerationLocation)) {
@@ -47,7 +47,8 @@ class DataClassGen {
 	}
 	
 	def generate(Root root, DataClass dc) {
-		val ctor = dc.operations.filter(op|op.constructor).head
+		val ctor = dc.structors.findFirst[isConstructor]
+		val dtor = dc.structors.findFirst[!isConstructor]
 		
 	'''
 		package «dc.getPackage()»;
@@ -75,18 +76,21 @@ class DataClassGen {
 			
 			«dc.operations.operationsImplementation(dc.name)»
 			
+			//--------------------- destruction
+			«getDestructorSignature(dc.name)» {
+				«IF dc.base != null»super.dtor();«ENDIF»
+				«IF dtor != null»«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»«ENDIF»
+			}
+			
 			// default constructor
 			public «dc.name»() {
 				super();
 				
 				«dc.attributes.attributeInitialization(dc, true)»
 				«IF ctor!=null»
-					
 					{
 						// user defined constructor body
-						«FOR l : ctor.detailCode.lines»
-							«l»
-						«ENDFOR»
+						«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
 					}
 				«ENDIF»
 			}
@@ -130,16 +134,8 @@ class DataClassGen {
 		'''«FOR a: attributes SEPARATOR ", "»«a.name»«ENDFOR»'''
 	}
 	
-	def argList(DataClass _dc) {
-		var result = ""
-		var dc = _dc
-		while (dc!=null) {
-			result = dc.attributes.argList.toString + result
-			dc = dc.base
-			if (dc!=null)
-				result = ", "+result
-		}
-		return result
+	def argList(DataClass dc) {
+		roomHelpers.getAllAttributes(dc).argList
 	}
 	
 	def private deepCopy(DataClass _dc) {

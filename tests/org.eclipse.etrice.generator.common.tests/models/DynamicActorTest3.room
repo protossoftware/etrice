@@ -25,10 +25,10 @@ RoomModel DynamicActorTest3 {
 			Binding opt and worker.opt
 		}
 		Behavior {
-			Operation Controller() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest3\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest3\", \"DynamicActorTest3_case\");"
 			}
-			Operation ~Controller() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {

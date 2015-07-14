@@ -35,10 +35,10 @@ RoomModel DynamicActorTest7 {
 			Binding opa and optarr.fct
 		}
 		Behavior {
-			Operation Container() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest7\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest7\", \"DynamicActorTest7_case\");"
 			}
-			Operation ~Container() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			Operation clean() {

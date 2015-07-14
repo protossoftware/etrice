@@ -256,11 +256,11 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public String destructorName(final String cls) {
-    return (cls + "_dtor");
+    return "dtor";
   }
   
   public String constructorReturnType() {
-    return "";
+    return "void";
   }
   
   public String destructorReturnType() {

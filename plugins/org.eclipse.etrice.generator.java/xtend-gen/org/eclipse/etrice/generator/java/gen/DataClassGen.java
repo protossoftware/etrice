@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -25,6 +26,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -41,10 +43,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class DataClassGen {
   @Inject
   private IGeneratorFileIo fileIO;
-  
-  @Inject
-  @Extension
-  private RoomHelpers _roomHelpers;
   
   @Inject
   @Extension
@@ -65,6 +63,9 @@ public class DataClassGen {
   @Inject
   @Extension
   private FileSystemHelpers _fileSystemHelpers;
+  
+  @Inject
+  private RoomHelpers roomHelpers;
   
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
@@ -92,14 +93,21 @@ public class DataClassGen {
   public CharSequence generate(final Root root, final DataClass dc) {
     CharSequence _xblockexpression = null;
     {
-      EList<StandardOperation> _operations = dc.getOperations();
-      final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
-        public Boolean apply(final StandardOperation op) {
-          return Boolean.valueOf(DataClassGen.this._roomHelpers.isConstructor(op));
+      EList<ClassStructor> _structors = dc.getStructors();
+      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          return Boolean.valueOf(it.isConstructor());
         }
       };
-      Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function);
-      final StandardOperation ctor = IterableExtensions.<StandardOperation>head(_filter);
+      final ClassStructor ctor = IterableExtensions.<ClassStructor>findFirst(_structors, _function);
+      EList<ClassStructor> _structors_1 = dc.getStructors();
+      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          boolean _isConstructor = it.isConstructor();
+          return Boolean.valueOf((!_isConstructor));
+        }
+      };
+      final ClassStructor dtor = IterableExtensions.<ClassStructor>findFirst(_structors_1, _function_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _package = this._roomExtensions.getPackage(dc);
@@ -179,11 +187,45 @@ public class DataClassGen {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      EList<StandardOperation> _operations_1 = dc.getOperations();
+      EList<StandardOperation> _operations = dc.getOperations();
       String _name_5 = dc.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations_1, _name_5);
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_5);
       _builder.append(_operationsImplementation, "\t");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("//--------------------- destruction");
+      _builder.newLine();
+      _builder.append("\t");
+      String _name_6 = dc.getName();
+      CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_6);
+      _builder.append(_destructorSignature, "\t");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      {
+        DataClass _base_2 = dc.getBase();
+        boolean _notEquals_1 = (!Objects.equal(_base_2, null));
+        if (_notEquals_1) {
+          _builder.append("super.dtor();");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      {
+        boolean _notEquals_2 = (!Objects.equal(dtor, null));
+        if (_notEquals_2) {
+          AbstractGenerator _instance = AbstractGenerator.getInstance();
+          DetailCode _detailCode = dtor.getDetailCode();
+          String _translatedCode = _instance.getTranslatedCode(_detailCode);
+          _builder.append(_translatedCode, "\t\t");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
@@ -191,8 +233,8 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_6 = dc.getName();
-      _builder.append(_name_6, "\t");
+      String _name_7 = dc.getName();
+      _builder.append(_name_7, "\t");
       _builder.append("() {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -206,10 +248,8 @@ public class DataClassGen {
       _builder.append(_attributeInitialization, "\t\t");
       _builder.newLineIfNotEmpty();
       {
-        boolean _notEquals_1 = (!Objects.equal(ctor, null));
-        if (_notEquals_1) {
-          _builder.append("\t\t");
-          _builder.newLine();
+        boolean _notEquals_3 = (!Objects.equal(ctor, null));
+        if (_notEquals_3) {
           _builder.append("\t\t");
           _builder.append("{");
           _builder.newLine();
@@ -217,16 +257,13 @@ public class DataClassGen {
           _builder.append("\t");
           _builder.append("// user defined constructor body");
           _builder.newLine();
-          {
-            DetailCode _detailCode = ctor.getDetailCode();
-            EList<String> _lines = _detailCode.getLines();
-            for(final String l : _lines) {
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append(l, "\t\t\t");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t\t");
+          _builder.append("\t");
+          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
+          DetailCode _detailCode_1 = ctor.getDetailCode();
+          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
+          _builder.append(_translatedCode_1, "\t\t\t");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("}");
           _builder.newLine();
@@ -242,21 +279,21 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_7 = dc.getName();
-      _builder.append(_name_7, "\t");
+      String _name_8 = dc.getName();
+      _builder.append(_name_8, "\t");
       _builder.append("(");
-      String _argList = this.argList(dc);
+      CharSequence _argList = this.argList(dc);
       _builder.append(_argList, "\t");
       _builder.append(") {");
       _builder.newLineIfNotEmpty();
       {
-        DataClass _base_2 = dc.getBase();
-        boolean _notEquals_2 = (!Objects.equal(_base_2, null));
-        if (_notEquals_2) {
+        DataClass _base_3 = dc.getBase();
+        boolean _notEquals_4 = (!Objects.equal(_base_3, null));
+        if (_notEquals_4) {
           _builder.append("\t\t");
           _builder.append("super(");
-          DataClass _base_3 = dc.getBase();
-          String _paramList = this.paramList(_base_3);
+          DataClass _base_4 = dc.getBase();
+          String _paramList = this.paramList(_base_4);
           _builder.append(_paramList, "\t\t");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
@@ -273,11 +310,11 @@ public class DataClassGen {
         for(final Attribute a : _attributes_4) {
           _builder.append("\t\t");
           _builder.append("this.");
-          String _name_8 = a.getName();
-          _builder.append(_name_8, "\t\t");
-          _builder.append(" = ");
           String _name_9 = a.getName();
           _builder.append(_name_9, "\t\t");
+          _builder.append(" = ");
+          String _name_10 = a.getName();
+          _builder.append(_name_10, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -292,16 +329,16 @@ public class DataClassGen {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _name_10 = dc.getName();
-      _builder.append(_name_10, "\t");
+      String _name_11 = dc.getName();
+      _builder.append(_name_11, "\t");
       _builder.append(" deepCopy() {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      String _name_11 = dc.getName();
-      _builder.append(_name_11, "\t\t");
-      _builder.append(" copy = new ");
       String _name_12 = dc.getName();
       _builder.append(_name_12, "\t\t");
+      _builder.append(" copy = new ");
+      String _name_13 = dc.getName();
+      _builder.append(_name_13, "\t\t");
       _builder.append("();");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -359,25 +396,9 @@ public class DataClassGen {
     return _builder;
   }
   
-  public String argList(final DataClass _dc) {
-    String result = "";
-    DataClass dc = _dc;
-    while ((!Objects.equal(dc, null))) {
-      {
-        EList<Attribute> _attributes = dc.getAttributes();
-        CharSequence _argList = this._procedureHelpers.argList(_attributes);
-        String _string = _argList.toString();
-        String _plus = (_string + result);
-        result = _plus;
-        DataClass _base = dc.getBase();
-        dc = _base;
-        boolean _notEquals = (!Objects.equal(dc, null));
-        if (_notEquals) {
-          result = (", " + result);
-        }
-      }
-    }
-    return result;
+  public CharSequence argList(final DataClass dc) {
+    List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(dc);
+    return this._procedureHelpers.argList(_allAttributes);
   }
   
   private String deepCopy(final DataClass _dc) {

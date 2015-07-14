@@ -20,17 +20,18 @@ import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import org.eclipse.etrice.core.common.base.LiteralType
+import org.eclipse.etrice.core.common.converter.TimeConverter
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
@@ -38,16 +39,14 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
-import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.core.room.util.RoomHelpers
-
-import org.eclipse.etrice.core.common.converter.TimeConverter
 
 @Singleton
 class NodeGen {
@@ -309,7 +308,7 @@ class NodeGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "destroy")
 			etLogger_logInfoF("%s_destroy", «clsname»Inst.name);
 			«FOR ai : ssi.allContainedInstances.reverseView»
-				«IF !ai.actorClass.operations.filter(op|op.destructor).empty»
+				«IF ai.actorClass.allStructors.exists[!isConstructor]»
 					«languageExt.memberInUse(ai.actorClass.name, languageExt.destructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»
@@ -333,7 +332,7 @@ class NodeGen {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "constructActorInstances")
 			
 			«FOR ai : ssi.allContainedInstances»
-				«IF !ai.actorClass.operations.filter(op|op.constructor).empty»
+				«IF ai.actorClass.allStructors.exists[isConstructor]»
 					«languageExt.memberInUse(ai.actorClass.name, languageExt.constructorName(ai.actorClass.name))»(&«ai.path.getPathName()»);
 				«ENDIF»
 			«ENDFOR»

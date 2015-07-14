@@ -46,6 +46,7 @@ import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -60,7 +61,6 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
@@ -828,16 +828,15 @@ public class NodeGen {
         for(final ActorInstance ai : _reverseView) {
           {
             ActorClass _actorClass = ai.getActorClass();
-            EList<StandardOperation> _operations = _actorClass.getOperations();
-            final Function1<StandardOperation, Boolean> _function_2 = new Function1<StandardOperation, Boolean>() {
-              public Boolean apply(final StandardOperation op) {
-                return Boolean.valueOf(op.isDestructor());
+            List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(_actorClass);
+            final Function1<ClassStructor, Boolean> _function_2 = new Function1<ClassStructor, Boolean>() {
+              public Boolean apply(final ClassStructor it) {
+                boolean _isConstructor = it.isConstructor();
+                return Boolean.valueOf((!_isConstructor));
               }
             };
-            Iterable<StandardOperation> _filter = IterableExtensions.<StandardOperation>filter(_operations, _function_2);
-            boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-            boolean _not = (!_isEmpty);
-            if (_not) {
+            boolean _exists = IterableExtensions.<ClassStructor>exists(_allStructors, _function_2);
+            if (_exists) {
               _builder.append("\t");
               ActorClass _actorClass_1 = ai.getActorClass();
               String _name_16 = _actorClass_1.getName();
@@ -915,16 +914,14 @@ public class NodeGen {
         for(final ActorInstance ai_1 : _allContainedInstances_1) {
           {
             ActorClass _actorClass_3 = ai_1.getActorClass();
-            EList<StandardOperation> _operations_1 = _actorClass_3.getOperations();
-            final Function1<StandardOperation, Boolean> _function_3 = new Function1<StandardOperation, Boolean>() {
-              public Boolean apply(final StandardOperation op) {
-                return Boolean.valueOf(NodeGen.this._roomHelpers.isConstructor(op));
+            List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(_actorClass_3);
+            final Function1<ClassStructor, Boolean> _function_3 = new Function1<ClassStructor, Boolean>() {
+              public Boolean apply(final ClassStructor it) {
+                return Boolean.valueOf(it.isConstructor());
               }
             };
-            Iterable<StandardOperation> _filter_1 = IterableExtensions.<StandardOperation>filter(_operations_1, _function_3);
-            boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
-            boolean _not_1 = (!_isEmpty_1);
-            if (_not_1) {
+            boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_allStructors_1, _function_3);
+            if (_exists_1) {
               _builder.append("\t");
               ActorClass _actorClass_4 = ai_1.getActorClass();
               String _name_18 = _actorClass_4.getName();

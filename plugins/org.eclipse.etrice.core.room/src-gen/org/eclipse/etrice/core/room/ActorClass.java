@@ -64,6 +64,7 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
@@ -239,6 +240,22 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
   EList<Annotation> getBehaviorAnnotations();
 
   /**
+   * Returns the value of the '<em><b>Structors</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.ClassStructor}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Structors</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Structors</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_Structors()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ClassStructor> getStructors();
+
+  /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
    * <!-- begin-user-doc -->
@@ -258,7 +275,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>();\nfor (ExternalPort ep : getExternalPorts()) {\n\tports.add(ep.getInterfacePort());\n}\nreturn ports;\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>();\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.add(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getExternalEndPorts();
@@ -267,7 +284,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>(getInterfacePorts());\nfor (ExternalPort ep : getExternalPorts()) {\n\tports.remove(ep.getInterfacePort());\n}\nreturn ports;\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<Port> ports = new BasicEList<Port>(getInterfacePorts());\r\nfor (ExternalPort ep : getExternalPorts()) {\r\n\tports.remove(ep.getInterfacePort());\r\n}\r\nreturn ports;\r\n'"
    * @generated
    */
   EList<Port> getRelayPorts();
@@ -276,7 +293,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPP> spps = new BasicEList<SPP>();\nfor (ServiceImplementation spp : getServiceImplementations()) {\n\tspps.add(spp.getSpp());\n}\nreturn spps;\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='EList<SPP> spps = new BasicEList<SPP>();\r\nfor (ServiceImplementation spp : getServiceImplementations()) {\r\n\tspps.add(spp.getSpp());\r\n}\r\nreturn spps;\r\n'"
    * @generated
    */
   EList<SPP> getImplementedSPPs();
@@ -285,7 +302,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (ActorClass)getBase();\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return (ActorClass)getBase();\r\n'"
    * @generated
    */
   ActorClass getActorBase();
@@ -294,7 +311,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getName();\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getName();\r\n'"
    * @generated
    */
   String getComponentName();
@@ -303,7 +320,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getInterfaceItems(this));\r\n'"
    * @generated
    */
   EList<AbstractInterfaceItem> getAbstractInterfaceItems();
@@ -312,7 +329,7 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));\n'"
+   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new <%org.eclipse.emf.common.util.BasicEList%><AbstractInterfaceItem>(new <%org.eclipse.etrice.core.room.util.RoomHelpers%>().getAllInterfaceItems(this));\r\n'"
    * @generated
    */
   EList<AbstractInterfaceItem> getAllAbstractInterfaceItems();

@@ -15,11 +15,11 @@ RoomModel StaticConfigTest {
 			LayerConnection ref testee_1 satisfied_by tester.spp
 		}
 		Behavior {
-			Operation Top_ac() {
+			ctor {
 				"etUnit_open(\"tmp\", \"StaticConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.StaticConfigTest\");"
 			}
-			Operation ~Top_ac() {
+			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
 			}
@@ -39,10 +39,10 @@ RoomModel StaticConfigTest {
 			ActorRef testee_super2: Testee_Super2_ac
 		}
 		Behavior {
-			Operation Tester_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
 			}
-			Operation ~Tester_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 			StateMachine {
@@ -78,10 +78,10 @@ RoomModel StaticConfigTest {
 			ActorRef testee_2: Testee_2_ac
 		}
 		Behavior {
-			Operation Testee_1_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
 			}
-			Operation ~Testee_1_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 			StateMachine {
@@ -154,10 +154,10 @@ RoomModel StaticConfigTest {
 			Attribute float64_super_i: float64 = "1.1"
 		}
 		Behavior {
-			Operation Testee_Super2_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_Super2_ac\");"
 			}
-			Operation ~Testee_Super2_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 		}
@@ -171,10 +171,10 @@ RoomModel StaticConfigTest {
 			Attribute int32_own_i: int32 = "11"
 		}
 		Behavior {
-			Operation Testee_2_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
 			}
-			Operation ~Testee_2_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 			StateMachine {

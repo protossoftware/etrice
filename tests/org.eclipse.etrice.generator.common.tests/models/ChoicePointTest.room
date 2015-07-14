@@ -29,10 +29,10 @@ RoomModel ChoicePointTest {
 			
 		}
 		Behavior {
-			Operation CPUser() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTest\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
 			}
-			Operation ~CPUser() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {

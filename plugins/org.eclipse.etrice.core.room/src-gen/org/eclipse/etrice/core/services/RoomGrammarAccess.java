@@ -631,20 +631,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cUserCode3DetailCodeParserRuleCall_8_1_0 = (RuleCall)cUserCode3Assignment_8_1.eContents().get(0);
 		private final Assignment cAttributesAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cAttributesAttributeParserRuleCall_9_0 = (RuleCall)cAttributesAssignment_9.eContents().get(0);
-		private final Assignment cOperationsAssignment_10 = (Assignment)cGroup.eContents().get(10);
-		private final RuleCall cOperationsStandardOperationParserRuleCall_10_0 = (RuleCall)cOperationsAssignment_10.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cStructorsAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cStructorsClassStructorParserRuleCall_10_0 = (RuleCall)cStructorsAssignment_10.eContents().get(0);
+		private final Assignment cOperationsAssignment_11 = (Assignment)cGroup.eContents().get(11);
+		private final RuleCall cOperationsStandardOperationParserRuleCall_11_0 = (RuleCall)cOperationsAssignment_11.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//// TODOHRR: define detail level language?
 		//DataClass:
 		//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-		//	operations+=StandardOperation* "}";
+		//	structors+=ClassStructor* operations+=StandardOperation* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-		//operations+=StandardOperation* "}"
+		//structors+=ClassStructor* operations+=StandardOperation* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"DataClass"
@@ -728,14 +730,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_9_0() { return cAttributesAttributeParserRuleCall_9_0; }
 
+		//structors+=ClassStructor*
+		public Assignment getStructorsAssignment_10() { return cStructorsAssignment_10; }
+
+		//ClassStructor
+		public RuleCall getStructorsClassStructorParserRuleCall_10_0() { return cStructorsClassStructorParserRuleCall_10_0; }
+
 		//operations+=StandardOperation*
-		public Assignment getOperationsAssignment_10() { return cOperationsAssignment_10; }
+		public Assignment getOperationsAssignment_11() { return cOperationsAssignment_11; }
 
 		//StandardOperation
-		public RuleCall getOperationsStandardOperationParserRuleCall_10_0() { return cOperationsStandardOperationParserRuleCall_10_0; }
+		public RuleCall getOperationsStandardOperationParserRuleCall_11_0() { return cOperationsStandardOperationParserRuleCall_11_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
+		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
@@ -841,9 +849,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public class StandardOperationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StandardOperation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOperationKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cDestructorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cDestructorTildeKeyword_1_0 = (Keyword)cDestructorAssignment_1.eContents().get(0);
+		private final Assignment cOverrideAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOverrideOverrideKeyword_0_0 = (Keyword)cOverrideAssignment_0.eContents().get(0);
+		private final Keyword cOperationKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -867,22 +875,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_8_0 = (RuleCall)cDetailCodeAssignment_8.eContents().get(0);
 		
 		//StandardOperation:
-		//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//	override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
 		//	returnType=RefableType))? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
 		//returnType=RefableType))? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
+		//override?="override"?
+		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
+
+		//"override"
+		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
+
 		//"Operation"
-		public Keyword getOperationKeyword_0() { return cOperationKeyword_0; }
-
-		//destructor?="~"?
-		public Assignment getDestructorAssignment_1() { return cDestructorAssignment_1; }
-
-		//"~"
-		public Keyword getDestructorTildeKeyword_1_0() { return cDestructorTildeKeyword_1_0; }
+		public Keyword getOperationKeyword_1() { return cOperationKeyword_1; }
 
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -1072,6 +1080,42 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_7_0() { return cDetailCodeDetailCodeParserRuleCall_7_0; }
+	}
+
+	public class ClassStructorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClassStructor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Alternatives cNameAlternatives_0_0 = (Alternatives)cNameAssignment_0.eContents().get(0);
+		private final Keyword cNameCtorKeyword_0_0_0 = (Keyword)cNameAlternatives_0_0.eContents().get(0);
+		private final Keyword cNameDtorKeyword_0_0_1 = (Keyword)cNameAlternatives_0_0.eContents().get(1);
+		private final Assignment cDetailCodeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDetailCodeDetailCodeParserRuleCall_1_0 = (RuleCall)cDetailCodeAssignment_1.eContents().get(0);
+		
+		//ClassStructor:
+		//	name=("ctor" | "dtor") detailCode=DetailCode;
+		public ParserRule getRule() { return rule; }
+
+		//name=("ctor" | "dtor") detailCode=DetailCode
+		public Group getGroup() { return cGroup; }
+
+		//name=("ctor" | "dtor")
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//"ctor" | "dtor"
+		public Alternatives getNameAlternatives_0_0() { return cNameAlternatives_0_0; }
+
+		//"ctor"
+		public Keyword getNameCtorKeyword_0_0_0() { return cNameCtorKeyword_0_0_0; }
+
+		//"dtor"
+		public Keyword getNameDtorKeyword_0_0_1() { return cNameDtorKeyword_0_0_1; }
+
+		//detailCode=DetailCode
+		public Assignment getDetailCodeAssignment_1() { return cDetailCodeAssignment_1; }
+
+		//DetailCode
+		public RuleCall getDetailCodeDetailCodeParserRuleCall_1_0() { return cDetailCodeDetailCodeParserRuleCall_1_0; }
 	}
 
 	public class GeneralProtocolClassElements extends AbstractParserRuleElementFinder {
@@ -1730,11 +1774,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_9_2 = (Keyword)cGroup_9.eContents().get(2);
 		private final Assignment cBehaviorAnnotationsAssignment_9_3 = (Assignment)cGroup_9.eContents().get(3);
 		private final RuleCall cBehaviorAnnotationsAnnotationParserRuleCall_9_3_0 = (RuleCall)cBehaviorAnnotationsAssignment_9_3.eContents().get(0);
-		private final Assignment cOperationsAssignment_9_4 = (Assignment)cGroup_9.eContents().get(4);
-		private final RuleCall cOperationsStandardOperationParserRuleCall_9_4_0 = (RuleCall)cOperationsAssignment_9_4.eContents().get(0);
-		private final Assignment cStateMachineAssignment_9_5 = (Assignment)cGroup_9.eContents().get(5);
-		private final RuleCall cStateMachineStateMachineParserRuleCall_9_5_0 = (RuleCall)cStateMachineAssignment_9_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9_6 = (Keyword)cGroup_9.eContents().get(6);
+		private final Assignment cStructorsAssignment_9_4 = (Assignment)cGroup_9.eContents().get(4);
+		private final RuleCall cStructorsClassStructorParserRuleCall_9_4_0 = (RuleCall)cStructorsAssignment_9_4.eContents().get(0);
+		private final Assignment cOperationsAssignment_9_5 = (Assignment)cGroup_9.eContents().get(5);
+		private final RuleCall cOperationsStandardOperationParserRuleCall_9_5_0 = (RuleCall)cOperationsAssignment_9_5.eContents().get(0);
+		private final Assignment cStateMachineAssignment_9_6 = (Assignment)cGroup_9.eContents().get(6);
+		private final RuleCall cStateMachineStateMachineParserRuleCall_9_6_0 = (RuleCall)cStateMachineAssignment_9_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9_7 = (Keyword)cGroup_9.eContents().get(7);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//// some notes on ports
@@ -1751,8 +1797,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
 		//	externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
 		//	serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-		//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-		//	stateMachine=StateMachine? "}")? "}";
+		//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
+		//	operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
 		public ParserRule getRule() { return rule; }
 
 		//(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
@@ -1761,8 +1807,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
 		//externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
 		//serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-		//stateMachine=StateMachine? "}")? "}"
+		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
+		//operations+=StandardOperation* stateMachine=StateMachine? "}")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"? & commType=ComponentCommunicationType?
@@ -1956,8 +2002,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_8_7() { return cRightCurlyBracketKeyword_8_7; }
 
-		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-		//stateMachine=StateMachine? "}")?
+		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
+		//operations+=StandardOperation* stateMachine=StateMachine? "}")?
 		public Group getGroup_9() { return cGroup_9; }
 
 		//"Behavior"
@@ -1978,20 +2024,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Annotation
 		public RuleCall getBehaviorAnnotationsAnnotationParserRuleCall_9_3_0() { return cBehaviorAnnotationsAnnotationParserRuleCall_9_3_0; }
 
+		//structors+=ClassStructor*
+		public Assignment getStructorsAssignment_9_4() { return cStructorsAssignment_9_4; }
+
+		//ClassStructor
+		public RuleCall getStructorsClassStructorParserRuleCall_9_4_0() { return cStructorsClassStructorParserRuleCall_9_4_0; }
+
 		//operations+=StandardOperation*
-		public Assignment getOperationsAssignment_9_4() { return cOperationsAssignment_9_4; }
+		public Assignment getOperationsAssignment_9_5() { return cOperationsAssignment_9_5; }
 
 		//StandardOperation
-		public RuleCall getOperationsStandardOperationParserRuleCall_9_4_0() { return cOperationsStandardOperationParserRuleCall_9_4_0; }
+		public RuleCall getOperationsStandardOperationParserRuleCall_9_5_0() { return cOperationsStandardOperationParserRuleCall_9_5_0; }
 
 		//stateMachine=StateMachine?
-		public Assignment getStateMachineAssignment_9_5() { return cStateMachineAssignment_9_5; }
+		public Assignment getStateMachineAssignment_9_6() { return cStateMachineAssignment_9_6; }
 
 		//StateMachine
-		public RuleCall getStateMachineStateMachineParserRuleCall_9_5_0() { return cStateMachineStateMachineParserRuleCall_9_5_0; }
+		public RuleCall getStateMachineStateMachineParserRuleCall_9_6_0() { return cStateMachineStateMachineParserRuleCall_9_6_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_9_6() { return cRightCurlyBracketKeyword_9_6; }
+		public Keyword getRightCurlyBracketKeyword_9_7() { return cRightCurlyBracketKeyword_9_7; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
@@ -3250,72 +3302,130 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLOGICAL_SYSTEM_CLASSLogicalSystemKeyword_6_0() { return cLOGICAL_SYSTEM_CLASSLogicalSystemKeyword_6_0; }
 	}
 	
-	private RoomModelElements pRoomModel;
-	private RoomClassElements pRoomClass;
-	private StructureClassElements pStructureClass;
-	private ActorContainerClassElements pActorContainerClass;
-	private VarDeclElements pVarDecl;
-	private RefableTypeElements pRefableType;
-	private DataTypeElements pDataType;
-	private ComplexTypeElements pComplexType;
-	private PrimitiveTypeElements pPrimitiveType;
-	private EnumerationTypeElements pEnumerationType;
-	private EnumLiteralElements pEnumLiteral;
-	private ExternalTypeElements pExternalType;
-	private DataClassElements pDataClass;
-	private AttributeElements pAttribute;
-	private OperationElements pOperation;
-	private StandardOperationElements pStandardOperation;
-	private PortOperationElements pPortOperation;
-	private CommunicationTypeElements unknownRuleCommunicationType;
-	private GeneralProtocolClassElements pGeneralProtocolClass;
-	private ProtocolClassElements pProtocolClass;
-	private CompoundProtocolClassElements pCompoundProtocolClass;
-	private SubProtocolElements pSubProtocol;
-	private MessageElements pMessage;
-	private PortClassElements pPortClass;
-	private MessageHandlerElements pMessageHandler;
-	private InMessageHandlerElements pInMessageHandler;
-	private OutMessageHandlerElements pOutMessageHandler;
-	private ModelComponentElements pModelComponent;
-	private ActorClassElements pActorClass;
-	private InterfaceItemElements pInterfaceItem;
-	private PortElements pPort;
-	private ExternalPortElements pExternalPort;
-	private SAPElements pSAP;
-	private SPPElements pSPP;
-	private ServiceImplementationElements pServiceImplementation;
-	private LogicalSystemElements pLogicalSystem;
-	private ActorContainerRefElements pActorContainerRef;
-	private SubSystemRefElements pSubSystemRef;
-	private SubSystemClassElements pSubSystemClass;
-	private LogicalThreadElements pLogicalThread;
-	private ActorInstanceMappingElements pActorInstanceMapping;
-	private RefPathElements pRefPath;
-	private RefSegmentElements pRefSegment;
-	private BindingElements pBinding;
-	private BindingEndPointElements pBindingEndPoint;
-	private LayerConnectionElements pLayerConnection;
-	private SAPointElements pSAPoint;
-	private RefSAPointElements pRefSAPoint;
-	private RelaySAPointElements pRelaySAPoint;
-	private SPPointElements pSPPoint;
-	private ActorRefElements pActorRef;
-	private ReferenceTypeElements unknownRuleReferenceType;
-	private AbstractInterfaceItemElements pAbstractInterfaceItem;
-	private MULTIPLICITYElements pMULTIPLICITY;
-	private AnnotationTargetTypeElements pAnnotationTargetType;
-	private RoomAnnotationTargetEnumElements unknownRuleRoomAnnotationTargetEnum;
+	private final RoomModelElements pRoomModel;
+	private final RoomClassElements pRoomClass;
+	private final StructureClassElements pStructureClass;
+	private final ActorContainerClassElements pActorContainerClass;
+	private final VarDeclElements pVarDecl;
+	private final RefableTypeElements pRefableType;
+	private final DataTypeElements pDataType;
+	private final ComplexTypeElements pComplexType;
+	private final PrimitiveTypeElements pPrimitiveType;
+	private final EnumerationTypeElements pEnumerationType;
+	private final EnumLiteralElements pEnumLiteral;
+	private final ExternalTypeElements pExternalType;
+	private final DataClassElements pDataClass;
+	private final AttributeElements pAttribute;
+	private final OperationElements pOperation;
+	private final StandardOperationElements pStandardOperation;
+	private final PortOperationElements pPortOperation;
+	private final ClassStructorElements pClassStructor;
+	private final CommunicationTypeElements unknownRuleCommunicationType;
+	private final GeneralProtocolClassElements pGeneralProtocolClass;
+	private final ProtocolClassElements pProtocolClass;
+	private final CompoundProtocolClassElements pCompoundProtocolClass;
+	private final SubProtocolElements pSubProtocol;
+	private final MessageElements pMessage;
+	private final PortClassElements pPortClass;
+	private final MessageHandlerElements pMessageHandler;
+	private final InMessageHandlerElements pInMessageHandler;
+	private final OutMessageHandlerElements pOutMessageHandler;
+	private final ModelComponentElements pModelComponent;
+	private final ActorClassElements pActorClass;
+	private final InterfaceItemElements pInterfaceItem;
+	private final PortElements pPort;
+	private final ExternalPortElements pExternalPort;
+	private final SAPElements pSAP;
+	private final SPPElements pSPP;
+	private final ServiceImplementationElements pServiceImplementation;
+	private final LogicalSystemElements pLogicalSystem;
+	private final ActorContainerRefElements pActorContainerRef;
+	private final SubSystemRefElements pSubSystemRef;
+	private final SubSystemClassElements pSubSystemClass;
+	private final LogicalThreadElements pLogicalThread;
+	private final ActorInstanceMappingElements pActorInstanceMapping;
+	private final RefPathElements pRefPath;
+	private final RefSegmentElements pRefSegment;
+	private final BindingElements pBinding;
+	private final BindingEndPointElements pBindingEndPoint;
+	private final LayerConnectionElements pLayerConnection;
+	private final SAPointElements pSAPoint;
+	private final RefSAPointElements pRefSAPoint;
+	private final RelaySAPointElements pRelaySAPoint;
+	private final SPPointElements pSPPoint;
+	private final ActorRefElements pActorRef;
+	private final ReferenceTypeElements unknownRuleReferenceType;
+	private final AbstractInterfaceItemElements pAbstractInterfaceItem;
+	private final MULTIPLICITYElements pMULTIPLICITY;
+	private final AnnotationTargetTypeElements pAnnotationTargetType;
+	private final RoomAnnotationTargetEnumElements unknownRuleRoomAnnotationTargetEnum;
 	
 	private final Grammar grammar;
 
-	private FSMGrammarAccess gaFSM;
+	private final FSMGrammarAccess gaFSM;
 
 	@Inject
 	public RoomGrammarAccess(GrammarProvider grammarProvider,
 		FSMGrammarAccess gaFSM) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaFSM = gaFSM;
+		this.pRoomModel = new RoomModelElements();
+		this.pRoomClass = new RoomClassElements();
+		this.pStructureClass = new StructureClassElements();
+		this.pActorContainerClass = new ActorContainerClassElements();
+		this.pVarDecl = new VarDeclElements();
+		this.pRefableType = new RefableTypeElements();
+		this.pDataType = new DataTypeElements();
+		this.pComplexType = new ComplexTypeElements();
+		this.pPrimitiveType = new PrimitiveTypeElements();
+		this.pEnumerationType = new EnumerationTypeElements();
+		this.pEnumLiteral = new EnumLiteralElements();
+		this.pExternalType = new ExternalTypeElements();
+		this.pDataClass = new DataClassElements();
+		this.pAttribute = new AttributeElements();
+		this.pOperation = new OperationElements();
+		this.pStandardOperation = new StandardOperationElements();
+		this.pPortOperation = new PortOperationElements();
+		this.pClassStructor = new ClassStructorElements();
+		this.unknownRuleCommunicationType = new CommunicationTypeElements();
+		this.pGeneralProtocolClass = new GeneralProtocolClassElements();
+		this.pProtocolClass = new ProtocolClassElements();
+		this.pCompoundProtocolClass = new CompoundProtocolClassElements();
+		this.pSubProtocol = new SubProtocolElements();
+		this.pMessage = new MessageElements();
+		this.pPortClass = new PortClassElements();
+		this.pMessageHandler = new MessageHandlerElements();
+		this.pInMessageHandler = new InMessageHandlerElements();
+		this.pOutMessageHandler = new OutMessageHandlerElements();
+		this.pModelComponent = new ModelComponentElements();
+		this.pActorClass = new ActorClassElements();
+		this.pInterfaceItem = new InterfaceItemElements();
+		this.pPort = new PortElements();
+		this.pExternalPort = new ExternalPortElements();
+		this.pSAP = new SAPElements();
+		this.pSPP = new SPPElements();
+		this.pServiceImplementation = new ServiceImplementationElements();
+		this.pLogicalSystem = new LogicalSystemElements();
+		this.pActorContainerRef = new ActorContainerRefElements();
+		this.pSubSystemRef = new SubSystemRefElements();
+		this.pSubSystemClass = new SubSystemClassElements();
+		this.pLogicalThread = new LogicalThreadElements();
+		this.pActorInstanceMapping = new ActorInstanceMappingElements();
+		this.pRefPath = new RefPathElements();
+		this.pRefSegment = new RefSegmentElements();
+		this.pBinding = new BindingElements();
+		this.pBindingEndPoint = new BindingEndPointElements();
+		this.pLayerConnection = new LayerConnectionElements();
+		this.pSAPoint = new SAPointElements();
+		this.pRefSAPoint = new RefSAPointElements();
+		this.pRelaySAPoint = new RelaySAPointElements();
+		this.pSPPoint = new SPPointElements();
+		this.pActorRef = new ActorRefElements();
+		this.unknownRuleReferenceType = new ReferenceTypeElements();
+		this.pAbstractInterfaceItem = new AbstractInterfaceItemElements();
+		this.pMULTIPLICITY = new MULTIPLICITYElements();
+		this.pAnnotationTargetType = new AnnotationTargetTypeElements();
+		this.unknownRuleRoomAnnotationTargetEnum = new RoomAnnotationTargetEnumElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -3351,7 +3461,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
 	//	systems+=LogicalSystem | annotationTypes+=AnnotationType)* "}";
 	public RoomModelElements getRoomModelAccess() {
-		return (pRoomModel != null) ? pRoomModel : (pRoomModel = new RoomModelElements());
+		return pRoomModel;
 	}
 	
 	public ParserRule getRoomModelRule() {
@@ -3361,7 +3471,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RoomClass:
 	//	DataType | GeneralProtocolClass | StructureClass;
 	public RoomClassElements getRoomClassAccess() {
-		return (pRoomClass != null) ? pRoomClass : (pRoomClass = new RoomClassElements());
+		return pRoomClass;
 	}
 	
 	public ParserRule getRoomClassRule() {
@@ -3371,7 +3481,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//StructureClass:
 	//	ActorContainerClass | LogicalSystem;
 	public StructureClassElements getStructureClassAccess() {
-		return (pStructureClass != null) ? pStructureClass : (pStructureClass = new StructureClassElements());
+		return pStructureClass;
 	}
 	
 	public ParserRule getStructureClassRule() {
@@ -3381,7 +3491,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ActorContainerClass:
 	//	ActorClass | SubSystemClass;
 	public ActorContainerClassElements getActorContainerClassAccess() {
-		return (pActorContainerClass != null) ? pActorContainerClass : (pActorContainerClass = new ActorContainerClassElements());
+		return pActorContainerClass;
 	}
 	
 	public ParserRule getActorContainerClassRule() {
@@ -3393,7 +3503,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//VarDecl:
 	//	name=ID ":" refType=RefableType;
 	public VarDeclElements getVarDeclAccess() {
-		return (pVarDecl != null) ? pVarDecl : (pVarDecl = new VarDeclElements());
+		return pVarDecl;
 	}
 	
 	public ParserRule getVarDeclRule() {
@@ -3403,7 +3513,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RefableType:
 	//	type=[DataType|FQN] ref?="ref"?;
 	public RefableTypeElements getRefableTypeAccess() {
-		return (pRefableType != null) ? pRefableType : (pRefableType = new RefableTypeElements());
+		return pRefableType;
 	}
 	
 	public ParserRule getRefableTypeRule() {
@@ -3413,7 +3523,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//DataType:
 	//	PrimitiveType | EnumerationType | ComplexType;
 	public DataTypeElements getDataTypeAccess() {
-		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
+		return pDataType;
 	}
 	
 	public ParserRule getDataTypeRule() {
@@ -3423,7 +3533,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ComplexType:
 	//	DataClass | ExternalType;
 	public ComplexTypeElements getComplexTypeAccess() {
-		return (pComplexType != null) ? pComplexType : (pComplexType = new ComplexTypeElements());
+		return pComplexType;
 	}
 	
 	public ParserRule getComplexTypeRule() {
@@ -3434,7 +3544,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
 	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
-		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
+		return pPrimitiveType;
 	}
 	
 	public ParserRule getPrimitiveTypeRule() {
@@ -3445,7 +3555,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
 	//	literals+=EnumLiteral)*)? "}";
 	public EnumerationTypeElements getEnumerationTypeAccess() {
-		return (pEnumerationType != null) ? pEnumerationType : (pEnumerationType = new EnumerationTypeElements());
+		return pEnumerationType;
 	}
 	
 	public ParserRule getEnumerationTypeRule() {
@@ -3455,7 +3565,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//EnumLiteral:
 	//	name=ID ("=" literal=IntLiteral)?;
 	public EnumLiteralElements getEnumLiteralAccess() {
-		return (pEnumLiteral != null) ? pEnumLiteral : (pEnumLiteral = new EnumLiteralElements());
+		return pEnumLiteral;
 	}
 	
 	public ParserRule getEnumLiteralRule() {
@@ -3465,7 +3575,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ExternalType:
 	//	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
 	public ExternalTypeElements getExternalTypeAccess() {
-		return (pExternalType != null) ? pExternalType : (pExternalType = new ExternalTypeElements());
+		return pExternalType;
 	}
 	
 	public ParserRule getExternalTypeRule() {
@@ -3476,9 +3586,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//DataClass:
 	//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
 	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-	//	operations+=StandardOperation* "}";
+	//	structors+=ClassStructor* operations+=StandardOperation* "}";
 	public DataClassElements getDataClassAccess() {
-		return (pDataClass != null) ? pDataClass : (pDataClass = new DataClassElements());
+		return pDataClass;
 	}
 	
 	public ParserRule getDataClassRule() {
@@ -3488,7 +3598,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Attribute:
 	//	"Attribute" name=ID ("[" size=INT "]")? ":" type=RefableType ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -3498,7 +3608,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Operation:
 	//	StandardOperation | PortOperation;
 	public OperationElements getOperationAccess() {
-		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
+		return pOperation;
 	}
 	
 	public ParserRule getOperationRule() {
@@ -3506,10 +3616,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StandardOperation:
-	//	"Operation" destructor?="~"? name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+	//	override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
 	//	returnType=RefableType))? docu=Documentation? detailCode=DetailCode;
 	public StandardOperationElements getStandardOperationAccess() {
-		return (pStandardOperation != null) ? pStandardOperation : (pStandardOperation = new StandardOperationElements());
+		return pStandardOperation;
 	}
 	
 	public ParserRule getStandardOperationRule() {
@@ -3520,11 +3630,21 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
 	//	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
 	public PortOperationElements getPortOperationAccess() {
-		return (pPortOperation != null) ? pPortOperation : (pPortOperation = new PortOperationElements());
+		return pPortOperation;
 	}
 	
 	public ParserRule getPortOperationRule() {
 		return getPortOperationAccess().getRule();
+	}
+
+	//ClassStructor:
+	//	name=("ctor" | "dtor") detailCode=DetailCode;
+	public ClassStructorElements getClassStructorAccess() {
+		return pClassStructor;
+	}
+	
+	public ParserRule getClassStructorRule() {
+		return getClassStructorAccess().getRule();
 	}
 
 	//// **************************************************************
@@ -3532,7 +3652,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//enum CommunicationType:
 	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync";
 	public CommunicationTypeElements getCommunicationTypeAccess() {
-		return (unknownRuleCommunicationType != null) ? unknownRuleCommunicationType : (unknownRuleCommunicationType = new CommunicationTypeElements());
+		return unknownRuleCommunicationType;
 	}
 	
 	public EnumRule getCommunicationTypeRule() {
@@ -3542,7 +3662,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//GeneralProtocolClass:
 	//	ProtocolClass | CompoundProtocolClass;
 	public GeneralProtocolClassElements getGeneralProtocolClassAccess() {
-		return (pGeneralProtocolClass != null) ? pGeneralProtocolClass : (pGeneralProtocolClass = new GeneralProtocolClassElements());
+		return pGeneralProtocolClass;
 	}
 	
 	public ParserRule getGeneralProtocolClassRule() {
@@ -3556,7 +3676,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
 	//	semantics=ProtocolSemantics? "}";
 	public ProtocolClassElements getProtocolClassAccess() {
-		return (pProtocolClass != null) ? pProtocolClass : (pProtocolClass = new ProtocolClassElements());
+		return pProtocolClass;
 	}
 	
 	public ParserRule getProtocolClassRule() {
@@ -3566,7 +3686,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//CompoundProtocolClass:
 	//	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol* "}";
 	public CompoundProtocolClassElements getCompoundProtocolClassAccess() {
-		return (pCompoundProtocolClass != null) ? pCompoundProtocolClass : (pCompoundProtocolClass = new CompoundProtocolClassElements());
+		return pCompoundProtocolClass;
 	}
 	
 	public ParserRule getCompoundProtocolClassRule() {
@@ -3576,7 +3696,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SubProtocol:
 	//	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
 	public SubProtocolElements getSubProtocolAccess() {
-		return (pSubProtocol != null) ? pSubProtocol : (pSubProtocol = new SubProtocolElements());
+		return pSubProtocol;
 	}
 	
 	public ParserRule getSubProtocolRule() {
@@ -3586,7 +3706,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Message:
 	//	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
 	public MessageElements getMessageAccess() {
-		return (pMessage != null) ? pMessage : (pMessage = new MessageElements());
+		return pMessage;
 	}
 	
 	public ParserRule getMessageRule() {
@@ -3597,7 +3717,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	{PortClass} "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
 	//	msgHandlers+=MessageHandler)* "}";
 	public PortClassElements getPortClassAccess() {
-		return (pPortClass != null) ? pPortClass : (pPortClass = new PortClassElements());
+		return pPortClass;
 	}
 	
 	public ParserRule getPortClassRule() {
@@ -3607,7 +3727,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//MessageHandler:
 	//	InMessageHandler | OutMessageHandler;
 	public MessageHandlerElements getMessageHandlerAccess() {
-		return (pMessageHandler != null) ? pMessageHandler : (pMessageHandler = new MessageHandlerElements());
+		return pMessageHandler;
 	}
 	
 	public ParserRule getMessageHandlerRule() {
@@ -3617,7 +3737,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//InMessageHandler:
 	//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
 	public InMessageHandlerElements getInMessageHandlerAccess() {
-		return (pInMessageHandler != null) ? pInMessageHandler : (pInMessageHandler = new InMessageHandlerElements());
+		return pInMessageHandler;
 	}
 	
 	public ParserRule getInMessageHandlerRule() {
@@ -3627,7 +3747,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//OutMessageHandler:
 	//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
 	public OutMessageHandlerElements getOutMessageHandlerAccess() {
-		return (pOutMessageHandler != null) ? pOutMessageHandler : (pOutMessageHandler = new OutMessageHandlerElements());
+		return pOutMessageHandler;
 	}
 	
 	public ParserRule getOutMessageHandlerRule() {
@@ -3639,7 +3759,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ModelComponent:
 	//	ActorClass;
 	public ModelComponentElements getModelComponentAccess() {
-		return (pModelComponent != null) ? pModelComponent : (pModelComponent = new ModelComponentElements());
+		return pModelComponent;
 	}
 	
 	public ParserRule getModelComponentRule() {
@@ -3660,10 +3780,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
 	//	externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
 	//	serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-	//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* operations+=StandardOperation*
-	//	stateMachine=StateMachine? "}")? "}";
+	//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
+	//	operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
 	public ActorClassElements getActorClassAccess() {
-		return (pActorClass != null) ? pActorClass : (pActorClass = new ActorClassElements());
+		return pActorClass;
 	}
 	
 	public ParserRule getActorClassRule() {
@@ -3673,7 +3793,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//InterfaceItem:
 	//	Port | SAP | SPP;
 	public InterfaceItemElements getInterfaceItemAccess() {
-		return (pInterfaceItem != null) ? pInterfaceItem : (pInterfaceItem = new InterfaceItemElements());
+		return pInterfaceItem;
 	}
 	
 	public ParserRule getInterfaceItemRule() {
@@ -3684,7 +3804,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
 	//	docu=Documentation?;
 	public PortElements getPortAccess() {
-		return (pPort != null) ? pPort : (pPort = new PortElements());
+		return pPort;
 	}
 	
 	public ParserRule getPortRule() {
@@ -3694,7 +3814,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ExternalPort:
 	//	"external" "Port" interfacePort=[Port];
 	public ExternalPortElements getExternalPortAccess() {
-		return (pExternalPort != null) ? pExternalPort : (pExternalPort = new ExternalPortElements());
+		return pExternalPort;
 	}
 	
 	public ParserRule getExternalPortRule() {
@@ -3704,7 +3824,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SAP:
 	//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SAPElements getSAPAccess() {
-		return (pSAP != null) ? pSAP : (pSAP = new SAPElements());
+		return pSAP;
 	}
 	
 	public ParserRule getSAPRule() {
@@ -3714,7 +3834,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SPP:
 	//	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SPPElements getSPPAccess() {
-		return (pSPP != null) ? pSPP : (pSPP = new SPPElements());
+		return pSPP;
 	}
 	
 	public ParserRule getSPPRule() {
@@ -3724,7 +3844,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ServiceImplementation:
 	//	"ServiceImplementation" "of" spp=[SPP];
 	public ServiceImplementationElements getServiceImplementationAccess() {
-		return (pServiceImplementation != null) ? pServiceImplementation : (pServiceImplementation = new ServiceImplementationElements());
+		return pServiceImplementation;
 	}
 	
 	public ParserRule getServiceImplementationRule() {
@@ -3735,7 +3855,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* &
 	//	bindings+=Binding* & connections+=LayerConnection*) "}";
 	public LogicalSystemElements getLogicalSystemAccess() {
-		return (pLogicalSystem != null) ? pLogicalSystem : (pLogicalSystem = new LogicalSystemElements());
+		return pLogicalSystem;
 	}
 	
 	public ParserRule getLogicalSystemRule() {
@@ -3745,7 +3865,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ActorContainerRef:
 	//	SubSystemRef | ActorRef;
 	public ActorContainerRefElements getActorContainerRefAccess() {
-		return (pActorContainerRef != null) ? pActorContainerRef : (pActorContainerRef = new ActorContainerRefElements());
+		return pActorContainerRef;
 	}
 	
 	public ParserRule getActorContainerRefRule() {
@@ -3755,7 +3875,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SubSystemRef:
 	//	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
 	public SubSystemRefElements getSubSystemRefAccess() {
-		return (pSubSystemRef != null) ? pSubSystemRef : (pSubSystemRef = new SubSystemRefElements());
+		return pSubSystemRef;
 	}
 	
 	public ParserRule getSubSystemRefRule() {
@@ -3768,7 +3888,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
 	//	threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}";
 	public SubSystemClassElements getSubSystemClassAccess() {
-		return (pSubSystemClass != null) ? pSubSystemClass : (pSubSystemClass = new SubSystemClassElements());
+		return pSubSystemClass;
 	}
 	
 	public ParserRule getSubSystemClassRule() {
@@ -3778,7 +3898,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//LogicalThread:
 	//	"LogicalThread" name=ID;
 	public LogicalThreadElements getLogicalThreadAccess() {
-		return (pLogicalThread != null) ? pLogicalThread : (pLogicalThread = new LogicalThreadElements());
+		return pLogicalThread;
 	}
 	
 	public ParserRule getLogicalThreadRule() {
@@ -3789,7 +3909,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"ActorInstanceMapping" path=RefPath "->" thread=[LogicalThread] ("{" actorInstanceMappings+=ActorInstanceMapping*
 	//	"}")?;
 	public ActorInstanceMappingElements getActorInstanceMappingAccess() {
-		return (pActorInstanceMapping != null) ? pActorInstanceMapping : (pActorInstanceMapping = new ActorInstanceMappingElements());
+		return pActorInstanceMapping;
 	}
 	
 	public ParserRule getActorInstanceMappingRule() {
@@ -3799,7 +3919,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RefPath:
 	//	refs+=RefSegment ("/" refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
-		return (pRefPath != null) ? pRefPath : (pRefPath = new RefPathElements());
+		return pRefPath;
 	}
 	
 	public ParserRule getRefPathRule() {
@@ -3809,7 +3929,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RefSegment:
 	//	ref=ID (":" idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
-		return (pRefSegment != null) ? pRefSegment : (pRefSegment = new RefSegmentElements());
+		return pRefSegment;
 	}
 	
 	public ParserRule getRefSegmentRule() {
@@ -3819,7 +3939,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//Binding:
 	//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 	public BindingElements getBindingAccess() {
-		return (pBinding != null) ? pBinding : (pBinding = new BindingElements());
+		return pBinding;
 	}
 	
 	public ParserRule getBindingRule() {
@@ -3829,7 +3949,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//BindingEndPoint:
 	//	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
 	public BindingEndPointElements getBindingEndPointAccess() {
-		return (pBindingEndPoint != null) ? pBindingEndPoint : (pBindingEndPoint = new BindingEndPointElements());
+		return pBindingEndPoint;
 	}
 	
 	public ParserRule getBindingEndPointRule() {
@@ -3839,7 +3959,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//LayerConnection:
 	//	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
 	public LayerConnectionElements getLayerConnectionAccess() {
-		return (pLayerConnection != null) ? pLayerConnection : (pLayerConnection = new LayerConnectionElements());
+		return pLayerConnection;
 	}
 	
 	public ParserRule getLayerConnectionRule() {
@@ -3849,7 +3969,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SAPoint:
 	//	RefSAPoint | RelaySAPoint;
 	public SAPointElements getSAPointAccess() {
-		return (pSAPoint != null) ? pSAPoint : (pSAPoint = new SAPointElements());
+		return pSAPoint;
 	}
 	
 	public ParserRule getSAPointRule() {
@@ -3859,7 +3979,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RefSAPoint: // satisfies a sub actor
 	//	"ref" ref=[ActorContainerRef];
 	public RefSAPointElements getRefSAPointAccess() {
-		return (pRefSAPoint != null) ? pRefSAPoint : (pRefSAPoint = new RefSAPointElements());
+		return pRefSAPoint;
 	}
 	
 	public ParserRule getRefSAPointRule() {
@@ -3869,7 +3989,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RelaySAPoint: // relays from own interface
 	//	"relay_sap" relay=[SPP];
 	public RelaySAPointElements getRelaySAPointAccess() {
-		return (pRelaySAPoint != null) ? pRelaySAPoint : (pRelaySAPoint = new RelaySAPointElements());
+		return pRelaySAPoint;
 	}
 	
 	public ParserRule getRelaySAPointRule() {
@@ -3879,7 +3999,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//SPPoint:
 	//	ref=[ActorContainerRef] "." service=[SPP];
 	public SPPointElements getSPPointAccess() {
-		return (pSPPoint != null) ? pSPPoint : (pSPPoint = new SPPointElements());
+		return pSPPoint;
 	}
 	
 	public ParserRule getSPPointRule() {
@@ -3889,7 +4009,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//ActorRef:
 	//	refType=ReferenceType? "ActorRef" name=ID multiplicity=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {
-		return (pActorRef != null) ? pActorRef : (pActorRef = new ActorRefElements());
+		return pActorRef;
 	}
 	
 	public ParserRule getActorRefRule() {
@@ -3900,7 +4020,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//enum ReferenceType:
 	//	FIXED="fixed" | OPTIONAL="optional";
 	public ReferenceTypeElements getReferenceTypeAccess() {
-		return (unknownRuleReferenceType != null) ? unknownRuleReferenceType : (unknownRuleReferenceType = new ReferenceTypeElements());
+		return unknownRuleReferenceType;
 	}
 	
 	public EnumRule getReferenceTypeRule() {
@@ -3913,7 +4033,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//AbstractInterfaceItem:
 	//	InterfaceItem;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
-		return (pAbstractInterfaceItem != null) ? pAbstractInterfaceItem : (pAbstractInterfaceItem = new AbstractInterfaceItemElements());
+		return pAbstractInterfaceItem;
 	}
 	
 	public ParserRule getAbstractInterfaceItemRule() {
@@ -3927,7 +4047,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//MULTIPLICITY returns ecore::EInt:
 	//	"[" ("*" | INT) "]";
 	public MULTIPLICITYElements getMULTIPLICITYAccess() {
-		return (pMULTIPLICITY != null) ? pMULTIPLICITY : (pMULTIPLICITY = new MULTIPLICITYElements());
+		return pMULTIPLICITY;
 	}
 	
 	public ParserRule getMULTIPLICITYRule() {
@@ -3938,7 +4058,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	"DataClass" | "ActorClass" | "ActorBehavior" | "ProtocolClass" | "CompoundProtocolClass" | "SubSystemClass" |
 	//	"LogicalSystem";
 	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
-		return (pAnnotationTargetType != null) ? pAnnotationTargetType : (pAnnotationTargetType = new AnnotationTargetTypeElements());
+		return pAnnotationTargetType;
 	}
 	
 	public ParserRule getAnnotationTargetTypeRule() {
@@ -3950,7 +4070,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	COMPOUND_PROTOCOL_CLASS="CompoundProtocolClass" | SUBSYSTEM_CLASS="SubSystemClass" |
 	//	LOGICAL_SYSTEM_CLASS="LogicalSystem";
 	public RoomAnnotationTargetEnumElements getRoomAnnotationTargetEnumAccess() {
-		return (unknownRuleRoomAnnotationTargetEnum != null) ? unknownRuleRoomAnnotationTargetEnum : (unknownRuleRoomAnnotationTargetEnum = new RoomAnnotationTargetEnumElements());
+		return unknownRuleRoomAnnotationTargetEnum;
 	}
 	
 	public EnumRule getRoomAnnotationTargetEnumRule() {
@@ -4015,8 +4135,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-	//	refinedTransitions+=RefinedTransition)* "}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
+	//	| refinedTransitions+=RefinedTransition)* "}";
 	public FSMGrammarAccess.StateMachineElements getStateMachineAccess() {
 		return gaFSM.getStateMachineAccess();
 	}
@@ -4686,8 +4806,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaFSM.getSTRINGRule();
 	} 

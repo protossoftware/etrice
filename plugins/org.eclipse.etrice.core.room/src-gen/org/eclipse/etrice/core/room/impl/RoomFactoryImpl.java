@@ -82,6 +82,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
       case RoomPackage.OPERATION: return createOperation();
       case RoomPackage.STANDARD_OPERATION: return createStandardOperation();
       case RoomPackage.PORT_OPERATION: return createPortOperation();
+      case RoomPackage.CLASS_STRUCTOR: return createClassStructor();
       case RoomPackage.GENERAL_PROTOCOL_CLASS: return createGeneralProtocolClass();
       case RoomPackage.PROTOCOL_CLASS: return createProtocolClass();
       case RoomPackage.COMPOUND_PROTOCOL_CLASS: return createCompoundProtocolClass();
@@ -346,6 +347,17 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
   {
     PortOperationImpl portOperation = new PortOperationImpl();
     return portOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ClassStructor createClassStructor()
+  {
+    ClassStructorImpl classStructor = new ClassStructorImpl();
+    return classStructor;
   }
 
   /**

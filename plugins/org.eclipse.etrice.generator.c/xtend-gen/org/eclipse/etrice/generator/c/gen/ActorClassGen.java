@@ -18,12 +18,14 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -578,9 +580,43 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      EList<StandardOperation> _operations = ac.getOperations();
-      String _name_19 = ac.getName();
-      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_19);
+      {
+        List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(ac);
+        final Function1<ClassStructor, Boolean> _function_3 = new Function1<ClassStructor, Boolean>() {
+          public Boolean apply(final ClassStructor it) {
+            return Boolean.valueOf(it.isConstructor());
+          }
+        };
+        boolean _exists = IterableExtensions.<ClassStructor>exists(_allStructors, _function_3);
+        if (_exists) {
+          String _name_19 = ac.getName();
+          CharSequence _constructorSignature = this._procedureHelpers.getConstructorSignature(_name_19);
+          _builder.append(_constructorSignature, "");
+          _builder.append(";");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      {
+        List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(ac);
+        final Function1<ClassStructor, Boolean> _function_4 = new Function1<ClassStructor, Boolean>() {
+          public Boolean apply(final ClassStructor it) {
+            boolean _isConstructor = it.isConstructor();
+            return Boolean.valueOf((!_isConstructor));
+          }
+        };
+        boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_allStructors_1, _function_4);
+        if (_exists_1) {
+          String _name_20 = ac.getName();
+          CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_20);
+          _builder.append(_destructorSignature, "");
+          _builder.append(";");
+        }
+      }
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      List<StandardOperation> _latestOperations = this._roomHelpers.getLatestOperations(ac);
+      String _name_21 = ac.getName();
+      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_latestOperations, _name_21);
       _builder.append(_operationsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -1090,8 +1126,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* operations */");
       _builder.newLine();
       {
-        List<Operation> _allOperations = this._roomHelpers.getAllOperations(ac);
-        for(final Operation op : _allOperations) {
+        List<StandardOperation> _latestOperations = this._roomHelpers.getLatestOperations(ac);
+        for(final StandardOperation op : _latestOperations) {
           final CharSequence args = this.argList(op);
           _builder.newLineIfNotEmpty();
           _builder.append("#define ");
@@ -1434,12 +1470,90 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      EList<StandardOperation> _operations = ac.getOperations();
+      CharSequence _classStructors = this.classStructors(ac);
+      _builder.append(_classStructors, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      List<StandardOperation> _latestOperations = this._roomHelpers.getLatestOperations(ac);
       String _name_13 = ac.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_13);
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_latestOperations, _name_13);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  protected CharSequence classStructors(final ActorClass ac) {
+    CharSequence _xblockexpression = null;
+    {
+      List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(ac);
+      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          return Boolean.valueOf(it.isConstructor());
+        }
+      };
+      final Iterable<ClassStructor> ctors = IterableExtensions.<ClassStructor>filter(_allStructors, _function);
+      List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(ac);
+      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          boolean _isConstructor = it.isConstructor();
+          return Boolean.valueOf((!_isConstructor));
+        }
+      };
+      final Iterable<ClassStructor> dtors = IterableExtensions.<ClassStructor>filter(_allStructors_1, _function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isEmpty = IterableExtensions.isEmpty(ctors);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          String _name = ac.getName();
+          CharSequence _constructorSignature = this._procedureHelpers.getConstructorSignature(_name);
+          _builder.append(_constructorSignature, "");
+          _builder.append("{");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          final Function1<ClassStructor, CharSequence> _function_2 = new Function1<ClassStructor, CharSequence>() {
+            public CharSequence apply(final ClassStructor it) {
+              DetailCode _detailCode = it.getDetailCode();
+              String _translatedCode = ActorClassGen.this._stateMachineGen.translator.getTranslatedCode(_detailCode);
+              return ActorClassGen.this._procedureHelpers.asBlock(_translatedCode);
+            }
+          };
+          Iterable<CharSequence> _map = IterableExtensions.<ClassStructor, CharSequence>map(ctors, _function_2);
+          String _join = IterableExtensions.join(_map);
+          _builder.append(_join, "\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(dtors);
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          String _name_1 = ac.getName();
+          CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_1);
+          _builder.append(_destructorSignature, "");
+          _builder.append("{");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          final Function1<ClassStructor, CharSequence> _function_3 = new Function1<ClassStructor, CharSequence>() {
+            public CharSequence apply(final ClassStructor it) {
+              DetailCode _detailCode = it.getDetailCode();
+              String _translatedCode = ActorClassGen.this._stateMachineGen.translator.getTranslatedCode(_detailCode);
+              return ActorClassGen.this._procedureHelpers.asBlock(_translatedCode);
+            }
+          };
+          Iterable<CharSequence> _map_1 = IterableExtensions.<ClassStructor, CharSequence>map(dtors, _function_3);
+          String _join_1 = IterableExtensions.join(_map_1);
+          _builder.append(_join_1, "\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _xblockexpression = _builder;
     }
     return _xblockexpression;

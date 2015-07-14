@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -61,6 +62,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
@@ -238,6 +240,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected EList<Annotation> behaviorAnnotations;
+
+  /**
+   * The cached value of the '{@link #getStructors() <em>Structors</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStructors()
+   * @generated
+   * @ordered
+   */
+  protected EList<ClassStructor> structors;
 
   /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -629,6 +641,20 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<ClassStructor> getStructors()
+  {
+    if (structors == null)
+    {
+      structors = new EObjectContainmentEList<ClassStructor>(ClassStructor.class, this, RoomPackage.ACTOR_CLASS__STRUCTORS);
+    }
+    return structors;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<StandardOperation> getOperations()
   {
     if (operations == null)
@@ -757,6 +783,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return basicSetBehaviorDocu(null, msgs);
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return ((InternalEList<?>)getBehaviorAnnotations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
     }
@@ -802,6 +830,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getBehaviorDocu();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return getBehaviorAnnotations();
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return getStructors();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return getOperations();
     }
@@ -868,6 +898,10 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getBehaviorAnnotations().clear();
         getBehaviorAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        getStructors().clear();
+        getStructors().addAll((Collection<? extends ClassStructor>)newValue);
+        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         getOperations().addAll((Collection<? extends StandardOperation>)newValue);
@@ -928,6 +962,9 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         getBehaviorAnnotations().clear();
         return;
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        getStructors().clear();
+        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         return;
@@ -973,6 +1010,8 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return behaviorDocu != null;
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return behaviorAnnotations != null && !behaviorAnnotations.isEmpty();
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return structors != null && !structors.isEmpty();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
     }

@@ -79,7 +79,32 @@ stable
 Feature Inheritance
 	description '''A class can specify a super class and inherits elements from the super class hierarchy.'''
 	text '''
+		When a ROOM class specifies a super class, it generally inherits all elements and properties.
+		In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.
+		Refinement is used in most cases (e.g. StateMachine) and realizes an extension of the overridden elements.
+		In this case, if a sub class overrides a piece of logic from a super class, it will always be executed subsequently to the inherited.
+		Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.
+
+		A formal definition of overriding is given below:
+		\begin{itemize}
+			\item early or late resolve - if element is overriden, which one should super class use by default - own or override ?
+			\item replacing or refinement - ignore inherited code or prepend inherited code automatically ?
+			\item (non_)accessible - if element is overriden, is super class' original accessible from sub class ? e.g. super.foo()
+			\item implict or explicit - does it use distinct model element / keyword?
+		\end{itemize}
 		
+		Examples programming languages:\\
+		c++ virtual function and java override  <==> accessible explicit late replacing\\
+		c++ function redefine <==> accessible implict early replacing\\
+		c++ dtor <==> late refinement\\
+		
+		eTrice override of model elements:\\
+		Operations (C generation)  <==> non_accessible explicit late replacing\\
+		Operations (Java generation) <==> accessible explicit late replacing\\
+		State and Transitions <==> non_accessible explicit late refinement\\
+		ctor/dtor <==> non_accessible implicit late refinement\\
+		StateMachine <==> non_accessible implicit late refinement\\
+		UserCode <==> non_accessible implicit late refinement\\
 	'''
 	example '''
 		\begin{lstlisting}[language=ROOM]
@@ -275,7 +300,7 @@ Feature LogicalModel
 Feature LogicalSystem
 	description '''The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems.'''
 	text '''
-		It describes the logical topology of your system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.
+		It describes the logical topology of your distributed system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.
 	'''
 	help '''
 	```room
@@ -285,8 +310,6 @@ Feature LogicalSystem
 	```
 	'''
 	contains SubSystemRef
-	contains Binding
-	contains LayerConnection
 	contains Annotation
 	stable
 ;
@@ -352,8 +375,8 @@ Feature ActorClass
 				LayerConnection ...
 			}
 			Behavior ["Documentation"] {
-				Operation ActorName() { /* constructor */ }
-				Operation ~ActorName() { /* destructor */ }
+				ctor { /* constructor */ }
+				dtor { /* destructor */ }
 				Operation ...
 				StateMachine ...
 			}
@@ -874,6 +897,8 @@ Feature DataClass
 	```room
 	DataClass DataClassName ["Documentation"] {
 		Attribute ... // nested DataClasses possible
+		ctor { /* constructor */ }
+		dtor { /* destructor */ }
 		Operation ...
 	}
 
@@ -992,6 +1017,7 @@ Feature Operation
 			\item Arbitrary amount of arguments
 			\item Return type
 			\item User code body, which can access the structural part of the containing class (e.g. attributes)
+			\item 'override' keyword, replaces the logic of the inherited operation having the same signature
 		\end{itemize}
 	'''
 	example '''
@@ -1040,10 +1066,14 @@ Feature Operation
 			"escaping required and don't forget the \";\" at line end"
 		}
 
-		Operation operationName(param1: int16, param2: int32, ...) : boolean
+		Operation operationName(param1: int16, param2: int32) : boolean
 			["Operations can have multiple parameters and one return type"] {
 			"return param1 == param2;"
 		}
+
+		// 'override' replaces implementation of overriding operation,
+		// becomes effective in entire inheritance hierarchy
+		override Operation operationName(param: int32) : boolean {""}
 		```
 	'''
 	uses DataType

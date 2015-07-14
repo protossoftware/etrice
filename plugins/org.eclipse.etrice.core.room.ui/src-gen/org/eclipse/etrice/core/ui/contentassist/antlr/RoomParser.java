@@ -47,6 +47,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStandardOperationAccess().getAlternatives_6_1(), "rule__StandardOperation__Alternatives_6_1");
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5(), "rule__PortOperation__Alternatives_5");
 					put(grammarAccess.getPortOperationAccess().getAlternatives_5_0_1(), "rule__PortOperation__Alternatives_5_0_1");
+					put(grammarAccess.getClassStructorAccess().getNameAlternatives_0_0(), "rule__ClassStructor__NameAlternatives_0_0");
 					put(grammarAccess.getGeneralProtocolClassAccess().getAlternatives(), "rule__GeneralProtocolClass__Alternatives");
 					put(grammarAccess.getPortClassAccess().getAlternatives_3(), "rule__PortClass__Alternatives_3");
 					put(grammarAccess.getMessageHandlerAccess().getAlternatives(), "rule__MessageHandler__Alternatives");
@@ -120,6 +121,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortOperationAccess().getGroup_3_1(), "rule__PortOperation__Group_3_1__0");
 					put(grammarAccess.getPortOperationAccess().getGroup_5_0(), "rule__PortOperation__Group_5_0__0");
 					put(grammarAccess.getPortOperationAccess().getGroup_5_1(), "rule__PortOperation__Group_5_1__0");
+					put(grammarAccess.getClassStructorAccess().getGroup(), "rule__ClassStructor__Group__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup(), "rule__ProtocolClass__Group__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_4(), "rule__ProtocolClass__Group_4__0");
 					put(grammarAccess.getProtocolClassAccess().getGroup_7(), "rule__ProtocolClass__Group_7__0");
@@ -292,13 +294,14 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDataClassAccess().getUserCode2Assignment_7_1(), "rule__DataClass__UserCode2Assignment_7_1");
 					put(grammarAccess.getDataClassAccess().getUserCode3Assignment_8_1(), "rule__DataClass__UserCode3Assignment_8_1");
 					put(grammarAccess.getDataClassAccess().getAttributesAssignment_9(), "rule__DataClass__AttributesAssignment_9");
-					put(grammarAccess.getDataClassAccess().getOperationsAssignment_10(), "rule__DataClass__OperationsAssignment_10");
+					put(grammarAccess.getDataClassAccess().getStructorsAssignment_10(), "rule__DataClass__StructorsAssignment_10");
+					put(grammarAccess.getDataClassAccess().getOperationsAssignment_11(), "rule__DataClass__OperationsAssignment_11");
 					put(grammarAccess.getAttributeAccess().getNameAssignment_1(), "rule__Attribute__NameAssignment_1");
 					put(grammarAccess.getAttributeAccess().getSizeAssignment_2_1(), "rule__Attribute__SizeAssignment_2_1");
 					put(grammarAccess.getAttributeAccess().getTypeAssignment_4(), "rule__Attribute__TypeAssignment_4");
 					put(grammarAccess.getAttributeAccess().getDefaultValueLiteralAssignment_5_1(), "rule__Attribute__DefaultValueLiteralAssignment_5_1");
 					put(grammarAccess.getAttributeAccess().getDocuAssignment_6(), "rule__Attribute__DocuAssignment_6");
-					put(grammarAccess.getStandardOperationAccess().getDestructorAssignment_1(), "rule__StandardOperation__DestructorAssignment_1");
+					put(grammarAccess.getStandardOperationAccess().getOverrideAssignment_0(), "rule__StandardOperation__OverrideAssignment_0");
 					put(grammarAccess.getStandardOperationAccess().getNameAssignment_2(), "rule__StandardOperation__NameAssignment_2");
 					put(grammarAccess.getStandardOperationAccess().getArgumentsAssignment_4_0(), "rule__StandardOperation__ArgumentsAssignment_4_0");
 					put(grammarAccess.getStandardOperationAccess().getArgumentsAssignment_4_1_1(), "rule__StandardOperation__ArgumentsAssignment_4_1_1");
@@ -312,6 +315,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortOperationAccess().getSendsMsgAssignment_5_1_1(), "rule__PortOperation__SendsMsgAssignment_5_1_1");
 					put(grammarAccess.getPortOperationAccess().getDocuAssignment_6(), "rule__PortOperation__DocuAssignment_6");
 					put(grammarAccess.getPortOperationAccess().getDetailCodeAssignment_7(), "rule__PortOperation__DetailCodeAssignment_7");
+					put(grammarAccess.getClassStructorAccess().getNameAssignment_0(), "rule__ClassStructor__NameAssignment_0");
+					put(grammarAccess.getClassStructorAccess().getDetailCodeAssignment_1(), "rule__ClassStructor__DetailCodeAssignment_1");
 					put(grammarAccess.getProtocolClassAccess().getCommTypeAssignment_0(), "rule__ProtocolClass__CommTypeAssignment_0");
 					put(grammarAccess.getProtocolClassAccess().getNameAssignment_2(), "rule__ProtocolClass__NameAssignment_2");
 					put(grammarAccess.getProtocolClassAccess().getDocuAssignment_3(), "rule__ProtocolClass__DocuAssignment_3");
@@ -365,8 +370,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getActorClassAccess().getAttributesAssignment_8_6_6(), "rule__ActorClass__AttributesAssignment_8_6_6");
 					put(grammarAccess.getActorClassAccess().getBehaviorDocuAssignment_9_1(), "rule__ActorClass__BehaviorDocuAssignment_9_1");
 					put(grammarAccess.getActorClassAccess().getBehaviorAnnotationsAssignment_9_3(), "rule__ActorClass__BehaviorAnnotationsAssignment_9_3");
-					put(grammarAccess.getActorClassAccess().getOperationsAssignment_9_4(), "rule__ActorClass__OperationsAssignment_9_4");
-					put(grammarAccess.getActorClassAccess().getStateMachineAssignment_9_5(), "rule__ActorClass__StateMachineAssignment_9_5");
+					put(grammarAccess.getActorClassAccess().getStructorsAssignment_9_4(), "rule__ActorClass__StructorsAssignment_9_4");
+					put(grammarAccess.getActorClassAccess().getOperationsAssignment_9_5(), "rule__ActorClass__OperationsAssignment_9_5");
+					put(grammarAccess.getActorClassAccess().getStateMachineAssignment_9_6(), "rule__ActorClass__StateMachineAssignment_9_6");
 					put(grammarAccess.getPortAccess().getConjugatedAssignment_0(), "rule__Port__ConjugatedAssignment_0");
 					put(grammarAccess.getPortAccess().getNameAssignment_2(), "rule__Port__NameAssignment_2");
 					put(grammarAccess.getPortAccess().getMultiplicityAssignment_3(), "rule__Port__MultiplicityAssignment_3");

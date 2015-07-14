@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.DataClass#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
@@ -185,6 +186,22 @@ public interface DataClass extends ComplexType
    * @generated
    */
   EList<Attribute> getAttributes();
+
+  /**
+   * Returns the value of the '<em><b>Structors</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.ClassStructor}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Structors</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Structors</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Structors()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ClassStructor> getStructors();
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

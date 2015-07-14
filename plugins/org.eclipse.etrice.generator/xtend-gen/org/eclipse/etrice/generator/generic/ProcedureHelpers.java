@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
@@ -26,7 +25,6 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
@@ -567,23 +565,10 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = this._roomHelpers.isConstructor(operation);
-            _and = _isConstructor;
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname);
-            _builder.append(_operationSignature, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        CharSequence _operationSignature = this.operationSignature(operation, classname);
+        _builder.append(_operationSignature, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
@@ -600,44 +585,45 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        {
-          boolean _and = false;
-          boolean _usesInheritance = this.languageExt.usesInheritance();
-          if (!_usesInheritance) {
-            _and = false;
-          } else {
-            boolean _isConstructor = this._roomHelpers.isConstructor(operation);
-            _and = _isConstructor;
-          }
-          boolean _not = (!_and);
-          if (_not) {
-            CharSequence _operationSignature = this.operationSignature(operation, classname);
-            _builder.append(_operationSignature, "");
-            _builder.append(" {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            AbstractGenerator _instance = AbstractGenerator.getInstance();
-            DetailCode _detailCode = operation.getDetailCode();
-            String _translatedCode = _instance.getTranslatedCode(_detailCode);
-            _builder.append(_translatedCode, "\t");
-            _builder.newLineIfNotEmpty();
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
+        CharSequence _operationSignature = this.operationSignature(operation, classname);
+        _builder.append(_operationSignature, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        AbstractGenerator _instance = AbstractGenerator.getInstance();
+        DetailCode _detailCode = operation.getDetailCode();
+        String _translatedCode = _instance.getTranslatedCode(_detailCode);
+        _builder.append(_translatedCode, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
       }
     }
     return _builder;
   }
   
-  /**
-   * @param ac an {@link ActorClass}
-   * @return code defining all operations of the actor class
-   */
-  public CharSequence operationsImplementation(final ActorClass ac) {
-    EList<StandardOperation> _operations = ac.getOperations();
-    String _name = ac.getName();
-    return this.operationsImplementation(_operations, _name);
+  public CharSequence asBlock(final CharSequence str) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(str, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence getConstructorSignature(final String classname) {
+    String _constructorName = this.languageExt.constructorName(classname);
+    String _constructorReturnType = this.languageExt.constructorReturnType();
+    return this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
+  }
+  
+  public CharSequence getDestructorSignature(final String classname) {
+    String _destructorName = this.languageExt.destructorName(classname);
+    String _destructorReturnType = this.languageExt.destructorReturnType();
+    return this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
   }
   
   /**
@@ -655,31 +641,13 @@ public class ProcedureHelpers {
    * 		constructor and destructor
    */
   private CharSequence operationSignature(final Operation operation, final String classname) {
-    CharSequence _xifexpression = null;
-    boolean _isConstructor = this._roomHelpers.isConstructor(operation);
-    if (_isConstructor) {
-      String _constructorName = this.languageExt.constructorName(classname);
-      String _constructorReturnType = this.languageExt.constructorReturnType();
-      _xifexpression = this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
-    } else {
-      CharSequence _xifexpression_1 = null;
-      boolean _isDestructor = this._roomHelpers.isDestructor(operation);
-      if (_isDestructor) {
-        String _destructorName = this.languageExt.destructorName(classname);
-        String _destructorReturnType = this.languageExt.destructorReturnType();
-        _xifexpression_1 = this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
-      } else {
-        String _name = operation.getName();
-        EList<VarDecl> _arguments = operation.getArguments();
-        CharSequence _BuildArgumentList = this.BuildArgumentList(_arguments);
-        String _string = _BuildArgumentList.toString();
-        RefableType _returnType = operation.getReturnType();
-        String _dataTypeToString = this.dataTypeToString(_returnType);
-        _xifexpression_1 = this.classOperationSignature(classname, _name, _string, _dataTypeToString);
-      }
-      _xifexpression = _xifexpression_1;
-    }
-    return _xifexpression;
+    String _name = operation.getName();
+    EList<VarDecl> _arguments = operation.getArguments();
+    CharSequence _BuildArgumentList = this.BuildArgumentList(_arguments);
+    String _string = _BuildArgumentList.toString();
+    RefableType _returnType = operation.getReturnType();
+    String _dataTypeToString = this.dataTypeToString(_returnType);
+    return this.classOperationSignature(classname, _name, _string, _dataTypeToString);
   }
   
   /**

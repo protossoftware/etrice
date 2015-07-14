@@ -161,28 +161,6 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.CHANGE_DESTRUCTOR_NAME)
-	public void fixDestructor(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Change destructor name", "~"+issue.getData()[0]+"()", "add.gif", new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				StandardOperation op = (StandardOperation) element;
-				op.setName(issue.getData()[0]);
-			}
-		});
-	}
-	
-	@Fix(RoomJavaValidator.CHANGE_CONSTRUCTOR_NAME)
-	public void fixConstructor(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Change constructor name", issue.getData()[0]+"()", "add.gif", new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				StandardOperation op = (StandardOperation) element;
-				op.setName(issue.getData()[0]);
-			}
-		});
-	}
-	
 	@Fix(RoomJavaValidator.INVALID_ANNOTATION_TARGET)
 	public void fixInvalidAnnotationTarget(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove this annotation", "remove @"+issue.getData()[0]+"...", "add.gif", new ISemanticModification() {
@@ -327,6 +305,28 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 				IXtextDocument document = context.getXtextDocument();
 				String editorReplace = DetailCodeIndentHelper.convertToSingleLines(document, issue);
 				document.replace(issue.getOffset(), issue.getLength(), editorReplace);
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.OPERATION_MISSING_OVERRIDE)
+	public void fixOperationMissingOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Mark operation as override", "add 'override' keyword", "add.gif", new ISemanticModification() {
+
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				((StandardOperation)element).setOverride(true);	
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.OPERATION_EXTRANEOUS_OVERRIDE)
+	public void fixOperationExtraneousOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove 'override' keyword", "", "remove.gif", new ISemanticModification() {
+
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				((StandardOperation)element).setOverride(false);	
 			}
 		});
 	}

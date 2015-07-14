@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -39,6 +40,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
@@ -106,6 +108,16 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * @ordered
    */
   protected EList<Attribute> attributes;
+
+  /**
+   * The cached value of the '{@link #getStructors() <em>Structors</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStructors()
+   * @generated
+   * @ordered
+   */
+  protected EList<ClassStructor> structors;
 
   /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -358,6 +370,20 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<ClassStructor> getStructors()
+  {
+    if (structors == null)
+    {
+      structors = new EObjectContainmentEList<ClassStructor>(ClassStructor.class, this, RoomPackage.DATA_CLASS__STRUCTORS);
+    }
+    return structors;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<StandardOperation> getOperations()
   {
     if (operations == null)
@@ -387,6 +413,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return basicSetUserCode3(null, msgs);
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
     }
@@ -416,6 +444,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return getUserCode3();
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return getAttributes();
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return getStructors();
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return getOperations();
     }
@@ -453,6 +483,10 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         getAttributes().clear();
         getAttributes().addAll((Collection<? extends Attribute>)newValue);
         return;
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        getStructors().clear();
+        getStructors().addAll((Collection<? extends ClassStructor>)newValue);
+        return;
       case RoomPackage.DATA_CLASS__OPERATIONS:
         getOperations().clear();
         getOperations().addAll((Collection<? extends StandardOperation>)newValue);
@@ -489,6 +523,9 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         getAttributes().clear();
         return;
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        getStructors().clear();
+        return;
       case RoomPackage.DATA_CLASS__OPERATIONS:
         getOperations().clear();
         return;
@@ -518,6 +555,8 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return userCode3 != null;
       case RoomPackage.DATA_CLASS__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return structors != null && !structors.isEmpty();
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
     }

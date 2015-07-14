@@ -47,10 +47,10 @@ RoomModel PingPongThreadTestReplPort {
 			
 		}
 		Behavior {
-			Operation MrPingActor() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"PingPongThreadTestReplPort\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTestReplPort\", \"PingPongThreadTestReplPort_case\");"
 			}
-			Operation ~MrPingActor() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {

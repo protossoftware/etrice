@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +32,7 @@ import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -58,6 +60,10 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.core.room.VarDecl;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * This class provides a collection of convenience functions that extract implicit information
@@ -399,7 +405,7 @@ public class RoomHelpers extends FSMHelpers {
 
 	/**
 	 * returns a list of {@link PortOperation}s of a {@link ProtocolClass} for one direction
-	 * including base classes.
+	 * including base classes. Ordered by base class first.
 	 *  
 	 * @param pc a {@link ProtocolClass}
 	 * @param incoming if <code>true</code> the operations of the regular port are returned, else those of the conjugate
@@ -464,7 +470,7 @@ public class RoomHelpers extends FSMHelpers {
 	
 	/**
 	 * Returns a list of all {@link Attribute}s of an {@link ActorClass}
-	 * including base classes.
+	 * including base classes. Ordered by base class first.
 	 * 
 	 * @param ac an {@link ActorClass}
 	 * 
@@ -484,7 +490,7 @@ public class RoomHelpers extends FSMHelpers {
 	
 	/**
 	 * Returns a list of all {@link Attribute}s of a {@link DataClass}
-	 * including base classes.
+	 * including base classes. Ordered by base class first.
 	 * 
 	 * @param dc an {@link DataClass}
 	 * 
@@ -504,14 +510,14 @@ public class RoomHelpers extends FSMHelpers {
 
 	/**
 	 * Returns a list of all {@link Operation}s of an {@link ActorClass}
-	 * including base classes.
+	 * including base classes. Ordered by base class first.
 	 * 
 	 * @param ac an {@link ActorClass}
 	 * 
 	 * @return a list of all {@link Operation}s of an {@link ActorClass}
 	 */
-	public List<Operation> getAllOperations(ActorClass ac) {
-		ArrayList<Operation> result = new ArrayList<Operation>();
+	public List<StandardOperation> getAllOperations(ActorClass ac) {
+		ArrayList<StandardOperation> result = new ArrayList<StandardOperation>();
 		
 		while (ac!=null) {
 			result.addAll(0, ac.getOperations());
@@ -521,22 +527,104 @@ public class RoomHelpers extends FSMHelpers {
 		
 		return result;
 	}
+	
+	/**
+	 * Returns a list of all {@link ClassStructor}s of an {@link ActorClass}
+	 * including base classes. Ordered by base class first.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of all {@link ClassStructor}s of an {@link ActorClass}
+	 */
+	public List<ClassStructor> getAllStructors(ActorClass ac) {
+		ArrayList<ClassStructor> result = new ArrayList<ClassStructor>();
+		
+		while (ac!=null) {
+			result.addAll(0, ac.getStructors());
+			
+			ac = ac.getActorBase();
+		}
+		
+		return result;
+	}
 
 	/**
 	 * Returns a list of all {@link Operation}s of a {@link DataClass}
-	 * including base classes.
+	 * including base classes. Ordered by base class first.
 	 * 
 	 * @param dc an {@link DataClass}
 	 * 
 	 * @return a list of all {@link Operation}s of a {@link DataClass}
 	 */
-	public List<Operation> getAllOperations(DataClass dc) {
-		ArrayList<Operation> result = new ArrayList<Operation>();
+	public List<StandardOperation> getAllOperations(DataClass dc) {
+		ArrayList<StandardOperation> result = new ArrayList<StandardOperation>();
 		
 		while (dc!=null) {
 			result.addAll(0, dc.getOperations());
 			
 			dc = dc.getBase();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns the latest implementations of (overridden) {@link Operation}s.
+	 * 
+	 * @param ac an {@link ActorClass}
+	 * 
+	 * @return a list of {@link Operation}s of an {@link ActorClass} inheritance hierarchy
+	 */
+	public List<StandardOperation> getLatestOperations(ActorClass ac){
+		Map<String, StandardOperation> map = Maps.newHashMap();
+		ActorClass base = ac;
+		while(base != null){
+			for(StandardOperation op : ac.getOperations())
+				if(!map.containsKey(op.getName()))
+					map.put(op.getName(), op);
+			base = base.getActorBase();
+		}
+		
+		return Lists.newArrayList(map.values());
+	}
+	
+	
+	/**
+	 * Returns the latest implementations of (overridden) {@link Operation}s.
+	 * 
+	 * @param ac an {@link DataClass}
+	 * 
+	 * @return a list of {@link Operation}s of an {@link DataClass} inheritance hierarchy
+	 */
+	public List<StandardOperation> getLatestOperations(DataClass dc){
+		Map<String, StandardOperation> map = Maps.newHashMap();
+		DataClass base = dc;
+		while(base != null){
+			for(StandardOperation op : dc.getOperations())
+				if(!map.containsKey(op.getName()))
+					map.put(op.getName(), op);
+			base = base.getBase();
+		}
+		
+		return Lists.newArrayList(map.values());
+	}
+	
+
+	/**
+	 * Returns a list of all {@link ClassStructor}s of a {@link DataClass}
+	 * including base classes. Ordered by base class first.
+	 * 
+	 * @param dc an {@link DataClass}
+	 * 
+	 * @return a list of all {@link ClassStructor}s of a {@link DataClass}
+	 */
+	public List<ClassStructor> getAllStructors(DataClass ac) {
+		ArrayList<ClassStructor> result = new ArrayList<ClassStructor>();
+		
+		while (ac!=null) {
+			result.addAll(0, ac.getStructors());
+			
+			ac = ac.getBase();
 		}
 		
 		return result;
@@ -1137,80 +1225,6 @@ public class RoomHelpers extends FSMHelpers {
 	}
 	
 	/**
-	 * Returns <code>true</code> if an operation is a constructor.
-	 * This is the case if the operation's name coincides with it's class's name
-	 * and if it is no destructor (destructor flag set).
-	 * 
-	 * @param op the operation
-	 * 
-	 * @return <code>true</code> if the operation is a constructor
-	 */
-	public boolean isConstructor(Operation op) {
-		if (op instanceof PortOperation)
-			return false;
-		
-		RoomClass cls = (RoomClass) op.eContainer();
-		if (cls.getName().equals(op.getName()))
-			return !((StandardOperation)op).isDestructor();
-		
-		return false;
-	}
-	
-	/**
-	 * Returns <code>true</code> if an operation is a destructor.
-	 * This is the case if the operation's name coincides with it's class's name
-	 * and if its destructor flag set.
-	 * 
-	 * @param op the operation
-	 * 
-	 * @return <code>true</code> if the operation is a destructor
-	 */
-	public boolean isDestructor(Operation op) {
-		if (op instanceof PortOperation)
-			return false;
-		
-		RoomClass cls = (RoomClass) op.eContainer();
-		if (cls.getName().equals(op.getName()))
-			return ((StandardOperation)op).isDestructor();
-		
-			return false;
-	}
-	
-	/**
-	 * Checks whether an {@link ActorClass} has a constructor operation defined.
-	 * 
-	 * @param ac the actor class
-	 * 
-	 * @return <code>true</code> if the actor class has a constructor
-	 */
-	public boolean hasConstructor(ActorClass ac) {
-		for (StandardOperation op : ac.getOperations()) {
-			if (op.getName().equals(ac.getName()))
-				if (!op.isDestructor())
-					return true;
-				}
-		
-		return false;
-	}
-
-	/**
-	 * Checks whether an {@link ActorClass} has a destructor operation defined.
-	 * 
-	 * @param ac the actor class
-	 * 
-	 * @return <code>true</code> if the actor class has a destructor
-	 */
-	public boolean hasDestructor(ActorClass ac) {
-		for (StandardOperation op : ac.getOperations()) {
-			if (op.getName().equals(ac.getName()))
-				if (op.isDestructor())
-					return true;
-		}
-		
-		return false;
-	}
-	
-	/**
 	 * Returns the {@link ProtocolClass} of an {@link InterfaceItem}.
 	 * In case of a relay port with a CompoundProtocolClass <code>null</code> is returned.
 	 * 
@@ -1567,5 +1581,32 @@ public class RoomHelpers extends FSMHelpers {
 		}
 		
 		return false;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public boolean matchingArguments(Operation op1, Operation op2){
+		List sig1 = Lists.newArrayList();
+		for(VarDecl varDecl : op1.getArguments()){
+			sig1.add(varDecl.getName());
+			sig1.add(varDecl.getRefType().getType());
+			sig1.add(varDecl.getRefType().isRef());
+		}
+		List sig2 = Lists.newArrayList();
+		for(VarDecl varDecl : op2.getArguments()){
+			sig2.add(varDecl.getName());
+			sig2.add(varDecl.getRefType().getType());
+			sig2.add(varDecl.getRefType().isRef());
+		}
+		
+		return sig1.equals(sig2);
+	}
+	
+	public boolean matchingReturnType(Operation op1, Operation op2){
+		RefableType refType1 = op1.getReturnType();
+		RefableType refType2 = op2.getReturnType();
+		if(refType1 != null && refType2 != null)
+			return refType1.getType().equals(refType2.getType()) && refType1.isRef() == refType2.isRef();
+		
+		return refType1 == null && refType2 == null;
 	}
 }

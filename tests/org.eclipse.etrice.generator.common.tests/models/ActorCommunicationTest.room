@@ -60,11 +60,11 @@ RoomModel ActorCommunicationTest {
 			Attribute async_result [ 10 ]: int16 = "{1051,1002,1053,1004,1055,1006,1057,1008,1059,1010}"
 		}
 		Behavior {
-			Operation Tester() {
+			ctor {
 				"etUnit_open(\"tmp\", \"ActorCommunicationTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests\");"
 			}
-			Operation ~Tester() {
+			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
 			}

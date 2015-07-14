@@ -118,10 +118,10 @@ RoomModel StoreRestore {
 			Attribute counter: int32 = "0"
 		}
 		Behavior {
-			Operation Tester() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"StoreRestore\", \"org.eclipse.etrice.generator.common.tests.StoreRestore\", \"StoreRestore_case\");"
 			}
-			Operation ~Tester() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			

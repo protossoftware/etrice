@@ -12,12 +12,6 @@ package org.eclipse.etrice.core.room;
  * <br>The standard form of an operation as used by
  * {@link ActorClass} and {@link DataClass}.
  * <p>
- * If the name coincides with it's containing classes name
- * then it is a constructor (with void return type).
- * If the name additionally is preceded by a tilde ~ then it
- * is a destructor.
- * </p>
- * <p>
  * The operation has a list of {@link VarDecl} arguments, an
  * optional return {@link RefableType} and a body (specified
  * as {@link DetailCode}).
@@ -28,7 +22,7 @@ package org.eclipse.etrice.core.room;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.room.StandardOperation#isDestructor <em>Destructor</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.StandardOperation#isOverride <em>Override</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,30 +33,29 @@ package org.eclipse.etrice.core.room;
 public interface StandardOperation extends Operation
 {
   /**
-   * Returns the value of the '<em><b>Destructor</b></em>' attribute.
+   * Returns the value of the '<em><b>Override</b></em>' attribute.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Override</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>If this flag is {@code true} <em>and</em> the name conincides with the class name
-   * it is treated as a destructor.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Destructor</em>' attribute.
-   * @see #setDestructor(boolean)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation_Destructor()
+   * @return the value of the '<em>Override</em>' attribute.
+   * @see #setOverride(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation_Override()
    * @model
    * @generated
    */
-  boolean isDestructor();
+  boolean isOverride();
 
   /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.StandardOperation#isDestructor <em>Destructor</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.StandardOperation#isOverride <em>Override</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Destructor</em>' attribute.
-   * @see #isDestructor()
+   * @param value the new value of the '<em>Override</em>' attribute.
+   * @see #isOverride()
    * @generated
    */
-  void setDestructor(boolean value);
+  void setOverride(boolean value);
 
 } // StandardOperation

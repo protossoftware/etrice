@@ -144,13 +144,13 @@ class JavaExtensions implements ILanguageExtension {
 		cls
 	}
 	override String destructorName(String cls) {
-		cls+"_dtor"
+		'dtor'
 	}
 	override String constructorReturnType() {
-		""
+		'void'
 	}
 	override String destructorReturnType() {
-		"void"
+		'void'
 	}
 	
 	override String superCall(String baseClassName, String method, String args) {

@@ -176,6 +176,15 @@ public interface RoomFactory extends EFactory
   PortOperation createPortOperation();
 
   /**
+   * Returns a new object of class '<em>Class Structor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Class Structor</em>'.
+   * @generated
+   */
+  ClassStructor createClassStructor();
+
+  /**
    * Returns a new object of class '<em>General Protocol Class</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -101,6 +101,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getAttributeRule());
 		c.setLinewrap().around(f.getStandardOperationRule());
 		c.setLinewrap().around(f.getPortOperationRule());
+		c.setLinewrap().around(f.getClassStructorRule());
 
 		// state graph items
 		c.setLinewrap().around(f.getStateRule());

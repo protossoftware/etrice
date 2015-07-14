@@ -33,14 +33,14 @@ RoomModel room.basic.service.tcp {
 			Attribute server: etSocketServerData ref
 		}
 		Behavior {
-			Operation ATcpServer() {
+			ctor {
 				"setErrorCode(etInitSockets());"
 				"server = etCreateSocketServerData();"
 				"server->receiver = socketReceiver;"
 				"server->bufferProvider = bufferProvider;"
 				"server->userData = self;"
 			}
-			Operation ~ATcpServer() {
+			dtor {
 				"etCleanupSockets();"
 				"etFreeSocketServerData(server);"
 			}
@@ -154,14 +154,14 @@ RoomModel room.basic.service.tcp {
 			Attribute client: etSocketConnectionData ref
 		}
 		Behavior {
-			Operation ATcpClient() {
+			ctor {
 				"setErrorCode(etInitSockets());"
 				"client = etCreateSocketConnectionData();"
 				"client->receiver = socketReceiver;"
 				"client->bufferProvider = bufferProvider;"
 				"client->userData = self;"
 			}
-			Operation ~ATcpClient() {
+			dtor {
 				"etCloseSocket(client);"
 				"etCleanupSockets();"
 				"etFreeSocketConnectionData(client);"

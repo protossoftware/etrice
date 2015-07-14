@@ -15,11 +15,11 @@ RoomModel StaticConfigTest {
 			LayerConnection ref testee_1 satisfied_by tester.spp
 		}
 		Behavior {
-			Operation Top_ac() {
+			ctor {
 				"etUnit_open(\"tmp\", \"StaticConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.StaticConfigTest\");"
 			}
-			Operation ~Top_ac() {
+			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
 			}
@@ -39,11 +39,11 @@ RoomModel StaticConfigTest {
 			ActorRef testee_super2: Testee_Super2_ac
 		}
 		Behavior {
-			Operation Tester_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
 				"etUnit_testFinished(caseId);"
 			}
-			Operation ~Tester_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 			StateMachine {
@@ -73,11 +73,11 @@ RoomModel StaticConfigTest {
 			ActorRef testee_2: Testee_2_ac
 		}
 		Behavior {
-			Operation Testee_1_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
 				"etUnit_testFinished(caseId);"
 			}
-			Operation ~Testee_1_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
 			}
 			StateMachine {
@@ -165,19 +165,22 @@ RoomModel StaticConfigTest {
 			Attribute float64_super_i: float64 = "1.1"
 		}
 		Behavior {
-			Operation Testee_Super2_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_Super2_ac\");"
 				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:1\", 1.1, float64_super_r, 0.1);"
 				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:2\", 2.2, float64_super_c, 0.1);"
-				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:3\", 3.3, float64_super_i, 0.1);"
+				"testInstanceConfig();"
 
 				// reg_port
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:5\", 4.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_r, 0.1f);"
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:6\", 3.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_c, 0.1f);"
-				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:7\", 25.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 			}
-			Operation ~Testee_Super2_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
+			}
+			Operation testInstanceConfig(){
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:3\", 3.3, float64_super_i, 0.1);"
+				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:7\", 25.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 			}
 		}
 	}
@@ -190,20 +193,22 @@ RoomModel StaticConfigTest {
 			Attribute int32_own_i: int32 = "11"
 		}
 		Behavior {
-			Operation Testee_2_ac() {
+			ctor {
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
 				"etUnit_testFinished(caseId);"
 			}
-			Operation ~Testee_2_ac() {
+			dtor {
 				"etUnit_closeTestCase(caseId);"
+			}
+			override Operation testInstanceConfig(){
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:2\", 4.4, float64_super_i, 0.1);"
+				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_2_ac:9\", 50.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 			}
 			StateMachine {
 				Transition init: initial -> s1 { }
 				State s1 {
 					entry {
-
 						"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:1\", 2.2, float64_super_c, 0.1);"
-						"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:2\", 4.4, float64_super_i, 0.1);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:3\", int32_own_r == 11);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:4\", int32_own_c == 12);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:5\", int32_own_i == 13);"
@@ -211,7 +216,6 @@ RoomModel StaticConfigTest {
 						// reg_port
 						"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_2_ac:6\", 4.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_r, 0.1f);"
 						"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_2_ac:7\", 3.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_c, 0.1f);"
-						"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_2_ac:9\", 50.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 
 						// sap
 						"Data_3_dc_varCheck3(&(((TestProtocolWithDataClassConjPort_var*)self->constData->sap.varData)->sap_data_3), caseId);"

@@ -27,10 +27,10 @@ RoomModel DynamicActorTest6 {
 			Binding pin and cont.pout
 		}
 		Behavior {
-			Operation Controller() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest6\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest6\", \"DynamicActorTest6_case\");"
 			}
-			Operation ~Controller() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {

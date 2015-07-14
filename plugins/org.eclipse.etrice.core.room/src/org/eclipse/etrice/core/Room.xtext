@@ -80,6 +80,7 @@ DataClass:
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
 		attributes+=Attribute*
+		structors+=ClassStructor*
 		operations+=StandardOperation*
 	'}';
 	
@@ -90,7 +91,7 @@ Attribute:
 Operation: StandardOperation | PortOperation; 
 
 StandardOperation:
-	'Operation' (destructor?='~')? name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returnType=RefableType)))?
+	(override?='override')? 'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returnType=RefableType)))?
 		(docu=Documentation)?
 		detailCode=DetailCode
 ;
@@ -100,6 +101,10 @@ PortOperation:
             (docu=Documentation)?
             detailCode=DetailCode
 ; 
+
+ClassStructor:
+	name=('ctor'|'dtor') detailCode=DetailCode
+;
 
 // **************************************************************
 // protocol class
@@ -195,6 +200,7 @@ ActorClass:
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
 			behaviorAnnotations+=Annotation*
+			structors+=ClassStructor*
 			operations+=StandardOperation*
 			(stateMachine=StateMachine)?
 		'}')?

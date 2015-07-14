@@ -435,30 +435,17 @@ class DocuPostprocessor {
 			The standard form of an operation as used by
 			{@link ActorClass} and {@link DataClass}.
 			<p>
-			If the name coincides with it's containing classes name
-			then it is a constructor (with void return type).
-			If the name additionally is preceded by a tilde ~ then it
-			is a destructor.
-			</p>
-			<p>
 			The operation has a list of {@link VarDecl} arguments, an
 			optional return {@link RefableType} and a body (specified
 			as {@link DetailCode}).
 			</p>
 		''')
 		
-		cls.getAttribute("destructor").setDocumentation(
-			'''
-				If this flag is {@code true} <em>and</em> the name conincides with the class name
-				it is treated as a destructor.
-			''')
-		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("PortOperation")
 		cls.setDocumentation('''
 			The port operation is very similar to the {@link StandardOperation}
-			and is used in the {@link PortClass}. It is not possible to
-			define constructor or destructor.
+			and is used in the {@link PortClass}.
 			<p>
 			Optionally a {@link Message} can be specified which is sent
 			when the method is invoked. For this reason these operations
@@ -470,6 +457,12 @@ class DocuPostprocessor {
 			'''
 				This optional reference to a message means that the operation sends a message.
 			''')
+		
+		//------------------------------------------------------------------
+		cls = pckg.getClass("ClassStructor")
+		cls.setDocumentation('''
+			Represents either the constructor (ctor) or destructor (dtor) of a ROOM class.
+		''')
 		
 		//------------------------------------------------------------------
 		cls = pckg.getClass("GeneralProtocolClass")

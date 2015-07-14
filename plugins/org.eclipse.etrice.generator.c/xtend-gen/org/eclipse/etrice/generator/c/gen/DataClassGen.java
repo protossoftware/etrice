@@ -252,8 +252,8 @@ public class DataClassGen {
       _builder.append("/* operations */");
       _builder.newLine();
       {
-        List<Operation> _allOperations = this._roomHelpers.getAllOperations(dc);
-        for(final Operation op : _allOperations) {
+        List<StandardOperation> _allOperations = this._roomHelpers.getAllOperations(dc);
+        for(final StandardOperation op : _allOperations) {
           final CharSequence args = this.argList(op);
           _builder.newLineIfNotEmpty();
           _builder.append("#define ");

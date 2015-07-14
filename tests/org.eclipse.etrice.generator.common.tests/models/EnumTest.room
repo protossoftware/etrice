@@ -34,10 +34,10 @@ RoomModel EnumTest {
 			
 		}
 		Behavior {
-			Operation EnumUser() {
+			ctor {
 				"caseId = etUnit_openAll(\"tmp\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
 			}
-			Operation ~EnumUser() {
+			dtor {
 				"etUnit_closeAll(caseId);"
 			}
 			StateMachine {
