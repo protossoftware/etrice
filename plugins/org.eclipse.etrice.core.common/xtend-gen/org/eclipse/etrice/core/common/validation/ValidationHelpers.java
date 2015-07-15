@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.core.common.validation;
 
+import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,5 +123,20 @@ public class ValidationHelpers {
       }
     };
     return IterableExtensions.<ValidationHelpers.NamedObject>filter(items, _function);
+  }
+  
+  /**
+   * Visitor for inheritance, safeguards from null, eProxy and circular issues.
+   * 
+   * @param start EObject, may be null
+   * @param function return null to exit
+   */
+  public static <E extends EObject> void saveRecursiveVisitor(final E start, final Function<E, E> function) {
+    final Set<E> visited = CollectionLiterals.<E>newHashSet();
+    E next = start;
+    while ((((!Objects.equal(next, null)) && (!next.eIsProxy())) && visited.add(next))) {
+      E _apply = function.apply(next);
+      next = _apply;
+    }
   }
 }

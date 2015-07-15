@@ -17,19 +17,31 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.validation.NamesAreUniqueValidationHelper;
 
 /**
- *  Clustering is deactivated.<br>
- *  Names are unique: two objects sharing the same fqn prefix have distinct names.<br>
- *  Called by {@link org.eclipse.xtext.validation.NamesAreUniqueValidator NamesAreUniqueValidator}. 
+ * Xtext's Clustering is deactivated.<br>
+ * Names are unique: two objects sharing the same fqn prefix have distinct
+ * names.<br>
+ * Called by {@link org.eclipse.xtext.validation.NamesAreUniqueValidator
+ * NamesAreUniqueValidator}.
  */
 public class FQNAreUniqueValidationHelper extends NamesAreUniqueValidationHelper {
-	
+
 	@Override
 	protected EClass getAssociatedClusterType(EClass eClass) {
-		return EcorePackage.eINSTANCE.eClass();
+		return EcorePackage.Literals.ECLASS;
 	}
-	
+
 	@Override
 	protected String getTypeLabel(EClass eClass) {
-		return "";
+		// validated object's cluster type is EClass
+		if (eClass == EcorePackage.Literals.ECLASS)
+			return "name";
+
+		return super.getTypeLabel(eClass);
 	}
+	
+//	@Override
+//	public String getDuplicateNameErrorMessage(IEObjectDescription description, EClass clusterType,
+//			EStructuralFeature feature) {
+//	}
+
 }

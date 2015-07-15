@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import java.util.ArrayList
 import org.eclipse.emf.ecore.resource.Resource
+import com.google.common.base.Function
 
 /**
  * @author hrentz
@@ -64,5 +65,18 @@ class ValidationHelpers {
 	
 	def static Iterable<NamedObject> inSameResource(Iterable<NamedObject> items, Resource resource) {
 		items.filter(i|i.obj.eResource==resource)
+	}
+	
+	/**
+	 * Visitor for inheritance, safeguards from null, eProxy and circular issues.
+	 * 
+	 * @param start EObject, may be null
+	 * @param function return null to exit
+	 */
+	def static <E extends EObject> saveRecursiveVisitor(E  start, Function<E , E> function){
+		val Set<E> visited = newHashSet
+		var E next = start
+		while(next != null && !next.eIsProxy && (visited += next))
+			next = function.apply(next)
 	}
 }

@@ -15,19 +15,19 @@
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.base.Annotation;
-import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
@@ -38,10 +38,8 @@ import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
@@ -71,24 +69,25 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
  
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
-	@Inject
-	private RoomHelpers roomHelpers;
+	@Inject protected RoomHelpers roomHelpers;
 
-	@Inject
-	private RoomNameProvider roomNameProvider;
+	@Inject protected ValidationUtil validationUtil;
 	
-	@Inject
-	private ValidationUtil ValidationUtil;
+	@Inject protected IQualifiedNameProvider fqnProvider;
 	
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
@@ -273,56 +272,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 	
 	@Check
-	public void checkUniqueNames(ActorClass ac) {
-		if (roomHelpers.isCircularClassHierarchy(ac))
-			return;
-		
-		HashMap<String, EObject> name2obj = new HashMap<String, EObject>();
-		
-		// first add all base class objects (we'll add no errors for them)
-		if (ac.getActorBase()!=null) {
-			ActorClass base = ac.getActorBase();
-			List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(base);
-			for (InterfaceItem item : items) {
-				name2obj.put(item.getName(), item);
-			}
-			List<ActorContainerRef> refs = roomHelpers.getAllActorContainerRefs(base);
-			for (ActorContainerRef ref : refs) {
-				name2obj.put(ref.getName(), ref);
-			}
-		}
-		
-		// now we check our own items and refs
-		List<InterfaceItem> items = roomHelpers.getInterfaceItems(ac);
-		for (InterfaceItem item : items) {
-			if (name2obj.containsKey(item.getName())) {
-				EObject duplicate = name2obj.get(item.getName());
-				String location = roomNameProvider.getLocation(duplicate);
-				EObject parent = item.eContainer();
-				@SuppressWarnings("unchecked")
-				int idx = ((List<EObject>)parent.eGet(item.eContainingFeature())).indexOf(item);
-				error("names must be unique (duplicate of "+location+")", parent, item.eContainingFeature(), idx);
-			}
-			else
-				name2obj.put(item.getName(), item);
-		}
-		
-		List<ActorContainerRef> refs = roomHelpers.getRefs(ac, false);
-		for (ActorContainerRef ref : refs) {
-			if (name2obj.containsKey(ref.getName())) {
-				EObject duplicate = name2obj.get(ref.getName());
-				String location = roomNameProvider.getLocation(duplicate);
-				EObject parent = ref.eContainer();
-				@SuppressWarnings("unchecked")
-				int idx = ((List<EObject>)parent.eGet(ref.eContainingFeature())).indexOf(ref);
-				error("names must be unique (duplicate of "+location+")", parent, ref.eContainingFeature(), idx);
-			}
-			else
-				name2obj.put(ref.getName(), ref);
-		}
-	}
-	
-	@Check
 	public void checkExecModelConsistent(ActorClass ac) {
 		if (roomHelpers.isCircularClassHierarchy(ac))
 			return;
@@ -350,7 +299,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkTopLevelRefinedStates(ActorClass ac) {
-		List<Result> errors = ValidationUtil.checkTopLevelRefinedStates(ac);
+		List<Result> errors = validationUtil.checkTopLevelRefinedStates(ac);
 		for (Result err : errors) {
 			error(err);
 		}
@@ -362,7 +311,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
 
 		if (ssc.getThreads().isEmpty())
-			warning("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread dflt_thread");
+			warning("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread defaultThread");
 		
 		checkMappings(ssc.getActorInstanceMappings());
 	}
@@ -408,7 +357,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkPortCompatibility(Binding bind) {
-		Result result = ValidationUtil.isValid(bind);
+		Result result = validationUtil.isValid(bind);
 		if (!result.isOk()) {
 			EObject sc = bind.eContainer();
 			@SuppressWarnings("unchecked")
@@ -419,16 +368,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkServiceCompatibility(LayerConnection conn) {
-		Result result = ValidationUtil.isValid(conn);
+		Result result = validationUtil.isValid(conn);
 		if (!result.isOk())
 			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
-	}
-	
-	@Check
-	public void checkInterfaceItemUniqueName(InterfaceItem item) {
-		Result result = ValidationUtil.isUniqueName(item);
-		if (!result.isOk())
-			error(result.getMsg(), FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name());
 	}
 	
 	@Check
@@ -546,6 +488,94 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 	}
 	
+	/**
+	 * {@link #checkInheritedNames(DataClass)}
+	 */
+	@Check
+	public void checkInheritedNames(ActorClass ac){
+		final Set<? extends EStructuralFeature> overrideFeatures = Sets.newHashSet(
+				RoomPackage.Literals.ACTOR_CLASS__OPERATIONS, RoomPackage.Literals.ACTOR_CLASS__STRUCTORS, FSMPackage.Literals.MODEL_COMPONENT__STATE_MACHINE);
+		
+		final Map<String, EObject> superNames = Maps.newHashMap();
+		// gather all named elements of super classes
+		ValidationHelpers.saveRecursiveVisitor(ac.getActorBase(), new Function<ActorClass, ActorClass>(){
+
+			@Override
+			public ActorClass apply(ActorClass input) {
+				for(EObject containee : input.eContents()){
+					QualifiedName qualifiedName = fqnProvider.apply(containee);
+					String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
+					if(name != null && !superNames.containsKey(name))
+						superNames.put(name, containee);
+				}
+				return input.getActorBase();
+			}});
+		
+		for(EObject containee : ac.eContents()){
+			QualifiedName qualifiedName = fqnProvider.apply(containee);
+			String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
+			if(name == null)
+				continue;
+			EObject existing = superNames.get(name);
+			if(existing == null)
+				continue;
+			if(overrideFeatures.contains(containee.eContainingFeature()) && containee.eContainingFeature() == existing.eContainingFeature())
+				continue;
+			if(superNames.containsKey(fqnProvider.apply(existing).getLastSegment()))
+				issueInheritedNameError(containee, existing);
+		}
+	}
+	
+	
+	/**
+	 * Copy&Paste of {@link #checkInheritedNames(ActorClass)}
+	 */
+	@Check
+	public void checkInheritedNames(DataClass dc){
+		final Set<? extends EStructuralFeature> overrideFeatures = Sets.newHashSet(
+				RoomPackage.Literals.DATA_CLASS__OPERATIONS, RoomPackage.Literals.DATA_CLASS__STRUCTORS);
+		
+		final Map<String, EObject> superNames = Maps.newHashMap();
+		// gather all named elements of super classes
+		ValidationHelpers.saveRecursiveVisitor(dc.getBase(), new Function<DataClass, DataClass>(){
+
+			@Override
+			public DataClass apply(DataClass input) {
+				for(EObject containee : input.eContents()){
+					QualifiedName qualifiedName = fqnProvider.apply(containee);
+					String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
+					if(name != null && !superNames.containsKey(name))
+						superNames.put(name, containee);
+				}
+				return input.getBase();
+			}});
+		
+		for(EObject containee : dc.eContents()){
+			QualifiedName qualifiedName = fqnProvider.apply(containee);
+			String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
+			if(name == null)
+				continue;
+			EObject existing = superNames.get(name);
+			if(existing == null)
+				continue;
+			if(overrideFeatures.contains(containee.eContainingFeature()) && containee.eContainingFeature() == existing.eContainingFeature())
+				continue;
+			if(superNames.containsKey(fqnProvider.apply(existing).getLastSegment()))
+				issueInheritedNameError(containee, existing);
+		}
+	}
+	
+	/**
+	 * Assuming target and source have the feature 'name', name not null, contained in a {@link RoomClass}
+	 */
+	private void issueInheritedNameError(EObject target, EObject source){
+		String targetName = fqnProvider.apply(target).getLastSegment();
+		String sourceName = fqnProvider.apply(source).getLastSegment();
+		String sourceType = source.eClass().getName();
+		String sourceOwner = roomHelpers.getRoomClass(source).getName();
+		error("name '" + targetName + "' is already assigned to " + sourceType + sourceOwner+"."+sourceName, target, target.eClass().getEStructuralFeature("name"));
+	}
+	
 	@Check
 	public void checkMessage(Message msg) {
 		ProtocolClass pc = (ProtocolClass) msg.eContainer();
@@ -566,47 +596,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkDataClass(DataClass dc) {
 		if (dc.getAttributes().isEmpty() && dc.getBase()==null)
 			error("Non-derived data classes have to define at least one attribute", RoomPackage.Literals.DATA_CLASS__ATTRIBUTES);
-	}
-	
-	@Check
-	public void checkAttribute(Attribute att) {
-		ArrayList<Attribute> all = new ArrayList<Attribute>();
-		
-		if (att.eContainer() instanceof ActorClass) {
-			ActorClass ac = (ActorClass) att.eContainer();
-			if (roomHelpers.isCircularClassHierarchy(ac))
-				// is checked elsewhere
-				return;
-			
-			do {
-				all.addAll(ac.getAttributes());
-				ac = ac.getActorBase();
-			}
-			while (ac!=null);
-		}
-		else if (att.eContainer() instanceof DataClass) {
-			DataClass dc = (DataClass) att.eContainer();
-			if (roomHelpers.isCircularClassHierarchy(dc))
-				// is checked elsewhere
-				return;
-			
-			do {
-				all.addAll(dc.getAttributes());
-				dc = dc.getBase();
-			}
-			while (dc!=null);
-		}
-		// skip PortClass case since they don't inherit (yet)
-		
-		String name = att.getName();
-		for (Attribute a : all) {
-			if (a!=att && a.getName().equals(name))
-				if (a.eContainer()!=att.eContainer())
-					error("name already used in base class '"+((RoomClass)a.eContainer()).getName()+"'",
-							RoomPackage.Literals.ATTRIBUTE__NAME);
-				else
-					error("name already used", RoomPackage.Literals.ATTRIBUTE__NAME);
-		}
 	}
 	
 	@Check
@@ -680,31 +669,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					a.getType().getName(),
 					a.getType().getName()+" {target = "+invalidTargetType.getLiteral()+" ...",
 					invalidTargetType.getLiteral());
-		}
-		}
-	
-	@Check
-	public void checkRoomClassAnnotationTypeUniqueness(RoomClass rc) {
-		if(rc.eContainer() instanceof RoomModel) {
-			RoomModel model = (RoomModel)rc.eContainer();
-			for(AnnotationType at : model.getAnnotationTypes()) {
-				if(rc.getName().equals(at.getName())) {
-					error("The name \""+at.getName()+"\" already exists as an AnnotationType name", rc, RoomPackage.Literals.ROOM_CLASS__NAME); 
-				}
-			}
-		}
-	}
-	
-	@Check
-	public void checkRoomClassAnnotationTypeUniqueness(AnnotationType at) {
-		if(at.eContainer() instanceof RoomModel) {
-			RoomModel model = (RoomModel)at.eContainer();
-			for(Object obj : org.eclipse.emf.ecore.util.EcoreUtil.getObjectsByType(model.eContents(), RoomPackage.Literals.ROOM_CLASS)) {
-				RoomClass rc = (RoomClass)obj;
-				if(at.getName().equals(rc.getName())) {
-					error("The name \""+at.getName()+"\" already exists as a RoomClass name", at, BasePackage.Literals.ANNOTATION_TYPE__NAME); 
-				}
-			}
 		}
 	}
 	

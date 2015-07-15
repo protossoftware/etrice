@@ -9,7 +9,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.ComposedChecks;
 
-@ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class, org.eclipse.xtext.validation.NamesAreUniqueValidator.class, org.eclipse.etrice.core.validation.ValidatorExtensionManager.class})
+@ComposedChecks(validators= {org.eclipse.xtext.validation.ImportUriValidator.class, org.eclipse.etrice.core.validation.ValidatorExtensionManager.class, org.eclipse.etrice.core.validation.RoomNamesAreUniqueValidator.class})
 public class AbstractRoomJavaValidator extends org.eclipse.etrice.core.fsm.validation.FSMJavaValidator {
 
 	@Override

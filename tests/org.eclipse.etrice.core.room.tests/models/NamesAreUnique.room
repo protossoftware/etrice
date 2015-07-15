@@ -1,0 +1,175 @@
+RoomModel NamesAreUnique {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
+
+	/*
+	 * Room model duplicate names
+	 */
+	LogicalSystem ClassDuplicate1 {
+		SubSystemRef dummy: SFlat
+	}
+
+	ActorClass ClassDuplicate1 { }
+
+	Enumeration ClassDuplicate1 {
+		DUMMY
+	}
+
+	PrimitiveType ClassDuplicate1: ptBoolean -> boolean default "false"
+
+	AnnotationType ClassDuplicate1 {
+		target = {
+			ActorClass, SubSystemClass
+		}
+	}
+
+	/*
+	 * Children unique names
+	 */
+	LogicalSystem LFlat {
+		SubSystemRef duplicate1: SFlat
+		SubSystemRef duplicate1: SFlat
+	}
+
+	SubSystemClass SFlat {
+		Port duplicate1: PDummy
+		SPP duplicate2: PDummy
+		ActorRef duplicate2: Dummy
+		LogicalThread duplicate1
+	}
+
+	ActorClass Flat {
+		Interface {
+			Port duplicate1: PDummy
+			SPP dupliCAte2: PDummy
+		}
+		Structure {
+			external Port duplicate1
+			SAP dupliCAte2: PEventBase
+			ActorRef duplicate1: Dummy
+			Attribute duplicate5: boolean
+		}
+		Behavior {
+			Operation duplicate5() {
+				""
+			}
+		}
+	}
+
+	DataClass DFlat {
+		Attribute duplicate1: boolean
+		Operation duplicate1() {
+			""
+		}
+	}
+
+	Enumeration EnumFlat {
+		Duplicate1,
+		Duplicate1
+	}
+
+	/*
+	 * Inherited children unique names
+	 */
+	ActorClass Base {
+		Interface {
+			Port base_duplicate1: PDummy
+			SPP base_duplicate2: PDummy
+		}
+		Structure {
+			SAP base_duplicate3: PDummy
+			ActorRef base_duplicate4: Dummy
+			Attribute base_duplicate5: boolean
+		}
+		Behavior {
+			ctor {
+				""
+			}
+			dtor {
+				""
+			}
+			Operation base_duplicate6() {
+				""
+			}
+			StateMachine { }
+		}
+	}
+
+	ActorClass Sub extends Base {
+		Interface {
+			Port base_duplicate2: PDummy
+			SPP base_duplicate6: PDummy
+		}
+		Structure {
+			SAP base_duplicate4: PDummy
+			ActorRef base_duplicate1: Dummy
+			Attribute base_duplicate3: boolean
+			Attribute sm : int32 // special: StateMachine
+			Attribute ^ctor : int32 // special: ctor
+			Attribute ^dtor : int32 // special: dtor
+		}
+		Behavior {
+			Operation base_duplicate5() {
+				""
+			}
+		}
+	}
+
+	ActorClass Override extends Base {
+		Behavior {
+			ctor {
+				""
+			}
+			dtor {
+				""
+			}
+			override Operation base_duplicate6() {
+				""
+			}
+			StateMachine { }
+		}
+	}
+
+	DataClass DBase {
+		Attribute base_duplicate1: boolean
+		ctor {
+			""
+		}
+		dtor {
+			""
+		}
+		Operation base_duplicate2() {
+			""
+		}
+	}
+
+	DataClass DSub extends DBase {
+		Attribute ^ctor : int32 // special: ctor
+		Attribute ^dtor : int32 // special: dtor
+		Attribute base_duplicate2: boolean
+		Operation base_duplicate1() {
+			""
+		}
+	}
+
+	DataClass DOverride extends DBase {
+		ctor {
+			""
+		}
+		dtor {
+			""
+		}
+		override Operation base_duplicate2() {
+			""
+		}
+	}
+
+	ActorClass Dummy { }
+
+	ProtocolClass PDummy {
+		incoming {
+			Message in1()
+		}
+	}
+
+}
