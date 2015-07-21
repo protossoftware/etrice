@@ -12,9 +12,11 @@
 
 #include "RandomGenerator.h"
 
+#ifdef ET_FLOAT64
+
 #include "math.h"
 
-void RandomGenerator_init(RandomGenerator* self, float64 seed, float64 min, float64 max){
+void RandomGenerator_init(RandomGenerator* self, etFloat64 seed, etFloat64 min, etFloat64 max){
 	self->seed = seed;
 	self->min = min;
 	self->max = max;
@@ -23,12 +25,14 @@ void RandomGenerator_init(RandomGenerator* self, float64 seed, float64 min, floa
 }
 
 
-float64 RandomGenerator_getNext(RandomGenerator* self){
+etFloat64 RandomGenerator_getNext(RandomGenerator* self){
 	self->seed = 1000. * fabs(log(self->seed)); /* shift comma 3 times to get nice values */
-	int64 resultInt = self->seed;    			/* get int number left of comma */
+	etInt64 resultInt = self->seed;    			/* get int number left of comma */
 	self->seed = self->seed - resultInt; 		/* cut off everything left of comma */
 	self->current = self->seed*self->range + self->min; /* stretch to range */
 	self->seed += 0.1; /** seed must always be bigger than 0 for log in next iteration */
 
 	return self->current;
 }
+
+#endif

@@ -19,7 +19,7 @@
  * this macro computes the memory aligned value for a given size. It uses the ALIGNMENT
  * defined in etDatatypes.h
  */
-#define MEM_CEIL(n)          ((n)+((ALIGNMENT-((n)&(ALIGNMENT-1)))&(ALIGNMENT-1)))
+#define MEM_CEIL(n)          ((n)+((etALIGNMENT-((n)&(etALIGNMENT-1)))&(etALIGNMENT-1)))
 
 struct etMemory;
 

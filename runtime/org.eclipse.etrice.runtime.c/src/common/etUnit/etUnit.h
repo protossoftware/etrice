@@ -130,13 +130,18 @@ void etUnit_closeAll(etInt16 id);
 /*
  * float values
  */
+#ifdef ET_FLOAT32
 /** calls \ref expectEqualFloat32() */
 #define EXPECT_EQUAL_FLOAT32(id, msg, expected, actual, precision)		expectEqualFloat32(id, msg, expected, actual, precision, __FILE__, __LINE__)
+#define EXPECT_RANGE_FLOAT32(id, msg, min, max, actual)		expectRangeFloat32(id, msg, min, max, actual, __FILE__, __LINE__)
+#endif
+
+#ifdef ET_FLOAT64
 /** calls \ref expectEqualFloat64() */
 #define EXPECT_EQUAL_FLOAT64(id, msg, expected, actual, precision)		expectEqualFloat64(id, msg, expected, actual, precision, __FILE__, __LINE__)
-
-#define EXPECT_RANGE_FLOAT32(id, msg, min, max, actual)		expectRangeFloat32(id, msg, min, max, actual, __FILE__, __LINE__)
 #define EXPECT_RANGE_FLOAT64(id, msg, min, max, actual)		expectRangeFloat64(id, msg, min, max, actual, __FILE__, __LINE__)
+#endif
+
 
 /*
  * Pointers
@@ -287,7 +292,9 @@ void expectEqualUInt32(etInt16 id, const char* msg, etUInt32 expected, etUInt32 
  * \param file the file name with the test case
  * \param line the line
  */
+#ifdef ET_FLOAT32
 void expectEqualFloat32(etInt16 id, const char* msg, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line);
+#endif
 /**
  * reports an error if two floats aren't equal
  *
@@ -299,7 +306,9 @@ void expectEqualFloat32(etInt16 id, const char* msg, etFloat32 expected, etFloat
  * \param file the file name with the test case
  * \param line the line
  */
+#ifdef ET_FLOAT64
 void expectEqualFloat64(etInt16 id, const char* msg, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
+#endif
 
 /**
  * reports an error if a value is not inside a range e.g. [-5.1, +3.0]
@@ -312,7 +321,9 @@ void expectEqualFloat64(etInt16 id, const char* msg, etFloat64 expected, etFloat
  * \param file the file name with the test case
  * \param line the line
  */
+#ifdef ET_FLOAT32
 void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat32 max, etFloat32 actual, const char* file, int line) ;
+#endif
 
 /**
  * reports an error if a value is not inside a range e.g. [-5.1, +3.0]
@@ -325,7 +336,9 @@ void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat3
  * \param file the file name with the test case
  * \param line the line
  */
+#ifdef ET_FLOAT64
 void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) ;
+#endif
 
 /**
  * reports an error if two pointers aren't equal

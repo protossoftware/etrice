@@ -55,14 +55,28 @@ static OrderInfo* getOrderInfo(etInt16 id) {
 	return NULL;
 }
 
+/* float measuring */
+#if defined (ET_FLOAT32) || defined (ET_FLOAT64)
+#define ETUNIT_FLOAT
+#ifdef ET_FLOAT64
+typedef etFloat64 etUnitFloat;
+#else
+typedef etFloat32 etUnitFloat;
+#endif
+#endif
+
+
 /* forward declarations of private functions */
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line);
 static void expect_range_int(etInt16 id, const char* message, etInt32 min, etInt32 max, etInt32 actual, const char* file, int line);
 static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected, etUInt32 actual, const char* file, int line);
 static void expect_range_uint(etInt16 id, const char* message, etUInt32 min, etUInt32 max, etUInt32 actual, const char* file, int line);
 
-static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line);
-static void expect_range_float(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line);
+#ifdef ETUNIT_FLOAT
+static void expect_equal_float(etInt16 id, const char* message, etUnitFloat expected, etUnitFloat actual, etUnitFloat precision, const char* file, int line);
+static void expect_range_float(etInt16 id, const char* message, etUnitFloat min, etUnitFloat max, etUnitFloat actual, const char* file, int line);
+#endif
+
 static void etUnit_handleExpect(etInt16 id, etBool result, const char *trace, const char* expected, const char* actual, const char* file, int line);
 
 /* public functions */
@@ -97,8 +111,6 @@ void etUnit_open(const char* testResultPath, const char* testFileName) {
 
 	/* prepare time measurement */
 	getTimeFromTarget(&etUnit_startTime);
-	etLogger_logInfoF("Start Time: %ld", etTimeHelpers_convertToMSec(&etUnit_startTime));
-
 }
 
 void etUnit_close(void) {
@@ -106,7 +118,10 @@ void etUnit_close(void) {
 		etLogger_fclose(etUnit_reportfile);
 		etUnit_reportfile = NULL;
 	}
-	etLogger_logInfoF("End Time: %ld", clock());
+	etTime endTime;
+	getTimeFromTarget(&endTime);
+	etTimeHelpers_subtract(&endTime, &etUnit_startTime);
+	etLogger_logInfoF("Elapsed Time: %ld ms", etTimeHelpers_convertToMSec(&endTime));
 	if (etUnit_errorCounter == 0)
 		etLogger_logInfoF("Error Counter: %ld", etUnit_errorCounter);
 	else
@@ -148,7 +163,6 @@ void etUnit_closeTestCase(etInt16 id) {
 	OrderInfo* info = getOrderInfo(id);
 	if(info != NULL){
 		if (info->currentIndex != info->size) {
-			char testresult[ETUNIT_FAILURE_TEXT_LEN];
 			etUnit_handleExpect(id, ET_FALSE, "EXPECT_ORDER was not completed", NULL, NULL, 0, 0);
 		}
 	}
@@ -231,21 +245,25 @@ void expect_equal_void_ptr(etInt16 id, const char* message, const void* expected
 	}
 }
 
+#ifdef ET_FLOAT32
 void expectEqualFloat32(etInt16 id, const char* message, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line) {
-	expect_equal_float(id, message, expected, actual, precision, file, line);
-}
-
-void expectEqualFloat64(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
 	expect_equal_float(id, message, expected, actual, precision, file, line);
 }
 
 void expectRangeFloat32(etInt16 id, const char* message, etFloat32 min, etFloat32 max, etFloat32 actual, const char* file, int line) {
 	expect_range_float(id, message, min, max, actual, file, line);
 }
+#endif
+
+#ifdef ET_FLOAT64
+void expectEqualFloat64(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
+	expect_equal_float(id, message, expected, actual, precision, file, line);
+}
 
 void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) {
 	expect_range_float(id, message, min, max, actual, file, line);
 }
+#endif
 
 void expectOrderStart(etInt16 id, etInt16* list, etInt16 size, const char* file, int line) {
 	int i;
@@ -362,7 +380,8 @@ static void expect_range_uint(etInt16 id, const char* message, etUInt32 min, etU
 	}
 }
 
-static void expect_equal_float(etInt16 id, const char* message, etFloat64 expected, etFloat64 actual, etFloat64 precision, const char* file, int line) {
+#ifdef ETUNIT_FLOAT
+static void expect_equal_float(etInt16 id, const char* message, etUnitFloat expected, etUnitFloat actual, etUnitFloat precision, const char* file, int line) {
 	if (expected - actual < -precision || expected - actual > precision) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
@@ -375,7 +394,7 @@ static void expect_equal_float(etInt16 id, const char* message, etFloat64 expect
 	}
 }
 
-static void expect_range_float(etInt16 id, const char* message, etFloat64 min, etFloat64 max, etFloat64 actual, const char* file, int line) {
+static void expect_range_float(etInt16 id, const char* message, etUnitFloat min, etUnitFloat max, etUnitFloat actual, const char* file, int line) {
 	if (actual < min || actual > max) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[64], act[16];
@@ -392,6 +411,7 @@ static void expect_range_float(etInt16 id, const char* message, etFloat64 min, e
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
 	}
 }
+#endif
 
 static void etUnit_handleExpect(etInt16 id, etBool result, const char *resulttext, const char* exp, const char* act, const char* file, int line) {
 	if (result == ET_TRUE) {

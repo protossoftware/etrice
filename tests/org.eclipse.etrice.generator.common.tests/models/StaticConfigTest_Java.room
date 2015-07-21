@@ -254,7 +254,7 @@ RoomModel StaticConfigTest {
 	DataClass Data_Super1_dc {
 
 	// PrimitiveType
-		Attribute bool_r: boolean = "falSe"
+		Attribute bool_r: boolean = "false"
 		Attribute bool_c: boolean = "false"
 		Attribute bool_i: boolean = "false"
 		Attribute int8_r: int8 = "8"

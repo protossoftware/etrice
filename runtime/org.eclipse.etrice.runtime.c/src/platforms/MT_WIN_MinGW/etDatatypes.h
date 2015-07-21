@@ -15,92 +15,38 @@
 
 /*
  * typedefs for platform specific datatypes
- * generic Version for most bigger 32 and 64 bit platforms like Linux an Windows
- *
- * */
+ * MinGW version
+ */
+
+#define ET_INT64
+#define ET_FLOAT32
+#define ET_FLOAT64
+
+#include "etStdDatatypes.h"
 
 #include <stdio.h>
 
 #define WINVER 0x0500
 #include <windows.h>
 
-/* unsigned integer datatypes */
-typedef unsigned char uint8;
-typedef unsigned short int uint16;
-typedef unsigned long uint32;
-typedef unsigned long long uint64;
+/*--- Data types for room.basic.types */
 
-/* signed integer datatypes */
-typedef char int8;
-typedef short int int16;
-typedef long int32;
-typedef long long int64;
+/*-----------------------------------------------------------*/
 
+/*--- Data types for runtime */
 
-/* float datatypes */
-typedef float float32;
-typedef double float64;
-
-/* string datatypes */
-typedef char* charPtr;
-
-
-#ifndef NULL
-	#define NULL 0
-#endif
-
-/* boolean datatypes and values */
-typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-
-#ifndef ET_TRUE
-	#define ET_TRUE 1
-#endif
-#ifndef ET_FALSE
-	#define ET_FALSE 0
-#endif
-#ifndef true
-	#define true 1
-#endif
-#ifndef false
-	#define false 0
-#endif
-
-#define ALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
-
-/*
- * typedefs for eTrice Runtime and Testing
- *
- * */
-
-typedef int8 etInt8;
-typedef int16 etInt16;
-typedef int32 etInt32;
-
-typedef uint8 etUInt8;
-typedef uint16 etUInt16;
-typedef uint32 etUInt32;
-
-typedef charPtr etCharPtr;
-
-typedef float32 etFloat32;
-typedef float64 etFloat64;
-
-typedef bool etBool;
-
+#define etALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
 
 typedef FILE* etFileHandle;
 
-typedef int16 etAddressId;
-
-/*
- * typedefs for OS-specific types
- */
-
+/* types for osal */
 typedef CRITICAL_SECTION etOSMutexData;
 typedef HANDLE etOSThreadData;
 typedef DWORD etOSThreadId;
 typedef HANDLE etOSSemaData;
 typedef HANDLE etOSTimerData;
 typedef DWORD etOSTimerId;
+
+/*-----------------------------------------------------------*/
 
 #endif /* _DATATYPES_H_ */

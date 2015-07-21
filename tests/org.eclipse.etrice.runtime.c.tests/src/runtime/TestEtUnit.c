@@ -36,8 +36,10 @@ void TestEtUnit_Expect(etInt16 id){
 	EXPECT_EQUAL_UINT32(id, "EXPECT_EQUAL_INT32", 1234567, 1234567);
 
 	/* float values */
+#ifdef ET_FLOAT32
 	EXPECT_EQUAL_FLOAT32(id, "EXPECT_EQUAL_FLOAT32", (etFloat32) 123.456, (etFloat32) 123.456, (etFloat32) 0.0001);
 	EXPECT_EQUAL_FLOAT32(id, "EXPECT_EQUAL_FLOAT32", (etFloat32) 123.456, (etFloat32) 123.456, (etFloat32) 0.0001);
+#endif
 
 	/* Pointers */
 	etUInt16 value;

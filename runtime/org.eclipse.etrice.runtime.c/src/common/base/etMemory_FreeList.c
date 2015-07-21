@@ -60,7 +60,7 @@ static void* etMemory_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
 	int asize, slot_offset, slot, slot_size;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getFreeListMem")
 
-	asize = (size / ALIGNMENT);
+	asize = (size / etALIGNMENT);
 	for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
 		slot = (asize + slot_offset) % self->nslots;
 		slot_size = self->freelists[slot].objsize;
@@ -87,7 +87,7 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 	{
 		int asize, slot_offset, slot, slot_size;
 
-		asize = (size / ALIGNMENT);
+		asize = (size / etALIGNMENT);
 		for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
 			slot = (asize + slot_offset) % self->nslots;
 			slot_size = self->freelists[slot].objsize;

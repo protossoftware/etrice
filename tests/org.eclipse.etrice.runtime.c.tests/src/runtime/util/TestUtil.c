@@ -16,6 +16,8 @@
 
 #include "RandomGenerator.h"
 
+#ifdef ET_FLOAT64
+
 static void TestRandomGenerator (etInt16 id) {
 	RandomGenerator rand;
 	int i;
@@ -28,7 +30,7 @@ static void TestRandomGenerator (etInt16 id) {
 		EXPECT_RANGE_FLOAT64(id, "random [-1,+1]", -1., +1., result); /* check for range */
 		sum += result;
 	}
-	average = sum / (float64)i;
+	average = sum / (etFloat64)i;
 	EXPECT_RANGE_FLOAT64(id, "average [-1,+1]", -0.1, 0.1, average); /* check for quality */
 
 	sum = average = 0;
@@ -38,16 +40,21 @@ static void TestRandomGenerator (etInt16 id) {
 		EXPECT_RANGE_FLOAT64(id, "random [-500,+1000]", -500., +1000., result); /* check for range */
 		sum += result;
 	}
-	average = sum / (float64)i;
+	average = sum / (etFloat64)i;
 	EXPECT_RANGE_FLOAT64(id, "average [-500,+1000]", 230., 270., average); /* check for quality */
 
 
 }
 
+#endif
 
 void TestUtil_runSuite(void){
 	etUnit_openTestSuite("TestUtil");
+
+#ifdef ET_FLOAT64
 	ADD_TESTCASE(TestRandomGenerator);
+#endif
+
 	etUnit_closeTestSuite();
 }
 

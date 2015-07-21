@@ -28,6 +28,7 @@
 #include "TestEtMemory.h"
 #include "TestEtQueue.h"
 #include "TestEtTimer.h"
+#include "TestEtDatatypes.h"
 #include "helpers/TestEtTimeHelpers.h"
 #include "util/TestUtil.h"
 
@@ -37,9 +38,9 @@
 
 void RunCRuntimeTestcases(void){
 	etInt16 id;
-	etMSCLogger_open("tmp/testlog", "test.log");
-	etUnit_open("tmp/testlog","TestCRuntime");
-
+	etMSCLogger_open("log/testlog", "test.log");
+	etUnit_open("log/testlog","TestCRuntime");
+	
 	TestEtQueue_runSuite();
 	TestEtMemory_runSuite();
 	TestEtMessage_runSuite();
@@ -47,6 +48,7 @@ void RunCRuntimeTestcases(void){
 	TestEtMessageService_runSuite();
 	TestEtUnit_runSuite();
 	TestEtTimer_runSuite();
+	TestEtDatatypes_runSuite();
 	TestEtTimeHelpers_runSuite();
 	TestUtil_runSuite();
 
@@ -54,7 +56,7 @@ void RunCRuntimeTestcases(void){
 
 	/* special situation for testing openAll and closeAll of etUnit
 	 * this has to be done outside of etUnit_open and etUnit_close */
-	id = etUnit_openAll("tmp/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
+	id = etUnit_openAll("log/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
 	EXPECT_TRUE(id, "Open and Close", ET_TRUE);
 	etUnit_closeAll(id);
 

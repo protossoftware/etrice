@@ -42,11 +42,11 @@ RoomModel room.basic.etunit {
 				"return self->constData->instName;"
 			}
 			Operation startTimeout(time: uint32){
-				"tcTimeoutIgnore = false;"
+				"tcTimeoutIgnore = ET_FALSE;"
 				"tcTimer.startTimeout(time);"
 			}
 			Operation invalidateTimeout(){
-				"tcTimeoutIgnore = true;"
+				"tcTimeoutIgnore = ET_TRUE;"
 			}
 			StateMachine {
 				Transition init: initial -> tpEnter of testing {
@@ -75,7 +75,7 @@ RoomModel room.basic.etunit {
 				}
 				State timeout {
 					entry {
-						"EXPECT_FALSE(tcCaseId, \"timeout\", true);"
+						"EXPECT_FALSE(tcCaseId, \"timeout\", ET_TRUE);"
 						"etUnit_closeTestCase(tcCaseId);"
 						"tcLifecycle.finishedTestCase(tcCaseId);"
 					}

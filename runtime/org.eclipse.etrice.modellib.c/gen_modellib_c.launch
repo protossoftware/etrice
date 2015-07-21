@@ -5,7 +5,7 @@
 <booleanAttribute key="GenInstanceDiagram" value="true"/>
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="true"/>
-<booleanAttribute key="MSC" value="false"/>
+<booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TimingService.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TcpService.room}"/>

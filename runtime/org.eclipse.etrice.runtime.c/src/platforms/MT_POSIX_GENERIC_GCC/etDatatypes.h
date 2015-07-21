@@ -17,8 +17,13 @@
 /*
  * typedefs for platform specific datatypes
  * POSIX version
- *
- * */
+ */
+
+#define ET_INT64
+#define ET_FLOAT32
+#define ET_FLOAT64
+
+#include "etStdDatatypes.h"
 
 #include <stdio.h>
 #include <pthread.h>
@@ -26,79 +31,17 @@
 #include <signal.h>
 #include <sys/types.h>
 
-/* unsigned integer datatypes */
-typedef unsigned char uint8;
-typedef unsigned short int uint16;
-typedef unsigned long uint32;
-typedef unsigned long long uint64;
+/*--- Data types for room.basic.types */
 
-/* signed integer datatypes */
-typedef char int8;
-typedef short int int16;
-typedef long int32;
-typedef long long int64;
+/*-----------------------------------------------------------*/
 
+/*--- Data types for runtime */
 
-/* float datatypes */
-typedef float float32;
-typedef double float64;
-
-/* string datatypes */
-typedef char* charPtr;
-
-
-#ifndef NULL
-	#define NULL 0
-#endif
-
-/* boolean datatypes and values */
-typedef char bool;  	/* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-typedef bool boolean;
-
-#ifndef ET_TRUE
-	#define ET_TRUE 1
-#endif
-#ifndef ET_FALSE
-	#define ET_FALSE 0
-#endif
-#ifndef true
-	#define true 1
-#endif
-#ifndef false
-	#define false 0
-#endif
-
-#define ALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
-
-/*
- * typedefs for eTrice Runtime and Testing
- *
- * */
-
-typedef int8 etInt8;
-typedef int16 etInt16;
-typedef int32 etInt32;
-
-typedef uint8 etUInt8;
-typedef uint16 etUInt16;
-typedef uint32 etUInt32;
-
-typedef charPtr etCharPtr;
-
-typedef float32 etFloat32;
-typedef float64 etFloat64;
-
-typedef bool etBool;
-
+#define etALIGNMENT		8	/* power of 2 and >= sizeof(int) ! */
 
 typedef FILE* etFileHandle;
 
-typedef int16 etAddressId;
-
-/*
- * typedefs for OS-specific types
- */
-
+/* types for osal */
 typedef pthread_mutex_t etOSMutexData;
 typedef pthread_t etOSThreadData;
 typedef pthread_t etOSThreadId;
@@ -108,9 +51,9 @@ typedef struct {
 	timer_t timerid;
 	sigevent_t te;
 	etBool signaled;
-}
-etOSTimerData;
+} etOSTimerData;
 typedef timer_t etOSTimerId;
 
+/*-----------------------------------------------------------*/
 
 #endif /* _DATATYPES_H_ */

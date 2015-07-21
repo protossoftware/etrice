@@ -15,12 +15,14 @@
 
 #include "etDatatypes.h"
 
+#ifdef ET_FLOAT64
+
 typedef struct RandomGenerator {
-	float64 seed;
-	float64 max;
-	float64 min;
-	float64 range;
-	float64 current;
+	etFloat64 seed;
+	etFloat64 max;
+	etFloat64 min;
+	etFloat64 range;
+	etFloat64 current;
 }RandomGenerator;
 
 /**
@@ -35,11 +37,11 @@ typedef struct RandomGenerator {
 * 	(...)
 *	RandomNumberGenerator rand;
 *	RandomNumberGenerator_init(&rand, 0.321, -10, 10);
-* 	float64 result = RandomNumberGenerator_getNext(&rand);
+* 	etFloat64 result = RandomNumberGenerator_getNext(&rand);
 * 	(...)
 * 	result now holds a random number between -10 and 10;
 */
-void RandomGenerator_init(RandomGenerator* self, float64 seed, float64 min, float64 max);
+void RandomGenerator_init(RandomGenerator* self, etFloat64 seed, etFloat64 min, etFloat64 max);
 
 /**
 * initialze once before use.
@@ -48,7 +50,8 @@ void RandomGenerator_init(RandomGenerator* self, float64 seed, float64 min, floa
 * @return A random number between min and max
 *
 */
-float64 RandomGenerator_getNext(RandomGenerator* self);
+etFloat64 RandomGenerator_getNext(RandomGenerator* self);
 
 
+#endif
 #endif /* RANDOMGENERATOR_H_ */

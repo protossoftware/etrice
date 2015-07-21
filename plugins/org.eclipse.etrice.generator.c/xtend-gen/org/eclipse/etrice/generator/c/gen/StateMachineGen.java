@@ -197,6 +197,10 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return "etInt16";
   }
   
+  public String boolType() {
+    return "etBool";
+  }
+  
   public CharSequence markVariableUsed(final String varname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("((void)trigger__et);\t/* avoids unused warning */");

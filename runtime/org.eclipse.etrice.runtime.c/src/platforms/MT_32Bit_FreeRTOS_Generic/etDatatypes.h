@@ -14,9 +14,15 @@
 #define _ETDATATYPES_H_
 
 /*
- * typedefs for FreeRTOS on a 32Bit environment
- *
- * */
+ * typedefs for platform specific datatypes
+ * FreeRTOS on a 32Bit version
+ */
+
+#define ET_INT64
+#define ET_FLOAT32
+//#define ET_FLOAT64 /* not available on this platform */
+
+#include "etStdDatatypes.h"
 
 #include <stdio.h>
 #include <FreeRTOS.h>
@@ -24,75 +30,26 @@
 #include <timers.h>
 #include <semphr.h>
 
-/* unsigned integer datatypes */
-typedef unsigned char uint8;
-typedef unsigned short int uint16;
-typedef unsigned int uint32;
-typedef unsigned long long uint64;
+/*--- Data types for room.basic.types */
 
-/* signed integer datatypes */
-typedef char int8;
-typedef short int int16;
-typedef int int32;
-typedef long long int64;
+/*-----------------------------------------------------------*/
 
-
-/* float datatypes */
-typedef float float32;
-/* typedef double float64; */ /* not available on this platform */
-
-/* boolean datatypes and values */
-//typedef char bool;  /* TODO: bool, Bool, Boolean, and boolean are already defined in some platforms*/
-//typedef bool boolean;
-typedef char boolean;
-
-#ifndef ET_TRUE
-	#define ET_TRUE 1
-#endif
-#ifndef ET_FALSE
-	#define ET_FALSE 0
-#endif
-
-/*
- * typedefs for eTrice Runtime and Testing
- *
- * */
-
-typedef int8 etInt8;
-typedef int16 etInt16;
-typedef int32 etInt32;
-
-typedef uint8 etUInt8;
-typedef uint16 etUInt16;
-typedef uint32 etUInt32;
-
-//typedef bool etBool;
-typedef char etBool;
+/*--- Data types for runtime */
 
 #define ALIGNMENT		4	/* power of 2 and >= sizeof(int) ! */
 
-typedef float32 etFloat32;
-typedef float32 etFloat64;
-
-/* string datatypes */
-typedef char* charPtr;
-
-
 typedef FILE* etFileHandle;
 
-typedef int8 etAddressId;
-
-
-/*
- * typedefs for OS-specific types
- */
+/* types for osal */
 typedef xSemaphoreHandle etOSMutexData;
 typedef xSemaphoreHandle etOSSemaData;
 
 typedef xTaskHandle etOSThreadData;
-typedef uint16 etOSThreadId;
+typedef etUInt16 etOSThreadId;
 
 typedef xTimerHandle etOSTimerData;
-typedef uint16 etOSTimerId;
+typedef etUInt16 etOSTimerId;
+
+/*-----------------------------------------------------------*/
 
 #endif /* _DATATYPES_H_ */
