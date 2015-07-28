@@ -22,10 +22,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.ui.behavior.actioneditor.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
-import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
@@ -167,11 +165,8 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 *            the {@link DetailCode} object to be represented.
 	 * @return the document being created.
 	 */
-	protected IDocument createDocument(DetailCode detailCode)
-			throws CoreException {
-		IDocument document = new Document();
-		document.set(SupportUtil.getInstance().getRoomHelpers()
-				.getDetailCode(detailCode));
+	protected IDocument createDocument(String detailCode) {
+		IDocument document = new Document(detailCode);
 		return document;
 	};
 
@@ -210,7 +205,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * </p>
 	 */
 	@Override
-	public void init(DetailCode detailCode) throws CoreException {
+	public void init(String detailCode) {
 		doSetDetailCode(detailCode);
 	}
 
@@ -228,6 +223,9 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 		fSourceViewer.configure(fConfiguration);
 
 		StyledText styledText = fSourceViewer.getTextWidget();
+		
+		// set font to global default for editors
+		styledText.setFont(JFaceResources.getTextFont());
 
 		// Focus listener to activate and deactivate context
 		styledText.addFocusListener(new FocusListener() {
@@ -268,23 +266,15 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 				fSourceViewer.getTextWidget().notifyListeners(SWT.Modify, null);
 			}
 		});
-		
-		initializeSourceViewer(getDetailCode());
 
 		getControl()
 				.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+		initializeSourceViewer();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDetailCode(DetailCode detailCode) {
-		try {
-			doSetDetailCode(detailCode);
-		} catch (CoreException e) {
-			Activator.getDefault().getLog().log(e.getStatus());
-		}
+	public void setDetailCode(String detailCode) {	
+		doSetDetailCode(detailCode);
 	}
 
 	/**
@@ -328,11 +318,10 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * @throws CoreException
 	 *             if the {code detailCode} could not be set
 	 */
-	protected void doSetDetailCode(DetailCode detailCode) throws CoreException {
-		super.setDetailCode(detailCode);
+	protected void doSetDetailCode(String detailCode)  {
 		fDocument = createDocument(detailCode);
 		if (fSourceViewer != null) {
-			initializeSourceViewer(detailCode);
+			initializeSourceViewer();
 		}
 	}
 
@@ -342,8 +331,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * @param detailCode
 	 *            the detailed Code to be used to initialize the source viewer
 	 */
-	private void initializeSourceViewer(DetailCode detailCode) {
-
+	private void initializeSourceViewer() {
 		if (fDocument != null) {
 			fSourceViewer.setDocument(fDocument, null);
 			fSourceViewer.setEditable(isEditable());
@@ -361,8 +349,6 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 		fDocument = null;
 		fSourceViewer = null;
 		fConfiguration = null;
-
-		super.dispose();
 	}
 
 	/**

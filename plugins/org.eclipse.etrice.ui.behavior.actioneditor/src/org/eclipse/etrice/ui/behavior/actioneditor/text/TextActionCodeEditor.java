@@ -13,11 +13,8 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.text;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.AbstractActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
-import org.eclipse.etrice.ui.behavior.support.SupportUtil;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
@@ -43,17 +40,14 @@ public class TextActionCodeEditor extends AbstractActionCodeEditor {
 	private Text text;
 
 	@Override
-	public void init(DetailCode detailCode) throws CoreException {
-		setDetailCode(detailCode);
+	public void init(String detailCode) {
+		text.setText(detailCode);
 	}
 
 	@Override
 	public void createControl(Composite parent) {
 		int style = SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL;
 		text = new Text(parent, style);
-		if (fDetailCode != null)
-			text.setText(SupportUtil.getInstance().getRoomHelpers()
-					.getDetailCode(fDetailCode));
 		text.setEnabled(true);
 	}
 
@@ -72,4 +66,11 @@ public class TextActionCodeEditor extends AbstractActionCodeEditor {
 			text.setSelection(offset + begin + 1, offset + end);
 		text.setFocus();
 	}
+	
+	public void dispose(){
+		if(text != null)
+			text.dispose();
+		text = null;
+	}
+	
 }

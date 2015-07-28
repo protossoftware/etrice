@@ -28,7 +28,10 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.detailcode.GuardDetailExpressionProvider;
+import org.eclipse.etrice.ui.behavior.detailcode.RuntimeDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ITransitionPropertyDialog;
@@ -91,6 +94,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 	
+	private ActorClass ac;
 	private Transition trans;
 	private List<AbstractInterfaceItem> interfaceItems = new ArrayList<AbstractInterfaceItem>();
 	private DetailCodeToString m2s;
@@ -107,6 +111,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 
 	public TransitionPropertyDialog(Shell shell, ActorClass ac, Transition trans) {
 		super(shell, "Edit Transition", ac);
+		this.ac = ac;
 		this.trans = trans;
 
 		Activator.getDefault().getInjector().injectMembers(this);
@@ -189,7 +194,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 						trans,
 						FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv,
 						s2m_not_null, m2s_null_empty, true, true, true,
-						"empty guard");
+						"empty guard", new GuardDetailExpressionProvider(ac));
 			}
 		}
 		
@@ -208,7 +213,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 						trans,
 						FSMPackage.eINSTANCE.getCPBranchTransition_Condition(),
 						gv, s2m_not_null, m2s_null_empty, true, true, true,
-						"empty condition");
+						"empty condition", new GuardDetailExpressionProvider(ac));
 			}
 		}
 
@@ -225,14 +230,14 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				createActionCodeEditor(body, "&Action Code:",
 						refined.getAction(), refined,
 						FSMPackage.eINSTANCE.getRefinedTransition_Action(),
-						null, s2m, m2s, true, true, false, null);
+						null, s2m, m2s, true, true, false, null, new RuntimeDetailExpressionProvider(ac));
 			}
 		}
 		else
 		{
 			createActionCodeEditor(body, "&Action Code:", trans.getAction(),
 					trans, FSMPackage.eINSTANCE.getTransition_Action(), null,
-					s2m, m2s, true, true, false, null);
+					s2m, m2s, true, true, false, null, new RuntimeDetailExpressionProvider(ac));
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -318,11 +323,11 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			DetailCode detailCode, EObject obj, EStructuralFeature feat,
 			IValidator singleValidator, IConverter s2m, IConverter m2s,
 			boolean useMembers, boolean useMessages,
-			boolean useRecvMessagesOnly, String decoratorString) {
+			boolean useRecvMessagesOnly, String decoratorString, IDetailExpressionProvider exprProvider) {
 
 		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
 				detailCode, obj, feat, singleValidator, null, s2m, m2s,
-				useMembers, useMessages, useRecvMessagesOnly);
+				useMembers, useMessages, useRecvMessagesOnly, exprProvider);
 
 		Control control;
 		if (entry != null)

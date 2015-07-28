@@ -28,6 +28,8 @@ import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry.ActionCodeEditorRegistryEntry;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceConstants;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.common.base.dialogs.MultiValidator2;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -177,9 +179,9 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 	 */
 	protected IActionCodeEditor createActionCodeEditor(Composite parent,
 			String label, DetailCode detailCode, EObject obj,
-			EStructuralFeature feat, IConverter s2m, IConverter m2s) {
+			EStructuralFeature feat, IConverter s2m, IConverter m2s, IDetailExpressionProvider exprPovider) {
 		return createActionCodeEditor(parent, label, detailCode, obj, feat,
-				null, null, s2m, m2s, true, true, false);
+				null, null, s2m, m2s, true, true, false, exprPovider);
 	}
 
 	/**
@@ -219,7 +221,7 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 			String label, DetailCode detailCode, EObject obj,
 			EStructuralFeature feat, IValidator singleValidator,
 			MultiValidator2 multiValidator, IConverter s2m, IConverter m2s,
-			boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
+			boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly, IDetailExpressionProvider exprPovider) {
 		Label l = getToolkit().createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));
 
@@ -237,8 +239,8 @@ public abstract class AbstractMemberAwarePropertyDialog extends AbstractProperty
 		ActionCodeEditorRegistryEntry editorEntry = ActionCodeEditorRegistry.INSTANCE.getEditorWithId(id);
 		if(editorEntry == null)
 			return null;
-		IActionCodeEditor actionCodeEditor = editorEntry.newActionCodeEditor(detailCode, parent,
-						mc, useMembers, useMessages, useRecvMessagesOnly);
+		String editorText = FSMSupportUtil.getInstance().getFSMHelpers().getDetailCode(detailCode);
+		IActionCodeEditor actionCodeEditor = editorEntry.newActionCodeEditor(parent, editorText, exprPovider);
 		if (actionCodeEditor != null) {
 			configureMemberAwareness(actionCodeEditor, useMembers, useMessages,
 					useRecvMessagesOnly);

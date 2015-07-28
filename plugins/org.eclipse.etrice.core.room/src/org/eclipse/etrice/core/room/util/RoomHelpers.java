@@ -579,7 +579,7 @@ public class RoomHelpers extends FSMHelpers {
 		Map<String, StandardOperation> map = Maps.newHashMap();
 		ActorClass base = ac;
 		while(base != null){
-			for(StandardOperation op : ac.getOperations())
+			for(StandardOperation op : base.getOperations())
 				if(!map.containsKey(op.getName()))
 					map.put(op.getName(), op);
 			base = base.getActorBase();
@@ -600,7 +600,7 @@ public class RoomHelpers extends FSMHelpers {
 		Map<String, StandardOperation> map = Maps.newHashMap();
 		DataClass base = dc;
 		while(base != null){
-			for(StandardOperation op : dc.getOperations())
+			for(StandardOperation op : base.getOperations())
 				if(!map.containsKey(op.getName()))
 					map.put(op.getName(), op);
 			base = base.getBase();

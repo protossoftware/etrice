@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.Activator;
+import org.eclipse.etrice.ui.behavior.detailcode.RuntimeDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.DetailCodeToString;
@@ -51,6 +52,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		}
 	}
 
+	private ActorClass ac;
 	private State state;
 	private boolean inherited;
 
@@ -73,6 +75,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
 		super(shell, edit?"Edit State":"View State", ac);
+		this.ac = ac;
 		this.state = s;
 
 		Activator.getDefault().getInjector().injectMembers(this);
@@ -207,7 +210,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			StringToDetailCode s2m, DetailCodeToString m2s) {
 
 		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
-				detailCode, state, feat, s2m, m2s);
+				detailCode, state, feat, s2m, m2s, new RuntimeDetailExpressionProvider(ac));
 
 		Control control;
 		if (entry != null)

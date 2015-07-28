@@ -21,12 +21,12 @@ import org.eclipse.swt.graphics.RGB;
  * 
  * @author jayant
  */
-public class GeneralActionCodeColorManager extends ActionCodeColorManager {
+public class GeneralActionCodeColorManager extends ActionCodeColorManager{
 
-	public static final RGB MULTI_LINE_COMMENT = new RGB(128, 0, 0);
-	public static final RGB SINGLE_LINE_COMMENT = new RGB(128, 0, 0);
-	public static final RGB KEYWORD = new RGB(0, 0, 128);
-	public static final RGB TYPE = new RGB(0, 0, 128);
-	public static final RGB STRING = new RGB(0, 128, 0);
+	// Standard coloring eclipse
+	public static final RGB TARGET_KEYWORD = new RGB(127, 0, 85);
+	public static final RGB COMMENT = new RGB(63, 127, 95);
+	public static final RGB STRING = new RGB(42, 0, 255);
+	public static final RGB NUMBER = new RGB(125, 125, 125); // new RGB(0, 0, 0);
 
 }

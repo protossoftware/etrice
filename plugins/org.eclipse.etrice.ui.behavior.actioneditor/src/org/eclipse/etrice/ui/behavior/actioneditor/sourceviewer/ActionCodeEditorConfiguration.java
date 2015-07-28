@@ -13,8 +13,12 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
@@ -27,95 +31,18 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
  */
 public class ActionCodeEditorConfiguration extends SourceViewerConfiguration {
 
-	/** the actor class */
-	private ActorClass fActorClass;
-	/** use members */
-	private boolean fMemberAware;
-	/** use messages or operations */
-	private boolean fMessageAware;
-	/** use receive messages only */
-	private boolean fRecvMessagesOnly;
-	/** parser for Action Code of the associated actor class */
-	private ActionCodeParser parser;
-
 	/** Color Manager for action code editor */
-	private ActionCodeColorManager fColorManager;
+	private ActionCodeColorManager fColorManager = null;
 
-	public ActionCodeEditorConfiguration(ActionCodeColorManager colorManager) {
+	private DetailExpressionUIProvider exprProvider;
+
+	public ActionCodeEditorConfiguration(ActionCodeColorManager colorManager, IDetailExpressionProvider exprProvider) {
 		fColorManager = colorManager;
-		fActorClass = null;
-		fMemberAware = false;
-		fMessageAware = false;
-		fRecvMessagesOnly = false;
-	}
 
-	public ActionCodeEditorConfiguration(ActionCodeColorManager colorManager,
-			ActorClass ac) {
-		super();
-		fActorClass = ac;
-		fColorManager = colorManager;
-		fMemberAware = true;
-		fMessageAware = true;
-		fRecvMessagesOnly = false;
-	}
-
-	public ActionCodeEditorConfiguration(ActionCodeColorManager colorManager,
-			ActorClass ac, boolean useMembers, boolean useMessages,
-			boolean useRecvMessagesOnly) {
-		super();
-		fActorClass = ac;
-		fColorManager = colorManager;
-		fMemberAware = useMembers;
-		fMessageAware = useMessages;
-		fRecvMessagesOnly = useRecvMessagesOnly;
-	}
-
-	/**
-	 * Getter for actor class.
-	 * 
-	 * @return the associated actor class
-	 */
-	public ActorClass getActorClass() {
-		return fActorClass;
-	}
-
-	/**
-	 * Getter for use members.
-	 * 
-	 * @return true if configuration is member aware else false
-	 */
-	public boolean isMemberAware() {
-		return fMemberAware;
-	}
-
-	/**
-	 * Getter for use messages.
-	 * 
-	 * @return true if configuration is message aware else false
-	 */
-	public boolean isMessageAware() {
-		return fMessageAware;
-	}
-
-	/**
-	 * Getter for use receive only messages.
-	 * 
-	 * @return true if configuration handles only receive only messages else
-	 *         false
-	 */
-	public boolean isRecvOnly() {
-		return fRecvMessagesOnly;
-	}
-
-	/**
-	 * Getter for internal action code parser for the associated actor class.
-	 * 
-	 * @return the parser for action code of the associated actor class
-	 */
-	public ActionCodeParser getActionCodeParser() {
-		if (parser == null)
-			parser = new ActionCodeParser(fActorClass, fRecvMessagesOnly);
-		return parser;
+		if (exprProvider == null)
+			exprProvider = new EmptyDetailExpressionProvider();
+		this.exprProvider = new DetailExpressionUIProvider(exprProvider);
+		RoomUiModule.getInjector().injectMembers(this.exprProvider);
 	}
 
 	/**
@@ -130,56 +57,6 @@ public class ActionCodeEditorConfiguration extends SourceViewerConfiguration {
 	}
 
 	/**
-	 * Setter for actor class. Invalidates the internal action code parser.
-	 * 
-	 * @param ac
-	 *            the Actor Class to associate to.
-	 */
-	public void setActorClass(ActorClass ac) {
-		if (!ac.equals(fActorClass)) {
-			fActorClass = ac;
-			parser = null;
-		}
-	}
-
-	/**
-	 * Setter for use members.
-	 * 
-	 * @param useMembers
-	 *            true to make configuration member aware
-	 */
-	public void setMemberAware(boolean useMembers) {
-		fMemberAware = useMembers;
-	}
-
-	/**
-	 * Setter for use messages.
-	 * 
-	 * @param useMessages
-	 *            true to make configuration message & operation aware
-	 */
-	public void setMessageAware(boolean useMessages) {
-		fMessageAware = useMessages;
-	}
-
-	/**
-	 * Setter for use receive messages only. Invalidates the internal action
-	 * code parser.
-	 * 
-	 * @param useRecvMessagesOnly
-	 *            true to use receive messages only
-	 */
-	public void setRecvOnly(boolean useRecvMessagesOnly) {
-		if (useRecvMessagesOnly != fRecvMessagesOnly) {
-			fRecvMessagesOnly = useRecvMessagesOnly;
-
-			// Only invalidate parser if the configuration is message aware.
-			if (fMessageAware)
-				parser = null;
-		}
-	}
-
-	/**
 	 * Setter for action code Color Manager.
 	 * 
 	 * @param colorManager
@@ -188,5 +65,25 @@ public class ActionCodeEditorConfiguration extends SourceViewerConfiguration {
 	public void setColorManager(ActionCodeColorManager colorManager) {
 		Assert.isNotNull(colorManager);
 		fColorManager = colorManager;
+	}
+
+	public DetailExpressionUIProvider getDetailExpressionProvider() {
+		return exprProvider;
+	}
+
+	class EmptyDetailExpressionProvider implements IDetailExpressionProvider {
+
+		final List<ExpressionFeature> EMPTY_LIST = new ArrayList<ExpressionFeature>();
+
+		@Override
+		public List<ExpressionFeature> getInitialFeatures() {
+			return EMPTY_LIST;
+		}
+
+		@Override
+		public List<ExpressionFeature> getContextFeatures(ExpressionFeature ctx) {
+			return EMPTY_LIST;
+		}
+
 	}
 }

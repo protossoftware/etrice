@@ -13,10 +13,10 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeAssistProcessor;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeColorManager;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeEditorConfiguration;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -35,29 +35,17 @@ import org.eclipse.jface.text.source.ISourceViewer;
  * 
  * @author jayant
  */
-public class ModelAwareActionCodeEditorConfiguration extends
-		ActionCodeEditorConfiguration {
-
-	public ModelAwareActionCodeEditorConfiguration(
-			ActionCodeColorManager colorManager) {
-		super(colorManager);
-	}
-
-	public ModelAwareActionCodeEditorConfiguration(
-			ActionCodeColorManager colorManager, ActorClass ac) {
-		super(colorManager, ac);
-	}
-
-	public ModelAwareActionCodeEditorConfiguration(
-			ActionCodeColorManager colorManager, ActorClass ac,
-			boolean useMembers, boolean useMessages, boolean useRecvMessagesOnly) {
-		super(colorManager, ac, useMembers, useMessages, useRecvMessagesOnly);
-	}
+public class ModelAwareActionCodeEditorConfiguration extends ActionCodeEditorConfiguration {
 
 	/** token scanner for syntax highlighting */
 	private GeneralActionCodeScanner generalActionCodeScanner;
 	/** content assist processor for content assistance */
 	private ActionCodeAssistProcessor actionCodeAssistProcessor;
+
+	public ModelAwareActionCodeEditorConfiguration(ActionCodeColorManager colorManager,
+			IDetailExpressionProvider exprProvider) {
+		super(colorManager, exprProvider);
+	}
 
 	/**
 	 * Constructs and returns an instance of the {@link ITokenScanner}. Same
@@ -68,9 +56,8 @@ public class ModelAwareActionCodeEditorConfiguration extends
 	private GeneralActionCodeScanner getTokenScanner() {
 		if (generalActionCodeScanner == null) {
 			generalActionCodeScanner = new GeneralActionCodeScanner(this);
-			generalActionCodeScanner.setDefaultReturnToken(new Token(
-					new TextAttribute(getColorManager().getColor(
-							ActionCodeColorManager.DEFAULT))));
+			generalActionCodeScanner.setDefaultReturnToken(new Token(new TextAttribute(getColorManager().getColor(
+					ActionCodeColorManager.DEFAULT))));
 		}
 		return generalActionCodeScanner;
 	}
@@ -94,12 +81,10 @@ public class ModelAwareActionCodeEditorConfiguration extends
 	 * @author jayant
 	 */
 	@Override
-	public IPresentationReconciler getPresentationReconciler(
-			ISourceViewer sourceViewer) {
+	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 
-		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(
-				getTokenScanner());
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getTokenScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 
@@ -115,8 +100,7 @@ public class ModelAwareActionCodeEditorConfiguration extends
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();
-		assistant.setContentAssistProcessor(getContextAssistProcessor(),
-				IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setContentAssistProcessor(getContextAssistProcessor(), IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.setEmptyMessage("No Proposals.");
 		assistant.enableAutoActivation(true);
 		assistant.setAutoActivationDelay(500);

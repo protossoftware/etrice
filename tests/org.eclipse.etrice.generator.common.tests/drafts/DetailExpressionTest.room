@@ -1,0 +1,158 @@
+RoomModel DetailExpressionTest {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+
+	LogicalSystem System_DetailExpression {
+		SubSystemRef subSystemRef: SubSystem_DetailExpression
+	}
+
+	SubSystemClass SubSystem_DetailExpression {
+		ActorRef timer: ATimingService
+		ActorRef actorRef: Tester
+		LayerConnection ref actorRef satisfied_by timer.timer
+		LogicalThread defaultThread
+	}
+
+	async ActorClass Tester {
+		Interface {
+			Port portNotVisible : PEventdriven
+			SPP sppEvent: PEventdriven
+		}
+		Structure {
+			Port rPortEvent: PEventdriven
+			Port rPortData: PDatadriven
+			Port rReplEvent [5]: PEventdriven
+			conjugated Port cPortEvent: PEventdriven
+			conjugated Port cPortData: PDatadriven
+			conjugated Port cReplEvent [5]: PEventdriven
+			ServiceImplementation of sppEvent
+			SAP sapEvent: PTimer
+			Attribute numberArray[5] : int32
+			Attribute infoData : DDataNested
+		}
+		Behavior {
+			Operation actorOp(param: int32): boolean {
+				"return true;"
+			}
+			StateMachine {
+				Transition init: initial -> idle
+				Transition eventTrans: idle -> state1 {
+					triggers {
+						<out1: cPortEvent guard {
+							"/* TODO activate action code editor */"
+							"rPortData.in1 == numberArray[3] &&"
+							"accessibleMessageData && infoData.flag"
+						}>
+					}
+					action {
+						"// TODO syntax highlightiing"
+						"rPortEvent.out1(true);"
+						"rPortData.in1;"
+						"rReplEvent[0].out1(true);"
+						"rReplEvent.out1(true); // broadcast"
+						"cPortEvent.in1();"
+						"cPortData.in1(32);"
+						"cReplEvent[3].in1();"
+						"cReplEvent.in1(); // broadcast"
+						"sapEvent.startTimeout(1000);"
+						"sppEvent[4].out1(true);"
+						"sppEvent.out1(true); // broadcast"
+						"rPortEvent.regularOp(32);"
+						"cPortEvent.conjugatedOp(32);"
+						"actorOp(32);"
+						"int number = numberArray[0];"
+						"DData nestedData = infoData.nested;"
+						"int port = infoData.nested.tcpPort;"
+						""
+						"//  TODO content assist: special event data"
+						"int data = (accessibleMessageData)? 1 : 0;"
+						""
+						"// -- not supported yet by code translation --"
+						"// getReplication():"
+						"// int replSize1 = rReplEvent.getReplication();"
+						"// int replSize2 = cReplEvent.getReplication();"
+						"// int replSize2 = sppEvent.getReplication();"
+						""
+						"// DataClass operations:"
+						"// infoData.operation(32);"
+						"// infoData.nested.set(\"127.0.0.1\", 8080);"
+					}
+				}
+				Transition guardedTrans: idle -> state2 {
+					guard {
+						"rPortData.in1 == numberArray[3] && infoData.flag"
+					}
+				}
+				State idle
+				State state1
+				State state2
+			}
+		}
+	}
+
+	ProtocolClass PEventdriven {
+		incoming {
+			Message in1()
+		}
+		outgoing {
+			Message out1(accessibleMessageData:boolean)
+		}
+		regular PortClass
+		{
+			Operation regularOp(param: int32): boolean {
+				"return true;"
+			}
+			Attribute regularAttr: int32
+		}
+		conjugated PortClass
+		{
+			Operation conjugatedOp(param: int32): boolean {
+				"return true;"
+			}
+			Attribute conjugatedAttr: int32
+		}
+	}
+
+	datadriven ProtocolClass PDatadriven {
+		incoming {
+			Message in1(data: int32)
+		}
+		/* not supported yet
+		regular PortClass
+		{
+			Operation regularOp(param: int32): boolean {
+				""
+			}
+			Attribute regularAttr: int32
+		}
+		conjugated PortClass
+		{
+			Operation conjugatedOp(param: int32): boolean {
+				""
+			}
+			Attribute conjugatedAttr: int32
+		}
+		* /*
+		*/
+	}
+
+	DataClass DDataNested {
+		Attribute flag: boolean
+		Attribute array[5]: int32
+		Attribute nested: DData
+		Operation dataOp(number: int32){
+			""
+		}
+	}
+
+	DataClass DData {
+		Attribute iPAddr: string
+		Attribute tcpPort: int32
+		Operation dataOp(ip: string, port: int32) {
+			""
+		}
+	}
+
+}

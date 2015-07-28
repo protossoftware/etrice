@@ -13,7 +13,6 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.actioneditor;
 
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.swt.widgets.Control;
 
 /**
@@ -23,13 +22,6 @@ import org.eclipse.swt.widgets.Control;
  * @author jayant
  */
 public interface IActionCodeEditor {
-
-	/**
-	 * Getter for the {@link DetailCode} object being represented by the editor.
-	 * 
-	 * @return the DetailCode object associated with the editor instance
-	 */
-	DetailCode getDetailCode();
 
 	/**
 	 * Getter for the editor {@link Control} representing the Action Code.

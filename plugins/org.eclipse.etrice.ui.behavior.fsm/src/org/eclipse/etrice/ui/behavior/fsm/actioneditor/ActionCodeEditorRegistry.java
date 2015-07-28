@@ -22,8 +22,8 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.ui.behavior.fsm.Activator;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -106,14 +106,11 @@ public class ActionCodeEditorRegistry {
 		 * 
 		 * @return the {@link IActionCodeEditor} instance or <code>null</code>
 		 */
-		public IActionCodeEditor newActionCodeEditor(DetailCode detailCode,
-				Composite parent, ModelComponent mc, boolean useMembers,
-				boolean useMessages, boolean useRecvMessagesOnly) {
+		public IActionCodeEditor newActionCodeEditor(Composite parent, String text, IDetailExpressionProvider exprProvider) {
 			IActionCodeEditorFactory factory = getFactory();
 			if (factory == null)
 				return null;
-			return factory.createActionCodeEditor(detailCode, parent, mc,
-					useMembers, useMessages, useRecvMessagesOnly);
+			return factory.createActionCodeEditor(parent, text, exprProvider);
 		}
 
 		/**

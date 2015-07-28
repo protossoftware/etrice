@@ -13,9 +13,9 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeColorManager;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.SourceViewerActionCodeEditor;
+import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 
 /**
  * An extension of the {@link SourceViewerActionCodeEditor} which configures it
@@ -28,11 +28,9 @@ public class ModelAwareActionCodeEditor extends SourceViewerActionCodeEditor {
 	/** Color Manager for this editor's configuration */
 	private ActionCodeColorManager fColorManager;
 
-	public ModelAwareActionCodeEditor(ActorClass ac, boolean useMembers,
-			boolean useMessages, boolean useRecvMessagesOnly) {
+	public ModelAwareActionCodeEditor(IDetailExpressionProvider exprProvider) {
 		super();
 		fColorManager = new ActionCodeColorManager();
-		setSourceViewerConfiguration(new ModelAwareActionCodeEditorConfiguration(
-				fColorManager, ac, useMembers, useMessages, useRecvMessagesOnly));
+		setSourceViewerConfiguration(new ModelAwareActionCodeEditorConfiguration(fColorManager, exprProvider));
 	}
 }

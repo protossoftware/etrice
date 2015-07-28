@@ -24,5 +24,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse eTrice (Incubation)
 Export-Package: org.eclipse.etrice.ui.behavior,
+ org.eclipse.etrice.ui.behavior.detailcode,
  org.eclipse.etrice.ui.behavior.editor,
  org.eclipse.etrice.ui.behavior.support
