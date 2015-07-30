@@ -388,7 +388,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortOperation" eSuperTypes="#//Operation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The port operation is very similar to the {@link StandardOperation}&#xD;&#xA;and is used in the {@link PortClass}. It is not possible to&#xD;&#xA;define constructor or destructor.&#xD;&#xA;&lt;p>&#xD;&#xA;Optionally a {@link Message} can be specified which is sent&#xD;&#xA;when the method is invoked. For this reason these operations&#xD;&#xA;are also shown in the 'messages' dialog of the behavior editor.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The port operation is very similar to the {@link StandardOperation}&#xD;&#xA;and is used in the {@link PortClass}.&#xD;&#xA;&lt;p>&#xD;&#xA;Optionally a {@link Message} can be specified which is sent&#xD;&#xA;when the method is invoked. For this reason these operations&#xD;&#xA;are also shown in the 'messages' dialog of the behavior editor.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sendsMsg" eType="#//Message">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -397,6 +397,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassStructor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;br>Represents either the constructor (ctor) or destructor (dtor) of a ROOM class.&#xD;&#xA;"/>
+    </eAnnotations>
     <eOperations name="isConstructor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return &quot;ctor&quot;.equals(this.getName());&#xD;&#xA;"/>
@@ -657,12 +660,6 @@
         <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface that are end ports.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
-        upperBound="-1" eType="#//ServiceImplementation" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="serviceAccessPoints" upperBound="-1"
         eType="#//SAP" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -673,6 +670,12 @@
         eType="#//Attribute" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of all actor class private attributes.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
+        upperBound="-1" eType="#//ServiceImplementation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"

@@ -1861,22 +1861,13 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__EXTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
 
   /**
-   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
-
-  /**
    * The feature id for the '<em><b>Service Access Points</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__SERVICE_ACCESS_POINTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+  int ACTOR_CLASS__SERVICE_ACCESS_POINTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
 
   /**
    * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1885,7 +1876,16 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+
+  /**
+   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
@@ -4139,17 +4139,6 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_ExternalPorts();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Service Implementations</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getServiceImplementations()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_ServiceImplementations();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints <em>Service Access Points</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4170,6 +4159,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getActorClass_Attributes();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Service Implementations</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getServiceImplementations()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_ServiceImplementations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}'.
@@ -5853,14 +5853,6 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__EXTERNAL_PORTS = eINSTANCE.getActorClass_ExternalPorts();
 
     /**
-     * The meta object literal for the '<em><b>Service Implementations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = eINSTANCE.getActorClass_ServiceImplementations();
-
-    /**
      * The meta object literal for the '<em><b>Service Access Points</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5875,6 +5867,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ACTOR_CLASS__ATTRIBUTES = eINSTANCE.getActorClass_Attributes();
+
+    /**
+     * The meta object literal for the '<em><b>Service Implementations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = eINSTANCE.getActorClass_ServiceImplementations();
 
     /**
      * The meta object literal for the '<em><b>Behavior Docu</b></em>' containment reference feature.

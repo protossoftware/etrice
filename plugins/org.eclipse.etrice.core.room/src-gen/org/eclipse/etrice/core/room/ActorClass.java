@@ -59,9 +59,9 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInternalPorts <em>Internal Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getExternalPorts <em>External Ports</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints <em>Service Access Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructors <em>Structors</em>}</li>
@@ -150,22 +150,6 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
   EList<ExternalPort> getExternalPorts();
 
   /**
-   * Returns the value of the '<em><b>Service Implementations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.ServiceImplementation}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is a list of all service implementations.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Service Implementations</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ServiceImplementations()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ServiceImplementation> getServiceImplementations();
-
-  /**
    * Returns the value of the '<em><b>Service Access Points</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.SAP}.
    * <!-- begin-user-doc -->
@@ -196,6 +180,22 @@ public interface ActorClass extends ActorContainerClass, ModelComponent
    * @generated
    */
   EList<Attribute> getAttributes();
+
+  /**
+   * Returns the value of the '<em><b>Service Implementations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.ServiceImplementation}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of all service implementations.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Service Implementations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass_ServiceImplementations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ServiceImplementation> getServiceImplementations();
 
   /**
    * Returns the value of the '<em><b>Behavior Docu</b></em>' containment reference.

@@ -10,8 +10,7 @@ package org.eclipse.etrice.core.room;
  *
  * <!-- begin-model-doc -->
  * <br>The port operation is very similar to the {@link StandardOperation}
- * and is used in the {@link PortClass}. It is not possible to
- * define constructor or destructor.
+ * and is used in the {@link PortClass}.
  * <p>
  * Optionally a {@link Message} can be specified which is sent
  * when the method is invoked. For this reason these operations

@@ -79,9 +79,11 @@ DataClass:
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
-		attributes+=Attribute*
-		structors+=ClassStructor*
-		operations+=StandardOperation*
+		(
+			attributes+=Attribute |
+			structors+=ClassStructor |
+			operations+=StandardOperation
+		)*
 	'}';
 	
 	
@@ -148,9 +150,11 @@ PortClass:
 	{PortClass}
 	'{'
 		('usercode' userCode=DetailCode)?
-		(attributes+=Attribute |
-		operations+=PortOperation |
-		msgHandlers+=MessageHandler)*
+		(
+			attributes+=Attribute |
+			operations+=PortOperation |
+			msgHandlers+=MessageHandler
+		)*
 	'}';
 
 MessageHandler: InMessageHandler|OutMessageHandler;
@@ -182,26 +186,32 @@ ActorClass:
 	'ActorClass' name=ID (docu=Documentation)? ('extends' base=[ActorClass|FQN])? '{'
 		annotations+=Annotation*
 		('Interface' '{'
-			interfacePorts+=Port*
-			serviceProvisionPoints+=SPP*
+			(
+				interfacePorts+=Port |
+				serviceProvisionPoints+=SPP
+			)*
 		'}')?
 		('Structure' (structureDocu=Documentation)? '{'
 			('usercode1' userCode1=DetailCode)?
 			('usercode2' userCode2=DetailCode)?
 			('usercode3' userCode3=DetailCode)?
-			((internalPorts+=Port |
-			externalPorts+=ExternalPort)* &
-			actorRefs+=ActorRef* &
-			serviceImplementations+=ServiceImplementation* &
-			serviceAccessPoints+=SAP* &
-			bindings+=Binding* &
-			connections+=LayerConnection* &
-			attributes+=Attribute*)
+			(
+				internalPorts+=Port |
+				externalPorts+=ExternalPort |
+				serviceAccessPoints+=SAP |
+				attributes+=Attribute |
+				actorRefs+=ActorRef |
+				serviceImplementations+=ServiceImplementation |
+				bindings+=Binding |
+				connections+=LayerConnection
+			)*
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
 			behaviorAnnotations+=Annotation*
-			structors+=ClassStructor*
-			operations+=StandardOperation*
+			(
+				structors+=ClassStructor |
+				operations+=StandardOperation
+			)*
 			(stateMachine=StateMachine)?
 		'}')?
 	'}';
@@ -224,9 +234,11 @@ ServiceImplementation:
 LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
 		annotations+=Annotation*
-		(subSystems+=SubSystemRef* &
-		bindings+=Binding* &
-		connections+=LayerConnection*)
+		(
+			subSystems+=SubSystemRef |
+			bindings+=Binding |
+			connections+=LayerConnection
+		)*
 	'}';
 
 ActorContainerRef: SubSystemRef | ActorRef;
@@ -240,13 +252,15 @@ SubSystemClass:
 		('usercode1' userCode1=DetailCode)?
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
-		(relayPorts+=Port* &
-		serviceProvisionPoints+=SPP* &
-		actorRefs+=ActorRef* &
-		bindings+=Binding* &
-		connections+=LayerConnection* &
-		threads+=LogicalThread* &
-		actorInstanceMappings+=ActorInstanceMapping*)
+		(
+			relayPorts+=Port |
+			serviceProvisionPoints+=SPP |
+			actorRefs+=ActorRef |
+			bindings+=Binding |
+			connections+=LayerConnection |
+			threads+=LogicalThread |
+			actorInstanceMappings+=ActorInstanceMapping
+		)*
 	'}';
 
 LogicalThread:

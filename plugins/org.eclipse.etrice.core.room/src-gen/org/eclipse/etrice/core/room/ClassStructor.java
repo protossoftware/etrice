@@ -11,6 +11,11 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * A representation of the model object '<em><b>Class Structor</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <br>Represents either the constructor (ctor) or destructor (dtor) of a ROOM class.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

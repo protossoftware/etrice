@@ -629,24 +629,25 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cUsercode3Keyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Assignment cUserCode3Assignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
 		private final RuleCall cUserCode3DetailCodeParserRuleCall_8_1_0 = (RuleCall)cUserCode3Assignment_8_1.eContents().get(0);
-		private final Assignment cAttributesAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cAttributesAttributeParserRuleCall_9_0 = (RuleCall)cAttributesAssignment_9.eContents().get(0);
-		private final Assignment cStructorsAssignment_10 = (Assignment)cGroup.eContents().get(10);
-		private final RuleCall cStructorsClassStructorParserRuleCall_10_0 = (RuleCall)cStructorsAssignment_10.eContents().get(0);
-		private final Assignment cOperationsAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cOperationsStandardOperationParserRuleCall_11_0 = (RuleCall)cOperationsAssignment_11.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
+		private final Alternatives cAlternatives_9 = (Alternatives)cGroup.eContents().get(9);
+		private final Assignment cAttributesAssignment_9_0 = (Assignment)cAlternatives_9.eContents().get(0);
+		private final RuleCall cAttributesAttributeParserRuleCall_9_0_0 = (RuleCall)cAttributesAssignment_9_0.eContents().get(0);
+		private final Assignment cStructorsAssignment_9_1 = (Assignment)cAlternatives_9.eContents().get(1);
+		private final RuleCall cStructorsClassStructorParserRuleCall_9_1_0 = (RuleCall)cStructorsAssignment_9_1.eContents().get(0);
+		private final Assignment cOperationsAssignment_9_2 = (Assignment)cAlternatives_9.eContents().get(2);
+		private final RuleCall cOperationsStandardOperationParserRuleCall_9_2_0 = (RuleCall)cOperationsAssignment_9_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//// TODOHRR: define detail level language?
 		//DataClass:
 		//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
-		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-		//	structors+=ClassStructor* operations+=StandardOperation* "}";
+		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (attributes+=Attribute
+		//	| structors+=ClassStructor | operations+=StandardOperation)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
-		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-		//structors+=ClassStructor* operations+=StandardOperation* "}"
+		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (attributes+=Attribute
+		//| structors+=ClassStructor | operations+=StandardOperation)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"DataClass"
@@ -724,26 +725,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_8_1_0() { return cUserCode3DetailCodeParserRuleCall_8_1_0; }
 
-		//attributes+=Attribute*
-		public Assignment getAttributesAssignment_9() { return cAttributesAssignment_9; }
+		//(attributes+=Attribute | structors+=ClassStructor | operations+=StandardOperation)*
+		public Alternatives getAlternatives_9() { return cAlternatives_9; }
+
+		//attributes+=Attribute
+		public Assignment getAttributesAssignment_9_0() { return cAttributesAssignment_9_0; }
 
 		//Attribute
-		public RuleCall getAttributesAttributeParserRuleCall_9_0() { return cAttributesAttributeParserRuleCall_9_0; }
+		public RuleCall getAttributesAttributeParserRuleCall_9_0_0() { return cAttributesAttributeParserRuleCall_9_0_0; }
 
-		//structors+=ClassStructor*
-		public Assignment getStructorsAssignment_10() { return cStructorsAssignment_10; }
+		//structors+=ClassStructor
+		public Assignment getStructorsAssignment_9_1() { return cStructorsAssignment_9_1; }
 
 		//ClassStructor
-		public RuleCall getStructorsClassStructorParserRuleCall_10_0() { return cStructorsClassStructorParserRuleCall_10_0; }
+		public RuleCall getStructorsClassStructorParserRuleCall_9_1_0() { return cStructorsClassStructorParserRuleCall_9_1_0; }
 
-		//operations+=StandardOperation*
-		public Assignment getOperationsAssignment_11() { return cOperationsAssignment_11; }
+		//operations+=StandardOperation
+		public Assignment getOperationsAssignment_9_2() { return cOperationsAssignment_9_2; }
 
 		//StandardOperation
-		public RuleCall getOperationsStandardOperationParserRuleCall_11_0() { return cOperationsStandardOperationParserRuleCall_11_0; }
+		public RuleCall getOperationsStandardOperationParserRuleCall_9_2_0() { return cOperationsStandardOperationParserRuleCall_9_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
+		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
@@ -1726,11 +1730,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
 		private final Keyword cInterfaceKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cInterfacePortsAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cInterfacePortsPortParserRuleCall_7_2_0 = (RuleCall)cInterfacePortsAssignment_7_2.eContents().get(0);
-		private final Assignment cServiceProvisionPointsAssignment_7_3 = (Assignment)cGroup_7.eContents().get(3);
-		private final RuleCall cServiceProvisionPointsSPPParserRuleCall_7_3_0 = (RuleCall)cServiceProvisionPointsAssignment_7_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7_4 = (Keyword)cGroup_7.eContents().get(4);
+		private final Alternatives cAlternatives_7_2 = (Alternatives)cGroup_7.eContents().get(2);
+		private final Assignment cInterfacePortsAssignment_7_2_0 = (Assignment)cAlternatives_7_2.eContents().get(0);
+		private final RuleCall cInterfacePortsPortParserRuleCall_7_2_0_0 = (RuleCall)cInterfacePortsAssignment_7_2_0.eContents().get(0);
+		private final Assignment cServiceProvisionPointsAssignment_7_2_1 = (Assignment)cAlternatives_7_2.eContents().get(1);
+		private final RuleCall cServiceProvisionPointsSPPParserRuleCall_7_2_1_0 = (RuleCall)cServiceProvisionPointsAssignment_7_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7_3 = (Keyword)cGroup_7.eContents().get(3);
 		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
 		private final Keyword cStructureKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Assignment cStructureDocuAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
@@ -1748,24 +1753,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cUsercode3Keyword_8_5_0 = (Keyword)cGroup_8_5.eContents().get(0);
 		private final Assignment cUserCode3Assignment_8_5_1 = (Assignment)cGroup_8_5.eContents().get(1);
 		private final RuleCall cUserCode3DetailCodeParserRuleCall_8_5_1_0 = (RuleCall)cUserCode3Assignment_8_5_1.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_8_6 = (UnorderedGroup)cGroup_8.eContents().get(6);
-		private final Alternatives cAlternatives_8_6_0 = (Alternatives)cUnorderedGroup_8_6.eContents().get(0);
-		private final Assignment cInternalPortsAssignment_8_6_0_0 = (Assignment)cAlternatives_8_6_0.eContents().get(0);
-		private final RuleCall cInternalPortsPortParserRuleCall_8_6_0_0_0 = (RuleCall)cInternalPortsAssignment_8_6_0_0.eContents().get(0);
-		private final Assignment cExternalPortsAssignment_8_6_0_1 = (Assignment)cAlternatives_8_6_0.eContents().get(1);
-		private final RuleCall cExternalPortsExternalPortParserRuleCall_8_6_0_1_0 = (RuleCall)cExternalPortsAssignment_8_6_0_1.eContents().get(0);
-		private final Assignment cActorRefsAssignment_8_6_1 = (Assignment)cUnorderedGroup_8_6.eContents().get(1);
-		private final RuleCall cActorRefsActorRefParserRuleCall_8_6_1_0 = (RuleCall)cActorRefsAssignment_8_6_1.eContents().get(0);
-		private final Assignment cServiceImplementationsAssignment_8_6_2 = (Assignment)cUnorderedGroup_8_6.eContents().get(2);
-		private final RuleCall cServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0 = (RuleCall)cServiceImplementationsAssignment_8_6_2.eContents().get(0);
-		private final Assignment cServiceAccessPointsAssignment_8_6_3 = (Assignment)cUnorderedGroup_8_6.eContents().get(3);
-		private final RuleCall cServiceAccessPointsSAPParserRuleCall_8_6_3_0 = (RuleCall)cServiceAccessPointsAssignment_8_6_3.eContents().get(0);
-		private final Assignment cBindingsAssignment_8_6_4 = (Assignment)cUnorderedGroup_8_6.eContents().get(4);
-		private final RuleCall cBindingsBindingParserRuleCall_8_6_4_0 = (RuleCall)cBindingsAssignment_8_6_4.eContents().get(0);
-		private final Assignment cConnectionsAssignment_8_6_5 = (Assignment)cUnorderedGroup_8_6.eContents().get(5);
-		private final RuleCall cConnectionsLayerConnectionParserRuleCall_8_6_5_0 = (RuleCall)cConnectionsAssignment_8_6_5.eContents().get(0);
-		private final Assignment cAttributesAssignment_8_6_6 = (Assignment)cUnorderedGroup_8_6.eContents().get(6);
-		private final RuleCall cAttributesAttributeParserRuleCall_8_6_6_0 = (RuleCall)cAttributesAssignment_8_6_6.eContents().get(0);
+		private final Alternatives cAlternatives_8_6 = (Alternatives)cGroup_8.eContents().get(6);
+		private final Assignment cInternalPortsAssignment_8_6_0 = (Assignment)cAlternatives_8_6.eContents().get(0);
+		private final RuleCall cInternalPortsPortParserRuleCall_8_6_0_0 = (RuleCall)cInternalPortsAssignment_8_6_0.eContents().get(0);
+		private final Assignment cExternalPortsAssignment_8_6_1 = (Assignment)cAlternatives_8_6.eContents().get(1);
+		private final RuleCall cExternalPortsExternalPortParserRuleCall_8_6_1_0 = (RuleCall)cExternalPortsAssignment_8_6_1.eContents().get(0);
+		private final Assignment cServiceAccessPointsAssignment_8_6_2 = (Assignment)cAlternatives_8_6.eContents().get(2);
+		private final RuleCall cServiceAccessPointsSAPParserRuleCall_8_6_2_0 = (RuleCall)cServiceAccessPointsAssignment_8_6_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_8_6_3 = (Assignment)cAlternatives_8_6.eContents().get(3);
+		private final RuleCall cAttributesAttributeParserRuleCall_8_6_3_0 = (RuleCall)cAttributesAssignment_8_6_3.eContents().get(0);
+		private final Assignment cActorRefsAssignment_8_6_4 = (Assignment)cAlternatives_8_6.eContents().get(4);
+		private final RuleCall cActorRefsActorRefParserRuleCall_8_6_4_0 = (RuleCall)cActorRefsAssignment_8_6_4.eContents().get(0);
+		private final Assignment cServiceImplementationsAssignment_8_6_5 = (Assignment)cAlternatives_8_6.eContents().get(5);
+		private final RuleCall cServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0 = (RuleCall)cServiceImplementationsAssignment_8_6_5.eContents().get(0);
+		private final Assignment cBindingsAssignment_8_6_6 = (Assignment)cAlternatives_8_6.eContents().get(6);
+		private final RuleCall cBindingsBindingParserRuleCall_8_6_6_0 = (RuleCall)cBindingsAssignment_8_6_6.eContents().get(0);
+		private final Assignment cConnectionsAssignment_8_6_7 = (Assignment)cAlternatives_8_6.eContents().get(7);
+		private final RuleCall cConnectionsLayerConnectionParserRuleCall_8_6_7_0 = (RuleCall)cConnectionsAssignment_8_6_7.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_8_7 = (Keyword)cGroup_8.eContents().get(7);
 		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
 		private final Keyword cBehaviorKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
@@ -1774,13 +1778,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_9_2 = (Keyword)cGroup_9.eContents().get(2);
 		private final Assignment cBehaviorAnnotationsAssignment_9_3 = (Assignment)cGroup_9.eContents().get(3);
 		private final RuleCall cBehaviorAnnotationsAnnotationParserRuleCall_9_3_0 = (RuleCall)cBehaviorAnnotationsAssignment_9_3.eContents().get(0);
-		private final Assignment cStructorsAssignment_9_4 = (Assignment)cGroup_9.eContents().get(4);
-		private final RuleCall cStructorsClassStructorParserRuleCall_9_4_0 = (RuleCall)cStructorsAssignment_9_4.eContents().get(0);
-		private final Assignment cOperationsAssignment_9_5 = (Assignment)cGroup_9.eContents().get(5);
-		private final RuleCall cOperationsStandardOperationParserRuleCall_9_5_0 = (RuleCall)cOperationsAssignment_9_5.eContents().get(0);
-		private final Assignment cStateMachineAssignment_9_6 = (Assignment)cGroup_9.eContents().get(6);
-		private final RuleCall cStateMachineStateMachineParserRuleCall_9_6_0 = (RuleCall)cStateMachineAssignment_9_6.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9_7 = (Keyword)cGroup_9.eContents().get(7);
+		private final Alternatives cAlternatives_9_4 = (Alternatives)cGroup_9.eContents().get(4);
+		private final Assignment cStructorsAssignment_9_4_0 = (Assignment)cAlternatives_9_4.eContents().get(0);
+		private final RuleCall cStructorsClassStructorParserRuleCall_9_4_0_0 = (RuleCall)cStructorsAssignment_9_4_0.eContents().get(0);
+		private final Assignment cOperationsAssignment_9_4_1 = (Assignment)cAlternatives_9_4.eContents().get(1);
+		private final RuleCall cOperationsStandardOperationParserRuleCall_9_4_1_0 = (RuleCall)cOperationsAssignment_9_4_1.eContents().get(0);
+		private final Assignment cStateMachineAssignment_9_5 = (Assignment)cGroup_9.eContents().get(5);
+		private final RuleCall cStateMachineStateMachineParserRuleCall_9_5_0 = (RuleCall)cStateMachineAssignment_9_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9_6 = (Keyword)cGroup_9.eContents().get(6);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
 		//// some notes on ports
@@ -1792,23 +1797,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//// since double containment is not supported we decided to define external ports as reference to interface ports
 		//ActorClass:
 		//	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-		//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
-		//	serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
-		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
-		//	externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
-		//	serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-		//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
-		//	operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
+		//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (interfacePorts+=Port |
+		//	serviceProvisionPoints+=SPP)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (internalPorts+=Port |
+		//	externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute | actorRefs+=ActorRef |
+		//	serviceImplementations+=ServiceImplementation | bindings+=Binding | connections+=LayerConnection)* "}")? ("Behavior"
+		//	behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
+		//	operations+=StandardOperation)* stateMachine=StateMachine? "}")? "}";
 		public ParserRule getRule() { return rule; }
 
 		//(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-		//base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
-		//serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
-		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
-		//externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
-		//serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
-		//operations+=StandardOperation* stateMachine=StateMachine? "}")? "}"
+		//base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (interfacePorts+=Port |
+		//serviceProvisionPoints+=SPP)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (internalPorts+=Port |
+		//externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute | actorRefs+=ActorRef |
+		//serviceImplementations+=ServiceImplementation | bindings+=Binding | connections+=LayerConnection)* "}")? ("Behavior"
+		//behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
+		//operations+=StandardOperation)* stateMachine=StateMachine? "}")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"? & commType=ComponentCommunicationType?
@@ -1865,7 +1870,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_6_0() { return cAnnotationsAnnotationParserRuleCall_6_0; }
 
-		//("Interface" "{" interfacePorts+=Port* serviceProvisionPoints+=SPP* "}")?
+		//("Interface" "{" (interfacePorts+=Port | serviceProvisionPoints+=SPP)* "}")?
 		public Group getGroup_7() { return cGroup_7; }
 
 		//"Interface"
@@ -1874,25 +1879,28 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_7_1() { return cLeftCurlyBracketKeyword_7_1; }
 
-		//interfacePorts+=Port*
-		public Assignment getInterfacePortsAssignment_7_2() { return cInterfacePortsAssignment_7_2; }
+		//(interfacePorts+=Port | serviceProvisionPoints+=SPP)*
+		public Alternatives getAlternatives_7_2() { return cAlternatives_7_2; }
+
+		//interfacePorts+=Port
+		public Assignment getInterfacePortsAssignment_7_2_0() { return cInterfacePortsAssignment_7_2_0; }
 
 		//Port
-		public RuleCall getInterfacePortsPortParserRuleCall_7_2_0() { return cInterfacePortsPortParserRuleCall_7_2_0; }
+		public RuleCall getInterfacePortsPortParserRuleCall_7_2_0_0() { return cInterfacePortsPortParserRuleCall_7_2_0_0; }
 
-		//serviceProvisionPoints+=SPP*
-		public Assignment getServiceProvisionPointsAssignment_7_3() { return cServiceProvisionPointsAssignment_7_3; }
+		//serviceProvisionPoints+=SPP
+		public Assignment getServiceProvisionPointsAssignment_7_2_1() { return cServiceProvisionPointsAssignment_7_2_1; }
 
 		//SPP
-		public RuleCall getServiceProvisionPointsSPPParserRuleCall_7_3_0() { return cServiceProvisionPointsSPPParserRuleCall_7_3_0; }
+		public RuleCall getServiceProvisionPointsSPPParserRuleCall_7_2_1_0() { return cServiceProvisionPointsSPPParserRuleCall_7_2_1_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_7_4() { return cRightCurlyBracketKeyword_7_4; }
+		public Keyword getRightCurlyBracketKeyword_7_3() { return cRightCurlyBracketKeyword_7_3; }
 
 		//("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
-		//("usercode3" userCode3=DetailCode)? ((internalPorts+=Port | externalPorts+=ExternalPort)* & actorRefs+=ActorRef* &
-		//serviceImplementations+=ServiceImplementation* & serviceAccessPoints+=SAP* & bindings+=Binding* &
-		//connections+=LayerConnection* & attributes+=Attribute*) "}")?
+		//("usercode3" userCode3=DetailCode)? (internalPorts+=Port | externalPorts+=ExternalPort | serviceAccessPoints+=SAP |
+		//attributes+=Attribute | actorRefs+=ActorRef | serviceImplementations+=ServiceImplementation | bindings+=Binding |
+		//connections+=LayerConnection)* "}")?
 		public Group getGroup_8() { return cGroup_8; }
 
 		//"Structure"
@@ -1943,67 +1951,64 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_8_5_1_0() { return cUserCode3DetailCodeParserRuleCall_8_5_1_0; }
 
-		//(internalPorts+=Port | externalPorts+=ExternalPort)* & actorRefs+=ActorRef* &
-		//serviceImplementations+=ServiceImplementation* & serviceAccessPoints+=SAP* & bindings+=Binding* &
-		//connections+=LayerConnection* & attributes+=Attribute*
-		public UnorderedGroup getUnorderedGroup_8_6() { return cUnorderedGroup_8_6; }
-
-		//(internalPorts+=Port | externalPorts+=ExternalPort)*
-		public Alternatives getAlternatives_8_6_0() { return cAlternatives_8_6_0; }
+		//(internalPorts+=Port | externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute |
+		//actorRefs+=ActorRef | serviceImplementations+=ServiceImplementation | bindings+=Binding |
+		//connections+=LayerConnection)*
+		public Alternatives getAlternatives_8_6() { return cAlternatives_8_6; }
 
 		//internalPorts+=Port
-		public Assignment getInternalPortsAssignment_8_6_0_0() { return cInternalPortsAssignment_8_6_0_0; }
+		public Assignment getInternalPortsAssignment_8_6_0() { return cInternalPortsAssignment_8_6_0; }
 
 		//Port
-		public RuleCall getInternalPortsPortParserRuleCall_8_6_0_0_0() { return cInternalPortsPortParserRuleCall_8_6_0_0_0; }
+		public RuleCall getInternalPortsPortParserRuleCall_8_6_0_0() { return cInternalPortsPortParserRuleCall_8_6_0_0; }
 
 		//externalPorts+=ExternalPort
-		public Assignment getExternalPortsAssignment_8_6_0_1() { return cExternalPortsAssignment_8_6_0_1; }
+		public Assignment getExternalPortsAssignment_8_6_1() { return cExternalPortsAssignment_8_6_1; }
 
 		//ExternalPort
-		public RuleCall getExternalPortsExternalPortParserRuleCall_8_6_0_1_0() { return cExternalPortsExternalPortParserRuleCall_8_6_0_1_0; }
+		public RuleCall getExternalPortsExternalPortParserRuleCall_8_6_1_0() { return cExternalPortsExternalPortParserRuleCall_8_6_1_0; }
 
-		//actorRefs+=ActorRef*
-		public Assignment getActorRefsAssignment_8_6_1() { return cActorRefsAssignment_8_6_1; }
-
-		//ActorRef
-		public RuleCall getActorRefsActorRefParserRuleCall_8_6_1_0() { return cActorRefsActorRefParserRuleCall_8_6_1_0; }
-
-		//serviceImplementations+=ServiceImplementation*
-		public Assignment getServiceImplementationsAssignment_8_6_2() { return cServiceImplementationsAssignment_8_6_2; }
-
-		//ServiceImplementation
-		public RuleCall getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0() { return cServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0; }
-
-		//serviceAccessPoints+=SAP*
-		public Assignment getServiceAccessPointsAssignment_8_6_3() { return cServiceAccessPointsAssignment_8_6_3; }
+		//serviceAccessPoints+=SAP
+		public Assignment getServiceAccessPointsAssignment_8_6_2() { return cServiceAccessPointsAssignment_8_6_2; }
 
 		//SAP
-		public RuleCall getServiceAccessPointsSAPParserRuleCall_8_6_3_0() { return cServiceAccessPointsSAPParserRuleCall_8_6_3_0; }
+		public RuleCall getServiceAccessPointsSAPParserRuleCall_8_6_2_0() { return cServiceAccessPointsSAPParserRuleCall_8_6_2_0; }
 
-		//bindings+=Binding*
-		public Assignment getBindingsAssignment_8_6_4() { return cBindingsAssignment_8_6_4; }
-
-		//Binding
-		public RuleCall getBindingsBindingParserRuleCall_8_6_4_0() { return cBindingsBindingParserRuleCall_8_6_4_0; }
-
-		//connections+=LayerConnection*
-		public Assignment getConnectionsAssignment_8_6_5() { return cConnectionsAssignment_8_6_5; }
-
-		//LayerConnection
-		public RuleCall getConnectionsLayerConnectionParserRuleCall_8_6_5_0() { return cConnectionsLayerConnectionParserRuleCall_8_6_5_0; }
-
-		//attributes+=Attribute*
-		public Assignment getAttributesAssignment_8_6_6() { return cAttributesAssignment_8_6_6; }
+		//attributes+=Attribute
+		public Assignment getAttributesAssignment_8_6_3() { return cAttributesAssignment_8_6_3; }
 
 		//Attribute
-		public RuleCall getAttributesAttributeParserRuleCall_8_6_6_0() { return cAttributesAttributeParserRuleCall_8_6_6_0; }
+		public RuleCall getAttributesAttributeParserRuleCall_8_6_3_0() { return cAttributesAttributeParserRuleCall_8_6_3_0; }
+
+		//actorRefs+=ActorRef
+		public Assignment getActorRefsAssignment_8_6_4() { return cActorRefsAssignment_8_6_4; }
+
+		//ActorRef
+		public RuleCall getActorRefsActorRefParserRuleCall_8_6_4_0() { return cActorRefsActorRefParserRuleCall_8_6_4_0; }
+
+		//serviceImplementations+=ServiceImplementation
+		public Assignment getServiceImplementationsAssignment_8_6_5() { return cServiceImplementationsAssignment_8_6_5; }
+
+		//ServiceImplementation
+		public RuleCall getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0() { return cServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0; }
+
+		//bindings+=Binding
+		public Assignment getBindingsAssignment_8_6_6() { return cBindingsAssignment_8_6_6; }
+
+		//Binding
+		public RuleCall getBindingsBindingParserRuleCall_8_6_6_0() { return cBindingsBindingParserRuleCall_8_6_6_0; }
+
+		//connections+=LayerConnection
+		public Assignment getConnectionsAssignment_8_6_7() { return cConnectionsAssignment_8_6_7; }
+
+		//LayerConnection
+		public RuleCall getConnectionsLayerConnectionParserRuleCall_8_6_7_0() { return cConnectionsLayerConnectionParserRuleCall_8_6_7_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_8_7() { return cRightCurlyBracketKeyword_8_7; }
 
-		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
-		//operations+=StandardOperation* stateMachine=StateMachine? "}")?
+		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
+		//operations+=StandardOperation)* stateMachine=StateMachine? "}")?
 		public Group getGroup_9() { return cGroup_9; }
 
 		//"Behavior"
@@ -2024,26 +2029,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Annotation
 		public RuleCall getBehaviorAnnotationsAnnotationParserRuleCall_9_3_0() { return cBehaviorAnnotationsAnnotationParserRuleCall_9_3_0; }
 
-		//structors+=ClassStructor*
-		public Assignment getStructorsAssignment_9_4() { return cStructorsAssignment_9_4; }
+		//(structors+=ClassStructor | operations+=StandardOperation)*
+		public Alternatives getAlternatives_9_4() { return cAlternatives_9_4; }
+
+		//structors+=ClassStructor
+		public Assignment getStructorsAssignment_9_4_0() { return cStructorsAssignment_9_4_0; }
 
 		//ClassStructor
-		public RuleCall getStructorsClassStructorParserRuleCall_9_4_0() { return cStructorsClassStructorParserRuleCall_9_4_0; }
+		public RuleCall getStructorsClassStructorParserRuleCall_9_4_0_0() { return cStructorsClassStructorParserRuleCall_9_4_0_0; }
 
-		//operations+=StandardOperation*
-		public Assignment getOperationsAssignment_9_5() { return cOperationsAssignment_9_5; }
+		//operations+=StandardOperation
+		public Assignment getOperationsAssignment_9_4_1() { return cOperationsAssignment_9_4_1; }
 
 		//StandardOperation
-		public RuleCall getOperationsStandardOperationParserRuleCall_9_5_0() { return cOperationsStandardOperationParserRuleCall_9_5_0; }
+		public RuleCall getOperationsStandardOperationParserRuleCall_9_4_1_0() { return cOperationsStandardOperationParserRuleCall_9_4_1_0; }
 
 		//stateMachine=StateMachine?
-		public Assignment getStateMachineAssignment_9_6() { return cStateMachineAssignment_9_6; }
+		public Assignment getStateMachineAssignment_9_5() { return cStateMachineAssignment_9_5; }
 
 		//StateMachine
-		public RuleCall getStateMachineStateMachineParserRuleCall_9_6_0() { return cStateMachineStateMachineParserRuleCall_9_6_0; }
+		public RuleCall getStateMachineStateMachineParserRuleCall_9_5_0() { return cStateMachineStateMachineParserRuleCall_9_5_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_9_7() { return cRightCurlyBracketKeyword_9_7; }
+		public Keyword getRightCurlyBracketKeyword_9_6() { return cRightCurlyBracketKeyword_9_6; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
@@ -2294,22 +2302,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cAnnotationsAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_4_0 = (RuleCall)cAnnotationsAssignment_4.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_5 = (UnorderedGroup)cGroup.eContents().get(5);
-		private final Assignment cSubSystemsAssignment_5_0 = (Assignment)cUnorderedGroup_5.eContents().get(0);
+		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
+		private final Assignment cSubSystemsAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
 		private final RuleCall cSubSystemsSubSystemRefParserRuleCall_5_0_0 = (RuleCall)cSubSystemsAssignment_5_0.eContents().get(0);
-		private final Assignment cBindingsAssignment_5_1 = (Assignment)cUnorderedGroup_5.eContents().get(1);
+		private final Assignment cBindingsAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
 		private final RuleCall cBindingsBindingParserRuleCall_5_1_0 = (RuleCall)cBindingsAssignment_5_1.eContents().get(0);
-		private final Assignment cConnectionsAssignment_5_2 = (Assignment)cUnorderedGroup_5.eContents().get(2);
+		private final Assignment cConnectionsAssignment_5_2 = (Assignment)cAlternatives_5.eContents().get(2);
 		private final RuleCall cConnectionsLayerConnectionParserRuleCall_5_2_0 = (RuleCall)cConnectionsAssignment_5_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//LogicalSystem:
-		//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* &
-		//	bindings+=Binding* & connections+=LayerConnection*) "}";
+		//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef |
+		//	bindings+=Binding | connections+=LayerConnection)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* & bindings+=Binding*
-		//& connections+=LayerConnection*) "}"
+		//"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef | bindings+=Binding |
+		//connections+=LayerConnection)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"LogicalSystem"
@@ -2336,22 +2344,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
 
-		//subSystems+=SubSystemRef* & bindings+=Binding* & connections+=LayerConnection*
-		public UnorderedGroup getUnorderedGroup_5() { return cUnorderedGroup_5; }
+		//(subSystems+=SubSystemRef | bindings+=Binding | connections+=LayerConnection)*
+		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
-		//subSystems+=SubSystemRef*
+		//subSystems+=SubSystemRef
 		public Assignment getSubSystemsAssignment_5_0() { return cSubSystemsAssignment_5_0; }
 
 		//SubSystemRef
 		public RuleCall getSubSystemsSubSystemRefParserRuleCall_5_0_0() { return cSubSystemsSubSystemRefParserRuleCall_5_0_0; }
 
-		//bindings+=Binding*
+		//bindings+=Binding
 		public Assignment getBindingsAssignment_5_1() { return cBindingsAssignment_5_1; }
 
 		//Binding
 		public RuleCall getBindingsBindingParserRuleCall_5_1_0() { return cBindingsBindingParserRuleCall_5_1_0; }
 
-		//connections+=LayerConnection*
+		//connections+=LayerConnection
 		public Assignment getConnectionsAssignment_5_2() { return cConnectionsAssignment_5_2; }
 
 		//LayerConnection
@@ -2452,34 +2460,34 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cUsercode3Keyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cUserCode3Assignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final RuleCall cUserCode3DetailCodeParserRuleCall_7_1_0 = (RuleCall)cUserCode3Assignment_7_1.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_8 = (UnorderedGroup)cGroup.eContents().get(8);
-		private final Assignment cRelayPortsAssignment_8_0 = (Assignment)cUnorderedGroup_8.eContents().get(0);
+		private final Alternatives cAlternatives_8 = (Alternatives)cGroup.eContents().get(8);
+		private final Assignment cRelayPortsAssignment_8_0 = (Assignment)cAlternatives_8.eContents().get(0);
 		private final RuleCall cRelayPortsPortParserRuleCall_8_0_0 = (RuleCall)cRelayPortsAssignment_8_0.eContents().get(0);
-		private final Assignment cServiceProvisionPointsAssignment_8_1 = (Assignment)cUnorderedGroup_8.eContents().get(1);
+		private final Assignment cServiceProvisionPointsAssignment_8_1 = (Assignment)cAlternatives_8.eContents().get(1);
 		private final RuleCall cServiceProvisionPointsSPPParserRuleCall_8_1_0 = (RuleCall)cServiceProvisionPointsAssignment_8_1.eContents().get(0);
-		private final Assignment cActorRefsAssignment_8_2 = (Assignment)cUnorderedGroup_8.eContents().get(2);
+		private final Assignment cActorRefsAssignment_8_2 = (Assignment)cAlternatives_8.eContents().get(2);
 		private final RuleCall cActorRefsActorRefParserRuleCall_8_2_0 = (RuleCall)cActorRefsAssignment_8_2.eContents().get(0);
-		private final Assignment cBindingsAssignment_8_3 = (Assignment)cUnorderedGroup_8.eContents().get(3);
+		private final Assignment cBindingsAssignment_8_3 = (Assignment)cAlternatives_8.eContents().get(3);
 		private final RuleCall cBindingsBindingParserRuleCall_8_3_0 = (RuleCall)cBindingsAssignment_8_3.eContents().get(0);
-		private final Assignment cConnectionsAssignment_8_4 = (Assignment)cUnorderedGroup_8.eContents().get(4);
+		private final Assignment cConnectionsAssignment_8_4 = (Assignment)cAlternatives_8.eContents().get(4);
 		private final RuleCall cConnectionsLayerConnectionParserRuleCall_8_4_0 = (RuleCall)cConnectionsAssignment_8_4.eContents().get(0);
-		private final Assignment cThreadsAssignment_8_5 = (Assignment)cUnorderedGroup_8.eContents().get(5);
+		private final Assignment cThreadsAssignment_8_5 = (Assignment)cAlternatives_8.eContents().get(5);
 		private final RuleCall cThreadsLogicalThreadParserRuleCall_8_5_0 = (RuleCall)cThreadsAssignment_8_5.eContents().get(0);
-		private final Assignment cActorInstanceMappingsAssignment_8_6 = (Assignment)cUnorderedGroup_8.eContents().get(6);
+		private final Assignment cActorInstanceMappingsAssignment_8_6 = (Assignment)cAlternatives_8.eContents().get(6);
 		private final RuleCall cActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0 = (RuleCall)cActorInstanceMappingsAssignment_8_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//SubSystemClass:
 		//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
-		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port* &
-		//	serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
-		//	threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}";
+		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port |
+		//	serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection |
+		//	threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
-		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port* &
-		//serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
-		//threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}"
+		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port |
+		//serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection |
+		//threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"SubSystemClass"
@@ -2542,47 +2550,47 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_7_1_0() { return cUserCode3DetailCodeParserRuleCall_7_1_0; }
 
-		//relayPorts+=Port* & serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* &
-		//connections+=LayerConnection* & threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*
-		public UnorderedGroup getUnorderedGroup_8() { return cUnorderedGroup_8; }
+		//(relayPorts+=Port | serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection
+		//| threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)*
+		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
-		//relayPorts+=Port*
+		//relayPorts+=Port
 		public Assignment getRelayPortsAssignment_8_0() { return cRelayPortsAssignment_8_0; }
 
 		//Port
 		public RuleCall getRelayPortsPortParserRuleCall_8_0_0() { return cRelayPortsPortParserRuleCall_8_0_0; }
 
-		//serviceProvisionPoints+=SPP*
+		//serviceProvisionPoints+=SPP
 		public Assignment getServiceProvisionPointsAssignment_8_1() { return cServiceProvisionPointsAssignment_8_1; }
 
 		//SPP
 		public RuleCall getServiceProvisionPointsSPPParserRuleCall_8_1_0() { return cServiceProvisionPointsSPPParserRuleCall_8_1_0; }
 
-		//actorRefs+=ActorRef*
+		//actorRefs+=ActorRef
 		public Assignment getActorRefsAssignment_8_2() { return cActorRefsAssignment_8_2; }
 
 		//ActorRef
 		public RuleCall getActorRefsActorRefParserRuleCall_8_2_0() { return cActorRefsActorRefParserRuleCall_8_2_0; }
 
-		//bindings+=Binding*
+		//bindings+=Binding
 		public Assignment getBindingsAssignment_8_3() { return cBindingsAssignment_8_3; }
 
 		//Binding
 		public RuleCall getBindingsBindingParserRuleCall_8_3_0() { return cBindingsBindingParserRuleCall_8_3_0; }
 
-		//connections+=LayerConnection*
+		//connections+=LayerConnection
 		public Assignment getConnectionsAssignment_8_4() { return cConnectionsAssignment_8_4; }
 
 		//LayerConnection
 		public RuleCall getConnectionsLayerConnectionParserRuleCall_8_4_0() { return cConnectionsLayerConnectionParserRuleCall_8_4_0; }
 
-		//threads+=LogicalThread*
+		//threads+=LogicalThread
 		public Assignment getThreadsAssignment_8_5() { return cThreadsAssignment_8_5; }
 
 		//LogicalThread
 		public RuleCall getThreadsLogicalThreadParserRuleCall_8_5_0() { return cThreadsLogicalThreadParserRuleCall_8_5_0; }
 
-		//actorInstanceMappings+=ActorInstanceMapping*
+		//actorInstanceMappings+=ActorInstanceMapping
 		public Assignment getActorInstanceMappingsAssignment_8_6() { return cActorInstanceMappingsAssignment_8_6; }
 
 		//ActorInstanceMapping
@@ -3585,8 +3593,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// TODOHRR: define detail level language?
 	//DataClass:
 	//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
-	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? attributes+=Attribute*
-	//	structors+=ClassStructor* operations+=StandardOperation* "}";
+	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (attributes+=Attribute
+	//	| structors+=ClassStructor | operations+=StandardOperation)* "}";
 	public DataClassElements getDataClassAccess() {
 		return pDataClass;
 	}
@@ -3775,13 +3783,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// since double containment is not supported we decided to define external ports as reference to interface ports
 	//ActorClass:
 	//	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-	//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" interfacePorts+=Port*
-	//	serviceProvisionPoints+=SPP* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
-	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? ((internalPorts+=Port |
-	//	externalPorts+=ExternalPort)* & actorRefs+=ActorRef* & serviceImplementations+=ServiceImplementation* &
-	//	serviceAccessPoints+=SAP* & bindings+=Binding* & connections+=LayerConnection* & attributes+=Attribute*) "}")?
-	//	("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* structors+=ClassStructor*
-	//	operations+=StandardOperation* stateMachine=StateMachine? "}")? "}";
+	//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (interfacePorts+=Port |
+	//	serviceProvisionPoints+=SPP)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (internalPorts+=Port |
+	//	externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute | actorRefs+=ActorRef |
+	//	serviceImplementations+=ServiceImplementation | bindings+=Binding | connections+=LayerConnection)* "}")? ("Behavior"
+	//	behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
+	//	operations+=StandardOperation)* stateMachine=StateMachine? "}")? "}";
 	public ActorClassElements getActorClassAccess() {
 		return pActorClass;
 	}
@@ -3852,8 +3860,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalSystem:
-	//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef* &
-	//	bindings+=Binding* & connections+=LayerConnection*) "}";
+	//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef |
+	//	bindings+=Binding | connections+=LayerConnection)* "}";
 	public LogicalSystemElements getLogicalSystemAccess() {
 		return pLogicalSystem;
 	}
@@ -3884,9 +3892,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//SubSystemClass:
 	//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
-	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port* &
-	//	serviceProvisionPoints+=SPP* & actorRefs+=ActorRef* & bindings+=Binding* & connections+=LayerConnection* &
-	//	threads+=LogicalThread* & actorInstanceMappings+=ActorInstanceMapping*) "}";
+	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port |
+	//	serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection |
+	//	threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)* "}";
 	public SubSystemClassElements getSubSystemClassAccess() {
 		return pSubSystemClass;
 	}
