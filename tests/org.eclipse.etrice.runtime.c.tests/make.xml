@@ -47,7 +47,7 @@
 		set_platform: sets the runtime.platform property if not set already
 	-->
 	<target name="set_platform" unless="runtime.platform">
-		<!--
+		<!-- change libaries in build target, too !
 		<property name="runtime.platform" value="MT_WIN_MinGW"/>
 		-->
 		<property name="runtime.platform" value="MT_POSIX_GENERIC_GCC"/>
@@ -195,6 +195,9 @@
 			<arg value="TestUtil.o"/>
 			<!-- library has to be in the last position -->
 			<arg value="-lorg.eclipse.etrice.runtime.c"/>
+			<!-- MinGW: -lws2_32-->
+			<!-- <arg value="-lws2_32"/> -->
+			<!-- Poxis: -lpthread - lrt - lm-->
 			<arg value="-lpthread"/>
 			<arg value="-lrt"/>
 			<arg value="-lm"/>
@@ -245,6 +248,7 @@
 		copy_results: copies the *.xml results to their final destination
 	-->
 	<target name="copy_results" depends="set_tr">
+		<mkdir dir="results"/>
 		<move file="./log/testlog/TestEtUnitSpecial.xml" tofile="./log/testlog/CTestEtUnitSpecial.xml"/>
 		<copy todir="${test.results}" >
 			<fileset dir="./log/testlog">

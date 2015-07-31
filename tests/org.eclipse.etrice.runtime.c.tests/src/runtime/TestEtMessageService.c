@@ -212,7 +212,8 @@ void TestEtMessageService_execute(etInt16 id){
 	EXPECT_EQUAL_INT16(id, "deliverAllMessages receivedEventIDCounter", 2, receivedEventIDCounter);
 
 	etMessageService_stop(&msgService);
-
+	// workaround: wait before destroy, thus preventing segmentation fault from msgServic thread
+	etThread_sleep(100);
 	etMessageService_destroy(&msgService);
 }
 
@@ -287,7 +288,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 	/*  still no message left */
 	EXPECT_EQUAL_INT16(id, "low water mark 6", 0, etMessageService_getMessagePoolLowWaterMark(&msgService));
 
-
+	etMessageService_destroy(&msgService);
 }
 
 

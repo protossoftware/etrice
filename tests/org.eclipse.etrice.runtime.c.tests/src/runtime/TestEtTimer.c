@@ -26,15 +26,18 @@
 
 static etSema GlobalSema;
 static etInt32 counter;
+static etBool timerIsInvalidated;
 
 static void TestEtTimer_TimerCallback1(void* data){
 	printf("TestEtTimer_TimerCallback1\n"); fflush(stdout); // TODO: remove debug output
-	etSema_wakeup(&GlobalSema);
+	if(!timerIsInvalidated)
+		etSema_wakeup(&GlobalSema);
 }
 
 static void TestEtTimer_TimerCallback2(void* data){
 	printf("TestEtTimer_TimerCallback2\n"); fflush(stdout); // TODO: remove debug output
-	counter++;
+	if(!timerIsInvalidated)
+		counter++;
 }
 
 static void TestEtTimer_lifecycle (etInt16 id) {
@@ -52,6 +55,7 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 
 	/* create semaphore */
 	etSema_construct(&GlobalSema);
+	timerIsInvalidated = false;
 
 	getTimeFromTarget(&startTime);
 	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // TODO: remove debug output
@@ -60,6 +64,7 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
 	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
+	timerIsInvalidated = true;
 	etTimer_stop(&timer1);
 	getTimeFromTarget(&endTime);
 
@@ -84,6 +89,7 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 	etTimer timer2;
 	etTime interval;
 	counter = 0;
+	timerIsInvalidated = false;
 
 	/* create semaphore */
 	etSema_construct(&GlobalSema);
@@ -109,6 +115,7 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 
 	//sleep(10);
 
+	timerIsInvalidated = true;
 	etTimer_stop(&timer2);
 	etTimer_stop(&timer1);
 

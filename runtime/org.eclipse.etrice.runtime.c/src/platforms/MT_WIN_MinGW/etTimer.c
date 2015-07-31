@@ -57,7 +57,7 @@ void etTimer_start(etTimer* self){
 			etLogger_logError("etTimer_start: no Timer Queue to create timer (NULL)");
 		}
 		else {
-				if (CreateTimerQueueTimer( &(self->osTimerData), hTimerQueue, etTimer_callback, self, 0, elapse, 0) == ET_FALSE){
+				if (CreateTimerQueueTimer( &(self->osTimerData), hTimerQueue, etTimer_callback, self, elapse, elapse, 0) == ET_FALSE){
 				etLogger_logError("etTimer_start: Timer could not be created");
 			}
 		}
@@ -67,8 +67,11 @@ void etTimer_start(etTimer* self){
 
 void etTimer_stop(etTimer* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "stop")
+	// To wait until timer has expired use INVALID_HANDLE_VALUE
 	if (DeleteTimerQueueTimer(hTimerQueue, self->osTimerData, NULL) == ET_FALSE){
-		etLogger_logError("etTimer_stop: Timer could not be stopped");
+		// ERROR_IO_PENDING indicates outstanding callback functions => no error
+		if(GetLastError() != ERROR_IO_PENDING)
+			etLogger_logError("etTimer_stop: Timer could not be stopped");
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
