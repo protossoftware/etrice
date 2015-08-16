@@ -1,14 +1,10 @@
 RoomModel ChoicePointTest {
 
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 
-	SubSystemClass SubSystem_CPTest {
-		ActorRef ChoicePointTest_Top: CPTest_Top
-	
-		LogicalThread dflt_thread
-	}
-
 	ActorClass CPTest_Top {
+		@TestInstance
 		Structure {
 			ActorRef cp_tester: CPTester
 			ActorRef cp_user: CPUser
@@ -30,7 +26,7 @@ RoomModel ChoicePointTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"ChoicePointTest\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"ChoicePointTest\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

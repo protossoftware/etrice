@@ -1,14 +1,10 @@
 RoomModel DynamicActorTest5 {
 	
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 	
-	SubSystemClass SubSystem_DynamicActorTest5 {
-		ActorRef appl: Appl
-		
-		LogicalThread dflt_thread
-	}
-	
 	ActorClass Appl {
+		@TestInstance
 		Structure {
 			ActorRef cont: Container
 		}
@@ -25,7 +21,7 @@ RoomModel DynamicActorTest5 {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest5\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest5\", \"DynamicActorTest5_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"DynamicActorTest5\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest5\", \"DynamicActorTest5_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

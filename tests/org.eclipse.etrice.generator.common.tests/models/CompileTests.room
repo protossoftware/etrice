@@ -1,0 +1,35 @@
+RoomModel CompileTestsModel {
+
+	import room.basic.types.* from "Types.room"
+	import room.basic.etunit.* from "Tests.room"
+	import DetailExpressionTestModel.DetailExpressionTest from "DetailExpressionTest.room"
+	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
+
+	ActorClass CompileTests {
+		@TestInstance
+		Structure {
+			Attribute caseId : int32
+			
+			// just compile
+			ActorRef detailExpressionTest: DetailExpressionTest
+			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
+		}
+		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\"log/testlog\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
+			}
+			dtor {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> finish
+				State finish {
+					entry {
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+}

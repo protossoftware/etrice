@@ -1,13 +1,10 @@
 RoomModel EnumTest {
 
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 
-	SubSystemClass SubSystem_EnumTest {
-		ActorRef actorRef1: EnumTest_Top
-		LogicalThread defaultThread
-	}
-
 	ActorClass EnumTest_Top {
+		@TestInstance
 		Structure {
 			ActorRef user: EnumUser
 		}
@@ -35,7 +32,7 @@ RoomModel EnumTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

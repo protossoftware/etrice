@@ -1,26 +1,7 @@
-PhysicalModel Standard {
+PhysicalModel PingPongThread {
 	
 	PhysicalSystem Sys {
 		NodeRef node1: PC
-		NodeRef node2: PC
-		NodeRef node3: PC
-		NodeRef node4: PC
-		NodeRef node5: PC
-		NodeRef node6: PC
-		NodeRef node7: PC
-		NodeRef node8: PC
-		NodeRef node9: PC
-		NodeRef node10: PC
-		NodeRef node11: PC
-		NodeRef node12: PC
-		NodeRef node13: PC
-		NodeRef node14: PC
-		NodeRef node15: PC
-		NodeRef node16: PC
-		NodeRef node17: PC
-		NodeRef node18: PC
-		NodeRef node19: PC
-		NodeRef node20: PC
 	}
 	
 	NodeClass PC {

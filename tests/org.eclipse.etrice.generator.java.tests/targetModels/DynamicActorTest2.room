@@ -1,11 +1,16 @@
 RoomModel DynamicActorTest2 {
 	
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 	
+	LogicalSystem JavaGenTests {
+		SubSystemRef da2Test : SubSystem_DynamicActorTest2
+	}
+	
 	SubSystemClass SubSystem_DynamicActorTest2 {
-		ActorRef appl: Appl
-		
-		LogicalThread dflt_thread
+		ActorRef appl : Appl
+	
+		LogicalThread defaultThread
 	}
 	
 	ActorClass Appl {
@@ -25,7 +30,7 @@ RoomModel DynamicActorTest2 {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"DynamicActorTest2\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest2\", \"DynamicActorTest2_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"DynamicActorTest2\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest2\", \"DynamicActorTest2_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

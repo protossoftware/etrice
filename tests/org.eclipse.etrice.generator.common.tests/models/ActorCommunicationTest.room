@@ -1,17 +1,19 @@
 RoomModel ActorCommunicationTest {
 
 	import room.basic.types.* from "Types.room"
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.service.timing.* from "TimingService.room"
 
 	SubSystemClass SubSystem_ActorCommunicationTest {
+		@TestInstance
 		ActorRef singleThread_Appl: Appl
 		ActorRef timing: ATimingService
 		LayerConnection ref singleThread_Appl satisfied_by timing.timer
 
 		// all unmapped instances are mapped to the default *physical* thread
-		LogicalThread dflt_thread
-		ActorInstanceMapping timing -> dflt_thread
-		ActorInstanceMapping singleThread_Appl -> dflt_thread
+		//LogicalThread dflt_thread
+		//ActorInstanceMapping timing -> dflt_thread
+		//ActorInstanceMapping singleThread_Appl -> dflt_thread
 	}
 
 	/*
@@ -61,7 +63,7 @@ RoomModel ActorCommunicationTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\"tmp\", \"ActorCommunicationTest\");"
+				"etUnit_open(\"log/testlog\", \"ActorCommunicationTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests\");"
 			}
 			dtor {

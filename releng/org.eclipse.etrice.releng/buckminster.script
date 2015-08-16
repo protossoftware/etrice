@@ -1,3 +1,8 @@
+#
+# org.eclipse.etrice.releng/buckminster.script
+# Run Buckminster script (nightly)
+#
+
 setpref complianceLevel=1.6
 
 setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"

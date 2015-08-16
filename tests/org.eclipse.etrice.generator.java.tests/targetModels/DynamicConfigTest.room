@@ -4,12 +4,14 @@ RoomModel DynamicConfigTest {
 
 	import room.basic.service.timing.* from "TimingService.room"
 
+	LogicalSystem System_DynamicConfigTest{
+		SubSystemRef main : SubSystem_DynamicConfigTest
+	}
+	
 	SubSystemClass SubSystem_DynamicConfigTest {
 		ActorRef testee: Testee_ac
 		ActorRef timingService: ATimingService
 		LayerConnection ref testee satisfied_by timingService.timer
-		
-		LogicalThread dflt_thread
 	}
 
 	ActorClass Testee_ac {
@@ -48,7 +50,7 @@ RoomModel DynamicConfigTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\"tmp\", \"DynamicConfigTest\");"
+				"etUnit_open(\"log/testlog\", \"DynamicConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.DynamicConfigTest\");"
 				"caseId = etUnit_openTestCase(\"DynamicConfigTest_case_Testee_ac\");"
 			}

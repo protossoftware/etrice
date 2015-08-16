@@ -1,23 +1,21 @@
-RoomModel StatemachineInterfaceTest {
+RoomModel StatemachineInterfaceTestModel {
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "Types.room"
 
-	LogicalSystem StatemachineInterfaceTest {
-		SubSystemRef main: MainSubSystem
-	}
-
-	SubSystemClass MainSubSystem {
-		ActorRef app1: AsyncApp
-		ActorRef app2: DataApp
-		ActorRef app3: EventApp
-		ActorRef app4: EmptyAsyncApp
-		ActorRef app5: EmptyDataApp
-		ActorRef app6: EmptyEventApp
-		//ActorRef app7: EmptyAsyncAppManual
-		//ActorRef app8: EmptyDataAppManual
-		ActorRef app9: EmptyEventAppManual
-		
-		LogicalThread defaultThread
+	ActorClass StatemachineInterfaceTest {
+		Structure {
+			ActorRef app1: AsyncApp
+			ActorRef app2: DataApp
+			ActorRef app3: EventApp
+			ActorRef app4: EmptyAsyncApp
+			ActorRef app5: EmptyDataApp
+			ActorRef app6: EmptyEventApp
+			
+			// does not work
+			//ActorRef app7: EmptyAsyncAppManual
+			//ActorRef app8: EmptyDataAppManual
+			//ActorRef app9: EmptyEventAppManual
+		}
 	}
 
 	AnnotationType BehaviorManual { 

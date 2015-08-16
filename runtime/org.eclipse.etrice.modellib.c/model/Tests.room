@@ -29,9 +29,6 @@ RoomModel room.basic.etunit {
 			ActorRef lifecycleActor : TestLifecycleActor
 		}
 		Behavior {
-			Operation getTestSuiteName() : string {
-				"return \"unnamedTestSuite\";"
-			}
 			ctor {
 				"etUnit_open(\"log/testlog\", getTestSuiteName());"
 				"etUnit_openTestSuite(getTestSuiteName());"
@@ -39,6 +36,9 @@ RoomModel room.basic.etunit {
 			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
+			}
+			Operation getTestSuiteName() : string {
+				"return \"unnamedTestSuite\";"
 			}
 		}
 	}
@@ -51,7 +51,7 @@ RoomModel room.basic.etunit {
 			SAP tcTimer : PTimer
 		}
 		Behavior {
-			Operation getTestCaseName() : charPtr {
+			Operation getTestCaseName() : string {
 				"return \"unnamedTestCase\";"
 			}
 			Operation startTimeout(timeMs: uint32){

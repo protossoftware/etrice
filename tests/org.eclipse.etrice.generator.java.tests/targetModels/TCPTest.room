@@ -1,14 +1,11 @@
 RoomModel TCPTest {
+
+	import room.basic.etunit.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 	import room.basic.service.tcp.* from "TcpService.room"
 	
-	SubSystemClass SubSystem_TCPTest {
-		ActorRef TCPTestTopRef:TCPTestTop
-	
-		LogicalThread dflt_thread
-	}
-	
 	ActorClass TCPTestTop {
+		@TestInstance
 		Structure {
 			ActorRef ref0: ATcpServer
 			ActorRef ref1 [ 5 ]: ATcpClient
@@ -44,7 +41,7 @@ RoomModel TCPTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"TCPTest\", \"org.eclipse.etrice.generator.common.tests.TCPTest\", \"TCPTest_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"TCPTest\", \"org.eclipse.etrice.generator.common.tests.TCPTest\", \"TCPTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

@@ -1,0 +1,9 @@
+MappingModel DynamicConfigTest {
+
+	import DynamicConfigTest.* from "DynamicConfigTest.room"
+	import room.generic.physical.* from "GenericPhysical.etphys"
+
+	Mapping System_DynamicConfigTest -> GenericPhysicalSystem {
+			SubSystemMapping main -> node {}
+	}
+}

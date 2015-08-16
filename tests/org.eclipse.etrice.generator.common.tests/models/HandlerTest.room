@@ -1,14 +1,11 @@
 RoomModel HandlerTest {
 
 	import room.basic.types.* from "Types.room"
+	import room.basic.etunit.* from "Tests.room"
 
-	SubSystemClass SubSystem_HandlerTest {
-		ActorRef HandlerTest_Top: HandlerTest_Top
-	
-		LogicalThread dflt_thread
-	}
 
 	ActorClass HandlerTest_Top {
+		@TestInstance
 		Structure {
 			ActorRef tester: Tester
 			ActorRef handlerUser: HandlerUser
@@ -30,7 +27,7 @@ RoomModel HandlerTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"HandlerTest\", \"org.eclipse.etrice.generator.common.tests.HandlerTest\", \"HandlerTest_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"HandlerTest\", \"org.eclipse.etrice.generator.common.tests.HandlerTest\", \"HandlerTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

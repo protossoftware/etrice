@@ -1,27 +1,49 @@
 RoomModel StaticConfigTest {
 
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../Types.room"
+	import room.basic.service.timing.* from "../TimingService.room"
 
-	SubSystemClass SubSystem_StaticConfigTest {
-		ActorRef top: Top_ac
-		
-		LogicalThread dflt_thread
+	LogicalSystem System_StaticConfigTest {
+		SubSystemRef main : SubSystem_StaticConfigTest
 	}
-
+	
+	SubSystemClass SubSystem_StaticConfigTest {
+		LayerConnection ref top satisfied_by timer.timer
+		ActorRef top: Top_ac
+		ActorRef timer : ATimingService
+	}
+	
 	ActorClass Top_ac {
 		Structure {
 			ActorRef testee_1: Testee_1_ac
 			ActorRef tester: Tester_ac
 			LayerConnection ref testee_1 satisfied_by tester.spp
+			SAP timer : PTimer
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\"tmp\", \"StaticConfigTest\");"
+				"etUnit_open(\"log/testlog\", \"StaticConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.StaticConfigTest\");"
 			}
 			dtor {
 				"etUnit_closeTestSuite();"
 				"etUnit_close();"
+			}
+			StateMachine {
+				Transition init: initial -> state0 {
+					action {
+						"timer.startTimeout(1000);"
+					}
+				}
+				Transition tr0: state0 -> state0 {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"etUnit_testFinished(-1);"
+					}
+				}
+				State state0
 			}
 		}
 	}
@@ -39,18 +61,13 @@ RoomModel StaticConfigTest {
 			ActorRef testee_super2: Testee_Super2_ac
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
-				"etUnit_testFinished(caseId);"
-			}
-			dtor {
-				"etUnit_closeTestCase(caseId);"
-			}
 			StateMachine {
 				Transition init: initial -> s1 { }
 				State s1 {
 					entry {
+						"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Tester_ac\");"
 						"Data_3_dc_varCheck3(&(data_3), caseId);"
+						"etUnit_closeTestCase(caseId);"
 					}
 				}
 			}
@@ -73,17 +90,11 @@ RoomModel StaticConfigTest {
 			ActorRef testee_2: Testee_2_ac
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
-				"etUnit_testFinished(caseId);"
-			}
-			dtor {
-				"etUnit_closeTestCase(caseId);"
-			}
 			StateMachine {
 				Transition init: initial -> s1 { }
 				State s1 {
 					entry {
+						"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_1_ac\");"
 						"Data_1_dc_varCheck1(&(data_1), caseId);"
 						"EXPECT_FALSE(caseId,\"testee_1:data_1:1\", data_1.bool_c);"
 						"EXPECT_TRUE(caseId,\"testee_1:data_1:2\", data_1.int8_c == 24);"
@@ -140,7 +151,7 @@ RoomModel StaticConfigTest {
 						// enums
 						"EXPECT_TRUE(caseId,\"testee_1:enumval1\", enumval1 == Enum_1.two);"
 						"EXPECT_TRUE(caseId,\"testee_1:enumval2\", enumval2 == Enum_2.three);"
-						"etUnit_testFinished(caseId);"
+						"etUnit_closeTestCase(caseId);"
 					}
 				}
 			}
@@ -166,21 +177,18 @@ RoomModel StaticConfigTest {
 		}
 		Behavior {
 			ctor {
+				"testInstanceConfig();"
+			}
+			Operation testInstanceConfig(){
 				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_Super2_ac\");"
 				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:1\", 1.1, float64_super_r, 0.1);"
 				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:2\", 2.2, float64_super_c, 0.1);"
-				"testInstanceConfig();"
-
+				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:3\", 3.3, float64_super_i, 0.1);"
+				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:7\", 25.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 				// reg_port
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:5\", 4.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_r, 0.1f);"
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:6\", 3.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_c, 0.1f);"
-			}
-			dtor {
 				"etUnit_closeTestCase(caseId);"
-			}
-			Operation testInstanceConfig(){
-				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_Super2_ac:3\", 3.3, float64_super_i, 0.1);"
-				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_Super2_ac:7\", 25.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 			}
 		}
 	}
@@ -193,14 +201,8 @@ RoomModel StaticConfigTest {
 			Attribute int32_own_i: int32 = "11"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
-				"etUnit_testFinished(caseId);"
-			}
-			dtor {
-				"etUnit_closeTestCase(caseId);"
-			}
 			override Operation testInstanceConfig(){
+				"caseId = etUnit_openTestCase(\"AttrConfigTest_case_Testee_2_ac\");"
 				"EXPECT_EQUAL_FLOAT64(caseId, \"Testee_2_ac:2\", 4.4, float64_super_i, 0.1);"
 				"EXPECT_EQUAL_FLOAT32(caseId, \"Testee_2_ac:9\", 50.0f, ((TestProtocolAttributesPort_var*) self->constData->reg_port.varData)->float_i, 0.1f);"
 			}
@@ -222,7 +224,7 @@ RoomModel StaticConfigTest {
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:sap:10\", ((TestProtocolWithDataClassConjPort_var*)self->constData->sap.varData)->sap_data_2.int32_r == 1);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:sap:11\", ((TestProtocolWithDataClassConjPort_var*)self->constData->sap.varData)->sap_data_2.int32_c == 2);"
 						"EXPECT_TRUE(caseId, \"Testee_2_ac:sap:12\", ((TestProtocolWithDataClassConjPort_var*)self->constData->sap.varData)->sap_data_2.int32_i == 3);"
-						"etUnit_testFinished(caseId);"
+						"etUnit_closeTestCase(caseId);"
 					}
 				}
 			}

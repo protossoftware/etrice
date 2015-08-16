@@ -1,11 +1,9 @@
 RoomModel StoreRestore {
 
-	SubSystemClass SubSystem_StoreRestore {
-		ActorRef top: StoreRestore_Top
-		LogicalThread defaultThread
-	}
+	import room.basic.etunit.* from "Tests.room"
 
 	ActorClass StoreRestore_Top {
+		@TestInstance
 		Structure {
 			ActorRef tester: Tester
 			ActorRef testee: Testee
@@ -119,7 +117,7 @@ RoomModel StoreRestore {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"StoreRestore\", \"org.eclipse.etrice.generator.common.tests.StoreRestore\", \"StoreRestore_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"StoreRestore\", \"org.eclipse.etrice.generator.common.tests.StoreRestore\", \"StoreRestore_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

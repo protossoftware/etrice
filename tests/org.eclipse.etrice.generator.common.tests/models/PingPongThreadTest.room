@@ -3,6 +3,10 @@ RoomModel PingPongThreadTest {
 	import room.basic.service.timing.* from "TimingService.room"
 	import room.basic.types.* from "Types.room"
 
+	LogicalSystem System_PingPong{
+		SubSystemRef main : SubSystem_PingPong
+	}
+	
 	SubSystemClass SubSystem_PingPong {
 		ActorRef application: PingPongTop
 		ActorRef services: ATimingService
@@ -12,10 +16,12 @@ RoomModel PingPongThreadTest {
 		LogicalThread mrPong1Thread
 		LogicalThread mrPong2Thread
 		LogicalThread mrPong3Thread
+		LogicalThread timingThread
 		ActorInstanceMapping application/MrPing -> mrPingThread
 		ActorInstanceMapping application/MrPong1 -> mrPong1Thread
 		ActorInstanceMapping application/MrPong2 -> mrPong2Thread
 		ActorInstanceMapping application/MrPong3 -> mrPong3Thread
+		ActorInstanceMapping services -> timingThread
 	}
 
 	ActorClass PingPongTop {
@@ -50,7 +56,7 @@ RoomModel PingPongThreadTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"tmp\", \"PingPongThreadTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTest\", \"PingPongThreadTest_case\");"
+				"caseId = etUnit_openAll(\"log/testlog\", \"PingPongThreadTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTest\", \"PingPongThreadTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"
@@ -87,7 +93,7 @@ RoomModel PingPongThreadTest {
 				}
 				Transition tr5: cp cp0 -> cp cp1 {
 					action {
-						"System.out.println(count);"
+						"//System.out.println(count);"
 					}
 				}
 				Transition tr6: cp cp0 -> waitForPong {

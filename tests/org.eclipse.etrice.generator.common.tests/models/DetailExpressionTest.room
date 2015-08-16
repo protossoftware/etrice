@@ -1,43 +1,30 @@
-RoomModel DetailExpressionTest {
+RoomModel DetailExpressionTestModel {
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "Types.room"
+	import room.basic.etunit.* from "Tests.room"
+	import room.basic.service.timing.* from "TimingService.room"
 
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.c/model/TimingService.room"
-
-	LogicalSystem System_DetailExpression {
-		SubSystemRef subSystemRef: SubSystem_DetailExpression
-	}
-
-	SubSystemClass SubSystem_DetailExpression {
-		ActorRef timer: ATimingService
-		ActorRef actorRef: Tester
-		LayerConnection ref actorRef satisfied_by timer.timer
-		LogicalThread defaultThread
-	}
-
-	async ActorClass Tester {
+	async ActorClass DetailExpressionTest {
 		Interface {
-			Port portNotVisible : PEventdriven
 			SPP sppEvent: PEventdriven
+			Port portNotVisible: PEventdriven
 		}
 		Structure {
+			ServiceImplementation of sppEvent
+			Attribute numberArray [ 5 ]: int32
+			Attribute infoData: DDataNested
 			Port rPortEvent: PEventdriven
 			Port rPortData: PDatadriven
 			Port rReplEvent [5]: PEventdriven
 			conjugated Port cPortEvent: PEventdriven
 			conjugated Port cPortData: PDatadriven
-			conjugated Port cReplEvent [5]: PEventdriven
-			ServiceImplementation of sppEvent
-			SAP sapEvent: PTimer
-			Attribute numberArray[5] : int32
-			Attribute infoData : DDataNested
+			conjugated Port cReplEvent [*]: PEventdriven
 		}
 		Behavior {
 			Operation actorOp(param: int32): boolean {
 				"return true;"
 			}
 			StateMachine {
-				Transition init: initial -> idle
 				Transition eventTrans: idle -> state1 {
 					triggers {
 						<out1: cPortEvent guard {
@@ -54,9 +41,8 @@ RoomModel DetailExpressionTest {
 						"rReplEvent.out1(true); // broadcast"
 						"cPortEvent.in1();"
 						"cPortData.in1(32);"
-						"cReplEvent[3].in1();"
+						"cReplEvent[1].in1();"
 						"cReplEvent.in1(); // broadcast"
-						"sapEvent.startTimeout(1000);"
 						"sppEvent[4].out1(true);"
 						"sppEvent.out1(true); // broadcast"
 						"rPortEvent.regularOp(32);"
@@ -85,6 +71,7 @@ RoomModel DetailExpressionTest {
 						"rPortData.in1 == numberArray[3] && infoData.flag"
 					}
 				}
+				Transition init: initial -> idle
 				State idle
 				State state1
 				State state2
@@ -97,7 +84,7 @@ RoomModel DetailExpressionTest {
 			Message in1()
 		}
 		outgoing {
-			Message out1(accessibleMessageData:boolean)
+			Message out1(accessibleMessageData: boolean)
 		}
 		regular PortClass
 		{
@@ -139,20 +126,20 @@ RoomModel DetailExpressionTest {
 	}
 
 	DataClass DDataNested {
-		Attribute flag: boolean
-		Attribute array[5]: int32
-		Attribute nested: DData
-		Operation dataOp(number: int32){
+		Operation dataOp(number: int32) {
 			""
 		}
+		Attribute flag: boolean
+		Attribute array [ 5 ]: int32
+		Attribute nested: DData
 	}
 
 	DataClass DData {
-		Attribute iPAddr: string
-		Attribute tcpPort: int32
 		Operation dataOp(ip: string, port: int32) {
 			""
 		}
+		Attribute iPAddr: string
+		Attribute tcpPort: int32
 	}
 
 }

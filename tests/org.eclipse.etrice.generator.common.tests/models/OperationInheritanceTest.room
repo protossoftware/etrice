@@ -1,0 +1,113 @@
+RoomModel OperationInheritanceTest {
+
+	import room.basic.types.* from "Types.room"
+
+	import room.basic.etunit.* from "Tests.room"
+
+	async ActorClass OperationInheritanceTest extends BaseActor {
+		@TestInstance
+		Structure {
+			Attribute testDataClass: SubDataClass
+		}
+		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\"log/testlog\", \"OperationInheritanceTest\", \"org.eclipse.etrice.generator.common.tests.OperationInheritanceTest\", \"OperationInheritanceTest_case\");"
+				"ctorRefine = 2;"
+			}
+			dtor {
+				"// sub dtor"
+				"etUnit_closeAll(caseId);"
+			}
+			override Operation overriddenOperation() {
+				"valueSub = 2;"
+			}
+			StateMachine {
+				Transition init: initial -> finish {
+					action {
+						"baseOperation();"
+						"overriddenOperation();"
+						"// c: not supported yet"
+						"//testDataClass.baseOperation();"
+						"//testDataClass.overriddenOperation(caseId);"
+						""
+						"// refine ctor, override operations"
+						"// -- ActorClass"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, ctorBase);"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, ctorRefine);"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, valueBase);"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, valueSub);"
+						""
+						"// -- DataClass"
+						// c: not supported yet
+						"//EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, testDataClass.ctorBase);"
+						"//EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, testDataClass.ctorRefine);"
+						"//EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, testDataClass.valueBase);"
+						"//EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, testDataClass.valueSub);"
+						"//EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 0, testDataClass.doNotCallOverride);"
+						"etUnit_testFinished(caseId);"
+					}
+				}
+				State finish
+			}
+		}
+	}
+
+	abstract async ActorClass BaseActor {
+		Structure {
+			Attribute caseId : int32
+			Attribute ctorBase: int32 = "0"
+			Attribute ctorRefine: int32 = "0"
+			Attribute valueBase: int32 = "0"
+			Attribute valueSub: int32 = "0"
+		}
+		Behavior {
+			ctor {
+				"ctorBase = 1;"
+				"ctorRefine = 1;"
+			}
+			dtor {
+				"// base dtor"
+			}
+			Operation overriddenOperation() {
+				"EXPECT_FALSE(caseId, \"<|MODEL_LOCATION|>\", true);"
+			}
+			Operation baseOperation() {
+				"valueBase = 1;"
+			}
+		}
+	}
+
+	DataClass BaseDataClass {
+		Operation overriddenOperation() {
+			"doNotCallOverride = 1;"
+		}
+		Operation baseOperation() {
+			"valueBase = 1;"
+		}
+		ctor {
+			"ctorBase = 1;"
+			"ctorRefine = 1;"
+		}
+		dtor {
+			"// base dtor"
+		}
+		Attribute ctorBase: int32 = "0"
+		Attribute ctorRefine: int32 = "0"
+		Attribute valueBase: int32 = "0"
+		Attribute valueSub: int32 = "0"
+		Attribute doNotCallOverride: int32 = "0"
+	}
+
+	DataClass SubDataClass extends BaseDataClass {
+		override Operation overriddenOperation() {
+			"valueSub = 2;"
+		}
+		ctor {
+			"ctorRefine = 2;"
+		}
+		dtor {
+			"// sub dtor"
+		}
+	}
+
+}

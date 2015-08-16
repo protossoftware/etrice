@@ -1,5 +1,5 @@
-PosixDebug
-MinGWDebug
+PosixLinux
+WindowsMinGW
 bin
 output
 results
