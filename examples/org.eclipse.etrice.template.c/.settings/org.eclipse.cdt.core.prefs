@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/ECLIPSE_MODE/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/ECLIPSE_MODE/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/ECLIPSE_MODE/value=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/MODELLIB_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/MODELLIB_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/MODELLIB_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.modellib.c}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/RUNTIME_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/RUNTIME_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/RUNTIME_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.runtime.c}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/TARGET_PLATFORM/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/TARGET_PLATFORM/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/TARGET_PLATFORM/value=MT_WIN_MinGW
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1937396059.1384391826/appendContributed=true

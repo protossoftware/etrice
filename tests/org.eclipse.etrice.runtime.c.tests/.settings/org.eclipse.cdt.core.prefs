@@ -1,3 +1,16 @@
 eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/ECLIPSE_MODE/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/ECLIPSE_MODE/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/ECLIPSE_MODE/value=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/RUNTIME_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/RUNTIME_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/RUNTIME_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.runtime.c}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887.1287683265/appendContributed=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887/RUNTIME_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887/RUNTIME_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887/RUNTIME_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.runtime.c}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921.786066887/appendContributed=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921/append=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1638834921/appendContributed=false

@@ -9,6 +9,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/util"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/WindowsMinGW"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
@@ -39,8 +40,8 @@
 								<option id="gnu.c.compiler.option.include.paths.1375092420" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/config}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_WIN_MinGW}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/util}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_WIN_MinGW}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.316560634" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -49,7 +50,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -63,6 +64,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/util"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/LinuxPosix"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
@@ -76,7 +78,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052" name="LinuxPosix" parent="cdt.managedbuild.config.gnu.mingw.lib.debug">
+				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052" name="LinuxPosix" parent="cdt.managedbuild.config.gnu.mingw.lib.debug">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.base.930702274" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1321111210" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
@@ -90,6 +92,7 @@
 								<option id="gnu.c.compiler.option.include.paths.1660194049" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/util}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_POSIX_GENERIC_GCC}&quot;"/>
 								</option>
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.1123878180" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" valueType="enumerated"/>
@@ -104,7 +107,66 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/MT_WIN_MinGW|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_WIN_MinGW|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023" moduleId="org.eclipse.cdt.core.settings" name="ExternalMakefile">
+				<externalSettings>
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/org.eclipse.etrice.runtime.c"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/util"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/ExternalMakefile"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/buildTools"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023" name="ExternalMakefile" parent="cdt.managedbuild.config.gnu.mingw.lib.debug">
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023." name="/" resourcePath="">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.lib.debug.1317763190" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.lib.debug">
+							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.lib.debug.1009481846" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.lib.debug"/>
+							<builder autoBuildTarget="all" buildPath="${workspace_loc:/org.eclipse.etrice.runtime.c}" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.target.gnu.builder.base.165982334" incrementalBuildTarget="build" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="false" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug.1640372698" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.lib.debug">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.2119013694" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug.226708852" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.lib.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug.2050526925" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.lib.debug">
+								<option id="gnu.cpp.compiler.mingw.lib.debug.option.optimization.level.371457215" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.lib.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.mingw.lib.debug.option.debugging.level.241076012" name="Debug Level" superClass="gnu.cpp.compiler.mingw.lib.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.354393464" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug">
+								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.lib.debug.option.optimization.level.1064029306" name="Optimization Level" superClass="gnu.c.compiler.mingw.lib.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option id="gnu.c.compiler.mingw.lib.debug.option.debugging.level.1609123346" name="Debug Level" superClass="gnu.c.compiler.mingw.lib.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.136770196" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/util}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_WIN_MinGW}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1429574570" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.base.958536019" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.1310847882" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -121,6 +183,9 @@
 		<configuration configurationName="MinGWDebug">
 			<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.runtime.c"/>
 		</configuration>
+		<configuration configurationName="ExternalMakefile">
+			<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.runtime.c"/>
+		</configuration>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/org.eclipse.etrice.runtime.c"/>
 		</configuration>
@@ -128,10 +193,13 @@
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052.;cdt.managedbuild.tool.gnu.c.compiler.base.183127152;cdt.managedbuild.tool.gnu.c.compiler.input.2145340965">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.;cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.62527096;cdt.managedbuild.tool.gnu.c.compiler.input.316560634">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052.;cdt.managedbuild.tool.gnu.c.compiler.base.183127152;cdt.managedbuild.tool.gnu.c.compiler.input.2145340965">
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023.;cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.354393464;cdt.managedbuild.tool.gnu.c.compiler.input.1429574570">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
