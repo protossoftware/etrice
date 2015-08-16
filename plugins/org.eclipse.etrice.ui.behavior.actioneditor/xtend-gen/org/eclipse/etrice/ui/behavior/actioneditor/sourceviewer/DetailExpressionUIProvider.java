@@ -269,9 +269,8 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
         if (!_matched_1) {
           if (data instanceof Port) {
             boolean _and = false;
-            int _multiplicity = ((Port)data).getMultiplicity();
-            boolean _greaterThan = (_multiplicity > 1);
-            if (!_greaterThan) {
+            boolean _isReplicated = ((Port)data).isReplicated();
+            if (!_isReplicated) {
               _and = false;
             } else {
               boolean _isEventDriven = ((Port)data).isEventDriven();

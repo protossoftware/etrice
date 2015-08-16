@@ -122,15 +122,17 @@ class ProcedureHelpers {
 	}
 	
 	/**
+	 * Attributes will be public. Should be protected, but not supported in C.
+	 * 
 	 * @param attribute an {@link Attribute}
 	 * @return the code declaring the attribute
 	 */
 	def attributeDeclaration(Attribute attribute){
 	'''
 		«IF attribute.size==0»
-			«attribute.type.type.typeName»«IF attribute.type.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
+			«languageExt.accessLevelPublic» «attribute.type.type.typeName»«IF attribute.type.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
 		«ELSE»
-			«languageExt.arrayDeclaration(attribute.type.type.typeName, attribute.size, attribute.name, attribute.type.ref)»;
+			«languageExt.accessLevelPublic» «languageExt.arrayDeclaration(attribute.type.type.typeName, attribute.size, attribute.name, attribute.type.ref)»;
 		«ENDIF» 	
 	'''	
 	}

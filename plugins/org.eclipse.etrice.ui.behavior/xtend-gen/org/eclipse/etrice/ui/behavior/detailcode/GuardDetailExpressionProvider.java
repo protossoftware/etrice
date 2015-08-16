@@ -98,9 +98,8 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
         boolean _matched = false;
         if (!_matched) {
           if (it instanceof Port) {
-            int _multiplicity = ((Port)it).getMultiplicity();
-            boolean _greaterThan = (_multiplicity > 1);
-            if (_greaterThan) {
+            boolean _isReplicated = ((Port)it).isReplicated();
+            if (_isReplicated) {
               _matched=true;
               _switchResult = GuardDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
             }

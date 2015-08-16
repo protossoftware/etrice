@@ -15,12 +15,9 @@ package org.eclipse.etrice.core.genmodel.etricegen.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
@@ -128,7 +125,7 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 			if (pi.getKind()==PortKind.RELAY)
 				return false;
 			
-			return pi.getPort().getMultiplicity()>1;
+			return pi.getPort().isReplicated();
 		}
 		else if (this instanceof SAPInstance)
 			return false;
@@ -161,7 +158,7 @@ public class InterfaceItemInstanceImpl extends InstanceBaseImpl implements Inter
 		if (this instanceof PortInstance)
 			if (((PortInstance) this).getKind()==PortKind.RELAY)
 				return true;
-
+		
 		return false;
 	}
 

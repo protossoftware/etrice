@@ -202,6 +202,8 @@ public class ProcedureHelpers {
   }
   
   /**
+   * Attributes will be public. Should be protected, but not supported in C.
+   * 
    * @param attribute an {@link Attribute}
    * @return the code declaring the attribute
    */
@@ -211,6 +213,9 @@ public class ProcedureHelpers {
       int _size = attribute.getSize();
       boolean _equals = (_size == 0);
       if (_equals) {
+        String _accessLevelPublic = this.languageExt.accessLevelPublic();
+        _builder.append(_accessLevelPublic, "");
+        _builder.append(" ");
         RefableType _type = attribute.getType();
         DataType _type_1 = _type.getType();
         String _typeName = this._typeHelpers.typeName(_type_1);
@@ -229,6 +234,9 @@ public class ProcedureHelpers {
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       } else {
+        String _accessLevelPublic_1 = this.languageExt.accessLevelPublic();
+        _builder.append(_accessLevelPublic_1, "");
+        _builder.append(" ");
         RefableType _type_3 = attribute.getType();
         DataType _type_4 = _type_3.getType();
         String _typeName_1 = this._typeHelpers.typeName(_type_4);

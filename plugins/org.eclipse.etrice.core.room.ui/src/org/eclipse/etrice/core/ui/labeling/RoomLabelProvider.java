@@ -243,9 +243,13 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		return pc.getName()+": "+pc.getProtocol().getName();
 	}
 	
-	String text(ActorClass ac) {
+	StyledString text(ActorClass ac) {
 		String base = ac.getBase()!=null? " extends "+ac.getActorBase().getName():"";
-		return ac.getName()+base;
+		StyledString result = new StyledString(ac.getName()+base);
+		int pos = result.toString().indexOf(" extends ");
+		if (pos>=0)
+			result.setStyle(pos+1, 7, getKeywordStyler());
+		return result;
 	}
 	
 	String text(Port p) {

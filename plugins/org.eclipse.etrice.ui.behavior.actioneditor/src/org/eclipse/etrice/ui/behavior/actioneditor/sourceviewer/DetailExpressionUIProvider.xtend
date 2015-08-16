@@ -127,7 +127,7 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 		if (feature.postfix == ExpressionPostfix.NONE) {
 			switch data {
 				SPP case data.isEventDriven/* fall through */,
-				Port case data.multiplicity > 1 && data.isEventDriven:
+				Port case data.isReplicated && data.isEventDriven:
 					completionInfo = completionInfo + " (broadcast)"
 			}
 		}

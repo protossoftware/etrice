@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -69,8 +70,12 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
@@ -111,11 +116,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkImportedNamespace(Import imp) {
-		if (imp.getImportedNamespace()==null)
-			return;
-		
 		if (imp.getImportURI()==null)
 			return;
+		
+		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
+		QualifiedName importedFQN;
+		boolean isWildcard = false;
+		try {
+			QualifiedName orig = nameConverter.toQualifiedName(imp.getImportedNamespace());
+			isWildcard = orig.getLastSegment().equals("*");
+			importedFQN = (isWildcard) ? orig.skipLast(1) : orig;
+		} catch(IllegalArgumentException e){
+			return;
+		}
 		
 		String uriString = importUriResolver.resolve(imp);
 		if(uriString == null) {
@@ -126,6 +139,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		URI uri = URI.createURI(uriString);
 		ResourceSet rs = imp.eResource().getResourceSet();
 
+		RoomModel importedModel;
 		try {
 			Resource res = rs.getResource(uri, true);
 			if (res==null)
@@ -143,16 +157,33 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					warning("referenced model is no ROOM model", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
-			
-			RoomModel model = (RoomModel) res.getContents().get(0);
-			if (!imp.getImportedNamespace().equals(model.getName()+".*")) {
-				error("the imported namespace should be '"+model.getName()+".*'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, model.getName()+".*");
-			}
+			importedModel = (RoomModel) res.getContents().get(0);
 		}
 		catch (RuntimeException re) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
+		
+		final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
+		if (resourceServiceProvider==null)
+			return;
+		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
+		IResourceDescription description = manager.getResourceDescription(importedModel.eResource());
+		
+		// TODO check for empty namespace
+		boolean exportedNameMatch = false;
+		if (description != null) {
+			Iterator<IEObjectDescription> iter = description.getExportedObjects().iterator();
+			while(iter.hasNext()){
+				QualifiedName exportedFQN = iter.next().getQualifiedName();
+				if(exportedNameMatch |= importedFQN.equals(exportedFQN))
+					break;	
+			}
+		}
+		if(!exportedNameMatch)
+			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, importedModel.getName()+".*");
+			
+		
 	}
 	
 	@Check
@@ -669,6 +700,18 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					a.getType().getName(),
 					a.getType().getName()+" {target = "+invalidTargetType.getLiteral()+" ...",
 					invalidTargetType.getLiteral());
+		}
+	}
+	
+	@Check
+	public void checkTestInstanceAnnotation(Annotation annotation){
+		if(annotation.getType() == null || !"TestInstance".equals(annotation.getType().getName()))
+				return;
+		
+		RoomClass roomClass = roomHelpers.getRoomClass(annotation);
+		if(roomClass instanceof SubSystemClass){
+			if(((SubSystemClass)roomClass).getThreads().size() > 0)
+				error("Annotation 'TestInstance' does not allow (explicit) LogicalThreads", annotation, null);
 		}
 	}
 	

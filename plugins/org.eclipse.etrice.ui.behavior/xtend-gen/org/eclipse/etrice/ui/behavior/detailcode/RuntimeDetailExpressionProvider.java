@@ -38,9 +38,8 @@ public class RuntimeDetailExpressionProvider extends DefaultDetailExpressionProv
           boolean _matched_1 = false;
           if (!_matched_1) {
             if (obj instanceof Port) {
-              int _multiplicity = ((Port)obj).getMultiplicity();
-              boolean _greaterThan = (_multiplicity > 1);
-              if (_greaterThan) {
+              boolean _isReplicated = ((Port)obj).isReplicated();
+              if (_isReplicated) {
                 _matched_1=true;
               }
             }

@@ -56,7 +56,7 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 			scope += createExprFeature(currentEventMessage.data)
 		scope += actorClass.allInterfaceItems.filter[isDataDriven && !isConjugated].map[
 			switch it {
-				Port case multiplicity > 1: createExprFeature(ExpressionPostfix.BRACKETS)
+				Port case isReplicated: createExprFeature(ExpressionPostfix.BRACKETS)
 				default: createExprFeature
 			}]
 		scope += actorClass.latestOperations.map[createExprFeature(ExpressionPostfix.PARENTHESES)]

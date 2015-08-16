@@ -41,6 +41,7 @@ import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo;
 import org.eclipse.etrice.generator.fsm.base.StdLineOutput;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
+import org.eclipse.etrice.generator.generic.TestInstanceCreator;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -292,7 +293,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 		else if (arg.startsWith("-")) {
 			return usageError("unrecognized option '"+arg+"'");
 		}
-		else {
+		else if(!arg.isEmpty()){
 			generatorSettings.getInputModelURIs().add(arg);
 		}
 		
@@ -427,6 +428,12 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
 	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
+		// create instance and mapping for test instances
+		if(!new TestInstanceCreator(logger).createInstancesAndMapping(getResourceSet())){
+			logger.logError("-- terminating", null);
+			return null;
+		}
+		
 		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
 		for (Resource resource : getResourceSet().getResources()) {
@@ -440,7 +447,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			logger.logError("-- terminating", null);
 			return null;
 		}
-		else {
+		else {			
 			logger.logInfo("-- creating generator model");
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
 			Root gmRoot = gmb.createGeneratorModel(rml, asLibrary);

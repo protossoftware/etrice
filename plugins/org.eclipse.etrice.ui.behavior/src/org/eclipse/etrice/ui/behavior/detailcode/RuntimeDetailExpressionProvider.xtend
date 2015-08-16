@@ -28,7 +28,7 @@ class RuntimeDetailExpressionProvider extends DefaultDetailExpressionProvider {
 			InterfaceItem: {
 				if (ctx.postfix == ExpressionPostfix.NONE) {
 					switch obj {
-						Port case obj.multiplicity > 1/* fall through */,
+						Port case obj.replicated/* fall through */,
 						SPP: {
 							// not supported yet by code translation
 							//scope += createRtMethodExprFeature(RT_METHOD_GET_REPLICATION, obj)

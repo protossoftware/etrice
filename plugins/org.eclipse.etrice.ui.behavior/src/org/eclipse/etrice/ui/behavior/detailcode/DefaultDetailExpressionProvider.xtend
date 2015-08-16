@@ -33,11 +33,11 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		actorClass.allInterfaceItems.forEach [
 			switch it {
 				SPP case isEventDriven/* fall through */,
-				Port case isEventDriven && multiplicity > 1: {
+				Port case isEventDriven && isReplicated: {
 					scope += createExprFeature // additional feature for broadcast 
 					scope += createExprFeature(ExpressionPostfix.BRACKETS)
 				}
-				Port case multiplicity > 1/* fall through  */,
+				Port case isReplicated/* fall through  */,
 				SPP:
 					scope += createExprFeature(ExpressionPostfix.BRACKETS)
 				default:

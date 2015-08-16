@@ -69,9 +69,8 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
               if (!_isEventDriven) {
                 _and = false;
               } else {
-                int _multiplicity = ((Port)it).getMultiplicity();
-                boolean _greaterThan = (_multiplicity > 1);
-                _and = _greaterThan;
+                boolean _isReplicated = ((Port)it).isReplicated();
+                _and = _isReplicated;
               }
               if (_and) {
                 _matched=true;
@@ -87,9 +86,8 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
         }
         if (!_matched) {
           if (it instanceof Port) {
-            int _multiplicity = ((Port)it).getMultiplicity();
-            boolean _greaterThan = (_multiplicity > 1);
-            if (_greaterThan) {
+            boolean _isReplicated = ((Port)it).isReplicated();
+            if (_isReplicated) {
               _matched=true;
             }
           }
