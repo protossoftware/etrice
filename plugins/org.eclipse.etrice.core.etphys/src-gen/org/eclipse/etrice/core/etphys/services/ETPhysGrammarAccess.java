@@ -624,25 +624,34 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getMULTI_THREADEDMultiThreadedKeyword_1_0() { return cMULTI_THREADEDMultiThreadedKeyword_1_0; }
 	}
 	
-	private PhysicalModelElements pPhysicalModel;
-	private PhysicalSystemElements pPhysicalSystem;
-	private NodeRefElements pNodeRef;
-	private NodeClassElements pNodeClass;
-	private PhysicalThreadElements pPhysicalThread;
-	private ExecModeElements unknownRuleExecMode;
-	private RuntimeClassElements pRuntimeClass;
-	private ThreadModelElements unknownRuleThreadModel;
-	private PRIOElements pPRIO;
+	private final PhysicalModelElements pPhysicalModel;
+	private final PhysicalSystemElements pPhysicalSystem;
+	private final NodeRefElements pNodeRef;
+	private final NodeClassElements pNodeClass;
+	private final PhysicalThreadElements pPhysicalThread;
+	private final ExecModeElements unknownRuleExecMode;
+	private final RuntimeClassElements pRuntimeClass;
+	private final ThreadModelElements unknownRuleThreadModel;
+	private final PRIOElements pPRIO;
 	
 	private final Grammar grammar;
 
-	private BaseGrammarAccess gaBase;
+	private final BaseGrammarAccess gaBase;
 
 	@Inject
 	public ETPhysGrammarAccess(GrammarProvider grammarProvider,
 		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
+		this.pPhysicalModel = new PhysicalModelElements();
+		this.pPhysicalSystem = new PhysicalSystemElements();
+		this.pNodeRef = new NodeRefElements();
+		this.pNodeClass = new NodeClassElements();
+		this.pPhysicalThread = new PhysicalThreadElements();
+		this.unknownRuleExecMode = new ExecModeElements();
+		this.pRuntimeClass = new RuntimeClassElements();
+		this.unknownRuleThreadModel = new ThreadModelElements();
+		this.pPRIO = new PRIOElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -676,7 +685,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//	"PhysicalModel" name=FQN "{" imports+=Import* (systems+=PhysicalSystem | nodeClasses+=NodeClass |
 	//	runtimeClasses+=RuntimeClass)* "}";
 	public PhysicalModelElements getPhysicalModelAccess() {
-		return (pPhysicalModel != null) ? pPhysicalModel : (pPhysicalModel = new PhysicalModelElements());
+		return pPhysicalModel;
 	}
 	
 	public ParserRule getPhysicalModelRule() {
@@ -686,7 +695,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//PhysicalSystem:
 	//	"PhysicalSystem" name=ID docu=Documentation? "{" nodeRefs+=NodeRef* "}";
 	public PhysicalSystemElements getPhysicalSystemAccess() {
-		return (pPhysicalSystem != null) ? pPhysicalSystem : (pPhysicalSystem = new PhysicalSystemElements());
+		return pPhysicalSystem;
 	}
 	
 	public ParserRule getPhysicalSystemRule() {
@@ -696,7 +705,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//NodeRef:
 	//	"NodeRef" name=ID ":" type=[NodeClass|FQN] docu=Documentation?;
 	public NodeRefElements getNodeRefAccess() {
-		return (pNodeRef != null) ? pNodeRef : (pNodeRef = new NodeRefElements());
+		return pNodeRef;
 	}
 	
 	public ParserRule getNodeRefRule() {
@@ -707,7 +716,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
 	//	"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}";
 	public NodeClassElements getNodeClassAccess() {
-		return (pNodeClass != null) ? pNodeClass : (pNodeClass = new NodeClassElements());
+		return pNodeClass;
 	}
 	
 	public ParserRule getNodeClassRule() {
@@ -719,7 +728,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//	"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
 	//	msgpoolsize=INT) "}";
 	public PhysicalThreadElements getPhysicalThreadAccess() {
-		return (pPhysicalThread != null) ? pPhysicalThread : (pPhysicalThread = new PhysicalThreadElements());
+		return pPhysicalThread;
 	}
 	
 	public ParserRule getPhysicalThreadRule() {
@@ -729,7 +738,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//enum ExecMode:
 	//	POLLED="polled" | BLOCKED="blocked" | MIXED="mixed";
 	public ExecModeElements getExecModeAccess() {
-		return (unknownRuleExecMode != null) ? unknownRuleExecMode : (unknownRuleExecMode = new ExecModeElements());
+		return unknownRuleExecMode;
 	}
 	
 	public EnumRule getExecModeRule() {
@@ -739,7 +748,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//RuntimeClass:
 	//	"RuntimeClass" name=ID docu=Documentation? "{" "model" "=" threadModel=ThreadModel "}";
 	public RuntimeClassElements getRuntimeClassAccess() {
-		return (pRuntimeClass != null) ? pRuntimeClass : (pRuntimeClass = new RuntimeClassElements());
+		return pRuntimeClass;
 	}
 	
 	public ParserRule getRuntimeClassRule() {
@@ -749,7 +758,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//enum ThreadModel:
 	//	SINGLE_THREADED="singleThreaded" | MULTI_THREADED="multiThreaded";
 	public ThreadModelElements getThreadModelAccess() {
-		return (unknownRuleThreadModel != null) ? unknownRuleThreadModel : (unknownRuleThreadModel = new ThreadModelElements());
+		return unknownRuleThreadModel;
 	}
 	
 	public EnumRule getThreadModelRule() {
@@ -759,7 +768,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//PRIO returns ecore::EInt hidden():
 	//	("+" | "-")? INT;
 	public PRIOElements getPRIOAccess() {
-		return (pPRIO != null) ? pPRIO : (pPRIO = new PRIOElements());
+		return pPRIO;
 	}
 	
 	public ParserRule getPRIORule() {
@@ -1109,8 +1118,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBase.getSTRINGRule();
 	} 

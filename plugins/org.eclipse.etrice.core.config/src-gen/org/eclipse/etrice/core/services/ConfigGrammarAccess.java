@@ -962,34 +962,52 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private ConfigModelElements pConfigModel;
-	private ConfigElementElements pConfigElement;
-	private SubSystemConfigElements pSubSystemConfig;
-	private DynamicConfigElements pDynamicConfig;
-	private ActorClassConfigElements pActorClassConfig;
-	private ActorInstanceConfigElements pActorInstanceConfig;
-	private ProtocolClassConfigElements pProtocolClassConfig;
-	private PortClassConfigElements pPortClassConfig;
-	private PortInstanceConfigElements pPortInstanceConfig;
-	private AttrConfigElements pAttrConfig;
-	private AttrClassConfigElements pAttrClassConfig;
-	private AttrInstanceConfigElements pAttrInstanceConfig;
-	private ConfigValueArrayElements pConfigValueArray;
-	private ConfigValueElements pConfigValue;
-	private LiteralConfigValueElements pLiteralConfigValue;
-	private EnumConfigValueElements pEnumConfigValue;
-	private RefPathElements pRefPath;
-	private RefSegmentElements pRefSegment;
+	private final ConfigModelElements pConfigModel;
+	private final ConfigElementElements pConfigElement;
+	private final SubSystemConfigElements pSubSystemConfig;
+	private final DynamicConfigElements pDynamicConfig;
+	private final ActorClassConfigElements pActorClassConfig;
+	private final ActorInstanceConfigElements pActorInstanceConfig;
+	private final ProtocolClassConfigElements pProtocolClassConfig;
+	private final PortClassConfigElements pPortClassConfig;
+	private final PortInstanceConfigElements pPortInstanceConfig;
+	private final AttrConfigElements pAttrConfig;
+	private final AttrClassConfigElements pAttrClassConfig;
+	private final AttrInstanceConfigElements pAttrInstanceConfig;
+	private final ConfigValueArrayElements pConfigValueArray;
+	private final ConfigValueElements pConfigValue;
+	private final LiteralConfigValueElements pLiteralConfigValue;
+	private final EnumConfigValueElements pEnumConfigValue;
+	private final RefPathElements pRefPath;
+	private final RefSegmentElements pRefSegment;
 	
 	private final Grammar grammar;
 
-	private BaseGrammarAccess gaBase;
+	private final BaseGrammarAccess gaBase;
 
 	@Inject
 	public ConfigGrammarAccess(GrammarProvider grammarProvider,
 		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
+		this.pConfigModel = new ConfigModelElements();
+		this.pConfigElement = new ConfigElementElements();
+		this.pSubSystemConfig = new SubSystemConfigElements();
+		this.pDynamicConfig = new DynamicConfigElements();
+		this.pActorClassConfig = new ActorClassConfigElements();
+		this.pActorInstanceConfig = new ActorInstanceConfigElements();
+		this.pProtocolClassConfig = new ProtocolClassConfigElements();
+		this.pPortClassConfig = new PortClassConfigElements();
+		this.pPortInstanceConfig = new PortInstanceConfigElements();
+		this.pAttrConfig = new AttrConfigElements();
+		this.pAttrClassConfig = new AttrClassConfigElements();
+		this.pAttrInstanceConfig = new AttrInstanceConfigElements();
+		this.pConfigValueArray = new ConfigValueArrayElements();
+		this.pConfigValue = new ConfigValueElements();
+		this.pLiteralConfigValue = new LiteralConfigValueElements();
+		this.pEnumConfigValue = new EnumConfigValueElements();
+		this.pRefPath = new RefPathElements();
+		this.pRefSegment = new RefSegmentElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1022,7 +1040,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//ConfigModel:
 	//	"ConfigModel" name=FQN "{" imports+=Import* configElements+=ConfigElement* "}";
 	public ConfigModelElements getConfigModelAccess() {
-		return (pConfigModel != null) ? pConfigModel : (pConfigModel = new ConfigModelElements());
+		return pConfigModel;
 	}
 	
 	public ParserRule getConfigModelRule() {
@@ -1032,7 +1050,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//ConfigElement:
 	//	SubSystemConfig | ActorClassConfig | ActorInstanceConfig | ProtocolClassConfig;
 	public ConfigElementElements getConfigElementAccess() {
-		return (pConfigElement != null) ? pConfigElement : (pConfigElement = new ConfigElementElements());
+		return pConfigElement;
 	}
 	
 	public ParserRule getConfigElementRule() {
@@ -1042,7 +1060,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//SubSystemConfig:
 	//	"SubSystemConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "{" dynConfig=DynamicConfig "}";
 	public SubSystemConfigElements getSubSystemConfigAccess() {
-		return (pSubSystemConfig != null) ? pSubSystemConfig : (pSubSystemConfig = new SubSystemConfigElements());
+		return pSubSystemConfig;
 	}
 	
 	public ParserRule getSubSystemConfigRule() {
@@ -1053,7 +1071,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	"dynamic configuration" "{" (("file path" filePath=STRING | ("user import" userCode1=STRING) ("user constructor"
 	//	userCode2=STRING)) & ("polling interval" polling=TIME)?) "}";
 	public DynamicConfigElements getDynamicConfigAccess() {
-		return (pDynamicConfig != null) ? pDynamicConfig : (pDynamicConfig = new DynamicConfigElements());
+		return pDynamicConfig;
 	}
 	
 	public ParserRule getDynamicConfigRule() {
@@ -1063,7 +1081,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//ActorClassConfig:
 	//	"ActorClassConfig" actor=[room::ActorClass|FQN] "{" attributes+=AttrClassConfig* "}";
 	public ActorClassConfigElements getActorClassConfigAccess() {
-		return (pActorClassConfig != null) ? pActorClassConfig : (pActorClassConfig = new ActorClassConfigElements());
+		return pActorClassConfig;
 	}
 	
 	public ParserRule getActorClassConfigRule() {
@@ -1074,7 +1092,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	"ActorInstanceConfig" root=[room::LogicalSystem|FQN] "/" subSystem=[room::SubSystemRef] "/" path=RefPath "{"
 	//	(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*) "}";
 	public ActorInstanceConfigElements getActorInstanceConfigAccess() {
-		return (pActorInstanceConfig != null) ? pActorInstanceConfig : (pActorInstanceConfig = new ActorInstanceConfigElements());
+		return pActorInstanceConfig;
 	}
 	
 	public ParserRule getActorInstanceConfigRule() {
@@ -1085,7 +1103,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	"ProtocolClassConfig" protocol=[room::ProtocolClass|FQN] "{" (("regular" regular=PortClassConfig)? & (("conjugate" |
 	//	"conjugated") conjugated=PortClassConfig)?) "}";
 	public ProtocolClassConfigElements getProtocolClassConfigAccess() {
-		return (pProtocolClassConfig != null) ? pProtocolClassConfig : (pProtocolClassConfig = new ProtocolClassConfigElements());
+		return pProtocolClassConfig;
 	}
 	
 	public ParserRule getProtocolClassConfigRule() {
@@ -1095,7 +1113,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//PortClassConfig:
 	//	{PortClassConfig} "Port" "{" attributes+=AttrClassConfig* "}";
 	public PortClassConfigElements getPortClassConfigAccess() {
-		return (pPortClassConfig != null) ? pPortClassConfig : (pPortClassConfig = new PortClassConfigElements());
+		return pPortClassConfig;
 	}
 	
 	public ParserRule getPortClassConfigRule() {
@@ -1105,7 +1123,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//PortInstanceConfig:
 	//	"InterfaceItem" item=[room::InterfaceItem] "{" attributes+=AttrInstanceConfig* "}";
 	public PortInstanceConfigElements getPortInstanceConfigAccess() {
-		return (pPortInstanceConfig != null) ? pPortInstanceConfig : (pPortInstanceConfig = new PortInstanceConfigElements());
+		return pPortInstanceConfig;
 	}
 	
 	public ParserRule getPortInstanceConfigRule() {
@@ -1115,7 +1133,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//AttrConfig:
 	//	AttrClassConfig | AttrInstanceConfig;
 	public AttrConfigElements getAttrConfigAccess() {
-		return (pAttrConfig != null) ? pAttrConfig : (pAttrConfig = new AttrConfigElements());
+		return pAttrConfig;
 	}
 	
 	public ParserRule getAttrConfigRule() {
@@ -1126,7 +1144,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" (("min" "=" min=NumberLiteral)? ("max" "="
 	//	max=NumberLiteral)? attributes+=AttrClassConfig*) "}")?;
 	public AttrClassConfigElements getAttrClassConfigAccess() {
-		return (pAttrClassConfig != null) ? pAttrClassConfig : (pAttrClassConfig = new AttrClassConfigElements());
+		return pAttrClassConfig;
 	}
 	
 	public ParserRule getAttrClassConfigRule() {
@@ -1137,7 +1155,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Attr" attribute=[room::Attribute] ("=" value=ConfigValueArray)? ("{" ((dynConfig?="dynamic configuration"
 	//	(readOnly?="read" | "write"))? attributes+=AttrInstanceConfig*) "}")?;
 	public AttrInstanceConfigElements getAttrInstanceConfigAccess() {
-		return (pAttrInstanceConfig != null) ? pAttrInstanceConfig : (pAttrInstanceConfig = new AttrInstanceConfigElements());
+		return pAttrInstanceConfig;
 	}
 	
 	public ParserRule getAttrInstanceConfigRule() {
@@ -1147,7 +1165,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//ConfigValueArray:
 	//	values+=ConfigValue ("," values+=ConfigValue)*;
 	public ConfigValueArrayElements getConfigValueArrayAccess() {
-		return (pConfigValueArray != null) ? pConfigValueArray : (pConfigValueArray = new ConfigValueArrayElements());
+		return pConfigValueArray;
 	}
 	
 	public ParserRule getConfigValueArrayRule() {
@@ -1157,7 +1175,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//ConfigValue:
 	//	LiteralConfigValue | EnumConfigValue;
 	public ConfigValueElements getConfigValueAccess() {
-		return (pConfigValue != null) ? pConfigValue : (pConfigValue = new ConfigValueElements());
+		return pConfigValue;
 	}
 	
 	public ParserRule getConfigValueRule() {
@@ -1167,7 +1185,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//LiteralConfigValue:
 	//	value=Literal;
 	public LiteralConfigValueElements getLiteralConfigValueAccess() {
-		return (pLiteralConfigValue != null) ? pLiteralConfigValue : (pLiteralConfigValue = new LiteralConfigValueElements());
+		return pLiteralConfigValue;
 	}
 	
 	public ParserRule getLiteralConfigValueRule() {
@@ -1177,7 +1195,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//EnumConfigValue:
 	//	type=[room::EnumerationType] "." value=[room::EnumLiteral];
 	public EnumConfigValueElements getEnumConfigValueAccess() {
-		return (pEnumConfigValue != null) ? pEnumConfigValue : (pEnumConfigValue = new EnumConfigValueElements());
+		return pEnumConfigValue;
 	}
 	
 	public ParserRule getEnumConfigValueRule() {
@@ -1187,7 +1205,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//RefPath:
 	//	refs+=RefSegment ("/" refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
-		return (pRefPath != null) ? pRefPath : (pRefPath = new RefPathElements());
+		return pRefPath;
 	}
 	
 	public ParserRule getRefPathRule() {
@@ -1197,7 +1215,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//RefSegment:
 	//	ref=ID (":" idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
-		return (pRefSegment != null) ? pRefSegment : (pRefSegment = new RefSegmentElements());
+		return pRefSegment;
 	}
 	
 	public ParserRule getRefSegmentRule() {
@@ -1547,8 +1565,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBase.getSTRINGRule();
 	} 

@@ -31,7 +31,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Import"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Import"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of all imported room models. The config elements reference these imports.&#xD;&#xA;"/>
@@ -53,12 +53,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class defines settings with a sub system scope.&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the logical system that contains the {@link org.eclipse.etrice.core.room.SubSystemRef sub system reference}.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the sub system reference.&#xD;&#xA;"/>
       </eAnnotations>
@@ -99,7 +99,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.ActorClass actor class}.&#xD;&#xA;The configuration defines the default values for all instances of the {@link #getActor actor}.&#xD;&#xA;The values are applied at generation time.&#xD;&#xA;The config sub elements are:&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>{@link AttrClassConfig attribute class config}&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actor" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actor" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the actor class.&#xD;&#xA;"/>
       </eAnnotations>
@@ -115,12 +115,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.ActorRef actor instance}.&#xD;&#xA;The configuration defines values for this actor instance and overrides the default values from the corresponding class config.&#xD;&#xA;The values are applied at generation time.&#xD;&#xA;The config sub elements are:&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>{@link AttrInstanceConfig attribute instance config}&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//LogicalSystem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the logical system that contains the {@link #getSubSystem sub system}.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystem" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemRef">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the sub system that contains the {@link #getPath actor instance}.&#xD;&#xA;"/>
       </eAnnotations>
@@ -148,7 +148,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.ProtocolClass protocol class}.&#xD;&#xA;The config sub elements are:&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>a {@link PortClassConfig port class config} for the regular port class&lt;/li>&#xD;&#xA;&#x9;&lt;li>a {@link PortClassConfig port class config} for the conjugate port class&lt;/li>&#xD;&#xA;&lt;/ul>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the protocol class.&#xD;&#xA;"/>
       </eAnnotations>
@@ -181,7 +181,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.InterfaceItem interface item} (e.g. port instance).&#xD;&#xA;The configuration defines values for this interface item and overrides the default values from the corresponding class config.&#xD;&#xA;The values are applied at generation time.&#xD;&#xA;The config sub elements are:&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>{@link AttrInstanceConfig attribute instance config}&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="item" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//InterfaceItem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the interface item.&#xD;&#xA;"/>
       </eAnnotations>
@@ -197,7 +197,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>It is the super class of&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>{@link AttrClassConfig}&lt;/li>&#xD;&#xA;&#x9;&lt;li>{@link AttrInstanceConfig}&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//Attribute">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the attribute.&#xD;&#xA;"/>
       </eAnnotations>
@@ -213,13 +213,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This class models a configuration for an {@link org.eclipse.etrice.core.room.Attribute attribute}.&#xD;&#xA;The configuration defines a default value for all instances of the attribute.&#xD;&#xA;The values are applied at generation time.&#xD;&#xA;&lt;br>If the type of the given {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} is&#xD;&#xA;&lt;ul>&#xD;&#xA;&#x9;&lt;li>primitive, then a {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} might exist and {@link #getAttributes attributes} is empty&lt;/li>&#xD;&#xA;&#x9;&lt;li>compound attribute (e.g. {@link org.eclipse.etrice.core.room.DataClass data class}), then {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} is null and configurations for children {@link #getAttributes attributes} might exist&lt;/li>&#xD;&#xA;&lt;/ul>&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="min" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="min" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the lower bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="max" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="max" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//NumberLiteral"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is the upper bound of {@link org.eclipse.etrice.core.config.AttrConfig#getValue value} , in case the {@link org.eclipse.etrice.core.config.AttrConfig#getAttribute attribute} has a numerical value.&#xD;&#xA;"/>
@@ -259,12 +259,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigValue"/>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralConfigValue" eSuperTypes="#//ConfigValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Literal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Literal"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumConfigValue" eSuperTypes="#//ConfigValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumLiteral"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefPath">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

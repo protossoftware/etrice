@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.etphys.editor/src" modelPluginID="org.eclipse.etrice.core.etphys"
     forceOverwrite="true" modelName="ETPhys" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.etphys.edit"
-    editorPluginID="org.eclipse.etrice.core.etphys.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
+    editorPluginID="org.eclipse.etrice.core.etphys.editor" runtimeVersion="2.10" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
   <genPackages prefix="ETPhys" basePackage="org.eclipse.etrice.core.etphys" disposableProviderFactory="true"
       ecorePackage="ETPhys.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ETPhys.ecore#//ExecMode">

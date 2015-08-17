@@ -239,20 +239,24 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private MappingModelElements pMappingModel;
-	private MappingElements pMapping;
-	private SubSystemMappingElements pSubSystemMapping;
-	private ThreadMappingElements pThreadMapping;
+	private final MappingModelElements pMappingModel;
+	private final MappingElements pMapping;
+	private final SubSystemMappingElements pSubSystemMapping;
+	private final ThreadMappingElements pThreadMapping;
 	
 	private final Grammar grammar;
 
-	private BaseGrammarAccess gaBase;
+	private final BaseGrammarAccess gaBase;
 
 	@Inject
 	public ETMapGrammarAccess(GrammarProvider grammarProvider,
 		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
+		this.pMappingModel = new MappingModelElements();
+		this.pMapping = new MappingElements();
+		this.pSubSystemMapping = new SubSystemMappingElements();
+		this.pThreadMapping = new ThreadMappingElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -285,7 +289,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//MappingModel:
 	//	"MappingModel" name=FQN "{" imports+=Import* mappings+=Mapping* "}";
 	public MappingModelElements getMappingModelAccess() {
-		return (pMappingModel != null) ? pMappingModel : (pMappingModel = new MappingModelElements());
+		return pMappingModel;
 	}
 	
 	public ParserRule getMappingModelRule() {
@@ -296,7 +300,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Mapping" logicalSys=[room::LogicalSystem|FQN] "->" physicalSys=[phys::PhysicalSystem|FQN] "{"
 	//	subsysMappings+=SubSystemMapping* "}";
 	public MappingElements getMappingAccess() {
-		return (pMapping != null) ? pMapping : (pMapping = new MappingElements());
+		return pMapping;
 	}
 	
 	public ParserRule getMappingRule() {
@@ -307,7 +311,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//	"SubSystemMapping" logicalSubSys=[room::SubSystemRef] "->" node=[phys::NodeRef] ("{" threadMappings+=ThreadMapping*
 	//	"}")?;
 	public SubSystemMappingElements getSubSystemMappingAccess() {
-		return (pSubSystemMapping != null) ? pSubSystemMapping : (pSubSystemMapping = new SubSystemMappingElements());
+		return pSubSystemMapping;
 	}
 	
 	public ParserRule getSubSystemMappingRule() {
@@ -317,7 +321,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//ThreadMapping:
 	//	"ThreadMapping" logicalThread=[room::LogicalThread] "->" physicalThread=[phys::PhysicalThread];
 	public ThreadMappingElements getThreadMappingAccess() {
-		return (pThreadMapping != null) ? pThreadMapping : (pThreadMapping = new ThreadMappingElements());
+		return pThreadMapping;
 	}
 	
 	public ParserRule getThreadMappingRule() {
@@ -667,8 +671,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBase.getSTRINGRule();
 	} 
