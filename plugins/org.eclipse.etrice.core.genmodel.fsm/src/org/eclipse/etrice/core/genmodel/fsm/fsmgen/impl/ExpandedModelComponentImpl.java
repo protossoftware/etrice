@@ -1105,6 +1105,19 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public EList<TransitionChain> getChains(Transition trans) {
+		TransitionChainBundle tcb = trans2chainBundle.get(trans);
+		if(tcb == null)
+			new BasicEList<TransitionChain>();
+		
+		return tcb.chains;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public EObject getData(Transition trans) {
 		if (trans==null)
 			return null;

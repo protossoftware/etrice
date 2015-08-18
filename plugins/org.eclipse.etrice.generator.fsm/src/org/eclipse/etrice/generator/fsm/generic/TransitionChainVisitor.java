@@ -40,7 +40,9 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	private ILanguageExtensionBase langExt;
 	private CodegenHelpers codegenHelpers;
 	private IDetailCodeTranslator translationProvider;
-	private boolean dataDriven;
+	
+	private TransitionChain tc = null;
+	private boolean dataDriven = false;
 
 	/**
 	 * Constructor
@@ -62,7 +64,7 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	}
 	
 	protected void init(TransitionChain tc) {
-		dataDriven = false;
+		this.tc = tc;
 		
 		if (tc.getTransition() instanceof GuardedTransition) {
 			dataDriven = true;
@@ -75,16 +77,17 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	// ITransitionChainVisitor interface
 	
 	public String genActionOperationCall(Transition tr) {
-
+		boolean noIfItem = dataDriven;
+		for(TransitionChain tc : xpac.getChains(tr))
+			noIfItem |= tc.getTransition() instanceof InitialTransition;
+		
 		if (fsmHelpers.hasDetailCode(tr.getAction())) {
-			if (tr instanceof InitialTransition)
-				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
-			else if (dataDriven)
+			if (noIfItem)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
-				String[] result = langExt.generateArglistAndTypedData(xpac.getData(tr));
-				String dataArg = result[0];
-				
+				String dataArg = "";
+				if(xpac.getData(tr) != null)
+					dataArg = langExt.generateArglistAndTypedData(tc.getData())[0];
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 			}
 		}

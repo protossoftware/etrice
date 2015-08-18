@@ -97,8 +97,8 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
     }
 	
 	override String genActionCodeMethod(ExpandedModelComponent xpmc, Transition tr, boolean generateImplementation) {
-        var start = xpmc.getChain(tr)?.getTransition
-        var hasArgs = start instanceof NonInitialTransition && !(start instanceof GuardedTransition)
+        var chain = xpmc.getChains(tr)
+        var hasArgs = !chain.empty && chain.forall[it.transition instanceof NonInitialTransition && !(it.transition instanceof GuardedTransition)]
         val opScope = langExt.operationScope(xpmc.getClassName, false)
         val opScopePriv = if (langExt.usesInheritance)
                             opScope

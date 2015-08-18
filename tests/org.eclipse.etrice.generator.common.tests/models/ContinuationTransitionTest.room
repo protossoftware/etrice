@@ -1,0 +1,397 @@
+RoomModel ContinuationTransitionTest {
+	
+	import room.basic.types.* from "Types.room"
+	import room.basic.etunit.* from "Tests.room"
+	
+	ActorClass ContinuationTransitionTest {
+		Structure {
+			ActorRef test1: TransitionChainsWithoutIfItem
+			ActorRef test2: TransitionChainsWithSameMsgData
+			ActorRef test3: TransitionChainsWithCompatibleData
+			ActorRef test4: TransitionChainsWithInCompatibleData
+			ActorRef test5 : TransitionChainWithoutIfItem_Sub
+			
+			// not supported yet, TODO
+			//ActorRef test6 : TransitionChainWithData_Sub
+		}
+	}
+	
+	ActorClass TransitionChainsWithoutIfItem {
+		Structure {
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition continuationExit: exitPoint of substate -> endExit {
+					action {
+						"int x = 0;"
+					}
+				}
+				Transition init: initial -> entryPoint of substate
+				Transition tr0: my startEntry -> entryPoint of substate {
+					triggers {
+						<in1: p0>
+					}
+				}
+				TransitionPoint startEntry
+				State substate {
+					subgraph {
+						Transition continuationEntry: my entryPoint -> cp choicePoint {
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition init: initial -> my exitPoint
+						Transition triggerExit: startExit -> my exitPoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition continuationCpElse: cp choicePoint -> startExit {
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition continuationCpCond: cp choicePoint -> endChoicePoint {
+							cond {
+								"true"
+							}
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
+							triggers {
+								<in2: p0>
+							}
+						}
+						ChoicePoint choicePoint
+						EntryPoint entryPoint
+						ExitPoint exitPoint
+						TransitionPoint startChoicePoint
+						State startExit
+						State endChoicePoint
+					}
+				}
+				State endExit
+			}
+		}
+	}
+	
+		ActorClass TransitionChainsWithSameMsgData {
+		Structure {
+			Attribute caseId : int32
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> startEntry2
+				Transition triggerEntry: my startEntry1 -> entryPoint of substate {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition continuationExit: exitPoint of substate -> endExit {
+					action {
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, data);"
+					}
+				}
+				Transition tr0: startEntry2 -> entryPoint of substate {
+					triggers {
+						<in1: p0>
+					}
+				}
+				TransitionPoint startEntry1
+				State substate {
+					subgraph {
+						Transition continuationEntry: my entryPoint -> cp choicePoint {
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition triggerExit: startExit1 -> my exitPoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition continuationCpElse: cp choicePoint -> startExit1 {
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition continuationCpCond: cp choicePoint -> startExit2 {
+							cond {
+								"true"
+							}
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition tr0: startExit2 -> my exitPoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						ChoicePoint choicePoint
+						EntryPoint entryPoint
+						ExitPoint exitPoint
+						TransitionPoint startChoicePoint
+						State startExit1
+						State startExit2
+					}
+				}
+				State endExit
+				State startEntry2
+			}
+		}
+	}
+	
+	ActorClass TransitionChainsWithCompatibleData {
+		Structure {
+			Attribute caseId : int32
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> startEntry2
+				Transition triggerEntry: my startEntry1 -> entryPoint of substate {
+					triggers {
+						<in3: p0>
+					}
+				}
+				Transition continuationExit: exitPoint of substate -> endExit {
+					action {
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, data);"
+					}
+				}
+				Transition tr0: startEntry2 -> entryPoint of substate {
+					triggers {
+						<in1: p0>
+					}
+				}
+				TransitionPoint startEntry1
+				State substate {
+					subgraph {
+						Transition continuationEntry: my entryPoint -> cp choicePoint {
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition triggerExit: startExit1 -> my exitPoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition continuationCpElse: cp choicePoint -> startExit1 {
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition continuationCpCond: cp choicePoint -> startExit2 {
+							cond {
+								"true"
+							}
+							action {
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+							}
+						}
+						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition tr0: startExit2 -> my exitPoint {
+							triggers {
+								<in3: p0>
+							}
+						}
+						ChoicePoint choicePoint
+						EntryPoint entryPoint
+						ExitPoint exitPoint
+						TransitionPoint startChoicePoint
+						State startExit1
+						State startExit2
+					}
+				}
+				State endExit
+				State startEntry2
+			}
+		}
+	}
+	
+	ActorClass TransitionChainsWithInCompatibleData {
+		Structure {
+			Attribute caseId : int32
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> startEntry2
+				Transition continuationExit: exitPoint of substate -> endExit {
+					action {
+						"int x = 0;"
+					}
+				}
+				Transition tr0: startEntry2 -> entryPoint of substate {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: my startEntry1 -> entryPoint of substate {
+					triggers {
+						<in2: p0>
+					}
+				}
+				TransitionPoint startEntry1
+				State substate {
+					subgraph {
+						Transition continuationEntry: my entryPoint -> cp choicePoint {
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition triggerExit: startExit1 -> my exitPoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition continuationCpElse: cp choicePoint -> startExit1 {
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition continuationCpCond: cp choicePoint -> startExit2 {
+							cond {
+								"caseId == 99"
+							}
+							action {
+								"int x = 0;"
+							}
+						}
+						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition tr0: startExit2 -> my exitPoint {
+							triggers {
+								<in2: p0>
+							}
+						}
+						ChoicePoint choicePoint
+						EntryPoint entryPoint
+						ExitPoint exitPoint
+						TransitionPoint startChoicePoint
+						State startExit1
+						State startExit2
+					}
+				}
+				State endExit
+				State startEntry2
+			}
+		}
+	}
+	
+	abstract ActorClass TransitionChainWithData_Base {
+		Structure {
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state0
+				Transition tr0: state0 -> cp cp0 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: cp cp0 -> state1 {
+					action {
+						"int x = data1;"
+					}
+				}
+				Transition tr2: cp cp0 -> state2 {
+					cond {
+						"true"
+					}
+					action {
+						"int x = data1;"
+					}
+				}
+				ChoicePoint cp0
+				State state0
+				State state1
+				State state2
+			}
+		}
+	}
+	
+	ActorClass TransitionChainWithData_Sub extends TransitionChainWithData_Base{
+		Structure { }
+		Behavior {
+			StateMachine {
+				Transition tr3: state3 -> cp cp0 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				State state3
+			}
+		}
+	}
+	
+	abstract ActorClass TransitionChainWithoutIfItem_Base {
+		Structure {
+			Port p0 : TestProtocol
+		}
+		Behavior {
+			StateMachine {
+				Transition continuationChoicePointElse: cp cp0 -> endChoicePoint1 {
+					action {
+						"int x = 0;"
+					}
+				}
+				Transition continuationChoicePointCond: cp cp0 -> endChoicePoint2 {
+					cond {
+						"true"
+					}
+					action {
+						"int x = 0;"
+					}
+				}
+				Transition init: initial -> cp cp0
+				ChoicePoint cp0
+				State endChoicePoint1
+				State endChoicePoint2
+			}
+		}
+	}
+	
+	ActorClass TransitionChainWithoutIfItem_Sub extends TransitionChainWithoutIfItem_Base {
+		Structure { }
+		Behavior {
+			StateMachine {
+				Transition triggerChoicePoint: startChoicePoint -> cp cp0 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				State startChoicePoint
+			}
+		}
+	}
+	
+	
+	
+	ProtocolClass TestProtocol {
+		incoming {
+			Message in1(data1 : int32)
+			Message in2(data2 : boolean)
+			Message in3(data3: int32)
+		}
+	}
+}

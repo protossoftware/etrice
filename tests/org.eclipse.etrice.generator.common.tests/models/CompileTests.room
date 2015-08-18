@@ -4,6 +4,7 @@ RoomModel CompileTestsModel {
 	import room.basic.etunit.* from "Tests.room"
 	import DetailExpressionTestModel.DetailExpressionTest from "DetailExpressionTest.room"
 	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
+	import ContinuationTransitionTest.* from "ContinuationTransitionTest.room"
 
 	ActorClass CompileTests {
 		@TestInstance
@@ -13,6 +14,7 @@ RoomModel CompileTestsModel {
 			// just compile
 			ActorRef detailExpressionTest: DetailExpressionTest
 			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
+			ActorRef continuationTransitionTest : ContinuationTransitionTest
 		}
 		Behavior {
 			ctor {

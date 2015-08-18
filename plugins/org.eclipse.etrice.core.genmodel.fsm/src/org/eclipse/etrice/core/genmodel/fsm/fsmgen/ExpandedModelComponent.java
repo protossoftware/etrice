@@ -216,6 +216,14 @@ public interface ExpandedModelComponent extends EObject {
 	TransitionChain getChain(Transition trans);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<TransitionChain> getChains(Transition trans);
+
+	/**
 	 * Returns the value of the '<em><b>Transition Chains</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain}.
 	 * <!-- begin-user-doc -->

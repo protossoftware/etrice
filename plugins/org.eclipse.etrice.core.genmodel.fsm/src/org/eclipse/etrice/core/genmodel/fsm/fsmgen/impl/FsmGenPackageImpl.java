@@ -439,6 +439,9 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		op = addEOperation(expandedModelComponentEClass, this.getTransitionChain(), "getChain", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(expandedModelComponentEClass, this.getTransitionChain(), "getChains", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theFSMPackage.getTransition(), "trans", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(expandedModelComponentEClass, this.getTransitionChain(), "getOwnTransitionChains", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedModelComponentEClass, theFSMPackage.getAbstractInterfaceItem(), "getOwnInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);

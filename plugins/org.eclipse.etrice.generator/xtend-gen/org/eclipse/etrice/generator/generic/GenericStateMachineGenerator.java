@@ -153,17 +153,27 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
   public String genActionCodeMethod(final ExpandedModelComponent xpmc, final Transition tr, final boolean generateImplementation) {
     String _xblockexpression = null;
     {
-      TransitionChain _chain = xpmc.getChain(tr);
-      Transition _transition = null;
-      if (_chain!=null) {
-        _transition=_chain.getTransition();
-      }
-      Transition start = _transition;
+      EList<TransitionChain> chain = xpmc.getChains(tr);
       boolean _and = false;
-      if (!(start instanceof NonInitialTransition)) {
+      boolean _isEmpty = chain.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (!_not) {
         _and = false;
       } else {
-        _and = (!(start instanceof GuardedTransition));
+        final Function1<TransitionChain, Boolean> _function = new Function1<TransitionChain, Boolean>() {
+          public Boolean apply(final TransitionChain it) {
+            boolean _and = false;
+            Transition _transition = it.getTransition();
+            if (!(_transition instanceof NonInitialTransition)) {
+              _and = false;
+            } else {
+              _and = (!(it.getTransition() instanceof GuardedTransition));
+            }
+            return Boolean.valueOf(_and);
+          }
+        };
+        boolean _forall = IterableExtensions.<TransitionChain>forall(chain, _function);
+        _and = _forall;
       }
       boolean hasArgs = _and;
       String _className = this.getClassName(xpmc);
