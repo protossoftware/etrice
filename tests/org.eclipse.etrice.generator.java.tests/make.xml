@@ -119,7 +119,7 @@
 				<echo>runner path converted to class: ${runner.class}</echo>-->
 				
 				<echo>run @{testId}</echo>
-				<java output="${output}/run.txt" classname="${runner.class}" fork="true" failonerror="true" timeout="${run.msTimout}">
+				<java output="${output}/run@{testId}.txt" classname="${runner.class}" fork="true" failonerror="true" timeout="${run.msTimout}">
 					<arg value="-run_as_test" />
 					<classpath path="./bin/@{testId};${runtime.path}/target/classes;" />
 				</java>

@@ -27,7 +27,6 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.ui.behavior.detailcode.GuardDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -45,10 +44,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
   public List<IDetailExpressionProvider.ExpressionFeature> getInitialFeatures() {
     final List<IDetailExpressionProvider.ExpressionFeature> scope = CollectionLiterals.<IDetailExpressionProvider.ExpressionFeature>newArrayList();
-    boolean _notEquals = (!Objects.equal(this.currentEventMessage, null));
+    boolean _notEquals = (!Objects.equal(this.transitionEventData, null));
     if (_notEquals) {
-      VarDecl _data = this.currentEventMessage.getData();
-      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(_data);
+      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(this.transitionEventData);
       scope.add(_createExprFeature);
     }
     List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);

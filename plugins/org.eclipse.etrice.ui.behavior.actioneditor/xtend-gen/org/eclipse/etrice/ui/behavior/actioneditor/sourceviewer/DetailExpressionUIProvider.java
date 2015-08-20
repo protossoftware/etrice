@@ -197,6 +197,12 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
         _switchResult = ActionCodeColorManager.SPECIAL_FEATURE;
       }
     }
+    if (!_matched) {
+      if (data instanceof RuntimeDetailExpressionProvider.RuntimeMethodExpressionData) {
+        _matched=true;
+        _switchResult = ActionCodeColorManager.OPERATION;
+      }
+    }
     return _switchResult;
   }
   
@@ -240,8 +246,22 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
     }
     if (!_matched) {
       if (data instanceof RuntimeDetailExpressionProvider.RuntimeMethodExpressionData) {
+        String _id_1 = feature.getId();
+        boolean _equals = Objects.equal(_id_1, RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION);
+        if (_equals) {
+          _matched=true;
+          typedInfo = "int";
+        }
+      }
+    }
+    if (!_matched) {
+      if (data instanceof VarDecl) {
         _matched=true;
-        typedInfo = "int";
+        RefableType _refType = ((VarDecl)data).getRefType();
+        DataType _type = _refType.getType();
+        String _name = _type.getName();
+        typedInfo = _name;
+        classInfo = "";
       }
     }
     if (!_matched) {

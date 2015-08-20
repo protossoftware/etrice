@@ -16,9 +16,10 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Port
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.SPP
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+
 /**
  * Defines expression for fsm detail code of an ActorClass
  */
@@ -26,10 +27,11 @@ import org.eclipse.etrice.core.room.SAP
 class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 
 	override getInitialFeatures() {
+		// no super call, keep it simple
 		val List<ExpressionFeature> scope = newArrayList
 
-		if (currentEventMessage != null)
-			scope += createExprFeature(currentEventMessage.data)
+		if (transitionEventData != null)
+			scope += createExprFeature(transitionEventData)
 		actorClass.allInterfaceItems.forEach [
 			switch it {
 				SPP case isEventDriven/* fall through */,
@@ -55,6 +57,7 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 	}
 
 	override getContextFeatures(ExpressionFeature ctx) {
+		// no super call, keep it simple
 		ctx.assertNotNull
 
 		val List<ExpressionFeature> scope = newArrayList

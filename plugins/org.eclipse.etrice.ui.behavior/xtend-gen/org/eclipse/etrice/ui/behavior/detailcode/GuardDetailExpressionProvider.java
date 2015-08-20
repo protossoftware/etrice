@@ -32,14 +32,15 @@ import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Defines expression for fsm guards of an ActorClass
@@ -48,32 +49,24 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * <li>data-driven incoming messages</li>
  * </ul>
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class GuardDetailExpressionProvider implements IDetailExpressionProvider {
-  @Accessors
   protected final ActorClass actorClass;
   
-  @Accessors
-  protected Message currentEventMessage;
-  
   @Extension
-  protected final RoomHelpers roomHelpers;
+  protected final RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
   
   protected final Function<EObject, String> nameProvider = SimpleAttributeResolver.NAME_RESOLVER;
   
-  public GuardDetailExpressionProvider(final ActorClass actorClass) {
-    this.actorClass = actorClass;
-    SupportUtil _instance = SupportUtil.getInstance();
-    RoomHelpers _roomHelpers = _instance.getRoomHelpers();
-    this.roomHelpers = _roomHelpers;
-  }
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  protected VarDecl transitionEventData;
   
   public List<IDetailExpressionProvider.ExpressionFeature> getInitialFeatures() {
     final List<IDetailExpressionProvider.ExpressionFeature> scope = CollectionLiterals.<IDetailExpressionProvider.ExpressionFeature>newArrayList();
-    boolean _notEquals = (!Objects.equal(this.currentEventMessage, null));
+    boolean _notEquals = (!Objects.equal(this.transitionEventData, null));
     if (_notEquals) {
-      VarDecl _data = this.currentEventMessage.getData();
-      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(_data);
+      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(this.transitionEventData);
       scope.add(_createExprFeature);
     }
     List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);
@@ -240,17 +233,12 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
     Assert.isNotNull(_data);
   }
   
-  @Pure
-  public ActorClass getActorClass() {
-    return this.actorClass;
+  public GuardDetailExpressionProvider(final ActorClass actorClass) {
+    super();
+    this.actorClass = actorClass;
   }
   
-  @Pure
-  public Message getCurrentEventMessage() {
-    return this.currentEventMessage;
-  }
-  
-  public void setCurrentEventMessage(final Message currentEventMessage) {
-    this.currentEventMessage = currentEventMessage;
+  public void setTransitionEventData(final VarDecl transitionEventData) {
+    this.transitionEventData = transitionEventData;
   }
 }

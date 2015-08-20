@@ -36,7 +36,7 @@ public class ActionCodeColorManager {
 	/** Default RGB color object */
 	public static final RGB DEFAULT = new RGB(0, 0, 0);
 
-	public static final RGB SPECIAL_FEATURE = new RGB(171, 48, 0);
+	public static final RGB SPECIAL_FEATURE = new RGB(220, 48, 0);
 	public static final RGB OPERATION = new RGB(184, 184, 0);
 	public static final RGB ATTRIBUTE = new RGB(105, 185, 0);
 	public static final RGB INTERFACE_ITEM = new RGB(200, 100, 0);

@@ -20,13 +20,17 @@ import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.InterfaceItem
-import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.Port
+import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider
 import org.eclipse.etrice.ui.behavior.support.SupportUtil
+import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.SimpleAttributeResolver
+
+import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * Defines expression for fsm guards of an ActorClass
@@ -35,25 +39,22 @@ import org.eclipse.xtext.util.SimpleAttributeResolver
  * <li>data-driven incoming messages</li>
  * </ul>
  */
+ @FinalFieldsConstructor
 class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 
-	@Accessors protected val ActorClass actorClass
-	
-	@Accessors protected Message currentEventMessage
-
-	protected val extension RoomHelpers roomHelpers
+	// ctor
+	protected val ActorClass actorClass
+	protected val extension RoomHelpers roomHelpers = SupportUtil.getInstance.roomHelpers
 	protected val Function<EObject, String> nameProvider = SimpleAttributeResolver.NAME_RESOLVER
-
-	new(ActorClass actorClass){
-		this.actorClass = actorClass
-		roomHelpers = SupportUtil.getInstance.roomHelpers
-	}
+	
+	// optional
+	@Accessors(AccessorType.PUBLIC_SETTER) protected VarDecl transitionEventData
 
 	override getInitialFeatures() {
 		val List<ExpressionFeature> scope = newArrayList
 
-		if(currentEventMessage != null)
-			scope += createExprFeature(currentEventMessage.data)
+		if(transitionEventData != null)
+			scope += createExprFeature(transitionEventData)
 		scope += actorClass.allInterfaceItems.filter[isDataDriven && !isConjugated].map[
 			switch it {
 				Port case isReplicated: createExprFeature(ExpressionPostfix.BRACKETS)

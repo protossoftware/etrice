@@ -52,7 +52,7 @@ RoomModel DetailExpressionTestModel {
 						"DData nestedData = infoData.nested;"
 						"int port = infoData.nested.tcpPort;"
 						""
-						"//  TODO content assist: special event data"
+						"// transition event data"
 						"int data = (accessibleMessageData)? 1 : 0;"
 						""
 						"// -- not supported yet by code translation --"

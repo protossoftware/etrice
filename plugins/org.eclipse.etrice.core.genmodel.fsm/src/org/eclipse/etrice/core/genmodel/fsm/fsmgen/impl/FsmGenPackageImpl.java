@@ -459,6 +459,9 @@ public class FsmGenPackageImpl extends EPackageImpl implements FsmGenPackage {
 		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEObject(), "getOrig", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "copy", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEObject(), "getCopy", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "orig", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(expandedModelComponentEClass, ecorePackage.getEString(), "getModelComponentName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(expandedModelComponentEClass, ecorePackage.getEObject(), "getData", 0, 1, IS_UNIQUE, IS_ORDERED);

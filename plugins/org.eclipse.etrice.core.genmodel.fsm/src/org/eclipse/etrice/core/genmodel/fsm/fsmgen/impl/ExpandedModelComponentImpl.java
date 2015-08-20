@@ -212,6 +212,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private LinkedList<TransitionChain> trchains = null;
 	private TransitionToChainBundleMap trans2chainBundle = null;
 	private HashMap<EObject, EObject> copy2orig = null;
+	private HashMap<EObject, EObject> orig2copy = null;
 	
 	private FSMHelpers fsmHelpers = new FSMHelpers();
 	protected FSMNameProvider fsmNameProvider = new FSMNameProvider();
@@ -401,6 +402,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	    for (EObject o : copier.keySet()) {
 			EObject c = copier.get(o);
 			copy2orig.put(c, o);
+			orig2copy.put(o, c);
 		}
 		
 	    if (getModelComponent().getStateMachine()!=null) {
@@ -434,6 +436,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 				ExpandedRefinedState state = FsmGenFactory.eINSTANCE.createExpandedRefinedState();
 				state.init(rs);
 				copy2orig.put(state, getOrig(rs));
+				orig2copy.put(getOrig(rs), state);
 				if (isOwnObject(rs))
 					addOwnObject(state);
 			}
@@ -838,6 +841,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		trchains = new LinkedList<TransitionChain>();
 		trans2chainBundle = new TransitionToChainBundleMap();
 		copy2orig = new HashMap<EObject, EObject>();
+		orig2copy = new HashMap<EObject, EObject>();
 		
 		buildStateGraph();
 		computeInterfaceItemLocalIds(getModelComponent(), 0);
@@ -1270,6 +1274,15 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	 */
 	public EObject getOrig(EObject copy) {
 		return copy2orig.get(copy);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EObject getCopy(EObject orig) {
+		return orig2copy.get(orig);
 	}
 
 	/**

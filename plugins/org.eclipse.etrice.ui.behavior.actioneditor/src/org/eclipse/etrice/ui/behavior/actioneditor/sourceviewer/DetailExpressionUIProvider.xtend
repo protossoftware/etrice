@@ -31,6 +31,8 @@ import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.etrice.ui.behavior.detailcode.RuntimeDetailExpressionProvider.RuntimeMethodExpressionData
 import org.eclipse.etrice.ui.behavior.actioneditor.Activator
+import org.eclipse.etrice.ui.behavior.detailcode.RuntimeDetailExpressionProvider
+import org.eclipse.etrice.core.room.VarDecl
 
 @FinalFieldsConstructor
 class DetailExpressionUIProvider implements IDetailExpressionProvider {
@@ -91,10 +93,16 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 		feature.assertNotNull
 
 		return switch data : feature.data {
-			InterfaceItem: ActionCodeColorManager.INTERFACE_ITEM
-			Attribute: ActionCodeColorManager.ATTRIBUTE
-			Operation: ActionCodeColorManager.OPERATION
-			EObject: ActionCodeColorManager.SPECIAL_FEATURE
+			InterfaceItem:
+				ActionCodeColorManager.INTERFACE_ITEM
+			Attribute:
+				ActionCodeColorManager.ATTRIBUTE
+			Operation:
+				ActionCodeColorManager.OPERATION
+			EObject:
+				ActionCodeColorManager.SPECIAL_FEATURE // unknown model object == special
+			RuntimeMethodExpressionData:
+				ActionCodeColorManager.OPERATION
 		}
 	}
 
@@ -106,7 +114,7 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 		feature.assertNotNull
 
 		val data = feature.data
-		
+
 		var completionInfo = feature.id + feature.getPostfixReplacement.key
 		var typedInfo = ""
 		var classInfo = if(data instanceof EObject) data.eClass.name else ""
@@ -115,14 +123,20 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 				typedInfo = data.type.type.name
 			InterfaceItem:
 				typedInfo = roomHelpers.getProtocol(data).name
-			RuntimeMethodExpressionData:
-				typedInfo = 'int'	
+			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
+				typedInfo = 'int'
+			VarDecl: {
+				typedInfo = data.refType.type.name
+				classInfo = ""
+			}
 			default: {
 				val label = labelProvider.getText(data)
+
 				// if label starts with completion then label might be better
 				if(!Strings.commonPrefix(label, completionInfo).empty) completionInfo = label
 			}
 		}
+
 		// mark port as broadcast
 		if (feature.postfix == ExpressionPostfix.NONE) {
 			switch data {
@@ -132,7 +146,7 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 			}
 		}
 
-		if(!typedInfo.empty) typedInfo = " : " + typedInfo 
+		if(!typedInfo.empty) typedInfo = " : " + typedInfo
 		if(!classInfo.empty) classInfo = " - " + classInfo
 
 		return completionInfo + typedInfo + classInfo
@@ -140,13 +154,13 @@ class DetailExpressionUIProvider implements IDetailExpressionProvider {
 
 	def Image getImage(ExpressionFeature feature) {
 		feature.assertNotNull
-		
+
 		switch feature.data {
-			EObject : labelProvider.getImage(feature.data)
+			EObject: labelProvider.getImage(feature.data)
 			RuntimeMethodExpressionData: Activator.getImage(IMAGE_RT_METHOD)
 		}
 	}
-	
+
 	/**
 	 * Filter by prefix
 	 */
